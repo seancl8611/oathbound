@@ -1,5 +1,17 @@
 # Characters
 
-Authoritative player, NPC, and character-relationship documentation belongs here.
+Authoritative player, recurring NPC, and character-relationship documentation belongs here.
 
-Planned files include `AKIO.md`, `STRAND_NPCS.md`, and `CHARACTER_RELATIONSHIPS.md`.
+## Current documents
+
+- [Akio](AKIO.md)
+- [Strand NPCs](STRAND_NPCS.md)
+
+## Planned expansion
+
+- Individual files for each recurring Strand NPC
+- Character relationship map
+- Dialogue and narrative-state requirements
+- Historical figures with recurring story importance
+
+Combatant-specific encounter design belongs under `docs/content/area_*`. A named boss may link to lore or character files, but its combat role remains owned by its area content document.
