@@ -4,7 +4,7 @@ title: Blighted Hounds
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - area-1
   - hushiro
@@ -24,7 +24,7 @@ Fast, low-health pack fighters that create rush-down pressure through circling, 
 
 ## One-sentence fantasy
 
-A corrupted village working dog that hunts in disciplined pack rhythm, harrying the player until one hound commits to a sudden lunge.
+A village working dog corrupted into a fast aggressive animal: recognizably canine, recognizably wrong, built to spot, lunge, and die.
 
 ## Lore context
 
@@ -33,40 +33,37 @@ These were guard dogs, herders, ratcatchers, and camp animals tied to village ro
 ## Visual identity
 
 - lean half-starved working-dog frame,
-- matted dark fur,
+- matted dark or patchy fur,
+- exposed sinew in restrained areas,
 - stretched muzzle and exposed gums,
-- prominent teeth,
-- unnatural yellow-white eye shine,
-- ragged collars, rope remnants, scars, and patchy fur.
+- wrong-bright eyes,
+- ragged collars, rope remnants, and scars.
 
-They should remain recognizable as village dogs rather than becoming giant wolves or fantasy demons.
+They remain village dogs rather than giant wolves or fantasy demons.
 
 ## Silhouette
 
-Low, angular, and coiled. Pronounced shoulders, long forelimbs, narrow torso, raised hackles, and extended muzzle. Idle/stalk poses compress the body; the lunge stretches it into a clean forward attack line.
+Low, angular, coiled, and fast. Pronounced shoulders, long forelimbs, narrow torso, raised hackles, and extended muzzle. Idle and windup compress the body; the lunge stretches it into a clean forward line.
 
 ## Attack language
 
 - circling and orbit pressure,
-- short snap or bite,
-- committed parryable lunge,
-- recovery and re-entry into the pack pattern.
+- short snap or bite in the full roster,
+- committed readable lunge,
+- exposed recovery,
+- re-entry into pack behavior.
 
-Only one hound should normally commit to the primary lunge while the others reposition and preserve psychological pressure.
+Only one hound should normally commit to the primary lunge while the others reposition and preserve pressure.
 
 ## Corruption language
 
-Widened jaws, blood-dark mouth, wrong-bright eyes, taut facial skin, and sharpened animal instinct. More visibly bodily than the garrison soldiers, but still grounded and recognizable.
-
-## Personality in motion
-
-Nervous, sharp, coordinated, and constantly reactive. They stalk, test space, and wait for an attack token rather than charging simultaneously.
+Widened jaws, blood-dark mouth, wrong-bright eyes, taut facial skin, and sharpened animal instinct. The body is more visibly altered than Hushiro's soldiers but remains grounded.
 
 ## Combat readability
 
-The player should read them as fragile but dangerous in a group. The active attacker's lunge startup must be clean enough for confident parry or decisive evasion. Group motion creates tension; the actual commitment remains fair.
+The active attacker's crouch must look like a coiled spring. The lunge is fast only after that clear preparation. Recovery must read as a deliberate punish window.
 
-## Required animation set
+## Full-game animation set
 
 - idle and snarl/intimidation variant,
 - walk/stalk/circle locomotion,
@@ -80,6 +77,25 @@ The player should read them as fragile but dangerous in a group. The active atta
 - deathblow,
 - death.
 
+## Milestone 1 delivery subset
+
+| Animation | Working frames | Readability purpose |
+|---|---:|---|
+| `idle` | 4–6 | Low tense crouch with raised hackles |
+| `run` | 6–8 | Fast committed pursuit |
+| `lunge_windup` | 4–6 | Unmistakable coiled-spring tell |
+| `lunge` | 3–4 | Fast forward airborne commitment |
+| `lunge_recovery` | 4–6 | Slow open vulnerable window |
+| `hurt` | 2–3 | Quick damage recoil |
+| `death` | 6–10 | Clear collapse and held dead frame |
+
+## Milestone 1 approval criteria
+
+- Lunge windup teaches the player when to evade or respond.
+- Lunge recovery is visibly punishable.
+- Silhouette is fast, low, and distinct from every upright humanoid.
+- Run, windup, active lunge, recovery, and death cannot be confused.
+
 ## Technical notes
 
-Use an AttackDirector or equivalent token system so only one hound performs the main lunge at a time. Orbiting hounds should threaten and reposition without creating unreadable dogpiling. The lunge telegraph and recovery window are the main production priorities.
+Working sprite height is 64–80 px. Use an AttackDirector or equivalent token system so only one hound performs the main lunge at a time. Orbiting hounds threaten and reposition without unreadable dogpiling. The polished Milestone 1 brief deliberately uses a lean animation subset; bite, parry, stagger, and deathblow-specific states remain full-game scope rather than silently expanding the first contractor batch.
