@@ -2,37 +2,36 @@
 id: CONTENT-STRAND-INTERACTIBLES
 title: Strand Interactibles
 category: content
-status: draft
+status: approved
 authority: primary
 last_reviewed: 2026-07-10
+topics:
+  - strand
+  - interactibles
+  - hub-services
+  - progression
+related:
+  - CONTENT-STRAND-OVERVIEW
+  - UI-HUB-INTERFACES
 ---
 
 # Strand Interactibles
 
-## Boat
+Each Strand service should read as a physical location first, a gameplay function second, and a menu or progression system third.
 
-Primary departure point for entering a run and selecting available travel options. Its presentation should acknowledge the Blood Moon and barrier crossing without implying routine access to the island.
+| Interactible | System role | Detailed source |
+|---|---|---|
+| Boat | Run start, crossing, and final Blood Aspect confirmation | [Boat](interactibles/BOAT.md) |
+| Forge Bench | Permanent weapon/prosthetic and combat-option development | [Forge Bench](interactibles/FORGE_BENCH.md) |
+| Merchant Stall | Stock-based purchases and salvaged goods | [Merchant Stall](interactibles/MERCHANT_STALL.md) |
+| Discovery Board | Codex, discovery tracking, and practical knowledge archive | [Discovery Board](interactibles/DISCOVERY_BOARD.md) |
+| Bloodwell | Broad permanent meta progression and Strand-side revival anchor | [Bloodwell](interactibles/BLOODWELL.md) |
+| Blood Cavern / Blood Mirror | Training, Aspect trials, unlocks, and mastery | Detailed migration begins after page 35 of the source bible |
 
-## Forge
+## Shared rules
 
-Smith-owned station for permanent equipment, weapon, or prosthetic progression. Exact upgrade tree remains under development.
-
-## Discovery Board
-
-Scribe-managed interface for enemies, regions, lore, discoveries, and possibly completion tracking.
-
-## Bloodwell
-
-Persistent progression station connected to Akio's Returning Blood. It must feel controlled and ritualized rather than like a generic skill tree.
-
-## Blood Cavern and Blood Mirror
-
-A dedicated interior for reflection, Blood Aspect selection, trials, or challenge content. The Mirror should present Akio's changing relationship with Returning Blood and may support controlled combat tests.
-
-## NPC stations
-
-Merchant layout, training space, Raven's station, and Keeper's position should each operate as readable landmarks rather than interchangeable dialogue points.
-
-## Dependency rule
-
-Final interface art should be designed after the corresponding system structure is documented. Physical stations may be concepted earlier, but must reserve space for actual interaction states and progression feedback.
+- Stations must remain recognizable without opening their menus.
+- UI should feel grounded in the station's materials and function.
+- Locked, available, selected, purchased, completed, and unavailable states must be clear.
+- Final interface art should follow the documented data and progression structure.
+- Bloodwell, Blood Mirror, Boat, and Shrine own different parts of the Blood Aspect/progression loop and must not be collapsed into one generic upgrade screen.
