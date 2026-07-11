@@ -1,121 +1,135 @@
 ---
 id: META-DOCUMENT-MAP
-title: Document Dependency Map
+title: Document Review Hints
 category: meta
 status: approved
-authority: primary
+authority: summary
 last_reviewed: 2026-07-10
 ---
 
-# Document Dependency Map
+# Document Review Hints
 
-Use this map to identify which files require review after a change.
+This file provides common review starting points. It is deliberately non-exhaustive and must never replace live repository search.
+
+Use it to seed search terms and likely review areas, then inspect the current repository for actual references, synonyms, outdated wording, UI consequences, production scope, and contractor-facing summaries.
 
 ## Returning Blood change
 
-Update first:
+Primary authority:
 - `docs/lore/RETURNING_BLOOD.md`
 
-Review:
-- `docs/lore/BEAST_BLOOD.md`
-- `docs/characters/AKIO.md`
-- `docs/gameplay/BLOOD_ASPECTS.md`
-- `docs/gameplay/CORRUPTION_AND_SHRINES.md`
-- `docs/gameplay/PROGRESSION.md`
-- `docs/content/strand/INTERACTIBLES.md`
-- `docs/lore/ECLIPSE_SHOGUN.md`
-- `docs/ui_ux/HUD.md`
-- `docs/ui_ux/SHRINE_INTERFACE.md`
-- Milestones 2, 3, and 4
-- Terminology and decision log
+Likely review areas:
+- Beast Blood canon
+- Akio
+- Blood Aspects
+- Corruption and Shrines
+- progression and run structure
+- Bloodwell and Blood Mirror content
+- Eclipse Shogun
+- HUD and Shrine interface
+- Milestones 2–4
+
+Suggested live-search terms:
+- `Returning Blood`
+- `Beast Blood`
+- `Akio`
+- `return after death`
+- `revive`
+- `Blood Aspect`
+- `Shrine`
 
 ## Blood Aspect or Corruption change
 
-Update first:
+Primary authority:
 - `docs/gameplay/BLOOD_ASPECTS.md`
 - `docs/gameplay/CORRUPTION_AND_SHRINES.md`
 
-Review:
-- Akio
-- Progression and run structure
+Likely review areas:
+- Akio and Returning Blood
+- progression and run structure
 - HUD and Shrine interface
-- Bloodwell and Blood Mirror
-- Asset inventory
-- Milestones 2, 3, and 4
+- Strand interactibles
+- asset inventory
+- Milestones 2–4
 
 ## Combat-system change
 
-Update first:
+Primary authority:
 - `docs/gameplay/COMBAT.md`
 
-Review:
-- Core loop and encounter design
-- Akio
-- Every affected enemy, miniboss, and boss file
+Likely review areas:
+- core loop
+- affected enemies, minibosses, and bosses
+- Akio animation requirements
 - HUD
-- Technical standards
-- Asset inventory
-- Relevant milestone animation/VFX scope
+- technical standards
+- asset inventory
+- milestone animation and VFX scope
 
 ## Character, enemy, or boss change
 
-Update first:
-- `docs/characters/` for named recurring characters
-- Relevant `docs/content/area_*` file for combatants
+Primary authority:
+- `docs/characters/` for recurring named characters
+- relevant `docs/content/area_*` file for combatants
 
-Review:
-- Story and lore relationships
-- Regional overview and encounters
-- Animation/VFX requirements
+Likely review areas:
+- story and lore relationships
+- regional overview
+- encounter rules
+- animation and VFX requirements
 - UI nameplates or portraits
-- Asset inventory
-- Assigned milestone
+- asset inventory
+- assigned milestone
 
 ## Area roster or environment change
 
-Update first:
-- Relevant `docs/content/area_*` folder
+Primary authority:
+- relevant `docs/content/area_*` folder
 
-Review:
-- `docs/overview/FULL_GAME_SCOPE.md`
-- Production roadmap
-- Asset inventory
-- Assigned milestone
-- Story progression
-- Regional UI/VFX needs
+Likely review areas:
+- full-game scope
+- production roadmap
+- asset inventory
+- assigned milestone
+- story progression
+- room, UI, and regional VFX needs
 
 ## Strand service change
 
-Update first:
+Primary authority:
 - `docs/content/strand/INTERACTIBLES.md`
 - `docs/characters/STRAND_NPCS.md` when an NPC is affected
 
-Review:
-- Progression
-- Blood Aspects/Returning Blood when relevant
-- Hub interfaces
+Likely review areas:
+- progression
+- Returning Blood or Blood Aspects when relevant
+- hub interfaces
 - Milestone 3
-- Asset inventory
+- asset inventory
 
 ## Art milestone change
 
-Update first:
-- Relevant `docs/art_production/milestones/MILESTONE_*.md`
+Primary authority:
+- relevant `docs/art_production/milestones/MILESTONE_*.md`
 
-Review:
-- Production roadmap
-- Asset inventory
-- Technical standards
-- Authoritative gameplay/content files
-- Contractor brief index/export history
+Likely review areas:
+- production roadmap
+- asset inventory
+- technical standards
+- authoritative gameplay and content files
+- contractor brief index and export history
 
 ## New system or region
 
-Create an authoritative file and stable document ID, then update:
+Create an authoritative file and stable document ID. Then determine impact through live search before updating:
 - `SOURCE_OF_TRUTH.md`
-- This dependency map
-- `FULL_GAME_SCOPE.md`
-- Production roadmap
-- Asset inventory
-- Relevant milestone
-- Open questions and decision log as needed
+- full-game scope
+- production roadmap
+- asset inventory
+- relevant milestone
+- terminology
+- open questions and decision log
+
+## Reliability rule
+
+The absence of a file from this guide does not mean it is unaffected. The presence of a file here does not mean it requires editing. Current repository content determines the real impact set.

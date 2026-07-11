@@ -11,6 +11,8 @@ last_reviewed: 2026-07-10
 
 Each major subject has one authoritative file. Other documents should summarize and link rather than duplicate the complete definition.
 
+This registry identifies ownership only. It is not a dependency map and does not define every file that must be reviewed after a change. Dependency discovery must use live repository search and the workflow in `ASSISTANT_WORKFLOW.md`.
+
 | Subject | Authoritative file |
 |---|---|
 | Game identity and pitch | `docs/overview/GAME_OVERVIEW.md` |
