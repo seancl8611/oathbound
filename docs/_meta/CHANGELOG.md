@@ -9,6 +9,19 @@ last_reviewed: 2026-07-10
 
 # Documentation Changelog
 
+## 2026-07-10 — Production bible migration: pages 1–35
+
+- Expanded the game overview, design pillars, full scope, art direction, and asset inventory.
+- Locked the base sword-kit roles and Blood Aspect run structure.
+- Clarified Corruption gain, Resist/Embrace behavior, run reset, and persistent progression.
+- Expanded Returning Blood, Blood Moon crossing, Order, and successful/failed return canon.
+- Replaced the short Akio summary with a production-ready character brief.
+- Split all six Strand NPCs into individual authoritative character files.
+- Split Boat, Forge Bench, Merchant Stall, Discovery Board, and Bloodwell into individual service files.
+- Added regional visual lock sheets to the Strand and Areas 1–3.
+- Added a universal character/enemy production brief standard.
+- Resolved two gameplay questions and recorded currency naming as a focused open question.
+
 ## 2026-07-10 — Core source-of-truth population
 
 - Added authoritative overview, gameplay, lore, character, regional content, art-production, milestone, and UI documents.
