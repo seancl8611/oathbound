@@ -9,6 +9,21 @@ last_reviewed: 2026-07-11
 
 # Documentation Changelog
 
+## 2026-07-11 — Blood Aspect, Technique, and room-reward redesign
+
+- Made Wolf, Wraith, and Ronin Blood Aspects the central run identities with fixed Tier 0–IV vertical escalation through Corruption and Shrine Embrace.
+- Removed Storm, Frost, Ember, Hex, and Shadow as player stance families.
+- Replaced the former stance and broad boon layers with temporary Techniques.
+- Locked four active Technique slots, one inactive reserve, empty run-start slots, and no full Technique inventory.
+- Locked independently useful Techniques, natural shared-combat-verb synergy, and a maximum of one slotless refinement per Technique.
+- Added Prosthetic Techniques to the normal Technique pool for the currently equipped tool.
+- Defined replacement, reserve movement, overwrite warning, decline, reroll, rest-room swapping, and pause-screen behavior.
+- Added a previewed room-reward framework for combat, Shrine, rest, shop, treasure, miniboss, regional boss, and final-boss flow.
+- Set a provisional successful-run target of six to eight Technique-related decisions while leaving exact room counts and probabilities open.
+- Added authoritative Technique gameplay, UI, and VFX documents.
+- Removed five stance VFX families from Milestone 4 and replaced them with reusable Technique card/build UI, route markers, and only necessary bespoke Technique combat cues.
+- Updated source ownership, scope, roadmap, progression, room identities, HUD, reward art, asset inventory, terminology, decisions, and open questions.
+
 ## 2026-07-11 — Production bible completion: pages 106–132 and polished Milestone 1 review
 
 - Completed Wolf, Wraith, and Ronin VFX briefs.
