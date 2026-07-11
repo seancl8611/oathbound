@@ -15,6 +15,8 @@ related:
   - LORE-RETURNING-BLOOD
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
+  - CONTENT-STRAND-BLOODWELL
+  - UI-RUN-RESULTS
 ---
 
 # Run Structure
@@ -57,7 +59,7 @@ Each function should read before interaction through environment composition, fo
 
 ## Failed run
 
-When Akio dies, Returning Blood reconstructs him at the Strand. Death is a real supernatural event, not a non-canon reset.
+When Akio dies, Returning Blood reconstructs him at the Strand through the Bloodwell anchor. Death is a real supernatural event, not a non-canon reset.
 
 The failed run burns away its temporary blood-state and run-only progress. Permanent unlocks, upgrades, discoveries, Blood Mirror progress, and major currencies survive according to the progression matrix.
 
@@ -69,10 +71,12 @@ On a successful run, Akio:
 2. completes the Rite at the Wellspring,
 3. severs one layer of the Shogun's blood-oath,
 4. sacrifices or loses the current body during the Wellspring process,
-5. reforms at the Strand through Returning Blood,
-6. keeps permanent rewards while temporary run-state is cleared.
+5. reforms near the Bloodwell at the Strand,
+6. saves permanent rewards and clears temporary run-state,
+7. receives a results summary,
+8. triggers relevant NPC, codex, Blood Mirror, or hub-state updates.
 
-Successful completion and death both return Akio to the Strand, but they must remain visually and narratively distinct.
+Successful completion and death both return Akio to the Strand, but they must remain visually and narratively distinct. See [Run Results and Strand Return](../ui_ux/RUN_RESULTS.md) for presentation requirements.
 
 ## Run growth
 
@@ -103,7 +107,7 @@ The following persist:
 - unlocked Blood Aspects,
 - chosen Aspect as an available loadout selection,
 - permanent upgrades,
-- Blood Mirror progress,
+- Blood Mirror trial and mastery progress,
 - narrative discoveries,
 - codex progression,
 - major permanent currencies and rewards.
