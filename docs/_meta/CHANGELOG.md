@@ -4,10 +4,22 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 
 # Documentation Changelog
+
+## 2026-07-11 — Production bible migration: pages 71–105
+
+- Completed the Court Caster and added Elite Defender, Hollow Vessel, and Court Sentinel production briefs.
+- Expanded Village Ogre, The Collector, and Keeper of the Gate into detailed encounter briefs.
+- Added the Embered Pilgrim, Rotwood Host, and Twin Maws encounter sources.
+- Added Blood Lotus, Eternal Swordsman, and the three-phase Eclipse Shogun encounter sources.
+- Resolved Area 2 and Area 3 major-encounter classifications and sequence.
+- Added core Parry, Posture Break, Deathblow, Corruption Full, Embrace, and Resist VFX briefs.
+- Updated full scope, asset inventory, terminology, source ownership, and Milestones 1, 2, 5, and 6.
+- Recorded unresolved implementation and lore questions instead of inventing values or canon.
+- Deferred Wolf Prey Mark because its source brief begins on page 105 and continues beyond the migration boundary.
 
 ## 2026-07-10 — Production bible migration: pages 36–70
 

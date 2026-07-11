@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - full-scope
   - asset-counts
@@ -28,7 +28,7 @@ This document records the current production-level shape of Oathbound. Exact bal
 | Area 1 standard enemies | 6 | Grounded village/garrison corruption roster |
 | Area 2 standard enemies | 4 | Forest, spirit, and predator roster |
 | Area 3 standard enemies | 5 | Preserved court and inner-sanctum roster |
-| Miniboss encounters | 6 | Two planned per main area |
+| Miniboss encounters | 6 | Two per main area |
 | Major bosses | 3 | One principal progression boss per area, including the final confrontation |
 | Environment sets | 4 | Strand plus Areas 1–3 |
 | VFX groups | 12 | Core combat, Blood Aspects, bosses, stances, and prosthetic support within current grouping |
@@ -86,7 +86,7 @@ Minibosses:
 
 Boss:
 
-- Keeper of the Gate
+- Keeper of the Gate — Ashen Duelist and Collapse phases
 
 ## Area 2 — Yomori Grove
 
@@ -97,13 +97,16 @@ Four standard enemies:
 - Mist Shepherd
 - Stalker Hound
 
-Current major-encounter inventory:
+Minibosses:
 
 - The Embered Pilgrim
-- The Rotwood Host
-- Rootfang and Briarthorn / The Twin Maws structure
+- Rotwood Host
 
-Exact implementation and encounter sequencing remain documented as draft outside this page-range migration.
+Boss:
+
+- Twin Maws — Rootfang and Briarthorn
+
+Both twins begin active. The first twin defeated transfers its half of the corrupted bond to the survivor, creating an empowered second half. Exact transition invulnerability, health/posture handling, inherited move timing, and difficulty normalization remain implementation questions.
 
 ## Area 3 — Kagutsuchi Court
 
@@ -115,13 +118,14 @@ Five standard enemies:
 - Hollow Vessel
 - Court Sentinel
 
-Current major-encounter inventory:
+Minibosses:
 
-- Blood Lotus Heart/Stalk encounter
-- Eternal Swordsman
-- Eclipse Shogun
+- Blood Lotus — Heart and Stalk multi-cycle encounter
+- Eternal Swordsman — focused duel encounter
 
-Final encounter grouping and implementation details remain under review.
+Boss:
+
+- Eclipse Shogun — Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases
 
 ## Environment sets
 
@@ -141,6 +145,7 @@ Additional specialized spaces, including Blood Cavern/Blood Mirror and the Wells
 - Boat Aspect-selection/run-start screen
 - Blood Mirror trial screen
 - Boss and miniboss presentation
+- Blood Lotus multi-cycle Heart/Stalk state presentation
 - Hub progression interfaces
 - Functional room presentation
 - Pause, overview, results, settings, controls, save/loading, credits, and completion presentation

@@ -4,7 +4,7 @@ title: Open Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 
 # Open Questions
@@ -40,7 +40,101 @@ Corruption is gained through combat accomplishments and major encounter progress
 
 **Status:** resolved
 
+## Resolved in production bible pages 71–105
+
+### Area 2 encounter structure
+
+**Resolution**
+
+The Embered Pilgrim and Rotwood Host are Area 2's two minibosses. Rootfang and Briarthorn form the paired Twin Maws boss encounter. Both twins begin active, and the first defeated transfers its half of the corrupted bond to the survivor, creating an empowered second half.
+
+**Affected files**
+
+- `docs/content/area_2/OVERVIEW.md`
+- `docs/content/area_2/MINIBOSSES.md`
+- `docs/content/area_2/BOSS.md`
+- `docs/art_production/milestones/MILESTONE_05.md`
+
+**Status:** resolved
+
+### Area 3 encounter classification
+
+**Resolution**
+
+Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal Area 3 boss. The Eclipse Shogun encounter uses the Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases.
+
+**Affected files**
+
+- `docs/content/area_3/OVERVIEW.md`
+- `docs/content/area_3/MINIBOSSES.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+
+**Status:** resolved
+
 ## Open questions
+
+### Elite Defender revival behavior
+
+**Category:** gameplay | content | production
+
+**Question**
+
+Does the Elite Defender use Kagutsuchi Court's one-time revival mechanic, or should it remain a pure shield-and-spear positional defender?
+
+**Why it matters**
+
+Adding revival may reinforce the regional preservation language, but it may also overload a unit whose primary read already depends on shield orientation, guard coverage, and committed spear punishments.
+
+**Affected files**
+
+- `docs/content/area_3/enemies/ELITE_DEFENDER.md`
+- `docs/content/area_3/ENEMIES.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+
+**Status:** open
+
+### Twin Maws transition implementation
+
+**Category:** gameplay | boss | UI/UX
+
+**Question**
+
+When the first Twin Maw dies, how are transition invulnerability, survivor health and posture, inherited attacks, transition duration, and difficulty normalization handled?
+
+**Current locked boundary**
+
+Both twins begin active. The first defeated transfers its half of the shared corrupted bond to the survivor. The survivor remains recognizably itself while gaining visible traces and selected capabilities from the fallen twin.
+
+**Affected files**
+
+- `docs/content/area_2/BOSS.md`
+- `docs/art_production/milestones/MILESTONE_05.md`
+- future boss UI and implementation documentation
+
+**Status:** open
+
+### Blood Lotus cycle tuning
+
+**Category:** gameplay | boss | UI/UX
+
+**Question**
+
+What are the final number of Heart cycles, Stalk-destruction timer, punishment threshold, deathblow HP-chunk values, Stalk relocation rules, and posture-reset behavior?
+
+**Current locked boundary**
+
+The Heart is invulnerable while active Stalks remain. Destroying the Stalks opens a short Heart window. The player builds posture and lands repeated deathblows to remove major HP chunks. Leaving Stalks active too long triggers a punishment phase and resets the encounter into another limb cycle.
+
+**Affected files**
+
+- `docs/content/area_3/MINIBOSSES.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+- future miniboss UI and implementation documentation
+
+**Status:** open
 
 ### Blood Cavern trial rewards and upgrade caps
 
@@ -74,7 +168,7 @@ How should Mist, Mist Shards, Scrolls, Gold, and Boss Emblems be finalized as cu
 
 **Why it matters**
 
-Pages 1–35 use overlapping currency language across Forge and Bloodwell interfaces. Persistence is broadly defined, but final names, icons, costs, and item-family counts require one consistent currency pass.
+The source bible uses overlapping currency language across Forge and Bloodwell interfaces. Persistence is broadly defined, but final names, icons, costs, and item-family counts require one consistent currency pass.
 
 **Affected files**
 
@@ -117,33 +211,19 @@ Who created the barrier, and what is its exact relationship to the Shogun and We
 
 **Status:** open
 
-### Area 2 encounter structure
+### The Shogun's ancient enemy
 
-**Category:** content
-
-**Question**
-
-What is the final sequencing and implementation of The Embered Pilgrim, The Rotwood Host, Rootfang, and Briarthorn?
-
-**Affected files**
-
-- `docs/content/area_2/OVERVIEW.md`
-- `docs/art_production/milestones/MILESTONE_05.md`
-
-**Status:** open
-
-### Area 3 encounter classification
-
-**Category:** content
+**Category:** lore
 
 **Question**
 
-How are the Blood Lotus and Eternal Swordsman classified and sequenced before the Eclipse Shogun?
+Who or what was the ancient enemy the Eclipse Shogun defeated using Beast Blood, and how did that conflict lead to the army's preservation and the island's current state?
 
 **Affected files**
 
-- `docs/content/area_3/OVERVIEW.md`
-- `docs/art_production/milestones/MILESTONE_06.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/TIMELINE.md`
 
 **Status:** open
 

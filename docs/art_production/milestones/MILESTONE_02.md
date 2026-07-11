@@ -20,8 +20,11 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - [Corrupted Archer](../../content/area_1/enemies/CORRUPTED_ARCHER.md)
 - [Cellar Bilemass](../../content/area_1/enemies/CELLAR_BILEMASS.md)
 - [Warden](../../content/area_1/enemies/WARDEN.md)
+- [Area 1 Minibosses](../../content/area_1/MINIBOSSES.md)
+- [Keeper of the Gate](../../content/area_1/BOSS.md)
 - [Corruption and Shrines](../../gameplay/CORRUPTION_AND_SHRINES.md)
 - [Shrine Interface](../../ui_ux/SHRINE_INTERFACE.md)
+- [Core Combat and Corruption VFX](../CORE_VFX.md)
 - [Art Direction](../ART_DIRECTION.md)
 - [Asset Inventory](../ASSET_INVENTORY.md)
 
@@ -39,13 +42,14 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - Archer projectile and impacts
 - Bile projectile, puddle, and status feedback
 - Warden restraint and outcome states
-- Ogre impact and warning effects
-- Collector fog, chains, snare, and ground masses
-- Keeper Phase 1, transformation, Phase 2, defeat, and completion effects
+- Ogre shield coverage, charge, impacts, and unblockable warning
+- Collector fog, chains, snare, ground masses, and reappearance cues
+- Keeper Phase 1, rupture transition, Phase 2, defeat, and completion effects
 - Miniboss and boss health/posture UI
 - Five Hushiro functional room skins
 - Necessary Hushiro props, breakables, reward object, and arena landmarks
-- Shared Corruption meter, Shrine Resist/Embrace foundation, and non-Aspect-specific Shrine effects
+- Shared Corruption meter and Shrine Resist/Embrace foundation
+- Corruption Full, Embrace Transformation, and Resist Stabilization cues
 
 ## Explicitly deferred
 
@@ -71,8 +75,9 @@ Exact commercial batch grouping may be adjusted during quotation without changin
 
 - All six standard enemies remain distinct in mixed encounters.
 - Archer draw/release, Bilemass puddles, and Warden restraint stages remain readable under pressure.
-- Both minibosses read above standard enemies and below Keeper.
-- Keeper's phases preserve identity while changing response rules.
+- Village Ogre clearly teaches shield-facing and response rules.
+- Collector remains oppressive without hiding intent.
+- Keeper’s phases preserve identity while changing response rules.
 - All functional room types read at a glance.
-- Shrine choices work without prematurely defining final Aspect identities.
+- Corruption Full, Embrace, and Resist cues remain distinct without prematurely defining final Aspect identities.
 - Area 1 remains cohesive from entry through boss completion.

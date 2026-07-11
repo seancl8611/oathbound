@@ -4,7 +4,7 @@ title: Shrine Interface
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - shrine
   - resist
@@ -14,6 +14,7 @@ topics:
 related:
   - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-BLOOD-ASPECTS
+  - ART-CORE-VFX
 ---
 
 # Shrine Interface
@@ -44,6 +45,8 @@ It should feel:
 - quieter than Embrace,
 - valuable in its own right rather than a weaker version of the other choice.
 
+The confirmed choice uses the [Resist Stabilization Cue](../art_production/CORE_VFX.md#resist-stabilization-cue): a cooler, paler ritual pulse that pushes Beast Blood back and resolves like an exhale.
+
 ## Embrace presentation
 
 Embrace advances the selected Aspect by one Tier, empties Corruption, and applies the next benefit and drawback immediately.
@@ -56,6 +59,8 @@ It should feel:
 - more visually assertive,
 - controlled rather than explosive,
 - consequential without reading as a generic evil choice.
+
+The confirmed choice uses the [Embrace Transformation Cue](../art_production/CORE_VFX.md#embrace-transformation-cue): a controlled surge from Shrine to Akio that settles into the new Aspect Tier presentation.
 
 ## Interface states
 

@@ -23,6 +23,7 @@ Prove final-quality player and enemy readability, parry/posture/deathblow feedba
 - [Blighted Hounds](../../content/area_1/enemies/BLIGHTED_HOUNDS.md)
 - [Hollow](../../content/area_1/enemies/HOLLOW.md)
 - [Combat HUD](../../ui_ux/HUD.md)
+- [Core Combat and Corruption VFX](../CORE_VFX.md)
 - [Art Direction](../ART_DIRECTION.md)
 - [Technical Standards](../TECHNICAL_STANDARDS.md)
 
@@ -36,12 +37,13 @@ Prove final-quality player and enemy readability, parry/posture/deathblow feedba
 - VFX-002 Hit Spark
 - VFX-003 Deathblow Cue
 - VFX-004 Sword Trail
+- Core Posture Break Cue
 - UI-001 Combat HUD
 - ENV-A1-001 Hushiro Combat Room Kit
 
 ## Internal batches
 
-1. Akio + parry, hit, and sword-trail VFX
+1. Akio + parry, hit, posture-break, and sword-trail VFX
 2. Corrupted Swordsman + deathblow cue
 3. Blighted Hound + Hollow
 4. Combat HUD + Hushiro combat room kit
@@ -57,4 +59,4 @@ Prove final-quality player and enemy readability, parry/posture/deathblow feedba
 
 ## Completion test
 
-Akio and all three enemies must remain readable at gameplay scale in the Hushiro test room, with clear attack windups, parry feedback, posture breaks, hazards/openings where applicable, and clean Godot 4 import.
+Akio and all three enemies remain readable at gameplay scale in the Hushiro test room. Parry Spark, Posture Break Cue, and Deathblow Cue must be immediately distinguishable from normal hits and from one another, with clean Godot 4 import and no effect obscuring attack follow-through.

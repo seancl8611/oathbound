@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 
 # Decision Log
@@ -137,3 +137,50 @@ Resist keeps the current Aspect Tier, lowers Corruption to approximately 75%, an
 - `docs/gameplay/CORRUPTION_AND_SHRINES.md`
 - `docs/ui_ux/SHRINE_INTERFACE.md`
 - `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-07-11 — Area 2 major-encounter structure
+
+**Status:** approved
+
+**Decision**
+
+The Embered Pilgrim and Rotwood Host are the two Yomori Grove minibosses. Rootfang and Briarthorn form the Twin Maws paired boss. Both twins begin active; the first defeated transfers its half of the corrupted bond to the survivor, which remains recognizably itself while gaining selected traits from the fallen twin.
+
+**Affected documents**
+
+- `docs/content/area_2/OVERVIEW.md`
+- `docs/content/area_2/MINIBOSSES.md`
+- `docs/content/area_2/BOSS.md`
+- `docs/overview/FULL_GAME_SCOPE.md`
+- `docs/art_production/milestones/MILESTONE_05.md`
+
+## 2026-07-11 — Area 3 encounter sequence
+
+**Status:** approved
+
+**Decision**
+
+Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal Area 3 boss.
+
+**Affected documents**
+
+- `docs/content/area_3/OVERVIEW.md`
+- `docs/content/area_3/MINIBOSSES.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/overview/FULL_GAME_SCOPE.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+
+## 2026-07-11 — Eclipse Shogun phases are revelations
+
+**Status:** approved
+
+**Decision**
+
+The Eclipse Shogun's three phases — Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed — reveal deeper layers of a chosen sovereign-beast identity. They are not a progression from discipline into mindless berserk collapse.
+
+**Affected documents**
+
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/_meta/TERMINOLOGY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`

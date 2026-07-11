@@ -38,26 +38,38 @@ Polished lacquer, vermilion and black armor, gilded trim, silk layers, ceremonia
 
 ## Shared corruption language
 
-Preservation taken to a monstrous extreme: unnatural stillness, repeated gestures, puppet-like precision, emotionless faces, unaging beauty, perfect equipment, and bodies that resume their assigned function after death. Visible mutation is restrained; behavioral and ritual wrongness dominate.
+Preservation taken to a monstrous extreme: unnatural stillness, repeated gestures, puppet-like precision, emotionless faces, unaging beauty, perfect equipment, and bodies or systems that continue their assigned function after death or structural failure. Visible mutation is restrained until a role specifically requires rupture, spawning, or frenzy.
 
 ## Movement philosophy
 
-Precise, elegant, and over-controlled. Patrols, pivots, formation changes, attack resets, and ceremonial gestures should be cleaner than earlier areas. Wrongness comes from timing held too long, synchronization that is too exact, and roles performed without improvisation.
+Precise, elegant, and over-controlled. Patrols, pivots, formation changes, guard re-angling, attack resets, casting forms, and ceremonial gestures should be cleaner than earlier areas. Wrongness comes from timing held too long, synchronization that is too exact, and roles performed without improvisation.
 
 ## Readability priorities
 
 - clean silhouette hierarchy against rich backgrounds,
 - unmistakable startup and recovery poses,
-- clear weapon lines and formation changes,
-- explicit revive, channel, and ritual states,
+- clear weapon lines, shield orientation, and formation changes,
+- explicit revive, channel, spawn, and frenzy states,
 - safe-space and projectile readability across reflective floors,
+- obvious ownership of spawned Spillborn,
 - danger expressed through precision rather than visual chaos.
 
-## Detailed unit briefs migrated in pages 36–70
+## Standard enemy roster
 
 | Enemy | Primary role | Authoritative brief |
 |---|---|---|
 | Court Guard | Baseline court swordsman with one-time revive | [Court Guard](enemies/COURT_GUARD.md) |
-| Court Caster | Escalating ranged ritual pressure with revive | [Court Caster](enemies/COURT_CASTER.md) |
+| Court Caster | Escalating ranged ritual pressure with one-time revive | [Court Caster](enemies/COURT_CASTER.md) |
+| Elite Defender | Shield-and-spear positional defender | [Elite Defender](enemies/ELITE_DEFENDER.md) |
+| Hollow Vessel | Stationary Spillborn spawner and source-priority objective | [Hollow Vessel](enemies/HOLLOW_VESSEL.md) |
+| Court Sentinel | Heavy kanabō bruiser with low-health frenzy | [Court Sentinel](enemies/COURT_SENTINEL.md) |
 
-The Elite Defender, Hollow Vessel, and Court Sentinel briefs begin after page 70 and remain for the next migration batch.
+## Role-separation rule
+
+- Court Guard is the baseline soldier.
+- Court Caster controls ranged space through escalating ritual volleys.
+- Elite Defender denies frontal aggression through directional guard coverage.
+- Hollow Vessel creates cumulative pressure by spawning weak expendable units.
+- Court Sentinel controls nearby space through weight, commitment, and frenzy escalation.
+
+No unit should inherit another unit's defining mechanic merely to make the roster appear more complex. In particular, the Elite Defender's possible revive behavior remains unresolved because it may overload the shield-orientation identity.
