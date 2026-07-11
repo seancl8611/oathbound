@@ -37,18 +37,25 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Area 1 regional identity | `docs/content/area_1/OVERVIEW.md` |
 | Area 1 enemy family and roster | `docs/content/area_1/ENEMIES.md` |
 | Individual Area 1 enemies | `docs/content/area_1/enemies/*.md` |
+| Area 1 minibosses | `docs/content/area_1/MINIBOSSES.md` |
+| Area 1 boss encounter | `docs/content/area_1/BOSS.md` |
 | Area 2 regional identity | `docs/content/area_2/OVERVIEW.md` |
 | Area 2 enemy family and roster | `docs/content/area_2/ENEMIES.md` |
 | Individual Area 2 enemies | `docs/content/area_2/enemies/*.md` |
+| Area 2 minibosses | `docs/content/area_2/MINIBOSSES.md` |
+| Area 2 boss encounter | `docs/content/area_2/BOSS.md` |
 | Area 3 regional identity | `docs/content/area_3/OVERVIEW.md` |
 | Area 3 enemy family and roster | `docs/content/area_3/ENEMIES.md` |
 | Individual Area 3 enemies | `docs/content/area_3/enemies/*.md` |
+| Area 3 minibosses | `docs/content/area_3/MINIBOSSES.md` |
+| Area 3 boss encounter | `docs/content/area_3/BOSS.md` |
 | Strand hub identity | `docs/content/strand/OVERVIEW.md` |
 | Strand interactible roster | `docs/content/strand/INTERACTIBLES.md` |
 | Individual Strand service definitions | `docs/content/strand/interactibles/*.md` |
 | Art direction | `docs/art_production/ART_DIRECTION.md` |
 | Art technical standards | `docs/art_production/TECHNICAL_STANDARDS.md` |
 | Character/enemy brief requirements | `docs/art_production/CHARACTER_BRIEF_STANDARD.md` |
+| Shared combat and Corruption VFX | `docs/art_production/CORE_VFX.md` |
 | Art asset inventory | `docs/art_production/ASSET_INVENTORY.md` |
 | Outsourcing process | `docs/art_production/OUTSOURCING_WORKFLOW.md` |
 | Milestone scope | `docs/art_production/milestones/MILESTONE_*.md` |
@@ -66,4 +73,4 @@ When two files conflict, use the file assigned authority here. Update dependent 
 
 ## Duplication rule
 
-Detailed definitions belong only in their authoritative file. Indexes own families, rosters, and navigation; linked files own individual identities or systems. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, or content definitions.
+Detailed definitions belong only in their authoritative file. Indexes own families, rosters, and navigation; linked files own individual identities or systems. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, content, or VFX definitions.
