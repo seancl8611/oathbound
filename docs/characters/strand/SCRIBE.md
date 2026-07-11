@@ -4,11 +4,12 @@ title: The Scribe
 category: character
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - strand
   - scribe
   - codex
+  - techniques
   - discovery-board
 related:
   - CHAR-STRAND-NPCS
@@ -19,7 +20,9 @@ related:
 
 ## Gameplay and narrative role
 
-The Scribe is the Strand's archivist, recorder, and keeper of practical knowledge. She maintains the Discovery Board and catalogs enemy weaknesses, prosthetic discoveries, relic notes, and fragments of island history. She supports codex progression, discovery tracking, and the gradual conversion of recovered knowledge into useful understanding.
+The Scribe is the Strand's archivist, recorder, and keeper of practical knowledge. She maintains the Discovery Board and catalogs enemy weaknesses, observed Technique patterns, prosthetic discoveries, Relic notes, and fragments of island history. She supports codex progression, discovery tracking, and the gradual conversion of recovered knowledge into useful understanding.
+
+Her records may explain known Technique combat verbs, affinities, and refinements without preserving the temporary active or reserve build from a completed run.
 
 ## One-sentence fantasy
 
