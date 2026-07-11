@@ -18,6 +18,8 @@ Individual Area 1 enemy briefs are stored in `area_1/enemies/`.
 
 - [Overview](area_2/OVERVIEW.md)
 - [Enemy family and roster](area_2/ENEMIES.md)
+- [Minibosses](area_2/MINIBOSSES.md)
+- [Twin Maws boss](area_2/BOSS.md)
 
 Individual Area 2 enemy briefs are stored in `area_2/enemies/`.
 
@@ -25,8 +27,10 @@ Individual Area 2 enemy briefs are stored in `area_2/enemies/`.
 
 - [Overview](area_3/OVERVIEW.md)
 - [Enemy family and roster](area_3/ENEMIES.md)
+- [Minibosses](area_3/MINIBOSSES.md)
+- [Eclipse Shogun boss encounter](area_3/BOSS.md)
 
-Individual Area 3 enemy briefs are stored in `area_3/enemies/`. Pages 36–70 currently cover the Court Guard and Court Caster; later units remain for subsequent migration batches.
+Individual Area 3 enemy briefs are stored in `area_3/enemies/`.
 
 ### The Strand
 
@@ -36,4 +40,4 @@ Individual Area 3 enemy briefs are stored in `area_3/enemies/`. Pages 36–70 cu
 
 ## Ownership rule
 
-Regional indexes own family identity and roster navigation. Individual enemy files own unit fantasy, combat role, visual identity, animation requirements, and technical notes. Gameplay system files own shared mechanics; lore files own history and canon; milestones own production scope.
+Regional indexes own family identity and roster navigation. Individual enemy files own standard-unit fantasy, combat role, visual identity, animation requirements, and technical notes. Miniboss and boss files own encounter identity, phases, arena dependencies, and production requirements. Gameplay system files own shared mechanics; lore files own history and canon; milestones own production scope.
