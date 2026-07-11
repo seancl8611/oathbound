@@ -13,13 +13,17 @@ topics:
   - vfx
 related:
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-TECHNIQUES
   - CHAR-AKIO
+  - ART-TECHNIQUE-VFX
   - ART-MILESTONE-04
 ---
 
 # Blood Aspect VFX
 
-These effects communicate the equipped Blood Aspect's tactical identity. They are information cues first and spectacle second. All three families layer onto Akio's approved base animation library and must preserve attack direction, enemy telegraphs, and the player's final position.
+These effects communicate the equipped Blood Aspect's central tactical identity. They are information cues first and spectacle second. All three families layer onto Akio's approved base animation library and must preserve attack direction, enemy telegraphs, and the player's final position.
+
+Techniques may reuse or lightly extend these effects when they amplify the same combat verb, but the Aspect must remain the stronger visual identity.
 
 ## Wolf Aspect — Prey Mark
 
@@ -40,7 +44,7 @@ A restrained red predator mark over one enemy, with a faint blood-scent trail or
 
 ### Readability requirements
 
-The marked enemy must remain unmistakable in mixed encounters. The cue cannot be confused with Burn, Shock, Hex, deathblow availability, or generic damage marks.
+The marked enemy must remain unmistakable in mixed encounters. The cue cannot be confused with Burn, Shock, deathblow availability, Technique target markers, or generic damage marks.
 
 ### Layering and usage
 
@@ -68,7 +72,7 @@ A pale-red body afterimage at the starting point, a compact mist-step trace, and
 
 ### Readability requirements
 
-The player must always know Akio's final position. The effect cannot obscure incoming attacks, enemy silhouettes, backstrike windows, or hazard boundaries. It must remain distinct from the Mist Raven prosthetic and ordinary dash effects.
+The player must always know Akio's final position. The effect cannot obscure incoming attacks, enemy silhouettes, backstrike windows, or hazard boundaries. It must remain distinct from the Mist Raven prosthetic, movement Techniques, and ordinary dash effects.
 
 ### Layering and usage
 
@@ -113,4 +117,5 @@ Ronin is the least visually noisy Aspect. Favor precision, timing, and clean con
 - Aspect effects use modular overlays and VFX, not separate complete character sheets.
 - Tier escalation should increase clarity and intensity without turning the three Aspects into color swaps.
 - Wolf owns marked-target pressure, Wraith owns displacement and afterimage, and Ronin owns disciplined contact and Focus.
+- Techniques inherit these families only when they reinforce the same combat verb; neutral Techniques remain visually compatible with every Aspect.
 - Effects must remain readable over every regional palette and during boss encounters.
