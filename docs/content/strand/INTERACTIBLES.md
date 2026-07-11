@@ -26,12 +26,22 @@ Each Strand service should read as a physical location first, a gameplay functio
 | Merchant Stall | Stock-based purchases and salvaged goods | [Merchant Stall](interactibles/MERCHANT_STALL.md) |
 | Discovery Board | Codex, discovery tracking, and practical knowledge archive | [Discovery Board](interactibles/DISCOVERY_BOARD.md) |
 | Bloodwell | Broad permanent meta progression and Strand-side revival anchor | [Bloodwell](interactibles/BLOODWELL.md) |
-| Blood Cavern / Blood Mirror | Training, Aspect trials, unlocks, and mastery | Detailed migration begins after page 35 of the source bible |
+| Blood Cavern / Blood Mirror | Training, trials, Aspect unlocks, previews, mastery, and build testing | [Blood Cavern and Blood Mirror](interactibles/BLOOD_CAVERN.md) |
+
+## System ownership boundary
+
+- **Boat:** equips or confirms an unlocked Blood Aspect before a run.
+- **Shrine:** handles in-run Resist/Embrace and Tier growth.
+- **Blood Mirror:** teaches, unlocks, previews, tests, and lightly improves Aspects.
+- **Bloodwell:** owns broad permanent meta progression and the Strand-side revival anchor.
+- **Blood Cavern:** provides the physical training and trial space.
+
+These functions must not collapse into one generic upgrade screen.
 
 ## Shared rules
 
 - Stations must remain recognizable without opening their menus.
 - UI should feel grounded in the station's materials and function.
-- Locked, available, selected, purchased, completed, and unavailable states must be clear.
+- Locked, available, selected, purchased, completed, mastered, and unavailable states must be clear where applicable.
 - Final interface art should follow the documented data and progression structure.
-- Bloodwell, Blood Mirror, Boat, and Shrine own different parts of the Blood Aspect/progression loop and must not be collapsed into one generic upgrade screen.
+- Repeated use must remain fast enough for the roguelite return loop.
