@@ -92,3 +92,48 @@ Milestone 2 remains Complete Area 1 Production. It includes shared Corruption/Sh
 
 - `docs/art_production/milestones/MILESTONE_02.md`
 - `docs/art_production/milestones/MILESTONE_04.md`
+
+## 2026-07-10 — Once-per-decade Blood Moon crossing
+
+**Status:** approved
+
+**Decision**
+
+The Blood Moon weakens the barrier once every ten years, creating a narrow opportunity for the Order to send one prepared warrior toward the island. All attempts before Akio failed to produce a returning warrior.
+
+**Affected documents**
+
+- `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/content/strand/interactibles/BOAT.md`
+
+## 2026-07-10 — Blood Aspect run ownership and reset
+
+**Status:** approved
+
+**Decision**
+
+The Blood Mirror unlocks, teaches, tests, and lightly improves Aspects. The Boat equips or confirms the selected Aspect. Shrines handle in-run Resist/Embrace progression. Blood Aspect Tier and Corruption reset after both failed and successful runs, while unlocked Aspects and permanent Blood Mirror progress persist.
+
+**Affected documents**
+
+- `docs/gameplay/BLOOD_ASPECTS.md`
+- `docs/gameplay/CORRUPTION_AND_SHRINES.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/content/strand/INTERACTIBLES.md`
+
+## 2026-07-10 — Resist and Embrace baseline rules
+
+**Status:** approved
+
+**Decision**
+
+Resist keeps the current Aspect Tier, lowers Corruption to approximately 75%, and grants a short-term support reward. Embrace empties Corruption and advances the active Aspect by one Tier, immediately applying the new benefit and drawback. Exact values remain tuning variables.
+
+**Affected documents**
+
+- `docs/gameplay/CORRUPTION_AND_SHRINES.md`
+- `docs/ui_ux/SHRINE_INTERFACE.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
