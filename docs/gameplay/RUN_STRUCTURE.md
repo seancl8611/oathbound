@@ -4,17 +4,21 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - runs
   - death
   - successful-return
   - wellspring
   - strand
+  - techniques
+  - room-rewards
 related:
   - LORE-RETURNING-BLOOD
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-STRAND-BLOODWELL
   - UI-RUN-RESULTS
 ---
@@ -40,8 +44,10 @@ Before departure, the player:
 
 - completes available Strand preparation,
 - confirms an unlocked Blood Aspect at the Boat after the system is unlocked,
+- confirms the current prosthetic loadout when available,
 - begins at Blood Aspect Tier 0,
-- starts without the previous run's Corruption, temporary boons, Gold, room progress, or temporary relic effects.
+- begins with four empty active Technique slots and one empty reserve slot,
+- starts without the previous run's Corruption, Techniques, refinements, Gold, room progress, or temporary Relic effects.
 
 ## Room functions
 
@@ -56,6 +62,20 @@ The game uses recognizable room categories:
 - Boss approach and boss arena
 
 Each function should read before interaction through environment composition, focal props, lighting, and UI treatment.
+
+Combat routes may also display a previewed primary reward category before entry. Room function and reward category are related but separate: a standard combat encounter may pay out Gold, Mist, Scrolls, recovery, temporary run growth, or a Technique opportunity.
+
+Detailed reward ownership and cadence belong in [Items, Currencies, and Rewards](ITEMS_AND_REWARDS.md).
+
+## Run power curve
+
+The intended build progression is:
+
+- **Area 1:** acquire the first meaningful Techniques and begin defining the build.
+- **Area 2:** fill the four active Technique slots, gain Aspect Tiers, and establish coherent synergy.
+- **Area 3:** refine, replace, use reserve strategically, and finalize the build for the Shogun.
+
+A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room.
 
 ## Failed run
 
@@ -83,12 +103,14 @@ Successful completion and death both return Akio to the Strand, but they must re
 A run may change through:
 
 - Blood Aspect Tier choices,
-- stances,
-- prosthetic tools and resources,
-- boons and relics,
+- four active Techniques and one reserve Technique,
+- Technique refinements and replacements,
+- prosthetic tools, resources, and eligible Prosthetic Techniques,
+- run-scoped Relics,
 - consumables,
 - temporary currencies and materials,
-- boss or discovery rewards.
+- survival and resource-cap rewards,
+- boss, miniboss, treasure, shop, or discovery rewards.
 
 ## Reset boundary
 
@@ -96,16 +118,19 @@ The following reset after death or successful Wellspring return:
 
 - current Corruption,
 - Blood Aspect Tier,
-- temporary boons,
+- active Techniques,
+- reserve Technique,
+- Technique refinements,
 - Gold,
 - room progress,
-- temporary relic effects,
+- temporary Relic effects,
 - other explicitly run-only states.
 
 The following persist:
 
 - unlocked Blood Aspects,
 - chosen Aspect as an available loadout selection,
+- unlocked Techniques in future reward pools,
 - permanent upgrades,
 - Blood Mirror trial and mastery progress,
 - narrative discoveries,
