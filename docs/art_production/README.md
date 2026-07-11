@@ -1,11 +1,22 @@
 # Art Production
 
-Authoritative art direction, technical standards, asset inventory, outsourcing workflow, reference rules, and milestone scope belong here.
+Authoritative art direction, technical standards, asset inventory, outsourcing workflow, and milestone scope belong here.
 
-Planned files:
-- `ART_DIRECTION.md`
-- `TECHNICAL_STANDARDS.md`
-- `ASSET_INVENTORY.md`
-- `OUTSOURCING_WORKFLOW.md`
-- `REFERENCE_LIBRARY_RULES.md`
-- `milestones/README.md`
+## Current documents
+
+- [Art Direction](ART_DIRECTION.md)
+- [Technical Standards](TECHNICAL_STANDARDS.md)
+- [Asset Inventory](ASSET_INVENTORY.md)
+- [Outsourcing Workflow](OUTSOURCING_WORKFLOW.md)
+- [Art Milestones](milestones/README.md)
+
+## Planned expansion
+
+- Reference-library rules
+- Asset ID registry
+- VFX color/value guide
+- UI export standards
+- Contractor brief source templates
+- Revision and delivery checklists
+
+Art-production documents translate authoritative design into asset requirements. They should not invent mechanics, lore, or encounter behavior when the source documents are unresolved.

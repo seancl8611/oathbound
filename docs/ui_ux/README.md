@@ -1,5 +1,21 @@
 # UI and UX
 
-Authoritative HUD, menus, interface states, interaction flows, and front-end documentation belongs here.
+Authoritative HUD, menus, interface states, interaction flows, and accessibility requirements belong here.
 
-Planned files include combat HUD, hub interfaces, Shrine interface, front end, controller/keyboard navigation, and accessibility requirements.
+## Current documents
+
+- [Combat HUD](HUD.md)
+- [Shrine Interface](SHRINE_INTERFACE.md)
+- [Hub Interfaces](HUB_INTERFACES.md)
+
+## Planned expansion
+
+- Front end and settings
+- Controller/keyboard navigation standard
+- Accessibility requirements
+- Dialogue and narrative presentation
+- Run-results screen
+- Save/loading feedback
+- Localization-safe layout rules
+
+UI files own information hierarchy and interaction states. Gameplay files own the underlying rules and values.
