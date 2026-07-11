@@ -17,7 +17,7 @@ related:
 
 # Asset Inventory
 
-This is the high-level production inventory. Individual character, system, regional, and milestone files own detailed animation and state lists.
+This is the high-level production inventory. Individual character, system, regional, encounter, and milestone files own detailed animation and state lists.
 
 ## Master counts
 
@@ -28,12 +28,12 @@ This is the high-level production inventory. Individual character, system, regio
 | Area 1 enemies | 6 | Village/garrison and raw-corruption set |
 | Area 2 enemies | 4 | Forest, spirit, and predator set |
 | Area 3 enemies | 5 | Court and inner-sanctum set |
-| Minibosses | 6 | Two per main area in the current plan |
-| Bosses | 3 | One principal boss package per main area |
+| Minibosses | 6 | Two per main area |
+| Bosses | 3 | One principal boss encounter per main area |
 | Environment sets | 4 | Strand and Areas 1–3; Blood Cavern is a Strand interior subset |
-| VFX groups | 12 | Current grouping includes Blood Aspect additions |
-| UI / room-art groups | 12 | Current grouping includes Blood Aspect additions; screen list is more granular than this grouping |
-| Item / consumable groups | 7 | Must be reviewed later against revised currency families |
+| VFX groups | 12 | High-level grouping; individual cue count is more granular |
+| UI / room-art groups | 12 | High-level grouping; screen list is more granular |
+| Item / consumable groups | 7 | Must be reviewed against revised currency families |
 
 ## Player
 
@@ -58,67 +58,83 @@ This is the high-level production inventory. Individual character, system, regio
 
 ## Combatants
 
-- **Area 1:** 6 standard enemies, 2 minibosses, 1 two-phase boss
-- **Area 2:** 4 standard enemies, 2 minibosses, Rootfang/Briarthorn boss structure
-- **Area 3:** 5 standard enemies, Blood Lotus encounter, Eternal Swordsman, Eclipse Shogun
+- **Area 1:** 6 standard enemies, Village Ogre, The Collector, Keeper of the Gate
+- **Area 2:** 4 standard enemies, Embered Pilgrim, Rotwood Host, Twin Maws encounter
+- **Area 3:** 5 standard enemies, Blood Lotus, Eternal Swordsman, Eclipse Shogun
 
-Pages 36–70 establish detailed production requirements for all six Area 1 enemies, all four Area 2 enemies, the Area 3 Court Guard, and the Area 3 Court Caster. Later Area 3 unit details remain in subsequent source pages.
+Pages 36–70 establish the standard-enemy production briefs. Pages 71–105 complete the Area 3 standard roster and establish all six miniboss briefs plus all three principal boss encounters.
 
 ## Environment sets
 
-- The Strand hub, docks, role-specific NPC stations, shoreline atmosphere, and Blood Cavern/Mirror interior
-- Hushiro Gate Village base kit and functional room skins
-- Yomori Grove base kit, rooms, arenas, hazards, and props
-- Kagutsuchi Court base kit, rooms, arenas, Wellspring support, and props
+- Strand hub, docks, role-specific NPC stations, shoreline atmosphere, and Blood Cavern/Mirror interior
+- Hushiro Gate Village base kit, functional rooms, miniboss spaces, and old-gate boss arena
+- Yomori Grove base kit, failed purification site, Rotwood arena, Twin Maws arena, rooms, hazards, and props
+- Kagutsuchi Court base kit, Blood Lotus fissure arena, duel court, Wellspring throne-space, rooms, transitions, and props
 
 ## Strand interactible art
 
 - Boat and departure lantern/dock presentation
-- Forge Bench, forge props, ember/heat layers, and upgrade-screen visual language
-- Merchant Stall, stock spread, salvage props, and shop-screen visual language
+- Forge Bench, forge props, ember/heat layers, and upgrade-screen language
+- Merchant Stall, stock spread, salvage props, and shop-screen language
 - Discovery Board, papers, diagrams, codex presentation, and unlock states
-- Bloodwell physical landmark, carved channels, contained blood surface, progression screen, and reformation effects
-- Blood Cavern outer training hall: platforms, dummies, racks, ropes, lanterns, and trial-state support
-- Blood Mirror inner chamber: black stone, shallow reflective water, mineral seams, mirror framing, and Aspect-trial presentation
+- Bloodwell landmark, carved channels, contained blood surface, progression screen, and reformation effects
+- Blood Cavern outer hall and Blood Mirror inner chamber
 
 ## UI/UX
 
 - Combat HUD
-- Corruption meter
-- Blood Aspect icon and Tier indicator
+- Corruption meter and Blood Aspect Tier indicator
 - Shrine Resist/Embrace interface
-- Boat Aspect-selection/run-start screen
-- Forge upgrade tree
-- Merchant inventory screen
-- Discovery Board/codex
-- Bloodwell progression tree
-- Blood Mirror/trial interface
-- Trial locked/available/active/completed/mastered states
-- Run-results and successful-return summary
+- Boat run-start screen
+- Forge, merchant, Discovery Board, Bloodwell, and Blood Mirror screens
+- Trial states and run-results presentation
 - Pause/build overview
-- Miniboss and boss UI
+- Miniboss and boss health/posture presentation
+- Blood Lotus multi-cycle Heart/posture support
 - Settings, controls, save/loading, and front end
 
-## VFX additions tied to Blood Aspects and return
+## Shared VFX briefs established through page 105
 
-- Wolf prey mark, target-pressure streaks, blood trail, aggression aura
-- Wraith perfect-dodge cue, afterimage, mist-step, flank/backstrike cue
-- Ronin enhanced parry spark, Counter Cut trail, deathblow Focus cue, posture-break emphasis
-- Corruption full, Shrine-ready, Resist, Embrace, and Tier-change effects
-- Bloodwell reformation pulse, red-black collapse, reconstruction flash, and optional brief Aspect residue
+- Parry Spark
+- Posture Break Cue
+- Deathblow Cue
+- Corruption Full Cue
+- Embrace Transformation Cue
+- Resist Stabilization Cue
 
-## Enemy-specific production dependencies established in pages 36–70
+The Wolf Prey Mark brief starts on page 105 but continues beyond the current source boundary and remains for the next migration batch.
 
-- Corrupted Archer arrows, impact, aiming, and retreat states
-- Cellar Bilemass bile projectile and persistent puddle readability
-- Warden restraint cast, bound state, yank telegraph, parry escape, and outcomes
-- Area 1 hound attack-token and lunge-readability support
-- Lingering Wraith flicker, targetability, and spectral blade layers
-- Lantern Wraith lantern flare and spirit-flame projectiles
-- Mist Shepherd flute loop, audio identity, and buff-link effects
-- Stalker Hound mist entry, reappearance, and pounce states
-- Court Guard first death, revive channel, interruption, revive completion, and final death
-- Court Caster escalating volley, channel, first death, revive, and final death
+## Enemy and encounter production dependencies
+
+### Standard enemies
+
+- Corrupted Archer projectile and retreat states
+- Cellar Bilemass projectile and puddle readability
+- Warden restraint stages and outcomes
+- Area 1 hound attack-token support
+- Area 2 spirit targetability, lantern, buff-link, mist, and pounce states
+- Court Guard and Court Caster one-time revival states
+- Elite Defender shield orientation and guard-break states
+- Hollow Vessel spawn ownership, Spillborn emergence, and progressive damage states
+- Court Sentinel composed/frenzy state transition
+
+### Area 1 major encounters
+
+- Village Ogre shield coverage, charge, sweep warning, impacts, and gate-yard support
+- Collector fog dimming, chain, snare, ground masses, and audio layers
+- Keeper Phase 1 duel, rupture transition, Phase 2 corruption, shockwave, sweep, and lane-charge effects
+
+### Area 2 major encounters
+
+- Embered Pilgrim channel-state flame, smoke, root-feed, and failed-rite arena changes
+- Rotwood shell crack, shell break, exposed core, roots, fungus, and blood-sap effects
+- Twin Maws simultaneous role readability, shell/anchor states, soul-transfer transition, and survivor empowerment
+
+### Area 3 major encounters
+
+- Blood Lotus Heart, three Stalks, fissure states, punishment projectiles, core exposure, and multi-cycle UI
+- Eternal Swordsman restrained spirit haze, duel trails, and reposition cues
+- Eclipse Shogun three complete phase presentations, polearm continuity, Wellspring arena evolution, eclipse motif, and ending transition dependencies
 
 ## Items and rewards
 
@@ -129,8 +145,8 @@ Pages 36–70 establish detailed production requirements for all six Area 1 enem
 - Boss Emblems
 - Chests, pickups, and breakables
 
-The current item/consumable count is provisional because recent currency-family changes may require the seven-group estimate to be split or renamed.
+The current item/consumable count remains provisional because currency-family changes may require the seven-group estimate to be split or renamed.
 
 ## Inventory rule
 
-When a system, enemy, boss, room type, item family, or UI screen is added or removed, update this inventory and its assigned milestone in the same change.
+When a system, enemy, boss, room type, item family, UI screen, or VFX family is added or removed, update this inventory and its assigned milestone in the same change.
