@@ -16,6 +16,10 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 ## Authoritative design sources
 
 - [Hushiro Gate Village](../../content/area_1/OVERVIEW.md)
+- [Area 1 Enemy Family](../../content/area_1/ENEMIES.md)
+- [Corrupted Archer](../../content/area_1/enemies/CORRUPTED_ARCHER.md)
+- [Cellar Bilemass](../../content/area_1/enemies/CELLAR_BILEMASS.md)
+- [Warden](../../content/area_1/enemies/WARDEN.md)
 - [Corruption and Shrines](../../gameplay/CORRUPTION_AND_SHRINES.md)
 - [Shrine Interface](../../ui_ux/SHRINE_INTERFACE.md)
 - [Art Direction](../ART_DIRECTION.md)
@@ -66,6 +70,7 @@ Exact commercial batch grouping may be adjusted during quotation without changin
 ## Completion test
 
 - All six standard enemies remain distinct in mixed encounters.
+- Archer draw/release, Bilemass puddles, and Warden restraint stages remain readable under pressure.
 - Both minibosses read above standard enemies and below Keeper.
 - Keeper's phases preserve identity while changing response rules.
 - All functional room types read at a glance.
