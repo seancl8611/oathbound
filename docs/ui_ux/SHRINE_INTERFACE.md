@@ -2,10 +2,16 @@
 id: UI-SHRINE
 title: Shrine Interface
 category: ui-ux
-status: draft
+status: approved
 authority: primary
 last_reviewed: 2026-07-10
-depends_on:
+topics:
+  - shrine
+  - resist
+  - embrace
+  - blood-aspects
+  - corruption
+related:
   - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-BLOOD-ASPECTS
 ---
@@ -19,21 +25,37 @@ The Shrine screen presents a focused in-run decision about how far Akio permits 
 - Active Blood Aspect
 - Current Tier
 - Current Corruption state
-- Current relevant benefits/drawbacks
+- Current benefits and drawbacks
 - Resist result
 - Embrace next-Tier benefit
 - Embrace next-Tier drawback
+- Maximum-Tier state
 - Controller and keyboard navigation states
 
-## Visual distinction
+## Resist presentation
 
-### Resist
+Resist keeps the current Aspect Tier, reduces Corruption to approximately 75%, and provides a short-term support reward such as healing.
 
-Controlled, stabilizing, contained, and quieter. It should not read as a weaker version of Embrace.
+It should feel:
 
-### Embrace
+- controlled,
+- stabilizing,
+- contained,
+- quieter than Embrace,
+- valuable in its own right rather than a weaker version of the other choice.
 
-Intensifying, mutating, dangerous, and more visually assertive without becoming a generic evil option.
+## Embrace presentation
+
+Embrace advances the selected Aspect by one Tier, empties Corruption, and applies the next benefit and drawback immediately.
+
+It should feel:
+
+- intensifying,
+- mutating,
+- dangerous,
+- more visually assertive,
+- controlled rather than explosive,
+- consequential without reading as a generic evil choice.
 
 ## Interface states
 
@@ -44,7 +66,19 @@ Intensifying, mutating, dangerous, and more visually assertive without becoming 
 - Confirmed
 - Cancel/back
 - Maximum Tier
-- No active Aspect, if supported
+- Tier-preview state
+
+A no-active-Aspect state should not be required during normal post-unlock runs because the Boat confirms one unlocked Aspect before departure. Pre-unlock and tutorial cases may use a simplified flow.
+
+## Information hierarchy
+
+The player should understand, before confirming:
+
+1. current Tier,
+2. what Resist does now,
+3. what Embrace adds now,
+4. what new drawback Embrace introduces,
+5. whether the Aspect is already at Tier IV.
 
 ## Production boundary
 
@@ -52,4 +86,4 @@ Milestone 2 may establish the shared screen framework and generic Shrine effects
 
 ## Accessibility
 
-Benefit and drawback cannot rely on color alone. Text areas must remain localization-safe and interaction focus must be clear with controller or keyboard input.
+Benefit and drawback cannot rely on color alone. Text areas must remain localization-safe, and focus/confirmation states must be clear with controller or keyboard input.
