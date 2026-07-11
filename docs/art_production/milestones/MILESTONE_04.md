@@ -13,6 +13,15 @@ last_reviewed: 2026-07-10
 
 Complete the visual identities and interface support for Akio's major build-shaping systems after the base character and shared Shrine foundation are stable.
 
+## Authoritative design sources
+
+- [Akio](../../characters/AKIO.md)
+- [Combat System](../../gameplay/COMBAT.md)
+- [Blood Aspect System](../../gameplay/BLOOD_ASPECTS.md)
+- [Corruption and Shrines](../../gameplay/CORRUPTION_AND_SHRINES.md)
+- [Progression](../../gameplay/PROGRESSION.md)
+- [Shrine Interface](../../ui_ux/SHRINE_INTERFACE.md)
+
 ## Planned scope
 
 - Wolf VFX family and Tier escalation
@@ -30,7 +39,8 @@ Complete the visual identities and interface support for Akio's major build-shap
 - Final overlays inherit approved Akio sheets.
 - Aspect effects inherit shared Returning Blood and Shrine language from Milestone 2.
 - Tool VFX follow confirmed tool mechanics and activation timing.
-- Item-family quantities must be locked before quotation.
+- Item-family quantities and currency names must be locked before quotation.
+- Wolf, Wraith, and Ronin art must follow their documented tactical identities rather than becoming interchangeable color variants.
 
 ## Completion test
 
