@@ -12,13 +12,14 @@ topics:
   - ui
   - vfx
   - items
+  - techniques
 related:
   - OVERVIEW-FULL-SCOPE
 ---
 
 # Asset Inventory
 
-This is the high-level production inventory. Individual character, system, regional, encounter, VFX, item, and milestone files own detailed animation and state lists.
+This is the high-level production inventory. Individual character, system, regional, encounter, VFX, item, UI, and milestone files own detailed animation and state lists.
 
 ## Master counts
 
@@ -34,11 +35,12 @@ This is the high-level production inventory. Individual character, system, regio
 | Environment sets | 4 | Strand and Areas 1–3; specialized interiors and arenas remain subsets |
 | Blood Aspect families | 3 | Wolf, Wraith, Ronin plus modular Tier escalation |
 | Prosthetic families | 8 | One approved tool family each |
-| Stance families | 5 | Storm, Frost, Ember, Hex, Shadow |
+| Technique loadout UI | 4 active + 1 reserve | Final Technique catalog and unique icon count remain open |
+| Run-scoped Relic capacity | 1 initial slot | Final Relic catalog remains open |
 | Currency families | 4 current | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
 
-High-level counts for UI screens, VFX cues, boons, relics, consumables, and room variants remain granular and should be finalized when catalog size is locked.
+The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, and room variants remain granular and should be finalized when catalog size is locked.
 
 ## Player and player-system art
 
@@ -51,7 +53,9 @@ High-level counts for UI screens, VFX cues, boons, relics, consumables, and room
 - Ronin parry, Counter Cut, and Focus states
 - Tier I–IV modular mutation overlays
 - Eight prosthetic tool VFX and icons
-- Five stance VFX and icons
+- Reusable Technique category, card, active-slot, reserve-slot, refinement, replacement, warning, decline, and reroll art
+- Unique Technique icons for approved catalog entries
+- Bespoke Technique combat VFX only where existing combat, Aspect, or prosthetic language cannot communicate the mechanic
 
 ## Combatants
 
@@ -75,15 +79,24 @@ Cross-area room types:
 - treasure/miniboss,
 - boss.
 
+Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss categories. Regional skins adapt material treatment without changing the symbol.
+
 ## UI and UX art
 
-- Run HUD: HP, posture, ten Spirit segments, stance, prosthetic cooldown, currency, status, Corruption, Aspect, and Tier
+- Run HUD: HP, posture, ten Spirit segments, prosthetic cooldown, contextual Technique state, currency, status, Corruption, Aspect, and Tier
+- Technique reward screen with three-card offers
+- Four active Technique slots and one reserve slot
+- Technique replacement, reserve movement, reserve overwrite warning, decline, and reroll states
+- Technique refinement and active/reserve comparison states
+- Rest-room active/reserve swap interface
+- Pause/build overview with read-only active and reserve Technique details
 - Damage-number style family
 - Standard-enemy health/posture indicators
 - Miniboss and boss bars with name and phase support
 - Deathblow prompt and persistent cue integration
 - Strand HUD and persistent currency counters
 - Interaction prompts and locked/available states
+- Route reward-preview markers
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause screens
 - Blood Lotus multi-cycle UI support
 - Front end, settings, controls, save/loading, credits, and completion presentation
@@ -118,20 +131,24 @@ Cross-area room types:
 - Mist Raven
 - Bloodletting Gourd
 
-### Stances
+### Techniques
 
-- Storm chain and Shock
-- Frost chill, freeze, and shatter
-- Ember Burn and scorch
-- Hex curse and doom
-- Shadow mark and consume
+- Reused base-combat, Aspect, and prosthetic effects where sufficient
+- Modular trigger, threshold, resource-return, mark, footprint, and refinement accents
+- Unique effects only for approved Technique mechanics that cannot read correctly through reuse
+- Mixed-build readability examples across all three regional palettes
+
+The removed Storm, Frost, Ember, Hex, and Shadow stance VFX families are no longer planned. Burn and Shock remain supported by approved prosthetics. Frost and Hex are not baseline player status requirements.
 
 ## Item and reward art
 
 - Mist, Scroll, Boss Emblem, and Gold world/HUD pairs
 - Health and Spirit pickups
-- Boon card template and icons
-- Relic cards and rarity frames
+- Temporary Health/Spirit capacity reward treatments
+- Route reward markers
+- Technique card template, categories, tags, active/reserve states, refinement state, replacement comparison, and warning states
+- Unique Technique icons for locked catalog entries
+- Relic cards, separate Relic slot, and rarity frames
 - Area-specific breakables with intact/broken states
 - Area-specific treasure and reward objects with unopened/opened states
 - Consumables and future item families as their mechanics are approved
