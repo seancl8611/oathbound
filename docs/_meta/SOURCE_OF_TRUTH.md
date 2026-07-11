@@ -32,12 +32,16 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Eclipse Shogun canon | `docs/lore/ECLIPSE_SHOGUN.md` |
 | Akio | `docs/characters/AKIO.md` |
 | Strand NPC roster | `docs/characters/STRAND_NPCS.md` |
+| Individual Strand NPC identities | `docs/characters/strand/*.md` |
 | Area 1 regional content | `docs/content/area_1/` |
 | Area 2 regional content | `docs/content/area_2/` |
 | Area 3 regional content | `docs/content/area_3/` |
-| Strand content and interactibles | `docs/content/strand/` |
+| Strand hub identity | `docs/content/strand/OVERVIEW.md` |
+| Strand interactible roster | `docs/content/strand/INTERACTIBLES.md` |
+| Individual Strand service definitions | `docs/content/strand/interactibles/*.md` |
 | Art direction | `docs/art_production/ART_DIRECTION.md` |
 | Art technical standards | `docs/art_production/TECHNICAL_STANDARDS.md` |
+| Character/enemy brief requirements | `docs/art_production/CHARACTER_BRIEF_STANDARD.md` |
 | Art asset inventory | `docs/art_production/ASSET_INVENTORY.md` |
 | Outsourcing process | `docs/art_production/OUTSOURCING_WORKFLOW.md` |
 | Milestone scope | `docs/art_production/milestones/MILESTONE_*.md` |
@@ -52,4 +56,4 @@ When two files conflict, use the file assigned authority here. Update dependent 
 
 ## Duplication rule
 
-Detailed definitions belong only in their authoritative file. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, or content definitions.
+Detailed definitions belong only in their authoritative file. Indexes own rosters and navigation; linked files own individual identities or systems. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, or content definitions.
