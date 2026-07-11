@@ -25,6 +25,7 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Blood Aspect mechanics | `docs/gameplay/BLOOD_ASPECTS.md` |
 | Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
 | Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
+| Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
 | Beast Blood canon | `docs/lore/BEAST_BLOOD.md` |
 | Returning Blood canon | `docs/lore/RETURNING_BLOOD.md` |
 | The Order | `docs/lore/THE_ORDER.md` |
@@ -33,9 +34,15 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Akio | `docs/characters/AKIO.md` |
 | Strand NPC roster | `docs/characters/STRAND_NPCS.md` |
 | Individual Strand NPC identities | `docs/characters/strand/*.md` |
-| Area 1 regional content | `docs/content/area_1/` |
-| Area 2 regional content | `docs/content/area_2/` |
-| Area 3 regional content | `docs/content/area_3/` |
+| Area 1 regional identity | `docs/content/area_1/OVERVIEW.md` |
+| Area 1 enemy family and roster | `docs/content/area_1/ENEMIES.md` |
+| Individual Area 1 enemies | `docs/content/area_1/enemies/*.md` |
+| Area 2 regional identity | `docs/content/area_2/OVERVIEW.md` |
+| Area 2 enemy family and roster | `docs/content/area_2/ENEMIES.md` |
+| Individual Area 2 enemies | `docs/content/area_2/enemies/*.md` |
+| Area 3 regional identity | `docs/content/area_3/OVERVIEW.md` |
+| Area 3 enemy family and roster | `docs/content/area_3/ENEMIES.md` |
+| Individual Area 3 enemies | `docs/content/area_3/enemies/*.md` |
 | Strand hub identity | `docs/content/strand/OVERVIEW.md` |
 | Strand interactible roster | `docs/content/strand/INTERACTIBLES.md` |
 | Individual Strand service definitions | `docs/content/strand/interactibles/*.md` |
@@ -47,7 +54,10 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Milestone scope | `docs/art_production/milestones/MILESTONE_*.md` |
 | Combat HUD | `docs/ui_ux/HUD.md` |
 | Shrine interface | `docs/ui_ux/SHRINE_INTERFACE.md` |
-| Hub interfaces | `docs/ui_ux/HUB_INTERFACES.md` |
+| Shared hub-interface language | `docs/ui_ux/HUB_INTERFACES.md` |
+| Blood Mirror and trial interface | `docs/ui_ux/BLOOD_MIRROR_TRIALS.md` |
+| Run-results and Strand-return interface | `docs/ui_ux/RUN_RESULTS.md` |
+| Pause/build overview | `docs/ui_ux/PAUSE_OVERVIEW.md` |
 | Contractor exports | `docs/external/` and `contractor_docs/` |
 
 ## Conflict rule
@@ -56,4 +66,4 @@ When two files conflict, use the file assigned authority here. Update dependent 
 
 ## Duplication rule
 
-Detailed definitions belong only in their authoritative file. Indexes own rosters and navigation; linked files own individual identities or systems. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, or content definitions.
+Detailed definitions belong only in their authoritative file. Indexes own families, rosters, and navigation; linked files own individual identities or systems. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, or content definitions.
