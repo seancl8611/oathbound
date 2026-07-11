@@ -13,14 +13,15 @@ Authoritative player-facing mechanics and system rules belong here.
 - [Blood Cavern Trial System](BLOOD_CAVERN_TRIALS.md)
 - [Stances](STANCES.md)
 - [Prosthetic Tools](PROSTHETICS.md)
+- [Items, Currencies, and Rewards](ITEMS_AND_REWARDS.md)
 
 ## Planned expansion
 
-- Boons, relics, items, and currencies
 - Encounter-design rules
 - Save/reset rules
-- Individual stance briefs
-- Individual prosthetic briefs
+- Individual stance tuning sheets
+- Individual prosthetic tuning sheets
+- Boon and relic catalogs
 - Balance-variable references
 
-Gameplay files own mechanics. Lore files may explain why a system exists, content files own physical locations and combatant identity, and milestone files may define art scope, but none should redefine gameplay rules.
+Gameplay files own mechanics. Lore files may explain why a system exists, content files own physical locations and combatant identity, art files own visual requirements, and milestone files own production scope; none should redefine gameplay rules.
