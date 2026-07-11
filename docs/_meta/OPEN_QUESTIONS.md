@@ -97,23 +97,55 @@ Exact prices and node costs remain balance questions, not naming questions.
 
 **Status:** resolved
 
-### Stance and prosthetic roster identities
+### Former stance roster
 
 **Resolution**
 
-The five stance identities are Storm, Frost, Ember, Hex, and Shadow. The eight prosthetic tools are Beast-Bane Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, and Bloodletting Gourd. Their tactical roles and visual footprints are now defined.
-
-Final costs, cooldowns, upgrade paths, stack values, durations, and balance caps remain open.
+The production bible defined Storm, Frost, Ember, Hex, and Shadow as five stance families. That roster is now superseded and removed by the approved Technique-system decision. The eight prosthetic identities remain approved.
 
 **Affected files**
 
-- `docs/gameplay/STANCES.md`
+- `docs/gameplay/TECHNIQUES.md`
 - `docs/gameplay/PROSTHETICS.md`
-- `docs/art_production/STANCE_VFX.md`
+- `docs/art_production/TECHNIQUE_VFX.md`
 - `docs/art_production/PROSTHETIC_VFX.md`
 - `docs/art_production/milestones/MILESTONE_04.md`
 
-**Status:** resolved at roster/identity level
+**Status:** superseded
+
+## Resolved in Technique-system review
+
+### Technique loadout and reserve structure
+
+**Resolution**
+
+Akio has four active Technique slots and one inactive reserve. Slots begin empty. There is no full inventory. New Techniques may fill an empty slot, replace any active Technique, enter reserve, or be declined for a smaller fallback. Replaced active Techniques move to reserve; overwriting occupied reserve loses its previous Technique after confirmation. Swapping is limited to Technique reward screens and rest rooms.
+
+**Status:** resolved
+
+### Technique dependency depth
+
+**Resolution**
+
+Most Techniques are standalone and useful immediately. Natural synergy uses shared combat verbs. A Technique may receive at most one slotless refinement, and no normal Technique requires an exact multi-Technique combination or prerequisite chain deeper than one.
+
+**Status:** resolved
+
+### Blood Aspect and Technique relationship
+
+**Resolution**
+
+Blood Aspects are the central run identity and vertical power path. Techniques are limited horizontal customization. Aspect selection weights Technique offers without fully locking the pool.
+
+**Status:** resolved
+
+### Room reward ownership
+
+**Resolution**
+
+Standard combat routes preview a primary payout. Selected combat and milestone rewards offer Techniques. Shrines own Resist/Embrace or support; rest rooms own recovery and reserve swapping; shops use Gold; treasure/miniboss rewards are high value; regional bosses grant persistent and current-run power; the Eclipse Shogun resolves through Wellspring completion.
+
+**Status:** resolved at structural level
 
 ## Open questions
 
@@ -198,51 +230,113 @@ What are the final Heart-cycle count, Stalk timer, punishment threshold, deathbl
 
 **Question**
 
-What are the final trial counts, unlock sequence, reward tables, mastery conditions, and numerical caps for permanent Blood Aspect reliability upgrades?
+What are the final trial counts, unlock sequence, reward tables, mastery conditions, Technique-pool unlock rules, and numerical caps for permanent Blood Aspect reliability upgrades?
 
 **Locked boundary**
 
-Trials may grant Aspect access, small capped reliability improvements, currency, cosmetics, lore reflections, or completion marks. They cannot add new Tiers or remove Embrace danger.
+Trials may grant Aspect access, small capped reliability improvements, Technique-pool access where deliberately designed, currency, cosmetics, lore reflections, or completion marks. They cannot add new Tiers, remove Embrace danger, or permanently pre-equip a run Technique.
 
 **Affected files**
 
 - `docs/gameplay/BLOOD_CAVERN_TRIALS.md`
 - `docs/gameplay/BLOOD_ASPECTS.md`
+- `docs/gameplay/TECHNIQUES.md`
 - `docs/gameplay/PROGRESSION.md`
 - `docs/ui_ux/BLOOD_MIRROR_TRIALS.md`
 - `docs/art_production/milestones/MILESTONE_03.md`
 
 **Status:** open
 
-### Stance and prosthetic tuning
+### Technique catalog and tuning
+
+**Category:** gameplay | balance | production | UI/UX
+
+**Question**
+
+What are the final Technique count, individual effects, rarity weights, Aspect weighting, combat-verb tags, refinement pairs, unlock sequence, and unique VFX/icon requirements?
+
+**Locked boundary**
+
+- Four active slots and one reserve.
+- Most Techniques are standalone.
+- At most one slotless refinement per Technique.
+- No exact multi-Technique dependency.
+- Selected Aspect weights but does not fully restrict offers.
+- Technique effects deepen sword, movement, execution, resource, or equipped-prosthetic play.
+
+**Affected files**
+
+- `docs/gameplay/TECHNIQUES.md`
+- `docs/gameplay/BLOOD_ASPECTS.md`
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/ui_ux/TECHNIQUE_REWARDS.md`
+- `docs/art_production/TECHNIQUE_VFX.md`
+- `docs/art_production/ITEM_REWARD_ART.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+
+**Status:** open
+
+### Prosthetic tuning and Prosthetic Techniques
 
 **Category:** gameplay | balance
 
 **Question**
 
-What are the final activation rules, Spirit costs, cooldowns, durations, stack thresholds, immunity rules, switching behavior, upgrade paths, and balance caps for the five stances and eight prosthetics?
+What are the final Spirit costs, cooldowns, durations, immunity rules, permanent Forge paths, eligible Prosthetic Techniques, one-step refinements, and balance caps for the eight prosthetics?
+
+**Locked boundary**
+
+The initial run structure uses one equipped prosthetic. Only that tool's Prosthetic Techniques enter the reward pool. A major Prosthetic Technique uses one active Technique slot; its refinement is slotless.
 
 **Affected files**
 
-- `docs/gameplay/STANCES.md`
 - `docs/gameplay/PROSTHETICS.md`
-- `docs/art_production/STANCE_VFX.md`
+- `docs/gameplay/TECHNIQUES.md`
 - `docs/art_production/PROSTHETIC_VFX.md`
+- `docs/art_production/TECHNIQUE_VFX.md`
 - `docs/art_production/milestones/MILESTONE_04.md`
 
 **Status:** open
 
-### Boon, relic, and item catalog
+### Reward cadence and room economy
+
+**Category:** gameplay | balance | production | UI/UX
+
+**Question**
+
+What are the final room counts, branching structure, reward probabilities, anti-streak rules, Technique opportunities per area, fallback values, reroll economy, shop stock and prices, temporary capacity values, miniboss reward composition, and regional boss recovery values?
+
+**Locked boundary**
+
+- Reward categories are previewed before route commitment.
+- Technique rewards do not follow every combat room.
+- Provisional successful-run target is six to eight Technique-related decisions.
+- Areas 1–2 form the build; Area 3 refines and replaces it.
+- Shrines do not normally grant Techniques.
+- Minibosses do not award only ordinary Gold or healing.
+
+**Affected files**
+
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/content/ROOM_TYPES.md`
+- `docs/ui_ux/TECHNIQUE_REWARDS.md`
+- `docs/art_production/ITEM_REWARD_ART.md`
+
+**Status:** open
+
+### Relic and consumable catalog
 
 **Category:** gameplay | production | UI/UX
 
 **Question**
 
-What are the final boon, relic, consumable, breakable, and reward-object counts, effect catalogs, rarity weights, drop tables, and persistent/run-only ownership rules for individual entries?
+What are the final Relic and consumable counts, effects, rarity weights, drop tables, and individual persistent/run-only ownership rules?
 
 **Locked boundary**
 
-The shared categories, card templates, world/HUD relationships, and Common–Legendary rarity presentation are approved.
+The initial framework uses one separate run-scoped Relic slot. Relics are broader passive rules and do not use Technique slots or replace the Blood Aspect as the run identity.
 
 **Affected files**
 
@@ -251,6 +345,7 @@ The shared categories, card templates, world/HUD relationships, and Common–Leg
 - `docs/art_production/ASSET_INVENTORY.md`
 - `docs/art_production/milestones/MILESTONE_04.md`
 - `docs/ui_ux/HUD.md`
+- `docs/ui_ux/PAUSE_OVERVIEW.md`
 
 **Status:** open
 
