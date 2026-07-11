@@ -13,6 +13,14 @@ last_reviewed: 2026-07-10
 
 Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village production package while respecting art dependencies.
 
+## Authoritative design sources
+
+- [Hushiro Gate Village](../../content/area_1/OVERVIEW.md)
+- [Corruption and Shrines](../../gameplay/CORRUPTION_AND_SHRINES.md)
+- [Shrine Interface](../../ui_ux/SHRINE_INTERFACE.md)
+- [Art Direction](../ART_DIRECTION.md)
+- [Asset Inventory](../ASSET_INVENTORY.md)
+
 ## Included combatants
 
 - Corrupted Archer
