@@ -5,34 +5,49 @@ category: overview
 status: approved
 authority: primary
 last_reviewed: 2026-07-10
+topics:
+  - combat-readability
+  - tragic-horror
+  - regional-escalation
+  - production-foundations
 ---
 
 # Design Pillars
 
-## Disciplined combat readability
+## Martial clarity first
 
-Combat is demanding but legible. Silhouettes, weapon direction, windups, parry states, posture breaks, hazards, and deathblow openings must remain understandable at gameplay scale.
+Combat is demanding but legible. Silhouettes, weapon direction, windups, parry states, posture breaks, hazards, and deathblow openings must remain understandable at normal gameplay scale. Atmosphere and ornament may intensify the scene, but they cannot obscure response rules.
 
 ## Rhythm over damage racing
 
-The central exchange is attack, defend, deflect, pressure posture, recognize the opening, and finish decisively. Health matters, but combat identity should not collapse into simple damage-per-second optimization.
+The central exchange is attack, defend, deflect, pressure posture, recognize the opening, and finish decisively. Health matters, but the combat identity should not collapse into damage-per-second optimization.
 
 ## Power with visible consequence
 
-Returning Blood grants strength through Blood Aspects, but each increase in power should communicate mutation, danger, and loss of control. Embrace and Resist are practical run decisions, not a simple good-versus-evil meter.
+Returning Blood grants strength through Blood Aspects, but each increase in power should communicate mutation, danger, and loss of safety. Embrace and Resist are practical run decisions, not a simple good-versus-evil meter.
 
 ## Tragic martial horror
 
-The island is frightening because recognizable human roles remain after identity has faded. Soldiers still guard, workers still labor, animals still hunt, and leaders still protect long after those actions have become monstrous.
+The island is frightening because recognizable roles remain after identity has faded. Soldiers still guard, workers still labor, animals still hunt, ritual figures still perform, and leaders still protect long after those actions have become monstrous.
 
-## Region-specific combat ecosystems
+## Role-readable silhouettes
 
-Each area should introduce a distinct encounter language, enemy roster, material palette, hazards, and boss test while remaining part of one coherent island.
+Every unit should communicate role through stance, weapon shape, posture, and mass before secondary costume detail is noticed. Enemy families may share materials and motifs, but blockers, ranged threats, controllers, predators, and elites must remain distinct at a glance.
 
-## Reusable production foundations
+## Regional escalation
 
-Player scale, animation rules, UI language, VFX hierarchy, palettes, pivots, and modular environment standards should be established early and inherited by later milestones.
+The three regions escalate through different preserved behaviors:
+
+- **Hushiro Gate Village:** discipline and recently human ruin
+- **Yomori Grove:** instinct, predation, spirit residue, and invasive environment pressure
+- **Kagutsuchi Court:** ritual perfection, hierarchy, and preservation denied an ending
+
+Escalation should be visible in silhouette, ornamentation, movement language, lighting, and corruption expression.
 
 ## Build variety without losing the sword game
 
 Blood Aspects, stances, prosthetics, boons, relics, and items should change tactics without replacing the core katana, posture, parry, and deathblow identity.
+
+## Reusable production foundations
+
+Player scale, animation-state clarity, UI language, VFX hierarchy, palettes, pivots, and modular environment standards should be established early and inherited by later milestones. Production should remain divided into reviewable, dependency-aware batches even when the full game is scoped in advance.
