@@ -30,10 +30,10 @@ This is the high-level production inventory. Individual character, system, regio
 | Area 3 enemies | 5 | Court and inner-sanctum set |
 | Minibosses | 6 | Two per main area in the current plan |
 | Bosses | 3 | One principal boss package per main area |
-| Environment sets | 4 | Strand and Areas 1–3 |
+| Environment sets | 4 | Strand and Areas 1–3; Blood Cavern is a Strand interior subset |
 | VFX groups | 12 | Current grouping includes Blood Aspect additions |
-| UI / room-art groups | 12 | Current grouping includes Blood Aspect additions |
-| Item / consumable groups | 7 | Must be reviewed later against the revised currency families |
+| UI / room-art groups | 12 | Current grouping includes Blood Aspect additions; screen list is more granular than this grouping |
+| Item / consumable groups | 7 | Must be reviewed later against revised currency families |
 
 ## Player
 
@@ -62,9 +62,11 @@ This is the high-level production inventory. Individual character, system, regio
 - **Area 2:** 4 standard enemies, 2 minibosses, Rootfang/Briarthorn boss structure
 - **Area 3:** 5 standard enemies, Blood Lotus encounter, Eternal Swordsman, Eclipse Shogun
 
+Pages 36–70 establish detailed production requirements for all six Area 1 enemies, all four Area 2 enemies, the Area 3 Court Guard, and the Area 3 Court Caster. Later Area 3 unit details remain in subsequent source pages.
+
 ## Environment sets
 
-- The Strand hub, docks, role-specific NPC stations, shoreline atmosphere, and Blood Cavern/Mirror support
+- The Strand hub, docks, role-specific NPC stations, shoreline atmosphere, and Blood Cavern/Mirror interior
 - Hushiro Gate Village base kit and functional room skins
 - Yomori Grove base kit, rooms, arenas, hazards, and props
 - Kagutsuchi Court base kit, rooms, arenas, Wellspring support, and props
@@ -75,8 +77,9 @@ This is the high-level production inventory. Individual character, system, regio
 - Forge Bench, forge props, ember/heat layers, and upgrade-screen visual language
 - Merchant Stall, stock spread, salvage props, and shop-screen visual language
 - Discovery Board, papers, diagrams, codex presentation, and unlock states
-- Bloodwell physical landmark, carved channels, contained blood surface, and progression-screen visual language
-- Blood Cavern and Blood Mirror support remain tracked, but detailed migration begins after page 35 of the source bible
+- Bloodwell physical landmark, carved channels, contained blood surface, progression screen, and reformation effects
+- Blood Cavern outer training hall: platforms, dummies, racks, ropes, lanterns, and trial-state support
+- Blood Mirror inner chamber: black stone, shallow reflective water, mineral seams, mirror framing, and Aspect-trial presentation
 
 ## UI/UX
 
@@ -90,15 +93,32 @@ This is the high-level production inventory. Individual character, system, regio
 - Discovery Board/codex
 - Bloodwell progression tree
 - Blood Mirror/trial interface
+- Trial locked/available/active/completed/mastered states
+- Run-results and successful-return summary
+- Pause/build overview
 - Miniboss and boss UI
-- Pause, overview, results, settings, controls, save/loading, and front end
+- Settings, controls, save/loading, and front end
 
-## VFX additions tied to Blood Aspects
+## VFX additions tied to Blood Aspects and return
 
 - Wolf prey mark, target-pressure streaks, blood trail, aggression aura
 - Wraith perfect-dodge cue, afterimage, mist-step, flank/backstrike cue
 - Ronin enhanced parry spark, Counter Cut trail, deathblow Focus cue, posture-break emphasis
 - Corruption full, Shrine-ready, Resist, Embrace, and Tier-change effects
+- Bloodwell reformation pulse, red-black collapse, reconstruction flash, and optional brief Aspect residue
+
+## Enemy-specific production dependencies established in pages 36–70
+
+- Corrupted Archer arrows, impact, aiming, and retreat states
+- Cellar Bilemass bile projectile and persistent puddle readability
+- Warden restraint cast, bound state, yank telegraph, parry escape, and outcomes
+- Area 1 hound attack-token and lunge-readability support
+- Lingering Wraith flicker, targetability, and spectral blade layers
+- Lantern Wraith lantern flare and spirit-flame projectiles
+- Mist Shepherd flute loop, audio identity, and buff-link effects
+- Stalker Hound mist entry, reappearance, and pounce states
+- Court Guard first death, revive channel, interruption, revive completion, and final death
+- Court Caster escalating volley, channel, first death, revive, and final death
 
 ## Items and rewards
 
