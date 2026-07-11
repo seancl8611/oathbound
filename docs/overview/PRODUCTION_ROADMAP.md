@@ -25,15 +25,17 @@ The separate Posture Break Cue exists in the broader core-VFX plan but requires 
 
 Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional room skins, regional props, basic Shrine/Corruption presentation, and boss/miniboss UI.
 
-The Blood Aspect-specific VFX sets and complete Tier I–IV mutation overlays remain deferred.
+The Blood Aspect-specific VFX sets, complete Tier I–IV mutation overlays, and final Technique reward presentation remain deferred.
 
 ## Milestone 3 — The Strand hub
 
 Produce the six hub NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and meta-progression interfaces.
 
-## Milestone 4 — Player combat depth and build expression
+## Milestone 4 — Player combat depth and run-build expression
 
-Complete Wolf, Wraith, and Ronin VFX identities, modular mutation overlays, five stance families, eight prosthetic families, status/UI extensions, and broad currency, pickup, boon, relic, breakable, and reward-object art.
+Complete Wolf, Wraith, and Ronin VFX identities, modular mutation overlays, eight prosthetic families, the Technique reward/build interface, reusable Technique icon and card language, selected Technique combat-feedback needs, Relic presentation, and broad currency, pickup, breakable, and reward-object art.
+
+This milestone no longer includes five elemental stance families. Technique VFX should reuse approved sword, Aspect, and prosthetic language wherever possible rather than assigning a bespoke effect family to every Technique.
 
 ## Milestone 5 — Complete Area 2
 
@@ -52,6 +54,8 @@ Complete front-end UI, narrative presentation, achievements/store art, missing-a
 - Characters are concepted and key poses approved before specialized VFX are finalized.
 - Base character art precedes mutation overlays.
 - Base regional kits precede room variants; final arenas follow confirmed combat footprints.
+- Reusable Technique card, slot, reserve, refinement, and category language may be produced before the complete Technique catalog is locked.
+- Unique Technique icons and bespoke combat effects require a locked catalog entry before final quotation.
 - Each milestone is divided into separately quoted, payable, reviewable batches.
 - Every batch receives sheet-level and in-engine review.
 - Contractor-facing Word/PDF documents are exports; Markdown remains the internal source of truth.
