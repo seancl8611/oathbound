@@ -1,6 +1,6 @@
 ---
 id: CONTENT-STRAND-BLOOD-CAVERN
- title: Blood Cavern and Blood Mirror
+title: Blood Cavern and Blood Mirror
 category: content
 status: approved
 authority: primary
