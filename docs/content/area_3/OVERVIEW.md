@@ -15,6 +15,8 @@ related:
   - ART-DIRECTION
   - ART-MILESTONE-06
   - CONTENT-AREA3-ENEMIES
+  - CONTENT-AREA3-MINIBOSSES
+  - CONTENT-AREA3-BOSS
 ---
 
 # Kagutsuchi Court
@@ -40,62 +42,44 @@ Polished lacquered wood, gilded trim, clean stone, shallow mirror-still water, s
 
 ## Enemy-family read
 
-Enemies are courtly roles trapped in ritual repetition: ceremonial guards, elite retainers, attendants, ritualists, noble functionaries, and preserved instruments of authority. The horror is beauty and duty maintained without release. Detailed family and unit rules belong in [Area 3 Enemies](ENEMIES.md).
+Enemies are courtly roles trapped in ritual repetition: ceremonial guards, elite retainers, attendants, ritualists, noble functionaries, preserved instruments of authority, and ceremonial systems that continue operating after failure. Detailed family and unit rules belong in [Area 3 Enemies](ENEMIES.md).
 
-## Architecture
+## Architecture and atmosphere
 
-- grand lacquered halls,
-- open ceremonial courtyards,
-- reflecting pools,
-- stone processional paths,
-- curved bridges,
-- blossom-lined approaches,
-- richly ornamented gate structures.
-
-The region should feel elevated, symmetrical, sacred, and carefully composed.
-
-## Ambient pressure
-
-- endless drifting blossoms,
-- warm lantern glow,
-- still reflective water,
-- faint surface mist,
-- soft banner movement,
-- petal-covered stone and bridge surfaces,
-- open ceremonial sightlines.
-
-The atmosphere is calm and luminous, but oppressive through excessive stillness.
+Grand halls, open ceremonial courtyards, reflecting pools, stone processional paths, curved bridges, blossom-lined approaches, and ornamented gates remain calm and luminous. Endless drifting petals, warm lanterns, still water, surface mist, and measured banner movement create oppression through excessive stillness.
 
 ## Movement philosophy
 
-Movement is precise, elegant, and unnaturally controlled. Soldiers patrol and fight in flawless patterns; ritualists maintain exact casting forms; attendants repeat poised gestures with puppet-like perfection. Wrongness comes from over-control rather than chaos.
+Movement is precise, elegant, and unnaturally controlled. Soldiers patrol and fight in flawless patterns; ritualists maintain exact casting forms; preserved systems continue their process. Wrongness comes from over-control until a specific mechanic introduces rupture, spawning, or frenzy.
 
 ## Standard enemy roster
 
 - [Court Guard](enemies/COURT_GUARD.md)
 - [Court Caster](enemies/COURT_CASTER.md)
-- Elite Defender — detailed source begins after page 70
-- Hollow Vessel — detailed source begins after page 70
-- Court Sentinel — detailed source begins after page 70
+- [Elite Defender](enemies/ELITE_DEFENDER.md)
+- [Hollow Vessel](enemies/HOLLOW_VESSEL.md)
+- [Court Sentinel](enemies/COURT_SENTINEL.md)
 
-## Current major encounters
+## Major encounter sequence
 
-- Blood Lotus encounter
-- Eternal Swordsman
-- Eclipse Shogun
+1. [Blood Lotus](MINIBOSSES.md#blood-lotus) — multi-cycle objective miniboss
+2. [Eternal Swordsman](MINIBOSSES.md#eternal-swordsman) — duel miniboss
+3. [The Eclipse Shogun](BOSS.md) — three-phase final boss
 
-The exact classification and sequencing of the Blood Lotus and Eternal Swordsman remain under review.
+The production-bible numbering resolves the previous classification uncertainty: Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the region’s principal boss.
 
 ## Combat identity
 
 - elite precise melee pressure,
-- ritual projectiles that escalate when ignored,
+- escalating ritual projectiles,
 - one-time revival and kill-confirmation windows,
-- defender/support relationships,
-- vessel and source-priority mechanics,
-- controlled escalation and frenzy states,
-- multi-phase final-boss structure.
+- directional shield denial,
+- stationary spawning and source-priority pressure,
+- heavy bruiser escalation and frenzy,
+- multi-cycle objective combat,
+- pure duel discipline,
+- three-phase final-boss revelation.
 
 ## Production warning
 
-Rich court detail must not compete with attack startup, weapon lines, projectiles, revival states, hazards, or safe-space reads. The Eclipse Shogun remains a dedicated internal batch chain within Milestone 6.
+Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun remains a dedicated internal batch chain within Milestone 6.
