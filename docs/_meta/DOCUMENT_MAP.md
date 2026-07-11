@@ -4,7 +4,7 @@ title: Document Review Hints
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 
 # Document Review Hints
@@ -48,6 +48,7 @@ Likely review areas:
 - Akio and Returning Blood
 - progression and run structure
 - HUD and Shrine interface
+- Blood Aspect VFX
 - Strand interactibles
 - asset inventory
 - Milestones 2–4
@@ -61,10 +62,35 @@ Likely review areas:
 - core loop
 - affected enemies, minibosses, and bosses
 - Akio animation requirements
-- HUD
+- HUD and shared combat VFX
 - technical standards
 - asset inventory
 - milestone animation and VFX scope
+
+## Player build-system change
+
+Primary authority:
+- `docs/gameplay/STANCES.md`
+- `docs/gameplay/PROSTHETICS.md`
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+
+Likely review areas:
+- Blood Aspects and Corruption
+- Run HUD and damage/status feedback
+- stance, prosthetic, Aspect, and item-art briefs
+- progression and currency ownership
+- Akio animation hooks
+- asset inventory
+- Milestone 4
+
+Suggested live-search terms:
+- affected stance or tool name
+- status name such as `Shock`, `Burn`, `Frost`, or `Hex`
+- `Spirit`
+- `cooldown`
+- `currency`
+- `icon`
+- `Milestone 4`
 
 ## Character, enemy, or boss change
 
@@ -89,10 +115,24 @@ Primary authority:
 Likely review areas:
 - full-game scope
 - production roadmap
+- cross-area room types
 - asset inventory
 - assigned milestone
 - story progression
 - room, UI, and regional VFX needs
+
+## Room-type change
+
+Primary authority:
+- `docs/content/ROOM_TYPES.md`
+
+Likely review areas:
+- regional environment and room files
+- run structure
+- Shrine and shop interfaces
+- miniboss and boss arena requirements
+- environment asset inventory
+- Milestones 1, 2, 5, and 6
 
 ## Strand service change
 
@@ -102,8 +142,9 @@ Primary authority:
 
 Likely review areas:
 - progression
+- currencies and item ownership
 - Returning Blood or Blood Aspects when relevant
-- hub interfaces
+- hub interfaces and Strand HUD
 - Milestone 3
 - asset inventory
 
@@ -116,6 +157,7 @@ Likely review areas:
 - production roadmap
 - asset inventory
 - technical standards
+- outsourcing workflow
 - authoritative gameplay and content files
 - contractor brief index and export history
 
