@@ -13,6 +13,15 @@ last_reviewed: 2026-07-10
 
 Create the persistent hub, recurring NPC cast, physical progression stations, and meta-system interface language.
 
+## Authoritative design sources
+
+- [The Strand](../../content/strand/OVERVIEW.md)
+- [Strand NPC Roster](../../characters/STRAND_NPCS.md)
+- [Strand Interactibles](../../content/strand/INTERACTIBLES.md)
+- [Hub Interfaces](../../ui_ux/HUB_INTERFACES.md)
+- [Progression](../../gameplay/PROGRESSION.md)
+- [Returning Blood](../../lore/RETURNING_BLOOD.md)
+
 ## Planned scope
 
 - Keeper, Peddler, Smith, Raven, Undead Samurai, and Scribe
@@ -30,6 +39,7 @@ Create the persistent hub, recurring NPC cast, physical progression stations, an
 - Blood Mirror UI must inherit the Blood Aspect structure established in gameplay documentation.
 - Physical stations are approved before final hub layout and lighting.
 - Hub navigation must be tested through repeated return loops, not only as a single establishing scene.
+- Individual NPC and station files own detailed requirements; this milestone owns their production grouping.
 
 ## Completion test
 
