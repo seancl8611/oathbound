@@ -21,77 +21,44 @@ related:
 
 ## Gameplay role
 
-Area 3 ranged-pressure and zone-shaping grunt. It projects fan-shaped spirit volleys that become denser the longer it is allowed to channel, creating an escalating priority target. Like the Court Guard, it reforms once after death unless properly finished during its revival window.
+Area 3 ranged pressure and zone-shaping elite grunt. It controls space with fan-shaped spirit volleys that grow denser the longer it is allowed to channel, forcing the player to either weave carefully or prioritize it quickly. Like other preserved inner-court servants, it reforms once after death unless properly finished during its revive window.
 
 ## One-sentence fantasy
 
-A preserved court ritualist who projects widening curtains of spirit fire through immaculate ceremonial form, then rises again if not properly put down.
+A preserved court ritualist who projects widening curtains of spirit-fire through immaculate ceremonial form, then rises once more if not properly put down.
 
 ## Lore context
 
-Court Casters were ritual attendants, shrine scholars, and ceremonial practitioners responsible for spiritual protection and sacred order within Kagutsuchi Court. Beast Blood locked their function into permanent service. They now use lantern-staves and formal gestures to deny space to intruders, and their role restores the body when first defeated.
+The Court Casters were ritual attendants, shrine scholars, and ceremonial practitioners of the inner sanctum — figures whose role was to maintain sacred order, light, and spiritual protection within Kagutsuchi Court. When the Beast Blood preserved the court in unnatural perfection, their ritual function was not destroyed but locked into permanent service. Now they continue their duties as hostile court instruments, channeling refined spirit power through lantern-staves and formal gestures to deny space to intruders. Like the other preserved inner-court servants, they do not treat death as final. Their service resumes unless the player interrupts the revival and ends them properly.
 
 ## Visual identity
 
-- tall elegant figure in layered ceremonial robes,
-- deep indigo-black, crimson, and gold palette,
-- shadowed hood or cowl,
-- faint pale violet-white inner points of light,
-- geometric lantern-staff as the dominant focal prop,
-- refined aristocratic presentation rather than battlefield wear.
+A tall, elegant robed court figure with layered ceremonial garments in deep indigo-black, crimson, and gold trim, carrying a spirit lantern-staff as the dominant focal prop. The body should feel refined and aristocratic rather than battle-hardened. The face is obscured beneath a hood or shadowed cowl, with only faint pale violet-white points of light or a soft inner glow visible. The lantern-staff should feel sacred, geometric, and highly readable, acting as both status symbol and attack origin. The overall impression is controlled ritual authority — beautiful, immaculate, and subtly wrong.
 
 ## Silhouette
 
-Tall, vertical, and ceremonial. Long robes and broad sleeves distinguish the Caster from armored swordsmen. The lantern-staff must remain a clear role, windup, and attack-origin anchor in every state.
+Tall, vertical, and ceremonial. The silhouette should read clearly as a robed caster rather than a swordsman: long layered robes, broad sleeves, narrow body mass, and a tall lantern-staff that creates an immediate ranged-support profile. Compared to the Court Guard, the Court Caster should feel less armored and more stately. The lantern-staff should always remain a clear secondary silhouette anchor, since it defines both role and attack language.
 
-## Weapon and attack language
+## Weapon / attack language
 
-The primary attack is an escalating fan of spirit projectiles or ritual crescents:
+Lantern-staff and spirit-volley casting. Its primary attack should be a fan-shaped spread of spirit projectiles or crescent-like ritual bolts that begin with weaveable gaps, then widen and fill in the longer the caster is allowed to continue channeling. The core pressure pattern is escalation through neglect: at first manageable, then increasingly oppressive if the player delays. The caster should feel like it is composing an expanding curtain of danger rather than firing random projectiles. Any direct close-range attack should remain secondary and limited.
 
-1. early patterns contain readable weaveable gaps,
-2. continued channeling or repeated casts widen the arc,
-3. later patterns fill previous gaps and become increasingly oppressive,
-4. interruption or target pressure prevents the full curtain from developing.
+## Corruption details
 
-Close-range offense should remain secondary and limited.
-
-## Revive rule
-
-After first defeat, the Caster enters a visible ritual restoration state. Pale spirit energy reassembles through the staff, robes, or inner body. The player must interrupt or finish the revival before it calmly resumes its assigned function.
-
-## Corruption language
-
-Over-refined preservation rather than decay: obscured identity, perfect posture, pale inner light, immaculate garments, uninterrupted ritual function, and restoration after death.
+The corruption here is ritual preservation and over-refinement, not bodily ruin. The Court Caster should look almost pristine, with the wrongness expressed through obscured identity, too-perfect posture, pale spirit-light, and the unnatural continuity of function after death. The revive mechanic can be represented by pale violet-white energy reassembling through the staff, robes, or inner body glow, as if the role itself is recalling the body back into service. The horror is not that it is decayed, but that it remains too intact and too composed to die naturally.
 
 ## Personality in motion
 
-Controlled, formal, and patient. Turns and cast poses are measured. It should not scramble or react theatrically under pressure. Revival feels like restoration of ceremony, not desperate survival.
+Controlled, formal, and eerily patient. The Court Caster should move minimally and with total composure, as if every action is part of a ritual pattern. It does not scramble, flinch dramatically, or overreact. Turns are measured. Casting poses are deliberate and stately. Even under pressure, it should feel like a preserved court functionary maintaining form rather than a panicked mage. Its revive should be calm and inevitable — more like the restoration of ceremony than a desperate return.
 
-## Combat readability
+## Combat read
 
-The player should immediately understand:
+Clear ranged-ritual threat read. The player should instantly understand that this enemy is dangerous at range, especially if allowed to keep channeling. The widening volley pattern needs to read clearly so the player feels the escalation: early gaps are safe, later gaps close, and the threat becomes more oppressive over time. Its revive state must also be unmistakable so the player learns that killing it once is not enough. The intended read is: elegant ranged court support, dangerous when ignored, and must be finished properly or it will resume control of the arena.
 
-- the lantern-staff is the cast origin,
-- the volley becomes more dangerous through neglect,
-- early gaps are intentionally navigable,
-- channel interruption is valuable,
-- first death is not necessarily final.
+## Required animations
 
-## Required animation set documented through page 70
+Idle, walk, channel_loop, volley_release, revive_channel, revive_complete, hurt, parried, stagger, death, deathblow
 
-- idle,
-- walk or glide,
-- channel loop,
-- volley release,
-- revive channel,
-- revive complete,
-- hurt,
-- parried or interrupted reaction,
-- stagger,
-- first death,
-- deathblow,
-- final death.
+## Technical notes
 
-## Migration boundary
-
-The production bible's dedicated technical notes for this unit begin on page 71. They are intentionally deferred to the next migration batch rather than inferred here.
+The key requirement is clear escalation in the projectile fan pattern. The first cast should be visibly weaveable, with subsequent channel continuation or repeated casts visibly expanding the arc and filling previous gaps so the mechanic reads immediately in gameplay. The lantern-staff must be the main visual anchor for windup, cast origin, and revival cues. Since Area 3 environments are bright, reflective, and visually rich, projectile readability and cast startup poses need especially clean contrast. Animation needs likely include idle, glide / walk, cast_windup, volley_cast, channel_loop, hurt, stagger / interrupt, death_1, revive_start, revive_rise, and final death / deathblow. The thematic emphasis should stay on ritual space control through preserved court magic — this enemy is a ceremonial ranged specialist, not a chaotic spellcaster.
