@@ -25,10 +25,11 @@ The Strand HUD displays persistent resources while removing combat-state modules
 ### Required modules
 
 - Mist
-- Scroll
+- Scrolls
 - Boss Emblems
-- persistent Gold only if later design assigns any Gold to hub use
 - any future approved persistent currency
+
+Gold is run-only under the current progression rules and should not appear as a persistent Strand wallet.
 
 Current currency icons reuse their Run HUD language but may appear slightly larger and calmer. Counters sit in an upper corner so the lower combat area remains clear.
 
