@@ -4,22 +4,45 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
+last_reviewed: 2026-07-10
 ---
 
 # Source of Truth
 
-Each major subject should have one authoritative file. Other files should summarize and link to it rather than duplicating the complete definition.
+Each major subject has one authoritative file. Other documents should summarize and link rather than duplicate the complete definition.
 
-| Subject | Authoritative location |
+| Subject | Authoritative file |
 |---|---|
-| Game identity, pitch, and pillars | `docs/overview/` |
-| Core mechanics and player-facing systems | `docs/gameplay/` |
-| Canon, history, factions, and supernatural rules | `docs/lore/` |
-| Akio and named characters | `docs/characters/` |
-| Area rosters, enemies, bosses, rooms, and regional content | `docs/content/` |
-| Art direction, technical standards, asset inventory, and milestone scope | `docs/art_production/` |
-| HUD, menus, and interface behavior | `docs/ui_ux/` |
-| Contractor-facing exports and records | `docs/external/` and `contractor_docs/` |
+| Game identity and pitch | `docs/overview/GAME_OVERVIEW.md` |
+| Design pillars | `docs/overview/DESIGN_PILLARS.md` |
+| Full production scope | `docs/overview/FULL_GAME_SCOPE.md` |
+| Top-level production order | `docs/overview/PRODUCTION_ROADMAP.md` |
+| Core gameplay loop | `docs/gameplay/CORE_LOOP.md` |
+| Combat rules and vocabulary | `docs/gameplay/COMBAT.md` |
+| Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
+| Blood Aspect mechanics | `docs/gameplay/BLOOD_ASPECTS.md` |
+| Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
+| Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
+| Beast Blood canon | `docs/lore/BEAST_BLOOD.md` |
+| Returning Blood canon | `docs/lore/RETURNING_BLOOD.md` |
+| The Order | `docs/lore/THE_ORDER.md` |
+| Barrier and Blood Moon | `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md` |
+| Eclipse Shogun canon | `docs/lore/ECLIPSE_SHOGUN.md` |
+| Akio | `docs/characters/AKIO.md` |
+| Strand NPC roster | `docs/characters/STRAND_NPCS.md` |
+| Area 1 regional content | `docs/content/area_1/` |
+| Area 2 regional content | `docs/content/area_2/` |
+| Area 3 regional content | `docs/content/area_3/` |
+| Strand content and interactibles | `docs/content/strand/` |
+| Art direction | `docs/art_production/ART_DIRECTION.md` |
+| Art technical standards | `docs/art_production/TECHNICAL_STANDARDS.md` |
+| Art asset inventory | `docs/art_production/ASSET_INVENTORY.md` |
+| Outsourcing process | `docs/art_production/OUTSOURCING_WORKFLOW.md` |
+| Milestone scope | `docs/art_production/milestones/MILESTONE_*.md` |
+| Combat HUD | `docs/ui_ux/HUD.md` |
+| Shrine interface | `docs/ui_ux/SHRINE_INTERFACE.md` |
+| Hub interfaces | `docs/ui_ux/HUB_INTERFACES.md` |
+| Contractor exports | `docs/external/` and `contractor_docs/` |
 
 ## Conflict rule
 
@@ -27,4 +50,4 @@ When two files conflict, use the file assigned authority here. Update dependent 
 
 ## Duplication rule
 
-Detailed definitions belong only in their authoritative file. Dependent files should contain the minimum context needed for their purpose and link back to the authoritative source.
+Detailed definitions belong only in their authoritative file. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, or content definitions.
