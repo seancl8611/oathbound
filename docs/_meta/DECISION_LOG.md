@@ -184,3 +184,50 @@ The Eclipse Shogun's three phases — Sovereign Duelist, Tyrant of the Wellsprin
 - `docs/content/area_3/BOSS.md`
 - `docs/_meta/TERMINOLOGY.md`
 - `docs/art_production/milestones/MILESTONE_06.md`
+
+## 2026-07-11 — Currency families and persistence
+
+**Status:** approved
+
+**Decision**
+
+Mist, Scrolls, and Boss Emblems are persistent currencies. Gold is run-only. Scrolls are Forge-focused; Mist is the broad base meta currency; Boss Emblems gate rare or major progression. `Mist Shards` is deprecated unless deliberately restored as a separate denomination.
+
+**Affected documents**
+
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/content/strand/interactibles/FORGE_BENCH.md`
+- `docs/content/strand/interactibles/BLOODWELL.md`
+- `docs/_meta/TERMINOLOGY.md`
+
+## 2026-07-11 — Player-system roster identities
+
+**Status:** approved
+
+**Decision**
+
+The five stances are Storm, Frost, Ember, Hex, and Shadow. The eight prosthetics are Beast-Bane Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, and Bloodletting Gourd. Their tactical identities and visual footprints are approved; exact numbers and upgrade paths remain tunable.
+
+**Affected documents**
+
+- `docs/gameplay/STANCES.md`
+- `docs/gameplay/PROSTHETICS.md`
+- `docs/art_production/STANCE_VFX.md`
+- `docs/art_production/PROSTHETIC_VFX.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+
+## 2026-07-11 — Milestone 1 Style Test gate
+
+**Status:** approved
+
+**Decision**
+
+Milestone 1 begins only after a separately paid Style Test is approved. The approved test locks scale, palette, detail density, perspective, outline, shadow, and Godot import targets. Contractor-facing scope follows the polished Milestone 1 brief; broader production-bible assets not listed in its paid bundle require explicit assignment before quotation.
+
+**Affected documents**
+
+- `docs/art_production/OUTSOURCING_WORKFLOW.md`
+- `docs/art_production/TECHNICAL_STANDARDS.md`
+- `docs/art_production/milestones/MILESTONE_01.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
