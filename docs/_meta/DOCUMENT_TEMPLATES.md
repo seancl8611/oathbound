@@ -19,12 +19,26 @@ category: lore | gameplay | character | content | art-production | ui-ux | overv
 status: locked | approved | draft | under-review | deferred | deprecated | cut
 authority: primary | summary
 last_reviewed: YYYY-MM-DD
-depends_on:
+topics:
+  - concise-searchable-topic
+related:
   - OTHER-DOCUMENT-ID
 ---
 ```
 
 Use stable uppercase IDs. Do not change an ID merely because a file is renamed.
+
+`topics` and `related` are optional. Add them only when they improve discovery for recurring concepts or meaningful cross-system relationships. They are search hints, not a complete dependency declaration.
+
+Keep topic labels short, lowercase, and reusable, such as:
+
+- `returning-blood`
+- `corruption`
+- `shrine`
+- `area-1`
+- `keeper-of-the-gate`
+
+Do not add large metadata blocks that merely restate the document body.
 
 ## Enemy entry
 
