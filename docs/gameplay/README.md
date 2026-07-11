@@ -10,6 +10,7 @@ Authoritative player-facing mechanics and system rules belong here.
 - [Blood Aspects](BLOOD_ASPECTS.md)
 - [Corruption and Shrines](CORRUPTION_AND_SHRINES.md)
 - [Progression](PROGRESSION.md)
+- [Blood Cavern Trial System](BLOOD_CAVERN_TRIALS.md)
 - [Stances](STANCES.md)
 - [Prosthetic Tools](PROSTHETICS.md)
 
@@ -22,4 +23,4 @@ Authoritative player-facing mechanics and system rules belong here.
 - Individual prosthetic briefs
 - Balance-variable references
 
-Gameplay files own mechanics. Lore files may explain why a system exists, and milestone files may define its art scope, but neither should redefine its rules.
+Gameplay files own mechanics. Lore files may explain why a system exists, content files own physical locations and combatant identity, and milestone files may define art scope, but none should redefine gameplay rules.
