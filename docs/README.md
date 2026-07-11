@@ -2,16 +2,33 @@
 
 This directory is the internal source of truth for Oathbound design, lore, content, art production, UI/UX, and production planning.
 
-## Sections
+## Start here
 
-- `_meta/` — documentation rules, source-of-truth map, terminology, decisions, and update protocol
-- `overview/` — game overview, design pillars, full scope, and roadmap
-- `gameplay/` — mechanics and systems
-- `lore/` — canon, history, world rules, and narrative foundations
-- `characters/` — player, NPC, and relationship documentation
-- `content/` — areas, enemies, minibosses, bosses, rooms, and region content
-- `art_production/` — art direction, asset inventory, technical standards, outsourcing, and milestones
-- `ui_ux/` — HUD, menus, and interaction design
-- `external/` — indexes and export history for contractor-facing documents
+- [Game overview](overview/GAME_OVERVIEW.md)
+- [Design pillars](overview/DESIGN_PILLARS.md)
+- [Full game scope](overview/FULL_GAME_SCOPE.md)
+- [Production roadmap](overview/PRODUCTION_ROADMAP.md)
 
-Major changes should follow `docs/_meta/UPDATE_PROTOCOL.md`.
+## Authoritative sections
+
+- [Gameplay](gameplay/README.md)
+- [Lore](lore/README.md)
+- [Characters](characters/README.md)
+- [Regional content](content/README.md)
+- [Art production](art_production/README.md)
+- [UI/UX](ui_ux/README.md)
+
+## Repository control files
+
+Before applying a broad change, read:
+
+1. [`_meta/SOURCE_OF_TRUTH.md`](_meta/SOURCE_OF_TRUTH.md)
+2. [`_meta/DOCUMENT_MAP.md`](_meta/DOCUMENT_MAP.md)
+3. [`_meta/ASSISTANT_WORKFLOW.md`](_meta/ASSISTANT_WORKFLOW.md)
+4. [`_meta/TERMINOLOGY.md`](_meta/TERMINOLOGY.md)
+
+Major approved changes belong in [`_meta/DECISION_LOG.md`](_meta/DECISION_LOG.md). Unresolved consequences belong in [`_meta/OPEN_QUESTIONS.md`](_meta/OPEN_QUESTIONS.md).
+
+## External documents
+
+Markdown remains authoritative. Contractor-ready Word/PDF files are generated exports tracked under `docs/external/` and `contractor_docs/`.
