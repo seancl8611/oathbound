@@ -4,15 +4,17 @@ title: Run Results and Strand Return
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - run-results
   - successful-return
   - bloodwell
   - wellspring
+  - techniques
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-PROGRESSION
+  - GAMEPLAY-TECHNIQUES
   - CONTENT-STRAND-BLOODWELL
 ---
 
@@ -39,12 +41,18 @@ After a successful Wellspring completion:
 - boss or major encounter defeated,
 - Wellspring Fragment or Boss Emblem gained where applicable,
 - permanent currencies and rewards gained,
-- discoveries or unlocks earned,
-- run-only effects, Corruption, Tier, Gold, and temporary relic effects lost.
+- discoveries, Technique-pool entries, or other unlocks earned,
+- final selected Blood Aspect and highest Tier reached,
+- final four active Techniques, reserve Technique, refinements, equipped prosthetic, and Relic as a run recap,
+- clear indication that active/reserve Techniques, refinements, Corruption, Tier, Gold, temporary capacity, and temporary Relic effects were burned away.
+
+Showing the final build is a record of the completed run, not continued ownership. The layout must not imply that those Techniques remain equipped at the Strand.
 
 ## Presentation goal
 
 Successful return should feel consequential rather than celebratory in a generic arcade sense. It communicates that Akio completed the Rite, lost the current body, and reformed with permanent consequences intact.
+
+The final-build recap should help players remember successful combinations without turning into a permanent loadout-save system.
 
 ## Bloodwell reformation treatment
 
@@ -62,5 +70,6 @@ The effect must imply danger and increasing marks on Akio without presenting the
 - Results data must be assembled from finalized persistence rules.
 - Permanent rewards are saved before the player can leave the screen.
 - Run-only state is visibly separated from retained progression.
+- The final Technique build may be recorded for run history or summary only if it remains clearly non-equipped and non-recoverable.
 - The return flow must remain reusable for prototype completion before final ending presentation is locked.
 - Failed-return treatment may share layout components, but successful completion must remain visually and narratively distinct.
