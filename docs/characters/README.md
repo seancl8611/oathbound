@@ -5,11 +5,19 @@ Authoritative player, recurring NPC, and character-relationship documentation be
 ## Current documents
 
 - [Akio](AKIO.md)
-- [Strand NPCs](STRAND_NPCS.md)
+- [Strand NPC roster](STRAND_NPCS.md)
+
+## Strand NPC briefs
+
+- [Keeper](strand/KEEPER.md)
+- [Peddler](strand/PEDDLER.md)
+- [Smith](strand/SMITH.md)
+- [Raven](strand/RAVEN.md)
+- [Undead Samurai](strand/UNDEAD_SAMURAI.md)
+- [Scribe](strand/SCRIBE.md)
 
 ## Planned expansion
 
-- Individual files for each recurring Strand NPC
 - Character relationship map
 - Dialogue and narrative-state requirements
 - Historical figures with recurring story importance
