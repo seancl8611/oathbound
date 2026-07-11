@@ -4,7 +4,7 @@ title: Corrupted Swordsman
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - area-1
   - hushiro
@@ -25,7 +25,7 @@ Baseline melee defender and primary posture/parry teacher for Area 1. He blocks,
 
 ## One-sentence fantasy
 
-A corrupted village conscript whose mind is gone but whose drilled guard discipline still forces the player to earn every opening.
+A village garrison soldier whose manhood is gone but whose uniform, sword grip, and drilled motions continue as a degraded mirror of Akio.
 
 ## Lore context
 
@@ -33,18 +33,19 @@ Low-ranking Hushiro soldiers were trained to patrol lanes, defend thresholds, ho
 
 ## Visual identity
 
+- garrison military uniform clearly distinct from Akio's Order clothing,
 - cracked dull red-and-black lacquer armor,
 - worn cloth and dirty wrappings,
 - damaged light helmet or jingasa,
-- rusted but habitually maintained katana,
+- standard-issue blade cruder than Akio's katana,
 - faded garrison insignia,
-- pallid grey skin and deadened expression.
+- restrained corruption through sunken eyes, pallor, blackened veins, and wrong stillness.
 
-The design should read as a real local conscript rather than an elite samurai or dramatic boss archetype.
+The design should read as a real local conscript rather than an elite samurai or boss archetype.
 
 ## Silhouette
 
-Compact, medium-height infantry profile with a visible katana, stable lower-body stance, restrained shoulder armor, and exceptionally clear guard poses. He should look standard, grounded, and disciplined rather than bulky, agile, or ornate.
+Compact, medium-height infantry profile with a visible katana, stable lower-body stance, restrained shoulder armor, and exceptionally clear guard poses. He should look standard, grounded, militarized, and slightly stiffer than Akio.
 
 ## Weapon and attack language
 
@@ -59,7 +60,7 @@ His technique uses proper fundamentals without flourish. Attack movement may adj
 
 ## Corruption language
 
-Pallid flesh, dim blood-lit eyes, dried blood in armor seams, wrong stillness, delayed head turns, and slight shoulder/joint rigidity. Corruption preserves the military role instead of replacing it with overt mutation.
+Pallid flesh, dim blood-lit eyes, dried blood in armor seams, delayed head turns, and slight shoulder or joint rigidity. Corruption preserves the military role instead of replacing it with overt mutation.
 
 ## Personality in motion
 
@@ -75,9 +76,9 @@ The player should immediately read:
 - retaliation may follow careless pressure,
 - posture break creates the decisive opening.
 
-Guard, attack startup, thrust profile, recovery, parry recoil, and deathblow-ready state must remain visually distinct.
+Idle, attack windup, attack swing, recovery, block, parried recoil, posture-broken, deathblow-ready, hurt, and death states must remain visually distinct.
 
-## Required animation set
+## Full-game animation set
 
 - idle and guard idle,
 - patrol walk and run,
@@ -88,6 +89,7 @@ Guard, attack startup, thrust profile, recovery, parry recoil, and deathblow-rea
 - running overhead,
 - block/react,
 - post-block counter options,
+- attack recovery,
 - hurt,
 - parried recoil,
 - stagger and posture break,
@@ -95,6 +97,29 @@ Guard, attack startup, thrust profile, recovery, parry recoil, and deathblow-rea
 - deathblow,
 - death.
 
+## Milestone 1 delivery subset
+
+| Animation | Working frames | Readability purpose |
+|---|---:|---|
+| `idle` | 4–6 | Armed readiness with slightly broken posture |
+| `walk` | 6–8 | Mechanical deliberate approach, not a stagger |
+| `attack_windup` | 4–6 | Primary reaction tell; unmistakable from idle |
+| `attack_swing` | 3–5 | Fast committed punishment |
+| `attack_recovery` | 3–5 | Open safe counter window |
+| `block` | 2–3 loop | Sustained guard, visibly different from idle |
+| `parried_recoil` | 3–4 | Weapon and body snapped wide after player parry |
+| `posture_broken` | 3–6 loop | Open vulnerable body, clearly not in stance |
+| `deathblow_ready` | 2–4 loop | Held execution opening |
+| `hurt` | 2–3 | Quick damage recoil, distinct from parried recoil |
+| `death` | 6–10 | Clear fall and held final frame |
+
+## Milestone 1 approval criteria
+
+- Silhouette cannot be mistaken for Akio.
+- Attack windup gives a readable decision window.
+- Idle, windup, parried recoil, posture-broken, deathblow-ready, hurt, and death are distinct at a glance.
+- Posture-broken reads as a temporary opening rather than injury or defeat.
+
 ## Technical notes
 
-This enemy is the foundational readability benchmark for humanoid combat. Soldier variants may tune counter chance, lunge distance, thrust frequency, post-block aggression, and whiff recovery while sharing common base logic. Counter decisions should consider range, posture, recent player attacks, and personality rather than triggering mechanically after every block.
+Working sprite height is 96–128 px, matching Akio's general scale. This enemy is the foundational readability benchmark for humanoid combat. Soldier variants may tune counter chance, lunge distance, thrust frequency, post-block aggression, and whiff recovery while sharing common base logic. Counter decisions should consider range, posture, recent player attacks, and personality rather than triggering after every block.

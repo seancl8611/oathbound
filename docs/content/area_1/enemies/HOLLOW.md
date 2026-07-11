@@ -4,7 +4,7 @@ title: Hollow
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - area-1
   - hushiro
@@ -24,11 +24,11 @@ Low-health civilian-corruption swarm enemy. Individually fragile, but dangerous 
 
 ## One-sentence fantasy
 
-A human villager stripped down to pure hunger, throwing its frail body at the player in desperate animal-like bursts.
+A ruined civilian whose identity and competence are almost gone, leaving a slumped human shape that still tries to harm the player without remembering how to do it well.
 
 ## Lore context
 
-Hollows are Hushiro's ordinary people: fishermen, farmers, laborers, tradespeople, and families. They had no military doctrine for Beast Blood to preserve. Corruption reduced them to appetite, panic, and the instinct to rush living flesh. They linger near homes, alleys, and work sites because those were once familiar, not because they still guard them.
+Hollows are Hushiro's ordinary people: fishermen, farmers, laborers, tradespeople, and families. They had no military doctrine for Beast Blood to preserve. Corruption reduced them to appetite, panic, and crude violence. They linger near homes, alleys, and work sites because those places were once familiar.
 
 ## Visual identity
 
@@ -39,44 +39,36 @@ Hollows are Hushiro's ordinary people: fishermen, farmers, laborers, tradespeopl
 - ruined mouths and blood-dark gums,
 - unmistakably civilian rather than military.
 
+The player should feel that each Hollow used to be someone.
+
 ## Silhouette
 
-Thin, crooked, and unstable: narrow torso, jutting shoulders, reaching arms, bent spine, uneven stance, and open-mouthed forward commitment. Groups should form a messy human mass rather than a formation.
+Thin, crooked, slumped, and unstable: narrow torso, jutting shoulders, reaching arms, bent spine, and uneven stance. Groups form a messy human mass rather than a formation.
 
 ## Attack language
 
-- short frantic rush,
-- committed lunge,
-- bite,
-- grab or clawing swipe where supported,
-- quick recovery into renewed crowd pressure.
+- slow lurch or shamble,
+- crude telegraphed grab or swing,
+- full-game variants may add a short rush, bite, or lunge,
+- easy interruption and fast defeat.
 
-The threat is cadence and quantity, not individual move complexity.
+The threat is quantity and timing disruption, not individual move complexity.
 
 ## Corruption language
 
 Hollow cheeks, visible tendon and bone, stretched mouth, inflamed or wrong-bright eyes, pallid skin, and hunger-driven body language. The horror is ordinary personhood collapsing into consumption.
 
-## Personality in motion
-
-Jerky drift punctuated by sudden violent energy. Ambient behavior may cluster around doorways, homes, alleys, or work areas. In combat, they crowd and commit without discipline.
-
 ## Combat readability
 
-The player should immediately understand:
+The player should understand immediately that one Hollow is pitiable and easy to dispatch, while several can interrupt, crowd, and complicate a duel with a stronger enemy.
 
-- one Hollow is easy to kill,
-- a group can interrupt and surround,
-- ignoring them while dueling a tougher enemy is dangerous,
-- lunges and bites remain quick but readable.
-
-## Required animation set
+## Full-game animation set
 
 - idle and cluster/feeding ambient variant,
 - wander or shamble,
-- run/short rush,
-- bite windup and bite,
-- lunge windup and lunge,
+- run or short rush where used,
+- crude attack or grab,
+- bite or lunge variants where supported,
 - hurt,
 - parried recoil,
 - stagger,
@@ -84,6 +76,23 @@ The player should immediately understand:
 - deathblow,
 - death.
 
+## Milestone 1 delivery subset
+
+| Animation | Working frames | Readability purpose |
+|---|---:|---|
+| `idle` | 4–6 | Slumped body language, not individually threatening |
+| `walk` | 6–8 | Slow unsteady lurch with a shorter step than the Swordsman |
+| `attack` | 4–6 | Crude telegraphed grab or swing |
+| `hurt` | 2–3 | Quick feedback and easy interruption |
+| `death` | 4–6 | Fast collapse for a fragile swarm unit |
+
+## Milestone 1 approval criteria
+
+- Reads fragile and pitiable rather than formidable.
+- Silhouette is distinct from Corrupted Swordsman at similar scale.
+- Attack is readable but visibly unskilled.
+- Hurt and death resolve quickly enough for group combat.
+
 ## Technical notes
 
-Keep production modular and inexpensive enough for group use. Crowd spacing should allow messy pressure without unreadable overlap. Hollows work best as a pressure layer around soldiers, forcing target prioritization and breaking comfortable one-on-one rhythm.
+Working sprite height is 72–96 px. Keep production modular and inexpensive enough for group use. Crowd spacing should allow messy pressure without unreadable overlap. The polished Milestone 1 brief uses a deliberately small animation set; advanced lunge, parry, deathblow, and ambient variants remain later full-game scope unless separately quoted.

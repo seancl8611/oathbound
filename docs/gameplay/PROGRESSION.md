@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - progression
   - persistence
@@ -12,17 +12,19 @@ topics:
   - blood-mirror
   - forge
   - trials
+  - currencies
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
+  - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-STRAND-INTERACTIBLES
   - UI-RUN-RESULTS
 ---
 
 # Progression
 
-Oathbound uses connected run-only and persistent progression layers. Every system must explicitly state whether its state survives death and successful completion.
+Oathbound uses connected run-only and persistent progression layers. Every system and item family must explicitly state whether its state survives failed death-return and successful completion.
 
 ## Run progression
 
@@ -31,7 +33,7 @@ Temporary power assembled during an attempt may include:
 - Blood Aspect Tier growth,
 - Corruption,
 - temporary boons,
-- temporary relic effects,
+- run-scoped relic effects,
 - Gold,
 - room progress,
 - temporary consumables or materials,
@@ -49,7 +51,18 @@ The Strand supports growth that survives return:
 - **Blood Cavern trials:** combat teaching, repeatable mastery challenges, fixed-loadout tests, cosmetics, lore reflections, or completion marks.
 - **Discovery Board:** codex knowledge, enemy information, relic/item notes, and recovered history.
 - **Merchant and NPC services:** persistent unlocks, stock access, or service progression where defined.
-- **Major currencies and rewards:** resources explicitly classified as permanent, including Boss Emblems and the finalized Mist/Scroll currency families.
+- **Persistent currencies:** Mist, Scrolls, and Boss Emblems.
+
+## Currency ownership
+
+| Currency | Persistence | Primary ownership |
+|---|---|---|
+| Mist | Persistent | Base meta-progression currency; broadly usable by Bloodwell and approved hub systems |
+| Scroll | Persistent | Forge-focused weapon and prosthetic upgrade currency |
+| Boss Emblem | Persistent | Rare boss-derived currency for major progression gates or high-value nodes |
+| Gold | Run-only | Mid-run shop economy |
+
+`Mist Shards` is deprecated draft terminology unless a separate shard denomination is intentionally reintroduced. UI and contractor briefs should use `Mist` for the current base persistent currency.
 
 ## Blood Aspect persistence
 
@@ -69,7 +82,7 @@ Appropriate persistent rewards include:
 - Aspect access,
 - capped timing or recovery comfort,
 - modest posture reliability,
-- permanent currency,
+- persistent currency,
 - cosmetics,
 - lore reflections,
 - challenge completion marks.
@@ -89,10 +102,11 @@ The results flow must distinguish retained rewards from states burned away durin
 
 - Persistent growth may improve options, reliability, and resilience, but must not erase the need to read combat.
 - Run growth should create meaningful build identity before the final area.
-- Permanent Aspect upgrades must stay small, capped, and reliability-focused.
-- Unlocks should be documented separately from balance values.
-- Every persistent interface must show costs, prerequisites, ownership, and purchased/maxed states clearly.
-- Trial rewards should remain deterministic enough that players understand why they succeeded or failed.
+- Permanent Aspect upgrades stay small, capped, and reliability-focused.
+- Unlocks are documented separately from balance values.
+- Every persistent interface shows costs, prerequisites, ownership, and purchased/maxed states clearly.
+- Trial rewards remain deterministic enough that players understand success and failure.
+- Gold cannot appear as a persistent Strand wallet unless its persistence rule is deliberately changed in the same update.
 
 ## Current persistence matrix
 
@@ -104,15 +118,11 @@ The results flow must distinguish retained rewards from states burned away durin
 | Selected Aspect as loadout option | Yes | Yes | approved |
 | Blood Mirror trial/mastery progress | Yes | Yes | approved |
 | Permanent Aspect upgrade ranks | Yes | Yes | approved |
+| Mist, Scrolls, Boss Emblems | Yes | Yes | approved |
 | Blood Aspect Tier | No | No | approved |
 | Corruption | No | No | approved |
 | Temporary boons | No | No | approved |
-| Temporary relic effects | No | No | approved |
+| Run-scoped relic effects | No | No | approved |
 | Gold | No | No | approved |
 | Room progress | No | No | approved |
-| Boss Emblems and other major permanent currencies | Yes | Yes | approved direction |
-| Individual consumables/materials | By item family | By item family | requires item documentation |
-
-## Currency naming note
-
-The source bible uses related terms including Mist, Mist Shards, Scrolls, and Boss Emblems. Their final names, families, and exact service ownership require a focused currency pass; the persistence rule is that currencies explicitly classified as major/permanent survive the run.
+| Individual consumables/materials | By item family | By item family | requires item-specific definition |

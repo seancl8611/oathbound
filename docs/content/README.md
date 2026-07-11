@@ -2,6 +2,12 @@
 
 Area, enemy, miniboss, boss, room, environment, and Strand content documentation belongs here.
 
+## Shared room language
+
+- [Cross-Area Room Types](ROOM_TYPES.md)
+
+This file owns the common functional identity of combat, Shrine, rest, shop, treasure/miniboss, and boss rooms. Regional documents own their local materials and authored spaces.
+
 ## Regions
 
 ### Area 1 — Hushiro Gate Village
@@ -40,4 +46,4 @@ Individual Area 3 enemy briefs are stored in `area_3/enemies/`.
 
 ## Ownership rule
 
-Regional indexes own family identity and roster navigation. Individual enemy files own standard-unit fantasy, combat role, visual identity, animation requirements, and technical notes. Miniboss and boss files own encounter identity, phases, arena dependencies, and production requirements. Gameplay system files own shared mechanics; lore files own history and canon; milestones own production scope.
+Cross-area files own stable room functions. Regional indexes own family identity and navigation. Individual enemy files own standard-unit fantasy, combat role, visual identity, animation requirements, and technical notes. Miniboss and boss files own encounter identity, phases, arena dependencies, and production requirements. Gameplay files own shared mechanics; lore files own canon; milestones own production scope.

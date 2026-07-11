@@ -4,7 +4,7 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 
 # Source of Truth
@@ -26,6 +26,9 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
 | Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
 | Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
+| Prosthetic tool mechanics | `docs/gameplay/PROSTHETICS.md` |
+| Stance identities and mechanics | `docs/gameplay/STANCES.md` |
+| Items, currencies, and rewards | `docs/gameplay/ITEMS_AND_REWARDS.md` |
 | Beast Blood canon | `docs/lore/BEAST_BLOOD.md` |
 | Returning Blood canon | `docs/lore/RETURNING_BLOOD.md` |
 | The Order | `docs/lore/THE_ORDER.md` |
@@ -34,11 +37,13 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Akio | `docs/characters/AKIO.md` |
 | Strand NPC roster | `docs/characters/STRAND_NPCS.md` |
 | Individual Strand NPC identities | `docs/characters/strand/*.md` |
+| Cross-area room identities | `docs/content/ROOM_TYPES.md` |
 | Area 1 regional identity | `docs/content/area_1/OVERVIEW.md` |
 | Area 1 enemy family and roster | `docs/content/area_1/ENEMIES.md` |
 | Individual Area 1 enemies | `docs/content/area_1/enemies/*.md` |
 | Area 1 minibosses | `docs/content/area_1/MINIBOSSES.md` |
 | Area 1 boss encounter | `docs/content/area_1/BOSS.md` |
+| Area 1 environment and rooms | `docs/content/area_1/ENVIRONMENT_AND_ROOMS.md` |
 | Area 2 regional identity | `docs/content/area_2/OVERVIEW.md` |
 | Area 2 enemy family and roster | `docs/content/area_2/ENEMIES.md` |
 | Individual Area 2 enemies | `docs/content/area_2/enemies/*.md` |
@@ -56,10 +61,15 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Art technical standards | `docs/art_production/TECHNICAL_STANDARDS.md` |
 | Character/enemy brief requirements | `docs/art_production/CHARACTER_BRIEF_STANDARD.md` |
 | Shared combat and Corruption VFX | `docs/art_production/CORE_VFX.md` |
+| Blood Aspect VFX | `docs/art_production/ASPECT_VFX.md` |
+| Prosthetic VFX | `docs/art_production/PROSTHETIC_VFX.md` |
+| Stance VFX | `docs/art_production/STANCE_VFX.md` |
+| Item, pickup, and reward art | `docs/art_production/ITEM_REWARD_ART.md` |
 | Art asset inventory | `docs/art_production/ASSET_INVENTORY.md` |
 | Outsourcing process | `docs/art_production/OUTSOURCING_WORKFLOW.md` |
 | Milestone scope | `docs/art_production/milestones/MILESTONE_*.md` |
-| Combat HUD | `docs/ui_ux/HUD.md` |
+| Run HUD and combat feedback | `docs/ui_ux/HUD.md` |
+| Strand HUD and interaction prompts | `docs/ui_ux/STRAND_HUD_AND_PROMPTS.md` |
 | Shrine interface | `docs/ui_ux/SHRINE_INTERFACE.md` |
 | Shared hub-interface language | `docs/ui_ux/HUB_INTERFACES.md` |
 | Blood Mirror and trial interface | `docs/ui_ux/BLOOD_MIRROR_TRIALS.md` |
@@ -73,4 +83,4 @@ When two files conflict, use the file assigned authority here. Update dependent 
 
 ## Duplication rule
 
-Detailed definitions belong only in their authoritative file. Indexes own families, rosters, and navigation; linked files own individual identities or systems. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, content, or VFX definitions.
+Detailed definitions belong only in their authoritative file. Indexes own families, rosters, and navigation; linked files own individual identities or systems. Milestone documents specify production scope and dependencies; they do not replace gameplay, lore, character, content, UI, or VFX definitions.

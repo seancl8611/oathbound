@@ -17,12 +17,12 @@ last_reviewed: 2026-07-11
 | Blood Aspect | A controlled specialization of Returning Blood. |
 | Wolf, Wraith, Ronin | Current Blood Aspect names. Capitalize as proper system names. |
 | Tier 0, Tier I, Tier II, Tier III, Tier IV | Standard mutation progression labels. |
-| Corruption | Gameplay meter representing Returning Blood pressure. Capitalize when naming the system. |
+| Corruption | Run-only gameplay meter representing Returning Blood pressure. Not a currency or pickup. |
 | Resist | Shrine choice that stabilizes without advancing Tier. |
 | Embrace | Shrine choice that permits greater mutation and advances power. |
 | The Order | Akio's religious-military organization. The Shogun predates it. |
 | The Strand | Persistent hub area. |
-| Bloodwell | Strand progression station connected to Returning Blood. One word. |
+| Bloodwell | Strand progression and revival station. One word. |
 | Blood Mirror | Strand mirror/trial system. Two words. |
 | Blood Moon | Rare event that empowers Beast Blood and weakens the barrier. |
 | Hushiro Gate Village | Area 1 region name. |
@@ -38,11 +38,26 @@ last_reviewed: 2026-07-11
 | Sovereign Duelist | Eclipse Shogun Phase 1. |
 | Tyrant of the Wellspring | Eclipse Shogun Phase 2. |
 | Eclipse Revealed | Eclipse Shogun Phase 3. |
+| Storm, Frost, Ember, Hex, Shadow | Approved combat stance names. |
+| Beast-Bane Whistle | Prosthetic interrupt pulse with stronger anti-beast response. |
+| Thunder Rod | Prosthetic line strike that applies Shock to the first target hit. |
+| Smoke Gourd | Prosthetic target-break smoke field. |
+| Fang Harpoon | Prosthetic interrupt and short pull tool. |
+| Mirror Umbrella | Prosthetic protected guard and stored-posture release tool. |
+| Flame Vent | Prosthetic short cone and Burn tool. |
+| Mist Raven | Prosthetic invulnerable blink and reposition tool. |
+| Bloodletting Gourd | Prosthetic Spirit-for-healing and temporary life-steal tool. |
+| Mist | Base persistent meta currency. |
+| Scroll / Scrolls | Persistent Forge-focused currency. Use singular or plural grammatically. |
+| Boss Emblem / Boss Emblems | Rare persistent boss-derived currency. |
+| Gold | Run-only shop currency. |
+| Common, Uncommon, Rare, Legendary | Current relic rarity tiers. |
 | posture | Combat state; lowercase in prose unless part of a UI label or heading. |
 | deathblow | One word; lowercase in general prose unless used as an official UI label. |
 
-## Rejected or unsafe wording
+## Deprecated or rejected wording
 
+- `Mist Shards` is deprecated draft wording unless a separate denomination is deliberately restored.
 - Do not call Akio immune to Beast Blood.
 - Do not describe Returning Blood as standard Order practice.
 - Do not state that Order warriors are normally dosed with Beast Blood to cross the barrier.

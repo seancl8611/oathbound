@@ -46,7 +46,7 @@ Corruption is gained through combat accomplishments and major encounter progress
 
 **Resolution**
 
-The Embered Pilgrim and Rotwood Host are Area 2's two minibosses. Rootfang and Briarthorn form the paired Twin Maws boss encounter. Both twins begin active, and the first defeated transfers its half of the corrupted bond to the survivor, creating an empowered second half.
+The Embered Pilgrim and Rotwood Host are Area 2's two minibosses. Rootfang and Briarthorn form the Twin Maws boss. Both twins begin active, and the first defeated transfers its half of the corrupted bond to the survivor.
 
 **Affected files**
 
@@ -61,7 +61,7 @@ The Embered Pilgrim and Rotwood Host are Area 2's two minibosses. Rootfang and B
 
 **Resolution**
 
-Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal Area 3 boss. The Eclipse Shogun encounter uses the Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases.
+Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal boss with Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases.
 
 **Affected files**
 
@@ -72,7 +72,70 @@ Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and 
 
 **Status:** resolved
 
+## Resolved in production bible pages 106–132
+
+### Currency family names and broad ownership
+
+**Resolution**
+
+- Mist is the base persistent meta currency.
+- Scrolls are the primary Forge currency.
+- Boss Emblems are rare persistent boss-derived currency.
+- Gold is run-only shop currency.
+- `Mist Shards` is deprecated draft wording unless intentionally reintroduced as a separate denomination.
+
+Exact prices and node costs remain balance questions, not naming questions.
+
+**Affected files**
+
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/content/strand/interactibles/FORGE_BENCH.md`
+- `docs/content/strand/interactibles/BLOODWELL.md`
+- `docs/ui_ux/HUD.md`
+- `docs/ui_ux/STRAND_HUD_AND_PROMPTS.md`
+
+**Status:** resolved
+
+### Stance and prosthetic roster identities
+
+**Resolution**
+
+The five stance identities are Storm, Frost, Ember, Hex, and Shadow. The eight prosthetic tools are Beast-Bane Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, and Bloodletting Gourd. Their tactical roles and visual footprints are now defined.
+
+Final costs, cooldowns, upgrade paths, stack values, durations, and balance caps remain open.
+
+**Affected files**
+
+- `docs/gameplay/STANCES.md`
+- `docs/gameplay/PROSTHETICS.md`
+- `docs/art_production/STANCE_VFX.md`
+- `docs/art_production/PROSTHETIC_VFX.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+
+**Status:** resolved at roster/identity level
+
 ## Open questions
+
+### Milestone 1 Posture Break Cue assignment
+
+**Category:** production | outsourcing
+
+**Question**
+
+Is the separate Posture Break Cue included in Milestone 1, and if so, which batch owns it?
+
+**Why it matters**
+
+The broader production bible defines the effect, but the polished Milestone 1 contractor brief lists only VFX-001 Parry Spark, VFX-002 Hit Spark, VFX-003 Deathblow Cue, and VFX-004 Sword Trail. It should not be silently added to a paid batch.
+
+**Affected files**
+
+- `docs/art_production/CORE_VFX.md`
+- `docs/art_production/milestones/MILESTONE_01.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+
+**Status:** open
 
 ### Elite Defender revival behavior
 
@@ -80,11 +143,7 @@ Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and 
 
 **Question**
 
-Does the Elite Defender use Kagutsuchi Court's one-time revival mechanic, or should it remain a pure shield-and-spear positional defender?
-
-**Why it matters**
-
-Adding revival may reinforce the regional preservation language, but it may also overload a unit whose primary read already depends on shield orientation, guard coverage, and committed spear punishments.
+Does the Elite Defender use Kagutsuchi Court's one-time revival mechanic, or remain a pure shield-and-spear positional defender?
 
 **Affected files**
 
@@ -101,17 +160,18 @@ Adding revival may reinforce the regional preservation language, but it may also
 
 **Question**
 
-When the first Twin Maw dies, how are transition invulnerability, survivor health and posture, inherited attacks, transition duration, and difficulty normalization handled?
+How are transition invulnerability, survivor health and posture, inherited attacks, transition duration, and difficulty normalization handled after the first Twin Maw dies?
 
-**Current locked boundary**
+**Locked boundary**
 
-Both twins begin active. The first defeated transfers its half of the shared corrupted bond to the survivor. The survivor remains recognizably itself while gaining visible traces and selected capabilities from the fallen twin.
+Both twins begin active. The first defeated empowers the survivor, which remains recognizably itself.
 
 **Affected files**
 
 - `docs/content/area_2/BOSS.md`
 - `docs/art_production/milestones/MILESTONE_05.md`
-- future boss UI and implementation documentation
+- `docs/ui_ux/HUD.md`
+- future boss implementation documentation
 
 **Status:** open
 
@@ -121,18 +181,14 @@ Both twins begin active. The first defeated transfers its half of the shared cor
 
 **Question**
 
-What are the final number of Heart cycles, Stalk-destruction timer, punishment threshold, deathblow HP-chunk values, Stalk relocation rules, and posture-reset behavior?
-
-**Current locked boundary**
-
-The Heart is invulnerable while active Stalks remain. Destroying the Stalks opens a short Heart window. The player builds posture and lands repeated deathblows to remove major HP chunks. Leaving Stalks active too long triggers a punishment phase and resets the encounter into another limb cycle.
+What are the final Heart-cycle count, Stalk timer, punishment threshold, deathblow HP chunks, Stalk relocation rules, and posture reset behavior?
 
 **Affected files**
 
 - `docs/content/area_3/MINIBOSSES.md`
+- `docs/ui_ux/HUD.md`
 - `docs/art_production/ASSET_INVENTORY.md`
 - `docs/art_production/milestones/MILESTONE_06.md`
-- future miniboss UI and implementation documentation
 
 **Status:** open
 
@@ -144,9 +200,9 @@ The Heart is invulnerable while active Stalks remain. Destroying the Stalks open
 
 What are the final trial counts, unlock sequence, reward tables, mastery conditions, and numerical caps for permanent Blood Aspect reliability upgrades?
 
-**Current locked boundary**
+**Locked boundary**
 
-Trials may unlock Aspects and grant small, capped reliability improvements, currency, cosmetics, lore reflections, or completion marks. They must not add new Tiers, remove Embrace danger, or permanently grant the major mechanics owned by in-run Aspect Tiers.
+Trials may grant Aspect access, small capped reliability improvements, currency, cosmetics, lore reflections, or completion marks. They cannot add new Tiers or remove Embrace danger.
 
 **Affected files**
 
@@ -158,25 +214,43 @@ Trials may unlock Aspects and grant small, capped reliability improvements, curr
 
 **Status:** open
 
-### Currency family names and ownership
+### Stance and prosthetic tuning
+
+**Category:** gameplay | balance
+
+**Question**
+
+What are the final activation rules, Spirit costs, cooldowns, durations, stack thresholds, immunity rules, switching behavior, upgrade paths, and balance caps for the five stances and eight prosthetics?
+
+**Affected files**
+
+- `docs/gameplay/STANCES.md`
+- `docs/gameplay/PROSTHETICS.md`
+- `docs/art_production/STANCE_VFX.md`
+- `docs/art_production/PROSTHETIC_VFX.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+
+**Status:** open
+
+### Boon, relic, and item catalog
 
 **Category:** gameplay | production | UI/UX
 
 **Question**
 
-How should Mist, Mist Shards, Scrolls, Gold, and Boss Emblems be finalized as currency names and families, and which Strand service owns each one?
+What are the final boon, relic, consumable, breakable, and reward-object counts, effect catalogs, rarity weights, drop tables, and persistent/run-only ownership rules for individual entries?
 
-**Why it matters**
+**Locked boundary**
 
-The source bible uses overlapping currency language across Forge and Bloodwell interfaces. Persistence is broadly defined, but final names, icons, costs, and item-family counts require one consistent currency pass.
+The shared categories, card templates, world/HUD relationships, and Common–Legendary rarity presentation are approved.
 
 **Affected files**
 
-- `docs/gameplay/PROGRESSION.md`
-- `docs/content/strand/interactibles/FORGE_BENCH.md`
-- `docs/content/strand/interactibles/BLOODWELL.md`
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/art_production/ITEM_REWARD_ART.md`
 - `docs/art_production/ASSET_INVENTORY.md`
-- `docs/ui_ux/HUB_INTERFACES.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+- `docs/ui_ux/HUD.md`
 
 **Status:** open
 
@@ -224,22 +298,6 @@ Who or what was the ancient enemy the Eclipse Shogun defeated using Beast Blood,
 - `docs/lore/ECLIPSE_SHOGUN.md`
 - `docs/lore/STORY_OVERVIEW.md`
 - `docs/lore/TIMELINE.md`
-
-**Status:** open
-
-### Stance and prosthetic mechanics
-
-**Category:** gameplay
-
-**Question**
-
-What are the final mechanics, costs, and upgrade paths for the five stances and eight prosthetic tools?
-
-**Affected files**
-
-- `docs/gameplay/STANCES.md`
-- `docs/gameplay/PROSTHETICS.md`
-- `docs/art_production/milestones/MILESTONE_04.md`
 
 **Status:** open
 

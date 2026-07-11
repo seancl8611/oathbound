@@ -4,7 +4,7 @@ title: Hub Interfaces
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - hub-ui
   - boat
@@ -17,11 +17,12 @@ topics:
 related:
   - CONTENT-STRAND-INTERACTIBLES
   - GAMEPLAY-PROGRESSION
+  - UI-STRAND-HUD-PROMPTS
 ---
 
 # Hub Interfaces
 
-The Strand's interfaces should feel like services embodied in physical stations, not disconnected menu screens. Detailed system behavior remains in the linked content and gameplay documents; this file owns shared UI/UX requirements and cross-screen consistency.
+The Strand's interfaces should feel like services embodied in physical stations, not disconnected menu screens. Detailed behavior remains in linked content and gameplay documents; this file owns shared UI/UX requirements and cross-screen consistency.
 
 ## Current interface set
 
@@ -35,6 +36,39 @@ The Strand's interfaces should feel like services embodied in physical stations,
 | Blood Mirror / Trials | Aspect unlocks, previews, repeatable trials, and light mastery upgrades | [Blood Mirror and Trials](BLOOD_MIRROR_TRIALS.md) |
 | Run Results | Successful-return rewards and reset summary | [Run Results and Strand Return](RUN_RESULTS.md) |
 | Pause / Overview | Current build, active effects, and control review | [Pause and Build Overview](PAUSE_OVERVIEW.md) |
+| Strand HUD | Persistent resources and interaction prompts outside runs | [Strand HUD and Prompts](STRAND_HUD_AND_PROMPTS.md) |
+
+## Boat Aspect selection and run start
+
+The Boat screen is a practical departure confirmation with ritual framing.
+
+Required contents after Aspect unlock:
+
+- selected Aspect,
+- list of unlocked Aspects,
+- locked-state requirements without spoilers,
+- concise role description,
+- Start Run,
+- Change Aspect,
+- Cancel/back.
+
+Visual anchors include the Boat lantern, dark timber, wet rope, mist crossing, and compact Aspect cards or icons. Before Aspect unlock, the screen may remain minimal.
+
+## Blood Mirror and Aspect trials
+
+The Blood Mirror presents self-confrontation rather than shopping or a generic skill tree.
+
+Required contents:
+
+- Aspect list,
+- trial categories,
+- locked and unlocked states,
+- reward preview,
+- Tier I-IV preview,
+- permanent upgrade ranks,
+- completed and mastered states.
+
+The screen uses sparse black stone, reflective water, blood-mineral light, distorted player reflection, and Aspect silhouettes. The data model must support future boss rematches or challenge ladders without rebuilding the interface foundation.
 
 ## Shared requirements
 
@@ -49,8 +83,6 @@ The Strand's interfaces should feel like services embodied in physical stations,
 
 ## Visual differentiation
 
-Interfaces share a project-wide language but inherit material cues from their stations:
-
 - **Boat:** dark timber, wet rope, lantern threshold, compact confirmation.
 - **Forge:** dark iron, ember accents, sockets, branches, and crafted silhouettes.
 - **Merchant:** tagged salvage, cloth-backed item cards, stock and price clarity.
@@ -62,4 +94,4 @@ Interfaces share a project-wide language but inherit material cues from their st
 
 ## Data dependency rule
 
-Final layouts follow documented data fields, progression ownership, and state behavior. Interface art must not invent upgrade branches, currencies, Aspect behavior, trial rules, or unlock requirements that remain unresolved in authoritative gameplay/content files.
+Final layouts follow documented data fields, progression ownership, currency names, and state behavior. Interface art must not invent upgrade branches, costs, Aspect behavior, trial rules, or unlock requirements that remain unresolved.

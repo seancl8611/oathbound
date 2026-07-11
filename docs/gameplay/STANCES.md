@@ -2,38 +2,73 @@
 id: GAMEPLAY-STANCES
 title: Stances
 category: gameplay
-status: draft
+status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
+topics:
+  - stances
+  - storm
+  - frost
+  - ember
+  - hex
+  - shadow
+related:
+  - ART-STANCE-VFX
+  - CHAR-AKIO
+  - ART-MILESTONE-04
 ---
 
 # Stances
 
-Stances are planned combat modifiers that reshape Akio's swordplay without replacing the base katana moveset.
+Stances are combat modifiers that reshape Akio's base swordplay without replacing the approved katana moveset. The current five identities are approved at the tactical and visual level; exact numerical mechanics, switching rules, and upgrade paths remain design and balance work.
 
-## Current stance families
+## Storm
 
-- Storm
-- Frost
-- Hex
-- Ember
-- Shadow
+**Identity:** aggressive multi-target pressure through chain lightning and Shock.
 
-## Required definition for each stance
+**Design direction:** rewards awareness of clustered enemies and maintaining tempo. The first hit remains primary; secondary chains are controlled rather than random room-wide damage.
 
-Before a stance is marked approved, document:
+## Frost
 
-- Core tactical purpose
-- Activation and switching rule
-- Modified attacks or counters
-- Resource cost or limitation
-- Synergy with Blood Aspects and prosthetics
-- Unique VFX language
-- UI icon and active-state treatment
-- Failure cases or balance risks
+**Identity:** buildup, slow, freeze, and deliberate punish windows.
 
-## Production rule
+**Design direction:** rewards repeated application and timing a strong follow-up against a clearly frozen or brittle target.
 
-Stance VFX should be designed after Akio's base animations and core trails are approved. Effects must preserve weapon arcs, parry states, and enemy tells.
+## Ember
 
-The five names are currently treated as planned content; their exact mechanics remain draft until individual stance briefs are added.
+**Identity:** sustained Burn pressure and limited scorched-area control.
+
+**Design direction:** supports close-range offense and anti-defense pressure through damage over time without turning every attack into a large fire spell.
+
+## Hex
+
+**Identity:** curse buildup and delayed punishment.
+
+**Design direction:** rewards planning around marked targets, meaningful thresholds, and delayed payoff rather than immediate raw damage.
+
+## Shadow
+
+**Identity:** mark-and-consume play tied to evasive timing, parries, dashes, exposed targets, and single-target punishment.
+
+**Design direction:** rewards precise windows and cashing out marks through disciplined attacks rather than permanent stealth.
+
+## Shared constraints
+
+- Stances modify or add effects to base attacks; they do not require five replacement player animation libraries.
+- Weapon arcs, parry states, enemy tells, and Akio's final position remain readable.
+- Stance status language must be consistent with HUD, damage numbers, prosthetics, boons, and enemy states.
+- Stances should offer build identity without invalidating posture, parry, and deathblow combat.
+
+## Remaining design work
+
+Each stance still requires final decisions for:
+
+- activation and switching,
+- exact modified attacks or triggers,
+- resource costs or cooldowns,
+- stack thresholds and durations,
+- Aspect and prosthetic synergies,
+- upgrade paths,
+- failure cases and balance caps.
+
+The authoritative visual language belongs in [Combat Stance VFX](../art_production/STANCE_VFX.md).

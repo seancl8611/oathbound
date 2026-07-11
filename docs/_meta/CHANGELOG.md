@@ -9,6 +9,19 @@ last_reviewed: 2026-07-11
 
 # Documentation Changelog
 
+## 2026-07-11 — Production bible completion: pages 106–132 and polished Milestone 1 review
+
+- Completed Wolf, Wraith, and Ronin VFX briefs.
+- Added authoritative VFX briefs for all eight prosthetics and all five combat stances.
+- Defined the approved prosthetic and stance roster identities while leaving numerical tuning open.
+- Added cross-area visual identities for combat, Shrine, rest, shop, treasure/miniboss, and boss rooms.
+- Completed Run HUD, Corruption/Aspect HUD, Strand HUD, damage-number, enemy-indicator, deathblow-prompt, and interaction-prompt requirements.
+- Added authoritative currency, pickup, boon, relic, breakable, treasure, and reward-object documentation.
+- Resolved Mist, Scroll, Boss Emblem, and Gold naming/persistence; deprecated `Mist Shards` as draft wording.
+- Integrated the polished Milestone 1 Style Test gate, exact technical defaults, review windows, revision baseline, batch structure, animation subsets, frame estimates, and approval criteria.
+- Recorded the unresolved Milestone 1 assignment of the separate Posture Break Cue rather than silently expanding contractor scope.
+- Updated source ownership, full scope, asset inventory, Milestone 4, terminology, decisions, indexes, and open questions.
+
 ## 2026-07-11 — Production bible migration: pages 71–105
 
 - Completed the Court Caster and added Elite Defender, Hollow Vessel, and Court Sentinel production briefs.
@@ -19,7 +32,6 @@ last_reviewed: 2026-07-11
 - Added core Parry, Posture Break, Deathblow, Corruption Full, Embrace, and Resist VFX briefs.
 - Updated full scope, asset inventory, terminology, source ownership, and Milestones 1, 2, 5, and 6.
 - Recorded unresolved implementation and lore questions instead of inventing values or canon.
-- Deferred Wolf Prey Mark because its source brief begins on page 105 and continues beyond the migration boundary.
 
 ## 2026-07-10 — Production bible migration: pages 36–70
 
