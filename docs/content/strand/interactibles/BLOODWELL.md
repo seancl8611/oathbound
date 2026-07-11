@@ -15,17 +15,21 @@ related:
   - CONTENT-STRAND-INTERACTIBLES
   - LORE-RETURNING-BLOOD
   - GAMEPLAY-PROGRESSION
+  - GAMEPLAY-RUN-STRUCTURE
+  - UI-RUN-RESULTS
 ---
 
 # Bloodwell
 
 ## Strand function
 
-The Bloodwell is the primary long-term progression tree and the Strand-side anchor through which Returning Blood reconstructs Akio.
+The Bloodwell is the primary long-term progression tree and the Strand-side anchor through which Returning Blood reconstructs Akio after failed or successful runs.
 
 ## Lore role
 
 The Bloodwell is a contained Beast Blood site in the Strand. After Akio's first return, it becomes the anchor through which Returning Blood reforms him. This use is unique to Akio and conflicts with the Order's traditional refusal to use Beast Blood directly.
+
+It does not make Akio casually immortal. When Akio dies or sacrifices his current body at the Wellspring, Beast Blood attempts to consume, distort, or rebuild him. The Bloodwell receives what remains and helps him reform only because his body and will remain coherent enough to return.
 
 ## Visual identity
 
@@ -37,7 +41,7 @@ Supporting motifs:
 - ritual cuts,
 - old hunter markings,
 - blood-lit seams,
-- carved channels spreading through the surrounding stone.
+- carved channels spreading through surrounding stone.
 
 The Bloodwell should feel like the metaphysical heart of the Strand without becoming visually excessive.
 
@@ -53,21 +57,66 @@ The Bloodwell uses three permanent branches:
 - **Way of Secrets**
 - **Way of Vows**
 
-The interface should support:
+The interface supports:
 
 - clear branch identity,
 - tier gates,
 - node ranks,
 - permanent costs,
 - locked-node previews,
-- purchased-state changes,
+- purchased and maxed states,
+- selected-node details,
 - side nodes and future branch expansion.
 
 The source bible currently references Mist Shards and Boss Emblems as Bloodwell costs. Final currency naming should be reconciled before implementation and contractor export.
 
-## Presentation goal
+## Bloodwell screen
 
-The tree should resemble branching blood channels or ritual paths spreading outward from the well. It must feel premium, permanent, sacred, and consequential, while node clarity remains more important than ornament.
+### Primary purpose
+
+Present long-term growth as meaningful blood-path choice.
+
+### Core contents
+
+- three branches,
+- tier gates,
+- node costs,
+- current permanent currency totals,
+- purchased ranks,
+- selected-node detail,
+- locked requirements and preview state.
+
+### Presentation goal
+
+Sacred and consequential, with more reverence than the Forge. The tree should resemble stone-carved ritual paths or blood channels spreading outward from the well.
+
+### Visual notes
+
+- stone-carved branch lines,
+- blood-lit sockets,
+- restrained ceremonial framing,
+- controlled purchased-state and unlock pulses.
+
+Node clarity is more important than ornament.
+
+## Relationship to Blood Aspects
+
+The Bloodwell owns broad permanent meta progression. It does not own normal Aspect selection, which happens at the Boat, or Aspect unlocks and trial mastery, which happen at the Blood Mirror. Future Bloodwell upgrades may lightly support Aspects, but cannot replace the run-only Shrine Tier loop or remove the danger of Embrace.
+
+## Revival and successful-return presentation
+
+After failed death-return or successful Wellspring sacrifice, Akio reforms near the Bloodwell.
+
+Visual treatment may include:
+
+- a deeper crimson pulse through the well,
+- blood-surface ripple rising upward,
+- mist gathering at the spawn point,
+- a brief red-black collapse and body-reconstruction flash,
+- momentary traces of the equipped Aspect,
+- a controlled return to normal Strand ambience.
+
+Successful return should then present the [Run Results and Strand Return](../../../ui_ux/RUN_RESULTS.md) summary, save permanent rewards, clear run-only state, and trigger relevant NPC, codex, or Blood Mirror updates.
 
 ## Animation and environment needs
 
@@ -76,11 +125,13 @@ The tree should resemble branching blood channels or ritual paths spreading outw
 - slow particle drift,
 - faint pulses traveling through carved channels,
 - controlled node-unlock glow,
-- small blood-vein or ritual-light flares.
+- small blood-vein or ritual-light flares,
+- reusable reformation pulse and spawn effect.
 
 ## Technical notes
 
 - The layout must support later branch expansion without a full redesign.
 - Branch and tier relationships must be readable immediately.
-- The Bloodwell owns broad permanent progression; it does not replace Boat Aspect selection, Blood Mirror trials, or Shrine Tier choices.
-- Detailed successful-return presentation and Bloodwell screen expansion continue beyond page 35 of the source bible and are not migrated in this batch.
+- Permanent rewards must be saved before the return flow completes.
+- Reformation effects must communicate danger and consequence rather than effortless resurrection.
+- The successful-return flow must remain usable during prototype completion before the final ending is fully designed.
