@@ -1,6 +1,6 @@
 # Art Production
 
-Authoritative art direction, technical standards, asset inventory, outsourcing workflow, character-brief requirements, and milestone scope belong here.
+Authoritative art direction, technical standards, asset inventory, outsourcing workflow, character-brief requirements, shared VFX briefs, and milestone scope belong here.
 
 ## Current documents
 
@@ -8,6 +8,7 @@ Authoritative art direction, technical standards, asset inventory, outsourcing w
 - [Technical Standards](TECHNICAL_STANDARDS.md)
 - [Asset Inventory](ASSET_INVENTORY.md)
 - [Character and Enemy Brief Standard](CHARACTER_BRIEF_STANDARD.md)
+- [Core Combat and Corruption VFX](CORE_VFX.md)
 - [Outsourcing Workflow](OUTSOURCING_WORKFLOW.md)
 - [Art Milestones](milestones/README.md)
 
@@ -15,6 +16,7 @@ Authoritative art direction, technical standards, asset inventory, outsourcing w
 
 - Reference-library rules
 - Asset ID registry
+- Aspect, stance, prosthetic, boss, and environment VFX briefs
 - VFX color/value guide
 - UI export standards
 - Contractor brief source templates
