@@ -4,7 +4,7 @@ title: Bloodwell
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - strand
   - bloodwell
@@ -16,6 +16,7 @@ related:
   - LORE-RETURNING-BLOOD
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-ITEMS-REWARDS
   - UI-RUN-RESULTS
 ---
 
@@ -68,7 +69,14 @@ The interface supports:
 - selected-node details,
 - side nodes and future branch expansion.
 
-The source bible currently references Mist Shards and Boss Emblems as Bloodwell costs. Final currency naming should be reconciled before implementation and contractor export.
+## Currency ownership
+
+- **Mist** is the primary broad Bloodwell currency.
+- **Boss Emblems** gate rare or major progression where appropriate.
+- **Scrolls** remain Forge-focused and should appear here only if a specific node intentionally crosses system ownership.
+- **Gold** is run-only and is not a Bloodwell currency.
+
+Earlier `Mist Shards` wording is deprecated unless a separate denomination is deliberately restored. Exact costs and node distribution remain balance data.
 
 ## Bloodwell screen
 
@@ -81,7 +89,7 @@ Present long-term growth as meaningful blood-path choice.
 - three branches,
 - tier gates,
 - node costs,
-- current permanent currency totals,
+- current persistent currency totals,
 - purchased ranks,
 - selected-node detail,
 - locked requirements and preview state.
@@ -130,8 +138,8 @@ Successful return should then present the [Run Results and Strand Return](../../
 
 ## Technical notes
 
-- The layout must support later branch expansion without a full redesign.
-- Branch and tier relationships must be readable immediately.
-- Permanent rewards must be saved before the return flow completes.
-- Reformation effects must communicate danger and consequence rather than effortless resurrection.
-- The successful-return flow must remain usable during prototype completion before the final ending is fully designed.
+- The layout supports later branch expansion without a full redesign.
+- Branch and tier relationships remain readable immediately.
+- Permanent rewards save before the return flow completes.
+- Reformation effects communicate danger and consequence rather than effortless resurrection.
+- The successful-return flow remains usable during prototype completion before the final ending is fully designed.
