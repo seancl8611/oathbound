@@ -4,7 +4,7 @@ title: Combat System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - katana
   - posture
@@ -14,16 +14,20 @@ topics:
 related:
   - CHAR-AKIO
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-PROSTHETICS
   - UI-HUD
 ---
 
 # Combat System
 
-Oathbound uses high-angle 2D action combat centered on katana exchanges, posture pressure, parries, blocks, dodges, contextual counters, and deathblows.
+Oathbound uses high-angle 2D action combat centered on katana exchanges, posture pressure, parries, blocks, dodges, contextual counters, deathblows, and readable arena pressure.
 
 ## Design goal
 
 The base sword kit should feel expressive without requiring many new buttons. One attack input supports multiple contextual outputs through combo timing, hold/release, post-parry follow-up, and dash-to-attack flow. The system should feel layered rather than overloaded.
+
+Bosses and larger encounters may use projectiles, ground danger, area denial, adds, movement tests, and clear attack opportunities. Combat should reward mastery without requiring one-mistake death or strict memorization as the default run experience.
 
 ## Core resources and states
 
@@ -66,6 +70,20 @@ Press attack during the late dash or shortly after the dash to perform a quick r
 - Generic prosthetic activation
 - Deathblow execution
 
+## Technique relationship
+
+Techniques may modify the timing reward, resource return, target condition, posture pressure, movement follow-up, execution payoff, or prosthetic behavior associated with approved combat actions.
+
+They must not:
+
+- replace the base sword kit with unrelated spell rotations,
+- create a new button for every Technique,
+- obscure attack direction or enemy response rules,
+- make parry, posture, movement, or deathblows broadly optional,
+- depend on an exact multi-Technique combination to function.
+
+Each Technique remains owned by [Technique System](TECHNIQUES.md). This file continues to own the underlying combat action and response vocabulary.
+
 ## Response rules
 
 Enemy attacks should communicate the intended response through silhouette, timing, and consistent visual language:
@@ -81,7 +99,7 @@ Enemy attacks should communicate the intended response through silhouette, timin
 
 Posture is not a second health bar. It represents control of the exchange. When an enemy's posture breaks, the enemy enters a visually distinct vulnerable state and may become deathblow-ready.
 
-Deathblows are punctuation and reward. Their cues, animation weight, and contact points must remain clear even in crowded encounters.
+Deathblows are punctuation and reward. Their cues, animation weight, and contact points must remain clear even in crowded encounters or when Execution Techniques trigger additional effects.
 
 ## Animation requirements
 
@@ -97,6 +115,8 @@ Akio's base sword library requires distinct animations for:
 
 These are in addition to core movement, parry, block, hurt, death, deathblow, and prosthetic-use states.
 
+Techniques should reuse this animation library unless a separately approved mechanic creates explicit additional animation scope.
+
 ## VFX requirements
 
 - Clean, distinct sword trails for all three combo attacks
@@ -104,18 +124,19 @@ These are in addition to core movement, parry, block, hurt, death, deathblow, an
 - Counter Cut spark/flash that follows a successful deflect
 - Dash Slash motion trail
 - Effects must not obscure attack direction, guard state, parry timing, or deathblow readiness
+- Technique cues should reuse approved combat, Aspect, and prosthetic language before requiring bespoke effects
 
 ## Readability hierarchy
 
 From quietest to strongest visual priority:
 
 1. Frequent movement and idle effects
-2. Normal hit feedback
+2. Normal hit and passive Technique feedback
 3. Standard attack trails and projectiles
-4. Parry and mechanic-specific warnings
+4. Technique thresholds, parry, and mechanic-specific warnings
 5. Posture break and deathblow opening
 6. Boss phase transition, Shrine choice, or major system state change
 
 ## Implementation boundary
 
-Exact frame data, damage values, posture formulas, invulnerability durations, input buffers, and cancel rules belong in implementation documentation or code. This file owns the design intent, move roles, and interaction vocabulary.
+Exact frame data, damage values, posture formulas, invulnerability durations, input buffers, cancel rules, Technique values, and encounter tuning belong in implementation documentation or code. This file owns the design intent, move roles, and interaction vocabulary.

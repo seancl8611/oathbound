@@ -4,7 +4,7 @@ title: Milestone 2 — Complete Area 1 Production
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 
 # Milestone 2 — Complete Area 1 Production
@@ -23,6 +23,7 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - [Area 1 Minibosses](../../content/area_1/MINIBOSSES.md)
 - [Keeper of the Gate](../../content/area_1/BOSS.md)
 - [Corruption and Shrines](../../gameplay/CORRUPTION_AND_SHRINES.md)
+- [Room Types](../../content/ROOM_TYPES.md)
 - [Shrine Interface](../../ui_ux/SHRINE_INTERFACE.md)
 - [Core Combat and Corruption VFX](../CORE_VFX.md)
 - [Art Direction](../ART_DIRECTION.md)
@@ -56,8 +57,11 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - Final Wolf, Wraith, and Ronin VFX sets
 - Complete Tier I–IV Aspect mutation overlays
 - Final Aspect-specific iconography and selection presentation
+- Technique cards, four-slot/reserve UI, refinements, replacement states, and route-reward marker family
+- Full Technique, Relic, currency, temporary-capacity, and consumable art families
 - Strand NPCs and final Peddler character
-- Full item, boon, relic, currency, and consumable families
+
+Milestone 2 may use temporary developer markers to test reward routing. Final shared Technique and route-reward presentation belongs to Milestone 4.
 
 ## Dependency-driven batches
 
@@ -77,7 +81,7 @@ Exact commercial batch grouping may be adjusted during quotation without changin
 - Archer draw/release, Bilemass puddles, and Warden restraint stages remain readable under pressure.
 - Village Ogre clearly teaches shield-facing and response rules.
 - Collector remains oppressive without hiding intent.
-- Keeper’s phases preserve identity while changing response rules.
+- Keeper's phases preserve identity while changing response rules.
 - All functional room types read at a glance.
-- Corruption Full, Embrace, and Resist cues remain distinct without prematurely defining final Aspect identities.
+- Corruption Full, Embrace, and Resist cues remain distinct without prematurely defining final Aspect or Technique identities.
 - Area 1 remains cohesive from entry through boss completion.

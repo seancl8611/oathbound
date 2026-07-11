@@ -9,9 +9,12 @@ topics:
   - prosthetics
   - tools
   - vfx
+  - prosthetic-techniques
 related:
   - GAMEPLAY-PROSTHETICS
+  - GAMEPLAY-TECHNIQUES
   - CHAR-AKIO
+  - ART-TECHNIQUE-VFX
   - ART-MILESTONE-04
 ---
 
@@ -99,10 +102,23 @@ Each prosthetic solves a specific combat problem. Effects must communicate the t
 
 **Technical:** activation may be strong; the sustained state stays quiet. Use contained red accents, not holy healing waves.
 
+## Prosthetic Technique extensions
+
+Temporary Prosthetic Techniques extend the approved tool identity rather than commission a second unrelated VFX family.
+
+Examples include:
+
+- a clearly bounded scorched zone attached to Flame Vent,
+- a stronger stored-posture release attached to Mirror Umbrella,
+- a modified pull or marked-target response attached to Fang Harpoon,
+- a temporary state marker attached to Bloodletting Gourd.
+
+Each extension must specify its changed footprint, target state, duration, and refinement difference. Reuse the base tool effect wherever the mechanic remains readable.
+
 ## Shared production rules
 
 - Tool effects remain below parry, posture break, deathblow, Shrine choice, and boss-transition cues in the global hierarchy.
 - Tool footprints must remain readable over all three area palettes.
 - Status markers require consistent active, expiring, and cleared states.
 - Any tool that cannot work with the generic activation pose must be identified before quotation as additional animation scope.
-- Exact costs, cooldowns, and upgrade behavior belong to gameplay documentation and remain tunable.
+- Exact costs, cooldowns, permanent upgrades, and Prosthetic Technique behavior belong to gameplay documentation and remain tunable.

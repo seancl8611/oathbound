@@ -11,7 +11,7 @@ Authoritative art direction, technical standards, asset inventory, outsourcing w
 - [Core Combat and Corruption VFX](CORE_VFX.md)
 - [Blood Aspect VFX](ASPECT_VFX.md)
 - [Prosthetic Tool VFX](PROSTHETIC_VFX.md)
-- [Combat Stance VFX](STANCE_VFX.md)
+- [Technique VFX](TECHNIQUE_VFX.md)
 - [Item, Pickup, and Reward Art](ITEM_REWARD_ART.md)
 - [Outsourcing Workflow](OUTSOURCING_WORKFLOW.md)
 - [Art Milestones](milestones/README.md)

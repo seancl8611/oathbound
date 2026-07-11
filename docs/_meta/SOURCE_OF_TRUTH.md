@@ -24,11 +24,11 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
 | Blood Aspect mechanics | `docs/gameplay/BLOOD_ASPECTS.md` |
 | Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
+| Technique mechanics, active slots, reserve, and refinements | `docs/gameplay/TECHNIQUES.md` |
 | Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
 | Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
 | Prosthetic tool mechanics | `docs/gameplay/PROSTHETICS.md` |
-| Stance identities and mechanics | `docs/gameplay/STANCES.md` |
-| Items, currencies, and rewards | `docs/gameplay/ITEMS_AND_REWARDS.md` |
+| Items, currencies, room rewards, and reward cadence | `docs/gameplay/ITEMS_AND_REWARDS.md` |
 | Beast Blood canon | `docs/lore/BEAST_BLOOD.md` |
 | Returning Blood canon | `docs/lore/RETURNING_BLOOD.md` |
 | The Order | `docs/lore/THE_ORDER.md` |
@@ -63,7 +63,7 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Shared combat and Corruption VFX | `docs/art_production/CORE_VFX.md` |
 | Blood Aspect VFX | `docs/art_production/ASPECT_VFX.md` |
 | Prosthetic VFX | `docs/art_production/PROSTHETIC_VFX.md` |
-| Stance VFX | `docs/art_production/STANCE_VFX.md` |
+| Technique VFX | `docs/art_production/TECHNIQUE_VFX.md` |
 | Item, pickup, and reward art | `docs/art_production/ITEM_REWARD_ART.md` |
 | Art asset inventory | `docs/art_production/ASSET_INVENTORY.md` |
 | Outsourcing process | `docs/art_production/OUTSOURCING_WORKFLOW.md` |
@@ -71,6 +71,7 @@ This registry identifies ownership only. It is not a dependency map and does not
 | Run HUD and combat feedback | `docs/ui_ux/HUD.md` |
 | Strand HUD and interaction prompts | `docs/ui_ux/STRAND_HUD_AND_PROMPTS.md` |
 | Shrine interface | `docs/ui_ux/SHRINE_INTERFACE.md` |
+| Technique rewards, replacement, and reserve interface | `docs/ui_ux/TECHNIQUE_REWARDS.md` |
 | Shared hub-interface language | `docs/ui_ux/HUB_INTERFACES.md` |
 | Blood Mirror and trial interface | `docs/ui_ux/BLOOD_MIRROR_TRIALS.md` |
 | Run-results and Strand-return interface | `docs/ui_ux/RUN_RESULTS.md` |

@@ -9,13 +9,16 @@ topics:
   - hud
   - posture
   - corruption
+  - techniques
   - deathblow
   - damage-numbers
   - enemy-indicators
 related:
   - GAMEPLAY-COMBAT
   - GAMEPLAY-CORRUPTION-SHRINES
+  - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
+  - UI-TECHNIQUE-REWARDS
   - ART-CORE-VFX
 ---
 
@@ -28,8 +31,8 @@ The Run HUD displays immediate combat state, current build tools, and run-only p
 - Player HP bar
 - Player posture bar
 - Ten Spirit emblem segments in the current Milestone 1 baseline
-- Equipped stance icon
 - Equipped prosthetic icon and cooldown or charge state
+- Compact active-Technique indicators where a Technique has combat-relevant state
 - Run currency counters
 - Status-effect row
 - Corruption meter
@@ -39,13 +42,32 @@ The Run HUD displays immediate combat state, current build tools, and run-only p
 - Damage numbers
 - Deathblow prompt
 
+The reserve Technique does not need a persistent combat-HUD slot because it is inactive. Full active/reserve build review belongs in the pause and reward interfaces.
+
+## Technique HUD behavior
+
+Most Techniques are passive modifications and should not add persistent HUD clutter.
+
+Show a Technique indicator during combat only when the player needs immediate state information, such as:
+
+- a stack or Focus threshold,
+- a temporary activation window,
+- an internal cooldown,
+- a stored charge,
+- a marked target,
+- a ready refinement payoff.
+
+When no state requires tracking, the Technique remains visible only in the build overview and reward screens.
+
+The HUD should support up to four active Technique icons in a compact build strip or contextual state area without implying four separate ability buttons.
+
 ## Information hierarchy
 
 1. HP and immediate survival
 2. Player and enemy posture
 3. Spirit and active prosthetic availability
 4. Deathblow state
-5. Active status effects and stance
+5. Active Technique state and urgent status conditions
 6. Corruption and Aspect Tier
 7. Currency and non-urgent run information
 
@@ -78,7 +100,9 @@ Required states:
 - after Embrace,
 - maximum Tier.
 
-The module shows selected Aspect and Tier I-IV after unlock. It uses dark crimson pressure language and must not resemble mana. Full-state feedback connects to the [Corruption Full Cue](../art_production/CORE_VFX.md#corruption-full-cue).
+The module shows selected Aspect and Tier I–IV after unlock. It uses dark crimson pressure language and must not resemble mana. Full-state feedback connects to the [Corruption Full Cue](../art_production/CORE_VFX.md#corruption-full-cue).
+
+The selected Aspect should remain more visually prominent than any single passive Technique because it is the run's central identity.
 
 ## Enemy health and posture indicators
 
@@ -94,19 +118,19 @@ Larger screen-anchored bar with name plate and optional portrait space.
 
 Full-width presentation with name, health, posture, and phase markers where required. Multi-cycle encounters such as Blood Lotus need clear Heart vulnerability and deathblow-chunk progress without inventing unsupported values.
 
-## Damage numbers
+## Damage numbers and status language
 
 Use a hand-inked, gameplay-readable style rather than a clean modern UI font. Numbers rise and fade quickly to avoid stacking.
 
-Current color language:
+Current approved color language:
 
 - red: HP damage,
 - pale yellow: posture damage,
 - orange: Burn,
-- cyan: Frost,
-- violet: Hex,
 - pale blue: Shock,
 - separate restrained treatment for healing and critical hits.
+
+Frost and Hex are no longer baseline player status families after removal of the stance system. Do not retain their HUD or damage-number requirements unless a future approved enemy, Technique, Relic, or encounter reintroduces them with a defined mechanic.
 
 Color cannot be the only differentiator; weight, outline, prefix, icon, or motion should reinforce type where practical. Critical values use subtle scale or weight changes rather than dramatic spectacle.
 
@@ -114,14 +138,14 @@ Color cannot be the only differentiator; weight, outline, prefix, icon, or motio
 
 The input prompt appears alongside the persistent world-space Deathblow Cue and should be understood in approximately 0.3 seconds. The cue and input prompt must read together without competing.
 
-The persistent execution indicator stays anchored over the enemy's upper body for the entire valid window, pulses subtly, and remains distinct from posture break, damage numbers, and status icons.
+The persistent execution indicator stays anchored over the enemy's upper body for the entire valid window, pulses subtly, and remains distinct from posture break, damage numbers, Technique markers, and status icons.
 
 ## World-space cue relationship
 
-The HUD complements rather than duplicates [Core Combat and Corruption VFX](../art_production/CORE_VFX.md). Parry, Posture Break, Deathblow, and Corruption Full cues originate in world space or on Akio; the HUD provides persistent context and resource state.
+The HUD complements rather than duplicates [Core Combat and Corruption VFX](../art_production/CORE_VFX.md). Parry, Posture Break, Deathblow, Corruption Full, target marks, and Technique-trigger cues originate in world space or on Akio; the HUD provides persistent context and resource state.
 
 ## Delivery requirements
 
-The artist supplies modular bars, fills, frames, icons, markers, number style sheets, and state examples. Godot owns layout, values, responsive anchoring, timing, cooldown motion, spawning, and visibility logic.
+The artist supplies modular bars, fills, frames, icons, markers, number style sheets, Technique-state examples, and required active/inactive states. Godot owns layout, values, responsive anchoring, timing, cooldown motion, spawning, and visibility logic.
 
 All elements must remain legible over Hushiro, Yomori, and Kagutsuchi backgrounds. Critical state should be understood in under one second without pulling attention away from attack windups.
