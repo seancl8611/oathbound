@@ -7,5 +7,11 @@
 - [Merchant Stall](interactibles/MERCHANT_STALL.md)
 - [Discovery Board](interactibles/DISCOVERY_BOARD.md)
 - [Bloodwell](interactibles/BLOODWELL.md)
+- [Blood Cavern and Blood Mirror](interactibles/BLOOD_CAVERN.md)
 
-Detailed Blood Cavern, Blood Mirror, return-results, and trial-system migration begins after page 35 of the source production bible.
+Related system and interface sources:
+
+- [Blood Cavern Trial System](../../gameplay/BLOOD_CAVERN_TRIALS.md)
+- [Blood Mirror and Trials Interface](../../ui_ux/BLOOD_MIRROR_TRIALS.md)
+- [Run Results and Strand Return](../../ui_ux/RUN_RESULTS.md)
+- [Pause and Build Overview](../../ui_ux/PAUSE_OVERVIEW.md)
