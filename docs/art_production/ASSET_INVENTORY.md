@@ -4,20 +4,21 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 topics:
   - asset-counts
   - characters
   - environments
   - ui
   - vfx
+  - items
 related:
   - OVERVIEW-FULL-SCOPE
 ---
 
 # Asset Inventory
 
-This is the high-level production inventory. Individual character, system, regional, encounter, and milestone files own detailed animation and state lists.
+This is the high-level production inventory. Individual character, system, regional, encounter, VFX, item, and milestone files own detailed animation and state lists.
 
 ## Master counts
 
@@ -30,31 +31,27 @@ This is the high-level production inventory. Individual character, system, regio
 | Area 3 enemies | 5 | Court and inner-sanctum set |
 | Minibosses | 6 | Two per main area |
 | Bosses | 3 | One principal boss encounter per main area |
-| Environment sets | 4 | Strand and Areas 1–3; Blood Cavern is a Strand interior subset |
-| VFX groups | 12 | High-level grouping; individual cue count is more granular |
-| UI / room-art groups | 12 | High-level grouping; screen list is more granular |
-| Item / consumable groups | 7 | Must be reviewed against revised currency families |
+| Environment sets | 4 | Strand and Areas 1–3; specialized interiors and arenas remain subsets |
+| Blood Aspect families | 3 | Wolf, Wraith, Ronin plus modular Tier escalation |
+| Prosthetic families | 8 | One approved tool family each |
+| Stance families | 5 | Storm, Frost, Ember, Hex, Shadow |
+| Currency families | 4 current | Mist, Scroll, Boss Emblem, Gold |
+| Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
 
-## Player
+High-level counts for UI screens, VFX cues, boons, relics, consumables, and room variants remain granular and should be finalized when catalog size is locked.
+
+## Player and player-system art
 
 - Akio concept and final base sprite
 - Complete base combat animation library
+- Separate ground shadow
 - Core sword trails and combat feedback
-- Wolf, Wraith, and Ronin VFX families
+- Wolf Prey Mark and pressure states
+- Wraith afterimage, perfect-dodge, and Mist-Step states
+- Ronin parry, Counter Cut, and Focus states
 - Tier I–IV modular mutation overlays
-- Five stance VFX families
-- Eight prosthetic VFX families
-
-## Strand characters
-
-| Character | Required production direction |
-|---|---|
-| Keeper | Concept, final humanoid noble-spirit sprite, restrained idle/talk variants |
-| Peddler | Concept, seated merchant sprite, modular salvage spread, shop-facing behaviors |
-| Smith | Concept, final working-smith sprite, forge ambient and interaction loops |
-| Raven | Perched design, harness/tags, idle, present-item, arrival/takeoff/landing states |
-| Undead Samurai | Concept, final archaic Order-samurai sprite, training/instruction states |
-| Scribe | Concept, final recorder sprite, book/board interactions, writing and talk states |
+- Eight prosthetic tool VFX and icons
+- Five stance VFX and icons
 
 ## Combatants
 
@@ -62,91 +59,89 @@ This is the high-level production inventory. Individual character, system, regio
 - **Area 2:** 4 standard enemies, Embered Pilgrim, Rotwood Host, Twin Maws encounter
 - **Area 3:** 5 standard enemies, Blood Lotus, Eternal Swordsman, Eclipse Shogun
 
-Pages 36–70 establish the standard-enemy production briefs. Pages 71–105 complete the Area 3 standard roster and establish all six miniboss briefs plus all three principal boss encounters.
+## Environment sets and rooms
 
-## Environment sets
+- Strand hub, docks, NPC stations, Blood Cavern, and Blood Mirror
+- Hushiro modular base kit, functional rooms, miniboss spaces, and old-gate boss arena
+- Yomori base kit, functional rooms, failed-purification site, Rotwood arena, and Twin Maws arena
+- Kagutsuchi base kit, functional rooms, Blood Lotus arena, duel court, and Wellspring throne-space
 
-- Strand hub, docks, role-specific NPC stations, shoreline atmosphere, and Blood Cavern/Mirror interior
-- Hushiro Gate Village base kit, functional rooms, miniboss spaces, and old-gate boss arena
-- Yomori Grove base kit, failed purification site, Rotwood arena, Twin Maws arena, rooms, hazards, and props
-- Kagutsuchi Court base kit, Blood Lotus fissure arena, duel court, Wellspring throne-space, rooms, transitions, and props
+Cross-area room types:
 
-## Strand interactible art
+- combat,
+- Shrine,
+- rest,
+- shop,
+- treasure/miniboss,
+- boss.
 
-- Boat and departure lantern/dock presentation
-- Forge Bench, forge props, ember/heat layers, and upgrade-screen language
-- Merchant Stall, stock spread, salvage props, and shop-screen language
-- Discovery Board, papers, diagrams, codex presentation, and unlock states
-- Bloodwell landmark, carved channels, contained blood surface, progression screen, and reformation effects
-- Blood Cavern outer hall and Blood Mirror inner chamber
+## UI and UX art
 
-## UI/UX
+- Run HUD: HP, posture, ten Spirit segments, stance, prosthetic cooldown, currency, status, Corruption, Aspect, and Tier
+- Damage-number style family
+- Standard-enemy health/posture indicators
+- Miniboss and boss bars with name and phase support
+- Deathblow prompt and persistent cue integration
+- Strand HUD and persistent currency counters
+- Interaction prompts and locked/available states
+- Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause screens
+- Blood Lotus multi-cycle UI support
+- Front end, settings, controls, save/loading, credits, and completion presentation
 
-- Combat HUD
-- Corruption meter and Blood Aspect Tier indicator
-- Shrine Resist/Embrace interface
-- Boat run-start screen
-- Forge, merchant, Discovery Board, Bloodwell, and Blood Mirror screens
-- Trial states and run-results presentation
-- Pause/build overview
-- Miniboss and boss health/posture presentation
-- Blood Lotus multi-cycle Heart/posture support
-- Settings, controls, save/loading, and front end
+## Shared VFX families
 
-## Shared VFX briefs established through page 105
+### Core combat and Corruption
 
-- Parry Spark
+- Parry Spark with standard/perfect grades
+- Hit Spark
+- Sword Trail variants
 - Posture Break Cue
 - Deathblow Cue
 - Corruption Full Cue
 - Embrace Transformation Cue
 - Resist Stabilization Cue
 
-The Wolf Prey Mark brief starts on page 105 but continues beyond the current source boundary and remains for the next migration batch.
+### Blood Aspects
 
-## Enemy and encounter production dependencies
+- Wolf target mark, healthy/wounded/finishable states, and pressure buildup
+- Wraith afterimage, vanish/reappear, and Mist-Step
+- Ronin enhanced contact, Counter Cut, and Focus
 
-### Standard enemies
+### Prosthetics
 
-- Corrupted Archer projectile and retreat states
-- Cellar Bilemass projectile and puddle readability
-- Warden restraint stages and outcomes
-- Area 1 hound attack-token support
-- Area 2 spirit targetability, lantern, buff-link, mist, and pounce states
-- Court Guard and Court Caster one-time revival states
-- Elite Defender shield orientation and guard-break states
-- Hollow Vessel spawn ownership, Spillborn emergence, and progressive damage states
-- Court Sentinel composed/frenzy state transition
+- Beast-Bane Whistle
+- Thunder Rod
+- Smoke Gourd
+- Fang Harpoon
+- Mirror Umbrella
+- Flame Vent
+- Mist Raven
+- Bloodletting Gourd
 
-### Area 1 major encounters
+### Stances
 
-- Village Ogre shield coverage, charge, sweep warning, impacts, and gate-yard support
-- Collector fog dimming, chain, snare, ground masses, and audio layers
-- Keeper Phase 1 duel, rupture transition, Phase 2 corruption, shockwave, sweep, and lane-charge effects
+- Storm chain and Shock
+- Frost chill, freeze, and shatter
+- Ember Burn and scorch
+- Hex curse and doom
+- Shadow mark and consume
 
-### Area 2 major encounters
+## Item and reward art
 
-- Embered Pilgrim channel-state flame, smoke, root-feed, and failed-rite arena changes
-- Rotwood shell crack, shell break, exposed core, roots, fungus, and blood-sap effects
-- Twin Maws simultaneous role readability, shell/anchor states, soul-transfer transition, and survivor empowerment
+- Mist, Scroll, Boss Emblem, and Gold world/HUD pairs
+- Health and Spirit pickups
+- Boon card template and icons
+- Relic cards and rarity frames
+- Area-specific breakables with intact/broken states
+- Area-specific treasure and reward objects with unopened/opened states
+- Consumables and future item families as their mechanics are approved
 
-### Area 3 major encounters
+## Milestone 1 production lock
 
-- Blood Lotus Heart, three Stalks, fissure states, punishment projectiles, core exposure, and multi-cycle UI
-- Eternal Swordsman restrained spirit haze, duel trails, and reposition cues
-- Eclipse Shogun three complete phase presentations, polearm continuity, Wellspring arena evolution, eclipse motif, and ending transition dependencies
+The polished Milestone 1 brief establishes exact delivery subsets, working frame counts, source-file requirements, review gates, batch folders, and acceptance criteria for Akio, Corrupted Swordsman, Blighted Hound, Hollow, VFX-001 through VFX-004, Combat HUD, and Hushiro Combat Room Kit.
 
-## Items and rewards
-
-- Boons
-- Relics
-- Consumables
-- Currencies and upgrade materials
-- Boss Emblems
-- Chests, pickups, and breakables
-
-The current item/consumable count remains provisional because currency-family changes may require the seven-group estimate to be split or renamed.
+The separate Posture Break Cue exists in the broader inventory, but its exact Milestone 1 contractor batch assignment remains unresolved because it is absent from the polished four-effect bundle.
 
 ## Inventory rule
 
-When a system, enemy, boss, room type, item family, UI screen, or VFX family is added or removed, update this inventory and its assigned milestone in the same change.
+When a system, enemy, boss, room type, item family, UI screen, or VFX family is added, removed, or reassigned, update this inventory and its assigned milestone in the same change.
