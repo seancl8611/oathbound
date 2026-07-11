@@ -17,6 +17,13 @@ last_reviewed: 2026-07-11
 
 Unlocked Aspects and the selected loadout option persist. Blood Aspect Tier starts at Tier 0 each run and resets after death or successful completion. Corruption also resets.
 
+**Affected files**
+
+- `docs/gameplay/BLOOD_ASPECTS.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/ui_ux/SHRINE_INTERFACE.md`
+
 **Status:** resolved
 
 ### Corruption and Resist rules
@@ -24,6 +31,12 @@ Unlocked Aspects and the selected loadout option persist. Blood Aspect Tier star
 **Resolution**
 
 Corruption is gained through combat accomplishments and major encounter progress. Taking damage is not a universal source in v1. Resist keeps the current Tier, reduces Corruption to approximately 75%, and grants a short-term support reward such as healing. Exact values remain tuning variables.
+
+**Affected files**
+
+- `docs/gameplay/CORRUPTION_AND_SHRINES.md`
+- `docs/ui_ux/HUD.md`
+- `docs/ui_ux/SHRINE_INTERFACE.md`
 
 **Status:** resolved
 
@@ -35,6 +48,13 @@ Corruption is gained through combat accomplishments and major encounter progress
 
 The Embered Pilgrim and Rotwood Host are Area 2's two minibosses. Rootfang and Briarthorn form the Twin Maws boss. Both twins begin active, and the first defeated transfers its half of the corrupted bond to the survivor.
 
+**Affected files**
+
+- `docs/content/area_2/OVERVIEW.md`
+- `docs/content/area_2/MINIBOSSES.md`
+- `docs/content/area_2/BOSS.md`
+- `docs/art_production/milestones/MILESTONE_05.md`
+
 **Status:** resolved
 
 ### Area 3 encounter classification
@@ -42,6 +62,13 @@ The Embered Pilgrim and Rotwood Host are Area 2's two minibosses. Rootfang and B
 **Resolution**
 
 Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal boss with Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases.
+
+**Affected files**
+
+- `docs/content/area_3/OVERVIEW.md`
+- `docs/content/area_3/MINIBOSSES.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
 
 **Status:** resolved
 
@@ -78,6 +105,14 @@ The five stance identities are Storm, Frost, Ember, Hex, and Shadow. The eight p
 
 Final costs, cooldowns, upgrade paths, stack values, durations, and balance caps remain open.
 
+**Affected files**
+
+- `docs/gameplay/STANCES.md`
+- `docs/gameplay/PROSTHETICS.md`
+- `docs/art_production/STANCE_VFX.md`
+- `docs/art_production/PROSTHETIC_VFX.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+
 **Status:** resolved at roster/identity level
 
 ## Open questions
@@ -110,6 +145,13 @@ The broader production bible defines the effect, but the polished Milestone 1 co
 
 Does the Elite Defender use Kagutsuchi Court's one-time revival mechanic, or remain a pure shield-and-spear positional defender?
 
+**Affected files**
+
+- `docs/content/area_3/enemies/ELITE_DEFENDER.md`
+- `docs/content/area_3/ENEMIES.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+
 **Status:** open
 
 ### Twin Maws transition implementation
@@ -124,6 +166,13 @@ How are transition invulnerability, survivor health and posture, inherited attac
 
 Both twins begin active. The first defeated empowers the survivor, which remains recognizably itself.
 
+**Affected files**
+
+- `docs/content/area_2/BOSS.md`
+- `docs/art_production/milestones/MILESTONE_05.md`
+- `docs/ui_ux/HUD.md`
+- future boss implementation documentation
+
 **Status:** open
 
 ### Blood Lotus cycle tuning
@@ -133,6 +182,13 @@ Both twins begin active. The first defeated empowers the survivor, which remains
 **Question**
 
 What are the final Heart-cycle count, Stalk timer, punishment threshold, deathblow HP chunks, Stalk relocation rules, and posture reset behavior?
+
+**Affected files**
+
+- `docs/content/area_3/MINIBOSSES.md`
+- `docs/ui_ux/HUD.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
 
 **Status:** open
 
@@ -148,6 +204,14 @@ What are the final trial counts, unlock sequence, reward tables, mastery conditi
 
 Trials may grant Aspect access, small capped reliability improvements, currency, cosmetics, lore reflections, or completion marks. They cannot add new Tiers or remove Embrace danger.
 
+**Affected files**
+
+- `docs/gameplay/BLOOD_CAVERN_TRIALS.md`
+- `docs/gameplay/BLOOD_ASPECTS.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/ui_ux/BLOOD_MIRROR_TRIALS.md`
+- `docs/art_production/milestones/MILESTONE_03.md`
+
 **Status:** open
 
 ### Stance and prosthetic tuning
@@ -162,6 +226,8 @@ What are the final activation rules, Spirit costs, cooldowns, durations, stack t
 
 - `docs/gameplay/STANCES.md`
 - `docs/gameplay/PROSTHETICS.md`
+- `docs/art_production/STANCE_VFX.md`
+- `docs/art_production/PROSTHETIC_VFX.md`
 - `docs/art_production/milestones/MILESTONE_04.md`
 
 **Status:** open
@@ -178,6 +244,14 @@ What are the final boon, relic, consumable, breakable, and reward-object counts,
 
 The shared categories, card templates, world/HUD relationships, and Common–Legendary rarity presentation are approved.
 
+**Affected files**
+
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/art_production/ITEM_REWARD_ART.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+- `docs/ui_ux/HUD.md`
+
 **Status:** open
 
 ### Order knowledge and intent
@@ -187,6 +261,12 @@ The shared categories, card templates, world/HUD relationships, and Common–Leg
 **Question**
 
 How much does the Order know about the Shogun, Wellspring, Returning Blood, and Akio's chance of returning?
+
+**Affected files**
+
+- `docs/lore/THE_ORDER.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/characters/AKIO.md`
 
 **Status:** open
 
@@ -198,6 +278,11 @@ How much does the Order know about the Shogun, Wellspring, Returning Blood, and 
 
 Who created the barrier, and what is its exact relationship to the Shogun and Wellspring?
 
+**Affected files**
+
+- `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+
 **Status:** open
 
 ### The Shogun's ancient enemy
@@ -208,6 +293,12 @@ Who created the barrier, and what is its exact relationship to the Shogun and We
 
 Who or what was the ancient enemy the Eclipse Shogun defeated using Beast Blood, and how did that conflict lead to the army's preservation and the island's current state?
 
+**Affected files**
+
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/TIMELINE.md`
+
 **Status:** open
 
 ### Ending structure
@@ -217,5 +308,11 @@ Who or what was the ancient enemy the Eclipse Shogun defeated using Beast Blood,
 **Question**
 
 What final decision or consequence follows the Shogun's defeat at the Wellspring?
+
+**Affected files**
+
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/art_production/milestones/MILESTONE_07.md`
 
 **Status:** open
