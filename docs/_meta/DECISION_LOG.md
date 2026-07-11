@@ -203,13 +203,17 @@ Mist, Scrolls, and Boss Emblems are persistent currencies. Gold is run-only. Scr
 
 ## 2026-07-11 — Player-system roster identities
 
-**Status:** approved
+**Status:** superseded
 
 **Decision**
 
-The five stances are Storm, Frost, Ember, Hex, and Shadow. The eight prosthetics are Beast-Bane Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, and Bloodletting Gourd. Their tactical identities and visual footprints are approved; exact numbers and upgrade paths remain tunable.
+The five stances were Storm, Frost, Ember, Hex, and Shadow. The eight prosthetics are Beast-Bane Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, and Bloodletting Gourd.
 
-**Affected documents**
+**Superseded by**
+
+The approved Blood Aspect central-identity and Technique-system decisions below. The eight prosthetic identities remain approved; the five stance families are removed.
+
+**Historical affected documents**
 
 - `docs/gameplay/STANCES.md`
 - `docs/gameplay/PROSTHETICS.md`
@@ -231,3 +235,103 @@ Milestone 1 begins only after a separately paid Style Test is approved. The appr
 - `docs/art_production/TECHNICAL_STANDARDS.md`
 - `docs/art_production/milestones/MILESTONE_01.md`
 - `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-07-11 — Blood Aspects are the central run identity
+
+**Status:** approved
+
+**Decision**
+
+Every post-unlock run confirms one Wolf, Wraith, or Ronin Blood Aspect. The Aspect is the broad tactical identity, and Corruption plus Shrine Embrace provide fixed Tier 0–IV vertical escalation. The player may Resist and finish without reaching Tier IV, but the Aspect is no longer an optional layer beneath a separate stance system.
+
+Techniques provide horizontal customization around the selected Aspect. They naturally connect through shared combat verbs without replacing the Aspect.
+
+**Replaces**
+
+The previous structure in which Blood Aspect mutation was an optional path layered on top of five elemental stances.
+
+**Affected documents**
+
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/gameplay/BLOOD_ASPECTS.md`
+- `docs/gameplay/CORRUPTION_AND_SHRINES.md`
+- `docs/gameplay/TECHNIQUES.md`
+- `docs/gameplay/CORE_LOOP.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+
+## 2026-07-11 — Four active Techniques and one reserve
+
+**Status:** approved
+
+**Decision**
+
+The former stance and broad boon layers are replaced by temporary in-run Techniques.
+
+- Akio begins each run with four empty active Technique slots and one empty inactive reserve slot.
+- There are no weak default Techniques and no full Technique inventory.
+- New Techniques fill empty slots, replace any active Technique, enter reserve, or may be declined for a smaller displayed fallback.
+- Replacing an active Technique moves the displaced Technique to reserve; overwriting occupied reserve permanently loses its previous Technique for the run after confirmation.
+- Active/reserve swapping is limited to Technique reward screens and rest rooms.
+- Most Techniques are independently useful and synergize through shared combat verbs.
+- A Technique may receive at most one slotless refinement.
+- No refinement chain is deeper than one, and no normal Technique requires an exact multi-Technique combination.
+- Prosthetic Techniques use the same active slots and only appear for the equipped tool.
+
+**Affected documents**
+
+- `docs/gameplay/TECHNIQUES.md`
+- `docs/gameplay/PROSTHETICS.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/ui_ux/TECHNIQUE_REWARDS.md`
+- `docs/ui_ux/HUD.md`
+- `docs/ui_ux/PAUSE_OVERVIEW.md`
+
+## 2026-07-11 — Previewed room reward framework
+
+**Status:** approved
+
+**Decision**
+
+Room function and primary payout are separate. Standard combat routes preview a primary reward such as Technique opportunity, Gold, Mist, Scrolls, recovery, or temporary capacity.
+
+- Technique rewards occur at selected combat and milestone opportunities rather than after every room.
+- Shrines own Resist/Embrace or ordinary Shrine support and do not normally offer Techniques.
+- Rest rooms own recovery and active/reserve swapping.
+- Shops use Gold and may sell recovery, capacity, rerolls, Techniques, refinements, prosthetic support, consumables, or occasional Relics.
+- Treasure and miniboss rewards provide higher-value build options.
+- Regional bosses provide persistent progression, current-run power, and transition recovery.
+- The Eclipse Shogun resolves through the Wellspring and results flow.
+
+The provisional successful-run target is six to eight Technique-related decisions, with Areas 1–2 forming the build and Area 3 refining or replacing it. Exact room counts, probabilities, and values remain balance work.
+
+**Affected documents**
+
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/content/ROOM_TYPES.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/ui_ux/TECHNIQUE_REWARDS.md`
+- `docs/ui_ux/SHRINE_INTERFACE.md`
+- `docs/art_production/ITEM_REWARD_ART.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+
+## 2026-07-11 — Stance art scope removed
+
+**Status:** approved
+
+**Decision**
+
+Storm, Frost, Ember, Hex, and Shadow stance families are removed from gameplay and art scope. Milestone 4 now owns reusable Technique reward/build presentation and only the bespoke Technique combat cues required after reuse of base combat, Aspect, and prosthetic VFX.
+
+Burn and Shock remain supported through approved prosthetics. Frost and Hex are not baseline player status requirements.
+
+**Affected documents**
+
+- `docs/overview/FULL_GAME_SCOPE.md`
+- `docs/overview/PRODUCTION_ROADMAP.md`
+- `docs/art_production/TECHNIQUE_VFX.md`
+- `docs/art_production/ITEM_REWARD_ART.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_04.md`
+- `docs/ui_ux/HUD.md`
