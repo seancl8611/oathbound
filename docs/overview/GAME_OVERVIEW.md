@@ -1,6 +1,6 @@
 ---
 id: OVERVIEW-GAME
- title: Oathbound Game Overview
+title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
