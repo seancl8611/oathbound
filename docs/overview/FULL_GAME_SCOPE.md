@@ -5,25 +5,52 @@ category: overview
 status: draft
 authority: primary
 last_reviewed: 2026-07-10
+topics:
+  - full-scope
+  - asset-counts
+  - areas
+  - strand
+related:
+  - ART-ASSET-INVENTORY
+  - OVERVIEW-PRODUCTION-ROADMAP
 ---
 
 # Full Game Scope
 
 This document records the current production-level shape of Oathbound. Exact balance values, frame counts, room counts, and implementation details remain subject to playtesting.
 
+## Master scope summary
+
+| Asset group | Planned count | Current scope note |
+|---|---:|---|
+| Player character | 1 | Akio concept, final sprite, and complete combat animation library |
+| Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, and Scribe |
+| Area 1 standard enemies | 6 | Grounded village/garrison corruption roster |
+| Area 2 standard enemies | 4 | Forest, spirit, and predator roster |
+| Area 3 standard enemies | 5 | Preserved court and inner-sanctum roster |
+| Miniboss encounters | 6 | Two planned per main area |
+| Major bosses | 3 | One principal progression boss per area, including the final confrontation |
+| Environment sets | 4 | Strand plus Areas 1–3 |
+| VFX groups | 12 | Core combat, Blood Aspects, bosses, stances, and prosthetic support within current grouping |
+| UI / room-art groups | 12 | Combat, hub, Shrine, room, boss, and Blood Aspect presentation within current grouping |
+| Item / consumable groups | 7 | Current count requires later review against the evolving currency families |
+
+Blood Aspect UI and VFX are presently included inside the existing UI/room-art and VFX group counts rather than tracked as entirely separate top-level groups.
+
 ## Player
 
 - Akio base character and full combat animation library
-- Katana combat, posture, parry, block, dash, counter, and deathblow interactions
+- Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
+- Katana combat, posture, parry, block, dash, counter, deathblow, and prosthetic activation
 - Blood Aspect system: Wolf, Wraith, and Ronin
-- Tier 0 through Tier IV mutation progression
-- Five stance families
+- Tier 0 through Tier IV run-only mutation progression
+- Five planned stance families
 - Eight planned prosthetic-tool effect families
 - Boons, relics, consumables, currencies, and upgrade materials
 
-## Persistent hub
+## Persistent hub — The Strand
 
-The Strand contains six primary NPC roles:
+Six primary recurring NPCs:
 
 - Keeper
 - Peddler
@@ -32,16 +59,23 @@ The Strand contains six primary NPC roles:
 - Undead Samurai
 - Scribe
 
-Major interactibles include the Boat, Forge, Discovery Board, Bloodwell, Blood Cavern/Blood Mirror, and NPC stations.
+Primary interactibles and services:
+
+- Boat and run-start confirmation
+- Forge Bench and permanent combat/tool improvement
+- Merchant Stall
+- Discovery Board/codex
+- Bloodwell permanent meta progression
+- Blood Cavern training space and Blood Mirror Aspect trials
 
 ## Area 1 — Hushiro Gate Village
 
 Six standard enemies:
 
 - Corrupted Swordsman
-- Blighted Hound
-- Hollow
 - Corrupted Archer
+- Blighted Hounds
+- Hollow
 - Cellar Bilemass
 - Warden
 
@@ -56,18 +90,24 @@ Boss:
 
 ## Area 2 — Yomori Grove
 
-Four standard enemies currently planned:
+Four standard enemies:
 
 - Lingering Wraith
 - Lantern Wraith
 - Mist Shepherd
 - Stalker Hound
 
-The region includes two minibosses and a paired boss structure built around Rootfang and Briarthorn. Exact names and encounter structure should be confirmed in the Area 2 content documents before they are marked approved.
+Current major-encounter inventory:
+
+- The Embered Pilgrim
+- The Rotwood Host
+- Rootfang and Briarthorn / The Twin Maws structure
+
+Exact implementation and encounter sequencing remain documented as draft outside this page-range migration.
 
 ## Area 3 — Kagutsuchi Court
 
-Five standard enemies currently planned:
+Five standard enemies:
 
 - Court Guard
 - Court Caster
@@ -75,28 +115,38 @@ Five standard enemies currently planned:
 - Hollow Vessel
 - Court Sentinel
 
-Major encounters include the Blood Lotus, Eternal Swordsman, and Eclipse Shogun. Final encounter grouping and naming remain under review.
+Current major-encounter inventory:
 
-## Environments
+- Blood Lotus Heart/Stalk encounter
+- Eternal Swordsman
+- Eclipse Shogun
 
-- The Strand hub
+Final encounter grouping and implementation details remain under review.
+
+## Environment sets
+
+- The Strand
 - Hushiro Gate Village
 - Yomori Grove
 - Kagutsuchi Court
-- Blood Cavern/Blood Mirror interior
-- Wellspring and final transition spaces
+
+Additional specialized spaces, including Blood Cavern/Blood Mirror and the Wellspring, are treated as parts of the relevant hub or regional production packages rather than extra top-level environment sets unless later tracking requires a split.
 
 ## Interface and presentation
 
 - Combat HUD
-- Corruption, Blood Aspect, and Tier presentation
-- Shrine Resist/Embrace interface
+- Corruption meter
+- Blood Aspect icon and Tier indicator
+- Shrine Resist/Embrace screen
+- Boat Aspect-selection/run-start screen
+- Blood Mirror trial screen
 - Boss and miniboss presentation
 - Hub progression interfaces
-- Front end, settings, controls, loading, save feedback, credits, and completion presentation
+- Functional room presentation
+- Pause, overview, results, settings, controls, save/loading, credits, and completion presentation
 
 ## Art-production structure
 
 The current plan uses seven top-level art milestones with independently quoted internal batches. Milestones are dependency and playtest groupings, not equal-size contracts.
 
-See [Production Roadmap](PRODUCTION_ROADMAP.md) and [Art Milestones](../art_production/milestones/README.md).
+See [Production Roadmap](PRODUCTION_ROADMAP.md), [Asset Inventory](../art_production/ASSET_INVENTORY.md), and [Art Milestones](../art_production/milestones/README.md).

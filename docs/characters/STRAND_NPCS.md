@@ -1,48 +1,44 @@
 ---
 id: CHAR-STRAND-NPCS
-title: Strand NPCs
+title: Strand NPC Roster
 category: character
-status: draft
+status: approved
 authority: primary
 last_reviewed: 2026-07-10
+topics:
+  - strand
+  - npcs
+  - hub-services
+related:
+  - CONTENT-STRAND-OVERVIEW
+  - CONTENT-STRAND-INTERACTIBLES
 ---
 
-# Strand NPCs
+# Strand NPC Roster
 
-The Strand contains six primary recurring NPC roles. Detailed biographies, dialogue arcs, and final names can be expanded without changing the functional roster.
+The Strand contains six primary recurring NPC roles. The roster is authoritative here; each linked file owns the character's detailed identity, motion, animation, and presentation brief.
 
-## Keeper
+| NPC | Primary function | Detailed brief |
+|---|---|---|
+| Keeper | Grave steward, threshold guide, and historical perspective | [Keeper](strand/KEEPER.md) |
+| Peddler | Salvage merchant and stock-based purchasing | [Peddler](strand/PEDDLER.md) |
+| Smith | Forge-master and permanent combat/tool improvement | [Smith](strand/SMITH.md) |
+| Raven | Order courier for vows, notices, progress, and rewards | [Raven](strand/RAVEN.md) |
+| Undead Samurai | Combat teacher, trial-giver, and martial repository | [Undead Samurai](strand/UNDEAD_SAMURAI.md) |
+| Scribe | Archivist, codex keeper, and discovery tracker | [Scribe](strand/SCRIBE.md) |
 
-Supports the Strand's central continuity and may frame Akio's returns, condition, or mission. Do not confuse this character with the Area 1 boss, Keeper of the Gate.
+## Shared production requirements
 
-## Peddler
+Every Strand NPC must define:
 
-Provides the persistent merchant role and connects to temporary shop spaces encountered during runs.
+- story identity and relationship to Akio,
+- persistent service or narrative role,
+- one-sentence fantasy,
+- distinct silhouette,
+- personality in motion,
+- idle and interaction needs,
+- supporting station or props,
+- UI dependencies,
+- technical presentation at top-down/three-quarter gameplay scale.
 
-## Smith
-
-Owns the Forge and supports weapon, prosthetic, or permanent equipment progression.
-
-## Raven
-
-Associated with information, observation, routes, messages, or discovery. Exact service and narrative identity remain draft.
-
-## Undead Samurai
-
-Supports martial training, combat trials, or stance-related development. His relationship to the island's corruption needs final canon.
-
-## Scribe
-
-Owns or manages the Discovery Board, codex, records, and recovered knowledge.
-
-## Shared requirements
-
-Each NPC should eventually define:
-
-- Story identity and relationship to Akio
-- Persistent service
-- Unlock and progression states
-- Idle and interaction animation needs
-- Station/interactible
-- Dialogue and UI dependencies
-- Visual silhouette distinct from Akio, enemies, and other NPCs
+NPCs should feel like restrained inhabitants of a threshold outpost rather than a socially busy town. Ambient environment motion carries much of the Strand's life.

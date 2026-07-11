@@ -13,6 +13,15 @@ last_reviewed: 2026-07-10
 
 Prove final-quality player and enemy readability, parry/posture/deathblow feedback, Hushiro mood, and the technical art pipeline in a playable combat room.
 
+## Authoritative design sources
+
+- [Akio](../../characters/AKIO.md)
+- [Combat System](../../gameplay/COMBAT.md)
+- [Hushiro Gate Village](../../content/area_1/OVERVIEW.md)
+- [Combat HUD](../../ui_ux/HUD.md)
+- [Art Direction](../ART_DIRECTION.md)
+- [Technical Standards](../TECHNICAL_STANDARDS.md)
+
 ## Included
 
 - PLY-001 Akio full base sprite and combat animation set
