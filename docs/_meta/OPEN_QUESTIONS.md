@@ -42,6 +42,28 @@ Corruption is gained through combat accomplishments and major encounter progress
 
 ## Open questions
 
+### Blood Cavern trial rewards and upgrade caps
+
+**Category:** gameplay | progression | UI/UX
+
+**Question**
+
+What are the final trial counts, unlock sequence, reward tables, mastery conditions, and numerical caps for permanent Blood Aspect reliability upgrades?
+
+**Current locked boundary**
+
+Trials may unlock Aspects and grant small, capped reliability improvements, currency, cosmetics, lore reflections, or completion marks. They must not add new Tiers, remove Embrace danger, or permanently grant the major mechanics owned by in-run Aspect Tiers.
+
+**Affected files**
+
+- `docs/gameplay/BLOOD_CAVERN_TRIALS.md`
+- `docs/gameplay/BLOOD_ASPECTS.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/ui_ux/BLOOD_MIRROR_TRIALS.md`
+- `docs/art_production/milestones/MILESTONE_03.md`
+
+**Status:** open
+
 ### Currency family names and ownership
 
 **Category:** gameplay | production | UI/UX

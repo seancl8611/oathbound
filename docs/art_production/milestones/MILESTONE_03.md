@@ -11,14 +11,20 @@ last_reviewed: 2026-07-10
 
 ## Goal
 
-Create the persistent hub, recurring NPC cast, physical progression stations, and meta-system interface language.
+Create the persistent hub, recurring NPC cast, physical progression stations, training spaces, revival presentation, and meta-system interface language.
 
 ## Authoritative design sources
 
 - [The Strand](../../content/strand/OVERVIEW.md)
 - [Strand NPC Roster](../../characters/STRAND_NPCS.md)
 - [Strand Interactibles](../../content/strand/INTERACTIBLES.md)
+- [Bloodwell](../../content/strand/interactibles/BLOODWELL.md)
+- [Blood Cavern and Blood Mirror](../../content/strand/interactibles/BLOOD_CAVERN.md)
+- [Blood Cavern Trial System](../../gameplay/BLOOD_CAVERN_TRIALS.md)
 - [Hub Interfaces](../../ui_ux/HUB_INTERFACES.md)
+- [Blood Mirror and Trials Interface](../../ui_ux/BLOOD_MIRROR_TRIALS.md)
+- [Run Results and Strand Return](../../ui_ux/RUN_RESULTS.md)
+- [Pause and Build Overview](../../ui_ux/PAUSE_OVERVIEW.md)
 - [Progression](../../gameplay/PROGRESSION.md)
 - [Returning Blood](../../lore/RETURNING_BLOOD.md)
 
@@ -29,18 +35,22 @@ Create the persistent hub, recurring NPC cast, physical progression stations, an
 - Boat
 - Forge
 - Discovery Board
-- Bloodwell
-- Blood Cavern and Blood Mirror
-- Merchant, Forge, Discovery, Bloodwell, Mirror/trial, run-results, and hub overview UI
+- Bloodwell and reformation presentation
+- Blood Cavern outer training hall
+- Blood Mirror inner chamber
+- Merchant, Forge, Discovery, Bloodwell, Mirror/trial, run-results, and pause/overview UI
+- Trial-state, completion, reward, and mastery presentation
 
 ## Dependency rules
 
 - NPC service and progression behavior must be documented before final interface art.
-- Blood Mirror UI must inherit the Blood Aspect structure established in gameplay documentation.
-- Physical stations are approved before final hub layout and lighting.
+- Blood Mirror UI inherits the Blood Aspect and trial structure established in gameplay documentation.
+- Trial screens require fixed-loadout, completion, reward, and mastery data before final layout.
+- Bloodwell return effects follow finalized persistence and successful-return rules.
+- Physical stations and primary landmarks are approved before final hub layout and lighting.
 - Hub navigation must be tested through repeated return loops, not only as a single establishing scene.
 - Individual NPC and station files own detailed requirements; this milestone owns their production grouping.
 
 ## Completion test
 
-All six NPCs and major services can be located, distinguished, interacted with, and understood without visual confusion. The hub supports repeated use and communicates persistent progression cleanly.
+All six NPCs and major services can be located, distinguished, interacted with, and understood without visual confusion. Training, Aspect trials, permanent progression, revival, results, and repeated departure all work as one coherent hub loop.

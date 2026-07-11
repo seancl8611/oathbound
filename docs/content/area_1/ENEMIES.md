@@ -5,39 +5,69 @@ category: content
 status: approved
 authority: primary
 last_reviewed: 2026-07-10
+topics:
+  - area-1
+  - hushiro
+  - enemies
+  - garrison
+related:
+  - CONTENT-AREA1-OVERVIEW
+  - GAMEPLAY-COMBAT
+  - ART-MILESTONE-01
+  - ART-MILESTONE-02
 ---
 
 # Area 1 Standard Enemies
 
-## Corrupted Swordsman
+## Family fantasy
 
-A Hushiro garrison soldier hollowed into drill and repetition. Core melee mirror enemy used to teach windups, parries, posture breaks, and deathblows.
+Grounded, disciplined village and gate defenders corrupted from within their existing structure. Hushiro's enemies should feel like a garrison and community still functioning in fragments: soldiers guard, archers preserve firing lines, constables restrain, dogs hunt, civilians hunger, and pooled Beast Blood spreads.
 
-## Blighted Hound
+## Shared motifs
 
-A corrupted village working dog. Fast pack rusher with a clear crouch-to-lunge tell and punishable recovery.
+- gatekeeping and patrol routes,
+- checkpoint and formation behavior,
+- duty continuing after meaning has died,
+- village-defense tools rather than elite warfare,
+- recently human identity before full monstrosity,
+- familiar roles converted into automatic violence.
 
-## Hollow
+## Shared material language
 
-A ruined civilian with little technique or identity remaining. Weak swarm enemy intended to feel fragile and pitiable.
+Cracked lacquer armor, dull red-and-black military colors, worn cloth ties, ash-stained wrappings, rusted iron, damaged jingasa, battered scabbards, rope fastenings, old insignia, straw, leather, wet wood, and practical village gear. Materials are degraded by time and corruption rather than replaced by fantastical ornament.
 
-## Corrupted Archer
+## Shared corruption language
 
-A garrison archer preserving firing-line and distance discipline. Provides readable ranged pressure, retreat behavior, arrows, impacts, and projectile-parry interactions.
+Pallid grey skin, deadened or dim ember-red eyes, stiff muscle memory, dried blood in seams, wrong pauses, body rigidity, and trained behavior continuing without thought. Area 1 corruption normally inhabits recognizable human or animal structure before it produces raw hostless forms.
 
-## Cellar Bilemass
+## Movement philosophy
 
-A hostless red-black mass formed in cellars and damp storage spaces. Spits yellow-green bile that creates persistent area-denial puddles.
+Area 1 enemies move like defenders first and corrupted beings second. Soldiers hold lanes and brace; archers preserve range; hounds circle and coordinate; Hollows crowd without discipline; support threats worsen the encounter if ignored. Their behavior teaches the player to identify role, timing, posture, and priority.
 
-## Warden
+## Readability priorities
 
-A corrupted village constable who once restrained the infected for cleansing. Slow controller enemy using heavy chains to bind, telegraph a yank, and expose the player to other threats.
+- clear guard and vulnerable states,
+- obvious weapon arcs and attack starts,
+- visible recovery windows,
+- strong distinction between advancing, attacking, blocking, fleeing, controlling, and spreading hazards,
+- direction locking before active attack frames,
+- family resemblance without role ambiguity.
+
+## Detailed unit briefs
+
+| Enemy | Primary role | Authoritative brief |
+|---|---|---|
+| Corrupted Swordsman | Baseline melee defender and posture/parry teacher | [Corrupted Swordsman](enemies/CORRUPTED_SWORDSMAN.md) |
+| Corrupted Archer | Ranged pressure and spacing target | [Corrupted Archer](enemies/CORRUPTED_ARCHER.md) |
+| Blighted Hounds | Coordinated pack rush-down pressure | [Blighted Hounds](enemies/BLIGHTED_HOUNDS.md) |
+| Hollow | Fragile civilian swarm pressure | [Hollow](enemies/HOLLOW.md) |
+| Cellar Bilemass | Persistent area denial | [Cellar Bilemass](enemies/CELLAR_BILEMASS.md) |
+| Warden | Chain restraint and crowd control | [Warden](enemies/WARDEN.md) |
 
 ## Mixed-encounter rules
 
-- Every role must be identifiable by silhouette before attack effects appear.
-- Archer and Warden should become priority targets for different reasons.
-- Bile hazards must remain visible beneath other combat effects.
-- Warden chains must not obscure parry poses or enemy tells.
-- Hollow numbers must not visually erase the more important threats.
-- Corrupted Swordsman and Archer should share a garrison family without becoming interchangeable.
+- Every role must be identifiable by silhouette before dependent VFX appears.
+- Archer, Bilemass, and Warden create different priority decisions.
+- Hound and Hollow numbers must not erase higher-priority tells.
+- Bile hazards and chain states must remain readable beneath blood, fog, and hit effects.
+- Shared soldier logic may expose tuning hooks for counter chance, lunge distance, thrust frequency, aggression after block, and whiff recovery.

@@ -2,7 +2,7 @@
 id: CONTENT-AREA2-OVERVIEW
 title: Yomori Grove
 category: content
-status: draft
+status: approved
 authority: primary
 last_reviewed: 2026-07-10
 topics:
@@ -14,6 +14,7 @@ topics:
 related:
   - ART-DIRECTION
   - ART-MILESTONE-05
+  - CONTENT-AREA2-ENEMIES
 ---
 
 # Yomori Grove
@@ -48,7 +49,7 @@ Enemies express instinct and predatory will preserved beyond death:
 - spirit-warped remnants,
 - territorial entities emerging from brush, canopy, roots, mist, and shadow.
 
-The family identity is stalking, territoriality, and the continuation of the hunt after life should have ended.
+The family identity is stalking, territoriality, and the continuation of the hunt after life should have ended. Detailed family and unit definitions belong in [Area 2 Enemies](ENEMIES.md).
 
 ## Architecture
 
@@ -76,14 +77,14 @@ Human structures remain as swallowed traces:
 
 ## Movement philosophy
 
-Beasts stalk, circle, and lunge. Spirit forms flicker, glide, and partially manifest. Environmental motion should constantly support uncertainty through mist, branch sway, fungal glow, and subtle threat-like movement, while attack intent remains fair and readable.
+Beasts stalk, circle, and lunge. Spirit forms flicker, glide, partially manifest, and relocate through the environment. Ambient motion supports uncertainty, but every targetable state, attack startup, reappearance point, and control zone must remain fair and readable.
 
-## Current standard enemies
+## Standard enemy roster
 
-- Lingering Wraith
-- Lantern Wraith
-- Mist Shepherd
-- Stalker Hound
+- [Lingering Wraith](enemies/LINGERING_WRAITH.md)
+- [Lantern Wraith](enemies/LANTERN_WRAITH.md)
+- [Mist Shepherd](enemies/MIST_SHEPHERD.md)
+- [Stalker Hound](enemies/STALKER_HOUND.md)
 
 ## Current major encounters
 
@@ -91,15 +92,18 @@ The region currently includes The Embered Pilgrim, The Rotwood Host, and a paire
 
 ## Combat identity
 
-- Spirit manifestation and disappearance
-- Mist-linked support behavior
-- Predator pressure
-- Root and fungal area control
-- Fire-rite and lantern pressure
-- Multi-entity coordination
+- spirit manifestation and disappearance,
+- disciplined spectral dueling,
+- light-source-based ranged telegraphs,
+- mist-linked support behavior,
+- predator pressure and elite pounce timing,
+- root and fungal area control,
+- fire-rite and lantern pressure,
+- multi-entity coordination.
 
 ## Production dependencies
 
 - Area 1 establishes shared scale, VFX hierarchy, and room readability.
 - Area 2 requires its own base environment kit before final room variants.
 - Spirit effects must preserve attack direction, targetability, and safe-space readability.
+- Audio is a functional readability layer for enemies such as the Mist Shepherd, not optional atmosphere alone.

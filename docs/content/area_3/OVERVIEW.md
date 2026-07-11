@@ -2,7 +2,7 @@
 id: CONTENT-AREA3-OVERVIEW
 title: Kagutsuchi Court
 category: content
-status: draft
+status: approved
 authority: primary
 last_reviewed: 2026-07-10
 topics:
@@ -14,6 +14,7 @@ topics:
 related:
   - ART-DIRECTION
   - ART-MILESTONE-06
+  - CONTENT-AREA3-ENEMIES
 ---
 
 # Kagutsuchi Court
@@ -31,59 +32,51 @@ Kagutsuchi Court is Area 3 and the endgame region: a grand inner court where bea
 - Dusk lavender
 - Restrained gilded highlights
 
-Corruption should appear through excessive refinement, impossible maintenance, and unnatural perfection rather than visible decay.
+Corruption appears through excessive refinement, impossible maintenance, and unnatural perfection rather than visible decay.
 
 ## Material language
 
-Polished lacquered wood, gilded trim, clean stone, shallow mirror-still water, silk banners, paper lanterns, refined roof tile, and immaculate blossom-covered courtyards. Materials should feel suspended outside age.
+Polished lacquered wood, gilded trim, clean stone, shallow mirror-still water, silk banners, paper lanterns, refined roof tile, polished weapons, and immaculate blossom-covered courtyards. Materials should feel suspended outside age.
 
 ## Enemy-family read
 
-Enemies are courtly roles trapped in ritual repetition:
-
-- ceremonial guards,
-- elite retainers,
-- attendants,
-- courtesans,
-- noble functionaries.
-
-Soldiers move with exact formation and martial control. Noncombat court figures repeat graceful but incomplete gestures. The horror is beauty and duty preserved without release.
+Enemies are courtly roles trapped in ritual repetition: ceremonial guards, elite retainers, attendants, ritualists, noble functionaries, and preserved instruments of authority. The horror is beauty and duty maintained without release. Detailed family and unit rules belong in [Area 3 Enemies](ENEMIES.md).
 
 ## Architecture
 
-- Grand lacquered halls
-- Open ceremonial courtyards
-- Reflecting pools
-- Stone processional paths
-- Curved bridges
-- Blossom-lined approaches
-- Richly ornamented gate structures
+- grand lacquered halls,
+- open ceremonial courtyards,
+- reflecting pools,
+- stone processional paths,
+- curved bridges,
+- blossom-lined approaches,
+- richly ornamented gate structures.
 
 The region should feel elevated, symmetrical, sacred, and carefully composed.
 
 ## Ambient pressure
 
-- Endless drifting blossoms
-- Warm lantern glow
-- Still reflective water
-- Faint surface mist
-- Soft banner movement
-- Petal-covered stone and bridge surfaces
-- Open ceremonial sightlines
+- endless drifting blossoms,
+- warm lantern glow,
+- still reflective water,
+- faint surface mist,
+- soft banner movement,
+- petal-covered stone and bridge surfaces,
+- open ceremonial sightlines.
 
 The atmosphere is calm and luminous, but oppressive through excessive stillness.
 
 ## Movement philosophy
 
-Movement is precise, elegant, and unnaturally controlled. Soldiers patrol and fight in flawless patterns; attendants and court figures repeat poised gestures with puppet-like perfection. Environmental motion remains soft and measured.
+Movement is precise, elegant, and unnaturally controlled. Soldiers patrol and fight in flawless patterns; ritualists maintain exact casting forms; attendants repeat poised gestures with puppet-like perfection. Wrongness comes from over-control rather than chaos.
 
-## Current standard enemies
+## Standard enemy roster
 
-- Court Guard
-- Court Caster
-- Elite Defender
-- Hollow Vessel
-- Court Sentinel
+- [Court Guard](enemies/COURT_GUARD.md)
+- [Court Caster](enemies/COURT_CASTER.md)
+- Elite Defender — detailed source begins after page 70
+- Hollow Vessel — detailed source begins after page 70
+- Court Sentinel — detailed source begins after page 70
 
 ## Current major encounters
 
@@ -95,13 +88,14 @@ The exact classification and sequencing of the Blood Lotus and Eternal Swordsman
 
 ## Combat identity
 
-- Elite melee pressure
-- Ritual projectiles and zones
-- Defender/support relationships
-- Revive or vessel mechanics
-- Controlled escalation and frenzy states
-- Multi-phase final-boss structure
+- elite precise melee pressure,
+- ritual projectiles that escalate when ignored,
+- one-time revival and kill-confirmation windows,
+- defender/support relationships,
+- vessel and source-priority mechanics,
+- controlled escalation and frenzy states,
+- multi-phase final-boss structure.
 
 ## Production warning
 
-Rich court detail must not compete with attack startup, weapon lines, hazards, or safe-space reads. The Eclipse Shogun should remain a dedicated internal batch chain within Milestone 6.
+Rich court detail must not compete with attack startup, weapon lines, projectiles, revival states, hazards, or safe-space reads. The Eclipse Shogun remains a dedicated internal batch chain within Milestone 6.

@@ -9,6 +9,17 @@ last_reviewed: 2026-07-10
 
 # Documentation Changelog
 
+## 2026-07-10 — Production bible migration: pages 36–70
+
+- Completed Bloodwell screen and Strand-return presentation requirements.
+- Added Blood Cavern, Blood Mirror, repeatable trial, permanent Aspect-upgrade, run-results, and pause/overview documentation.
+- Added the complete Area 1 enemy family and six individual enemy production briefs.
+- Added the complete Area 2 standard-enemy family and four individual enemy production briefs.
+- Added the Area 3 family foundation, Court Guard, and Court Caster briefs through page 70.
+- Registered individual enemy and trial/UI authority paths.
+- Linked Milestones 1, 2, 3, 5, and 6 to their authoritative detailed sources.
+- Added a focused open question for final Blood Cavern trial rewards and permanent upgrade caps.
+
 ## 2026-07-10 — Production bible migration: pages 1–35
 
 - Expanded the game overview, design pillars, full scope, art direction, and asset inventory.

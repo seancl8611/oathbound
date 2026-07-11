@@ -16,6 +16,7 @@ related:
   - LORE-RETURNING-BLOOD
   - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-PROGRESSION
+  - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - CONTENT-STRAND-INTERACTIBLES
 ---
 
@@ -59,10 +60,23 @@ Blood Mirror trials may award small permanent upgrades that improve reliability,
 
 - add new Tiers,
 - remove the danger of Embrace,
-- unlock the major run-changing mechanics that belong to in-run Tier growth,
-- transform an Aspect into a different combat identity.
+- unlock major run-changing mechanics that belong to in-run Tier growth,
+- transform an Aspect into a different combat identity,
+- create a broad invulnerability or timing advantage that trivializes core combat.
 
-Appropriate upgrade directions include slightly longer windows, modest posture improvements, shorter recovery, and other capped reliability adjustments.
+Illustrative directions from the production bible:
+
+| Aspect | Example direction | Guardrail |
+|---|---|---|
+| Wolf | Prey mark lasts slightly longer | No new Prey behavior |
+| Wolf | Pressure bonus builds slightly faster | No additional attack |
+| Wraith | Perfect-dodge punish window lasts slightly longer | No new dodge type |
+| Wraith | Mist-step recovery is slightly reduced | No added invulnerability spike |
+| Ronin | Perfect parries deal slightly more posture damage | Avoid broad parry-window expansion |
+| Ronin | Counter Cut recovery is slightly reduced | No new counter mechanic |
+| General | Resist reward is slightly improved | Must not replace Embrace tension |
+
+These examples are design direction, not locked numerical tuning. Detailed trial structure belongs in [Blood Cavern Trial System](BLOOD_CAVERN_TRIALS.md).
 
 ## Wolf Aspect
 
@@ -148,4 +162,6 @@ Do not create twelve complete replacement Akio animation libraries. Use:
 - [Corruption and Shrines](CORRUPTION_AND_SHRINES.md)
 - [Combat](COMBAT.md)
 - [Progression](PROGRESSION.md)
+- [Blood Cavern Trial System](BLOOD_CAVERN_TRIALS.md)
 - [Shrine interface](../ui_ux/SHRINE_INTERFACE.md)
+- [Blood Mirror interface](../ui_ux/BLOOD_MIRROR_TRIALS.md)
