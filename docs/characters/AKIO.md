@@ -4,7 +4,7 @@ title: Akio
 category: character
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - akio
   - player-character
@@ -25,7 +25,7 @@ Akio is Oathbound's player character: a disciplined Order swordsman and the firs
 
 ## One-sentence fantasy
 
-A disciplined swordsman who forced Beast Blood to obey him and now uses its mutations without surrendering his identity.
+A quiet, disciplined swordsman who uses the same corrupting power that destroyed the island without surrendering his identity to it.
 
 ## Gameplay role
 
@@ -61,7 +61,8 @@ Akio wears worn Order field gear built for repeated crossings and survival rathe
 - scarf wrapping,
 - light lamellar reinforcement,
 - leather and cords,
-- pouches and ritual tags.
+- pouches and ritual tags,
+- anti-corruption seals and warding marks.
 
 Cloth, cords, and tags support motion and identity without obscuring the upper-body line, weapon direction, or facing.
 
@@ -70,6 +71,21 @@ Cloth, cords, and tags support motion and identity without obscuring the upper-b
 The katana is the primary identity weapon. Supporting gear may include utility blade, pouches, seals, vials, cords, and unlockable beast-hunting or prosthetic tools tied to Order methods.
 
 The base body supports add-on tools without requiring a full character redesign.
+
+## Personality and narrative presentation
+
+Akio is a quiet protagonist. He should not explain every theme or discovery through long speeches.
+
+His character is communicated through:
+
+- short, deliberate responses,
+- silence and restraint,
+- actions and refusals,
+- changing relationships with Strand NPCs and the Order,
+- physical signs of Returning Blood,
+- and major decisions during the campaign.
+
+His exact personal motivation, emotional arc, and relationship to the Shogun remain part of the story-spine design lock.
 
 ## Personality in motion
 
@@ -86,17 +102,19 @@ His gait is grounded and weighted rather than sneaking. His combat stance is com
 
 ## Corruption relationship
 
-Akio is not immune to Beast Blood. It claimed him deeply enough to transform him, but his resolve prevented the loss of identity. The Blood submitted and became Returning Blood.
+Akio is not immune to Beast Blood. His resolve and the Order's anti-corruption warding are the current required ingredients in the unprecedented condition that becomes Returning Blood.
 
-Returning Blood rebuilds and empowers him, but repeated use creates the danger that he may approach the same beast, wraith, hollow, or servant states that consumed others.
+The exact event and mechanism remain under design lock. Resolve is necessary, but it is no longer treated as the complete explanation by itself.
+
+Returning Blood rebuilds and empowers him, but repeated use preserves the danger that his control may fail and that he may approach the beast, wraith, hollow, or unstable states seen elsewhere on the island.
 
 ## Revival identity
 
 Akio is the first known warrior to return from Beast Blood death with body and identity intact.
 
 - On failed runs, Returning Blood reforms him at the Strand.
-- On successful runs, it reconstructs him after the Wellspring sacrifice and the severing of one layer of the Shogun's blood-oath.
-- Temporary run-state is burned away; permanent progression survives.
+- On successful runs, he defeats the Shogun, reaches the protected ancient source, damages one persistent layer, and is destroyed or expelled before reforming at the Strand.
+- Temporary run-state is burned away; permanent progression and persistent campaign damage survive.
 
 ## Combat readability
 
@@ -185,3 +203,4 @@ Frame counts are working contractor estimates. Final timing is tuned in Godot an
 - Akio is not naturally immune.
 - Returning Blood is not routine Order practice.
 - Blood Aspects are controlled mutations of Returning Blood, not unrelated magical classes.
+- Akio should not become a heavily expositional protagonist.
