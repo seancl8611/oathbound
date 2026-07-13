@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - project-identity
   - combat
@@ -24,9 +24,11 @@ related:
 
 Oathbound is a high-angle 2D action roguelite built around disciplined katana combat, posture pressure, precise parries, stagger, deathblows, Hades-like room-and-boss flow, and run-based build progression.
 
-The player controls Akio, a warrior of the Order sent through an ancient containment barrier onto a cursed Japanese-gothic island. The island is shaped by Beast Blood, a supernatural force that preserves roles, instincts, duties, and oaths after identity has begun to collapse.
+The player controls Akio, a warrior of the Order sent through an ancient containment barrier onto a cursed Japanese-gothic island. The island was once a flourishing kingdom that used rare Beast Blood from an ancient source to survive a deadly plague. The apparent miracle gradually corrupted its people and ruler.
 
-Akio is not immune to Beast Blood. His resolve forced it to obey rather than erase him, mutating it into Returning Blood. Returning Blood allows him to reform after death, retain his identity, and develop controlled Blood Aspects during runs.
+Beast Blood strengthens, heals, regenerates, and transforms while intensifying impulses already present in the bearer. Corrupted inhabitants may retain memory, loyalty, recognition, training, and attachment rather than becoming mindless infected.
+
+Akio is not immune. His resolve and the Order's anti-corruption warding contribute to an unprecedented condition called Returning Blood. It allows him to reform after death, retain his identity, and develop controlled Blood Aspects during runs. The exact origin remains under story design lock.
 
 ## Project statement
 
@@ -34,7 +36,7 @@ The game should feel disciplined, dangerous, elegant, and cursed. Martial clarit
 
 ## Core player fantasy
 
-The player should feel like a trained hunter surviving a place where duty has outlived humanity. Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
+The player should feel like a trained hunter crossing into a fallen kingdom whose people still retain distorted fragments of humanity, loyalty, and memory. Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
 
 Across a run, the player grows from the complete base sword kit into a specialized late-run build. The selected Blood Aspect defines the central identity; limited Techniques refine how that identity uses Akio's sword, movement, executions, resources, and prosthetic.
 
@@ -50,7 +52,7 @@ Across a run, the player grows from the complete base sword kit into a specializ
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
 - Failed runs return Akio to the Strand through Returning Blood reconstruction
-- Successful runs defeat the Shogun's current manifestation, complete the Rite at the Wellspring, sever one layer of his blood-oath, and return Akio with permanent rewards intact
+- Successful runs defeat the Shogun, reach the protected ancient source, damage one persistent source layer, and return Akio to the Strand with permanent rewards and campaign progress intact
 
 ## Run-build philosophy
 
@@ -72,8 +74,11 @@ A single error should matter without routinely ending an otherwise viable run in
 - **The Strand:** persistent shoreline hub and preparation threshold
 - **Area 1 — Hushiro Gate Village:** disciplined, grounded, and recently human
 - **Area 2 — Yomori Grove:** feral, spiritual, predatory, and environmentally invasive
-- **Area 3 — Kagutsuchi Court:** courtly, immaculate, preserved, and lethal
-- **Final confrontation:** the Eclipse Shogun and the Wellspring
+- **Area 3 — Kagutsuchi Court:** courtly, loyal, corrupted, and lethal
+- **Run climax:** the Eclipse Shogun followed by temporary access to the protected ancient source
+- **True-final direction:** permanent defeat of the Shogun and a deeper source confrontation after enough persistent layers have been removed
+
+The ancient source's identity, number of layers, required clear count, and true-final encounter are not yet locked.
 
 ## Structural references
 
@@ -92,5 +97,6 @@ These are directional references, not templates to copy.
 - [Blood Aspects](../gameplay/BLOOD_ASPECTS.md)
 - [Technique System](../gameplay/TECHNIQUES.md)
 - [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md)
+- [Beast Blood](../lore/BEAST_BLOOD.md)
 - [Returning Blood](../lore/RETURNING_BLOOD.md)
 - [Run structure](../gameplay/RUN_STRUCTURE.md)

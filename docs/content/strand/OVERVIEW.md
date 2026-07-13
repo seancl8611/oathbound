@@ -4,7 +4,7 @@ title: The Strand
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - strand
   - hub
@@ -43,9 +43,9 @@ A practical Order threshold station built against a cold shoreline: black sand, 
 - Parchment-tan paper
 - Muted moss and coastal grass
 - Cold blue-gray sea
-- Indigo-violet mist
+- Indigo-violet coastal mist
 - Restrained lantern gold, lit-window warmth, and forge embers
-- Distant crimson eclipse and blood-red accents associated with the island and Mistveil
+- Distant crimson eclipse and blood-red accents associated with the island
 
 ## Materials
 
@@ -74,11 +74,11 @@ The Strand should use a few distinct role-specific structures rather than repeat
 - Forge smoke and ember drift
 - Fluttering banners and paper strips
 - Low coastal wind
-- Distant red-veined motion in the Mistveil
+- Distant crimson pulse or eclipse light from the island during major campaign states
 
 ## Movement philosophy
 
-NPC motion is restrained, functional, and watchful. The Strand should not feel socially bustling. Much of its life comes from environmental movement—smoke, tide, cloth, paper, light, and wind—while characters repeat maintenance, ritual, recordkeeping, and preparation routines.
+NPC motion is restrained, functional, and watchful. The Strand should not feel socially bustling. Much of its life comes from environmental movement—smoke, tide, cloth, paper, light, and wind—while characters perform maintenance, ritual, recordkeeping, and preparation.
 
 ## Primary NPCs
 

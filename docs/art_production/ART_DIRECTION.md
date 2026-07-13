@@ -4,7 +4,7 @@ title: Art Direction
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - pixel-art
   - combat-readability
@@ -59,7 +59,9 @@ Beast Blood may appear through:
 - biological pressure,
 - asymmetrical distortion.
 
-It may be ritualized, contained, feral, or spiritually thinned, but it must always read as the same invasive force expressed through a particular host, place, or preserved role.
+It may be ritualized, controlled, feral, spiritually thinned, or physically unstable, but it must read as the same rare force expressed through a particular bearer, history, duration, and environment.
+
+Do not imply a conventional airborne or bite-spread infection. Do not make every victim visually communicate one repeated duty or role as the curse's central meaning.
 
 ### Material language
 
@@ -100,23 +102,23 @@ Startup, active, recoil, stagger, posture-break, and deathblow-ready states requ
 
 ### Area 1 — Hushiro Gate Village
 
-**Identity:** a militarized village threshold where discipline remains visible beneath corruption. Human ruin first, monstrosity second.
+**Identity:** a militarized village threshold where retained memory, loyalty, and discipline remain visible beneath recent corruption. Human ruin first, monstrosity second.
 
 **Palette:** rain-dark timber brown, soot-black tile, clay-mud earth, wet stone gray, smoke fog, faded shrine red, dried blood brown-black, dim lantern amber, and restrained dark crimson.
 
-**Materials:** soaked timber, warped clay walls, cracked tile, damp stone, soot-stained paper, rotting shrine wood, rusted iron, old cloth, household debris, and barricade materials. Corruption appears as seepage, staining, root intrusion, and structural warping.
+**Materials:** soaked timber, warped clay walls, cracked tile, damp stone, soot-stained paper, rotting shrine wood, rusted iron, old cloth, household debris, and barricade materials. Corruption appears as localized residue, staining, root intrusion, and structural warping.
 
 **Architecture:** dense narrow paths, leaning homes, close rooflines, shallow balconies, worn torii, small shrines, guard points, barricaded interiors, and visible evidence of failed defense.
 
-**Motion:** villagers twitch, hesitate, and repeat fragments of former routines; soldiers retain slower, clearer stance discipline. Environmental motion remains subtle and oppressive.
+**Motion:** villagers twitch, hesitate, watch, retreat, or rush; soldiers retain slower, clearer stance discipline and formation habits. Environmental motion remains subtle and oppressive.
 
 ### Area 2 — Yomori Grove
 
-**Identity:** a haunted hunting region where instinct, spirit residue, and feral corruption overtake human order.
+**Identity:** a haunted hunting region where long-term Beast Blood corruption produces predation, spirit residue, bodily instability, and feral pressure.
 
 **Palette:** rot-black bark, bone-white trunks, wet earth, corpse-gray stone, deep moss green-black, cold fog, crimson leaves, dark blood-red sap, pale spirit light, and cyan-blue fungal glow.
 
-**Materials:** root-knotted earth, swollen bark, red-veined trunks, slick stone, damp moss, fungal bloom, shrine lanterns, trail markers, and blood-rich sap. The forest should feel vascular, sentient, and biologically pressurized.
+**Materials:** root-knotted earth, swollen bark, red-veined trunks, slick stone, damp moss, fungal bloom, shrine lanterns, trail markers, and blood-rich sap. The forest should feel biologically pressurized and spiritually unstable without requiring a separate curse.
 
 **Architecture:** swallowed hunting paths, shrine trails, torii, lantern markers, wayfinding stones, abandoned rest sites, and broken crossings overtaken by roots.
 
@@ -124,16 +126,18 @@ Startup, active, recoil, stagger, posture-break, and deathblow-ready states requ
 
 ### Area 3 — Kagutsuchi Court
 
-**Identity:** an immaculate inner court where beauty, hierarchy, and ceremony have been preserved past nature.
+**Identity:** an immaculate inner court where elite retainers preserve culture, loyalty, hierarchy, and controlled corruption beneath the Shogun's rule.
 
 **Palette:** lacquer black, deep vermilion, ceremonial red, warm lantern gold, muted ivory stone, blue-black water, blossom pink, dusk lavender, and restrained gilded accents.
 
-**Materials:** polished lacquer, gilded trim, clean stone, mirror-still water, silk banners, refined tile, and immaculate blossom-covered courtyards. Corruption appears through over-refinement and impossible preservation rather than decay.
+**Materials:** polished lacquer, gilded trim, clean stone, mirror-still water, silk banners, refined tile, and immaculate blossom-covered courtyards. Corruption appears through controlled mutation, impossible maintenance, and hidden Blood use rather than ordinary decay.
 
 **Architecture:** grand halls, open courtyards, reflecting pools, curved bridges, stone paths, blossom-lined approaches, and richly ornamented gates arranged with symmetry and processional hierarchy.
 
-**Motion:** soldiers and attendants move with precise, elegant, puppet-like control. Environmental motion is soft and measured: blossoms, water, banners, and lantern light reinforce ritual suspension.
+**Motion:** soldiers and retainers move with precise, elegant discipline. Environmental motion is soft and measured: blossoms, water, banners, and lantern light reinforce control and concealed danger rather than mindless ritual repetition.
 
 ## Production rule
 
 Regional art may become more ornate as the game advances, but combat communication must remain consistent. Every environment, character, and VFX delivery should be reviewed at gameplay scale before detail polish is approved.
+
+The ancient source's anatomy and final visual language remain unapproved. Do not infer final source art from the working giant-Heart concept.

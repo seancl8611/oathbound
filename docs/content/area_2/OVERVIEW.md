@@ -4,7 +4,7 @@ title: Yomori Grove
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - area-2
   - yomori-grove
@@ -21,7 +21,7 @@ related:
 
 # Yomori Grove
 
-Yomori Grove is Area 2, where instinct, spirit residue, predation, and feral corruption overtake human order. The environment should feel active, watchful, and unreliable even when enemies are offscreen.
+Yomori Grove is Area 2, where long-term Beast Blood corruption has produced predation, spiritual instability, altered animals, and environment-bound remnants. The environment should feel active, watchful, and unreliable even when enemies are offscreen.
 
 ## Palette
 
@@ -44,7 +44,11 @@ Root-knotted earth, swollen bark, red-veined trunks, slick stone, damp moss, fun
 
 ## Enemy-family read
 
-Enemies express instinct and predatory will preserved beyond death: corrupted beasts, hunting shades, spirit-warped remnants, and territorial entities emerging from brush, canopy, roots, mist, and shadow. Detailed family and unit definitions belong in [Area 2 Enemies](ENEMIES.md).
+Enemies are different long-term outcomes of the same Beast Blood curse: corrupted beasts, hunting shades, spirit-warped remnants, and territorial entities emerging from brush, canopy, roots, mist, and shadow.
+
+Some spirit forms may result when corrupted bodies fail while memory, will, or residue remains bound to a place, object, or hunting ground. The exact supernatural process remains open and does not require a separate unrelated curse.
+
+Detailed family and unit definitions belong in [Area 2 Enemies](ENEMIES.md).
 
 ## Architecture and ambient pressure
 
@@ -66,7 +70,7 @@ Beasts stalk, circle, and lunge. Spirit forms flicker, glide, partially manifest
 1. [The Embered Pilgrim and Rotwood Host](MINIBOSSES.md)
 2. [Twin Maws — Rootfang and Briarthorn](BOSS.md)
 
-The Embered Pilgrim and Rotwood Host are the region’s two minibosses. Rootfang and Briarthorn form the paired final boss. Whichever twin dies first transfers its half of the corrupted bond to the survivor, creating an empowered second half.
+The Embered Pilgrim and Rotwood Host are the region's two minibosses. Rootfang and Briarthorn form the paired final boss. Whichever twin dies first transfers its half of the corrupted bond to the survivor, creating an empowered second half.
 
 ## Combat identity
 

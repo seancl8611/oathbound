@@ -4,7 +4,7 @@ title: The Boat
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - strand
   - boat
@@ -29,7 +29,9 @@ The Boat is the run-start point, island-crossing point, and final loadout-confir
 
 ## Lore role
 
-The Boat carries Akio through the narrow path opened when the once-per-decade Blood Moon weakens the barrier. Before Akio, every departure was considered one-way. Returning Blood's link to the Wellspring and Bloodwell allows him to make repeated crossings during the active Blood Moon period.
+The Boat carries Akio through the narrow path opened when the once-per-decade Blood Moon weakens the barrier. Before Akio, every departure was considered one-way.
+
+Returning Blood allows Akio to reform at the Strand and make repeated departures during the active campaign period. The exact magical explanation belongs to [Returning Blood](../../../lore/RETURNING_BLOOD.md) and no longer requires a technical Wellspring/Bloodwell anchor link.
 
 ## Visual identity
 

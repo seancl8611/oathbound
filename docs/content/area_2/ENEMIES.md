@@ -4,7 +4,7 @@ title: Area 2 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - area-2
   - yomori-grove
@@ -21,7 +21,7 @@ related:
 
 ## Family fantasy
 
-Feral, spiritual, hunting-ground corruption built around instinct, territoriality, unfinished pursuit, and a forest that has become an active participant in the hunt.
+Feral, spiritual, hunting-ground corruption built around predation, territoriality, unstable bodies, lingering memory, and a forest that has become saturated by long-term Beast Blood use.
 
 ## Shared motifs
 
@@ -30,8 +30,8 @@ Feral, spiritual, hunting-ground corruption built around instinct, territorialit
 - half-seen movement between trunks,
 - broken hunting routes,
 - roots, mist, fungal pulse, and red sap,
-- old ritual forms repurposed into predatory functions,
-- earlier enemy families evolving through Yomori's environment rather than simple stat inflation.
+- old ritual forms distorted by long corruption,
+- earlier human and animal identities becoming less physically stable rather than merely gaining statistics.
 
 ## Shared material language
 
@@ -39,7 +39,9 @@ Bone-white bark, red-veined trunks, blood-rich sap, wet roots, corpse-dark earth
 
 ## Shared corruption language
 
-Area 2 expresses instinct preserved beyond the body: spirit residue, feral persistence, partial manifestation, ash-frayed silhouettes, root binding, pale ghost-light, and predatory urges continuing after death. It is less structured than Hushiro and more spatially invasive.
+Area 2 expresses Beast Blood after prolonged bodily and spiritual instability: spirit residue, feral persistence, partial manifestation, ash-frayed silhouettes, root binding, pale ghost-light, and predatory urges continuing after the original body has weakened or failed.
+
+The exact process remains intentionally flexible. Area 2 spirits belong to the same curse but do not require a separate magic system or a rigid hierarchy beneath the Shogun.
 
 ## Movement philosophy
 

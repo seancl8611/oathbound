@@ -4,7 +4,7 @@ title: Open Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 ---
 
 # Open Questions
@@ -61,7 +61,9 @@ The Embered Pilgrim and Rotwood Host are Area 2's two minibosses. Rootfang and B
 
 **Resolution**
 
-Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal boss with Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases.
+Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal regional boss with Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases.
+
+The current endgame direction now continues beyond him to source-layer completion and an eventual true-final source encounter.
 
 **Affected files**
 
@@ -70,7 +72,7 @@ Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and 
 - `docs/content/area_3/BOSS.md`
 - `docs/art_production/milestones/MILESTONE_06.md`
 
-**Status:** resolved
+**Status:** resolved at regional-roster level
 
 ## Resolved in production bible pages 106–132
 
@@ -143,13 +145,13 @@ Blood Aspects are the central run identity and vertical power path. Techniques a
 
 **Resolution**
 
-Standard combat routes preview a primary payout. Selected combat and milestone rewards offer Techniques. Shrines own Resist/Embrace or support; rest rooms own recovery and reserve swapping; shops use Gold; treasure/miniboss rewards are high value; regional bosses grant persistent and current-run power; the Eclipse Shogun resolves through Wellspring completion.
+Standard combat routes preview a primary payout. Selected combat and milestone rewards offer Techniques. Shrines own Resist/Embrace or support; rest rooms own recovery and reserve swapping; shops use Gold; treasure/miniboss rewards are high value; regional bosses grant persistent and current-run power. The Eclipse Shogun opens the protected source-completion step, which grants persistent campaign progress and ends the run.
 
 **Status:** resolved at structural level
 
-## Open questions
+# Open production and gameplay questions
 
-### Milestone 1 Posture Break Cue assignment
+## Milestone 1 Posture Break Cue assignment
 
 **Category:** production | outsourcing
 
@@ -169,7 +171,7 @@ The broader production bible defines the effect, but the polished Milestone 1 co
 
 **Status:** open
 
-### Elite Defender revival behavior
+## Elite Defender revival behavior
 
 **Category:** gameplay | content | production
 
@@ -186,7 +188,7 @@ Does the Elite Defender use Kagutsuchi Court's one-time revival mechanic, or rem
 
 **Status:** open
 
-### Twin Maws transition implementation
+## Twin Maws transition implementation
 
 **Category:** gameplay | boss | UI/UX
 
@@ -207,7 +209,7 @@ Both twins begin active. The first defeated empowers the survivor, which remains
 
 **Status:** open
 
-### Blood Lotus cycle tuning
+## Blood Lotus cycle tuning
 
 **Category:** gameplay | boss | UI/UX
 
@@ -224,7 +226,7 @@ What are the final Heart-cycle count, Stalk timer, punishment threshold, deathbl
 
 **Status:** open
 
-### Blood Cavern trial rewards and upgrade caps
+## Blood Cavern trial rewards and upgrade caps
 
 **Category:** gameplay | progression | UI/UX
 
@@ -247,7 +249,7 @@ Trials may grant Aspect access, small capped reliability improvements, Technique
 
 **Status:** open
 
-### Technique catalog and tuning
+## Technique catalog and tuning
 
 **Category:** gameplay | balance | production | UI/UX
 
@@ -277,7 +279,7 @@ What are the final Technique count, individual effects, rarity weights, Aspect w
 
 **Status:** open
 
-### Prosthetic tuning and Prosthetic Techniques
+## Prosthetic tuning and Prosthetic Techniques
 
 **Category:** gameplay | balance
 
@@ -299,7 +301,7 @@ The initial run structure uses one equipped prosthetic. Only that tool's Prosthe
 
 **Status:** open
 
-### Reward cadence and room economy
+## Reward cadence and room economy
 
 **Category:** gameplay | balance | production | UI/UX
 
@@ -326,7 +328,7 @@ What are the final room counts, branching structure, reward probabilities, anti-
 
 **Status:** open
 
-### Relic and consumable catalog
+## Relic and consumable catalog
 
 **Category:** gameplay | production | UI/UX
 
@@ -349,65 +351,232 @@ The initial framework uses one separate run-scoped Relic slot. Relics are broade
 
 **Status:** open
 
-### Order knowledge and intent
+# Story-spine design lock questions
 
-**Category:** lore
+These questions must be answered in dependency order before the complete story spine, successful-clear count, ending, and final Milestone 6 scope can be locked.
 
-**Question**
-
-How much does the Order know about the Shogun, Wellspring, Returning Blood, and Akio's chance of returning?
-
-**Affected files**
-
-- `docs/lore/THE_ORDER.md`
-- `docs/lore/STORY_OVERVIEW.md`
-- `docs/characters/AKIO.md`
-
-**Status:** open
-
-### Barrier origin
-
-**Category:** lore
+## 1. Ancient source identity and agency
 
 **Question**
 
-Who created the barrier, and what is its exact relationship to the Shogun and Wellspring?
+What exactly is the ancient source of Beast Blood, and what kind of existence does it have?
 
-**Affected files**
+Decide whether it is a living power, remnant, vessel, organism, god, parasite, Heart-like core, or another concept; whether it is alive, dormant, dying, or awakening; and whether it has consciousness, only primal impulse, or no personal agenda.
 
-- `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md`
-- `docs/lore/ECLIPSE_SHOGUN.md`
+**Locked boundary**
 
-**Status:** open
+- It is ancient, rare, powerful, and associated uniquely with the island.
+- It grants healing, regeneration, strength, longevity, and transformation.
+- It corrupts and magnifies qualities already present in the bearer.
+- It is not currently locked as a literal giant Heart.
 
-### The Shogun's ancient enemy
+**Why it matters**
 
-**Category:** lore
+Its nature determines the curse's mythology, final boss, source-layer logic, environment, VFX, and ending.
 
-**Question**
+**Status:** open; prerequisite for Questions 2–3 and 10–12
 
-Who or what was the ancient enemy the Eclipse Shogun defeated using Beast Blood, and how did that conflict lead to the army's preservation and the island's current state?
-
-**Affected files**
-
-- `docs/lore/ECLIPSE_SHOGUN.md`
-- `docs/lore/STORY_OVERVIEW.md`
-- `docs/lore/TIMELINE.md`
-
-**Status:** open
-
-### Ending structure
-
-**Category:** lore
+## 2. Discovery or acquisition of the source
 
 **Question**
 
-What final decision or consequence follows the Shogun's defeat at the Wellspring?
+After the source itself is defined, how exactly did the Shogun's civilization discover, encounter, acquire, or bring it under their control?
 
-**Affected files**
+Possibilities remain open:
 
-- `docs/lore/STORY_OVERVIEW.md`
-- `docs/lore/ECLIPSE_SHOGUN.md`
-- `docs/art_production/milestones/MILESTONE_07.md`
+- found beneath the island through mining or excavation,
+- revealed by an earthquake, ritual, or supernatural event,
+- encountered after the Shogun or earlier inhabitants traveled elsewhere,
+- recovered from another place and stored on the island,
+- inherited from an older civilization,
+- or another origin appropriate to the final source concept.
+
+**Locked boundary**
+
+Greed, forbidden curiosity, worship, research, or attempted exploitation contributed to people pursuing the power. The Shogun initially opposed its use.
+
+**Why it matters**
+
+The discovery cannot be locked independently of the source. It determines the island's older history, Wellspring location, source chamber, religion, and who bears responsibility for first exploiting it.
+
+**Status:** open; must follow Question 1
+
+## 3. Physical access to usable Beast Blood
+
+**Question**
+
+Where does usable Beast Blood actually come from, and how was it collected, stored, administered, and replenished?
+
+Is it drawn directly from the source, collected in a Wellspring or ritual basin, produced through a vessel, extracted during an awakening, or obtained through another limited process?
+
+**Locked boundary**
+
+- Beast Blood is not airborne.
+- It is not spread casually through bites or ordinary contact.
+- It is rare and must be deliberately obtained and used.
+
+**Why it matters**
+
+This defines the plague treatment, the Shogun's army, the barrier's containment purpose, the source chamber, and the threat of the Blood reaching the outside world.
+
+**Status:** open; must follow Questions 1–2
+
+## 4. Plague-era timeline and the Shogun's daughter
+
+**Question**
+
+What happened from the first plague cases through the kingdom's collapse, and what specifically happened to the Shogun's daughter after she received Beast Blood?
+
+Establish:
+
+- how quickly the plague spread,
+- when the Shogun approved the cure,
+- how long the apparent miracle lasted,
+- why use expanded from the sick to soldiers and the wider population,
+- when corruption became undeniable,
+- and whether the daughter survived, transformed, died, disappeared, or remains relevant.
+
+**Locked boundary**
+
+The kingdom flourished before the plague. The Shogun was popular and initially restricted Beast Blood. His daughter's impending death helped drive the decision to use it.
 
 **Status:** open
+
+## 5. Shogun's present goal and relationship to the source
+
+**Question**
+
+What does the Shogun want during Akio's campaign, and how does the ancient source affect that desire?
+
+Decide whether he seeks conquest, forced salvation, escape, renewed prosperity, protection of his kingdom, release, or another goal. Also decide whether the source influences him intentionally, amplifies him without awareness, or has no agency.
+
+**Locked boundary**
+
+The Shogun is not an innocent puppet. Beast Blood magnifies his qualities, but he remains responsible for continuing to use, defend, and expand its power.
+
+**Status:** open
+
+## 6. Corrupted inhabitants, loyalty, and Area 2 spirits
+
+**Question**
+
+How much memory and humanity can corrupted inhabitants retain, and how does long-term Beast Blood produce the island's different physical and spiritual forms?
+
+Clarify:
+
+- why soldiers and subjects remain loyal or organized,
+- why they identify Akio as an outsider and enemy,
+- how independent beasts and spirits relate to the Shogun's kingdom,
+- and how Area 2 wraiths emerge from the same Beast Blood curse.
+
+**Locked boundary**
+
+There is no required hive mind or universal strength hierarchy. Corrupted beings may retain recognition, relationships, loyalty, training, and territory. Akio's Returning Blood does not make enemies automatically accept him.
+
+**Status:** partially established; exact spirit and loyalty rules open
+
+## 7. Order knowledge, mission, and recurring threat
+
+**Question**
+
+What does the Order know about the plague, Shogun, source, Beast Blood, barrier, and consequences of destroying the source—and what exactly does it believe Akio must accomplish?
+
+Also establish why a warrior must be sent every ten years. Is the Shogun preparing conquest, is the barrier deteriorating, are outsiders attempting to acquire the Blood, is the source awakening, or is another threat escalating?
+
+**Locked boundary**
+
+The Order opposes Beast Blood, uses anti-corruption warding, sends one warrior during the Blood Moon, and did not expect Returning Blood as a standard outcome.
+
+**Status:** open
+
+## 8. Barrier origin and Blood Moon deadline
+
+**Question**
+
+Who created the barrier, when was it created, what does it contain, and what happens when the active Blood Moon period ends?
+
+Establish whether the barrier primarily prevents departure, access to the source, transport of Beast Blood, or all three; whether the Shogun can affect it; and how repeated Akio runs fit within one active period.
+
+**Status:** open
+
+## 9. Exact Returning Blood cause
+
+**Question**
+
+What event exposes Akio to Beast Blood, how do the Order's warding and his resolve alter it, and why did the same protection not produce Returning Blood in previous warriors?
+
+**Current direction**
+
+The ward protects Akio's identity; his resolve prevents surrender; Beast Blood's regeneration then reconstructs the identity the ward preserved and returns him to the Strand where the rite originated.
+
+**Locked boundary**
+
+Akio is not naturally immune, Returning Blood is not routine Order practice, and resolve alone is no longer a sufficient complete explanation.
+
+**Status:** open; current direction promising but not canonized
+
+## 10. Successful-run source layers and forced return
+
+**Question**
+
+What is Akio actually damaging after each Shogun victory, why does that damage persist, and why can he remove only one layer before his current body is destroyed or expelled?
+
+Define whether the layers are biological defenses, seals, bindings, shells, vessels, wards, phases of awakening, or another structure derived from the final source concept.
+
+**Locked boundary**
+
+A successful run defeats the Shogun, reaches the source, completes one persistent damage step, and returns Akio to the Strand.
+
+**Status:** open; depends on Questions 1–3
+
+## 11. Campaign clear count and changes after each clear
+
+**Question**
+
+How many successful source-layer completions are required before the Shogun can be permanently defeated and the true-final source encounter begins?
+
+For each required clear, establish what changes in story, NPC dialogue, hub state, source state, Shogun behavior, encounters, unlocks, or presentation.
+
+**Locked boundary**
+
+No clear count is approved. Six remains only a prior candidate. The count must follow the completed story spine and source-layer design rather than determine them.
+
+**Status:** open; depends on Questions 1–10
+
+## 12. True-final source encounter, ending, and postgame
+
+**Question**
+
+What happens after the Shogun's permanent defeat, what form does the source confrontation take, what does Akio ultimately do with Beast Blood, and why can gameplay continue after the canonical ending?
+
+Establish:
+
+- source boss identity and phases,
+- final vulnerability,
+- fate of the Shogun, daughter, island inhabitants, and barrier,
+- Akio's final condition,
+- ending consequence,
+- credits trigger,
+- postgame explanation and scope.
+
+**Locked boundary**
+
+The Shogun remains the central character antagonist. The ancient source is the deeper supernatural threat and intended true-final encounter.
+
+**Status:** open; final story-spine dependency
+
+## 13. Eclipse Shogun final character and production identity
+
+**Question**
+
+What final body type, costume, weapon, movement language, and beast transformation distinguish the Shogun from the game's other samurai bosses?
+
+**Current direction**
+
+A regal, cunning, potentially slender or lightly armored ruler may fit better than another heavily armored warrior. The final form should use Beast Blood and reveal a beast transformation without becoming a mindless brute.
+
+**Locked boundary**
+
+The three-phase structure remains Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed. The existing armor, mask, polearm, and animation list are reopened working concepts.
+
+**Status:** open before Milestone 6 quotation

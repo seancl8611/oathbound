@@ -2,17 +2,18 @@
 id: CONTENT-AREA3-BOSS
 title: The Eclipse Shogun — Boss Encounter
 category: content
-status: approved
+status: draft
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - area-3
   - eclipse-shogun
-  - final-boss
-  - wellspring
+  - regional-boss
+  - ancient-source
   - three-phase
 related:
   - LORE-ECLIPSE-SHOGUN
+  - LORE-BEAST-BLOOD
   - CONTENT-AREA3-OVERVIEW
   - CONTENT-AREA3-MINIBOSSES
   - ART-MILESTONE-06
@@ -22,62 +23,90 @@ related:
 
 ## Gameplay role
 
-Final boss of Kagutsuchi Court and the thematic opposite of Akio. The Shogun used Beast Blood to preserve an entire kingdom. Akio uses altered Beast Blood while fighting to preserve only his own identity.
+Principal boss of Kagutsuchi Court and the central character antagonist of Oathbound.
+
+Defeating him completes the combat route through the three regions and temporarily opens the path to the protected ancient source. He is not the original source or the final supernatural threat.
 
 ## One-sentence fantasy
 
-The island’s former protector, now an eternal ruler who saved his people by imprisoning them inside unending preservation.
+A once-beloved ruler who used forbidden Blood to save his plague-stricken kingdom, then chose control and continued power after the miracle revealed its cost.
 
 ## Lore context
 
-The Shogun used Beast Blood to defeat an ancient enemy and make his army impossible to kill. Over time, protection became possession and immortality became imprisonment. He recognizes Akio as the stable Beast Blood result he once tried and failed to create.
+The Shogun originally opposed the exploitation of Beast Blood. He permitted its use when plague threatened his people and his daughter, then expanded it after the cure appeared successful.
+
+Beast Blood magnified his loyalty, pride, authority, and fear of loss. He remained coherent and responsible for his choices while becoming the ruler and defender of a corrupted kingdom.
 
 ## Phase structure
 
-The encounter uses three phases, each framed as a revelation rather than deterioration.
+The encounter retains three phases, each framed as a deliberate revelation rather than an accidental deterioration.
 
-### Phase 1 — The Sovereign Duelist
+### Phase 1 — Sovereign Duelist
 
-An immaculate ruler-warrior using measured crescent-polearm technique, precise spacing, counters, and calm dominance. This phase is a clean martial test built around the sense that a king is judging the player’s worth through pure superiority.
+The Shogun fights as a composed ruler and exceptional combatant. This phase emphasizes measured spacing, counters, deceptive timing, and authority rather than brute size.
 
 ### Phase 2 — Tyrant of the Wellspring
 
-The mask fractures and the Shogun openly uses the Wellspring. Arena control, blood-force, ritual summons, and controlled area-denial enter the fight. He remains disciplined; his authority expands from the weapon into the battlefield.
+The Shogun openly draws on source-derived Beast Blood. Arena control, blood-force, ritual techniques, or controlled area denial enter the fight. He remains calculating while revealing how extensively he has used the forbidden power.
 
 ### Phase 3 — Eclipse Revealed
 
-The Shogun reveals a perfected sovereign-beast form: taller, broader, more predatory, and fully integrated with Beast Blood while retaining the same weapon, discipline, and royal identity. This is not a berserk collapse. It is the true form he has chosen and mastered.
+The Shogun deliberately releases a sovereign beast form that he has restrained or concealed. The transformation must remain recognizable as the same cunning ruler rather than becoming a random mindless monster.
 
-## Visual identity
+## Visual identity review
 
-- **Phase 1:** immaculate black lacquer war armor, deep crimson trim, gold accents, severe regal silhouette, iconic crescent-bladed polearm.
-- **Phase 2:** fractured mask or facial concealment, visible red veins, harsher stance, stronger Wellspring influence, selective restraint exposed as a choice.
-- **Phase 3:** perfected fusion of sovereign, sword saint, and beast; larger and more inhuman but still elegant, commanding, and recognizably the same king.
+The exact visual identity is reopened for story design lock.
+
+Current preferred direction:
+
+- regal and cunning before heavily armored,
+- potentially slender or lightly armored,
+- ceremonial authority and controlled corruption,
+- elegant movement rather than massive brute force,
+- an increasingly visible Beast Blood transformation across phases.
+
+The existing black-lacquer armor, mask, crescent polearm, and sword-saint emphasis remain working concepts, not final locked requirements. Final weapon, costume, silhouette, and animation scope require a dedicated review before Milestone 6 quotation.
 
 ## Silhouette escalation
 
-Phase 1 is upright, aristocratic, balanced, and defined by the polearm. Phase 2 sharpens the outline through broken-mask language, harsher weapon posture, stronger cloth flow, and Wellspring aura. Phase 3 becomes broader, taller, and more predatory while preserving continuity. The player should feel they are seeing deeper layers of one being rather than three disconnected designs.
+Phase 1 should be upright, composed, and unmistakably sovereign. Phase 2 exposes stronger source influence and a less restrained combat posture. Phase 3 becomes more predatory and inhuman while preserving facial, costume, weapon, or movement continuity.
 
-## Required animations
+## Working animation list
 
-Idle, walk, swing_windup, swing_active, funeral_measure_hit, blade_dance_cast, dash_windup, dash_strike, scythe_rift_cast, predators_feint, ravenous_rend_windup, ravenous_rend_strike, blood_halo_cast, timeless_zone_cast, eclipse_measure_hit, ascent_rise, ascent_slam, crimson_rift_bloom, last_eclipse_windup, last_eclipse_strike, phase_transition_2, phase_transition_3, parried, stagger, hurt, death, deathblow
+The previous animation list remains a planning reference only:
+
+Idle, walk, swing_windup, swing_active, funeral_measure_hit, blade_dance_cast, dash_windup, dash_strike, scythe_rift_cast, predators_feint, ravenous_rend_windup, ravenous_rend_strike, blood_halo_cast, timeless_zone_cast, eclipse_measure_hit, ascent_rise, ascent_slam, crimson_rift_bloom, last_eclipse_windup, last_eclipse_strike, phase_transition_2, phase_transition_3, parried, stagger, hurt, death, deathblow.
+
+Names, weapon assumptions, and unique actions must be revised after the final ruler concept and moveset are approved.
 
 ## Arena and VFX dependencies
 
-The fight takes place above or around the Beast Blood Wellspring in a throne-space or ritual sanctum that fuses royal authority with the island’s source corruption.
+The fight takes place in the Shogun's throne-space or ritual sanctum near the route to the protected source.
 
 - Phase 1 remains relatively clean and duel-readable.
-- Phase 2 introduces blood-lit patterns, ritual manifestations, and controlled danger zones.
-- Phase 3 transforms the arena into a full eclipse-state battlefield dominated by the king’s revealed nature.
-
-VFX progress from restrained blade and armor accents, to controlled blood and ritual arena power, to fully integrated sovereign-beast effects. The eclipse motif becomes more prominent each phase.
+- Phase 2 introduces source-derived blood patterns and controlled danger zones.
+- Phase 3 transforms the arena around the Shogun's chosen beast form.
+- Final defeat must clearly open the route beyond him rather than appearing to complete the entire campaign.
 
 ## Technical notes
 
-Each phase tests a different layer of mastery without losing visual or mechanical coherence. Phase 1 requires precise reads and fair duel clarity. Phase 2 adds arena command without unreadable noise. Phase 3 escalates speed, strength, and fear while preserving disciplined-sovereign identity.
+Each phase tests a different layer of mastery without losing visual or mechanical coherence. Transitions must communicate deliberate escalation and retained cunning.
 
-Transitions must be highly legible and emotionally consequential. The player should understand that the Shogun is deciding how much truth to reveal rather than losing control under pressure. He is the final synthesis of the island: the king who mastered collapse, instinct, and preservation and turned them into a throne.
+The Shogun must remain narratively important even when the ancient source becomes the true-final encounter. His responsibility comes from choosing, expanding, defending, and potentially weaponizing Beast Blood.
 
 ## Narrative boundary
 
-The encounter identity and three-phase revelation structure are approved. The final post-defeat choice, ending consequence, and exact relationship between the Shogun, Wellspring, and barrier remain owned by lore documentation and open questions.
+Approved:
+
+- the Shogun is the Area 3 principal boss,
+- the encounter has three escalating phases,
+- the final phase is a deliberate beast transformation,
+- defeating him opens access to the deeper source.
+
+Still open:
+
+- final costume, body type, weapon, and animation list,
+- current political goal and relationship to the source,
+- reconstruction between successful runs,
+- permanent defeat version,
+- transition from Shogun defeat to source-layer completion.

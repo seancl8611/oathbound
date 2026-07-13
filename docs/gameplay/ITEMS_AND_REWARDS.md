@@ -4,7 +4,7 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - currencies
   - pickups
@@ -13,6 +13,7 @@ topics:
   - breakables
   - room-rewards
   - reward-cadence
+  - source-completion
 related:
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-TECHNIQUES
@@ -44,7 +45,7 @@ Every major room reward should primarily serve one of four needs:
 1. **Build growth:** Techniques, refinements, Prosthetic Techniques, and Relics.
 2. **Survival:** Health, Spirit, recovery, and temporary capacity.
 3. **Economy:** Gold, rerolls, and shop access.
-4. **Persistent progress:** Mist, Scrolls, Boss Emblems, unlocks, and discoveries.
+4. **Persistent progress:** Mist, Scrolls, Boss Emblems, unlocks, discoveries, and source-layer campaign progress.
 
 ## Currency families
 
@@ -56,6 +57,8 @@ Every major room reward should primarily serve one of four needs:
 | Gold | Run-scoped | Mid-run shop economy |
 
 Corruption is not a currency or pickup. It is a run-only Blood Aspect pressure meter.
+
+Source-layer campaign progress is not a currency and cannot be purchased, spent, or lost.
 
 Earlier references to `Mist Shards` are treated as draft/deprecated wording unless a separate shard denomination is intentionally reintroduced later.
 
@@ -240,7 +243,21 @@ May include:
 
 Regional transition support should also restore an approved amount of Health and/or Spirit so the next area begins from a viable state.
 
-The Eclipse Shogun ends the run and therefore resolves through Wellspring completion, permanent rewards, and the results flow rather than granting additional current-run power afterward.
+The Eclipse Shogun is different. Defeating him opens the protected source-completion space rather than granting additional current-run power. Permanent rewards and campaign progress are finalized only after Akio damages the source layer and completes the successful-return sequence.
+
+## Source-layer completion
+
+The current successful-run objective after the Shogun is persistent damage to one protected source layer or equivalent campaign state.
+
+This completion may grant:
+
+- persistent campaign progress,
+- major currencies or Boss Emblems where appropriate,
+- narrative and codex discoveries,
+- unlocks tied to the next campaign stage,
+- results-screen confirmation.
+
+It does not grant current-run power because the run ends immediately afterward. The exact number, identity, and presentation of source layers remain open.
 
 ## Relics
 
@@ -309,6 +326,7 @@ These are pacing targets, not locked room counts or mandatory probabilities.
 - Rare rewards should be exciting without invalidating sword combat or boss mechanics.
 - Technique rewards should be less frequent and more consequential than minor currency or recovery rewards.
 - Persistent-currency rewards must not overwhelm the reason to pursue current-run strength.
+- Source-layer progress cannot be replaced by an ordinary currency payout.
 
 ## Implementation boundaries
 
@@ -322,6 +340,5 @@ Still unresolved:
 - shop stock and reroll economics,
 - exact temporary capacity values,
 - individual consumable ownership,
-- whether any additional persistent currency families are needed.
-
-Do not invent numerical values in art or UI documents before these systems are designed and playtested.
+- whether any additional persistent currency families are needed,
+- source-layer count and completion rewards.

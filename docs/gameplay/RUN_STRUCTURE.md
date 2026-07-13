@@ -4,17 +4,18 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - runs
   - death
   - successful-return
-  - wellspring
+  - ancient-source
   - strand
   - techniques
   - room-rewards
 related:
   - LORE-RETURNING-BLOOD
+  - LORE-STORY-OVERVIEW
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
@@ -25,7 +26,7 @@ related:
 
 # Run Structure
 
-A run begins after preparation and final confirmation at the Boat in the Strand. It ends through death, successful Wellspring completion, or another explicitly designed return condition.
+A run begins after preparation and final confirmation at the Boat in the Strand. It ends through death, successful source-layer damage after the Shogun, or another explicitly designed return condition.
 
 ## Regional flow
 
@@ -34,7 +35,8 @@ The current intended progression is:
 1. Hushiro Gate Village
 2. Yomori Grove
 3. Kagutsuchi Court
-4. Eclipse Shogun and Wellspring completion
+4. Eclipse Shogun
+5. Temporary access to the protected ancient source
 
 Exact branching, room counts, rerouting, and area-order flexibility remain implementation and playtest questions.
 
@@ -60,6 +62,7 @@ The game uses recognizable room categories:
 - Treasure/reward
 - Miniboss
 - Boss approach and boss arena
+- Source approach or completion chamber after the Shogun
 
 Each function should read before interaction through environment composition, focal props, lighting, and UI treatment.
 
@@ -79,7 +82,7 @@ A successful run should create several meaningful Technique decisions without aw
 
 ## Failed run
 
-When Akio dies, Returning Blood reconstructs him at the Strand through the Bloodwell anchor. Death is a real supernatural event, not a non-canon reset.
+When Akio dies, Returning Blood reconstructs him at the Strand. Death is a real supernatural event, not a non-canon reset.
 
 The failed run burns away its temporary blood-state and run-only progress. Permanent unlocks, upgrades, discoveries, Blood Mirror progress, and major currencies survive according to the progression matrix.
 
@@ -88,15 +91,18 @@ The failed run burns away its temporary blood-state and run-only progress. Perma
 On a successful run, Akio:
 
 1. defeats the Eclipse Shogun's current manifestation,
-2. completes the Rite at the Wellspring,
-3. severs one layer of the Shogun's blood-oath,
-4. sacrifices or loses the current body during the Wellspring process,
-5. reforms near the Bloodwell at the Strand,
-6. saves permanent rewards and clears temporary run-state,
-7. receives a results summary,
-8. triggers relevant NPC, codex, Blood Mirror, or hub-state updates.
+2. gains temporary access to the protected ancient source or its inner chamber,
+3. damages or removes one persistent source layer,
+4. is destroyed, sacrificed, or expelled by the source interaction,
+5. reforms at the Strand through Returning Blood,
+6. saves permanent rewards and persistent campaign damage,
+7. clears temporary run-state,
+8. receives a results summary,
+9. triggers relevant NPC, codex, Blood Mirror, source-state, or hub updates.
 
 Successful completion and death both return Akio to the Strand, but they must remain visually and narratively distinct. See [Run Results and Strand Return](../ui_ux/RUN_RESULTS.md) for presentation requirements.
+
+The exact source-layer count, reason Akio cannot finish the source in one run, Shogun reconstruction rule, and true-final sequence remain open story-design questions.
 
 ## Run growth
 
@@ -114,7 +120,7 @@ A run may change through:
 
 ## Reset boundary
 
-The following reset after death or successful Wellspring return:
+The following reset after death or successful source-layer return:
 
 - current Corruption,
 - Blood Aspect Tier,
@@ -135,6 +141,7 @@ The following persist:
 - Blood Mirror trial and mastery progress,
 - narrative discoveries,
 - codex progression,
-- major permanent currencies and rewards.
+- major permanent currencies and rewards,
+- completed source-layer or equivalent campaign progress.
 
 See [Progression](PROGRESSION.md) for system ownership and the current persistence matrix.

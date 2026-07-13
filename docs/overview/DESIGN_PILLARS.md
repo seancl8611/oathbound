@@ -4,7 +4,7 @@ title: Oathbound Design Pillars
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - combat-readability
   - tragic-horror
@@ -28,7 +28,9 @@ Returning Blood grants strength through Blood Aspects, but each increase in powe
 
 ## Tragic martial horror
 
-The island is frightening because recognizable roles remain after identity has faded. Soldiers still guard, workers still labor, animals still hunt, ritual figures still perform, and leaders still protect long after those actions have become monstrous.
+The island is frightening because its people accepted a miracle that saved their civilization before revealing its cost. Corrupted inhabitants retain enough memory, loyalty, recognition, and humanity to remain recognizable while becoming dangerous.
+
+The horror comes from seeing the person, kingdom, or relationship that still exists inside the transformation—not from a mindless infection or a single metaphor assigned to every victim.
 
 ## Role-readable silhouettes
 
@@ -36,17 +38,17 @@ Every unit should communicate role through stance, weapon shape, posture, and ma
 
 ## Regional escalation
 
-The three regions escalate through different preserved behaviors:
+The three regions escalate through different expressions of the same island-wide curse:
 
-- **Hushiro Gate Village:** discipline and recently human ruin
-- **Yomori Grove:** instinct, predation, spirit residue, and invasive environment pressure
-- **Kagutsuchi Court:** ritual perfection, hierarchy, and preservation denied an ending
+- **Hushiro Gate Village:** disciplined defenders, villagers, animals, and recent physical corruption
+- **Yomori Grove:** predation, spirit residue, long-term bodily instability, and invasive environment pressure
+- **Kagutsuchi Court:** royal loyalty, hierarchy, controlled Beast Blood use, and advanced transformation
 
-Escalation should be visible in silhouette, ornamentation, movement language, lighting, and corruption expression.
+Escalation should be visible in silhouette, ornamentation, movement language, lighting, and corruption expression without requiring each area to embody a separate philosophical thesis.
 
 ## Build variety without losing the sword game
 
-Blood Aspects, stances, prosthetics, boons, relics, and items should change tactics without replacing the core katana, posture, parry, and deathblow identity.
+Blood Aspects, Techniques, prosthetics, Relics, and items should change tactics without replacing the core katana, posture, parry, and deathblow identity.
 
 ## Reusable production foundations
 

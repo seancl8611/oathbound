@@ -4,7 +4,7 @@ title: Oathbound Terminology
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 ---
 
 # Oathbound Terminology
@@ -12,8 +12,9 @@ last_reviewed: 2026-07-11
 | Preferred term | Definition / usage |
 |---|---|
 | Oathbound | Current project title. Italicize only when normal prose style calls for it. |
-| Beast Blood | The island's corrupting supernatural force. Capitalize both words. |
-| Returning Blood | Beast Blood changed into obedience after submitting to Akio's resolve. |
+| Beast Blood | Rare corrupting supernatural power obtained deliberately from the island's ancient source. Capitalize both words. |
+| ancient source | Current generic wording for the unresolved origin of Beast Blood. Lowercase until a proper name is approved. Do not assume it is literally a giant Heart. |
+| Returning Blood | Akio's unprecedented Beast Blood condition, shaped by his resolve and expected to involve Order warding. Exact origin remains open. |
 | Blood Aspect | A controlled specialization of Returning Blood and the central tactical identity of a run. |
 | Wolf, Wraith, Ronin | Current Blood Aspect names. Capitalize as proper system names. |
 | Tier 0, Tier I, Tier II, Tier III, Tier IV | Standard Blood Aspect mutation progression labels. |
@@ -28,9 +29,9 @@ last_reviewed: 2026-07-11
 | combat verb | Shared action or behavior used to express natural synergy, such as parry, Counter Cut, posture break, deathblow, dash, flank, Prey, pursuit, or Spirit. |
 | The Order | Akio's religious-military organization. The Shogun predates it. |
 | The Strand | Persistent hub area. |
-| Bloodwell | Strand progression and revival station. One word. |
+| Bloodwell | Strand progression and reformation-presentation station. One word. It is not currently defined as a technical source anchor. |
 | Blood Mirror | Strand mirror/trial system. Two words. |
-| Blood Moon | Rare event that empowers Beast Blood and weakens the barrier. |
+| Blood Moon | Rare event that empowers existing Beast Blood and weakens the barrier. |
 | Hushiro Gate Village | Area 1 region name. |
 | Yomori Grove | Area 2 region name. |
 | Kagutsuchi Court | Area 3 region name. |
@@ -40,10 +41,11 @@ last_reviewed: 2026-07-11
 | Blood Lotus | Area 3 Miniboss #1. Use Heart and Stalks for its component units. |
 | Spillborn | Weak expendable units spawned by a Hollow Vessel. |
 | Eternal Swordsman | Area 3 Miniboss #2. |
-| Eclipse Shogun | Area 3 principal boss and final-boss title. He predates the Order. |
+| Eclipse Shogun | Area 3 principal boss and central character antagonist. He is not the original Beast Blood source or the true-final supernatural encounter. |
 | Sovereign Duelist | Eclipse Shogun Phase 1. |
-| Tyrant of the Wellspring | Eclipse Shogun Phase 2. |
-| Eclipse Revealed | Eclipse Shogun Phase 3. |
+| Tyrant of the Wellspring | Eclipse Shogun Phase 2 working name. |
+| Eclipse Revealed | Eclipse Shogun Phase 3 working name and deliberate beast transformation. |
+| source layer | Generic working term for one persistent successful-run damage step against the ancient source. Exact form and final name remain open. |
 | Beast-Bane Whistle | Prosthetic interrupt pulse with stronger anti-beast response. |
 | Thunder Rod | Prosthetic line strike that applies Shock to the first target hit. |
 | Smoke Gourd | Prosthetic target-break smoke field. |
@@ -65,6 +67,7 @@ last_reviewed: 2026-07-11
 ## Deprecated, superseded, or rejected wording
 
 - `Mist Shards` is deprecated draft wording unless a separate denomination is deliberately restored.
+- `Mistveil` is removed from current lore and should not be used as a spreading corruption force or proper world term unless explicitly reintroduced.
 - `boon` is superseded for ordinary run upgrades; use `Technique` for Akio's temporary combat upgrades and `Relic` for separate passive rules.
 - Storm, Frost, Ember, Hex, and Shadow are removed stance-system names and should not be used as current player build categories.
 - `stance` may still describe an ordinary body pose or enemy combat posture, but not a current player progression system.
@@ -73,7 +76,10 @@ last_reviewed: 2026-07-11
 - Do not describe Returning Blood as standard Order practice.
 - Do not state that Order warriors are normally dosed with Beast Blood to cross the barrier.
 - Do not identify the Eclipse Shogun as an Order founder or member.
-- Do not describe the Eclipse Shogun's final phase as a mindless berserk collapse; it is a deliberate revelation of his perfected sovereign-beast form.
+- Do not describe Beast Blood as an airborne or bite-transmitted zombie infection.
+- Do not define Beast Blood primarily as automatic preservation of duties, jobs, or oaths.
+- Do not describe the Eclipse Shogun as an innocent puppet or his final phase as a mindless berserk collapse.
+- Do not treat the current giant-Heart concept, source anatomy, Shogun armor, mask, polearm, or animation list as locked.
 
 ## Status values
 
