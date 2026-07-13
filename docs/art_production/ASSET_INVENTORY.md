@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - asset-counts
   - characters
@@ -13,6 +13,7 @@ topics:
   - vfx
   - items
   - techniques
+  - ancient-source
 related:
   - OVERVIEW-FULL-SCOPE
 ---
@@ -31,8 +32,9 @@ This is the high-level production inventory. Individual character, system, regio
 | Area 2 enemies | 4 | Forest, spirit, and predator set |
 | Area 3 enemies | 5 | Court and inner-sanctum set |
 | Minibosses | 6 | Two per main area |
-| Bosses | 3 | One principal boss encounter per main area |
-| Environment sets | 4 | Strand and Areas 1–3; specialized interiors and arenas remain subsets |
+| Regional bosses | 3 | One principal boss encounter per main area |
+| True-final source encounter | 1 provisional | Exact combatant, phase, and reusable-asset count remain open |
+| Environment sets | 4 + source subset | Strand and Areas 1–3; source approach/chamber remains an endgame subset until locked |
 | Blood Aspect families | 3 | Wolf, Wraith, Ronin plus modular Tier escalation |
 | Prosthetic families | 8 | One approved tool family each |
 | Technique loadout UI | 4 active + 1 reserve | Final Technique catalog and unique icon count remain open |
@@ -40,7 +42,7 @@ This is the high-level production inventory. Individual character, system, regio
 | Currency families | 4 current | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
 
-The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, and room variants remain granular and should be finalized when catalog size is locked.
+The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, room variants, source layers, and true-final source assets remain granular and should be finalized when catalog and story scope are locked.
 
 ## Player and player-system art
 
@@ -62,13 +64,15 @@ The former five stance families are removed. High-level counts for Technique ico
 - **Area 1:** 6 standard enemies, Village Ogre, The Collector, Keeper of the Gate
 - **Area 2:** 4 standard enemies, Embered Pilgrim, Rotwood Host, Twin Maws encounter
 - **Area 3:** 5 standard enemies, Blood Lotus, Eternal Swordsman, Eclipse Shogun
+- **True endgame:** provisional ancient-source encounter after permanent Shogun defeat; exact body, avatar, phase count, and use of existing assets remain open
 
 ## Environment sets and rooms
 
 - Strand hub, docks, NPC stations, Blood Cavern, and Blood Mirror
 - Hushiro modular base kit, functional rooms, miniboss spaces, and old-gate boss arena
 - Yomori base kit, functional rooms, failed-purification site, Rotwood arena, and Twin Maws arena
-- Kagutsuchi base kit, functional rooms, Blood Lotus arena, duel court, and Wellspring throne-space
+- Kagutsuchi base kit, functional rooms, Blood Lotus arena, duel court, and Shogun throne-space
+- Protected source approach or chamber, reusable source-layer completion state, and provisional true-final arena
 
 Cross-area room types:
 
@@ -99,6 +103,8 @@ Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Heal
 - Route reward-preview markers
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause screens
 - Blood Lotus multi-cycle UI support
+- Source-layer completion and persistent campaign-progress state
+- True-final source boss presentation after encounter lock
 - Front end, settings, controls, save/loading, credits, and completion presentation
 
 ## Shared VFX families
@@ -138,6 +144,13 @@ Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Heal
 - Unique effects only for approved Technique mechanics that cannot read correctly through reuse
 - Mixed-build readability examples across all three regional palettes
 
+### Endgame source
+
+- Reusable source-layer damage and completion reaction
+- Forced-return or body-destruction transition
+- Persistent layer-state differences if visually required
+- True-final source effects only after source identity and encounter mechanics are approved
+
 The removed Storm, Frost, Ember, Hex, and Shadow stance VFX families are no longer planned. Burn and Shock remain supported by approved prosthetics. Frost and Hex are not baseline player status requirements.
 
 ## Item and reward art
@@ -162,3 +175,5 @@ The separate Posture Break Cue exists in the broader inventory, but its exact Mi
 ## Inventory rule
 
 When a system, enemy, boss, room type, item family, UI screen, or VFX family is added, removed, or reassigned, update this inventory and its assigned milestone in the same change.
+
+The provisional source encounter must not be assigned a fixed asset count or contractor quote until its narrative and encounter design are locked.
