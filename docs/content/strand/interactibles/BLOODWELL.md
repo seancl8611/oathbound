@@ -4,7 +4,7 @@ title: Bloodwell
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - strand
   - bloodwell
@@ -24,23 +24,26 @@ related:
 
 ## Strand function
 
-The Bloodwell is the primary long-term progression tree and the Strand-side anchor through which Returning Blood reconstructs Akio after failed or successful runs.
+The Bloodwell is the primary long-term progression tree and the Strand location where Akio's Returning Blood reformation is presented after failed or successful runs.
 
 ## Lore role
 
-The Bloodwell is a contained Beast Blood site in the Strand. After Akio's first return, it becomes the anchor through which Returning Blood reforms him. This use is unique to Akio and conflicts with the Order's traditional refusal to use Beast Blood directly.
+The Bloodwell is a controlled ritual site used by the Order for anti-corruption rites and later associated with Akio's unprecedented returns.
 
-It does not make Akio casually immortal. When Akio dies or sacrifices his current body at the Wellspring, Beast Blood attempts to consume, distort, or rebuild him. The Bloodwell receives what remains and helps him reform only because his body and will remain coherent enough to return.
+The current lore does not require it to be a separate Beast Blood anchor linked technically to the island's source. Akio returns to the Strand because Returning Blood preserves the identity protected by the Order's warding and follows that rite back to its place of origin. The exact metaphysics remain deliberately brief and under story design lock.
+
+The Bloodwell does not make Akio casually immortal. Reformation remains dangerous, incomplete in its retention of temporary run-state, and unique to him.
 
 ## Visual identity
 
-A carved stone well set into the central hub plaza. Its circular rim is worn by age, offerings, and repeated rites. The blood inside sits unnaturally still and reflects faint red light from below.
+A carved stone well set into the central hub plaza. Its circular rim is worn by age, offerings, and repeated rites. The liquid or darkness inside sits unnaturally still and reflects faint red light from below.
 
 Supporting motifs:
 
 - sacred geometry,
 - ritual cuts,
 - old hunter markings,
+- anti-corruption seals,
 - blood-lit seams,
 - carved channels spreading through surrounding stone.
 
@@ -113,22 +116,22 @@ The Bloodwell owns broad permanent meta progression. It does not own normal Aspe
 
 ## Revival and successful-return presentation
 
-After failed death-return or successful Wellspring sacrifice, Akio reforms near the Bloodwell.
+After failed death-return or successful source-layer completion, Akio reforms near the Bloodwell or the final approved Strand return point.
 
 Visual treatment may include:
 
 - a deeper crimson pulse through the well,
-- blood-surface ripple rising upward,
+- liquid-surface ripple rising upward,
 - mist gathering at the spawn point,
 - a brief red-black collapse and body-reconstruction flash,
 - momentary traces of the equipped Aspect,
 - a controlled return to normal Strand ambience.
 
-Successful return should then present the [Run Results and Strand Return](../../../ui_ux/RUN_RESULTS.md) summary, save permanent rewards, clear run-only state, and trigger relevant NPC, codex, or Blood Mirror updates.
+Successful return should then present the [Run Results and Strand Return](../../../ui_ux/RUN_RESULTS.md) summary, save permanent rewards and source-layer campaign progress, clear run-only state, and trigger relevant NPC, codex, Blood Mirror, or source-state updates.
 
 ## Animation and environment needs
 
-- subtle blood-surface ripple,
+- subtle surface ripple,
 - restrained red internal glow,
 - slow particle drift,
 - faint pulses traveling through carved channels,
@@ -140,6 +143,6 @@ Successful return should then present the [Run Results and Strand Return](../../
 
 - The layout supports later branch expansion without a full redesign.
 - Branch and tier relationships remain readable immediately.
-- Permanent rewards save before the return flow completes.
+- Permanent rewards and campaign progress save before the return flow completes.
 - Reformation effects communicate danger and consequence rather than effortless resurrection.
-- The successful-return flow remains usable during prototype completion before the final ending is fully designed.
+- The successful-return flow remains usable during prototype completion before the final source and ending are fully designed.
