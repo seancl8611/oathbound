@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 topics:
   - progression
   - persistence
@@ -14,6 +14,7 @@ topics:
   - trials
   - currencies
   - techniques
+  - source-layers
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
@@ -26,7 +27,7 @@ related:
 
 # Progression
 
-Oathbound uses connected run-only and persistent progression layers. Every system and item family must explicitly state whether its state survives failed death-return and successful completion.
+Oathbound uses connected run-only, persistent character, and persistent campaign progression layers. Every system and item family must explicitly state whether its state survives failed death-return and successful completion.
 
 ## Run progression
 
@@ -45,7 +46,7 @@ Temporary power assembled during an attempt may include:
 - temporary consumables or materials,
 - run-specific modifications and encounter rewards.
 
-These states are burned away on failed death-return or successful Wellspring return unless a later system explicitly reclassifies them.
+These states are burned away on failed death-return or successful source-layer return unless a later system explicitly reclassifies them.
 
 ## Run-build ownership
 
@@ -56,7 +57,7 @@ These states are burned away on failed death-return or successful Wellspring ret
 
 Permanent progression may unlock additional Techniques into future reward pools, but it does not preserve an assembled Technique loadout between runs.
 
-## Persistent progression
+## Persistent character progression
 
 The Strand supports growth that survives return:
 
@@ -67,6 +68,18 @@ The Strand supports growth that survives return:
 - **Discovery Board:** codex knowledge, enemy information, Technique/prosthetic/Relic notes, and recovered history.
 - **Merchant and NPC services:** persistent unlocks, stock access, or service progression where defined.
 - **Persistent currencies:** Mist, Scrolls, and Boss Emblems.
+
+## Persistent campaign progression
+
+Successful runs additionally preserve damage dealt to the ancient source or its equivalent campaign-layer state.
+
+The exact representation remains open, but it must:
+
+- survive all later deaths and successful returns,
+- visibly advance the story,
+- unlock appropriate NPC, codex, environment, or encounter changes,
+- lead eventually to the Shogun's permanent defeat and the true-final source confrontation,
+- remain separate from ordinary currencies and character-upgrade ranks.
 
 ## Currency ownership
 
@@ -120,14 +133,14 @@ Appropriate persistent rewards include:
 
 ## Return processing
 
-Both failed and successful runs reconstruct Akio at the Strand through Returning Blood and the Bloodwell. A successful return additionally:
+Both failed and successful runs reconstruct Akio at the Strand through Returning Blood. A successful return additionally:
 
-1. saves permanent boss, Wellspring, currency, discovery, and unlock rewards,
+1. saves permanent boss, source-layer, currency, discovery, and unlock rewards,
 2. clears run-only state,
 3. presents a results summary,
-4. triggers relevant NPC, codex, Blood Mirror, or hub-state updates.
+4. triggers relevant NPC, codex, Blood Mirror, source-state, or hub updates.
 
-The results flow must distinguish retained rewards from states burned away during reformation.
+The results flow must distinguish retained rewards and campaign progress from states burned away during reformation.
 
 ## Design rules
 
@@ -140,12 +153,14 @@ The results flow must distinguish retained rewards from states burned away durin
 - Every persistent interface shows costs, prerequisites, ownership, and purchased/maxed states clearly.
 - Trial rewards remain deterministic enough that players understand success and failure.
 - Gold cannot appear as a persistent Strand wallet unless its persistence rule is deliberately changed in the same update.
+- Source-layer campaign progress is not purchasable and cannot be lost.
 
 ## Current persistence matrix
 
 | Category | Persists after death | Persists after completed run | Status |
 |---|---:|---:|---|
 | Narrative discoveries and codex progress | Yes | Yes | approved |
+| Persistent source-layer campaign progress | Yes | Yes | approved direction; exact structure open |
 | Permanent upgrades | Yes | Yes | approved |
 | Unlocked Blood Aspects | Yes | Yes | approved |
 | Selected Aspect as loadout option | Yes | Yes | approved |
