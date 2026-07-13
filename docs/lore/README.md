@@ -16,11 +16,16 @@ Authoritative canon, world history, factions, supernatural rules, and narrative 
 
 Lore files own fictional facts. Gameplay files own mechanical rules even when those mechanics are explained by lore.
 
+The Beast Blood file currently owns approved boundaries for the unresolved ancient source until that subject is defined strongly enough to receive its own authoritative document.
+
 ## Planned expansion
 
-- Detailed timeline
-- Island history before and after the Shogun's decision
+- Complete story spine
+- Ancient source identity, agency, discovery, and Blood-access history
+- Detailed plague-era and post-corruption timeline
 - Region-specific cultures and rituals
-- Wellspring cosmology
-- Ending canon
-- Character-specific narrative arcs
+- Order knowledge and barrier history
+- Shogun daughter and character-specific narrative arcs
+- Source-layer campaign progression
+- True-final source encounter and ending canon
+- Postgame narrative continuity
