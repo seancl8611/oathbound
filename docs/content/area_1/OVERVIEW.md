@@ -4,7 +4,7 @@ title: Hushiro Gate Village
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - area-1
   - hushiro
@@ -19,7 +19,7 @@ related:
 
 # Hushiro Gate Village
 
-Hushiro Gate Village is Area 1 and the island's wet, militarized threshold. Discipline is still visible beneath corruption. The region should read as recently human first and monstrous second.
+Hushiro Gate Village is Area 1 and the island's wet, militarized threshold. Discipline and recognizable community remain visible beneath corruption. The region should read as recently human first and monstrous second.
 
 ## Palette
 
@@ -39,15 +39,16 @@ The region remains desaturated overall. Warmth comes from lanterns; blood-red pr
 
 Dark soaked timber, warped clay walls, cracked tile, damp stone, soot-stained paper, rotting shrine wood, rusted iron, old cloth, household debris, and barricade material.
 
-Corruption appears through staining, seepage, darkened grain, root intrusion, structural warping, and diluted Beast Blood emerging from cracks, cellars, and shrine-adjacent spaces.
+Corruption appears through staining, old treatment sites, damaged vessels, darkened grain, root intrusion, structural warping, and localized Beast Blood residue. It should not imply an airborne or casually spreading infection.
 
 ## Enemy-family read
 
 Enemies are recently human and partially transformed:
 
-- villagers repeat fragments of final routines in twitchy groups,
-- soldiers remain upright, role-bound, and disciplined,
-- familiar human function remains visible beneath collapse.
+- villagers retain fragmented memory, fear, hunger, and territorial recognition,
+- soldiers remain disciplined and loyal to the kingdom they defended,
+- hounds recognize packs, handlers, and familiar ground,
+- familiar human relationships remain visible beneath collapse.
 
 The visual principle is human ruin first, full monstrosity second.
 
@@ -57,11 +58,11 @@ A dense dark-timber village of narrow paths, leaning homes, close rooflines, sha
 
 ## Ambient pressure
 
-Low fog, lantern flicker, damp haze, roof runoff, moving cloth and paper, muddy ground, blood-slick thresholds, debris-choked alleys, and quiet Beast Blood seepage.
+Low fog, lantern flicker, damp haze, roof runoff, moving cloth and paper, muddy ground, blood-slick thresholds, debris-choked alleys, and localized corruption around former treatment, storage, or ritual sites.
 
 ## Movement philosophy
 
-Villagers twitch, hesitate, rush, and repeat routes. Soldiers retain slower stance discipline, readable guards, and deliberate attack structure. Environmental movement remains subtle and oppressive.
+Villagers twitch, hesitate, watch, retreat, or rush according to fragmented awareness rather than endlessly repeating meaningless routines. Soldiers retain stance discipline, readable guards, formation habits, and deliberate attack structure. Environmental movement remains subtle and oppressive.
 
 ## Combat purpose
 
