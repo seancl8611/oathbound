@@ -4,7 +4,7 @@ title: Area 1 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - area-1
   - hushiro
@@ -21,16 +21,16 @@ related:
 
 ## Family fantasy
 
-Grounded, disciplined village and gate defenders corrupted from within their existing structure. Hushiro's enemies should feel like a garrison and community still functioning in fragments: soldiers guard, archers preserve firing lines, constables restrain, dogs hunt, civilians hunger, and pooled Beast Blood spreads.
+Grounded village and gate defenders corrupted from within a community they still partially recognize. Hushiro's enemies should feel like soldiers, civilians, and animals whose training, loyalties, fear, hunger, and territorial awareness survive in distorted form.
 
 ## Shared motifs
 
 - gatekeeping and patrol routes,
 - checkpoint and formation behavior,
-- duty continuing after meaning has died,
+- loyalty to former comrades and ruler,
 - village-defense tools rather than elite warfare,
 - recently human identity before full monstrosity,
-- familiar roles converted into automatic violence.
+- familiar relationships converted into hostility toward an invading outsider.
 
 ## Shared material language
 
@@ -38,7 +38,9 @@ Cracked lacquer armor, dull red-and-black military colors, worn cloth ties, ash-
 
 ## Shared corruption language
 
-Pallid grey skin, deadened or dim ember-red eyes, stiff muscle memory, dried blood in seams, wrong pauses, body rigidity, and trained behavior continuing without thought. Area 1 corruption normally inhabits recognizable human or animal structure before it produces raw hostless forms.
+Pallid grey skin, dim ember-red eyes, dried blood in seams, wrong pauses, body rigidity, signs of old treatment or ritual use, and moments of recognition beneath violent response.
+
+Area 1 corruption normally inhabits recognizable human or animal structure before producing raw failed forms. It should not imply that every enemy is an empty body automatically repeating an assigned function.
 
 ## Movement philosophy
 
