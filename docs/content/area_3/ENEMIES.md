@@ -4,12 +4,12 @@ title: Area 3 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - area-3
   - kagutsuchi-court
   - enemies
-  - preservation
+  - corruption
   - court
 related:
   - CONTENT-AREA3-OVERVIEW
@@ -21,16 +21,16 @@ related:
 
 ## Family fantasy
 
-Courtly, elite, ritualized retainers preserved in unnatural perfection. Kagutsuchi's enemies are terrifying because they remain too complete, too composed, and too obedient to reach a natural end.
+Courtly, elite, ritualized retainers whose training, loyalty, and humanity have survived longer under controlled Beast Blood corruption. Kagutsuchi's enemies are terrifying because they remain composed, aware, and devoted enough to defend the Shogun deliberately.
 
 ## Shared motifs
 
-- ceremony frozen into repetition,
-- flawless formation and processional movement,
+- disciplined formation and processional movement,
 - lacquered authority and court hierarchy,
-- attendants trapped in service roles,
+- loyalty to the Shogun and recognition of the Court,
+- immaculate beauty concealing mutation,
 - blossom-strewn stillness and reflective water,
-- preserved beauty denying age, improvisation, and release.
+- controlled Beast Blood use that can rupture into revival, spawning, or frenzy.
 
 ## Shared material language
 
@@ -38,11 +38,13 @@ Polished lacquer, vermilion and black armor, gilded trim, silk layers, ceremonia
 
 ## Shared corruption language
 
-Preservation taken to a monstrous extreme: unnatural stillness, repeated gestures, puppet-like precision, emotionless faces, unaging beauty, perfect equipment, and bodies or systems that continue their assigned function after death or structural failure. Visible mutation is restrained until a role specifically requires rupture, spawning, or frenzy.
+Corruption is restrained and controlled until an enemy's mechanic reveals its cost: unnatural stillness, heightened precision, dim blood-lit eyes, hidden veins, preserved bodies, one-time revival, vessel rupture, and deliberate low-health transformation.
+
+Enemies should not read as empty puppets automatically performing assigned jobs. Their behavior can reflect retained memory, training, allegiance, fear, and ambition even when their judgment has become monstrous.
 
 ## Movement philosophy
 
-Precise, elegant, and over-controlled. Patrols, pivots, formation changes, guard re-angling, attack resets, casting forms, and ceremonial gestures should be cleaner than earlier areas. Wrongness comes from timing held too long, synchronization that is too exact, and roles performed without improvisation.
+Precise, elegant, and over-controlled. Patrols, pivots, formation changes, guard re-angling, attack resets, casting forms, and ceremonial gestures should be cleaner than earlier areas. Wrongness comes from restraint, synchronization, and discipline that conceal how much Beast Blood is being used.
 
 ## Readability priorities
 
