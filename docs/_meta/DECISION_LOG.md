@@ -4,18 +4,22 @@ title: Decision Log
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-13
 ---
 
 # Decision Log
 
 ## 2026-07-10 — Returning Blood origin
 
-**Status:** locked
+**Status:** partially superseded; exact origin reopened 2026-07-13
 
 **Decision**
 
-Akio's resolve forced Beast Blood to submit rather than erase him. That submission mutated it into Returning Blood.
+Akio's resolve is necessary to prevent Beast Blood from erasing him and to preserve his identity through Returning Blood.
+
+**Superseded boundary**
+
+Resolve alone is no longer treated as the complete origin. Order anti-corruption warding is expected to contribute, while the exact event and mechanism remain open.
 
 **Replaces**
 
@@ -43,11 +47,15 @@ The Order does not normally empower its warriors with Beast Blood. Akio's condit
 
 ## 2026-07-10 — Eclipse Shogun predates the Order
 
-**Status:** locked
+**Status:** partially superseded; history revised 2026-07-13
 
-**Decision**
+**Decision retained**
 
-The Eclipse Shogun was the island's protector before the Order existed. He used Beast Blood to preserve his people, and protection became imprisonment.
+The Eclipse Shogun was the island's protector and ruler before the Order existed.
+
+**Superseded premise**
+
+The earlier ancient-enemy and broad preservation explanation is replaced by the plague-era Beast Blood history recorded below.
 
 **Affected documents**
 
@@ -172,11 +180,15 @@ Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and 
 
 ## 2026-07-11 — Eclipse Shogun phases are revelations
 
-**Status:** approved
+**Status:** approved at structural level; character presentation reopened 2026-07-13
 
 **Decision**
 
-The Eclipse Shogun's three phases — Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed — reveal deeper layers of a chosen sovereign-beast identity. They are not a progression from discipline into mindless berserk collapse.
+The Eclipse Shogun's three phases — Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed — reveal increasing use of Beast Blood and culminate in a deliberate beast transformation. They are not a progression into an unrelated mindless brute.
+
+**Reopened**
+
+Final body type, costume, armor weight, weapon, animation list, and ruler presentation require a dedicated review before Milestone 6 quotation.
 
 **Affected documents**
 
@@ -301,7 +313,7 @@ Room function and primary payout are separate. Standard combat routes preview a 
 - Shops use Gold and may sell recovery, capacity, rerolls, Techniques, refinements, prosthetic support, consumables, or occasional Relics.
 - Treasure and miniboss rewards provide higher-value build options.
 - Regional bosses provide persistent progression, current-run power, and transition recovery.
-- The Eclipse Shogun resolves through the Wellspring and results flow.
+- Defeating the Eclipse Shogun opens the protected source-completion step.
 
 The provisional successful-run target is six to eight Technique-related decisions, with Areas 1–2 forming the build and Area 3 refining or replacing it. Exact room counts, probabilities, and values remain balance work.
 
@@ -335,3 +347,123 @@ Burn and Shock remain supported through approved prosthetics. Frost and Hex are 
 - `docs/art_production/ASSET_INVENTORY.md`
 - `docs/art_production/milestones/MILESTONE_04.md`
 - `docs/ui_ux/HUD.md`
+
+## 2026-07-13 — Beast Blood narrative foundation
+
+**Status:** approved
+
+**Decision**
+
+Beast Blood is a rare supernatural power obtained deliberately from an ancient source associated uniquely with the island.
+
+- It is not airborne, bite-transmitted, or a conventional infection.
+- It heals, strengthens, regenerates, extends life, and transforms.
+- It magnifies qualities and desires already present rather than primarily preserving duties or assigning one role.
+- Resolve can delay corruption but may fail.
+- Corrupted inhabitants can retain memory, recognition, loyalty, training, and relationships.
+- Humanoid corruption, beasts, failed bodies, spirit-like remnants, and environment-bound forms may all arise from the same power.
+- The source's exact identity, agency, anatomy, discovery, and Blood-access method remain open.
+
+**Replaces**
+
+The earlier framing that Beast Blood's primary narrative function is preserving roles, duties, habits, and oaths after humane purpose disappears.
+
+**Affected documents**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/WORLD.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/overview/DESIGN_PILLARS.md`
+
+## 2026-07-13 — Shogun plague-era history
+
+**Status:** approved direction; detailed timeline open
+
+**Decision**
+
+The Shogun ruled a flourishing kingdom and was originally a popular, loyal protector. His civilization discovered or acquired the ancient source through circumstances still to be designed. He initially opposed Beast Blood use.
+
+A deadly plague threatened the island and his daughter. He authorized Beast Blood first as a cure, then expanded its use after the apparent miracle succeeded. Corruption emerged gradually.
+
+The Shogun is not an innocent puppet. Beast Blood magnified loyalty, pride, authority, and fear of loss, but he remained responsible for continuing to use, defend, and expand its power after the cost became visible.
+
+**Replaces**
+
+The unresolved ancient-enemy premise in which the Shogun primarily used Beast Blood to make an army impossible to kill during one war.
+
+**Affected documents**
+
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-07-13 — Returning Blood origin reopened
+
+**Status:** open direction
+
+**Decision**
+
+Akio's resolve remains necessary but is not a sufficient complete explanation by itself. The Order's anti-corruption warding is expected to protect the identity that Beast Blood later reconstructs.
+
+The exact exposure event, magical interaction, reason for Strand return, and reason previous warriors failed remain open. A complex Bloodwell/Wellspring anchor system is not part of the current direction.
+
+**Affected documents**
+
+- `docs/lore/RETURNING_BLOOD.md`
+- `docs/lore/THE_ORDER.md`
+- `docs/characters/AKIO.md`
+- `docs/content/strand/interactibles/BLOODWELL.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-07-13 — Successful-run source progression
+
+**Status:** approved structural direction
+
+**Decision**
+
+A successful run now proceeds beyond the Eclipse Shogun:
+
+1. defeat the Shogun's current manifestation,
+2. reach the protected ancient source or inner chamber,
+3. damage or remove one persistent source layer,
+4. lose or be expelled from the current body,
+5. reform at the Strand with permanent rewards and campaign damage intact.
+
+The source-layer count, forced-return cause, Shogun reconstruction, required successful clears, and final sequence remain open.
+
+**Replaces**
+
+The earlier model in which the Wellspring Rite severed one layer of the Shogun's blood-oath.
+
+**Affected documents**
+
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/overview/FULL_GAME_SCOPE.md`
+- `docs/gameplay/CORE_LOOP.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/gameplay/PROGRESSION.md`
+- `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/content/ROOM_TYPES.md`
+- `docs/ui_ux/RUN_RESULTS.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+
+## 2026-07-13 — Shogun and ancient-source antagonist hierarchy
+
+**Status:** approved structural direction
+
+**Decision**
+
+The Eclipse Shogun remains Oathbound's central character antagonist and the principal boss of Kagutsuchi Court. He is responsible for choosing, expanding, defending, and potentially weaponizing Beast Blood.
+
+The ancient source is the deeper supernatural threat and intended true-final encounter after the Shogun's permanent defeat. The source must not erase the Shogun's responsibility or narrative importance.
+
+**Affected documents**
+
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/overview/FULL_GAME_SCOPE.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
