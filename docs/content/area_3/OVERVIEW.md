@@ -4,11 +4,11 @@ title: Kagutsuchi Court
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-13
 topics:
   - area-3
   - kagutsuchi-court
-  - preservation
+  - corruption
   - court
   - endgame
 related:
@@ -21,7 +21,7 @@ related:
 
 # Kagutsuchi Court
 
-Kagutsuchi Court is Area 3 and the endgame region: a grand inner court where beauty, hierarchy, ceremony, and lethal function have been preserved beyond nature.
+Kagutsuchi Court is Area 3 and the endgame region: the surviving seat of a once-prosperous kingdom whose elite retain more culture, loyalty, discipline, and controlled Beast Blood use than the inhabitants of the outer island.
 
 ## Palette
 
@@ -34,23 +34,25 @@ Kagutsuchi Court is Area 3 and the endgame region: a grand inner court where bea
 - Dusk lavender
 - Restrained gilded highlights
 
-Corruption appears through excessive refinement, impossible maintenance, and unnatural perfection rather than visible decay.
+Corruption appears through impossible maintenance, controlled mutation, and a ruler's refusal to let his kingdom visibly decline rather than through ordinary decay.
 
 ## Material language
 
-Polished lacquered wood, gilded trim, clean stone, shallow mirror-still water, silk banners, paper lanterns, refined roof tile, polished weapons, and immaculate blossom-covered courtyards. Materials should feel suspended outside age.
+Polished lacquered wood, gilded trim, clean stone, shallow mirror-still water, silk banners, paper lanterns, refined roof tile, polished weapons, and immaculate blossom-covered courtyards. Materials should feel sustained beyond natural possibility.
 
 ## Enemy-family read
 
-Enemies are courtly roles trapped in ritual repetition: ceremonial guards, elite retainers, attendants, ritualists, noble functionaries, preserved instruments of authority, and ceremonial systems that continue operating after failure. Detailed family and unit rules belong in [Area 3 Enemies](ENEMIES.md).
+Enemies are elite soldiers, retainers, ritualists, vessels, and guardians who retain strong loyalty to the Shogun and recognition of the Court they defend.
+
+Their precision comes from training, hierarchy, memory, and more controlled Beast Blood corruption—not from empty ceremonial roles automatically repeating after all identity is gone. Detailed family and unit rules belong in [Area 3 Enemies](ENEMIES.md).
 
 ## Architecture and atmosphere
 
-Grand halls, open ceremonial courtyards, reflecting pools, stone processional paths, curved bridges, blossom-lined approaches, and ornamented gates remain calm and luminous. Endless drifting petals, warm lanterns, still water, surface mist, and measured banner movement create oppression through excessive stillness.
+Grand halls, open ceremonial courtyards, reflecting pools, stone processional paths, curved bridges, blossom-lined approaches, and ornamented gates remain calm and luminous. Endless drifting petals, warm lanterns, still water, surface mist, and measured banner movement create oppression through deliberate control and unnatural maintenance.
 
 ## Movement philosophy
 
-Movement is precise, elegant, and unnaturally controlled. Soldiers patrol and fight in flawless patterns; ritualists maintain exact casting forms; preserved systems continue their process. Wrongness comes from over-control until a specific mechanic introduces rupture, spawning, or frenzy.
+Movement is precise, elegant, and unnaturally controlled. Soldiers use disciplined formations; ritualists maintain exact casting forms; elite retainers react with greater awareness than the outer island's inhabitants. Wrongness comes from restraint held too long and transformation concealed beneath courtly control until a specific mechanic introduces revival, rupture, spawning, or frenzy.
 
 ## Standard enemy roster
 
@@ -64,9 +66,10 @@ Movement is precise, elegant, and unnaturally controlled. Soldiers patrol and fi
 
 1. [Blood Lotus](MINIBOSSES.md#blood-lotus) — multi-cycle objective miniboss
 2. [Eternal Swordsman](MINIBOSSES.md#eternal-swordsman) — duel miniboss
-3. [The Eclipse Shogun](BOSS.md) — three-phase final boss
+3. [The Eclipse Shogun](BOSS.md) — three-phase regional boss
+4. Protected ancient-source completion space reached after the Shogun
 
-The production-bible numbering resolves the previous classification uncertainty: Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the region’s principal boss.
+The Eclipse Shogun remains the region's principal boss and central character antagonist. The current endgame direction continues beyond him to one persistent source-layer damage step and eventually a true-final source encounter.
 
 ## Combat identity
 
@@ -78,8 +81,9 @@ The production-bible numbering resolves the previous classification uncertainty:
 - heavy bruiser escalation and frenzy,
 - multi-cycle objective combat,
 - pure duel discipline,
-- three-phase final-boss revelation.
+- three-phase Shogun revelation,
+- post-Shogun source-layer completion.
 
 ## Production warning
 
-Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun remains a dedicated internal batch chain within Milestone 6.
+Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun and the provisional source endgame remain dedicated internal batch chains within Milestone 6.
