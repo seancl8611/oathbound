@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - project-identity
   - combat
@@ -12,6 +12,7 @@ topics:
   - blood-moon
   - techniques
   - three-areas
+  - the-heart
 related:
   - OVERVIEW-DESIGN-PILLARS
   - GAMEPLAY-COMBAT
@@ -24,11 +25,15 @@ related:
 
 Oathbound is a high-angle 2D action roguelite built around disciplined katana combat, posture pressure, precise parries, stagger, deathblows, Hades-like room-and-boss flow, and run-based build progression.
 
-The player controls Akio, a warrior of the Order sent through an ancient containment barrier onto a cursed Japanese-gothic island. The island was once a flourishing kingdom that used rare Beast Blood from an ancient source to survive a deadly plague. The apparent miracle gradually corrupted its people and ruler.
+The player controls Akio, a warrior of the Order sent through an ancient containment barrier onto a cursed Japanese-gothic island. The island was once a flourishing kingdom that used rare Beast Blood from the Heart—an ancient living godlike organ or supernatural core—to survive a deadly plague. The apparent miracle gradually corrupted its people and ruler.
 
-Beast Blood strengthens, heals, regenerates, and transforms while intensifying impulses already present in the bearer. Corrupted inhabitants may retain memory, loyalty, recognition, training, and attachment rather than becoming mindless infected.
+The Heart's ultimate origin remains deliberately ambiguous. It may be part of a forgotten entity, the core of the island, a divine vessel, or something else entirely. It possesses primal agency centered on survival, regeneration, growth, and continuation rather than a human personality or clearly explained plan.
+
+Beast Blood strengthens, heals, regenerates, and transforms while intensifying impulses already present in the bearer. Corrupted inhabitants may retain memory, loyalty, recognition, training, ambition, and attachment rather than becoming mindless infected. Retained humanity does not equal freedom from the Blood.
 
 Akio is not immune. His resolve and the Order's anti-corruption warding contribute to an unprecedented condition called Returning Blood. It allows him to reform after death, retain his identity, and develop controlled Blood Aspects during runs. The exact origin remains under story design lock.
+
+Akio is the only known bearer with genuine control over Beast Blood. Other bearers may direct abilities or retain intelligence, but they ultimately lose the ability to reject the Blood's rule.
 
 ## Project statement
 
@@ -52,7 +57,7 @@ Across a run, the player grows from the complete base sword kit into a specializ
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
 - Failed runs return Akio to the Strand through Returning Blood reconstruction
-- Successful runs defeat the Shogun, reach the protected ancient source, damage one persistent source layer, and return Akio to the Strand with permanent rewards and campaign progress intact
+- Successful runs defeat the Shogun, reach the protected Heart, damage one persistent Heart layer, and return Akio to the Strand with permanent rewards and campaign progress intact
 
 ## Run-build philosophy
 
@@ -72,13 +77,13 @@ A single error should matter without routinely ending an otherwise viable run in
 ## World structure
 
 - **The Strand:** persistent shoreline hub and preparation threshold
-- **Area 1 — Hushiro Gate Village:** disciplined, grounded, and recently human
-- **Area 2 — Yomori Grove:** feral, spiritual, predatory, and environmentally invasive
-- **Area 3 — Kagutsuchi Court:** courtly, loyal, corrupted, and lethal
-- **Run climax:** the Eclipse Shogun followed by temporary access to the protected ancient source
-- **True-final direction:** permanent defeat of the Shogun and a deeper source confrontation after enough persistent layers have been removed
+- **Area 1 — Hushiro Gate Village / Rupture:** recent corruption, violence, bodily collapse, fragmented community, and desperate faith
+- **Area 2 — Yomori Grove / Adaptation:** long-term predation, spirit persistence, altered nature, and the curse as an established condition of existence
+- **Area 3 — Kagutsuchi Court / False Ascendancy:** courtly beauty, hierarchy, elite mutation, and the mistaken belief that Beast Blood has been mastered
+- **Run climax:** the Eclipse Shogun followed by temporary access to the protected Heart
+- **True-final direction:** permanent defeat of the Shogun and a deeper Heart confrontation after enough persistent layers have been removed
 
-The ancient source's identity, number of layers, required clear count, and true-final encounter are not yet locked.
+The Heart's identity is locked. Its discovery, physical access method, number of layers, required clear count, final manifestation, and true-final encounter remain open.
 
 ## Structural references
 
