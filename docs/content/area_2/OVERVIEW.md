@@ -4,13 +4,14 @@ title: Yomori Grove
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - area-2
   - yomori-grove
   - forest
   - spirits
   - predators
+  - adaptation
 related:
   - ART-DIRECTION
   - ART-MILESTONE-05
@@ -21,7 +22,9 @@ related:
 
 # Yomori Grove
 
-Yomori Grove is Area 2, where long-term Beast Blood corruption has produced predation, spiritual instability, altered animals, and environment-bound remnants. The environment should feel active, watchful, and unreliable even when enemies are offscreen.
+Yomori Grove is Area 2, where long-term Beast Blood corruption has become part of the forest's ecological and spiritual condition.
+
+The region represents adaptation rather than immediate collapse. Suffering remains present, but the inhabitants are no longer reacting only as victims in the middle of a catastrophe. Predators, spirits, and environment-bound remnants have settled into more established patterns of existence shaped by the curse.
 
 ## Palette
 
@@ -44,7 +47,11 @@ Root-knotted earth, swollen bark, red-veined trunks, slick stone, damp moss, fun
 
 ## Enemy-family read
 
-Enemies are different long-term outcomes of the same Beast Blood curse: corrupted beasts, hunting shades, spirit-warped remnants, and territorial entities emerging from brush, canopy, roots, mist, and shadow.
+Enemies are long-term outcomes of the same Beast Blood curse: corrupted beasts, hunting shades, spirit-warped remnants, and territorial entities emerging from brush, canopy, roots, mist, and shadow.
+
+Predators should feel more hesitant, observant, intelligent, cunning, and dangerous than Area 1's unstable creatures. They stalk, test distance, retreat, isolate, and choose favorable moments rather than relying only on exposed aggression.
+
+Some spirits may appear calm, accepting, resigned, or bound into repeated patterns. Others remain hostile, but their hostility should feel deliberate or territorial rather than frantic. This does not mean they control or escape Beast Blood; the curse has become the condition through which they continue to exist.
 
 Some spirit forms may result when corrupted bodies fail while memory, will, or residue remains bound to a place, object, or hunting ground. The exact supernatural process remains open and does not require a separate unrelated curse.
 
@@ -56,7 +63,7 @@ Old hunting paths, shrine trails, torii, lantern markers, wayfinding stones, aba
 
 ## Movement philosophy
 
-Beasts stalk, circle, and lunge. Spirit forms flicker, glide, partially manifest, and relocate. Ambient uncertainty is encouraged, but every targetable state, attack startup, reappearance point, and control zone must remain fair.
+Beasts stalk, circle, observe, withdraw, and lunge. Spirit forms flicker, glide, partially manifest, and relocate with greater calm or purpose than Area 1's ruptured victims. Ambient uncertainty is encouraged, but every targetable state, attack startup, reappearance point, and control zone must remain fair.
 
 ## Standard enemy roster
 
@@ -78,7 +85,7 @@ The Embered Pilgrim and Rotwood Host are the region's two minibosses. Rootfang a
 - disciplined spectral dueling,
 - light-source-based ranged telegraphs,
 - mist-linked support behavior,
-- predator pressure and elite pounce timing,
+- patient predator pressure and elite pounce timing,
 - root and fungal area control,
 - corrupted fire-rite escalation,
 - shell-and-core state recognition,

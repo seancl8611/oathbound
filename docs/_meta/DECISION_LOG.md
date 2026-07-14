@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Decision Log
@@ -467,3 +467,82 @@ The ancient source is the deeper supernatural threat and intended true-final enc
 - `docs/overview/FULL_GAME_SCOPE.md`
 - `docs/art_production/ASSET_INVENTORY.md`
 - `docs/art_production/milestones/MILESTONE_06.md`
+
+## 2026-07-14 — The Heart identity and agency
+
+**Status:** locked at story-foundation level
+
+**Decision**
+
+The source of Beast Blood is the Heart: an ancient living godlike organ or supernatural core associated uniquely with the island.
+
+- It is physically real but not an ordinary biological organ.
+- It may be part of a forgotten godlike being, the core of the island, a divine vessel, or something else entirely.
+- Its ultimate origin remains deliberately ambiguous and may be suggested through conflicting evidence.
+- It exists somewhere between dormancy, injury, imprisonment, and awakening.
+- It possesses primal agency centered on survival, regeneration, growth, continuation, resistance to restraint, and incorporation of other life.
+- It does not require a human personality, ordinary speech, or a fully explained plan.
+- Beast Blood is its living power and gradually rewrites bearers according to its nature.
+- Some desperate Hushiro inhabitants may worship the Heart as the only power that answered their suffering.
+
+The Heart is the deeper supernatural threat and intended true-final encounter, while the Eclipse Shogun remains the central character antagonist responsible for exploiting and defending its power.
+
+**Deliberately unresolved**
+
+The Heart's larger body or creator, relationship to the island, understanding of humanity, exact awakening behavior, final anatomy, vulnerability, and encounter manifestation remain open or intentionally mysterious.
+
+**Affected documents**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
+- `docs/_meta/TERMINOLOGY.md`
+
+## 2026-07-14 — Akio's unique control and the Court's false mastery
+
+**Status:** locked at thematic level
+
+**Decision**
+
+Akio is the only known bearer with genuine control over Beast Blood.
+
+Other bearers may retain humanity, intelligence, ambitions, martial skill, ritual knowledge, or the ability to direct and deliberately activate mutations. Those qualities do not equal control. Ordinary bearers ultimately lose the ability to reject Beast Blood or act against its continuation.
+
+Akio can Resist escalation, consciously Embrace power, express different Blood Aspects, return toward a controlled baseline, preserve identity through reconstruction, and oppose the Heart itself.
+
+Kagutsuchi Court represents false ascendancy. Its elites believe that hierarchy, strength, ritual, and advanced mutation prove mastery, but they have become more powerful and dangerous servants of the curse. The Eclipse Shogun is the greatest example of this false mastery.
+
+**Affected documents**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/RETURNING_BLOOD.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/characters/AKIO.md`
+- `docs/content/area_3/OVERVIEW.md`
+- `docs/overview/DESIGN_PILLARS.md`
+- `docs/_meta/TERMINOLOGY.md`
+
+## 2026-07-14 — Regional curse progression
+
+**Status:** approved
+
+**Decision**
+
+The three established regions present a thematic progression in the curse without becoming a universal biological stage system:
+
+- Hushiro Gate Village represents rupture: recent corruption, violence, bodily collapse, fragmented community, and desperate faith.
+- Yomori Grove represents adaptation: long-term predation, spirit persistence, altered nature, and the curse as an established ecological and spiritual condition.
+- Kagutsuchi Court represents false ascendancy: elite discipline, culture, and advanced mutation mistaken for mastery.
+
+The established locations remain unchanged: Area 1 is the gate village, Area 2 is the forest, and Area 3 is Kagutsuchi Court. Discarded Eclipse Palace, underground-city, living-citadel, and layered-palace concepts are not part of the current direction.
+
+**Affected documents**
+
+- `docs/overview/DESIGN_PILLARS.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/content/area_1/OVERVIEW.md`
+- `docs/content/area_2/OVERVIEW.md`
+- `docs/content/area_3/OVERVIEW.md`
+- `docs/_meta/TERMINOLOGY.md`

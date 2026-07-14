@@ -4,14 +4,14 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - full-scope
   - asset-counts
   - areas
   - strand
   - techniques
-  - ancient-source
+  - the-heart
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
@@ -19,7 +19,7 @@ related:
 
 # Full Game Scope
 
-This document records the current production-level shape of Oathbound. Exact balance values, frame counts, room counts, Technique and Relic catalog sizes, source-layer count, and implementation details remain subject to design lock and playtesting.
+This document records the current production-level shape of Oathbound. Exact balance values, frame counts, room counts, Technique and Relic catalog sizes, Heart-layer count, and implementation details remain subject to design lock and playtesting.
 
 ## Master scope summary
 
@@ -36,8 +36,8 @@ This document records the current production-level shape of Oathbound. Exact bal
 | Area 3 standard enemies | 5 | Court and inner-sanctum roster |
 | Miniboss encounters | 6 | Two per main area |
 | Regional major bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
-| True-final source encounter | 1 provisional | Ancient source confrontation after permanent Shogun defeat; identity and asset count remain open |
-| Environment sets | 4 + source subset | Strand plus Areas 1–3; protected source chamber remains an Area 3/endgame subset until scoped |
+| True-final Heart encounter | 1 provisional | Confrontation after permanent Shogun defeat; manifestation and asset count remain open |
+| Environment sets | 4 + Heart subset | Strand plus Areas 1–3; protected Heart chamber remains an Area 3/endgame subset until scoped |
 | Cross-area room types | 6 | Combat, Shrine, rest, shop, treasure/miniboss, boss |
 | Current currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
@@ -56,6 +56,7 @@ This document records the current production-level shape of Oathbound. Exact bal
 - Prosthetics: Beast-Bane Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, Bloodletting Gourd
 - One equipped prosthetic in the initial run structure
 - One initial run-scoped Relic slot
+- Akio is the only known bearer with genuine control over Beast Blood
 
 The former Storm, Frost, Ember, Hex, and Shadow stance system is removed. Burn and Shock remain where owned by approved prosthetics or other explicitly documented content. Frost and Hex are not baseline player status families.
 
@@ -69,8 +70,8 @@ The former Storm, Frost, Ember, Hex, and Shadow stance system is removed. Burn a
 - Reserve swapping occurs only at Technique reward screens and rest rooms.
 - Prosthetic Techniques use normal active slots and may receive one slotless refinement.
 - Relics use a separate slot.
-- Run-only build state resets after death or successful source-layer completion.
-- Source-layer campaign progress persists across all later runs.
+- Run-only build state resets after death or successful Heart-layer completion.
+- Heart-layer campaign progress persists across all later runs.
 
 ## Persistent hub — The Strand
 
@@ -92,7 +93,7 @@ Primary interactibles and services:
 - Bloodwell permanent meta progression
 - Blood Cavern training space and Blood Mirror Aspect trials
 
-## Area 1 — Hushiro Gate Village
+## Area 1 — Hushiro Gate Village / Rupture
 
 Standard enemies:
 
@@ -112,7 +113,9 @@ Boss:
 
 - Keeper of the Gate — Ashen Duelist and Collapse phases
 
-## Area 2 — Yomori Grove
+The regional identity emphasizes recent corruption, violent bodily collapse, fragmented community, and limited desperate Heart worship.
+
+## Area 2 — Yomori Grove / Adaptation
 
 Standard enemies:
 
@@ -132,7 +135,9 @@ Boss:
 
 Both twins begin active. The first defeated transfers its half of the corrupted bond to the survivor. Exact transition invulnerability, health/posture handling, inherited move timing, and difficulty normalization remain implementation questions.
 
-## Area 3 — Kagutsuchi Court and source approach
+The regional identity emphasizes long-term predation, spirit persistence, and Beast Blood absorbed into the forest's ecological and spiritual condition.
+
+## Area 3 — Kagutsuchi Court / False Ascendancy
 
 Standard enemies:
 
@@ -151,14 +156,16 @@ Regional boss:
 
 - Eclipse Shogun — Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed phases
 
+Kagutsuchi Court remains the approved immaculate royal-court setting. Its elites retain intelligence, hierarchy, and advanced mutation but remain unable to reject Beast Blood. Their apparent mastery is false.
+
 Successful-run completion currently adds:
 
-- temporary access beyond the Shogun to the protected ancient source,
-- one persistent source-layer damage event,
+- temporary access beyond the Shogun to the protected Heart,
+- one persistent Heart-layer damage event,
 - forced destruction or expulsion of Akio's current body,
 - successful return and campaign-progress presentation.
 
-After enough successful completions, the current direction includes permanent Shogun defeat and a true-final source encounter. Exact source form, mechanics, environment, animation, VFX, UI, and asset count remain open and must be locked before final Milestone 6 quotation.
+After enough successful completions, the current direction includes permanent Shogun defeat and a true-final Heart encounter. Exact manifestation, mechanics, environment, animation, VFX, UI, and asset count remain open and must be locked before final Milestone 6 quotation.
 
 ## Environment and room structure
 
@@ -169,7 +176,7 @@ Top-level environment sets:
 - Yomori Grove
 - Kagutsuchi Court
 
-Each run area adapts six common room functions: combat, Shrine, rest, shop, treasure/miniboss, and boss. Specialized spaces such as Blood Cavern, Blood Mirror, authored miniboss arenas, the Wellspring, and protected source chamber remain subsets of their hub or region.
+Each run area adapts six common room functions: combat, Shrine, rest, shop, treasure/miniboss, and boss. Specialized spaces such as Blood Cavern, Blood Mirror, authored miniboss arenas, the Wellspring, and protected Heart chamber remain subsets of their hub or region.
 
 Combat routes support previewed primary rewards. Technique-marked combat rooms use the shared combat-room kit rather than requiring a separate full environment family.
 
@@ -196,7 +203,7 @@ Current reward ownership includes:
 - Gold-based run shops,
 - high-value treasure and miniboss rewards,
 - persistent plus current-run rewards after regional bosses,
-- source-layer/results processing after the Eclipse Shogun.
+- Heart-layer/results processing after the Eclipse Shogun.
 
 ## Interface and presentation
 
@@ -215,7 +222,7 @@ Current reward ownership includes:
 - Boat Aspect-selection/run-start screen
 - Blood Mirror trial screen
 - Boss and miniboss presentation
-- Source-layer completion and persistent campaign-progress presentation
+- Heart-layer completion and persistent campaign-progress presentation
 - Hub progression interfaces
 - Functional room presentation
 - Pause, overview, results, settings, controls, save/loading, credits, and completion presentation
@@ -226,6 +233,6 @@ The current plan uses seven top-level art milestones with independently quoted i
 
 Removing five stance families reduces unique player-system VFX and status-art scope. Technique production instead requires reusable card templates, category and slot icons, reserve/replacement states, refinement markers, and only the bespoke combat VFX needed for approved Technique mechanics.
 
-The provisional source encounter adds endgame scope, but its fixed asset count must remain unquoted until the story and encounter are locked.
+The provisional Heart encounter adds endgame scope, but its fixed asset count must remain unquoted until its manifestation and encounter design are locked.
 
 See [Production Roadmap](PRODUCTION_ROADMAP.md), [Asset Inventory](../art_production/ASSET_INVENTORY.md), and [Art Milestones](../art_production/milestones/README.md).

@@ -4,13 +4,14 @@ title: Kagutsuchi Court
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - area-3
   - kagutsuchi-court
   - corruption
   - court
   - endgame
+  - false-ascendancy
 related:
   - ART-DIRECTION
   - ART-MILESTONE-06
@@ -21,7 +22,11 @@ related:
 
 # Kagutsuchi Court
 
-Kagutsuchi Court is Area 3 and the endgame region: the surviving seat of a once-prosperous kingdom whose elite retain more culture, loyalty, discipline, and controlled Beast Blood use than the inhabitants of the outer island.
+Kagutsuchi Court is Area 3 and the endgame region: the surviving seat of a once-prosperous kingdom whose elite retain more culture, loyalty, discipline, intelligence, and specialized Beast Blood mutation than the inhabitants of the outer island.
+
+The region represents false ascendancy. Its inhabitants believe that strength, ritual, hierarchy, and refinement allowed them to master Beast Blood. In reality, they have evolved into more powerful and dangerous expressions of the curse while remaining unable to reject its rule.
+
+Kagutsuchi Court remains the established immaculate royal-court setting. This thematic revision does not replace it with an underground city, Eclipse Palace, living citadel, or another new region concept.
 
 ## Palette
 
@@ -34,7 +39,7 @@ Kagutsuchi Court is Area 3 and the endgame region: the surviving seat of a once-
 - Dusk lavender
 - Restrained gilded highlights
 
-Corruption appears through impossible maintenance, controlled mutation, and a ruler's refusal to let his kingdom visibly decline rather than through ordinary decay.
+Corruption appears through impossible maintenance, elegant specialized mutation, and a ruler's refusal to let his kingdom visibly decline rather than through ordinary decay.
 
 ## Material language
 
@@ -44,7 +49,9 @@ Polished lacquered wood, gilded trim, clean stone, shallow mirror-still water, s
 
 Enemies are elite soldiers, retainers, ritualists, vessels, and guardians who retain strong loyalty to the Shogun and recognition of the Court they defend.
 
-Their precision comes from training, hierarchy, memory, and more controlled Beast Blood corruption—not from empty ceremonial roles automatically repeating after all identity is gone. Detailed family and unit rules belong in [Area 3 Enemies](ENEMIES.md).
+They may direct Beast Blood abilities, perform rituals, conceal mutations, choose when to transform, and preserve personal aspirations. None of those traits equal genuine control. Their remaining humanity and discipline have been recruited into defending the Heart, the Shogun, and the Blood-dependent order they believe they mastered.
+
+Their precision comes from training, hierarchy, memory, and more advanced mutation—not from genuine sovereignty equal to Akio's. Detailed family and unit rules belong in [Area 3 Enemies](ENEMIES.md).
 
 ## Architecture and atmosphere
 
@@ -52,7 +59,9 @@ Grand halls, open ceremonial courtyards, reflecting pools, stone processional pa
 
 ## Movement philosophy
 
-Movement is precise, elegant, and unnaturally controlled. Soldiers use disciplined formations; ritualists maintain exact casting forms; elite retainers react with greater awareness than the outer island's inhabitants. Wrongness comes from restraint held too long and transformation concealed beneath courtly control until a specific mechanic introduces revival, rupture, spawning, or frenzy.
+Movement is precise, elegant, and unnaturally controlled. Soldiers use disciplined formations; ritualists maintain exact casting forms; elite retainers react with greater awareness than the outer island's inhabitants.
+
+Wrongness comes from intelligence and restraint serving the curse. Transformations may be concealed or deliberately activated through revival, rupture, spawning, or frenzy, but the ability to direct a mutation should never be presented as freedom from Beast Blood.
 
 ## Standard enemy roster
 
@@ -67,9 +76,11 @@ Movement is precise, elegant, and unnaturally controlled. Soldiers use disciplin
 1. [Blood Lotus](MINIBOSSES.md#blood-lotus) — multi-cycle objective miniboss
 2. [Eternal Swordsman](MINIBOSSES.md#eternal-swordsman) — duel miniboss
 3. [The Eclipse Shogun](BOSS.md) — three-phase regional boss
-4. Protected ancient-source completion space reached after the Shogun
+4. Protected Heart completion space reached after the Shogun
 
-The Eclipse Shogun remains the region's principal boss and central character antagonist. The current endgame direction continues beyond him to one persistent source-layer damage step and eventually a true-final source encounter.
+The Eclipse Shogun remains the region's principal boss and central character antagonist. He is the greatest example of false mastery: an intelligent and deliberate user who has become a more powerful servant of the force he believes he commands.
+
+The current endgame direction continues beyond him to one persistent Heart-layer damage step and eventually a true-final Heart encounter.
 
 ## Combat identity
 
@@ -82,8 +93,8 @@ The Eclipse Shogun remains the region's principal boss and central character ant
 - multi-cycle objective combat,
 - pure duel discipline,
 - three-phase Shogun revelation,
-- post-Shogun source-layer completion.
+- post-Shogun Heart-layer completion.
 
 ## Production warning
 
-Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun and the provisional source endgame remain dedicated internal batch chains within Milestone 6.
+Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun and the provisional Heart endgame remain dedicated internal batch chains within Milestone 6.

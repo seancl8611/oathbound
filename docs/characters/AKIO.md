@@ -4,7 +4,7 @@ title: Akio
 category: character
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - akio
   - player-character
@@ -21,11 +21,11 @@ related:
 
 # Akio
 
-Akio is Oathbound's player character: a disciplined Order swordsman and the first known bearer of Returning Blood.
+Akio is Oathbound's player character: a disciplined Order swordsman, the first known bearer of Returning Blood, and the only known person with genuine control over Beast Blood.
 
 ## One-sentence fantasy
 
-A quiet, disciplined swordsman who uses the same corrupting power that destroyed the island without surrendering his identity to it.
+A quiet, disciplined swordsman who uses the same corrupting power that destroyed the island while preserving the ability to reject its rule.
 
 ## Gameplay role
 
@@ -106,6 +106,10 @@ Akio is not immune to Beast Blood. His resolve and the Order's anti-corruption w
 
 The exact event and mechanism remain under design lock. Resolve is necessary, but it is no longer treated as the complete explanation by itself.
 
+Other bearers may retain intelligence, humanity, ambitions, martial skill, or the ability to trigger mutations deliberately. Those qualities do not equal true control. Ordinary bearers ultimately lose the ability to reject Beast Blood or act against its continuation.
+
+Akio remains uniquely capable of choosing how the Blood is expressed. He can Resist escalation, consciously Embrace power, express different Blood Aspects, return toward a controlled baseline, and continue opposing the Heart itself.
+
 Returning Blood rebuilds and empowers him, but repeated use preserves the danger that his control may fail and that he may approach the beast, wraith, hollow, or unstable states seen elsewhere on the island.
 
 ## Revival identity
@@ -113,7 +117,7 @@ Returning Blood rebuilds and empowers him, but repeated use preserves the danger
 Akio is the first known warrior to return from Beast Blood death with body and identity intact.
 
 - On failed runs, Returning Blood reforms him at the Strand.
-- On successful runs, he defeats the Shogun, reaches the protected ancient source, damages one persistent layer, and is destroyed or expelled before reforming at the Strand.
+- On successful runs, he defeats the Shogun, reaches the protected Heart, damages one persistent layer, and is destroyed or expelled before reforming at the Strand.
 - Temporary run-state is burned away; permanent progression and persistent campaign damage survive.
 
 ## Combat readability
@@ -203,4 +207,6 @@ Frame counts are working contractor estimates. Final timing is tuned in Godot an
 - Akio is not naturally immune.
 - Returning Blood is not routine Order practice.
 - Blood Aspects are controlled mutations of Returning Blood, not unrelated magical classes.
+- Akio is the only known bearer with genuine control over Beast Blood.
+- Do not equate another character's retained intelligence or deliberate mutation use with Akio's sovereignty.
 - Akio should not become a heavily expositional protagonist.
