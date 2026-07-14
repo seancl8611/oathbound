@@ -33,7 +33,11 @@ The Shogun ordered the site sealed and placed under royal control. He prohibited
 
 A deadly plague later threatened the island. When conventional means failed and his own daughter was expected to die, physicians argued that the Heart's regenerative power might be used as a cure.
 
-The Shogun initially refused. He permitted the first controlled use of power obtained from the Heart only when the kingdom's survival was threatened and his daughter's death appeared inevitable. The exact extraction, preparation, storage, and administration method remains unresolved.
+The Shogun initially refused. He permitted the first forbidden extraction only when the kingdom's survival was threatened and his daughter's death appeared inevitable.
+
+Researchers could not simply cut into the Heart or drain an exposed vessel. During a controlled weak-pulse window, they temporarily loosened part of the ancient restraint structure and placed a small measure of freshly drawn human blood into its carved channels or basin. No death or human sacrifice was required. The Heart responded by releasing a small quantity of Beast Blood, which had to be collected before its pulse strengthened and the restraints were restored.
+
+The process was a dangerous exchange rather than a routine harvest. It offered healing and survival while opening every recipient to transformation and eventual loss of independence. The exact first-extraction scene, who participated, and whether the Heart consciously recognized the offering remain unresolved.
 
 The treatment worked. The sick recovered, damaged bodies healed, and the kingdom appeared to have been saved. Use expanded from the dying to soldiers and eventually to much of the population.
 
@@ -95,7 +99,7 @@ The phases should reveal increasing Beast Blood use and culminate in a deliberat
 
 His exact redesign remains open. A more regal, cunning, lightly armored sovereign may replace the current heavily armored warrior emphasis, but this should not be treated as approved art scope until the character direction is reviewed.
 
-`Tyrant of the Wellspring` remains a working phase name. This discovery decision does not establish a location, extraction system, or Heart-access structure called the Wellspring.
+`Tyrant of the Wellspring` remains a working phase name. The extraction decision does not establish a location, structure, or process called the Wellspring.
 
 ## Place in the successful-run sequence
 
