@@ -4,14 +4,14 @@ title: Milestone 6 — Area 3 and Endgame
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Milestone 6 — Area 3 and Endgame
 
 ## Goal
 
-Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, protected ancient-source approach, repeated successful-run completion sequence, true-final source confrontation, and ending-space art.
+Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, protected Heart approach, repeated successful-run completion sequence, true-final Heart confrontation, and ending-space art.
 
 ## Authoritative design sources
 
@@ -25,7 +25,7 @@ Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, 
 - [Area 3 Minibosses](../../content/area_3/MINIBOSSES.md)
 - [Eclipse Shogun Encounter](../../content/area_3/BOSS.md)
 - [Eclipse Shogun Canon](../../lore/ECLIPSE_SHOGUN.md)
-- [Beast Blood](../../lore/BEAST_BLOOD.md)
+- [Beast Blood and the Heart](../../lore/BEAST_BLOOD.md)
 - [Story Overview](../../lore/STORY_OVERVIEW.md)
 - [Combat System](../../gameplay/COMBAT.md)
 - [Run Structure](../../gameplay/RUN_STRUCTURE.md)
@@ -44,12 +44,14 @@ Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, 
 - Eclipse Shogun and all three approved revelation phases
 - Court projectiles, ritual zones, revive states, spawning, shield coverage, frenzy, Lotus effects, and Shogun effects
 - Kagutsuchi environment kit, rooms, Blood Lotus arena, duel court, Shogun throne-space, transitions, and regional props
-- Protected source approach or chamber reached after defeating the Shogun
-- Reusable source-layer damage, forced-return, and persistent campaign-progress presentation
+- Protected Heart approach or chamber reached after defeating the Shogun
+- Reusable Heart-layer damage, forced-return, and persistent campaign-progress presentation
 - Endgame boss UI and completion presentation
-- Provisional true-final source encounter and ending environment
+- Provisional true-final Heart encounter and ending environment
 
-The source's identity, number of layers, true-final form, phase structure, environment footprint, animation list, and VFX family remain unresolved. These items are part of the intended endgame but cannot receive a fixed asset count or contractor quote until design lock.
+The source identity is locked as the Heart. Its exact anatomy, number of layers, true-final manifestation, phase structure, environment footprint, animation list, and VFX family remain unresolved. These items cannot receive a fixed asset count or contractor quote until encounter design lock.
+
+Kagutsuchi Court remains the approved Area 3 setting. The milestone does not assume the discarded Eclipse Palace, underground-city, living-citadel, or layered-palace alternatives.
 
 ## Suggested internal order
 
@@ -57,10 +59,10 @@ The source's identity, number of layers, true-final form, phase structure, envir
 2. Blood Lotus Heart, Stalks, arena fissures, and multi-cycle UI
 3. Eternal Swordsman duel package
 4. Eclipse Shogun concept review and Phase 1
-5. Phase 2, source influence, arena control, and first arena transformation
+5. Phase 2, Heart influence, arena control, and first arena transformation
 6. Phase 3 beast revelation and full eclipse state
-7. Protected source approach and reusable source-layer completion sequence
-8. True-final source concept and encounter package after design lock
+7. Protected Heart approach and reusable Heart-layer completion sequence
+8. True-final Heart manifestation and encounter package after design lock
 9. Final defeat, ending transition, and complete endgame integration
 
 ## Dependency rules
@@ -71,11 +73,11 @@ The source's identity, number of layers, true-final form, phase structure, envir
 - Court Sentinel frenzy needs a distinct transition and recovery state.
 - Blood Lotus requires synchronized Heart, Stalk, fissure, punishment, posture, and UI state design.
 - Eternal Swordsman animation quality and duel readability take priority over spectacle.
-- Eclipse Shogun concept must be reviewed against the newer regal, cunning ruler direction before final character quotation; the current three phases remain the approved structural baseline.
-- Defeating the Shogun, entering the source space, damaging one layer, losing the current body, and returning to the Strand form one reusable dependency chain.
-- The source encounter requires locked answers for source nature, agency, anatomy, layer count, final vulnerability, and relationship to the Shogun.
-- Final source art must not be inferred from the working giant-Heart idea before that concept is approved.
-- The Shogun and source receive dedicated internal batches rather than one undivided delivery.
+- Eclipse Shogun concept must be reviewed against the regal false-master direction before final character quotation; the current three phases remain the approved structural baseline.
+- Defeating the Shogun, entering the Heart space, damaging one layer, losing the current body, and returning to the Strand form one reusable dependency chain.
+- The Heart encounter requires locked answers for discovery, access, anatomy, layer count, final vulnerability, manifestation, and relationship to the Shogun.
+- Heart art may imply a divine organ, island core, vessel, or remnant, but must not conclusively explain its cosmic origin or default to a simple realistic oversized heart.
+- The Shogun and Heart receive dedicated internal batches rather than one undivided delivery.
 
 ## Completion test
 
@@ -83,8 +85,8 @@ The source's identity, number of layers, true-final form, phase structure, envir
 - Revive, guard, spawn, and frenzy states are understood immediately.
 - Blood Lotus communicates active Stalks, punishment, core exposure, posture, deathblow readiness, and reset cycles.
 - Eternal Swordsman remains a clean, respectful duel.
-- The Eclipse Shogun remains the central character antagonist and culminates in a deliberate Beast Blood transformation.
-- Defeating the Shogun clearly opens a new source-completion step rather than appearing to end the campaign immediately.
-- Source-layer damage and forced return read as permanent successful-run progress.
-- The true-final source encounter is visually and mechanically distinct without making the Shogun narratively irrelevant.
-- Court and source effects preserve safe-space information throughout the endgame.
+- The Eclipse Shogun remains the central character antagonist and culminates in a deliberate Beast Blood transformation representing false ascendancy rather than true control.
+- Defeating the Shogun clearly opens a new Heart-completion step rather than appearing to end the campaign immediately.
+- Heart-layer damage and forced return read as permanent successful-run progress.
+- The true-final Heart encounter is visually and mechanically distinct without making the Shogun narratively irrelevant.
+- Court and Heart effects preserve safe-space information throughout the endgame.
