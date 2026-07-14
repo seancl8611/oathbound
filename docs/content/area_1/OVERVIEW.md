@@ -4,13 +4,14 @@ title: Hushiro Gate Village
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - area-1
   - hushiro
   - village
   - garrison
   - environment
+  - rupture
 related:
   - ART-DIRECTION
   - ART-MILESTONE-01
@@ -19,7 +20,9 @@ related:
 
 # Hushiro Gate Village
 
-Hushiro Gate Village is Area 1 and the island's wet, militarized threshold. Discipline and recognizable community remain visible beneath corruption. The region should read as recently human first and monstrous second.
+Hushiro Gate Village is Area 1 and the island's wet, militarized threshold. It represents rupture: recent and unstable Beast Blood corruption breaking ordinary people, bodies, relationships, and community into violent fragments.
+
+The region should read as recently human first and monstrous second. Its inhabitants understand little about what is happening to them beyond fear, pain, hunger, desperate faith, and survival instinct.
 
 ## Palette
 
@@ -45,12 +48,18 @@ Corruption appears through staining, old treatment sites, damaged vessels, darke
 
 Enemies are recently human and partially transformed:
 
-- villagers retain fragmented memory, fear, hunger, and territorial recognition,
-- soldiers remain disciplined and loyal to the kingdom they defended,
+- villagers retain fragmented memory, fear, hunger, faith, and territorial recognition,
+- soldiers retain pieces of training and loyalty while their control deteriorates,
 - hounds recognize packs, handlers, and familiar ground,
-- familiar human relationships remain visible beneath collapse.
+- familiar human relationships remain visible beneath violent collapse.
 
-The visual principle is human ruin first, full monstrosity second.
+Their behavior is more exposed, reactive, disorganized, and beastlike than later regions. The visual principle is human ruin first, full monstrosity second.
+
+## Desperate Heart worship
+
+Some cursed villagers worship the Heart because Beast Blood was the only power that answered their suffering. Their faith is fragmented and unstable rather than a complete organized religion.
+
+Crude symbols, altered household shrines, offerings, or repeated references to a buried or ancient god may encourage the player to question whether the Heart is divine without confirming its ultimate origin.
 
 ## Architecture
 
@@ -62,7 +71,7 @@ Low fog, lantern flicker, damp haze, roof runoff, moving cloth and paper, muddy 
 
 ## Movement philosophy
 
-Villagers twitch, hesitate, watch, retreat, or rush according to fragmented awareness rather than endlessly repeating meaningless routines. Soldiers retain stance discipline, readable guards, formation habits, and deliberate attack structure. Environmental movement remains subtle and oppressive.
+Villagers twitch, hesitate, watch, retreat, rush, or lash out according to fragmented awareness. Soldiers retain readable guards and pieces of formation behavior, but the region should feel less controlled and more unstable than Yomori Grove or Kagutsuchi Court. Environmental movement remains subtle and oppressive.
 
 ## Combat purpose
 
