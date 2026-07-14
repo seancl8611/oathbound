@@ -53,13 +53,17 @@ The Shogun ordered the site sealed and placed under royal control. He prohibited
 
 For years, the Court studied the chamber in secret. Researchers mapped the complex, translated fragments of inscriptions, documented the Heart's pulse and regeneration, and argued over whether the ancient builders had revered it or attempted to contain it. No interpretation became definitive.
 
-## Fall of the kingdom
+## Forbidden extraction and the fall of the kingdom
 
 The Shogun's prohibition remained in place until a deadly plague threatened the island and his daughter became one of the dying.
 
-Physicians who had studied the Heart argued that its regenerative nature might offer a cure. The Shogun initially refused. He authorized the first controlled attempt to use power obtained from the Heart only when conventional medicine had failed, the kingdom's survival was threatened, and his daughter's death appeared inevitable.
+Physicians who had studied the Heart argued that its regenerative nature might offer a cure. The Shogun initially refused. He authorized the first controlled attempt to obtain Beast Blood only when conventional medicine had failed, the kingdom's survival was threatened, and his daughter's death appeared inevitable.
 
-The exact process by which usable Beast Blood was drawn, prepared, stored, and administered remains unresolved.
+Usable Beast Blood could not be taken by simply cutting into exposed Heart tissue or draining a visible vessel. The ancient complex contained a sealed extraction structure of carved channels, basins, restraints, and mechanisms. During a controlled window when the Heart's pulse became slower and less forceful, researchers temporarily loosened part of the restraint system and placed a small measure of freshly drawn human blood into the structure. This required no death or human sacrifice.
+
+The Heart responded by changing its pulse and releasing a small quantity of dark Beast Blood into a collection basin. Researchers had to collect it and restore the restraints before the Heart entered a stronger pulse cycle. Mistimed or prolonged extraction risked uncontrolled Blood release, invasive organic growth, chamber instability, and direct exposure to the source of the curse.
+
+The process carried the meaning of a forbidden exchange. Human blood was offered, the Heart answered with healing power, and whoever later took that power accepted the risk of transformation and eventual loss of independence. Whether the Heart consciously recognized the exchange remained unknown.
 
 Beast Blood appeared miraculous: the sick recovered, damaged bodies healed, and the kingdom survived. Use then expanded from the critically ill to soldiers and eventually to much of the population.
 
@@ -140,4 +144,4 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 
 ## Canon boundaries
 
-Exact dialogue, Akio's complete character arc, the method of obtaining usable Beast Blood, the Order's knowledge, the Shogun's present objective, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
+Exact dialogue, Akio's complete character arc, the first extraction scene, the Order's knowledge, the Shogun's present objective, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
