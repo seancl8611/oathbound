@@ -31,13 +31,37 @@ It may be the surviving organ of a forgotten entity, the core of the island, a d
 
 The Heart possesses primal agency centered on survival, regeneration, growth, continuation, and incorporation rather than a human personality or clearly explained plan. Whether it is malicious, defensive, instinctive, or simply incompatible with human life remains unresolved by design.
 
+## Discovery beneath Kagutsuchi Court
+
+The Heart was not brought to the island by the Shogun's civilization. It was already buried deep beneath the land.
+
+Long before the plague, royal engineers expanding Kagutsuchi Court excavated foundations, cisterns, drainage channels, and protected storage beneath the capital. A collapse, possibly caused by an earthquake, exposed masonry that did not belong to their civilization and a sealed stairway descending below the Court's natural foundations.
+
+The passage led into an ancient complex built around the Heart. The first explorers did not see the Heart in its entirety. They encountered part of an immense living mass embedded within the island's stone, with dark tissue, blackened vessels extending into the rock, and a slow pulse perceptible through the chamber floor.
+
+Carved seals, ritual channels, restraints, damaged inscriptions, and chambers surrounded it. Their purpose could not be determined with certainty. The structure may have served as a shrine, prison, research site, containment system, harvesting facility, or several of those things at different times. Altars could also be read as operating platforms, while devotional markings could also be read as restraints.
+
+Whether the collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains unresolved.
+
+## The kingdom's first response
+
+Royal engineers, guards, scholars, physicians, and ritual specialists made the discovery rather than the Shogun personally. Their interpretations quickly divided.
+
+Some believed the Heart was the remnant of an ancient god. Others believed it was a dangerous imprisoned entity or an unknown natural power. Its visible regeneration proved that it was alive and possessed properties beyond ordinary medicine, but the surrounding complex suggested that an earlier civilization had feared, worshipped, studied, or exploited it.
+
+The Shogun ordered the site sealed and placed under royal control. He prohibited direct human use and restricted entry to a small circle of trusted scholars, physicians, ritualists, engineers, guards, and retainers.
+
+For years, the Court studied the chamber in secret. Researchers mapped the complex, translated fragments of inscriptions, documented the Heart's pulse and regeneration, and argued over whether the ancient builders had revered it or attempted to contain it. No interpretation became definitive.
+
 ## Fall of the kingdom
 
-The Shogun's civilization discovered or acquired access to the Heart under circumstances that remain open. Greed, worship, forbidden research, or attempts to exploit the power contributed to its pursuit.
+The Shogun's prohibition remained in place until a deadly plague threatened the island and his daughter became one of the dying.
 
-The Shogun initially opposed the use of Beast Blood and sought to restrict access to it. His position changed when a deadly plague threatened the island and his daughter became one of the dying.
+Physicians who had studied the Heart argued that its regenerative nature might offer a cure. The Shogun initially refused. He authorized the first controlled attempt to use power obtained from the Heart only when conventional medicine had failed, the kingdom's survival was threatened, and his daughter's death appeared inevitable.
 
-Beast Blood was first used as a cure. It appeared miraculous: the sick recovered, damaged bodies healed, and the kingdom survived. Use then expanded from the critically ill to soldiers and eventually to much of the population.
+The exact process by which usable Beast Blood was drawn, prepared, stored, and administered remains unresolved.
+
+Beast Blood appeared miraculous: the sick recovered, damaged bodies healed, and the kingdom survived. Use then expanded from the critically ill to soldiers and eventually to much of the population.
 
 Corruption emerged over time. The Blood strengthened and regenerated its bearers while magnifying fear, ambition, loyalty, pride, hunger, and other impulses until genuine independence began to fail.
 
@@ -69,7 +93,7 @@ The Court retains beauty, hierarchy, culture, discipline, and powerful specializ
 
 Their mastery is false. They may direct abilities and retain aspirations, but they cannot truly reject the Blood or act against its continuation. The curse has produced more capable servants who mistake their dependence for evolution.
 
-Kagutsuchi Court remains the established immaculate royal-court setting; the regional concept does not replace it with an underground city, Eclipse Palace, or another new location.
+Kagutsuchi Court remains the established immaculate royal-court setting; the regional concept does not replace it with an underground city, Eclipse Palace, or another new location. The ancient Heart complex is a restricted structure beneath the Court, not a replacement for the region.
 
 ## Akio's mission
 
@@ -116,4 +140,4 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 
 ## Canon boundaries
 
-Exact dialogue, Akio's complete character arc, the Heart's discovery and access method, the Order's knowledge, the Shogun's present objective, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
+Exact dialogue, Akio's complete character arc, the method of obtaining usable Beast Blood, the Order's knowledge, the Shogun's present objective, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
