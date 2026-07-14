@@ -30,11 +30,23 @@ Beast Blood is a rare supernatural power drawn from the Heart, an ancient living
 - A bearer who remains intelligent or composed may still be enslaved to desires reshaped by the Blood.
 - Beast Blood becomes naturally more powerful during the Blood Moon.
 
+## Discovery of the Heart
+
+The Heart was not transported to the island by the Shogun's civilization. It was already buried beneath or within the land.
+
+Royal excavation during the expansion of Kagutsuchi Court exposed a sealed passage into an ancient complex built around the Heart. The first explorers encountered only part of the immense living mass, embedded in stone and connected to blackened vessels extending into the island.
+
+The surrounding complex contained carved seals, ritual channels, restraints, damaged inscriptions, and chambers whose original purposes could not be established. The structure may have been a shrine, prison, research site, containment system, harvesting facility, or a combination that changed over time.
+
+The Shogun ordered the discovery sealed, prohibited direct human use, and limited study to trusted royal engineers, scholars, physicians, ritual specialists, guards, and retainers. The Heart remained under restricted study until the plague and his daughter's impending death caused him to authorize its first controlled human use.
+
+Whether the original collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains deliberately unresolved.
+
 ## Acquisition and containment boundary
 
 Beast Blood is not an airborne plague, a bite-transmitted infection, or a common substance that spreads through ordinary proximity.
 
-Access requires deliberate use of Blood obtained from the Heart or another specifically established Heart-derived process. The exact method by which usable Blood is drawn, stored, administered, and replenished remains open until the discovery and access questions are answered.
+Access requires deliberate use of Blood obtained from the Heart or another specifically established Heart-derived process. The discovery of the Heart does not yet determine how usable Blood is drawn, collected, prepared, stored, administered, or replenished. Those mechanics remain open.
 
 This rarity is essential. The danger is not a conventional outbreak; it is the possibility that people will exploit, transport, weaponize, worship, or distribute a forbidden power.
 
