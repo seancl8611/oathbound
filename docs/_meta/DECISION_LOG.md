@@ -546,3 +546,36 @@ The established locations remain unchanged: Area 1 is the gate village, Area 2 i
 - `docs/content/area_2/OVERVIEW.md`
 - `docs/content/area_3/OVERVIEW.md`
 - `docs/_meta/TERMINOLOGY.md`
+
+## 2026-07-14 — Heart discovery beneath Kagutsuchi Court
+
+**Status:** approved at story-foundation level
+
+**Decision**
+
+The Heart was already buried beneath or within the island before the Shogun's civilization discovered it.
+
+During the prosperous expansion of Kagutsuchi Court, royal excavation exposed a sealed stairway after a collapse, possibly caused by an earthquake. The passage led into an ancient complex built around part of the Heart.
+
+The first explorers encountered an immense living mass embedded in stone, surrounded by carved seals, ritual channels, restraints, damaged inscriptions, and chambers whose original purposes could not be determined. The complex may have been a shrine, prison, research site, containment system, harvesting facility, or a combination that changed over time.
+
+Royal engineers, guards, scholars, physicians, and ritual specialists made the discovery rather than the Shogun personally. The Shogun ordered the site sealed, prohibited direct human use, and restricted study to a small trusted circle.
+
+The prohibition remained until the plague threatened the kingdom and his daughter was expected to die. The Shogun then authorized the first controlled attempt to use power obtained from the Heart.
+
+This decision establishes discovery and chamber access only. It does not define how usable Beast Blood is drawn, collected, prepared, stored, administered, or replenished.
+
+`Wellspring` is not established as the approved name of the ancient complex, an extraction location, or a Blood-access process. It remains only in the working phase name `Tyrant of the Wellspring` unless deliberately redefined.
+
+**Deliberately unresolved**
+
+The ancient builders, the complex's original purpose, the cause of the collapse, whether the Heart influenced its discovery, the Heart's relationship to the island, the complex's relationship to the barrier, and the exact interval between discovery and plague remain open or intentionally mysterious.
+
+**Affected documents**
+
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/WORLD.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
+- `docs/_meta/TERMINOLOGY.md`

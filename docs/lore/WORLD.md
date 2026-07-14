@@ -4,7 +4,7 @@ title: World
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # World
@@ -41,8 +41,12 @@ A deeper region shaped by spirit remnants, predators, lantern rites, roots, mist
 
 The island's court and endgame region. It expresses the surviving authority, wealth, loyalty, hierarchy, and corruption of the Shogun's former kingdom.
 
-## The Wellspring and ancient source
+The Heart was discovered beneath the Court during the kingdom's prosperous expansion. Royal excavation exposed a sealed passage and an older complex built around part of the Heart. The complex is a restricted structure beneath the established Court setting, not a replacement underground region.
 
-The Wellspring is the current working name for the location, access point, or concentration through which Beast Blood is obtained from the island's ancient source.
+## The ancient Heart complex
 
-The source may ultimately be a Heart, core, remnant, living power, vessel, or another form. Its nature, location, discovery, and relationship to the Wellspring are not yet locked.
+The complex surrounding the Heart predates the Shogun's civilization. Its carved seals, ritual channels, restraints, damaged inscriptions, and chambers do not clearly reveal whether its builders worshipped, imprisoned, studied, contained, or exploited the Heart.
+
+The Shogun sealed the site and prohibited direct human use before the plague. Its exact access route, playable presentation, relationship to the barrier, and later modifications remain open.
+
+The term `Wellspring` is not currently approved as the name of this complex, an extraction system, or the source of usable Beast Blood. It remains only in the working Eclipse Shogun phase name `Tyrant of the Wellspring` unless deliberately redefined later.
