@@ -396,30 +396,42 @@ Akio is the only known bearer with genuine control over Beast Blood. Other beare
 
 ## 2. Discovery or acquisition of the Heart
 
-**Question**
+**Resolution**
 
-How exactly did the Shogun's civilization discover, encounter, acquire, or gain access to the Heart?
+The Heart was already buried beneath or within the island before the Shogun's civilization discovered it.
 
-Possibilities remain open:
+During the prosperous expansion of Kagutsuchi Court, royal engineers excavating foundations, cisterns, drainage channels, and protected storage exposed a sealed stairway after a collapse, possibly caused by an earthquake. The stairway descended into an ancient complex built around part of the Heart.
 
-- found within or beneath the island through exploration or excavation,
-- revealed by an earthquake, ritual, or supernatural event,
-- encountered after the Shogun or earlier inhabitants traveled elsewhere,
-- recovered from another place and stored on the island,
-- inherited from an older civilization,
-- or another origin appropriate to the Heart's ancient and ambiguous nature.
+The first explorers encountered an immense living mass embedded in stone, with dark tissue, blackened vessels extending into the island, and a slow pulse perceptible through the chamber floor. The complex contained carved seals, ritual channels, restraints, damaged inscriptions, and chambers whose original purposes could not be determined.
 
-**Locked boundary**
+The structure may have been a shrine, prison, research site, containment system, harvesting facility, or several of those things at different times. Altars could also be read as operating platforms, and devotional markings could also be read as restraints. Whether the collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains unresolved.
 
-Greed, forbidden curiosity, worship, research, or attempted exploitation contributed to people pursuing the power. The Shogun initially opposed its use.
+Royal engineers, guards, scholars, physicians, and ritual specialists made the discovery rather than the Shogun personally. The Shogun ordered the site sealed, prohibited direct human use, and restricted entry to a small trusted circle.
 
-Kagutsuchi Court remains the established Area 3 setting. Answering this question should not automatically replace the Court with an underground city, Eclipse Palace, or another discarded region concept.
+For years, the Court mapped and studied the ancient complex without reaching a definitive interpretation of its builders or purpose. The prohibition remained until the plague threatened the kingdom and the Shogun's daughter was expected to die. He then authorized the first controlled attempt to use power obtained from the Heart.
 
-**Why it matters**
+This decision establishes discovery and access to the chamber only. The exact method by which usable Beast Blood was drawn, prepared, stored, administered, and replenished remains Question 3.
 
-The discovery determines the island's older history, the Heart's location, access architecture, religious interpretation, and who bears responsibility for first exploiting it.
+`Wellspring` is not established by this decision as the name of the complex, an extraction site, or a Blood-access process.
 
-**Status:** open; Question 1 prerequisite satisfied
+**Deliberately unresolved**
+
+- who built the ancient complex,
+- whether its primary purpose was worship, imprisonment, study, containment, harvesting, or a changing combination,
+- whether the island formed around the Heart,
+- whether the Heart influenced its own discovery,
+- whether the ancient builders also created the barrier,
+- and the exact interval between discovery and the plague.
+
+**Affected files**
+
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/WORLD.md`
+- `docs/_meta/TERMINOLOGY.md`
+
+**Status:** resolved
 
 ## 3. Physical access to usable Beast Blood
 
@@ -427,19 +439,20 @@ The discovery determines the island's older history, the Heart's location, acces
 
 Where does usable Beast Blood physically come from, and how was it collected, stored, administered, and replenished?
 
-Is it drawn directly from the Heart, collected in a Wellspring or ritual basin, produced through a vessel, extracted during an awakening, or obtained through another limited process?
+Is it drawn directly from the Heart, collected in a ritual basin, produced through a vessel, extracted during an awakening, or obtained through another limited process?
 
 **Locked boundary**
 
 - Beast Blood is not airborne.
 - It is not spread casually through bites or ordinary contact.
 - It is rare and must be deliberately obtained and used.
+- Discovery of the Heart and entry into its ancient complex do not by themselves define the usable-Blood process.
 
 **Why it matters**
 
 This defines the plague treatment, the Shogun's army, the barrier's containment purpose, the Heart chamber, and the threat of the Blood reaching the outside world.
 
-**Status:** open; must follow Question 2
+**Status:** open; Question 2 prerequisite satisfied
 
 ## 4. Plague-era timeline and the Shogun's daughter
 
@@ -549,11 +562,17 @@ What is Akio actually damaging after each Shogun victory, why does that damage p
 
 Define whether the layers are biological defenses, seals, bindings, shells, vessels, wards, phases of awakening, or another structure derived from the Heart.
 
+**Parked possibility — not approved**
+
+The carved seals, ritual channels, restraints, and other structures in the ancient Heart complex may later connect to the persistent Heart-layer sequence. Akio might break, restore, sever, reactivate, or otherwise interact with parts of that system after successful runs.
+
+This is preserved only so the possibility is not lost. It is not canon, does not establish what the layers are, and does not decide whether the ancient structures restrain the Heart, protect it, exploit it, or serve several purposes.
+
 **Locked boundary**
 
 A successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
 
-**Status:** open; depends on Questions 2–3
+**Status:** open; Question 2 satisfied, still depends on Question 3
 
 ## 11. Campaign clear count and changes after each clear
 
