@@ -83,7 +83,9 @@ A single error should matter without routinely ending an otherwise viable run in
 - **Run climax:** the Eclipse Shogun followed by temporary access to the protected Heart
 - **True-final direction:** permanent defeat of the Shogun and a deeper Heart confrontation after enough persistent layers have been removed
 
-The Heart's identity is locked. Its discovery, physical access method, number of layers, required clear count, final manifestation, and true-final encounter remain open.
+The Heart's identity, discovery, and forbidden extraction process are locked. Its number of layers, required clear count, final manifestation, and true-final encounter remain open.
+
+The Court obtains Beast Blood through an ancient extraction structure during controlled weak-pulse windows. Researchers loosen part of the Heart's restraints and offer a small measure of freshly drawn human blood, causing the Heart to release Beast Blood. This does not require death or human sacrifice, but the exchange establishes Beast Blood as an intentionally accepted curse rather than a conventional infection.
 
 ## Structural references
 

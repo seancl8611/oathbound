@@ -42,11 +42,29 @@ The Shogun ordered the discovery sealed, prohibited direct human use, and limite
 
 Whether the original collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains deliberately unresolved.
 
-## Acquisition and containment boundary
+## Forbidden extraction
 
-Beast Blood is not an airborne plague, a bite-transmitted infection, or a common substance that spreads through ordinary proximity.
+Usable Beast Blood comes directly from the Heart, but it cannot be obtained by simply cutting into exposed tissue or draining an accessible vessel.
 
-Access requires deliberate use of Blood obtained from the Heart or another specifically established Heart-derived process. The discovery of the Heart does not yet determine how usable Blood is drawn, collected, prepared, stored, administered, or replenished. Those mechanics remain open.
+The ancient complex contains a sealed extraction structure built around part of the Heart. Its carved channels, restraints, basins, and mechanisms can be deliberately activated to make the Heart release a small quantity of Beast Blood. The Court never determines whether the original builders created the structure to harvest, worship, study, contain, or survive contact with the Heart.
+
+Extraction can be attempted only during controlled windows when the Heart's pulse becomes slower and less forceful. Researchers enter the inner chamber, temporarily alter or loosen part of the ancient restraint system, and place a small measure of freshly drawn human blood into one of the carved channels or basins. This offering does not require a death or human sacrifice.
+
+The Heart responds. Its pulse changes, the surrounding channels fill, and dark Beast Blood emerges into a collection basin. The Blood is not taken from a permanently accessible vein. It is produced or released only after the Heart has been deliberately disturbed through the ancient process.
+
+The act resembles a forbidden exchange: human blood is offered, the Heart releases a portion of its own power, and the person who later takes that power becomes vulnerable to the Heart's influence. The Heart does not need to speak or consciously negotiate. Its response may arise from instinct, ancient supernatural law, or the unknown mechanism created around it.
+
+The result nevertheless carries the meaning of a devil's bargain. Healing, strength, and survival are received by accepting a power that will eventually attempt to transform the bearer and erode genuine independence.
+
+## Extraction danger and access boundary
+
+The Heart does not remain passive during extraction. As Beast Blood is released, its pulse strengthens, the chamber reacts, and organic growth presses against the ancient restraints. Researchers must collect the Blood and restore the seals before the controlled window closes.
+
+If the process is mistimed or prolonged, too much Blood may enter the channels, Heart tissue may grow through the extraction structure, the chamber may begin to close around those inside, or the released Blood may overwhelm anyone exposed to it.
+
+This prevents extraction from becoming safe, casual, or industrial. Every attempt requires entering the Heart's chamber, interfering with an ancient containment system, and risking direct contact with the source of the curse. New Beast Blood can be obtained only by returning to the Heart and repeating this forbidden process.
+
+Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, and wounds caused by corrupted creatures do not spread the curse.
 
 This rarity is essential. The danger is not a conventional outbreak; it is the possibility that people will exploit, transport, weaponize, worship, or distribute a forbidden power.
 

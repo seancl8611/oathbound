@@ -45,8 +45,12 @@ The Heart was discovered beneath the Court during the kingdom's prosperous expan
 
 ## The ancient Heart complex
 
-The complex surrounding the Heart predates the Shogun's civilization. Its carved seals, ritual channels, restraints, damaged inscriptions, and chambers do not clearly reveal whether its builders worshipped, imprisoned, studied, contained, or exploited the Heart.
+The complex surrounding the Heart predates the Shogun's civilization. Its carved seals, ritual channels, restraints, damaged inscriptions, basins, and chambers do not clearly reveal whether its builders worshipped, imprisoned, studied, contained, exploited, or attempted to survive contact with the Heart.
 
 The Shogun sealed the site and prohibited direct human use before the plague. Its exact access route, playable presentation, relationship to the barrier, and later modifications remain open.
 
-The term `Wellspring` is not currently approved as the name of this complex, an extraction system, or the source of usable Beast Blood. It remains only in the working Eclipse Shogun phase name `Tyrant of the Wellspring` unless deliberately redefined later.
+The Court eventually learned to activate part of the ancient structure during weaker Heart-pulse windows. Researchers temporarily loosened its restraints and placed a small measure of freshly drawn human blood into a carved channel or basin. No death or human sacrifice was required. The Heart answered by releasing a small quantity of Beast Blood, which had to be collected before the pulse strengthened and the restraints were restored.
+
+The process is dangerous and cannot become routine industrial harvesting. It requires direct entry into the protected chamber and deliberate interference with an ancient containment structure.
+
+The term `Wellspring` is not approved as the name of this complex, its extraction structure, or the process that produces Beast Blood. It remains only in the working Eclipse Shogun phase name `Tyrant of the Wellspring` unless deliberately redefined later.

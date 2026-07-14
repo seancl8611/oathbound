@@ -350,7 +350,7 @@ Burn and Shock remain supported through approved prosthetics. Frost and Hex are 
 
 ## 2026-07-13 — Beast Blood narrative foundation
 
-**Status:** approved
+**Status:** approved; source identity, discovery, and extraction later resolved
 
 **Decision**
 
@@ -362,7 +362,7 @@ Beast Blood is a rare supernatural power obtained deliberately from an ancient s
 - Resolve can delay corruption but may fail.
 - Corrupted inhabitants can retain memory, recognition, loyalty, training, and relationships.
 - Humanoid corruption, beasts, failed bodies, spirit-like remnants, and environment-bound forms may all arise from the same power.
-- The source's exact identity, agency, anatomy, discovery, and Blood-access method remain open.
+- The source's identity, discovery, and Blood-access method were left open here and resolved by later decisions.
 
 **Replaces**
 
@@ -563,7 +563,7 @@ Royal engineers, guards, scholars, physicians, and ritual specialists made the d
 
 The prohibition remained until the plague threatened the kingdom and his daughter was expected to die. The Shogun then authorized the first controlled attempt to use power obtained from the Heart.
 
-This decision establishes discovery and chamber access only. It does not define how usable Beast Blood is drawn, collected, prepared, stored, administered, or replenished.
+This decision establishes discovery and chamber access only. The later forbidden-extraction decision defines how usable Beast Blood is released.
 
 `Wellspring` is not established as the approved name of the ancient complex, an extraction location, or a Blood-access process. It remains only in the working phase name `Tyrant of the Wellspring` unless deliberately redefined.
 
@@ -579,3 +579,36 @@ The ancient builders, the complex's original purpose, the cause of the collapse,
 - `docs/lore/WORLD.md`
 - `docs/_meta/OPEN_QUESTIONS.md`
 - `docs/_meta/TERMINOLOGY.md`
+
+## 2026-07-14 — Forbidden Beast Blood extraction
+
+**Status:** locked at story-foundation level
+
+**Decision**
+
+Usable Beast Blood comes directly from the Heart, but it cannot be obtained by simply cutting into exposed tissue or draining an accessible vessel.
+
+The ancient Heart complex contains a sealed extraction structure of carved channels, restraints, basins, and mechanisms. Extraction can be attempted only during controlled windows when the Heart's pulse becomes slower and less forceful.
+
+Researchers temporarily alter or loosen part of the restraint system and place a small measure of freshly drawn human blood into one of the channels or basins. This offering does not require a death or human sacrifice. The Heart responds by changing its pulse and releasing a small quantity of Beast Blood into a collection basin.
+
+The Blood is not taken from a permanently accessible vein. It is released only after the Heart is deliberately disturbed through the ancient process. Researchers must collect it and restore the restraints before the Heart enters a stronger pulse cycle. Mistiming or prolonging the process risks uncontrolled Blood release, invasive organic growth, chamber instability, and direct exposure.
+
+The act has the narrative meaning of a devil's bargain. Human blood is offered, the Heart answers with healing power, and whoever takes that power accepts the risk of transformation and eventual loss of genuine independence. The Heart does not need to speak or consciously negotiate; its response may arise from instinct, ancient supernatural law, or the unknown mechanism built around it.
+
+Once collected, Beast Blood already possesses its supernatural effects. It must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, and wounds caused by corrupted creatures do not spread the curse. New Beast Blood requires returning to the Heart and repeating the forbidden extraction.
+
+**Deliberately unresolved**
+
+The extraction structure's builders and original purpose, why freshly drawn human blood causes the response, whether the Heart consciously recognizes the exchange, the exact operating actions and first-extraction scene, and whether repeated extraction weakens the restraints or accelerates awakening remain open.
+
+**Affected documents**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/WORLD.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
+- `docs/_meta/TERMINOLOGY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
