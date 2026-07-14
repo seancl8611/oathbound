@@ -4,7 +4,7 @@ title: Oathbound Terminology
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Oathbound Terminology
@@ -12,9 +12,13 @@ last_reviewed: 2026-07-13
 | Preferred term | Definition / usage |
 |---|---|
 | Oathbound | Current project title. Italicize only when normal prose style calls for it. |
-| Beast Blood | Rare corrupting supernatural power obtained deliberately from the island's ancient source. Capitalize both words. |
-| ancient source | Current generic wording for the unresolved origin of Beast Blood. Lowercase until a proper name is approved. Do not assume it is literally a giant Heart. |
+| Beast Blood | Rare corrupting supernatural power obtained deliberately from the Heart. Capitalize both words. |
+| the Heart | The ancient living godlike organ or supernatural core that produces Beast Blood. Capitalize Heart when referring to the source. Its ultimate origin remains deliberately ambiguous. |
 | Returning Blood | Akio's unprecedented Beast Blood condition, shaped by his resolve and expected to involve Order warding. Exact origin remains open. |
+| true control | Akio's unique ability to preserve genuine agency, reject escalation, vary Blood Aspect expression, return toward baseline, and oppose the Heart. Do not use for other Beast Blood bearers. |
+| false ascendancy | Kagutsuchi Court's belief that disciplined, specialized, and powerful mutation proves mastery. The elites remain unable to reject Beast Blood. |
+| rupture | Hushiro Gate Village's dominant regional expression: recent corruption, violence, bodily collapse, fragmented community, and desperate faith. |
+| adaptation | Yomori Grove's dominant regional expression: long-term predation, spirit persistence, and a curse incorporated into ecological and spiritual existence. |
 | Blood Aspect | A controlled specialization of Returning Blood and the central tactical identity of a run. |
 | Wolf, Wraith, Ronin | Current Blood Aspect names. Capitalize as proper system names. |
 | Tier 0, Tier I, Tier II, Tier III, Tier IV | Standard Blood Aspect mutation progression labels. |
@@ -31,21 +35,21 @@ last_reviewed: 2026-07-13
 | The Strand | Persistent hub area. |
 | Bloodwell | Strand progression and reformation-presentation station. One word. It is not currently defined as a technical source anchor. |
 | Blood Mirror | Strand mirror/trial system. Two words. |
-| Blood Moon | Rare event that empowers existing Beast Blood and weakens the barrier. |
-| Hushiro Gate Village | Area 1 region name. |
-| Yomori Grove | Area 2 region name. |
-| Kagutsuchi Court | Area 3 region name. |
+| Blood Moon | Rare event that empowers the Heart and existing Beast Blood while weakening the barrier. |
+| Hushiro Gate Village | Area 1 region name; regional theme is rupture. |
+| Yomori Grove | Area 2 region name; regional theme is adaptation. |
+| Kagutsuchi Court | Area 3 region name; regional theme is false ascendancy. The established royal-court setting remains approved. |
 | Keeper of the Gate | Area 1 major boss. Do not shorten to Keeper when the Strand Keeper could be confused. |
 | Twin Maws | Area 2 paired boss encounter comprising Rootfang and Briarthorn. |
 | Rootfang, Briarthorn | The two Twin Maws bosses. Both begin active; the first death empowers the survivor. |
-| Blood Lotus | Area 3 Miniboss #1. Use Heart and Stalks for its component units. |
+| Blood Lotus | Area 3 Miniboss #1. Use Heart and Stalks for its component units; context must distinguish the Blood Lotus Heart from the ancient source. |
 | Spillborn | Weak expendable units spawned by a Hollow Vessel. |
 | Eternal Swordsman | Area 3 Miniboss #2. |
-| Eclipse Shogun | Area 3 principal boss and central character antagonist. He is not the original Beast Blood source or the true-final supernatural encounter. |
+| Eclipse Shogun | Area 3 principal boss, central character antagonist, and greatest false master of Beast Blood. He is not the Heart or the true-final supernatural encounter. |
 | Sovereign Duelist | Eclipse Shogun Phase 1. |
 | Tyrant of the Wellspring | Eclipse Shogun Phase 2 working name. |
 | Eclipse Revealed | Eclipse Shogun Phase 3 working name and deliberate beast transformation. |
-| source layer | Generic working term for one persistent successful-run damage step against the ancient source. Exact form and final name remain open. |
+| source layer / Heart layer | Generic working term for one persistent successful-run damage step against the Heart. Exact form and final name remain open. |
 | Beast-Bane Whistle | Prosthetic interrupt pulse with stronger anti-beast response. |
 | Thunder Rod | Prosthetic line strike that applies Shock to the first target hit. |
 | Smoke Gourd | Prosthetic target-break smoke field. |
@@ -66,6 +70,7 @@ last_reviewed: 2026-07-13
 
 ## Deprecated, superseded, or rejected wording
 
+- `ancient source` remains acceptable as a generic descriptive phrase, but use `the Heart` when referring to the approved Beast Blood source.
 - `Mist Shards` is deprecated draft wording unless a separate denomination is deliberately restored.
 - `Mistveil` is removed from current lore and should not be used as a spreading corruption force or proper world term unless explicitly reintroduced.
 - `boon` is superseded for ordinary run upgrades; use `Technique` for Akio's temporary combat upgrades and `Relic` for separate passive rules.
@@ -79,7 +84,9 @@ last_reviewed: 2026-07-13
 - Do not describe Beast Blood as an airborne or bite-transmitted zombie infection.
 - Do not define Beast Blood primarily as automatic preservation of duties, jobs, or oaths.
 - Do not describe the Eclipse Shogun as an innocent puppet or his final phase as a mindless berserk collapse.
-- Do not treat the current giant-Heart concept, source anatomy, Shogun armor, mask, polearm, or animation list as locked.
+- Do not describe another intelligent or deliberate Beast Blood user as having true control equal to Akio.
+- Do not treat the Heart's exact origin, larger body, final anatomy, or true-final manifestation as explained or locked.
+- Do not replace Kagutsuchi Court with the discarded Eclipse Palace, underground-city, or layered-palace concepts.
 
 ## Status values
 
