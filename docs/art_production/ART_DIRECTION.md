@@ -4,13 +4,14 @@ title: Art Direction
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - pixel-art
   - combat-readability
   - regional-palettes
   - corruption-language
   - materials
+  - the-heart
 related:
   - ART-TECHNICAL-STANDARDS
   - CONTENT-STRAND-OVERVIEW
@@ -59,7 +60,9 @@ Beast Blood may appear through:
 - biological pressure,
 - asymmetrical distortion.
 
-It may be ritualized, controlled, feral, spiritually thinned, or physically unstable, but it must read as the same rare force expressed through a particular bearer, history, duration, and environment.
+It may be ritualized, deliberately activated, feral, spiritually thinned, or physically unstable, but it must read as the same rare force expressed through a particular bearer, history, duration, and environment.
+
+Deliberate activation, retained intelligence, and elegant mutation do not visually imply true control. Akio alone possesses genuine sovereignty over Beast Blood; Court presentation should communicate false mastery rather than equality with him.
 
 Do not imply a conventional airborne or bite-spread infection. Do not make every victim visually communicate one repeated duty or role as the curse's central meaning.
 
@@ -100,9 +103,9 @@ Startup, active, recoil, stagger, posture-break, and deathblow-ready states requ
 
 **Motion:** restrained NPC routine and watchfulness; most life comes from smoke, tide, cloth, paper, lanterns, mist, and wind.
 
-### Area 1 — Hushiro Gate Village
+### Area 1 — Hushiro Gate Village / Rupture
 
-**Identity:** a militarized village threshold where retained memory, loyalty, and discipline remain visible beneath recent corruption. Human ruin first, monstrosity second.
+**Identity:** a militarized village threshold where recent corruption violently breaks ordinary people and community. Human ruin first, monstrosity second.
 
 **Palette:** rain-dark timber brown, soot-black tile, clay-mud earth, wet stone gray, smoke fog, faded shrine red, dried blood brown-black, dim lantern amber, and restrained dark crimson.
 
@@ -110,11 +113,13 @@ Startup, active, recoil, stagger, posture-break, and deathblow-ready states requ
 
 **Architecture:** dense narrow paths, leaning homes, close rooflines, shallow balconies, worn torii, small shrines, guard points, barricaded interiors, and visible evidence of failed defense.
 
-**Motion:** villagers twitch, hesitate, watch, retreat, or rush; soldiers retain slower, clearer stance discipline and formation habits. Environmental motion remains subtle and oppressive.
+**Motion:** villagers twitch, hesitate, watch, retreat, rush, or lash out; soldiers retain fragments of stance discipline and formation behavior. Environmental motion remains subtle and oppressive.
 
-### Area 2 — Yomori Grove
+Heart worship may appear through limited crude symbols, altered household shrines, or desperate offerings without turning the whole region into a formal religious complex.
 
-**Identity:** a haunted hunting region where long-term Beast Blood corruption produces predation, spirit residue, bodily instability, and feral pressure.
+### Area 2 — Yomori Grove / Adaptation
+
+**Identity:** a haunted hunting region where long-term Beast Blood corruption has become part of predation, spirit persistence, and the environment's normal condition.
 
 **Palette:** rot-black bark, bone-white trunks, wet earth, corpse-gray stone, deep moss green-black, cold fog, crimson leaves, dark blood-red sap, pale spirit light, and cyan-blue fungal glow.
 
@@ -122,22 +127,26 @@ Startup, active, recoil, stagger, posture-break, and deathblow-ready states requ
 
 **Architecture:** swallowed hunting paths, shrine trails, torii, lantern markers, wayfinding stones, abandoned rest sites, and broken crossings overtaken by roots.
 
-**Motion:** beasts stalk, circle, and lunge; spirits flicker, glide, and partially manifest. Mist, fungi, branches, and shadow movement constantly support uncertainty without making combat unreadable.
+**Motion:** beasts stalk, observe, circle, withdraw, and lunge; spirits flicker, glide, and partially manifest with greater calm or purpose than Area 1's ruptured victims. Mist, fungi, branches, and shadow movement support uncertainty without making combat unreadable.
 
-### Area 3 — Kagutsuchi Court
+### Area 3 — Kagutsuchi Court / False Ascendancy
 
-**Identity:** an immaculate inner court where elite retainers preserve culture, loyalty, hierarchy, and controlled corruption beneath the Shogun's rule.
+**Identity:** an immaculate inner court where elite retainers preserve culture, loyalty, hierarchy, and advanced mutation while mistaking dependence on Beast Blood for mastery.
 
 **Palette:** lacquer black, deep vermilion, ceremonial red, warm lantern gold, muted ivory stone, blue-black water, blossom pink, dusk lavender, and restrained gilded accents.
 
-**Materials:** polished lacquer, gilded trim, clean stone, mirror-still water, silk banners, refined tile, and immaculate blossom-covered courtyards. Corruption appears through controlled mutation, impossible maintenance, and hidden Blood use rather than ordinary decay.
+**Materials:** polished lacquer, gilded trim, clean stone, mirror-still water, silk banners, refined tile, and immaculate blossom-covered courtyards. Corruption appears through elegant specialized mutation, impossible maintenance, and hidden Blood use rather than ordinary decay.
 
-**Architecture:** grand halls, open courtyards, reflecting pools, curved bridges, stone paths, blossom-lined approaches, and richly ornamented gates arranged with symmetry and processional hierarchy.
+**Architecture:** grand halls, open courtyards, reflecting pools, curved bridges, stone paths, blossom-lined approaches, and richly ornamented gates arranged with symmetry and processional hierarchy. Kagutsuchi Court remains the approved setting.
 
-**Motion:** soldiers and retainers move with precise, elegant discipline. Environmental motion is soft and measured: blossoms, water, banners, and lantern light reinforce control and concealed danger rather than mindless ritual repetition.
+**Motion:** soldiers and retainers move with precise, elegant discipline. Environmental motion is soft and measured: blossoms, water, banners, and lantern light reinforce apparent control and concealed enslavement rather than mindless ritual repetition.
+
+## The Heart visual boundary
+
+The source is canonically the Heart: an ancient living godlike organ or supernatural core. Its exact anatomy, size, surrounding structure, and final encounter form remain unapproved.
+
+Concept work may suggest a divine organ, island core, vessel, remnant, or part of something larger, but it must not conclusively explain the Heart's origin or default to a simple oversized realistic human heart.
 
 ## Production rule
 
 Regional art may become more ornate as the game advances, but combat communication must remain consistent. Every environment, character, and VFX delivery should be reviewed at gameplay scale before detail polish is approved.
-
-The ancient source's anatomy and final visual language remain unapproved. Do not infer final source art from the working giant-Heart concept.
