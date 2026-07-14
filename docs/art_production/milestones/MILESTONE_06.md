@@ -45,11 +45,12 @@ Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, 
 - Court projectiles, ritual zones, revive states, spawning, shield coverage, frenzy, Lotus effects, and Shogun effects
 - Kagutsuchi environment kit, rooms, Blood Lotus arena, duel court, Shogun throne-space, transitions, and regional props
 - Protected Heart approach or chamber reached after defeating the Shogun
+- Ancient extraction-structure elements already established in the Heart complex: carved channels, basins, restraints, and controlled weak-pulse presentation where visible
 - Reusable Heart-layer damage, forced-return, and persistent campaign-progress presentation
 - Endgame boss UI and completion presentation
 - Provisional true-final Heart encounter and ending environment
 
-The source identity is locked as the Heart. Its exact anatomy, number of layers, true-final manifestation, phase structure, environment footprint, animation list, and VFX family remain unresolved. These items cannot receive a fixed asset count or contractor quote until encounter design lock.
+The source identity and the forbidden Beast Blood extraction process are locked at story-foundation level. The Heart's exact anatomy, number of layers, true-final manifestation, phase structure, environment footprint, animation list, and VFX family remain unresolved. These items cannot receive a fixed asset count or contractor quote until encounter design lock.
 
 Kagutsuchi Court remains the approved Area 3 setting. The milestone does not assume the discarded Eclipse Palace, underground-city, living-citadel, or layered-palace alternatives.
 
@@ -75,7 +76,8 @@ Kagutsuchi Court remains the approved Area 3 setting. The milestone does not ass
 - Eternal Swordsman animation quality and duel readability take priority over spectacle.
 - Eclipse Shogun concept must be reviewed against the regal false-master direction before final character quotation; the current three phases remain the approved structural baseline.
 - Defeating the Shogun, entering the Heart space, damaging one layer, losing the current body, and returning to the Strand form one reusable dependency chain.
-- The Heart encounter requires locked answers for discovery, access, anatomy, layer count, final vulnerability, manifestation, and relationship to the Shogun.
+- Heart discovery and Beast Blood extraction are locked: extraction uses the ancient structure during a weak-pulse window, a small fresh human-blood offering without required sacrifice, and a timed release before the restraints are restored.
+- The true-final Heart encounter still requires locked answers for anatomy, layer count, final vulnerability, manifestation, and relationship to the Shogun.
 - Heart art may imply a divine organ, island core, vessel, or remnant, but must not conclusively explain its cosmic origin or default to a simple realistic oversized heart.
 - The Shogun and Heart receive dedicated internal batches rather than one undivided delivery.
 
