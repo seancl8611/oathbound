@@ -23,13 +23,19 @@ The Eclipse Shogun predates the Order. He was once the popular ruler and protect
 
 ## Before the fall
 
-The Shogun's civilization discovered or acquired access to the Heart, the ancient source of Beast Blood. The route by which the kingdom found it remains unresolved.
+The Heart was already buried beneath the island before the Shogun's civilization discovered it.
 
-The Shogun initially opposed the Blood's use and sought to restrict access to a power he believed would be exploited.
+During the prosperous expansion of Kagutsuchi Court, royal excavation exposed a sealed stairway and ancient complex beneath the capital. The structure surrounded part of the Heart and contained carved seals, ritual channels, restraints, damaged inscriptions, and rooms whose original purposes could no longer be distinguished with certainty.
 
-A deadly plague later threatened the island. When conventional means failed and his own daughter was expected to die, the Shogun permitted Beast Blood to be used as a cure.
+The discovery was made by royal engineers, guards, scholars, physicians, and ritual specialists rather than by the Shogun personally. Competing interpretations described the Heart as an ancient god, a dangerous imprisoned entity, or an unknown natural power. The surrounding structure could be read as a shrine, prison, research site, containment system, or some combination.
 
-It worked. The sick recovered, damaged bodies healed, and the kingdom appeared to have been saved. Use expanded from the dying to soldiers and eventually to much of the population.
+The Shogun ordered the site sealed and placed under royal control. He prohibited direct human use and allowed only restricted study by trusted members of the Court. For years, researchers mapped the complex and documented the Heart's pulse, regeneration, and reactions without reaching a definitive understanding of what the earlier builders had intended.
+
+A deadly plague later threatened the island. When conventional means failed and his own daughter was expected to die, physicians argued that the Heart's regenerative power might be used as a cure.
+
+The Shogun initially refused. He permitted the first controlled use of power obtained from the Heart only when the kingdom's survival was threatened and his daughter's death appeared inevitable. The exact extraction, preparation, storage, and administration method remains unresolved.
+
+The treatment worked. The sick recovered, damaged bodies healed, and the kingdom appeared to have been saved. Use expanded from the dying to soldiers and eventually to much of the population.
 
 ## Responsibility and corruption
 
@@ -89,11 +95,13 @@ The phases should reveal increasing Beast Blood use and culminate in a deliberat
 
 His exact redesign remains open. A more regal, cunning, lightly armored sovereign may replace the current heavily armored warrior emphasis, but this should not be treated as approved art scope until the character direction is reviewed.
 
+`Tyrant of the Wellspring` remains a working phase name. This discovery decision does not establish a location, extraction system, or Heart-access structure called the Wellspring.
+
 ## Place in the successful-run sequence
 
-Defeating the Shogun temporarily opens the path to the protected Heart. Akio then damages one persistent source layer before being destroyed or expelled and reconstructed at the Strand.
+Defeating the Shogun temporarily opens the path to the protected Heart. Akio then damages one persistent Heart layer before being destroyed or expelled and reconstructed at the Strand.
 
-The Shogun's reconstruction, permanent defeat condition, relationship to the source layers, and true-final version remain unresolved.
+The Shogun's reconstruction, permanent defeat condition, relationship to the Heart layers, and true-final version remain unresolved.
 
 ## Open questions
 
