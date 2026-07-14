@@ -14,6 +14,7 @@ last_reviewed: 2026-07-14
 | Oathbound | Current project title. Italicize only when normal prose style calls for it. |
 | Beast Blood | Rare corrupting supernatural power obtained deliberately from the Heart. Capitalize both words. |
 | the Heart | The ancient living godlike organ or supernatural core that produces Beast Blood. Capitalize Heart when referring to the source. Its ultimate origin remains deliberately ambiguous. |
+| ancient Heart complex | Generic descriptive term for the pre-Shogun structure discovered beneath Kagutsuchi Court around part of the Heart. Its builders and original purpose remain unknown. This is not currently an approved proper name. |
 | Returning Blood | Akio's unprecedented Beast Blood condition, shaped by his resolve and expected to involve Order warding. Exact origin remains open. |
 | true control | Akio's unique ability to preserve genuine agency, reject escalation, vary Blood Aspect expression, return toward baseline, and oppose the Heart. Do not use for other Beast Blood bearers. |
 | false ascendancy | Kagutsuchi Court's belief that disciplined, specialized, and powerful mutation proves mastery. The elites remain unable to reject Beast Blood. |
@@ -47,7 +48,7 @@ last_reviewed: 2026-07-14
 | Eternal Swordsman | Area 3 Miniboss #2. |
 | Eclipse Shogun | Area 3 principal boss, central character antagonist, and greatest false master of Beast Blood. He is not the Heart or the true-final supernatural encounter. |
 | Sovereign Duelist | Eclipse Shogun Phase 1. |
-| Tyrant of the Wellspring | Eclipse Shogun Phase 2 working name. |
+| Tyrant of the Wellspring | Eclipse Shogun Phase 2 working name. It does not establish `Wellspring` as the approved name of the Heart complex or Blood-extraction process. |
 | Eclipse Revealed | Eclipse Shogun Phase 3 working name and deliberate beast transformation. |
 | source layer / Heart layer | Generic working term for one persistent successful-run damage step against the Heart. Exact form and final name remain open. |
 | Beast-Bane Whistle | Prosthetic interrupt pulse with stronger anti-beast response. |
@@ -71,6 +72,7 @@ last_reviewed: 2026-07-14
 ## Deprecated, superseded, or rejected wording
 
 - `ancient source` remains acceptable as a generic descriptive phrase, but use `the Heart` when referring to the approved Beast Blood source.
+- `Wellspring` is not currently approved as the name of the Heart complex, its access architecture, or the process that produces usable Beast Blood. Preserve it only in the working phase name `Tyrant of the Wellspring` unless explicitly redefined.
 - `Mist Shards` is deprecated draft wording unless a separate denomination is deliberately restored.
 - `Mistveil` is removed from current lore and should not be used as a spreading corruption force or proper world term unless explicitly reintroduced.
 - `boon` is superseded for ordinary run upgrades; use `Technique` for Akio's temporary combat upgrades and `Relic` for separate passive rules.
