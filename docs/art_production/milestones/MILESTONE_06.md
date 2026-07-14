@@ -45,12 +45,11 @@ Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, 
 - Court projectiles, ritual zones, revive states, spawning, shield coverage, frenzy, Lotus effects, and Shogun effects
 - Kagutsuchi environment kit, rooms, Blood Lotus arena, duel court, Shogun throne-space, transitions, and regional props
 - Protected Heart approach or chamber reached after defeating the Shogun
-- Ancient extraction-structure elements already established in the Heart complex: carved channels, basins, restraints, and controlled weak-pulse presentation where visible
 - Reusable Heart-layer damage, forced-return, and persistent campaign-progress presentation
 - Endgame boss UI and completion presentation
 - Provisional true-final Heart encounter and ending environment
 
-The source identity and the forbidden Beast Blood extraction process are locked at story-foundation level. The Heart's exact anatomy, number of layers, true-final manifestation, phase structure, environment footprint, animation list, and VFX family remain unresolved. These items cannot receive a fixed asset count or contractor quote until encounter design lock.
+The source identity and the forbidden Beast Blood extraction process are locked at story-foundation level. This lore decision guides any later Heart-complex design but does not by itself add a separately quoted asset batch or fixed asset count. The Heart's exact anatomy, number of layers, true-final manifestation, phase structure, environment footprint, animation list, and VFX family remain unresolved. These items cannot receive a fixed asset count or contractor quote until encounter design lock.
 
 Kagutsuchi Court remains the approved Area 3 setting. The milestone does not assume the discarded Eclipse Palace, underground-city, living-citadel, or layered-palace alternatives.
 
