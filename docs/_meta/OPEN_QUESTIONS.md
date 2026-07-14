@@ -410,7 +410,7 @@ Royal engineers, guards, scholars, physicians, and ritual specialists made the d
 
 For years, the Court mapped and studied the ancient complex without reaching a definitive interpretation of its builders or purpose. The prohibition remained until the plague threatened the kingdom and the Shogun's daughter was expected to die. He then authorized the first controlled attempt to use power obtained from the Heart.
 
-This decision establishes discovery and access to the chamber only. The exact method by which usable Beast Blood was drawn, prepared, stored, administered, and replenished remains Question 3.
+This decision establishes discovery and access to the chamber. The process by which usable Beast Blood is released is resolved in Question 3.
 
 `Wellspring` is not established by this decision as the name of the complex, an extraction site, or a Blood-access process.
 
@@ -435,24 +435,46 @@ This decision establishes discovery and access to the chamber only. The exact me
 
 ## 3. Physical access to usable Beast Blood
 
-**Question**
+**Resolution**
 
-Where does usable Beast Blood physically come from, and how was it collected, stored, administered, and replenished?
+Usable Beast Blood comes directly from the Heart, but it cannot be obtained by simply cutting into exposed tissue or draining an accessible vessel.
 
-Is it drawn directly from the Heart, collected in a ritual basin, produced through a vessel, extracted during an awakening, or obtained through another limited process?
+The ancient Heart complex contains a sealed extraction structure built around part of the Heart. Its carved channels, restraints, basins, and mechanisms can be deliberately activated to make the Heart release a small quantity of Beast Blood. The Court never determines whether the original builders created the structure to harvest, worship, study, contain, or survive contact with the Heart.
 
-**Locked boundary**
+Extraction can be attempted only during controlled windows when the Heart's pulse becomes slower and less forceful. Researchers enter the inner chamber, temporarily alter or loosen part of the ancient restraint system, and place a small measure of freshly drawn human blood into one of the carved channels or basins. This offering does not require a death or human sacrifice.
 
-- Beast Blood is not airborne.
-- It is not spread casually through bites or ordinary contact.
-- It is rare and must be deliberately obtained and used.
-- Discovery of the Heart and entry into its ancient complex do not by themselves define the usable-Blood process.
+The Heart responds by changing its pulse and releasing dark Beast Blood into a collection basin. The Blood is not taken from a permanently accessible vein. It is produced or released only after the Heart has been deliberately disturbed through the ancient process.
 
-**Why it matters**
+The act resembles a forbidden exchange: human blood is offered, the Heart releases a portion of its own power, and whoever later takes that power becomes vulnerable to the Heart's influence. The Heart does not need to speak or consciously negotiate. Its response may arise from instinct, ancient supernatural law, or the unknown mechanism created around it.
 
-This defines the plague treatment, the Shogun's army, the barrier's containment purpose, the Heart chamber, and the threat of the Blood reaching the outside world.
+As Beast Blood is released, the Heart's pulse strengthens, the chamber reacts, and organic growth presses against the ancient restraints. Researchers must collect the Blood and restore the seals before the controlled window closes. Mistiming or prolonging the process risks uncontrolled Blood release, invasive growth, chamber instability, and direct exposure.
 
-**Status:** open; Question 2 prerequisite satisfied
+Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, and wounds caused by corrupted creatures do not spread the curse. New Beast Blood can be obtained only by returning to the Heart and repeating the forbidden extraction.
+
+**Narrative meaning**
+
+The process is a devil's bargain without requiring a literal speaking contract. Healing, strength, and survival are accepted together with a power that will eventually attempt to transform the bearer and erode genuine independence. The kingdom's miracle therefore depends on repeatedly violating a place that had likely been sealed for a reason.
+
+**Deliberately unresolved**
+
+- who built the extraction structure,
+- whether its original purpose was harvesting, worship, study, containment, sacrifice, or another function,
+- why freshly drawn human blood causes the Heart to respond,
+- whether the Heart consciously recognizes the exchange,
+- the exact operating actions and first-extraction scene,
+- and whether repeated extraction weakens the restraints or accelerates the Heart's awakening.
+
+**Affected files**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/WORLD.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/_meta/TERMINOLOGY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+
+**Status:** resolved at story-foundation level
 
 ## 4. Plague-era timeline and the Shogun's daughter
 
@@ -471,7 +493,7 @@ Establish:
 
 **Locked boundary**
 
-The kingdom flourished before the plague. The Shogun was popular and initially restricted Beast Blood. His daughter's impending death helped drive the decision to use it.
+The kingdom flourished before the plague. The Shogun was popular and initially restricted Beast Blood. His daughter's impending death helped drive the decision to use it. The first extraction uses the approved forbidden process from Question 3, but its participants and exact scene remain open here.
 
 **Status:** open
 
@@ -550,7 +572,7 @@ The ward protects Akio's identity; his resolve prevents surrender; Beast Blood's
 
 Akio is not naturally immune, Returning Blood is not routine Order practice, and resolve alone is no longer a sufficient complete explanation.
 
-Akio's genuine control is canon, but the exact event and mechanism that created it remain open.
+Akio's genuine control is canon, but the exact event and mechanism that created it remain open. His exposure need not repeat the historical extraction process unless deliberately established later.
 
 **Status:** open; current direction promising but not canonized
 
@@ -564,7 +586,7 @@ Define whether the layers are biological defenses, seals, bindings, shells, vess
 
 **Parked possibility — not approved**
 
-The carved seals, ritual channels, restraints, and other structures in the ancient Heart complex may later connect to the persistent Heart-layer sequence. Akio might break, restore, sever, reactivate, or otherwise interact with parts of that system after successful runs.
+The carved seals, ritual channels, restraints, extraction structure, and other features of the ancient Heart complex may later connect to the persistent Heart-layer sequence. Akio might break, restore, sever, reactivate, or otherwise interact with parts of that system after successful runs.
 
 This is preserved only so the possibility is not lost. It is not canon, does not establish what the layers are, and does not decide whether the ancient structures restrain the Heart, protect it, exploit it, or serve several purposes.
 
@@ -572,7 +594,7 @@ This is preserved only so the possibility is not lost. It is not canon, does not
 
 A successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
 
-**Status:** open; Question 2 satisfied, still depends on Question 3
+**Status:** open; Questions 2–3 satisfied
 
 ## 11. Campaign clear count and changes after each clear
 
@@ -586,7 +608,7 @@ For each required clear, establish what changes in story, NPC dialogue, hub stat
 
 No clear count is approved. Six remains only a prior candidate. The count must follow the completed story spine and Heart-layer design rather than determine them.
 
-**Status:** open; depends on Questions 2–10
+**Status:** open; depends on Questions 4–10
 
 ## 12. True-final Heart encounter, ending, and postgame
 
