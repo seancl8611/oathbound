@@ -4,11 +4,11 @@ title: Eclipse Shogun
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - eclipse-shogun
   - beast-blood
-  - ancient-source
+  - the-heart
   - plague
   - final-boss
 related:
@@ -23,7 +23,7 @@ The Eclipse Shogun predates the Order. He was once the popular ruler and protect
 
 ## Before the fall
 
-The Shogun's civilization discovered an ancient source of Beast Blood. Its exact nature and the route by which the kingdom found or acquired it remain unresolved.
+The Shogun's civilization discovered or acquired access to the Heart, the ancient source of Beast Blood. The route by which the kingdom found it remains unresolved.
 
 The Shogun initially opposed the Blood's use and sought to restrict access to a power he believed would be exploited.
 
@@ -43,25 +43,37 @@ Beast Blood gradually magnified qualities already present in him:
 - authority became domination,
 - refusal to lose his people became refusal to relinquish power.
 
-He remained coherent longer than most and continued making meaningful choices after the cost became visible. His original decision was sympathetic; his later refusal to stop, his defense of the source, and any attempt to expand its use remain his responsibility.
+He remained coherent longer than most and continued making meaningful choices after the cost became visible. His original decision was sympathetic; his later refusal to stop, his defense of the Heart, and any attempt to expand its use remain his responsibility.
+
+## The greatest false master
+
+The Shogun is the most convincing example of Beast Blood's false mastery.
+
+He may deliberately direct the Blood, preserve intelligence, choose when to reveal mutations, and maintain tactical discipline through severe transformation. He interprets those abilities as proof that his will conquered the curse.
+
+They are not genuine control.
+
+He cannot willingly relinquish the Heart, permit the kingdom to die naturally, imagine salvation without Beast Blood, or act against the Blood's continuation. The Blood does not need to issue direct commands; it has made his deepest desires dependent upon its continued existence.
+
+The Shogun can command the form of his transformation, but he cannot reject the force transforming him. Akio alone demonstrates the possibility of true sovereignty over Beast Blood.
 
 ## Relationship to the island
 
-Many corrupted soldiers and subjects retain fragments of loyalty, recognition, culture, and memory. Their allegiance does not require a hive mind. The Shogun was their ruler before the curse, saved them from the plague in the short term, and remains the island's central political and military authority.
+Many corrupted soldiers and subjects retain loyalty, recognition, culture, memory, ambition, and skill. Their allegiance does not require a hive mind. The Shogun was their ruler before the curse, saved them from the plague in the short term, and remains the island's central political and military authority.
 
-The exact extent of his current control is still open. Some inhabitants remain organized beneath him, while beasts, spirits, and long-corrupted remnants may act more independently.
+Some inhabitants remain organized beneath him, while beasts, spirits, and long-corrupted remnants may act more independently. Retained humanity and organization do not mean freedom from Beast Blood.
 
-## Relationship to the ancient source
+## Relationship to the Heart
 
 The Shogun is Beast Blood's greatest known user and defender, but he is not its origin.
 
-The source is the deeper supernatural threat beyond him. Whether it possesses a will, influences the Shogun, merely intensifies his desires, or has no personal intention remains unresolved.
+The Heart is an ancient living godlike organ or supernatural core with primal agency centered on survival, growth, regeneration, continuation, and incorporation. It does not need a human personality or direct control over the Shogun.
 
-The Shogun must remain the central character antagonist even if the source becomes the true-final supernatural encounter. His choices caused the kingdom's power to spread and persist.
+The Shogun must remain the central character antagonist even though the Heart becomes the true-final supernatural threat. His choices caused Beast Blood to spread, become institutionalized, and persist.
 
 ## Relationship to Akio
 
-Akio carries the same forbidden power without succumbing in the same way. This makes him a threat to the Shogun's authority and a possible challenge to everything the Shogun believes about strength, rule, and control.
+Akio carries the same forbidden power while preserving the ability to reject its rule. This makes him a threat to the Shogun's authority and a direct contradiction of the Shogun's belief that domination, discipline, and greater mutation equal mastery.
 
 Akio is a quiet protagonist. Their opposition should be communicated through restrained exchanges, action, and the Shogun's interpretation of Akio rather than long philosophical speeches from Akio.
 
@@ -73,13 +85,13 @@ The Shogun remains the principal boss of Kagutsuchi Court. His three current pha
 2. Tyrant of the Wellspring
 3. Eclipse Revealed
 
-The phases should reveal increasing use of Beast Blood and culminate in a controlled or deliberately unleashed beast transformation. He does not become a random mindless brute.
+The phases should reveal increasing Beast Blood use and culminate in a deliberate beast transformation. The transformation is not proof of genuine control and should not become a random mindless collapse. It is the final expression of the Shogun's false ascendancy: an intelligent ruler becoming a more powerful servant of the force he believes he mastered.
 
 His exact redesign remains open. A more regal, cunning, lightly armored sovereign may replace the current heavily armored warrior emphasis, but this should not be treated as approved art scope until the character direction is reviewed.
 
 ## Place in the successful-run sequence
 
-Defeating the Shogun temporarily opens the path to the protected ancient source. Akio then damages one persistent source layer before being destroyed or expelled and reconstructed at the Strand.
+Defeating the Shogun temporarily opens the path to the protected Heart. Akio then damages one persistent source layer before being destroyed or expelled and reconstructed at the Strand.
 
 The Shogun's reconstruction, permanent defeat condition, relationship to the source layers, and true-final version remain unresolved.
 
@@ -88,7 +100,7 @@ The Shogun's reconstruction, permanent defeat condition, relationship to the sou
 - What is the Shogun's personal name and historical title?
 - What exactly happened to his daughter after receiving Beast Blood?
 - What does he currently want: isolation, conquest, forced salvation, release, or another goal?
-- Does the source influence him intentionally, instinctively, or not at all?
+- How directly does the Heart's primal agency affect him?
 - Why and how does he reconstruct after successful runs?
-- How does his encounter change before the true-final source confrontation?
+- How does his encounter change before the true-final Heart confrontation?
 - What final visual and combat identity best distinguishes him from the game's other samurai bosses?
