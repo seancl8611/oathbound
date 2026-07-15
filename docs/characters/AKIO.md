@@ -4,7 +4,7 @@ title: Akio
 category: character
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 topics:
   - akio
   - player-character
@@ -85,7 +85,21 @@ His character is communicated through:
 - physical signs of Returning Blood,
 - and major decisions during the campaign.
 
-His exact personal motivation, emotional arc, and relationship to the Shogun remain part of the story-spine design lock.
+His exact personal motivation and complete emotional arc remain part of the story-spine design lock.
+
+## Relationship to the Shogun
+
+Akio's repeated confrontations with the Eclipse Shogun form a central campaign relationship.
+
+The Shogun senses Beast Blood within Akio and initially dismisses his restraint as weakness. As Akio repeatedly returns and demonstrates controlled Blood Aspects, the Shogun becomes fascinated and interprets him as a favored or more advanced bearer.
+
+The Shogun eventually attempts to recruit Akio as a champion, general, heir, or symbol of the forced-salvation kingdom he intends to expand beyond the island.
+
+Akio's defining response is refusal. He does not need long philosophical arguments; his continued opposition to the Shogun and the Heart demonstrates that Beast Blood can be used without accepting its rule.
+
+As Akio survives, wins, and damages the Heart, the Shogun's fascination becomes envy, fear, and hatred. Akio represents the choice the Shogun can no longer make: carrying Beast Blood while remaining able to reject its continuation.
+
+The broad relationship progression is locked as dismissal, fascination, recruitment, and fear or hatred. Exact dialogue, conversation count, branching conditions, and Akio's specific responses remain future narrative work.
 
 ## Personality in motion
 
