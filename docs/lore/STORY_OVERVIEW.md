@@ -55,9 +55,7 @@ For years, the Court studied the chamber in secret. Researchers mapped the compl
 
 ## Forbidden extraction and the fall of the kingdom
 
-The Shogun's prohibition remained in place until a deadly plague threatened the island and his daughter became one of the dying.
-
-Physicians who had studied the Heart argued that its regenerative nature might offer a cure. The Shogun initially refused. He authorized the first controlled attempt to obtain Beast Blood only when conventional medicine had failed, the kingdom's survival was threatened, and his daughter's death appeared inevitable.
+The Shogun's prohibition remained in place until a deadly plague pushed the island's civilization toward extinction. Conventional medicine and containment efforts failed, and the Shogun authorized the first controlled attempt to obtain Beast Blood only when the kingdom appeared unlikely to survive without it.
 
 Usable Beast Blood could not be taken by simply cutting into exposed Heart tissue or draining a visible vessel. The ancient complex contained a sealed extraction structure of carved channels, basins, restraints, and mechanisms. During a controlled window when the Heart's pulse became slower and less forceful, researchers temporarily loosened part of the restraint system and placed a small measure of freshly drawn human blood into the structure. This required no death or human sacrifice.
 
@@ -65,11 +63,13 @@ The Heart responded by changing its pulse and releasing a small quantity of dark
 
 The process carried the meaning of a forbidden exchange. Human blood was offered, the Heart answered with healing power, and whoever later took that power accepted the risk of transformation and eventual loss of independence. Whether the Heart consciously recognized the exchange remained unknown.
 
-Beast Blood appeared miraculous: the sick recovered, damaged bodies healed, and the kingdom survived. Use then expanded from the critically ill to soldiers and eventually to much of the population.
+Beast Blood appeared miraculous: the sick recovered, damaged bodies healed, and the kingdom survived. Because corruption emerged only after its use had spread, the civilization became dependent on Beast Blood before the danger was fully understood.
 
-Corruption emerged over time. The Blood strengthened and regenerated its bearers while magnifying fear, ambition, loyalty, pride, hunger, and other impulses until genuine independence began to fail.
+By the time physical transformation, altered behavior, violent impulses, and loss of genuine independence became undeniable, the Blood had already reached much of the population and become embedded in the kingdom's survival, military strength, and ruling structure. Attempts to limit or abandon it came too late.
 
-The Shogun remained coherent longer than most. He had been a popular ruler, a strong protector, and the center of a loyal civilization. Those same qualities gradually hardened into possessiveness, control, and an unwillingness to relinquish the power that had saved his people.
+The Shogun had been a successful ruler of a flourishing kingdom, but he does not need to have been a heroic or morally ideal man before the fall. His first use of Beast Blood was a last resort against extinction. His later responsibility comes from continuing to use, defend, and expand its power after the consequences became visible.
+
+The exact duration and detailed chronology of the plague era are not currently important. The required sequence is discovery, restriction, extinction-level plague, miraculous cure, delayed corruption, dependence, and continued use.
 
 ## The contained island
 
