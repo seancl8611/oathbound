@@ -111,7 +111,7 @@ The Shogun must remain the central character antagonist even though the Heart be
 
 ## Relationship to Akio
 
-Akio carries the same forbidden power while preserving the ability to reject its rule. The Shogun can sense Beast Blood within him and recognizes that Akio restrains it through discipline, resolve, and Order warding.
+Akio carries the same forbidden power while preserving the ability to reject its rule. The Shogun can sense Beast Blood within him and recognizes that Akio restrains it, but he does not initially understand how that control is possible.
 
 Their relationship develops across repeated encounters:
 
