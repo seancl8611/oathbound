@@ -4,7 +4,7 @@ title: Open Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 ---
 
 # Open Questions
@@ -504,21 +504,53 @@ The Shogun is not currently established to have a daughter. No daughter, royal-h
 
 **Status:** resolved as a minor continuity foundation
 
-## 5. Shogun's present goal and relationship to the Heart
+## 5. Shogun's present goal, mindset, and relationship to Akio
 
-**Question**
+**Resolution**
 
-What does the Shogun want during Akio's campaign, and how does the Heart's primal agency affect that desire?
+The Shogun intends to end the island's containment and extend his corrupted kingdom beyond the barrier.
 
-Decide whether he seeks conquest, forced salvation, escape, renewed prosperity, protection of his kingdom, release, or another goal.
+He does not believe he is spreading a curse. Beast Blood genuinely saved the kingdom from plague, and long-term corruption gradually changed practical reliance into a belief that the Blood represents a stronger form of life. When its consequences appeared, he rationalized mutations as rare complications, failed discipline, incomplete adaptation, or evidence that only stronger bearers could master it.
 
-**Locked boundary**
+Stopping would require him to accept that his kingdom was not truly saved and that his authority spread a second catastrophe. He refuses that conclusion.
 
-The Shogun is not an innocent puppet. Beast Blood magnifies his qualities, but he remains responsible for continuing to use, defend, and expand its power.
+Beast Blood magnifies qualities already present in him: determination becomes an inability to surrender, responsibility becomes possession, authority becomes domination, fear of extinction becomes rejection of natural death, and pride in saving the kingdom becomes certainty that he has discovered humanity's future.
 
-He is the greatest false master of Beast Blood: intelligent and capable of deliberate transformation, but unable to reject the Heart or imagine salvation without its power.
+His present goal combines restoration, conquest, and forced salvation. He intends to carry Beast Blood and his military authority to the mainland, incorporate those who accept it, and defeat or transform those who resist.
 
-**Status:** open
+The Heart does not directly control him like a puppet. Its primal nature favors survival, regeneration, growth, continuation, and incorporation. The Shogun's desires have gradually changed until his sincere plans protect the Heart, preserve Beast Blood, and spread its influence. He remains intelligent and responsible for those choices.
+
+His mastery is false because he can direct mutations and retain discipline but cannot willingly abandon the Heart, end extraction, accept the natural death of his kingdom, allow others to reject his salvation, or imagine a future without Beast Blood and his rule.
+
+The Shogun senses Beast Blood within Akio and recognizes that Akio restrains it. Their repeated relationship develops through four broad stages:
+
+1. **Dismissal** — Akio is another limited Order warrior who will fail because he refuses to fully embrace the Blood.
+2. **Fascination** — Akio's repeated returns and controlled Aspects suggest that he may be favored by the Heart or represent a greater stage of Beast Blood evolution.
+3. **Recruitment** — The Shogun attempts to make Akio a champion, general, heir, or symbol of the kingdom he intends to build beyond the island.
+4. **Fear and hatred** — Akio's refusals, victories, and attacks on the Heart prove that he possesses genuine control, exposing the Shogun's mastery as false.
+
+Akio becomes the living contradiction the Shogun cannot accept: a bearer who can use Beast Blood without serving its continuation.
+
+**Deliberately unresolved**
+
+- the exact method and timing of the Shogun's barrier-breach plan,
+- what the Order knows about the conquest threat,
+- exact encounter-by-encounter dialogue,
+- the number of unique or conditional conversations,
+- voice-acting and cinematic scope,
+- how the Shogun reconstructs after defeat,
+- how his relationship changes after each Heart layer,
+- and his final visual, weapon, animation, and combat identity.
+
+**Affected files**
+
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/characters/AKIO.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/overview/GAME_OVERVIEW.md`
+
+**Status:** resolved at major narrative and character-relationship level
 
 ## 6. Corrupted inhabitants, loyalty, and Area 2 spirits
 
@@ -547,7 +579,7 @@ Retained humanity or deliberate mutation use does not equal true control. Hushir
 
 What does the Order know about the plague, Shogun, Heart, Beast Blood, barrier, and consequences of destroying the Heart—and what exactly does it believe Akio must accomplish?
 
-Also establish why a warrior must be sent every ten years. Is the Shogun preparing conquest, is the barrier deteriorating, are outsiders attempting to acquire the Blood, is the Heart awakening, or is another threat escalating?
+The Shogun's intent to spread Beast Blood through mainland conquest and forced salvation is established. This question must determine what the Order knows about that intent, why the threat becomes actionable every ten years, and what outcome it expects from the warrior it sends.
 
 **Locked boundary**
 
@@ -601,7 +633,7 @@ This is preserved only so the possibility is not lost. It is not canon, does not
 
 A successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
 
-**Status:** open; Questions 2–4 satisfied
+**Status:** open; Questions 2–5 satisfied
 
 ## 11. Campaign clear count and changes after each clear
 
@@ -615,7 +647,7 @@ For each required clear, establish what changes in story, NPC dialogue, hub stat
 
 No clear count is approved. Six remains only a prior candidate. The count must follow the completed story spine and Heart-layer design rather than determine them.
 
-**Status:** open; depends on Questions 5–10
+**Status:** open; depends on Questions 6–10
 
 ## 12. True-final Heart encounter, ending, and postgame
 
