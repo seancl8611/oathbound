@@ -38,7 +38,9 @@ Royal excavation during the expansion of Kagutsuchi Court exposed a sealed passa
 
 The surrounding complex contained carved seals, ritual channels, restraints, damaged inscriptions, and chambers whose original purposes could not be established. The structure may have been a shrine, prison, research site, containment system, harvesting facility, or a combination that changed over time.
 
-The Shogun ordered the discovery sealed, prohibited direct human use, and limited study to trusted royal engineers, scholars, physicians, ritual specialists, guards, and retainers. The Heart remained under restricted study until the plague and his daughter's impending death caused him to authorize its first controlled human use.
+The Shogun ordered the discovery sealed, prohibited direct human use, and limited study to trusted royal engineers, scholars, physicians, ritual specialists, guards, and retainers. The Heart remained under restricted study until a deadly plague pushed the island's civilization toward extinction and the Shogun authorized its first controlled human use.
+
+Beast Blood genuinely cured the plague and initially appeared miraculous. Its corruption emerged late enough that use spread through the endangered population before the consequences were understood. By the time transformation and loss of independence became undeniable, the kingdom had become dependent on the Blood for survival, strength, and continued rule.
 
 Whether the original collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains deliberately unresolved.
 
