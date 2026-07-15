@@ -51,7 +51,7 @@ The Order does not normally empower its warriors with Beast Blood. Akio's condit
 
 **Decision retained**
 
-The Eclipse Shogun was the island's protector and ruler before the Order existed.
+The Eclipse Shogun was the island's successful ruler before the Order existed.
 
 **Superseded premise**
 
@@ -350,7 +350,7 @@ Burn and Shock remain supported through approved prosthetics. Frost and Hex are 
 
 ## 2026-07-13 — Beast Blood narrative foundation
 
-**Status:** approved; source identity, discovery, and extraction later resolved
+**Status:** approved; source identity, discovery, extraction, and plague adoption later resolved
 
 **Decision**
 
@@ -362,7 +362,7 @@ Beast Blood is a rare supernatural power obtained deliberately from an ancient s
 - Resolve can delay corruption but may fail.
 - Corrupted inhabitants can retain memory, recognition, loyalty, training, and relationships.
 - Humanoid corruption, beasts, failed bodies, spirit-like remnants, and environment-bound forms may all arise from the same power.
-- The source's identity, discovery, and Blood-access method were left open here and resolved by later decisions.
+- The source's identity, discovery, Blood-access method, and plague-era adoption were left open here and resolved by later decisions.
 
 **Replaces**
 
@@ -378,25 +378,27 @@ The earlier framing that Beast Blood's primary narrative function is preserving 
 
 ## 2026-07-13 — Shogun plague-era history
 
-**Status:** approved direction; detailed timeline open
+**Status:** approved as a minor continuity foundation; detailed timeline not required
 
 **Decision**
 
-The Shogun ruled a flourishing kingdom and was originally a popular, loyal protector. His civilization discovered or acquired the ancient source through circumstances still to be designed. He initially opposed Beast Blood use.
+The Shogun ruled a flourishing kingdom as a successful ruler, but he is not required to have been a heroic or morally ideal man. His civilization discovered the Heart beneath Kagutsuchi Court, restricted its use, and studied it without allowing direct human use.
 
-A deadly plague threatened the island and his daughter. He authorized Beast Blood first as a cure, then expanded its use after the apparent miracle succeeded. Corruption emerged gradually.
+A deadly plague later pushed the island's civilization toward extinction. The Shogun authorized Beast Blood as a last resort. The cure genuinely worked, but its corruption was delayed long enough for use to spread through the endangered population before the danger was understood. By the time transformation and loss of independence became undeniable, the kingdom had become dependent on Beast Blood.
 
-The Shogun is not an innocent puppet. Beast Blood magnified loyalty, pride, authority, and fear of loss, but he remained responsible for continuing to use, defend, and expand its power after the cost became visible.
+The Shogun's first decision can be understood as a response to extinction. He remains responsible for continuing to use, defend, and expand Beast Blood after its consequences became visible.
+
+The Shogun is not currently established to have a daughter. The former daughter premise is removed unless deliberately reintroduced later.
 
 **Replaces**
 
-The unresolved ancient-enemy premise in which the Shogun primarily used Beast Blood to make an army impossible to kill during one war.
+The unresolved ancient-enemy premise in which the Shogun primarily used Beast Blood to make an army impossible to kill during one war, and the temporary daughter premise used to personalize the plague decision.
 
 **Affected documents**
 
+- `docs/lore/BEAST_BLOOD.md`
 - `docs/lore/ECLIPSE_SHOGUN.md`
 - `docs/lore/STORY_OVERVIEW.md`
-- `docs/content/area_3/BOSS.md`
 - `docs/_meta/OPEN_QUESTIONS.md`
 
 ## 2026-07-13 — Returning Blood origin reopened
@@ -561,7 +563,7 @@ The first explorers encountered an immense living mass embedded in stone, surrou
 
 Royal engineers, guards, scholars, physicians, and ritual specialists made the discovery rather than the Shogun personally. The Shogun ordered the site sealed, prohibited direct human use, and restricted study to a small trusted circle.
 
-The prohibition remained until the plague threatened the kingdom and his daughter was expected to die. The Shogun then authorized the first controlled attempt to use power obtained from the Heart.
+The prohibition remained until a deadly plague pushed the island's civilization toward extinction. The Shogun then authorized the first controlled attempt to use power obtained from the Heart.
 
 This decision establishes discovery and chamber access only. The later forbidden-extraction decision defines how usable Beast Blood is released.
 
