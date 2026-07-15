@@ -73,7 +73,7 @@ The exact duration and detailed chronology of the plague era are not currently i
 
 ## The Shogun's present goal
 
-The Shogun no longer views Beast Blood as a curse. Its success against the plague and his centuries of corruption have transformed practical reliance into a belief that the Blood represents a stronger form of life.
+The Shogun no longer views Beast Blood as a curse. Its success against the plague and his long-term corruption have transformed practical reliance into a belief that the Blood represents a stronger form of life.
 
 He intends to end the island's containment and extend his kingdom beyond the barrier. His goal combines restoration, conquest, and forced salvation: those who accept Beast Blood may be incorporated into his new civilization, while those who resist will be defeated or transformed.
 
