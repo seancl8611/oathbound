@@ -355,6 +355,8 @@ The initial framework uses one separate run-scoped Relic slot. Relics are broade
 
 These questions must be answered in dependency order before the complete story spine, successful-clear count, ending, and final Milestone 6 scope can be locked.
 
+The questions do not hold equal narrative, gameplay, or production weight. Some are minor continuity beats that need only enough definition to keep the story consistent. Others may reshape the campaign, character motivations, game structure, or production scope. Each question should be resolved only to the depth its consequences require.
+
 ## 1. Ancient source identity and agency
 
 **Resolution**
@@ -408,7 +410,7 @@ The structure may have been a shrine, prison, research site, containment system,
 
 Royal engineers, guards, scholars, physicians, and ritual specialists made the discovery rather than the Shogun personally. The Shogun ordered the site sealed, prohibited direct human use, and restricted entry to a small trusted circle.
 
-For years, the Court mapped and studied the ancient complex without reaching a definitive interpretation of its builders or purpose. The prohibition remained until the plague threatened the kingdom and the Shogun's daughter was expected to die. He then authorized the first controlled attempt to use power obtained from the Heart.
+For years, the Court mapped and studied the ancient complex without reaching a definitive interpretation of its builders or purpose. The prohibition remained until a deadly plague pushed the island's civilization toward extinction. The Shogun then authorized the first controlled attempt to use power obtained from the Heart.
 
 This decision establishes discovery and access to the chamber. The process by which usable Beast Blood is released is resolved in Question 3.
 
@@ -476,26 +478,31 @@ The process is a devil's bargain without requiring a literal speaking contract. 
 
 **Status:** resolved at story-foundation level
 
-## 4. Plague-era timeline and the Shogun's daughter
+## 4. Plague-era fall of the kingdom
 
-**Question**
+**Resolution**
 
-What happened from the first plague cases through the kingdom's collapse, and what specifically happened to the Shogun's daughter after she received Beast Blood?
+The Heart remained under restricted study until a deadly plague pushed the island's civilization toward extinction. Conventional medicine and containment efforts failed, and the Shogun authorized Beast Blood as a last resort when the kingdom appeared unlikely to survive without it.
 
-Establish:
+Beast Blood genuinely cured the plague and initially appeared miraculous. Because the corruption was delayed, its use spread through the endangered population before the danger was understood.
 
-- how quickly the plague spread,
-- when the Shogun approved the cure,
-- how long the apparent miracle lasted,
-- why use expanded from the sick to soldiers and the wider population,
-- when corruption became undeniable,
-- and whether the daughter survived, transformed, died, disappeared, or remains relevant.
+By the time physical transformations, altered behavior, violent impulses, and loss of genuine independence became undeniable, too many people had already received Beast Blood. The kingdom's survival, military strength, and ruling structure had become dependent on continued access to the Heart. Attempts to restrict or abandon its use came too late.
 
-**Locked boundary**
+The Shogun had been a successful ruler of a flourishing kingdom, but he is not required to have been a heroic or morally ideal man. His first use of Beast Blood can be understood as a last resort against extinction. His later responsibility comes from continuing to use, defend, and expand its power after the consequences became visible.
 
-The kingdom flourished before the plague. The Shogun was popular and initially restricted Beast Blood. His daughter's impending death helped drive the decision to use it. The first extraction uses the approved forbidden process from Question 3, but its participants and exact scene remain open here.
+The exact chronology is not locked because it is not currently important to the game. The required historical sequence is discovery, restriction, extinction-level plague, miraculous cure, delayed corruption, dependence, and continued use.
 
-**Status:** open
+**Removed premise**
+
+The Shogun is not currently established to have a daughter. No daughter, royal-heir treatment, or related fate should be treated as canon unless deliberately introduced later.
+
+**Affected files**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+
+**Status:** resolved as a minor continuity foundation
 
 ## 5. Shogun's present goal and relationship to the Heart
 
@@ -594,7 +601,7 @@ This is preserved only so the possibility is not lost. It is not canon, does not
 
 A successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
 
-**Status:** open; Questions 2–3 satisfied
+**Status:** open; Questions 2–4 satisfied
 
 ## 11. Campaign clear count and changes after each clear
 
@@ -608,7 +615,7 @@ For each required clear, establish what changes in story, NPC dialogue, hub stat
 
 No clear count is approved. Six remains only a prior candidate. The count must follow the completed story spine and Heart-layer design rather than determine them.
 
-**Status:** open; depends on Questions 4–10
+**Status:** open; depends on Questions 5–10
 
 ## 12. True-final Heart encounter, ending, and postgame
 
@@ -620,7 +627,7 @@ Establish:
 
 - Heart boss manifestation and phases,
 - final vulnerability,
-- fate of the Shogun, daughter, island inhabitants, and barrier,
+- fate of the Shogun, island inhabitants, and barrier,
 - Akio's final condition,
 - ending consequence,
 - credits trigger,
