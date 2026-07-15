@@ -19,7 +19,7 @@ related:
 
 # Eclipse Shogun
 
-The Eclipse Shogun predates the Order. He was once the popular ruler and protector of a flourishing island kingdom.
+The Eclipse Shogun predates the Order. He was once the successful ruler of a flourishing island kingdom.
 
 ## Before the fall
 
@@ -31,15 +31,15 @@ The discovery was made by royal engineers, guards, scholars, physicians, and rit
 
 The Shogun ordered the site sealed and placed under royal control. He prohibited direct human use and allowed only restricted study by trusted members of the Court. For years, researchers mapped the complex and documented the Heart's pulse, regeneration, and reactions without reaching a definitive understanding of what the earlier builders had intended.
 
-A deadly plague later threatened the island. When conventional means failed and his own daughter was expected to die, physicians argued that the Heart's regenerative power might be used as a cure.
+A deadly plague later pushed the island's civilization toward extinction. When conventional means failed, physicians argued that the Heart's regenerative power might be used as a cure.
 
-The Shogun initially refused. He permitted the first forbidden extraction only when the kingdom's survival was threatened and his daughter's death appeared inevitable.
+The Shogun permitted the first forbidden extraction only when the kingdom appeared unlikely to survive without it.
 
 Researchers could not simply cut into the Heart or drain an exposed vessel. During a controlled weak-pulse window, they temporarily loosened part of the ancient restraint structure and placed a small measure of freshly drawn human blood into its carved channels or basin. No death or human sacrifice was required. The Heart responded by releasing a small quantity of Beast Blood, which had to be collected before its pulse strengthened and the restraints were restored.
 
 The process was a dangerous exchange rather than a routine harvest. It offered healing and survival while opening every recipient to transformation and eventual loss of independence. The exact first-extraction scene, who participated, and whether the Heart consciously recognized the offering remain unresolved.
 
-The treatment worked. The sick recovered, damaged bodies healed, and the kingdom appeared to have been saved. Use expanded from the dying to soldiers and eventually to much of the population.
+The treatment worked. The sick recovered, damaged bodies healed, and the kingdom appeared to have been saved. Because the corruption was delayed, use spread through the population before its consequences were understood. By the time transformation and loss of independence became undeniable, the kingdom had already become dependent on Beast Blood.
 
 ## Responsibility and corruption
 
@@ -53,7 +53,7 @@ Beast Blood gradually magnified qualities already present in him:
 - authority became domination,
 - refusal to lose his people became refusal to relinquish power.
 
-He remained coherent longer than most and continued making meaningful choices after the cost became visible. His original decision was sympathetic; his later refusal to stop, his defense of the Heart, and any attempt to expand its use remain his responsibility.
+He remained coherent longer than most and continued making meaningful choices after the cost became visible. His first use of Beast Blood can be understood as a last resort against extinction; his later refusal to stop, his defense of the Heart, and any attempt to expand its use remain his responsibility.
 
 ## The greatest false master
 
@@ -110,7 +110,6 @@ The Shogun's reconstruction, permanent defeat condition, relationship to the Hea
 ## Open questions
 
 - What is the Shogun's personal name and historical title?
-- What exactly happened to his daughter after receiving Beast Blood?
 - What does he currently want: isolation, conquest, forced salvation, release, or another goal?
 - How directly does the Heart's primal agency affect him?
 - Why and how does he reconstruct after successful runs?
