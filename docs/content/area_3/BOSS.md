@@ -4,7 +4,7 @@ title: The Eclipse Shogun — Boss Encounter
 category: content
 status: draft
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 topics:
   - area-3
   - eclipse-shogun
@@ -29,13 +29,13 @@ Defeating him completes the combat route through the three regions and temporari
 
 ## One-sentence fantasy
 
-A once-beloved ruler who used forbidden Blood to save his plague-stricken kingdom, then chose control and continued power after the miracle revealed its cost.
+A successful ruler who used forbidden Blood as a last resort to save his plague-stricken kingdom, then chose control and continued power after the miracle revealed its cost.
 
 ## Lore context
 
-The Shogun originally opposed the exploitation of Beast Blood. He permitted its use when plague threatened his people and his daughter, then expanded it after the cure appeared successful.
+The Shogun originally restricted the exploitation of Beast Blood. He permitted its use when plague pushed his civilization toward extinction, then continued and expanded it after the cure appeared successful and the delayed corruption spread through the population.
 
-Beast Blood magnified his loyalty, pride, authority, and fear of loss. He remained coherent and responsible for his choices while becoming the ruler and defender of a corrupted kingdom.
+Beast Blood magnified his qualities and ambitions. He remained coherent and responsible for his choices while becoming the ruler and defender of a corrupted kingdom.
 
 ## Phase structure
 
