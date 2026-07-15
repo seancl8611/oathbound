@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 ---
 
 # Decision Log
@@ -614,3 +614,41 @@ The extraction structure's builders and original purpose, why freshly drawn huma
 - `docs/_meta/OPEN_QUESTIONS.md`
 - `docs/_meta/TERMINOLOGY.md`
 - `docs/art_production/milestones/MILESTONE_06.md`
+
+## 2026-07-15 — Shogun forced salvation and Akio relationship
+
+**Status:** locked at major narrative and character-relationship level
+
+**Decision**
+
+The Eclipse Shogun intends to end the island's containment and extend his corrupted kingdom beyond the barrier through conquest and forced salvation.
+
+He does not believe he is spreading a curse. Beast Blood genuinely saved his civilization from plague, and long-term corruption gradually transformed practical reliance into a belief that the Blood represents a stronger form of life. He rationalizes failed transformations as weakness, failed discipline, or incomplete adaptation while treating Kagutsuchi Court's organized elites as evidence of mastery.
+
+Beast Blood magnifies qualities already present in him: determination becomes an inability to surrender, responsibility becomes possession, authority becomes domination, fear of extinction becomes rejection of natural death, and pride in saving the kingdom becomes certainty that he has discovered humanity's future.
+
+The Heart does not directly command him. Its primal nature favors survival, regeneration, growth, continuation, and incorporation. The Shogun's desires have changed until his sincere plans protect the Heart, preserve Beast Blood, and spread its influence. He remains intelligent and responsible for his choices.
+
+His mastery is false because he can direct mutation and retain discipline but cannot willingly abandon the Heart, end extraction, accept the natural death of his kingdom, allow others to reject his salvation, or imagine a future without Beast Blood and his rule.
+
+The Shogun senses Beast Blood within Akio. Their repeated relationship develops through four stages:
+
+1. dismissal of Akio as a restrained Order warrior,
+2. fascination with his repeated returns and controlled Aspects,
+3. recruitment of Akio as a champion, general, heir, or symbol of the Shogun's future kingdom,
+4. fear and hatred when Akio's refusals, victories, and attacks on the Heart prove genuine control and expose the Shogun's mastery as false.
+
+Akio becomes the living contradiction the Shogun cannot accept: a bearer who can use Beast Blood without serving its continuation.
+
+**Deliberately unresolved**
+
+The exact barrier-breach method and timing, the Order's knowledge, encounter-by-encounter dialogue, conversation count, voice-acting and cinematic scope, Shogun reconstruction, changes after each Heart layer, and final visual and combat identity remain open.
+
+**Affected documents**
+
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/characters/AKIO.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/_meta/OPEN_QUESTIONS.md`
