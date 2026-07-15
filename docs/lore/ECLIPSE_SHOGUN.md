@@ -4,7 +4,7 @@ title: Eclipse Shogun
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 topics:
   - eclipse-shogun
   - beast-blood
@@ -41,35 +41,59 @@ The process was a dangerous exchange rather than a routine harvest. It offered h
 
 The treatment worked. The sick recovered, damaged bodies healed, and the kingdom appeared to have been saved. Because the corruption was delayed, use spread through the population before its consequences were understood. By the time transformation and loss of independence became undeniable, the kingdom had already become dependent on Beast Blood.
 
-## Responsibility and corruption
+## Responsibility and changing belief
 
 The Shogun should not be treated as an innocent puppet.
 
-Beast Blood gradually magnified qualities already present in him:
+He did not originally desire Beast Blood. Its apparent success against the plague changed his judgment: the forbidden power he had restricted appeared to validate his decision and preserve the civilization under his rule.
 
-- loyalty hardened into possessiveness,
+When corruption emerged, he rationalized each consequence rather than accept that the cure itself was the cause. Early mutations became rare complications, violent behavior became failed discipline, unstable bodies became unsuccessful adaptation, and the Court's stronger bearers became proof that the Blood could be mastered.
+
+Stopping would have required him to admit that the kingdom had not truly been saved and that his authority had spread a second catastrophe after ending the first. He refused that conclusion.
+
+Long-term Beast Blood gradually magnified qualities already present in him:
+
+- determination became an inability to surrender,
+- responsibility for the kingdom became possession of it,
 - protection became control,
 - confidence became pride,
 - authority became domination,
-- refusal to lose his people became refusal to relinquish power.
+- fear of extinction became rejection of natural death,
+- and refusal to lose his people became refusal to relinquish power.
 
-He remained coherent longer than most and continued making meaningful choices after the cost became visible. His first use of Beast Blood can be understood as a last resort against extinction; his later refusal to stop, his defense of the Heart, and any attempt to expand its use remain his responsibility.
+He remained coherent and continued making meaningful choices after the cost became visible. His first use of Beast Blood can be understood as a last resort against extinction; his later refusal to stop, his defense of the Heart, and his plan to expand its use remain his responsibility.
+
+## Present goal — forced salvation
+
+The Shogun intends to end the island's containment and extend his corrupted kingdom beyond the barrier.
+
+He does not believe he is spreading a curse. He believes Beast Blood saved his civilization, overcame the limitations of the human body, and created the foundation of a stronger form of life. In his view, the island was transformed and then imprisoned by outsiders too weak or fearful to understand what it had become.
+
+His goal combines restoration, conquest, and forced salvation. He intends to carry Beast Blood and his military authority to the mainland, incorporating those who accept it and defeating or transforming those who resist.
+
+He does not seek destruction for its own sake. He seeks a world in which disease, age, injury, natural death, and resistance to his authority are overcome through the Heart's power.
+
+The exact method by which he plans to overcome the barrier, the timing of the mainland threat, and what the Order knows about that plan remain owned by later story questions.
 
 ## The greatest false master
 
 The Shogun is the most convincing example of Beast Blood's false mastery.
 
-He may deliberately direct the Blood, preserve intelligence, choose when to reveal mutations, and maintain tactical discipline through severe transformation. He interprets those abilities as proof that his will conquered the curse.
+He can deliberately direct the Blood, preserve intelligence, choose when to reveal mutations, maintain tactical discipline through severe transformation, and command an organized Court. He interprets those abilities as proof that his will conquered the curse.
 
 They are not genuine control.
 
-He cannot willingly relinquish the Heart, permit the kingdom to die naturally, imagine salvation without Beast Blood, or act against the Blood's continuation. The Blood does not need to issue direct commands; it has made his deepest desires dependent upon its continued existence.
+He cannot willingly relinquish the Heart, end extraction, accept the natural death of his kingdom, allow his subjects to reject his salvation, or imagine a future in which his rule and Beast Blood do not continue.
 
-The Shogun can command the form of his transformation, but he cannot reject the force transforming him. Akio alone demonstrates the possibility of true sovereignty over Beast Blood.
+He controls how the Blood expresses itself, but he cannot reject what it has made him desire. Akio alone demonstrates the possibility of true sovereignty over Beast Blood.
 
 ## Relationship to the island
 
 Many corrupted soldiers and subjects retain loyalty, recognition, culture, memory, ambition, and skill. Their allegiance does not require a hive mind. The Shogun was their ruler before the curse, saved them from the plague in the short term, and remains the island's central political and military authority.
+
+He does not believe the kingdom truly fell. Kagutsuchi Court's organized soldiers, preserved traditions, and controlled mutations appear to prove that civilization survived in a stronger form.
+
+The suffering visible in Hushiro and Yomori does not change his conclusion. He regards those outcomes as failed discipline, incomplete adaptation, or necessary losses rather than evidence that Beast Blood must be rejected.
 
 Some inhabitants remain organized beneath him, while beasts, spirits, and long-corrupted remnants may act more independently. Retained humanity and organization do not mean freedom from Beast Blood.
 
@@ -77,15 +101,32 @@ Some inhabitants remain organized beneath him, while beasts, spirits, and long-c
 
 The Shogun is Beast Blood's greatest known user and defender, but he is not its origin.
 
-The Heart is an ancient living godlike organ or supernatural core with primal agency centered on survival, growth, regeneration, continuation, and incorporation. It does not need a human personality or direct control over the Shogun.
+He does not regard himself as a humble worshipper or the Heart's servant. He treats the Heart as a divine or supernatural power that his Court discovered, studied, survived, and brought under royal control.
 
-The Shogun must remain the central character antagonist even though the Heart becomes the true-final supernatural threat. His choices caused Beast Blood to spread, become institutionalized, and persist.
+The Heart possesses primal agency centered on survival, growth, regeneration, continuation, and incorporation. It does not need to speak to the Shogun or directly command him.
+
+Over time, the Shogun's desires have changed until everything he sincerely wants also advances the Heart's nature. His plans protect the Heart, preserve Beast Blood, spread its influence, and incorporate new life while still feeling entirely like his own choices.
+
+The Shogun must remain the central character antagonist even though the Heart becomes the true-final supernatural threat. His corruption explains his changing beliefs but does not erase his responsibility.
 
 ## Relationship to Akio
 
-Akio carries the same forbidden power while preserving the ability to reject its rule. This makes him a threat to the Shogun's authority and a direct contradiction of the Shogun's belief that domination, discipline, and greater mutation equal mastery.
+Akio carries the same forbidden power while preserving the ability to reject its rule. The Shogun can sense Beast Blood within him and recognizes that Akio restrains it, but he does not initially understand how that control is possible.
 
-Akio is a quiet protagonist. Their opposition should be communicated through restrained exchanges, action, and the Shogun's interpretation of Akio rather than long philosophical speeches from Akio.
+Their relationship develops across repeated encounters:
+
+1. **Dismissal** — The Shogun sees Akio as another restrained Order warrior who fears the power inside him and will eventually die or surrender. He considers Akio's refusal to fully embrace mutation a weakness.
+2. **Fascination** — Akio's repeated returns and controlled Blood Aspects reveal that he is unprecedented. The Shogun initially interprets him as specially favored by the Heart or as a more advanced form of Beast Blood bearer.
+3. **Recruitment** — The Shogun attempts to bring Akio into his kingdom as a champion, general, heir, or living symbol of the stronger civilization he intends to build. He presents the Order as an institution that fears and limits what Akio has become.
+4. **Fear and hatred** — Akio's continued refusal, repeated victories, and attacks on the Heart prove that he can possess Beast Blood without serving its continuation. Akio becomes the living contradiction that exposes the Shogun's false mastery.
+
+The Shogun's offer is sincere within his corrupted worldview, but it is not an offer of humble equality. He wants to place Akio inside his own vision of conquest and salvation.
+
+As Akio progresses, the Shogun moves from insisting that Akio has not fully awakened, to claiming that he denies his true nature, to recognizing that Akio possesses a freedom he no longer has. That realization produces envy, fear, and hatred.
+
+Akio is a quiet protagonist. Their relationship should be communicated through restrained exchanges, actions, refusals, and changing pre-fight or post-fight dialogue rather than long speeches from Akio.
+
+The Shogun should remember the campaign's repeated encounters at the story level. Exact dialogue lines, the number of unique conversations, branching conditions, voice acting, and cinematic presentation remain future narrative and production work.
 
 ## Final-boss identity
 
@@ -110,8 +151,8 @@ The Shogun's reconstruction, permanent defeat condition, relationship to the Hea
 ## Open questions
 
 - What is the Shogun's personal name and historical title?
-- What does he currently want: isolation, conquest, forced salvation, release, or another goal?
-- How directly does the Heart's primal agency affect him?
-- Why and how does he reconstruct after successful runs?
+- What exact encounter-by-encounter dialogue expresses dismissal, fascination, recruitment, and hatred?
+- How many unique or conditional conversations does the final game require?
+- Why and how does the Shogun reconstruct after successful runs?
 - How does his encounter change before the true-final Heart confrontation?
 - What final visual and combat identity best distinguishes him from the game's other samurai bosses?

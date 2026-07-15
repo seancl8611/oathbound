@@ -4,7 +4,7 @@ title: Story Overview
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 topics:
   - story
   - blood-moon
@@ -71,6 +71,18 @@ The Shogun had been a successful ruler of a flourishing kingdom, but he does not
 
 The exact duration and detailed chronology of the plague era are not currently important. The required sequence is discovery, restriction, extinction-level plague, miraculous cure, delayed corruption, dependence, and continued use.
 
+## The Shogun's present goal
+
+The Shogun no longer views Beast Blood as a curse. Its success against the plague and his long-term corruption have transformed practical reliance into a belief that the Blood represents a stronger form of life.
+
+He intends to end the island's containment and extend his kingdom beyond the barrier. His goal combines restoration, conquest, and forced salvation: those who accept Beast Blood may be incorporated into his new civilization, while those who resist will be defeated or transformed.
+
+He believes outsiders imprisoned the island because they fear what its people became. He regards Kagutsuchi Court's discipline, preserved culture, and deliberate mutation as evidence that the Blood can be mastered, while dismissing the suffering of Hushiro and Yomori as failed discipline or incomplete adaptation.
+
+The Heart does not need to command him directly. Beast Blood has magnified his determination, authority, pride, and fear of extinction until his sincere ambitions protect the Heart, preserve the Blood, and spread its influence. He remains intelligent and responsible for those choices.
+
+The exact method by which he intends to overcome the barrier, the timing of the mainland threat, and the Order's knowledge remain open under their later questions.
+
 ## The contained island
 
 An ancient barrier now isolates the island, its corrupted inhabitants, and access to the Heart. The barrier's builders, mechanism, and exact relationship to the Heart and Shogun remain unresolved.
@@ -109,6 +121,16 @@ Akio is the only known bearer with genuine control over Beast Blood. Other beare
 
 Across repeated attempts, Akio travels through Hushiro Gate Village, Yomori Grove, and Kagutsuchi Court toward the Eclipse Shogun and the Heart.
 
+## Akio and the Shogun
+
+The Shogun senses Beast Blood within Akio and recognizes that Akio restrains it.
+
+Their repeated encounters develop through dismissal, fascination, recruitment, and eventual fear and hatred. The Shogun first considers Akio a limited Order warrior, then interprets his repeated returns and controlled Aspects as evidence that he may be favored by the Heart or represent a greater stage of Beast Blood evolution.
+
+He attempts to recruit Akio as a champion of the kingdom he intends to spread beyond the island. Akio's repeated refusal and continued attacks on the Heart eventually force the Shogun to recognize that Akio possesses genuine control: he can carry Beast Blood without serving its continuation.
+
+Akio becomes the living contradiction that exposes the Shogun's false mastery. Exact dialogue, conversation count, branching conditions, voice acting, and cinematic presentation remain future narrative and production work.
+
 ## Successful-run direction
 
 The Shogun remains the central character antagonist and principal ruler of the island, but he is not the original source of Beast Blood.
@@ -126,7 +148,7 @@ The exact number and nature of the layers, required successful clears, Heart enc
 
 ## Final-antagonist direction
 
-The Eclipse Shogun remains responsible for choosing, expanding, defending, and potentially weaponizing Beast Blood. He should not become an innocent puppet whose actions no longer matter.
+The Eclipse Shogun remains responsible for choosing, expanding, defending, and weaponizing Beast Blood. He should not become an innocent puppet whose actions no longer matter.
 
 The Heart is the deeper supernatural threat beyond him and is intended to support a true-final confrontation after the Shogun's permanent defeat. Its final anatomy, vulnerability, manifestation, and combat identity remain open.
 
@@ -136,6 +158,7 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 - A miracle whose delayed cost corrupts the civilization it saved
 - Loyalty becoming possessiveness
 - Protection becoming control
+- Forced salvation becoming conquest
 - Human desire intensified by supernatural power
 - Retained humanity without genuine independence
 - False mastery contrasted with Akio's unique control
@@ -144,4 +167,4 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 
 ## Canon boundaries
 
-Exact dialogue, Akio's complete character arc, the first extraction scene, the Order's knowledge, the Shogun's present objective, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
+Exact dialogue, conversation count, Akio's complete character arc, the first extraction scene, the Order's knowledge, the barrier-breach method and timing, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.

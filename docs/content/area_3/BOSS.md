@@ -4,7 +4,7 @@ title: The Eclipse Shogun — Boss Encounter
 category: content
 status: draft
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 topics:
   - area-3
   - eclipse-shogun
@@ -29,13 +29,28 @@ Defeating him completes the combat route through the three regions and temporari
 
 ## One-sentence fantasy
 
-A successful ruler who used forbidden Blood as a last resort to save his plague-stricken kingdom, then chose control and continued power after the miracle revealed its cost.
+A successful ruler who used forbidden Blood as a last resort to save his plague-stricken kingdom, then came to believe that conquest and forced transformation would bring that salvation to the wider world.
 
 ## Lore context
 
 The Shogun originally restricted the exploitation of Beast Blood. He permitted its use when plague pushed his civilization toward extinction, then continued and expanded it after the cure appeared successful and the delayed corruption spread through the population.
 
-Beast Blood magnified his qualities and ambitions. He remained coherent and responsible for his choices while becoming the ruler and defender of a corrupted kingdom.
+Long-term Beast Blood magnified his determination, authority, pride, and fear of extinction. He now sees the Blood as evolution rather than a curse and intends to end the island's containment, extend his kingdom to the mainland, and force his salvation upon those who resist.
+
+He remains coherent and responsible for his choices. The Heart does not need to command him directly; his plans protect it and spread its influence while still feeling entirely like his own ambitions.
+
+## Repeated encounter relationship
+
+The Shogun senses Beast Blood within Akio and recognizes that Akio restrains it. Their relationship develops across repeated confrontations rather than resetting after each run:
+
+1. **Dismissal** — The Shogun treats Akio as another limited Order warrior who will fail because he refuses to fully embrace the Blood.
+2. **Fascination** — Akio's repeated returns and controlled Aspects suggest that he may be favored by the Heart or represent a greater stage of Beast Blood evolution.
+3. **Recruitment** — The Shogun offers Akio a place as a champion, general, heir, or symbol of the kingdom he intends to build beyond the island.
+4. **Fear and hatred** — Akio's refusals, victories, and attacks on the Heart prove that he possesses genuine control, exposing the Shogun's mastery as false.
+
+The encounter should support changing pre-fight or post-fight dialogue that reflects campaign progress and prior meetings. Exact dialogue lines, conversation count, branching conditions, voice acting, and cinematic presentation remain unscoped.
+
+Akio remains a quiet protagonist. The relationship should rely on concise responses, silence, refusals, and the Shogun's changing interpretation rather than long exchanges from Akio.
 
 ## Phase structure
 
@@ -92,7 +107,7 @@ The fight takes place in the Shogun's throne-space or ritual sanctum near the ro
 
 Each phase tests a different layer of mastery without losing visual or mechanical coherence. Transitions must communicate deliberate escalation and retained cunning.
 
-The Shogun must remain narratively important even when the ancient source becomes the true-final encounter. His responsibility comes from choosing, expanding, defending, and potentially weaponizing Beast Blood.
+The Shogun must remain narratively important even when the ancient source becomes the true-final encounter. His responsibility comes from choosing, expanding, defending, and weaponizing Beast Blood through his plan of forced salvation.
 
 ## Narrative boundary
 
@@ -101,12 +116,15 @@ Approved:
 - the Shogun is the Area 3 principal boss,
 - the encounter has three escalating phases,
 - the final phase is a deliberate beast transformation,
-- defeating him opens access to the deeper source.
+- defeating him opens access to the deeper source,
+- his present goal is mainland conquest through forced Beast Blood salvation,
+- and his repeated relationship with Akio progresses through dismissal, fascination, recruitment, and fear or hatred.
 
 Still open:
 
 - final costume, body type, weapon, and animation list,
-- current political goal and relationship to the source,
+- exact repeated dialogue and presentation scope,
+- the method and timing of the barrier threat,
 - reconstruction between successful runs,
 - permanent defeat version,
 - transition from Shogun defeat to source-layer completion.
