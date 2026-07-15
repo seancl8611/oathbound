@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 topics:
   - project-identity
   - combat
@@ -34,6 +34,8 @@ Beast Blood strengthens, heals, regenerates, and transforms while intensifying i
 Akio is not immune. His resolve and the Order's anti-corruption warding contribute to an unprecedented condition called Returning Blood. It allows him to reform after death, retain his identity, and develop controlled Blood Aspects during runs. The exact origin remains under story design lock.
 
 Akio is the only known bearer with genuine control over Beast Blood. Other bearers may direct abilities or retain intelligence, but they ultimately lose the ability to reject the Blood's rule.
+
+The Eclipse Shogun intends to end the island's containment and extend his kingdom to the mainland through conquest and forced Beast Blood salvation. He first dismisses Akio's restraint, then becomes fascinated by his repeated returns, attempts to recruit him, and eventually fears and hates him as living proof that the Shogun's own mastery is false.
 
 ## Project statement
 
