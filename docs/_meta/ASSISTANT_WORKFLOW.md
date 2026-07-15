@@ -4,7 +4,7 @@ title: Assistant Update Workflow
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-14
 ---
 
 # Assistant Update Workflow
@@ -50,6 +50,7 @@ A change is not complete merely because every file listed in `DOCUMENT_MAP.md` w
 - A contractor brief may summarize a mechanic but should point back to its authoritative internal document.
 - Do not silently promote a working assumption to approved design.
 - Do not edit unrelated systems merely to make a requested change appear more complete.
+- Open questions do not hold equal narrative, gameplay, or production weight. Resolve each only to the level needed for consistency and dependency progress. A minor continuity beat should not receive the same depth or scope as a decision that reshapes the game, campaign, or production plan.
 
 ## Adding new content
 
