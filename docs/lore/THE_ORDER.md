@@ -4,27 +4,47 @@ title: The Order
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-16
 topics:
   - order
   - blood-moon
   - crossing
   - akio
   - warding
+  - barrier
 related:
   - LORE-BARRIER-BLOOD-MOON
   - LORE-RETURNING-BLOOD
   - CHAR-AKIO
+  - CHAR-STRAND-KEEPER
 ---
 
 # The Order
 
-The Order is the religious-military organization that trains Akio, organizes the Strand operation, and sends him toward the island.
+The Order is the religious-military organization that trains Akio, maintains the island containment operation, organizes the Strand, and sends him toward the island.
+
+## Origin and historical duty
+
+The Order began after the fall of the island's kingdom.
+
+Survivors, mainland warriors, ritualists, and religious authorities could not destroy the corrupted kingdom or reach whatever sustained it. They created the barrier as a desperate containment solution and accepted responsibility for guarding it until the curse could be destroyed from within.
+
+The Strand was established at the barrier's controlled threshold. The Keeper, a former noble of the island, aided the founders and bound his spirit to that passage.
+
+The earliest members possessed more direct knowledge of the catastrophe than the modern Order. Over generations, much of that history was lost, fragmented, or reduced to inherited doctrine and ritual procedure.
+
+The modern Order retains the essential duty:
+
+- maintain the barrier and Strand operation,
+- watch for the Blood Moon,
+- prepare one exceptional warrior for the crossing,
+- and destroy the cursed force and whatever sustains it.
 
 ## Established knowledge
 
 - The Order knows that the island contains an organized population of Beast Blood users with unnatural strength, regeneration, and apparent resistance to ordinary death.
-- It knows that an ancient barrier prevents reliable entry and that the Blood Moon creates a rare crossing opportunity.
+- It knows that the barrier prevents reliable entry and departure and that the Blood Moon creates a rare crossing opportunity.
+- It knows how to maintain the Strand threshold and prepare the Boat, but it does not fully understand the Heart-linked reason the barrier comes under pressure.
 - It knows that every warrior previously sent through the crossing failed to return.
 - It infers that the cursed forces may answer to a ruler or depend on a central source, but it does not know the Heart's identity, the plague-era history, the extraction process, or the Shogun's mainland ambitions.
 - It does not send Akio because it understands a risk of Beast Blood spreading beyond the island. Its mission is based on the continued existence of the cursed force itself.
@@ -45,7 +65,7 @@ The mission is considered one-way. Akio is expected to complete as much of it as
 
 ## Warding tradition
 
-The Order has developed anti-corruption rites, seals, protective markings, and warding magic for warriors expected to confront Beast Blood.
+The Order has developed anti-corruption rites, seals, protective markings, barrier maintenance practices, and warding magic through generations of guarding the Strand.
 
 These protections are intended to preserve judgment, memory, and spiritual integrity long enough to complete the mission. They do not grant immunity and have not previously allowed a warrior to return after death.
 
@@ -58,10 +78,11 @@ The Order is primarily a background faction. It provides:
 - Akio's martial discipline and initial authority,
 - the mission that begins the game,
 - anti-corruption rites and field equipment,
-- the organized operation at the Strand,
-- and limited world-building context about previous crossings and the island's cursed inhabitants.
+- maintenance of the barrier and the organized operation at the Strand,
+- the Boat and ritual preparation used for each crossing,
+- and limited world-building context about previous warriors and the island's cursed inhabitants.
 
-Some Strand personnel are members or agents of the Order, while other residents may simply support the operation. The Raven is the established Order courier.
+Some Strand personnel are members or agents of the Order, while other residents may simply support the operation. The Raven is the established Order courier. The Keeper predates the modern organization but remains central to its threshold duty.
 
 The Order does not need a large political subplot or complete understanding of the island. Akio discovers the kingdom's history, the Heart, and the real consequences of the mission after crossing.
 
@@ -78,6 +99,7 @@ Order equipment should feel functional, ritualized, and controlled:
 
 ## Deliberately unresolved
 
+- the exact founders and ritual used to create the original barrier,
 - what fragmentary records first led the Order to begin sending warriors,
 - whether it knows the Eclipse Shogun's name or only that the cursed forces have a ruler,
 - how much communication remains possible between the Strand and the wider Order,
