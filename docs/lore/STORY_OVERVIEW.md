@@ -81,7 +81,7 @@ He believes outsiders imprisoned the island because they fear what its people be
 
 The Heart does not need to command him directly. Beast Blood has magnified his determination, authority, pride, and fear of extinction until his sincere ambitions protect the Heart, preserve the Blood, and spread its influence. He remains intelligent and responsible for those choices.
 
-The exact method by which he intends to overcome the barrier, the timing of the mainland threat, and the Order's knowledge remain open under their later questions.
+The exact method by which he intends to overcome the barrier and the timing of the mainland threat remain open. The Order does not know this plan when it sends Akio.
 
 ## The contained island
 
@@ -117,7 +117,13 @@ Kagutsuchi Court remains the established immaculate royal-court setting; the reg
 
 ## Akio's mission
 
-Akio is a quiet, disciplined warrior of the Order sent to end the island's threat. The Order opposes Beast Blood and equips its crossing warriors with anti-corruption rites and warding magic.
+Akio is a quiet, disciplined warrior sent from the Order's Strand operation to destroy the island's cursed threat. The Order knows that the island contains organized Beast Blood users with unnatural regeneration and apparent resistance to ordinary death, but it does not know the plague-era history, the Heart, the extraction process, or the Shogun's plan for the mainland.
+
+The Order infers that the cursed forces may have a ruler or depend on a central source. Akio's original command is to cross the barrier, destroy the island's hostile cursed forces and leader, and find and destroy whatever source allows the curse to persist.
+
+The Order assumes destroying that source will end the threat. It does not understand enough to anticipate the consequences. The mission is considered one-way, and Akio is not expected to return.
+
+The Order equips its crossing warriors with anti-corruption rites and warding magic. Some Strand personnel belong to the Order or support its operation, but the faction remains primarily the source of Akio's training, mission, and initial world context.
 
 Akio is exposed to Beast Blood but does not succumb normally. His resolve and the Order's warding contribute to an unprecedented condition called Returning Blood. It reconstructs him after death while preserving his identity and allows controlled Blood Aspects during runs. The exact origin remains under design lock.
 
@@ -171,4 +177,4 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 
 ## Canon boundaries
 
-Exact dialogue, conversation count, Akio's complete character arc, the first extraction scene, the Order's knowledge, the barrier-breach method and timing, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
+Exact dialogue, conversation count, Akio's complete character arc, the first extraction scene, the barrier-breach method and timing, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
