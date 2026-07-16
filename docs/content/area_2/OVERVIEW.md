@@ -4,7 +4,7 @@ title: Yomori Grove
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 topics:
   - area-2
   - yomori-grove
@@ -22,9 +22,9 @@ related:
 
 # Yomori Grove
 
-Yomori Grove is Area 2, where long-term Beast Blood corruption has become part of the forest's ecological and spiritual condition.
+Yomori Grove is Area 2, where the long presence of Beast Blood bearers has devastated the forest and left enduring physical and spiritual remnants.
 
-The region represents adaptation rather than immediate collapse. Suffering remains present, but the inhabitants are no longer reacting only as victims in the middle of a catastrophe. Predators, spirits, and environment-bound remnants have settled into more established patterns of existence shaped by the curse.
+The region represents adaptation rather than immediate collapse. Suffering remains present, but the inhabitants are no longer reacting only as victims in the middle of a catastrophe. Predators, spirits, and other remnants have settled into more established patterns of existence shaped by the curse.
 
 ## Palette
 
@@ -45,15 +45,17 @@ The region should feel dark and internally lit by corruption rather than by civi
 
 Root-knotted earth, swollen bark, red-veined trunks, slick stone, damp moss, fungal bloom, old shrine lanterns, trail markers, and blood-rich sap. Materials should feel overgrown, unstable, spiritually contaminated, and biologically pressurized.
 
+These visual effects do not mean Beast Blood spreads through soil, roots, water, prey, or vegetation. The damaged ecology reflects the prolonged presence and actions of corrupted people and beasts rather than an environmental route of transmission.
+
 ## Enemy-family read
 
-Enemies are long-term outcomes of the same Beast Blood curse: corrupted beasts, hunting shades, spirit-warped remnants, and territorial entities emerging from brush, canopy, roots, mist, and shadow.
+Enemies are long-term outcomes surrounding the same Beast Blood curse: corrupted beasts, hunting shades, spirits of past inhabitants, and territorial remnants emerging from brush, canopy, roots, mist, and shadow.
 
 Predators should feel more hesitant, observant, intelligent, cunning, and dangerous than Area 1's unstable creatures. They stalk, test distance, retreat, isolate, and choose favorable moments rather than relying only on exposed aggression.
 
-Some spirits may appear calm, accepting, resigned, or bound into repeated patterns. Others remain hostile, but their hostility should feel deliberate or territorial rather than frantic. This does not mean they control or escape Beast Blood; the curse has become the condition through which they continue to exist.
+Area 2's spirits are truly the spirits of people who died after being shaped by Beast Blood. They persist less as complete ghosts than as incomplete memories or remnants of who they were. A spirit may retain an attachment, duty, emotion, ritual, path, or fighting instinct without preserving a full living personality.
 
-Some spirit forms may result when corrupted bodies fail while memory, will, or residue remains bound to a place, object, or hunting ground. The exact supernatural process remains open and does not require a separate unrelated curse.
+Some spirits may appear calm, accepting, resigned, or bound into repeated patterns. Others remain hostile, but their hostility should feel deliberate or territorial rather than frantic. Their persistence belongs to the same curse and does not require a separate supernatural force.
 
 Detailed family and unit definitions belong in [Area 2 Enemies](ENEMIES.md).
 
