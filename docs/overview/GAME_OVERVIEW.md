@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-16
 topics:
   - project-identity
   - combat
@@ -19,15 +19,20 @@ related:
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - LORE-RETURNING-BLOOD
+  - LORE-BARRIER-BLOOD-MOON
 ---
 
 # Oathbound Game Overview
 
 Oathbound is a high-angle 2D action roguelite built around disciplined katana combat, posture pressure, precise parries, stagger, deathblows, Hades-like room-and-boss flow, and run-based build progression.
 
-The player controls Akio, a warrior of the Order sent through an ancient containment barrier onto a cursed Japanese-gothic island. The island was once a flourishing kingdom that used rare Beast Blood from the Heart—an ancient living godlike organ or supernatural core—to survive a deadly plague. The apparent miracle gradually corrupted its people and ruler.
+The player controls Akio, a warrior of the Order sent through a containment barrier onto a cursed Japanese-gothic island. The island was once a flourishing kingdom that used rare Beast Blood from the Heart—an ancient living godlike organ or supernatural core—to survive a deadly plague. The apparent miracle gradually corrupted its people and ruler.
 
 The Heart's ultimate origin remains deliberately ambiguous. It may be part of a forgotten entity, the core of the island, a divine vessel, or something else entirely. It possesses primal agency centered on survival, regeneration, growth, and continuation rather than a human personality or clearly explained plan.
+
+The Blood Moon is the visible result of a recurring active cycle within the Heart. During it, existing Beast Blood becomes stronger and the containment barrier comes under pressure. The Order-created Strand threshold, the Keeper, and a sealed Boat provide the single controlled route Akio uses to enter the island.
+
+The entire campaign takes place beneath the Blood Moon without defining exactly how much ordinary time passes between repeated runs.
 
 Beast Blood strengthens, heals, regenerates, and transforms while intensifying impulses already present in the bearer. Corrupted inhabitants may retain memory, loyalty, recognition, training, ambition, and attachment rather than becoming mindless infected. Retained humanity does not equal freedom from the Blood.
 
@@ -58,6 +63,7 @@ Across a run, the player grows from the complete base sword kit into a specializ
 - Technique categories that modify existing combat verbs, including eligible Prosthetic Techniques
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
+- Keeper-maintained Boat crossing through the Strand's controlled barrier threshold
 - Failed runs return Akio to the Strand through Returning Blood reconstruction
 - Successful runs defeat the Shogun, reach the protected Heart, damage one persistent Heart layer, and return Akio to the Strand with permanent rewards and campaign progress intact
 
@@ -78,14 +84,14 @@ A single error should matter without routinely ending an otherwise viable run in
 
 ## World structure
 
-- **The Strand:** persistent shoreline hub and preparation threshold
+- **The Strand:** persistent shoreline hub, barrier threshold, and preparation point
 - **Area 1 — Hushiro Gate Village / Rupture:** recent corruption, violence, bodily collapse, fragmented community, and desperate faith
-- **Area 2 — Yomori Grove / Adaptation:** long-term predation, spirit persistence, altered nature, and the curse as an established condition of existence
+- **Area 2 — Yomori Grove / Adaptation:** long-term predation, true spirits persisting as incomplete remnants, and ecological devastation surrounding corrupted inhabitants
 - **Area 3 — Kagutsuchi Court / False Ascendancy:** courtly beauty, hierarchy, elite mutation, and the mistaken belief that Beast Blood has been mastered
 - **Run climax:** the Eclipse Shogun followed by temporary access to the protected Heart
 - **True-final direction:** permanent defeat of the Shogun and a deeper Heart confrontation after enough persistent layers have been removed
 
-The Heart's identity, discovery, and forbidden extraction process are locked. Its number of layers, required clear count, final manifestation, and true-final encounter remain open.
+The Heart's identity, discovery, forbidden extraction process, Blood Moon relationship, and the Order barrier's broad origin are locked. Its number of layers, required clear count, final manifestation, and true-final encounter remain open.
 
 The Court obtains Beast Blood through an ancient extraction structure during controlled weak-pulse windows. Researchers loosen part of the Heart's restraints and offer a small measure of freshly drawn human blood, causing the Heart to release Beast Blood. This does not require death or human sacrifice, but the exchange establishes Beast Blood as an intentionally accepted curse rather than a conventional infection.
 
@@ -108,4 +114,5 @@ These are directional references, not templates to copy.
 - [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md)
 - [Beast Blood](../lore/BEAST_BLOOD.md)
 - [Returning Blood](../lore/RETURNING_BLOOD.md)
+- [Barrier and Blood Moon](../lore/THE_BARRIER_AND_BLOOD_MOON.md)
 - [Run structure](../gameplay/RUN_STRUCTURE.md)
