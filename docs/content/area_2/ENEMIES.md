@@ -4,7 +4,7 @@ title: Area 2 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-15
 topics:
   - area-2
   - yomori-grove
@@ -21,7 +21,7 @@ related:
 
 ## Family fantasy
 
-Feral, spiritual, hunting-ground corruption built around predation, territoriality, unstable bodies, lingering memory, and a forest that has become saturated by long-term Beast Blood use.
+Feral, spiritual, hunting-ground corruption built around predation, territoriality, unstable bodies, lingering human remnants, and a forest visibly devastated by the long presence of corrupted people and beasts.
 
 ## Shared motifs
 
@@ -37,11 +37,15 @@ Feral, spiritual, hunting-ground corruption built around predation, territoriali
 
 Bone-white bark, red-veined trunks, blood-rich sap, wet roots, corpse-dark earth, slick stone, moss-black growth, cyan fungal light, old shrine wood, cracked lanterns, rotting rope, trail markers, and swallowed hunting gear.
 
+These environmental signs are visual consequences of prolonged devastation around corrupted inhabitants. They do not establish soil, roots, water, vegetation, prey, or wounds as new ways to transmit Beast Blood.
+
 ## Shared corruption language
 
-Area 2 expresses Beast Blood after prolonged bodily and spiritual instability: spirit residue, feral persistence, partial manifestation, ash-frayed silhouettes, root binding, pale ghost-light, and predatory urges continuing after the original body has weakened or failed.
+Area 2 expresses long-term bodily and spiritual consequences of Beast Blood: feral persistence, partial manifestation, ash-frayed silhouettes, root-like binding imagery, pale spirit light, and predatory urges continuing after the original body has weakened or failed.
 
-The exact process remains intentionally flexible. Area 2 spirits belong to the same curse but do not require a separate magic system or a rigid hierarchy beneath the Shogun.
+Its wraiths are the true spirits of past people, reduced to incomplete memories or remnants rather than complete conventional ghosts. They may preserve a duty, attachment, emotion, ritual, route, or fighting instinct without retaining the whole person they once were.
+
+Area 2 spirits belong to the same curse but do not require a separate magic system, a hive mind, or a rigid hierarchy beneath the Shogun.
 
 ## Movement philosophy
 
