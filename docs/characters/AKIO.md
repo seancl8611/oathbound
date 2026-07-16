@@ -87,6 +87,14 @@ His character is communicated through:
 
 His exact personal motivation and complete emotional arc remain part of the story-spine design lock.
 
+## Original mission
+
+The Order sends Akio from the Strand on what it considers a one-way extermination mission. He is commanded to cross the barrier, destroy the island's hostile Beast Blood forces and any ruler directing them, and find and destroy the source that allows the curse and its apparently deathless bearers to persist.
+
+Akio begins without knowledge of the Heart, the plague-era history, the extraction process, the Shogun's mainland ambitions, or the consequences of destroying the source. Returning Blood unexpectedly turns the mission from one final attempt into a repeated campaign in which Akio discovers the truth for himself.
+
+The Order remains the source of Akio's training, equipment, warding, and initial command rather than a constant expositional presence.
+
 ## Relationship to the Shogun
 
 Akio's repeated confrontations with the Eclipse Shogun form a central campaign relationship.
