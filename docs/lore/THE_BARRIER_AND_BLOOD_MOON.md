@@ -4,7 +4,7 @@ title: The Barrier and Blood Moon
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-15
 topics:
   - barrier
   - blood-moon
@@ -31,6 +31,8 @@ An ancient barrier contains the island, its corrupted inhabitants, and access to
 - Beast Blood is not airborne and does not spread through ordinary proximity; containment prevents deliberate transport and expansion rather than a conventional epidemic.
 - The barrier's builders, mechanism, and exact relationship to the source and Shogun remain unresolved.
 
+These are objective setting rules. The Order does not begin the game knowing the barrier's complete purpose or the danger of deliberately carrying Beast Blood beyond it.
+
 ## Blood Moon cycle
 
 Once every ten years, the Blood Moon naturally empowers existing Beast Blood and weakens the containment barrier.
@@ -47,9 +49,9 @@ The Order does not normally use Beast Blood to empower crossing warriors. It rel
 
 ## Why the Order acts
 
-The Order believes permanent containment cannot be trusted indefinitely. Each Blood Moon creates another period in which the island's ruler, corrupted inhabitants, or people seeking Beast Blood could exploit the weakened barrier.
+The Order treats the island as an unresolved stronghold of cursed, apparently deathless Beast Blood users. Their continued organization, regeneration, and survival suggest that they may answer to a ruler or depend on a central source.
 
-The exact immediate threat remains open. The Shogun may seek conquest, forced expansion of Beast Blood, escape from containment, or another goal. The Order's true knowledge of the source and the consequences of destroying it are also unresolved.
+The Order does not know the Shogun's conquest plan, the Heart's identity, or a specific risk of Beast Blood spreading beyond the island. It sends a warrior because the Blood Moon is its only known opportunity to enter, destroy the cursed forces, and find whatever sustains them.
 
 ## Boat and repeated crossings
 
@@ -74,5 +76,4 @@ The Blood Moon explains:
 - How does it interact with the ancient source?
 - Does it weaken uniformly or only along specific paths?
 - Can the Shogun influence its behavior?
-- What exact danger forces the Order to continue sending warriors?
 - What happens when the active Blood Moon period ends?
