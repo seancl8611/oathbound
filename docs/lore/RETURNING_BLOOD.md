@@ -4,17 +4,19 @@ title: Returning Blood
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-16
 topics:
   - returning-blood
   - akio
   - revival
   - blood-aspects
   - order-warding
+  - strand
 related:
   - LORE-BEAST-BLOOD
   - CHAR-AKIO
   - LORE-THE-ORDER
+  - LORE-BARRIER-BLOOD-MOON
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
 ---
@@ -31,6 +33,7 @@ Returning Blood is an unprecedented form of Beast Blood that reconstructs Akio a
 - The Order's anti-corruption warding is expected to contribute to the condition.
 - The exact event that creates Returning Blood and the reason previous warriors did not develop it remain unresolved.
 - Akio is the only known bearer with genuine control over Beast Blood.
+- The Keeper and Boat facilitate barrier crossing but do not create Returning Blood.
 
 ## Current origin direction
 
@@ -38,7 +41,9 @@ Before crossing, Akio receives Order rites intended to protect his mind and soul
 
 Instead, the Blood's regenerative power becomes bound to the identity the ward was protecting. This allows it to rebuild Akio while preserving memory and self.
 
-The current direction also uses the warding rite to explain why reformation returns Akio to the Strand, where the rite was established. The precise metaphysics should remain brief and may be refined during story design lock.
+The current direction also uses the warding rite to explain why reformation returns Akio to the Strand, where the rite was established. The Strand is also the controlled threshold from which the Keeper guides the Boat through the barrier, allowing Akio to depart again after reconstruction.
+
+The precise metaphysics should remain brief and may be refined during Question 9. The Keeper's bond to the barrier threshold is not by itself the explanation for Akio's revival.
 
 ## Unique condition and genuine control
 
@@ -68,6 +73,8 @@ When Akio dies during a run, Returning Blood reforms him at the Strand. The curr
 
 Permanent upgrades, unlocked Aspects, Blood Mirror progress, discoveries, and major currencies survive according to the progression system.
 
+Akio may then board the Boat and cross again while the campaign remains beneath the Blood Moon. The story does not define how much ordinary time passes between attempts.
+
 ## Successful-run return
 
 The current successful-run direction is:
@@ -89,6 +96,7 @@ Blood Aspects are controlled expressions of the same Beast Blood rather than sep
 - Do not describe Akio as immune to Beast Blood.
 - Do not describe Returning Blood as a standard Order technique.
 - Do not imply that all Order warriors are dosed with Beast Blood to cross the barrier.
+- Do not describe the Keeper or Boat as the source of Returning Blood.
 - Do not describe revival as casual immortality or a consequence-free reset.
 - Do not treat Blood Aspects as unrelated magical classes.
 - Do not describe intelligent, disciplined, or deliberate mutation use by another bearer as genuine control equal to Akio's.

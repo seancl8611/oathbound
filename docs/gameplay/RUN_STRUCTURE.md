@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-16
 topics:
   - runs
   - death
@@ -13,20 +13,27 @@ topics:
   - strand
   - techniques
   - room-rewards
+  - blood-moon
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
+  - LORE-BARRIER-BLOOD-MOON
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-STRAND-BLOODWELL
+  - CONTENT-STRAND-BOAT
   - UI-RUN-RESULTS
 ---
 
 # Run Structure
 
-A run begins after preparation and final confirmation at the Boat in the Strand. It ends through death, successful source-layer damage after the Shogun, or another explicitly designed return condition.
+A run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
+
+A run ends through death, successful source-layer damage after the Shogun, or another explicitly designed return condition.
+
+The campaign takes place beneath the Blood Moon. The game does not define how much ordinary time passes between repeated runs; the setting may read as one endless night, multiple nights, or an unclear supernatural period.
 
 ## Regional flow
 
@@ -49,7 +56,10 @@ Before departure, the player:
 - confirms the current prosthetic loadout when available,
 - begins at Blood Aspect Tier 0,
 - begins with four empty active Technique slots and one empty reserve slot,
-- starts without the previous run's Corruption, Techniques, refinements, Gold, room progress, or temporary Relic effects.
+- starts without the previous run's Corruption, Techniques, refinements, Gold, room progress, or temporary Relic effects,
+- and commits to the Keeper-guided barrier crossing by selecting `Start Run`.
+
+The Keeper's contribution should remain part of the departure presentation rather than a separate repeated menu or resource cost.
 
 ## Room functions
 
@@ -85,6 +95,8 @@ A successful run should create several meaningful Technique decisions without aw
 When Akio dies, Returning Blood reconstructs him at the Strand. Death is a real supernatural event, not a non-canon reset.
 
 The failed run burns away its temporary blood-state and run-only progress. Permanent unlocks, upgrades, discoveries, Blood Mirror progress, and major currencies survive according to the progression matrix.
+
+Akio may prepare and board the Boat again without the narrative defining an exact elapsed time between attempts.
 
 ## Successful run
 

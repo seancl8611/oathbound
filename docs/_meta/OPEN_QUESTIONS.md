@@ -4,7 +4,7 @@ title: Open Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-16
 ---
 
 # Open Questions
@@ -422,7 +422,7 @@ This decision establishes discovery and access to the chamber. The process by wh
 - whether its primary purpose was worship, imprisonment, study, containment, harvesting, or a changing combination,
 - whether the island formed around the Heart,
 - whether the Heart influenced its own discovery,
-- whether the ancient builders also created the barrier,
+- whether the ancient complex influenced the later Order barrier design,
 - and the exact interval between discovery and the plague.
 
 **Affected files**
@@ -616,15 +616,46 @@ The Order remains primarily a background faction. It trains and equips Akio, pro
 
 **Status:** resolved at background-faction and mission level
 
-## 8. Barrier origin and Blood Moon deadline
+## 8. Barrier origin, Blood Moon, and Strand crossing
 
-**Question**
+**Resolution**
 
-Who created the barrier, when was it created, what does it contain, and what happens when the active Blood Moon period ends?
+The barrier was created after the kingdom's fall by survivors, mainland warriors, ritualists, and religious authorities who became the foundation of the Order. It was a desperate containment solution because they could not destroy the corrupted kingdom or reach whatever sustained it.
 
-Establish whether the barrier primarily prevents departure, access to the Heart, transport of Beast Blood, or all three; whether the Shogun can affect it; and how repeated Akio runs fit within one active period.
+The barrier primarily prevents corrupted inhabitants from leaving and prevents Beast Blood or source-derived material from being deliberately carried beyond the island. Entry is also extremely difficult as a consequence of containment.
 
-**Status:** open
+The Blood Moon is the visible result of a recurring power cycle within the Heart rather than a random astronomical event. Once every ten years, the Heart enters a period of intensified regeneration and activity. Existing Beast Blood becomes stronger and less stable, corrupted creatures and spirits become more active, and the barrier comes under increased pressure.
+
+Whether the Heart physically alters the moon, creates a supernatural eclipse, or resonates with an existing lunar cycle remains intentionally unexplained.
+
+The Strand was established around the barrier's controlled threshold. The Keeper, a former noble of the Shogun's court, aided the founders of the Order and permanently bound his spirit to the Strand's barrier anchor. He does not power the entire barrier alone; he maintains its controlled point of passage and stabilizes one narrow route during the Blood Moon.
+
+The Order prepares the Boat with the required seals, and the Keeper guides it through the passage. This is how Akio enters at the beginning of every run. Before Akio, every crossing was considered one-way.
+
+The entire campaign takes place beneath the Blood Moon. The story does not define how much ordinary time passes between runs. It may feel like one endless night, several nights, or a supernatural period in which ordinary time is unclear.
+
+The Shogun cannot create the Blood Moon or deactivate the barrier at will. He intends to exploit the strain caused by the Heart's active cycle, but his exact breach method and timing remain open.
+
+**Deliberately unresolved**
+
+- whether the Heart physically affects the moon or creates a supernatural eclipse,
+- the detailed ritual used to create the original barrier,
+- the precise nature of the Keeper's bond to the threshold,
+- how much ordinary time passes during the campaign,
+- and the Shogun's method for attempting to breach the barrier.
+
+**Affected files**
+
+- `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md`
+- `docs/lore/THE_ORDER.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/RETURNING_BLOOD.md`
+- `docs/characters/strand/KEEPER.md`
+- `docs/content/strand/OVERVIEW.md`
+- `docs/content/strand/interactibles/BOAT.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+
+**Status:** resolved at world-history, hub-function, and campaign-setting level
 
 ## 9. Exact Returning Blood cause
 
@@ -641,6 +672,8 @@ The ward protects Akio's identity; his resolve prevents surrender; Beast Blood's
 Akio is not naturally immune, Returning Blood is not routine Order practice, and resolve alone is no longer a sufficient complete explanation.
 
 Akio's genuine control is canon, but the exact event and mechanism that created it remain open. His exposure need not repeat the historical extraction process unless deliberately established later.
+
+The Keeper and Boat facilitate the barrier crossing but do not create Returning Blood.
 
 **Status:** open; current direction promising but not canonized
 
@@ -662,7 +695,7 @@ This is preserved only so the possibility is not lost. It is not canon, does not
 
 A successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
 
-**Status:** open; Questions 2–7 satisfied
+**Status:** open; Questions 2–8 satisfied
 
 ## 11. Campaign clear count and changes after each clear
 
@@ -676,7 +709,7 @@ For each required clear, establish what changes in story, NPC dialogue, hub stat
 
 No clear count is approved. Six remains only a prior candidate. The count must follow the completed story spine and Heart-layer design rather than determine them.
 
-**Status:** open; depends on Questions 8–10
+**Status:** open; depends on Questions 9–10
 
 ## 12. True-final Heart encounter, ending, and postgame
 

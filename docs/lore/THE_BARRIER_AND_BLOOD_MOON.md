@@ -4,7 +4,7 @@ title: The Barrier and Blood Moon
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-16
 topics:
   - barrier
   - blood-moon
@@ -16,64 +16,85 @@ related:
   - LORE-BEAST-BLOOD
   - LORE-RETURNING-BLOOD
   - CONTENT-STRAND-INTERACTIBLES
+  - CHAR-STRAND-KEEPER
 ---
 
 # The Barrier and Blood Moon
 
-An ancient barrier contains the island, its corrupted inhabitants, and access to the source of Beast Blood.
+The barrier was created after the fall of the island's kingdom by the survivors, mainland warriors, ritualists, and religious authorities who became the foundation of the Order.
+
+They could not defeat the corrupted kingdom or locate and destroy whatever sustained it, so they isolated the island as a desperate containment measure.
 
 ## Barrier rules
 
-- The barrier was created by powerful figures in the past.
-- It is not a mechanism the Order can casually disable, alter, or bypass.
-- It normally prevents reliable entry and departure.
-- It helps prevent the Shogun, corrupted inhabitants, source-derived material, and usable Beast Blood from being carried beyond the island.
+- The barrier primarily prevents the island's corrupted inhabitants from leaving.
+- It also prevents Beast Blood and source-derived material from being deliberately carried beyond the island.
+- Entry is extremely difficult as a consequence of containment rather than the barrier's primary purpose.
+- It is not a mechanism the modern Order can casually disable, alter, or bypass.
 - Beast Blood is not airborne and does not spread through ordinary proximity; containment prevents deliberate transport and expansion rather than a conventional epidemic.
-- The barrier's builders, mechanism, and exact relationship to the source and Shogun remain unresolved.
+- The Shogun cannot deactivate the barrier at will.
 
-These are objective setting rules. The Order does not begin the game knowing the barrier's complete purpose or the danger of deliberately carrying Beast Blood beyond it.
+These are objective setting rules. The modern Order does not begin the game knowing the Heart's identity, the original plague history, or every consequence the barrier was designed to prevent.
 
 ## Blood Moon cycle
 
-Once every ten years, the Blood Moon naturally empowers existing Beast Blood and weakens the containment barrier.
+The Blood Moon is the visible result of a recurring power cycle within the Heart rather than a random astronomical event.
 
-This creates a narrow crossing window:
+Once every ten years, the Heart enters a period of intensified regeneration and activity. Its pulse strengthens, existing Beast Blood becomes more active, and its supernatural influence appears in the sky as the Blood Moon.
 
-- the Order may send one exceptionally prepared warrior through the viable path,
-- Beast Blood already present on the island becomes more active,
-- the Shogun and source may become more dangerous,
-- the crossing is treated as a rare mission rather than routine travel,
-- all previous attempts before Akio failed to produce a returning warrior.
+Whether the Heart physically alters the moon, creates a supernatural eclipse, or resonates with an existing lunar cycle remains deliberately unexplained. The Blood Moon and the Heart's awakening are parts of the same event.
 
-The Order does not normally use Beast Blood to empower crossing warriors. It relies on martial preparation, anti-corruption rites, and warding protections.
+During the Blood Moon:
+
+- the Heart becomes more active,
+- existing Beast Blood becomes stronger and less stable,
+- corrupted creatures and spirits become more active,
+- the barrier comes under increased pressure,
+- and narrow weaknesses form within the containment.
+
+The Blood Moon does not create new Beast Blood bearers or make the curse contagious.
+
+## The Keeper and the Strand threshold
+
+The Strand was established around the barrier's controlled threshold and became the Order's staging point for repeated attempts to enter the island.
+
+The Keeper was once a noble of the Shogun's court who witnessed the kingdom's fall. He aided the founders of the Order during the original containment effort and permanently bound his spirit to the Strand's barrier anchor.
+
+He does not power the entire barrier alone. He maintains its controlled point of passage, preserves the threshold rites, and stabilizes one narrow route during the Blood Moon.
+
+The Order prepares the Boat with the required seals, and the Keeper guides it through the stabilized passage. This is how Akio enters the island at the beginning of every run.
+
+Before Akio, every departure was considered one-way.
 
 ## Why the Order acts
 
 The Order treats the island as an unresolved stronghold of cursed, apparently deathless Beast Blood users. Their continued organization, regeneration, and survival suggest that they may answer to a ruler or depend on a central source.
 
-The Order does not know the Shogun's conquest plan, the Heart's identity, or a specific risk of Beast Blood spreading beyond the island. It sends a warrior because the Blood Moon is its only known opportunity to enter, destroy the cursed forces, and find whatever sustains them.
+The Order does not know the Shogun's conquest plan or the Heart's identity. It sends a warrior because the Blood Moon is its only known opportunity to enter, destroy the cursed forces, and find whatever sustains them.
 
-## Boat and repeated crossings
+## Campaign time
 
-The Boat carries Akio through the narrow path opened during the Blood Moon. Before Akio, every departure was considered one-way.
+The entire campaign takes place beneath the Blood Moon.
 
-Returning Blood allows Akio to reform at the Strand and attempt the crossing again during the active campaign period. The exact duration of that period and what happens when the Blood Moon window ends remain open.
+The story does not define how much ordinary time passes during Akio's repeated attempts. It may feel like one endless night, several nights, or a supernatural period in which ordinary time is unclear. No exact duration or explanation is required.
 
-## Story function
+Returning Blood reforms Akio at the Strand, and the Keeper can stabilize the passage again whenever Akio boards the Boat for another run.
 
-The Blood Moon explains:
+## The Shogun and the barrier
 
-- why the Order cannot send an army,
-- why attempts occur only once per decade,
-- why Beast Blood is unusually powerful during Akio's mission,
-- why the barrier presents both an opportunity and a danger,
-- why Akio's ability to return changes the practical meaning of the crossing.
+The Shogun did not create the Blood Moon and cannot activate it at will. He understands that the Heart's active cycle places the barrier under greater pressure and intends to exploit that weakness.
 
-## Open questions
+The same event therefore creates opposing opportunities:
 
-- Who created the barrier and why?
-- Was it created before or after the kingdom's corruption?
-- How does it interact with the ancient source?
-- Does it weaken uniformly or only along specific paths?
-- Can the Shogun influence its behavior?
-- What happens when the active Blood Moon period ends?
+- the Order can send Akio into the island,
+- while the Shogun has his best chance to overcome containment.
+
+The exact method and timing of the Shogun's breach attempt remain unresolved. The Order does not know the details of that plan.
+
+## Deliberately unresolved
+
+- whether the Heart physically affects the moon or creates a supernatural eclipse,
+- the detailed ritual used to create the barrier,
+- the precise nature of the Keeper's bond to the threshold,
+- how much ordinary time passes during the campaign,
+- and the Shogun's method for attempting to breach the barrier.

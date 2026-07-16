@@ -4,7 +4,7 @@ title: Story Overview
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-16
 topics:
   - story
   - blood-moon
@@ -17,6 +17,7 @@ related:
   - LORE-BARRIER-BLOOD-MOON
   - LORE-RETURNING-BLOOD
   - LORE-ECLIPSE-SHOGUN
+  - CHAR-STRAND-KEEPER
 ---
 
 # Story Overview
@@ -83,11 +84,31 @@ The Heart does not need to command him directly. Beast Blood has magnified his d
 
 The exact method by which he intends to overcome the barrier and the timing of the mainland threat remain open. The Order does not know this plan when it sends Akio.
 
-## The contained island
+## The barrier and the Blood Moon
 
-An ancient barrier now isolates the island, its corrupted inhabitants, and access to the Heart. The barrier's builders, mechanism, and exact relationship to the Heart and Shogun remain unresolved.
+After the kingdom's fall, survivors, mainland warriors, ritualists, and religious authorities created the barrier as a desperate containment measure. These founders became the beginning of the Order.
 
-Once every ten years, the Blood Moon empowers the Heart and existing Beast Blood while weakening a narrow crossing path. The Order uses that opening to send one prepared warrior toward the island. Every attempt before Akio failed to produce a returning warrior.
+The barrier primarily prevents the island's corrupted inhabitants from leaving and prevents Beast Blood or source-derived material from being deliberately carried beyond the island. Entry is also extremely difficult as a consequence of that containment.
+
+The Blood Moon is the visible result of a recurring power cycle within the Heart rather than a random astronomical event. Once every ten years, the Heart enters a period of intensified regeneration and activity. Its pulse strengthens, existing Beast Blood becomes more active, and its influence appears in the sky as the Blood Moon.
+
+Whether the Heart physically alters the moon, creates a supernatural eclipse, or resonates with an existing lunar cycle remains unexplained.
+
+During this cycle, the Heart's power places the barrier under greater pressure and creates narrow weaknesses. The Shogun intends to exploit that strain, but he cannot create the Blood Moon or deactivate the barrier at will.
+
+## The Strand and the Keeper
+
+The Strand was established around the barrier's controlled threshold and became the Order's staging point for attempts to enter the island.
+
+The Keeper was once a noble of the Shogun's court who witnessed the kingdom's fall. He aided the founders of the Order during the original containment effort and permanently bound his spirit to the Strand's barrier anchor.
+
+He does not power the entire barrier alone. He maintains the controlled point of passage and stabilizes one narrow route during the Blood Moon. The Order prepares the Boat with the required seals, and the Keeper guides it through the passage.
+
+This is how Akio enters the island at the beginning of every run. Before Akio, every departure was considered one-way.
+
+The entire campaign takes place beneath the Blood Moon. The story does not define how much ordinary time passes during Akio's repeated attempts; it may feel like one endless night, several nights, or a supernatural period in which ordinary time is unclear.
+
+## The island's inhabitants
 
 The island's inhabitants are not universally mindless. Many retain memory, loyalty, recognition, training, attachment, ambition, and territorial identity. The Shogun's organized followers remain loyal through surviving hierarchy, dependence, fear, faith, and corrupted versions of earlier allegiance rather than a required hive mind. Other beasts, failed bodies, and spirits may be independent or territorial. Retained humanity does not equal freedom from the Blood.
 
@@ -177,4 +198,4 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 
 ## Canon boundaries
 
-Exact dialogue, conversation count, Akio's complete character arc, the first extraction scene, the barrier-breach method and timing, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
+Exact dialogue, conversation count, Akio's complete character arc, the first extraction scene, the Shogun's barrier-breach method and timing, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
