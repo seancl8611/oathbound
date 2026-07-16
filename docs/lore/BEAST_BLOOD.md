@@ -4,7 +4,7 @@ title: Beast Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-15
 topics:
   - beast-blood
   - the-heart
@@ -66,7 +66,7 @@ If the process is mistimed or prolonged, too much Blood may enter the channels, 
 
 This prevents extraction from becoming safe, casual, or industrial. Every attempt requires entering the Heart's chamber, interfering with an ancient containment system, and risking direct contact with the source of the curse. New Beast Blood can be obtained only by returning to the Heart and repeating this forbidden process.
 
-Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, and wounds caused by corrupted creatures do not spread the curse.
+Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, wounds, contaminated soil, roots, water, prey, or damaged vegetation do not transmit Beast Blood or create new bearers.
 
 This rarity is essential. The danger is not a conventional outbreak; it is the possibility that people will exploit, transport, weaponize, worship, or distribute a forbidden power.
 
@@ -78,6 +78,8 @@ The island's inhabitants may still recognize former comrades, rulers, handlers, 
 
 Ordinary bearers gradually lose the ability to reject the Blood or act against its continuation. Their remaining humanity may become part of the mechanism that defends the curse. They are not necessarily mindless puppets, but the Blood ultimately governs what they are capable of refusing.
 
+The Shogun does not require a hive mind to retain followers. Existing loyalty, military hierarchy, dependence, fear, faith, and pride in the kingdom can survive in corrupted form. Independent beasts, failed bodies, and spirits may have no loyalty to him at all.
+
 They may attack Akio because he is an armed outsider, a warrior of the Order, and an intruder entering defended territory. Akio carrying Returning Blood does not automatically make him one of them.
 
 ## Manifestation range
@@ -88,13 +90,15 @@ Beast Blood may produce:
 - full or partial beast transformations,
 - altered animals,
 - unstable masses or failed bodies,
-- spirit-like remnants and wraith manifestations,
-- environment-bound corruption.
+- the true spirits of deceased bearers persisting as incomplete memories or remnants,
+- and visible ecological devastation caused by the long presence and actions of corrupted inhabitants and beasts.
+
+Yomori Grove's damaged ecology does not mean that Beast Blood has become environmentally contagious. Its blighted roots, sap, fungal growth, and other visual signs express the prolonged effect of corrupted people and creatures on the region rather than a new route of transmission.
 
 These outcomes do not require a rigid universal stage system. Host, duration, will, physical condition, environment, and manner of use may all influence the result. The regions emphasize different dominant expressions of the same curse:
 
 - Hushiro Gate Village presents rupture, recent transformation, violence, and human collapse.
-- Yomori Grove presents long-term adaptation, predation, spiritual persistence, and a curse absorbed into the environment.
+- Yomori Grove presents long-term adaptation, predation, spiritual persistence, and ecological devastation surrounding corrupted life.
 - Kagutsuchi Court presents false ascendancy: powerful specialized mutations mistaken for mastery by elites who remain bound to the Blood.
 
 ## The Heart

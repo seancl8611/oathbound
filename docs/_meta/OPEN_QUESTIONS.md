@@ -554,24 +554,32 @@ Akio becomes the living contradiction the Shogun cannot accept: a bearer who can
 
 ## 6. Corrupted inhabitants, loyalty, and Area 2 spirits
 
-**Question**
+**Resolution**
 
-How exactly does long-term Beast Blood produce the island's different physical and spiritual forms?
+Beast Blood does not erase memory, personality, training, or loyalty at one fixed rate. Corrupted inhabitants may retain recognition, relationships, ambitions, customs, and organized behavior while gradually losing the ability to reject the Blood or act against its continuation.
 
-Clarify:
+The Shogun's followers do not require a hive mind. Existing allegiance, military hierarchy, dependence, fear, faith, and pride in the kingdom can survive in corrupted form. Independent beasts, failed bodies, and territorial spirits may have no loyalty to him.
 
-- the detailed limits of memory and humanity retained by corrupted inhabitants,
-- why soldiers and subjects remain loyal or organized,
-- how independent beasts and spirits relate to the Shogun's kingdom,
-- and how Area 2 wraiths emerge from the same Beast Blood curse.
+Area 2's wraiths are the true spirits of past people who died after being shaped by Beast Blood. They persist as incomplete memories or remnants rather than complete conventional ghosts, often retaining only an attachment, emotion, duty, ritual, path, or fighting instinct.
 
-**Locked boundary**
+Yomori Grove's damaged ecology is not a contagious form of Beast Blood. Soil, roots, water, prey, vegetation, bites, and wounds do not create new bearers. The region's blight is a visual and ecological consequence of the prolonged presence and actions of corrupted people and beasts.
 
-There is no required hive mind or universal strength hierarchy. Corrupted beings may retain recognition, relationships, loyalty, training, ambitions, and territory.
+Hushiro emphasizes rupture, Yomori emphasizes adaptation and spiritual remnants, and Kagutsuchi emphasizes false ascendancy. These are regional themes rather than mandatory biological stages.
 
-Retained humanity or deliberate mutation use does not equal true control. Hushiro emphasizes rupture, Yomori emphasizes adaptation, and Kagutsuchi emphasizes false ascendancy. Akio alone has genuine sovereignty over Beast Blood.
+**Deliberately unresolved**
 
-**Status:** partially established; exact spirit rules remain open
+- why some deceased bearers persist as spirits while others do not,
+- how much memory an individual spirit retains,
+- and how long those remnants can endure.
+
+**Affected files**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/content/area_2/OVERVIEW.md`
+- `docs/content/area_2/ENEMIES.md`
+
+**Status:** resolved at continuity and regional-context level
 
 ## 7. Order knowledge, mission, and recurring threat
 
@@ -633,7 +641,7 @@ This is preserved only so the possibility is not lost. It is not canon, does not
 
 A successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
 
-**Status:** open; Questions 2–5 satisfied
+**Status:** open; Questions 2–6 satisfied
 
 ## 11. Campaign clear count and changes after each clear
 
@@ -647,7 +655,7 @@ For each required clear, establish what changes in story, NPC dialogue, hub stat
 
 No clear count is approved. Six remains only a prior candidate. The count must follow the completed story spine and Heart-layer design rather than determine them.
 
-**Status:** open; depends on Questions 6–10
+**Status:** open; depends on Questions 7–10
 
 ## 12. True-final Heart encounter, ending, and postgame
 
