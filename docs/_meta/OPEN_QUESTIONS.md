@@ -534,7 +534,6 @@ Akio becomes the living contradiction the Shogun cannot accept: a bearer who can
 **Deliberately unresolved**
 
 - the exact method and timing of the Shogun's barrier-breach plan,
-- what the Order knows about the conquest threat,
 - exact encounter-by-encounter dialogue,
 - the number of unique or conditional conversations,
 - voice-acting and cinematic scope,
@@ -583,17 +582,39 @@ Hushiro emphasizes rupture, Yomori emphasizes adaptation and spiritual remnants,
 
 ## 7. Order knowledge, mission, and recurring threat
 
-**Question**
+**Resolution**
 
-What does the Order know about the plague, Shogun, Heart, Beast Blood, barrier, and consequences of destroying the Heart—and what exactly does it believe Akio must accomplish?
+The Order knows that the island contains an organized population of Beast Blood users with unnatural strength, regeneration, and apparent resistance to ordinary death. It knows that the barrier prevents reliable entry, that the Blood Moon creates a rare crossing opportunity, and that all previous warriors sent through failed to return.
 
-The Shogun's intent to spread Beast Blood through mainland conquest and forced salvation is established. This question must determine what the Order knows about that intent, why the threat becomes actionable every ten years, and what outcome it expects from the warrior it sends.
+The Order does not know the plague-era history, the Heart, the extraction process, the Shogun's conquest plan, the risk of deliberately carrying Beast Blood beyond the island, or the consequences of destroying the source. It only infers that the cursed forces may answer to a ruler or depend on a central source because they remain organized and continue surviving through powers ordinary people do not possess.
 
-**Locked boundary**
+Akio's original mission is direct:
 
-The Order opposes Beast Blood, uses anti-corruption warding, sends one warrior during the Blood Moon, and did not expect Returning Blood as a standard outcome.
+1. cross the barrier during the Blood Moon,
+2. destroy the island's hostile cursed forces and any ruler or leader sustaining them,
+3. find and destroy the source that allows the curse and its apparently deathless bearers to persist.
 
-**Status:** open
+The Order assumes destroying the source will end the threat. It does not possess a more informed neutralization strategy and cannot warn Akio about consequences it does not understand.
+
+The mission is considered one-way. Returning Blood is unexpected and turns the operation into a repeated campaign.
+
+The Order remains primarily a background faction. It trains and equips Akio, provides warding, organizes the Strand operation, gives the player's initial goal, and supplies limited world context. Some Strand personnel belong to or work for the Order, but the faction does not require a large political subplot or complete understanding of the island.
+
+**Deliberately unresolved**
+
+- what fragmentary records first led the Order to begin the operation,
+- whether it knows the Eclipse Shogun's name or only that the cursed forces have a ruler,
+- how much communication remains possible between the Strand and the wider Order,
+- and how the Order reacts after Akio unexpectedly returns carrying Beast Blood.
+
+**Affected files**
+
+- `docs/lore/THE_ORDER.md`
+- `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/characters/AKIO.md`
+
+**Status:** resolved at background-faction and mission level
 
 ## 8. Barrier origin and Blood Moon deadline
 
@@ -641,7 +662,7 @@ This is preserved only so the possibility is not lost. It is not canon, does not
 
 A successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
 
-**Status:** open; Questions 2–6 satisfied
+**Status:** open; Questions 2–7 satisfied
 
 ## 11. Campaign clear count and changes after each clear
 
@@ -655,7 +676,7 @@ For each required clear, establish what changes in story, NPC dialogue, hub stat
 
 No clear count is approved. Six remains only a prior candidate. The count must follow the completed story spine and Heart-layer design rather than determine them.
 
-**Status:** open; depends on Questions 7–10
+**Status:** open; depends on Questions 8–10
 
 ## 12. True-final Heart encounter, ending, and postgame
 
