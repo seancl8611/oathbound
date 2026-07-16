@@ -89,7 +89,9 @@ An ancient barrier now isolates the island, its corrupted inhabitants, and acces
 
 Once every ten years, the Blood Moon empowers the Heart and existing Beast Blood while weakening a narrow crossing path. The Order uses that opening to send one prepared warrior toward the island. Every attempt before Akio failed to produce a returning warrior.
 
-The island's inhabitants are not universally mindless. Many retain memory, loyalty, recognition, training, attachment, ambition, and territorial identity. Retained humanity does not equal freedom from the Blood.
+The island's inhabitants are not universally mindless. Many retain memory, loyalty, recognition, training, attachment, ambition, and territorial identity. The Shogun's organized followers remain loyal through surviving hierarchy, dependence, fear, faith, and corrupted versions of earlier allegiance rather than a required hive mind. Other beasts, failed bodies, and spirits may be independent or territorial. Retained humanity does not equal freedom from the Blood.
+
+Beast Blood does not spread through ordinary contact, bites, wounds, soil, roots, water, prey, or vegetation. Environmental damage reflects the prolonged presence and actions of corrupted inhabitants rather than a contagious ecological form of the curse.
 
 ## Regional curse progression
 
@@ -101,7 +103,9 @@ The outer village presents recent and unstable corruption. Fear, hunger, violenc
 
 ### Yomori Grove — Adaptation
 
-The forest presents long-term coexistence with the curse. Predators have become more patient, intelligent, and dangerous; spirits and environment-bound remnants persist in calmer or more established patterns. The curse is no longer only an active catastrophe but part of the region's natural and spiritual condition.
+The forest presents long-term life around the curse. Predators have become more patient, intelligent, and dangerous, while the region bears visible ecological damage from the presence of corrupted people and beasts.
+
+Yomori's wraiths are the true spirits of past inhabitants. They now persist as incomplete memories or remnants rather than complete conventional ghosts, often preserving only an attachment, emotion, duty, ritual, path, or fighting instinct. They arise from the same Beast Blood tragedy without making the environment itself contagious or introducing a separate unrelated curse.
 
 ### Kagutsuchi Court — False Ascendancy
 
