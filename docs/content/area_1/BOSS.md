@@ -4,7 +4,7 @@ title: Keeper of the Gate
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-19
 topics:
   - area-1
   - keeper-of-the-gate
@@ -30,7 +30,11 @@ The last true protector of Hushiro, a master swordsman who still defends his fal
 
 ## Lore context
 
-The Keeper remained at the old stone arch where Hushiro ends and the deeper island begins after command, order, and reason had collapsed. He fought the infected and his own broken soldiers, and continued after the last meaningful defensive line had failed. Beast Blood entered through countless wounds, but his will held longer than anyone else’s. He understands what Hushiro has become but cannot accept an outsider cutting through the village and calling it mercy. Even the beasts remain his people, and his last duty is to deny anyone the right to finish them.
+The Keeper remained at the old stone arch where Hushiro ends and the deeper island begins after command, order, and reason had collapsed. He fought the infected and his own broken soldiers and continued after the last meaningful defensive line had failed.
+
+He had received Beast Blood during the kingdom's plague-era treatment and carried it through years of battle and decline. Countless later wounds, exhaustion, and prolonged use pushed the existing curse deeper, but those wounds did not transmit Beast Blood to him.
+
+His will held longer than almost anyone else's. He understands what Hushiro has become but cannot accept an outsider cutting through the village and calling it mercy. Even the beasts remain his people, and his last duty is to deny anyone the right to finish them.
 
 ## Phase structure
 
@@ -47,7 +51,7 @@ This phase is about reading intent, respecting structure, and winning a discipli
 
 ### Deathblow transition
 
-The first deathblow does not kill the Keeper. It breaks the last restraint holding back Beast Blood. The player’s moment of victory destroys the last human form in which he could still defend Hushiro.
+The first deathblow does not kill the Keeper. It breaks the last restraint holding back the Beast Blood already within him. The player's moment of victory destroys the final human form in which he could still defend Hushiro.
 
 ### Phase 2 — The Collapse
 
@@ -82,4 +86,4 @@ Phase 1 uses restrained blade trails, ember accents, posture sparks, dust, and c
 
 Phase 1 must remain fair and highly readable through clean stances, punish windows, deliberate attack families, and rewarding parry structure. Blade Dance should use varied but learnable timing. The Ember Overhead branches need distinct tells.
 
-Phase 2 may be faster and less formal but cannot become unreadable chaos. The sweep must read as unblockable, the leap must communicate shockwave danger, and the charge must communicate lateral evasion. The fight’s thematic emphasis is the last protector losing the last thing that made him human.
+Phase 2 may be faster and less formal but cannot become unreadable chaos. The sweep must read as unblockable, the leap must communicate shockwave danger, and the charge must communicate lateral evasion. The fight's thematic emphasis is the last protector losing the last thing that made him human.
