@@ -28,15 +28,15 @@ Returning Blood is the unprecedented form taken by the dormant Beast Blood inher
 
 ## Escaped bloodline
 
-During the early Beast Blood era, the Eclipse Shogun and the child's other parent had both taken Beast Blood but had not yet undergone their later severe transformations.
+During the early Beast Blood era, the Eclipse Shogun and the child's mother had both taken Beast Blood but had not yet undergone their later severe transformations.
 
-Their child developed before birth within two already-altered parents. The child remained human, but carried a dormant inherited expression of Beast Blood rather than receiving a later extracted dose.
+The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of Beast Blood rather than receiving a later extracted dose.
 
-Before the barrier was completed, the child was secretly taken from the island by the other parent and a trusted retainer. The bloodline survived outside the containment for generations. Its descendants did not display ordinary Beast Blood powers, obvious mutation, or knowledge of their origin.
+Before the barrier was completed, the child was secretly taken from the island by the mother and a trusted retainer. The bloodline survived outside the containment for generations. Its descendants did not display ordinary Beast Blood powers, obvious mutation, or knowledge of their origin.
 
 Akio unknowingly descends from that escaped royal child.
 
-This does not create a second source of Beast Blood and does not make the curse conventionally hereditary. The original alteration still came from Beast Blood extracted from the Heart. Akio inherits the dormant condition created when the escaped child developed within two altered parents.
+This does not create a second source of Beast Blood and does not make the curse conventionally hereditary. The original alteration still came from Beast Blood extracted from the Heart. Akio inherits the dormant condition first formed in the escaped child before birth.
 
 ## First awakening
 
@@ -137,7 +137,7 @@ Akio's refusal remains more important than the lineage itself. He does not need 
 
 ## Deliberately unresolved
 
-- the exact identity and fate of the escaped child's other parent and retainer,
+- the exact identity and fate of the escaped child's mother and retainer,
 - how the bloodline remained hidden across generations,
 - the exact cause and location of Akio's first death,
 - why reconstruction selects the Strand,
