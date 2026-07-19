@@ -199,9 +199,9 @@ Once active within a bearer, Beast Blood does not require repeated doses or cont
 
 A deadly plague pushed the kingdom toward extinction. Beast Blood genuinely cured it, but delayed corruption allowed use to spread before the danger became clear. The Shogun remains responsible for continuing to defend and expand the Blood after its cost became visible.
 
-During the early Beast Blood era, the Shogun and the child's other parent had both taken Beast Blood but had not yet undergone severe transformation. Their child developed with a dormant inherited expression of the Blood.
+During the early Beast Blood era, the Shogun and the child's mother had both taken Beast Blood but had not yet undergone severe transformation. The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child carried a dormant inherited expression of the Blood.
 
-Before the barrier was completed, the child was secretly taken from the island by the other parent and a trusted retainer. The bloodline survived outside the containment and eventually produced Akio.
+Before the barrier was completed, the child was secretly taken from the island by the mother and a trusted retainer. The bloodline survived outside the containment and eventually produced Akio.
 
 This child supersedes the earlier removed daughter premise only as Akio's ancestry. The child's gender, name, protectors, escape details, and later life remain unresolved. The child is not required to motivate the Shogun's original plague decision.
 
@@ -262,7 +262,7 @@ The Strand is the controlled threshold. The Keeper, a former Court noble bound t
 
 **Resolution**
 
-Akio unknowingly descends from the Shogun's escaped child. The original child developed within two parents who already carried Beast Blood and inherited a dormant form of the alteration. That dormant condition continued through the bloodline outside the barrier.
+Akio unknowingly descends from the Shogun's escaped child. That child was conceived after the Shogun and the child's mother had both taken Beast Blood and developed while the mother already carried it. The child carried a dormant inherited form of the alteration, which continued through the bloodline outside the barrier.
 
 Akio begins the game without active Beast Blood abilities. He is the first known descendant of the escaped bloodline to:
 
@@ -299,6 +299,7 @@ Neither Akio nor the Shogun initially knows their relationship. The Shogun event
 - `docs/lore/ECLIPSE_SHOGUN.md`
 - `docs/lore/THE_ORDER.md`
 - `docs/characters/AKIO.md`
+- `docs/gameplay/CORE_LOOP.md`
 - `docs/gameplay/RUN_STRUCTURE.md`
 - `docs/overview/GAME_OVERVIEW.md`
 
