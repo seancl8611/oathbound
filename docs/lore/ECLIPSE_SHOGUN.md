@@ -35,11 +35,11 @@ The treatment worked. The sick recovered and the kingdom appeared saved. Because
 
 ## The escaped child
 
-During the early Beast Blood era, the Shogun and the child's other parent had both taken Beast Blood but had not yet undergone their later severe transformations.
+During the early Beast Blood era, the Shogun and the child's mother had both taken Beast Blood but had not yet undergone their later severe transformations.
 
-Their child developed before birth within two already-altered parents. The child remained human but carried a dormant inherited expression of Beast Blood.
+The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of Beast Blood.
 
-Before the barrier was completed, the child was secretly taken from the island by the other parent and a trusted retainer. The Shogun did not recover the child, and the bloodline survived outside the containment.
+Before the barrier was completed, the child was secretly taken from the island by the mother and a trusted retainer. The Shogun did not recover the child, and the bloodline survived outside the containment.
 
 This child is not the removed earlier daughter premise used to justify the Shogun's plague decision. The child's gender, name, exact relationship to the Court, escape circumstances, and later life remain unresolved. The approved purpose of the bloodline is to establish Akio's inherited connection and the later Shogun reveal.
 
@@ -129,7 +129,7 @@ The Shogun's reconstruction, permanent defeat condition, relationship to the Hea
 
 ## Open questions
 
-- What were the names and exact roles of the escaped child, other parent, and retainer?
+- What were the names and exact roles of the escaped child, mother, and retainer?
 - When and how do Akio and the Shogun confirm their relationship?
 - What exact encounter dialogue expresses dismissal, fascination, recruitment, and hatred?
 - Why and how does the Shogun reconstruct after successful runs?
