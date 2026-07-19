@@ -4,7 +4,7 @@ title: The Order
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-19
 topics:
   - order
   - blood-moon
@@ -47,8 +47,8 @@ The modern Order retains the essential duty:
 - It knows how to maintain the Strand threshold and prepare the Boat, but it does not fully understand the Heart-linked reason the barrier comes under pressure.
 - It knows that every warrior previously sent through the crossing failed to return.
 - It infers that the cursed forces may answer to a ruler or depend on a central source, but it does not know the Heart's identity, the plague-era history, the extraction process, or the Shogun's mainland ambitions.
-- It does not send Akio because it understands a risk of Beast Blood spreading beyond the island. Its mission is based on the continued existence of the cursed force itself.
 - It does not normally use Beast Blood to empower its warriors.
+- It does not know that Akio descends from an escaped island bloodline or carries dormant inherited Beast Blood.
 - Akio's Returning Blood is an exceptional event, not standard doctrine or an expected result.
 
 ## Mission
@@ -69,7 +69,9 @@ The Order has developed anti-corruption rites, seals, protective markings, barri
 
 These protections are intended to preserve judgment, memory, and spiritual integrity long enough to complete the mission. They do not grant immunity and have not previously allowed a warrior to return after death.
 
-The current Returning Blood direction assumes that Akio's warding and resolve both contribute to his unprecedented survival. The exact rite and mechanism remain under design lock.
+Order warding does not create Returning Blood. It may continue helping Akio resist spiritual pressure as part of his normal equipment and training, but his inherited condition and first death are the cause of the awakening.
+
+Resolve also does not create Returning Blood. Akio's resolve becomes important afterward because it allows him to develop control over the awakened curse.
 
 ## Role in the story
 
@@ -84,7 +86,7 @@ The Order is primarily a background faction. It provides:
 
 Some Strand personnel are members or agents of the Order, while other residents may simply support the operation. The Raven is the established Order courier. The Keeper predates the modern organization but remains central to its threshold duty.
 
-The Order does not need a large political subplot or complete understanding of the island. Akio discovers the kingdom's history, the Heart, and the real consequences of the mission after crossing.
+The Order does not need a large political subplot or complete understanding of the island. Akio discovers the kingdom's history, his lineage, the Heart, and the real consequences of the mission after crossing.
 
 ## Visual identity
 
@@ -102,5 +104,6 @@ Order equipment should feel functional, ritualized, and controlled:
 - the exact founders and ritual used to create the original barrier,
 - what fragmentary records first led the Order to begin sending warriors,
 - whether it knows the Eclipse Shogun's name or only that the cursed forces have a ruler,
+- whether any surviving Order record contains part of the escaped bloodline's history,
 - how much communication remains possible between the Strand and the wider Order,
-- and how the Order reacts after Akio unexpectedly returns carrying Beast Blood.
+- and how the Order reacts after Akio unexpectedly returns carrying awakened Beast Blood.
