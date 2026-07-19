@@ -76,7 +76,7 @@ This rarity is essential. The danger is not a conventional outbreak; it is the p
 
 Akio does not receive a new dose from the Heart during the game opening.
 
-During the early Beast Blood era, the Eclipse Shogun and the child's other parent had both taken Beast Blood while still capable of producing a human child. Their child developed before birth within two already-altered parents and carried a dormant inherited expression of the Blood.
+During the early Beast Blood era, the Eclipse Shogun and the child's mother had both taken Beast Blood while still capable of producing a human child. The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child carried a dormant inherited expression of the Blood.
 
 That child escaped the island before the barrier was completed, and the dormant condition continued through the surviving bloodline outside the containment.
 
