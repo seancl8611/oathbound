@@ -4,9 +4,10 @@ title: Core Gameplay Loop
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-19
 topics:
   - core-loop
+  - first-attempt
   - strand
   - boat
   - shrine
@@ -17,17 +18,28 @@ related:
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROGRESSION
+  - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
 ---
 
 # Core Gameplay Loop
+
+## Introductory first attempt
+
+Before the persistent roguelite loop begins, Akio crosses to the island without active Beast Blood abilities.
+
+The player uses the base sword kit and available Order equipment. Blood Aspects, Shrine Resist/Embrace progression, and Blood-derived Techniques are unavailable.
+
+The attempt ends in Akio's first death. Dormant inherited Beast Blood awakens, reconstructs him at the Strand as Returning Blood, and begins the normal repeated-run structure.
+
+The opening should reveal the return through brief gameplay presentation and subtle signs rather than a long explanatory cutscene.
 
 ## Persistent loop
 
 1. Return to or prepare in the Strand.
 2. Spend permanent resources through the appropriate service: Bloodwell, Forge, Merchant, Discovery Board, or Blood Mirror.
 3. Confirm one unlocked Blood Aspect and the current prosthetic loadout at the Boat after those systems are available.
-4. Cross toward the island during the active Blood Moon window.
+4. Cross toward the island beneath the Blood Moon.
 5. Progress through combat, reward, Shrine, rest, shop, miniboss, and boss spaces.
 6. Build run power through Blood Aspect Tier choices, four active Techniques and one reserve, refinements, prosthetic specialization, Relics, resources, and other temporary rewards.
 7. Fill Corruption through combat accomplishments and choose Resist or Embrace at Shrines.
@@ -42,7 +54,7 @@ related:
 2. Pressure enemies with katana attacks and movement.
 3. Block, dodge, or parry according to the telegraph and response rule.
 4. Use Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash according to timing and context.
-5. Build enemy posture while managing Akio's health, posture, Spirit Emblems, Corruption, and space.
+5. Build enemy posture while managing Akio's health, posture, Spirit Emblems, Corruption, and space after those systems are active.
 6. Use the equipped prosthetic and active Techniques to strengthen chosen combat verbs without replacing sword fundamentals.
 7. Exploit posture breaks and deathblow openings.
 8. Reposition around hazards, ranged pressure, restraints, and multi-enemy combinations.
@@ -50,7 +62,9 @@ related:
 
 ## Build-identity rule
 
-The selected Blood Aspect is the run's central tactical identity. Corruption and Embrace determine how far that identity escalates vertically. Techniques provide limited horizontal customization around it.
+After Blood Aspects are unlocked, the selected Aspect is the run's central tactical identity. Corruption and Embrace determine how far that identity escalates vertically. Techniques provide limited horizontal customization around it.
+
+The introductory first attempt is the deliberate exception: Akio has no active Blood identity yet.
 
 The player should commonly fill the four active Technique slots across Areas 1 and 2, then refine, replace, and perfect the build through Area 3. The single reserve allows controlled adaptation without becoming a full Technique inventory.
 
