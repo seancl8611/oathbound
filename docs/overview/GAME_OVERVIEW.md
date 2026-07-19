@@ -4,11 +4,12 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-19
 topics:
   - project-identity
   - combat
   - returning-blood
+  - inherited-beast-blood
   - blood-moon
   - techniques
   - three-areas
@@ -18,6 +19,7 @@ related:
   - GAMEPLAY-COMBAT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RUN-STRUCTURE
   - LORE-RETURNING-BLOOD
   - LORE-BARRIER-BLOOD-MOON
 ---
@@ -28,19 +30,29 @@ Oathbound is a high-angle 2D action roguelite built around disciplined katana co
 
 The player controls Akio, a warrior of the Order sent through a containment barrier onto a cursed Japanese-gothic island. The island was once a flourishing kingdom that used rare Beast Blood from the Heart—an ancient living godlike organ or supernatural core—to survive a deadly plague. The apparent miracle gradually corrupted its people and ruler.
 
-The Heart's ultimate origin remains deliberately ambiguous. It may be part of a forgotten entity, the core of the island, a divine vessel, or something else entirely. It possesses primal agency centered on survival, regeneration, growth, and continuation rather than a human personality or clearly explained plan.
+The Heart's ultimate origin remains deliberately ambiguous. It possesses primal agency centered on survival, regeneration, growth, and continuation rather than a human personality or clearly explained plan.
 
-The Blood Moon is the visible result of a recurring active cycle within the Heart. During it, existing Beast Blood becomes stronger and the containment barrier comes under pressure. The Order-created Strand threshold, the Keeper, and a sealed Boat provide the single controlled route Akio uses to enter the island.
+The Blood Moon is the visible result of a recurring active cycle within the Heart. During it, existing Beast Blood becomes stronger and the containment barrier comes under pressure. The Order-created Strand threshold, the Keeper, and a sealed Boat provide the controlled route Akio uses to enter the island.
 
 The entire campaign takes place beneath the Blood Moon without defining exactly how much ordinary time passes between repeated runs.
 
-Beast Blood strengthens, heals, regenerates, and transforms while intensifying impulses already present in the bearer. Corrupted inhabitants may retain memory, loyalty, recognition, training, ambition, and attachment rather than becoming mindless infected. Retained humanity does not equal freedom from the Blood.
+Beast Blood strengthens, heals, regenerates, and transforms while intensifying impulses already present in the bearer. Once active, it does not require repeated doses from the Heart. It does not spread through ordinary contact, wounds, the environment, or death on the island.
 
-Akio is not immune. His resolve and the Order's anti-corruption warding contribute to an unprecedented condition called Returning Blood. It allows him to reform after death, retain his identity, and develop controlled Blood Aspects during runs. The exact origin remains under story design lock.
+## Akio and Returning Blood
+
+Akio unknowingly descends from a royal child born during the kingdom's early Beast Blood era. Both of that child's parents—including the Eclipse Shogun—had already taken Beast Blood while still capable of producing a human child.
+
+The child escaped before the barrier was completed. The resulting bloodline survived outside the island with a dormant inherited expression of Beast Blood.
+
+Akio begins without active Blood powers. He is the first known descendant to return inside the barrier during a Blood Moon and die after the dormant condition has been fully stirred.
+
+His first death awakens its regenerative power and reconstructs him at the Strand as Returning Blood. Because his body developed naturally around the dormant condition, it preserves his established human form rather than immediately fixing him into an ordinary corrupted transformation.
+
+Akio is not immune. His lineage explains why Returning Blood can awaken; his discipline and resolve explain why he can later control and evolve it without surrendering himself to the curse.
 
 Akio is the only known bearer with genuine control over Beast Blood. Other bearers may direct abilities or retain intelligence, but they ultimately lose the ability to reject the Blood's rule.
 
-The Eclipse Shogun intends to end the island's containment and extend his kingdom to the mainland through conquest and forced Beast Blood salvation. He first dismisses Akio's restraint, then becomes fascinated by his repeated returns, attempts to recruit him, and eventually fears and hates him as living proof that the Shogun's own mastery is false.
+The Eclipse Shogun eventually recognizes Akio as a descendant of the escaped royal child. This deepens his attempt to recruit Akio as an heir and champion, while Akio's refusal proves that bloodline does not grant ownership or allegiance.
 
 ## Project statement
 
@@ -48,19 +60,22 @@ The game should feel disciplined, dangerous, elegant, and cursed. Martial clarit
 
 ## Core player fantasy
 
-The player should feel like a trained hunter crossing into a fallen kingdom whose people still retain distorted fragments of humanity, loyalty, and memory. Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
+The player should feel like a trained hunter entering a fallen kingdom with only a complete sword kit, then awakening a forbidden inherited power and gradually learning to evolve it on his own terms.
 
-Across a run, the player grows from the complete base sword kit into a specialized late-run build. The selected Blood Aspect defines the central identity; limited Techniques refine how that identity uses Akio's sword, movement, executions, resources, and prosthetic.
+Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
+
+Across a standard run, the player grows from the complete base sword kit into a specialized late-run build. The selected Blood Aspect defines the central identity; limited Techniques refine how that identity uses Akio's sword, movement, executions, resources, and prosthetic.
 
 ## Locked gameplay snapshot
 
+- Introductory first attempt using the base sword kit without active Blood powers
+- First death awakens dormant inherited Beast Blood and reconstructs Akio at the Strand
 - Base katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
 - Core combat: parry, posture, stagger, deathblow, block, dash, and prosthetic-tool support
-- Central run identity: Wolf, Wraith, or Ronin Blood Aspect
+- Central post-unlock run identity: Wolf, Wraith, or Ronin Blood Aspect
 - Run-only Corruption meter and Shrine Resist/Embrace decision
 - Fixed Blood Aspect Tier 0–IV escalation with increasing benefit, drawback, and mutation
 - Technique system: four active temporary Techniques, one inactive reserve, and at most one refinement per Technique
-- Technique categories that modify existing combat verbs, including eligible Prosthetic Techniques
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
 - Keeper-maintained Boat crossing through the Strand's controlled barrier threshold
@@ -78,22 +93,21 @@ Across a run, the player grows from the complete base sword kit into a specializ
 
 ## Encounter and boss direction
 
-Combat uses Sekiro-inspired posture, parry, counter, and deathblow fundamentals without requiring every encounter to become a strict memorization test. Bosses and larger encounters should also use readable Hades-like arena patterns: clear telegraphs, movement pressure, projectiles, area danger, and reliable attack opportunities.
+Combat uses Sekiro-inspired posture, parry, counter, and deathblow fundamentals. Bosses and larger encounters also use readable Hades-like arena patterns: clear telegraphs, movement pressure, projectiles, area danger, and reliable attack opportunities.
 
-A single error should matter without routinely ending an otherwise viable run instantly.
+A single error should matter without routinely ending an otherwise viable standard run instantly.
 
 ## World structure
 
 - **The Strand:** persistent shoreline hub, barrier threshold, and preparation point
+- **Introductory attempt:** a short unpowered entry ending in the first Returning Blood awakening
 - **Area 1 — Hushiro Gate Village / Rupture:** recent corruption, violence, bodily collapse, fragmented community, and desperate faith
 - **Area 2 — Yomori Grove / Adaptation:** long-term predation, true spirits persisting as incomplete remnants, and ecological devastation surrounding corrupted inhabitants
 - **Area 3 — Kagutsuchi Court / False Ascendancy:** courtly beauty, hierarchy, elite mutation, and the mistaken belief that Beast Blood has been mastered
 - **Run climax:** the Eclipse Shogun followed by temporary access to the protected Heart
 - **True-final direction:** permanent defeat of the Shogun and a deeper Heart confrontation after enough persistent layers have been removed
 
-The Heart's identity, discovery, forbidden extraction process, Blood Moon relationship, and the Order barrier's broad origin are locked. Its number of layers, required clear count, final manifestation, and true-final encounter remain open.
-
-The Court obtains Beast Blood through an ancient extraction structure during controlled weak-pulse windows. Researchers loosen part of the Heart's restraints and offer a small measure of freshly drawn human blood, causing the Heart to release Beast Blood. This does not require death or human sacrifice, but the exchange establishes Beast Blood as an intentionally accepted curse rather than a conventional infection.
+The Heart's identity, discovery, extraction process, Blood Moon relationship, barrier origin, and Returning Blood origin are locked. Its number of layers, required clear count, final manifestation, and true-final encounter remain open.
 
 ## Structural references
 

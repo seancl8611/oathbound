@@ -4,12 +4,13 @@ title: Beast Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-19
 topics:
   - beast-blood
   - the-heart
   - corruption
   - transformation
+  - inherited-beast-blood
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -29,6 +30,7 @@ Beast Blood is a rare supernatural power drawn from the Heart, an ancient living
 - Strong resolve can delay transformation, but ordinary bearers do not achieve Akio's true control.
 - A bearer who remains intelligent or composed may still be enslaved to desires reshaped by the Blood.
 - Beast Blood becomes naturally more powerful during the Blood Moon.
+- Once active in a bearer, Beast Blood does not require repeated doses or continued supply from the Heart.
 
 ## Discovery of the Heart
 
@@ -64,11 +66,25 @@ The Heart does not remain passive during extraction. As Beast Blood is released,
 
 If the process is mistimed or prolonged, too much Blood may enter the channels, Heart tissue may grow through the extraction structure, the chamber may begin to close around those inside, or the released Blood may overwhelm anyone exposed to it.
 
-This prevents extraction from becoming safe, casual, or industrial. Every attempt requires entering the Heart's chamber, interfering with an ancient containment system, and risking direct contact with the source of the curse. New Beast Blood can be obtained only by returning to the Heart and repeating this forbidden process.
+This prevents extraction from becoming safe, casual, or industrial. Every attempt requires entering the Heart's chamber, interfering with an ancient containment system, and risking direct contact with the source of the curse. New extracted Beast Blood can be obtained only by returning to the Heart and repeating this forbidden process.
 
-Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, wounds, contaminated soil, roots, water, prey, or damaged vegetation do not transmit Beast Blood or create new bearers.
+Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, wounds, contaminated soil, roots, water, prey, damaged vegetation, or merely dying on the island do not transmit Beast Blood or create new bearers.
 
 This rarity is essential. The danger is not a conventional outbreak; it is the possibility that people will exploit, transport, weaponize, worship, or distribute a forbidden power.
+
+## Akio's inherited exception
+
+Akio does not receive a new dose from the Heart during the game opening.
+
+During the early Beast Blood era, the Eclipse Shogun and the child's mother had both taken Beast Blood while still capable of producing a human child. The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child carried a dormant inherited expression of the Blood.
+
+That child escaped the island before the barrier was completed, and the dormant condition continued through the surviving bloodline outside the containment.
+
+This is a narrow historical exception, not a new general transmission route. It does not mean every child of a bearer inherits Beast Blood, that Beast Blood spreads through ordinary reproduction, or that descendants create new Blood independent of the Heart. The original supernatural alteration still came from Blood extracted from the Heart.
+
+Akio remains human. His body developed naturally around the inherited condition rather than receiving active Beast Blood after reaching adulthood.
+
+When Akio returns inside the barrier during the Blood Moon, the dormant Blood becomes fully active. His first death triggers its regenerative power and creates the first known Returning Blood manifestation.
 
 ## Retained humanity is not control
 
@@ -95,7 +111,7 @@ Beast Blood may produce:
 
 Yomori Grove's damaged ecology does not mean that Beast Blood has become environmentally contagious. Its blighted roots, sap, fungal growth, and other visual signs express the prolonged effect of corrupted people and creatures on the region rather than a new route of transmission.
 
-These outcomes do not require a rigid universal stage system. Host, duration, will, physical condition, environment, and manner of use may all influence the result. The regions emphasize different dominant expressions of the same curse:
+These outcomes do not require a rigid universal stage system. Host, duration, will, physical condition, environment, manner of use, and whether the body developed around the Blood may influence the result. The regions emphasize different dominant expressions of the same curse:
 
 - Hushiro Gate Village presents rupture, recent transformation, violence, and human collapse.
 - Yomori Grove presents long-term adaptation, predation, spiritual persistence, and ecological devastation surrounding corrupted life.
@@ -117,7 +133,7 @@ No single explanation is currently canon.
 
 The Heart is alive, but not in an ordinary human sense. It exists somewhere between dormancy, injury, imprisonment, and awakening. Human exploitation and repeated Beast Blood use have increased its activity, while the Blood Moon further stimulates the Heart and Blood connected to it.
 
-The Heart possesses primal agency rather than a human personality. It does not require dialogue, a political plan, or direct command over every victim. Its nature expresses survival, regeneration, growth, continuation, resistance to restraint, and incorporation of other life.
+The Heart possesses primal agency rather than a human personality. It does not require dialogue, a political plan, direct selection of Akio, or automatic control over everyone who dies on the island. Its nature expresses survival, regeneration, growth, continuation, resistance to restraint, and incorporation of other life.
 
 It gives genuine life and healing, but its form of preservation gradually rewrites the bearer according to that nature. Whether the Heart is malicious, instinctive, defensive, or simply incompatible with human life remains intentionally unresolved.
 
@@ -129,11 +145,11 @@ This worship should suggest that the Heart may be an ancient god or sacred entit
 
 ## Relationship to Returning Blood
 
-Returning Blood is not a separate original substance. It is an unprecedented condition in which Beast Blood reconstructs Akio while preserving continuity of self.
+Returning Blood is not a separate original substance. It is the awakened inherited Beast Blood within Akio reconstructing his established human form while preserving continuity of self.
 
-Other bearers may retain humanity, intelligence, or technical use of mutations, but Akio is the only known bearer with genuine sovereignty over the Blood. He remains capable of resisting escalation, expressing different Blood Aspects, returning toward a controlled baseline, and opposing the Heart itself.
+Akio's lineage explains why this manifestation is possible. His resolve does not create Returning Blood; it allows him to develop genuine sovereignty over the awakened power afterward.
 
-Akio's resolve and the Order's anti-corruption warding are current required ingredients. Their exact interaction and the reason he succeeds where previous warriors failed remain open in [Returning Blood](RETURNING_BLOOD.md).
+Other bearers may retain humanity, intelligence, or technical use of mutations, but Akio is the only known bearer with genuine control. He remains capable of resisting escalation, expressing different Blood Aspects, returning toward a controlled baseline, and opposing the Heart itself.
 
 ## Visual discipline
 

@@ -4,10 +4,12 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-19
 topics:
   - runs
+  - first-attempt
   - death
+  - returning-blood
   - successful-return
   - ancient-source
   - strand
@@ -29,11 +31,33 @@ related:
 
 # Run Structure
 
-A run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
+A standard run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
 
-A run ends through death, successful source-layer damage after the Shogun, or another explicitly designed return condition.
+A standard run ends through death, successful source-layer damage after the Shogun, or another explicitly designed return condition.
 
-The campaign takes place beneath the Blood Moon. The game does not define how much ordinary time passes between repeated runs; the setting may read as one endless night, multiple nights, or an unclear supernatural period.
+The campaign takes place beneath the Blood Moon. The game does not define how much ordinary time passes between repeated runs.
+
+## Introductory first attempt
+
+Before the normal roguelite loop begins, the player completes Akio's first attempt.
+
+Akio enters as an ordinary Order swordsman with dormant inherited Beast Blood but no knowledge of it and no active Blood powers.
+
+During this attempt:
+
+- the player uses the base katana kit and available Order equipment,
+- Blood Aspects are unavailable,
+- Shrine Resist and Embrace progression is unavailable,
+- Blood-derived Techniques are unavailable,
+- and the player is introduced to the island and core combat without a full run build.
+
+The first attempt ends in Akio's first death. The exact enemy, location, run length, and whether the endpoint is fully scripted or reached through a designed unwinnable encounter remain opening-production decisions.
+
+Death awakens the dormant Beast Blood inherited through Akio's escaped royal bloodline. It reconstructs him at the Strand as Returning Blood.
+
+The first return should use a brief, striking presentation with subtle physical and environmental signs rather than a long explanatory cutscene. Akio and the player should understand that he died and returned, but not yet understand his ancestry or the full Blood system.
+
+The normal repeated-run structure begins after this return.
 
 ## Regional flow
 
@@ -47,7 +71,9 @@ The current intended progression is:
 
 Exact branching, room counts, rerouting, and area-order flexibility remain implementation and playtest questions.
 
-## Run start
+The introductory attempt may use only a short portion of Hushiro rather than the complete regional flow.
+
+## Standard run start
 
 Before departure, the player:
 
@@ -60,6 +86,8 @@ Before departure, the player:
 - and commits to the Keeper-guided barrier crossing by selecting `Start Run`.
 
 The Keeper's contribution should remain part of the departure presentation rather than a separate repeated menu or resource cost.
+
+Blood Aspect selection does not appear during the first attempt and need not become available immediately after the first return. Akio and the player unlock and learn advanced Blood systems through later progression.
 
 ## Room functions
 
@@ -82,7 +110,7 @@ Detailed reward ownership and cadence belong in [Items, Currencies, and Rewards]
 
 ## Run power curve
 
-The intended build progression is:
+The intended build progression after the relevant systems are unlocked is:
 
 - **Area 1:** acquire the first meaningful Techniques and begin defining the build.
 - **Area 2:** fill the four active Technique slots, gain Aspect Tiers, and establish coherent synergy.
@@ -92,7 +120,7 @@ A successful run should create several meaningful Technique decisions without aw
 
 ## Failed run
 
-When Akio dies, Returning Blood reconstructs him at the Strand. Death is a real supernatural event, not a non-canon reset.
+After Returning Blood has awakened, Akio's death reconstructs him at the Strand. Death is a real supernatural event, not a non-canon reset.
 
 The failed run burns away its temporary blood-state and run-only progress. Permanent unlocks, upgrades, discoveries, Blood Mirror progress, and major currencies survive according to the progression matrix.
 
