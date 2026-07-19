@@ -59,17 +59,17 @@ The Shogun's first use can be understood as a last resort against extinction. Hi
 
 ## The escaped royal bloodline
 
-During the early Beast Blood era, the Shogun and the child's other parent had both taken Beast Blood but had not yet undergone their later severe transformations.
+During the early Beast Blood era, the Shogun and the child's mother had both taken Beast Blood but had not yet undergone their later severe transformations.
 
-Their child developed before birth within two already-altered parents. The child remained human but carried a dormant inherited expression of Beast Blood.
+The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of Beast Blood.
 
-Before the kingdom was fully contained, the child was secretly taken from the island by the other parent and a trusted retainer. The bloodline survived outside the barrier for generations without displaying ordinary Beast Blood powers or knowing its complete origin.
+Before the kingdom was fully contained, the child was secretly taken from the island by the mother and a trusted retainer. The bloodline survived outside the barrier for generations without displaying ordinary Beast Blood powers or knowing its complete origin.
 
 Akio unknowingly descends from that escaped royal child.
 
 This does not create a second source or make Beast Blood conventionally contagious or hereditary. The original alteration still came from Blood extracted from the Heart. Akio's family carries the dormant continuation of one exceptional bloodline formed during the kingdom's early corruption.
 
-The exact identity and fate of the other parent and retainer, the escape route, and how the bloodline remained hidden are deliberately unresolved until their narrative value is clearer.
+The exact identity and fate of the mother and retainer, the escape route, and how the bloodline remained hidden are deliberately unresolved until their narrative value is clearer.
 
 ## The Shogun's present goal
 
