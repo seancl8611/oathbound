@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 ---
 
 # Production Roadmap
@@ -43,11 +43,17 @@ Produce Yomori Grove, its full enemy and boss roster, regional hazards, rooms, V
 
 ## Milestone 6 — Complete Area 3 and endgame
 
-Produce Kagutsuchi Court, its roster, major encounters, Eclipse Shogun, Heart chamber approach, the Court-built extraction apparatus, one reusable Heart Binding completion sequence, ending-space art, and endgame integration.
+Produce Kagutsuchi Court, its roster, major encounters, Eclipse Shogun, Heart chamber approach, the Court-built extraction apparatus, one reusable Heart Binding completion sequence, six Binding states, the fully exposed Heart, the two-phase true-final Heart encounter, first-clear ending presentation, shortened repeat-clear presentation, and endgame integration.
 
-The completion package uses the same core ritual after each successful run: Returning Blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. It does not require a different mechanism, puzzle, or bespoke win sequence for every Binding.
+The Binding-completion package uses the same core ritual after each of the first six successful clears: Returning Blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. It does not require a different mechanism, puzzle, or bespoke win sequence for every Binding.
 
-The exact Binding count and clear-specific state variants remain provisional until Question 11 is locked. The true-final Heart confrontation after the Shogun's permanent defeat also remains provisional until its encounter and ending are locked.
+The final story run continues from defeat of the Shogun's current body into the Heart without ending the run. The Heart encounter uses the freed Unbound Heart and the enormous Vessel of Continuance as its two conceptual forms.
+
+The Heart does not require a humanoid swordsman, a third phase, or a separate weak-point subsystem. Exact attacks, animation counts, effects, tuning, arena rules, and recovery between bosses remain dependent on later encounter design and playtesting.
+
+The first Heart victory ends the story. Repeat Heart victories remain available as postgame gameplay challenges without additional story progression.
+
+Future difficulty settings, run modifiers, enemy or room variants, challenge restrictions, alternate conditions, and special Heart-route rewards remain deferred expansion ideas and are not part of the initial roadmap scope.
 
 ## Milestone 7 — Release presentation and final cohesion
 
@@ -61,8 +67,10 @@ Complete front-end UI, narrative presentation, achievements/store art, missing-a
 - Reusable Technique card, slot, reserve, refinement, and category language may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke combat effects require a locked catalog entry before final quotation.
 - The base Heart Binding ritual may be scoped as one reusable package.
-- Exact Binding-state variant counts cannot receive a fixed quote until the campaign clear count and per-clear changes are approved.
-- The true-final Heart encounter cannot receive a fixed quote until its identity, phases, asset reuse, and arena needs are approved.
+- The six Binding-state variants and fully exposed state are locked at high level, but exact layer construction remains an art-design task.
+- The two Heart forms and one transformation may be scoped conceptually; exact animation and VFX counts require the approved moveset and arena design.
+- Postgame route controls and repeat-clear rewards require system design before final UI quotation.
+- Deferred postgame modifiers and variants must not be included in the initial quote unless intentionally promoted into base scope later.
 - Each milestone is divided into separately quoted, payable, reviewable batches.
 - Every batch receives sheet-level and in-engine review.
 - Contractor-facing Word/PDF documents are exports; Markdown remains the internal source of truth.
