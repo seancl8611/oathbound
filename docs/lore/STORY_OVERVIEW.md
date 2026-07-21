@@ -4,7 +4,7 @@ title: Story Overview
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 topics:
   - story
   - blood-moon
@@ -12,6 +12,7 @@ topics:
   - eclipse-shogun
   - the-heart
   - inherited-beast-blood
+  - heart-bindings
 related:
   - LORE-BEAST-BLOOD
   - LORE-BARRIER-BLOOD-MOON
@@ -31,7 +32,7 @@ The source of Beast Blood is the Heart, an ancient living godlike organ or super
 
 It may be the surviving organ of a forgotten entity, the core of the island, a divine vessel, or the remnant of something too old and vast to understand. Its ultimate origin is deliberately ambiguous, and the story may present conflicting evidence without confirming one explanation.
 
-The Heart possesses primal agency centered on survival, regeneration, growth, continuation, and incorporation rather than a human personality or clearly explained plan. Whether it is malicious, defensive, instinctive, or simply incompatible with human life remains unresolved by design.
+The Heart possesses primal agency centered on survival, regeneration, growth, continuation, resistance to restraint, and incorporation rather than a human personality or clearly explained plan. Whether it is malicious, defensive, instinctive, or simply incompatible with human life remains unresolved by design.
 
 ## Discovery beneath Kagutsuchi Court
 
@@ -41,7 +42,9 @@ Long before the plague, royal engineers expanding Kagutsuchi Court excavated fou
 
 The passage led into an ancient complex built around the Heart. The first explorers did not see the Heart in its entirety. They encountered part of an immense living mass embedded within the island's stone, with dark tissue, blackened vessels extending into the rock, and a slow pulse perceptible through the chamber floor.
 
-Carved seals, ritual channels, restraints, damaged inscriptions, and chambers surrounded it. Their purpose could not be determined with certainty. The structure may have served as a shrine, prison, research site, containment system, harvesting facility, or several of those things at different times. Altars could also be read as operating platforms, while devotional markings could also be read as restraints.
+The Heart was enclosed by multiple ancient Heart Bindings: layered restraints, sealed stone, ritual markings, and unknown materials that kept it dormant, limited its influence, and concealed its deeper body.
+
+The Bindings were not created by the Shogun's civilization. Their builders, age, construction, and complete purpose remain unknown. Other parts of the complex may have been a shrine, prison, research site, containment system, or several of those things at different times.
 
 Whether the collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains unresolved.
 
@@ -49,21 +52,27 @@ Whether the collapse was natural, caused by failing ancient architecture, or sub
 
 Royal engineers, guards, scholars, physicians, and ritual specialists made the discovery rather than the Shogun personally. Their interpretations quickly divided.
 
-Some believed the Heart was the remnant of an ancient god. Others believed it was a dangerous imprisoned entity or an unknown natural power. Its visible regeneration proved that it was alive and possessed properties beyond ordinary medicine, but the surrounding complex suggested that an earlier civilization had feared, worshipped, studied, or exploited it.
+Some believed the Heart was the remnant of an ancient god. Others believed it was a dangerous imprisoned entity or an unknown natural power. Its visible regeneration proved that it was alive and possessed properties beyond ordinary medicine, but the surrounding Bindings suggested that an earlier power had feared or deliberately restrained it.
 
 The Shogun ordered the site sealed and placed under royal control. He prohibited direct human use and restricted entry to a small circle of trusted scholars, physicians, ritualists, engineers, guards, and retainers.
 
-For years, the Court studied the chamber in secret. Researchers mapped the complex, translated fragments of inscriptions, documented the Heart's pulse and regeneration, and argued over whether the ancient builders had revered it or attempted to contain it. No interpretation became definitive.
+For years, the Court studied the chamber in secret. Researchers mapped the complex, translated fragments of inscriptions, documented the Heart's pulse and regeneration, and argued over the identity and purpose of the ancient builders. No interpretation became definitive.
 
-## Forbidden extraction and the fall of the kingdom
+## The first breach, extraction, and fall of the kingdom
 
-The Shogun's prohibition remained in place until a deadly plague pushed the island's civilization toward extinction. Conventional medicine and containment efforts failed, and the Shogun authorized the first controlled attempt to obtain Beast Blood only when the kingdom appeared unlikely to survive without it.
+The Shogun's prohibition remained in place until a deadly plague pushed the island's civilization toward extinction. Conventional medicine and containment efforts failed, and the Shogun authorized the first controlled attempt to obtain power from the Heart only when the kingdom appeared unlikely to survive without it.
 
-Usable Beast Blood could not be taken by simply cutting into exposed Heart tissue or draining a visible vessel. The ancient complex contained a sealed extraction structure of carved channels, basins, restraints, and mechanisms. During a controlled window when the Heart's pulse became slower and less forceful, researchers temporarily loosened part of the restraint system and placed a small measure of freshly drawn human blood into the structure. This required no death or human sacrifice.
+The intact Heart Bindings prevented direct access. The Shogun's researchers destroyed or opened the outermost Binding and exposed a small part of the Heart.
 
-The Heart responded by changing its pulse and releasing a small quantity of dark Beast Blood into a collection basin. Researchers had to collect it and restore the restraints before the Heart entered a stronger pulse cycle. Mistimed or prolonged extraction risked uncontrolled Blood release, invasive organic growth, chamber instability, and direct exposure to the source of the curse.
+This was the first irreversible violation of the ancient prison. The breach stirred the Heart from deep dormancy, strengthened its pulse and influence, and made Beast Blood extraction possible without fully releasing it.
 
-The process carried the meaning of a forbidden exchange. Human blood was offered, the Heart answered with healing power, and whoever later took that power accepted the risk of transformation and eventual loss of independence. Whether the Heart consciously recognized the exchange remained unknown.
+The Shogun's engineers, physicians, and ritual specialists then constructed an extraction apparatus against the exposed portion. The apparatus belonged to the Court and was separate from the ancient Binding system.
+
+A small measure of freshly drawn human blood was placed into the apparatus. It carried that offering inward to the Heart, and the Heart responded by releasing a small quantity of dark Beast Blood outward into a collection vessel. The process required no death or human sacrifice.
+
+The exchange was simple and forbidden: human blood went inward, and Beast Blood came outward. The Court never determined whether the Heart consumed the offering, followed an unknown supernatural law, or instinctively attempted to incorporate the life presented to it.
+
+Researchers had to end the process before the Heart's reaction became uncontrollable. Mistimed or prolonged extraction risked invasive growth, overwhelming Blood release, chamber instability, and direct exposure to the curse.
 
 Beast Blood appeared miraculous: the sick recovered, damaged bodies healed, and the kingdom survived. Because corruption emerged only after its use had spread, the civilization became dependent on Beast Blood before the danger was fully understood.
 
@@ -71,7 +80,7 @@ By the time physical transformation, altered behavior, violent impulses, and los
 
 The Shogun had been a successful ruler of a flourishing kingdom, but he does not need to have been a heroic or morally ideal man before the fall. His first use of Beast Blood was a last resort against extinction. His later responsibility comes from continuing to use, defend, and expand its power after the consequences became visible.
 
-The exact duration and detailed chronology of the plague era are not currently important. The required sequence is discovery, restriction, extinction-level plague, miraculous cure, delayed corruption, dependence, and continued use.
+The exact duration and detailed chronology of the plague era are not currently important. The required sequence is discovery, restriction, first Binding breach, extraction, extinction-level plague, miraculous cure, delayed corruption, dependence, and continued use.
 
 ## The escaped royal bloodline
 
@@ -131,6 +140,8 @@ Beast Blood does not spread through ordinary contact, bites, wounds, soil, roots
 
 Once active in a bearer, Beast Blood remains part of that bearer and does not require repeated doses or continued supply from the Heart.
 
+The Heart's influence nevertheless becomes stronger as its Bindings are removed. Existing Beast Blood reacts more intensely, corrupted inhabitants may become more unstable, and Akio experiences greater temptation and pressure from the curse. This is supernatural influence, not a physical channel or continuing supply network.
+
 ## Regional curse progression
 
 Akio's path through the island reveals increasingly established expressions of the same curse rather than three unrelated supernatural forces.
@@ -169,7 +180,9 @@ He is the first known descendant of the escaped bloodline to return inside the b
 
 His first death awakens its regenerative power. Because Akio's body developed naturally around the dormant condition, the Blood reconstructs his established human form rather than immediately fixing him into an ordinary corrupted transformation. He reforms at the Strand carrying Returning Blood.
 
-The exact cause and location of that first death and the precise reason reconstruction selects the Strand remain deliberately limited mysteries or production decisions.
+That first complete reconstruction establishes the Strand as the stable return point used by later deaths. The deeper supernatural transport is deliberately left mysterious.
+
+The exact cause and location of that first death remain production decisions.
 
 Akio initially understands none of the lineage or mechanism. The player gradually discovers Blood Aspects, Shrine evolution, Corruption decisions, and Techniques during the real repeated runs.
 
@@ -197,20 +210,32 @@ Akio does not need a large royal-identity subplot. His repeated refusal and cont
 
 Akio becomes the living contradiction that exposes the Shogun's false mastery. Exact reveal timing, dialogue, conversation count, branching conditions, voice acting, and cinematic presentation remain future narrative work.
 
-## Successful-run direction
+## Successful-run Heart Binding ritual
 
 The Shogun remains the central character antagonist and principal ruler of the island, but he is not the original source of Beast Blood.
 
-The current successful-run direction is:
+After each successful Shogun victory:
 
-1. Akio defeats the Shogun's current manifestation.
-2. The victory opens temporary access to the Heart or its protected inner chamber.
-3. Akio damages or removes one persistent protective layer around the Heart.
-4. The Heart, chamber, or completed act destroys or expels Akio's current body.
-5. Returning Blood reforms him at the Strand.
-6. The damage to the Heart persists across successful runs.
+1. Akio enters the Heart chamber.
+2. He uses the same extraction apparatus created by the Shogun's civilization.
+3. He cuts himself and places Returning Blood into the apparatus as the human-blood offering.
+4. The apparatus carries his Blood into the exposed Heart.
+5. The Heart attempts to absorb and reclaim its own power.
+6. Akio's controlled Blood resists.
+7. The rejection creates a violent pulse that breaks one remaining ancient Heart Binding.
+8. The Heart retaliates and dissolves Akio's current body into blood.
+9. Returning Blood reconstructs him at the Strand using the stable pattern and return point established by his first return.
+10. The destroyed Binding and permanent rewards persist while run-only state is lost.
 
-The exact number and nature of the layers, required successful clears, Heart encounter, forced-return event, and final ending are unresolved.
+The ritual is deliberately simple and reusable. Each completion uses the same apparatus and core animation rather than a unique mechanism, puzzle, or bespoke win condition for every Binding. Later clears may escalate through stronger pulses, greater Heart exposure, more chamber damage, and increasing supernatural pressure.
+
+The damage persists because the Heart can regenerate living tissue but cannot rebuild the external ancient restraints created by an unknown power.
+
+Akio can destroy only one Binding per run because the Heart's retaliation kills his current body immediately after the Binding breaks.
+
+Destroying the Bindings weakens the Heart's protection while also releasing more of its influence. Every successful clear moves Akio closer to the Heart's vulnerable body and brings the Heart closer to full awakening.
+
+The total number of Bindings, campaign changes after each completion, Shogun reconstruction rule, permanent-defeat sequence, final Heart encounter, and ending remain unresolved.
 
 ## Final-antagonist direction
 
@@ -222,6 +247,7 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 
 - Power discovered through greed and forbidden curiosity
 - A miracle whose delayed cost corrupts the civilization it saved
+- Salvation beginning with the violation of an ancient prison
 - Loyalty becoming possessiveness
 - Protection becoming control
 - Forced salvation becoming conquest
@@ -230,8 +256,9 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 - Inherited connection without inherited obligation
 - False mastery contrasted with Akio's unique control
 - A quiet warrior evolving forbidden power without accepting its rule
+- Every step toward destroying the Heart also freeing more of it
 - Mystery preserved where complete explanation would weaken the ancient source
 
 ## Canon boundaries
 
-Exact dialogue, conversation count, Akio's complete character arc, the identity and fate of the escaped child's protectors, how Akio's lineage is confirmed, the first-death presentation, why reconstruction selects the Strand, the Shogun's barrier-breach method and timing, successful-clear count, final Heart encounter, ending, and postgame explanation remain under development.
+Exact dialogue, conversation count, Akio's complete character arc, the identity and fate of the escaped child's protectors, how Akio's lineage is confirmed, the first-death presentation, the deeper metaphysics of Strand reconstruction, the Shogun's barrier-breach method and timing, Heart Binding count, changes after each successful clear, final Heart encounter, ending, and postgame explanation remain under development.
