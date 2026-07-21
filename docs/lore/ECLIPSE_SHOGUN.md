@@ -4,7 +4,7 @@ title: Eclipse Shogun
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 topics:
   - eclipse-shogun
   - beast-blood
@@ -12,6 +12,7 @@ topics:
   - plague
   - royal-bloodline
   - final-boss
+  - heart-bindings
 related:
   - CONTENT-AREA3-BOSS
   - LORE-BEAST-BLOOD
@@ -27,7 +28,9 @@ The Eclipse Shogun predates the Order. He was once the successful ruler of a flo
 
 The Heart was already buried beneath the island before the Shogun's civilization discovered it.
 
-During the prosperous expansion of Kagutsuchi Court, royal excavation exposed a sealed stairway and ancient complex beneath the capital. The structure surrounded part of the Heart and contained carved seals, ritual channels, restraints, damaged inscriptions, and rooms whose original purposes could no longer be distinguished with certainty.
+During the prosperous expansion of Kagutsuchi Court, royal excavation exposed a sealed stairway and ancient complex beneath the capital. The structure surrounded the Heart and contained layered seals, restraints, unknown materials, damaged inscriptions, and rooms whose original purposes could no longer be distinguished with certainty.
+
+These ancient Heart Bindings kept the Heart dormant, limited its influence, and protected its deeper body. The Shogun's civilization did not build them.
 
 The discovery was made by royal engineers, guards, scholars, physicians, and ritual specialists rather than by the Shogun personally. Competing interpretations described the Heart as an ancient god, a dangerous imprisoned entity, or an unknown natural power. The surrounding structure could be read as a shrine, prison, research site, containment system, or some combination.
 
@@ -37,7 +40,9 @@ A deadly plague later pushed the island's civilization toward extinction. When c
 
 The Shogun permitted the first forbidden extraction only when the kingdom appeared unlikely to survive without it.
 
-Researchers could not simply cut into the Heart or drain an exposed vessel. During a controlled weak-pulse window, they temporarily loosened part of the ancient restraint structure and placed a small measure of freshly drawn human blood into its carved channels or basin. No death or human sacrifice was required. The Heart responded by releasing a small quantity of Beast Blood, which had to be collected before its pulse strengthened and the restraints were restored.
+The intact Bindings prevented direct access to living Heart tissue. The Shogun authorized his researchers to breach or destroy the outermost Binding, stirring the Heart from deep dormancy and exposing a small part of it.
+
+The Court then built an extraction apparatus against that exposed portion. Researchers placed a small measure of freshly drawn human blood into the apparatus. No death or human sacrifice was required. The offering flowed inward, and the Heart responded by releasing a small quantity of Beast Blood outward into a collection vessel.
 
 The process was a dangerous exchange rather than a routine harvest. It offered healing and survival while opening every recipient to transformation and eventual loss of independence. The exact first-extraction scene, who participated, and whether the Heart consciously recognized the offering remain unresolved.
 
@@ -113,11 +118,13 @@ Some inhabitants remain organized beneath him, while beasts, spirits, and long-c
 
 The Shogun is Beast Blood's greatest known user and defender, but he is not its origin.
 
-He does not regard himself as a humble worshipper or the Heart's servant. He treats the Heart as a divine or supernatural power that his Court discovered, studied, survived, and brought under royal control.
+He does not regard himself as a humble worshipper or the Heart's servant. He treats the Heart as a divine or supernatural power that his Court discovered, breached, exploited, and brought under royal control.
 
-The Heart possesses primal agency centered on survival, growth, regeneration, continuation, and incorporation. It does not need to speak to the Shogun or directly command him.
+The Heart possesses primal agency centered on survival, growth, regeneration, continuation, resistance to restraint, and incorporation. It does not need to speak to the Shogun or directly command him.
 
 Over time, the Shogun's desires have changed until everything he sincerely wants also advances the Heart's nature. His plans protect the Heart, preserve Beast Blood, spread its influence, and incorporate new life while still feeling entirely like his own choices.
+
+The remaining Heart Bindings continue to restrain the Heart. Destroying them weakens its protection but also releases more of its influence. The Shogun does not require a physical channel or continuing supply from the Heart to remain a bearer.
 
 The Shogun must remain the central character antagonist even though the Heart becomes the true-final supernatural threat. His corruption explains his changing beliefs but does not erase his responsibility.
 
@@ -156,9 +163,11 @@ His exact redesign remains open. A more regal, cunning, lightly armored sovereig
 
 ## Place in the successful-run sequence
 
-Defeating the Shogun temporarily opens the path to the protected Heart. Akio then damages one persistent Heart layer before being destroyed or expelled and reconstructed at the Strand.
+Defeating the Shogun temporarily opens the path to the Heart chamber.
 
-The Shogun's reconstruction, permanent defeat condition, relationship to the Heart layers, and true-final version remain unresolved.
+Akio then uses the Court's extraction apparatus to offer Returning Blood. The Heart's attempt to reclaim that Blood produces a rejection pulse that breaks one ancient Heart Binding. The Heart retaliates by dissolving Akio's current body, and Returning Blood reconstructs him at the Strand with the destroyed Binding preserved.
+
+The Shogun's reconstruction, permanent defeat condition, relationship to the remaining Binding count, and true-final version remain unresolved.
 
 ## Open questions
 
