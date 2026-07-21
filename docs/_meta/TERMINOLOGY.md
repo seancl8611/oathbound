@@ -4,7 +4,7 @@ title: Oathbound Terminology
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-20
 ---
 
 # Oathbound Terminology
@@ -14,9 +14,12 @@ last_reviewed: 2026-07-14
 | Oathbound | Current project title. Italicize only when normal prose style calls for it. |
 | Beast Blood | Rare corrupting supernatural power obtained deliberately from the Heart. Capitalize both words. |
 | the Heart | The ancient living godlike organ or supernatural core that produces Beast Blood. Capitalize Heart when referring to the source. Its ultimate origin remains deliberately ambiguous. |
-| ancient Heart complex | Generic descriptive term for the pre-Shogun structure discovered beneath Kagutsuchi Court around part of the Heart. Its builders and original purpose remain unknown. This is not currently an approved proper name. |
-| forbidden extraction | The controlled process used to obtain Beast Blood through the ancient Heart complex during a weaker pulse window. Researchers loosen part of the restraint structure and offer a small measure of freshly drawn human blood, causing the Heart to release Beast Blood. The process does not require death or human sacrifice. Use as descriptive language rather than a confirmed historical proper name. |
-| Returning Blood | Akio's unprecedented Beast Blood condition, shaped by his resolve and expected to involve Order warding. Exact origin remains open. |
+| ancient Heart complex | Generic descriptive term for the pre-Shogun structure discovered beneath Kagutsuchi Court around the imprisoned Heart. Its builders and original purpose remain unknown. This is not currently an approved proper name. |
+| Heart Binding | One of the layered ancient restraints imprisoning the Heart, limiting its influence, and protecting its deeper body. The Shogun's civilization did not build the Bindings. Use as the approved working name until an in-world name is chosen. |
+| extraction apparatus | The later mechanism built by the Shogun's engineers, physicians, and ritual specialists against the exposed Heart after the first Binding was breached. It receives a fresh human-blood offering, carries it inward, and collects Beast Blood released outward. It is not part of the original ancient Binding system. |
+| forbidden extraction | The controlled use of the Shogun-built extraction apparatus to offer a small measure of freshly drawn human blood and collect Beast Blood released by the Heart. The process does not require death or human sacrifice. Use as descriptive language rather than a confirmed historical proper name. |
+| Returning Blood | Akio's unprecedented form of inherited Beast Blood. His first death awakens it and reconstructs his established human form at the Strand. His lineage explains the return; discipline and resolve explain his later genuine control. |
+| stable return point | Brief working explanation for why later reconstructions occur at the Strand: Akio's first successful reconstruction establishes the human pattern and destination that Returning Blood follows afterward. Do not turn this into a separate technical anchor system. |
 | true control | Akio's unique ability to preserve genuine agency, reject escalation, vary Blood Aspect expression, return toward baseline, and oppose the Heart. Do not use for other Beast Blood bearers. |
 | false ascendancy | Kagutsuchi Court's belief that disciplined, specialized, and powerful mutation proves mastery. The elites remain unable to reject Beast Blood. |
 | rupture | Hushiro Gate Village's dominant regional expression: recent corruption, violence, bodily collapse, fragmented community, and desperate faith. |
@@ -35,7 +38,7 @@ last_reviewed: 2026-07-14
 | combat verb | Shared action or behavior used to express natural synergy, such as parry, Counter Cut, posture break, deathblow, dash, flank, Prey, pursuit, or Spirit. |
 | The Order | Akio's religious-military organization. The Shogun predates it. |
 | The Strand | Persistent hub area. |
-| Bloodwell | Strand progression and reformation-presentation station. One word. It is not currently defined as a technical source anchor. |
+| Bloodwell | Strand progression and reformation-presentation station. One word. It is not the source of Returning Blood or a technical anchor. |
 | Blood Mirror | Strand mirror/trial system. Two words. |
 | Blood Moon | Rare event that empowers the Heart and existing Beast Blood while weakening the barrier. |
 | Hushiro Gate Village | Area 1 region name; regional theme is rupture. |
@@ -51,7 +54,7 @@ last_reviewed: 2026-07-14
 | Sovereign Duelist | Eclipse Shogun Phase 1. |
 | Tyrant of the Wellspring | Eclipse Shogun Phase 2 working name. It does not establish `Wellspring` as the approved name of the Heart complex or forbidden extraction process. |
 | Eclipse Revealed | Eclipse Shogun Phase 3 working name and deliberate beast transformation. |
-| source layer / Heart layer | Generic working term for one persistent successful-run damage step against the Heart. Exact form and final name remain open. |
+| Heart Binding ritual | The repeated successful-run sequence: Akio offers Returning Blood through the extraction apparatus, the Heart tries to reclaim it, the rejection breaks one Binding, and the Heart dissolves Akio's current body before he reconstructs at the Strand. |
 | Beast-Bane Whistle | Prosthetic interrupt pulse with stronger anti-beast response. |
 | Thunder Rod | Prosthetic line strike that applies Shock to the first target hit. |
 | Smoke Gourd | Prosthetic target-break smoke field. |
@@ -73,6 +76,9 @@ last_reviewed: 2026-07-14
 ## Deprecated, superseded, or rejected wording
 
 - `ancient source` remains acceptable as a generic descriptive phrase, but use `the Heart` when referring to the approved Beast Blood source.
+- `source layer` and generic `Heart layer` are superseded when referring to the successful-run objective; use `Heart Binding`.
+- Do not describe the extraction apparatus as ancient or built by the unknown creators of the Heart Bindings.
+- Do not add physical channels that continually feed or control the island's Beast Blood bearers. Existing Beast Blood needs no continued supply.
 - `Wellspring` is not approved as the name of the Heart complex, its access architecture, or the forbidden extraction process. Preserve it only in the working phase name `Tyrant of the Wellspring` unless explicitly redefined.
 - Do not describe the human-blood offering used during forbidden extraction as requiring a death or human sacrifice.
 - `Mist Shards` is deprecated draft wording unless a separate denomination is deliberately restored.
