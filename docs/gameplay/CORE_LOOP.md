@@ -4,7 +4,7 @@ title: Core Gameplay Loop
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 topics:
   - core-loop
   - first-attempt
@@ -12,7 +12,7 @@ topics:
   - boat
   - shrine
   - techniques
-  - ancient-source
+  - heart-bindings
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
@@ -44,9 +44,9 @@ The opening should reveal the return through brief gameplay presentation and sub
 6. Build run power through Blood Aspect Tier choices, four active Techniques and one reserve, refinements, prosthetic specialization, Relics, resources, and other temporary rewards.
 7. Fill Corruption through combat accomplishments and choose Resist or Embrace at Shrines.
 8. Route toward previewed rewards that support build growth, survival, economy, or persistent progress.
-9. Die and reform at the Strand, or defeat the Eclipse Shogun and reach the protected ancient source.
-10. On a successful run, damage one persistent source layer before Akio's current body is destroyed or expelled.
-11. Reform at the Strand, lose run-only state, keep permanent progression and campaign damage, and prepare for the next crossing.
+9. Die and reform at the Strand, or defeat the Eclipse Shogun and enter the Heart chamber.
+10. On a successful run, offer Returning Blood through the Shogun-built extraction apparatus. The Heart's failed attempt to reclaim that Blood breaks one ancient Heart Binding and dissolves Akio's current body.
+11. Reform at the Strand, lose run-only state, keep permanent progression and the destroyed Binding, and prepare for the next crossing.
 
 ## Moment-to-moment loop
 
@@ -72,4 +72,4 @@ The player should commonly fill the four active Technique slots across Areas 1 a
 
 Run systems should deepen the sword-combat loop rather than bypass it. A successful build may change timing, mobility, resource use, pressure, prosthetic behavior, or punish options, but Akio should still feel like a swordsman whose survival depends on reading combat correctly.
 
-The exact source-layer count, required successful clears, and true-final completion sequence remain story-design questions rather than locked gameplay values.
+The Heart Binding identity and one-Binding-per-successful-run ritual are locked. The total Binding count, changes after each completion, and true-final completion sequence remain story-design questions rather than locked gameplay values.

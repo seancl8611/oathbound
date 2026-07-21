@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-20
 topics:
   - full-scope
   - asset-counts
@@ -12,6 +12,7 @@ topics:
   - strand
   - techniques
   - the-heart
+  - heart-bindings
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
@@ -19,7 +20,7 @@ related:
 
 # Full Game Scope
 
-This document records the current production-level shape of Oathbound. Exact balance values, frame counts, room counts, Technique and Relic catalog sizes, Heart-layer count, and implementation details remain subject to design lock and playtesting.
+This document records the current production-level shape of Oathbound. Exact balance values, frame counts, room counts, Technique and Relic catalog sizes, Heart Binding count, and implementation details remain subject to design lock and playtesting.
 
 ## Master scope summary
 
@@ -37,7 +38,7 @@ This document records the current production-level shape of Oathbound. Exact bal
 | Miniboss encounters | 6 | Two per main area |
 | Regional major bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
 | True-final Heart encounter | 1 provisional | Confrontation after permanent Shogun defeat; manifestation and asset count remain open |
-| Environment sets | 4 + Heart subset | Strand plus Areas 1–3; protected Heart chamber remains an Area 3/endgame subset until scoped |
+| Environment sets | 4 + Heart subset | Strand plus Areas 1–3; Heart chamber remains an Area 3/endgame subset until scoped |
 | Cross-area room types | 6 | Combat, Shrine, rest, shop, treasure/miniboss, boss |
 | Current currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
@@ -70,8 +71,8 @@ The former Storm, Frost, Ember, Hex, and Shadow stance system is removed. Burn a
 - Reserve swapping occurs only at Technique reward screens and rest rooms.
 - Prosthetic Techniques use normal active slots and may receive one slotless refinement.
 - Relics use a separate slot.
-- Run-only build state resets after death or successful Heart-layer completion.
-- Heart-layer campaign progress persists across all later runs.
+- Run-only build state resets after death or successful Heart Binding completion.
+- Destroyed Heart Bindings and equivalent campaign progress persist across all later runs.
 
 ## Persistent hub — The Strand
 
@@ -158,14 +159,18 @@ Regional boss:
 
 Kagutsuchi Court remains the approved immaculate royal-court setting. Its elites retain intelligence, hierarchy, and advanced mutation but remain unable to reject Beast Blood. Their apparent mastery is false.
 
-Successful-run completion currently adds:
+Successful-run completion adds:
 
-- temporary access beyond the Shogun to the protected Heart,
-- one persistent Heart-layer damage event,
-- forced destruction or expulsion of Akio's current body,
-- successful return and campaign-progress presentation.
+- temporary access beyond the Shogun to the Heart chamber,
+- use of the Shogun-built extraction apparatus with Akio's Returning Blood,
+- one persistent Heart Binding rupture,
+- dissolution of Akio's current body through the Heart's retaliation,
+- successful reconstruction at the Strand,
+- and permanent Binding-progress presentation.
 
-After enough successful completions, the current direction includes permanent Shogun defeat and a true-final Heart encounter. Exact manifestation, mechanics, environment, animation, VFX, UI, and asset count remain open and must be locked before final Milestone 6 quotation.
+The completion sequence is one reusable ritual rather than a unique apparatus, puzzle, or win condition for every Binding. Production may escalate the scene through greater Heart exposure, stronger chamber reactions, and limited state variants.
+
+After enough successful completions, the current direction includes permanent Shogun defeat and a true-final Heart encounter. Exact Binding count, clear-specific changes, final manifestation, mechanics, environment, animation, VFX, UI, and asset count remain open and must be locked before final Milestone 6 quotation.
 
 ## Environment and room structure
 
@@ -176,7 +181,7 @@ Top-level environment sets:
 - Yomori Grove
 - Kagutsuchi Court
 
-Each run area adapts six common room functions: combat, Shrine, rest, shop, treasure/miniboss, and boss. Specialized spaces such as Blood Cavern, Blood Mirror, authored miniboss arenas, the Wellspring, and protected Heart chamber remain subsets of their hub or region.
+Each run area adapts six common room functions: combat, Shrine, rest, shop, treasure/miniboss, and boss. Specialized spaces such as Blood Cavern, Blood Mirror, authored miniboss arenas, the Heart chamber, and the extraction platform remain subsets of their hub or region.
 
 Combat routes support previewed primary rewards. Technique-marked combat rooms use the shared combat-room kit rather than requiring a separate full environment family.
 
@@ -203,7 +208,7 @@ Current reward ownership includes:
 - Gold-based run shops,
 - high-value treasure and miniboss rewards,
 - persistent plus current-run rewards after regional bosses,
-- Heart-layer/results processing after the Eclipse Shogun.
+- Heart Binding and results processing after the Eclipse Shogun.
 
 ## Interface and presentation
 
@@ -222,7 +227,7 @@ Current reward ownership includes:
 - Boat Aspect-selection/run-start screen
 - Blood Mirror trial screen
 - Boss and miniboss presentation
-- Heart-layer completion and persistent campaign-progress presentation
+- Heart Binding completion and persistent campaign-progress presentation
 - Hub progression interfaces
 - Functional room presentation
 - Pause, overview, results, settings, controls, save/loading, credits, and completion presentation
@@ -233,6 +238,6 @@ The current plan uses seven top-level art milestones with independently quoted i
 
 Removing five stance families reduces unique player-system VFX and status-art scope. Technique production instead requires reusable card templates, category and slot icons, reserve/replacement states, refinement markers, and only the bespoke combat VFX needed for approved Technique mechanics.
 
-The provisional Heart encounter adds endgame scope, but its fixed asset count must remain unquoted until its manifestation and encounter design are locked.
+The base Heart Binding ritual is now production-scopable as one reusable completion sequence. The total Binding-state variants and true-final Heart encounter remain unquoted until Questions 11–12 are locked.
 
 See [Production Roadmap](PRODUCTION_ROADMAP.md), [Asset Inventory](../art_production/ASSET_INVENTORY.md), and [Art Milestones](../art_production/milestones/README.md).

@@ -4,7 +4,7 @@ title: World
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-20
 ---
 
 # World
@@ -41,16 +41,20 @@ A deeper region shaped by spirit remnants, predators, lantern rites, roots, mist
 
 The island's court and endgame region. It expresses the surviving authority, wealth, loyalty, hierarchy, and corruption of the Shogun's former kingdom.
 
-The Heart was discovered beneath the Court during the kingdom's prosperous expansion. Royal excavation exposed a sealed passage and an older complex built around part of the Heart. The complex is a restricted structure beneath the established Court setting, not a replacement underground region.
+The Heart was discovered beneath the Court during the kingdom's prosperous expansion. Royal excavation exposed a sealed passage and an older complex built around the imprisoned Heart. The complex is a restricted structure beneath the established Court setting, not a replacement underground region.
 
 ## The ancient Heart complex
 
-The complex surrounding the Heart predates the Shogun's civilization. Its carved seals, ritual channels, restraints, damaged inscriptions, basins, and chambers do not clearly reveal whether its builders worshipped, imprisoned, studied, contained, exploited, or attempted to survive contact with the Heart.
+The complex surrounding the Heart predates the Shogun's civilization. Multiple ancient Heart Bindings kept the Heart dormant, limited its influence, and protected its deeper body. Their builders, age, method, and complete purpose remain unknown.
 
-The Shogun sealed the site and prohibited direct human use before the plague. Its exact access route, playable presentation, relationship to the barrier, and later modifications remain open.
+Other seals, inscriptions, rooms, and ritual markings do not clearly reveal whether the builders worshipped, imprisoned, studied, contained, or attempted to survive contact with the Heart.
 
-The Court eventually learned to activate part of the ancient structure during weaker Heart-pulse windows. Researchers temporarily loosened its restraints and placed a small measure of freshly drawn human blood into a carved channel or basin. No death or human sacrifice was required. The Heart answered by releasing a small quantity of Beast Blood, which had to be collected before the pulse strengthened and the restraints were restored.
+The Shogun sealed the site and prohibited direct human use before the plague. During the plague, he authorized researchers to breach or destroy the outermost Binding, which stirred the Heart and exposed a small portion of living tissue.
 
-The process is dangerous and cannot become routine industrial harvesting. It requires direct entry into the protected chamber and deliberate interference with an ancient containment structure.
+The Court then built its own extraction apparatus against that exposed portion. Researchers placed a small measure of freshly drawn human blood into the apparatus. No death or human sacrifice was required. The offering flowed inward, and the Heart answered by releasing a small quantity of Beast Blood outward into a collection vessel.
 
-The term `Wellspring` is not approved as the name of this complex, its extraction structure, or the process that produces Beast Blood. It remains only in the working Eclipse Shogun phase name `Tyrant of the Wellspring` unless deliberately redefined later.
+The process is dangerous and cannot become routine industrial harvesting. It requires direct entry into the Heart chamber and deliberate contact with the awakened source.
+
+The remaining Bindings continue to restrain the Heart. Destroying them strengthens its influence but does not create a physical channel or continued Blood supply to the island's bearers.
+
+The term `Wellspring` is not approved as the name of this complex, its extraction apparatus, or the process that produces Beast Blood. It remains only in the working Eclipse Shogun phase name `Tyrant of the Wellspring` unless deliberately redefined later.

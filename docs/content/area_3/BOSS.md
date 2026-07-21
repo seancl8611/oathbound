@@ -4,12 +4,13 @@ title: The Eclipse Shogun — Boss Encounter
 category: content
 status: draft
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-20
 topics:
   - area-3
   - eclipse-shogun
   - regional-boss
-  - ancient-source
+  - the-heart
+  - heart-bindings
   - three-phase
 related:
   - LORE-ECLIPSE-SHOGUN
@@ -25,7 +26,7 @@ related:
 
 Principal boss of Kagutsuchi Court and the central character antagonist of Oathbound.
 
-Defeating him completes the combat route through the three regions and temporarily opens the path to the protected ancient source. He is not the original source or the final supernatural threat.
+Defeating him completes the combat route through the three regions and temporarily opens the path to the Heart chamber and its next intact Binding. He is not the original source or the final supernatural threat.
 
 ## One-sentence fantasy
 
@@ -33,7 +34,7 @@ A successful ruler who used forbidden Blood as a last resort to save his plague-
 
 ## Lore context
 
-The Shogun originally restricted the exploitation of Beast Blood. He permitted its use when plague pushed his civilization toward extinction, then continued and expanded it after the cure appeared successful and the delayed corruption spread through the population.
+The Shogun originally restricted the exploitation of Beast Blood. He permitted his researchers to breach the outermost ancient Heart Binding and build an extraction apparatus when plague pushed his civilization toward extinction, then continued and expanded Beast Blood use after the cure appeared successful and the delayed corruption spread through the population.
 
 Long-term Beast Blood magnified his determination, authority, pride, and fear of extinction. He now sees the Blood as evolution rather than a curse and intends to end the island's containment, extend his kingdom to the mainland, and force his salvation upon those who resist.
 
@@ -62,7 +63,7 @@ The Shogun fights as a composed ruler and exceptional combatant. This phase emph
 
 ### Phase 2 — Tyrant of the Wellspring
 
-The Shogun openly draws on source-derived Beast Blood. Arena control, blood-force, ritual techniques, or controlled area denial enter the fight. He remains calculating while revealing how extensively he has used the forbidden power.
+The Shogun openly draws on Beast Blood. Arena control, blood-force, ritual techniques, or controlled area denial enter the fight. He remains calculating while revealing how extensively he has used the forbidden power.
 
 ### Phase 3 — Eclipse Revealed
 
@@ -84,7 +85,7 @@ The existing black-lacquer armor, mask, crescent polearm, and sword-saint emphas
 
 ## Silhouette escalation
 
-Phase 1 should be upright, composed, and unmistakably sovereign. Phase 2 exposes stronger source influence and a less restrained combat posture. Phase 3 becomes more predatory and inhuman while preserving facial, costume, weapon, or movement continuity.
+Phase 1 should be upright, composed, and unmistakably sovereign. Phase 2 exposes stronger Heart influence and a less restrained combat posture. Phase 3 becomes more predatory and inhuman while preserving facial, costume, weapon, or movement continuity.
 
 ## Working animation list
 
@@ -96,18 +97,19 @@ Names, weapon assumptions, and unique actions must be revised after the final ru
 
 ## Arena and VFX dependencies
 
-The fight takes place in the Shogun's throne-space or ritual sanctum near the route to the protected source.
+The fight takes place in the Shogun's throne-space or ritual sanctum near the route to the Heart chamber.
 
 - Phase 1 remains relatively clean and duel-readable.
-- Phase 2 introduces source-derived blood patterns and controlled danger zones.
+- Phase 2 introduces Beast Blood patterns and controlled danger zones.
 - Phase 3 transforms the arena around the Shogun's chosen beast form.
 - Final defeat must clearly open the route beyond him rather than appearing to complete the entire campaign.
+- The transition beyond the arena leads to the reusable extraction-apparatus and Heart Binding sequence; it does not require a separate unique completion system for each successful clear.
 
 ## Technical notes
 
 Each phase tests a different layer of mastery without losing visual or mechanical coherence. Transitions must communicate deliberate escalation and retained cunning.
 
-The Shogun must remain narratively important even when the ancient source becomes the true-final encounter. His responsibility comes from choosing, expanding, defending, and weaponizing Beast Blood through his plan of forced salvation.
+The Shogun must remain narratively important even when the Heart becomes the true-final encounter. His responsibility comes from choosing, expanding, defending, and weaponizing Beast Blood through his plan of forced salvation.
 
 ## Narrative boundary
 
@@ -116,9 +118,11 @@ Approved:
 - the Shogun is the Area 3 principal boss,
 - the encounter has three escalating phases,
 - the final phase is a deliberate beast transformation,
-- defeating him opens access to the deeper source,
+- defeating him opens access to the Heart chamber and one Binding completion,
 - his present goal is mainland conquest through forced Beast Blood salvation,
 - and his repeated relationship with Akio progresses through dismissal, fascination, recruitment, and fear or hatred.
+
+The post-boss handoff is locked at foundation level: Akio uses the Court's extraction apparatus to offer Returning Blood, one ancient Heart Binding breaks, the Heart dissolves his current body, and he reconstructs at the Strand.
 
 Still open:
 
@@ -127,4 +131,4 @@ Still open:
 - the method and timing of the barrier threat,
 - reconstruction between successful runs,
 - permanent defeat version,
-- transition from Shogun defeat to source-layer completion.
+- total Heart Binding count and clear-specific changes.

@@ -4,7 +4,7 @@ title: Cross-Area Room Types
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-20
 topics:
   - rooms
   - combat-room
@@ -13,7 +13,7 @@ topics:
   - shop-room
   - miniboss-room
   - boss-room
-  - source-completion
+  - heart-binding-completion
   - reward-preview
 related:
   - CONTENT-AREA1-OVERVIEW
@@ -28,7 +28,7 @@ related:
 
 Every common room type has a stable gameplay function and at-a-glance visual identity across all three areas. Regional skins change materials, architecture, and atmosphere without changing the functional read.
 
-The protected source-completion space after the Shogun is a specialized endgame space rather than a seventh common room family.
+The Heart Binding completion space after the Shogun is a specialized endgame space rather than a seventh common room family.
 
 ## Function and reward relationship
 
@@ -128,7 +128,7 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 
 **Function:** the area's culminating boss encounter.
 
-**Reward behavior:** regional bosses that lead into another area provide persistent progression, a major current-run reward, and approved transition recovery. Defeating the Eclipse Shogun instead opens temporary access to the protected ancient source and the successful-run completion step.
+**Reward behavior:** regional bosses that lead into another area provide persistent progression, a major current-run reward, and approved transition recovery. Defeating the Eclipse Shogun instead opens temporary access to the Heart chamber and the successful-run Binding ritual.
 
 **Shared read:** largest and most thematically saturated authored space in the region, designed first around boss mechanics and only then dressed outward.
 
@@ -136,19 +136,19 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 
 - **Hushiro:** old stone gate and threshold where the village ends.
 - **Yomori:** root-tangled, spirit-saturated heart of the grove.
-- **Kagutsuchi:** royal throne-space or ritual sanctum guarding the route to the source.
+- **Kagutsuchi:** royal throne-space or ritual sanctum guarding the route to the Heart chamber.
 
 **Production rules:** perimeter art and ambient particles never compete with the boss silhouette or attack telegraphs. The arena may evolve during phase changes, but geometry, hazard boundaries, and safe space stay readable. Each boss room receives a dedicated environment brief rather than relying only on generic room-type art.
 
-## Protected Source Completion Space
+## Heart Binding Completion Space
 
 **Function:** specialized successful-run space reached after defeating the Eclipse Shogun.
 
-**Current behavior:** Akio reaches the ancient source or its protected inner chamber, damages one persistent layer, and is destroyed or expelled before Returning Blood reforms him at the Strand.
+**Current behavior:** Akio reaches the Heart chamber, uses the Shogun-built extraction apparatus to offer Returning Blood, breaks one ancient Heart Binding through the Heart's rejection response, is dissolved into blood by the retaliation, and reconstructs at the Strand.
 
-**Shared read:** unmistakably deeper and older than the Shogun's court. It should communicate that the ruler guarded or exploited a power he did not create.
+**Shared read:** unmistakably deeper and older than the Shogun's court. The ancient Binding architecture and the later Court-built extraction apparatus must read as distinct layers of history. The space should communicate that the Shogun exploited a power and prison his civilization did not create.
 
-**Production rules:** do not finalize anatomy, source form, layer count, or true-final arena before the story and encounter are locked. Repeated completion must support persistent visual or UI state without requiring an entirely new environment for every successful clear unless later approved.
+**Production rules:** reuse the same apparatus and core completion sequence across successful clears. Escalate through additional Heart exposure, stronger chamber reactions, damaged Binding states, and limited visual variants rather than an entirely new mechanism, puzzle, or environment for every completion. Do not finalize total Binding count, exact state-variant count, final Heart anatomy, or true-final arena before Questions 11–12 are locked.
 
 ## Identification standard
 

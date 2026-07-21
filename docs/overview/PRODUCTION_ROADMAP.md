@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-20
 ---
 
 # Production Roadmap
@@ -43,9 +43,11 @@ Produce Yomori Grove, its full enemy and boss roster, regional hazards, rooms, V
 
 ## Milestone 6 — Complete Area 3 and endgame
 
-Produce Kagutsuchi Court, its roster, major encounters, Eclipse Shogun, protected source approach, repeated source-layer completion presentation, ending-space art, and endgame integration.
+Produce Kagutsuchi Court, its roster, major encounters, Eclipse Shogun, Heart chamber approach, the Court-built extraction apparatus, one reusable Heart Binding completion sequence, ending-space art, and endgame integration.
 
-The current story direction also includes a true-final ancient-source confrontation after the Shogun's permanent defeat. Its exact character, environment, animation, VFX, and UI scope must remain provisional until the story spine and encounter are locked.
+The completion package uses the same core ritual after each successful run: Returning Blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. It does not require a different mechanism, puzzle, or bespoke win sequence for every Binding.
+
+The exact Binding count and clear-specific state variants remain provisional until Question 11 is locked. The true-final Heart confrontation after the Shogun's permanent defeat also remains provisional until its encounter and ending are locked.
 
 ## Milestone 7 — Release presentation and final cohesion
 
@@ -58,7 +60,9 @@ Complete front-end UI, narrative presentation, achievements/store art, missing-a
 - Base regional kits precede room variants; final arenas follow confirmed combat footprints.
 - Reusable Technique card, slot, reserve, refinement, and category language may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke combat effects require a locked catalog entry before final quotation.
-- The true-final source encounter cannot receive a fixed quote until its identity, phases, asset reuse, and arena needs are approved.
+- The base Heart Binding ritual may be scoped as one reusable package.
+- Exact Binding-state variant counts cannot receive a fixed quote until the campaign clear count and per-clear changes are approved.
+- The true-final Heart encounter cannot receive a fixed quote until its identity, phases, asset reuse, and arena needs are approved.
 - Each milestone is divided into separately quoted, payable, reviewable batches.
 - Every batch receives sheet-level and in-engine review.
 - Contractor-facing Word/PDF documents are exports; Markdown remains the internal source of truth.

@@ -4,13 +4,15 @@ title: Beast Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 topics:
   - beast-blood
   - the-heart
   - corruption
   - transformation
   - inherited-beast-blood
+  - heart-bindings
+  - extraction
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -32,45 +34,74 @@ Beast Blood is a rare supernatural power drawn from the Heart, an ancient living
 - Beast Blood becomes naturally more powerful during the Blood Moon.
 - Once active in a bearer, Beast Blood does not require repeated doses or continued supply from the Heart.
 
-## Discovery of the Heart
+## Discovery of the imprisoned Heart
 
 The Heart was not transported to the island by the Shogun's civilization. It was already buried beneath or within the land.
 
-Royal excavation during the expansion of Kagutsuchi Court exposed a sealed passage into an ancient complex built around the Heart. The first explorers encountered only part of the immense living mass, embedded in stone and connected to blackened vessels extending into the island.
+Royal excavation during the expansion of Kagutsuchi Court exposed a sealed passage into an ancient complex built around the Heart. The first explorers encountered only part of the immense living mass, embedded in stone and enclosed by layered restraints, seals, and unknown materials.
 
-The surrounding complex contained carved seals, ritual channels, restraints, damaged inscriptions, and chambers whose original purposes could not be established. The structure may have been a shrine, prison, research site, containment system, harvesting facility, or a combination that changed over time.
+These ancient **Heart Bindings** kept the Heart dormant, limited its influence, and protected its deeper body. The Shogun's civilization did not create them. Their builders, age, method, and complete purpose remain unknown.
+
+The surrounding complex also contained damaged inscriptions, ritual markings, operating spaces, and structures whose original functions could not be established. It may have been a prison, shrine, containment site, research complex, or a combination that changed over time.
 
 The Shogun ordered the discovery sealed, prohibited direct human use, and limited study to trusted royal engineers, scholars, physicians, ritual specialists, guards, and retainers. The Heart remained under restricted study until a deadly plague pushed the island's civilization toward extinction and the Shogun authorized its first controlled human use.
 
-Beast Blood genuinely cured the plague and initially appeared miraculous. Its corruption emerged late enough that use spread through the endangered population before the consequences were understood. By the time transformation and loss of independence became undeniable, the kingdom had become dependent on the Blood for survival, strength, and continued rule.
-
 Whether the original collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains deliberately unresolved.
 
-## Forbidden extraction
+## The first breached Binding
 
-Usable Beast Blood comes directly from the Heart, but it cannot be obtained by simply cutting into exposed tissue or draining an accessible vessel.
+The intact Heart Bindings prevented the Court from reaching living Heart tissue or obtaining usable Beast Blood.
 
-The ancient complex contains a sealed extraction structure built around part of the Heart. Its carved channels, restraints, basins, and mechanisms can be deliberately activated to make the Heart release a small quantity of Beast Blood. The Court never determines whether the original builders created the structure to harvest, worship, study, contain, or survive contact with the Heart.
+During the plague, the Shogun authorized his researchers to breach the prison. They destroyed or opened the outermost Heart Binding and exposed a small part of the Heart.
 
-Extraction can be attempted only during controlled windows when the Heart's pulse becomes slower and less forceful. Researchers enter the inner chamber, temporarily alter or loosen part of the ancient restraint system, and place a small measure of freshly drawn human blood into one of the carved channels or basins. This offering does not require a death or human sacrifice.
+This was the first irreversible violation of the ancient containment system. The breach stirred the Heart from deep dormancy, strengthened its pulse and influence, and made extraction possible without fully releasing it.
 
-The Heart responds. Its pulse changes, the surrounding channels fill, and dark Beast Blood emerges into a collection basin. The Blood is not taken from a permanently accessible vein. It is produced or released only after the Heart has been deliberately disturbed through the ancient process.
+Beast Blood genuinely cured the plague and initially appeared miraculous. Its corruption emerged late enough that use spread through the endangered population before the consequences were understood. By the time transformation and loss of independence became undeniable, the kingdom had become dependent on the Blood for survival, strength, and continued rule.
 
-The act resembles a forbidden exchange: human blood is offered, the Heart releases a portion of its own power, and the person who later takes that power becomes vulnerable to the Heart's influence. The Heart does not need to speak or consciously negotiate. Its response may arise from instinct, ancient supernatural law, or the unknown mechanism created around it.
+## Shogun-built extraction apparatus
 
-The result nevertheless carries the meaning of a devil's bargain. Healing, strength, and survival are received by accepting a power that will eventually attempt to transform the bearer and erode genuine independence.
+Usable Beast Blood comes directly from the Heart, but it cannot be obtained by simply cutting exposed tissue or draining a visible vessel.
+
+After breaching the first Binding, the Shogun's engineers, physicians, and ritual specialists constructed an extraction apparatus against the exposed portion of the Heart. The apparatus is a later Court invention and is separate from the ancient Binding system.
+
+Its exact production design may remain simple, but its required functions are:
+
+- receive a small measure of freshly drawn human blood,
+- carry that offering inward to the exposed Heart,
+- receive the Beast Blood released in response,
+- and collect it in a sealed vessel or basin.
+
+The offering does not require a death or human sacrifice.
+
+The process follows a clear supernatural exchange:
+
+> Human blood flows inward. The Heart releases Beast Blood outward.
+
+The Heart's pulse changes when the offering reaches it, and a small amount of dark Beast Blood returns through the apparatus. The Blood is produced or released only after the Heart is deliberately disturbed.
+
+The Court never determines why human blood causes this response. The Heart may consume the offering, react through instinct, follow an unknown supernatural law, or attempt to incorporate the life introduced into it.
 
 ## Extraction danger and access boundary
 
-The Heart does not remain passive during extraction. As Beast Blood is released, its pulse strengthens, the chamber reacts, and organic growth presses against the ancient restraints. Researchers must collect the Blood and restore the seals before the controlled window closes.
+The Heart does not remain passive during extraction. Its pulse strengthens, its influence fills the chamber, and living tissue presses against the remaining Bindings.
 
-If the process is mistimed or prolonged, too much Blood may enter the channels, Heart tissue may grow through the extraction structure, the chamber may begin to close around those inside, or the released Blood may overwhelm anyone exposed to it.
+Researchers must collect the Blood and end the process before the Heart's reaction becomes uncontrollable. If extraction is mistimed or prolonged, the released Blood may overwhelm those present, Heart tissue may invade the apparatus, or the chamber may begin closing around them.
 
-This prevents extraction from becoming safe, casual, or industrial. Every attempt requires entering the Heart's chamber, interfering with an ancient containment system, and risking direct contact with the source of the curse. New extracted Beast Blood can be obtained only by returning to the Heart and repeating this forbidden process.
+This prevents extraction from becoming safe, casual, or industrial. Every attempt requires entering the Heart chamber, disturbing the awakened source, and risking direct exposure to the curse.
 
 Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, wounds, contaminated soil, roots, water, prey, damaged vegetation, or merely dying on the island do not transmit Beast Blood or create new bearers.
 
 This rarity is essential. The danger is not a conventional outbreak; it is the possibility that people will exploit, transport, weaponize, worship, or distribute a forbidden power.
+
+## Heart Bindings and awakening
+
+The remaining Heart Bindings still restrain the Heart and shield its deeper body.
+
+Destroying a Binding permanently removes one part of that ancient prison. The Heart can regenerate living tissue, but it did not create the Bindings and cannot rebuild their materials, seals, or containment function.
+
+As more Bindings are destroyed, the Heart becomes more awake and its supernatural influence strengthens. Existing Beast Blood reacts more intensely, the Blood Moon may become more severe, and Akio experiences greater pressure and temptation from the curse.
+
+This influence does not require physical channels or a constant supply of Beast Blood to every bearer. Existing Blood remains part of each bearer and responds more strongly as the Heart's imprisonment weakens.
 
 ## Akio's inherited exception
 
@@ -131,7 +162,7 @@ Conflicting evidence may suggest that:
 
 No single explanation is currently canon.
 
-The Heart is alive, but not in an ordinary human sense. It exists somewhere between dormancy, injury, imprisonment, and awakening. Human exploitation and repeated Beast Blood use have increased its activity, while the Blood Moon further stimulates the Heart and Blood connected to it.
+The Heart is alive, but not in an ordinary human sense. It exists somewhere between dormancy, injury, imprisonment, and awakening. The first breached Binding, human exploitation, repeated Beast Blood extraction, and the Blood Moon have increased its activity.
 
 The Heart possesses primal agency rather than a human personality. It does not require dialogue, a political plan, direct selection of Akio, or automatic control over everyone who dies on the island. Its nature expresses survival, regeneration, growth, continuation, resistance to restraint, and incorporation of other life.
 
@@ -150,6 +181,8 @@ Returning Blood is not a separate original substance. It is the awakened inherit
 Akio's lineage explains why this manifestation is possible. His resolve does not create Returning Blood; it allows him to develop genuine sovereignty over the awakened power afterward.
 
 Other bearers may retain humanity, intelligence, or technical use of mutations, but Akio is the only known bearer with genuine control. He remains capable of resisting escalation, expressing different Blood Aspects, returning toward a controlled baseline, and opposing the Heart itself.
+
+After a Shogun victory, Akio can place Returning Blood into the Court's extraction apparatus. The Heart attempts to reclaim that Blood, but Akio's controlled Blood rejects its authority. The resulting pulse destroys one remaining Heart Binding before the Heart retaliates and dissolves Akio's current body.
 
 ## Visual discipline
 
