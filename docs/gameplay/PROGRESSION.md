@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-20
 topics:
   - progression
   - persistence
@@ -14,7 +14,7 @@ topics:
   - trials
   - currencies
   - techniques
-  - source-layers
+  - heart-bindings
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
@@ -46,7 +46,7 @@ Temporary power assembled during an attempt may include:
 - temporary consumables or materials,
 - run-specific modifications and encounter rewards.
 
-These states are burned away on failed death-return or successful source-layer return unless a later system explicitly reclassifies them.
+These states are burned away on failed death-return or successful Heart Binding return unless a later system explicitly reclassifies them.
 
 ## Run-build ownership
 
@@ -71,15 +71,18 @@ The Strand supports growth that survives return:
 
 ## Persistent campaign progression
 
-Successful runs additionally preserve damage dealt to the ancient source or its equivalent campaign-layer state.
+Successful runs preserve destroyed Heart Bindings.
 
-The exact representation remains open, but it must:
+Each successful clear:
 
-- survive all later deaths and successful returns,
-- visibly advance the story,
-- unlock appropriate NPC, codex, environment, or encounter changes,
-- lead eventually to the Shogun's permanent defeat and the true-final source confrontation,
-- remain separate from ordinary currencies and character-upgrade ranks.
+- destroys one ancient Binding through the Returning Blood ritual,
+- survives all later deaths and successful returns,
+- visibly exposes more of the Heart,
+- unlocks appropriate NPC, codex, environment, encounter, or world-state changes,
+- moves the campaign toward the Shogun's permanent defeat and the true-final Heart confrontation,
+- and remains separate from ordinary currencies and character-upgrade ranks.
+
+The total Binding count and exact changes after each completion remain open, but the identity and persistence model are locked.
 
 ## Currency ownership
 
@@ -135,10 +138,10 @@ Appropriate persistent rewards include:
 
 Both failed and successful runs reconstruct Akio at the Strand through Returning Blood. A successful return additionally:
 
-1. saves permanent boss, source-layer, currency, discovery, and unlock rewards,
+1. saves permanent boss, destroyed-Binding, currency, discovery, and unlock rewards,
 2. clears run-only state,
 3. presents a results summary,
-4. triggers relevant NPC, codex, Blood Mirror, source-state, or hub updates.
+4. triggers relevant NPC, codex, Blood Mirror, Heart-state, or hub updates.
 
 The results flow must distinguish retained rewards and campaign progress from states burned away during reformation.
 
@@ -153,14 +156,14 @@ The results flow must distinguish retained rewards and campaign progress from st
 - Every persistent interface shows costs, prerequisites, ownership, and purchased/maxed states clearly.
 - Trial rewards remain deterministic enough that players understand success and failure.
 - Gold cannot appear as a persistent Strand wallet unless its persistence rule is deliberately changed in the same update.
-- Source-layer campaign progress is not purchasable and cannot be lost.
+- Destroyed Heart Binding progress is not purchasable and cannot be lost.
 
 ## Current persistence matrix
 
 | Category | Persists after death | Persists after completed run | Status |
 |---|---:|---:|---|
 | Narrative discoveries and codex progress | Yes | Yes | approved |
-| Persistent source-layer campaign progress | Yes | Yes | approved direction; exact structure open |
+| Destroyed Heart Binding campaign progress | Yes | Yes | approved; exact count and clear-specific changes open |
 | Permanent upgrades | Yes | Yes | approved |
 | Unlocked Blood Aspects | Yes | Yes | approved |
 | Selected Aspect as loadout option | Yes | Yes | approved |
