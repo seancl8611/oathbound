@@ -15,7 +15,8 @@ topics:
   - three-areas
   - the-heart
   - heart-bindings
-  - campaign-clears
+  - true-final-heart
+  - postgame
 related:
   - OVERVIEW-DESIGN-PILLARS
   - GAMEPLAY-COMBAT
@@ -34,7 +35,7 @@ The player controls Akio, a warrior of the Order sent through a containment barr
 
 The Heart's ultimate origin remains deliberately ambiguous. It possesses primal agency centered on survival, regeneration, growth, continuation, resistance to restraint, and incorporation rather than a human personality or clearly explained plan.
 
-The Heart was already dormant and imprisoned beneath the island by seven layered ancient Heart Bindings created by an unknown power. The Shogun's civilization breached the outermost Binding during the plague and built its own extraction apparatus against the exposed Heart. Human blood was offered inward, and the Heart released Beast Blood outward.
+The Heart was already dormant and imprisoned beneath the island by layered ancient Heart Bindings created by an unknown power. The Shogun's civilization breached the outermost Binding during the plague and built its own extraction apparatus against the exposed Heart. Human blood was offered inward, and the Heart released Beast Blood outward.
 
 The Blood Moon is the visible result of a recurring active cycle within the Heart. During it, existing Beast Blood becomes stronger and the containment barrier comes under pressure. The Order-created Strand threshold, the Keeper, and a sealed Boat provide the controlled route Akio uses to enter the island.
 
@@ -86,9 +87,10 @@ Across a standard run, the player grows from the complete base sword kit into a 
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
 - Keeper-maintained Boat crossing through the Strand's controlled barrier threshold
 - Failed runs return Akio to the Strand through Returning Blood reconstruction
-- Successful Binding runs defeat the Shogun, use the Court's extraction apparatus to break one ancient Heart Binding with Returning Blood, dissolve Akio's current body, and reconstruct him at the Strand with permanent rewards and Binding progress intact
-- Six intact Bindings remain when the campaign begins; six successful Binding clears are required
-- The next successful full run is the seventh and final campaign run, leading from the Shogun's permanent defeat into the true-final Heart encounter
+- The first six successful clears defeat the Shogun, use the Court's extraction apparatus to break one ancient Heart Binding with Returning Blood, dissolve Akio's current body, and reconstruct him at the Strand with permanent rewards and Binding progress intact
+- The seventh successful story run defeats the Shogun's current body and continues into the unlocked two-phase true-final Heart encounter
+- Destroying the Heart ends the curse, stops the Shogun's reconstruction, kills the corrupted population as their sustained bodies fail, ends Returning Blood, and makes Akio mortal
+- Completed saves retain repeatable normal runs and optional access to the Heart route without further story progression
 
 ## Run-build philosophy
 
@@ -106,6 +108,8 @@ Combat uses Sekiro-inspired posture, parry, counter, and deathblow fundamentals.
 
 A single error should matter without routinely ending an otherwise viable standard run instantly.
 
+The true-final Heart is conceptually a large nonhuman beast encounter rather than another swordsman duel. Its first phase is the freed mobile Heart with malformed limbs; its second phase is an enormous defensive vessel formed around the Heart. Exact attacks and mechanics remain future encounter-design work, and the fight does not add a weak-point subsystem.
+
 ## World structure
 
 - **The Strand:** persistent shoreline hub, barrier threshold, and preparation point
@@ -114,11 +118,14 @@ A single error should matter without routinely ending an otherwise viable standa
 - **Area 2 — Yomori Grove / Adaptation:** long-term predation, true spirits persisting as incomplete remnants, and ecological devastation surrounding corrupted inhabitants
 - **Area 3 — Kagutsuchi Court / False Ascendancy:** courtly beauty, hierarchy, elite mutation, and the mistaken belief that Beast Blood has been mastered
 - **Run climax:** the Eclipse Shogun followed by the reusable Heart Binding ritual during the first six successful clears
-- **Final campaign run:** the seventh successful full run permanently defeats the Shogun and continues into the exposed Heart
+- **Final story run:** the seventh successful full run defeats the Shogun's current body and continues into the two-phase true-final Heart encounter
+- **Postgame:** normal runs and the Heart route remain repeatable for gameplay challenge, but repeat Heart victories do not advance or alter the completed story
 
-The Heart's identity, discovery, ancient imprisonment, Shogun-built extraction process, Blood Moon relationship, barrier origin, Returning Blood origin, Heart Binding identity, one-Binding-per-run ritual, persistent damage rule, forced-return cause, seven-original/six-remaining Binding count, six-clear requirement, and seventh final-run structure are locked.
+The Heart's identity, discovery, ancient imprisonment, Shogun-built extraction process, Blood Moon relationship, barrier origin, Returning Blood origin, Heart Binding identity, one-Binding-per-run ritual, persistent damage rule, forced-return cause, seven-original/six-remaining Binding count, six-clear requirement, seventh final-story run, two-phase Heart concept, ending consequences, and repeatable non-progressing postgame route are locked.
 
-Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Binding-progress presentation, and concise narrative updates. The base scope does not require island-wide state modifiers or rebuilt regional environment sets after each clear. The final Heart manifestation, true-final encounter, ending, and postgame remain open.
+Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Binding-progress presentation, and concise narrative updates. The base scope does not require island-wide state modifiers or rebuilt regional environment sets after each clear.
+
+Future postgame difficulty settings, run modifiers, enemy or room variants, challenge restrictions, and special Heart-route rewards remain possible later expansion material and are not included in the initial game scope.
 
 ## Structural references
 
