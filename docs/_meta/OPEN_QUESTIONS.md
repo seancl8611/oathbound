@@ -4,7 +4,7 @@ title: Open Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 ---
 
 # Open Questions
@@ -155,7 +155,7 @@ What are the final Relic and consumable counts, effects, rarity weights, drop ta
 
 # Story-spine design lock questions
 
-These questions are resolved in dependency order before the complete story spine, clear count, ending, and final Milestone 6 scope are locked.
+These questions are resolved in dependency order before the complete story spine, ending, and final Milestone 6 scope are locked.
 
 ## 1. Ancient source identity and agency
 
@@ -342,13 +342,30 @@ Destroying Bindings both exposes the Heart's vulnerable body and releases more o
 
 ## 11. Campaign clear count and changes after each clear
 
-**Question**
+**Resolution**
 
-How many successful Heart Binding completions are required before the Shogun can be permanently defeated and the true-final Heart encounter begins? What changes after each clear?
+The Heart's ancient prison originally contained seven Heart Bindings. The Shogun's researchers destroyed the outermost Binding before the game, leaving six intact Bindings when Akio begins the campaign.
 
-**Locked boundary:** no clear count is approved. Six remains only a prior candidate. Each clear destroys one Binding, exposes more of the Heart, strengthens its influence, dissolves Akio's current body, and returns him to the Strand.
+Akio must complete six successful Binding runs. Each successful run defeats the Shogun, destroys one remaining Binding through the reusable Returning Blood ritual, dissolves Akio's current body, and reconstructs him at the Strand. Failed runs do not advance the count.
 
-**Status:** open; Question 10 satisfied
+After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final campaign run. No Binding remains, so Akio does not repeat the extraction ritual or suffer its automatic dissolution. He can make the Shogun's defeat permanent and continue into the true-final Heart encounter.
+
+The six-clear requirement is a roguelite mastery objective supported by alternate Blood Aspects, Techniques, prosthetics, Relics, routes, rewards, permanent progression, and player execution. The six clears are not six unique story missions.
+
+Mandatory clear-to-clear production remains concentrated in:
+
+- one historical broken outer Binding,
+- six removable or destroyed Binding states around the same Heart chamber,
+- progressively greater Heart exposure and stronger room-local pulse, movement, sound, and reaction,
+- a fully exposed Heart state,
+- clear Binding-progress presentation,
+- and concise Shogun, NPC, results, or codex updates where appropriate.
+
+The base scope does not require island-wide visual transformations, universal enemy modifiers, new regional environment sets, new enemy families, or entirely different Shogun fights after every clear. Those remain optional future expansion ideas.
+
+**Still open within this structure:** exact clear rewards, dialogue allocation, whether the Shogun receives limited clear-state variations, his reconstruction presentation, and the exact permanent-death method.
+
+**Status:** resolved at campaign-count, roguelite-progression, and production-boundary level
 
 ## 12. True-final Heart encounter, ending, and postgame
 
@@ -358,9 +375,9 @@ What happens after the Shogun's permanent defeat, what form does the Heart confr
 
 Establish the Heart encounter, final vulnerability, fate of the Shogun and island, Akio's final condition, credits trigger, and postgame explanation.
 
-**Locked boundary:** the Shogun remains the central character antagonist. The Heart is the deeper supernatural threat and intended true-final encounter.
+**Locked boundary:** the Shogun remains the central character antagonist. The Heart is the deeper supernatural threat and intended true-final encounter. The confrontation occurs on the seventh successful full run after six Binding clears.
 
-**Status:** open; final story-spine dependency
+**Status:** open; next and final story-spine dependency
 
 ## 13. Eclipse Shogun final character and production identity
 
@@ -368,7 +385,7 @@ Establish the Heart encounter, final vulnerability, fate of the Shogun and islan
 
 What final body type, costume, weapon, movement language, and beast transformation distinguish the Shogun from the game's other samurai bosses?
 
-**Current direction:** a regal, cunning, potentially lightly armored ruler may fit better than another heavily armored warrior. His transformation represents false ascendancy rather than genuine control.
+**Current direction:** use Kokushibo from _Demon Slayer_ as a high-level reference for composed aristocratic menace, severe discipline, restrained speech, overwhelming swordmaster presence, and controlled inhuman escalation. The Eclipse Shogun must remain an original design and must not copy Kokushibo's distinctive eyes, anatomy, costume, sword, moon motifs, effects, silhouette, or exact mannerisms.
 
 **Locked boundary:** the three phases remain Sovereign Duelist, Tyrant of the Wellspring, and Eclipse Revealed. Existing armor, mask, polearm, and animation concepts remain reopened.
 
