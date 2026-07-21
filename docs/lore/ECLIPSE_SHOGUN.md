@@ -13,8 +13,10 @@ topics:
   - royal-bloodline
   - final-boss
   - heart-bindings
+  - true-final-heart
 related:
   - CONTENT-AREA3-BOSS
+  - CONTENT-AREA3-TRUE-FINAL-HEART
   - LORE-BEAST-BLOOD
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -124,7 +126,9 @@ The Heart possesses primal agency centered on survival, growth, regeneration, co
 
 Over time, the Shogun's desires have changed until everything he sincerely wants also advances the Heart's nature. His plans protect the Heart, preserve Beast Blood, spread its influence, and incorporate new life while still feeling entirely like his own choices.
 
-The remaining Heart Bindings continue to restrain the Heart. Destroying them weakens its protection but also releases more of its influence. The Shogun does not require a physical channel or continuing supply from the Heart to remain a bearer.
+The remaining Heart Bindings restrain the Heart. Destroying them weakens its protection but also releases more of its influence. The Shogun does not require a physical channel, renewed dose, or continuous transfer from the Heart to use Beast Blood or reconstruct while the Heart remains alive.
+
+The Heart is nevertheless the source sustaining Beast Blood as an active supernatural curse. When Akio destroys it, the Shogun's reconstruction stops, the Blood's influence releases him, and his unnaturally sustained body dies permanently.
 
 The Shogun must remain the central character antagonist even though the Heart becomes the true-final supernatural threat. His corruption explains his changing beliefs but does not erase his responsibility.
 
@@ -141,7 +145,7 @@ Their relationship develops across repeated encounters:
 3. **Recognition and recruitment** — The Shogun realizes Akio descends from the child who escaped before containment. He attempts to claim Akio as his heir, champion, general, and proof that the royal bloodline has produced a superior bearer.
 4. **Fear and hatred** — Akio refuses the claimed inheritance, repeatedly defeats the Shogun, and attacks the Heart. He proves that bloodline and Beast Blood do not require loyalty to either of them.
 
-The six Binding clears provide enough repeated confrontations to distribute this relationship gradually. Dismissal dominates before the first clear; fascination can develop across early clears; recognition and recruitment can occupy the middle clears; fear and hatred can dominate the final Binding clears and final campaign run. Exact dialogue allocation remains future narrative work.
+The six Binding clears provide enough repeated confrontations to distribute this relationship gradually. Dismissal dominates before the first clear; fascination can develop across early clears; recognition and recruitment can occupy the middle clears; fear and hatred can dominate the final Binding clears and final story run. Exact dialogue allocation remains future narrative work.
 
 The Shogun's offer is sincere within his corrupted worldview, but it is possessive rather than loving or equal. He treats Akio's ancestry as another basis for ownership and wants to place him inside the Shogun's vision of conquest and salvation.
 
@@ -175,7 +179,11 @@ Akio then uses the Court's extraction apparatus to offer Returning Blood. The He
 
 The Shogun must reconstruct between those six successful Binding clears so that he remains the repeated run climax. His existing Beast Blood is sufficient for reconstruction and does not require a physical channel or renewed dose, but the exact reconstruction process, duration, visual presentation, and vulnerability remain unresolved.
 
-After Akio destroys the sixth remaining Binding, the next successful full run is the seventh and final campaign run. No Binding ritual remains after that Shogun defeat, allowing Akio to stay, make the defeat permanent, and continue into the true-final Heart encounter. The exact permanent-death method and final version remain unresolved.
+After Akio destroys the sixth remaining Binding, the next successful full run is the seventh and final story run. No Binding ritual remains after that Shogun defeat. Akio defeats the Shogun's current body and proceeds directly into the true-final Heart encounter while the run remains active.
+
+Destroying the Heart—not a separate final execution of the Shogun—makes the Shogun's defeat permanent. The Heart's death makes Beast Blood inert and stops his attempted reconstruction.
+
+After the canonical ending, completed saves may repeat normal runs, the Shogun encounter, and the optional Heart continuation for gameplay without further story progression.
 
 ## Open questions
 
