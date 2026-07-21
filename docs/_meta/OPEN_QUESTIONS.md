@@ -348,7 +348,9 @@ The Heart's ancient prison originally contained seven Heart Bindings. The Shogun
 
 Akio must complete six successful Binding runs. Each successful run defeats the Shogun, destroys one remaining Binding through the reusable Returning Blood ritual, dissolves Akio's current body, and reconstructs him at the Strand. Failed runs do not advance the count.
 
-After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final campaign run. No Binding remains, so Akio does not repeat the extraction ritual or suffer its automatic dissolution. He can make the Shogun's defeat permanent and continue into the true-final Heart encounter.
+After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final story run. No Binding remains, so Akio does not repeat the extraction ritual or suffer its automatic dissolution. He defeats the Shogun's current body and continues directly into the true-final Heart encounter.
+
+The Shogun does not require a separate permanent-death method. Destroying the Heart ends the curse, makes Beast Blood inert, stops his reconstruction, frees him from the Blood's influence, and allows his body to die permanently.
 
 The six-clear requirement is a roguelite mastery objective supported by alternate Blood Aspects, Techniques, prosthetics, Relics, routes, rewards, permanent progression, and player execution. The six clears are not six unique story missions.
 
@@ -363,21 +365,47 @@ Mandatory clear-to-clear production remains concentrated in:
 
 The base scope does not require island-wide visual transformations, universal enemy modifiers, new regional environment sets, new enemy families, or entirely different Shogun fights after every clear. Those remain optional future expansion ideas.
 
-**Still open within this structure:** exact clear rewards, dialogue allocation, whether the Shogun receives limited clear-state variations, his reconstruction presentation, and the exact permanent-death method.
+**Still open within this structure:** exact clear rewards, dialogue allocation, whether the Shogun receives limited clear-state variations, and his reconstruction presentation.
 
 **Status:** resolved at campaign-count, roguelite-progression, and production-boundary level
 
 ## 12. True-final Heart encounter, ending, and postgame
 
-**Question**
+**Resolution**
 
-What happens after the Shogun's permanent defeat, what form does the Heart confrontation take, what does Akio ultimately do with Beast Blood, and why can gameplay continue after the canonical ending?
+After all six remaining Bindings are destroyed, the seventh successful story run continues from defeat of the Shogun's current body into the true-final Heart encounter without ending the run between those bosses.
 
-Establish the Heart encounter, final vulnerability, fate of the Shogun and island, Akio's final condition, credits trigger, and postgame explanation.
+The encounter has two conceptual phases:
 
-**Locked boundary:** the Shogun remains the central character antagonist. The Heart is the deeper supernatural threat and intended true-final encounter. The confrontation occurs on the seventh successful full run after six Binding clears.
+1. **The Unbound Heart** — the exposed Heart tears free of its prison and apparatus, grows malformed limbs, and becomes a mobile beastlike organ.
+2. **The Vessel of Continuance** — the Heart forms an enormous nonhuman defensive beast body around itself while remaining visibly central to the form.
 
-**Status:** open; next and final story-spine dependency
+The Heart does not become a humanoid swordsman or create another samurai duel. The exact moveset, timings, tuning, arena rules, and transition implementation remain future encounter-design work. The encounter uses Oathbound's established systems and does not add a separate weak-point or body-part targeting subsystem.
+
+The first Heart victory canonically destroys the source of Beast Blood. Active Beast Blood becomes inert; the Shogun's reconstruction stops and he dies permanently; corrupted inhabitants are freed before their unnaturally sustained bodies fail; corrupted beasts collapse; Yomori's spirits pass on; the Blood Moon ends; and the barrier safely weakens.
+
+Akio survives in his current complete human body but loses Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction. He becomes mortal. The ending and credits follow.
+
+After story completion, the save remains playable. Normal roguelite runs and the Heart route may be repeated. Repeat Heart victories are gameplay challenges only and do not advance the story, produce new canonical endings, reverse the ending, or imply that another Heart exists.
+
+The postgame should eventually provide a clear choice or condition for whether a run ends after the Shogun or continues into the Heart. Exact control, rewards, and presentation remain future design work.
+
+Possible future difficulty settings, run modifiers, enemy or room variants, challenge restrictions, alternate conditions, and special Heart-route rewards are noted for later exploration but are explicitly outside the initial game scope.
+
+**Affected files**
+
+- `docs/content/area_3/TRUE_FINAL_HEART.md`
+- `docs/content/area_3/BOSS.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/ECLIPSE_SHOGUN.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/overview/FULL_GAME_SCOPE.md`
+- `docs/ui_ux/RUN_RESULTS.md`
+- `docs/art_production/ASSET_INVENTORY.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+
+**Status:** resolved at story-ending, encounter-concept, postgame, and production-boundary level
 
 ## 13. Eclipse Shogun final character and production identity
 

@@ -4,7 +4,7 @@ title: Story Overview
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - story
   - blood-moon
@@ -13,6 +13,9 @@ topics:
   - the-heart
   - inherited-beast-blood
   - heart-bindings
+  - true-final-heart
+  - ending
+  - postgame
 related:
   - LORE-BEAST-BLOOD
   - LORE-BARRIER-BLOOD-MOON
@@ -20,6 +23,7 @@ related:
   - LORE-ECLIPSE-SHOGUN
   - CHAR-AKIO
   - CHAR-STRAND-KEEPER
+  - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
 # Story Overview
@@ -138,9 +142,9 @@ The island's inhabitants are not universally mindless. Many retain memory, loyal
 
 Beast Blood does not spread through ordinary contact, bites, wounds, soil, roots, water, prey, vegetation, or merely dying within the barrier. Environmental damage reflects the prolonged presence and actions of corrupted inhabitants rather than a contagious ecological form of the curse.
 
-Once active in a bearer, Beast Blood remains part of that bearer and does not require repeated doses or continued supply from the Heart.
+Once active in a bearer, Beast Blood remains part of that bearer and does not require repeated doses or continued supply while the Heart remains alive. The Heart is still the supernatural source sustaining Beast Blood as an active curse; destroying it makes the Blood inert everywhere.
 
-The Heart's influence nevertheless becomes stronger as its Bindings are removed. Existing Beast Blood reacts more intensely, corrupted inhabitants may become more unstable, and Akio experiences greater temptation and pressure from the curse. This is supernatural influence, not a physical channel or continuing supply network.
+The Heart's influence becomes stronger as its Bindings are removed. Existing Beast Blood reacts more intensely, corrupted inhabitants may become more unstable, and Akio experiences greater temptation and pressure from the curse. This is supernatural influence, not a physical channel or continuing supply network.
 
 ## Regional curse progression
 
@@ -214,7 +218,9 @@ Akio becomes the living contradiction that exposes the Shogun's false mastery. E
 
 The Shogun remains the central character antagonist and principal ruler of the island, but he is not the original source of Beast Blood.
 
-After each successful Shogun victory:
+The ancient prison originally contained seven Bindings. The Court destroyed the outermost before the game, leaving six for Akio.
+
+After each of the first six successful Shogun victories:
 
 1. Akio enters the Heart chamber.
 2. He uses the same extraction apparatus created by the Shogun's civilization.
@@ -233,15 +239,50 @@ The damage persists because the Heart can regenerate living tissue but cannot re
 
 Akio can destroy only one Binding per run because the Heart's retaliation kills his current body immediately after the Binding breaks.
 
-Destroying the Bindings weakens the Heart's protection while also releasing more of its influence. Every successful clear moves Akio closer to the Heart's vulnerable body and brings the Heart closer to full awakening.
+Destroying the Bindings weakens the Heart's protection while also releasing more of its influence. Every successful clear moves Akio closer to the Heart's exposed body and brings the Heart closer to full awakening.
 
-The total number of Bindings, campaign changes after each completion, Shogun reconstruction rule, permanent-defeat sequence, final Heart encounter, and ending remain unresolved.
+## Final story run and the Unbound Heart
+
+After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final story run.
+
+Akio defeats the Shogun's current body but does not perform another Binding ritual. He continues into the exposed Heart chamber while the run remains active. The Shogun may begin reconstructing as before; his permanent death depends on destruction of the source rather than a separate anti-regeneration method.
+
+The true-final Heart encounter has two conceptual phases:
+
+1. **The Unbound Heart** — the Heart tears free from the prison and apparatus, grows malformed limbs, and becomes a mobile beastlike organ.
+2. **The Vessel of Continuance** — it forms an enormous nonhuman defensive beast body around itself while remaining visibly central to the form.
+
+The Heart does not become a humanoid swordsman or another samurai duel. Exact attacks, timings, tuning, arena rules, and transition implementation remain future encounter-design work. The fight uses Oathbound's established systems and does not add a separate weak-point or body-part targeting subsystem.
+
+Returning Blood's established rejection of the Heart may support the final narrative and visual resolution without becoming a new standalone player mechanic.
+
+## Destruction of the curse and ending
+
+The first Heart victory canonically ends the story.
+
+Destroying the Heart makes active Beast Blood inert across the island. The Shogun's reconstruction stops; the curse releases its hold over him; and his unnaturally sustained body dies permanently. Corrupted inhabitants are likewise freed before their transformed and repeatedly regenerated bodies fail. Corrupted beasts and failed bodies collapse, while Yomori's lingering spirits can finally pass on.
+
+The Heart's death ends the supernatural Blood Moon cycle and allows the containment barrier to weaken safely.
+
+Akio survives in his current complete human body, but Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction end with the source. He becomes mortal.
+
+The ending and credits follow.
+
+## Postgame continuation
+
+After the canonical ending, the completed save remains playable. Akio may continue normal roguelite runs and may repeat the true-final Heart route.
+
+Repeat Heart victories have no additional story meaning. They do not advance the plot, create another canonical ending, imply another Heart, or reverse the island's completed fate. They exist for gameplay mastery, build experimentation, rewards, records, and future challenge systems.
+
+The exact control or condition that determines whether a postgame run ends after the Shogun or continues into the Heart remains future design work.
+
+Additional difficulty settings, run modifiers, enemy or room variants, challenge restrictions, alternate run conditions, and special Heart-route rewards may be explored later. They are not part of the initial game scope.
 
 ## Final-antagonist direction
 
 The Eclipse Shogun remains responsible for choosing, expanding, defending, and weaponizing Beast Blood. He should not become an innocent puppet whose actions no longer matter.
 
-The Heart is the deeper supernatural threat beyond him and is intended to support a true-final confrontation after the Shogun's permanent defeat. Its final anatomy, vulnerability, manifestation, and combat identity remain open.
+The Heart is the deeper supernatural threat beyond him. Its true-final form is a two-phase nonhuman beast encounter, but its exact anatomy, moveset, animation list, tuning, and arena behavior remain open for dedicated design and playtesting.
 
 ## Current themes
 
@@ -257,8 +298,9 @@ The Heart is the deeper supernatural threat beyond him and is intended to suppor
 - False mastery contrasted with Akio's unique control
 - A quiet warrior evolving forbidden power without accepting its rule
 - Every step toward destroying the Heart also freeing more of it
+- Choosing mortality over power sustained by the curse
 - Mystery preserved where complete explanation would weaken the ancient source
 
 ## Canon boundaries
 
-Exact dialogue, conversation count, Akio's complete character arc, the identity and fate of the escaped child's protectors, how Akio's lineage is confirmed, the first-death presentation, the deeper metaphysics of Strand reconstruction, the Shogun's barrier-breach method and timing, Heart Binding count, changes after each successful clear, final Heart encounter, ending, and postgame explanation remain under development.
+Exact dialogue, conversation count, Akio's complete character arc, the identity and fate of the escaped child's protectors, how Akio's lineage is confirmed, the first-death presentation, the deeper metaphysics of Strand reconstruction, the Shogun's barrier-breach method and timing, Shogun reconstruction presentation, exact Heart moveset and tuning, postgame route control, and deferred challenge modifiers remain under development.

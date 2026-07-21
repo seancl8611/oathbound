@@ -4,7 +4,7 @@ title: Kagutsuchi Court
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - area-3
   - kagutsuchi-court
@@ -13,12 +13,14 @@ topics:
   - endgame
   - false-ascendancy
   - heart-bindings
+  - true-final-heart
 related:
   - ART-DIRECTION
   - ART-MILESTONE-06
   - CONTENT-AREA3-ENEMIES
   - CONTENT-AREA3-MINIBOSSES
   - CONTENT-AREA3-BOSS
+  - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
 # Kagutsuchi Court
@@ -77,11 +79,16 @@ Wrongness comes from intelligence and restraint serving the curse. Transformatio
 1. [Blood Lotus](MINIBOSSES.md#blood-lotus) — multi-cycle objective miniboss
 2. [Eternal Swordsman](MINIBOSSES.md#eternal-swordsman) — duel miniboss
 3. [The Eclipse Shogun](BOSS.md) — three-phase regional boss
-4. Heart chamber and reusable Heart Binding ritual reached after the Shogun
+4. Heart chamber and reusable Heart Binding ritual during the first six successful clears
+5. [The Unbound Heart](TRUE_FINAL_HEART.md) — unlocked two-phase true-final encounter after all six Bindings are destroyed
 
 The Eclipse Shogun remains the region's principal boss and central character antagonist. He is the greatest example of false mastery: an intelligent and deliberate user who has become a more powerful servant of the force he believes he commands.
 
-The endgame continues beyond him. Akio uses the Court's extraction apparatus and Returning Blood to break one ancient Heart Binding, is dissolved by the Heart's retaliation, and reconstructs at the Strand with that campaign progress preserved.
+During the first six successful clears, Akio uses the Court's extraction apparatus and Returning Blood to break one ancient Heart Binding, is dissolved by the Heart's retaliation, and reconstructs at the Strand with that campaign progress preserved.
+
+On the seventh successful story run, Akio defeats the Shogun's current body and continues directly into the Heart encounter. Destroying the Heart makes Beast Blood inert, stops the Shogun's reconstruction, ends the curse, and completes the story.
+
+After completion, normal runs and the Heart continuation may be repeated for gameplay without further story progression.
 
 ## Combat identity
 
@@ -94,8 +101,13 @@ The endgame continues beyond him. Akio uses the Court's extraction apparatus and
 - multi-cycle objective combat,
 - pure duel discipline,
 - three-phase Shogun revelation,
-- post-Shogun Heart Binding completion.
+- post-Shogun Heart Binding completion during the first six clears,
+- two-phase large-creature Heart continuation after unlock.
 
 ## Production warning
 
-Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun and the provisional Heart endgame remain dedicated internal batch chains within Milestone 6. The Binding ritual reuses one core completion sequence; exact Binding-state variants remain open until the campaign clear count is locked.
+Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads.
+
+Eclipse Shogun and the two-form Heart endgame remain dedicated internal batch chains within Milestone 6. The Binding ritual reuses one core completion sequence. The Heart encounter must use established combat systems and must not add a one-off weak-point subsystem.
+
+Future difficulty modifiers, enemy or room variants, challenge restrictions, and special Heart-route rewards remain deferred and are not part of the initial Area 3 scope.

@@ -13,6 +13,8 @@ topics:
   - successful-return
   - heart-bindings
   - campaign-clears
+  - true-final-heart
+  - postgame
   - strand
   - techniques
   - room-rewards
@@ -34,7 +36,7 @@ related:
 
 A standard run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
 
-A standard run ends through death, successful destruction of one Heart Binding after the Shogun, or another explicitly designed return condition.
+A run ends through death, successful destruction of one Heart Binding after the Shogun, completion of an unlocked true-final Heart route, or another explicitly designed return condition.
 
 The campaign takes place beneath the Blood Moon. The game does not define how much ordinary time passes between repeated runs.
 
@@ -68,7 +70,8 @@ The current intended progression is:
 2. Yomori Grove
 3. Kagutsuchi Court
 4. Eclipse Shogun
-5. Temporary access to the Heart chamber and the next intact Heart Binding
+5. Temporary access to the Heart chamber
+6. One Binding completion during the first six successful clears, or the unlocked true-final Heart encounter after all six Bindings are destroyed
 
 Exact branching, room counts, rerouting, and area-order flexibility remain implementation and playtest questions.
 
@@ -115,7 +118,7 @@ The intended build progression after the relevant systems are unlocked is:
 
 - **Area 1:** acquire the first meaningful Techniques and begin defining the build.
 - **Area 2:** fill the four active Technique slots, gain Aspect Tiers, and establish coherent synergy.
-- **Area 3:** refine, replace, use reserve strategically, and finalize the build for the Shogun.
+- **Area 3:** refine, replace, use reserve strategically, and finalize the build for the Shogun and any enabled Heart continuation.
 
 A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room.
 
@@ -127,7 +130,7 @@ The failed run burns away its temporary blood-state and run-only progress. Perma
 
 Akio may prepare and board the Boat again without the narrative defining an exact elapsed time between attempts.
 
-## Successful run
+## Successful Binding run
 
 On a successful Binding run, Akio:
 
@@ -155,7 +158,9 @@ The Heart's ancient prison originally contained seven Heart Bindings. The Shogun
 
 The main campaign requires six successful Binding runs. Each successful Binding run destroys one of those six remaining restraints. Failed runs do not advance the Binding count.
 
-After the sixth Binding is destroyed, the Heart's deeper body is exposed and the next successful full run becomes the final campaign run. No Binding remains during that run, so Akio does not repeat the extraction ritual and is not automatically dissolved after the Shogun's defeat. He can remain in his current body, complete the Shogun's permanent defeat, and proceed into the true-final Heart encounter.
+After the sixth Binding is destroyed, the Heart's deeper body is exposed and the next successful full run becomes the final story run. No Binding remains during that run, so Akio does not repeat the extraction ritual and is not automatically dissolved after defeating the Shogun's current body. He continues directly into the true-final Heart encounter with the same run still active.
+
+The Shogun is not permanently killed through a separate anti-regeneration method before the Heart. His body may begin reconstructing as it did after earlier defeats. Destroying the Heart ends the curse, makes Beast Blood inert, stops that reconstruction, frees the Shogun from the Blood's influence, and allows his body to die permanently with the rest of the corrupted island.
 
 The six-clear requirement is a roguelite mastery target rather than six unique story missions. Continued play is supported primarily by alternate Blood Aspects, Techniques, prosthetics, Relics, routes, rewards, persistent upgrades, and increasing player consistency.
 
@@ -168,7 +173,49 @@ Mandatory clear-to-clear production remains restrained. Progress is communicated
 
 The base game does not require island-wide visual transformations, universal enemy modifiers, new regional environment sets, or new enemy families after every Binding clear. Those ideas remain optional future expansion material.
 
-The Binding identity, repeated ritual, persistent damage rule, forced-return cause, seven-original/six-remaining count, six successful Binding clears, and seventh final-run structure are locked. Exact Shogun reconstruction details, clear rewards, dialogue allocation, final permanent-death method, and true-final sequence remain open story-design questions.
+## True-final Heart route
+
+The true-final Heart encounter unlocks only after all six remaining Bindings have been destroyed.
+
+The first unlocked Heart route is the final story run. The player must defeat the Eclipse Shogun and then defeat the Heart without ending or losing the run between those encounters. The Heart is an additional true-final boss after the established three-region route and Shogun climax, not a replacement for the Shogun.
+
+The Heart encounter has two conceptual phases:
+
+1. **The Unbound Heart** — the fully exposed Heart tears free of the ancient prison and Shogun-built apparatus, grows malformed limbs, and becomes a mobile beastlike organ.
+2. **The Vessel of Continuance** — the Heart forms an enormous nonhuman defensive vessel around itself, creating a larger and more complete beast body while remaining visibly central to that form.
+
+The Heart is not a humanoid swordsman, does not create another samurai duel, and does not require a weak-point subsystem that does not exist elsewhere in Oathbound. Exact attacks, timings, numerical tuning, arena-control rules, posture behavior, transitions, and final animation lists remain encounter-design and playtest work.
+
+The final resolution may use Returning Blood's established rejection of the Heart as the narrative basis for Akio surviving direct contact and creating the opportunity to destroy the exposed source. This does not add a separate player mechanic or weak-point system by itself.
+
+## First Heart victory and ending
+
+The first true-final Heart victory canonically completes the story.
+
+Destroying the Heart makes active Beast Blood inert across the island. Its death:
+
+- stops the Shogun's reconstruction and allows him to die permanently,
+- frees corrupted inhabitants from the curse before their unnaturally sustained bodies fail,
+- collapses corrupted beasts and failed bodies,
+- allows Yomori's lingering spirits to pass on,
+- ends the supernatural Blood Moon cycle,
+- and allows the containment barrier to weaken safely.
+
+Akio survives in his current complete human body, but Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction end with the source. He becomes mortal.
+
+The ending and credits follow the first Heart victory.
+
+## Postgame runs
+
+After the story is completed, the save remains playable. Akio may continue starting normal roguelite runs and may repeat the true-final Heart route.
+
+Repeat Heart victories are gameplay challenges only. They do not advance the story, produce additional canonical endings, destroy another Heart, or reverse the completed ending. The first victory remains the canonical conclusion.
+
+The postgame should allow the player to choose or meet a clear condition for whether a completed run ends after the Shogun or continues into the harder Heart encounter. The exact Boat option, modifier, menu label, reward structure, and unlock presentation remain future design work.
+
+Future postgame development may explore additional difficulty settings, run modifiers, enemy or room variants, challenge restrictions, and special rewards tied to challenging the Heart. These are explicitly deferred and are not part of the initial game scope.
+
+The Binding identity, repeated ritual, persistent damage rule, forced-return cause, seven-original/six-remaining count, six successful Binding clears, seventh final-story run, two-phase Heart concept, first-clear ending, and repeatable non-progressing postgame Heart route are locked. Exact clear rewards, dialogue allocation, Shogun reconstruction presentation, Heart moveset, balance tuning, postgame route control, and optional future challenge systems remain open.
 
 ## Run growth
 
@@ -208,6 +255,7 @@ The following persist:
 - narrative discoveries,
 - codex progression,
 - major permanent currencies and rewards,
-- destroyed Heart Bindings and equivalent campaign progress.
+- destroyed Heart Bindings and equivalent campaign progress,
+- story-completion state and unlocked postgame Heart access.
 
 See [Progression](PROGRESSION.md) for system ownership and the current persistence matrix.

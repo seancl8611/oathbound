@@ -4,7 +4,7 @@ title: Returning Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - returning-blood
   - akio
@@ -13,6 +13,8 @@ topics:
   - inherited-beast-blood
   - strand
   - heart-bindings
+  - ending
+  - postgame
 related:
   - LORE-BEAST-BLOOD
   - CHAR-AKIO
@@ -21,6 +23,7 @@ related:
   - LORE-BARRIER-BLOOD-MOON
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
+  - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
 # Returning Blood
@@ -104,11 +107,11 @@ Permanent upgrades, unlocked Aspects, Blood Mirror progress, discoveries, and ma
 
 Akio may then board the Boat and cross again while the campaign remains beneath the Blood Moon. The story does not define how much ordinary time passes between attempts.
 
-## Successful-run return
+## Successful Binding-run return
 
-After defeating the Eclipse Shogun, Akio reaches the Heart chamber and uses the extraction apparatus built by the Shogun's civilization.
+During each of the first six successful clears, Akio defeats the Eclipse Shogun and reaches the Heart chamber and extraction apparatus built by the Shogun's civilization.
 
-The successful-run sequence is:
+The successful Binding-run sequence is:
 
 1. Akio cuts himself and places Returning Blood into the apparatus as the human-blood offering.
 2. The apparatus carries that Blood into the exposed Heart.
@@ -122,6 +125,28 @@ The successful-run sequence is:
 The process is intentionally direct. It does not require a different mechanism for each Binding, an extended ritual explanation, or visible travel of Akio's blood across the island.
 
 The Heart Binding remains destroyed because it is an external ancient restraint that the Heart did not create and cannot regenerate. Akio can complete only one Binding per run because the retaliation destroys his current body immediately after the rupture.
+
+## Final Heart confrontation
+
+After all six remaining Bindings are destroyed, the seventh successful story run does not repeat the extraction ritual.
+
+Akio defeats the Shogun's current body and continues into the true-final Heart encounter while the same run remains active.
+
+Returning Blood's established rejection of the Heart may support the final narrative and visual resolution. It does not require a separate new player mechanic or weak-point subsystem.
+
+The first Heart victory destroys the source sustaining Beast Blood.
+
+## End of Returning Blood
+
+When the Heart dies, active Beast Blood becomes inert. Returning Blood can no longer reconstruct Akio, express Blood Aspects, or provide supernatural regeneration.
+
+Akio's current body survives because it is already a complete living human body at the moment the source is destroyed. He does not dissolve or transform into an ordinary corrupted corpse.
+
+Akio becomes mortal. Any later death would be final within the canonical story.
+
+This choice completes his contrast with the Shogun: Akio gives up the power to return rather than preserve himself through the curse.
+
+After the ending, completed saves may repeat normal runs and the Heart route for gameplay. Those postgame runs do not canonically restore Returning Blood or reverse Akio's mortality. The first Heart victory remains the story's true conclusion.
 
 ## Relationship to the Shogun
 
@@ -145,6 +170,8 @@ Akio's refusal remains more important than the lineage itself. He does not need 
 - Do not describe revival as consequence-free or imply that the current body survives death.
 - Do not treat Blood Aspects as unrelated magical classes.
 - Do not describe intelligent or deliberate mutation use by another bearer as genuine control equal to Akio's.
+- Do not canonically restore Returning Blood after the Heart has been destroyed.
+- Do not treat repeat postgame Heart runs as additional story events.
 
 ## Deliberately unresolved
 
