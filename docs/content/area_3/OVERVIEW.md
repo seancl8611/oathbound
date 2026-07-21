@@ -4,7 +4,7 @@ title: Kagutsuchi Court
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-20
 topics:
   - area-3
   - kagutsuchi-court
@@ -12,6 +12,7 @@ topics:
   - court
   - endgame
   - false-ascendancy
+  - heart-bindings
 related:
   - ART-DIRECTION
   - ART-MILESTONE-06
@@ -76,11 +77,11 @@ Wrongness comes from intelligence and restraint serving the curse. Transformatio
 1. [Blood Lotus](MINIBOSSES.md#blood-lotus) — multi-cycle objective miniboss
 2. [Eternal Swordsman](MINIBOSSES.md#eternal-swordsman) — duel miniboss
 3. [The Eclipse Shogun](BOSS.md) — three-phase regional boss
-4. Protected Heart completion space reached after the Shogun
+4. Heart chamber and reusable Heart Binding ritual reached after the Shogun
 
 The Eclipse Shogun remains the region's principal boss and central character antagonist. He is the greatest example of false mastery: an intelligent and deliberate user who has become a more powerful servant of the force he believes he commands.
 
-The current endgame direction continues beyond him to one persistent Heart-layer damage step and eventually a true-final Heart encounter.
+The endgame continues beyond him. Akio uses the Court's extraction apparatus and Returning Blood to break one ancient Heart Binding, is dissolved by the Heart's retaliation, and reconstructs at the Strand with that campaign progress preserved.
 
 ## Combat identity
 
@@ -93,8 +94,8 @@ The current endgame direction continues beyond him to one persistent Heart-layer
 - multi-cycle objective combat,
 - pure duel discipline,
 - three-phase Shogun revelation,
-- post-Shogun Heart-layer completion.
+- post-Shogun Heart Binding completion.
 
 ## Production warning
 
-Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun and the provisional Heart endgame remain dedicated internal batch chains within Milestone 6.
+Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads. Eclipse Shogun and the provisional Heart endgame remain dedicated internal batch chains within Milestone 6. The Binding ritual reuses one core completion sequence; exact Binding-state variants remain open until the campaign clear count is locked.
