@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - project-identity
   - combat
@@ -15,6 +15,7 @@ topics:
   - three-areas
   - the-heart
   - heart-bindings
+  - campaign-clears
 related:
   - OVERVIEW-DESIGN-PILLARS
   - GAMEPLAY-COMBAT
@@ -33,7 +34,7 @@ The player controls Akio, a warrior of the Order sent through a containment barr
 
 The Heart's ultimate origin remains deliberately ambiguous. It possesses primal agency centered on survival, regeneration, growth, continuation, resistance to restraint, and incorporation rather than a human personality or clearly explained plan.
 
-The Heart was already dormant and imprisoned beneath the island by layered ancient Heart Bindings created by an unknown power. The Shogun's civilization breached the outermost Binding during the plague and built its own extraction apparatus against the exposed Heart. Human blood was offered inward, and the Heart released Beast Blood outward.
+The Heart was already dormant and imprisoned beneath the island by seven layered ancient Heart Bindings created by an unknown power. The Shogun's civilization breached the outermost Binding during the plague and built its own extraction apparatus against the exposed Heart. Human blood was offered inward, and the Heart released Beast Blood outward.
 
 The Blood Moon is the visible result of a recurring active cycle within the Heart. During it, existing Beast Blood becomes stronger and the containment barrier comes under pressure. The Order-created Strand threshold, the Keeper, and a sealed Boat provide the controlled route Akio uses to enter the island.
 
@@ -85,7 +86,9 @@ Across a standard run, the player grows from the complete base sword kit into a 
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
 - Keeper-maintained Boat crossing through the Strand's controlled barrier threshold
 - Failed runs return Akio to the Strand through Returning Blood reconstruction
-- Successful runs defeat the Shogun, use the Court's extraction apparatus to break one ancient Heart Binding with Returning Blood, dissolve Akio's current body, and reconstruct him at the Strand with permanent rewards and Binding progress intact
+- Successful Binding runs defeat the Shogun, use the Court's extraction apparatus to break one ancient Heart Binding with Returning Blood, dissolve Akio's current body, and reconstruct him at the Strand with permanent rewards and Binding progress intact
+- Six intact Bindings remain when the campaign begins; six successful Binding clears are required
+- The next successful full run is the seventh and final campaign run, leading from the Shogun's permanent defeat into the true-final Heart encounter
 
 ## Run-build philosophy
 
@@ -95,6 +98,7 @@ Across a standard run, the player grows from the complete base sword kit into a 
 - Refinements are shallow: one base Technique may receive one slotless refinement.
 - A full Technique inventory does not exist; the single reserve provides controlled adaptation.
 - Run power should deepen sword combat rather than replace it with automatic damage or screen-filling effects.
+- Repeated successful clears are a roguelite mastery objective supported by build experimentation, routing, progression, and execution rather than six separate story missions.
 
 ## Encounter and boss direction
 
@@ -109,10 +113,12 @@ A single error should matter without routinely ending an otherwise viable standa
 - **Area 1 — Hushiro Gate Village / Rupture:** recent corruption, violence, bodily collapse, fragmented community, and desperate faith
 - **Area 2 — Yomori Grove / Adaptation:** long-term predation, true spirits persisting as incomplete remnants, and ecological devastation surrounding corrupted inhabitants
 - **Area 3 — Kagutsuchi Court / False Ascendancy:** courtly beauty, hierarchy, elite mutation, and the mistaken belief that Beast Blood has been mastered
-- **Run climax:** the Eclipse Shogun followed by the reusable Heart Binding ritual
-- **True-final direction:** permanent defeat of the Shogun and a deeper Heart confrontation after enough Bindings have been removed
+- **Run climax:** the Eclipse Shogun followed by the reusable Heart Binding ritual during the first six successful clears
+- **Final campaign run:** the seventh successful full run permanently defeats the Shogun and continues into the exposed Heart
 
-The Heart's identity, discovery, ancient imprisonment, Shogun-built extraction process, Blood Moon relationship, barrier origin, Returning Blood origin, Heart Binding identity, one-Binding-per-run ritual, persistent damage rule, and forced-return cause are locked. The total Binding count, changes after each clear, final manifestation, and true-final encounter remain open.
+The Heart's identity, discovery, ancient imprisonment, Shogun-built extraction process, Blood Moon relationship, barrier origin, Returning Blood origin, Heart Binding identity, one-Binding-per-run ritual, persistent damage rule, forced-return cause, seven-original/six-remaining Binding count, six-clear requirement, and seventh final-run structure are locked.
+
+Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Binding-progress presentation, and concise narrative updates. The base scope does not require island-wide state modifiers or rebuilt regional environment sets after each clear. The final Heart manifestation, true-final encounter, ending, and postgame remain open.
 
 ## Structural references
 
