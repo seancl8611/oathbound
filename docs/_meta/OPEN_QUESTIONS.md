@@ -4,7 +4,7 @@ title: Open Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 ---
 
 # Open Questions
@@ -33,7 +33,7 @@ The Embered Pilgrim and Rotwood Host are the two Yomori Grove minibosses. Rootfa
 
 ## Area 3 encounter classification
 
-Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal regional boss. The endgame continues beyond him to persistent Heart-layer progress and an intended true-final Heart encounter.
+Blood Lotus is Area 3 Miniboss #1, Eternal Swordsman is Area 3 Miniboss #2, and Eclipse Shogun is the principal regional boss. The endgame continues beyond him to persistent Heart Binding progress and an intended true-final Heart encounter.
 
 **Status:** resolved at regional-roster level
 
@@ -57,7 +57,7 @@ Blood Aspects are the central vertical run identity. Techniques provide limited 
 
 ## Room reward ownership
 
-Standard combat routes may preview a primary payout. Selected encounters offer Techniques. Shrines own Resist/Embrace or support, rest rooms own recovery and reserve swapping, shops use Gold, and treasure/miniboss rewards are higher value. The Eclipse Shogun opens the protected Heart-completion step.
+Standard combat routes may preview a primary payout. Selected encounters offer Techniques. Shrines own Resist/Embrace or support, rest rooms own recovery and reserve swapping, shops use Gold, and treasure/miniboss rewards are higher value. The Eclipse Shogun opens the Heart Binding completion step.
 
 **Status:** resolved at structural level
 
@@ -173,11 +173,11 @@ The Eclipse Shogun remains the central character antagonist; the Heart is the de
 
 **Resolution**
 
-The Heart was already buried beneath the island. Royal excavation beneath Kagutsuchi Court exposed an ancient complex built around part of it. The complex contains seals, ritual channels, restraints, damaged inscriptions, and chambers whose original purposes cannot be confirmed.
+The Heart was already buried beneath the island. Royal excavation beneath Kagutsuchi Court exposed an ancient complex built around it.
 
-The Shogun ordered the site sealed and restricted study until the plague forced reconsideration.
+The Heart was dormant and enclosed by layered ancient Heart Bindings that limited its influence and protected its deeper body. The Shogun's civilization did not create the Bindings.
 
-**Deliberately unresolved:** the ancient builders, original purpose, cause of discovery, and relationship between the complex and later barrier design.
+**Deliberately unresolved:** the ancient builders, complete original purpose, cause of discovery, and relationship between the complex and later barrier design.
 
 **Status:** resolved
 
@@ -185,7 +185,9 @@ The Shogun ordered the site sealed and restricted study until the plague forced 
 
 **Resolution**
 
-Usable Beast Blood is released directly from the Heart through the ancient extraction structure during controlled weak-pulse windows. Researchers temporarily alter the restraints and place a small measure of fresh human blood into the channels. The Heart responds by releasing Beast Blood into a basin.
+The intact Heart Bindings prevented the Court from reaching living Heart tissue. During the plague, the Shogun authorized researchers to breach or destroy the outermost Binding, awakening the Heart enough to expose part of it.
+
+The Shogun's civilization then built an extraction apparatus against the exposed Heart. Researchers placed a small measure of fresh human blood into the apparatus. The offering flowed inward, and the Heart released Beast Blood outward into a collection vessel. The process did not require death or human sacrifice.
 
 Collected Blood must be deliberately consumed or introduced. Ordinary contact, proximity, wounds, environmental exposure, and merely dying on the island do not create bearers.
 
@@ -274,11 +276,13 @@ The player's first attempt uses the base sword kit without Blood Aspects, Shrine
 
 That death activates the inherited Blood's regenerative power. Because Akio's body developed naturally around the dormant condition, it reconstructs his established human form instead of immediately fixing him into an ordinary corrupted transformation. He returns to the Strand carrying the first known Returning Blood.
 
+The first reconstruction establishes the stable human pattern and Strand destination followed by later returns. The deeper transport remains deliberately mysterious rather than becoming a separate anchor system.
+
 Previous Order warriors did not carry this inherited condition. Earlier descendants remained outside the barrier and never combined Akio's awakening circumstances.
 
 Resolve does not create Returning Blood. Akio's lineage and first death explain why he returns. His discipline and resolve explain why he can later control and evolve the awakened Blood without surrendering himself to it.
 
-The Order's warding may protect Akio as ordinary field protection but does not create the revival. The Keeper and Boat facilitate crossing but do not create Returning Blood. No new dose is introduced during the opening attempt.
+The Order's warding may protect Akio as ordinary field protection but does not create the revival. The Keeper, Boat, and Bloodwell do not create Returning Blood. No new dose is introduced during the opening attempt.
 
 Neither Akio nor the Shogun initially knows their relationship. The Shogun eventually recognizes Akio as the descendant of the escaped royal child, deepening his attempt to claim him as an heir.
 
@@ -287,7 +291,7 @@ Neither Akio nor the Shogun initially knows their relationship. The Shogun event
 - the escaped child's gender, name, protectors, and exact escape,
 - the cause and location of Akio's first death,
 - whether the first attempt ends through a scripted event or designed unwinnable encounter,
-- why reconstruction selects the Strand,
+- the deeper metaphysics behind the preserved return imprint,
 - how and when the bloodline is confirmed,
 - and whether any other dormant descendants exist.
 
@@ -305,31 +309,46 @@ Neither Akio nor the Shogun initially knows their relationship. The Shogun event
 
 **Status:** resolved at lineage, awakening, and control-foundation level
 
-## 10. Successful-run Heart layers and forced return
+## 10. Successful-run Heart Bindings and forced return
 
-**Question**
+**Resolution**
 
-What is Akio damaging after each Shogun victory, why does that damage persist, and why can he complete only one step before his current body is destroyed or expelled?
+The Heart was already imprisoned by multiple ancient Heart Bindings created by an unknown power. The Bindings keep it dormant, limit its influence, and protect its deeper body. The Shogun's civilization did not build them.
 
-Define whether the layers are biological defenses, seals, bindings, shells, vessels, wards, phases of awakening, or another structure derived from the Heart.
+During the plague, the Shogun's researchers breached the outermost Binding and built an extraction apparatus against the exposed Heart. Ordinary extraction offers fresh human blood inward and receives Beast Blood outward.
 
-**Parked possibility — not approved**
+After each Shogun victory, Akio uses the same apparatus and offers Returning Blood. The Heart recognizes its own power and attempts to absorb and reclaim it, but Akio's controlled Blood resists. The rejection creates a violent pulse that breaks one remaining Binding.
 
-The carved seals, ritual channels, restraints, extraction structure, and other features of the ancient Heart complex may connect to the persistent layer sequence. Akio might break, restore, sever, reactivate, or otherwise interact with parts of that system.
+The Heart immediately retaliates through the same contact and dissolves Akio's current body into blood. Returning Blood then reconstructs him at the Strand using the stable pattern and destination established by his first return.
 
-**Locked boundary:** a successful run defeats the Shogun, reaches the Heart, completes one persistent damage step, and returns Akio to the Strand.
+The Binding remains destroyed because it is an external ancient restraint that the Heart did not create and cannot regenerate. Akio can complete only one per run because the retaliation kills his current body immediately after the rupture.
 
-**Status:** open; Questions 2–9 satisfied
+The sequence is intentionally simple and reusable: blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. It does not require a separate mechanism, puzzle, or unique win condition for every Binding.
+
+Destroying Bindings both exposes the Heart's vulnerable body and releases more of its influence. Existing Beast Blood becomes more agitated and Akio's temptation toward the curse grows stronger, but no physical channel or continued Blood supply is required.
+
+**Affected files**
+
+- `docs/lore/BEAST_BLOOD.md`
+- `docs/lore/STORY_OVERVIEW.md`
+- `docs/lore/RETURNING_BLOOD.md`
+- `docs/gameplay/CORE_LOOP.md`
+- `docs/gameplay/RUN_STRUCTURE.md`
+- `docs/overview/GAME_OVERVIEW.md`
+- `docs/art_production/milestones/MILESTONE_06.md`
+- `docs/_meta/TERMINOLOGY.md`
+
+**Status:** resolved at story-foundation and successful-run-loop level
 
 ## 11. Campaign clear count and changes after each clear
 
 **Question**
 
-How many successful Heart-layer completions are required before the Shogun can be permanently defeated and the true-final Heart encounter begins? What changes after each clear?
+How many successful Heart Binding completions are required before the Shogun can be permanently defeated and the true-final Heart encounter begins? What changes after each clear?
 
-**Locked boundary:** no clear count is approved. Six remains only a prior candidate.
+**Locked boundary:** no clear count is approved. Six remains only a prior candidate. Each clear destroys one Binding, exposes more of the Heart, strengthens its influence, dissolves Akio's current body, and returns him to the Strand.
 
-**Status:** open; depends on Question 10
+**Status:** open; Question 10 satisfied
 
 ## 12. True-final Heart encounter, ending, and postgame
 
