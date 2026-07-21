@@ -4,14 +4,14 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 topics:
   - runs
   - first-attempt
   - death
   - returning-blood
   - successful-return
-  - ancient-source
+  - heart-bindings
   - strand
   - techniques
   - room-rewards
@@ -33,7 +33,7 @@ related:
 
 A standard run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
 
-A standard run ends through death, successful source-layer damage after the Shogun, or another explicitly designed return condition.
+A standard run ends through death, successful destruction of one Heart Binding after the Shogun, or another explicitly designed return condition.
 
 The campaign takes place beneath the Blood Moon. The game does not define how much ordinary time passes between repeated runs.
 
@@ -67,7 +67,7 @@ The current intended progression is:
 2. Yomori Grove
 3. Kagutsuchi Court
 4. Eclipse Shogun
-5. Temporary access to the protected ancient source
+5. Temporary access to the Heart chamber and the next intact Heart Binding
 
 Exact branching, room counts, rerouting, and area-order flexibility remain implementation and playtest questions.
 
@@ -100,7 +100,7 @@ The game uses recognizable room categories:
 - Treasure/reward
 - Miniboss
 - Boss approach and boss arena
-- Source approach or completion chamber after the Shogun
+- Heart approach and Binding-completion chamber after the Shogun
 
 Each function should read before interaction through environment composition, focal props, lighting, and UI treatment.
 
@@ -131,18 +131,24 @@ Akio may prepare and board the Boat again without the narrative defining an exac
 On a successful run, Akio:
 
 1. defeats the Eclipse Shogun's current manifestation,
-2. gains temporary access to the protected ancient source or its inner chamber,
-3. damages or removes one persistent source layer,
-4. is destroyed, sacrificed, or expelled by the source interaction,
-5. reforms at the Strand through Returning Blood,
-6. saves permanent rewards and persistent campaign damage,
-7. clears temporary run-state,
-8. receives a results summary,
-9. triggers relevant NPC, codex, Blood Mirror, source-state, or hub updates.
+2. gains temporary access to the Heart chamber and the Shogun-built extraction apparatus,
+3. cuts himself and offers Returning Blood through that apparatus,
+4. causes the Heart to attempt to reclaim the Blood,
+5. breaks one ancient Heart Binding when Akio's resistant Blood rejects that control,
+6. is dissolved into blood by the Heart's retaliation,
+7. reforms at the Strand through Returning Blood,
+8. saves permanent rewards and the destroyed-Binding campaign progress,
+9. clears temporary run-state,
+10. receives a results summary,
+11. triggers relevant NPC, codex, Blood Mirror, Heart-state, or hub updates.
 
-Successful completion and death both return Akio to the Strand, but they must remain visually and narratively distinct. See [Run Results and Strand Return](../ui_ux/RUN_RESULTS.md) for presentation requirements.
+The ritual should remain visually direct: blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. It is one reusable completion sequence with escalating Heart exposure rather than a separate mechanism or puzzle for every Binding.
 
-The exact source-layer count, reason Akio cannot finish the source in one run, Shogun reconstruction rule, and true-final sequence remain open story-design questions.
+The destroyed Binding remains gone because it is an external ancient restraint that the Heart did not create and cannot regenerate. Akio can destroy only one per run because the retaliation kills his current body immediately after the Binding breaks.
+
+Successful completion and failed death both return Akio to the Strand, but they must remain visually and narratively distinct. See [Run Results and Strand Return](../ui_ux/RUN_RESULTS.md) for presentation requirements.
+
+The Binding identity, repeated ritual, persistent damage rule, and forced-return cause are locked. The total Binding count, exact changes after each clear, Shogun reconstruction rule, and true-final sequence remain open story-design questions.
 
 ## Run growth
 
@@ -160,7 +166,7 @@ A run may change through:
 
 ## Reset boundary
 
-The following reset after death or successful source-layer return:
+The following reset after death or successful Heart Binding return:
 
 - current Corruption,
 - Blood Aspect Tier,
@@ -182,6 +188,6 @@ The following persist:
 - narrative discoveries,
 - codex progression,
 - major permanent currencies and rewards,
-- completed source-layer or equivalent campaign progress.
+- destroyed Heart Bindings and equivalent campaign progress.
 
 See [Progression](PROGRESSION.md) for system ownership and the current persistence matrix.
