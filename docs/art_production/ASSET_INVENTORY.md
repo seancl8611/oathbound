@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - asset-counts
   - characters
@@ -34,8 +34,9 @@ This is the high-level production inventory. Individual character, system, regio
 | Area 3 enemies | 5 | Court and false-ascendancy set |
 | Minibosses | 6 | Two per main area |
 | Regional bosses | 3 | One principal boss encounter per main area |
+| Heart Binding campaign | 7 original / 6 player clears | One historical broken layer, six removable campaign layers, and one fully exposed final state |
 | True-final Heart encounter | 1 provisional | Exact manifestation, phase, and reusable-asset count remain open |
-| Environment sets | 4 + Heart subset | Strand and Areas 1–3; Heart chamber remains an endgame subset until locked |
+| Environment sets | 4 + Heart subset | Strand and Areas 1–3; Heart chamber remains an endgame subset |
 | Blood Aspect families | 3 | Wolf, Wraith, Ronin plus modular Tier escalation |
 | Prosthetic families | 8 | One approved tool family each |
 | Technique loadout UI | 4 active + 1 reserve | Final Technique catalog and unique icon count remain open |
@@ -43,7 +44,7 @@ This is the high-level production inventory. Individual character, system, regio
 | Currency families | 4 current | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
 
-The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, room variants, Heart Binding state variants, and true-final Heart assets remain granular and should be finalized when catalog and encounter scope are locked.
+The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, room variants, and true-final Heart assets remain granular and should be finalized when catalog and encounter scope are locked.
 
 ## Player and player-system art
 
@@ -73,7 +74,7 @@ The former five stance families are removed. High-level counts for Technique ico
 - Hushiro modular base kit, functional rooms, miniboss spaces, and old-gate boss arena
 - Yomori base kit, functional rooms, failed-purification site, Rotwood arena, and Twin Maws arena
 - Kagutsuchi base kit, functional rooms, Blood Lotus arena, duel court, and Shogun throne-space
-- Heart chamber with ancient nested Bindings, one Shogun-built extraction apparatus, reusable successful-run completion state, and provisional true-final arena
+- Heart chamber with one historical broken outer Binding, six removable campaign Bindings, one Shogun-built extraction apparatus, reusable successful-run completion state, fully exposed final state, and provisional true-final arena
 
 Cross-area room types:
 
@@ -104,7 +105,7 @@ Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Heal
 - Route reward-preview markers
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause screens
 - Blood Lotus multi-cycle UI support
-- Heart Binding completion and persistent campaign-progress state
+- Six-clear Heart Binding completion and persistent campaign-progress state
 - True-final Heart boss presentation after encounter lock
 - Front end, settings, controls, save/loading, credits, and completion presentation
 
@@ -153,10 +154,13 @@ Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Heal
 - Reusable Heart reaction and one-Binding rupture
 - Akio dissolution transition
 - Strand reconstruction transition
-- Progressive exposed-Heart and chamber-state differences if visually required
+- One historical broken Binding state
+- Six removable or destroyed campaign Binding states
+- Fully exposed Heart state after the sixth clear
+- Progressively stronger room-local pulse, movement, sound, and reaction
 - True-final Heart effects only after manifestation and encounter mechanics are approved
 
-The base successful-run ritual is one reusable sequence, not a different apparatus, puzzle, or bespoke win animation for every Binding. Exact variant count remains open until the campaign clear count and changes after each clear are locked.
+The base successful-run ritual is one reusable sequence, not a different apparatus, puzzle, or bespoke win animation for every Binding. The six-clear structure does not add mandatory island-wide modifiers, rebuilt regional environments, new enemy families, or separate Shogun encounters after every clear.
 
 The Heart identity is locked, but its exact anatomy and final manifestation remain open. Art may imply a divine organ, island core, vessel, or remnant without conclusively explaining its origin or defaulting to a simple realistic oversized heart.
 
@@ -185,4 +189,4 @@ The separate Posture Break Cue exists in the broader inventory, but its exact Mi
 
 When a system, enemy, boss, room type, item family, UI screen, or VFX family is added, removed, or reassigned, update this inventory and its assigned milestone in the same change.
 
-The base Heart Binding completion sequence may be scoped as one reusable package. The true-final Heart encounter and exact clear-state variant count must not receive fixed asset counts or contractor quotes until Questions 11–12 are locked.
+The Heart Binding completion sequence may be scoped as one reusable package with six removable layer states and one fully exposed final state. The true-final Heart encounter must not receive a fixed asset count or contractor quote until Question 12 is locked.
