@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - runs
   - first-attempt
@@ -12,6 +12,7 @@ topics:
   - returning-blood
   - successful-return
   - heart-bindings
+  - campaign-clears
   - strand
   - techniques
   - room-rewards
@@ -128,7 +129,7 @@ Akio may prepare and board the Boat again without the narrative defining an exac
 
 ## Successful run
 
-On a successful run, Akio:
+On a successful Binding run, Akio:
 
 1. defeats the Eclipse Shogun's current manifestation,
 2. gains temporary access to the Heart chamber and the Shogun-built extraction apparatus,
@@ -148,7 +149,26 @@ The destroyed Binding remains gone because it is an external ancient restraint t
 
 Successful completion and failed death both return Akio to the Strand, but they must remain visually and narratively distinct. See [Run Results and Strand Return](../ui_ux/RUN_RESULTS.md) for presentation requirements.
 
-The Binding identity, repeated ritual, persistent damage rule, and forced-return cause are locked. The total Binding count, exact changes after each clear, Shogun reconstruction rule, and true-final sequence remain open story-design questions.
+## Campaign clear structure
+
+The Heart's ancient prison originally contained seven Heart Bindings. The Shogun's researchers destroyed the outermost Binding before the game, leaving six intact Bindings when Akio begins the campaign.
+
+The main campaign requires six successful Binding runs. Each successful Binding run destroys one of those six remaining restraints. Failed runs do not advance the Binding count.
+
+After the sixth Binding is destroyed, the Heart's deeper body is exposed and the next successful full run becomes the final campaign run. No Binding remains during that run, so Akio does not repeat the extraction ritual and is not automatically dissolved after the Shogun's defeat. He can remain in his current body, complete the Shogun's permanent defeat, and proceed into the true-final Heart encounter.
+
+The six-clear requirement is a roguelite mastery target rather than six unique story missions. Continued play is supported primarily by alternate Blood Aspects, Techniques, prosthetics, Relics, routes, rewards, persistent upgrades, and increasing player consistency.
+
+Mandatory clear-to-clear production remains restrained. Progress is communicated through:
+
+- six removable or broken Binding states around the same Heart chamber,
+- progressively greater Heart exposure and stronger room-local pulse, movement, sound, and reaction,
+- a clear destroyed-versus-remaining Binding tracker in results or campaign presentation,
+- and concise Shogun, NPC, or codex progression where appropriate.
+
+The base game does not require island-wide visual transformations, universal enemy modifiers, new regional environment sets, or new enemy families after every Binding clear. Those ideas remain optional future expansion material.
+
+The Binding identity, repeated ritual, persistent damage rule, forced-return cause, seven-original/six-remaining count, six successful Binding clears, and seventh final-run structure are locked. Exact Shogun reconstruction details, clear rewards, dialogue allocation, final permanent-death method, and true-final sequence remain open story-design questions.
 
 ## Run growth
 

@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - full-scope
   - asset-counts
@@ -13,6 +13,7 @@ topics:
   - techniques
   - the-heart
   - heart-bindings
+  - campaign-clears
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
@@ -20,7 +21,7 @@ related:
 
 # Full Game Scope
 
-This document records the current production-level shape of Oathbound. Exact balance values, frame counts, room counts, Technique and Relic catalog sizes, Heart Binding count, and implementation details remain subject to design lock and playtesting.
+This document records the current production-level shape of Oathbound. Exact balance values, frame counts, room counts, Technique and Relic catalog sizes, and implementation details remain subject to design lock and playtesting.
 
 ## Master scope summary
 
@@ -37,8 +38,10 @@ This document records the current production-level shape of Oathbound. Exact bal
 | Area 3 standard enemies | 5 | Court and inner-sanctum roster |
 | Miniboss encounters | 6 | Two per main area |
 | Regional major bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
-| True-final Heart encounter | 1 provisional | Confrontation after permanent Shogun defeat; manifestation and asset count remain open |
-| Environment sets | 4 + Heart subset | Strand plus Areas 1–3; Heart chamber remains an Area 3/endgame subset until scoped |
+| Heart Binding campaign | 7 original / 6 player clears | The Court destroyed one before the game; Akio destroys six through one reusable ritual |
+| Final campaign run | 1 | Seventh successful full run; permanent Shogun defeat followed by true-final Heart confrontation |
+| True-final Heart encounter | 1 provisional | Manifestation and asset count remain open |
+| Environment sets | 4 + Heart subset | Strand plus Areas 1–3; Heart chamber remains an Area 3/endgame subset |
 | Cross-area room types | 6 | Combat, Shrine, rest, shop, treasure/miniboss, boss |
 | Current currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
@@ -73,6 +76,7 @@ The former Storm, Frost, Ember, Hex, and Shadow stance system is removed. Burn a
 - Relics use a separate slot.
 - Run-only build state resets after death or successful Heart Binding completion.
 - Destroyed Heart Bindings and equivalent campaign progress persist across all later runs.
+- Six successful Binding clears form the long-term roguelite mastery objective before the final campaign run.
 
 ## Persistent hub — The Strand
 
@@ -159,7 +163,9 @@ Regional boss:
 
 Kagutsuchi Court remains the approved immaculate royal-court setting. Its elites retain intelligence, hierarchy, and advanced mutation but remain unable to reject Beast Blood. Their apparent mastery is false.
 
-Successful-run completion adds:
+The Heart's prison originally contained seven Bindings. The Court destroyed the outermost before the game, leaving six intact campaign Bindings.
+
+Successful Binding-run completion adds:
 
 - temporary access beyond the Shogun to the Heart chamber,
 - use of the Shogun-built extraction apparatus with Akio's Returning Blood,
@@ -168,9 +174,20 @@ Successful-run completion adds:
 - successful reconstruction at the Strand,
 - and permanent Binding-progress presentation.
 
-The completion sequence is one reusable ritual rather than a unique apparatus, puzzle, or win condition for every Binding. Production may escalate the scene through greater Heart exposure, stronger chamber reactions, and limited state variants.
+The completion sequence is one reusable ritual rather than a unique apparatus, puzzle, or win condition for every Binding. Akio completes six successful Binding runs. After the sixth Binding is destroyed, the next successful full run becomes the seventh and final campaign run, permanently defeats the Shogun, and continues into the true-final Heart encounter.
 
-After enough successful completions, the current direction includes permanent Shogun defeat and a true-final Heart encounter. Exact Binding count, clear-specific changes, final manifestation, mechanics, environment, animation, VFX, UI, and asset count remain open and must be locked before final Milestone 6 quotation.
+Required clear-to-clear presentation is concentrated in the Heart chamber:
+
+- one historical broken outer Binding,
+- six removable or destroyable remaining Binding layers,
+- progressively greater Heart exposure,
+- stronger room-local pulse, movement, sound, and reaction,
+- a fully exposed final state,
+- and a clear Binding-progress display.
+
+The base scope does not require island-wide visual transformations, universal enemy modifiers, new regional environment sets, new enemy families, or entirely different Shogun encounters after every successful clear. Such changes remain optional future expansion material.
+
+The final Heart manifestation, mechanics, environment, animation, VFX, UI, and asset count remain open and must be locked before final true-endgame quotation.
 
 ## Environment and room structure
 
@@ -227,7 +244,7 @@ Current reward ownership includes:
 - Boat Aspect-selection/run-start screen
 - Blood Mirror trial screen
 - Boss and miniboss presentation
-- Heart Binding completion and persistent campaign-progress presentation
+- Heart Binding completion, six-clear tracker, and persistent campaign-progress presentation
 - Hub progression interfaces
 - Functional room presentation
 - Pause, overview, results, settings, controls, save/loading, credits, and completion presentation
@@ -238,6 +255,6 @@ The current plan uses seven top-level art milestones with independently quoted i
 
 Removing five stance families reduces unique player-system VFX and status-art scope. Technique production instead requires reusable card templates, category and slot icons, reserve/replacement states, refinement markers, and only the bespoke combat VFX needed for approved Technique mechanics.
 
-The base Heart Binding ritual is now production-scopable as one reusable completion sequence. The total Binding-state variants and true-final Heart encounter remain unquoted until Questions 11–12 are locked.
+The Heart Binding campaign is production-scopable as one chamber, one extraction apparatus, one reusable completion sequence, six removable Binding layers, one fully exposed final state, limited escalating room-local effects, and campaign-progress UI. The true-final Heart encounter remains unquoted until Question 12 is locked.
 
 See [Production Roadmap](PRODUCTION_ROADMAP.md), [Asset Inventory](../art_production/ASSET_INVENTORY.md), and [Art Milestones](../art_production/milestones/README.md).
