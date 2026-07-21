@@ -4,7 +4,7 @@ title: Core Gameplay Loop
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - core-loop
   - first-attempt
@@ -13,6 +13,8 @@ topics:
   - shrine
   - techniques
   - heart-bindings
+  - true-final-heart
+  - postgame
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
@@ -20,6 +22,7 @@ related:
   - GAMEPLAY-PROGRESSION
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
+  - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
 # Core Gameplay Loop
@@ -45,8 +48,10 @@ The opening should reveal the return through brief gameplay presentation and sub
 7. Fill Corruption through combat accomplishments and choose Resist or Embrace at Shrines.
 8. Route toward previewed rewards that support build growth, survival, economy, or persistent progress.
 9. Die and reform at the Strand, or defeat the Eclipse Shogun and enter the Heart chamber.
-10. On a successful run, offer Returning Blood through the Shogun-built extraction apparatus. The Heart's failed attempt to reclaim that Blood breaks one ancient Heart Binding and dissolves Akio's current body.
+10. During the first six successful clears, offer Returning Blood through the Shogun-built extraction apparatus. The Heart's failed attempt to reclaim that Blood breaks one ancient Heart Binding and dissolves Akio's current body.
 11. Reform at the Strand, lose run-only state, keep permanent progression and the destroyed Binding, and prepare for the next crossing.
+12. After all six Bindings are destroyed, complete the seventh story run by defeating the Shogun's current body and continuing into the two-phase true-final Heart encounter without ending the run.
+13. After story completion, continue normal runs and optionally repeat the Heart route without additional story progression.
 
 ## Moment-to-moment loop
 
@@ -68,8 +73,12 @@ The introductory first attempt is the deliberate exception: Akio has no active B
 
 The player should commonly fill the four active Technique slots across Areas 1 and 2, then refine, replace, and perfect the build through Area 3. The single reserve allows controlled adaptation without becoming a full Technique inventory.
 
+The same active build continues from the Shogun into an enabled Heart route. The exact recovery, resource carryover, and encounter tuning between those bosses remain future design work.
+
 ## Design requirement
 
 Run systems should deepen the sword-combat loop rather than bypass it. A successful build may change timing, mobility, resource use, pressure, prosthetic behavior, or punish options, but Akio should still feel like a swordsman whose survival depends on reading combat correctly.
 
-The Heart Binding identity and one-Binding-per-successful-run ritual are locked. The total Binding count, changes after each completion, and true-final completion sequence remain story-design questions rather than locked gameplay values.
+The seven-original/six-remaining Binding count, six Binding clears, seventh final-story run, two-phase Heart concept, canonical first-clear ending, and repeatable non-progressing postgame route are locked.
+
+The Heart encounter uses established combat systems and does not add a separate weak-point subsystem. Exact attacks, tuning, postgame route controls, and deferred modifiers or variants remain future design work.
