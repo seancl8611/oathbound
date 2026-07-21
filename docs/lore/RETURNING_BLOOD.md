@@ -4,7 +4,7 @@ title: Returning Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 topics:
   - returning-blood
   - akio
@@ -12,6 +12,7 @@ topics:
   - blood-aspects
   - inherited-beast-blood
   - strand
+  - heart-bindings
 related:
   - LORE-BEAST-BLOOD
   - CHAR-AKIO
@@ -52,7 +53,7 @@ His first attempt therefore uses only his normal sword training and available Or
 
 Because Akio's body developed naturally around the inherited condition, the Blood reconstructs his established human form instead of immediately replacing it with a fixed corrupted form. He reforms at the Strand carrying the first known Returning Blood.
 
-The exact supernatural reason reconstruction selects the Strand is intentionally not overexplained. The first return establishes the Strand as the consistent destination of later reconstructions.
+That first complete reconstruction establishes the Strand as Returning Blood's stable return point. Later deaths follow the preserved human pattern and destination created by that first successful return. The deeper supernatural transport remains deliberately mysterious; the Bloodwell, Keeper, Boat, and Order warding do not create or power the revival.
 
 ## Why Akio is unique
 
@@ -87,14 +88,17 @@ The first attempt precedes the normal Blood-powered run loop:
 2. The player uses the base sword kit without Blood Aspects, Shrine evolution, or Blood Techniques.
 3. The attempt ends in Akio's first death.
 4. Dormant inherited Beast Blood awakens and reconstructs him at the Strand.
-5. Subtle physical and environmental signs establish that something has changed.
-6. The player gradually unlocks and learns the Blood systems during later runs.
+5. The first reconstruction establishes the stable human pattern and return point used by later returns.
+6. Subtle physical and environmental signs establish that something has changed.
+7. The player gradually unlocks and learns the Blood systems during later runs.
 
 The exact cause, location, and presentation of the first death remain production and opening-sequence decisions. It should not require a long cutscene or extensive explanation.
 
 ## Failed-run return
 
-After the first awakening, Returning Blood reforms Akio at the Strand whenever he dies during a run. The current run's Corruption, Blood Aspect Tier, Techniques, refinements, Gold, room progress, and temporary Relic effects are burned away during the return.
+After the first awakening, Returning Blood reforms Akio at the Strand whenever he dies during a run. Death is real: his current body is destroyed, while Returning Blood preserves continuity and reconstructs the established human pattern at its stable return point.
+
+The current run's Corruption, Blood Aspect Tier, Techniques, refinements, Gold, room progress, and temporary Relic effects are burned away during the return.
 
 Permanent upgrades, unlocked Aspects, Blood Mirror progress, discoveries, and major currencies survive according to the progression system.
 
@@ -102,15 +106,22 @@ Akio may then board the Boat and cross again while the campaign remains beneath 
 
 ## Successful-run return
 
-The current successful-run direction is:
+After defeating the Eclipse Shogun, Akio reaches the Heart chamber and uses the extraction apparatus built by the Shogun's civilization.
 
-1. Akio defeats the Shogun's current manifestation.
-2. He reaches the protected Heart or its access chamber.
-3. He damages or removes one persistent layer protecting the Heart.
-4. The Heart, chamber, or act destroys or expels his current body.
-5. Returning Blood reconstructs him at the Strand with permanent rewards and source damage preserved.
+The successful-run sequence is:
 
-The exact forced-return event, source layers, successful-clear count, and final completion sequence remain open.
+1. Akio cuts himself and places Returning Blood into the apparatus as the human-blood offering.
+2. The apparatus carries that Blood into the exposed Heart.
+3. The Heart attempts to absorb and reclaim its own power.
+4. Akio's Blood resists that control.
+5. The resulting rejection pulse breaks one ancient Heart Binding.
+6. The Heart retaliates through the same contact and dissolves Akio's current body into blood.
+7. Returning Blood follows the stable pattern and destination established by the first return and reconstructs him at the Strand.
+8. Temporary run-state is lost, while the destroyed Binding and permanent rewards remain.
+
+The process is intentionally direct. It does not require a different mechanism for each Binding, an extended ritual explanation, or visible travel of Akio's blood across the island.
+
+The Heart Binding remains destroyed because it is an external ancient restraint that the Heart did not create and cannot regenerate. Akio can complete only one Binding per run because the retaliation destroys his current body immediately after the rupture.
 
 ## Relationship to the Shogun
 
@@ -127,19 +138,19 @@ Akio's refusal remains more important than the lineage itself. He does not need 
 - Do not make Order warding or resolve the cause of Returning Blood.
 - Do not introduce a new dose of Beast Blood during Akio's first attempt.
 - Do not imply that ordinary contact, wounds, proximity, or death on the island creates Beast Blood bearers.
-- Do not describe the Keeper or Boat as the source of Returning Blood.
+- Do not describe the Keeper, Boat, Bloodwell, or Strand as the source of Returning Blood.
+- Do not turn the Strand return into a separate technical anchor system.
 - Do not call Akio half-human or require him to be nonhuman.
 - Do not give Akio Blood Aspects or advanced Blood Techniques before the first awakening.
-- Do not describe revival as casual immortality or a consequence-free reset.
+- Do not describe revival as consequence-free or imply that the current body survives death.
 - Do not treat Blood Aspects as unrelated magical classes.
 - Do not describe intelligent or deliberate mutation use by another bearer as genuine control equal to Akio's.
-- Do not reintroduce a complex Bloodwell/Wellspring anchor system unless explicitly approved.
 
 ## Deliberately unresolved
 
 - the exact identity and fate of the escaped child's mother and retainer,
 - how the bloodline remained hidden across generations,
 - the exact cause and location of Akio's first death,
-- why reconstruction selects the Strand,
+- the deeper metaphysics behind the first reconstruction and preserved return imprint,
 - when and how Akio and the Shogun confirm their relationship,
 - and whether any other dormant descendants still exist.
