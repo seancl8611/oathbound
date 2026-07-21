@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-07-20
 topics:
   - project-identity
   - combat
@@ -14,6 +14,7 @@ topics:
   - techniques
   - three-areas
   - the-heart
+  - heart-bindings
 related:
   - OVERVIEW-DESIGN-PILLARS
   - GAMEPLAY-COMBAT
@@ -30,7 +31,9 @@ Oathbound is a high-angle 2D action roguelite built around disciplined katana co
 
 The player controls Akio, a warrior of the Order sent through a containment barrier onto a cursed Japanese-gothic island. The island was once a flourishing kingdom that used rare Beast Blood from the Heart—an ancient living godlike organ or supernatural core—to survive a deadly plague. The apparent miracle gradually corrupted its people and ruler.
 
-The Heart's ultimate origin remains deliberately ambiguous. It possesses primal agency centered on survival, regeneration, growth, and continuation rather than a human personality or clearly explained plan.
+The Heart's ultimate origin remains deliberately ambiguous. It possesses primal agency centered on survival, regeneration, growth, continuation, resistance to restraint, and incorporation rather than a human personality or clearly explained plan.
+
+The Heart was already dormant and imprisoned beneath the island by layered ancient Heart Bindings created by an unknown power. The Shogun's civilization breached the outermost Binding during the plague and built its own extraction apparatus against the exposed Heart. Human blood was offered inward, and the Heart released Beast Blood outward.
 
 The Blood Moon is the visible result of a recurring active cycle within the Heart. During it, existing Beast Blood becomes stronger and the containment barrier comes under pressure. The Order-created Strand threshold, the Keeper, and a sealed Boat provide the controlled route Akio uses to enter the island.
 
@@ -47,6 +50,8 @@ The child escaped before the barrier was completed. The resulting bloodline surv
 Akio begins without active Blood powers. He is the first known descendant to return inside the barrier during a Blood Moon and die after the dormant condition has been fully stirred.
 
 His first death awakens its regenerative power and reconstructs him at the Strand as Returning Blood. Because his body developed naturally around the dormant condition, it preserves his established human form rather than immediately fixing him into an ordinary corrupted transformation.
+
+That first complete reconstruction establishes the stable human pattern and Strand destination used by later returns. The deeper supernatural transport remains deliberately mysterious.
 
 Akio is not immune. His lineage explains why Returning Blood can awaken; his discipline and resolve explain why he can later control and evolve it without surrendering himself to the curse.
 
@@ -80,7 +85,7 @@ Across a standard run, the player grows from the complete base sword kit into a 
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
 - Keeper-maintained Boat crossing through the Strand's controlled barrier threshold
 - Failed runs return Akio to the Strand through Returning Blood reconstruction
-- Successful runs defeat the Shogun, reach the protected Heart, damage one persistent Heart layer, and return Akio to the Strand with permanent rewards and campaign progress intact
+- Successful runs defeat the Shogun, use the Court's extraction apparatus to break one ancient Heart Binding with Returning Blood, dissolve Akio's current body, and reconstruct him at the Strand with permanent rewards and Binding progress intact
 
 ## Run-build philosophy
 
@@ -104,10 +109,10 @@ A single error should matter without routinely ending an otherwise viable standa
 - **Area 1 — Hushiro Gate Village / Rupture:** recent corruption, violence, bodily collapse, fragmented community, and desperate faith
 - **Area 2 — Yomori Grove / Adaptation:** long-term predation, true spirits persisting as incomplete remnants, and ecological devastation surrounding corrupted inhabitants
 - **Area 3 — Kagutsuchi Court / False Ascendancy:** courtly beauty, hierarchy, elite mutation, and the mistaken belief that Beast Blood has been mastered
-- **Run climax:** the Eclipse Shogun followed by temporary access to the protected Heart
-- **True-final direction:** permanent defeat of the Shogun and a deeper Heart confrontation after enough persistent layers have been removed
+- **Run climax:** the Eclipse Shogun followed by the reusable Heart Binding ritual
+- **True-final direction:** permanent defeat of the Shogun and a deeper Heart confrontation after enough Bindings have been removed
 
-The Heart's identity, discovery, extraction process, Blood Moon relationship, barrier origin, and Returning Blood origin are locked. Its number of layers, required clear count, final manifestation, and true-final encounter remain open.
+The Heart's identity, discovery, ancient imprisonment, Shogun-built extraction process, Blood Moon relationship, barrier origin, Returning Blood origin, Heart Binding identity, one-Binding-per-run ritual, persistent damage rule, and forced-return cause are locked. The total Binding count, changes after each clear, final manifestation, and true-final encounter remain open.
 
 ## Structural references
 
