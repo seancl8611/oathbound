@@ -15,8 +15,10 @@ topics:
   - techniques
   - the-heart
   - heart-bindings
+  - true-final-heart
 related:
   - OVERVIEW-FULL-SCOPE
+  - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
 # Asset Inventory
@@ -35,7 +37,7 @@ This is the high-level production inventory. Individual character, system, regio
 | Minibosses | 6 | Two per main area |
 | Regional bosses | 3 | One principal boss encounter per main area |
 | Heart Binding campaign | 7 original / 6 player clears | One historical broken layer, six removable campaign layers, and one fully exposed final state |
-| True-final Heart encounter | 1 provisional | Exact manifestation, phase, and reusable-asset count remain open |
+| True-final Heart encounter | 1 encounter / 2 forms | Unbound Heart followed by the enormous Vessel of Continuance |
 | Environment sets | 4 + Heart subset | Strand and Areas 1–3; Heart chamber remains an endgame subset |
 | Blood Aspect families | 3 | Wolf, Wraith, Ronin plus modular Tier escalation |
 | Prosthetic families | 8 | One approved tool family each |
@@ -44,7 +46,7 @@ This is the high-level production inventory. Individual character, system, regio
 | Currency families | 4 current | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
 
-The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, room variants, and true-final Heart assets remain granular and should be finalized when catalog and encounter scope are locked.
+The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, room variants, exact Heart animations, and exact Heart effects remain granular and should be finalized when catalog and encounter mechanics are locked.
 
 ## Player and player-system art
 
@@ -66,7 +68,9 @@ The former five stance families are removed. High-level counts for Technique ico
 - **Area 1:** 6 standard enemies, Village Ogre, The Collector, Keeper of the Gate
 - **Area 2:** 4 standard enemies, Embered Pilgrim, Rotwood Host, Twin Maws encounter
 - **Area 3:** 5 standard enemies, Blood Lotus, Eternal Swordsman, Eclipse Shogun
-- **True endgame:** provisional Heart encounter after permanent Shogun defeat; exact body, avatar, phase count, and use of existing assets remain open
+- **True endgame:** one two-phase Heart encounter using the freed Unbound Heart and the enormous nonhuman Vessel of Continuance
+
+The Heart forms are one encounter package, not two separate narrative characters. Exact attacks, animation counts, movement rules, and effect counts remain open until encounter design is approved.
 
 ## Environment sets and rooms
 
@@ -74,7 +78,7 @@ The former five stance families are removed. High-level counts for Technique ico
 - Hushiro modular base kit, functional rooms, miniboss spaces, and old-gate boss arena
 - Yomori base kit, functional rooms, failed-purification site, Rotwood arena, and Twin Maws arena
 - Kagutsuchi base kit, functional rooms, Blood Lotus arena, duel court, and Shogun throne-space
-- Heart chamber with one historical broken outer Binding, six removable campaign Bindings, one Shogun-built extraction apparatus, reusable successful-run completion state, fully exposed final state, and provisional true-final arena
+- Heart chamber with one historical broken outer Binding, six removable campaign Bindings, one Shogun-built extraction apparatus, reusable successful-run completion state, fully exposed final state, and a true-final arena supporting both Heart forms
 
 Cross-area room types:
 
@@ -106,7 +110,10 @@ Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Heal
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause screens
 - Blood Lotus multi-cycle UI support
 - Six-clear Heart Binding completion and persistent campaign-progress state
-- True-final Heart boss presentation after encounter lock
+- Two-phase true-final Heart boss presentation
+- First-clear ending and credits presentation
+- Shortened repeat-clear Heart results presentation
+- Postgame Heart-route access state after its control method is approved
 - Front end, settings, controls, save/loading, credits, and completion presentation
 
 ## Shared VFX families
@@ -158,11 +165,20 @@ Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Heal
 - Six removable or destroyed campaign Binding states
 - Fully exposed Heart state after the sixth clear
 - Progressively stronger room-local pulse, movement, sound, and reaction
-- True-final Heart effects only after manifestation and encounter mechanics are approved
+- Unbound Heart creature form with malformed locomotion structures
+- Vessel of Continuance creature form built around the visible Heart
+- One transformation between Heart phases
+- Heart destruction and curse-ending presentation
+- First-clear ending transition
+- Shortened repeat-clear transition
 
 The base successful-run ritual is one reusable sequence, not a different apparatus, puzzle, or bespoke win animation for every Binding. The six-clear structure does not add mandatory island-wide modifiers, rebuilt regional environments, new enemy families, or separate Shogun encounters after every clear.
 
-The Heart identity is locked, but its exact anatomy and final manifestation remain open. Art may imply a divine organ, island core, vessel, or remnant without conclusively explaining its origin or defaulting to a simple realistic oversized heart.
+The Heart encounter has exactly two conceptual forms. It does not require a humanoid swordsman, a third form, or a separate weak-point or body-part targeting system. Exact animation and VFX counts remain open until the moveset, arena behavior, and transition design are approved.
+
+The Heart identity is locked, but its exact final anatomy remains open. Art may imply a divine organ, island core, vessel, or remnant without conclusively explaining its origin or defaulting to a simple realistic oversized heart.
+
+Future postgame difficulty settings, modifiers, enemy or room variants, challenge restrictions, alternate conditions, and special Heart-route rewards are deferred and are not part of the initial inventory.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance VFX families are no longer planned. Burn and Shock remain supported by approved prosthetics. Frost and Hex are not baseline player status requirements.
 
@@ -189,4 +205,4 @@ The separate Posture Break Cue exists in the broader inventory, but its exact Mi
 
 When a system, enemy, boss, room type, item family, UI screen, or VFX family is added, removed, or reassigned, update this inventory and its assigned milestone in the same change.
 
-The Heart Binding completion sequence may be scoped as one reusable package with six removable layer states and one fully exposed final state. The true-final Heart encounter must not receive a fixed asset count or contractor quote until Question 12 is locked.
+The base Heart Binding completion sequence and two-form true-final Heart concept are production-scopeable. Exact Heart animation counts, VFX counts, postgame route controls, and reward presentation must remain unquoted until their gameplay rules are approved.
