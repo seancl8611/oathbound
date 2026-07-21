@@ -4,7 +4,7 @@ title: Beast Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - beast-blood
   - the-heart
@@ -13,10 +13,12 @@ topics:
   - inherited-beast-blood
   - heart-bindings
   - extraction
+  - ending
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
   - LORE-ECLIPSE-SHOGUN
+  - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
 # Beast Blood
@@ -32,7 +34,8 @@ Beast Blood is a rare supernatural power drawn from the Heart, an ancient living
 - Strong resolve can delay transformation, but ordinary bearers do not achieve Akio's true control.
 - A bearer who remains intelligent or composed may still be enslaved to desires reshaped by the Blood.
 - Beast Blood becomes naturally more powerful during the Blood Moon.
-- Once active in a bearer, Beast Blood does not require repeated doses or continued supply from the Heart.
+- Once active in a bearer, Beast Blood does not require repeated doses or continued transfer from the Heart while the Heart remains alive.
+- The Heart remains the supernatural source sustaining Beast Blood as an active curse. Destroying it makes all active Beast Blood inert.
 
 ## Discovery of the imprisoned Heart
 
@@ -95,13 +98,15 @@ This rarity is essential. The danger is not a conventional outbreak; it is the p
 
 ## Heart Bindings and awakening
 
-The remaining Heart Bindings still restrain the Heart and shield its deeper body.
+The Heart's ancient prison originally contained seven Bindings. The Court destroyed the outermost before the game, leaving six intact Bindings for Akio's campaign.
 
 Destroying a Binding permanently removes one part of that ancient prison. The Heart can regenerate living tissue, but it did not create the Bindings and cannot rebuild their materials, seals, or containment function.
 
 As more Bindings are destroyed, the Heart becomes more awake and its supernatural influence strengthens. Existing Beast Blood reacts more intensely, the Blood Moon may become more severe, and Akio experiences greater pressure and temptation from the curse.
 
 This influence does not require physical channels or a constant supply of Beast Blood to every bearer. Existing Blood remains part of each bearer and responds more strongly as the Heart's imprisonment weakens.
+
+After all six remaining Bindings are destroyed, the exposed Heart can tear free as the Unbound Heart and form the enormous Vessel of Continuance during the true-final encounter.
 
 ## Akio's inherited exception
 
@@ -168,6 +173,24 @@ The Heart possesses primal agency rather than a human personality. It does not r
 
 It gives genuine life and healing, but its form of preservation gradually rewrites the bearer according to that nature. Whether the Heart is malicious, instinctive, defensive, or simply incompatible with human life remains intentionally unresolved.
 
+## Destruction of the source
+
+The first true-final Heart victory canonically destroys the source sustaining Beast Blood.
+
+When the Heart dies:
+
+- active Beast Blood becomes inert,
+- regeneration and transformation can no longer sustain corrupted bodies,
+- the Shogun's reconstruction stops,
+- corrupted inhabitants are released from the Blood's influence before their bodies fail,
+- corrupted beasts and failed bodies collapse,
+- Yomori's spirits can pass on,
+- and the Blood Moon cycle ends.
+
+Akio's current complete human body survives, but Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction end. He becomes mortal.
+
+Repeat postgame Heart victories are gameplay challenges and do not represent additional canonical destructions of the source.
+
 ## Worship
 
 Some desperate inhabitants, especially among the ruined people of Hushiro Gate Village, may worship the Heart as the only power that answered their suffering. Their faith is fragmented and unstable rather than a complete island-wide religion.
@@ -182,7 +205,9 @@ Akio's lineage explains why this manifestation is possible. His resolve does not
 
 Other bearers may retain humanity, intelligence, or technical use of mutations, but Akio is the only known bearer with genuine control. He remains capable of resisting escalation, expressing different Blood Aspects, returning toward a controlled baseline, and opposing the Heart itself.
 
-After a Shogun victory, Akio can place Returning Blood into the Court's extraction apparatus. The Heart attempts to reclaim that Blood, but Akio's controlled Blood rejects its authority. The resulting pulse destroys one remaining Heart Binding before the Heart retaliates and dissolves Akio's current body.
+After a Shogun victory during the first six successful clears, Akio can place Returning Blood into the Court's extraction apparatus. The Heart attempts to reclaim that Blood, but Akio's controlled Blood rejects its authority. The resulting pulse destroys one remaining Heart Binding before the Heart retaliates and dissolves Akio's current body.
+
+Returning Blood's established rejection of the Heart may support the final narrative and visual resolution without becoming a separate one-off player mechanic.
 
 ## Visual discipline
 
