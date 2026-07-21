@@ -4,7 +4,7 @@ title: Eclipse Shogun
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - eclipse-shogun
   - beast-blood
@@ -30,7 +30,7 @@ The Heart was already buried beneath the island before the Shogun's civilization
 
 During the prosperous expansion of Kagutsuchi Court, royal excavation exposed a sealed stairway and ancient complex beneath the capital. The structure surrounded the Heart and contained layered seals, restraints, unknown materials, damaged inscriptions, and rooms whose original purposes could no longer be distinguished with certainty.
 
-These ancient Heart Bindings kept the Heart dormant, limited its influence, and protected its deeper body. The Shogun's civilization did not build them.
+These seven ancient Heart Bindings kept the Heart dormant, limited its influence, and protected its deeper body. The Shogun's civilization did not build them.
 
 The discovery was made by royal engineers, guards, scholars, physicians, and ritual specialists rather than by the Shogun personally. Competing interpretations described the Heart as an ancient god, a dangerous imprisoned entity, or an unknown natural power. The surrounding structure could be read as a shrine, prison, research site, containment system, or some combination.
 
@@ -40,7 +40,7 @@ A deadly plague later pushed the island's civilization toward extinction. When c
 
 The Shogun permitted the first forbidden extraction only when the kingdom appeared unlikely to survive without it.
 
-The intact Bindings prevented direct access to living Heart tissue. The Shogun authorized his researchers to breach or destroy the outermost Binding, stirring the Heart from deep dormancy and exposing a small part of it.
+The intact Bindings prevented direct access to living Heart tissue. The Shogun authorized his researchers to breach or destroy the outermost Binding, stirring the Heart from deep dormancy and exposing a small part of it. Six intact Bindings remained.
 
 The Court then built an extraction apparatus against that exposed portion. Researchers placed a small measure of freshly drawn human blood into the apparatus. No death or human sacrifice was required. The offering flowed inward, and the Heart responded by releasing a small quantity of Beast Blood outward into a collection vessel.
 
@@ -141,6 +141,8 @@ Their relationship develops across repeated encounters:
 3. **Recognition and recruitment** — The Shogun realizes Akio descends from the child who escaped before containment. He attempts to claim Akio as his heir, champion, general, and proof that the royal bloodline has produced a superior bearer.
 4. **Fear and hatred** — Akio refuses the claimed inheritance, repeatedly defeats the Shogun, and attacks the Heart. He proves that bloodline and Beast Blood do not require loyalty to either of them.
 
+The six Binding clears provide enough repeated confrontations to distribute this relationship gradually. Dismissal dominates before the first clear; fascination can develop across early clears; recognition and recruitment can occupy the middle clears; fear and hatred can dominate the final Binding clears and final campaign run. Exact dialogue allocation remains future narrative work.
+
 The Shogun's offer is sincere within his corrupted worldview, but it is possessive rather than loving or equal. He treats Akio's ancestry as another basis for ownership and wants to place him inside the Shogun's vision of conquest and salvation.
 
 Akio remains a quiet protagonist. Their connection should be communicated through restrained exchanges, old records, recognition, actions, and refusals rather than a large family melodrama or long speeches from Akio.
@@ -157,17 +159,23 @@ The Shogun remains the principal boss of Kagutsuchi Court. His three current pha
 
 The phases should reveal increasing Beast Blood use and culminate in a deliberate beast transformation. The transformation is not proof of genuine control and should not become a random mindless collapse. It is the final expression of the Shogun's false ascendancy: an intelligent ruler becoming a more powerful servant of the force he believes he mastered.
 
-His exact redesign remains open. A more regal, cunning, lightly armored sovereign may replace the current heavily armored warrior emphasis, but this should not be treated as approved art scope until the character direction is reviewed.
+The approved high-level character reference is **Kokushibo from _Demon Slayer_**. The intended qualities are composed aristocratic menace, severe discipline, quiet confidence, restrained speech, overwhelming swordmaster presence, and a controlled transition into something visibly inhuman without losing intelligence or dignity.
+
+This is a directional reference, not a design to copy. The Eclipse Shogun must retain an original face, anatomy, silhouette, costume, armor, weapon, color language, motifs, attack effects, and transformation. Kokushibo's distinctive eyes, clothing, sword design, moon motifs, visual effects, and exact mannerisms are not production requirements.
+
+His exact redesign remains open. A more regal, cunning, lightly armored sovereign may replace the current heavily armored warrior emphasis, but final body type, face, costume, weapon, movement language, transformation anatomy, and animation scope still require dedicated review before Milestone 6 quotation.
 
 `Tyrant of the Wellspring` remains a working phase name. The extraction decision does not establish a location, structure, or process called the Wellspring.
 
 ## Place in the successful-run sequence
 
-Defeating the Shogun temporarily opens the path to the Heart chamber.
+Defeating the Shogun temporarily opens the path to the Heart chamber during the first six successful clears.
 
 Akio then uses the Court's extraction apparatus to offer Returning Blood. The Heart's attempt to reclaim that Blood produces a rejection pulse that breaks one ancient Heart Binding. The Heart retaliates by dissolving Akio's current body, and Returning Blood reconstructs him at the Strand with the destroyed Binding preserved.
 
-The Shogun's reconstruction, permanent defeat condition, relationship to the remaining Binding count, and true-final version remain unresolved.
+The Shogun must reconstruct between those six successful Binding clears so that he remains the repeated run climax. His existing Beast Blood is sufficient for reconstruction and does not require a physical channel or renewed dose, but the exact reconstruction process, duration, visual presentation, and vulnerability remain unresolved.
+
+After Akio destroys the sixth remaining Binding, the next successful full run is the seventh and final campaign run. No Binding ritual remains after that Shogun defeat, allowing Akio to stay, make the defeat permanent, and continue into the true-final Heart encounter. The exact permanent-death method and final version remain unresolved.
 
 ## Open questions
 
@@ -175,6 +183,6 @@ The Shogun's reconstruction, permanent defeat condition, relationship to the rem
 - When and how do Akio and the Shogun confirm their relationship?
 - What exact encounter-by-encounter dialogue expresses dismissal, fascination, recruitment, and hatred?
 - How many unique or conditional conversations does the final game require?
-- Why and how does the Shogun reconstruct after successful runs?
-- How does his encounter change before the true-final Heart confrontation?
-- What final visual and combat identity best distinguishes him from the game's other samurai bosses?
+- What exact mechanism and presentation reconstruct the Shogun between the first six successful clears?
+- How, if at all, does his encounter vary before the true-final Heart confrontation?
+- What original body type, costume, weapon, movement language, and beast transformation best express the approved Kokushibo-like character direction without copying that character?
