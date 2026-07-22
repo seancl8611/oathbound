@@ -4,7 +4,7 @@ title: Document Review Map
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Document Review Map
@@ -24,6 +24,8 @@ Usually review:
 - `gameplay/RUN_STRUCTURE.md` when the campaign loop changes
 - relevant UI, asset inventory, and milestone files when presentation scope changes
 - terminology and current design questions
+
+The core story and lore are currently approved. New questions should not reopen canon unless a genuine contradiction or missing campaign decision is found.
 
 ## Combat rule change
 
@@ -75,7 +77,7 @@ Usually review:
 - item, Technique, and prosthetic art
 - asset inventory
 - Milestone 4
-- current launch catalog question
+- launch run-build content catalog
 
 ## Run structure or campaign change
 
@@ -92,6 +94,8 @@ Usually review:
 - Boat, Keeper, results, and Strand return
 - Heart Binding and postgame presentation
 - asset inventory and Milestones 3, 6, and 7
+
+The successful-run duration target is approved. Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain prototype and playtest work unless they create a verified new production package.
 
 ## Character, enemy, miniboss, or boss change
 
@@ -110,7 +114,7 @@ Usually review:
 - asset inventory
 - assigned milestone
 
-Exact timing and tuning should remain in the encounter file rather than being added to `OPEN_QUESTIONS.md` unless they change production scope.
+Exact timing, tuning, and movesets should remain in the encounter file rather than being added to `OPEN_QUESTIONS.md` unless they change production scope.
 
 ## Area or room change
 
@@ -128,6 +132,8 @@ Usually review:
 - asset inventory
 - assigned milestone
 
+Do not treat every possible room-layout or routing choice as a production-scope question. The top-level tracker is updated only when the decision changes required asset families, interfaces, or release content.
+
 ## Strand service or persistent-progression change
 
 Authorities:
@@ -144,7 +150,47 @@ Usually review:
 - hub UI and Strand HUD
 - asset inventory
 - Milestone 3
-- persistent-progression and trial-scope question
+- persistent progression, onboarding, and trial package
+
+## Narrative delivery change
+
+Authorities:
+
+- relevant lore and character files for canon
+- relevant UI, content, or milestone file for presentation ownership
+
+Usually review:
+
+- first-death and Returning Blood presentation
+- bloodline-confirmation delivery
+- Shogun dialogue and reconstruction states
+- NPC, codex, results, and Heart-chamber updates
+- ending and credits
+- portraits, voice, cinematics, and in-engine dialogue
+- Milestones 6 and 7
+- narrative delivery and authored-content package
+
+Presentation changes should not silently redefine approved story facts.
+
+## Postgame release change
+
+Authorities:
+
+- `gameplay/RUN_STRUCTURE.md`
+- `content/area_3/TRUE_FINAL_HEART.md`
+- relevant reward, Boat, results, and save-state UI files
+
+Usually review:
+
+- Heart-route access control
+- repeat-clear rewards and records
+- completed-save behavior
+- canonical-versus-repeat presentation
+- asset inventory
+- Milestones 6 and 7
+- postgame release package
+
+Deferred modifiers, enemy variants, room variants, and challenge restrictions remain outside the initial release unless intentionally promoted.
 
 ## Art milestone change
 
@@ -172,7 +218,7 @@ Create one authoritative file and stable document ID, then update only applicabl
 - asset inventory
 - assigned milestone
 - terminology
-- current design questions
+- current design questions when the new content creates a genuine production-scope decision
 
 ## Reliability rule
 
