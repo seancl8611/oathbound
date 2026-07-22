@@ -4,7 +4,7 @@ title: Oathbound Design Pillars
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-21
 topics:
   - combat-readability
   - tragic-horror
@@ -26,13 +26,13 @@ The central exchange is attack, defend, deflect, pressure posture, recognize the
 
 Returning Blood grants strength through Blood Aspects, but each increase in power should communicate mutation, danger, and loss of safety. Embrace and Resist are practical run decisions, not a simple good-versus-evil meter.
 
-Akio is the only known bearer with genuine control over Beast Blood. Other bearers may retain intelligence, skill, ambition, or the ability to direct mutations, but they ultimately lose the ability to reject the Blood's rule.
+Akio is the only known bearer with genuine control over Beast Blood. Other bearers may retain intelligence, skill, ambition, or deliberate mutation use while ultimately losing the ability to reject the Blood's rule.
 
 ## Tragic martial horror
 
-The island is frightening because its people accepted a miracle that saved their civilization before revealing its cost. Corrupted inhabitants retain enough memory, loyalty, recognition, and humanity to remain recognizable while becoming dangerous.
+The island is frightening because its people accepted a miracle that saved their civilization before revealing its cost.
 
-The horror comes from seeing the person, kingdom, or relationship that still exists inside the transformation—not from a mindless infection or a single metaphor assigned to every victim.
+Corrupted inhabitants retain enough memory, loyalty, recognition, and humanity to remain recognizable while becoming dangerous. The horror comes from seeing the person, kingdom, or relationship that still exists inside the transformation rather than from a mindless infection.
 
 Retained humanity does not equal freedom. Beast Blood can recruit a person's remaining loyalty, ambition, faith, and discipline into defending the force that enslaved them.
 
@@ -42,15 +42,15 @@ Every unit should communicate role through stance, weapon shape, posture, and ma
 
 ## Regional curse progression
 
-The three regions reveal increasingly established expressions of the same island-wide curse:
+The three regions reveal increasingly established expressions of the same curse:
 
-- **Hushiro Gate Village — Rupture:** recent corruption, bodily collapse, fear, violence, fragmented community, and desperate attempts to understand or worship the power transforming ordinary people.
-- **Yomori Grove — Adaptation:** long-term predation, spirit persistence, altered nature, and a curse that has become part of the region's ecological and spiritual condition.
+- **Hushiro Gate Village — Rupture:** recent corruption, bodily collapse, fear, violence, fragmented community, and desperate faith.
+- **Yomori Grove — Adaptation:** long-term predation, persistent spirits, and ecological damage caused by corrupted inhabitants and beasts living around the curse.
 - **Kagutsuchi Court — False Ascendancy:** beauty, hierarchy, elite discipline, and advanced mutation used as false evidence that Beast Blood has been mastered.
 
-The progression is thematic rather than a universal biological stage system. Different hosts may transform differently, but each region emphasizes a dominant relationship with the curse.
+The progression is thematic rather than a universal biological stage system. Beast Blood does not become environmentally contagious in Yomori.
 
-Kagutsuchi Court's inhabitants may direct their abilities and preserve more intelligence than the outer island's victims. They have evolved into more dangerous expressions of Beast Blood, not genuine masters equal to Akio.
+Kagutsuchi's inhabitants may direct abilities and preserve more intelligence than the outer island's victims. They are more dangerous servants of Beast Blood, not genuine masters equal to Akio.
 
 Escalation should be visible in silhouette, ornamentation, movement language, lighting, and corruption expression while preserving each region's established setting: gate village, forest, and royal court.
 
@@ -60,4 +60,6 @@ Blood Aspects, Techniques, prosthetics, Relics, and items should change tactics 
 
 ## Reusable production foundations
 
-Player scale, animation-state clarity, UI language, VFX hierarchy, palettes, pivots, and modular environment standards should be established early and inherited by later milestones. Production should remain divided into reviewable, dependency-aware batches even when the full game is scoped in advance.
+Player scale, animation-state clarity, UI language, VFX hierarchy, palettes, pivots, and modular environment standards should be established early and inherited by later milestones.
+
+Production should remain divided into reviewable, dependency-aware batches even when the full game is scoped in advance.

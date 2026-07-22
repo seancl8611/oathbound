@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - progression
   - persistence
@@ -13,7 +13,6 @@ topics:
   - forge
   - trials
   - currencies
-  - techniques
   - heart-bindings
 related:
   - GAMEPLAY-RUN-STRUCTURE
@@ -21,162 +20,171 @@ related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - GAMEPLAY-ITEMS-REWARDS
-  - CONTENT-STRAND-INTERACTIBLES
-  - UI-RUN-RESULTS
+  - META-OPEN-QUESTIONS
 ---
 
 # Progression
 
-Oathbound uses connected run-only, persistent character, and persistent campaign progression layers. Every system and item family must explicitly state whether its state survives failed death-return and successful completion.
+Oathbound uses three connected progression layers:
 
-## Run progression
+1. run-only build progression,
+2. persistent character progression,
+3. persistent campaign progression.
 
-Temporary power assembled during an attempt may include:
+Every system and item family must state whether it survives death and successful completion.
 
-- Blood Aspect Tier growth,
+## Run-only progression
+
+Temporary run state may include:
+
+- Blood Aspect Tier,
 - Corruption,
 - four active Techniques,
 - one reserve Technique,
-- Technique refinements and replacements,
+- Technique refinements,
+- temporary Prosthetic Techniques,
 - run-scoped Relic effects,
-- temporary prosthetic specialization,
 - Gold,
 - room progress,
-- temporary Health, Spirit, or capacity improvements,
-- temporary consumables or materials,
-- run-specific modifications and encounter rewards.
+- temporary Health or Spirit capacity,
+- consumables,
+- temporary encounter rewards.
 
-These states are burned away on failed death-return or successful Heart Binding return unless a later system explicitly reclassifies them.
-
-## Run-build ownership
-
-- **Blood Aspect:** central tactical identity and vertical Tier escalation.
-- **Technique system:** limited horizontal build construction through four active slots, one reserve, and shallow refinements.
-- **Prosthetic:** equipped tactical tool with permanent Forge development and temporary eligible Prosthetic Techniques.
-- **Relic:** separate rare passive rule using its own run-scoped slot.
-
-Permanent progression may unlock additional Techniques into future reward pools, but it does not preserve an assembled Technique loadout between runs.
+These states reset after failed death-return or successful Heart Binding completion unless an item explicitly defines a different rule.
 
 ## Persistent character progression
 
-The Strand supports growth that survives return:
+The Strand supports permanent growth through:
 
-- **Bloodwell:** broad permanent meta progression through Way of Steel, Way of Secrets, and Way of Vows.
-- **Forge Bench:** weapon, prosthetic, socket, and long-term combat-option development.
-- **Blood Mirror:** Aspect unlocks, trial completion, mastery progress, and small capped permanent Aspect upgrades.
-- **Blood Cavern trials:** combat teaching, repeatable mastery challenges, fixed-loadout tests, cosmetics, lore reflections, or completion marks.
-- **Discovery Board:** codex knowledge, enemy information, Technique/prosthetic/Relic notes, and recovered history.
-- **Merchant and NPC services:** persistent unlocks, stock access, or service progression where defined.
-- **Persistent currencies:** Mist, Scrolls, and Boss Emblems.
+- **Bloodwell:** broad meta progression,
+- **Forge Bench:** weapon and prosthetic development,
+- **Blood Mirror:** Blood Aspect unlocks, mastery, and small capped reliability upgrades,
+- **Blood Cavern:** teaching, fixed-loadout trials, mastery challenges, and approved unlocks,
+- **Discovery Board:** codex and recovered history,
+- **Merchant and NPC services:** approved stock or service progression,
+- **Mist, Scrolls, and Boss Emblems:** persistent currencies.
+
+Permanent progression may improve options, reliability, and resilience. It must not remove the need to read combat or replace run-build decisions.
+
+The exact launch depth of these systems remains part of the persistent-progression and trial-scope question.
 
 ## Persistent campaign progression
 
-Successful runs preserve destroyed Heart Bindings.
+The Heart's prison originally contained seven Bindings. The Court destroyed the outermost Binding before the game, leaving six intact.
 
-Each successful clear:
+Each successful Binding run:
 
-- destroys one ancient Binding through the Returning Blood ritual,
-- survives all later deaths and successful returns,
-- visibly exposes more of the Heart,
-- unlocks appropriate NPC, codex, environment, encounter, or world-state changes,
-- moves the campaign toward the Shogun's permanent defeat and the true-final Heart confrontation,
-- and remains separate from ordinary currencies and character-upgrade ranks.
+- destroys one of the six remaining Bindings,
+- permanently preserves that progress,
+- exposes more of the Heart,
+- updates campaign presentation,
+- and moves the story toward the final Heart route.
 
-The total Binding count and exact changes after each completion remain open, but the identity and persistence model are locked.
+Failed runs do not advance the count.
+
+After the sixth Binding is destroyed, the next successful full run becomes the seventh and final story run. It continues from the Shogun into the Heart without another Binding ritual.
+
+Destroyed Binding progress is not a currency, cannot be purchased, and cannot be lost.
 
 ## Currency ownership
 
-| Currency | Persistence | Primary ownership |
+| Currency | Persistence | Primary owner |
 |---|---|---|
-| Mist | Persistent | Base meta-progression currency; broadly usable by Bloodwell and approved hub systems |
-| Scroll | Persistent | Forge-focused weapon and prosthetic upgrade currency |
-| Boss Emblem | Persistent | Rare boss-derived currency for major progression gates or high-value nodes |
-| Gold | Run-only | Mid-run shop economy |
+| Mist | Persistent | Broad meta progression |
+| Scroll | Persistent | Forge upgrades |
+| Boss Emblem | Persistent | Rare major gates or high-value nodes |
+| Gold | Run-only | Shops and run economy |
 
-`Mist Shards` is deprecated draft terminology unless a separate shard denomination is intentionally reintroduced. UI and contractor briefs should use `Mist` for the current base persistent currency.
+`Mist Shards` is deprecated unless restored intentionally as a separate denomination.
 
 ## Blood Aspect persistence
 
 - Unlocked Aspects persist.
-- The player's selected Aspect remains available as a loadout choice.
-- Blood Aspect Tier starts at Tier 0 each run and resets after death or successful completion.
+- The selected Aspect remains available as a loadout choice.
+- Every run begins at Tier 0.
 - Corruption resets after the run.
-- Blood Mirror trial completion and small permanent upgrades persist.
-- Permanent Aspect upgrades cannot replace the run-changing Embrace Tier system.
+- Blood Mirror mastery and small permanent upgrades persist.
+- Permanent Aspect upgrades cannot replace the in-run Embrace Tier system.
 
 ## Technique persistence
 
-- Four active Technique slots and one reserve slot begin empty each run.
-- Active and reserve Techniques reset after death or successful completion.
-- Technique refinements reset with their base Techniques.
-- Techniques discarded or overwritten during a run are not restored at return.
-- Permanent systems may unlock a Technique into future reward pools or improve general access, but do not pre-equip run Techniques.
-- The initial scope does not include permanent increases to active or reserve Technique capacity.
+- Four active slots and one reserve begin empty each run.
+- Active Techniques, reserve, and refinements reset after the run.
+- Discarded or overwritten Techniques are not restored during the same run.
+- Permanent progression may unlock Techniques into future reward pools.
+- Permanent progression does not pre-equip a run Technique or increase slot capacity in the initial scope.
 
-## Prosthetic progression boundary
+## Prosthetic progression
 
-The Forge owns permanent prosthetic unlocks, baseline improvements, and long-term branches. The run owns temporary Prosthetic Techniques and refinements for the currently equipped tool.
-
-Permanent upgrades must not make temporary Prosthetic Techniques irrelevant or turn direct-damage tools into replacements for sword combat.
+- The Forge owns permanent prosthetic unlocks, baseline improvements, and long-term branches.
+- The run owns temporary Prosthetic Techniques and refinements for the equipped tool.
+- Permanent upgrades must not make temporary specializations irrelevant or replace sword combat.
 
 ## Trial reward boundary
 
-Blood Cavern and Blood Mirror rewards may improve reliability, grant unlocks, or record mastery. They must not create permanent versions of the major mechanics intended to arrive through in-run Aspect Tiers or Technique acquisition.
+Blood Cavern and Blood Mirror rewards may grant:
 
-Appropriate persistent rewards include:
-
-- Aspect access,
-- Technique-pool unlocks where explicitly designed,
-- capped timing or recovery comfort,
+- Blood Aspect access,
+- Technique-pool unlocks,
+- small timing or recovery reliability improvements,
 - modest posture reliability,
 - persistent currency,
 - cosmetics,
 - lore reflections,
-- challenge completion marks.
+- mastery marks.
+
+Trials may not:
+
+- add new Blood Aspect Tiers,
+- remove Embrace danger,
+- permanently pre-equip a Technique,
+- or create permanent versions of major run-only mechanics.
 
 ## Return processing
 
-Both failed and successful runs reconstruct Akio at the Strand through Returning Blood. A successful return additionally:
+Both failed and successful runs reconstruct Akio at the Strand through Returning Blood.
 
-1. saves permanent boss, destroyed-Binding, currency, discovery, and unlock rewards,
+A successful Binding return additionally:
+
+1. saves destroyed-Binding progress and permanent rewards,
 2. clears run-only state,
 3. presents a results summary,
-4. triggers relevant NPC, codex, Blood Mirror, Heart-state, or hub updates.
+4. triggers relevant NPC, codex, Blood Mirror, Heart, or hub updates.
 
-The results flow must distinguish retained rewards and campaign progress from states burned away during reformation.
+The results flow must clearly distinguish retained progress from burned-away run state.
+
+## Persistence matrix
+
+| Category | After death | After Binding completion |
+|---|---:|---:|
+| Narrative and codex progress | Persists | Persists |
+| Destroyed Heart Bindings | Persists | Persists |
+| Permanent upgrades | Persists | Persists |
+| Unlocked Blood Aspects | Persists | Persists |
+| Blood Mirror progress | Persists | Persists |
+| Techniques unlocked into future pools | Persists | Persists |
+| Mist, Scrolls, Boss Emblems | Persists | Persists |
+| Blood Aspect Tier | Resets | Resets |
+| Corruption | Resets | Resets |
+| Active and reserve Techniques | Resets | Resets |
+| Technique refinements | Resets | Resets |
+| Run-scoped Relic effects | Resets | Resets |
+| Gold | Resets | Resets |
+| Room progress | Resets | Resets |
+| Consumables | Item-specific | Item-specific |
 
 ## Design rules
 
-- Persistent growth may improve options, reliability, and resilience, but must not erase the need to read combat.
-- Run growth should create meaningful build identity before the final area.
-- The selected Blood Aspect remains more identity-defining than any single Technique.
-- Techniques are independently useful and do not depend on exact multi-Technique combinations.
-- Permanent Aspect upgrades stay small, capped, and reliability-focused.
-- Unlocks are documented separately from balance values.
-- Every persistent interface shows costs, prerequisites, ownership, and purchased/maxed states clearly.
-- Trial rewards remain deterministic enough that players understand success and failure.
-- Gold cannot appear as a persistent Strand wallet unless its persistence rule is deliberately changed in the same update.
-- Destroyed Heart Binding progress is not purchasable and cannot be lost.
+- Persistent growth improves options and reliability, not automatic victory.
+- Run growth should establish a meaningful build before Area 3.
+- Blood Aspect remains more identity-defining than any single Technique.
+- Techniques remain independently useful.
+- Permanent Aspect upgrades stay small and capped.
+- Unlocks and numerical balance values are documented separately.
+- Gold never becomes a persistent Strand wallet without an explicit system change.
 
-## Current persistence matrix
+## Current scope dependency
 
-| Category | Persists after death | Persists after completed run | Status |
-|---|---:|---:|---|
-| Narrative discoveries and codex progress | Yes | Yes | approved |
-| Destroyed Heart Binding campaign progress | Yes | Yes | approved; exact count and clear-specific changes open |
-| Permanent upgrades | Yes | Yes | approved |
-| Unlocked Blood Aspects | Yes | Yes | approved |
-| Selected Aspect as loadout option | Yes | Yes | approved |
-| Blood Mirror trial/mastery progress | Yes | Yes | approved |
-| Permanent Aspect upgrade ranks | Yes | Yes | approved |
-| Unlocked Techniques in future reward pools | Yes | Yes | approved |
-| Mist, Scrolls, Boss Emblems | Yes | Yes | approved |
-| Blood Aspect Tier | No | No | approved |
-| Corruption | No | No | approved |
-| Active Techniques | No | No | approved |
-| Reserve Technique | No | No | approved |
-| Technique refinements | No | No | approved |
-| Run-scoped Relic effects | No | No | approved |
-| Gold | No | No | approved |
-| Room progress | No | No | approved |
-| Individual consumables/materials | By item family | By item family | requires item-specific definition |
+The remaining progression-level question is the minimum launch depth of the Bloodwell, Forge, Blood Mirror, Blood Cavern, trial catalog, upgrade ranks, and unlock ownership.
+
+Exact upgrade percentages and currency costs remain later implementation and balance work.

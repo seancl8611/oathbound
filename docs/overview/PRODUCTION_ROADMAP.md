@@ -13,64 +13,64 @@ Oathbound art production is organized by dependency order and meaningful playtes
 
 ## Pre-milestone gate — Paid Style Test
 
-Before Milestone 1, a separately paid test establishes and locks practical sprite scale, palette, detail density, high-angle perspective fit, outline treatment, ground shadow, Hushiro tone, and Godot import quality. Approved test outputs become binding visual targets for Milestone 1.
+Before Milestone 1, a separately paid test locks practical sprite scale, palette, detail density, high-angle perspective, outline treatment, ground shadow, Hushiro tone, and Godot import quality.
 
 ## Milestone 1 — Combat vertical slice
 
-Establish Akio, core combat readability, three representative Area 1 enemies, the four-effect contractor VFX bundle, combat HUD, and the base Hushiro environment kit.
+Establish Akio, core combat readability, three representative Area 1 enemies, five shared combat VFX, Combat HUD, and the base Hushiro environment kit.
 
-The separate Posture Break Cue exists in the broader core-VFX plan but requires explicit batch assignment before it is treated as paid Milestone 1 scope.
+The Posture Break Cue is assigned to Batch 2 with the Corrupted Swordsman and Deathblow Cue so the complete posture-break-to-execution loop is reviewed together.
 
-## Milestone 2 — Complete Area 1 production
+## Milestone 2 — Complete Area 1
 
-Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional room skins, regional props, basic Shrine/Corruption presentation, and boss/miniboss UI.
+Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional-room skins, regional props, Shrine and Corruption foundations, and boss/miniboss UI.
 
-The Blood Aspect-specific VFX sets, complete Tier I–IV mutation overlays, and final Technique reward presentation remain deferred.
+Final Blood Aspect VFX, complete Tier I–IV mutation overlays, and final Technique presentation remain deferred to Milestone 4.
 
-## Milestone 3 — The Strand hub
+## Milestone 3 — The Strand
 
-Produce the six hub NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and meta-progression interfaces.
+Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
+
+The final depth of trials and permanent upgrade catalogs depends on the persistent-progression scope decision.
 
 ## Milestone 4 — Player combat depth and run-build expression
 
-Complete Wolf, Wraith, and Ronin VFX identities, modular mutation overlays, eight prosthetic families, the Technique reward/build interface, reusable Technique icon and card language, selected Technique combat-feedback needs, Relic presentation, and broad currency, pickup, breakable, and reward-object art.
+Complete Wolf, Wraith, and Ronin VFX identities, modular mutation overlays, eight prosthetic families, Technique reward and build interfaces, reusable Technique icon and card language, approved Technique combat-feedback needs, Relic presentation, and broad currency, pickup, breakable, and reward-object art.
 
-This milestone no longer includes five elemental stance families. Technique VFX should reuse approved sword, Aspect, and prosthetic language wherever possible rather than assigning a bespoke effect family to every Technique.
+Final unique icons and bespoke effects require the approved launch content catalog.
 
 ## Milestone 5 — Complete Area 2
 
-Produce Yomori Grove, its full enemy and boss roster, regional hazards, rooms, VFX, and integration pass.
+Produce Yomori Grove, its enemy and encounter roster, regional hazards, functional rooms, VFX, and integration pass.
 
-## Milestone 6 — Complete Area 3 and endgame
+Exact Twin Maws transition values remain implementation and playtest work rather than quotation blockers for the high-level encounter package.
 
-Produce Kagutsuchi Court, its roster, major encounters, Eclipse Shogun, Heart chamber approach, the Court-built extraction apparatus, one reusable Heart Binding completion sequence, six Binding states, the fully exposed Heart, the two-phase true-final Heart encounter, first-clear ending presentation, shortened repeat-clear presentation, and endgame integration.
+## Milestone 6 — Area 3 and endgame
 
-The Binding-completion package uses the same core ritual after each of the first six successful clears: Returning Blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. It does not require a different mechanism, puzzle, or bespoke win sequence for every Binding.
+Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, Court-built extraction apparatus, reusable Heart Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart encounter, ending presentation, and repeat-clear presentation.
 
-The final story run continues from defeat of the Shogun's current body into the Heart without ending the run. The Heart encounter uses the freed Unbound Heart and the enormous Vessel of Continuance as its two conceptual forms.
+The Eclipse Shogun's high-level identity is approved. His exact encounter structure, weapon, attacks, transformation anatomy, animation list, and bespoke effects require later concept and gameplay-design approval before final quotation.
 
-The Heart does not require a humanoid swordsman, a third phase, or a separate weak-point subsystem. Exact attacks, animation counts, effects, tuning, arena rules, and recovery between bosses remain dependent on later encounter design and playtesting.
+The Heart Binding package uses one reusable ritual after each of the first six successful clears. The seventh story run continues from the Shogun into the Heart without ending the active build.
 
-The first Heart victory ends the story. Repeat Heart victories remain available as postgame gameplay challenges without additional story progression.
+The true-final Heart has two conceptual forms and does not require a humanoid swordsman form, third phase, or separate weak-point subsystem.
 
-Future difficulty settings, run modifiers, enemy or room variants, challenge restrictions, alternate conditions, and special Heart-route rewards remain deferred expansion ideas and are not part of the initial roadmap scope.
+## Milestone 7 — Release presentation and cohesion
 
-## Milestone 7 — Release presentation and final cohesion
+Complete front-end UI, narrative presentation, achievements and store art, missing-asset audit, cross-game readability, and final production cleanup.
 
-Complete front-end UI, narrative presentation, achievements/store art, missing-asset audit, cross-game readability, and final production cleanup.
+Narrative volume, voice acting, cinematics, postgame route control, and repeat-clear rewards must be approved before their final production scope is quoted.
 
 ## Production rules
 
-- Characters are concepted and key poses approved before specialized VFX are finalized.
+- Character concepts and key poses precede specialized VFX.
 - Base character art precedes mutation overlays.
-- Base regional kits precede room variants; final arenas follow confirmed combat footprints.
-- Reusable Technique card, slot, reserve, refinement, and category language may be produced before the complete Technique catalog is locked.
-- Unique Technique icons and bespoke combat effects require a locked catalog entry before final quotation.
-- The base Heart Binding ritual may be scoped as one reusable package.
-- The six Binding-state variants and fully exposed state are locked at high level, but exact layer construction remains an art-design task.
-- The two Heart forms and one transformation may be scoped conceptually; exact animation and VFX counts require the approved moveset and arena design.
-- Postgame route controls and repeat-clear rewards require system design before final UI quotation.
-- Deferred postgame modifiers and variants must not be included in the initial quote unless intentionally promoted into base scope later.
-- Each milestone is divided into separately quoted, payable, reviewable batches.
+- Base regional kits precede room variants and final arenas.
+- Reusable Technique UI may be produced before the complete Technique catalog is locked.
+- Unique Technique icons and bespoke effects require approved catalog entries.
+- The base Heart Binding ritual is one reusable package.
+- Exact Heart and Shogun animation and VFX counts require approved encounter designs.
+- Deferred challenge modifiers and variants are excluded from the initial quote unless intentionally promoted later.
+- Each milestone uses separately quoted, payable, reviewable internal batches.
 - Every batch receives sheet-level and in-engine review.
-- Contractor-facing Word/PDF documents are exports; Markdown remains the internal source of truth.
+- Markdown remains the internal source of truth; Word and PDF files are exports.

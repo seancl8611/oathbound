@@ -2,59 +2,73 @@
 id: LORE-WORLD
 title: World
 category: lore
-status: draft
+status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 ---
 
 # World
 
-Oathbound takes place primarily on an isolated Japanese-gothic island sealed behind an ancient barrier.
+Oathbound takes place primarily on an isolated Japanese-gothic island contained behind a barrier created after the kingdom's fall.
 
 ## The island
 
-The island was once a flourishing kingdom. Beast Blood saved much of its population from a deadly plague before gradually corrupting the people who used it.
+The island once supported a flourishing kingdom. Beast Blood saved much of its population from a deadly plague before gradually corrupting those who used it.
 
-The island is not a mindless ruin. Many inhabitants retain fragments of memory, loyalty, recognition, training, attachment, and territorial identity:
+The island is not a mindless ruin. Inhabitants may retain memory, loyalty, recognition, training, relationships, ambition, and territorial identity while remaining unable to reject Beast Blood or act against its continuation.
 
-- soldiers recognize comrades and continue defending the kingdom,
-- subjects may remain loyal to the Shogun who once saved them,
-- animals recognize handlers, packs, and familiar territory,
-- corrupted people may repeat customs or behaviors they still partially remember,
-- other victims have lost bodily stability and persist as beasts, failed forms, or spirit-like remnants.
-
-These fragments do not make the inhabitants healthy or fully rational. They explain coexistence without requiring a hive mind. Akio is attacked because he is an armed outsider and warrior of the Order entering defended territory.
+Akio is attacked because he is an armed Order warrior entering defended and corrupted territory, not because every inhabitant belongs to a hive mind.
 
 ## The Strand
 
-The Strand is the persistent hub from which Akio prepares, recovers, trains, and returns to the island. It is connected to the run loop through the Boat and houses the game's primary meta-progression characters and interactibles.
+The Strand is the persistent shoreline hub built around the barrier's controlled threshold.
+
+The Keeper stabilizes the crossing used by the Order-sealed Boat. Akio prepares, trains, progresses, departs, and reconstructs there.
 
 ## Hushiro Gate Village
 
-A wet, militarized village threshold. It remains recently human: timber, mud, soot-black tile, lanterns, barricades, guard buildings, cellars, and broken defensive infrastructure.
+Hushiro is the island's outer militarized settlement and Area 1.
+
+Its wet timber, mud, tile, lanterns, barricades, guard buildings, cellars, and broken defenses preserve the read of a community that collapsed recently enough to remain recognizable.
+
+Its regional theme is rupture.
 
 ## Yomori Grove
 
-A deeper region shaped by spirit remnants, predators, lantern rites, roots, mist, and long-term Beast Blood corruption. Its spirits remain connected to the same curse, although the exact process by which corrupted people become wraith-like forms remains unresolved.
+Yomori is Area 2, shaped by predators, shrine paths, lantern rites, mist, roots, and persistent spirits.
+
+Its ecological damage comes from the prolonged presence and actions of corrupted inhabitants and beasts. Beast Blood does not spread through soil, roots, water, prey, or vegetation.
+
+Yomori's wraiths are true spirits of people who died after being shaped by the Beast Blood tragedy. They persist as incomplete memories, attachments, duties, rituals, paths, or fighting instincts.
+
+Its regional theme is adaptation.
 
 ## Kagutsuchi Court
 
-The island's court and endgame region. It expresses the surviving authority, wealth, loyalty, hierarchy, and corruption of the Shogun's former kingdom.
+Kagutsuchi is the island's royal court and Area 3.
 
-The Heart was discovered beneath the Court during the kingdom's prosperous expansion. Royal excavation exposed a sealed passage and an older complex built around the imprisoned Heart. The complex is a restricted structure beneath the established Court setting, not a replacement underground region.
+It preserves authority, wealth, hierarchy, beauty, and disciplined mutation beyond natural possibility. Its elites mistake retained intelligence and controlled transformation for mastery.
+
+Its regional theme is false ascendancy.
 
 ## The ancient Heart complex
 
-The complex surrounding the Heart predates the Shogun's civilization. Multiple ancient Heart Bindings kept the Heart dormant, limited its influence, and protected its deeper body. Their builders, age, method, and complete purpose remain unknown.
+Royal excavation beneath Kagutsuchi Court exposed a structure that predates the Shogun's civilization.
 
-Other seals, inscriptions, rooms, and ritual markings do not clearly reveal whether the builders worshipped, imprisoned, studied, contained, or attempted to survive contact with the Heart.
+The complex surrounds the Heart and its seven ancient Heart Bindings. Its builders, age, method, and original purpose remain unknown.
 
-The Shogun sealed the site and prohibited direct human use before the plague. During the plague, he authorized researchers to breach or destroy the outermost Binding, which stirred the Heart and exposed a small portion of living tissue.
+The structure may have served as a shrine, prison, research site, containment system, or several functions across an unknown history. Its remaining inscriptions and rooms do not provide a definitive answer.
 
-The Court then built its own extraction apparatus against that exposed portion. Researchers placed a small measure of freshly drawn human blood into the apparatus. No death or human sacrifice was required. The offering flowed inward, and the Heart answered by releasing a small quantity of Beast Blood outward into a collection vessel.
+The Shogun initially sealed the site and prohibited direct human use.
 
-The process is dangerous and cannot become routine industrial harvesting. It requires direct entry into the Heart chamber and deliberate contact with the awakened source.
+During the plague, he authorized researchers to breach the outermost Binding. The Court then built its own extraction apparatus against the exposed Heart. The apparatus and the ancient Binding system must remain historically and visually distinct.
 
-The remaining Bindings continue to restrain the Heart. Destroying them strengthens its influence but does not create a physical channel or continued Blood supply to the island's bearers.
+The remaining six Bindings restrain the Heart when the game begins. Destroying them releases more of its influence but does not create a physical channel or continued Blood supply to existing bearers.
 
-The term `Wellspring` is not approved as the name of this complex, its extraction apparatus, or the process that produces Beast Blood. It remains only in the working Eclipse Shogun phase name `Tyrant of the Wellspring` unless deliberately redefined later.
+## Containment barrier
+
+The barrier is not ancient and was not built by the unknown Heart-complex civilization.
+
+Survivors, mainland warriors, ritualists, and religious authorities created it after the kingdom's fall. Their organization became the Order.
+
+The barrier contains corrupted inhabitants and prevents deliberate transport of Beast Blood or Heart-derived material. The Blood Moon places it under pressure and creates the rare crossing opportunity used by Akio.

@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 topics:
   - techniques
   - run-builds
@@ -18,247 +18,193 @@ related:
   - GAMEPLAY-ITEMS-REWARDS
   - UI-TECHNIQUE-REWARDS
   - ART-TECHNIQUE-VFX
-  - ART-MILESTONE-04
+  - META-OPEN-QUESTIONS
 ---
 
 # Technique System
 
-Techniques are temporary in-run upgrades that strengthen or reshape Akio's existing combat actions. They replace the former five-stance system and broad generic boon layer.
+Techniques are temporary in-run upgrades that strengthen or reshape Akio's existing combat actions. They provide horizontal customization around the selected Blood Aspect rather than replacing it as the run's central identity.
 
-## System role
+## System ownership
 
-The selected Blood Aspect is the central identity of a run. Techniques provide horizontal customization around that identity by modifying sword actions, defensive responses, movement, executions, resources, and the equipped prosthetic.
+- **Blood Aspect and Corruption:** vertical risk-and-power progression.
+- **Techniques:** limited horizontal run-build construction.
+- **Prosthetic:** equipped tactical tool with eligible temporary Techniques.
+- **Relic:** separate passive rule using its own slot.
 
-The systems remain distinct:
+Technique builds must deepen sword combat rather than automate or replace it.
 
-- **Blood Aspect and Corruption:** vertical risk-and-power escalation through Tier 0–IV.
-- **Techniques:** limited horizontal build construction during the current run.
-- **Prosthetic:** equipped tactical tool with eligible temporary Prosthetic Techniques.
-- **Relic:** separate rare passive rule using its own slot.
+## Starting state and capacity
 
-Technique builds must deepen the sword-combat loop rather than automate or replace it.
+Each run begins with:
 
-## Starting state
+- four empty active Technique slots,
+- one empty inactive reserve slot.
 
-- Technique slots begin empty.
-- Akio does not begin with weak placeholder or default Techniques.
-- The base katana kit, selected Blood Aspect at Tier 0, equipped prosthetic, and permanent progression provide the starting combat foundation.
-- New Techniques should feel like meaningful power gained during the run.
+Akio does not begin with placeholder Techniques. The base katana kit, selected Blood Aspect, equipped prosthetic, and permanent progression provide the starting foundation.
 
-## Loadout limit
+Only active Techniques affect combat. The reserve is not a full inventory.
 
-Akio has:
-
-- **four active Technique slots,**
-- **one inactive reserve slot.**
-
-Only active Techniques affect combat. The reserve holds one dormant Technique and is not a full inventory.
-
-The four active slots are unrestricted. They are not permanently assigned to Blade, Deflection, Movement, Execution, or Prosthetic categories. A player may build any combination that remains valid under the general rules.
-
-The initial scope does not include permanent increases to the four active slots or the single reserve slot.
+The four active slots are unrestricted by category. The initial scope does not include permanent slot-capacity increases.
 
 ## Acquiring Techniques
 
 Technique opportunities normally present three cards.
 
-While an active slot is empty:
+While an active slot is empty, the selected Technique fills that slot.
 
-1. the player chooses one Technique,
-2. it fills an empty active slot,
-3. the Technique remains active for the current run.
-
-After all four active slots are full, a selected new Technique may:
+After all active slots are full, a selected new Technique may:
 
 - replace any active Technique,
-- enter the reserve slot,
-- be declined in favor of the displayed smaller fallback reward.
+- enter the reserve,
+- or be declined for the displayed smaller fallback reward.
 
-The new Technique does not dictate which active Technique it replaces. The player chooses.
+The player chooses which active Technique is replaced.
 
-## Replacement and reserve behavior
+## Replacement and reserve
 
 When a new Technique replaces an active Technique:
 
 1. the new Technique becomes active,
-2. the displaced active Technique moves to reserve,
-3. if reserve is already occupied, its previous Technique is permanently lost for the current run after an explicit confirmation.
+2. the displaced Technique moves to reserve,
+3. if reserve is occupied, its previous Technique is lost for the run after explicit confirmation.
 
-The player may exchange the reserve Technique with any active Technique only at:
+The reserve may be swapped with an active Technique only at:
 
 - Technique reward screens,
 - rest rooms.
 
-General swapping is not available during combat or from the ordinary pause screen.
-
 Reserve rules:
 
-- the reserve Technique is inactive,
-- it retains any refinement already earned,
-- it cannot receive a new refinement while inactive,
-- overwriting it loses it for the current run,
-- a lost or declined Technique is not guaranteed to return, although normal reward generation may offer the same Technique again.
+- inactive while stored,
+- retains an existing refinement,
+- cannot receive a new refinement while inactive,
+- is lost if overwritten,
+- and is not guaranteed to reappear after being lost or declined.
 
-This structure preserves forward-moving decisions while allowing one controlled experiment, contingency, or later reorganization.
+## Construction rules
 
-## Technique construction rules
+Every Technique should:
 
-Every Technique must be:
+1. provide immediate value on its own,
+2. become stronger through compatible combat behavior,
+3. remain functional without an exact combination.
 
-1. useful immediately on its own,
-2. stronger when paired with compatible combat verbs or the selected Aspect,
-3. functional without requiring an exact combination.
+Synergy should emerge through shared combat verbs such as:
 
-Most Techniques are standalone. Synergy should emerge primarily through shared player behavior rather than dependency webs.
-
-Examples of shared combat verbs include:
-
-- `PARRY`
-- `COUNTER CUT`
-- `POSTURE`
-- `DEATHBLOW`
-- `DASH`
-- `FLANK`
-- `PREY`
-- `PURSUIT`
-- `PROSTHETIC`
-- `SPIRIT`
-
-A Ronin build may naturally connect perfect parry, Counter Cut, posture break, and deathblow Techniques without those Techniques explicitly requiring one another.
-
-## Refinements and conditional upgrades
-
-A Technique may have at most one refinement:
-
-> Base Technique → one refinement
-
-Refinements:
-
-- do not consume another Technique slot,
-- may appear only after the base Technique is active,
-- directly deepen the base effect,
-- retain their state if the Technique moves into reserve.
+- parry,
+- Counter Cut,
+- posture,
+- deathblow,
+- dash,
+- flank,
+- Prey,
+- pursuit,
+- prosthetic,
+- Spirit.
 
 Do not create:
 
-- chains deeper than one refinement,
-- Techniques requiring multiple other Techniques,
-- exact multi-Technique combination requirements,
-- unusable investment pieces that have no current effect,
-- large Hades-style duo or legendary prerequisite webs.
+- Techniques that do nothing without another Technique,
+- exact multi-Technique dependency chains,
+- deep prerequisite webs,
+- or automatic effects that replace active combat execution.
 
-Rare authored interactions may exist, but they must remain understandable, independently functional, and limited in number.
+## Refinements
 
-## Technique categories
+A Technique may receive at most one refinement.
 
-Categories organize reward pools and communication; they are not slot restrictions.
+A refinement:
 
-### Blade Techniques
+- does not consume another slot,
+- may appear only while the base Technique is active,
+- directly deepens the base effect,
+- remains attached if the Technique moves to reserve.
 
-Modify the approved katana actions, such as Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, or Dash Slash.
+No refinement chain extends beyond one step.
 
-### Deflection Techniques
+## Categories
 
-Modify parries, blocking, posture control, Counter Cut follow-ups, or mastery-based defensive rewards.
+Categories organize communication and reward generation. They do not restrict slots.
 
-### Execution Techniques
-
-Modify posture breaks, deathblows, kill momentum, or execution-linked recovery.
-
-### Movement Techniques
-
-Modify dashes, clean avoidance, repositioning, flanking, pursuit, or re-entry attacks.
-
-### Prosthetic Techniques
-
-Temporarily modify the equipped prosthetic. They use the same four active slots as other Techniques.
-
-### General Techniques
-
-Support health, posture, Spirit, recovery, or other broadly useful run behaviors without becoming generic percentage-stat clutter.
+- **Blade:** modifies approved katana actions.
+- **Deflection:** modifies parry, block, posture, Counter Cut, or defensive mastery.
+- **Execution:** modifies posture break, deathblow, or execution momentum.
+- **Movement:** modifies dash, repositioning, flanking, pursuit, or re-entry.
+- **Prosthetic:** temporarily modifies the equipped tool.
+- **General:** supports health, Spirit, recovery, or broad combat rules without generic stat clutter.
 
 ## Prosthetic Techniques
 
-Prosthetic Techniques are part of the normal Technique system, not a separate in-run tree or interface.
+Prosthetic Techniques use the normal Technique system.
 
-Rules:
-
-- only Techniques for the currently equipped prosthetic are eligible,
-- a major prosthetic modification occupies one active Technique slot,
-- its one-step refinement is slotless,
-- the Forge owns permanent unlocks and baseline tool development,
-- the run owns temporary specialization and synergy.
-
-Example structure:
-
-- **Scorching Wake:** Flame Vent leaves a small scorched zone.
-- **Fed Embers — refinement:** the scorched zone lasts longer and applies greater pressure.
-
-The second option may appear only after Scorching Wake is active. No deeper Flame Vent chain follows it in the initial system.
+- Only the equipped prosthetic contributes eligible Techniques.
+- A major prosthetic modification occupies one active slot.
+- Its single refinement is slotless.
+- The Forge owns permanent tool development.
+- The run owns temporary specialization.
+- Prosthetic Techniques should strengthen the tool's existing tactical role rather than replace it with an unrelated ability.
 
 ## Blood Aspect relationship
 
-Every post-unlock run confirms one Blood Aspect at the Boat. The Aspect defines the broad tactical identity; Techniques shape the player's expression of it.
+The selected Aspect weights Technique offers without fully restricting them.
 
-Technique generation may weight options toward the selected Aspect without fully restricting the pool:
+- **Ronin:** parry, posture, Counter Cut, deathblow, controlled defense.
+- **Wolf:** Prey, pursuit, consecutive pressure, wounded targets, execution momentum.
+- **Wraith:** clean avoidance, repositioning, flanking, Dash Slash, punish-after-dodge.
 
-- **Ronin:** parry, posture, Counter Cut, deathblow, and controlled defense.
-- **Wolf:** prey, pursuit, consecutive pressure, wounded targets, and execution momentum.
-- **Wraith:** clean avoidance, repositioning, flanking, Dash Slash, and punish-after-dodge play.
+Neutral, recovery, prosthetic, and alternate-style Techniques remain available so runs using the same Aspect can develop differently.
 
-Neutral, prosthetic, recovery, and alternate-style Techniques remain available so two runs using the same Aspect can develop differently.
-
-Techniques should connect to Aspect Tiers through shared verbs and natural amplification. Ordinary Techniques should not require a particular Tier unless a rare, clearly authored interaction explicitly needs that boundary.
+Ordinary Techniques should not require a specific Aspect Tier unless a rare authored interaction explicitly needs that boundary.
 
 ## Reward-generation principles
 
-Before four active slots are filled, Technique offers should favor:
+Before all active slots are filled, offers should favor:
 
-- immediately useful new Techniques,
+- useful new Techniques,
 - selected-Aspect compatibility,
 - occasional eligible Prosthetic Techniques,
 - occasional higher-rarity options.
 
-After four slots are filled, offers should usually mix:
+After the loadout is full, offers should usually mix:
 
-- a compatible new Technique,
+- a compatible replacement,
 - a refinement for an active Technique,
 - a Prosthetic Technique, rare option, or wildcard.
 
-Reward generation should avoid three unusable or overly narrow choices. Limited rerolls and smaller decline rewards may reduce extreme bad luck without guaranteeing a perfect build.
+The generator should avoid three unusable or excessively narrow options. Limited rerolls and decline rewards may reduce extreme bad luck without guaranteeing a perfect build.
 
-Detailed room ownership and reward cadence belong in [Items, Currencies, and Rewards](ITEMS_AND_REWARDS.md). Screen behavior belongs in [Technique Rewards and Build Management](../ui_ux/TECHNIQUE_REWARDS.md).
+Detailed cadence and room ownership belong in `ITEMS_AND_REWARDS.md`.
 
 ## Expected late-run state
 
 A successful late run should commonly reach:
 
-- Blood Aspect Tier II–IV depending on Resist/Embrace decisions,
+- Blood Aspect Tier II–IV depending on Shrine choices,
 - four active Techniques,
 - one optional reserve Technique,
 - one to three refined Techniques,
-- zero or more Prosthetic Techniques within the four active slots,
+- zero or more Prosthetic Techniques within the active slots,
 - one run-scoped Relic when obtained,
-- additional resource and survival growth from other reward categories.
+- additional survival and resource growth.
 
-The late-game power fantasy should come from several coherent layers reinforcing skilled combat, not from collecting every mechanic in the catalog.
+The late-run fantasy should come from several coherent layers reinforcing skilled play rather than collecting every catalog entry.
 
-## Run reset
+## Reset rule
 
-Active Techniques, the reserve Technique, and all refinements are run-only. They are burned away after failed death-return or successful Wellspring completion.
+Active Techniques, reserve, and refinements reset after death, successful Heart Binding completion, or story completion.
 
-Permanent progression may unlock additional Techniques into future reward pools or improve baseline reliability, but it does not preserve an assembled Technique build between runs.
+Permanent progression may unlock additional Techniques into future reward pools. It does not preserve an assembled build between runs.
 
-## Open balance work
+## Current scope dependency
 
-Still subject to implementation and playtesting:
+The structural system is resolved. The remaining production-level question is the minimum launch catalog:
 
-- final Technique catalog size,
-- individual effects and values,
-- rarity weights,
-- exact reward cadence,
-- reroll availability and cost,
-- decline-reward values,
-- final Aspect weighting,
-- final Relic interactions,
-- exact number of refinements expected per successful run.
+- total base Technique count,
+- category distribution,
+- refinement count,
+- Prosthetic Technique count per tool,
+- unique icon requirements,
+- bespoke VFX or animation requirements.
+
+Individual effects, values, rarity weights, Aspect weighting, reroll rates, and expected refinement frequency remain later design and playtest work.

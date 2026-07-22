@@ -4,7 +4,7 @@ title: Core Combat and Corruption VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 topics:
   - vfx
   - parry
@@ -20,121 +20,103 @@ related:
   - UI-HUD
   - UI-SHRINE
   - ART-MILESTONE-01
-  - ART-MILESTONE-02
-  - ART-ASPECT-VFX
 ---
 
 # Core Combat and Corruption VFX
 
-Shared combat and corruption cues strengthen readability without obscuring silhouettes, telegraphs, recovery frames, or safe space. Frequent effects stay compact and directional. Stronger presentation is reserved for posture breaks, execution openings, Shrine choices, and boss transitions.
+Shared combat cues must strengthen readability without obscuring silhouettes, attack direction, recovery frames, or safe space. Frequent effects remain compact. Stronger presentation is reserved for posture breaks, execution openings, Shrine decisions, and boss transitions.
 
 ## Milestone 1 combat bundle
 
 ### VFX-001 — Parry Spark
 
-**Gameplay purpose:** confirms a successful deflect immediately.
+**Purpose:** immediate confirmation of a successful deflect.
 
 **Working frames:** 4–6.
 
-**Visual fantasy:** refracted steel-on-steel contact at the exact weapon intersection, not a generic spark cloud.
-
-**Grades:**
-
-- standard deflect: medium burst,
-- perfect parry: brighter core, slightly larger rays, and stronger punctuation.
-
-**Readability:** instantly distinguishable from Hit Spark without requiring sound. The brightest point remains tight to contact; small sparks follow the incoming strike angle.
-
-**Constraints:** no smoke, broad circular explosion, blood-heavy accent, or magical glyph.
+- Standard deflect: compact directional burst.
+- Perfect parry: brighter core and stronger punctuation.
+- Must remain distinct from Hit Spark without depending on sound.
+- No broad smoke cloud, circular explosion, or magical glyph.
 
 ### VFX-002 — Hit Spark
 
-**Gameplay purpose:** workhorse confirmation for ordinary damage.
+**Purpose:** ordinary damage confirmation.
 
 **Working frames:** 3–5.
 
-**Visual fantasy:** quick restrained impact burst.
-
-**Readability:** smaller, quieter, and more frequent than Parry Spark. It must never compete with parry, posture break, deathblow, or boss-transition cues.
-
-**Constraints:** avoid oversized flashes and long-lived particles.
+- Smaller and quieter than Parry Spark.
+- Clears quickly.
+- Must not compete with posture break, deathblow, or boss-transition cues.
 
 ### VFX-003 — Deathblow Cue
 
-**Gameplay purpose:** marks a valid execution opening.
+**Purpose:** persistent confirmation that an execution is available.
 
-**Working frames:** 3–4 loop for the persistent window.
+**Working frames:** 3–4 frame loop for the valid window.
 
-**Visual fantasy:** ritual blood seal, sharp spectral pulse, or restrained execution mark anchored above the enemy's upper body. It must feel diegetic to Oathbound rather than like a generic exclamation icon.
-
-**Readability:** visible across a crowded screen and unmistakable from posture break or status effects. It persists until consumed or the valid window closes and works with the HUD input prompt.
-
-**Constraints:** red is the primary accent, but shape and placement also carry the read.
+- Anchored above or around the enemy's upper body.
+- Uses a ritual blood-seal or restrained execution-mark language.
+- Remains visible in crowded combat.
+- Must not resemble a generic exclamation icon.
 
 ### VFX-004 — Sword Trail
 
-**Gameplay purpose:** clarifies Akio's base combo arcs.
+**Purpose:** clarify Akio's base blade paths.
 
 **Working frames:** approximately 4–6 per swing family.
 
-**Visual fantasy:** disciplined blade-path reinforcement rather than decorative energy.
+Required variants:
 
-**Required variants:**
+- Quick Slash — shortest and lightest,
+- Cross Cut — wider diagonal path,
+- Heavy Cleave — weightiest and most committed.
 
-- Quick Slash: shortest and lightest,
-- Cross Cut: wider diagonal coverage,
-- Heavy Cleave: weightiest trail, stronger follow-through, and clearest commitment.
+Trails reinforce the weapon path and clear before obscuring recovery or the next attack.
 
-**Readability:** the trail clarifies where the blade traveled and clears before it obscures recovery or the next attack.
+### VFX-005 — Posture Break Cue
 
-## Posture Break Cue
+**Purpose:** show that enemy posture has fully broken and a vulnerability state has begun.
 
-**Gameplay purpose:** shows that an enemy's posture has fully broken and a vulnerability state has begun.
+**Working direction:** quick body-centered break flash with a compact cracked ring and sharp metallic fragments.
 
-**Visual fantasy:** quick body-centered break flash with a compact cracked ring and sharp metallic fragments.
+- Slightly larger and longer than Parry Spark.
+- Clears quickly.
+- Distinct from hit, parry, hurt, death, and Deathblow Cue.
+- The break cue communicates that the enemy opened; the persistent Deathblow Cue communicates that execution remains available.
 
-**Timing:** slightly larger and longer than Parry Spark, but fast to clear.
+VFX-005 is included in Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblow Cue because that batch establishes the complete posture-break-to-execution read on the baseline humanoid enemy.
 
-**Readability:** distinct from normal hit, parry, hurt, death, and Deathblow Cue. The cue says the enemy is opened; the persistent Deathblow Cue says execution is available.
+## Corruption and Shrine cues
 
-**Scope note:** this effect is part of the broader core VFX language, but the polished Milestone 1 brief lists only VFX-001 through VFX-004. Its exact contractor batch assignment remains an open production-scope question.
+### Corruption Full Cue
 
-## Corruption Full Cue
+Shows that Corruption is full and may be resolved at the next Shrine.
 
-**Gameplay purpose:** shows that Corruption is full and may be resolved at the next Shrine.
+- low-frequency dark-crimson pressure around Akio and the meter,
+- ends immediately after Shrine resolution,
+- distinct from low HP, depleted Spirit, Burn, Shock, or boss empowerment.
 
-**Visual fantasy:** low-frequency dark-crimson pressure around Akio and the HUD meter.
+### Embrace Transformation Cue
 
-**Timing:** continuous while full, ending immediately after Shrine resolution.
+Communicates a Blood Aspect Tier increase.
 
-**Readability:** distinct from low HP, depleted Spirit, Burn, Focus, boss empowerment, and other urgent states.
+- Shrine flare,
+- controlled blood-red surge into Akio,
+- brief full-body ignition,
+- settlement into the new Aspect and Tier state.
 
-## Embrace Transformation Cue
+### Resist Stabilization Cue
 
-**Gameplay purpose:** communicates an increase in Blood Aspect Tier.
+Communicates stabilization without Tier advancement.
 
-**Visual fantasy:** controlled blood-red surge travels from Shrine to Akio, briefly ignites the full body, then settles into the new Aspect/Tier overlay.
-
-**Timing:** one short ritual beat: Shrine flare, player ignition, state settlement.
-
-**Readability:** clearly empowerment through acceptance rather than stabilization.
-
-## Resist Stabilization Cue
-
-**Gameplay purpose:** communicates Corruption being restrained without Tier advancement.
-
-**Visual fantasy:** cooler pale ritual pulse that pushes pressure outward and ends in a brief recovery beat.
-
-**Timing:** one short stabilizing exhale.
-
-**Readability:** clearly holding the line, not gaining power. It may echo Health pickup language without looking identical.
-
-## Related player-system VFX
-
-- [Blood Aspect VFX](ASPECT_VFX.md)
-- [Prosthetic Tool VFX](PROSTHETIC_VFX.md)
-- [Combat Stance VFX](STANCE_VFX.md)
+- cooler pale ritual pulse,
+- outward release of pressure,
+- brief recovery beat,
+- clearly reads as restraint rather than empowerment.
 
 ## Delivery and testing
 
-Source files are required. Each effect receives transparent frames or sheets, timing notes, palette continuity, and in-engine testing over Hushiro, Yomori, and Kagutsuchi backgrounds. Effects must remain readable with screen shake, damage numbers, HUD state, multiple enemies, and environmental atmosphere active.
+Every effect requires source files, transparent frames or sheets, timing notes, palette continuity, and clean Godot import.
+
+Effects must remain readable across Hushiro, Yomori, and Kagutsuchi backgrounds with HUD, damage numbers, screen shake, multiple enemies, and environmental atmosphere active.

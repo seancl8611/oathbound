@@ -4,13 +4,12 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 topics:
   - currencies
   - pickups
   - techniques
   - relics
-  - breakables
   - room-rewards
   - reward-cadence
   - heart-binding-completion
@@ -19,61 +18,57 @@ related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RUN-STRUCTURE
   - CONTENT-ROOM-TYPES
-  - ART-ITEM-REWARD-ART
-  - UI-TECHNIQUE-REWARDS
-  - UI-HUD
+  - META-OPEN-QUESTIONS
 ---
 
 # Items, Currencies, and Rewards
 
-This file owns the functional categories for currencies, pickups, Techniques, Relics, breakables, reward containers, room payout ownership, and the current reward-cadence framework. Exact drop rates, prices, catalog sizes, rarity weights, and final room counts remain balance content.
+This file owns reward categories, currency ownership, room payouts, and the current reward-cadence framework. Exact rates, prices, room counts, catalog sizes, and numerical values remain balance work unless explicitly approved elsewhere.
 
-## Reward-design goals
+## Reward goals
 
 The reward framework should:
 
-- make route choice readable before commitment,
-- build Technique power gradually rather than after every room,
+- make route choices readable before commitment,
+- build run power gradually,
 - keep survival, economy, and persistent progression valuable,
-- allow four active Technique slots to fill across Areas 1 and 2,
-- shift Area 3 toward refinement, replacement, reserve use, and final build optimization,
-- provide meaningful rewards even when the player declines a Technique,
-- avoid exact-combination dependence and excessive random punishment.
+- fill the Technique loadout mainly through Areas 1 and 2,
+- shift Area 3 toward refinement and final build decisions,
+- provide useful fallback rewards,
+- and avoid exact-combination dependence or severe random failure.
 
-Every major room reward should primarily serve one of four needs:
+Major rewards primarily support:
 
-1. **Build growth:** Techniques, refinements, Prosthetic Techniques, and Relics.
-2. **Survival:** Health, Spirit, recovery, and temporary capacity.
-3. **Economy:** Gold, rerolls, and shop access.
-4. **Persistent progress:** Mist, Scrolls, Boss Emblems, unlocks, discoveries, and destroyed Heart Binding campaign progress.
+1. **Build growth** — Techniques, refinements, Prosthetic Techniques, Relics.
+2. **Survival** — Health, Spirit, recovery, temporary capacity.
+3. **Economy** — Gold, shops, rerolls.
+4. **Persistent progress** — Mist, Scrolls, Boss Emblems, unlocks, discoveries, Heart Bindings.
 
 ## Currency families
 
-| Currency | Scope | Primary role |
+| Currency | Persistence | Primary role |
 |---|---|---|
-| Mist | Persistent | Base meta-progression currency |
-| Scroll | Persistent | Forge-focused upgrade currency |
-| Boss Emblem | Persistent | Rare boss-derived progression currency |
-| Gold | Run-scoped | Mid-run shop economy |
+| Mist | Persistent | Broad meta progression |
+| Scroll | Persistent | Forge upgrades |
+| Boss Emblem | Persistent | Rare major progression gates |
+| Gold | Run-only | Shops and run economy |
 
-Corruption is not a currency or pickup. It is a run-only Blood Aspect pressure meter.
+Corruption and destroyed Heart Bindings are not currencies.
 
-Destroyed Heart Binding progress is not a currency and cannot be purchased, spent, or lost.
+`Mist Shards` is deprecated unless restored intentionally as a separate denomination.
 
-Earlier references to `Mist Shards` are treated as draft/deprecated wording unless a separate shard denomination is intentionally reintroduced later.
+## Pickups and minor drops
 
-## Health and Spirit pickups
+- Health restores HP.
+- Spirit restores the shared prosthetic resource.
+- Minor enemy and breakable drops may include small Gold, Health, Spirit, Mist, or Scroll value where approved.
+- Minor drops support flow but do not replace the room's previewed primary reward.
 
-- **Health pickup:** restores HP.
-- **Spirit pickup:** restores Spirit emblems used by prosthetic tools.
-- Drops may come from enemies, breakables, scripted rewards, Shrine support, rest rooms, or boss transitions.
-- Pickup confirmation should be fast and should not interrupt combat flow.
+## Route previews
 
-## Route and reward previews
+When the player chooses between routes, the primary reward category should be shown through a consistent symbol or environmental marker.
 
-When the player chooses between upcoming routes, the primary reward category should be previewed through a consistent symbol or environmental marker.
-
-Preview categories may include:
+Supported preview categories may include:
 
 - Technique,
 - Gold,
@@ -90,31 +85,29 @@ Preview categories may include:
 - miniboss,
 - boss.
 
-Room function and primary reward are separate. A standard combat room may pay out Gold, Mist, Scrolls, recovery, temporary capacity, or a Technique opportunity.
+Room function and payout are related but separate. A standard combat room may award any approved combat-room payout.
 
-Color cannot be the only differentiator between route rewards.
+Color cannot be the only differentiator.
 
-## Standard combat-room rewards
+## Standard combat rewards
 
-A standard combat room uses the current area's enemy roster and awards one previewed primary reward after completion.
+A standard combat room awards one previewed primary reward after completion.
 
-Eligible primary rewards include:
+Eligible rewards include:
 
 - Gold,
 - Mist,
 - Scrolls,
-- Health recovery,
-- Spirit recovery,
-- temporary maximum-Health increase,
-- temporary maximum-Spirit increase,
+- Health or Spirit recovery,
+- temporary capacity,
 - Technique opportunity,
-- an approved reroll resource when implemented.
+- an approved reroll resource.
 
-Not every combat room awards a Technique. Small enemy and breakable drops may supplement the primary reward with minor Gold, Health, Spirit, or rare small materials.
+Not every combat room awards a Technique.
 
 ## Technique opportunities
 
-Technique-marked combat rooms and other approved Technique sources present three options through the Technique reward interface.
+Technique offers normally present three cards.
 
 Before all four active slots are filled, offers favor:
 
@@ -123,224 +116,169 @@ Before all four active slots are filled, offers favor:
 - eligible Prosthetic Techniques,
 - occasional higher-rarity options.
 
-After all four active slots are filled, offers should usually mix:
+After all active slots are filled, offers usually mix:
 
-- a compatible new Technique that may replace an active Technique or enter reserve,
+- a compatible replacement option,
 - a refinement for an active Technique,
 - a Prosthetic Technique, rare option, or wildcard.
 
-The player may reject all Technique choices and take the displayed smaller fallback reward. The fallback is predetermined for that offer rather than selected from every reward category.
+The player may decline all choices for a displayed lower-value fallback, such as Gold, recovery, Mist, or an approved reroll resource.
 
-Possible fallbacks include:
-
-- moderate Gold,
-- small Health and Spirit recovery,
-- a small amount of Mist,
-- a reroll resource when approved.
-
-The fallback must remain lower value than accepting a suitable Technique.
-
-Detailed active-slot, reserve, replacement, overwrite, refinement, and swapping rules belong in [Technique System](TECHNIQUES.md). Screen behavior belongs in [Technique Rewards and Build Management](../ui_ux/TECHNIQUE_REWARDS.md).
+Detailed slot, reserve, overwrite, and refinement rules belong in `TECHNIQUES.md`.
 
 ## Shrine rooms
 
-Shrines exclusively own Blood Aspect stabilization and escalation.
+Shrines own Blood Aspect stabilization and escalation.
 
-When Corruption is full, the Shrine presents:
-
-- Resist,
-- Embrace.
-
-When Corruption is not full, the Shrine provides normal support such as Health, Spirit, or another approved stabilizing result.
-
-Shrines do not normally present ordinary Technique selections. This keeps the Corruption meter and Aspect Tier decision clear and prevents one room from owning two major build systems.
+- At full Corruption: present Resist or Embrace.
+- Below full Corruption: provide approved support such as recovery.
+- Shrines do not normally present ordinary Technique selections.
 
 ## Rest rooms
 
 Rest rooms provide:
 
-- Health recovery,
-- Spirit restoration,
-- active/reserve Technique swapping,
-- read-only build review and comparison,
+- Health and Spirit recovery,
+- active and reserve Technique swapping,
+- read-only build review,
 - short narrative breathing room where appropriate.
 
-Rest rooms do not generate new Techniques or restore Techniques that were permanently discarded during the run.
+They do not generate new Techniques or restore discarded Techniques.
 
-## Shop rooms
+## Shops
 
-Run shops use Gold and offer limited random stock. Eligible stock may include:
+Run shops use Gold and may offer:
 
-- Health recovery,
-- Spirit restoration,
-- temporary maximum-Health or maximum-Spirit increases,
+- recovery,
+- temporary capacity,
 - consumables,
-- Technique rerolls,
-- a purchasable Technique,
-- an active-Technique refinement,
-- eligible prosthetic support or Prosthetic Techniques,
-- an occasional run-scoped Relic.
+- rerolls,
+- Techniques,
+- refinements,
+- prosthetic support,
+- occasional Relics.
 
-Technique and refinement purchases should be expensive enough that Gold-focused routes represent a meaningful alternate build strategy rather than automatic purchases.
+Technique and refinement purchases should be expensive enough that Gold routing is a meaningful build strategy rather than an automatic purchase path.
 
-Final stock count, prices, refresh rules, and reroll behavior remain balance work.
+Final stock count, prices, refresh rules, and reroll economics remain balance work.
 
-## Treasure rooms and reward containers
+## Treasure and miniboss rewards
 
-Treasure rooms provide higher-value or less predictable rewards than ordinary combat rooms.
+Treasure rooms provide higher-value or less predictable rewards than standard combat rooms.
 
-Eligible rewards include:
+Eligible treasure rewards include:
 
-- run-scoped Relic choice,
+- Relic choice,
 - rare Technique,
-- guaranteed active-Technique refinement,
-- large Gold, Mist, or Scroll bundle,
-- major temporary maximum-Health or maximum-Spirit increase,
-- rare consumable,
-- exceptional reserve or lost-Technique interaction when explicitly designed.
+- guaranteed refinement,
+- large currency bundle,
+- major temporary capacity,
+- rare consumable if consumables are included at launch.
 
-Major reward containers appear after minibosses, in treasure rooms, and at scripted discoveries. They require unmistakable unopened and opened states.
+A miniboss guarantees a meaningful build-development reward and should never award only ordinary Gold or healing.
 
-A standard treasure room should not guarantee the same payout type every run unless its route preview explicitly identifies that reward.
+Possible miniboss rewards include:
 
-## Miniboss rewards
-
-A miniboss guarantees a meaningful build-development reward after victory. It should never award only ordinary Gold or healing.
-
-The reward presentation should offer a high-value choice such as:
-
-- a higher-rarity Technique,
-- a refinement for an active Technique,
-- a run-scoped Relic,
-- a special regional or encounter reward.
-
-A miniboss may also provide a modest persistent payout such as Mist or Scrolls alongside the run reward.
-
-Exact choice composition may vary by encounter, but the reward must match the greater risk and time commitment.
+- higher-rarity Technique,
+- active-Technique refinement,
+- Relic,
+- special encounter reward,
+- modest additional Mist or Scrolls.
 
 ## Regional boss rewards
 
-Bosses that lead into another region provide both persistent and current-run value.
+The Area 1 and Area 2 bosses provide both persistent and current-run value.
 
-### Persistent reward
+Persistent rewards may include:
 
-May include:
-
-- Boss Emblem where appropriate,
+- Boss Emblem,
 - Mist or Scrolls,
-- unlock or narrative progression,
-- discovery or codex progress.
+- unlocks,
+- narrative or codex progress.
 
-### Current-run reward
+Current-run rewards may include:
 
-May include:
+- refinement,
+- rare Technique choice,
+- Prosthetic Technique,
+- Relic,
+- major temporary Health or Spirit improvement.
 
-- refine any active Technique,
-- choose from rare Techniques,
-- gain an eligible Prosthetic Technique or refinement,
-- choose a run-scoped Relic,
-- receive a major temporary Health or Spirit improvement.
+Regional transitions should also restore enough Health or Spirit for the next area to begin from a viable state.
 
-Regional transition support should also restore an approved amount of Health and/or Spirit so the next area begins from a viable state.
+## Eclipse Shogun and Heart Binding completion
 
-The Eclipse Shogun is different. Defeating him opens the Heart Binding completion space rather than granting additional current-run power. Permanent rewards and campaign progress are finalized only after Akio breaks one Binding and completes the successful-return sequence.
+The Eclipse Shogun does not grant additional current-run power during the first six successful clears because the run ends immediately after the Binding ritual.
 
-## Heart Binding completion
+After defeating him, Akio:
 
-After the Shogun, Akio uses the Court's extraction apparatus and Returning Blood to break one ancient Heart Binding. The Heart's retaliation dissolves his current body, so the run ends immediately after the Binding ruptures.
+1. enters the Heart chamber,
+2. offers Returning Blood through the extraction apparatus,
+3. breaks one remaining Heart Binding,
+4. is dissolved by the Heart,
+5. reconstructs at the Strand.
 
-This completion may grant:
+The campaign begins with six intact Bindings. Each successful Binding run destroys one. Permanent completion rewards may include:
 
-- one persistent destroyed-Binding campaign step,
-- major currencies or Boss Emblems where appropriate,
+- destroyed-Binding progress,
+- Mist, Scrolls, or Boss Emblems,
+- unlocks,
 - narrative and codex discoveries,
-- unlocks tied to the next campaign stage,
 - results-screen confirmation.
 
-It does not grant current-run power because Akio's current body is destroyed immediately afterward.
-
-The Binding identity, persistence rule, and one-per-run completion are locked. The total Binding count, clear-specific reward changes, and final completion sequence remain open.
+After all six Bindings are destroyed, the seventh successful story run continues from the Shogun into the Heart instead of performing another Binding ritual.
 
 ## Relics
 
-Relics provide rare passive rules and use a separate Relic slot rather than Technique slots.
+Relics are rare run-scoped passive rules using a separate slot.
 
-The initial framework assumes one equipped run-scoped Relic. Any additional Relic capacity is a later progression or balance decision and should not be implied by art before approval.
+The initial structure uses one equipped Relic. Current rarity tiers are:
 
-Current rarity tiers:
+- Common,
+- Uncommon,
+- Rare,
+- Legendary.
 
-- Common
-- Uncommon
-- Rare
-- Legendary
+Relics may alter broader combat, economy, survival, or risk rules, but should not replace the selected Blood Aspect as the run's central identity.
 
-Rarity changes frame treatment and presentation hierarchy; it should not recolor the same icon into an unreadable palette swap.
+Final Relic count and detailed effects belong to the launch build-content catalog decision.
 
-Relics should create broader rules, risks, or economy changes without replacing the selected Blood Aspect as the run's central identity.
+## Provisional cadence
 
-## Breakable props and enemy drops
-
-Breakables are area-appropriate destructible objects that may drop:
-
-- minor Gold,
-- Health,
-- Spirit,
-- rare small consumables,
-- occasional small Mist or Scroll value when approved.
-
-Required gameplay states:
-
-- intact,
-- damaged where useful,
-- broken/spent.
-
-Breakables must be distinguishable from decorative props without appearing like modern glowing containers.
-
-Minor drops should support run flow without replacing previewed room rewards.
-
-## Provisional reward cadence
-
-Until exact room counts are playtested, target a successful full run at approximately:
+Until run length and room structure are approved, target a successful full run at approximately:
 
 - six to eight Technique-related decisions,
-- two regional boss power rewards before the final region is complete,
-- one to two miniboss rewards depending on route,
+- two regional boss power rewards before Kagutsuchi is complete,
+- one to two miniboss rewards depending on routing,
 - one to two Relic opportunities,
-- several Gold, recovery, capacity, Mist, and Scroll routes,
+- several economy, recovery, capacity, Mist, and Scroll routes,
 - multiple Shrine decisions governed by Corruption pacing.
 
-Provisional regional shape:
+Regional direction:
 
-- **Area 1:** roughly two ordinary Technique opportunities, then a major Area 1 boss reward.
-- **Area 2:** roughly two ordinary Technique opportunities, then a major Area 2 boss reward.
-- **Area 3:** roughly two or three Technique, refinement, treasure, or shop opportunities focused on finalizing the build.
-- **Optional routes:** shops, treasure rooms, and minibosses may add further choices without guaranteeing a perfect combination.
+- **Area 1:** first meaningful Techniques and one major boss reward.
+- **Area 2:** complete the active loadout and deepen synergy.
+- **Area 3:** refine, replace, use reserve, and finalize the build.
 
-These are pacing targets, not locked room counts or mandatory probabilities.
+These are pacing targets, not locked room counts or probabilities.
 
-## Reward-generation guardrails
+## Guardrails
 
 - Do not require an exact Technique combination for a viable run.
-- Do not generate three options that are all invalid for the current loadout.
-- Refinements only target active Techniques.
-- Prosthetic Techniques only appear for the equipped prosthetic.
-- Selected Aspect weights offers but does not fully lock the player to one pool.
-- Rare rewards should be exciting without invalidating sword combat or boss mechanics.
-- Technique rewards should be less frequent and more consequential than minor currency or recovery rewards.
-- Persistent-currency rewards must not overwhelm the reason to pursue current-run strength.
-- Heart Binding progress cannot be replaced by an ordinary currency payout.
+- Do not generate three invalid choices.
+- Refinements target active Techniques.
+- Prosthetic Techniques appear only for the equipped tool.
+- Selected Aspect weights but does not fully restrict offers.
+- Rare rewards must not invalidate sword combat or boss mechanics.
+- Persistent currency must not overwhelm current-run strength.
+- Heart Binding progress cannot be replaced by ordinary currency.
 
-## Implementation boundaries
+## Current scope dependencies
 
-Still unresolved:
+The following remain in `OPEN_QUESTIONS.md` because they affect production scope:
 
-- final room counts and route branching,
-- exact reward probabilities and anti-streak rules,
-- final costs and drop tables,
-- Technique and Relic catalog sizes,
-- final rarity probabilities,
-- shop stock and reroll economics,
-- exact temporary capacity values,
-- individual consumable ownership,
-- whether any additional persistent currency families are needed,
-- Heart Binding count and clear-specific completion rewards.
+- run length and route structure,
+- launch Technique, Prosthetic Technique, Relic, and consumable catalog sizes,
+- postgame Heart-route rewards.
+
+Exact prices, rates, probabilities, temporary values, and reroll formulas remain implementation and playtest work.
