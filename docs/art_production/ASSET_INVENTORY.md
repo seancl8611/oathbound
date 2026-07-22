@@ -14,125 +14,121 @@ topics:
   - items
   - techniques
   - the-heart
-  - heart-bindings
-  - true-final-heart
 related:
   - OVERVIEW-FULL-SCOPE
-  - CONTENT-AREA3-TRUE-FINAL-HEART
+  - OVERVIEW-PRODUCTION-ROADMAP
+  - META-OPEN-QUESTIONS
 ---
 
 # Asset Inventory
 
-This is the high-level production inventory. Individual character, system, regional, encounter, VFX, item, UI, and milestone files own detailed animation and state lists.
+This file records high-level production groups and known counts. Detailed state and animation lists belong in the individual character, encounter, UI, VFX, and milestone files.
 
 ## Master counts
 
-| Asset group | Planned count | Notes |
+| Asset group | Planned count | Boundary |
 |---|---:|---|
-| Player character | 1 | Akio concept, final sprite, full combat animation set |
+| Player character | 1 | Akio concept, final sprite, complete base combat set |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
-| Area 1 enemies | 6 | Village/garrison and rupture set |
-| Area 2 enemies | 4 | Forest, spirit, predator, and adaptation set |
-| Area 3 enemies | 5 | Court and false-ascendancy set |
-| Minibosses | 6 | Two per main area |
-| Regional bosses | 3 | One principal boss encounter per main area |
-| Heart Binding campaign | 7 original / 6 player clears | One historical broken layer, six removable campaign layers, and one fully exposed final state |
-| True-final Heart encounter | 1 encounter / 2 forms | Unbound Heart followed by the enormous Vessel of Continuance |
-| Environment sets | 4 + Heart subset | Strand and Areas 1–3; Heart chamber remains an endgame subset |
-| Blood Aspect families | 3 | Wolf, Wraith, Ronin plus modular Tier escalation |
-| Prosthetic families | 8 | One approved tool family each |
-| Technique loadout UI | 4 active + 1 reserve | Final Technique catalog and unique icon count remain open |
-| Run-scoped Relic capacity | 1 initial slot | Final Relic catalog remains open |
-| Currency families | 4 current | Mist, Scroll, Boss Emblem, Gold |
+| Area 1 enemies | 6 | Hushiro standard roster |
+| Area 2 enemies | 4 | Yomori standard roster |
+| Area 3 enemies | 5 | Kagutsuchi standard roster |
+| Minibosses | 6 | Two per area |
+| Regional bosses | 3 | One principal encounter per area |
+| Heart Binding campaign | 7 original / 6 player clears | Historical breach, six removable states, fully exposed state |
+| True-final Heart | 1 encounter / 2 forms | Unbound Heart and Vessel of Continuance |
+| Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
+| Blood Aspect families | 3 | Wolf, Wraith, Ronin |
+| Prosthetic families | 8 | One family per tool |
+| Technique loadout UI | 4 active + 1 reserve | Catalog size remains open |
+| Relic capacity | 1 initial slot | Catalog size remains open |
+| Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
 
-The former five stance families are removed. High-level counts for Technique icons, unique Technique VFX, Relics, consumables, room variants, exact Heart animations, and exact Heart effects remain granular and should be finalized when catalog and encounter mechanics are locked.
+## Player and build-system art
 
-## Player and player-system art
-
-- Akio concept and final base sprite
+- Akio concept and base sprite
 - Complete base combat animation library
 - Separate ground shadow
-- Core sword trails and combat feedback
-- Wolf Prey Mark and pressure states
-- Wraith afterimage, perfect-dodge, and Mist-Step states
-- Ronin parry, Counter Cut, and Focus states
+- Five Milestone 1 combat VFX
+- Wolf, Wraith, and Ronin combat-feedback families
 - Tier I–IV modular mutation overlays
-- Eight prosthetic tool VFX and icons
-- Reusable Technique category, card, active-slot, reserve-slot, refinement, replacement, warning, decline, and reroll art
-- Unique Technique icons for approved catalog entries
-- Bespoke Technique combat VFX only where existing combat, Aspect, or prosthetic language cannot communicate the mechanic
+- Eight prosthetic icons and VFX families
+- Technique card, category, slot, reserve, refinement, replacement, warning, decline, and reroll presentation
+- Unique Technique icons only for approved catalog entries
+- Bespoke Technique effects only when existing combat, Aspect, or prosthetic language is insufficient
+- Relic cards, slot, icon, and rarity presentation
+
+Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch build-content catalog decision.
 
 ## Combatants
 
-- **Area 1:** 6 standard enemies, Village Ogre, The Collector, Keeper of the Gate
-- **Area 2:** 4 standard enemies, Embered Pilgrim, Rotwood Host, Twin Maws encounter
-- **Area 3:** 5 standard enemies, Blood Lotus, Eternal Swordsman, Eclipse Shogun
-- **True endgame:** one two-phase Heart encounter using the freed Unbound Heart and the enormous nonhuman Vessel of Continuance
+- **Area 1:** six standard enemies, Village Ogre, The Collector, Keeper of the Gate
+- **Area 2:** four standard enemies, Embered Pilgrim, Rotwood Host, Twin Maws
+- **Area 3:** five standard enemies, Blood Lotus, Eternal Swordsman, Eclipse Shogun
+- **True endgame:** Unbound Heart and Vessel of Continuance as one encounter package
 
-The Heart forms are one encounter package, not two separate narrative characters. Exact attacks, animation counts, movement rules, and effect counts remain open until encounter design is approved.
+The Eclipse Shogun is one principal boss package with a regal starting identity and controlled inhuman escalation. Exact phase count, sprite-set count, weapon, attacks, animations, and bespoke effects require later encounter approval.
 
-## Environment sets and rooms
+The Heart has exactly two conceptual forms. Exact attacks, animation counts, and VFX counts remain later encounter-design work.
 
-- Strand hub, docks, NPC stations, Blood Cavern, and Blood Mirror
-- Hushiro modular base kit, functional rooms, miniboss spaces, and old-gate boss arena
-- Yomori base kit, functional rooms, failed-purification site, Rotwood arena, and Twin Maws arena
-- Kagutsuchi base kit, functional rooms, Blood Lotus arena, duel court, and Shogun throne-space
-- Heart chamber with one historical broken outer Binding, six removable campaign Bindings, one Shogun-built extraction apparatus, reusable successful-run completion state, fully exposed final state, and a true-final arena supporting both Heart forms
+## Environment and room art
 
-Cross-area room types:
+- Strand hub, docks, NPC stations, Blood Cavern, Blood Mirror
+- Hushiro modular kit, functional rooms, miniboss spaces, boss arena
+- Yomori modular kit, functional rooms, miniboss spaces, Twin Maws arena
+- Kagutsuchi modular kit, functional rooms, Blood Lotus arena, duel court, Shogun arena
+- Heart chamber with one historical broken Binding, six removable Bindings, extraction apparatus, reusable ritual state, fully exposed state, and true-final arena support
+
+Cross-area room functions:
 
 - combat,
 - Shrine,
 - rest,
 - shop,
-- treasure/miniboss,
+- treasure or miniboss,
 - boss.
 
-Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss categories. Regional skins adapt material treatment without changing the symbol.
+Final room counts, authored variants, and route-marker volume depend on the run-length and route-structure decision.
 
 ## UI and UX art
 
-- Run HUD: HP, posture, ten Spirit segments, prosthetic cooldown, contextual Technique state, currency, status, Corruption, Aspect, and Tier
-- Technique reward screen with three-card offers
-- Four active Technique slots and one reserve slot
-- Technique replacement, reserve movement, reserve overwrite warning, decline, and reroll states
-- Technique refinement and active/reserve comparison states
-- Rest-room active/reserve swap interface
-- Pause/build overview with read-only active and reserve Technique details
-- Damage-number style family
-- Standard-enemy health/posture indicators
-- Miniboss and boss bars with name and phase support
-- Deathblow prompt and persistent cue integration
-- Strand HUD and persistent currency counters
-- Interaction prompts and locked/available states
-- Route reward-preview markers
-- Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause screens
-- Blood Lotus multi-cycle UI support
-- Six-clear Heart Binding completion and persistent campaign-progress state
-- Two-phase true-final Heart boss presentation
-- First-clear ending and credits presentation
-- Shortened repeat-clear Heart results presentation
-- Postgame Heart-route access state after its control method is approved
-- Front end, settings, controls, save/loading, credits, and completion presentation
+- Run HUD and combat feedback
+- Four active Technique slots and one reserve
+- Technique reward, replacement, reserve, refinement, decline, and reroll states
+- Rest-room reserve swapping
+- Pause and build overview
+- Enemy, miniboss, and boss health and posture presentation
+- Deathblow prompt and cue integration
+- Strand HUD and persistent currencies
+- Route reward previews
+- Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause interfaces
+- Blood Lotus multi-cycle support
+- six-clear Heart Binding progress
+- two-form true-final Heart presentation
+- first-clear ending and credits
+- shortened repeat-clear results
+- postgame Heart-route access after its control method is approved
 
 ## Shared VFX families
 
 ### Core combat and Corruption
 
-- Parry Spark with standard/perfect grades
-- Hit Spark
-- Sword Trail variants
-- Posture Break Cue
-- Deathblow Cue
+- VFX-001 Parry Spark
+- VFX-002 Hit Spark
+- VFX-003 Deathblow Cue
+- VFX-004 Sword Trail
+- VFX-005 Posture Break Cue
 - Corruption Full Cue
 - Embrace Transformation Cue
 - Resist Stabilization Cue
 
+VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblow Cue.
+
 ### Blood Aspects
 
-- Wolf target mark, healthy/wounded/finishable states, and pressure buildup
-- Wraith afterimage, vanish/reappear, and Mist-Step
+- Wolf marks and pressure states
+- Wraith afterimage, vanish, reappearance, and Mist-Step
 - Ronin enhanced contact, Counter Cut, and Focus
 
 ### Prosthetics
@@ -146,63 +142,36 @@ Shared route-reward markers are required for Technique, Gold, Mist, Scroll, Heal
 - Mist Raven
 - Bloodletting Gourd
 
-### Techniques
+### Endgame
 
-- Reused base-combat, Aspect, and prosthetic effects where sufficient
-- Modular trigger, threshold, resource-return, mark, footprint, and refinement accents
-- Unique effects only for approved Technique mechanics that cannot read correctly through reuse
-- Mixed-build readability examples across all three regional palettes
-
-### Endgame Heart
-
-- Heart chamber and ancient Binding visual language
-- Separate Shogun-built extraction-apparatus visual language
-- Reusable human-blood/Returning-Blood offering beat
-- Reusable Heart reaction and one-Binding rupture
-- Akio dissolution transition
-- Strand reconstruction transition
-- One historical broken Binding state
-- Six removable or destroyed campaign Binding states
-- Fully exposed Heart state after the sixth clear
-- Progressively stronger room-local pulse, movement, sound, and reaction
-- Unbound Heart creature form with malformed locomotion structures
-- Vessel of Continuance creature form built around the visible Heart
-- One transformation between Heart phases
-- Heart destruction and curse-ending presentation
-- First-clear ending transition
-- Shortened repeat-clear transition
-
-The base successful-run ritual is one reusable sequence, not a different apparatus, puzzle, or bespoke win animation for every Binding. The six-clear structure does not add mandatory island-wide modifiers, rebuilt regional environments, new enemy families, or separate Shogun encounters after every clear.
-
-The Heart encounter has exactly two conceptual forms. It does not require a humanoid swordsman, a third form, or a separate weak-point or body-part targeting system. Exact animation and VFX counts remain open until the moveset, arena behavior, and transition design are approved.
-
-The Heart identity is locked, but its exact final anatomy remains open. Art may imply a divine organ, island core, vessel, or remnant without conclusively explaining its origin or defaulting to a simple realistic oversized heart.
-
-Future postgame difficulty settings, modifiers, enemy or room variants, challenge restrictions, alternate conditions, and special Heart-route rewards are deferred and are not part of the initial inventory.
-
-The removed Storm, Frost, Ember, Hex, and Shadow stance VFX families are no longer planned. Burn and Shock remain supported by approved prosthetics. Frost and Hex are not baseline player status requirements.
+- ancient Binding visual language
+- separate Court extraction-apparatus language
+- reusable Returning Blood offering
+- Heart reaction and Binding rupture
+- Akio dissolution
+- Strand reconstruction
+- six Binding-state changes and fully exposed Heart
+- stronger room-local Heart reactions
+- Unbound Heart
+- Vessel of Continuance
+- transformation between Heart forms
+- Heart destruction and ending transition
 
 ## Item and reward art
 
-- Mist, Scroll, Boss Emblem, and Gold world/HUD pairs
+- Mist, Scroll, Boss Emblem, and Gold world and HUD presentation
 - Health and Spirit pickups
-- Temporary Health/Spirit capacity reward treatments
-- Route reward markers
-- Technique card template, categories, tags, active/reserve states, refinement state, replacement comparison, and warning states
-- Unique Technique icons for locked catalog entries
-- Relic cards, separate Relic slot, and rarity frames
-- Area-specific breakables with intact/broken states
-- Area-specific treasure and reward objects with unopened/opened states
-- Consumables and future item families as their mechanics are approved
+- temporary Health and Spirit capacity rewards
+- route markers
+- Technique and refinement presentation
+- Relic presentation
+- area-specific breakables
+- treasure and major reward objects
+- consumables only if included in the approved launch catalog
 
-## Milestone 1 production lock
+## Inventory rules
 
-The polished Milestone 1 brief establishes exact delivery subsets, working frame counts, source-file requirements, review gates, batch folders, and acceptance criteria for Akio, Corrupted Swordsman, Blighted Hound, Hollow, VFX-001 through VFX-004, Combat HUD, and Hushiro Combat Room Kit.
-
-The separate Posture Break Cue exists in the broader inventory, but its exact Milestone 1 contractor batch assignment remains unresolved because it is absent from the polished four-effect bundle.
-
-## Inventory rule
-
-When a system, enemy, boss, room type, item family, UI screen, or VFX family is added, removed, or reassigned, update this inventory and its assigned milestone in the same change.
-
-The base Heart Binding completion sequence and two-form true-final Heart concept are production-scopeable. Exact Heart animation counts, VFX counts, postgame route controls, and reward presentation must remain unquoted until their gameplay rules are approved.
+- Add an asset only after its gameplay, narrative, or production role is approved.
+- Do not estimate exact animation or effect counts before encounter design is locked.
+- Update the assigned milestone whenever a production group is added, removed, or reassigned.
+- Do not include deferred postgame modifiers, enemy variants, or challenge systems in the initial inventory.
