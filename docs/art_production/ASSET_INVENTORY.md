@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 topics:
   - asset-counts
   - characters
@@ -33,19 +33,19 @@ This file records high-level production groups and known counts. Detailed state 
 | Area 1 enemies | 6 | Hushiro standard roster |
 | Area 2 enemies | 4 | Yomori standard roster |
 | Area 3 enemies | 5 | Kagutsuchi standard roster |
-| Minibosses | 6 | Two per area |
+| Minibosses | 6 | Two designed encounters per area; run frequency is later routing work |
 | Regional bosses | 3 | One principal encounter per area |
 | Heart Binding campaign | 7 original / 6 player clears | Historical breach, six removable states, fully exposed state |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart and Vessel of Continuance |
 | Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
 | Blood Aspect families | 3 | Wolf, Wraith, Ronin |
 | Prosthetic families | 8 | One family per tool |
-| Technique loadout UI | 4 active + 1 reserve | Catalog size remains open |
-| Relic capacity | 1 initial slot | Catalog size remains open |
+| Technique loadout UI | 4 active + 1 reserve | Launch catalog count remains open |
+| Relic capacity | 1 initial slot | Launch catalog count remains open |
 | Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
 | Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
 
-## Player and build-system art
+## Player and run-build art
 
 - Akio concept and base sprite
 - Complete base combat animation library
@@ -59,7 +59,7 @@ This file records high-level production groups and known counts. Detailed state 
 - Bespoke Technique effects only when existing combat, Aspect, or prosthetic language is insufficient
 - Relic cards, slot, icon, and rarity presentation
 
-Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch build-content catalog decision.
+Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. That decision should establish approximate counts and production treatment tiers without requiring final balance values.
 
 ## Combatants
 
@@ -89,7 +89,7 @@ Cross-area room functions:
 - treasure or miniboss,
 - boss.
 
-Final room counts, authored variants, and route-marker volume depend on the run-length and route-structure decision.
+The initial scope requires modular regional kits and the approved functional-room families. Exact room counts, route topology, branch frequency, miniboss frequency, route-marker quantity, and authored layout counts are prototype and implementation decisions. Promote them into production scope only if testing proves they require additional environment packages beyond the existing modular-kit boundary.
 
 ## UI and UX art
 
@@ -104,11 +104,11 @@ Final room counts, authored variants, and route-marker volume depend on the run-
 - Route reward previews
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause interfaces
 - Blood Lotus multi-cycle support
-- six-clear Heart Binding progress
-- two-form true-final Heart presentation
-- first-clear ending and credits
-- shortened repeat-clear results
-- postgame Heart-route access after its control method is approved
+- Six-clear Heart Binding progress
+- Two-form true-final Heart presentation
+- First-clear ending and credits
+- Shortened repeat-clear results
+- Postgame Heart-route access after its control method is approved
 
 ## Shared VFX families
 
@@ -174,4 +174,4 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - Add an asset only after its gameplay, narrative, or production role is approved.
 - Do not estimate exact animation or effect counts before encounter design is locked.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.
-- Do not include deferred postgame modifiers, enemy variants, or challenge systems in the initial inventory.
+- Do not include deferred postgame modifiers, enemy variants, route algorithms, or challenge systems in the initial inventory.
