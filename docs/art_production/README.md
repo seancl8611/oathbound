@@ -1,8 +1,8 @@
 # Art Production
 
-Authoritative art direction, technical standards, asset inventory, outsourcing workflow, asset-family briefs, and milestone scope belong here.
+Authoritative art direction, technical standards, asset inventory, outsourcing workflow, visual-system briefs, and milestone scope belong here.
 
-## Current documents
+## Core documents
 
 - [Art Direction](ART_DIRECTION.md)
 - [Technical Standards](TECHNICAL_STANDARDS.md)
@@ -16,13 +16,20 @@ Authoritative art direction, technical standards, asset inventory, outsourcing w
 - [Outsourcing Workflow](OUTSOURCING_WORKFLOW.md)
 - [Art Milestones](milestones/README.md)
 
-## Planned expansion
+## Current production dependencies
 
-- Reference-library rules
-- Asset ID registry
-- Boss-specific VFX briefs where needed
-- UI export standards
-- Contractor brief source templates
-- Revision and delivery checklists
+Final quotation still depends on the current design questions for:
 
-Art-production documents translate authoritative design into asset requirements. They should not invent mechanics, lore, values, or encounter behavior when the source documents are unresolved.
+- room and route volume,
+- launch Technique, Prosthetic Technique, Relic, and consumable catalogs,
+- persistent progression and trial UI volume,
+- narrative, voice, and cinematic scope,
+- postgame route and repeat-clear presentation.
+
+Exact boss sprite sets, animations, and bespoke VFX must wait for approved encounter designs.
+
+## Authority rule
+
+Art-production documents translate approved design into asset requirements. They do not invent mechanics, lore, values, catalog entries, or encounter behavior when the owning design file remains unresolved.
+
+The asset inventory records high-level groups. Individual briefs own detailed visual requirements. Milestones own production grouping, dependencies, and quotation boundaries.
