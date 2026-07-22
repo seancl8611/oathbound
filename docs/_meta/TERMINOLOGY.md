@@ -4,99 +4,99 @@ title: Oathbound Terminology
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-21
 ---
 
 # Oathbound Terminology
 
 | Preferred term | Definition / usage |
 |---|---|
-| Oathbound | Current project title. Italicize only when normal prose style calls for it. |
-| Beast Blood | Rare corrupting supernatural power obtained deliberately from the Heart. Capitalize both words. |
-| the Heart | The ancient living godlike organ or supernatural core that produces Beast Blood. Capitalize Heart when referring to the source. Its ultimate origin remains deliberately ambiguous. |
-| ancient Heart complex | Generic descriptive term for the pre-Shogun structure discovered beneath Kagutsuchi Court around the imprisoned Heart. Its builders and original purpose remain unknown. This is not currently an approved proper name. |
-| Heart Binding | One of the layered ancient restraints imprisoning the Heart, limiting its influence, and protecting its deeper body. The Shogun's civilization did not build the Bindings. Use as the approved working name until an in-world name is chosen. |
-| extraction apparatus | The later mechanism built by the Shogun's engineers, physicians, and ritual specialists against the exposed Heart after the first Binding was breached. It receives a fresh human-blood offering, carries it inward, and collects Beast Blood released outward. It is not part of the original ancient Binding system. |
-| forbidden extraction | The controlled use of the Shogun-built extraction apparatus to offer a small measure of freshly drawn human blood and collect Beast Blood released by the Heart. The process does not require death or human sacrifice. Use as descriptive language rather than a confirmed historical proper name. |
-| Returning Blood | Akio's unprecedented form of inherited Beast Blood. His first death awakens it and reconstructs his established human form at the Strand. His lineage explains the return; discipline and resolve explain his later genuine control. |
-| stable return point | Brief working explanation for why later reconstructions occur at the Strand: Akio's first successful reconstruction establishes the human pattern and destination that Returning Blood follows afterward. Do not turn this into a separate technical anchor system. |
-| true control | Akio's unique ability to preserve genuine agency, reject escalation, vary Blood Aspect expression, return toward baseline, and oppose the Heart. Do not use for other Beast Blood bearers. |
-| false ascendancy | Kagutsuchi Court's belief that disciplined, specialized, and powerful mutation proves mastery. The elites remain unable to reject Beast Blood. |
-| rupture | Hushiro Gate Village's dominant regional expression: recent corruption, violence, bodily collapse, fragmented community, and desperate faith. |
-| adaptation | Yomori Grove's dominant regional expression: long-term predation, spirit persistence, and a curse incorporated into ecological and spiritual existence. |
-| Blood Aspect | A controlled specialization of Returning Blood and the central tactical identity of a run. |
-| Wolf, Wraith, Ronin | Current Blood Aspect names. Capitalize as proper system names. |
-| Tier 0, Tier I, Tier II, Tier III, Tier IV | Standard Blood Aspect mutation progression labels. |
-| Corruption | Run-only gameplay meter representing Returning Blood pressure. Not a currency, morality score, or Technique resource. |
-| Resist | Shrine choice that stabilizes without advancing Tier. |
-| Embrace | Shrine choice that permits greater mutation and advances power. |
-| Technique | Temporary in-run upgrade that modifies Akio's existing combat actions, resources, or equipped prosthetic. Capitalize when referring to the formal system or named category. |
-| active Technique | One of the four equipped Techniques currently affecting combat. |
-| reserve Technique | The single inactive Technique held for controlled swapping at reward screens or rest rooms. |
-| refinement | One slotless upgrade to an active base Technique. A Technique may have at most one refinement. |
-| Prosthetic Technique | Temporary Technique available only for the currently equipped prosthetic. Uses a normal active Technique slot. |
-| combat verb | Shared action or behavior used to express natural synergy, such as parry, Counter Cut, posture break, deathblow, dash, flank, Prey, pursuit, or Spirit. |
+| Oathbound | Current project title. |
+| Beast Blood | Corrupting supernatural power obtained deliberately from the Heart. Capitalize both words. |
+| the Heart | Ancient living godlike organ or supernatural core that produces Beast Blood. Its ultimate origin remains deliberately ambiguous. |
+| ancient Heart complex | Pre-Shogun structure discovered beneath Kagutsuchi Court around the imprisoned Heart. Not an approved proper name. |
+| Heart Binding | One of seven ancient restraints that imprisoned the Heart, limited its influence, and protected its deeper body. The Court destroyed one before the game; Akio destroys the remaining six. |
+| extraction apparatus | Court-built mechanism placed against the exposed Heart after the first Binding was breached. It is separate from the ancient Binding system. |
+| forbidden extraction | Offering fresh human blood through the apparatus and collecting Beast Blood released by the Heart. It does not require death or human sacrifice. |
+| Returning Blood | Akio's inherited expression of Beast Blood. His first death awakens it and reconstructs his established human form at the Strand. |
+| stable return point | Working explanation that Akio's first reconstruction establishes the human pattern and Strand destination used by later returns. Do not create a separate anchor system. |
+| true control | Akio's unique ability to preserve genuine agency, Resist escalation, vary Blood Aspect expression, return toward baseline, and oppose the Heart. |
+| false ascendancy | Kagutsuchi Court's belief that disciplined and specialized mutation proves mastery despite continued inability to reject Beast Blood. |
+| rupture | Hushiro's regional theme: recent corruption, violence, bodily collapse, fragmented community, and desperate faith. |
+| adaptation | Yomori's regional theme: long-term predation, spirit persistence, and ecological damage caused by corrupted inhabitants and beasts. It does not mean environmental Beast Blood transmission. |
+| Blood Aspect | Controlled specialization of Returning Blood and the central tactical identity of a run. |
+| Wolf, Wraith, Ronin | Current Blood Aspect names. |
+| Tier 0, Tier I, Tier II, Tier III, Tier IV | Standard Blood Aspect progression labels. |
+| Corruption | Run-only pressure meter. Not a currency, morality score, or Technique resource. |
+| Resist | Shrine choice that stabilizes Corruption without advancing Tier. |
+| Embrace | Shrine choice that empties Corruption and advances the active Aspect by one Tier. |
+| Technique | Temporary in-run upgrade that modifies Akio's existing combat actions, resources, or equipped prosthetic. |
+| active Technique | One of four equipped Techniques currently affecting combat. |
+| reserve Technique | One inactive Technique available for controlled swapping at reward screens or rest rooms. |
+| refinement | One slotless upgrade to an active base Technique. Maximum one per Technique. |
+| Prosthetic Technique | Temporary Technique available only for the equipped prosthetic. Uses a normal active Technique slot. |
+| combat verb | Shared action or behavior used for natural synergy, such as parry, posture, deathblow, dash, flank, Prey, pursuit, or Spirit. |
 | The Order | Akio's religious-military organization. The Shogun predates it. |
-| The Strand | Persistent hub area. |
-| Bloodwell | Strand progression and reformation-presentation station. One word. It is not the source of Returning Blood or a technical anchor. |
-| Blood Mirror | Strand mirror/trial system. Two words. |
-| Blood Moon | Rare event that empowers the Heart and existing Beast Blood while weakening the barrier. |
-| Hushiro Gate Village | Area 1 region name; regional theme is rupture. |
-| Yomori Grove | Area 2 region name; regional theme is adaptation. |
-| Kagutsuchi Court | Area 3 region name; regional theme is false ascendancy. The established royal-court setting remains approved. |
-| Keeper of the Gate | Area 1 major boss. Do not shorten to Keeper when the Strand Keeper could be confused. |
+| The Strand | Persistent shoreline hub and controlled barrier threshold. |
+| Bloodwell | Strand permanent-progression and reformation-presentation station. One word. It is not the source of Returning Blood. |
+| Blood Mirror | Strand Aspect trial and mastery system. Two words. |
+| Blood Moon | Recurring Heart cycle that strengthens existing Beast Blood and pressures the barrier. |
+| Hushiro Gate Village | Area 1; regional theme is rupture. |
+| Yomori Grove | Area 2; regional theme is adaptation. |
+| Kagutsuchi Court | Area 3; regional theme is false ascendancy. |
+| Keeper of the Gate | Area 1 boss. Do not shorten to Keeper when the Strand Keeper could be confused. |
 | Twin Maws | Area 2 paired boss encounter comprising Rootfang and Briarthorn. |
-| Rootfang, Briarthorn | The two Twin Maws bosses. Both begin active; the first death empowers the survivor. |
-| Blood Lotus | Area 3 Miniboss #1. Use Heart and Stalks for its component units; context must distinguish the Blood Lotus Heart from the ancient source. |
-| Spillborn | Weak expendable units spawned by a Hollow Vessel. |
+| Rootfang, Briarthorn | Twin Maws combatants. Both begin active; the first defeated empowers the survivor. |
+| Blood Lotus | Area 3 Miniboss #1. Use Heart and Stalks for its encounter components when context is clear. |
+| Spillborn | Weak expendable unit spawned by a Hollow Vessel. |
 | Eternal Swordsman | Area 3 Miniboss #2. |
-| Eclipse Shogun | Area 3 principal boss, central character antagonist, and greatest false master of Beast Blood. He is not the Heart or the true-final supernatural encounter. |
-| Sovereign Duelist | Eclipse Shogun Phase 1. |
-| Tyrant of the Wellspring | Eclipse Shogun Phase 2 working name. It does not establish `Wellspring` as the approved name of the Heart complex or forbidden extraction process. |
-| Eclipse Revealed | Eclipse Shogun Phase 3 working name and deliberate beast transformation. |
-| Heart Binding ritual | The repeated successful-run sequence: Akio offers Returning Blood through the extraction apparatus, the Heart tries to reclaim it, the rejection breaks one Binding, and the Heart dissolves Akio's current body before he reconstructs at the Strand. |
-| Beast-Bane Whistle | Prosthetic interrupt pulse with stronger anti-beast response. |
-| Thunder Rod | Prosthetic line strike that applies Shock to the first target hit. |
-| Smoke Gourd | Prosthetic target-break smoke field. |
-| Fang Harpoon | Prosthetic interrupt and short pull tool. |
-| Mirror Umbrella | Prosthetic protected guard and stored-posture release tool. |
-| Flame Vent | Prosthetic short cone and Burn tool. |
-| Mist Raven | Prosthetic invulnerable blink and reposition tool. |
-| Bloodletting Gourd | Prosthetic Spirit-for-healing and temporary life-steal tool. |
-| Burn | Approved damage-over-time status currently owned by Flame Vent and any future explicitly documented mechanics. |
-| Shock | Approved status currently owned by Thunder Rod and any future explicitly documented mechanics. |
+| Eclipse Shogun | Area 3 principal boss, central character antagonist, and greatest false master. He is not the Heart. |
+| Sovereign Duelist | Working Eclipse Shogun phase label. Not locked. |
+| Tyrant of the Wellspring | Working Eclipse Shogun phase label. `Wellspring` is not an approved world location or extraction term. |
+| Eclipse Revealed | Working Eclipse Shogun phase label. Not locked. |
+| Heart Binding ritual | Successful-run sequence in which Akio offers Returning Blood, one Binding breaks, the Heart dissolves him, and he reconstructs at the Strand. |
+| Beast-Bane Whistle | Anti-beast interrupt prosthetic. |
+| Thunder Rod | Line-strike and Shock prosthetic. |
+| Smoke Gourd | Target-break smoke prosthetic. |
+| Fang Harpoon | Interrupt and short-pull prosthetic. |
+| Mirror Umbrella | Protected guard and stored-posture release prosthetic. |
+| Flame Vent | Short-cone Burn prosthetic. |
+| Mist Raven | Invulnerable blink and reposition prosthetic. |
+| Bloodletting Gourd | Spirit-for-healing and temporary healing-on-hit prosthetic. |
+| Burn | Approved damage-over-time status owned by Flame Vent and explicitly documented mechanics. |
+| Shock | Approved status owned by Thunder Rod and explicitly documented mechanics. |
 | Mist | Base persistent meta currency. |
-| Scroll / Scrolls | Persistent Forge-focused currency. Use singular or plural grammatically. |
+| Scroll / Scrolls | Persistent Forge-focused currency. |
 | Boss Emblem / Boss Emblems | Rare persistent boss-derived currency. |
 | Gold | Run-only shop currency. |
-| Common, Uncommon, Rare, Legendary | Current Relic rarity tiers and available presentation language for Technique quality where approved. |
-| posture | Combat state; lowercase in prose unless part of a UI label or heading. |
-| deathblow | One word; lowercase in general prose unless used as an official UI label. |
+| Common, Uncommon, Rare, Legendary | Current Relic rarity tiers. |
+| posture | Lowercase in prose unless part of an official UI label. |
+| deathblow | One word; lowercase in prose unless used as an official UI label. |
 
 ## Deprecated, superseded, or rejected wording
 
-- `ancient source` remains acceptable as a generic descriptive phrase, but use `the Heart` when referring to the approved Beast Blood source.
-- `source layer` and generic `Heart layer` are superseded when referring to the successful-run objective; use `Heart Binding`.
-- Do not describe the extraction apparatus as ancient or built by the unknown creators of the Heart Bindings.
-- Do not add physical channels that continually feed or control the island's Beast Blood bearers. Existing Beast Blood needs no continued supply.
-- `Wellspring` is not approved as the name of the Heart complex, its access architecture, or the forbidden extraction process. Preserve it only in the working phase name `Tyrant of the Wellspring` unless explicitly redefined.
-- Do not describe the human-blood offering used during forbidden extraction as requiring a death or human sacrifice.
-- `Mist Shards` is deprecated draft wording unless a separate denomination is deliberately restored.
-- `Mistveil` is removed from current lore and should not be used as a spreading corruption force or proper world term unless explicitly reintroduced.
-- `boon` is superseded for ordinary run upgrades; use `Technique` for Akio's temporary combat upgrades and `Relic` for separate passive rules.
-- Storm, Frost, Ember, Hex, and Shadow are removed stance-system names and should not be used as current player build categories.
-- `stance` may still describe an ordinary body pose or enemy combat posture, but not a current player progression system.
-- Frost and Hex are not baseline player status families after removal of the stance system.
+- Use `the Heart` instead of generic `ancient source` when referring to the approved source.
+- Use `Heart Binding` instead of `source layer` or generic `Heart layer` for the campaign objective.
+- Do not describe the extraction apparatus as ancient or built by the Binding creators.
+- Do not add physical channels that continuously feed or control Beast Blood bearers.
+- `Wellspring` is not an approved place, system, or extraction term.
+- Do not describe forbidden extraction as requiring death or human sacrifice.
+- `Mist Shards` is deprecated unless intentionally restored as a separate denomination.
+- `Mistveil` is removed from current lore.
+- Use `Technique` instead of `boon` for ordinary run upgrades.
+- Storm, Frost, Ember, Hex, and Shadow are removed player stance-system names.
+- Frost and Hex are not baseline player status families.
 - Do not call Akio immune to Beast Blood.
-- Do not describe Returning Blood as standard Order practice.
-- Do not state that Order warriors are normally dosed with Beast Blood to cross the barrier.
-- Do not identify the Eclipse Shogun as an Order founder or member.
-- Do not describe Beast Blood as an airborne or bite-transmitted zombie infection.
-- Do not define Beast Blood primarily as automatic preservation of duties, jobs, or oaths.
-- Do not describe the Eclipse Shogun as an innocent puppet or his final phase as a mindless berserk collapse.
-- Do not describe another intelligent or deliberate Beast Blood user as having true control equal to Akio.
-- Do not treat the Heart's exact origin, larger body, final anatomy, or true-final manifestation as explained or locked.
-- Do not replace Kagutsuchi Court with the discarded Eclipse Palace, underground-city, or layered-palace concepts.
+- Returning Blood is not standard Order practice.
+- The Order does not normally dose warriors with Beast Blood.
+- The Eclipse Shogun is not an Order founder or member.
+- Beast Blood is not airborne, bite-transmitted, or environmentally contagious.
+- Do not define Beast Blood primarily as automatic preservation of duties or oaths.
+- The Shogun is not an innocent puppet or a mindless final-form berserker.
+- Other deliberate Beast Blood users do not possess true control equal to Akio.
+- Do not treat the Heart's cosmic origin or final anatomy as explained.
+- Do not replace Kagutsuchi Court with discarded Eclipse Palace, underground-city, living-citadel, or layered-palace concepts.
+- Working boss phase names and attack lists are not locked canon until the encounter design is approved.
 
 ## Status values
 
