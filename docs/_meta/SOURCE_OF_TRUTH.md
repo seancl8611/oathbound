@@ -28,9 +28,10 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
 | Prosthetic mechanics | `docs/gameplay/PROSTHETICS.md` |
 | Items, currencies, and rewards | `docs/gameplay/ITEMS_AND_REWARDS.md` |
+| World and island setting | `docs/lore/WORLD.md` |
+| Story spine | `docs/lore/STORY_OVERVIEW.md` |
 | Beast Blood canon | `docs/lore/BEAST_BLOOD.md` |
 | Returning Blood canon | `docs/lore/RETURNING_BLOOD.md` |
-| Story spine | `docs/lore/STORY_OVERVIEW.md` |
 | The Order | `docs/lore/THE_ORDER.md` |
 | Barrier and Blood Moon | `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md` |
 | Eclipse Shogun canon | `docs/lore/ECLIPSE_SHOGUN.md` |
