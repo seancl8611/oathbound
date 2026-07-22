@@ -4,7 +4,7 @@ title: Area 3 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-21
 topics:
   - area-3
   - kagutsuchi-court
@@ -21,57 +21,48 @@ related:
 
 ## Family fantasy
 
-Courtly, elite, ritualized retainers whose training, loyalty, and humanity have survived longer under controlled Beast Blood corruption. Kagutsuchi's enemies are terrifying because they remain composed, aware, and devoted enough to defend the Shogun deliberately.
+Courtly, elite, ritualized retainers whose training, loyalty, and humanity have survived longer under controlled Beast Blood corruption.
 
-## Shared motifs
+Kagutsuchi enemies remain terrifying because they are composed, aware, and organized enough to defend the Shogun deliberately.
+
+## Shared identity
 
 - disciplined formation and processional movement,
-- lacquered authority and court hierarchy,
-- loyalty to the Shogun and recognition of the Court,
+- lacquered authority and visible hierarchy,
 - immaculate beauty concealing mutation,
-- blossom-strewn stillness and reflective water,
-- controlled Beast Blood use that can rupture into revival, spawning, or frenzy.
+- polished armor and maintained ceremonial clothing,
+- precise and over-controlled motion,
+- retained memory, allegiance, ambition, and training,
+- explicit mechanical reveals such as revival, spawning, guard coverage, or frenzy.
 
-## Shared material language
+Retained humanity does not mean freedom from Beast Blood.
 
-Polished lacquer, vermilion and black armor, gilded trim, silk layers, ceremonial cords, immaculate robes, polished blades, refined stone, lantern light, blossom petals, and pristine court architecture. Materials should look maintained beyond natural possibility rather than weathered.
+## Standard roster
 
-## Shared corruption language
+| Enemy | Primary role | Defining mechanic |
+|---|---|---|
+| Court Guard | Baseline court swordsman | One-time revival |
+| Court Caster | Escalating ranged ritual pressure | One-time revival |
+| Elite Defender | Shield-and-spear positional defender | Directional guard coverage; no revival |
+| Hollow Vessel | Stationary source-priority unit | Spawns Spillborn |
+| Court Sentinel | Heavy bruiser | Low-health frenzy |
 
-Corruption is restrained and controlled until an enemy's mechanic reveals its cost: unnatural stillness, heightened precision, dim blood-lit eyes, hidden veins, preserved bodies, one-time revival, vessel rupture, and deliberate low-health transformation.
+## Role-separation rules
 
-Enemies should not read as empty puppets automatically performing assigned jobs. Their behavior can reflect retained memory, training, allegiance, fear, and ambition even when their judgment has become monstrous.
+- Court Guard establishes the baseline court soldier and revival read.
+- Court Caster controls ranged space and shares revival while remaining visually and mechanically distinct from the Guard.
+- Elite Defender owns frontal denial, shield orientation, re-angling, and spear punishments.
+- Hollow Vessel owns cumulative spawn pressure and clear source attribution.
+- Court Sentinel owns weight, commitment, nearby-space control, and frenzy escalation.
 
-## Movement philosophy
-
-Precise, elegant, and over-controlled. Patrols, pivots, formation changes, guard re-angling, attack resets, casting forms, and ceremonial gestures should be cleaner than earlier areas. Wrongness comes from restraint, synchronization, and discipline that conceal how much Beast Blood is being used.
+No unit should inherit another unit's defining mechanic merely to appear more complex.
 
 ## Readability priorities
 
-- clean silhouette hierarchy against rich backgrounds,
+- clean silhouette hierarchy against rich Court backgrounds,
 - unmistakable startup and recovery poses,
-- clear weapon lines, shield orientation, and formation changes,
+- clear weapon lines and shield orientation,
 - explicit revive, channel, spawn, and frenzy states,
-- safe-space and projectile readability across reflective floors,
-- obvious ownership of spawned Spillborn,
+- obvious ownership of Spillborn,
+- safe-space readability across reflective floors,
 - danger expressed through precision rather than visual chaos.
-
-## Standard enemy roster
-
-| Enemy | Primary role | Authoritative brief |
-|---|---|---|
-| Court Guard | Baseline court swordsman with one-time revive | [Court Guard](enemies/COURT_GUARD.md) |
-| Court Caster | Escalating ranged ritual pressure with one-time revive | [Court Caster](enemies/COURT_CASTER.md) |
-| Elite Defender | Shield-and-spear positional defender | [Elite Defender](enemies/ELITE_DEFENDER.md) |
-| Hollow Vessel | Stationary Spillborn spawner and source-priority objective | [Hollow Vessel](enemies/HOLLOW_VESSEL.md) |
-| Court Sentinel | Heavy kanabō bruiser with low-health frenzy | [Court Sentinel](enemies/COURT_SENTINEL.md) |
-
-## Role-separation rule
-
-- Court Guard is the baseline soldier.
-- Court Caster controls ranged space through escalating ritual volleys.
-- Elite Defender denies frontal aggression through directional guard coverage.
-- Hollow Vessel creates cumulative pressure by spawning weak expendable units.
-- Court Sentinel controls nearby space through weight, commitment, and frenzy escalation.
-
-No unit should inherit another unit's defining mechanic merely to make the roster appear more complex. In particular, the Elite Defender's possible revive behavior remains unresolved because it may overload the shield-orientation identity.
