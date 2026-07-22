@@ -1,30 +1,31 @@
 # Oathbound
 
-Private source repository for Oathbound game design, lore, content, art production, contractor-ready source material, and the Godot project.
+Private source repository for Oathbound game design, lore, content, UI/UX, art production, contractor source material, and the Godot project.
 
 ## Documentation
 
-The authoritative internal documentation lives under [`docs/`](docs/README.md).
+Authoritative internal documentation lives under [`docs/`](docs/README.md).
 
 Start with:
 
-- [Game Overview](docs/overview/GAME_OVERVIEW.md)
-- [Full Game Scope](docs/overview/FULL_GAME_SCOPE.md)
-- [Production Roadmap](docs/overview/PRODUCTION_ROADMAP.md)
-- [Source of Truth Map](docs/_meta/SOURCE_OF_TRUTH.md)
-- [Assistant Update Workflow](docs/_meta/ASSISTANT_WORKFLOW.md)
-- [Open Questions](docs/_meta/OPEN_QUESTIONS.md)
+1. [Game Overview](docs/overview/GAME_OVERVIEW.md)
+2. [Full Game Scope](docs/overview/FULL_GAME_SCOPE.md)
+3. [Current Design Questions](docs/_meta/OPEN_QUESTIONS.md)
+4. [Source of Truth](docs/_meta/SOURCE_OF_TRUTH.md)
+5. [Assistant Update Workflow](docs/_meta/ASSISTANT_WORKFLOW.md)
 
 ## Repository model
 
 - `docs/` — authoritative Markdown design and production documentation
-- `contractor_docs/` — generated Word/PDF contractor deliverables and templates
+- `contractor_docs/` — generated contractor deliverables and export records
 - `art/` — references, concepts, approved source art, and exports
 - `assets/` — game-ready imported assets
 - `game/` — Godot project
 
 ## Change workflow
 
-Major changes should use focused branches and pull requests. Update the authoritative file first, review dependencies, search for contradictions, and record major approved decisions.
+Major changes should use focused branches and pull requests.
 
-Word and PDF files are external deliverables. Markdown remains the internal source of truth.
+Update the authoritative file first, review live dependencies, remove stale or duplicated statements, and keep unresolved scope decisions in `docs/_meta/OPEN_QUESTIONS.md`.
+
+Exact tuning belongs in the gameplay or encounter file that owns it. Word and PDF files are exports; Markdown remains the internal source of truth.
