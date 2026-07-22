@@ -2,7 +2,7 @@
 
 Authoritative player-facing mechanics and system rules belong here.
 
-## Current documents
+## Core documents
 
 - [Core Loop](CORE_LOOP.md)
 - [Combat](COMBAT.md)
@@ -15,13 +15,17 @@ Authoritative player-facing mechanics and system rules belong here.
 - [Prosthetic Tools](PROSTHETICS.md)
 - [Items, Currencies, and Rewards](ITEMS_AND_REWARDS.md)
 
-## Planned expansion
+## Current design work
 
-- Encounter-design rules
-- Save/reset rules
-- Individual Technique tuning sheets and catalog
-- Individual prosthetic tuning sheets
-- Relic and consumable catalogs
-- Balance-variable references
+Production-level gameplay questions are tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md):
 
-Gameplay files own mechanics. Lore files may explain why a system exists, content files own physical locations and combatant identity, art files own visual requirements, and milestone files own production scope; none should redefine gameplay rules.
+- run length and route structure,
+- launch build-content catalog,
+- persistent progression and trial scope,
+- postgame route and repeat-clear rewards.
+
+Exact attack timings, cooldowns, probabilities, prices, hitboxes, numerical balance, and other playtest values remain in the owning gameplay or encounter file and do not belong in the top-level question tracker.
+
+## Authority rule
+
+Gameplay files own mechanics. Lore explains fiction, content owns combatant and location identity, UI owns interaction behavior, art owns visual requirements, and milestones own production scope. Those files may summarize gameplay but must not redefine it.
