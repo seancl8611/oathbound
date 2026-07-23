@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-23
 topics:
   - progression
   - persistence
@@ -13,6 +13,7 @@ topics:
   - forge
   - trials
   - currencies
+  - blood-resource
   - heart-bindings
 related:
   - GAMEPLAY-RUN-STRUCTURE
@@ -39,6 +40,8 @@ Temporary run state may include:
 
 - Blood Aspect Tier,
 - Corruption,
+- Blood after its Tier II unlock,
+- Blood Art readiness or active state,
 - four active Techniques,
 - one reserve Technique,
 - Technique refinements,
@@ -51,6 +54,8 @@ Temporary run state may include:
 - temporary encounter rewards.
 
 These states reset after failed death-return or successful Heart Binding completion unless an item explicitly defines a different rule.
+
+Blood is a run-only combat resource owned by the Blood Aspect system. It is not a persistent wallet, meta currency, shop currency, or campaign collectible. Run upgrades may modify Blood generation, activation, capacity, retention, duration, or Blood Art behavior only where the owning gameplay design approves that interaction.
 
 ## Persistent character progression
 
@@ -97,6 +102,8 @@ Destroyed Binding progress is not a currency, cannot be purchased, and cannot be
 
 Currency ownership is resolved and should not be reintroduced as an open scope question. Exact costs remain balance work.
 
+Corruption, Blood, and destroyed Heart Bindings are not currencies. Blood exists only as the current run's Blood Art resource after Tier II.
+
 `Mist Shards` is deprecated unless intentionally restored as a separate denomination.
 
 ## Blood Aspect persistence
@@ -105,8 +112,13 @@ Currency ownership is resolved and should not be reintroduced as an open scope q
 - The selected Aspect remains available as a loadout choice.
 - Every run begins at Tier 0.
 - Corruption resets after the run.
+- Blood is unavailable before Tier II and resets after the run.
+- Blood Art readiness, activation, and temporary effects reset after the run.
 - Blood Mirror mastery and small permanent upgrades persist.
 - Permanent Aspect upgrades cannot replace the in-run Embrace Tier system.
+- Permanent progression cannot create a persistent Blood wallet or carry stored Blood between runs.
+
+The persistent-progression pass must explicitly approve any upgrade that changes starting Blood, Blood capacity, gain rules, activation requirements, or initial Blood Art availability.
 
 ## Technique persistence
 
@@ -142,7 +154,8 @@ Trials may not:
 - add new Blood Aspect Tiers,
 - remove Embrace danger,
 - permanently pre-equip a Technique,
-- create permanent versions of major run-only mechanics.
+- create a persistent Blood balance,
+- or create permanent versions of major run-only mechanics.
 
 The final number of basic-combat trials, Aspect trials, Technique demonstrations, mastery trials, and their unlock ownership remains part of the current progression package decision.
 
@@ -153,7 +166,7 @@ Both failed and successful runs reconstruct Akio at the Strand through Returning
 A successful Binding return additionally:
 
 1. saves destroyed-Binding progress and permanent rewards,
-2. clears run-only state,
+2. clears run-only state, including Blood and Blood Art state,
 3. presents a results summary,
 4. triggers relevant NPC, codex, Blood Mirror, Heart, or hub updates.
 
@@ -172,6 +185,7 @@ The results flow must clearly distinguish retained progress from burned-away run
 | Mist, Scrolls, Boss Emblems | Persists | Persists |
 | Blood Aspect Tier | Resets | Resets |
 | Corruption | Resets | Resets |
+| Blood and Blood Art state | Resets | Resets |
 | Active and reserve Techniques | Resets | Resets |
 | Technique refinements | Resets | Resets |
 | Run-scoped Relic effects | Resets | Resets |
@@ -186,12 +200,14 @@ The results flow must clearly distinguish retained progress from burned-away run
 - Blood Aspect remains more identity-defining than any single Technique.
 - Techniques remain independently useful.
 - Permanent Aspect upgrades stay small and capped.
+- Blood remains a run-only Blood Art resource rather than an account-level progression layer.
 - Gold never becomes a persistent Strand wallet without an explicit system change.
 - Unlocks and numerical balance values are documented separately.
 
 ## Current production dependencies
 
-1. Scope the launch run-build content catalog so the total unlockable content is known.
-2. Scope the persistent progression, onboarding, and trial package around that catalog and the approved service boundaries.
+1. Complete the shared Blood Aspect Tier, Blood-generation, and Blood Art design so unlock and trial scope can be estimated.
+2. Scope the launch run-build content catalog so the total unlockable content is known.
+3. Scope the persistent progression, onboarding, and trial package around those approved systems and service boundaries.
 
-Exact upgrade percentages, currency costs, timing windows, and reward values remain later implementation and balance work.
+Exact upgrade percentages, Blood generation values, Blood capacity, activation requirements, currency costs, timing windows, and reward values remain later implementation and balance work.

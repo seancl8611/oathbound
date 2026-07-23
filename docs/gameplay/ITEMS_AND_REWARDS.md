@@ -4,17 +4,19 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-23
 topics:
   - currencies
   - pickups
   - techniques
   - relics
+  - blood-resource
   - room-rewards
   - reward-cadence
   - heart-binding-completion
 related:
   - GAMEPLAY-PROGRESSION
+  - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RUN-STRUCTURE
   - CONTENT-ROOM-TYPES
@@ -53,7 +55,13 @@ Major rewards support:
 | Boss Emblem | Persistent | Rare major progression gates |
 | Gold | Run-only | Shops and run economy |
 
-Corruption and destroyed Heart Bindings are not currencies.
+Corruption, Blood, and destroyed Heart Bindings are not currencies.
+
+- **Corruption** governs Shrine-ready Aspect progression.
+- **Blood** is a Tier II-and-later run-only combat resource used to activate the selected Blood Art.
+- **Destroyed Heart Bindings** are persistent campaign state.
+
+Blood is not purchased, banked at the Strand, displayed as a route reward, or carried between runs. Its exact combat generation and activation rules belong in `BLOOD_ASPECTS.md`.
 
 `Mist Shards` is deprecated unless intentionally restored as a separate denomination.
 
@@ -62,7 +70,25 @@ Corruption and destroyed Heart Bindings are not currencies.
 - Health restores HP.
 - Spirit restores the shared prosthetic resource.
 - Minor enemy and breakable drops may include small Gold, Health, Spirit, Mist, or Scroll value where approved.
+- Blood is generated through the approved Blood Aspect combat rules rather than treated as an ordinary pickup or breakable drop in the current baseline.
 - Minor drops support flow but do not replace the room's previewed primary reward.
+
+## Blood-related run growth
+
+Blood itself is not a reward category, but approved run rewards may modify the Blood Art system.
+
+Possible later design space includes:
+
+- modified Blood generation,
+- modified activation requirement or capacity,
+- retained Blood after activation,
+- changed Blood Art duration or immediate effect,
+- new interaction between an existing Technique and the Blood Art,
+- or another bounded Aspect-specific rule.
+
+These effects may belong to later Aspect Tiers, Techniques, refinements, Relics, or another approved run system. They must not create a persistent Blood balance, make the Blood Art functional only after finding a required upgrade, or produce near-permanent Blood Art uptime as the normal build state.
+
+The exact number and ownership of Blood-related rewards remain part of later Aspect, Technique, and catalog design.
 
 ## Route previews
 
@@ -124,6 +150,7 @@ Shrines own Blood Aspect stabilization and escalation.
 - At full Corruption: present Resist or Embrace.
 - Below full Corruption: provide approved support such as Health or Spirit recovery.
 - Shrines do not normally present ordinary Technique selections.
+- Blood Art charge is separate from Corruption and does not pay for Embrace.
 
 ## Rest rooms
 
@@ -134,7 +161,7 @@ Rest rooms provide:
 - read-only build review,
 - short narrative breathing room where appropriate.
 
-They do not generate new Techniques or restore discarded Techniques.
+They do not generate new Techniques or restore discarded Techniques. Whether Blood changes during a rest or non-combat transition remains an explicit Blood Aspect design question rather than an assumed rest reward.
 
 ## Shops
 
@@ -151,6 +178,8 @@ Run shops use Gold and may offer:
 
 Technique and refinement purchases should be expensive enough that Gold routing is a meaningful build strategy rather than an automatic purchase path.
 
+Blood is not directly bought or sold. A shop may eventually sell an approved Technique, refinement, Relic, or service that modifies Blood Art behavior, but only after that content family is designed.
+
 Final stock count, prices, refresh rules, and reroll economics remain balance work.
 
 ## Treasure and miniboss rewards
@@ -165,6 +194,8 @@ A miniboss guarantees meaningful build development and should never award only o
 - special encounter reward,
 - modest additional Mist or Scrolls.
 
+A later approved Blood-related Technique, refinement, or Relic may appear through these sources; raw Blood is not itself the reward.
+
 Miniboss frequency and route placement remain later gameplay decisions. The reward system must support the approved encounters without assuming all six appear in every run.
 
 ## Regional boss rewards
@@ -175,7 +206,7 @@ Persistent rewards may include Boss Emblems, Mist, Scrolls, unlocks, and narrati
 
 Current-run rewards may include a refinement, rare Technique choice, Prosthetic Technique, Relic, or major temporary Health or Spirit improvement.
 
-Regional transitions should restore enough Health or Spirit for the next area to begin from a viable state.
+Regional transitions should restore enough Health or Spirit for the next area to begin from a viable state. Blood behavior at transitions is owned by the Blood Aspect design and is not automatically refilled by the reward system.
 
 ## Eclipse Shogun and Heart Binding completion
 
@@ -204,7 +235,7 @@ The initial structure uses one equipped Relic. Current rarity tiers are:
 - Rare,
 - Legendary.
 
-Relics may alter broader combat, economy, survival, or risk rules, but should not replace the selected Blood Aspect as the run's central identity.
+Relics may alter broader combat, economy, survival, risk, or an approved Blood Art rule, but should not replace the selected Blood Aspect as the run's central identity.
 
 The final Relic catalog belongs to the launch run-build content decision.
 
@@ -234,12 +265,13 @@ These are pacing targets, not locked room counts or probabilities.
 - Refinements target active Techniques.
 - Prosthetic Techniques appear only for the equipped tool.
 - Selected Aspect weights but does not fully restrict offers.
+- Blood is a combat resource, not a currency or route reward.
 - Rare rewards must not invalidate sword combat or boss mechanics.
 - Persistent currency must not overwhelm current-run strength.
 - Heart Binding progress cannot be replaced by ordinary currency.
 
 ## Current production dependency
 
-The remaining reward-level production question is the launch run-build content catalog: approximate Technique, refinement, Prosthetic Technique, Relic, and consumable counts, plus their reusable-versus-unique production treatment.
+The remaining reward-level production question is the launch run-build content catalog: approximate Technique, refinement, Prosthetic Technique, Relic, consumable, and approved Blood-interaction counts, plus their reusable-versus-unique production treatment.
 
-Exact effects, prices, rates, probabilities, route generation, temporary values, and reroll formulas remain later design and playtest work.
+Exact effects, prices, Blood rates, activation amounts, probabilities, route generation, temporary values, and reroll formulas remain later design and playtest work.

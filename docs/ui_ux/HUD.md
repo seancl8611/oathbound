@@ -4,17 +4,20 @@ title: Run HUD and Combat Feedback
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 topics:
   - hud
   - posture
   - corruption
+  - blood-resource
+  - blood-arts
   - techniques
   - deathblow
   - damage-numbers
   - enemy-indicators
 related:
   - GAMEPLAY-COMBAT
+  - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
@@ -37,6 +40,7 @@ The Run HUD displays immediate combat state, current build tools, and run-only p
 - Status-effect row
 - Corruption meter
 - Selected Blood Aspect and current Tier
+- Integrated Blood Art buildup, ready, activation, and unavailable states after Tier II
 - Enemy health and posture indicators
 - Miniboss and boss bars
 - Damage numbers
@@ -67,11 +71,12 @@ The HUD should support up to four active Technique icons in a compact build stri
 2. Player and enemy posture
 3. Spirit and active prosthetic availability
 4. Deathblow state
-5. Active Technique state and urgent status conditions
+5. Ready or active Blood Art state and urgent Technique or status conditions
 6. Corruption and Aspect Tier
-7. Currency and non-urgent run information
+7. Blood buildup when not yet ready
+8. Currency and non-urgent run information
 
-Corruption becomes more prominent when full and Shrine-ready, but it remains secondary to immediate survival during combat.
+Corruption becomes more prominent when full and Shrine-ready, but it remains secondary to immediate survival during combat. Blood Art readiness may become prominent when full or active, but ordinary Blood buildup should remain visually quieter than enemy telegraphs and posture state.
 
 ## Player bars and resources
 
@@ -89,7 +94,9 @@ Ten countable segments in the current baseline, with unmistakable full and empty
 
 ## Corruption and Blood Aspect module
 
-Required states:
+The Corruption and Aspect presentation share one coherent Returning Blood module while preserving their separate gameplay purposes.
+
+### Corruption states
 
 - hidden before unlock,
 - empty,
@@ -100,7 +107,28 @@ Required states:
 - after Embrace,
 - maximum Tier.
 
-The module shows selected Aspect and Tier I–IV after unlock. It uses dark crimson pressure language and must not resemble mana. Full-state feedback connects to the [Corruption Full Cue](../art_production/CORE_VFX.md#corruption-full-cue).
+The module shows selected Aspect and Tier I–IV after unlock. Corruption uses dark crimson pressure language and must not resemble mana. Full-state feedback connects to the [Corruption Full Cue](../art_production/CORE_VFX.md#corruption-full-cue).
+
+### Blood Art states
+
+Before Tier II, Blood Art buildup is hidden, locked, or otherwise clearly unavailable without implying an error.
+
+After Tier II, the Aspect module must support:
+
+- empty Blood,
+- Blood building through combat,
+- near-ready state,
+- Blood Art ready,
+- activation confirmation,
+- active or resolving Blood Art,
+- consumed or rebuilding state,
+- and any later approved retained-Blood state.
+
+Blood is mechanically tracked as a combat resource, but the interface is not required to use a separate large horizontal meter. The preferred direction is to integrate buildup into the existing Aspect emblem, seal, segments, veins, fill treatment, or another compact visual language.
+
+The player must still be able to understand whether the Blood Art is unavailable, building, ready, or active. The exact amount, segmentation, numeric display, duration treatment, and variation between different Blood Art types remain pending UI and gameplay design.
+
+The HUD must not assume that every Blood Art is a temporary buff. It should support immediate, contextual, defensive, movement, focused-attack, control, and duration-based Arts through reusable shared states plus limited Aspect-specific presentation.
 
 The selected Aspect should remain more visually prominent than any single passive Technique because it is the run's central identity.
 
@@ -138,14 +166,16 @@ Color cannot be the only differentiator; weight, outline, prefix, icon, or motio
 
 The input prompt appears alongside the persistent world-space Deathblow Cue and should be understood in approximately 0.3 seconds. The cue and input prompt must read together without competing.
 
-The persistent execution indicator stays anchored over the enemy's upper body for the entire valid window, pulses subtly, and remains distinct from posture break, damage numbers, Technique markers, and status icons.
+The persistent execution indicator stays anchored over the enemy's upper body for the entire valid window, pulses subtly, and remains distinct from posture break, damage numbers, Technique markers, Aspect marks, and status icons.
 
 ## World-space cue relationship
 
-The HUD complements rather than duplicates [Core Combat and Corruption VFX](../art_production/CORE_VFX.md). Parry, Posture Break, Deathblow, Corruption Full, target marks, and Technique-trigger cues originate in world space or on Akio; the HUD provides persistent context and resource state.
+The HUD complements rather than duplicates [Core Combat and Corruption VFX](../art_production/CORE_VFX.md). Parry, Posture Break, Deathblow, Corruption Full, target marks, Blood Art activation, and Technique-trigger cues originate in world space or on Akio; the HUD provides persistent context and resource state.
 
 ## Delivery requirements
 
-The artist supplies modular bars, fills, frames, icons, markers, number style sheets, Technique-state examples, and required active/inactive states. Godot owns layout, values, responsive anchoring, timing, cooldown motion, spawning, and visibility logic.
+The artist supplies modular bars, fills, frames, icons, markers, number style sheets, Technique-state examples, and required active/inactive states. Godot owns layout, values, responsive anchoring, timing, fill motion, spawning, and visibility logic.
+
+The Blood Art framework should reuse a shared Aspect-module location and common locked, building, ready, activated, and consumed logic. Exact Art-specific target, duration, charge, and active-state treatments remain later production requirements after the three Arts are designed.
 
 All elements must remain legible over Hushiro, Yomori, and Kagutsuchi backgrounds. Critical state should be understood in under one second without pulling attention away from attack windups.

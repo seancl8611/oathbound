@@ -15,40 +15,83 @@ Questions are ordered by dependency. Resolve each only to the depth needed to es
 
 ## Priority order
 
-1. Blood Aspect gameplay model and power budget
+1. Blood Aspect Tier, Blood-generation, and Blood Art package
 2. Launch run-build content catalog
 3. Persistent progression, onboarding, and trial package
 4. Narrative delivery and authored-content package
 5. Postgame release package
 
-## 1. Blood Aspect gameplay model and power budget
+## 1. Blood Aspect Tier, Blood-generation, and Blood Art package
 
-What exactly does equipping and progressing a Blood Aspect add to a run?
+How do the approved Blood Aspect framework and Tier II Blood Art system function for Wolf, Wraith, and Ronin?
 
-Decide:
+### Approved framework
 
-- whether Aspects are primarily passive modifiers, persistent signature mechanics, contextual actions, activatable abilities, or a bounded hybrid,
-- whether all three Aspects use the same system form or may use different forms within a shared interface and power budget,
-- whether an activatable Aspect ability exists,
-- if so, whether it is available at Tier 0, unlocked later, or improved through Tiers,
-- what input, resource, charge, cooldown, combat accomplishment, or risk condition governs activation,
-- whether Aspects directly alter the base sword kit,
-- whether Aspects directly buff owned Techniques during the run, influence only offer weighting and affinity, unlock special interactions, or use another limited relationship,
-- whether higher Tiers add new abilities or only deepen existing functionality,
-- what player behavior should change moment to moment when an Aspect is equipped,
-- and what share of total run power the Aspect should own compared with Techniques, prosthetics, Relics, and other rewards.
-
-Approved direction:
-
-- Blood Aspects are an overarching run-power system increased at designated Shrine rooms.
-- Aspect growth should reward skill and strategic decision-making.
+- Every Aspect has a persistent signature mechanic at Tier 0.
+- Tier I strengthens, broadens, or stabilizes that signature mechanic.
+- Tier II unlocks the run-only Blood resource and the Aspect's activatable Blood Art.
+- Combat generates Blood after Tier II.
+- Activating a Blood Art consumes the required Blood.
+- Tier III and Tier IV deepen the established mechanic, Blood Art, or their interaction rather than continually adding unrelated abilities.
+- Blood is not a currency, route reward, shop wallet, or persistent meta resource.
+- Blood may be modified during a run by later Tiers, Techniques, refinements, Relics, or other approved run effects.
+- Blood Arts should generally preserve sword execution and should not default to one large automatic attack.
+- Blood Arts may use different forms; they are not all required to be temporary activatable buffs.
+- The initial baseline uses one clear activation threshold. Partial activation is deferred until playable Arts and representative playtesting exist.
 - Successful runs should commonly finish at Tier II or Tier III.
 - Tier IV should be difficult, rewarding, occasional, and non-mandatory even for experienced players.
-- Some runs may prioritize other build systems rather than maximum Aspect growth.
-- Tier IV must not take over the run or make Techniques and other mechanics secondary.
 - Mid-Tier runs must remain complete, viable, and strategically interesting.
 
-This question materially affects combat mechanics, input mapping, HUD, Shrine presentation, tutorials, VFX, animation, audio, balancing, Technique design, and Milestone 4 production scope. It must be answered before the shared Tier contract or individual Aspect tables are approved.
+### Decide the shared Tier contract
+
+- the exact baseline value and complexity allowed at Tier 0,
+- what Tier I may add or improve,
+- the guaranteed baseline supplied by the Tier II Blood Art unlock,
+- whether Tier benefits accumulate, transform, or may do either under a consistent rule,
+- whether drawbacks accumulate, transform, or use another clearly communicated structure,
+- whether every Tier must add a benefit and drawback or may deepen an existing pair,
+- how much complexity one Tier may add,
+- what Shrine behavior remains available after Tier IV,
+- and how Resist remains meaningful for players who deliberately remain at Tier II or III.
+
+### Decide Blood generation and activation behavior
+
+- which combat events generate Blood for each Aspect,
+- whether all combat provides baseline Blood with Aspect-specific bonus sources or each Aspect uses distinct generation rules,
+- how health damage, posture damage, parries, dodges, deathblows, elites, bosses, summons, hazards, and multi-target actions contribute,
+- what anti-farming and multi-hit safeguards are required,
+- Blood capacity and the activation amount,
+- whether Blood carries unchanged between combat rooms,
+- whether Blood decays, is retained, or is adjusted during transitions,
+- what happens when Tier II is first acquired,
+- what happens at boss entrances and phase changes,
+- and whether any Blood remains after activation.
+
+Exact numerical gain rates remain playtest values after the behavioral rules are approved.
+
+### Decide each Blood Art's form and function
+
+For Wolf, Wraith, and Ronin, establish:
+
+- the exact Blood Art effect and tactical purpose,
+- whether it is a temporary state, contextual action, defensive response, mobility or control tool, focused attack, or another bounded type,
+- activation timing and interruption rules,
+- whether it has a duration, immediate resolution, or mixed behavior,
+- how it functions against standard enemies, groups, elites, and bosses,
+- how Tier III and Tier IV deepen it,
+- which Techniques or refinements may modify it,
+- and what unique input, HUD, animation, VFX, and audio states it requires.
+
+### Partial-activation boundary
+
+Partial Blood Art activation is not part of the approved baseline. Reconsider it only after:
+
+1. the three Blood Arts are playable,
+2. the shared Blood and HUD framework is implemented,
+3. representative standard, elite, miniboss, and boss testing exists,
+4. and playtesting demonstrates that partial spending creates meaningful tactical choices without making readiness harder to read or full activation less satisfying.
+
+This question materially affects combat mechanics, input mapping, HUD, Shrine presentation, tutorials, VFX, animation, audio, balancing, Technique design, and Milestone 4 production scope. It must be answered before individual Aspect tables or the Technique catalog are approved.
 
 ## 2. Launch run-build content catalog
 
@@ -58,6 +101,7 @@ Decide:
 
 - approximate base Technique count and broad combat-role distribution,
 - how many Techniques support one refinement,
+- how many Technique or refinement entries may modify Blood or Blood Arts,
 - temporary Prosthetic Technique count per equipped tool,
 - initial Relic count and approximate rarity distribution,
 - whether consumables are included at launch,
@@ -67,17 +111,16 @@ This question establishes production counts and treatment tiers. It does not req
 
 Before approving those counts, complete the following design groundwork in the owning gameplay files:
 
-1. Blood Aspect gameplay model and power budget,
-2. activatable-ability and Technique-interaction decisions,
-3. shared Tier contract using the approved Tier II–III common / Tier IV occasional target,
-4. exact Tier 0–IV mechanical direction for Wolf, Wraith, and Ronin,
-5. formal definitions for each Aspect's exclusive mechanics,
-6. Technique category, combat-verb tag, affinity, and rarity model,
-7. refinement design standard,
-8. Aspect–Tier–Technique interaction rules,
-9. and the launch coverage matrix in `gameplay/TECHNIQUE_CATALOG.md`.
+1. shared Blood Aspect Tier contract,
+2. shared Blood-generation and activation rules,
+3. exact Tier 0–IV mechanical direction, signature mechanic, and Blood Art for Wolf, Wraith, and Ronin,
+4. cross-Aspect distinction and overlap audit,
+5. Technique category, combat-verb tag, affinity, and rarity model,
+6. refinement design standard,
+7. Aspect–Tier–Technique and Blood-interaction rules,
+8. and the launch coverage matrix in `gameplay/TECHNIQUE_CATALOG.md`.
 
-**Dependency:** the Blood Aspect gameplay model determines what mechanical territory Techniques should complement rather than duplicate.
+**Dependency:** the completed Blood Aspect package determines what mechanical territory Techniques should complement rather than duplicate.
 
 **Affects:** run rewards, unlocks, trials, UI population, icon production, VFX planning, animation scope, and Milestone 4.
 
@@ -91,13 +134,14 @@ Decide:
 - approximate permanent node, rank, or branch counts per service,
 - required basic-combat and system-teaching trials,
 - required Blood Aspect introduction and mastery trials,
+- required Blood Art teaching and mastery states,
 - whether Technique demonstrations or mastery trials are included,
 - which approved catalog entries or systems unlock through each service,
 - and the distinct interface and presentation states required for those flows.
 
-Currency ownership is already resolved in the progression and reward authorities and is not part of this question. Exact costs and upgrade percentages remain later balance work.
+Currency ownership is already resolved and is not part of this question. Blood is a run-only combat resource, not a persistent currency. Exact costs and upgrade percentages remain later balance work.
 
-**Dependency:** the Blood Aspect model and launch catalog should be scoped first so unlock, tutorial, and trial ownership reference known systems and content.
+**Dependency:** the Blood Aspect package and launch catalog should be scoped first so unlock, tutorial, and trial ownership reference known systems and content.
 
 **Affects:** Strand content volume, onboarding, persistent progression depth, UI workload, non-run replayability, and Milestone 3.
 
@@ -150,7 +194,8 @@ The following are intentionally not top-level scoping questions:
 - exact enemy and boss movesets,
 - Shogun and Heart encounter details,
 - exact Corruption gains, Shrine frequency, and Tier thresholds,
-- exact Aspect ability cooldowns, charges, durations, and numerical values,
+- exact Blood gain values, capacity, activation amount, duration, retention, and anti-farming formulas,
+- partial Blood Art activation before the required milestone and playtest evidence exists,
 - Spirit costs, prosthetic cooldowns, hitboxes, immunity tables, and status values,
 - reward probabilities, prices, reroll formulas, and anti-streak rules,
 - exact permanent-upgrade percentages,
