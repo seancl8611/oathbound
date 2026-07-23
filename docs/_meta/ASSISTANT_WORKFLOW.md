@@ -4,7 +4,7 @@ title: Assistant Update Workflow
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Assistant Update Workflow
@@ -36,15 +36,40 @@ Use `DOCUMENT_MAP.md` only to seed likely dependencies. Live repository search r
 9. Update the asset inventory and milestone files only when production scope changes.
 10. Use a focused branch and pull request unless a direct commit is explicitly requested.
 
+## Question classification
+
+Before adding a question, classify the missing decision:
+
+- **Current production-scope decision:** changes initial-release content counts, required systems, authored presentation, interfaces, milestones, or quotation boundaries. Track it in `OPEN_QUESTIONS.md`.
+- **Later system or encounter design:** defines routing, room composition, movesets, detailed effects, or feature behavior that can be resolved when that feature is designed. Record it only in the owning file when useful.
+- **Playtest or balance variable:** depends on real combat feel, timing, economy, probability, or numerical tuning. Keep it out of the top-level tracker.
+- **Resolved direction:** update the authority and remove the question.
+- **Deliberate mystery or creative boundary:** preserve it as canon rather than treating it as missing information.
+
+A question is not important merely because it can be asked. It belongs in the tracker only when answering it is necessary to define the initial game or plan its production.
+
+## Question priority
+
+Order current questions by dependency:
+
+1. content inventories that other systems consume,
+2. unlock, progression, onboarding, and hub scope built around those inventories,
+3. authored narrative and presentation packages,
+4. release-completion and postgame scope.
+
+Do not prioritize a later gameplay-detail question above an independent production decision simply because the detail appears earlier in the run.
+
 ## Question hygiene
 
-`OPEN_QUESTIONS.md` contains only unresolved decisions that materially affect current scope, content volume, production planning, or narrative presentation.
+`OPEN_QUESTIONS.md` contains only unresolved decisions that materially affect current scope, content volume, production planning, or authored presentation.
 
 - Remove a question once its authoritative answer is recorded.
 - Do not keep resolved-question summaries in the tracker.
 - Do not promote exact tuning values into top-level scope questions.
 - Keep frame counts, cooldowns, probabilities, attack timings, and playtest values in the owning gameplay or encounter file.
+- Keep exact room counts, route topology, branch frequency, and miniboss frequency out of the tracker until prototyping proves they create a production-scope change.
 - Combine overlapping questions around the production decision they block.
+- Remove subquestions already answered by authoritative files.
 - Preserve deliberate mysteries as canon boundaries rather than treating them as problems that must be answered.
 
 ## Information ownership
@@ -65,7 +90,7 @@ When two files conflict, the authority assigned in `SOURCE_OF_TRUTH.md` wins. Co
 
 Resolve a question only to the level needed for the current design stage.
 
-A high-level scope pass should establish identity, purpose, boundaries, dependencies, and required content volume. It should not invent final attack lists, exact numerical tuning, frame counts, or encounter timings before implementation and playtesting.
+A high-level scope pass should establish identity, purpose, boundaries, dependencies, and required content volume. It should not invent final attack lists, exact numerical tuning, frame counts, encounter timings, route probabilities, or final scripts before their design and production stages.
 
 ## Duplication rule
 

@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Production Roadmap
@@ -23,7 +23,9 @@ The Posture Break Cue is assigned to Batch 2 with the Corrupted Swordsman and De
 
 ## Milestone 2 — Complete Area 1
 
-Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional-room skins, regional props, Shrine and Corruption foundations, and boss/miniboss UI.
+Complete the remaining Area 1 roster, both designed minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional-room skins, regional props, Shrine and Corruption foundations, and boss/miniboss UI.
+
+Exact room counts, branch frequency, and miniboss run frequency are not quotation blockers for the modular Area 1 package. They remain prototype and playtest decisions unless they create additional asset requirements.
 
 Final Blood Aspect VFX, complete Tier I–IV mutation overlays, and final Technique presentation remain deferred to Milestone 4.
 
@@ -31,19 +33,19 @@ Final Blood Aspect VFX, complete Tier I–IV mutation overlays, and final Techni
 
 Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
 
-The final depth of trials and permanent upgrade catalogs depends on the persistent-progression scope decision.
+The final number of progression nodes, training experiences, trials, unlock flows, and mastery states depends on the approved persistent progression, onboarding, and trial package.
 
 ## Milestone 4 — Player combat depth and run-build expression
 
 Complete Wolf, Wraith, and Ronin VFX identities, modular mutation overlays, eight prosthetic families, Technique reward and build interfaces, reusable Technique icon and card language, approved Technique combat-feedback needs, Relic presentation, and broad currency, pickup, breakable, and reward-object art.
 
-Final unique icons and bespoke effects require the approved launch content catalog.
+Final unique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
 ## Milestone 5 — Complete Area 2
 
 Produce Yomori Grove, its enemy and encounter roster, regional hazards, functional rooms, VFX, and integration pass.
 
-Exact Twin Maws transition values remain implementation and playtest work rather than quotation blockers for the high-level encounter package.
+Exact room and miniboss routing remain prototype work. Exact Twin Maws transition values remain implementation and playtest work rather than quotation blockers for the high-level encounter package.
 
 ## Milestone 6 — Area 3 and endgame
 
@@ -57,9 +59,9 @@ The true-final Heart has two conceptual forms and does not require a humanoid sw
 
 ## Milestone 7 — Release presentation and cohesion
 
-Complete front-end UI, narrative presentation, achievements and store art, missing-asset audit, cross-game readability, and final production cleanup.
+Complete front-end UI, the approved narrative-delivery package, achievements and store art, missing-asset audit, cross-game readability, and final production cleanup.
 
-Narrative volume, voice acting, cinematics, postgame route control, and repeat-clear rewards must be approved before their final production scope is quoted.
+The core story and lore are approved. Final quotation depends on the authored-content inventory, voice and cinematic boundary, postgame Heart-route access, repeat-clear rewards, and required release UI—not on reopening narrative canon.
 
 ## Production rules
 
@@ -68,9 +70,10 @@ Narrative volume, voice acting, cinematics, postgame route control, and repeat-c
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.
+- The standard successful-run pacing target is 45–50 minutes, but exact room and encounter budgets require playable validation.
 - The base Heart Binding ritual is one reusable package.
 - Exact Heart and Shogun animation and VFX counts require approved encounter designs.
-- Deferred challenge modifiers and variants are excluded from the initial quote unless intentionally promoted later.
+- Deferred route algorithms, room probabilities, challenge modifiers, and variants are excluded from the initial quote unless intentionally promoted later.
 - Each milestone uses separately quoted, payable, reviewable internal batches.
 - Every batch receives sheet-level and in-engine review.
 - Markdown remains the internal source of truth; Word and PDF files are exports.

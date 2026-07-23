@@ -15,16 +15,19 @@ Authoritative player-facing mechanics and system rules belong here.
 - [Prosthetic Tools](PROSTHETICS.md)
 - [Items, Currencies, and Rewards](ITEMS_AND_REWARDS.md)
 
-## Current design work
+## Current status
 
-Production-level gameplay questions are tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md):
+The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain later prototype and playtest decisions rather than top-level scope questions.
 
-- run length and route structure,
-- launch build-content catalog,
-- persistent progression and trial scope,
-- postgame route and repeat-clear rewards.
+Current production-level gameplay dependencies tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
 
-Exact attack timings, cooldowns, probabilities, prices, hitboxes, numerical balance, and other playtest values remain in the owning gameplay or encounter file and do not belong in the top-level question tracker.
+- launch run-build content catalog,
+- persistent progression, onboarding, and trial package,
+- postgame release package.
+
+The narrative-delivery package is also tracked there because it affects authored content and production, but it does not reopen gameplay or lore canon.
+
+Exact attacks, timings, cooldowns, probabilities, prices, hitboxes, numerical balance, route generation, and other playtest values remain in the owning gameplay or encounter file.
 
 ## Authority rule
 

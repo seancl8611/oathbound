@@ -4,7 +4,7 @@ title: Cross-Area Room Types
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 topics:
   - rooms
   - combat-room
@@ -28,7 +28,7 @@ related:
 
 Every common room type has a stable gameplay function and at-a-glance visual identity across all three areas. Regional skins change materials, architecture, and atmosphere without changing the functional read.
 
-The Heart Binding completion space after the Shogun is a specialized endgame space rather than a seventh common room family.
+The Heart Binding completion space after the Shogun is a specialized endgame space rather than another common room family.
 
 ## Function and reward relationship
 
@@ -41,6 +41,8 @@ Room function and primary reward are related but separate.
 Where the route branches, the player should understand the upcoming room function and previewed primary reward before committing. Reward markers cannot rely on color alone.
 
 The exact economy and reward-generation rules belong in [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md).
+
+Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain prototype and playtest decisions. The initial production boundary is the reusable room-family and modular regional-kit requirement defined below.
 
 ## Combat Room
 
@@ -56,7 +58,7 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 - **Yomori:** forest clearing, widened hunting path, or shrine approach.
 - **Kagutsuchi:** lacquered chamber, bridge expanse, or blossom courtyard.
 
-**Production rules:** ambient fog, mist, fungal pulse, petals, water, or lantern motion cannot crowd the combat footprint. Build reusable templates with multiple perimeter variants rather than unique room art for every encounter. Technique-marked combat rooms use the same environment kit as other combat rooms; their identity comes from route preview and reward presentation, not a separate full room set.
+**Production rules:** ambient fog, mist, fungal pulse, petals, water, or lantern motion cannot crowd the combat footprint. Build reusable templates with perimeter variants rather than unique room art for every encounter. Technique-marked combat rooms use the same environment kit as other combat rooms; their identity comes from route preview and reward presentation.
 
 ## Shrine Room
 
@@ -72,15 +74,15 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 - **Yomori:** moss-eaten forest Shrine with roots and spirit light.
 - **Kagutsuchi:** immaculate court Shrine with gilded trim and blossom offerings.
 
-**Production rules:** the central object must be visible from the entrance. Use warm ritual light, restrained incense or mineral pulse, calmer audio, and no active threat language. The interface shows equipped Aspect, Tier, Corruption, Resist result, and next Embrace benefit and drawback. Its visual language must remain distinct from Technique-card rewards.
+**Production rules:** the central object must be visible from the entrance. Use warm ritual light, restrained incense or mineral pulse, calmer audio, and no active threat language. The interface shows equipped Aspect, Tier, Corruption, Resist result, and next Embrace benefit and drawback. Its visual language remains distinct from Technique-card rewards.
 
 ## Rest Room
 
-**Function:** recovery, Spirit restoration, reserve swapping, and short narrative beats between pressure sequences.
+**Function:** recovery, Spirit restoration, reserve swapping, and short narrative breathing room between pressure sequences.
 
-**Reward behavior:** restore approved Health and Spirit values and permit exchange between the four active Techniques and one reserve Technique. Rest rooms do not generate new Techniques or recover discarded ones.
+**Reward behavior:** restore approved Health and Spirit values and permit exchange between the four active Techniques and one reserve. Rest rooms do not generate new Techniques or recover discarded ones.
 
-**Shared read:** enclosed or sheltered space with one bright inviting rest focal point and softer, less combat-loaded composition than neighboring rooms.
+**Shared read:** enclosed or sheltered space with one bright inviting rest focal point and softer composition than neighboring combat spaces.
 
 **Area skins:**
 
@@ -88,13 +90,13 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 - **Yomori:** root-sheltered hollow or Shrine-adjacent clearing.
 - **Kagutsuchi:** quiet lacquered chamber with floor cushions and a small lantern.
 
-**Production rules:** gentle warmth, low particulate motion, and no threat cues. Rest rooms are rare enough that the player should stop immediately upon recognizing one. Build management is compact and does not present a full Technique inventory.
+**Production rules:** gentle warmth, low particulate motion, and no threat cues. Rest rooms should be recognizable immediately. Build management is compact and does not present a full Technique inventory.
 
 ## Shop Room
 
 **Function:** mid-run merchant offering limited run-scoped goods for Gold.
 
-**Reward behavior:** stock may include healing, Spirit, temporary capacity, consumables, rerolls, Techniques, active-Technique refinements, eligible Prosthetic Techniques, prosthetic support, and occasional run-scoped Relics.
+**Reward behavior:** stock may include healing, Spirit, temporary capacity, approved consumables, rerolls, Techniques, active-Technique refinements, eligible Prosthetic Techniques, prosthetic support, and occasional run-scoped Relics.
 
 **Shared read:** compact safe space with merchant figure, merchandise spread, and lantern-warm purchase focal point. It inherits the Strand Merchant Stall's internal layout language in a smaller temporary form.
 
@@ -104,13 +106,13 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 - **Yomori:** traveling altar or moss-bed display.
 - **Kagutsuchi:** refined courtier display table in a lacquered alcove.
 
-**Production rules:** merchant and merchandise dominate the center. Enemies do not spawn here. It is a purchase-decision space, not an exploration room. Technique stock uses the approved Technique card language and clearly distinguishes a new Technique from a refinement.
+**Production rules:** merchant and merchandise dominate the center. Enemies do not spawn here. It is a purchase-decision space, not an exploration room. Technique stock clearly distinguishes a new Technique from a refinement.
 
-## Treasure / Miniboss Room
+## Treasure and Miniboss Rooms
 
-**Function:** risk/reward space culminating in a clearly presented high-value payout.
+**Function:** risk/reward spaces culminating in a clearly presented high-value payout.
 
-**Treasure behavior:** may provide a Relic, rare Technique, guaranteed refinement, large currency bundle, major temporary capacity increase, rare consumable, or another explicitly previewed high-value reward.
+**Treasure behavior:** may provide a Relic, rare Technique, guaranteed refinement, large currency bundle, major temporary capacity increase, approved rare consumable, or another previewed high-value reward.
 
 **Miniboss behavior:** victory guarantees meaningful build development such as a higher-rarity Technique, active-Technique refinement, run-scoped Relic, or special regional reward. A miniboss may also grant modest persistent currency. It should not award only ordinary Gold or healing.
 
@@ -122,13 +124,13 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 - **Yomori:** root-choked arena, corrupted Shrine circle, or old hunting ground.
 - **Kagutsuchi:** lacquered terrace, blossom courtyard, or ceremonial approach.
 
-**Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard Technique room.
+**Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard combat reward.
 
 ## Boss Room
 
 **Function:** the area's culminating boss encounter.
 
-**Reward behavior:** regional bosses that lead into another area provide persistent progression, a major current-run reward, and approved transition recovery. Defeating the Eclipse Shogun instead opens temporary access to the Heart chamber and the successful-run Binding ritual.
+**Reward behavior:** regional bosses that lead into another area provide persistent progression, a major current-run reward, and approved transition recovery. Defeating the Eclipse Shogun opens temporary access to the Heart chamber and the successful-run Binding ritual or true-final continuation.
 
 **Shared read:** largest and most thematically saturated authored space in the region, designed first around boss mechanics and only then dressed outward.
 
@@ -136,19 +138,21 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 
 - **Hushiro:** old stone gate and threshold where the village ends.
 - **Yomori:** root-tangled, spirit-saturated heart of the grove.
-- **Kagutsuchi:** royal throne-space or ritual sanctum guarding the route to the Heart chamber.
+- **Kagutsuchi:** royal throne-space or ritual sanctum guarding the Heart route.
 
-**Production rules:** perimeter art and ambient particles never compete with the boss silhouette or attack telegraphs. The arena may evolve during phase changes, but geometry, hazard boundaries, and safe space stay readable. Each boss room receives a dedicated environment brief rather than relying only on generic room-type art.
+**Production rules:** perimeter art and ambient particles never compete with the boss silhouette or attack telegraphs. The arena may evolve during phase changes, but geometry, hazard boundaries, and safe space stay readable. Each boss room receives a dedicated environment brief.
 
 ## Heart Binding Completion Space
 
 **Function:** specialized successful-run space reached after defeating the Eclipse Shogun.
 
-**Current behavior:** Akio reaches the Heart chamber, uses the Shogun-built extraction apparatus to offer Returning Blood, breaks one ancient Heart Binding through the Heart's rejection response, is dissolved into blood by the retaliation, and reconstructs at the Strand.
+**Current behavior:** Akio reaches the Heart chamber, uses the Shogun-built extraction apparatus to offer Returning Blood, breaks one ancient Heart Binding through the Heart's rejection response, is dissolved by the retaliation, and reconstructs at the Strand.
 
-**Shared read:** unmistakably deeper and older than the Shogun's court. The ancient Binding architecture and the later Court-built extraction apparatus must read as distinct layers of history. The space should communicate that the Shogun exploited a power and prison his civilization did not create.
+**Approved campaign states:** the Court historically destroyed the outermost of seven original Bindings. Six remain when Akio begins, producing six player-destroyed states followed by the fully exposed Heart and true-final encounter.
 
-**Production rules:** reuse the same apparatus and core completion sequence across successful clears. Escalate through additional Heart exposure, stronger chamber reactions, damaged Binding states, and limited visual variants rather than an entirely new mechanism, puzzle, or environment for every completion. Do not finalize total Binding count, exact state-variant count, final Heart anatomy, or true-final arena before Questions 11–12 are locked.
+**Shared read:** unmistakably deeper and older than the Shogun's court. Ancient Binding architecture and the later Court-built extraction apparatus must read as distinct historical layers.
+
+**Production rules:** reuse the same apparatus and core completion sequence across successful clears. Escalate through damaged or removed Binding states, greater Heart exposure, stronger chamber reactions, and limited visual variants rather than a new mechanism, puzzle, or environment for every completion. Final Heart anatomy and true-final arena details remain owned by the approved Heart concept and later encounter design.
 
 ## Identification standard
 

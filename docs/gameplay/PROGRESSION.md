@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 topics:
   - progression
   - persistence
@@ -47,7 +47,7 @@ Temporary run state may include:
 - Gold,
 - room progress,
 - temporary Health or Spirit capacity,
-- consumables,
+- approved consumables,
 - temporary encounter rewards.
 
 These states reset after failed death-return or successful Heart Binding completion unless an item explicitly defines a different rule.
@@ -66,7 +66,7 @@ The Strand supports permanent growth through:
 
 Permanent progression may improve options, reliability, and resilience. It must not remove the need to read combat or replace run-build decisions.
 
-The exact launch depth of these systems remains part of the persistent-progression and trial-scope question.
+The services and ownership boundaries are approved. The remaining production decision is their minimum launch package: approximate nodes or ranks, onboarding and trial counts, unlock mapping, mastery content, and required interface states.
 
 ## Persistent campaign progression
 
@@ -74,7 +74,7 @@ The Heart's prison originally contained seven Bindings. The Court destroyed the 
 
 Each successful Binding run:
 
-- destroys one of the six remaining Bindings,
+- destroys one remaining Binding,
 - permanently preserves that progress,
 - exposes more of the Heart,
 - updates campaign presentation,
@@ -95,7 +95,9 @@ Destroyed Binding progress is not a currency, cannot be purchased, and cannot be
 | Boss Emblem | Persistent | Rare major gates or high-value nodes |
 | Gold | Run-only | Shops and run economy |
 
-`Mist Shards` is deprecated unless restored intentionally as a separate denomination.
+Currency ownership is resolved and should not be reintroduced as an open scope question. Exact costs remain balance work.
+
+`Mist Shards` is deprecated unless intentionally restored as a separate denomination.
 
 ## Blood Aspect persistence
 
@@ -113,6 +115,8 @@ Destroyed Binding progress is not a currency, cannot be purchased, and cannot be
 - Discarded or overwritten Techniques are not restored during the same run.
 - Permanent progression may unlock Techniques into future reward pools.
 - Permanent progression does not pre-equip a run Technique or increase slot capacity in the initial scope.
+
+The exact unlock mapping depends on the approved launch run-build catalog and the persistent progression, onboarding, and trial package.
 
 ## Prosthetic progression
 
@@ -138,7 +142,9 @@ Trials may not:
 - add new Blood Aspect Tiers,
 - remove Embrace danger,
 - permanently pre-equip a Technique,
-- or create permanent versions of major run-only mechanics.
+- create permanent versions of major run-only mechanics.
+
+The final number of basic-combat trials, Aspect trials, Technique demonstrations, mastery trials, and their unlock ownership remains part of the current progression package decision.
 
 ## Return processing
 
@@ -180,11 +186,12 @@ The results flow must clearly distinguish retained progress from burned-away run
 - Blood Aspect remains more identity-defining than any single Technique.
 - Techniques remain independently useful.
 - Permanent Aspect upgrades stay small and capped.
-- Unlocks and numerical balance values are documented separately.
 - Gold never becomes a persistent Strand wallet without an explicit system change.
+- Unlocks and numerical balance values are documented separately.
 
-## Current scope dependency
+## Current production dependencies
 
-The remaining progression-level question is the minimum launch depth of the Bloodwell, Forge, Blood Mirror, Blood Cavern, trial catalog, upgrade ranks, and unlock ownership.
+1. Scope the launch run-build content catalog so the total unlockable content is known.
+2. Scope the persistent progression, onboarding, and trial package around that catalog and the approved service boundaries.
 
-Exact upgrade percentages and currency costs remain later implementation and balance work.
+Exact upgrade percentages, currency costs, timing windows, and reward values remain later implementation and balance work.

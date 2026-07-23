@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Decision Log
@@ -139,8 +139,24 @@ VFX-005 Posture Break Cue is included in Milestone 1 Batch 2 with the Corrupted 
 
 **Authority:** `docs/art_production/milestones/MILESTONE_01.md`
 
-## 2026-07-21 — Current question structure
+## 2026-07-22 — Successful-run duration
 
-The design tracker contains only unresolved decisions that affect current scope, content volume, production planning, or narrative presentation. Exact playtest tuning remains in the owning gameplay or encounter file.
+A normal successful Binding run targets 45–50 minutes of active run time. Experienced repeat clears may take approximately 35–42 minutes, slower clears may approach 60 minutes, and the seventh story run adds approximately 8–12 minutes for the Heart.
+
+Exact room counts, route topology, branch frequency, miniboss frequency, and encounter budgets remain prototype and playtest work.
+
+**Authority:** `docs/gameplay/RUN_STRUCTURE.md`
+
+## 2026-07-22 — Narrative canon status
+
+The campaign spine, world rules, major relationships, Heart Binding structure, ending, and postgame continuity are complete at the current scoping depth. Remaining narrative work concerns the authored delivery package and final writing rather than unresolved canon.
+
+**Authority:** `docs/lore/README.md`, `docs/lore/STORY_OVERVIEW.md`, and `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-07-22 — Current question priority
+
+The top-level tracker contains four dependency-ordered production decisions: launch run-build catalog; persistent progression, onboarding, and trials; narrative delivery; and postgame release scope.
+
+Routing details, room counts, miniboss frequency, movesets, exact scripts, and tuning are excluded from the top-level tracker unless they later create a verified production-scope change.
 
 **Authority:** `docs/_meta/OPEN_QUESTIONS.md` and `docs/_meta/ASSISTANT_WORKFLOW.md`

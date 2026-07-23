@@ -2,6 +2,12 @@
 
 Authoritative canon, world history, factions, supernatural rules, and narrative foundations belong here.
 
+## Current status
+
+The core narrative and lore are complete at the current full-game scoping depth. The campaign spine, major character relationships, supernatural rules, regional meaning, Heart Binding structure, final confrontation, ending, and postgame continuity are approved.
+
+Remaining narrative work concerns delivery and authored production volume rather than unresolved story logic. Final dialogue, codex text, scene scripts, voice scope, portraits, cinematics, and repeated-clear presentation are not yet fully scoped or written.
+
 ## Core documents
 
 - [Story Overview](STORY_OVERVIEW.md) — complete campaign spine and ending
@@ -18,15 +24,16 @@ Lore files own fictional facts. Gameplay files own mechanical rules even when lo
 
 The Story Overview summarizes the complete spine. Detailed rules remain in the linked authoritative files and should not be duplicated here.
 
-## Current narrative work
+## Remaining narrative production
 
-The remaining narrative-production decisions are tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md), primarily:
+The narrative-delivery package is tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md). It must define the minimum authored presentation for:
 
-- Akio's first-death presentation,
-- bloodline-confirmation timing,
-- repeated Shogun dialogue,
-- Shogun reconstruction presentation,
-- clear-state narrative updates,
-- voice and cinematic scope.
+- Akio's first death and Returning Blood awakening,
+- bloodline confirmation,
+- Shogun dialogue progression and reconstruction,
+- campaign-state NPC, codex, results, and Heart-chamber updates,
+- ending and credits,
+- voice acting,
+- cinematic, portrait, in-engine dialogue, and environmental delivery.
 
 Deliberate mysteries such as the Heart's ultimate origin and the ancient builders are canon boundaries, not missing answers.
