@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-23
 topics:
   - techniques
   - run-builds
@@ -26,16 +26,16 @@ related:
 
 # Technique System
 
-Techniques are temporary in-run upgrades that strengthen or reshape Akio's existing combat actions. They provide horizontal customization around the selected Blood Aspect rather than replacing it as the run's central identity.
+Techniques are temporary in-run upgrades that strengthen or reshape Akio's existing combat actions. They provide horizontal customization alongside the selected Blood Aspect rather than replacing it or being replaced by it.
 
 ## System ownership
 
-- **Blood Aspect and Corruption:** vertical risk-and-power progression.
+- **Blood Aspect and Corruption:** overarching run identity and optional vertical power pursuit; exact gameplay form remains to be approved in `BLOOD_ASPECTS.md`.
 - **Techniques:** limited horizontal run-build construction.
 - **Prosthetic:** equipped tactical tool with eligible temporary Techniques.
 - **Relic:** separate passive rule using its own slot.
 
-Technique builds must deepen sword combat rather than automate or replace it.
+Technique builds must deepen sword combat rather than automate or replace it. Blood Aspect power must likewise leave Technique choices meaningful.
 
 ## Starting state and capacity
 
@@ -218,48 +218,51 @@ Prosthetic Techniques use the normal Technique system.
 
 ## Blood Aspect relationship
 
-The selected Aspect weights Technique offers without fully restricting them.
+The exact Blood Aspect–Technique relationship is not yet approved. It must follow the gameplay-model decision in `BLOOD_ASPECTS.md` rather than assume that offer weighting is the only interaction.
 
-- **Ronin:** parry, posture, Counter Cut, deathblow, controlled defense.
-- **Wolf:** Prey, pursuit, consecutive pressure, wounded targets, execution momentum.
-- **Wraith:** clean avoidance, repositioning, flanking, Dash Slash, punish-after-dodge.
+Possible bounded relationships include:
 
-Neutral, recovery, prosthetic, and alternate-style Techniques remain available so runs using the same Aspect can develop differently.
+- soft offer weighting and affinity only,
+- direct run-long buffs to approved Technique tags or categories,
+- higher-Tier interactions with already-owned Techniques,
+- rare Aspect-linked Technique behavior,
+- or another structure that preserves both systems' independence.
 
-Ordinary Techniques should not require a specific Aspect Tier unless a rare authored interaction explicitly needs that boundary.
+The final relationship must determine:
 
-### Aspect–Tier–Technique contract
+- whether any Technique may be hard-locked to an Aspect,
+- whether any Technique may require a minimum Tier,
+- whether Aspect progression may modify owned Techniques during the run,
+- whether those modifications affect categories, tags, individual entries, or only offer generation,
+- what qualifies as a justified rare Aspect-specific interaction,
+- how offer weighting distinguishes affinity from eligibility,
+- and how much neutral or alternate-affinity representation every run should retain.
 
-The final catalog should follow this hierarchy:
-
-- the Aspect creates the run's central tactical mechanic and identity,
-- Tiers strengthen, complicate, or increase the risk of that mechanic,
-- Techniques alter specific approved combat actions that can interact naturally with the Aspect,
-- and refinements deepen a selected Technique.
-
-Required guardrails:
+Until those decisions are approved, retain these guardrails:
 
 - no ordinary Technique is required to make an Aspect functional,
 - no Aspect Tier is required to make an ordinary Technique functional,
 - affinity creates amplification rather than permission,
 - the same Technique may produce different value under different Aspects,
-- an Aspect should support several distinct valid four-Technique builds,
+- every Aspect should support several distinct valid four-Technique builds,
+- Techniques must not duplicate an Aspect's signature mechanic or activatable ability,
+- Aspect power must not make Technique selection or refinement secondary,
 - and rare Tier-referencing interactions remain explicit exceptions rather than the normal catalog structure.
 
-Before final catalog design, decide:
+The current directional affinities remain:
 
-- whether any Technique may be hard-locked to an Aspect,
-- whether any Technique may require a minimum Tier,
-- what qualifies as a justified rare Aspect-specific interaction,
-- how offer weighting distinguishes affinity from eligibility,
-- and how much neutral or alternate-affinity representation every run should retain.
+- **Ronin:** parry, posture, Counter Cut, deathblow, controlled defense.
+- **Wolf:** Prey, pursuit, consecutive pressure, wounded targets, execution momentum.
+- **Wraith:** clean avoidance, repositioning, flanking, Dash Slash, punish-after-dodge.
+
+These are design directions, not locked Technique eligibility rules.
 
 ## Reward-generation principles
 
 Before all active slots are filled, offers should favor:
 
 - useful new Techniques,
-- selected-Aspect compatibility,
+- selected-Aspect compatibility after the relationship model is approved,
 - occasional eligible Prosthetic Techniques,
 - occasional higher-rarity options.
 
@@ -277,7 +280,8 @@ Detailed cadence and room ownership belong in `ITEMS_AND_REWARDS.md`.
 
 A successful late run should commonly reach:
 
-- Blood Aspect Tier II–IV depending on Shrine choices,
+- Blood Aspect Tier II or Tier III,
+- occasional Tier IV when the player performs well and invests in Aspect growth,
 - four active Techniques,
 - one optional reserve Technique,
 - one to three refined Techniques,
@@ -285,7 +289,7 @@ A successful late run should commonly reach:
 - one run-scoped Relic when obtained,
 - additional survival and resource growth.
 
-The late-run fantasy should come from several coherent layers reinforcing skilled play rather than collecting every catalog entry.
+Even experienced players should not be assumed to maximize the Aspect every run. The late-run fantasy should come from several coherent layers reinforcing skilled play and meaningful priorities rather than one system automatically dominating the build.
 
 ## Individual catalog ownership
 
@@ -302,6 +306,7 @@ Every catalog entry should state:
 - intended play pattern,
 - boss, elite, and crowd behavior,
 - cross-Aspect usefulness,
+- Aspect-overlap check,
 - refinement when present,
 - UI, VFX, animation, audio, and unlock treatment.
 
@@ -311,6 +316,7 @@ The old stance upgrade catalog does not constrain the new Technique effects. It 
 
 Before launch counts are approved, the Technique system and catalog together must demonstrate that:
 
+- the Blood Aspect gameplay model and power budget are already approved,
 - each core sword action has meaningful but non-mandatory support,
 - each Aspect supports several distinct valid build shapes,
 - early choices provide immediate standalone value,
@@ -318,6 +324,8 @@ Before launch counts are approved, the Technique system and catalog together mus
 - alternate-affinity and neutral options prevent repetitive same-Aspect runs,
 - no category becomes an automatic requirement for a viable build,
 - boss and mixed-encounter usefulness are documented,
+- Techniques do not make Aspect growth irrelevant,
+- Aspects do not make Technique choices secondary,
 - and the reward generator can avoid presenting three invalid choices.
 
 ## Reset rule
@@ -330,14 +338,16 @@ Permanent progression may unlock additional Techniques into future reward pools.
 
 Before approving the minimum launch catalog, resolve:
 
-1. complete Aspect and Tier definitions in `BLOOD_ASPECTS.md`,
-2. primary-category boundaries,
-3. the combat-verb tag taxonomy,
-4. affinity assignment and offer-weighting rules,
-5. the Technique rarity model,
-6. the final refinement standard,
-7. rare Aspect- or Tier-specific exception rules,
-8. and the launch coverage matrix in `TECHNIQUE_CATALOG.md`.
+1. the Blood Aspect gameplay model and power budget in `BLOOD_ASPECTS.md`,
+2. the activatable-ability and direct Technique-interaction decisions,
+3. the shared Tier contract and exact Aspect functionality,
+4. primary-category boundaries,
+5. the combat-verb tag taxonomy,
+6. affinity assignment and offer-weighting rules,
+7. the Technique rarity model,
+8. the final refinement standard,
+9. rare Aspect- or Tier-specific exception rules,
+10. and the launch coverage matrix in `TECHNIQUE_CATALOG.md`.
 
 After that groundwork, approve:
 
