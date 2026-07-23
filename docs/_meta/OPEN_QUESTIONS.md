@@ -33,7 +33,19 @@ Decide:
 - whether consumables are included at launch,
 - and which content groups use reusable presentation versus unique icons, VFX, or animation support.
 
-This question establishes production counts and treatment tiers. It does not require final Technique effects, exact balance values, or complete item-by-item design.
+This question establishes production counts and treatment tiers. It does not require final numerical tuning or every catalog entry to be implementation-complete.
+
+Before approving those counts, complete the following design groundwork in the owning gameplay files:
+
+1. shared Blood Aspect Tier contract,
+2. complete Tier 0–IV mechanical direction for Wolf, Wraith, and Ronin,
+3. formal definitions for each Aspect's exclusive mechanics,
+4. Technique category, combat-verb tag, affinity, and rarity model,
+5. refinement design standard,
+6. Aspect–Tier–Technique interaction rules,
+7. and the launch coverage matrix in `gameplay/TECHNIQUE_CATALOG.md`.
+
+These prerequisites remain system-design work rather than separate top-level production questions. They exist to ensure the final count represents the actual mechanical coverage required for varied roguelite builds.
 
 **Why first:** the catalog defines the content inventory used by run rewards, unlocks, trials, UI population, icon production, VFX planning, and Milestone 4.
 
