@@ -4,16 +4,19 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 topics:
   - techniques
   - run-builds
   - active-slots
   - reserve-slot
   - refinements
+  - technique-categories
+  - aspect-affinity
   - prosthetic-techniques
 related:
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-TECHNIQUE-CATALOG
   - GAMEPLAY-PROSTHETICS
   - GAMEPLAY-ITEMS-REWARDS
   - UI-TECHNIQUE-REWARDS
@@ -123,6 +126,27 @@ A refinement:
 
 No refinement chain extends beyond one step.
 
+### Refinement design direction
+
+A refinement should strengthen the reason the player selected the base Technique. It should not turn that Technique into a different combat identity or unrelated reward family.
+
+Possible refinement dimensions include:
+
+- greater reliability or consistency,
+- a stronger payoff for the same skilled behavior,
+- a carefully bounded additional target or use case,
+- a deeper interaction with the same combat verb,
+- a resource interaction that supports the same loop,
+- or a risk adjustment that preserves the original decision.
+
+The final refinement standard must decide:
+
+- how transformative a refinement may be,
+- whether simple numerical improvements are acceptable and under what conditions,
+- whether every launch Technique should support a refinement,
+- which effects are too broad and should become separate Techniques or Relics,
+- and how refinements are distributed across categories, affinities, and rarities.
+
 ## Categories
 
 Categories organize communication and reward generation. They do not restrict slots.
@@ -133,6 +157,53 @@ Categories organize communication and reward generation. They do not restrict sl
 - **Movement:** modifies dash, repositioning, flanking, pursuit, or re-entry.
 - **Prosthetic:** temporarily modifies the equipped tool.
 - **General:** supports health, Spirit, recovery, or broad combat rules without generic stat clutter.
+
+A Technique should normally have one primary category. Category describes the principal part of combat changed by the entry; it does not describe every trigger, synergy, rarity, or Aspect relationship.
+
+## Technique metadata model
+
+The player-facing card and internal catalog use several separate dimensions. They must not collapse into interchangeable labels.
+
+### Primary category
+
+Category answers: **what part of the combat system does this Technique principally modify?**
+
+A Technique normally has one primary category even when it uses several combat verbs.
+
+### Combat-verb tags
+
+Tags answer: **which approved player actions, enemy states, resources, or positional rules does this Technique directly use?**
+
+A Technique may use several tags. The final taxonomy should be drawn from approved combat vocabulary such as Quick Slash, Heavy Cleave, thrust, parry, Counter Cut, posture, deathblow, dash, Dash Slash, flank, Prey, perfect dodge, Focus, Spirit, or an approved prosthetic.
+
+Tags support communication, offer validation, build comparison, trials, analytics, and later balance work. They do not create prerequisites by themselves.
+
+### Aspect affinity
+
+Affinity answers: **which Aspect naturally amplifies or is naturally amplified by this Technique?**
+
+Affinity is normally soft:
+
+- it may influence offer weighting,
+- it may explain a natural synergy,
+- it does not make the Technique unusable with another Aspect,
+- and it does not replace the Technique's category or tags.
+
+A Technique may be neutral or may have more than one justified affinity, but the catalog should avoid labeling every broadly useful entry as universally affiliated.
+
+### Rarity
+
+Rarity answers: **how unusual, transformative, complex, or restricted is this Technique within the run reward ecosystem?**
+
+Rarity should not mean only a larger numerical bonus. The final rarity model must define:
+
+- approved Technique rarity tiers,
+- what gameplay and production properties justify each tier,
+- whether rarity affects offer timing or reward-source eligibility,
+- how rare entries remain understandable and independently useful,
+- and which effects are too broad for Techniques and belong to Relics or other systems.
+
+Individual rarity assignments belong in [Technique Catalog](TECHNIQUE_CATALOG.md) after the model is approved.
 
 ## Prosthetic Techniques
 
@@ -156,6 +227,32 @@ The selected Aspect weights Technique offers without fully restricting them.
 Neutral, recovery, prosthetic, and alternate-style Techniques remain available so runs using the same Aspect can develop differently.
 
 Ordinary Techniques should not require a specific Aspect Tier unless a rare authored interaction explicitly needs that boundary.
+
+### Aspect–Tier–Technique contract
+
+The final catalog should follow this hierarchy:
+
+- the Aspect creates the run's central tactical mechanic and identity,
+- Tiers strengthen, complicate, or increase the risk of that mechanic,
+- Techniques alter specific approved combat actions that can interact naturally with the Aspect,
+- and refinements deepen a selected Technique.
+
+Required guardrails:
+
+- no ordinary Technique is required to make an Aspect functional,
+- no Aspect Tier is required to make an ordinary Technique functional,
+- affinity creates amplification rather than permission,
+- the same Technique may produce different value under different Aspects,
+- an Aspect should support several distinct valid four-Technique builds,
+- and rare Tier-referencing interactions remain explicit exceptions rather than the normal catalog structure.
+
+Before final catalog design, decide:
+
+- whether any Technique may be hard-locked to an Aspect,
+- whether any Technique may require a minimum Tier,
+- what qualifies as a justified rare Aspect-specific interaction,
+- how offer weighting distinguishes affinity from eligibility,
+- and how much neutral or alternate-affinity representation every run should retain.
 
 ## Reward-generation principles
 
@@ -190,21 +287,66 @@ A successful late run should commonly reach:
 
 The late-run fantasy should come from several coherent layers reinforcing skilled play rather than collecting every catalog entry.
 
+## Individual catalog ownership
+
+Individual Technique entries, their attached refinements, catalog status, coverage matrix, production treatment, and launch population belong in [Technique Catalog](TECHNIQUE_CATALOG.md).
+
+Every catalog entry should state:
+
+- stable ID and status,
+- primary category,
+- rarity,
+- combat-verb tags,
+- Aspect affinity,
+- trigger and standalone effect,
+- intended play pattern,
+- boss, elite, and crowd behavior,
+- cross-Aspect usefulness,
+- refinement when present,
+- UI, VFX, animation, audio, and unlock treatment.
+
+The old stance upgrade catalog does not constrain the new Technique effects. It is historical implementation context only.
+
+## Catalog approval tests
+
+Before launch counts are approved, the Technique system and catalog together must demonstrate that:
+
+- each core sword action has meaningful but non-mandatory support,
+- each Aspect supports several distinct valid build shapes,
+- early choices provide immediate standalone value,
+- late choices create replacement, reserve, and refinement decisions,
+- alternate-affinity and neutral options prevent repetitive same-Aspect runs,
+- no category becomes an automatic requirement for a viable build,
+- boss and mixed-encounter usefulness are documented,
+- and the reward generator can avoid presenting three invalid choices.
+
 ## Reset rule
 
 Active Techniques, reserve, and refinements reset after death, successful Heart Binding completion, or story completion.
 
 Permanent progression may unlock additional Techniques into future reward pools. It does not preserve an assembled build between runs.
 
-## Current scope dependency
+## Current design package
 
-The structural system is resolved. The remaining production-level question is the minimum launch catalog:
+Before approving the minimum launch catalog, resolve:
+
+1. complete Aspect and Tier definitions in `BLOOD_ASPECTS.md`,
+2. primary-category boundaries,
+3. the combat-verb tag taxonomy,
+4. affinity assignment and offer-weighting rules,
+5. the Technique rarity model,
+6. the final refinement standard,
+7. rare Aspect- or Tier-specific exception rules,
+8. and the launch coverage matrix in `TECHNIQUE_CATALOG.md`.
+
+After that groundwork, approve:
 
 - total base Technique count,
-- category distribution,
+- category and rarity distribution,
 - refinement count,
 - Prosthetic Technique count per tool,
 - unique icon requirements,
-- bespoke VFX or animation requirements.
+- bespoke VFX or animation requirements,
+- and unlock ownership.
 
-Individual effects, values, rarity weights, Aspect weighting, reroll rates, and expected refinement frequency remain later design and playtest work.
+Individual numerical values, exact rarity weights, reroll rates, and expected refinement frequency remain implementation and playtest work.
