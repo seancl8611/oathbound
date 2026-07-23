@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 topics:
   - blood-aspects
   - wolf
@@ -17,6 +17,7 @@ related:
   - LORE-RETURNING-BLOOD
   - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-TECHNIQUE-CATALOG
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - CONTENT-STRAND-INTERACTIBLES
@@ -193,6 +194,89 @@ These examples are design direction, not locked numerical tuning. Detailed trial
 
 **Constraint:** Ronin is likely the first/default Aspect. It should be reliable and fundamentals-focused rather than intentionally weak.
 
+## Detailed design package
+
+The high-level identities and Tier directions above are approved. The following decisions must be resolved here before the launch Technique coverage and catalog count can be approved.
+
+### Shared Tier contract
+
+Decide:
+
+- whether Tier 0 grants each Aspect's core active mechanic immediately or only establishes selection, affinity, and presentation,
+- whether Tier benefits accumulate, replace earlier behavior, or may do either under a consistent rule,
+- whether drawbacks accumulate, transform, or use another clearly communicated structure,
+- whether every Tier must add one benefit and one drawback or may deepen an existing pair,
+- how much mechanical complexity one Tier may add,
+- what Shrine behavior and reward remain available after Tier IV,
+- how repeated Resist choices remain strategically meaningful,
+- what Tier a typical successful run should commonly reach,
+- and whether Tier IV is an expected endpoint, an optional high-risk capstone, or dependent on route and play quality.
+
+The answer should define the structural contract, not final percentages, durations, Corruption rates, or Shrine frequency.
+
+### Wolf mechanic definition
+
+Before locking Wolf's Tier table, define:
+
+- how Prey is selected,
+- whether only one target may be Prey,
+- whether selection is automatic, manual, or action-driven,
+- what begins, maintains, breaks, and resets target pressure,
+- how Prey transfers after a kill or invalid target,
+- how Wolf functions in single-target boss encounters,
+- what qualifies as wounded or finishable,
+- and which parts of the loop belong to Tier 0, Tier I, or later Tiers.
+
+### Wraith mechanic definition
+
+Before locking Wraith's Tier table, define:
+
+- what qualifies as a perfect dodge,
+- whether perfect dodge is universal combat vocabulary or enabled primarily through Wraith,
+- how the punish window begins and ends,
+- how flank and rear position are detected,
+- what backstrike means within the base combat system,
+- what Mist-Step changes relative to the ordinary dash,
+- how repeated avoidance builds or resets momentum,
+- and how Wraith remains mechanically distinct from the Mist Raven prosthetic.
+
+### Ronin mechanic definition
+
+Before locking Ronin's Tier table, define:
+
+- what Focus is,
+- when Focus first becomes available,
+- how it is gained, stored, refreshed, consumed, or lost,
+- which actions benefit from Focus,
+- whether deathblow recovery and Focus are separate or alternate directions,
+- how missed-parry risk is expressed without making the fundamentals-focused Aspect excessively punitive,
+- how Ronin remains useful against enemies with unusual posture or deathblow behavior,
+- and which parts of the loop belong to Tier 0, Tier I, or later Tiers.
+
+### Aspect approval tests
+
+Each completed Aspect design must satisfy all of the following:
+
+- it is functional before any Technique is acquired,
+- every Tier strengthens the same tactical identity rather than adding unrelated powers,
+- Embrace creates a meaningful benefit-and-drawback decision,
+- Resist remains a valid situational choice,
+- the Aspect does not make block, parry, dodge, posture, deathblow, or sword positioning broadly irrelevant,
+- the Aspect supports several distinct four-Technique build shapes,
+- ordinary Techniques remain useful outside their strongest affinity,
+- and the three Aspects remain mechanically and visually distinct in common rooms, bosses, and mixed encounters.
+
+## Current design order
+
+Resolve this package in the following order:
+
+1. shared Tier contract,
+2. Wolf core mechanic and Tier 0–IV direction,
+3. Wraith core mechanic and Tier 0–IV direction,
+4. Ronin core mechanic and Tier 0–IV direction,
+5. cross-Aspect distinction and overlap audit,
+6. then Technique metadata, coverage, and catalog design.
+
 ## Visual production rule
 
 Do not create twelve complete replacement Akio animation libraries. Use:
@@ -207,6 +291,7 @@ Do not create twelve complete replacement Akio animation libraries. Use:
 - [Returning Blood](../lore/RETURNING_BLOOD.md)
 - [Corruption and Shrines](CORRUPTION_AND_SHRINES.md)
 - [Technique System](TECHNIQUES.md)
+- [Technique Catalog](TECHNIQUE_CATALOG.md)
 - [Combat](COMBAT.md)
 - [Progression](PROGRESSION.md)
 - [Blood Cavern Trial System](BLOOD_CAVERN_TRIALS.md)
