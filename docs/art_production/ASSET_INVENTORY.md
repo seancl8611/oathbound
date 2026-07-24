@@ -31,14 +31,14 @@ This file records high-level production groups and known counts. Detailed state 
 | Player character | 1 | Akio concept, final sprite, complete base combat set |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
 | Area 1 enemies | 6 | Hushiro standard roster |
-| Area 2 enemies | 4 | Yomori standard roster |
+| Area 2 enemies | 4 | Yomori spirit and predator roster |
 | Area 3 enemies | 5 | Kagutsuchi standard roster |
 | Minibosses | 6 | Two designed encounters per area; run frequency is later routing work |
 | Regional bosses | 3 | One principal encounter per area |
 | Heart Binding campaign | 7 original / 6 player clears | Historical breach, six removable states, fully exposed state |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart and Vessel of Continuance |
 | Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
-| Blood Aspect families | TBD | Launch count and roster are open; Wolf, Wraith, and Ronin are candidates |
+| Blood Aspect families | 3 | Three launch production positions; exact identities remain open |
 | Prosthetic families | 8 | One family per tool |
 | Technique loadout UI | 4 active + 1 reserve | Launch catalog count remains open |
 | Relic capacity | 1 initial slot | Launch catalog count remains open |
@@ -52,15 +52,18 @@ This file records high-level production groups and known counts. Detailed state 
 - Separate ground shadow
 - Five Milestone 1 combat VFX
 - Reusable Blood Aspect presentation framework where practical
-- Candidate-specific combat-feedback families only after roster approval
+- Three Aspect-specific offensive and combat-feedback families after identity approval
 - Modular mutation overlays only where required by the approved system
+- Shared defensive, execution, input, and enemy-response presentation across Aspects where practical
 - Eight prosthetic icons and VFX families
 - Technique card, category, slot, reserve, refinement, replacement, warning, decline, and reroll presentation
 - Unique Technique icons only for approved catalog entries
 - Bespoke Technique effects only when existing combat, approved Aspect, or prosthetic language is insufficient
 - Relic cards, slot, icon, and rarity presentation
 
-The final Blood Aspect family count, candidate selection, unique UI, overlays, VFX, animation, and audio requirements depend on the approved system purpose, launch count, identity roster, and individual packages.
+The launch scope now reserves production capacity for three Blood Aspect families. Candidate selection and exact UI, overlays, VFX, animation, and audio requirements depend on identity and shared-system approval.
+
+Additional Aspect families are outside current production scope. Reconsider them only after gameplay testing demonstrates a missing identity.
 
 Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. That decision should establish approximate counts and production treatment tiers without requiring final balance values.
 
@@ -106,7 +109,7 @@ The initial scope requires modular regional kits and the approved functional-roo
 - Strand HUD and persistent currencies
 - Route reward previews
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause interfaces
-- Reusable placeholder support for an eventual approved Aspect system
+- Reusable placeholder support for the three-Aspect system
 - Blood Lotus multi-cycle support
 - Six-clear Heart Binding progress
 - Two-form true-final Heart presentation
@@ -114,7 +117,7 @@ The initial scope requires modular regional kits and the approved functional-roo
 - Shortened repeat-clear results
 - Postgame Heart-route access after its control method is approved
 
-Aspect-specific HUD modules, readiness states, Tier displays, candidate icons, and Blood Art presentation are not countable final assets until the system structure and roster are approved.
+Three Aspect slots and selection states are part of current UI scope. Aspect-specific HUD modules, readiness states, Tier displays, candidate icons, and Blood Art presentation remain uncountable until the identities and shared structure are approved.
 
 ## Shared VFX families
 
@@ -131,7 +134,7 @@ Aspect-specific HUD modules, readiness states, Tier displays, candidate icons, a
 
 VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblow Cue.
 
-### Blood Aspect candidates — not approved production scope
+### Blood Aspect candidates — identities not approved
 
 Current candidate directions include:
 
@@ -139,7 +142,7 @@ Current candidate directions include:
 - Wraith afterimage, vanish, reappearance, and movement states,
 - Ronin enhanced contact, Counter Cut, and discipline states.
 
-These are references for identity evaluation, not three committed VFX families. Final VFX families follow roster approval.
+These are references for evaluating the three roster positions, not approved final VFX definitions. Final treatment follows identity approval.
 
 ### Prosthetics
 
@@ -182,7 +185,7 @@ These are references for identity evaluation, not three committed VFX families. 
 ## Inventory rules
 
 - Add an asset only after its gameplay, narrative, or production role is approved.
-- Candidate names, detailed drafts, and provisional trial lists do not establish production counts.
+- The three-family count reserves scope; candidate names and detailed drafts do not approve the final family identities or treatment.
 - Do not estimate exact animation or effect counts before the owning system or encounter is locked.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.
-- Do not include deferred postgame modifiers, enemy variants, route algorithms, or challenge systems in the initial inventory.
+- Do not include deferred additional Aspects, postgame modifiers, enemy variants, route algorithms, or challenge systems in the initial inventory.
