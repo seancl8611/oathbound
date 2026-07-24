@@ -75,6 +75,15 @@ Exact Shrine frequency, Corruption gain, Blood gain, thresholds, and numerical p
 4. Prosthetic and temporary Prosthetic Techniques.
 5. Relics, survival, resources, and economy.
 
+## Unlock and selection
+
+- Aspects are introduced after basic combat is established.
+- Ronin is the likely first/default unlock.
+- Wolf and Wraith unlock later through Aspect trials or progression milestones.
+- The Blood Mirror unlocks, teaches, previews, tests, and lightly improves Aspects.
+- The Boat equips or confirms one unlocked Aspect before the run.
+- The selected Aspect remains the loadout default between runs until changed.
+
 ## Run flow
 
 1. Confirm an unlocked Aspect at the Boat.
@@ -165,26 +174,37 @@ Offer weighting, affinity rules, rare Aspect interactions, and Blood-related cat
 
 Unlocked Aspects and small Blood Mirror reliability upgrades may persist. Permanent progression cannot add Tiers, guarantee Tier IV, remove Embrace risk, pre-equip Techniques, provide a permanent Blood wallet, or make major run-only Aspect power automatic.
 
+Permanent Aspect upgrades should remain small reliability, duration, recovery, or comfort improvements. They cannot add new signature behavior, broaden invulnerability, or permanently provide a run-only Technique or Blood Art upgrade.
+
 ## Aspect directions
 
 ### Wolf
 
 - **Role:** aggression, pursuit, and selected-target pressure.
+- **Fantasy:** predatory Returning Blood that turns aggression into prey pressure and relentless pursuit.
 - **Loop direction:** identify prey, maintain pressure, finish the target, and chain momentum.
+- **Technique direction:** pursuit, consecutive pressure, wounded targets, Dash Slash re-entry, execution momentum, and target isolation.
+- **Visual direction:** red eyes, sharper stance, blood trail on prey, and a controlled feral aura while remaining recognizably samurai-shaped.
 - **Constraint:** target pressure and pursuit, not generic attack speed.
 - **Open:** exact Prey mechanic, Blood generation, Blood Art, Tier effects, and drawback expression.
 
 ### Wraith
 
 - **Role:** evasion, repositioning, and punishment after clean avoidance.
+- **Fantasy:** a spectral mutation approaching bodily dissolution without abandoning Akio's physical form.
 - **Loop direction:** bait, avoid cleanly, reposition, and punish from a favorable angle.
+- **Technique direction:** perfect dodge, repositioning, flanking, Dash Slash, recovery manipulation, and tactical movement.
+- **Visual direction:** mist trails, pale-red afterimages, smoky blade trails, and a partial wraith silhouette at high Tiers.
 - **Constraint:** distinct from Wolf aggression and the Mist Raven prosthetic.
 - **Open:** perfect-dodge vocabulary, positional rules, Mist-Step ownership, Blood generation, Blood Art, Tier effects, and drawback expression.
 
 ### Ronin
 
 - **Role:** sword discipline, parries, posture, Counter Cuts, and deathblows.
+- **Fantasy:** disciplined Returning Blood reinforcing Akio's sword fundamentals.
 - **Loop direction:** control the exchange, defend precisely, pressure posture, counter or execute, and reset.
+- **Technique direction:** parry, Counter Cut, posture control, Focus, deathblow, guard timing, and defensive tool mastery.
+- **Visual direction:** blood-lit blade edge, sharper parry spark, calm red aura after deathblow, and a controlled human silhouette.
 - **Constraint:** reliable and fundamentals-focused rather than intentionally weak.
 - **Open:** Focus ownership, posture and deathblow interaction, Blood generation, Blood Art, Tier effects, and drawback expression.
 
