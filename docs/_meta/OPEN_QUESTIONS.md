@@ -13,46 +13,88 @@ This file contains unresolved decisions that materially change release scope, pr
 
 ## Priority order
 
-1. Blood Aspect system foundation, launch count, and identities
+1. Three-Aspect identity roster
 2. Shared Aspect structure and selected Aspect packages
 3. Launch run-build content catalog
 4. Persistent progression, onboarding, and trial package
 5. Narrative delivery and authored-content package
 6. Postgame release package
 
-## 1. Blood Aspect system foundation, launch count, and identities
+## Resolved Blood Aspect foundation
 
-What should the Blood Aspect system contribute to a run, how many Aspects should launch, and what distinct identity should each selected Aspect own?
+The current launch-scoping direction is approved at this depth:
 
-No launch count or final Aspect roster is approved.
+- the player selects one Blood Aspect as a major run foundation,
+- the selected Aspect changes the run identity immediately at Tier 0,
+- the launch scope currently assumes three Aspects,
+- all Aspects use the complete attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
+- identities are multidimensional rather than assigned to one core action,
+- and the preferred weapon direction is one physical katana expressed through different Blood combat forms over a shared defensive and execution framework.
 
-Wolf, Wraith, and Ronin are working candidates only. They may be retained, revised, renamed, replaced, combined, or cut. Their current roles, fantasies, loops, visual directions, Tier ideas, and mechanical terms are draft material rather than commitments.
+Three is the current production baseline, not a permanent ceiling. A fourth or later Aspect should not be added during the current paper-design pass. Reconsider expansion only after playable testing demonstrates a meaningful missing combat identity that cannot be covered by the approved three or by Techniques and prosthetics.
 
-Decide:
+## 1. Three-Aspect identity roster
 
-- the system's purpose within the run build,
-- whether one selected Aspect should remain the central run specialization,
-- the minimum launch count needed for meaningful replayability,
-- whether three is the correct count,
-- the player fantasy and combined combat identity of each selected Aspect,
-- how every identity uses the full attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
-- which combinations, timings, ranges, risks, or tactical situations each identity emphasizes without monopolizing one core action,
-- whether Akio retains one physical katana, uses Aspect-specific Blood weapon forms, or uses a broader weapon foundation,
-- how much Tier 0 changes attack rhythm, reach, coverage, commitment, recovery, movement flow, damage profile, posture profile, and weapon presentation,
-- how shared inputs, defensive rules, enemy responses, and execution language remain readable across identities,
-- the risk-and-reward character of each identity,
-- the visual and thematic distinction between identities,
-- and whether the proposed roster is achievable within production scope.
+Wolf, Wraith, and Ronin are the current working candidates for the three available roster positions. Their inclusion, names, fantasies, combat patterns, risks, and exact foundation changes remain unapproved.
 
-An Aspect must not be approved as merely the attack build, dash build, parry build, ranged build, or another single-action specialization. All Aspects should remain capable of supporting upgrades to all core combat behaviors, even when one identity favors particular combinations or situations.
+The roster decision is a sequence of focused passes rather than one oversized question:
 
-Approval should produce a short roster and identity table plus a shared-versus-Aspect-specific combat-foundation boundary before any exact Tier, Blood-generation, Blood Art, or individual mechanic work is treated as final.
+### Pass 1 — Roster coverage
+
+Define what the complete three-Aspect roster must cover across:
+
+- player fantasy,
+- attack rhythm, reach, coverage, commitment, recovery, and movement flow,
+- health-damage and posture-pressure profiles,
+- target handling and encounter approach,
+- natural risk-and-reward patterns,
+- full-kit use,
+- visual distinction,
+- and production cost.
+
+This pass defines the comparison criteria. It does not invent exact mechanics.
+
+### Pass 2 — Candidate identity definitions
+
+Evaluate Wolf, Wraith, and Ronin one at a time. For each candidate, define:
+
+- the controlled Returning Blood fantasy,
+- the combined combat pattern created at Tier 0,
+- the offensive-foundation changes that make it immediately recognizable,
+- how it uses attacks, defense, movement, posture, deathblows, Techniques, and prosthetics,
+- the situations and combinations it emphasizes without monopolizing one action,
+- its natural risk,
+- and its group, elite, and boss viability.
+
+This pass includes how each candidate expresses the multidimensional foundation. That is not a separate later question.
+
+### Pass 3 — Roster overlap and gap audit
+
+Compare the three candidates together:
+
+- identify mechanical or thematic overlap,
+- identify any missing launch-critical combat territory,
+- confirm that each candidate remains useful with the full combat kit,
+- confirm that Techniques and prosthetics retain meaningful build space,
+- and determine whether the candidates are sufficiently distinct for repeated runs.
+
+A detected gap should first be addressed by revising or replacing one of the three candidates. It does not automatically justify a fourth Aspect.
+
+### Pass 4 — Roster revision
+
+Retain, revise, rename, combine, or replace candidates as required by the audit.
+
+### Pass 5 — Identity approval
+
+Approve a concise three-row roster table and the shared-versus-Aspect-specific combat-foundation boundary.
+
+Only after this pass should exact Tiers, Blood generation, Blood Arts, candidate mechanics, or candidate-specific production packages be treated as final.
 
 ## 2. Shared Aspect structure and selected Aspect packages
 
-Only after the system purpose, count, identities, and combat-foundation boundary are approved, decide the shared gameplay structure.
+Only after the three identities and combat-foundation boundary are approved, decide the shared gameplay structure.
 
-The current Tier 0-IV, Corruption, Embrace, Blood, Blood Art, drawback-family, and one-Aspect-per-run model is a working proposal. It may be preserved, revised, simplified, or replaced during this pass.
+The current Tier 0-IV, Corruption, Embrace, Blood, Blood Art, and drawback-family model remains a working proposal. It may be preserved, revised, simplified, or replaced during this pass.
 
 Decide:
 
@@ -91,7 +133,7 @@ Decide:
 
 Before approving counts, complete:
 
-1. the approved Aspect system purpose, count, identity roster, and combat-foundation boundary,
+1. the approved three-Aspect identity roster and combat-foundation boundary,
 2. the approved shared Aspect structure and individual packages,
 3. a cross-system overlap audit,
 4. Technique category, tag, affinity, and rarity rules,
@@ -145,6 +187,7 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 
 ## Deferred gameplay and implementation decisions
 
+- fourth or later Blood Aspects before playable roster testing demonstrates a missing identity,
 - exact room counts and route topology,
 - miniboss placement,
 - exact enemy and boss movesets,
