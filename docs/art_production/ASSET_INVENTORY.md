@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-23
 topics:
   - asset-counts
   - characters
@@ -38,7 +38,7 @@ This file records high-level production groups and known counts. Detailed state 
 | Heart Binding campaign | 7 original / 6 player clears | Historical breach, six removable states, fully exposed state |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart and Vessel of Continuance |
 | Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
-| Blood Aspect families | 3 | Wolf, Wraith, Ronin |
+| Blood Aspect families | TBD | Launch count and roster are open; Wolf, Wraith, and Ronin are candidates |
 | Prosthetic families | 8 | One family per tool |
 | Technique loadout UI | 4 active + 1 reserve | Launch catalog count remains open |
 | Relic capacity | 1 initial slot | Launch catalog count remains open |
@@ -51,13 +51,16 @@ This file records high-level production groups and known counts. Detailed state 
 - Complete base combat animation library
 - Separate ground shadow
 - Five Milestone 1 combat VFX
-- Wolf, Wraith, and Ronin combat-feedback families
-- Tier I–IV modular mutation overlays
+- Reusable Blood Aspect presentation framework where practical
+- Candidate-specific combat-feedback families only after roster approval
+- Modular mutation overlays only where required by the approved system
 - Eight prosthetic icons and VFX families
 - Technique card, category, slot, reserve, refinement, replacement, warning, decline, and reroll presentation
 - Unique Technique icons only for approved catalog entries
-- Bespoke Technique effects only when existing combat, Aspect, or prosthetic language is insufficient
+- Bespoke Technique effects only when existing combat, approved Aspect, or prosthetic language is insufficient
 - Relic cards, slot, icon, and rarity presentation
+
+The final Blood Aspect family count, candidate selection, unique UI, overlays, VFX, animation, and audio requirements depend on the approved system purpose, launch count, identity roster, and individual packages.
 
 Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. That decision should establish approximate counts and production treatment tiers without requiring final balance values.
 
@@ -103,12 +106,15 @@ The initial scope requires modular regional kits and the approved functional-roo
 - Strand HUD and persistent currencies
 - Route reward previews
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause interfaces
+- Reusable placeholder support for an eventual approved Aspect system
 - Blood Lotus multi-cycle support
 - Six-clear Heart Binding progress
 - Two-form true-final Heart presentation
 - First-clear ending and credits
 - Shortened repeat-clear results
 - Postgame Heart-route access after its control method is approved
+
+Aspect-specific HUD modules, readiness states, Tier displays, candidate icons, and Blood Art presentation are not countable final assets until the system structure and roster are approved.
 
 ## Shared VFX families
 
@@ -125,11 +131,15 @@ The initial scope requires modular regional kits and the approved functional-roo
 
 VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblow Cue.
 
-### Blood Aspects
+### Blood Aspect candidates — not approved production scope
 
-- Wolf marks and pressure states
-- Wraith afterimage, vanish, reappearance, and Mist-Step
-- Ronin enhanced contact, Counter Cut, and Focus
+Current candidate directions include:
+
+- Wolf marks and pressure states,
+- Wraith afterimage, vanish, reappearance, and movement states,
+- Ronin enhanced contact, Counter Cut, and discipline states.
+
+These are references for identity evaluation, not three committed VFX families. Final VFX families follow roster approval.
 
 ### Prosthetics
 
@@ -172,6 +182,7 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 ## Inventory rules
 
 - Add an asset only after its gameplay, narrative, or production role is approved.
-- Do not estimate exact animation or effect counts before encounter design is locked.
+- Candidate names, detailed drafts, and provisional trial lists do not establish production counts.
+- Do not estimate exact animation or effect counts before the owning system or encounter is locked.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.
 - Do not include deferred postgame modifiers, enemy variants, route algorithms, or challenge systems in the initial inventory.

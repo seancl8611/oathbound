@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 topics:
   - trials
   - training
@@ -24,9 +24,11 @@ related:
 
 ## Purpose
 
-Provide repeatable, skill-focused activities in the Strand that teach combat, unlock Blood Aspects, demonstrate selected Technique interactions, and reward mastery without depending on run RNG.
+Provide repeatable, skill-focused activities in the Strand that teach approved combat systems, demonstrate selected Technique interactions, and reward mastery without depending on run RNG.
 
-## Trial families
+The trial framework is approved. Exact Aspect-specific trial families, counts, names, mechanics, and rewards depend on the final approved Blood Aspect system and roster.
+
+## Approved trial families
 
 ### Basic Combat Trials
 
@@ -38,28 +40,28 @@ Provide repeatable, skill-focused activities in the Strand that teach combat, un
 - Counter Cut,
 - Dash Slash.
 
-### Wolf Trials
+### Approved Aspect Trials
 
-- mark prey,
-- maintain selected-target pressure,
-- defeat marked targets before the mark expires,
-- chain pressure across targets.
+After the Aspect system and roster are approved, each selected Aspect may receive trials that teach:
 
-### Wraith Trials
+- its core player fantasy and combat identity,
+- its signature mechanic,
+- its risk or drawback,
+- its progression structure,
+- its active ability or Blood Art if retained,
+- and its behavior against representative encounter types.
 
-- perfect dodge,
-- reposition,
-- mist-step,
-- flank or backstrike punish,
-- avoid pressure while countering.
+The number of trial families should follow the approved launch roster rather than assume three.
 
-### Ronin Trials
+### Current candidate examples — not approved
 
-- perfect parry,
-- Counter Cut,
-- posture break,
-- deathblow,
-- stand-ground defense.
+The following examples come from the Wolf, Wraith, and Ronin working drafts. They do not confirm those candidates, mechanics, or terms for launch.
+
+- **Wolf candidate:** selected-target pressure, pursuit, prey marking, and momentum transfer.
+- **Wraith candidate:** clean avoidance, repositioning, passing through pressure, and flank punishment.
+- **Ronin candidate:** precise parries, Counter Cuts, posture control, deathblows, and disciplined exchange management.
+
+Terms such as `Prey`, `Mist-Step`, and `Focus` remain provisional until their owning Aspect identity and mechanic are approved.
 
 ### Technique Demonstrations
 
@@ -74,46 +76,34 @@ These demonstrations do not create a persistent equipped Technique loadout.
 
 ### Advanced and Mastery Trials
 
-Later challenges may combine mechanics, impose fixed Aspect, Technique, prosthetic, or Relic loadouts, or test execution under stricter conditions. They should remain deterministic enough that failure teaches a clear lesson.
+Later challenges may combine mechanics, impose fixed approved Aspect, Technique, prosthetic, or Relic loadouts, or test execution under stricter conditions. They should remain deterministic enough that failure teaches a clear lesson.
 
 ## Reward philosophy
 
 Trials may award:
 
-- Blood Aspect unlocks,
+- access to approved Blood Aspects or equivalent specializations,
 - approved Technique-pool unlocks,
 - permanent currency,
-- small permanent Aspect upgrades,
+- small permanent reliability upgrades,
 - cosmetics,
 - lore reflections,
 - challenge-completion marks.
 
-Rewards must not replace the in-run Shrine Embrace Tier system or permanently pre-equip a run Technique.
+Rewards must not replace the approved run-only progression structure or permanently pre-equip a run Technique.
 
 Unlocking a Technique through a trial means adding it to future eligible reward pools, not granting it at the start of every run.
 
 ## Permanent Aspect upgrade rule
 
-Permanent Aspect upgrades are small, capped, and reliability-focused. They may make an existing loop easier to execute, but they must not add a new Tier, remove the danger of Embrace, or introduce the Aspect's major run-changing mechanics.
+If permanent Aspect upgrades remain in the final system, they must be small, capped, and reliability-focused. They may make an existing loop easier to execute, but they must not add a new major mechanic, remove the intended risk, or bypass run progression.
 
-Illustrative directions from the production bible:
-
-| Aspect | Upgrade direction | Constraint |
-|---|---|---|
-| Wolf | Prey mark lasts slightly longer | No new Prey behavior |
-| Wolf | Pressure bonus builds slightly faster | No new attack |
-| Wraith | Perfect-dodge punish window lasts slightly longer | No new dodge type |
-| Wraith | Mist-step recovery is slightly reduced | No additional invulnerability spike |
-| Ronin | Perfect parries deal slightly more posture damage | Do not broadly widen the parry window |
-| Ronin | Counter Cut recovery is slightly reduced | No new counter mechanic |
-| General | Resist reward is slightly improved | Must not replace Embrace tension |
-
-These are design examples rather than final numerical tuning.
+Candidate-specific permanent upgrades should not be approved before the roster and individual mechanics are approved.
 
 ## Technical requirements
 
 - Trials must be repeatable.
-- Fixed conditions and standardized Aspect, Technique, prosthetic, and Relic loadouts must be supported.
+- Fixed conditions and standardized approved Aspect, Technique, prosthetic, and Relic loadouts must be supported.
 - Progress, unlocks, rewards, and permanent upgrade ranks must persist.
 - Temporary trial Techniques clear when the trial ends.
 - Trial rules should not require random room or reward generation.

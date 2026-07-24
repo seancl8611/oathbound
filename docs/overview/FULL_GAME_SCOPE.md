@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-23
 topics:
   - full-scope
   - asset-counts
@@ -31,7 +31,7 @@ This document defines the current production-level shape of Oathbound. It does n
 | Asset group | Planned count | Current boundary |
 |---|---:|---|
 | Player character | 1 | Akio concept, final sprite, complete base combat library |
-| Blood Aspects | 3 | Wolf, Wraith, Ronin with Tier 0–IV run escalation |
+| Blood Aspects | TBD | Count and roster are open; Wolf, Wraith, and Ronin are working candidates |
 | Technique loadout | 4 active + 1 reserve | Launch catalog size remains open |
 | Prosthetic tools | 8 | One equipped at a time in the initial run structure |
 | Run-scoped Relic capacity | 1 | Launch catalog remains open |
@@ -54,16 +54,18 @@ Akio begins with a complete katana kit: Quick Slash, Cross Cut, Heavy Cleave, Ho
 
 Core combat includes parry, posture, stagger, deathblow, block, dash, and prosthetic support.
 
-After Returning Blood systems unlock, each run uses:
+The current working run-build proposal includes:
 
-- one selected Blood Aspect at Tier 0,
-- Corruption and Shrine Resist or Embrace decisions,
+- one selected Blood Aspect or equivalent Returning Blood specialization,
+- Corruption and Shrine decisions,
 - four empty active Technique slots,
 - one empty reserve slot,
 - one equipped prosthetic,
 - and one initial run-scoped Relic slot.
 
-Blood Aspects provide the run's vertical risk-and-power identity. Techniques provide limited horizontal customization. Most Techniques are independently useful, and each may receive at most one slotless refinement.
+The Aspect system's role, launch count, roster, identities, Tier structure, Blood model, and individual mechanics are not approved. Wolf, Wraith, and Ronin remain working candidates only.
+
+Techniques remain the working horizontal customization layer. Most Techniques should be independently useful, and each may receive at most one slotless refinement.
 
 Run-only build state resets after death or successful Heart Binding completion. Destroyed Bindings, permanent unlocks, persistent currencies, discoveries, and story progress survive.
 
@@ -103,7 +105,7 @@ Primary services:
 - Blood Cavern
 - Blood Mirror
 
-The exact launch depth of permanent upgrades, onboarding, trials, unlocks, and mastery content remains a current production-scope decision.
+The exact launch depth of permanent upgrades, onboarding, trials, unlocks, and mastery content remains a current production-scope decision. Aspect-specific services and trial counts depend on the approved Aspect system and roster.
 
 ## Area 1 — Hushiro Gate Village / Rupture
 
@@ -210,7 +212,7 @@ The Heart is not another swordsman encounter and does not require a separate wea
 
 The first Heart victory destroys the source of Beast Blood. The Shogun's reconstruction stops, corrupted inhabitants and beasts lose their unnatural sustain, Yomori's spirits pass on, the Blood Moon ends, and the barrier weakens safely.
 
-Akio survives in his current human body but loses Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction. He becomes mortal.
+Akio survives in his current human body but loses Returning Blood, any Blood Aspect powers, supernatural regeneration, and future reconstruction. He becomes mortal.
 
 ## Narrative status
 
@@ -230,9 +232,11 @@ Additional difficulty modifiers, enemy variants, room variants, and alternate ch
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md), in dependency order:
 
-1. launch run-build content catalog,
-2. persistent progression, onboarding, and trial package,
-3. narrative delivery and authored-content package,
-4. postgame release package.
+1. Blood Aspect system foundation, launch count, and identities,
+2. shared Aspect structure and selected Aspect packages,
+3. launch run-build content catalog,
+4. persistent progression, onboarding, and trial package,
+5. narrative delivery and authored-content package,
+6. postgame release package.
 
 Exact routing, room counts, miniboss frequency, combat tuning, encounter movesets, catalog effects, final scripts, and numerical values are deferred to their appropriate design and implementation stages rather than treated as missing full-game scope.

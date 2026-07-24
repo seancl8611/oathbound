@@ -2,7 +2,7 @@
 id: GAMEPLAY-BLOOD-ASPECTS
 title: Blood Aspect System
 category: gameplay
-status: approved
+status: draft
 authority: primary
 last_reviewed: 2026-07-23
 topics:
@@ -27,217 +27,185 @@ related:
 
 # Blood Aspect System
 
-Blood Aspects are controlled specializations of Akio's Returning Blood. The player equips one before a run and may advance it at Shrines through Embrace. The Aspect shapes run identity without replacing sword combat, Techniques, prosthetics, Relics, routing, or player execution.
+## Design status
 
-## Approved framework
+The Blood Aspect system is under reevaluation.
 
-- **Tier 0:** one persistent Aspect-specific signature mechanic.
-- **Tier I:** strengthens, broadens, or stabilizes that mechanic.
-- **Tier II:** unlocks the run-only **Blood** resource and the Aspect's activatable **Blood Art**.
-- **Tier III:** deepens the mechanic, Blood Art, or their relationship.
-- **Tier IV:** a difficult, rewarding capstone of the same identity.
+The repository does not currently approve:
 
-Blood Arts may be temporary states, contextual actions, defensive responses, mobility or control tools, focused attacks, or another bounded form. They are not all required to be buffs and should generally not be one automatic high-damage attack.
+- a fixed launch count,
+- Wolf, Wraith, and Ronin as the final roster,
+- the exact identity of any candidate Aspect,
+- the Tier 0-IV structure,
+- Blood unlocking at Tier II,
+- one Blood Art per Aspect,
+- the drawback-family model,
+- or the exact relationship between Aspects, Corruption, Shrines, Techniques, trials, and persistent progression.
 
-## Blood resource
+Wolf, Wraith, and Ronin remain useful working candidates. Their existing descriptions may be retained, revised, renamed, combined, replaced, or cut.
 
-Blood is a run-only combat resource used only to activate the selected Aspect's Blood Art.
+The amount of detail in a draft does not make it approved.
 
-- Blood is inactive before Tier II.
-- Combat generates Blood after Tier II.
-- The qualifying actions and gain rules may differ by Aspect.
-- The Blood Art requires the approved activation amount and consumes it on use.
-- Blood has no shop price, route category, Strand wallet, or account persistence.
-- Blood resets after death or successful completion.
-- Tiers, Techniques, refinements, Relics, or other run effects may modify Blood or the Blood Art.
-- Modifiers cannot make near-permanent Blood Art uptime the default.
+## Current design objective
 
-Capacity, activation amount, gain rate, room carry, boss behavior, and retained Blood after use remain open.
+Determine whether Blood Aspects should remain the central run specialization through which Akio deliberately shapes Returning Blood.
 
-The launch baseline uses one clear activation threshold. Partial activation may be reconsidered only after all three Arts, integrated HUD feedback, and representative encounter testing exist.
+A successful system should:
 
-## Run-power target
+- deepen the base katana combat rather than replace it,
+- create meaningfully different run identities,
+- support several valid Technique builds per identity,
+- remain readable during standard, group, elite, and boss encounters,
+- express increasing supernatural power and risk,
+- and fit the available gameplay, UI, animation, VFX, audio, trial, and progression scope.
 
-- Skilled players are not expected to reach Tier IV every run.
-- Successful runs should commonly end at Tier II or III.
-- Tier IV should be notable, rewarding, and optional.
-- Some runs may prioritize Techniques, economy, survival, prosthetics, or another route.
-- Mid-Tier runs must remain complete and strategically valid.
-- Tier IV cannot make Techniques or other systems secondary.
+## First approval package: purpose, count, and identities
 
-Exact Shrine frequency, Corruption gain, Blood gain, thresholds, and numerical power remain balance work.
+Before designing exact mechanics, approve:
 
-## Build hierarchy
+1. the system's role in the run build,
+2. whether the player selects one Aspect per run,
+3. the intended launch count,
+4. the final or provisional launch roster,
+5. the player fantasy of each selected identity,
+6. the combat behavior each identity rewards,
+7. the risk each identity introduces,
+8. the combat territory reserved for Techniques and prosthetics,
+9. and the production distinction required for each identity.
 
-1. Base combat and player skill.
-2. Blood Aspect and Tier progression.
-3. Techniques: four active upgrades plus one reserve.
-4. Prosthetic and temporary Prosthetic Techniques.
-5. Relics, survival, resources, and economy.
+Three is not currently a locked count.
 
-## Unlock and selection
+## Identity evaluation template
 
-- Aspects are introduced after basic combat is established.
-- Ronin is the likely first/default unlock.
-- Wolf and Wraith unlock later through Aspect trials or progression milestones.
-- The Blood Mirror unlocks, teaches, previews, tests, and lightly improves Aspects.
-- The Boat equips or confirms one unlocked Aspect before the run.
-- The selected Aspect remains the loadout default between runs until changed.
+Each proposed Aspect should answer:
 
-## Run flow
+- **Fantasy:** What form of controlled Returning Blood is Akio expressing?
+- **Combat identity:** What decisions does it change during ordinary sword combat?
+- **Skill expression:** What player behavior does it reward?
+- **Risk:** What danger or limitation belongs naturally to that identity?
+- **Encounter coverage:** How does it function against groups, elites, and bosses?
+- **Build space:** What related mechanics remain available for Techniques and prosthetics?
+- **Visual identity:** How is it readable without requiring a separate full Akio animation set?
+- **Production cost:** What unique UI, animation, VFX, and audio does it require?
 
-1. Confirm an unlocked Aspect at the Boat.
-2. Begin at Tier 0 with empty Technique slots.
-3. Use the Tier 0 signature mechanic while assembling the run build.
-4. Fill Corruption and reach Shrine-ready states.
-5. Choose Resist or Embrace.
-6. Embrace advances one fixed Tier, up to Tier IV.
-7. At Tier II, combat begins generating Blood and the Blood Art becomes usable when ready.
-8. Aspect Tier, Blood, and all run-only Aspect state reset after the run.
+An Aspect should not be approved only because its theme is appealing. It must own a distinct and sustainable gameplay loop.
 
-## Shared Tier contract
+## Working structural candidate — not approved
 
-### Tier 0 — Signature identity
+The previous design used this shared structure:
 
-- The signature mechanic is immediately active and works without Techniques.
-- It should change combat decisions more than raw statistics.
-- Tier 0 has no meaningful combat drawback.
+- **Tier 0:** one persistent signature mechanic with no meaningful drawback.
+- **Tier I:** strengthens the signature and introduces one coherent drawback family.
+- **Tier II:** unlocks run-only Blood and one activatable Blood Art.
+- **Tier III:** deepens the established specialization.
+- **Tier IV:** provides an optional capstone with the strongest form of the same risk.
 
-### Tier I — First mutation
+Additional working rules were:
 
-- Strengthens, broadens, or stabilizes the signature mechanic.
-- Introduces the Aspect's single drawback family.
-- Does not unlock Blood or another major system.
+- one headline improvement and at most one minor supporting rule per Tier,
+- no new Aspect resource, input, or second Blood Art after Tier II,
+- evolving rather than unrelated stacked drawbacks,
+- Tier II or III as a common successful-run endpoint,
+- Tier IV as occasional rather than mandatory,
+- Resist as stabilization rather than an alternate power path,
+- and no Tier V.
 
-### Tier II — Blood Art unlock
+These remain candidates for evaluation. They should not constrain the identity pass if a simpler or stronger structure emerges.
 
-- Unlocks Blood generation and a complete, independently useful Blood Art.
-- The Blood Art is the headline benefit; only one minor supporting rule may accompany it.
-- The Blood Art cannot require a specific Technique or later Tier to function.
+## Working Blood candidate — not approved
 
-### Tier III — Specialization
+The previous design treated Blood as:
 
-- Deepens the signature mechanic, Blood Art, appropriate Blood generation, or their interaction.
-- Must feel like a complete and satisfying successful-run endpoint.
-- Adds no new Aspect resource, input, or second Art.
+- a run-only combat resource,
+- inactive before Tier II,
+- generated through combat,
+- used only to activate the selected Aspect's Blood Art,
+- reset after death or successful completion,
+- and unavailable as a shop, route, Strand, or persistent currency.
 
-### Tier IV — Capstone mutation
+Capacity, activation amount, gain rules, room carry, boss behavior, retention, and individual Blood Arts were unresolved.
 
-- Significantly strengthens the established loop without adding an unrelated system.
-- Raises potential but still requires skilled sword execution.
-- Cannot create near-permanent Art uptime, invalidate bosses, or overshadow the Technique build.
+Partial activation was deferred until representative playable testing. This remains a reasonable safeguard only if Blood Arts remain in the final system.
 
-### Benefit and complexity rules
+## Working candidate identities
 
-- Benefits normally accumulate.
-- A later Tier may explicitly transform or replace an earlier version when that is clearer than stacking both.
-- Each Tier has one headline improvement and at most one minor supporting rule.
-- Every Tier reinforces the same tactical identity.
-- A later Tier cannot repair an incomplete earlier Tier.
+### Wolf — candidate
 
-### Drawback rules
+- **Current role direction:** aggression, pursuit, and selected-target pressure.
+- **Current fantasy direction:** predatory Returning Blood.
+- **Current loop direction:** identify prey, maintain pressure, finish the target, and transfer momentum.
+- **Current constraint:** should not collapse into generic attack speed or claim all aggressive Technique space.
+- **Status:** identity and inclusion are unapproved.
 
-- Each Aspect owns one coherent drawback family.
-- Tier 0 has no meaningful drawback.
-- Tier I introduces it; Tiers II-IV intensify or transform it.
-- The current Tier's wording represents the complete active drawback; unrelated penalties do not stack across Tiers.
-- The drawback should influence decisions and remain manageable through skilled play.
-- It cannot disable a core defensive action, invalidate a Technique category, create unavoidable damage, or make the Aspect broadly unusable in common encounters.
-- Tier IV carries the strongest risk but must not be a trap.
+### Wraith — candidate
 
-### Resist and maximum Tier
+- **Current role direction:** evasion, repositioning, and punishment after clean avoidance.
+- **Current fantasy direction:** controlled spectral dissolution.
+- **Current loop direction:** bait, avoid, reposition, and punish from a favorable angle.
+- **Current constraint:** must remain distinct from Wolf, ordinary movement Techniques, and the Mist Raven prosthetic.
+- **Status:** identity and inclusion are unapproved.
 
-Resist keeps the current Tier, reduces Corruption, and grants approved immediate support. It may be used to stabilize a run, remain at a preferred Tier, postpone a conflicting drawback, or delay Tier IV.
+### Ronin — candidate
 
-Repeated Resist choices do not stack permanent power, improve the Blood Art, remove the current drawback, or become an alternate upgrade path.
+- **Current role direction:** sword discipline, parries, posture, Counter Cuts, and deathblows.
+- **Current fantasy direction:** Returning Blood reinforcing trained martial control.
+- **Current loop direction:** control the exchange, defend precisely, counter or execute, and reset.
+- **Current constraint:** must feel like a complete specialization rather than a basic or intentionally weaker default.
+- **Status:** identity and inclusion are unapproved.
 
-There is no Tier V. Corruption may still fill at Tier IV. At a full-Corruption Shrine, Embrace is replaced by **Stabilize**, which reduces Corruption and grants support without increasing Aspect power.
+## Technique relationship boundary
 
-### Readability
+Until the Aspect roster and identities are approved:
 
-- Shrine presentation shows the current Tier, next headline benefit, and complete next drawback.
-- The build interface shows the complete current Aspect state.
-- No hidden stacking rules are required to understand the active mechanic or risk.
+- do not populate the Technique catalog around Wolf, Wraith, or Ronin as fixed launch identities,
+- do not reserve major Technique categories for candidate mechanics,
+- do not hard-lock ordinary Techniques to a candidate Aspect,
+- and do not use candidate affinities to approve production counts.
 
-## Technique relationship
-
-- Techniques remain independently useful run upgrades.
-- Selecting an Aspect does not automatically buff every matching-affinity Technique.
-- The Aspect and Blood Art may create conditions that naturally improve certain Techniques.
-- A limited number of optional upgrades may modify Blood generation or Blood Art behavior.
-- Blood-related upgrades cannot repair an incomplete baseline Art.
-- Two runs using the same Aspect must support different valid Technique builds.
-
-Offer weighting, affinity rules, rare Aspect interactions, and Blood-related catalog coverage remain open.
+The final Aspect system should preserve independently useful Techniques and several valid builds for each selected identity.
 
 ## Permanent progression boundary
 
-Unlocked Aspects and small Blood Mirror reliability upgrades may persist. Permanent progression cannot add Tiers, guarantee Tier IV, remove Embrace risk, pre-equip Techniques, provide a permanent Blood wallet, or make major run-only Aspect power automatic.
+Blood Mirror, Blood Cavern, Bloodwell, and unlock plans may reference a future Aspect system, but exact unlocks, mastery trials, permanent upgrades, and interface counts remain blocked by the final system and roster.
 
-Permanent Aspect upgrades should remain small reliability, duration, recovery, or comfort improvements. They cannot add new signature behavior, broaden invulnerability, or permanently provide a run-only Technique or Blood Art upgrade.
+No persistent upgrade should make a run-only Aspect mechanic automatic or remove its intended risk.
 
-## Aspect directions
+## Design order
 
-### Wolf
-
-- **Role:** aggression, pursuit, and selected-target pressure.
-- **Fantasy:** predatory Returning Blood that turns aggression into prey pressure and relentless pursuit.
-- **Loop direction:** identify prey, maintain pressure, finish the target, and chain momentum.
-- **Technique direction:** pursuit, consecutive pressure, wounded targets, Dash Slash re-entry, execution momentum, and target isolation.
-- **Visual direction:** red eyes, sharper stance, blood trail on prey, and a controlled feral aura while remaining recognizably samurai-shaped.
-- **Constraint:** target pressure and pursuit, not generic attack speed.
-- **Open:** exact Prey mechanic, Blood generation, Blood Art, Tier effects, and drawback expression.
-
-### Wraith
-
-- **Role:** evasion, repositioning, and punishment after clean avoidance.
-- **Fantasy:** a spectral mutation approaching bodily dissolution without abandoning Akio's physical form.
-- **Loop direction:** bait, avoid cleanly, reposition, and punish from a favorable angle.
-- **Technique direction:** perfect dodge, repositioning, flanking, Dash Slash, recovery manipulation, and tactical movement.
-- **Visual direction:** mist trails, pale-red afterimages, smoky blade trails, and a partial wraith silhouette at high Tiers.
-- **Constraint:** distinct from Wolf aggression and the Mist Raven prosthetic.
-- **Open:** perfect-dodge vocabulary, positional rules, Mist-Step ownership, Blood generation, Blood Art, Tier effects, and drawback expression.
-
-### Ronin
-
-- **Role:** sword discipline, parries, posture, Counter Cuts, and deathblows.
-- **Fantasy:** disciplined Returning Blood reinforcing Akio's sword fundamentals.
-- **Loop direction:** control the exchange, defend precisely, pressure posture, counter or execute, and reset.
-- **Technique direction:** parry, Counter Cut, posture control, Focus, deathblow, guard timing, and defensive tool mastery.
-- **Visual direction:** blood-lit blade edge, sharper parry spark, calm red aura after deathblow, and a controlled human silhouette.
-- **Constraint:** reliable and fundamentals-focused rather than intentionally weak.
-- **Open:** Focus ownership, posture and deathblow interaction, Blood generation, Blood Art, Tier effects, and drawback expression.
-
-## Remaining design order
-
-1. Shared Blood generation and activation rules.
-2. Wolf exact mechanics, Blood Art, Tiers, and drawback.
-3. Wraith exact mechanics, Blood Art, Tiers, and drawback.
-4. Ronin exact mechanics, Blood Art, Tiers, and drawback.
-5. Cross-Aspect distinction and overlap audit.
-6. Technique metadata, Blood interactions, and refinement rules.
-7. Technique catalog coverage and launch counts.
-8. Partial-activation evaluation after playable testing.
+1. Approve the system purpose.
+2. Approve the launch count.
+3. Approve the identity roster at fantasy and combat-loop depth.
+4. Audit identity overlap and production cost.
+5. Approve or revise the shared progression structure.
+6. Design each selected Aspect's exact mechanics.
+7. Approve shared resource, activation, Shrine, and HUD rules.
+8. Finalize Aspect-Technique interaction rules.
+9. Populate Technique coverage and launch counts.
+10. Evaluate optional complexity through playable testing.
 
 ## Approval tests
 
-Each completed Aspect must:
+The roster is not ready unless:
 
-- matter at Tier 0,
-- remain complete at Tier II or III,
-- provide a functional Blood Art at Tier II,
-- keep Tier IV rewarding but optional,
-- preserve core combat and Technique importance,
-- reward participation without forcing one repetitive action,
-- support standard enemies, groups, elites, and bosses,
-- and remain distinct from the other Aspects.
+- every selected Aspect owns a distinct player fantasy and combat decision pattern,
+- the launch count supports replayability without exceeding production scope,
+- no identity is merely a stronger or weaker version of another,
+- base katana combat remains primary,
+- Techniques and prosthetics retain meaningful territory,
+- each identity can function against groups, elites, and bosses,
+- and the roster can be communicated clearly through gameplay and presentation.
 
-## Visual production rule
+An individual Aspect is not ready for exact Tier or Blood Art approval until its identity passes the roster-level audit.
 
-Use one base Akio animation set with modular eyes, markings, weapon treatments, auras, mist, trails, and composable Tier overlays. Reuse shared Blood input and readiness logic where practical; individual Arts may still require distinct animation, VFX, audio, targeting, or duration states.
+## Visual production direction
+
+The preferred production direction remains one base Akio animation set with modular eyes, markings, weapon treatments, auras, trails, and composable overlays where possible.
+
+This is a cost-control direction, not proof that three specific Aspect families are approved.
 
 ## Related documents
 
+- [Current Design Questions](../_meta/OPEN_QUESTIONS.md)
 - [Returning Blood](../lore/RETURNING_BLOOD.md)
 - [Corruption and Shrines](CORRUPTION_AND_SHRINES.md)
 - [Technique System](TECHNIQUES.md)
