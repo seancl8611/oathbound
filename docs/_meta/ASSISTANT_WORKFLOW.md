@@ -4,7 +4,7 @@ title: Assistant Update Workflow
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-23
 ---
 
 # Assistant Update Workflow
@@ -22,6 +22,32 @@ For broad design work, begin with:
 5. the authoritative file for the affected subject
 
 Use `DOCUMENT_MAP.md` only to seed likely dependencies. Live repository search remains required.
+
+## Design-status discipline
+
+Before treating any statement as settled, check both the document frontmatter and the wording around the statement.
+
+- **Approved:** authoritative only to the depth explicitly approved in the file.
+- **Draft:** working material that may be revised, replaced, combined, or cut.
+- **Candidate, likely, proposed, current direction, working, illustrative, or example:** not approved unless the authoritative file explicitly says otherwise.
+- A detailed mechanic, named roster, count, table, trial, asset list, or production note is not automatically approved because it is specific.
+- A dependent file cannot promote a draft statement into a locked decision.
+- Historical commits and decision logs explain prior thinking but do not override current status.
+
+When the user reopens a prior decision, downgrade the authoritative status and correct dependent summaries before continuing deeper design.
+
+## Prerequisite check before proposing the next question
+
+Before asking or answering a detailed design question:
+
+1. identify its parent decision,
+2. confirm that the parent decision is approved,
+3. confirm that the roster, count, identity, or system boundary it assumes is approved,
+4. and check `OPEN_QUESTIONS.md` for an earlier dependency.
+
+Do not design a named character, Aspect, Tier, ability, trial, Technique interaction, or asset package as final while its identity, inclusion, or parent system remains draft.
+
+When several questions remain, present the earliest unresolved dependency as one concise question. Do not answer a broad package through an unnecessarily long speculative design.
 
 ## Required process
 
@@ -52,12 +78,13 @@ A question is not important merely because it can be asked. It belongs in the tr
 
 Order current questions by dependency:
 
-1. content inventories that other systems consume,
-2. unlock, progression, onboarding, and hub scope built around those inventories,
-3. authored narrative and presentation packages,
-4. release-completion and postgame scope.
+1. foundational system purpose, roster, count, and identity decisions,
+2. content inventories that other systems consume,
+3. unlock, progression, onboarding, and hub scope built around those inventories,
+4. authored narrative and presentation packages,
+5. release-completion and postgame scope.
 
-Do not prioritize a later gameplay-detail question above an independent production decision simply because the detail appears earlier in the run.
+Do not prioritize a child mechanic above an unresolved parent identity or roster decision simply because the child mechanic is easier to describe.
 
 ## Question hygiene
 
