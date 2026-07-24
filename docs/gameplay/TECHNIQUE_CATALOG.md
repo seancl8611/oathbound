@@ -27,149 +27,152 @@ related:
 
 ## Purpose and ownership
 
-This file owns the individual Technique catalog, catalog coverage, entry status, and refinement attached to each approved Technique.
+This file owns individual Technique entries, catalog coverage, entry status, refinements, and production treatment.
 
-[Technique System](TECHNIQUES.md) remains authoritative for shared rules such as slots, reserve behavior, categories, affinity, rarity, refinements, and offer eligibility. [Blood Aspect System](BLOOD_ASPECTS.md) remains authoritative for Aspect mechanics, gameplay form, power budget, and Tier behavior. This file must not redefine those systems.
+[Technique System](TECHNIQUES.md) owns shared rules such as slots, reserve behavior, categories, affinity, rarity, refinements, eligibility, and the approved Aspect-Technique responsibility contract. [Blood Aspect System](BLOOD_ASPECTS.md) owns Aspect identity, foundation, progression, and power budget. This file must not redefine either system.
 
-The removed Storm, Frost, Ember, Hex, and Shadow stance catalog is historical implementation context only. It does not constrain the identities, effects, triggers, categories, or affinities of the new Technique catalog.
+The removed Storm, Frost, Ember, Hex, and Shadow stance catalog is historical implementation context only.
 
 ## Current status
 
-No individual launch Technique, refinement, category count, rarity distribution, or final catalog total is approved yet.
+No individual launch Technique, refinement, category count, rarity distribution, or final catalog total is approved.
+
+The general layer contract is approved:
+
+- Aspects define the pre-run combat foundation.
+- Techniques are four limited, replaceable in-run modifications plus one reserve.
+- Ordinary Techniques are usable by every Aspect.
+- Affinity represents amplification rather than eligibility.
+- Technique builds may reinforce, broaden, compensate, or hybridize an Aspect.
+- Most synergy should emerge through shared combat verbs rather than bespoke per-Aspect versions.
 
 Before catalog population begins, approve:
 
-1. what equipping a Blood Aspect actually gives the player,
-2. whether Aspects use passive modifiers, signature mechanics, contextual actions, activatable abilities, Technique interactions, or a bounded hybrid,
-3. the shared Aspect power budget relative to Techniques and other run systems,
-4. the shared Tier contract using the approved Tier II–III common / Tier IV occasional target,
-5. the complete Tier 0–IV mechanical direction for Wolf, Wraith, and Ronin,
-6. the Technique category, combat-verb tag, affinity, and rarity model,
-7. the refinement design standard,
-8. the Aspect–Tier–Technique interaction rules,
-9. and the launch coverage matrix.
+1. the final three-Aspect identity roster and combat-foundation boundary,
+2. the shared Aspect progression and power budget,
+3. Technique category, combat-verb tag, affinity, and rarity models,
+4. the refinement design standard,
+5. affinity and offer-weighting rules,
+6. rare direct Aspect-, Blood-, or Tier-referencing exception rules,
+7. and the launch coverage matrix.
 
-Catalog counts should follow the Aspect-system and coverage passes rather than precede them.
+Catalog counts follow those passes rather than preceding them.
 
 ## Catalog design sequence
 
-1. Define the Blood Aspect gameplay model, player-facing functionality, and power budget in `BLOOD_ASPECTS.md`.
-2. Decide whether an activatable Aspect ability and direct Technique interaction exist.
-3. Define the shared Tier contract and each Aspect's exact Tier direction.
-4. Finalize Technique metadata and refinement rules in `TECHNIQUES.md`.
-5. Build the coverage matrix below around combat territory not already owned by the Aspect system.
-6. Draft individual Technique concepts.
-7. Test every entry for standalone value and cross-Aspect usefulness.
-8. Identify refinement, rarity, UI, VFX, animation, audio, and unlock treatment.
-9. Approve launch counts and production tiers.
+1. Approve the three-Aspect roster and shared Aspect structure.
+2. Finalize Technique metadata, affinity, refinement, and exception rules.
+3. Build the coverage matrix around combat territory not already owned by the Aspect foundation.
+4. Draft individual Technique concepts.
+5. Test every entry for standalone value and cross-Aspect usefulness.
+6. Verify reinforce, broaden, compensate, and hybridize build coverage for every Aspect.
+7. Identify rarity, UI, VFX, animation, audio, and unlock treatment.
+8. Approve launch counts and production tiers.
 
 ## Launch coverage matrix
 
-Populate this matrix before approving the final catalog size. A row may be supported by several Techniques, and one Technique may cover several compatible rows. Coverage does not require one Technique per row.
+Populate this matrix before approving the final catalog size. One Technique may cover several compatible rows, and one row may be supported by several Techniques.
 
-The matrix must be revisited after the Blood Aspect gameplay model is approved. Techniques should complement Aspect functionality rather than duplicate signature abilities or make Aspect progression irrelevant.
-
-| Coverage family | Required questions | Current status |
+| Coverage family | Required question | Status |
 |---|---|---|
-| Quick Slash and combo opening | What distinct run-build choices can deepen safe opening pressure without becoming generic attack speed? | Open |
-| Cross Cut and crowd coverage | What choices support nearby or off-line target control while preserving readable sword combat? | Open |
-| Heavy Cleave and commitment | What choices reward earned openings, posture pressure, or risk-managed commitment? | Open |
-| Hold Thrust and spacing | What choices deepen narrow single-target punishment, spacing, or anti-commitment play? | Open |
-| Counter Cut | What choices support parry-to-counter play without belonging only to Ronin? | Open |
-| Dash Slash and re-entry | What choices deepen movement-to-offense transitions across Wraith, Wolf, and neutral builds? | Open |
-| Block and parry | What choices reward defense, timing, posture control, or recovery without trivializing enemy response rules? | Open |
-| Posture break and deathblow | What choices alter execution payoff, momentum, or target transition without automating combat? | Open |
-| Wolf compatibility | After Wolf is fully defined, what Technique space remains for pursuit, Prey pressure, wounded targets, isolation, and execution momentum? | Open |
-| Wraith compatibility | After Wraith is fully defined, what Technique space remains for clean avoidance, repositioning, flanking, re-entry, and punish timing? | Open |
-| Ronin compatibility | After Ronin is fully defined, what Technique space remains for disciplined parry, Counter Cut, posture control, deathblow, and Focus? | Open |
-| Cross-Aspect alternatives | Can every Aspect build outside its strongest affinity without receiving dead or misleading choices? | Open |
-| Health, Spirit, and recovery | What limited General Techniques support survival or resources without becoming generic stat clutter? | Open |
-| Boss viability | Which entries remain useful against single targets, immunity-bearing elites, and bosses? | Open |
-| Mixed-encounter viability | Which entries help with groups, ranged pressure, hazards, or target prioritization? | Open |
-| Early-run value | Which entries are immediately useful when the player owns no other Techniques? | Open |
-| Late-run decisions | Which entries create meaningful replacement, reserve, refinement, or specialization decisions after all slots are full? | Open |
+| Attack opening and chains | What choices alter opening pressure, chain behavior, or commitment without becoming generic attack speed? | Open |
+| Range and crowd coverage | What choices affect reach, arcs, nearby targets, or line control across all Aspects? | Open |
+| Heavy commitment | What choices reward earned openings, posture pressure, or risk-managed commitment? | Open |
+| Spacing and precision | What choices deepen narrow punishment, spacing, or anti-commitment play? | Open |
+| Defense-to-offense | What choices connect parry, block, dodge, or recovery into offense without belonging to one Aspect? | Open |
+| Movement and re-entry | What choices deepen repositioning, pursuit, flanking, or movement-to-attack transitions? | Open |
+| Posture and execution | What choices alter posture pressure, break payoff, deathblow momentum, or target transition? | Open |
+| Prosthetic development | What temporary choices deepen each equipped tool's existing tactical purpose? | Open |
+| Reinforce builds | Does every Aspect have several Techniques that naturally deepen its strengths? | Open |
+| Broaden builds | Can every Aspect develop adjacent combat options without losing its identity? | Open |
+| Compensate builds | Can a player spend slots to cover an Aspect weakness without erasing the tradeoff entirely? | Open |
+| Hybrid builds | Can each Aspect support surprising cross-category combinations that remain coherent? | Open |
+| Alternate affinity | Are neutral and alternate-affinity choices useful rather than misleading or dead? | Open |
+| Health, Spirit, and recovery | What limited General Techniques support survival or resources without generic stat clutter? | Open |
+| Boss viability | Which entries remain useful against single targets, elites, and bosses? | Open |
+| Mixed encounters | Which entries address groups, ranged pressure, hazards, or target prioritization? | Open |
+| Early-run value | Which entries provide immediate value without another exact Technique? | Open |
+| Late-run decisions | Which entries create meaningful replacement, reserve, refinement, or specialization choices? | Open |
 
 ## Technique entry schema
-
-Every drafted Technique should use the following fields.
 
 ### Identity
 
 - **Stable ID:** `TECH-###`
 - **Name:** player-facing Technique name
 - **Status:** concept, approved, deferred, cut, or implemented
-- **Primary category:** one approved Technique category
-- **Rarity:** approved Technique rarity tier
-- **Combat-verb tags:** all directly affected approved verbs
-- **Aspect affinity:** Wolf, Wraith, Ronin, neutral, or a justified combination
-- **Prosthetic requirement:** none unless the entry is a Prosthetic Technique
+- **Primary category:** one approved category
+- **Rarity:** approved rarity tier
+- **Combat-verb tags:** all directly affected verbs
+- **Aspect affinity:** one or more justified soft affinities, or neutral
+- **Build direction:** reinforce, broaden, compensate, hybridize, or a justified combination
+- **Prosthetic requirement:** none unless this is a Prosthetic Technique
 
 ### Gameplay definition
 
-- **Trigger or condition:** what player action, enemy state, or resource condition activates the Technique
-- **Base effect:** the complete standalone behavior without numerical tuning
-- **Intended decision:** why a player selects it over another valid option
-- **Intended play pattern:** what skilled behavior it encourages
-- **Failure and reset behavior:** what breaks, expires, or resets the effect
-- **Boss and elite behavior:** immunity, single-target, and encounter restrictions
-- **Crowd behavior:** how the entry behaves with multiple enemies
+- **Trigger or condition:** player action, enemy state, resource state, or positional condition
+- **Base effect:** complete standalone behavior without numerical tuning
+- **Intended decision:** why the player selects it over another valid option
+- **Intended pattern:** what skilled behavior it encourages
+- **Failure and reset behavior:** what breaks, expires, or resets it
+- **Boss and elite behavior:** restrictions and reliability
+- **Crowd behavior:** multiple-enemy behavior
 - **Cross-Aspect usefulness:** why it remains valid outside its strongest affinity
-- **Aspect overlap check:** why it complements rather than duplicates the selected Aspect's signature functionality
-- **Invalid combinations or safeguards:** only when required to preserve combat rules
+- **Aspect overlap check:** why it modifies rather than duplicates the Aspect foundation
+- **Invalid combinations or safeguards:** only where required
 
 ### Refinement
 
-- **Refinement name:** player-facing name
-- **Refinement effect:** one direct deepening of the base Technique
-- **Why it preserves identity:** how it strengthens the original choice rather than replacing it
+- **Refinement name**
+- **Refinement effect**
+- **Why it preserves the base Technique's identity**
 
 Use `None at launch` when an approved Technique intentionally ships without a refinement.
 
 ### Production and progression
 
-- **UI treatment:** icon, tags, comparisons, counters, or HUD state
-- **VFX treatment:** reused, lightly extended, or bespoke
-- **Animation treatment:** existing animation library or explicit scope increase
-- **Audio requirement:** reused cue, layered cue, or bespoke
-- **Unlock ownership:** starting pool, Blood Cavern, Blood Mirror, campaign milestone, or another approved source
-- **Dependencies:** mechanics or data required before implementation
+- **UI treatment**
+- **VFX treatment:** reused, extended, or bespoke
+- **Animation treatment:** existing library or explicit scope increase
+- **Audio requirement**
+- **Unlock ownership**
+- **Dependencies**
 
 ## Quality checks
 
-An individual Technique is not ready for approval unless:
+An individual Technique is not ready unless:
 
 - it provides value without another exact Technique,
-- its effect can be understood before selection,
-- it deepens approved combat rather than replacing sword execution,
-- its category, tags, affinity, and rarity describe different properties,
-- it remains useful in at least one common enemy encounter and one major encounter context,
-- it does not become invalid merely because the player selected a different Aspect,
-- it complements rather than reproduces an Aspect's signature mechanic or active ability,
-- its refinement, when present, strengthens the original reason for selection,
-- it states any boss, elite, crowd, or immunity behavior that affects reliability,
-- and its production treatment is explicit enough to estimate after the catalog is approved.
+- its effect is understandable before selection,
+- it deepens active combat rather than replacing execution,
+- its category, tags, affinity, rarity, and build direction describe different properties,
+- it remains useful in common and major encounter contexts,
+- it does not become invalid under another Aspect,
+- it modifies rather than reproduces an Aspect foundation or activatable ability,
+- its refinement preserves the original reason for selection,
+- and its production treatment is explicit enough to estimate.
 
 ## Catalog-level checks
 
-The launch catalog should be approved only when:
+Approve the launch catalog only when:
 
-- the Blood Aspect system's functionality and power budget are already approved,
-- every core sword action has meaningful but non-mandatory support,
-- each Aspect supports several distinct valid four-Technique build shapes,
+- the Aspect roster and shared structure are approved,
+- every core combat action has meaningful but non-mandatory support,
+- each Aspect supports several reinforce, broaden, compensate, and hybridize build shapes,
 - neutral and alternate-affinity choices prevent repetitive same-Aspect runs,
-- early offers can produce immediate value,
-- late offers can produce replacement, reserve, and refinement decisions,
-- the pool does not rely on exact prerequisite chains,
+- early offers provide standalone value,
+- late offers create replacement, reserve, and refinement decisions,
+- the pool avoids exact prerequisite chains,
 - the reward generator can avoid three invalid choices,
-- Techniques do not make Aspect Tier pursuit irrelevant,
+- Techniques do not make Aspect progression irrelevant,
 - Aspects do not make Technique selection secondary,
-- and unique icon, VFX, animation, audio, and unlock requirements are counted.
+- and unique production requirements are counted.
 
 ## Deferred values
 
 The catalog may define behavior without locking:
 
-- damage and posture numbers,
+- damage and posture values,
 - durations and cooldowns,
 - exact thresholds,
 - offer weights and rarity probabilities,
@@ -177,4 +180,4 @@ The catalog may define behavior without locking:
 - final unlock costs,
 - or frame-level implementation values.
 
-Those remain implementation and playtest work in the appropriate owning files or data.
+Those remain implementation and playtest work.

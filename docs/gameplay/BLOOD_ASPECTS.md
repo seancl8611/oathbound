@@ -38,7 +38,8 @@ The following direction is approved:
 - no Aspect is defined only as the attack, dash, parry, ranged, or deathblow build,
 - identities come from connected differences across the combat foundation,
 - the universal defensive and execution language remains shared and readable,
-- and the preferred weapon direction is one physical katana expressed through Aspect-specific Blood combat forms.
+- the preferred weapon direction is one physical katana expressed through Aspect-specific Blood combat forms,
+- and the selected Aspect remains functional before any Technique is acquired.
 
 Three is the current production and design baseline, not a permanent ceiling. A fourth or later Aspect is deferred until playable testing demonstrates a meaningful missing combat identity that cannot be handled by the approved three, Techniques, or prosthetics.
 
@@ -56,7 +57,9 @@ This file remains a draft because the repository does not yet approve:
 - Blood unlocking at Tier II,
 - one Blood Art per Aspect,
 - the drawback-family model,
-- or the exact relationship between Aspects, Corruption, Shrines, Techniques, trials, and persistent progression.
+- detailed Aspect-affinity and offer-weighting rules,
+- rare direct Aspect- or Tier-referencing Technique exceptions,
+- or the exact relationship between Aspects, Corruption, Shrines, trials, and persistent progression.
 
 Wolf, Wraith, and Ronin remain the three working candidates. They may be retained, revised, renamed, combined, or replaced during the identity pass.
 
@@ -77,6 +80,66 @@ The selected Aspect should:
 - express increasing supernatural power and risk,
 - and remain achievable within gameplay, UI, animation, VFX, audio, trial, and progression scope.
 
+## Approved Aspect-Technique layer contract
+
+Aspects and Techniques are both major run-build layers, but they have different responsibilities.
+
+### Aspects own the foundation
+
+The selected Aspect is:
+
+- chosen before the run,
+- active from Tier 0,
+- always present during combat,
+- responsible for the run's starting combat identity,
+- allowed to change attack rhythm, reach, coverage, commitment, recovery, movement flow, target handling, damage-versus-posture profile, and Blood-weapon expression,
+- and the owner of any later Aspect-specific vertical power and risk progression that remains in the final system.
+
+An Aspect must be complete without finding a particular Technique. Techniques may deepen or redirect it, but they cannot repair an incomplete foundation.
+
+### Techniques own modular build construction
+
+Techniques are:
+
+- temporary rewards acquired during the run,
+- limited to four active slots plus one inactive reserve,
+- individually replaceable,
+- focused modifications to existing attacks, defenses, movement, posture, deathblows, resources, or the equipped prosthetic,
+- and the primary way the player chooses how to develop the selected foundation during that specific run.
+
+A Technique should provide standalone value and should not become the player's entire foundation by itself.
+
+### Intentional overlap
+
+Overlap is expected at the combat-verb level. Both systems may affect attacks, parries, dodges, posture, deathblows, movement, and prosthetics, but they affect them at different scales.
+
+- The Aspect establishes how the overall combat foundation behaves.
+- A Technique modifies a specific action, condition, payoff, transition, or tactical option within that foundation.
+
+A Technique may intentionally:
+
+1. **Reinforce** an Aspect's existing strengths.
+2. **Broaden** the Aspect into an adjacent play pattern.
+3. **Compensate** for a weakness at the cost of a Technique slot.
+4. **Hybridize** the foundation into an unusual but coherent build.
+
+The same Technique may feel different under different Aspects because the underlying attack form, range, rhythm, movement flow, or posture profile is already different. Most synergy should emerge this way rather than through bespoke per-Aspect versions of every Technique.
+
+### Compatibility rules
+
+- Ordinary Techniques are not hard-locked to one Aspect.
+- Ordinary Techniques do not require a minimum Aspect Tier.
+- Affinity describes natural synergy and may later influence offer weighting; it does not determine eligibility.
+- Every Aspect must support several distinct valid four-Technique builds.
+- Neutral and alternate-affinity Techniques must remain meaningful options.
+- An Aspect cannot automatically make an entire Technique category the correct choice.
+- A Technique cannot duplicate the Aspect's complete foundation, signature mechanic, or activatable Blood Art.
+- Direct Aspect-, Blood-, or Tier-referencing Techniques may exist only as limited, explicit exceptions after the shared structure and roster are approved.
+- Aspect progression must not make Technique selection secondary.
+- Technique combinations must not make Aspect identity irrelevant.
+
+This contract is approved at the system-responsibility level. Exact affinities, offer weights, rare exceptions, and individual entries remain later design work.
+
 ## Three-Aspect identity process
 
 The identity roster is resolved through focused passes rather than one broad question.
@@ -94,6 +157,7 @@ Define what the complete roster must cover across:
 - target handling,
 - natural risk,
 - full-kit use,
+- Technique build shapes,
 - encounter coverage,
 - visual distinction,
 - and production cost.
@@ -104,7 +168,7 @@ This pass creates evaluation criteria without designing exact abilities.
 
 Evaluate Wolf, Wraith, and Ronin individually using the identity template below.
 
-This pass includes how each candidate expresses the shared multidimensional combat foundation. That work is not a separate later question.
+This pass includes how each candidate expresses the shared multidimensional combat foundation and supports reinforce, broaden, compensate, and hybridize Technique builds.
 
 ### Pass 3 — Overlap and gap audit
 
@@ -114,6 +178,7 @@ Compare all three candidates together.
 - identify missing launch-critical territory,
 - confirm full-kit use,
 - confirm distinct run identities,
+- confirm multiple Technique build shapes,
 - preserve Technique and prosthetic build space,
 - and test group, elite, and boss viability at the concept level.
 
@@ -129,6 +194,7 @@ Approve:
 
 - one concise identity row for each of the three Aspects,
 - the shared-versus-Aspect-specific combat-foundation boundary,
+- the expected Technique build shapes for each identity,
 - and the production distinction required for each identity.
 
 Exact Tiers, Blood generation, Blood Arts, and candidate mechanics follow after this approval.
@@ -141,14 +207,14 @@ Each proposed Aspect should answer:
 - **Combat identity:** What combined decisions does it change during ordinary combat?
 - **Foundation change:** How does it alter rhythm, reach, coverage, commitment, recovery, movement flow, damage profile, posture profile, target handling, or weapon form?
 - **Full-kit use:** How does it use attacks, parries, blocks, dodges, posture pressure, deathblows, Techniques, and prosthetics?
+- **Technique build space:** How can Techniques reinforce, broaden, compensate, or hybridize the identity?
 - **Emphasis:** Which combinations or situations does it favor without making other core actions irrelevant?
 - **Risk:** What danger or limitation belongs naturally to the identity?
 - **Encounter coverage:** How does it function against groups, elites, and bosses?
-- **Build space:** What related mechanics remain available for Techniques and prosthetics?
 - **Visual identity:** How is it readable without unnecessary production duplication?
 - **Production cost:** What unique UI, animation, VFX, and audio does it require?
 
-An Aspect should not be approved only because its theme is appealing or because it strongly modifies one input. It must create a sustainable combat pattern using the complete game.
+An Aspect should not be approved only because its theme is appealing or because it strongly modifies one input. It must create a sustainable combat pattern using the complete game and support more than one obvious Technique build.
 
 ## Cross-behavior requirement
 
@@ -251,17 +317,6 @@ These directions are incomplete and do not grant exclusive ownership over an act
 - **Current constraint:** must not collapse into the parry build or feel like a basic or intentionally weaker default.
 - **Status:** identity and inclusion are unapproved.
 
-## Technique relationship boundary
-
-Until the three identities are approved:
-
-- do not populate the Technique catalog around Wolf, Wraith, or Ronin as fixed identities,
-- do not reserve major Technique categories for candidate mechanics,
-- do not hard-lock ordinary Techniques to a candidate Aspect,
-- and do not use candidate affinities to approve production counts.
-
-The final system should preserve independently useful Techniques, full-kit upgrade opportunities, and several valid builds for each identity.
-
 ## Permanent progression boundary
 
 Blood Mirror, Blood Cavern, Bloodwell, and unlock plans may reference the three-Aspect launch scope, but exact unlocks, mastery trials, permanent upgrades, and interface counts remain blocked by the final identities and shared system.
@@ -270,19 +325,20 @@ No persistent upgrade should make a run-only Aspect mechanic automatic or remove
 
 ## Design order
 
-1. Define three-roster coverage criteria.
-2. Define Wolf at fantasy and combined-combat-pattern depth.
-3. Define Wraith at fantasy and combined-combat-pattern depth.
-4. Define Ronin at fantasy and combined-combat-pattern depth.
-5. Audit overlap, gaps, full-kit use, and production cost.
-6. Revise, replace, combine, or rename candidates as needed.
-7. Approve the three-row identity roster and combat-foundation boundary.
-8. Approve or revise the shared progression structure.
-9. Design each selected Aspect's exact mechanics.
-10. Approve shared resource, activation, Shrine, and HUD rules.
-11. Finalize Aspect-Technique interaction rules.
-12. Populate Technique coverage and launch counts.
-13. Reconsider additional Aspects only after playable testing demonstrates a missing identity.
+1. Use the approved Aspect-Technique layer contract as a roster constraint.
+2. Define three-roster coverage criteria, including required Technique build shapes.
+3. Define Wolf at fantasy and combined-combat-pattern depth.
+4. Define Wraith at fantasy and combined-combat-pattern depth.
+5. Define Ronin at fantasy and combined-combat-pattern depth.
+6. Audit overlap, gaps, full-kit use, Technique build space, and production cost.
+7. Revise, replace, combine, or rename candidates as needed.
+8. Approve the three-row identity roster and combat-foundation boundary.
+9. Approve or revise the shared progression structure.
+10. Design each selected Aspect's exact mechanics.
+11. Approve shared resource, activation, Shrine, and HUD rules.
+12. Finalize affinity, offer weighting, and rare direct-interaction exceptions.
+13. Populate Technique coverage and launch counts.
+14. Reconsider additional Aspects only after playable testing demonstrates a missing identity.
 
 ## Approval tests
 
@@ -294,6 +350,7 @@ The roster is not ready unless:
 - all identities preserve meaningful attack, defense, movement, posture, deathblow, Technique, and prosthetic play,
 - Tier 0 creates a noticeable run identity,
 - the universal combat framework remains readable and teachable,
+- each identity supports reinforce, broaden, compensate, and hybridize Technique builds,
 - Techniques and prosthetics retain meaningful territory,
 - each identity functions against groups, elites, and bosses,
 - and the roster can be communicated clearly through gameplay and presentation.
