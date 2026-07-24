@@ -34,17 +34,23 @@ Decide:
 - whether one selected Aspect should remain the central run specialization,
 - the minimum launch count needed for meaningful replayability,
 - whether three is the correct count,
-- the player fantasy and combat identity of each selected Aspect,
-- the combat territory each identity owns and must leave available for Techniques, prosthetics, and base combat,
+- the player fantasy and combined combat identity of each selected Aspect,
+- how every identity uses the full attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
+- which combinations, timings, ranges, risks, or tactical situations each identity emphasizes without monopolizing one core action,
+- whether Akio retains one physical katana, uses Aspect-specific Blood weapon forms, or uses a broader weapon foundation,
+- how much Tier 0 changes attack rhythm, reach, coverage, commitment, recovery, movement flow, damage profile, posture profile, and weapon presentation,
+- how shared inputs, defensive rules, enemy responses, and execution language remain readable across identities,
 - the risk-and-reward character of each identity,
 - the visual and thematic distinction between identities,
 - and whether the proposed roster is achievable within production scope.
 
-Approval should produce a short roster and identity table before any exact Tier, Blood-generation, Blood Art, or individual mechanic work is treated as final.
+An Aspect must not be approved as merely the attack build, dash build, parry build, ranged build, or another single-action specialization. All Aspects should remain capable of supporting upgrades to all core combat behaviors, even when one identity favors particular combinations or situations.
+
+Approval should produce a short roster and identity table plus a shared-versus-Aspect-specific combat-foundation boundary before any exact Tier, Blood-generation, Blood Art, or individual mechanic work is treated as final.
 
 ## 2. Shared Aspect structure and selected Aspect packages
 
-Only after the system purpose, count, and identities are approved, decide the shared gameplay structure.
+Only after the system purpose, count, identities, and combat-foundation boundary are approved, decide the shared gameplay structure.
 
 The current Tier 0-IV, Corruption, Embrace, Blood, Blood Art, drawback-family, and one-Aspect-per-run model is a working proposal. It may be preserved, revised, simplified, or replaced during this pass.
 
@@ -58,10 +64,12 @@ Decide:
 - how Resist, Embrace, and maximum-Tier Shrine behavior relate to the final system,
 - Blood generation and activation behavior if Blood remains,
 - the exact package for each approved Aspect,
+- how every package continues to support the full combat kit,
 - cross-Aspect distinction and overlap,
+- relative attack, range, posture, speed, recovery, and coverage tradeoffs,
 - and required input, HUD, animation, VFX, audio, trial, and progression states.
 
-Exact gain rates, thresholds, durations, and balance values remain playtest work.
+Exact damage, posture, speed, range, gain-rate, threshold, and duration values remain playtest work. The behavioral and relative tradeoff direction must be approved before production counts are locked.
 
 Partial Blood Art activation is not part of the current working baseline. Reconsider it only if Blood Arts remain in the approved system and playable testing demonstrates a need.
 
@@ -83,7 +91,7 @@ Decide:
 
 Before approving counts, complete:
 
-1. the approved Aspect system purpose, count, and identity roster,
+1. the approved Aspect system purpose, count, identity roster, and combat-foundation boundary,
 2. the approved shared Aspect structure and individual packages,
 3. a cross-system overlap audit,
 4. Technique category, tag, affinity, and rarity rules,
@@ -142,6 +150,7 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 - exact enemy and boss movesets,
 - exact Corruption gain, Shrine frequency, and Tier thresholds,
 - exact Blood gain, capacity, activation, duration, retention, and anti-farming values if Blood remains,
+- exact Aspect damage, posture, speed, range, recovery, and coverage values,
 - partial activation before approved system direction and playtest evidence,
 - Spirit costs and prosthetic cooldowns,
 - hitboxes, immunity tables, and status values,
