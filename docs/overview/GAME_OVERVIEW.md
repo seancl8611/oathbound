@@ -67,18 +67,18 @@ The game should feel disciplined, dangerous, elegant, and cursed. Martial clarit
 
 ## Core player fantasy
 
-The player should feel like a trained hunter entering a fallen kingdom with only a complete sword kit, then awakening a forbidden inherited power and gradually learning to evolve it on his own terms.
+The player should feel like a trained hunter entering a fallen kingdom with a complete sword foundation, then awakening a forbidden inherited power and gradually learning to evolve it on his own terms.
 
 Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
 
-Across a standard run, the player grows from the complete base sword kit into a specialized late-run build. The exact role, count, identities, and structure of Blood Aspects are currently being reevaluated. Techniques remain the working horizontal customization layer around the approved base combat.
+Across a standard run, the player grows from the approved introductory sword foundation into a specialized late-run build. The exact role, count, identities, weapon expression, attack foundations, and progression structure of Blood Aspects are currently being reevaluated. Techniques remain the working horizontal customization layer around the universal combat framework.
 
 ## Approved gameplay snapshot
 
 - Introductory first attempt using the base sword kit without active Blood powers
 - First death awakens dormant inherited Beast Blood and reconstructs Akio at the Strand
-- Base katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
-- Core combat: parry, posture, stagger, deathblow, block, dash, and prosthetic-tool support
+- Introductory base katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
+- Universal combat language: parry, posture, stagger, deathblow, block, dash, and prosthetic-tool support
 - Run-only build growth through temporary choices
 - Technique system: four active temporary Techniques, one inactive reserve, and at most one refinement per Technique
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
@@ -96,21 +96,27 @@ The current working draft proposes:
 
 - one selected Blood Aspect as a major run specialization,
 - a launch roster currently represented by Wolf, Wraith, and Ronin candidates,
+- an immediate Tier 0 change to run identity,
+- multidimensional identities that use the full attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
+- possible Aspect-specific attack rhythms, ranges, coverage, commitment, recovery, damage or posture profiles, and Blood weapon forms,
 - Corruption and Shrine Resist/Embrace choices,
 - Tier-based escalation,
 - and an activatable Blood Art supported by a run-only Blood resource.
 
-The launch count, candidate identities, Tier structure, Blood model, and individual mechanics are not locked. See [Blood Aspect System](../gameplay/BLOOD_ASPECTS.md) and [Current Design Questions](../_meta/OPEN_QUESTIONS.md).
+An Aspect should not become merely the attack, dash, parry, ranged, or deathblow build. All Aspects should remain capable of supporting upgrades to every core combat behavior while favoring different combinations, situations, and tradeoffs.
+
+The launch count, candidate identities, post-unlock weapon foundation, Tier structure, Blood model, and individual mechanics are not locked. See [Blood Aspect System](../gameplay/BLOOD_ASPECTS.md) and [Current Design Questions](../_meta/OPEN_QUESTIONS.md).
 
 ## Run-build philosophy
 
 - Base combat and player skill remain primary.
-- The final Blood Aspect system, if retained, should provide a major run identity without replacing the sword kit.
-- Techniques provide limited horizontal customization.
+- The final Blood Aspect system, if retained, should provide a major run identity from Tier 0 while preserving a shared readable combat language.
+- The post-unlock attack foundation may vary by Aspect; it is not yet locked to one unchanged katana moveset or to multiple independent weapon classes.
+- Techniques provide limited horizontal customization across the full combat kit.
 - Most Techniques are independently useful and synergize through shared combat verbs rather than exact prerequisite combinations.
 - Refinements are shallow: one base Technique may receive one slotless refinement.
 - A full Technique inventory does not exist; the single reserve provides controlled adaptation.
-- Run power should deepen sword combat rather than replace it with automatic damage or screen-filling effects.
+- Run power should deepen active combat rather than replace it with automatic damage or screen-filling effects.
 - Repeated successful clears are a roguelite mastery objective supported by build experimentation, routing, progression, and execution rather than six separate story missions.
 
 ## Encounter and boss direction
