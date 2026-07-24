@@ -27,59 +27,111 @@ related:
 
 # Blood Aspect System
 
-## Design status
+## Approved foundation at the current scoping depth
 
-The Blood Aspect system is under reevaluation.
+The following direction is approved:
 
-The repository does not currently approve:
+- the player selects one Blood Aspect as a major run foundation,
+- the selected Aspect creates an immediate run identity at Tier 0,
+- the current launch scope contains three Aspects,
+- all Aspects use the complete attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
+- no Aspect is defined only as the attack, dash, parry, ranged, or deathblow build,
+- identities come from connected differences across the combat foundation,
+- the universal defensive and execution language remains shared and readable,
+- and the preferred weapon direction is one physical katana expressed through Aspect-specific Blood combat forms.
 
-- a fixed launch count,
-- Wolf, Wraith, and Ronin as the final roster,
-- the exact identity of any candidate Aspect,
-- whether Akio uses only one unchanged weapon foundation after Aspects unlock,
-- whether Aspects alter the katana through Blood forms or use broader weapon foundations,
+Three is the current production and design baseline, not a permanent ceiling. A fourth or later Aspect is deferred until playable testing demonstrates a meaningful missing combat identity that cannot be handled by the approved three, Techniques, or prosthetics.
+
+The approved weapon direction does not lock exact forms, animation counts, ranges, attack chains, or statistics. Those remain part of identity design and later testing.
+
+## Current unresolved status
+
+This file remains a draft because the repository does not yet approve:
+
+- Wolf, Wraith, and Ronin as the final three identities,
+- the exact fantasy or combined combat pattern of any candidate,
+- the exact attack or Blood-weapon foundation of any candidate,
+- relative range, rhythm, coverage, commitment, recovery, damage, or posture tradeoffs,
 - the Tier 0-IV structure,
 - Blood unlocking at Tier II,
 - one Blood Art per Aspect,
 - the drawback-family model,
 - or the exact relationship between Aspects, Corruption, Shrines, Techniques, trials, and persistent progression.
 
-Wolf, Wraith, and Ronin remain useful working candidates. Their existing descriptions may be retained, revised, renamed, combined, replaced, or cut.
+Wolf, Wraith, and Ronin remain the three working candidates. They may be retained, revised, renamed, combined, or replaced during the identity pass.
 
 The amount of detail in a draft does not make it approved.
 
-## Current design objective
+## System purpose
 
-Determine whether Blood Aspects should remain the central run specialization through which Akio deliberately shapes Returning Blood.
+Blood Aspects are the central pre-run choice through which Akio shapes Returning Blood into a distinct combat foundation.
 
-A successful system should:
+The selected Aspect should:
 
-- preserve Oathbound's universal posture, parry, block, dodge, deathblow, and prosthetic combat language,
-- allow the selected Aspect to alter Akio's attack or weapon foundation when that creates a stronger run identity,
-- create meaningfully different run identities from Tier 0,
-- support the full combat kit rather than assigning one action exclusively to each Aspect,
-- support several valid Technique builds per identity,
-- remain readable during standard, group, elite, and boss encounters,
+- remain noticeable from the first combat room,
+- matter even when the player does not heavily pursue later Aspect upgrades,
+- preserve Oathbound's posture, parry, block, dodge, deathblow, and prosthetic language,
+- alter Akio's offensive or weapon foundation enough to create a different run identity,
+- support several valid Technique builds,
+- function against standard enemies, groups, elites, and bosses,
 - express increasing supernatural power and risk,
-- and fit the available gameplay, UI, animation, VFX, audio, trial, and progression scope.
+- and remain achievable within gameplay, UI, animation, VFX, audio, trial, and progression scope.
 
-## First approval package: purpose, count, and identities
+## Three-Aspect identity process
 
-Before designing exact mechanics, approve:
+The identity roster is resolved through focused passes rather than one broad question.
 
-1. the system's role in the run build,
-2. whether the player selects one Aspect per run,
-3. the intended launch count,
-4. the final or provisional launch roster,
-5. the player fantasy of each selected identity,
-6. the combined combat pattern each identity creates rather than one action it exclusively rewards,
-7. how each identity uses attacks, defense, movement, posture, deathblows, Techniques, and prosthetics,
-8. how much the selected Aspect changes Akio's Tier 0 weapon or attack foundation,
-9. the risk each identity introduces,
-10. the combat space each identity emphasizes without monopolizing,
-11. and the production distinction required for each identity.
+### Pass 1 — Roster coverage
 
-Three is not currently a locked count.
+Define what the complete roster must cover across:
+
+- player fantasy,
+- attack rhythm,
+- reach and arc coverage,
+- commitment and recovery,
+- movement-to-attack flow,
+- health-damage and posture-pressure profiles,
+- target handling,
+- natural risk,
+- full-kit use,
+- encounter coverage,
+- visual distinction,
+- and production cost.
+
+This pass creates evaluation criteria without designing exact abilities.
+
+### Pass 2 — Candidate definitions
+
+Evaluate Wolf, Wraith, and Ronin individually using the identity template below.
+
+This pass includes how each candidate expresses the shared multidimensional combat foundation. That work is not a separate later question.
+
+### Pass 3 — Overlap and gap audit
+
+Compare all three candidates together.
+
+- identify mechanical and thematic overlap,
+- identify missing launch-critical territory,
+- confirm full-kit use,
+- confirm distinct run identities,
+- preserve Technique and prosthetic build space,
+- and test group, elite, and boss viability at the concept level.
+
+A gap should first be addressed by revising or replacing one of the three candidates. It does not automatically justify adding a fourth.
+
+### Pass 4 — Roster revision
+
+Retain, revise, rename, combine, or replace candidates as required by the audit.
+
+### Pass 5 — Identity approval
+
+Approve:
+
+- one concise identity row for each of the three Aspects,
+- the shared-versus-Aspect-specific combat-foundation boundary,
+- and the production distinction required for each identity.
+
+Exact Tiers, Blood generation, Blood Arts, and candidate mechanics follow after this approval.
 
 ## Identity evaluation template
 
@@ -87,22 +139,20 @@ Each proposed Aspect should answer:
 
 - **Fantasy:** What form of controlled Returning Blood is Akio expressing?
 - **Combat identity:** What combined decisions does it change during ordinary combat?
-- **Foundation change:** Does it alter attack rhythm, reach, coverage, commitment, recovery, movement flow, damage profile, posture profile, weapon form, or another foundational property?
+- **Foundation change:** How does it alter rhythm, reach, coverage, commitment, recovery, movement flow, damage profile, posture profile, target handling, or weapon form?
 - **Full-kit use:** How does it use attacks, parries, blocks, dodges, posture pressure, deathblows, Techniques, and prosthetics?
 - **Emphasis:** Which combinations or situations does it favor without making other core actions irrelevant?
-- **Risk:** What danger or limitation belongs naturally to that identity?
+- **Risk:** What danger or limitation belongs naturally to the identity?
 - **Encounter coverage:** How does it function against groups, elites, and bosses?
 - **Build space:** What related mechanics remain available for Techniques and prosthetics?
 - **Visual identity:** How is it readable without unnecessary production duplication?
 - **Production cost:** What unique UI, animation, VFX, and audio does it require?
 
-An Aspect should not be approved only because its theme is appealing or because it strongly modifies one input. It must create a distinct and sustainable combat pattern using the complete game.
+An Aspect should not be approved only because its theme is appealing or because it strongly modifies one input. It must create a sustainable combat pattern using the complete game.
 
 ## Cross-behavior requirement
 
-An Aspect must not collapse into a label such as the attack build, dash build, parry build, ranged build, or deathblow build.
-
-All approved Aspects should remain capable of meaningfully using:
+All three Aspects must meaningfully support:
 
 - the complete attack foundation,
 - parry and block,
@@ -111,42 +161,42 @@ All approved Aspects should remain capable of meaningfully using:
 - Techniques,
 - and the equipped prosthetic.
 
-An Aspect may favor certain combinations, timings, ranges, risks, or tactical situations. It should not make one core behavior its only meaningful route or reserve an entire core action family for itself.
+An Aspect may favor certain combinations, timings, ranges, risks, or tactical situations. It must not make one core behavior its only meaningful route or reserve an entire action family for itself.
 
-Techniques may upgrade all core combat behaviors under every Aspect. Affinity or synergy should change value and expression, not determine whether a behavior is available.
+Techniques may upgrade all core combat behaviors under every Aspect. Affinity or synergy may change value and expression, but it does not determine whether a behavior is available.
 
 ## Tier 0 foundation-change boundary
 
-Selecting an Aspect at Tier 0 should immediately change the run identity before any Shrine upgrade, Blood Art, or Technique is acquired.
+Selecting an Aspect at Tier 0 must change the run before any Shrine upgrade, Blood Art, or Technique is acquired.
 
-The identity may change several connected dimensions, including:
+An identity may change several connected dimensions:
 
 - attack-chain rhythm,
-- effective range or arc coverage,
+- effective range and arc coverage,
 - commitment and recovery,
 - movement-to-attack flow,
 - target handling,
 - health-damage versus posture-pressure profile,
 - weapon appearance or Blood-formed extension,
-- and contextual properties of the universal combat actions.
+- and contextual properties of universal combat actions.
 
-The current preferred scope direction is a shared universal defensive and execution framework with meaningful Aspect-specific offensive foundations. This could use one physical katana expressed through different Blood forms, but a broader weapon structure is not ruled out until the roster and production audit are complete.
+The shared parry, block, dodge, posture, deathblow, prosthetic, input, and enemy-response language should remain recognizable across all Aspects.
 
-Tier 0 should not replace every animation, input, or rule. The player should retain enough shared language that enemies, bosses, Techniques, and tutorials do not require separate games for each Aspect.
+Tier 0 should not replace every animation, input, or rule. The Aspects should feel like three distinct combat foundations within Oathbound, not three unrelated games.
 
-Relative differences in damage, posture pressure, range, speed, and recovery may be appropriate when they support the identity. They should be balanced as tradeoffs rather than making one Aspect a direct statistical upgrade. Exact values remain playtest work.
+Relative differences in damage, posture pressure, range, speed, and recovery are appropriate when they support identity. They must function as tradeoffs rather than direct statistical upgrades. Exact values remain playtest work.
 
 ## Working structural candidate — not approved
 
-The previous design used this shared structure:
+The previous design used:
 
-- **Tier 0:** one persistent signature mechanic with no meaningful drawback.
-- **Tier I:** strengthens the signature and introduces one coherent drawback family.
-- **Tier II:** unlocks run-only Blood and one activatable Blood Art.
-- **Tier III:** deepens the established specialization.
+- **Tier 0:** one persistent signature mechanic with no meaningful drawback,
+- **Tier I:** strengthens the signature and introduces one coherent drawback family,
+- **Tier II:** unlocks run-only Blood and one activatable Blood Art,
+- **Tier III:** deepens the established specialization,
 - **Tier IV:** provides an optional capstone with the strongest form of the same risk.
 
-Additional working rules were:
+Additional working rules included:
 
 - one headline improvement and at most one minor supporting rule per Tier,
 - no new Aspect resource, input, or second Blood Art after Tier II,
@@ -156,7 +206,7 @@ Additional working rules were:
 - Resist as stabilization rather than an alternate power path,
 - and no Tier V.
 
-These remain candidates for evaluation. They should not constrain the identity pass if a simpler or stronger structure emerges.
+These remain candidates. They should not constrain the identity pass if a stronger or simpler structure emerges.
 
 ## Working Blood candidate — not approved
 
@@ -169,28 +219,28 @@ The previous design treated Blood as:
 - reset after death or successful completion,
 - and unavailable as a shop, route, Strand, or persistent currency.
 
-Capacity, activation amount, gain rules, room carry, boss behavior, retention, and individual Blood Arts were unresolved.
+Capacity, activation amount, gain rules, room carry, boss behavior, retention, and individual Blood Arts remain unresolved.
 
-Partial activation was deferred until representative playable testing. This remains a reasonable safeguard only if Blood Arts remain in the final system.
+Partial activation remains deferred unless the final system retains Blood Arts and playable testing demonstrates a need.
 
 ## Working candidate identities
 
-The following directions are intentionally incomplete. Their current emphasis does not grant exclusive ownership over an action family.
+These directions are incomplete and do not grant exclusive ownership over an action family.
 
 ### Wolf — candidate
 
 - **Current role direction:** predatory pressure, pursuit, target control, and momentum.
 - **Current fantasy direction:** predatory Returning Blood.
 - **Current pattern direction:** manage priority targets, maintain dangerous pressure, defend while committed, finish openings, and transfer momentum.
-- **Current constraint:** should not collapse into the attack build, generic attack speed, or exclusive ownership of aggressive Techniques.
+- **Current constraint:** must not collapse into the attack build, generic attack speed, or ownership of all aggressive Techniques.
 - **Status:** identity and inclusion are unapproved.
 
 ### Wraith — candidate
 
 - **Current role direction:** spectral spacing, deceptive movement, avoidance, and positional punishment.
 - **Current fantasy direction:** controlled spectral dissolution.
-- **Current pattern direction:** manipulate spacing, evade or defend cleanly, reposition, and convert angle or timing into offense.
-- **Current constraint:** should not collapse into the dash build or claim all movement Techniques and must remain distinct from the Mist Raven prosthetic.
+- **Current pattern direction:** manipulate spacing, defend or evade cleanly, reposition, and convert angle or timing into offense.
+- **Current constraint:** must not collapse into the dash build or claim all movement Techniques and must remain distinct from Mist Raven.
 - **Status:** identity and inclusion are unapproved.
 
 ### Ronin — candidate
@@ -198,64 +248,65 @@ The following directions are intentionally incomplete. Their current emphasis do
 - **Current role direction:** adaptable sword mastery, exchange control, posture management, counters, and deliberate offense.
 - **Current fantasy direction:** Returning Blood reinforcing trained martial control.
 - **Current pattern direction:** read the encounter, shift between pressure and defense, create openings, counter or execute, and maintain control.
-- **Current constraint:** should not collapse into the parry build or feel like a basic or intentionally weaker default.
+- **Current constraint:** must not collapse into the parry build or feel like a basic or intentionally weaker default.
 - **Status:** identity and inclusion are unapproved.
 
 ## Technique relationship boundary
 
-Until the Aspect roster and identities are approved:
+Until the three identities are approved:
 
-- do not populate the Technique catalog around Wolf, Wraith, or Ronin as fixed launch identities,
+- do not populate the Technique catalog around Wolf, Wraith, or Ronin as fixed identities,
 - do not reserve major Technique categories for candidate mechanics,
 - do not hard-lock ordinary Techniques to a candidate Aspect,
 - and do not use candidate affinities to approve production counts.
 
-The final Aspect system should preserve independently useful Techniques, full-kit upgrade opportunities, and several valid builds for each selected identity.
+The final system should preserve independently useful Techniques, full-kit upgrade opportunities, and several valid builds for each identity.
 
 ## Permanent progression boundary
 
-Blood Mirror, Blood Cavern, Bloodwell, and unlock plans may reference a future Aspect system, but exact unlocks, mastery trials, permanent upgrades, and interface counts remain blocked by the final system and roster.
+Blood Mirror, Blood Cavern, Bloodwell, and unlock plans may reference the three-Aspect launch scope, but exact unlocks, mastery trials, permanent upgrades, and interface counts remain blocked by the final identities and shared system.
 
 No persistent upgrade should make a run-only Aspect mechanic automatic or remove its intended risk.
 
 ## Design order
 
-1. Approve the system purpose.
-2. Approve the launch count.
-3. Approve the identity roster at fantasy and combined-combat-pattern depth.
-4. Decide the shared-versus-Aspect-specific combat foundation boundary.
-5. Audit identity overlap and production cost.
-6. Approve or revise the shared progression structure.
-7. Design each selected Aspect's exact mechanics.
-8. Approve shared resource, activation, Shrine, and HUD rules.
-9. Finalize Aspect-Technique interaction rules.
-10. Populate Technique coverage and launch counts.
-11. Evaluate optional complexity through playable testing.
+1. Define three-roster coverage criteria.
+2. Define Wolf at fantasy and combined-combat-pattern depth.
+3. Define Wraith at fantasy and combined-combat-pattern depth.
+4. Define Ronin at fantasy and combined-combat-pattern depth.
+5. Audit overlap, gaps, full-kit use, and production cost.
+6. Revise, replace, combine, or rename candidates as needed.
+7. Approve the three-row identity roster and combat-foundation boundary.
+8. Approve or revise the shared progression structure.
+9. Design each selected Aspect's exact mechanics.
+10. Approve shared resource, activation, Shrine, and HUD rules.
+11. Finalize Aspect-Technique interaction rules.
+12. Populate Technique coverage and launch counts.
+13. Reconsider additional Aspects only after playable testing demonstrates a missing identity.
 
 ## Approval tests
 
 The roster is not ready unless:
 
-- every selected Aspect owns a distinct player fantasy and combined combat decision pattern,
-- the launch count supports replayability without exceeding production scope,
+- all three identities own distinct fantasies and combined combat patterns,
 - no identity is merely a stronger or weaker version of another,
 - no identity is reducible to one core action,
 - all identities preserve meaningful attack, defense, movement, posture, deathblow, Technique, and prosthetic play,
 - Tier 0 creates a noticeable run identity,
 - the universal combat framework remains readable and teachable,
 - Techniques and prosthetics retain meaningful territory,
-- each identity can function against groups, elites, and bosses,
+- each identity functions against groups, elites, and bosses,
 - and the roster can be communicated clearly through gameplay and presentation.
 
 An individual Aspect is not ready for exact Tier or Blood Art approval until its identity passes the roster-level audit.
 
 ## Visual and weapon-production direction
 
-The previous preferred direction used one base Akio animation set with modular eyes, markings, weapon treatments, auras, trails, and composable overlays where possible.
+The current approved scoping direction uses one physical katana expressed through three Aspect-specific Blood combat forms over a shared defensive and execution framework.
 
-A current working option is one physical katana with Aspect-specific Blood forms, attack variants, ranges, rhythms, and effects layered over a shared defensive and execution framework.
+Exact attack variants, ranges, rhythms, effects, animation reuse, overlays, and production counts remain open until the identities are approved.
 
-This is a production-aware candidate, not a locked restriction. If a broader weapon foundation creates substantially better run identities, it should be evaluated against animation, Technique, enemy-readability, tutorial, balance, and content costs before approval.
+Reuse Akio's base animation, input, defensive, execution, and enemy-response language where practical. Add Aspect-specific offensive animation, VFX, audio, and weapon treatment only where required to create a genuinely distinct run identity.
 
 ## Related documents
 
