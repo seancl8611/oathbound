@@ -13,7 +13,7 @@ This file contains unresolved decisions that materially change release scope, pr
 
 ## Priority order
 
-1. Three-Aspect identity roster
+1. Three-Aspect identity roster and Technique compatibility
 2. Shared Aspect structure and selected Aspect packages
 3. Launch run-build content catalog
 4. Persistent progression, onboarding, and trial package
@@ -29,15 +29,38 @@ The current launch-scoping direction is approved at this depth:
 - the launch scope currently assumes three Aspects,
 - all Aspects use the complete attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
 - identities are multidimensional rather than assigned to one core action,
-- and the preferred weapon direction is one physical katana expressed through different Blood combat forms over a shared defensive and execution framework.
+- and the weapon direction is one physical katana expressed through different Blood combat forms over a shared defensive and execution framework.
 
 Three is the current production baseline, not a permanent ceiling. A fourth or later Aspect should not be added during the current paper-design pass. Reconsider expansion only after playable testing demonstrates a meaningful missing combat identity that cannot be covered by the approved three or by Techniques and prosthetics.
 
-## 1. Three-Aspect identity roster
+## Resolved Aspect-Technique responsibility contract
+
+Aspects and Techniques are both major run-build layers with different responsibilities.
+
+- **Aspect:** the pre-run, always-present combat foundation and immediate Tier 0 identity.
+- **Techniques:** four limited, replaceable in-run modifications plus one inactive reserve.
+- The Aspect may broadly change rhythm, range, coverage, commitment, recovery, movement flow, target handling, damage-versus-posture profile, and Blood-weapon expression.
+- A Technique modifies a specific action, condition, transition, payoff, resource interaction, or tactical option within that foundation.
+- An Aspect must function before any Technique is acquired.
+- An ordinary Technique must function with every Aspect.
+- Ordinary Techniques are not hard-locked to an Aspect or minimum Tier.
+- Affinity represents amplification rather than eligibility.
+- Most synergy should emerge through shared combat verbs instead of bespoke per-Aspect versions of every Technique.
+
+A Technique loadout may intentionally:
+
+1. reinforce an Aspect's strengths,
+2. broaden it into adjacent options,
+3. compensate for a weakness at the cost of a slot,
+4. or hybridize it into an unusual but coherent build.
+
+Direct Aspect-, Blood-, or Tier-referencing Techniques remain possible only as limited explicit exceptions after the roster and shared structure are approved.
+
+## 1. Three-Aspect identity roster and Technique compatibility
 
 Wolf, Wraith, and Ronin are the current working candidates for the three available roster positions. Their inclusion, names, fantasies, combat patterns, risks, and exact foundation changes remain unapproved.
 
-The roster decision is a sequence of focused passes rather than one oversized question:
+The roster decision is a sequence of focused passes rather than one oversized question.
 
 ### Pass 1 — Roster coverage
 
@@ -50,9 +73,17 @@ Define what the complete three-Aspect roster must cover across:
 - natural risk-and-reward patterns,
 - full-kit use,
 - visual distinction,
-- and production cost.
+- production cost,
+- and Technique build space.
 
-This pass defines the comparison criteria. It does not invent exact mechanics.
+For Technique compatibility, each identity must support multiple valid ways to:
+
+- reinforce its strengths,
+- broaden its options,
+- compensate for a weakness,
+- and hybridize its foundation.
+
+This pass defines comparison criteria. It does not invent exact mechanics or Technique entries.
 
 ### Pass 2 — Candidate identity definitions
 
@@ -63,10 +94,11 @@ Evaluate Wolf, Wraith, and Ronin one at a time. For each candidate, define:
 - the offensive-foundation changes that make it immediately recognizable,
 - how it uses attacks, defense, movement, posture, deathblows, Techniques, and prosthetics,
 - the situations and combinations it emphasizes without monopolizing one action,
+- how Techniques can reinforce, broaden, compensate, and hybridize it,
 - its natural risk,
 - and its group, elite, and boss viability.
 
-This pass includes how each candidate expresses the multidimensional foundation. That is not a separate later question.
+This pass includes how each candidate expresses the multidimensional foundation and interacts with the general Technique concept. Those are not separate later questions.
 
 ### Pass 3 — Roster overlap and gap audit
 
@@ -75,6 +107,7 @@ Compare the three candidates together:
 - identify mechanical or thematic overlap,
 - identify any missing launch-critical combat territory,
 - confirm that each candidate remains useful with the full combat kit,
+- confirm several distinct four-Technique build shapes per candidate,
 - confirm that Techniques and prosthetics retain meaningful build space,
 - and determine whether the candidates are sufficiently distinct for repeated runs.
 
@@ -86,9 +119,13 @@ Retain, revise, rename, combine, or replace candidates as required by the audit.
 
 ### Pass 5 — Identity approval
 
-Approve a concise three-row roster table and the shared-versus-Aspect-specific combat-foundation boundary.
+Approve:
 
-Only after this pass should exact Tiers, Blood generation, Blood Arts, candidate mechanics, or candidate-specific production packages be treated as final.
+- a concise three-row roster table,
+- the shared-versus-Aspect-specific combat-foundation boundary,
+- and the expected Technique build directions for each identity.
+
+Only after this pass should exact Tiers, Blood generation, Blood Arts, candidate mechanics, detailed affinities, or candidate-specific production packages be treated as final.
 
 ## 2. Shared Aspect structure and selected Aspect packages
 
@@ -109,6 +146,8 @@ Decide:
 - how every package continues to support the full combat kit,
 - cross-Aspect distinction and overlap,
 - relative attack, range, posture, speed, recovery, and coverage tradeoffs,
+- detailed affinity and offer-weighting rules,
+- whether any direct Aspect-, Blood-, or Tier-referencing Technique exceptions ship,
 - and required input, HUD, animation, VFX, audio, trial, and progression states.
 
 Exact damage, posture, speed, range, gain-rate, threshold, and duration values remain playtest work. The behavioral and relative tradeoff direction must be approved before production counts are locked.
@@ -125,7 +164,7 @@ Decide:
 
 - approximate base Technique count and broad combat-role distribution,
 - how many Techniques support one refinement,
-- how many entries may interact with the approved Aspect system,
+- how many entries may directly reference the approved Aspect system,
 - temporary Prosthetic Technique count per equipped tool,
 - initial Relic count and approximate rarity distribution,
 - whether consumables are included at launch,
@@ -135,10 +174,10 @@ Before approving counts, complete:
 
 1. the approved three-Aspect identity roster and combat-foundation boundary,
 2. the approved shared Aspect structure and individual packages,
-3. a cross-system overlap audit,
-4. Technique category, tag, affinity, and rarity rules,
-5. the refinement standard,
-6. Aspect-Technique interaction rules,
+3. detailed affinity, weighting, and direct-exception rules,
+4. a cross-system overlap audit,
+5. Technique category, tag, and rarity rules,
+6. the refinement standard,
 7. and the launch coverage matrix in `gameplay/TECHNIQUE_CATALOG.md`.
 
 ## 4. Persistent progression, onboarding, and trial package
@@ -188,6 +227,8 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 ## Deferred gameplay and implementation decisions
 
 - fourth or later Blood Aspects before playable roster testing demonstrates a missing identity,
+- individual Technique concepts and final catalog counts before the Aspect roster and shared structure are approved,
+- exact affinity weights and reward probabilities,
 - exact room counts and route topology,
 - miniboss placement,
 - exact enemy and boss movesets,
