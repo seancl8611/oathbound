@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-23
 ---
 
 # Production Roadmap
@@ -27,19 +27,21 @@ Complete the remaining Area 1 roster, both designed minibosses, Keeper of the Ga
 
 Exact room counts, branch frequency, and miniboss run frequency are not quotation blockers for the modular Area 1 package. They remain prototype and playtest decisions unless they create additional asset requirements.
 
-Final Blood Aspect VFX, complete Tier I–IV mutation overlays, and final Technique presentation remain deferred to Milestone 4.
+Final Blood Aspect VFX, mutation overlays, and final Technique presentation remain deferred to Milestone 4. Their exact scope depends on the approved Aspect system and roster.
 
 ## Milestone 3 — The Strand
 
 Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
 
-The final number of progression nodes, training experiences, trials, unlock flows, and mastery states depends on the approved persistent progression, onboarding, and trial package.
+The final number of progression nodes, training experiences, trials, unlock flows, Aspect-specific services, and mastery states depends on the approved Aspect system and the persistent progression, onboarding, and trial package.
 
 ## Milestone 4 — Player combat depth and run-build expression
 
-Complete Wolf, Wraith, and Ronin VFX identities, modular mutation overlays, eight prosthetic families, Technique reward and build interfaces, reusable Technique icon and card language, approved Technique combat-feedback needs, Relic presentation, and broad currency, pickup, breakable, and reward-object art.
+Complete the approved Blood Aspect roster's VFX identities, modular mutation treatment where required, eight prosthetic families, Technique reward and build interfaces, reusable Technique icon and card language, approved Technique combat-feedback needs, Relic presentation, and broad currency, pickup, breakable, and reward-object art.
 
-Final unique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
+Wolf, Wraith, and Ronin are working candidates rather than a fixed production commitment. Final Aspect family count, unique effects, overlays, icons, and animation needs require approval of the system purpose, launch count, identity roster, and individual packages.
+
+Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
 ## Milestone 5 — Complete Area 2
 
@@ -67,6 +69,7 @@ The core story and lore are approved. Final quotation depends on the authored-co
 
 - Character concepts and key poses precede specialized VFX.
 - Base character art precedes mutation overlays.
+- The Blood Aspect roster and identity package must be approved before quoting final Aspect-specific production.
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.
