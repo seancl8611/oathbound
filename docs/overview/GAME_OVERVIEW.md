@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 topics:
   - project-identity
   - combat
@@ -71,17 +71,15 @@ The player should feel like a trained hunter entering a fallen kingdom with only
 
 Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
 
-Across a standard run, the player grows from the complete base sword kit into a specialized late-run build. The selected Blood Aspect defines the central identity; limited Techniques refine how that identity uses Akio's sword, movement, executions, resources, and prosthetic.
+Across a standard run, the player grows from the complete base sword kit into a specialized late-run build. The exact role, count, identities, and structure of Blood Aspects are currently being reevaluated. Techniques remain the working horizontal customization layer around the approved base combat.
 
-## Locked gameplay snapshot
+## Approved gameplay snapshot
 
 - Introductory first attempt using the base sword kit without active Blood powers
 - First death awakens dormant inherited Beast Blood and reconstructs Akio at the Strand
 - Base katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
 - Core combat: parry, posture, stagger, deathblow, block, dash, and prosthetic-tool support
-- Central post-unlock run identity: Wolf, Wraith, or Ronin Blood Aspect
-- Run-only Corruption meter and Shrine Resist/Embrace decision
-- Fixed Blood Aspect Tier 0–IV escalation with increasing benefit, drawback, and mutation
+- Run-only build growth through temporary choices
 - Technique system: four active temporary Techniques, one inactive reserve, and at most one refinement per Technique
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
 - Persistent hub systems: Bloodwell, Blood Mirror, Boat, Forge, Merchant, Discovery Board, and training services
@@ -92,9 +90,22 @@ Across a standard run, the player grows from the complete base sword kit into a 
 - Destroying the Heart ends the curse, stops the Shogun's reconstruction, kills the corrupted population as their sustained bodies fail, ends Returning Blood, and makes Akio mortal
 - Completed saves retain repeatable normal runs and optional access to the Heart route without further story progression
 
+## Working Blood Aspect direction — not approved
+
+The current working draft proposes:
+
+- one selected Blood Aspect as a major run specialization,
+- a launch roster currently represented by Wolf, Wraith, and Ronin candidates,
+- Corruption and Shrine Resist/Embrace choices,
+- Tier-based escalation,
+- and an activatable Blood Art supported by a run-only Blood resource.
+
+The launch count, candidate identities, Tier structure, Blood model, and individual mechanics are not locked. See [Blood Aspect System](../gameplay/BLOOD_ASPECTS.md) and [Current Design Questions](../_meta/OPEN_QUESTIONS.md).
+
 ## Run-build philosophy
 
-- Blood Aspects provide vertical risk-and-power progression.
+- Base combat and player skill remain primary.
+- The final Blood Aspect system, if retained, should provide a major run identity without replacing the sword kit.
 - Techniques provide limited horizontal customization.
 - Most Techniques are independently useful and synergize through shared combat verbs rather than exact prerequisite combinations.
 - Refinements are shallow: one base Technique may receive one slotless refinement.
