@@ -4,12 +4,13 @@ title: Corruption and Shrines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 topics:
   - corruption
   - shrine
   - resist
   - embrace
+  - stabilize
   - blood-aspects
 related:
   - LORE-RETURNING-BLOOD
@@ -22,101 +23,92 @@ related:
 
 # Corruption and Shrines
 
-Corruption represents the run-only accumulation and pressure of Returning Blood. It is tied to controlled mutation and Shrine decisions; it is not a morality score, currency, or Technique resource.
-
-## System role
-
-Corruption and Shrines control the vertical escalation of the selected Blood Aspect. Techniques are acquired through the separate room-reward framework and provide horizontal build customization.
-
-Shrines should remain focused on the Blood Aspect decision rather than also functioning as ordinary Technique reward rooms.
+Corruption is the run-only pressure of Returning Blood. It controls Shrine-ready states and Aspect Tier advancement; it is not morality, currency, Blood Art charge, or a Technique resource.
 
 ## Corruption gain
 
-The current v1 sources are combat accomplishment and progression events:
+Current sources are combat accomplishment and progression events:
 
-- kills,
-- elite kills,
+- kills and elite kills,
 - successful parries,
 - posture breaks,
 - deathblows,
 - miniboss progress,
 - boss progress.
 
-Taking damage is not a universal Corruption source in v1.
-
-Exact gain values, weighting, and threshold pacing remain balance variables.
+Taking damage is not a universal source. Exact gain values and pacing remain balance variables.
 
 ## Shrine-ready state
 
-When Corruption reaches full, the player receives a clear but non-disruptive indication that a Shrine decision is available. Full Corruption should not interrupt combat or compete with low-health, posture-break, or deathblow warnings.
+At full Corruption, the player receives a clear non-disruptive indication that a Shrine decision is available.
 
 ## Resist
 
-Resist represents Akio stabilizing Returning Blood without permitting another Tier mutation.
+Resist stabilizes Returning Blood without advancing the Aspect.
 
-Current rule:
-
-- remain at the current Blood Aspect Tier,
+- keep the current Tier,
 - reduce Corruption to approximately 75%,
-- receive a short-term support reward such as healing or Spirit recovery,
-- communicate containment, restraint, and reduced pressure.
+- receive approved immediate support such as Health or Spirit recovery,
+- remain eligible to Embrace later.
 
-The exact reduction percentage and support table may be tuned, but Resist does not advance Tier or grant a normal Technique selection.
+Resist may be used to stabilize a difficult run, remain at a preferred Tier, postpone a conflicting drawback, or delay Tier IV. Repeated Resist choices do not stack permanent power, improve the Blood Art, remove the active drawback, or become an alternate upgrade path.
+
+The exact reduction and support table remain tuning work.
 
 ## Embrace
 
-Embrace permits Returning Blood to advance.
+Embrace advances the selected Aspect by one fixed Tier, up to Tier IV.
 
-Current rule:
+- empty Corruption,
+- apply the new headline benefit immediately,
+- replace the previous drawback wording with the complete drawback for the new Tier,
+- communicate controlled danger rather than a morality choice.
 
-- increase the active Blood Aspect by one Tier, up to Tier IV,
-- empty the Corruption meter,
-- apply the new benefit and drawback immediately,
-- communicate controlled danger rather than uncontrolled explosion.
+Each Tier has one headline improvement and at most one minor supporting rule. Drawbacks evolve within one Aspect-specific family rather than accumulating as unrelated penalties.
 
-Embrace does not consume or create a Technique slot. It amplifies the build through the selected Aspect's fixed Tier progression.
+## Maximum Tier: Stabilize
 
-## Shrine behavior when Corruption is not full
+There is no Tier V. Corruption may continue filling at Tier IV so the Shrine loop remains relevant.
 
-A Shrine room must still provide normal support so it never feels dead. The support may include:
+At full Corruption while already at Tier IV:
+
+- Embrace is unavailable,
+- the Shrine presents **Stabilize**,
+- Stabilize reduces Corruption and grants approved support,
+- and no additional Aspect power, Blood Art, Tier, or permanent scaling is awarded.
+
+## Shrine support below full Corruption
+
+A Shrine encountered below full Corruption provides approved support such as:
 
 - Health recovery,
 - Spirit recovery,
 - a small stabilizing benefit,
-- another approved support result from the Shrine table.
+- or another approved Shrine-table result.
 
-It should not normally present a three-card Technique offer. Exceptional narrative or scripted events require explicit documentation rather than using ordinary Shrine ownership.
+Shrines do not normally present ordinary Technique selections.
 
 ## Run behavior
 
-- The player confirms an unlocked Aspect before departure at the Boat.
-- The run begins at Tier 0.
-- Tier changes occur during the run through Shrine Embrace choices.
-- The selected Aspect remains available between runs, but its Tier resets after death or successful completion.
-- Corruption and temporary Tier state are burned away during death, return, or Wellspring sacrifice.
-- Active and reserve Techniques reset separately under the Technique system.
-
-## System ownership
-
-- **Blood Mirror:** unlocks, teaches, previews, tests, and lightly improves Aspects.
-- **Boat:** equips or confirms the selected Aspect before a run.
-- **Shrine:** handles in-run Resist/Embrace Tier decisions and ordinary Shrine support.
-- **Technique reward framework:** owns new Techniques, replacements, refinements, and reserve decisions.
-- **Bloodwell:** owns broader permanent meta progression and does not replace the Shrine Tier loop.
+- Select an unlocked Aspect at the Boat.
+- Begin at Tier 0.
+- Advance only through Shrine Embrace choices.
+- Reset Corruption and temporary Tier state after death or successful completion.
+- Technique and Blood state reset under their owning systems.
 
 ## Presentation requirements
 
-- Resist and Embrace must be distinguishable before text is read.
-- Current Aspect, current Tier, next benefit, and next drawback must be legible.
-- Resist should feel controlled and stabilizing, not merely like a weaker Embrace.
-- Embrace should feel more forceful and dangerous without becoming a generic evil option.
-- Shared Shrine effects may be produced before final Aspect-specific VFX, but should avoid prematurely locking the final Wolf, Wraith, or Ronin identity.
-- The Shrine interface should not resemble the Technique card-selection screen.
+- Resist, Embrace, and Stabilize must be distinguishable before text is read.
+- Show current Aspect, current Tier, next headline benefit, and complete next drawback.
+- The player must not combine historical Tier descriptions to understand the active state.
+- Resist should feel controlled and stabilizing.
+- Embrace should feel forceful and dangerous without appearing generically evil.
+- The Shrine interface must remain distinct from Technique card selection.
 
-## Balance variables still open
+## Open balance variables
 
-- exact Corruption gain values,
-- exact full-meter threshold and pacing,
-- final Resist percentage and support-reward table,
-- final benefit/drawback values for every Tier,
-- Shrine frequency across a full run.
+- Corruption gain and threshold pacing,
+- Shrine frequency,
+- Resist and Stabilize reduction values,
+- support-reward tables,
+- exact benefit and drawback values for each Aspect Tier.
