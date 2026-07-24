@@ -19,8 +19,12 @@ Authoritative player-facing mechanics and system rules belong here.
 
 The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain later prototype and playtest decisions rather than top-level scope questions.
 
+The Blood Aspect system is currently a draft. Three is not a locked launch count, and Wolf, Wraith, and Ronin are working candidates rather than an approved roster.
+
 Current production-level gameplay dependencies tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
 
+- Blood Aspect system purpose, count, and identity roster,
+- shared Aspect structure and selected Aspect packages,
 - launch run-build content catalog,
 - persistent progression, onboarding, and trial package,
 - postgame release package.
