@@ -71,7 +71,7 @@ The player should feel like a trained hunter entering a fallen kingdom with a co
 
 Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
 
-Across a standard run, the player grows from the approved introductory sword foundation into a specialized late-run build. The exact role, count, identities, weapon expression, attack foundations, and progression structure of Blood Aspects are currently being reevaluated. Techniques remain the working horizontal customization layer around the universal combat framework.
+After Returning Blood awakens, the player selects one of three Blood Aspects as the run's immediate combat foundation. Each Aspect keeps Oathbound's shared defensive and execution language while expressing the katana through a different Blood combat form. Techniques then customize the full combat kit around that foundation.
 
 ## Approved gameplay snapshot
 
@@ -79,6 +79,10 @@ Across a standard run, the player grows from the approved introductory sword fou
 - First death awakens dormant inherited Beast Blood and reconstructs Akio at the Strand
 - Introductory base katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
 - Universal combat language: parry, posture, stagger, deathblow, block, dash, and prosthetic-tool support
+- One selected Blood Aspect creates an immediate Tier 0 run identity
+- Current launch scope: three Blood Aspects
+- One physical katana expressed through Aspect-specific Blood combat forms over a shared defensive and execution framework
+- All Aspects use the complete attack, defense, movement, posture, deathblow, Technique, and prosthetic framework
 - Run-only build growth through temporary choices
 - Technique system: four active temporary Techniques, one inactive reserve, and at most one refinement per Technique
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
@@ -90,28 +94,29 @@ Across a standard run, the player grows from the approved introductory sword fou
 - Destroying the Heart ends the curse, stops the Shogun's reconstruction, kills the corrupted population as their sustained bodies fail, ends Returning Blood, and makes Akio mortal
 - Completed saves retain repeatable normal runs and optional access to the Heart route without further story progression
 
-## Working Blood Aspect direction — not approved
+## Blood Aspect identity work still open
 
-The current working draft proposes:
+Wolf, Wraith, and Ronin currently occupy the three working roster positions, but their final inclusion and identities are not approved.
 
-- one selected Blood Aspect as a major run specialization,
-- a launch roster currently represented by Wolf, Wraith, and Ronin candidates,
-- an immediate Tier 0 change to run identity,
-- multidimensional identities that use the full attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
-- possible Aspect-specific attack rhythms, ranges, coverage, commitment, recovery, damage or posture profiles, and Blood weapon forms,
-- Corruption and Shrine Resist/Embrace choices,
-- Tier-based escalation,
-- and an activatable Blood Art supported by a run-only Blood resource.
+The identity pass must determine:
 
-An Aspect should not become merely the attack, dash, parry, ranged, or deathblow build. All Aspects should remain capable of supporting upgrades to every core combat behavior while favoring different combinations, situations, and tradeoffs.
+- the fantasy and combined combat pattern of each candidate,
+- the attack rhythm, range, coverage, commitment, recovery, movement flow, damage, posture, target-handling, and weapon-expression differences that create each run identity,
+- how each candidate uses the full combat kit,
+- the natural risk belonging to each identity,
+- and whether the three candidates remain distinct when compared together.
 
-The launch count, candidate identities, post-unlock weapon foundation, Tier structure, Blood model, and individual mechanics are not locked. See [Blood Aspect System](../gameplay/BLOOD_ASPECTS.md) and [Current Design Questions](../_meta/OPEN_QUESTIONS.md).
+An Aspect cannot become merely the attack, dash, parry, ranged, or deathblow build. Every Aspect must remain capable of supporting upgrades to every core combat behavior while favoring different combinations, situations, and tradeoffs.
+
+A fourth or later Aspect is outside the current paper-design scope. Reconsider expansion only after playable testing demonstrates a missing combat identity that cannot be covered by the three approved identities, Techniques, or prosthetics.
+
+The exact candidate identities, attack foundations, Tier structure, Blood model, and individual mechanics remain open. See [Blood Aspect System](../gameplay/BLOOD_ASPECTS.md) and [Current Design Questions](../_meta/OPEN_QUESTIONS.md).
 
 ## Run-build philosophy
 
 - Base combat and player skill remain primary.
-- The final Blood Aspect system, if retained, should provide a major run identity from Tier 0 while preserving a shared readable combat language.
-- The post-unlock attack foundation may vary by Aspect; it is not yet locked to one unchanged katana moveset or to multiple independent weapon classes.
+- The selected Blood Aspect provides a major run identity from Tier 0 while preserving a shared readable combat language.
+- Aspect-specific Blood combat forms may vary attack rhythm, reach, coverage, commitment, recovery, damage, posture pressure, movement flow, and target handling.
 - Techniques provide limited horizontal customization across the full combat kit.
 - Most Techniques are independently useful and synergize through shared combat verbs rather than exact prerequisite combinations.
 - Refinements are shallow: one base Technique may receive one slotless refinement.
