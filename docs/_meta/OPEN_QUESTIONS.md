@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-07-25
 ---
 
 # Current Design Questions
@@ -47,60 +47,66 @@ Aspects and Techniques are both major run-build layers with different responsibi
 - Affinity represents amplification rather than eligibility.
 - Most synergy should emerge through shared combat verbs instead of bespoke per-Aspect versions of every Technique.
 
-A Technique loadout may intentionally:
-
-1. reinforce an Aspect's strengths,
-2. broaden it into adjacent options,
-3. compensate for a weakness at the cost of a slot,
-4. or hybridize it into an unusual but coherent build.
+A Technique loadout may intentionally reinforce an Aspect's strengths, broaden it into adjacent options, compensate for a weakness at the cost of a slot, or hybridize it into an unusual but coherent build.
 
 Direct Aspect-, Blood-, or Tier-referencing Techniques remain possible only as limited explicit exceptions after the roster and shared structure are approved.
 
+## Resolved shared player-kit boundary
+
+The shared-versus-Aspect-specific combat boundary is approved.
+
+### Universal across all Aspects
+
+- inputs and control scheme,
+- block, parry, and base dodge rules,
+- posture, stagger, posture-break, and deathblow rules,
+- Spirit and prosthetic controls,
+- Technique-system rules,
+- enemy telegraphs, responses, and punish logic,
+- and the existence and general purpose of Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash.
+
+Every Aspect retains the complete combat kit. No major action may be removed or made functionally irrelevant.
+
+### Allowed to vary by Aspect at Tier 0
+
+- attack-chain structure and rhythm,
+- reach and arc coverage,
+- forward movement, tracking, commitment, and recovery,
+- movement-to-attack flow,
+- health-damage and posture-pressure profile,
+- target handling,
+- offensive transitions after dodge, parry, block, or deathblow,
+- and the Blood-formed expression of the katana.
+
+These differences must combine into a recognizable offensive foundation rather than one passive bonus or one altered input.
+
+Universal Techniques retain one ruleset across all Aspects. They may feel or perform differently only because the underlying Aspect-specific player action already differs.
+
+Aspect statistics and properties are balanced as tradeoffs. No Aspect should simultaneously own the best speed, range, damage, safety, posture pressure, coverage, and flexibility. Exact values remain playtest work.
+
 ## 1. Three-Aspect identity roster and Technique compatibility
 
-Wolf, Wraith, and Ronin are the current working candidates for the three available roster positions. Their inclusion, names, fantasies, combat patterns, risks, and exact foundation changes remain unapproved.
+Wolf, Wraith, and Ronin are the current working candidates for the three roster positions. Their inclusion, names, fantasies, combat patterns, risks, and exact foundation changes remain unapproved.
 
-The roster decision is a sequence of focused passes rather than one oversized question.
+The roster decision is a sequence of focused passes.
 
-### Pass 1 — Roster coverage
-
-Define what the complete three-Aspect roster must cover across:
-
-- player fantasy,
-- attack rhythm, reach, coverage, commitment, recovery, and movement flow,
-- health-damage and posture-pressure profiles,
-- target handling and encounter approach,
-- natural risk-and-reward patterns,
-- full-kit use,
-- visual distinction,
-- production cost,
-- and Technique build space.
-
-For Technique compatibility, each identity must support multiple valid ways to:
-
-- reinforce its strengths,
-- broaden its options,
-- compensate for a weakness,
-- and hybridize its foundation.
-
-This pass defines comparison criteria. It does not invent exact mechanics or Technique entries.
-
-### Pass 2 — Candidate identity definitions
+### Pass 1 — Candidate identity definitions
 
 Evaluate Wolf, Wraith, and Ronin one at a time. For each candidate, define:
 
 - the controlled Returning Blood fantasy,
 - the combined combat pattern created at Tier 0,
 - the offensive-foundation changes that make it immediately recognizable,
+- how it reinterprets the approved shared core actions,
 - how it uses attacks, defense, movement, posture, deathblows, Techniques, and prosthetics,
 - the situations and combinations it emphasizes without monopolizing one action,
 - how Techniques can reinforce, broaden, compensate, and hybridize it,
 - its natural risk,
 - and its group, elite, and boss viability.
 
-This pass includes how each candidate expresses the multidimensional foundation and interacts with the general Technique concept. Those are not separate later questions.
+This pass defines identity at concept depth. It does not lock exact numbers, animations, Tiers, Blood Arts, or individual Techniques.
 
-### Pass 3 — Roster overlap and gap audit
+### Pass 2 — Roster overlap and gap audit
 
 Compare the three candidates together:
 
@@ -109,27 +115,28 @@ Compare the three candidates together:
 - confirm that each candidate remains useful with the full combat kit,
 - confirm several distinct four-Technique build shapes per candidate,
 - confirm that Techniques and prosthetics retain meaningful build space,
+- confirm the approved shared player-kit boundary remains intact,
 - and determine whether the candidates are sufficiently distinct for repeated runs.
 
 A detected gap should first be addressed by revising or replacing one of the three candidates. It does not automatically justify a fourth Aspect.
 
-### Pass 4 — Roster revision
+### Pass 3 — Roster revision
 
 Retain, revise, rename, combine, or replace candidates as required by the audit.
 
-### Pass 5 — Identity approval
+### Pass 4 — Identity approval
 
 Approve:
 
 - a concise three-row roster table,
-- the shared-versus-Aspect-specific combat-foundation boundary,
+- the candidate-specific use of the approved shared player-kit boundary,
 - and the expected Technique build directions for each identity.
 
 Only after this pass should exact Tiers, Blood generation, Blood Arts, candidate mechanics, detailed affinities, or candidate-specific production packages be treated as final.
 
 ## 2. Shared Aspect structure and selected Aspect packages
 
-Only after the three identities and combat-foundation boundary are approved, decide the shared gameplay structure.
+Only after the three identities are approved, decide the shared gameplay structure.
 
 The current Tier 0-IV, Corruption, Embrace, Blood, Blood Art, and drawback-family model remains a working proposal. It may be preserved, revised, simplified, or replaced during this pass.
 
@@ -172,7 +179,7 @@ Decide:
 
 Before approving counts, complete:
 
-1. the approved three-Aspect identity roster and combat-foundation boundary,
+1. the approved three-Aspect identity roster,
 2. the approved shared Aspect structure and individual packages,
 3. detailed affinity, weighting, and direct-exception rules,
 4. a cross-system overlap audit,
