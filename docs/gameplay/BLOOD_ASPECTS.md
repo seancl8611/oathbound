@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: draft
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-07-25
 topics:
   - blood-aspects
   - blood-arts
@@ -20,6 +20,7 @@ related:
   - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-TECHNIQUE-CATALOG
+  - GAMEPLAY-COMBAT
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - CONTENT-STRAND-INTERACTIBLES
@@ -38,12 +39,13 @@ The following direction is approved:
 - no Aspect is defined only as the attack, dash, parry, ranged, or deathblow build,
 - identities come from connected differences across the combat foundation,
 - the universal defensive and execution language remains shared and readable,
-- the preferred weapon direction is one physical katana expressed through Aspect-specific Blood combat forms,
-- and the selected Aspect remains functional before any Technique is acquired.
+- the weapon direction is one physical katana expressed through Aspect-specific Blood combat forms,
+- the selected Aspect remains functional before any Technique is acquired,
+- and the shared-versus-Aspect-specific player-kit boundary in this document is approved.
 
 Three is the current production and design baseline, not a permanent ceiling. A fourth or later Aspect is deferred until playable testing demonstrates a meaningful missing combat identity that cannot be handled by the approved three, Techniques, or prosthetics.
 
-The approved weapon direction does not lock exact forms, animation counts, ranges, attack chains, or statistics. Those remain part of identity design and later testing.
+The weapon direction does not lock exact forms, animation counts, ranges, attack chains, or statistics. Those remain part of identity design and later testing.
 
 ## Current unresolved status
 
@@ -52,13 +54,13 @@ This file remains a draft because the repository does not yet approve:
 - Wolf, Wraith, and Ronin as the final three identities,
 - the exact fantasy or combined combat pattern of any candidate,
 - the exact attack or Blood-weapon foundation of any candidate,
-- relative range, rhythm, coverage, commitment, recovery, damage, or posture tradeoffs,
+- relative range, rhythm, coverage, commitment, recovery, damage, or posture tradeoffs between candidates,
 - the Tier 0-IV structure,
 - Blood unlocking at Tier II,
 - one Blood Art per Aspect,
 - the drawback-family model,
 - detailed Aspect-affinity and offer-weighting rules,
-- rare direct Aspect- or Tier-referencing Technique exceptions,
+- rare direct Aspect-, Blood-, or Tier-referencing Technique exceptions,
 - or the exact relationship between Aspects, Corruption, Shrines, trials, and persistent progression.
 
 Wolf, Wraith, and Ronin remain the three working candidates. They may be retained, revised, renamed, combined, or replaced during the identity pass.
@@ -123,7 +125,7 @@ A Technique may intentionally:
 3. **Compensate** for a weakness at the cost of a Technique slot.
 4. **Hybridize** the foundation into an unusual but coherent build.
 
-The same Technique may feel different under different Aspects because the underlying attack form, range, rhythm, movement flow, or posture profile is already different. Most synergy should emerge this way rather than through bespoke per-Aspect versions of every Technique.
+Ordinary Techniques have one universal ruleset. They do not contain separate Wolf, Wraith, and Ronin versions. A Technique may feel or perform differently because it modifies an action whose base rhythm, reach, movement flow, commitment, or posture profile already differs by Aspect.
 
 ### Compatibility rules
 
@@ -140,13 +142,140 @@ The same Technique may feel different under different Aspects because the underl
 
 This contract is approved at the system-responsibility level. Exact affinities, offer weights, rare exceptions, and individual entries remain later design work.
 
+## Approved shared player-kit boundary
+
+Blood Aspects create distinct Tier 0 combat foundations without turning Akio into three unrelated characters.
+
+All three Aspects use the same controls, defensive language, enemy-response rules, and overall combat systems. Each Aspect may substantially reshape Akio's offensive foundation and the way universal actions connect together.
+
+### Universal combat framework
+
+The following remain consistent across all three Aspects:
+
+- input layout and control scheme,
+- block and parry rules,
+- dodge input and base invulnerability rules,
+- posture, stagger, and posture-break rules,
+- deathblow requirements and execution rules,
+- Spirit and prosthetic controls,
+- Technique slots, acquisition, replacement, reserve, and refinement rules,
+- enemy telegraphs, hit reactions, defensive responses, and punish windows,
+- and the general existence and purpose of Akio's core combat actions.
+
+The player should not need to relearn defensive timing, enemy logic, or interface behavior after changing Aspects.
+
+### Shared core actions
+
+Every Aspect retains access to the complete combat kit, including:
+
+- Quick Slash,
+- Cross Cut,
+- Heavy Cleave,
+- Hold Thrust,
+- Counter Cut,
+- Dash Slash,
+- block,
+- parry,
+- dodge and repositioning,
+- posture pressure,
+- deathblows,
+- Techniques,
+- and the equipped prosthetic.
+
+An Aspect may alter the offensive expression of these actions, but it should not remove a major combat action or make it functionally irrelevant.
+
+Every Aspect retains the general purpose of a quick opening attack, crowd-oriented attack, committed heavy attack, precise thrust, defense-to-offense counter, and movement-to-offense attack. Exact animation, timing, reach, and tactical value may differ.
+
+### Aspect-specific offensive foundation
+
+At Tier 0, each Aspect may change several connected dimensions of Akio's offense:
+
+- attack-chain structure,
+- attack rhythm and timing,
+- effective reach,
+- attack arcs and coverage,
+- forward movement and tracking,
+- commitment and recovery,
+- movement between attacks,
+- health-damage and posture-pressure balance,
+- target handling,
+- transitions following dodges, parries, blocks, and deathblows,
+- and the visual form of the katana through Returning Blood.
+
+These changes should work together to create a recognizable combat identity. An Aspect should not be defined by changing only one number, one attack, or one input.
+
+### Attack identity without separate characters
+
+Each Aspect may use unique offensive animations where necessary, but the system should reuse shared animation, input, defensive, and execution language when practical.
+
+The intended result is:
+
+- three meaningfully different offensive foundations,
+- one recognizable version of Akio,
+- one readable enemy and defensive framework,
+- and one universal Technique catalog that functions across all three.
+
+The player should notice the selected Aspect during the first combat room while retaining immediate understanding of block, parry, dodge, posture break, deathblow, and prosthetic use.
+
+### Contextual differences
+
+Universal actions may have different offensive consequences under each Aspect.
+
+- A parry always follows the same timing and success rules, but the available counterattack or offensive transition may differ.
+- A dodge always follows the same base defensive rules, but movement-to-attack flow may differ.
+- A deathblow always requires an eligible enemy state, but its effect on positioning or offensive momentum may differ.
+- A prosthetic always retains its own tactical function, but its value may change naturally because of the selected Aspect's range, rhythm, or target-handling profile.
+
+These differences belong to the Aspect foundation rather than separate versions of Techniques or prosthetics.
+
+### Technique compatibility under the boundary
+
+Techniques modify shared actions and systems using one universal effect.
+
+A Technique should not contain separate Wolf, Wraith, and Ronin versions. It may become more or less valuable under an Aspect because the underlying player action already behaves differently.
+
+Each Aspect must allow Technique builds that:
+
+- reinforce its established strengths,
+- broaden it into adjacent combat options,
+- compensate for one of its weaknesses at the cost of a slot,
+- or hybridize it with another combat approach.
+
+The Aspect establishes the foundation. Techniques determine how that foundation develops during the run.
+
+### Balance boundary
+
+Aspects may have different relative:
+
+- attack speeds,
+- damage profiles,
+- posture pressure,
+- ranges,
+- recovery times,
+- tracking,
+- and crowd coverage.
+
+These must function as tradeoffs rather than direct upgrades. No Aspect should have the best speed, range, damage, safety, posture pressure, and flexibility simultaneously. Exact numerical values remain implementation and gameplay-testing work.
+
+### Boundary approval test
+
+The shared-kit boundary is successful when:
+
+- all three Aspects use the same controls and defensive rules,
+- all three retain the complete combat kit,
+- each Aspect is recognizable before acquiring a Technique,
+- changing Aspects changes more than visual effects or statistics,
+- universal Techniques remain understandable and functional across all three,
+- enemies and bosses do not require separate rule sets for each Aspect,
+- and no Aspect feels like either a minor passive modifier or a completely separate playable character.
+
 ## Three-Aspect identity process
 
 The identity roster is resolved through focused passes rather than one broad question.
 
 ### Pass 1 — Roster coverage
 
-Define what the complete roster must cover across:
+The approved shared player-kit boundary now provides the common comparison frame. Define what the complete roster must cover across:
 
 - player fantasy,
 - attack rhythm,
@@ -168,11 +297,11 @@ This pass creates evaluation criteria without designing exact abilities.
 
 Evaluate Wolf, Wraith, and Ronin individually using the identity template below.
 
-This pass includes how each candidate expresses the shared multidimensional combat foundation and supports reinforce, broaden, compensate, and hybridize Technique builds.
+This pass includes how each candidate expresses the approved shared player-kit boundary and supports reinforce, broaden, compensate, and hybridize Technique builds.
 
 ### Pass 3 — Overlap and gap audit
 
-Compare all three candidates together.
+Compare all three candidates together:
 
 - identify mechanical and thematic overlap,
 - identify missing launch-critical territory,
@@ -193,7 +322,7 @@ Retain, revise, rename, combine, or replace candidates as required by the audit.
 Approve:
 
 - one concise identity row for each of the three Aspects,
-- the shared-versus-Aspect-specific combat-foundation boundary,
+- the exact candidate-specific use of the already-approved shared player-kit boundary,
 - the expected Technique build shapes for each identity,
 - and the production distinction required for each identity.
 
@@ -206,6 +335,7 @@ Each proposed Aspect should answer:
 - **Fantasy:** What form of controlled Returning Blood is Akio expressing?
 - **Combat identity:** What combined decisions does it change during ordinary combat?
 - **Foundation change:** How does it alter rhythm, reach, coverage, commitment, recovery, movement flow, damage profile, posture profile, target handling, or weapon form?
+- **Shared-kit expression:** How does it reinterpret the shared core actions without removing their general purpose?
 - **Full-kit use:** How does it use attacks, parries, blocks, dodges, posture pressure, deathblows, Techniques, and prosthetics?
 - **Technique build space:** How can Techniques reinforce, broaden, compensate, or hybridize the identity?
 - **Emphasis:** Which combinations or situations does it favor without making other core actions irrelevant?
@@ -230,27 +360,6 @@ All three Aspects must meaningfully support:
 An Aspect may favor certain combinations, timings, ranges, risks, or tactical situations. It must not make one core behavior its only meaningful route or reserve an entire action family for itself.
 
 Techniques may upgrade all core combat behaviors under every Aspect. Affinity or synergy may change value and expression, but it does not determine whether a behavior is available.
-
-## Tier 0 foundation-change boundary
-
-Selecting an Aspect at Tier 0 must change the run before any Shrine upgrade, Blood Art, or Technique is acquired.
-
-An identity may change several connected dimensions:
-
-- attack-chain rhythm,
-- effective range and arc coverage,
-- commitment and recovery,
-- movement-to-attack flow,
-- target handling,
-- health-damage versus posture-pressure profile,
-- weapon appearance or Blood-formed extension,
-- and contextual properties of universal combat actions.
-
-The shared parry, block, dodge, posture, deathblow, prosthetic, input, and enemy-response language should remain recognizable across all Aspects.
-
-Tier 0 should not replace every animation, input, or rule. The Aspects should feel like three distinct combat foundations within Oathbound, not three unrelated games.
-
-Relative differences in damage, posture pressure, range, speed, and recovery are appropriate when they support identity. They must function as tradeoffs rather than direct statistical upgrades. Exact values remain playtest work.
 
 ## Working structural candidate — not approved
 
@@ -325,20 +434,19 @@ No persistent upgrade should make a run-only Aspect mechanic automatic or remove
 
 ## Design order
 
-1. Use the approved Aspect-Technique layer contract as a roster constraint.
-2. Define three-roster coverage criteria, including required Technique build shapes.
-3. Define Wolf at fantasy and combined-combat-pattern depth.
-4. Define Wraith at fantasy and combined-combat-pattern depth.
-5. Define Ronin at fantasy and combined-combat-pattern depth.
-6. Audit overlap, gaps, full-kit use, Technique build space, and production cost.
-7. Revise, replace, combine, or rename candidates as needed.
-8. Approve the three-row identity roster and combat-foundation boundary.
-9. Approve or revise the shared progression structure.
-10. Design each selected Aspect's exact mechanics.
-11. Approve shared resource, activation, Shrine, and HUD rules.
-12. Finalize affinity, offer weighting, and rare direct-interaction exceptions.
-13. Populate Technique coverage and launch counts.
-14. Reconsider additional Aspects only after playable testing demonstrates a missing identity.
+1. Use the approved Aspect-Technique layer contract and shared player-kit boundary as roster constraints.
+2. Define Wolf at fantasy and Tier 0 combined-combat-pattern depth.
+3. Define Wraith at fantasy and Tier 0 combined-combat-pattern depth.
+4. Define Ronin at fantasy and Tier 0 combined-combat-pattern depth.
+5. Audit overlap, gaps, full-kit use, Technique build space, encounter coverage, and production cost.
+6. Revise, replace, combine, or rename candidates as needed.
+7. Approve the three-row identity roster.
+8. Approve or revise the shared progression structure.
+9. Design each selected Aspect's exact mechanics.
+10. Approve shared resource, activation, Shrine, and HUD rules.
+11. Finalize affinity, offer weighting, and rare direct-interaction exceptions.
+12. Populate Technique coverage and launch counts.
+13. Reconsider additional Aspects only after playable testing demonstrates a missing identity.
 
 ## Approval tests
 
@@ -349,7 +457,7 @@ The roster is not ready unless:
 - no identity is reducible to one core action,
 - all identities preserve meaningful attack, defense, movement, posture, deathblow, Technique, and prosthetic play,
 - Tier 0 creates a noticeable run identity,
-- the universal combat framework remains readable and teachable,
+- the approved shared player-kit boundary remains readable and teachable,
 - each identity supports reinforce, broaden, compensate, and hybridize Technique builds,
 - Techniques and prosthetics retain meaningful territory,
 - each identity functions against groups, elites, and bosses,
@@ -359,7 +467,7 @@ An individual Aspect is not ready for exact Tier or Blood Art approval until its
 
 ## Visual and weapon-production direction
 
-The current approved scoping direction uses one physical katana expressed through three Aspect-specific Blood combat forms over a shared defensive and execution framework.
+The approved scoping direction uses one physical katana expressed through three Aspect-specific Blood combat forms over a shared defensive and execution framework.
 
 Exact attack variants, ranges, rhythms, effects, animation reuse, overlays, and production counts remain open until the identities are approved.
 
