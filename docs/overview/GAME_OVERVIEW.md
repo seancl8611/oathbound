@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-07-26
 topics:
   - project-identity
   - combat
@@ -20,7 +20,11 @@ topics:
 related:
   - OVERVIEW-DESIGN-PILLARS
   - GAMEPLAY-COMBAT
+  - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-WOLF-ASPECT
+  - GAMEPLAY-WRAITH-ASPECT
+  - GAMEPLAY-RONIN-ASPECT
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RUN-STRUCTURE
   - LORE-RETURNING-BLOOD
@@ -71,7 +75,7 @@ The player should feel like a trained hunter entering a fallen kingdom with a co
 
 Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding how much dangerous power Akio will permit Returning Blood to express.
 
-After Returning Blood awakens, the player selects one of three Blood Aspects as the run's immediate combat foundation. Each Aspect keeps Oathbound's shared defensive and execution language while expressing the katana through a different Blood combat form. Techniques then customize the full combat kit around that foundation.
+After Returning Blood awakens, the player selects one of three Blood Aspects as the run's immediate combat foundation. Each Aspect keeps Oathbound's shared control, movement, parry, posture, and execution language while assigning a different Blood-formed katana kit to the offensive inputs. Techniques then customize that foundation during the run.
 
 ## Approved gameplay snapshot
 
@@ -80,9 +84,13 @@ After Returning Blood awakens, the player selects one of three Blood Aspects as 
 - Introductory base katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
 - Universal combat language: parry, posture, stagger, deathblow, block, dash, and prosthetic-tool support
 - One selected Blood Aspect creates an immediate Tier 0 run identity
-- Current launch scope: three Blood Aspects
-- One physical katana expressed through Aspect-specific Blood combat forms over a shared defensive and execution framework
-- All Aspects use the complete attack, defense, movement, posture, deathblow, Technique, and prosthetic framework
+- Current launch scope: Wolf, Wraith, and Ronin
+- One physical katana expressed through Aspect-specific Blood weapon kits
+- Wolf qualitative kit: four-hit fast close-range pressure
+- Wraith qualitative kit: two-hit extended spectral poking and reach control
+- Ronin qualitative kit: three-hit slow heavy direct damage
+- Neutral locomotion and dash functionality remain universal across Aspects
+- Basic sequence, Held Attack, Dash Attack, Parry Counter, attack properties, and approved defensive profile belong to the selected kit
 - Run-only build growth through temporary choices
 - Technique system: four active temporary Techniques, one inactive reserve, and at most one refinement per Technique
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
@@ -94,29 +102,41 @@ After Returning Blood awakens, the player selects one of three Blood Aspects as 
 - Destroying the Heart ends the curse, stops the Shogun's reconstruction, kills the corrupted population as their sustained bodies fail, ends Returning Blood, and makes Akio mortal
 - Completed saves retain repeatable normal runs and optional access to the Heart route without further story progression
 
-## Blood Aspect identity work still open
+## Blood Aspect roster work still open
 
-Wolf, Wraith, and Ronin currently occupy the three working roster positions, but their final inclusion and identities are not approved.
+Wolf, Wraith, and Ronin are each approved at qualitative Tier 0 weapon-kit depth for comparison.
 
-The identity pass must determine:
+The current kits are:
 
-- the fantasy and combined combat pattern of each candidate,
-- the attack rhythm, range, coverage, commitment, recovery, movement flow, damage, posture, target-handling, and weapon-expression differences that create each run identity,
-- how each candidate uses the full combat kit,
-- the natural risk belonging to each identity,
-- and whether the three candidates remain distinct when compared together.
+| Aspect | Qualitative weapon identity |
+|---|---|
+| Wolf | Four-hit fast close-range pressure with pursuit and sustained output |
+| Wraith | Two-hit extended spectral poking with long lines, broad arcs, and short commitments |
+| Ronin | Three-hit slow heavy swordplay with high per-hit damage, posture impact, and stagger |
 
-An Aspect cannot become merely the attack, dash, parry, ranged, or deathblow build. Every Aspect must remain capable of supporting upgrades to every core combat behavior while favoring different combinations, situations, and tradeoffs.
+The next design step is the combined roster audit. It must determine:
 
-A fourth or later Aspect is outside the current paper-design scope. Reconsider expansion only after playable testing demonstrates a missing combat identity that cannot be covered by the three approved identities, Techniques, or prosthetics.
+- whether the three kits remain clearly distinct during ordinary gameplay,
+- whether any kit is merely a stronger or weaker version of another,
+- whether each remains viable in mixed waves, crowds, ranged pressure, hazards, elites, and bosses,
+- whether several Technique builds remain valid for each kit,
+- whether Techniques and prosthetics retain meaningful territory,
+- whether Ronin's defensive advantages remain balanced,
+- and whether required animation, VFX, audio, UI, and teaching scope remains achievable.
 
-The exact candidate identities, attack foundations, Tier structure, Blood model, and individual mechanics remain open. See [Blood Aspect System](../gameplay/BLOOD_ASPECTS.md) and [Current Design Questions](../_meta/OPEN_QUESTIONS.md).
+Exact frame data, hitboxes, numerical values, progression, Blood model, Blood Arts, drawbacks, affinities, and production counts remain open.
+
+The weapon-kit model may eventually support a fourth and possibly fifth Aspect. Neither belongs to current launch paper-design or production scope. Expansion should be reconsidered only after the initial three are implemented and playable evidence demonstrates a missing identity.
+
+See [Blood Aspect System](../gameplay/BLOOD_ASPECTS.md) and [Current Design Questions](../_meta/OPEN_QUESTIONS.md).
 
 ## Run-build philosophy
 
 - Base combat and player skill remain primary.
 - The selected Blood Aspect provides a major run identity from Tier 0 while preserving a shared readable combat language.
-- Aspect-specific Blood combat forms may vary attack rhythm, reach, coverage, commitment, recovery, damage, posture pressure, movement flow, and target handling.
+- Aspect-specific Blood weapon kits may vary sequence length, attack rhythm, reach, geometry, commitment, recovery, damage, enemy-posture pressure, stagger, movement, tracking, target handling, and modest defensive profile.
+- Neutral movement and dash remain universal.
+- A combo is a set of available attacks rather than a required gameplay objective.
 - Techniques provide limited horizontal customization across the full combat kit.
 - Most Techniques are independently useful and synergize through shared combat verbs rather than exact prerequisite combinations.
 - Refinements are shallow: one base Technique may receive one slotless refinement.
@@ -163,7 +183,11 @@ These are directional references, not templates to copy.
 - [Full game scope](FULL_GAME_SCOPE.md)
 - [Core loop](../gameplay/CORE_LOOP.md)
 - [Combat](../gameplay/COMBAT.md)
+- [Aspect Weapon-Kit Model](../gameplay/ASPECT_WEAPON_KIT_MODEL.md)
 - [Blood Aspects](../gameplay/BLOOD_ASPECTS.md)
+- [Wolf Blood Aspect](../gameplay/WOLF_ASPECT.md)
+- [Wraith Blood Aspect](../gameplay/WRAITH_ASPECT.md)
+- [Ronin Blood Aspect](../gameplay/RONIN_ASPECT.md)
 - [Technique System](../gameplay/TECHNIQUES.md)
 - [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md)
 - [Beast Blood](../lore/BEAST_BLOOD.md)
