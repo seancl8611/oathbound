@@ -4,7 +4,7 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-26
 ---
 
 # Source of Truth
@@ -21,7 +21,12 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Core gameplay loop | `docs/gameplay/CORE_LOOP.md` |
 | Combat rules and vocabulary | `docs/gameplay/COMBAT.md` |
 | Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
-| Blood Aspect mechanics | `docs/gameplay/BLOOD_ASPECTS.md` |
+| Blood Aspect system mechanics | `docs/gameplay/BLOOD_ASPECTS.md` |
+| Shared Blood Aspect weapon-kit model | `docs/gameplay/ASPECT_WEAPON_KIT_MODEL.md` |
+| Blood Aspect evaluation and roster-comparison guidelines | `docs/gameplay/ASPECT_IDENTITY_GUIDELINES.md` |
+| Wolf qualitative Tier 0 weapon kit | `docs/gameplay/WOLF_ASPECT.md` |
+| Wraith qualitative Tier 0 weapon kit | `docs/gameplay/WRAITH_ASPECT.md` |
+| Ronin qualitative Tier 0 weapon kit | `docs/gameplay/RONIN_ASPECT.md` |
 | Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
 | Technique mechanics | `docs/gameplay/TECHNIQUES.md` |
 | Individual Technique catalog and refinements | `docs/gameplay/TECHNIQUE_CATALOG.md` |

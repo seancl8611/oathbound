@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-26
 ---
 
 # Decision Log
@@ -160,3 +160,31 @@ The top-level tracker contains four dependency-ordered production decisions: lau
 Routing details, room counts, miniboss frequency, movesets, exact scripts, and tuning are excluded from the top-level tracker unless they later create a verified production-scope change.
 
 **Authority:** `docs/_meta/OPEN_QUESTIONS.md` and `docs/_meta/ASSISTANT_WORKFLOW.md`
+
+## 2026-07-26 — Blood Aspects use complete weapon kits
+
+Blood Aspects are defined through concrete sword timing, reach, geometry, movement, tracking, damage, posture, stagger, commitment, and recovery rather than passive bonuses or mandatory behavioral loops. Combos are available attack sequences, not objectives the player must maintain.
+
+**Authority:** `docs/gameplay/ASPECT_WEAPON_KIT_MODEL.md`
+
+## 2026-07-26 — Three qualitative Tier 0 kits approved for comparison
+
+The initial roster uses distinct 4/2/3 weapon cadences:
+
+- Wolf uses a four-hit fast close-range pressure sequence.
+- Wraith uses a two-hit extended spectral poke sequence.
+- Ronin uses a three-hit slow heavy-damage sequence.
+
+Wolf was expanded from three to four attacks to strengthen sustained pursuit. Wraith's forced-reposition rules were removed so spacing emerges from range and geometry. Ronin's combo-maintenance and directional-selection proposals were rejected in favor of direct heavy health, posture, stagger, and charge-attack impact.
+
+The player may stop any sequence at any point. Final combined roster approval remains pending the overlap, encounter, Technique-space, and production audit.
+
+**Authority:** `docs/gameplay/BLOOD_ASPECTS.md`, `docs/gameplay/WOLF_ASPECT.md`, `docs/gameplay/WRAITH_ASPECT.md`, and `docs/gameplay/RONIN_ASPECT.md`
+
+## 2026-07-26 — Neutral movement remains universal; defensive profiles may vary modestly
+
+All launch Aspects retain the same neutral locomotion, dash functionality, defense input, parry timing, posture-break rules, and deathblow language. Modest player-posture, block-efficiency, recovery, and Parry Counter differences may support a complete kit when balanced by its attack properties.
+
+Ronin currently uses the strongest guard profile of the three, balanced by slow posture recovery and heavily committed attacks.
+
+**Authority:** `docs/gameplay/COMBAT.md` and `docs/gameplay/ASPECT_WEAPON_KIT_MODEL.md`
