@@ -8,12 +8,15 @@ last_reviewed: 2026-07-26
 topics:
   - blood-aspects
   - aspect-roster
+  - weapon-kits
   - wolf
   - wraith
+  - ronin
   - encounter-design
   - roguelite-combat
   - techniques
 related:
+  - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-WOLF-ASPECT
   - GAMEPLAY-WRAITH-ASPECT
@@ -25,282 +28,274 @@ related:
 
 # Blood Aspect Identity Guidelines
 
-This document records the approved lens for evaluating Blood Aspect identities and the approved working directions for Wolf and Wraith.
+## Current evaluation principle
 
-The complete qualitative Tier 0 foundations are owned by:
+Blood Aspects are evaluated as complete sword weapon kits that share one control and combat language.
 
-- [Wolf Blood Aspect](WOLF_ASPECT.md)
-- [Wraith Blood Aspect](WRAITH_ASPECT.md)
+The approved design rule is:
 
-These approvals do not lock exact numerical values, frame data, hitboxes, animations, Blood Arts, progression packages, production counts, or final inclusion after the three-Aspect roster audit.
+> **Define concrete moves first. Let the moves' timing, range, geometry, damage, posture, tracking, commitment, and recovery create the playstyle naturally.**
+
+Do not begin by prescribing a behavioral loop such as:
+
+- maintain pressure forever,
+- reposition after every sequence,
+- preserve a combo through defense,
+- reach a specific finisher,
+- or use movement direction to select attacks.
+
+Those descriptions may emerge as observations after the kit exists. They should not substitute for the kit.
+
+The authoritative system model is [Blood Aspect Weapon-Kit Model](ASPECT_WEAPON_KIT_MODEL.md).
 
 ## Encounter assumption
 
-Oathbound combines disciplined posture, parry, block, dodge, counter, and deathblow combat with Hades-like roguelite room encounters.
-
-A normal combat room may include:
+Oathbound combines disciplined posture, parry, block, dodge, counter, and deathblow combat with roguelite room encounters containing:
 
 - multiple waves,
 - mixed melee and ranged enemies,
-- several simultaneous threats,
+- simultaneous threats,
 - target-priority decisions,
 - crowd pressure,
-- elites or minibosses,
+- elites and minibosses,
 - hazards and area denial,
-- and bosses or other sustained single-target encounters.
+- and sustained boss encounters.
 
-Aspect design must therefore be tested against both single-target and multi-target play. An Aspect may be best at one situation, but every launch Aspect must remain viable, active, and fun against groups, ranged pressure, hazards, elites, and bosses.
+Every launch kit must remain active, viable, and enjoyable across those situations. No Aspect may be designed only for one-on-one sword duels or only for large groups.
 
-Do not design an Aspect as though the game consists only of Sekiro-like one-on-one duels. Likewise, do not remove the posture, defensive, and execution framework merely to imitate a broader action roguelite.
+## Universal layer during roster design
 
-## Shared-controls principle
+The initial three launch candidates share:
 
-Blood Aspects share one control layout, neutral movement standard, enemy-response language, and combat interface. They do not need to share one identical moveset.
+- controller layout,
+- neutral locomotion,
+- neutral dash properties,
+- block rules and baseline efficiency,
+- player-posture capacity and recovery,
+- parry timing,
+- deathblow eligibility and execution behavior,
+- enemy responses,
+- Technique rules,
+- prosthetic controls,
+- and combat interface language.
 
-Every launch candidate must preserve recognizable access to:
+The identity pass should not differentiate candidates through:
 
-- repeated basic attack input,
-- held attack input,
-- block and parry input,
-- universal neutral dodge and dash,
-- post-parry attack,
-- dash-to-attack input,
-- posture pressure,
-- deathblows,
-- Techniques,
-- and the equipped prosthetic.
+- weaker or stronger neutral dashes,
+- different base player-posture bars,
+- different sustained-block efficiency,
+- unique deathblow positioning or effects,
+- removal of a defensive action,
+- or a new resource or input.
 
-An Aspect may reinterpret the actions assigned to those inputs through different sequence lengths, names, attack geometry, movement, tracking, commitment, recovery, target interaction, damage profile, posture profile, and transitions.
+These systems may be revisited only after the weapon kits themselves are playable and a demonstrated need exists.
 
-`Quick Slash`, `Cross Cut`, `Heavy Cleave`, `Hold Thrust`, `Counter Cut`, and `Dash Slash` are not mandatory shared move names or roles.
+## Shared offensive slots
 
-The universal neutral dash retains the same functional distance, speed, startup, invulnerability, recovery, steering, collision, and repeat availability across launch Aspects. Movement identity should come primarily from attacks and offensive transitions rather than weakening dependable evasion.
+Every candidate must define:
 
-## Aspect identity evaluation lens
+1. **Basic Attack:** the primary sequence produced by one or repeated presses.
+2. **Held Attack:** the major secondary or committed sword action.
+3. **Dash Attack:** the offensive follow-up after the universal neutral dash.
+4. **Parry Counter:** the direct attack after the universal parry.
+5. **Blood Art:** later only, if retained by the final progression system.
 
-Define each Aspect first through a clear player-facing role and relative combat properties.
+The held attack should be treated as a genuine secondary action. It may be a lunge, sweep, draw cut, impale, Blood extension, transformation attack, or another coherent sword move.
 
-Every candidate should state directly:
+## Combo guidance
 
-- **Known as:** the simple playstyle label a player would understand,
-- **fantasy:** the form of controlled Returning Blood Akio expresses,
-- **basic sequence:** what repeated attack presses produce and why that structure teaches the playstyle,
-- **held attack:** the committed option produced by hold and release,
-- **counterattack:** how a universal parry returns to Aspect-specific offense,
-- **dash attack:** how the universal neutral dash converts into Aspect-specific offense,
-- **range:** close, medium, flexible, or another justified relative profile,
-- **attack rhythm:** fast, sustained, deliberate, burst-oriented, variable, or another clear direction,
-- **damage profile:** relative per-hit damage and sustained output,
-- **enemy-posture profile:** how strongly and consistently it pressures enemy posture,
-- **player-posture profile:** how much pressure Akio can absorb and how posture recovers,
-- **movement:** how offense moves, holds, crosses, or repositions Akio,
-- **coverage:** how attacks handle nearby and multiple enemies,
-- **tracking:** how readily attacks stay connected to moving targets,
-- **commitment and recovery:** where the Aspect is safe or punishable,
-- **target handling:** how it prioritizes, transfers between, or controls enemies,
-- **defensive use:** how shared parry, block, and neutral dash support the playstyle,
-- **natural risk:** the gameplay weakness created by those strengths,
-- **encounter viability:** mixed-wave, crowd, ranged, hazard, elite, and boss behavior,
-- **Technique space:** how universal Techniques reinforce, broaden, compensate, or hybridize the foundation,
-- **visual identity:** how the Blood-katana form communicates the moveset,
-- and **production cost:** what unique animation, VFX, audio, UI, or trial work is required.
+Combo structure is a weapon property, not an objective.
 
-Exact numbers are not needed during identity approval. The goal is to establish clear relative tradeoffs and a recognizable roguelite playstyle before locking implementation values.
+A good kit allows the player to:
 
-## Design-discussion guidance
+- stop after one hit,
+- continue the sequence,
+- defend,
+- dash,
+- redirect,
+- use a Prosthetic,
+- or abandon the sequence.
 
-When proposing or reviewing an Aspect:
+Avoid making the player feel that they failed the Aspect because they did not:
 
-- begin with what the Aspect is known as,
-- describe its relative properties plainly,
-- define the basic sequence before assuming a universal three-hit combo,
-- make the held, counter, and dash attacks reinforce the same identity,
-- keep neutral dash functionality universal,
-- explain why the playstyle should be enjoyable across room encounters,
-- compare strengths and weaknesses against the other roster positions,
-- preserve both crowd and single-target viability,
-- distinguish a preferred situation from exclusive functionality,
-- and defer exact values, frame data, hitboxes, animation counts, and Tier effects until the general identity is approved.
+- complete every sequence,
+- loop the final hit,
+- preserve a combo state,
+- or reach one named attack.
 
-Avoid making the explanation depend on overly formal or heavily authored decision-loop language. Concrete playstyle, sequence, rhythm, range, coverage, movement, damage, posture, commitment, and risk descriptions are preferred.
+## Movement guidance
 
-External roguelite comparisons may be used to test whether a foundation is likely to be fun and replayable, but the final Aspect must remain native to Oathbound's shared sword, posture, defense, deathblow, and encounter systems.
+Attack movement may reinforce a kit, but movement should not be the substitute for the kit.
 
-## Wolf — approved identity and revised Tier 0 direction
+Avoid:
 
-### Status boundary
+- forced lateral movement on every sequence,
+- mandatory offset finishing positions,
+- automatic orbiting behind targets,
+- every counter relocating Akio,
+- and directional movement input choosing unrelated sword attacks.
 
-Wolf's high-level combat role, relative property direction, and qualitative Tier 0 combat foundation are approved for continued roster design.
+A spacing-focused style can emerge from long reach, broad geometry, slower timing, low tracking, and whiff recovery without forcing Akio to move after each attack.
 
-The complete action-by-action foundation is recorded in [Wolf Blood Aspect](WOLF_ASPECT.md).
+## Candidate evaluation template
 
-Still unapproved:
+Evaluate each candidate using concrete gameplay properties.
 
-- exact frame timing, damage, posture, range, tracking, and recovery values,
-- exact hitboxes, chain windows, and passage eligibility,
-- exact Blood-katana shape and production treatment,
-- whether Wolf needs any later unique mechanic beyond its Tier 0 moveset,
-- Tier progression, drawback, Blood Art, and Corruption interactions,
-- production counts,
-- and Wolf's final inclusion after the three-candidate overlap and gap audit.
+### Kit definition
 
-### Player-facing role
+- **Player-facing label:** What simple weapon style is this?
+- **Fantasy:** How does Returning Blood alter the katana?
+- **Basic Attack:** What physically happens on one press and repeated presses?
+- **Held Attack:** What major secondary action does hold and release provide?
+- **Dash Attack:** What attack follows the universal dash?
+- **Parry Counter:** What direct response follows a universal parry?
 
-**Wolf is the close-range aggressive Aspect.**
+### Weapon properties
 
-It is built around fast, forward-moving offense, sustained pressure, and carrying momentum through mixed groups of enemies. It should feel strongest while Akio remains connected to combat, but its short reach and greater commitment punish missed attacks and careless overextension.
+- **Range:** How far do normal and committed attacks reach?
+- **Cadence:** Fast, sustained, measured, slow, burst-oriented, or variable?
+- **Geometry:** Narrow lines, wide arcs, frontal coverage, circular coverage, or another shape?
+- **Attack movement:** How much does Akio move because the sword action itself requires it?
+- **Tracking:** How strongly do attacks correct toward moving targets?
+- **Damage:** What is the relative per-hit and sustained health output?
+- **Enemy posture:** Is pressure repeated, focused, heavy per hit, or situational?
+- **Commitment:** Which attacks are safe tests and which are major decisions?
+- **Recovery:** What happens after contact, block, and a miss?
+- **Target handling:** How does the kit deal with one target, nearby enemies, and target transfer?
 
-### Aspect-specific control expression
+### Game-wide fit
 
-| Input or system | Approved Wolf direction |
-|---|---|
-| Basic attack sequence | Fang Slash → Rending Cross → Blood Cleave |
-| Sequence rhythm | Fast escalating pressure; successful completion may restart smoothly |
-| Held attack | Predator's Passage, a committed piercing pursuit that may pass through valid ordinary enemies |
-| Parry counter | Fang Reversal, advancing return to pressure that enters at Rending Cross |
-| Dash attack | Hunting Slash after the universal neutral dash, entering at Rending Cross |
-| Neutral dash | Same functional distance, speed, invulnerability, and recovery as every launch Aspect |
-| Block | Functional sustained block, not dominant guard specialization |
-| Player posture | Moderate-to-high capacity with no automatic attack-based recovery at Tier 0 |
-| Main failure state | Missed forward commitment, overextension, or being surrounded |
+- **Natural strengths:** What do the moves make easier?
+- **Natural weaknesses:** What do the same moves make harder?
+- **Encounter coverage:** How does it handle groups, ranged enemies, elites, hazards, and bosses?
+- **Technique space:** How can Techniques reinforce, broaden, compensate, and hybridize it?
+- **Production scope:** What unique animations, VFX, audio, and teaching content are required?
 
-### Relative property profile
+## Approval standard
 
-| Property | Approved working direction |
-|---|---|
-| Range | Shortest or near-shortest normal attack range |
-| Attack rhythm | Fast, continuous, and forward-driving |
-| Per-hit damage | Moderate rather than automatically highest |
-| Sustained output | Strong while the player maintains contact and pressure |
-| Enemy-posture pressure | Consistent through repeated contact |
-| Attack movement | Strong forward movement during offense |
-| Coverage | Narrow opener with broader follow-up and finisher |
-| Tracking | Strong against nearby or retreating enemies once Akio commits |
-| Commitment | Higher once an offensive sequence is underway |
-| Recovery | Favorable while attacks connect; punishable after misses |
-| Target handling | Strong priority-target pursuit with transfer into nearby enemies |
-| Defense | Parry, block, and dash help Wolf remain engaged |
-| Natural risk | Overextension, short range, target fixation, missed attacks, and group pressure |
+A candidate is ready for comparison when:
 
-### Technique build space
+- the moves can be described without relying on abstract behavioral instructions,
+- the basic and held attacks form a coherent weapon kit,
+- its strengths and weaknesses emerge from attack properties,
+- its dash attack and parry counter reinforce the kit without rewriting universal systems,
+- it supports ordinary defense, deathblows, Techniques, and prosthetics,
+- it works in both crowds and single-target encounters,
+- and it can be distinguished from the other candidates during the first combat room.
 
-Under Wolf, universal Techniques may naturally:
+Exact frame data, hitboxes, values, animation counts, Blood Arts, and progression remain later work.
 
-- **reinforce:** pursuit, sustained offense, repeated contact, chain continuation, and momentum,
-- **broaden:** crowd coverage, ranged-enemy handling, alternate sequence routes, or mixed-wave control,
-- **compensate:** recovery, defense, spacing, reach, or disengagement,
-- **hybridize:** posture, deathblow, counter, finisher, held-attack, movement, or prosthetic-focused builds.
+## Current candidate status
 
-Wolf must not own all aggressive Techniques, and no Technique is required to make its foundation functional.
+### Wolf — approved for comparison
 
-## Wraith — approved identity and Tier 0 direction
+**Working label:** fast close-range pressure kit.
 
-### Status boundary
+Concrete direction:
 
-Wraith's high-level combat role, relative property direction, and qualitative Tier 0 combat foundation are approved for continued roster design.
+- Fang Slash → Rending Cross → Blood Cleave,
+- short reach,
+- fast cadence,
+- forward attack movement,
+- strong nearby tracking,
+- moderate per-hit damage,
+- strong sustained health and enemy-posture output,
+- Predator's Passage as the held pursuit lunge,
+- Hunting Slash as the advancing dash attack,
+- and Fang Reversal as the advancing parry counter.
 
-The complete action-by-action foundation is recorded in [Wraith Blood Aspect](WRAITH_ASPECT.md).
+Important correction:
 
-Still unapproved:
+Wolf's three-hit sequence is not a required combo objective. Completing or restarting the chain is one available offensive pattern. The player remains free to stop, defend, redirect, or use another action.
 
-- exact frame timing, damage, posture, range, tracking, and recovery values,
-- exact hitboxes and attack-bound movement distances,
-- exact collision shortening for lateral actions,
-- exact Blood-katana shape and production treatment,
-- whether Wraith needs any later unique mechanic beyond its Tier 0 moveset,
-- Tier progression, drawback, Blood Art, and Corruption interactions,
-- production counts,
-- and Wraith's final inclusion after the three-candidate overlap and gap audit.
+See [Wolf Blood Aspect](WOLF_ASPECT.md).
 
-### Player-facing role
+### Wraith — reopened
 
-**Wraith is the mid-range spectral skirmisher.**
+**Retained working label:** extended spectral blade or spectral reach-control kit.
 
-It is built around extended melee reach, short attack sequences, controlled lateral movement, and positional punishment. It attacks from the edge of danger, finishes in a new position, reassesses the encounter, and enters again from another angle.
+Promising territory:
 
-### Aspect-specific control expression
+- medium-to-long melee reach,
+- Blood-formed blade extensions,
+- strong lines and arcs,
+- deliberate timing,
+- Pale Lance as a possible long narrow held attack,
+- and natural weakness when enemies enter inside its preferred range.
 
-| Input or system | Approved Wraith direction |
-|---|---|
-| Basic attack sequence | Veil Cut → Passing Arc |
-| Sequence rhythm | Two-hit burst ending in lateral repositioning and reassessment |
-| Held attack | Pale Lance, a long narrow spectral punish with severe miss recovery |
-| Parry counter | Veil Reversal, a terminal off-axis counter after a universal parry |
-| Dash attack | Ghostline Slash after the universal neutral dash, terminal and position-changing |
-| Neutral dash | Same functional distance, speed, invulnerability, and recovery as every launch Aspect |
-| Block | Sustained block retained but less efficient than Wolf's |
-| Player posture | Lower capacity than Wolf with stronger recovery after escaping pressure |
-| Main failure state | Being pinned, missing a committed line attack, or choosing an unsafe finishing position |
+No longer approved:
 
-### Relative property profile
+- mandatory lateral movement in Passing Arc,
+- a required reposition-and-reassess loop,
+- special offset finishing positions for every offensive action,
+- forced off-axis parry counter movement,
+- weaker base block,
+- and lower base player posture.
 
-| Property | Approved working direction |
-|---|---|
-| Range | Medium-to-long effective melee reach |
-| Attack rhythm | Short deliberate bursts rather than continuous pressure |
-| Per-hit damage | Moderate with strong focused damage from Pale Lance |
-| Sustained output | Lower than Wolf when forced to remain continuously engaged |
-| Enemy-posture pressure | Reliable during selected punish windows rather than constant contact |
-| Attack movement | Lateral and diagonal repositioning attached to offense |
-| Coverage | Strong lines, diagonals, and arcs without full-circle safety |
-| Tracking | Moderate and restrained; geometry matters more than target adhesion |
-| Commitment | Moderate on sequence actions and high on Pale Lance misses |
-| Recovery | Controlled after successful short sequences; vulnerable after poor committed attacks |
-| Target handling | Controls formations and attack lanes rather than pursuing one target continuously |
-| Defense | Parry and repositioning preferred; sustained block remains a costly fallback |
-| Natural risk | Point-blank pressure, constrained arenas, hazards, and dangerous finishing positions |
+Wraith must be redesigned before it returns to approved comparison status.
 
-### Encounter requirement
+See [Wraith Blood Aspect](WRAITH_ASPECT.md).
 
-Wraith must remain viable against:
+### Ronin — unresolved
 
-- mixed waves by fighting around formations and changing angles,
-- crowds through line and arc coverage rather than center-of-group safety,
-- ranged enemies through Pale Lance and Ghostline Slash,
-- elites through spacing and punish windows,
-- bosses through measured pressure, parries, and long punish access,
-- and hazards through careful destination selection rather than extra dash safety.
+The following proposals are rejected:
 
-### Technique build space
+- preserving a combo through defense,
+- building play around reaching Judgment Stroke,
+- and movement-direction input selecting different basic attacks.
 
-Under Wraith, universal Techniques may naturally:
+Ronin requires a new complete weapon-kit direction.
 
-- **reinforce:** reach, short-sequence damage, lateral movement, line coverage, positional punishment, and recovery after successful repositioning,
-- **broaden:** close-range continuation, sustained posture pressure, pursuit, or heavier commitment,
-- **compensate:** fragile blocking, lower player-posture capacity, missed Pale Lance recovery, crowd collapse, or unsafe finishing positions,
-- **hybridize:** parry counters, deathblows, posture, heavy attacks, attack movement, or prosthetic-focused builds.
+A slower, deliberate, high-impact katana with stronger per-hit damage and enemy-posture pressure is a possible exploration path, not an approved concept.
 
-Wraith must not own all movement, dash, range, or avoidance Techniques, and it must remain distinct from Mist Raven.
+## Technique compatibility lens
+
+Techniques should target universal action categories:
+
+- Basic Attack,
+- Held Attack,
+- Dash Attack,
+- Parry Counter,
+- Block,
+- Parry,
+- Deathblow,
+- Prosthetic,
+- Health,
+- Enemy Posture,
+- Player Posture,
+- and Movement.
+
+Do not create a separate Wolf, Wraith, and Ronin version of each ordinary Technique. The underlying move differences create the different results.
+
+Each kit must support:
+
+- **reinforce** builds,
+- **broaden** builds,
+- **compensate** builds,
+- and **hybridize** builds.
+
+No Aspect owns all attack, range, movement, posture, parry, or deathblow Techniques.
 
 ## Future roster capacity
 
-The expanded Aspect contract creates room for additional combat identities beyond the initial three.
+The weapon-kit model may eventually support a fourth and fifth Aspect.
 
-A fourth and possibly fifth Aspect may be considered in future development, but neither is part of the current paper-design, launch-production, animation, UI, trial, or content-count baseline.
+They remain outside current launch paper-design and production scope. First complete, implement, and test the three current candidates. Additional Aspects require evidence of a missing combat identity that cannot be addressed through the existing roster, Techniques, or prosthetics.
 
-Additional Aspects should be reconsidered only after:
+## Next design task
 
-- Wolf, Wraith, and Ronin are designed and audited together,
-- the three-Aspect roster is playable,
-- Techniques and prosthetics are tested for coverage,
-- and playtesting demonstrates a meaningful missing identity that cannot be solved by revising the existing roster or build systems.
+Redesign Wraith under the weapon-kit model.
 
-The existence of theoretical design space does not itself justify expanding launch scope.
+Start with concrete alternatives for:
 
-## Next roster question
-
-Wolf and Wraith are complete at qualitative Tier 0 depth for comparison.
-
-The next roster step is to define Ronin through the same expanded criteria:
-
-- Ronin-specific basic attack structure,
+- basic sequence length and attacks,
+- attack cadence,
+- reach and geometry,
 - held attack,
+- dash attack,
 - parry counter,
-- dash attack after the universal neutral dash,
-- player-posture and blocking direction,
-- attack rhythm, reach, commitment, and target handling,
-- mixed-encounter viability,
-- Technique build space,
-- and natural risk.
+- damage and enemy-posture profile,
+- tracking,
+- and recovery.
 
-Ronin must not collapse into the parry-only Aspect, the generic default sword style, or a slower and stronger version of Wolf.
+Do not begin from forced repositioning, altered deathblows, altered player posture, or altered block efficiency.
