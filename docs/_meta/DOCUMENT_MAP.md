@@ -4,7 +4,7 @@ title: Document Review Map
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-26
 ---
 
 # Document Review Map
@@ -35,6 +35,8 @@ Authority:
 
 Usually review:
 
+- Aspect Weapon-Kit Model when shared action or defensive boundaries change
+- individual Aspect files when a kit is affected
 - Akio
 - affected Techniques and prosthetics
 - affected enemies and bosses
@@ -47,18 +49,24 @@ Usually review:
 
 Authorities:
 
-- `gameplay/BLOOD_ASPECTS.md`
-- `gameplay/CORRUPTION_AND_SHRINES.md`
+- `gameplay/BLOOD_ASPECTS.md` for the overall system
+- `gameplay/ASPECT_WEAPON_KIT_MODEL.md` for shared kit rules
+- `gameplay/ASPECT_IDENTITY_GUIDELINES.md` for roster evaluation
+- `gameplay/WOLF_ASPECT.md`, `WRAITH_ASPECT.md`, or `RONIN_ASPECT.md` for individual qualitative kits
+- `gameplay/CORRUPTION_AND_SHRINES.md` for Corruption and Shrine mechanics
 
 Usually review:
 
+- Combat shared rules
 - Returning Blood and Akio
-- Techniques and shared combat verbs
+- Techniques and shared action tags
 - progression and run structure
 - Shrine ownership and UI
 - Blood Aspect VFX
 - Blood Mirror and Blood Cavern
-- Milestones 2–4
+- game overview and full scope when roster status changes
+- source-of-truth registry and current design questions
+- Milestones 2–4 when production scope changes
 
 ## Technique, prosthetic, Relic, or reward change
 
