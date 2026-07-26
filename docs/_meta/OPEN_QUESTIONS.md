@@ -32,7 +32,9 @@ The current launch-scoping direction is approved at this depth:
 - the weapon direction is one physical katana expressed through different Blood combat forms,
 - and shared controls do not require an identical moveset.
 
-Three is the current production baseline, not a permanent ceiling. A fourth or later Aspect should not be added during the current paper-design pass. Reconsider expansion only after playable testing demonstrates a meaningful missing combat identity that cannot be covered by the approved three or by Techniques and prosthetics.
+Three is the current production baseline, not a permanent ceiling.
+
+The expanded moveset contract may support a fourth and possibly fifth Aspect in future development. Neither is part of the current paper-design, launch-production, animation, VFX, UI, trial, or milestone baseline. Reconsider expansion only after the three launch candidates are playable and testing demonstrates a meaningful missing combat identity that cannot be covered by revising the roster, Techniques, or prosthetics.
 
 ## Resolved Aspect-Technique responsibility contract
 
@@ -79,13 +81,13 @@ Aspect selection must not reduce dependable evasion or arena navigation through 
 - basic attack sequence length, names, order, branches, restart behavior, and rhythm,
 - reach and attack geometry,
 - movement, tracking, commitment, recovery, and cancel opportunities attached to attacks,
-- health-damage and posture-pressure profile,
+- health-damage and enemy-posture profile,
 - target handling,
 - held-attack behavior,
 - post-parry counterattack behavior,
 - dash-attack behavior and follow-up sequence,
 - offensive transitions after block, dodge, parry, deathblow, or another attack,
-- player posture capacity and recovery direction,
+- player-posture capacity and recovery direction,
 - block efficiency and posture cost,
 - and the Blood-formed expression of the katana.
 
@@ -105,7 +107,7 @@ Wolf's high-level role and qualitative Tier 0 combat foundation are approved for
 - **Rhythm:** fast, continuous, and forward-driving.
 - **Range:** shortest or near-shortest normal attack reach.
 - **Damage:** moderate per hit with strong sustained output while connected.
-- **Posture:** consistent enemy-posture pressure through repeated contact.
+- **Enemy posture:** consistent pressure through repeated contact.
 - **Movement:** strong movement within attacks and offensive transitions; universal neutral movement and dash remain unchanged.
 - **Coverage:** narrow opener with broader later attacks for nearby threats.
 - **Commitment:** responsive while attacks connect and more punishable after misses.
@@ -116,44 +118,81 @@ Wolf's approved Aspect-specific controls are:
 
 - **Basic sequence:** Fang Slash → Rending Cross → Blood Cleave.
 - **Sequence rule:** successful completion may flow back to Fang Slash; misses receive full recovery.
-- **Held attack:** Predator's Passage, a committed piercing pursuit that may pass through valid ordinary enemies and stops at heavy targets or invalid destinations.
-- **Dash attack:** Hunting Slash after the universal neutral dash, entering the sequence at Rending Cross.
-- **Parry counter:** Fang Reversal after a universal parry, entering the sequence at Rending Cross.
-- **Defense:** functional sustained block, universal parry timing, moderate-to-high player posture capacity, and no automatic attack-based posture recovery at Tier 0.
+- **Held attack:** Predator's Passage, committed piercing pursuit with conditional pass-through.
+- **Dash attack:** Hunting Slash after the universal neutral dash, entering at Rending Cross.
+- **Parry counter:** Fang Reversal after a universal parry, entering at Rending Cross.
+- **Defense:** functional sustained block, universal parry timing, moderate-to-high player-posture capacity, and no automatic attack-based posture recovery at Tier 0.
 
 Wolf's authoritative package is owned by `gameplay/WOLF_ASPECT.md`.
 
 Still unresolved for Wolf are exact values, hitboxes, chain windows, passage eligibility, player-posture values, exact animation and Blood-katana treatment, any later unique mechanic, Tier progression, drawback, Corruption behavior, Blood Art, production counts, and final roster inclusion after the three-candidate audit.
 
+## Resolved Wraith concept-level foundation
+
+Wraith's high-level role and qualitative Tier 0 combat foundation are approved for roster comparison under the expanded contract.
+
+- **Known as:** the mid-range spectral skirmisher.
+- **Rhythm:** short deliberate attack bursts followed by repositioning and reassessment.
+- **Range:** medium-to-long effective melee reach.
+- **Damage:** moderate normal damage with strong focused damage from Pale Lance.
+- **Enemy posture:** reliable punishment during chosen openings, but lower sustained pressure than Wolf.
+- **Movement:** lateral and diagonal movement attached to attacks; universal neutral movement and dash remain unchanged.
+- **Coverage:** strong lines, diagonals, and arcs without full-circle safety.
+- **Tracking:** moderate and restrained; attack geometry matters more than target adhesion.
+- **Commitment:** controlled through the short sequence and severe after missed committed line attacks.
+- **Encounter role:** spacing, positional punishment, ranged-enemy access, and mixed-wave control.
+- **Risk:** point-blank pressure, constrained arenas, hazards, missed committed attacks, and dangerous finishing positions.
+
+Wraith's approved Aspect-specific controls are:
+
+- **Basic sequence:** Veil Cut → Passing Arc.
+- **Sequence rule:** two-hit sequence ending in lateral repositioning and deliberate reassessment; no third combo attack.
+- **Passing Arc movement:** always includes a meaningful lateral component; movement shortens or stops near invalid destinations rather than offering a stationary alternate.
+- **Held attack:** Pale Lance, a long narrow spectral punish with severe miss recovery.
+- **Dash attack:** Ghostline Slash after the universal neutral dash, terminal and position-changing.
+- **Parry counter:** Veil Reversal after a universal parry, terminal and off-axis.
+- **Defense:** sustained block retained but less efficient than Wolf's; lower player-posture capacity with stronger recovery after escaping pressure.
+
+Wraith remains distinct from Mist Raven because its movement is visible, directional, attack-bound, collision-constrained, and generally non-invulnerable beyond universal defensive rules.
+
+Wraith's authoritative package is owned by `gameplay/WRAITH_ASPECT.md`.
+
+Still unresolved for Wraith are exact values, hitboxes, movement distances, collision shortening, player-posture values, exact animation and Blood-katana treatment, any later unique mechanic, Tier progression, drawback, Corruption behavior, Blood Art, production counts, and final roster inclusion after the three-candidate audit.
+
 ## 1. Three-Aspect identity roster and Technique compatibility
 
-Wolf, Wraith, and Ronin remain the three working candidates for the three roster positions.
+Wolf, Wraith, and Ronin remain the three working candidates for the three launch roster positions.
 
-Wolf's revised concept-level Tier 0 combat foundation is complete for the current comparison pass. Wraith is the next active candidate. Ronin follows Wraith.
+Wolf and Wraith are complete at qualitative Tier 0 depth for the current comparison pass. **Ronin is the next active candidate.**
 
-### Pass 1 — Candidate identity definitions
+### Pass 1 — Ronin identity definition
 
-For Wraith and then Ronin, define:
+Define:
 
 - the clear player-facing playstyle label and fantasy,
-- the Aspect-specific basic attack sequence and why its length or structure teaches the identity,
+- the Ronin-specific basic attack structure and why its length or branching teaches the identity,
 - the held attack,
 - the post-parry counterattack,
 - the dash attack following the universal neutral dash,
 - relative range, rhythm, damage, enemy-posture pressure, player-posture profile, movement, coverage, tracking, commitment, and recovery,
 - how block, parry, and the universal neutral dash support the playstyle,
-- how the candidate remains fun and viable in mixed waves, crowds, ranged pressure, elites, hazards, and bosses,
+- how Ronin remains fun and viable in mixed waves, crowds, ranged pressure, elites, hazards, and bosses,
 - how universal Techniques can reinforce, broaden, compensate, and hybridize it,
 - its natural risk,
-- and how it remains one version of Akio rather than a separate character.
+- and how it remains one version of Akio rather than a generic default or separate character.
 
 This pass does not lock exact numbers, frame data, hitboxes, production counts, Tiers, Blood Arts, or individual Techniques.
 
-Wraith must remain distinct from Wolf and from Mist Raven. It must not become only the dash Aspect, teleport Aspect, or invulnerability Aspect.
+Ronin must not become:
+
+- only the parry Aspect,
+- the plain default sword kit,
+- the intentionally weakest or safest option,
+- or a slower and stronger version of Wolf.
 
 ### Pass 2 — Roster overlap and gap audit
 
-After Wraith and Ronin are defined, compare all three candidates together:
+After Ronin is defined, compare all three candidates together:
 
 - identify mechanical or thematic overlap,
 - identify any missing launch-critical combat territory,
@@ -280,7 +319,7 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 
 ## Deferred gameplay and implementation decisions
 
-- fourth or later Blood Aspects before playable roster testing demonstrates a missing identity,
+- fourth or fifth Blood Aspects before playable roster testing demonstrates a missing identity,
 - individual Technique concepts and final catalog counts before the Aspect roster and shared structure are approved,
 - exact affinity weights and reward probabilities,
 - exact room counts and route topology,
@@ -288,7 +327,7 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 - exact enemy and boss movesets,
 - exact Corruption gain, Shrine frequency, and Tier thresholds,
 - exact Blood gain, capacity, activation, duration, retention, and anti-farming values if Blood remains,
-- exact Aspect attack damage, posture, range, tracking, recovery, block efficiency, and coverage values,
+- exact Aspect attack damage, player posture, enemy posture, range, tracking, recovery, block efficiency, and coverage values,
 - exact neutral movement and dash values while preserving their universal contract,
 - whether any future Aspect removes sustained block,
 - partial activation before approved system direction and playtest evidence,
@@ -296,4 +335,4 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 - hitboxes, immunity tables, and status values,
 - reward probabilities, prices, rerolls, and anti-streak formulas,
 - exact permanent-upgrade percentages,
-- final animation frames and VFX timing.
+- and final animation frames and VFX timing.
