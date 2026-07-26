@@ -2,17 +2,18 @@
 id: GAMEPLAY-WRAITH-ASPECT
 title: Wraith Blood Aspect
 category: gameplay
-status: approved
+status: draft
 authority: primary
 last_reviewed: 2026-07-26
 topics:
   - blood-aspects
   - wraith
   - tier-0
+  - weapon-kits
   - combat-foundation
   - roguelite-combat
-  - techniques
 related:
+  - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-ASPECT-IDENTITY-GUIDELINES
   - GAMEPLAY-COMBAT
@@ -22,359 +23,292 @@ related:
 
 # Wraith Blood Aspect
 
-This document owns Wraith's approved qualitative Tier 0 combat foundation under the expanded Aspect contract.
+## Status correction
 
-It does not approve exact numerical values, frame data, hitboxes, Tier progression, drawbacks, Blood Art, Corruption interactions, production counts, or Wraith's final inclusion after the three-Aspect roster audit.
+Wraith's previous qualitative Tier 0 approval is reopened under the approved [Blood Aspect Weapon-Kit Model](ASPECT_WEAPON_KIT_MODEL.md).
 
-## Tier 0 identity
+The prior package overprescribed how the player should move and behave. It made lateral repositioning, special finishing positions, and repeated reassessment too central to the kit instead of allowing a spacing playstyle to emerge naturally from the sword's range, geometry, timing, tracking, and recovery.
 
-**Wraith is the mid-range spectral skirmisher.**
+This document preserves the promising identity territory and clearly separates it from the decisions that must be redesigned.
 
-Wraith reshapes Akio's shared controls around:
+## Retained working identity
 
-- extended melee reach,
-- short offensive sequences,
-- lateral attack movement,
-- deliberate changes of angle,
-- positional punishment,
-- and repeated disengagement and re-entry without changing the universal neutral dash.
+Wraith remains a promising **extended spectral blade** candidate.
 
-Wraith fights from the edge of ordinary melee range. It attacks in controlled bursts, finishes in a new position, reassesses the encounter, and enters again from another angle.
-
-Wraith does not require teleportation, automatic invulnerability, a unique meter, a target mark, delayed phantom attacks, or an additional input at Tier 0. Its identity comes from its moveset, attack geometry, finishing positions, and defensive profile.
-
-## Universal movement retained
-
-Wraith uses the same functional neutral movement and dash as every launch Aspect.
-
-Wraith does not receive:
-
-- greater or shorter neutral dash distance,
-- faster or slower neutral dash travel,
-- different neutral dash startup,
-- different neutral dash invulnerability,
-- different neutral dash recovery,
-- different repeat-dash availability,
-- or different ordinary locomotion speed.
-
-Wraith feels mobile because its attacks cross lanes and finish at deliberate offsets, not because its dependable defensive movement is stronger than another Aspect's.
-
-## Shared Wraith attack rules
-
-Wraith's attacks generally have:
+The intended broad territory is:
 
 - medium-to-long effective melee reach,
-- restrained forward pursuit,
-- deliberate lateral movement,
-- moderate target correction,
+- Returning Blood extending or reshaping the physical katana,
 - strong line and arc coverage,
-- moderate health and enemy-posture damage,
-- and meaningful recovery after missed committed attacks.
+- deliberate rather than frantic attack timing,
+- strong access to enemies outside conventional sword range,
+- useful crowd and lane control,
+- and natural weakness when enemies collapse inside its preferred range.
 
-Wraith should feel controlled while the player maintains favorable spacing and vulnerable when enemies pin Akio at point-blank range or when attack movement ends in a dangerous position.
+This is a working direction, not a complete approved kit.
 
-Wraith does not teleport through enemies, automatically orbit behind targets, gain extra invulnerability during attacks, ignore hazards, or receive extreme target magnetism.
+## Current design principle
 
-## Wraith basic attack sequence
+Wraith should feel spacing-oriented because of what its sword attacks physically do.
 
-Repeated basic attack presses produce Wraith's two-hit repositioning sequence:
+Possible causes of that playstyle include:
 
-1. **Veil Cut**
-2. **Passing Arc**
+- longer reach,
+- broad or elongated hit geometry,
+- restrained forward tracking,
+- deliberate startup,
+- meaningful recovery after misses,
+- and difficulty correcting against enemies already inside the swing.
 
-There is no third basic combo attack.
+Wraith does not need to force Akio to reposition after every attack.
 
-The sequence belongs specifically to Wraith. Its shorter structure teaches the player to attack, reposition, and reassess rather than continuously recommit like Wolf.
+The player remains free to:
+
+- hold position,
+- step normally,
+- use the universal dash,
+- attack from the current position,
+- defend,
+- change targets,
+- or reposition when the encounter makes it useful.
+
+## Universal systems retained
+
+Wraith uses the same functional:
+
+- ordinary movement speed,
+- neutral dash,
+- dash invulnerability and recovery,
+- sustained block rules and efficiency,
+- player-posture capacity and recovery,
+- parry timing,
+- deathblow rules and standard positioning,
+- Technique system,
+- and prosthetic system
+
+as the other launch candidates during the identity pass.
+
+Wraith is not currently defined by:
+
+- lower player posture,
+- weaker sustained block,
+- stronger posture recovery,
+- special deathblow positioning,
+- a superior dash,
+- teleportation,
+- or additional invulnerability.
+
+## Retained possible held attack — Pale Lance
+
+**Pale Lance** remains a promising held-attack direction, but it is not yet relocked.
+
+Working concept:
+
+- holding and releasing attack creates a long, narrow Blood-formed thrust or blade extension,
+- the motion remains connected to the physical katana,
+- it is a melee line attack rather than an independent projectile,
+- it provides Wraith's longest focused reach,
+- it has limited tracking,
+- it rewards clear punish windows,
+- and it has meaningful recovery after a miss.
+
+Pale Lance could give Wraith strong access to:
+
+- ranged enemies behind a front line,
+- enemies recovering from committed attacks,
+- elites at the edge of their threat range,
+- and bosses during narrow punish windows.
+
+The exact startup, travel, reach, damage, posture pressure, and movement remain open.
+
+## Reopened basic attack sequence
+
+The previous sequence was:
+
+> Veil Cut → Passing Arc
+
+This exact package is no longer approved.
 
 ### Veil Cut
 
-Veil Cut is a narrow extended opening slash.
+The general idea of a narrow extended opening slash remains usable as a design ingredient.
 
-It should have:
+Potential retained properties:
 
-- medium-to-long effective melee reach,
+- longer reach than Wolf's opener,
+- moderate damage,
+- restrained tracking,
 - limited forward movement,
-- a narrow diagonal or horizontal attack shape,
-- moderate health damage,
-- moderate enemy-posture pressure,
-- restrained target correction,
-- and relatively safe recovery after successful contact.
+- and a clear directional hit shape.
 
-Primary uses:
-
-- test an opening outside conventional melee range,
-- catch an approaching enemy,
-- strike before a shorter-ranged enemy begins its attack,
-- and establish the angle for Passing Arc.
-
-Veil Cut reaches the enemy without aggressively pulling Wraith into point-blank range. Its narrow shape does not protect Akio from pressure arriving from the sides or rear.
+The name and exact role remain open.
 
 ### Passing Arc
 
-Passing Arc is a broader spectral slash combined with controlled lateral movement.
+Passing Arc's previous mandatory lateral movement is rejected as a required foundation rule.
 
-It should have:
+A broad spectral sweep may still belong in Wraith's kit, but it should be evaluated first as an attack:
 
-- broader coverage than Veil Cut,
-- a diagonal or crescent-shaped Blood extension,
-- moderate lateral movement chosen by player aim or directional input,
-- good coverage along the travel path,
-- moderate health and enemy-posture damage,
-- limited automatic tracking,
-- and a finishing position offset from the original target.
+- What arc does it cover?
+- How far does it reach?
+- How quickly does it start?
+- How much recovery does it have?
+- How does it handle nearby enemies?
+- Does Akio need to move for the animation and hit shape to work?
 
-Primary uses:
+Any movement should serve the sword action rather than enforce a reposition-and-reassess loop.
 
-- complete Wraith's short sequence,
-- leave the enemy's direct retaliation lane,
-- threaten another enemy positioned along the cut,
-- and establish a new angle for the next decision.
+### Sequence length
 
-Passing Arc always contains a meaningful lateral component. It does not have a separate stationary version at the current concept depth.
+Wraith may ultimately use:
 
-Near walls, pits, hazards, blocked geometry, or invalid destinations, the movement shortens or stops rather than carrying Akio into an invalid position. Exact collision handling and movement distance remain implementation and playtesting work.
+- a two-hit sequence,
+- a three-hit sequence,
+- or another simple finite structure.
 
-Passing Arc does not automatically move behind the enemy or guarantee safety. The chosen direction may place Wraith into another attack, hazard, or crowd.
+Sequence length should be chosen after the attacks themselves are defined. It should not be used merely to contrast Wolf.
 
-## Sequence ending rule
+The player is not required to complete the sequence to use Wraith correctly.
 
-After Passing Arc, Wraith's sequence ends.
+## Reopened dash attack
 
-Following a brief and readable recovery, the player may:
+The previous **Ghostline Slash** required a special diagonal or lateral attack path and an offset finishing position.
 
-- begin another Veil Cut sequence,
-- block or parry,
-- use the universal neutral dash,
-- activate the equipped prosthetic,
-- or reposition normally.
+That behavior is reopened.
 
-The sequence does not restart with Wolf-like continuity. Wraith is rewarded for reading the new position before attacking again.
+The revised dash attack should:
 
-## Held attack — Pale Lance
+- begin after the universal neutral dash,
+- provide a concrete spectral sword attack,
+- preserve the same defensive dash rules as every Aspect,
+- and reinforce Wraith through reach, geometry, timing, or recovery rather than mandatory repositioning.
 
-Holding and releasing the attack input produces **Pale Lance**.
+Possible directions include:
 
-Wraith aligns the physical katana and briefly extends it into a long, narrow spectral point.
+- a long horizontal sweep,
+- an extended diagonal cut,
+- or a fast narrow line slash.
 
-Pale Lance should have:
+No option is approved yet.
 
-- Wraith's longest effective sword reach,
-- a very narrow attack line,
-- slight or moderate forward glide,
-- limited tracking after release,
-- strong focused health damage,
-- meaningful enemy-posture pressure,
-- and substantial recovery after a miss.
+## Reopened parry counter
 
-Primary uses:
+The previous **Veil Reversal** forced a short off-axis shift.
 
-- punish a long enemy recovery,
-- strike through an open lane,
-- threaten a ranged enemy behind the front line,
-- attack a boss from the edge of danger,
-- and reach an enemy that expects Akio's sword to fall short.
+That movement is no longer approved as a defining rule.
 
-Pale Lance remains attached to Akio's physical sword motion. It is not a projectile, does not continue independently, and does not carry Wraith through the target.
+Wraith's parry counter should be redesigned as a concrete spectral sword response after the universal parry. It may differ through:
 
-Wolf uses its held attack to force close engagement. Wraith uses its held attack to exploit preserved distance.
+- longer reach,
+- broader arc,
+- slower but heavier impact,
+- reduced tracking,
+- or another property coherent with the final kit.
 
-## Dash attack — Ghostline Slash
+It should not require:
 
-Attacking during the approved late-dash window or shortly after the universal neutral dash produces **Ghostline Slash**.
+- teleportation,
+- movement behind the target,
+- extra invulnerability,
+- or unique deathblow interaction.
 
-Ghostline Slash is an offensive repositioning cut with:
+## Damage and enemy-posture direction
 
-- the universal dash's unchanged defensive behavior before the attack begins,
-- modest additional attack-bound movement,
-- a diagonal or lateral travel line,
-- broader line coverage than Wolf's Hunting Slash,
-- moderate health and enemy-posture damage,
-- and a finishing position offset from the target.
+The final Wraith profile remains open, but the current likely territory is:
 
-Ghostline Slash is a terminal action. It does not automatically enter Veil Cut, Passing Arc, or another uninterrupted sequence.
+- moderate normal health damage,
+- deliberate rather than rapid sustained output,
+- useful multi-enemy coverage,
+- focused damage from Pale Lance or another held action,
+- and enemy-posture pressure delivered through well-timed extended attacks rather than Wolf-like repeated close contact.
 
-After normal recovery, the player may begin another action. This keeps Wraith's rhythm distinct from Wolf's pressure-restoring dash attack.
+This must be compared against the final Ronin kit before approval.
 
-Ghostline Slash receives no additional invulnerability. It may place Wraith into another enemy's attack, against a wall, near a hazard, or beyond the intended target.
+## Natural strengths to preserve
 
-## Parry counterattack — Veil Reversal
+The final kit should likely provide several of the following:
 
-After a successful universal parry, pressing attack produces **Veil Reversal**.
+- longer effective melee reach,
+- strong frontal lane control,
+- useful arcs against grouped enemies,
+- access to ranged enemies without becoming a projectile weapon,
+- good punishment of enemies whose attacks fall short,
+- and strong control of the space immediately in front of Akio.
 
-Veil Reversal is a precise spectral counter combined with a short visible shift across the attacker's front.
+## Natural weaknesses to preserve
 
-It should have:
+The final kit should likely be challenged by several of the following:
 
-- the same parry requirement and timing rules used by every Aspect,
-- short lateral rather than forward movement,
-- strong focused enemy-posture pressure,
-- moderate health damage,
-- limited nearby coverage,
-- and a finishing position slightly offset from the attacker.
+- enemies already inside its preferred range,
+- low tracking after commitment,
+- slower startup than Wolf,
+- meaningful whiff recovery,
+- pressure from multiple directions,
+- and attacks that require deliberate aim rather than target adhesion.
 
-Veil Reversal is a terminal action. It converts successful defense into positional advantage without automatically entering Wraith's basic sequence.
+These weaknesses should emerge from the moves, not from weaker universal defense or movement.
 
-Veil Reversal does not teleport behind the enemy, gain separate invulnerability, or pass through blocked geometry. Its movement shortens or stops near invalid destinations.
+## Encounter requirements
 
-Wolf parries and forces itself back onto the enemy. Wraith parries and moves the exchange off-axis.
+The redesigned Wraith must remain viable against:
 
-## Wraith defensive and player-posture profile
-
-Wraith retains:
-
-- sustained block,
-- universal parry timing,
-- the universal neutral dash,
-- player posture,
-- posture break,
-- and deathblows.
-
-Its working defensive direction is:
-
-- lower player-posture capacity than Wolf,
-- greater player-posture cost while sustaining block,
-- universal parry timing and success rules,
-- faster natural player-posture recovery after block is released and pressure is escaped,
-- and strong positional reward from Veil Reversal.
-
-Wraith can block unfamiliar attacks, projectiles, or dangerous sequences, but it is not intended to remain planted behind sustained guard.
-
-Removing sustained block is not part of Wraith's approved Tier 0 foundation. A parry-only version remains a possible later experiment only if the roster, enemy patterns, bosses, tutorials, accessibility, and encounter compatibility justify it.
-
-## Damage and enemy-posture profile
-
-Wraith applies:
-
-- moderate damage through Veil Cut and Passing Arc,
-- strong focused damage through Pale Lance,
-- reliable enemy-posture punishment during clear openings,
-- lower sustained enemy-posture pressure than Wolf,
-- and reduced output when forced into prolonged point-blank defense.
-
-Wraith does not receive an automatic maximum-range or sweet-spot damage bonus at Tier 0. Such a rule may later be considered as a Technique, refinement, or progression mechanic if needed.
-
-## Range and Blood-katana direction
-
-Wraith has medium-to-long effective melee reach.
-
-Its Returning Blood expression should make the katana feel:
-
-- thin,
-- spectral,
-- elongated during committed motions,
-- precise,
-- and visually tied to attack direction.
-
-Possible treatment includes a translucent blade extension, narrow crescent trails, or fading afterimages attached to the physical sword motion.
-
-Wraith should not resemble unrestricted spellcasting or permanent ranged combat. Exact shape, color, animation, VFX, and audio treatment remain open.
-
-## Target handling and crowd behavior
-
-Wraith handles targets through spacing and geometry rather than aggressive lock-on pursuit.
-
-Its crowd viability comes from:
-
-- Veil Cut threatening from outside close range,
-- Passing Arc cutting across nearby lanes,
-- Ghostline Slash crossing a formation,
-- Pale Lance reaching through an open line,
-- and repeatedly choosing a safer angle.
-
-Wraith does not receive:
-
-- automatic chained attacks between enemies,
-- full-circle crowd clearing,
-- constant crowd stagger,
-- free passage through enemies,
-- or safety in the center of a group.
-
-Wraith is strongest along the edge of a formation and weakest when enemies fully surround or pin Akio.
-
-## Encounter behavior
-
-### Mixed groups
-
-Wraith fights around the outside of enemy formations, uses attack geometry to affect several threats, and changes angle before the formation closes.
-
-### Crowds
-
-Wraith has strong natural line and arc coverage but poor stability when surrounded. It should move along or across a crowd rather than stand in its center.
-
-### Ranged enemies
-
-Pale Lance and Ghostline Slash give Wraith strong access to ranged enemies without granting a permanent projectile or superior neutral dash.
-
-### Elites
-
-Wraith operates near the edge of an elite's immediate reach, punishes committed actions, and repositions before the next sequence. Fast elites that continuously close distance challenge its preferred spacing.
-
-### Bosses
-
-Wraith remains fully viable in single-target encounters through measured Veil Cut pressure, Passing Arc angle changes, Pale Lance punish windows, Veil Reversal, universal parry, and universal movement.
-
-Wraith applies less continuous enemy-posture pressure than Wolf but gains more reliable access to selected punish windows.
-
-### Hazards and constrained arenas
-
-Walls, pits, traps, persistent ground danger, and cramped rooms directly challenge Wraith's offensive movement. The universal dash remains dependable, but optional attack follow-ups may still end in dangerous positions.
+- mixed waves through reach and attack geometry,
+- crowds through controlled arcs rather than forced movement,
+- ranged enemies through long melee access,
+- elites through spacing and punish timing,
+- bosses through reliable single-target attacks and universal defense,
+- and hazards without requiring special destination logic for every attack.
 
 ## Technique build space
 
-Universal Techniques retain the same rules under every Aspect.
+The final kit must support universal Techniques that can:
 
-Under Wraith they may naturally:
+- **reinforce:** reach, line coverage, arc coverage, deliberate damage, and punish strength,
+- **broaden:** close-range handling, faster pressure, pursuit, or posture continuity,
+- **compensate:** whiff recovery, low tracking, enemies inside preferred range, or crowd collapse,
+- **hybridize:** parry counters, dash attacks, deathblows, posture, held attacks, or prosthetics.
 
-- **reinforce:** extended reach, short-sequence damage, lateral attack movement, line coverage, positional punishment, and recovery after successful repositioning,
-- **broaden:** close-range continuation, sustained enemy-posture pressure, more aggressive restarts, pursuit, and heavier single-target commitment,
-- **compensate:** fragile blocking, lower player-posture capacity, missed Pale Lance recovery, point-blank crowd pressure, and unsafe finishing positions,
-- **hybridize:** parry counters, deathblows, heavy attacks, attack movement, posture, or prosthetic-focused builds.
-
-No Technique is required for Wraith to handle groups, ranged enemies, elites, hazards, or bosses at a basic viable level.
-
-Wraith does not own all movement, dash, range, or defensive Techniques.
+Wraith does not own all range, movement, dash, or avoidance Techniques.
 
 ## Distinction from Mist Raven
 
-Wraith does not replace the Mist Raven prosthetic.
+Wraith remains a sword weapon kit. Mist Raven remains a specialized prosthetic action.
 
-Wraith's movement is:
+Wraith should not depend on:
 
-- part of ordinary sword attacks,
-- visible from beginning to end,
-- directional,
-- committed,
-- constrained by collision and hazards,
-- and generally non-invulnerable beyond the universal defensive rules.
+- disappearance,
+- reactive teleportation,
+- transformation-based avoidance,
+- or broad invulnerability.
 
-Mist Raven may retain a specialized reactive escape, transformation, or avoidance function. Wraith's identity is controlled offensive positioning rather than disappearance on demand.
+Its spectral identity comes from the Blood-formed katana and attack behavior.
 
-## Tier 0 summary
+## Decisions explicitly discarded
 
-Wraith is the mid-range spectral skirmisher.
+The following are not part of the current Wraith foundation:
 
-- **Basic sequence:** Veil Cut → Passing Arc.
-- **Sequence rule:** two-hit burst ending in a lateral offset and deliberate reassessment.
-- **Held attack:** Pale Lance, a long narrow spectral punish with severe miss recovery.
-- **Dash attack:** Ghostline Slash after the universal neutral dash, terminal and position-changing.
-- **Parry counter:** Veil Reversal after a universal parry, terminal and off-axis.
-- **Neutral movement:** identical functional neutral movement and dash across launch Aspects.
-- **Defense:** sustained block retained but less efficient than Wolf's; lower player-posture capacity with stronger recovery after escaping pressure.
-- **Enemy posture:** reliable during chosen openings but weaker sustained pressure than Wolf.
-- **Main strengths:** reach, attack geometry, ranged-enemy access, positional punishment, and mixed-wave control.
-- **Main weaknesses:** point-blank pressure, constrained spaces, missed committed attacks, and dangerous finishing positions.
+- mandatory lateral movement on Passing Arc,
+- required repositioning after the basic sequence,
+- a prescribed reposition-and-reassess gameplay loop,
+- Ghostline Slash always ending at an offset,
+- Veil Reversal always shifting off-axis,
+- lower base player posture,
+- weaker base block efficiency,
+- special deathblow behavior,
+- or unique neutral dash properties.
 
-## Remaining Wraith decisions
+## Next Wraith question
 
-After the full three-Aspect roster and overlap audit are approved, decide:
+Define two or three concrete Wraith weapon-kit options by specifying:
 
-- exact relative attack, player-posture, enemy-posture, range, tracking, recovery, and block-efficiency values,
-- exact hitboxes and movement distances,
-- exact collision shortening for Passing Arc, Ghostline Slash, and Veil Reversal,
-- exact animation and Blood-katana treatment,
-- whether Wraith needs any later unique mechanic beyond the Tier 0 moveset,
-- shared Tier progression and Wraith's Tier package,
-- drawback and Corruption behavior,
-- Blood generation and Blood Art if retained,
-- production scope,
-- and trial or persistent-progression requirements.
+- the complete basic attack sequence,
+- sequence length,
+- attack cadence,
+- reach and hit geometry,
+- per-hit damage and enemy-posture direction,
+- tracking and recovery,
+- held attack,
+- dash attack,
+- and parry counter.
+
+Choose the option whose moves naturally create the clearest spectral spacing playstyle without prescribing how the player must move after every action.

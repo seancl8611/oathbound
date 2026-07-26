@@ -9,12 +9,12 @@ last_reviewed: 2026-07-26
 
 # Current Design Questions
 
-This file contains unresolved decisions that materially change release scope, production workload, interfaces, or authored presentation. Exact numerical tuning remains in implementation and playtesting.
+This file contains unresolved decisions that materially change release scope, production workload, interfaces, or authored presentation. Exact numerical tuning remains implementation and playtesting work.
 
 ## Priority order
 
-1. Three-Aspect identity roster and Technique compatibility
-2. Shared Aspect structure and selected Aspect packages
+1. Three-Aspect weapon-kit roster and Technique compatibility
+2. Shared Aspect progression structure and selected packages
 3. Launch run-build content catalog
 4. Persistent progression, onboarding, and trial package
 5. Narrative delivery and authored-content package
@@ -22,252 +22,320 @@ This file contains unresolved decisions that materially change release scope, pr
 
 ## Resolved Blood Aspect foundation
 
-The current launch-scoping direction is approved at this depth:
+The following direction is approved:
 
-- the player selects one Blood Aspect as a major run foundation,
-- the selected Aspect changes the run identity immediately at Tier 0,
-- the launch scope currently assumes three Aspects,
-- all Aspects use the same control layout and participate in the attack, defense, movement, posture, deathblow, Technique, and prosthetic systems,
-- identities are multidimensional rather than assigned to one core action,
-- the weapon direction is one physical katana expressed through different Blood combat forms,
-- and shared controls do not require an identical moveset.
+- the player selects one Blood Aspect before a run,
+- the selected Aspect creates an immediate Tier 0 sword-combat identity,
+- the current launch baseline contains three Aspects,
+- all Aspects use one physical katana expressed through different Returning Blood forms,
+- shared controls do not require one identical moveset,
+- each Aspect owns a complete sword kit assigned to shared offensive action slots,
+- ordinary Techniques use one universal ruleset,
+- and the initial roster is completed before exact progression, Blood Arts, or production counts are locked.
 
-Three is the current production baseline, not a permanent ceiling.
+The authoritative design rule is:
 
-The expanded moveset contract may support a fourth and possibly fifth Aspect in future development. Neither is part of the current paper-design, launch-production, animation, VFX, UI, trial, or milestone baseline. Reconsider expansion only after the three launch candidates are playable and testing demonstrates a meaningful missing combat identity that cannot be covered by revising the roster, Techniques, or prosthetics.
+> **The moves create the playstyle. An Aspect should not depend on a mandatory combo goal, forced movement loop, or separate behavioral minigame.**
+
+See `gameplay/ASPECT_WEAPON_KIT_MODEL.md`.
+
+## Resolved weapon-kit action model
+
+Every candidate defines:
+
+- **Basic Attack:** primary attack sequence and normal swordplay,
+- **Held Attack:** major secondary or committed sword action,
+- **Dash Attack:** offensive follow-up after the universal neutral dash,
+- **Parry Counter:** direct attack after the universal parry,
+- and potentially **Blood Art** later if retained by the final progression system.
+
+Aspect identity should emerge from connected differences in:
+
+- attack cadence,
+- sequence length,
+- reach,
+- hit geometry,
+- attack-bound movement,
+- tracking,
+- health damage,
+- enemy-posture pressure,
+- commitment,
+- recovery,
+- target handling,
+- and Blood-katana presentation.
+
+The held attack is treated as a genuine secondary sword action. It does not need to be one universal thrust or merely a charged Basic Attack.
+
+## Resolved universal launch layer
+
+During the initial three-Aspect identity pass, every candidate shares the same functional:
+
+- controller layout,
+- ordinary locomotion,
+- neutral dash distance, speed, startup, invulnerability, recovery, steering, collision, and repeat availability,
+- block rules and baseline efficiency,
+- player-posture capacity and recovery,
+- parry timing and success rules,
+- enemy telegraphs and response logic,
+- posture-break and stagger rules,
+- deathblow eligibility, execution, and standard positioning,
+- Technique system,
+- prosthetic system,
+- and combat interface language.
+
+These systems are not current Aspect identity levers.
+
+The identity pass should not create:
+
+- weaker or stronger neutral dashes,
+- different base player-posture bars,
+- different base block efficiency,
+- removal of sustained block,
+- unique deathblow movement or effects,
+- or new Aspect-specific resources or inputs.
+
+Later exceptions require playable evidence and explicit review of balance, enemies, bosses, onboarding, accessibility, UI, and production cost.
+
+## Resolved combo and movement boundaries
+
+### Combos
+
+A combo or attack sequence is a set of available sword attacks, not a required objective.
+
+The player may stop, defend, dash, redirect, use a Prosthetic, or abandon a sequence without failing the Aspect's intended gameplay.
+
+Do not define a kit around:
+
+- preserving a combo state,
+- reaching one finisher as the main goal,
+- maintaining a combo through unrelated actions,
+- or looping a sequence as a mandatory success condition.
+
+### Movement
+
+Attack-bound movement is valid when it naturally belongs to the attack.
+
+Do not manufacture identity through:
+
+- mandatory lateral movement after ordinary attacks,
+- every counter changing position,
+- every dash attack ending at a special offset,
+- automatic movement behind enemies,
+- or movement-direction input selecting unrelated Basic Attacks.
+
+A spacing playstyle should usually emerge from reach, geometry, timing, tracking, and recovery.
 
 ## Resolved Aspect-Technique responsibility contract
 
-Aspects and Techniques are both major run-build layers with different responsibilities.
-
-- **Aspect:** the pre-run, always-present combat foundation and immediate Tier 0 identity.
-- **Techniques:** four limited, replaceable in-run modifications plus one inactive reserve.
-- The Aspect may broadly change chain structure, rhythm, range, coverage, commitment, recovery, attack movement, target handling, defensive profile, damage-versus-posture profile, and Blood-weapon expression.
-- A Technique modifies a specific action, condition, transition, payoff, resource interaction, or tactical option within that foundation.
+- **Aspect:** pre-run, always-present sword foundation active from Tier 0.
+- **Techniques:** four active temporary modifications plus one inactive reserve.
 - An Aspect must function before any Technique is acquired.
-- An ordinary Technique must function with every Aspect.
+- Ordinary Techniques must function with every Aspect.
 - Ordinary Techniques are not hard-locked to an Aspect or minimum Tier.
-- Affinity represents amplification rather than eligibility.
-- Most synergy should emerge through shared combat verbs instead of bespoke per-Aspect versions of every Technique.
+- Affinity may later amplify or weight offers; it does not determine eligibility.
+- A Technique modifies a specific action, condition, payoff, transition, resource interaction, or tactical option.
+- A Technique cannot repair an incomplete Aspect kit.
+- Aspect progression cannot make Techniques secondary.
 
-A Technique loadout may intentionally reinforce an Aspect's strengths, broaden it into adjacent options, compensate for a weakness at the cost of a slot, or hybridize it into an unusual but coherent build.
+Ordinary Technique action tags should include:
 
-Direct Aspect-, Blood-, or Tier-referencing Techniques remain possible only as limited explicit exceptions after the roster and shared structure are approved.
+- Basic Attack,
+- Held Attack,
+- Dash Attack,
+- Parry Counter,
+- Block,
+- Parry,
+- Deathblow,
+- Prosthetic,
+- Health,
+- Enemy Posture,
+- Player Posture,
+- and Movement.
 
-## Resolved expanded player-kit boundary
+Technique builds may reinforce, broaden, compensate, or hybridize the selected kit.
 
-The original shared-moveset boundary is superseded. The approved rule is:
+## Current launch roster status
 
-> Aspects share controls, neutral movement, enemy rules, and combat readability; they do not need to share one identical sword moveset.
+Wolf, Wraith, and Ronin remain the three working launch positions.
 
-### Universal across launch Aspects
+Three is the current production baseline, not a permanent ceiling. The weapon-kit model may eventually support a fourth and possibly fifth Aspect, but neither belongs to current launch paper-design, animation, VFX, UI, trial, content-count, or milestone scope.
 
-- input layout and control scheme,
-- basic attack, held attack, defense, parry-counter, dash-attack, deathblow, Technique, and prosthetic action slots,
-- defense input and parry timing/success logic,
-- enemy telegraphs, responses, and punish logic,
-- posture, stagger, posture-break, and deathblow language,
-- Spirit and prosthetic controls,
-- Technique-system rules,
-- ordinary locomotion speed,
-- neutral dash distance and travel speed,
-- neutral dash startup, invulnerability, recovery, steering, collision, and repeat availability,
-- and standard access to actions after a neutral dash.
+Complete and test the initial three first. Expansion requires playable evidence of a missing identity that cannot be covered by revising the roster, Techniques, or prosthetics.
 
-Aspect selection must not reduce dependable evasion or arena navigation through a shorter, slower, or less responsive neutral dash.
+### Wolf — approved for comparison
 
-### Allowed to vary by Aspect at Tier 0
+Wolf remains the fast close-range pressure kit.
 
-- basic attack sequence length, names, order, branches, restart behavior, and rhythm,
-- reach and attack geometry,
-- movement, tracking, commitment, recovery, and cancel opportunities attached to attacks,
-- health-damage and enemy-posture profile,
-- target handling,
-- held-attack behavior,
-- post-parry counterattack behavior,
-- dash-attack behavior and follow-up sequence,
-- offensive transitions after block, dodge, parry, deathblow, or another attack,
-- player-posture capacity and recovery direction,
-- block efficiency and posture cost,
-- and the Blood-formed expression of the katana.
+Approved qualitative package:
 
-`Quick Slash`, `Cross Cut`, `Heavy Cleave`, `Hold Thrust`, `Counter Cut`, and `Dash Slash` are no longer mandatory universal move names or roles. They may remain within an individual Aspect when appropriate.
+- **Basic Attack:** Fang Slash → Rending Cross → Blood Cleave,
+- **Held Attack:** Predator's Passage,
+- **Dash Attack:** Hunting Slash,
+- **Parry Counter:** Fang Reversal,
+- short reach,
+- fast cadence,
+- strong forward attack movement,
+- strong nearby tracking,
+- moderate per-hit damage,
+- strong sustained health and enemy-posture output,
+- and significant whiff and overcommitment risk.
 
-All current launch candidates retain meaningful attack, block, parry, dodge, posture, deathblow, Technique, and prosthetic play. Removing sustained block entirely remains an unresolved possible exception requiring explicit roster-level approval and encounter compatibility review.
+Important correction:
 
-Universal Techniques retain one ruleset across all Aspects. They may feel or perform differently only because the underlying Aspect-specific action already differs.
+- Wolf's sequence is an available pressure pattern, not a required combo objective.
+- Wolf uses universal block, player posture, deathblows, locomotion, and neutral dash.
 
-Aspect statistics and properties are balanced as tradeoffs. No Aspect should simultaneously own the best attack speed, range, damage, safety, posture pressure, tracking, coverage, and flexibility. Neutral movement and dash are not automatic tradeoff levers.
+Still unresolved:
 
-## Resolved Wolf concept-level foundation — revised
+- exact values and frame data,
+- exact hitboxes and chain windows,
+- Predator's Passage eligibility and collision behavior,
+- exact animations and Blood presentation,
+- later unique mechanics if any,
+- progression, drawback, Corruption, Blood, and Blood Art,
+- Technique interactions,
+- production counts,
+- and final roster inclusion after the audit.
 
-Wolf's high-level role and qualitative Tier 0 combat foundation are approved for roster comparison under the expanded contract.
+### Wraith — reopened and next active task
 
-- **Known as:** the close-range aggressive Aspect.
-- **Rhythm:** fast, continuous, and forward-driving.
-- **Range:** shortest or near-shortest normal attack reach.
-- **Damage:** moderate per hit with strong sustained output while connected.
-- **Enemy posture:** consistent pressure through repeated contact.
-- **Movement:** strong movement within attacks and offensive transitions; universal neutral movement and dash remain unchanged.
-- **Coverage:** narrow opener with broader later attacks for nearby threats.
-- **Commitment:** responsive while attacks connect and more punishable after misses.
-- **Encounter role:** priority-target pursuit with built-in mixed-wave, crowd, ranged, elite, hazard, and boss viability.
-- **Risk:** short reach, overextension, missed attacks, target fixation, and surrounding pressure.
+Wraith's previous complete Tier 0 approval is partially superseded.
 
-Wolf's approved Aspect-specific controls are:
+Retained promising territory:
 
-- **Basic sequence:** Fang Slash → Rending Cross → Blood Cleave.
-- **Sequence rule:** successful completion may flow back to Fang Slash; misses receive full recovery.
-- **Held attack:** Predator's Passage, committed piercing pursuit with conditional pass-through.
-- **Dash attack:** Hunting Slash after the universal neutral dash, entering at Rending Cross.
-- **Parry counter:** Fang Reversal after a universal parry, entering at Rending Cross.
-- **Defense:** functional sustained block, universal parry timing, moderate-to-high player-posture capacity, and no automatic attack-based posture recovery at Tier 0.
+- extended spectral Blood-katana form,
+- medium-to-long melee reach,
+- strong line and arc coverage,
+- deliberate timing,
+- Pale Lance as a possible long narrow Held Attack,
+- and weakness when enemies enter inside preferred range.
 
-Wolf's authoritative package is owned by `gameplay/WOLF_ASPECT.md`.
+No longer approved:
 
-Still unresolved for Wolf are exact values, hitboxes, chain windows, passage eligibility, player-posture values, exact animation and Blood-katana treatment, any later unique mechanic, Tier progression, drawback, Corruption behavior, Blood Art, production counts, and final roster inclusion after the three-candidate audit.
+- mandatory lateral movement in Passing Arc,
+- required reposition-and-reassess sequence behavior,
+- Ghostline Slash always ending at an offset,
+- Veil Reversal always shifting off-axis,
+- weaker base block,
+- lower base player posture,
+- special deathblow behavior,
+- and any unique neutral dash behavior.
 
-## Resolved Wraith concept-level foundation
-
-Wraith's high-level role and qualitative Tier 0 combat foundation are approved for roster comparison under the expanded contract.
-
-- **Known as:** the mid-range spectral skirmisher.
-- **Rhythm:** short deliberate attack bursts followed by repositioning and reassessment.
-- **Range:** medium-to-long effective melee reach.
-- **Damage:** moderate normal damage with strong focused damage from Pale Lance.
-- **Enemy posture:** reliable punishment during chosen openings, but lower sustained pressure than Wolf.
-- **Movement:** lateral and diagonal movement attached to attacks; universal neutral movement and dash remain unchanged.
-- **Coverage:** strong lines, diagonals, and arcs without full-circle safety.
-- **Tracking:** moderate and restrained; attack geometry matters more than target adhesion.
-- **Commitment:** controlled through the short sequence and severe after missed committed line attacks.
-- **Encounter role:** spacing, positional punishment, ranged-enemy access, and mixed-wave control.
-- **Risk:** point-blank pressure, constrained arenas, hazards, missed committed attacks, and dangerous finishing positions.
-
-Wraith's approved Aspect-specific controls are:
-
-- **Basic sequence:** Veil Cut → Passing Arc.
-- **Sequence rule:** two-hit sequence ending in lateral repositioning and deliberate reassessment; no third combo attack.
-- **Passing Arc movement:** always includes a meaningful lateral component; movement shortens or stops near invalid destinations rather than offering a stationary alternate.
-- **Held attack:** Pale Lance, a long narrow spectral punish with severe miss recovery.
-- **Dash attack:** Ghostline Slash after the universal neutral dash, terminal and position-changing.
-- **Parry counter:** Veil Reversal after a universal parry, terminal and off-axis.
-- **Defense:** sustained block retained but less efficient than Wolf's; lower player-posture capacity with stronger recovery after escaping pressure.
-
-Wraith remains distinct from Mist Raven because its movement is visible, directional, attack-bound, collision-constrained, and generally non-invulnerable beyond universal defensive rules.
-
-Wraith's authoritative package is owned by `gameplay/WRAITH_ASPECT.md`.
-
-Still unresolved for Wraith are exact values, hitboxes, movement distances, collision shortening, player-posture values, exact animation and Blood-katana treatment, any later unique mechanic, Tier progression, drawback, Corruption behavior, Blood Art, production counts, and final roster inclusion after the three-candidate audit.
-
-## 1. Three-Aspect identity roster and Technique compatibility
-
-Wolf, Wraith, and Ronin remain the three working candidates for the three launch roster positions.
-
-Wolf and Wraith are complete at qualitative Tier 0 depth for the current comparison pass. **Ronin is the next active candidate.**
-
-### Pass 1 — Ronin identity definition
-
-Define:
-
-- the clear player-facing playstyle label and fantasy,
-- the Ronin-specific basic attack structure and why its length or branching teaches the identity,
-- the held attack,
-- the post-parry counterattack,
-- the dash attack following the universal neutral dash,
-- relative range, rhythm, damage, enemy-posture pressure, player-posture profile, movement, coverage, tracking, commitment, and recovery,
-- how block, parry, and the universal neutral dash support the playstyle,
-- how Ronin remains fun and viable in mixed waves, crowds, ranged pressure, elites, hazards, and bosses,
-- how universal Techniques can reinforce, broaden, compensate, and hybridize it,
-- its natural risk,
-- and how it remains one version of Akio rather than a generic default or separate character.
-
-This pass does not lock exact numbers, frame data, hitboxes, production counts, Tiers, Blood Arts, or individual Techniques.
-
-Ronin must not become:
-
-- only the parry Aspect,
-- the plain default sword kit,
-- the intentionally weakest or safest option,
-- or a slower and stronger version of Wolf.
-
-### Pass 2 — Roster overlap and gap audit
-
-After Ronin is defined, compare all three candidates together:
-
-- identify mechanical or thematic overlap,
-- identify any missing launch-critical combat territory,
-- confirm that each candidate remains useful with the complete combat framework,
-- confirm several distinct four-Technique build shapes per candidate,
-- confirm that Techniques and prosthetics retain meaningful build space,
-- confirm that neutral movement and dash remain universal,
-- confirm that enemy and boss rules do not need separate compatibility layers,
-- and determine whether the candidates are sufficiently distinct for repeated runs.
-
-A detected gap should first be addressed by revising or replacing one of the three candidates. It does not automatically justify a fourth Aspect.
-
-### Pass 3 — Roster revision
-
-Retain, revise, rename, combine, or replace candidates as required by the audit.
-
-### Pass 4 — Identity approval
-
-Approve:
-
-- a concise three-row roster table,
-- the candidate-specific moveset and defensive profile,
-- the expected Technique build directions for each identity,
-- and the production distinction required for each identity.
-
-Only after this pass should exact Tiers, Blood generation, Blood Arts, later candidate mechanics, detailed affinities, or candidate-specific production packages be treated as final.
-
-## 2. Shared Aspect structure and selected Aspect packages
-
-Only after the three identities are approved, decide the shared gameplay structure.
-
-The current Tier 0-IV, Corruption, Embrace, Blood, Blood Art, and drawback-family model remains a working proposal. It may be preserved, revised, simplified, or replaced during this pass.
+The next discussion must define two or three concrete Wraith weapon-kit options and choose one based on the moves themselves.
 
 Decide:
 
-- whether the Tier 0-IV structure remains appropriate,
+- complete Basic Attack sequence,
+- sequence length,
+- cadence,
+- reach,
+- hit geometry,
+- damage and enemy-posture profile,
+- tracking,
+- commitment and recovery,
+- Held Attack,
+- Dash Attack,
+- Parry Counter,
+- natural strengths and weaknesses,
+- encounter coverage,
+- and Technique build directions.
+
+### Ronin — unresolved after Wraith
+
+Rejected Ronin directions:
+
+- preserving a combo through defense,
+- playing around reaching Judgment Stroke,
+- and movement-direction input selecting different Basic Attacks.
+
+Ronin requires a new complete weapon-kit direction.
+
+A deliberate high-impact katana is one possible exploration path, not an approved answer. Ronin must not become:
+
+- the plain default sword kit,
+- only the parry Aspect,
+- the intentionally safest option,
+- a weaker or stronger Wolf,
+- or a kit defined by one input gimmick.
+
+## Roster design sequence
+
+1. Redesign Wraith under the weapon-kit model.
+2. Define Ronin under the same model.
+3. Compare Wolf, Wraith, and Ronin together.
+4. Identify mechanical overlap and missing combat territory.
+5. Confirm mixed-wave, crowd, ranged, hazard, elite, and boss viability.
+6. Confirm several four-Technique build directions for each kit.
+7. Confirm Techniques and prosthetics retain meaningful space.
+8. Estimate required animation, VFX, audio, UI, and trial scope.
+9. Revise, rename, combine, or replace candidates as needed.
+10. Approve the final three-row launch roster.
+
+Only after that should exact Tiers, Blood generation, Blood Arts, drawbacks, affinities, or candidate production packages be treated as final.
+
+## Roster approval test
+
+The launch roster is not ready unless:
+
+- each candidate can be explained as a concrete sword weapon kit,
+- its playstyle emerges from the moves rather than behavioral instructions,
+- no candidate depends on a mandatory combo or movement loop,
+- no candidate is merely a stronger or weaker version of another,
+- universal movement, defense, player posture, and deathblows remain readable,
+- every candidate works against all major encounter types,
+- each supports reinforce, broaden, compensate, and hybridize Technique builds,
+- Techniques and prosthetics retain meaningful territory,
+- and production requirements remain achievable.
+
+## 2. Shared Aspect progression structure and selected packages
+
+After the weapon-kit roster is approved, decide:
+
+- whether Tier 0-IV remains appropriate,
 - whether every selected Aspect uses the same Tier contract,
-- whether Blood remains a Tier II run-only activation resource,
-- whether every Aspect has one Blood Art,
-- whether one evolving drawback family remains the correct risk model,
-- how Resist, Embrace, and maximum-Tier Shrine behavior relate to the final system,
-- Blood generation and activation behavior if Blood remains,
+- whether Blood remains a Tier II run-only resource,
+- whether every Aspect receives one Blood Art,
+- whether one evolving drawback family remains correct,
+- how Resist, Embrace, and maximum-Tier Shrine behavior work,
+- Blood generation and activation if retained,
 - the exact package for each approved Aspect,
-- how every package continues to support the complete combat framework,
-- cross-Aspect distinction and overlap,
-- relative attack, player-posture, enemy-posture, range, recovery, block-efficiency, and coverage tradeoffs,
+- how progression deepens rather than replaces the weapon kit,
 - detailed affinity and offer-weighting rules,
-- whether any direct Aspect-, Blood-, or Tier-referencing Technique exceptions ship,
-- and required input, HUD, animation, VFX, audio, trial, and progression states.
+- whether limited direct Aspect-, Blood-, or Tier-referencing Techniques ship,
+- and required HUD, input, animation, VFX, audio, trial, and progression states.
 
-Exact damage, posture, attack speed, range, gain-rate, threshold, and duration values remain playtest work. Neutral locomotion and dash remain universal unless a later exceptional system change receives explicit approval.
+The prior working model used:
 
-Partial Blood Art activation is not part of the current working baseline. Reconsider it only if Blood Arts remain in the approved system and playable testing demonstrates a need.
+- Tier 0 as the immediate foundation,
+- Tier I to deepen it and possibly introduce risk,
+- Tier II to unlock Blood and a Blood Art,
+- Tier III to deepen the specialization,
+- Tier IV as an occasional capstone,
+- Tier II or III as a common successful-run endpoint,
+- and no Tier V.
 
-This package must be completed before individual Technique coverage and launch counts are approved.
+This remains a proposal and may be revised or simplified.
+
+Exact damage, posture, attack speed, range, gain-rate, threshold, and duration values remain playtest work.
 
 ## 3. Launch run-build content catalog
 
-What minimum catalog must exist at launch for a complete and replayable run-build system?
+Decide the minimum launch catalog for a complete and replayable build system:
 
-Decide:
-
-- approximate base Technique count and broad combat-role distribution,
+- approximate base Technique count and role distribution,
+- Technique action-tag coverage,
 - how many Techniques support one refinement,
 - how many entries may directly reference the approved Aspect system,
-- temporary Prosthetic Technique count per equipped tool,
-- initial Relic count and approximate rarity distribution,
-- whether consumables are included at launch,
+- temporary Prosthetic Technique count per tool,
+- initial Relic count and rarity distribution,
+- whether consumables ship,
 - and which entries require unique icons, VFX, animation, or audio.
 
 Before approving counts, complete:
 
-1. the approved three-Aspect identity roster,
-2. the approved shared Aspect structure and individual packages,
-3. detailed affinity, weighting, and direct-exception rules,
+1. the three-Aspect roster,
+2. the shared progression structure and individual packages,
+3. affinity and direct-exception rules,
 4. a cross-system overlap audit,
 5. Technique category, tag, and rarity rules,
 6. the refinement standard,
@@ -275,23 +343,19 @@ Before approving counts, complete:
 
 ## 4. Persistent progression, onboarding, and trial package
 
-What minimum persistent-progression and training package ships through the Bloodwell, Forge, Blood Mirror, and Blood Cavern?
-
-Decide:
+Decide the minimum persistent package across the Bloodwell, Forge, Blood Mirror, and Blood Cavern:
 
 - available launch services,
-- approximate permanent node, rank, or branch counts,
-- required basic-combat and system trials,
-- approved Aspect-system teaching and mastery trials,
+- permanent node, rank, or branch counts,
+- required basic-combat trials,
+- weapon-kit teaching and mastery trials,
 - Technique demonstrations or mastery trials,
 - unlock ownership,
 - and required interface states.
 
-Exact costs and percentages remain balance work. Any persistent Aspect content depends on the final approved Aspect system.
+Exact costs and percentages remain balance work. Persistent Aspect content depends on the final roster and progression structure.
 
 ## 5. Narrative delivery and authored-content package
-
-What minimum authored package communicates the approved story clearly?
 
 Decide:
 
@@ -306,8 +370,6 @@ Decide:
 
 ## 6. Postgame release package
 
-What minimum postgame package ships after the canonical Heart victory?
-
 Decide:
 
 - continuation from the Shogun to the Heart,
@@ -319,20 +381,21 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 
 ## Deferred gameplay and implementation decisions
 
-- fourth or fifth Blood Aspects before playable roster testing demonstrates a missing identity,
-- individual Technique concepts and final catalog counts before the Aspect roster and shared structure are approved,
+- fourth or fifth Aspect before playable roster evidence,
+- exact frame data and hitboxes,
+- exact attack, damage, posture, tracking, and recovery values,
+- exact neutral movement and dash values while preserving the universal contract,
+- any future difference in base block, player posture, or deathblow behavior,
+- individual Technique concepts and final counts before roster approval,
 - exact affinity weights and reward probabilities,
 - exact room counts and route topology,
 - miniboss placement,
 - exact enemy and boss movesets,
 - exact Corruption gain, Shrine frequency, and Tier thresholds,
-- exact Blood gain, capacity, activation, duration, retention, and anti-farming values if Blood remains,
-- exact Aspect attack damage, player posture, enemy posture, range, tracking, recovery, block efficiency, and coverage values,
-- exact neutral movement and dash values while preserving their universal contract,
-- whether any future Aspect removes sustained block,
-- partial activation before approved system direction and playtest evidence,
+- exact Blood gain, capacity, activation, duration, retention, and anti-farming values,
+- partial Blood Art activation,
 - Spirit costs and prosthetic cooldowns,
-- hitboxes, immunity tables, and status values,
+- immunity tables and status values,
 - reward probabilities, prices, rerolls, and anti-streak formulas,
 - exact permanent-upgrade percentages,
 - and final animation frames and VFX timing.
