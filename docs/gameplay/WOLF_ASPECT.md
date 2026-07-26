@@ -22,275 +22,310 @@ related:
 
 # Wolf Blood Aspect
 
-This document owns Wolf's approved qualitative Tier 0 offensive foundation.
+This document owns Wolf's approved qualitative Tier 0 combat foundation under the expanded Aspect contract.
 
-It does not approve exact numerical values, frame data, unique meters or marks, Tier progression, drawbacks, Blood Art, Corruption interactions, production counts, or Wolf's final inclusion after the three-Aspect roster audit.
+It supersedes the assumption that Wolf merely changes the properties of one universal `Quick Slash`, `Cross Cut`, `Heavy Cleave`, `Hold Thrust`, `Counter Cut`, and `Dash Slash` kit.
+
+It does not approve exact numerical values, frame data, hitboxes, unique meters or marks, Tier progression, drawbacks, Blood Art, Corruption interactions, production counts, or Wolf's final inclusion after the three-Aspect roster audit.
 
 ## Tier 0 identity
 
-Wolf is the close-range aggressive Aspect.
+**Wolf is the close-range aggressive Aspect.**
 
-At Tier 0, Wolf reshapes Akio's shared sword kit around:
+Wolf reshapes Akio's shared controls around:
 
-- fast and continuous attack timing,
-- strong forward movement,
+- fast and continuous offensive timing,
+- strong forward pursuit,
 - staying connected to nearby enemies,
 - transferring pressure between threats,
-- consistent health and posture pressure,
-- and greater commitment once offense begins.
+- repeated health and posture pressure,
+- rapid return to offense after movement or defense,
+- and greater commitment once an attack sequence begins.
 
-Wolf does not require a unique meter, target mark, stacking buff, or additional input at Tier 0. Its identity comes from the behavior of the shared combat actions.
+Wolf does not require a unique meter, target mark, stacking buff, additional input, or automatic attack behavior at Tier 0. Its identity comes from its complete Aspect-specific moveset and transition rules.
+
+## Universal movement retained
+
+Wolf uses the same functional neutral movement and dash as every launch Aspect.
+
+Wolf does not receive:
+
+- shorter backward or lateral dash distance,
+- reduced dash speed,
+- reduced neutral dash invulnerability,
+- slower neutral dash recovery,
+- or reduced general locomotion speed.
+
+Wolf's aggressive movement identity comes from attacks and offensive transitions rather than a nerf to Akio's dependable evasion or traversal.
 
 ## Shared Wolf attack rules
 
 Wolf's attacks generally have:
 
-- shorter effective weapon reach,
-- stronger forward movement,
-- stronger correction toward nearby moving targets,
-- faster transitions between successful attacks,
-- easier redirection between nearby enemies during a chain,
+- short effective weapon reach,
+- strong forward movement,
+- strong correction toward nearby aimed enemies,
+- fast transitions after successful contact,
+- practical redirection between nearby targets,
+- moderate per-hit damage,
+- repeated posture pressure,
 - and greater recovery risk after missing.
 
-Wolf should feel responsive while its attacks connect, but reckless when the player attacks into empty space or continues a chain at the wrong time.
+Wolf should feel responsive while its attacks connect and reckless when the player attacks into empty space or continues an unearned sequence.
 
-Wolf does not teleport to targets, automatically continue attacking, ignore enemy pressure, or gain broad safety while attacking. The player still chooses direction, timing, defense, and when to stop.
+Wolf does not teleport to targets, automatically continue attacking, ignore enemy pressure, gain broad invulnerability while attacking, or magnetize across unreasonable distances.
 
-## Quick Slash
+## Wolf basic attack sequence
 
-### Shared purpose
+Repeated basic attack presses produce Wolf's three-hit escalating pressure chain:
 
-Quick Slash remains the safest attack for testing an opening and beginning the sword chain.
+1. **Fang Slash**
+2. **Rending Cross**
+3. **Blood Cleave**
 
-### Wolf expression
+The sequence belongs specifically to Wolf. Other Aspects may use different chain lengths, names, structures, or purposes.
 
-Wolf's Quick Slash is a short, fast advancing cut.
+### Fang Slash
+
+Fang Slash is Wolf's fast advancing opener.
 
 It should have:
 
-- the fastest or near-fastest opening timing among the Aspects,
-- a tight attack arc,
+- fast or near-fastest opening timing among the launch Aspects,
+- a narrow diagonal or forward arc,
 - short weapon reach,
-- noticeable forward movement,
-- strong correction toward a nearby aimed enemy,
+- a small but noticeable forward step,
+- moderate nearby target correction,
 - and moderate health and posture pressure.
 
-Quick Slash makes entering close range immediate, but its narrow coverage does not protect Akio from side pressure.
-
-### Primary uses
+Primary uses:
 
 - begin pressure,
 - catch a nearby retreating enemy,
-- restart offense after defense,
-- and enter Wolf's broader later-chain attacks.
+- test a close opening,
+- and establish Wolf's forward momentum.
 
-### Risk
+Its narrow coverage does not protect Wolf from enemies approaching from the sides.
 
-Repeated use can pull Akio into surrounding enemies, hazards, or an unsafe commitment.
+### Rending Cross
 
-## Cross Cut
-
-### Shared purpose
-
-Cross Cut remains the wider second attack connecting the opener to the committed finisher.
-
-### Wolf expression
-
-Wolf's Cross Cut is its main nearby-enemy coverage attack.
+Rending Cross is Wolf's broader returning cut and pressure connector.
 
 It should have:
 
-- a broader arc than Quick Slash,
+- a broader arc than Fang Slash,
 - continued forward movement,
-- enough side coverage to catch nearby enemies,
-- redirection toward a nearby threat after Quick Slash,
+- enough side coverage to catch nearby interference,
+- stronger redirection toward a second nearby threat,
 - and balanced health and posture pressure.
 
-Cross Cut is essential to Wolf's mixed-wave viability. Wolf cannot depend entirely on narrow single-target attacks.
-
-### Primary uses
+Primary uses:
 
 - continue pressure on the current target,
-- catch an enemy approaching from the side,
-- redirect toward another nearby enemy,
-- and create enough control to attempt Heavy Cleave.
+- remain connected to an enemy attempting to shift away,
+- catch a nearby enemy entering from the side,
+- redirect pressure between close threats,
+- and establish the opening for Blood Cleave.
 
-### Risk
+Rending Cross is not a full-circle crowd-clear attack. Enemies behind Akio or beyond its arc remain dangerous.
 
-Cross Cut is not a full-circle crowd-clear attack. Enemies behind Akio or beyond its arc remain dangerous.
+### Blood Cleave
 
-## Heavy Cleave
-
-### Shared purpose
-
-Heavy Cleave remains the committed combo finisher with strong posture pressure and meaningful recovery risk.
-
-### Wolf expression
-
-Wolf's Heavy Cleave is a broad, forceful finishing attack carrying forward momentum through the end of the chain.
+Blood Cleave is Wolf's committed finishing cut.
 
 It should have:
 
 - a broad frontal or diagonal arc,
-- strong posture pressure,
+- stronger posture pressure than the preceding hits,
 - meaningful but not automatically roster-leading health damage,
-- coverage against the main target and nearby enemies,
+- coverage against the main target and nearby enemies in front of Akio,
 - strong forward commitment,
 - and severe recovery after missing.
 
-The attack should feel like the release of pressure created through Quick Slash and Cross Cut.
+Primary uses:
 
-### Primary uses
-
-- finish a successful close-range sequence,
+- finish an earned close-range sequence,
 - threaten several enemies positioned in front of Akio,
 - punish a large opening,
-- and push an elite or boss toward posture break.
+- and drive an elite or boss toward posture break.
 
-### Risk
+Blood Cleave is Wolf's clearest basic-chain overcommitment point. Earlier hits connecting does not automatically make the finisher safe.
 
-Heavy Cleave is one of Wolf's clearest overcommitment points. An unearned finisher leaves Akio open to side attacks, ranged attacks, hazards, or boss retaliation.
+## Chain continuation rule
 
-Earlier attacks connecting does not automatically make Heavy Cleave safe.
+After a successful Blood Cleave, Wolf may restart at Fang Slash with a shortened but readable transition.
 
-## Hold Thrust
+This creates the intended rhythm:
 
-### Shared purpose
+> Fang Slash → Rending Cross → Blood Cleave → recommit or disengage.
 
-Hold Thrust remains a precise, narrow attack for spacing, punishment, and strong single-target posture pressure.
+The shortened restart is available because Wolf completed the sequence successfully. It does not create an automatic infinite combo.
 
-### Wolf expression
+On a miss—especially a missed Blood Cleave—Wolf receives the full recovery and becomes punishable. The player must still choose whether another sequence is safe.
 
-Wolf's Hold Thrust is a short-range lunging thrust used to catch an enemy attempting to create distance.
+## Held attack — Predator's Passage
 
-It should have:
+Holding and releasing the attack input produces **Predator's Passage**, a long piercing pursuit lunge.
 
-- shorter starting reach than a spacing-focused Aspect,
-- substantial forward movement when released,
-- strong single-target posture pressure,
-- narrow coverage,
-- limited side correction,
-- and high recovery risk after missing.
+The purpose of Predator's Passage is not safe long-range damage. Wolf uses range to force itself back into close combat.
 
-The thrust gives Wolf direct pursuit without turning it into a ranged or long-reach style.
+### Against ordinary enemies
 
-### Primary uses
+On a clean hit against a valid ordinary enemy, Wolf may drive through the target and emerge immediately behind or slightly beside it.
 
-- punish a retreating enemy,
-- close a small gap,
-- exploit a clear single-target opening,
-- and apply strong posture pressure to elites and bosses.
+After passage:
 
-### Risk
+- Wolf turns toward the struck enemy,
+- remains at close combat distance,
+- and may quickly resume offense.
 
-The narrow lunge is dangerous against side movement, crowds, and poor timing. A miss may place Akio deep inside enemy pressure.
+The move should feel like Wolf crossing through its prey and immediately turning back onto it.
 
-## Counter Cut
+### Against elites, bosses, and heavy enemies
 
-### Shared purpose
+Wolf does not pass through enemies whose size, stability, state, or encounter role makes passage visually or mechanically unreasonable.
 
-Counter Cut remains the attack follow-up after a successful parry.
+Instead:
 
-### Wolf expression
+- Wolf stops at impact,
+- drives the thrust into the target,
+- remains directly engaged,
+- and may transition into a close follow-up after successful contact.
 
-Wolf's Counter Cut is a fast advancing slash that immediately restores close-range pressure against the parried enemy.
+### Collision and safety rules
 
-It should have:
+Predator's Passage:
+
+- travels along a committed line,
+- provides no additional invulnerability beyond any already-active universal movement rule,
+- has limited directional correction after release,
+- and leaves Wolf exposed if it misses.
+
+Wolf must stop at impact rather than passing into an invalid destination such as:
+
+- a wall,
+- a pit,
+- a persistent hazard,
+- blocked geometry,
+- or an occupied space that cannot safely contain Akio.
+
+The exact passage eligibility rules remain implementation and testing work.
+
+## Dash attack — Hunting Slash
+
+Attacking during the approved late-dash window or shortly after the universal neutral dash produces **Hunting Slash**.
+
+Hunting Slash is an aggressive re-entry cut with:
+
+- quick startup after the shared dash window,
+- strong movement toward the aimed nearby enemy,
+- a relatively narrow initial hit,
+- moderate target correction,
+- and a close finishing position.
+
+On successful use, Hunting Slash enters Wolf's basic sequence at **Rending Cross**, functioning as an alternate opener:
+
+> Universal dash → Hunting Slash → Rending Cross → Blood Cleave.
+
+This supports Wolf's pressure identity without changing the distance, speed, invulnerability, or recovery of the neutral dash itself.
+
+Hunting Slash remains an optional offensive commitment. Using it after every dash can place Wolf back into the attack it avoided or into pressure from another enemy.
+
+## Parry counterattack — Fang Reversal
+
+After a successful universal parry, pressing attack produces **Fang Reversal**.
+
+Fang Reversal is a fast advancing retaliatory cut with:
 
 - the same parry requirement and timing rules used by every Aspect,
 - quick attack startup,
 - short range with a forward step,
 - strong posture pressure,
 - limited nearby coverage,
-- and a fast transition into Quick Slash or the normal attack chain.
+- and immediate close-range orientation toward the parried enemy.
 
-The parry itself does not become easier or stronger. Wolf changes the offensive continuation after success.
+On successful use, Fang Reversal enters Wolf's basic sequence at **Rending Cross**:
 
-### Primary uses
+> Universal parry → Fang Reversal → Rending Cross → Blood Cleave.
 
-- remain engaged after a parry,
-- prevent unnecessary distance from opening,
-- resume the main attack sequence,
-- and maintain posture pressure.
+The parry itself does not become easier, safer, or stronger. Wolf changes the offensive continuation after success.
 
-### Risk
+Fang Reversal does not guarantee safety in a crowd. Another enemy may punish an immediate counterattack.
 
-Counter Cut does not guarantee safety. In a crowd, using it immediately may expose Akio to another enemy's attack.
+## Wolf defensive and player-posture profile
 
-## Dash Slash
+Wolf retains:
 
-### Shared purpose
+- sustained block,
+- universal parry timing,
+- the universal neutral dash,
+- player posture,
+- posture break,
+- and deathblows.
 
-Dash Slash remains the movement-to-offense attack used near the end of a dodge or immediately afterward.
+Wolf's qualitative defensive profile is:
 
-### Wolf expression
+- moderate-to-high player posture capacity,
+- normal functional blocking rather than exceptional guard dominance,
+- average or somewhat slow posture recovery after disengaging,
+- and strong offensive continuation after successful parries.
 
-Wolf's Dash Slash is an aggressive re-entry cut with strong forward travel and target correction.
+This gives Wolf enough stability to remain close without allowing careless sustained blocking to erase its commitment risk.
 
-It should have:
+Wolf's preferred defensive answer is:
 
-- quick startup after the shared dodge window,
-- strong movement toward the aimed enemy,
-- a relatively narrow initial hit,
-- enough follow-through to catch a nearby second target when positioned correctly,
-- and a fast transition into Quick Slash or Cross Cut.
+> Read the attack, parry it, use Fang Reversal, and reclaim pressure.
 
-Dash Slash helps Wolf return to pressure after avoiding danger, but it does not make every dodge automatically offensive.
+Wolf does not automatically recover posture by attacking at Tier 0. That remains a possible later mechanic or Technique direction rather than part of the approved foundation.
 
-### Primary uses
+Exact posture capacity, block cost, recovery delay, and recovery rate remain playtest work.
 
-- re-enter close range,
-- pursue a retreating or ranged enemy,
-- move around one threat and attack another,
-- and continue offense after a necessary dodge.
+## Offensive transitions
 
-### Risk
+### From neutral
 
-Using Dash Slash after every dodge can place Akio back into the attack he avoided or into pressure from another enemy.
-
-## Offensive transitions from shared defense
-
-Wolf retains the universal block, parry, dodge, posture, and deathblow rules. Its difference is faster and more forward-moving offensive continuation.
+- Fang Slash begins the standard three-hit chain.
+- Predator's Passage closes a larger gap through committed pursuit.
 
 ### After parry
 
-- Counter Cut quickly restores pressure.
-- The normal attack chain may resume without unnecessary distance.
+- Fang Reversal restores close-range pressure.
+- It enters the basic sequence at Rending Cross.
 - Parry timing and defensive safety remain universal.
 
 ### After block
 
-- Releasing block into Quick Slash should feel responsive.
-- Blocking does not preserve a hidden chain bonus or provide automatic offense.
-- Sustained blocking remains a defensive compromise rather than Wolf's preferred state.
+- Releasing block into Fang Slash should feel responsive.
+- Blocking does not preserve a hidden sequence bonus.
+- Sustained blocking remains a compromise rather than Wolf's preferred state.
 
-### After dodge
+### After dash
 
-- Dash Slash provides strong re-entry.
-- The player may still choose to disengage.
-- Wolf gains no extra invulnerability or automatic counterattack.
+- The neutral dash retains universal behavior.
+- Hunting Slash provides optional aggressive re-entry.
+- Hunting Slash enters the basic sequence at Rending Cross.
+- The player may still choose to disengage instead.
 
 ### After deathblow
 
-- Akio finishes positioned and oriented clearly enough to identify the next threat.
-- Wolf may transition quickly into movement, Quick Slash, or Dash Slash.
-- The deathblow does not automatically attack, damage, or mark another enemy.
-
-This supports pressure transfer without turning executions into automated crowd clearing.
+- Wolf finishes positioned and oriented clearly enough to identify the next threat.
+- Wolf may transition quickly into movement, Fang Slash, Predator's Passage, or a universal dash.
+- The deathblow does not automatically damage, attack, or mark another enemy.
 
 ## Target switching and crowd behavior
 
-Wolf supports target transfer through normal movement, aiming, and attack direction.
+Wolf supports target transfer through normal movement, aim, and attack direction.
 
-During the attack chain, the player should be able to redirect the next attack toward another nearby enemy. Helpful target correction should not force Akio to remain attached to the original target.
+During the basic sequence, the player may redirect the next attack toward another nearby enemy. Helpful target correction should not force Wolf to remain attached to the original target.
 
 Wolf's crowd viability comes from:
 
 - fast redirection,
-- Cross Cut's broader coverage,
-- Heavy Cleave's frontal crowd threat,
+- Rending Cross's nearby coverage,
+- Blood Cleave's frontal crowd threat,
 - forward movement between enemies,
-- Dash Slash re-entry,
+- Hunting Slash re-entry,
+- Predator's Passage access to priority threats,
 - and quick continuation after deathblows.
 
 Wolf does not receive:
@@ -298,6 +333,7 @@ Wolf does not receive:
 - automatic chained attacks between enemies,
 - full-circle coverage on every attack,
 - constant crowd stagger,
+- automatic passage through every target,
 - or immunity while attacking.
 
 Crowds remain a major source of risk.
@@ -310,13 +346,11 @@ Its qualitative profile is:
 
 - moderate damage per attack,
 - strong sustained output while connected,
-- consistent posture pressure across the chain,
-- stronger posture payoff from Heavy Cleave, Hold Thrust, and Counter Cut,
+- consistent posture pressure across the basic sequence,
+- stronger posture payoff from Blood Cleave, Predator's Passage, and Fang Reversal,
 - and reduced effectiveness when attacks miss or the player must disengage.
 
-Wolf does not depend entirely on posture damage, because roguelite rooms include enemies with different durability, behavior, and threat roles.
-
-Wolf also does not own the highest individual-hit damage. Its advantage comes from continuity and reduced downtime.
+Wolf does not own the highest individual-hit damage. Its advantage comes from continuity, pursuit, and reduced downtime after successful actions.
 
 ## Range and Blood-katana direction
 
@@ -329,7 +363,9 @@ Its Returning Blood expression should make the katana feel:
 - predatory,
 - and built for close engagement.
 
-The Blood form may strengthen the blade's visual weight, edge, or trails, but it should not create a permanently long extension that contradicts Wolf's range weakness.
+The Blood form may strengthen the blade's visual weight, edge, impact, or trails, but it should not create a permanently long extension that contradicts Wolf's normal range weakness.
+
+Predator's Passage may create a temporary elongated piercing form because its purpose is committed pursuit rather than safe spacing.
 
 Exact shape, color, VFX, and animation treatment remain open.
 
@@ -337,25 +373,31 @@ Exact shape, color, VFX, and animation treatment remain open.
 
 ### Mixed groups
 
-Wolf pressures an important enemy while using Cross Cut, Heavy Cleave, redirection, defense, and movement to account for nearby threats.
+Wolf pressures an important enemy while using Rending Cross, Blood Cleave, target redirection, defense, and movement to account for nearby threats.
 
 It should feel strong while moving through a group, but unsafe when surrounded without a clear route or defensive response.
 
 ### Ranged enemies
 
-Wolf uses Dash Slash, forward-moving attacks, prosthetics, and target prioritization to reach ranged threats.
+Wolf uses the universal dash, Hunting Slash, Predator's Passage, prosthetics, and target prioritization to reach ranged threats.
 
-It should have viable approach tools without gaining a ranged attack solely to erase this weakness.
+It has viable approach tools without gaining a safe ranged attack solely to erase its short-range weakness.
 
 ### Elites
 
-Wolf maintains steady health and posture pressure, but elite retaliation punishes careless chain completion and repeated unearned Heavy Cleaves.
+Wolf maintains steady health and posture pressure, but elite retaliation punishes careless chain completion, failed passage attempts, and repeated unearned Blood Cleaves.
 
 ### Bosses
 
 Wolf performs well during sustained attack windows and applies consistent posture pressure.
 
-During short or dangerous openings, the player must stop the chain early, parry, block, or disengage. Wolf remains viable without attacking continuously through boss retaliation.
+During short or dangerous openings, the player must stop the chain early, parry, block, or disengage. Heavy bosses stop Predator's Passage at impact rather than allowing visually implausible pass-through behavior.
+
+### Hazards and constrained arenas
+
+Wolf's forward commitment can carry it toward walls, hazards, pits, or surrounding enemies.
+
+Universal neutral movement remains reliable, but Wolf's chosen offensive attacks may end in dangerous positions. The player must consider where the attack will finish, not only whether it will connect.
 
 ## Technique build space
 
@@ -363,34 +405,36 @@ Universal Techniques retain the same rules under every Aspect.
 
 Under Wolf they may naturally:
 
-- **reinforce:** pursuit, repeated contact, sustained offense, and posture continuity,
-- **broaden:** crowd coverage, ranged-enemy handling, and mixed-wave control,
+- **reinforce:** pursuit, repeated contact, sustained offense, sequence continuation, and posture continuity,
+- **broaden:** crowd coverage, ranged-enemy handling, alternate chain routes, and mixed-wave control,
 - **compensate:** recovery, defense, spacing, reach, and disengagement,
-- **hybridize:** Heavy Cleave, Counter Cut, deathblow, posture, movement, or prosthetic-focused builds.
+- **hybridize:** Blood Cleave, Fang Reversal, deathblow, posture, movement, held-attack, or prosthetic-focused builds.
 
-No Technique is required for Wolf to handle groups, bosses, or ranged enemies at a basic viable level.
+No Technique is required for Wolf to handle groups, bosses, hazards, or ranged enemies at a basic viable level.
 
 ## Tier 0 summary
 
-Wolf retains the shared three-hit sword chain and universal defensive rules, but changes their offensive expression:
+Wolf uses the shared controls and universal neutral movement through an Aspect-specific combat grammar:
 
-- **Quick Slash:** fast, narrow, advancing opener.
-- **Cross Cut:** broader advancing follow-up for nearby-enemy coverage.
-- **Heavy Cleave:** broad, committed, posture-heavy finisher.
-- **Hold Thrust:** short-range pursuit lunge with severe miss risk.
-- **Counter Cut:** fast advancing return to pressure after parry.
-- **Dash Slash:** aggressive re-entry with strong forward travel.
-- **Transitions:** responsive while connected and punishable after misses.
-- **Main strengths:** close pressure, sustained output, target pursuit, and movement through mixed encounters.
-- **Main weaknesses:** short reach, forward commitment, missed attacks, overextension, and surrounding pressure.
+- **Basic sequence:** Fang Slash → Rending Cross → Blood Cleave.
+- **Sequence behavior:** successful completion may restart smoothly; missed commitment receives full recovery.
+- **Held attack:** Predator's Passage, a committed piercing pursuit that may cross through ordinary enemies and stops at heavy targets.
+- **Dash attack:** Hunting Slash, an aggressive re-entry that follows the universal dash and enters at Rending Cross.
+- **Parry counter:** Fang Reversal, a fast return to pressure that enters at Rending Cross.
+- **Defense:** functional block, universal parry timing, moderate-to-high posture capacity, and no automatic attack-based posture recovery.
+- **Neutral movement:** identical functional dash distance, speed, invulnerability, and recovery to other launch Aspects.
+- **Main strengths:** close pressure, sustained output, target pursuit, posture continuity, and transfer through mixed encounters.
+- **Main weaknesses:** short reach, forward commitment, missed attacks, overextension, target fixation, and surrounding pressure.
 
 ## Remaining Wolf decisions
 
 After the full three-Aspect identity roster and overlap audit are approved, decide:
 
-- exact relative attack, posture, range, tracking, and recovery values,
+- exact relative attack, damage, posture, range, tracking, and recovery values,
+- exact chain timing, restart timing, passage eligibility, and transition windows,
+- exact player-posture capacity, blocking cost, and recovery values,
 - exact animation and Blood-katana treatment,
-- whether Wolf needs any unique mechanic beyond the attack foundation,
+- whether Wolf needs any later unique mechanic beyond this attack foundation,
 - shared Tier progression and Wolf's Tier package,
 - drawback and Corruption behavior,
 - Blood generation and Blood Art if retained,

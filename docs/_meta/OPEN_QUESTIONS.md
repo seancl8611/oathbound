@@ -27,9 +27,10 @@ The current launch-scoping direction is approved at this depth:
 - the player selects one Blood Aspect as a major run foundation,
 - the selected Aspect changes the run identity immediately at Tier 0,
 - the launch scope currently assumes three Aspects,
-- all Aspects use the complete attack, defense, movement, posture, deathblow, Technique, and prosthetic framework,
+- all Aspects use the same control layout and participate in the attack, defense, movement, posture, deathblow, Technique, and prosthetic systems,
 - identities are multidimensional rather than assigned to one core action,
-- and the weapon direction is one physical katana expressed through different Blood combat forms over a shared defensive and execution framework.
+- the weapon direction is one physical katana expressed through different Blood combat forms,
+- and shared controls do not require an identical moveset.
 
 Three is the current production baseline, not a permanent ceiling. A fourth or later Aspect should not be added during the current paper-design pass. Reconsider expansion only after playable testing demonstrates a meaningful missing combat identity that cannot be covered by the approved three or by Techniques and prosthetics.
 
@@ -39,7 +40,7 @@ Aspects and Techniques are both major run-build layers with different responsibi
 
 - **Aspect:** the pre-run, always-present combat foundation and immediate Tier 0 identity.
 - **Techniques:** four limited, replaceable in-run modifications plus one inactive reserve.
-- The Aspect may broadly change rhythm, range, coverage, commitment, recovery, movement flow, target handling, damage-versus-posture profile, and Blood-weapon expression.
+- The Aspect may broadly change chain structure, rhythm, range, coverage, commitment, recovery, attack movement, target handling, defensive profile, damage-versus-posture profile, and Blood-weapon expression.
 - A Technique modifies a specific action, condition, transition, payoff, resource interaction, or tactical option within that foundation.
 - An Aspect must function before any Technique is acquired.
 - An ordinary Technique must function with every Aspect.
@@ -51,77 +52,104 @@ A Technique loadout may intentionally reinforce an Aspect's strengths, broaden i
 
 Direct Aspect-, Blood-, or Tier-referencing Techniques remain possible only as limited explicit exceptions after the roster and shared structure are approved.
 
-## Resolved shared player-kit boundary
+## Resolved expanded player-kit boundary
 
-The shared-versus-Aspect-specific combat boundary is approved.
+The original shared-moveset boundary is superseded. The approved rule is:
 
-### Universal across all Aspects
+> Aspects share controls, neutral movement, enemy rules, and combat readability; they do not need to share one identical sword moveset.
 
-- inputs and control scheme,
-- block, parry, and base dodge rules,
-- posture, stagger, posture-break, and deathblow rules,
+### Universal across launch Aspects
+
+- input layout and control scheme,
+- basic attack, held attack, defense, parry-counter, dash-attack, deathblow, Technique, and prosthetic action slots,
+- defense input and parry timing/success logic,
+- enemy telegraphs, responses, and punish logic,
+- posture, stagger, posture-break, and deathblow language,
 - Spirit and prosthetic controls,
 - Technique-system rules,
-- enemy telegraphs, responses, and punish logic,
-- and the existence and general purpose of Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash.
+- ordinary locomotion speed,
+- neutral dash distance and travel speed,
+- neutral dash startup, invulnerability, recovery, steering, collision, and repeat availability,
+- and standard access to actions after a neutral dash.
 
-Every Aspect retains the complete combat kit. No major action may be removed or made functionally irrelevant.
+Aspect selection must not reduce dependable evasion or arena navigation through a shorter, slower, or less responsive neutral dash.
 
 ### Allowed to vary by Aspect at Tier 0
 
-- attack-chain structure and rhythm,
-- reach and arc coverage,
-- forward movement, tracking, commitment, and recovery,
-- movement-to-attack flow,
+- basic attack sequence length, names, order, branches, restart behavior, and rhythm,
+- reach and attack geometry,
+- movement, tracking, commitment, recovery, and cancel opportunities attached to attacks,
 - health-damage and posture-pressure profile,
 - target handling,
-- offensive transitions after dodge, parry, block, or deathblow,
+- held-attack behavior,
+- post-parry counterattack behavior,
+- dash-attack behavior and follow-up sequence,
+- offensive transitions after block, dodge, parry, deathblow, or another attack,
+- player posture capacity and recovery direction,
+- block efficiency and posture cost,
 - and the Blood-formed expression of the katana.
 
-These differences must combine into a recognizable offensive foundation rather than one passive bonus or one altered input.
+`Quick Slash`, `Cross Cut`, `Heavy Cleave`, `Hold Thrust`, `Counter Cut`, and `Dash Slash` are no longer mandatory universal move names or roles. They may remain within an individual Aspect when appropriate.
 
-Universal Techniques retain one ruleset across all Aspects. They may feel or perform differently only because the underlying Aspect-specific player action already differs.
+All current launch candidates retain meaningful attack, block, parry, dodge, posture, deathblow, Technique, and prosthetic play. Removing sustained block entirely remains an unresolved possible exception requiring explicit roster-level approval and encounter compatibility review.
 
-Aspect statistics and properties are balanced as tradeoffs. No Aspect should simultaneously own the best speed, range, damage, safety, posture pressure, coverage, and flexibility. Exact values remain playtest work.
+Universal Techniques retain one ruleset across all Aspects. They may feel or perform differently only because the underlying Aspect-specific action already differs.
 
-## Resolved Wolf concept-level foundation
+Aspect statistics and properties are balanced as tradeoffs. No Aspect should simultaneously own the best attack speed, range, damage, safety, posture pressure, tracking, coverage, and flexibility. Neutral movement and dash are not automatic tradeoff levers.
 
-Wolf's high-level role and qualitative Tier 0 attack foundation are approved for roster comparison.
+## Resolved Wolf concept-level foundation — revised
+
+Wolf's high-level role and qualitative Tier 0 combat foundation are approved for roster comparison under the expanded contract.
 
 - **Known as:** the close-range aggressive Aspect.
 - **Rhythm:** fast, continuous, and forward-driving.
 - **Range:** shortest or near-shortest normal attack reach.
 - **Damage:** moderate per hit with strong sustained output while connected.
-- **Posture:** consistent pressure through repeated contact.
-- **Movement:** strong forward movement and nearby target correction.
-- **Coverage:** narrow opener, broader follow-up and finisher.
+- **Posture:** consistent enemy-posture pressure through repeated contact.
+- **Movement:** strong movement within attacks and offensive transitions; universal neutral movement and dash remain unchanged.
+- **Coverage:** narrow opener with broader later attacks for nearby threats.
 - **Commitment:** responsive while attacks connect and more punishable after misses.
-- **Encounter role:** priority-target pursuit with built-in mixed-wave, crowd, elite, and boss viability.
+- **Encounter role:** priority-target pursuit with built-in mixed-wave, crowd, ranged, elite, hazard, and boss viability.
 - **Risk:** short reach, overextension, missed attacks, target fixation, and surrounding pressure.
 
-Wolf retains one universal defensive framework and one universal Technique catalog. Its approved attack expressions are owned by `gameplay/WOLF_ASPECT.md`.
+Wolf's approved Aspect-specific controls are:
 
-Still unresolved for Wolf are exact values, exact animation and Blood-katana treatment, any later unique mechanic, Tier progression, drawback, Corruption behavior, Blood Art, production counts, and final roster inclusion after the three-candidate audit.
+- **Basic sequence:** Fang Slash → Rending Cross → Blood Cleave.
+- **Sequence rule:** successful completion may flow back to Fang Slash; misses receive full recovery.
+- **Held attack:** Predator's Passage, a committed piercing pursuit that may pass through valid ordinary enemies and stops at heavy targets or invalid destinations.
+- **Dash attack:** Hunting Slash after the universal neutral dash, entering the sequence at Rending Cross.
+- **Parry counter:** Fang Reversal after a universal parry, entering the sequence at Rending Cross.
+- **Defense:** functional sustained block, universal parry timing, moderate-to-high player posture capacity, and no automatic attack-based posture recovery at Tier 0.
+
+Wolf's authoritative package is owned by `gameplay/WOLF_ASPECT.md`.
+
+Still unresolved for Wolf are exact values, hitboxes, chain windows, passage eligibility, player-posture values, exact animation and Blood-katana treatment, any later unique mechanic, Tier progression, drawback, Corruption behavior, Blood Art, production counts, and final roster inclusion after the three-candidate audit.
 
 ## 1. Three-Aspect identity roster and Technique compatibility
 
 Wolf, Wraith, and Ronin remain the three working candidates for the three roster positions.
 
-Wolf's concept-level identity and Tier 0 attack foundation are complete for the current pass. Wraith is the next active candidate. Ronin follows Wraith.
+Wolf's revised concept-level Tier 0 combat foundation is complete for the current comparison pass. Wraith is the next active candidate. Ronin follows Wraith.
 
 ### Pass 1 — Candidate identity definitions
 
 For Wraith and then Ronin, define:
 
-- the clear player-facing playstyle label,
-- relative range, rhythm, damage, posture, movement, coverage, tracking, commitment, and recovery,
-- the qualitative Tier 0 attack foundation,
-- how the candidate uses the shared core actions,
-- how it remains fun and viable in mixed waves, crowds, elites, ranged pressure, hazards, and bosses,
+- the clear player-facing playstyle label and fantasy,
+- the Aspect-specific basic attack sequence and why its length or structure teaches the identity,
+- the held attack,
+- the post-parry counterattack,
+- the dash attack following the universal neutral dash,
+- relative range, rhythm, damage, enemy-posture pressure, player-posture profile, movement, coverage, tracking, commitment, and recovery,
+- how block, parry, and the universal neutral dash support the playstyle,
+- how the candidate remains fun and viable in mixed waves, crowds, ranged pressure, elites, hazards, and bosses,
 - how universal Techniques can reinforce, broaden, compensate, and hybridize it,
-- and its natural risk.
+- its natural risk,
+- and how it remains one version of Akio rather than a separate character.
 
-This pass does not lock exact numbers, frame data, production counts, Tiers, Blood Arts, or individual Techniques.
+This pass does not lock exact numbers, frame data, hitboxes, production counts, Tiers, Blood Arts, or individual Techniques.
+
+Wraith must remain distinct from Wolf and from Mist Raven. It must not become only the dash Aspect, teleport Aspect, or invulnerability Aspect.
 
 ### Pass 2 — Roster overlap and gap audit
 
@@ -129,10 +157,11 @@ After Wraith and Ronin are defined, compare all three candidates together:
 
 - identify mechanical or thematic overlap,
 - identify any missing launch-critical combat territory,
-- confirm that each candidate remains useful with the full combat kit,
+- confirm that each candidate remains useful with the complete combat framework,
 - confirm several distinct four-Technique build shapes per candidate,
 - confirm that Techniques and prosthetics retain meaningful build space,
-- confirm the approved shared player-kit boundary remains intact,
+- confirm that neutral movement and dash remain universal,
+- confirm that enemy and boss rules do not need separate compatibility layers,
 - and determine whether the candidates are sufficiently distinct for repeated runs.
 
 A detected gap should first be addressed by revising or replacing one of the three candidates. It does not automatically justify a fourth Aspect.
@@ -146,8 +175,9 @@ Retain, revise, rename, combine, or replace candidates as required by the audit.
 Approve:
 
 - a concise three-row roster table,
-- the candidate-specific use of the approved shared player-kit boundary,
-- and the expected Technique build directions for each identity.
+- the candidate-specific moveset and defensive profile,
+- the expected Technique build directions for each identity,
+- and the production distinction required for each identity.
 
 Only after this pass should exact Tiers, Blood generation, Blood Arts, later candidate mechanics, detailed affinities, or candidate-specific production packages be treated as final.
 
@@ -167,14 +197,14 @@ Decide:
 - how Resist, Embrace, and maximum-Tier Shrine behavior relate to the final system,
 - Blood generation and activation behavior if Blood remains,
 - the exact package for each approved Aspect,
-- how every package continues to support the full combat kit,
+- how every package continues to support the complete combat framework,
 - cross-Aspect distinction and overlap,
-- relative attack, range, posture, speed, recovery, and coverage tradeoffs,
+- relative attack, player-posture, enemy-posture, range, recovery, block-efficiency, and coverage tradeoffs,
 - detailed affinity and offer-weighting rules,
 - whether any direct Aspect-, Blood-, or Tier-referencing Technique exceptions ship,
 - and required input, HUD, animation, VFX, audio, trial, and progression states.
 
-Exact damage, posture, speed, range, gain-rate, threshold, and duration values remain playtest work. The behavioral and relative tradeoff direction must be approved before production counts are locked.
+Exact damage, posture, attack speed, range, gain-rate, threshold, and duration values remain playtest work. Neutral locomotion and dash remain universal unless a later exceptional system change receives explicit approval.
 
 Partial Blood Art activation is not part of the current working baseline. Reconsider it only if Blood Arts remain in the approved system and playable testing demonstrates a need.
 
@@ -258,7 +288,9 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 - exact enemy and boss movesets,
 - exact Corruption gain, Shrine frequency, and Tier thresholds,
 - exact Blood gain, capacity, activation, duration, retention, and anti-farming values if Blood remains,
-- exact Aspect damage, posture, speed, range, recovery, and coverage values,
+- exact Aspect attack damage, posture, range, tracking, recovery, block efficiency, and coverage values,
+- exact neutral movement and dash values while preserving their universal contract,
+- whether any future Aspect removes sustained block,
 - partial activation before approved system direction and playtest evidence,
 - Spirit costs and prosthetic cooldowns,
 - hitboxes, immunity tables, and status values,
