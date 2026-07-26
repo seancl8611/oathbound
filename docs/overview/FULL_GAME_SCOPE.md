@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-07-26
 topics:
   - full-scope
   - asset-counts
@@ -19,6 +19,11 @@ topics:
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
+  - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
+  - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-WOLF-ASPECT
+  - GAMEPLAY-WRAITH-ASPECT
+  - GAMEPLAY-RONIN-ASPECT
   - META-OPEN-QUESTIONS
 ---
 
@@ -30,8 +35,8 @@ This document defines the current production-level shape of Oathbound. It does n
 
 | Asset group | Planned count | Current boundary |
 |---|---:|---|
-| Player character | 1 | Akio concept, final sprite, complete base combat library |
-| Blood Aspects | 3 | Three launch positions; Wolf, Wraith, and Ronin are working candidates rather than approved identities |
+| Player character | 1 | Akio concept, final sprite, complete introductory and Aspect combat libraries |
+| Blood Aspects | 3 | Wolf, Wraith, and Ronin have approved qualitative Tier 0 kits; final combined roster approval remains pending audit |
 | Technique loadout | 4 active + 1 reserve | Launch catalog size remains open |
 | Prosthetic tools | 8 | One equipped at a time in the initial run structure |
 | Run-scoped Relic capacity | 1 | Launch catalog remains open |
@@ -50,25 +55,42 @@ This document defines the current production-level shape of Oathbound. It does n
 
 ## Player and run build
 
-Akio begins with a complete katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash.
+Akio begins with a complete introductory katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash.
 
-Core combat includes parry, posture, stagger, deathblow, block, dash, and prosthetic support.
+Core combat includes parry, player and enemy posture, stagger, deathblow, block, dash, and prosthetic support.
 
-The current launch-scoping direction includes:
+After Returning Blood awakens, the current launch-scoping direction includes:
 
 - one selected Blood Aspect as an immediate Tier 0 run foundation,
 - three Blood Aspect positions at launch,
-- one physical katana expressed through Aspect-specific Blood combat forms,
-- a shared defensive and execution framework across all Aspects,
+- Wolf as a four-hit fast close-range pressure kit,
+- Wraith as a two-hit extended spectral poke and reach-control kit,
+- Ronin as a three-hit slow heavy direct-damage kit,
+- one physical katana expressed through Aspect-specific Blood weapon forms,
+- universal controller layout, neutral movement, neutral dash, parry timing, enemy rules, and deathblow language,
+- modest approved defensive-profile differences that do not remove shared defensive actions,
 - Corruption and Shrine decisions as a working structure,
 - four empty active Technique slots,
 - one empty reserve slot,
 - one equipped prosthetic,
 - and one initial run-scoped Relic slot.
 
-The Aspect system's role and current launch count are approved at this scoping depth. The final identities, exact weapon forms, Tier structure, Blood model, and individual mechanics remain open. Wolf, Wraith, and Ronin are the current working candidates for the three roster positions.
+The Aspect system's role, current launch count, weapon-kit model, and three qualitative Tier 0 candidate kits are approved at this scoping depth.
 
-A fourth or later Aspect is not included in current production scope. Reconsider expansion only after playable testing demonstrates a missing combat identity that cannot be covered by the three approved identities, Techniques, or prosthetics.
+Still open are:
+
+- the combined roster overlap and gap audit,
+- final roster approval,
+- exact animation and VFX counts,
+- exact frame data and combat values,
+- Tier structure,
+- Blood model,
+- Blood Arts,
+- drawbacks and Corruption behavior,
+- Technique interactions,
+- and individual production packages.
+
+A fourth or fifth Aspect is not included in current production scope. Reconsider expansion only after the initial three are implemented and playable testing demonstrates a missing combat identity that cannot be covered by the roster, Techniques, or prosthetics.
 
 Techniques remain the working horizontal customization layer. Most Techniques should be independently useful, and each may receive at most one slotless refinement.
 
@@ -110,7 +132,7 @@ Primary services:
 - Blood Cavern
 - Blood Mirror
 
-The exact launch depth of permanent upgrades, onboarding, trials, unlocks, and mastery content remains a current production-scope decision. Aspect-specific services and trial counts depend on the approved three identities and shared system.
+The exact launch depth of permanent upgrades, onboarding, trials, unlocks, and mastery content remains a current production-scope decision. Aspect-specific services and trial counts depend on final roster approval and the shared progression system.
 
 ## Area 1 — Hushiro Gate Village / Rupture
 
@@ -237,8 +259,8 @@ Additional difficulty modifiers, enemy variants, room variants, and alternate ch
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md), in dependency order:
 
-1. three-Aspect identity roster,
-2. shared Aspect structure and selected Aspect packages,
+1. three-Aspect weapon-kit roster audit and final approval,
+2. shared Aspect progression structure and selected packages,
 3. launch run-build content catalog,
 4. persistent progression, onboarding, and trial package,
 5. narrative delivery and authored-content package,
