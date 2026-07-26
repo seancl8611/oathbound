@@ -4,7 +4,7 @@ title: Blood Aspect Identity Guidelines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-25
+last_reviewed: 2026-07-26
 topics:
   - blood-aspects
   - aspect-roster
@@ -14,6 +14,7 @@ topics:
   - techniques
 related:
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-WOLF-ASPECT
   - GAMEPLAY-COMBAT
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-TECHNIQUE-CATALOG
@@ -22,7 +23,9 @@ related:
 
 # Blood Aspect Identity Guidelines
 
-This document records the approved lens for evaluating Blood Aspect identities and the approved working direction for Wolf. It does not approve Wolf's exact Tier 0 moveset, numerical values, animations, Blood Art, progression package, or final inclusion in the three-Aspect roster.
+This document records the approved lens for evaluating Blood Aspect identities and Wolf's approved working identity direction. Wolf's qualitative Tier 0 attack foundation is owned by [Wolf Blood Aspect](WOLF_ASPECT.md).
+
+It does not approve Wolf's exact numerical values, frame data, animations, Blood Art, progression package, production scope, or final inclusion in the three-Aspect roster.
 
 ## Encounter assumption
 
@@ -76,24 +79,25 @@ When proposing or reviewing an Aspect:
 - compare strengths and weaknesses against the other roster positions,
 - preserve both crowd and single-target viability,
 - distinguish a preferred situation from exclusive functionality,
-- and defer detailed mechanics, exact values, animation lists, and Tier effects until the general identity is approved.
+- and defer exact values, frame data, animation counts, and Tier effects until the general identity is approved.
 
 Avoid making the explanation depend on overly formal or heavily authored decision-loop language. Concrete playstyle, rhythm, range, coverage, movement, damage, posture, commitment, and risk descriptions are preferred.
 
 External roguelite comparisons may be used to test whether a foundation is likely to be fun and replayable, but the final Aspect must remain native to Oathbound's shared sword, posture, defense, and deathblow systems.
 
-## Wolf — approved working identity direction
+## Wolf — approved identity and Tier 0 direction
 
 ### Status boundary
 
-Wolf's high-level combat role and relative property direction are approved for continued roster design.
+Wolf's high-level combat role, relative property direction, and qualitative Tier 0 offensive foundation are approved for continued roster design.
+
+The complete attack-by-attack foundation is recorded in [Wolf Blood Aspect](WOLF_ASPECT.md).
 
 Still unapproved:
 
-- exact changes to Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash,
-- exact Blood-katana form,
 - exact frame timing, damage, posture, range, tracking, and recovery values,
-- unique mechanics, marks, meters, or target states,
+- exact Blood-katana shape and production treatment,
+- whether Wolf needs any unique mechanic beyond its attack foundation,
 - Tier progression, drawback, Blood Art, and Corruption interactions,
 - production counts,
 - and Wolf's final inclusion after the three-candidate overlap and gap audit.
@@ -126,7 +130,7 @@ Wolf may be particularly strong at pursuing a priority target, but it is not a p
 
 ### Roguelite room-combat requirement
 
-Wolf's encounter pattern should not be "mark one enemy and ignore everything else."
+Wolf's encounter pattern is not "mark one enemy and ignore everything else."
 
 The intended high-level experience is:
 
@@ -136,17 +140,17 @@ The intended high-level experience is:
 - use shared defense to survive continued engagement,
 - and move pressure into the next threat as the room or wave changes.
 
-Wolf should remain viable when enemies surround Akio, ranged enemies require target prioritization, hazards make constant pressure unsafe, or a boss provides only limited attack windows. These situations may challenge Wolf's strengths without invalidating the Aspect.
+Wolf remains viable when enemies surround Akio, ranged enemies require target prioritization, hazards make constant pressure unsafe, or a boss provides only limited attack windows. These situations may challenge Wolf's strengths without invalidating the Aspect.
 
 ### Damage and balance direction
 
-Wolf should not automatically have the highest individual-hit damage. Its offensive advantage should come from sustained contact, reduced downtime, movement through attacks, repeated health and posture pressure, and effective continuation between targets.
+Wolf does not automatically have the highest individual-hit damage. Its offensive advantage comes from sustained contact, reduced downtime, movement through attacks, repeated health and posture pressure, and effective continuation between targets.
 
 Wolf must not simultaneously own the best speed, damage, range, safety, posture pressure, tracking, and crowd coverage. Its strengths are purchased through short reach and commitment risk.
 
 ### Technique build space
 
-Universal Techniques must work under the same rules used by every Aspect.
+Universal Techniques retain the same rules used by every Aspect.
 
 Under Wolf, they may naturally support:
 
@@ -157,10 +161,8 @@ Under Wolf, they may naturally support:
 
 Wolf must not own all aggressive Techniques, and no Technique is required to make its foundation functional.
 
-## Next Wolf question
+## Next roster question
 
-With the general role approved, the next Wolf design step is:
+Wolf's concept-level Tier 0 identity pass is complete.
 
-> How should Wolf reinterpret each shared core attack and offensive transition at Tier 0 while preserving the approved close-range, fast, forward-moving, mixed-encounter identity?
-
-That pass should define qualitative behavior and tradeoffs without final numerical tuning.
+The next roster step is to define Wraith through the same player-facing role, relative property, mixed-encounter, Technique-space, and shared-attack criteria before comparing it against Wolf.
