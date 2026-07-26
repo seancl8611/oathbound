@@ -15,6 +15,9 @@ related:
   - CHAR-AKIO
   - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-WOLF-ASPECT
+  - GAMEPLAY-WRAITH-ASPECT
+  - GAMEPLAY-RONIN-ASPECT
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROSTHETICS
   - UI-HUD
@@ -28,14 +31,15 @@ Oathbound uses high-angle 2D action combat centered on katana exchanges, posture
 
 The sword system should feel expressive without requiring many new buttons. One attack input supports multiple contextual outputs through repeated presses, hold/release, post-parry follow-up, and dash-to-attack flow.
 
-Blood Aspects use those shared input slots to provide distinct sword weapon kits. The moves' timing, reach, geometry, damage, posture pressure, tracking, commitment, and recovery should create the playstyle naturally.
+Blood Aspects use those shared input slots to provide distinct sword weapon kits. The moves' timing, reach, geometry, damage, posture pressure, tracking, commitment, and recovery create the playstyle naturally.
 
 Bosses and larger encounters may use projectiles, ground danger, area denial, adds, movement tests, and clear attack opportunities. Combat should reward mastery without requiring one-mistake death or strict memorization as the default run experience.
 
 ## Core resources and states
 
 - **Health:** conventional survival resource.
-- **Posture:** pressure state that creates vulnerability when broken.
+- **Player posture:** pressure accumulated while Akio blocks or receives certain attacks; breaking it creates vulnerability.
+- **Enemy posture:** control pressure that may create a deathblow opening when broken.
 - **Spirit Emblems:** resource for prosthetic-tool use.
 - **Corruption:** run-state pressure tied to Returning Blood and Shrine choices.
 
@@ -49,7 +53,7 @@ Repeated presses produce the selected Aspect's primary attack sequence.
 
 An Aspect may use:
 
-- a one-, two-, three-, or otherwise justified finite sequence,
+- a two-, three-, four-, or otherwise justified finite sequence,
 - different action names and animations,
 - different timing, range, geometry, movement, tracking, commitment, and recovery,
 - or another readable attack structure when it better serves the weapon kit.
@@ -57,6 +61,12 @@ An Aspect may use:
 No universal three-hit chain is required. `Quick Slash`, `Cross Cut`, and `Heavy Cleave` are not mandatory shared move names or roles.
 
 A sequence is a set of attack options, not a required objective. The player may stop, defend, dash, change targets, use a Prosthetic, or abandon the sequence without failing the Aspect's intended gameplay.
+
+The current qualitative roster uses:
+
+- Wolf: four attacks,
+- Wraith: two attacks,
+- Ronin: three attacks.
 
 ### Held Attack
 
@@ -72,6 +82,7 @@ Held Attack may differ substantially through:
 - target interaction,
 - damage,
 - enemy-posture pressure,
+- stagger,
 - and recovery.
 
 It does not need to be one universal thrust or merely a stronger version of Basic Attack.
@@ -80,7 +91,7 @@ It does not need to be one universal thrust or merely a stronger version of Basi
 
 After a successful universal parry, pressing Attack produces the selected Aspect's direct offensive follow-up.
 
-Parry timing, success rules, and defensive safety remain shared. The resulting sword attack may differ through reach, geometry, timing, damage, posture pressure, tracking, and recovery.
+Parry timing and success rules remain shared. The resulting sword attack may differ through reach, geometry, timing, damage, enemy-posture pressure, tracking, stagger, and recovery.
 
 ### Dash Attack
 
@@ -121,27 +132,47 @@ Aspects may differ through the optional attack performed after the dash. Attack-
 
 Techniques, Relics, temporary effects, Corruption, or later exceptional mechanics may modify movement only after explicit approval and encounter-wide testing.
 
-## Universal defense and player-posture contract
+## Shared defense and player-posture contract
 
-During the initial three-Aspect identity pass, every launch candidate uses the same functional:
+Every launch Aspect retains:
 
-- defense input,
-- sustained-block rules and baseline efficiency,
-- player-posture capacity,
-- player-posture recovery rules,
-- posture-break behavior,
-- parry timing and success logic,
-- and access to defense after ordinary movement and attacks.
+- the same defense input,
+- sustained block,
+- the same parry timing and success logic,
+- the same posture-break behavior,
+- the same enemy attack-response rules,
+- and access to defense after ordinary movement.
 
-Base block efficiency and player-posture size are not current Aspect identity levers.
+The selected weapon kit may use modest differences in:
 
-The roster may revisit defensive differences only after the sword kits are playable and testing demonstrates that a specific variation improves the game enough to justify enemy compatibility, balance, onboarding, accessibility, UI, and production costs.
+- base player-posture capacity,
+- posture damage received while blocking,
+- natural posture recovery direction,
+- access to defense after an Aspect-specific attack completes,
+- and Parry Counter payoff.
 
-Removing sustained block is not part of the current launch baseline.
+These differences must remain secondary to the sword moves and must be balanced by the kit's timing, range, movement, tracking, damage, and recovery.
+
+No launch Aspect:
+
+- removes sustained block or parry,
+- receives a different parry window,
+- gains automatic parries or counters,
+- becomes immune to posture break,
+- recovers posture freely while actively blocking,
+- or cancels committed attacks into defense without an approved recovery window.
+
+Current qualitative direction:
+
+- Wolf uses a balanced guard profile suitable for close engagement.
+- Wraith uses a functional baseline guard; its quick-footed identity comes from short attacks and recovery.
+- Ronin uses higher posture stability and more efficient blocking, balanced by slower posture recovery and highly committed heavy attacks.
+
+Exact posture and block values remain implementation and playtesting work.
 
 ## Universal deathblow contract
 
-Deathblows remain part of the shared combat and execution layer during the identity pass.
+Deathblows remain part of the shared combat and execution layer.
 
 All launch Aspects use the same functional:
 
