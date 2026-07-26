@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-25
+last_reviewed: 2026-07-26
 ---
 
 # Current Design Questions
@@ -84,31 +84,48 @@ Universal Techniques retain one ruleset across all Aspects. They may feel or per
 
 Aspect statistics and properties are balanced as tradeoffs. No Aspect should simultaneously own the best speed, range, damage, safety, posture pressure, coverage, and flexibility. Exact values remain playtest work.
 
+## Resolved Wolf concept-level foundation
+
+Wolf's high-level role and qualitative Tier 0 attack foundation are approved for roster comparison.
+
+- **Known as:** the close-range aggressive Aspect.
+- **Rhythm:** fast, continuous, and forward-driving.
+- **Range:** shortest or near-shortest normal attack reach.
+- **Damage:** moderate per hit with strong sustained output while connected.
+- **Posture:** consistent pressure through repeated contact.
+- **Movement:** strong forward movement and nearby target correction.
+- **Coverage:** narrow opener, broader follow-up and finisher.
+- **Commitment:** responsive while attacks connect and more punishable after misses.
+- **Encounter role:** priority-target pursuit with built-in mixed-wave, crowd, elite, and boss viability.
+- **Risk:** short reach, overextension, missed attacks, target fixation, and surrounding pressure.
+
+Wolf retains one universal defensive framework and one universal Technique catalog. Its approved attack expressions are owned by `gameplay/WOLF_ASPECT.md`.
+
+Still unresolved for Wolf are exact values, exact animation and Blood-katana treatment, any later unique mechanic, Tier progression, drawback, Corruption behavior, Blood Art, production counts, and final roster inclusion after the three-candidate audit.
+
 ## 1. Three-Aspect identity roster and Technique compatibility
 
-Wolf, Wraith, and Ronin are the current working candidates for the three roster positions. Their inclusion, names, fantasies, combat patterns, risks, and exact foundation changes remain unapproved.
+Wolf, Wraith, and Ronin remain the three working candidates for the three roster positions.
 
-The roster decision is a sequence of focused passes.
+Wolf's concept-level identity and Tier 0 attack foundation are complete for the current pass. Wraith is the next active candidate. Ronin follows Wraith.
 
 ### Pass 1 — Candidate identity definitions
 
-Evaluate Wolf, Wraith, and Ronin one at a time. For each candidate, define:
+For Wraith and then Ronin, define:
 
-- the controlled Returning Blood fantasy,
-- the combined combat pattern created at Tier 0,
-- the offensive-foundation changes that make it immediately recognizable,
-- how it reinterprets the approved shared core actions,
-- how it uses attacks, defense, movement, posture, deathblows, Techniques, and prosthetics,
-- the situations and combinations it emphasizes without monopolizing one action,
-- how Techniques can reinforce, broaden, compensate, and hybridize it,
-- its natural risk,
-- and its group, elite, and boss viability.
+- the clear player-facing playstyle label,
+- relative range, rhythm, damage, posture, movement, coverage, tracking, commitment, and recovery,
+- the qualitative Tier 0 attack foundation,
+- how the candidate uses the shared core actions,
+- how it remains fun and viable in mixed waves, crowds, elites, ranged pressure, hazards, and bosses,
+- how universal Techniques can reinforce, broaden, compensate, and hybridize it,
+- and its natural risk.
 
-This pass defines identity at concept depth. It does not lock exact numbers, animations, Tiers, Blood Arts, or individual Techniques.
+This pass does not lock exact numbers, frame data, production counts, Tiers, Blood Arts, or individual Techniques.
 
 ### Pass 2 — Roster overlap and gap audit
 
-Compare the three candidates together:
+After Wraith and Ronin are defined, compare all three candidates together:
 
 - identify mechanical or thematic overlap,
 - identify any missing launch-critical combat territory,
@@ -132,7 +149,7 @@ Approve:
 - the candidate-specific use of the approved shared player-kit boundary,
 - and the expected Technique build directions for each identity.
 
-Only after this pass should exact Tiers, Blood generation, Blood Arts, candidate mechanics, detailed affinities, or candidate-specific production packages be treated as final.
+Only after this pass should exact Tiers, Blood generation, Blood Arts, later candidate mechanics, detailed affinities, or candidate-specific production packages be treated as final.
 
 ## 2. Shared Aspect structure and selected Aspect packages
 
