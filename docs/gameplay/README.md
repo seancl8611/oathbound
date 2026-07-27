@@ -22,29 +22,28 @@ Authoritative player-facing mechanics and system rules belong here.
 
 ## Current status
 
-The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain later prototype and playtest decisions rather than top-level scope questions.
+The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain prototype and playtest decisions rather than top-level scope questions.
 
-The Blood Aspect system remains a draft at the progression and production-package level, but the following qualitative Tier 0 weapon kits are approved for roster comparison:
+The launch Blood Aspect roster is approved:
 
-- **Wolf:** four-hit fast close-range pressure,
-- **Wraith:** two-hit extended spectral poking and reach control,
-- **Ronin:** three-hit slow heavy direct damage.
+- **Wolf:** four-hit fast close-range pressure and pursuit,
+- **Wraith:** two-hit extended spectral reach and frontal control,
+- **Ronin:** three-hit slow heavy impact and defensive stability.
 
-The current launch baseline remains three Aspects. A fourth or fifth Aspect is possible future expansion but is not part of current launch scope.
+These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain supported by universal systems, Techniques, prosthetics, and encounter design. Additional Aspects are outside current launch scope unless playable evidence later demonstrates a missing identity.
 
-The next active gameplay task is the three-kit overlap, gap, encounter, Technique-space, and production audit before final combined roster approval.
+Aspect progression is fixed from Tier 0 through Tier IV. At a full Corruption threshold, the player chooses Resist or Embrace; Embrace advances the selected Aspect by one fixed Tier. Tier IV uses Stabilize rather than Tier V. Blood is run-only and unavailable before Tier II.
 
 Current production-level gameplay dependencies tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
 
-- final three-Aspect roster audit and approval,
-- shared Aspect progression structure and selected packages,
+- fixed Tier I-IV packages, evolving drawbacks, Blood rules, and Blood Arts for Wolf, Wraith, and Ronin,
 - launch run-build content catalog,
 - persistent progression, onboarding, and trial package,
 - and postgame release package.
 
 The narrative-delivery package is also tracked there because it affects authored content and production, but it does not reopen gameplay or lore canon.
 
-Exact attacks values, timings, cooldowns, probabilities, prices, hitboxes, numerical balance, route generation, and other playtest values remain in the owning gameplay or encounter file.
+Exact attack values, timings, cooldowns, probabilities, prices, hitboxes, resource values, route generation, and other playtest variables remain in their owning gameplay or encounter files.
 
 ## Authority rule
 
