@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-07-26
 ---
 
 # Production Roadmap
@@ -19,7 +19,7 @@ Before Milestone 1, a separately paid test locks practical sprite scale, palette
 
 Establish Akio, core combat readability, three representative Area 1 enemies, five shared combat VFX, Combat HUD, and the base Hushiro environment kit.
 
-The Posture Break Cue is assigned to Batch 2 with the Corrupted Swordsman and Deathblow Cue so the complete posture-break-to-execution loop is reviewed together.
+The Posture Break Cue is assigned to Batch 2 with the Corrupted Swordsman and Deathblow Cue so the posture-break-to-execution loop is reviewed together.
 
 ## Milestone 2 — Complete Area 1
 
@@ -27,19 +27,19 @@ Complete the remaining Area 1 roster, both designed minibosses, Keeper of the Ga
 
 Exact room counts, branch frequency, and miniboss run frequency are not quotation blockers for the modular Area 1 package. They remain prototype and playtest decisions unless they create additional asset requirements.
 
-Final Blood Aspect VFX, mutation overlays, and final Technique presentation remain deferred to Milestone 4. Their exact scope depends on the approved Aspect system and roster.
+Final Blood Aspect VFX, Tier overlays, and Technique presentation remain deferred to Milestone 4. Their exact counts depend on the fixed Tier packages, Blood Arts, and launch run-build catalog rather than roster selection.
 
 ## Milestone 3 — The Strand
 
 Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
 
-The final number of progression nodes, training experiences, trials, unlock flows, Aspect-specific services, and mastery states depends on the approved Aspect system and the persistent progression, onboarding, and trial package.
+The final number of progression nodes, training experiences, trials, unlock flows, Aspect-specific services, and mastery states depends on the persistent progression, onboarding, and trial package.
 
 ## Milestone 4 — Player combat depth and run-build expression
 
-Complete the approved Blood Aspect roster's VFX identities, modular mutation treatment where required, eight prosthetic families, Technique reward and build interfaces, reusable Technique icon and card language, approved Technique combat-feedback needs, Relic presentation, and broad currency, pickup, breakable, and reward-object art.
+Complete the approved Wolf, Wraith, and Ronin combat-presentation families; their Tier and Blood Art states; eight prosthetic families; Technique reward and build interfaces; reusable Technique icon and card language; approved Technique combat-feedback needs; Relic presentation; and broad currency, pickup, breakable, and reward-object art.
 
-Wolf, Wraith, and Ronin are working candidates rather than a fixed production commitment. Final Aspect family count, unique effects, overlays, icons, and animation needs require approval of the system purpose, launch count, identity roster, and individual packages.
+The three launch Aspect identities are fixed. Final quotation still requires each Aspect's Tier I-IV package, drawback presentation, Blood rules, Blood Art, exact animation/VFX/audio requirements, icons, and trial states.
 
 Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
@@ -53,9 +53,9 @@ Exact room and miniboss routing remain prototype work. Exact Twin Maws transitio
 
 Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, Court-built extraction apparatus, reusable Heart Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart encounter, ending presentation, and repeat-clear presentation.
 
-The Eclipse Shogun's high-level identity is approved. His exact encounter structure, weapon, attacks, transformation anatomy, animation list, and bespoke effects require later concept and gameplay-design approval before final quotation.
+The Eclipse Shogun's high-level identity is approved. His exact encounter structure, weapon, attacks, transformation anatomy, animation list, and bespoke effects require later encounter approval before final quotation.
 
-The Heart Binding package uses one reusable ritual after each of the first six successful clears. The seventh story run continues from the Shogun into the Heart without ending the active build.
+The Binding package uses one reusable ritual after each of the first six successful clears. The seventh story run continues from the Shogun into the Heart without ending the active build.
 
 The true-final Heart has two conceptual forms and does not require a humanoid swordsman form, third phase, or separate weak-point subsystem.
 
@@ -68,15 +68,16 @@ The core story and lore are approved. Final quotation depends on the authored-co
 ## Production rules
 
 - Character concepts and key poses precede specialized VFX.
-- Base character art precedes mutation overlays.
-- The Blood Aspect roster and identity package must be approved before quoting final Aspect-specific production.
+- Base character art precedes Tier or Blood overlays.
+- Wolf, Wraith, and Ronin are the fixed launch Aspect families.
+- Exact Aspect-specific production counts require approved Tier packages, Blood Arts, and presentation requirements.
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.
 - The standard successful-run pacing target is 45–50 minutes, but exact room and encounter budgets require playable validation.
 - The base Heart Binding ritual is one reusable package.
 - Exact Heart and Shogun animation and VFX counts require approved encounter designs.
-- Deferred route algorithms, room probabilities, challenge modifiers, and variants are excluded from the initial quote unless intentionally promoted later.
+- Deferred route algorithms, room probabilities, challenge modifiers, variants, and additional Aspects are excluded from the initial quote unless intentionally promoted later.
 - Each milestone uses separately quoted, payable, reviewable internal batches.
 - Every batch receives sheet-level and in-engine review.
 - Markdown remains the internal source of truth; Word and PDF files are exports.
