@@ -4,7 +4,7 @@ title: Blood Aspect VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-26
 topics:
   - blood-aspects
   - wolf
@@ -13,6 +13,9 @@ topics:
   - vfx
 related:
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-WOLF-ASPECT
+  - GAMEPLAY-WRAITH-ASPECT
+  - GAMEPLAY-RONIN-ASPECT
   - GAMEPLAY-TECHNIQUES
   - CHAR-AKIO
   - ART-TECHNIQUE-VFX
@@ -21,101 +24,142 @@ related:
 
 # Blood Aspect VFX
 
-These effects communicate the equipped Blood Aspect's central tactical identity. They are information cues first and spectacle second. All three families layer onto Akio's approved base animation library and must preserve attack direction, enemy telegraphs, and the player's final position.
+Blood Aspect effects communicate the selected katana weapon kit. They are information cues first and spectacle second. All three families layer onto Akio's base character presentation and must preserve attack direction, enemy telegraphs, hit geometry, hazards, and the player's final position.
 
-Techniques may reuse or lightly extend these effects when they amplify the same combat verb, but the Aspect must remain the stronger visual identity.
+Techniques may reuse or lightly extend an Aspect family when they amplify the same combat verb, but the selected Aspect remains the stronger visual identity.
 
-## Wolf Aspect — Prey Mark
+Exact Tier escalation, Blood resource, Blood Art, mutation-overlay, animation, audio, and effect counts remain dependent on the fixed progression packages.
 
-### Gameplay purpose
+## Shared presentation rules
 
-Shows the selected prey target and the buildup of pressure from consecutive attacks.
+- The physical katana remains visible or clearly connected to the Blood-formed weapon expression.
+- Attack reach and geometry must be readable before spectacle.
+- Neutral dash and universal defensive actions keep shared presentation across Aspects.
+- Aspect VFX cannot imply invulnerability, teleportation, independent projectiles, automatic target marks, or combat states that the gameplay does not provide.
+- Tier escalation should deepen the same visual family rather than replace it with unrelated effects.
+- Wolf, Wraith, and Ronin must not become simple color swaps.
+- Effects use modular overlays and VFX where practical rather than requiring three unrelated complete player sheets.
 
-### Visual fantasy
-
-A restrained red predator mark over one enemy, with a faint blood-scent trail or pressure streak connecting Akio's aggression to that target.
-
-### Timing and states
-
-- Appears when prey is selected.
-- Persists while the target lives or until the mark expires or changes target.
-- Pressure intensity swells with consecutive hits.
-- Supports distinct healthy, wounded, and finishable states so wounded-prey bonuses remain readable.
-
-### Readability requirements
-
-The marked enemy must remain unmistakable in mixed encounters. The cue cannot be confused with Burn, Shock, deathblow availability, Technique target markers, or generic damage marks.
-
-### Layering and usage
-
-Attach the primary mark above the target's upper body or head. Optional pressure streaks remain faint and close to Akio's blade path. The effect is active only while Wolf Aspect is equipped.
-
-### Technical notes
-
-Use one consistent target-mark language with clearly stepped intensity. Avoid large rings, full-body red washes, or long screen-spanning trails.
-
-## Wraith Aspect — Afterimage and Mist-Step
+## Wolf — pressure and pursuit
 
 ### Gameplay purpose
 
-Communicates perfect-dodge and reposition identity, including where Akio disappeared and where he finished.
+Communicate fast close-range attacks, forward pursuit, nearby target correction, sustained contact, and the danger of committed misses.
 
-### Visual fantasy
+### Approved visual direction
 
-A pale-red body afterimage at the starting point, a compact mist-step trace, and a short reappearance cue at the final position.
+- dense Blood edge close to the physical katana,
+- compact predatory trails that follow the real attack arc,
+- stronger contact emphasis across connected attacks,
+- clear forward travel on Predator's Passage and Hunting Slash,
+- broad but controlled impact on Blood Cleave,
+- visible recovery or Blood dissipation after a severe miss.
 
-### Timing and escalation
+Wolf effects should feel forceful, close-ranged, and committed to direct contact.
 
-- Perfect dodge uses a very fast vanish-and-reappear blip.
-- Higher-Tier reposition effects may linger slightly longer or travel farther, while remaining compact.
-- The reappearance point must become readable immediately.
+### Boundaries
 
-### Readability requirements
+- no automatic Prey Mark,
+- no persistent marked-target UI requirement,
+- no pressure meter or combo-state effect,
+- no permanently extended blade that removes Wolf's reach weakness,
+- no attack invulnerability implied through full-body Blood coverage.
 
-The player must always know Akio's final position. The effect cannot obscure incoming attacks, enemy silhouettes, backstrike windows, or hazard boundaries. It must remain distinct from the Mist Raven prosthetic, movement Techniques, and ordinary dash effects.
+A future Tier benefit or Blood Art may introduce a target state only if the approved gameplay package explicitly requires it.
 
-### Layering and usage
-
-Place the first afterimage on Akio's starting body position, a subtle mist bridge between positions, and a compact re-form cue at the destination. Active only while Wraith Aspect is equipped.
-
-### Technical notes
-
-Use a few strong body-shaped afterimages rather than a broad fog smear. Positional clarity takes priority over particle density.
-
-## Ronin Aspect — Parry, Counter, and Focus Cues
+## Wraith — reach and frontal control
 
 ### Gameplay purpose
 
-Communicates Ronin's disciplined parry, Counter Cut, and deathblow-triggered Focus effects.
+Communicate long connected melee reach, narrow pokes, broad spectral arcs, restrained movement, and quick return to neutral.
 
-### Visual fantasy
+### Approved visual direction
 
-- A clean steel-bright enhancement on successful parry.
-- A brighter, brief flash on Counter Cut.
-- A calm restrained red Focus aura after deathblow.
+- elongated pale or spectral Blood edge visibly connected to the katana,
+- clean narrow lines for Veil Cut and Pale Lance,
+- broad translucent frontal arcs for Passing Arc,
+- compact extended slash language for Ghostline Slash,
+- restrained body effects so Akio's actual position remains obvious,
+- clear endpoint and dissipation on missed extended attacks.
 
-### Timing and escalation
+Wraith should feel precise and light in visual motion without becoming intangible.
 
-- Parry enhancement is instantaneous.
-- Counter Cut flash follows the riposte blade path and clears quickly.
-- Focus is a short post-deathblow aura whose duration may increase by Tier.
+### Boundaries
 
-### Readability requirements
+- no perfect-dodge identity,
+- no vanish or reappearance states,
+- no Mist-Step,
+- no forced afterimage path between special positions,
+- no teleportation or additional invulnerability,
+- no independent projectile detached from the katana,
+- no confusion with the Mist Raven prosthetic.
 
-Parry, Counter Cut, and Focus must never collapse into one generic red effect. Ronin additions layer on top of the shared Parry Spark and Deathblow Cue rather than replacing them.
+## Ronin — impact and stability
 
-### Layering and usage
+### Gameplay purpose
 
-Parry and Counter Cut effects anchor to weapon contact and blade path. Focus attaches to Akio's body after a successful deathblow. Active only while Ronin Aspect is equipped.
+Communicate deliberate heavy attacks, concentrated power, large health and posture impact, strong ordinary-enemy stagger, stable guarding, and meaningful recovery after commitment.
 
-### Technical notes
+### Approved visual direction
 
-Ronin is the least visually noisy Aspect. Favor precision, timing, and clean contact emphasis over persistent aura volume.
+- dense compressed Blood edge,
+- restrained accumulation around the blade and sheath before heavy actions,
+- controlled trails before contact,
+- strong hit-frame emphasis and recoil readability,
+- heavier audio and impact treatment than Wolf or Wraith,
+- clear guard stability and slow posture-recovery states where the HUD or animation requires them.
 
-## Shared constraints
+Ronin is the least visually noisy family outside major impact moments.
 
-- Aspect effects use modular overlays and VFX, not separate complete character sheets.
-- Tier escalation should increase clarity and intensity without turning the three Aspects into color swaps.
-- Wolf owns marked-target pressure, Wraith owns displacement and afterimage, and Ronin owns disciplined contact and Focus.
-- Techniques inherit these families only when they reinforce the same combat verb; neutral Techniques remain visually compatible with every Aspect.
-- Effects must remain readable over every regional palette and during boss encounters.
+### Boundaries
+
+- no generic Focus aura after deathblows,
+- no Counter Cut terminology or effect requirement,
+- no combo-preservation state,
+- no permanently enlarged reach,
+- no effect that suggests heavy attacks can cancel instantly into defense.
+
+## Tier escalation
+
+Every Aspect follows a fixed Tier path from Tier 0 through Tier IV. The exact gameplay packages are not yet authored, so production should not invent unrelated visual mechanics for each Tier.
+
+When the packages are approved:
+
+- Tier escalation should intensify or extend the existing family,
+- one evolving drawback family should remain readable without covering enemy telegraphs,
+- Embrace should clearly communicate advancement and danger,
+- Resist should stabilize the current state without implying advancement,
+- Stabilize at Tier IV should not look like Tier V,
+- any mutation overlay should be modular and justified by gameplay or narrative presentation.
+
+## Blood and Blood Arts
+
+Blood is unavailable before Tier II. The shared UI and VFX framework must support unavailable, building, ready, activated, active or resolving, consumed, and rebuilding states.
+
+Each Blood Art may require limited Aspect-specific treatment, but the common readiness and activation language should remain recognizable across all three.
+
+Do not assume every Blood Art is a duration buff or one giant attack. Exact target, timing, area, duration, cooldown, and persistent visual states follow the approved gameplay packages.
+
+## Technique relationship
+
+- Neutral Techniques remain compatible with every Aspect family.
+- Technique effects reuse base sword, Aspect, posture, deathblow, and prosthetic language before new VFX are authorized.
+- A Technique cannot create a separate Wolf, Wraith, and Ronin effect set unless its approved rule genuinely requires different geometry or presentation.
+- Aspect identity remains more prominent than any single temporary Technique.
+
+## Delivery requirements
+
+Final production briefs must define:
+
+- required attack trails and impact states,
+- Tier I-IV changes,
+- drawback presentation,
+- Blood buildup and readiness states,
+- Blood Art startup, active, resolve, and recovery states,
+- animation dependencies,
+- audio requirements,
+- HUD and Shrine relationships,
+- regional palette tests,
+- and boss readability tests.
+
+Exact sprite frames, particle counts, blend behavior, screen effects, color values, and timing are production and implementation decisions after the gameplay package is approved.
