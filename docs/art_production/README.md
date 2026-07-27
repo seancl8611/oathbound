@@ -18,8 +18,12 @@ Authoritative art direction, technical standards, asset inventory, outsourcing w
 
 ## Current production dependencies
 
-Final quotation still depends on approved scope for:
+Wolf, Wraith, and Ronin are the fixed launch Blood Aspect families. Final Aspect quotation still depends on:
 
+- each Aspect's fixed Tier I-IV benefits and evolving drawback family,
+- Blood generation and activation rules,
+- the three Blood Art designs,
+- exact Aspect animation, VFX, audio, icon, HUD, Shrine, selection, and trial states,
 - launch Technique, refinement, Prosthetic Technique, Relic, and consumable catalogs,
 - persistent progression, onboarding, trial, and hub-interface volume,
 - narrative authored-content, voice, portrait, and cinematic volume,
@@ -27,6 +31,8 @@ Final quotation still depends on approved scope for:
 - encounter-specific sprite, animation, and bespoke VFX counts once the Shogun and Heart designs are approved.
 
 The modular regional environment kits and functional-room families are already in scope. Exact room counts, route topology, branch frequency, miniboss frequency, route-marker quantity, and authored layout counts remain prototype and playtest decisions unless they create a verified need for additional art packages.
+
+Additional Blood Aspects are excluded from current launch production scope.
 
 ## Authority rule
 
