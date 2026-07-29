@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-07-29
 ---
 
 # Current Design Questions
@@ -30,15 +30,16 @@ The following decisions are settled and should not be reopened as top-level ques
 - Techniques remain universal temporary run rewards with four active slots, one reserve slot, and at most one refinement per Technique.
 - Aspects do not use corrective tracking, hidden homing, or post-input target correction.
 - Wolf's Tier I-IV progression, Predatory Commitment drawback family, Blood direction, and Dire Hunt Blood Art are approved as a working draft for current scoping.
+- Wraith's Tier I **Pale Barrage** is approved as a working draft: continuing to hold Pale Lance after its initial thrust performs rapid lower-impact spectral jabs, with greater combined payoff and commitment the longer the player continues.
 
 Wolf's working progression is:
 
-- **Tier I — Blood Tempo**
+- **Tier I — Blood Tempo**, including alternate entries into Rending Cross and the Hunting Slash rear follow-up
 - **Tier II — Dire Hunt**, including Blood Fang
 - **Tier III — Fanged Guard**
 - **Tier IV — Apex Feast**
 
-Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package.
+Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package. Wraith Tier I may likewise be revised after the rest of the roster is drafted or after playable testing.
 
 Authoritative references:
 
@@ -60,14 +61,14 @@ Authoritative references:
 
 ## 1. Remaining Blood Aspect Tier packages and cross-roster comparison
 
-Define the fixed Tier I-IV packages for Wraith and Ronin within the approved Shrine structure.
+Define Wraith's fixed Tier II-IV package and Ronin's fixed Tier I-IV package within the approved Shrine structure.
 
 Resolve:
 
-- Wraith's headline benefit at Tiers I, II, III, and IV,
+- Wraith's headline benefit at Tiers II, III, and IV,
 - Ronin's headline benefit at Tiers I, II, III, and IV,
-- whether each Tier needs one minor supporting rule in addition to its headline benefit,
-- one evolving drawback family for Wraith and one for Ronin,
+- whether each remaining Tier needs one minor supporting rule in addition to its headline benefit,
+- one evolving drawback family for Wraith that incorporates Pale Barrage's focused commitment and one evolving drawback family for Ronin,
 - each Aspect's Tier II Blood Art form, practical payoff, duration or resolution behavior, and any justified exception to the shared Blood defaults,
 - how each package deepens its Tier 0 weapon kit without replacing Techniques,
 - whether limited direct Aspect-, Tier-, or Blood-referencing Techniques ship,
