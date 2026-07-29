@@ -4,7 +4,7 @@ title: Technique Catalog
 category: gameplay
 status: draft
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - techniques
   - technique-catalog
@@ -41,6 +41,7 @@ The approved layer contract is:
 
 - Wolf, Wraith, and Ronin define the pre-run weapon foundation.
 - Each Aspect follows a fixed Tier path rather than branching Technique-like packages.
+- Wolf's current path is Blood Tempo, Dire Hunt and Blood Fang, Fanged Guard, and Apex Feast.
 - Techniques are four limited replaceable in-run modifications plus one reserve.
 - Ordinary Techniques are usable by every Aspect.
 - Affinity represents amplification or weighting rather than eligibility.
@@ -49,25 +50,39 @@ The approved layer contract is:
 
 Before catalog population begins, approve:
 
-1. each Aspect's fixed Tier I-IV benefits and power budget relative to Techniques,
-2. Technique category, combat-verb tag, affinity, and rarity models,
-3. the refinement design standard,
-4. affinity and offer-weighting rules,
-5. rare direct Aspect-, Tier-, or Blood-referencing exception rules,
-6. and the launch coverage matrix.
+1. Wraith and Ronin's fixed Tier I-IV benefits and power budgets,
+2. cross-roster overlap and the Technique power-budget boundary,
+3. Technique category, combat-verb tag, affinity, and rarity models,
+4. the refinement design standard,
+5. affinity and offer-weighting rules,
+6. rare direct Aspect-, Tier-, or Blood-referencing exception rules,
+7. and the launch coverage matrix.
 
 Catalog counts follow these decisions rather than preceding them.
 
+## Protected Wolf design space
+
+Ordinary Techniques must not directly reproduce:
+
+- Blood Tempo's earlier next-Basic input after a successful hit,
+- Dire Hunt's activation recovery and transformation package,
+- Blood Fang,
+- Fanged Guard's single frontal block while charging a Held Attack,
+- Apex Feast's deathblow eruption and fully charged next Held Attack.
+
+A Technique may interact with the same universal action tags, but it must create a distinct rule with cross-Aspect value. Direct Wolf-specific exceptions require explicit approval.
+
 ## Catalog design sequence
 
-1. Finalize the fixed Tier packages and Technique power-budget boundary.
-2. Finalize Technique metadata, affinity, refinement, rarity, and exception rules.
-3. Build the coverage matrix around territory not already owned by the Aspect foundations.
-4. Draft individual Technique concepts.
-5. Test every entry for standalone value and cross-Aspect usefulness.
-6. Verify reinforce, broaden, compensate, and hybridize coverage for Wolf, Wraith, and Ronin.
-7. Identify rarity, UI, VFX, animation, audio, and unlock treatment.
-8. Approve launch counts and production tiers.
+1. Finalize Wraith and Ronin's fixed Tier packages.
+2. Compare all three packages and define the Technique power-budget boundary.
+3. Finalize Technique metadata, affinity, refinement, rarity, and exception rules.
+4. Build the coverage matrix around territory not already owned by the Aspect foundations.
+5. Draft individual Technique concepts.
+6. Test every entry for standalone value and cross-Aspect usefulness.
+7. Verify reinforce, broaden, compensate, and hybridize coverage for Wolf, Wraith, and Ronin.
+8. Identify rarity, UI, VFX, animation, audio, and unlock treatment.
+9. Approve launch counts and production tiers.
 
 ## Launch coverage matrix
 
@@ -75,20 +90,20 @@ Populate this matrix before approving final catalog size. One Technique may cove
 
 | Coverage family | Required question | Status |
 |---|---|---|
-| Attack opening and sequences | What choices alter opening pressure, sequence behavior, or commitment without becoming generic attack speed? | Open |
+| Attack opening and sequences | What choices alter opening pressure, sequence behavior, or commitment without duplicating Blood Tempo or becoming generic attack speed? | Open |
 | Range and crowd coverage | What choices affect reach, arcs, nearby targets, or line control across all Aspects? | Open |
 | Heavy commitment | What choices reward earned openings, posture pressure, or risk-managed commitment? | Open |
 | Spacing and precision | What choices deepen narrow punishment, spacing, or anti-commitment play? | Open |
-| Defense-to-offense | What choices connect parry, block, dodge, recovery, or Parry Counter into offense without belonging to one Aspect? | Open |
-| Movement and re-entry | What choices deepen repositioning, pursuit, spacing, or movement-to-attack transitions? | Open |
-| Posture and execution | What choices alter posture pressure, break payoff, deathblow momentum, or target transition? | Open |
+| Defense-to-offense | What choices connect parry, block, dodge, recovery, or Parry Counter into offense without duplicating Fanged Guard? | Open |
+| Movement and re-entry | What choices deepen repositioning, pursuit, spacing, or movement-to-attack transitions without adding corrective tracking? | Open |
+| Posture and execution | What choices alter posture pressure, break payoff, deathblow payoff, or target transition without duplicating Apex Feast? | Open |
 | Prosthetic development | What temporary choices deepen each equipped tool's existing tactical purpose? | Open |
 | Reinforce builds | Does every Aspect have several Techniques that deepen its strengths? | Open |
 | Broaden builds | Can every Aspect develop adjacent combat options without losing its identity? | Open |
 | Compensate builds | Can slots cover a weakness without erasing its firm tradeoff? | Open |
 | Hybrid builds | Can each Aspect support surprising cross-category combinations that remain coherent? | Open |
 | Alternate affinity | Are neutral and alternate-affinity choices useful rather than misleading or dead? | Open |
-| Health, Spirit, and recovery | What limited General Techniques support survival or resources without generic stat clutter? | Open |
+| Health, Spirit, and recovery | What limited General Techniques support survival or resources without duplicating Dire Hunt's healing identity? | Open |
 | Boss viability | Which entries remain useful against single targets, elites, and bosses? | Open |
 | Mixed encounters | Which entries address groups, ranged pressure, hazards, or target prioritization? | Open |
 | Early-run value | Which entries provide immediate value without another exact Technique? | Open |
@@ -118,7 +133,7 @@ Populate this matrix before approving final catalog size. One Technique may cove
 - **Boss and elite behavior:** restrictions and reliability
 - **Crowd behavior:** multiple-enemy behavior
 - **Cross-Aspect usefulness:** why it remains valid outside its strongest affinity
-- **Aspect overlap check:** why it modifies rather than duplicates the selected weapon foundation
+- **Aspect overlap check:** why it modifies rather than duplicates the selected weapon foundation, fixed Tier benefits, or Blood Art
 - **Invalid combinations or safeguards:** only where required
 
 ### Refinement
@@ -148,7 +163,8 @@ An individual Technique is not ready unless:
 - category, tags, affinity, rarity, and build direction describe different properties,
 - it remains useful in common and major encounter contexts,
 - it is not invalid under another Aspect,
-- it modifies rather than reproduces an Aspect foundation or Blood Art,
+- it modifies rather than reproduces an Aspect foundation, fixed Tier benefit, or Blood Art,
+- it does not add hidden homing or corrective tracking,
 - its refinement preserves the original reason for selection,
 - and its production treatment is explicit enough to estimate.
 
@@ -156,7 +172,7 @@ An individual Technique is not ready unless:
 
 Approve the launch catalog only when:
 
-- fixed Aspect Tier packages and the Technique power budget are approved,
+- all three fixed Aspect Tier packages and the Technique power budget are approved,
 - every core combat action has meaningful but non-mandatory support,
 - each Aspect supports several reinforce, broaden, compensate, and hybridize builds,
 - neutral and alternate-affinity choices prevent repetitive same-Aspect runs,
