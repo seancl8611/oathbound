@@ -171,9 +171,22 @@ Approved shared boundaries:
 
 - Blood is unavailable before Tier II.
 - Blood does not exist as a persistent wallet, shop currency, route currency, or campaign collectible.
+- Stored Blood persists between rooms until it is spent or the run ends.
 - Blood and Blood Art state reset after death or successful completion.
 - Blood progression must deepen the selected weapon kit without replacing ordinary swordplay or making Techniques secondary.
 - Blood Arts should provide a clear practical payoff on activation rather than depending entirely on ideal follow-up play.
+- A Blood Art may be an immediate signature action, a temporary state, or another clearly defined combat expression. Blood Arts are not required to share one form.
+
+Working launch defaults:
+
+- The launch Aspects use one shared Blood-meter framework, including capacity, readiness language, activation input, and core HUD states.
+- Meaningful direct katana health damage, enemy-posture pressure, successful Parry Counters, posture breaks, and deathblows form the shared generation foundation.
+- Generation is weighted around meaningful combat contribution rather than granting an equal flat amount for every hit, so different sequence counts do not create an automatic advantage.
+- A Blood Art normally requires a full meter and activates manually.
+- Activation consumes the Art's Blood cost.
+- A duration-based Blood Art does not normally generate Blood while active. Generation resumes after an immediate Art resolves or a duration-based Art ends.
+
+These are defaults rather than absolute restrictions. A specific Aspect may use a different activation cost, trigger, meter behavior, or active-generation rule only when its approved design clearly requires the exception. An exception should not be added only to make an Aspect mechanically different.
 
 Wolf's working Blood direction is approved:
 
@@ -181,20 +194,20 @@ Wolf's working Blood direction is approved:
 - Dire Hunt requires a full meter and activates manually,
 - activation consumes the stored Blood,
 - Blood cannot be generated during Dire Hunt,
-- and exact capacity, gain values, duration, retention details, and anti-farming thresholds remain tuning work.
+- and exact capacity, gain values, duration, and anti-farming thresholds remain tuning work.
 
-Still unresolved at system level:
+Still unresolved at system or Aspect-package level:
 
-- Wraith and Ronin Blood generation and Blood Arts,
-- final shared input and HUD details,
-- final capacity and retention rules if they are standardized,
+- Wraith and Ronin's Blood Arts and how each Art expresses the shared defaults,
+- whether either approved package requires a justified exception to a shared default,
+- final detailed input and HUD presentation,
 - exact duration or cooldown behavior,
 - and limited Tier or Technique interactions.
 
 ## Remaining design package
 
-1. Define Wraith's fixed Tier I-IV benefits, drawback family, Blood rules, and Blood Art.
-2. Define Ronin's fixed Tier I-IV benefits, drawback family, Blood rules, and Blood Art.
+1. Define Wraith's fixed Tier I-IV benefits, drawback family, Blood Art, and any justified exception to the shared Blood defaults.
+2. Define Ronin's fixed Tier I-IV benefits, drawback family, Blood Art, and any justified exception to the shared Blood defaults.
 3. Compare all three packages for power, production cost, accessibility, and Technique overlap.
 4. Resolve shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.
 5. Finalize required animation, VFX, audio, HUD, Shrine, selection, trial, and persistent-progression states.
