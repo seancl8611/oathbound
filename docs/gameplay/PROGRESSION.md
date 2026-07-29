@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - progression
   - persistence
@@ -71,7 +71,14 @@ The selected Aspect follows one fixed Tier path during the run. It is not a bran
 
 The meaningful choice is whether to accept the next Tier and its danger now. The player does not choose between alternate upgrade branches when advancing.
 
-The exact Tier I-IV benefits and drawback wording for Wolf, Wraith, and Ronin remain the next Aspect design package.
+Wolf's current fixed path is approved as a working draft:
+
+- Tier I — Blood Tempo,
+- Tier II — Dire Hunt and Blood Fang,
+- Tier III — Fanged Guard,
+- Tier IV — Apex Feast.
+
+Wraith and Ronin remain the next Tier-package design work. Wolf may be revisited after cross-roster comparison or playable testing, but its package is not an unresolved blank.
 
 ## Blood persistence boundary
 
@@ -83,7 +90,9 @@ Blood is a run-only combat resource owned by the Blood Aspect system.
 - Permanent progression cannot create stored Blood between runs or make Blood available before the approved in-run unlock.
 - Any permanent upgrade affecting starting Blood, capacity, gain, activation, or Blood Art availability requires explicit system approval.
 
-Exact Blood generation, capacity, activation, duration, retention, cooldown, and anti-farming values remain unresolved in the Blood Aspect package.
+Wolf's working Blood direction is approved: meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows build Blood; Dire Hunt requires a full meter, activates manually, consumes the stored Blood, and prevents Blood generation while active.
+
+Exact Blood capacity, gain values, duration, retention details, cooldown behavior, and anti-farming thresholds remain tuning work. Wraith and Ronin Blood rules remain unresolved.
 
 ## Persistent character progression
 
@@ -98,6 +107,8 @@ The Strand supports permanent growth through:
 - **Mist, Scrolls, and Boss Emblems:** persistent currencies.
 
 Permanent progression may improve options, reliability, and resilience. It must not remove the need to read combat, replace run-build choices, bypass Embrace danger, or pre-equip major run-only power.
+
+No separate duplicate Blood Art upgrade tree beneath each Aspect is currently approved. Any future Blood Art meta progression must be justified as part of a broader game-wide system rather than repeating the same subsystem for Wolf, Wraith, and Ronin.
 
 The service ownership boundaries are approved. The remaining production decision is the minimum launch package: approximate nodes or ranks, onboarding and trial counts, unlock mapping, mastery content, rewards, and required interface states.
 
@@ -225,8 +236,9 @@ The results flow must clearly distinguish retained progress from burned-away run
 
 ## Current production dependencies
 
-1. Define Wolf, Wraith, and Ronin's fixed Tier I-IV benefits, drawback families, Blood rules, and Blood Arts.
-2. Scope the launch run-build content catalog.
-3. Scope persistent progression, onboarding, and trials around those approved systems.
+1. Define Wraith and Ronin's fixed Tier I-IV benefits, drawback families, Blood rules, and Blood Arts.
+2. Compare Wolf, Wraith, and Ronin for power, accessibility, production cost, drawback severity, and Technique overlap.
+3. Scope the launch run-build content catalog.
+4. Scope persistent progression, onboarding, and trials around those approved systems.
 
 Exact upgrade percentages, resource values, costs, timing windows, and reward values remain implementation and balance work.
