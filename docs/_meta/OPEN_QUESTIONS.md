@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 ---
 
 # Current Design Questions
@@ -25,6 +25,17 @@ The following decisions are settled and should not be reopened as top-level ques
 - Tier IV is the maximum. A full threshold at Tier IV uses **Stabilize** rather than creating Tier V.
 - Blood is run-only, unavailable before Tier II, and resets after the run.
 - Techniques remain universal temporary run rewards with four active slots, one reserve slot, and at most one refinement per Technique.
+- Aspects do not use corrective tracking, hidden homing, or post-input target correction.
+- Wolf's Tier I-IV progression, Predatory Commitment drawback family, Blood direction, and Dire Hunt Blood Art are approved as a working draft for current scoping.
+
+Wolf's working progression is:
+
+- **Tier I — Blood Tempo**
+- **Tier II — Dire Hunt**, including Blood Fang
+- **Tier III — Fanged Guard**
+- **Tier IV — Apex Feast**
+
+Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package.
 
 Authoritative references:
 
@@ -38,26 +49,37 @@ Authoritative references:
 
 ## Priority order
 
-1. Fixed Blood Aspect Tier packages and Blood Arts
+1. Remaining Blood Aspect Tier packages and cross-roster comparison
 2. Launch run-build content catalog
 3. Persistent progression, onboarding, and trial package
 4. Narrative delivery and authored-content package
 5. Postgame release package
 
-## 1. Fixed Blood Aspect Tier packages and Blood Arts
+## 1. Remaining Blood Aspect Tier packages and cross-roster comparison
 
-Define the fixed Tier I-IV package for Wolf, Wraith, and Ronin within the approved Shrine structure.
+Define the fixed Tier I-IV packages for Wraith and Ronin within the approved Shrine structure.
 
 Resolve:
 
-- each Aspect's headline benefit at Tiers I, II, III, and IV,
+- Wraith's headline benefit at Tiers I, II, III, and IV,
+- Ronin's headline benefit at Tiers I, II, III, and IV,
 - whether each Tier needs one minor supporting rule in addition to its headline benefit,
-- one evolving drawback family per Aspect,
-- the selected Aspect's Tier II Blood unlock and Blood Art package,
-- Blood generation, capacity, activation, duration, retention, and anti-farming rules,
-- how each package deepens the Tier 0 weapon kit without replacing Techniques,
+- one evolving drawback family for Wraith and one for Ronin,
+- each Aspect's Tier II Blood unlock and Blood Art package,
+- Blood generation, capacity, activation, duration, retention, and anti-farming direction where not already settled,
+- how each package deepens its Tier 0 weapon kit without replacing Techniques,
 - whether limited direct Aspect-, Tier-, or Blood-referencing Techniques ship,
 - and the required HUD, input, animation, VFX, audio, Shrine, trial, and progression states.
+
+After both packages are drafted, compare Wolf, Wraith, and Ronin for:
+
+- practical payoff and accessibility,
+- power across ordinary encounters, elites, and bosses,
+- drawback severity,
+- production cost,
+- visual distinction,
+- overlap with universal Techniques,
+- and whether each Tier is desirable to Embrace.
 
 Do not reopen whether advancement is linear or choice-based. The player choice is Resist versus Embrace; the Aspect's Tier path itself is fixed.
 
@@ -92,6 +114,8 @@ Define the minimum launch package across the Bloodwell, Forge, Blood Mirror, and
 
 The service ownership boundaries and persistent currencies are already approved.
 
+Do not assume a separate duplicate Blood Art upgrade tree beneath each Aspect. Any future Blood Art meta progression must be justified as part of a broader game-wide system.
+
 ## 4. Narrative delivery and authored-content package
 
 Define the authored presentation required for launch:
@@ -121,10 +145,10 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 
 Keep the following in their owning gameplay, encounter, economy, UI, or production files rather than this tracker:
 
-- exact frame data, hitboxes, cancel windows, tracking, damage, posture, stagger, and recovery values,
+- exact frame data, hitboxes, cancel windows, attack travel, damage, posture, stagger, and recovery values,
 - exact neutral movement and dash values within the approved universal contract,
 - exact Corruption gain, thresholds, Shrine frequency, and support values,
-- exact Blood values after the Blood system direction is approved,
+- exact Blood values after each Blood-system direction is approved,
 - Spirit costs and prosthetic cooldowns,
 - immunity tables and status values,
 - room counts, route topology, branch frequency, and miniboss placement,
