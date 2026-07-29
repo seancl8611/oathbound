@@ -4,7 +4,7 @@ title: Wolf Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-07-29
 topics:
   - blood-aspects
   - wolf
@@ -82,7 +82,7 @@ A long, narrow pursuit lunge that converts distance into close engagement.
 - no additional invulnerability,
 - severe recovery after a miss.
 
-Wolf may pass through an eligible ordinary enemy only when the attack connects and the destination on the far side is safe and valid. Against bosses, elites, heavy enemies, walls, hazards, pits, blocked geometry, or invalid destinations, Wolf stops on the near side.
+Predator's Passage closes distance and stops when it reaches an enemy or blocking obstacle. It does not pass through the target.
 
 ## Dash Attack — Hunting Slash
 
@@ -91,9 +91,11 @@ A fast advancing re-entry cut after the universal neutral dash.
 - quick startup,
 - short-to-medium attack reach,
 - strong forward movement along the selected direction,
-- close finishing position.
+- and a close finishing position or constrained pass-through on a successful hit.
 
-The universal dash itself is unchanged. Hunting Slash is an optional offensive commitment after it.
+When Hunting Slash strikes an eligible ordinary enemy, Akio may carry through that enemy along the original attack direction only when safe and valid space exists on the far side. Against bosses, elites, heavy enemies, walls, hazards, pits, blocked geometry, or invalid destinations, Akio stops on the near side.
+
+The universal dash itself is unchanged. Hunting Slash is an optional offensive commitment after it and never teleports, tracks, or automatically places Akio behind a target.
 
 ## Parry Counter — Fang Reversal
 
@@ -155,17 +157,21 @@ The benefits should clearly outweigh the drawbacks. Embrace should feel like a d
 
 When Fang Slash, Rending Cross, or Raking Fang successfully hits an enemy, Akio may begin the next Basic Attack earlier during the current attack's recovery.
 
-This does not increase the speed of the current animation or apply global attack speed. It only opens the input for the next Basic Attack sooner.
+After Predator's Passage, Hunting Slash, or Fang Reversal successfully hits, Akio may instead continue directly into Rending Cross during that attack's recovery. The sequence may then continue normally into Raking Fang and Blood Cleave.
 
-- The benefit exists only during that attack's recovery.
-- It is not stored and has no cooldown.
-- If the player does not continue attacking, it expires naturally.
+When Hunting Slash carries Akio through an eligible ordinary enemy, the immediate Rending Cross deals increased health and enemy-posture damage if it strikes that same enemy from behind.
+
+- These continuations are always optional.
+- The rear follow-up does not automatically turn Akio toward the crossed enemy.
+- The rear bonus is lost if Akio performs another action first or Rending Cross does not strike the same enemy from behind.
+- The benefit exists only during the current attack's recovery and is not stored.
 - Missed attacks receive no benefit.
 - Block, parry, dash, and Prosthetic actions are not accelerated.
+- This is an authored Wolf interaction rather than a universal backstab-damage rule.
 
 ### Predatory Commitment I
 
-Raking Fang and Hunting Slash travel slightly farther along the direction chosen by the player. They cannot turn, home, or correct their path after the attack begins.
+Raking Fang and Hunting Slash travel slightly farther along the direction chosen by the player. Hunting Slash may therefore carry Akio farther through an eligible ordinary enemy when the hit and destination are valid. Neither attack can turn, home, or correct its path after it begins.
 
 ## Tier II — Dire Hunt
 
@@ -254,14 +260,14 @@ The primed pursuit retains its full travel and miss recovery. Tier IV gives Wolf
 
 # Progression summary
 
-- **Tier I — Blood Tempo:** successful Basic Attacks allow the next Basic Attack to begin sooner.
+- **Tier I — Blood Tempo:** successful Basic Attacks accelerate the next Basic input; successful pursuit, dash, and parry-counter hits may continue into Rending Cross; crossing an ordinary enemy with Hunting Slash can empower the immediate rear Rending Cross.
 - **Tier II — Dire Hunt:** activation immediately restores health, clears posture, interrupts nearby ordinary enemies, and begins a transformation with lifesteal, interruption resistance, increased damage, and Blood Fang.
 - **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack without cancelling the charge.
 - **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
 
 The progression is:
 
-> successful hits accelerate Wolf's offense → Dire Hunt guarantees immediate recovery and unlocks Blood Fang → Fanged Guard helps prepare pursuit under pressure → deathblows prime the next hunt
+> successful entries and hits connect Wolf's offense into a fluid hunt → Dire Hunt guarantees immediate recovery and unlocks Blood Fang → Fanged Guard helps prepare pursuit under pressure → deathblows prime the next hunt
 
 # Technique space
 
@@ -273,7 +279,8 @@ Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, postur
 
 The working package establishes requirements for:
 
-- a Tier I Blood-link cue,
+- Blood Tempo chain-window and alternate-entry feedback,
+- Hunting Slash pass-through constraints and the empowered rear Rending Cross,
 - Dire Hunt activation, active-state, and ending presentation,
 - the Blood Fang animation and Blood-jaw effect,
 - Fanged Guard charge and block feedback,
