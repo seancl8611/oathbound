@@ -23,7 +23,10 @@ The following decisions are settled and should not be reopened as top-level ques
 - Aspect Tier progression is fixed rather than a branching upgrade-package choice.
 - Every run begins at Tier 0. At a full Corruption threshold, the player chooses **Resist** or **Embrace**; Embrace advances the selected Aspect by one fixed Tier, up to Tier IV.
 - Tier IV is the maximum. A full threshold at Tier IV uses **Stabilize** rather than creating Tier V.
-- Blood is run-only, unavailable before Tier II, and resets after the run.
+- Blood is run-only, unavailable before Tier II, stored between rooms until spent, and reset after the run.
+- The working launch default uses one shared Blood meter, capacity, readiness, activation input, and HUD language. Blood is generally built through meaningful katana health damage, enemy-posture pressure, successful Parry Counters, posture breaks, and deathblows rather than a flat equal reward per hit.
+- Blood Arts normally require a full meter, activate manually, consume their cost, and do not generate Blood while a duration-based Art is active. These are defaults rather than absolute restrictions; a specific Aspect may depart from them only when its approved design clearly requires the exception.
+- A Blood Art is not required to use one common form. It may be an immediate signature action, a temporary state, or another clearly defined combat expression.
 - Techniques remain universal temporary run rewards with four active slots, one reserve slot, and at most one refinement per Technique.
 - Aspects do not use corrective tracking, hidden homing, or post-input target correction.
 - Wolf's Tier I-IV progression, Predatory Commitment drawback family, Blood direction, and Dire Hunt Blood Art are approved as a working draft for current scoping.
@@ -65,8 +68,7 @@ Resolve:
 - Ronin's headline benefit at Tiers I, II, III, and IV,
 - whether each Tier needs one minor supporting rule in addition to its headline benefit,
 - one evolving drawback family for Wraith and one for Ronin,
-- each Aspect's Tier II Blood unlock and Blood Art package,
-- Blood generation, capacity, activation, duration, retention, and anti-farming direction where not already settled,
+- each Aspect's Tier II Blood Art form, practical payoff, duration or resolution behavior, and any justified exception to the shared Blood defaults,
 - how each package deepens its Tier 0 weapon kit without replacing Techniques,
 - whether limited direct Aspect-, Tier-, or Blood-referencing Techniques ship,
 - and the required HUD, input, animation, VFX, audio, Shrine, trial, and progression states.
@@ -148,7 +150,7 @@ Keep the following in their owning gameplay, encounter, economy, UI, or producti
 - exact frame data, hitboxes, cancel windows, attack travel, damage, posture, stagger, and recovery values,
 - exact neutral movement and dash values within the approved universal contract,
 - exact Corruption gain, thresholds, Shrine frequency, and support values,
-- exact Blood values after each Blood-system direction is approved,
+- exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown, and anti-farming values within the approved shared defaults,
 - Spirit costs and prosthetic cooldowns,
 - immunity tables and status values,
 - room counts, route topology, branch frequency, and miniboss placement,
