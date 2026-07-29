@@ -4,11 +4,12 @@ title: Wolf Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - blood-aspects
   - wolf
-  - tier-0
+  - tier-progression
+  - blood-arts
   - weapon-kits
   - combat-foundation
   - roguelite-combat
@@ -28,325 +29,257 @@ related:
 
 ## Status
 
-This document owns Wolf's approved qualitative Tier 0 weapon kit for roster comparison.
+Wolf is an approved member of the three-Aspect launch roster. This document owns Wolf's Tier 0 weapon kit and its current fixed Tier I-IV progression package.
 
-It does not approve exact numerical values, frame data, hitboxes, chain windows, animation counts, Blood Art, Tier progression, drawbacks, Corruption interactions, production scope, or Wolf's final inclusion after the roster audit.
+The Tier package is approved as a working draft for current scoping. It may be revisited after Wraith and Ronin are developed or after playable testing. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
 
-## Core weapon identity
+## Weapon identity
 
-**Wolf is the fast close-range pressure kit.**
+**Wolf is the fast close-range pressure and pursuit kit.**
 
-Its swordplay is defined by:
+Wolf is defined by:
 
-- the longest basic sequence of the initial three,
+- the fastest and longest Basic Attack sequence in the launch roster,
 - short effective reach,
-- fast attack cadence,
-- forward movement within attacks,
-- strong correction toward nearby aimed enemies,
+- player-directed forward movement attached to attacks,
 - moderate per-hit damage,
 - strong sustained health and enemy-posture output,
-- fast offensive follow-ups,
-- and significant risk after missed forward commitments.
+- practical transfer between nearby targets through player aim and attack geometry,
+- and dangerous recovery after missed pursuit or extended commitments.
 
-The player does not need to complete or maintain Wolf's sequence to use the Aspect correctly. The attacks naturally support sustained pressure, but the player may stop, defend, dash, change targets, use a Prosthetic, or abandon the sequence whenever the encounter demands it.
+Wolf does not use corrective tracking, hidden homing, or post-input target correction. Its attacks follow the direction selected by the player, their authored arcs, and their authored forward travel.
 
-## Universal systems retained
+The player never needs to complete or preserve Wolf's sequence. Each attack must remain useful on its own, and the player may stop, defend, dash, redirect, use a Prosthetic, or disengage whenever necessary.
 
-Wolf uses the universal:
+## Shared systems
 
-- ordinary movement speed,
-- neutral dash distance, speed, startup, invulnerability, recovery, steering, and repeat availability,
-- defense input,
-- parry timing,
-- posture-break and deathblow rules,
-- Technique system,
-- and prosthetic system.
+Wolf retains universal locomotion, neutral dash, defense input, parry timing, posture rules, deathblows, Technique inventory, and prosthetic controls.
 
-Wolf's aggressive identity comes from its sword attacks, not from a weaker backward dash, a unique deathblow system, or altered parry timing.
+Its aggression comes from the sword kit rather than a stronger neutral dash, automatic targeting, attack invulnerability, or a separate combo meter.
 
-## Basic attack sequence
+# Tier 0 weapon kit
 
-Repeated Basic Attack presses produce:
+## Basic Attack sequence
 
-1. **Fang Slash**
-2. **Rending Cross**
-3. **Raking Fang**
-4. **Blood Cleave**
+1. **Fang Slash** — fast advancing opener with short reach and moderate pressure.
+2. **Rending Cross** — broader returning cut that continues pressure and catches nearby interference.
+3. **Raking Fang** — fast pursuit strike with strong forward travel along the player's chosen direction.
+4. **Blood Cleave** — broad committed final cut with strong damage and posture pressure but severe miss recovery.
 
-This four-hit sequence creates Wolf's extended pressure cadence. It is a set of offensive options, not a mandatory objective.
-
-### Fang Slash
-
-Fang Slash is a fast advancing opener with:
-
-- short reach,
-- a narrow diagonal or forward arc,
-- a small forward step,
-- moderate nearby target correction,
-- fast startup,
-- and moderate health and enemy-posture pressure.
-
-Primary uses:
-
-- test a close opening,
-- begin pressure,
-- catch a nearby retreating enemy,
-- and enter Wolf's broader attacks.
-
-Its narrow coverage leaves Wolf vulnerable to side pressure.
-
-### Rending Cross
-
-Rending Cross is a broader returning cut with:
-
-- continued forward movement,
-- a wider arc than Fang Slash,
-- practical nearby-enemy coverage,
-- stronger redirection toward a second close threat,
-- and balanced health and enemy-posture pressure.
-
-Primary uses:
-
-- continue attacking the current target,
-- catch nearby interference,
-- transfer into another close enemy,
-- and threaten a small group in front of Akio.
-
-It is not a full-circle crowd-clear attack.
-
-### Raking Fang
-
-Raking Fang is a fast third pursuit strike that reconnects Wolf before the committed final attack.
-
-Working properties:
-
-- faster startup than Blood Cleave,
-- short reach,
-- a tighter arc than Rending Cross,
-- strong forward movement,
-- strong correction toward a nearby aimed enemy,
-- moderate health and enemy-posture pressure,
-- and practical redirection toward another close target.
-
-Primary uses:
-
-- maintain contact with an enemy shifting away,
-- close the small distance created during an exchange,
-- move pressure into another nearby enemy,
-- and provide a fast attack option before deciding whether Blood Cleave is safe.
-
-Raking Fang is the clearest expression of Wolf's pursuit inside the basic sequence. Its tighter arc does not protect Akio from enemies outside the attack line.
-
-### Blood Cleave
-
-Blood Cleave is a committed frontal or diagonal final cut with:
-
-- the broadest coverage in Wolf's basic sequence,
-- strong enemy-posture damage,
-- meaningful health damage,
-- strong forward commitment,
-- and severe recovery after a miss.
-
-Primary uses:
-
-- punish a large opening,
-- hit the main target and nearby enemies in front of Akio,
-- finish a sustained attack opportunity,
-- and push elites or bosses toward posture break.
-
-Reaching Blood Cleave does not guarantee that using it is safe.
-
-## Sequence flow
-
-Wolf's attack recoveries should allow all four attacks to feel fast and connected, especially on successful contact.
-
-A completed sequence may return smoothly to Fang Slash, but this is a responsiveness property rather than a combo-maintenance goal.
-
-The player remains free to:
-
-- stop after Fang Slash,
-- stop after Rending Cross,
-- use Raking Fang without committing to Blood Cleave,
-- defend before the final attack,
-- redirect the next strike,
-- or leave the sequence entirely.
-
-Missed attacks receive meaningful recovery. Raking Fang can pull Wolf into danger, and a missed Blood Cleave creates the sequence's largest punish window.
-
-## Why Wolf uses four attacks
-
-Wolf's sequence was expanded from three attacks to four because sustained pressure is its defining weapon rhythm.
-
-The new structure creates a clear escalation:
+The sequence cadence is:
 
 > fast entry → broader pressure → close pursuit → committed finish
 
-Raking Fang adds another fast contact-maintaining decision before Blood Cleave. The change does not require the player to complete the sequence and does not add a combo reward or meter.
+Blood Cleave is not a required finisher. Fang Slash and Rending Cross must provide worthwhile value during short openings, and Raking Fang offers another fast decision before the player chooses whether Blood Cleave is safe.
 
 ## Held Attack — Predator's Passage
 
-Holding and releasing Attack produces **Predator's Passage**, a long piercing pursuit lunge.
+A long, narrow pursuit lunge that converts distance into close engagement.
 
-Its purpose is to convert distance into close engagement rather than deal safe ranged damage.
-
-Working properties:
-
-- long committed travel along a narrow line,
-- limited correction after release,
-- strong single-target health and enemy-posture pressure,
+- committed player-directed travel,
+- fixed attack line after release,
+- strong single-target health and posture damage,
 - no additional invulnerability,
-- and severe recovery after a miss.
+- severe recovery after a miss.
 
-Against valid ordinary enemies, Wolf may pass through the target and finish immediately behind or beside it, provided the destination is safe and valid.
-
-Against elites, bosses, heavy enemies, walls, hazards, pits, blocked geometry, or invalid destinations, Wolf stops at impact and remains engaged on the near side.
-
-Exact passage eligibility remains implementation and testing work.
+Wolf may pass through an eligible ordinary enemy only when the attack connects and the destination on the far side is safe and valid. Against bosses, elites, heavy enemies, walls, hazards, pits, blocked geometry, or invalid destinations, Wolf stops on the near side.
 
 ## Dash Attack — Hunting Slash
 
-Attacking during the approved window after the universal neutral dash produces **Hunting Slash**.
-
-Hunting Slash is an advancing re-entry cut with:
+A fast advancing re-entry cut after the universal neutral dash.
 
 - quick startup,
 - short-to-medium attack reach,
-- strong movement toward the aimed nearby enemy,
-- moderate target correction,
-- a narrow initial hit,
-- and a close finishing position.
-
-It may flow naturally into Rending Cross, followed by Raking Fang and Blood Cleave, but the player is not required to continue.
+- strong forward movement along the selected direction,
+- close finishing position.
 
 The universal dash itself is unchanged. Hunting Slash is an optional offensive commitment after it.
 
 ## Parry Counter — Fang Reversal
 
-After a successful universal parry, pressing Attack produces **Fang Reversal**.
+A fast advancing retaliatory cut after the universal parry.
 
-Fang Reversal is a fast advancing retaliatory cut with:
-
-- universal parry requirements,
 - short reach,
-- a forward step,
+- forward step,
 - strong enemy-posture pressure,
 - moderate health damage,
-- and limited nearby coverage.
+- limited nearby coverage.
 
-It may flow into Rending Cross, followed by the remainder of Wolf's sequence, but does not force continuation.
-
-The counter does not make the parry easier, add invulnerability, or guarantee safety against another enemy in a crowd.
+It does not alter parry timing, add invulnerability, or guarantee safety against surrounding enemies.
 
 ## Defensive profile
 
-Wolf retains a functional sustained block and universal parry timing.
+Wolf retains functional blocking and universal parry timing.
 
-Its working defensive direction is broadly balanced:
+Its defensive profile is broadly balanced:
 
-- sufficient player-posture stability for close engagement,
+- enough player-posture stability for close engagement,
 - no special block-efficiency advantage,
-- no automatic posture recovery from attacking,
+- no automatic posture recovery from ordinary attacking,
 - and strong offensive return through Fang Reversal or Hunting Slash.
 
-Wolf survives close pressure through active offense and timely universal defense rather than the roster's strongest guard.
+Wolf is not the roster's strongest guard.
 
-## Range, damage, and posture profile
+## Combat profile
 
-| Property | Working direction |
+| Property | Approved direction |
 |---|---|
-| Normal range | Shortest or near-shortest of the initial three |
-| Sequence length | Four attacks |
+| Preferred range | Close |
+| Basic sequence | Four attacks |
 | Cadence | Fastest and most sustained |
-| Per-hit health damage | Moderate |
-| Sustained output | Strong while attacks connect |
-| Enemy-posture pressure | Consistent through repeated contact |
-| Attack movement | Strong forward movement |
-| Tracking | Strong against nearby aimed enemies |
-| Coverage | Narrow opener, broader second and final attacks, tight pursuit third hit |
-| Whiff risk | High after lunges and committed final attacks |
+| Per-hit damage | Moderate |
+| Sustained output | Highest while connected |
+| Enemy posture | Repeated pressure |
+| Attack movement | Strongly forward and player-directed |
+| Held identity | Pursuit |
+| Main failure state | Overextension after missed or prolonged commitments |
 
-Wolf does not automatically own the highest individual-hit damage, longest reach, strongest guard, or safest attacks.
-
-## Natural strengths
-
-- close-range pressure,
-- sustained health damage,
-- repeated enemy-posture pressure,
-- pursuit of nearby or retreating enemies,
-- fast return to offense after dash or parry,
-- and practical target transfer within a nearby group.
-
-## Natural weaknesses
+## Firm tradeoffs
 
 - short reach,
 - forward overcommitment,
-- missed attack recovery,
-- target fixation,
+- dangerous whiff recovery,
 - side and rear pressure,
 - ranged enemies when approach is denied,
 - and hazards that make direct pursuit unsafe.
 
-These weaknesses emerge from Wolf's attacks rather than weaker universal movement.
+Wolf must not depend on completing its full sequence to produce competitive damage or posture pressure against bosses.
 
-## Encounter viability
+# Fixed Tier progression
 
-### Mixed groups
+Each Wolf Tier has a concrete combat effect and continues the same evolving drawback family: **Predatory Commitment**. Higher Tiers make Wolf's player-directed pursuit more forceful and rewarding while preserving the positional danger of a badly aimed commitment.
 
-Wolf pressures an important nearby target while Rending Cross, Raking Fang, Blood Cleave, normal aiming, defense, and movement account for surrounding enemies.
+The benefits should clearly outweigh the drawbacks. Embrace should feel like a desirable escalation rather than a questionable trade.
 
-### Crowds
+## Tier I — Blood Tempo
 
-Wolf can move pressure through a group but remains unsafe when fully surrounded. It does not receive automatic enemy-to-enemy chaining, full-circle attacks, or attack invulnerability.
+When Fang Slash, Rending Cross, or Raking Fang successfully hits an enemy, Akio may begin the next Basic Attack earlier during the current attack's recovery.
 
-### Ranged enemies
+This does not increase the speed of the current animation or apply global attack speed. It only opens the input for the next Basic Attack sooner.
 
-Predator's Passage, Hunting Slash, forward attack movement, universal dash, and prosthetics provide approach options. Wolf does not gain permanent ranged attacks solely to erase this weakness.
+- The benefit exists only during that attack's recovery.
+- It is not stored and has no cooldown.
+- If the player does not continue attacking, it expires naturally.
+- Missed attacks receive no benefit.
+- Block, parry, dash, and Prosthetic actions are not accelerated.
 
-### Elites and bosses
+### Predatory Commitment I
 
-Wolf performs well during sustained openings but must stop attacking when retaliation begins. Blood Cleave and Predator's Passage remain punishable commitments.
+Raking Fang and Hunting Slash travel slightly farther along the direction chosen by the player. They cannot turn, home, or correct their path after the attack begins.
 
-### Hazards
+## Tier II — Dire Hunt
 
-Forward movement and passage attacks require deliberate aim and destination awareness. Universal dash remains dependable.
+Tier II unlocks Wolf's Blood meter and Blood Art.
 
-## Technique build space
+Wolf gains Blood through meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows. Dire Hunt requires a full meter, activates manually, and consumes the stored Blood. Blood cannot be generated while the Art is active and all Blood state resets after the run.
 
-Universal Techniques may naturally:
+Exact capacity, gain values, duration, and anti-farming thresholds remain tuning work.
 
-- **reinforce:** pursuit, fast Basic Attacks, sustained pressure, repeated contact, and enemy-posture continuity,
-- **broaden:** crowd coverage, ranged-enemy handling, held-attack use, or target transfer,
-- **compensate:** whiff recovery, spacing, reach, defense, or disengagement,
-- **hybridize:** parry counters, dash attacks, deathblows, Blood Cleave, posture, or prosthetics.
+### Blood Art — Dire Hunt
 
-Wolf does not own all aggressive, Basic Attack, posture, pursuit, or dash Techniques.
+Akio allows the Wolf expression of Returning Blood to temporarily alter his body and swordsmanship.
 
-## Blood-katana presentation
+When Dire Hunt activates:
 
-Wolf's Returning Blood should make the katana feel:
+- a short-range Blood howl interrupts nearby ordinary enemies,
+- Akio clears his accumulated player posture,
+- and Akio restores a limited amount of health.
 
-- dense,
-- predatory,
-- forceful,
-- close-ranged,
-- and visually committed to direct contact.
+These effects give the activation immediate value even if Akio cannot safely attack afterward.
 
-It should not create a permanently long blade extension that removes Wolf's range weakness.
+For the duration of Dire Hunt:
 
-Exact animation, VFX, color, shape, and audio remain open.
+- direct katana hits restore limited health,
+- light enemy attacks are less likely to interrupt committed Wolf sword attacks,
+- Wolf attacks deal greater health and enemy-posture damage,
+- and Predator's Passage is replaced by Blood Fang.
 
-## Remaining Wolf decisions
+Akio retains normal block, parry, and dash behavior. Dire Hunt does not require successful parries to be useful.
 
-After the roster audit, decide:
+### Blood Fang
 
-- exact timing, range, tracking, recovery, damage, and enemy-posture values,
-- exact chain windows,
-- passage eligibility and collision behavior,
-- exact Blood-katana presentation,
-- whether any later unique mechanic is required,
-- Tier progression,
-- drawback and Corruption behavior,
-- Blood and Blood Art if retained,
-- Technique interactions,
-- production counts,
-- and trial or persistent-progression requirements.
+Akio performs a committed forward lunge while a large Blood-formed wolf jaw manifests around him and bites at the point of contact.
+
+- Blood Fang follows the direction selected when the attack begins.
+- It does not track, turn, or select a target automatically.
+- A successful bite restores more health than an ordinary sword hit.
+- It deals strong health and enemy-posture damage.
+- It may pass through eligible ordinary enemies when safe space exists on the far side.
+- It stops against heavy enemies, elites, bosses, walls, hazards, and invalid destinations.
+- A miss retains severe recovery.
+
+Blood Fang is Dire Hunt's main new attack and visual centerpiece. The rest of the transformation should reuse Wolf's existing attack library with stronger Blood presentation where practical.
+
+### Predatory Commitment II
+
+Blood Fang and Wolf's existing pursuit attacks carry Akio farther along the selected direction and remain fully committed after release. The transformation is clearly stronger than normal Wolf combat, but careless aim can place Akio in danger.
+
+## Tier III — Fanged Guard
+
+Tier III upgrades Predator's Passage and Blood Fang while they are being charged.
+
+While charging either attack, Akio forms a Blood jaw around the front of his body. The first frontal blockable enemy attack that reaches Akio:
+
+- is blocked using normal player-posture rules,
+- does not cancel the Held Attack,
+- and immediately completes the Held Attack's charge.
+
+The player still chooses when and where to release the attack.
+
+Fanged Guard does not protect against attacks from the side or rear, grabs, hazards, or unblockable attacks. It can block only one attack during each charge.
+
+### Predatory Commitment III
+
+Fanged Guard helps Akio complete the charge but does not make the resulting pursuit safe. Predator's Passage and Blood Fang retain their selected direction and severe miss recovery.
+
+## Tier IV — Apex Feast
+
+Any successful deathblow, including a boss-phase deathblow, triggers Apex Feast.
+
+When Apex Feast activates:
+
+- Returning Blood erupts in a short radius around Akio,
+- nearby ordinary enemies are briefly staggered,
+- stronger nearby enemies receive enemy-posture damage,
+- Akio restores a limited amount of health,
+- and Akio's next Held Attack begins fully charged.
+
+The primed Held Attack may be released immediately without waiting through its normal charge. The benefit is consumed when Predator's Passage or Blood Fang is used, does not stack, and expires when the encounter ends.
+
+Apex Feast does not automatically release the Held Attack or select its direction.
+
+### Predatory Commitment IV
+
+The primed pursuit retains its full travel and miss recovery. Tier IV gives Wolf a concrete transition from a deathblow into another pursuit, but the player must still aim and release it correctly.
+
+# Progression summary
+
+- **Tier I — Blood Tempo:** successful Basic Attacks allow the next Basic Attack to begin sooner.
+- **Tier II — Dire Hunt:** activation immediately restores health, clears posture, interrupts nearby ordinary enemies, and begins a transformation with lifesteal, interruption resistance, increased damage, and Blood Fang.
+- **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack without cancelling the charge.
+- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+
+The progression is:
+
+> successful hits accelerate Wolf's offense → Dire Hunt guarantees immediate recovery and unlocks Blood Fang → Fanged Guard helps prepare pursuit under pressure → deathblows prime the next hunt
+
+# Technique space
+
+Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not simply duplicate Blood Tempo, Dire Hunt, Fanged Guard, Blood Fang, or Apex Feast.
+
+Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, or movement Technique.
+
+# Production requirements
+
+The working package establishes requirements for:
+
+- a Tier I Blood-link cue,
+- Dire Hunt activation, active-state, and ending presentation,
+- the Blood Fang animation and Blood-jaw effect,
+- Fanged Guard charge and block feedback,
+- Apex Feast deathblow eruption and primed-Held state,
+- Blood unavailable, building, ready, activated, active, consumed, and rebuilding HUD states,
+- Shrine Tier summaries and drawback language,
+- and Wolf teaching and mastery-trial coverage.
+
+Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, healing, Blood gain, duration, interruption resistance, collision, and recovery values remain implementation, production, and playtesting work.

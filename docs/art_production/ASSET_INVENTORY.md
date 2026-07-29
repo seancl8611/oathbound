@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-07-28
 topics:
   - asset-counts
   - characters
@@ -28,7 +28,7 @@ This file records high-level production groups and known counts. Detailed state 
 
 | Asset group | Planned count | Boundary |
 |---|---:|---|
-| Player character | 1 | Akio concept, final sprite, complete base combat set |
+| Player character | 1 | Akio concept, final sprite, introductory combat, and approved Aspect combat support |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
 | Area 1 enemies | 6 | Hushiro standard roster |
 | Area 2 enemies | 4 | Yomori spirit and predator roster |
@@ -38,7 +38,7 @@ This file records high-level production groups and known counts. Detailed state 
 | Heart Binding campaign | 7 original / 6 player clears | Historical breach, six removable states, fully exposed state |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart and Vessel of Continuance |
 | Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
-| Blood Aspect families | 3 | Three launch production positions; exact identities remain open |
+| Blood Aspect families | 3 | Wolf, Wraith, and Ronin |
 | Prosthetic families | 8 | One family per tool |
 | Technique loadout UI | 4 active + 1 reserve | Launch catalog count remains open |
 | Relic capacity | 1 initial slot | Launch catalog count remains open |
@@ -48,24 +48,37 @@ This file records high-level production groups and known counts. Detailed state 
 ## Player and run-build art
 
 - Akio concept and base sprite
-- Complete base combat animation library
+- Complete introductory combat animation library
 - Separate ground shadow
-- Five Milestone 1 combat VFX
-- Reusable Blood Aspect presentation framework where practical
-- Three Aspect-specific offensive and combat-feedback families after identity approval
-- Modular mutation overlays only where required by the approved system
-- Shared defensive, execution, input, and enemy-response presentation across Aspects where practical
+- Five Milestone 1 shared combat VFX
+- Reusable Blood-formed katana presentation framework where practical
+- Three approved Aspect combat families: Wolf, Wraith, and Ronin
+- Aspect-specific Basic, Held, Dash Attack, and Parry Counter presentation
+- Tier I-IV overlays or transformations only where required by approved fixed packages
+- Blood resource and Blood Art presentation after Tier II
+- Shared defense, execution, input, and enemy-response presentation across Aspects
 - Eight prosthetic icons and VFX families
 - Technique card, category, slot, reserve, refinement, replacement, warning, decline, and reroll presentation
 - Unique Technique icons only for approved catalog entries
-- Bespoke Technique effects only when existing combat, approved Aspect, or prosthetic language is insufficient
+- Bespoke Technique effects only when existing combat, Aspect, or prosthetic language is insufficient
 - Relic cards, slot, icon, and rarity presentation
 
-The launch scope now reserves production capacity for three Blood Aspect families. Candidate selection and exact UI, overlays, VFX, animation, and audio requirements depend on identity and shared-system approval.
+The launch production boundary contains exactly three Aspect families. Additional families are outside current scope and require later playable evidence of a missing combat identity.
 
-Additional Aspect families are outside current production scope. Reconsider them only after gameplay testing demonstrates a missing identity.
+Wolf's current working Tier package establishes these additional high-level groups:
 
-Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. That decision should establish approximate counts and production treatment tiers without requiring final balance values.
+- **Blood Tempo:** valid-contact link cue
+- **Dire Hunt:** activation, active transformation, guaranteed recovery feedback, and ending state
+- **Blood Fang:** principal bespoke Wolf attack animation and Blood-jaw effect
+- **Fanged Guard:** Held Attack charge guard, one-hit frontal block, and charge-complete feedback
+- **Apex Feast:** deathblow eruption, limited recovery feedback, and primed-Held state
+- **Wolf Blood HUD:** unavailable, building, ready, activated, active, consumed, and rebuilding states
+
+The rest of Wolf's transformed sword library should reuse existing Wolf animations with stronger Blood treatment where practical. The Blood jaw is an attack effect rather than a companion or separate character asset.
+
+Final Wolf counts still depend on a production brief specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Wraith and Ronin counts depend on their unresolved Tier packages and Blood Arts.
+
+Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog.
 
 ## Combatants
 
@@ -74,17 +87,17 @@ Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts 
 - **Area 3:** five standard enemies, Blood Lotus, Eternal Swordsman, Eclipse Shogun
 - **True endgame:** Unbound Heart and Vessel of Continuance as one encounter package
 
-The Eclipse Shogun is one principal boss package with a regal starting identity and controlled inhuman escalation. Exact phase count, sprite-set count, weapon, attacks, animations, and bespoke effects require later encounter approval.
+The Eclipse Shogun is one principal boss package with a regal starting identity and controlled inhuman escalation. Exact phase count, sprite-set count, weapon, attacks, animation, and bespoke effects require later encounter approval.
 
 The Heart has exactly two conceptual forms. Exact attacks, animation counts, and VFX counts remain later encounter-design work.
 
 ## Environment and room art
 
-- Strand hub, docks, NPC stations, Blood Cavern, Blood Mirror
-- Hushiro modular kit, functional rooms, miniboss spaces, boss arena
-- Yomori modular kit, functional rooms, miniboss spaces, Twin Maws arena
-- Kagutsuchi modular kit, functional rooms, Blood Lotus arena, duel court, Shogun arena
-- Heart chamber with one historical broken Binding, six removable Bindings, extraction apparatus, reusable ritual state, fully exposed state, and true-final arena support
+- Strand hub, docks, NPC stations, Blood Cavern, and Blood Mirror
+- Hushiro modular kit, functional rooms, miniboss spaces, and boss arena
+- Yomori modular kit, functional rooms, miniboss spaces, and Twin Maws arena
+- Kagutsuchi modular kit, functional rooms, Blood Lotus arena, duel court, and Shogun arena
+- Heart chamber with one historical broken Binding, six removable Bindings, extraction apparatus, reusable ritual state, fully exposed state, and true-final support
 
 Cross-area room functions:
 
@@ -95,11 +108,17 @@ Cross-area room functions:
 - treasure or miniboss,
 - boss.
 
-The initial scope requires modular regional kits and the approved functional-room families. Exact room counts, route topology, branch frequency, miniboss frequency, route-marker quantity, and authored layout counts are prototype and implementation decisions. Promote them into production scope only if testing proves they require additional environment packages beyond the existing modular-kit boundary.
+Initial scope requires modular regional kits and the approved functional-room families. Exact room counts, route topology, branch frequency, miniboss frequency, route-marker quantity, and authored layout counts remain prototype and implementation decisions unless testing proves they require additional environment packages.
 
 ## UI and UX art
 
 - Run HUD and combat feedback
+- Selected Aspect and Tier 0-IV states
+- Corruption empty, filling, full, Resist, Embrace, and Stabilize states
+- Blood unavailable, building, ready, activated, active or resolving, consumed, and rebuilding states after Tier II
+- Wolf Dire Hunt active-state indicator
+- Wolf Fanged Guard charge protection and consumed state
+- Wolf Apex Feast primed-Held state
 - Four active Technique slots and one reserve
 - Technique reward, replacement, reserve, refinement, decline, and reroll states
 - Rest-room reserve swapping
@@ -109,7 +128,7 @@ The initial scope requires modular regional kits and the approved functional-roo
 - Strand HUD and persistent currencies
 - Route reward previews
 - Shrine, Boat, Forge, Merchant, Discovery Board, Bloodwell, Blood Mirror, results, and pause interfaces
-- Reusable placeholder support for the three-Aspect system
+- Three Aspect selection slots and icons
 - Blood Lotus multi-cycle support
 - Six-clear Heart Binding progress
 - Two-form true-final Heart presentation
@@ -117,7 +136,7 @@ The initial scope requires modular regional kits and the approved functional-roo
 - Shortened repeat-clear results
 - Postgame Heart-route access after its control method is approved
 
-Three Aspect slots and selection states are part of current UI scope. Aspect-specific HUD modules, readiness states, Tier displays, candidate icons, and Blood Art presentation remain uncountable until the identities and shared structure are approved.
+Three Aspect slots and selection states are fixed. Wolf's high-level Tier and Blood states are now known. Exact Wolf HUD count and all Wraith/Ronin Tier-specific treatments remain uncountable until detailed implementation briefs and the remaining progression packages are approved.
 
 ## Shared VFX families
 
@@ -131,18 +150,39 @@ Three Aspect slots and selection states are part of current UI scope. Aspect-spe
 - Corruption Full Cue
 - Embrace Transformation Cue
 - Resist Stabilization Cue
+- Tier IV Stabilize Cue where distinct support is required
 
 VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblow Cue.
 
-### Blood Aspect candidates — identities not approved
+### Approved Blood Aspect identities
 
-Current candidate directions include:
+**Wolf**
 
-- Wolf marks and pressure states,
-- Wraith afterimage, vanish, reappearance, and movement states,
-- Ronin enhanced contact, Counter Cut, and discipline states.
+- dense close-range Blood edge and trails,
+- fast connected pressure readability,
+- player-directed pursuit and target-contact emphasis,
+- severe miss or overcommitment readability on committed actions,
+- no corrective tracking, companion, or mirrored attacker presentation,
+- Blood jaw language for Blood Fang and Fanged Guard,
+- compact deathblow eruption language for Apex Feast.
 
-These are references for evaluating the three roster positions, not approved final VFX definitions. Final treatment follows identity approval.
+**Wraith**
+
+- elongated spectral blade lines,
+- narrow extended pokes and broad translucent arcs,
+- restrained player-directed movement with clear physical connection to the katana,
+- no corrective tracking, teleport, vanish, forced-offset, or Mist Raven presentation.
+
+**Ronin**
+
+- dense compressed Blood edge,
+- restrained buildup around blade and sheath,
+- strong impact-frame emphasis and heavy audio,
+- stable guard and slow-recovery readability,
+- fixed attack lines,
+- no corrective tracking, generic Focus aura, or required combo-state presentation.
+
+Tier escalation and Blood Arts may extend these families only after their gameplay packages are approved. Wolf's current working package is the exception available for high-level scoping. Do not preserve superseded prey-mark, perfect-dodge teleport, Mist-Step, Counter Cut, or deathblow-Focus requirements.
 
 ### Prosthetics
 
@@ -185,7 +225,11 @@ These are references for evaluating the three roster positions, not approved fin
 ## Inventory rules
 
 - Add an asset only after its gameplay, narrative, or production role is approved.
-- The three-family count reserves scope; candidate names and detailed drafts do not approve the final family identities or treatment.
-- Do not estimate exact animation or effect counts before the owning system or encounter is locked.
+- Wolf, Wraith, and Ronin are the fixed launch Aspect identities.
+- Do not imply corrective tracking or homing in animation or VFX.
+- Wolf's package may guide high-level asset grouping but not final counts before the implementation brief.
+- Do not estimate exact Wraith or Ronin Tier, Blood Art, or effect counts before their progression packages are approved.
+- No duplicate Aspect-specific Blood Art upgrade tree is currently included.
+- Do not preserve assets that exist only for superseded mechanics.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.
-- Do not include deferred additional Aspects, postgame modifiers, enemy variants, route algorithms, or challenge systems in the initial inventory.
+- Do not include additional Aspects, deferred postgame modifiers, enemy variants, route algorithms, or challenge systems in the initial inventory.

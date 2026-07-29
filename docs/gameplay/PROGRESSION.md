@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-07-28
 topics:
   - progression
   - persistence
@@ -18,6 +18,7 @@ topics:
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - GAMEPLAY-ITEMS-REWARDS
@@ -38,24 +39,63 @@ Every system and item family must state whether it survives death and successful
 
 Temporary run state may include:
 
-- Blood Aspect Tier,
+- selected Blood Aspect and current Tier,
 - Corruption,
-- Blood after its Tier II unlock,
+- Blood after Tier II,
 - Blood Art readiness or active state,
-- four active Techniques,
-- one reserve Technique,
+- four active Techniques and one reserve,
 - Technique refinements,
 - temporary Prosthetic Techniques,
-- run-scoped Relic effects,
+- one run-scoped Relic,
 - Gold,
 - room progress,
 - temporary Health or Spirit capacity,
 - approved consumables,
-- temporary encounter rewards.
+- and encounter rewards.
 
-These states reset after failed death-return or successful Heart Binding completion unless an item explicitly defines a different rule.
+These states reset after failed death-return or successful Heart Binding completion unless an item explicitly defines another rule.
 
-Blood is a run-only combat resource owned by the Blood Aspect system. It is not a persistent wallet, meta currency, shop currency, or campaign collectible. Run upgrades may modify Blood generation, activation, capacity, retention, duration, or Blood Art behavior only where the owning gameplay design approves that interaction.
+## Fixed Blood Aspect Tier path
+
+The selected Aspect follows one fixed Tier path during the run. It is not a branching skill tree or package-selection system.
+
+- Every run begins at **Tier 0**.
+- Corruption controls access to Shrine decisions.
+- At a full threshold, the player chooses **Resist** or **Embrace**.
+- Resist keeps the current Tier, lowers Corruption, and grants approved immediate support.
+- Embrace advances the selected Aspect by one fixed Tier.
+- Each Tier has one headline benefit and at most one minor supporting rule.
+- Each Aspect has one evolving drawback family rather than unrelated penalties accumulating at every Tier.
+- Tier IV is the maximum.
+- At Tier IV, a full threshold offers **Stabilize** instead of Tier V or further scaling.
+
+The meaningful choice is whether to accept the next Tier and its danger now. The player does not choose between alternate upgrade branches when advancing.
+
+Wolf's current fixed path is approved as a working draft:
+
+- Tier I — Blood Tempo,
+- Tier II — Dire Hunt and Blood Fang,
+- Tier III — Fanged Guard,
+- Tier IV — Apex Feast.
+
+Wraith and Ronin remain the next Tier-package design work. Wolf may be revisited after cross-roster comparison or playable testing, but its package is not an unresolved blank.
+
+## Blood persistence boundary
+
+Blood is a run-only combat resource owned by the Blood Aspect system.
+
+- Blood is unavailable before Tier II.
+- Blood is not a persistent wallet, meta currency, shop currency, route resource, or campaign collectible.
+- Stored Blood persists between rooms until it is spent or the run ends.
+- Blood and Blood Art state reset after death or successful completion.
+- Permanent progression cannot create stored Blood between runs or make Blood available before the approved in-run unlock.
+- Any permanent upgrade affecting starting Blood, capacity, gain, activation, or Blood Art availability requires explicit system approval.
+
+The working launch defaults are a shared Blood-meter framework, generation through meaningful katana health damage and enemy-posture pressure plus successful Parry Counters, posture breaks, and deathblows, full-meter manual activation, and no Blood generation during a duration-based Blood Art. These are not absolute restrictions; an approved Aspect package may depart from a default when its identity clearly requires the exception.
+
+Wolf's working Blood direction follows those defaults: meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows build Blood; Dire Hunt requires a full meter, activates manually, consumes the stored Blood, and prevents Blood generation while active.
+
+Exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown behavior, and anti-farming thresholds remain tuning work. Wraith and Ronin's Blood Art designs and any justified exceptions remain unresolved.
 
 ## Persistent character progression
 
@@ -63,15 +103,17 @@ The Strand supports permanent growth through:
 
 - **Bloodwell:** broad meta progression,
 - **Forge Bench:** weapon and prosthetic development,
-- **Blood Mirror:** Blood Aspect unlocks, mastery, and small capped reliability upgrades,
+- **Blood Mirror:** Aspect unlocks, mastery, and small capped reliability upgrades,
 - **Blood Cavern:** teaching, fixed-loadout trials, mastery challenges, and approved unlocks,
 - **Discovery Board:** codex and recovered history,
 - **Merchant and NPC services:** approved stock or service progression,
 - **Mist, Scrolls, and Boss Emblems:** persistent currencies.
 
-Permanent progression may improve options, reliability, and resilience. It must not remove the need to read combat or replace run-build decisions.
+Permanent progression may improve options, reliability, and resilience. It must not remove the need to read combat, replace run-build choices, bypass Embrace danger, or pre-equip major run-only power.
 
-The services and ownership boundaries are approved. The remaining production decision is their minimum launch package: approximate nodes or ranks, onboarding and trial counts, unlock mapping, mastery content, and required interface states.
+No separate duplicate Blood Art upgrade tree beneath each Aspect is currently approved. Any future Blood Art meta progression must be justified as part of a broader game-wide system rather than repeating the same subsystem for Wolf, Wraith, and Ronin.
+
+The service ownership boundaries are approved. The remaining production decision is the minimum launch package: approximate nodes or ranks, onboarding and trial counts, unlock mapping, mastery content, rewards, and required interface states.
 
 ## Persistent campaign progression
 
@@ -87,7 +129,7 @@ Each successful Binding run:
 
 Failed runs do not advance the count.
 
-After the sixth Binding is destroyed, the next successful full run becomes the seventh and final story run. It continues from the Shogun into the Heart without another Binding ritual.
+After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final story run. It continues from the Shogun into the Heart without another Binding ritual.
 
 Destroyed Binding progress is not a currency, cannot be purchased, and cannot be lost.
 
@@ -100,25 +142,19 @@ Destroyed Binding progress is not a currency, cannot be purchased, and cannot be
 | Boss Emblem | Persistent | Rare major gates or high-value nodes |
 | Gold | Run-only | Shops and run economy |
 
-Currency ownership is resolved and should not be reintroduced as an open scope question. Exact costs remain balance work.
+Currency ownership is resolved. Exact costs remain balance work.
 
-Corruption, Blood, and destroyed Heart Bindings are not currencies. Blood exists only as the current run's Blood Art resource after Tier II.
-
-`Mist Shards` is deprecated unless intentionally restored as a separate denomination.
+Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards` is deprecated unless intentionally restored as a separate denomination.
 
 ## Blood Aspect persistence
 
-- Unlocked Aspects persist.
-- The selected Aspect remains available as a loadout choice.
+- Unlocked Aspects persist as loadout choices.
 - Every run begins at Tier 0.
-- Corruption resets after the run.
-- Blood is unavailable before Tier II and resets after the run.
+- Tier and Corruption reset after the run.
+- Blood is unavailable before Tier II, persists between rooms after it is unlocked, and resets after the run.
 - Blood Art readiness, activation, and temporary effects reset after the run.
-- Blood Mirror mastery and small permanent upgrades persist.
-- Permanent Aspect upgrades cannot replace the in-run Embrace Tier system.
-- Permanent progression cannot create a persistent Blood wallet or carry stored Blood between runs.
-
-The persistent-progression pass must explicitly approve any upgrade that changes starting Blood, Blood capacity, gain rules, activation requirements, or initial Blood Art availability.
+- Blood Mirror mastery and small permanent reliability upgrades persist.
+- Permanent Aspect upgrades cannot replace the fixed in-run Embrace Tier system.
 
 ## Technique persistence
 
@@ -126,15 +162,15 @@ The persistent-progression pass must explicitly approve any upgrade that changes
 - Active Techniques, reserve, and refinements reset after the run.
 - Discarded or overwritten Techniques are not restored during the same run.
 - Permanent progression may unlock Techniques into future reward pools.
-- Permanent progression does not pre-equip a run Technique or increase slot capacity in the initial scope.
+- Permanent progression does not pre-equip a run Technique or increase slot capacity in initial scope.
 
-The exact unlock mapping depends on the approved launch run-build catalog and the persistent progression, onboarding, and trial package.
+The exact unlock mapping depends on the launch Technique catalog and persistent progression package.
 
 ## Prosthetic progression
 
 - The Forge owns permanent prosthetic unlocks, baseline improvements, and long-term branches.
 - The run owns temporary Prosthetic Techniques and refinements for the equipped tool.
-- Permanent upgrades must not make temporary specializations irrelevant or replace sword combat.
+- Permanent upgrades must not make temporary specialization irrelevant or replace sword combat.
 
 ## Trial reward boundary
 
@@ -147,17 +183,16 @@ Blood Cavern and Blood Mirror rewards may grant:
 - persistent currency,
 - cosmetics,
 - lore reflections,
-- mastery marks.
+- and mastery marks.
 
 Trials may not:
 
 - add new Blood Aspect Tiers,
 - remove Embrace danger,
+- create alternate Tier branches,
 - permanently pre-equip a Technique,
 - create a persistent Blood balance,
 - or create permanent versions of major run-only mechanics.
-
-The final number of basic-combat trials, Aspect trials, Technique demonstrations, mastery trials, and their unlock ownership remains part of the current progression package decision.
 
 ## Return processing
 
@@ -197,17 +232,16 @@ The results flow must clearly distinguish retained progress from burned-away run
 
 - Persistent growth improves options and reliability, not automatic victory.
 - Run growth should establish a meaningful build before Area 3.
-- Blood Aspect remains more identity-defining than any single Technique.
+- The Blood Aspect remains more identity-defining than any single Technique.
 - Techniques remain independently useful.
 - Permanent Aspect upgrades stay small and capped.
-- Blood remains a run-only Blood Art resource rather than an account-level progression layer.
 - Gold never becomes a persistent Strand wallet without an explicit system change.
-- Unlocks and numerical balance values are documented separately.
 
 ## Current production dependencies
 
-1. Complete the shared Blood Aspect Tier, Blood-generation, and Blood Art design so unlock and trial scope can be estimated.
-2. Scope the launch run-build content catalog so the total unlockable content is known.
-3. Scope the persistent progression, onboarding, and trial package around those approved systems and service boundaries.
+1. Define Wraith and Ronin's fixed Tier I-IV benefits, drawback families, Blood Arts, and any justified exceptions to the shared Blood defaults.
+2. Compare Wolf, Wraith, and Ronin for power, accessibility, production cost, drawback severity, and Technique overlap.
+3. Scope the launch run-build content catalog.
+4. Scope persistent progression, onboarding, and trials around those approved systems.
 
-Exact upgrade percentages, Blood generation values, Blood capacity, activation requirements, currency costs, timing windows, and reward values remain later implementation and balance work.
+Exact upgrade percentages, resource values, costs, timing windows, and reward values remain implementation and balance work.
