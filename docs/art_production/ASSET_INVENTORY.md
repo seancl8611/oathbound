@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - asset-counts
   - characters
@@ -54,7 +54,7 @@ This file records high-level production groups and known counts. Detailed state 
 - Reusable Blood-formed katana presentation framework where practical
 - Three approved Aspect combat families: Wolf, Wraith, and Ronin
 - Aspect-specific Basic, Held, Dash Attack, and Parry Counter presentation
-- Tier I-IV overlays or transformations only where required by the final fixed packages
+- Tier I-IV overlays or transformations only where required by approved fixed packages
 - Blood resource and Blood Art presentation after Tier II
 - Shared defense, execution, input, and enemy-response presentation across Aspects
 - Eight prosthetic icons and VFX families
@@ -65,9 +65,20 @@ This file records high-level production groups and known counts. Detailed state 
 
 The launch production boundary contains exactly three Aspect families. Additional families are outside current scope and require later playable evidence of a missing combat identity.
 
-The Aspect identities are approved, but exact animation, VFX, audio, icon, Tier, Blood Art, Shrine, HUD, trial, and selection-state counts depend on the fixed Tier packages and Blood Art designs.
+Wolf's current working Tier package establishes these additional high-level groups:
 
-Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. That decision should establish approximate counts and production treatment tiers without requiring final balance values.
+- **Blood Tempo:** valid-contact link cue
+- **Dire Hunt:** activation, active transformation, guaranteed recovery feedback, and ending state
+- **Blood Fang:** principal bespoke Wolf attack animation and Blood-jaw effect
+- **Fanged Guard:** Held Attack charge guard, one-hit frontal block, and charge-complete feedback
+- **Apex Feast:** deathblow eruption, limited recovery feedback, and primed-Held state
+- **Wolf Blood HUD:** unavailable, building, ready, activated, active, consumed, and rebuilding states
+
+The rest of Wolf's transformed sword library should reuse existing Wolf animations with stronger Blood treatment where practical. The Blood jaw is an attack effect rather than a companion or separate character asset.
+
+Final Wolf counts still depend on a production brief specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Wraith and Ronin counts depend on their unresolved Tier packages and Blood Arts.
+
+Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog.
 
 ## Combatants
 
@@ -104,7 +115,10 @@ Initial scope requires modular regional kits and the approved functional-room fa
 - Run HUD and combat feedback
 - Selected Aspect and Tier 0-IV states
 - Corruption empty, filling, full, Resist, Embrace, and Stabilize states
-- Blood unavailable, building, ready, activated, active or resolving, and consumed states after Tier II
+- Blood unavailable, building, ready, activated, active or resolving, consumed, and rebuilding states after Tier II
+- Wolf Dire Hunt active-state indicator
+- Wolf Fanged Guard charge protection and consumed state
+- Wolf Apex Feast primed-Held state
 - Four active Technique slots and one reserve
 - Technique reward, replacement, reserve, refinement, decline, and reroll states
 - Rest-room reserve swapping
@@ -122,7 +136,7 @@ Initial scope requires modular regional kits and the approved functional-room fa
 - Shortened repeat-clear results
 - Postgame Heart-route access after its control method is approved
 
-Three Aspect slots and selection states are fixed. Exact Tier benefit, drawback, Blood Art, readiness, and Aspect-specific HUD treatments remain uncountable until the individual progression packages are approved.
+Three Aspect slots and selection states are fixed. Wolf's high-level Tier and Blood states are now known. Exact Wolf HUD count and all Wraith/Ronin Tier-specific treatments remain uncountable until detailed implementation briefs and the remaining progression packages are approved.
 
 ## Shared VFX families
 
@@ -146,15 +160,18 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 
 - dense close-range Blood edge and trails,
 - fast connected pressure readability,
-- pursuit movement and target-contact emphasis,
-- severe miss or overcommitment readability on committed actions.
+- player-directed pursuit and target-contact emphasis,
+- severe miss or overcommitment readability on committed actions,
+- no corrective tracking, companion, or mirrored attacker presentation,
+- Blood jaw language for Blood Fang and Fanged Guard,
+- compact deathblow eruption language for Apex Feast.
 
 **Wraith**
 
 - elongated spectral blade lines,
 - narrow extended pokes and broad translucent arcs,
-- restrained movement with clear physical connection to the katana,
-- no teleport, vanish, forced-offset, or Mist Raven presentation.
+- restrained player-directed movement with clear physical connection to the katana,
+- no corrective tracking, teleport, vanish, forced-offset, or Mist Raven presentation.
 
 **Ronin**
 
@@ -162,9 +179,10 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - restrained buildup around blade and sheath,
 - strong impact-frame emphasis and heavy audio,
 - stable guard and slow-recovery readability,
-- no generic Focus aura or required combo-state presentation.
+- fixed attack lines,
+- no corrective tracking, generic Focus aura, or required combo-state presentation.
 
-Tier escalation and Blood Arts may extend these families only after their gameplay packages are approved. Do not preserve superseded prey-mark, perfect-dodge teleport, Mist-Step, Counter Cut, or deathblow-Focus requirements.
+Tier escalation and Blood Arts may extend these families only after their gameplay packages are approved. Wolf's current working package is the exception available for high-level scoping. Do not preserve superseded prey-mark, perfect-dodge teleport, Mist-Step, Counter Cut, or deathblow-Focus requirements.
 
 ### Prosthetics
 
@@ -208,7 +226,10 @@ Tier escalation and Blood Arts may extend these families only after their gamepl
 
 - Add an asset only after its gameplay, narrative, or production role is approved.
 - Wolf, Wraith, and Ronin are the fixed launch Aspect identities.
-- Do not estimate exact Aspect animation, Tier, Blood Art, or effect counts before the individual progression packages are approved.
+- Do not imply corrective tracking or homing in animation or VFX.
+- Wolf's package may guide high-level asset grouping but not final counts before the implementation brief.
+- Do not estimate exact Wraith or Ronin Tier, Blood Art, or effect counts before their progression packages are approved.
+- No duplicate Aspect-specific Blood Art upgrade tree is currently included.
 - Do not preserve assets that exist only for superseded mechanics.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.
 - Do not include additional Aspects, deferred postgame modifiers, enemy variants, route algorithms, or challenge systems in the initial inventory.
