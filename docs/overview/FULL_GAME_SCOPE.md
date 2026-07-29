@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - full-scope
   - asset-counts
@@ -67,6 +67,7 @@ After Returning Blood awakens, launch scope includes:
 - Ronin as a three-hit slow heavy impact and stability kit,
 - one physical katana expressed through Aspect-specific Blood forms,
 - universal controls, locomotion, neutral dash, parry timing, enemy rules, and deathblow language,
+- player-directed attacks without corrective tracking, hidden homing, or post-input target correction,
 - fixed Aspect advancement from Tier 0 through Tier IV,
 - Shrine decisions between Resist and Embrace, with Stabilize at Tier IV,
 - Blood as a run-only combat resource unavailable before Tier II,
@@ -78,11 +79,24 @@ The launch roster is approved. The game does not currently require a fourth mobi
 
 A fourth or fifth Aspect is outside current production scope. Reconsider expansion only after playable testing demonstrates a missing identity that cannot be covered by the approved roster and supporting systems.
 
+## Wolf package at current scope
+
+Wolf's fixed Tier package is approved as a working draft:
+
+- **Tier I — Blood Tempo:** valid Basic Attack contact opens the next Basic Attack input earlier.
+- **Tier II — Dire Hunt:** a full Blood meter activates immediate limited healing, player-posture clearing, a nearby ordinary-enemy interrupt, and a temporary transformation with lifesteal, greater health and posture damage, light-attack interruption resistance, and Blood Fang.
+- **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack through normal posture rules without cancelling the charge.
+- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+
+Predatory Commitment is Wolf's evolving drawback family: pursuit actions travel farther along the selected direction and retain meaningful miss recovery. The benefits must clearly outweigh this positional risk.
+
+This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial dependencies without locking final values or counts. It may be revised after Wraith and Ronin are designed or after playable testing.
+
 Still open at production scope are:
 
-- each Aspect's fixed Tier I-IV benefits and evolving drawback family,
-- Blood generation and activation rules,
-- the Blood Art package for each Aspect,
+- Wraith and Ronin's fixed Tier I-IV benefits and evolving drawback families,
+- Wraith and Ronin Blood generation and Blood Arts,
+- cross-roster power, accessibility, overlap, and production comparison,
 - detailed Technique affinity and direct-exception rules,
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
@@ -92,6 +106,8 @@ Exact frame data, hitboxes, combat values, resource values, and cancel windows r
 Techniques remain the horizontal customization layer. Most Techniques are independently useful, use universal action tags, and may receive at most one slotless refinement.
 
 Run-only build state resets after death or successful Heart Binding completion. Destroyed Bindings, permanent unlocks, persistent currencies, discoveries, and story progress survive.
+
+No separate duplicate Blood Art progression tree beneath each Aspect is currently part of scope.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system is not part of the game.
 
@@ -252,7 +268,7 @@ The exact Heart-route access control, repeat-clear rewards, records, cosmetics, 
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. fixed Aspect Tier packages and Blood Arts,
+1. Wraith and Ronin Aspect Tier packages and Blood Arts, followed by cross-roster comparison,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
