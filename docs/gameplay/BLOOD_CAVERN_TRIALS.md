@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - trials
   - training
@@ -46,14 +46,26 @@ Teach or refresh:
 
 ### Wolf Trials
 
-Representative lessons may teach:
+Tier 0 lessons may teach:
 
 - value from Fang Slash and Rending Cross without requiring full sequence completion,
-- pursuit through Raking Fang, Hunting Slash, and Predator's Passage,
-- nearby target transfer,
+- player-directed pursuit through Raking Fang, Hunting Slash, and Predator's Passage,
+- nearby target transfer through aim and attack geometry,
 - recognizing when Blood Cleave is safe,
 - avoiding overcommitment after a miss,
 - managing ranged pressure and hazards without changing the universal dash.
+
+Wolf attacks do not use corrective tracking or hidden homing.
+
+The current working Tier package supports later demonstrations for:
+
+- **Blood Tempo:** confirm a successful Basic Attack and use the earlier next-attack input,
+- **Dire Hunt:** activate for immediate health and posture recovery, then use its empowered state,
+- **Blood Fang:** choose a safe attack line, connect for healing, and understand severe miss recovery,
+- **Fanged Guard:** absorb one frontal blockable attack while charging a Held Attack, then choose when to release,
+- **Apex Feast:** earn a deathblow, read the nearby eruption, and use the fully charged next Held Attack.
+
+These are approved teaching goals, not final trial count commitments.
 
 ### Wraith Trials
 
@@ -66,7 +78,7 @@ Representative lessons may teach:
 - returning quickly to defense,
 - handling enemies that enter point-blank range or attack from several directions.
 
-Wraith trials must not teach teleportation, perfect-dodge rewards, Mist-Step, forced offsets, or mandatory repositioning.
+Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, or mandatory repositioning.
 
 ### Ronin Trials
 
@@ -77,20 +89,23 @@ Representative lessons may teach:
 - faster but lower-power access through Breaching Slash,
 - Answering Steel after a universal parry,
 - guard stability and accumulated posture,
-- respecting slow startup, tracking limits, and severe miss recovery.
+- respecting fixed attack lines, slow startup, and severe miss recovery.
 
-Ronin trials must not teach combo preservation, a required finisher, Counter Cut as an Aspect mechanic, or a generic Focus state.
+Ronin trials must not teach corrective tracking, combo preservation, a required finisher, Counter Cut as an Aspect mechanic, or a generic Focus state.
 
 ### Fixed Tier and Blood demonstrations
 
-After the individual packages are approved, trials may teach:
+Wolf's working package may be used for high-level trial planning now. Wraith and Ronin demonstrations wait for their approved packages.
+
+Trials may teach:
 
 - Tier I-IV headline benefits,
 - each Aspect's evolving drawback family,
 - Resist, Embrace, and Stabilize decisions,
 - Blood unavailability before Tier II,
 - Blood generation and readiness,
-- Blood Art activation and resolution,
+- guaranteed Blood Art activation payoff,
+- Blood Art active-state behavior,
 - and the interaction between fixed Aspect progression and temporary Techniques.
 
 A trial preview does not grant permanent in-run Tier or Blood state.
@@ -130,6 +145,7 @@ Rewards must not:
 - grant permanent Tier or Blood state,
 - permanently pre-equip a run Technique,
 - create a persistent Blood balance,
+- create a separate duplicate Blood Art upgrade tree under each Aspect,
 - or replace run-only progression.
 
 Unlocking a Technique through a trial adds it to future eligible reward pools rather than equipping it at every run start.
