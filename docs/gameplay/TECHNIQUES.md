@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - techniques
   - run-builds
@@ -30,7 +30,7 @@ Techniques are temporary in-run upgrades that strengthen or reshape Akio's exist
 
 ## System ownership
 
-- **Blood Aspect:** selected pre-run weapon foundation, immediate Tier 0 identity, and fixed vertical Tier progression.
+- **Blood Aspect:** selected pre-run weapon foundation, immediate Tier 0 identity, fixed vertical Tier progression, and Tier II Blood Art.
 - **Techniques:** four limited replaceable in-run modifications plus one inactive reserve.
 - **Prosthetic:** equipped tactical tool with eligible temporary Techniques.
 - **Relic:** separate passive rule using its own slot.
@@ -41,7 +41,9 @@ Aspect power must leave Technique choices meaningful. Technique combinations mus
 
 ### Aspects define the foundation
 
-The selected Aspect determines attack sequence, rhythm, reach, coverage, commitment, recovery, attack movement, tracking, target handling, damage and posture profile, defensive direction, and Blood-weapon expression.
+The selected Aspect determines attack sequence, rhythm, reach, coverage, commitment, recovery, player-directed attack movement, target handling through arcs and collision, damage and posture profile, defensive direction, fixed Tier benefits, and Blood-weapon expression.
+
+Aspects do not use corrective tracking, hidden homing, or post-input target correction.
 
 An Aspect must function before the player acquires any Technique.
 
@@ -67,12 +69,21 @@ The same Technique may create different value under Wolf, Wraith, and Ronin beca
 - No Technique is required to make an Aspect functional.
 - No Aspect is required to make an ordinary Technique functional.
 - A Technique cannot reproduce an Aspect's complete weapon foundation or Blood Art.
+- A Technique must not duplicate a fixed Tier behavior unless approved as a limited direct exception.
 - No Aspect makes an entire Technique category automatically correct.
 - Every Aspect supports several valid four-Technique builds.
 - Direct Aspect-, Tier-, or Blood-referencing Techniques are limited explicit exceptions.
 - Fixed Aspect Tier progression must not make Techniques secondary.
 
 The responsibility contract is approved. Exact affinity assignments, offer weighting, direct exceptions, and catalog entries remain open.
+
+Wolf's fixed package currently owns these behaviors and ordinary Techniques should not reproduce them directly:
+
+- Blood Tempo's earlier next-Basic input after valid contact,
+- Dire Hunt's guaranteed activation recovery and transformation,
+- Blood Fang,
+- Fanged Guard's one-hit frontal block while charging the Held Attack,
+- Apex Feast's deathblow eruption and fully charged next Held Attack.
 
 ## Starting capacity
 
@@ -117,13 +128,14 @@ Every Technique should:
 2. become stronger through compatible skilled behavior,
 3. remain functional without an exact combination.
 
-Synergy should use approved shared verbs such as Basic Attack, Held Attack, Dash Attack, Parry Counter, block, parry, posture, deathblow, dodge, movement, pursuit, spacing, target state, prosthetic use, Health, and Spirit.
+Synergy should use approved shared verbs such as Basic Attack, Held Attack, Dash Attack, Parry Counter, block, parry, posture, deathblow, dodge, movement, pursuit, spacing, positional conditions, prosthetic use, Health, and Spirit.
 
 Do not create:
 
 - entries that do nothing without another exact Technique,
 - exact multi-Technique dependency chains,
 - deep prerequisite webs,
+- generic delayed bursts that duplicate no clear combat role,
 - or automatic effects that replace active execution.
 
 ## Refinements
@@ -148,7 +160,7 @@ Categories organize communication and reward generation. They do not restrict sl
 
 - **Blade:** modifies katana or Blood-weapon actions.
 - **Deflection:** modifies parry, block, player posture, or Parry Counter.
-- **Execution:** modifies posture break, deathblow, or execution momentum.
+- **Execution:** modifies posture break, deathblow, or execution payoff.
 - **Movement:** modifies dodge, repositioning, spacing, pursuit, or re-entry.
 - **Prosthetic:** temporarily modifies the equipped tool.
 - **General:** supports Health, Spirit, recovery, or broad combat rules without generic stat clutter.
@@ -202,8 +214,10 @@ Prosthetic Techniques use the normal Technique system.
 
 ## Aspect relationship still to define
 
-The roster and fixed Tier structure are approved. Still resolve:
+The roster, fixed Tier structure, and Wolf working package are approved. Still resolve:
 
+- Wraith and Ronin Tier packages and their power budgets,
+- cross-roster overlap after all three packages exist,
 - soft offer-weighting strength,
 - neutral and alternate-affinity representation,
 - whether any direct Wolf-, Wraith-, Ronin-, Tier-, or Blood-referencing Technique ships at launch,
@@ -259,6 +273,7 @@ Before launch counts are approved, demonstrate that:
 - boss and mixed-encounter usefulness are documented,
 - Techniques do not make Aspect progression irrelevant,
 - fixed Aspect progression does not make Technique selection secondary,
+- fixed Tier behaviors are not accidentally duplicated as generic cards,
 - and the reward generator can avoid presenting three invalid choices.
 
 ## Reset rule
@@ -271,7 +286,7 @@ Permanent progression may unlock additional entries into future reward pools. It
 
 Before approving the launch catalog, resolve:
 
-1. fixed Tier I-IV Aspect packages and their power budget relative to Techniques,
+1. Wraith and Ronin Tier packages and cross-roster power budget,
 2. primary-category boundaries,
 3. combat-verb tag taxonomy,
 4. affinity and offer-weighting rules,
