@@ -4,7 +4,7 @@ title: Ronin Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - blood-aspects
   - ronin
@@ -46,16 +46,16 @@ Ronin is defined by:
 - the highest per-hit health damage,
 - the highest or near-highest per-hit enemy-posture pressure,
 - the strongest ordinary-enemy stagger,
-- minimal attack-bound movement,
-- restrained tracking after commitment,
+- minimal player-directed attack movement,
+- fixed attack lines after commitment,
 - severe recovery after missed heavy attacks,
 - and the strongest guard profile, balanced by slow posture recovery.
 
-The player judges how much of an opening can be used safely. Ronin's attacks are individually valuable; the player never needs to complete the full sequence.
+Ronin does not use corrective tracking, hidden homing, or post-input target rotation. The player judges both the attack direction and how much of an opening can be used safely. Ronin's attacks are individually valuable; the player never needs to complete the full sequence.
 
 ## Shared systems
 
-Ronin retains universal locomotion, neutral dash, defense input, parry timing, posture-break rules, deathblows, Technique inventory, and prosthetic system.
+Ronin retains universal locomotion, neutral dash, defense input, parry timing, posture-break rules, deathblows, Technique inventory, and prosthetic controls.
 
 Its stability does not create parry immunity, automatic counters, free posture recovery while guarding, instant attack cancels, or a unique defensive input.
 
@@ -81,7 +81,7 @@ A defining high-damage draw attack that concentrates power around the katana and
 - major enemy-posture pressure,
 - strong ordinary-enemy stagger,
 - conventional or modestly extended melee reach rather than Wraith-like reach,
-- limited tracking after commitment,
+- fixed attack line after commitment,
 - severe miss recovery.
 
 Its advantage is power, not safe distance.
@@ -104,10 +104,10 @@ A forceful retaliatory strike after the universal parry.
 - universal parry requirements,
 - high damage and enemy-posture payoff,
 - strong ordinary-enemy recoil or stagger where enemy rules allow,
-- restrained movement and tracking,
+- restrained player-directed movement,
 - meaningful commitment after activation.
 
-It does not change parry timing or make the counter automatically safe in crowds.
+It does not change parry timing, turn toward a target after release, or make the counter automatically safe in crowds.
 
 ## Defensive profile
 
@@ -137,8 +137,7 @@ Ronin's guard supports deliberate exchanges; it does not erase the consequences 
 | Sustained output | Opening-dependent and lower than Wolf |
 | Enemy posture | Largest chunks per clean strike |
 | Ordinary-enemy stagger | Strongest |
-| Attack movement | Minimal and grounded |
-| Tracking | Low-to-moderate, decreasing with commitment |
+| Attack movement | Minimal, grounded, and player-directed |
 | Held identity | Power |
 | Main failure state | Missed heavy commitment and accumulated posture that recovers slowly |
 
@@ -156,7 +155,7 @@ Ronin's guard supports deliberate exchanges; it does not erase the consequences 
 
 - slow attack startup,
 - severe whiff recovery,
-- limited tracking,
+- fixed attack lines after commitment,
 - minimal attack-bound movement,
 - low sustained output when openings are scarce,
 - mobile or ranged enemies,
@@ -179,7 +178,7 @@ Universal Techniques may:
 
 - **reinforce** heavy Basic Attacks, Stillness Draw, direct damage, posture chunks, and stagger,
 - **broaden** attack speed, pursuit, crowd handling, ranged access, or sequence flexibility,
-- **compensate** for whiff recovery, tracking, posture recovery, mobile enemies, or surrounding pressure,
+- **compensate** for whiff recovery, fixed attack lines, posture recovery, mobile enemies, or surrounding pressure,
 - **hybridize** through Breaching Slash, Answering Steel, deathblows, blocking, posture, or prosthetics.
 
 Ronin does not own every damage, posture, parry, block, Held Attack, or heavy-attack Technique.
@@ -201,4 +200,4 @@ Define:
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, range, tracking, geometry, damage, posture, stagger, block efficiency, player-posture values, armor interactions, charge behavior, and presentation values remain implementation and playtesting work.
+Exact timing, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, charge behavior, and presentation values remain implementation and playtesting work.
