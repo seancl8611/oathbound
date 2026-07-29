@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - project-identity
   - combat
@@ -79,6 +79,7 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, and d
 - Approved launch roster: Wolf, Wraith, and Ronin
 - One physical katana expressed through Aspect-specific Blood weapon kits
 - Universal locomotion, neutral dash, parry timing, enemy rules, and deathblow language across Aspects
+- Player-directed attacks with no corrective tracking, hidden homing, or post-input target correction
 - Fixed Aspect Tier progression through Shrine Resist and Embrace decisions, up to Tier IV
 - Blood as a run-only combat resource unavailable before Tier II
 - Four active temporary Techniques, one reserve, and at most one refinement per Technique
@@ -91,13 +92,24 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, and d
 
 | Aspect | Weapon identity | Firm tradeoff |
 |---|---|---|
-| Wolf | Four-hit fast close-range pressure, pursuit, sustained output, and nearby target transfer | Missed pursuit and extended pressure create dangerous overcommitment and punish windows |
+| Wolf | Four-hit fast close-range pressure, player-directed pursuit, sustained output, and nearby target transfer through aim and attack geometry | Missed pursuit and extended pressure create dangerous overcommitment and punish windows |
 | Wraith | Two-hit extended spectral poking, long lines, broad arcs, and short commitments | Point-blank pressure, cramped spaces, and attacks from several directions undermine its reach advantage |
-| Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, low tracking, and slow posture recovery punish bad commitments |
+| Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, fixed attack lines, and slow posture recovery punish bad commitments |
 
 These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain shared-system, Technique, and prosthetic territory.
 
 A fourth or fifth Aspect is outside current launch paper-design and production scope. Expansion should be reconsidered only after playable testing demonstrates a genuinely missing identity that the current systems cannot support.
+
+## Wolf fixed progression working draft
+
+Wolf's current Tier package is approved for scoping and may be revised after the other Aspects or playable testing:
+
+- **Tier I — Blood Tempo:** successful Basic Attacks allow the next Basic Attack input earlier.
+- **Tier II — Dire Hunt:** activating a full Blood meter immediately restores limited health, clears player posture, interrupts nearby ordinary enemies, and begins a transformation with lifesteal, increased health and posture damage, interruption resistance against light attacks, and Blood Fang.
+- **Tier III — Fanged Guard:** while Predator's Passage or Blood Fang is charging, one frontal blockable attack is blocked through normal player-posture rules without cancelling the charge.
+- **Tier IV — Apex Feast:** deathblows cause a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+
+Wolf's evolving tradeoff is Predatory Commitment: its pursuit attacks travel farther along the player's selected direction and remain punishable when aimed poorly. The benefits should clearly exceed this positional risk.
 
 ## Run-build philosophy
 
@@ -110,6 +122,8 @@ A fourth or fifth Aspect is outside current launch paper-design and production s
 - Most Techniques are independently useful and synergize through shared combat verbs.
 - Run power should deepen active combat rather than replace it with automatic damage or screen-filling effects.
 - Repeated clears are supported by build experimentation, routing, progression, and execution rather than separate story missions.
+
+No duplicate Aspect-specific Blood Art upgrade tree is currently approved. Any future Blood Art meta progression must belong to a broader game-wide system that justifies the added layer.
 
 ## Campaign structure
 
@@ -152,7 +166,7 @@ Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Bindin
 
 The remaining production-level questions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. fixed Aspect Tier packages, drawback families, Blood rules, and Blood Arts,
+1. Wraith and Ronin Tier packages, Blood rules, and Blood Arts, followed by cross-roster comparison,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
