@@ -32,7 +32,7 @@ Wraith is an approved member of the three-Aspect launch roster. This document ow
 
 It supersedes the earlier forced-reposition concept. Wraith's spacing identity comes from reach, geometry, short commitments, player aim, and recovery rather than mandatory lateral movement, target correction, or special evasion.
 
-Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier I-IV package, drawback family, Blood rules, Blood Art, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier I-IV package, drawback family, Blood Art, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -186,9 +186,9 @@ Define:
 
 - fixed Tier I-IV benefits,
 - one evolving drawback family,
-- Tier II Blood generation and activation rules,
-- Wraith's Blood Art,
+- Wraith's Tier II Blood Art and how it uses the shared Blood defaults,
+- any justified exception required by the approved Blood Art,
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, range, geometry, player-directed movement, damage, posture, recovery, charge behavior, and presentation values remain implementation and playtesting work.
+Exact timing, range, geometry, player-directed movement, damage, posture, recovery, charge behavior, Blood values, and presentation values remain implementation and playtesting work.
