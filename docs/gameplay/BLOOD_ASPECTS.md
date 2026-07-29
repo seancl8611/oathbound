@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-07-29
 topics:
   - blood-aspects
   - blood-arts
@@ -101,7 +101,7 @@ Modest defensive differences may use player-posture capacity, block posture effi
 | Aspect | Basic sequence | Held identity | Primary strength | Firm tradeoff |
 |---|---|---|---|---|
 | Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, player-directed pursuit, and nearby target transfer through attack geometry | Missed pursuit and extended pressure create dangerous overcommitment and punish windows |
-| Wraith | Veil Cut → Passing Arc | Pale Lance — reach | Longest melee reach, line control, broad spectral arcs, and short commitments | Point-blank pressure, cramped spaces, and attacks from several directions undermine its spacing advantage |
+| Wraith | Veil Cut → Passing Arc | Pale Lance — reach and focused rapid thrusts after Tier I | Longest melee reach, frontal control, short ordinary commitments, and concentrated multi-hit punishment during larger openings | Point-blank pressure, cramped spaces, attacks from several directions, and overlong focused commitments undermine its advantage |
 | Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, and slow posture recovery punish bad commitments |
 
 Supporting actions:
@@ -156,12 +156,16 @@ The player's choice is whether to advance now, not which branch of upgrades to s
 
 Wolf's current working progression is approved for scoping:
 
-- **Tier I — Blood Tempo:** successful Basic Attacks open the next Basic Attack input earlier.
+- **Tier I — Blood Tempo:** successful Basic Attacks accelerate the next Basic input; successful Held, Dash Attack, and Parry Counter hits may flow into Rending Cross; Hunting Slash can cross eligible ordinary enemies and empower the immediate rear Rending Cross.
 - **Tier II — Dire Hunt:** unlocks Blood, immediate activation recovery, an empowered transformation, and Blood Fang.
 - **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack without cancelling the charge.
 - **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
 
-Wraith and Ronin Tier packages remain unresolved.
+Wraith's current Tier I working draft is:
+
+- **Tier I — Pale Barrage:** continuing to hold after Pale Lance's initial thrust unleashes a rapid series of lower-impact spectral jabs. The player may release early, while longer use delivers greater combined pressure at the cost of a longer focused commitment.
+
+Wraith Tier II-IV and Ronin Tier I-IV remain unresolved.
 
 ## Blood contract
 
@@ -206,13 +210,13 @@ Still unresolved at system or Aspect-package level:
 
 ## Remaining design package
 
-1. Define Wraith's fixed Tier I-IV benefits, drawback family, Blood Art, and any justified exception to the shared Blood defaults.
-2. Define Ronin's fixed Tier I-IV benefits, drawback family, Blood Art, and any justified exception to the shared Blood defaults.
-3. Compare all three packages for power, production cost, accessibility, and Technique overlap.
+1. Define Wraith's fixed Tier II-IV benefits, evolving drawback family, Blood Art, and any justified exception to the shared Blood defaults.
+2. Define Ronin's fixed Tier I-IV benefits, evolving drawback family, Blood Art, and any justified exception to the shared Blood defaults.
+3. Compare all three packages for power, production cost, accessibility, and Technique overlap, including the current Wolf and Wraith Tier I drafts.
 4. Resolve shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.
 5. Finalize required animation, VFX, audio, HUD, Shrine, selection, trial, and persistent-progression states.
 
-Wolf's package remains open to later revision after cross-roster comparison or playable testing; it is not an active blank design question.
+Wolf's package remains open to later revision after cross-roster comparison or playable testing; it is not an active blank design question. Wraith's Tier I may likewise be adjusted after the remaining Wraith and Ronin packages are drafted or after playable testing.
 
 Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, and numerical resource values remain implementation and playtesting work in the owning files.
 
