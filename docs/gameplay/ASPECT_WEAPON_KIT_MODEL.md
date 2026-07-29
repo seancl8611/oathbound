@@ -4,7 +4,7 @@ title: Blood Aspect Weapon-Kit Model
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - blood-aspects
   - weapon-kits
@@ -32,11 +32,9 @@ The player keeps the same controller layout, neutral movement, enemy rules, post
 
 > **The moves create the playstyle. The player should not need to maintain a separate objective, combo state, prescribed movement loop, or Aspect-specific mastery meter to use an Aspect correctly.**
 
-An Aspect feels different because its attacks have different timing, reach, geometry, commitment, recovery, damage, posture pressure, tracking, target handling, stagger, and impact.
+An Aspect feels different because its attacks have different timing, reach, geometry, player-directed movement, commitment, recovery, damage, posture pressure, target handling, stagger, and impact.
 
 ## Shared action model
-
-Each Aspect owns a complete kit built from the same action slots:
 
 | Shared action slot | Aspect-owned output |
 |---|---|
@@ -66,6 +64,21 @@ The following remain functionally universal across Wolf, Wraith, and Ronin:
 
 No Aspect receives a weaker or stronger neutral dash. Neutral movement is not a balance penalty.
 
+## Player-directed attack rule
+
+No Aspect uses corrective tracking, hidden homing, or post-input target correction.
+
+An attack may use:
+
+- the direction selected by the player before commitment,
+- its authored arc or line,
+- authored forward travel,
+- and normal collision with valid targets and geometry.
+
+Once a committed action begins, it does not curve toward a moving enemy or rotate Akio automatically. Distinct target handling should come from reach, arcs, travel, collision, and player aim.
+
+A signature move may pass through an eligible enemy only when that behavior is explicitly authored, the attack connects, and the far-side destination is safe and valid. This is not target correction.
+
 ## Defensive-profile boundary
 
 Block, parry, dodge, player posture, and deathblows remain available to every Aspect.
@@ -82,6 +95,8 @@ Parry timing, success conditions, defense input, posture-break consequences, and
 
 A defensive difference cannot be the Aspect's entire identity. No Aspect removes block or parry, gains automatic counters, becomes immune to posture break, or recovers posture freely while actively guarding.
 
+A fixed Tier benefit may protect a specific authored action, such as Wolf's Fanged Guard blocking one frontal blockable hit during a Held Attack charge. Such benefits must use normal shared rules and must not silently rewrite universal defense.
+
 ## Aspect-owned differentiation
 
 An Aspect may differ through:
@@ -91,16 +106,17 @@ An Aspect may differ through:
 - cadence,
 - reach and hit geometry,
 - attack-bound movement,
-- tracking and target correction,
 - per-hit and sustained health damage,
 - enemy-posture pressure,
 - ordinary-enemy stagger,
 - commitment and whiff risk,
-- target-transfer behavior,
+- target-transfer behavior through player aim and attack geometry,
 - Held Attack purpose,
 - Dash Attack purpose,
 - Parry Counter purpose,
 - modest defensive profile,
+- fixed Tier progression,
+- Blood Art,
 - and Returning Blood presentation.
 
 These properties must combine into a coherent weapon kit. One unusual rule or altered statistic is not sufficient.
@@ -117,7 +133,7 @@ Do not build an Aspect around maintaining a combo state, preserving a sequence t
 
 | Aspect | Basic sequence | Purpose |
 |---|---:|---|
-| Wolf | Four attacks | Longest and fastest sustained pressure pattern with pursuit and nearby target transfer |
+| Wolf | Four attacks | Longest and fastest sustained pressure pattern with player-directed pursuit and nearby target transfer |
 | Wraith | Two attacks | Short extended-range pokes and quick return to movement or defense |
 | Ronin | Three attacks | Slower escalating impact without making the final strike mandatory |
 
@@ -127,9 +143,11 @@ Each attack must remain useful when the sequence ends early.
 
 Attack movement is valid when it belongs naturally to the sword action. Forced repositioning must not substitute for a complete weapon identity.
 
-Avoid mandatory lateral movement, automatic movement behind enemies, every counter changing position, every dash attack ending at a special offset, or movement-direction input selecting unrelated sword attacks.
+Avoid mandatory lateral movement, every counter changing position, every dash attack ending at a special offset, or movement-direction input selecting unrelated sword attacks.
 
-Spacing should usually emerge from reach, geometry, commitment, tracking, and recovery.
+An explicitly authored signature action may cross an eligible ordinary enemy along its original attack line. It must not automatically select, chase, or rotate toward that enemy.
+
+Spacing should emerge from reach, geometry, player-directed travel, commitment, and recovery.
 
 ## Technique compatibility
 
@@ -157,23 +175,25 @@ Examples:
 - a Dash Attack Technique modifies Hunting Slash, Ghostline Slash, and Breaching Slash without changing the neutral dash,
 - a Parry Counter Technique modifies each direct counter without changing parry timing.
 
+Techniques should not duplicate a fixed Tier benefit or Blood Art without explicit approval.
+
 ## Approved launch roster
 
 ### Wolf — pressure and pursuit
 
 - Fang Slash → Rending Cross → Raking Fang → Blood Cleave,
 - fastest cadence and shortest reach,
-- strong forward movement and nearby tracking,
+- strong player-directed forward movement,
 - moderate per-hit damage with high sustained output,
 - Predator's Passage, Hunting Slash, and Fang Reversal,
+- fixed progression through Blood Tempo, Dire Hunt, Fanged Guard, and Apex Feast,
 - failure state: overextension after missed pursuit or prolonged pressure.
 
 ### Wraith — reach and control
 
 - Veil Cut → Passing Arc,
 - longest effective melee reach,
-- long lines, broad arcs, and short commitments,
-- moderate damage and restrained tracking,
+- long lines, broad arcs, restrained movement, and short commitments,
 - Pale Lance, Ghostline Slash, and Veil Reversal,
 - failure state: point-blank, cramped, or multi-directional pressure.
 
@@ -182,12 +202,12 @@ Examples:
 - Severing Cut → Crushing Cross → Bloodfall,
 - slowest cadence and conventional medium reach,
 - highest per-hit damage, posture pressure, and ordinary-enemy stagger,
-- minimal movement, restrained tracking, and severe recovery,
+- minimal movement and severe recovery,
 - Stillness Draw, Breaching Slash, and Answering Steel,
 - strongest guard profile balanced by slow posture recovery,
 - failure state: missed heavy commitment and accumulated posture.
 
-The roster is approved. It deliberately leaves mobility, evasion, ranged utility, and broad crowd-control specialization to universal systems, Techniques, prosthetics, and encounter design.
+The roster deliberately leaves mobility, evasion, ranged utility, and broad crowd-control specialization to universal systems, Techniques, prosthetics, and encounter design.
 
 ## Professional kit test
 
@@ -197,7 +217,7 @@ A weapon kit is complete only when a designer can answer:
 2. What distinct purpose does Held Attack serve?
 3. What attack follows the universal dash?
 4. What response follows the universal parry?
-5. What are the kit's range, timing, geometry, damage, posture, stagger, tracking, commitment, and recovery characteristics?
+5. What are the kit's range, timing, geometry, movement, damage, posture, stagger, commitment, and recovery characteristics?
 6. What natural strengths and weaknesses emerge from the moves?
 7. Does the kit work against groups, ranged pressure, elites, hazards, and bosses?
 8. Can Techniques reinforce, broaden, compensate, and hybridize it?
@@ -209,7 +229,7 @@ Wolf, Wraith, and Ronin meet this test at qualitative Tier 0 depth.
 
 Every selected Aspect follows one fixed Tier path from Tier 0 to Tier IV through Shrine Embrace choices. The Tier path is not a branching package selection.
 
-The next design work defines each Aspect's Tier I-IV benefits, evolving drawback family, Tier II Blood rules, Blood Art, and production package. It must deepen the approved weapon kit without making ordinary Techniques secondary.
+Wolf's fixed Tier package is approved as a working draft for current scoping. Wraith and Ronin remain the next package-design work. After all three are drafted, compare their power, accessibility, production cost, drawback severity, and Technique overlap before final production lock.
 
 ## Future roster capacity
 
