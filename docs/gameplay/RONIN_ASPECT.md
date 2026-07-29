@@ -32,7 +32,7 @@ Ronin is an approved member of the three-Aspect launch roster. This document own
 
 It replaces earlier directions based on maintaining a combo through defense, reaching a special finisher as the central goal, or selecting Basic Attacks through movement-direction input.
 
-Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier I-IV package, drawback family, Blood rules, Blood Art, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier I-IV package, drawback family, Blood Art, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -195,9 +195,9 @@ Define:
 
 - fixed Tier I-IV benefits,
 - one evolving drawback family,
-- Tier II Blood generation and activation rules,
-- Ronin's Blood Art,
+- Ronin's Tier II Blood Art and how it uses the shared Blood defaults,
+- any justified exception required by the approved Blood Art,
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, charge behavior, and presentation values remain implementation and playtesting work.
+Exact timing, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, charge behavior, Blood values, and presentation values remain implementation and playtesting work.
