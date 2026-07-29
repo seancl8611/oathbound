@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 ---
 
 # Production Roadmap
@@ -35,11 +35,22 @@ Produce the six recurring NPCs, Strand environment, physical interactibles, trai
 
 The final number of progression nodes, training experiences, trials, unlock flows, Aspect-specific services, and mastery states depends on the persistent progression, onboarding, and trial package.
 
+No duplicate Aspect-specific Blood Art progression tree is currently assumed for Blood Mirror production.
+
 ## Milestone 4 — Player combat depth and run-build expression
 
 Complete the approved Wolf, Wraith, and Ronin combat-presentation families; their Tier and Blood Art states; eight prosthetic families; Technique reward and build interfaces; reusable Technique icon and card language; approved Technique combat-feedback needs; Relic presentation; and broad currency, pickup, breakable, and reward-object art.
 
-The three launch Aspect identities are fixed. Final quotation still requires each Aspect's Tier I-IV package, drawback presentation, Blood rules, Blood Art, exact animation/VFX/audio requirements, icons, and trial states.
+Wolf's current working package establishes these high-level production needs:
+
+- Tier I Blood Tempo contact-link cue,
+- Dire Hunt activation, active, and ending states,
+- Blood Fang as the principal new Wolf attack and animation dependency,
+- Fanged Guard charge and one-hit frontal block feedback,
+- Apex Feast deathblow eruption and primed-Held state,
+- Wolf Blood building, ready, activated, active, consumed, and rebuilding states.
+
+The three launch Aspect identities are fixed. Wolf's package is now available for scoping, but final quotation still requires its exact animation/VFX/audio implementation brief. Wraith and Ronin still require their Tier I-IV packages, drawback presentation, Blood rules, Blood Arts, icons, and trial states.
 
 Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
@@ -70,7 +81,9 @@ The core story and lore are approved. Final quotation depends on the authored-co
 - Character concepts and key poses precede specialized VFX.
 - Base character art precedes Tier or Blood overlays.
 - Wolf, Wraith, and Ronin are the fixed launch Aspect families.
-- Exact Aspect-specific production counts require approved Tier packages, Blood Arts, and presentation requirements.
+- All Aspect attacks remain player-directed; production must not imply corrective tracking or homing.
+- Wolf's working Tier package may guide high-level scope but not final frame or effect counts.
+- Wraith and Ronin exact production counts require approved Tier packages and Blood Arts.
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.
