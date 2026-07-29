@@ -4,7 +4,7 @@ title: Blood Aspect Identity Guidelines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - blood-aspects
   - aspect-roster
@@ -33,7 +33,7 @@ related:
 
 Blood Aspects are complete katana weapon kits that share one control and combat language.
 
-> **Define concrete moves first. Let timing, range, geometry, damage, posture, stagger, tracking, commitment, and recovery create the playstyle naturally.**
+> **Define concrete moves first. Let timing, range, geometry, player-directed movement, damage, posture, stagger, commitment, and recovery create the playstyle naturally.**
 
 Do not substitute an abstract behavior rule for a weapon kit. Avoid identities based on maintaining pressure forever, repositioning after every sequence, preserving a combo through defense, reaching one required finisher, or selecting attacks through movement-direction input.
 
@@ -43,7 +43,7 @@ Do not substitute an abstract behavior rule for a weapon kit. Avoid identities b
 |---|---|---|
 | Wolf | Fast close-range pressure and pursuit | Missed pursuit and extended pressure create dangerous overcommitment |
 | Wraith | Extended spectral reach and frontal control | Point-blank, cramped, and multi-directional pressure undermine its spacing advantage |
-| Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, low tracking, and slow posture recovery punish bad commitments |
+| Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, and slow posture recovery punish bad commitments |
 
 The launch roster is final at the current scoping stage. Mobility, evasion, ranged utility, and broader crowd control remain shared-system, Technique, and prosthetic territory rather than requiring a fourth Aspect.
 
@@ -78,6 +78,22 @@ Wolf, Wraith, and Ronin share:
 
 No Aspect receives a weaker or stronger neutral dash.
 
+## Player-directed attack guidance
+
+No Aspect uses corrective tracking, hidden homing, or post-input target correction.
+
+Attacks use the direction selected by the player together with their authored arc, line, forward travel, and collision. Once an attack is committed, it does not curve or rotate toward a moving enemy.
+
+Distinct target handling should come from:
+
+- attack width and reach,
+- forward travel,
+- collision behavior,
+- sequence timing,
+- and player aim.
+
+A signature attack may pass through an eligible ordinary enemy only when the behavior is explicitly authored and the destination is safe. It must still follow the original attack line.
+
 ## Defensive-profile guidance
 
 Every Aspect retains block, parry, dodge, player posture, and deathblows.
@@ -92,7 +108,9 @@ Modest differences may use:
 
 These differences support a complete weapon kit; they cannot be the kit's entire identity.
 
-Do not change parry timing, parry success conditions, defense input, posture-break consequences, or enemy response rules. Do not grant automatic counters, posture-break immunity, free guarding, or posture recovery while actively blocking.
+Do not change universal parry timing, parry success conditions, defense input, posture-break consequences, or enemy response rules. Do not grant automatic counters, posture-break immunity, free guarding, or posture recovery while actively blocking.
+
+A fixed Tier benefit may protect one specific authored action while still using shared block and posture rules. Wolf's Fanged Guard is the current approved example.
 
 ## Shared offensive slots
 
@@ -124,9 +142,11 @@ Each attack must remain useful when the sequence ends early.
 
 Attack movement may reinforce a kit but must not replace it.
 
-Avoid mandatory lateral movement, special offset finishes, automatic movement behind targets, every counter relocating Akio, or directional movement input selecting unrelated sword attacks.
+Avoid mandatory lateral movement, every counter relocating Akio, every dash attack ending at a special offset, or directional movement input selecting unrelated sword attacks.
 
-A spacing identity should usually emerge from reach, geometry, commitment, tracking, and recovery.
+A specific signature move may cross an enemy along its original line when that behavior is central to the move and safely constrained. This must not become automatic target selection or general behind-the-enemy repositioning.
+
+A spacing identity should emerge from reach, geometry, player-directed movement, commitment, and recovery.
 
 ## Kit evaluation template
 
@@ -136,18 +156,19 @@ A spacing identity should usually emerge from reach, geometry, commitment, track
 - What distinct purpose does Held Attack serve?
 - What attack follows the universal dash?
 - What direct response follows a universal parry?
+- What practical payoff does the Blood Art guarantee on activation?
 
 ### Weapon properties
 
 - range and geometry,
 - cadence and sequence length,
-- attack-bound movement,
-- tracking and target correction,
+- player-directed attack movement,
 - per-hit and sustained health damage,
 - enemy-posture pressure and stagger,
 - commitment and miss recovery,
-- target handling,
-- and modest defensive properties.
+- target handling through arcs and collision,
+- modest defensive properties,
+- and fixed Tier evolution.
 
 ### Game-wide fit
 
@@ -167,9 +188,10 @@ A kit is ready when:
 - Dash Attack and Parry Counter reinforce the kit without rewriting universal controls,
 - ordinary defense, deathblows, Techniques, and prosthetics remain relevant,
 - the kit works against groups and single targets,
+- its Blood Art is practically useful even without perfect follow-up play,
 - and it is distinguishable from the other two during the first combat room.
 
-The current roster meets this qualitative Tier 0 standard.
+The current roster meets this qualitative Tier 0 standard. Wolf also has an approved working Tier I-IV package.
 
 ## Cross-roster comparison
 
@@ -182,7 +204,6 @@ The current roster meets this qualitative Tier 0 standard.
 | Per-hit damage | Moderate | Moderate | Highest |
 | Sustained output | Highest while connected | Moderate | Opening-dependent |
 | Attack movement | Strongly forward | Restrained | Minimal |
-| Tracking | Strong nearby | Restrained | Low-to-moderate |
 | Held purpose | Pursuit | Reach | Power |
 | Primary risk | Overextension | Pressure inside preferred range | Missed heavy commitment and slow posture recovery |
 
@@ -190,7 +211,9 @@ The current roster meets this qualitative Tier 0 standard.
 
 Ordinary Techniques target universal action categories rather than separate move-specific versions for each Aspect.
 
-Each Aspect must support reinforce, broaden, compensate, and hybridize builds. No Aspect owns all attack, range, movement, damage, posture, parry, block, or deathblow Techniques.
+Each Aspect must support reinforce, broaden, compensate, and hybridize builds. No Aspect owns all attack, range, movement, damage, posture, parry, block, healing, or deathblow Techniques.
+
+Fixed Tier benefits and Blood Arts should avoid broad generic effects that would erase Technique space. Their rules should be tailored to the Aspect's signature actions and progression fantasy.
 
 ## Future roster capacity
 
@@ -200,4 +223,4 @@ Neither additional Aspect belongs to current launch paper-design or production s
 
 ## Next design dependency
 
-Define each approved Aspect's fixed Tier I-IV benefits, evolving drawback family, Tier II Blood rules, Blood Art, and production package. Do not repeat the completed roster audit or reopen the launch identity space without playable evidence.
+Define Wraith and Ronin's fixed Tier I-IV benefits, evolving drawback families, Tier II Blood rules, Blood Arts, and production packages. Then compare all three Aspects before final production lock. Do not reopen the completed roster audit or Wolf's package as a blank question without new evidence.
