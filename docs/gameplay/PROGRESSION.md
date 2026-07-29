@@ -86,13 +86,16 @@ Blood is a run-only combat resource owned by the Blood Aspect system.
 
 - Blood is unavailable before Tier II.
 - Blood is not a persistent wallet, meta currency, shop currency, route resource, or campaign collectible.
+- Stored Blood persists between rooms until it is spent or the run ends.
 - Blood and Blood Art state reset after death or successful completion.
 - Permanent progression cannot create stored Blood between runs or make Blood available before the approved in-run unlock.
 - Any permanent upgrade affecting starting Blood, capacity, gain, activation, or Blood Art availability requires explicit system approval.
 
-Wolf's working Blood direction is approved: meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows build Blood; Dire Hunt requires a full meter, activates manually, consumes the stored Blood, and prevents Blood generation while active.
+The working launch defaults are a shared Blood-meter framework, generation through meaningful katana health damage and enemy-posture pressure plus successful Parry Counters, posture breaks, and deathblows, full-meter manual activation, and no Blood generation during a duration-based Blood Art. These are not absolute restrictions; an approved Aspect package may depart from a default when its identity clearly requires the exception.
 
-Exact Blood capacity, gain values, duration, retention details, cooldown behavior, and anti-farming thresholds remain tuning work. Wraith and Ronin Blood rules remain unresolved.
+Wolf's working Blood direction follows those defaults: meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows build Blood; Dire Hunt requires a full meter, activates manually, consumes the stored Blood, and prevents Blood generation while active.
+
+Exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown behavior, and anti-farming thresholds remain tuning work. Wraith and Ronin's Blood Art designs and any justified exceptions remain unresolved.
 
 ## Persistent character progression
 
@@ -148,7 +151,7 @@ Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards
 - Unlocked Aspects persist as loadout choices.
 - Every run begins at Tier 0.
 - Tier and Corruption reset after the run.
-- Blood is unavailable before Tier II and resets after the run.
+- Blood is unavailable before Tier II, persists between rooms after it is unlocked, and resets after the run.
 - Blood Art readiness, activation, and temporary effects reset after the run.
 - Blood Mirror mastery and small permanent reliability upgrades persist.
 - Permanent Aspect upgrades cannot replace the fixed in-run Embrace Tier system.
@@ -236,7 +239,7 @@ The results flow must clearly distinguish retained progress from burned-away run
 
 ## Current production dependencies
 
-1. Define Wraith and Ronin's fixed Tier I-IV benefits, drawback families, Blood rules, and Blood Arts.
+1. Define Wraith and Ronin's fixed Tier I-IV benefits, drawback families, Blood Arts, and any justified exceptions to the shared Blood defaults.
 2. Compare Wolf, Wraith, and Ronin for power, accessibility, production cost, drawback severity, and Technique overlap.
 3. Scope the launch run-build content catalog.
 4. Scope persistent progression, onboarding, and trials around those approved systems.
