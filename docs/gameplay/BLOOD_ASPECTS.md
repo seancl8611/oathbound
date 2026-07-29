@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-07-28
 topics:
   - blood-aspects
   - blood-arts
@@ -56,13 +56,15 @@ Each kit may differ through:
 - Dash Attack,
 - Parry Counter,
 - reach and hit geometry,
-- attack-bound movement and tracking,
+- player-directed attack movement,
 - health damage and enemy-posture pressure,
 - stagger,
 - commitment and recovery,
-- target handling,
+- target handling through authored arcs and collision,
 - modest approved defensive properties,
 - and Blood-katana presentation.
+
+No Aspect uses corrective tracking, hidden homing, or post-input target correction. Attacks follow the player's chosen direction and their authored geometry and travel.
 
 ## Shared action slots
 
@@ -72,7 +74,7 @@ Each kit may differ through:
 | Held Attack | Major secondary or committed sword action |
 | Dash Attack | Offensive follow-up after the universal neutral dash |
 | Parry Counter | Offensive response after a universal parry |
-| Blood Art | Tier II Blood-powered signature action or state, finalized in the Aspect progression package |
+| Blood Art | Tier II Blood-powered signature action or state |
 
 A sequence is a set of available attacks, not a completion objective. The player may stop, defend, dash, redirect, use a Prosthetic, or abandon the sequence whenever the encounter demands it.
 
@@ -98,9 +100,9 @@ Modest defensive differences may use player-posture capacity, block posture effi
 
 | Aspect | Basic sequence | Held identity | Primary strength | Firm tradeoff |
 |---|---|---|---|---|
-| Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, nearby tracking, and target transfer | Missed pursuit and extended pressure create dangerous overcommitment and punish windows |
+| Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, player-directed pursuit, and nearby target transfer through attack geometry | Missed pursuit and extended pressure create dangerous overcommitment and punish windows |
 | Wraith | Veil Cut → Passing Arc | Pale Lance — reach | Longest melee reach, line control, broad spectral arcs, and short commitments | Point-blank pressure, cramped spaces, and attacks from several directions undermine its spacing advantage |
-| Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, low tracking, and slow posture recovery punish bad commitments |
+| Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, and slow posture recovery punish bad commitments |
 
 Supporting actions:
 
@@ -150,39 +152,56 @@ Aspect progression is fixed rather than a branching package selection.
 - **Tier IV** is the maximum.
 - At Tier IV, a full threshold offers **Stabilize** rather than Tier V or more permanent power.
 
-The player's choice is whether to advance now, not which branch of upgrades to select. Exact Tier I-IV benefits and drawbacks remain to be authored for each Aspect.
+The player's choice is whether to advance now, not which branch of upgrades to select.
+
+Wolf's current working progression is approved for scoping:
+
+- **Tier I — Blood Tempo:** successful Basic Attacks open the next Basic Attack input earlier.
+- **Tier II — Dire Hunt:** unlocks Blood, immediate activation recovery, an empowered transformation, and Blood Fang.
+- **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack without cancelling the charge.
+- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+
+Wraith and Ronin Tier packages remain unresolved.
 
 ## Blood contract
 
 Blood is a run-only combat resource owned by the selected Aspect.
 
-Approved boundaries:
+Approved shared boundaries:
 
 - Blood is unavailable before Tier II.
 - Blood does not exist as a persistent wallet, shop currency, route currency, or campaign collectible.
 - Blood and Blood Art state reset after death or successful completion.
 - Blood progression must deepen the selected weapon kit without replacing ordinary swordplay or making Techniques secondary.
+- Blood Arts should provide a clear practical payoff on activation rather than depending entirely on ideal follow-up play.
 
-Still unresolved:
+Wolf's working Blood direction is approved:
 
-- Blood generation and anti-farming rules,
-- capacity and retention,
-- activation input and conditions,
-- duration or cooldown behavior,
-- the exact Blood Art for each Aspect,
-- and Tier interactions with Blood Art behavior.
+- meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows generate Blood,
+- Dire Hunt requires a full meter and activates manually,
+- activation consumes the stored Blood,
+- Blood cannot be generated during Dire Hunt,
+- and exact capacity, gain values, duration, retention details, and anti-farming thresholds remain tuning work.
+
+Still unresolved at system level:
+
+- Wraith and Ronin Blood generation and Blood Arts,
+- final shared input and HUD details,
+- final capacity and retention rules if they are standardized,
+- exact duration or cooldown behavior,
+- and limited Tier or Technique interactions.
 
 ## Remaining design package
 
-The roster and fixed progression structure are approved. The next Aspect work is to define:
+1. Define Wraith's fixed Tier I-IV benefits, drawback family, Blood rules, and Blood Art.
+2. Define Ronin's fixed Tier I-IV benefits, drawback family, Blood rules, and Blood Art.
+3. Compare all three packages for power, production cost, accessibility, and Technique overlap.
+4. Resolve shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.
+5. Finalize required animation, VFX, audio, HUD, Shrine, selection, trial, and persistent-progression states.
 
-1. Wolf's fixed Tier I-IV benefits, drawback family, Blood rules, and Blood Art.
-2. Wraith's fixed Tier I-IV benefits, drawback family, Blood rules, and Blood Art.
-3. Ronin's fixed Tier I-IV benefits, drawback family, Blood rules, and Blood Art.
-4. Shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.
-5. Required animation, VFX, audio, HUD, Shrine, selection, trial, and persistent-progression states.
+Wolf's package remains open to later revision after cross-roster comparison or playable testing; it is not an active blank design question.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, tracking, recovery, and numerical resource values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, and numerical resource values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 
