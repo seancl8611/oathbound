@@ -32,11 +32,21 @@ The launch Blood Aspect roster is approved:
 
 These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain supported by universal systems, Techniques, prosthetics, and encounter design. Additional Aspects are outside current launch scope unless playable evidence later demonstrates a missing identity.
 
+All Aspect attacks are player-directed. The game does not use corrective tracking, hidden homing, or post-input target correction.
+
 Aspect progression is fixed from Tier 0 through Tier IV. At a full Corruption threshold, the player chooses Resist or Embrace; Embrace advances the selected Aspect by one fixed Tier. Tier IV uses Stabilize rather than Tier V. Blood is run-only and unavailable before Tier II.
+
+Wolf's Tier package is approved as a working draft:
+
+- Tier I — Blood Tempo
+- Tier II — Dire Hunt and Blood Fang
+- Tier III — Fanged Guard
+- Tier IV — Apex Feast
 
 Current production-level gameplay dependencies tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
 
-- fixed Tier I-IV packages, evolving drawbacks, Blood rules, and Blood Arts for Wolf, Wraith, and Ronin,
+- fixed Tier I-IV packages, evolving drawbacks, Blood rules, and Blood Arts for Wraith and Ronin,
+- cross-roster comparison after all three packages exist,
 - launch run-build content catalog,
 - persistent progression, onboarding, and trial package,
 - and postgame release package.
