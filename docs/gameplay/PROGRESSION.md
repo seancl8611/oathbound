@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-07-31
 topics:
   - progression
   - persistence
@@ -78,7 +78,12 @@ Wolf's current fixed path is approved as a working draft:
 - Tier III — Fanged Guard,
 - Tier IV — Apex Feast.
 
-Wraith and Ronin remain the next Tier-package design work. Wolf may be revisited after cross-roster comparison or playable testing, but its package is not an unresolved blank.
+Wraith's current path is approved through Tier II as a working draft:
+
+- Tier I — Pale Barrage,
+- Tier II — movable spinning Blood Art, final name unresolved.
+
+Wraith Tier III-IV and Ronin Tier I-IV remain the next Tier-package design work. Wolf and Wraith may be revisited after cross-roster comparison or playable testing, but their recorded Tiers are not unresolved blanks.
 
 ## Blood persistence boundary
 
@@ -91,11 +96,13 @@ Blood is a run-only combat resource owned by the Blood Aspect system.
 - Permanent progression cannot create stored Blood between runs or make Blood available before the approved in-run unlock.
 - Any permanent upgrade affecting starting Blood, capacity, gain, activation, or Blood Art availability requires explicit system approval.
 
-The working launch defaults are a shared Blood-meter framework, generation through meaningful katana health damage and enemy-posture pressure plus successful Parry Counters, posture breaks, and deathblows, full-meter manual activation, and no Blood generation during a duration-based Blood Art. These are not absolute restrictions; an approved Aspect package may depart from a default when its identity clearly requires the exception.
+The working launch defaults are a shared Blood-meter framework, generation through meaningful katana Health damage and enemy-posture pressure plus successful Parry Counters, posture breaks, and deathblows, full-meter manual activation, and no Blood generation during a duration-based Blood Art. These are not absolute restrictions; an approved Aspect package may depart from a default when its identity clearly requires the exception.
 
 Wolf's working Blood direction follows those defaults: meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows build Blood; Dire Hunt requires a full meter, activates manually, consumes the stored Blood, and prevents Blood generation while active.
 
-Exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown behavior, and anti-farming thresholds remain tuning work. Wraith and Ronin's Blood Art designs and any justified exceptions remain unresolved.
+Wraith's working Blood direction also follows those defaults: the Tier II spinning Art requires a full meter, activates manually, consumes the stored Blood, and prevents Blood generation while its fixed sequence resolves. The Art allows slow continuous steering, repeatedly interrupts ordinary enemies without knockback, does not force-stagger elites, and leaves Akio unable to defend while connected attacks deal direct Health damage. Enemy attacks cannot interrupt or stagger Akio out of the Art.
+
+Exact Blood capacity, source weighting, gain values, activation cost, rotation count, duration, spin speed, movement speed, radius, damage, posture pressure, collision behavior, enemy-response cadence, and anti-farming thresholds remain tuning work. Wraith's Tier III-IV interactions, final Blood Art name, and Ronin's Blood Art remain unresolved.
 
 ## Persistent character progression
 
@@ -239,9 +246,10 @@ The results flow must clearly distinguish retained progress from burned-away run
 
 ## Current production dependencies
 
-1. Define Wraith and Ronin's fixed Tier I-IV benefits, drawback families, Blood Arts, and any justified exceptions to the shared Blood defaults.
-2. Compare Wolf, Wraith, and Ronin for power, accessibility, production cost, drawback severity, and Technique overlap.
-3. Scope the launch run-build content catalog.
-4. Scope persistent progression, onboarding, and trials around those approved systems.
+1. Define Wraith's Tier III-IV benefits, evolving drawback family, final Blood Art name, and any later interactions with Pale Barrage or the Art.
+2. Define Ronin's fixed Tier I-IV benefits, drawback family, Blood Art, and any justified exceptions to the shared Blood defaults.
+3. Compare Wolf, Wraith, and Ronin for power, accessibility, production cost, drawback severity, and Technique overlap.
+4. Scope the launch run-build content catalog.
+5. Scope persistent progression, onboarding, and trials around those approved systems.
 
 Exact upgrade percentages, resource values, costs, timing windows, and reward values remain implementation and balance work.
