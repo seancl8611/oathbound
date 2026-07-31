@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-29
+last_reviewed: 2026-07-31
 ---
 
 # Current Design Questions
@@ -24,13 +24,14 @@ The following decisions are settled and should not be reopened as top-level ques
 - Every run begins at Tier 0. At a full Corruption threshold, the player chooses **Resist** or **Embrace**; Embrace advances the selected Aspect by one fixed Tier, up to Tier IV.
 - Tier IV is the maximum. A full threshold at Tier IV uses **Stabilize** rather than creating Tier V.
 - Blood is run-only, unavailable before Tier II, stored between rooms until spent, and reset after the run.
-- The working launch default uses one shared Blood meter, capacity, readiness, activation input, and HUD language. Blood is generally built through meaningful katana health damage, enemy-posture pressure, successful Parry Counters, posture breaks, and deathblows rather than a flat equal reward per hit.
+- The working launch default uses one shared Blood meter, capacity, readiness, activation input, and HUD language. Blood is generally built through meaningful katana Health damage, enemy-posture pressure, successful Parry Counters, posture breaks, and deathblows rather than a flat equal reward per hit.
 - Blood Arts normally require a full meter, activate manually, consume their cost, and do not generate Blood while a duration-based Art is active. These are defaults rather than absolute restrictions; a specific Aspect may depart from them only when its approved design clearly requires the exception.
 - A Blood Art is not required to use one common form. It may be an immediate signature action, a temporary state, or another clearly defined combat expression.
 - Techniques remain universal temporary run rewards with four active slots, one reserve slot, and at most one refinement per Technique.
 - Aspects do not use corrective tracking, hidden homing, or post-input target correction.
 - Wolf's Tier I-IV progression, Predatory Commitment drawback family, Blood direction, and Dire Hunt Blood Art are approved as a working draft for current scoping.
 - Wraith's Tier I **Pale Barrage** is approved as a working draft: continuing to hold Pale Lance after its initial thrust performs rapid lower-impact spectral jabs, with greater combined payoff and commitment the longer the player continues.
+- Wraith's Tier II Blood Art form and combat behavior are approved as a working draft: a full meter activates a fixed, steerable sequence of identical spinning spectral hits with no finishing slash; ordinary enemies are repeatedly interrupted without knockback, elites resist the forced interrupt, and Akio receives direct Health damage but cannot be interrupted by enemy attacks during the sequence.
 
 Wolf's working progression is:
 
@@ -39,7 +40,12 @@ Wolf's working progression is:
 - **Tier III — Fanged Guard**
 - **Tier IV — Apex Feast**
 
-Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package. Wraith Tier I may likewise be revised after the rest of the roster is drafted or after playable testing.
+Wraith's working progression is:
+
+- **Tier I — Pale Barrage**
+- **Tier II — spinning Blood Art**, final name unresolved
+
+Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package. Wraith Tier I-II may likewise be revised after the rest of the roster is drafted or after playable testing.
 
 Authoritative references:
 
@@ -61,16 +67,17 @@ Authoritative references:
 
 ## 1. Remaining Blood Aspect Tier packages and cross-roster comparison
 
-Define Wraith's fixed Tier II-IV package and Ronin's fixed Tier I-IV package within the approved Shrine structure.
+Define Wraith's fixed Tier III-IV package and Ronin's fixed Tier I-IV package within the approved Shrine structure.
 
 Resolve:
 
-- Wraith's headline benefit at Tiers II, III, and IV,
+- Wraith's headline benefit at Tiers III and IV,
 - Ronin's headline benefit at Tiers I, II, III, and IV,
 - whether each remaining Tier needs one minor supporting rule in addition to its headline benefit,
-- one evolving drawback family for Wraith that incorporates Pale Barrage's focused commitment and one evolving drawback family for Ronin,
-- each Aspect's Tier II Blood Art form, practical payoff, duration or resolution behavior, and any justified exception to the shared Blood defaults,
-- how each package deepens its Tier 0 weapon kit without replacing Techniques,
+- one evolving drawback family for Wraith that incorporates Pale Barrage's focused commitment and the Tier II Art's direct Health exposure, and one evolving drawback family for Ronin,
+- Wraith's final Blood Art name and any later Tier interactions with Pale Barrage or the Art,
+- Ronin's Tier II Blood Art form, practical payoff, duration or resolution behavior, and any justified exception to the shared Blood defaults,
+- how each remaining package deepens its Tier 0 weapon kit without replacing Techniques,
 - whether limited direct Aspect-, Tier-, or Blood-referencing Techniques ship,
 - and the required HUD, input, animation, VFX, audio, Shrine, trial, and progression states.
 
@@ -152,6 +159,7 @@ Keep the following in their owning gameplay, encounter, economy, UI, or producti
 - exact neutral movement and dash values within the approved universal contract,
 - exact Corruption gain, thresholds, Shrine frequency, and support values,
 - exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown, and anti-farming values within the approved shared defaults,
+- Wraith Blood Art rotation count, exact duration, exact spin speed, exact movement speed, exact radius, collision behavior, enemy-response cadence, and numerical damage or posture values within the approved Tier II behavior,
 - Spirit costs and prosthetic cooldowns,
 - immunity tables and status values,
 - room counts, route topology, branch frequency, and miniboss placement,
