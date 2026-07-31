@@ -171,7 +171,6 @@ Wraith must not combine the safest spacing, strongest damage, and easiest recove
 - **Crowds:** control a broad front during ordinary combat, then spend a full Blood meter to move through a large group with repeated spinning hits.
 - **Ranged pressure:** reach exposed ranged enemies through Veil Cut, Pale Lance, Ghostline Slash, universal dash, and prosthetics; the Blood Art is not a fast room-crossing pursuit tool.
 - **Elites and bosses:** punish from the edge of threat range, use Pale Barrage during sufficiently long openings, and use the Tier II Blood Art only when direct Health exposure is acceptable.
-- **Hazards:** benefit from not requiring forced offsets during ordinary combat while still needing clear lines and deliberate aim; hazard interactions during the Blood Art remain implementation work.
 
 # Fixed Tier progression
 
@@ -213,6 +212,7 @@ On activation, Akio extends the spectral katana and performs a fixed sequence of
 - The working spin radius extends roughly four to five Akio body widths from his center.
 - The player may continuously steer Akio in any direction throughout the sequence.
 - Akio moves slightly slower than his ordinary locomotion speed.
+- Akio retains ordinary collision and cannot pass through enemies; enemies body-block his movement during the Art.
 - The spin does not home toward enemies or automatically select a movement path.
 - Once activated, the fixed sequence resolves without a manual early cancel.
 - Akio cannot dash, block, parry, perform ordinary attacks, or use Prosthetics until the Art ends.
@@ -252,7 +252,7 @@ The resulting Tier II rhythm is:
 
 > fill Blood through ordinary combat → activate near a group or committed nearby target → steer the spinning radius through enemies → accept direct Health risk in exchange for uninterrupted multi-hit damage and posture pressure
 
-Exact rotation count, total duration, spin speed, Health damage, posture damage, movement speed, collision handling, immunity interactions, Blood values, and final presentation remain implementation and playtesting work.
+Exact rotation count, total duration, spin speed, Health damage, posture damage, movement speed, Blood values, and final presentation remain implementation and playtesting work.
 
 ## Technique space
 
@@ -282,4 +282,4 @@ Define:
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, jab count, maximum Pale Barrage hold duration, rotation count, Blood Art duration, range, player-directed movement, damage, posture, recovery, aim adjustment, Blood values, proc weighting, enemy-response cadence, collision behavior, and presentation values remain implementation and playtesting work.
+Exact timing, jab count, maximum Pale Barrage hold duration, rotation count, Blood Art duration, range, player-directed movement, damage, posture, recovery, aim adjustment, Blood values, proc weighting, enemy-response cadence, and presentation values remain implementation and playtesting work.
