@@ -31,7 +31,7 @@ The following decisions are settled and should not be reopened as top-level ques
 - Aspects do not use corrective tracking, hidden homing, or post-input target correction.
 - Wolf's Tier I-IV progression, Predatory Commitment drawback family, Blood direction, and Dire Hunt Blood Art are approved as a working draft for current scoping.
 - Wraith's Tier I **Pale Barrage** is approved as a working draft: continuing to hold Pale Lance after its initial thrust performs rapid lower-impact spectral jabs, with greater combined payoff and commitment the longer the player continues.
-- Wraith's Tier II Blood Art form and combat behavior are approved as a working draft: a full meter activates a fixed, steerable sequence of identical spinning spectral hits with no finishing slash; ordinary enemies are repeatedly interrupted without knockback, elites resist the forced interrupt, and Akio receives direct Health damage but cannot be interrupted by enemy attacks during the sequence.
+- Wraith's Tier II Blood Art form and combat behavior are approved as a working draft: a full meter activates a fixed, steerable sequence of identical spinning spectral hits with no finishing slash; ordinary enemies are repeatedly interrupted without knockback, elites resist the forced interrupt, Akio receives direct Health damage but cannot be interrupted by enemy attacks, and ordinary enemy collision body-blocks his movement during the sequence.
 
 Wolf's working progression is:
 
@@ -159,7 +159,7 @@ Keep the following in their owning gameplay, encounter, economy, UI, or producti
 - exact neutral movement and dash values within the approved universal contract,
 - exact Corruption gain, thresholds, Shrine frequency, and support values,
 - exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown, and anti-farming values within the approved shared defaults,
-- Wraith Blood Art rotation count, exact duration, exact spin speed, exact movement speed, exact radius, collision behavior, enemy-response cadence, and numerical damage or posture values within the approved Tier II behavior,
+- Wraith Blood Art rotation count, exact duration, exact spin speed, exact movement speed, exact radius, enemy-response cadence, and numerical damage or posture values within the approved Tier II behavior,
 - Spirit costs and prosthetic cooldowns,
 - immunity tables and status values,
 - room counts, route topology, branch frequency, and miniboss placement,
