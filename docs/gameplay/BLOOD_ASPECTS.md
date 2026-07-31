@@ -166,7 +166,7 @@ Wolf's current working progression is approved for scoping:
 Wraith's current working progression is approved through Tier II:
 
 - **Tier I — Pale Barrage:** continuing to hold after Pale Lance's initial thrust unleashes a rapid series of lower-impact spectral jabs. The player may release early, while longer use delivers greater combined pressure at the cost of a longer focused commitment.
-- **Tier II — Blood Art, name unresolved:** a full Blood meter activates a fixed sequence of identical spectral spinning hits. Akio may steer slightly slower than ordinary movement, each hit interrupts ordinary enemies without knockback, and the Art applies repeated Health and posture pressure across a radius of roughly four to five Akio body widths.
+- **Tier II — Blood Art, name unresolved:** a full Blood meter activates a fixed sequence of identical spectral spinning hits. Akio may steer slightly slower than ordinary movement, retains ordinary enemy collision and is body-blocked, each hit interrupts ordinary enemies without knockback, and the Art applies repeated Health and posture pressure across a radius of roughly four to five Akio body widths.
 
 Wraith Tier III-IV and Ronin Tier I-IV remain unresolved.
 
@@ -208,6 +208,7 @@ Wraith's working Blood direction is approved through its Tier II Art:
 - the Art requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while spinning,
 - activation begins a fixed sequence of identical rotations with no separate finishing slash,
 - Akio may steer continuously while moving slightly slower than ordinary locomotion,
+- Akio retains ordinary collision and cannot pass through enemies; enemies body-block his movement during the Art,
 - Akio cannot dash, block, parry, use ordinary attacks, or use Prosthetics until the sequence ends,
 - every hit briefly interrupts ordinary enemies without knockback, while elites do not receive this forced interrupt,
 - ordinary enemies use their normal automatic guard response after contact and may be posture-broken by the repeated rotations,
@@ -223,7 +224,7 @@ Still unresolved at system or Aspect-package level:
 - Wraith's Blood Art name and later Tier interactions,
 - whether Ronin requires a justified exception to a shared default,
 - final detailed input and HUD presentation,
-- exact Wraith rotation count, duration, spin speed, damage, movement speed, collision, and enemy-response cadence,
+- exact Wraith rotation count, duration, spin speed, damage, movement speed, and enemy-response cadence,
 - exact duration or cooldown behavior for unresolved Arts,
 - and limited Tier or Technique interactions.
 
@@ -237,7 +238,7 @@ Still unresolved at system or Aspect-package level:
 
 Wolf's package remains open to later revision after cross-roster comparison or playable testing; it is not an active blank design question. Wraith's Tier I-II package may likewise be adjusted after the remaining Wraith and Ronin packages are drafted or after playable testing.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, collision, and numerical resource values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, and numerical resource values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 
