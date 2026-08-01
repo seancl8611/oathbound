@@ -4,7 +4,7 @@ title: Technique Rewards and Build Management
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-01
 topics:
   - techniques
   - reward-screen
@@ -23,7 +23,9 @@ related:
 
 # Technique Rewards and Build Management
 
-This interface presents temporary Technique choices, refinements, replacements, reserve management, and decline rewards without turning the run into constant inventory maintenance.
+This interface presents temporary Technique choices, refinements, replacements, rarity, reserve management, and decline rewards without turning the run into constant inventory maintenance.
+
+The four active slots are a curation limit rather than the endpoint of Technique progression. After the loadout is full, the interface must continue supporting meaningful build improvement and revision.
 
 ## Required persistent context
 
@@ -43,7 +45,7 @@ Each card includes:
 
 - icon,
 - Technique name,
-- rarity or quality marker,
+- rarity marker,
 - category,
 - concise effect description,
 - combat-verb tags,
@@ -52,6 +54,8 @@ Each card includes:
 - refinement state or prerequisite when relevant.
 
 Affinity language communicates natural compatibility, not a hard requirement unless the card explicitly states one.
+
+Rarity communicates unusualness, specialization, transformation, complexity, or reward restriction rather than only a larger number. The interface must not imply that every higher-rarity card is automatically correct for every build.
 
 ## Offer before all active slots are filled
 
@@ -67,15 +71,33 @@ The first Technique choice should arrive early enough that run growth begins qui
 
 ## Offer after all active slots are filled
 
-The offer should usually combine different decision types rather than present three interchangeable additions:
+A full loadout is not a completed build. The working post-fill offer structure should usually include:
 
-- a compatible new Technique,
-- a refinement for an active Technique,
-- a Prosthetic Technique, rare option, or wildcard.
+- one refinement for an active Technique,
+- one compatible replacement or higher-rarity new Technique,
+- one wildcard such as a Prosthetic Technique, rare option, alternate-affinity entry, or another refinement.
+
+This is a generation direction rather than a mandatory identical arrangement on every screen. The important requirement is that post-fill Technique rooms do not routinely present three interchangeable or clearly inferior base additions.
 
 Selecting a refinement upgrades its active base Technique immediately and consumes no additional slot.
 
 Selecting a new Technique opens the replacement and reserve state.
+
+The player should be able to compare the offered effect against the current active Technique occupying a relevant role. Higher-rarity or more specialized cards require clear effect descriptions rather than relying on rarity framing alone.
+
+## Refinement presentation
+
+A Technique may receive at most one refinement.
+
+The refinement card must show:
+
+- the active base Technique being improved,
+- the complete current effect,
+- the complete refined effect,
+- which behavior, payoff, reliability, coverage, or related combat interaction changes,
+- and confirmation that no additional slot is consumed.
+
+A refinement should read as a meaningful deepening of the original Technique, not as an unrelated second ability or a negligible hidden percentage increase.
 
 ## Replacement and reserve state
 
@@ -142,7 +164,7 @@ Rest rooms provide a compact build-management state containing:
 - four active Techniques,
 - one reserve Technique,
 - current refinements,
-- combat-verb tags,
+- rarity and combat-verb tags,
 - active Aspect and Tier,
 - equipped prosthetic and Relic.
 
@@ -172,3 +194,4 @@ Use:
 - Long descriptions must remain localization-safe.
 - The player must understand a Technique's immediate effect before confirming.
 - The screen should not imply exact-combination dependence or hidden prerequisites.
+- A post-fill offer must clearly show how each option can improve, reshape, or specialize the existing build.
