@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-01
 topics:
   - full-scope
   - asset-counts
@@ -37,7 +37,7 @@ This document defines Oathbound's current production-level shape. It does not lo
 |---|---:|---|
 | Player character | 1 | Akio concept, final sprite, introductory combat, and three Aspect combat libraries |
 | Blood Aspects | 3 | Wolf, Wraith, and Ronin are the approved launch roster |
-| Technique loadout | 4 active + 1 reserve | Launch catalog size remains open |
+| Technique loadout | 4 active + 1 reserve | Launch catalog size remains open; later development uses replacement, rarity, and one refinement per Technique |
 | Prosthetic tools | 8 | One equipped at a time in the initial run structure |
 | Run-scoped Relic capacity | 1 | Launch catalog remains open |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
@@ -63,21 +63,36 @@ After Returning Blood awakens, launch scope includes:
 
 - one selected Blood Aspect as the immediate Tier 0 run foundation,
 - Wolf as a four-hit fast close-range pressure and pursuit kit,
-- Wraith as a two-hit extended spectral reach and control kit,
+- Wraith as a two-hit extended spectral reach and control kit with slower cadence and fewer ordinary options than Wolf,
 - Ronin as a three-hit slow heavy impact and stability kit,
 - one physical katana expressed through Aspect-specific Blood forms,
 - universal controls, locomotion, neutral dash, parry timing, enemy rules, and deathblow language,
 - player-directed attacks without corrective tracking, hidden homing, or post-input target correction,
-- fixed Aspect advancement from Tier 0 through Tier IV,
+- optional fixed Aspect advancement from Tier 0 through Tier IV,
 - Shrine decisions between Resist and Embrace, with Stabilize at Tier IV,
+- route-level opportunity cost between Shrine, Technique, refinement, Relic, economy, survival, and other rewards,
 - Blood as a run-only combat resource unavailable before Tier II,
 - four empty active Technique slots and one empty reserve slot,
+- continued Technique development after the slots are filled through replacement, rarity, one refinement per Technique, and reserve decisions,
 - one equipped prosthetic,
 - and one run-scoped Relic slot.
 
 The launch roster is approved. The game does not currently require a fourth mobility, evasion, projectile, or crowd-control Aspect; those combat needs remain supported by universal systems, Techniques, prosthetics, and encounter design.
 
 A fourth or fifth Aspect is outside current production scope. Reconsider expansion only after playable testing demonstrates a missing identity that cannot be covered by the approved roster and supporting systems.
+
+## Optional investment outcomes
+
+The selected Aspect always defines Akio's weapon identity, but a successful run does not need to maximize the Aspect Tier path.
+
+Launch balance and content must support:
+
+- Tier 0-I with an excellent coherent and refined Technique build,
+- Tier II with a solid Technique build as a common hybrid outcome,
+- Tier III with fewer or less-developed Technique upgrades as a deliberate Aspect-focused outcome,
+- and occasional Tier IV high-roll runs.
+
+Mandatory encounters must not assume a particular Aspect Tier or Blood Art. Choosing a Shrine route should have a meaningful opportunity cost because the player forgoes another previewed reward. Resist remains recovery and stabilization rather than an equal alternate long-term power route.
 
 ## Wolf package at current scope
 
@@ -88,22 +103,32 @@ Wolf's fixed Tier package is approved as a working draft:
 - **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack through normal posture rules without cancelling the charge.
 - **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
 
-Predatory Commitment is Wolf's evolving drawback family: pursuit actions travel farther along the selected direction and retain meaningful miss recovery. The benefits must clearly outweigh this positional risk.
+Wolf's pursuit actions remain player-directed and retain meaningful miss recovery and positional overcommitment. These are inherent weapon-kit tradeoffs, not a separate named drawback family or added Tier penalty. Every Tier remains clearly net-positive.
 
 This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial dependencies without locking final values or counts. It may be revised after Wraith and Ronin are designed or after playable testing.
 
+## Wraith package at current scope
+
+Wraith is approved through Tier II:
+
+- **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
+- **Tier II — Blood Art, final name unresolved:** a full meter activates a fixed sequence of identical steerable spinning hits; Akio moves slower than ordinary locomotion, is body-blocked by enemies, cannot use ordinary defensive or offensive actions, receives direct Health damage, and cannot be interrupted by enemy attacks.
+
+Wraith's limits come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, and reduced response options during major commitments. Later Tiers may grant strong benefits while preserving those inherent limitations.
+
 Still open at production scope are:
 
-- Wraith and Ronin's fixed Tier I-IV benefits and evolving drawback families,
-- Wraith and Ronin Blood generation and Blood Arts,
-- cross-roster power, accessibility, overlap, and production comparison,
+- Wraith Tier III, followed by Tier IV after Tier III is approved,
+- Ronin's Tier I-IV package designed one Tier at a time,
+- Wraith's final Blood Art name and Ronin's Blood Art,
+- cross-roster power, accessibility, inherent tradeoffs, overlap, and production comparison,
 - detailed Technique affinity and direct-exception rules,
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
 
 Exact frame data, hitboxes, combat values, resource values, and cancel windows remain implementation and playtesting work.
 
-Techniques remain the horizontal customization layer. Most Techniques are independently useful, use universal action tags, and may receive at most one slotless refinement.
+Techniques remain the horizontal customization layer and an optional major run-investment route. Most Techniques are independently useful, use universal action tags, may receive at most one slotless refinement, and remain valuable after the loadout is full through refinement, replacement, rarity, reserve management, or specialization.
 
 Run-only build state resets after death or successful Heart Binding completion. Destroyed Bindings, permanent unlocks, persistent currencies, discoveries, and story progress survive.
 
@@ -268,7 +293,7 @@ The exact Heart-route access control, repeat-clear rewards, records, cosmetics, 
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. Wraith and Ronin Aspect Tier packages and Blood Arts, followed by cross-roster comparison,
+1. Wraith Tier III, then Wraith Tier IV and Ronin's Tier package one Tier at a time, followed by cross-roster comparison,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
