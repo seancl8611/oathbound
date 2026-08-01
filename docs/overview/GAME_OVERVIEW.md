@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-01
 topics:
   - project-identity
   - combat
@@ -65,9 +65,9 @@ The Eclipse Shogun eventually recognizes Akio as a descendant of the escaped roy
 
 ## Core player fantasy
 
-The player should feel like a trained hunter entering a fallen kingdom with a complete sword foundation, then awakening a forbidden inherited power and learning to evolve it on his own terms.
+The player should feel like a trained hunter entering a fallen kingdom with a complete sword foundation, then awakening a forbidden inherited power and deciding how deeply to invest in it during each run.
 
-Victory comes from reading intent, controlling rhythm, pressuring posture, and deciding when to accept the danger of deeper Returning Blood expression.
+Victory comes from reading intent, controlling rhythm, pressuring posture, building a coherent set of Techniques, and deciding when Aspect advancement is worth giving up another reward opportunity.
 
 ## Approved gameplay snapshot
 
@@ -80,9 +80,10 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, and d
 - One physical katana expressed through Aspect-specific Blood weapon kits
 - Universal locomotion, neutral dash, parry timing, enemy rules, and deathblow language across Aspects
 - Player-directed attacks with no corrective tracking, hidden homing, or post-input target correction
-- Fixed Aspect Tier progression through Shrine Resist and Embrace decisions, up to Tier IV
+- Optional fixed Aspect Tier progression through Shrine Resist and Embrace decisions, up to Tier IV
 - Blood as a run-only combat resource unavailable before Tier II
 - Four active temporary Techniques, one reserve, and at most one refinement per Technique
+- Technique development continuing after four slots are filled through refinement, replacement, rarity, and reserve decisions
 - One equipped prosthetic and one run-scoped Relic slot
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
 - Persistent Strand services: Boat, Bloodwell, Blood Mirror, Forge, Merchant, Discovery Board, Blood Cavern, and training support
@@ -90,11 +91,11 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, and d
 
 ## Launch Blood Aspect roster
 
-| Aspect | Weapon identity | Firm tradeoff |
+| Aspect | Weapon identity | Inherent tradeoffs |
 |---|---|---|
-| Wolf | Four-hit fast close-range pressure, player-directed pursuit, sustained output, and nearby target transfer through aim and attack geometry | Missed pursuit and extended pressure create dangerous overcommitment and punish windows |
-| Wraith | Two-hit extended spectral poking, long lines, broad arcs, and short commitments | Point-blank pressure, cramped spaces, and attacks from several directions undermine its reach advantage |
-| Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, fixed attack lines, and slow posture recovery punish bad commitments |
+| Wolf | Four-hit fast close-range pressure, player-directed pursuit, sustained output, and nearby target transfer through aim and attack geometry | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
+| Wraith | Two-hit extended spectral control with the longest melee reach and selected committed multi-hit attacks | Slower cadence than Wolf, fewer ordinary options, restrained movement, and vulnerability when spacing collapses |
+| Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, fixed attack lines, minimal movement, and slow posture recovery |
 
 These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain shared-system, Technique, and prosthetic territory.
 
@@ -109,15 +110,21 @@ Wolf's current Tier package is approved for scoping and may be revised after the
 - **Tier III — Fanged Guard:** while Predator's Passage or Blood Fang is charging, one frontal blockable attack is blocked through normal player-posture rules without cancelling the charge.
 - **Tier IV — Apex Feast:** deathblows cause a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
 
-Wolf's evolving tradeoff is Predatory Commitment: its pursuit attacks travel farther along the player's selected direction and remain punishable when aimed poorly. The benefits should clearly exceed this positional risk.
+Wolf's pursuit becomes more forceful and rewarding through its Tiers while remaining player-directed and punishable when aimed poorly. This positional commitment is an inherent property of Wolf's actions rather than a separate named drawback system.
 
 ## Run-build philosophy
 
 - Base combat and player skill remain primary.
-- The selected Aspect provides the strongest immediate run identity.
-- Aspect progression is fixed vertical development, not a branching skill tree.
+- The selected Aspect provides the strongest immediate weapon identity.
+- Tier 0 is a complete and viable kit.
+- Aspect progression is optional fixed vertical development, not a branching skill tree or mandatory checklist.
+- The main cost of Aspect advancement is choosing a Shrine route instead of another valuable reward.
 - At full Corruption, the player chooses whether to Resist or advance through Embrace.
+- Resist is recovery and stabilization rather than an equal alternate power path.
 - Techniques provide temporary horizontal customization across universal combat tags.
+- Four active slots limit curation, not total Technique development; later rewards refine, replace, specialize, or pivot the build.
+- Technique-focused Tier 0-I builds, Tier II hybrids, and deeper Tier III-IV Aspect investment should all be viable outcomes.
+- Mandatory encounters do not assume a particular Tier or Blood Art.
 - A sequence is a set of available attacks, not a required combo objective.
 - Most Techniques are independently useful and synergize through shared combat verbs.
 - Run power should deepen active combat rather than replace it with automatic damage or screen-filling effects.
@@ -166,7 +173,7 @@ Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Bindin
 
 The remaining production-level questions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. Wraith and Ronin Tier packages, Blood rules, and Blood Arts, followed by cross-roster comparison,
+1. Wraith Tier III, followed by Wraith Tier IV and Ronin's Tier package one Tier at a time, then cross-roster comparison,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
