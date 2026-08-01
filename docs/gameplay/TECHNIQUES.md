@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-01
 topics:
   - techniques
   - run-builds
@@ -26,16 +26,16 @@ related:
 
 # Technique System
 
-Techniques are temporary in-run upgrades that strengthen or reshape Akio's existing combat actions. They provide limited horizontal build construction around the selected Blood Aspect rather than replacing it or being replaced by it.
+Techniques are temporary in-run upgrades that strengthen or reshape Akio's existing combat actions. They provide limited horizontal build construction around the selected Blood Aspect and form a powerful optional investment route alongside Aspect Tier advancement.
 
 ## System ownership
 
-- **Blood Aspect:** selected pre-run weapon foundation, immediate Tier 0 identity, fixed vertical Tier progression, and Tier II Blood Art.
-- **Techniques:** four limited replaceable in-run modifications plus one inactive reserve.
+- **Blood Aspect:** selected pre-run weapon foundation, immediate Tier 0 identity, optional fixed vertical Tier progression, and Tier II Blood Art.
+- **Techniques:** four limited replaceable in-run modifications plus one inactive reserve, with continued development through replacement and refinement.
 - **Prosthetic:** equipped tactical tool with eligible temporary Techniques.
 - **Relic:** separate passive rule using its own slot.
 
-Aspect power must leave Technique choices meaningful. Technique combinations must deepen active combat without making Wolf, Wraith, or Ronin irrelevant.
+The Aspect remains Akio's weapon identity even when the player invests mainly in Techniques. Aspect power must leave Technique choices meaningful, and strong Technique builds must remain viable without requiring high Aspect Tier.
 
 ## Aspect-Technique division
 
@@ -45,7 +45,7 @@ The selected Aspect determines attack sequence, rhythm, reach, coverage, commitm
 
 Aspects do not use corrective tracking, hidden homing, or post-input target correction.
 
-An Aspect must function before the player acquires any Technique.
+An Aspect must function before the player acquires any Technique. Tier 0 is a complete weapon kit rather than a weak state waiting to be repaired by Techniques or Embrace.
 
 ### Techniques define chosen run development
 
@@ -59,6 +59,18 @@ A four-Technique loadout may:
 4. **Hybridize** it into an unusual but coherent build.
 
 The same Technique may create different value under Wolf, Wraith, and Ronin because the underlying actions already differ. Most synergy should emerge through shared combat verbs rather than bespoke versions of every entry.
+
+## Optional investment contract
+
+Aspect and Technique development are not exclusive classes selected at the start of a run. The player may change emphasis as rewards appear.
+
+- Tier 0-I with an excellent refined Technique build must be fully viable.
+- Tier II with a solid Technique build is a common hybrid outcome.
+- Tier III with fewer or less-developed Techniques is a valid Aspect-focused outcome.
+- Tier IV with a complete ideal Technique build is an exceptional high-roll rather than the expected baseline.
+- Mandatory encounters must not assume that the player owns a Blood Art or has reached a particular Aspect Tier.
+
+The meaningful opportunity cost comes from route rewards. Choosing a Shrine can forgo a Technique, refinement, Relic, economy, or survival opportunity; choosing Technique development can delay Aspect advancement.
 
 ## Compatibility guardrails
 
@@ -74,8 +86,7 @@ The same Technique may create different value under Wolf, Wraith, and Ronin beca
 - Every Aspect supports several valid four-Technique builds.
 - Direct Aspect-, Tier-, or Blood-referencing Techniques are limited explicit exceptions.
 - Fixed Aspect Tier progression must not make Techniques secondary.
-
-The responsibility contract is approved. Exact affinity assignments, offer weighting, direct exceptions, and catalog entries remain open.
+- A strong Technique route must remain capable of winning at Tier 0-I.
 
 Wolf's fixed package currently owns these behaviors and ordinary Techniques should not reproduce them directly:
 
@@ -94,6 +105,8 @@ Each run begins with:
 
 Only active Techniques affect combat. The reserve is not a full inventory. Active slots are unrestricted by category, and initial scope does not include permanent slot-capacity increases.
 
+The four-slot limit is a curation constraint, not the end of Technique progression. A full loadout can still improve through better cohesion, higher-value replacements, one refinement per Technique, reserve management, and rare or specialized entries.
+
 ## Acquiring Techniques
 
 Technique opportunities normally present three cards.
@@ -101,6 +114,22 @@ Technique opportunities normally present three cards.
 - While an active slot is empty, the selected Technique fills it.
 - After all active slots are full, a new Technique may replace an active Technique, enter the reserve, or be declined for a displayed smaller fallback reward.
 - The player chooses which active Technique is replaced.
+
+A player should commonly fill the four active slots during Area 2. Possessing the exact desired four-Technique build with all desired refinements should remain uncommon until late in a run. Occasional early high-roll builds are allowed and may free the player to pursue deeper Aspect investment.
+
+## Full loadout development
+
+Having four Techniques is not the same as completing a build. Later Technique opportunities remain valuable through:
+
+- refinement of an active Technique,
+- replacement of a weaker or poorly fitting entry,
+- acquisition of a rarer or more transformative entry,
+- reserve management for future encounters,
+- Prosthetic specialization,
+- correction of a weakness exposed by the run,
+- or a pivot created by a Relic or another reward.
+
+The reward generator should treat a filled loadout as a build-development state rather than continuing to offer three undifferentiated base cards.
 
 ## Replacement and reserve
 
@@ -150,9 +179,9 @@ A refinement:
 - remains attached if the Technique moves to reserve,
 - does not extend into a second refinement.
 
-A refinement should preserve the original reason for selecting the Technique. It may improve reliability, payoff, bounded coverage, interaction with the same combat verb, supporting resource behavior, or risk without becoming an unrelated ability.
+A refinement should be a meaningful late-run improvement rather than only a negligible numerical increase. It may improve reliability, payoff, bounded coverage, interaction with the same combat verb, supporting resource behavior, or risk. It must preserve the original reason for selecting the Technique and must not become an unrelated second ability.
 
-The launch catalog must still define how transformative refinements may be, whether simple numerical improvements are acceptable, and which approved Techniques ship without one.
+The launch catalog must define the final refinement standard, which Techniques ship without one, and how often refinement opportunities appear.
 
 ## Categories
 
@@ -197,16 +226,18 @@ An entry may be neutral or have more than one justified affinity.
 
 ### Rarity
 
-Rarity represents unusualness, transformation, complexity, or reward restriction rather than only a larger number.
+Techniques use rarity to distinguish unusualness, transformation, specialization, complexity, reward restriction, and production cost rather than only a larger number.
 
-The catalog must define rarity tiers, offer timing, reward-source eligibility, readability, and which effects belong to Relics or other systems instead.
+The same Technique should not normally be duplicated across several rarities as simple numerical versions. Higher-rarity Techniques may be more build-defining or specialized, but they should not be automatically correct for every loadout.
+
+The catalog must define the final rarity tiers, offer timing, reward-source eligibility, readability, and which effects belong to Relics or other systems instead.
 
 ## Prosthetic Techniques
 
 Prosthetic Techniques use the normal Technique system.
 
 - Only the equipped prosthetic contributes eligible entries.
-- A major temporary prosthetic modification occupies one active slot.
+- A major temporary Prosthetic modification occupies one active slot.
 - Its one refinement is slotless.
 - The Forge owns permanent tool development.
 - The run owns temporary specialization.
@@ -214,7 +245,7 @@ Prosthetic Techniques use the normal Technique system.
 
 ## Aspect relationship still to define
 
-The roster, fixed Tier structure, and Wolf working package are approved. Still resolve:
+The roster, fixed Tier structure, optional-investment contract, and Wolf working package are approved. Still resolve:
 
 - Wraith and Ronin Tier packages and their power budgets,
 - cross-roster overlap after all three packages exist,
@@ -231,15 +262,21 @@ These decisions do not affect Technique eligibility under the ordinary universal
 
 Before all active slots are filled, offers should favor useful standalone entries, approved compatibility weighting, occasional eligible Prosthetic Techniques, and occasional higher-rarity options.
 
-After the loadout is full, offers should usually mix:
+After the loadout is full, the working offer structure should usually include:
 
-- a compatible replacement,
-- a refinement for an active Technique,
-- a Prosthetic Technique, rare option, or wildcard.
+- one refinement for an active Technique,
+- one compatible replacement or higher-rarity new Technique,
+- one wildcard such as a Prosthetic Technique, rare option, alternate-affinity entry, or another refinement.
 
-The generator should avoid three unusable or excessively narrow choices. Limited rerolls and decline rewards may reduce extreme bad luck without guaranteeing a perfect build.
+This is a reward-generation direction rather than a mandatory identical three-card formula for every screen. The generator should avoid three unusable, excessively narrow, or clearly inferior choices. Limited rerolls and decline rewards may reduce extreme bad luck without guaranteeing a perfect build.
 
-## Expected late-run state
+## Expected run development
+
+A successful run should commonly develop as follows:
+
+- **Area 1:** establish two or three active Techniques and the beginning of a build.
+- **Area 2:** fill the active loadout, establish synergy, and begin replacement or refinement decisions.
+- **Area 3:** refine, replace, use the reserve, and finalize the build.
 
 A successful late run should commonly reach:
 
@@ -251,7 +288,7 @@ A successful late run should commonly reach:
 - one run-scoped Relic when obtained,
 - and additional survival or resource growth.
 
-The late-run fantasy comes from coherent systems reinforcing skilled play rather than one layer dominating the build.
+A run may deviate through luck and routing. An early ideal Technique build may shift toward Aspect advancement; strong early Shrine investment may leave more Technique development unfinished.
 
 ## Catalog ownership
 
@@ -267,10 +304,11 @@ Before launch counts are approved, demonstrate that:
 - every core action has meaningful but non-mandatory support,
 - each Aspect supports reinforce, broaden, compensate, and hybridize builds,
 - early choices provide standalone value,
-- late choices create replacement, reserve, and refinement decisions,
+- late choices create meaningful replacement, reserve, rarity, and refinement decisions,
 - neutral and alternate-affinity choices prevent repetitive runs,
 - no category is mandatory for a viable build,
 - boss and mixed-encounter usefulness are documented,
+- Tier 0-I Technique-focused builds can remain viable,
 - Techniques do not make Aspect progression irrelevant,
 - fixed Aspect progression does not make Technique selection secondary,
 - fixed Tier behaviors are not accidentally duplicated as generic cards,
@@ -290,7 +328,7 @@ Before approving the launch catalog, resolve:
 2. primary-category boundaries,
 3. combat-verb tag taxonomy,
 4. affinity and offer-weighting rules,
-5. Technique rarity model,
+5. final Technique rarity model,
 6. final refinement standard,
 7. rare direct Aspect-, Tier-, or Blood-specific exceptions,
 8. launch coverage matrix.

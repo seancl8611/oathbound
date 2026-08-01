@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-31
+last_reviewed: 2026-08-01
 topics:
   - blood-aspects
   - blood-arts
@@ -47,7 +47,7 @@ These three identities are the complete current launch space. A fourth or fifth 
 
 Blood Aspects are distinct katana weapon kits, not passive stances, branching classes, or behavioral minigames.
 
-> **The moves create the playstyle. The player should not need to maintain a combo goal, forced movement loop, or separate Aspect-specific meter to use a kit correctly.**
+> **The moves create the playstyle. The player should not need to maintain a combo goal, forced movement loop, separate Aspect-specific meter, or player-facing drawback checklist to use a kit correctly.**
 
 Each kit may differ through:
 
@@ -63,6 +63,8 @@ Each kit may differ through:
 - target handling through authored arcs and collision,
 - modest approved defensive properties,
 - and Blood-katana presentation.
+
+An Aspect's weaknesses and limits should emerge from these weapon properties. Higher Tiers may strengthen an action while preserving or emphasizing its existing commitment, positioning requirement, speed, reach, or defensive access. Tiers do not require separate named drawback families or unrelated penalty attributes.
 
 No Aspect uses corrective tracking, hidden homing, or post-input target correction. Attacks follow the player's chosen direction and their authored geometry and travel.
 
@@ -100,11 +102,11 @@ Modest ordinary defensive differences may use player-posture capacity, block pos
 
 ## Approved roster
 
-| Aspect | Basic sequence | Held identity | Primary strength | Firm tradeoff |
+| Aspect | Basic sequence | Held identity | Primary strength | Inherent tradeoffs |
 |---|---|---|---|---|
-| Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, player-directed pursuit, and nearby target transfer through attack geometry | Missed pursuit and extended pressure create dangerous overcommitment and punish windows |
-| Wraith | Veil Cut → Passing Arc | Pale Lance — reach and focused rapid thrusts after Tier I | Longest melee reach, frontal control, short ordinary commitments, concentrated multi-hit punishment, and an earned movable spinning Blood Art after Tier II | Point-blank pressure, cramped spaces, attacks from several directions, overlong focused commitments, and direct Health exposure during the Blood Art undermine its advantage |
-| Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, and slow posture recovery punish bad commitments |
+| Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, player-directed pursuit, and nearby target transfer through attack geometry | Short reach, forward commitment, unsafe misses, and dangerous final positioning after poorly aimed pursuit |
+| Wraith | Veil Cut → Passing Arc | Pale Lance — reach and focused rapid thrusts after Tier I | Longest melee reach, frontal control, concentrated multi-hit punishment, and an earned movable spinning Blood Art after Tier II | Slower and less versatile than Wolf, restrained movement, fixed attack lines, point-blank pressure, and reduced defensive access during its strongest commitments |
+| Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 Supporting actions:
 
@@ -126,9 +128,9 @@ An Aspect is:
 - active from Tier 0,
 - always present during combat,
 - responsible for the complete starting sword kit,
-- and the owner of fixed vertical Tier progression during that run.
+- and the owner of an optional fixed vertical Tier path during that run.
 
-An Aspect must function before a specific Technique is acquired.
+An Aspect must function before a specific Technique is acquired and before the player advances it. Tier 0 is a complete weapon foundation rather than an intentionally weak prerequisite state.
 
 ### Techniques
 
@@ -140,9 +142,9 @@ One Technique uses one rule across every Aspect. Its value may differ naturally 
 
 Ordinary Techniques are not hard-locked to one Aspect or Tier. Affinity may affect weighting or amplification after those rules are approved; it does not determine basic eligibility.
 
-## Approved Tier and Shrine contract
+## Optional Tier-investment contract
 
-Aspect progression is fixed rather than a branching package selection.
+Aspect progression is fixed rather than a branching package selection, but investing deeply in that path is optional.
 
 - Every run begins at **Tier 0**.
 - Corruption fills through approved combat and progression events.
@@ -150,11 +152,21 @@ Aspect progression is fixed rather than a branching package selection.
 - **Resist** keeps the current Tier, lowers Corruption, and grants approved immediate support.
 - **Embrace** advances the selected Aspect by one fixed Tier and empties Corruption.
 - Each Tier presents one headline improvement and at most one minor supporting rule.
-- Each Aspect uses one evolving drawback family rather than accumulating unrelated penalties.
+- Each Tier must be clearly net-positive and preserve the Aspect's inherent limitations through the upgraded action itself.
 - **Tier IV** is the maximum.
 - At Tier IV, a full threshold offers **Stabilize** rather than Tier V or more permanent power.
 
-The player's choice is whether to advance now, not which branch of upgrades to select.
+The player chooses how much of the run to invest in Aspect advancement versus Techniques, refinements, Relics, economy, survival, and other rewards. The main opportunity cost occurs through route selection: choosing a Shrine can mean foregoing another valuable reward room.
+
+Expected viability:
+
+- Tier 0-I plus a strong Technique build can complete a run.
+- Tier II plus a solid Technique build is a common hybrid outcome.
+- Tier III is a deliberate deeper Aspect investment.
+- Tier IV is occasional rather than expected.
+- Mandatory encounters are not balanced around a required Tier or Blood Art.
+
+The player's choice inside the Aspect path remains whether to advance now, not which branch of upgrades to select.
 
 Wolf's current working progression is approved for scoping:
 
@@ -183,6 +195,7 @@ Approved shared boundaries:
 - Blood progression must deepen the selected weapon kit without replacing ordinary swordplay or making Techniques secondary.
 - Blood Arts should provide a clear practical payoff on activation rather than depending entirely on ideal follow-up play.
 - A Blood Art may be an immediate signature action, a temporary state, or another clearly defined combat expression. Blood Arts are not required to share one form.
+- A run that does not reach Tier II must remain viable without a Blood Art.
 
 Working launch defaults:
 
@@ -230,9 +243,9 @@ Still unresolved at system or Aspect-package level:
 
 ## Remaining design package
 
-1. Define Wraith's fixed Tier III-IV benefits, evolving drawback family, final Blood Art name, and later interactions with Pale Barrage or the Art.
-2. Define Ronin's fixed Tier I-IV benefits, evolving drawback family, Blood Art, and any justified exception to the shared Blood defaults.
-3. Compare all three packages for power, production cost, accessibility, and Technique overlap, including the current Wolf and Wraith working drafts.
+1. Define Wraith's fixed Tier III-IV benefits, final Blood Art name, and later interactions with Pale Barrage or the Art while preserving its inherent mobility, speed, and versatility limits.
+2. Define Ronin's fixed Tier I-IV benefits, Blood Art, and any justified exception to the shared Blood defaults while preserving its inherent commitment and recovery limits.
+3. Compare all three packages for power, production cost, accessibility, Technique overlap, inherent tradeoffs, and whether Technique-focused, hybrid, and Aspect-focused runs remain viable.
 4. Resolve shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.
 5. Finalize required animation, VFX, audio, HUD, Shrine, selection, trial, and persistent-progression states.
 

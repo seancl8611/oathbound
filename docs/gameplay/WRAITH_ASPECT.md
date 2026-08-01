@@ -4,7 +4,7 @@ title: Wraith Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-31
+last_reviewed: 2026-08-01
 topics:
   - blood-aspects
   - wraith
@@ -32,9 +32,9 @@ related:
 
 Wraith is an approved member of the three-Aspect launch roster. This document owns Wraith's qualitative Tier 0 weapon kit and its current Tier I-II working progression.
 
-It supersedes the earlier forced-reposition concept. Wraith's spacing identity comes from reach, short commitments, player aim, recovery, and rapid spectral weapon expressions rather than mandatory lateral movement, target correction, or special evasion.
+It supersedes the earlier forced-reposition concept. Wraith's spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, and spectral weapon expressions rather than mandatory lateral movement, target correction, or special evasion.
 
-Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Tier III-IV package, evolving drawback family, Blood Art name, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Tier III-IV package, Blood Art name, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -43,16 +43,18 @@ Exact numerical values, frame data, hitboxes, animation, detailed Blood presenta
 Wraith is defined by:
 
 - the longest effective melee reach in the launch roster,
-- a short two-hit Basic Attack sequence,
+- a short two-hit Basic Attack sequence with fewer ordinary attack options than Wolf,
+- a slower and more deliberate cadence than Wolf,
 - narrow long-reaching lines and broad spectral arcs,
-- short commitments and quick return to movement or defense,
-- restrained forward movement,
+- restrained movement during attacks,
 - moderate per-hit damage,
 - controlled frontal and lane coverage,
 - fixed player-directed attack lines after commitment,
-- rapid spectral blade expressions on selected committed attacks,
+- rapid spectral blade expressions only within selected committed attacks,
 - an earned movable multi-enemy spinning release after Tier II,
 - and weakness when enemies enter inside its preferred range or threaten it outside the currently selected action.
+
+Wraith gives up mobility, speed, and ordinary versatility in exchange for reach, control, and strong payoff from correctly chosen openings. These limitations are part of the weapon kit itself rather than a separate drawback system.
 
 Wraith does not use corrective tracking, hidden homing, or automatic rotation. The player may use one precise attack, add the second attack, defend, dash, reposition normally, use a Prosthetic, or disengage.
 
@@ -66,7 +68,7 @@ It is not defined by teleportation, additional invulnerability, automatic moveme
 
 ### Basic Attack sequence
 
-1. **Veil Cut** — narrow extended opener with medium-to-long reach, moderate pressure, limited movement, and quick recovery.
+1. **Veil Cut** — narrow extended opener with medium-to-long reach, moderate pressure, limited movement, and controlled recovery.
 2. **Passing Arc** — broad long-reaching spectral sweep with wider frontal coverage and moderate recovery.
 
 The sequence cadence is:
@@ -91,14 +93,14 @@ Pale Lance is not a projectile. Its advantage is reach rather than Ronin-level i
 
 ### Dash Attack — Ghostline Slash
 
-A quick extended cut after the universal neutral dash.
+A controlled extended cut after the universal neutral dash.
 
-- fast startup,
+- reliable startup,
 - medium-to-long spectral reach,
 - moderate damage and posture pressure,
 - limited movement beyond the dash,
 - fixed authored arc after release,
-- quick recovery into movement or defense.
+- controlled recovery into movement or defense.
 
 It does not require a special offset or add invulnerability to the dash.
 
@@ -119,7 +121,7 @@ It does not teleport, move behind the enemy, force an off-axis finish, rotate to
 
 Wraith retains functional blocking and universal parry timing during ordinary combat.
 
-Its mobility impression comes from short attack commitments, quick recovery after Veil Cut, the universal dash, and Ghostline Slash's return to neutral.
+Its defensive success depends on preserving useful spacing, selecting an appropriate attack, and returning to neutral before pressure collapses around it. Wraith has less attack-bound mobility and fewer offensive transitions than Wolf.
 
 Wraith does not require a dramatically weaker guard. Its natural defensive weakness is pressure inside the effective reach of its extended attacks and attacks arriving outside its focused front.
 
@@ -131,21 +133,20 @@ During the Tier II Blood Art, Akio is not blocking and cannot use ordinary defen
 |---|---|
 | Preferred range | Medium-to-long during ordinary combat; nearby multi-enemy coverage during the Tier II Art |
 | Basic sequence | Two attacks |
-| Cadence | Short quick-to-moderate pokes with selected rapid spectral commitments |
+| Cadence | Slower and more deliberate than Wolf; selected rapid spectral commitments |
 | Per-hit damage | Moderate |
 | Sustained output | Moderate and lower than Wolf outside committed openings |
 | Enemy posture | Focused extended pressure; repeated multi-target pressure during the Tier II Art |
 | Attack movement | Restrained and player-directed; slowly steerable during the Tier II Art |
 | Held identity | Reach and focused multi-hit commitment after Tier I |
-| Main failure state | Enemies collapse inside preferred range or attack from several directions; careless Tier II activation exposes Health directly |
+| Main failure state | Poor positioning, enemies collapsing inside preferred range, or committing to the wrong direction or opening |
 
 ## Strengths
 
 - longest effective melee reach,
 - punishment from outside conventional sword range,
 - strong line and frontal arc coverage,
-- short ordinary attack commitments,
-- quick return to movement or defense after lighter attacks,
+- controlled ordinary attack commitments,
 - access to ranged enemies without becoming a projectile kit,
 - concentrated multi-hit punishment during larger openings after Tier I,
 - an earned multi-enemy spinning attack after Tier II,
@@ -153,6 +154,9 @@ During the Tier II Blood Art, Akio is not blocking and cannot use ordinary defen
 
 ## Firm tradeoffs
 
+- slower attack cadence than Wolf,
+- fewer ordinary attacks and offensive transitions,
+- restrained movement during attacks,
 - point-blank pressure during ordinary combat,
 - cramped spaces,
 - attacks from several directions,
@@ -160,21 +164,23 @@ During the Tier II Blood Art, Akio is not blocking and cannot use ordinary defen
 - moderate rather than heavy individual hits,
 - lower ordinary sustained output than Wolf,
 - meaningful recovery after Pale Lance or other extended misses,
-- increasing exposure when Pale Barrage is held for too long,
-- and direct Health exposure with no block, parry, or dash during the Tier II Blood Art.
+- becoming stationary while sustaining Pale Barrage,
+- and slower movement with no block, parry, dash, ordinary attack, or Prosthetic access during the Tier II Blood Art.
 
-Wraith must not combine the safest spacing, strongest damage, and easiest recovery. Reach and rapid spectral weapon expression are its primary advantages, while committed focused attacks and the movable spinning Blood Art remain punishable when used during the wrong opening.
+Wraith must not combine the safest spacing, strongest damage, fastest actions, and easiest recovery. Its player outplay is intelligent positioning, selecting the correct attack and direction, and committing only when the opening supports the chosen action.
 
 ## Encounter role
 
 - **Mixed groups:** threaten priority enemies at range, use Passing Arc for frontal interference, and use the Tier II Blood Art when nearby enemies cluster.
-- **Crowds:** control a broad front during ordinary combat, then spend a full Blood meter to move through a large group with repeated spinning hits.
+- **Crowds:** control a broad front during ordinary combat, then spend a full Blood meter to move through a nearby group with repeated spinning hits.
 - **Ranged pressure:** reach exposed ranged enemies through Veil Cut, Pale Lance, Ghostline Slash, universal dash, and prosthetics; the Blood Art is not a fast room-crossing pursuit tool.
 - **Elites and bosses:** punish from the edge of threat range, use Pale Barrage during sufficiently long openings, and use the Tier II Blood Art only when direct Health exposure is acceptable.
 
 # Fixed Tier progression
 
-Wraith's Tier I-II package is approved as a working draft for current scoping. Later Tiers must deepen Wraith's rapid spectral weapon identity without turning every action into the same multi-hit attack or erasing the risks of focused commitment and direct Health exposure.
+Wraith's Tier I-II package is approved as a working draft for current scoping. Later Tiers may provide stronger benefits than Wolf's equivalent Tiers because Wraith gives up more ordinary mobility, speed, and versatility. Every Tier must remain clearly net-positive while preserving those inherent kit limitations through the upgraded actions themselves.
+
+Wraith does not require a separate named drawback family or an added penalty at each Tier.
 
 ## Tier I — Pale Barrage
 
@@ -185,7 +191,8 @@ After the initial Pale Lance thrust, continuing to hold the attack input causes 
 - The original single Pale Lance remains available by releasing without continuing into the barrage.
 - Each additional jab deals lower individual health and enemy-posture damage than the initial Pale Lance.
 - A completed barrage delivers strong combined health and enemy-posture pressure during a sufficiently long opening.
-- Akio has limited movement and aim adjustment once the barrage begins.
+- Akio remains stationary once the barrage begins.
+- Aim adjustment is limited after the barrage begins.
 - The jabs do not track, rotate toward, or independently select enemies.
 - The longer Akio continues the barrage, the longer he remains committed and exposed to retaliation, flanking pressure, and enemies outside the focused direction.
 - Releasing early gives up the remaining damage but ends the commitment sooner.
@@ -194,7 +201,7 @@ Pale Barrage is one authored multi-hit Held Attack rather than a separate status
 
 The resulting Tier I rhythm is:
 
-> use the ordinary Wraith kit during short exchanges → hold Pale Lance into rapid jabs when a larger opening appears → release before the commitment becomes unsafe
+> establish useful range and direction → use ordinary Wraith attacks during short exchanges → hold Pale Lance into rapid jabs when a larger opening appears → release before the commitment becomes unsafe
 
 ## Tier II — Blood Art (name unresolved)
 
@@ -250,7 +257,7 @@ No special gaps that guarantee ordinary enemies an attack between rotations are 
 
 The resulting Tier II rhythm is:
 
-> fill Blood through ordinary combat → activate near a group or committed nearby target → steer the spinning radius through enemies → accept direct Health risk in exchange for uninterrupted multi-hit damage and posture pressure
+> fill Blood through ordinary combat → position before activation → activate near a group or committed nearby target → steer the slower spinning radius through enemies → accept limited response options and direct Health risk in exchange for uninterrupted multi-hit damage and posture pressure
 
 Exact rotation count, total duration, spin speed, Health damage, posture damage, movement speed, Blood values, and final presentation remain implementation and playtesting work.
 
@@ -258,12 +265,14 @@ Exact rotation count, total duration, spin speed, Health damage, posture damage,
 
 Universal Techniques may:
 
-- **reinforce** reach, line coverage, arc coverage, quick poke recovery, Pale Lance, Pale Barrage, and multi-hit actions,
-- **broaden** close-range handling, pressure, pursuit, or posture continuity,
+- **reinforce** reach, line coverage, arc coverage, Pale Lance, Pale Barrage, and multi-hit actions,
+- **broaden** close-range handling, pressure, pursuit, faster re-entry, or posture continuity,
 - **compensate** for fixed attack lines, point-blank pressure, crowd collapse, focused commitment, direct Health exposure, or whiff recovery,
 - **hybridize** through parry counters, dash attacks, deathblows, posture, or prosthetics.
 
 Wraith does not own every range, movement, dash, avoidance, multi-hit, Held Attack, area attack, interruption-resistance, or damage-amplification Technique.
+
+A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without requiring the Blood Art.
 
 ## Blood-katana presentation
 
@@ -275,10 +284,11 @@ The blade remains visibly connected to Akio's physical katana. Pale Barrage shou
 
 Define:
 
-- fixed Tier III-IV benefits,
-- one evolving drawback family that incorporates Pale Barrage's focused commitment and the Blood Art's direct Health exposure without making ordinary Wraith attacks uniformly slow,
+- the fixed Tier III benefit,
+- the fixed Tier IV benefit after Tier III is approved,
 - the Tier II Blood Art's final name,
 - any later Tier interactions with Pale Barrage or the Blood Art,
+- how later benefits remain powerful while preserving Wraith's inherent mobility, speed, positioning, and versatility limits,
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 

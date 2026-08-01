@@ -4,7 +4,7 @@ title: Ronin Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-01
 topics:
   - blood-aspects
   - ronin
@@ -32,7 +32,7 @@ Ronin is an approved member of the three-Aspect launch roster. This document own
 
 It replaces earlier directions based on maintaining a combo through defense, reaching a special finisher as the central goal, or selecting Basic Attacks through movement-direction input.
 
-Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier I-IV package, drawback family, Blood Art, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier I-IV package, Blood Art, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -50,6 +50,8 @@ Ronin is defined by:
 - fixed attack lines after commitment,
 - severe recovery after missed heavy attacks,
 - and the strongest guard profile, balanced by slow posture recovery.
+
+Ronin's limitations are inherent in its startup, movement, commitment, and recovery rather than expressed through a separate player-facing drawback category.
 
 Ronin does not use corrective tracking, hidden homing, or post-input target rotation. The player judges both the attack direction and how much of an opening can be used safely. Ronin's attacks are individually valuable; the player never needs to complete the full sequence.
 
@@ -170,7 +172,12 @@ Ronin must not become the generally optimal kit by combining the strongest guard
 - **Crowds:** threaten grouped frontal targets but struggle when fast enemies attack from several directions.
 - **Ranged pressure:** rely on universal dash, Breaching Slash, projectile defense where supported, prosthetics, and target priority rather than pursuit or extended reach.
 - **Elites and bosses:** convert correctly read openings into the largest individual health and posture gains.
-- **Hazards:** benefit from minimal attack movement while suffering when area denial removes stable preparation space.
+
+## Tier progression direction
+
+Ronin's future Tiers must provide clearly net-positive benefits that deepen heavy impact, posture pressure, stability, or deliberate punishment. The benefits may be strong because Ronin already gives up speed, movement, and recovery through its ordinary kit.
+
+Future Tiers should preserve those inherent limitations through the actions they strengthen rather than adding separate named drawbacks or unrelated penalty attributes. A strong Ronin Technique build at Tier 0-I must remain capable of completing a run without requiring the Blood Art.
 
 ## Technique space
 
@@ -191,11 +198,13 @@ Presentation may use a dense Blood edge, a spectral sheath during Stillness Draw
 
 ## Remaining Ronin design work
 
-Define:
+Define one Tier at a time:
 
-- fixed Tier I-IV benefits,
-- one evolving drawback family,
-- Ronin's Tier II Blood Art and how it uses the shared Blood defaults,
+- the fixed Tier I benefit,
+- Tier II and Ronin's Blood Art after Tier I is approved,
+- Tier III after Tier II is approved,
+- Tier IV after Tier III is approved,
+- how each Tier preserves Ronin's inherent speed, movement, commitment, and recovery limits,
 - any justified exception required by the approved Blood Art,
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.

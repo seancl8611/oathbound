@@ -4,7 +4,7 @@ title: Blood Aspect Identity Guidelines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-01
 topics:
   - blood-aspects
   - aspect-roster
@@ -35,15 +35,15 @@ Blood Aspects are complete katana weapon kits that share one control and combat 
 
 > **Define concrete moves first. Let timing, range, geometry, player-directed movement, damage, posture, stagger, commitment, and recovery create the playstyle naturally.**
 
-Do not substitute an abstract behavior rule for a weapon kit. Avoid identities based on maintaining pressure forever, repositioning after every sequence, preserving a combo through defense, reaching one required finisher, or selecting attacks through movement-direction input.
+Do not substitute an abstract behavior rule or player-facing drawback category for a weapon kit. Avoid identities based on maintaining pressure forever, repositioning after every sequence, preserving a combo through defense, reaching one required finisher, or selecting attacks through movement-direction input.
 
 ## Approved launch roster
 
-| Aspect | Identity | Firm tradeoff |
+| Aspect | Identity | Inherent tradeoffs |
 |---|---|---|
-| Wolf | Fast close-range pressure and pursuit | Missed pursuit and extended pressure create dangerous overcommitment |
-| Wraith | Extended spectral reach and frontal control | Point-blank, cramped, and multi-directional pressure undermine its spacing advantage |
-| Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, and slow posture recovery punish bad commitments |
+| Wolf | Fast close-range pressure and pursuit | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
+| Wraith | Extended spectral reach and frontal control | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, and vulnerability when spacing collapses |
+| Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 The launch roster is final at the current scoping stage. Mobility, evasion, ranged utility, and broader crowd control remain shared-system, Technique, and prosthetic territory rather than requiring a fourth Aspect.
 
@@ -57,7 +57,6 @@ Oathbound combines disciplined posture, parry, block, dodge, counter, and deathb
 - target-priority decisions,
 - crowd pressure,
 - elites and minibosses,
-- hazards and area denial,
 - and sustained bosses.
 
 Every launch kit must remain viable across these situations. No Aspect is designed only for one-on-one sword duels or only for large groups.
@@ -133,7 +132,7 @@ The player may stop after one attack, continue, defend, dash, redirect, use a Pr
 | Aspect | Sequence | Cadence purpose |
 |---|---:|---|
 | Wolf | Four attacks | Sustained close pressure and pursuit |
-| Wraith | Two attacks | Extended pokes and quick return to movement or defense |
+| Wraith | Two attacks | Deliberate extended control with fewer ordinary options |
 | Ronin | Three attacks | Slow escalating impact and heavy direct damage |
 
 Each attack must remain useful when the sequence ends early.
@@ -147,6 +146,19 @@ Avoid mandatory lateral movement, every counter relocating Akio, every dash atta
 A specific signature move may cross an enemy along its original line when that behavior is central to the move and safely constrained. This must not become automatic target selection or general behind-the-enemy repositioning.
 
 A spacing identity should emerge from reach, geometry, player-directed movement, commitment, and recovery.
+
+## Tier progression guidance
+
+Aspect Tier progression is a fixed optional investment route.
+
+- Tier 0 is a complete and viable weapon kit.
+- Every Tier is clearly net-positive.
+- Higher Tiers deepen signature actions without requiring separate named drawbacks or added penalty attributes.
+- Existing weaknesses may remain visible through the upgraded action's movement, commitment, direction, speed, recovery, or defensive access.
+- Technique-focused Tier 0-I builds must remain capable of completing a run.
+- Tier II is a common hybrid target, Tier III is deeper specialization, and Tier IV is occasional rather than expected.
+
+The purpose of preserving tradeoffs is to keep the weapon identity and player outplay intact, not to discourage Embrace or make later Tiers undesirable.
 
 ## Kit evaluation template
 
@@ -173,8 +185,9 @@ A spacing identity should emerge from reach, geometry, player-directed movement,
 ### Game-wide fit
 
 - natural strengths and weaknesses,
-- groups, ranged pressure, elites, hazards, and boss viability,
+- groups, ranged pressure, elites, and boss viability,
 - reinforce, broaden, compensate, and hybridize Technique space,
+- viability across Technique-focused, hybrid, and Aspect-focused runs,
 - prosthetic relevance,
 - and animation, VFX, audio, UI, and teaching scope.
 
@@ -189,6 +202,7 @@ A kit is ready when:
 - ordinary defense, deathblows, Techniques, and prosthetics remain relevant,
 - the kit works against groups and single targets,
 - its Blood Art is practically useful even without perfect follow-up play,
+- Tier 0-I Technique-focused builds remain viable,
 - and it is distinguishable from the other two during the first combat room.
 
 The current roster meets this qualitative Tier 0 standard. Wolf also has an approved working Tier I-IV package.
@@ -197,15 +211,15 @@ The current roster meets this qualitative Tier 0 standard. Wolf also has an appr
 
 | Property | Wolf | Wraith | Ronin |
 |---|---|---|---|
-| Style | Fast close pressure | Extended spectral poking | Slow heavy direct impact |
+| Style | Fast close pressure | Extended spectral control | Slow heavy direct impact |
 | Sequence | Four hits | Two hits | Three hits |
 | Range | Close | Longest | Medium |
-| Cadence | Fastest | Short quick-to-moderate | Slowest |
+| Cadence | Fastest | Slower and deliberate | Slowest |
 | Per-hit damage | Moderate | Moderate | Highest |
 | Sustained output | Highest while connected | Moderate | Opening-dependent |
 | Attack movement | Strongly forward | Restrained | Minimal |
 | Held purpose | Pursuit | Reach | Power |
-| Primary risk | Overextension | Pressure inside preferred range | Missed heavy commitment and slow posture recovery |
+| Primary risk | Overextension | Poor positioning and commitment to the wrong direction or opening | Missed heavy commitment and slow posture recovery |
 
 ## Technique compatibility
 
@@ -223,4 +237,4 @@ Neither additional Aspect belongs to current launch paper-design or production s
 
 ## Next design dependency
 
-Define Wraith and Ronin's fixed Tier I-IV benefits, evolving drawback families, Tier II Blood rules, Blood Arts, and production packages. Then compare all three Aspects before final production lock. Do not reopen the completed roster audit or Wolf's package as a blank question without new evidence.
+Define Wraith's Tier III benefit next, then Tier IV after Tier III is approved. Define Ronin one Tier at a time afterward. Compare all three Aspects for inherent tradeoffs, power, accessibility, Technique overlap, and viability across Technique-focused, hybrid, and Aspect-focused runs before final production lock.
