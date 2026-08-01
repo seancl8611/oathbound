@@ -4,7 +4,7 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-08-01
 topics:
   - currencies
   - pickups
@@ -33,15 +33,17 @@ The reward framework should:
 
 - make route choices readable before commitment,
 - build run power gradually,
+- create meaningful competition between Aspect, Technique, survival, economy, and rare-reward routes,
 - keep survival, economy, and persistent progression valuable,
 - fill the Technique loadout mainly through Areas 1 and 2,
 - shift Area 3 toward refinement and final build decisions,
 - provide useful fallback rewards,
+- allow occasional high-roll builds without making ideal builds routine,
 - and avoid exact-combination dependence or severe random failure.
 
 Major rewards support:
 
-1. **Build growth** — Techniques, refinements, Prosthetic Techniques, Relics.
+1. **Build growth** — Techniques, refinements, Prosthetic Techniques, Relics, and optional Aspect Tier advancement through Shrine routes.
 2. **Survival** — Health, Spirit, recovery, temporary capacity.
 3. **Economy** — Gold, shops, rerolls.
 4. **Persistent progress** — Mist, Scrolls, Boss Emblems, unlocks, discoveries, Heart Bindings.
@@ -86,11 +88,11 @@ Possible later design space includes:
 - new interaction between an existing Technique and the Blood Art,
 - or another bounded Aspect-specific rule.
 
-These effects may belong to later Aspect Tiers, Techniques, refinements, Relics, or another approved run system. They must not create a persistent Blood balance, make the Blood Art functional only after finding a required upgrade, or produce near-permanent Blood Art uptime as the normal build state.
+These effects may belong to later Aspect Tiers, Techniques, refinements, Relics, or another approved run system. They must not create a persistent Blood balance, make the Blood Art functional only after finding a required upgrade, produce near-permanent Blood Art uptime as the normal build state, or make Tier II mandatory for run viability.
 
 The exact number and ownership of Blood-related rewards remain part of later Aspect, Technique, and catalog design.
 
-## Route previews
+## Route previews and opportunity cost
 
 When the player chooses between routes, the primary reward category should be shown through a consistent symbol or environmental marker.
 
@@ -112,6 +114,8 @@ Supported preview categories may include:
 - boss.
 
 Room function and payout are related but separate. A standard combat room may award any approved combat-room payout. Color cannot be the only differentiator.
+
+Route selection provides the main opportunity cost between Aspect and Technique development. Choosing a Shrine can mean giving up a Technique, refinement, Relic, economy, or survival opportunity; choosing another route can delay Aspect advancement. The player may change emphasis throughout the run rather than declaring a fixed build class at the beginning.
 
 Exact route topology, branch frequency, and room distribution are later run-design and playtest decisions.
 
@@ -137,17 +141,25 @@ Technique offers normally present three cards.
 
 Before all four active slots are filled, offers favor immediately useful Techniques, selected-Aspect compatibility, eligible Prosthetic Techniques, and occasional higher-rarity options.
 
-After all active slots are filled, offers usually mix a compatible replacement, an active-Technique refinement, and a Prosthetic Technique, rare option, or wildcard.
+Filling the four active slots does not finish the Technique route. After all active slots are filled, offers should usually support build development through:
+
+- one refinement for an active Technique,
+- one compatible replacement or higher-rarity new Technique,
+- one wildcard such as a Prosthetic Technique, rare option, alternate-affinity entry, or another refinement.
+
+This is a working offer-generation direction rather than a mandatory identical formula for every screen. Post-fill offers should not routinely present three clearly inferior base replacements.
 
 The player may decline all choices for a displayed lower-value fallback such as Gold, recovery, Mist, or an approved reroll resource.
 
-Detailed slot, reserve, overwrite, and refinement rules belong in `TECHNIQUES.md`.
+Detailed slot, reserve, overwrite, rarity, and refinement rules belong in `TECHNIQUES.md`.
 
 ## Shrine rooms
 
-Shrines own Blood Aspect stabilization and escalation.
+Shrines own Blood Aspect stabilization and optional escalation.
 
 - At full Corruption: present Resist or Embrace.
+- Embrace advances the fixed Aspect Tier and represents the Shrine route's long-term power reward.
+- Resist keeps the Tier and provides recovery or stabilization; it is a safety valve rather than an equal alternate build path.
 - Below full Corruption: provide approved support such as Health or Spirit recovery.
 - Shrines do not normally present ordinary Technique selections.
 - Blood Art charge is separate from Corruption and does not pay for Embrace.
@@ -235,7 +247,7 @@ The initial structure uses one equipped Relic. Current rarity tiers are:
 - Rare,
 - Legendary.
 
-Relics may alter broader combat, economy, survival, risk, or an approved Blood Art rule, but should not replace the selected Blood Aspect as the run's central identity.
+Relics may alter broader combat, economy, survival, risk, or an approved Blood Art rule, but should not replace the selected Blood Aspect as the run's weapon identity or make a particular Aspect Tier mandatory.
 
 The final Relic catalog belongs to the launch run-build content decision.
 
@@ -248,15 +260,26 @@ Within the approved 45–50-minute successful-run target, the current pacing dir
 - one to two miniboss rewards depending on later routing decisions,
 - one to two Relic opportunities,
 - several economy, recovery, capacity, Mist, and Scroll routes,
-- multiple Shrine decisions governed by Corruption pacing.
+- multiple optional Shrine decisions governed by Corruption pacing and route availability.
 
 Regional direction:
 
 - **Area 1:** first meaningful Techniques and one major boss reward.
-- **Area 2:** complete the active loadout and deepen synergy.
-- **Area 3:** refine, replace, use reserve, and finalize the build.
+- **Area 2:** commonly complete the active Technique loadout and deepen synergy.
+- **Area 3:** refine, replace, use reserve, and finalize the build while deciding whether further Shrine investment is worth the opportunity cost.
 
 These are pacing targets, not locked room counts or probabilities.
+
+## Expected build outcomes
+
+The reward structure should support:
+
+- Tier 0-I with an excellent refined Technique build,
+- Tier II with a solid Technique build as a common hybrid,
+- Tier III with fewer or less-developed Technique upgrades,
+- and occasional Tier IV high-roll runs.
+
+A player who assembles an ideal Technique build early may shift later choices toward Shrines. That is a valid reward for a lucky and coherent run, not a failure of the system. The ideal build should remain difficult to obtain consistently before late game.
 
 ## Guardrails
 
@@ -269,9 +292,10 @@ These are pacing targets, not locked room counts or probabilities.
 - Rare rewards must not invalidate sword combat or boss mechanics.
 - Persistent currency must not overwhelm current-run strength.
 - Heart Binding progress cannot be replaced by ordinary currency.
+- Mandatory encounters must not assume a particular Aspect Tier, Blood Art, or ideal Technique loadout.
 
 ## Current production dependency
 
-The remaining reward-level production question is the launch run-build content catalog: approximate Technique, refinement, Prosthetic Technique, Relic, consumable, and approved Blood-interaction counts, plus their reusable-versus-unique production treatment.
+The remaining reward-level production question is the launch run-build content catalog: approximate Technique, refinement, Prosthetic Technique, Relic, consumable, and approved Blood-interaction counts; final Technique rarity and refinement standards; post-fill offer behavior; and reusable-versus-unique production treatment.
 
 Exact effects, prices, Blood rates, activation amounts, probabilities, route generation, temporary values, and reroll formulas remain later design and playtest work.
