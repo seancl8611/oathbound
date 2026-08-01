@@ -4,7 +4,7 @@ title: Wolf Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-29
+last_reviewed: 2026-08-01
 topics:
   - blood-aspects
   - wolf
@@ -93,7 +93,7 @@ A fast advancing re-entry cut after the universal neutral dash.
 - strong forward movement along the selected direction,
 - and a close finishing position or constrained pass-through on a successful hit.
 
-When Hunting Slash strikes an eligible ordinary enemy, Akio may carry through that enemy along the original attack direction only when safe and valid space exists on the far side. Against bosses, elites, heavy enemies, walls, hazards, pits, blocked geometry, or invalid destinations, Akio stops on the near side.
+When Hunting Slash strikes an eligible ordinary enemy, Akio may carry through that enemy along the original attack direction only when safe and valid space exists on the far side. Against bosses, elites, heavy enemies, walls, blocked geometry, or invalid destinations, Akio stops on the near side.
 
 The universal dash itself is unchanged. Hunting Slash is an optional offensive commitment after it and never teleports, tracks, or automatically places Akio behind a target.
 
@@ -142,16 +142,13 @@ Wolf is not the roster's strongest guard.
 - forward overcommitment,
 - dangerous whiff recovery,
 - side and rear pressure,
-- ranged enemies when approach is denied,
-- and hazards that make direct pursuit unsafe.
+- and ranged enemies when approach is denied.
 
 Wolf must not depend on completing its full sequence to produce competitive damage or posture pressure against bosses.
 
 # Fixed Tier progression
 
-Each Wolf Tier has a concrete combat effect and continues the same evolving drawback family: **Predatory Commitment**. Higher Tiers make Wolf's player-directed pursuit more forceful and rewarding while preserving the positional danger of a badly aimed commitment.
-
-The benefits should clearly outweigh the drawbacks. Embrace should feel like a desirable escalation rather than a questionable trade.
+Each Wolf Tier provides a concrete net-positive combat benefit while preserving Wolf's inherent pursuit tradeoffs. Stronger movement and pursuit remain player-directed, and poor aim or timing can still leave Akio in an unsafe position. This limitation comes from how Wolf's actions operate rather than from a separate named drawback or added penalty attribute.
 
 ## Tier I — Blood Tempo
 
@@ -168,8 +165,6 @@ When Hunting Slash carries Akio through an eligible ordinary enemy, the immediat
 - Missed attacks receive no benefit.
 - Block, parry, dash, and Prosthetic actions are not accelerated.
 - This is an authored Wolf interaction rather than a universal backstab-damage rule.
-
-### Predatory Commitment I
 
 Raking Fang and Hunting Slash travel slightly farther along the direction chosen by the player. Hunting Slash may therefore carry Akio farther through an eligible ordinary enemy when the hit and destination are valid. Neither attack can turn, home, or correct its path after it begins.
 
@@ -211,12 +206,10 @@ Akio performs a committed forward lunge while a large Blood-formed wolf jaw mani
 - A successful bite restores more health than an ordinary sword hit.
 - It deals strong health and enemy-posture damage.
 - It may pass through eligible ordinary enemies when safe space exists on the far side.
-- It stops against heavy enemies, elites, bosses, walls, hazards, and invalid destinations.
+- It stops against heavy enemies, elites, bosses, walls, and invalid destinations.
 - A miss retains severe recovery.
 
 Blood Fang is Dire Hunt's main new attack and visual centerpiece. The rest of the transformation should reuse Wolf's existing attack library with stronger Blood presentation where practical.
-
-### Predatory Commitment II
 
 Blood Fang and Wolf's existing pursuit attacks carry Akio farther along the selected direction and remain fully committed after release. The transformation is clearly stronger than normal Wolf combat, but careless aim can place Akio in danger.
 
@@ -232,9 +225,7 @@ While charging either attack, Akio forms a Blood jaw around the front of his bod
 
 The player still chooses when and where to release the attack.
 
-Fanged Guard does not protect against attacks from the side or rear, grabs, hazards, or unblockable attacks. It can block only one attack during each charge.
-
-### Predatory Commitment III
+Fanged Guard does not protect against attacks from the side or rear or against unblockable attacks. It can block only one attack during each charge.
 
 Fanged Guard helps Akio complete the charge but does not make the resulting pursuit safe. Predator's Passage and Blood Fang retain their selected direction and severe miss recovery.
 
@@ -254,8 +245,6 @@ The primed Held Attack may be released immediately without waiting through its n
 
 Apex Feast does not automatically release the Held Attack or select its direction.
 
-### Predatory Commitment IV
-
 The primed pursuit retains its full travel and miss recovery. Tier IV gives Wolf a concrete transition from a deathblow into another pursuit, but the player must still aim and release it correctly.
 
 # Progression summary
@@ -268,6 +257,8 @@ The primed pursuit retains its full travel and miss recovery. Tier IV gives Wolf
 The progression is:
 
 > successful entries and hits connect Wolf's offense into a fluid hunt → Dire Hunt guarantees immediate recovery and unlocks Blood Fang → Fanged Guard helps prepare pursuit under pressure → deathblows prime the next hunt
+
+Every Tier remains clearly stronger than the previous one. Wolf's short reach, directional pursuit, and unsafe misses remain part of the weapon kit rather than separate Tier penalties.
 
 # Technique space
 
@@ -286,7 +277,7 @@ The working package establishes requirements for:
 - Fanged Guard charge and block feedback,
 - Apex Feast deathblow eruption and primed-Held state,
 - Blood unavailable, building, ready, activated, active, consumed, and rebuilding HUD states,
-- Shrine Tier summaries and drawback language,
+- Shrine Tier summaries and action-specific behavior changes,
 - and Wolf teaching and mastery-trial coverage.
 
 Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, healing, Blood gain, duration, interruption resistance, collision, and recovery values remain implementation, production, and playtesting work.
