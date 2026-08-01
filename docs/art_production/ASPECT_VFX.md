@@ -4,7 +4,7 @@ title: Blood Aspect VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-01
 topics:
   - blood-aspects
   - wolf
@@ -24,11 +24,11 @@ related:
 
 # Blood Aspect VFX
 
-Blood Aspect effects communicate the selected katana weapon kit. They are information cues first and spectacle second. All three families layer onto Akio's base character presentation and must preserve attack direction, enemy telegraphs, hit geometry, hazards, and the player's final position.
+Blood Aspect effects communicate the selected katana weapon kit. They are information cues first and spectacle second. All three families layer onto Akio's base character presentation and must preserve attack direction, enemy telegraphs, hit geometry, and the player's final position.
 
 Techniques may reuse or lightly extend an Aspect family when they amplify the same combat verb, but the selected Aspect remains the stronger visual identity.
 
-Wolf's current Tier I-IV and Blood Art package is approved as a working draft. Wraith and Ronin escalation remains dependent on their future fixed progression packages.
+Wolf's current Tier I-IV and Blood Art package is approved as a working draft. Wraith is approved through Tier II. Ronin escalation and the remaining Wraith Tiers depend on their future fixed progression packages.
 
 ## Shared presentation rules
 
@@ -39,6 +39,7 @@ Wolf's current Tier I-IV and Blood Art package is approved as a working draft. W
 - Tier escalation should deepen the same visual family rather than replace it with unrelated effects.
 - Wolf, Wraith, and Ronin must not become simple color swaps.
 - Effects use modular overlays and VFX where practical rather than requiring three unrelated complete player sheets.
+- Inherent tradeoffs should remain readable through movement, direction, commitment, recovery, and defensive access rather than through a separate drawback icon or penalty effect.
 
 ## Wolf — pressure and pursuit
 
@@ -99,7 +100,7 @@ Presentation must distinguish:
 - immediate completion of the Held Attack charge,
 - and the remaining player choice to release or hold the attack.
 
-The effect must not imply side, rear, grab, hazard, or unblockable protection.
+The effect must not imply side, rear, or unblockable protection.
 
 ### Tier IV — Apex Feast
 
@@ -126,9 +127,9 @@ The primed-Held cue must disappear when consumed or when the encounter ends. Ape
 
 ### Gameplay purpose
 
-Communicate long connected melee reach, narrow pokes, broad spectral arcs, restrained movement, fixed attack lines, and quick return to neutral.
+Communicate long connected melee reach, narrow pokes, broad spectral arcs, slower and more deliberate ordinary attacks than Wolf, restrained movement, fixed attack lines, and strong payoff from intelligent positioning.
 
-### Approved visual direction
+### Tier 0 visual direction
 
 - elongated pale or spectral Blood edge visibly connected to the katana,
 - clean narrow lines for Veil Cut and Pale Lance,
@@ -137,9 +138,37 @@ Communicate long connected melee reach, narrow pokes, broad spectral arcs, restr
 - restrained body effects so Akio's actual position remains obvious,
 - clear endpoint and dissipation on missed extended attacks.
 
-Wraith should feel precise and light in visual motion without becoming intangible.
+Wraith should feel precise and light in spectral motion without making Akio himself fast, intangible, or highly mobile.
 
-### Boundaries
+### Tier I — Pale Barrage
+
+Pale Barrage requires:
+
+- a clear continuation from the initial Pale Lance,
+- rapid repeated spectral thrusts along the original direction,
+- visible stationary commitment once the barrage begins,
+- clear release and recovery states,
+- no effect suggesting independent target selection, homing, or automatic rotation.
+
+The visual intensity may build across the authored sequence, but it must not imply a separate meter or stored combo reward.
+
+### Tier II — spinning Blood Art
+
+The current working Blood Art requires:
+
+- a clear full-meter activation cue,
+- one continuous fixed sequence of identical spectral rotations,
+- a readable radius around Akio rather than an autonomous field,
+- continuous but slower player-directed movement,
+- obvious body-blocking and final-position readability,
+- clear absence of ordinary block, parry, dash, attack, and Prosthetic access,
+- direct-Health-damage feedback without implying damage immunity,
+- ordinary-enemy hit or guard interruption without gameplay knockback,
+- a clear ending state before ordinary actions resume.
+
+The effect must remain visibly attached to Akio's katana and cannot read as orbiting independent blades.
+
+### Wraith boundaries
 
 - no perfect-dodge identity,
 - no vanish or reappearance states,
@@ -148,7 +177,8 @@ Wraith should feel precise and light in visual motion without becoming intangibl
 - no teleportation or additional invulnerability,
 - no corrective tracking or homing,
 - no independent projectile detached from the katana,
-- no confusion with the Mist Raven prosthetic.
+- no confusion with the Mist Raven prosthetic,
+- no VFX that hides Wraith's stationary or slowed commitments.
 
 ## Ronin — impact and stability
 
@@ -178,17 +208,18 @@ Ronin is the least visually noisy family outside major impact moments.
 
 ## Tier escalation
 
-Every Aspect follows a fixed Tier path from Tier 0 through Tier IV.
+Every Aspect follows a fixed optional Tier path from Tier 0 through Tier IV.
 
-Wolf's working escalation is defined in `WOLF_ASPECT.md`. Production may use it for high-level dependency planning, but final counts still require animation and implementation briefs.
+Wolf's working escalation is defined in `WOLF_ASPECT.md`. Wraith is defined through Tier II in `WRAITH_ASPECT.md`. Production may use these for high-level dependency planning, but final counts still require animation and implementation briefs.
 
-Wraith and Ronin production must not invent unrelated visual mechanics before their Tier packages are approved.
+Wraith Tier III-IV and Ronin production must not invent unrelated visual mechanics before their Tier packages are approved.
 
 Across all three:
 
 - Tier escalation should intensify or extend the existing family,
-- one evolving drawback family should remain readable without covering enemy telegraphs,
-- Embrace should clearly communicate advancement and danger,
+- every Tier should read as a desirable net-positive advancement,
+- inherent limitations remain visible through the upgraded action's movement, direction, commitment, recovery, or defensive access,
+- Embrace should clearly communicate advancement without requiring a separate danger or drawback badge,
 - Resist should stabilize the current state without implying advancement,
 - Stabilize at Tier IV should not look like Tier V,
 - any mutation overlay should be modular and justified by gameplay or narrative presentation.
@@ -206,8 +237,9 @@ A Blood Art must communicate its guaranteed activation payoff and its usable com
 - Neutral Techniques remain compatible with every Aspect family.
 - Technique effects reuse base sword, Aspect, posture, deathblow, and prosthetic language before new VFX are authorized.
 - A Technique cannot create a separate Wolf, Wraith, and Ronin effect set unless its approved rule genuinely requires different geometry or presentation.
-- Technique VFX must not duplicate Blood Tempo, Blood Fang, Fanged Guard, or Apex Feast without explicit approval.
+- Technique VFX must not duplicate Blood Tempo, Blood Fang, Fanged Guard, Apex Feast, Pale Barrage, or the Wraith Blood Art without explicit approval.
 - Aspect identity remains more prominent than any single temporary Technique.
+- Technique rarity and refinements may change framing and effect treatment only when the approved gameplay entry requires it.
 
 ## Delivery requirements
 
@@ -215,7 +247,7 @@ Final production briefs must define:
 
 - required attack trails and impact states,
 - Tier I-IV changes,
-- drawback presentation,
+- action-specific movement, commitment, recovery, and defense-state presentation,
 - Blood buildup and readiness states,
 - Blood Art startup, active, resolve, and recovery states,
 - animation dependencies,
