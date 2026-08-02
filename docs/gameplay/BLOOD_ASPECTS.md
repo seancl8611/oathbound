@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-02
 topics:
   - blood-aspects
   - blood-arts
@@ -96,7 +96,7 @@ Every launch Aspect retains the same functional:
 
 Aspect selection does not create a weaker or stronger neutral dash. No launch Aspect removes block or parry from ordinary combat, changes parry success conditions, becomes immune to posture break during ordinary combat, or receives automatic counters.
 
-A Blood Art may temporarily commit Akio to authored action-specific defense and control rules while it resolves. Wraith's Tier II Blood Art is the current approved example: Akio cannot block or parry during the spin, enemy attacks deal direct Health damage instead of player-posture damage, and enemy attacks cannot interrupt the Art.
+A Blood Art may be an immediate authored action or a temporary state. Duration states should normally deepen the existing weapon kit and shared combat decisions rather than replace the entire kit with an autonomous or locked sequence. Wolf's Dire Hunt and Wraith's Reach both preserve ordinary dash, block, parry, attacks, deathblows, and Prosthetic access while strengthening different Aspect identities.
 
 Modest ordinary defensive differences may use player-posture capacity, block posture efficiency, posture recovery direction, defensive access after attacks, and Parry Counter payoff. These differences must remain subordinate to the shared defense system.
 
@@ -105,7 +105,7 @@ Modest ordinary defensive differences may use player-posture capacity, block pos
 | Aspect | Basic sequence | Held identity | Primary strength | Inherent tradeoffs |
 |---|---|---|---|---|
 | Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, player-directed pursuit, and nearby target transfer through attack geometry | Short reach, forward commitment, unsafe misses, and dangerous final positioning after poorly aimed pursuit |
-| Wraith | Veil Cut → Passing Arc | Pale Lance — reach and focused rapid thrusts after Tier I | Longest melee reach, frontal control, concentrated multi-hit punishment, and an earned movable spinning Blood Art after Tier II | Slower and less versatile than Wolf, restrained movement, fixed attack lines, point-blank pressure, and reduced defensive access during its strongest commitments |
+| Wraith | Veil Cut → Passing Arc | Pale Lance — reach and focused rapid thrusts after Tier I | Longest melee reach, frontal control, concentrated multi-hit punishment, and delayed spectral attack echoes during Wraith's Reach | Slower and less versatile than Wolf, restrained movement, fixed attack lines, point-blank pressure, and vulnerability outside its focused front |
 | Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 Supporting actions:
@@ -116,7 +116,7 @@ Supporting actions:
 | Wraith | Ghostline Slash | Veil Reversal |
 | Ronin | Breaching Slash | Answering Steel |
 
-The roster deliberately does not include a dedicated teleport, projectile, full-circle crowd-clear, or pure evasion neutral weapon kit. Wraith's Tier II spinning Blood Art is an earned full-meter signature action rather than the identity of its ordinary kit. Mobility, ranged utility, broad crowd control, and defensive specialization otherwise remain shared-system, Technique, and prosthetic territory.
+The roster deliberately does not include a dedicated teleport, projectile, full-circle crowd-clear, or pure evasion neutral weapon kit. Mobility, ranged utility, broad crowd control, and defensive specialization remain shared-system, Technique, and prosthetic territory. Wraith's Reach extends and repeats authored melee geometry without becoming a projectile field, autonomous companion, or replacement combat mode.
 
 ## Aspect and Technique responsibilities
 
@@ -178,7 +178,7 @@ Wolf's current working progression is approved for scoping:
 Wraith's current working progression is approved through Tier II:
 
 - **Tier I — Pale Barrage:** continuing to hold after Pale Lance's initial thrust unleashes a rapid series of lower-impact spectral jabs. The player may release early, while longer use delivers greater combined pressure at the cost of a longer focused commitment.
-- **Tier II — Blood Art, name unresolved:** a full Blood meter activates a fixed sequence of identical spectral spinning hits. Akio may steer slightly slower than ordinary movement, retains ordinary enemy collision and is body-blocked, each hit interrupts ordinary enemies without knockback, and the Art applies repeated Health and posture pressure across a radius of roughly four to five Akio body widths.
+- **Tier II — Wraith's Reach:** a full Blood meter begins a duration state that extends Veil Cut, Passing Arc, and Pale Lance. Each qualifying attack leaves one delayed spectral afterimage strike along its original player-directed line or arc while Akio retains the full ordinary combat kit.
 
 Wraith Tier III-IV and Ronin Tier I-IV remain unresolved.
 
@@ -193,7 +193,7 @@ Approved shared boundaries:
 - Stored Blood persists between rooms until it is spent or the run ends.
 - Blood and Blood Art state reset after death or successful completion.
 - Blood progression must deepen the selected weapon kit without replacing ordinary swordplay or making Techniques secondary.
-- Blood Arts should provide a clear practical payoff on activation rather than depending entirely on ideal follow-up play.
+- Blood Arts should provide a clear practical payoff when activated rather than depending entirely on ideal follow-up play.
 - A Blood Art may be an immediate signature action, a temporary state, or another clearly defined combat expression. Blood Arts are not required to share one form.
 - A run that does not reach Tier II must remain viable without a Blood Art.
 
@@ -216,34 +216,33 @@ Wolf's working Blood direction is approved:
 - Blood cannot be generated during Dire Hunt,
 - and exact capacity, gain values, duration, and anti-farming thresholds remain tuning work.
 
-Wraith's working Blood direction is approved through its Tier II Art:
+Wraith's working Blood direction is approved through Wraith's Reach:
 
-- the Art requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while spinning,
-- activation begins a fixed sequence of identical rotations with no separate finishing slash,
-- Akio may steer continuously while moving slightly slower than ordinary locomotion,
-- Akio retains ordinary collision and cannot pass through enemies; enemies body-block his movement during the Art,
-- Akio cannot dash, block, parry, use ordinary attacks, or use Prosthetics until the sequence ends,
-- every hit briefly interrupts ordinary enemies without knockback, while elites do not receive this forced interrupt,
-- ordinary enemies use their normal automatic guard response after contact and may be posture-broken by the repeated rotations,
-- Akio cannot perform a deathblow until the Art ends, but later rotations may continue damaging a deathblow-ready enemy's Health,
-- Akio's blocking state remains false; connected enemy attacks deal direct Health damage rather than player-posture damage,
-- and Akio has complete resistance to interruption or stagger from enemy attacks without receiving damage reduction.
+- Wraith's Reach requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while active,
+- activation begins a temporary empowered state rather than a locked replacement sequence,
+- Veil Cut, Passing Arc, and Pale Lance gain additional spectral reach,
+- each qualifying attack creates one delayed spectral afterimage along its original player-selected direction and authored geometry,
+- afterimages do not track, home, rotate, or independently select enemies,
+- the initial Pale Lance creates one afterimage while Pale Barrage's additional jabs gain range but do not each create another full echo,
+- Akio retains ordinary locomotion, dash, block, parry, attacks, deathblows, and Prosthetic access,
+- the Art adds no Health restoration, Blood refund, damage reduction, posture clearing, interruption resistance, automatic defense, or special parry reward,
+- afterimages do not generate Blood,
+- and afterimage damage, posture pressure, interruption, guard response, and Technique or healing triggers are weighted separately from the physical strike.
 
 No exception to the shared Blood-meter, full-meter activation, consumption, or active-generation defaults is currently required for Wraith.
 
 Still unresolved at system or Aspect-package level:
 
 - Ronin's Blood Art and how it expresses the shared defaults,
-- Wraith's Blood Art name and later Tier interactions,
 - whether Ronin requires a justified exception to a shared default,
-- final detailed input and HUD presentation,
-- exact Wraith rotation count, duration, spin speed, damage, movement speed, and enemy-response cadence,
+- final detailed Blood input and HUD presentation,
+- exact Wraith's Reach duration, extended ranges, arc widths, echo delay, damage, posture pressure, guard response, and proc weighting,
 - exact duration or cooldown behavior for unresolved Arts,
 - and limited Tier or Technique interactions.
 
 ## Remaining design package
 
-1. Define Wraith's fixed Tier III-IV benefits, final Blood Art name, and later interactions with Pale Barrage or the Art while preserving its inherent mobility, speed, and versatility limits.
+1. Define Wraith's fixed Tier III-IV benefits and any later interactions with Pale Barrage, delayed echoes, Veil Reversal, or Wraith's Reach while preserving its inherent mobility, speed, and versatility limits.
 2. Define Ronin's fixed Tier I-IV benefits, Blood Art, and any justified exception to the shared Blood defaults while preserving its inherent commitment and recovery limits.
 3. Compare all three packages for power, production cost, accessibility, Technique overlap, inherent tradeoffs, and whether Technique-focused, hybrid, and Aspect-focused runs remain viable.
 4. Resolve shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.

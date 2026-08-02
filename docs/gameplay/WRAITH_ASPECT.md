@@ -4,7 +4,7 @@ title: Wraith Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-02
 topics:
   - blood-aspects
   - wraith
@@ -32,9 +32,9 @@ related:
 
 Wraith is an approved member of the three-Aspect launch roster. This document owns Wraith's qualitative Tier 0 weapon kit and its current Tier I-II working progression.
 
-It supersedes the earlier forced-reposition concept. Wraith's spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, and spectral weapon expressions rather than mandatory lateral movement, target correction, or special evasion.
+It supersedes the earlier forced-reposition concept and the earlier Tier II spinning Blood Art. Wraith's spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, and spectral weapon expressions rather than mandatory lateral movement, target correction, special evasion, or a replacement combat mode.
 
-Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Tier III-IV package, Blood Art name, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Tier III-IV package, limited Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -51,7 +51,7 @@ Wraith is defined by:
 - controlled frontal and lane coverage,
 - fixed player-directed attack lines after commitment,
 - rapid spectral blade expressions only within selected committed attacks,
-- an earned movable multi-enemy spinning release after Tier II,
+- a Tier II duration state that extends its existing attacks and leaves delayed spectral afterimage strikes,
 - and weakness when enemies enter inside its preferred range or threaten it outside the currently selected action.
 
 Wraith gives up mobility, speed, and ordinary versatility in exchange for reach, control, and strong payoff from correctly chosen openings. These limitations are part of the weapon kit itself rather than a separate drawback system.
@@ -60,9 +60,9 @@ Wraith does not use corrective tracking, hidden homing, or automatic rotation. T
 
 ## Shared systems
 
-Wraith retains universal locomotion, neutral dash, defense input, parry timing, posture rules, deathblows, Technique inventory, and prosthetic controls during ordinary combat.
+Wraith retains universal locomotion, neutral dash, defense input, parry timing, posture rules, deathblows, Technique inventory, and prosthetic controls during ordinary combat and during Wraith's Reach.
 
-It is not defined by teleportation, additional invulnerability, automatic movement behind targets, forced offsets, or a stronger neutral dash. Its Tier II Blood Art temporarily commits Akio to its own authored control and defense rules while the Art resolves.
+It is not defined by teleportation, additional invulnerability, automatic movement behind targets, forced offsets, or a stronger neutral dash. Wraith's Reach strengthens the existing weapon kit without replacing it or disabling the shared combat language.
 
 ## Tier 0 kit
 
@@ -119,25 +119,25 @@ It does not teleport, move behind the enemy, force an off-axis finish, rotate to
 
 ## Defensive profile
 
-Wraith retains functional blocking and universal parry timing during ordinary combat.
+Wraith retains functional blocking and universal parry timing.
 
 Its defensive success depends on preserving useful spacing, selecting an appropriate attack, and returning to neutral before pressure collapses around it. Wraith has less attack-bound mobility and fewer offensive transitions than Wolf.
 
 Wraith does not require a dramatically weaker guard. Its natural defensive weakness is pressure inside the effective reach of its extended attacks and attacks arriving outside its focused front.
 
-During the Tier II Blood Art, Akio is not blocking and cannot use ordinary defense. Enemy attacks that connect deal direct Health damage rather than player-posture damage. The Art grants complete resistance to interruption from enemy attacks, but it does not prevent their damage.
+Wraith's Reach does not add healing, damage reduction, interruption resistance, automatic defense, posture clearing, or a special parry reward. Dash, block, parry, deathblow, and Prosthetic access remain fully available while the state is active.
 
 ## Combat profile
 
 | Property | Approved direction |
 |---|---|
-| Preferred range | Medium-to-long during ordinary combat; nearby multi-enemy coverage during the Tier II Art |
+| Preferred range | Medium-to-long |
 | Basic sequence | Two attacks |
 | Cadence | Slower and more deliberate than Wolf; selected rapid spectral commitments |
 | Per-hit damage | Moderate |
 | Sustained output | Moderate and lower than Wolf outside committed openings |
-| Enemy posture | Focused extended pressure; repeated multi-target pressure during the Tier II Art |
-| Attack movement | Restrained and player-directed; slowly steerable during the Tier II Art |
+| Enemy posture | Focused extended pressure and delayed echo pressure during Wraith's Reach |
+| Attack movement | Restrained and player-directed |
 | Held identity | Reach and focused multi-hit commitment after Tier I |
 | Main failure state | Poor positioning, enemies collapsing inside preferred range, or committing to the wrong direction or opening |
 
@@ -149,7 +149,7 @@ During the Tier II Blood Art, Akio is not blocking and cannot use ordinary defen
 - controlled ordinary attack commitments,
 - access to ranged enemies without becoming a projectile kit,
 - concentrated multi-hit punishment during larger openings after Tier I,
-- an earned multi-enemy spinning attack after Tier II,
+- delayed spectral repetition of core attacks during Wraith's Reach,
 - and punishment of enemy attacks that fall short.
 
 ## Firm tradeoffs
@@ -157,7 +157,7 @@ During the Tier II Blood Art, Akio is not blocking and cannot use ordinary defen
 - slower attack cadence than Wolf,
 - fewer ordinary attacks and offensive transitions,
 - restrained movement during attacks,
-- point-blank pressure during ordinary combat,
+- point-blank pressure,
 - cramped spaces,
 - attacks from several directions,
 - fixed attack lines after commitment,
@@ -165,16 +165,18 @@ During the Tier II Blood Art, Akio is not blocking and cannot use ordinary defen
 - lower ordinary sustained output than Wolf,
 - meaningful recovery after Pale Lance or other extended misses,
 - becoming stationary while sustaining Pale Barrage,
-- and slower movement with no block, parry, dash, ordinary attack, or Prosthetic access during the Tier II Blood Art.
+- and delayed echoes missing when enemies leave the original authored line or arc.
 
 Wraith must not combine the safest spacing, strongest damage, fastest actions, and easiest recovery. Its player outplay is intelligent positioning, selecting the correct attack and direction, and committing only when the opening supports the chosen action.
 
+Wraith's Reach adds no artificial penalty. It preserves Wraith's ordinary startup, recovery, movement, direction, point-blank, side-pressure, and rear-pressure limitations while making its existing frontal control more powerful. The larger coverage may also contact or threaten additional enemies, so committing without reading the whole group can still create pressure that Wraith is not positioned to answer.
+
 ## Encounter role
 
-- **Mixed groups:** threaten priority enemies at range, use Passing Arc for frontal interference, and use the Tier II Blood Art when nearby enemies cluster.
-- **Crowds:** control a broad front during ordinary combat, then spend a full Blood meter to move through a nearby group with repeated spinning hits.
-- **Ranged pressure:** reach exposed ranged enemies through Veil Cut, Pale Lance, Ghostline Slash, universal dash, and prosthetics; the Blood Art is not a fast room-crossing pursuit tool.
-- **Elites and bosses:** punish from the edge of threat range, use Pale Barrage during sufficiently long openings, and use the Tier II Blood Art only when direct Health exposure is acceptable.
+- **Mixed groups:** threaten priority enemies at range, use Passing Arc for frontal interference, and use delayed echoes to maintain pressure while returning to defense or changing actions.
+- **Crowds:** control a broad front through Passing Arc and Wraith's Reach while remaining vulnerable to enemies entering from outside that front.
+- **Ranged pressure:** reach exposed ranged enemies through Veil Cut, Pale Lance, Ghostline Slash, universal dash, and Prosthetics without becoming a projectile or room-crossing pursuit kit.
+- **Elites and bosses:** punish from the edge of threat range, use Pale Barrage during sufficiently long openings, and place delayed echoes along predicted movement or committed attack lines.
 
 # Fixed Tier progression
 
@@ -203,82 +205,107 @@ The resulting Tier I rhythm is:
 
 > establish useful range and direction → use ordinary Wraith attacks during short exchanges → hold Pale Lance into rapid jabs when a larger opening appears → release before the commitment becomes unsafe
 
-## Tier II — Blood Art (name unresolved)
+## Tier II — Wraith's Reach
 
 Tier II unlocks Wraith's Blood meter and Blood Art.
 
-The Art follows the shared Blood defaults: it requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while its fixed spinning sequence is active. Exact Blood capacity and source weighting remain tuning work.
+Wraith's Reach follows the shared Blood defaults: it requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while its duration state is active. Exact Blood capacity, source weighting, activation timing, and duration remain tuning work.
 
-On activation, Akio extends the spectral katana and performs a fixed sequence of identical spinning rotations around himself. There is no separate finishing slash.
+Activation begins the empowered state after a short readable Blood manifestation. No separate damaging activation attack, forced movement, control lockout, or replacement moveset is currently required.
 
-### Attack and movement
+For the duration of Wraith's Reach:
 
-- Every rotation uses the same damage, enemy-posture pressure, reach, and hit behavior.
-- Each rotation deals moderate individual Health and enemy-posture damage.
-- Keeping an enemy within the attack for several rotations produces high combined damage and posture pressure.
-- The working spin radius extends roughly four to five Akio body widths from his center.
-- The player may continuously steer Akio in any direction throughout the sequence.
-- Akio moves slightly slower than his ordinary locomotion speed.
-- Akio retains ordinary collision and cannot pass through enemies; enemies body-block his movement during the Art.
-- The spin does not home toward enemies or automatically select a movement path.
-- Once activated, the fixed sequence resolves without a manual early cancel.
-- Akio cannot dash, block, parry, perform ordinary attacks, or use Prosthetics until the Art ends.
+- Veil Cut gains additional spectral reach.
+- Passing Arc gains additional spectral reach and wider frontal coverage.
+- Pale Lance gains additional spectral reach.
+- Each qualifying Veil Cut, Passing Arc, or Pale Lance produces one delayed spectral afterimage strike a short beat after the physical hit timing.
+- The afterimage repeats the original action's player-selected direction and authored line or arc.
+- The afterimage does not track, home, rotate toward, or independently select an enemy.
+- The afterimage may hit an enemy that remains in or enters its geometry, and it misses if the enemy leaves that geometry.
+- Akio retains ordinary locomotion, neutral dash, block, parry, Basic Attacks, Held Attack, Dash Attack, Parry Counter, deathblows, and Prosthetic access.
+- Wraith's ordinary startup, recovery, restrained attack movement, commitment, and defensive-access rules remain unchanged.
 
-### Ordinary-enemy response
+### Pale Barrage interaction
 
-- Every connected rotation briefly interrupts or staggers an ordinary enemy without knocking it away.
-- After first contact, an ordinary enemy that can guard uses its normal automatic block response against subsequent rotations while its posture holds.
-- Repeated rotations damage that guard and posture while continuing to create brief hit or block interruption on contact.
-- The Art is intended to easily kill or posture-break ordinary enemies that remain within its radius for most of the sequence.
-- The rotations do not create gameplay knockback, so enemies remain available for later hits unless their ordinary collision or death response moves them.
+The initial Pale Lance creates one delayed Pale Lance afterimage whether the player releases immediately or continues into Pale Barrage.
 
-No special gaps that guarantee ordinary enemies an attack between rotations are currently approved. Exact enemy response cadence remains animation and playtesting work.
+Pale Barrage's additional jabs receive Wraith's Reach's increased reach, but the individual jabs do not each create their own full afterimage strike. This preserves Pale Barrage as one committed multi-hit action and prevents excessive damage, posture pressure, visual noise, Blood generation, or Technique-trigger multiplication.
 
-### Elites and stronger enemies
+### Echo impact and system interactions
 
-- Elites do not receive the Art's forced stagger or interrupt on each hit.
-- Elites and bosses still receive Health damage and enemy-posture pressure and use their normal guard, posture, and reaction rules.
-- Their attacks cannot interrupt or stagger Akio out of the Art, but any attack that connects still deals direct Health damage.
+The delayed afterimage is a secondary Wraith hit rather than a second full copy of every property on the original attack.
 
-### Posture break and deathblow handling
+Working boundaries are:
 
-- If an enemy's posture breaks during the Art, it enters the normal deathblow-ready stagger.
-- Akio cannot execute a deathblow until the spinning sequence has ended.
-- The remaining rotations may continue damaging the staggered enemy's Health and may kill it through ordinary Health depletion.
-- Akio may instead steer toward other enemies and posture-break several enemies during the same Art.
-- Any surviving eligible enemy remains available for a deathblow after the Art ends, subject to the normal deathblow rules.
+- lower Health damage than the corresponding physical strike,
+- meaningful enemy-posture pressure,
+- normal hit or guard response unless an enemy's own rules specify otherwise,
+- no forced repeated stagger against elites or bosses,
+- no Blood generation from the afterimage,
+- and weighted or restricted per-hit Technique and healing interactions so the echo does not automatically duplicate every proc at full value.
 
-### Akio's defensive state
+Exact Health damage, enemy-posture pressure, ordinary-enemy interruption, guard response, Technique weighting, and hit-stop remain implementation and playtesting work.
 
-- Akio's blocking state is false for the full spinning sequence.
-- Enemy attacks that connect do not deal player-posture damage; they deal direct Health damage.
-- Akio has complete resistance to interruption and stagger caused by enemy attacks while the Art is active.
-- This interruption resistance does not reduce or prevent the Health damage of connected attacks.
+### Defense and parry relationship
+
+Wraith's Reach grants no direct Health restoration, Blood refund, damage reduction, posture clearing, interruption resistance, automatic counter, or special parry success condition.
+
+A successful parry remains valuable through the universal defense system and may naturally allow a previously placed afterimage to resolve while Akio defends. Veil Reversal remains available after a successful parry, but Tier II adds no separate parry reward. Any later direct parry, Veil Reversal, or Blood Art interaction must be justified as part of Tier III, Tier IV, or limited Technique design rather than assumed here.
 
 The resulting Tier II rhythm is:
 
-> fill Blood through ordinary combat → position before activation → activate near a group or committed nearby target → steer the slower spinning radius through enemies → accept limited response options and direct Health risk in exchange for uninterrupted multi-hit damage and posture pressure
-
-Exact rotation count, total duration, spin speed, Health damage, posture damage, movement speed, Blood values, and final presentation remain implementation and playtesting work.
+> fill Blood through ordinary combat → activate Wraith's Reach before a valuable exchange → place longer player-directed attacks and delayed echoes through deliberate line and arc selection → continue reading, blocking, parrying, dashing, and repositioning normally → gain greater frontal control without escaping Wraith's existing commitment and spacing limits
 
 ## Technique space
 
 Universal Techniques may:
 
-- **reinforce** reach, line coverage, arc coverage, Pale Lance, Pale Barrage, and multi-hit actions,
+- **reinforce** reach, line coverage, arc coverage, Pale Lance, Pale Barrage, delayed hits, and multi-hit actions,
 - **broaden** close-range handling, pressure, pursuit, faster re-entry, or posture continuity,
-- **compensate** for fixed attack lines, point-blank pressure, crowd collapse, focused commitment, direct Health exposure, or whiff recovery,
-- **hybridize** through parry counters, dash attacks, deathblows, posture, or prosthetics.
+- **compensate** for fixed attack lines, point-blank pressure, crowd collapse, focused commitment, or whiff recovery,
+- **hybridize** through parry counters, dash attacks, deathblows, posture, or Prosthetics.
 
-Wraith does not own every range, movement, dash, avoidance, multi-hit, Held Attack, area attack, interruption-resistance, or damage-amplification Technique.
+Wraith does not own every range, delayed-hit, movement, dash, avoidance, multi-hit, Held Attack, area-attack, or damage-amplification Technique.
 
 A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without requiring the Blood Art.
 
 ## Blood-katana presentation
 
-Wraith's Blood-formed katana should feel elongated, spectral, precise, light in visual motion, and capable of rapidly reproducing focused thrusts and wide spinning cuts without becoming an independent projectile weapon.
+Wraith's Blood-formed katana should feel elongated, spectral, precise, and light in visual motion without becoming an independent projectile weapon.
 
-The blade remains visibly connected to Akio's physical katana. Pale Barrage should read as Akio repeatedly driving or manifesting the spectral edge through deliberate weapon motion. The Tier II Blood Art should read as one continuous, steerable spinning sword sequence rather than autonomous homing blades or a separate magical field.
+The blade remains visibly connected to Akio's physical katana. Pale Barrage should read as Akio repeatedly driving or manifesting the spectral edge through deliberate weapon motion.
+
+During Wraith's Reach:
+
+- the connected Blood blade extends farther during Veil Cut, Passing Arc, and Pale Lance,
+- the physical strike remains the clearest primary action,
+- a restrained translucent afterimage of Akio or the blade lingers for a short beat,
+- that afterimage repeats the original authored strike,
+- enemy telegraphs and Akio's current position remain readable,
+- and the effect must not resemble an autonomous companion, homing blade, projectile field, or screen-filling automatic attack.
+
+## Progression summary
+
+- **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
+- **Tier II — Wraith's Reach:** a full Blood meter begins a duration state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed geometry while all normal combat actions remain available.
+
+The current progression is:
+
+> establish range and choose the correct committed action → gain focused multi-hit punishment through Pale Barrage → extend Wraith's existing sword kit into lingering frontal control without replacing the parry-and-posture combat loop
+
+## Production requirements
+
+The working package establishes requirements for:
+
+- Pale Barrage continuation and release feedback,
+- Wraith's Reach activation, active-state, and ending presentation,
+- extended Veil Cut, Passing Arc, and Pale Lance geometry and VFX,
+- delayed afterimage creation, timing, direction, line and arc reuse, and dissolution,
+- the one-echo Pale Barrage rule,
+- Blood unavailable, building, ready, activated, active, consumed, and rebuilding HUD states,
+- clear duration-state communication without hiding enemy telegraphs,
+- Shrine Tier summaries and action-specific behavior changes,
+- and Wraith teaching and mastery-trial coverage.
 
 ## Remaining Wraith design work
 
@@ -286,10 +313,9 @@ Define:
 
 - the fixed Tier III benefit,
 - the fixed Tier IV benefit after Tier III is approved,
-- the Tier II Blood Art's final name,
-- any later Tier interactions with Pale Barrage or the Blood Art,
-- how later benefits remain powerful while preserving Wraith's inherent mobility, speed, positioning, and versatility limits,
+- any later Tier interaction with Pale Barrage, delayed echoes, Veil Reversal, or Wraith's Reach,
+- how later benefits remain powerful while preserving Wraith's inherent mobility, speed, positioning, direction, and versatility limits,
 - limited direct Technique interactions if approved,
-- final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
+- and final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, jab count, maximum Pale Barrage hold duration, rotation count, Blood Art duration, range, player-directed movement, damage, posture, recovery, aim adjustment, Blood values, proc weighting, enemy-response cadence, and presentation values remain implementation and playtesting work.
+Exact timing, jab count, maximum Pale Barrage hold duration, Wraith's Reach duration, extended ranges and arc widths, echo delay, echo damage, posture pressure, interruption behavior, guard response, recovery, Blood values, proc weighting, and presentation values remain implementation and playtesting work.

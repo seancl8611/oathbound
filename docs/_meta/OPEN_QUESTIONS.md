@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-02
 ---
 
 # Current Design Questions
@@ -36,6 +36,7 @@ The following decisions are settled and should not be reopened as top-level ques
 - The working launch default uses one shared Blood meter, capacity, readiness, activation input, and HUD language. Blood is generally built through meaningful katana Health damage, enemy-posture pressure, successful Parry Counters, posture breaks, and deathblows rather than a flat equal reward per hit.
 - Blood Arts normally require a full meter, activate manually, consume their cost, and do not generate Blood while a duration-based Art is active. These are defaults rather than absolute restrictions; a specific Aspect may depart from them only when its approved design clearly requires the exception.
 - A Blood Art is not required to use one common form. It may be an immediate signature action, a temporary state, or another clearly defined combat expression.
+- Duration-based Blood Arts should normally deepen the existing weapon kit and shared combat decisions rather than replace the entire kit with an autonomous or locked sequence.
 - Techniques remain universal temporary run rewards with four active slots, one reserve slot, and at most one refinement per Technique.
 - Filling four Technique slots does not complete the Technique route. Later rewards remain valuable through refinement, compatible replacement, rarity, reserve management, Prosthetic specialization, build correction, and pivoting.
 - Technique rarity represents unusualness, transformation, specialization, complexity, and reward restriction rather than only larger numbers. The final rarity tiers remain catalog work.
@@ -47,7 +48,10 @@ The following decisions are settled and should not be reopened as top-level ques
 - Wolf's positional overcommitment is an inherent consequence of its pursuit actions rather than a formal drawback family.
 - Wraith is slower and less versatile than Wolf, uses fewer ordinary attacks, has restrained attack movement, and depends more heavily on positioning and deliberate action selection.
 - Wraith's Tier I **Pale Barrage** is approved as a working draft: continuing to hold Pale Lance after its initial thrust performs rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
-- Wraith's Tier II Blood Art form and combat behavior are approved as a working draft: a full meter activates a fixed, steerable sequence of identical spinning spectral hits with no finishing slash; Akio moves slower than ordinary locomotion, ordinary enemies body-block him, ordinary enemies are repeatedly interrupted without knockback, elites resist the forced interrupt, and Akio receives direct Health damage but cannot be interrupted by enemy attacks.
+- Wraith's Tier II **Wraith's Reach** is approved as a working draft: a full meter begins a duration state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed geometry.
+- During Wraith's Reach, Akio retains ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetic access. The Art adds no healing, Blood refund, damage reduction, posture clearing, interruption resistance, automatic defense, or special parry reward.
+- Pale Barrage's initial Pale Lance creates one delayed afterimage while its additional jabs gain the extended reach without each creating another full echo.
+- Wraith's Reach afterimages do not track, home, rotate, independently select enemies, or generate Blood. Their damage, posture pressure, guard response, interruption, and Technique or healing interactions are separately weighted from the physical strike.
 
 Wolf's working progression is:
 
@@ -59,7 +63,7 @@ Wolf's working progression is:
 Wraith's working progression is:
 
 - **Tier I — Pale Barrage**
-- **Tier II — spinning Blood Art**, final name unresolved
+- **Tier II — Wraith's Reach**
 
 Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package. Wraith Tier I-II may likewise be revised after the rest of the roster is drafted or after playable testing.
 
@@ -90,11 +94,10 @@ Immediate order:
 
 1. Define Wraith's Tier III headline benefit.
 2. Define Wraith's Tier IV headline benefit after Tier III is approved.
-3. Finalize Wraith's Blood Art name and any later-Tier interaction after the Tier path is coherent.
-4. Define Ronin Tier I.
-5. Define Ronin Tier II and its Blood Art after Tier I is approved.
-6. Define Ronin Tiers III and IV one at a time.
-7. Compare the three complete working packages.
+3. Define Ronin Tier I.
+4. Define Ronin Tier II and its Blood Art after Tier I is approved.
+5. Define Ronin Tiers III and IV one at a time.
+6. Compare the three complete working packages.
 
 For each remaining Tier, resolve:
 
@@ -106,7 +109,7 @@ For each remaining Tier, resolve:
 - how it avoids duplicating ordinary Technique space,
 - and the required HUD, input, animation, VFX, audio, Shrine, trial, and progression states.
 
-For Wraith specifically, later Tiers may grant stronger benefits because the kit gives up mobility, speed, and ordinary versatility. They should reward intelligent positioning and action selection without adding artificial penalties.
+For Wraith specifically, later Tiers may grant stronger benefits because the kit gives up mobility, speed, and ordinary versatility. They should reward intelligent positioning and action selection without adding artificial penalties. Potential interaction space now includes Pale Barrage, delayed afterimages, Veil Reversal, and Wraith's Reach, but Tier III does not need to modify every part of the kit.
 
 For Ronin, preserve slow startup, heavy commitment, minimal attack movement, and slow posture recovery while allowing large deliberate payoffs.
 
@@ -196,7 +199,7 @@ Keep the following in their owning gameplay, encounter, economy, UI, or producti
 - exact neutral movement and dash values within the approved universal contract,
 - exact Corruption gain, thresholds, Shrine frequency, route distribution, and support values,
 - exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown, and anti-farming values within the approved shared defaults,
-- Wraith Blood Art rotation count, exact duration, exact spin speed, exact movement speed, exact radius, enemy-response cadence, and numerical damage or posture values within the approved Tier II behavior,
+- Wraith's Reach duration, activation timing, extended attack ranges, Passing Arc width, echo delay, echo damage, echo posture pressure, ordinary-enemy interruption, guard response, hit-stop, and Technique or healing proc weighting within the approved Tier II behavior,
 - Spirit costs and prosthetic cooldowns,
 - immunity tables and status values,
 - room counts, route topology, branch frequency, and miniboss placement,

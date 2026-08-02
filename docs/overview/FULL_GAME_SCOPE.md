@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-02
 topics:
   - full-scope
   - asset-counts
@@ -112,21 +112,30 @@ This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial
 Wraith is approved through Tier II:
 
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
-- **Tier II — Blood Art, final name unresolved:** a full meter activates a fixed sequence of identical steerable spinning hits; Akio moves slower than ordinary locomotion, is body-blocked by enemies, cannot use ordinary defensive or offensive actions, receives direct Health damage, and cannot be interrupted by enemy attacks.
+- **Tier II — Wraith's Reach:** a full Blood meter begins a temporary state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed line or arc.
 
-Wraith's limits come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, and reduced response options during major commitments. Later Tiers may grant strong benefits while preserving those inherent limitations.
+During Wraith's Reach:
+
+- Akio retains ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetic access,
+- the Art does not add healing, Blood refund, damage reduction, posture clearing, interruption resistance, automatic defense, or a special parry reward,
+- delayed afterimages do not track, home, rotate, independently select targets, or generate Blood,
+- Pale Barrage receives the increased reach but only its initial Pale Lance creates one delayed afterimage,
+- and afterimage damage, posture pressure, interruption, guard response, and Technique or healing interactions are weighted separately from the physical strike.
+
+Wraith's limits continue to come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, point-blank pressure, side and rear threats, and recovery after committed attacks. Wraith's Reach strengthens those existing actions without creating a replacement combat mode or an added artificial penalty.
 
 Still open at production scope are:
 
 - Wraith Tier III, followed by Tier IV after Tier III is approved,
 - Ronin's Tier I-IV package designed one Tier at a time,
-- Wraith's final Blood Art name and Ronin's Blood Art,
+- Ronin's Blood Art,
+- later Wraith interactions with Pale Barrage, delayed echoes, Veil Reversal, or Wraith's Reach,
 - cross-roster power, accessibility, inherent tradeoffs, overlap, and production comparison,
 - detailed Technique affinity and direct-exception rules,
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
 
-Exact frame data, hitboxes, combat values, resource values, and cancel windows remain implementation and playtesting work.
+Exact frame data, hitboxes, combat values, resource values, echo timing and behavior, and cancel windows remain implementation and playtesting work.
 
 Techniques remain the horizontal customization layer and an optional major run-investment route. Most Techniques are independently useful, use universal action tags, may receive at most one slotless refinement, and remain valuable after the loadout is full through refinement, replacement, rarity, reserve management, or specialization.
 
