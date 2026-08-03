@@ -109,10 +109,11 @@ This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial
 
 ## Wraith package at current scope
 
-Wraith is approved through Tier II:
+Wraith is approved through Tier III:
 
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
 - **Tier II — Wraith's Reach:** a full Blood meter begins a temporary state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed line or arc.
+- **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry against an eligible incoming attack from any direction without cancelling the charge, interrupting Pale Barrage, changing the attack direction, or adding fallback protection when mistimed.
 
 During Wraith's Reach:
 
@@ -122,20 +123,24 @@ During Wraith's Reach:
 - Pale Barrage receives the increased reach but only its initial Pale Lance creates one delayed afterimage,
 - and afterimage damage, posture pressure, interruption, guard response, and Technique or healing interactions are weighted separately from the physical strike.
 
-Wraith's limits continue to come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, point-blank pressure, side and rear threats, and recovery after committed attacks. Wraith's Reach strengthens those existing actions without creating a replacement combat mode or an added artificial penalty.
+Veiled Guard follows the ordinary parry timing, eligibility, enemy-posture pressure, deflection response, and posture-break rules. The spectral manifestation may intercept an eligible attack from any direction without turning Akio or redirecting Pale Lance. One successful Veiled Guard parry is available for the entire Pale Lance use, including continuation into Pale Barrage; entering the barrage does not refresh it.
+
+Veiled Guard does not add an automatic block, damage reduction, healing, Blood generation or refund, easier parry timing, bonus damage, automatic Veil Reversal, or another passive. A missed timing or later attack after the single use is spent affects Akio and the committed action through the ordinary combat rules.
+
+Wraith's limits continue to come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, point-blank pressure, side and rear threats, and recovery after committed attacks. Wraith's Reach strengthens those existing actions without creating a replacement combat mode, while Veiled Guard preserves one skilled defensive answer without making Pale Lance or Pale Barrage generally safe.
 
 Still open at production scope are:
 
-- Wraith Tier III, followed by Tier IV after Tier III is approved,
+- Wraith Tier IV,
 - Ronin's Tier I-IV package designed one Tier at a time,
 - Ronin's Blood Art,
-- later Wraith interactions with Pale Barrage, delayed echoes, Veil Reversal, or Wraith's Reach,
+- any final Wraith Tier IV interaction with Pale Barrage, delayed echoes, Veil Reversal, Wraith's Reach, or Veiled Guard,
 - cross-roster power, accessibility, inherent tradeoffs, overlap, and production comparison,
 - detailed Technique affinity and direct-exception rules,
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
 
-Exact frame data, hitboxes, combat values, resource values, echo timing and behavior, and cancel windows remain implementation and playtesting work.
+Exact frame data, hitboxes, combat values, resource values, echo timing and behavior, Veiled Guard input buffering and manifestation timing, and cancel windows remain implementation and playtesting work.
 
 Techniques remain the horizontal customization layer and an optional major run-investment route. Most Techniques are independently useful, use universal action tags, may receive at most one slotless refinement, and remain valuable after the loadout is full through refinement, replacement, rarity, reserve management, or specialization.
 
@@ -302,7 +307,7 @@ The exact Heart-route access control, repeat-clear rewards, records, cosmetics, 
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. Wraith Tier III, then Wraith Tier IV and Ronin's Tier package one Tier at a time, followed by cross-roster comparison,
+1. Wraith Tier IV, then Ronin's Tier package one Tier at a time, followed by cross-roster comparison,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
