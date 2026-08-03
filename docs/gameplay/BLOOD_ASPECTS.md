@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-02
+last_reviewed: 2026-08-03
 topics:
   - blood-aspects
   - blood-arts
@@ -41,7 +41,7 @@ The approved launch roster is:
 - **Wraith** — extended spectral reach and frontal control,
 - **Ronin** — slow heavy impact and defensive stability.
 
-These three identities are the complete current launch space. A fourth or fifth Aspect is not part of current paper design, production, animation, VFX, UI, trial, catalog, or milestone scope. Expansion requires later playable evidence of a missing identity that cannot be covered by the three kits, universal combat, Techniques, or prosthetics.
+These three identities are the complete current launch space. A fourth or fifth Aspect is not part of current paper design, production, animation, VFX, UI, trial, catalog, or milestone scope. Expansion requires later playable evidence of a missing identity that cannot be covered by the three kits, universal combat, Techniques, or Prosthetics.
 
 ## Governing rule
 
@@ -57,7 +57,7 @@ Each kit may differ through:
 - Parry Counter,
 - reach and hit geometry,
 - player-directed attack movement,
-- health damage and enemy-posture pressure,
+- Health damage and enemy-posture pressure,
 - stagger,
 - commitment and recovery,
 - target handling through authored arcs and collision,
@@ -66,7 +66,7 @@ Each kit may differ through:
 
 An Aspect's weaknesses and limits should emerge from these weapon properties. Higher Tiers may strengthen an action while preserving or emphasizing its existing commitment, positioning requirement, speed, reach, or defensive access. Tiers do not require separate named drawback families or unrelated penalty attributes.
 
-No Aspect uses corrective tracking, hidden homing, or post-input target correction. Attacks follow the player's chosen direction and their authored geometry and travel.
+No Aspect uses corrective tracking, hidden homing, or post-input target correction. Attacks follow the player's chosen direction and their authored geometry and travel. A sustained authored attack may allow limited direct player steering only when explicitly approved; that steering must not snap toward or automatically follow enemies.
 
 ## Shared action slots
 
@@ -90,7 +90,7 @@ Every launch Aspect retains the same functional:
 - defense input and parry timing,
 - enemy telegraphs and response rules,
 - posture-break, stagger, and deathblow language,
-- Spirit and prosthetic controls,
+- Spirit and Prosthetic controls,
 - Technique inventory and refinement rules,
 - and combat interface language.
 
@@ -105,7 +105,7 @@ Modest ordinary defensive differences may use player-posture capacity, block pos
 | Aspect | Basic sequence | Held identity | Primary strength | Inherent tradeoffs |
 |---|---|---|---|---|
 | Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, player-directed pursuit, and nearby target transfer through attack geometry | Short reach, forward commitment, unsafe misses, and dangerous final positioning after poorly aimed pursuit |
-| Wraith | Veil Cut → Passing Arc | Pale Lance — reach, focused rapid thrusts after Tier I, and one preserved spectral parry after Tier III | Longest melee reach, frontal control, concentrated multi-hit punishment, delayed spectral attack echoes during Wraith's Reach, and skilled defense during its defining Held commitment | Slower and less versatile than Wolf, restrained movement, fixed attack lines, point-blank pressure, vulnerability outside its focused front, and no protection after Veiled Guard is spent or mistimed |
+| Wraith | Veil Cut → Passing Arc | Pale Lance — reach, focused rapid thrusts after Tier I, one preserved spectral parry after Tier III, and a steerable three-lane barrage after Tier IV | Longest melee reach, frontal control, concentrated multi-hit punishment, delayed spectral attack echoes during Wraith's Reach, skilled defense during its defining Held commitment, and broad non-stacking lane control | Slower and less versatile than Wolf, restrained movement, fixed attack lines, point-blank pressure, vulnerability outside its focused front, stationary barrage commitment, and no protection after Veiled Guard is spent or mistimed |
 | Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 Supporting actions:
@@ -116,7 +116,9 @@ Supporting actions:
 | Wraith | Ghostline Slash | Veil Reversal |
 | Ronin | Breaching Slash | Answering Steel |
 
-The roster deliberately does not include a dedicated teleport, projectile, full-circle crowd-clear, or pure evasion neutral weapon kit. Mobility, ranged utility, broad crowd control, and defensive specialization remain shared-system, Technique, and prosthetic territory. Wraith's Reach extends and repeats authored melee geometry without becoming a projectile field, autonomous companion, or replacement combat mode. Veiled Guard preserves one normal parry during Pale Lance or Pale Barrage rather than granting passive protection or a separate defensive system.
+The roster deliberately does not include a dedicated teleport, projectile, full-circle crowd-clear, or pure evasion neutral weapon kit. Mobility, ranged utility, broad crowd control, and defensive specialization remain shared-system, Technique, and Prosthetic territory.
+
+Wraith's Reach extends and repeats authored melee geometry without becoming a projectile field, autonomous companion, or replacement combat mode. Veiled Guard preserves one normal parry during Pale Lance or Pale Barrage rather than granting passive protection. Pale Procession creates two reduced-power adjacent shade streams and limited direct steering, but streams cannot stack on one enemy and the shades do not select targets independently.
 
 ## Aspect and Technique responsibilities
 
@@ -173,15 +175,16 @@ Wolf's current working progression is approved for scoping:
 - **Tier I — Blood Tempo:** successful Basic Attacks accelerate the next Basic input; successful Held, Dash Attack, and Parry Counter hits may flow into Rending Cross; Hunting Slash can cross eligible ordinary enemies and empower the immediate rear Rending Cross.
 - **Tier II — Dire Hunt:** unlocks Blood, immediate activation recovery, an empowered transformation, and Blood Fang.
 - **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack without cancelling the charge.
-- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited Health, and fully charge the next Held Attack.
 
-Wraith's current working progression is approved through Tier III:
+Wraith's current working progression is approved through Tier IV:
 
 - **Tier I — Pale Barrage:** continuing to hold after Pale Lance's initial thrust unleashes a rapid series of lower-impact spectral jabs. The player may release early, while longer use delivers greater combined pressure at the cost of a longer focused commitment.
 - **Tier II — Wraith's Reach:** a full Blood meter begins a duration state that extends Veil Cut, Passing Arc, and Pale Lance. Each qualifying attack leaves one delayed spectral afterimage strike along its original player-directed line or arc while Akio retains the full ordinary combat kit.
 - **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry against an eligible incoming attack from any direction without cancelling the charge, interrupting Pale Barrage, changing its direction, or adding fallback protection when mistimed.
+- **Tier IV — Pale Procession:** Pale Barrage creates two reduced-power adjacent shade streams and permits slow player-directed steering within a limited frontal arc. An enemy can receive only one stream's hit per barrage beat, with Akio's central stream taking priority, so the formation cannot multiply single-target damage.
 
-Wraith Tier IV and Ronin Tier I-IV remain unresolved.
+Ronin Tier I-IV remains unresolved.
 
 ## Blood contract
 
@@ -232,6 +235,8 @@ Wraith's working Blood direction is approved through Wraith's Reach:
 
 Veiled Guard does not alter the shared Blood defaults. It remains available during Wraith's Reach but does not extend the Art, refund Blood, create another afterimage, or increase the one-parry-per-Pale-Lance limit.
 
+Pale Procession also does not alter the shared Blood defaults. During Wraith's Reach, all three barrage lanes receive the approved extended reach, but only the initial Pale Lance creates one delayed afterimage; shade jabs create no echoes or Blood and remain subject to the non-stacking rule.
+
 No exception to the shared Blood-meter, full-meter activation, consumption, or active-generation defaults is currently required for Wraith.
 
 Still unresolved at system or Aspect-package level:
@@ -241,18 +246,18 @@ Still unresolved at system or Aspect-package level:
 - final detailed Blood input and HUD presentation,
 - exact Wraith's Reach duration, extended ranges, arc widths, echo delay, damage, posture pressure, guard response, and proc weighting,
 - exact Veiled Guard concurrent input handling, buffering, visual timing, and feedback,
+- exact Pale Procession shade values, lane geometry, steering speed, steering arc, hit-priority resolution, and presentation,
 - exact duration or cooldown behavior for unresolved Arts,
 - and limited Tier or Technique interactions.
 
 ## Remaining design package
 
-1. Define Wraith's fixed Tier IV benefit and any final interaction with Pale Barrage, delayed echoes, Veil Reversal, Wraith's Reach, or Veiled Guard while preserving its inherent mobility, speed, and versatility limits.
-2. Define Ronin's fixed Tier I-IV benefits, Blood Art, and any justified exception to the shared Blood defaults while preserving its inherent commitment and recovery limits.
-3. Compare all three packages for power, production cost, accessibility, Technique overlap, inherent tradeoffs, and whether Technique-focused, hybrid, and Aspect-focused runs remain viable.
-4. Resolve shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.
-5. Finalize required animation, VFX, audio, HUD, Shrine, selection, trial, and persistent-progression states.
+1. Define Ronin's fixed Tier I-IV benefits, Blood Art, and any justified exception to the shared Blood defaults while preserving its inherent commitment and recovery limits.
+2. Compare all three packages for power, production cost, accessibility, Technique overlap, inherent tradeoffs, and whether Technique-focused, hybrid, and Aspect-focused runs remain viable.
+3. Resolve shared affinity and limited direct Aspect-, Tier-, or Blood-Technique exceptions.
+4. Finalize required animation, VFX, audio, HUD, Shrine, selection, trial, and persistent-progression states.
 
-Wolf's package remains open to later revision after cross-roster comparison or playable testing; it is not an active blank design question. Wraith's Tier I-III package may likewise be adjusted after Tier IV, the Ronin package, cross-roster comparison, or playable testing.
+Wolf and Wraith now have complete working Tier I-IV packages. Both remain open to later revision after Ronin is drafted, the cross-roster comparison is performed, or playable testing reveals a problem; neither is an active blank design question.
 
 Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, and numerical resource values remain implementation and playtesting work in the owning files.
 

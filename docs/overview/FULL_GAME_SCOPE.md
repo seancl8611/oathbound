@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-02
+last_reviewed: 2026-08-03
 topics:
   - full-scope
   - asset-counts
@@ -57,7 +57,7 @@ This document defines Oathbound's current production-level shape. It does not lo
 
 Akio begins with a complete introductory katana kit: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash.
 
-Core combat includes parry, player and enemy posture, stagger, deathblow, block, dash, and prosthetic support.
+Core combat includes parry, player and enemy posture, stagger, deathblow, block, dash, and Prosthetic support.
 
 After Returning Blood awakens, launch scope includes:
 
@@ -74,10 +74,10 @@ After Returning Blood awakens, launch scope includes:
 - Blood as a run-only combat resource unavailable before Tier II,
 - four empty active Technique slots and one empty reserve slot,
 - continued Technique development after the slots are filled through replacement, rarity, one refinement per Technique, and reserve decisions,
-- one equipped prosthetic,
+- one equipped Prosthetic,
 - and one run-scoped Relic slot.
 
-The launch roster is approved. The game does not currently require a fourth mobility, evasion, projectile, or crowd-control Aspect; those combat needs remain supported by universal systems, Techniques, prosthetics, and encounter design.
+The launch roster is approved. The game does not currently require a fourth mobility, evasion, projectile, or crowd-control Aspect; those combat needs remain supported by universal systems, Techniques, Prosthetics, and encounter design.
 
 A fourth or fifth Aspect is outside current production scope. Reconsider expansion only after playable testing demonstrates a missing identity that cannot be covered by the approved roster and supporting systems.
 
@@ -99,48 +99,61 @@ Mandatory encounters must not assume a particular Aspect Tier or Blood Art. Choo
 Wolf's fixed Tier package is approved as a working draft:
 
 - **Tier I — Blood Tempo:** valid Basic Attack contact opens the next Basic Attack input earlier.
-- **Tier II — Dire Hunt:** a full Blood meter activates immediate limited healing, player-posture clearing, a nearby ordinary-enemy interrupt, and a temporary transformation with lifesteal, greater health and posture damage, light-attack interruption resistance, and Blood Fang.
+- **Tier II — Dire Hunt:** a full Blood meter activates immediate limited healing, player-posture clearing, a nearby ordinary-enemy interrupt, and a temporary transformation with lifesteal, greater Health and posture damage, light-attack interruption resistance, and Blood Fang.
 - **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack through normal posture rules without cancelling the charge.
-- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited Health, and fully charge the next Held Attack.
 
 Wolf's pursuit actions remain player-directed and retain meaningful miss recovery and positional overcommitment. These are inherent weapon-kit tradeoffs, not a separate named drawback family or added Tier penalty. Every Tier remains clearly net-positive.
 
-This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial dependencies without locking final values or counts. It may be revised after Wraith and Ronin are designed or after playable testing.
+This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial dependencies without locking final values or counts. It may be revised after Ronin is designed, during cross-roster comparison, or after playable testing.
 
 ## Wraith package at current scope
 
-Wraith is approved through Tier III:
+Wraith's fixed Tier package is approved as a working draft:
 
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
 - **Tier II — Wraith's Reach:** a full Blood meter begins a temporary state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed line or arc.
 - **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry against an eligible incoming attack from any direction without cancelling the charge, interrupting Pale Barrage, changing the attack direction, or adding fallback protection when mistimed.
+- **Tier IV — Pale Procession:** while channeling Pale Barrage, two reduced-power spectral shades form adjacent barrage lanes and the player may slowly rotate the full formation within a limited frontal arc. An enemy may receive only one stream's hit per barrage beat, with Akio's central stream taking priority.
 
 During Wraith's Reach:
 
 - Akio retains ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetic access,
 - the Art does not add healing, Blood refund, damage reduction, posture clearing, interruption resistance, automatic defense, or a special parry reward,
 - delayed afterimages do not track, home, rotate, independently select targets, or generate Blood,
-- Pale Barrage receives the increased reach but only its initial Pale Lance creates one delayed afterimage,
+- Pale Barrage receives increased reach but only its initial Pale Lance creates one delayed afterimage,
 - and afterimage damage, posture pressure, interruption, guard response, and Technique or healing interactions are weighted separately from the physical strike.
 
-Veiled Guard follows the ordinary parry timing, eligibility, enemy-posture pressure, deflection response, and posture-break rules. The spectral manifestation may intercept an eligible attack from any direction without turning Akio or redirecting Pale Lance. One successful Veiled Guard parry is available for the entire Pale Lance use, including continuation into Pale Barrage; entering the barrage does not refresh it.
+Veiled Guard follows ordinary parry timing, eligibility, enemy-posture pressure, deflection response, and posture-break rules. The spectral manifestation may intercept an eligible attack from any direction without turning Akio or redirecting Pale Lance. One successful Veiled Guard parry is available for the entire Pale Lance use, including continuation into Pale Barrage; entering the barrage does not refresh it.
 
-Veiled Guard does not add an automatic block, damage reduction, healing, Blood generation or refund, easier parry timing, bonus damage, automatic Veil Reversal, or another passive. A missed timing or later attack after the single use is spent affects Akio and the committed action through the ordinary combat rules.
+Pale Procession follows these production-level boundaries:
 
-Wraith's limits continue to come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, point-blank pressure, side and rear threats, and recovery after committed attacks. Wraith's Reach strengthens those existing actions without creating a replacement combat mode, while Veiled Guard preserves one skilled defensive answer without making Pale Lance or Pale Barrage generally safe.
+- Akio remains stationary while channeling,
+- two shades maintain stable left and right offsets and reduced-power adjacent lines,
+- the formation rotates only through direct player input and cannot track or automatically follow an enemy,
+- shade streams do not stack Health or posture damage with each other or with Akio on one enemy,
+- central-stream contact takes priority when geometry overlaps,
+- shades stop when the barrage ends or Akio is interrupted,
+- shade hits generate no Blood and create no Wraith's Reach afterimages,
+- Veiled Guard remains limited to one use per Pale Lance,
+- and the Tier adds no lingering attacks, detonation system, automatic targeting, healing, Blood refund, extra defense, or unrelated passive.
+
+Pale Procession's boss value is reliability rather than extra damage: limited steering may preserve Akio's existing central stream against modest movement during a valid opening. Short or mobile exchanges should continue to favor Veil Cut, Passing Arc, normal defense, movement, and other ordinary actions.
+
+Wraith's limits continue to come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, point-blank pressure, side and rear threats, stationary barrage commitment, and recovery after committed attacks. Its later Tiers deepen reach and frontal control without creating a replacement combat mode or removing those limits.
+
+Wolf and Wraith now have complete qualitative Tier I-IV working packages. They remain open to cross-roster revision and playable testing rather than further blank Tier design.
 
 Still open at production scope are:
 
-- Wraith Tier IV,
 - Ronin's Tier I-IV package designed one Tier at a time,
 - Ronin's Blood Art,
-- any final Wraith Tier IV interaction with Pale Barrage, delayed echoes, Veil Reversal, Wraith's Reach, or Veiled Guard,
 - cross-roster power, accessibility, inherent tradeoffs, overlap, and production comparison,
 - detailed Technique affinity and direct-exception rules,
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
 
-Exact frame data, hitboxes, combat values, resource values, echo timing and behavior, Veiled Guard input buffering and manifestation timing, and cancel windows remain implementation and playtesting work.
+Exact frame data, hitboxes, combat values, resource values, echo timing and behavior, Veiled Guard input buffering and manifestation timing, Pale Procession lane geometry and steering, and cancel windows remain implementation and playtesting work.
 
 Techniques remain the horizontal customization layer and an optional major run-investment route. Most Techniques are independently useful, use universal action tags, may receive at most one slotless refinement, and remain valuable after the loadout is full through refinement, replacement, rarity, reserve management, or specialization.
 
@@ -230,7 +243,7 @@ Both twins begin active. The first defeated transfers part of the shared bond to
 
 Yomori represents long-term predation, spirit persistence, and ecological damage caused by corrupted inhabitants and beasts. Beast Blood does not spread through soil, roots, water, prey, or vegetation.
 
-Exact transition health, posture, timing, and difficulty behavior remain later encounter work.
+Exact transition Health, posture, timing, and difficulty behavior remain later encounter work.
 
 ## Area 3 — Kagutsuchi Court / False Ascendancy
 
@@ -307,7 +320,7 @@ The exact Heart-route access control, repeat-clear rewards, records, cosmetics, 
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. Wraith Tier IV, then Ronin's Tier package one Tier at a time, followed by cross-roster comparison,
+1. Ronin's Tier package one Tier at a time, beginning with Tier I, followed by cross-roster comparison,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
