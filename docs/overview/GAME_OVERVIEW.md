@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-03
 topics:
   - project-identity
   - combat
@@ -74,7 +74,7 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 - Introductory first attempt using a complete base katana kit without active Blood powers
 - First death awakens Returning Blood and reconstructs Akio at the Strand
 - Base katana actions: Quick Slash, Cross Cut, Heavy Cleave, Hold Thrust, Counter Cut, and Dash Slash
-- Shared combat language: parry, posture, stagger, deathblow, block, dash, and prosthetic support
+- Shared combat language: parry, posture, stagger, deathblow, block, dash, and Prosthetic support
 - One selected Blood Aspect creates the immediate Tier 0 run identity
 - Approved launch roster: Wolf, Wraith, and Ronin
 - One physical katana expressed through Aspect-specific Blood weapon kits
@@ -84,7 +84,7 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 - Blood as a run-only combat resource unavailable before Tier II
 - Four active temporary Techniques, one reserve, and at most one refinement per Technique
 - Technique development continuing after four slots are filled through refinement, replacement, rarity, and reserve decisions
-- One equipped prosthetic and one run-scoped Relic slot
+- One equipped Prosthetic and one run-scoped Relic slot
 - Previewed room rewards supporting build growth, survival, economy, and persistent progression
 - Persistent Strand services: Boat, Bloodwell, Blood Mirror, Forge, Merchant, Discovery Board, Blood Cavern, and training support
 - Failed runs return Akio to the Strand through Returning Blood reconstruction
@@ -94,10 +94,10 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 | Aspect | Weapon identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Four-hit fast close-range pressure, player-directed pursuit, sustained output, and nearby target transfer through aim and attack geometry | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Two-hit extended spectral control with the longest melee reach and selected committed multi-hit attacks | Slower cadence than Wolf, fewer ordinary options, restrained movement, and vulnerability when spacing collapses |
+| Wraith | Two-hit extended spectral control with the longest melee reach, selected committed multi-hit attacks, delayed echoes, one preserved Held parry, and three-lane frontal barrage control at Tier IV | Slower cadence than Wolf, fewer ordinary options, restrained movement, stationary barrage commitment, and vulnerability when spacing collapses |
 | Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, fixed attack lines, minimal movement, and slow posture recovery |
 
-These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain shared-system, Technique, and prosthetic territory.
+These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain shared-system, Technique, and Prosthetic territory.
 
 A fourth or fifth Aspect is outside current launch paper-design and production scope. Expansion should be reconsidered only after playable testing demonstrates a genuinely missing identity that the current systems cannot support.
 
@@ -106,11 +106,22 @@ A fourth or fifth Aspect is outside current launch paper-design and production s
 Wolf's current Tier package is approved for scoping and may be revised after the other Aspects or playable testing:
 
 - **Tier I — Blood Tempo:** successful Basic Attacks allow the next Basic Attack input earlier.
-- **Tier II — Dire Hunt:** activating a full Blood meter immediately restores limited health, clears player posture, interrupts nearby ordinary enemies, and begins a transformation with lifesteal, increased health and posture damage, interruption resistance against light attacks, and Blood Fang.
+- **Tier II — Dire Hunt:** activating a full Blood meter immediately restores limited Health, clears player posture, interrupts nearby ordinary enemies, and begins a transformation with lifesteal, increased Health and posture damage, interruption resistance against light attacks, and Blood Fang.
 - **Tier III — Fanged Guard:** while Predator's Passage or Blood Fang is charging, one frontal blockable attack is blocked through normal player-posture rules without cancelling the charge.
-- **Tier IV — Apex Feast:** deathblows cause a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+- **Tier IV — Apex Feast:** deathblows cause a nearby Blood eruption, restore limited Health, and fully charge the next Held Attack.
 
 Wolf's pursuit becomes more forceful and rewarding through its Tiers while remaining player-directed and punishable when aimed poorly. This positional commitment is an inherent property of Wolf's actions rather than a separate named drawback system.
+
+## Wraith fixed progression working draft
+
+Wraith's current Tier package is approved for scoping and may be revised after Ronin, cross-roster comparison, or playable testing:
+
+- **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed.
+- **Tier II — Wraith's Reach:** a full Blood meter begins a duration state that extends Veil Cut, Passing Arc, and Pale Lance and gives qualifying attacks one delayed spectral afterimage along their original player-directed geometry.
+- **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry against an eligible attack from any direction without cancelling the charge or interrupting Pale Barrage.
+- **Tier IV — Pale Procession:** Pale Barrage gains two reduced-power adjacent shade streams and slow direct steering within a limited frontal arc. Streams never stack on one enemy, so Tier IV broadens coverage and improves alignment without multiplying single-target damage.
+
+Wraith's later Tiers preserve its stationary commitment, limited response after Veiled Guard is spent, and dependence on correct positioning and direction. The shades do not track, select enemies, generate Blood, or create extra Wraith's Reach afterimages.
 
 ## Run-build philosophy
 
@@ -173,7 +184,7 @@ Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Bindin
 
 The remaining production-level questions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. Wraith Tier III, followed by Wraith Tier IV and Ronin's Tier package one Tier at a time, then cross-roster comparison,
+1. Ronin's Tier package one Tier at a time, beginning with Tier I, then cross-roster comparison,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
