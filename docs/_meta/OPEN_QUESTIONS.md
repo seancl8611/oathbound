@@ -52,6 +52,10 @@ The following decisions are settled and should not be reopened as top-level ques
 - During Wraith's Reach, Akio retains ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetic access. The Art adds no healing, Blood refund, damage reduction, posture clearing, interruption resistance, automatic defense, or special parry reward.
 - Pale Barrage's initial Pale Lance creates one delayed afterimage while its additional jabs gain the extended reach without each creating another full echo.
 - Wraith's Reach afterimages do not track, home, rotate, independently select enemies, or generate Blood. Their damage, posture pressure, guard response, interruption, and Technique or healing interactions are separately weighted from the physical strike.
+- Wraith's Tier III **Veiled Guard** is approved as a working draft: each Pale Lance use permits one manually timed spectral parry against an eligible incoming attack from any direction while charging Pale Lance or channeling Pale Barrage.
+- Veiled Guard uses the ordinary parry input, timing, eligibility, enemy-posture pressure, deflection response, and posture-break rules. It does not turn Akio, cancel the charge, interrupt Pale Barrage, remove accumulated charge, change the attack direction, automatically release the attack, or trigger Veil Reversal.
+- Entering Pale Barrage does not refresh Veiled Guard after it is spent. A mistimed parry provides no fallback block, damage reduction, interruption resistance, healing, Blood, easier timing, or other protection.
+- Veiled Guard is the complete Tier III headline benefit. No additional passive is currently required.
 
 Wolf's working progression is:
 
@@ -64,8 +68,9 @@ Wraith's working progression is:
 
 - **Tier I — Pale Barrage**
 - **Tier II — Wraith's Reach**
+- **Tier III — Veiled Guard**
 
-Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package. Wraith Tier I-II may likewise be revised after the rest of the roster is drafted or after playable testing.
+Wolf may be revised after Wraith and Ronin are developed or after playable testing, but it is no longer an unanswered blank package. Wraith Tier I-III may likewise be revised after Tier IV, the rest of the roster, cross-roster comparison, or playable testing.
 
 Authoritative references:
 
@@ -92,12 +97,11 @@ Continue one Tier at a time within the approved optional-investment structure.
 
 Immediate order:
 
-1. Define Wraith's Tier III headline benefit.
-2. Define Wraith's Tier IV headline benefit after Tier III is approved.
-3. Define Ronin Tier I.
-4. Define Ronin Tier II and its Blood Art after Tier I is approved.
-5. Define Ronin Tiers III and IV one at a time.
-6. Compare the three complete working packages.
+1. Define Wraith's Tier IV headline benefit.
+2. Define Ronin Tier I.
+3. Define Ronin Tier II and its Blood Art after Tier I is approved.
+4. Define Ronin Tiers III and IV one at a time.
+5. Compare the three complete working packages.
 
 For each remaining Tier, resolve:
 
@@ -109,7 +113,7 @@ For each remaining Tier, resolve:
 - how it avoids duplicating ordinary Technique space,
 - and the required HUD, input, animation, VFX, audio, Shrine, trial, and progression states.
 
-For Wraith specifically, later Tiers may grant stronger benefits because the kit gives up mobility, speed, and ordinary versatility. They should reward intelligent positioning and action selection without adding artificial penalties. Potential interaction space now includes Pale Barrage, delayed afterimages, Veil Reversal, and Wraith's Reach, but Tier III does not need to modify every part of the kit.
+For Wraith specifically, Tier IV may grant a strong final benefit because the kit gives up mobility, speed, and ordinary versatility. It should reward intelligent positioning and action selection without adding artificial penalties. Potential interaction space includes Pale Barrage, delayed afterimages, Veil Reversal, Wraith's Reach, and Veiled Guard, but Tier IV does not need to modify every part of the kit or add a separate passive if one focused headline is sufficient.
 
 For Ronin, preserve slow startup, heavy commitment, minimal attack movement, and slow posture recovery while allowing large deliberate payoffs.
 
@@ -200,6 +204,7 @@ Keep the following in their owning gameplay, encounter, economy, UI, or producti
 - exact Corruption gain, thresholds, Shrine frequency, route distribution, and support values,
 - exact Blood capacity, source weighting, gain values, activation cost, duration, cooldown, and anti-farming values within the approved shared defaults,
 - Wraith's Reach duration, activation timing, extended attack ranges, Passing Arc width, echo delay, echo damage, echo posture pressure, ordinary-enemy interruption, guard response, hit-stop, and Technique or healing proc weighting within the approved Tier II behavior,
+- Veiled Guard concurrent Held Attack and parry input handling, input buffering, eligible-attack edge cases, spectral manifestation direction and timing, availability and spent-state feedback, and final VFX or audio presentation within the approved Tier III behavior,
 - Spirit costs and prosthetic cooldowns,
 - immunity tables and status values,
 - room counts, route topology, branch frequency, and miniboss placement,
