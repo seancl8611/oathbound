@@ -4,7 +4,7 @@ title: Blood Aspect Identity Guidelines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-03
 topics:
   - blood-aspects
   - aspect-roster
@@ -42,10 +42,10 @@ Do not substitute an abstract behavior rule or player-facing drawback category f
 | Aspect | Identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Fast close-range pressure and pursuit | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Extended spectral reach and frontal control | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, and vulnerability when spacing collapses |
+| Wraith | Extended spectral reach and frontal control | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, stationary barrage commitment, and vulnerability when spacing collapses |
 | Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
-The launch roster is final at the current scoping stage. Mobility, evasion, ranged utility, and broader crowd control remain shared-system, Technique, and prosthetic territory rather than requiring a fourth Aspect.
+The launch roster is final at the current scoping stage. Mobility, evasion, ranged utility, and broader crowd control remain shared-system, Technique, and Prosthetic territory rather than requiring a fourth Aspect.
 
 ## Encounter assumption
 
@@ -72,7 +72,7 @@ Wolf, Wraith, and Ronin share:
 - posture-break and deathblow language,
 - enemy responses,
 - Technique rules,
-- prosthetic controls,
+- Prosthetic controls,
 - and combat interface language.
 
 No Aspect receives a weaker or stronger neutral dash.
@@ -81,9 +81,19 @@ No Aspect receives a weaker or stronger neutral dash.
 
 No Aspect uses corrective tracking, hidden homing, or post-input target correction.
 
-Attacks use the direction selected by the player together with their authored arc, line, forward travel, and collision. Once an attack is committed, it does not curve or rotate toward a moving enemy.
+Attacks use the direction selected by the player together with their authored arc, line, forward travel, and collision. Once an ordinary attack is committed, it does not curve or rotate toward a moving enemy.
 
-Distinct target handling should come from:
+A sustained authored attack may permit limited direct player steering when explicitly approved. That steering must:
+
+- respond only to player input,
+- remain inside an authored angular range,
+- avoid snapping toward or automatically following enemies,
+- preserve the attack's commitment and movement limits,
+- and remain readable against enemy telegraphs.
+
+Wraith's Pale Procession is the approved example: the three-lane formation may rotate slowly within a limited frontal arc, but the shades do not select targets and the formation remains stationary at Akio's origin.
+
+Distinct target handling should otherwise come from:
 
 - attack width and reach,
 - forward travel,
@@ -109,7 +119,7 @@ These differences support a complete weapon kit; they cannot be the kit's entire
 
 Do not change universal parry timing, parry success conditions, defense input, posture-break consequences, or enemy response rules. Do not grant automatic counters, posture-break immunity, free guarding, or posture recovery while actively blocking.
 
-A fixed Tier benefit may protect one specific authored action while still using shared block and posture rules. Wolf's Fanged Guard is the current approved example.
+A fixed Tier benefit may protect one specific authored action while still using shared defensive rules. Wolf's Fanged Guard automatically blocks one frontal blockable attack through normal posture rules while a pursuit charge is held. Wraith's Veiled Guard instead preserves one manually timed ordinary parry from any direction while Pale Lance or Pale Barrage remains committed.
 
 ## Shared offensive slots
 
@@ -160,6 +170,8 @@ Aspect Tier progression is a fixed optional investment route.
 
 The purpose of preserving tradeoffs is to keep the weapon identity and player outplay intact, not to discourage Embrace or make later Tiers undesirable.
 
+A Tier IV may broaden a signature action without multiplying single-target output. Wraith's Pale Procession uses two reduced-power adjacent barrage lanes, but one enemy may receive only one stream per barrage beat and Akio's central stream takes priority when lanes overlap.
+
 ## Kit evaluation template
 
 ### Concrete actions
@@ -175,7 +187,7 @@ The purpose of preserving tradeoffs is to keep the weapon identity and player ou
 - range and geometry,
 - cadence and sequence length,
 - player-directed attack movement,
-- per-hit and sustained health damage,
+- per-hit and sustained Health damage,
 - enemy-posture pressure and stagger,
 - commitment and miss recovery,
 - target handling through arcs and collision,
@@ -188,7 +200,7 @@ The purpose of preserving tradeoffs is to keep the weapon identity and player ou
 - groups, ranged pressure, elites, and boss viability,
 - reinforce, broaden, compensate, and hybridize Technique space,
 - viability across Technique-focused, hybrid, and Aspect-focused runs,
-- prosthetic relevance,
+- Prosthetic relevance,
 - and animation, VFX, audio, UI, and teaching scope.
 
 ## Approval standard
@@ -199,13 +211,13 @@ A kit is ready when:
 - Basic and Held attacks form a coherent weapon style,
 - strengths and weaknesses emerge from attack properties,
 - Dash Attack and Parry Counter reinforce the kit without rewriting universal controls,
-- ordinary defense, deathblows, Techniques, and prosthetics remain relevant,
+- ordinary defense, deathblows, Techniques, and Prosthetics remain relevant,
 - the kit works against groups and single targets,
 - its Blood Art is practically useful even without perfect follow-up play,
 - Tier 0-I Technique-focused builds remain viable,
 - and it is distinguishable from the other two during the first combat room.
 
-The current roster meets this qualitative Tier 0 standard. Wolf also has an approved working Tier I-IV package.
+The current roster meets this qualitative Tier 0 standard. Wolf and Wraith also have approved working Tier I-IV packages.
 
 ## Cross-roster comparison
 
@@ -231,10 +243,10 @@ Fixed Tier benefits and Blood Arts should avoid broad generic effects that would
 
 ## Future roster capacity
 
-A fourth or fifth Aspect remains possible only after the initial three are implemented and playable evidence demonstrates a missing combat identity that cannot be solved through the current roster, Techniques, prosthetics, or encounter design.
+A fourth or fifth Aspect remains possible only after the initial three are implemented and playable evidence demonstrates a missing combat identity that cannot be solved through the current roster, Techniques, Prosthetics, or encounter design.
 
 Neither additional Aspect belongs to current launch paper-design or production scope.
 
 ## Next design dependency
 
-Define Wraith's Tier III benefit next, then Tier IV after Tier III is approved. Define Ronin one Tier at a time afterward. Compare all three Aspects for inherent tradeoffs, power, accessibility, Technique overlap, and viability across Technique-focused, hybrid, and Aspect-focused runs before final production lock.
+Define Ronin Tier I next, then continue through Ronin's Tier II Blood Art, Tier III, and Tier IV one Tier at a time. Compare all three completed Aspect packages for inherent tradeoffs, power, accessibility, Technique overlap, production cost, and viability across Technique-focused, hybrid, and Aspect-focused runs before final production lock.
