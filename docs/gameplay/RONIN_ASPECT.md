@@ -4,7 +4,7 @@ title: Ronin Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-03
 topics:
   - blood-aspects
   - ronin
@@ -59,34 +59,45 @@ Ronin does not use corrective tracking, hidden homing, or post-input target rota
 
 Ronin retains universal locomotion, neutral dash, defense input, parry timing, posture-break rules, deathblows, Technique inventory, and prosthetic controls.
 
-Its stability does not create parry immunity, automatic counters, free posture recovery while guarding, instant attack cancels, or a unique defensive input.
+Its stability does not create parry immunity, automatic counters, free posture recovery while guarding, instant attack cancels, innate interruption resistance, super armor, damage reduction, or a unique defensive input.
+
+A Tier 0 heavy attack must be protected by correct timing, spacing, enemy stagger, or a sufficiently large opening. A later fixed Tier benefit or Blood Art may protect one specific authored action only if that exception is explicitly approved.
 
 ## Tier 0 kit
 
 ### Basic Attack sequence
 
-1. **Severing Cut** — deliberate heavy opener with meaningful single-hit damage and posture pressure.
-2. **Crushing Cross** — broader, more committed follow-up with stronger impact and frontal coverage.
-3. **Bloodfall** — the most committed Basic Attack, delivering the largest damage, posture, and stagger payoff with severe recovery.
+1. **Severing Cut** — the most reliable Basic Attack for short openings, using a comparatively compact line while still delivering meaningful single-hit damage and posture pressure.
+2. **Crushing Cross** — the broadest frontal Basic Attack, with greater commitment, stronger impact, and the clearest role against closely grouped enemies in front of Akio.
+3. **Bloodfall** — the most committed and directionally demanding Basic Attack, delivering the sequence's largest damage, posture, and stagger payoff with severe recovery.
 
 The sequence cadence is:
 
-> deliberate punish → heavier frontal commitment → maximum committed impact
+> deliberate punish → broader heavy commitment → maximum committed impact
 
-Severing Cut must provide strong value during short openings. Bloodfall is an available heavy option, not a required finisher or combo reward.
+Severing Cut must provide strong value during short openings. Crushing Cross provides Ronin's primary ordinary frontal group coverage through authored sword geometry rather than a shockwave, tracking, or permanent extended reach. Bloodfall is an available heavy option, not a required finisher or combo reward.
+
+Each attack remains useful when the sequence ends early.
 
 ### Held Attack — Stillness Draw
 
 A defining high-damage draw attack that concentrates power around the katana and sheath.
 
+Stillness Draw uses one fixed preparation threshold rather than multiple damage charge levels. Once prepared, the player may hold the readied stance and manually release the strike. Continuing to hold does not increase its power.
+
+While the readied stance is held, Akio remains committed and does not regain ordinary defense access. Its risk comes from choosing when and where to prepare and release the attack, not from managing several charge tiers.
+
+Stillness Draw provides:
+
+- Ronin's clearest precise single-target punish,
 - major single-hit health damage,
 - major enemy-posture pressure,
 - strong ordinary-enemy stagger,
 - conventional or modestly extended melee reach rather than Wraith-like reach,
-- fixed attack line after commitment,
-- severe miss recovery.
+- a fixed attack line after commitment,
+- and severe miss recovery.
 
-Its advantage is power, not safe distance.
+Its advantage is power, not safe distance. It must remain distinct from Bloodfall: Bloodfall is the sequence's largest impact and stagger commitment, while Stillness Draw is Ronin's strongest prepared single-target punishment tool.
 
 ### Dash Attack — Breaching Slash
 
@@ -95,38 +106,51 @@ A quicker attack after the universal neutral dash.
 - faster and more convenient than Ronin's normal heavy attacks,
 - conventional sword reach,
 - useful for short openings or re-entry,
-- lower damage, posture pressure, and stagger than the main sequence.
+- the most responsive recovery profile within Ronin's Tier 0 attacks,
+- and lower damage, posture pressure, and stagger than the main sequence.
 
-Breaching Slash must not replace Ronin's ordinary heavy strikes.
+Breaching Slash must not replace Ronin's ordinary heavy strikes. Its role is access and re-entry, not pursuit dominance or maximum punishment.
 
 ### Parry Counter — Answering Steel
 
 A forceful retaliatory strike after the universal parry.
 
 - universal parry requirements,
+- Ronin's strongest immediate conversion from a successful parry,
 - high damage and enemy-posture payoff,
 - strong ordinary-enemy recoil or stagger where enemy rules allow,
 - restrained player-directed movement,
-- meaningful commitment after activation.
+- and meaningful commitment after activation.
 
 It does not change parry timing, turn toward a target after release, or make the counter automatically safe in crowds.
 
+## Contact, commitment, and recovery
+
+Ronin should feel deliberate and heavy rather than generally unresponsive.
+
+- meaningful startup and active commitment cannot be cancelled into block or dash,
+- a full miss receives severe authored recovery,
+- successful or guarded contact receives strong hit-stop, audiovisual weight, and its authored contact recovery,
+- and ordinary defensive access returns after that authored recovery rather than through a special hit-confirm cancellation rule.
+
+Tier 0 does not include a formal mechanic that reduces recovery whenever an attack connects. The distinction between a successful impact and a complete miss should initially come from authored animation, hit-stop, feedback, and recovery tuning.
+
 ## Defensive profile
 
-Ronin has the strongest ordinary guard profile in the launch roster through approved qualitative advantages such as:
+Ronin has the strongest ordinary guard profile in the launch roster through:
 
-- higher player-posture capacity,
-- better block posture efficiency,
+- meaningfully higher player-posture capacity as its primary defensive advantage,
+- modestly better block posture efficiency as a secondary advantage,
 - and greater stability during direct exchanges.
 
 These strengths are balanced by:
 
-- slow player-posture recovery,
+- the slowest player-posture recovery in the launch roster,
 - committed attacks that delay access to defense,
 - no instant block or dash cancel during meaningful attack startup or active frames,
 - and no free posture recovery while actively guarding.
 
-Ronin's guard supports deliberate exchanges; it does not erase the consequences of bad commitments.
+Ronin can withstand a direct exchange longer, but accumulated posture remains a serious concern during the next exchange. Its guard supports deliberate exchanges; it does not erase the consequences of bad commitments or permit indefinite blocking.
 
 ## Combat profile
 
@@ -140,7 +164,7 @@ Ronin's guard supports deliberate exchanges; it does not erase the consequences 
 | Enemy posture | Largest chunks per clean strike |
 | Ordinary-enemy stagger | Strongest |
 | Attack movement | Minimal, grounded, and player-directed |
-| Held identity | Power |
+| Held identity | Prepared single-target power |
 | Main failure state | Missed heavy commitment and accumulated posture that recovers slowly |
 
 ## Strengths
@@ -151,6 +175,7 @@ Ronin's guard supports deliberate exchanges; it does not erase the consequences 
 - excellent punishment of short and large openings,
 - powerful elite and boss damage,
 - strong Parry Counter payoff,
+- clear frontal group coverage through Crushing Cross,
 - and stable blocking during direct exchanges.
 
 ## Firm tradeoffs
@@ -159,6 +184,7 @@ Ronin's guard supports deliberate exchanges; it does not erase the consequences 
 - severe whiff recovery,
 - fixed attack lines after commitment,
 - minimal attack-bound movement,
+- no innate interruption resistance or damage reduction during attacks,
 - low sustained output when openings are scarce,
 - mobile or ranged enemies,
 - pressure from several directions,
@@ -168,10 +194,10 @@ Ronin must not become the generally optimal kit by combining the strongest guard
 
 ## Encounter role
 
-- **Mixed groups:** remove or stagger priority enemies while using frontal arcs and defense to stabilize direct pressure.
+- **Mixed groups:** remove or stagger priority enemies while using Crushing Cross, frontal arcs, and defense to stabilize direct pressure.
 - **Crowds:** threaten grouped frontal targets but struggle when fast enemies attack from several directions.
 - **Ranged pressure:** rely on universal dash, Breaching Slash, projectile defense where supported, prosthetics, and target priority rather than pursuit or extended reach.
-- **Elites and bosses:** convert correctly read openings into the largest individual health and posture gains.
+- **Elites and bosses:** convert correctly read openings into the largest individual health and posture gains, with Stillness Draw serving as the clearest prepared single-target punish.
 
 ## Tier progression direction
 
@@ -209,4 +235,4 @@ Define one Tier at a time:
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, charge behavior, Blood values, and presentation values remain implementation and playtesting work.
+Exact timing, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood values, and presentation values remain implementation and playtesting work.
