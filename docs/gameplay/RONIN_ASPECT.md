@@ -4,12 +4,13 @@ title: Ronin Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-03
+last_reviewed: 2026-08-04
 topics:
   - blood-aspects
   - ronin
   - tier-0
   - tier-progression
+  - blood-arts
   - weapon-kits
   - combat-foundation
   - roguelite-combat
@@ -29,11 +30,11 @@ related:
 
 ## Status
 
-Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit, its boundaries, and its approved working Tier I benefit.
+Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit, its boundaries, and its approved working Tier I-II progression package and Blood Art.
 
 It replaces earlier directions based on maintaining a combo through defense, reaching a special finisher as the central goal, or selecting Basic Attacks through movement-direction input.
 
-Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier II-IV package, Blood Art, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier III-IV package, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -236,6 +237,59 @@ The resulting Tier I rhythm is:
 
 Steadfast Reprisal is not intended to become Ronin's default answer in every encounter. It is a calculated guard-and-punish option whose value depends on enemy knowledge, timing, positioning, and threat awareness.
 
+## Tier II — Falling Mountain
+
+Tier II unlocks Ronin's Blood meter and Blood Art.
+
+Ronin gains Blood through meaningful katana Health damage, large enemy-posture contributions, Answering Steel, successful Reprisal Cuts, posture breaks, and deathblows. Blood gain is weighted around the value of Ronin's fewer heavy impacts rather than requiring the same number of individual hits as Wolf or Wraith.
+
+Falling Mountain follows the shared Blood defaults: it requires a full meter, activates manually, consumes the stored Blood, and generates no Blood from the Art itself. Exact capacity, gain weighting, activation timing, and anti-farming thresholds remain tuning work.
+
+### Blood Art — Falling Mountain
+
+Akio plants his feet, gathers a dense mass of Returning Blood around the katana, and drives the weapon downward in a monumental two-handed slam.
+
+The action has slow, clearly readable startup and must be protected by a correctly created opening. Akio does not pursue, leap toward, or automatically close distance to a target. The player selects the slam direction, which becomes fixed once the commitment begins.
+
+Falling Mountain grants no invulnerability, damage reduction, automatic block, posture clearing, healing, corrective turning, tracking, homing, or innate interruption resistance. If Akio is interrupted before the weapon establishes the impact site, the delayed rupture is not created.
+
+### Primary slam
+
+The initial strike is Ronin's largest single committed impact.
+
+- The katana's direct landing line deals extreme Health damage and extreme enemy-posture damage.
+- Eligible ordinary enemies struck directly receive Ronin's strongest authored stagger or knockdown response.
+- A compact immediate impact burst damages and pressures nearby enemies around the landing point.
+- The direct blade result takes priority over the immediate burst for a target caught by the central strike, preventing the same enemy from receiving two full simultaneous primary-impact instances.
+- Nearby enemies receive a reduced but still meaningful portion of the slam through the immediate impact burst.
+- Akio remains planted through the strike and receives severe authored recovery.
+
+The Art's central payoff depends on aiming the blade correctly. The impact burst provides secondary encounter utility without allowing a near miss to equal a direct strike.
+
+### Deep Rupture
+
+The primary slam drives Returning Blood and force into the ground. Approximately three seconds after the initial impact, the original landing point erupts a second time in **Deep Rupture**.
+
+Deep Rupture is a powerful second payoff rather than a minor visual aftereffect.
+
+- It remains fixed at the original impact location.
+- Its radius is smaller than the primary slam's immediate impact field.
+- It deals strong Health damage and very strong enemy-posture damage.
+- It causes forceful stagger or knockdown against eligible ordinary enemies.
+- Its direct combat payoff remains below the primary blade slam but is substantial enough to influence positioning and enemy decisions.
+- An enemy struck by the primary slam may also be struck by Deep Rupture if it remains within the later eruption.
+- Once the primary impact successfully establishes the rupture site, Akio may move, defend, or take other actions normally; later damage to Akio does not cancel the scheduled eruption.
+- Deep Rupture does not track, move with an enemy, retarget, expand toward a target, or independently select targets.
+- It generates no Blood, creates no further rupture, and uses restricted or weighted per-hit Technique and healing interactions.
+
+The authored timing target is approximately three seconds so the rupture can become a readable delayed threat rather than an immediate double hit. The exact final delay, radius, Health damage, posture damage, stagger rules, and encounter-transition behavior remain implementation and playtesting work.
+
+The resulting Tier II rhythm is:
+
+> build Blood through deliberate heavy combat → create a large opening → aim and commit to the monumental slam → use the fixed delayed rupture as a second powerful positional threat
+
+Falling Mountain is one Blood Art with two linked impacts. Deep Rupture represents the original slam continuing through the earth; it is not a spectral copy of Akio repeating the attack and does not become Wraith-like delayed weapon geometry.
+
 ## Tier progression direction
 
 Future Ronin Tiers must provide clearly net-positive benefits that deepen heavy impact, posture pressure, stability, or deliberate punishment. The benefits may be strong because Ronin already gives up speed, movement, and recovery through its ordinary kit.
@@ -249,9 +303,9 @@ Universal Techniques may:
 - **reinforce** heavy Basic Attacks, Stillness Draw, direct damage, posture chunks, and stagger,
 - **broaden** attack speed, pursuit, crowd handling, ranged access, or sequence flexibility,
 - **compensate** for whiff recovery, fixed attack lines, posture recovery, mobile enemies, or surrounding pressure,
-- **hybridize** through Breaching Slash, Answering Steel, Steadfast Reprisal, deathblows, blocking, posture, or prosthetics.
+- **hybridize** through Breaching Slash, Answering Steel, Steadfast Reprisal, Falling Mountain, deathblows, blocking, posture, or prosthetics.
 
-Ronin does not own every damage, posture, parry, block, Held Attack, guard-counter, or heavy-attack Technique. Universal Techniques must not simply duplicate Steadfast Reprisal's block-triggered standalone retaliation.
+Ronin does not own every damage, posture, parry, block, Held Attack, guard-counter, slam, delayed-ground-effect, or heavy-attack Technique. Universal Techniques must not simply duplicate Steadfast Reprisal's block-triggered standalone retaliation or Falling Mountain's full-meter slam-and-rupture package.
 
 ## Blood-katana presentation
 
@@ -261,16 +315,17 @@ Presentation may use a dense Blood edge, a spectral sheath during Stillness Draw
 
 Steadfast Reprisal requires a readable temporary availability cue after a qualifying block and distinct impact feedback for Reprisal Cut without implying automatic protection or guaranteed safety.
 
+Falling Mountain requires a full-meter ready state, readable activation commitment, a dense Blood-loaded slam, a clearly marked impact site, persistent ground-fracture feedback during the approximate three-second delay, and a powerful second rupture cue that remains visually distinct from Wraith's spectral afterimages.
+
 ## Remaining Ronin design work
 
 Define one Tier at a time:
 
-- Tier II and Ronin's Blood Art,
-- Tier III after Tier II is approved,
+- Tier III,
 - Tier IV after Tier III is approved,
 - how each Tier preserves Ronin's inherent speed, movement, commitment, and recovery limits,
 - any justified exception required by the approved Blood Art,
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, response-window duration, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood values, and presentation values remain implementation and playtesting work.
+Exact timing, response-window duration, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood capacity and gain values, Falling Mountain startup and recovery, Deep Rupture delay and radius, and presentation values remain implementation and playtesting work.
