@@ -9,6 +9,7 @@ topics:
   - blood-aspects
   - ronin
   - tier-0
+  - tier-progression
   - weapon-kits
   - combat-foundation
   - roguelite-combat
@@ -28,11 +29,11 @@ related:
 
 ## Status
 
-Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit and its boundaries.
+Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit, its boundaries, and its approved working Tier I benefit.
 
 It replaces earlier directions based on maintaining a combo through defense, reaching a special finisher as the central goal, or selecting Basic Attacks through movement-direction input.
 
-Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier I-IV package, Blood Art, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier II-IV package, Blood Art, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -199,9 +200,45 @@ Ronin must not become the generally optimal kit by combining the strongest guard
 - **Ranged pressure:** rely on universal dash, Breaching Slash, projectile defense where supported, prosthetics, and target priority rather than pursuit or extended reach.
 - **Elites and bosses:** convert correctly read openings into the largest individual health and posture gains, with Stillness Draw serving as the clearest prepared single-target punish.
 
+# Fixed Tier progression
+
+Each Ronin Tier must provide a concrete net-positive combat benefit while preserving slow startup, heavy commitment, minimal attack movement, fixed direction, severe miss recovery, and slow player-posture recovery.
+
+## Tier I — Steadfast Reprisal
+
+After successfully blocking a blockable enemy attack without suffering a posture break, Akio briefly gains the option to perform **Reprisal Cut** with the Basic Attack input.
+
+### Reprisal Cut
+
+Reprisal Cut is a slow, planted heavy retaliation performed from Ronin's guarded stance.
+
+- Akio must complete the relevant authored block recovery before the retaliation may begin.
+- Blocking does not accelerate Reprisal Cut's startup.
+- The attack uses a compact frontal line with little or no player-directed movement.
+- The player selects its direction, which becomes fixed once the attack is committed.
+- It deals strong Health damage, substantial enemy-posture pressure, and powerful ordinary-enemy stagger.
+- Its payoff is greater than an ordinary Severing Cut but remains below Answering Steel after a successful parry.
+- It emphasizes enemy-posture pressure and stagger slightly more than raw Health damage.
+- It is a standalone retaliation and does not continue directly into Crushing Cross or the rest of Ronin's Basic Attack sequence.
+- A miss or poorly timed use receives severe recovery.
+
+The Reprisal Cut option is always manual and temporary. The player may continue guarding, attempt a parry, dash away, use a Prosthetic, or take another legal action instead. Taking another action or allowing the response window to expire removes the option.
+
+Steadfast Reprisal provides no automatic counter, target selection, corrective turning, tracking, movement into range, posture recovery, block-efficiency increase, damage reduction, interruption resistance, super armor, or protection against a continued enemy sequence.
+
+When Reprisal Cut begins, Akio gives up guarding and may be interrupted through ordinary combat rules. The player must judge that the blocked enemy's sequence has actually ended, that no other threat will arrive first, and that the selected attack line will reach the intended target.
+
+A blocked attack may leave the enemy outside Reprisal Cut's range. Steadfast Reprisal does not compensate for poor spacing or allow the retaliation to chase the attacker.
+
+The resulting Tier I rhythm is:
+
+> withstand one direct attack → read whether the pressure has truly ended → confirm position and range → commit to a heavy retaliation
+
+Steadfast Reprisal is not intended to become Ronin's default answer in every encounter. It is a calculated guard-and-punish option whose value depends on enemy knowledge, timing, positioning, and threat awareness.
+
 ## Tier progression direction
 
-Ronin's future Tiers must provide clearly net-positive benefits that deepen heavy impact, posture pressure, stability, or deliberate punishment. The benefits may be strong because Ronin already gives up speed, movement, and recovery through its ordinary kit.
+Future Ronin Tiers must provide clearly net-positive benefits that deepen heavy impact, posture pressure, stability, or deliberate punishment. The benefits may be strong because Ronin already gives up speed, movement, and recovery through its ordinary kit.
 
 Future Tiers should preserve those inherent limitations through the actions they strengthen rather than adding separate named drawbacks or unrelated penalty attributes. A strong Ronin Technique build at Tier 0-I must remain capable of completing a run without requiring the Blood Art.
 
@@ -212,9 +249,9 @@ Universal Techniques may:
 - **reinforce** heavy Basic Attacks, Stillness Draw, direct damage, posture chunks, and stagger,
 - **broaden** attack speed, pursuit, crowd handling, ranged access, or sequence flexibility,
 - **compensate** for whiff recovery, fixed attack lines, posture recovery, mobile enemies, or surrounding pressure,
-- **hybridize** through Breaching Slash, Answering Steel, deathblows, blocking, posture, or prosthetics.
+- **hybridize** through Breaching Slash, Answering Steel, Steadfast Reprisal, deathblows, blocking, posture, or prosthetics.
 
-Ronin does not own every damage, posture, parry, block, Held Attack, or heavy-attack Technique.
+Ronin does not own every damage, posture, parry, block, Held Attack, guard-counter, or heavy-attack Technique. Universal Techniques must not simply duplicate Steadfast Reprisal's block-triggered standalone retaliation.
 
 ## Blood-katana presentation
 
@@ -222,12 +259,13 @@ Ronin's Blood-formed katana should feel dense, compressed, disciplined, and heav
 
 Presentation may use a dense Blood edge, a spectral sheath during Stillness Draw, restrained trails before contact, strong hit-frame emphasis, and heavy audio. It must not gain Wraith-like permanent reach.
 
+Steadfast Reprisal requires a readable temporary availability cue after a qualifying block and distinct impact feedback for Reprisal Cut without implying automatic protection or guaranteed safety.
+
 ## Remaining Ronin design work
 
 Define one Tier at a time:
 
-- the fixed Tier I benefit,
-- Tier II and Ronin's Blood Art after Tier I is approved,
+- Tier II and Ronin's Blood Art,
 - Tier III after Tier II is approved,
 - Tier IV after Tier III is approved,
 - how each Tier preserves Ronin's inherent speed, movement, commitment, and recovery limits,
@@ -235,4 +273,4 @@ Define one Tier at a time:
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood values, and presentation values remain implementation and playtesting work.
+Exact timing, response-window duration, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood values, and presentation values remain implementation and playtesting work.
