@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-08-05
 ---
 
 # Decision Log
@@ -175,7 +175,7 @@ The initial roster uses distinct 4/2/3 weapon cadences:
 - Wraith uses a two-hit extended spectral poke sequence.
 - Ronin uses a three-hit slow heavy-damage sequence.
 
-Wolf was expanded from three to four attacks to strengthen sustained pursuit. Wraith's forced-reposition rules were removed so spacing emerges from range and geometry. Ronin's combo-maintenance and directional-selection proposals were rejected in favor of direct heavy health, posture, stagger, and charge-attack impact.
+Wolf was expanded from three to four attacks to strengthen sustained pursuit. Wraith's forced-reposition rules were removed so spacing emerges from range and geometry. Ronin's combo-maintenance and directional-selection proposals were rejected in favor of direct heavy Health, posture, stagger, and charge-attack impact.
 
 The player may stop any sequence at any point. Final combined roster approval remains pending the overlap, encounter, Technique-space, and production audit.
 
@@ -188,3 +188,21 @@ All launch Aspects retain the same neutral locomotion, dash functionality, defen
 Ronin currently uses the strongest guard profile of the three, balanced by slow posture recovery and heavily committed attacks.
 
 **Authority:** `docs/gameplay/COMBAT.md` and `docs/gameplay/ASPECT_WEAPON_KIT_MODEL.md`
+
+## 2026-08-05 — Ronin working Tier package complete
+
+Ronin's current fixed path is Steadfast Reprisal, Falling Mountain with Deep Rupture, Unbroken Resolve with Measured Weight and Perfect Weight, and Shattering Wake. Its benefits preserve slow startup, fixed direction, minimal movement, severe recovery, and slow player-posture recovery.
+
+**Authority:** `docs/gameplay/RONIN_ASPECT.md`
+
+## 2026-08-05 — Wolf package revised around immediate Blood Hunt
+
+Wolf's current fixed path is Blood Tempo with Feral Momentum growth, Blood Hunt and Blood Fang, Fanged Guard, and Apex Mauling. The former Dire Hunt transformation and Apex Feast deathblow package are superseded.
+
+**Authority:** `docs/gameplay/WOLF_ASPECT.md`
+
+## 2026-08-05 — Wraith Tier 0 revision precedes final roster lock
+
+Wraith remains the launch reach-and-frontal-control identity and retains a complete working Tier draft, but its Tier 0 action foundation is the current active design question. Its Blood Art and later Tier distribution will be reviewed only after Tier 0 is settled. Final cross-roster production lock remains deferred until the Wraith revision, growth-rule audit, minor-support audit, and Ronin follow-up are complete.
+
+**Authority:** `docs/_meta/OPEN_QUESTIONS.md`, `docs/gameplay/WRAITH_ASPECT.md`, and `docs/gameplay/ASPECT_IDENTITY_GUIDELINES.md`

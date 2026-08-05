@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-05
 topics:
   - asset-counts
   - characters
@@ -65,24 +65,36 @@ This file records high-level production groups and known counts. Detailed state 
 
 The launch production boundary contains exactly three Aspect families. Additional families are outside current scope and require later playable evidence of a missing combat identity.
 
-Wolf's current working Tier package establishes these additional high-level groups:
+Wolf's approved current Tier package establishes these additional high-level groups:
 
-- **Blood Tempo:** valid-contact link cue
-- **Dire Hunt:** activation, active transformation, guaranteed recovery feedback, and ending state
-- **Blood Fang:** principal bespoke Wolf attack animation and Blood-jaw effect
-- **Fanged Guard:** Held Attack charge guard, one-hit frontal block, and charge-complete feedback
-- **Apex Feast:** deathblow eruption, limited recovery feedback, and primed-Held state
-- **Wolf Blood HUD:** unavailable, building, ready, activated, active, consumed, and rebuilding states
+- **Blood Tempo:** valid-contact continuation cue
+- **Feral Momentum:** deterministic sequence-position and Tier escalation treatment for Rending Cross, Raking Fang, and Blood Cleave
+- **Blood Hunt:** activation, limited-healing feedback, Blood howl, one fixed pursuit line, ordinary-enemy pass-through readability, stopping behavior, and ending recovery
+- **Blood Fang:** principal bespoke Wolf endpoint attack and Blood-jaw effect
+- **Fanged Guard:** action-specific frontal guard availability, one-hit consumption, normal posture cost, and Predator's Passage charge-complete feedback
+- **Apex Mauling:** consolidated primary-target claw series, compact reduced-power outer coverage, posture and guard recoil, and movement-only slow feedback
+- **Wolf Blood HUD:** unavailable, building, ready, activated, resolving, consumed, and rebuilding states
 
-Wraith's current Tier I-II package establishes these high-level groups:
+Ronin's approved current Tier package establishes these additional high-level groups:
 
-- **Pale Barrage:** continued Pale Lance sequence, repeated thrust language, stationary commitment, release, and recovery states
-- **Tier II spinning Blood Art:** full-meter activation, fixed repeated rotations, slower player-directed movement, body-blocking readability, ordinary-action lockout, direct Health exposure, and ending state
-- **Wraith Blood HUD:** unavailable, building, ready, activated, resolving, consumed, and rebuilding states
+- **Steadfast Reprisal:** qualifying-block opportunity cue and slow standalone Reprisal Cut
+- **Falling Mountain:** Blood activation, player-posture relief, planted channel, direct slam, compact impact burst, fixed-point Deep Rupture anticipation, delayed rupture, and severe recovery
+- **Unbroken Resolve:** narrow costly commitment-preservation cue plus Measured Weight and Perfect Weight readiness and consumption
+- **Shattering Wake:** primary-contact origin and reduced-Health, strong-posture transfer through the target into enemies behind it
+- **Ronin Blood HUD:** unavailable, building, ready, activated, resolving, consumed, and rebuilding states
 
-The rest of Wolf's transformed sword library should reuse existing Wolf animations with stronger Blood treatment where practical. The Blood jaw is an attack effect rather than a companion or separate character asset.
+Wraith's current working Tier package establishes provisional high-level groups only:
 
-Final Wolf and Wraith counts still depend on production briefs specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Wraith Tier III-IV and all Ronin Tier counts depend on their unresolved packages.
+- **Tier 0 reach family:** elongated connected blade lines, distinct narrow and broad geometry, restrained player position, and clear miss dissipation
+- **Pale Barrage draft:** continued Pale Lance sequence, repeated thrust language, stationary commitment, release, and recovery states
+- **Wraith's Reach draft:** activation and duration state, extended authored geometry, one delayed afterimage along the original line or arc, and retained ordinary action access
+- **Veiled Guard draft:** one manually timed spectral parry manifestation and one-use-per-Pale-Lance state
+- **Pale Procession draft:** two reduced-power adjacent barrage shades and limited player-directed frontal steering
+- **Wraith Blood HUD:** unavailable, building, ready, activated, active or resolving, consumed, and rebuilding states
+
+Wraith's exact Tier 0 animation count, Blood Art package, and later Tier assets must not receive final counts until the ordered Wraith revision is complete. The current draft is useful for comparison and dependency awareness only.
+
+Final Wolf and Ronin counts still depend on production briefs specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Final Wraith counts additionally depend on its revised gameplay package.
 
 Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. The reusable UI framework must support a filled four-Technique loadout continuing to improve through refinement, compatible or higher-rarity replacement, wildcard offers, reserve management, and specialization.
 
@@ -124,11 +136,14 @@ Route-marker art must make Shrine, Technique, refinement-capable, survival, econ
 - Selected Aspect and Tier 0-IV states
 - Corruption empty, filling, full, Resist, Embrace, and Stabilize states
 - Blood unavailable, building, ready, activated, active or resolving, consumed, and rebuilding states after Tier II
-- Wolf Dire Hunt active-state indicator
-- Wolf Fanged Guard charge protection and consumed state
-- Wolf Apex Feast primed-Held state
+- Wolf Blood Hunt activation and resolving state where HUD support is required
+- Wolf Fanged Guard available and consumed state where HUD support is required
+- Wolf Apex Mauling contact and movement-slow feedback primarily in world space
 - Wraith Pale Barrage continued-action and release state where HUD support is required
-- Wraith spinning Blood Art active or resolving state
+- Wraith current Blood Art active or resolving state, pending final form
+- Wraith Veiled Guard available and spent state where HUD support is required
+- Ronin Falling Mountain activation and resolving state
+- Ronin Measured Weight and Perfect Weight state where HUD support is required
 - Four active Technique slots and one reserve
 - Technique rarity, reward, replacement, reserve, refinement, decline, reroll, post-fill offer, and comparison states
 - Rest-room reserve swapping
@@ -146,7 +161,7 @@ Route-marker art must make Shrine, Technique, refinement-capable, survival, econ
 - Shortened repeat-clear results
 - Postgame Heart-route access after its control method is approved
 
-Three Aspect slots and selection states are fixed. Wolf's high-level Tier and Blood states and Wraith's Tier I-II states are known. Exact counts remain uncountable until detailed implementation briefs and the remaining progression packages are approved.
+Three Aspect slots and selection states are fixed. Wolf and Ronin high-level Tier and Blood states are known. Wraith remains provisional. Exact counts remain uncountable until detailed implementation briefs and the Wraith revision are approved.
 
 ## Shared VFX families
 
@@ -172,9 +187,10 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - fast connected pressure readability,
 - player-directed pursuit and target-contact emphasis,
 - severe miss or overcommitment readability on committed actions,
-- no corrective tracking, companion, or mirrored attacker presentation,
-- Blood jaw language for Blood Fang and Fanged Guard,
-- compact deathblow eruption language for Apex Feast.
+- Blood Hunt activation, howl, fixed pursuit, stopping, Blood Fang endpoint, and ending recovery,
+- Fanged Guard frontal one-use language,
+- consolidated Blood-claw impact language for Apex Mauling,
+- no corrective tracking, companion, transformation-state, or mirrored-attacker presentation.
 
 **Wraith**
 
@@ -182,9 +198,10 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - narrow extended pokes and broad translucent arcs,
 - slower and more deliberate cadence than Wolf,
 - restrained player-directed movement with clear physical connection to the katana,
-- stationary focused commitment during Pale Barrage,
-- slower movement and fixed repeated rotation language during the Tier II Art,
-- no corrective tracking, teleport, vanish, forced-offset, or Mist Raven presentation.
+- current stationary focused commitment during Pale Barrage,
+- current delayed authored-geometry afterimages during Wraith's Reach,
+- current spectral parry and three-lane barrage draft language,
+- no corrective tracking, teleport, vanish, forced-offset, discarded spin, or Mist Raven presentation.
 
 **Ronin**
 
@@ -192,10 +209,13 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - restrained buildup around blade and sheath,
 - strong impact-frame emphasis and heavy audio,
 - stable guard and slow-recovery readability,
+- Falling Mountain direct and delayed fixed-point impact,
+- compact Unbroken Resolve and Weight-state communication,
+- contact-origin Shattering Wake transfer,
 - fixed attack lines,
 - no corrective tracking, generic Focus aura, or required combo-state presentation.
 
-Tier escalation and Blood Arts may extend these families only after their gameplay packages are approved. Wolf and Wraith Tier I-II are available for high-level scoping. Do not preserve superseded prey-mark, perfect-dodge teleport, Mist-Step, Counter Cut, deathblow-Focus, or formal drawback-badge requirements.
+Tier escalation and Blood Arts may extend these families only according to approved gameplay packages. Wolf and Ronin are available for high-level scoping through Tier IV. Wraith remains provisional until revision. Do not preserve superseded prey-mark, Dire Hunt transformation, Apex Feast, Wraith spin, perfect-dodge teleport, Mist-Step, Counter Cut, deathblow-Focus, or formal drawback-badge requirements.
 
 ### Prosthetics
 
@@ -241,8 +261,8 @@ Tier escalation and Blood Arts may extend these families only after their gamepl
 - Wolf, Wraith, and Ronin are the fixed launch Aspect identities.
 - Do not imply corrective tracking or homing in animation or VFX.
 - Do not create separate mandatory drawback icons or penalty effects; represent inherent limitations through the actual action and state presentation.
-- Wolf and Wraith Tier I-II may guide high-level asset grouping but not final counts before implementation briefs.
-- Do not estimate exact Wraith Tier III-IV or Ronin Tier, Blood Art, or effect counts before their progression packages are approved.
+- Wolf and Ronin may guide high-level Tier I-IV asset grouping but not final counts before implementation briefs.
+- Wraith's current draft may guide comparison only; do not lock final animation, VFX, HUD, audio, or trial counts before its revision.
 - No duplicate Aspect-specific Blood Art upgrade tree is currently included.
 - Do not preserve assets that exist only for superseded mechanics.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.

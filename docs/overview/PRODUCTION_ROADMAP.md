@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-05
 ---
 
 # Production Roadmap
@@ -41,16 +41,26 @@ No duplicate Aspect-specific Blood Art progression tree is currently assumed for
 
 Complete the approved Wolf, Wraith, and Ronin combat-presentation families; their Tier and Blood Art states; eight prosthetic families; Technique reward and build interfaces; reusable Technique icon and card language; approved Technique combat-feedback needs; Relic presentation; and broad currency, pickup, breakable, and reward-object art.
 
-Wolf's current working package establishes these high-level production needs:
+Wolf's approved current package establishes these high-level production needs:
 
-- Tier I Blood Tempo contact-link cue,
-- Dire Hunt activation, active, and ending states,
-- Blood Fang as the principal new Wolf attack and animation dependency,
-- Fanged Guard charge and one-hit frontal block feedback,
-- Apex Feast deathblow eruption and primed-Held state,
-- Wolf Blood building, ready, activated, active, consumed, and rebuilding states.
+- Blood Tempo valid-contact continuation cue,
+- Feral Momentum sequence-position and Tier escalation treatment,
+- Blood Hunt activation, limited-healing feedback, Blood howl, fixed pursuit, stopping behavior, Blood Fang endpoint, and ending recovery,
+- Fanged Guard action-specific frontal one-hit protection and posture feedback,
+- Apex Mauling consolidated claw package, compact outer coverage, posture and guard recoil, and movement-only slow,
+- Wolf Blood building, ready, activated, resolving, consumed, and rebuilding states.
 
-The three launch Aspect identities are fixed. Wolf's package is now available for scoping, but final quotation still requires its exact animation/VFX/audio implementation brief. Wraith and Ronin still require their Tier I-IV packages, drawback presentation, Blood rules, Blood Arts, icons, and trial states.
+Ronin's approved current package establishes these high-level production needs:
+
+- Steadfast Reprisal qualifying-block opportunity and slow standalone counter,
+- Falling Mountain activation, posture relief, planted slam, compact impact burst, fixed-point Deep Rupture, and recovery,
+- Unbroken Resolve commitment-preservation cue plus Measured Weight and Perfect Weight states,
+- Shattering Wake contact-origin transfer through the primary target,
+- Ronin Blood building, ready, activated, resolving, consumed, and rebuilding states.
+
+Wraith retains a complete working draft, but its Tier 0 foundation, Blood Art, and later distribution are the active ordered revision. The current Pale Barrage, Wraith's Reach, Veiled Guard, and Pale Procession package may guide comparison and dependency awareness but must not set final animation, VFX, audio, HUD, Shrine, trial, or quotation counts.
+
+The three launch Aspect identities are fixed. Wolf and Ronin support high-level scoping through Tier IV, but final quotation still requires implementation briefs. Wraith final quotation additionally requires its revised gameplay package.
 
 Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
@@ -82,8 +92,8 @@ The core story and lore are approved. Final quotation depends on the authored-co
 - Base character art precedes Tier or Blood overlays.
 - Wolf, Wraith, and Ronin are the fixed launch Aspect families.
 - All Aspect attacks remain player-directed; production must not imply corrective tracking or homing.
-- Wolf's working Tier package may guide high-level scope but not final frame or effect counts.
-- Wraith and Ronin exact production counts require approved Tier packages and Blood Arts.
+- Wolf and Ronin working packages may guide high-level scope but not final frame or effect counts before implementation briefs.
+- Wraith final production counts require its revised Tier 0 foundation, Blood Art, and Tier distribution.
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.

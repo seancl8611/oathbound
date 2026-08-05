@@ -4,10 +4,21 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-05
 ---
 
 # Documentation Changelog
+
+## 2026-08-05 — Aspect package revision and repository synchronization
+
+- Completed Ronin's current qualitative Tier 0-IV package through Steadfast Reprisal, Falling Mountain, Unbroken Resolve, and Shattering Wake.
+- Replaced Wolf's Dire Hunt transformation with the immediate Blood Hunt pursuit Art.
+- Replaced Wolf's Apex Feast deathblow package with Apex Mauling and added Feral Momentum as Wolf's deterministic Tier-growth rule.
+- Expanded Fanged Guard to selected connected Basic-sequence commitments while preserving normal player-posture and directional counters.
+- Marked Wolf and Ronin complete through the present audit.
+- Reopened Wraith's Tier 0 weapon foundation as the active ordered revision before its Blood Art and later Tier distribution are relocked.
+- Removed stale Dire Hunt, Apex Feast, discarded Wraith spinning-Art, and unresolved-Ronin references from overview, scope, progression, trials, VFX, asset, roadmap, and milestone documents.
+- Synchronized production dependencies so Wraith Tier 0 revision is the current active question and final Aspect production lock remains deferred until the cross-roster audit.
 
 ## 2026-07-11 — Blood Aspect, Technique, and room-reward redesign
 
