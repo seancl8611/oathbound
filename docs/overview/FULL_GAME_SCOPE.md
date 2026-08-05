@@ -20,7 +20,7 @@ related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
   - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
-  - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-BLOOD_ASPECTS
   - GAMEPLAY-WOLF-ASPECT
   - GAMEPLAY-WRAITH-ASPECT
   - GAMEPLAY-RONIN-ASPECT
@@ -253,7 +253,7 @@ Boss:
 
 Both twins begin active. The first defeated transfers part of the shared bond to the survivor, which remains recognizably itself while gaining limited traits from the fallen twin.
 
-Yomori represents long-term predation, spirit persistence, and ecological damage caused by corrupted inhabitants and beasts. Beast Blood does not spread through soil, roots, water, prey, vegetation.
+Yomori represents long-term predation, spirit persistence, and ecological damage caused by corrupted inhabitants and beasts. Beast Blood does not spread through soil, roots, water, prey, or vegetation.
 
 Exact transition Health, posture, timing, and difficulty behavior remain later encounter work.
 
