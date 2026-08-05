@@ -133,12 +133,14 @@ A fixed Tier may reward later sequence positions when the reward is bounded to t
 
 A later Tier may preserve one selected connected commitment without requiring sequence completion. Wolf's Fanged Guard is the approved example: one block may preserve an eligible Raking Fang or Blood Cleave, but the player may still abandon the sequence and the block does not guarantee a hit or safe position.
 
+A capstone may add one bounded secondary impact to several defining actions when it remains tied to valid contact, uses predictable geometry, preserves action recovery, and does not multiply full-power proc behavior. Wolf's Apex Mauling is the approved example.
+
 ## Approved launch cadence
 
 | Aspect | Basic sequence | Purpose |
 |---|---:|---|
 | Wolf | Four attacks | Longest and fastest sustained pressure pattern with player-directed pursuit and nearby target transfer |
-| Wraith | Two attacks | Short extended-range pokes and quick return to movement or defense |
+| Wraith | Two attacks | Short extended-range pokes and quick return to movement or defense; under Tier 0 revision |
 | Ronin | Three attacks | Slower escalating impact without making the final strike mandatory |
 
 Each attack must remain useful when the sequence ends early.
@@ -174,7 +176,7 @@ A Technique applies one rule across all Aspects. Different outcomes emerge natur
 
 Examples:
 
-- a Basic Attack Technique affects Wolf's four-hit sequence, Wraith's two-hit sequence, and Ronin's three-hit sequence through one rule,
+- a Basic Attack Technique affects Wolf's four-hit sequence, Wraith's current two-hit sequence, and Ronin's three-hit sequence through one rule,
 - a Held Attack Technique applies to Predator's Passage, Pale Lance, and Stillness Draw,
 - a Dash Attack Technique modifies Hunting Slash, Ghostline Slash, and Breaching Slash without changing the neutral dash,
 - a Parry Counter Technique modifies each direct counter without changing parry timing.
@@ -194,12 +196,12 @@ Techniques should not duplicate a fixed Tier benefit or Blood Art without explic
 - approved Feral Momentum growth: later successfully connected Basic-sequence positions gain modest deterministic Health and posture payoff that strengthens with each Tier,
 - approved Tier II Blood Hunt: immediate Health recovery and close disruption followed by one fixed-line encounter-crossing pursuit ending in Blood Fang,
 - approved Tier III Fanged Guard: one normal posture-costing frontal block may preserve Predator's Passage charge or one connected Raking Fang or Blood Cleave startup per sequence,
-- unresolved Tier IV redistribution,
+- approved Tier IV Apex Mauling: qualifying major impacts create one consolidated rapid Blood-claw package with strong posture pressure, compact secondary coverage, and a brief movement-only slow,
 - failure state: overextension after missed pursuit or prolonged pressure.
 
 ### Wraith — reach and control
 
-- Veil Cut → Passing Arc,
+- current Veil Cut → Passing Arc foundation under Tier 0 revision,
 - longest effective melee reach,
 - long lines, broad arcs, restrained movement, and short commitments,
 - Pale Lance, Ghostline Slash, and Veil Reversal,
@@ -233,13 +235,13 @@ A weapon kit is complete only when a designer can answer:
 8. Can Techniques reinforce, broaden, compensate, and hybridize it?
 9. Can the kit be explained as a weapon style rather than a behavioral instruction?
 
-Wolf, Wraith, and Ronin meet this test at qualitative Tier 0 depth.
+Wolf and Ronin meet this test at approved qualitative depth. Wraith currently meets it as a working draft and is the next foundation under revision.
 
 ## Fixed progression boundary
 
 Every selected Aspect follows one fixed Tier path from Tier 0 to Tier IV through Shrine Embrace choices. The Tier path is not a branching package selection.
 
-All three Aspects have complete qualitative working packages. The current cross-roster audit is revising them one decision at a time before production lock. Wolf's Tier I Blood Tempo, Feral Momentum growth rule, Tier II Blood Hunt, Tier III Fanged Guard, and Ronin's Tier I-IV package are approved through the present audit; Wolf Tier IV and Wraith's Blood Art and later distribution remain active design work.
+The current cross-roster audit is revising the launch packages one decision at a time before production lock. Wolf's Tier I-IV package and Ronin's Tier I-IV package are approved through the present audit. Wraith's Tier 0 foundation is the current active question; its Blood Art and later distribution remain subsequent design work.
 
 ## Future roster capacity
 
