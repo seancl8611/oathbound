@@ -35,17 +35,18 @@ The following decisions are settled and should not be reopened as top-level ques
 - Every Tier must be clearly net-positive while preserving the Aspect's inherent limitations through the upgraded action itself.
 - A Tier may contain one headline benefit and at most one minor supporting rule. A small supporting reward may improve accessibility and immediate feel, but it must not turn Tier progression into generic stat inflation or erase Technique space.
 - Techniques remain universal temporary run rewards with four active slots, one reserve slot, and at most one refinement per Technique.
+- Wolf Tier II is **Blood Hunt**, an immediate full-meter pursuit Art rather than a temporary transformation.
 
 ## Current working Aspect packages
 
-All three Aspects now have complete qualitative Tier I-IV working packages. These packages are strong foundations but are explicitly open to revision during the current cross-roster audit.
+All three Aspects have qualitative Tier I-IV working packages. These packages are strong foundations but remain open to revision during the current cross-roster audit.
 
 ### Wolf
 
-- **Tier I — Blood Tempo:** successful contact improves offensive flow, alternate entries, and selected pursuit follow-ups.
-- **Tier II — Dire Hunt:** temporary Blood transformation with activation recovery, increased offense, sustain, interruption resistance, and Blood Fang.
-- **Tier III — Fanged Guard:** one frontal blockable attack may be blocked while charging Predator's Passage or Blood Fang.
-- **Tier IV — Apex Feast:** deathblows create an eruption, restore Health, and fully charge the next Held Attack.
+- **Tier I — Blood Tempo:** successful contact improves offensive flow, alternate entries, and selected pursuit follow-ups; exact breadth remains under review.
+- **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
+- **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
+- **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, restores Health, and primes Predator's Passage; it must be broadened or replaced.
 
 ### Wraith
 
@@ -86,35 +87,47 @@ Authoritative references:
 
 Resolve the following questions **one at a time in the listed order**. Do not redesign later Tiers around a Blood Art until that Aspect's Blood Art form is selected.
 
-## Question 1 — Wolf Blood Art form
+## Resolved Question 1 — Wolf Blood Art form
 
-Compare the current temporary-state **Dire Hunt** against serious immediate-action or other non-duration alternatives.
+Wolf's Tier II Blood Art is **Blood Hunt**, replacing the temporary-state Dire Hunt concept.
 
-Resolve:
+Approved boundaries:
 
-- Should Wolf's Blood Art remain a temporary transformation, become one explosive pursuit action, or use another concise form?
-- What immediate practical value occurs at activation even if the primary follow-up misses or cannot be used?
-- Should **Blood Fang** remain, and if so, should it be the Art's main action rather than one feature inside a larger state?
-- How does the Art express pressure and pursuit without tracking, line correction, or guaranteed safe positioning?
-- How does it remain useful against ordinary encounters, elites, and bosses?
-- Which parts of current Dire Hunt are essential, excessive, generic, or better assigned to later Tiers or Techniques?
-- What animation, VFX, audio, HUD, collision, and teaching scope does each candidate require?
+- Blood Hunt is one immediate authored action rather than a duration transformation.
+- Activation restores limited Health and releases a short Blood howl that briefly staggers nearby ordinary enemies and applies modest posture pressure to stronger enemies and bosses.
+- The activation value resolves when Blood is spent and does not require the pursuit or endpoint to connect.
+- Akio then commits along one player-selected line in a long Blood-wolf pursuit.
+- The pursuit damages and may pass through eligible ordinary enemies when valid space exists.
+- It stops against elites, bosses, heavy enemies, walls, blocked geometry, invalid destinations, or its maximum distance.
+- The action ends in **Blood Fang**, a strong Health- and posture-damaging jaw strike with powerful eligible ordinary-enemy stagger.
+- Blood Hunt cannot track, turn, home, retarget, or correct its line.
+- Light ordinary hits do not interrupt the launched pursuit, but they still deal full Health, posture, status, and other valid effects.
+- Posture-breaking, lethal, perilous, grabbing, launching, or overriding knockdown attacks interrupt normally.
+- The brief directional preparation and ending recovery retain ordinary vulnerability.
+- A poor line may miss the intended target or leave Akio in severe recovery and dangerous positioning.
+- Blood Hunt does not clear player posture, grant damage reduction, or create a temporary generic damage, lifesteal, or moveset-buff state.
+- Blood generation resumes after the immediate Art finishes resolving.
 
-**This is the current active question.**
+Dire Hunt's temporary transformation, general damage bonuses, per-hit lifesteal, moveset-wide interruption resistance, and moveset-wide travel increases are no longer part of Wolf Tier II.
 
-## Question 2 — Wolf Tier distribution after the Blood Art
+## Question 2 — Wolf Tier distribution after Blood Hunt
 
-After Wolf's Blood Art is selected, reassess Tiers I, III, and IV around it.
+Reassess Tiers I, III, and IV around the approved immediate Blood Hunt Art.
 
 Resolve:
 
 - Is Blood Tempo overloaded with accelerated chains, alternate entries, rear payoff, and travel increases?
 - Which Blood Tempo behavior is the essential Tier I headline?
-- Does Fanged Guard remain appropriate for the selected Blood Art and Held Attack structure?
+- Which secondary behavior, if any, belongs at Tier I rather than a later Tier or Technique?
+- Does Fanged Guard remain appropriate when Blood Fang is no longer a charged Held replacement?
+- Should Fanged Guard continue to affect only Predator's Passage, be expanded through a different Wolf action, or be replaced?
 - What becomes Wolf's Tier IV headline benefit?
-- How can Tier IV provide meaningful value during a boss fight and ordinary combat without depending solely on a deathblow?
+- How can Tier IV provide meaningful value during boss fights and ordinary combat without depending solely on a deathblow?
 - Can deathblows remain a secondary refresh, amplification, or special payoff rather than the only trigger?
+- How should Blood Hunt interact with later Tiers without making every Wolf Tier depend on the Blood Art?
 - Which Wolf Tiers need one small beginner-visible supporting reward?
+
+**This is the current active question.**
 
 ## Question 3 — Wraith Blood Art form
 
@@ -275,6 +288,7 @@ Keep exact values and frame-level decisions in their owning gameplay, encounter,
 - neutral movement and dash values,
 - Corruption thresholds, Shrine frequency, route distribution, and support values,
 - Blood capacity, gain weighting, activation cost, duration, and anti-farming rules,
+- exact Blood Hunt preparation, travel, collision, stopping priority, interruption categories, damage, posture, Health recovery, howl radius, and ending recovery,
 - exact per-Tier stat or action-growth values after the growth structure is approved,
 - enemy immunity and response tables,
 - Spirit costs and Prosthetic cooldowns,
