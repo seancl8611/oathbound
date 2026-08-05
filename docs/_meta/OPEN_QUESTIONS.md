@@ -39,10 +39,11 @@ The following decisions are settled and should not be reopened as top-level ques
 - Wolf's approved small Tier-growth rule is **Feral Momentum**: later Basic Attacks reached through successful Blood Tempo continuations gain a modest deterministic Health- and enemy-posture payoff that strengthens with each Embrace.
 - Wolf Tier II is **Blood Hunt**, an immediate full-meter pursuit Art rather than a temporary transformation.
 - Wolf Tier III is **Fanged Guard**, which preserves one selected frontal high-risk ordinary commitment through a normal posture-costing block.
+- Wolf Tier IV is **Apex Mauling**, which adds a rapid Blood-claw mauling and brief movement-only slow after qualifying major impacts.
 
 ## Current working Aspect packages
 
-All three Aspects have qualitative Tier I-IV working packages. These packages are strong foundations but remain open to revision during the current cross-roster audit.
+Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Wraith retains a complete working draft, but its Tier 0 foundation and later progression are now under ordered revision.
 
 ### Wolf
 
@@ -50,10 +51,11 @@ All three Aspects have qualitative Tier I-IV working packages. These packages ar
 - **Feral Momentum — Tier growth:** later connected Basic-sequence positions gain modest deterministic Health and posture payoff that scales at every Tier.
 - **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
 - **Tier III — Fanged Guard:** one frontal blockable hit may preserve Predator's Passage charge, or one connected Raking Fang or Blood Cleave startup per Basic sequence, using normal player-posture rules.
-- **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, restores Health, and primes Predator's Passage; it must be broadened or replaced.
+- **Tier IV — Apex Mauling:** connected Blood Cleave, Predator's Passage, Fang Reversal, and Blood Fang trigger a consolidated Blood-claw mauling with strong posture pressure, compact secondary coverage, and a brief movement-only slow on the primary target.
 
 ### Wraith
 
+- **Tier 0:** current two-hit reach-and-control foundation is the next active revision target.
 - **Tier I — Pale Barrage:** Pale Lance may continue into rapid stationary spectral jabs.
 - **Tier II — Wraith's Reach:** temporary state with greater spectral reach and delayed attack afterimages.
 - **Tier III — Veiled Guard:** one manually timed spectral parry may preserve each Pale Lance or Pale Barrage use.
@@ -66,7 +68,7 @@ All three Aspects have qualitative Tier I-IV working packages. These packages ar
 - **Tier III — Unbroken Resolve:** selected commitments may survive one costly eligible hit, while disciplined clean attacks may create Measured Weight and Perfect Weight.
 - **Tier IV — Shattering Wake:** qualifying direct heavy impacts transfer reduced Health damage and strong posture force through the primary target into enemies behind it.
 
-Ronin is currently closest to the desired progression standard because its later Tiers affect several parts of the ordinary kit, remain useful during bosses, and provide both expert and accessible value. This is a comparison reference, not a decision that Ronin can no longer be adjusted.
+Ronin remains the comparison reference for broad later-Tier coverage. Wolf now meets a comparable standard through ordinary sequence flow, a distinct Blood Art, action-specific commitment protection, and a broadly available Tier IV impact effect.
 
 Authoritative references:
 
@@ -89,7 +91,7 @@ Authoritative references:
 
 # 1. Cross-roster Aspect package revision
 
-Resolve the following questions **one at a time in the listed order**. Do not redesign later Tiers around a Blood Art until that Aspect's Blood Art form is selected.
+Resolve the following questions **one at a time in the listed order**. Each Aspect's Tier 0 foundation must be settled before redesigning its later package around that foundation.
 
 ## Resolved Question 1 — Wolf Blood Art form
 
@@ -114,11 +116,9 @@ Approved boundaries:
 
 Dire Hunt's temporary transformation, general damage bonuses, per-hit lifesteal, moveset-wide interruption resistance, and moveset-wide travel increases are no longer part of Wolf Tier II.
 
-## Question 2 — Wolf Tier distribution after Blood Hunt
+## Resolved Question 2 — Wolf Tier distribution after Blood Hunt
 
-Reassess Tiers I, III, and IV around the approved immediate Blood Hunt Art.
-
-### Resolved Tier I — Blood Tempo
+### Tier I — Blood Tempo
 
 Blood Tempo is one unified successful-contact continuation mechanic.
 
@@ -144,7 +144,7 @@ Approved boundaries:
 
 The former Hunting Slash rear-Rending-Cross damage bonus and the former Raking Fang and Hunting Slash travel increases are removed from fixed Wolf progression. They are not automatically moved to another Tier.
 
-### Resolved Wolf growth rule — Feral Momentum
+### Wolf growth rule — Feral Momentum
 
 Beginning at Tier I, later Basic Attacks reached through successful Blood Tempo continuations receive a deterministic sequence-position bonus:
 
@@ -157,7 +157,7 @@ Alternate entries from Predator's Passage, Hunting Slash, and Fang Reversal begi
 
 Feral Momentum uses no random critical-hit roll, separate meter, stack counter, or persistent combo timer. It does not improve non-Basic actions, Blood Hunt, travel, or whiff recovery, and it does not make Blood Cleave mandatory.
 
-### Resolved Tier III — Fanged Guard
+### Tier III — Fanged Guard
 
 Fanged Guard preserves selected high-risk ordinary Wolf commitments through one frontal blockable hit using normal player-posture rules.
 
@@ -177,23 +177,49 @@ Boundaries:
 - side, rear, perilous, unblockable, grab, launch, knockdown, and second-hit threats are not protected,
 - and Fanged Guard grants no damage reduction beyond the normal block, posture immunity, tracking, direction correction, damage increase, or guaranteed safe positioning.
 
-Tier III also advances Feral Momentum by one normal Tier step, modestly increasing the deterministic Health and enemy-posture payoff of connected Rending Cross, Raking Fang, and Blood Cleave. This is the approved repeated growth reward rather than an additional separate mechanic.
+Tier III also advances Feral Momentum by one normal Tier step.
 
-### Remaining Wolf Tier question
+### Tier IV — Apex Mauling
+
+Qualifying direct hits or guards from connected Blood Cleave, Predator's Passage, Fang Reversal, or Blood Fang trigger one rapid Blood-claw mauling at the original contact point.
+
+Approved boundaries:
+
+- the primary target receives meaningful additional Health damage, strong total enemy-posture pressure, powerful guard recoil, and eligible ordinary-enemy stagger,
+- compact outer claw arcs may strike nearby enemies once for reduced Health damage and meaningful posture pressure,
+- the visible claw series is resolved as one consolidated Tier IV package rather than several independent full-power hits,
+- large enemies and bosses do not receive extra damage because several marks overlap them,
+- the final claw briefly slows only the primary target's movement,
+- attack startup, animation speed, recovery, defensive timing, projectile speed, and perilous timing remain unchanged,
+- elite and boss slow strength or duration is reduced and protected authored movement remains unaffected,
+- Apex Mauling does not track, retarget, rotate, search for enemies, generate Blood, recursively trigger itself, or cancel Wolf's recovery,
+- Blood Hunt travel hits do not trigger it; only Blood Fang may do so,
+- and Feral Momentum may strengthen Apex Mauling's posture, recoil, and stagger when connected Blood Cleave creates it, without substantially multiplying its Health damage.
+
+Tier IV also applies Feral Momentum's final normal Tier increase. The former deathblow-only Apex Feast package, its healing, eruption, and primed Predator's Passage are removed.
+
+Wolf's Tier I-IV package is complete for the present audit. Exact damage, posture, claw cadence, slow strength and duration, collision, proc weighting, and presentation remain implementation and playtesting work.
+
+## Question 3 — Wraith Tier 0 revision
+
+Reassess Wraith's complete starting weapon kit before redesigning its Blood Art or later Tiers.
 
 Resolve:
 
-- What becomes Wolf's Tier IV headline benefit?
-- How can Tier IV provide meaningful value during boss fights and ordinary combat without depending solely on a deathblow?
-- Can deathblows remain a secondary refresh, amplification, or special payoff rather than the only trigger?
-- How should Tier IV interact with Blood Tempo, Feral Momentum, Fanged Guard, and Blood Hunt without making the full package depend on one action?
-- Does Tier IV need one additional beginner-visible supporting rule beyond its normal Feral Momentum increase?
+- Does the current two-hit Basic sequence provide enough ordinary decision variety and satisfaction compared with Wolf's four-hit pressure sequence and Ronin's three-hit heavy sequence?
+- Should Veil Cut → Passing Arc remain a two-attack sequence, gain a third authored option, or change its attack roles while preserving Wraith's shorter sequence identity?
+- Are Veil Cut, Passing Arc, Pale Lance, Ghostline Slash, and Veil Reversal sufficiently distinct in timing, geometry, commitment, and purpose?
+- Does Wraith currently rely too heavily on generic longer reach rather than producing a distinct frontal-control playstyle through attack selection?
+- How should Tier 0 handle close-range pressure, groups, mobile targets, ranged enemies, elites, and bosses without solving every weakness?
+- Does Pale Lance already carry too much of Wraith's identity before later Tiers further concentrate on it?
+- What should Wraith's ordinary damage, posture, stagger, movement, and recovery profile be relative to Wolf and Ronin?
+- Which Tier 0 animations, VFX, hit geometries, and teaching requirements are necessary for a complete and production-realistic foundation?
 
-**The current active question is Wolf Tier IV.**
+**This is the current active question.**
 
-## Question 3 — Wraith Blood Art form
+## Question 4 — Wraith Blood Art form
 
-Compare the current temporary-state **Wraith's Reach** against immediate-action or concise non-duration alternatives.
+After Wraith Tier 0 is settled, compare the current temporary-state **Wraith's Reach** against immediate-action or concise non-duration alternatives.
 
 Resolve:
 
@@ -201,11 +227,11 @@ Resolve:
 - Could a short spectral formation, authored corridor, large frontal sequence, or another immediate control action fit better?
 - What guaranteed activation value does the Art provide if the player cannot land an ideal follow-up?
 - How does the Art reinforce reach and frontal control without permanently solving point-blank pressure?
-- How does it remain distinct from Ronin's delayed ground rupture, Wolf's pursuit, projectiles, tracking attacks, and autonomous companions?
+- How does it remain distinct from Ronin's delayed ground rupture, Wolf's pursuit and Blood-claw impacts, projectiles, tracking attacks, and autonomous companions?
 - Which current ideas—extended geometry, delayed afterimages, Pale Procession, or another effect—belong in the Art versus later Tiers?
 - What production and readability burden does each candidate create?
 
-## Question 4 — Wraith Tier distribution after the Blood Art
+## Question 5 — Wraith Tier distribution after the Blood Art
 
 After Wraith's Blood Art is selected, reassess Tiers I, III, and IV around it.
 
@@ -218,7 +244,7 @@ Resolve:
 - What Tier IV benefit remains useful in short exchanges, against mobile bosses, and when a full stationary barrage is unsafe?
 - Which Wraith Tiers need a beginner-visible supporting reward?
 
-## Question 5 — Per-Tier small growth rewards
+## Question 6 — Per-Tier small growth rewards
 
 Decide whether every Embrace should include a small, always-readable growth reward in addition to its headline mechanic.
 
@@ -237,7 +263,7 @@ Resolve:
 - How much Health can Ronin gain without making its strongest guard and interruption-resistance tools generally optimal?
 - Should generic Health, damage, posture, or Blood-generation increases remain rare because Techniques and permanent progression also need meaningful space?
 
-## Question 6 — Minor supporting benefits by Tier
+## Question 7 — Minor supporting benefits by Tier
 
 Audit every Tier that currently contains only one narrow or highly conditional mechanic.
 
@@ -252,7 +278,7 @@ For each Tier, determine:
 
 Possible supporting rewards include small action-specific changes to preparation, contact recovery, geometry, guard recoil, response-window duration, Blood gain from skilled actions, or another existing combat verb. Do not add filler benefits only to equalize feature counts.
 
-## Question 7 — Ronin follow-up audit
+## Question 8 — Ronin follow-up audit
 
 Ronin does not currently require a new Blood Art concept, but it must be checked against whatever standards are approved for Wolf and Wraith.
 
@@ -264,9 +290,9 @@ Resolve:
 - Does Falling Mountain remain powerful without trivializing elite and boss posture systems?
 - Does any Ronin Tier need simplification after the full roster is compared?
 
-## Question 8 — Final cross-roster lock
+## Question 9 — Final cross-roster lock
 
-After Questions 1-7 are resolved, compare the completed packages for:
+After Questions 1-8 are resolved, compare the completed packages for:
 
 - immediate feel at Tier 0,
 - practical payoff and accessibility at every Embrace,
@@ -352,6 +378,7 @@ Keep exact values and frame-level decisions in their owning gameplay, encounter,
 - exact Blood Hunt preparation, travel, collision, stopping priority, interruption categories, damage, posture, Health recovery, howl radius, and ending recovery,
 - exact Feral Momentum Health-damage and enemy-posture scaling at Tiers I-IV,
 - exact Fanged Guard startup windows, frontal coverage, reset timing, posture interaction, and feedback,
+- exact Apex Mauling damage, posture, claw count, cadence, compact secondary geometry, guard recoil, movement-slow strength and duration, boss and elite scaling, and proc weighting,
 - exact Wraith or Ronin Tier-growth values after their structures are approved,
 - enemy immunity and response tables,
 - Spirit costs and Prosthetic cooldowns,
