@@ -178,11 +178,15 @@ Expected viability:
 - **Feral Momentum — Tier growth:** Rending Cross, Raking Fang, and Blood Cleave gain increasing deterministic Health and enemy-posture payoff when reached through successful Blood Tempo continuations; the payoff strengthens modestly at every Tier.
 - **Tier II — Blood Hunt:** a full meter restores limited Health, releases a short disruptive howl, and launches one long player-directed pursuit through eligible ordinary enemies before ending in Blood Fang.
 - **Tier III — Fanged Guard:** one normal posture-costing frontal block may preserve Predator's Passage charge, or one connected Raking Fang or Blood Cleave startup per Basic sequence.
-- **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, restores Health, and primes Predator's Passage; it must be broadened or replaced during Wolf Tier redistribution.
+- **Tier IV — Apex Mauling:** connected Blood Cleave, Predator's Passage, Fang Reversal, and Blood Fang trigger a consolidated rapid Blood-claw mauling with strong posture pressure, compact secondary coverage, and a brief movement-only slow on the primary target.
 
-Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel and no longer grants a Hunting Slash rear-Rending-Cross damage bonus. Feral Momentum is deterministic rather than random critical-hit chance and uses no separate combo meter or persistent timer. Tier III advances Feral Momentum by its normal one-Tier step rather than adding a separate critical or combo statistic.
+Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel and no longer grants a Hunting Slash rear-Rending-Cross damage bonus. Feral Momentum is deterministic rather than random critical-hit chance and uses no separate combo meter or persistent timer. Tier III and Tier IV advance Feral Momentum by their normal Tier steps rather than adding separate critical or combo statistics.
+
+Apex Mauling's visible claw series is one weighted Tier IV package rather than several independent full-power hits. It does not generate Blood, recursively trigger itself, alter enemy attack timing, or remove Wolf's recovery and positional risk.
 
 ### Wraith
+
+Wraith's Tier 0 foundation is the next active revision target. Its later package remains a working draft until that foundation and Blood Art are reassessed.
 
 - **Tier I — Pale Barrage:** continuing to hold after Pale Lance's initial thrust unleashes rapid lower-impact spectral jabs while Akio remains stationary and committed.
 - **Tier II — Wraith's Reach:** the current full-meter draft begins a temporary state that extends core attacks and gives qualifying attacks one delayed spectral afterimage along their original geometry.
@@ -196,7 +200,7 @@ Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel an
 - **Tier III — Unbroken Resolve:** selected commitments may survive one costly eligible hit, while disciplined clean attacks may create Measured Weight and Perfect Weight.
 - **Tier IV — Shattering Wake:** qualifying direct heavy impacts transfer reduced Health damage and strong posture force through the primary target into enemies behind it.
 
-Wolf Tiers I-III, Wolf's Feral Momentum growth rule, and Ronin's Tier I-IV package are approved through the current audit. Wolf Tier IV and Wraith's full Tier package remain working drafts pending the ordered cross-roster questions.
+Wolf's Tier I-IV package, Wolf's Feral Momentum growth rule, and Ronin's Tier I-IV package are approved through the current audit. Wraith's Tier 0 and Tier I-IV package remain working drafts pending the ordered cross-roster questions.
 
 ## Blood contract
 
@@ -238,7 +242,7 @@ Working launch defaults:
 
 ### Wraith Blood direction
 
-Wraith's Reach remains the current working draft pending the dedicated Wraith Blood Art review.
+Wraith's Reach remains the current working draft pending the dedicated Wraith Tier 0 and Blood Art reviews.
 
 - it requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while active,
 - Veil Cut, Passing Arc, and Pale Lance gain additional spectral reach,
@@ -260,7 +264,7 @@ Wraith's Reach remains the current working draft pending the dedicated Wraith Bl
 
 Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
-1. decide Wolf Tier IV around Blood Tempo, Feral Momentum, Blood Hunt, and Fanged Guard,
+1. revise Wraith's Tier 0 weapon foundation,
 2. review Wraith's Blood Art form,
 3. redistribute Wraith's later Tiers,
 4. decide Wraith and Ronin small-growth structures,
@@ -270,7 +274,7 @@ Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
 After the Aspect audit, resolve shared affinity, limited direct Aspect-, Tier-, or Blood-Technique exceptions, and final animation, VFX, audio, HUD, Shrine, trial, selection, and persistent-progression requirements.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Fanged Guard timing and reset rules, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Fanged Guard timing and reset rules, Apex Mauling claw cadence, secondary geometry, slow values and proc weighting, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 
