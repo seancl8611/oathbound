@@ -30,11 +30,11 @@ related:
 
 ## Status
 
-Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit, its boundaries, and its approved working Tier I-II progression package and Blood Art.
+Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit, its boundaries, and its approved working Tier I-III progression package and Blood Art.
 
 It replaces earlier directions based on maintaining a combo through defense, reaching a special finisher as the central goal, or selecting Basic Attacks through movement-direction input.
 
-Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier III-IV package, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier IV package, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -290,6 +290,69 @@ The resulting Tier II rhythm is:
 
 Falling Mountain is one Blood Art with two linked impacts. Deep Rupture represents the original slam continuing through the earth; it is not a spectral copy of Akio repeating the attack and does not become Wraith-like delayed weapon geometry.
 
+## Tier III — Unbroken Resolve
+
+Tier III gives Ronin two linked outcomes for deliberate heavy commitments: a costly fallback when Akio is struck during a major attack and a stronger mastery payoff when the player executes two clean heavy actions in succession.
+
+### Resolve window
+
+During the late committed portion of **Bloodfall**, the released strike of **Stillness Draw**, **Answering Steel**, or **Reprisal Cut**, the first eligible frontal standard enemy hit that strikes Akio does not interrupt the qualifying Ronin attack.
+
+- The incoming hit deals its full normal Health damage, player-posture damage, status buildup, and other valid effects.
+- Unbroken Resolve provides no block, parry, damage reduction, automatic counter, healing, posture restoration, targeting, turning, movement, or invulnerability.
+- The protection exists only during the authored late-commitment window, not during preparation, early startup, or recovery.
+- If Akio is struck before the Resolve window begins, the attack is interrupted normally.
+- The attack is interrupted normally if the hit breaks Akio's posture, kills him, is perilous or unblockable, is an authored grab, launch, or knockdown that overrides Resolve, arrives from outside the approved frontal coverage, or is a second incoming hit.
+- Preserving the animation does not guarantee the attack will connect. The enemy may move away or remain outside the player-selected attack line while Akio still takes the full incoming hit and retains the attack's normal recovery.
+
+Unbroken Resolve is an explicit Tier III interruption-resistance exception for this narrow family of committed actions. It does not change the universal Defense input, sustained block, parry timing, parry success rules, or posture-break behavior.
+
+### Measured Weight
+
+When Akio lands a qualifying deliberate Ronin strike without taking Health damage during that attack, he gains **Measured Weight** for a short period. The working timing target is approximately four seconds.
+
+Qualifying setup strikes are:
+
+- Severing Cut,
+- Crushing Cross,
+- Bloodfall,
+- Stillness Draw,
+- Answering Steel,
+- and Reprisal Cut.
+
+Breaching Slash does not create Measured Weight because it is Ronin's quicker access and re-entry attack. Falling Mountain and Deep Rupture also do not create or consume the state; Tier III must remain useful without a full Blood meter.
+
+While Measured Weight is active, the next cleanly landed **Bloodfall**, **Stillness Draw**, **Answering Steel**, or **Reprisal Cut** consumes the state and gains **Perfect Weight**.
+
+### Perfect Weight
+
+A Perfect Weight strike gains:
+
+- increased enemy-posture damage,
+- stronger guard recoil against blocking enemies,
+- and stronger stagger against eligible ordinary enemies.
+
+Perfect Weight does not increase Health damage, extend reach, accelerate startup, reduce recovery, add movement, or force inappropriate stagger against bosses or protected elites.
+
+Measured Weight is lost when:
+
+- Akio takes Health damage,
+- its short duration expires,
+- a qualifying heavy strike misses,
+- or Perfect Weight is successfully consumed.
+
+Blocking, parrying, dashing, moving, or using a Prosthetic does not immediately cancel Measured Weight, but the timer continues to run. This permits a brief defensive or positional decision without allowing the state to be stored indefinitely.
+
+A Perfect Weight strike does not immediately create another Measured Weight state. The bounded two-stage sequence resets after consumption rather than becoming an endlessly maintained combo condition.
+
+If Unbroken Resolve preserves the intended consuming strike after Akio is hit, taking Health damage removes Measured Weight and the attack receives no Perfect Weight benefit. The player therefore receives either the costly fallback of completing the attack through one hit or the superior clean-execution payoff, not both.
+
+The resulting Tier III rhythm is:
+
+> land one deliberate strike cleanly → preserve the short opportunity through disciplined movement or defense → commit to a major follow-up → either earn Perfect Weight through clean execution or rely on Unbroken Resolve to complete an imperfect trade
+
+Tier III rewards skilled consecutive execution without requiring the player to maintain an indefinite hit streak, complete Ronin's full Basic sequence, or adopt one prescribed combat loop.
+
 ## Tier progression direction
 
 Future Ronin Tiers must provide clearly net-positive benefits that deepen heavy impact, posture pressure, stability, or deliberate punishment. The benefits may be strong because Ronin already gives up speed, movement, and recovery through its ordinary kit.
@@ -303,9 +366,9 @@ Universal Techniques may:
 - **reinforce** heavy Basic Attacks, Stillness Draw, direct damage, posture chunks, and stagger,
 - **broaden** attack speed, pursuit, crowd handling, ranged access, or sequence flexibility,
 - **compensate** for whiff recovery, fixed attack lines, posture recovery, mobile enemies, or surrounding pressure,
-- **hybridize** through Breaching Slash, Answering Steel, Steadfast Reprisal, Falling Mountain, deathblows, blocking, posture, or prosthetics.
+- **hybridize** through Breaching Slash, Answering Steel, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, Perfect Weight, deathblows, blocking, posture, or prosthetics.
 
-Ronin does not own every damage, posture, parry, block, Held Attack, guard-counter, slam, delayed-ground-effect, or heavy-attack Technique. Universal Techniques must not simply duplicate Steadfast Reprisal's block-triggered standalone retaliation or Falling Mountain's full-meter slam-and-rupture package.
+Ronin does not own every damage, posture, parry, block, Held Attack, guard-counter, slam, delayed-ground-effect, interruption-resistance, clean-hit, or heavy-attack Technique. Universal Techniques must not simply duplicate Steadfast Reprisal's block-triggered standalone retaliation, Falling Mountain's full-meter slam-and-rupture package, or Tier III's bounded Measured Weight into Perfect Weight sequence.
 
 ## Blood-katana presentation
 
@@ -317,15 +380,16 @@ Steadfast Reprisal requires a readable temporary availability cue after a qualif
 
 Falling Mountain requires a full-meter ready state, readable activation commitment, a dense Blood-loaded slam, a clearly marked impact site, persistent ground-fracture feedback during the approximate three-second delay, and a powerful second rupture cue that remains visually distinct from Wraith's spectral afterimages.
 
+Tier III requires a restrained but clear Resolve-window cue that does not resemble a block, parry, or invulnerability flash; a temporary Measured Weight state cue with readable expiration; and a distinct Perfect Weight impact treatment emphasizing posture and guard recoil rather than extra Health damage.
+
 ## Remaining Ronin design work
 
 Define one Tier at a time:
 
-- Tier III,
-- Tier IV after Tier III is approved,
-- how each Tier preserves Ronin's inherent speed, movement, commitment, and recovery limits,
-- any justified exception required by the approved Blood Art,
+- Tier IV,
+- how Tier IV preserves Ronin's inherent speed, movement, commitment, and recovery limits,
+- any justified exception required by the approved Tier IV benefit,
 - limited direct Technique interactions if approved,
 - final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
 
-Exact timing, response-window duration, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood capacity and gain values, Falling Mountain startup and recovery, Deep Rupture delay and radius, and presentation values remain implementation and playtesting work.
+Exact timing, Resolve-window eligibility, frontal coverage, override attacks, Measured Weight duration, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood capacity and gain values, Falling Mountain startup and recovery, Deep Rupture delay and radius, and presentation values remain implementation and playtesting work.
