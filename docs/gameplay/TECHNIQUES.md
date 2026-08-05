@@ -88,7 +88,7 @@ The meaningful opportunity cost comes from route rewards. Choosing a Shrine can 
 - Fixed Aspect Tier progression must not make Techniques secondary.
 - A strong Technique route must remain capable of winning at Tier 0-I.
 
-Wolf's current package owns these behaviors and ordinary Techniques should not reproduce them directly:
+Wolf's approved package owns these behaviors and ordinary Techniques should not reproduce them directly:
 
 - Blood Tempo's complete successful-contact routing into approved Basic-sequence positions,
 - Feral Momentum's full Tier-scaled deterministic Health- and enemy-posture escalation across connected Basic-sequence positions,
@@ -96,13 +96,15 @@ Wolf's current package owns these behaviors and ordinary Techniques should not r
 - Blood Hunt's full-meter fixed-line pursuit through eligible ordinary enemies,
 - Blood Fang as Blood Hunt's endpoint strike,
 - Fanged Guard's one frontal normal-posture block during Predator's Passage charge or one eligible connected Raking Fang or Blood Cleave startup per Basic sequence,
-- and the final approved Wolf Tier IV behavior after Apex Feast is revised.
+- and Apex Mauling's complete qualifying-strike package: rapid Blood claws, consolidated Health and posture payoff, compact secondary coverage, and movement-only slow.
 
 The removed Blood Tempo travel increases and rear-Rending-Cross bonus no longer reserve those effects from the Technique catalog. General Basic Attack damage, posture, critical-hit, movement, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Blood Tempo or Feral Momentum's exact fixed progression.
 
 The removed Dire Hunt transformation also no longer reserves generic temporary damage increases, moveset-wide lifesteal, moveset-wide interruption resistance, or moveset-wide travel increases from the ordinary Technique catalog. Those effects remain subject to normal Technique, Relic, balance, and overlap rules rather than being automatically excluded by Wolf Tier II.
 
 Fanged Guard reserves only its exact action-specific preservation package. General cross-Aspect block, player-posture, Held Attack, or Basic Attack Techniques remain possible when they do not reproduce its eligibility windows, one-use sequence rule, or automatic continuation preservation.
+
+Apex Mauling reserves only its exact fixed package. General cross-Aspect slow, multi-hit, guard-pressure, posture, or nearby-coverage Techniques remain possible when they do not reproduce its qualifying Wolf actions, consolidated claw sequence, Feral Momentum interaction, and movement-only slow together.
 
 ## Starting capacity
 
@@ -253,9 +255,9 @@ Prosthetic Techniques use the normal Technique system.
 
 ## Aspect relationship still to define
 
-The roster, fixed Tier structure, optional-investment contract, Wolf Tiers I-III, Wolf Feral Momentum, and Ronin's current qualitative package are approved through the present audit. Still resolve:
+The roster, fixed Tier structure, optional-investment contract, Wolf's complete Tier I-IV package, Wolf Feral Momentum, and Ronin's current qualitative package are approved through the present audit. Still resolve:
 
-- Wolf Tier IV around Blood Tempo, Feral Momentum, Blood Hunt, and Fanged Guard,
+- Wraith's Tier 0 weapon foundation,
 - Wraith's Blood Art form and later Tier distribution,
 - Wraith and Ronin small-growth and minor-supporting-benefit standards,
 - Ronin's follow-up audit after those standards are selected,
