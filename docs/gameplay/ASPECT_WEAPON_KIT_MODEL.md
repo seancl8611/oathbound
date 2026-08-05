@@ -4,7 +4,7 @@ title: Blood Aspect Weapon-Kit Model
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-05
 topics:
   - blood-aspects
   - weapon-kits
@@ -95,7 +95,7 @@ Parry timing, success conditions, defense input, posture-break consequences, and
 
 A defensive difference cannot be the Aspect's entire identity. No Aspect removes block or parry, gains automatic counters, becomes immune to posture break, or recovers posture freely while actively guarding.
 
-A fixed Tier benefit may protect a specific authored action, such as Wolf's Fanged Guard blocking one frontal blockable hit during a Held Attack charge. Such benefits must use normal shared rules and must not silently rewrite universal defense.
+A fixed Tier benefit may protect a specific authored action, such as Wolf's current Fanged Guard draft blocking one frontal blockable hit during a Held Attack charge. Such benefits must use normal shared rules and must not silently rewrite universal defense.
 
 ## Aspect-owned differentiation
 
@@ -186,7 +186,8 @@ Techniques should not duplicate a fixed Tier benefit or Blood Art without explic
 - strong player-directed forward movement,
 - moderate per-hit damage with high sustained output,
 - Predator's Passage, Hunting Slash, and Fang Reversal,
-- fixed progression through Blood Tempo, Dire Hunt, Fanged Guard, and Apex Feast,
+- approved Tier II Blood Hunt: immediate Health recovery and close disruption followed by one fixed-line encounter-crossing pursuit ending in Blood Fang,
+- working progression through Blood Tempo, Blood Hunt, Fanged Guard, and an unresolved final Tier IV redistribution,
 - failure state: overextension after missed pursuit or prolonged pressure.
 
 ### Wraith — reach and control
@@ -195,6 +196,7 @@ Techniques should not duplicate a fixed Tier benefit or Blood Art without explic
 - longest effective melee reach,
 - long lines, broad arcs, restrained movement, and short commitments,
 - Pale Lance, Ghostline Slash, and Veil Reversal,
+- current working progression through Pale Barrage, Wraith's Reach, Veiled Guard, and Pale Procession,
 - failure state: point-blank, cramped, or multi-directional pressure.
 
 ### Ronin — impact and stability
@@ -205,6 +207,7 @@ Techniques should not duplicate a fixed Tier benefit or Blood Art without explic
 - minimal movement and severe recovery,
 - Stillness Draw, Breaching Slash, and Answering Steel,
 - strongest guard profile balanced by slow posture recovery,
+- completed working progression through Steadfast Reprisal, Falling Mountain, Unbroken Resolve, and Shattering Wake,
 - failure state: missed heavy commitment and accumulated posture.
 
 The roster deliberately leaves mobility, evasion, ranged utility, and broad crowd-control specialization to universal systems, Techniques, prosthetics, and encounter design.
@@ -229,7 +232,7 @@ Wolf, Wraith, and Ronin meet this test at qualitative Tier 0 depth.
 
 Every selected Aspect follows one fixed Tier path from Tier 0 to Tier IV through Shrine Embrace choices. The Tier path is not a branching package selection.
 
-Wolf's fixed Tier package is approved as a working draft for current scoping. Wraith and Ronin remain the next package-design work. After all three are drafted, compare their power, accessibility, production cost, drawback severity, and Technique overlap before final production lock.
+All three Aspects have complete qualitative working packages. The current cross-roster audit is revising them one decision at a time before production lock. Wolf's Tier II Blood Hunt and Ronin's Tier I-IV package are approved through the present audit; Wolf's remaining Tier distribution and Wraith's Blood Art and later distribution remain active design work.
 
 ## Future roster capacity
 
