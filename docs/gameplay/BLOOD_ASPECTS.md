@@ -106,7 +106,7 @@ A Blood Art may be an immediate authored action, a temporary state, or another c
 - Wraith's current **Wraith's Reach** draft is a temporary reach-and-afterimage state under later review.
 - Ronin's **Falling Mountain** is an immediate planted slam with a delayed rupture.
 
-Modest ordinary defensive differences may use player-posture capacity, block posture efficiency, posture recovery direction, defensive access after attacks, and Parry Counter payoff. These differences remain subordinate to the shared defense system.
+Modest ordinary defensive differences may use player-posture capacity, block posture efficiency, posture recovery direction, defensive access after attacks, and Parry Counter payoff. These differences remain subordinate to the shared defense system. Wolf's Fanged Guard is an approved action-specific example: one frontal blockable hit may preserve selected high-risk Wolf commitments while using ordinary block posture and posture-break rules.
 
 ## Approved roster
 
@@ -177,10 +177,10 @@ Expected viability:
 - **Tier I — Blood Tempo:** successful Wolf contact may continue earlier into the Basic sequence through approved optional routes.
 - **Feral Momentum — Tier growth:** Rending Cross, Raking Fang, and Blood Cleave gain increasing deterministic Health and enemy-posture payoff when reached through successful Blood Tempo continuations; the payoff strengthens modestly at every Tier.
 - **Tier II — Blood Hunt:** a full meter restores limited Health, releases a short disruptive howl, and launches one long player-directed pursuit through eligible ordinary enemies before ending in Blood Fang.
-- **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
+- **Tier III — Fanged Guard:** one normal posture-costing frontal block may preserve Predator's Passage charge, or one connected Raking Fang or Blood Cleave startup per Basic sequence.
 - **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, restores Health, and primes Predator's Passage; it must be broadened or replaced during Wolf Tier redistribution.
 
-Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel and no longer grants a Hunting Slash rear-Rending-Cross damage bonus. Feral Momentum is deterministic rather than random critical-hit chance and uses no separate combo meter or persistent timer.
+Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel and no longer grants a Hunting Slash rear-Rending-Cross damage bonus. Feral Momentum is deterministic rather than random critical-hit chance and uses no separate combo meter or persistent timer. Tier III advances Feral Momentum by its normal one-Tier step rather than adding a separate critical or combo statistic.
 
 ### Wraith
 
@@ -196,7 +196,7 @@ Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel an
 - **Tier III — Unbroken Resolve:** selected commitments may survive one costly eligible hit, while disciplined clean attacks may create Measured Weight and Perfect Weight.
 - **Tier IV — Shattering Wake:** qualifying direct heavy impacts transfer reduced Health damage and strong posture force through the primary target into enemies behind it.
 
-Wolf Tiers I-II, Wolf's Feral Momentum growth rule, and Ronin's Tier I-IV package are approved through the current audit. Wolf Tiers III-IV and Wraith's full Tier package remain working drafts pending the ordered cross-roster questions.
+Wolf Tiers I-III, Wolf's Feral Momentum growth rule, and Ronin's Tier I-IV package are approved through the current audit. Wolf Tier IV and Wraith's full Tier package remain working drafts pending the ordered cross-roster questions.
 
 ## Blood contract
 
@@ -260,7 +260,7 @@ Wraith's Reach remains the current working draft pending the dedicated Wraith Bl
 
 Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
-1. decide Wolf Tier III and Tier IV around Blood Tempo, Feral Momentum, and Blood Hunt,
+1. decide Wolf Tier IV around Blood Tempo, Feral Momentum, Blood Hunt, and Fanged Guard,
 2. review Wraith's Blood Art form,
 3. redistribute Wraith's later Tiers,
 4. decide Wraith and Ronin small-growth structures,
@@ -270,7 +270,7 @@ Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
 After the Aspect audit, resolve shared affinity, limited direct Aspect-, Tier-, or Blood-Technique exceptions, and final animation, VFX, audio, HUD, Shrine, trial, selection, and persistent-progression requirements.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Fanged Guard timing and reset rules, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 
