@@ -31,7 +31,7 @@ related:
 
 Wolf is an approved member of the three-Aspect launch roster. This document owns Wolf's Tier 0 weapon kit and its current fixed Tier I-IV progression package.
 
-Tier II **Blood Hunt** is approved through the current cross-roster audit. Tiers I, III, and IV remain working drafts scheduled for redistribution review now that the Blood Art form is settled. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
+Tier I **Blood Tempo**, Wolf's **Feral Momentum** Tier-growth rule, and Tier II **Blood Hunt** are approved through the current cross-roster audit. Tiers III and IV remain working drafts scheduled for redistribution review. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
 
 ## Weapon identity
 
@@ -148,27 +148,64 @@ Wolf must not depend on completing its full sequence to produce competitive dama
 
 # Fixed Tier progression
 
-Each Wolf Tier provides a concrete net-positive combat benefit while preserving Wolf's inherent pursuit tradeoffs. Stronger movement and pursuit remain player-directed, and poor aim or timing can still leave Akio in an unsafe position. This limitation comes from how Wolf's actions operate rather than from a separate named drawback or added penalty attribute.
+Each Wolf Tier provides a concrete net-positive combat benefit while preserving Wolf's inherent pursuit tradeoffs. Stronger movement and pursuit remain player-directed, and poor aim or timing can still leave Akio in an unsafe position.
+
+Beginning at Tier I, every further Embrace also advances **Feral Momentum**, a small deterministic growth rule tied to successfully connected Basic-sequence continuations. Feral Momentum is a supporting reward rather than a separate meter, objective, or replacement for each Tier's headline mechanic.
 
 ## Tier I — Blood Tempo
 
-When Fang Slash, Rending Cross, or Raking Fang successfully hits an enemy, Akio may begin the next Basic Attack earlier during the current attack's recovery.
+Successful Wolf sword contact may flow into the Basic Attack sequence earlier during the current attack's contact recovery.
 
-After Predator's Passage, Hunting Slash, or Fang Reversal successfully hits, Akio may instead continue directly into Rending Cross during that attack's recovery. The sequence may then continue normally into Raking Fang and Blood Cleave.
+Approved continuations are:
 
-When Hunting Slash carries Akio through an eligible ordinary enemy, the immediate Rending Cross deals increased health and enemy-posture damage if it strikes that same enemy from behind.
+- Fang Slash → Rending Cross,
+- Rending Cross → Raking Fang,
+- Raking Fang → Blood Cleave,
+- Predator's Passage → Rending Cross,
+- Hunting Slash → Rending Cross,
+- Fang Reversal → Rending Cross.
 
-- These continuations are always optional.
-- The rear follow-up does not automatically turn Akio toward the crossed enemy.
-- The rear bonus is lost if Akio performs another action first or Rending Cross does not strike the same enemy from behind.
-- The benefit exists only during the current attack's recovery and is not stored.
-- Missed attacks receive no benefit.
-- Block, parry, dash, and Prosthetic actions are not accelerated.
-- This is an authored Wolf interaction rather than a universal backstab-damage rule.
+The following boundaries apply:
 
-Raking Fang and Hunting Slash travel slightly farther along the direction chosen by the player. Hunting Slash may therefore carry Akio farther through an eligible ordinary enemy when the hit and destination are valid. Neither attack can turn, home, or correct its path after it begins.
+- Every continuation is optional.
+- The benefit exists only during the current attack's contact recovery and is not stored.
+- Missed attacks receive no Blood Tempo continuation.
+- The player manually selects the direction of every continued attack.
+- Blood Cleave does not loop directly into Fang Slash.
+- Block, parry, dash, Prosthetic use, and other defensive or utility actions are not accelerated.
+- Blood Tempo does not reduce whiff recovery.
+- Blood Tempo adds no tracking, corrective turning, extra travel, rear-hit bonus, or automatic target selection.
 
-Blood Tempo remains a working Tier I draft and will be reviewed for possible simplification during Wolf Tier redistribution.
+The resulting Tier I rhythm is:
+
+> enter through successful Wolf contact → decide whether continued pressure is safe → flow into the Basic sequence or stop and respond
+
+### Feral Momentum — Tier growth
+
+Feral Momentum gives a modest deterministic payoff to later Basic Attacks reached through successful Blood Tempo continuations.
+
+- Rending Cross receives the smallest additional Health-damage and enemy-posture payoff.
+- Raking Fang receives a larger additional payoff.
+- Blood Cleave receives the largest additional payoff.
+- Fang Slash remains the baseline opener and receives no sequence-position bonus.
+- Predator's Passage, Hunting Slash, and Fang Reversal may enter at Rending Cross after successful contact; that Rending Cross receives the normal second-position Feral Momentum payoff and may continue escalating through Raking Fang and Blood Cleave.
+- A later Basic Attack receives Feral Momentum only when the preceding approved attack successfully connected and the player uses the Blood Tempo continuation.
+- Continuing the ordinary sequence after a miss does not grant the connected-sequence bonus.
+- Each Embrace from Tier I through Tier IV modestly increases the Feral Momentum payoff applied to these later connected sequence positions.
+
+Feral Momentum does not:
+
+- create random critical-hit chance,
+- use a separate meter, stack counter, or persistent combo timer,
+- increase Predator's Passage, Hunting Slash, Fang Reversal, Blood Hunt, or Blood Fang damage,
+- increase attack travel,
+- reduce miss recovery,
+- require Blood Cleave to be used,
+- or prevent the player from stopping the sequence to defend, move, dash, or use another action.
+
+The reward is intentionally deterministic rather than critical-hit based so the player can understand why a connected sequence became stronger. Exact Health-damage and enemy-posture values at Tiers I-IV remain tuning work. Presentation should use modestly intensifying hit feedback on the eligible sequence positions without creating a new HUD meter.
+
+The removed Hunting Slash rear-Rending-Cross bonus and the removed Raking Fang and Hunting Slash travel increases do not move automatically to another Wolf Tier. They remain available only for later reconsideration as ordinary Technique space if the catalog requires them.
 
 ## Tier II — Blood Hunt
 
@@ -299,29 +336,33 @@ Apex Feast is explicitly a working draft. Its current deathblow-only trigger is 
 
 # Progression summary
 
-- **Tier I — Blood Tempo:** successful contact improves Wolf's offensive flow, alternate sequence entries, and selected pursuit follow-ups; exact breadth remains under review.
+- **Tier I — Blood Tempo:** successful Wolf contact may continue earlier into the Basic sequence through one unified set of optional routes.
+- **Feral Momentum — Tier growth:** every Embrace modestly increases the deterministic Health and enemy-posture payoff of later Basic Attacks reached through successful Blood Tempo continuations.
 - **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
 - **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
 - **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, heals, and primes Predator's Passage; the capstone must be broadened or replaced during redistribution review.
 
 The current progression is:
 
-> successful entries connect Wolf's ordinary pressure → Blood Hunt converts a full meter into one explosive encounter-crossing pursuit → later Tiers remain to be redistributed around the approved immediate Art
+> successful contact connects Wolf's ordinary pressure and strengthens later sequence hits → Blood Hunt converts a full meter into one explosive encounter-crossing pursuit → later Tiers remain to be redistributed around the approved foundation
 
 Wolf's short reach, directional pursuit, unsafe misses, and dangerous ending position remain part of the weapon kit rather than separate Tier penalties.
 
 # Technique space
 
-Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not simply duplicate Blood Tempo, Blood Hunt's activation howl and encounter-crossing pursuit, Blood Fang, Fanged Guard, or the final approved Tier IV package.
+Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not reproduce Blood Tempo's complete contact-routing package, Feral Momentum's full Tier-scaled connected-sequence escalation, Blood Hunt's activation howl and encounter-crossing pursuit, Blood Fang, Fanged Guard, or the final approved Tier IV package.
 
-Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, or movement Technique.
+General Basic Attack damage, posture, critical, movement, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Wolf's exact fixed progression behavior.
+
+Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, critical-hit, or movement Technique.
 
 # Production requirements
 
 The working package establishes requirements for:
 
-- Blood Tempo chain-window and alternate-entry feedback,
-- Hunting Slash pass-through constraints and the empowered rear Rending Cross,
+- Blood Tempo contact-continuation windows and alternate-entry feedback,
+- Feral Momentum sequence-position, connected-state, and Tier-scaling feedback without a separate HUD meter,
+- Hunting Slash pass-through constraints without a fixed rear-damage reward,
 - Blood Hunt full-meter readiness, activation Health recovery, Blood howl, directional preparation, pursuit line, pass-through collision, interruption categories, stopping logic, and ending recovery,
 - the Blood wolf manifestation and Blood Fang endpoint animation,
 - Fanged Guard charge and block feedback while its current draft remains active,
@@ -330,4 +371,4 @@ The working package establishes requirements for:
 - Shrine Tier summaries and action-specific behavior changes,
 - and Wolf teaching and mastery-trial coverage.
 
-Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, healing, Blood gain, pursuit distance, interruption resistance, collision, stopping priority, and recovery values remain implementation, production, and playtesting work.
+Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, Feral Momentum scaling, healing, Blood gain, pursuit distance, interruption resistance, collision, stopping priority, and recovery values remain implementation, production, and playtesting work.

@@ -82,6 +82,8 @@ No Aspect uses corrective tracking, hidden homing, or post-input target correcti
 
 A sequence is a set of available attacks rather than a completion objective. The player may stop, defend, dash, redirect, use a Prosthetic, or abandon the sequence whenever the encounter demands it.
 
+A Tier may reward successfully connected sequence positions without turning sequence completion into a required objective. Wolf's Feral Momentum is the approved example: later Basic Attacks receive a modest deterministic payoff only when reached through successful Blood Tempo continuations, but each attack remains independently useful and the player may stop at any time.
+
 ## Universal combat layer
 
 Every launch Aspect retains the same functional:
@@ -155,6 +157,7 @@ Aspect progression is fixed rather than a branching package selection, but inves
 - **Resist** keeps the current Tier and provides approved stabilization support.
 - **Embrace** advances the selected Aspect by one fixed Tier and empties Corruption.
 - Each Tier presents one headline improvement and at most one minor supporting rule.
+- An Aspect may use one small repeated growth rule across several Tiers when it reinforces the kit without becoming generic stat inflation; Wolf's Feral Momentum is the approved example.
 - Each Tier must be clearly net-positive and preserve the Aspect's inherent limitations through the upgraded action itself.
 - **Tier IV** is the maximum.
 - At Tier IV, a full threshold offers **Stabilize** rather than Tier V.
@@ -171,10 +174,13 @@ Expected viability:
 
 ### Wolf
 
-- **Tier I — Blood Tempo:** successful contact improves offensive flow, alternate entries, and selected pursuit follow-ups; exact breadth remains under review.
+- **Tier I — Blood Tempo:** successful Wolf contact may continue earlier into the Basic sequence through approved optional routes.
+- **Feral Momentum — Tier growth:** Rending Cross, Raking Fang, and Blood Cleave gain increasing deterministic Health and enemy-posture payoff when reached through successful Blood Tempo continuations; the payoff strengthens modestly at every Tier.
 - **Tier II — Blood Hunt:** a full meter restores limited Health, releases a short disruptive howl, and launches one long player-directed pursuit through eligible ordinary enemies before ending in Blood Fang.
 - **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
 - **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, restores Health, and primes Predator's Passage; it must be broadened or replaced during Wolf Tier redistribution.
+
+Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel and no longer grants a Hunting Slash rear-Rending-Cross damage bonus. Feral Momentum is deterministic rather than random critical-hit chance and uses no separate combo meter or persistent timer.
 
 ### Wraith
 
@@ -190,7 +196,7 @@ Expected viability:
 - **Tier III — Unbroken Resolve:** selected commitments may survive one costly eligible hit, while disciplined clean attacks may create Measured Weight and Perfect Weight.
 - **Tier IV — Shattering Wake:** qualifying direct heavy impacts transfer reduced Health damage and strong posture force through the primary target into enemies behind it.
 
-Wolf's Tier II and Ronin's Tier I-IV package are approved through the current audit. Wolf Tiers I, III, and IV and Wraith's full Tier package remain working drafts pending the ordered cross-roster questions.
+Wolf Tiers I-II, Wolf's Feral Momentum growth rule, and Ronin's Tier I-IV package are approved through the current audit. Wolf Tiers III-IV and Wraith's full Tier package remain working drafts pending the ordered cross-roster questions.
 
 ## Blood contract
 
@@ -254,17 +260,17 @@ Wraith's Reach remains the current working draft pending the dedicated Wraith Bl
 
 Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
-1. redistribute Wolf Tiers I, III, and IV around Blood Hunt,
+1. decide Wolf Tier III and Tier IV around Blood Tempo, Feral Momentum, and Blood Hunt,
 2. review Wraith's Blood Art form,
 3. redistribute Wraith's later Tiers,
-4. decide the per-Tier small-growth structure,
+4. decide Wraith and Ronin small-growth structures,
 5. audit minor supporting benefits,
 6. recheck Ronin against the approved standards,
 7. perform the final cross-roster production lock.
 
 After the Aspect audit, resolve shared affinity, limited direct Aspect-, Tier-, or Blood-Technique exceptions, and final animation, VFX, audio, HUD, Shrine, trial, selection, and persistent-progression requirements.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 

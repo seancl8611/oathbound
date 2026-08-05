@@ -35,6 +35,8 @@ The following decisions are settled and should not be reopened as top-level ques
 - Every Tier must be clearly net-positive while preserving the Aspect's inherent limitations through the upgraded action itself.
 - A Tier may contain one headline benefit and at most one minor supporting rule. A small supporting reward may improve accessibility and immediate feel, but it must not turn Tier progression into generic stat inflation or erase Technique space.
 - Techniques remain universal temporary run rewards with four active slots, one reserve slot, and at most one refinement per Technique.
+- Wolf Tier I is **Blood Tempo**, a unified successful-contact continuation system into the Basic sequence.
+- Wolf's approved small Tier-growth rule is **Feral Momentum**: later Basic Attacks reached through successful Blood Tempo continuations gain a modest deterministic Health- and enemy-posture payoff that strengthens with each Embrace.
 - Wolf Tier II is **Blood Hunt**, an immediate full-meter pursuit Art rather than a temporary transformation.
 
 ## Current working Aspect packages
@@ -43,7 +45,8 @@ All three Aspects have qualitative Tier I-IV working packages. These packages ar
 
 ### Wolf
 
-- **Tier I — Blood Tempo:** successful contact improves offensive flow, alternate entries, and selected pursuit follow-ups; exact breadth remains under review.
+- **Tier I — Blood Tempo:** successful Wolf contact may continue earlier into the Basic sequence through approved optional routes.
+- **Feral Momentum — Tier growth:** later connected Basic-sequence positions gain modest deterministic Health and posture payoff that scales at every Tier.
 - **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
 - **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
 - **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, restores Health, and primes Predator's Passage; it must be broadened or replaced.
@@ -114,20 +117,58 @@ Dire Hunt's temporary transformation, general damage bonuses, per-hit lifesteal,
 
 Reassess Tiers I, III, and IV around the approved immediate Blood Hunt Art.
 
+### Resolved Tier I — Blood Tempo
+
+Blood Tempo is one unified successful-contact continuation mechanic.
+
+Approved routes:
+
+- Fang Slash → Rending Cross,
+- Rending Cross → Raking Fang,
+- Raking Fang → Blood Cleave,
+- Predator's Passage → Rending Cross,
+- Hunting Slash → Rending Cross,
+- Fang Reversal → Rending Cross.
+
+Approved boundaries:
+
+- continuations are optional,
+- they exist only during the current attack's contact recovery,
+- misses receive no accelerated continuation,
+- direction remains fully player-selected,
+- Blood Cleave does not loop into Fang Slash,
+- defensive and utility actions are not accelerated,
+- whiff recovery is unchanged,
+- and Blood Tempo adds no tracking, corrective turning, additional travel, or rear-hit bonus.
+
+The former Hunting Slash rear-Rending-Cross damage bonus and the former Raking Fang and Hunting Slash travel increases are removed from fixed Wolf progression. They are not automatically moved to another Tier.
+
+### Resolved Wolf growth rule — Feral Momentum
+
+Beginning at Tier I, later Basic Attacks reached through successful Blood Tempo continuations receive a deterministic sequence-position bonus:
+
+- Rending Cross receives the smallest additional Health and enemy-posture payoff,
+- Raking Fang receives a larger payoff,
+- Blood Cleave receives the largest payoff,
+- and each Embrace through Tier IV modestly increases those payoffs.
+
+Alternate entries from Predator's Passage, Hunting Slash, and Fang Reversal begin at Rending Cross and receive the normal second-position bonus. The escalation requires the preceding approved action to connect successfully; continuing after a miss does not receive it.
+
+Feral Momentum uses no random critical-hit roll, separate meter, stack counter, or persistent combo timer. It does not improve non-Basic actions, Blood Hunt, travel, or whiff recovery, and it does not make Blood Cleave mandatory.
+
+### Remaining Wolf Tier questions
+
 Resolve:
 
-- Is Blood Tempo overloaded with accelerated chains, alternate entries, rear payoff, and travel increases?
-- Which Blood Tempo behavior is the essential Tier I headline?
-- Which secondary behavior, if any, belongs at Tier I rather than a later Tier or Technique?
 - Does Fanged Guard remain appropriate when Blood Fang is no longer a charged Held replacement?
-- Should Fanged Guard continue to affect only Predator's Passage, be expanded through a different Wolf action, or be replaced?
+- Should Fanged Guard continue to affect only Predator's Passage, expand through a different Wolf action, or be replaced?
 - What becomes Wolf's Tier IV headline benefit?
 - How can Tier IV provide meaningful value during boss fights and ordinary combat without depending solely on a deathblow?
 - Can deathblows remain a secondary refresh, amplification, or special payoff rather than the only trigger?
 - How should Blood Hunt interact with later Tiers without making every Wolf Tier depend on the Blood Art?
-- Which Wolf Tiers need one small beginner-visible supporting reward?
+- Do Tier III or IV need one additional beginner-visible supporting rule beyond their Feral Momentum increase?
 
-**This is the current active question.**
+**The current active question is Wolf Tier III.**
 
 ## Question 3 — Wraith Blood Art form
 
@@ -160,18 +201,17 @@ Resolve:
 
 Decide whether every Embrace should include a small, always-readable growth reward in addition to its headline mechanic.
 
-Candidate identity directions include:
+Current directions:
 
-- Wolf: modest authored attack-cadence improvements,
-- Wraith: modest spectral attack-reach improvements,
-- Ronin: modest maximum-Health improvements.
+- **Wolf is resolved:** Feral Momentum modestly increases the Health and enemy-posture payoff of later successfully connected Basic-sequence positions at every Tier.
+- **Wraith remains unresolved:** modest spectral attack-reach growth is one candidate.
+- **Ronin remains unresolved:** modest maximum-Health growth is one candidate.
 
 Resolve:
 
-- Should growth occur at every Tier, only selected Tiers, or through action-specific supporting rules instead of one repeated stat track?
+- Should Wraith and Ronin also use one repeated growth track, selected Tier-specific supporting rules, or no universal pattern?
 - Which game attributes are real scalable implementation metrics rather than vague labels?
 - Which changes are perceptible and enjoyable for beginners without becoming mandatory raw power?
-- How should attack speed be authored without compressing parry readability or erasing severe miss recovery?
 - How much additional reach can Wraith gain without becoming excessively safe?
 - How much Health can Ronin gain without making its strongest guard and interruption-resistance tools generally optimal?
 - Should generic Health, damage, posture, or Blood-generation increases remain rare because Techniques and permanent progression also need meaningful space?
@@ -289,7 +329,8 @@ Keep exact values and frame-level decisions in their owning gameplay, encounter,
 - Corruption thresholds, Shrine frequency, route distribution, and support values,
 - Blood capacity, gain weighting, activation cost, duration, and anti-farming rules,
 - exact Blood Hunt preparation, travel, collision, stopping priority, interruption categories, damage, posture, Health recovery, howl radius, and ending recovery,
-- exact per-Tier stat or action-growth values after the growth structure is approved,
+- exact Feral Momentum Health-damage and enemy-posture scaling at Tiers I-IV,
+- exact Wraith or Ronin Tier-growth values after their structures are approved,
 - enemy immunity and response tables,
 - Spirit costs and Prosthetic cooldowns,
 - room and encounter counts,
