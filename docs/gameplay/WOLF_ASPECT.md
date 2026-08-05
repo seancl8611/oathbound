@@ -4,7 +4,7 @@ title: Wolf Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-05
 topics:
   - blood-aspects
   - wolf
@@ -31,7 +31,7 @@ related:
 
 Wolf is an approved member of the three-Aspect launch roster. This document owns Wolf's Tier 0 weapon kit and its current fixed Tier I-IV progression package.
 
-The Tier package is approved as a working draft for current scoping. It may be revisited after Wraith and Ronin are developed or after playable testing. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
+Tier II **Blood Hunt** is approved through the current cross-roster audit. Tiers I, III, and IV remain working drafts scheduled for redistribution review now that the Blood Art form is settled. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
 
 ## Weapon identity
 
@@ -168,101 +168,151 @@ When Hunting Slash carries Akio through an eligible ordinary enemy, the immediat
 
 Raking Fang and Hunting Slash travel slightly farther along the direction chosen by the player. Hunting Slash may therefore carry Akio farther through an eligible ordinary enemy when the hit and destination are valid. Neither attack can turn, home, or correct its path after it begins.
 
-## Tier II — Dire Hunt
+Blood Tempo remains a working Tier I draft and will be reviewed for possible simplification during Wolf Tier redistribution.
 
-Tier II unlocks Wolf's Blood meter and Blood Art.
+## Tier II — Blood Hunt
 
-Wolf gains Blood through meaningful sword damage, posture breaks, Fang Reversal after a parry, and deathblows. Dire Hunt requires a full meter, activates manually, and consumes the stored Blood. Blood cannot be generated while the Art is active and all Blood state resets after the run.
+Tier II unlocks Wolf's Blood meter and immediate Blood Art.
 
-Exact capacity, gain values, duration, and anti-farming thresholds remain tuning work.
+Wolf gains Blood through meaningful sword damage, enemy-posture contribution, Fang Reversal after a parry, posture breaks, and deathblows. Blood Hunt requires a full meter, activates manually, consumes the stored Blood, and generates no Blood while the immediate Art is resolving. Blood generation resumes after Blood Hunt ends.
 
-### Blood Art — Dire Hunt
+Exact capacity, gain values, activation timing, travel, collision, and anti-farming thresholds remain tuning work.
 
-Akio allows the Wolf expression of Returning Blood to temporarily alter his body and swordsmanship.
+### Blood Art — Blood Hunt
 
-When Dire Hunt activates:
+Akio releases a violent Blood howl, selects a direction during a brief readable preparation, and launches into a long committed pursuit while a massive Blood wolf form manifests around him. The rush tears through eligible ordinary enemies before ending in **Blood Fang**, a crushing jaw strike.
 
-- a short-range Blood howl interrupts nearby ordinary enemies,
-- Akio clears his accumulated player posture,
-- and Akio restores a limited amount of health.
+Blood Hunt compresses Wolf's pressure-and-pursuit identity into one decisive action:
 
-These effects give the activation immediate value even if Akio cannot safely attack afterward.
+> create close-range disorder → choose a line through the encounter → tear through the pack → finish on the priority target
 
-For the duration of Dire Hunt:
+### Guaranteed activation value
 
-- direct katana hits restore limited health,
-- light enemy attacks are less likely to interrupt committed Wolf sword attacks,
-- Wolf attacks deal greater health and enemy-posture damage,
-- and Predator's Passage is replaced by Blood Fang.
+When Blood Hunt commits:
 
-Akio retains normal block, parry, and dash behavior. Dire Hunt does not require successful parries to be useful.
+- Akio restores a limited amount of Health,
+- a short-range Blood howl briefly staggers nearby ordinary enemies,
+- and stronger enemies and bosses receive modest enemy-posture pressure without automatic stagger.
+
+These effects resolve when the Blood meter is spent and do not depend on the pursuit or Blood Fang connecting. Blood Hunt therefore provides practical value even when the chosen route later misses, is interrupted by an overriding attack, or cannot reach the intended target.
+
+Blood Hunt does not clear player posture. Immediate Health recovery is Wolf's primary activation recovery direction.
+
+### Pursuit line
+
+After the howl, Akio commits along the player-selected direction.
+
+- The direction is fixed once the pursuit launches.
+- Blood Hunt cannot curve, turn, track, home, retarget, or correct toward an enemy.
+- It grants no additional neutral-dash invulnerability.
+- The rush travels farther and carries greater force than Predator's Passage.
+- Eligible ordinary enemies crossed directly take reduced Health damage and meaningful enemy-posture damage.
+- Each crossed enemy may be damaged only once by the pursuit portion.
+- Akio may pass through an eligible ordinary enemy only when safe and valid space exists along the original line.
+- The pursuit stops against elites, bosses, heavy enemies, walls, blocked geometry, or invalid destinations.
+
+Blood Hunt is not a locked multi-target cinematic. It resolves only against enemies and geometry occupying the line selected by the player.
 
 ### Blood Fang
 
-Akio performs a committed forward lunge while a large Blood-formed wolf jaw manifests around him and bites at the point of contact.
+When the pursuit reaches a stopping target or obstacle, or reaches its maximum authored distance, the manifested wolf jaws snap shut in Blood Fang.
 
-- Blood Fang follows the direction selected when the attack begins.
-- It does not track, turn, or select a target automatically.
-- A successful bite restores more health than an ordinary sword hit.
-- It deals strong health and enemy-posture damage.
-- It may pass through eligible ordinary enemies when safe space exists on the far side.
-- It stops against heavy enemies, elites, bosses, walls, and invalid destinations.
-- A miss retains severe recovery.
+Blood Fang provides:
 
-Blood Fang is Dire Hunt's main new attack and visual centerpiece. The rest of the transformation should reuse Wolf's existing attack library with stronger Blood presentation where practical.
+- strong direct Health damage,
+- strong enemy-posture damage,
+- powerful ordinary-enemy stagger where enemy rules permit,
+- a wider contact area than Predator's Passage,
+- and heavy impact feedback.
 
-Blood Fang and Wolf's existing pursuit attacks carry Akio farther along the selected direction and remain fully committed after release. The transformation is clearly stronger than normal Wolf combat, but careless aim can place Akio in danger.
+Against a boss or elite, Blood Hunt functions as a committed direct approach ending in Blood Fang. Against groups, the player may line up ordinary enemies before finishing on a priority target or at the route endpoint.
+
+The final bite does not restore additional Health by default. Blood Hunt's limited Health recovery is guaranteed at activation rather than dependent on landing the endpoint.
+
+### Interruption and damage rules
+
+During the launched high-speed pursuit, light ordinary enemy hits do not interrupt Blood Hunt.
+
+- Those hits still deal their full normal Health damage, player-posture damage, status buildup, and other valid effects.
+- A posture break interrupts the Art.
+- Lethal damage interrupts the Art.
+- Perilous or unblockable attacks, authored grabs, launches, and overriding knockdowns interrupt normally.
+- The protection applies only after the pursuit launches; the brief directional preparation remains vulnerable under ordinary rules.
+- Blood Hunt provides no block, parry, damage reduction, invulnerability, automatic counter, posture restoration, or protection during ending recovery.
+
+The activation howl helps create a brief close-range opening, but it does not guarantee a safe route or prevent stronger enemies from responding.
+
+### Failure state
+
+Blood Hunt preserves and intensifies Wolf's normal pursuit risk.
+
+A poorly selected route may cause Akio to:
+
+- pass the intended target,
+- stop against the wrong enemy or obstacle,
+- finish in a surrounded position,
+- or complete Blood Fang into empty space at maximum distance.
+
+A missed or poorly positioned final bite receives severe authored recovery. Blood Hunt does not place Akio safely behind a target, return him to his starting point, or protect him after the action ends.
+
+Blood Hunt remains distinct from Predator's Passage. Predator's Passage is Wolf's repeatable single-target Held pursuit; Blood Hunt is a full-meter encounter-crossing line attack with guaranteed activation recovery, through-enemy pressure, and a major Blood Fang endpoint.
+
+The resulting Tier II rhythm is:
+
+> build Blood through aggressive sword combat → activate for immediate Health recovery and close-range disruption → choose one committed pursuit line → tear through eligible ordinary enemies → finish in Blood Fang and accept the resulting position
 
 ## Tier III — Fanged Guard
 
-Tier III upgrades Predator's Passage and Blood Fang while they are being charged.
+Tier III currently upgrades Predator's Passage while it is being charged.
 
-While charging either attack, Akio forms a Blood jaw around the front of his body. The first frontal blockable enemy attack that reaches Akio:
+While charging Predator's Passage, Akio forms a Blood jaw around the front of his body. The first frontal blockable enemy attack that reaches Akio:
 
 - is blocked using normal player-posture rules,
 - does not cancel the Held Attack,
-- and immediately completes the Held Attack's charge.
+- and immediately completes Predator's Passage's charge.
 
 The player still chooses when and where to release the attack.
 
 Fanged Guard does not protect against attacks from the side or rear or against unblockable attacks. It can block only one attack during each charge.
 
-Fanged Guard helps Akio complete the charge but does not make the resulting pursuit safe. Predator's Passage and Blood Fang retain their selected direction and severe miss recovery.
+Fanged Guard helps Akio complete Predator's Passage but does not make the resulting pursuit safe. The attack retains its selected direction and severe miss recovery.
+
+Fanged Guard no longer applies to Blood Fang because Blood Fang is now the endpoint of the immediate Blood Hunt Art rather than a charged Held Attack. Tier III remains a working draft scheduled for review during Wolf Tier redistribution.
 
 ## Tier IV — Apex Feast
 
-Any successful deathblow, including a boss-phase deathblow, triggers Apex Feast.
+Any successful deathblow, including a boss-phase deathblow, currently triggers Apex Feast.
 
 When Apex Feast activates:
 
 - Returning Blood erupts in a short radius around Akio,
 - nearby ordinary enemies are briefly staggered,
 - stronger nearby enemies receive enemy-posture damage,
-- Akio restores a limited amount of health,
-- and Akio's next Held Attack begins fully charged.
+- Akio restores a limited amount of Health,
+- and Akio's next Predator's Passage begins fully charged.
 
-The primed Held Attack may be released immediately without waiting through its normal charge. The benefit is consumed when Predator's Passage or Blood Fang is used, does not stack, and expires when the encounter ends.
+The primed Predator's Passage may be released immediately without waiting through its normal charge. The benefit does not stack and expires when the encounter ends.
 
-Apex Feast does not automatically release the Held Attack or select its direction.
+Apex Feast does not automatically release the Held Attack or select its direction. The primed pursuit retains its full travel and miss recovery.
 
-The primed pursuit retains its full travel and miss recovery. Tier IV gives Wolf a concrete transition from a deathblow into another pursuit, but the player must still aim and release it correctly.
+Apex Feast is explicitly a working draft. Its current deathblow-only trigger is not considered sufficient for final Tier IV because it may provide little or no value during bosses or encounters without frequent deathblows. Wolf Tier redistribution must replace or broaden this capstone after Blood Hunt's later-Tier interactions are reviewed.
 
 # Progression summary
 
-- **Tier I — Blood Tempo:** successful Basic Attacks accelerate the next Basic input; successful pursuit, dash, and parry-counter hits may continue into Rending Cross; crossing an ordinary enemy with Hunting Slash can empower the immediate rear Rending Cross.
-- **Tier II — Dire Hunt:** activation immediately restores health, clears posture, interrupts nearby ordinary enemies, and begins a transformation with lifesteal, interruption resistance, increased damage, and Blood Fang.
-- **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack without cancelling the charge.
-- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited health, and fully charge the next Held Attack.
+- **Tier I — Blood Tempo:** successful contact improves Wolf's offensive flow, alternate sequence entries, and selected pursuit follow-ups; exact breadth remains under review.
+- **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
+- **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
+- **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, heals, and primes Predator's Passage; the capstone must be broadened or replaced during redistribution review.
 
-The progression is:
+The current progression is:
 
-> successful entries and hits connect Wolf's offense into a fluid hunt → Dire Hunt guarantees immediate recovery and unlocks Blood Fang → Fanged Guard helps prepare pursuit under pressure → deathblows prime the next hunt
+> successful entries connect Wolf's ordinary pressure → Blood Hunt converts a full meter into one explosive encounter-crossing pursuit → later Tiers remain to be redistributed around the approved immediate Art
 
-Every Tier remains clearly stronger than the previous one. Wolf's short reach, directional pursuit, and unsafe misses remain part of the weapon kit rather than separate Tier penalties.
+Wolf's short reach, directional pursuit, unsafe misses, and dangerous ending position remain part of the weapon kit rather than separate Tier penalties.
 
 # Technique space
 
-Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not simply duplicate Blood Tempo, Dire Hunt, Fanged Guard, Blood Fang, or Apex Feast.
+Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not simply duplicate Blood Tempo, Blood Hunt's activation howl and encounter-crossing pursuit, Blood Fang, Fanged Guard, or the final approved Tier IV package.
 
 Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, or movement Technique.
 
@@ -272,12 +322,12 @@ The working package establishes requirements for:
 
 - Blood Tempo chain-window and alternate-entry feedback,
 - Hunting Slash pass-through constraints and the empowered rear Rending Cross,
-- Dire Hunt activation, active-state, and ending presentation,
-- the Blood Fang animation and Blood-jaw effect,
-- Fanged Guard charge and block feedback,
-- Apex Feast deathblow eruption and primed-Held state,
-- Blood unavailable, building, ready, activated, active, consumed, and rebuilding HUD states,
+- Blood Hunt full-meter readiness, activation Health recovery, Blood howl, directional preparation, pursuit line, pass-through collision, interruption categories, stopping logic, and ending recovery,
+- the Blood wolf manifestation and Blood Fang endpoint animation,
+- Fanged Guard charge and block feedback while its current draft remains active,
+- replacement or broadening of Apex Feast during Wolf Tier redistribution,
+- Blood unavailable, building, ready, activated, consumed, resolving, and rebuilding HUD states,
 - Shrine Tier summaries and action-specific behavior changes,
 - and Wolf teaching and mastery-trial coverage.
 
-Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, healing, Blood gain, duration, interruption resistance, collision, and recovery values remain implementation, production, and playtesting work.
+Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, healing, Blood gain, pursuit distance, interruption resistance, collision, stopping priority, and recovery values remain implementation, production, and playtesting work.
