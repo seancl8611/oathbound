@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-05
 topics:
   - techniques
   - run-builds
@@ -88,13 +88,16 @@ The meaningful opportunity cost comes from route rewards. Choosing a Shrine can 
 - Fixed Aspect Tier progression must not make Techniques secondary.
 - A strong Technique route must remain capable of winning at Tier 0-I.
 
-Wolf's fixed package currently owns these behaviors and ordinary Techniques should not reproduce them directly:
+Wolf's current package owns these behaviors and ordinary Techniques should not reproduce them directly:
 
-- Blood Tempo's earlier next-Basic input after valid contact,
-- Dire Hunt's guaranteed activation recovery and transformation,
-- Blood Fang,
-- Fanged Guard's one-hit frontal block while charging the Held Attack,
-- Apex Feast's deathblow eruption and fully charged next Held Attack.
+- Blood Tempo's earlier next-Basic input after valid contact and its current alternate-entry behavior while that Tier remains under review,
+- Blood Hunt's guaranteed activation Health recovery and short disruptive howl,
+- Blood Hunt's full-meter fixed-line pursuit through eligible ordinary enemies,
+- Blood Fang as Blood Hunt's endpoint strike,
+- Fanged Guard's current one-hit frontal block while charging Predator's Passage while that Tier remains under review,
+- and the final approved Wolf Tier IV behavior after Apex Feast is revised.
+
+The removed Dire Hunt transformation no longer reserves generic temporary damage increases, moveset-wide lifesteal, moveset-wide interruption resistance, or moveset-wide travel increases from the ordinary Technique catalog. Those effects remain subject to the normal Technique, Relic, balance, and overlap rules rather than being automatically excluded by Wolf Tier II.
 
 ## Starting capacity
 
@@ -245,10 +248,13 @@ Prosthetic Techniques use the normal Technique system.
 
 ## Aspect relationship still to define
 
-The roster, fixed Tier structure, optional-investment contract, and Wolf working package are approved. Still resolve:
+The roster, fixed Tier structure, optional-investment contract, Wolf Tier II Blood Hunt, and Ronin's current qualitative package are approved through the present audit. Still resolve:
 
-- Wraith and Ronin Tier packages and their power budgets,
-- cross-roster overlap after all three packages exist,
+- Wolf Tier I, III, and IV redistribution around Blood Hunt,
+- Wraith's Blood Art form and later Tier distribution,
+- the cross-roster small-growth and minor-supporting-benefit standards,
+- Ronin's follow-up audit after those standards are selected,
+- final cross-roster power and production budgets,
 - soft offer-weighting strength,
 - neutral and alternate-affinity representation,
 - whether any direct Wolf-, Wraith-, Ronin-, Tier-, or Blood-referencing Technique ships at launch,
@@ -324,7 +330,7 @@ Permanent progression may unlock additional entries into future reward pools. It
 
 Before approving the launch catalog, resolve:
 
-1. Wraith and Ronin Tier packages and cross-roster power budget,
+1. the remaining cross-roster Aspect package questions in `docs/_meta/OPEN_QUESTIONS.md`,
 2. primary-category boundaries,
 3. combat-verb tag taxonomy,
 4. affinity and offer-weighting rules,
