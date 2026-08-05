@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-03
+last_reviewed: 2026-08-05
 topics:
   - project-identity
   - combat
@@ -94,34 +94,46 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 | Aspect | Weapon identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Four-hit fast close-range pressure, player-directed pursuit, sustained output, and nearby target transfer through aim and attack geometry | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Two-hit extended spectral control with the longest melee reach, selected committed multi-hit attacks, delayed echoes, one preserved Held parry, and three-lane frontal barrage control at Tier IV | Slower cadence than Wolf, fewer ordinary options, restrained movement, stationary barrage commitment, and vulnerability when spacing collapses |
+| Wraith | Current two-hit extended spectral reach and frontal-control foundation, with deliberate lines and arcs rather than pursuit | Slower cadence than Wolf, fewer ordinary options, restrained movement, direction dependence, and vulnerability when spacing collapses |
 | Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, fixed attack lines, minimal movement, and slow posture recovery |
 
 These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain shared-system, Technique, and Prosthetic territory.
 
 A fourth or fifth Aspect is outside current launch paper-design and production scope. Expansion should be reconsidered only after playable testing demonstrates a genuinely missing identity that the current systems cannot support.
 
-## Wolf fixed progression working draft
+## Wolf fixed progression
 
-Wolf's current Tier package is approved for scoping and may be revised after the other Aspects or playable testing:
+Wolf's current Tier package is approved through the present cross-roster audit:
 
-- **Tier I — Blood Tempo:** successful Basic Attacks allow the next Basic Attack input earlier.
-- **Tier II — Dire Hunt:** activating a full Blood meter immediately restores limited Health, clears player posture, interrupts nearby ordinary enemies, and begins a transformation with lifesteal, increased Health and posture damage, interruption resistance against light attacks, and Blood Fang.
-- **Tier III — Fanged Guard:** while Predator's Passage or Blood Fang is charging, one frontal blockable attack is blocked through normal player-posture rules without cancelling the charge.
-- **Tier IV — Apex Feast:** deathblows cause a nearby Blood eruption, restore limited Health, and fully charge the next Held Attack.
+- **Tier I — Blood Tempo:** approved successful-contact routes may continue earlier into the Basic sequence.
+- **Feral Momentum — Tier growth:** later Basic attacks reached through successful Blood Tempo continuations gain a modest deterministic Health- and enemy-posture payoff that strengthens with each Embrace.
+- **Tier II — Blood Hunt:** full-meter activation restores limited Health, disrupts nearby ordinary enemies, and launches one player-directed pursuit through eligible ordinary enemies before ending in Blood Fang.
+- **Tier III — Fanged Guard:** one selected frontal blockable hit may preserve Predator's Passage charge or one connected Raking Fang or Blood Cleave startup through normal player-posture rules.
+- **Tier IV — Apex Mauling:** qualifying major Wolf impacts trigger one consolidated Blood-claw mauling with strong posture pressure, compact secondary coverage, and a brief movement-only slow on the primary target.
 
-Wolf's pursuit becomes more forceful and rewarding through its Tiers while remaining player-directed and punishable when aimed poorly. This positional commitment is an inherent property of Wolf's actions rather than a separate named drawback system.
+Wolf remains player-directed and punishable. Blood Hunt cannot home, turn, or correct its line; Fanged Guard does not provide general armor; and Apex Mauling does not cancel recovery, recursively trigger, or alter enemy attack timing.
 
-## Wraith fixed progression working draft
+## Wraith provisional progression under revision
 
-Wraith's current Tier package is approved for scoping and may be revised after Ronin, cross-roster comparison, or playable testing:
+Wraith retains a complete working Tier I-IV package for comparison, but its Tier 0 foundation and later distribution are now under ordered revision:
 
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed.
 - **Tier II — Wraith's Reach:** a full Blood meter begins a duration state that extends Veil Cut, Passing Arc, and Pale Lance and gives qualifying attacks one delayed spectral afterimage along their original player-directed geometry.
 - **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry against an eligible attack from any direction without cancelling the charge or interrupting Pale Barrage.
 - **Tier IV — Pale Procession:** Pale Barrage gains two reduced-power adjacent shade streams and slow direct steering within a limited frontal arc. Streams never stack on one enemy, so Tier IV broadens coverage and improves alignment without multiplying single-target damage.
 
-Wraith's later Tiers preserve its stationary commitment, limited response after Veiled Guard is spent, and dependence on correct positioning and direction. The shades do not track, select enemies, generate Blood, or create extra Wraith's Reach afterimages.
+These benefits remain provisional until Wraith's complete Tier 0 action roles, Blood Art form, and Tier distribution are reapproved. The revision must preserve Wraith's reach-and-frontal-control identity without concentrating the entire package on Pale Lance or removing point-blank and directional weaknesses.
+
+## Ronin fixed progression working package
+
+Ronin's current Tier package is approved through the present cross-roster audit:
+
+- **Tier I — Steadfast Reprisal:** a qualifying block creates a short optional window for a slow standalone Reprisal Cut.
+- **Tier II — Falling Mountain:** full-meter activation clears meaningful accumulated player posture and powers a planted monumental slam, compact impact burst, and delayed Deep Rupture at the original impact point.
+- **Tier III — Unbroken Resolve:** selected late commitments may survive one costly eligible frontal hit, while disciplined clean attacks may create Measured Weight and one later Perfect Weight strike.
+- **Tier IV — Shattering Wake:** qualifying direct heavy impacts transfer reduced Health damage and strong posture force through the primary target into enemies behind it.
+
+Ronin remains slow, grounded, and directionally committed. Its later protection is action-specific rather than general armor, and its strongest effects do not add tracking, free movement, or unrestricted single-target multiplication.
 
 ## Run-build philosophy
 
@@ -184,7 +196,7 @@ Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Bindin
 
 The remaining production-level questions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. Ronin's Tier package one Tier at a time, beginning with Tier I, then cross-roster comparison,
+1. cross-roster Aspect package revision, beginning with Wraith's Tier 0 weapon kit,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
