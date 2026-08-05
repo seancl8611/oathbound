@@ -17,7 +17,7 @@ topics:
   - techniques
 related:
   - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
-  - GAMEPLAY-BLOOD-ASPECTS
+  - GAMEPLAY-BLOOD_ASPECTS
   - GAMEPLAY-ASPECT-IDENTITY-GUIDELINES
   - GAMEPLAY-WOLF-ASPECT
   - GAMEPLAY-WRAITH-ASPECT
@@ -30,11 +30,11 @@ related:
 
 ## Status
 
-Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit, its boundaries, and its approved working Tier I-III progression package and Blood Art.
+Ronin is an approved member of the three-Aspect launch roster. This document owns Ronin's qualitative Tier 0 weapon kit, its boundaries, and its approved working Tier I-IV progression package and Blood Art.
 
 It replaces earlier directions based on maintaining a combo through defense, reaching a special finisher as the central goal, or selecting Basic Attacks through movement-direction input.
 
-Exact numerical values, frame data, hitboxes, animation, Blood presentation, Tier IV package, justified exceptions to the shared Blood defaults, Technique exceptions, and production counts remain later design or implementation work.
+Exact numerical values, frame data, hitboxes, animation, Blood presentation, Technique exceptions, and production counts remain later design or implementation work.
 
 ## Weapon identity
 
@@ -61,7 +61,7 @@ Ronin does not use corrective tracking, hidden homing, or post-input target rota
 
 Ronin retains universal locomotion, neutral dash, defense input, parry timing, posture-break rules, deathblows, Technique inventory, and prosthetic controls.
 
-Its stability does not create parry immunity, automatic counters, free posture recovery while guarding, instant attack cancels, innate interruption resistance, super armor, damage reduction, or a unique defensive input.
+Its Tier 0 stability does not create parry immunity, automatic counters, free posture recovery while guarding, instant attack cancels, innate interruption resistance, super armor, damage reduction, or a unique defensive input.
 
 A Tier 0 heavy attack must be protected by correct timing, spacing, enemy stagger, or a sufficiently large opening. A later fixed Tier benefit or Blood Art may protect one specific authored action only if that exception is explicitly approved.
 
@@ -186,13 +186,13 @@ Ronin can withstand a direct exchange longer, but accumulated posture remains a 
 - severe whiff recovery,
 - fixed attack lines after commitment,
 - minimal attack-bound movement,
-- no innate interruption resistance or damage reduction during attacks,
+- no innate interruption resistance or damage reduction during Tier 0 attacks,
 - low sustained output when openings are scarce,
 - mobile or ranged enemies,
 - pressure from several directions,
 - and slow recovery of accumulated player posture.
 
-Ronin must not become the generally optimal kit by combining the strongest guard with unrestricted damage, posture, and stagger. Its commitments and recovery remain fundamental costs.
+Ronin must not become the generally optimal kit by combining the strongest guard with unrestricted damage, posture, and stagger. Its commitments and recovery remain fundamental costs. Falling Mountain and Unbroken Resolve create narrow later-Tier interruption-resistance exceptions without converting the full kit into armored offense.
 
 ## Encounter role
 
@@ -203,7 +203,7 @@ Ronin must not become the generally optimal kit by combining the strongest guard
 
 # Fixed Tier progression
 
-Each Ronin Tier must provide a concrete net-positive combat benefit while preserving slow startup, heavy commitment, minimal attack movement, fixed direction, severe miss recovery, and slow player-posture recovery.
+Each Ronin Tier provides a concrete net-positive combat benefit while preserving slow startup, heavy commitment, minimal attack movement, fixed direction, severe miss recovery, and slow player-posture recovery.
 
 ## Tier I — Steadfast Reprisal
 
@@ -245,19 +245,24 @@ Ronin gains Blood through meaningful katana Health damage, large enemy-posture c
 
 Falling Mountain follows the shared Blood defaults: it requires a full meter, activates manually, consumes the stored Blood, and generates no Blood from the Art itself. Exact capacity, gain weighting, activation timing, and anti-farming thresholds remain tuning work.
 
+Activating Falling Mountain immediately clears a meaningful portion of Ronin's accumulated player posture. This posture relief occurs when the activation commits and does not depend on the slam connecting, establishing a rupture site, or damaging an enemy. It gives the full-meter activation practical value even when the follow-up strike misses or cannot connect, while preserving slow ordinary posture recovery as Ronin's central liability between Blood Art uses.
+
 ### Blood Art — Falling Mountain
 
-Akio plants his feet, gathers a dense mass of Returning Blood around the katana, and drives the weapon downward in a monumental two-handed slam.
+Akio plants his feet, gathers a dense mass of Returning Blood around the katana during a brief channel, and drives the weapon downward in a monumental two-handed slam.
 
-The action has slow, clearly readable startup and must be protected by a correctly created opening. Akio does not pursue, leap toward, or automatically close distance to a target. The player selects the slam direction, which becomes fixed once the commitment begins.
+The action has slow, clearly readable startup and remains a committed positional choice. Akio does not pursue, leap toward, or automatically close distance to a target. The player selects the slam direction before commitment, and that line cannot be corrected once the channel begins. Ronin remains planted even at his most powerful moment.
 
-Falling Mountain grants no invulnerability, damage reduction, automatic block, posture clearing, healing, corrective turning, tracking, homing, or innate interruption resistance. If Akio is interrupted before the weapon establishes the impact site, the delayed rupture is not created.
+During the brief Blood channel, Akio resists interruption from ordinary enemy attacks. Those attacks still deal their full normal Health damage, player-posture damage, status buildup, and other valid effects. The channel is interrupted normally if an incoming hit breaks Akio's posture, kills him, is perilous or unblockable, is an authored grab, launch, or knockdown that overrides the resistance, or otherwise falls outside the approved ordinary-attack category.
+
+This is the same general Blood Art precedent established by Dire Hunt's interruption resistance rather than a new universal defense rule. Falling Mountain grants no invulnerability, damage reduction, automatic block, healing, corrective turning, tracking, homing, or protection after the brief channel. If an overriding attack interrupts Akio before the weapon establishes the impact site, Deep Rupture is not created, but the activation's posture clear remains spent and resolved.
 
 ### Primary slam
 
 The initial strike is Ronin's largest single committed impact.
 
-- The katana's direct landing line deals extreme Health damage and extreme enemy-posture damage.
+- The katana's direct landing line deals extreme Health damage.
+- Its direct posture impact is sufficient to outright break posture on most non-boss enemies and inflicts a severe posture hit on bosses.
 - Eligible ordinary enemies struck directly receive Ronin's strongest authored stagger or knockdown response.
 - A compact immediate impact burst damages and pressures nearby enemies around the landing point.
 - The direct blade result takes priority over the immediate burst for a target caught by the central strike, preventing the same enemy from receiving two full simultaneous primary-impact instances.
@@ -286,7 +291,7 @@ The authored timing target is approximately three seconds so the rupture can bec
 
 The resulting Tier II rhythm is:
 
-> build Blood through deliberate heavy combat → create a large opening → aim and commit to the monumental slam → use the fixed delayed rupture as a second powerful positional threat
+> build Blood through deliberate heavy combat → clear meaningful accumulated posture on activation → remain planted through a protected but punishable channel → aim and commit to the monumental slam → use the fixed delayed rupture as a second powerful positional threat
 
 Falling Mountain is one Blood Art with two linked impacts. Deep Rupture represents the original slam continuing through the earth; it is not a spectral copy of Akio repeating the attack and does not become Wraith-like delayed weapon geometry.
 
@@ -353,11 +358,81 @@ The resulting Tier III rhythm is:
 
 Tier III rewards skilled consecutive execution without requiring the player to maintain an indefinite hit streak, complete Ronin's full Basic sequence, or adopt one prescribed combat loop.
 
+## Tier IV — Shattering Wake
+
+When a major Ronin strike directly hits an enemy or is guarded by an enemy, the force of the impact erupts through and beyond that primary target as **Shattering Wake**.
+
+Qualifying originating strikes are:
+
+- Bloodfall,
+- Stillness Draw,
+- Answering Steel,
+- Reprisal Cut,
+- and Falling Mountain's direct blade slam.
+
+The wake begins at the primary enemy's contact point and travels a limited distance behind that enemy along the originating attack's original player-selected direction.
+
+Shattering Wake deals:
+
+- reduced Health damage compared with the originating strike,
+- strong enemy-posture damage,
+- strong guard recoil,
+- and forceful stagger against eligible ordinary enemies caught behind the primary target.
+
+The primary enemy receives only the originating strike or guarded impact. It cannot also receive Shattering Wake damage, even when its body overlaps the wake geometry. Against a boss or large enemy, the wake may strike adds positioned behind it without multiplying damage against the primary target.
+
+Shattering Wake requires direct enemy contact before it can appear.
+
+- A complete miss creates no wake.
+- Striking scenery or empty space creates no wake.
+- The wake cannot originate directly from Akio as a free ranged attack.
+- The wake follows the original committed line and cannot turn, track, home, correct aim, retarget, or independently select enemies.
+- Each qualifying originating strike creates at most one wake, regardless of how many enemies the original geometry touches.
+- Shattering Wake generates no Blood and uses restricted or weighted per-hit Technique, healing, and repeated-effect interactions.
+
+### Perfect Weight interaction
+
+A qualifying strike creates its normal Shattering Wake whether or not Perfect Weight is active.
+
+When the originating strike also receives Perfect Weight, the wake gains increased enemy-posture pressure, stronger guard recoil, and stronger eligible ordinary-enemy stagger. Perfect Weight does not add a major Health-damage increase to the wake or allow it to strike the primary target.
+
+If Unbroken Resolve preserves a qualifying strike after Akio takes Health damage, that strike may still create a normal Shattering Wake when it connects. Because taking Health damage removes Measured Weight, the wake receives no Perfect Weight amplification.
+
+### Falling Mountain interaction
+
+Only Falling Mountain's direct blade slam creates Shattering Wake. Its immediate impact burst and Deep Rupture do not create additional wakes.
+
+The Falling Mountain package at Tier IV may therefore produce:
+
+1. the direct monumental slam,
+2. one directional Shattering Wake beyond the directly struck or guarding target,
+3. the compact immediate impact burst,
+4. and Deep Rupture approximately three seconds later.
+
+The wake remains dependent on direct blade contact. Falling Mountain still provides no forward movement or line correction, so a poorly positioned or poorly aimed activation can miss and create no Shattering Wake.
+
+The resulting Tier IV rhythm is:
+
+> align a major target with enemies behind it → commit to a major Ronin strike → land the direct impact → drive reduced Health damage and strong posture force through the formation
+
+Shattering Wake gives Ronin a capstone positional group payoff without increasing startup speed, ordinary attack movement, pre-contact reach, single-target damage against the primary enemy, or safety after a miss.
+
+# Progression summary
+
+- **Tier I — Steadfast Reprisal:** a correctly read block can create an optional slow, standalone heavy retaliation.
+- **Tier II — Falling Mountain:** full Blood clears meaningful accumulated posture and powers a planted monumental slam, immediate impact burst, and powerful delayed Deep Rupture.
+- **Tier III — Unbroken Resolve:** selected major commitments may survive one costly eligible frontal hit, while two disciplined clean strikes can produce a Perfect Weight posture-and-stagger payoff.
+- **Tier IV — Shattering Wake:** major direct impacts transfer reduced Health damage and strong posture force through the primary target into enemies positioned behind it.
+
+The completed progression is:
+
+> stabilize direct pressure and answer deliberately → spend Blood on one monumental planted impact → master costly trades or clean consecutive execution → align major impacts to break formations beyond the primary target
+
 ## Tier progression direction
 
-Future Ronin Tiers must provide clearly net-positive benefits that deepen heavy impact, posture pressure, stability, or deliberate punishment. The benefits may be strong because Ronin already gives up speed, movement, and recovery through its ordinary kit.
+The completed Ronin package deepens heavy impact, posture pressure, stability, deliberate punishment, and positional formation-breaking. Its benefits are strong because Ronin continues to give up speed, attack movement, line correction, and recovery through its ordinary kit.
 
-Future Tiers should preserve those inherent limitations through the actions they strengthen rather than adding separate named drawbacks or unrelated penalty attributes. A strong Ronin Technique build at Tier 0-I must remain capable of completing a run without requiring the Blood Art.
+The package preserves those inherent limitations through the actions it strengthens rather than adding unrelated penalty attributes. A strong Ronin Technique build at Tier 0-I remains capable of completing a run without requiring Falling Mountain or the later Tier benefits.
 
 ## Technique space
 
@@ -366,9 +441,9 @@ Universal Techniques may:
 - **reinforce** heavy Basic Attacks, Stillness Draw, direct damage, posture chunks, and stagger,
 - **broaden** attack speed, pursuit, crowd handling, ranged access, or sequence flexibility,
 - **compensate** for whiff recovery, fixed attack lines, posture recovery, mobile enemies, or surrounding pressure,
-- **hybridize** through Breaching Slash, Answering Steel, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, Perfect Weight, deathblows, blocking, posture, or prosthetics.
+- **hybridize** through Breaching Slash, Answering Steel, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, Perfect Weight, Shattering Wake, deathblows, blocking, posture, or prosthetics.
 
-Ronin does not own every damage, posture, parry, block, Held Attack, guard-counter, slam, delayed-ground-effect, interruption-resistance, clean-hit, or heavy-attack Technique. Universal Techniques must not simply duplicate Steadfast Reprisal's block-triggered standalone retaliation, Falling Mountain's full-meter slam-and-rupture package, or Tier III's bounded Measured Weight into Perfect Weight sequence.
+Ronin does not own every damage, posture, parry, block, Held Attack, guard-counter, slam, delayed-ground-effect, interruption-resistance, clean-hit, through-target, or heavy-attack Technique. Universal Techniques must not simply duplicate Steadfast Reprisal's block-triggered standalone retaliation, Falling Mountain's full-meter slam-and-rupture package, Tier III's bounded Measured Weight into Perfect Weight sequence, or Shattering Wake's contact-gated through-target force.
 
 ## Blood-katana presentation
 
@@ -378,18 +453,20 @@ Presentation may use a dense Blood edge, a spectral sheath during Stillness Draw
 
 Steadfast Reprisal requires a readable temporary availability cue after a qualifying block and distinct impact feedback for Reprisal Cut without implying automatic protection or guaranteed safety.
 
-Falling Mountain requires a full-meter ready state, readable activation commitment, a dense Blood-loaded slam, a clearly marked impact site, persistent ground-fracture feedback during the approximate three-second delay, and a powerful second rupture cue that remains visually distinct from Wraith's spectral afterimages.
+Falling Mountain requires a full-meter ready state, a readable posture-clear pulse at activation, a clearly telegraphed planted channel, a dense Blood-loaded slam, a clearly marked impact site, persistent ground-fracture feedback during the approximate three-second delay, and a powerful second rupture cue that remains visually distinct from Wraith's spectral afterimages. Its channel-resistance cue must not resemble a block, parry, invulnerability, or damage-immunity effect.
 
 Tier III requires a restrained but clear Resolve-window cue that does not resemble a block, parry, or invulnerability flash; a temporary Measured Weight state cue with readable expiration; and a distinct Perfect Weight impact treatment emphasizing posture and guard recoil rather than extra Health damage.
 
+Shattering Wake requires a contact-originating force trail that begins beyond the primary target, clearly preserves the original attack direction, and remains visually distinct from a free projectile, Wraith's extended geometry, and Deep Rupture's fixed delayed ground eruption.
+
 ## Remaining Ronin design work
 
-Define one Tier at a time:
+Ronin's qualitative Tier I-IV package is complete for current scoping. Remaining work includes:
 
-- Tier IV,
-- how Tier IV preserves Ronin's inherent speed, movement, commitment, and recovery limits,
-- any justified exception required by the approved Tier IV benefit,
+- cross-roster comparison against Wolf and Wraith,
 - limited direct Technique interactions if approved,
-- final animation, VFX, audio, HUD, Shrine, selection, and trial requirements.
+- exact enemy eligibility and response rules,
+- final animation, VFX, audio, HUD, Shrine, selection, and trial requirements,
+- and implementation and playtesting values.
 
-Exact timing, Resolve-window eligibility, frontal coverage, override attacks, Measured Weight duration, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, armor interactions, Stillness Draw preparation and readied-state durations, Blood capacity and gain values, Falling Mountain startup and recovery, Deep Rupture delay and radius, and presentation values remain implementation and playtesting work.
+Exact timing, Resolve-window eligibility, frontal coverage, override attacks, Measured Weight duration, range, geometry, player-directed movement, damage, posture, stagger, block efficiency, player-posture values, Falling Mountain posture-clear amount, channel duration, channel interruption categories, startup and recovery, Stillness Draw preparation and readied-state durations, Blood capacity and gain values, Deep Rupture delay and radius, Shattering Wake length, width, damage, posture, guard recoil, collision, and proc weighting, and presentation values remain implementation and playtesting work.
