@@ -129,6 +129,8 @@ The player may stop, continue, defend, dash, change targets, use a Prosthetic, o
 
 Do not build an Aspect around maintaining a combo state, preserving a sequence through unrelated actions, reaching a named finisher as the central goal, or repeating one prescribed loop.
 
+A fixed Tier may reward later sequence positions when the reward is bounded to the authored sequence itself, requires no separate meter or persistent timer, and does not make completion mandatory. Wolf's Feral Momentum is the approved example: successful Blood Tempo continuations give later Basic attacks modest deterministic payoff, while the player remains free to stop after any attack.
+
 ## Approved launch cadence
 
 | Aspect | Basic sequence | Purpose |
@@ -186,8 +188,10 @@ Techniques should not duplicate a fixed Tier benefit or Blood Art without explic
 - strong player-directed forward movement,
 - moderate per-hit damage with high sustained output,
 - Predator's Passage, Hunting Slash, and Fang Reversal,
+- approved Tier I Blood Tempo: successful contact may continue earlier into approved Basic-sequence positions,
+- approved Feral Momentum growth: later successfully connected Basic-sequence positions gain modest deterministic Health and posture payoff that strengthens with each Tier,
 - approved Tier II Blood Hunt: immediate Health recovery and close disruption followed by one fixed-line encounter-crossing pursuit ending in Blood Fang,
-- working progression through Blood Tempo, Blood Hunt, Fanged Guard, and an unresolved final Tier IV redistribution,
+- working later progression through Fanged Guard and an unresolved Tier IV redistribution,
 - failure state: overextension after missed pursuit or prolonged pressure.
 
 ### Wraith — reach and control
@@ -232,7 +236,7 @@ Wolf, Wraith, and Ronin meet this test at qualitative Tier 0 depth.
 
 Every selected Aspect follows one fixed Tier path from Tier 0 to Tier IV through Shrine Embrace choices. The Tier path is not a branching package selection.
 
-All three Aspects have complete qualitative working packages. The current cross-roster audit is revising them one decision at a time before production lock. Wolf's Tier II Blood Hunt and Ronin's Tier I-IV package are approved through the present audit; Wolf's remaining Tier distribution and Wraith's Blood Art and later distribution remain active design work.
+All three Aspects have complete qualitative working packages. The current cross-roster audit is revising them one decision at a time before production lock. Wolf's Tier I Blood Tempo, Feral Momentum growth rule, Tier II Blood Hunt, and Ronin's Tier I-IV package are approved through the present audit; Wolf Tiers III-IV and Wraith's Blood Art and later distribution remain active design work.
 
 ## Future roster capacity
 
