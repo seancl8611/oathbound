@@ -95,7 +95,7 @@ Parry timing, success conditions, defense input, posture-break consequences, and
 
 A defensive difference cannot be the Aspect's entire identity. No Aspect removes block or parry, gains automatic counters, becomes immune to posture break, or recovers posture freely while actively guarding.
 
-A fixed Tier benefit may protect a specific authored action, such as Wolf's current Fanged Guard draft blocking one frontal blockable hit during a Held Attack charge. Such benefits must use normal shared rules and must not silently rewrite universal defense.
+A fixed Tier benefit may protect a specific authored action when it uses ordinary shared costs and consequences. Wolf's Fanged Guard is the approved example: one frontal blockable hit may preserve Predator's Passage charge or one eligible connected Raking Fang or Blood Cleave startup, but normal player-posture damage and posture break still apply.
 
 ## Aspect-owned differentiation
 
@@ -130,6 +130,8 @@ The player may stop, continue, defend, dash, change targets, use a Prosthetic, o
 Do not build an Aspect around maintaining a combo state, preserving a sequence through unrelated actions, reaching a named finisher as the central goal, or repeating one prescribed loop.
 
 A fixed Tier may reward later sequence positions when the reward is bounded to the authored sequence itself, requires no separate meter or persistent timer, and does not make completion mandatory. Wolf's Feral Momentum is the approved example: successful Blood Tempo continuations give later Basic attacks modest deterministic payoff, while the player remains free to stop after any attack.
+
+A later Tier may preserve one selected connected commitment without requiring sequence completion. Wolf's Fanged Guard is the approved example: one block may preserve an eligible Raking Fang or Blood Cleave, but the player may still abandon the sequence and the block does not guarantee a hit or safe position.
 
 ## Approved launch cadence
 
@@ -191,7 +193,8 @@ Techniques should not duplicate a fixed Tier benefit or Blood Art without explic
 - approved Tier I Blood Tempo: successful contact may continue earlier into approved Basic-sequence positions,
 - approved Feral Momentum growth: later successfully connected Basic-sequence positions gain modest deterministic Health and posture payoff that strengthens with each Tier,
 - approved Tier II Blood Hunt: immediate Health recovery and close disruption followed by one fixed-line encounter-crossing pursuit ending in Blood Fang,
-- working later progression through Fanged Guard and an unresolved Tier IV redistribution,
+- approved Tier III Fanged Guard: one normal posture-costing frontal block may preserve Predator's Passage charge or one connected Raking Fang or Blood Cleave startup per sequence,
+- unresolved Tier IV redistribution,
 - failure state: overextension after missed pursuit or prolonged pressure.
 
 ### Wraith — reach and control
@@ -236,7 +239,7 @@ Wolf, Wraith, and Ronin meet this test at qualitative Tier 0 depth.
 
 Every selected Aspect follows one fixed Tier path from Tier 0 to Tier IV through Shrine Embrace choices. The Tier path is not a branching package selection.
 
-All three Aspects have complete qualitative working packages. The current cross-roster audit is revising them one decision at a time before production lock. Wolf's Tier I Blood Tempo, Feral Momentum growth rule, Tier II Blood Hunt, and Ronin's Tier I-IV package are approved through the present audit; Wolf Tiers III-IV and Wraith's Blood Art and later distribution remain active design work.
+All three Aspects have complete qualitative working packages. The current cross-roster audit is revising them one decision at a time before production lock. Wolf's Tier I Blood Tempo, Feral Momentum growth rule, Tier II Blood Hunt, Tier III Fanged Guard, and Ronin's Tier I-IV package are approved through the present audit; Wolf Tier IV and Wraith's Blood Art and later distribution remain active design work.
 
 ## Future roster capacity
 
