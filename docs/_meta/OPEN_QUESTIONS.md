@@ -38,6 +38,7 @@ The following decisions are settled and should not be reopened as top-level ques
 - Wolf Tier I is **Blood Tempo**, a unified successful-contact continuation system into the Basic sequence.
 - Wolf's approved small Tier-growth rule is **Feral Momentum**: later Basic Attacks reached through successful Blood Tempo continuations gain a modest deterministic Health- and enemy-posture payoff that strengthens with each Embrace.
 - Wolf Tier II is **Blood Hunt**, an immediate full-meter pursuit Art rather than a temporary transformation.
+- Wolf Tier III is **Fanged Guard**, which preserves one selected frontal high-risk ordinary commitment through a normal posture-costing block.
 
 ## Current working Aspect packages
 
@@ -48,7 +49,7 @@ All three Aspects have qualitative Tier I-IV working packages. These packages ar
 - **Tier I — Blood Tempo:** successful Wolf contact may continue earlier into the Basic sequence through approved optional routes.
 - **Feral Momentum — Tier growth:** later connected Basic-sequence positions gain modest deterministic Health and posture payoff that scales at every Tier.
 - **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
-- **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
+- **Tier III — Fanged Guard:** one frontal blockable hit may preserve Predator's Passage charge, or one connected Raking Fang or Blood Cleave startup per Basic sequence, using normal player-posture rules.
 - **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, restores Health, and primes Predator's Passage; it must be broadened or replaced.
 
 ### Wraith
@@ -156,19 +157,39 @@ Alternate entries from Predator's Passage, Hunting Slash, and Fang Reversal begi
 
 Feral Momentum uses no random critical-hit roll, separate meter, stack counter, or persistent combo timer. It does not improve non-Basic actions, Blood Hunt, travel, or whiff recovery, and it does not make Blood Cleave mandatory.
 
-### Remaining Wolf Tier questions
+### Resolved Tier III — Fanged Guard
+
+Fanged Guard preserves selected high-risk ordinary Wolf commitments through one frontal blockable hit using normal player-posture rules.
+
+Approved uses:
+
+- while charging Predator's Passage, the first frontal blockable hit is blocked, does not cancel the Held Attack, and immediately completes its charge,
+- when Raking Fang or Blood Cleave is reached through successful Blood Tempo continuation, one eligible early committed startup window may block the first frontal blockable hit without cancelling that attack,
+- and only one Fanged Guard block may occur during one connected Basic sequence.
+
+If Raking Fang spends the sequence allowance, Blood Cleave receives no second block. If Raking Fang does not spend it and Blood Cleave is reached through continued successful contact, Blood Cleave may use the allowance. Predator's Passage has its own one-block allowance per Held use.
+
+Boundaries:
+
+- normal player-posture damage applies,
+- posture break cancels the attack normally,
+- Fang Slash, Rending Cross, nonconnected Raking Fang or Blood Cleave, Blood Hunt, Blood Fang, and recovery receive no protection,
+- side, rear, perilous, unblockable, grab, launch, knockdown, and second-hit threats are not protected,
+- and Fanged Guard grants no damage reduction beyond the normal block, posture immunity, tracking, direction correction, damage increase, or guaranteed safe positioning.
+
+Tier III also advances Feral Momentum by one normal Tier step, modestly increasing the deterministic Health and enemy-posture payoff of connected Rending Cross, Raking Fang, and Blood Cleave. This is the approved repeated growth reward rather than an additional separate mechanic.
+
+### Remaining Wolf Tier question
 
 Resolve:
 
-- Does Fanged Guard remain appropriate when Blood Fang is no longer a charged Held replacement?
-- Should Fanged Guard continue to affect only Predator's Passage, expand through a different Wolf action, or be replaced?
 - What becomes Wolf's Tier IV headline benefit?
 - How can Tier IV provide meaningful value during boss fights and ordinary combat without depending solely on a deathblow?
 - Can deathblows remain a secondary refresh, amplification, or special payoff rather than the only trigger?
-- How should Blood Hunt interact with later Tiers without making every Wolf Tier depend on the Blood Art?
-- Do Tier III or IV need one additional beginner-visible supporting rule beyond their Feral Momentum increase?
+- How should Tier IV interact with Blood Tempo, Feral Momentum, Fanged Guard, and Blood Hunt without making the full package depend on one action?
+- Does Tier IV need one additional beginner-visible supporting rule beyond its normal Feral Momentum increase?
 
-**The current active question is Wolf Tier III.**
+**The current active question is Wolf Tier IV.**
 
 ## Question 3 — Wraith Blood Art form
 
@@ -330,6 +351,7 @@ Keep exact values and frame-level decisions in their owning gameplay, encounter,
 - Blood capacity, gain weighting, activation cost, duration, and anti-farming rules,
 - exact Blood Hunt preparation, travel, collision, stopping priority, interruption categories, damage, posture, Health recovery, howl radius, and ending recovery,
 - exact Feral Momentum Health-damage and enemy-posture scaling at Tiers I-IV,
+- exact Fanged Guard startup windows, frontal coverage, reset timing, posture interaction, and feedback,
 - exact Wraith or Ronin Tier-growth values after their structures are approved,
 - enemy immunity and response tables,
 - Spirit costs and Prosthetic cooldowns,

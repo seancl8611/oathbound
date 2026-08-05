@@ -31,7 +31,7 @@ related:
 
 Wolf is an approved member of the three-Aspect launch roster. This document owns Wolf's Tier 0 weapon kit and its current fixed Tier I-IV progression package.
 
-Tier I **Blood Tempo**, Wolf's **Feral Momentum** Tier-growth rule, and Tier II **Blood Hunt** are approved through the current cross-roster audit. Tiers III and IV remain working drafts scheduled for redistribution review. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
+Tier I **Blood Tempo**, Wolf's **Feral Momentum** Tier-growth rule, Tier II **Blood Hunt**, and Tier III **Fanged Guard** are approved through the current cross-roster audit. Tier IV remains a working draft scheduled for redistribution review. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
 
 ## Weapon identity
 
@@ -300,21 +300,54 @@ The resulting Tier II rhythm is:
 
 ## Tier III — Fanged Guard
 
-Tier III currently upgrades Predator's Passage while it is being charged.
+Fanged Guard protects Wolf's most committed ordinary offensive moments without granting general armor or changing shared defense rules.
 
-While charging Predator's Passage, Akio forms a Blood jaw around the front of his body. The first frontal blockable enemy attack that reaches Akio:
+### Predator's Passage
+
+While charging Predator's Passage, Akio forms a Blood wolf jaw around the front of his body. The first frontal blockable enemy attack that reaches Akio:
 
 - is blocked using normal player-posture rules,
-- does not cancel the Held Attack,
+- does not cancel Predator's Passage,
 - and immediately completes Predator's Passage's charge.
 
-The player still chooses when and where to release the attack.
+The player still chooses when and where to release the attack. The charge receives one Fanged Guard block allowance per use.
 
-Fanged Guard does not protect against attacks from the side or rear or against unblockable attacks. It can block only one attack during each charge.
+### Connected Basic sequence
 
-Fanged Guard helps Akio complete Predator's Passage but does not make the resulting pursuit safe. The attack retains its selected direction and severe miss recovery.
+When **Raking Fang** or **Blood Cleave** is reached through a successful Blood Tempo continuation, a Blood wolf jaw briefly guards Akio's front during that attack's approved early committed startup window.
 
-Fanged Guard no longer applies to Blood Fang because Blood Fang is now the endpoint of the immediate Blood Hunt Art rather than a charged Held Attack. Tier III remains a working draft scheduled for review during Wolf Tier redistribution.
+The first frontal blockable enemy attack that reaches Akio during an eligible window:
+
+- is blocked using normal player-posture rules,
+- does not cancel the qualifying Basic Attack,
+- and consumes Fanged Guard for that connected Basic sequence.
+
+Only one Fanged Guard block may occur during one connected Basic sequence. If Raking Fang consumes the block, Blood Cleave receives no second block during that sequence. If Raking Fang is not challenged or the eligible window passes without a block, Blood Cleave may still use the sequence's one allowance if it is reached through continued successful contact.
+
+Returning to neutral, missing or abandoning the sequence, or performing another action ends that sequence's allowance. Predator's Passage uses a separate one-block allowance because it is a distinct Held Attack use.
+
+### Boundaries
+
+Fanged Guard does not protect:
+
+- Fang Slash or Rending Cross,
+- Raking Fang or Blood Cleave reached without the required successful Blood Tempo continuation,
+- Blood Hunt or Blood Fang,
+- attack recovery,
+- side or rear attacks,
+- perilous or unblockable attacks,
+- authored grabs, launches, or overriding knockdowns,
+- or any second qualifying hit after its allowance has been spent.
+
+The block applies normal player-posture damage. If that blocked hit breaks Akio's posture, the qualifying Wolf attack is cancelled through ordinary posture-break rules.
+
+Fanged Guard provides no damage reduction beyond the normal block, posture immunity, automatic counter, Health recovery, tracking, direction correction, attack acceleration, damage increase, or protection after a miss. Preserving an attack does not guarantee that the attack connects or that its resulting position is safe.
+
+Tier III also advances Feral Momentum by one normal Tier step, modestly improving the deterministic Health and enemy-posture payoff of connected Rending Cross, Raking Fang, and Blood Cleave. This is Tier III's existing repeated growth reward rather than a separate third mechanic.
+
+The resulting Tier III rhythm is:
+
+> connect Wolf's offense → choose whether to commit into Raking Fang or Blood Cleave under frontal pressure → allow one normal posture-costing block to preserve the sequence → complete or abandon the hunt based on the remaining threats
 
 ## Tier IV — Apex Feast
 
@@ -339,22 +372,22 @@ Apex Feast is explicitly a working draft. Its current deathblow-only trigger is 
 - **Tier I — Blood Tempo:** successful Wolf contact may continue earlier into the Basic sequence through one unified set of optional routes.
 - **Feral Momentum — Tier growth:** every Embrace modestly increases the deterministic Health and enemy-posture payoff of later Basic Attacks reached through successful Blood Tempo continuations.
 - **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
-- **Tier III — Fanged Guard:** the current draft blocks one frontal blockable attack while charging Predator's Passage; redistribution review remains pending.
+- **Tier III — Fanged Guard:** one normal posture-costing frontal block may preserve Predator's Passage charge, or one connected Raking Fang or Blood Cleave startup per Basic sequence.
 - **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, heals, and primes Predator's Passage; the capstone must be broadened or replaced during redistribution review.
 
 The current progression is:
 
-> successful contact connects Wolf's ordinary pressure and strengthens later sequence hits → Blood Hunt converts a full meter into one explosive encounter-crossing pursuit → later Tiers remain to be redistributed around the approved foundation
+> successful contact connects Wolf's ordinary pressure and strengthens later sequence hits → Blood Hunt converts a full meter into one explosive encounter-crossing pursuit → Fanged Guard preserves one selected high-risk ordinary commitment under frontal pressure → Tier IV remains to be rebuilt into a broadly useful capstone
 
-Wolf's short reach, directional pursuit, unsafe misses, and dangerous ending position remain part of the weapon kit rather than separate Tier penalties.
+Wolf's short reach, directional pursuit, unsafe misses, side and rear vulnerability, posture risk, and dangerous ending position remain part of the weapon kit rather than separate Tier penalties.
 
 # Technique space
 
-Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not reproduce Blood Tempo's complete contact-routing package, Feral Momentum's full Tier-scaled connected-sequence escalation, Blood Hunt's activation howl and encounter-crossing pursuit, Blood Fang, Fanged Guard, or the final approved Tier IV package.
+Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not reproduce Blood Tempo's complete contact-routing package, Feral Momentum's full Tier-scaled connected-sequence escalation, Blood Hunt's activation howl and encounter-crossing pursuit, Blood Fang, Fanged Guard's action-specific one-block preservation, or the final approved Tier IV package.
 
-General Basic Attack damage, posture, critical, movement, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Wolf's exact fixed progression behavior.
+General Basic Attack damage, posture, critical, movement, block, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Wolf's exact fixed progression behavior.
 
-Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, critical-hit, or movement Technique.
+Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, critical-hit, block, or movement Technique.
 
 # Production requirements
 
@@ -365,10 +398,10 @@ The working package establishes requirements for:
 - Hunting Slash pass-through constraints without a fixed rear-damage reward,
 - Blood Hunt full-meter readiness, activation Health recovery, Blood howl, directional preparation, pursuit line, pass-through collision, interruption categories, stopping logic, and ending recovery,
 - the Blood wolf manifestation and Blood Fang endpoint animation,
-- Fanged Guard charge and block feedback while its current draft remains active,
+- Fanged Guard's Predator's Passage charge state, eligible connected-sequence startup windows, one-use sequence state, frontal block, posture-break interaction, and spent-state feedback,
 - replacement or broadening of Apex Feast during Wolf Tier redistribution,
 - Blood unavailable, building, ready, activated, consumed, resolving, and rebuilding HUD states,
 - Shrine Tier summaries and action-specific behavior changes,
 - and Wolf teaching and mastery-trial coverage.
 
-Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, Feral Momentum scaling, healing, Blood gain, pursuit distance, interruption resistance, collision, stopping priority, and recovery values remain implementation, production, and playtesting work.
+Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, Feral Momentum scaling, Fanged Guard windows, healing, Blood gain, pursuit distance, interruption resistance, collision, stopping priority, and recovery values remain implementation, production, and playtesting work.
