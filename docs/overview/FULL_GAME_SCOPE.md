@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-03
+last_reviewed: 2026-08-05
 topics:
   - full-scope
   - asset-counts
@@ -63,7 +63,7 @@ After Returning Blood awakens, launch scope includes:
 
 - one selected Blood Aspect as the immediate Tier 0 run foundation,
 - Wolf as a four-hit fast close-range pressure and pursuit kit,
-- Wraith as a two-hit extended spectral reach and control kit with slower cadence and fewer ordinary options than Wolf,
+- Wraith as a current two-hit extended spectral reach and frontal-control foundation under ordered revision,
 - Ronin as a three-hit slow heavy impact and stability kit,
 - one physical katana expressed through Aspect-specific Blood forms,
 - universal controls, locomotion, neutral dash, parry timing, enemy rules, and deathblow language,
@@ -96,20 +96,21 @@ Mandatory encounters must not assume a particular Aspect Tier or Blood Art. Choo
 
 ## Wolf package at current scope
 
-Wolf's fixed Tier package is approved as a working draft:
+Wolf's fixed Tier package is approved through the present cross-roster audit:
 
-- **Tier I — Blood Tempo:** valid Basic Attack contact opens the next Basic Attack input earlier.
-- **Tier II — Dire Hunt:** a full Blood meter activates immediate limited healing, player-posture clearing, a nearby ordinary-enemy interrupt, and a temporary transformation with lifesteal, greater Health and posture damage, light-attack interruption resistance, and Blood Fang.
-- **Tier III — Fanged Guard:** charging Predator's Passage or Blood Fang blocks one frontal blockable attack through normal posture rules without cancelling the charge.
-- **Tier IV — Apex Feast:** deathblows create a nearby Blood eruption, restore limited Health, and fully charge the next Held Attack.
+- **Tier I — Blood Tempo:** approved successful-contact routes may continue earlier into the Basic sequence.
+- **Feral Momentum — Tier growth:** later Basic attacks reached through successful Blood Tempo continuations gain modest deterministic Health and enemy-posture payoff that increases with every Embrace.
+- **Tier II — Blood Hunt:** a full Blood meter restores limited Health, releases a short disruptive Blood howl, launches Akio along one player-selected pursuit line through eligible ordinary enemies, and ends in Blood Fang against the stopping target or endpoint.
+- **Tier III — Fanged Guard:** one selected frontal blockable hit may preserve Predator's Passage charge or one connected Raking Fang or Blood Cleave startup through normal player-posture rules.
+- **Tier IV — Apex Mauling:** qualifying major impacts trigger one consolidated Blood-claw mauling with strong posture pressure, compact reduced-power secondary coverage, and a brief movement-only slow on the primary target.
 
-Wolf's pursuit actions remain player-directed and retain meaningful miss recovery and positional overcommitment. These are inherent weapon-kit tradeoffs, not a separate named drawback family or added Tier penalty. Every Tier remains clearly net-positive.
+Wolf remains player-directed and punishable. Blood Hunt cannot track, turn, retarget, or correct its line. Its preparation and ending recovery remain vulnerable, full incoming damage and posture still apply during pursuit, and overriding attacks interrupt normally. Fanged Guard is action-specific rather than general armor. Apex Mauling does not cancel recovery, recursively trigger, generate Blood, or alter enemy attack timing.
 
-This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial dependencies without locking final values or counts. It may be revised after Ronin is designed, during cross-roster comparison, or after playable testing.
+This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial dependencies without locking final values or counts. Final production counts still require implementation briefs and playtesting.
 
 ## Wraith package at current scope
 
-Wraith's fixed Tier package is approved as a working draft:
+Wraith retains a complete working Tier package for comparison, but its Tier 0 foundation, Blood Art form, and later Tier distribution are under ordered revision:
 
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
 - **Tier II — Wraith's Reach:** a full Blood meter begins a temporary state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed line or arc.
@@ -138,22 +139,33 @@ Pale Procession follows these production-level boundaries:
 - Veiled Guard remains limited to one use per Pale Lance,
 - and the Tier adds no lingering attacks, detonation system, automatic targeting, healing, Blood refund, extra defense, or unrelated passive.
 
-Pale Procession's boss value is reliability rather than extra damage: limited steering may preserve Akio's existing central stream against modest movement during a valid opening. Short or mobile exchanges should continue to favor Veil Cut, Passing Arc, normal defense, movement, and other ordinary actions.
+These details are provisional production references rather than a final lock. Wraith Tier 0 must first be reassessed for ordinary decision variety, action-role distinction, encounter coverage, relative combat profile, and realistic animation and VFX burden. The Blood Art and later Tiers will then be redistributed around the approved foundation.
 
-Wraith's limits continue to come from its slower cadence than Wolf, fewer ordinary actions, restrained movement, fixed attack lines, positioning dependence, point-blank pressure, side and rear threats, stationary barrage commitment, and recovery after committed attacks. Its later Tiers deepen reach and frontal control without creating a replacement combat mode or removing those limits.
+## Ronin package at current scope
 
-Wolf and Wraith now have complete qualitative Tier I-IV working packages. They remain open to cross-roster revision and playable testing rather than further blank Tier design.
+Ronin's current Tier package is approved through the present cross-roster audit:
+
+- **Tier I — Steadfast Reprisal:** a qualifying block creates a short optional window for a slow standalone Reprisal Cut.
+- **Tier II — Falling Mountain:** a full Blood meter clears meaningful accumulated player posture and powers a planted monumental slam, compact immediate impact burst, and delayed Deep Rupture at the original impact point.
+- **Tier III — Unbroken Resolve:** selected late commitments may survive one costly eligible frontal hit, while disciplined clean attacks may create Measured Weight and one later Perfect Weight strike with improved posture, guard-recoil, and stagger payoff.
+- **Tier IV — Shattering Wake:** qualifying direct heavy impacts transfer reduced Health damage and strong posture force through the primary target into enemies behind it.
+
+Ronin remains slow, grounded, and directionally committed. Falling Mountain does not gain tracking, line correction, invulnerability, healing, or safe recovery. Unbroken Resolve keeps full incoming Health and posture damage and fails against posture break, lethal hits, perilous attacks, grabs, launches, side or rear pressure, and later hits. Shattering Wake cannot originate on a miss or multiply its damage back onto the primary target.
+
+Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Wraith retains a complete working draft but remains the active revision target. All three still require a final cross-roster production lock after Wraith and the remaining growth-rule and minor-support questions are resolved.
 
 Still open at production scope are:
 
-- Ronin's Tier I-IV package designed one Tier at a time,
-- Ronin's Blood Art,
-- cross-roster power, accessibility, inherent tradeoffs, overlap, and production comparison,
+- Wraith's Tier 0 revision, followed by its Blood Art and Tier redistribution,
+- Wraith and Ronin small Tier-growth rules,
+- minor supporting-benefit audit across narrow or conditional Tiers,
+- Ronin follow-up audit against the final standards,
+- final cross-roster power, accessibility, inherent-tradeoff, overlap, and production comparison,
 - detailed Technique affinity and direct-exception rules,
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
 
-Exact frame data, hitboxes, combat values, resource values, echo timing and behavior, Veiled Guard input buffering and manifestation timing, Pale Procession lane geometry and steering, and cancel windows remain implementation and playtesting work.
+Exact frame data, hitboxes, combat values, resource values, afterimage timing and behavior, Veiled Guard input buffering and manifestation timing, Pale Procession lane geometry and steering, Blood Hunt movement and collision, Apex Mauling geometry and slow, Ronin timing windows, and cancel windows remain implementation and playtesting work.
 
 Techniques remain the horizontal customization layer and an optional major run-investment route. Most Techniques are independently useful, use universal action tags, may receive at most one slotless refinement, and remain valuable after the loadout is full through refinement, replacement, rarity, reserve management, or specialization.
 
@@ -241,7 +253,7 @@ Boss:
 
 Both twins begin active. The first defeated transfers part of the shared bond to the survivor, which remains recognizably itself while gaining limited traits from the fallen twin.
 
-Yomori represents long-term predation, spirit persistence, and ecological damage caused by corrupted inhabitants and beasts. Beast Blood does not spread through soil, roots, water, prey, or vegetation.
+Yomori represents long-term predation, spirit persistence, and ecological damage caused by corrupted inhabitants and beasts. Beast Blood does not spread through soil, roots, water, prey, vegetation.
 
 Exact transition Health, posture, timing, and difficulty behavior remain later encounter work.
 
@@ -320,7 +332,7 @@ The exact Heart-route access control, repeat-clear rewards, records, cosmetics, 
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. Ronin's Tier package one Tier at a time, beginning with Tier I, followed by cross-roster comparison,
+1. cross-roster Aspect package revision, beginning with Wraith's Tier 0 weapon kit,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
