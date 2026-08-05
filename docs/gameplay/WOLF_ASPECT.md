@@ -29,9 +29,9 @@ related:
 
 ## Status
 
-Wolf is an approved member of the three-Aspect launch roster. This document owns Wolf's Tier 0 weapon kit and its current fixed Tier I-IV progression package.
+Wolf is an approved member of the three-Aspect launch roster. This document owns Wolf's Tier 0 weapon kit and its fixed Tier I-IV progression package.
 
-Tier I **Blood Tempo**, Wolf's **Feral Momentum** Tier-growth rule, Tier II **Blood Hunt**, and Tier III **Fanged Guard** are approved through the current cross-roster audit. Tier IV remains a working draft scheduled for redistribution review. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, and final presentation remain implementation and balance work.
+Tier I **Blood Tempo**, Wolf's **Feral Momentum** Tier-growth rule, Tier II **Blood Hunt**, Tier III **Fanged Guard**, and Tier IV **Apex Mauling** are approved through the current cross-roster audit. Exact numerical values, frame data, hitboxes, animation timing, resource tuning, slow strength and duration, and final presentation remain implementation and balance work.
 
 ## Weapon identity
 
@@ -349,23 +349,78 @@ The resulting Tier III rhythm is:
 
 > connect Wolf's offense → choose whether to commit into Raking Fang or Blood Cleave under frontal pressure → allow one normal posture-costing block to preserve the sequence → complete or abandon the hunt based on the remaining threats
 
-## Tier IV — Apex Feast
+## Tier IV — Apex Mauling
 
-Any successful deathblow, including a boss-phase deathblow, currently triggers Apex Feast.
+When a qualifying Wolf strike directly hits an enemy or is guarded, Returning Blood tears across the contact point as a rapid series of dense Blood-claw slashes. The effect resembles violent mauling marks rather than spectral wolves, autonomous companions, or repeated copies of Akio.
 
-When Apex Feast activates:
+Qualifying strikes are:
 
-- Returning Blood erupts in a short radius around Akio,
-- nearby ordinary enemies are briefly staggered,
-- stronger nearby enemies receive enemy-posture damage,
-- Akio restores a limited amount of Health,
-- and Akio's next Predator's Passage begins fully charged.
+- **Blood Cleave** reached through a successful Blood Tempo continuation,
+- **Predator's Passage**,
+- **Fang Reversal**,
+- and **Blood Fang**, the endpoint of Blood Hunt.
 
-The primed Predator's Passage may be released immediately without waiting through its normal charge. The benefit does not stack and expires when the encounter ends.
+Fang Slash, Rending Cross, Raking Fang, Hunting Slash, Blood Hunt's travel hits, deathblows, misses, and scenery contact do not trigger Apex Mauling. Each qualifying strike may create at most one mauling sequence.
 
-Apex Feast does not automatically release the Held Attack or select its direction. The primed pursuit retains its full travel and miss recovery.
+### Primary mauling
 
-Apex Feast is explicitly a working draft. Its current deathblow-only trigger is not considered sufficient for final Tier IV because it may provide little or no value during bosses or encounters without frequent deathblows. Wolf Tier redistribution must replace or broaden this capstone after Blood Hunt's later-Tier interactions are reviewed.
+After the qualifying strike resolves, several fast claw marks tear across the primary target from alternating authored angles around the original contact point.
+
+- The primary target receives meaningful additional Health damage.
+- The complete mauling delivers strong enemy-posture damage and powerful guard recoil.
+- Eligible ordinary enemies receive strong stagger.
+- Although several claw marks appear, the effect is balanced and resolved as one consolidated Tier IV package.
+- A large enemy or boss does not receive extra damage because more claw marks overlap its body.
+- The mauling remains fixed to the original contact point and originating attack direction.
+- It does not track, retarget, rotate toward, or independently select an enemy after activation.
+
+### Nearby coverage
+
+The outer claw arcs may catch enemies positioned in a compact area immediately beside the primary target.
+
+- A secondary enemy may be struck at most once by one Apex Mauling activation.
+- Secondary enemies receive reduced Health damage, meaningful enemy-posture pressure, and eligible ordinary-enemy stagger.
+- The secondary coverage does not search for targets, widen toward enemies, or continue traveling through the encounter.
+
+Apex Mauling therefore gives Wolf compact group payoff around caught prey without becoming Wraith-like lane control, a projectile, or a room-wide crowd clear.
+
+### Wounded-prey slow
+
+The final claw briefly reduces the primary target's movement speed.
+
+The slow may affect ordinary walking, pursuit, retreating, and eligible repositioning movement. It does not alter:
+
+- attack startup or animation speed,
+- attack recovery,
+- block or parry timing,
+- projectile speed,
+- perilous-attack timing,
+- scripted movement,
+- phase transitions,
+- grabs, leaps, or overriding authored actions.
+
+Ordinary enemies may receive the full brief movement slow. Elites and bosses receive reduced strength, reduced duration, or immunity during protected actions according to their encounter rules. The slow does not guarantee Wolf another attack and does not prevent the enemy from attacking normally.
+
+### System interactions
+
+A connected Blood Cleave enhanced by Feral Momentum also strengthens Apex Mauling's enemy-posture damage, guard recoil, and eligible ordinary-enemy stagger. Feral Momentum does not substantially multiply the mauling's additional Health damage.
+
+Blood Fang creates Apex Mauling only at the final stopping impact. Enemies crossed during Blood Hunt do not create separate maulings.
+
+The visual claw series:
+
+- generates no Blood,
+- cannot trigger another Apex Mauling,
+- uses weighted or restricted per-hit Technique and healing interactions,
+- and does not count each visible claw as an independent full-power proc opportunity.
+
+Apex Mauling grants no Health recovery, player-posture recovery, damage reduction, invulnerability, interruption resistance, tracking, recovery cancellation, or safer ending position. Every qualifying Wolf action retains its existing commitment, miss recovery, and positional risk.
+
+Tier IV also applies Feral Momentum's final normal Tier increase to connected Rending Cross, Raking Fang, and Blood Cleave.
+
+The resulting Tier IV rhythm is:
+
+> catch the prey with a major Wolf impact → maul the contact point with rapid Blood claws → briefly hinder the prey's escape → accept the original action's recovery and resulting position
 
 # Progression summary
 
@@ -373,25 +428,25 @@ Apex Feast is explicitly a working draft. Its current deathblow-only trigger is 
 - **Feral Momentum — Tier growth:** every Embrace modestly increases the deterministic Health and enemy-posture payoff of later Basic Attacks reached through successful Blood Tempo continuations.
 - **Tier II — Blood Hunt:** activation restores limited Health and disrupts nearby ordinary enemies before one long player-directed pursuit tears through eligible ordinary enemies and ends in Blood Fang.
 - **Tier III — Fanged Guard:** one normal posture-costing frontal block may preserve Predator's Passage charge, or one connected Raking Fang or Blood Cleave startup per Basic sequence.
-- **Tier IV — Apex Feast:** the current deathblow-triggered draft erupts, heals, and primes Predator's Passage; the capstone must be broadened or replaced during redistribution review.
+- **Tier IV — Apex Mauling:** connected Blood Cleave, Predator's Passage, Fang Reversal, and Blood Fang trigger a consolidated Blood-claw mauling with strong posture pressure, compact secondary coverage, and a brief movement-only slow on the primary target.
 
-The current progression is:
+The progression is:
 
-> successful contact connects Wolf's ordinary pressure and strengthens later sequence hits → Blood Hunt converts a full meter into one explosive encounter-crossing pursuit → Fanged Guard preserves one selected high-risk ordinary commitment under frontal pressure → Tier IV remains to be rebuilt into a broadly useful capstone
+> successful contact connects Wolf's ordinary pressure and strengthens later sequence hits → Blood Hunt converts a full meter into one explosive encounter-crossing pursuit → Fanged Guard preserves one selected high-risk ordinary commitment under frontal pressure → Apex Mauling turns major successful contact into a violent Blood-claw culmination that hinders the prey's escape
 
 Wolf's short reach, directional pursuit, unsafe misses, side and rear vulnerability, posture risk, and dangerous ending position remain part of the weapon kit rather than separate Tier penalties.
 
 # Technique space
 
-Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not reproduce Blood Tempo's complete contact-routing package, Feral Momentum's full Tier-scaled connected-sequence escalation, Blood Hunt's activation howl and encounter-crossing pursuit, Blood Fang, Fanged Guard's action-specific one-block preservation, or the final approved Tier IV package.
+Universal Techniques may reinforce, broaden, compensate for, or hybridize Wolf through shared action tags. They must not reproduce Blood Tempo's complete contact-routing package, Feral Momentum's full Tier-scaled connected-sequence escalation, Blood Hunt's activation howl and encounter-crossing pursuit, Blood Fang, Fanged Guard's action-specific one-block preservation, or Apex Mauling's complete qualifying-strike, claw-package, and movement-slow behavior.
 
-General Basic Attack damage, posture, critical, movement, block, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Wolf's exact fixed progression behavior.
+General Basic Attack damage, posture, critical, movement, slow, block, multi-hit, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Wolf's exact fixed progression behavior.
 
-Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, critical-hit, block, or movement Technique.
+Wolf does not own every aggressive, Basic Attack, Held Attack, deathblow, posture, healing, critical-hit, slow, block, multi-hit, or movement Technique.
 
 # Production requirements
 
-The working package establishes requirements for:
+The approved package establishes requirements for:
 
 - Blood Tempo contact-continuation windows and alternate-entry feedback,
 - Feral Momentum sequence-position, connected-state, and Tier-scaling feedback without a separate HUD meter,
@@ -399,9 +454,9 @@ The working package establishes requirements for:
 - Blood Hunt full-meter readiness, activation Health recovery, Blood howl, directional preparation, pursuit line, pass-through collision, interruption categories, stopping logic, and ending recovery,
 - the Blood wolf manifestation and Blood Fang endpoint animation,
 - Fanged Guard's Predator's Passage charge state, eligible connected-sequence startup windows, one-use sequence state, frontal block, posture-break interaction, and spent-state feedback,
-- replacement or broadening of Apex Feast during Wolf Tier redistribution,
+- Apex Mauling's qualifying-hit recognition, rapid Blood-claw presentation, consolidated damage and posture package, compact secondary coverage, movement-only slow, boss and elite scaling, and restricted multi-hit interactions,
 - Blood unavailable, building, ready, activated, consumed, resolving, and rebuilding HUD states,
 - Shrine Tier summaries and action-specific behavior changes,
 - and Wolf teaching and mastery-trial coverage.
 
-Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, Feral Momentum scaling, Fanged Guard windows, healing, Blood gain, pursuit distance, interruption resistance, collision, stopping priority, and recovery values remain implementation, production, and playtesting work.
+Exact animation counts, timing, sprite overlays, VFX density, audio, HUD layout, damage, posture, Feral Momentum scaling, Fanged Guard windows, Apex Mauling claw count and cadence, slow values, healing, Blood gain, pursuit distance, interruption resistance, collision, stopping priority, and recovery values remain implementation, production, and playtesting work.
