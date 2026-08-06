@@ -42,7 +42,7 @@ Do not substitute an abstract behavior rule or player-facing drawback category f
 | Aspect | Identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Fast close-range pressure and pursuit | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Extended spectral reach and frontal control; current Tier 0 action package under ordered revision | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, direction dependence, and vulnerability when spacing collapses |
+| Wraith | Extended spectral reach and frontal control | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, fixed direction, close and lateral pressure, and vulnerability after a poor line commitment |
 | Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 The launch roster is final at the current scoping stage. Mobility, evasion, ranged utility, and broader crowd control remain shared-system, Technique, and Prosthetic territory rather than requiring a fourth Aspect.
@@ -91,7 +91,7 @@ A sustained authored attack may permit limited direct player steering when expli
 - preserve the attack's commitment and movement limits,
 - and remain readable against enemy telegraphs.
 
-The current Pale Procession draft demonstrates the allowed boundary: a three-lane formation may rotate slowly within a limited frontal arc, but the shades do not select targets and the formation remains stationary at Akio's origin. Its final ownership and form remain subject to the ordered Wraith revision.
+The current Pale Procession draft demonstrates the allowed boundary: a three-lane formation may rotate slowly within a limited frontal arc, but the shades do not select targets and the formation remains stationary at Akio's origin. Its final ownership and form remain subject to the ordered Wraith Tier III-IV revision.
 
 Distinct target handling should otherwise come from:
 
@@ -119,7 +119,7 @@ These differences support a complete weapon kit; they cannot be the kit's entire
 
 Do not change universal parry timing, parry success conditions, defense input, posture-break consequences, or enemy response rules. Do not grant automatic counters, posture-break immunity, free guarding, or posture recovery while actively blocking.
 
-A fixed Tier benefit may protect one specific authored action while still using shared defensive rules. Wolf's Fanged Guard automatically blocks one frontal blockable attack through normal posture rules during selected commitments. The current Wraith draft instead uses Veiled Guard to preserve one manually timed ordinary parry from any direction while Pale Lance or Pale Barrage remains committed. Wraith's final defensive Tier ownership remains subject to revision after Tier 0 and its Blood Art are settled.
+A fixed Tier benefit may protect one specific authored action while still using shared defensive rules. Wolf's Fanged Guard automatically blocks one frontal blockable attack through normal posture rules during selected commitments. Wraith's current Veiled Guard candidate instead preserves one manually timed ordinary parry while Pale Lance or Pale Barrage remains committed. Its final ownership remains subject to the Tier III-IV distribution audit.
 
 ## Shared offensive slots
 
@@ -142,10 +142,10 @@ The player may stop after one attack, continue, defend, dash, redirect, use a Pr
 | Aspect | Sequence | Cadence purpose |
 |---|---:|---|
 | Wolf | Four attacks | Sustained close pressure and pursuit |
-| Wraith | Current working two attacks | Deliberate extended control with fewer ordinary options; exact action count and roles under revision |
+| Wraith | Two attacks | Precise extended line followed by an optional broader committed frontal sweep |
 | Ronin | Three attacks | Slow escalating impact and heavy direct damage |
 
-Each attack must remain useful when the sequence ends early. Wraith should remain shorter and more selective than Wolf even if the revision adds or restructures an authored Basic option.
+Each attack must remain useful when the sequence ends early. Wraith remains shorter and more selective than Wolf: Veil Cut handles short precise openings, while Passing Arc adds broader posture and guard pressure when the player accepts more commitment.
 
 ## Movement guidance
 
@@ -171,6 +171,20 @@ Aspect Tier progression is a fixed optional investment route.
 The purpose of preserving tradeoffs is to keep the weapon identity and player outplay intact, not to discourage Embrace or make later Tiers undesirable.
 
 A Tier IV may broaden a signature action without multiplying single-target output. The current Pale Procession draft uses two reduced-power adjacent barrage lanes with one stream per enemy per beat; this remains a valid comparison principle even if Wraith's final Tier IV changes.
+
+## Blood Art differentiation
+
+Blood Arts should produce distinct encounter-scale decisions rather than three versions of the same damage state.
+
+The approved launch distinction is:
+
+> Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point
+
+- **Blood Hunt** commits Wolf to one long player-directed pursuit and endpoint.
+- **Wraith's Reach** supplies one compact frontal sweep, one very long fixed corridor strike, and one delayed repetition along the same geometry.
+- **Falling Mountain** plants Ronin at one chosen point for a monumental slam and delayed rupture.
+
+Wraith's Reach is not a duration buff. Its corridor and delayed echo are one immediate authored package. It does not track, pursue, grant generic defense, generate Blood, or independently trigger Spectral Edge.
 
 ## Kit evaluation template
 
@@ -217,21 +231,22 @@ A kit is ready when:
 - Tier 0-I Technique-focused builds remain viable,
 - and it is distinguishable from the other two during the first combat room.
 
-Wolf and Ronin meet the current qualitative Tier 0 and Tier I-IV working-package standards. Wraith remains an approved launch identity but its Tier 0 action foundation and later package are being reassessed before final cross-roster approval.
+Wolf and Ronin meet the current qualitative Tier 0 and Tier I-IV working-package standards. Wraith's Tier 0-II package is approved; its Tier III-IV distribution remains under review before final cross-roster approval.
 
 ## Cross-roster comparison
 
 | Property | Wolf | Wraith | Ronin |
 |---|---|---|---|
-| Style | Fast close pressure | Extended spectral control under revision | Slow heavy direct impact |
-| Sequence | Four hits | Current working two hits | Three hits |
-| Range | Close | Longest intended | Medium |
+| Style | Fast close pressure | Extended spectral frontal control | Slow heavy direct impact |
+| Sequence | Four hits | Two hits | Three hits |
+| Range | Close | Longest average | Medium |
 | Cadence | Fastest | Slower and deliberate | Slowest |
-| Per-hit damage | Moderate | Moderate intended | Highest |
-| Sustained output | Highest while connected | Moderate intended | Opening-dependent |
-| Attack movement | Strongly forward | Restrained intended | Minimal |
-| Held purpose | Pursuit | Reach and focused frontal control under revision | Power |
-| Primary risk | Overextension | Poor positioning, collapsed spacing, and commitment to the wrong direction or opening | Missed heavy commitment and slow posture recovery |
+| Per-hit damage | Moderate | Moderate | Highest |
+| Sustained output | Highest while connected | Moderate and opening-dependent | Opening-dependent |
+| Attack movement | Strongly forward | Restrained | Minimal |
+| Held purpose | Pursuit | Focused reach and stationary multi-hit commitment | Power |
+| Blood Art | Long pursuit through the battlefield | Immediate sweep, fixed corridor, and delayed echo | Planted slam and delayed rupture |
+| Primary risk | Overextension | Poor positioning, collapsed spacing, lateral pressure, and commitment to the wrong line | Missed heavy commitment and slow posture recovery |
 
 ## Technique compatibility
 
@@ -249,4 +264,4 @@ Neither additional Aspect belongs to current launch paper-design or production s
 
 ## Next design dependency
 
-Reassess Wraith's complete Tier 0 weapon kit first. Decide whether its two-hit Basic sequence is sufficient, distinguish the purpose of Veil Cut, Passing Arc, Pale Lance, Ghostline Slash, and Veil Reversal, define its relative combat profile and encounter weaknesses, and confirm production-realistic animation and VFX requirements. Then review Wraith's Blood Art and later Tier distribution before the remaining growth-rule, Ronin follow-up, and final cross-roster audits.
+Reassess Wraith's Tier III and Tier IV distribution around the approved immediate Wraith's Reach. Determine whether Veiled Guard and Pale Procession remain worthwhile, whether the later package overconcentrates on Pale Lance and Pale Barrage, whether another Tier should support Veil Cut, Passing Arc, Ghostline Slash, Veil Reversal, or the corridor Blood Art, and whether the remaining animation, VFX, input, collision, and teaching burden is justified.
