@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 ---
 
 # Production Roadmap
@@ -58,17 +58,19 @@ Ronin's approved current package establishes these high-level production needs:
 - Shattering Wake contact-origin transfer through the primary target,
 - Ronin Blood building, ready, activated, resolving, consumed, and rebuilding states.
 
-Wraith's approved Tier 0-II package establishes these high-level production needs:
+Wraith's approved Tier 0-III package establishes these high-level production needs:
 
 - distinct Veil Cut, Passing Arc, Pale Lance, Ghostline Slash, and Veil Reversal geometry and impact treatment,
 - Pale Barrage continuation, stationary commitment, early release, interruption, and recovery,
 - Spectral Edge physical-range versus spectral-only contact feedback and Tier escalation,
 - Wraith's Reach full-meter activation, short directional preparation, compact broad opening sweep, very long fixed corridor strike, one weaker delayed same-geometry repetition, and ending recovery,
+- Spectral Passage continuous spectral geometry through ordinary-enemy bodies, dominant primary impact, reduced secondary impacts, and visible stopping against elites, bosses, heavy enemies, solid geometry, and authored blockers,
+- prevention of extra reach, tracking, projectile, bounce, repeated same-enemy, secondary Blood, and unrestricted Spectral Edge or proc presentation,
 - Wraith Blood building, ready, activated, resolving, consumed, and rebuilding states.
 
-Wraith's current Veiled Guard and Pale Procession concepts may guide Tier III-IV comparison and dependency awareness, but they must not set final animation, VFX, audio, HUD, Shrine, trial, or quotation counts before the later-Tier distribution audit.
+Pale Procession may guide Tier IV comparison and dependency awareness, but it must not set final animation, VFX, audio, HUD, Shrine, trial, or quotation counts before the capstone audit.
 
-The three launch Aspect identities are fixed. Wolf and Ronin support high-level scoping through Tier IV, while Wraith supports high-level scoping through Tier II. Final quotation still requires implementation briefs and Wraith's completed Tier III-IV package.
+The three launch Aspect identities are fixed. Wolf and Ronin support high-level scoping through Tier IV, while Wraith supports high-level scoping through Tier III. Final quotation still requires implementation briefs and Wraith's completed Tier IV package.
 
 Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
@@ -101,7 +103,8 @@ The core story and lore are approved. Final quotation depends on the authored-co
 - Wolf, Wraith, and Ronin are the fixed launch Aspect families.
 - All Aspect attacks remain player-directed; production must not imply corrective tracking or homing.
 - Wolf and Ronin working packages may guide high-level scope through Tier IV but not final frame or effect counts before implementation briefs.
-- Wraith may guide high-level scope through Tier II; final production counts require the completed Tier III-IV distribution.
+- Wraith may guide high-level scope through Tier III; final production counts require the completed Tier IV capstone.
+- Spectral Passage should primarily reuse existing attack geometry and trails with collision and impact extensions rather than require a new command animation.
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.
