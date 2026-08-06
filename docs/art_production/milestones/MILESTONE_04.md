@@ -40,11 +40,11 @@ The milestone must support optional Aspect Tier investment and continued Techniq
 ## Planned scope
 
 - Wolf Tier 0 attack, player-directed pursuit, contact, and overcommitment presentation
-- Wraith revised Tier 0 extended blade lines, distinct attack geometry, restrained movement, and deliberate frontal-control presentation
+- Wraith approved Tier 0 extended blade lines, distinct attack geometry, restrained movement, deliberate frontal control, and Spectral Edge contact presentation
 - Ronin Tier 0 concentrated power, heavy impact, guard stability, and slow-recovery presentation
 - Three Aspect icons and selection states
 - Fixed optional Tier I-IV escalation with action-specific commitment and tradeoff presentation
-- Tier II Blood buildup, readiness, activation, active or resolving, consumed, and rebuilding states
+- Tier II Blood buildup, readiness, activation, resolving, consumed, and rebuilding states
 - Three Blood Art presentation packages after their gameplay designs are approved
 - Modular mutation overlays only where required by approved Tier or narrative presentation
 - Eight prosthetic VFX families
@@ -69,16 +69,21 @@ The milestone must support optional Aspect Tier investment and continued Techniq
 
 Blood Hunt is one immediate authored action rather than a transformation. Blood Fang is an effect attached to Akio's final endpoint strike, not a companion or independent actor. Wolf's ordinary animation library should be reused wherever the approved action does not require a distinct animation.
 
-### Wraith package under ordered revision
+### Wraith package available through Tier II
 
-Wraith retains a complete current draft for comparison:
+- **Tier 0:** distinct Veil Cut line, Passing Arc sweep, Pale Lance focused reach, Ghostline Slash re-entry, and Veil Reversal posture-counter presentation
+- **Tier I — Pale Barrage:** continuation from Pale Lance into rapid repeated thrusts while Akio remains stationary and committed to the selected direction
+- **Spectral Edge:** physical-range versus spectral-only contact distinction and modest Tier-scaled posture and guard-pressure treatment
+- **Tier II — Wraith's Reach:** full-meter activation, short directional preparation, compact broad frontal opening sweep, one very long fixed corridor strike, one weaker delayed repetition along the exact same geometry, and ending recovery
 
-- **Current Tier I — Pale Barrage:** continuation from Pale Lance into rapid repeated thrusts while Akio remains stationary and committed to the selected direction
-- **Current Tier II — Wraith's Reach:** a duration state with extended authored attack geometry and one delayed afterimage along the original line or arc
-- **Current Tier III — Veiled Guard:** one manually timed spectral parry manifestation per Pale Lance use
-- **Current Tier IV — Pale Procession:** two reduced-power adjacent barrage shades and limited player-directed frontal steering
+Wraith's Reach is an immediate authored Blood Art rather than a duration state. It requires no persistent reach aura or ordinary-attack afterimage system. The delayed spectral Wraith appears only to repeat the approved corridor and must not read as an autonomous companion.
 
-Do not lock final Wraith animation, VFX, audio, HUD, Shrine, or trial counts from this draft. Wraith Tier 0 must first be revised for action variety, role distinction, encounter coverage, relative combat profile, and production realism. Its Blood Art and later Tiers will then be redistributed around the approved foundation.
+Current later-Tier candidates remain provisional:
+
+- **Tier III candidate — Veiled Guard:** one manually timed spectral parry manifestation per Pale Lance use
+- **Tier IV candidate — Pale Procession:** two reduced-power adjacent barrage shades and limited player-directed frontal steering
+
+Wraith Tier 0-II may guide high-level scoping. Do not lock final Tier III-IV animation, VFX, audio, HUD, Shrine, or trial counts until the later-Tier distribution audit is complete.
 
 ### Ronin package available for high-level scoping
 
@@ -89,16 +94,16 @@ Do not lock final Wraith animation, VFX, audio, HUD, Shrine, or trial counts fro
 
 Ronin effects remain grounded, fixed-direction, and impact-focused. Falling Mountain and Unbroken Resolve provide narrow interruption-resistance exceptions without turning the entire kit into armored offense.
 
-The former five stance families and superseded Wolf Prey Mark, Dire Hunt transformation, Apex Feast, Wraith perfect-dodge/Mist-Step/spinning Art, and Ronin Counter Cut/Focus packages are not part of this milestone.
+The former five stance families and superseded Wolf Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach buff, Wraith perfect-dodge/Mist-Step/spinning Art, and Ronin Counter Cut/Focus packages are not part of this milestone.
 
 ## Suggested internal order
 
 1. Final Wolf, Wraith, and Ronin icons and Tier 0 VFX identity prototypes
 2. Prototype Wolf Blood Tempo, Feral Momentum, Blood Hunt, Blood Fang, Fanged Guard, and Apex Mauling using the approved package
 3. Prototype Ronin Steadfast Reprisal, Falling Mountain, Unbroken Resolve, and Shattering Wake using the approved package
-4. Complete Wraith Tier 0 revision before approving final Wraith animation and effect counts
-5. Select Wraith's Blood Art form and redistribute its Tier I, III, and IV benefits
-6. Resolve Wraith and Ronin growth-rule and minor-support questions
+4. Prototype Wraith Tier 0, Pale Barrage, Spectral Edge, and immediate Wraith's Reach using the approved Tier 0-II package
+5. Resolve Wraith Tier III-IV distribution and any remaining later-Tier production groups
+6. Resolve Ronin's growth-rule and roster-wide minor-support questions
 7. Complete the final cross-roster Tier I-IV presentation and production audit
 8. Complete Blood buildup, readiness, activation, and all three Blood Arts
 9. Prosthetic tool VFX and icons
@@ -114,17 +119,17 @@ The former five stance families and superseded Wolf Prey Mark, Dire Hunt transfo
 - Final overlays inherit approved Akio sheets.
 - Aspect effects follow the approved weapon-kit identities rather than superseded behavioral mechanics.
 - All attacks remain player-directed; effects cannot imply corrective tracking or homing.
-- Wolf and Ronin packages support high-level planning, but final animation and effect counts require implementation briefs.
-- Wraith's current draft supports comparison only; final counts require the completed revision.
+- Wolf and Ronin packages support high-level planning through Tier IV, but final animation and effect counts require implementation briefs.
+- Wraith Tier 0-II supports high-level planning; final Tier III-IV and complete-package counts require the later-Tier revision.
 - Blood Art effects require approved gameplay actions, timing, targeting, state behavior, and guaranteed activation payoff.
 - Aspect effects inherit shared Returning Blood and Shrine language from Milestone 2.
 - No separate mandatory drawback presentation is required. Inherent limitations remain visible through movement, direction, commitment, recovery, and defensive access.
 - Tool effects follow approved tool role, timing, footprint, and status behavior.
 - Technique effects follow the approved slot, reserve, rarity, refinement, and trigger rules.
 - Techniques reuse approved base combat, Aspect, and prosthetic VFX before new production is authorized.
-- Techniques must not duplicate Blood Tempo, Feral Momentum, Blood Hunt, Blood Fang, Fanged Guard, Apex Mauling, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, Shattering Wake, or the approved final Wraith package without explicit approval.
+- Techniques must not duplicate Blood Tempo, Feral Momentum, Blood Hunt, Blood Fang, Fanged Guard, Apex Mauling, Pale Barrage, Spectral Edge, Wraith's Reach, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, Shattering Wake, or the approved final Wraith Tier III-IV package without explicit approval.
 - Wolf, Wraith, and Ronin must remain distinct rather than becoming color variants.
-- Wraith effects must remain visually separate from Mist Raven and must not imply teleportation.
+- Wraith effects must remain visually separate from Mist Raven and must not imply teleportation, a duration transformation, or an autonomous companion.
 - Status markers and damage-number types must remain consistent across prosthetics, enemies, Techniques, Relics, and HUD.
 - Technique, Relic, item, and consumable quantities must be locked before a final fixed quote; reusable templates may be produced before final catalog size.
 - Additional Aspects are excluded from this milestone.
@@ -139,15 +144,17 @@ The former five stance families and superseded Wolf Prey Mark, Dire Hunt transfo
 - Blood Hunt has an obvious activation payoff, fixed direction, stopping behavior, Blood Fang endpoint, and punishable ending position.
 - Fanged Guard clearly protects only one approved frontal commitment through normal posture rules.
 - Apex Mauling clearly communicates one consolidated claw package and movement-only slow without changing enemy attack timing.
-- Wraith reads as deliberate extended frontal control without teleport, homing, perfect-dodge, or discarded spinning effects.
-- Wraith's final Tier 0 actions are individually distinct and satisfying in the first combat room.
-- Wraith's final Blood Art communicates guaranteed activation value and preserves point-blank and directional weaknesses.
+- Wraith reads as deliberate extended frontal control without teleport, homing, perfect-dodge, duration-state reach buff, or discarded spinning effects.
+- Wraith's Tier 0 actions are individually distinct and satisfying in the first combat room.
+- Pale Barrage communicates continuation, stationary commitment, early release, and reduced repeated-hit impact.
+- Spectral Edge clearly distinguishes physical contact from correctly spaced spectral-only contact without reading as a critical hit.
+- Wraith's Reach clearly communicates its compact frontal sweep, fixed very long corridor, delayed same-geometry echo, ordinary vulnerability, and punishable poor line selection.
 - Ronin reads as heavy impact and stability without tracking or a generic Focus state.
 - Falling Mountain clearly communicates posture relief, direct impact, fixed delayed rupture, and severe commitment.
 - Unbroken Resolve distinguishes costly commitment preservation from Measured Weight and Perfect Weight.
 - Shattering Wake originates at primary contact and does not multiply damage back onto the primary target.
 - Tier escalation is visible, modular, desirable, and compatible with the base player sheet.
-- Blood unavailable, building, ready, active or resolving, and consumed states are understandable.
+- Blood unavailable, building, ready, resolving, and consumed states are understandable.
 - Each approved Blood Art communicates activation payoff, target, timing, and resolution without obscuring enemy tells.
 - All eight prosthetics communicate footprint, target, status, and active state.
 - Technique choices, rarity, active slots, reserve, refinements, replacements, and loss warnings are understandable without tutorial text.
