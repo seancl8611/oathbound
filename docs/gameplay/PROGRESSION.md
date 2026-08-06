@@ -42,7 +42,7 @@ Temporary run state may include:
 - selected Blood Aspect and current Tier,
 - Corruption,
 - Blood after Tier II,
-- Blood Art readiness or active state,
+- Blood Art readiness or resolving state,
 - four active Techniques and one reserve,
 - Technique refinements,
 - temporary Prosthetic Techniques,
@@ -112,14 +112,13 @@ Ronin's fixed path is approved through the present audit:
 - Tier III — Unbroken Resolve with Measured Weight and Perfect Weight,
 - Tier IV — Shattering Wake.
 
-Wraith retains a complete working draft but its foundation and progression are under ordered revision:
+Wraith is approved through Tier II:
 
-- current Tier I — Pale Barrage,
-- current Tier II — Wraith's Reach,
-- current Tier III — Veiled Guard,
-- current Tier IV — Pale Procession.
+- Tier I — Pale Barrage,
+- Spectral Edge — deterministic spectral-only posture and guard-pressure growth at every Embrace,
+- Tier II — Wraith's Reach, an immediate frontal sweep, fixed corridor strike, and delayed repetition along the same geometry.
 
-Wraith Tier 0 must be settled before its Blood Art or later Tier distribution is relocked. Wolf and Ronin may receive only focused follow-up changes during the final comparison rather than being treated as blank Tier packages.
+Wraith's current Tier III Veiled Guard and Tier IV Pale Procession concepts remain provisional until the later-Tier distribution audit is complete. Wolf and Ronin may receive only focused follow-up changes during the final comparison rather than being treated as blank Tier packages.
 
 ## Technique development boundary
 
@@ -149,17 +148,19 @@ Blood is a run-only combat resource owned by the Blood Aspect system.
 - Any permanent upgrade affecting starting Blood, capacity, gain, activation, or Blood Art availability requires explicit system approval.
 - Runs that do not reach Tier II remain viable without Blood or a Blood Art.
 
-The working launch defaults are a shared Blood-meter framework, generation through meaningful katana Health damage and enemy-posture pressure plus successful Parry Counters, posture breaks, and deathblows, full-meter manual activation, and no Blood generation during a duration-based Blood Art. These are not absolute restrictions; an approved Aspect package may depart from a default when its identity clearly requires the exception.
+The working launch defaults are a shared Blood-meter framework, generation through meaningful katana Health damage and enemy-posture pressure plus successful Parry Counters, posture breaks, and deathblows, full-meter manual activation, and no Blood generation while an immediate Blood Art resolves or a duration-based Blood Art remains active. These are not absolute restrictions; an approved Aspect package may depart from a default when its identity clearly requires the exception.
 
 Wolf's approved direction uses an immediate full-meter action rather than a duration state. Meaningful Wolf sword damage, enemy-posture pressure, Fang Reversal after a parry, posture breaks, and deathblows may build Blood according to the final weighting. Blood Hunt consumes the full meter, immediately provides limited Health recovery and a disruptive Blood howl, then launches one fixed player-directed pursuit ending in Blood Fang. Blood generation resumes after the immediate Art finishes resolving.
 
 Blood Hunt does not clear player posture, grant damage reduction, create lifesteal, or apply a generic moveset buff. Ordinary light hits do not interrupt the launched pursuit but still deal full valid effects; posture-breaking, lethal, perilous, grabbing, launching, or overriding knockdown attacks interrupt normally. Exact source weighting, preparation, travel, collision, stopping priority, recovery, damage, posture, and howl values remain tuning work.
 
-Wraith's Blood direction remains provisional until its Tier 0 revision and Blood Art comparison are complete. The current Wraith's Reach draft uses a full-meter duration state with extended authored geometry and delayed afterimages while retaining ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetic access. It grants no healing, Blood refund, damage reduction, posture clearing, interruption resistance, automatic defense, or special parry reward.
+Wraith's approved Blood Art is the immediate Wraith's Reach. Full-meter activation commits one compact broad frontal sweep, one very long narrow-to-medium corridor strike, and one delayed spectral repetition along the same fixed player-selected geometry. The sweep supplies practical activation value before the later stages connect. The Art does not track, pursue, heal, clear posture, grant damage reduction or interruption resistance, generate Blood, or independently trigger Spectral Edge.
+
+The corridor and delayed echo reward placement and prediction: enemies may leave the line before the echo or enter it before resolution. Ordinary vulnerability, interruption, commitment, and recovery remain active. Exact source weighting, directional preparation, sweep geometry, corridor dimensions, echo delay, damage, posture, stagger, interruption, recovery, and proc weighting remain tuning work.
 
 Ronin's approved Blood Art is Falling Mountain. Full-meter activation clears a meaningful portion of accumulated player posture and powers a planted manually aimed slam, compact impact burst, and delayed Deep Rupture at the original point. Its brief planted channel may resist eligible ordinary-hit interruption while full incoming damage and posture remain active; posture break, lethal hits, perilous attacks, grabs, launches, and overriding knockdowns remain normal counters.
 
-Exact Blood capacity, source weighting, gain values, activation cost, Blood Hunt values, Wraith duration or alternative Art behavior, Falling Mountain timing and impact, and anti-farming thresholds remain tuning work.
+Exact Blood capacity, source weighting, gain values, activation cost, Blood Hunt values, Wraith's Reach values, Falling Mountain timing and impact, and anti-farming thresholds remain tuning work.
 
 ## Persistent character progression
 
@@ -304,8 +305,8 @@ The results flow must clearly distinguish retained progress from burned-away run
 
 ## Current production dependencies
 
-1. Reassess Wraith's Tier 0 weapon kit, then select its Blood Art form and redistribute its later Tiers.
-2. Decide Wraith and Ronin small Tier-growth rules and audit narrow Tiers for any justified minor supporting benefit.
+1. Reassess Wraith's Tier III-IV distribution around the approved immediate Wraith's Reach.
+2. Decide Ronin's small Tier-growth rule and audit narrow Tiers for any justified minor supporting benefit.
 3. Perform Ronin's follow-up audit and the final Wolf, Wraith, and Ronin comparison for power, accessibility, production cost, inherent tradeoffs, and Technique overlap across Technique-focused, hybrid, and Aspect-focused runs.
 4. Scope the launch run-build content catalog, including rarity, refinements, post-fill offers, and route competition.
 5. Scope persistent progression, onboarding, and trials around those approved systems.
