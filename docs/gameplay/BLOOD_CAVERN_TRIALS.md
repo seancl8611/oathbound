@@ -70,19 +70,30 @@ These are approved teaching goals, not final trial count commitments.
 
 ### Wraith Trials
 
-Representative Tier 0 lessons currently under revision may teach:
+Approved Tier 0 lessons may teach:
 
-- edge-of-range use of Veil Cut,
-- frontal control through Passing Arc,
-- narrow-lane punishment with Pale Lance,
+- using Veil Cut as the precise low-commitment line for short openings,
+- deciding whether to stop after Veil Cut or commit to Passing Arc's broader frontal sweep,
+- using Pale Lance only for confirmed focused openings and respecting severe miss recovery,
+- using Ghostline Slash for controlled dash re-entry rather than pursuit,
+- converting a successful parry into strong posture pressure through Veil Reversal,
 - reaching exposed ranged enemies through authored melee geometry and universal movement,
+- maintaining useful distance without relying on an artificial close-range dead zone,
 - returning to defense after deliberate commitments,
-- handling enemies that enter point-blank range or attack from several directions,
-- and selecting among distinct actions rather than relying on generic longer reach.
+- and handling enemies that enter point-blank range or attack from several directions.
 
-Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, or mandatory repositioning.
+Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, mandatory repositioning, or a duration-wide reach state.
 
-The current later-Tier draft may guide provisional demonstrations for Pale Barrage, Wraith's Reach, Veiled Guard, and Pale Procession, but no final trial count or script should be approved until Tier 0, the Blood Art, and Tier distribution complete their ordered revision.
+The approved Tier I-II package supports demonstrations for:
+
+- **Pale Barrage:** choose between a single Pale Lance, partial continuation, and full stationary barrage according to opening size,
+- **Spectral Edge:** distinguish physical-range contact from qualifying spectral-only contact and understand that the reward emphasizes posture and guard pressure rather than Health damage,
+- **Wraith's Reach activation:** use the compact frontal sweep as guaranteed immediate value without treating it as full-circle protection,
+- **Wraith's Reach corridor:** select one valuable line, understand the fixed very long corridor strike, and respect ordinary vulnerability and poor-line recovery,
+- **Wraith's Reach echo:** predict whether enemies will remain in, leave, or enter the same corridor before the delayed repetition resolves,
+- and understand that the Blood Art does not track, pursue, generate Blood, grant generic defense, or independently trigger Spectral Edge.
+
+Veiled Guard and Pale Procession may guide provisional trial concepts, but no final Tier III-IV trial count or script should be approved until the later-Tier distribution audit is complete.
 
 ### Ronin Trials
 
@@ -106,11 +117,11 @@ Ronin trials must not teach corrective tracking, combo preservation, a required 
 
 ### Fixed Tier and Blood demonstrations
 
-Wolf and Ronin may be used for high-level trial planning now. Wraith demonstrations remain provisional until the ordered revision is complete.
+Wolf and Ronin may be used for high-level Tier I-IV trial planning. Wraith may be planned through Tier II; its Tier III-IV demonstrations remain provisional.
 
 Trials may teach:
 
-- Tier I-IV headline benefits,
+- approved Tier headline benefits,
 - the inherent movement, direction, commitment, recovery, and defensive limitations preserved by each upgraded action,
 - Resist, Embrace, and Stabilize decisions,
 - Blood unavailability before Tier II,
