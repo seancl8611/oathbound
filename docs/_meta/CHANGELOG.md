@@ -4,10 +4,21 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 ---
 
 # Documentation Changelog
+
+## 2026-08-06 — Wraith Tier III Spectral Passage lock
+
+- Replaced the former Veiled Guard Tier III candidate with Spectral Passage.
+- Made Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal continue through ordinary-enemy bodies across their remaining authored geometry.
+- Defined reduced Health damage and meaningful posture and guard pressure for additional ordinary targets.
+- Defined elite, boss, protected-heavy, solid-geometry, and authored-blocker stopping rules.
+- Prevented extra reach, tracking, movement, defense, repeated same-enemy hits, secondary Blood generation, and unrestricted Spectral Edge or proc multiplication.
+- Kept Pale Barrage's repeated jabs and Wraith's Reach outside unrestricted Spectral Passage behavior.
+- Preserved Veiled Guard as a retired candidate and advanced the active Wraith question to Tier IV.
+- Synchronized Wraith, Blood Aspect, progression, identity-guideline, decision-log, candidate-history, and open-question documents.
 
 ## 2026-08-05 — Wraith Tier II corridor Blood Art lock
 

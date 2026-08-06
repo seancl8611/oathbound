@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 topics:
   - asset-counts
   - characters
@@ -83,22 +83,22 @@ Ronin's approved current Tier package establishes these additional high-level gr
 - **Shattering Wake:** primary-contact origin and reduced-Health, strong-posture transfer through the target into enemies behind it
 - **Ronin Blood HUD:** unavailable, building, ready, activated, resolving, consumed, and rebuilding states
 
-Wraith's approved Tier 0-II package establishes these high-level groups:
+Wraith's approved Tier 0-III package establishes these high-level groups:
 
 - **Tier 0 reach family:** elongated connected blade lines, distinct Veil Cut and Passing Arc geometry, focused Pale Lance, controlled Ghostline Slash, posture-focused Veil Reversal, restrained player position, and clear miss dissipation
 - **Pale Barrage:** continued Pale Lance sequence, repeated thrust language, stationary commitment, early release, interruption, and recovery states
 - **Spectral Edge:** readable physical-range versus spectral-only contact and modest Tier-scaled posture and guard-pressure treatment
 - **Wraith's Reach:** full-meter activation, short directional preparation, compact broad frontal opening sweep, one very long connected corridor strike, one weaker delayed repetition along the exact same geometry, and ending recovery
+- **Spectral Passage:** continuous ordinary attack trails through eligible ordinary-enemy bodies, dominant primary impacts, reduced secondary impacts, and clear termination against elites, bosses, protected heavy enemies, solid geometry, and authored blockers
 - **Wraith Blood HUD:** unavailable, building, ready, activated, resolving, consumed, and rebuilding states
 
-Wraith's current later-Tier candidates establish provisional groups only:
+Wraith's current Tier IV candidate establishes one provisional group only:
 
-- **Veiled Guard candidate:** one manually timed spectral parry manifestation and one-use-per-Pale-Lance state
 - **Pale Procession candidate:** two reduced-power adjacent barrage shades and limited player-directed frontal steering
 
-Wraith Tier 0-II may receive high-level production grouping. Final Tier III-IV animation, VFX, HUD, audio, Shrine, and trial counts must wait for the later-Tier distribution audit.
+Wraith Tier 0-III may receive high-level production grouping. Final Tier IV animation, VFX, HUD, audio, Shrine, trial, and full-package counts must wait for the capstone audit.
 
-Final Wolf and Ronin counts still depend on production briefs specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Final Wraith counts additionally depend on its unresolved Tier III-IV package.
+Final Wolf and Ronin counts still depend on production briefs specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Final Wraith counts additionally depend on its unresolved Tier IV package.
 
 Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. The reusable UI framework must support a filled four-Technique loadout continuing to improve through refinement, compatible or higher-rarity replacement, wildcard offers, reserve management, and specialization.
 
@@ -146,7 +146,7 @@ Route-marker art must make Shrine, Technique, refinement-capable, survival, econ
 - Wraith Pale Barrage continued-action and release state where HUD support is required
 - Wraith Spectral Edge contact feedback primarily in world space
 - Wraith's Reach activation, directional commitment, resolving, echo-timing, consumed, and rebuilding support where HUD presentation is required
-- Wraith Veiled Guard available and spent state where HUD support is required if retained
+- Wraith Spectral Passage primary-versus-secondary impact and stopping-body feedback primarily in world space; no persistent HUD state is required by default
 - Ronin Falling Mountain activation and resolving state
 - Ronin Measured Weight and Perfect Weight state where HUD support is required
 - Four active Technique slots and one reserve
@@ -166,7 +166,7 @@ Route-marker art must make Shrine, Technique, refinement-capable, survival, econ
 - Shortened repeat-clear results
 - Postgame Heart-route access after its control method is approved
 
-Three Aspect slots and selection states are fixed. Wolf and Ronin high-level Tier and Blood states are known through Tier IV. Wraith states are known through Tier II; Tier III-IV remain provisional. Exact final counts remain uncountable until detailed implementation briefs and the later-Tier revision are approved.
+Three Aspect slots and selection states are fixed. Wolf and Ronin high-level Tier and Blood states are known through Tier IV. Wraith states are known through Tier III; Tier IV remains provisional. Exact final counts remain uncountable until detailed implementation briefs and the capstone revision are approved.
 
 ## Shared VFX families
 
@@ -205,8 +205,9 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - restrained player-directed movement with clear physical connection to the katana,
 - spectral-only contact feedback for Spectral Edge,
 - Wraith's Reach opening sweep, fixed very long corridor, and one delayed authored-geometry repetition,
-- provisional spectral parry and three-lane barrage language only if later retained,
-- no corrective tracking, teleport, vanish, forced-offset, duration-wide reach state, ordinary-attack echo state, discarded spin, or Mist Raven presentation.
+- Spectral Passage continuity through ordinary formations, reduced secondary impacts, and visible stopping-body termination,
+- provisional three-lane barrage language only if Pale Procession is retained,
+- no corrective tracking, teleport, vanish, forced-offset, duration-wide reach state, ordinary-attack echo state, Veiled Guard, discarded spin, or Mist Raven presentation.
 
 **Ronin**
 
@@ -220,7 +221,7 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - fixed attack lines,
 - no corrective tracking, generic Focus aura, or required combo-state presentation.
 
-Tier escalation and Blood Arts may extend these families only according to approved gameplay packages. Wolf and Ronin are available for high-level scoping through Tier IV. Wraith is available through Tier II, with Tier III-IV provisional. Do not preserve superseded prey-mark, Dire Hunt transformation, Apex Feast, Wraith duration state, Wraith spin, perfect-dodge teleport, Mist-Step, Counter Cut, deathblow-Focus, or formal drawback-badge requirements.
+Tier escalation and Blood Arts may extend these families only according to approved gameplay packages. Wolf and Ronin are available for high-level scoping through Tier IV. Wraith is available through Tier III, with Tier IV provisional. Do not preserve superseded prey-mark, Dire Hunt transformation, Apex Feast, Wraith duration state, Wraith spin, Veiled Guard, perfect-dodge teleport, Mist-Step, Counter Cut, deathblow-Focus, or formal drawback-badge requirements.
 
 ### Prosthetics
 
@@ -267,7 +268,8 @@ Tier escalation and Blood Arts may extend these families only according to appro
 - Do not imply corrective tracking or homing in animation or VFX.
 - Do not create separate mandatory drawback icons or penalty effects; represent inherent limitations through the actual action and state presentation.
 - Wolf and Ronin may guide high-level Tier I-IV asset grouping but not final counts before implementation briefs.
-- Wraith may guide high-level Tier 0-II grouping; do not lock Tier III-IV or final full-package counts before the later-Tier revision.
+- Wraith may guide high-level Tier 0-III grouping; do not lock Tier IV or final full-package counts before the capstone revision.
+- Spectral Passage should reuse existing attack animation and trail families where practical; its main new burden is collision, impact hierarchy, and stopping feedback rather than a separate player action.
 - No duplicate Aspect-specific Blood Art upgrade tree is currently included.
 - Do not preserve assets that exist only for superseded mechanics.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.

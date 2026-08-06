@@ -4,7 +4,7 @@ title: Blood Aspect VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 topics:
   - blood-aspects
   - wolf
@@ -28,7 +28,7 @@ Blood Aspect effects communicate the selected katana weapon kit. They are inform
 
 Techniques may reuse or lightly extend an Aspect family when they amplify the same combat verb, but the selected Aspect remains the stronger visual identity.
 
-Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Wraith is approved through Tier II, while its Tier III-IV distribution remains under ordered revision. Final counts for all three still require implementation briefs and playable validation.
+Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Wraith is approved through Tier III, while Tier IV remains under ordered revision. Final counts for all three still require implementation briefs and playable validation.
 
 ## Shared presentation rules
 
@@ -39,7 +39,7 @@ Wolf and Ronin have complete qualitative Tier I-IV packages approved through the
 - Tier escalation should deepen the same visual family rather than replace it with unrelated effects.
 - Wolf, Wraith, and Ronin must not become simple color swaps.
 - Effects use modular overlays and VFX where practical rather than requiring three unrelated complete player sheets.
-- Inherent tradeoffs should remain readable through movement, direction, commitment, recovery, and defensive access rather than through a separate drawback icon or penalty effect.
+- Inherent tradeoffs should remain readable through movement, direction, commitment, recovery, collision, and defensive access rather than through a separate drawback icon or penalty effect.
 
 ## Wolf — pressure and pursuit
 
@@ -143,9 +143,9 @@ Large targets must not appear to receive multiplied damage from overlapping claw
 
 ### Gameplay purpose
 
-Communicate long connected melee reach, narrow pokes, broad spectral arcs, slower and more deliberate ordinary attacks than Wolf, restrained movement, fixed attack lines, stronger pressure from correctly spaced spectral contact, and one major Blood Art that controls a chosen frontal corridor.
+Communicate long connected melee reach, narrow pokes, broad spectral arcs, slower and more deliberate ordinary attacks than Wolf, restrained movement, fixed attack lines, stronger pressure from correctly spaced spectral contact, one major Blood Art that controls a chosen frontal corridor, and Tier III penetration through layered ordinary formations.
 
-Wraith's Tier 0-II package is approved. Final Tier III-IV counts remain provisional until the later-Tier distribution audit is complete.
+Wraith's Tier 0-III package is approved. Final Tier IV counts remain provisional until the capstone audit is complete.
 
 ### Tier 0 visual direction
 
@@ -183,7 +183,7 @@ Spectral Edge must not read as a critical hit, large Health-damage multiplier, a
 
 ### Tier II — Wraith's Reach
 
-Wraith's Reach is an immediate sweep–corridor–echo Blood Art rather than a duration state.
+Wraith's Reach is an immediate sweep-corridor-echo Blood Art rather than a duration state.
 
 Presentation requires:
 
@@ -212,17 +212,31 @@ The delayed Wraith is a brief authored repetition, not an autonomous companion. 
 
 The retired duration-state version must not leave a persistent body aura, moveset-wide reach state, or repeated afterimages on ordinary attacks.
 
-### Tier III candidate — Veiled Guard
+### Tier III — Spectral Passage
 
-Veiled Guard currently requires:
+Spectral Passage uses the existing attack trails and geometry rather than creating a detached projectile or new summoned strike.
 
-- a spectral manifestation that can face an eligible incoming attack without turning Akio,
-- ordinary manually timed parry readability,
-- one-use-per-Pale-Lance availability,
-- clear success without releasing or redirecting the held attack,
-- and clear loss of protection after the use is spent or the timing is missed.
+Presentation requires:
 
-It must not imply passive omnidirectional protection, easier parry timing, fallback blocking, damage reduction, or an automatic counter. Final ownership remains subject to Tier III-IV redistribution.
+- the spectral portion of Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal to remain visibly continuous through ordinary-enemy bodies,
+- one dominant normal impact on the first or primary target,
+- reduced but clear secondary impacts on additional ordinary enemies within the remaining line or arc,
+- visible termination when the attack contacts an elite, boss, protected heavy enemy, solid geometry, or another authored stopping body,
+- no second impact against an enemy already struck by that action,
+- and restrained secondary feedback so formation penetration remains readable without obscuring telegraphs.
+
+The effect must not imply:
+
+- additional reach or width,
+- target selection or chaining,
+- bouncing between enemies,
+- an independently moving projectile,
+- same-enemy repeated damage,
+- full-value Spectral Edge on every secondary target,
+- secondary Blood generation,
+- or a persistent penetration state around Akio.
+
+Pale Barrage's repeated jabs and all stages of Wraith's Reach need distinct presentation showing that they do not each create unrestricted Spectral Passage chains.
 
 ### Tier IV candidate — Pale Procession
 
@@ -233,9 +247,10 @@ Pale Procession currently requires:
 - slow direct player steering inside a limited frontal arc,
 - no snapping, homing, automatic target selection, or independent retargeting,
 - one stream per enemy per barrage beat with central-stream priority,
+- no Spectral Passage chain from shade hits,
 - and immediate shade termination when the barrage ends or is interrupted.
 
-Shade effects must read as reduced-power lanes rather than extra full-strength attackers. Final Tier IV may change after the later-Tier distribution audit.
+Shade effects must read as reduced-power lanes rather than extra full-strength attackers. Final Tier IV may change after the capstone audit.
 
 ### Wraith boundaries
 
@@ -248,6 +263,7 @@ Shade effects must read as reduced-power lanes rather than extra full-strength a
 - no independent projectile detached from the katana,
 - no autonomous companion behavior,
 - no duration-wide reach or ordinary-attack echo state,
+- no Veiled Guard parry-during-Held presentation,
 - no confusion with the Mist Raven prosthetic,
 - no return to the discarded spinning replacement-combat Art,
 - no VFX that hides Wraith's stationary, restrained, or directional commitments.
@@ -329,13 +345,13 @@ Only Falling Mountain's direct blade slam may create its wake; Deep Rupture does
 
 Every Aspect follows a fixed optional Tier path from Tier 0 through Tier IV.
 
-Wolf and Ronin are available for high-level production planning through Tier IV. Wraith is available through Tier II; final Tier III-IV counts must wait for the ordered later-Tier revision.
+Wolf and Ronin are available for high-level production planning through Tier IV. Wraith is available through Tier III; final Tier IV counts must wait for the capstone review.
 
 Across all three:
 
 - Tier escalation should intensify or extend the existing family,
 - every Tier should read as a desirable net-positive advancement,
-- inherent limitations remain visible through the upgraded action's movement, direction, commitment, recovery, or defensive access,
+- inherent limitations remain visible through the upgraded action's movement, direction, commitment, recovery, collision, or defensive access,
 - Embrace should clearly communicate advancement without requiring a separate danger or drawback badge,
 - Resist should stabilize the current state without implying advancement,
 - Stabilize at Tier IV should not look like Tier V,
@@ -354,7 +370,7 @@ A Blood Art must communicate its guaranteed activation payoff and its immediate 
 - Neutral Techniques remain compatible with every Aspect family.
 - Technique effects reuse base sword, Aspect, posture, deathblow, and prosthetic language before new VFX are authorized.
 - A Technique cannot create a separate Wolf, Wraith, and Ronin effect set unless its approved rule genuinely requires different geometry or presentation.
-- Technique VFX must not duplicate Blood Tempo, Feral Momentum, Blood Hunt, Blood Fang, Fanged Guard, Apex Mauling, Pale Barrage, Spectral Edge, Wraith's Reach, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, Shattering Wake, or the approved final Wraith Tier III-IV package without explicit approval.
+- Technique VFX must not duplicate Blood Tempo, Feral Momentum, Blood Hunt, Blood Fang, Fanged Guard, Apex Mauling, Pale Barrage, Spectral Edge, Wraith's Reach, Spectral Passage, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, Shattering Wake, or the approved final Wraith Tier IV package without explicit approval.
 - Aspect identity remains more prominent than any single temporary Technique.
 - Technique rarity and refinements may change framing and effect treatment only when the approved gameplay entry requires it.
 
@@ -364,7 +380,7 @@ Final production briefs must define:
 
 - required attack trails and impact states,
 - Tier I-IV changes,
-- action-specific movement, commitment, recovery, and defense-state presentation,
+- action-specific movement, commitment, recovery, collision, and defense-state presentation,
 - Blood buildup and readiness states,
 - Blood Art startup, active or resolving behavior, and recovery states,
 - animation dependencies,

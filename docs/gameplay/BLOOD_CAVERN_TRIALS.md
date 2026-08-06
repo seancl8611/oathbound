@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 topics:
   - trials
   - training
@@ -82,18 +82,21 @@ Approved Tier 0 lessons may teach:
 - returning to defense after deliberate commitments,
 - and handling enemies that enter point-blank range or attack from several directions.
 
-Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, mandatory repositioning, or a duration-wide reach state.
+Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, mandatory repositioning, a duration-wide reach state, or the retired Veiled Guard mechanic.
 
-The approved Tier I-II package supports demonstrations for:
+The approved Tier I-III package supports demonstrations for:
 
 - **Pale Barrage:** choose between a single Pale Lance, partial continuation, and full stationary barrage according to opening size,
 - **Spectral Edge:** distinguish physical-range contact from qualifying spectral-only contact and understand that the reward emphasizes posture and guard pressure rather than Health damage,
 - **Wraith's Reach activation:** use the compact frontal sweep as guaranteed immediate value without treating it as full-circle protection,
 - **Wraith's Reach corridor:** select one valuable line, understand the fixed very long corridor strike, and respect ordinary vulnerability and poor-line recovery,
 - **Wraith's Reach echo:** predict whether enemies will remain in, leave, or enter the same corridor before the delayed repetition resolves,
-- and understand that the Blood Art does not track, pursue, generate Blood, grant generic defense, or independently trigger Spectral Edge.
+- **Spectral Passage alignment:** position ordinary enemies in one authored line or arc so a qualifying attack can continue through the front rank,
+- **Spectral Passage stopping rules:** distinguish ordinary pass-through targets from elites, bosses, heavy stopping enemies, solid geometry, and authored blockers,
+- **Spectral Passage weighting:** understand that secondary ordinary targets receive reduced Health damage and meaningful posture and guard pressure without Blood generation or unrestricted proc multiplication,
+- and understand that Wraith's Reach remains self-contained and Pale Barrage's repeated jabs do not each gain unrestricted full passage behavior.
 
-Veiled Guard and Pale Procession may guide provisional trial concepts, but no final Tier III-IV trial count or script should be approved until the later-Tier distribution audit is complete.
+Pale Procession may guide provisional Tier IV trial concepts, but no final Tier IV trial count or script should be approved until the capstone audit is complete.
 
 ### Ronin Trials
 
@@ -117,12 +120,12 @@ Ronin trials must not teach corrective tracking, combo preservation, a required 
 
 ### Fixed Tier and Blood demonstrations
 
-Wolf and Ronin may be used for high-level Tier I-IV trial planning. Wraith may be planned through Tier II; its Tier III-IV demonstrations remain provisional.
+Wolf and Ronin may be used for high-level Tier I-IV trial planning. Wraith may be planned through Tier III; its Tier IV demonstrations remain provisional.
 
 Trials may teach:
 
 - approved Tier headline benefits,
-- the inherent movement, direction, commitment, recovery, and defensive limitations preserved by each upgraded action,
+- the inherent movement, direction, commitment, recovery, collision, and defensive limitations preserved by each upgraded action,
 - Resist, Embrace, and Stabilize decisions,
 - Blood unavailability before Tier II,
 - Blood generation and readiness,

@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 topics:
   - blood-aspects
   - blood-arts
@@ -118,7 +118,7 @@ Modest ordinary defensive differences may use player-posture capacity, block pos
 | Aspect | Basic sequence | Held identity | Primary strength | Inherent tradeoffs |
 |---|---|---|---|---|
 | Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure and player-directed pursuit | Short reach, forward commitment, unsafe misses, and dangerous final positioning |
-| Wraith | Veil Cut → Passing Arc | Pale Lance — focused reach | Longest average melee reach, deliberate line-and-arc selection, frontal control, stronger posture pressure from correctly spaced spectral contact, and one delayed corridor-control Blood Art | Fewer ordinary actions, restrained movement, deliberate frontal commitments, close and lateral pressure, and severe Pale Lance or Blood Art misses |
+| Wraith | Veil Cut → Passing Arc | Pale Lance — focused reach | Longest average melee reach, deliberate line-and-arc selection, frontal control, stronger posture pressure from correctly spaced spectral contact, delayed corridor control, and Tier III penetration through layered ordinary formations | Fewer ordinary actions, restrained movement, deliberate frontal commitments, close and lateral pressure, and severe Pale Lance or Blood Art misses |
 | Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 Supporting actions:
@@ -189,7 +189,7 @@ Expected viability:
 
 Wolf's removed rear-hit, generic travel, temporary-transformation, and deathblow-only Apex Feast concepts are not part of fixed progression.
 
-### Wraith — approved through Tier II
+### Wraith — approved through Tier III
 
 Approved Tier 0 roles:
 
@@ -204,13 +204,15 @@ Approved progression:
 - **Tier I — Pale Barrage:** continuing to hold after Pale Lance produces rapid lower-impact stationary spectral jabs along the committed direction; releasing ends the barrage early.
 - **Spectral Edge — Tier growth:** qualifying primary attacks that connect through spectral-only geometry gain modest enemy-posture and guard pressure. The benefit scales slightly at every Embrace and adds no Health damage, reach, tracking, movement, meter, or unrestricted repeated-hit multiplication.
 - **Tier II — Wraith's Reach:** a full meter commits one compact broad frontal sweep, one very long fixed corridor strike, and one delayed spectral repetition along the same corridor. The sweep supplies immediate frontal value; the corridor and echo reward line selection and prediction.
+- **Tier III — Spectral Passage:** the spectral portion of Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal continues through ordinary-enemy bodies across the remaining authored geometry. Additional ordinary targets take reduced Health damage and meaningful posture and guard pressure; elites, bosses, heavy stopping enemies, and solid geometry end further passage.
 
-Provisional later candidates:
+Provisional later candidate:
 
-- **Tier III candidate — Veiled Guard:** one manually timed spectral parry may preserve each Pale Lance or Pale Barrage use.
 - **Tier IV candidate — Pale Procession:** Pale Barrage gains two reduced-power non-stacking adjacent streams and limited direct steering.
 
-Tier III-IV remain under ordered review and are not approved production scope.
+Tier IV remains under ordered review and is not approved production scope.
+
+The former Veiled Guard candidate is removed from fixed progression. Spectral Passage adds no new input, reach, tracking, movement, defense, same-enemy repeat hit, secondary Blood generation, or unrestricted Spectral Edge and proc multiplication.
 
 ### Ronin — approved through Tier IV
 
@@ -275,6 +277,8 @@ Wraith's Reach is the approved Tier II immediate Blood Art.
 - ordinary vulnerability, interruption, commitment, and recovery remain active,
 - and exact preparation, sweep, corridor, echo, damage, posture, stagger, interruption, and recovery values remain tuning work.
 
+Spectral Passage is not a Blood Art and does not alter Wraith's Reach. Its additional ordinary-enemy contacts generate no Blood and use restricted Spectral Edge, Technique, healing, status, and proc weighting.
+
 ### Ronin Blood direction
 
 - meaningful heavy Health damage, large posture contributions, Answering Steel, successful Reprisal Cuts, posture breaks, and deathblows generate Blood,
@@ -288,7 +292,7 @@ Wraith's Reach is the approved Tier II immediate Blood Art.
 
 Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
-1. redistribute Wraith's Tier III-IV package around the approved immediate Wraith's Reach,
+1. select Wraith's Tier IV capstone around the approved Tier 0-III package,
 2. decide Ronin's small-growth structure,
 3. audit minor supporting benefits,
 4. recheck Ronin against the approved standards,
@@ -296,7 +300,7 @@ Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
 After the Aspect audit, resolve shared affinity, limited direct Aspect-, Tier-, or Blood-Technique exceptions, and final animation, VFX, audio, HUD, Shrine, trial, selection, and persistent-progression requirements.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Spectral Edge qualification and scaling, Pale Barrage behavior, Fanged Guard timing and reset rules, Apex Mauling behavior, Wraith's Reach behavior, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Spectral Edge qualification and scaling, Pale Barrage behavior, Fanged Guard timing and reset rules, Apex Mauling behavior, Wraith's Reach behavior, Spectral Passage stopping classifications and secondary weighting, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 

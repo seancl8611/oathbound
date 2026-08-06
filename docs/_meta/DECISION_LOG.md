@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 ---
 
 # Decision Log
@@ -212,5 +212,13 @@ Wraith retains its two-hit sequence with sharper action roles: Veil Cut is the p
 Wraith Tier II is an immediate sweep–corridor–echo action rather than a temporary moveset-wide reach state. A compact frontal sweep supplies guaranteed activation value, a fixed very long corridor strike creates the main commitment, and one delayed spectral repetition reuses the exact selected geometry. The Art does not track, pursue, grant generic defense, generate Blood, or trigger Spectral Edge independently.
 
 The former duration-wide reach increase and repeated afterimages on ordinary Wraith attacks are superseded. Wraith's Tier III-IV distribution is now the active Aspect question.
+
+**Authority:** `docs/gameplay/WRAITH_ASPECT.md`, `docs/gameplay/BLOOD_ASPECTS.md`, and `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-08-06 — Wraith Tier III becomes Spectral Passage
+
+Wraith Tier III is Spectral Passage. Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal may continue through ordinary-enemy bodies across their remaining authored geometry. Additional ordinary targets receive reduced Health damage and meaningful posture and guard pressure, while elites, bosses, protected heavy enemies, solid geometry, and authored blockers stop further passage.
+
+Spectral Passage adds no new input, reach, tracking, movement, defense, same-enemy multiplication, secondary Blood generation, or unrestricted Spectral Edge and proc multiplication. The former Veiled Guard parry-during-Pale-Lance candidate is retired. Wraith Tier IV is now the active Aspect question.
 
 **Authority:** `docs/gameplay/WRAITH_ASPECT.md`, `docs/gameplay/BLOOD_ASPECTS.md`, and `docs/_meta/OPEN_QUESTIONS.md`

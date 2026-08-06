@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 ---
 
 # Current Design Questions
@@ -41,7 +41,7 @@ The following decisions are settled and should not be reopened as top-level ques
 
 Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit.
 
-Wraith's Tier 0, Tier I, and Tier II package are approved. Wraith's Tier III-IV distribution remains under ordered revision.
+Wraith's Tier 0-III package is approved. Wraith's Tier IV capstone remains under ordered revision.
 
 ### Wolf
 
@@ -57,7 +57,7 @@ Wraith's Tier 0, Tier I, and Tier II package are approved. Wraith's Tier III-IV 
 - **Tier I — Pale Barrage:** Pale Lance may continue into rapid stationary spectral jabs and may be released early to end the commitment.
 - **Spectral Edge — Tier growth:** qualifying primary attacks that connect through spectral-only reach gain modest enemy-posture and guard pressure; the reward scales slightly at every Embrace.
 - **Tier II — Wraith's Reach:** a full meter commits a compact broad frontal sweep, one very long fixed corridor strike, and one delayed spectral repetition along the same corridor.
-- **Tier III candidate — Veiled Guard:** one manually timed spectral parry may preserve each Pale Lance or Pale Barrage use.
+- **Tier III — Spectral Passage:** qualifying ordinary spectral attacks continue through ordinary-enemy bodies across their remaining authored geometry, dealing reduced Health damage and meaningful posture and guard pressure to additional ordinary targets.
 - **Tier IV candidate — Pale Procession:** Pale Barrage gains two non-stacking adjacent shade streams and limited player-directed steering.
 
 ### Ronin
@@ -163,25 +163,46 @@ The roster distinction is:
 
 **Authority:** `gameplay/WRAITH_ASPECT.md`
 
-## Question 5 — Wraith Tier distribution after the Blood Art
+## Resolved Question 5 — Wraith Tier III
 
-Reassess Tiers III and IV around the approved immediate Wraith's Reach.
+Wraith Tier III is **Spectral Passage**, replacing the former Veiled Guard candidate.
+
+Approved package:
+
+- the spectral portion of Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal is no longer occluded by the first ordinary enemy it contacts,
+- the attack continues through the remaining authored line or arc and may strike additional ordinary enemies layered within that geometry,
+- the first or primary target receives the normal authored result,
+- additional ordinary targets receive reduced Health damage and meaningful enemy-posture and guard pressure,
+- each qualifying action may strike each enemy at most once,
+- elites, bosses, protected heavy enemies, solid geometry, and other authored stopping bodies end further passage after valid contact,
+- Pale Barrage's repeated jabs do not each receive unrestricted full passage behavior,
+- Wraith's Reach remains self-contained and does not gain extra Tier III hits or passage chains,
+- the Tier adds no new input, state, meter, reach, width, movement, tracking, correction, defense, or same-enemy damage multiplication,
+- secondary passage contacts generate no Blood and use restricted Spectral Edge, Technique, healing, status, and proc weighting,
+- and Tier III advances Spectral Edge by its normal third step.
+
+The former Veiled Guard parry-during-Pale-Lance concept is retired from fixed progression.
+
+**Authority:** `gameplay/WRAITH_ASPECT.md`
+
+## Question 6 — Wraith Tier IV capstone
+
+Reassess **Pale Procession** against the approved Tier 0-III package.
 
 Resolve:
 
-- Does too much of Wraith's remaining progression still develop Pale Lance and Pale Barrage?
-- Should Tier III or IV provide additional value to Veil Cut, Passing Arc, Ghostline Slash, or Veil Reversal?
-- Is Veiled Guard sufficient as a complete Tier III now that Wraith's Reach no longer buffs the ordinary moveset?
-- Is Pale Procession sufficiently broad and useful for Tier IV?
+- Is Pale Procession sufficiently broad and useful for a final Embrace?
+- Does a Pale Barrage-focused capstone overconcentrate Wraith's progression on the Held Attack after Spectral Passage successfully broadened Tier III?
 - What Tier IV value remains useful in short exchanges, against mobile bosses, and when a full stationary barrage is unsafe?
-- Should either later Tier interact with Wraith's Reach, or should the Blood Art remain complete and self-contained at Tier II?
-- Which later Tier interactions with Spectral Edge are meaningful without becoming repeated-hit multiplication?
-- Does any Tier need one minor supporting benefit beyond Spectral Edge, or would that exceed the one-headline-plus-one-supporting-rule limit?
-- What animation, VFX, input, readability, and engineering burden remains justified after removing the duration state?
+- Should Tier IV improve Pale Barrage, the full ordinary kit, Wraith's Reach, or a carefully limited combination?
+- How should Tier IV interact with Spectral Passage without producing excessive multi-target, repeated-hit, Blood, healing, or proc multiplication?
+- How should Tier IV interact with Spectral Edge without turning Wraith into unrestricted posture damage?
+- Can the capstone feel visually and mechanically transformative while preserving fixed direction, restrained movement, point-blank pressure, lateral weakness, and punishable recovery?
+- What animation, VFX, input, readability, HUD, teaching, and engineering burden is justified for an occasional capstone?
 
 **This is the current active question.**
 
-## Question 6 — Per-Tier growth rules
+## Question 7 — Per-Tier growth rules
 
 Current state:
 
@@ -196,7 +217,7 @@ Resolve for Ronin:
 - Would posture stability, heavy-hit consistency, or another authored combat verb fit better?
 - Should generic Health, damage, posture, or Blood-generation increases remain rare because Techniques and permanent progression also need meaningful space?
 
-## Question 7 — Minor supporting benefits by Tier
+## Question 8 — Minor supporting benefits by Tier
 
 Audit every Tier that contains only one narrow or highly conditional mechanic.
 
@@ -211,7 +232,7 @@ For each Tier, determine:
 
 Do not add filler benefits only to equalize feature counts.
 
-## Question 8 — Ronin follow-up audit
+## Question 9 — Ronin follow-up audit
 
 Ronin does not currently require a new Blood Art concept, but it must be checked against the standards approved for Wolf and Wraith.
 
@@ -223,9 +244,9 @@ Resolve:
 - Does Falling Mountain remain powerful without trivializing elite and boss posture systems?
 - Does any Ronin Tier need simplification after the full roster is compared?
 
-## Question 9 — Final cross-roster lock
+## Question 10 — Final cross-roster lock
 
-After Questions 1-8 are resolved, compare the completed packages for:
+After Questions 1-9 are resolved, compare the completed packages for:
 
 - immediate feel at Tier 0,
 - practical payoff and accessibility at every Embrace,
@@ -309,7 +330,7 @@ Keep exact values and frame-level decisions in their owning files, including:
 - Corruption thresholds, Shrine frequency, route distribution, and support values,
 - Blood capacity, gain weighting, activation cost, duration, and anti-farming rules,
 - exact Wolf package values and collision rules,
-- exact Wraith Tier 0 timings, geometry, Spectral Edge qualification and scaling, Pale Barrage behavior, Wraith's Reach preparation, sweep, corridor, echo, interruption, recovery, and later-Tier interactions,
+- exact Wraith Tier 0 timings, geometry, Spectral Edge qualification and scaling, Pale Barrage behavior, Wraith's Reach preparation, sweep, corridor, echo, Spectral Passage stopping classifications and secondary weighting, interruption, recovery, and Tier IV interactions,
 - exact Ronin package values and any later growth rule,
 - enemy immunity and response tables,
 - Spirit costs and Prosthetic cooldowns,
