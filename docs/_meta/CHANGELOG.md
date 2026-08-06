@@ -9,6 +9,17 @@ last_reviewed: 2026-08-05
 
 # Documentation Changelog
 
+## 2026-08-05 — Wraith Tier II corridor Blood Art lock
+
+- Replaced the temporary duration-state version of Wraith's Reach with one immediate sweep–corridor–echo Blood Art.
+- Added a compact broad frontal opening sweep as guaranteed activation value.
+- Added one very long fixed corridor strike and one delayed spectral repetition along the same player-selected geometry.
+- Removed the moveset-wide reach increase and repeated afterimages on ordinary Wraith attacks from fixed progression.
+- Defined Blood, Spectral Edge, interruption, tracking, proc-weighting, and defensive boundaries for the new Art.
+- Preserved the retired duration-state concept in the supporting later-Tier candidate file.
+- Advanced the active Wraith question to Tier III-IV distribution around the approved Tier 0-II package.
+- Synchronized Wraith, Blood Aspect, progression, identity-guideline, decision-log, and open-question documents.
+
 ## 2026-08-05 — Aspect package revision and repository synchronization
 
 - Completed Ronin's current qualitative Tier 0-IV package through Steadfast Reprisal, Falling Mountain, Unbroken Resolve, and Shattering Wake.
