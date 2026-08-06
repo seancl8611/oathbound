@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 topics:
   - progression
   - persistence
@@ -112,13 +112,14 @@ Ronin's fixed path is approved through the present audit:
 - Tier III — Unbroken Resolve with Measured Weight and Perfect Weight,
 - Tier IV — Shattering Wake.
 
-Wraith is approved through Tier II:
+Wraith is approved through Tier III:
 
 - Tier I — Pale Barrage,
 - Spectral Edge — deterministic spectral-only posture and guard-pressure growth at every Embrace,
-- Tier II — Wraith's Reach, an immediate frontal sweep, fixed corridor strike, and delayed repetition along the same geometry.
+- Tier II — Wraith's Reach, an immediate frontal sweep, fixed corridor strike, and delayed repetition along the same geometry,
+- Tier III — Spectral Passage, allowing qualifying spectral attacks to continue through ordinary-enemy bodies across their remaining authored geometry with reduced secondary Health damage and meaningful posture and guard pressure.
 
-Wraith's current Tier III Veiled Guard and Tier IV Pale Procession concepts remain provisional until the later-Tier distribution audit is complete. Wolf and Ronin may receive only focused follow-up changes during the final comparison rather than being treated as blank Tier packages.
+Pale Procession remains the provisional Tier IV candidate. The former Veiled Guard Tier III concept is retired. Wolf and Ronin may receive only focused follow-up changes during the final comparison rather than being treated as blank Tier packages.
 
 ## Technique development boundary
 
@@ -157,6 +158,8 @@ Blood Hunt does not clear player posture, grant damage reduction, create lifeste
 Wraith's approved Blood Art is the immediate Wraith's Reach. Full-meter activation commits one compact broad frontal sweep, one very long narrow-to-medium corridor strike, and one delayed spectral repetition along the same fixed player-selected geometry. The sweep supplies practical activation value before the later stages connect. The Art does not track, pursue, heal, clear posture, grant damage reduction or interruption resistance, generate Blood, or independently trigger Spectral Edge.
 
 The corridor and delayed echo reward placement and prediction: enemies may leave the line before the echo or enter it before resolution. Ordinary vulnerability, interruption, commitment, and recovery remain active. Exact source weighting, directional preparation, sweep geometry, corridor dimensions, echo delay, damage, posture, stagger, interruption, recovery, and proc weighting remain tuning work.
+
+Spectral Passage does not change Wraith's Blood Art. Secondary passage contacts generate no Blood and use restricted Spectral Edge, Technique, healing, status, and proc weighting.
 
 Ronin's approved Blood Art is Falling Mountain. Full-meter activation clears a meaningful portion of accumulated player posture and powers a planted manually aimed slam, compact impact burst, and delayed Deep Rupture at the original point. Its brief planted channel may resist eligible ordinary-hit interruption while full incoming damage and posture remain active; posture break, lethal hits, perilous attacks, grabs, launches, and overriding knockdowns remain normal counters.
 
@@ -305,7 +308,7 @@ The results flow must clearly distinguish retained progress from burned-away run
 
 ## Current production dependencies
 
-1. Reassess Wraith's Tier III-IV distribution around the approved immediate Wraith's Reach.
+1. Select Wraith's Tier IV capstone around the approved Tier 0-III package.
 2. Decide Ronin's small Tier-growth rule and audit narrow Tiers for any justified minor supporting benefit.
 3. Perform Ronin's follow-up audit and the final Wolf, Wraith, and Ronin comparison for power, accessibility, production cost, inherent tradeoffs, and Technique overlap across Technique-focused, hybrid, and Aspect-focused runs.
 4. Scope the launch run-build content catalog, including rarity, refinements, post-fill offers, and route competition.
