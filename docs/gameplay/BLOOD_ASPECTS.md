@@ -82,7 +82,12 @@ No Aspect uses corrective tracking, hidden homing, or post-input target correcti
 
 A sequence is a set of available attacks rather than a completion objective. The player may stop, defend, dash, redirect, use a Prosthetic, or abandon the sequence whenever the encounter demands it.
 
-A Tier may reward successfully connected sequence positions without turning sequence completion into a required objective. Wolf's Feral Momentum is the approved example: later Basic Attacks receive a modest deterministic payoff only when reached through successful Blood Tempo continuations, but each attack remains independently useful and the player may stop at any time.
+A Tier may reward authored behavior without turning it into a mandatory objective:
+
+- Wolf's **Feral Momentum** rewards later Basic Attacks reached through successful Blood Tempo continuations.
+- Wraith's **Spectral Edge** rewards primary attacks that connect through spectral-only reach beyond the physical katana.
+
+Both are deterministic supporting rules rather than meters, timers, random critical systems, or requirements to complete a sequence.
 
 ## Universal combat layer
 
@@ -103,17 +108,17 @@ Aspect selection does not create a weaker or stronger neutral dash. No launch As
 A Blood Art may be an immediate authored action, a temporary state, or another clearly defined combat expression. Blood Arts are not required to share one form:
 
 - Wolf's **Blood Hunt** is an immediate player-directed pursuit action.
-- Wraith's current **Wraith's Reach** draft is a temporary reach-and-afterimage state under later review.
+- Wraith's current **Wraith's Reach** candidate is a temporary reach-and-afterimage state under active review.
 - Ronin's **Falling Mountain** is an immediate planted slam with a delayed rupture.
 
-Modest ordinary defensive differences may use player-posture capacity, block posture efficiency, posture recovery direction, defensive access after attacks, and Parry Counter payoff. These differences remain subordinate to the shared defense system. Wolf's Fanged Guard is an approved action-specific example: one frontal blockable hit may preserve selected high-risk Wolf commitments while using ordinary block posture and posture-break rules.
+Modest ordinary defensive differences may use player-posture capacity, block posture efficiency, posture recovery direction, defensive access after attacks, and Parry Counter payoff. These differences remain subordinate to the shared defense system.
 
 ## Approved roster
 
 | Aspect | Basic sequence | Held identity | Primary strength | Inherent tradeoffs |
 |---|---|---|---|---|
-| Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure, player-directed pursuit, and nearby target transfer through attack geometry | Short reach, forward commitment, unsafe misses, and dangerous final positioning after poorly aimed pursuit |
-| Wraith | Veil Cut → Passing Arc | Pale Lance — reach and focused commitment | Longest melee reach, frontal control, concentrated multi-hit punishment, delayed spectral pressure, skilled defense during its defining Held action, and broad non-stacking lane control | Slower and less versatile than Wolf, restrained movement, fixed attack lines, point-blank pressure, stationary barrage commitment, and vulnerability outside its focused front |
+| Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure and player-directed pursuit | Short reach, forward commitment, unsafe misses, and dangerous final positioning |
+| Wraith | Veil Cut → Passing Arc | Pale Lance — focused reach | Longest average melee reach, deliberate line-and-arc selection, frontal control, and stronger posture pressure from correctly spaced spectral contact | Fewer ordinary actions, restrained movement, deliberate frontal commitments, close and lateral pressure, and severe Pale Lance misses |
 | Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 Supporting actions:
@@ -157,7 +162,9 @@ Aspect progression is fixed rather than a branching package selection, but inves
 - **Resist** keeps the current Tier and provides approved stabilization support.
 - **Embrace** advances the selected Aspect by one fixed Tier and empties Corruption.
 - Each Tier presents one headline improvement and at most one minor supporting rule.
-- An Aspect may use one small repeated growth rule across several Tiers when it reinforces the kit without becoming generic stat inflation; Wolf's Feral Momentum is the approved example.
+- An Aspect may use one small repeated growth rule across several Tiers when it reinforces the kit without becoming generic stat inflation.
+- Wolf's approved repeated rule is Feral Momentum.
+- Wraith's approved repeated rule is Spectral Edge.
 - Each Tier must be clearly net-positive and preserve the Aspect's inherent limitations through the upgraded action itself.
 - **Tier IV** is the maximum.
 - At Tier IV, a full threshold offers **Stabilize** rather than Tier V.
@@ -170,37 +177,47 @@ Expected viability:
 - Tier IV is occasional rather than expected.
 - Mandatory encounters are not balanced around a required Tier or Blood Art.
 
-## Current fixed progression packages
+## Current progression packages
 
-### Wolf
+### Wolf — approved through Tier IV
 
 - **Tier I — Blood Tempo:** successful Wolf contact may continue earlier into the Basic sequence through approved optional routes.
-- **Feral Momentum — Tier growth:** Rending Cross, Raking Fang, and Blood Cleave gain increasing deterministic Health and enemy-posture payoff when reached through successful Blood Tempo continuations; the payoff strengthens modestly at every Tier.
-- **Tier II — Blood Hunt:** a full meter restores limited Health, releases a short disruptive howl, and launches one long player-directed pursuit through eligible ordinary enemies before ending in Blood Fang.
-- **Tier III — Fanged Guard:** one normal posture-costing frontal block may preserve Predator's Passage charge, or one connected Raking Fang or Blood Cleave startup per Basic sequence.
-- **Tier IV — Apex Mauling:** connected Blood Cleave, Predator's Passage, Fang Reversal, and Blood Fang trigger a consolidated rapid Blood-claw mauling with strong posture pressure, compact secondary coverage, and a brief movement-only slow on the primary target.
+- **Feral Momentum — Tier growth:** later connected Basic-sequence positions gain increasing deterministic Health and enemy-posture payoff at every Tier.
+- **Tier II — Blood Hunt:** a full meter restores limited Health, releases a short disruptive howl, and launches one long player-directed pursuit before Blood Fang.
+- **Tier III — Fanged Guard:** one normal posture-costing frontal block may preserve selected approved commitments.
+- **Tier IV — Apex Mauling:** qualifying major contacts trigger a consolidated Blood-claw mauling with strong posture pressure, compact secondary coverage, and a brief movement-only slow.
 
-Blood Tempo no longer includes additional Raking Fang or Hunting Slash travel and no longer grants a Hunting Slash rear-Rending-Cross damage bonus. Feral Momentum is deterministic rather than random critical-hit chance and uses no separate combo meter or persistent timer. Tier III and Tier IV advance Feral Momentum by their normal Tier steps rather than adding separate critical or combo statistics.
+Wolf's removed rear-hit, generic travel, temporary-transformation, and deathblow-only Apex Feast concepts are not part of fixed progression.
 
-Apex Mauling's visible claw series is one weighted Tier IV package rather than several independent full-power hits. It does not generate Blood, recursively trigger itself, alter enemy attack timing, or remove Wolf's recovery and positional risk.
+### Wraith — Tier 0 and Tier I approved
 
-### Wraith
+Approved Tier 0 roles:
 
-Wraith's Tier 0 foundation is the next active revision target. Its later package remains a working draft until that foundation and Blood Art are reassessed.
+- **Veil Cut:** precise low-commitment extended line.
+- **Passing Arc:** broader, slower, more committed frontal-control follow-up.
+- **Pale Lance:** longest narrow focused punish with severe miss recovery.
+- **Ghostline Slash:** controlled dash re-entry.
+- **Veil Reversal:** strongest ordinary Wraith parry-to-posture conversion.
 
-- **Tier I — Pale Barrage:** continuing to hold after Pale Lance's initial thrust unleashes rapid lower-impact spectral jabs while Akio remains stationary and committed.
-- **Tier II — Wraith's Reach:** the current full-meter draft begins a temporary state that extends core attacks and gives qualifying attacks one delayed spectral afterimage along their original geometry.
-- **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry without cancelling the charge or barrage.
-- **Tier IV — Pale Procession:** Pale Barrage creates two reduced-power adjacent streams and permits slow player-directed steering without allowing stream stacking on one enemy.
+Approved Tier I:
 
-### Ronin
+- **Pale Barrage:** continuing to hold after Pale Lance produces rapid lower-impact stationary spectral jabs along the committed direction; releasing ends the barrage early.
+- **Spectral Edge — Tier growth:** qualifying primary attacks that connect through spectral-only geometry gain modest enemy-posture and guard pressure. The benefit scales slightly at every Embrace and adds no Health damage, reach, tracking, movement, meter, or unrestricted repeated-hit multiplication.
+
+Provisional later candidates:
+
+- **Tier II candidate — Wraith's Reach:** a temporary state that extends selected attacks and creates one delayed spectral afterimage along qualifying original geometry.
+- **Tier III candidate — Veiled Guard:** one manually timed spectral parry may preserve each Pale Lance or Pale Barrage use.
+- **Tier IV candidate — Pale Procession:** Pale Barrage gains two reduced-power non-stacking adjacent streams and limited direct steering.
+
+Tier II-IV remain under ordered review and are not approved production scope.
+
+### Ronin — approved through Tier IV
 
 - **Tier I — Steadfast Reprisal:** a qualifying block creates a temporary optional Reprisal Cut.
 - **Tier II — Falling Mountain:** activation clears meaningful accumulated posture and powers a planted monumental slam, immediate impact burst, and delayed Deep Rupture.
 - **Tier III — Unbroken Resolve:** selected commitments may survive one costly eligible hit, while disciplined clean attacks may create Measured Weight and Perfect Weight.
 - **Tier IV — Shattering Wake:** qualifying direct heavy impacts transfer reduced Health damage and strong posture force through the primary target into enemies behind it.
-
-Wolf's Tier I-IV package, Wolf's Feral Momentum growth rule, and Ronin's Tier I-IV package are approved through the current audit. Wraith's Tier 0 and Tier I-IV package remain working drafts pending the ordered cross-roster questions.
 
 ## Blood contract
 
@@ -242,14 +259,19 @@ Working launch defaults:
 
 ### Wraith Blood direction
 
-Wraith's Reach remains the current working draft pending the dedicated Wraith Tier 0 and Blood Art reviews.
+Wraith's Blood Art form is the current active design question. Wraith's Reach remains the provisional comparison candidate.
+
+Candidate behavior:
 
 - it requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while active,
 - Veil Cut, Passing Arc, and Pale Lance gain additional spectral reach,
 - each qualifying action creates one delayed spectral afterimage along its original player-selected geometry,
 - afterimages do not track, home, rotate, independently select enemies, or generate Blood,
-- Pale Barrage's additional jabs gain range but do not each create another full echo,
-- and afterimage damage, posture pressure, interruption, guard response, and Technique or healing triggers are separately weighted from the physical strike.
+- Pale Barrage's additional jabs may gain range but do not each create another full echo,
+- afterimages do not independently receive Spectral Edge,
+- and afterimage damage, posture pressure, interruption, guard response, and Technique or healing triggers are separately weighted from the primary strike.
+
+The review must determine whether the final Art remains a duration state, what guaranteed activation value it provides, and whether an immediate or concise frontal-control action would better fit Wraith.
 
 ### Ronin Blood direction
 
@@ -264,17 +286,16 @@ Wraith's Reach remains the current working draft pending the dedicated Wraith Ti
 
 Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
-1. revise Wraith's Tier 0 weapon foundation,
-2. review Wraith's Blood Art form,
-3. redistribute Wraith's later Tiers,
-4. decide Wraith and Ronin small-growth structures,
-5. audit minor supporting benefits,
-6. recheck Ronin against the approved standards,
-7. perform the final cross-roster production lock.
+1. select Wraith's Blood Art form and guaranteed activation value,
+2. redistribute Wraith's later Tiers,
+3. decide Ronin's small-growth structure,
+4. audit minor supporting benefits,
+5. recheck Ronin against the approved standards,
+6. perform the final cross-roster production lock.
 
 After the Aspect audit, resolve shared affinity, limited direct Aspect-, Tier-, or Blood-Technique exceptions, and final animation, VFX, audio, HUD, Shrine, trial, selection, and persistent-progression requirements.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Fanged Guard timing and reset rules, Apex Mauling claw cadence, secondary geometry, slow values and proc weighting, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Spectral Edge qualification and scaling, Pale Barrage behavior, Fanged Guard timing and reset rules, Apex Mauling behavior, Wraith Blood Art behavior, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 
