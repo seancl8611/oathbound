@@ -63,7 +63,7 @@ After Returning Blood awakens, launch scope includes:
 
 - one selected Blood Aspect as the immediate Tier 0 run foundation,
 - Wolf as a four-hit fast close-range pressure and pursuit kit,
-- Wraith as a current two-hit extended spectral reach and frontal-control foundation under ordered revision,
+- Wraith as a two-hit extended spectral reach and frontal-control kit approved through Tier II,
 - Ronin as a three-hit slow heavy impact and stability kit,
 - one physical katana expressed through Aspect-specific Blood forms,
 - universal controls, locomotion, neutral dash, parry timing, enemy rules, and deathblow language,
@@ -110,36 +110,30 @@ This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial
 
 ## Wraith package at current scope
 
-Wraith retains a complete working Tier package for comparison, but its Tier 0 foundation, Blood Art form, and later Tier distribution are under ordered revision:
+Wraith's Tier 0-II package is approved, while Tier III-IV remain under ordered revision:
 
+- **Tier 0:** Veil Cut is the precise low-commitment line, Passing Arc is the broader committed frontal sweep, Pale Lance is the longest focused punish, Ghostline Slash is controlled dash re-entry, and Veil Reversal is Wraith's strongest ordinary parry-to-posture conversion.
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
-- **Tier II — Wraith's Reach:** a full Blood meter begins a temporary state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed line or arc.
-- **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry against an eligible incoming attack from any direction without cancelling the charge, interrupting Pale Barrage, changing the attack direction, or adding fallback protection when mistimed.
-- **Tier IV — Pale Procession:** while channeling Pale Barrage, two reduced-power spectral shades form adjacent barrage lanes and the player may slowly rotate the full formation within a limited frontal arc. An enemy may receive only one stream's hit per barrage beat, with Akio's central stream taking priority.
+- **Spectral Edge — Tier growth:** qualifying ordinary primary attacks that connect through spectral-only geometry gain modest enemy-posture and guard pressure that scales at each Embrace.
+- **Tier II — Wraith's Reach:** a full Blood meter commits one compact broad frontal sweep, one very long narrow-to-medium fixed corridor strike, and one delayed spectral repetition along the exact same corridor.
+- **Tier III candidate — Veiled Guard:** each Pale Lance use may permit one manually timed spectral parry without cancelling the charge, interrupting Pale Barrage, or changing the selected direction.
+- **Tier IV candidate — Pale Procession:** Pale Barrage may gain two reduced-power adjacent shade streams and limited player-directed steering within a frontal arc, with one stream per enemy per beat.
 
-During Wraith's Reach:
+Wraith's Reach follows these production-level boundaries:
 
-- Akio retains ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetic access,
-- the Art does not add healing, Blood refund, damage reduction, posture clearing, interruption resistance, automatic defense, or a special parry reward,
-- delayed afterimages do not track, home, rotate, independently select targets, or generate Blood,
-- Pale Barrage receives increased reach but only its initial Pale Lance creates one delayed afterimage,
-- and afterimage damage, posture pressure, interruption, guard response, and Technique or healing interactions are weighted separately from the physical strike.
+- the opening sweep supplies guaranteed activation value through modest Health damage, strong posture and guard pressure, and brief eligible ordinary-enemy stagger,
+- the sweep is frontal rather than full-circle and provides no healing, posture clear, damage reduction, automatic defense, or interruption resistance,
+- the corridor uses the fixed player-selected direction and cannot track, turn, home, retarget, or correct itself,
+- Akio uses little or no forward pursuit,
+- the delayed Wraith repeats the exact same corridor with lower Health damage and meaningful posture and guard pressure,
+- enemies may leave before the echo or enter its geometry before it resolves,
+- all stages generate no Blood and do not independently trigger Spectral Edge,
+- the echo cannot recursively create another echo and receives restricted Technique, healing, and proc weighting,
+- and ordinary vulnerability, interruption, commitment, and recovery remain active.
 
-Veiled Guard follows ordinary parry timing, eligibility, enemy-posture pressure, deflection response, and posture-break rules. The spectral manifestation may intercept an eligible attack from any direction without turning Akio or redirecting Pale Lance. One successful Veiled Guard parry is available for the entire Pale Lance use, including continuation into Pale Barrage; entering the barrage does not refresh it.
+The former duration-wide reach increase and repeated afterimages on ordinary attacks are retired from fixed Wraith progression.
 
-Pale Procession follows these production-level boundaries:
-
-- Akio remains stationary while channeling,
-- two shades maintain stable left and right offsets and reduced-power adjacent lines,
-- the formation rotates only through direct player input and cannot track or automatically follow an enemy,
-- shade streams do not stack Health or posture damage with each other or with Akio on one enemy,
-- central-stream contact takes priority when geometry overlaps,
-- shades stop when the barrage ends or Akio is interrupted,
-- shade hits generate no Blood and create no Wraith's Reach afterimages,
-- Veiled Guard remains limited to one use per Pale Lance,
-- and the Tier adds no lingering attacks, detonation system, automatic targeting, healing, Blood refund, extra defense, or unrelated passive.
-
-These details are provisional production references rather than a final lock. Wraith Tier 0 must first be reassessed for ordinary decision variety, action-role distinction, encounter coverage, relative combat profile, and realistic animation and VFX burden. The Blood Art and later Tiers will then be redistributed around the approved foundation.
+Veiled Guard and Pale Procession remain provisional production references rather than a final lock. The next audit must determine whether they provide sufficient breadth, short-exchange and mobile-boss value, and production efficiency without concentrating too much of the remaining package on Pale Lance and Pale Barrage.
 
 ## Ronin package at current scope
 
@@ -152,12 +146,12 @@ Ronin's current Tier package is approved through the present cross-roster audit:
 
 Ronin remains slow, grounded, and directionally committed. Falling Mountain does not gain tracking, line correction, invulnerability, healing, or safe recovery. Unbroken Resolve keeps full incoming Health and posture damage and fails against posture break, lethal hits, perilous attacks, grabs, launches, side or rear pressure, and later hits. Shattering Wake cannot originate on a miss or multiply its damage back onto the primary target.
 
-Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Wraith retains a complete working draft but remains the active revision target. All three still require a final cross-roster production lock after Wraith and the remaining growth-rule and minor-support questions are resolved.
+Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Wraith is approved through Tier II and remains the active Tier III-IV revision target. All three still require a final cross-roster production lock after Wraith and the remaining growth-rule and minor-support questions are resolved.
 
 Still open at production scope are:
 
-- Wraith's Tier 0 revision, followed by its Blood Art and Tier redistribution,
-- Wraith and Ronin small Tier-growth rules,
+- Wraith's Tier III-IV distribution around the approved immediate Wraith's Reach,
+- Ronin's small Tier-growth rule,
 - minor supporting-benefit audit across narrow or conditional Tiers,
 - Ronin follow-up audit against the final standards,
 - final cross-roster power, accessibility, inherent-tradeoff, overlap, and production comparison,
@@ -165,7 +159,7 @@ Still open at production scope are:
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
 
-Exact frame data, hitboxes, combat values, resource values, afterimage timing and behavior, Veiled Guard input buffering and manifestation timing, Pale Procession lane geometry and steering, Blood Hunt movement and collision, Apex Mauling geometry and slow, Ronin timing windows, and cancel windows remain implementation and playtesting work.
+Exact frame data, hitboxes, combat values, resource values, Wraith's Reach preparation, sweep, corridor, echo, interruption and recovery, Veiled Guard input buffering and manifestation timing, Pale Procession lane geometry and steering, Blood Hunt movement and collision, Apex Mauling geometry and slow, Ronin timing windows, and cancel windows remain implementation and playtesting work.
 
 Techniques remain the horizontal customization layer and an optional major run-investment route. Most Techniques are independently useful, use universal action tags, may receive at most one slotless refinement, and remain valuable after the loadout is full through refinement, replacement, rarity, reserve management, or specialization.
 
@@ -332,7 +326,7 @@ The exact Heart-route access control, repeat-clear rewards, records, cosmetics, 
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. cross-roster Aspect package revision, beginning with Wraith's Tier 0 weapon kit,
+1. cross-roster Aspect package revision, currently Wraith Tier III-IV distribution,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,

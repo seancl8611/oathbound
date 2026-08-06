@@ -32,9 +32,9 @@ related:
 
 Wraith is an approved member of the three-Aspect launch roster.
 
-Its qualitative Tier 0 weapon foundation and Tier I package are now approved for current scoping. Tier II-IV remain provisional candidates under ordered revision and must not be treated as final production scope until each later Tier is reviewed.
+Its qualitative Tier 0 weapon foundation, Tier I package, and Tier II Blood Art are approved for current scoping. Tier III-IV remain provisional candidates under ordered revision and must not be treated as final production scope until each later Tier is reviewed.
 
-Wraith supersedes the earlier forced-reposition concept and the earlier spinning Blood Art. Its spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, and spectral weapon expressions rather than mandatory lateral movement, target correction, special evasion, teleportation, or a replacement combat mode.
+Wraith supersedes the earlier forced-reposition concept, the earlier spinning Blood Art, and the former duration-state version of Wraith's Reach. Its spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, and spectral weapon expressions rather than mandatory lateral movement, target correction, special evasion, teleportation, a generic moveset buff, or a replacement combat mode.
 
 Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Technique exceptions, and production counts remain implementation and playtesting work.
 
@@ -52,9 +52,10 @@ Wraith is defined by:
 - moderate individual Health damage,
 - selected strong enemy-posture and guard-pressure tools,
 - fixed player-directed attack geometry after commitment,
+- a Tier II immediate Blood Art that controls one chosen frontal corridor and repeats it after a delay,
 - and weakness when enemies collapse inside its preferred range or attack from outside its selected front.
 
-Wraith gives up mobility, speed, close-range flexibility, and ordinary transition count in exchange for reach, attack selection, and frontal control.
+Wraith gives up mobility, speed, close-range flexibility, and ordinary transition count in exchange for reach, attack selection, frontal control, and delayed pressure along a deliberately chosen line.
 
 Wraith does not use corrective tracking, hidden homing, automatic target selection, or an artificial point-blank damage dead zone. Close pressure is dangerous because its actions are frontal, deliberate, and comparatively limited—not because nearby enemies become immune to its attacks.
 
@@ -156,7 +157,7 @@ Its defensive weakness is not an artificially weak guard. Its weakness is preser
 | Cadence | Deliberate; faster than Ronin and slower than Wolf |
 | Per-hit Health damage | Moderate |
 | Sustained output | Below connected Wolf pressure |
-| Enemy posture | Selected strong line, sweep, Held, and counter pressure |
+| Enemy posture | Selected strong line, sweep, Held, counter, and Blood Art pressure |
 | Ordinary stagger | Below Ronin |
 | Attack movement | Restrained and player-directed |
 | Main failure state | Poor spacing, wrong attack selection, lateral collapse, or a missed commitment |
@@ -166,7 +167,7 @@ Its defensive weakness is not an artificially weak guard. Its weakness is preser
 - **Mixed groups:** pressure priority targets from useful range and use Passing Arc to interfere with grouped frontal threats.
 - **Crowds:** control a broad front but struggle when enemies surround, flank, or attack simultaneously.
 - **Ranged pressure:** reach exposed targets through extended attacks, universal dash, and Prosthetics without becoming a projectile or room-crossing pursuit kit.
-- **Elites and bosses:** punish from the edge of threat range, use Veil Cut during short openings, and reserve Pale Lance for confirmed commitments.
+- **Elites and bosses:** punish from the edge of threat range, use Veil Cut during short openings, reserve Pale Lance for confirmed commitments, and place Wraith's Reach where the target is likely to remain or return.
 
 # Approved Tier I package
 
@@ -215,7 +216,7 @@ Approved boundaries:
 - it adds no reach, width, movement, tracking, correction, interruption resistance, or recovery reduction,
 - it does not create automatic stagger against elites or bosses,
 - Pale Barrage's additional jabs do not each receive a full independent Spectral Edge bonus,
-- delayed, secondary, shade, or repeated hits do not independently receive Spectral Edge unless a later Tier explicitly defines a restricted interaction,
+- delayed, secondary, shade, repeated, and Blood Art hits do not independently receive Spectral Edge unless a later Tier explicitly defines a restricted interaction,
 - and the rule uses no meter, stack counter, timer, random chance, or stored reward.
 
 Spectral Edge rewards the player for maintaining Wraith's intended spacing rather than simply granting generic stat growth. A close-range hit remains fully functional; a correctly spaced spectral hit creates stronger posture and guard pressure.
@@ -224,35 +225,97 @@ The complete Tier I rhythm is:
 
 > preserve useful distance → choose the correct line or arc → gain modest Spectral Edge pressure through spectral-only contact → use Pale Barrage only when the opening is large enough
 
+# Approved Tier II package
+
+## Blood Art — Wraith's Reach
+
+Tier II unlocks Wraith's Blood meter and **Wraith's Reach**, an immediate two-stage frontal Blood Art followed by one delayed spectral repetition.
+
+Wraith's Reach follows the shared Blood defaults:
+
+- it requires a full meter,
+- activates manually,
+- consumes the stored Blood when the Art commits,
+- generates no Blood while its authored action and delayed echo are resolving,
+- and Blood generation resumes after the complete Art finishes.
+
+The player selects one direction during a brief readable Blood manifestation. Once committed, the Art uses that fixed player-selected direction and cannot track, turn, home, retarget, or correct itself.
+
+### Stage 1 — opening sweep
+
+Akio releases a compact but broad spectral sweep across his immediate front.
+
+- modest Health damage,
+- strong enemy-posture and guard pressure,
+- brief stagger against eligible ordinary enemies,
+- modest enemy-posture pressure without automatic stagger against elites and bosses,
+- frontal coverage only,
+- and no protection against side, rear, perilous, grabbing, launching, or simultaneous threats.
+
+The opening sweep is Wraith's Reach's guaranteed activation value. Once the Art commits and Blood is spent, this sweep provides practical frontal pressure without requiring the corridor strike or delayed echo to connect.
+
+It is not a full-circle panic effect, posture clear, heal, automatic parry, or invulnerability window.
+
+### Stage 2 — corridor strike
+
+Immediately after the sweep, Akio drives the spectral katana through a very long narrow-to-medium frontal corridor.
+
+- moderate Health damage,
+- strong enemy-posture and guard pressure,
+- longer reach than Wraith's ordinary attacks,
+- little or no forward pursuit,
+- fixed authored corridor after commitment,
+- no corrective rotation,
+- and normal vulnerability and interruption behavior.
+
+The corridor strike is a committed frontal control action rather than a projectile, room-crossing dash, or Ronin-level impact attack.
+
+### Delayed spectral echo
+
+A short beat later, a spectral Wraith repeats the corridor strike along the exact same authored geometry and player-selected direction.
+
+- lower Health damage than the primary corridor strike,
+- meaningful enemy-posture and guard pressure,
+- no Blood generation,
+- no tracking, turning, homing, retargeting, or independent target selection,
+- and no persistence outside the authored delay and strike timing.
+
+An enemy that leaves the corridor before the echo resolves avoids it. An enemy that remains in or enters the corridor may be struck. The echo therefore rewards prediction and placement rather than target correction.
+
+### Interruption and failure rules
+
+Wraith's Reach grants no healing, player-posture clearing, damage reduction, interruption resistance, super armor, automatic defense, Blood refund, movement correction, or guaranteed corridor hit.
+
+The directional preparation, corridor commitment, and ending recovery remain vulnerable through ordinary combat rules. A poor line may miss the priority target, allow mobile enemies to leave before the echo, or leave Akio exposed to pressure outside the selected front.
+
+If Akio is interrupted after the opening sweep but before completing the corridor strike, the guaranteed sweep value remains resolved but the unfinished stages do not occur unless ordinary implementation rules support their already-authored timing. Exact interruption frames remain prototype work.
+
+### Spectral Edge and system interactions
+
+Tier II advances Spectral Edge by its normal second Tier step for qualifying ordinary primary attacks.
+
+Wraith's Reach uses its own authored Health, posture, guard-pressure, and stagger values:
+
+- the opening sweep does not independently trigger Spectral Edge,
+- the primary corridor strike does not independently trigger Spectral Edge,
+- the delayed echo does not independently trigger Spectral Edge,
+- the echo receives restricted Technique, healing, and other proc weighting,
+- the echo cannot recursively create another echo,
+- and none of the Art's stages generate Blood.
+
+These boundaries prevent the full-meter action from multiplying Spectral Edge, multi-hit Techniques, healing, or Blood generation beyond its intended authored package.
+
+The approved Tier II rhythm is:
+
+> fill Blood through ordinary combat → identify a valuable frontal line → commit Wraith's Reach and stabilize the immediate front with the opening sweep → drive one extended corridor strike → reposition or defend while the delayed echo punishes enemies that remain in or enter the chosen geometry
+
+The launch-roster Blood Art distinction is:
+
+> Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point
+
 # Provisional later-Tier candidates
 
-The following sections preserve the current working candidates for discussion. They are not approved production scope.
-
-## Tier II candidate — Wraith's Reach
-
-The current candidate unlocks Wraith's Blood meter and a temporary empowered state.
-
-Provisional behavior:
-
-- a full meter activates manually and is consumed,
-- Blood does not generate while the duration state is active,
-- Veil Cut, Passing Arc, and Pale Lance gain additional spectral reach,
-- qualifying primary attacks create one delayed spectral afterimage along the original player-selected line or arc,
-- afterimages do not track, home, rotate, or independently select targets,
-- an afterimage may hit an enemy that remains in or enters its geometry and misses if the enemy leaves,
-- Akio retains ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetics,
-- and ordinary startup, recovery, commitment, and restrained attack movement remain unchanged.
-
-Provisional interaction boundaries:
-
-- Pale Lance creates at most one full delayed afterimage whether or not it continues into Pale Barrage,
-- additional Pale Barrage jabs may receive the reach extension but do not each create full afterimages,
-- echoes deal lower Health damage than the corresponding primary strike and emphasize meaningful posture pressure,
-- echoes generate no Blood,
-- echoes receive restricted Technique, healing, and proc weighting,
-- and echoes do not independently receive Spectral Edge.
-
-The Tier II review must determine whether this duration state is the correct Blood Art form, whether it provides enough immediate activation value, and whether an immediate or shorter frontal-control action would fit Wraith better.
+The following sections preserve the current Tier III-IV candidates for discussion. They are not approved production scope.
 
 ## Tier III candidate — Veiled Guard
 
@@ -267,7 +330,7 @@ Provisional boundaries:
 - a mistime provides no fallback block or protection,
 - and the effect adds no healing, Blood refund, automatic counter, easier timing, or passive defense.
 
-This candidate remains dependent on the final Tier II and broader Tier distribution.
+This candidate must now be judged against the approved immediate Wraith's Reach rather than the retired duration state.
 
 ## Tier IV candidate — Pale Procession
 
@@ -283,9 +346,9 @@ Provisional boundaries:
 - releasing or being interrupted ends all streams,
 - only one stream may damage an enemy during each authored barrage beat,
 - central-stream contact takes priority,
-- and shade hits generate no Blood, no delayed echoes, and restricted proc value.
+- and shade hits generate no Blood, no delayed echoes, no Spectral Edge bonus, and restricted proc value.
 
-This candidate is intended as a frontal-coverage and reliability upgrade rather than a single-target damage multiplier. Its final role remains dependent on the Tier II and Tier III reviews.
+This candidate is intended as a frontal-coverage and reliability upgrade rather than a single-target damage multiplier. Its final role remains dependent on the Tier III-IV distribution audit.
 
 # Technique space
 
@@ -298,11 +361,12 @@ Universal Techniques may reinforce or broaden Wraith's:
 - posture continuity,
 - close-range handling,
 - re-entry,
-- or whiff recovery.
+- whiff recovery,
+- or delayed line pressure.
 
-Techniques must not simply duplicate Spectral Edge's deterministic spacing reward or turn Wraith into a tracking, projectile, teleportation, or autonomous-companion kit.
+Techniques must not simply duplicate Spectral Edge's deterministic spacing reward or Wraith's Reach's sweep–corridor–echo package, or turn Wraith into a tracking, projectile, teleportation, or autonomous-companion kit.
 
-A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without a Blood Art or later Tier.
+A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without Wraith's Reach or later Tiers.
 
 # Presentation requirements
 
@@ -326,9 +390,19 @@ The feedback must not imply a critical hit, separate meter, or large Health-dama
 
 Pale Barrage requires clear continuation, early-release, stationary commitment, and diminishing per-jab impact communication without hiding enemy telegraphs.
 
+Wraith's Reach requires:
+
+- a short readable directional preparation,
+- a compact broad opening sweep that reads as immediate frontal value rather than a full-circle blast,
+- a visibly connected very long corridor strike,
+- a restrained delayed spectral repetition along exactly the same geometry,
+- clear differentiation between the primary strike and weaker echo,
+- readable timing that lets enemies visibly leave or enter the delayed corridor,
+- and no presentation suggesting homing, a projectile field, an autonomous companion, or a duration transformation.
+
 # Production requirements
 
-The approved Tier 0-I package establishes requirements for:
+The approved Tier 0-II package establishes requirements for:
 
 - distinct Veil Cut and Passing Arc timing, geometry, recovery, and hit response,
 - clear physical and spectral hit-region ownership,
@@ -337,23 +411,28 @@ The approved Tier 0-I package establishes requirements for:
 - Pale Lance charge, release, miss, and recovery presentation,
 - Pale Barrage continuation, early release, maximum sequence, and interruption behavior,
 - restricted multi-hit Blood, Technique, healing, and proc weighting,
-- Shrine summaries for Pale Barrage and Spectral Edge,
-- and Tier 0-I teaching and mastery-trial coverage.
+- Blood unavailable, building, ready, committed, resolving, consumed, and rebuilding states,
+- Wraith's Reach directional preparation and fixed-line commitment,
+- opening-sweep geometry, ordinary-enemy stagger, elite and boss response, and guaranteed activation-value handling,
+- corridor geometry, reach, collision, interruption, and recovery,
+- delayed echo timing, fixed geometry reuse, entry and exit collision behavior, and dissolution,
+- prevention of Blood generation, Spectral Edge multiplication, recursive echoes, and full-value proc duplication,
+- Shrine summaries for Pale Barrage, Spectral Edge, and Wraith's Reach,
+- and Tier 0-II teaching and mastery-trial coverage.
 
-Tier II-IV production requirements remain provisional until those Tiers are individually approved.
+Tier III-IV production requirements remain provisional until those Tiers are individually approved.
 
 # Remaining Wraith work
 
-The current active design question is Tier II and Wraith's Blood Art form.
+The current active design question is Tier III-IV distribution after the approved immediate Wraith's Reach.
 
 Remaining ordered work is:
 
-1. compare Wraith's Reach against immediate or concise non-duration Blood Art alternatives,
-2. select the Tier II Blood Art and guaranteed activation value,
-3. redistribute Tier III-IV around that decision,
-4. audit Spectral Edge interactions with the selected later package,
-5. complete cross-roster comparison against Wolf and Ronin,
-6. finalize animation, VFX, audio, HUD, Shrine, selection, and trial requirements,
-7. and validate the package through prototypes and playtesting.
+1. reassess Veiled Guard and Pale Procession against the approved Tier 0-II package,
+2. determine whether later Tiers need broader value outside Pale Lance and Pale Barrage,
+3. audit Spectral Edge interactions with the selected Tier III-IV package,
+4. complete cross-roster comparison against Wolf and Ronin,
+5. finalize animation, VFX, audio, HUD, Shrine, selection, and trial requirements,
+6. and validate the package through prototypes and playtesting.
 
-Exact timing, damage, posture, guard pressure, spectral hit-region size, Pale Barrage jab count and duration, recovery, Blood values, proc weighting, later-Tier behavior, and presentation values remain implementation and playtesting work.
+Exact timing, damage, posture, guard pressure, spectral hit-region size, Pale Barrage jab count and duration, Wraith's Reach preparation, sweep size, corridor dimensions, echo delay, interruption timing, recovery, Blood values, proc weighting, later-Tier behavior, and presentation values remain implementation and playtesting work.

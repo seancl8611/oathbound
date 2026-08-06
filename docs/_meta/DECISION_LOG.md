@@ -201,8 +201,16 @@ Wolf's current fixed path is Blood Tempo with Feral Momentum growth, Blood Hunt 
 
 **Authority:** `docs/gameplay/WOLF_ASPECT.md`
 
-## 2026-08-05 — Wraith Tier 0 revision precedes final roster lock
+## 2026-08-05 — Wraith Tier 0 and Tier I approved
 
-Wraith remains the launch reach-and-frontal-control identity and retains a complete working Tier draft, but its Tier 0 action foundation is the current active design question. Its Blood Art and later Tier distribution will be reviewed only after Tier 0 is settled. Final cross-roster production lock remains deferred until the Wraith revision, growth-rule audit, minor-support audit, and Ronin follow-up are complete.
+Wraith retains its two-hit sequence with sharper action roles: Veil Cut is the precise low-commitment line and Passing Arc is the broader committed frontal-control follow-up. Pale Barrage remains Tier I, and Spectral Edge rewards spectral-only primary contact with modest posture and guard pressure that scales at each Embrace.
 
-**Authority:** `docs/_meta/OPEN_QUESTIONS.md`, `docs/gameplay/WRAITH_ASPECT.md`, and `docs/gameplay/ASPECT_IDENTITY_GUIDELINES.md`
+**Authority:** `docs/gameplay/WRAITH_ASPECT.md`
+
+## 2026-08-05 — Wraith's Reach becomes an immediate corridor Blood Art
+
+Wraith Tier II is an immediate sweep–corridor–echo action rather than a temporary moveset-wide reach state. A compact frontal sweep supplies guaranteed activation value, a fixed very long corridor strike creates the main commitment, and one delayed spectral repetition reuses the exact selected geometry. The Art does not track, pursue, grant generic defense, generate Blood, or trigger Spectral Edge independently.
+
+The former duration-wide reach increase and repeated afterimages on ordinary Wraith attacks are superseded. Wraith's Tier III-IV distribution is now the active Aspect question.
+
+**Authority:** `docs/gameplay/WRAITH_ASPECT.md`, `docs/gameplay/BLOOD_ASPECTS.md`, and `docs/_meta/OPEN_QUESTIONS.md`

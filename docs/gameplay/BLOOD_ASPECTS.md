@@ -108,7 +108,7 @@ Aspect selection does not create a weaker or stronger neutral dash. No launch As
 A Blood Art may be an immediate authored action, a temporary state, or another clearly defined combat expression. Blood Arts are not required to share one form:
 
 - Wolf's **Blood Hunt** is an immediate player-directed pursuit action.
-- Wraith's current **Wraith's Reach** candidate is a temporary reach-and-afterimage state under active review.
+- Wraith's **Wraith's Reach** is an immediate frontal sweep and corridor strike followed by one delayed spectral repetition along the same fixed geometry.
 - Ronin's **Falling Mountain** is an immediate planted slam with a delayed rupture.
 
 Modest ordinary defensive differences may use player-posture capacity, block posture efficiency, posture recovery direction, defensive access after attacks, and Parry Counter payoff. These differences remain subordinate to the shared defense system.
@@ -118,7 +118,7 @@ Modest ordinary defensive differences may use player-posture capacity, block pos
 | Aspect | Basic sequence | Held identity | Primary strength | Inherent tradeoffs |
 |---|---|---|---|---|
 | Wolf | Fang Slash → Rending Cross → Raking Fang → Blood Cleave | Predator's Passage — pursuit | Fast sustained close pressure and player-directed pursuit | Short reach, forward commitment, unsafe misses, and dangerous final positioning |
-| Wraith | Veil Cut → Passing Arc | Pale Lance — focused reach | Longest average melee reach, deliberate line-and-arc selection, frontal control, and stronger posture pressure from correctly spaced spectral contact | Fewer ordinary actions, restrained movement, deliberate frontal commitments, close and lateral pressure, and severe Pale Lance misses |
+| Wraith | Veil Cut → Passing Arc | Pale Lance — focused reach | Longest average melee reach, deliberate line-and-arc selection, frontal control, stronger posture pressure from correctly spaced spectral contact, and one delayed corridor-control Blood Art | Fewer ordinary actions, restrained movement, deliberate frontal commitments, close and lateral pressure, and severe Pale Lance or Blood Art misses |
 | Ronin | Severing Cut → Crushing Cross → Bloodfall | Stillness Draw — power | Highest per-hit impact, posture chunks, ordinary-enemy stagger, and strongest guard profile | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 Supporting actions:
@@ -189,7 +189,7 @@ Expected viability:
 
 Wolf's removed rear-hit, generic travel, temporary-transformation, and deathblow-only Apex Feast concepts are not part of fixed progression.
 
-### Wraith — Tier 0 and Tier I approved
+### Wraith — approved through Tier II
 
 Approved Tier 0 roles:
 
@@ -199,18 +199,18 @@ Approved Tier 0 roles:
 - **Ghostline Slash:** controlled dash re-entry.
 - **Veil Reversal:** strongest ordinary Wraith parry-to-posture conversion.
 
-Approved Tier I:
+Approved progression:
 
-- **Pale Barrage:** continuing to hold after Pale Lance produces rapid lower-impact stationary spectral jabs along the committed direction; releasing ends the barrage early.
+- **Tier I — Pale Barrage:** continuing to hold after Pale Lance produces rapid lower-impact stationary spectral jabs along the committed direction; releasing ends the barrage early.
 - **Spectral Edge — Tier growth:** qualifying primary attacks that connect through spectral-only geometry gain modest enemy-posture and guard pressure. The benefit scales slightly at every Embrace and adds no Health damage, reach, tracking, movement, meter, or unrestricted repeated-hit multiplication.
+- **Tier II — Wraith's Reach:** a full meter commits one compact broad frontal sweep, one very long fixed corridor strike, and one delayed spectral repetition along the same corridor. The sweep supplies immediate frontal value; the corridor and echo reward line selection and prediction.
 
 Provisional later candidates:
 
-- **Tier II candidate — Wraith's Reach:** a temporary state that extends selected attacks and creates one delayed spectral afterimage along qualifying original geometry.
 - **Tier III candidate — Veiled Guard:** one manually timed spectral parry may preserve each Pale Lance or Pale Barrage use.
 - **Tier IV candidate — Pale Procession:** Pale Barrage gains two reduced-power non-stacking adjacent streams and limited direct steering.
 
-Tier II-IV remain under ordered review and are not approved production scope.
+Tier III-IV remain under ordered review and are not approved production scope.
 
 ### Ronin — approved through Tier IV
 
@@ -259,19 +259,21 @@ Working launch defaults:
 
 ### Wraith Blood direction
 
-Wraith's Blood Art form is the current active design question. Wraith's Reach remains the provisional comparison candidate.
+Wraith's Reach is the approved Tier II immediate Blood Art.
 
-Candidate behavior:
-
-- it requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while active,
-- Veil Cut, Passing Arc, and Pale Lance gain additional spectral reach,
-- each qualifying action creates one delayed spectral afterimage along its original player-selected geometry,
-- afterimages do not track, home, rotate, independently select enemies, or generate Blood,
-- Pale Barrage's additional jabs may gain range but do not each create another full echo,
-- afterimages do not independently receive Spectral Edge,
-- and afterimage damage, posture pressure, interruption, guard response, and Technique or healing triggers are separately weighted from the primary strike.
-
-The review must determine whether the final Art remains a duration state, what guaranteed activation value it provides, and whether an immediate or concise frontal-control action would better fit Wraith.
+- it requires a full meter, activates manually, consumes the stored Blood when committed, and generates no Blood while the Art and delayed echo resolve,
+- the player selects one direction during a short readable preparation,
+- a compact broad frontal sweep provides modest Health damage, strong posture and guard pressure, and brief stagger against eligible ordinary enemies,
+- the sweep provides guaranteed activation value without requiring the later corridor or echo to connect,
+- the sweep is frontal rather than full-circle and provides no healing, posture clear, damage reduction, automatic defense, or interruption resistance,
+- Akio then performs one very long narrow-to-medium corridor strike along the fixed selected direction,
+- the corridor deals moderate Health damage and strong posture and guard pressure without tracking, turning, homing, pursuit, or target correction,
+- a delayed spectral Wraith repeats the exact same corridor geometry with lower Health damage and meaningful posture and guard pressure,
+- enemies may leave before the echo or enter its geometry before it resolves,
+- the Art's stages generate no Blood and do not independently trigger Spectral Edge,
+- the echo cannot recursively create another echo and receives restricted Technique, healing, and proc weighting,
+- ordinary vulnerability, interruption, commitment, and recovery remain active,
+- and exact preparation, sweep, corridor, echo, damage, posture, stagger, interruption, and recovery values remain tuning work.
 
 ### Ronin Blood direction
 
@@ -286,16 +288,15 @@ The review must determine whether the final Art remains a duration state, what g
 
 Resolve the ordered questions in `docs/_meta/OPEN_QUESTIONS.md`:
 
-1. select Wraith's Blood Art form and guaranteed activation value,
-2. redistribute Wraith's later Tiers,
-3. decide Ronin's small-growth structure,
-4. audit minor supporting benefits,
-5. recheck Ronin against the approved standards,
-6. perform the final cross-roster production lock.
+1. redistribute Wraith's Tier III-IV package around the approved immediate Wraith's Reach,
+2. decide Ronin's small-growth structure,
+3. audit minor supporting benefits,
+4. recheck Ronin against the approved standards,
+5. perform the final cross-roster production lock.
 
 After the Aspect audit, resolve shared affinity, limited direct Aspect-, Tier-, or Blood-Technique exceptions, and final animation, VFX, audio, HUD, Shrine, trial, selection, and persistent-progression requirements.
 
-Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Spectral Edge qualification and scaling, Pale Barrage behavior, Fanged Guard timing and reset rules, Apex Mauling behavior, Wraith Blood Art behavior, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
+Exact frame data, hitboxes, chain windows, damage, posture, stagger, movement, recovery, Feral Momentum scaling, Spectral Edge qualification and scaling, Pale Barrage behavior, Fanged Guard timing and reset rules, Apex Mauling behavior, Wraith's Reach behavior, resource values, collision details, and numerical growth values remain implementation and playtesting work in the owning files.
 
 ## Related documents
 
