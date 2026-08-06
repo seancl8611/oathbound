@@ -58,9 +58,17 @@ Ronin's approved current package establishes these high-level production needs:
 - Shattering Wake contact-origin transfer through the primary target,
 - Ronin Blood building, ready, activated, resolving, consumed, and rebuilding states.
 
-Wraith retains a complete working draft, but its Tier 0 foundation, Blood Art, and later distribution are the active ordered revision. The current Pale Barrage, Wraith's Reach, Veiled Guard, and Pale Procession package may guide comparison and dependency awareness but must not set final animation, VFX, audio, HUD, Shrine, trial, or quotation counts.
+Wraith's approved Tier 0-II package establishes these high-level production needs:
 
-The three launch Aspect identities are fixed. Wolf and Ronin support high-level scoping through Tier IV, but final quotation still requires implementation briefs. Wraith final quotation additionally requires its revised gameplay package.
+- distinct Veil Cut, Passing Arc, Pale Lance, Ghostline Slash, and Veil Reversal geometry and impact treatment,
+- Pale Barrage continuation, stationary commitment, early release, interruption, and recovery,
+- Spectral Edge physical-range versus spectral-only contact feedback and Tier escalation,
+- Wraith's Reach full-meter activation, short directional preparation, compact broad opening sweep, very long fixed corridor strike, one weaker delayed same-geometry repetition, and ending recovery,
+- Wraith Blood building, ready, activated, resolving, consumed, and rebuilding states.
+
+Wraith's current Veiled Guard and Pale Procession concepts may guide Tier III-IV comparison and dependency awareness, but they must not set final animation, VFX, audio, HUD, Shrine, trial, or quotation counts before the later-Tier distribution audit.
+
+The three launch Aspect identities are fixed. Wolf and Ronin support high-level scoping through Tier IV, while Wraith supports high-level scoping through Tier II. Final quotation still requires implementation briefs and Wraith's completed Tier III-IV package.
 
 Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
@@ -92,8 +100,8 @@ The core story and lore are approved. Final quotation depends on the authored-co
 - Base character art precedes Tier or Blood overlays.
 - Wolf, Wraith, and Ronin are the fixed launch Aspect families.
 - All Aspect attacks remain player-directed; production must not imply corrective tracking or homing.
-- Wolf and Ronin working packages may guide high-level scope but not final frame or effect counts before implementation briefs.
-- Wraith final production counts require its revised Tier 0 foundation, Blood Art, and Tier distribution.
+- Wolf and Ronin working packages may guide high-level scope through Tier IV but not final frame or effect counts before implementation briefs.
+- Wraith may guide high-level scope through Tier II; final production counts require the completed Tier III-IV distribution.
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.
