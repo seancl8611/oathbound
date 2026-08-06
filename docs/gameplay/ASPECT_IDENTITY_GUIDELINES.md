@@ -4,7 +4,7 @@ title: Blood Aspect Identity Guidelines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 topics:
   - blood-aspects
   - aspect-roster
@@ -42,7 +42,7 @@ Do not substitute an abstract behavior rule or player-facing drawback category f
 | Aspect | Identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Fast close-range pressure and pursuit | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Extended spectral reach and frontal control | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, fixed direction, close and lateral pressure, and vulnerability after a poor line commitment |
+| Wraith | Extended spectral reach, frontal control, and formation penetration | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, fixed direction, close and lateral pressure, and vulnerability after a poor line commitment |
 | Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 The launch roster is final at the current scoping stage. Mobility, evasion, ranged utility, and broader crowd control remain shared-system, Technique, and Prosthetic territory rather than requiring a fourth Aspect.
@@ -91,7 +91,7 @@ A sustained authored attack may permit limited direct player steering when expli
 - preserve the attack's commitment and movement limits,
 - and remain readable against enemy telegraphs.
 
-The current Pale Procession draft demonstrates the allowed boundary: a three-lane formation may rotate slowly within a limited frontal arc, but the shades do not select targets and the formation remains stationary at Akio's origin. Its final ownership and form remain subject to the ordered Wraith Tier III-IV revision.
+The current Pale Procession draft demonstrates the allowed boundary: a three-lane formation may rotate slowly within a limited frontal arc, but the shades do not select targets and the formation remains stationary at Akio's origin. Its final ownership and form remain subject to the Wraith Tier IV review.
 
 Distinct target handling should otherwise come from:
 
@@ -101,7 +101,15 @@ Distinct target handling should otherwise come from:
 - sequence timing,
 - and player aim.
 
-A signature attack may pass through an eligible ordinary enemy only when the behavior is explicitly authored and the destination is safe. It must still follow the original attack line.
+A signature attack may pass through an eligible ordinary enemy only when the behavior is explicitly authored. It must still follow the original attack geometry and preserve clear stopping rules.
+
+Wraith's approved Spectral Passage is the ordinary-attack example:
+
+- qualifying spectral geometry continues through ordinary-enemy bodies,
+- additional ordinary targets receive reduced Health damage and meaningful posture and guard pressure,
+- elites, bosses, heavy stopping enemies, and solid geometry end further passage,
+- each enemy may be struck at most once by the action,
+- and the Tier adds no tracking, extra reach, movement, bounce, or same-enemy multiplication.
 
 ## Defensive-profile guidance
 
@@ -119,7 +127,7 @@ These differences support a complete weapon kit; they cannot be the kit's entire
 
 Do not change universal parry timing, parry success conditions, defense input, posture-break consequences, or enemy response rules. Do not grant automatic counters, posture-break immunity, free guarding, or posture recovery while actively blocking.
 
-A fixed Tier benefit may protect one specific authored action while still using shared defensive rules. Wolf's Fanged Guard automatically blocks one frontal blockable attack through normal posture rules during selected commitments. Wraith's current Veiled Guard candidate instead preserves one manually timed ordinary parry while Pale Lance or Pale Barrage remains committed. Its final ownership remains subject to the Tier III-IV distribution audit.
+A fixed Tier benefit may protect one specific authored action while still using shared defensive rules. Wolf's Fanged Guard automatically blocks one frontal blockable attack through normal posture rules during selected commitments. Ronin's Unbroken Resolve preserves selected late commitments through one costly eligible hit. Wraith's former Veiled Guard candidate was rejected rather than adding a third commitment-preservation Tier III.
 
 ## Shared offensive slots
 
@@ -164,11 +172,13 @@ Aspect Tier progression is a fixed optional investment route.
 - Tier 0 is a complete and viable weapon kit.
 - Every Tier is clearly net-positive.
 - Higher Tiers deepen signature actions without requiring separate named drawbacks or added penalty attributes.
-- Existing weaknesses may remain visible through the upgraded action's movement, commitment, direction, speed, recovery, or defensive access.
+- Existing weaknesses may remain visible through the upgraded action's movement, commitment, direction, speed, recovery, collision, or defensive access.
 - Technique-focused Tier 0-I builds must remain capable of completing a run.
 - Tier II is a common hybrid target, Tier III is deeper specialization, and Tier IV is occasional rather than expected.
 
 The purpose of preserving tradeoffs is to keep the weapon identity and player outplay intact, not to discourage Embrace or make later Tiers undesirable.
+
+A Tier III should provide a clear built-in specialization rather than requiring unnecessary operational complexity. Spectral Passage deepens Wraith's existing lines and arcs through authored collision behavior without adding a new command or generic stat bonus.
 
 A Tier IV may broaden a signature action without multiplying single-target output. The current Pale Procession draft uses two reduced-power adjacent barrage lanes with one stream per enemy per beat; this remains a valid comparison principle even if Wraith's final Tier IV changes.
 
@@ -231,7 +241,7 @@ A kit is ready when:
 - Tier 0-I Technique-focused builds remain viable,
 - and it is distinguishable from the other two during the first combat room.
 
-Wolf and Ronin meet the current qualitative Tier 0 and Tier I-IV working-package standards. Wraith's Tier 0-II package is approved; its Tier III-IV distribution remains under review before final cross-roster approval.
+Wolf and Ronin meet the current qualitative Tier 0 and Tier I-IV working-package standards. Wraith's Tier 0-III package is approved; its Tier IV capstone remains under review before final cross-roster approval.
 
 ## Cross-roster comparison
 
@@ -246,6 +256,7 @@ Wolf and Ronin meet the current qualitative Tier 0 and Tier I-IV working-package
 | Attack movement | Strongly forward | Restrained | Minimal |
 | Held purpose | Pursuit | Focused reach and stationary multi-hit commitment | Power |
 | Blood Art | Long pursuit through the battlefield | Immediate sweep, fixed corridor, and delayed echo | Planted slam and delayed rupture |
+| Tier III | Preserve connected aggression through one frontal block | Penetrate layered ordinary formations through existing spectral geometry | Preserve heavy commitments or earn clean posture payoff |
 | Primary risk | Overextension | Poor positioning, collapsed spacing, lateral pressure, and commitment to the wrong line | Missed heavy commitment and slow posture recovery |
 
 ## Technique compatibility
@@ -264,4 +275,4 @@ Neither additional Aspect belongs to current launch paper-design or production s
 
 ## Next design dependency
 
-Reassess Wraith's Tier III and Tier IV distribution around the approved immediate Wraith's Reach. Determine whether Veiled Guard and Pale Procession remain worthwhile, whether the later package overconcentrates on Pale Lance and Pale Barrage, whether another Tier should support Veil Cut, Passing Arc, Ghostline Slash, Veil Reversal, or the corridor Blood Art, and whether the remaining animation, VFX, input, collision, and teaching burden is justified.
+Reassess Wraith's Tier IV capstone around the approved Spectral Passage Tier III. Determine whether Pale Procession remains worthwhile, whether a second Pale Barrage upgrade is too narrow, whether the capstone should support the broader ordinary kit or Wraith's Reach, and whether the animation, VFX, input, collision, and teaching burden is justified.
