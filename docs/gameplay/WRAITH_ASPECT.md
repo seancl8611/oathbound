@@ -4,7 +4,7 @@ title: Wraith Blood Aspect
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-03
+last_reviewed: 2026-08-05
 topics:
   - blood-aspects
   - wraith
@@ -30,11 +30,13 @@ related:
 
 ## Status
 
-Wraith is an approved member of the three-Aspect launch roster. This document owns Wraith's qualitative Tier 0 weapon kit and its complete current Tier I-IV working progression.
+Wraith is an approved member of the three-Aspect launch roster.
 
-It supersedes the earlier forced-reposition concept and the earlier Tier II spinning Blood Art. Wraith's spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, and spectral weapon expressions rather than mandatory lateral movement, target correction, special evasion, or a replacement combat mode.
+Its qualitative Tier 0 weapon foundation and Tier I package are now approved for current scoping. Tier II-IV remain provisional candidates under ordered revision and must not be treated as final production scope until each later Tier is reviewed.
 
-Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, limited Technique exceptions, and production counts remain later implementation and playtesting work.
+Wraith supersedes the earlier forced-reposition concept and the earlier spinning Blood Art. Its spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, and spectral weapon expressions rather than mandatory lateral movement, target correction, special evasion, teleportation, or a replacement combat mode.
+
+Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Technique exceptions, and production counts remain implementation and playtesting work.
 
 ## Weapon identity
 
@@ -42,98 +44,108 @@ Exact numerical values, frame data, hitboxes, animation, detailed Blood presenta
 
 Wraith is defined by:
 
-- the longest effective melee reach in the launch roster,
-- a short two-hit Basic Attack sequence with fewer ordinary attack options than Wolf,
+- the longest average melee reach in the launch roster,
+- a short two-hit Basic Attack sequence,
 - a slower and more deliberate cadence than Wolf,
-- narrow long-reaching lines and broad spectral arcs,
+- narrow long-reaching lines and broad frontal spectral arcs,
 - restrained movement during attacks,
-- moderate per-hit damage,
-- controlled frontal and lane coverage,
-- fixed player-directed attack lines after commitment,
-- rapid spectral blade expressions only within selected committed attacks,
-- a Tier II duration state that extends its existing attacks and leaves delayed spectral afterimage strikes,
-- a Tier III spectral guard that preserves one correctly timed parry during Pale Lance or Pale Barrage,
-- a Tier IV three-lane Pale Barrage formation with limited manual steering,
-- and weakness when enemies enter inside its preferred range or threaten it outside the currently selected action.
+- moderate individual Health damage,
+- selected strong enemy-posture and guard-pressure tools,
+- fixed player-directed attack geometry after commitment,
+- and weakness when enemies collapse inside its preferred range or attack from outside its selected front.
 
-Wraith gives up mobility, speed, and ordinary versatility in exchange for reach, control, and strong payoff from correctly chosen openings. These limitations are part of the weapon kit itself rather than a separate drawback system.
+Wraith gives up mobility, speed, close-range flexibility, and ordinary transition count in exchange for reach, attack selection, and frontal control.
 
-Wraith does not use corrective tracking, hidden homing, or automatic target selection. The player may use one precise attack, add the second attack, defend, dash, reposition normally, use a Prosthetic, or disengage.
+Wraith does not use corrective tracking, hidden homing, automatic target selection, or an artificial point-blank damage dead zone. Close pressure is dangerous because its actions are frontal, deliberate, and comparatively limited—not because nearby enemies become immune to its attacks.
 
 ## Shared systems
 
-Wraith retains universal locomotion, neutral dash, defense input, parry timing, posture rules, deathblows, Technique inventory, and Prosthetic controls during ordinary combat and during Wraith's Reach.
+Wraith retains universal locomotion, neutral dash, Defense input, ordinary parry timing, posture rules, deathblows, Technique inventory, and Prosthetic controls.
 
-It is not defined by teleportation, additional invulnerability, automatic movement behind targets, forced offsets, or a stronger neutral dash. Wraith's Reach strengthens the existing weapon kit without replacing it or disabling the shared combat language. Veiled Guard uses the normal parry input, timing, eligibility, and enemy response rather than creating an automatic defense or separate parry system.
+The player may stop the Basic sequence after either attack, defend, dash, reposition normally, use a Prosthetic, or disengage. Wraith does not gain additional invulnerability, automatic movement behind targets, forced offsets, or a stronger neutral dash.
 
-Pale Procession permits limited direct player steering during one sustained authored attack. This is not target tracking: the formation rotates only through player input, remains inside a limited frontal arc, and does not snap toward or follow enemies.
+# Approved Tier 0 kit
 
-## Tier 0 kit
+## Basic Attack sequence
 
-### Basic Attack sequence
+### 1. Veil Cut
 
-1. **Veil Cut** — narrow extended opener with medium-to-long reach, moderate pressure, limited movement, and controlled recovery.
-2. **Passing Arc** — broad long-reaching spectral sweep with wider frontal coverage and moderate recovery.
+A precise, low-commitment extended line attack.
 
-The sequence cadence is:
+- narrow medium-to-long frontal line,
+- quickest Wraith Basic startup,
+- moderate Health and enemy-posture damage,
+- little attack-bound movement,
+- shortest Basic recovery,
+- and best suited to short openings, spacing checks, and single-target pressure.
 
-> precise extended poke → broad spectral sweep
+Veil Cut is the reliable ordinary attack. Its advantage is accurate reach and controlled commitment rather than heavy impact or broad coverage.
 
-The player may stop after Veil Cut without losing a bonus. Passing Arc may use a small natural step or turn as part of its authored animation, but it does not chase a target, force Wraith across the enemy, or end at a special offset.
+### 2. Passing Arc
 
-### Held Attack — Pale Lance
+A broader and more committed frontal-control follow-up.
+
+- broad spectral sweep across Wraith's front,
+- slower startup and longer recovery than Veil Cut,
+- moderate Health damage,
+- stronger enemy-posture and guard pressure than Veil Cut,
+- useful contact against grouped or laterally adjacent frontal enemies,
+- restrained authored movement,
+- and no tracking or corrective rotation after commitment.
+
+Passing Arc does not need greater maximum reach than Veil Cut. Its purpose is wider frontal control and stronger pressure, not simply being a superior second attack.
+
+The approved Basic rhythm is:
+
+> test or punish with a precise extended line → stop safely or commit to a broader frontal sweep
+
+The two-hit sequence is intentionally retained. A third Basic Attack should be reconsidered only if prototype play shows that the poke-to-sweep decision remains unsatisfying after these roles are implemented clearly.
+
+## Held Attack — Pale Lance
 
 A long, narrow Blood-formed thrust or blade extension connected to the physical katana.
 
 - Wraith's longest focused melee reach,
 - very narrow attack line,
-- moderate-to-strong Health damage,
+- stronger Health damage than Veil Cut,
 - strong focused enemy-posture pressure,
 - minimal forward movement,
-- fixed direction after release before Tier IV steering applies to the continued barrage,
-- meaningful miss recovery.
+- fixed direction after release,
+- meaningful preparation,
+- and severe miss recovery relative to Wraith's ordinary attacks.
 
-Pale Lance is not a projectile. Its advantage is reach rather than Ronin-level impact.
+Pale Lance is a focused punish for a confirmed opening. It is not a projectile, pursuit tool, or Ronin-level heavy impact attack.
 
-### Dash Attack — Ghostline Slash
+## Dash Attack — Ghostline Slash
 
 A controlled extended cut after the universal neutral dash.
 
 - reliable startup,
 - medium-to-long spectral reach,
-- moderate damage and posture pressure,
-- limited movement beyond the dash,
-- fixed authored arc after release,
-- controlled recovery into movement or defense.
+- modest Health and enemy-posture damage,
+- limited additional movement beyond the dash,
+- fixed authored geometry after release,
+- and quick return to movement or defense.
 
-It does not require a special offset or add invulnerability to the dash.
+Ghostline Slash is Wraith's responsive re-entry and repositioning attack. It does not add invulnerability or become a second pursuit system.
 
-### Parry Counter — Veil Reversal
+## Parry Counter — Veil Reversal
 
 A precise extended counter slash after the universal parry.
 
-- longer reach than Wolf's counter,
-- narrow-to-medium frontal arc,
+- extended narrow-to-medium frontal geometry,
 - moderate Health damage,
-- strong enemy-posture pressure,
+- Wraith's strongest ordinary parry-to-posture conversion,
 - limited forward movement,
-- controlled recovery.
+- and controlled recovery.
 
-It does not teleport, move behind the enemy, force an off-axis finish, rotate toward a target after release, or alter parry timing.
+Veil Reversal does not teleport, move behind the enemy, rotate toward a target after release, or alter universal parry timing.
 
 ## Defensive profile
 
 Wraith retains functional blocking and universal parry timing.
 
-Its defensive success depends on preserving useful spacing, selecting an appropriate attack, and returning to neutral before pressure collapses around it. Wraith has less attack-bound mobility and fewer offensive transitions than Wolf.
-
-Wraith does not require a dramatically weaker guard. Its natural defensive weakness is pressure inside the effective reach of its extended attacks and attacks arriving outside its focused front.
-
-Wraith's Reach does not add healing, damage reduction, interruption resistance, automatic defense, posture clearing, or a special parry reward. Dash, block, parry, deathblow, and Prosthetic access remain fully available while the state is active.
-
-Veiled Guard does not improve ordinary parries or grant passive omnidirectional protection. It preserves one manually timed normal parry while Akio is charging Pale Lance or channeling Pale Barrage, using a spectral manifestation so Akio does not turn, stop the attack, or leave its selected direction.
-
-Pale Procession does not provide another defensive use. Akio remains stationary while channeling, and after Veiled Guard is spent or mistimed, incoming attacks affect Akio and the barrage through ordinary combat rules.
+Its defensive weakness is not an artificially weak guard. Its weakness is preserving useful spacing while using a small set of deliberate frontal actions. Close, lateral, and simultaneous pressure can force Wraith out of its preferred attack selection.
 
 ## Combat profile
 
@@ -141,322 +153,207 @@ Pale Procession does not provide another defensive use. Akio remains stationary 
 |---|---|
 | Preferred range | Medium-to-long |
 | Basic sequence | Two attacks |
-| Cadence | Slower and more deliberate than Wolf; selected rapid spectral commitments |
-| Per-hit damage | Moderate |
-| Sustained output | Moderate and lower than Wolf outside committed openings |
-| Enemy posture | Focused extended pressure and delayed echo pressure during Wraith's Reach |
-| Attack movement | Restrained and player-directed; stationary during Pale Barrage |
-| Held identity | Reach, focused multi-hit commitment, one skilled spectral defense, and broad three-lane control after Tier IV |
-| Main failure state | Poor positioning, enemies collapsing inside preferred range, or committing to the wrong direction or opening |
-
-## Strengths
-
-- longest effective melee reach,
-- punishment from outside conventional sword range,
-- strong line and frontal arc coverage,
-- controlled ordinary attack commitments,
-- access to ranged enemies without becoming a projectile kit,
-- concentrated multi-hit punishment during larger openings after Tier I,
-- delayed spectral repetition of core attacks during Wraith's Reach,
-- one manually timed multidirectional parry that can preserve Pale Lance or Pale Barrage after Tier III,
-- broad multi-lane Pale Barrage coverage and limited manual aim adjustment after Tier IV,
-- and punishment of enemy attacks that fall short.
-
-## Firm tradeoffs
-
-- slower attack cadence than Wolf,
-- fewer ordinary attacks and offensive transitions,
-- restrained movement during attacks,
-- point-blank pressure,
-- cramped spaces,
-- attacks from several directions,
-- fixed attack lines after commitment outside Pale Procession's limited direct steering,
-- moderate rather than heavy individual hits,
-- lower ordinary sustained output than Wolf,
-- meaningful recovery after Pale Lance or other extended misses,
-- becoming stationary while sustaining Pale Barrage,
-- delayed echoes missing when enemies leave the original authored line or arc,
-- Veiled Guard providing no protection when mistimed or after its single use is spent,
-- Pale Procession shades dealing reduced damage and never stacking on one enemy,
-- and Pale Procession steering being too slow and limited to replace ordinary movement or quick attacks.
-
-Wraith must not combine the safest spacing, strongest damage, fastest actions, and easiest recovery. Its player outplay is intelligent positioning, selecting the correct attack and direction, committing only when the opening supports the chosen action, correctly timing Veiled Guard, and steering Pale Procession only when sustaining the barrage remains worth the risk.
+| Cadence | Deliberate; faster than Ronin and slower than Wolf |
+| Per-hit Health damage | Moderate |
+| Sustained output | Below connected Wolf pressure |
+| Enemy posture | Selected strong line, sweep, Held, and counter pressure |
+| Ordinary stagger | Below Ronin |
+| Attack movement | Restrained and player-directed |
+| Main failure state | Poor spacing, wrong attack selection, lateral collapse, or a missed commitment |
 
 ## Encounter role
 
-- **Mixed groups:** threaten priority enemies at range, use Passing Arc for frontal interference, place delayed echoes, and use Pale Procession to cover separated frontal lanes during a sufficiently long opening.
-- **Crowds:** control a broad front through Passing Arc, Wraith's Reach, and three non-stacking Pale Barrage lanes while remaining vulnerable after Veiled Guard is spent or mistimed.
-- **Ranged pressure:** reach exposed ranged enemies through Veil Cut, Pale Lance, Ghostline Slash, universal dash, and Prosthetics without becoming a projectile or room-crossing pursuit kit.
-- **Elites and bosses:** punish from the edge of threat range, use Pale Barrage during sufficiently long openings, place delayed echoes along predicted movement, preserve one barrage through Veiled Guard, and use Pale Procession's limited manual steering to maintain the central stream against modest repositioning without gaining extra single-target damage.
+- **Mixed groups:** pressure priority targets from useful range and use Passing Arc to interfere with grouped frontal threats.
+- **Crowds:** control a broad front but struggle when enemies surround, flank, or attack simultaneously.
+- **Ranged pressure:** reach exposed targets through extended attacks, universal dash, and Prosthetics without becoming a projectile or room-crossing pursuit kit.
+- **Elites and bosses:** punish from the edge of threat range, use Veil Cut during short openings, and reserve Pale Lance for confirmed commitments.
 
-# Fixed Tier progression
+# Approved Tier I package
 
-Wraith's Tier I-IV package is approved as a working draft for current scoping. Every Tier is clearly net-positive while preserving Wraith's inherent limitations through the upgraded actions themselves.
-
-Wraith does not require a separate named drawback family or an added penalty at each Tier.
-
-## Tier I — Pale Barrage
+## Headline benefit — Pale Barrage
 
 Pale Lance gains a continued held form.
 
-After the initial Pale Lance thrust, continuing to hold the attack input causes Akio to unleash a rapid series of spectral jabs in front of him along the original Pale Lance direction. Releasing the input ends the barrage early, while continuing to hold performs the full current maximum sequence.
+After the initial Pale Lance thrust, continuing to hold the attack input causes Akio to unleash a rapid series of spectral jabs along the original Pale Lance direction. Releasing ends the barrage early; continuing to hold performs the current maximum sequence.
 
-- The original single Pale Lance remains available by releasing without continuing into the barrage.
-- Each additional jab deals lower individual Health and enemy-posture damage than the initial Pale Lance.
-- A completed barrage delivers strong combined Health and enemy-posture pressure during a sufficiently long opening.
-- Akio remains stationary once the barrage begins.
-- Aim adjustment is limited after the barrage begins until Tier IV expands it into slow direct steering.
-- The jabs do not track, rotate automatically toward, or independently select enemies.
-- The longer Akio continues the barrage, the longer he remains committed and exposed to retaliation, flanking pressure, and enemies outside the focused direction.
-- Releasing early gives up the remaining damage but ends the commitment sooner.
+Approved boundaries:
 
-Pale Barrage is one authored multi-hit Held Attack rather than a separate status effect, meter, or stored reward. Blood generation, Technique triggers, healing, and other per-hit interactions must be weighted so the additional jabs do not automatically receive full independent proc value; exact rules remain balance work.
+- the original single Pale Lance remains available by releasing without continuing,
+- each additional jab deals lower individual Health and enemy-posture damage than the initial thrust,
+- a completed barrage delivers strong combined Health and posture pressure during a sufficiently long opening,
+- Akio remains stationary once the barrage begins,
+- aim adjustment is highly limited after commitment unless a later approved Tier explicitly changes it,
+- the jabs do not track, rotate automatically, or select targets independently,
+- longer continuation creates longer exposure to retaliation, flanking, and threats outside the selected line,
+- and releasing early sacrifices remaining damage in exchange for ending the commitment sooner.
 
-The resulting Tier I rhythm is:
+Pale Barrage is one authored multi-hit Held Attack rather than a separate status, meter, or stored reward. Blood generation, Technique triggers, healing, and other per-hit interactions must be weighted so its additional jabs do not receive unrestricted full-value independent procs.
 
-> establish useful range and direction → use ordinary Wraith attacks during short exchanges → hold Pale Lance into rapid jabs when a larger opening appears → release before the commitment becomes unsafe
+The Tier I Held rhythm is:
 
-## Tier II — Wraith's Reach
+> use a single Pale Lance for a confirmed medium opening → continue into Pale Barrage only when the opening supports sustained stationary commitment → release before the line becomes unsafe
 
-Tier II unlocks Wraith's Blood meter and Blood Art.
+## Supporting growth rule — Spectral Edge
 
-Wraith's Reach follows the shared Blood defaults: it requires a full meter, activates manually, consumes the stored Blood, and does not generate Blood while its duration state is active. Exact Blood capacity, source weighting, activation timing, and duration remain tuning work.
+Beginning at Tier I, Wraith attacks that connect through the spectral extension beyond the physical katana's ordinary reach gain a modest enemy-posture and guard-pressure bonus.
 
-Activation begins the empowered state after a short readable Blood manifestation. No separate damaging activation attack, forced movement, control lockout, or replacement moveset is currently required.
+Each Embrace from Tier I through Tier IV modestly increases this bonus.
 
-For the duration of Wraith's Reach:
+Qualifying primary attacks are:
 
-- Veil Cut gains additional spectral reach.
-- Passing Arc gains additional spectral reach and wider frontal coverage.
-- Pale Lance gains additional spectral reach.
-- Each qualifying Veil Cut, Passing Arc, or Pale Lance produces one delayed spectral afterimage strike a short beat after the physical hit timing.
-- The afterimage repeats the original action's player-selected direction and authored line or arc.
-- The afterimage does not track, home, rotate toward, or independently select an enemy.
-- The afterimage may hit an enemy that remains in or enters its geometry, and it misses if the enemy leaves that geometry.
-- Akio retains ordinary locomotion, neutral dash, block, parry, Basic Attacks, Held Attack, Dash Attack, Parry Counter, deathblows, and Prosthetic access.
-- Wraith's ordinary startup, recovery, restrained attack movement, commitment, and defensive-access rules remain unchanged.
+- Veil Cut,
+- Passing Arc,
+- Pale Lance's initial thrust,
+- Ghostline Slash,
+- and Veil Reversal.
 
-### Pale Barrage interaction
+Approved boundaries:
 
-The initial Pale Lance creates one delayed Pale Lance afterimage whether the player releases immediately or continues into Pale Barrage.
+- the bonus requires contact through the spectral-only portion of the authored attack geometry,
+- physical-blade-range contact receives no Spectral Edge bonus,
+- the bonus improves enemy-posture and guard pressure rather than Health damage,
+- it adds no reach, width, movement, tracking, correction, interruption resistance, or recovery reduction,
+- it does not create automatic stagger against elites or bosses,
+- Pale Barrage's additional jabs do not each receive a full independent Spectral Edge bonus,
+- delayed, secondary, shade, or repeated hits do not independently receive Spectral Edge unless a later Tier explicitly defines a restricted interaction,
+- and the rule uses no meter, stack counter, timer, random chance, or stored reward.
 
-Pale Barrage's additional jabs receive Wraith's Reach's increased reach, but the individual jabs do not each create their own full afterimage strike. This prevents excessive damage, posture pressure, visual noise, Blood generation, or Technique-trigger multiplication.
+Spectral Edge rewards the player for maintaining Wraith's intended spacing rather than simply granting generic stat growth. A close-range hit remains fully functional; a correctly spaced spectral hit creates stronger posture and guard pressure.
 
-### Echo impact and system interactions
+The complete Tier I rhythm is:
 
-The delayed afterimage is a secondary Wraith hit rather than a second full copy of every property on the original attack.
+> preserve useful distance → choose the correct line or arc → gain modest Spectral Edge pressure through spectral-only contact → use Pale Barrage only when the opening is large enough
 
-Working boundaries are:
+# Provisional later-Tier candidates
 
-- lower Health damage than the corresponding physical strike,
-- meaningful enemy-posture pressure,
-- normal hit or guard response unless an enemy's own rules specify otherwise,
-- no forced repeated stagger against elites or bosses,
-- no Blood generation from the afterimage,
-- and weighted or restricted per-hit Technique and healing interactions so the echo does not automatically duplicate every proc at full value.
+The following sections preserve the current working candidates for discussion. They are not approved production scope.
 
-Exact Health damage, enemy-posture pressure, ordinary-enemy interruption, guard response, Technique weighting, and hit-stop remain implementation and playtesting work.
+## Tier II candidate — Wraith's Reach
 
-### Defense and parry relationship
+The current candidate unlocks Wraith's Blood meter and a temporary empowered state.
 
-Wraith's Reach grants no direct Health restoration, Blood refund, damage reduction, posture clearing, interruption resistance, automatic counter, or special parry success condition.
+Provisional behavior:
 
-A successful parry remains valuable through the universal defense system and may naturally allow a previously placed afterimage to resolve while Akio defends. Veil Reversal remains available after a successful parry, but Tier II adds no separate parry reward.
+- a full meter activates manually and is consumed,
+- Blood does not generate while the duration state is active,
+- Veil Cut, Passing Arc, and Pale Lance gain additional spectral reach,
+- qualifying primary attacks create one delayed spectral afterimage along the original player-selected line or arc,
+- afterimages do not track, home, rotate, or independently select targets,
+- an afterimage may hit an enemy that remains in or enters its geometry and misses if the enemy leaves,
+- Akio retains ordinary movement, dash, block, parry, attacks, deathblows, and Prosthetics,
+- and ordinary startup, recovery, commitment, and restrained attack movement remain unchanged.
 
-The resulting Tier II rhythm is:
+Provisional interaction boundaries:
 
-> fill Blood through ordinary combat → activate Wraith's Reach before a valuable exchange → place longer player-directed attacks and delayed echoes through deliberate line and arc selection → continue reading, blocking, parrying, dashing, and repositioning normally → gain greater frontal control without escaping Wraith's existing commitment and spacing limits
+- Pale Lance creates at most one full delayed afterimage whether or not it continues into Pale Barrage,
+- additional Pale Barrage jabs may receive the reach extension but do not each create full afterimages,
+- echoes deal lower Health damage than the corresponding primary strike and emphasize meaningful posture pressure,
+- echoes generate no Blood,
+- echoes receive restricted Technique, healing, and proc weighting,
+- and echoes do not independently receive Spectral Edge.
 
-## Tier III — Veiled Guard
+The Tier II review must determine whether this duration state is the correct Blood Art form, whether it provides enough immediate activation value, and whether an immediate or shorter frontal-control action would fit Wraith better.
 
-While charging Pale Lance or channeling Pale Barrage, Akio may press the normal parry input to have a spectral Wraith parry one eligible incoming attack from any direction.
+## Tier III candidate — Veiled Guard
 
-Veiled Guard follows these rules:
+The current candidate permits one manually timed spectral parry during each Pale Lance use, including when that use continues into Pale Barrage.
 
-- The player must time the input within the ordinary parry window.
-- The incoming attack must be eligible for an ordinary parry.
-- The spectral Wraith may face and intercept the attack from any direction without turning Akio.
-- A successful parry uses ordinary enemy-posture pressure, deflection response, and posture-break rules.
-- A successful parry does not cancel Pale Lance, interrupt Pale Barrage, remove accumulated charge, change the attack's selected direction, or automatically release the attack.
-- A successful parry does not automatically trigger Veil Reversal or another offensive action.
-- Each Pale Lance use permits one Veiled Guard parry, including when the same use continues into Pale Barrage.
-- Entering Pale Barrage does not refresh Veiled Guard after it has been spent.
-- A mistimed parry provides no fallback block, damage reduction, interruption resistance, or other protection.
-- If an enemy attack connects after a missed timing or after Veiled Guard is spent, it affects Akio and the committed action through ordinary combat rules.
-- Veiled Guard adds no healing, Blood generation, Blood refund, bonus damage, automatic counter, easier parry timing, turning, or passive protection.
+Provisional boundaries:
 
-Veiled Guard does not change ordinary parries outside Pale Lance or Pale Barrage. Its multidirectional property exists because the spectral manifestation performs the defense while Akio preserves the original attack animation and direction.
+- normal parry timing and attack eligibility apply,
+- the spectral manifestation may intercept an eligible attack from any direction without rotating Akio,
+- success preserves the current Pale Lance charge or Pale Barrage channel,
+- entering Pale Barrage does not refresh the use,
+- a mistime provides no fallback block or protection,
+- and the effect adds no healing, Blood refund, automatic counter, easier timing, or passive defense.
 
-### Wraith's Reach interaction
+This candidate remains dependent on the final Tier II and broader Tier distribution.
 
-Veiled Guard remains available during Pale Lance and Pale Barrage while Wraith's Reach is active.
+## Tier IV candidate — Pale Procession
 
-- Wraith's Reach still extends Pale Lance and Pale Barrage according to Tier II.
-- The initial Pale Lance still creates only one delayed afterimage.
-- Veiled Guard does not create another afterimage, extend Wraith's Reach, refund Blood, or add a separate parry reward.
-- One Veiled Guard use remains available per Pale Lance use; Wraith's Reach does not increase or refresh that count.
+The current candidate adds two reduced-power adjacent spectral barrage lanes while Akio channels Pale Barrage.
 
-The resulting Tier III rhythm is:
+Provisional boundaries:
 
-> choose and begin a committed Pale Lance action → continue reading the entire encounter while holding the selected line → manually parry one eligible attack through the spectral guard without abandoning the charge or barrage → decide whether the remaining commitment is still safe after the guard is spent
+- Akio remains the central and strongest stream,
+- left and right shades create adjacent frontal lanes,
+- the formation may rotate slowly through direct player input within a limited frontal arc,
+- the formation does not track or snap to enemies,
+- Akio remains stationary,
+- releasing or being interrupted ends all streams,
+- only one stream may damage an enemy during each authored barrage beat,
+- central-stream contact takes priority,
+- and shade hits generate no Blood, no delayed echoes, and restricted proc value.
 
-Veiled Guard is the complete Tier III headline benefit. No additional passive is required.
+This candidate is intended as a frontal-coverage and reliability upgrade rather than a single-target damage multiplier. Its final role remains dependent on the Tier II and Tier III reviews.
 
-## Tier IV — Pale Procession
+# Technique space
 
-While channeling Pale Barrage, two spectral shades manifest beside Akio and perform reduced-power barrages along adjacent lines, creating a broad three-lane frontal formation.
+Universal Techniques may reinforce or broaden Wraith's:
 
-### Formation and steering
+- reach and spectral-only spacing,
+- line and arc coverage,
+- Pale Lance and Pale Barrage,
+- dash attacks and parry counters,
+- posture continuity,
+- close-range handling,
+- re-entry,
+- or whiff recovery.
 
-- Akio remains the central and strongest barrage stream.
-- One shade forms to his left and one to his right.
-- Each shade performs Pale Barrage along a fixed adjacent line relative to the central stream.
-- The player may slowly rotate the entire formation through direct directional input within a limited frontal arc.
-- The shades maintain their authored spacing and angles while the formation rotates.
-- The formation does not snap toward, track, home onto, or automatically follow enemies.
-- Akio remains stationary and cannot move the formation's origin while channeling.
-- Releasing Pale Barrage or being interrupted immediately ends all three streams and dismisses the shades.
+Techniques must not simply duplicate Spectral Edge's deterministic spacing reward or turn Wraith into a tracking, projectile, teleportation, or autonomous-companion kit.
 
-### Non-stacking rule
+A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without a Blood Art or later Tier.
 
-An enemy may receive damage and enemy-posture pressure from only one Pale Procession stream during each authored barrage beat.
+# Presentation requirements
 
-- If an enemy overlaps multiple streams, only one stream applies for that beat.
-- Akio's central stream takes priority when it connects.
-- The shade streams cannot converge to multiply damage or posture pressure against one enemy.
-- Large enemies and bosses do not receive extra hits merely because their collision overlaps several lanes.
+Wraith's Blood-formed katana should feel elongated, spectral, precise, and light in visual motion while remaining visibly connected to the physical katana.
 
-This rule makes Pale Procession a frontal coverage and reliability upgrade rather than a single-target damage multiplier.
+Tier 0 must communicate:
 
-### Shade impact and system interactions
+- Veil Cut as the precise low-commitment line,
+- Passing Arc as the broader committed sweep,
+- Pale Lance as the longest focused punish,
+- Ghostline Slash as controlled dash re-entry,
+- and Veil Reversal as the posture-focused counter.
 
-- Shade jabs deal reduced Health damage and reduced enemy-posture pressure compared with Akio's central barrage.
-- Shade jabs generate no Blood.
-- Shade jabs use weighted or restricted Technique, healing, and other per-hit interactions.
-- Shade jabs do not create delayed Wraith's Reach afterimages.
-- Shade jabs do not independently force repeated stagger against elites or bosses.
-- The shades do not select targets, retarget after a death, or persist independently of Akio.
+Spectral Edge requires readable but restrained feedback distinguishing:
 
-### Boss and single-target role
+- physical-blade contact,
+- spectral-only contact,
+- and the modestly increasing Tier I-IV posture and guard-pressure reward.
 
-Pale Procession does not increase Wraith's maximum single-target Pale Barrage damage. Its boss value comes from limited manual steering:
+The feedback must not imply a critical hit, separate meter, or large Health-damage multiplier.
 
-- the player may keep Akio's central stream aligned with modest boss movement during a valid opening,
-- the rotation is deliberately slower and narrower than ordinary locomotion or free aiming,
-- a boss can still leave the formation's frontal arc or interrupt Akio after Veiled Guard is spent,
-- and Basic Attacks remain preferable for short, mobile, or uncertain exchanges.
+Pale Barrage requires clear continuation, early-release, stationary commitment, and diminishing per-jab impact communication without hiding enemy telegraphs.
 
-### Veiled Guard interaction
+# Production requirements
 
-- One Veiled Guard parry remains available per Pale Lance use.
-- The shades do not gain separate defensive uses.
-- A successful Veiled Guard preserves Akio's channel and both shade streams.
-- Entering Pale Barrage still does not refresh Veiled Guard.
-- After Veiled Guard is spent or mistimed, Pale Procession provides no fallback defense.
+The approved Tier 0-I package establishes requirements for:
 
-### Wraith's Reach interaction
+- distinct Veil Cut and Passing Arc timing, geometry, recovery, and hit response,
+- clear physical and spectral hit-region ownership,
+- deterministic Spectral Edge qualification and scaling,
+- Spectral Edge posture and guard-pressure feedback,
+- Pale Lance charge, release, miss, and recovery presentation,
+- Pale Barrage continuation, early release, maximum sequence, and interruption behavior,
+- restricted multi-hit Blood, Technique, healing, and proc weighting,
+- Shrine summaries for Pale Barrage and Spectral Edge,
+- and Tier 0-I teaching and mastery-trial coverage.
 
-During Wraith's Reach:
+Tier II-IV production requirements remain provisional until those Tiers are individually approved.
 
-- the central and shade barrage streams receive the approved extended Pale Barrage reach,
-- the formation's non-stacking rule remains absolute,
-- the initial Pale Lance still creates only one delayed afterimage,
-- the shades and individual barrage jabs do not create additional afterimages,
-- and Wraith's Reach does not increase the number of shades or Veiled Guard uses.
+# Remaining Wraith work
 
-The resulting Tier IV rhythm is:
+The current active design question is Tier II and Wraith's Blood Art form.
 
-> identify a sufficiently long frontal opening → commit through Pale Lance into Pale Barrage → manifest three non-stacking spectral lanes → slowly steer the formation to maintain coverage or keep the central stream aligned → use Veiled Guard once when a correctly read attack justifies preserving the commitment → release before stationary exposure becomes unsafe
+Remaining ordered work is:
 
-Pale Procession is the complete Tier IV headline benefit. It adds no lingering attacks, detonations, automatic target selection, single-target stacking, healing, Blood refund, extra parry, damage reduction, or unrelated passive.
+1. compare Wraith's Reach against immediate or concise non-duration Blood Art alternatives,
+2. select the Tier II Blood Art and guaranteed activation value,
+3. redistribute Tier III-IV around that decision,
+4. audit Spectral Edge interactions with the selected later package,
+5. complete cross-roster comparison against Wolf and Ronin,
+6. finalize animation, VFX, audio, HUD, Shrine, selection, and trial requirements,
+7. and validate the package through prototypes and playtesting.
 
-## Technique space
-
-Universal Techniques may:
-
-- **reinforce** reach, line coverage, arc coverage, Pale Lance, Pale Barrage, delayed hits, parry counters, and multi-hit actions,
-- **broaden** close-range handling, pressure, pursuit, faster re-entry, or posture continuity,
-- **compensate** for fixed attack lines, point-blank pressure, crowd collapse, focused commitment, or whiff recovery,
-- **hybridize** through parry counters, dash attacks, deathblows, posture, or Prosthetics.
-
-Wraith does not own every range, delayed-hit, movement, dash, avoidance, multi-hit, Held Attack, parry, area-attack, or damage-amplification Technique. Ordinary Techniques must not duplicate Veiled Guard's preserved parry or Pale Procession's three-lane steering package.
-
-A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without requiring Wraith's Reach, Veiled Guard, or Pale Procession.
-
-## Blood-katana presentation
-
-Wraith's Blood-formed katana should feel elongated, spectral, precise, and light in visual motion without becoming an independent projectile weapon.
-
-The blade remains visibly connected to Akio's physical katana. Pale Barrage should read as Akio repeatedly driving or manifesting the spectral edge through deliberate weapon motion.
-
-During Wraith's Reach:
-
-- the connected Blood blade extends farther during Veil Cut, Passing Arc, and Pale Lance,
-- the physical strike remains the clearest primary action,
-- a restrained translucent afterimage of Akio or the blade lingers for a short beat,
-- that afterimage repeats the original authored strike,
-- enemy telegraphs and Akio's current position remain readable,
-- and the effect must not resemble an autonomous companion, homing blade, projectile field, or screen-filling automatic attack.
-
-When Veiled Guard succeeds:
-
-- Akio remains visibly committed to Pale Lance or Pale Barrage,
-- a brief spectral Wraith manifests toward the incoming attack direction,
-- the Wraith performs a concise defensive blade motion without rotating Akio,
-- the ordinary parry spark, sound, and enemy response remain recognizable,
-- the manifestation disappears immediately after the deflection,
-- and the presentation must not imply a persistent or independently controllable companion.
-
-During Pale Procession:
-
-- two restrained spectral shades appear at stable left and right offsets,
-- their barrage lines remain visibly weaker than Akio's central stream,
-- the entire formation rotates together only in response to player input,
-- overlap does not produce extra hit flashes on one enemy,
-- the shades disappear immediately when the barrage ends,
-- and enemy telegraphs, deathblow readiness, and the central physical action remain readable.
-
-## Progression summary
-
-- **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
-- **Tier II — Wraith's Reach:** a full Blood meter begins a duration state that extends Veil Cut, Passing Arc, and Pale Lance and gives each qualifying attack one delayed spectral afterimage along its original player-directed geometry while all normal combat actions remain available.
-- **Tier III — Veiled Guard:** each Pale Lance use permits one manually timed spectral parry against an eligible attack from any direction without cancelling the charge, interrupting Pale Barrage, or changing the attack direction.
-- **Tier IV — Pale Procession:** Pale Barrage creates two reduced-power adjacent shade streams and allows slow player-directed steering within a limited frontal arc; streams never stack on one enemy.
-
-The progression is:
-
-> establish range and choose the correct committed action → gain focused multi-hit punishment through Pale Barrage → extend the sword kit into lingering frontal control through Wraith's Reach → preserve one skilled defensive answer through Veiled Guard → transform the defining barrage into a broad, steerable, non-stacking spectral formation
-
-## Production requirements
-
-The working package establishes requirements for:
-
-- Pale Barrage continuation and release feedback,
-- Wraith's Reach activation, active-state, and ending presentation,
-- extended Veil Cut, Passing Arc, and Pale Lance geometry and VFX,
-- delayed afterimage creation, timing, direction, line and arc reuse, and dissolution,
-- the one-echo Pale Barrage rule,
-- Veiled Guard availability, spent-state, success, and failed-timing feedback,
-- concurrent Held Attack and parry input handling during Pale Lance and Pale Barrage,
-- multidirectional spectral manifestation without rotating Akio or redirecting the attack,
-- ordinary parry, enemy-posture, posture-break, and interruption behavior during Veiled Guard,
-- Pale Procession shade spawning, stable offsets, adjacent line geometry, reduced-impact presentation, and dismissal,
-- slow direct steering within a limited frontal arc,
-- deterministic one-stream-per-enemy resolution with central-stream priority,
-- prevention of shade Blood generation, echo creation, and full-value proc multiplication,
-- Blood unavailable, building, ready, activated, active, consumed, and rebuilding HUD states,
-- clear duration-state, Veiled Guard, and Pale Procession communication without hiding enemy telegraphs,
-- Shrine Tier summaries and action-specific behavior changes,
-- and Wraith teaching and mastery-trial coverage.
-
-## Remaining Wraith work
-
-The qualitative Tier 0-IV package is complete for current scoping. Remaining work includes:
-
-- cross-roster comparison after Ronin's package is drafted,
-- limited direct Technique interactions if approved,
-- final animation, VFX, audio, HUD, Shrine, selection, and trial requirements,
-- implementation prototypes for concurrent Held/parry input and three-lane hit resolution,
-- and playable validation that Basic Attacks remain preferable during short or mobile exchanges.
-
-Exact timing, jab count, maximum Pale Barrage hold duration, Wraith's Reach duration, extended ranges and arc widths, echo delay, echo damage, posture pressure, interruption behavior, guard response, recovery, Blood values, proc weighting, Veiled Guard input buffering, spectral manifestation timing, Pale Procession lane spacing, shade values, steering speed, steering arc, per-beat collision resolution, and presentation values remain implementation and playtesting work.
+Exact timing, damage, posture, guard pressure, spectral hit-region size, Pale Barrage jab count and duration, recovery, Blood values, proc weighting, later-Tier behavior, and presentation values remain implementation and playtesting work.
