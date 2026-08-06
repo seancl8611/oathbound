@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-06
 topics:
   - project-identity
   - combat
@@ -94,7 +94,7 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 | Aspect | Weapon identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Four-hit fast close-range pressure, player-directed pursuit, sustained output, and nearby target transfer through aim and attack geometry | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Two-hit extended spectral reach and frontal control, with a precise line, broader sweep, focused Held commitment, and fixed corridor Blood Art | Slower cadence than Wolf, fewer ordinary options, restrained movement, direction dependence, close and lateral pressure, and vulnerability after a poor commitment |
+| Wraith | Two-hit extended spectral reach and frontal control, with a precise line, broader sweep, focused Held commitment, fixed corridor Blood Art, and Tier III penetration through layered ordinary formations | Slower cadence than Wolf, fewer ordinary options, restrained movement, direction dependence, close and lateral pressure, and vulnerability after a poor commitment |
 | Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, fixed attack lines, minimal movement, and slow posture recovery |
 
 These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain shared-system, Technique, and Prosthetic territory.
@@ -113,20 +113,22 @@ Wolf's current Tier package is approved through the present cross-roster audit:
 
 Wolf remains player-directed and punishable. Blood Hunt cannot home, turn, or correct its line; Fanged Guard does not provide general armor; and Apex Mauling does not cancel recovery, recursively trigger, or alter enemy attack timing.
 
-## Wraith progression approved through Tier II
+## Wraith progression approved through Tier III
 
-Wraith's Tier 0-II package is approved, while Tier III-IV remain under ordered revision:
+Wraith's Tier 0-III package is approved, while Tier IV remains under ordered revision:
 
 - **Tier 0:** Veil Cut is the precise low-commitment line, Passing Arc is the broader committed frontal sweep, Pale Lance is the longest focused punish, Ghostline Slash is controlled dash re-entry, and Veil Reversal is the strongest ordinary Wraith parry-to-posture conversion.
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed.
 - **Spectral Edge — Tier growth:** spectral-only contact from qualifying ordinary primary attacks gains modest posture and guard pressure that scales at each Embrace.
 - **Tier II — Wraith's Reach:** a full Blood meter commits a compact broad frontal opening sweep, one very long fixed corridor strike, and one delayed spectral repetition along the exact same geometry.
-- **Tier III candidate — Veiled Guard:** each Pale Lance use may permit one manually timed spectral parry without cancelling the charge or barrage.
+- **Tier III — Spectral Passage:** Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal continue through ordinary-enemy bodies across their remaining authored geometry. Additional ordinary targets receive reduced Health damage and meaningful posture and guard pressure.
 - **Tier IV candidate — Pale Procession:** Pale Barrage may gain two reduced-power adjacent shade streams and limited direct steering within a frontal arc.
 
 Wraith's Reach is an immediate authored action rather than a duration state. The opening sweep supplies guaranteed activation value; the corridor and echo reward placement and prediction. The Art cannot track, pursue, grant generic defense, generate Blood, or independently trigger Spectral Edge.
 
-The former moveset-wide reach increase and repeated afterimages on ordinary attacks are retired. The current remaining Wraith question is whether Veiled Guard and Pale Procession provide the right Tier III-IV breadth, boss value, and production efficiency without concentrating too much progression on Pale Lance and Pale Barrage.
+Spectral Passage adds no new input, reach, width, movement, tracking, defense, or same-enemy multiplication. Elites, bosses, protected heavy enemies, solid geometry, and authored blockers stop further passage. Secondary contacts generate no Blood and use restricted Spectral Edge and proc weighting.
+
+The former moveset-wide reach state, ordinary-attack echoes, and Veiled Guard candidate are retired. The current remaining Wraith question is Tier IV.
 
 ## Ronin fixed progression working package
 
@@ -200,7 +202,7 @@ Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Bindin
 
 The remaining production-level questions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. cross-roster Aspect package revision, currently Wraith Tier III-IV distribution,
+1. cross-roster Aspect package revision, currently Wraith Tier IV,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
