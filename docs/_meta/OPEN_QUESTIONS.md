@@ -41,7 +41,7 @@ The following decisions are settled and should not be reopened as top-level ques
 
 Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit.
 
-Wraith's Tier 0 foundation and Tier I package are now approved. Wraith's Tier II Blood Art and later Tier distribution remain under ordered revision.
+Wraith's Tier 0, Tier I, and Tier II package are approved. Wraith's Tier III-IV distribution remains under ordered revision.
 
 ### Wolf
 
@@ -56,7 +56,7 @@ Wraith's Tier 0 foundation and Tier I package are now approved. Wraith's Tier II
 - **Tier 0:** Veil Cut remains a precise low-commitment line; Passing Arc remains a broader, slower, more committed frontal-control follow-up. Pale Lance is the longest focused punish, Ghostline Slash is controlled dash re-entry, and Veil Reversal is Wraith's strongest ordinary parry-to-posture conversion.
 - **Tier I — Pale Barrage:** Pale Lance may continue into rapid stationary spectral jabs and may be released early to end the commitment.
 - **Spectral Edge — Tier growth:** qualifying primary attacks that connect through spectral-only reach gain modest enemy-posture and guard pressure; the reward scales slightly at every Embrace.
-- **Tier II candidate — Wraith's Reach:** temporary state with greater spectral reach and delayed attack afterimages.
+- **Tier II — Wraith's Reach:** a full meter commits a compact broad frontal sweep, one very long fixed corridor strike, and one delayed spectral repetition along the same corridor.
 - **Tier III candidate — Veiled Guard:** one manually timed spectral parry may preserve each Pale Lance or Pale Barrage use.
 - **Tier IV candidate — Pale Procession:** Pale Barrage gains two non-stacking adjacent shade streams and limited player-directed steering.
 
@@ -133,38 +133,53 @@ Approved Tier I package:
 
 **Authority:** `gameplay/WRAITH_ASPECT.md`
 
-## Question 4 — Wraith Blood Art form
+## Resolved Question 4 — Wraith Blood Art form
 
-Compare the current temporary-state **Wraith's Reach** against immediate-action or concise non-duration alternatives.
+Wraith Tier II is **Wraith's Reach**, replacing the former temporary reach-and-afterimage state with one immediate authored frontal action.
 
-Resolve:
+Approved package:
 
-- Should Wraith's Blood Art remain a temporary reach-and-afterimage state?
-- Does the Art need a guaranteed activation effect before any follow-up attack connects?
-- Could a spectral formation, authored corridor, broad frontal sequence, delayed line field, or another immediate control action fit better?
-- Should extended geometry and delayed afterimages remain together, be separated, or be removed?
-- Which Tier 0 actions should the Art affect?
-- How should Pale Barrage and Spectral Edge interact with the Art without multiplying repeated hits or posture pressure excessively?
-- How does the Art reinforce reach and frontal control without solving point-blank, lateral, and simultaneous pressure?
-- How does it remain distinct from Wolf's pursuit, Ronin's monumental slam and rupture, projectiles, tracking attacks, and autonomous companions?
-- What practical value does activation provide if the player cannot land the ideal follow-up?
-- What animation, VFX, audio, HUD, readability, and engineering burden does each candidate create?
+- a full Blood meter activates manually and is consumed when the Art commits,
+- the player selects one direction during a short readable preparation,
+- a compact broad frontal opening sweep supplies guaranteed activation value,
+- the sweep deals modest Health damage, strong enemy-posture and guard pressure, and briefly staggers eligible ordinary enemies,
+- elites and bosses receive modest posture pressure without automatic stagger,
+- the sweep is frontal rather than full-circle and grants no healing, posture clear, damage reduction, automatic defense, or interruption resistance,
+- Akio then performs one very long narrow-to-medium corridor strike along the fixed selected direction,
+- the corridor deals moderate Health damage and strong posture and guard pressure,
+- the strike uses little or no forward pursuit and cannot track, turn, home, retarget, or correct itself,
+- a delayed spectral Wraith repeats the exact same corridor geometry with lower Health damage and meaningful posture and guard pressure,
+- enemies may leave before the echo or enter the corridor before it resolves,
+- the Art's stages generate no Blood and do not independently trigger Spectral Edge,
+- the echo cannot recursively create another echo and receives restricted Technique, healing, and proc weighting,
+- ordinary vulnerability, interruption, commitment, and recovery remain active,
+- and a poor selected line may miss the priority target or leave Akio exposed outside the chosen front.
 
-**This is the current active question.**
+The former duration-wide reach increase and repeated afterimages on ordinary attacks are retired from fixed Wraith progression.
+
+The roster distinction is:
+
+> Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point
+
+**Authority:** `gameplay/WRAITH_ASPECT.md`
 
 ## Question 5 — Wraith Tier distribution after the Blood Art
 
-After Wraith's Blood Art is selected, reassess Tiers III and IV around it.
+Reassess Tiers III and IV around the approved immediate Wraith's Reach.
 
 Resolve:
 
-- Does too much of Wraith's progression still develop Pale Lance and Pale Barrage?
+- Does too much of Wraith's remaining progression still develop Pale Lance and Pale Barrage?
 - Should Tier III or IV provide additional value to Veil Cut, Passing Arc, Ghostline Slash, or Veil Reversal?
-- Is Veiled Guard sufficient as a complete Tier III?
+- Is Veiled Guard sufficient as a complete Tier III now that Wraith's Reach no longer buffs the ordinary moveset?
 - Is Pale Procession sufficiently broad and useful for Tier IV?
 - What Tier IV value remains useful in short exchanges, against mobile bosses, and when a full stationary barrage is unsafe?
+- Should either later Tier interact with Wraith's Reach, or should the Blood Art remain complete and self-contained at Tier II?
 - Which later Tier interactions with Spectral Edge are meaningful without becoming repeated-hit multiplication?
 - Does any Tier need one minor supporting benefit beyond Spectral Edge, or would that exceed the one-headline-plus-one-supporting-rule limit?
+- What animation, VFX, input, readability, and engineering burden remains justified after removing the duration state?
+
+**This is the current active question.**
 
 ## Question 6 — Per-Tier growth rules
 
@@ -294,7 +309,7 @@ Keep exact values and frame-level decisions in their owning files, including:
 - Corruption thresholds, Shrine frequency, route distribution, and support values,
 - Blood capacity, gain weighting, activation cost, duration, and anti-farming rules,
 - exact Wolf package values and collision rules,
-- exact Wraith Tier 0 timings, geometry, Spectral Edge qualification and scaling, Pale Barrage behavior, and later-Tier interactions,
+- exact Wraith Tier 0 timings, geometry, Spectral Edge qualification and scaling, Pale Barrage behavior, Wraith's Reach preparation, sweep, corridor, echo, interruption, recovery, and later-Tier interactions,
 - exact Ronin package values and any later growth rule,
 - enemy immunity and response tables,
 - Spirit costs and Prosthetic cooldowns,
