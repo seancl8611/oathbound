@@ -222,3 +222,13 @@ Wraith Tier III is Spectral Passage. Veil Cut, Passing Arc, Pale Lance's initial
 Spectral Passage adds no new input, reach, tracking, movement, defense, same-enemy multiplication, secondary Blood generation, or unrestricted Spectral Edge and proc multiplication. The former Veiled Guard parry-during-Pale-Lance candidate is retired. Wraith Tier IV is now the active Aspect question.
 
 **Authority:** `docs/gameplay/WRAITH_ASPECT.md`, `docs/gameplay/BLOOD_ASPECTS.md`, and `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-08-06 — Wraith Tier IV becomes Beyond the Veil
+
+Wraith Tier IV is **Beyond the Veil**. Pale Lance gains increased maximum spectral reach, Ghostline Slash gains increased spectral attack reach without changing the universal neutral dash, and valid deathblows may be initiated from greater distance through a clear frontal path using one straight authored spectral approach.
+
+Spectral Edge is revised so Veil Cut, Passing Arc, and Veil Reversal qualify from Tier I, while Pale Lance's initial thrust and Ghostline Slash unlock qualification only at Tier IV. Tier IV also adds Veilstride: a brief non-stacking movement-only bonus after a deathblow kills its target.
+
+The package does not add tracking, teleportation, a universal range increase, stronger neutral dash behavior, attack-speed growth, unrestricted repeated-hit Spectral Edge, or generic mobility. Pale Procession is retired because it repeated Spectral Passage's ordinary-group role and overconcentrated progression on Pale Barrage. Wraith's Tier 0-IV qualitative package is now complete for current scoping.
+
+**Authority:** `docs/gameplay/WRAITH_ASPECT.md`, `docs/gameplay/WRAITH_LATER_TIER_CANDIDATES.md`, and `docs/_meta/OPEN_QUESTIONS.md`
