@@ -105,21 +105,22 @@ Wolf's fixed path is approved through the present audit:
 - Tier III — Fanged Guard,
 - Tier IV — Apex Mauling.
 
-Ronin's fixed path is approved through the present audit:
+Wraith's fixed path is approved through the present audit:
+
+- Tier I — Pale Barrage,
+- Spectral Edge — deterministic spectral-only posture and guard-pressure growth at every Embrace; Veil Cut, Passing Arc, and Veil Reversal qualify from Tier I, while Pale Lance's initial thrust and Ghostline Slash unlock qualification at Tier IV,
+- Tier II — Wraith's Reach, an immediate frontal sweep, fixed corridor strike, and delayed repetition along the same geometry,
+- Tier III — Spectral Passage, allowing qualifying spectral attacks to continue through ordinary-enemy bodies across their remaining authored geometry with reduced secondary Health damage and meaningful posture and guard pressure,
+- Tier IV — Beyond the Veil, increasing Pale Lance and Ghostline Slash spectral reach, enabling extended clear-path deathblow initiation, and granting brief movement-only Veilstride after a deathblow kill.
+
+Ronin's current Tier I-IV path remains approved through the present audit while Tier 0 is reviewed:
 
 - Tier I — Steadfast Reprisal,
 - Tier II — Falling Mountain and Deep Rupture,
 - Tier III — Unbroken Resolve with Measured Weight and Perfect Weight,
 - Tier IV — Shattering Wake.
 
-Wraith is approved through Tier III:
-
-- Tier I — Pale Barrage,
-- Spectral Edge — deterministic spectral-only posture and guard-pressure growth at every Embrace,
-- Tier II — Wraith's Reach, an immediate frontal sweep, fixed corridor strike, and delayed repetition along the same geometry,
-- Tier III — Spectral Passage, allowing qualifying spectral attacks to continue through ordinary-enemy bodies across their remaining authored geometry with reduced secondary Health damage and meaningful posture and guard pressure.
-
-Pale Procession remains the provisional Tier IV candidate. The former Veiled Guard Tier III concept is retired. Wolf and Ronin may receive only focused follow-up changes during the final comparison rather than being treated as blank Tier packages.
+Pale Procession and the former Veiled Guard concept are retired from fixed Wraith progression. Wolf and Ronin may receive only focused follow-up changes during the final comparison rather than being treated as blank Tier packages.
 
 ## Technique development boundary
 
@@ -160,6 +161,8 @@ Wraith's approved Blood Art is the immediate Wraith's Reach. Full-meter activati
 The corridor and delayed echo reward placement and prediction: enemies may leave the line before the echo or enter it before resolution. Ordinary vulnerability, interruption, commitment, and recovery remain active. Exact source weighting, directional preparation, sweep geometry, corridor dimensions, echo delay, damage, posture, stagger, interruption, recovery, and proc weighting remain tuning work.
 
 Spectral Passage does not change Wraith's Blood Art. Secondary passage contacts generate no Blood and use restricted Spectral Edge, Technique, healing, status, and proc weighting.
+
+Beyond the Veil does not change Wraith's Blood Art or universal neutral dash. Pale Lance and Ghostline Slash gain authored Tier IV reach and Spectral Edge eligibility; extended deathblow initiation requires an already valid target and clear path; Veilstride is a brief movement-only post-kill benefit. Exact Tier IV reach, deathblow range and angle, pathing, blocker handling, and Veilstride values remain tuning work.
 
 Ronin's approved Blood Art is Falling Mountain. Full-meter activation clears a meaningful portion of accumulated player posture and powers a planted manually aimed slam, compact impact burst, and delayed Deep Rupture at the original point. Its brief planted channel may resist eligible ordinary-hit interruption while full incoming damage and posture remain active; posture break, lethal hits, perilous attacks, grabs, launches, and overriding knockdowns remain normal counters.
 
@@ -308,7 +311,7 @@ The results flow must clearly distinguish retained progress from burned-away run
 
 ## Current production dependencies
 
-1. Select Wraith's Tier IV capstone around the approved Tier 0-III package.
+1. Review Ronin's Tier 0 weapon foundation against Wolf and Wraith.
 2. Decide Ronin's small Tier-growth rule and audit narrow Tiers for any justified minor supporting benefit.
 3. Perform Ronin's follow-up audit and the final Wolf, Wraith, and Ronin comparison for power, accessibility, production cost, inherent tradeoffs, and Technique overlap across Technique-focused, hybrid, and Aspect-focused runs.
 4. Scope the launch run-build content catalog, including rarity, refinements, post-fill offers, and route competition.
