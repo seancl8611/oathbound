@@ -63,8 +63,8 @@ After Returning Blood awakens, launch scope includes:
 
 - one selected Blood Aspect as the immediate Tier 0 run foundation,
 - Wolf as a four-hit fast close-range pressure and pursuit kit,
-- Wraith as a two-hit extended spectral reach and frontal-control kit approved through Tier III,
-- Ronin as a three-hit slow heavy impact and stability kit,
+- Wraith as a two-hit extended spectral reach and frontal-control kit approved through Tier IV,
+- Ronin as a three-hit slow heavy impact and stability kit whose Tier 0 foundation remains under focused review,
 - one physical katana expressed through Aspect-specific Blood forms,
 - universal controls, locomotion, neutral dash, parry timing, enemy rules, and deathblow language,
 - player-directed attacks without corrective tracking, hidden homing, or post-input target correction,
@@ -110,14 +110,14 @@ This package defines high-level gameplay, VFX, animation, HUD, Shrine, and trial
 
 ## Wraith package at current scope
 
-Wraith's Tier 0-III package is approved, while Tier IV remains under ordered revision:
+Wraith's Tier 0-IV package is approved through the present cross-roster audit:
 
 - **Tier 0:** Veil Cut is the precise low-commitment line, Passing Arc is the broader committed frontal sweep, Pale Lance is the longest focused punish, Ghostline Slash is controlled dash re-entry, and Veil Reversal is Wraith's strongest ordinary parry-to-posture conversion.
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed to the selected direction.
-- **Spectral Edge — Tier growth:** qualifying ordinary primary attacks that connect through spectral-only geometry gain modest enemy-posture and guard pressure that scales at each Embrace.
+- **Spectral Edge — Tier growth:** eligible primary attacks that connect through spectral-only geometry gain modest enemy-posture and guard pressure that scales at each Embrace. Veil Cut, Passing Arc, and Veil Reversal qualify from Tier I; Pale Lance's initial thrust and Ghostline Slash unlock qualification at Tier IV.
 - **Tier II — Wraith's Reach:** a full Blood meter commits one compact broad frontal sweep, one very long narrow-to-medium fixed corridor strike, and one delayed spectral repetition along the exact same corridor.
 - **Tier III — Spectral Passage:** Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal continue through ordinary-enemy bodies across their remaining authored geometry. Additional ordinary targets receive reduced Health damage and meaningful posture and guard pressure.
-- **Tier IV candidate — Pale Procession:** Pale Barrage may gain two reduced-power adjacent shade streams and limited player-directed steering within a frontal arc, with one stream per enemy per beat.
+- **Tier IV — Beyond the Veil:** Pale Lance gains increased maximum spectral reach, Ghostline Slash gains increased spectral attack reach without changing the universal neutral dash, and valid deathblows may begin from greater distance through a clear frontal path. Pale Lance and Ghostline Slash unlock Spectral Edge eligibility, and a killing deathblow grants brief non-stacking movement-only Veilstride.
 
 Wraith's Reach follows these production-level boundaries:
 
@@ -134,7 +134,7 @@ Wraith's Reach follows these production-level boundaries:
 Spectral Passage follows these production-level boundaries:
 
 - the spectral portion continues only across the attack's remaining authored line or arc,
-- the attack gains no extra reach or width and cannot turn, track, home, retarget, bounce, or seek another enemy,
+- the attack cannot turn, track, home, retarget, bounce, or seek another enemy,
 - the first or primary target receives the normal authored result,
 - additional ordinary targets receive reduced Health damage and meaningful posture and guard pressure,
 - each qualifying action may strike each enemy at most once,
@@ -142,13 +142,23 @@ Spectral Passage follows these production-level boundaries:
 - Pale Barrage's repeated jabs and Wraith's Reach do not receive unrestricted passage chains,
 - and secondary passage contacts generate no Blood and use restricted Spectral Edge, Technique, healing, status, and proc weighting.
 
-The former duration-wide reach increase, repeated afterimages on ordinary attacks, and Veiled Guard candidate are retired from fixed Wraith progression.
+Beyond the Veil follows these production-level boundaries:
 
-Pale Procession remains a provisional production reference rather than a final lock. The next audit must determine whether it provides sufficient breadth, short-exchange and mobile-boss value, and production efficiency without overconcentrating the capstone on Pale Lance and Pale Barrage.
+- Pale Lance's longer reach remains narrow, fixed, interruptible, and severely punishable on a miss,
+- Ghostline Slash's attack reach increases while neutral-dash distance, startup, invulnerability, recovery, collision, and steering remain unchanged,
+- Pale Lance and Ghostline Slash gain Spectral Edge only through spectral-only contact at Tier IV,
+- an extended deathblow requires an already deathblow-ready target within a limited frontal angle and a clear path,
+- solid geometry, impassable hazards, intervening enemies, and authored blockers prevent initiation,
+- Akio travels along one straight visible spectral approach rather than teleporting, curving, tracking, or retargeting,
+- Veilstride triggers only when the deathblow kills the target,
+- Veilstride changes movement speed only and does not alter attack speed, dash behavior, recovery, tracking, or attack-bound movement,
+- and the package adds no universal range increase or generic mobility state.
+
+The former duration-wide reach increase, repeated afterimages on ordinary attacks, Veiled Guard, and Pale Procession are retired from fixed Wraith progression. Pale Procession creates no shade, steering, or three-lane production group.
 
 ## Ronin package at current scope
 
-Ronin's current Tier package is approved through the present cross-roster audit:
+Ronin's current Tier I-IV package remains approved while Tier 0 is the next ordered review:
 
 - **Tier I — Steadfast Reprisal:** a qualifying block creates a short optional window for a slow standalone Reprisal Cut.
 - **Tier II — Falling Mountain:** a full Blood meter clears meaningful accumulated player posture and powers a planted monumental slam, compact immediate impact burst, and delayed Deep Rupture at the original impact point.
@@ -157,11 +167,11 @@ Ronin's current Tier package is approved through the present cross-roster audit:
 
 Ronin remains slow, grounded, and directionally committed. Falling Mountain does not gain tracking, line correction, invulnerability, healing, or safe recovery. Unbroken Resolve keeps full incoming Health and posture damage and fails against posture break, lethal hits, perilous attacks, grabs, launches, side or rear pressure, and later hits. Shattering Wake cannot originate on a miss or multiply its damage back onto the primary target.
 
-Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Wraith is approved through Tier III and remains the active Tier IV revision target. All three still require a final cross-roster production lock after Wraith and the remaining growth-rule and minor-support questions are resolved.
+Wolf and Wraith have complete qualitative Tier 0-IV packages approved through the present audit. Ronin's Tier I-IV package remains approved, while its Tier 0 weapon foundation must be reviewed before exact complete-package production counts and the final cross-roster lock.
 
 Still open at production scope are:
 
-- Wraith's Tier IV capstone around the approved Tier 0-III package,
+- Ronin's Tier 0 weapon-foundation review,
 - Ronin's small Tier-growth rule,
 - minor supporting-benefit audit across narrow or conditional Tiers,
 - Ronin follow-up audit against the final standards,
@@ -170,7 +180,7 @@ Still open at production scope are:
 - exact animation, VFX, audio, UI, trial, and progression packages,
 - and the launch Technique, Prosthetic Technique, Relic, and consumable catalogs.
 
-Exact frame data, hitboxes, combat values, resource values, Wraith's Reach preparation, sweep, corridor, echo, interruption and recovery, Spectral Passage stopping classifications and secondary weighting, Pale Procession lane geometry and steering, Blood Hunt movement and collision, Apex Mauling geometry and slow, Ronin timing windows, and cancel windows remain implementation and playtesting work.
+Exact frame data, hitboxes, combat values, resource values, Wraith's Reach preparation, sweep, corridor, echo, interruption and recovery, Spectral Passage stopping classifications and secondary weighting, Beyond the Veil reach, deathblow pathing, and Veilstride values, Blood Hunt movement and collision, Apex Mauling geometry and slow, Ronin timing windows, and cancel windows remain implementation and playtesting work.
 
 Techniques remain the horizontal customization layer and an optional major run-investment route. Most Techniques are independently useful, use universal action tags, may receive at most one slotless refinement, and remain valuable after the loadout is full through refinement, replacement, rarity, reserve management, or specialization.
 
@@ -337,7 +347,7 @@ The exact Heart-route access control, repeat-clear rewards, records, cosmetics, 
 
 The remaining production-level decisions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. cross-roster Aspect package revision, currently Wraith Tier IV,
+1. cross-roster Aspect package revision, currently Ronin Tier 0,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,
