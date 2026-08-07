@@ -9,6 +9,19 @@ last_reviewed: 2026-08-06
 
 # Documentation Changelog
 
+## 2026-08-06 — Wraith Tier IV Beyond the Veil lock
+
+- Retired Pale Procession from fixed Wraith progression because it repeated Spectral Passage's ordinary-group role through width and overconcentrated progression on Pale Barrage.
+- Approved Beyond the Veil as Wraith Tier IV.
+- Increased Pale Lance's maximum spectral reach while preserving its narrow fixed line, preparation, interruption, and severe miss recovery.
+- Increased Ghostline Slash's spectral attack reach without changing the universal neutral dash.
+- Revised Spectral Edge so Tier I-III qualification belongs to Veil Cut, Passing Arc, and Veil Reversal; Pale Lance's initial thrust and Ghostline Slash unlock qualification only at Tier IV.
+- Added extended deathblow initiation through a valid clear frontal path using one authored straight spectral approach.
+- Added Veilstride, a brief non-stacking movement-only bonus after a deathblow kills its target.
+- Kept Pale Barrage's repeated jabs, Wraith's Reach, deathblow travel, and Veilstride outside independent Spectral Edge triggering.
+- Marked Wraith's Tier 0-IV package complete for current scoping and advanced the active Aspect review to Ronin Tier 0.
+- Preserved Pale Procession and other rejected Tier IV directions in supporting candidate history.
+
 ## 2026-08-06 — Wraith Tier III Spectral Passage lock
 
 - Replaced the former Veiled Guard Tier III candidate with Spectral Passage.
@@ -51,7 +64,7 @@ last_reviewed: 2026-08-06
 - Locked independently useful Techniques, natural shared-combat-verb synergy, and a maximum of one slotless refinement per Technique.
 - Added Prosthetic Techniques to the normal Technique pool for the currently equipped tool.
 - Defined replacement, reserve movement, overwrite warning, decline, reroll, rest-room swapping, and pause-screen behavior.
-- Added a previewed room-reward framework for combat, Shrine, rest, shop, treasure, miniboss, regional boss, and final-boss flow.
+- Added a previewed room-reward framework for combat, Shrine, rest, shop, treasure/miniboss, regional boss, and final-boss flow.
 - Set a provisional successful-run target of six to eight Technique-related decisions while leaving exact room counts and probabilities open.
 - Added authoritative Technique gameplay, UI, and VFX documents.
 - Removed five stance VFX families from Milestone 4 and replaced them with reusable Technique card/build UI, route markers, and only necessary bespoke Technique combat cues.
