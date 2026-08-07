@@ -42,7 +42,7 @@ Do not substitute an abstract behavior rule or player-facing drawback category f
 | Aspect | Identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Fast close-range pressure and pursuit | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Extended spectral reach, frontal control, and formation penetration | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, fixed direction, close and lateral pressure, and vulnerability after a poor line commitment |
+| Wraith | Extended spectral reach, frontal control, formation penetration, and distant engagement | Slower cadence than Wolf, fewer ordinary attack options, restrained movement, fixed direction, close and lateral pressure, and vulnerability after a poor line commitment |
 | Ronin | Slow heavy impact and defensive stability | Slow startup, severe recovery, minimal attack movement, and slow posture recovery |
 
 The launch roster is final at the current scoping stage. Mobility, evasion, ranged utility, and broader crowd control remain shared-system, Technique, and Prosthetic territory rather than requiring a fourth Aspect.
@@ -75,7 +75,7 @@ Wolf, Wraith, and Ronin share:
 - Prosthetic controls,
 - and combat interface language.
 
-No Aspect receives a weaker or stronger neutral dash.
+No Aspect receives a weaker or stronger neutral dash. Beyond the Veil increases Ghostline Slash's attack reach but does not modify Wraith's neutral dash.
 
 ## Player-directed attack guidance
 
@@ -91,7 +91,7 @@ A sustained authored attack may permit limited direct player steering when expli
 - preserve the attack's commitment and movement limits,
 - and remain readable against enemy telegraphs.
 
-The current Pale Procession draft demonstrates the allowed boundary: a three-lane formation may rotate slowly within a limited frontal arc, but the shades do not select targets and the formation remains stationary at Akio's origin. Its final ownership and form remain subject to the Wraith Tier IV review.
+No current fixed Wraith Tier requires steering. The retired Pale Procession candidate used limited steering as an exploration boundary, but it is not production scope.
 
 Distinct target handling should otherwise come from:
 
@@ -110,6 +110,14 @@ Wraith's approved Spectral Passage is the ordinary-attack example:
 - elites, bosses, heavy stopping enemies, and solid geometry end further passage,
 - each enemy may be struck at most once by the action,
 - and the Tier adds no tracking, extra reach, movement, bounce, or same-enemy multiplication.
+
+A signature execution may begin from greater distance only when the target already satisfies the shared deathblow rules and the authored path is valid. Wraith's Beyond the Veil is the approved example:
+
+- the target must already be deathblow-ready,
+- the target must lie within the approved frontal angle and distance,
+- the path must be clear of geometry, hazards, intervening enemies, and authored blockers,
+- Akio uses one straight authored spectral approach,
+- and the movement does not curve, retarget, become a neutral dash, or create general traversal.
 
 ## Defensive-profile guidance
 
@@ -165,6 +173,8 @@ A specific signature move may cross an enemy along its original line when that b
 
 A spacing identity should emerge from reach, geometry, player-directed movement, commitment, and recovery.
 
+A short supporting movement reward may follow a completed authored event when it reinforces the kit without rewriting neutral controls. Wraith's Veilstride is the approved example: a deathblow kill grants brief movement speed to leave the execution position or rebuild spacing, but it does not increase attack speed, dash distance, invulnerability, recovery, or attack-bound movement.
+
 ## Tier progression guidance
 
 Aspect Tier progression is a fixed optional investment route.
@@ -180,7 +190,14 @@ The purpose of preserving tradeoffs is to keep the weapon identity and player ou
 
 A Tier III should provide a clear built-in specialization rather than requiring unnecessary operational complexity. Spectral Passage deepens Wraith's existing lines and arcs through authored collision behavior without adding a new command or generic stat bonus.
 
-A Tier IV may broaden a signature action without multiplying single-target output. The current Pale Procession draft uses two reduced-power adjacent barrage lanes with one stream per enemy per beat; this remains a valid comparison principle even if Wraith's final Tier IV changes.
+A Tier IV should create a recognizable final capability rather than merely adjust hidden timing or repeat the previous Tier's encounter role. Beyond the Veil follows that standard:
+
+- it expands Pale Lance's and Ghostline Slash's authored spectral opportunity,
+- it unlocks their Spectral Edge eligibility only at Tier IV,
+- it turns Wraith's posture pressure into a unique extended-range deathblow opportunity,
+- and it supplies a small post-kill repositioning reward without becoming generic combat mobility.
+
+Pale Procession was rejected because it repeated Spectral Passage's ordinary-group problem category through width after Tier III had already solved it through depth.
 
 ## Blood Art differentiation
 
@@ -241,7 +258,7 @@ A kit is ready when:
 - Tier 0-I Technique-focused builds remain viable,
 - and it is distinguishable from the other two during the first combat room.
 
-Wolf and Ronin meet the current qualitative Tier 0 and Tier I-IV working-package standards. Wraith's Tier 0-III package is approved; its Tier IV capstone remains under review before final cross-roster approval.
+Wolf and Wraith meet the current qualitative Tier 0-IV working-package standards. Ronin's current Tier I-IV package remains approved, and its Tier 0 foundation is the next ordered review before final cross-roster approval.
 
 ## Cross-roster comparison
 
@@ -257,6 +274,7 @@ Wolf and Ronin meet the current qualitative Tier 0 and Tier I-IV working-package
 | Held purpose | Pursuit | Focused reach and stationary multi-hit commitment | Power |
 | Blood Art | Long pursuit through the battlefield | Immediate sweep, fixed corridor, and delayed echo | Planted slam and delayed rupture |
 | Tier III | Preserve connected aggression through one frontal block | Penetrate layered ordinary formations through existing spectral geometry | Preserve heavy commitments or earn clean posture payoff |
+| Tier IV | Maul major contacts and briefly slow caught prey | Engage and execute from greater spectral distance, then reclaim spacing after a killing deathblow | Drive posture force through a directly struck target |
 | Primary risk | Overextension | Poor positioning, collapsed spacing, lateral pressure, and commitment to the wrong line | Missed heavy commitment and slow posture recovery |
 
 ## Technique compatibility
@@ -275,4 +293,4 @@ Neither additional Aspect belongs to current launch paper-design or production s
 
 ## Next design dependency
 
-Reassess Wraith's Tier IV capstone around the approved Spectral Passage Tier III. Determine whether Pale Procession remains worthwhile, whether a second Pale Barrage upgrade is too narrow, whether the capstone should support the broader ordinary kit or Wraith's Reach, and whether the animation, VFX, input, collision, and teaching burden is justified.
+Review Ronin's Tier 0 weapon foundation before selecting its repeated Tier-growth rule or conducting the final cross-roster lock. Confirm that Severing Cut, Crushing Cross, Bloodfall, Stillness Draw, Breaching Slash, Answering Steel, and the strongest-guard/slow-posture-recovery profile create a complete and readable Tier 0 kit.
