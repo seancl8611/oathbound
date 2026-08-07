@@ -94,7 +94,7 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 | Aspect | Weapon identity | Inherent tradeoffs |
 |---|---|---|
 | Wolf | Four-hit fast close-range pressure, player-directed pursuit, sustained output, and nearby target transfer through aim and attack geometry | Short reach, unsafe misses, and dangerous positioning after poorly aimed pursuit |
-| Wraith | Two-hit extended spectral reach and frontal control, with a precise line, broader sweep, focused Held commitment, fixed corridor Blood Art, and Tier III penetration through layered ordinary formations | Slower cadence than Wolf, fewer ordinary options, restrained movement, direction dependence, close and lateral pressure, and vulnerability after a poor commitment |
+| Wraith | Two-hit extended spectral reach and frontal control, with a precise line, broader sweep, focused Held commitment, fixed corridor Blood Art, Tier III penetration through layered ordinary formations, and Tier IV distant engagement and execution | Slower cadence than Wolf, fewer ordinary options, restrained movement, direction dependence, close and lateral pressure, and vulnerability after a poor commitment |
 | Ronin | Three-hit slow heavy swordplay, high per-hit damage, posture impact, stagger, and stable guarding | Slow startup, severe recovery, fixed attack lines, minimal movement, and slow posture recovery |
 
 These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain shared-system, Technique, and Prosthetic territory.
@@ -113,26 +113,28 @@ Wolf's current Tier package is approved through the present cross-roster audit:
 
 Wolf remains player-directed and punishable. Blood Hunt cannot home, turn, or correct its line; Fanged Guard does not provide general armor; and Apex Mauling does not cancel recovery, recursively trigger, or alter enemy attack timing.
 
-## Wraith progression approved through Tier III
+## Wraith fixed progression
 
-Wraith's Tier 0-III package is approved, while Tier IV remains under ordered revision:
+Wraith's Tier 0-IV package is approved through the present cross-roster audit:
 
 - **Tier 0:** Veil Cut is the precise low-commitment line, Passing Arc is the broader committed frontal sweep, Pale Lance is the longest focused punish, Ghostline Slash is controlled dash re-entry, and Veil Reversal is the strongest ordinary Wraith parry-to-posture conversion.
 - **Tier I — Pale Barrage:** continuing Pale Lance produces rapid lower-impact spectral jabs while Akio remains stationary and committed.
-- **Spectral Edge — Tier growth:** spectral-only contact from qualifying ordinary primary attacks gains modest posture and guard pressure that scales at each Embrace.
+- **Spectral Edge — Tier growth:** spectral-only contact from eligible ordinary primary attacks gains modest posture and guard pressure that scales at each Embrace. Veil Cut, Passing Arc, and Veil Reversal qualify from Tier I; Pale Lance's initial thrust and Ghostline Slash unlock qualification at Tier IV.
 - **Tier II — Wraith's Reach:** a full Blood meter commits a compact broad frontal opening sweep, one very long fixed corridor strike, and one delayed spectral repetition along the exact same geometry.
 - **Tier III — Spectral Passage:** Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal continue through ordinary-enemy bodies across their remaining authored geometry. Additional ordinary targets receive reduced Health damage and meaningful posture and guard pressure.
-- **Tier IV candidate — Pale Procession:** Pale Barrage may gain two reduced-power adjacent shade streams and limited direct steering within a frontal arc.
+- **Tier IV — Beyond the Veil:** Pale Lance gains increased maximum spectral reach, Ghostline Slash gains increased spectral attack reach without changing the universal neutral dash, and valid deathblows may be initiated from greater distance through a clear frontal path. Pale Lance and Ghostline Slash unlock Spectral Edge eligibility, and a killing deathblow grants brief movement-only Veilstride.
 
 Wraith's Reach is an immediate authored action rather than a duration state. The opening sweep supplies guaranteed activation value; the corridor and echo reward placement and prediction. The Art cannot track, pursue, grant generic defense, generate Blood, or independently trigger Spectral Edge.
 
-Spectral Passage adds no new input, reach, width, movement, tracking, defense, or same-enemy multiplication. Elites, bosses, protected heavy enemies, solid geometry, and authored blockers stop further passage. Secondary contacts generate no Blood and use restricted Spectral Edge and proc weighting.
+Spectral Passage adds no new input, movement, tracking, defense, or same-enemy multiplication. Elites, bosses, protected heavy enemies, solid geometry, and authored blockers stop further passage. Secondary contacts generate no Blood and use restricted Spectral Edge and proc weighting.
 
-The former moveset-wide reach state, ordinary-attack echoes, and Veiled Guard candidate are retired. The current remaining Wraith question is Tier IV.
+Beyond the Veil does not grant teleportation, a stronger neutral dash, a universal range increase, attack-speed growth, or generic mobility. Extended deathblows require an already valid target and clear path; Veilstride follows only a deathblow kill.
+
+The former moveset-wide reach state, ordinary-attack echoes, Veiled Guard, and Pale Procession candidates are retired.
 
 ## Ronin fixed progression working package
 
-Ronin's current Tier package is approved through the present cross-roster audit:
+Ronin's current Tier I-IV package is approved while its Tier 0 weapon foundation is the next ordered review:
 
 - **Tier I — Steadfast Reprisal:** a qualifying block creates a short optional window for a slow standalone Reprisal Cut.
 - **Tier II — Falling Mountain:** full-meter activation clears meaningful accumulated player posture and powers a planted monumental slam, compact impact burst, and delayed Deep Rupture at the original impact point.
@@ -202,7 +204,7 @@ Mandatory clear-to-clear escalation is concentrated in the Heart chamber, Bindin
 
 The remaining production-level questions are maintained only in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. cross-roster Aspect package revision, currently Wraith Tier IV,
+1. cross-roster Aspect package revision, currently Ronin Tier 0,
 2. launch run-build content catalog,
 3. persistent progression, onboarding, and trial package,
 4. narrative delivery and authored-content package,

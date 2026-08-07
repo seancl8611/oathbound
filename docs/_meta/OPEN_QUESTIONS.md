@@ -31,7 +31,6 @@ The following decisions are settled and should not be reopened as top-level ques
 - Mandatory encounters must not assume a particular Aspect Tier or Blood Art.
 - Blood is run-only, unavailable before Tier II, stored between rooms until spent, and reset after the run.
 - Blood Arts normally require a full meter, activate manually, consume the stored Blood, and must provide practical value without requiring perfect follow-up play.
-- Blood Arts are not required to share one form. Immediate actions, temporary states, and other concise authored expressions are all valid when they fit the Aspect.
 - Every Tier must be clearly net-positive while preserving the Aspect's inherent limitations through the upgraded action itself.
 - A Tier may contain one headline benefit and at most one minor supporting rule.
 - A supporting rule must reinforce the Aspect's own play pattern rather than become generic stat inflation or erase Technique space.
@@ -39,9 +38,9 @@ The following decisions are settled and should not be reopened as top-level ques
 
 ## Current working Aspect packages
 
-Wolf and Ronin have complete qualitative Tier I-IV packages approved through the present audit.
+Wolf and Wraith have complete qualitative Tier 0-IV packages approved through the present audit.
 
-Wraith's Tier 0-III package is approved. Wraith's Tier IV capstone remains under ordered revision.
+Ronin's current Tier I-IV package remains approved, but its Tier 0 weapon foundation is the next ordered review before its growth rule and final roster comparison.
 
 ### Wolf
 
@@ -53,15 +52,16 @@ Wraith's Tier 0-III package is approved. Wraith's Tier IV capstone remains under
 
 ### Wraith
 
-- **Tier 0:** Veil Cut remains a precise low-commitment line; Passing Arc remains a broader, slower, more committed frontal-control follow-up. Pale Lance is the longest focused punish, Ghostline Slash is controlled dash re-entry, and Veil Reversal is Wraith's strongest ordinary parry-to-posture conversion.
+- **Tier 0:** Veil Cut is a precise low-commitment line; Passing Arc is a broader, slower, more committed frontal-control follow-up. Pale Lance is the longest focused punish, Ghostline Slash is controlled dash re-entry, and Veil Reversal is Wraith's strongest ordinary parry-to-posture conversion.
 - **Tier I — Pale Barrage:** Pale Lance may continue into rapid stationary spectral jabs and may be released early to end the commitment.
-- **Spectral Edge — Tier growth:** qualifying primary attacks that connect through spectral-only reach gain modest enemy-posture and guard pressure; the reward scales slightly at every Embrace.
+- **Spectral Edge — Tier growth:** qualifying spectral-only primary contact gains modest enemy-posture and guard pressure and scales slightly at every Embrace. Veil Cut, Passing Arc, and Veil Reversal qualify from Tier I; Pale Lance's initial thrust and Ghostline Slash unlock qualification at Tier IV.
 - **Tier II — Wraith's Reach:** a full meter commits a compact broad frontal sweep, one very long fixed corridor strike, and one delayed spectral repetition along the same corridor.
 - **Tier III — Spectral Passage:** qualifying ordinary spectral attacks continue through ordinary-enemy bodies across their remaining authored geometry, dealing reduced Health damage and meaningful posture and guard pressure to additional ordinary targets.
-- **Tier IV candidate — Pale Procession:** Pale Barrage gains two non-stacking adjacent shade streams and limited player-directed steering.
+- **Tier IV — Beyond the Veil:** Pale Lance and Ghostline Slash gain increased spectral reach, unlock their Spectral Edge eligibility, and valid deathblows may begin from greater clear-path frontal distance. A deathblow kill grants brief movement-only Veilstride.
 
 ### Ronin
 
+- **Tier 0:** Severing Cut → Crushing Cross → Bloodfall, Stillness Draw, Breaching Slash, Answering Steel, strongest guard profile, and slow player-posture recovery.
 - **Tier I — Steadfast Reprisal:** a qualifying block may create an optional Reprisal Cut.
 - **Tier II — Falling Mountain:** activation clears meaningful accumulated posture and powers a planted monumental slam, immediate impact burst, and delayed Deep Rupture.
 - **Tier III — Unbroken Resolve:** selected commitments may survive one costly eligible hit, while disciplined clean attacks may create Measured Weight and Perfect Weight.
@@ -118,15 +118,14 @@ Approved Tier 0 roles:
 - **Ghostline Slash:** controlled dash re-entry with quick defensive return.
 - **Veil Reversal:** extended parry counter with Wraith's strongest ordinary parry-to-posture conversion.
 
-The kit does not use an artificial close-range damage dead zone. Point-blank pressure remains a weakness because Wraith has deliberate frontal commitments, restrained attack movement, and fewer ordinary options.
-
 Approved Tier I package:
 
 - **Pale Barrage** remains the headline benefit.
 - Continuing to hold after Pale Lance produces rapid lower-impact spectral jabs along the committed line.
 - Akio remains stationary, the barrage may be released early, and the jabs do not track or retarget.
 - **Spectral Edge** is the supporting Tier-growth rule.
-- Qualifying primary attacks that connect through spectral-only geometry gain modest enemy-posture and guard pressure.
+- Veil Cut, Passing Arc, and Veil Reversal qualify from Tier I when contact occurs through spectral-only geometry.
+- Pale Lance and Ghostline Slash do not qualify until Tier IV.
 - The reward scales slightly with every Embrace from Tier I through Tier IV.
 - It adds no Health damage, tracking, movement, reach, interruption resistance, or separate meter.
 - Pale Barrage jabs and later secondary hits do not each receive unrestricted full-value Spectral Edge bonuses.
@@ -142,13 +141,8 @@ Approved package:
 - a full Blood meter activates manually and is consumed when the Art commits,
 - the player selects one direction during a short readable preparation,
 - a compact broad frontal opening sweep supplies guaranteed activation value,
-- the sweep deals modest Health damage, strong enemy-posture and guard pressure, and briefly staggers eligible ordinary enemies,
-- elites and bosses receive modest posture pressure without automatic stagger,
-- the sweep is frontal rather than full-circle and grants no healing, posture clear, damage reduction, automatic defense, or interruption resistance,
 - Akio then performs one very long narrow-to-medium corridor strike along the fixed selected direction,
-- the corridor deals moderate Health damage and strong posture and guard pressure,
-- the strike uses little or no forward pursuit and cannot track, turn, home, retarget, or correct itself,
-- a delayed spectral Wraith repeats the exact same corridor geometry with lower Health damage and meaningful posture and guard pressure,
+- a delayed spectral Wraith repeats the exact same corridor geometry,
 - enemies may leave before the echo or enter the corridor before it resolves,
 - the Art's stages generate no Blood and do not independently trigger Spectral Edge,
 - the echo cannot recursively create another echo and receives restricted Technique, healing, and proc weighting,
@@ -156,10 +150,6 @@ Approved package:
 - and a poor selected line may miss the priority target or leave Akio exposed outside the chosen front.
 
 The former duration-wide reach increase and repeated afterimages on ordinary attacks are retired from fixed Wraith progression.
-
-The roster distinction is:
-
-> Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point
 
 **Authority:** `gameplay/WRAITH_ASPECT.md`
 
@@ -176,48 +166,71 @@ Approved package:
 - each qualifying action may strike each enemy at most once,
 - elites, bosses, protected heavy enemies, solid geometry, and other authored stopping bodies end further passage after valid contact,
 - Pale Barrage's repeated jabs do not each receive unrestricted full passage behavior,
-- Wraith's Reach remains self-contained and does not gain extra Tier III hits or passage chains,
-- the Tier adds no new input, state, meter, reach, width, movement, tracking, correction, defense, or same-enemy damage multiplication,
+- Wraith's Reach remains self-contained,
 - secondary passage contacts generate no Blood and use restricted Spectral Edge, Technique, healing, status, and proc weighting,
-- and Tier III advances Spectral Edge by its normal third step.
-
-The former Veiled Guard parry-during-Pale-Lance concept is retired from fixed progression.
+- and the Tier adds no new input, state, meter, reach, width, movement, tracking, correction, defense, or same-enemy damage multiplication.
 
 **Authority:** `gameplay/WRAITH_ASPECT.md`
 
-## Question 6 — Wraith Tier IV capstone
+## Resolved Question 6 — Wraith Tier IV capstone
 
-Reassess **Pale Procession** against the approved Tier 0-III package.
+Wraith Tier IV is **Beyond the Veil**. The former Pale Procession candidate is retired.
+
+Approved package:
+
+- Pale Lance gains increased maximum spectral reach while retaining its narrow fixed line, preparation, interruption behavior, and severe miss recovery,
+- Pale Barrage may use the approved Tier IV maximum line, but its repeated jabs do not independently receive full Spectral Edge triggers,
+- Ghostline Slash gains increased spectral attack reach without changing the universal neutral dash,
+- Pale Lance's initial thrust and Ghostline Slash become Spectral Edge-eligible at Tier IV,
+- valid deathblows may be initiated from greater distance when the target is already deathblow-ready and a clear frontal path exists,
+- the extended approach is one straight authored spectral movement rather than a teleport, tracking pursuit, or general traversal action,
+- blockers, hazards, intervening enemies, and invalid encounter conditions prevent the extended initiation,
+- a deathblow kill grants brief non-stacking movement-only **Veilstride**,
+- Veilstride does not alter attack speed, dash distance, dash invulnerability, recovery, or attack-bound movement,
+- Tier IV advances Spectral Edge by its normal fourth step,
+- and the package preserves point-blank pressure, lateral collapse, fixed direction, interruption, and miss punishment.
+
+Pale Procession is retired because Spectral Passage already provides ordinary group value through formation depth, while Pale Procession repeated the same problem category through width and overconcentrated progression on Pale Barrage.
+
+**Authority:** `gameplay/WRAITH_ASPECT.md`
+
+## Question 7 — Ronin Tier 0 weapon foundation
+
+Review Ronin's current Tier 0 before changing its growth rule or later Tiers.
 
 Resolve:
 
-- Is Pale Procession sufficiently broad and useful for a final Embrace?
-- Does a Pale Barrage-focused capstone overconcentrate Wraith's progression on the Held Attack after Spectral Passage successfully broadened Tier III?
-- What Tier IV value remains useful in short exchanges, against mobile bosses, and when a full stationary barrage is unsafe?
-- Should Tier IV improve Pale Barrage, the full ordinary kit, Wraith's Reach, or a carefully limited combination?
-- How should Tier IV interact with Spectral Passage without producing excessive multi-target, repeated-hit, Blood, healing, or proc multiplication?
-- How should Tier IV interact with Spectral Edge without turning Wraith into unrestricted posture damage?
-- Can the capstone feel visually and mechanically transformative while preserving fixed direction, restrained movement, point-blank pressure, lateral weakness, and punishable recovery?
-- What animation, VFX, input, readability, HUD, teaching, and engineering burden is justified for an occasional capstone?
+- Does **Severing Cut → Crushing Cross → Bloodfall** create a satisfying three-step progression from accessible heavy contact into major commitment?
+- Are the three Basic attacks sufficiently distinct in startup, reach, geometry, movement, Health damage, posture damage, stagger, guard pressure, and recovery?
+- Is Severing Cut practical during short openings, or does Ronin become inaccessible before later progression?
+- Does Crushing Cross provide a meaningful middle commitment rather than feeling like filler between the opener and Bloodfall?
+- Is Bloodfall powerful enough to justify its startup and recovery without becoming the only Basic attack that matters?
+- Does **Stillness Draw** have a clear Held Attack role distinct from Bloodfall and Falling Mountain?
+- Does **Breaching Slash** provide appropriate dash re-entry while preserving Ronin's low mobility?
+- Does **Answering Steel** provide a satisfying parry-counter identity without making ordinary defense the dominant way to play?
+- Is Ronin's strongest guard profile with slow player-posture recovery perceptible, fair, and distinct from later Unbroken Resolve?
+- How does Tier 0 perform against ordinary groups, mobile elites, bosses, short openings, ranged pressure, and missed commitments?
+- Does Tier 0 preserve clear roster separation from Wolf's pursuit and Wraith's extended frontal control?
+- Are the required animations, impact responses, VFX, audio, and teaching burden justified and readable?
 
 **This is the current active question.**
 
-## Question 7 — Per-Tier growth rules
+## Question 8 — Ronin per-Tier growth rule
 
 Current state:
 
 - **Wolf is resolved:** Feral Momentum scales later connected Basic-sequence positions.
-- **Wraith is resolved:** Spectral Edge scales posture and guard pressure from spectral-only primary contact.
+- **Wraith is resolved:** Spectral Edge scales posture and guard pressure from qualifying spectral-only primary contact.
 - **Ronin remains unresolved:** modest maximum-Health growth is one candidate.
 
-Resolve for Ronin:
+Resolve after the Tier 0 audit:
 
 - Should Ronin use one repeated growth track, selected Tier-specific supporting rules, or no persistent growth rule?
 - Is maximum Health perceptible and enjoyable without making Ronin's guard and interruption-resistance tools generally optimal?
 - Would posture stability, heavy-hit consistency, or another authored combat verb fit better?
 - Should generic Health, damage, posture, or Blood-generation increases remain rare because Techniques and permanent progression also need meaningful space?
 
-## Question 8 — Minor supporting benefits by Tier
+## Question 9 — Minor supporting benefits by Tier
 
 Audit every Tier that contains only one narrow or highly conditional mechanic.
 
@@ -232,21 +245,21 @@ For each Tier, determine:
 
 Do not add filler benefits only to equalize feature counts.
 
-## Question 9 — Ronin follow-up audit
+## Question 10 — Ronin follow-up audit
 
-Ronin does not currently require a new Blood Art concept, but it must be checked against the standards approved for Wolf and Wraith.
+After the Tier 0 and growth-rule reviews, recheck Ronin against the standards approved for Wolf and Wraith.
 
 Resolve:
 
-- Does Ronin receive a small Tier-growth structure?
-- Is Tier III's Measured Weight and Perfect Weight state readable without excessive timer management?
-- Is Shattering Wake appropriately comparable to revised Wolf and Wraith Tier IV benefits?
+- Does Tier III's Measured Weight and Perfect Weight state remain readable without excessive timer management?
+- Is Shattering Wake appropriately comparable to Apex Mauling and Beyond the Veil?
 - Does Falling Mountain remain powerful without trivializing elite and boss posture systems?
-- Does any Ronin Tier need simplification after the full roster is compared?
+- Does any Ronin Tier need simplification after the full package is compared?
+- Does the final Tier distribution address Ronin's own commitment and recovery weaknesses without erasing them?
 
-## Question 10 — Final cross-roster lock
+## Question 11 — Final cross-roster lock
 
-After Questions 1-9 are resolved, compare the completed packages for:
+After Questions 1-10 are resolved, compare the completed packages for:
 
 - immediate feel at Tier 0,
 - practical payoff and accessibility at every Embrace,
@@ -325,16 +338,10 @@ Additional difficulty settings, challenge modifiers, enemy variants, and room va
 
 Keep exact values and frame-level decisions in their owning files, including:
 
-- frame data, hitboxes, cancel windows, attack travel, damage, posture, stagger, and recovery,
-- neutral movement and dash values,
-- Corruption thresholds, Shrine frequency, route distribution, and support values,
-- Blood capacity, gain weighting, activation cost, duration, and anti-farming rules,
-- exact Wolf package values and collision rules,
-- exact Wraith Tier 0 timings, geometry, Spectral Edge qualification and scaling, Pale Barrage behavior, Wraith's Reach preparation, sweep, corridor, echo, Spectral Passage stopping classifications and secondary weighting, interruption, recovery, and Tier IV interactions,
-- exact Ronin package values and any later growth rule,
-- enemy immunity and response tables,
-- Spirit costs and Prosthetic cooldowns,
-- room and encounter counts,
-- reward probabilities, prices, rarity weights, and rerolls,
+- damage, posture, guard pressure, stagger, reach, movement, recovery, and interruption timing,
+- hitboxes, collision, targeting, deathblow pathing, and blocker classifications,
+- Blood capacity, gain values, proc weighting, and anti-farming rules,
+- Spectral Edge scaling, Tier IV reach increases, extended deathblow range and angle, and Veilstride duration,
+- room counts, route probabilities, reward probabilities, prices, rarity weights, and rerolls,
 - exact permanent-upgrade percentages,
 - and final animation frames, VFX density, audio timing, or HUD layout.

@@ -50,7 +50,22 @@ Wolf's approved current package establishes these high-level production needs:
 - Apex Mauling consolidated claw package, compact outer coverage, posture and guard recoil, and movement-only slow,
 - Wolf Blood building, ready, activated, resolving, consumed, and rebuilding states.
 
-Ronin's approved current package establishes these high-level production needs:
+Wraith's approved Tier 0-IV package establishes these high-level production needs:
+
+- distinct Veil Cut, Passing Arc, Pale Lance, Ghostline Slash, and Veil Reversal geometry and impact treatment,
+- Pale Barrage continuation, stationary commitment, early release, interruption, and recovery,
+- Spectral Edge physical-range versus eligible spectral-only contact feedback, Tier escalation, and the Tier IV Pale Lance/Ghostline eligibility unlock,
+- Wraith's Reach full-meter activation, short directional preparation, compact broad opening sweep, very long fixed corridor strike, one weaker delayed same-geometry repetition, and ending recovery,
+- Spectral Passage continuous spectral geometry through ordinary-enemy bodies, dominant primary impact, reduced secondary impacts, and visible stopping against elites, bosses, heavy enemies, solid geometry, and authored blockers,
+- Beyond the Veil longer Pale Lance and Ghostline Slash attack geometry without neutral-dash changes,
+- greater-distance deathblow prompt, invalid-path suppression, clear-path and blocker validation, and one straight visible spectral approach,
+- Veilstride brief movement-only activation and expiration after a killing deathblow,
+- prevention of tracking, teleportation, universal range increase, stronger neutral-dash presentation, repeated-jab Spectral Edge, secondary Blood, and unrestricted proc presentation,
+- Wraith Blood building, ready, activated, resolving, consumed, and rebuilding states.
+
+Beyond the Veil should reuse Pale Lance, Ghostline Slash, shared deathblow, and locomotion presentation wherever practical. Pale Procession is retired and creates no shade, steering, or three-lane production package.
+
+Ronin's approved current Tier I-IV package establishes these high-level production needs:
 
 - Steadfast Reprisal qualifying-block opportunity and slow standalone counter,
 - Falling Mountain activation, posture relief, planted slam, compact impact burst, fixed-point Deep Rupture, and recovery,
@@ -58,19 +73,9 @@ Ronin's approved current package establishes these high-level production needs:
 - Shattering Wake contact-origin transfer through the primary target,
 - Ronin Blood building, ready, activated, resolving, consumed, and rebuilding states.
 
-Wraith's approved Tier 0-III package establishes these high-level production needs:
+Ronin's exact Tier 0 animation, VFX, audio, and teaching counts remain provisional until the focused review of Severing Cut, Crushing Cross, Bloodfall, Stillness Draw, Breaching Slash, Answering Steel, and its guard profile is complete.
 
-- distinct Veil Cut, Passing Arc, Pale Lance, Ghostline Slash, and Veil Reversal geometry and impact treatment,
-- Pale Barrage continuation, stationary commitment, early release, interruption, and recovery,
-- Spectral Edge physical-range versus spectral-only contact feedback and Tier escalation,
-- Wraith's Reach full-meter activation, short directional preparation, compact broad opening sweep, very long fixed corridor strike, one weaker delayed same-geometry repetition, and ending recovery,
-- Spectral Passage continuous spectral geometry through ordinary-enemy bodies, dominant primary impact, reduced secondary impacts, and visible stopping against elites, bosses, heavy enemies, solid geometry, and authored blockers,
-- prevention of extra reach, tracking, projectile, bounce, repeated same-enemy, secondary Blood, and unrestricted Spectral Edge or proc presentation,
-- Wraith Blood building, ready, activated, resolving, consumed, and rebuilding states.
-
-Pale Procession may guide Tier IV comparison and dependency awareness, but it must not set final animation, VFX, audio, HUD, Shrine, trial, or quotation counts before the capstone audit.
-
-The three launch Aspect identities are fixed. Wolf and Ronin support high-level scoping through Tier IV, while Wraith supports high-level scoping through Tier III. Final quotation still requires implementation briefs and Wraith's completed Tier IV package.
+The three launch Aspect identities are fixed. Wolf and Wraith support high-level scoping through Tier IV. Ronin supports Tier I-IV scoping, while its complete-package quotation still depends on the Tier 0 review and all three packages require implementation briefs.
 
 Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
 
@@ -102,9 +107,11 @@ The core story and lore are approved. Final quotation depends on the authored-co
 - Base character art precedes Tier or Blood overlays.
 - Wolf, Wraith, and Ronin are the fixed launch Aspect families.
 - All Aspect attacks remain player-directed; production must not imply corrective tracking or homing.
-- Wolf and Ronin working packages may guide high-level scope through Tier IV but not final frame or effect counts before implementation briefs.
-- Wraith may guide high-level scope through Tier III; final production counts require the completed Tier IV capstone.
+- Wolf and Wraith working packages may guide high-level scope through Tier IV but not final frame or effect counts before implementation briefs.
+- Ronin Tier I-IV may guide high-level scope; final Tier 0 and complete-package counts require its focused Tier 0 review.
 - Spectral Passage should primarily reuse existing attack geometry and trails with collision and impact extensions rather than require a new command animation.
+- Beyond the Veil should reuse existing attack, deathblow, and locomotion families; its new production burden is authored range variants, Tier-gated Spectral Edge feedback, clear-path deathblow validation and approach, and Veilstride feedback.
+- Pale Procession shade, steering, and three-lane assets are excluded.
 - Base regional kits precede room variants and final arenas.
 - Reusable Technique UI may be produced before the complete Technique catalog is locked.
 - Unique Technique icons and bespoke effects require approved catalog entries.

@@ -32,11 +32,9 @@ related:
 
 Wraith is an approved member of the three-Aspect launch roster.
 
-Its qualitative Tier 0 weapon foundation and Tier I-III packages are approved for current scoping. Tier IV remains a provisional candidate under ordered revision and must not be treated as final production scope until reviewed.
+Its qualitative Tier 0 weapon foundation and complete Tier I-IV progression are approved for current scoping. Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Technique exceptions, and production counts remain implementation and playtesting work.
 
-Wraith supersedes the earlier forced-reposition concept, the earlier spinning Blood Art, the former duration-state version of Wraith's Reach, and the former Veiled Guard Tier III candidate. Its spacing identity comes from extended reach, deliberate attack selection, player aim, recovery, spectral weapon expressions, corridor control, and formation penetration rather than mandatory lateral movement, target correction, special evasion, teleportation, generic armor, a generic moveset buff, or a replacement combat mode.
-
-Exact numerical values, frame data, hitboxes, animation, detailed Blood presentation, Technique exceptions, and production counts remain implementation and playtesting work.
+Wraith supersedes the earlier forced-reposition concept, the earlier spinning Blood Art, the former duration-state version of Wraith's Reach, the former Veiled Guard Tier III candidate, and the former Pale Procession Tier IV candidate. Its identity comes from extended reach, deliberate attack selection, player aim, recovery, spectral weapon expressions, corridor control, formation penetration, and final mastery of distant engagement and execution rather than mandatory lateral movement, target correction, special evasion, teleportation, generic armor, a generic moveset buff, or a replacement combat mode.
 
 ## Weapon identity
 
@@ -54,9 +52,10 @@ Wraith is defined by:
 - fixed player-directed attack geometry after commitment,
 - a Tier II immediate Blood Art that controls one chosen frontal corridor and repeats it after a delay,
 - Tier III formation penetration through ordinary-enemy lines,
+- Tier IV distant engagement and deathblow initiation,
 - and weakness when enemies collapse inside its preferred range or attack from outside its selected front.
 
-Wraith gives up mobility, speed, close-range flexibility, and ordinary transition count in exchange for reach, attack selection, frontal control, delayed corridor pressure, and the ability to threaten layered ordinary formations.
+Wraith gives up mobility, speed, close-range flexibility, and ordinary transition count in exchange for reach, attack selection, frontal control, delayed corridor pressure, formation penetration, and the ability to engage or execute from spectral distance at maximum investment.
 
 Wraith does not use corrective tracking, hidden homing, automatic target selection, or an artificial point-blank damage dead zone. Close pressure is dangerous because its actions are frontal, deliberate, and comparatively limited—not because nearby enemies become immune to its attacks.
 
@@ -64,7 +63,7 @@ Wraith does not use corrective tracking, hidden homing, automatic target selecti
 
 Wraith retains universal locomotion, neutral dash, Defense input, ordinary parry timing, posture rules, deathblows, Technique inventory, and Prosthetic controls.
 
-The player may stop the Basic sequence after either attack, defend, dash, reposition normally, use a Prosthetic, or disengage. Wraith does not gain additional invulnerability, automatic movement behind targets, forced offsets, or a stronger neutral dash.
+The player may stop the Basic sequence after either attack, defend, dash, reposition normally, use a Prosthetic, or disengage. Wraith does not gain additional neutral-dash distance or invulnerability, automatic movement behind targets, forced offsets, or a stronger ordinary dash.
 
 # Approved Tier 0 kit
 
@@ -165,7 +164,7 @@ Its defensive weakness is not an artificially weak guard. Its weakness is preser
 
 ## Encounter role
 
-- **Mixed groups:** pressure priority targets from useful range, use Passing Arc to interfere with grouped frontal threats, and at Tier III line attacks through ordinary front ranks.
+- **Mixed groups:** pressure priority targets from useful range, use Passing Arc to interfere with grouped frontal threats, and at Tier III strike through ordinary front ranks.
 - **Crowds:** control a broad front and layered ordinary formations but struggle when enemies surround, flank, or attack simultaneously.
 - **Ranged pressure:** reach exposed targets through extended attacks, universal dash, and Prosthetics without becoming a projectile or room-crossing pursuit kit.
 - **Elites and bosses:** punish from the edge of threat range, use Veil Cut during short openings, reserve Pale Lance for confirmed commitments, and place Wraith's Reach where the target is likely to remain or return. Spectral Passage does not create unrestricted single-target multiplication against them.
@@ -184,7 +183,7 @@ Approved boundaries:
 - each additional jab deals lower individual Health and enemy-posture damage than the initial thrust,
 - a completed barrage delivers strong combined Health and posture pressure during a sufficiently long opening,
 - Akio remains stationary once the barrage begins,
-- aim adjustment is highly limited after commitment unless a later approved Tier explicitly changes it,
+- aim adjustment is highly limited after commitment,
 - the jabs do not track, rotate automatically, or select targets independently,
 - longer continuation creates longer exposure to retaliation, flanking, and threats outside the selected line,
 - and releasing early sacrifices remaining damage in exchange for ending the commitment sooner.
@@ -197,17 +196,17 @@ The Tier I Held rhythm is:
 
 ## Supporting growth rule — Spectral Edge
 
-Beginning at Tier I, Wraith attacks that connect through the spectral extension beyond the physical katana's ordinary reach gain a modest enemy-posture and guard-pressure bonus.
+Beginning at Tier I, qualifying Wraith attacks that connect through the spectral extension beyond the physical katana's ordinary reach gain a modest enemy-posture and guard-pressure bonus.
 
 Each Embrace from Tier I through Tier IV modestly increases this bonus.
 
-Qualifying primary attacks are:
+From Tier I through Tier III, qualifying primary attacks are:
 
 - Veil Cut,
 - Passing Arc,
-- Pale Lance's initial thrust,
-- Ghostline Slash,
 - and Veil Reversal.
+
+Pale Lance's initial thrust and Ghostline Slash do not qualify for Spectral Edge before Tier IV. Their Tier IV eligibility is an explicit part of Beyond the Veil rather than an implicit Tier I property.
 
 Approved boundaries:
 
@@ -216,15 +215,15 @@ Approved boundaries:
 - the bonus improves enemy-posture and guard pressure rather than Health damage,
 - it adds no reach, width, movement, tracking, correction, interruption resistance, or recovery reduction,
 - it does not create automatic stagger against elites or bosses,
-- Pale Barrage's additional jabs do not each receive a full independent Spectral Edge bonus,
-- delayed, secondary, shade, repeated, and Blood Art hits do not independently receive Spectral Edge unless a later Tier explicitly defines a restricted interaction,
+- Pale Barrage's additional jabs do not receive full independent Spectral Edge bonuses,
+- delayed, secondary, repeated, and Blood Art hits do not independently receive Spectral Edge unless an approved Tier explicitly defines a restricted interaction,
 - and the rule uses no meter, stack counter, timer, random chance, or stored reward.
 
-Spectral Edge rewards the player for maintaining Wraith's intended spacing rather than simply granting generic stat growth. A close-range hit remains fully functional; a correctly spaced spectral hit creates stronger posture and guard pressure.
+Spectral Edge rewards the player for maintaining Wraith's intended spacing rather than simply granting generic stat growth. A close-range hit remains fully functional; a correctly spaced qualifying spectral hit creates stronger posture and guard pressure.
 
 The complete Tier I rhythm is:
 
-> preserve useful distance → choose the correct line or arc → gain modest Spectral Edge pressure through spectral-only contact → use Pale Barrage only when the opening is large enough
+> preserve useful distance → choose the correct line or arc → gain modest Spectral Edge pressure through qualifying spectral-only contact → use Pale Barrage only when the opening is large enough
 
 # Approved Tier II package
 
@@ -253,9 +252,7 @@ Akio releases a compact but broad spectral sweep across his immediate front.
 - frontal coverage only,
 - and no protection against side, rear, perilous, grabbing, launching, or simultaneous threats.
 
-The opening sweep is Wraith's Reach's guaranteed activation value. Once the Art commits and Blood is spent, this sweep provides practical frontal pressure without requiring the corridor strike or delayed echo to connect.
-
-It is not a full-circle panic effect, posture clear, heal, automatic parry, or invulnerability window.
+The opening sweep is Wraith's Reach's guaranteed activation value. It is not a full-circle panic effect, posture clear, heal, automatic parry, or invulnerability window.
 
 ### Stage 2 — corridor strike
 
@@ -269,8 +266,6 @@ Immediately after the sweep, Akio drives the spectral katana through a very long
 - no corrective rotation,
 - and normal vulnerability and interruption behavior.
 
-The corridor strike is a committed frontal control action rather than a projectile, room-crossing dash, or Ronin-level impact attack.
-
 ### Delayed spectral echo
 
 A short beat later, a spectral Wraith repeats the corridor strike along the exact same authored geometry and player-selected direction.
@@ -281,7 +276,7 @@ A short beat later, a spectral Wraith repeats the corridor strike along the exac
 - no tracking, turning, homing, retargeting, or independent target selection,
 - and no persistence outside the authored delay and strike timing.
 
-An enemy that leaves the corridor before the echo resolves avoids it. An enemy that remains in or enters the corridor may be struck. The echo therefore rewards prediction and placement rather than target correction.
+An enemy that leaves the corridor before the echo resolves avoids it. An enemy that remains in or enters the corridor may be struck.
 
 ### Interruption and failure rules
 
@@ -289,11 +284,9 @@ Wraith's Reach grants no healing, player-posture clearing, damage reduction, int
 
 The directional preparation, corridor commitment, and ending recovery remain vulnerable through ordinary combat rules. A poor line may miss the priority target, allow mobile enemies to leave before the echo, or leave Akio exposed to pressure outside the selected front.
 
-If Akio is interrupted after the opening sweep but before completing the corridor strike, the guaranteed sweep value remains resolved but the unfinished stages do not occur unless ordinary implementation rules support their already-authored timing. Exact interruption frames remain prototype work.
-
 ### Spectral Edge and system interactions
 
-Tier II advances Spectral Edge by its normal second Tier step for qualifying ordinary primary attacks.
+Tier II advances Spectral Edge by its normal second Tier step for currently qualifying ordinary primary attacks.
 
 Wraith's Reach uses its own authored Health, posture, guard-pressure, and stagger values:
 
@@ -303,8 +296,6 @@ Wraith's Reach uses its own authored Health, posture, guard-pressure, and stagge
 - the echo receives restricted Technique, healing, and other proc weighting,
 - the echo cannot recursively create another echo,
 - and none of the Art's stages generate Blood.
-
-These boundaries prevent the full-meter action from multiplying Spectral Edge, multi-hit Techniques, healing, or Blood generation beyond its intended authored package.
 
 The approved Tier II rhythm is:
 
@@ -327,6 +318,8 @@ Qualifying attacks are:
 - Pale Lance's initial thrust,
 - Ghostline Slash,
 - and Veil Reversal.
+
+Spectral Passage eligibility is independent of Spectral Edge eligibility. At Tier III, Pale Lance and Ghostline Slash may pass through ordinary enemies but do not yet receive Spectral Edge.
 
 The first or primary contacted enemy receives the attack's normal authored Health, posture, guard, and stagger result. Additional ordinary enemies reached through Spectral Passage receive:
 
@@ -362,13 +355,11 @@ Tier III advances Spectral Edge by its normal third Tier step.
 
 For enemies reached after the primary contact:
 
-- contact through the spectral-only region may receive a restricted Spectral Edge posture and guard-pressure contribution,
+- contact through the spectral-only region may receive a restricted Spectral Edge posture and guard-pressure contribution only when the originating attack is Spectral Edge-eligible at the current Tier,
 - secondary passage contacts do not receive unrestricted full-value Spectral Edge multiplication,
 - secondary contacts generate no Blood,
 - Technique, healing, status, and other per-hit effects use restricted or separately authored weighting,
 - and Spectral Passage cannot recursively trigger itself or another secondary attack.
-
-These restrictions preserve the visible formation benefit without converting one long or broad attack into unrestricted resource, healing, or proc multiplication.
 
 The approved Tier III rhythm is:
 
@@ -376,27 +367,96 @@ The approved Tier III rhythm is:
 
 Spectral Passage does not improve Wraith's defense, point-blank speed, lateral coverage, startup, recovery, or movement. Its value depends on enemy alignment and correct geometry rather than another operational command.
 
-# Provisional Tier IV candidate
+# Approved Tier IV package
 
-The following candidate remains preserved for discussion and is not approved production scope.
+## Headline benefit — Beyond the Veil
 
-## Tier IV candidate — Pale Procession
+Tier IV completes Wraith's mastery of engagement and execution from spectral distance.
 
-The current candidate adds two reduced-power adjacent spectral barrage lanes while Akio channels Pale Barrage.
+Beyond the Veil provides three linked improvements:
 
-Provisional boundaries:
+1. Pale Lance gains increased maximum spectral reach.
+2. Ghostline Slash gains increased spectral attack reach after the unchanged universal dash.
+3. Valid deathblows may be initiated from farther away through a clear frontal path.
 
-- Akio remains the central and strongest stream,
-- left and right shades create adjacent frontal lanes,
-- the formation may rotate slowly through direct player input within a limited frontal arc,
-- the formation does not track or snap to enemies,
-- Akio remains stationary,
-- releasing or being interrupted ends all streams,
-- only one stream may damage an enemy during each authored barrage beat,
-- central-stream contact takes priority,
-- and shade hits generate no Blood, no delayed echoes, no Spectral Edge bonus, no Spectral Passage chain, and restricted proc value.
+The package does not grant a stronger neutral dash, generic movement speed during ordinary combat, tracking, teleportation, or a universal range increase to every Wraith attack.
 
-This candidate is intended as a frontal-coverage and reliability upgrade rather than a single-target damage multiplier. Its final role remains dependent on the Tier IV audit.
+## Pale Lance mastery
+
+Pale Lance's initial thrust gains a meaningful but controlled increase to its maximum spectral reach.
+
+- The added reach remains a narrow fixed line.
+- Preparation, direction commitment, interruption behavior, and severe miss recovery remain unchanged.
+- The Pale Barrage continuation uses the approved Tier IV maximum line, but its repeated jabs remain separately weighted and do not each receive full independent Spectral Edge triggers.
+- The attack gains no tracking, turning, homing, pursuit, correction, armor, or recovery reduction.
+
+At Tier IV, Pale Lance's initial thrust becomes eligible for Spectral Edge. Contact must still occur through the spectral-only portion of the authored geometry.
+
+## Ghostline Slash mastery
+
+Ghostline Slash gains increased spectral attack reach after the normal neutral dash.
+
+- Neutral-dash distance, startup, invulnerability, recovery, collision, and steering remain unchanged.
+- The added attack reach follows the player's selected direction and does not track or snap toward an enemy.
+- Ghostline Slash gains no extra attack-bound movement, protection, recovery cancel, automatic follow-up, or damage merely for being used after a dash.
+
+At Tier IV, Ghostline Slash becomes eligible for Spectral Edge. Contact must still occur through the spectral-only portion of the slash.
+
+## Extended deathblow initiation
+
+When an enemy is already in a valid deathblow-ready state, Wraith may initiate that deathblow from a greater distance than the shared ordinary initiation range.
+
+Approved boundaries:
+
+- the enemy must satisfy all normal deathblow conditions,
+- the target must be within a limited frontal acquisition angle,
+- the path between Akio and the target must be clear,
+- solid geometry, impassable hazards, intervening enemies, and other authored blockers prevent the extended initiation,
+- Akio travels rapidly along one authored straight spectral approach,
+- the approach does not curve, track a moving target after commitment, or retarget,
+- the approach is not a free attack, neutral dash, teleport, or general-purpose traversal action,
+- and the deathblow retains the shared deathblow's authored damage, success, camera, vulnerability, and encounter rules unless separately standardized for all Aspects.
+
+Extended initiation changes where a valid deathblow may begin; it does not create deathblow readiness, increase deathblow damage, or bypass encounter-specific execution restrictions.
+
+## Supporting benefit — Veilstride
+
+After a deathblow kills its target, Akio gains a brief modest movement-speed increase.
+
+Veilstride exists to help Wraith leave the execution position, restore medium-to-long spacing, or establish the next useful attack line.
+
+Approved boundaries:
+
+- the deathblow must kill the target,
+- the benefit is movement speed only,
+- it does not increase attack speed, animation speed, dash distance, dash invulnerability, recovery speed, tracking, or attack-bound movement,
+- it does not stack with itself,
+- a new valid trigger refreshes rather than multiplies the duration,
+- and exact magnitude and duration remain tuning work.
+
+Veilstride is not triggered by ordinary Spectral Edge contact. Spectral Edge remains a posture-and-guard spacing reward rather than a general mobility engine.
+
+## Spectral Edge and Tier IV interactions
+
+Tier IV advances Spectral Edge by its normal fourth and final Tier step.
+
+At Tier IV, qualifying primary attacks are:
+
+- Veil Cut,
+- Passing Arc,
+- Pale Lance's initial thrust,
+- Ghostline Slash,
+- and Veil Reversal.
+
+Pale Barrage's repeated jabs, Wraith's Reach, extended deathblow travel, the deathblow itself, and Veilstride do not independently trigger Spectral Edge.
+
+Spectral Passage continues to function normally across the remaining authored geometry of Pale Lance and Ghostline Slash. Additional passage contacts use the approved reduced and restricted rules and do not turn the Tier IV reach increase into unrestricted Blood, healing, Technique, status, or proc multiplication.
+
+## Intended Tier IV rhythm
+
+> punish a confirmed opening from greater Pale Lance distance → re-enter from farther away through Ghostline Slash when appropriate → convert accumulated posture pressure into an extended-range valid deathblow → use Veilstride to reclaim spacing or choose the next front
+
+Beyond the Veil improves Wraith's distant opportunity and post-execution repositioning without removing the danger of wrong attack selection, lateral collapse, point-blank pressure, fixed direction, interruption, or a missed commitment.
 
 # Technique space
 
@@ -411,11 +471,13 @@ Universal Techniques may reinforce or broaden Wraith's:
 - close-range handling,
 - re-entry,
 - whiff recovery,
+- deathblows,
+- movement after execution,
 - or delayed line pressure.
 
-Techniques must not simply duplicate Spectral Edge's deterministic spacing reward, Wraith's Reach's sweep-corridor-echo package, or Spectral Passage's ordinary-enemy formation penetration, or turn Wraith into a tracking, projectile, teleportation, or autonomous-companion kit.
+Techniques must not simply duplicate Spectral Edge's deterministic spacing reward, Wraith's Reach's sweep-corridor-echo package, Spectral Passage's ordinary-enemy formation penetration, Beyond the Veil's extended engagement and execution range, or Veilstride's post-kill repositioning.
 
-A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without Wraith's Reach, Spectral Passage, or Tier IV.
+A strong Wraith Technique build at Tier 0-I must remain capable of completing a run without Wraith's Reach, Spectral Passage, or Beyond the Veil.
 
 # Presentation requirements
 
@@ -433,65 +495,69 @@ Spectral Edge requires readable but restrained feedback distinguishing:
 
 - physical-blade contact,
 - spectral-only contact,
+- attacks that are currently eligible,
 - and the modestly increasing Tier I-IV posture and guard-pressure reward.
 
-The feedback must not imply a critical hit, separate meter, or large Health-damage multiplier.
+Pale Lance and Ghostline Slash should not imply Spectral Edge eligibility before Tier IV. Their Tier IV Shrine summary and presentation must make the newly unlocked eligibility clear without requiring a separate HUD meter.
 
 Pale Barrage requires clear continuation, early-release, stationary commitment, and diminishing per-jab impact communication without hiding enemy telegraphs.
 
 Wraith's Reach requires:
 
 - a short readable directional preparation,
-- a compact broad opening sweep that reads as immediate frontal value rather than a full-circle blast,
+- a compact broad opening sweep,
 - a visibly connected very long corridor strike,
-- a restrained delayed spectral repetition along exactly the same geometry,
+- a restrained delayed repetition along exactly the same geometry,
 - clear differentiation between the primary strike and weaker echo,
-- readable timing that lets enemies visibly leave or enter the delayed corridor,
 - and no presentation suggesting homing, a projectile field, an autonomous companion, or a duration transformation.
 
 Spectral Passage requires:
 
 - the existing spectral line or arc to remain visually continuous through ordinary-enemy bodies,
-- clear reduced secondary impacts behind or across the primary contact,
+- clear reduced secondary impacts,
 - readable stopping against elites, bosses, heavy enemies, solid geometry, and authored blockers,
-- no additional projectile detached from the katana,
 - and no effect suggesting new reach, tracking, bouncing, repeated hits on one enemy, or an autonomous chain attack.
+
+Beyond the Veil requires:
+
+- a clearly longer but still narrow Pale Lance line,
+- a clearly longer Ghostline Slash spectral region without implying a longer neutral dash,
+- a readable extended deathblow prompt or targeting state that appears only for valid clear-path targets,
+- one rapid straight spectral approach rather than a teleport or curved pursuit,
+- restrained Veilstride movement feedback after a killing deathblow,
+- and no clone, shade, persistent zone, extra lane, tracking ribbon, or large secondary attack effect.
 
 # Production requirements
 
-The approved Tier 0-III package establishes requirements for:
+The approved Tier 0-IV package establishes requirements for:
 
 - distinct Veil Cut and Passing Arc timing, geometry, recovery, and hit response,
 - clear physical and spectral hit-region ownership,
-- deterministic Spectral Edge qualification and scaling,
-- Spectral Edge posture and guard-pressure feedback,
-- Pale Lance charge, release, miss, and recovery presentation,
-- Pale Barrage continuation, early release, maximum sequence, and interruption behavior,
+- deterministic Spectral Edge qualification, Tier gating, and scaling,
+- Pale Lance and Ghostline Slash becoming Spectral Edge-eligible only at Tier IV,
+- Pale Lance charge, release, miss, recovery, Tier IV reach, and Pale Barrage continuation behavior,
 - restricted multi-hit Blood, Technique, healing, and proc weighting,
-- Blood unavailable, building, ready, committed, resolving, consumed, and rebuilding states,
-- Wraith's Reach directional preparation and fixed-line commitment,
-- opening-sweep geometry, ordinary-enemy stagger, elite and boss response, and guaranteed activation-value handling,
-- corridor geometry, reach, collision, interruption, and recovery,
-- delayed echo timing, fixed geometry reuse, entry and exit collision behavior, and dissolution,
-- Spectral Passage ordinary-enemy penetration and stopping-body classification,
-- primary and secondary target ownership and reduced secondary impact weighting,
-- prevention of repeated same-enemy hits, Blood generation, recursive passage, and unrestricted proc or Spectral Edge multiplication,
-- Shrine summaries for Pale Barrage, Spectral Edge, Wraith's Reach, and Spectral Passage,
-- and Tier 0-III teaching and mastery-trial coverage.
-
-Tier IV production requirements remain provisional until the Tier is approved.
+- Wraith's Reach preparation, sweep, corridor, echo, interruption, and fixed-geometry rules,
+- Spectral Passage penetration, stopping-body classification, secondary ownership, and restricted interactions,
+- Tier IV Ghostline Slash reach without neutral-dash modification,
+- extended deathblow target validation, clear-path testing, approach travel, blocker handling, and encounter exceptions,
+- Veilstride trigger, duration, refresh, movement-only behavior, and feedback,
+- Shrine summaries for Pale Barrage, Spectral Edge, Wraith's Reach, Spectral Passage, Beyond the Veil, and Veilstride,
+- and Tier 0-IV teaching and mastery-trial coverage.
 
 # Remaining Wraith work
 
-The current active design question is Tier IV after the approved Spectral Passage Tier III.
+The qualitative Wraith Tier 0-IV package is approved for current scope.
 
-Remaining ordered work is:
+Remaining work is implementation and validation:
 
-1. reassess Pale Procession against the approved Tier 0-III package,
-2. determine whether the capstone should remain Pale Barrage-focused or provide broader value,
-3. audit Tier IV interactions with Spectral Edge, Spectral Passage, and Wraith's Reach,
-4. complete cross-roster comparison against Wolf and Ronin,
-5. finalize animation, VFX, audio, HUD, Shrine, selection, and trial requirements,
-6. and validate the package through prototypes and playtesting.
+1. prototype the Tier 0 attack roles and physical-versus-spectral hit regions,
+2. validate Pale Barrage commitment and release behavior,
+3. validate Wraith's Reach sweep, corridor, and echo readability,
+4. validate Spectral Passage stopping rules and secondary weighting,
+5. validate Tier IV reach increases and extended deathblow pathing,
+6. tune Veilstride so it restores positioning without becoming a persistent mobility engine,
+7. finalize animation, VFX, audio, HUD, Shrine, selection, and trial requirements,
+8. and compare the implemented package against Wolf and Ronin.
 
-Exact timing, damage, posture, guard pressure, spectral hit-region size, Pale Barrage jab count and duration, Wraith's Reach preparation, sweep size, corridor dimensions, echo delay, Spectral Passage stopping classifications, secondary-target weighting, interruption timing, recovery, Blood values, proc weighting, Tier IV behavior, and presentation values remain implementation and playtesting work.
+Exact timing, damage, posture, guard pressure, spectral hit-region size, Pale Barrage jab count and duration, Wraith's Reach preparation, sweep size, corridor dimensions, echo delay, Spectral Passage stopping classifications, secondary-target weighting, Tier IV reach increases, extended deathblow range and angle, Veilstride magnitude and duration, interruption timing, recovery, Blood values, proc weighting, and presentation values remain implementation and playtesting work.

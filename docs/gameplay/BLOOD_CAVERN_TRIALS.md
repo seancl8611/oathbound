@@ -82,21 +82,25 @@ Approved Tier 0 lessons may teach:
 - returning to defense after deliberate commitments,
 - and handling enemies that enter point-blank range or attack from several directions.
 
-Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, mandatory repositioning, a duration-wide reach state, or the retired Veiled Guard mechanic.
+Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, mandatory repositioning, a duration-wide reach state, Veiled Guard, or Pale Procession.
 
-The approved Tier I-III package supports demonstrations for:
+The approved Tier I-IV package supports demonstrations for:
 
 - **Pale Barrage:** choose between a single Pale Lance, partial continuation, and full stationary barrage according to opening size,
-- **Spectral Edge:** distinguish physical-range contact from qualifying spectral-only contact and understand that the reward emphasizes posture and guard pressure rather than Health damage,
+- **Spectral Edge at Tier I-III:** distinguish physical-range contact from eligible spectral-only contact and understand that Veil Cut, Passing Arc, and Veil Reversal receive posture and guard-pressure reward while Pale Lance and Ghostline Slash do not yet qualify,
 - **Wraith's Reach activation:** use the compact frontal sweep as guaranteed immediate value without treating it as full-circle protection,
 - **Wraith's Reach corridor:** select one valuable line, understand the fixed very long corridor strike, and respect ordinary vulnerability and poor-line recovery,
 - **Wraith's Reach echo:** predict whether enemies will remain in, leave, or enter the same corridor before the delayed repetition resolves,
 - **Spectral Passage alignment:** position ordinary enemies in one authored line or arc so a qualifying attack can continue through the front rank,
 - **Spectral Passage stopping rules:** distinguish ordinary pass-through targets from elites, bosses, heavy stopping enemies, solid geometry, and authored blockers,
 - **Spectral Passage weighting:** understand that secondary ordinary targets receive reduced Health damage and meaningful posture and guard pressure without Blood generation or unrestricted proc multiplication,
-- and understand that Wraith's Reach remains self-contained and Pale Barrage's repeated jabs do not each gain unrestricted full passage behavior.
+- **Beyond the Veil reach:** compare Pale Lance and Ghostline Slash before and after Tier IV while preserving their fixed direction, ordinary interruption, and miss or commitment risks,
+- **Tier IV Spectral Edge unlock:** connect through the spectral-only portions of Pale Lance's initial thrust and Ghostline Slash after those attacks become eligible at Tier IV,
+- **extended deathblow initiation:** identify a deathblow-ready target at greater frontal distance, verify a clear path, and distinguish valid approach lines from blocked, hazardous, obstructed, or out-of-angle attempts,
+- **Veilstride:** use the brief movement speed after a killing deathblow to leave the execution position, reclaim preferred spacing, or establish the next useful front,
+- and understand that Wraith's Reach remains self-contained, Pale Barrage's repeated jabs do not each gain unrestricted Spectral Edge or passage behavior, and Veilstride does not improve attacks or the neutral dash.
 
-Pale Procession may guide provisional Tier IV trial concepts, but no final Tier IV trial count or script should be approved until the capstone audit is complete.
+These are approved teaching goals, not final trial count commitments. Beyond the Veil should preferably use existing Pale Lance, Ghostline Slash, deathblow, locomotion, and obstacle-validation trial components rather than requiring one oversized bespoke showcase.
 
 ### Ronin Trials
 
@@ -109,7 +113,9 @@ Representative Tier 0 lessons may teach:
 - guard stability and accumulated posture,
 - respecting fixed attack lines, slow startup, and severe miss recovery.
 
-The approved current Tier package supports later demonstrations for:
+These Tier 0 lessons remain subject to the focused Ronin Tier 0 review before exact scripts or counts are locked.
+
+The approved current Tier I-IV package supports later demonstrations for:
 
 - **Steadfast Reprisal:** block a qualifying attack, judge whether the enemy sequence has ended, and choose whether the slow standalone Reprisal Cut is safe,
 - **Falling Mountain:** use the activation posture relief, commit to one manually aimed planted slam, and understand the delayed Deep Rupture at the original point,
@@ -120,7 +126,7 @@ Ronin trials must not teach corrective tracking, combo preservation, a required 
 
 ### Fixed Tier and Blood demonstrations
 
-Wolf and Ronin may be used for high-level Tier I-IV trial planning. Wraith may be planned through Tier III; its Tier IV demonstrations remain provisional.
+Wolf and Wraith may be used for high-level Tier I-IV trial planning. Ronin's Tier I-IV demonstrations may also be planned, while exact Tier 0 teaching waits for its focused review.
 
 Trials may teach:
 
@@ -179,6 +185,8 @@ Unlocking a Technique through a trial adds it to future eligible reward pools ra
 
 Permanent Aspect upgrades, if included, must remain small, capped, and reliability-focused. They may make an approved action easier to execute but cannot add a major mechanic, remove the kit's firm tradeoff, bypass fixed Tier progression, or unlock Blood before Tier II.
 
+Permanent upgrades must not grant Pale Lance or Ghostline Slash their Tier IV Spectral Edge eligibility early, extend Wraith deathblow initiation before Tier IV, or reproduce Veilstride outside its approved trigger.
+
 ## Technical requirements
 
 - Trials are repeatable.
@@ -186,4 +194,5 @@ Permanent Aspect upgrades, if included, must remain small, capped, and reliabili
 - Progress, unlocks, rewards, and permanent-upgrade ranks persist.
 - Temporary trial Techniques and run-only state clear when the trial ends.
 - Trial rules do not require random room or reward generation.
+- The framework must support Tier-specific Spectral Edge eligibility, clear-path extended deathblow validation, and temporary Veilstride movement state where Wraith demonstrations require them.
 - The framework may support future challenge ladders, boss rematches, or score modes without making them current launch promises.

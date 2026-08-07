@@ -83,22 +83,24 @@ Ronin's approved current Tier package establishes these additional high-level gr
 - **Shattering Wake:** primary-contact origin and reduced-Health, strong-posture transfer through the target into enemies behind it
 - **Ronin Blood HUD:** unavailable, building, ready, activated, resolving, consumed, and rebuilding states
 
-Wraith's approved Tier 0-III package establishes these high-level groups:
+Ronin's Tier I-IV groups are approved at high level. Exact Tier 0 animation and effect counts remain provisional until the focused Tier 0 review is complete.
+
+Wraith's approved Tier 0-IV package establishes these high-level groups:
 
 - **Tier 0 reach family:** elongated connected blade lines, distinct Veil Cut and Passing Arc geometry, focused Pale Lance, controlled Ghostline Slash, posture-focused Veil Reversal, restrained player position, and clear miss dissipation
 - **Pale Barrage:** continued Pale Lance sequence, repeated thrust language, stationary commitment, early release, interruption, and recovery states
-- **Spectral Edge:** readable physical-range versus spectral-only contact and modest Tier-scaled posture and guard-pressure treatment
+- **Spectral Edge:** readable physical-range versus eligible spectral-only contact, Tier I-III eligibility for Veil Cut, Passing Arc, and Veil Reversal, Tier IV eligibility unlock for Pale Lance and Ghostline Slash, and modest Tier-scaled posture and guard-pressure treatment
 - **Wraith's Reach:** full-meter activation, short directional preparation, compact broad frontal opening sweep, one very long connected corridor strike, one weaker delayed repetition along the exact same geometry, and ending recovery
 - **Spectral Passage:** continuous ordinary attack trails through eligible ordinary-enemy bodies, dominant primary impacts, reduced secondary impacts, and clear termination against elites, bosses, protected heavy enemies, solid geometry, and authored blockers
+- **Beyond the Veil — Pale Lance:** longer maximum narrow spectral extension and continued Pale Barrage line without new tracking, projectile, armor, or recovery effects
+- **Beyond the Veil — Ghostline Slash:** longer spectral attack region after the unchanged universal dash
+- **Beyond the Veil — extended deathblow:** greater-distance valid-target prompt, clear-path and blocker states, one straight visible spectral approach, and transition into shared deathblow presentation
+- **Veilstride:** brief movement-only post-deathblow-kill activation, locomotion trail, refresh, and expiration feedback
 - **Wraith Blood HUD:** unavailable, building, ready, activated, resolving, consumed, and rebuilding states
 
-Wraith's current Tier IV candidate establishes one provisional group only:
+The retired Pale Procession candidate creates no production group. No adjacent barrage shades, three-lane collision package, or steering system should be counted.
 
-- **Pale Procession candidate:** two reduced-power adjacent barrage shades and limited player-directed frontal steering
-
-Wraith Tier 0-III may receive high-level production grouping. Final Tier IV animation, VFX, HUD, audio, Shrine, trial, and full-package counts must wait for the capstone audit.
-
-Final Wolf and Ronin counts still depend on production briefs specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Final Wraith counts additionally depend on its unresolved Tier IV package.
+Final Wolf and Wraith counts depend on production briefs specifying animation reuse, sprite overlays, VFX, audio, HUD, Shrine, and trial treatment. Final Ronin counts additionally depend on the focused Tier 0 review.
 
 Final Technique, refinement, Prosthetic Technique, Relic, and consumable counts depend on the launch run-build content catalog. The reusable UI framework must support a filled four-Technique loadout continuing to improve through refinement, compatible or higher-rarity replacement, wildcard offers, reserve management, and specialization.
 
@@ -144,9 +146,11 @@ Route-marker art must make Shrine, Technique, refinement-capable, survival, econ
 - Wolf Fanged Guard available and consumed state where HUD support is required
 - Wolf Apex Mauling contact and movement-slow feedback primarily in world space
 - Wraith Pale Barrage continued-action and release state where HUD support is required
-- Wraith Spectral Edge contact feedback primarily in world space
+- Wraith Spectral Edge contact feedback primarily in world space, including Tier IV Pale Lance and Ghostline Slash eligibility
 - Wraith's Reach activation, directional commitment, resolving, echo-timing, consumed, and rebuilding support where HUD presentation is required
 - Wraith Spectral Passage primary-versus-secondary impact and stopping-body feedback primarily in world space; no persistent HUD state is required by default
+- Wraith extended-deathblow prompt, invalid-path suppression, approach, and transition states
+- Wraith Veilstride activation and expiration primarily in world space; no persistent meter is required
 - Ronin Falling Mountain activation and resolving state
 - Ronin Measured Weight and Perfect Weight state where HUD support is required
 - Four active Technique slots and one reserve
@@ -166,7 +170,7 @@ Route-marker art must make Shrine, Technique, refinement-capable, survival, econ
 - Shortened repeat-clear results
 - Postgame Heart-route access after its control method is approved
 
-Three Aspect slots and selection states are fixed. Wolf and Ronin high-level Tier and Blood states are known through Tier IV. Wraith states are known through Tier III; Tier IV remains provisional. Exact final counts remain uncountable until detailed implementation briefs and the capstone revision are approved.
+Three Aspect slots and selection states are fixed. Wolf and Wraith high-level Tier and Blood states are known through Tier IV. Ronin's Tier I-IV states are known, while exact Tier 0 counts remain under focused review. Exact final counts remain uncountable until detailed implementation briefs are approved.
 
 ## Shared VFX families
 
@@ -203,10 +207,13 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - precise Veil Cut and broad Passing Arc roles,
 - focused Pale Lance and stationary Pale Barrage commitment,
 - restrained player-directed movement with clear physical connection to the katana,
-- spectral-only contact feedback for Spectral Edge,
+- eligible spectral-only contact feedback for Spectral Edge with clear Tier IV eligibility expansion,
 - Wraith's Reach opening sweep, fixed very long corridor, and one delayed authored-geometry repetition,
 - Spectral Passage continuity through ordinary formations, reduced secondary impacts, and visible stopping-body termination,
-- provisional three-lane barrage language only if Pale Procession is retained,
+- longer Tier IV Pale Lance and Ghostline Slash attack geometry,
+- greater-distance valid deathblow prompt and one straight visible spectral approach,
+- brief Veilstride movement feedback after a killing deathblow,
+- no Pale Procession shade or three-lane barrage language,
 - no corrective tracking, teleport, vanish, forced-offset, duration-wide reach state, ordinary-attack echo state, Veiled Guard, discarded spin, or Mist Raven presentation.
 
 **Ronin**
@@ -221,7 +228,7 @@ VFX-005 is part of Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblo
 - fixed attack lines,
 - no corrective tracking, generic Focus aura, or required combo-state presentation.
 
-Tier escalation and Blood Arts may extend these families only according to approved gameplay packages. Wolf and Ronin are available for high-level scoping through Tier IV. Wraith is available through Tier III, with Tier IV provisional. Do not preserve superseded prey-mark, Dire Hunt transformation, Apex Feast, Wraith duration state, Wraith spin, Veiled Guard, perfect-dodge teleport, Mist-Step, Counter Cut, deathblow-Focus, or formal drawback-badge requirements.
+Tier escalation and Blood Arts may extend these families only according to approved gameplay packages. Wolf and Wraith are available for high-level scoping through Tier IV. Ronin is available through Tier I-IV, with Tier 0 exact counts pending its focused review. Do not preserve superseded prey-mark, Dire Hunt transformation, Apex Feast, Wraith duration state, Wraith spin, Veiled Guard, Pale Procession, perfect-dodge teleport, Mist-Step, Counter Cut, deathblow-Focus, or formal drawback-badge requirements.
 
 ### Prosthetics
 
@@ -267,9 +274,10 @@ Tier escalation and Blood Arts may extend these families only according to appro
 - Wolf, Wraith, and Ronin are the fixed launch Aspect identities.
 - Do not imply corrective tracking or homing in animation or VFX.
 - Do not create separate mandatory drawback icons or penalty effects; represent inherent limitations through the actual action and state presentation.
-- Wolf and Ronin may guide high-level Tier I-IV asset grouping but not final counts before implementation briefs.
-- Wraith may guide high-level Tier 0-III grouping; do not lock Tier IV or final full-package counts before the capstone revision.
+- Wolf and Wraith may guide high-level Tier I-IV asset grouping but not final counts before implementation briefs.
+- Ronin may guide Tier I-IV grouping; exact Tier 0 and final full-package counts wait for the focused Tier 0 review.
 - Spectral Passage should reuse existing attack animation and trail families where practical; its main new burden is collision, impact hierarchy, and stopping feedback rather than a separate player action.
+- Beyond the Veil should reuse Pale Lance, Ghostline Slash, shared deathblow, and locomotion families where practical; its main new burden is authored range variants, Tier-gated Spectral Edge feedback, clear-path deathblow validation and approach, and brief Veilstride feedback.
 - No duplicate Aspect-specific Blood Art upgrade tree is currently included.
 - Do not preserve assets that exist only for superseded mechanics.
 - Update the assigned milestone whenever a production group is added, removed, or reassigned.
