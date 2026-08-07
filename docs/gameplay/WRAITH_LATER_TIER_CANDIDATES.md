@@ -21,9 +21,9 @@ related:
 
 ## Purpose
 
-This supporting file preserves rejected Wraith Tier II-III directions and the current provisional Tier IV candidate.
+This supporting file preserves rejected Wraith Tier II-IV directions and records the approved replacement references.
 
-It is not approved production scope. `WRAITH_ASPECT.md` owns the approved Tier 0-III package. Git history preserves earlier full drafts if exact superseded wording is needed.
+It is not approved production scope. `WRAITH_ASPECT.md` owns the approved Tier 0-IV package. Git history preserves earlier full drafts if exact superseded wording is needed.
 
 # Retired Tier II direction — duration-state Wraith's Reach
 
@@ -115,74 +115,69 @@ Approved summary:
 
 The full approved rules belong in `WRAITH_ASPECT.md`.
 
-# Tier IV candidate — Pale Procession
+# Retired Tier IV direction — Pale Procession
 
-While channeling Pale Barrage, two spectral shades manifest beside Akio and perform reduced-power barrages along adjacent lines, creating a broad three-lane frontal formation.
+Pale Procession added two reduced-power spectral shades beside Akio while he channeled Pale Barrage. The shades created adjacent non-stacking barrage lanes, and the player could slowly rotate the three-lane formation within a limited frontal arc.
 
-## Formation and steering
+Former boundaries:
 
-- Akio remains the central and strongest barrage stream.
-- One shade forms to his left and one to his right.
-- Each shade performs Pale Barrage along a fixed adjacent line relative to the central stream.
-- The player may slowly rotate the entire formation through direct directional input within a limited frontal arc.
-- The shades maintain authored spacing and angles while the formation rotates.
-- The formation does not snap toward, track, home onto, or automatically follow enemies.
-- Akio remains stationary and cannot move the formation's origin while channeling.
-- Releasing Pale Barrage or being interrupted immediately ends all three streams and dismisses the shades.
+- Akio remained the central and strongest stream,
+- the left and right shades maintained authored adjacent lines,
+- Akio remained stationary,
+- the formation did not track, snap, home, or automatically follow enemies,
+- releasing or being interrupted ended all streams,
+- one stream could affect an enemy during each barrage beat,
+- the central stream had priority,
+- large enemies and bosses could not receive overlapping stream multiplication,
+- shade contacts generated no Blood,
+- shade contacts received no independent Spectral Edge,
+- shade contacts used restricted Technique, healing, and proc weighting,
+- and shade contacts created no Wraith's Reach echoes or Spectral Passage chains.
 
-## Non-stacking rule
+Pale Procession was rejected because:
 
-An enemy may receive damage and enemy-posture pressure from only one Pale Procession stream during each authored barrage beat.
+- Spectral Passage already solved ordinary group value through formation depth,
+- Pale Procession solved the same broad problem through width,
+- Wraith would have spent consecutive Tiers answering how to hit more enemies instead of expanding into a new combat axis,
+- Tier I had already made Pale Barrage the headline Held Attack upgrade,
+- the candidate offered little value during short exchanges, mobile boss fights, or moments when stationary barrage commitment was unsafe,
+- its boss value was mostly steering reliability rather than a clear capstone benefit,
+- and three-lane animation, VFX, steering, collision, non-stacking, and restricted-proc rules created substantial production burden for one conditional action.
 
-- If an enemy overlaps multiple streams, only one stream applies for that beat.
-- Akio's central stream takes priority when it connects.
-- Shade streams cannot converge to multiply damage or posture pressure against one enemy.
-- Large enemies and bosses do not receive extra hits merely because their collision overlaps several lanes.
+The mechanic may remain available as later Technique or post-launch exploration, but it is not part of fixed Wraith progression.
 
-Pale Procession is therefore a frontal-coverage and reliability upgrade rather than a single-target damage multiplier.
+# Other rejected Tier IV explorations
 
-## Shade impact and system interactions
+Several short-lived directions were considered during the Tier IV audit and rejected before entering authoritative scope:
 
-- Shade jabs deal reduced Health damage and reduced enemy-posture pressure compared with Akio's central barrage.
-- Shade jabs generate no Blood.
-- Shade jabs receive no independent Spectral Edge bonus.
-- Shade jabs use restricted Technique, healing, and other per-hit interactions.
-- Shade jabs do not create Wraith's Reach echoes.
-- Shade jabs do not create Spectral Passage chains or bypass the one-stream-per-enemy rule.
-- Shade jabs do not independently force repeated stagger against elites or bosses.
-- The shades do not select targets, retarget after a death, or persist independently of Akio.
+- mirrored or converging spectral follow-up attacks were rejected for excessive visual clutter and repeated-hit complexity,
+- another spectral-tip damage payoff was rejected because Spectral Edge already owns that spacing condition,
+- guard-phasing and projectile-cutting directions were rejected as either system-overriding or too encounter-dependent,
+- recovery-cancel and earlier-dash concepts were rejected because they depended on unknown frame timing and felt like quality-of-life tuning rather than a capstone,
+- and Ghostline-only follow-up routes were rejected because they refined an existing action without creating a headline Wraith capability.
 
-## Boss and single-target role
+# Approved Tier IV reference — Beyond the Veil
 
-Pale Procession does not increase Wraith's maximum single-target Pale Barrage damage. Its current boss value comes from limited manual steering:
+Beyond the Veil completes Wraith's mastery of engagement and execution from spectral distance.
 
-- the player may keep Akio's central stream aligned with modest movement during a valid opening,
-- the rotation is slower and narrower than ordinary locomotion or free aiming,
-- a boss can still leave the formation's frontal arc or interrupt Akio,
-- and Basic Attacks remain preferable for short, mobile, or uncertain exchanges.
+Approved summary:
 
-## Questions for Tier IV review
+- Pale Lance gains increased maximum spectral reach while retaining its narrow fixed line, preparation, interruption, and severe miss recovery,
+- the Pale Barrage continuation may use the approved Tier IV maximum line, but repeated jabs do not each receive full independent Spectral Edge triggers,
+- Ghostline Slash gains increased spectral attack reach without changing the universal neutral dash,
+- Pale Lance's initial thrust and Ghostline Slash become Spectral Edge-eligible only at Tier IV,
+- valid deathblows may be initiated from farther away through a clear frontal path,
+- the extended deathblow approach is one authored straight spectral movement rather than a teleport, curved pursuit, or general traversal action,
+- solid geometry, hazards, intervening enemies, and authored blockers prevent the extended initiation,
+- a deathblow kill grants brief non-stacking movement-only Veilstride,
+- Veilstride does not alter attack speed, dash distance, invulnerability, recovery, or attack-bound movement,
+- Spectral Edge receives its normal fourth Tier step,
+- and Wraith's point-blank, lateral, fixed-direction, interruption, and miss weaknesses remain intact.
 
-- Is a second major Pale Barrage upgrade too narrow after Tier I already adds Pale Barrage?
-- Does Pale Procession provide enough value during short exchanges and mobile boss encounters?
-- Is three-lane hit resolution and steering worth its animation, VFX, collision, and readability cost?
-- Does Spectral Passage already provide sufficient ordinary group value, making another formation upgrade redundant?
-- Should Tier IV instead upgrade several Wraith actions or build from Wraith's Reach?
-- Can a broad Tier IV preserve point-blank and lateral weaknesses without becoming a full-screen control tool?
-- What benefit remains valuable when stationary barrage commitment is unsafe?
+The full approved rules belong in `WRAITH_ASPECT.md`.
 
-# Candidate production burden
+# Decision outcome
 
-If Pale Procession is retained, it requires:
+Wraith's qualitative Tier 0-IV package is complete for current scoping.
 
-- shade spawning, stable offsets, adjacent line geometry, reduced impact, and dismissal,
-- slow direct steering within a limited frontal arc,
-- deterministic one-stream-per-enemy resolution with central-stream priority,
-- prevention of shade Blood generation, Wraith's Reach echo creation, Spectral Edge multiplication, Spectral Passage chains, and full-value proc multiplication,
-- and readable Shrine, HUD, teaching, and mastery-trial states.
-
-# Current active decision
-
-Reassess Tier IV around the approved Tier 0-III package.
-
-The final capstone should remain useful against ordinary encounters and mobile bosses, preserve Wraith's frontal and spacing weaknesses, avoid overconcentrating progression on Pale Lance and Pale Barrage, and justify its production burden relative to Wolf and Ronin.
+Further Wraith work concerns prototype validation, exact tuning, animation, VFX, audio, deathblow pathing, Shrine communication, trials, and cross-roster production comparison rather than another Tier IV concept search.
