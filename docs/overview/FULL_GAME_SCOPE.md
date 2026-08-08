@@ -94,7 +94,7 @@ The Blood Art distinction is fixed:
 
 > **Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point.**
 
-All three packages are ready for the final cross-roster paper-design comparison. Final animation counts, VFX counts, frame data, combat values, collision, and effect timing still require implementation briefs and playable validation.
+All three packages are locked at current qualitative paper-design depth. Final animation counts, VFX counts, frame data, combat values, collision, and effect timing still require implementation briefs and playable validation.
 
 ## Optional investment outcomes
 
@@ -234,11 +234,10 @@ No duplicate Blood Art progression tree beneath each Aspect is included in launc
 
 ## Current open production scope
 
-1. Final cross-roster Aspect comparison.
-2. Launch Technique/Prosthetic-Technique/Relic/consumable catalog.
-3. Persistent progression, onboarding, and trial package.
-4. Narrative delivery, voice, cinematic, portrait, and final-writing package.
-5. Postgame reward and UI package.
+1. Launch Technique/Prosthetic-Technique/Relic/consumable catalog.
+2. Persistent progression, onboarding, and trial package.
+3. Narrative delivery, voice, cinematic, portrait, and final-writing package.
+4. Postgame reward and UI package.
 
 ## Deferred implementation work
 
