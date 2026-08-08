@@ -9,6 +9,14 @@ last_reviewed: 2026-08-07
 
 # Documentation Changelog
 
+## 2026-08-07 — Aspect questions closed for current scope
+
+- Treated Wolf, Wraith, and Ronin Tier 0-IV packages as locked at current qualitative paper-design depth after user review.
+- Removed the final cross-roster Aspect comparison and other resolved Aspect/Tier audits from the active question tracker.
+- Kept exact combat values, timings, hitboxes, growth percentages, collision, and presentation tuning deferred to prototyping and implementation.
+- Advanced the active design area to the launch run-build content catalog.
+- Synchronized gameplay, overview, full-scope, progression, and production-roadmap status wording.
+
 ## 2026-08-07 — Ronin package lock and Aspect documentation cleanup
 
 - Approved Ronin's Tier 0 weapon foundation without changing its six-action moveset or strongest-guard/slow-posture-recovery identity.
