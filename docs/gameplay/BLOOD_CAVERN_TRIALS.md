@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-06
+last_reviewed: 2026-08-07
 topics:
   - trials
   - training
@@ -26,173 +26,126 @@ related:
 
 Provide repeatable, skill-focused Strand activities that teach approved combat systems, demonstrate selected Technique interactions, and reward mastery without depending on run RNG.
 
-The trial framework and three-Aspect launch roster are approved. Exact trial counts, names, encounter scripts, rewards, and production volume remain part of the persistent progression, onboarding, and trial package.
+The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, rewards, and production volume remain part of the persistent progression/onboarding package.
 
 ## Trial families
 
 ### Basic Combat Trials
 
-Teach or refresh:
-
-- block and timed parry,
-- player and enemy posture,
-- posture break,
-- deathblow,
-- dodge,
-- perilous-attack response,
-- introductory Counter Cut,
-- introductory Dash Slash,
-- prosthetic activation.
+Teach or refresh block, timed parry, player/enemy posture, posture break, deathblow, dodge, perilous responses, introductory Counter Cut/Dash Slash, and Prosthetic activation.
 
 ### Wolf Trials
 
-Tier 0 lessons may teach:
+Tier 0 lessons:
 
-- value from Fang Slash and Rending Cross without requiring full sequence completion,
+- short-range pressure and sequence choice,
 - player-directed pursuit through Raking Fang, Hunting Slash, and Predator's Passage,
-- nearby target transfer through aim and attack geometry,
-- recognizing when Blood Cleave is safe,
-- avoiding overcommitment after a miss,
-- managing ranged pressure and hazards without changing the universal dash.
+- choosing when Blood Cleave is safe,
+- avoiding overcommitment after misses.
 
-Wolf attacks do not use corrective tracking or hidden homing.
+Tier lessons:
 
-The approved current Tier package supports later demonstrations for:
-
-- **Blood Tempo:** confirm valid contact and choose an approved earlier continuation into the Basic sequence,
-- **Feral Momentum:** recognize the increasing deterministic payoff on later Basic-sequence positions reached through successful continuation,
-- **Blood Hunt:** activate for limited Health recovery and a disruptive howl, choose one safe pursuit line, understand pass-through and stopping rules, and respect dangerous ending recovery,
-- **Blood Fang:** understand the strong endpoint strike and that only the endpoint—not travel contact—may create later Tier interactions,
-- **Fanged Guard:** use the one frontal block on Predator's Passage or one connected later Basic startup while respecting normal posture-break and directional counters,
-- **Apex Mauling:** trigger the consolidated claw package from a qualifying major impact and understand its compact secondary coverage and movement-only slow.
-
-These are approved teaching goals, not final trial count commitments.
+- **Blood Tempo:** recognize valid-contact continuation windows.
+- **Feral Momentum:** recognize increasing payoff on later connected Basic positions.
+- **Blood Hunt/Blood Fang:** use activation healing/disruption, choose a pursuit line, understand pass-through/stopping rules, and respect ending recovery.
+- **Fanged Guard:** use one frontal block while respecting normal posture-break rules.
+- **Apex Mauling:** trigger the contact-gated mauling and understand compact secondary coverage and movement-only slow.
 
 ### Wraith Trials
 
-Approved Tier 0 lessons may teach:
+Tier 0 lessons:
 
-- using Veil Cut as the precise low-commitment line for short openings,
-- deciding whether to stop after Veil Cut or commit to Passing Arc's broader frontal sweep,
-- using Pale Lance only for confirmed focused openings and respecting severe miss recovery,
-- using Ghostline Slash for controlled dash re-entry rather than pursuit,
-- converting a successful parry into strong posture pressure through Veil Reversal,
-- reaching exposed ranged enemies through authored melee geometry and universal movement,
-- maintaining useful distance without relying on an artificial close-range dead zone,
-- returning to defense after deliberate commitments,
-- and handling enemies that enter point-blank range or attack from several directions.
+- Veil Cut for short precise openings,
+- Passing Arc for broader frontal commitment,
+- Pale Lance for confirmed focused punishes,
+- Ghostline Slash for controlled re-entry,
+- Veil Reversal for posture-focused parry conversion,
+- maintaining useful spacing without tracking or teleportation.
 
-Wraith trials must not teach corrective tracking, teleportation, perfect-dodge rewards, Mist-Step, forced offsets, mandatory repositioning, a duration-wide reach state, Veiled Guard, or Pale Procession.
+Tier lessons:
 
-The approved Tier I-IV package supports demonstrations for:
-
-- **Pale Barrage:** choose between a single Pale Lance, partial continuation, and full stationary barrage according to opening size,
-- **Spectral Edge at Tier I-III:** distinguish physical-range contact from eligible spectral-only contact and understand that Veil Cut, Passing Arc, and Veil Reversal receive posture and guard-pressure reward while Pale Lance and Ghostline Slash do not yet qualify,
-- **Wraith's Reach activation:** use the compact frontal sweep as guaranteed immediate value without treating it as full-circle protection,
-- **Wraith's Reach corridor:** select one valuable line, understand the fixed very long corridor strike, and respect ordinary vulnerability and poor-line recovery,
-- **Wraith's Reach echo:** predict whether enemies will remain in, leave, or enter the same corridor before the delayed repetition resolves,
-- **Spectral Passage alignment:** position ordinary enemies in one authored line or arc so a qualifying attack can continue through the front rank,
-- **Spectral Passage stopping rules:** distinguish ordinary pass-through targets from elites, bosses, heavy stopping enemies, solid geometry, and authored blockers,
-- **Spectral Passage weighting:** understand that secondary ordinary targets receive reduced Health damage and meaningful posture and guard pressure without Blood generation or unrestricted proc multiplication,
-- **Beyond the Veil reach:** compare Pale Lance and Ghostline Slash before and after Tier IV while preserving their fixed direction, ordinary interruption, and miss or commitment risks,
-- **Tier IV Spectral Edge unlock:** connect through the spectral-only portions of Pale Lance's initial thrust and Ghostline Slash after those attacks become eligible at Tier IV,
-- **extended deathblow initiation:** identify a deathblow-ready target at greater frontal distance, verify a clear path, and distinguish valid approach lines from blocked, hazardous, obstructed, or out-of-angle attempts,
-- **Veilstride:** use the brief movement speed after a killing deathblow to leave the execution position, reclaim preferred spacing, or establish the next useful front,
-- and understand that Wraith's Reach remains self-contained, Pale Barrage's repeated jabs do not each gain unrestricted Spectral Edge or passage behavior, and Veilstride does not improve attacks or the neutral dash.
-
-These are approved teaching goals, not final trial count commitments. Beyond the Veil should preferably use existing Pale Lance, Ghostline Slash, deathblow, locomotion, and obstacle-validation trial components rather than requiring one oversized bespoke showcase.
+- **Pale Barrage:** choose between single thrust, partial continuation, and full stationary commitment.
+- **Spectral Edge:** distinguish physical contact from eligible spectral-only contact and its Tier-scaled posture/guard payoff.
+- **Wraith's Reach:** use the opening sweep, select one valuable corridor, and predict the delayed same-geometry echo.
+- **Spectral Passage:** align layered ordinary enemies and learn stopping rules against elites, bosses, protected heavies, and geometry.
+- **Beyond the Veil:** use longer Pale Lance/Ghostline geometry, Tier IV Spectral Edge eligibility, valid clear-path extended deathblows, and brief Veilstride movement after a killing deathblow.
 
 ### Ronin Trials
 
-Representative Tier 0 lessons may teach:
+Tier 0 lessons:
 
-- selecting Severing Cut, Crushing Cross, or Bloodfall according to opening size,
-- high-value punishment through Stillness Draw,
-- faster but lower-power access through Breaching Slash,
-- Answering Steel after a universal parry,
-- guard stability and accumulated posture,
-- respecting fixed attack lines, slow startup, and severe miss recovery.
+- choose Severing Cut, Crushing Cross, or Bloodfall according to opening size,
+- use Stillness Draw for prepared single-target punishment,
+- use Breaching Slash for faster lower-power re-entry,
+- use Answering Steel after a universal parry,
+- understand strongest-guard stability, accumulated posture, and slow posture recovery,
+- respect fixed attack lines and severe miss recovery.
 
-These Tier 0 lessons remain subject to the focused Ronin Tier 0 review before exact scripts or counts are locked.
+Tier lessons:
 
-The approved current Tier I-IV package supports later demonstrations for:
+- **Posture-capacity growth:** recognize that each Embrace allows Ronin to absorb more posture before breaking while recovery speed remains unchanged.
+- **Steadfast Reprisal:** block, read whether pressure has ended, then decide whether Reprisal Cut is safe.
+- **Falling Mountain:** use partial posture relief, aim the planted slam, and understand the delayed fixed-point Deep Rupture.
+- **Unbroken Resolve:** distinguish the costly one-hit commitment-preservation route from clean Measured Weight → Perfect Weight execution.
+- **Shattering Wake:** line enemies behind a directly struck or guarding primary target and understand that the wake cannot double-hit the primary target.
 
-- **Steadfast Reprisal:** block a qualifying attack, judge whether the enemy sequence has ended, and choose whether the slow standalone Reprisal Cut is safe,
-- **Falling Mountain:** use the activation posture relief, commit to one manually aimed planted slam, and understand the delayed Deep Rupture at the original point,
-- **Unbroken Resolve:** distinguish the narrow costly commitment-preservation window from the clean-hit Measured Weight and Perfect Weight route,
-- **Shattering Wake:** line enemies behind a directly struck or guarding primary target and understand that the wake does not multiply damage back onto that target.
+Ronin trials must not teach tracking, required combo completion, generic armor, or a persistent Focus state.
 
-Ronin trials must not teach corrective tracking, combo preservation, a required finisher, Counter Cut as an Aspect mechanic, or a generic Focus state.
+## Fixed Tier and Blood demonstrations
 
-### Fixed Tier and Blood demonstrations
-
-Wolf and Wraith may be used for high-level Tier I-IV trial planning. Ronin's Tier I-IV demonstrations may also be planned, while exact Tier 0 teaching waits for its focused review.
+All three Aspect packages may now be used for high-level Tier 0-IV trial planning.
 
 Trials may teach:
 
-- approved Tier headline benefits,
-- the inherent movement, direction, commitment, recovery, collision, and defensive limitations preserved by each upgraded action,
+- Tier headline benefits and supporting growth rules,
+- inherent movement, direction, commitment, recovery, collision, and defensive limitations,
 - Resist, Embrace, and Stabilize decisions,
 - Blood unavailability before Tier II,
-- Blood generation and readiness,
-- guaranteed Blood Art activation payoff,
-- Blood Art action or active-state behavior,
-- and the interaction between fixed Aspect progression and temporary Techniques.
+- Blood generation/readiness,
+- Blood Art activation value and failure states,
+- interaction between fixed Aspect progression and temporary Techniques.
 
-A trial preview does not grant permanent in-run Tier or Blood state.
+A trial preview does not grant persistent run Tier or Blood state.
 
-### Technique demonstrations
+## Technique demonstrations
 
-Selected instructional trials may use fixed Techniques to teach:
+Selected trials may use fixed Techniques to teach:
 
-- how one standalone Technique modifies a universal combat verb,
-- how one refinement deepens its base Technique,
-- how a Prosthetic Technique changes the equipped tool,
-- how Techniques reinforce, broaden, compensate, or hybridize an Aspect,
-- and how shared combat verbs create synergy without exact-combination dependence.
+- one universal combat-verb modification,
+- one refinement,
+- Prosthetic Technique behavior,
+- reinforce/broaden/compensate/hybridize relationships with an Aspect.
 
-Temporary trial Techniques do not become a persistent equipped loadout.
+Temporary trial loadouts do not become persistent equipped builds.
 
-### Advanced and mastery trials
+## Advanced and mastery trials
 
-Later challenges may combine approved mechanics, impose fixed Aspect, Technique, prosthetic, or Relic loadouts, or test execution under stricter conditions. They should remain deterministic enough that failure teaches a clear lesson.
+Later challenges may use fixed Aspects, Techniques, Prosthetics, Relics, stricter execution goals, or boss-rematch structures. They should remain deterministic enough that failure teaches a clear lesson.
 
 ## Reward philosophy
 
-Trials may award:
+Trials may award Aspect access, Technique-pool unlocks, persistent currency, small capped reliability upgrades, cosmetics, lore reflections, and mastery marks.
 
-- access to an approved Blood Aspect where unlock pacing requires it,
-- approved Technique-pool unlocks,
-- persistent currency,
-- small capped reliability upgrades,
-- cosmetics,
-- lore reflections,
-- and mastery marks.
-
-Rewards must not:
+Trials may not:
 
 - add alternate Aspect Tier branches,
-- remove Embrace danger,
 - grant permanent Tier or Blood state,
 - permanently pre-equip a run Technique,
-- create a persistent Blood balance,
-- create a separate duplicate Blood Art upgrade tree under each Aspect,
-- or replace run-only progression.
-
-Unlocking a Technique through a trial adds it to future eligible reward pools rather than equipping it at every run start.
+- create persistent Blood,
+- duplicate the Blood Art system as a permanent tree,
+- or remove a kit's core tradeoffs.
 
 ## Permanent Aspect upgrade boundary
 
-Permanent Aspect upgrades, if included, must remain small, capped, and reliability-focused. They may make an approved action easier to execute but cannot add a major mechanic, remove the kit's firm tradeoff, bypass fixed Tier progression, or unlock Blood before Tier II.
+Permanent Aspect upgrades, if included, remain small, capped, and reliability-focused. They cannot add major Tier mechanics early, bypass fixed progression, or unlock Blood before Tier II.
 
-Permanent upgrades must not grant Pale Lance or Ghostline Slash their Tier IV Spectral Edge eligibility early, extend Wraith deathblow initiation before Tier IV, or reproduce Veilstride outside its approved trigger.
+Permanent upgrades must not grant Wraith Tier IV reach/deathblow rules early or reproduce Ronin's run-only Tier posture-capacity growth as an uncapped permanent scaling path.
 
 ## Technical requirements
 
 - Trials are repeatable.
-- Fixed conditions and standardized Aspect, Technique, prosthetic, and Relic loadouts are supported.
+- Fixed Aspect/Technique/Prosthetic/Relic loadouts are supported.
 - Progress, unlocks, rewards, and permanent-upgrade ranks persist.
-- Temporary trial Techniques and run-only state clear when the trial ends.
-- Trial rules do not require random room or reward generation.
-- The framework must support Tier-specific Spectral Edge eligibility, clear-path extended deathblow validation, and temporary Veilstride movement state where Wraith demonstrations require them.
-- The framework may support future challenge ladders, boss rematches, or score modes without making them current launch promises.
+- Temporary trial state clears when the trial ends.
+- Trial rules do not require random room/reward generation.
+- Framework supports Tier-specific Spectral Edge eligibility, clear-path extended deathblows, Veilstride, Ronin posture-capacity variants, and other approved Tier states where demonstrations require them.

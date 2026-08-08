@@ -4,7 +4,7 @@ title: Blood Aspect VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-06
+last_reviewed: 2026-08-07
 topics:
   - blood-aspects
   - wolf
@@ -18,409 +18,155 @@ related:
   - GAMEPLAY-RONIN-ASPECT
   - GAMEPLAY-TECHNIQUES
   - CHAR-AKIO
-  - ART-TECHNIQUE-VFX
   - ART-MILESTONE-04
 ---
 
 # Blood Aspect VFX
 
-Blood Aspect effects communicate the selected katana weapon kit. They are information cues first and spectacle second. All three families layer onto Akio's base character presentation and must preserve attack direction, enemy telegraphs, hit geometry, and the player's final position.
+Blood Aspect effects communicate weapon geometry, commitment, state, and impact before spectacle. All three qualitative Tier 0-IV packages are approved for high-level production planning; exact counts and timings still require implementation briefs and playable validation.
 
-Techniques may reuse or lightly extend an Aspect family when they amplify the same combat verb, but the selected Aspect remains the stronger visual identity.
+## Shared rules
 
-Wolf, Wraith, and Ronin have complete qualitative Tier I-IV packages approved through the present audit. Final counts for all three still require implementation briefs and playable validation. Ronin's Tier 0 weapon foundation remains the next design review, so Ronin's exact Tier 0 animation and VFX counts remain provisional until that review closes.
-
-## Shared presentation rules
-
-- The physical katana remains visible or clearly connected to the Blood-formed weapon expression.
-- Attack reach, direction, and geometry must be readable before spectacle.
-- Neutral dash and universal defensive actions keep shared presentation across Aspects.
-- Aspect VFX cannot imply invulnerability, teleportation, independent projectiles, automatic target marks, corrective tracking, or homing that gameplay does not provide.
-- Tier escalation should deepen the same visual family rather than replace it with unrelated effects.
-- Wolf, Wraith, and Ronin must not become simple color swaps.
-- Effects use modular overlays and VFX where practical rather than requiring three unrelated complete player sheets.
-- Inherent tradeoffs should remain readable through movement, direction, commitment, recovery, collision, and defensive access rather than through a separate drawback icon or penalty effect.
+- The physical katana remains visible or clearly connected to the Blood-formed expression.
+- Direction, reach, collision, and final player position must remain readable.
+- Neutral dash and universal defense keep shared presentation across Aspects.
+- VFX cannot imply tracking, homing, teleportation, invulnerability, armor, projectiles, or target selection that gameplay does not provide.
+- Tier escalation should extend the same visual family rather than replace it.
+- Wolf, Wraith, and Ronin must not become color swaps.
+- Reuse base animation, HUD, and effect families whenever a Tier changes geometry or values rather than creating a new action.
 
 ## Wolf — pressure and pursuit
 
-### Gameplay purpose
+### Tier 0
 
-Communicate fast close-range attacks, player-directed forward pursuit, sustained contact, and the danger of committed misses.
+- dense close-range Blood edge,
+- compact predatory trails,
+- strong connected-contact emphasis,
+- readable forward travel on Predator's Passage and Hunting Slash,
+- broad committed Blood Cleave impact,
+- clear severe-miss recovery.
 
-### Tier 0 visual direction
+### Tier I — Blood Tempo / Feral Momentum
 
-- dense Blood edge close to the physical katana,
-- compact predatory trails that follow the real attack arc,
-- stronger contact emphasis across connected attacks,
-- clear forward travel on Predator's Passage and Hunting Slash,
-- broad but controlled impact on Blood Cleave,
-- visible recovery or Blood dissipation after a severe miss.
+- brief continuation-ready cue only after valid contact,
+- escalating impact treatment on later connected Basic positions,
+- no combo meter, random critical flash, or persistent attack-speed aura.
 
-Wolf effects should feel forceful, close-ranged, and committed to direct contact.
+### Tier II — Blood Hunt
 
-### Tier I — Blood Tempo and Feral Momentum
+- full-meter activation surge,
+- limited-healing feedback,
+- short Blood howl and nearby disruption radius,
+- one fixed pursuit line,
+- readable ordinary-enemy pass-through and stronger-enemy/geometry stopping,
+- Blood Fang endpoint,
+- severe ending recovery.
 
-Successful approved Wolf contact needs a brief Blood-link cue showing that the player may continue earlier into the Basic sequence.
-
-The cue must:
-
-- occur only after valid contact,
-- remain subordinate to hit, parry, posture-break, and deathblow feedback,
-- distinguish a valid continuation from a miss,
-- and avoid implying a stored combo state or permanent attack-speed buff.
-
-Feral Momentum may intensify the contact and impact treatment of Rending Cross, Raking Fang, and Blood Cleave according to their reached sequence position and current Tier. It should communicate deterministic escalating payoff without adding a separate meter, stack display, random critical flash, or persistent timer.
-
-### Tier II — Blood Hunt and Blood Fang
-
-Blood Hunt requires:
-
-- a clear full-meter activation surge,
-- restrained limited-healing feedback,
-- a short Blood howl with a readable nearby disruption radius,
-- one long fixed player-selected pursuit line,
-- clear pass-through contact on eligible ordinary enemies without reading as teleportation,
-- a readable stop against stronger enemies, obstacles, invalid space, or maximum distance,
-- and a clear ending transition into Blood Fang and severe recovery.
-
-Blood Hunt must not read as a temporary transformation, general moveset buff, invulnerability state, or automatically guided path. Akio's original line, current position, stopping cause, and final position must remain readable.
-
-Blood Fang is the pursuit endpoint and principal bespoke effect:
-
-- a Blood-formed wolf jaw manifests around the final committed strike,
-- the jaw bites at the actual stopping point or endpoint,
-- the effect distinguishes Blood Fang from ordinary travel contact,
-- and a miss or poor endpoint must communicate dangerous recovery.
-
-The jaw is an attack effect, not a summoned animal or independent entity.
+The wolf jaw is an attack effect, not a summoned companion or transformation.
 
 ### Tier III — Fanged Guard
 
-Fanged Guard requires one shared frontal fang-guard language across its approved action-specific uses:
-
-- while Predator's Passage is charging,
-- during the eligible startup of connected Raking Fang,
-- or during the eligible startup of connected Blood Cleave.
-
-Presentation must distinguish:
-
-- protection available,
-- the single frontal block being consumed,
-- normal player-posture cost and possible posture break,
-- immediate charge completion for Predator's Passage,
-- and the absence of further protection for the current connected Basic sequence after the allowance is spent.
-
-The effect must not imply side, rear, perilous, grab, launch, knockdown, recovery, or general moveset protection.
+Use one frontal fang-guard language for Predator's Passage charge and eligible connected Raking Fang/Blood Cleave startup. Show availability, one-hit consumption, normal posture cost, and posture break without implying general armor.
 
 ### Tier IV — Apex Mauling
 
-A qualifying direct hit or guard from connected Blood Cleave, Predator's Passage, Fang Reversal, or Blood Fang triggers one rapid Blood-claw mauling at the original contact point.
-
-Presentation requires:
-
-- a visible rapid claw series that resolves as one consolidated gameplay package,
-- a dominant primary-target read,
-- compact outer claw arcs for reduced-power nearby coverage,
-- clear posture, guard-recoil, and eligible ordinary-enemy stagger emphasis,
-- a restrained movement-only slow cue on the primary target,
-- and no visual suggestion that enemy attack timing or animation speed changed.
-
-Large targets must not appear to receive multiplied damage from overlapping claw marks. The mauling cannot track, retarget, search, recursively trigger, generate Blood, or cancel Wolf's recovery. When connected Blood Cleave creates the mauling, Feral Momentum may strengthen posture and recoil presentation without turning it into an excessive Health-damage explosion.
-
-### Wolf boundaries
-
-- no automatic Prey Mark,
-- no persistent marked-target UI requirement,
-- no pressure meter or combo-state effect,
-- no corrective tracking or homing cue,
-- no spectral companion or mirrored attacker,
-- no temporary Dire Hunt transformation state,
-- no permanently extended blade that removes Wolf's reach weakness,
-- no full-body effect that implies attack invulnerability,
-- no deathblow-gated Apex Feast eruption or primed-Held state.
+Show one consolidated rapid Blood-claw package at valid contact, with dominant primary impact, compact reduced-power outer coverage, posture/guard recoil, and a restrained movement-only slow cue.
 
 ## Wraith — reach and frontal control
 
-### Gameplay purpose
+### Tier 0
 
-Communicate long connected melee reach, narrow pokes, broad spectral arcs, slower and more deliberate ordinary attacks than Wolf, restrained movement, fixed attack lines, stronger pressure from correctly spaced eligible spectral contact, one major Blood Art that controls a chosen frontal corridor, Tier III penetration through layered ordinary formations, and Tier IV engagement and execution from spectral distance.
+- elongated spectral Blood edge connected to the katana,
+- precise Veil Cut line,
+- broad Passing Arc sweep,
+- longest narrow Pale Lance expression,
+- compact extended Ghostline Slash,
+- posture-focused Veil Reversal,
+- restrained body effects and clear miss dissipation.
 
-Wraith's Tier 0-IV package is approved. Exact production counts, timings, and asset reuse remain implementation-brief and playable-validation work.
+### Tier I — Pale Barrage / Spectral Edge
 
-### Tier 0 visual direction
+Pale Barrage needs clear continuation from Pale Lance, repeated lower-impact thrusts along the same direction, stationary commitment, early release, and recovery.
 
-- elongated pale or spectral Blood edge visibly connected to the katana,
-- a clean precise medium-to-long line for Veil Cut,
-- a broad translucent frontal arc for Passing Arc,
-- the longest narrow connected blade expression for Pale Lance,
-- compact extended slash language for Ghostline Slash,
-- a posture-focused extended counter treatment for Veil Reversal,
-- restrained body effects so Akio's actual position remains obvious,
-- and clear endpoint and dissipation on missed extended attacks.
-
-Wraith should feel precise and light in spectral motion without making Akio himself fast, intangible, or highly mobile. The five Tier 0 actions must remain visually distinct through geometry, cadence, commitment, recovery, and impact rather than becoming several versions of the same long slash.
-
-### Tier I — Pale Barrage and Spectral Edge
-
-Pale Barrage requires:
-
-- a clear continuation from the initial Pale Lance,
-- rapid repeated spectral thrusts along the original direction,
-- visible stationary commitment once the barrage begins,
-- clear early release, maximum sequence, interruption, and recovery states,
-- reduced per-jab impact relative to the initial Pale Lance,
-- and no effect suggesting independent target selection, homing, or automatic rotation.
-
-The visual intensity may build across the authored sequence, but it must not imply a separate meter or stored combo reward.
-
-Spectral Edge requires restrained feedback distinguishing:
-
-- physical-blade-range contact,
-- spectral-only contact from an attack that is currently eligible,
-- spectral-only contact from Pale Lance or Ghostline Slash before Tier IV that does not receive the bonus,
-- and the modestly increasing posture and guard-pressure reward at each Embrace.
-
-From Tier I through Tier III, Veil Cut, Passing Arc, and Veil Reversal are eligible. Pale Lance's initial thrust and Ghostline Slash become eligible only at Tier IV.
-
-Spectral Edge must not read as a critical hit, large Health-damage multiplier, added reach, tracking, or persistent buff. Pale Barrage jabs and secondary hits cannot each produce unrestricted full-value Spectral Edge flashes.
+Spectral Edge must distinguish physical-range contact from currently eligible spectral-only contact. Its Tier escalation emphasizes posture/guard pressure rather than Health-damage spectacle. Pale Lance and Ghostline Slash gain the cue only at Tier IV.
 
 ### Tier II — Wraith's Reach
 
-Wraith's Reach is an immediate sweep-corridor-echo Blood Art rather than a duration state.
+- full-meter activation,
+- short directional preparation,
+- compact broad frontal sweep,
+- very long connected corridor strike,
+- one weaker delayed repetition along the exact same corridor,
+- clear ending recovery and Blood-consumed state.
 
-Presentation requires:
-
-- a clear full-meter activation cue,
-- a short readable directional preparation,
-- one compact broad frontal opening sweep,
-- a readable distinction between the sweep's immediate coverage and the following corridor,
-- one very long narrow-to-medium corridor strike visibly connected to Akio's katana,
-- one delayed spectral Wraith that repeats the exact same corridor geometry,
-- clear timing separation between the primary corridor strike and weaker echo,
-- readable corridor persistence only through anticipation and the later strike rather than a damaging field,
-- visual space for enemies to leave or enter the corridor before the echo resolves,
-- and clear ending recovery and Blood-consumed feedback.
-
-The opening sweep must read as strong immediate frontal pressure, not a full-circle panic blast. It cannot imply healing, posture clearing, damage reduction, automatic defense, interruption resistance, or protection outside the front.
-
-The corridor must not read as a projectile detached from the katana, room-crossing dash, target lock, or homing beam. Akio uses little or no forward pursuit, and the fixed selected line must remain obvious after commitment.
-
-The delayed Wraith is a brief authored repetition, not an autonomous companion. It must:
-
-- appear only for the delayed corridor strike,
-- reuse the exact original direction and geometry,
-- remain visually weaker than the primary strike,
-- disappear immediately after resolution,
-- and avoid implying retargeting, independent decisions, Blood generation, Spectral Edge, or recursive echoes.
-
-The retired duration-state version must not leave a persistent body aura, moveset-wide reach state, or repeated afterimages on ordinary attacks.
+The delayed Wraith is a brief authored repetition, not an autonomous companion.
 
 ### Tier III — Spectral Passage
 
-Spectral Passage uses the existing attack trails and geometry rather than creating a detached projectile or new summoned strike.
+Existing spectral geometry remains visibly continuous through eligible ordinary-enemy bodies. Show dominant primary impact, reduced secondary impacts, and obvious termination against elites, bosses, protected heavies, solid geometry, and authored blockers.
 
-Presentation requires:
-
-- the spectral portion of Veil Cut, Passing Arc, Pale Lance's initial thrust, Ghostline Slash, and Veil Reversal to remain visibly continuous through ordinary-enemy bodies,
-- one dominant normal impact on the first or primary target,
-- reduced but clear secondary impacts on additional ordinary enemies within the remaining line or arc,
-- visible termination when the attack contacts an elite, boss, protected heavy enemy, solid geometry, or another authored stopping body,
-- no second impact against an enemy already struck by that action,
-- and restrained secondary feedback so formation penetration remains readable without obscuring telegraphs.
-
-The effect must not imply:
-
-- additional reach or width,
-- target selection or chaining,
-- bouncing between enemies,
-- an independently moving projectile,
-- same-enemy repeated damage,
-- full-value Spectral Edge on every secondary target,
-- secondary Blood generation,
-- or a persistent penetration state around Akio.
-
-Pale Barrage's repeated jabs and all stages of Wraith's Reach need distinct presentation showing that they do not each create unrestricted Spectral Passage chains.
+Do not imply added reach, chaining, bouncing, same-target multiplication, or a detached projectile.
 
 ### Tier IV — Beyond the Veil
 
-Beyond the Veil should read as mastery of engagement and execution from spectral distance, not as a transformation or screen-filling capstone.
+- longer Pale Lance and Ghostline Slash attack geometry without neutral-dash changes,
+- Tier IV Spectral Edge eligibility on those attacks,
+- greater-distance deathblow prompt only for valid clear paths,
+- one straight visible spectral approach into the shared execution,
+- brief movement-only Veilstride after a killing deathblow.
 
-Pale Lance presentation requires:
-
-- a clearly longer maximum spectral extension,
-- the same narrow player-selected line,
-- visible continuity from the physical katana,
-- preserved charge, commitment, interruption, and severe miss-recovery reads,
-- a Pale Barrage continuation that may use the longer authored line without producing one full Spectral Edge flash per jab,
-- and no visual implication of a projectile, tracking thrust, or safe recovery.
-
-Ghostline Slash presentation requires:
-
-- a clearly longer spectral slash region after the normal dash,
-- no change to the dash trail, distance, invulnerability, steering, or recovery language,
-- a clear distinction between movement ending and the extended attack geometry,
-- and no suggestion that Akio teleported or that the slash snapped toward an enemy.
-
-At Tier IV, Pale Lance's initial thrust and Ghostline Slash gain the existing Spectral Edge contact cue when they connect through their spectral-only regions. Their pre-Tier-IV versions must not use that reward cue.
-
-Extended deathblow initiation requires:
-
-- a readable valid-target prompt or highlight at greater distance,
-- clear suppression of the prompt when geometry, hazards, intervening enemies, target angle, or encounter rules invalidate the path,
-- one rapid straight spectral approach from Akio to the already deathblow-ready target,
-- visible travel rather than disappearance and reappearance,
-- no curved pursuit, retargeting, or room-crossing route correction,
-- and a clean transition into the shared deathblow presentation.
-
-Veilstride requires:
-
-- one restrained movement-ready cue after a deathblow kills its target,
-- a brief spectral trailing treatment while ordinary locomotion is accelerated,
-- clear fade or expiration,
-- and no implication of attack-speed increase, dash enhancement, invulnerability, recovery acceleration, or a persistent buff state.
-
-Beyond the Veil should use the fewest additional full-screen or character-duplicate effects possible. It requires no shades, clones, adjacent barrage lanes, persistent zones, or new attack entity.
-
-### Wraith boundaries
-
-- no perfect-dodge identity,
-- no vanish or reappearance states,
-- no Mist-Step,
-- no forced afterimage path between special positions,
-- no teleportation or additional invulnerability,
-- no corrective tracking or homing,
-- no independent projectile detached from the katana,
-- no autonomous companion behavior,
-- no duration-wide reach or ordinary-attack echo state,
-- no Veiled Guard parry-during-Held presentation,
-- no Pale Procession shade or three-lane barrage presentation,
-- no Veilstride attack-speed or dash-enhancement read,
-- no confusion with the Mist Raven prosthetic,
-- no return to the discarded spinning replacement-combat Art,
-- no VFX that hides Wraith's stationary, restrained, or directional commitments.
+No teleportation, persistent transformation, Pale Procession shades, or generic mobility state.
 
 ## Ronin — impact and stability
 
-### Gameplay purpose
-
-Communicate deliberate heavy attacks, concentrated power, large Health and posture impact, strong ordinary-enemy stagger, stable guarding, fixed attack lines, and meaningful recovery after commitment.
-
-### Tier 0 visual direction
+### Tier 0
 
 - dense compressed Blood edge,
-- restrained accumulation around the blade and sheath before heavy actions,
-- controlled trails before contact,
-- strong hit-frame emphasis and recoil readability,
-- heavier audio and impact treatment than Wolf or Wraith,
-- clear guard stability and slow posture-recovery states where the HUD or animation requires them.
+- restrained buildup around blade and sheath,
+- strongest hit-frame and recoil emphasis,
+- heavier audio than Wolf or Wraith,
+- clear guard stability and slow posture-recovery readability,
+- minimal visual noise between major impacts.
 
-Ronin is the least visually noisy family outside major impact moments.
+### Repeated posture growth
+
+Ronin's Tier I-IV maximum-posture growth should use the existing player-posture HUD/capacity language. It requires **no separate buff icon, aura, stack effect, or new VFX state**.
 
 ### Tier I — Steadfast Reprisal
 
-Reprisal Cut requires:
-
-- a short readable opportunity cue after a qualifying successful block,
-- a deliberate planted startup distinct from Answering Steel,
-- strong standalone impact without implying a free quick counter,
-- and no movement-to-target, armor, posture recovery, or protection from continued pressure.
+- short opportunity cue after a qualifying block,
+- planted startup distinct from Answering Steel,
+- strong standalone impact,
+- no movement-to-target, armor, or posture-recovery implication.
 
 ### Tier II — Falling Mountain
 
-Falling Mountain requires:
+- full-meter activation and partial posture-relief cue,
+- planted channel with narrow interruption-resistance readability,
+- monumental direct slam,
+- compact reduced-power impact burst,
+- marked original impact point,
+- powerful delayed Deep Rupture at that same point,
+- severe recovery.
 
-- a full-meter activation and meaningful player-posture relief cue,
-- a brief planted channel with narrow ordinary-hit interruption-resistance readability that does not imply damage reduction or invulnerability,
-- one manually aimed monumental blade slam,
-- a compact immediate impact burst,
-- a marked original impact point that clearly anticipates Deep Rupture,
-- and a powerful delayed eruption at that same fixed location.
+Deep Rupture must read as ground-bound force rather than Wraith-like delayed weapon geometry.
 
-The effect must preserve no forward movement, no line correction, and severe ending recovery. Deep Rupture must remain physical and ground-bound rather than resembling Wraith's delayed weapon geometry.
+### Tier III — Unbroken Resolve / Weight
 
-### Tier III — Unbroken Resolve
+Use distinct compact reads for:
 
-Unbroken Resolve requires two distinct readable routes:
+- the late commitment-preservation window,
+- temporary Measured Weight readiness,
+- Perfect Weight consumption emphasizing posture, guard recoil, and stagger rather than extra Health damage.
 
-- a narrow late-commitment preservation cue for the first eligible frontal standard hit while full incoming Health and posture still apply,
-- and a clean-hit Measured Weight state that may be consumed by one approved later strike as Perfect Weight.
-
-Perfect Weight should emphasize enemy-posture damage, guard recoil, and eligible stagger rather than larger Health-damage spectacle. The consuming strike must not appear to restart the sequence immediately. Timer or readiness feedback should remain compact and avoid becoming a dominant maintenance UI.
+The timer/readiness cue should not become a dominant maintenance UI.
 
 ### Tier IV — Shattering Wake
 
-A qualifying direct heavy impact creates one reduced-Health, strong-posture wake through the struck or guarding primary target into enemies behind it.
+A qualifying heavy contact produces one forward force wake beginning at the primary contact point and continuing behind the target. Show reduced Health payoff, strong posture/recoil, no wake on a miss, no double-hit on the primary target, and stronger posture treatment when Perfect Weight amplifies it.
 
-Presentation requires:
+## Tier escalation and production boundary
 
-- clear origin at actual primary contact,
-- readable forward transfer through that target rather than a free ranged launch,
-- no wake on a miss,
-- no damage multiplication back onto the primary target,
-- stronger posture, recoil, and stagger treatment when Perfect Weight amplifies the wake,
-- and no tracking or aim correction.
+All three launch Aspect families now support high-level Tier 0-IV scoping.
 
-Only Falling Mountain's direct blade slam may create its wake; Deep Rupture does not.
-
-### Ronin boundaries
-
-- no generic Focus aura after deathblows,
-- no Counter Cut terminology or effect requirement,
-- no combo-preservation objective,
-- no corrective tracking or homing,
-- no permanently enlarged reach,
-- no general super armor or damage reduction,
-- no effect suggesting heavy attacks can cancel instantly into defense.
-
-## Tier escalation
-
-Every Aspect follows a fixed optional Tier path from Tier 0 through Tier IV.
-
-Wolf and Wraith are available for high-level production planning through Tier IV. Ronin's Tier I-IV package is also approved, while its Tier 0 weapon foundation remains under focused review before exact final counts are locked.
-
-Across all three:
-
-- Tier escalation should intensify or extend the existing family,
-- every Tier should read as a desirable net-positive advancement,
-- inherent limitations remain visible through the upgraded action's movement, direction, commitment, recovery, collision, or defensive access,
-- Embrace should clearly communicate advancement without requiring a separate danger or drawback badge,
-- Resist should stabilize the current state without implying advancement,
-- Stabilize at Tier IV should not look like Tier V,
-- any mutation overlay should be modular and justified by gameplay or narrative presentation.
-
-## Blood and Blood Arts
-
-Blood is unavailable before Tier II. The shared UI and VFX framework must support unavailable, building, ready, activated, resolving, consumed, and rebuilding states. Duration-active support remains available if a future approved Art requires it, but the current three approved Tier II Arts are immediate authored packages.
-
-Each Blood Art may require limited Aspect-specific treatment, but common readiness and activation language should remain recognizable across all three.
-
-A Blood Art must communicate its guaranteed activation payoff and its immediate resolution or usable combat state. Do not assume every Blood Art is a duration transformation.
-
-## Technique relationship
-
-- Neutral Techniques remain compatible with every Aspect family.
-- Technique effects reuse base sword, Aspect, posture, deathblow, and prosthetic language before new VFX are authorized.
-- A Technique cannot create a separate Wolf, Wraith, and Ronin effect set unless its approved rule genuinely requires different geometry or presentation.
-- Technique VFX must not duplicate Blood Tempo, Feral Momentum, Blood Hunt, Blood Fang, Fanged Guard, Apex Mauling, Pale Barrage, Spectral Edge, Wraith's Reach, Spectral Passage, Beyond the Veil, Veilstride, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, or Shattering Wake without explicit approval.
-- Aspect identity remains more prominent than any single temporary Technique.
-- Technique rarity and refinements may change framing and effect treatment only when the approved gameplay entry requires it.
-
-## Delivery requirements
-
-Final production briefs must define:
-
-- required attack trails and impact states,
-- Tier I-IV changes,
-- action-specific movement, commitment, recovery, collision, and defense-state presentation,
-- Blood buildup and readiness states,
-- Blood Art startup, active or resolving behavior, and recovery states,
-- Spectral Edge eligibility communication across Tier I-IV,
-- extended deathblow prompt, path validation, approach, and blocker states,
-- Veilstride activation and expiration,
-- animation dependencies,
-- audio requirements,
-- HUD and Shrine relationships,
-- regional palette tests,
-- and boss readability tests.
-
-Exact sprite frames, particle counts, blend behavior, screen effects, color values, and timing are production and implementation decisions after each gameplay package is approved.
+Final production still requires exact animation reuse, VFX/audio counts, HUD states, collision, timing, and implementation briefs. Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach buff, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, and formal drawback-badge assets remain excluded.

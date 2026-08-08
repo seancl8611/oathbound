@@ -22,39 +22,34 @@ Authoritative player-facing mechanics and system rules belong here.
 
 ## Current status
 
-The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain prototype and playtest decisions rather than top-level scope questions.
+The launch Blood Aspect roster is fixed:
 
-The launch Blood Aspect roster is approved:
-
-- **Wolf:** four-hit fast close-range pressure and pursuit,
-- **Wraith:** two-hit extended spectral reach and frontal control,
+- **Wolf:** four-hit fast close-range pressure and pursuit.
+- **Wraith:** two-hit extended spectral reach and frontal control.
 - **Ronin:** three-hit slow heavy impact and defensive stability.
 
-These three identities complete the current launch space. Mobility, evasion, ranged utility, and broader crowd-control options remain supported by universal systems, Techniques, prosthetics, and encounter design. Additional Aspects are outside current launch scope unless playable evidence later demonstrates a missing identity.
+All three have complete qualitative Tier 0-IV packages for the final cross-roster paper-design comparison.
 
-All Aspect attacks are player-directed. The game does not use corrective tracking, hidden homing, or post-input target correction.
+| Tier | Wolf | Wraith | Ronin |
+|---|---|---|---|
+| I | Blood Tempo | Pale Barrage | Steadfast Reprisal |
+| Growth | Feral Momentum | Spectral Edge | Maximum player-posture capacity |
+| II | Blood Hunt / Blood Fang | Wraith's Reach | Falling Mountain / Deep Rupture |
+| III | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
+| IV | Apex Mauling | Beyond the Veil | Shattering Wake |
 
-Aspect progression is fixed from Tier 0 through Tier IV. At a full Corruption threshold, the player chooses Resist or Embrace; Embrace advances the selected Aspect by one fixed Tier. Tier IV uses Stabilize rather than Tier V. Blood is run-only and unavailable before Tier II.
+All Aspect attacks remain player-directed without corrective tracking, hidden homing, or post-input target correction. Aspect progression is fixed from Tier 0 through Tier IV; Blood is run-only and unavailable before Tier II.
 
-Wolf's Tier package is approved as a working draft:
+The current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
 
-- Tier I — Blood Tempo
-- Tier II — Dire Hunt and Blood Fang
-- Tier III — Fanged Guard
-- Tier IV — Apex Feast
+1. final cross-roster Aspect comparison,
+2. launch run-build content catalog,
+3. persistent progression, onboarding, and trials,
+4. narrative delivery and authored-content scope,
+5. postgame release scope.
 
-Current production-level gameplay dependencies tracked in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
-
-- fixed Tier I-IV packages, evolving drawbacks, Blood rules, and Blood Arts for Wraith and Ronin,
-- cross-roster comparison after all three packages exist,
-- launch run-build content catalog,
-- persistent progression, onboarding, and trial package,
-- and postgame release package.
-
-The narrative-delivery package is also tracked there because it affects authored content and production, but it does not reopen gameplay or lore canon.
-
-Exact attack values, timings, cooldowns, probabilities, prices, hitboxes, resource values, route generation, and other playtest variables remain in their owning gameplay or encounter files.
+The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact attack values, timings, hitboxes, resource values, route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
 
 ## Authority rule
 
-Gameplay files own mechanics. Lore explains fiction, content owns combatant and location identity, UI owns interaction behavior, art owns visual requirements, and milestones own production scope. Those files may summarize gameplay but must not redefine it.
+Gameplay files own mechanics. Lore explains fiction, content owns combatant/location identity, UI owns interaction behavior, art owns visual requirements, and milestones own production scope. Summary files must not redefine those authorities.
