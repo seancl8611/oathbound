@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-08
 ---
 
 # Current Design Questions
@@ -23,15 +23,6 @@ This file contains only unresolved decisions that materially affect launch scope
 - Mandatory encounters cannot assume a particular Aspect Tier or Blood Art.
 - Exact damage, timing, hitboxes, growth percentages, collision, VFX timing, and other balance values remain prototype and implementation work.
 
-Aspect authority remains in:
-
-- `gameplay/WOLF_ASPECT.md`
-- `gameplay/WRAITH_ASPECT.md`
-- `gameplay/RONIN_ASPECT.md`
-- `gameplay/BLOOD_ASPECTS.md`
-- `gameplay/ASPECT_WEAPON_KIT_MODEL.md`
-- `gameplay/ASPECT_IDENTITY_GUIDELINES.md`
-
 ## Priority order
 
 1. Launch run-build content catalog
@@ -41,23 +32,39 @@ Aspect authority remains in:
 
 # 1. Launch run-build content catalog
 
-**This is the current active question.**
+**This is the current active design area.**
 
-Define the minimum complete and replayable launch catalog:
+The next step is to **sketch the actual Technique roster**, not to finish every catalog rule in advance. Rarity distribution, category counts, affinity strength, refinements, offer weighting, and related rules should be adjusted after the roster can be viewed as a whole.
 
-- approximate base Technique count and role distribution,
-- universal action-tag coverage,
-- Technique rarity roles,
-- affinity and offer weighting,
-- number and quality of refinements,
-- post-fill offer construction and anti-dead-offer rules,
-- allowed direct Aspect-, Tier-, or Blood-referencing entries,
-- temporary Prosthetic Technique count per tool,
-- initial Relic count and rarity distribution,
-- whether consumables ship,
-- and entries requiring unique icons, VFX, animation, or audio.
+### Provisional planning sketch
 
-The coverage matrix belongs in `gameplay/TECHNIQUE_CATALOG.md`.
+These are working targets, not locked requirements:
+
+- approximately **30 base Techniques** at launch, excluding Prosthetic Techniques and Relics,
+- rough category direction: **Blade ~8, Deflection ~6, Execution ~5, Movement ~5, General ~6**,
+- category counts may shift substantially as individual Techniques are designed,
+- Technique rarity currently sketches as **Common / Uncommon / Rare / Legendary**,
+- Legendary Techniques should be uncommon, powerful, and capable of making a run feel unusually exciting; exact count and rules are deferred,
+- roughly **60–70%** of base Techniques may receive one refinement,
+- Aspect affinity is mostly soft weighting rather than eligibility,
+- direct Aspect-, Tier-, or Blood-specific Techniques remain rare exceptions,
+- Relics currently sketch as a simpler **three-rarity structure** rather than mirroring Technique rarity; exact labels/counts remain provisional,
+- final Prosthetic Technique counts, Relic counts, consumables, rarity distribution, refinement distribution, and offer construction should emerge from roster design rather than be forced beforehand.
+
+### Roster-design goals
+
+While sketching entries, keep enough coverage for:
+
+- Basic, Held, Dash Attack, Parry Counter, block/parry, posture, deathblow, movement, Health, Spirit, and Prosthetic play,
+- reinforce, broaden, compensate, and hybridize build directions,
+- all three Aspects without making affinity restrictive,
+- ordinary encounters, elites, bosses, and mixed groups,
+- useful early-run standalone choices and meaningful late-run replacement/refinement choices,
+- and restrained production scope for bespoke UI, VFX, animation, and audio.
+
+The working roster and coverage matrix belong in `gameplay/TECHNIQUE_CATALOG.md`.
+
+Do **not** treat the provisional counts or rarity/refinement targets above as correctness requirements. Revisit them after a substantial portion of the Technique roster exists.
 
 # 2. Persistent progression, onboarding, and trial package
 
