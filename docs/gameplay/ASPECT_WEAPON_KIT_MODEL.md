@@ -125,7 +125,7 @@ Techniques may reinforce, broaden, compensate for, or hybridize an Aspect. They 
 
 ## Production lock boundary
 
-All three qualitative Tier 0-IV packages are approved for the final cross-roster comparison.
+All three qualitative Tier 0-IV packages are locked for current paper-design scope. Reopen them only when prototyping identifies a concrete gameplay, overlap, readability, or production issue.
 
 Exact frame data, damage, posture, stagger, reach, movement, recovery, collision, proc weighting, Blood values, Tier-growth percentages, animation counts, and VFX timing remain implementation and playtesting work.
 

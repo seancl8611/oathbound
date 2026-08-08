@@ -118,8 +118,10 @@ Beginning at Tier I, every Embrace modestly increases Ronin's maximum player-pos
 
 **Authority:** `docs/gameplay/RONIN_ASPECT.md`
 
-## 2026-08-07 — Three launch Aspect packages individually complete
+## 2026-08-07 — Launch Aspect design locked for current scope
 
-Wolf, Wraith, and Ronin now each have complete qualitative Tier 0-IV paper-design packages. The next active Aspect decision is the final cross-roster comparison for overlap, accessibility, encounter coverage, Technique space, preserved weaknesses, and production cost.
+Wolf, Wraith, and Ronin each have complete qualitative Tier 0-IV paper-design packages. The remaining cross-roster comparison was reviewed outside the tracker and is considered resolved for current scope. No Aspect or Tier question remains active unless prototyping reveals a concrete gameplay, overlap, readability, or production problem.
+
+The next active design area is the launch run-build content catalog.
 
 **Authority:** `docs/_meta/OPEN_QUESTIONS.md`, `docs/gameplay/BLOOD_ASPECTS.md`

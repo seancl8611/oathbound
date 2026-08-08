@@ -102,7 +102,7 @@ The three Blood Arts are intentionally different:
 
 > **Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point.**
 
-Exact combat values, timing, hitboxes, growth percentages, and final effects remain prototype and playtesting work.
+All three Aspect packages are locked at current qualitative paper-design depth. They are not active design questions unless prototyping exposes a concrete problem. Exact combat values, timing, hitboxes, growth percentages, and final effects remain prototype and playtesting work.
 
 ## Run-build philosophy
 
@@ -150,11 +150,10 @@ A normal successful Binding run currently targets roughly 45–50 minutes. Exact
 
 The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
 
-1. final cross-roster Aspect comparison,
-2. launch run-build content catalog,
-3. persistent progression, onboarding, and trial package,
-4. narrative delivery and authored-content package,
-5. postgame release package.
+1. launch run-build content catalog,
+2. persistent progression, onboarding, and trial package,
+3. narrative delivery and authored-content package,
+4. postgame release package.
 
 ## Source links
 

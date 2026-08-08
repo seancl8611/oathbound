@@ -47,7 +47,7 @@ Complete the approved Wolf, Wraith, and Ronin combat-presentation families; Tier
 | Wraith | Pale Barrage | Wraith's Reach | Spectral Passage | Beyond the Veil | Spectral Edge |
 | Ronin | Steadfast Reprisal | Falling Mountain | Unbroken Resolve | Shattering Wake | Maximum player-posture capacity |
 
-All three Tier 0-IV packages now support high-level production planning. Final frame counts, VFX counts, timings, collision, and reuse decisions still require implementation briefs and playable validation.
+All three Tier 0-IV packages support high-level production planning. Final frame counts, VFX counts, timings, collision, and reuse decisions still require implementation briefs and playable validation.
 
 Wolf production needs include successful-contact continuation, Feral Momentum escalation, Blood Hunt activation/howl/pursuit/Blood Fang, Fanged Guard one-hit protection, Apex Mauling, and Blood resource states.
 
@@ -100,4 +100,4 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 ## Current pre-production dependency
 
-Complete the final cross-roster Aspect comparison, then proceed to the launch run-build catalog and the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
+Scope the launch run-build content catalog, then proceed through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
