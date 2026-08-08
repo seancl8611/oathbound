@@ -4,121 +4,100 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-06
+last_reviewed: 2026-08-07
 ---
 
 # Production Roadmap
 
-Oathbound art production is organized by dependency order and meaningful playtest groups. Top-level milestones do not need equal asset counts.
+Oathbound production is organized by dependency order and meaningful playtest groups. Top-level milestones do not need equal asset counts.
 
 ## Pre-milestone gate — Paid Style Test
 
-Before Milestone 1, a separately paid test locks practical sprite scale, palette, detail density, high-angle perspective, outline treatment, ground shadow, Hushiro tone, and Godot import quality.
+Before Milestone 1, a separately paid Style Test locks practical sprite scale, palette, detail density, high-angle perspective, outline treatment, ground shadow, Hushiro tone, and Godot import quality.
 
 ## Milestone 1 — Combat vertical slice
 
 Establish Akio, core combat readability, three representative Area 1 enemies, five shared combat VFX, Combat HUD, and the base Hushiro environment kit.
 
-The Posture Break Cue is assigned to Batch 2 with the Corrupted Swordsman and Deathblow Cue so the posture-break-to-execution loop is reviewed together.
+The Posture Break Cue remains grouped with the Corrupted Swordsman and Deathblow Cue so the posture-break-to-execution loop is reviewed together.
 
 ## Milestone 2 — Complete Area 1
 
-Complete the remaining Area 1 roster, both designed minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional-room skins, regional props, Shrine and Corruption foundations, and boss/miniboss UI.
+Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional-room skins, regional props, Shrine/Corruption foundations, and boss/miniboss UI.
 
-Exact room counts, branch frequency, and miniboss run frequency are not quotation blockers for the modular Area 1 package. They remain prototype and playtest decisions unless they create additional asset requirements.
-
-Final Blood Aspect VFX, Tier overlays, and Technique presentation remain deferred to Milestone 4. Their exact counts depend on the fixed Tier packages, Blood Arts, and launch run-build catalog rather than roster selection.
+Exact room counts and routing remain prototype work unless they create additional asset requirements.
 
 ## Milestone 3 — The Strand
 
 Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
 
-The final number of progression nodes, training experiences, trials, unlock flows, Aspect-specific services, and mastery states depends on the persistent progression, onboarding, and trial package.
+Final node counts, trials, unlock flows, mastery states, and permanent-progression depth depend on the persistent progression/onboarding package.
 
-No duplicate Aspect-specific Blood Art progression tree is currently assumed for Blood Mirror production.
+No duplicate Aspect-specific Blood Art progression tree is assumed.
 
 ## Milestone 4 — Player combat depth and run-build expression
 
-Complete the approved Wolf, Wraith, and Ronin combat-presentation families; their Tier and Blood Art states; eight prosthetic families; Technique reward and build interfaces; reusable Technique icon and card language; approved Technique combat-feedback needs; Relic presentation; and broad currency, pickup, breakable, and reward-object art.
+Complete the approved Wolf, Wraith, and Ronin combat-presentation families; Tier/Blood states; eight Prosthetic families; Technique reward/build interfaces; Relic presentation; and broad currency/pickup/reward-object art.
 
-Wolf's approved current package establishes these high-level production needs:
+### Locked Aspect production packages
 
-- Blood Tempo valid-contact continuation cue,
-- Feral Momentum sequence-position and Tier escalation treatment,
-- Blood Hunt activation, limited-healing feedback, Blood howl, fixed pursuit, stopping behavior, Blood Fang endpoint, and ending recovery,
-- Fanged Guard action-specific frontal one-hit protection and posture feedback,
-- Apex Mauling consolidated claw package, compact outer coverage, posture and guard recoil, and movement-only slow,
-- Wolf Blood building, ready, activated, resolving, consumed, and rebuilding states.
+| Aspect | Tier I | Tier II | Tier III | Tier IV | Repeated growth |
+|---|---|---|---|---|---|
+| Wolf | Blood Tempo | Blood Hunt | Fanged Guard | Apex Mauling | Feral Momentum |
+| Wraith | Pale Barrage | Wraith's Reach | Spectral Passage | Beyond the Veil | Spectral Edge |
+| Ronin | Steadfast Reprisal | Falling Mountain | Unbroken Resolve | Shattering Wake | Maximum player-posture capacity |
 
-Wraith's approved Tier 0-IV package establishes these high-level production needs:
+All three Tier 0-IV packages now support high-level production planning. Final frame counts, VFX counts, timings, collision, and reuse decisions still require implementation briefs and playable validation.
 
-- distinct Veil Cut, Passing Arc, Pale Lance, Ghostline Slash, and Veil Reversal geometry and impact treatment,
-- Pale Barrage continuation, stationary commitment, early release, interruption, and recovery,
-- Spectral Edge physical-range versus eligible spectral-only contact feedback, Tier escalation, and the Tier IV Pale Lance/Ghostline eligibility unlock,
-- Wraith's Reach full-meter activation, short directional preparation, compact broad opening sweep, very long fixed corridor strike, one weaker delayed same-geometry repetition, and ending recovery,
-- Spectral Passage continuous spectral geometry through ordinary-enemy bodies, dominant primary impact, reduced secondary impacts, and visible stopping against elites, bosses, heavy enemies, solid geometry, and authored blockers,
-- Beyond the Veil longer Pale Lance and Ghostline Slash attack geometry without neutral-dash changes,
-- greater-distance deathblow prompt, invalid-path suppression, clear-path and blocker validation, and one straight visible spectral approach,
-- Veilstride brief movement-only activation and expiration after a killing deathblow,
-- prevention of tracking, teleportation, universal range increase, stronger neutral-dash presentation, repeated-jab Spectral Edge, secondary Blood, and unrestricted proc presentation,
-- Wraith Blood building, ready, activated, resolving, consumed, and rebuilding states.
+Wolf production needs include successful-contact continuation, Feral Momentum escalation, Blood Hunt activation/howl/pursuit/Blood Fang, Fanged Guard one-hit protection, Apex Mauling, and Blood resource states.
 
-Beyond the Veil should reuse Pale Lance, Ghostline Slash, shared deathblow, and locomotion presentation wherever practical. Pale Procession is retired and creates no shade, steering, or three-lane production package.
+Wraith production needs include distinct Tier 0 geometry, Pale Barrage continuation, Spectral Edge contact feedback, Wraith's Reach sweep/corridor/echo, Spectral Passage formation penetration, Beyond the Veil range/deathblow/Veilstride states, and Blood resource states.
 
-Ronin's approved current Tier I-IV package establishes these high-level production needs:
+Ronin production needs include distinct Tier 0 heavy actions, strong guard/posture readability, Steadfast Reprisal opportunity/counter, Falling Mountain posture relief/slam/burst/Deep Rupture, Unbroken Resolve plus Measured/Perfect Weight, Shattering Wake, posture-capacity growth reflected through existing posture UI, and Blood resource states.
 
-- Steadfast Reprisal qualifying-block opportunity and slow standalone counter,
-- Falling Mountain activation, posture relief, planted slam, compact impact burst, fixed-point Deep Rupture, and recovery,
-- Unbroken Resolve commitment-preservation cue plus Measured Weight and Perfect Weight states,
-- Shattering Wake contact-origin transfer through the primary target,
-- Ronin Blood building, ready, activated, resolving, consumed, and rebuilding states.
+Ronin's repeated posture growth should reuse the normal player-posture HUD and capacity language rather than create a separate buff icon or VFX state.
 
-Ronin's exact Tier 0 animation, VFX, audio, and teaching counts remain provisional until the focused review of Severing Cut, Crushing Cross, Bloodfall, Stillness Draw, Breaching Slash, Answering Steel, and its guard profile is complete.
-
-The three launch Aspect identities are fixed. Wolf and Wraith support high-level scoping through Tier IV. Ronin supports Tier I-IV scoping, while its complete-package quotation still depends on the Tier 0 review and all three packages require implementation briefs.
-
-Final unique Technique icons, bespoke effects, and catalog population require the approved launch run-build content catalog.
+Final unique Technique icons and bespoke Technique effects depend on the launch run-build catalog.
 
 ## Milestone 5 — Complete Area 2
 
-Produce Yomori Grove, its enemy and encounter roster, regional hazards, functional rooms, VFX, and integration pass.
+Produce Yomori Grove, its enemy/encounter roster, regional hazards, functional rooms, VFX, and integration pass.
 
-Exact room and miniboss routing remain prototype work. Exact Twin Maws transition values remain implementation and playtest work rather than quotation blockers for the high-level encounter package.
+Exact routing and Twin Maws transition values remain implementation/playtest work.
 
 ## Milestone 6 — Area 3 and endgame
 
-Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, Court-built extraction apparatus, reusable Heart Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart encounter, ending presentation, and repeat-clear presentation.
+Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Heart Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart encounter, ending presentation, and repeat-clear presentation.
 
-The Eclipse Shogun's high-level identity is approved. His exact encounter structure, weapon, attacks, transformation anatomy, animation list, and bespoke effects require later encounter approval before final quotation.
+The Shogun's high-level identity is approved. Exact attacks, phase structure, transformation anatomy, animation list, and bespoke VFX require later encounter approval.
 
 The Binding package uses one reusable ritual after each of the first six successful clears. The seventh story run continues from the Shogun into the Heart without ending the active build.
 
-The true-final Heart has two conceptual forms and does not require a humanoid swordsman form, third phase, or separate weak-point subsystem.
-
 ## Milestone 7 — Release presentation and cohesion
 
-Complete front-end UI, the approved narrative-delivery package, achievements and store art, missing-asset audit, cross-game readability, and final production cleanup.
+Complete front-end UI, approved narrative delivery, achievements/store art, missing-asset audit, cross-game readability, and final production cleanup.
 
-The core story and lore are approved. Final quotation depends on the authored-content inventory, voice and cinematic boundary, postgame Heart-route access, repeat-clear rewards, and required release UI—not on reopening narrative canon.
+Final quotation depends on the authored-content inventory, voice/cinematic boundary, postgame access/rewards, and required release UI—not on reopening approved story canon.
 
 ## Production rules
 
 - Character concepts and key poses precede specialized VFX.
-- Base character art precedes Tier or Blood overlays.
+- Base character art precedes Tier/Blood overlays.
 - Wolf, Wraith, and Ronin are the fixed launch Aspect families.
-- All Aspect attacks remain player-directed; production must not imply corrective tracking or homing.
-- Wolf and Wraith working packages may guide high-level scope through Tier IV but not final frame or effect counts before implementation briefs.
-- Ronin Tier I-IV may guide high-level scope; final Tier 0 and complete-package counts require its focused Tier 0 review.
-- Spectral Passage should primarily reuse existing attack geometry and trails with collision and impact extensions rather than require a new command animation.
-- Beyond the Veil should reuse existing attack, deathblow, and locomotion families; its new production burden is authored range variants, Tier-gated Spectral Edge feedback, clear-path deathblow validation and approach, and Veilstride feedback.
-- Pale Procession shade, steering, and three-lane assets are excluded.
-- Base regional kits precede room variants and final arenas.
-- Reusable Technique UI may be produced before the complete Technique catalog is locked.
-- Unique Technique icons and bespoke effects require approved catalog entries.
-- The standard successful-run pacing target is 45–50 minutes, but exact room and encounter budgets require playable validation.
+- All Aspect attacks remain player-directed; presentation must not imply corrective tracking or homing.
+- All three qualitative Tier 0-IV packages may guide high-level scope; final asset counts require implementation briefs.
+- Reuse existing attack, deathblow, locomotion, and HUD families whenever a Tier modifies geometry or values rather than creating a new action.
+- Ronin posture-capacity growth uses existing posture presentation rather than a new status family.
+- Spectral Passage should primarily reuse existing attack geometry/trails with extended collision and impact handling.
+- Beyond the Veil should reuse Pale Lance, Ghostline Slash, shared deathblow, and locomotion presentation.
+- Pale Procession shade/steering/three-lane assets are excluded.
+- Reusable Technique UI may precede final catalog lock; unique icons and bespoke effects require approved entries.
+- The standard successful-run pacing target is 45–50 minutes, with exact room/encounter budgets deferred to playtesting.
 - The base Heart Binding ritual is one reusable package.
-- Exact Heart and Shogun animation and VFX counts require approved encounter designs.
-- Deferred route algorithms, room probabilities, challenge modifiers, variants, and additional Aspects are excluded from the initial quote unless intentionally promoted later.
+- Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
 - Each milestone uses separately quoted, payable, reviewable internal batches.
-- Every batch receives sheet-level and in-engine review.
-- Markdown remains the internal source of truth; Word and PDF files are exports.
+- Markdown remains the internal source of truth; Word/PDF files are exports.
+
+## Current pre-production dependency
+
+Complete the final cross-roster Aspect comparison, then proceed to the launch run-build catalog and the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
