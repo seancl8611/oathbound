@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-06
+last_reviewed: 2026-08-07
 topics:
   - progression
   - persistence
@@ -42,7 +42,7 @@ Temporary run state may include:
 - selected Blood Aspect and current Tier,
 - Corruption,
 - Blood after Tier II,
-- Blood Art readiness or resolving state,
+- Blood Art state,
 - four active Techniques and one reserve,
 - Technique refinements,
 - temporary Prosthetic Techniques,
@@ -50,159 +50,98 @@ Temporary run state may include:
 - Gold,
 - room progress,
 - temporary Health or Spirit capacity,
-- approved consumables,
-- and encounter rewards.
+- approved consumables and encounter rewards.
 
-These states reset after failed death-return or successful Heart Binding completion unless an item explicitly defines another rule.
+These reset after failed death-return or successful completion unless explicitly defined otherwise.
 
 ## Run-build investment model
 
-The selected Blood Aspect is Akio's central weapon foundation from Tier 0, but deeper Aspect Tier advancement is one optional run-development route rather than a mandatory checklist.
+The selected Aspect defines Akio's weapon foundation from Tier 0. Deeper Aspect investment is optional and competes with Technique, Relic, Prosthetic, economy, survival, and other reward routes.
 
-Run power may be developed through:
+Expected viable outcomes:
 
-- Aspect Tier advancement at Shrines,
-- Technique acquisition, replacement, rarity, reserve management, and refinement,
-- a Relic,
-- temporary Prosthetic specialization,
-- economy and shop routing,
-- survival and temporary capacity,
-- and approved encounter rewards.
+- **Technique-focused:** Tier 0-I with a strong coherent Technique build.
+- **Hybrid:** Tier II with a solid Technique build.
+- **Aspect-focused:** Tier III with less-developed horizontal upgrades.
+- **High-roll:** Tier IV plus a strong completed Technique build.
 
-Most runs may combine these routes. The player does not choose a permanent Technique class or Aspect class at the beginning; the run's emphasis may change in response to rewards.
+Mandatory encounters must not assume a particular Tier or Blood Art.
 
 ## Fixed Blood Aspect Tier path
 
-The selected Aspect follows one fixed Tier path during the run. It is not a branching skill tree or package-selection system.
-
 - Every run begins at **Tier 0**.
-- Corruption controls access to Shrine decisions.
-- At a full threshold, the player chooses **Resist** or **Embrace**.
-- Resist keeps the current Tier, lowers Corruption, and grants approved immediate support.
+- Full Corruption creates a Shrine choice between **Resist** and **Embrace**.
+- Resist keeps the current Tier and provides approved stabilization support.
 - Embrace advances the selected Aspect by one fixed Tier.
 - Each Tier has one headline benefit and at most one minor supporting rule.
-- Every Tier is clearly net-positive and preserves the Aspect's inherent weapon-kit limitations through the upgraded action itself.
-- Separate named drawback families and added penalty attributes are not required.
-- Tier IV is the maximum.
-- At Tier IV, a full threshold offers **Stabilize** instead of Tier V or further scaling.
+- Tier IV is the maximum; later thresholds offer **Stabilize** rather than Tier V.
+- Higher Tiers remain net-positive while preserving the weapon kit's inherent risks.
 
-The main opportunity cost occurs when routing into a Shrine instead of another previewed reward. Resist is a recovery and pacing option rather than an equal alternate power path.
+### Locked Aspect paths
 
-Expected power routes:
+| Tier | Wolf | Wraith | Ronin |
+|---|---|---|---|
+| **I** | Blood Tempo | Pale Barrage | Steadfast Reprisal |
+| **Repeated growth** | Feral Momentum | Spectral Edge | Maximum player-posture capacity |
+| **II** | Blood Hunt / Blood Fang | Wraith's Reach | Falling Mountain / Deep Rupture |
+| **III** | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
+| **IV** | Apex Mauling | Beyond the Veil | Shattering Wake |
 
-- **Technique-focused:** Tier 0-I with a strong, coherent, refined Technique loadout remains capable of completing the run.
-- **Hybrid:** Tier II with a solid Technique build is a common successful state.
-- **Aspect-focused:** Tier III with fewer or less-developed Technique upgrades is a valid deliberate specialization.
-- **High-roll:** Tier IV with an ideal completed Technique build is exceptional rather than the expected baseline.
+Wolf's Feral Momentum improves later connected Basic positions at each Embrace. Wraith's Spectral Edge improves eligible spectral-only posture and guard pressure at each Embrace. Ronin's repeated growth modestly increases maximum player-posture capacity at each Embrace while leaving posture recovery speed and block efficiency unchanged.
 
-Mandatory encounters must not assume a specific Tier or Blood Art. Tier II may be common without being required.
-
-Wolf's fixed path is approved through the present audit:
-
-- Tier I — Blood Tempo,
-- Feral Momentum — deterministic later-sequence Health and enemy-posture growth at every Embrace,
-- Tier II — Blood Hunt and Blood Fang,
-- Tier III — Fanged Guard,
-- Tier IV — Apex Mauling.
-
-Wraith's fixed path is approved through the present audit:
-
-- Tier I — Pale Barrage,
-- Spectral Edge — deterministic spectral-only posture and guard-pressure growth at every Embrace; Veil Cut, Passing Arc, and Veil Reversal qualify from Tier I, while Pale Lance's initial thrust and Ghostline Slash unlock qualification at Tier IV,
-- Tier II — Wraith's Reach, an immediate frontal sweep, fixed corridor strike, and delayed repetition along the same geometry,
-- Tier III — Spectral Passage, allowing qualifying spectral attacks to continue through ordinary-enemy bodies across their remaining authored geometry with reduced secondary Health damage and meaningful posture and guard pressure,
-- Tier IV — Beyond the Veil, increasing Pale Lance and Ghostline Slash spectral reach, enabling extended clear-path deathblow initiation, and granting brief movement-only Veilstride after a deathblow kill.
-
-Ronin's current Tier I-IV path remains approved through the present audit while Tier 0 is reviewed:
-
-- Tier I — Steadfast Reprisal,
-- Tier II — Falling Mountain and Deep Rupture,
-- Tier III — Unbroken Resolve with Measured Weight and Perfect Weight,
-- Tier IV — Shattering Wake.
-
-Pale Procession and the former Veiled Guard concept are retired from fixed Wraith progression. Wolf and Ronin may receive only focused follow-up changes during the final comparison rather than being treated as blank Tier packages.
-
-## Technique development boundary
-
-Technique capacity remains four active slots plus one inactive reserve. Filling the four active slots does not complete the Technique route.
-
-Later Technique development may include:
-
-- replacing a weaker or poorly fitting Technique,
-- acquiring a rarer or more specialized Technique,
-- refining an active Technique once,
-- preserving an alternate Technique in reserve,
-- specializing the equipped Prosthetic,
-- correcting an exposed weakness,
-- or pivoting around a Relic or another reward.
-
-A successful run should commonly fill its active slots during Area 2, then use later decisions to refine and finalize the build. Exact desired four-Technique loadouts and all desired refinements should remain uncommon until late in the run, while occasional early high-roll builds are allowed.
+The three individual Tier 0-IV packages are approved for final cross-roster comparison. Exact numerical growth remains balance work.
 
 ## Blood persistence boundary
 
-Blood is a run-only combat resource owned by the Blood Aspect system.
+Blood is run-only and unavailable before Tier II.
 
-- Blood is unavailable before Tier II.
-- Blood is not a persistent wallet, meta currency, shop currency, route resource, or campaign collectible.
-- Stored Blood persists between rooms until it is spent or the run ends.
+- Stored Blood persists between rooms until spent or the run ends.
 - Blood and Blood Art state reset after death or successful completion.
-- Permanent progression cannot create stored Blood between runs or make Blood available before the approved in-run unlock.
-- Any permanent upgrade affecting starting Blood, capacity, gain, activation, or Blood Art availability requires explicit system approval.
-- Runs that do not reach Tier II remain viable without Blood or a Blood Art.
+- Permanent progression cannot pre-store Blood or unlock it before Tier II.
+- Blood Arts normally require a full meter, activate manually, consume the meter, and do not generate Blood while resolving.
+- Generation is weighted around meaningful combat contribution.
 
-The working launch defaults are a shared Blood-meter framework, generation through meaningful katana Health damage and enemy-posture pressure plus successful Parry Counters, posture breaks, and deathblows, full-meter manual activation, and no Blood generation while an immediate Blood Art resolves or a duration-based Blood Art remains active. These are not absolute restrictions; an approved Aspect package may depart from a default when its identity clearly requires the exception.
+Approved Blood Art forms remain distinct:
 
-Wolf's approved direction uses an immediate full-meter action rather than a duration state. Meaningful Wolf sword damage, enemy-posture pressure, Fang Reversal after a parry, posture breaks, and deathblows may build Blood according to the final weighting. Blood Hunt consumes the full meter, immediately provides limited Health recovery and a disruptive Blood howl, then launches one fixed player-directed pursuit ending in Blood Fang. Blood generation resumes after the immediate Art finishes resolving.
+- **Wolf — Blood Hunt:** limited activation healing/disruption followed by one pursuit line and Blood Fang.
+- **Wraith — Wraith's Reach:** frontal sweep, long fixed corridor, delayed same-geometry echo.
+- **Ronin — Falling Mountain:** partial posture relief, planted slam, compact burst, delayed fixed-point Deep Rupture.
 
-Blood Hunt does not clear player posture, grant damage reduction, create lifesteal, or apply a generic moveset buff. Ordinary light hits do not interrupt the launched pursuit but still deal full valid effects; posture-breaking, lethal, perilous, grabbing, launching, or overriding knockdown attacks interrupt normally. Exact source weighting, preparation, travel, collision, stopping priority, recovery, damage, posture, and howl values remain tuning work.
+Exact capacity, gain weighting, timing, damage, interruption rules, and anti-farming thresholds remain tuning work in the owning Aspect files.
 
-Wraith's approved Blood Art is the immediate Wraith's Reach. Full-meter activation commits one compact broad frontal sweep, one very long narrow-to-medium corridor strike, and one delayed spectral repetition along the same fixed player-selected geometry. The sweep supplies practical activation value before the later stages connect. The Art does not track, pursue, heal, clear posture, grant damage reduction or interruption resistance, generate Blood, or independently trigger Spectral Edge.
+## Technique development boundary
 
-The corridor and delayed echo reward placement and prediction: enemies may leave the line before the echo or enter it before resolution. Ordinary vulnerability, interruption, commitment, and recovery remain active. Exact source weighting, directional preparation, sweep geometry, corridor dimensions, echo delay, damage, posture, stagger, interruption, recovery, and proc weighting remain tuning work.
+Technique capacity is four active slots plus one inactive reserve. Filling the active slots does not complete the Technique route.
 
-Spectral Passage does not change Wraith's Blood Art. Secondary passage contacts generate no Blood and use restricted Spectral Edge, Technique, healing, status, and proc weighting.
+Later development may include replacement, rarity improvement, one refinement per Technique, reserve management, Prosthetic specialization, weakness correction, or build pivots around other rewards.
 
-Beyond the Veil does not change Wraith's Blood Art or universal neutral dash. Pale Lance and Ghostline Slash gain authored Tier IV reach and Spectral Edge eligibility; extended deathblow initiation requires an already valid target and clear path; Veilstride is a brief movement-only post-kill benefit. Exact Tier IV reach, deathblow range and angle, pathing, blocker handling, and Veilstride values remain tuning work.
-
-Ronin's approved Blood Art is Falling Mountain. Full-meter activation clears a meaningful portion of accumulated player posture and powers a planted manually aimed slam, compact impact burst, and delayed Deep Rupture at the original point. Its brief planted channel may resist eligible ordinary-hit interruption while full incoming damage and posture remain active; posture break, lethal hits, perilous attacks, grabs, launches, and overriding knockdowns remain normal counters.
-
-Exact Blood capacity, source weighting, gain values, activation cost, Blood Hunt values, Wraith's Reach values, Falling Mountain timing and impact, and anti-farming thresholds remain tuning work.
+A successful run should commonly fill its active slots during Area 2, then refine and finalize the build later. Exact offer counts and probabilities remain open until the launch Technique catalog is scoped.
 
 ## Persistent character progression
 
 The Strand supports permanent growth through:
 
 - **Bloodwell:** broad meta progression,
-- **Forge Bench:** weapon and prosthetic development,
+- **Forge Bench:** weapon and Prosthetic development,
 - **Blood Mirror:** Aspect unlocks, mastery, and small capped reliability upgrades,
 - **Blood Cavern:** teaching, fixed-loadout trials, mastery challenges, and approved unlocks,
 - **Discovery Board:** codex and recovered history,
 - **Merchant and NPC services:** approved stock or service progression,
 - **Mist, Scrolls, and Boss Emblems:** persistent currencies.
 
-Permanent progression may improve options, reliability, and resilience. It must not remove the need to read combat, replace run-build choices, guarantee high Aspect Tier, or pre-equip major run-only power.
+Permanent progression improves options, reliability, and resilience. It must not guarantee high Aspect Tier, replace run-build choices, pre-equip major run-only power, or remove the need to read combat.
 
-No separate duplicate Blood Art upgrade tree beneath each Aspect is currently approved. Any future Blood Art meta progression must be justified as part of a broader game-wide system rather than repeating the same subsystem for Wolf, Wraith, and Ronin.
-
-The service ownership boundaries are approved. The remaining production decision is the minimum launch package: approximate nodes or ranks, onboarding and trial counts, unlock mapping, mastery content, rewards, and required interface states.
+No duplicate Blood Art upgrade tree beneath each Aspect is approved.
 
 ## Persistent campaign progression
 
 The Heart's prison originally contained seven Bindings. The Court destroyed the outermost Binding before the game, leaving six intact.
 
-Each successful Binding run:
+Each successful Binding run destroys one remaining Binding and permanently preserves that campaign progress. Failed runs do not advance the count.
 
-- destroys one remaining Binding,
-- permanently preserves that progress,
-- exposes more of the Heart,
-- updates campaign presentation,
-- and moves the story toward the final Heart route.
+After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final story run, continuing from the Shogun into the Heart.
 
-Failed runs do not advance the count.
-
-After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final story run. It continues from the Shogun into the Heart without another Binding ritual.
-
-Destroyed Binding progress is not a currency, cannot be purchased, and cannot be lost.
+Destroyed Binding progress is not a currency and cannot be lost.
 
 ## Currency ownership
 
@@ -213,57 +152,35 @@ Destroyed Binding progress is not a currency, cannot be purchased, and cannot be
 | Boss Emblem | Persistent | Rare major gates or high-value nodes |
 | Gold | Run-only | Shops and run economy |
 
-Currency ownership is resolved. Exact costs remain balance work.
+Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards` remains deprecated unless intentionally restored.
 
-Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards` is deprecated unless intentionally restored as a separate denomination.
+## Persistence boundaries
 
-## Blood Aspect persistence
+### Blood Aspects
 
 - Unlocked Aspects persist as loadout choices.
 - Every run begins at Tier 0.
 - Tier and Corruption reset after the run.
-- Blood is unavailable before Tier II, persists between rooms after it is unlocked, and resets after the run.
-- Blood Art readiness, activation, and temporary effects reset after the run.
+- Blood is unavailable before Tier II and resets after the run.
 - Blood Mirror mastery and small permanent reliability upgrades persist.
-- Permanent Aspect upgrades cannot replace the fixed in-run Embrace Tier system or make high Tier mandatory.
+- Permanent upgrades cannot replace the fixed in-run Embrace path.
 
-## Technique persistence
+### Techniques
 
 - Four active slots and one reserve begin empty each run.
 - Active Techniques, reserve, and refinements reset after the run.
-- Discarded or overwritten Techniques are not restored during the same run.
-- Permanent progression may unlock Techniques into future reward pools.
-- Permanent progression does not pre-equip a run Technique or increase slot capacity in initial scope.
+- Permanent progression may unlock Techniques into future pools but does not pre-equip them or increase slot capacity in initial scope.
 
-The exact unlock mapping depends on the launch Technique catalog and persistent progression package.
+### Prosthetics
 
-## Prosthetic progression
-
-- The Forge owns permanent prosthetic unlocks, baseline improvements, and long-term branches.
+- The Forge owns permanent Prosthetic unlocks and baseline improvements.
 - The run owns temporary Prosthetic Techniques and refinements for the equipped tool.
-- Permanent upgrades must not make temporary specialization irrelevant or replace sword combat.
 
 ## Trial reward boundary
 
-Blood Cavern and Blood Mirror rewards may grant:
+Blood Cavern and Blood Mirror rewards may grant Aspect access, Technique-pool unlocks, small capped reliability improvements, modest posture reliability, persistent currency, cosmetics, lore reflections, and mastery marks.
 
-- Blood Aspect access,
-- Technique-pool unlocks,
-- small timing or recovery reliability improvements,
-- modest posture reliability,
-- persistent currency,
-- cosmetics,
-- lore reflections,
-- and mastery marks.
-
-Trials may not:
-
-- add new Blood Aspect Tiers,
-- create alternate Tier branches,
-- permanently pre-equip a Technique,
-- create a persistent Blood balance,
-- create permanent versions of major run-only mechanics,
-- or make a particular Tier required for ordinary run viability.
+Trials may not add alternate Aspect Tiers, permanently pre-equip a Technique, create persistent Blood, or convert major run-only mechanics into permanent baseline power.
 
 ## Return processing
 
@@ -271,50 +188,34 @@ Both failed and successful runs reconstruct Akio at the Strand through Returning
 
 A successful Binding return additionally:
 
-1. saves destroyed-Binding progress and permanent rewards,
-2. clears run-only state, including Blood and Blood Art state,
+1. saves Binding progress and permanent rewards,
+2. clears run-only state,
 3. presents a results summary,
-4. triggers relevant NPC, codex, Blood Mirror, Heart, or hub updates.
-
-The results flow must clearly distinguish retained progress from burned-away run state.
+4. triggers relevant hub, codex, Blood Mirror, and Heart updates.
 
 ## Persistence matrix
 
-| Category | After death | After Binding completion |
+| Category | After death | After completion |
 |---|---:|---:|
-| Narrative and codex progress | Persists | Persists |
-| Destroyed Heart Bindings | Persists | Persists |
-| Permanent upgrades | Persists | Persists |
-| Unlocked Blood Aspects | Persists | Persists |
-| Blood Mirror progress | Persists | Persists |
-| Techniques unlocked into future pools | Persists | Persists |
-| Mist, Scrolls, Boss Emblems | Persists | Persists |
+| Narrative/codex progress | Persists | Persists |
+| Destroyed Bindings | Persists | Persists |
+| Permanent upgrades/unlocks | Persists | Persists |
+| Persistent currencies | Persists | Persists |
 | Blood Aspect Tier | Resets | Resets |
 | Corruption | Resets | Resets |
 | Blood and Blood Art state | Resets | Resets |
-| Active and reserve Techniques | Resets | Resets |
-| Technique refinements | Resets | Resets |
-| Run-scoped Relic effects | Resets | Resets |
+| Techniques/refinements | Resets | Resets |
+| Run Relic effects | Resets | Resets |
 | Gold | Resets | Resets |
 | Room progress | Resets | Resets |
 | Consumables | Item-specific | Item-specific |
 
-## Design rules
-
-- Persistent growth improves options and reliability, not automatic victory.
-- Run growth should establish a meaningful build before Area 3.
-- The Blood Aspect remains more identity-defining than any single Technique.
-- Deep Aspect Tier investment remains optional.
-- Techniques remain independently useful and can support a complete winning route.
-- Permanent Aspect upgrades stay small and capped.
-- Gold never becomes a persistent Strand wallet without an explicit system change.
-
 ## Current production dependencies
 
-1. Review Ronin's Tier 0 weapon foundation against Wolf and Wraith.
-2. Decide Ronin's small Tier-growth rule and audit narrow Tiers for any justified minor supporting benefit.
-3. Perform Ronin's follow-up audit and the final Wolf, Wraith, and Ronin comparison for power, accessibility, production cost, inherent tradeoffs, and Technique overlap across Technique-focused, hybrid, and Aspect-focused runs.
-4. Scope the launch run-build content catalog, including rarity, refinements, post-fill offers, and route competition.
-5. Scope persistent progression, onboarding, and trials around those approved systems.
+1. Complete the final cross-roster Aspect comparison.
+2. Scope the launch run-build content catalog.
+3. Scope persistent progression, onboarding, and trials.
+4. Lock the authored narrative-delivery package.
+5. Lock postgame release scope.
 
-Exact upgrade percentages, resource values, costs, timing windows, and reward values remain implementation and balance work.
+Exact percentages, combat values, resource values, costs, timing windows, offer rates, and reward values remain implementation and balance work.
