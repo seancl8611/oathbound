@@ -161,6 +161,6 @@ They should not duplicate Blood Tempo, Feral Momentum, Blood Hunt, Fanged Guard,
 
 ## Current design dependency
 
-The three qualitative Tier 0-IV packages are locked individually. The remaining Aspect task is the final cross-roster comparison in `docs/_meta/OPEN_QUESTIONS.md`.
+The three qualitative Tier 0-IV Aspect packages are locked for current paper-design scope. The next active design area is the launch run-build content catalog in `docs/_meta/OPEN_QUESTIONS.md`.
 
 Exact frame data, hitboxes, damage, posture, stagger, movement, recovery, collision, Blood values, proc weighting, Tier-growth percentages, deathblow pathing, VFX timing, and animation counts remain implementation and playtesting work.
