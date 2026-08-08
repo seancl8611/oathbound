@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-07
 topics:
   - techniques
   - run-builds
@@ -88,23 +88,7 @@ The meaningful opportunity cost comes from route rewards. Choosing a Shrine can 
 - Fixed Aspect Tier progression must not make Techniques secondary.
 - A strong Technique route must remain capable of winning at Tier 0-I.
 
-Wolf's approved package owns these behaviors and ordinary Techniques should not reproduce them directly:
-
-- Blood Tempo's complete successful-contact routing into approved Basic-sequence positions,
-- Feral Momentum's full Tier-scaled deterministic Health- and enemy-posture escalation across connected Basic-sequence positions,
-- Blood Hunt's guaranteed activation Health recovery and short disruptive howl,
-- Blood Hunt's full-meter fixed-line pursuit through eligible ordinary enemies,
-- Blood Fang as Blood Hunt's endpoint strike,
-- Fanged Guard's one frontal normal-posture block during Predator's Passage charge or one eligible connected Raking Fang or Blood Cleave startup per Basic sequence,
-- and Apex Mauling's complete qualifying-strike package: rapid Blood claws, consolidated Health and posture payoff, compact secondary coverage, and movement-only slow.
-
-The removed Blood Tempo travel increases and rear-Rending-Cross bonus no longer reserve those effects from the Technique catalog. General Basic Attack damage, posture, critical-hit, movement, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Blood Tempo or Feral Momentum's exact fixed progression.
-
-The removed Dire Hunt transformation also no longer reserves generic temporary damage increases, moveset-wide lifesteal, moveset-wide interruption resistance, or moveset-wide travel increases from the ordinary Technique catalog. Those effects remain subject to normal Technique, Relic, balance, and overlap rules rather than being automatically excluded by Wolf Tier II.
-
-Fanged Guard reserves only its exact action-specific preservation package. General cross-Aspect block, player-posture, Held Attack, or Basic Attack Techniques remain possible when they do not reproduce its eligibility windows, one-use sequence rule, or automatic continuation preservation.
-
-Apex Mauling reserves only its exact fixed package. General cross-Aspect slow, multi-hit, guard-pressure, posture, or nearby-coverage Techniques remain possible when they do not reproduce its qualifying Wolf actions, consolidated claw sequence, Feral Momentum interaction, and movement-only slow together.
+Fixed Aspect mechanics reserve their exact authored packages, not every generic combat verb they touch. General cross-Aspect damage, posture, movement, block, parry, Held Attack, Basic Attack, guard-pressure, slow, multi-hit, or coverage Techniques remain possible when they use one universal rule and do not reproduce a locked Tier or Blood Art package.
 
 ## Starting capacity
 
@@ -246,30 +230,25 @@ The catalog must define the final rarity tiers, offer timing, reward-source elig
 
 Prosthetic Techniques use the normal Technique system.
 
-- Only the equipped prosthetic contributes eligible entries.
+- Only the equipped Prosthetic contributes eligible entries.
 - A major temporary Prosthetic modification occupies one active slot.
 - Its one refinement is slotless.
 - The Forge owns permanent tool development.
 - The run owns temporary specialization.
 - Prosthetic Techniques deepen the tool's existing tactical role rather than replacing it with an unrelated ability.
 
-## Aspect relationship still to define
+## Aspect relationship
 
-The roster, fixed Tier structure, optional-investment contract, Wolf's complete Tier I-IV package, Wolf Feral Momentum, and Ronin's current qualitative package are approved through the present audit. Still resolve:
+The Wolf, Wraith, and Ronin Tier 0-IV packages are locked for current paper-design scope. Technique catalog design must work around those packages rather than reopen them.
 
-- Wraith's Tier 0 weapon foundation,
-- Wraith's Blood Art form and later Tier distribution,
-- Wraith and Ronin small-growth and minor-supporting-benefit standards,
-- Ronin's follow-up audit after those standards are selected,
-- final cross-roster power and production budgets,
-- soft offer-weighting strength,
+Still unresolved for the Technique catalog:
+
+- soft affinity and offer-weighting strength,
 - neutral and alternate-affinity representation,
-- whether any direct Wolf-, Wraith-, Ronin-, Tier-, or Blood-referencing Technique ships at launch,
+- whether any direct Aspect-, Tier-, or Blood-referencing Technique ships at launch,
 - rarity and production treatment for those exceptions,
 - whether fixed Tier benefits may alter already-owned Techniques,
 - and how the catalog prevents repetitive same-Aspect builds.
-
-These decisions do not affect Technique eligibility under the ordinary universal rules.
 
 ## Reward-generation principles
 
@@ -337,15 +316,15 @@ Permanent progression may unlock additional entries into future reward pools. It
 
 Before approving the launch catalog, resolve:
 
-1. the remaining cross-roster Aspect package questions in `docs/_meta/OPEN_QUESTIONS.md`,
-2. primary-category boundaries,
-3. combat-verb tag taxonomy,
-4. affinity and offer-weighting rules,
-5. final Technique rarity model,
-6. final refinement standard,
-7. rare direct Aspect-, Tier-, or Blood-specific exceptions,
-8. launch coverage matrix.
+1. approximate launch Technique count and role/category distribution,
+2. primary-category boundaries and combat-verb tag coverage,
+3. affinity and offer-weighting rules,
+4. final Technique rarity model,
+5. final refinement standard,
+6. rare direct Aspect-, Tier-, or Blood-specific exceptions,
+7. launch coverage matrix,
+8. Prosthetic Technique count per tool and Relic/consumable boundaries.
 
-Then approve total count, category and rarity distribution, refinement count, Prosthetic Technique count per tool, icon needs, bespoke production requirements, and unlock ownership.
+Then approve icon needs, bespoke production requirements, unlock ownership, offer construction, and final launch population.
 
 Individual values, rarity weights, reroll rates, and refinement frequency remain implementation and playtesting work.
