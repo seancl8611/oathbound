@@ -22,13 +22,11 @@ Authoritative player-facing mechanics and system rules belong here.
 
 ## Current status
 
-The launch Blood Aspect roster is fixed:
+The launch Blood Aspect roster and qualitative Tier 0-IV packages are locked for current paper-design scope:
 
 - **Wolf:** four-hit fast close-range pressure and pursuit.
 - **Wraith:** two-hit extended spectral reach and frontal control.
 - **Ronin:** three-hit slow heavy impact and defensive stability.
-
-All three have complete qualitative Tier 0-IV packages for the final cross-roster paper-design comparison.
 
 | Tier | Wolf | Wraith | Ronin |
 |---|---|---|---|
@@ -38,17 +36,16 @@ All three have complete qualitative Tier 0-IV packages for the final cross-roste
 | III | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
 | IV | Apex Mauling | Beyond the Veil | Shattering Wake |
 
-All Aspect attacks remain player-directed without corrective tracking, hidden homing, or post-input target correction. Aspect progression is fixed from Tier 0 through Tier IV; Blood is run-only and unavailable before Tier II.
+No further Aspect or Tier audit is active unless prototyping exposes a concrete problem. Exact attack values, timings, hitboxes, growth percentages, and related balance remain implementation work.
 
 The current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
 
-1. final cross-roster Aspect comparison,
-2. launch run-build content catalog,
-3. persistent progression, onboarding, and trials,
-4. narrative delivery and authored-content scope,
-5. postgame release scope.
+1. launch run-build content catalog,
+2. persistent progression, onboarding, and trials,
+3. narrative delivery and authored-content scope,
+4. postgame release scope.
 
-The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact attack values, timings, hitboxes, resource values, route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
+The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
 
 ## Authority rule
 
