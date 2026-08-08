@@ -89,7 +89,7 @@ Mandatory encounters must not assume a particular Tier or Blood Art.
 
 Wolf's Feral Momentum improves later connected Basic positions at each Embrace. Wraith's Spectral Edge improves eligible spectral-only posture and guard pressure at each Embrace. Ronin's repeated growth modestly increases maximum player-posture capacity at each Embrace while leaving posture recovery speed and block efficiency unchanged.
 
-The three individual Tier 0-IV packages are approved for final cross-roster comparison. Exact numerical growth remains balance work.
+All three Tier 0-IV packages are locked at current qualitative paper-design depth. Exact numerical growth remains balance work.
 
 ## Blood persistence boundary
 
@@ -212,10 +212,9 @@ A successful Binding return additionally:
 
 ## Current production dependencies
 
-1. Complete the final cross-roster Aspect comparison.
-2. Scope the launch run-build content catalog.
-3. Scope persistent progression, onboarding, and trials.
-4. Lock the authored narrative-delivery package.
-5. Lock postgame release scope.
+1. Scope the launch run-build content catalog.
+2. Scope persistent progression, onboarding, and trials.
+3. Lock the authored narrative-delivery package.
+4. Lock postgame release scope.
 
 Exact percentages, combat values, resource values, costs, timing windows, offer rates, and reward values remain implementation and balance work.
