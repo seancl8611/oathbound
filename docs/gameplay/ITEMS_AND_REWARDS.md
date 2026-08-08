@@ -4,7 +4,7 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-08
 topics:
   - currencies
   - pickups
@@ -90,7 +90,7 @@ Possible later design space includes:
 
 These effects may belong to later Aspect Tiers, Techniques, refinements, Relics, or another approved run system. They must not create a persistent Blood balance, make the Blood Art functional only after finding a required upgrade, produce near-permanent Blood Art uptime as the normal build state, or make Tier II mandatory for run viability.
 
-The exact number and ownership of Blood-related rewards remain part of later Aspect, Technique, and catalog design.
+The exact number and ownership of Blood-related rewards remain part of later Technique and catalog design.
 
 ## Route previews and opportunity cost
 
@@ -173,7 +173,7 @@ Rest rooms provide:
 - read-only build review,
 - short narrative breathing room where appropriate.
 
-They do not generate new Techniques or restore discarded Techniques. Whether Blood changes during a rest or non-combat transition remains an explicit Blood Aspect design question rather than an assumed rest reward.
+They do not generate new Techniques or restore discarded Techniques.
 
 ## Shops
 
@@ -185,7 +185,7 @@ Run shops use Gold and may offer:
 - rerolls,
 - Techniques,
 - refinements,
-- prosthetic support,
+- Prosthetic support,
 - occasional Relics.
 
 Technique and refinement purchases should be expensive enough that Gold routing is a meaningful build strategy rather than an automatic purchase path.
@@ -196,7 +196,7 @@ Final stock count, prices, refresh rules, and reroll economics remain balance wo
 
 ## Treasure and miniboss rewards
 
-Treasure rooms provide higher-value or less predictable rewards than standard combat rooms. Eligible rewards may include a Relic choice, rare Technique, guaranteed refinement, large currency bundle, major temporary capacity, or rare consumable if consumables ship at launch.
+Treasure rooms provide higher-value or less predictable rewards than standard combat rooms. Eligible rewards may include a Relic choice, higher-rarity Technique, guaranteed refinement, large currency bundle, major temporary capacity, or rare consumable if consumables ship at launch.
 
 A miniboss guarantees meaningful build development and should never award only ordinary Gold or healing. Possible rewards include:
 
@@ -216,9 +216,9 @@ The Area 1 and Area 2 bosses provide both persistent and current-run value.
 
 Persistent rewards may include Boss Emblems, Mist, Scrolls, unlocks, and narrative or codex progress.
 
-Current-run rewards may include a refinement, rare Technique choice, Prosthetic Technique, Relic, or major temporary Health or Spirit improvement.
+Current-run rewards may include a refinement, higher-rarity Technique choice, Prosthetic Technique, Relic, or major temporary Health or Spirit improvement.
 
-Regional transitions should restore enough Health or Spirit for the next area to begin from a viable state. Blood behavior at transitions is owned by the Blood Aspect design and is not automatically refilled by the reward system.
+Regional transitions should restore enough Health or Spirit for the next area to begin from a viable state. Blood is not automatically refilled by the reward system.
 
 ## Eclipse Shogun and Heart Binding completion
 
@@ -238,18 +238,17 @@ After all six Bindings are destroyed, the seventh successful story run continues
 
 ## Relics
 
-Relics are rare run-scoped passive rules using a separate slot.
+Relics are rare run-scoped passive rules using a separate slot. The initial structure uses one equipped Relic.
 
-The initial structure uses one equipped Relic. Current rarity tiers are:
+The **current provisional rarity sketch** is a simpler three-tier structure rather than mirroring Technique rarity. A working label set is:
 
 - Common,
-- Uncommon,
 - Rare,
 - Legendary.
 
-Relics may alter broader combat, economy, survival, risk, or an approved Blood Art rule, but should not replace the selected Blood Aspect as the run's weapon identity or make a particular Aspect Tier mandatory.
+This is not locked. The labels, distribution, count, and power expectations should be revisited when the Relic roster is actually designed.
 
-The final Relic catalog belongs to the launch run-build content decision.
+Relics may alter broader combat, economy, survival, risk, or an approved Blood Art rule, but should not replace the selected Blood Aspect as the run's weapon identity or make a particular Aspect Tier mandatory.
 
 ## Pacing framework
 
@@ -296,6 +295,6 @@ A player who assembles an ideal Technique build early may shift later choices to
 
 ## Current production dependency
 
-The remaining reward-level production question is the launch run-build content catalog: approximate Technique, refinement, Prosthetic Technique, Relic, consumable, and approved Blood-interaction counts; final Technique rarity and refinement standards; post-fill offer behavior; and reusable-versus-unique production treatment.
+The active run-build task is to sketch the base Technique roster around the provisional planning targets in `TECHNIQUE_CATALOG.md`. Exact Technique rarity distribution, refinement distribution, offer weighting, Prosthetic Technique counts, Relic counts/rarities, consumables, and unique production needs should be revised after the roster is visible as a whole.
 
-Exact effects, prices, Blood rates, activation amounts, probabilities, route generation, temporary values, and reroll formulas remain later design and playtest work.
+Exact effects, prices, Blood rates, probabilities, route generation, temporary values, and reroll formulas remain later design and playtest work.
