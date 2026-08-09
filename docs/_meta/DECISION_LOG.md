@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-09
 ---
 
 # Decision Log
@@ -23,15 +23,15 @@ Wolf, Wraith, and Ronin are the central run weapon identities. The former Storm,
 
 **Authority:** `docs/gameplay/BLOOD_ASPECTS.md`
 
-## 2026-07-11 — Four active Techniques and one reserve
+## 2026-07-11 — Original four-slot Technique system — superseded
 
-Runs use four active Technique slots, one inactive reserve, independently useful Techniques, and at most one refinement per Technique.
+The original Technique model used four unrestricted active slots plus one reserve. This structure was superseded on 2026-08-09 by five action-specific combat slots plus slotless supporting Technique upgrades.
 
 **Authority:** `docs/gameplay/TECHNIQUES.md`
 
 ## 2026-07-11 — Previewed reward and currency framework
 
-Room function and payout are separate. Routes may preview reward categories; Shrines own Resist/Embrace; rest rooms own recovery/reserve swapping; shops use Gold. Mist, Scrolls, and Boss Emblems persist; Gold is run-only.
+Room function and payout are separate. Routes may preview reward categories; Shrines own Resist/Embrace; shops use Gold. Mist, Scrolls, and Boss Emblems persist; Gold is run-only.
 
 **Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`
 
@@ -61,7 +61,7 @@ The seventh successful story run continues from the Shogun into the two-form Hea
 
 ## 2026-07-22 — Successful-run duration
 
-A normal successful Binding run targets roughly 45–50 minutes. Exact room counts, topology, branch frequency, and encounter budgets remain prototype/playtest work.
+A normal successful Binding run targets roughly 45-50 minutes. Exact room counts, topology, branch frequency, and encounter budgets remain prototype/playtest work.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`
 
@@ -75,53 +75,38 @@ All launch Aspects retain universal neutral movement, dash, defense input, ordin
 
 ## 2026-08-05 — Wolf package revised around Blood Hunt
 
-Wolf's fixed path is Blood Tempo with Feral Momentum growth, Blood Hunt/Blood Fang, Fanged Guard, and Apex Mauling. Dire Hunt transformation and Apex Feast are superseded.
+Wolf's fixed path is Blood Tempo with Feral Momentum growth, Blood Hunt/Blood Fang, Fanged Guard, and Apex Mauling.
 
 **Authority:** `docs/gameplay/WOLF_ASPECT.md`
 
-## 2026-08-05 — Wraith Tier 0-II direction
+## 2026-08-05 to 2026-08-06 — Wraith Tier package completed
 
-Wraith retains Veil Cut → Passing Arc, with Pale Lance, Ghostline Slash, and Veil Reversal. Pale Barrage is Tier I; Spectral Edge rewards eligible spectral-only posture/guard pressure; Wraith's Reach is an immediate frontal sweep–corridor–echo Blood Art rather than a duration state.
-
-**Authority:** `docs/gameplay/WRAITH_ASPECT.md`
-
-## 2026-08-06 — Wraith Tier III Spectral Passage
-
-Qualifying Wraith spectral attacks continue through ordinary-enemy bodies across their remaining authored geometry, with reduced secondary Health damage and meaningful posture/guard pressure. Protected targets and geometry stop further passage. Veiled Guard is retired.
-
-**Authority:** `docs/gameplay/WRAITH_ASPECT.md`
-
-## 2026-08-06 — Wraith Tier IV Beyond the Veil
-
-Pale Lance and Ghostline Slash gain greater Tier IV spectral reach and Spectral Edge eligibility. Valid deathblows may begin from greater clear-path frontal distance through one straight visible spectral approach. Killing deathblows grant brief movement-only Veilstride. Pale Procession is retired.
+Wraith retains Veil Cut → Passing Arc with Pale Lance, Ghostline Slash, and Veil Reversal. Pale Barrage, Spectral Edge, Wraith's Reach, Spectral Passage, and Beyond the Veil complete its Tier I-IV path.
 
 **Authority:** `docs/gameplay/WRAITH_ASPECT.md`
 
 ## 2026-08-07 — Ronin Tier 0-IV package locked
 
-Ronin keeps its current Tier 0 weapon foundation:
-
-- Severing Cut → Crushing Cross → Bloodfall,
-- Stillness Draw,
-- Breaching Slash,
-- Answering Steel,
-- strongest baseline guard with slowest player-posture recovery.
-
-Its fixed progression remains:
-
-- Tier I — Steadfast Reprisal,
-- Tier II — Falling Mountain with Deep Rupture,
-- Tier III — Unbroken Resolve with Measured Weight and Perfect Weight,
-- Tier IV — Shattering Wake.
-
-Beginning at Tier I, every Embrace modestly increases Ronin's maximum player-posture capacity. This growth does not increase posture recovery speed or block efficiency. Generic maximum-Health growth and Stillness Draw-only damage growth are not part of the fixed package.
+Ronin keeps Severing Cut → Crushing Cross → Bloodfall, Stillness Draw, Breaching Slash, Answering Steel, strongest baseline guard, and slowest player-posture recovery. Its fixed progression remains Steadfast Reprisal, Falling Mountain / Deep Rupture, Unbroken Resolve / Measured Weight / Perfect Weight, and Shattering Wake, with modest maximum-posture growth at each Embrace.
 
 **Authority:** `docs/gameplay/RONIN_ASPECT.md`
 
 ## 2026-08-07 — Launch Aspect design locked for current scope
 
-Wolf, Wraith, and Ronin each have complete qualitative Tier 0-IV paper-design packages. The remaining cross-roster comparison was reviewed outside the tracker and is considered resolved for current scope. No Aspect or Tier question remains active unless prototyping reveals a concrete gameplay, overlap, readability, or production problem.
-
-The next active design area is the launch run-build content catalog.
+Wolf, Wraith, and Ronin each have complete qualitative Tier 0-IV paper-design packages. No Aspect or Tier question remains active unless prototyping reveals a concrete problem.
 
 **Authority:** `docs/_meta/OPEN_QUESTIONS.md`, `docs/gameplay/BLOOD_ASPECTS.md`
+
+## 2026-08-09 — Technique architecture rebuilt around core combat actions
+
+Techniques remain the main horizontal run-build layer, but the four-active-plus-reserve model is removed.
+
+Akio now has five direct Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow. One direct Technique may occupy each slot; ordinary Techniques do not stack within the same action. Filled slots normally remain committed, with rare replacement offers allowed.
+
+Slotless supporting Techniques can deepen a recurring effect family, create synergy, or improve broader build behavior without a global inventory cap. Their practical cap comes from reward opportunities, rarity, prerequisites, route choices, and run length. Slotted Techniques may still receive one refinement.
+
+Effect families are internal authoring/build structures rather than necessarily player-facing named schools. Each must be broad enough to support comparable depth across several core combat actions. Generic elemental schools are not the target; supernatural effects should derive from Oathbound's samurai, Order, Returning Blood, seals, wounds, execution, and controlled-mutation language.
+
+Technique rarity remains Common / Uncommon / Rare / Legendary. Some Legendaries may use family-investment prerequisites, with exact thresholds deferred until the roster is designed.
+
+**Authority:** `docs/gameplay/TECHNIQUES.md`, `docs/gameplay/TECHNIQUE_CATALOG.md`
