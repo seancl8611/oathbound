@@ -4,7 +4,7 @@ title: Run Results and Strand Return
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-09
 topics:
   - run-results
   - successful-return
@@ -48,10 +48,12 @@ After a successful Heart Binding completion:
 - permanent currencies and rewards gained,
 - discoveries, Technique-pool entries, or other unlocks earned,
 - final selected Blood Aspect and highest Tier reached,
-- final four active Techniques, reserve Technique, refinements, equipped prosthetic, and Relic as a run recap,
-- clear indication that active/reserve Techniques, refinements, Corruption, Tier, Gold, temporary capacity, and temporary Relic effects were burned away.
+- final five slotted Techniques,
+- owned supporting Techniques and refinements in a readable recap,
+- equipped Prosthetic and Relic,
+- clear indication that Techniques, refinements, Corruption, Tier, Gold, temporary capacity, and temporary Relic effects were burned away.
 
-Showing the final build is a record of the completed run, not continued ownership. The layout must not imply that those Techniques remain equipped at the Strand.
+Showing the final build is a record of the completed run, not continued ownership.
 
 The Binding-progress display shows six player-destroyed Bindings plus the historical outer breach. It must clearly distinguish the Court's earlier destruction from Akio's campaign progress.
 
@@ -68,29 +70,15 @@ After the player defeats the Shogun's current body and the Heart within the same
 5. unlock postgame run continuation and repeatable Heart-route access,
 6. preserve a completed-story marker on the save.
 
-The first Heart victory should not be presented as one more Binding clear. It is the completion of the main story.
+The first Heart victory should not be presented as one more Binding clear.
 
 ## Repeat Heart completion
 
-After story completion, the Heart route may be repeated as a gameplay challenge.
-
-A repeat Heart result:
-
-- records the completed run and rewards,
-- may record build, time, difficulty, or future challenge information,
-- uses a shortened completion presentation,
-- returns the player to the postgame Strand,
-- and does not replay or advance the canonical ending by default.
-
-The interface must not imply that another Heart was canonically destroyed or that the story progressed again.
+After story completion, the Heart route may be repeated as a gameplay challenge. A repeat result may record build, time, difficulty, or future challenge information but does not advance the canonical ending again.
 
 ## Presentation goal
 
-Successful Binding return should feel consequential rather than celebratory in a generic arcade sense. It communicates that Akio defeated the Shogun, used Returning Blood to destroy one ancient restraint around the Heart, was dissolved by the Heart's retaliation, and reconstructed with campaign progress intact.
-
-The first Heart clear should feel final and distinct. Repeat Heart clears should feel prestigious and difficult without pretending to be additional story chapters.
-
-The final-build recap should help players remember successful combinations without turning into a permanent loadout-save system.
+Successful Binding return should feel consequential rather than celebratory in a generic arcade sense. The final-build recap should help players remember successful combinations without turning into a permanent loadout-save system.
 
 ## Reformation treatment
 
@@ -101,9 +89,7 @@ The final-build recap should help players remember successful combinations witho
 - optional momentary residue from the equipped Aspect,
 - controlled return to normal Strand ambience.
 
-The effect must imply real bodily destruction, danger, and increasing marks on Akio without presenting Returning Blood as effortless immortality.
-
-This reformation treatment belongs to deaths and the first six Binding returns. The canonical Heart ending instead removes Returning Blood and leaves Akio mortal.
+The canonical Heart ending instead removes Returning Blood and leaves Akio mortal.
 
 ## Technical requirements
 
@@ -113,5 +99,3 @@ This reformation treatment belongs to deaths and the first six Binding returns. 
 - Run-only state is visibly separated from retained progression.
 - The final Technique build may be recorded for run history or summary only if it remains clearly non-equipped and non-recoverable.
 - Binding-return, first Heart clear, and repeat Heart clear require distinct result-state flags.
-- Failed-return treatment may share layout components, but successful Binding completion, story completion, and repeat challenge completion must remain visually and narratively distinct.
-- Future modifier, difficulty, enemy/room-variant, and challenge-record fields are deferred and are not required for the initial result screen.
