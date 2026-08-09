@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-08
+last_reviewed: 2026-08-09
 ---
 
 # Current Design Questions
@@ -20,53 +20,64 @@ This file contains only unresolved decisions that materially affect launch scope
 - Every run begins at Tier 0; Embrace advances the selected Aspect through its fixed path to Tier IV.
 - Blood is run-only and unavailable before Tier II.
 - Tier 0-I Technique-focused builds, Tier II hybrids, and deeper Tier III-IV Aspect builds must all remain viable.
-- Mandatory encounters cannot assume a particular Aspect Tier or Blood Art.
+- Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, or Legendary.
 - Exact damage, timing, hitboxes, growth percentages, collision, VFX timing, and other balance values remain prototype and implementation work.
+
+## Technique architecture now approved
+
+- Techniques are the main horizontal run-build layer around the selected Aspect.
+- There is **no global cap on total Technique upgrades**.
+- Five core combat slots may each hold one direct Technique: **Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow**.
+- Direct Techniques do not stack within the same combat slot.
+- A filled slot normally remains committed; rare replacement offers may overwrite that slot.
+- Slotless supporting Techniques may deepen an existing family, create cross-family synergy, or improve broader Technique behavior.
+- A slotted Technique may receive at most one refinement.
+- Technique rarity uses **Common / Uncommon / Rare / Legendary**.
+- Some Legendary Techniques may use family-investment prerequisites; exact thresholds remain open.
+- Internal effect families must be broad enough to affect several core combat slots and support comparable build depth.
+- Family names and player-facing presentation are not locked; the player may ultimately recognize them mainly through symbols, color, VFX, or effect language.
+- Generic elemental schools are not the target. Familiar functions such as slow, AoE, extra reach, delayed damage, chaining, restraint, or recovery should be expressed through Oathbound-specific samurai / Returning Blood themes.
 
 ## Priority order
 
-1. Launch run-build content catalog
-2. Persistent progression, onboarding, and trial package
-3. Narrative delivery and authored-content package
-4. Postgame release package
+1. Launch Technique roster and family design
+2. Remaining run-build catalog: Prosthetic Techniques, Relics, consumables
+3. Persistent progression, onboarding, and trial package
+4. Narrative delivery and authored-content package
+5. Postgame release package
 
-# 1. Launch run-build content catalog
+# 1. Launch Technique roster and family design
 
 **This is the current active design area.**
 
-The next step is to **sketch the actual Technique roster**, not to finish every catalog rule in advance. Rarity distribution, category counts, affinity strength, refinements, offer weighting, and related rules should be adjusted after the roster can be viewed as a whole.
+Define the first small set of broad internal effect families, then map them against the five core combat slots.
 
-### Provisional planning sketch
+The next roster pass should answer:
 
-These are working targets, not locked requirements:
+- what each family fundamentally does,
+- how each family can affect Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow without feeling forced,
+- which direct Techniques are strongest enough to define one of those slots,
+- what slotless supporting Techniques deepen focused and hybrid builds,
+- which effects deserve refinements,
+- which rare offers may replace an occupied combat slot,
+- what Legendary / capstone concepts exist and what prerequisite depth is reasonable,
+- and how the full roster performs across Wolf, Wraith, Ronin, bosses, groups, and realistic trigger frequency.
 
-- approximately **30 base Techniques** at launch, excluding Prosthetic Techniques and Relics,
-- rough category direction: **Blade ~8, Deflection ~6, Execution ~5, Movement ~5, General ~6**,
-- category counts may shift substantially as individual Techniques are designed,
-- Technique rarity currently sketches as **Common / Uncommon / Rare / Legendary**,
-- Legendary Techniques should be uncommon, powerful, and capable of making a run feel unusually exciting; exact count and rules are deferred,
-- roughly **60–70%** of base Techniques may receive one refinement,
-- Aspect affinity is mostly soft weighting rather than eligibility,
-- direct Aspect-, Tier-, or Blood-specific Techniques remain rare exceptions,
-- Relics currently sketch as a simpler **three-rarity structure** rather than mirroring Technique rarity; exact labels/counts remain provisional,
-- final Prosthetic Technique counts, Relic counts, consumables, rarity distribution, refinement distribution, and offer construction should emerge from roster design rather than be forced beforehand.
+Do **not** lock the old ~30-Technique total or the old Blade / Deflection / Execution / Movement / General quotas. The final launch count should emerge from the new roster architecture.
 
-### Roster-design goals
+The working roster belongs in `gameplay/TECHNIQUE_CATALOG.md`.
 
-While sketching entries, keep enough coverage for:
+# 2. Remaining run-build catalog
 
-- Basic, Held, Dash Attack, Parry Counter, block/parry, posture, deathblow, movement, Health, Spirit, and Prosthetic play,
-- reinforce, broaden, compensate, and hybridize build directions,
-- all three Aspects without making affinity restrictive,
-- ordinary encounters, elites, bosses, and mixed groups,
-- useful early-run standalone choices and meaningful late-run replacement/refinement choices,
-- and restrained production scope for bespoke UI, VFX, animation, and audio.
+After the core Technique roster is coherent, define:
 
-The working roster and coverage matrix belong in `gameplay/TECHNIQUE_CATALOG.md`.
+- how Prosthetic-specific temporary upgrades fit the new slot structure,
+- initial Relic count and final rarity structure,
+- whether consumables ship,
+- reward-room frequency and offer construction,
+- and entries requiring unique icons, VFX, animation, or audio.
 
-Do **not** treat the provisional counts or rarity/refinement targets above as correctness requirements. Revisit them after a substantial portion of the Technique roster exists.
-
-# 2. Persistent progression, onboarding, and trial package
+# 3. Persistent progression, onboarding, and trial package
 
 Define the minimum launch package across the Bloodwell, Forge, Blood Mirror, and Blood Cavern:
 
@@ -81,7 +92,7 @@ Define the minimum launch package across the Bloodwell, Forge, Blood Mirror, and
 
 Do not assume a duplicate Blood Art upgrade tree beneath every Aspect.
 
-# 3. Narrative delivery and authored-content package
+# 4. Narrative delivery and authored-content package
 
 Define:
 
@@ -93,7 +104,7 @@ Define:
 - voice scope,
 - and cinematic, portrait, in-engine, or environmental delivery ownership.
 
-# 4. Postgame release package
+# 5. Postgame release package
 
 Define:
 
@@ -111,8 +122,7 @@ Keep exact values in their owning files, including:
 - damage, posture, guard pressure, stagger, reach, movement, recovery, and interruption timing,
 - hitboxes, collision, targeting, deathblow pathing, and blocker classifications,
 - Blood capacity, gain values, proc weighting, and anti-farming rules,
-- Feral Momentum, Spectral Edge, and Ronin posture-capacity scaling,
-- Tier IV reach, extended deathblow range and angle, and Veilstride duration,
-- room counts, route and reward probabilities, prices, rarity weights, and rerolls,
+- Aspect growth percentages,
+- room counts, route and reward probabilities, prices, rarity weights, replacement rates, and rerolls,
 - permanent-upgrade percentages,
 - and final animation frames, VFX density, audio timing, or HUD layout.
