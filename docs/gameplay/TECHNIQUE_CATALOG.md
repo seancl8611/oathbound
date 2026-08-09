@@ -4,14 +4,15 @@ title: Technique Catalog
 category: gameplay
 status: draft
 authority: primary
-last_reviewed: 2026-07-28
+last_reviewed: 2026-08-09
 topics:
   - techniques
   - technique-catalog
+  - combat-slots
+  - effect-families
+  - supporting-techniques
   - refinements
-  - combat-verbs
-  - aspect-affinity
-  - run-builds
+  - rarity
 related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-BLOOD-ASPECTS
@@ -25,175 +26,200 @@ related:
 
 # Technique Catalog
 
-## Purpose and ownership
+## Purpose
 
-This file owns individual Technique entries, catalog coverage, entry status, refinements, and production treatment.
+This file owns the working Technique roster, family coverage, individual Technique concepts, supporting upgrades, refinements, rarity candidates, and production treatment.
 
-[Technique System](TECHNIQUES.md) owns slots, reserve behavior, categories, affinity, rarity, refinements, eligibility, and the Aspect-Technique responsibility contract. [Blood Aspect System](BLOOD_ASPECTS.md) owns the Wolf, Wraith, and Ronin foundations and fixed Tier progression. This file must not redefine either system.
-
-The removed Storm, Frost, Ember, Hex, and Shadow stance catalog is historical context only.
+`TECHNIQUES.md` owns the system rules. The Aspect files own Wolf, Wraith, and Ronin and must not be reopened merely to make a Technique fit.
 
 ## Current status
 
-No individual launch Technique, refinement, category count, rarity distribution, or final catalog total is approved.
+The Technique architecture is now locked at a higher level, but the actual effect families and individual roster are not yet approved.
 
-The approved layer contract is:
+The old planning model of roughly 30 base Techniques divided into Blade, Deflection, Execution, Movement, and General quotas is retired. Those buckets were too unequal to serve as the backbone of build design.
 
-- Wolf, Wraith, and Ronin define the pre-run weapon foundation.
-- Each Aspect follows a fixed Tier path rather than branching Technique-like packages.
-- Wolf's current path is Blood Tempo, Dire Hunt and Blood Fang, Fanged Guard, and Apex Feast.
-- Techniques are four limited replaceable in-run modifications plus one reserve.
-- Ordinary Techniques are usable by every Aspect.
-- Affinity represents amplification or weighting rather than eligibility.
-- Builds may reinforce, broaden, compensate, or hybridize an Aspect.
-- Most synergy emerges through shared combat verbs rather than bespoke per-Aspect versions.
+The roster should now be built from two independent dimensions:
 
-Before catalog population begins, approve:
+1. **Combat slot** — which core action is directly modified.
+2. **Effect family** — which recurring supernatural / martial rule the Technique belongs to.
 
-1. Wraith and Ronin's fixed Tier I-IV benefits and power budgets,
-2. cross-roster overlap and the Technique power-budget boundary,
-3. Technique category, combat-verb tag, affinity, and rarity models,
-4. the refinement design standard,
-5. affinity and offer-weighting rules,
-6. rare direct Aspect-, Tier-, or Blood-referencing exception rules,
-7. and the launch coverage matrix.
+Exact player-facing family names are not required. Family identity may ultimately be communicated through color, symbol, VFX, effect wording, or another UI language.
 
-Catalog counts follow these decisions rather than preceding them.
+## Five slotted action roles
 
-## Protected Wolf design space
+Every broad effect family should be tested for meaningful representation across these action roles:
 
-Ordinary Techniques must not directly reproduce:
+| Combat slot | Core action | Trigger frequency | Expected per-trigger power |
+|---|---|---|---|
+| Basic Attack | Basic sequence / primary sword action | Very high | Lower per trigger |
+| Held Attack | committed Held action | Medium | Strong |
+| Dash | Dash Attack / approved evade or re-entry interaction | High | Medium |
+| Parry / Counter | successful parry / Parry Counter | Medium and skill-gated | Strong |
+| Deathblow | posture break / execution | Low | Very strong |
 
-- Blood Tempo's earlier next-Basic input after a successful hit,
-- Dire Hunt's activation recovery and transformation package,
-- Blood Fang,
-- Fanged Guard's single frontal block while charging a Held Attack,
-- Apex Feast's deathblow eruption and fully charged next Held Attack.
+A family does not need perfectly symmetrical effects in all five slots, but it must have enough breadth that it does not become an unequal mechanic bucket such as "only healing" or "only delayed attacks."
 
-A Technique may interact with the same universal action tags, but it must create a distinct rule with cross-Aspect value. Direct Wolf-specific exceptions require explicit approval.
+## Effect-family requirements
 
-## Catalog design sequence
+A launch family should:
 
-1. Finalize Wraith and Ronin's fixed Tier packages.
-2. Compare all three packages and define the Technique power-budget boundary.
-3. Finalize Technique metadata, affinity, refinement, rarity, and exception rules.
-4. Build the coverage matrix around territory not already owned by the Aspect foundations.
-5. Draft individual Technique concepts.
-6. Test every entry for standalone value and cross-Aspect usefulness.
-7. Verify reinforce, broaden, compensate, and hybridize coverage for Wolf, Wraith, and Ronin.
-8. Identify rarity, UI, VFX, animation, audio, and unlock treatment.
-9. Approve launch counts and production tiers.
+- fit Akio's disciplined supernatural-samurai fantasy,
+- derive naturally from Returning Blood, Order technique, seals, wounds, execution, controlled mutation, or another established world concept,
+- support several combat slots rather than one narrow mechanic,
+- have a repeatable visual / gameplay identity,
+- support both focused and hybrid builds,
+- offer room for slotless supporting upgrades,
+- and remain distinct from the locked Wolf, Wraith, and Ronin identities.
 
-## Launch coverage matrix
+Avoid using generic elemental categories such as fire, frost, or lightning as the main family structure. Familiar functions such as slow, area damage, chaining, extra reach, delayed damage, crowd control, or recovery remain valid when expressed through Oathbound-specific rules.
 
-Populate this matrix before approving final catalog size. One Technique may cover several compatible rows, and one row may be supported by several Techniques.
+## Supporting-upgrade layer
 
-| Coverage family | Required question | Status |
-|---|---|---|
-| Attack opening and sequences | What choices alter opening pressure, sequence behavior, or commitment without duplicating Blood Tempo or becoming generic attack speed? | Open |
-| Range and crowd coverage | What choices affect reach, arcs, nearby targets, or line control across all Aspects? | Open |
-| Heavy commitment | What choices reward earned openings, posture pressure, or risk-managed commitment? | Open |
-| Spacing and precision | What choices deepen narrow punishment, spacing, or anti-commitment play? | Open |
-| Defense-to-offense | What choices connect parry, block, dodge, recovery, or Parry Counter into offense without duplicating Fanged Guard? | Open |
-| Movement and re-entry | What choices deepen repositioning, pursuit, spacing, or movement-to-attack transitions without adding corrective tracking? | Open |
-| Posture and execution | What choices alter posture pressure, break payoff, deathblow payoff, or target transition without duplicating Apex Feast? | Open |
-| Prosthetic development | What temporary choices deepen each equipped tool's existing tactical purpose? | Open |
-| Reinforce builds | Does every Aspect have several Techniques that deepen its strengths? | Open |
-| Broaden builds | Can every Aspect develop adjacent combat options without losing its identity? | Open |
-| Compensate builds | Can slots cover a weakness without erasing its firm tradeoff? | Open |
-| Hybrid builds | Can each Aspect support surprising cross-category combinations that remain coherent? | Open |
-| Alternate affinity | Are neutral and alternate-affinity choices useful rather than misleading or dead? | Open |
-| Health, Spirit, and recovery | What limited General Techniques support survival or resources without duplicating Dire Hunt's healing identity? | Open |
-| Boss viability | Which entries remain useful against single targets, elites, and bosses? | Open |
-| Mixed encounters | Which entries address groups, ranged pressure, hazards, or target prioritization? | Open |
-| Early-run value | Which entries provide immediate value without another exact Technique? | Open |
-| Late-run decisions | Which entries create meaningful replacement, reserve, refinement, or specialization choices? | Open |
+After or alongside slotted Techniques, the roster needs slotless supporting Techniques that can deepen a family without occupying another core action slot.
 
-## Technique entry schema
+Supporting concepts may:
 
-### Identity
+- strengthen a family's shared effect,
+- improve buildup, spread, duration, or payoff,
+- connect two combat slots that already use the same family,
+- create cross-family interactions,
+- modify a family interaction with posture, Health, Spirit, bosses, crowds, or positioning,
+- or unlock a more advanced family behavior.
+
+There is no fixed inventory cap on these upgrades. Their practical limit comes from reward opportunities and build prerequisites.
+
+## Rarity direction
+
+Technique rarity remains:
+
+- Common
+- Uncommon
+- Rare
+- Legendary
+
+Legendary Techniques should be exceptional and run-shaping. Some may be independent rare finds; others may act as family capstones that require prior investment before becoming eligible.
+
+Exact prerequisite counts are not yet locked. Prerequisites must never consume so much of a run that the player is forced into one family merely to reach a capstone.
+
+## Replacement direction
+
+A slotted Technique normally commits that combat slot for the rest of the run.
+
+Rare replacement offers may overwrite the existing Technique in that same combat slot. Replacements should support meaningful pivots or unusually strong finds rather than make early choices disposable.
+
+## Refinement direction
+
+A slotted Technique may have one refinement. Refinements improve that exact Technique; slotless supporting Techniques improve broader family or build behavior.
+
+There is no longer a target that 60-70% of the roster must receive refinements. Coverage should follow the actual concepts.
+
+## Aspect audit for every candidate
+
+Every slotted or supporting Technique must be checked against all three Aspects:
+
+- **Wolf:** fast, close, pursuit-heavy, high hit frequency.
+- **Wraith:** longest effective melee reach, line control, deliberate spacing.
+- **Ronin:** slow, heavy, high impact, strong defensive stability.
+
+Check whether the Technique:
+
+- remains useful on all three,
+- has intentional rather than accidental affinity,
+- disproportionately scales from hit frequency, individual hit size, reach, or defensive stability,
+- erases an Aspect's failure state,
+- duplicates a fixed Tier or Blood Art,
+- or makes one Aspect overwhelmingly correct for that family.
+
+## Coverage checklist
+
+The first roster pass should cover enough of the following without forcing one Technique per row:
+
+- Basic Attack pressure and sequence behavior,
+- Held Attack commitment and payoff,
+- Dash Attack / re-entry,
+- parry and Parry Counter payoff,
+- posture break and Deathblow payoff,
+- area damage / crowd handling,
+- controlled range or geometry changes,
+- slow / suppression / restraint equivalents,
+- delayed or repeated damage,
+- marks and later payoff,
+- posture pressure and guard breaking,
+- Health risk / recovery,
+- Spirit and Prosthetic synergy,
+- focused-family build deepening,
+- hybrid-family interactions,
+- boss usefulness,
+- mixed-encounter usefulness,
+- and rare high-impact Legendary behavior.
+
+## Entry templates
+
+### Slotted Technique
 
 - **Stable ID:** `TECH-###`
-- **Name:** player-facing Technique name
-- **Status:** concept, approved, deferred, cut, or implemented
-- **Primary category:** one approved category
-- **Rarity:** approved rarity tier
-- **Combat-verb tags:** all directly affected verbs
-- **Aspect affinity:** one or more justified soft affinities, or neutral
-- **Build direction:** reinforce, broaden, compensate, hybridize, or a justified combination
-- **Prosthetic requirement:** none unless this is a Prosthetic Technique
+- **Name:**
+- **Status:** concept / candidate / approved / deferred / cut / implemented
+- **Combat slot:** Basic Attack / Held Attack / Dash / Parry-Counter / Deathblow
+- **Effect family:** internal family identifier
+- **Working rarity:**
+- **Core effect:**
+- **Skill / decision requirement:**
+- **Aspect audit:** Wolf / Wraith / Ronin
+- **Boss / crowd behavior:**
+- **Overlap check:**
+- **Refinement:** candidate or none
+- **Production notes:** UI / VFX / animation / audio
 
-### Gameplay definition
+### Supporting Technique
 
-- **Trigger or condition:** player action, enemy state, resource state, or positional condition
-- **Base effect:** complete standalone behavior without numerical tuning
-- **Intended decision:** why the player selects it over another valid option
-- **Intended pattern:** what skilled behavior it encourages
-- **Failure and reset behavior:** what breaks, expires, or resets it
-- **Boss and elite behavior:** restrictions and reliability
-- **Crowd behavior:** multiple-enemy behavior
-- **Cross-Aspect usefulness:** why it remains valid outside its strongest affinity
-- **Aspect overlap check:** why it modifies rather than duplicates the selected weapon foundation, fixed Tier benefits, or Blood Art
-- **Invalid combinations or safeguards:** only where required
+- **Stable ID:** `TECH-S###`
+- **Name:**
+- **Status:**
+- **Effect family or cross-family requirement:**
+- **Working rarity:**
+- **Prerequisite when present:**
+- **Support effect:**
+- **Why it is worth a reward choice:**
+- **Aspect / encounter audit:**
+- **Production notes:**
 
-### Refinement
+### Legendary / capstone candidate
 
-- **Refinement name**
-- **Refinement effect**
-- **Why it preserves the base Technique's identity**
+- **Stable ID:** `TECH-L###`
+- **Name:**
+- **Family or neutral:**
+- **Eligibility requirement:** provisional until roster review
+- **Effect:**
+- **Why it changes the run:**
+- **Why it does not replace the Aspect:**
+- **Production cost:**
 
-Use `None at launch` when an approved Technique intentionally ships without a refinement.
+## Current roster-design sequence
 
-### Production and progression
+1. Define the first set of broad effect families.
+2. Test each family across all five combat slots.
+3. Draft the strongest slotted Technique concepts.
+4. Add supporting Techniques that deepen focused and hybrid builds.
+5. Identify refinements and rare replacements.
+6. Identify Legendary / capstone candidates and sensible prerequisites.
+7. Audit the whole roster across Wolf, Wraith, Ronin, bosses, groups, and realistic trigger frequency.
+8. Only then lock launch count, family representation, reward frequency, rarity distribution, and production scope.
 
-- **UI treatment**
-- **VFX treatment:** reused, extended, or bespoke
-- **Animation treatment:** existing library or explicit scope increase
-- **Audio requirement**
-- **Unlock ownership**
-- **Dependencies**
+## Deferred until roster review
 
-## Quality checks
+Do not lock yet:
 
-An individual Technique is not ready unless:
-
-- it provides value without another exact Technique,
-- its effect is understandable before selection,
-- it deepens active combat rather than replacing execution,
-- category, tags, affinity, rarity, and build direction describe different properties,
-- it remains useful in common and major encounter contexts,
-- it is not invalid under another Aspect,
-- it modifies rather than reproduces an Aspect foundation, fixed Tier benefit, or Blood Art,
-- it does not add hidden homing or corrective tracking,
-- its refinement preserves the original reason for selection,
-- and its production treatment is explicit enough to estimate.
-
-## Catalog-level checks
-
-Approve the launch catalog only when:
-
-- all three fixed Aspect Tier packages and the Technique power budget are approved,
-- every core combat action has meaningful but non-mandatory support,
-- each Aspect supports several reinforce, broaden, compensate, and hybridize builds,
-- neutral and alternate-affinity choices prevent repetitive same-Aspect runs,
-- early offers provide standalone value,
-- late offers create replacement, reserve, and refinement decisions,
-- the pool avoids exact prerequisite chains,
-- the reward generator can avoid three invalid choices,
-- Techniques do not make Aspect progression irrelevant,
-- fixed Aspect progression does not make Technique selection secondary,
-- and unique production requirements are counted.
-
-## Deferred values
-
-The catalog may define behavior without locking:
-
-- damage and posture values,
-- durations and cooldowns,
-- exact thresholds,
-- offer weights and rarity probabilities,
-- reroll formulas,
-- final unlock costs,
-- or frame-level implementation values.
-
-Those remain implementation and playtest work.
+- exact number of effect families,
+- final family names or player-facing presentation,
+- total launch Technique count,
+- supporting-Technique count,
+- exact rarity totals or probabilities,
+- Legendary prerequisite thresholds,
+- replacement frequency,
+- exact refinement coverage,
+- family offer weighting,
+- Prosthetic Technique structure under the new slot model,
+- final Relic count / rarity distribution,
+- consumable inclusion,
+- or numerical combat values.

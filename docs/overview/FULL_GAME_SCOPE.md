@@ -4,26 +4,19 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-09
 topics:
   - full-scope
-  - asset-counts
+  - techniques
   - areas
   - strand
-  - techniques
   - the-heart
-  - heart-bindings
-  - campaign-clears
-  - true-final-heart
   - postgame
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
-  - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
   - GAMEPLAY-BLOOD-ASPECTS
-  - GAMEPLAY-WOLF-ASPECT
-  - GAMEPLAY-WRAITH-ASPECT
-  - GAMEPLAY-RONIN-ASPECT
+  - GAMEPLAY-TECHNIQUES
   - META-OPEN-QUESTIONS
 ---
 
@@ -37,7 +30,8 @@ This document defines Oathbound's current production-level shape. It does not lo
 |---|---:|---|
 | Player character | 1 | Akio concept, final sprite, introductory combat, three Aspect combat libraries |
 | Blood Aspects | 3 | Wolf, Wraith, Ronin |
-| Technique loadout | 4 active + 1 reserve | Launch catalog size remains open |
+| Core Technique slots | 5 | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow |
+| Supporting Technique capacity | No fixed inventory cap | Limited by reward opportunities, rarity, prerequisites, and run length |
 | Prosthetic tools | 8 | One equipped at a time |
 | Run-scoped Relic capacity | 1 | Launch catalog remains open |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
@@ -48,10 +42,8 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Regional bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
 | Heart Binding campaign | 7 original / 6 player clears | One historical breach and six player-destroyed Bindings |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
-| Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber states |
-| Cross-area room functions | 6 | Combat, Shrine, rest, shop, treasure/miniboss, boss |
 | Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
-| Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
+| Relic rarity tiers | Provisional 3 | Common, Rare, Legendary working sketch |
 
 ## Player and run build
 
@@ -61,17 +53,18 @@ After Returning Blood awakens, launch scope includes:
 
 - one selected Blood Aspect as the immediate Tier 0 weapon foundation,
 - three complete Aspect packages from Tier 0 through Tier IV,
-- one physical katana expressed through Aspect-specific Blood forms,
-- universal controls, locomotion, neutral dash, parry timing, enemy rules, and deathblow language,
-- player-directed attacks without corrective tracking, homing, or post-input correction,
 - optional fixed Aspect advancement through Shrine Resist/Embrace decisions,
 - Blood as a run-only resource unavailable before Tier II,
-- four active Technique slots and one reserve,
-- one refinement maximum per Technique,
+- five direct Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow,
+- one direct Technique maximum per slot,
+- rare same-slot replacement offers,
+- slotless supporting Technique upgrades with no fixed inventory cap,
+- one refinement maximum per eligible slotted Technique,
+- four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
 - one equipped Prosthetic,
 - and one run-scoped Relic slot.
 
-A fourth or fifth Aspect is outside current production scope.
+The exact Technique roster size is open. The retired rough ~30 count and Blade / Deflection / Execution / Movement / General quotas are no longer production requirements.
 
 ## Locked Aspect scope
 
@@ -84,38 +77,34 @@ A fourth or fifth Aspect is outside current production scope.
 | **Tier III** | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
 | **Tier IV** | Apex Mauling | Beyond the Veil | Shattering Wake |
 
-Supporting growth is deliberately narrow:
+All three packages are locked at current qualitative paper-design depth. Final animation counts, VFX counts, frame data, combat values, collision, and effect timing still require playable validation.
 
-- Wolf increasingly rewards later connected Basic positions.
-- Wraith increasingly rewards eligible spectral-only contact with posture and guard pressure.
-- Ronin gains modest maximum player-posture capacity at each Embrace; posture recovery speed and block efficiency do not scale.
+## Technique scope boundary
 
-The Blood Art distinction is fixed:
+Technique design must use a small set of broad internal effect families that can meaningfully affect several of the five core combat slots.
 
-> **Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point.**
+Those family names are authoring tools, not necessarily player-facing labels. Final recognition may use symbols, color, VFX, effect wording, or another UI language.
 
-All three packages are ready for the final cross-roster paper-design comparison. Final animation counts, VFX counts, frame data, combat values, collision, and effect timing still require implementation briefs and playable validation.
+The main family structure should avoid generic elemental schools. Familiar functions such as slow, area damage, extra range, delayed damage, chaining, restraint, marks, recovery, and impact bursts remain valid when expressed through Oathbound-specific samurai / Returning Blood themes.
+
+Focused and hybrid family builds must both be supported. Some Legendary Techniques may use prior family investment as an eligibility requirement, but exact thresholds remain open.
 
 ## Optional investment outcomes
 
 Launch balance must support:
 
-- Tier 0-I with an excellent coherent Technique build,
+- Tier 0-I with a strong coherent Technique build,
 - Tier II with a solid Technique build as a common hybrid,
-- Tier III with fewer horizontal upgrades as deliberate Aspect specialization,
+- Tier III with less-developed horizontal upgrades as deliberate Aspect specialization,
 - occasional Tier IV high-roll runs.
 
-Mandatory encounters must not assume a particular Tier or Blood Art.
+Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, or Legendary.
 
 ## Run-duration target
 
-A normal successful Binding run targets approximately **45–50 minutes** of active time.
+A normal successful Binding run targets approximately **45-50 minutes** of active time.
 
-- Experienced repeat clears may take roughly 35–42 minutes.
-- Slower successful clears may approach 60 minutes.
-- The seventh story run adds the two-form Heart encounter and may reach roughly 55–60 minutes.
-
-Exact room counts, route topology, branch frequency, and miniboss frequency remain prototype decisions unless they create additional production scope.
+The final number of Technique reward opportunities must be tuned against the new uncapped supporting-upgrade layer and competition with Shrines, Relics, economy, and survival routes.
 
 ## The Strand
 
@@ -140,72 +129,13 @@ Primary services:
 
 Service ownership is approved. Exact launch depth of permanent upgrades, onboarding, trials, unlocks, mastery content, and UI states remains open.
 
-## Area 1 — Hushiro Gate Village / Rupture
+## Area roster
 
-Standard enemies:
+- **Area 1 — Hushiro Gate Village / Rupture:** 6 standard enemies, 2 minibosses, Keeper of the Gate.
+- **Area 2 — Yomori Grove / Adaptation:** 4 standard enemies, 2 minibosses, Twin Maws.
+- **Area 3 — Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 minibosses, Eclipse Shogun.
 
-- Corrupted Swordsman
-- Corrupted Archer
-- Blighted Hounds
-- Hollow
-- Cellar Bilemass
-- Warden
-
-Minibosses:
-
-- Village Ogre
-- The Collector
-
-Boss:
-
-- Keeper of the Gate
-
-Hushiro represents recent corruption, bodily collapse, fragmented community, violence, and desperate faith.
-
-## Area 2 — Yomori Grove / Adaptation
-
-Standard enemies:
-
-- Lingering Wraith
-- Lantern Wraith
-- Mist Shepherd
-- Stalker Hound
-
-Minibosses:
-
-- Embered Pilgrim
-- Rotwood Host
-
-Boss:
-
-- Twin Maws: Rootfang and Briarthorn
-
-Both twins begin active. The first defeated transfers part of the shared bond to the survivor.
-
-Yomori represents long-term predation, spirit persistence, and ecological damage caused by corrupted inhabitants and beasts. Beast Blood does not spread through soil, roots, water, prey, or vegetation.
-
-## Area 3 — Kagutsuchi Court / False Ascendancy
-
-Standard enemies:
-
-- Court Guard
-- Court Caster
-- Elite Defender
-- Hollow Vessel
-- Court Sentinel
-
-Minibosses:
-
-- Blood Lotus
-- Eternal Swordsman
-
-Boss:
-
-- Eclipse Shogun
-
-Kagutsuchi is an immaculate royal court whose elites retain intelligence, hierarchy, and disciplined mutation while remaining unable to reject Beast Blood.
-
-The Shogun's high-level identity is approved. Exact phase count, weapon, attacks, transformation anatomy, animation list, and VFX remain later encounter-design work.
+Exact encounter pacing and authored room distribution remain prototype work.
 
 ## Heart Binding campaign
 
@@ -226,16 +156,14 @@ Postgame retains repeatable normal runs and optional Heart-route access without 
 
 ## Run-build and persistence boundary
 
-Temporary run state includes Aspect Tier, Corruption, Blood, Techniques/refinements, temporary Prosthetic specialization, run Relic, Gold, temporary capacities, and room progress.
+Temporary run state includes Aspect Tier, Corruption, Blood, slotted and supporting Techniques, refinements, temporary Prosthetic specialization, run Relic, Gold, temporary capacities, and room progress.
 
 Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks/mastery, permanent upgrades, and persistent currencies.
 
-No duplicate Blood Art progression tree beneath each Aspect is included in launch scope.
-
 ## Current open production scope
 
-1. Final cross-roster Aspect comparison.
-2. Launch Technique/Prosthetic-Technique/Relic/consumable catalog.
+1. Launch Technique effect families and roster.
+2. Remaining run-build catalog: Prosthetic upgrades, Relics, consumables, and reward frequency.
 3. Persistent progression, onboarding, and trial package.
 4. Narrative delivery, voice, cinematic, portrait, and final-writing package.
 5. Postgame reward and UI package.

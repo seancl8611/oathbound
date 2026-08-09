@@ -140,4 +140,4 @@ Each Blood Art must provide practical activation value while preserving the Aspe
 
 ## Approval status
 
-Wolf, Wraith, and Ronin now meet the qualitative Tier 0-IV package standard. The remaining Aspect task is the final cross-roster comparison for overlap, accessibility, encounter coverage, Technique space, and production cost.
+Wolf, Wraith, and Ronin meet the qualitative Tier 0-IV package standard and are locked for current paper-design scope. Reopen an Aspect only when prototyping exposes a concrete gameplay, overlap, readability, or production problem.

@@ -4,31 +4,21 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-09
 topics:
   - project-identity
   - combat
   - returning-blood
-  - inherited-beast-blood
-  - blood-moon
   - techniques
-  - three-areas
-  - the-heart
+  - blood-aspects
   - heart-bindings
-  - true-final-heart
-  - postgame
 related:
   - OVERVIEW-DESIGN-PILLARS
   - GAMEPLAY-COMBAT
-  - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
   - GAMEPLAY-BLOOD-ASPECTS
-  - GAMEPLAY-WOLF-ASPECT
-  - GAMEPLAY-WRAITH-ASPECT
-  - GAMEPLAY-RONIN-ASPECT
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RUN-STRUCTURE
   - LORE-RETURNING-BLOOD
-  - LORE-BARRIER-BLOOD-MOON
 ---
 
 # Oathbound Game Overview
@@ -41,13 +31,7 @@ The game should feel disciplined, dangerous, elegant, and cursed. Combat readabi
 
 The player controls Akio, a warrior of the Order sent through a containment barrier onto a cursed Japanese-gothic island.
 
-The island's kingdom once used Beast Blood from the Heart—an ancient living supernatural core—to survive a plague. The Heart was already imprisoned beneath the island by seven ancient Bindings. During the plague, the Court breached the outermost Binding and built an extraction apparatus against the exposed Heart.
-
-The Blood Moon reflects a recurring active cycle within the Heart. During it, existing Beast Blood strengthens and the barrier comes under pressure. The Strand, its Keeper, and a sealed Boat provide Akio's controlled route into the island.
-
-## Akio and Returning Blood
-
-Akio unknowingly descends from a royal child born during the kingdom's early Beast Blood era and escaped before the barrier was completed.
+The island's kingdom once used Beast Blood from the Heart—an ancient living supernatural core—to survive a plague. Akio unknowingly descends from a royal child born during that era and escaped before containment.
 
 Akio begins without active Blood powers. His first death inside the barrier during the Blood Moon awakens the dormant inherited condition and reconstructs him at the Strand as Returning Blood.
 
@@ -55,9 +39,9 @@ His lineage explains why the power can awaken; his discipline explains why he ca
 
 ## Core player fantasy
 
-The player enters with a complete sword foundation, awakens forbidden inherited power, chooses one Blood Aspect before each run, and decides how deeply to invest in that Aspect versus Techniques and other run rewards.
+Akio is a disciplined swordsman who learns to direct a supernatural curse through his existing martial skill.
 
-Victory comes from reading intent, controlling rhythm, pressuring posture, building a coherent run loadout, and judging commitment correctly.
+The selected Blood Aspect determines how Akio fundamentally fights. Techniques are the main horizontal run-build layer and determine how Returning Blood, controlled mutation, seals, wounds, execution, and other supernatural martial effects reshape that combat during the run.
 
 ## Approved gameplay snapshot
 
@@ -66,11 +50,13 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 - Shared combat: parry, player/enemy posture, stagger, deathblow, block, dash, and Prosthetic support.
 - One selected Blood Aspect creates the immediate Tier 0 weapon identity.
 - Launch roster: **Wolf, Wraith, Ronin**.
-- Universal locomotion, neutral dash, parry timing, enemy rules, and deathblow language across Aspects.
-- No corrective tracking, hidden homing, or post-input target correction.
 - Optional fixed Aspect progression from Tier 0 through Tier IV through Shrine Resist/Embrace decisions.
 - Blood is run-only and unavailable before Tier II.
-- Four active temporary Techniques, one reserve, and at most one refinement per Technique.
+- Five core Technique slots tied to **Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow**.
+- One direct Technique maximum per core combat slot; rare replacement offers may overwrite a filled slot.
+- Slotless supporting Techniques may deepen effect families and build synergies without a global inventory cap.
+- At most one refinement per eligible slotted Technique.
+- Technique rarity: Common / Uncommon / Rare / Legendary.
 - One equipped Prosthetic and one run-scoped Relic.
 - Failed runs return Akio to the Strand through Returning Blood reconstruction.
 
@@ -82,41 +68,20 @@ Victory comes from reading intent, controlling rhythm, pressuring posture, build
 | **Wraith** | Two-hit extended spectral reach and frontal control | Fewer ordinary options, restrained movement, close/lateral pressure |
 | **Ronin** | Three-hit slow heavy impact and strongest guard | Slow startup, severe recovery, minimal movement, slow posture recovery |
 
-### Fixed Tier packages
-
-| Tier | Wolf | Wraith | Ronin |
-|---|---|---|---|
-| **I** | Blood Tempo | Pale Barrage | Steadfast Reprisal |
-| **Growth** | Feral Momentum | Spectral Edge | Maximum player-posture capacity |
-| **II** | Blood Hunt / Blood Fang | Wraith's Reach | Falling Mountain / Deep Rupture |
-| **III** | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
-| **IV** | Apex Mauling | Beyond the Veil | Shattering Wake |
-
-Repeated growth remains narrow and Aspect-specific:
-
-- Wolf increasingly rewards later connected Basic positions.
-- Wraith increasingly rewards eligible spectral-only contact with posture/guard pressure.
-- Ronin gains modest maximum player-posture capacity at every Embrace while posture recovery and block efficiency remain unchanged.
-
-The three Blood Arts are intentionally different:
-
-> **Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point.**
-
-Exact combat values, timing, hitboxes, growth percentages, and final effects remain prototype and playtesting work.
+All three Aspect packages are locked at current qualitative paper-design depth. Exact combat values, timing, hitboxes, growth percentages, and final effects remain prototype and playtesting work.
 
 ## Run-build philosophy
 
 - Base combat and player skill remain primary.
 - The selected Aspect provides the strongest immediate weapon identity.
 - Tier 0 is complete and viable.
-- Aspect progression is optional vertical development rather than a branching tree.
-- Shrine routing competes with Techniques, Relics, economy, survival, and other rewards.
-- Tier 0-I Technique-focused builds, Tier II hybrids, and deeper Tier III-IV Aspect builds should all be viable.
-- Mandatory encounters do not assume a particular Tier or Blood Art.
-- Techniques provide temporary horizontal customization through shared combat verbs.
-- Run power should deepen active combat rather than replace it with automatic damage.
-
-No duplicate Aspect-specific Blood Art upgrade tree is approved.
+- Aspect progression is optional vertical development.
+- Techniques provide the main horizontal build development.
+- Technique effect families must be broad enough to interact with several core combat actions rather than acting as narrow mechanic buckets.
+- Generic elemental schools are not the target; familiar functions such as AoE, slow, range, delayed damage, restraint, recovery, and chaining should be expressed through Oathbound-specific supernatural samurai language.
+- Focused and hybrid Technique builds should both be viable.
+- Technique-heavy Tier 0-I, Tier II hybrid, Tier III Aspect-heavy, and occasional Tier IV high-roll runs should all be viable.
+- Mandatory encounters do not assume a particular Tier, Blood Art, Technique family, or Legendary.
 
 ## Campaign structure
 
@@ -126,35 +91,24 @@ During each of the first six successful clears, Akio defeats the Eclipse Shogun,
 
 After the sixth remaining Binding is destroyed, the next successful run becomes the seventh and final story run. It continues from the Shogun into the true-final Heart encounter.
 
-The Heart encounter has two conceptual forms:
-
-1. **The Unbound Heart** — a mobile beastlike organ with malformed support limbs.
-2. **The Vessel of Continuance** — an enormous nonhuman defensive body formed around the visibly central Heart.
-
 Destroying the Heart ends the source of Beast Blood, stops the Shogun's reconstruction, ends the Blood Moon, weakens the barrier, and leaves Akio mortal in his current human body.
 
 ## World structure
 
 - **The Strand:** persistent hub, preparation, progression, and return point.
 - **Introductory attempt:** short unpowered entry ending in the Returning Blood awakening.
-- **Area 1 — Hushiro Gate Village / Rupture:** recent corruption, violence, bodily collapse, fragmented community.
-- **Area 2 — Yomori Grove / Adaptation:** long-term predation, incomplete spirit remnants, ecological devastation caused by corrupted inhabitants and beasts.
-- **Area 3 — Kagutsuchi Court / False Ascendancy:** courtly beauty, hierarchy, elite mutation, and false mastery of Beast Blood.
+- **Area 1 — Hushiro Gate Village / Rupture**
+- **Area 2 — Yomori Grove / Adaptation**
+- **Area 3 — Kagutsuchi Court / False Ascendancy**
 - **First six successful clears:** Eclipse Shogun followed by the Binding ritual.
 - **Final story run:** Shogun followed by the two-form Heart.
 - **Postgame:** repeatable normal runs and optional Heart-route access without changing the completed story.
 
-A normal successful Binding run currently targets roughly 45–50 minutes. Exact room counts, route topology, encounter frequency, and authored layouts remain prototype work.
+A normal successful Binding run currently targets roughly 45-50 minutes. Exact room counts, route topology, encounter frequency, and authored layouts remain prototype work.
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md):
-
-1. final cross-roster Aspect comparison,
-2. launch run-build content catalog,
-3. persistent progression, onboarding, and trial package,
-4. narrative delivery and authored-content package,
-5. postgame release package.
+The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md), beginning with the launch Technique effect families and roster under the revised five-slot plus supporting-upgrade architecture.
 
 ## Source links
 

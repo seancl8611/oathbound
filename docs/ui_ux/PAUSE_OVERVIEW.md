@@ -4,7 +4,7 @@ title: Pause and Build Overview
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-09
 topics:
   - pause
   - build-overview
@@ -23,15 +23,16 @@ related:
 
 ## Primary purpose
 
-Let the player review the current build and controls without overwhelming the combat presentation or bypassing the Technique reserve rules.
+Let the player review the current build and controls without overwhelming combat presentation or creating free mid-run respec behavior.
 
 ## Core contents
 
 - active Blood Aspect and current Tier,
 - current Corruption state,
-- four active Techniques and their refinements,
-- one inactive reserve Technique,
-- equipped prosthetic and current tool state,
+- five core Technique slots: Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow,
+- owned slotless supporting Techniques,
+- Technique refinements,
+- equipped Prosthetic and current tool state,
 - equipped run-scoped Relic,
 - currencies,
 - active effects and status conditions,
@@ -41,18 +42,11 @@ Let the player review the current build and controls without overwhelming the co
 
 The pause screen is read-only for Technique loadout management.
 
-It may show:
+It may show full Technique descriptions, affected combat slot, rarity, refinement state, supporting-family relationships, and current trigger / stack / cooldown state where relevant.
 
-- full Technique descriptions,
-- combat-verb tags,
-- category and affinity,
-- refinement state,
-- active versus reserve state,
-- current trigger, stack, or cooldown state where relevant.
+It does not permit arbitrary Technique replacement. A filled combat slot is changed only through a valid replacement reward or another explicitly approved system.
 
-It does not permit active/reserve swapping. Swapping remains restricted to Technique reward screens and rest rooms.
-
-The screen must not imply that lost or declined Techniques remain stored elsewhere.
+Exact player-facing effect-family names, colors, symbols, and grouping remain future UI work.
 
 ## Presentation goal
 
@@ -64,14 +58,14 @@ Functional, clean, and more stripped back than the major progression interfaces.
 - minimal ornament,
 - strong hierarchy,
 - readable icon-and-text pairings,
-- four active slots visually grouped together,
-- one reserve slot clearly separated and marked inactive,
-- clear distinction between equipped, active, temporary, and persistent information.
+- five core combat slots visually grouped together,
+- supporting Technique upgrades visually separated from the five core slots,
+- clear distinction between equipped, temporary, and persistent information.
 
 ## Technical requirements
 
 - Support controller and keyboard navigation.
 - Keep the most important current-build information visible without deep submenu navigation.
-- Allow Technique, Relic, and status complexity to expand without forcing a full layout redesign.
+- Allow supporting Technique, Relic, and status complexity to expand without forcing a full layout redesign.
 - Do not expose hidden information or imply ownership rules different from the authoritative gameplay files.
 - Keep descriptions localization-safe and allow scroll or focus expansion without shrinking critical text.

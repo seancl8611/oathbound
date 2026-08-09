@@ -4,15 +4,14 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-05
+last_reviewed: 2026-08-09
 topics:
   - techniques
   - run-builds
-  - active-slots
-  - reserve-slot
+  - combat-slots
   - refinements
-  - technique-categories
-  - aspect-affinity
+  - technique-families
+  - rarity
   - prosthetic-techniques
 related:
   - GAMEPLAY-BLOOD-ASPECTS
@@ -26,326 +25,194 @@ related:
 
 # Technique System
 
-Techniques are temporary in-run upgrades that strengthen or reshape Akio's existing combat actions. They provide limited horizontal build construction around the selected Blood Aspect and form a powerful optional investment route alongside Aspect Tier advancement.
+Techniques are the main horizontal run-build system. The selected Blood Aspect defines how Akio fundamentally fights; Techniques determine how Returning Blood and disciplined swordcraft reshape that kit during the run.
+
+Techniques should feel visibly transformative and worthy of a meaningful run choice. Small numerical improvements belong primarily in refinements, supporting upgrades, permanent progression, or tuning rather than occupying a major combat slot by themselves.
 
 ## System ownership
 
-- **Blood Aspect:** selected pre-run weapon foundation, immediate Tier 0 identity, optional fixed vertical Tier progression, and Tier II Blood Art.
-- **Techniques:** four limited replaceable in-run modifications plus one inactive reserve, with continued development through replacement and refinement.
-- **Prosthetic:** equipped tactical tool with eligible temporary Techniques.
-- **Relic:** separate passive rule using its own slot.
+- **Blood Aspect:** pre-run weapon foundation, Tier 0 moveset, fixed Tier I-IV progression, and Tier II Blood Art.
+- **Slotted Techniques:** one run-only modification for each major combat action family.
+- **Supporting Techniques:** slotless run-only upgrades that deepen an existing effect family, create synergy, or improve broader Technique behavior.
+- **Refinements:** one-step improvement to a specific slotted Technique.
+- **Prosthetic:** equipped tactical tool with its own temporary specialization rules.
+- **Relic:** separate run-scoped passive rule.
 
-The Aspect remains Akio's weapon identity even when the player invests mainly in Techniques. Aspect power must leave Technique choices meaningful, and strong Technique builds must remain viable without requiring high Aspect Tier.
+The Aspect remains the weapon identity underneath every Technique. A Technique may make an action supernatural, but it must not replace Wolf, Wraith, or Ronin with a different weapon class.
 
-## Aspect-Technique division
+## Five combat slots
 
-### Aspects define the foundation
+Akio has five Technique-bearing combat slots:
 
-The selected Aspect determines attack sequence, rhythm, reach, coverage, commitment, recovery, player-directed attack movement, target handling through arcs and collision, damage and posture profile, defensive direction, fixed Tier benefits, and Blood-weapon expression.
+1. **Basic Attack slot** — modifies the selected Aspect's Basic Attack sequence or repeated primary sword action.
+2. **Held Attack slot** — modifies the selected Aspect's committed Held Attack.
+3. **Dash slot** — modifies neutral-dash follow-up, Dash Attack, or an approved dodge/re-entry interaction without rewriting the universal dash contract.
+4. **Parry / Counter slot** — modifies successful parry payoff, Parry Counter, or an approved defense-to-offense interaction without changing the universal parry window.
+5. **Deathblow slot** — modifies posture-break payoff, Deathblow, or the transition created by execution.
 
-Aspects do not use corrective tracking, hidden homing, or post-input target correction.
+All five begin empty each run.
 
-An Aspect must function before the player acquires any Technique. Tier 0 is a complete weapon kit rather than a weak state waiting to be repaired by Techniques or Embrace.
+A slotted Technique occupies exactly one combat slot. Two slotted Techniques cannot stack in the same slot. Once a slot is filled, ordinary offers do not add another Technique on top of it.
 
-### Techniques define chosen run development
+This creates five clear run-defining decisions while allowing Technique progression to continue after the core kit is filled.
 
-A Technique modifies a specific action, condition, transition, payoff, resource interaction, or tactical option inside that foundation.
+## Replacement
 
-A four-Technique loadout may:
+A filled combat slot normally remains committed for the run.
 
-1. **Reinforce** the selected Aspect's strengths.
-2. **Broaden** it into adjacent combat options.
-3. **Compensate** for a weakness at the cost of a slot without erasing the tradeoff.
-4. **Hybridize** it into an unusual but coherent build.
+Rare or specially generated replacement offers may allow the player to replace the Technique currently occupying that same slot. The interface must clearly compare the current and proposed Technique before confirmation.
 
-The same Technique may create different value under Wolf, Wraith, and Ronin because the underlying actions already differ. Most synergy should emerge through shared combat verbs rather than bespoke versions of every entry.
+The replaced Technique is lost. The current design no longer uses a general inactive reserve inventory for slotted Techniques.
 
-## Optional investment contract
+Replacement should be exceptional enough that early choices matter, but available often enough to let a rare high-value find create a meaningful pivot.
 
-Aspect and Technique development are not exclusive classes selected at the start of a run. The player may change emphasis as rewards appear.
+## Supporting Techniques
 
-- Tier 0-I with an excellent refined Technique build must be fully viable.
-- Tier II with a solid Technique build is a common hybrid outcome.
-- Tier III with fewer or less-developed Techniques is a valid Aspect-focused outcome.
-- Tier IV with a complete ideal Technique build is an exceptional high-roll rather than the expected baseline.
-- Mandatory encounters must not assume that the player owns a Blood Art or has reached a particular Aspect Tier.
+Supporting Techniques do not occupy the five combat slots and do not have a separate inventory cap.
 
-The meaningful opportunity cost comes from route rewards. Choosing a Shrine can forgo a Technique, refinement, Relic, economy, or survival opportunity; choosing Technique development can delay Aspect advancement.
+They may:
 
-## Compatibility guardrails
+- strengthen an effect family already present in the build,
+- add a secondary rule to that family's effects,
+- create synergy between two families or combat actions,
+- improve status buildup, spread, duration, payoff, or reliability where appropriate,
+- modify Health, Spirit, posture, or another approved resource interaction,
+- or deepen a coherent run pattern without replacing one of Akio's core actions.
 
-- Ordinary Techniques are usable by every Aspect.
-- Ordinary Techniques do not require a minimum Aspect Tier.
-- Affinity represents amplification or weighting, not permission.
-- Neutral and alternate-affinity choices remain valid.
-- No Technique is required to make an Aspect functional.
-- No Aspect is required to make an ordinary Technique functional.
-- A Technique cannot reproduce an Aspect's complete weapon foundation or Blood Art.
-- A Technique must not duplicate a fixed Tier behavior unless approved as a limited direct exception.
-- No Aspect makes an entire Technique category automatically correct.
-- Every Aspect supports several valid four-Technique builds.
-- Direct Aspect-, Tier-, or Blood-referencing Techniques are limited explicit exceptions.
-- Fixed Aspect Tier progression must not make Techniques secondary.
-- A strong Technique route must remain capable of winning at Tier 0-I.
+Their practical limit comes from reward opportunities, route choices, rarity, prerequisites, and run length rather than an arbitrary inventory maximum.
 
-Wolf's approved package owns these behaviors and ordinary Techniques should not reproduce them directly:
+A supporting Technique must still be meaningful. The pool should not become cluttered with negligible percentage bonuses simply because supporting upgrades are slotless.
 
-- Blood Tempo's complete successful-contact routing into approved Basic-sequence positions,
-- Feral Momentum's full Tier-scaled deterministic Health- and enemy-posture escalation across connected Basic-sequence positions,
-- Blood Hunt's guaranteed activation Health recovery and short disruptive howl,
-- Blood Hunt's full-meter fixed-line pursuit through eligible ordinary enemies,
-- Blood Fang as Blood Hunt's endpoint strike,
-- Fanged Guard's one frontal normal-posture block during Predator's Passage charge or one eligible connected Raking Fang or Blood Cleave startup per Basic sequence,
-- and Apex Mauling's complete qualifying-strike package: rapid Blood claws, consolidated Health and posture payoff, compact secondary coverage, and movement-only slow.
+## Effect families
 
-The removed Blood Tempo travel increases and rear-Rending-Cross bonus no longer reserve those effects from the Technique catalog. General Basic Attack damage, posture, critical-hit, movement, or sequence Techniques remain possible when they use one universal cross-Aspect rule and do not duplicate Blood Tempo or Feral Momentum's exact fixed progression.
+Techniques may belong to an internal effect family used for authoring, offer weighting, synergy, prerequisite logic, and presentation consistency.
 
-The removed Dire Hunt transformation also no longer reserves generic temporary damage increases, moveset-wide lifesteal, moveset-wide interruption resistance, or moveset-wide travel increases from the ordinary Technique catalog. Those effects remain subject to normal Technique, Relic, balance, and overlap rules rather than being automatically excluded by Wolf Tier II.
+These families are not required to appear to the player as named factions or schools. Player-facing recognition may later use color, symbols, VFX language, terminology inside effects, or another UI treatment.
 
-Fanged Guard reserves only its exact action-specific preservation package. General cross-Aspect block, player-posture, Held Attack, or Basic Attack Techniques remain possible when they do not reproduce its eligibility windows, one-use sequence rule, or automatic continuation preservation.
+A valid family must be broad enough to support comparable build depth across the major combat slots. Do not create one family that only owns healing while another owns repeated attacks, AoE, and multiple core-action modifications.
 
-Apex Mauling reserves only its exact fixed package. General cross-Aspect slow, multi-hit, guard-pressure, posture, or nearby-coverage Techniques remain possible when they do not reproduce its qualifying Wolf actions, consolidated claw sequence, Feral Momentum interaction, and movement-only slow together.
+Each family should be capable of expressing its identity through several of the five combat slots plus supporting upgrades. Exact family names, visual identifiers, and launch family count remain catalog-design work.
 
-## Starting capacity
+## Family and slot independence
 
-Each run begins with:
+Combat slot and effect family answer different questions:
 
-- four empty active Technique slots,
-- one empty inactive reserve slot.
+- **Combat slot:** which part of Akio's core kit is modified?
+- **Effect family:** what supernatural or martial rule is being expressed?
 
-Only active Techniques affect combat. The reserve is not a full inventory. Active slots are unrestricted by category, and initial scope does not include permanent slot-capacity increases.
+A family may therefore have a Basic Attack Technique, Held Attack Technique, Dash Technique, Parry / Counter Technique, Deathblow Technique, and several supporting Techniques.
 
-The four-slot limit is a curation constraint, not the end of Technique progression. A full loadout can still improve through better cohesion, higher-value replacements, one refinement per Technique, reserve management, and rare or specialized entries.
+The player may mix families freely. Owning one family in the Basic Attack slot does not require choosing that family for Dash, Parry, or any other slot.
 
-## Acquiring Techniques
+Soft offer weighting may make an existing family somewhat easier to deepen, but hybrid builds must remain normal and viable.
 
-Technique opportunities normally present three cards.
+## Rarity
 
-- While an active slot is empty, the selected Technique fills it.
-- After all active slots are full, a new Technique may replace an active Technique, enter the reserve, or be declined for a displayed smaller fallback reward.
-- The player chooses which active Technique is replaced.
+The current Technique rarity structure is:
 
-A player should commonly fill the four active slots during Area 2. Possessing the exact desired four-Technique build with all desired refinements should remain uncommon until late in a run. Occasional early high-roll builds are allowed and may free the player to pursue deeper Aspect investment.
+- **Common**
+- **Uncommon**
+- **Rare**
+- **Legendary**
 
-## Full loadout development
+Rarity represents unusualness, transformation, specialization, prerequisite depth, reward restriction, and production complexity rather than only larger numbers.
 
-Having four Techniques is not the same as completing a build. Later Technique opportunities remain valuable through:
+Legendary Techniques should be very rare and capable of meaningfully changing a run. Some may function as family capstones that become eligible only after sufficient investment in that family. Exact prerequisite thresholds and which Legendaries require them remain catalog-design work.
 
-- refinement of an active Technique,
-- replacement of a weaker or poorly fitting entry,
-- acquisition of a rarer or more transformative entry,
-- reserve management for future encounters,
-- Prosthetic specialization,
-- correction of a weakness exposed by the run,
-- or a pivot created by a Relic or another reward.
-
-The reward generator should treat a filled loadout as a build-development state rather than continuing to offer three undifferentiated base cards.
-
-## Replacement and reserve
-
-When a new Technique replaces an active Technique:
-
-1. the new Technique becomes active,
-2. the displaced Technique moves to reserve,
-3. if reserve is occupied, its previous Technique is lost after explicit confirmation.
-
-The reserve may be swapped with an active Technique only at Technique reward screens and rest rooms.
-
-Reserve rules:
-
-- inactive while stored,
-- retains an existing refinement,
-- cannot receive a new refinement while inactive,
-- is lost if overwritten,
-- is not guaranteed to reappear after loss or decline.
-
-## Construction rules
-
-Every Technique should:
-
-1. provide immediate standalone value,
-2. become stronger through compatible skilled behavior,
-3. remain functional without an exact combination.
-
-Synergy should use approved shared verbs such as Basic Attack, Held Attack, Dash Attack, Parry Counter, block, parry, posture, deathblow, dodge, movement, pursuit, spacing, positional conditions, prosthetic use, Health, and Spirit.
-
-Do not create:
-
-- entries that do nothing without another exact Technique,
-- exact multi-Technique dependency chains,
-- deep prerequisite webs,
-- generic delayed bursts that duplicate no clear combat role,
-- or automatic effects that replace active execution.
+A run should not require a Legendary to become viable.
 
 ## Refinements
 
-A Technique may receive at most one refinement.
+A slotted Technique may receive at most one refinement.
 
 A refinement:
 
-- does not consume another slot,
-- may appear only while the base Technique is active,
-- directly deepens the base effect,
-- remains attached if the Technique moves to reserve,
-- does not extend into a second refinement.
+- consumes no additional combat slot,
+- deepens that specific Technique,
+- preserves its original identity,
+- may improve payoff, coverage, reliability, geometry, interaction, or risk,
+- and does not become an unrelated second ability.
 
-A refinement should be a meaningful late-run improvement rather than only a negligible numerical increase. It may improve reliability, payoff, bounded coverage, interaction with the same combat verb, supporting resource behavior, or risk. It must preserve the original reason for selecting the Technique and must not become an unrelated second ability.
+Refinements and supporting Techniques serve different purposes: a refinement improves one specific slotted Technique; a supporting Technique can improve a broader family or interaction.
 
-The launch catalog must define the final refinement standard, which Techniques ship without one, and how often refinement opportunities appear.
+The previous rough assumption that 60-70% of Techniques require refinements is no longer a quota. Refinement coverage should follow the actual roster.
 
-## Categories
+## Construction direction
 
-Categories organize communication and reward generation. They do not restrict slots.
+Techniques should preserve the samurai power fantasy established by Akio and Returning Blood.
 
-- **Blade:** modifies katana or Blood-weapon actions.
-- **Deflection:** modifies parry, block, player posture, or Parry Counter.
-- **Execution:** modifies posture break, deathblow, or execution payoff.
-- **Movement:** modifies dodge, repositioning, spacing, pursuit, or re-entry.
-- **Prosthetic:** temporarily modifies the equipped tool.
-- **General:** supports Health, Spirit, recovery, or broad combat rules without generic stat clutter.
+Good Technique effects may include:
 
-A Technique normally has one primary category.
+- delayed or repeated cuts,
+- Blood-weapon extensions,
+- compact cutting waves,
+- marks and later detonation,
+- binding or suppression,
+- posture rupture and impact bursts,
+- controlled AoE tied to a successful sword action,
+- altered attack geometry,
+- supernatural parry or Deathblow payoff,
+- risk-and-recovery windows,
+- and other effects that visibly grow out of swordsmanship, Order training, Returning Blood, seals, wounds, or controlled mutation.
 
-## Technique metadata
+Avoid making the roster primarily a collection of generic fire, frost, lightning, poison, or spell-casting effects. Familiar gameplay functions such as slow, area damage, extra reach, delayed damage, chaining, crowd control, and recovery are valid, but their presentation should fit Oathbound's world.
 
-Every catalog entry states:
+## Compatibility guardrails
 
-- stable ID and status,
-- player-facing name,
-- primary category,
-- rarity,
-- combat-verb tags,
-- soft Aspect affinity or neutral status,
-- build direction,
-- trigger or condition,
-- standalone effect,
-- failure and reset behavior,
-- boss, elite, and crowd behavior,
-- cross-Aspect usefulness,
-- overlap safeguards,
-- refinement when present,
-- UI, VFX, animation, audio, and unlock treatment.
+- Ordinary Techniques must remain usable across Wolf, Wraith, and Ronin unless explicitly approved otherwise.
+- The underlying Aspect determines the actual attack timing, reach, geometry, movement, damage profile, and failure state being modified.
+- A Technique may reinforce, broaden, or partially compensate for an Aspect without erasing its firm tradeoff.
+- Do not grant universal homing, corrective rotation, free commitment cancellation, or broad invulnerability.
+- Do not make Wolf's pursuit, Wraith's reach/control, or Ronin's impact/stability universally available through ordinary Techniques.
+- Frequent-trigger effects must be checked for accidental bias toward Wolf's higher hit frequency; large single-action effects must be checked for accidental bias toward Ronin; reach and line effects must be checked against Wraith.
+- Mandatory encounters cannot assume ownership of a specific Technique family, Legendary, Aspect Tier, or Blood Art.
 
-### Aspect affinity
+## Reward progression
 
-Affinity explains which Aspect naturally amplifies or is amplified by an entry.
+Technique opportunities normally present three choices.
 
-Affinity may influence offer weighting and communicate natural synergy. It does not make a Technique unusable elsewhere, replace category or tags, or justify a dead option under another Aspect.
+Early opportunities should favor filling empty combat slots with strong standalone choices while still allowing supporting upgrades when the player already has something worth deepening.
 
-An entry may be neutral or have more than one justified affinity.
+As the run develops, offers may include:
 
-### Rarity
+- a Technique for an empty combat slot,
+- a supporting Technique for a family already represented,
+- a refinement for an owned slotted Technique,
+- a rare replacement for a filled slot,
+- a cross-family synergy,
+- an eligible higher-rarity or Legendary option,
+- or an eligible Prosthetic-related upgrade.
 
-Techniques use rarity to distinguish unusualness, transformation, specialization, complexity, reward restriction, and production cost rather than only a larger number.
+Filling all five combat slots does not end Technique progression. Later Technique rooms should increasingly deepen, connect, refine, or selectively replace the existing build.
 
-The same Technique should not normally be duplicated across several rarities as simple numerical versions. Higher-rarity Techniques may be more build-defining or specialized, but they should not be automatically correct for every loadout.
+The number of Technique reward opportunities per run is a major balance lever and remains open until the roster and run pacing are reviewed together.
 
-The catalog must define the final rarity tiers, offer timing, reward-source eligibility, readability, and which effects belong to Relics or other systems instead.
+## Aspect relationship
 
-## Prosthetic Techniques
+The Wolf, Wraith, and Ronin Tier 0-IV packages are locked at current qualitative paper-design depth.
 
-Prosthetic Techniques use the normal Technique system.
+Technique design must work around those packages rather than reopen them. Strong Technique-focused runs at Tier 0-I, hybrid runs around Tier II, Aspect-heavy Tier III runs, and occasional Tier IV high-rolls should all remain viable.
 
-- Only the equipped prosthetic contributes eligible entries.
-- A major temporary Prosthetic modification occupies one active slot.
-- Its one refinement is slotless.
-- The Forge owns permanent tool development.
-- The run owns temporary specialization.
-- Prosthetic Techniques deepen the tool's existing tactical role rather than replacing it with an unrelated ability.
+## Prosthetic boundary
 
-## Aspect relationship still to define
+The Forge owns permanent Prosthetic development. Temporary run upgrades may deepen the equipped tool or create sword-and-tool synergy, but the current Prosthetic Technique structure should be rechecked against the new five-slot system before final catalog approval.
 
-The roster, fixed Tier structure, optional-investment contract, Wolf's complete Tier I-IV package, Wolf Feral Momentum, and Ronin's current qualitative package are approved through the present audit. Still resolve:
-
-- Wraith's Tier 0 weapon foundation,
-- Wraith's Blood Art form and later Tier distribution,
-- Wraith and Ronin small-growth and minor-supporting-benefit standards,
-- Ronin's follow-up audit after those standards are selected,
-- final cross-roster power and production budgets,
-- soft offer-weighting strength,
-- neutral and alternate-affinity representation,
-- whether any direct Wolf-, Wraith-, Ronin-, Tier-, or Blood-referencing Technique ships at launch,
-- rarity and production treatment for those exceptions,
-- whether fixed Tier benefits may alter already-owned Techniques,
-- and how the catalog prevents repetitive same-Aspect builds.
-
-These decisions do not affect Technique eligibility under the ordinary universal rules.
-
-## Reward-generation principles
-
-Before all active slots are filled, offers should favor useful standalone entries, approved compatibility weighting, occasional eligible Prosthetic Techniques, and occasional higher-rarity options.
-
-After the loadout is full, the working offer structure should usually include:
-
-- one refinement for an active Technique,
-- one compatible replacement or higher-rarity new Technique,
-- one wildcard such as a Prosthetic Technique, rare option, alternate-affinity entry, or another refinement.
-
-This is a reward-generation direction rather than a mandatory identical three-card formula for every screen. The generator should avoid three unusable, excessively narrow, or clearly inferior choices. Limited rerolls and decline rewards may reduce extreme bad luck without guaranteeing a perfect build.
-
-## Expected run development
-
-A successful run should commonly develop as follows:
-
-- **Area 1:** establish two or three active Techniques and the beginning of a build.
-- **Area 2:** fill the active loadout, establish synergy, and begin replacement or refinement decisions.
-- **Area 3:** refine, replace, use the reserve, and finalize the build.
-
-A successful late run should commonly reach:
-
-- Tier II or III, with Tier IV occasional rather than expected,
-- four active Techniques,
-- one optional reserve,
-- one to three refined Techniques,
-- zero or more Prosthetic Techniques within active slots,
-- one run-scoped Relic when obtained,
-- and additional survival or resource growth.
-
-A run may deviate through luck and routing. An early ideal Technique build may shift toward Aspect advancement; strong early Shrine investment may leave more Technique development unfinished.
-
-## Catalog ownership
-
-Individual entries, refinements, coverage, production treatment, and launch population belong in [Technique Catalog](TECHNIQUE_CATALOG.md).
-
-The removed Storm, Frost, Ember, Hex, and Shadow stance catalog is historical context only.
-
-## Catalog approval tests
-
-Before launch counts are approved, demonstrate that:
-
-- the approved Wolf, Wraith, and Ronin foundations remain distinct,
-- every core action has meaningful but non-mandatory support,
-- each Aspect supports reinforce, broaden, compensate, and hybridize builds,
-- early choices provide standalone value,
-- late choices create meaningful replacement, reserve, rarity, and refinement decisions,
-- neutral and alternate-affinity choices prevent repetitive runs,
-- no category is mandatory for a viable build,
-- boss and mixed-encounter usefulness are documented,
-- Tier 0-I Technique-focused builds can remain viable,
-- Techniques do not make Aspect progression irrelevant,
-- fixed Aspect progression does not make Technique selection secondary,
-- fixed Tier behaviors are not accidentally duplicated as generic cards,
-- and the reward generator can avoid presenting three invalid choices.
+Do not consume one of the five core combat slots with a Prosthetic Technique unless a later design decision explicitly assigns it to one of those combat actions.
 
 ## Reset rule
 
-Active Techniques, reserve, and refinements reset after death, successful Heart Binding completion, or story completion.
+All slotted Techniques, supporting Techniques, refinements, replacement state, and other temporary Technique progression reset when the run ends.
 
-Permanent progression may unlock additional entries into future reward pools. It does not preserve an assembled build between runs.
+Permanent progression may unlock additional Techniques into future reward pools but does not pre-equip them.
 
 ## Current design package
 
-Before approving the launch catalog, resolve:
+The next catalog work is to:
 
-1. the remaining cross-roster Aspect package questions in `docs/_meta/OPEN_QUESTIONS.md`,
-2. primary-category boundaries,
-3. combat-verb tag taxonomy,
-4. affinity and offer-weighting rules,
-5. final Technique rarity model,
-6. final refinement standard,
-7. rare direct Aspect-, Tier-, or Blood-specific exceptions,
-8. launch coverage matrix.
+1. define a small set of broad, equally expandable effect families using Oathbound-specific samurai / Returning Blood themes,
+2. map candidate slotted Techniques across the five combat slots,
+3. define enough supporting Techniques that focused and hybrid builds can deepen after slots fill,
+4. identify refinements, rare replacements, and Legendary/capstone candidates,
+5. then determine the actual launch Technique count, family representation, reward frequency, prerequisites, and production requirements.
 
-Then approve total count, category and rarity distribution, refinement count, Prosthetic Technique count per tool, icon needs, bespoke production requirements, and unlock ownership.
-
-Individual values, rarity weights, reroll rates, and refinement frequency remain implementation and playtesting work.
+Exact numerical values, rarity probabilities, offer weights, replacement frequency, family weighting, and final UI identifiers remain later design and playtest work.
