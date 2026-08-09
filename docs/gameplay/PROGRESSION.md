@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-09
 topics:
   - progression
   - persistence
@@ -43,9 +43,10 @@ Temporary run state may include:
 - Corruption,
 - Blood after Tier II,
 - Blood Art state,
-- four active Techniques and one reserve,
-- Technique refinements,
-- temporary Prosthetic Techniques,
+- five core slotted Techniques,
+- slotless supporting Techniques,
+- Technique refinements and rare replacement state,
+- temporary Prosthetic upgrades,
 - one run-scoped Relic,
 - Gold,
 - room progress,
@@ -65,7 +66,7 @@ Expected viable outcomes:
 - **Aspect-focused:** Tier III with less-developed horizontal upgrades.
 - **High-roll:** Tier IV plus a strong completed Technique build.
 
-Mandatory encounters must not assume a particular Tier or Blood Art.
+Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, or Legendary.
 
 ## Fixed Blood Aspect Tier path
 
@@ -86,8 +87,6 @@ Mandatory encounters must not assume a particular Tier or Blood Art.
 | **II** | Blood Hunt / Blood Fang | Wraith's Reach | Falling Mountain / Deep Rupture |
 | **III** | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
 | **IV** | Apex Mauling | Beyond the Veil | Shattering Wake |
-
-Wolf's Feral Momentum improves later connected Basic positions at each Embrace. Wraith's Spectral Edge improves eligible spectral-only posture and guard pressure at each Embrace. Ronin's repeated growth modestly increases maximum player-posture capacity at each Embrace while leaving posture recovery speed and block efficiency unchanged.
 
 All three Tier 0-IV packages are locked at current qualitative paper-design depth. Exact numerical growth remains balance work.
 
@@ -111,11 +110,21 @@ Exact capacity, gain weighting, timing, damage, interruption rules, and anti-far
 
 ## Technique development boundary
 
-Technique capacity is four active slots plus one inactive reserve. Filling the active slots does not complete the Technique route.
+The run begins with five empty core Technique slots tied to:
 
-Later development may include replacement, rarity improvement, one refinement per Technique, reserve management, Prosthetic specialization, weakness correction, or build pivots around other rewards.
+- Basic Attack,
+- Held Attack,
+- Dash,
+- Parry / Counter,
+- Deathblow.
 
-A successful run should commonly fill its active slots during Area 2, then refine and finalize the build later. Exact offer counts and probabilities remain open until the launch Technique catalog is scoped.
+Each slot can hold one direct Technique. Direct Techniques do not stack within the same core action.
+
+Technique progression continues beyond those five choices through slotless supporting Techniques, one refinement per eligible slotted Technique, rare same-slot replacement offers, family synergy, and eligible higher-rarity or Legendary effects.
+
+There is no global cap on total Technique upgrades. The practical cap comes from reward opportunities, route choices, rarity, prerequisites, and run length.
+
+A successful run should commonly establish most of its core Technique identity through Areas 1 and 2, then deepen, refine, or selectively replace that build later. Exact reward counts remain open until the launch roster and run pacing are reviewed together.
 
 ## Persistent character progression
 
@@ -167,14 +176,15 @@ Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards
 
 ### Techniques
 
-- Four active slots and one reserve begin empty each run.
-- Active Techniques, reserve, and refinements reset after the run.
-- Permanent progression may unlock Techniques into future pools but does not pre-equip them or increase slot capacity in initial scope.
+- Five core combat slots begin empty each run.
+- Slotted Techniques, supporting Techniques, refinements, and replacement state reset after the run.
+- Permanent progression may unlock Techniques into future pools but does not pre-equip them.
+- Initial scope does not include permanent expansion beyond the five core combat slots.
 
 ### Prosthetics
 
 - The Forge owns permanent Prosthetic unlocks and baseline improvements.
-- The run owns temporary Prosthetic Techniques and refinements for the equipped tool.
+- The run owns temporary Prosthetic specialization and approved Technique interactions.
 
 ## Trial reward boundary
 
@@ -212,9 +222,10 @@ A successful Binding return additionally:
 
 ## Current production dependencies
 
-1. Scope the launch run-build content catalog.
-2. Scope persistent progression, onboarding, and trials.
-3. Lock the authored narrative-delivery package.
-4. Lock postgame release scope.
+1. Scope the launch Technique roster and effect-family structure.
+2. Scope remaining run-build content: Prosthetic upgrades, Relics, and consumables.
+3. Scope persistent progression, onboarding, and trials.
+4. Lock the authored narrative-delivery package.
+5. Lock postgame release scope.
 
-Exact percentages, combat values, resource values, costs, timing windows, offer rates, and reward values remain implementation and balance work.
+Exact percentages, combat values, resource values, costs, timing windows, offer rates, replacement rates, and reward values remain implementation and balance work.
