@@ -15,6 +15,7 @@ Authoritative player-facing mechanics and system rules belong here.
 - [Ronin Blood Aspect](RONIN_ASPECT.md)
 - [Corruption and Shrines](CORRUPTION_AND_SHRINES.md)
 - [Technique System](TECHNIQUES.md)
+- [Technique Catalog](TECHNIQUE_CATALOG.md)
 - [Progression](PROGRESSION.md)
 - [Blood Cavern Trial System](BLOOD_CAVERN_TRIALS.md)
 - [Prosthetic Tools](PROSTHETICS.md)
@@ -28,22 +29,17 @@ The launch Blood Aspect roster and qualitative Tier 0-IV packages are locked for
 - **Wraith:** two-hit extended spectral reach and frontal control.
 - **Ronin:** three-hit slow heavy impact and defensive stability.
 
-| Tier | Wolf | Wraith | Ronin |
-|---|---|---|---|
-| I | Blood Tempo | Pale Barrage | Steadfast Reprisal |
-| Growth | Feral Momentum | Spectral Edge | Maximum player-posture capacity |
-| II | Blood Hunt / Blood Fang | Wraith's Reach | Falling Mountain / Deep Rupture |
-| III | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
-| IV | Apex Mauling | Beyond the Veil | Shattering Wake |
-
 No further Aspect or Tier audit is active unless prototyping exposes a concrete problem. Exact attack values, timings, hitboxes, growth percentages, and related balance remain implementation work.
 
-The current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) are:
+The Technique architecture now uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless supporting upgrades. The old four-active-plus-reserve model is retired.
 
-1. launch run-build content catalog,
-2. persistent progression, onboarding, and trials,
-3. narrative delivery and authored-content scope,
-4. postgame release scope.
+Current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) begin with:
+
+1. Technique effect families and launch roster,
+2. remaining run-build content,
+3. persistent progression, onboarding, and trials,
+4. narrative delivery and authored-content scope,
+5. postgame release scope.
 
 The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
 
