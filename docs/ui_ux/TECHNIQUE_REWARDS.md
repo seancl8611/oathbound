@@ -4,14 +4,14 @@ title: Technique Rewards and Build Management
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-09
 topics:
   - techniques
   - reward-screen
-  - active-slots
-  - reserve-slot
+  - combat-slots
   - replacement
   - refinement
+  - supporting-techniques
 related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
@@ -23,175 +23,110 @@ related:
 
 # Technique Rewards and Build Management
 
-This interface presents temporary Technique choices, refinements, replacements, rarity, reserve management, and decline rewards without turning the run into constant inventory maintenance.
-
-The four active slots are a curation limit rather than the endpoint of Technique progression. After the loadout is full, the interface must continue supporting meaningful build improvement and revision.
+This interface presents slotted Techniques, slotless supporting upgrades, refinements, rare replacements, rarity, prerequisites, and decline rewards without turning the run into constant inventory maintenance.
 
 ## Required persistent context
 
-Every Technique reward screen shows:
+Every Technique reward screen must be able to show:
 
 - active Blood Aspect and current Tier,
-- four active Technique slots,
-- one reserve slot,
-- equipped prosthetic,
-- rerolls remaining when the system is available,
-- the predetermined decline/fallback reward,
+- the five core combat slots: Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow,
+- owned supporting Technique upgrades,
+- current refinements,
+- equipped Prosthetic,
+- equipped Relic,
+- rerolls remaining when available,
+- decline / fallback reward,
 - controller and keyboard prompts.
 
 ## Technique card fields
 
-Each card includes:
+Each card should communicate:
 
 - icon,
 - Technique name,
-- rarity marker,
-- category,
+- rarity,
+- affected combat slot when it directly modifies one,
 - concise effect description,
-- combat-verb tags,
-- Aspect affinity when relevant,
-- prosthetic requirement when relevant,
-- refinement state or prerequisite when relevant.
+- relevant prerequisite or existing-family interaction,
+- refinement or replacement state when relevant.
 
-Affinity language communicates natural compatibility, not a hard requirement unless the card explicitly states one.
+Exact player-facing family labels are intentionally not locked. Family recognition may later use symbols, color, VFX, effect wording, or another presentation system. Color cannot be the only identifier.
 
-Rarity communicates unusualness, specialization, transformation, complexity, or reward restriction rather than only a larger number. The interface must not imply that every higher-rarity card is automatically correct for every build.
+## Empty combat slot
 
-## Offer before all active slots are filled
+When a card directly modifies an empty combat slot, confirmation fills that slot.
 
-The screen presents three Technique choices. Selecting one:
+A slot may contain only one direct Technique. Choosing a Basic Attack Technique therefore does not prevent later acquisition of Held Attack, Dash, Parry / Counter, Deathblow, or slotless supporting Techniques.
 
-1. previews its effect,
-2. fills an empty active slot,
-3. confirms the updated build.
+## Filled combat slot
 
-The player may choose the visual slot position for organization, but the four active slots have no category restrictions.
+Ordinary offers do not stack a second direct Technique onto a filled slot.
 
-The first Technique choice should arrive early enough that run growth begins quickly, while Akio still starts the run with empty Technique slots.
+A specially generated replacement offer may propose a new Technique for that same slot. Before confirmation, the interface must show:
 
-## Offer after all active slots are filled
+- current Technique,
+- proposed Technique,
+- effect and rarity differences,
+- the fact that the current Technique will be lost.
 
-A full loadout is not a completed build. The working post-fill offer structure should usually include:
+Replacement requires explicit confirmation and is not a general free-respec system.
 
-- one refinement for an active Technique,
-- one compatible replacement or higher-rarity new Technique,
-- one wildcard such as a Prosthetic Technique, rare option, alternate-affinity entry, or another refinement.
+## Supporting Techniques
 
-This is a generation direction rather than a mandatory identical arrangement on every screen. The important requirement is that post-fill Technique rooms do not routinely present three interchangeable or clearly inferior base additions.
+Supporting Techniques consume no combat slot.
 
-Selecting a refinement upgrades its active base Technique immediately and consumes no additional slot.
+The reward screen should show which owned effect or family they deepen and why the choice is currently useful. They may remain valid after all five core slots are filled.
 
-Selecting a new Technique opens the replacement and reserve state.
+The interface should avoid presenting supporting upgrades that are functionally dead because their prerequisite effect is absent unless the card itself establishes standalone value.
 
-The player should be able to compare the offered effect against the current active Technique occupying a relevant role. Higher-rarity or more specialized cards require clear effect descriptions rather than relying on rarity framing alone.
+## Refinements
 
-## Refinement presentation
+A slotted Technique may receive at most one refinement.
 
-A Technique may receive at most one refinement.
+A refinement card must show:
 
-The refinement card must show:
+- the specific owned Technique being improved,
+- the current effect,
+- the refined effect,
+- and confirmation that no additional combat slot is consumed.
 
-- the active base Technique being improved,
-- the complete current effect,
-- the complete refined effect,
-- which behavior, payoff, reliability, coverage, or related combat interaction changes,
-- and confirmation that no additional slot is consumed.
+## Legendary / prerequisite presentation
 
-A refinement should read as a meaningful deepening of the original Technique, not as an unrelated second ability or a negligible hidden percentage increase.
+When a higher-rarity Technique uses prerequisites, eligibility and requirements must be understandable without exposing unnecessary hidden-generation math.
 
-## Replacement and reserve state
+The exact prerequisite model is not yet locked. The interface must support a future family-capstone structure without assuming every Legendary uses prerequisites.
 
-The player may:
-
-- replace any one active Technique,
-- place the new Technique directly into reserve,
-- cancel and return to the three-card offer.
-
-When an active Technique is replaced:
-
-- the selected new Technique becomes active,
-- the displaced Technique moves to reserve,
-- if reserve is occupied, the interface shows which dormant Technique will be lost.
-
-Reserve overwrite requires an explicit confirmation. The confirmation shows:
-
-- new active Technique,
-- displaced Technique moving to reserve,
-- reserve Technique being lost,
-- retained refinement states.
-
-The interface must never silently discard a Technique.
-
-## Reserve swapping
-
-At a Technique reward screen or rest room, the player may exchange the reserve Technique with any active Technique.
-
-The interface must communicate that:
-
-- reserve is inactive,
-- only one Technique can be held there,
-- refinements remain attached,
-- reserve Techniques cannot receive new refinements while inactive,
-- general swapping is unavailable from the ordinary pause screen.
-
-## Decline and fallback
+## Decline and rerolls
 
 The player may reject all Technique choices and take the displayed smaller fallback reward.
-
-The fallback is generated before the screen opens and is not a free menu of every reward category. Examples include:
-
-- Gold,
-- small Health and Spirit recovery,
-- a small amount of Mist,
-- a reroll resource when that system is approved.
-
-The fallback must be visibly lower value than the Technique opportunity so players do not routinely convert Technique rooms into economy rooms.
-
-## Rerolls
 
 When rerolls are available:
 
 - show the remaining count or cost,
-- reroll all unselected Technique cards together,
-- do not change already owned Techniques,
-- do not guarantee an exact combination,
-- preserve the decline reward unless gameplay documentation explicitly changes it.
+- reroll all unselected choices together,
+- do not alter owned Techniques,
+- do not guarantee an exact family or build,
+- preserve the decline reward unless gameplay documentation changes it.
 
-## Rest-room build management
+## Rest-room and pause relationship
 
-Rest rooms provide a compact build-management state containing:
+The retired reserve-slot model no longer supports routine Technique swapping at rest rooms.
 
-- four active Techniques,
-- one reserve Technique,
-- current refinements,
-- rarity and combat-verb tags,
-- active Aspect and Tier,
-- equipped prosthetic and Relic.
-
-The player may only exchange active and reserve Techniques. Rest rooms do not create, recover, or freely browse lost Techniques.
-
-## Pause-screen relationship
-
-The ordinary pause/build overview is read-only for Technique loadout management. It shows active and reserve Techniques and their effects, but swapping remains restricted to Technique reward screens and rest rooms.
+Rest and pause interfaces may provide build review, but filled combat slots are normally committed unless a valid replacement reward is being resolved.
 
 ## Presentation direction
 
 Technique rewards should feel like temporary blood-stabilized martial knowledge rather than modern collectible cards floating without context.
 
-Use:
+Use aged paper or ritual-slip surfaces, ink-line action silhouettes, restrained Returning Blood seams or stamps, readable combat-slot identifiers, stronger framing for rare options, and clear comparisons before decorative lore text.
 
-- aged paper or ritual-slip surfaces,
-- ink-line action silhouettes,
-- restrained Returning Blood seams or stamps,
-- clear slot and reserve diagrams,
-- stronger framing for rare options and refinements,
-- explicit tags and comparisons before decorative lore text.
+Final family color, symbol, terminology, and layout treatment remain future UI design.
 
 ## Accessibility and clarity
 
-- Rarity, category, active/reserve state, and refinement cannot rely on color alone.
+- Rarity, combat slot, replacement state, and refinement cannot rely on color alone.
 - Replacement and loss warnings require clear text, icon, and focus treatment.
 - Long descriptions must remain localization-safe.
 - The player must understand a Technique's immediate effect before confirming.
-- The screen should not imply exact-combination dependence or hidden prerequisites.
-- A post-fill offer must clearly show how each option can improve, reshape, or specialize the existing build.
+- The screen must distinguish direct combat-slot Techniques from slotless supporting upgrades.
