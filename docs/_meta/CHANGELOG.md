@@ -9,6 +9,22 @@ last_reviewed: 2026-08-09
 
 # Documentation Changelog
 
+## 2026-08-09 — Core Technique-family mechanics pass
+
+- Reclassified the earlier ~55-Technique concept pool as exploratory rather than the current launch roster.
+- Paused cross-family Techniques and refinements until the five core families and direct combat-slot Techniques are stable.
+- Kept families primarily player-recognizable through symbol, color treatment, effect behavior, VFX, and audio rather than formal school names.
+- Clarified the pale-silver family around **echoes**: delayed additional sword slashes, not literal full-action repetition.
+- Removed the separate `Fracture` term from the gold family.
+- Defined the working **Rupture** rule as a visible buildup meter with no partial effect; full meter triggers a large posture burst, strong allowed hit reaction, and smaller nearby posture shockwave, then resets.
+- Marked the Violet Seal buildup/completion model as the next active design question.
+- Marked the ivory and crimson families for redesign around concrete scalable mechanics rather than precision-only or Health-risk-only triggers.
+- Clarified that refinements are small buffs to an existing slotted Technique, not separate Techniques.
+- Standardized all Technique sources around the same Technique reward screen; combat rooms are the main source, with shops, treasure, minibosses, and regional bosses able to grant the same reward type.
+- Removed Prosthetic Techniques and temporary Prosthetic specialization from the run-build system.
+- Assigned Prosthetic progression to persistent Forge development using the existing Scroll currency model.
+- Synchronized Technique, catalog, reward, progression, Prosthetic, UI, VFX, full-scope, decision, and open-question documentation.
+
 ## 2026-08-09 — Technique architecture overhaul
 
 - Replaced the four unrestricted active Technique slots plus reserve with five direct combat slots: Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow.
@@ -19,8 +35,7 @@ last_reviewed: 2026-08-09
 - Kept Common / Uncommon / Rare / Legendary Technique rarity and allowed some Legendary candidates to use family-investment prerequisites, with exact thresholds deferred.
 - Reframed Technique families as internal effect/build structures that must support comparable depth across several core combat actions rather than unequal mechanic buckets.
 - Removed the old Blade / Deflection / Execution / Movement / General launch quotas and the old ~30-Technique count as correctness requirements.
-- Rejected generic elemental schools as the main Technique-family structure; familiar effects such as slow, AoE, extended reach, delayed damage, chaining, restraint, and recovery should use Oathbound-specific samurai / Returning Blood presentation.
-- Synchronized Technique, catalog, reward, progression, Prosthetic, overview, pause, and HUD documentation.
+- Rejected generic elemental schools as the main Technique-family structure; familiar effects such as slow, AoE, extended reach, delayed damage, chaining, restraint, and recovery should use Oathbound-specific presentation.
 
 ## 2026-08-07 — Aspect questions closed for current scope
 
