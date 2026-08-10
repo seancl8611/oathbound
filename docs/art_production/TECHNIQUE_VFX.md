@@ -28,7 +28,7 @@ Techniques reshape existing sword actions through repeatable family effects. The
 Technique presentation has two layers:
 
 - **selection and build communication:** combat-slot identity, rarity, refinement state, supporting-upgrade relationships, and family symbol / color treatment,
-- **combat feedback:** readable effects that show buildup, echo slashes, Rupture, seals, altered footprints, or other approved family behavior.
+- **combat feedback:** readable effects that show buildup, echo slashes, Rupture, Seal stacks, altered footprints, or other approved family behavior.
 
 The former elemental stance families remain removed from scope. Prosthetic effects remain in their own visual system and are not part of Technique-family production.
 
@@ -70,7 +70,17 @@ Exact meter placement, crack patterns, radius, and intensity remain future UI/VF
 
 ### Violet / binding knot — Seal
 
-Do not finalize Seal VFX until the buildup model is decided. The final system must clearly distinguish partial buildup from the completed Seal effect.
+Seal uses visible discrete marks on the enemy rather than a meter.
+
+The visual progression should read clearly as:
+
+1. one violet seal mark appears,
+2. a second mark appears and a faint binding line or pattern connects them,
+3. the third mark completes the symbol,
+4. the completed pattern visibly closes or tightens while the enemy is Bound,
+5. the pattern breaks or fades when Bind ends and the stacks reset.
+
+The player must be able to distinguish one, two, and three Seals without relying on violet color alone. The completed Bind cue must not resemble a stun, posture break, or Rupture proc.
 
 ### Ivory and crimson families
 
@@ -121,6 +131,7 @@ Color alone cannot carry family identity.
 - Technique feedback cannot hide enemy telegraphs, safe zones, projectiles, posture state, or Akio's final position.
 - Multiple Technique effects may trigger close together; effects must layer cleanly.
 - Frequent Basic Attack effects require lower visual intensity than rarer Held, Parry, Deathblow, or Legendary payoffs.
+- Seal marks must remain readable on moving enemies and must not obscure essential enemy animation cues.
 - Automatic room-wide spectacle is outside the intended combat identity unless explicitly approved as an exceptional effect.
 - Exact timing, footprint, trigger, and value remain owned by gameplay and implementation documentation.
 
