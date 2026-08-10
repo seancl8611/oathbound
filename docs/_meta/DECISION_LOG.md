@@ -101,12 +101,34 @@ Wolf, Wraith, and Ronin each have complete qualitative Tier 0-IV paper-design pa
 
 Techniques remain the main horizontal run-build layer, but the four-active-plus-reserve model is removed.
 
-Akio now has five direct Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow. One direct Technique may occupy each slot; ordinary Techniques do not stack within the same action. Filled slots normally remain committed, with rare replacement offers allowed.
+Akio has five direct Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow. One direct Technique may occupy each slot; ordinary Techniques do not stack within the same action. Filled slots normally remain committed, with rare replacement offers allowed.
 
-Slotless supporting Techniques can deepen a recurring effect family, create synergy, or improve broader build behavior without a global inventory cap. Their practical cap comes from reward opportunities, rarity, prerequisites, route choices, and run length. Slotted Techniques may still receive one refinement.
+Slotless supporting Techniques can deepen a recurring effect family, create synergy, or improve broader build behavior without a global inventory cap. Slotted Techniques may receive one refinement.
 
-Effect families are internal authoring/build structures rather than necessarily player-facing named schools. Each must be broad enough to support comparable depth across several core combat actions. Generic elemental schools are not the target; supernatural effects should derive from Oathbound's samurai, Order, Returning Blood, seals, wounds, execution, and controlled-mutation language.
-
-Technique rarity remains Common / Uncommon / Rare / Legendary. Some Legendaries may use family-investment prerequisites, with exact thresholds deferred until the roster is designed.
+Effect families are internal authoring/build structures rather than necessarily player-facing named schools. Generic elemental schools are not the target.
 
 **Authority:** `docs/gameplay/TECHNIQUES.md`, `docs/gameplay/TECHNIQUE_CATALOG.md`
+
+## 2026-08-09 — Technique families refocused on scalable mechanics
+
+The earlier broad Technique concept pool is no longer treated as the current launch roster. Core family mechanics must be stabilized before supporting, cross-family, Legendary, and refinement content is rebuilt.
+
+Families do not need formal player-facing names; the intended recognition model is symbol, color treatment, effect behavior, VFX, and audio.
+
+The pale-silver family is centered on **echoes**, meaning delayed additional sword slashes rather than Akio literally repeating full actions.
+
+The gold family is centered on **Rupture**. Eligible effects fill an enemy Rupture meter. Partial buildup has no separate effect. Filling the meter triggers a large posture-damage proc, a strong hit reaction where allowed, and a smaller nearby posture shockwave, then resets the meter. The separate `Fracture` term is retired.
+
+The violet Seal buildup model remains the next active design question. The ivory and crimson families require new scalable recurring mechanics rather than relying only on precision or Health-risk triggers.
+
+**Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-08-09 — Technique reward and Prosthetic boundaries clarified
+
+All Technique reward sources use the same underlying Technique reward screen. Combat rooms are the main source, while shops, treasure, minibosses, and regional bosses may also grant a Technique reward. The source does not inherently force a refinement or other Technique subtype.
+
+Refinements are small improvements to an existing slotted Technique and are not separate Techniques.
+
+Prosthetic Techniques are removed. Prosthetic progression is persistent and belongs to the Forge, with Scrolls as the current Forge currency.
+
+**Authority:** `docs/gameplay/TECHNIQUES.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`, `docs/gameplay/PROSTHETICS.md`
