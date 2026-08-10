@@ -46,18 +46,19 @@ Temporary run state may include:
 - five core slotted Techniques,
 - slotless supporting Techniques,
 - Technique refinements and rare replacement state,
-- temporary Prosthetic upgrades,
 - one run-scoped Relic,
 - Gold,
 - room progress,
 - temporary Health or Spirit capacity,
 - approved consumables and encounter rewards.
 
-These reset after failed death-return or successful completion unless explicitly defined otherwise.
+Prosthetic progression is not part of the temporary Technique build.
+
+These run states reset after failed death-return or successful completion unless explicitly defined otherwise.
 
 ## Run-build investment model
 
-The selected Aspect defines Akio's weapon foundation from Tier 0. Deeper Aspect investment is optional and competes with Technique, Relic, Prosthetic, economy, survival, and other reward routes.
+The selected Aspect defines Akio's weapon foundation from Tier 0. Deeper Aspect investment is optional and competes with Technique, Relic, economy, survival, and other reward routes.
 
 Expected viable outcomes:
 
@@ -120,11 +121,11 @@ The run begins with five empty core Technique slots tied to:
 
 Each slot can hold one direct Technique. Direct Techniques do not stack within the same core action.
 
-Technique progression continues beyond those five choices through slotless supporting Techniques, one refinement per eligible slotted Technique, rare same-slot replacement offers, family synergy, and eligible higher-rarity or Legendary effects.
+Technique progression can continue beyond those five choices through slotless supporting Techniques, one small refinement per eligible slotted Technique, rare same-slot replacement offers, family synergy, and eligible higher-rarity or Legendary effects.
 
-There is no global cap on total Technique upgrades. The practical cap comes from reward opportunities, route choices, rarity, prerequisites, and run length.
+There is no global cap on total Technique upgrades. The practical cap comes from Technique reward opportunities, route choices, rarity, prerequisites, and run length.
 
-A successful run should commonly establish most of its core Technique identity through Areas 1 and 2, then deepen, refine, or selectively replace that build later. Exact reward counts remain open until the launch roster and run pacing are reviewed together.
+The current design pass is focused on stabilizing the five core family mechanics before rebuilding the supporting and refinement layers.
 
 ## Persistent character progression
 
@@ -146,7 +147,7 @@ No duplicate Blood Art upgrade tree beneath each Aspect is approved.
 
 The Heart's prison originally contained seven Bindings. The Court destroyed the outermost Binding before the game, leaving six intact.
 
-Each successful Binding run destroys one remaining Binding and permanently preserves that campaign progress. Failed runs do not advance the count.
+Each successful Binding run destroys one remaining Binding and permanently preserves that progress. Failed runs do not advance the count.
 
 After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final story run, continuing from the Shogun into the Heart.
 
@@ -157,7 +158,7 @@ Destroyed Binding progress is not a currency and cannot be lost.
 | Currency | Persistence | Primary owner |
 |---|---|---|
 | Mist | Persistent | Broad meta progression |
-| Scroll | Persistent | Forge upgrades |
+| Scroll | Persistent | Forge upgrades, including Prosthetics |
 | Boss Emblem | Persistent | Rare major gates or high-value nodes |
 | Gold | Run-only | Shops and run economy |
 
@@ -183,8 +184,8 @@ Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards
 
 ### Prosthetics
 
-- The Forge owns permanent Prosthetic unlocks and baseline improvements.
-- The run owns temporary Prosthetic specialization and approved Technique interactions.
+- The Forge owns Prosthetic unlocks and permanent individual tool improvements.
+- Prosthetics do not receive a separate temporary Technique layer during runs.
 
 ## Trial reward boundary
 
@@ -222,10 +223,11 @@ A successful Binding return additionally:
 
 ## Current production dependencies
 
-1. Scope the launch Technique roster and effect-family structure.
-2. Scope remaining run-build content: Prosthetic upgrades, Relics, and consumables.
-3. Scope persistent progression, onboarding, and trials.
-4. Lock the authored narrative-delivery package.
-5. Lock postgame release scope.
+1. Finish the five core Technique-family mechanics and direct slotted roster.
+2. Scope remaining run-build content: Relics and consumables.
+3. Scope permanent Prosthetic progression together with the broader Forge package.
+4. Scope persistent progression, onboarding, and trials.
+5. Lock the authored narrative-delivery package.
+6. Lock postgame release scope.
 
 Exact percentages, combat values, resource values, costs, timing windows, offer rates, replacement rates, and reward values remain implementation and balance work.
