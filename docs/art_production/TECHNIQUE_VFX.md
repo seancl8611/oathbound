@@ -15,91 +15,117 @@ related:
   - GAMEPLAY-TECHNIQUES
   - ART-CORE-VFX
   - ART-ASPECT-VFX
-  - ART-PROSTHETIC-VFX
   - ART-ITEM-REWARD-ART
   - ART-MILESTONE-04
 ---
 
 # Technique VFX
 
-Techniques reshape existing combat actions through Returning Blood and supernatural martial effects. Their VFX should make run growth exciting while preserving sword arcs, enemy tells, posture state, and Akio's final position.
+Techniques reshape existing sword actions through repeatable family effects. Their VFX should make run growth readable and exciting while preserving sword arcs, enemy tells, posture state, and Akio's final position.
 
 ## Production role
 
 Technique presentation has two layers:
 
-- **selection and build communication:** combat-slot identity, rarity, refinement, supporting-upgrade relationships, and eventual family symbols / color / effect language,
-- **combat feedback:** readable additions that clarify a new trigger, payoff, mark, restraint, repeated cut, altered footprint, resource return, or other modified behavior.
+- **selection and build communication:** combat-slot identity, rarity, refinement state, supporting-upgrade relationships, and family symbol / color treatment,
+- **combat feedback:** readable effects that show buildup, echo slashes, Rupture, seals, altered footprints, or other approved family behavior.
 
-The former elemental stance families remain removed from scope. The new Technique-family structure should use Oathbound-specific visual language rather than restoring generic elemental schools.
+The former elemental stance families remain removed from scope. Prosthetic effects remain in their own visual system and are not part of Technique-family production.
 
 ## Reuse hierarchy
 
 Before commissioning a new Technique effect, use this order:
 
-1. approved base sword trail, parry, posture, deathblow, movement, or resource cue,
-2. selected Blood Aspect VFX language,
-3. established Returning Blood / Order seal / wound / ritual language,
-4. equipped Prosthetic VFX language when relevant,
-5. small modular overlay, marker, pulse, trail, rupture, seal, or afterimage,
-6. bespoke effect only when the mechanic cannot read correctly through reuse.
+1. approved base sword trail, parry, posture, deathblow, or movement cue,
+2. selected Blood Aspect VFX language where compatible,
+3. established Returning Blood / Order / wound / ritual language,
+4. small modular family overlay, marker, meter, pulse, trail, rupture, seal, or echo,
+5. bespoke effect only when the mechanic cannot read correctly through reuse.
+
+## Current family visual needs
+
+### Pale silver / twin slash — Echo
+
+Echoes should read as delayed additional sword slashes, not as Akio literally replaying the full action.
+
+The visual system must support:
+
+- one delayed echo slash,
+- multiple delayed echoes,
+- echoes following the original authored attack line,
+- and later supporting effects that change echo timing, spread, or strength without obscuring the original hit.
+
+### Gold / cracked crest — Rupture
+
+Rupture needs a readable buildup-and-proc language:
+
+- visible enemy Rupture meter or equivalent buildup cue,
+- no misleading ticking-damage treatment during partial buildup,
+- clear full-meter trigger,
+- strong target impact / posture-break cue,
+- compact outward posture shockwave for nearby enemies,
+- immediate reset after the proc.
+
+Exact meter placement, crack patterns, radius, and intensity remain future UI/VFX design.
+
+### Violet / binding knot — Seal
+
+Do not finalize Seal VFX until the buildup model is decided. The final system must clearly distinguish partial buildup from the completed Seal effect.
+
+### Ivory and crimson families
+
+Do not commission family-specific VFX until each has a stable scalable mechanic.
 
 ## Core combat-slot treatment
 
 ### Basic Attack Techniques
 
-Frequent effects must remain visually light enough to trigger repeatedly. Favor precise trail changes, marks, restrained echoes, controlled Blood extensions, or target-state buildup rather than large bursts on every hit.
+Frequent effects must stay visually light enough for repeated use. Favor compact echoes, buildup cues, marks, or target-state feedback rather than large bursts on every hit.
 
 ### Held Attack Techniques
 
-Held attacks may support stronger geometry changes, delayed follow-up cuts, impact ruptures, compact waves, or other high-commitment supernatural payoffs.
+Held attacks may support larger fixed geometry, stronger impact effects, or other high-commitment payoffs.
 
 ### Dash Techniques
 
-Favor directional re-entry effects, short-lived afterimages, controlled trails, movement-linked marks, or effects anchored to the start / end of the actual authored dash. Do not obscure landing position or imply extra invulnerability.
+Effects must remain tied to the actual dash path, start point, end point, or Dash Attack contact without implying extra invulnerability or hidden movement.
 
 ### Parry / Counter Techniques
 
-Favor contact pulses, stored-force cues, seals, delayed retaliation, counter-linked Blood effects, or readable mastery windows. Never widen the apparent parry timing beyond the implemented rule.
+Never widen the apparent parry timing beyond the implemented rule. Technique feedback should occur after or around the successful defensive read.
 
 ### Deathblow Techniques
 
-These may carry some of the largest ordinary Technique effects because they trigger least often. Keep the execution cue primary, then resolve any rupture, spread, mark, recovery, or follow-up effect afterward.
+These may carry larger effects because they trigger less often. The Deathblow cue stays primary, with Technique effects resolving after the execution read is clear.
 
 ## Supporting Techniques
 
-Slotless supporting upgrades should usually modify existing family cues rather than introduce a completely unrelated VFX language.
+Supporting effects should normally modify an existing family cue rather than introduce a new visual language.
 
-Examples include clearer buildup, wider spread, longer-lived marks, stronger repeat-cut treatment, added seal connections, or a changed payoff frame.
+This layer is deferred until the five core family mechanics are stable.
 
 ## Refinement treatment
 
-A refinement should look like deeper command of the same slotted Technique, not a second unrelated power. It may strengthen an existing cue through an additional pulse, clearer threshold, expanded but accurate footprint, stronger payoff frame, or restrained layered accent.
+A refinement should look like a small improvement to the same Technique, not a second ability. It may slightly strengthen an existing cue or payoff but should not require a new independent VFX package.
 
 ## Family recognition
 
-Exact player-facing family names and UI treatment are not locked.
+The families do not require formal names in the UI.
 
-Once families are approved, each should receive a consistent visual grammar that can repeat across several combat slots and supporting upgrades. Recognition may use a combination of symbol, silhouette, Blood behavior, seals, wound patterns, motion timing, audio, and color.
+Each approved family should eventually receive a consistent symbol, color treatment, motion language, audio language, and gameplay effect that remains recognizable across several combat slots.
 
 Color alone cannot carry family identity.
-
-## Aspect relationship
-
-Technique effects may inherit the selected Aspect's material and motion language when appropriate, but an effect family should remain recognizable across Wolf, Wraith, and Ronin.
-
-The same Technique must not require three completely separate VFX families merely because the underlying Aspect attack differs.
 
 ## Readability constraints
 
 - Technique feedback cannot hide enemy telegraphs, safe zones, projectiles, posture state, or Akio's final position.
-- Multiple supporting and slotted Techniques may trigger close together; effects must layer cleanly.
+- Multiple Technique effects may trigger close together; effects must layer cleanly.
 - Frequent Basic Attack effects require lower visual intensity than rarer Held, Parry, Deathblow, or Legendary payoffs.
-- Automatic room-wide spectacle is outside the intended combat identity unless explicitly approved as an exceptional high-rarity effect.
+- Automatic room-wide spectacle is outside the intended combat identity unless explicitly approved as an exceptional effect.
 - Exact timing, footprint, trigger, and value remain owned by gameplay and implementation documentation.
 
 ## Delivery planning
 
-The effect families and first Technique roster must be coherent before quoting the full set of unique icons and bespoke effects.
+Do not quote the full set of unique Technique icons or bespoke effects until the five core family mechanics and slotted roster are stable.
 
-Every Technique intended for production must specify source combat slot or supporting role, trigger, target / footprint, existing VFX reuse, added marker or effect, refinement difference, Aspect or Prosthetic dependency, and mixed-build readability risk.
+Every production-ready Technique must specify its combat slot or supporting role, trigger, target / footprint, existing VFX reuse, added family cue, refinement difference, Aspect interaction, and mixed-build readability risk.

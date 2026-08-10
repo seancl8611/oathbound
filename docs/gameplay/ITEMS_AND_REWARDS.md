@@ -34,14 +34,14 @@ The reward framework should:
 - make route choices readable before commitment,
 - build run power gradually,
 - create meaningful competition between Aspect, Technique, survival, economy, and rare-reward routes,
-- keep Technique rooms valuable after all five core combat slots are filled,
+- keep Technique rewards valuable after all five core combat slots are filled,
 - support focused and hybrid Technique builds,
 - allow occasional high-roll builds without making ideal builds routine,
 - and avoid severe random failure or exact-combination dependence.
 
 Major rewards support:
 
-1. **Build growth** — Techniques, refinements, supporting Technique upgrades, Prosthetic specialization, Relics, and optional Aspect Tier advancement through Shrine routes.
+1. **Build growth** — Technique rewards, Relics, and optional Aspect Tier advancement through Shrine routes.
 2. **Survival** — Health, Spirit, recovery, temporary capacity.
 3. **Economy** — Gold, shops, rerolls.
 4. **Persistent progress** — Mist, Scrolls, Boss Emblems, unlocks, discoveries, Heart Bindings.
@@ -51,7 +51,7 @@ Major rewards support:
 | Currency | Persistence | Primary role |
 |---|---|---|
 | Mist | Persistent | Broad meta progression |
-| Scroll | Persistent | Forge upgrades |
+| Scroll | Persistent | Forge upgrades, including permanent Prosthetic development |
 | Boss Emblem | Persistent | Rare major progression gates |
 | Gold | Run-only | Shops and run economy |
 
@@ -77,7 +77,7 @@ The primary reward category should be shown before route commitment through a co
 
 Supported preview categories may include Technique, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss.
 
-Choosing a Shrine can mean giving up a Technique, Relic, economy, or survival opportunity; choosing another route can delay Aspect advancement. The player may change build emphasis during the run.
+Choosing a Shrine can mean giving up a Technique, Relic, economy, or survival opportunity; choosing another route can delay Aspect advancement.
 
 Exact route topology and reward distribution remain later run-design and playtest decisions.
 
@@ -85,39 +85,39 @@ Exact route topology and reward distribution remain later run-design and playtes
 
 A standard combat room awards one previewed primary reward after completion.
 
-Eligible rewards include Gold, Mist, Scrolls, Health or Spirit recovery, temporary capacity, a Technique opportunity, and an approved reroll resource.
+Eligible rewards include Gold, Mist, Scrolls, Health or Spirit recovery, temporary capacity, a Technique reward, and an approved reroll resource.
 
-Not every combat room awards a Technique.
+Combat rooms are the **primary source of Technique rewards**, but not the only source.
 
-## Technique opportunities
+## Universal Technique reward
 
-Technique offers normally present three choices.
+A Technique reward always opens the same underlying Technique reward screen and follows the same eligibility rules regardless of source.
 
-The five direct combat slots are:
+A Technique reward may come from:
 
-- Basic Attack,
-- Held Attack,
-- Dash,
-- Parry / Counter,
-- Deathblow.
+- a standard combat room,
+- a shop purchase,
+- treasure,
+- a miniboss,
+- a regional boss,
+- or another explicitly approved source.
 
-While relevant slots remain empty, offers should commonly include strong standalone slotted Techniques.
+The source does not make the reward inherently a "refinement reward," "Legendary reward," or another separate Technique subtype.
 
-As the build develops, Technique offers may instead include:
+Depending on the current build, an eligible Technique reward screen may offer:
 
 - a Technique for an empty combat slot,
-- a slotless supporting Technique that deepens an effect family,
+- a slotless supporting Technique,
 - a refinement for an owned slotted Technique,
-- a rare replacement for the Technique already occupying the same slot,
-- a cross-family synergy,
-- an eligible higher-rarity or Legendary option,
-- or an eligible Prosthetic-related upgrade.
+- a rare same-slot replacement,
+- a cross-family Technique,
+- or an eligible Legendary.
 
-There is no global Technique inventory cap. The main cap on Technique growth is how many reward opportunities the player chooses and receives during the run.
+The reward source may later influence rarity or quality weighting, but all sources use the same Technique system rather than separate reward interfaces or subtype-specific reward pools.
 
-A full five-slot combat kit is therefore not a finished Technique build.
+There is no global Technique inventory cap. The main cap on Technique growth is how many Technique rewards the player chooses and receives during the run.
 
-The player may decline all choices for a displayed lower-value fallback such as Gold, recovery, Mist, or an approved reroll resource.
+The player may decline all Technique choices for a displayed lower-value fallback when that source allows a decline.
 
 Detailed slot, rarity, replacement, family, and refinement rules belong in `TECHNIQUES.md`.
 
@@ -129,18 +129,20 @@ Shrines own Blood Aspect stabilization and optional escalation.
 - Embrace advances the fixed Aspect Tier.
 - Resist keeps the Tier and provides approved stabilization support.
 - Below full Corruption: provide approved support such as Health or Spirit recovery.
-- Shrines do not normally present ordinary Technique selections.
+- Shrines do not normally present ordinary Technique rewards.
 - Blood Art charge is separate from Corruption and does not pay for Embrace.
 
 ## Rest rooms
 
 Rest rooms provide Health and Spirit recovery, read-only build review, and short narrative breathing room where appropriate.
 
-The previous active/reserve Technique swapping rule is retired with the reserve-slot model. Rest rooms do not freely respec the five committed combat-slot choices.
+The retired reserve-slot model no longer supports routine Technique swapping at rest rooms.
 
 ## Shops
 
-Run shops use Gold and may offer recovery, temporary capacity, consumables if included, rerolls, Techniques, refinements, supporting Technique upgrades, Prosthetic support, and occasional Relics.
+Run shops use Gold and may offer recovery, temporary capacity, consumables if included, rerolls, **Technique rewards**, and occasional Relics.
+
+When a shop sells a Technique reward, purchasing it opens the normal Technique reward screen rather than a separate refinement-only or supporting-only screen.
 
 Technique purchases should be expensive enough that Gold routing is a meaningful strategy rather than an automatic purchase path.
 
@@ -148,17 +150,16 @@ Blood is not directly bought or sold.
 
 ## Treasure and miniboss rewards
 
-Treasure rooms may provide a Relic choice, higher-rarity Technique, guaranteed refinement, powerful supporting Technique, large currency bundle, major temporary capacity, or rare consumable if consumables ship.
+Treasure rooms may provide a Technique reward, Relic choice, large currency bundle, major temporary capacity, or rare consumable if consumables ship.
 
 A miniboss guarantees meaningful build development and should never award only ordinary Gold or healing. Possible rewards include:
 
-- higher-rarity Technique,
-- refinement,
-- supporting Technique,
-- rare same-slot replacement,
-- Relic,
-- special encounter reward,
+- a Technique reward,
+- a Relic,
+- a special encounter reward,
 - modest additional Mist or Scrolls.
+
+A miniboss Technique reward may later receive better rarity weighting, but it still uses the universal Technique reward screen.
 
 Miniboss frequency and route placement remain later gameplay decisions.
 
@@ -168,7 +169,7 @@ The Area 1 and Area 2 bosses provide both persistent and current-run value.
 
 Persistent rewards may include Boss Emblems, Mist, Scrolls, unlocks, and narrative or codex progress.
 
-Current-run rewards may include a higher-rarity Technique choice, refinement, supporting Technique, Prosthetic upgrade, Relic, or major temporary Health or Spirit improvement.
+Current-run rewards may include a Technique reward, Relic, or major temporary Health or Spirit improvement.
 
 Regional transitions should restore enough Health or Spirit for the next area to begin from a viable state. Blood is not automatically refilled by the reward system.
 
@@ -186,15 +187,15 @@ After all six Bindings are destroyed, the seventh successful story run continues
 
 Relics are rare run-scoped passive rules using a separate slot. The initial structure uses one equipped Relic.
 
-The current provisional rarity sketch is a simpler three-tier structure rather than mirroring Technique rarity. A working label set is Common, Rare, and Legendary.
+The current provisional rarity sketch is Common, Rare, and Legendary. This is not locked.
 
-This is not locked. Relic labels, distribution, count, and power expectations should be revisited when the Relic roster is designed.
+Relics are separate from Techniques. Techniques do not need Relic-specific upgrade cards, and Relics do not occupy one of the five Technique combat slots.
 
 ## Pacing framework
 
-Within the approved 45-50-minute successful-run target, Technique reward frequency must now be tuned against both core-slot filling and later supporting upgrades.
+Within the approved 45-50-minute successful-run target, Technique reward frequency must be tuned against both core-slot filling and later supporting upgrades.
 
-The old assumption of only six to eight Technique decisions is no longer authoritative. The final count should be high enough for a player to establish several core combat-slot choices and deepen at least part of the build, while still preserving meaningful competition with Shrines, Relics, economy, and survival routes.
+The old assumption of only six to eight Technique decisions is no longer authoritative.
 
 Regional direction remains:
 
@@ -208,7 +209,7 @@ Exact counts and probabilities remain open.
 
 The reward structure should continue supporting Tier 0-I Technique-focused runs, Tier II hybrids, Tier III Aspect-heavy runs, and occasional Tier IV high-rolls.
 
-A Technique-heavy route may accumulate more supporting upgrades than an Aspect-heavy route. That is intended opportunity cost rather than a global Technique-cap problem.
+A Technique-heavy route may accumulate more slotless upgrades than an Aspect-heavy route. That is intended opportunity cost rather than a global Technique-cap problem.
 
 ## Guardrails
 
@@ -217,10 +218,11 @@ A Technique-heavy route may accumulate more supporting upgrades than an Aspect-h
 - A direct Technique cannot stack with another direct Technique in the same combat slot.
 - Supporting Techniques must be meaningful enough to justify a reward choice.
 - Rare replacement offers must clearly show what current slotted Technique will be lost.
+- Prosthetic upgrades do not belong in Technique reward screens.
 - Blood is a combat resource, not a currency or route reward.
 - Rare rewards must not invalidate sword combat or boss mechanics.
 - Mandatory encounters must not assume a particular Aspect Tier, Blood Art, Technique family, or ideal build.
 
 ## Current production dependency
 
-The active run-build task is to define the Technique effect families and first roster under the new five-slot plus supporting-upgrade architecture. Technique reward frequency, rarity distribution, replacement rates, Prosthetic integration, Relic counts, consumables, and unique production needs should be revised after that roster is visible as a whole.
+The active run-build task is to finish the five core Technique-family mechanics and rebuild the direct five-by-five slotted roster. Supporting, cross-family, Legendary, refinement, rarity, and reward-frequency work should follow that core pass.

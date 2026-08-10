@@ -31,8 +31,8 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Player character | 1 | Akio concept, final sprite, introductory combat, three Aspect combat libraries |
 | Blood Aspects | 3 | Wolf, Wraith, Ronin |
 | Core Technique slots | 5 | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow |
-| Supporting Technique capacity | No fixed inventory cap | Limited by reward opportunities, rarity, prerequisites, and run length |
-| Prosthetic tools | 8 | One equipped at a time |
+| Supporting Technique capacity | No fixed inventory cap | Limited by Technique rewards, rarity, prerequisites, and run length |
+| Prosthetic tools | 8 | One equipped at a time; permanent Forge progression |
 | Run-scoped Relic capacity | 1 | Launch catalog remains open |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
 | Area 1 standard enemies | 6 | Hushiro rupture roster |
@@ -59,10 +59,12 @@ After Returning Blood awakens, launch scope includes:
 - one direct Technique maximum per slot,
 - rare same-slot replacement offers,
 - slotless supporting Technique upgrades with no fixed inventory cap,
-- one refinement maximum per eligible slotted Technique,
+- one small refinement maximum per eligible slotted Technique,
 - four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
-- one equipped Prosthetic,
+- one equipped Prosthetic with permanent Forge progression,
 - and one run-scoped Relic slot.
+
+Prosthetic Techniques are not part of the run-build system. Techniques do not add separate temporary upgrade layers to Prosthetics or Relics.
 
 The exact Technique roster size is open. The retired rough ~30 count and Blade / Deflection / Execution / Movement / General quotas are no longer production requirements.
 
@@ -81,13 +83,19 @@ All three packages are locked at current qualitative paper-design depth. Final a
 
 ## Technique scope boundary
 
-Technique design must use a small set of broad internal effect families that can meaningfully affect several of the five core combat slots.
+Technique design uses a small set of broad internal effect families that can meaningfully affect several of the five core combat slots.
 
-Those family names are authoring tools, not necessarily player-facing labels. Final recognition may use symbols, color, VFX, effect wording, or another UI language.
+The families do not need formal player-facing names. Final recognition should rely on symbols, color treatment, effect behavior, VFX, and audio language.
 
-The main family structure should avoid generic elemental schools. Familiar functions such as slow, area damage, extra range, delayed damage, chaining, restraint, marks, recovery, and impact bursts remain valid when expressed through Oathbound-specific samurai / Returning Blood themes.
+Each family needs one scalable gameplay mechanic. The current working state is:
 
-Focused and hybrid family builds must both be supported. Some Legendary Techniques may use prior family investment as an eligibility requirement, but exact thresholds remain open.
+- pale-silver echo family: strong direction,
+- gold Rupture family: working qualitative rule established,
+- violet Seal family: buildup/completion rule next to define,
+- ivory family: scalable mechanic redesign required,
+- crimson family: scalable mechanic redesign required.
+
+Supporting, cross-family, Legendary, and refinement concepts should be rebuilt only after this core pass is stable.
 
 ## Optional investment outcomes
 
@@ -104,7 +112,7 @@ Mandatory encounters must not assume a particular Tier, Blood Art, Technique fam
 
 A normal successful Binding run targets approximately **45-50 minutes** of active time.
 
-The final number of Technique reward opportunities must be tuned against the new uncapped supporting-upgrade layer and competition with Shrines, Relics, economy, and survival routes.
+The final number of Technique reward opportunities must be tuned against the supporting-upgrade layer and competition with Shrines, Relics, economy, and survival routes.
 
 ## The Strand
 
@@ -156,20 +164,21 @@ Postgame retains repeatable normal runs and optional Heart-route access without 
 
 ## Run-build and persistence boundary
 
-Temporary run state includes Aspect Tier, Corruption, Blood, slotted and supporting Techniques, refinements, temporary Prosthetic specialization, run Relic, Gold, temporary capacities, and room progress.
+Temporary run state includes Aspect Tier, Corruption, Blood, slotted and supporting Techniques, refinements, run Relic, Gold, temporary capacities, and room progress.
 
-Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks/mastery, permanent upgrades, and persistent currencies.
+Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks/mastery, permanent upgrades including Prosthetic progression, and persistent currencies.
 
 ## Current open production scope
 
-1. Launch Technique effect families and roster.
-2. Remaining run-build catalog: Prosthetic upgrades, Relics, consumables, and reward frequency.
-3. Persistent progression, onboarding, and trial package.
-4. Narrative delivery, voice, cinematic, portrait, and final-writing package.
-5. Postgame reward and UI package.
+1. Finish the five core Technique-family mechanics and direct roster.
+2. Rebuild later Technique layers and finish Relic / consumable run-build scope.
+3. Define permanent Prosthetic / Forge progression depth.
+4. Persistent progression, onboarding, and trial package.
+5. Narrative delivery, voice, cinematic, portrait, and final-writing package.
+6. Postgame reward and UI package.
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system is not part of the game.

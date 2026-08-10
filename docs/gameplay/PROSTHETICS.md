@@ -9,9 +9,10 @@ topics:
   - prosthetics
   - spirit-emblems
   - combat-tools
-  - prosthetic-techniques
+  - forge-progression
 related:
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-PROGRESSION
   - ART-PROSTHETIC-VFX
   - CHAR-AKIO
   - ART-MILESTONE-04
@@ -36,33 +37,32 @@ Akio carries eight ritualized combat tools operated primarily through a shared g
 
 ## Loadout boundary
 
-The initial run structure assumes one equipped Prosthetic at a time. Permanent progression may unlock tools and improve their baseline behavior through the Forge. Any later second-tool loadout is a separate scope decision.
+The initial run structure uses one equipped Prosthetic at a time. Any later second-tool loadout is a separate scope decision.
 
 ## Shared resource model
 
 Prosthetics use Spirit emblems or the project's final equivalent shared tool resource. Exact costs, cooldowns, charges, and upgrade values remain tuning variables until implementation and playtesting define them.
 
-## Permanent and run-only growth
+## Progression ownership
 
-- **Forge:** unlocks Prosthetics, improves baseline reliability, and owns permanent branches.
-- **Run build:** may offer temporary tool-specific upgrades or sword-and-tool synergies for the currently equipped Prosthetic.
+Prosthetic Techniques are removed from the Technique reward system.
 
-The previous rule that a major Prosthetic Technique consumes one of four unrestricted active Technique slots is retired.
+- **Forge:** owns permanent Prosthetic unlocks and individual tool progression.
+- **Technique system:** modifies Akio's sword build and does not temporarily upgrade a particular Prosthetic.
+- **Run rewards:** do not need a separate Prosthetic-Technique layer.
 
-The exact temporary Prosthetic-upgrade structure must be re-evaluated against the new five core combat slots. A Prosthetic upgrade should not consume a Basic Attack, Held Attack, Dash, Parry / Counter, or Deathblow slot unless it explicitly modifies that action.
-
-Only the currently equipped tool contributes tool-specific temporary upgrades to the reward pool.
+The current persistent currency model already assigns **Scrolls** to Forge upgrades. Exact Prosthetic upgrade branches, rank counts, costs, and whether each tool uses linear or branching progression remain future persistent-progression design work.
 
 ## Interaction principles
 
-- Tools should create openings, solve positioning problems, or support a build identity.
+- Tools should create openings, solve positioning problems, or support tactical decisions.
 - Direct-damage tools should not make sword combat, parry, posture, or deathblow play optional.
-- Status applications must use the same approved definitions used by enemies, HUD, Techniques, and damage numbers.
+- Status applications must use the same approved definitions used by enemies and HUD.
 - Mist Raven and Wraith Aspect must remain mechanically and visually distinct.
 - Mirror Umbrella requires explicit active, inactive, and release states.
 - Smoke cannot hide essential silhouettes or attack tells.
 - Pull, blink, and interrupt behavior must respect boss and elite immunity rules where applicable.
-- Temporary Prosthetic upgrades should strengthen the tool's existing tactical role or create a coherent sword-and-tool interaction rather than transform it into an unrelated ability.
+- Permanent upgrades should deepen the existing tool role rather than transform it into an unrelated weapon class.
 
 ## Required implementation data per tool
 
@@ -74,13 +74,10 @@ Only the currently equipped tool contributes tool-specific temporary upgrades to
 - status duration and stack behavior
 - posture and HP effects
 - permanent Forge upgrade path
-- eligible temporary run upgrades
 - icon, world object, VFX, sound, and animation dependencies
 
 ## Production rule
 
 Most tools should use Akio's shared `prosthetic_use` pose plus layered tool objects and effects. Any tool requiring a unique full-body animation is an explicit scope increase and must be identified before quotation.
 
-Temporary Technique effects should extend the approved Prosthetic VFX language rather than require a second complete effect family for the same tool.
-
-The authoritative visual requirements belong in [Prosthetic Tool VFX](../art_production/PROSTHETIC_VFX.md). Technique-specific production rules belong in [Technique VFX](../art_production/TECHNIQUE_VFX.md).
+The authoritative visual requirements belong in [Prosthetic Tool VFX](../art_production/PROSTHETIC_VFX.md).
