@@ -17,7 +17,11 @@ last_reviewed: 2026-08-09
 - Clarified the pale-silver family around **echoes**: delayed additional sword slashes, not literal full-action repetition.
 - Removed the separate `Fracture` term from the gold family.
 - Defined the working **Rupture** rule as a visible buildup meter with no partial effect; full meter triggers a large posture burst, strong allowed hit reaction, and smaller nearby posture shockwave, then resets.
-- Marked the Violet Seal buildup/completion model as the next active design question.
+- Locked the Violet family around discrete **Seal stacks** rather than a buildup meter.
+- Defined one Seal as a minor movement slow, two Seals as stronger movement restriction plus suppression of qualifying movement abilities, and three Seals as a brief **Bind** that roots without stunning and then clears the stacks.
+- Explicitly separated Violet from posture mechanics: Seal does not inherently damage posture, suppress posture recovery, or trigger a posture burst.
+- Defined the enemy-facing Seal visual as one mark, two connected marks, then a completed binding pattern during Bind.
+- Advanced the active family-design question from Violet to the Ivory scalable mechanic.
 - Marked the ivory and crimson families for redesign around concrete scalable mechanics rather than precision-only or Health-risk-only triggers.
 - Clarified that refinements are small buffs to an existing slotted Technique, not separate Techniques.
 - Standardized all Technique sources around the same Technique reward screen; combat rooms are the main source, with shops, treasure, minibosses, and regional bosses able to grant the same reward type.
