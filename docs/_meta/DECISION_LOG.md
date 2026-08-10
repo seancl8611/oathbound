@@ -119,9 +119,17 @@ The pale-silver family is centered on **echoes**, meaning delayed additional swo
 
 The gold family is centered on **Rupture**. Eligible effects fill an enemy Rupture meter. Partial buildup has no separate effect. Filling the meter triggers a large posture-damage proc, a strong hit reaction where allowed, and a smaller nearby posture shockwave, then resets the meter. The separate `Fracture` term is retired.
 
-The violet Seal buildup model remains the next active design question. The ivory and crimson families require new scalable recurring mechanics rather than relying only on precision or Health-risk triggers.
-
 **Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/_meta/OPEN_QUESTIONS.md`
+
+## 2026-08-09 — Violet family locked around Seal stacks
+
+The Violet family uses discrete visible **Seal stacks**, not a buildup meter and not posture pressure.
+
+One Seal mildly slows enemy movement. Two Seals strengthen the movement restriction and suppress qualifying movement abilities where applicable. Three Seals complete the pattern and briefly **Bind** the enemy in place. Bind is not a stun: the enemy can still use attacks valid from its current position. When Bind ends, the stacks clear and must be rebuilt.
+
+Seal presentation should visibly progress from individual marks to connected marks to a completed binding pattern. Exact slow strength, duration, expiry, and protected-enemy resistance remain tuning / integration work.
+
+**Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`
 
 ## 2026-08-09 — Technique reward and Prosthetic boundaries clarified
 
