@@ -10,6 +10,7 @@ topics:
   - technique-catalog
   - combat-slots
   - effect-families
+  - rupture
   - supporting-techniques
   - refinements
   - rarity
@@ -28,198 +29,173 @@ related:
 
 ## Purpose
 
-This file owns the working Technique roster, family coverage, individual Technique concepts, supporting upgrades, refinements, rarity candidates, and production treatment.
+This file owns the working Technique roster and the current design state of the five effect families.
 
-`TECHNIQUES.md` owns the system rules. The Aspect files own Wolf, Wraith, and Ronin and must not be reopened merely to make a Technique fit.
+`TECHNIQUES.md` owns system rules. The Aspect files own Wolf, Wraith, and Ronin and must not be reopened merely to make a Technique fit.
 
 ## Current status
 
-The Technique architecture is now locked at a higher level, but the actual effect families and individual roster are not yet approved.
+The five-slot Technique architecture is approved, but the roster is being rebuilt around stronger scalable family mechanics.
 
-The old planning model of roughly 30 base Techniques divided into Blade, Deflection, Execution, Movement, and General quotas is retired. Those buckets were too unequal to serve as the backbone of build design.
+The earlier draft of roughly 55 Techniques was useful exploration, but it is **not the current launch roster**. Cross-family Techniques and refinements were intentionally removed from the working comparison sheet after the core slotted Techniques exposed larger family-design problems.
 
-The roster should now be built from two independent dimensions:
+Supporting Techniques, cross-family Techniques, Legendary details, and refinements should not be rebuilt until the five core families are coherent.
 
-1. **Combat slot** — which core action is directly modified.
-2. **Effect family** — which recurring supernatural / martial rule the Technique belongs to.
+## Family presentation
 
-Exact player-facing family names are not required. Family identity may ultimately be communicated through color, symbol, VFX, effect wording, or another UI language.
+The families do not need formal player-facing names. The current working UI identifiers are only shorthand for design comparison:
 
-## Five slotted action roles
+| Working identifier | Intended recurring mechanic | Current state |
+|---|---|---|
+| Pale silver / twin slash | Echoes: delayed additional slashes created by qualifying actions | Strong direction; core concepts need a few rewrites |
+| Gold / cracked crest | Rupture: buildup toward a large posture-breaking proc, with more AoE emphasis than most families | Rupture rule now has a working definition |
+| Violet / binding knot | Seals: buildup and control / suppression | Promising, but seal buildup behavior must be defined before the core set is rewritten |
+| Ivory / blade circle | Undecided scalable mechanic; previous precision-only trigger family is insufficient | Redesign required |
+| Crimson / split blood drop | Undecided scalable mechanic; previous damage / sacrifice / recovery trigger family is insufficient | Redesign required |
 
-Every broad effect family should be tested for meaningful representation across these action roles:
+Exact colors, symbols, and final UI treatment remain provisional. The important requirement is that each family has a clear scalable mechanic that can be recognized and upgraded across several combat slots.
 
-| Combat slot | Core action | Trigger frequency | Expected per-trigger power |
-|---|---|---|---|
-| Basic Attack | Basic sequence / primary sword action | Very high | Lower per trigger |
-| Held Attack | committed Held action | Medium | Strong |
-| Dash | Dash Attack / approved evade or re-entry interaction | High | Medium |
-| Parry / Counter | successful parry / Parry Counter | Medium and skill-gated | Strong |
-| Deathblow | posture break / execution | Low | Very strong |
+# Pale silver / twin slash — Echo family
 
-A family does not need perfectly symmetrical effects in all five slots, but it must have enough breadth that it does not become an unequal mechanic bucket such as "only healing" or "only delayed attacks."
+## Core rule
 
-## Effect-family requirements
+An **echo** is a delayed additional slash created by a qualifying Technique.
 
-A launch family should:
+The echo should read practically as another sword slash appearing after the original action. The scalable mechanic is the echo itself, not the idea that Akio literally performs every action twice.
 
-- fit Akio's disciplined supernatural-samurai fantasy,
-- derive naturally from Returning Blood, Order technique, seals, wounds, execution, controlled mutation, or another established world concept,
-- support several combat slots rather than one narrow mechanic,
-- have a repeatable visual / gameplay identity,
-- support both focused and hybrid builds,
-- offer room for slotless supporting upgrades,
-- and remain distinct from the locked Wolf, Wraith, and Ronin identities.
+This distinction matters because supporting upgrades can later modify echoes consistently: damage, timing, count, spread, persistence, carried properties, or other bounded behavior.
 
-Avoid using generic elemental categories such as fire, frost, or lightning as the main family structure. Familiar functions such as slow, area damage, chaining, extra reach, delayed damage, crowd control, or recovery remain valid when expressed through Oathbound-specific rules.
+## Current core-slot pass
 
-## Supporting-upgrade layer
+| Slot | Working Technique | Current direction |
+|---|---|---|
+| Basic Attack | Lingering Cut | Keep. Basic hits create a delayed echo slash on the target. |
+| Held Attack | Second Draw | Keep. A landed Held Attack creates a delayed echo along the same authored attack line. |
+| Dash | Passing Shadow | Redesign. Do not simply repeat the Dash Attack or make Akio act twice; the result should create an echo in a way that scales with the family mechanic. |
+| Parry / Counter | Remembered Reversal | Keep concept, rewrite wording. A successful Counter creates a delayed **echo slash** based on the Counter rather than implying Akio performs the Counter again. |
+| Deathblow | Final Memory | Keep. Deathblow produces several delayed echo slashes around the executed target. |
 
-After or alongside slotted Techniques, the roster needs slotless supporting Techniques that can deepen a family without occupying another core action slot.
+### Current supporting notes
 
-Supporting concepts may:
+- **Passing Memory** remains a strong future supporting concept: an echo that kills or posture-breaks can continue as a weaker slash toward another enemy.
+- **Faithful Recall** is deferred until the catalog has enough compatible effects to define what echoes are actually allowed to copy.
+- **Layered Intent** is unclear and should not remain in the roster without a cleaner mechanical definition.
+- **Unforgotten Steel** remains a promising future Legendary concept: a normal echo creates one additional weaker echo, with no recursive continuation.
 
-- strengthen a family's shared effect,
-- improve buildup, spread, duration, or payoff,
-- connect two combat slots that already use the same family,
-- create cross-family interactions,
-- modify a family interaction with posture, Health, Spirit, bosses, crowds, or positioning,
-- or unlock a more advanced family behavior.
+# Gold / cracked crest — Rupture family
 
-There is no fixed inventory cap on these upgrades. Their practical limit comes from reward opportunities and build prerequisites.
+## Rupture rule — working draft
 
-## Rarity direction
+The previous **Fracture** terminology is removed.
 
-Technique rarity remains:
+Gold-family buildup is simply called **Rupture buildup**.
 
-- Common
-- Uncommon
-- Rare
-- Legendary
+- Eligible effects add progress to an enemy's visible **Rupture meter**.
+- Partial Rupture buildup has no separate debuff or ticking effect.
+- When the meter fills, **Rupture triggers immediately**.
+- Rupture then resets the target's Rupture meter to zero.
+- Exact buildup amounts, decay timing, and boss-specific reaction strength remain tuning work.
 
-Legendary Techniques should be exceptional and run-shaping. Some may be independent rare finds; others may act as family capstones that require prior investment before becoming eligible.
+### Rupture proc
 
-Exact prerequisite counts are not yet locked. Prerequisites must never consume so much of a run that the player is forced into one family merely to reach a capstone.
+When Rupture triggers:
 
-## Replacement direction
+1. the target takes a large burst of posture damage,
+2. the target receives a strong readable hit reaction where its enemy class allows it,
+3. a compact shockwave around the target applies smaller posture pressure to nearby enemies.
 
-A slotted Technique normally commits that combat slot for the rest of the run.
+Bosses and protected elites may resist the hard reaction while still taking the intended posture burst.
 
-Rare replacement offers may overwrite the existing Technique in that same combat slot. Replacements should support meaningful pivots or unusually strong finds rather than make early choices disposable.
+Rupture is primarily a **posture-breaking buildup mechanic**, not poison, ticking damage, or a generic vulnerability debuff.
 
-## Refinement direction
+Not every Gold Technique must add Rupture buildup. A Gold Technique may instead stay within the same identity through direct posture pressure, guard breaking, impact, or bounded AoE.
 
-A slotted Technique may have one refinement. Refinements improve that exact Technique; slotless supporting Techniques improve broader family or build behavior.
+## Current core-slot pass
 
-There is no longer a target that 60-70% of the roster must receive refinements. Coverage should follow the actual concepts.
+| Slot | Working Technique | Current direction |
+|---|---|---|
+| Basic Attack | Rupturing Edge | Keep concept; rename from Fracturing Edge. Basic attacks apply Rupture buildup. |
+| Held Attack | Mountain Breaker | Keep. A landed Held Attack creates a compact impact burst with heavy posture / guard pressure; it does not need to add Rupture buildup. |
+| Dash | Breaching Step | Keep direction. Dash Attack creates a short forward impact / posture shockwave. AoE strength must be carefully bounded. |
+| Parry / Counter | Breaking Reversal | Redesign. "More posture damage" alone is too plain for a core Technique. |
+| Deathblow | Shattered Ground | Keep family role, but define the exact post-Deathblow AoE behavior before approval. |
 
-## Aspect audit for every candidate
+### Current supporting notes
 
-Every slotted or supporting Technique must be checked against all three Aspects:
+- **Deep Fracture** should be renamed if retained; the concept that guarding enemies receive Rupture buildup faster remains promising.
+- **Chain Break** remains promising but should use Rupture terminology: a Rupture can apply partial Rupture buildup to nearby enemies.
+- **Faultline** may work as a boss-oriented supporting effect, but repeated-Rupture scaling must be defined carefully.
+- **Heavenbreaker** remains a promising Legendary direction: a Rupture can trigger other nearby enemies whose Rupture meters are already sufficiently developed.
 
-- **Wolf:** fast, close, pursuit-heavy, high hit frequency.
-- **Wraith:** longest effective melee reach, line control, deliberate spacing.
-- **Ronin:** slow, heavy, high impact, strong defensive stability.
+# Violet / binding knot — Seal family
 
-Check whether the Technique:
+The central idea remains enemy sealing, restraint, slowing, suppression, and posture-recovery control.
 
-- remains useful on all three,
-- has intentional rather than accidental affinity,
-- disproportionately scales from hit frequency, individual hit size, reach, or defensive stability,
-- erases an Aspect's failure state,
-- duplicates a fixed Tier or Blood Art,
-- or makes one Aspect overwhelmingly correct for that family.
+The next question is the **Seal buildup model**.
 
-## Coverage checklist
+Before rewriting the five core slots, decide:
 
-The first roster pass should cover enough of the following without forcing one Technique per row:
+- whether Seal uses discrete stacks, a continuous meter, or another visible buildup model,
+- whether partial buildup already creates a minor effect,
+- what exactly happens at the completed threshold,
+- how completed Seal differs from simply having more partial buildup,
+- how Seal behaves on bosses and protected elites,
+- and how different core actions apply or interact with Seal without all becoming the same Technique.
 
-- Basic Attack pressure and sequence behavior,
-- Held Attack commitment and payoff,
-- Dash Attack / re-entry,
-- parry and Parry Counter payoff,
-- posture break and Deathblow payoff,
-- area damage / crowd handling,
-- controlled range or geometry changes,
-- slow / suppression / restraint equivalents,
-- delayed or repeated damage,
-- marks and later payoff,
-- posture pressure and guard breaking,
-- Health risk / recovery,
-- Spirit and Prosthetic synergy,
-- focused-family build deepening,
-- hybrid-family interactions,
-- boss usefulness,
-- mixed-encounter usefulness,
-- and rare high-impact Legendary behavior.
+Current concepts such as Sealing Cuts, Binding Draw, Warding Step, Counterseal, Passing Seal, Suppression, Tightening Bind, Constricting Script, and Sevenfold Seal are **design references only** until this rule is settled.
 
-## Entry templates
+# Ivory / blade circle — Redesign required
 
-### Slotted Technique
+The previous version relied on triggers such as perfect timing, uninterrupted sequences, precision dodges, and perfect parries.
 
-- **Stable ID:** `TECH-###`
-- **Name:**
-- **Status:** concept / candidate / approved / deferred / cut / implemented
-- **Combat slot:** Basic Attack / Held Attack / Dash / Parry-Counter / Deathblow
-- **Effect family:** internal family identifier
-- **Working rarity:**
-- **Core effect:**
-- **Skill / decision requirement:**
-- **Aspect audit:** Wolf / Wraith / Ronin
-- **Boss / crowd behavior:**
-- **Overlap check:**
-- **Refinement:** candidate or none
-- **Production notes:** UI / VFX / animation / audio
+Those are useful **activation conditions**, but they are not enough to define a scalable parent family.
 
-### Supporting Technique
+The family needs a concrete recurring effect that can be generated, recognized, strengthened, and used across multiple combat slots. The previous core and supporting concepts are therefore deferred rather than treated as current candidates.
 
-- **Stable ID:** `TECH-S###`
-- **Name:**
-- **Status:**
-- **Effect family or cross-family requirement:**
-- **Working rarity:**
-- **Prerequisite when present:**
-- **Support effect:**
-- **Why it is worth a reward choice:**
-- **Aspect / encounter audit:**
-- **Production notes:**
+# Crimson / split blood drop — Redesign required
 
-### Legendary / capstone candidate
+The previous version relied on recent damage, Health sacrifice, retaliation, and Health reclamation.
 
-- **Stable ID:** `TECH-L###`
-- **Name:**
-- **Family or neutral:**
-- **Eligibility requirement:** provisional until roster review
-- **Effect:**
-- **Why it changes the run:**
-- **Why it does not replace the Aspect:**
-- **Production cost:**
+Those can remain useful mechanics elsewhere, but by themselves they do not create a sufficiently scalable parent-family effect.
 
-## Current roster-design sequence
+The family needs a concrete recurring effect that can be generated and upgraded across multiple combat slots without becoming merely the healing / sacrifice category. The previous core and supporting concepts are deferred rather than treated as current candidates.
 
-1. Define the first set of broad effect families.
-2. Test each family across all five combat slots.
-3. Draft the strongest slotted Technique concepts.
-4. Add supporting Techniques that deepen focused and hybrid builds.
-5. Identify refinements and rare replacements.
-6. Identify Legendary / capstone candidates and sensible prerequisites.
-7. Audit the whole roster across Wolf, Wraith, Ronin, bosses, groups, and realistic trigger frequency.
-8. Only then lock launch count, family representation, reward frequency, rarity distribution, and production scope.
+# Refinements — deferred
 
-## Deferred until roster review
+The previous refinement draft is intentionally not part of the active roster while the base Techniques are changing.
 
-Do not lock yet:
+The locked system rule remains:
 
-- exact number of effect families,
-- final family names or player-facing presentation,
-- total launch Technique count,
-- supporting-Technique count,
-- exact rarity totals or probabilities,
-- Legendary prerequisite thresholds,
-- replacement frequency,
-- exact refinement coverage,
-- family offer weighting,
-- Prosthetic Technique structure under the new slot model,
-- final Relic count / rarity distribution,
-- consumable inclusion,
-- or numerical combat values.
+- at most one refinement per eligible slotted Technique,
+- a refinement is a small buff to the existing Technique,
+- it is not counted or designed as another Technique.
+
+Refinement concepts should be recreated only after the five-by-five core matrix is stable.
+
+# Cross-family Techniques — deferred
+
+The previous cross-family draft is intentionally set aside.
+
+Cross-family Techniques should be designed only after each individual family has a stable scalable mechanic. Otherwise the hybrid effects are built on mechanics that may no longer exist.
+
+# Legendary Techniques — partially deferred
+
+Earlier Legendary ideas may be retained as inspiration, but final Legendary design and eligibility are deferred until the core families are stable.
+
+No Legendary prerequisite threshold is currently locked.
+
+# Current roster-design sequence
+
+1. Lock the Rupture family rule at qualitative gameplay depth.
+2. Define the Seal buildup / completion rule.
+3. Design a scalable recurring mechanic for the ivory family.
+4. Design a scalable recurring mechanic for the crimson family.
+5. Revisit the pale-silver Dash and other weak core-slot concepts.
+6. Rebuild and approve the full five-by-five slotted Technique matrix.
+7. Then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements.
+8. Audit the completed roster across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, and AoE limits.
+9. Only then lock total launch count, rarity distribution, reward frequency, eligibility, and production scope.
+
+## Deferred implementation and balance work
+
+Do not lock exact damage, posture values, Rupture buildup amounts, meter decay timings, AoE radii, hit reactions, rarity probabilities, offer weights, replacement rates, or final UI colors / symbols until prototyping and roster review require them.
