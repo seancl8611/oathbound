@@ -11,6 +11,7 @@ topics:
   - combat-slots
   - effect-families
   - rupture
+  - seals
   - supporting-techniques
   - refinements
   - rarity
@@ -48,8 +49,8 @@ The families do not need formal player-facing names. The current working UI iden
 | Working identifier | Intended recurring mechanic | Current state |
 |---|---|---|
 | Pale silver / twin slash | Echoes: delayed additional slashes created by qualifying actions | Strong direction; core concepts need a few rewrites |
-| Gold / cracked crest | Rupture: buildup toward a large posture-breaking proc, with more AoE emphasis than most families | Rupture rule now has a working definition |
-| Violet / binding knot | Seals: buildup and control / suppression | Promising, but seal buildup behavior must be defined before the core set is rewritten |
+| Gold / cracked crest | Rupture: buildup toward a large posture-breaking proc, with more AoE emphasis than most families | Core mechanic defined |
+| Violet / binding knot | Seal stacks: visible marks that progressively restrict enemy movement and complete into a brief Bind | Core mechanic defined |
 | Ivory / blade circle | Undecided scalable mechanic; previous precision-only trigger family is insufficient | Redesign required |
 | Crimson / split blood drop | Undecided scalable mechanic; previous damage / sacrifice / recovery trigger family is insufficient | Redesign required |
 
@@ -72,7 +73,7 @@ This distinction matters because supporting upgrades can later modify echoes con
 | Basic Attack | Lingering Cut | Keep. Basic hits create a delayed echo slash on the target. |
 | Held Attack | Second Draw | Keep. A landed Held Attack creates a delayed echo along the same authored attack line. |
 | Dash | Passing Shadow | Redesign. Do not simply repeat the Dash Attack or make Akio act twice; the result should create an echo in a way that scales with the family mechanic. |
-| Parry / Counter | Remembered Reversal | Keep concept, rewrite wording. A successful Counter creates a delayed **echo slash** based on the Counter rather than implying Akio performs the Counter again. |
+| Parry / Counter | Remembered Reversal | Keep concept, rewrite wording. A successful Counter creates a delayed echo slash based on the Counter rather than implying Akio performs the Counter again. |
 | Deathblow | Final Memory | Keep. Deathblow produces several delayed echo slashes around the executed target. |
 
 ### Current supporting notes
@@ -84,7 +85,7 @@ This distinction matters because supporting upgrades can later modify echoes con
 
 # Gold / cracked crest — Rupture family
 
-## Rupture rule — working draft
+## Rupture rule
 
 The previous **Fracture** terminology is removed.
 
@@ -129,20 +130,51 @@ Not every Gold Technique must add Rupture buildup. A Gold Technique may instead 
 
 # Violet / binding knot — Seal family
 
-The central idea remains enemy sealing, restraint, slowing, suppression, and posture-recovery control.
+## Seal rule
 
-The next question is the **Seal buildup model**.
+Violet Techniques apply visible **Seal stacks** rather than filling a continuous meter.
 
-Before rewriting the five core slots, decide:
+The stack pattern is both the mechanic and the enemy-facing visual:
 
-- whether Seal uses discrete stacks, a continuous meter, or another visible buildup model,
-- whether partial buildup already creates a minor effect,
-- what exactly happens at the completed threshold,
-- how completed Seal differs from simply having more partial buildup,
-- how Seal behaves on bosses and protected elites,
-- and how different core actions apply or interact with Seal without all becoming the same Technique.
+- **1 Seal:** one violet mark appears on the enemy and causes a minor movement-speed reduction.
+- **2 Seals:** a second mark appears, the marks begin connecting, movement is reduced more strongly, and qualifying movement abilities such as lunges, leaps, teleports, or retreats are restricted where applicable.
+- **3 Seals:** the pattern completes and the enemy becomes **Bound** for a short time.
 
-Current concepts such as Sealing Cuts, Binding Draw, Warding Step, Counterseal, Passing Seal, Suppression, Tightening Bind, Constricting Script, and Sevenfold Seal are **design references only** until this rule is settled.
+A Bound enemy is rooted in place but can still perform attacks that are valid from its current position. The Bind is control, not a stun. When the Bind ends, the Seal stacks are cleared and must be built again.
+
+Exact slow values, Bind duration, stack duration / expiry, and protected-enemy exceptions remain tuning work. Bosses and protected elites must not have authored encounter mechanics invalidated by Seal; exact resistance behavior will be defined during enemy-system integration.
+
+## Visual treatment
+
+Seal should be readable directly on the enemy without a separate buildup meter:
+
+1. first violet mark appears,
+2. second mark appears and a faint line or binding pattern connects them,
+3. third mark completes the pattern,
+4. the completed pattern visibly tightens or closes while the target is Bound,
+5. the pattern breaks or fades when Bind ends and stacks reset.
+
+Color cannot be the only identifier; the count and changing seal shape must remain readable.
+
+## Current core-slot direction
+
+| Slot | Working Technique | Current direction |
+|---|---|---|
+| Basic Attack | Sealing Cuts | Repeated Basic contact applies Seal stacks at an appropriate normalized rate. |
+| Held Attack | Binding Draw | A landed Held Attack applies multiple Seal stacks at once rather than using a separate instant-Seal rule. |
+| Dash | Warding Step | Dash Attack leaves a short-lived seal mark on the ground; an enemy crossing it gains a Seal stack. |
+| Parry / Counter | Counterseal | Landing the Counter applies multiple Seal stacks to the attacker. |
+| Deathblow | Passing Seal | Deathblowing an enemy transfers or distributes its remaining Seal value into nearby surviving enemies. Exact distribution remains to be designed. |
+
+These are working slot directions, not yet the final five approved Technique implementations.
+
+### Family boundary
+
+Violet is primarily about **restricting enemy movement and positioning**.
+
+It should not become another posture family. Seal does not inherently damage posture, stop posture recovery, or trigger a posture burst. Those functions belong elsewhere unless a later specific cross-family Technique intentionally connects them.
+
+Supporting, Legendary, and refinement ideas for Violet remain deferred until the core five-slot implementation is stable.
 
 # Ivory / blade circle — Redesign required
 
@@ -186,16 +218,15 @@ No Legendary prerequisite threshold is currently locked.
 
 # Current roster-design sequence
 
-1. Lock the Rupture family rule at qualitative gameplay depth.
-2. Define the Seal buildup / completion rule.
-3. Design a scalable recurring mechanic for the ivory family.
-4. Design a scalable recurring mechanic for the crimson family.
-5. Revisit the pale-silver Dash and other weak core-slot concepts.
-6. Rebuild and approve the full five-by-five slotted Technique matrix.
-7. Then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements.
-8. Audit the completed roster across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, and AoE limits.
-9. Only then lock total launch count, rarity distribution, reward frequency, eligibility, and production scope.
+1. Design a scalable recurring mechanic for the ivory family.
+2. Design a scalable recurring mechanic for the crimson family.
+3. Revisit the pale-silver Dash and other weak core-slot concepts.
+4. Revisit weak Gold and Violet core-slot concepts around their now-defined family mechanics.
+5. Rebuild and approve the full five-by-five slotted Technique matrix.
+6. Then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements.
+7. Audit the completed roster across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, and AoE / control limits.
+8. Only then lock total launch count, rarity distribution, reward frequency, eligibility, and production scope.
 
 ## Deferred implementation and balance work
 
-Do not lock exact damage, posture values, Rupture buildup amounts, meter decay timings, AoE radii, hit reactions, rarity probabilities, offer weights, replacement rates, or final UI colors / symbols until prototyping and roster review require them.
+Do not lock exact damage, posture values, Rupture buildup amounts, meter decay timings, Seal slow values, Seal durations, protected-enemy control resistance, AoE radii, hit reactions, rarity probabilities, offer weights, replacement rates, or final UI colors / symbols until prototyping and roster review require them.
