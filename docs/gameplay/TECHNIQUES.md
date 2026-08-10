@@ -85,7 +85,13 @@ The player should primarily distinguish families through a consistent **symbol, 
 
 A valid family must have one clear scalable gameplay identity that can meaningfully affect several of the five combat slots. The family should not merely be a collection of unrelated triggers such as "perfect timing" or "lose Health."
 
-Current family development is intentionally focused on defining those scalable mechanics before rebuilding supporting, cross-family, Legendary, or refinement content.
+Current defined family mechanics include:
+
+- **Pale silver / twin slash:** echoes are delayed additional sword slashes created by qualifying actions.
+- **Gold / cracked crest:** Rupture buildup fills a visible enemy meter; a full meter triggers the Rupture posture-impact proc and resets.
+- **Violet / binding knot:** discrete Seal stacks progressively restrict movement; three Seals complete the pattern and briefly Bind the enemy in place without stunning it.
+
+The Ivory and Crimson scalable mechanics remain open. Supporting, cross-family, Legendary, and refinement content stays deferred until the core family mechanics and five-by-five direct matrix are stable.
 
 ## Rarity
 
@@ -135,7 +141,7 @@ Source and encounter value may later influence rarity or quality weighting, but 
 
 Techniques should visibly alter Akio's existing sword actions rather than add unrelated spell buttons.
 
-Strong effects may include delayed slashes, repeated echoes, buildup meters, posture ruptures, seals, suppression, controlled AoE, altered attack geometry, precise counter payoffs, and other effects earned through sword actions.
+Strong effects may include delayed slashes, repeated echoes, buildup meters, posture ruptures, visible seal stacks, movement binding, controlled AoE, altered attack geometry, precise counter payoffs, and other effects earned through sword actions.
 
 Avoid making the roster primarily generic fire, frost, lightning, poison, or autonomous magic. Familiar gameplay functions are valid when expressed through Oathbound's combat language.
 
@@ -147,6 +153,7 @@ Avoid making the roster primarily generic fire, frost, lightning, poison, or aut
 - Do not make Wolf's pursuit, Wraith's reach/control, or Ronin's impact/stability universally available through ordinary Techniques.
 - High-frequency triggers must be normalized so Wolf does not gain accidental proc dominance.
 - Large single-action effects must be checked against Ronin, and reach/line effects against Wraith.
+- Seal-based movement restriction must not invalidate protected boss movement or authored encounter mechanics.
 - Mandatory encounters cannot assume a specific Technique family, Legendary, Aspect Tier, or Blood Art.
 
 ## Prosthetic boundary
@@ -165,9 +172,11 @@ Permanent progression may unlock additional Techniques into future reward pools 
 
 The active Technique task is now:
 
-1. finish the scalable mechanic for each of the five core effect families,
-2. rebuild the five-by-five slotted Technique matrix around those mechanics,
-3. only then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements,
-4. then determine launch count, rarity distribution, eligibility, reward frequency, and production requirements.
+1. define the scalable Ivory mechanic,
+2. define the scalable Crimson mechanic,
+3. revisit weak core-slot concepts across the now-defined Echo, Rupture, and Seal families,
+4. approve the five-by-five slotted Technique matrix,
+5. only then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements,
+6. then determine launch count, rarity distribution, eligibility, reward frequency, and production requirements.
 
 Exact numerical values, rarity probabilities, offer weights, replacement frequency, family weighting, and final UI identifiers remain later design and playtest work.
