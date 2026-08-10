@@ -25,7 +25,7 @@ This file contains only unresolved decisions that materially affect launch scope
 - All Technique rewards use the same underlying reward screen regardless of whether the source is a combat room, shop, treasure, miniboss, regional boss, or another approved source.
 - Prosthetic Techniques are removed. Prosthetic progression is persistent and belongs to the Forge.
 - Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, or Legendary.
-- Exact damage, timing, hitboxes, buildup rates, decay rates, rarity weights, and VFX timing remain prototype and implementation work.
+- Exact damage, timing, hitboxes, buildup rates, durations, rarity weights, and VFX timing remain prototype and implementation work.
 
 ## Current family-design state
 
@@ -34,12 +34,12 @@ The earlier broad Technique draft is no longer treated as the current launch ros
 Current state:
 
 - **Pale silver / twin slash:** Echo mechanic is a strong direction. Echoes are delayed additional slashes; some core-slot concepts still need rewriting so the scalable mechanic is the echo itself rather than simply repeating Akio's action.
-- **Gold / cracked crest:** Rupture mechanic has a working qualitative rule.
-- **Violet / binding knot:** Seal family is promising, but the buildup / completion model is unresolved.
+- **Gold / cracked crest:** Rupture mechanic is defined at qualitative gameplay depth.
+- **Violet / binding knot:** Seal-stack mechanic is defined at qualitative gameplay depth.
 - **Ivory / blade circle:** redesign required; precision triggers alone are not a scalable parent-family mechanic.
 - **Crimson / split blood drop:** redesign required; Health loss / sacrifice / recovery triggers alone are not a scalable parent-family mechanic.
 
-### Rupture rule now established at working-design depth
+### Rupture rule
 
 - Gold effects may add **Rupture buildup** to a visible enemy meter.
 - The old **Fracture** terminology is removed.
@@ -47,7 +47,17 @@ Current state:
 - Filling the meter immediately triggers **Rupture** and resets the meter.
 - Rupture deals a large burst of posture damage, creates a strong hit reaction where allowed, and sends a smaller posture shockwave into nearby enemies.
 - Not every Gold Technique must add Rupture buildup; direct posture, guard-breaking, impact, and bounded AoE effects can still belong to the family.
-- Exact buildup amounts, decay timing, AoE radius, and boss reaction strength remain tuning work.
+
+### Seal rule
+
+- Violet uses discrete visible **Seal stacks**, not a buildup meter.
+- One Seal causes a minor movement-speed reduction.
+- Two Seals cause a stronger movement reduction and restrict qualifying movement abilities such as lunges, leaps, teleports, or retreats where applicable.
+- Three Seals complete the pattern and briefly **Bind** the enemy in place.
+- Bind is not a stun: the enemy may still perform attacks that are valid from its current position.
+- When Bind ends, the Seal stacks clear and must be built again.
+- Seal does not inherently damage posture, stop posture recovery, or trigger a posture burst.
+- Exact slow values, durations, stack expiry, and boss / protected-enemy resistance remain tuning and enemy-integration work.
 
 ## Priority order
 
@@ -63,20 +73,19 @@ Current state:
 
 **This is the current active design area.**
 
-The immediate next question is the **Violet Seal model**:
+The immediate next question is the **Ivory family**:
 
-- Does Seal use discrete stacks, a continuous meter, or another buildup representation?
-- Does partial buildup already produce a minor effect?
-- What happens when Seal reaches completion?
-- How does completed Seal behave on normal enemies, elites, and bosses?
-- How can Basic, Held, Dash, Parry / Counter, and Deathblow interact with Seal without becoming five copies of the same mechanic?
+- What concrete recurring effect does the family create?
+- How can precision, timing, clean sequences, dodges, and parries generate or interact with that effect without being the effect themselves?
+- How does the effect scale across Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow?
+- How is the effect visibly readable and upgradeable?
+- How does it remain distinct from Echo, Rupture, Seal, and the locked Aspect identities?
 
-After Seal is coherent:
+After Ivory is coherent:
 
-1. define a scalable recurring mechanic for the ivory family,
-2. define a scalable recurring mechanic for the crimson family,
-3. revisit weak pale-silver and gold core-slot concepts,
-4. approve the full five-by-five slotted Technique matrix.
+1. define the scalable recurring mechanic for Crimson,
+2. revisit weak Pale Silver, Gold, and Violet core-slot concepts,
+3. approve the full five-by-five slotted Technique matrix.
 
 Do not rebuild cross-family Techniques or refinements before this core pass is complete.
 
@@ -122,4 +131,4 @@ Define repeat Heart-route access, repeat-clear rewards, launch completion goals,
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup, Seal buildup, guard pressure, stagger, reach, movement, recovery, Blood values, room probabilities, prices, rarity weights, replacement rates, permanent-upgrade percentages, and final VFX / animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup, Rupture decay, Seal slow values, Seal duration / expiry, protected-enemy Seal resistance, guard pressure, stagger, reach, movement, recovery, Blood values, room probabilities, prices, rarity weights, replacement rates, permanent-upgrade percentages, and final VFX / animation timing.
