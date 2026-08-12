@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-12
 ---
 
 # Production Roadmap
@@ -57,7 +57,7 @@ Ronin production needs include distinct Tier 0 heavy actions, strong guard/postu
 
 Ronin's repeated posture growth should reuse the normal player-posture HUD and capacity language rather than create a separate buff icon or VFX state.
 
-Final unique Technique icons and bespoke Technique effects depend on the launch run-build catalog.
+The five Technique family mechanics—Echo, Rupture, Seal, Rift, and Burst—are defined at qualitative core-rule depth. Final unique Technique icons and bespoke Technique effects depend on approval of the direct five-by-five matrix and the later launch catalog layers.
 
 ## Milestone 5 — Complete Area 2
 
@@ -100,4 +100,4 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 ## Current pre-production dependency
 
-Scope the launch run-build content catalog, then proceed through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
+Finish and approve the five-by-five direct Technique matrix first. Then rebuild the later Technique layers and continue through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
