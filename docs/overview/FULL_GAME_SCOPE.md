@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-12
 topics:
   - full-scope
   - techniques
@@ -83,19 +83,19 @@ All three packages are locked at current qualitative paper-design depth. Final a
 
 ## Technique scope boundary
 
-Technique design uses a small set of broad internal effect families that can meaningfully affect several of the five core combat slots.
+Technique design uses five broad internal effect families that can meaningfully affect the five core combat slots. The families do not need formal player-facing names; recognition should rely on symbols, color treatment, effect behavior, VFX, and audio language.
 
-The families do not need formal player-facing names. Final recognition should rely on symbols, color treatment, effect behavior, VFX, and audio language.
+All five family mechanics are defined at qualitative core-rule depth:
 
-Each family needs one scalable gameplay mechanic. The current working state is:
+- **Pale silver / twin slash — Echo:** delayed additional sword slashes created by qualifying actions.
+- **Gold / cracked crest — Rupture:** buildup fills a visible enemy meter; completion triggers a large posture-impact proc and bounded nearby posture pressure.
+- **Violet / binding knot — Seal:** discrete visible marks progressively restrict movement; three complete the pattern and briefly Bind the target without stunning it.
+- **Ivory / blade circle — Rift:** one visible fracture mark automatically opens after a short fuse for direct Health damage; further qualifying applications intensify the same mark before it opens.
+- **Crimson / split blood drop — Burst:** immediate heavy direct AoE centered on a Burst-ready struck target; the target then recharges, accelerated by continued close-range sword pressure.
 
-- pale-silver echo family: strong direction,
-- gold Rupture family: working qualitative rule established,
-- violet Seal family: buildup/completion rule next to define,
-- ivory family: scalable mechanic redesign required,
-- crimson family: scalable mechanic redesign required.
+The families are not required to use identical buildup structures or power curves. Rift and Burst may provide stronger first-pick value while remaining viable with further investment.
 
-Supporting, cross-family, Legendary, and refinement concepts should be rebuilt only after this core pass is stable.
+The direct five-by-five Technique matrix is the active roster-design task. Supporting, cross-family, Legendary, and refinement concepts should be rebuilt only after that matrix is stable.
 
 ## Optional investment outcomes
 
@@ -170,7 +170,7 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Current open production scope
 
-1. Finish the five core Technique-family mechanics and direct roster.
+1. Finish and approve the five-by-five direct Technique matrix.
 2. Rebuild later Technique layers and finish Relic / consumable run-build scope.
 3. Define permanent Prosthetic / Forge progression depth.
 4. Persistent progression, onboarding, and trial package.
@@ -179,6 +179,6 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, Burst damage/radius/recharge, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system is not part of the game.
