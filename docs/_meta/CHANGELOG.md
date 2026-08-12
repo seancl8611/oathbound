@@ -4,10 +4,26 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-11
 ---
 
 # Documentation Changelog
+
+## 2026-08-11 — Rift and Crimson Burst family lock
+
+- Locked the Ivory / blade-circle family around **Rift**.
+- Defined Rift as one visible ivory fracture-line on the enemy that automatically opens after a short fuse for direct Health damage.
+- Further qualifying Rift applications intensify the same visible mark rather than adding exposed stacks; the fracture spreads and becomes more prominent as its eventual burst grows stronger.
+- Positioned Rift as a **strong-upfront, moderate-scaling** family: one pickup is immediately useful, while deeper investment remains viable without requiring the highest synergy ceiling.
+- Locked the Crimson / split-blood-drop family around **Burst**.
+- Defined Burst as immediate heavy direct AoE damage centered on a struck Burst-ready target, damaging both the primary target and nearby enemies.
+- Added a short per-target Burst recharge and made continued close-range direct sword pressure accelerate that recovery, giving Crimson a close-quarters aggression identity.
+- Prohibited Burst damage from recursively triggering additional Bursts and kept pack-wide cascade behavior bounded.
+- Kept persistent crimson damage zones out of the base family rule; they may be explored later through supporting or higher-rarity Techniques.
+- Defined working Burst visual language around a readable split-blood-drop ready / recharge cue and a compact radial crimson blast.
+- Explicitly allowed the five Technique families to use different buildup structures and different early / late power curves rather than forcing all families into stack-based scaling.
+- Marked all five family cores as defined at qualitative gameplay depth: Echo, Rupture, Seal, Rift, and Burst.
+- Advanced the active Technique task to designing and approving the full five-by-five direct combat-slot matrix.
 
 ## 2026-08-09 — Core Technique-family mechanics pass
 
