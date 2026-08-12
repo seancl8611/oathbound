@@ -4,7 +4,7 @@ title: Technique Rewards and Build Management
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-12
 topics:
   - techniques
   - reward-screen
@@ -52,7 +52,7 @@ Each card should communicate:
 - relevant prerequisite or existing-family interaction,
 - refinement or replacement state when relevant.
 
-The five effect families do not need formal player-facing names. Recognition should later use symbol, color treatment, effect behavior, and VFX / audio language. Color cannot be the only identifier.
+The five effect families do not need formal player-facing names. The current family mechanics are Echo, Rupture, Seal, Rift, and Burst; recognition should later use symbol, color treatment, effect behavior, and VFX / audio language. Color cannot be the only identifier.
 
 ## Empty combat slot
 
@@ -79,7 +79,7 @@ Supporting Techniques consume no combat slot.
 
 The reward screen should show which owned family effect or interaction they deepen and why the choice is currently useful.
 
-Supporting concepts are currently deferred until the five core family mechanics are stable, but the interface must continue supporting them later.
+Supporting concepts remain deferred until the direct five-by-five Technique matrix is stable, but the interface must continue supporting them later.
 
 ## Refinements
 
@@ -98,7 +98,7 @@ A refinement should read as a **small improvement to the same Technique**, not a
 
 When a higher-rarity Technique uses prerequisites, eligibility and requirements must be understandable without exposing unnecessary hidden-generation math.
 
-Exact Legendary eligibility remains deferred until the core family roster is stable.
+Exact Legendary eligibility remains deferred until the direct core roster is stable.
 
 ## Decline and rerolls
 
@@ -122,7 +122,7 @@ Rest and pause interfaces may provide build review, but filled combat slots are 
 
 Technique rewards should feel like temporary martial knowledge rather than modern collectible cards floating without context.
 
-Use readable combat-slot identifiers and strong visual family recognition, while keeping exact family colors, symbols, layout, and card art provisional until the mechanics are stable.
+Use readable combat-slot identifiers and strong visual family recognition. Exact family colors, symbols, layout, and card art remain provisional even though the five family mechanics are defined.
 
 ## Accessibility and clarity
 
