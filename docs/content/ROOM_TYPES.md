@@ -4,7 +4,7 @@ title: Cross-Area Room Types
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-08-12
 topics:
   - rooms
   - combat-room
@@ -48,7 +48,7 @@ Exact room counts, route topology, branch frequency, miniboss frequency, and aut
 
 **Function:** standard enemy encounter drawn from the current area's roster.
 
-**Reward behavior:** one previewed primary reward after completion. Eligible categories include Technique opportunity, Gold, Mist, Scrolls, recovery, temporary capacity, or another approved standard-combat payout.
+**Reward behavior:** one previewed primary reward after completion. Eligible categories include a Technique reward, Gold, Mist, Scrolls, recovery, temporary capacity, or another approved standard-combat payout.
 
 **Shared read:** moderately sized open footprint, clear central sightlines, minimal combat clutter, and modular area-specific dressing around the perimeter. A route marker or entrance treatment communicates the primary payout without making the space look like a modern loot chamber.
 
@@ -74,13 +74,13 @@ Exact room counts, route topology, branch frequency, miniboss frequency, and aut
 - **Yomori:** moss-eaten forest Shrine with roots and spirit light.
 - **Kagutsuchi:** immaculate court Shrine with gilded trim and blossom offerings.
 
-**Production rules:** the central object must be visible from the entrance. Use warm ritual light, restrained incense or mineral pulse, calmer audio, and no active threat language. The interface shows equipped Aspect, Tier, Corruption, Resist result, and next Embrace benefit and drawback. Its visual language remains distinct from Technique-card rewards.
+**Production rules:** the central object must be visible from the entrance. Use warm ritual light, restrained incense or mineral pulse, calmer audio, and no active threat language. The interface shows equipped Aspect, Tier, Corruption, and the approved Resist / next-Embrace information. Its visual language remains distinct from Technique rewards.
 
 ## Rest Room
 
-**Function:** recovery, Spirit restoration, reserve swapping, and short narrative breathing room between pressure sequences.
+**Function:** Health and Spirit recovery, read-only build review, and short narrative breathing room between pressure sequences.
 
-**Reward behavior:** restore approved Health and Spirit values and permit exchange between the four active Techniques and one reserve. Rest rooms do not generate new Techniques or recover discarded ones.
+**Reward behavior:** restore approved Health and Spirit values. Rest rooms do not generate new Techniques, recover discarded Techniques, or permit routine swapping between filled combat slots.
 
 **Shared read:** enclosed or sheltered space with one bright inviting rest focal point and softer composition than neighboring combat spaces.
 
@@ -90,13 +90,13 @@ Exact room counts, route topology, branch frequency, miniboss frequency, and aut
 - **Yomori:** root-sheltered hollow or Shrine-adjacent clearing.
 - **Kagutsuchi:** quiet lacquered chamber with floor cushions and a small lantern.
 
-**Production rules:** gentle warmth, low particulate motion, and no threat cues. Rest rooms should be recognizable immediately. Build management is compact and does not present a full Technique inventory.
+**Production rules:** gentle warmth, low particulate motion, and no threat cues. Rest rooms should be recognizable immediately. Build review is compact and read-only rather than a Technique inventory or respec screen.
 
 ## Shop Room
 
 **Function:** mid-run merchant offering limited run-scoped goods for Gold.
 
-**Reward behavior:** stock may include healing, Spirit, temporary capacity, approved consumables, rerolls, Techniques, active-Technique refinements, eligible Prosthetic Techniques, prosthetic support, and occasional run-scoped Relics.
+**Reward behavior:** stock may include healing, Spirit, temporary capacity, approved consumables, rerolls, **Technique rewards**, and occasional run-scoped Relics. Purchasing a Technique reward opens the same universal Technique reward screen used by other approved sources.
 
 **Shared read:** compact safe space with merchant figure, merchandise spread, and lantern-warm purchase focal point. It inherits the Strand Merchant Stall's internal layout language in a smaller temporary form.
 
@@ -106,15 +106,15 @@ Exact room counts, route topology, branch frequency, miniboss frequency, and aut
 - **Yomori:** traveling altar or moss-bed display.
 - **Kagutsuchi:** refined courtier display table in a lacquered alcove.
 
-**Production rules:** merchant and merchandise dominate the center. Enemies do not spawn here. It is a purchase-decision space, not an exploration room. Technique stock clearly distinguishes a new Technique from a refinement.
+**Production rules:** merchant and merchandise dominate the center. Enemies do not spawn here. It is a purchase-decision space, not an exploration room. Technique purchases use the normal reward-card language rather than a shop-specific refinement or Prosthetic-Technique interface.
 
 ## Treasure and Miniboss Rooms
 
 **Function:** risk/reward spaces culminating in a clearly presented high-value payout.
 
-**Treasure behavior:** may provide a Relic, rare Technique, guaranteed refinement, large currency bundle, major temporary capacity increase, approved rare consumable, or another previewed high-value reward.
+**Treasure behavior:** may provide a Technique reward, Relic choice, large currency bundle, major temporary capacity increase, approved rare consumable, or another previewed high-value reward.
 
-**Miniboss behavior:** victory guarantees meaningful build development such as a higher-rarity Technique, active-Technique refinement, run-scoped Relic, or special regional reward. A miniboss may also grant modest persistent currency. It should not award only ordinary Gold or healing.
+**Miniboss behavior:** victory guarantees meaningful build development such as a Technique reward, run-scoped Relic, special regional reward, or modest persistent currency in addition to the main payout. It should not award only ordinary Gold or healing. A miniboss Technique reward may later receive better rarity or quality weighting, but it still uses the universal Technique reward screen.
 
 **Shared read:** larger and more dramatic than a standard combat room, with landmark framing, deliberate arena footprint, and an unmistakable reward object revealed before or after victory.
 
@@ -124,7 +124,7 @@ Exact room counts, route topology, branch frequency, miniboss frequency, and aut
 - **Yomori:** root-choked arena, corrupted Shrine circle, or old hunting ground.
 - **Kagutsuchi:** lacquered terrace, blossom courtyard, or ceremonial approach.
 
-**Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard combat reward.
+**Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard combat reward without implying a separate Technique subtype interface.
 
 ## Boss Room
 
