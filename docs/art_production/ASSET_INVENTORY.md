@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-12
 topics:
   - asset-counts
   - characters
@@ -40,10 +40,10 @@ This file records high-level production groups and known counts. Detailed states
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
 | Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
 | Prosthetic families | 8 | One family per tool |
-| Technique loadout UI | 4 active + 1 reserve | Catalog count remains open |
+| Technique direct-slot UI | 5 slots | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow; supporting Techniques are slotless |
 | Relic capacity | 1 | Catalog count remains open |
 | Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
-| Relic rarity tiers | 4 | Common, Uncommon, Rare, Legendary |
+| Relic rarity tiers | Provisional 3 | Common, Rare, Legendary working sketch |
 
 ## Player and run-build art
 
@@ -54,7 +54,7 @@ This file records high-level production groups and known counts. Detailed states
 - Blood resource and Blood Art states after Tier II.
 - Shared defense, execution, input, and enemy-response language.
 - Eight Prosthetic icons/VFX families.
-- Technique card, rarity, category, slot, reserve, refinement, replacement, warning, decline, reroll, comparison, and post-fill offer states.
+- Technique card, rarity, family, direct-slot, supporting, refinement, replacement, warning, decline, reroll, comparison, and post-fill offer states.
 - Relic card/icon/rarity family.
 
 Additional Aspect families are outside launch scope.
@@ -115,7 +115,7 @@ Required families include:
 - Wolf Feral Momentum/Fanged Guard/Blood Hunt feedback where needed.
 - Wraith Spectral Edge, Wraith's Reach, Spectral Passage, extended deathblow, and Veilstride feedback where needed.
 - Ronin posture-capacity changes through existing posture HUD, Falling Mountain, Measured/Perfect Weight, and Shattering Wake feedback where needed.
-- Technique slots/reserve/rarity/refinement/replacement/comparison states.
+- Five direct Technique slots plus supporting/rarity/refinement/replacement/comparison states.
 - Pause/build overview.
 - Enemy/boss Health and posture.
 - Deathblow prompts.
@@ -127,9 +127,9 @@ Required families include:
 
 Core shared VFX include Parry Spark, Hit Spark, Deathblow Cue, Sword Trail, Posture Break Cue, Corruption Full, Embrace, Resist, and Tier IV Stabilize where needed.
 
-Aspect VFX follow `ASPECT_VFX.md`; Prosthetic VFX follow `PROSTHETIC_VFX.md`.
+Aspect VFX follow `ASPECT_VFX.md`; Prosthetic VFX follow `PROSTHETIC_VFX.md`; Technique-family presentation follows `TECHNIQUE_VFX.md`.
 
-Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, and formal drawback-badge assets remain excluded.
+Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique UI, and formal drawback-badge assets remain excluded.
 
 ## Item and reward art
 
@@ -151,5 +151,5 @@ Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-stat
 - Reuse existing attack, deathblow, movement, and HUD families when a Tier modifies existing actions.
 - No duplicate Aspect-specific Blood Art upgrade tree is included.
 - Do not preserve assets for superseded mechanics.
-- Final Technique, Relic, Prosthetic-Technique, and consumable counts depend on the launch run-build catalog.
+- Final Technique, Relic, and consumable counts depend on the launch run-build catalog; Prosthetic progression is a separate persistent Forge package.
 - Additional Aspects, postgame modifiers, enemy variants, challenge systems, and route algorithms are outside initial inventory unless intentionally promoted.
