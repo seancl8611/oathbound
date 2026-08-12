@@ -4,7 +4,7 @@ title: Oathbound Terminology
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-12
 ---
 
 # Oathbound Terminology
@@ -30,12 +30,17 @@ last_reviewed: 2026-07-21
 | Corruption | Run-only pressure meter. Not a currency, morality score, or Technique resource. |
 | Resist | Shrine choice that stabilizes Corruption without advancing Tier. |
 | Embrace | Shrine choice that empties Corruption and advances the active Aspect by one Tier. |
-| Technique | Temporary in-run upgrade that modifies Akio's existing combat actions, resources, or equipped prosthetic. |
-| active Technique | One of four equipped Techniques currently affecting combat. |
-| reserve Technique | One inactive Technique available for controlled swapping at reward screens or rest rooms. |
-| refinement | One slotless upgrade to an active base Technique. Maximum one per Technique. |
-| Prosthetic Technique | Temporary Technique available only for the equipped prosthetic. Uses a normal active Technique slot. |
-| combat verb | Shared action or behavior used for natural synergy, such as parry, posture, deathblow, dash, flank, Prey, pursuit, or Spirit. |
+| Technique | Temporary in-run upgrade belonging to the five-slot sword-action build or its slotless supporting layer. |
+| slotted Technique | One direct Technique occupying exactly one of five combat slots: Basic Attack, Held Attack, Dash, Parry / Counter, or Deathblow. |
+| supporting Technique | Slotless run-only Technique that deepens a family mechanic or approved build interaction. It has no separate global inventory cap. |
+| refinement | One small slotless improvement to a specific slotted Technique. Maximum one refinement per eligible slotted Technique. |
+| replacement | Rare Technique offer that explicitly overwrites the current direct Technique in the same combat slot. |
+| Echo | Pale-silver family mechanic: delayed additional sword slashes created by qualifying actions. |
+| Rupture | Gold family mechanic: buildup fills an enemy meter; completion triggers a major posture-impact proc and bounded nearby posture pressure. Capitalize when naming the Technique mechanic. |
+| Seal | Violet family mechanic: discrete visible marks progressively restrict movement; three complete the pattern and briefly Bind the target. |
+| Rift | Ivory family mechanic: one visible fracture mark automatically opens after a short fuse for direct Health damage and can be intensified before opening. |
+| Burst | Crimson family mechanic: immediate direct AoE centered on a Burst-ready struck target; the target then recharges, accelerated by continued close-range sword pressure. |
+| combat verb | Shared action or behavior used for natural synergy, such as parry, posture, deathblow, dash, movement, close-range pressure, or Spirit. |
 | The Order | Akio's religious-military organization. The Shogun predates it. |
 | The Strand | Persistent shoreline hub and controlled barrier threshold. |
 | Bloodwell | Strand permanent-progression and reformation-presentation station. One word. It is not the source of Returning Blood. |
@@ -69,7 +74,7 @@ last_reviewed: 2026-07-21
 | Scroll / Scrolls | Persistent Forge-focused currency. |
 | Boss Emblem / Boss Emblems | Rare persistent boss-derived currency. |
 | Gold | Run-only shop currency. |
-| Common, Uncommon, Rare, Legendary | Current Relic rarity tiers. |
+| Common, Uncommon, Rare, Legendary | Current Technique rarity tiers. Relic rarity remains a separate provisional decision. |
 | posture | Lowercase in prose unless part of an official UI label. |
 | deathblow | One word; lowercase in prose unless used as an official UI label. |
 
@@ -84,6 +89,8 @@ last_reviewed: 2026-07-21
 - `Mist Shards` is deprecated unless intentionally restored as a separate denomination.
 - `Mistveil` is removed from current lore.
 - Use `Technique` instead of `boon` for ordinary run upgrades.
+- `active Technique`, `reserve Technique`, the four-active-plus-reserve loadout, and routine rest-room Technique swapping are superseded by the five direct combat slots plus slotless supporting Techniques.
+- `Prosthetic Technique` is removed from the run-build system; Prosthetic progression belongs to the persistent Forge package.
 - Storm, Frost, Ember, Hex, and Shadow are removed player stance-system names.
 - Frost and Hex are not baseline player status families.
 - Do not call Akio immune to Beast Blood.
