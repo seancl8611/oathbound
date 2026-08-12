@@ -4,7 +4,7 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-08-12
 ---
 
 # Source of Truth
@@ -74,7 +74,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Run HUD and combat feedback | `docs/ui_ux/HUD.md` |
 | Strand HUD and prompts | `docs/ui_ux/STRAND_HUD_AND_PROMPTS.md` |
 | Shrine interface | `docs/ui_ux/SHRINE_INTERFACE.md` |
-| Technique rewards and reserve interface | `docs/ui_ux/TECHNIQUE_REWARDS.md` |
+| Technique rewards and build-management interface | `docs/ui_ux/TECHNIQUE_REWARDS.md` |
 | Hub interfaces | `docs/ui_ux/HUB_INTERFACES.md` |
 | Blood Mirror and trials UI | `docs/ui_ux/BLOOD_MIRROR_TRIALS.md` |
 | Results and Strand return | `docs/ui_ux/RUN_RESULTS.md` |
