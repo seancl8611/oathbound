@@ -4,7 +4,7 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-12
 topics:
   - currencies
   - pickups
@@ -225,4 +225,4 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 
 ## Current production dependency
 
-The active run-build task is to finish the five core Technique-family mechanics and rebuild the direct five-by-five slotted roster. Supporting, cross-family, Legendary, refinement, rarity, and reward-frequency work should follow that core pass.
+The five core family mechanics are defined. The active run-build task is to finish and approve the direct five-by-five Technique matrix, then rebuild supporting, cross-family, Legendary, refinement, rarity, and reward-frequency work from that stable roster.
