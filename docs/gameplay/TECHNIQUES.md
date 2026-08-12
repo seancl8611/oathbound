@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-11
 topics:
   - techniques
   - run-builds
@@ -68,7 +68,7 @@ Supporting Techniques consume no combat slot and have no separate inventory cap.
 They may:
 
 - improve a family's shared scalable mechanic,
-- improve buildup, spread, payoff, duration, or reliability,
+- improve buildup, spread, payoff, duration, cooldown, area, or reliability,
 - connect two already-owned family effects,
 - create cross-family interactions,
 - or deepen another coherent run pattern.
@@ -83,9 +83,25 @@ Effect families are internal build structures, not necessarily player-facing nam
 
 The player should primarily distinguish families through a consistent **symbol, color treatment, effect behavior, VFX, and audio language**. Exact UI treatment remains future design work, and color cannot be the only identifier.
 
-A valid family must have one clear scalable gameplay identity that can meaningfully affect several of the five combat slots. The family should not merely be a collection of unrelated triggers such as "perfect timing" or "lose Health."
+A valid family must have one clear scalable gameplay identity that can meaningfully affect several of the five combat slots. Families do **not** need identical structures, buildup rules, or power curves. One family may use stacks, another a meter, another a delayed effect, and another an immediate damage effect. The requirement is that additional investment creates a recognizable path rather than a collection of unrelated triggers.
 
-Current family development is intentionally focused on defining those scalable mechanics before rebuilding supporting, cross-family, Legendary, or refinement content.
+Current defined family mechanics include:
+
+- **Pale silver / twin slash:** Echoes are delayed additional sword slashes created by qualifying actions.
+- **Gold / cracked crest:** Rupture buildup fills a visible enemy meter; a full meter triggers the Rupture posture-impact proc and resets.
+- **Violet / binding knot:** discrete Seal stacks progressively restrict movement; three Seals complete the pattern and briefly Bind the enemy in place without stunning it.
+- **Ivory / blade circle:** Rift creates one visible ivory fracture-line on an enemy. The Rift is guaranteed to open after a short delay for direct Health damage; additional qualifying Rift applications before it opens intensify the same visible mark and strengthen the eventual burst.
+- **Crimson / split blood drop:** Burst is an immediate, heavy close-range AoE blast centered on a struck enemy when that target is Burst-ready. The primary target and nearby enemies take direct damage. After triggering, that target briefly recharges; continued close-range sword pressure can accelerate that recharge.
+
+The five family mechanics are now defined at qualitative core-rule depth. Supporting, cross-family, Legendary, and refinement content stays deferred until the five-by-five direct matrix is stable.
+
+## Family power curves
+
+The five families are not required to scale identically.
+
+Rift and Burst are intentionally allowed to provide strong value from a first pickup with less setup than some buildup-oriented families. They must remain viable with further investment, but they do not need the same maximum synergy ceiling as every other family. Rupture, Seal, Echo, Rift, and Burst should each earn later investment through their own mechanic rather than through a standardized stack model.
+
+Exact early-, mid-, and late-run balance remains prototype and tuning work.
 
 ## Rarity
 
@@ -135,7 +151,7 @@ Source and encounter value may later influence rarity or quality weighting, but 
 
 Techniques should visibly alter Akio's existing sword actions rather than add unrelated spell buttons.
 
-Strong effects may include delayed slashes, repeated echoes, buildup meters, posture ruptures, seals, suppression, controlled AoE, altered attack geometry, precise counter payoffs, and other effects earned through sword actions.
+Strong effects may include delayed echo slashes, Rupture buildup and posture bursts, visible Seal patterns and movement binding, Rift marks that visibly spread before opening, cooldown-based close-range AoE Bursts, controlled altered attack geometry, precise counter payoffs, and other effects earned through sword actions.
 
 Avoid making the roster primarily generic fire, frost, lightning, poison, or autonomous magic. Familiar gameplay functions are valid when expressed through Oathbound's combat language.
 
@@ -147,6 +163,10 @@ Avoid making the roster primarily generic fire, frost, lightning, poison, or aut
 - Do not make Wolf's pursuit, Wraith's reach/control, or Ronin's impact/stability universally available through ordinary Techniques.
 - High-frequency triggers must be normalized so Wolf does not gain accidental proc dominance.
 - Large single-action effects must be checked against Ronin, and reach/line effects against Wraith.
+- Seal-based movement restriction must not invalidate protected boss movement or authored encounter mechanics.
+- Rift must remain one readable evolving target mark rather than another exposed stack counter. Rapid or multi-hit actions require normalized Rift application so they do not bypass the intended family pacing.
+- Burst must damage the primary target so it remains useful against bosses and isolated elites. Its AoE must be bounded, its recharge readable, and Burst damage must not recursively trigger additional Bursts.
+- Close-range Burst recharge acceleration must reward staying engaged without making high-frequency Aspect kits automatically dominant.
 - Mandatory encounters cannot assume a specific Technique family, Legendary, Aspect Tier, or Blood Art.
 
 ## Prosthetic boundary
@@ -165,9 +185,10 @@ Permanent progression may unlock additional Techniques into future reward pools 
 
 The active Technique task is now:
 
-1. finish the scalable mechanic for each of the five core effect families,
-2. rebuild the five-by-five slotted Technique matrix around those mechanics,
-3. only then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements,
-4. then determine launch count, rarity distribution, eligibility, reward frequency, and production requirements.
+1. design and approve the five direct combat-slot Techniques for each of the five now-defined families,
+2. revisit weak existing Echo, Rupture, and Seal slot concepts while defining the Rift and Burst slot implementations,
+3. audit the complete five-by-five matrix across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, mixed-family compatibility, AoE, and control limits,
+4. only then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements,
+5. then determine launch count, rarity distribution, eligibility, reward frequency, and production requirements.
 
-Exact numerical values, rarity probabilities, offer weights, replacement frequency, family weighting, and final UI identifiers remain later design and playtest work.
+Exact numerical values, Rift fuse and intensity values, Burst cooldown and radius, close-range recovery rates, rarity probabilities, offer weights, replacement frequency, family weighting, and final UI identifiers remain later design and playtest work.

@@ -4,10 +4,26 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-11
 ---
 
 # Documentation Changelog
+
+## 2026-08-11 — Rift and Crimson Burst family lock
+
+- Locked the Ivory / blade-circle family around **Rift**.
+- Defined Rift as one visible ivory fracture-line on the enemy that automatically opens after a short fuse for direct Health damage.
+- Further qualifying Rift applications intensify the same visible mark rather than adding exposed stacks; the fracture spreads and becomes more prominent as its eventual burst grows stronger.
+- Positioned Rift as a **strong-upfront, moderate-scaling** family: one pickup is immediately useful, while deeper investment remains viable without requiring the highest synergy ceiling.
+- Locked the Crimson / split-blood-drop family around **Burst**.
+- Defined Burst as immediate heavy direct AoE damage centered on a struck Burst-ready target, damaging both the primary target and nearby enemies.
+- Added a short per-target Burst recharge and made continued close-range direct sword pressure accelerate that recovery, giving Crimson a close-quarters aggression identity.
+- Prohibited Burst damage from recursively triggering additional Bursts and kept pack-wide cascade behavior bounded.
+- Kept persistent crimson damage zones out of the base family rule; they may be explored later through supporting or higher-rarity Techniques.
+- Defined working Burst visual language around a readable split-blood-drop ready / recharge cue and a compact radial crimson blast.
+- Explicitly allowed the five Technique families to use different buildup structures and different early / late power curves rather than forcing all families into stack-based scaling.
+- Marked all five family cores as defined at qualitative gameplay depth: Echo, Rupture, Seal, Rift, and Burst.
+- Advanced the active Technique task to designing and approving the full five-by-five direct combat-slot matrix.
 
 ## 2026-08-09 — Core Technique-family mechanics pass
 
@@ -17,7 +33,11 @@ last_reviewed: 2026-08-09
 - Clarified the pale-silver family around **echoes**: delayed additional sword slashes, not literal full-action repetition.
 - Removed the separate `Fracture` term from the gold family.
 - Defined the working **Rupture** rule as a visible buildup meter with no partial effect; full meter triggers a large posture burst, strong allowed hit reaction, and smaller nearby posture shockwave, then resets.
-- Marked the Violet Seal buildup/completion model as the next active design question.
+- Locked the Violet family around discrete **Seal stacks** rather than a buildup meter.
+- Defined one Seal as a minor movement slow, two Seals as stronger movement restriction plus suppression of qualifying movement abilities, and three Seals as a brief **Bind** that roots without stunning and then clears the stacks.
+- Explicitly separated Violet from posture mechanics: Seal does not inherently damage posture, suppress posture recovery, or trigger a posture burst.
+- Defined the enemy-facing Seal visual as one mark, two connected marks, then a completed binding pattern during Bind.
+- Advanced the active family-design question from Violet to the Ivory scalable mechanic.
 - Marked the ivory and crimson families for redesign around concrete scalable mechanics rather than precision-only or Health-risk-only triggers.
 - Clarified that refinements are small buffs to an existing slotted Technique, not separate Techniques.
 - Standardized all Technique sources around the same Technique reward screen; combat rooms are the main source, with shops, treasure, minibosses, and regional bosses able to grant the same reward type.
