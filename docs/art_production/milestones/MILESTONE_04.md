@@ -4,7 +4,7 @@ title: Milestone 4 — Player Combat Depth
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-12
 ---
 
 # Milestone 4 — Player Combat Depth
@@ -13,7 +13,7 @@ last_reviewed: 2026-08-07
 
 Complete the visual identities and interface support for Akio's major build-shaping systems after the base character, combat VFX hierarchy, Shrine foundation, and core room framework are stable.
 
-The milestone must support optional Aspect Tier investment and continued Technique development after the four active slots are filled.
+The milestone must support optional Aspect Tier investment, five direct Technique slots, and continued Technique development through slotless supporting upgrades and other approved post-slot rewards.
 
 ## Authoritative design sources
 
@@ -38,12 +38,14 @@ The milestone must support optional Aspect Tier investment and continued Techniq
 - Tier II Blood buildup, readiness, activation, resolving, consumed, and rebuilding states.
 - Three Blood Art packages.
 - Eight Prosthetic VFX/icon families.
-- Technique card, rarity, category, slot, reserve, refinement, replacement, warning, decline, reroll, and comparison states.
-- Four active Technique slots and one reserve.
-- Post-fill Technique offers supporting refinement, replacement, rarity upgrades, and wildcard opportunities.
-- Rest-room reserve swapping.
+- Reusable Technique card, rarity, family, direct-slot, supporting, refinement, replacement, warning, decline, reroll, and comparison states.
+- Five direct Technique slots: Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow.
+- Post-fill Technique offers supporting slotless upgrades, refinements, rare same-slot replacements, cross-family effects, and eligible higher-rarity or Legendary opportunities as approved by the final catalog.
+- Read-only rest/pause build review rather than reserve swapping.
 - Relic card family and one initial Relic slot.
 - Currency, Health, Spirit, capacity, route-marker, breakable, treasure, and reward-object art.
+
+The direct five-by-five Technique matrix must be approved before unique Technique icon/VFX production is scoped. The five family mechanics—Echo, Rupture, Seal, Rift, and Burst—are already defined at qualitative core-rule depth.
 
 ## Locked Aspect scope
 
@@ -92,10 +94,10 @@ All three packages may guide high-level scoping. Exact counts still require impl
 5. Complete final cross-roster presentation/readability pass.
 6. Complete Blood buildup/readiness and all three Blood Arts.
 7. Complete Prosthetic VFX/icons.
-8. Complete reusable Technique card/build framework.
-9. Complete Technique reward/replacement/refinement/reserve screens.
+8. Complete reusable Technique card/build framework for five direct slots plus slotless supporting upgrades.
+9. Complete Technique reward/replacement/refinement/supporting states.
 10. Complete currency, pickup, Relic, breakable, treasure, and reward-object families.
-11. Complete approved Technique icon catalog and bespoke combat cues.
+11. Complete approved Technique icon catalog and bespoke combat cues after the direct matrix and later catalog layers are locked.
 12. Full HUD, Shrine, reward-screen, and mixed-build integration.
 
 ## Dependency rules
@@ -105,10 +107,11 @@ All three packages may guide high-level scoping. Exact counts still require impl
 - All three Tier 0-IV packages support high-level planning; final frame/effect counts require implementation briefs.
 - Ronin posture-capacity growth reuses existing posture UI rather than creating a new status family.
 - Spectral Passage and Beyond the Veil should reuse existing attack/deathblow/locomotion families wherever practical.
-- Techniques reuse base combat, Aspect, and Prosthetic VFX before new production is authorized.
+- Techniques reuse base combat and Aspect VFX before new production is authorized.
+- Prosthetic progression is a separate persistent Forge package and does not create temporary Prosthetic-Technique reward states.
 - Additional Aspects are excluded.
 - No duplicate Aspect-specific Blood Art progression tree is included.
-- Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, and Ronin Counter Cut/Focus assets are excluded.
+- Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, and reserve-Technique assets are excluded.
 
 ## Completion test
 
@@ -119,5 +122,5 @@ All three packages may guide high-level scoping. Exact counts still require impl
 - Ronin's posture growth reads through the normal posture system rather than a new mechanic.
 - Wraith range effects do not resemble teleportation or detached projectiles.
 - Wolf pursuit does not resemble automatic targeting.
-- Technique choices, rarity, slots, reserve, refinements, replacements, and warnings remain understandable after the active loadout fills.
+- Technique choices, five direct slots, supporting upgrades, rarity, refinements, replacements, and warnings remain understandable as the build develops.
 - Enemy telegraphs remain readable under mixed Aspect, Technique, Prosthetic, and Blood effects.
