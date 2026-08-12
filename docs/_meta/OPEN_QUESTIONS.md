@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-11
 ---
 
 # Current Design Questions
@@ -25,19 +25,21 @@ This file contains only unresolved decisions that materially affect launch scope
 - All Technique rewards use the same underlying reward screen regardless of whether the source is a combat room, shop, treasure, miniboss, regional boss, or another approved source.
 - Prosthetic Techniques are removed. Prosthetic progression is persistent and belongs to the Forge.
 - Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, or Legendary.
-- Exact damage, timing, hitboxes, buildup rates, durations, rarity weights, and VFX timing remain prototype and implementation work.
+- Exact damage, timing, hitboxes, buildup rates, durations, cooldowns, rarity weights, and VFX timing remain prototype and implementation work.
 
 ## Current family-design state
 
-The earlier broad Technique draft is no longer treated as the current launch roster. The core slotted families must be stabilized before supporting, cross-family, Legendary, or refinement content is rebuilt.
+The earlier broad Technique draft is no longer treated as the current launch roster. The five core family mechanics are now defined at qualitative core-rule depth, but the direct five-by-five Technique matrix still needs to be designed and approved.
 
 Current state:
 
-- **Pale silver / twin slash:** Echo mechanic is a strong direction. Echoes are delayed additional slashes; some core-slot concepts still need rewriting so the scalable mechanic is the echo itself rather than simply repeating Akio's action.
-- **Gold / cracked crest:** Rupture mechanic is defined at qualitative gameplay depth.
-- **Violet / binding knot:** Seal-stack mechanic is defined at qualitative gameplay depth.
-- **Ivory / blade circle:** redesign required; precision triggers alone are not a scalable parent-family mechanic.
-- **Crimson / split blood drop:** redesign required; Health loss / sacrifice / recovery triggers alone are not a scalable parent-family mechanic.
+- **Pale silver / twin slash:** Echo mechanic defined. Echoes are delayed additional slashes; some core-slot concepts still need rewriting so the scalable mechanic is the echo itself rather than simply repeating Akio's action.
+- **Gold / cracked crest:** Rupture mechanic defined at qualitative gameplay depth.
+- **Violet / binding knot:** Seal mechanic defined at qualitative gameplay depth.
+- **Ivory / blade circle:** Rift mechanic defined. A single evolving fracture mark automatically opens after a short delay for Health damage; further qualifying applications intensify the same mark and strengthen the burst.
+- **Crimson / split blood drop:** Burst mechanic defined. A Burst-ready target can take an immediate heavy close-range AoE blast centered on itself; after triggering, that target recharges, and continued close-range sword pressure accelerates recovery.
+
+The families are not required to use the same buildup model or scale identically. Rift and Burst are intentionally allowed to provide strong first-pick value while remaining viable with later investment.
 
 ### Rupture rule
 
@@ -59,9 +61,29 @@ Current state:
 - Seal does not inherently damage posture, stop posture recovery, or trigger a posture burst.
 - Exact slow values, durations, stack expiry, and boss / protected-enemy resistance remain tuning and enemy-integration work.
 
+### Rift rule
+
+- Rift is represented by one visible ivory fracture-line on the enemy, not a meter or exposed stack counter.
+- The first qualifying application starts a short fuse.
+- A Rift always opens at the end of that fuse, even if it was never intensified further.
+- Further qualifying Rift applications before opening intensify the same mark, making it visibly spread / worsen and increasing the eventual direct Health-damage burst.
+- When the Rift opens, the fracture violently splits / flashes through the target and then disappears.
+- Exact fuse, maximum intensity, application strength, damage, and boss scaling remain tuning work.
+
+### Burst rule
+
+- Crimson centers on **immediate direct AoE damage** rather than a persistent damaging zone.
+- A qualifying Crimson Technique can trigger Burst on a struck target when that target is Burst-ready.
+- Burst damages the primary target as well as nearby enemies inside a bounded radius, keeping it useful against bosses and isolated targets.
+- After triggering, that target enters a short recharge state before it can Burst again.
+- Continued close-range direct sword hits against that target accelerate Burst recovery.
+- Burst damage cannot recursively trigger more Bursts, and multi-target trigger limits must prevent pack-wide cascade behavior from one swing.
+- Persistent crimson zones may exist later as supporting or higher-rarity effects, but are not part of the base family rule.
+- Exact damage, radius, cooldown, close-range recovery rate, and trigger limits remain tuning work.
+
 ## Priority order
 
-1. Finish the five core Technique-family mechanics and slotted matrix
+1. Finish and approve the five-by-five direct Technique matrix
 2. Rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements
 3. Finish Relic / consumable run-build scope
 4. Scope permanent Prosthetic progression and the wider Forge package
@@ -69,23 +91,27 @@ Current state:
 6. Narrative delivery and authored-content package
 7. Postgame release package
 
-# 1. Core Technique-family mechanics
+# 1. Core Technique-slot matrix
 
 **This is the current active design area.**
 
-The immediate next question is the **Ivory family**:
+The immediate next task is to define or revise the five direct Techniques for each family:
 
-- What concrete recurring effect does the family create?
-- How can precision, timing, clean sequences, dodges, and parries generate or interact with that effect without being the effect themselves?
-- How does the effect scale across Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow?
-- How is the effect visibly readable and upgradeable?
-- How does it remain distinct from Echo, Rupture, Seal, and the locked Aspect identities?
+- rewrite the weak Pale Silver / Echo slot concepts, especially Dash,
+- revisit weak Gold / Rupture slot concepts, especially Counter and exact Deathblow behavior,
+- revisit the working Violet / Seal slot concepts and approve the final five,
+- define how the five Rift slots apply, intensify, accelerate, or potentially force open the same Rift mechanic,
+- define how the five Crimson slots vary Burst strength, footprint, trigger access, and close-range recharge interaction.
 
-After Ivory is coherent:
+Then audit the complete matrix for:
 
-1. define the scalable recurring mechanic for Crimson,
-2. revisit weak Pale Silver, Gold, and Violet core-slot concepts,
-3. approve the full five-by-five slotted Technique matrix.
+- compatibility with Wolf, Wraith, and Ronin,
+- boss and isolated-target usefulness,
+- group power and AoE limits,
+- high-frequency / multi-hit trigger normalization,
+- mixed-family compatibility,
+- visual readability when multiple family effects coexist,
+- and whether each family feels like a coherent scalable path without being mechanically identical to the others.
 
 Do not rebuild cross-family Techniques or refinements before this core pass is complete.
 
@@ -131,4 +157,4 @@ Define repeat Heart-route access, repeat-clear rewards, launch completion goals,
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup, Rupture decay, Seal slow values, Seal duration / expiry, protected-enemy Seal resistance, guard pressure, stagger, reach, movement, recovery, Blood values, room probabilities, prices, rarity weights, replacement rates, permanent-upgrade percentages, and final VFX / animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup, Rupture decay, Seal slow values, Seal duration / expiry, protected-enemy Seal resistance, Rift fuse / intensity / damage, Burst damage / radius / cooldown / close-range recovery, guard pressure, stagger, reach, movement, recovery, Blood values, room probabilities, prices, rarity weights, replacement rates, permanent-upgrade percentages, and final VFX / animation timing.
