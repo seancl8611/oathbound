@@ -4,7 +4,7 @@ title: Blood Cavern and Blood Mirror
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-12
 topics:
   - strand
   - blood-cavern
@@ -53,7 +53,7 @@ The cavern is an Order training and anti-corruption site. Its deeper chamber con
 
 The player descends from learning how to fight into proving how much of the Beast Blood can be controlled. The outer hall teaches and tests execution; the Blood Mirror reveals, unlocks, previews, and lightly improves Blood Aspects through skill-focused trials.
 
-Fixed-loadout demonstrations may temporarily assign Techniques to teach their combat verbs, refinements, or prosthetic interactions. Those temporary trial loadouts do not become an equipped run build.
+Fixed-loadout demonstrations may temporarily assign approved Techniques to teach one of the five direct combat-slot modifications, family behavior such as Echo, Rupture, Seal, Rift, or Burst, and later approved supporting or mixed-build interactions. Prosthetic behavior remains part of the separate Prosthetic system rather than a temporary Prosthetic-Technique layer. Temporary trial loadouts do not become an equipped run build.
 
 ## System states
 
@@ -73,7 +73,7 @@ Stillness is important. The inner chamber should feel older, more intimate, and 
 
 ## Technical requirements
 
-- Repeatable trials must support fixed conditions and standardized Aspect, Technique, prosthetic, and Relic loadouts.
+- Repeatable trials must support fixed conditions and standardized Aspect, Technique, Prosthetic, and Relic loadouts.
 - Temporary trial Techniques clear when the trial ends.
 - Trial completion, reward, unlock, Technique-pool access, and mastery flags must persist.
 - The system should allow future challenge ladders, boss rematches, or score-based modes without requiring the space or data structure to be rebuilt.
