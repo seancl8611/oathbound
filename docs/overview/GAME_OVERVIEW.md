@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-12
 topics:
   - project-identity
   - combat
@@ -41,7 +41,7 @@ His lineage explains why the power can awaken; his discipline explains why he ca
 
 Akio is a disciplined swordsman who learns to direct a supernatural curse through his existing martial skill.
 
-The selected Blood Aspect determines how Akio fundamentally fights. Techniques are the main horizontal run-build layer and determine how Returning Blood, controlled mutation, seals, wounds, execution, and other supernatural martial effects reshape that combat during the run.
+The selected Blood Aspect determines how Akio fundamentally fights. Techniques are the main horizontal run-build layer and reshape his existing sword actions through recurring supernatural effects such as Echo, Rupture, Seal, Rift, and Burst.
 
 ## Approved gameplay snapshot
 
@@ -77,7 +77,8 @@ All three Aspect packages are locked at current qualitative paper-design depth. 
 - Tier 0 is complete and viable.
 - Aspect progression is optional vertical development.
 - Techniques provide the main horizontal build development.
-- Technique effect families must be broad enough to interact with several core combat actions rather than acting as narrow mechanic buckets.
+- The five current Technique families are **Echo, Rupture, Seal, Rift, and Burst**, each with a distinct scalable mechanic.
+- Technique families may use different buildup structures and early/late power curves rather than one standardized stacking model.
 - Generic elemental schools are not the target; familiar functions such as AoE, slow, range, delayed damage, restraint, recovery, and chaining should be expressed through Oathbound-specific supernatural samurai language.
 - Focused and hybrid Technique builds should both be viable.
 - Technique-heavy Tier 0-I, Tier II hybrid, Tier III Aspect-heavy, and occasional Tier IV high-roll runs should all be viable.
@@ -108,7 +109,7 @@ A normal successful Binding run currently targets roughly 45-50 minutes. Exact r
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md), beginning with the launch Technique effect families and roster under the revised five-slot plus supporting-upgrade architecture.
+The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). The immediate run-build task is the complete five-by-five direct Technique matrix now that all five family mechanics are defined.
 
 ## Source links
 
