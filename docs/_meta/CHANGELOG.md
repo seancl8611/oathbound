@@ -4,10 +4,20 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-11
+last_reviewed: 2026-08-12
 ---
 
 # Documentation Changelog
+
+## 2026-08-12 — Technique architecture consistency audit
+
+- Audited Technique dependencies after the five family cores were locked.
+- Removed stale four-active-plus-reserve and rest-room swapping language from the core loop, run structure, terminology, art inventory, and Milestone 4 scope.
+- Removed remaining temporary Prosthetic-Technique assumptions from dependent run-build and production documentation; Prosthetic progression remains persistent Forge development.
+- Synchronized full-scope, progression, reward, UI, combat, and production dependencies around five direct combat slots plus slotless supporting Techniques.
+- Updated dependent summaries to recognize all five defined family mechanics: Echo, Rupture, Seal, Rift, and Burst.
+- Corrected the art inventory's Relic rarity summary to the currently provisional three-tier Common / Rare / Legendary sketch rather than the four-tier Technique rarity model.
+- Confirmed the active design dependency is now the direct five-by-five Technique matrix; later supporting, cross-family, Legendary, refinement, rarity, and reward-frequency work remains downstream.
 
 ## 2026-08-11 — Rift and Crimson Burst family lock
 
