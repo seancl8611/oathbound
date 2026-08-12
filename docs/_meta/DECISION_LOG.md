@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-11
 ---
 
 # Decision Log
@@ -130,6 +130,32 @@ One Seal mildly slows enemy movement. Two Seals strengthen the movement restrict
 Seal presentation should visibly progress from individual marks to connected marks to a completed binding pattern. Exact slow strength, duration, expiry, and protected-enemy resistance remain tuning / integration work.
 
 **Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`
+
+## 2026-08-11 — Ivory-symbol family locked around Rift
+
+The Ivory / blade-circle family now uses **Rift** as its scalable effect. A qualifying Technique creates one visible ivory fracture-line on the enemy and starts a short fuse. The Rift is guaranteed to open for direct Health damage even with only one application.
+
+Further qualifying Rift applications before opening intensify the same visible fracture rather than adding exposed stacks. The mark spreads and becomes more unstable as its eventual burst grows stronger. Rift is intentionally positioned as a strong-upfront, moderate-scaling family rather than another threshold-dependent buildup path.
+
+**Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/art_production/TECHNIQUE_VFX.md`
+
+## 2026-08-11 — Crimson-symbol family locked around close-range Burst
+
+The Crimson / split-blood-drop family now centers on **Burst**: immediate heavy direct AoE damage centered on a struck enemy when that target is Burst-ready.
+
+The primary target always takes Burst damage so the mechanic remains useful against bosses and isolated enemies. Nearby enemies inside the bounded blast also take damage. After triggering, that target briefly recharges; continued close-range direct sword pressure accelerates recovery. Burst damage cannot recursively trigger additional Bursts. Persistent damage zones are not part of the base family rule, though they may be explored later as supporting or higher-rarity upgrades.
+
+Crimson is intentionally an aggressive close-quarters family with strong first-pick value and viable but not necessarily highest-ceiling scaling.
+
+**Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/art_production/TECHNIQUE_VFX.md`
+
+## 2026-08-11 — All five core Technique-family mechanics defined
+
+Echo, Rupture, Seal, Rift, and Burst are now defined at qualitative core-rule depth. Families are explicitly allowed to use different buildup structures and different early / late power curves rather than being forced into one standardized stack model.
+
+The active Technique question advances from family-core design to the full five-by-five direct combat-slot matrix.
+
+**Authority:** `docs/_meta/OPEN_QUESTIONS.md`, `docs/gameplay/TECHNIQUE_CATALOG.md`
 
 ## 2026-08-09 — Technique reward and Prosthetic boundaries clarified
 
