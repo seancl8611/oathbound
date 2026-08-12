@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-12
 topics:
   - progression
   - persistence
@@ -125,7 +125,7 @@ Technique progression can continue beyond those five choices through slotless su
 
 There is no global cap on total Technique upgrades. The practical cap comes from Technique reward opportunities, route choices, rarity, prerequisites, and run length.
 
-The current design pass is focused on stabilizing the five core family mechanics before rebuilding the supporting and refinement layers.
+The five core family mechanics—Echo, Rupture, Seal, Rift, and Burst—are defined at qualitative core-rule depth. The current design pass is focused on approving the complete five-by-five direct Technique matrix before rebuilding supporting, cross-family, Legendary, and refinement content.
 
 ## Persistent character progression
 
@@ -223,7 +223,7 @@ A successful Binding return additionally:
 
 ## Current production dependencies
 
-1. Finish the five core Technique-family mechanics and direct slotted roster.
+1. Finish and approve the five-by-five direct Technique matrix, then rebuild the later Technique layers.
 2. Scope remaining run-build content: Relics and consumables.
 3. Scope permanent Prosthetic progression together with the broader Forge package.
 4. Scope persistent progression, onboarding, and trials.
