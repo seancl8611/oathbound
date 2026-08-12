@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-22
+last_reviewed: 2026-08-12
 topics:
   - runs
   - first-attempt
@@ -97,10 +97,10 @@ Before departure, the player:
 
 - completes available Strand preparation,
 - confirms one unlocked Blood Aspect at the Boat after the system is unlocked,
-- confirms the current prosthetic loadout when available,
+- confirms the current Prosthetic loadout when available,
 - begins at Blood Aspect Tier 0,
-- begins with four empty active Technique slots and one empty reserve slot,
-- starts without the previous run's Corruption, Techniques, refinements, Gold, room progress, or temporary Relic effects,
+- begins with five empty direct Technique slots: Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow,
+- starts without the previous run's Corruption, slotted or supporting Techniques, refinements, replacement state, Gold, room progress, or temporary Relic effects,
 - and commits to the Keeper-guided barrier crossing by selecting `Start Run`.
 
 The Keeper's contribution remains part of the departure presentation rather than a separate repeated menu or resource cost.
@@ -130,11 +130,11 @@ Detailed reward ownership and cadence belong in [Items, Currencies, and Rewards]
 
 After the relevant systems are unlocked:
 
-- **Area 1:** acquire the first meaningful Techniques and begin defining the build.
-- **Area 2:** fill the four active Technique slots, gain Aspect Tiers, and establish coherent synergy.
-- **Area 3:** refine, replace, use the reserve strategically, and finalize the build for the Shogun and any enabled Heart continuation.
+- **Area 1:** acquire early direct Techniques and establish the first family/build direction.
+- **Area 2:** fill more of the five core slots, gain Aspect Tiers, and begin deepening family synergy through later Technique rewards.
+- **Area 3:** finish or refine the build through remaining direct slots, slotless supporting Techniques, refinements, rare same-slot replacements, and eligible high-rarity or Legendary opportunities.
 
-A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room.
+A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. Exact reward frequency remains a later tuning and catalog decision.
 
 ## Failed run
 
@@ -176,7 +176,7 @@ After the sixth Binding is destroyed, the next successful full run becomes the s
 
 The Shogun is not permanently killed through a separate anti-regeneration method before the Heart. Destroying the Heart makes Beast Blood inert, stops his reconstruction, frees him from the Blood's influence, and allows his body to die permanently.
 
-The six-clear requirement is a roguelite mastery target rather than six unique story missions. Continued play is supported through alternate Blood Aspects, Techniques, prosthetics, Relics, routes, rewards, persistent upgrades, and increasing player consistency.
+The six-clear requirement is a roguelite mastery target rather than six unique story missions. Continued play is supported through alternate Blood Aspects, Techniques, Prosthetics, Relics, routes, rewards, persistent upgrades, and increasing player consistency.
 
 The base game does not require island-wide visual transformations, universal enemy modifiers, new regional environment sets, or new enemy families after every Binding clear.
 
@@ -227,14 +227,17 @@ Additional difficulty settings, run modifiers, enemy variants, room variants, ch
 A run may change through:
 
 - Blood Aspect Tier choices,
-- four active Techniques and one reserve,
-- Technique refinements and replacements,
-- the equipped prosthetic and eligible Prosthetic Techniques,
+- five direct slotted Techniques,
+- slotless supporting Techniques,
+- Technique refinements and rare same-slot replacements,
+- the equipped Prosthetic,
 - run-scoped Relics,
 - approved consumables,
 - temporary currencies and materials,
 - survival and resource-cap rewards,
 - boss, miniboss, treasure, shop, or discovery rewards.
+
+Prosthetic progression itself is persistent and belongs to the Forge rather than a temporary Technique layer.
 
 ## Reset boundary
 
@@ -242,8 +245,9 @@ The following reset after death or successful Heart Binding return:
 
 - Corruption,
 - Blood Aspect Tier,
-- active and reserve Techniques,
-- Technique refinements,
+- slotted Techniques,
+- supporting Techniques,
+- Technique refinements and replacement state,
 - Gold,
 - room progress,
 - temporary Relic effects,
@@ -255,6 +259,7 @@ The following persist:
 - selected Aspect as an available loadout choice,
 - Techniques unlocked into future reward pools,
 - permanent upgrades,
+- permanent Prosthetic progression,
 - Blood Mirror trial and mastery progress,
 - narrative discoveries and codex progress,
 - persistent currencies and rewards,
