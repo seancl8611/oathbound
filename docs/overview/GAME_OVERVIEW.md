@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-13
 topics:
   - project-identity
   - combat
@@ -41,20 +41,21 @@ His lineage explains why the power can awaken; his discipline explains why he ca
 
 Akio is a disciplined swordsman who learns to direct a supernatural curse through his existing martial skill.
 
-The selected Blood Aspect determines how Akio fundamentally fights. Techniques are the main horizontal run-build layer and reshape his existing sword actions through recurring supernatural effects such as Echo, Rupture, Seal, Rift, and Burst.
+The selected Blood Aspect determines how Akio fundamentally fights. Techniques are the main horizontal run-build layer and reshape his existing sword actions through recurring supernatural effects such as Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct Health damage.
 
 ## Approved gameplay snapshot
 
 - Introductory attempt with a complete base katana kit and no active Blood powers.
 - First death awakens Returning Blood and reconstructs Akio at the Strand.
-- Shared combat: parry, player/enemy posture, stagger, deathblow, block, dash, and Prosthetic support.
+- Shared combat: parry, player/enemy posture, stagger, deathblow, block, dash, universal backstab classification, and Prosthetic support.
 - One selected Blood Aspect creates the immediate Tier 0 weapon identity.
 - Launch roster: **Wolf, Wraith, Ronin**.
 - Optional fixed Aspect progression from Tier 0 through Tier IV through Shrine Resist/Embrace decisions.
 - Blood is run-only and unavailable before Tier II.
 - Five core Technique slots tied to **Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow**.
 - One direct Technique maximum per core combat slot; rare replacement offers may overwrite a filled slot.
-- Slotless supporting Techniques may deepen effect families and build synergies without a global inventory cap.
+- The full **25-Technique direct matrix is approved at qualitative paper-design depth**.
+- Slotless Supporting Techniques may deepen effect families and build synergies without a global inventory cap.
 - At most one refinement per eligible slotted Technique.
 - Technique rarity: Common / Uncommon / Rare / Legendary.
 - One equipped Prosthetic and one run-scoped Relic.
@@ -77,9 +78,10 @@ All three Aspect packages are locked at current qualitative paper-design depth. 
 - Tier 0 is complete and viable.
 - Aspect progression is optional vertical development.
 - Techniques provide the main horizontal build development.
-- The five current Technique families are **Echo, Rupture, Seal, Rift, and Burst**, each with a distinct scalable mechanic.
+- The five Technique families are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct Health damage**.
 - Technique families may use different buildup structures and early/late power curves rather than one standardized stacking model.
-- Generic elemental schools are not the target; familiar functions such as AoE, slow, range, delayed damage, restraint, recovery, and chaining should be expressed through Oathbound-specific supernatural samurai language.
+- Every direct Technique should remain useful even when it is the player's only pickup from that family.
+- Generic elemental schools are not the target.
 - Focused and hybrid Technique builds should both be viable.
 - Technique-heavy Tier 0-I, Tier II hybrid, Tier III Aspect-heavy, and occasional Tier IV high-roll runs should all be viable.
 - Mandatory encounters do not assume a particular Tier, Blood Art, Technique family, or Legendary.
@@ -109,7 +111,7 @@ A normal successful Binding run currently targets roughly 45-50 minutes. Exact r
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). The immediate run-build task is the complete five-by-five direct Technique matrix now that all five family mechanics are defined.
+The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). The immediate run-build task is now the **later Technique catalog**: Legendaries, Supporting Techniques, Cross-family Techniques, refinements, rare replacements, rarity, prerequisites, and eligibility.
 
 ## Source links
 
