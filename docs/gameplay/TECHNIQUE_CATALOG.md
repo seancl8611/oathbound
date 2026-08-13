@@ -4,7 +4,7 @@ title: Technique Catalog
 category: gameplay
 status: draft
 authority: primary
-last_reviewed: 2026-08-11
+last_reviewed: 2026-08-12
 topics:
   - techniques
   - technique-catalog
@@ -13,7 +13,8 @@ topics:
   - rupture
   - seals
   - rift
-  - burst
+  - vulnerable
+  - backstabs
   - supporting-techniques
   - refinements
   - rarity
@@ -38,7 +39,7 @@ This file owns the working Technique roster and the current design state of the 
 
 ## Current status
 
-The five-slot Technique architecture is approved. All five core families now have a defined qualitative mechanic, but the final five-by-five direct Technique matrix is not yet approved.
+The five-slot Technique architecture is approved. All five core families have a defined qualitative mechanic. The Crimson direct row is now approved at qualitative depth, while the complete five-by-five direct Technique matrix is not yet approved.
 
 The earlier draft of roughly 55 Techniques was useful exploration, but it is **not the current launch roster**. Cross-family Techniques and refinements were intentionally removed from the working comparison sheet after the core slotted Techniques exposed larger family-design problems.
 
@@ -54,11 +55,11 @@ The families do not need formal player-facing names. The current working UI iden
 | Gold / cracked crest | Rupture: buildup toward a large posture-breaking proc, with bounded nearby posture pressure | Core mechanic defined |
 | Violet / binding knot | Seal stacks: visible marks that progressively restrict enemy movement and complete into a brief Bind | Core mechanic defined |
 | Ivory / blade circle | Rift: one visible fracture mark that automatically opens for Health damage and becomes stronger when further intensified before opening | Core mechanic defined |
-| Crimson / split blood drop | Burst: immediate close-range AoE blast centered on a struck target, followed by a readable per-target recharge accelerated by continued close-range pressure | Core mechanic defined |
+| Crimson / split blood drop | Vulnerable and direct Health damage: short Vulnerable status amplifies genuine backstabs; other Crimson Techniques provide standalone Health-damage, AoE, or backstab payoffs | Core mechanic and five direct slot concepts approved |
 
 Exact colors, symbols, names, and final UI treatment remain provisional. The important requirement is that each family has a clear scalable mechanic that can be recognized and upgraded across several combat slots.
 
-The five families are not required to share the same buildup structure or power curve. Rift and Burst are intentionally allowed to offer stronger immediate value from a first pickup, while more setup-oriented families may gain more from deeper synergy.
+The five families are not required to share the same buildup structure or power curve. Every direct Technique should still provide worthwhile standalone value when it is the only pickup from its family.
 
 # Pale silver / twin slash — Echo family
 
@@ -223,56 +224,65 @@ The exact five Rift Techniques are still to be approved. The slot pass should de
 
 High-frequency actions must use normalized Rift application so Wolf or multi-hit actions do not gain accidental dominance.
 
-# Crimson / split blood drop — Burst effect
+# Crimson / split blood drop — Vulnerable and direct Health damage
 
-## Burst rule
+## Family identity
 
-Crimson is the close-range direct-AoE family.
+Crimson is the **direct Health-damage and backstab-specialist family**.
 
-A qualifying Crimson Technique can trigger **Burst** on the struck target when that target is Burst-ready.
+Backstabs are not created by Crimson. A backstab is a universal positional hit: Akio genuinely strikes an enemy from behind according to the shared combat rule. Crimson does not manipulate enemy facing, create artificial rear-angle windows, slow enemies to manufacture backstabs, or widen the backstab arc as its core solution.
 
-- Burst is centered on the struck enemy.
-- The primary target takes direct Health damage from the Burst, so the mechanic remains useful against bosses and isolated elites.
-- Nearby enemies inside the bounded blast also take direct Health damage.
-- Burst resolves immediately; the core family does not create a persistent damaging zone.
-- After Burst triggers, that target enters a short recharge state before it can Burst again.
-- Continued **close-range direct sword hits** against that same target accelerate Burst recovery, rewarding aggressive close-quarters combat.
-- Burst damage cannot trigger additional Bursts.
-- Multi-target trigger rules must prevent one swing from recursively detonating an entire pack.
+The family gains its distinctive positional payoff through **Vulnerable** while retaining enough direct Health-damage and AoE options that not every Crimson Technique needs to mention Vulnerable or backstabs.
 
-Exact Burst damage, radius, base recharge, close-range recovery acceleration, and multi-target trigger limits remain tuning work.
+## Vulnerable rule
 
-## Intended power curve
+**Vulnerable** is a short enemy status effect.
 
-Burst should provide **strong early value** with a single Technique: immediate direct damage, immediate AoE, and no buildup requirement before the first proc.
+- While Vulnerable, genuine backstabs against that enemy deal substantially increased direct Health damage.
+- Vulnerable does not make attacks from the front count as backstabs.
+- Vulnerable does not slow, stun, root, change facing, suppress movement abilities, or change enemy awareness.
+- Applying Vulnerable again may refresh its duration; exact refresh behavior is tuning work.
+- Exact duration and backstab-damage multiplier remain playtest variables.
 
-Additional Crimson investment should remain valuable through stronger blasts, improved radius, better recovery, stronger central-target damage, and specialized slot interactions. It can remain balanced later without needing the highest multiplicative scaling ceiling.
+The intent is simple: a Crimson Technique can expose an enemy, and the player can choose whether to exploit that status by naturally moving behind them.
 
-## Close-range identity
+## Standalone-value rule
 
-Crimson should reward fighting near the target rather than simply becoming a generic AoE family.
+A player may receive only one or two Crimson Techniques in a run. Therefore every Crimson direct Technique must be valuable by itself.
 
-The core incentive is that staying engaged with direct close-range sword attacks helps the target become Burst-ready again sooner. This should not use broad low-Health thresholds or inconsistent "below 50% Health" bonuses as the main family rule.
+Crimson synergy should improve an already-useful Technique rather than turn an otherwise incomplete pickup into a functional one. For example, **Deep Cut** is already a powerful Held backstab, while Vulnerable from **Open Wound** or **Exposed Guard** can make that same positional hit even stronger if both are owned.
 
-## Visual / cooldown language
+## Approved direct core-slot roster
 
-The player needs to read both **which target can Burst** and **when that target is recharging**.
+| Slot | Technique | Approved qualitative effect |
+|---|---|---|
+| Basic Attack | **Open Wound** | Qualifying Basic Attack hits apply **Vulnerable** for a short duration. Frequent or multi-hit Aspect actions require normalized application rather than one status event per damage instance. |
+| Held Attack | **Deep Cut** | A Held Attack that lands as a genuine backstab deals extremely high direct Health damage and partially bypasses defensive mitigation. It does not need to apply Vulnerable itself. |
+| Dash | **Blood Arc** | Dash Attack releases a wide crimson sword arc through the struck target and nearby enemies, dealing direct Health damage. This is Crimson's standalone bounded-AoE option and does not need to apply Vulnerable. |
+| Parry / Counter | **Exposed Guard** | A successful Counter applies **Vulnerable** to the struck enemy. The Counter remains useful as a direct combat action even when the player owns no other Crimson Technique; Vulnerable then rewards natural repositioning for a later backstab. |
+| Deathblow | **Predator's Wake** | After a Deathblow resolves, nearby surviving enemies become **Vulnerable** for a short duration, turning an execution into a positional damage opportunity against the remaining encounter. |
 
-Working presentation:
+These five slot concepts are approved at qualitative paper-design depth. Names may still be revisited during final catalog polish, but their gameplay roles should not be reopened casually without a concrete overlap, balance, readability, or implementation problem.
 
-1. a compact crimson split-blood-drop marker or equivalent family cue shows that the target is Burst-ready,
-2. triggering Burst makes that cue flash as a concentrated crimson impact forms on / under the target,
-3. a short, heavy radial crimson blast expands and disappears immediately,
-4. during recharge, the marker becomes visibly dim / separated / incomplete,
-5. as recovery completes, the split form closes or brightens back into the ready state.
+## Visual direction
 
-Exact marker placement and animation remain UI/VFX work. The ready / recharge distinction must remain understandable without relying on color alone.
+Crimson should communicate exposed flesh / opened defense and severe direct Health damage rather than the old Burst-ready/recharge language.
 
-## Core-slot design direction
+Working needs:
 
-The exact five Crimson Techniques are still to be approved. The slot pass should vary **blast strength, footprint, trigger access, and recovery interaction** while preserving the shared close-range Burst identity.
+- **Vulnerable:** a compact crimson wound, split-mark, or exposed-guard cue on the affected enemy for the short status duration.
+- **Backstab payoff:** a strong but brief crimson hit accent when a Vulnerable backstab receives its enhanced damage.
+- **Deep Cut:** a heavier concentrated rear-hit treatment without implying a separate meter or status.
+- **Blood Arc:** a wide but bounded crimson sword-shaped arc, visually distinct from Gold's posture shockwave and from an omnidirectional explosion.
+- **Predator's Wake:** a clear short application pulse to nearby survivors after the Deathblow read is complete.
 
-Persistent crimson ground effects may be explored later as supporting or higher-rarity upgrades, but they are not part of the base Burst rule.
+Vulnerable must be readable without relying on crimson color alone and must not resemble Seal stacks, Rift fractures, Rupture buildup, or a deathblow-ready cue.
+
+## Legendary boundary
+
+Invisibility / enemy-awareness suppression is **not** part of ordinary Crimson Techniques.
+
+A future Crimson Legendary may use a brief **Unseen** state that allows Akio to reposition without enemies noticing or retargeting until he attacks, creating an exceptional opportunity to set up a backstab. This concept is reserved for the later Legendary pass; exact trigger, duration, break conditions, boss behavior, and eligibility are not yet locked.
 
 # Refinements — deferred
 
@@ -296,19 +306,21 @@ Cross-family Techniques should be designed only after each individual family has
 
 Earlier Legendary ideas may be retained as inspiration, but final Legendary design and eligibility are deferred until the core families are stable.
 
+The Crimson family specifically reserves **Unseen / brief invisibility or awareness suppression** for this later Legendary layer rather than ordinary slotted Techniques.
+
 No Legendary prerequisite threshold is currently locked.
 
 # Current roster-design sequence
 
 1. Revisit the pale-silver Dash and other weak Echo concepts.
 2. Revisit weak Gold and Violet core-slot concepts.
-3. Design the five Rift slot Techniques around apply / intensify / accelerate / open interactions.
-4. Design the five Crimson slot Techniques around direct Burst, close-range pressure, and readable recharge.
+3. Design and approve the five Rift slot Techniques around apply / intensify / accelerate / open interactions.
+4. Keep the approved Crimson row stable while auditing its interaction with universal backstabs, bosses, groups, and each Aspect.
 5. Rebuild and approve the full five-by-five slotted Technique matrix.
-6. Audit the completed roster across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, mixed-family compatibility, and AoE / control limits.
+6. Audit the completed roster across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, mixed-family compatibility, and AoE / control / positional limits.
 7. Then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements.
 8. Only then lock total launch count, rarity distribution, reward frequency, eligibility, and production scope.
 
 ## Deferred implementation and balance work
 
-Do not lock exact damage, posture values, Rupture buildup amounts, meter decay timings, Seal slow values, Seal durations, protected-enemy control resistance, Rift fuse / intensity values, Burst damage / radius / cooldown, close-range Burst recovery rates, hit reactions, rarity probabilities, offer weights, replacement rates, or final UI colors / symbols until prototyping and roster review require them.
+Do not lock exact damage, posture values, Rupture buildup amounts, meter decay timings, Seal slow values, Seal durations, protected-enemy control resistance, Rift fuse / intensity values, Vulnerable duration / refresh / backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage / width, Predator's Wake radius, hit reactions, rarity probabilities, offer weights, replacement rates, or final UI colors / symbols until prototyping and roster review require them.

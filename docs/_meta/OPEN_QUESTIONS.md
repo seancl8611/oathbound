@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-11
+last_reviewed: 2026-08-12
 ---
 
 # Current Design Questions
@@ -24,12 +24,13 @@ This file contains only unresolved decisions that materially affect launch scope
 - Technique families are primarily recognized through symbol, color treatment, effect behavior, VFX, and audio rather than requiring formal player-facing school names.
 - All Technique rewards use the same underlying reward screen regardless of whether the source is a combat room, shop, treasure, miniboss, regional boss, or another approved source.
 - Prosthetic Techniques are removed. Prosthetic progression is persistent and belongs to the Forge.
+- Backstabs are a universal positional combat classification based on genuinely striking an enemy from behind; Crimson does not create fake backstab windows by altering enemy facing or widening the rear arc.
 - Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, or Legendary.
-- Exact damage, timing, hitboxes, buildup rates, durations, cooldowns, rarity weights, and VFX timing remain prototype and implementation work.
+- Exact damage, timing, hitboxes, buildup rates, durations, rarity weights, and VFX timing remain prototype and implementation work.
 
 ## Current family-design state
 
-The earlier broad Technique draft is no longer treated as the current launch roster. The five core family mechanics are now defined at qualitative core-rule depth, but the direct five-by-five Technique matrix still needs to be designed and approved.
+The earlier broad Technique draft is no longer treated as the current launch roster. The five core family mechanics are defined at qualitative core-rule depth, but the complete direct five-by-five Technique matrix still needs to be approved.
 
 Current state:
 
@@ -37,9 +38,9 @@ Current state:
 - **Gold / cracked crest:** Rupture mechanic defined at qualitative gameplay depth.
 - **Violet / binding knot:** Seal mechanic defined at qualitative gameplay depth.
 - **Ivory / blade circle:** Rift mechanic defined. A single evolving fracture mark automatically opens after a short delay for Health damage; further qualifying applications intensify the same mark and strengthen the burst.
-- **Crimson / split blood drop:** Burst mechanic defined. A Burst-ready target can take an immediate heavy close-range AoE blast centered on itself; after triggering, that target recharges, and continued close-range sword pressure accelerates recovery.
+- **Crimson / split blood drop:** Crimson has been redesigned around **Vulnerable, backstab payoff, and direct Health damage**. The family core and its five direct slot concepts are approved at qualitative depth.
 
-The families are not required to use the same buildup model or scale identically. Rift and Burst are intentionally allowed to provide strong first-pick value while remaining viable with later investment.
+The families are not required to use the same buildup model or scale identically. Every direct Technique should still provide worthwhile standalone value when it is the player's only pickup from that family.
 
 ### Rupture rule
 
@@ -70,16 +71,24 @@ The families are not required to use the same buildup model or scale identically
 - When the Rift opens, the fracture violently splits / flashes through the target and then disappears.
 - Exact fuse, maximum intensity, application strength, damage, and boss scaling remain tuning work.
 
-### Burst rule
+### Crimson / Vulnerable rule
 
-- Crimson centers on **immediate direct AoE damage** rather than a persistent damaging zone.
-- A qualifying Crimson Technique can trigger Burst on a struck target when that target is Burst-ready.
-- Burst damages the primary target as well as nearby enemies inside a bounded radius, keeping it useful against bosses and isolated targets.
-- After triggering, that target enters a short recharge state before it can Burst again.
-- Continued close-range direct sword hits against that target accelerate Burst recovery.
-- Burst damage cannot recursively trigger more Bursts, and multi-target trigger limits must prevent pack-wide cascade behavior from one swing.
-- Persistent crimson zones may exist later as supporting or higher-rarity effects, but are not part of the base family rule.
-- Exact damage, radius, cooldown, close-range recovery rate, and trigger limits remain tuning work.
+- **Vulnerable** is a short enemy status effect.
+- While Vulnerable, genuine backstabs against that enemy deal substantially increased direct Health damage.
+- Vulnerable does not make frontal attacks count as backstabs and does not slow, stun, root, change enemy facing, suppress movement abilities, or change awareness.
+- Not every Crimson Technique applies or references Vulnerable. Crimson may also use direct Health damage, bounded AoE, and standalone backstab payoffs.
+- Every Crimson direct Technique must remain worthwhile when it is the player's only Crimson pickup.
+- Exact Vulnerable duration, refresh rule, and backstab multiplier remain tuning work.
+
+Approved Crimson direct row:
+
+- **Basic Attack — Open Wound:** qualifying Basic hits apply Vulnerable for a short duration.
+- **Held Attack — Deep Cut:** a Held Attack backstab deals extremely high direct Health damage and partially bypasses defensive mitigation; it does not need to apply Vulnerable.
+- **Dash — Blood Arc:** Dash Attack releases a wide bounded crimson sword arc that deals direct Health damage to the struck target and nearby enemies; no Vulnerable requirement.
+- **Parry / Counter — Exposed Guard:** a successful Counter applies Vulnerable to the struck enemy.
+- **Deathblow — Predator's Wake:** after the Deathblow resolves, nearby surviving enemies become Vulnerable for a short duration.
+
+A brief invisibility / enemy-awareness-suppression effect is reserved for a future **Crimson Legendary**, not an ordinary core Technique. Exact Legendary implementation remains deferred.
 
 ## Priority order
 
@@ -95,13 +104,13 @@ The families are not required to use the same buildup model or scale identically
 
 **This is the current active design area.**
 
-The immediate next task is to define or revise the five direct Techniques for each family:
+The immediate next task is to finish the unresolved direct Techniques:
 
 - rewrite the weak Pale Silver / Echo slot concepts, especially Dash,
 - revisit weak Gold / Rupture slot concepts, especially Counter and exact Deathblow behavior,
 - revisit the working Violet / Seal slot concepts and approve the final five,
-- define how the five Rift slots apply, intensify, accelerate, or potentially force open the same Rift mechanic,
-- define how the five Crimson slots vary Burst strength, footprint, trigger access, and close-range recharge interaction.
+- define and approve how the five Rift slots apply, intensify, accelerate, or potentially force open the same Rift mechanic,
+- keep the approved Crimson row stable unless the full-matrix audit exposes a concrete overlap, balance, readability, or implementation problem.
 
 Then audit the complete matrix for:
 
@@ -109,6 +118,7 @@ Then audit the complete matrix for:
 - boss and isolated-target usefulness,
 - group power and AoE limits,
 - high-frequency / multi-hit trigger normalization,
+- genuine backstab access and Vulnerable usefulness across important enemies,
 - mixed-family compatibility,
 - visual readability when multiple family effects coexist,
 - and whether each family feels like a coherent scalable path without being mechanically identical to the others.
@@ -157,4 +167,4 @@ Define repeat Heart-route access, repeat-clear rewards, launch completion goals,
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup, Rupture decay, Seal slow values, Seal duration / expiry, protected-enemy Seal resistance, Rift fuse / intensity / damage, Burst damage / radius / cooldown / close-range recovery, guard pressure, stagger, reach, movement, recovery, Blood values, room probabilities, prices, rarity weights, replacement rates, permanent-upgrade percentages, and final VFX / animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup, Rupture decay, Seal slow values, Seal duration / expiry, protected-enemy Seal resistance, Rift fuse / intensity / damage, Vulnerable duration / refresh / backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage / width, Predator's Wake radius, guard pressure, stagger, reach, movement, recovery, Blood values, room probabilities, prices, rarity weights, replacement rates, permanent-upgrade percentages, and final VFX / animation timing.

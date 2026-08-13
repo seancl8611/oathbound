@@ -9,30 +9,43 @@ last_reviewed: 2026-08-12
 
 # Documentation Changelog
 
+## 2026-08-12 — Crimson Vulnerable / backstab redesign
+
+- Superseded the 2026-08-11 Crimson **Burst** family direction.
+- Locked backstab as a universal positional hit classification based on genuinely striking an enemy from behind; Crimson does not create fake backstab windows through forced facing, widened rear arcs, scripted enemy behavior, or ordinary slow.
+- Rebuilt Crimson around **Vulnerable**, a short enemy status that causes genuine backstabs to deal substantially increased direct Health damage.
+- Kept Vulnerable deliberately narrow: it does not slow, stun, root, alter facing, suppress movement abilities, or change enemy awareness.
+- Established that not every Crimson Technique needs to apply or reference Vulnerable; the family may also use standalone direct Health damage, bounded AoE, and backstab payoffs.
+- Added a standalone-value requirement so a Crimson Technique remains worthwhile even when it is the player's only Crimson pickup.
+- Approved the Crimson direct five-slot row at qualitative depth:
+  - **Basic Attack — Open Wound:** qualifying Basic hits apply Vulnerable.
+  - **Held Attack — Deep Cut:** a Held backstab deals extremely high Health damage and partially bypasses defensive mitigation.
+  - **Dash — Blood Arc:** Dash Attack creates a wide bounded crimson sword arc for direct Health damage and nearby coverage.
+  - **Parry / Counter — Exposed Guard:** a successful Counter applies Vulnerable.
+  - **Deathblow — Predator's Wake:** nearby survivors become Vulnerable after a Deathblow resolves.
+- Reserved brief invisibility / enemy-awareness suppression for a future Crimson **Legendary** through the working Unseen concept; exact Legendary implementation remains deferred.
+- Removed Burst-ready, per-target Burst recharge, close-range Burst recovery, and radial Burst VFX from current production direction.
+- Advanced Crimson from an unresolved direct-row task to a completed qualitative row awaiting the full five-family compatibility/readability audit.
+
 ## 2026-08-12 — Technique architecture consistency audit
 
 - Audited Technique dependencies after the five family cores were locked.
 - Removed stale four-active-plus-reserve and rest-room swapping language from the core loop, run structure, terminology, art inventory, and Milestone 4 scope.
 - Removed remaining temporary Prosthetic-Technique assumptions from dependent run-build and production documentation; Prosthetic progression remains persistent Forge development.
 - Synchronized full-scope, progression, reward, UI, combat, and production dependencies around five direct combat slots plus slotless supporting Techniques.
-- Updated dependent summaries to recognize all five defined family mechanics: Echo, Rupture, Seal, Rift, and Burst.
+- Updated dependent summaries to recognize the then-current five defined family mechanics: Echo, Rupture, Seal, Rift, and Burst. Crimson Burst was subsequently superseded by the Vulnerable / backstab redesign above.
 - Corrected the art inventory's Relic rarity summary to the currently provisional three-tier Common / Rare / Legendary sketch rather than the four-tier Technique rarity model.
 - Confirmed the active design dependency is now the direct five-by-five Technique matrix; later supporting, cross-family, Legendary, refinement, rarity, and reward-frequency work remains downstream.
 
-## 2026-08-11 — Rift and Crimson Burst family lock
+## 2026-08-11 — Rift and Crimson Burst family lock — Crimson portion superseded 2026-08-12
 
 - Locked the Ivory / blade-circle family around **Rift**.
 - Defined Rift as one visible ivory fracture-line on the enemy that automatically opens after a short fuse for direct Health damage.
 - Further qualifying Rift applications intensify the same visible mark rather than adding exposed stacks; the fracture spreads and becomes more prominent as its eventual burst grows stronger.
 - Positioned Rift as a **strong-upfront, moderate-scaling** family: one pickup is immediately useful, while deeper investment remains viable without requiring the highest synergy ceiling.
-- Locked the Crimson / split-blood-drop family around **Burst**.
-- Defined Burst as immediate heavy direct AoE damage centered on a struck Burst-ready target, damaging both the primary target and nearby enemies.
-- Added a short per-target Burst recharge and made continued close-range direct sword pressure accelerate that recovery, giving Crimson a close-quarters aggression identity.
-- Prohibited Burst damage from recursively triggering additional Bursts and kept pack-wide cascade behavior bounded.
-- Kept persistent crimson damage zones out of the base family rule; they may be explored later through supporting or higher-rarity Techniques.
-- Defined working Burst visual language around a readable split-blood-drop ready / recharge cue and a compact radial crimson blast.
+- Previously locked the Crimson / split-blood-drop family around **Burst**; that Crimson direction is now superseded by the 2026-08-12 Vulnerable / backstab redesign.
+- The superseded Burst direction used immediate heavy direct AoE centered on a Burst-ready target, per-target recharge, close-range recovery acceleration, bounded pack behavior, and no persistent base damage zone.
 - Explicitly allowed the five Technique families to use different buildup structures and different early / late power curves rather than forcing all families into stack-based scaling.
-- Marked all five family cores as defined at qualitative gameplay depth: Echo, Rupture, Seal, Rift, and Burst.
 - Advanced the active Technique task to designing and approving the full five-by-five direct combat-slot matrix.
 
 ## 2026-08-09 — Core Technique-family mechanics pass

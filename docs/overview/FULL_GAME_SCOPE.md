@@ -47,7 +47,7 @@ This document defines Oathbound's current production-level shape. It does not lo
 
 ## Player and run build
 
-Akio begins with a complete introductory katana kit. Core combat includes parry, player/enemy posture, stagger, deathblow, block, dash, and Prosthetic support.
+Akio begins with a complete introductory katana kit. Core combat includes parry, player/enemy posture, stagger, deathblow, block, dash, universal rear-hit / backstab classification, and Prosthetic support.
 
 After Returning Blood awakens, launch scope includes:
 
@@ -91,11 +91,13 @@ All five family mechanics are defined at qualitative core-rule depth:
 - **Gold / cracked crest — Rupture:** buildup fills a visible enemy meter; completion triggers a large posture-impact proc and bounded nearby posture pressure.
 - **Violet / binding knot — Seal:** discrete visible marks progressively restrict movement; three complete the pattern and briefly Bind the target without stunning it.
 - **Ivory / blade circle — Rift:** one visible fracture mark automatically opens after a short fuse for direct Health damage; further qualifying applications intensify the same mark before it opens.
-- **Crimson / split blood drop — Burst:** immediate heavy direct AoE centered on a Burst-ready struck target; the target then recharges, accelerated by continued close-range sword pressure.
+- **Crimson / split blood drop — Vulnerable / direct Health damage:** Vulnerable is a short enemy status that makes genuine backstabs deal substantially increased Health damage. Other Crimson Techniques may instead provide standalone direct Health damage, bounded AoE, or stronger backstab payoffs.
 
-The families are not required to use identical buildup structures or power curves. Rift and Burst may provide stronger first-pick value while remaining viable with further investment.
+Backstabs remain universal positional hits based on actually reaching the enemy's rear. Crimson does not create fake rear-angle windows, force enemy facing, or rely on ordinary slow to manufacture backstabs.
 
-The direct five-by-five Technique matrix is the active roster-design task. Supporting, cross-family, Legendary, and refinement concepts should be rebuilt only after that matrix is stable.
+The Crimson direct row is approved at qualitative depth: **Open Wound, Deep Cut, Blood Arc, Exposed Guard, Predator's Wake**. The rest of the direct five-by-five Technique matrix remains the active roster-design task.
+
+Supporting, cross-family, Legendary, and refinement concepts should be rebuilt only after that matrix is stable. A brief Unseen / invisibility-style Crimson effect is reserved for the later Legendary layer rather than ordinary direct Techniques.
 
 ## Optional investment outcomes
 
@@ -179,6 +181,6 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, Burst damage/radius/recharge, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system is not part of the game.

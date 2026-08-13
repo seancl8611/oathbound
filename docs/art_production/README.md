@@ -36,9 +36,11 @@ All five Technique family mechanics are defined at qualitative core-rule depth:
 - Rupture,
 - Seal,
 - Rift,
-- Burst.
+- Crimson Vulnerable / backstab / direct Health damage.
 
-The immediate Technique production dependency is approval of the direct five-by-five matrix. Reusable Technique UI/VFX framework work may proceed at a system level, but final unique icons and bespoke effects should wait for approved catalog entries. Supporting, cross-family, Legendary, and refinement production scope follows the direct matrix.
+The Crimson direct row is already approved at qualitative depth. Its production language now requires a readable Vulnerable enemy status, enhanced Vulnerable-backstab hit feedback, a concentrated Deep Cut rear-hit treatment, bounded sword-shaped Blood Arc AoE, and Predator's Wake application feedback. The superseded Burst-ready / recharge presentation is not a production target.
+
+The immediate Technique production dependency is approval of the remaining direct five-by-five matrix. Reusable Technique UI/VFX framework work may proceed at a system level, but final unique icons and bespoke effects should wait for approved catalog entries. Supporting, cross-family, Legendary, and refinement production scope follows the direct matrix.
 
 Other remaining production dependencies include:
 
