@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-13
 ---
 
 # Production Roadmap
@@ -57,7 +57,9 @@ Ronin production needs include distinct Tier 0 heavy actions, strong guard/postu
 
 Ronin's repeated posture growth should reuse the normal player-posture HUD and capacity language rather than create a separate buff icon or VFX state.
 
-The five Technique family mechanics—Echo, Rupture, Seal, Rift, and Burst—are defined at qualitative core-rule depth. Final unique Technique icons and bespoke Technique effects depend on approval of the direct five-by-five matrix and the later launch catalog layers.
+The five Technique family mechanics and all 25 direct slot Techniques are approved at qualitative paper-design depth: **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**.
+
+The direct matrix may now guide high-level Technique-specific planning. Final total unique Technique icons and bespoke effects still depend on the remaining later catalog layers: Legendary, Supporting, Cross-family, refinement, replacement, rarity, and eligibility decisions.
 
 ## Milestone 5 — Complete Area 2
 
@@ -92,6 +94,7 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 - Beyond the Veil should reuse Pale Lance, Ghostline Slash, shared deathblow, and locomotion presentation.
 - Pale Procession shade/steering/three-lane assets are excluded.
 - Reusable Technique UI may precede final catalog lock; unique icons and bespoke effects require approved entries.
+- The approved 25 direct Techniques should remain stable unless testing exposes a concrete issue.
 - The standard successful-run pacing target is 45–50 minutes, with exact room/encounter budgets deferred to playtesting.
 - The base Heart Binding ritual is one reusable package.
 - Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
@@ -100,4 +103,4 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 ## Current pre-production dependency
 
-Finish and approve the five-by-five direct Technique matrix first. Then rebuild the later Technique layers and continue through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
+Complete and approve the **later Technique catalog layers** first: Legendary, Supporting, Cross-family, refinements, rare replacements, rarity, prerequisites, and eligibility. Then continue through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
