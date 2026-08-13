@@ -39,8 +39,10 @@ last_reviewed: 2026-08-12
 | Rupture | Gold family mechanic: buildup fills an enemy meter; completion triggers a major posture-impact proc and bounded nearby posture pressure. Capitalize when naming the Technique mechanic. |
 | Seal | Violet family mechanic: discrete visible marks progressively restrict movement; three complete the pattern and briefly Bind the target. |
 | Rift | Ivory family mechanic: one visible fracture mark automatically opens after a short fuse for direct Health damage and can be intensified before opening. |
-| Burst | Crimson family mechanic: immediate direct AoE centered on a Burst-ready struck target; the target then recharges, accelerated by continued close-range sword pressure. |
-| combat verb | Shared action or behavior used for natural synergy, such as parry, posture, deathblow, dash, movement, close-range pressure, or Spirit. |
+| backstab | Universal positional hit classification for an eligible sword attack that genuinely contacts an enemy from within that enemy's rear region relative to current facing. Crimson does not create or widen the backstab region. |
+| Vulnerable | Crimson family status: a short enemy state during which genuine backstabs deal substantially increased direct Health damage. Vulnerable does not slow, stun, root, alter facing, suppress movement, or change awareness. |
+| Unseen | Reserved future Crimson Legendary concept for a brief invisibility / enemy-awareness-suppression state. Exact behavior is not yet locked. |
+| combat verb | Shared action or behavior used for natural synergy, such as parry, posture, deathblow, dash, backstab, movement, or Spirit. |
 | The Order | Akio's religious-military organization. The Shogun predates it. |
 | The Strand | Persistent shoreline hub and controlled barrier threshold. |
 | Bloodwell | Strand permanent-progression and reformation-presentation station. One word. It is not the source of Returning Blood. |
@@ -91,6 +93,8 @@ last_reviewed: 2026-08-12
 - Use `Technique` instead of `boon` for ordinary run upgrades.
 - `active Technique`, `reserve Technique`, the four-active-plus-reserve loadout, and routine rest-room Technique swapping are superseded by the five direct combat slots plus slotless supporting Techniques.
 - `Prosthetic Technique` is removed from the run-build system; Prosthetic progression belongs to the persistent Forge package.
+- Crimson `Burst`, Burst-ready targets, per-target Burst recharge, and close-range Burst recovery are superseded by the Vulnerable / backstab / direct-Health-damage family direction.
+- Do not use a widened rear arc, forced facing, scripted enemy activity, or ordinary invisibility as Crimson's core backstab-enabling mechanic.
 - Storm, Frost, Ember, Hex, and Shadow are removed player stance-system names.
 - Frost and Hex are not baseline player status families.
 - Do not call Akio immune to Beast Blood.
