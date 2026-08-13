@@ -10,6 +10,7 @@ topics:
   - posture
   - parry
   - deathblow
+  - backstab
   - base-moveset
 related:
   - CHAR-AKIO
@@ -25,7 +26,7 @@ related:
 
 # Combat System
 
-Oathbound uses high-angle 2D action combat centered on katana exchanges, posture pressure, parries, blocks, dodges, contextual counters, deathblows, and readable arena pressure.
+Oathbound uses high-angle 2D action combat centered on katana exchanges, posture pressure, parries, blocks, dodges, contextual counters, deathblows, positional attacks, and readable arena pressure.
 
 ## Design goal
 
@@ -188,6 +189,18 @@ An Aspect is not currently defined through unique deathblow movement, chaining, 
 
 Techniques or later explicitly approved systems may modify deathblow outcomes through universal rules.
 
+## Universal backstab contract
+
+A **backstab** is a universal positional hit classification, not a Crimson-only action and not a separate execution prompt.
+
+- A direct eligible sword attack counts as a backstab when it genuinely contacts the target from within the target's rear region relative to that target's facing at the moment of contact.
+- Backstab availability does not require a status, Technique, stealth state, scripted enemy animation, or special temporary window.
+- Crimson does not make frontal hits count as backstabs, widen the rear region as its core solution, force enemy facing, or manipulate enemy activity to manufacture a positional result.
+- Important enemies and bosses must expose a usable facing / rear relationship so positional Technique builds remain viable even when the enemy is non-humanoid.
+- Exact rear-angle threshold, collision sampling, and any baseline backstab damage treatment remain implementation and playtesting work.
+
+Approved mechanics may reward the classification. The Crimson status **Vulnerable**, for example, causes genuine backstabs against that enemy to deal substantially increased direct Health damage while the status is active.
+
 ## Technique relationship
 
 The direct Technique layer is tied to exactly five shared combat slots:
@@ -200,7 +213,7 @@ The direct Technique layer is tied to exactly five shared combat slots:
 
 One direct Technique may occupy each slot. Ordinary direct Techniques do not create additional action buttons or stack multiple direct modifications into the same slot.
 
-Slotless supporting Techniques may interact with approved shared combat states such as posture, movement, family buildup, target state, or other existing mechanics, but they do not create extra direct combat slots. Prosthetic progression is separate and persistent; ordinary Techniques do not temporarily upgrade a particular Prosthetic.
+Slotless supporting Techniques may interact with approved shared combat states such as posture, movement, family buildup, target state, backstab classification, or other existing mechanics, but they do not create extra direct combat slots. Prosthetic progression is separate and persistent; ordinary Techniques do not temporarily upgrade a particular Prosthetic.
 
 A Technique uses one rule across every Aspect. It may produce different practical value because the underlying moves differ, so high-frequency and multi-hit interactions require normalization.
 
@@ -213,7 +226,7 @@ Techniques must not:
 - depend on an exact multi-Technique combination to function,
 - or require separate Wolf, Wraith, and Ronin versions of an ordinary effect.
 
-The [Technique System](TECHNIQUES.md) owns Technique rules. This file owns shared controls, movement, defense, deathblows, response language, and action-slot vocabulary. The selected Aspect owns the sword attacks assigned to the offensive slots.
+The [Technique System](TECHNIQUES.md) owns Technique rules. This file owns shared controls, movement, defense, deathblows, backstab classification, response language, and action-slot vocabulary. The selected Aspect owns the sword attacks assigned to the offensive slots.
 
 ## Response rules
 
@@ -228,7 +241,7 @@ Enemy attacks should communicate intended responses through silhouette, timing, 
 
 ## Enemy posture and deathblows
 
-Enemy posture is not a second health bar. It represents control of the exchange. When posture breaks, the enemy enters a visually distinct vulnerable state and may become deathblow-ready.
+Enemy posture is not a second health bar. It represents control of the exchange. When posture breaks, the enemy enters a visually distinct execution-vulnerable state and may become deathblow-ready. This posture-break state is separate from the capitalized Crimson status **Vulnerable**.
 
 Deathblows are punctuation and reward. Their cues, animation weight, and contact points must remain clear even in crowded encounters or when Deathblow Techniques add effects.
 
@@ -250,6 +263,7 @@ Reuse is preferred where it preserves identity and readability. Wolf, Wraith, an
 
 - Frequent sword trails must communicate attack direction and reach.
 - Held, counter, and dash attacks require readable treatment appropriate to the selected Aspect.
+- Backstab and Vulnerable feedback must reinforce positional contact without obscuring enemy facing or implying a stealth state when none exists.
 - Blood forms must not obscure guard state, parry timing, hazards, enemy telegraphs, or deathblow readiness.
 - Technique cues should reuse approved combat and Aspect language before requiring bespoke effects; established shared VFX may also be reused where mechanically accurate.
 
@@ -266,6 +280,6 @@ From quietest to strongest visual priority:
 
 ## Implementation boundary
 
-Exact frame data, damage values, posture formulas, invulnerability durations, input buffers, cancel rules, Technique values, and encounter tuning belong in implementation documentation or code.
+Exact frame data, damage values, posture formulas, invulnerability durations, input buffers, cancel rules, rear-angle thresholds, Technique values, and encounter tuning belong in implementation documentation or code.
 
-This file owns the shared control, neutral movement, defense, deathblow, response, and action-slot contracts. The Aspect documents own the exact sword kits.
+This file owns the shared control, neutral movement, defense, deathblow, backstab, response, and action-slot contracts. The Aspect documents own the exact sword kits.

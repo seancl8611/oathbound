@@ -4,7 +4,7 @@ title: Item, Pickup, and Reward Art
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-13
 topics:
   - currencies
   - pickups
@@ -68,7 +68,7 @@ The five direct combat slots are Basic Attack, Held Attack, Dash, Parry / Counte
 
 Supporting Techniques consume no combat slot and require a visually distinct relationship from direct slotted Techniques without becoming a completely separate visual product family.
 
-The five family mechanics—Echo, Rupture, Seal, Rift, and Burst—are defined. Exact player-facing family names, symbols, colors, and final card treatment remain provisional; recognition may use symbols, color, seals, motion language, VFX motifs, or effect wording. Color alone is insufficient.
+The five approved family mechanics are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**. The full 25-Technique direct matrix is approved at qualitative paper-design depth. Exact player-facing family names, symbols, colors, and final card treatment remain provisional; recognition may use symbols, color, seals, motion language, VFX motifs, or effect wording. Color alone is insufficient.
 
 Required Technique UI art states currently include offered, focused, selected, slotted, supporting, refined, unavailable or invalid, replacement preview, declined/fallback reward, and reroll-ready when implemented.
 
@@ -112,4 +112,4 @@ Do not produce a fixed four-rarity Relic art set until that decision is locked.
 - World pickups, route markers, and corresponding UI icons must remain visibly related.
 - Area-specific objects inherit regional material language.
 - Reusable Technique card, combat-slot, supporting-upgrade, refinement, comparison, and warning templates should be approved before producing a full catalog.
-- Final unique Technique icons require a locked Technique catalog entry.
+- The approved 25 direct Techniques may receive individual icon planning now; final total Technique icon count still depends on later Legendary, Supporting, Cross-family, refinement, replacement, rarity, and eligibility decisions.

@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-08-11
+last_reviewed: 2026-08-12
 ---
 
 # Decision Log
@@ -139,21 +139,39 @@ Further qualifying Rift applications before opening intensify the same visible f
 
 **Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/art_production/TECHNIQUE_VFX.md`
 
-## 2026-08-11 — Crimson-symbol family locked around close-range Burst
+## 2026-08-11 — Crimson-symbol close-range Burst — superseded 2026-08-12
 
-The Crimson / split-blood-drop family now centers on **Burst**: immediate heavy direct AoE damage centered on a struck enemy when that target is Burst-ready.
+The Crimson / split-blood-drop family briefly used **Burst**: immediate heavy direct AoE centered on a Burst-ready enemy, followed by per-target recharge accelerated by close-range sword pressure.
 
-The primary target always takes Burst damage so the mechanic remains useful against bosses and isolated enemies. Nearby enemies inside the bounded blast also take damage. After triggering, that target briefly recharges; continued close-range direct sword pressure accelerates recovery. Burst damage cannot recursively trigger additional Bursts. Persistent damage zones are not part of the base family rule, though they may be explored later as supporting or higher-rarity upgrades.
+That direction was superseded on 2026-08-12 because it overlapped too closely with other direct-damage family behavior and required unnecessary target recharge state.
 
-Crimson is intentionally an aggressive close-quarters family with strong first-pick value and viable but not necessarily highest-ceiling scaling.
+**Current authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`
 
-**Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/art_production/TECHNIQUE_VFX.md`
+## 2026-08-12 — Universal backstab classification and Crimson Vulnerable family
 
-## 2026-08-11 — All five core Technique-family mechanics defined
+A **backstab** is now a universal positional hit classification for an eligible sword attack that genuinely strikes an enemy from behind relative to current facing. Backstab availability does not require Crimson, stealth, scripted enemy behavior, forced facing, a widened rear arc, or a temporary eligibility window.
 
-Echo, Rupture, Seal, Rift, and Burst are now defined at qualitative core-rule depth. Families are explicitly allowed to use different buildup structures and different early / late power curves rather than being forced into one standardized stack model.
+Crimson is rebuilt around **Vulnerable**, direct Health damage, and backstab specialization. Vulnerable is a short enemy status that causes genuine backstabs to deal substantially increased Health damage. It does not slow, stun, root, alter facing, suppress movement abilities, or change awareness.
 
-The active Technique question advances from family-core design to the full five-by-five direct combat-slot matrix.
+Not every Crimson Technique must apply Vulnerable. Crimson can also use standalone Health damage, bounded AoE, and direct backstab payoffs. Every Crimson direct Technique must remain useful as the player's only Crimson pickup.
+
+The direct Crimson row is approved at qualitative depth:
+
+- **Open Wound — Basic Attack:** qualifying Basic hits apply Vulnerable.
+- **Deep Cut — Held Attack:** a genuine Held backstab deals extremely high direct Health damage and partially bypasses defensive mitigation.
+- **Blood Arc — Dash:** Dash Attack produces a wide bounded crimson sword arc for direct Health damage and nearby coverage.
+- **Exposed Guard — Parry / Counter:** a successful Counter applies Vulnerable.
+- **Predator's Wake — Deathblow:** nearby surviving enemies become Vulnerable after the Deathblow resolves.
+
+Brief invisibility / enemy-awareness suppression is reserved for a future Crimson Legendary through the working **Unseen** concept rather than ordinary core Techniques. Exact Legendary behavior remains deferred.
+
+**Authority:** `docs/gameplay/COMBAT.md`, `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/art_production/TECHNIQUE_VFX.md`
+
+## 2026-08-12 — Five-family matrix remains active design dependency
+
+Echo, Rupture, Seal, Rift, and the redesigned Crimson Vulnerable / direct-Health family are defined at qualitative core-rule depth. Crimson's direct row is complete; Echo, Rupture, Seal, and Rift still require remaining slot approval before the full matrix audit.
+
+Families are allowed to use different buildup structures and different early / late power curves rather than being forced into one standardized stack model.
 
 **Authority:** `docs/_meta/OPEN_QUESTIONS.md`, `docs/gameplay/TECHNIQUE_CATALOG.md`
 

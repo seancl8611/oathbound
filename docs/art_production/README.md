@@ -28,17 +28,21 @@ Current Aspect production groups include:
 
 Exact final animation counts, sprite overlays, VFX, audio, icon, HUD, Shrine, selection, and trial requirements still depend on implementation briefs and playable validation rather than reopening the approved qualitative Tier packages.
 
-The Technique system now uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless supporting upgrades. The retired four-active-plus-reserve model and temporary Prosthetic-Technique layer are not production targets.
+The Technique system uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless later-layer upgrades. The retired four-active-plus-reserve model and temporary Prosthetic-Technique layer are not production targets.
 
-All five Technique family mechanics are defined at qualitative core-rule depth:
+All five Technique family mechanics and the full 25-Technique direct matrix are approved at qualitative paper-design depth:
 
 - Echo,
 - Rupture,
 - Seal,
 - Rift,
-- Burst.
+- Crimson Vulnerable / backstab / direct Health damage.
 
-The immediate Technique production dependency is approval of the direct five-by-five matrix. Reusable Technique UI/VFX framework work may proceed at a system level, but final unique icons and bespoke effects should wait for approved catalog entries. Supporting, cross-family, Legendary, and refinement production scope follows the direct matrix.
+The direct matrix may now guide Technique-specific visual planning. The current design dependency before final Technique production counts are locked is the remaining catalog layer: **Legendary, Supporting, Cross-family, refinement, replacement, rarity, and eligibility decisions**.
+
+Crimson production language requires a readable Vulnerable enemy status, enhanced Vulnerable-backstab hit feedback, a concentrated Deep Cut rear-hit treatment, bounded sword-shaped Blood Arc AoE, and Predator's Wake application feedback. The superseded Burst-ready / recharge presentation is not a production target.
+
+Reusable Technique UI/VFX framework work may proceed at a system level. Final total unique icon and bespoke-effect counts should wait until the later Technique layers and final launch catalog are approved.
 
 Other remaining production dependencies include:
 
