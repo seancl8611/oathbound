@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-13
 topics:
   - full-scope
   - techniques
@@ -31,6 +31,7 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Player character | 1 | Akio concept, final sprite, introductory combat, three Aspect combat libraries |
 | Blood Aspects | 3 | Wolf, Wraith, Ronin |
 | Core Technique slots | 5 | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow |
+| Direct Technique matrix | 25 approved concepts | Five families × five direct combat slots |
 | Supporting Technique capacity | No fixed inventory cap | Limited by Technique rewards, rarity, prerequisites, and run length |
 | Prosthetic tools | 8 | One equipped at a time; permanent Forge progression |
 | Run-scoped Relic capacity | 1 | Launch catalog remains open |
@@ -57,8 +58,9 @@ After Returning Blood awakens, launch scope includes:
 - Blood as a run-only resource unavailable before Tier II,
 - five direct Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow,
 - one direct Technique maximum per slot,
+- the approved 25-Technique direct matrix across five families,
 - rare same-slot replacement offers,
-- slotless supporting Technique upgrades with no fixed inventory cap,
+- slotless Supporting Technique upgrades with no fixed inventory cap,
 - one small refinement maximum per eligible slotted Technique,
 - four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
 - one equipped Prosthetic with permanent Forge progression,
@@ -66,7 +68,7 @@ After Returning Blood awakens, launch scope includes:
 
 Prosthetic Techniques are not part of the run-build system. Techniques do not add separate temporary upgrade layers to Prosthetics or Relics.
 
-The exact Technique roster size is open. The retired rough ~30 count and Blade / Deflection / Execution / Movement / General quotas are no longer production requirements.
+The final total Technique roster size remains open because Supporting, Cross-family, Legendary, refinement, and replacement layers are still being designed. The retired rough ~30 count and Blade / Deflection / Execution / Movement / General quotas are no longer production requirements.
 
 ## Locked Aspect scope
 
@@ -85,7 +87,7 @@ All three packages are locked at current qualitative paper-design depth. Final a
 
 Technique design uses five broad internal effect families that can meaningfully affect the five core combat slots. The families do not need formal player-facing names; recognition should rely on symbols, color treatment, effect behavior, VFX, and audio language.
 
-All five family mechanics are defined at qualitative core-rule depth:
+All five family mechanics and all 25 direct slot Techniques are approved at qualitative core-rule depth:
 
 - **Pale silver / twin slash — Echo:** delayed additional sword slashes created by qualifying actions.
 - **Gold / cracked crest — Rupture:** buildup fills a visible enemy meter; completion triggers a large posture-impact proc and bounded nearby posture pressure.
@@ -95,9 +97,9 @@ All five family mechanics are defined at qualitative core-rule depth:
 
 Backstabs remain universal positional hits based on actually reaching the enemy's rear. Crimson does not create fake rear-angle windows, force enemy facing, or rely on ordinary slow to manufacture backstabs.
 
-The Crimson direct row is approved at qualitative depth: **Open Wound, Deep Cut, Blood Arc, Exposed Guard, Predator's Wake**. The rest of the direct five-by-five Technique matrix remains the active roster-design task.
+The direct roster is owned by `TECHNIQUE_CATALOG.md` and should remain stable unless prototyping exposes a concrete issue.
 
-Supporting, cross-family, Legendary, and refinement concepts should be rebuilt only after that matrix is stable. A brief Unseen / invisibility-style Crimson effect is reserved for the later Legendary layer rather than ordinary direct Techniques.
+The current Technique scope task is the later catalog layer: **Legendary Techniques, same-family Supporting Techniques, Cross-family Techniques, refinements, rare replacements, rarity assignments, prerequisites, and reward eligibility**. A brief Unseen / invisibility-style Crimson effect is reserved as a current Legendary candidate rather than an ordinary direct Technique.
 
 ## Optional investment outcomes
 
@@ -166,14 +168,14 @@ Postgame retains repeatable normal runs and optional Heart-route access without 
 
 ## Run-build and persistence boundary
 
-Temporary run state includes Aspect Tier, Corruption, Blood, slotted and supporting Techniques, refinements, run Relic, Gold, temporary capacities, and room progress.
+Temporary run state includes Aspect Tier, Corruption, Blood, slotted and Supporting Techniques, Cross-family Techniques, refinements, run Relic, Gold, temporary capacities, and room progress.
 
 Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks/mastery, permanent upgrades including Prosthetic progression, and persistent currencies.
 
 ## Current open production scope
 
-1. Finish and approve the five-by-five direct Technique matrix.
-2. Rebuild later Technique layers and finish Relic / consumable run-build scope.
+1. Complete the later Technique catalog layers and lock final Technique production count.
+2. Finish Relic / consumable run-build scope.
 3. Define permanent Prosthetic / Forge progression depth.
 4. Persistent progression, onboarding, and trial package.
 5. Narrative delivery, voice, cinematic, portrait, and final-writing package.
