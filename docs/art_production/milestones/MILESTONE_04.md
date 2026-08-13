@@ -45,7 +45,9 @@ The milestone must support optional Aspect Tier investment, five direct Techniqu
 - Relic card family and one initial Relic slot.
 - Currency, Health, Spirit, capacity, route-marker, breakable, treasure, and reward-object art.
 
-The direct five-by-five Technique matrix must be approved before unique Technique icon/VFX production is scoped. The five family mechanics—Echo, Rupture, Seal, Rift, and Burst—are already defined at qualitative core-rule depth.
+The direct five-by-five Technique matrix must be approved before the complete unique Technique icon/VFX catalog is scoped. The five family mechanics—Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage—are defined at qualitative core-rule depth, and the five Crimson direct slot concepts are already approved.
+
+Crimson production should support Vulnerable target marking, enhanced Vulnerable-backstab feedback, Deep Cut's concentrated rear-hit treatment, Blood Arc's bounded sword-shaped AoE, and Predator's Wake application feedback. The retired Burst-ready / recharge marker and radial Burst language are excluded.
 
 ## Locked Aspect scope
 
@@ -108,10 +110,11 @@ All three packages may guide high-level scoping. Exact counts still require impl
 - Ronin posture-capacity growth reuses existing posture UI rather than creating a new status family.
 - Spectral Passage and Beyond the Veil should reuse existing attack/deathblow/locomotion families wherever practical.
 - Techniques reuse base combat and Aspect VFX before new production is authorized.
+- Crimson backstab presentation must not imply forced enemy facing, scripted rear access, or ordinary invisibility.
 - Prosthetic progression is a separate persistent Forge package and does not create temporary Prosthetic-Technique reward states.
 - Additional Aspects are excluded.
 - No duplicate Aspect-specific Blood Art progression tree is included.
-- Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, and reserve-Technique assets are excluded.
+- Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique assets, and Crimson Burst-ready/recharge assets are excluded.
 
 ## Completion test
 
@@ -123,4 +126,5 @@ All three packages may guide high-level scoping. Exact counts still require impl
 - Wraith range effects do not resemble teleportation or detached projectiles.
 - Wolf pursuit does not resemble automatic targeting.
 - Technique choices, five direct slots, supporting upgrades, rarity, refinements, replacements, and warnings remain understandable as the build develops.
+- Vulnerable and backstab feedback remain readable without obscuring enemy facing or attack telegraphs.
 - Enemy telegraphs remain readable under mixed Aspect, Technique, Prosthetic, and Blood effects.

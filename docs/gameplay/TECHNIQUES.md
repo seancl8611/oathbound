@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-11
+last_reviewed: 2026-08-12
 topics:
   - techniques
   - run-builds
@@ -68,7 +68,7 @@ Supporting Techniques consume no combat slot and have no separate inventory cap.
 They may:
 
 - improve a family's shared scalable mechanic,
-- improve buildup, spread, payoff, duration, cooldown, area, or reliability,
+- improve buildup, spread, payoff, duration, area, or reliability,
 - connect two already-owned family effects,
 - create cross-family interactions,
 - or deepen another coherent run pattern.
@@ -83,7 +83,7 @@ Effect families are internal build structures, not necessarily player-facing nam
 
 The player should primarily distinguish families through a consistent **symbol, color treatment, effect behavior, VFX, and audio language**. Exact UI treatment remains future design work, and color cannot be the only identifier.
 
-A valid family must have one clear scalable gameplay identity that can meaningfully affect several of the five combat slots. Families do **not** need identical structures, buildup rules, or power curves. One family may use stacks, another a meter, another a delayed effect, and another an immediate damage effect. The requirement is that additional investment creates a recognizable path rather than a collection of unrelated triggers.
+A valid family must have one clear scalable gameplay identity that can meaningfully affect several of the five combat slots. Families do **not** need identical structures, buildup rules, or power curves. One family may use stacks, another a meter, another a delayed effect, and another a short status or positional damage rule. The requirement is that additional investment creates a recognizable path rather than a collection of unrelated triggers.
 
 Current defined family mechanics include:
 
@@ -91,7 +91,7 @@ Current defined family mechanics include:
 - **Gold / cracked crest:** Rupture buildup fills a visible enemy meter; a full meter triggers the Rupture posture-impact proc and resets.
 - **Violet / binding knot:** discrete Seal stacks progressively restrict movement; three Seals complete the pattern and briefly Bind the enemy in place without stunning it.
 - **Ivory / blade circle:** Rift creates one visible ivory fracture-line on an enemy. The Rift is guaranteed to open after a short delay for direct Health damage; additional qualifying Rift applications before it opens intensify the same visible mark and strengthen the eventual burst.
-- **Crimson / split blood drop:** Burst is an immediate, heavy close-range AoE blast centered on a struck enemy when that target is Burst-ready. The primary target and nearby enemies take direct damage. After triggering, that target briefly recharges; continued close-range sword pressure can accelerate that recharge.
+- **Crimson / split blood drop:** Crimson is the direct Health-damage and backstab-specialist family. Its shared status, **Vulnerable**, is a short enemy state that makes backstabs deal substantially increased Health damage. Some Crimson Techniques apply Vulnerable, while others provide standalone direct Health damage, AoE, or stronger backstab payoffs without applying the status themselves.
 
 The five family mechanics are now defined at qualitative core-rule depth. Supporting, cross-family, Legendary, and refinement content stays deferred until the five-by-five direct matrix is stable.
 
@@ -99,7 +99,9 @@ The five family mechanics are now defined at qualitative core-rule depth. Suppor
 
 The five families are not required to scale identically.
 
-Rift and Burst are intentionally allowed to provide strong value from a first pickup with less setup than some buildup-oriented families. They must remain viable with further investment, but they do not need the same maximum synergy ceiling as every other family. Rupture, Seal, Echo, Rift, and Burst should each earn later investment through their own mechanic rather than through a standardized stack model.
+Rift is intentionally allowed to provide strong value from a first pickup with less setup than some buildup-oriented families. Crimson should also remain attractive when only one or two Crimson Techniques appear in a run: every Crimson direct Technique must function as a worthwhile standalone pickup rather than depending on another Crimson Technique to make it useful.
+
+Rupture, Seal, Echo, Rift, and Crimson should each earn later investment through their own mechanic rather than through a standardized stack model.
 
 Exact early-, mid-, and late-run balance remains prototype and tuning work.
 
@@ -151,7 +153,7 @@ Source and encounter value may later influence rarity or quality weighting, but 
 
 Techniques should visibly alter Akio's existing sword actions rather than add unrelated spell buttons.
 
-Strong effects may include delayed echo slashes, Rupture buildup and posture bursts, visible Seal patterns and movement binding, Rift marks that visibly spread before opening, cooldown-based close-range AoE Bursts, controlled altered attack geometry, precise counter payoffs, and other effects earned through sword actions.
+Strong effects may include delayed echo slashes, Rupture buildup and posture bursts, visible Seal patterns and movement binding, Rift marks that visibly spread before opening, Vulnerable-based backstab opportunities, direct Health-damage cleaves or AoE, precise counter payoffs, and other effects earned through sword actions.
 
 Avoid making the roster primarily generic fire, frost, lightning, poison, or autonomous magic. Familiar gameplay functions are valid when expressed through Oathbound's combat language.
 
@@ -165,8 +167,9 @@ Avoid making the roster primarily generic fire, frost, lightning, poison, or aut
 - Large single-action effects must be checked against Ronin, and reach/line effects against Wraith.
 - Seal-based movement restriction must not invalidate protected boss movement or authored encounter mechanics.
 - Rift must remain one readable evolving target mark rather than another exposed stack counter. Rapid or multi-hit actions require normalized Rift application so they do not bypass the intended family pacing.
-- Burst must damage the primary target so it remains useful against bosses and isolated elites. Its AoE must be bounded, its recharge readable, and Burst damage must not recursively trigger additional Bursts.
-- Close-range Burst recharge acceleration must reward staying engaged without making high-frequency Aspect kits automatically dominant.
+- Backstab classification is universal combat behavior based on actually striking an enemy from behind. Crimson must not create fake backstab windows by scripting enemy facing, widening the rear arc, or making enemies temporarily count as backstabbed from the front.
+- Vulnerable modifies the payoff of genuine backstabs while the status is active. It does not slow, stun, root, alter facing, or suppress enemy awareness.
+- Every Crimson direct Technique must remain useful when it is the player's only Crimson pickup; Vulnerable synergy is additive rather than mandatory.
 - Mandatory encounters cannot assume a specific Technique family, Legendary, Aspect Tier, or Blood Art.
 
 ## Prosthetic boundary
@@ -185,10 +188,12 @@ Permanent progression may unlock additional Techniques into future reward pools 
 
 The active Technique task is now:
 
-1. design and approve the five direct combat-slot Techniques for each of the five now-defined families,
-2. revisit weak existing Echo, Rupture, and Seal slot concepts while defining the Rift and Burst slot implementations,
-3. audit the complete five-by-five matrix across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, mixed-family compatibility, AoE, and control limits,
+1. finish and approve the five direct combat-slot Techniques for each family,
+2. keep the approved Crimson core row stable while revisiting weak Echo, Rupture, and Seal concepts and finishing Rift,
+3. audit the complete five-by-five matrix across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, mixed-family compatibility, AoE, control, backstab access, and readability,
 4. only then rebuild supporting Techniques, cross-family Techniques, Legendaries, and refinements,
 5. then determine launch count, rarity distribution, eligibility, reward frequency, and production requirements.
 
-Exact numerical values, Rift fuse and intensity values, Burst cooldown and radius, close-range recovery rates, rarity probabilities, offer weights, replacement frequency, family weighting, and final UI identifiers remain later design and playtest work.
+The Crimson direct row is approved at qualitative depth as **Open Wound, Deep Cut, Blood Arc, Exposed Guard, and Predator's Wake**. Exact numerical values remain later tuning work.
+
+Exact numerical values, Rift fuse and intensity values, Vulnerable duration and backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, rarity probabilities, offer weights, replacement frequency, family weighting, and final UI identifiers remain later design and playtest work.
