@@ -31,17 +31,19 @@ The launch Blood Aspect roster and qualitative Tier 0-IV packages are locked for
 
 No further Aspect or Tier audit is active unless prototyping exposes a concrete problem. Exact attack values, timings, hitboxes, growth percentages, and related balance remain implementation work.
 
-The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless supporting upgrades. The old four-active-plus-reserve model is retired.
+The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless later-layer upgrades. The old four-active-plus-reserve model is retired.
 
-All five core Technique-family mechanics are defined at qualitative core-rule depth: **Echo, Rupture, Seal, Rift, and Burst**. The active Technique task is to finish and approve the direct five-by-five combat-slot matrix before rebuilding supporting, cross-family, Legendary, and refinement layers.
+All five Technique-family mechanics and the complete **25-Technique direct matrix** are approved at qualitative paper-design depth: **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**.
 
-Current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) begin with:
+The active Technique work is now the remaining catalog layer:
 
-1. direct five-by-five Technique matrix,
-2. remaining Technique layers and run-build content,
-3. persistent Prosthetic / Forge scope and broader persistent progression,
-4. narrative delivery and authored-content scope,
-5. postgame release scope.
+1. Legendary Techniques,
+2. same-family Supporting Techniques,
+3. Cross-family Techniques,
+4. refinements and rare replacements,
+5. rarity, prerequisites, eligibility, reward frequency, and final launch count.
+
+Current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) now begin with completing those later Technique layers, followed by the remaining run-build, Prosthetic / Forge, persistent-progression, narrative, and postgame packages.
 
 The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
 
