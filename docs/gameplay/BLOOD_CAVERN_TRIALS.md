@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-12
 topics:
   - trials
   - training
@@ -32,7 +32,7 @@ The framework and three-Aspect launch roster are approved. Exact trial counts, s
 
 ### Basic Combat Trials
 
-Teach or refresh block, timed parry, player/enemy posture, posture break, deathblow, dodge, perilous responses, introductory Counter Cut/Dash Slash, and Prosthetic activation.
+Teach or refresh block, timed parry, player/enemy posture, posture break, deathblow, dodge, perilous responses, introductory Parry Counter / Dash Attack use, and Prosthetic activation.
 
 ### Wolf Trials
 
@@ -109,12 +109,14 @@ A trial preview does not grant persistent run Tier or Blood state.
 
 ## Technique demonstrations
 
-Selected trials may use fixed Techniques to teach:
+Selected trials may eventually use fixed approved Techniques to teach:
 
-- one universal combat-verb modification,
-- one refinement,
-- Prosthetic Technique behavior,
-- reinforce/broaden/compensate/hybridize relationships with an Aspect.
+- how a direct Technique modifies one of the five combat slots,
+- how Echo, Rupture, Seal, Rift, or Burst reads and resolves in combat,
+- how a Technique behaves across different Aspect attack geometry or frequency,
+- and, after those layers are approved, supporting-Technique, refinement, or mixed-family interactions.
+
+Prosthetic behavior is taught through the Prosthetic system rather than a temporary Prosthetic-Technique layer.
 
 Temporary trial loadouts do not become persistent equipped builds.
 

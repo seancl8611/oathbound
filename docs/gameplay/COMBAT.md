@@ -4,7 +4,7 @@ title: Combat System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-08-12
 topics:
   - katana
   - posture
@@ -40,7 +40,7 @@ Bosses and larger encounters may use projectiles, ground danger, area denial, ad
 - **Health:** conventional survival resource.
 - **Player posture:** pressure accumulated while Akio blocks or receives certain attacks; breaking it creates vulnerability.
 - **Enemy posture:** control pressure that may create a deathblow opening when broken.
-- **Spirit Emblems:** resource for prosthetic-tool use.
+- **Spirit Emblems:** resource for Prosthetic-tool use.
 - **Corruption:** run-state pressure tied to Returning Blood and Shrine choices.
 
 ## Shared control and action framework
@@ -104,10 +104,10 @@ The neutral dash remains shared. The chosen attack after it may differ, but it s
 - Sustained block
 - Timed parry/perfect deflect
 - Directional neutral dash with invulnerability timing
-- Generic prosthetic activation
+- Generic Prosthetic activation
 - Deathblow execution
 
-All launch candidates retain meaningful access to attack, defense, movement, posture pressure, deathblows, Techniques, and the equipped prosthetic.
+All launch Aspects retain meaningful access to attack, defense, movement, posture pressure, deathblows, Techniques, and the equipped Prosthetic.
 
 ## Universal neutral movement and dash contract
 
@@ -190,22 +190,19 @@ Techniques or later explicitly approved systems may modify deathblow outcomes th
 
 ## Technique relationship
 
-Ordinary Techniques should target shared action categories such as:
+The direct Technique layer is tied to exactly five shared combat slots:
 
 - Basic Attack,
 - Held Attack,
-- Dash Attack,
-- Parry Counter,
-- Block,
-- Parry,
-- Deathblow,
-- Prosthetic,
-- Health,
-- Enemy Posture,
-- Player Posture,
-- and Movement.
+- Dash / Dash Attack,
+- Parry / Counter,
+- Deathblow.
 
-A Technique uses one rule across every Aspect. It may produce different practical value because the underlying moves differ.
+One direct Technique may occupy each slot. Ordinary direct Techniques do not create additional action buttons or stack multiple direct modifications into the same slot.
+
+Slotless supporting Techniques may interact with approved shared combat states such as posture, movement, family buildup, target state, or other existing mechanics, but they do not create extra direct combat slots. Prosthetic progression is separate and persistent; ordinary Techniques do not temporarily upgrade a particular Prosthetic.
+
+A Technique uses one rule across every Aspect. It may produce different practical value because the underlying moves differ, so high-frequency and multi-hit interactions require normalization.
 
 Techniques must not:
 
@@ -233,11 +230,11 @@ Enemy attacks should communicate intended responses through silhouette, timing, 
 
 Enemy posture is not a second health bar. It represents control of the exchange. When posture breaks, the enemy enters a visually distinct vulnerable state and may become deathblow-ready.
 
-Deathblows are punctuation and reward. Their cues, animation weight, and contact points must remain clear even in crowded encounters or when universal Execution Techniques add effects.
+Deathblows are punctuation and reward. Their cues, animation weight, and contact points must remain clear even in crowded encounters or when Deathblow Techniques add effects.
 
 ## Animation requirements
 
-Akio requires one shared defensive, movement, hurt, death, deathblow, and prosthetic-use language.
+Akio requires one shared defensive, movement, hurt, death, deathblow, and Prosthetic-use language.
 
 Each approved Aspect may require distinct offensive animations for:
 
@@ -247,14 +244,14 @@ Each approved Aspect may require distinct offensive animations for:
 - Dash Attack,
 - and any explicitly approved contextual attack transition.
 
-Reuse is preferred where it preserves identity and readability. Exact animation counts remain blocked until the three-Aspect roster and overlap audit are approved.
+Reuse is preferred where it preserves identity and readability. Wolf, Wraith, and Ronin are locked at qualitative paper-design depth; exact final animation counts remain implementation-brief and playable-validation work.
 
 ## VFX requirements
 
 - Frequent sword trails must communicate attack direction and reach.
 - Held, counter, and dash attacks require readable treatment appropriate to the selected Aspect.
 - Blood forms must not obscure guard state, parry timing, hazards, enemy telegraphs, or deathblow readiness.
-- Technique cues should reuse approved combat, Aspect, and prosthetic language before requiring bespoke effects.
+- Technique cues should reuse approved combat and Aspect language before requiring bespoke effects; established shared VFX may also be reused where mechanically accurate.
 
 ## Readability hierarchy
 

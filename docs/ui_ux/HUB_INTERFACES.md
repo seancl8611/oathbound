@@ -4,7 +4,7 @@ title: Hub Interfaces
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-12
 topics:
   - hub-ui
   - boat
@@ -37,7 +37,7 @@ The Strand's interfaces should feel like services embodied in physical stations,
 | Bloodwell | Three-branch permanent meta progression and revival anchor | [Bloodwell](../content/strand/interactibles/BLOODWELL.md) |
 | Blood Mirror / Trials | Aspect unlocks, previews, repeatable trials, Technique demonstrations, and light mastery upgrades | [Blood Mirror and Trials](BLOOD_MIRROR_TRIALS.md) |
 | Run Results | Successful-return rewards and reset summary | [Run Results and Strand Return](RUN_RESULTS.md) |
-| Pause / Overview | Current Aspect, active Techniques, reserve, Relic, effects, and control review | [Pause and Build Overview](PAUSE_OVERVIEW.md) |
+| Pause / Overview | Current Aspect, five direct Technique slots, supporting Techniques, refinements, Relic, effects, and control review | [Pause and Build Overview](PAUSE_OVERVIEW.md) |
 | Strand HUD | Persistent resources and interaction prompts outside runs | [Strand HUD and Prompts](STRAND_HUD_AND_PROMPTS.md) |
 
 ## Boat Aspect selection and run start
@@ -50,7 +50,7 @@ Required contents after Aspect unlock:
 - list of unlocked Aspects,
 - locked-state requirements without spoilers,
 - concise role description,
-- equipped prosthetic summary when available,
+- equipped Prosthetic summary when available,
 - Start Run,
 - Change Aspect,
 - Cancel/back.

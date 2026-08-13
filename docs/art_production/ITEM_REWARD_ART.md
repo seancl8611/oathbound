@@ -4,7 +4,7 @@ title: Item, Pickup, and Reward Art
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-12
 topics:
   - currencies
   - pickups
@@ -68,7 +68,7 @@ The five direct combat slots are Basic Attack, Held Attack, Dash, Parry / Counte
 
 Supporting Techniques consume no combat slot and require a visually distinct relationship from direct slotted Techniques without becoming a completely separate visual product family.
 
-Exact player-facing effect-family names are not locked. Once families are approved, recognition may use symbols, color, seals, motion language, VFX motifs, or effect wording. Color alone is insufficient.
+The five family mechanics—Echo, Rupture, Seal, Rift, and Burst—are defined. Exact player-facing family names, symbols, colors, and final card treatment remain provisional; recognition may use symbols, color, seals, motion language, VFX motifs, or effect wording. Color alone is insufficient.
 
 Required Technique UI art states currently include offered, focused, selected, slotted, supporting, refined, unavailable or invalid, replacement preview, declined/fallback reward, and reroll-ready when implemented.
 

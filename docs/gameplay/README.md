@@ -31,13 +31,15 @@ The launch Blood Aspect roster and qualitative Tier 0-IV packages are locked for
 
 No further Aspect or Tier audit is active unless prototyping exposes a concrete problem. Exact attack values, timings, hitboxes, growth percentages, and related balance remain implementation work.
 
-The Technique architecture now uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless supporting upgrades. The old four-active-plus-reserve model is retired.
+The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless supporting upgrades. The old four-active-plus-reserve model is retired.
+
+All five core Technique-family mechanics are defined at qualitative core-rule depth: **Echo, Rupture, Seal, Rift, and Burst**. The active Technique task is to finish and approve the direct five-by-five combat-slot matrix before rebuilding supporting, cross-family, Legendary, and refinement layers.
 
 Current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) begin with:
 
-1. Technique effect families and launch roster,
-2. remaining run-build content,
-3. persistent progression, onboarding, and trials,
+1. direct five-by-five Technique matrix,
+2. remaining Technique layers and run-build content,
+3. persistent Prosthetic / Forge scope and broader persistent progression,
 4. narrative delivery and authored-content scope,
 5. postgame release scope.
 
