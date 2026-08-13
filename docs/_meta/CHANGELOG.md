@@ -4,10 +4,24 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-13
 ---
 
 # Documentation Changelog
+
+## 2026-08-13 — Direct Technique matrix lock and repo cleanup
+
+- Locked the full **25-Technique direct matrix** at qualitative paper-design depth after final review.
+- Approved all five direct rows across Echo, Rupture, Seal, Rift, and Crimson.
+- Finalized Echo's direct row as Lingering Cut, Second Draw, Passing Shadow, Remembered Reversal, and Final Memory.
+- Finalized Rupture's direct row as Rupturing Edge, Mountain Breaker, Breaching Step, Breaking Reversal, and Shattered Ground.
+- Finalized Seal's direct row as Sealing Cuts, Binding Draw, Warding Step, Counterseal, and Passing Seal.
+- Finalized Rift's direct row as Rift Edge, Deep Rift, Shearing Step, Rift Reversal, and Parting Rift.
+- Kept Crimson's approved row as Open Wound, Deep Cut, Blood Arc, Exposed Guard, and Predator's Wake.
+- Removed stale live-design language that still treated Echo, Rupture, Seal, Rift, or the full matrix as unresolved.
+- Advanced the active Technique task to the later catalog layers: **Legendary, Supporting, Cross-family, refinements, replacements, rarity, prerequisites, and eligibility**.
+- Rebased the Crimson Vulnerable redesign onto the current `main` documentation baseline so the live repo no longer depends on the previously diverged stacked-branch history.
+- Historical Burst entries remain only as explicitly superseded design history.
 
 ## 2026-08-12 — Crimson Vulnerable / backstab redesign
 
@@ -35,7 +49,7 @@ last_reviewed: 2026-08-12
 - Synchronized full-scope, progression, reward, UI, combat, and production dependencies around five direct combat slots plus slotless supporting Techniques.
 - Updated dependent summaries to recognize the then-current five defined family mechanics: Echo, Rupture, Seal, Rift, and Burst. Crimson Burst was subsequently superseded by the Vulnerable / backstab redesign above.
 - Corrected the art inventory's Relic rarity summary to the currently provisional three-tier Common / Rare / Legendary sketch rather than the four-tier Technique rarity model.
-- Confirmed the active design dependency is now the direct five-by-five Technique matrix; later supporting, cross-family, Legendary, refinement, rarity, and reward-frequency work remains downstream.
+- Confirmed the active design dependency was the direct five-by-five Technique matrix; that dependency was completed on 2026-08-13.
 
 ## 2026-08-11 — Rift and Crimson Burst family lock — Crimson portion superseded 2026-08-12
 
