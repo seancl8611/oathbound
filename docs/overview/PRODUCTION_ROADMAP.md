@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-14
 ---
 
 # Production Roadmap
@@ -57,9 +57,16 @@ Ronin production needs include distinct Tier 0 heavy actions, strong guard/postu
 
 Ronin's repeated posture growth should reuse the normal player-posture HUD and capacity language rather than create a separate buff icon or VFX state.
 
-The five Technique family mechanics and all 25 direct slot Techniques are approved at qualitative paper-design depth: **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**.
+The current working Technique roster is complete at qualitative paper-design depth: **50 actual Techniques plus 10 refinements**.
 
-The direct matrix may now guide high-level Technique-specific planning. Final total unique Technique icons and bespoke effects still depend on the remaining later catalog layers: Legendary, Supporting, Cross-family, refinement, replacement, rarity, and eligibility decisions.
+The 50 Techniques comprise:
+
+- 25 direct slotted Techniques,
+- 15 same-family Supporting Techniques,
+- 5 Cross-family Techniques,
+- 5 Legendary family capstones.
+
+Rarity and prerequisite rules are also approved. Final Technique production quotation still depends on the reward-structure audit, final VFX/icon briefs, and prototype validation rather than further roster expansion.
 
 ## Milestone 5 — Complete Area 2
 
@@ -93,8 +100,8 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 - Spectral Passage should primarily reuse existing attack geometry/trails with extended collision and impact handling.
 - Beyond the Veil should reuse Pale Lance, Ghostline Slash, shared deathblow, and locomotion presentation.
 - Pale Procession shade/steering/three-lane assets are excluded.
-- Reusable Technique UI may precede final catalog lock; unique icons and bespoke effects require approved entries.
-- The approved 25 direct Techniques should remain stable unless testing exposes a concrete issue.
+- Reusable Technique UI may precede final implementation tuning; unique icons and bespoke effects require approved catalog entries and production briefs.
+- The current 50-Technique roster should remain stable unless testing exposes a concrete problem.
 - The standard successful-run pacing target is 45–50 minutes, with exact room/encounter budgets deferred to playtesting.
 - The base Heart Binding ritual is one reusable package.
 - Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
@@ -103,4 +110,4 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 ## Current pre-production dependency
 
-Complete and approve the **later Technique catalog layers** first: Legendary, Supporting, Cross-family, refinements, rare replacements, rarity, prerequisites, and eligibility. Then continue through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
+Finalize the **Technique reward structure and 50-Technique roster audit**: reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and cross-Aspect / boss / readability validation. Then continue through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
