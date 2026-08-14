@@ -33,17 +33,25 @@ No further Aspect or Tier audit is active unless prototyping exposes a concrete 
 
 The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless later-layer upgrades. The old four-active-plus-reserve model is retired.
 
-All five Technique-family mechanics and the complete **25-Technique direct matrix** are approved at qualitative paper-design depth: **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**.
+The current working Technique roster is complete at qualitative paper-design depth:
 
-The active Technique work is now the remaining catalog layer:
+- **25 direct slotted Techniques**,
+- **15 same-family Supporting Techniques**,
+- **5 Cross-family Techniques**,
+- **5 Legendary Techniques**,
+- **10 refinements** that are not counted as separate Techniques.
 
-1. Legendary Techniques,
-2. same-family Supporting Techniques,
-3. Cross-family Techniques,
-4. refinements and rare replacements,
-5. rarity, prerequisites, eligibility, reward frequency, and final launch count.
+This produces **50 actual Techniques plus 10 refinements**. Rarity and prerequisite / eligibility rules are approved in `TECHNIQUE_CATALOG.md` and `TECHNIQUES.md`.
 
-Current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) now begin with completing those later Technique layers, followed by the remaining run-build, Prosthetic / Forge, persistent-progression, narrative, and postgame packages.
+The active Technique work is now:
+
+1. reward frequency,
+2. offer-generation order,
+3. rarity probabilities and source weighting,
+4. rare same-slot replacement behavior,
+5. the complete 50-Technique compatibility/readability audit.
+
+Current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) begin with that Technique reward/audit pass, followed by the remaining run-build, Prosthetic / Forge, persistent-progression, narrative, and postgame packages.
 
 The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
 
