@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-14
 ---
 
 # Decision Log
@@ -155,25 +155,35 @@ Crimson is rebuilt around **Vulnerable**, direct Health damage, and backstab spe
 
 Not every Crimson Technique must apply Vulnerable. Crimson can also use standalone Health damage, bounded AoE, and direct backstab payoffs. Every Crimson direct Technique must remain useful as the player's only Crimson pickup.
 
-The direct Crimson row is approved at qualitative depth:
-
-- **Open Wound — Basic Attack:** qualifying Basic hits apply Vulnerable.
-- **Deep Cut — Held Attack:** a genuine Held backstab deals extremely high direct Health damage and partially bypasses defensive mitigation.
-- **Blood Arc — Dash:** Dash Attack produces a wide bounded crimson sword arc for direct Health damage and nearby coverage.
-- **Exposed Guard — Parry / Counter:** a successful Counter applies Vulnerable.
-- **Predator's Wake — Deathblow:** nearby surviving enemies become Vulnerable after the Deathblow resolves.
-
-Brief invisibility / enemy-awareness suppression is reserved for a future Crimson Legendary through the working **Unseen** concept rather than ordinary core Techniques. Exact Legendary behavior remains deferred.
+The direct Crimson row is approved at qualitative depth: Open Wound, Deep Cut, Blood Arc, Exposed Guard, and Predator's Wake.
 
 **Authority:** `docs/gameplay/COMBAT.md`, `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/art_production/TECHNIQUE_VFX.md`
 
-## 2026-08-12 — Five-family matrix remains active design dependency
+## 2026-08-12 — Five-family matrix dependency — superseded 2026-08-13
 
-Echo, Rupture, Seal, Rift, and the redesigned Crimson Vulnerable / direct-Health family are defined at qualitative core-rule depth. Crimson's direct row is complete; Echo, Rupture, Seal, and Rift still require remaining slot approval before the full matrix audit.
+At this point Echo, Rupture, Seal, Rift, and Crimson were defined at qualitative core-rule depth, but the full direct matrix remained incomplete. That dependency was closed on 2026-08-13.
 
-Families are allowed to use different buildup structures and different early / late power curves rather than being forced into one standardized stack model.
+**Current authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`
 
-**Authority:** `docs/_meta/OPEN_QUESTIONS.md`, `docs/gameplay/TECHNIQUE_CATALOG.md`
+## 2026-08-13 — Direct five-by-five Technique matrix locked
+
+All 25 direct slotted Techniques are approved at qualitative paper-design depth: one Technique for each of the five combat slots in each of the five families. The direct matrix is no longer an active content-design dependency.
+
+**Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`
+
+## 2026-08-14 — 50-Technique working roster, rarity, and eligibility locked
+
+The current working launch Technique roster is **50 actual Techniques plus 10 refinements**: 25 direct, 15 same-family Supporting, 5 Cross-family, and 5 Legendary Techniques.
+
+The rarity distribution is **10 Common / 18 Uncommon / 17 Rare / 5 Legendary**. Refinements have no rarity.
+
+Direct Techniques require only an empty relevant combat slot and can be the player's first pickup from a family regardless of rarity. Supporting Techniques require an already-owned effect that can actually use them. Cross-family Techniques require investment in both listed families plus any entry-specific mechanic requirement.
+
+A Legendary requires **3 native Techniques from its family, including at least 1 slotted Technique**. Same-family Supporting Techniques count toward the three; Cross-family Techniques and refinements do not. Individual Legendaries may impose a mechanic-specific requirement so the capstone cannot appear in a build unable to use it.
+
+The current Technique content roster should remain stable unless audit or prototyping identifies a concrete problem. The next Technique-system decisions are reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and full-roster validation.
+
+**Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/_meta/OPEN_QUESTIONS.md`
 
 ## 2026-08-09 — Technique reward and Prosthetic boundaries clarified
 
