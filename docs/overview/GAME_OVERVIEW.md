@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-14
 topics:
   - project-identity
   - combat
@@ -54,10 +54,10 @@ The selected Blood Aspect determines how Akio fundamentally fights. Techniques a
 - Blood is run-only and unavailable before Tier II.
 - Five core Technique slots tied to **Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow**.
 - One direct Technique maximum per core combat slot; rare replacement offers may overwrite a filled slot.
-- The full **25-Technique direct matrix is approved at qualitative paper-design depth**.
-- Slotless Supporting Techniques may deepen effect families and build synergies without a global inventory cap.
+- The current working Technique roster is **50 actual Techniques plus 10 refinements**.
+- The 50 Techniques include 25 direct, 15 same-family Supporting, 5 Cross-family, and 5 Legendary Techniques.
+- Technique rarity distribution is 10 Common, 18 Uncommon, 17 Rare, and 5 Legendary.
 - At most one refinement per eligible slotted Technique.
-- Technique rarity: Common / Uncommon / Rare / Legendary.
 - One equipped Prosthetic and one run-scoped Relic.
 - Failed runs return Akio to the Strand through Returning Blood reconstruction.
 
@@ -81,6 +81,8 @@ All three Aspect packages are locked at current qualitative paper-design depth. 
 - The five Technique families are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct Health damage**.
 - Technique families may use different buildup structures and early/late power curves rather than one standardized stacking model.
 - Every direct Technique should remain useful even when it is the player's only pickup from that family.
+- Supporting and Cross-family eligibility must avoid dead offers.
+- Family Legendaries require meaningful prior family investment rather than appearing as isolated early pickups.
 - Generic elemental schools are not the target.
 - Focused and hybrid Technique builds should both be viable.
 - Technique-heavy Tier 0-I, Tier II hybrid, Tier III Aspect-heavy, and occasional Tier IV high-roll runs should all be viable.
@@ -111,7 +113,7 @@ A normal successful Binding run currently targets roughly 45-50 minutes. Exact r
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). The immediate run-build task is now the **later Technique catalog**: Legendaries, Supporting Techniques, Cross-family Techniques, refinements, rare replacements, rarity, prerequisites, and eligibility.
+The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). The immediate Technique task is now **reward structure and roster validation**: reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and the complete 50-Technique audit.
 
 ## Source links
 

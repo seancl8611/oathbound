@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-14
 topics:
   - full-scope
   - techniques
@@ -31,8 +31,12 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Player character | 1 | Akio concept, final sprite, introductory combat, three Aspect combat libraries |
 | Blood Aspects | 3 | Wolf, Wraith, Ronin |
 | Core Technique slots | 5 | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow |
-| Direct Technique matrix | 25 approved concepts | Five families × five direct combat slots |
-| Supporting Technique capacity | No fixed inventory cap | Limited by Technique rewards, rarity, prerequisites, and run length |
+| Direct Technique matrix | 25 approved Techniques | Five families × five direct combat slots |
+| Same-family Supporting Techniques | 15 approved Techniques | Three per family |
+| Cross-family Techniques | 5 approved Techniques | Rare hybrid-build effects |
+| Legendary Techniques | 5 approved Techniques | One family capstone per family |
+| Refinements | 10 approved concepts | Small parent-Technique upgrades; not separate Techniques |
+| Working Technique roster | 50 actual Techniques | 10 Common / 18 Uncommon / 17 Rare / 5 Legendary |
 | Prosthetic tools | 8 | One equipped at a time; permanent Forge progression |
 | Run-scoped Relic capacity | 1 | Launch catalog remains open |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
@@ -59,16 +63,18 @@ After Returning Blood awakens, launch scope includes:
 - five direct Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow,
 - one direct Technique maximum per slot,
 - the approved 25-Technique direct matrix across five families,
+- 15 slotless same-family Supporting Techniques,
+- 5 Rare Cross-family Techniques,
+- 5 Legendary family capstones,
+- 10 selective refinements with one refinement maximum per eligible parent Technique,
 - rare same-slot replacement offers,
-- slotless Supporting Technique upgrades with no fixed inventory cap,
-- one small refinement maximum per eligible slotted Technique,
 - four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
 - one equipped Prosthetic with permanent Forge progression,
 - and one run-scoped Relic slot.
 
 Prosthetic Techniques are not part of the run-build system. Techniques do not add separate temporary upgrade layers to Prosthetics or Relics.
 
-The final total Technique roster size remains open because Supporting, Cross-family, Legendary, refinement, and replacement layers are still being designed. The retired rough ~30 count and Blade / Deflection / Execution / Movement / General quotas are no longer production requirements.
+The current working Technique content roster is **50 actual Techniques plus 10 refinements**. The roster is complete for paper-design scope and should not be expanded without a concrete audit or prototype need.
 
 ## Locked Aspect scope
 
@@ -85,9 +91,9 @@ All three packages are locked at current qualitative paper-design depth. Final a
 
 ## Technique scope boundary
 
-Technique design uses five broad internal effect families that can meaningfully affect the five core combat slots. The families do not need formal player-facing names; recognition should rely on symbols, color treatment, effect behavior, VFX, and audio language.
+Technique design uses five broad internal effect families. The families do not need formal player-facing names; recognition should rely on symbols, color treatment, effect behavior, VFX, and audio language.
 
-All five family mechanics and all 25 direct slot Techniques are approved at qualitative core-rule depth:
+All five family mechanics are approved:
 
 - **Pale silver / twin slash — Echo:** delayed additional sword slashes created by qualifying actions.
 - **Gold / cracked crest — Rupture:** buildup fills a visible enemy meter; completion triggers a large posture-impact proc and bounded nearby posture pressure.
@@ -97,9 +103,9 @@ All five family mechanics and all 25 direct slot Techniques are approved at qual
 
 Backstabs remain universal positional hits based on actually reaching the enemy's rear. Crimson does not create fake rear-angle windows, force enemy facing, or rely on ordinary slow to manufacture backstabs.
 
-The direct roster is owned by `TECHNIQUE_CATALOG.md` and should remain stable unless prototyping exposes a concrete issue.
+`TECHNIQUE_CATALOG.md` owns the complete 50-Technique roster, rarity assignments, prerequisites, and refinements.
 
-The current Technique scope task is the later catalog layer: **Legendary Techniques, same-family Supporting Techniques, Cross-family Techniques, refinements, rare replacements, rarity assignments, prerequisites, and reward eligibility**. A brief Unseen / invisibility-style Crimson effect is reserved as a current Legendary candidate rather than an ordinary direct Technique.
+The current Technique-system task is **reward structure and roster validation**, not additional content creation: reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and the full compatibility/readability audit remain open.
 
 ## Optional investment outcomes
 
@@ -116,7 +122,7 @@ Mandatory encounters must not assume a particular Tier, Blood Art, Technique fam
 
 A normal successful Binding run targets approximately **45-50 minutes** of active time.
 
-The final number of Technique reward opportunities must be tuned against the supporting-upgrade layer and competition with Shrines, Relics, economy, and survival routes.
+The final number of Technique reward opportunities must be tuned against the 50-Technique roster and competition with Shrines, Relics, economy, and survival routes.
 
 ## The Strand
 
@@ -168,13 +174,13 @@ Postgame retains repeatable normal runs and optional Heart-route access without 
 
 ## Run-build and persistence boundary
 
-Temporary run state includes Aspect Tier, Corruption, Blood, slotted and Supporting Techniques, Cross-family Techniques, refinements, run Relic, Gold, temporary capacities, and room progress.
+Temporary run state includes Aspect Tier, Corruption, Blood, slotted Techniques, Supporting Techniques, Cross-family Techniques, Legendaries, refinements, run Relic, Gold, temporary capacities, and room progress.
 
 Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks/mastery, permanent upgrades including Prosthetic progression, and persistent currencies.
 
 ## Current open production scope
 
-1. Complete the later Technique catalog layers and lock final Technique production count.
+1. Finalize Technique reward structure and complete the 50-Technique roster audit.
 2. Finish Relic / consumable run-build scope.
 3. Define permanent Prosthetic / Forge progression depth.
 4. Persistent progression, onboarding, and trial package.
@@ -183,6 +189,6 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system is not part of the game.
