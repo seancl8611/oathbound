@@ -4,10 +4,25 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-14
 ---
 
 # Documentation Changelog
+
+## 2026-08-14 — Technique roster, rarity, and eligibility lock
+
+- Completed the current working launch Technique roster at **50 actual Techniques plus 10 refinements**.
+- Locked the roster composition as 25 direct slotted Techniques, 15 same-family Supporting Techniques, 5 Cross-family Techniques, and 5 family Legendaries.
+- Added the approved same-family Supporting roster and one Legendary capstone for Echo, Rupture, Seal, Rift, and Crimson.
+- Added five Rare Cross-family Techniques: Resonant Break, Fractured Memory, Shattered Scar, Exposed Break, and Bound Wound.
+- Added ten selective refinements; refinements remain small parent-Technique upgrades and do not count as separate Techniques.
+- Locked the rarity distribution at **10 Common / 18 Uncommon / 17 Rare / 5 Legendary**. Refinements have no rarity.
+- Locked direct-Technique eligibility around an empty combat slot with no family prerequisite; Rare direct Techniques may still be a player's first pickup from that family.
+- Locked Supporting eligibility around an already-owned effect that can actually interact with the support, preventing dead support offers.
+- Locked Cross-family eligibility around existing investment in both listed families plus any entry-specific mechanic requirement.
+- Locked Legendary eligibility at **3 native Techniques from that family, including at least 1 slotted Technique**. Same-family Supporting Techniques count; Cross-family Techniques and refinements do not.
+- Advanced the active Technique-system work to reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and the complete roster audit.
+- Kept exact combat values, rarity probabilities, reward weights, and offer frequency deferred to prototyping and reward-system design.
 
 ## 2026-08-13 — Direct Technique matrix lock and repo cleanup
 
