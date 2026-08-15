@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-14
 topics:
   - progression
   - persistence
@@ -14,12 +14,14 @@ topics:
   - trials
   - currencies
   - blood-resource
+  - relics
   - heart-bindings
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-CORRUPTION-SHRINES
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - GAMEPLAY-ITEMS-REWARDS
   - META-OPEN-QUESTIONS
@@ -44,9 +46,9 @@ Temporary run state may include:
 - Blood after Tier II,
 - Blood Art state,
 - five core slotted Techniques,
-- slotless supporting Techniques,
+- slotless Supporting, Cross-family, and Legendary Techniques,
 - Technique refinements and rare replacement state,
-- one run-scoped Relic,
+- the currently equipped Relic benefit,
 - Gold,
 - room progress,
 - temporary Health or Spirit capacity,
@@ -67,7 +69,7 @@ Expected viable outcomes:
 - **Aspect-focused:** Tier III with less-developed horizontal upgrades.
 - **High-roll:** Tier IV plus a strong completed Technique build.
 
-Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, or Legendary.
+Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, or Relic.
 
 ## Fixed Blood Aspect Tier path
 
@@ -121,11 +123,25 @@ The run begins with five empty core Technique slots tied to:
 
 Each slot can hold one direct Technique. Direct Techniques do not stack within the same core action.
 
-Technique progression can continue beyond those five choices through slotless supporting Techniques, one small refinement per eligible slotted Technique, rare same-slot replacement offers, family synergy, and eligible higher-rarity or Legendary effects.
+Technique progression can continue beyond those five choices through slotless same-family Supporting Techniques, Cross-family Techniques, family Legendaries, one refinement per eligible slotted Technique, and rare same-slot replacement offers.
 
 There is no global cap on total Technique upgrades. The practical cap comes from Technique reward opportunities, route choices, rarity, prerequisites, and run length.
 
-The five core family mechanics—Echo, Rupture, Seal, Rift, and Burst—are defined at qualitative core-rule depth. The current design pass is focused on approving the complete five-by-five direct Technique matrix before rebuilding supporting, cross-family, Legendary, and refinement content.
+The five core family mechanics—Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage—are defined at qualitative core-rule depth. The current working Technique roster contains 50 actual Techniques plus 10 refinements and is complete for current paper-design scope.
+
+## Relic persistence boundary
+
+Relics use a split ownership/effect model:
+
+- unlocked or discovered Relics persist in the player's collection,
+- Akio may equip one Relic at a time,
+- the equipped Relic provides its benefit during the run,
+- the active benefit ends when the run ends,
+- and the owned Relic remains available for future runs.
+
+Relics do not use rarity tiers. The approved launch roster contains 10 Relics.
+
+A shallow permanent Relic mastery/rank system remains an optional later layer. If retained, it should strengthen the Relic's existing effect rather than create branching trees or unrelated mechanics.
 
 ## Persistent character progression
 
@@ -135,6 +151,7 @@ The Strand supports permanent growth through:
 - **Forge Bench:** weapon and Prosthetic development,
 - **Blood Mirror:** Aspect unlocks, mastery, and small capped reliability upgrades,
 - **Blood Cavern:** teaching, fixed-loadout trials, mastery challenges, and approved unlocks,
+- **Relic collection:** permanently discovered Relics available for selection at the Relic Reliquary or equivalent Strand interactible,
 - **Discovery Board:** codex and recovered history,
 - **Merchant and NPC services:** approved stock or service progression,
 - **Mist, Scrolls, and Boss Emblems:** persistent currencies.
@@ -178,9 +195,16 @@ Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards
 ### Techniques
 
 - Five core combat slots begin empty each run.
-- Slotted Techniques, supporting Techniques, refinements, and replacement state reset after the run.
+- Slotted, Supporting, Cross-family, Legendary Techniques, refinements, and replacement state reset after the run.
 - Permanent progression may unlock Techniques into future pools but does not pre-equip them.
 - Initial scope does not include permanent expansion beyond the five core combat slots.
+
+### Relics
+
+- Relic collection ownership persists.
+- One Relic may be equipped for a run.
+- The equipped effect is run-active, but the Relic itself is not lost when the run ends.
+- Relics do not occupy Technique or Prosthetic slots.
 
 ### Prosthetics
 
@@ -189,7 +213,7 @@ Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards
 
 ## Trial reward boundary
 
-Blood Cavern and Blood Mirror rewards may grant Aspect access, Technique-pool unlocks, small capped reliability improvements, modest posture reliability, persistent currency, cosmetics, lore reflections, and mastery marks.
+Blood Cavern and Blood Mirror rewards may grant Aspect access, Technique-pool unlocks, small capped reliability improvements, modest posture reliability, persistent currency, cosmetics, lore reflections, mastery marks, or approved Relic unlocks where later content design assigns them.
 
 Trials may not add alternate Aspect Tiers, permanently pre-equip a Technique, create persistent Blood, or convert major run-only mechanics into permanent baseline power.
 
@@ -211,23 +235,23 @@ A successful Binding return additionally:
 | Narrative/codex progress | Persists | Persists |
 | Destroyed Bindings | Persists | Persists |
 | Permanent upgrades/unlocks | Persists | Persists |
+| Relic collection | Persists | Persists |
 | Persistent currencies | Persists | Persists |
 | Blood Aspect Tier | Resets | Resets |
 | Corruption | Resets | Resets |
 | Blood and Blood Art state | Resets | Resets |
 | Techniques/refinements | Resets | Resets |
-| Run Relic effects | Resets | Resets |
+| Equipped Relic effect | Ends | Ends |
 | Gold | Resets | Resets |
 | Room progress | Resets | Resets |
 | Consumables | Item-specific | Item-specific |
 
 ## Current production dependencies
 
-1. Finish and approve the five-by-five direct Technique matrix, then rebuild the later Technique layers.
-2. Scope remaining run-build content: Relics and consumables.
-3. Scope permanent Prosthetic progression together with the broader Forge package.
-4. Scope persistent progression, onboarding, and trials.
-5. Lock the authored narrative-delivery package.
-6. Lock postgame release scope.
+1. Define permanent Prosthetic / Forge progression for all eight launch tools.
+2. Complete the wider Strand, permanent-progression, onboarding, and trial package.
+3. Review full-run integration, rewards, encounters, and pacing, including deferred Technique reward and Relic acquisition tuning.
+4. Lock the authored narrative-delivery package.
+5. Lock endgame, postgame, and release scope.
 
-Exact percentages, combat values, resource values, costs, timing windows, offer rates, replacement rates, and reward values remain implementation and balance work.
+Exact percentages, combat values, resource values, Relic rank thresholds, costs, timing windows, offer rates, replacement rates, and reward values remain implementation and balance work.
