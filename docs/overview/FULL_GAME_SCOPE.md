@@ -105,7 +105,7 @@ Backstabs remain universal positional hits based on actually reaching the enemy'
 
 `TECHNIQUE_CATALOG.md` owns the complete 50-Technique roster, rarity assignments, prerequisites, and refinements.
 
-The current Technique-system task is **reward structure and roster validation**, not additional content creation: reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and the full compatibility/readability audit remain open.
+Remaining Technique reward-frequency, offer-generation, rarity/source weighting, replacement, compatibility, and readability work is still required, but it now sits inside the broader **launch run-build and pre-run preparation package** rather than acting as the game's top-level design blocker by itself.
 
 ## Optional investment outcomes
 
@@ -145,7 +145,7 @@ Primary services:
 - Blood Cavern
 - Blood Mirror
 
-Service ownership is approved. Exact launch depth of permanent upgrades, onboarding, trials, unlocks, mastery content, and UI states remains open.
+Service ownership is approved. Exact launch depth of permanent upgrades, onboarding, trials, unlocks, mastery content, run-preparation selection interactibles, and UI states remains open.
 
 ## Area roster
 
@@ -180,12 +180,15 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Current open production scope
 
-1. Finalize Technique reward structure and complete the 50-Technique roster audit.
-2. Finish Relic / consumable run-build scope.
-3. Define permanent Prosthetic / Forge progression depth.
-4. Persistent progression, onboarding, and trial package.
-5. Narrative delivery, voice, cinematic, portrait, and final-writing package.
-6. Postgame reward and UI package.
+Top-level questions are intentionally grouped as large game packages before narrowing into subsystem details:
+
+1. **Launch run-build and pre-run preparation package** — Relics, consumables, preparation interactibles, reward-system coexistence, and later nested Technique reward/audit details.
+2. **Strand hub and permanent-progression package** — Bloodwell, Forge/Prosthetics, Relic/Aspect mastery, trials, unlocks, onboarding, and service ownership.
+3. **Full-run integration, encounter, and pacing package** — validate the complete three-region run, room purposes, transitions, system coexistence, and whether any major launch-flow component is missing.
+4. **Narrative delivery and campaign-presentation package** — first-death delivery, repeated-run dialogue/content, Binding-state communication, codex/NPC ownership, voice/cinematic boundary, ending/credits, and writing scope.
+5. **Endgame, postgame, and release package** — repeat Heart access/rewards, completion/mastery goals, required postgame/front-end UI, and what remains launch versus post-launch.
+
+Exact Technique probabilities, Relic ranks, Prosthetic node values, room counts, route probabilities, and similar subsystem details should be answered only when their owning broad package is active or when implementation requires them.
 
 ## Deferred implementation work
 
