@@ -4,13 +4,14 @@ title: Relics
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-15
 topics:
   - relics
   - run-builds
   - persistence
   - strand
   - preparation
+  - mastery
 related:
   - GAMEPLAY-ITEMS-REWARDS
   - GAMEPLAY-PROGRESSION
@@ -29,12 +30,27 @@ They should add personality, discovery, and light strategic choice without becom
 
 - Akio may equip **one Relic** at a time.
 - Relic ownership is persistent once the Relic is unlocked or discovered.
-- The equipped Relic's gameplay benefit is active only during the run.
+- The currently equipped Relic's gameplay benefit is active during the run.
 - Relics use a separate slot from Techniques and Prosthetics.
 - Relics do **not** use Common / Rare / Legendary rarity tiers.
 - Relic effects should usually be understandable in one concise sentence.
-- Relics may be replaced through approved limited run-transition opportunities rather than swapped freely in ordinary rooms.
-- Exact acquisition sources, upgrade thresholds, swap timing, and numerical values remain later content / implementation work.
+- Relics may be switched during a run through approved transition opportunities rather than freely during active combat.
+- Exact acquisition sources, mastery thresholds, transition-swap timing, and numerical values remain later content / implementation work.
+
+## Mastery progression
+
+Relic progression is earned through combat use rather than purchased at the Forge or granted simply for winning a run.
+
+- Each Relic owns persistent individual mastery progress.
+- **Only the currently equipped Relic gains mastery.**
+- Eligible enemy kills earned while that Relic is equipped advance its mastery.
+- Switching Relics during a run redirects subsequent eligible kill progress to the newly equipped Relic.
+- Progress already earned on another Relic is permanent and is not lost when the player switches.
+- Relic mastery is **not** purchased with Scrolls, Mist, Boss Emblems, Gold, or another Forge currency.
+- Relics are **not upgraded at the Forge Bench**.
+- Exact kill requirements, enemy weighting, rank count, rank thresholds, mastery presentation, and numerical improvement per rank remain later tuning and implementation work.
+
+Relic mastery should strengthen the Relic's existing benefit rather than add unrelated mechanics, branching trees, or a second active ability.
 
 ## System boundaries
 
@@ -51,6 +67,8 @@ Relics are selected through a dedicated physical **Relic Reliquary** or equivale
 The Boat remains focused on a simple run-start confirmation and does not become a general loadout screen.
 
 The broader Strand direction uses separate physical preparation interactibles for Aspect, Prosthetic, and Relic selection rather than combining all run setup into one large menu.
+
+The Reliquary or another approved transition presentation may also support Relic switching opportunities during a run when the run structure provides them. Exact locations remain later integration work.
 
 ## Approved launch roster
 
@@ -78,15 +96,10 @@ The current launch roster is **10 Relics** at qualitative paper-design depth.
 - Relics should not require a specific Technique family or exact multi-system combination to function.
 - Relics should not invalidate encounter mechanics, remove core combat risk, or replace player execution.
 - Numerical balance should ensure no Relic becomes an automatic choice for every run.
-
-## Upgrade / mastery boundary
-
-A shallow permanent Relic mastery or rank system remains a supported direction, but it is not required to lock this roster.
-
-If Relic upgrades are retained, they should strengthen the Relic's existing benefit rather than add unrelated mechanics or branching trees. Exact rank count, encounter requirements, values, and exceptions remain later design work.
+- Mastery should reward using a Relic rather than create a reason to perform disruptive combat-time swapping.
 
 ## Production boundary
 
-The 10 approved Relics may now guide icon, object, Reliquary, and basic selection-interface planning.
+The 10 approved Relics may guide icon, object, Reliquary, mastery-display, and basic selection-interface planning.
 
-Do not create Relic rarity-badge families. Exact object designs, acquisition scenes, upgrade-state art, numerical values, and transition-swap presentation remain later production decisions.
+Do not create Relic rarity-badge families. Exact object designs, acquisition scenes, mastery-state art, numerical values, kill thresholds, and transition-swap presentation remain later production decisions.
