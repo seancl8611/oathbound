@@ -9,6 +9,17 @@ last_reviewed: 2026-08-14
 
 # Documentation Changelog
 
+## 2026-08-14 — Relic system and launch roster lock
+
+- Locked Relics as a small supporting system with **one equipped slot**, persistent collection ownership, and run-active benefits.
+- Removed the provisional Common / Rare / Legendary Relic rarity model; Relics now have **no rarity tiers**.
+- Locked the current launch roster at **10 Relics**: Traveler's Coin, Merchant's Seal, Iron Prayer Bead, Spirit Tassel, Execution Bead, Wayfarer's Charm, Last Oath, Unbroken Cord, Scribe's Lens, and Blood Moon Shard.
+- Changed **Wayfarer's Charm** to restore a small amount of Health whenever Akio enters a room.
+- Changed **Last Oath** so its once-per-run lethal-damage protection leaves Akio at **25 HP**.
+- Preserved exact acquisition-source allocation, Relic mastery/rank thresholds, swap timing, and numerical balance as later content / playtest work.
+- Registered a dedicated `RELICS.md` authority and synchronized reward, progression, scope, roadmap, gameplay index, item-art, and asset-inventory dependencies.
+- Advanced the next major gameplay-system design area to **permanent Prosthetic / Forge progression** for the eight launch tools.
+
 ## 2026-08-14 — Technique roster, rarity, and eligibility lock
 
 - Completed the current working launch Technique roster at **50 actual Techniques plus 10 refinements**.
@@ -17,7 +28,7 @@ last_reviewed: 2026-08-14
 - Added five Rare Cross-family Techniques: Resonant Break, Fractured Memory, Shattered Scar, Exposed Break, and Bound Wound.
 - Added ten selective refinements; refinements remain small parent-Technique upgrades and do not count as separate Techniques.
 - Locked the rarity distribution at **10 Common / 18 Uncommon / 17 Rare / 5 Legendary**. Refinements have no rarity.
-- Locked direct-Technique eligibility around an empty combat slot with no family prerequisite; Rare direct Techniques may still be a player's first pickup from that family.
+- Locked direct-Technique eligibility around an empty combat slot with no family prerequisite; Rare direct Techniques may still be the player's first pickup from that family.
 - Locked Supporting eligibility around an already-owned effect that can actually interact with the support, preventing dead support offers.
 - Locked Cross-family eligibility around existing investment in both listed families plus any entry-specific mechanic requirement.
 - Locked Legendary eligibility at **3 native Techniques from that family, including at least 1 slotted Technique**. Same-family Supporting Techniques count; Cross-family Techniques and refinements do not.
