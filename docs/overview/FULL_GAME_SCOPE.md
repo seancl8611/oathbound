@@ -8,6 +8,7 @@ last_reviewed: 2026-08-14
 topics:
   - full-scope
   - techniques
+  - relics
   - areas
   - strand
   - the-heart
@@ -17,6 +18,7 @@ related:
   - OVERVIEW-PRODUCTION-ROADMAP
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - META-OPEN-QUESTIONS
 ---
 
@@ -38,7 +40,8 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Refinements | 10 approved concepts | Small parent-Technique upgrades; not separate Techniques |
 | Working Technique roster | 50 actual Techniques | 10 Common / 18 Uncommon / 17 Rare / 5 Legendary |
 | Prosthetic tools | 8 | One equipped at a time; permanent Forge progression |
-| Run-scoped Relic capacity | 1 | Launch catalog remains open |
+| Relic slot | 1 | One equipped Relic at a time |
+| Launch Relic roster | 10 approved Relics | Persistent collection, run-active benefit, no rarity tiers |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
 | Area 1 standard enemies | 6 | Hushiro rupture roster |
 | Area 2 standard enemies | 4 | Yomori spirit/predator roster |
@@ -48,7 +51,6 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Heart Binding campaign | 7 original / 6 player clears | One historical breach and six player-destroyed Bindings |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
 | Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
-| Relic rarity tiers | Provisional 3 | Common, Rare, Legendary working sketch |
 
 ## Player and run build
 
@@ -70,7 +72,7 @@ After Returning Blood awakens, launch scope includes:
 - rare same-slot replacement offers,
 - four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
 - one equipped Prosthetic with permanent Forge progression,
-- and one run-scoped Relic slot.
+- and one equipped Relic from the persistent 10-Relic collection.
 
 Prosthetic Techniques are not part of the run-build system. Techniques do not add separate temporary upgrade layers to Prosthetics or Relics.
 
@@ -105,7 +107,24 @@ Backstabs remain universal positional hits based on actually reaching the enemy'
 
 `TECHNIQUE_CATALOG.md` owns the complete 50-Technique roster, rarity assignments, prerequisites, and refinements.
 
-Remaining Technique reward-frequency, offer-generation, rarity/source weighting, replacement, compatibility, and readability work is still required, but it belongs to the later full-run integration/reward pass rather than interrupting the current Relic-to-Prosthetic design sequence.
+Remaining Technique reward-frequency, offer-generation, rarity/source weighting, replacement, compatibility, and readability work is still required, but it belongs to the later full-run integration/reward pass rather than interrupting the current system-design sequence.
+
+## Relic scope boundary
+
+Relics are a small supporting layer rather than another build family.
+
+Launch scope uses:
+
+- **one equipped Relic**,
+- a persistent collection of **10 approved Relics**,
+- simple run-wide benefits that remain broadly usable across Aspects,
+- no Common / Rare / Legendary Relic tiers,
+- dedicated Relic selection through a Strand Reliquary or equivalent physical interactible,
+- and limited in-run replacement opportunities rather than free swapping in ordinary rooms.
+
+The approved roster is Traveler's Coin, Merchant's Seal, Iron Prayer Bead, Spirit Tassel, Execution Bead, Wayfarer's Charm, Last Oath, Unbroken Cord, Scribe's Lens, and Blood Moon Shard.
+
+Exact acquisition allocation, shallow mastery/rank rules, swap timing, and numerical values remain later implementation/content work.
 
 ## Optional investment outcomes
 
@@ -116,7 +135,7 @@ Launch balance must support:
 - Tier III with less-developed horizontal upgrades as deliberate Aspect specialization,
 - occasional Tier IV high-roll runs.
 
-Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, or Legendary.
+Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, or Relic.
 
 ## Run-duration target
 
@@ -144,8 +163,11 @@ Primary services:
 - Bloodwell
 - Blood Cavern
 - Blood Mirror
+- dedicated preparation interactibles for Aspect, Prosthetic, and Relic selection
 
-Service ownership is approved. Exact launch depth of permanent upgrades, onboarding, trials, unlocks, mastery content, run-preparation selection interactibles, and UI states remains open.
+The Relic selection interactible is currently represented by a **Relic Reliquary** direction. The Boat remains focused on run-start confirmation rather than a combined loadout screen.
+
+Exact launch depth of permanent upgrades, onboarding, trials, unlocks, mastery content, and final UI states remains open.
 
 ## Area roster
 
@@ -157,7 +179,7 @@ Exact encounter pacing and authored room distribution remain prototype work.
 
 ## Heart Binding campaign
 
-The Heart's prison originally contained seven ancient Bindings. The Court destroyed the outermost Binding during the plague, leaving six intact when Akio begins.
+The Heart's prison originally contained seven Bindings. The Court destroyed the outermost Binding during the plague, leaving six intact when Akio begins.
 
 Each of the first six successful clears destroys one remaining Binding and permanently preserves that progress.
 
@@ -174,25 +196,24 @@ Postgame retains repeatable normal runs and optional Heart-route access without 
 
 ## Run-build and persistence boundary
 
-Temporary run state includes Aspect Tier, Corruption, Blood, slotted Techniques, Supporting Techniques, Cross-family Techniques, Legendaries, refinements, run Relic, Gold, temporary capacities, and room progress.
+Temporary run state includes Aspect Tier, Corruption, Blood, slotted Techniques, Supporting Techniques, Cross-family Techniques, Legendaries, refinements, the equipped Relic benefit, Gold, temporary capacities, and room progress.
 
-Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks/mastery, permanent upgrades including Prosthetic progression, and persistent currencies.
+Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks/mastery, the unlocked Relic collection, permanent upgrades including Prosthetic progression, and persistent currencies.
 
 ## Current open production scope
 
-Top-level questions remain broad, but they follow the current design trajectory rather than replacing it with narrow tuning passes:
+Top-level questions remain broad and follow the established design trajectory:
 
-1. **Finish the Relic system and launch roster** — lock the supporting system's role, collection/equip boundary, broad swap/mastery direction, and launch effect roster without creating overlap with larger build systems.
-2. **Define permanent Prosthetic / Forge progression** — establish meaningful persistent development for all eight Prosthetics before exact costs and values.
-3. **Complete the wider Strand, permanent-progression, onboarding, and trial package** — Bloodwell, mastery, trials, preparation interactibles, unlock flow, currencies, and service ownership.
-4. **Review full-run integration, rewards, encounters, and pacing** — validate the complete three-region run, reward ecosystem, room purposes, transitions, system coexistence, Technique reward/audit details, and whether any major launch-flow component is missing.
-5. **Narrative delivery and campaign presentation** — first-death delivery, repeated-run dialogue/content, Binding-state communication, codex/NPC ownership, voice/cinematic boundary, ending/credits, and writing scope.
-6. **Endgame, postgame, and release scope** — repeat Heart access/rewards, completion/mastery goals, required postgame/front-end UI, and what remains launch versus post-launch.
+1. **Define permanent Prosthetic / Forge progression** — establish meaningful persistent development for all eight Prosthetics before exact costs and values.
+2. **Complete the wider Strand, permanent-progression, onboarding, and trial package** — Bloodwell, mastery, trials, preparation interactibles, unlock flow, currencies, and service ownership.
+3. **Review full-run integration, rewards, encounters, and pacing** — validate the complete three-region run, reward ecosystem, room purposes, transitions, system coexistence, Technique reward/audit details, Relic acquisition/swap details, and whether any major launch-flow component is missing.
+4. **Narrative delivery and campaign presentation** — first-death delivery, repeated-run dialogue/content, Binding-state communication, codex/NPC ownership, voice/cinematic boundary, ending/credits, and writing scope.
+5. **Endgame, postgame, and release scope** — repeat Heart access/rewards, completion/mastery goals, required postgame/front-end UI, and what remains launch versus post-launch.
 
 Exact Technique probabilities, Relic ranks, Prosthetic node values, room counts, route probabilities, and similar subsystem details should remain nested until their owning major system or later integration pass requires them.
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system is not part of the game.
