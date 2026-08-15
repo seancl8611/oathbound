@@ -4,12 +4,12 @@ title: Prosthetic Tool VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-15
 topics:
   - prosthetics
   - tools
   - vfx
-  - prosthetic-techniques
+  - forge-progression
 related:
   - GAMEPLAY-PROSTHETICS
   - GAMEPLAY-TECHNIQUES
@@ -102,18 +102,22 @@ Each prosthetic solves a specific combat problem. Effects must communicate the t
 
 **Technical:** activation may be strong; the sustained state stays quiet. Use contained red accents, not holy healing waves.
 
-## Prosthetic Technique extensions
+## Forge upgrade presentation
 
-Temporary Prosthetic Techniques extend the approved tool identity rather than commission a second unrelated VFX family.
+Permanent Forge upgrades strengthen properties that already belong to the base tool. They do not commission alternate attacks, new status families, unrelated active effects, or a second Technique-style VFX package.
 
-Examples include:
+Approved upgrade presentation may proportionally strengthen existing visual language when gameplay readability requires it:
 
-- a clearly bounded scorched zone attached to Flame Vent,
-- a stronger stored-posture release attached to Mirror Umbrella,
-- a modified pull or marked-target response attached to Fang Harpoon,
-- a temporary state marker attached to Bloodletting Gourd.
+- Beast-Bane Whistle may show a larger existing resonance ring when pulse radius increases.
+- Thunder Rod retains the same line strike and Shock marker; stronger impact or longer Shock should use intensity/timing changes rather than a new effect family.
+- Smoke Gourd retains the same cloud language while its approved footprint or persistence changes.
+- Fang Harpoon retains the same projectile, chain, impact, and pull language while displacement or impact strength changes.
+- Mirror Umbrella retains its open-guard and close-release states while storage, efficiency, or release strength improves.
+- Flame Vent retains the same directional cone and Burn treatment while reach, direct damage, or Burn duration improves.
+- Mist Raven retains the same vanish/reappear language while Spirit efficiency or short fixed-distance range improves.
+- Bloodletting Gourd retains the same immediate heal pulse and healing-on-hit overlay while their existing values or duration improve.
 
-Each extension must specify its changed footprint, target state, duration, and refinement difference. Reuse the base tool effect wherever the mechanic remains readable.
+Forge progression should therefore reuse the base tool asset set wherever possible. A numerical or bounded geometric upgrade does not justify a new animation or unrelated VFX concept by itself.
 
 ## Shared production rules
 
@@ -121,4 +125,5 @@ Each extension must specify its changed footprint, target state, duration, and r
 - Tool footprints must remain readable over all three area palettes.
 - Status markers require consistent active, expiring, and cleared states.
 - Any tool that cannot work with the generic activation pose must be identified before quotation as additional animation scope.
-- Exact costs, cooldowns, permanent upgrades, and Prosthetic Technique behavior belong to gameplay documentation and remain tunable.
+- Any Forge upgrade that unexpectedly requires a unique full-body animation or substantially new VFX family is an explicit scope increase and must be separately approved.
+- Exact costs, Spirit values, damage, posture, status durations, footprints, and timing remain tunable gameplay values owned by the Prosthetic gameplay documentation.
