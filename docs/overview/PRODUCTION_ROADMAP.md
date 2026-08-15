@@ -68,6 +68,8 @@ The 50 Techniques comprise:
 
 Rarity and prerequisite rules are also approved. Final Technique production quotation still depends on the reward-structure audit, final VFX/icon briefs, and prototype validation rather than further roster expansion.
 
+The launch Relic package is also complete at qualitative paper-design depth: **10 collectible Relics**, one equipped slot, persistent collection ownership, run-active benefits, and no Relic rarity tiers. Exact acquisition allocation, rank values, and transition-swap presentation remain later content/implementation work.
+
 ## Milestone 5 — Complete Area 2
 
 Produce Yomori Grove, its enemy/encounter roster, regional hazards, functional rooms, VFX, and integration pass.
@@ -102,6 +104,7 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 - Pale Procession shade/steering/three-lane assets are excluded.
 - Reusable Technique UI may precede final implementation tuning; unique icons and bespoke effects require approved catalog entries and production briefs.
 - The current 50-Technique roster should remain stable unless testing exposes a concrete problem.
+- Relic production uses the approved 10-item roster and does not require rarity-badge families.
 - The standard successful-run pacing target is 45–50 minutes, with exact room/encounter budgets deferred to playtesting.
 - The base Heart Binding ritual is one reusable package.
 - Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
@@ -112,4 +115,4 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 Use the broad-question hierarchy in `docs/_meta/OPEN_QUESTIONS.md` without replacing the established design sequence with narrow tuning work.
 
-The current design focus is to **finish the Relic system and launch roster**. Once that qualitative package is complete, move directly to **permanent Prosthetic / Forge progression** for the eight launch tools. The wider Strand/progression package follows after those two systems. Technique reward cadence, exact Relic rank/swap values, Prosthetic percentages/costs, and other detailed tuning remain nested until later integration or playable validation.
+The Relic system and launch roster are complete for current qualitative paper-design scope. The next major gameplay-system pass is **permanent Prosthetic / Forge progression** for the eight launch tools. The wider Strand/progression package follows afterward. Technique reward cadence, Relic acquisition/rank/swap details, Prosthetic percentages/costs, and other detailed tuning remain nested until later integration or playable validation.

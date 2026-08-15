@@ -16,6 +16,7 @@ Authoritative player-facing mechanics and system rules belong here.
 - [Corruption and Shrines](CORRUPTION_AND_SHRINES.md)
 - [Technique System](TECHNIQUES.md)
 - [Technique Catalog](TECHNIQUE_CATALOG.md)
+- [Relics](RELICS.md)
 - [Progression](PROGRESSION.md)
 - [Blood Cavern Trial System](BLOOD_CAVERN_TRIALS.md)
 - [Prosthetic Tools](PROSTHETICS.md)
@@ -31,7 +32,7 @@ The launch Blood Aspect roster and qualitative Tier 0-IV packages are locked for
 
 No further Aspect or Tier audit is active unless prototyping exposes a concrete problem. Exact attack values, timings, hitboxes, growth percentages, and related balance remain implementation work.
 
-The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless later-layer upgrades. The old four-active-plus-reserve model is retired.
+The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless Supporting, Cross-family, and Legendary Techniques.
 
 The current working Technique roster is complete at qualitative paper-design depth:
 
@@ -43,15 +44,20 @@ The current working Technique roster is complete at qualitative paper-design dep
 
 This produces **50 actual Techniques plus 10 refinements**. Rarity and prerequisite / eligibility rules are approved in `TECHNIQUE_CATALOG.md` and `TECHNIQUES.md`.
 
-The active Technique work is now:
+The Relic system is also complete at current qualitative paper-design depth:
 
-1. reward frequency,
-2. offer-generation order,
-3. rarity probabilities and source weighting,
-4. rare same-slot replacement behavior,
-5. the complete 50-Technique compatibility/readability audit.
+- **10 approved launch Relics**,
+- one equipped Relic slot,
+- persistent collection ownership,
+- run-active benefits,
+- no Relic rarity tiers,
+- simple supporting effects that remain separate from Technique, Aspect, and Prosthetic progression.
 
-Current production-level dependencies in [`../_meta/OPEN_QUESTIONS.md`](../_meta/OPEN_QUESTIONS.md) begin with that Technique reward/audit pass, followed by the remaining run-build, Prosthetic / Forge, persistent-progression, narrative, and postgame packages.
+Exact Relic acquisition allocation, shallow rank/mastery thresholds, transition swap timing, and numerical values remain later design/playtest work.
+
+The next major gameplay-system pass is **permanent Prosthetic / Forge progression for all eight launch tools**.
+
+Remaining Technique reward cadence, rarity/source weighting, rare replacement behavior, roster integration testing, and exact run-reward probabilities belong to the later full-run integration/reward pass rather than the current headline agenda.
 
 The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
 

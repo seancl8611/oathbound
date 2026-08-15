@@ -4,7 +4,7 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-14
 topics:
   - currencies
   - pickups
@@ -18,6 +18,7 @@ related:
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - GAMEPLAY-RUN-STRUCTURE
   - CONTENT-ROOM-TYPES
   - META-OPEN-QUESTIONS
@@ -75,7 +76,7 @@ Blood is not purchased, banked at the Strand, displayed as a route reward, or ca
 
 The primary reward category should be shown before route commitment through a consistent symbol or environmental marker.
 
-Supported preview categories may include Technique, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss.
+Supported preview categories may include Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss.
 
 Choosing a Shrine can mean giving up a Technique, Relic, economy, or survival opportunity; choosing another route can delay Aspect advancement.
 
@@ -185,11 +186,17 @@ After all six Bindings are destroyed, the seventh successful story run continues
 
 ## Relics
 
-Relics are rare run-scoped passive rules using a separate slot. The initial structure uses one equipped Relic.
+`RELICS.md` owns the Relic system and launch roster.
 
-The current provisional rarity sketch is Common, Rare, and Legendary. This is not locked.
+The launch structure uses **one equipped Relic**. Relic ownership persists once unlocked or discovered, while the equipped effect is a run benefit. Relics are separate from Techniques and Prosthetics and do not consume a Technique combat slot.
 
-Relics are separate from Techniques. Techniques do not need Relic-specific upgrade cards, and Relics do not occupy one of the five Technique combat slots.
+The approved launch roster contains **10 Relics**. Relics do **not** use Common / Rare / Legendary rarity tiers.
+
+Relic rewards should be relatively uncommon so the system remains a small supporting layer rather than competing constantly with Techniques, Shrines, economy, survival, or Aspect advancement.
+
+Relic acquisition sources remain open. Relics may eventually come from run rewards, quests, discoveries, collectibles, NPC progression, trials, or another approved source, but exact allocation is not needed for current scope.
+
+Relics may be changed through approved limited transition opportunities rather than freely swapped in ordinary rooms. Exact swap timing remains later implementation work.
 
 ## Pacing framework
 
@@ -219,10 +226,11 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 - Supporting Techniques must be meaningful enough to justify a reward choice.
 - Rare replacement offers must clearly show what current slotted Technique will be lost.
 - Prosthetic upgrades do not belong in Technique reward screens.
+- Relics remain a small separate supporting layer and should not become Technique-family upgrades.
 - Blood is a combat resource, not a currency or route reward.
 - Rare rewards must not invalidate sword combat or boss mechanics.
-- Mandatory encounters must not assume a particular Aspect Tier, Blood Art, Technique family, or ideal build.
+- Mandatory encounters must not assume a particular Aspect Tier, Blood Art, Technique family, Relic, or ideal build.
 
 ## Current production dependency
 
-The five core family mechanics are defined. The active run-build task is to finish and approve the direct five-by-five Technique matrix, then rebuild supporting, cross-family, Legendary, refinement, rarity, and reward-frequency work from that stable roster.
+The Technique content roster and launch Relic roster are complete at current qualitative paper-design depth. The next major gameplay-system pass is permanent Prosthetic / Forge progression. Technique reward cadence, reward-source weighting, Relic acquisition allocation, and exact reward probabilities remain later integration and playtest work.

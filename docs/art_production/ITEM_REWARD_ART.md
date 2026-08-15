@@ -4,7 +4,7 @@ title: Item, Pickup, and Reward Art
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-14
 topics:
   - currencies
   - pickups
@@ -16,6 +16,7 @@ topics:
 related:
   - GAMEPLAY-ITEMS-REWARDS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - UI-TECHNIQUE-REWARDS
   - ART-TECHNIQUE-VFX
   - ART-MILESTONE-04
@@ -24,7 +25,7 @@ related:
 
 # Item, Pickup, and Reward Art
 
-Item art must connect in-world pickups, route markers, HUD icons, Technique cards, Relic cards, and reward containers through one readable visual language. Silhouette and economic role take priority over decorative detail.
+Item art must connect in-world pickups, route markers, HUD icons, Technique cards, Relic objects, and reward containers through one readable visual language. Silhouette and economic role take priority over decorative detail.
 
 ## Currency items
 
@@ -46,7 +47,7 @@ Temporary maximum-Health and maximum-Spirit rewards must be more substantial tha
 
 ## Route reward markers
 
-Branching routes need preview symbols for Technique, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss rewards.
+Branching routes need preview symbols for Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss rewards where those categories are available.
 
 Markers should feel like ritual signs, hanging tags, lantern emblems, carved seals, or regionally integrated wayfinding rather than abstract neon game icons. Color cannot be the only differentiator.
 
@@ -68,7 +69,7 @@ The five direct combat slots are Basic Attack, Held Attack, Dash, Parry / Counte
 
 Supporting Techniques consume no combat slot and require a visually distinct relationship from direct slotted Techniques without becoming a completely separate visual product family.
 
-The five approved family mechanics are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**. The full 25-Technique direct matrix is approved at qualitative paper-design depth. Exact player-facing family names, symbols, colors, and final card treatment remain provisional; recognition may use symbols, color, seals, motion language, VFX motifs, or effect wording. Color alone is insufficient.
+The five approved family mechanics are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**. The current roster contains **50 actual Techniques plus 10 refinements**. Exact player-facing family names, symbols, colors, and final card treatment remain provisional; recognition may use symbols, color, seals, motion language, VFX motifs, or effect wording. Color alone is insufficient.
 
 Required Technique UI art states currently include offered, focused, selected, slotted, supporting, refined, unavailable or invalid, replacement preview, declined/fallback reward, and reroll-ready when implemented.
 
@@ -96,20 +97,35 @@ Major rewards are larger and more prominent than breakables:
 - **Area 2:** root-grown offering bowl or Shrine container.
 - **Area 3:** ornate lacquered chest with gold trim.
 
-Required states are unopened and opened/spent. Treasure, miniboss, and regional boss reward frames should use increasing presentation hierarchy while reusing the same card and icon language.
+Required states are unopened and opened/spent. Treasure, miniboss, and regional boss reward frames should use increasing presentation hierarchy while reusing the same card and icon language where appropriate.
 
 ## Relic visual family
 
-Relics use hand-inked icons on aged parchment cards and remain visually separate from the Technique combat-slot system.
+The approved launch roster contains **10 Relics**. Relics do **not** use rarity tiers.
 
-The current Relic rarity model is provisional. A working three-tier sketch is Common, Rare, and Legendary, but final labels and presentation should wait for the actual Relic roster.
+Relics should read as distinct collectible physical objects rather than another Technique-card family. The working object language may include coins, seals, beads, tassels, cords, charms, lenses, shards, and other small recovered artifacts appropriate to each named Relic.
 
-Do not produce a fixed four-rarity Relic art set until that decision is locked.
+The ten approved names are:
+
+- Traveler's Coin
+- Merchant's Seal
+- Iron Prayer Bead
+- Spirit Tassel
+- Execution Bead
+- Wayfarer's Charm
+- Last Oath
+- Unbroken Cord
+- Scribe's Lens
+- Blood Moon Shard
+
+Each Relic needs a recognizable collection/equip icon and a readable representation in the dedicated Relic Reliquary or equivalent Strand interactible. A separate Common / Rare / Legendary badge family is explicitly unnecessary.
+
+Exact object sprite treatment, upgrade-state variants, acquisition presentation, and transition-swap UI remain later production work.
 
 ## Delivery expectations
 
-- Icons must work at HUD scale and card scale.
-- World pickups, route markers, and corresponding UI icons must remain visibly related.
+- Icons must work at HUD scale and selection-interface scale.
+- World pickups, route markers, and corresponding UI icons must remain visibly related where a Relic appears as an in-run reward.
 - Area-specific objects inherit regional material language.
 - Reusable Technique card, combat-slot, supporting-upgrade, refinement, comparison, and warning templates should be approved before producing a full catalog.
-- The approved 25 direct Techniques may receive individual icon planning now; final total Technique icon count still depends on later Legendary, Supporting, Cross-family, refinement, replacement, rarity, and eligibility decisions.
+- The approved 50-Technique roster and 10-Relic roster may guide individual icon planning now; exact animation/VFX treatment still follows implementation briefs.
