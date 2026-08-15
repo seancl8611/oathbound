@@ -9,88 +9,137 @@ last_reviewed: 2026-08-14
 
 # Current Design Questions
 
-This file contains unresolved decisions that materially affect launch scope, content volume, production planning, interfaces, or authored presentation. Resolved rules belong in their authoritative files. Exact numerical tuning and playtest variables do not belong here.
+This file tracks unresolved decisions that materially affect launch scope, content volume, production planning, interfaces, or authored presentation.
+
+Resolved rules belong in their authoritative files. Exact numerical tuning and playtest variables do not belong here.
+
+## Question hierarchy rule
+
+Top-level questions should represent **large game-wide or production-wide packages**, not isolated subsystem details.
+
+Examples of details that should remain nested beneath an owning package rather than become headline agenda items include:
+
+- exact Technique reward frequency or rarity probabilities,
+- exact Relic rank thresholds, acquisition-source counts, or swap timing,
+- individual Prosthetic upgrade percentages or node costs,
+- exact room counts, route probabilities, shop prices, or reward weights,
+- final animation timings, VFX timing, hitboxes, damage values, and other playtest tuning.
+
+When a major package becomes the active design area, narrow into its detailed questions only as needed. Do not allow a small unresolved detail to displace broader unfinished areas of the game from the top of the agenda.
 
 ## Approved dependencies
 
 - Launch Blood Aspects are **Wolf, Wraith, and Ronin**.
 - All three Tier 0-IV Aspect packages are locked at qualitative paper-design depth.
 - Five direct Technique slots are locked: **Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow**.
-- The complete **25-Technique direct matrix is approved** at qualitative paper-design depth.
-- The current working launch Technique catalog contains **50 actual Techniques plus 10 refinements**.
-- The 50 Techniques consist of 25 direct, 15 same-family Supporting, 5 Cross-family, and 5 Legendary Techniques.
-- Current rarity distribution is **10 Common / 18 Uncommon / 17 Rare / 5 Legendary**.
-- Refinements have no rarity and are not separate Techniques.
-- Direct Techniques have no family prerequisite and are normally eligible while their combat slot is empty.
-- Supporting Techniques require an already-owned effect that can actually interact with the support.
-- Cross-family Techniques require investment in both listed families plus any entry-specific mechanic requirement.
-- Legendaries require **3 native Techniques from that family**, including at least **1 slotted Technique**. Same-family Supporting Techniques count; Cross-family Techniques and refinements do not.
-- A slotted Technique may receive at most one refinement, and the parent Technique must already be owned.
-- There is no global cap on slotless Supporting Techniques.
-- Filled direct slots normally remain committed; rare replacement offers may overwrite that same slot.
-- All Technique rewards use the same underlying reward screen regardless of source.
+- The current launch Technique catalog contains **50 actual Techniques plus 10 refinements** and is complete for current paper-design scope.
+- Technique rarity, prerequisites, direct-slot ownership, Supporting / Cross-family / Legendary eligibility, and refinement ownership are approved.
 - Prosthetic Techniques are removed; Prosthetic progression is persistent and belongs to the Forge.
 - Backstabs are a universal positional combat classification based on genuinely striking an enemy from behind.
 - Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, or Legendary.
+- The standard successful-run target remains approximately **45–50 minutes**, with exact room and reward cadence deferred to playable validation.
 
 ## Approved Technique roster state
 
-The current Technique roster is complete for paper-design scope. `docs/gameplay/TECHNIQUE_CATALOG.md` owns the full 50-Technique roster, individual rarities, Supporting / Cross-family / Legendary prerequisites, and the 10 refinements.
+The Technique content roster is complete for current paper-design scope. `docs/gameplay/TECHNIQUE_CATALOG.md` owns the full 50-Technique roster, individual rarities, Supporting / Cross-family / Legendary prerequisites, and the 10 refinements.
 
-The roster should not be expanded merely to hit a larger count. New or replacement Techniques should be added only when the later audit or prototype exposes a concrete gap, overlap, balance issue, readability problem, or compatibility problem.
+The roster should not be expanded merely to hit a larger count. New or replacement Techniques should be added only when prototype or integration testing exposes a concrete gap, overlap, balance issue, readability problem, or compatibility problem.
 
-## Priority order
+Remaining Technique reward-frequency, offer-weighting, replacement, and roster-audit work belongs inside the broader **launch run-build and preparation package** below. It is no longer the game's top-level design question by itself.
 
-1. Finish Technique reward-offer structure and roster audit
-2. Finish Relic / consumable run-build scope
-3. Scope permanent Prosthetic progression and the wider Forge package
-4. Persistent progression, onboarding, and trial package
-5. Narrative delivery and authored-content package
-6. Postgame release package
+# Priority order
 
-# 1. Technique reward structure and roster audit
+1. **Launch run-build and pre-run preparation package**
+2. **Strand hub and permanent-progression package**
+3. **Full-run integration, encounter, and pacing package**
+4. **Narrative delivery and campaign-presentation package**
+5. **Endgame, postgame, and release package**
 
-**This is the current active Technique area.**
+# 1. Launch run-build and pre-run preparation package
 
-Technique content creation, rarity assignment, and prerequisite / eligibility design are no longer open questions.
+Define the remaining launch-facing structure around what Akio brings into a run, what he discovers during the run, and how the major run-build systems compete for attention without becoming redundant.
 
-Next establish:
+At broad scope, finish:
 
-1. **Reward frequency** — how many Technique opportunities a normal successful run should produce.
-2. **Offer-generation order** — whether the game builds the eligible pool first and then weights rarity, or rolls rarity first and resolves eligible entries afterward.
-3. **Rarity probabilities / source weighting** — how Common, Uncommon, Rare, and Legendary offers are distributed across combat rooms, shops, treasure, minibosses, bosses, and other approved sources.
-4. **Rare replacement behavior** — how often an occupied direct slot can receive an explicit overwrite offer and what confirmation / comparison presentation it requires.
-5. **Roster audit** — test all 50 Techniques across Wolf, Wraith, Ronin, bosses, groups, multi-hit normalization, backstab access, mixed-family builds, AoE / control limits, and visual readability.
+- the **Relic system's launch role and catalog scope**, including its simple one-slot identity, persistent collection boundary, run-only equipped benefit, and relationship to Techniques / Aspects / Prosthetics,
+- whether **consumables** add enough value to justify launch inclusion,
+- the **pre-run selection experience** for Aspect, Prosthetic, and Relic through distinct Strand interactibles while keeping the Boat focused on run-start confirmation,
+- the overall relationship between **Techniques, Relics, Shrines, economy, survival rewards, and route choices** so no run-build layer crowds out the others,
+- and whether the current reward ecosystem gives the player enough meaningful decisions across a normal successful run.
 
-The audit should also verify that prerequisite rules never create dead reward offers and that the three-native-Technique Legendary gate produces realistic but rare capstone access within the run-duration target.
+Only after that broad structure is coherent should this package narrow into details such as:
 
-# 2. Remaining run-build catalog
+- Relic roster entries, shallow upgrade / mastery behavior, exact swap opportunities, and acquisition-source allocation,
+- Technique reward frequency, eligible-pool generation, rarity/source weighting, and rare replacement behavior,
+- exact reward-source competition and fallback behavior,
+- and the final cross-Aspect / boss / readability audit of the 50-Technique roster.
 
-After the Technique reward structure is coherent, define:
+These detailed items are important for implementation, but they are subordinate to the larger question of whether Oathbound's complete run-build ecosystem is coherent and appropriately scoped.
 
-- initial Relic count and final rarity structure,
-- whether consumables ship,
-- competition between Technique rewards and other route rewards,
-- and entries requiring unique icons, VFX, animation, or audio.
+# 2. Strand hub and permanent-progression package
 
-# 3. Permanent Prosthetic / Forge scope
+Define the Strand as a complete between-run gameplay space rather than solving each service in isolation.
 
-Define individual permanent upgrade paths for the eight Prosthetics through the Forge.
+At broad scope, establish:
 
-Scrolls are currently the persistent Forge currency. Exact branch counts, ranks, costs, and tool-specific upgrade depth remain open.
+- the permanent progression available through the **Bloodwell**,
+- the permanent **Prosthetic / Forge** development package for all eight tools,
+- the long-term progression or mastery role, if any, for **Relics** and Blood Aspects,
+- the purpose and launch depth of the **Blood Mirror and Blood Cavern** trial / mastery systems,
+- the unlock and onboarding flow across the Strand's services,
+- the final physical ownership of run-preparation interactibles such as the Aspect selection station, Prosthetic selection station, Relic Reliquary, Forge Bench, and Boat,
+- and whether the four persistent / run currencies have enough meaningful uses without creating unnecessary upgrade economies.
 
-# 4. Persistent progression, onboarding, and trial package
+After this package is coherent, narrow into individual Forge paths, rank counts, costs, trial rewards, mastery thresholds, exact unlock timing, and interface states.
 
-Define the minimum launch package across the Bloodwell, Forge, Blood Mirror, and Blood Cavern.
+# 3. Full-run integration, encounter, and pacing package
 
-# 5. Narrative delivery and authored-content package
+Review Oathbound as one complete playable run from the Strand through Hushiro, Yomori, Kagutsuchi, the Eclipse Shogun, and eventual Heart progression.
 
-Define first-death presentation, bloodline confirmation, Shogun dialogue progression, codex / NPC updates, ending / credits requirements, voice scope, and delivery ownership.
+At broad scope, verify:
 
-# 6. Postgame release package
+- the three-region sequence provides enough change in combat demands and pacing,
+- standard combat rooms, Shrines, Rest rooms, Shops, treasure / miniboss rooms, regional bosses, and transition spaces each have a clear purpose,
+- regional-boss transitions provide the correct recovery / preparation opportunities without becoming overloaded menus,
+- enemy, miniboss, boss, Aspect, Technique, Prosthetic, Relic, Shrine, and economy systems can coexist without any one layer invalidating the others,
+- the current 45–50 minute successful-run target still appears plausible once the full system set is playable,
+- and no major encounter, room, reward, or run-flow system is missing from launch scope.
 
-Define repeat Heart-route access, repeat-clear rewards, launch completion goals, and required postgame UI states.
+Exact room counts, route algorithms, branch frequency, reward probabilities, encounter compositions, enemy values, and pacing numbers remain prototype / playtest work unless testing reveals a production-scope change.
+
+# 4. Narrative delivery and campaign-presentation package
+
+The story spine, Heart Binding structure, major lore, Shogun motivation, Returning Blood foundation, and ending are already approved at high level.
+
+Define how much authored content is actually required to deliver that story across repeated runs:
+
+- introductory attempt and first-death presentation,
+- bloodline / Returning Blood reveal timing,
+- Shogun dialogue progression across repeated encounters,
+- NPC dialogue and Strand updates,
+- codex / Discovery Board ownership,
+- Binding-clear presentation and campaign-state communication,
+- portrait / cinematic / voice-acting scope,
+- ending and credits presentation,
+- and the final writing / localization inventory required for launch.
+
+Detailed line counts and final scripts should follow only after this delivery package is scoped.
+
+# 5. Endgame, postgame, and release package
+
+Define what the player can do after the first canonical Heart victory and what presentation is required for a complete initial release.
+
+At broad scope, establish:
+
+- how repeat Heart-route access works after story completion,
+- whether repeat Heart clears provide unique rewards or primarily mastery / record value,
+- launch completion goals, achievements, records, or optional mastery objectives,
+- required postgame UI states and save-state communication,
+- front-end / settings / credits / completion presentation still needed for release,
+- and whether any additional challenge-mode, modifier, variant, or New-Game-style system is truly required for launch or should remain post-launch scope.
+
+Do not expand the base game with difficulty modifiers, large variant systems, or additional Aspects merely to create postgame volume unless playable testing demonstrates a clear need.
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room probabilities, prices, rarity probabilities, offer weights, replacement rates, permanent-upgrade percentages, and final VFX/animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room probabilities, prices, rarity probabilities, offer weights, replacement rates, Relic rank thresholds, permanent-upgrade percentages, route probabilities, and final VFX/animation timing.
