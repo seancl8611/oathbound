@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-15
 topics:
   - progression
   - persistence
@@ -39,22 +39,9 @@ Every system and item family must state whether it survives death and successful
 
 ## Run-only progression
 
-Temporary run state may include:
+Temporary run state may include the selected Blood Aspect and current Tier, Corruption, Blood after Tier II, Blood Art state, five core slotted Techniques, slotless Supporting / Cross-family / Legendary Techniques, Technique refinements and replacement state, the currently equipped Relic benefit, Gold, room progress, temporary Health or Spirit capacity, and approved consumables or encounter rewards.
 
-- selected Blood Aspect and current Tier,
-- Corruption,
-- Blood after Tier II,
-- Blood Art state,
-- five core slotted Techniques,
-- slotless Supporting, Cross-family, and Legendary Techniques,
-- Technique refinements and rare replacement state,
-- the currently equipped Relic benefit,
-- Gold,
-- room progress,
-- temporary Health or Spirit capacity,
-- approved consumables and encounter rewards.
-
-Prosthetic progression is not part of the temporary Technique build.
+Prosthetic progression is not part of the temporary Technique build. Relic mastery is persistent even though the equipped Relic benefit is run-active.
 
 These run states reset after failed death-return or successful completion unless explicitly defined otherwise.
 
@@ -69,7 +56,7 @@ Expected viable outcomes:
 - **Aspect-focused:** Tier III with less-developed horizontal upgrades.
 - **High-roll:** Tier IV plus a strong completed Technique build.
 
-Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, or Relic.
+Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, Relic, or highly upgraded Prosthetic.
 
 ## Fixed Blood Aspect Tier path
 
@@ -113,45 +100,65 @@ Exact capacity, gain weighting, timing, damage, interruption rules, and anti-far
 
 ## Technique development boundary
 
-The run begins with five empty core Technique slots tied to:
+The run begins with five empty core Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow. Each slot can hold one direct Technique.
 
-- Basic Attack,
-- Held Attack,
-- Dash,
-- Parry / Counter,
-- Deathblow.
-
-Each slot can hold one direct Technique. Direct Techniques do not stack within the same core action.
-
-Technique progression can continue beyond those five choices through slotless same-family Supporting Techniques, Cross-family Techniques, family Legendaries, one refinement per eligible slotted Technique, and rare same-slot replacement offers.
+Technique progression can continue through slotless same-family Supporting Techniques, Cross-family Techniques, family Legendaries, one refinement per eligible slotted Technique, and rare same-slot replacement offers.
 
 There is no global cap on total Technique upgrades. The practical cap comes from Technique reward opportunities, route choices, rarity, prerequisites, and run length.
 
-The five core family mechanics—Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage—are defined at qualitative core-rule depth. The current working Technique roster contains 50 actual Techniques plus 10 refinements and is complete for current paper-design scope.
+The five core family mechanics—Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage—are defined at qualitative core-rule depth. The current launch Technique roster contains 50 actual Techniques plus 10 refinements and is complete for current paper-design scope.
 
-## Relic persistence boundary
+## Relic persistence and mastery boundary
 
-Relics use a split ownership/effect model:
+Relics use persistent collection and mastery with a run-active equipped benefit:
 
 - unlocked or discovered Relics persist in the player's collection,
 - Akio may equip one Relic at a time,
 - the equipped Relic provides its benefit during the run,
-- the active benefit ends when the run ends,
-- and the owned Relic remains available for future runs.
+- Relics may be switched during approved run-transition opportunities,
+- only the currently equipped Relic gains persistent mastery,
+- eligible enemy kills earned while a Relic is equipped advance that Relic's mastery,
+- switching redirects later eligible kill progress to the newly equipped Relic,
+- mastery already earned is never lost when switching or when a run ends,
+- Relics are not upgraded at the Forge and do not consume Forge currencies,
+- and mastery strengthens the existing Relic benefit rather than adding branching or unrelated mechanics.
 
-Relics do not use rarity tiers. The approved launch roster contains 10 Relics.
+Relics do not use rarity tiers. The approved launch roster contains 10 Relics. Exact mastery rank count, kill weighting, thresholds, swap locations, and numerical growth remain later tuning work.
 
-A shallow permanent Relic mastery/rank system remains an optional later layer. If retained, it should strengthen the Relic's existing effect rather than create branching trees or unrelated mechanics.
+## Prosthetic Forge progression boundary
+
+The eight launch Prosthetics are permanent tactical tools developed through the Forge Bench.
+
+- A Prosthetic is functionally complete when unlocked.
+- The Forge owns permanent individual tool upgrades.
+- Scrolls remain the primary persistent Forge currency.
+- Prosthetic paths are shallow and linear rather than Technique-style branching builds.
+- Two upgrades are the default; a third is used only when the base tool already has multiple existing properties worth improving.
+- Upgrades improve existing properties only and do not add a new tactical role, alternate active ability, unrelated status family, or second moveset.
+- One Prosthetic is equipped at a time in the current launch structure.
+
+The locked qualitative paths are:
+
+- **Beast-Bane Whistle:** stronger interrupt/stagger → larger pulse radius.
+- **Thunder Rod:** stronger direct hit → longer Shock.
+- **Smoke Gourd:** larger cloud → longer persistence.
+- **Fang Harpoon:** greater eligible pull → stronger interruption/posture impact.
+- **Mirror Umbrella:** greater pressure storage → improved Spirit efficiency → stronger posture release.
+- **Flame Vent:** greater cone reach → stronger direct Health damage → longer Burn.
+- **Mist Raven:** improved Spirit efficiency → modestly greater fixed short-range blink distance.
+- **Bloodletting Gourd:** stronger immediate heal → longer healing-on-hit window → stronger healing-on-hit return.
+
+Exact percentages, costs, resource values, damage, status values, and timing remain implementation/playtest work.
 
 ## Persistent character progression
 
 The Strand supports permanent growth through:
 
 - **Bloodwell:** broad meta progression,
-- **Forge Bench:** weapon and Prosthetic development,
+- **Forge Bench:** weapon and permanent Prosthetic development,
 - **Blood Mirror:** Aspect unlocks, mastery, and small capped reliability upgrades,
 - **Blood Cavern:** teaching, fixed-loadout trials, mastery challenges, and approved unlocks,
-- **Relic collection:** permanently discovered Relics available for selection at the Relic Reliquary or equivalent Strand interactible,
+- **Relic collection and mastery:** permanently discovered Relics, kill-earned individual mastery, and selection through the Relic Reliquary or equivalent interactible,
 - **Discovery Board:** codex and recovered history,
 - **Merchant and NPC services:** approved stock or service progression,
 - **Mist, Scrolls, and Boss Emblems:** persistent currencies.
@@ -179,7 +186,7 @@ Destroyed Binding progress is not a currency and cannot be lost.
 | Boss Emblem | Persistent | Rare major gates or high-value nodes |
 | Gold | Run-only | Shops and run economy |
 
-Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards` remains deprecated unless intentionally restored.
+Corruption, Blood, Relic mastery, and destroyed Heart Bindings are not currencies. `Mist Shards` remains deprecated unless intentionally restored.
 
 ## Persistence boundaries
 
@@ -187,8 +194,7 @@ Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards
 
 - Unlocked Aspects persist as loadout choices.
 - Every run begins at Tier 0.
-- Tier and Corruption reset after the run.
-- Blood is unavailable before Tier II and resets after the run.
+- Tier, Corruption, and Blood reset after the run.
 - Blood Mirror mastery and small permanent reliability upgrades persist.
 - Permanent upgrades cannot replace the fixed in-run Embrace path.
 
@@ -197,18 +203,19 @@ Corruption, Blood, and destroyed Heart Bindings are not currencies. `Mist Shards
 - Five core combat slots begin empty each run.
 - Slotted, Supporting, Cross-family, Legendary Techniques, refinements, and replacement state reset after the run.
 - Permanent progression may unlock Techniques into future pools but does not pre-equip them.
-- Initial scope does not include permanent expansion beyond the five core combat slots.
 
 ### Relics
 
-- Relic collection ownership persists.
-- One Relic may be equipped for a run.
-- The equipped effect is run-active, but the Relic itself is not lost when the run ends.
-- Relics do not occupy Technique or Prosthetic slots.
+- Relic collection ownership and mastery persist.
+- One Relic is equipped at a time.
+- The equipped effect is run-active, but the Relic and earned kill mastery persist after the run.
+- Only the equipped Relic receives eligible kill progress.
+- Relics do not occupy Technique or Prosthetic slots and are not upgraded at the Forge.
 
 ### Prosthetics
 
-- The Forge owns Prosthetic unlocks and permanent individual tool improvements.
+- Prosthetic unlocks and Forge upgrades persist.
+- The Forge owns permanent individual tool improvements.
 - Prosthetics do not receive a separate temporary Technique layer during runs.
 
 ## Trial reward boundary
@@ -221,12 +228,9 @@ Trials may not add alternate Aspect Tiers, permanently pre-equip a Technique, cr
 
 Both failed and successful runs reconstruct Akio at the Strand through Returning Blood.
 
-A successful Binding return additionally:
+A successful Binding return additionally saves Binding progress and permanent rewards, clears run-only state, presents a results summary, and triggers relevant hub, codex, Blood Mirror, and Heart updates.
 
-1. saves Binding progress and permanent rewards,
-2. clears run-only state,
-3. presents a results summary,
-4. triggers relevant hub, codex, Blood Mirror, and Heart updates.
+Relic mastery earned from eligible kills is saved regardless of whether the run ultimately succeeds or fails.
 
 ## Persistence matrix
 
@@ -235,7 +239,7 @@ A successful Binding return additionally:
 | Narrative/codex progress | Persists | Persists |
 | Destroyed Bindings | Persists | Persists |
 | Permanent upgrades/unlocks | Persists | Persists |
-| Relic collection | Persists | Persists |
+| Relic collection/mastery | Persists | Persists |
 | Persistent currencies | Persists | Persists |
 | Blood Aspect Tier | Resets | Resets |
 | Corruption | Resets | Resets |
@@ -248,10 +252,9 @@ A successful Binding return additionally:
 
 ## Current production dependencies
 
-1. Define permanent Prosthetic / Forge progression for all eight launch tools.
-2. Complete the wider Strand, permanent-progression, onboarding, and trial package.
-3. Review full-run integration, rewards, encounters, and pacing, including deferred Technique reward and Relic acquisition tuning.
-4. Lock the authored narrative-delivery package.
-5. Lock endgame, postgame, and release scope.
+1. Complete the wider Strand, permanent-progression, onboarding, and trial package.
+2. Review full-run integration, rewards, encounters, and pacing, including deferred Technique reward, Relic mastery/acquisition, and Forge tuning.
+3. Lock the authored narrative-delivery package.
+4. Lock endgame, postgame, and release scope.
 
-Exact percentages, combat values, resource values, Relic rank thresholds, costs, timing windows, offer rates, replacement rates, and reward values remain implementation and balance work.
+Exact percentages, combat values, resource values, Relic mastery thresholds/kill weighting, Forge costs, timing windows, offer rates, replacement rates, and reward values remain implementation and balance work.
