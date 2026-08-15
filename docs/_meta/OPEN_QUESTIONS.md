@@ -34,9 +34,12 @@ When a major system or package becomes the active design area, finish it at usef
 - Five direct Technique slots are locked: **Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow**.
 - The current launch Technique catalog contains **50 actual Techniques plus 10 refinements** and is complete for current paper-design scope.
 - Technique rarity, prerequisites, direct-slot ownership, Supporting / Cross-family / Legendary eligibility, and refinement ownership are approved.
+- The launch Relic roster contains **10 Relics** and is complete for current paper-design scope.
+- Relics use one equipped slot, persistent collection ownership, run-active effects, and **no rarity tiers**.
+- Relics remain separate from Techniques and Prosthetics; exact acquisition allocation, rank thresholds, swap timing, and numerical balance are later details.
 - Prosthetic Techniques are removed; Prosthetic progression is persistent and belongs to the Forge.
 - Backstabs are a universal positional combat classification based on genuinely striking an enemy from behind.
-- Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, or Legendary.
+- Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, Legendary, or Relic.
 - The standard successful-run target remains approximately **45–50 minutes**, with exact room and reward cadence deferred to playable validation.
 
 ## Approved Technique roster state
@@ -47,38 +50,38 @@ The roster should not be expanded merely to hit a larger count. New or replaceme
 
 Remaining Technique reward-frequency, offer-weighting, replacement, and roster-audit work is still required, but it is a later integration/tuning layer and should not interrupt the current system-design sequence.
 
+## Approved Relic state
+
+`docs/gameplay/RELICS.md` owns the approved **10-Relic launch roster** and system boundaries.
+
+The roster is:
+
+- Traveler's Coin
+- Merchant's Seal
+- Iron Prayer Bead
+- Spirit Tassel
+- Execution Bead
+- Wayfarer's Charm
+- Last Oath
+- Unbroken Cord
+- Scribe's Lens
+- Blood Moon Shard
+
+The Relic system is complete for current qualitative paper-design scope. Exact acquisition sources, shallow mastery/rank rules, swap timing, and numerical values remain nested later decisions rather than a reason to continue expanding the system now.
+
 # Priority order
 
-1. **Finish the Relic system and launch roster**
-2. **Define permanent Prosthetic / Forge progression**
-3. **Complete the wider Strand, permanent-progression, onboarding, and trial package**
-4. **Review full-run integration, rewards, encounters, and pacing**
-5. **Define narrative delivery and campaign presentation**
-6. **Define endgame, postgame, and release scope**
+1. **Define permanent Prosthetic / Forge progression**
+2. **Complete the wider Strand, permanent-progression, onboarding, and trial package**
+3. **Review full-run integration, rewards, encounters, and pacing**
+4. **Define narrative delivery and campaign presentation**
+5. **Define endgame, postgame, and release scope**
 
-# 1. Finish the Relic system and launch roster
+# 1. Permanent Prosthetic / Forge progression
 
-Relics are the current active design area. Finish them at qualitative paper-design depth before moving on.
+**This is the next major gameplay-system design area.**
 
-At broad scope, establish:
-
-- the final role of Relics alongside Aspects, Techniques, and Prosthetics,
-- the one-slot equipped structure and persistent-collection / run-only-benefit boundary,
-- whether the current no-rarity direction is retained,
-- the pre-run Relic selection experience through a dedicated Strand interactible rather than the Boat,
-- the broad in-run replacement / swap boundary,
-- whether shallow permanent Relic mastery or upgrading adds value without becoming another large progression tree,
-- and the **launch Relic roster**: enough simple, distinct effects to make discovery and experimentation worthwhile without overlapping the larger build systems.
-
-The current direction favors simple, readable, often one-line benefits rather than another family/prerequisite/meter system.
-
-After the role and roster are coherent, exact acquisition-source allocation, rank thresholds, encounter counts, swap timing, and balance values can remain implementation or later-content decisions.
-
-Once this Relic package is complete, move directly to Prosthetics / Forge rather than continuing into small Relic tuning questions.
-
-# 2. Permanent Prosthetic / Forge progression
-
-The eight launch Prosthetic tools and their tactical roles already exist. The next major gameplay-system pass after Relics is to define how those tools develop persistently through the Forge.
+The eight launch Prosthetic tools and their tactical roles already exist. Define how those tools develop persistently through the Forge.
 
 At broad scope, establish:
 
@@ -92,9 +95,9 @@ Scrolls remain the current persistent Forge currency.
 
 Do not make exact node counts, percentage values, costs, unlock thresholds, cooldown values, or damage numbers top-level blockers. Those should follow the qualitative path design and later playtesting.
 
-# 3. Strand hub, permanent progression, onboarding, and trials
+# 2. Strand hub, permanent progression, onboarding, and trials
 
-After Relics and Prosthetic progression are coherent, review the Strand as the complete between-run layer.
+After Prosthetic progression is coherent, review the Strand as the complete between-run layer.
 
 At broad scope, establish:
 
@@ -109,7 +112,7 @@ The current preparation direction favors separate small physical selection inter
 
 After this package is coherent, narrow into exact trial counts, mastery thresholds, unlock timing, permanent-upgrade values, interface states, and currency costs.
 
-# 4. Full-run integration, rewards, encounters, and pacing
+# 3. Full-run integration, rewards, encounters, and pacing
 
 Review Oathbound as one complete playable run from the Strand through Hushiro, Yomori, Kagutsuchi, the Eclipse Shogun, and eventual Heart progression.
 
@@ -124,11 +127,11 @@ At broad scope, verify:
 - the current 45–50 minute successful-run target still appears plausible once the full system set is playable,
 - and no major encounter, room, reward, or run-flow system is missing from launch scope.
 
-This is also where the remaining Technique reward cadence, eligible-pool generation, rarity/source weighting, rare replacement behavior, and full 50-Technique compatibility/readability audit should be resolved when enough of the complete run exists to judge them properly.
+This is also where the remaining Technique reward cadence, eligible-pool generation, rarity/source weighting, rare replacement behavior, full 50-Technique compatibility/readability audit, Relic acquisition-source allocation, and exact Relic transition-swap behavior should be resolved when enough of the complete run exists to judge them properly.
 
 Exact room counts, route algorithms, branch frequency, reward probabilities, encounter compositions, enemy values, prices, and pacing numbers remain prototype / playtest work unless testing reveals a production-scope change.
 
-# 5. Narrative delivery and campaign presentation
+# 4. Narrative delivery and campaign presentation
 
 The story spine, Heart Binding structure, major lore, Shogun motivation, Returning Blood foundation, and ending are already approved at high level.
 
@@ -146,7 +149,7 @@ Define how much authored content is actually required to deliver that story acro
 
 Detailed line counts and final scripts should follow only after this delivery package is scoped.
 
-# 6. Endgame, postgame, and release scope
+# 5. Endgame, postgame, and release scope
 
 Define what the player can do after the first canonical Heart victory and what presentation is required for a complete initial release.
 
@@ -163,4 +166,4 @@ Do not expand the base game with difficulty modifiers, large variant systems, or
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room probabilities, prices, rarity probabilities, offer weights, replacement rates, Relic rank thresholds, permanent-upgrade percentages, route probabilities, and final VFX/animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room probabilities, prices, rarity probabilities, offer weights, replacement rates, Relic rank thresholds, Relic acquisition allocation, permanent-upgrade percentages, route probabilities, and final VFX/animation timing.
