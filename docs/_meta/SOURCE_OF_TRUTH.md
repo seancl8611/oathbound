@@ -4,7 +4,7 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-14
 ---
 
 # Source of Truth
@@ -30,6 +30,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
 | Technique mechanics | `docs/gameplay/TECHNIQUES.md` |
 | Individual Technique catalog and refinements | `docs/gameplay/TECHNIQUE_CATALOG.md` |
+| Relic mechanics and launch roster | `docs/gameplay/RELICS.md` |
 | Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
 | Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
 | Prosthetic mechanics | `docs/gameplay/PROSTHETICS.md` |
