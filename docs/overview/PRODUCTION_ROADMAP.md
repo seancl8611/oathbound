@@ -110,4 +110,6 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 ## Current pre-production dependency
 
-Finalize the **Technique reward structure and 50-Technique roster audit**: reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and cross-Aspect / boss / readability validation. Then continue through the remaining production-scope packages in `docs/_meta/OPEN_QUESTIONS.md`.
+Use the broad package order in `docs/_meta/OPEN_QUESTIONS.md` rather than treating a narrow subsystem-detail pass as the game's headline blocker.
+
+The current design focus is the **launch run-build and pre-run preparation package**: complete the Relic / consumable boundary, preparation interactibles, and overall relationship among Aspects, Prosthetics, Techniques, Relics, Shrines, economy, survival rewards, and route decisions. Technique reward cadence, rarity/source weighting, replacement behavior, and the 50-Technique audit remain required later details inside that broader package rather than a separate top-level gate.
