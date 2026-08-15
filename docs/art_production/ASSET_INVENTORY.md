@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-14
 topics:
   - asset-counts
   - characters
@@ -13,6 +13,7 @@ topics:
   - vfx
   - items
   - techniques
+  - relics
   - the-heart
 related:
   - OVERVIEW-FULL-SCOPE
@@ -41,9 +42,9 @@ This file records high-level production groups and known counts. Detailed states
 | Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
 | Prosthetic families | 8 | One family per tool |
 | Technique direct-slot UI | 5 slots | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow; supporting Techniques are slotless |
-| Relic capacity | 1 | Catalog count remains open |
+| Relic capacity | 1 | One equipped Relic |
+| Launch Relics | 10 | Persistent collectible objects; no rarity tiers |
 | Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
-| Relic rarity tiers | Provisional 3 | Common, Rare, Legendary working sketch |
 
 ## Player and run-build art
 
@@ -55,7 +56,7 @@ This file records high-level production groups and known counts. Detailed states
 - Shared defense, execution, input, and enemy-response language.
 - Eight Prosthetic icons/VFX families.
 - Technique card, rarity, family, direct-slot, supporting, refinement, replacement, warning, decline, reroll, comparison, and post-fill offer states.
-- Relic card/icon/rarity family.
+- Ten Relic object/icon identities plus one shared collection/equip presentation family.
 
 Additional Aspect families are outside launch scope.
 
@@ -95,6 +96,7 @@ Exact Shogun and Heart attack/animation/VFX counts remain later encounter work.
 ## Environment and room art
 
 - Strand hub, docks, NPC stations, Blood Cavern, Blood Mirror.
+- Dedicated preparation interactibles for Aspect, Prosthetic, and Relic selection, including the current Relic Reliquary direction.
 - Hushiro modular kit, functional rooms, miniboss spaces, boss arena.
 - Yomori modular kit, functional rooms, miniboss spaces, Twin Maws arena.
 - Kagutsuchi modular kit, functional rooms, miniboss spaces, Shogun arena.
@@ -116,6 +118,7 @@ Required families include:
 - Wraith Spectral Edge, Wraith's Reach, Spectral Passage, extended deathblow, and Veilstride feedback where needed.
 - Ronin posture-capacity changes through existing posture HUD, Falling Mountain, Measured/Perfect Weight, and Shattering Wake feedback where needed.
 - Five direct Technique slots plus supporting/rarity/refinement/replacement/comparison states.
+- Relic collection/equip states without rarity badges.
 - Pause/build overview.
 - Enemy/boss Health and posture.
 - Deathblow prompts.
@@ -129,7 +132,7 @@ Core shared VFX include Parry Spark, Hit Spark, Deathblow Cue, Sword Trail, Post
 
 Aspect VFX follow `ASPECT_VFX.md`; Prosthetic VFX follow `PROSTHETIC_VFX.md`; Technique-family presentation follows `TECHNIQUE_VFX.md`.
 
-Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique UI, and formal drawback-badge assets remain excluded.
+Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique UI, formal drawback-badge assets, and Relic rarity-badge families remain excluded.
 
 ## Item and reward art
 
@@ -138,7 +141,7 @@ Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-stat
 - Temporary capacity rewards.
 - Route markers.
 - Technique rarity/refinement presentation.
-- Relics.
+- Ten approved Relics.
 - Regional breakables and treasure.
 - Consumables only if included in the final launch catalog.
 
@@ -151,5 +154,5 @@ Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-stat
 - Reuse existing attack, deathblow, movement, and HUD families when a Tier modifies existing actions.
 - No duplicate Aspect-specific Blood Art upgrade tree is included.
 - Do not preserve assets for superseded mechanics.
-- Final Technique, Relic, and consumable counts depend on the launch run-build catalog; Prosthetic progression is a separate persistent Forge package.
+- The Technique roster and 10-Relic launch roster are approved for current paper-design scope; Prosthetic progression is the next separate persistent Forge package.
 - Additional Aspects, postgame modifiers, enemy variants, challenge systems, and route algorithms are outside initial inventory unless intentionally promoted.
