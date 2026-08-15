@@ -110,6 +110,6 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 ## Current pre-production dependency
 
-Use the broad package order in `docs/_meta/OPEN_QUESTIONS.md` rather than treating a narrow subsystem-detail pass as the game's headline blocker.
+Use the broad-question hierarchy in `docs/_meta/OPEN_QUESTIONS.md` without replacing the established design sequence with narrow tuning work.
 
-The current design focus is the **launch run-build and pre-run preparation package**: complete the Relic / consumable boundary, preparation interactibles, and overall relationship among Aspects, Prosthetics, Techniques, Relics, Shrines, economy, survival rewards, and route decisions. Technique reward cadence, rarity/source weighting, replacement behavior, and the 50-Technique audit remain required later details inside that broader package rather than a separate top-level gate.
+The current design focus is to **finish the Relic system and launch roster**. Once that qualitative package is complete, move directly to **permanent Prosthetic / Forge progression** for the eight launch tools. The wider Strand/progression package follows after those two systems. Technique reward cadence, exact Relic rank/swap values, Prosthetic percentages/costs, and other detailed tuning remain nested until later integration or playable validation.

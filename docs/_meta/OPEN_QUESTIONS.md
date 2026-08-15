@@ -15,7 +15,7 @@ Resolved rules belong in their authoritative files. Exact numerical tuning and p
 
 ## Question hierarchy rule
 
-Top-level questions should represent **large game-wide or production-wide packages**, not isolated subsystem details.
+Top-level questions should represent **large gameplay systems or production-wide packages**, not isolated subsystem details.
 
 Examples of details that should remain nested beneath an owning package rather than become headline agenda items include:
 
@@ -25,7 +25,7 @@ Examples of details that should remain nested beneath an owning package rather t
 - exact room counts, route probabilities, shop prices, or reward weights,
 - final animation timings, VFX timing, hitboxes, damage values, and other playtest tuning.
 
-When a major package becomes the active design area, narrow into its detailed questions only as needed. Do not allow a small unresolved detail to displace broader unfinished areas of the game from the top of the agenda.
+When a major system or package becomes the active design area, finish it at useful qualitative paper-design depth before moving to the next major area. Narrow into detailed questions only as needed; do not let a small unresolved detail displace the established design trajectory.
 
 ## Approved dependencies
 
@@ -45,54 +45,71 @@ The Technique content roster is complete for current paper-design scope. `docs/g
 
 The roster should not be expanded merely to hit a larger count. New or replacement Techniques should be added only when prototype or integration testing exposes a concrete gap, overlap, balance issue, readability problem, or compatibility problem.
 
-Remaining Technique reward-frequency, offer-weighting, replacement, and roster-audit work belongs inside the broader **launch run-build and preparation package** below. It is no longer the game's top-level design question by itself.
+Remaining Technique reward-frequency, offer-weighting, replacement, and roster-audit work is still required, but it is a later integration/tuning layer and should not interrupt the current system-design sequence.
 
 # Priority order
 
-1. **Launch run-build and pre-run preparation package**
-2. **Strand hub and permanent-progression package**
-3. **Full-run integration, encounter, and pacing package**
-4. **Narrative delivery and campaign-presentation package**
-5. **Endgame, postgame, and release package**
+1. **Finish the Relic system and launch roster**
+2. **Define permanent Prosthetic / Forge progression**
+3. **Complete the wider Strand, permanent-progression, onboarding, and trial package**
+4. **Review full-run integration, rewards, encounters, and pacing**
+5. **Define narrative delivery and campaign presentation**
+6. **Define endgame, postgame, and release scope**
 
-# 1. Launch run-build and pre-run preparation package
+# 1. Finish the Relic system and launch roster
 
-Define the remaining launch-facing structure around what Akio brings into a run, what he discovers during the run, and how the major run-build systems compete for attention without becoming redundant.
+Relics are the current active design area. Finish them at qualitative paper-design depth before moving on.
 
-At broad scope, finish:
+At broad scope, establish:
 
-- the **Relic system's launch role and catalog scope**, including its simple one-slot identity, persistent collection boundary, run-only equipped benefit, and relationship to Techniques / Aspects / Prosthetics,
-- whether **consumables** add enough value to justify launch inclusion,
-- the **pre-run selection experience** for Aspect, Prosthetic, and Relic through distinct Strand interactibles while keeping the Boat focused on run-start confirmation,
-- the overall relationship between **Techniques, Relics, Shrines, economy, survival rewards, and route choices** so no run-build layer crowds out the others,
-- and whether the current reward ecosystem gives the player enough meaningful decisions across a normal successful run.
+- the final role of Relics alongside Aspects, Techniques, and Prosthetics,
+- the one-slot equipped structure and persistent-collection / run-only-benefit boundary,
+- whether the current no-rarity direction is retained,
+- the pre-run Relic selection experience through a dedicated Strand interactible rather than the Boat,
+- the broad in-run replacement / swap boundary,
+- whether shallow permanent Relic mastery or upgrading adds value without becoming another large progression tree,
+- and the **launch Relic roster**: enough simple, distinct effects to make discovery and experimentation worthwhile without overlapping the larger build systems.
 
-Only after that broad structure is coherent should this package narrow into details such as:
+The current direction favors simple, readable, often one-line benefits rather than another family/prerequisite/meter system.
 
-- Relic roster entries, shallow upgrade / mastery behavior, exact swap opportunities, and acquisition-source allocation,
-- Technique reward frequency, eligible-pool generation, rarity/source weighting, and rare replacement behavior,
-- exact reward-source competition and fallback behavior,
-- and the final cross-Aspect / boss / readability audit of the 50-Technique roster.
+After the role and roster are coherent, exact acquisition-source allocation, rank thresholds, encounter counts, swap timing, and balance values can remain implementation or later-content decisions.
 
-These detailed items are important for implementation, but they are subordinate to the larger question of whether Oathbound's complete run-build ecosystem is coherent and appropriately scoped.
+Once this Relic package is complete, move directly to Prosthetics / Forge rather than continuing into small Relic tuning questions.
 
-# 2. Strand hub and permanent-progression package
+# 2. Permanent Prosthetic / Forge progression
 
-Define the Strand as a complete between-run gameplay space rather than solving each service in isolation.
+The eight launch Prosthetic tools and their tactical roles already exist. The next major gameplay-system pass after Relics is to define how those tools develop persistently through the Forge.
+
+At broad scope, establish:
+
+- the meaningful upgrade identity for each of the eight Prosthetics,
+- whether each tool uses a short linear path, small branching path, or another consistent shallow structure,
+- what kinds of upgrades are allowed without turning Prosthetics into a second Technique system,
+- how upgrade depth compares across the eight tools,
+- and what the Forge must support at launch for those paths to feel complete.
+
+Scrolls remain the current persistent Forge currency.
+
+Do not make exact node counts, percentage values, costs, unlock thresholds, cooldown values, or damage numbers top-level blockers. Those should follow the qualitative path design and later playtesting.
+
+# 3. Strand hub, permanent progression, onboarding, and trials
+
+After Relics and Prosthetic progression are coherent, review the Strand as the complete between-run layer.
 
 At broad scope, establish:
 
 - the permanent progression available through the **Bloodwell**,
-- the permanent **Prosthetic / Forge** development package for all eight tools,
-- the long-term progression or mastery role, if any, for **Relics** and Blood Aspects,
+- the long-term mastery role, if any, for Blood Aspects and Relics,
 - the purpose and launch depth of the **Blood Mirror and Blood Cavern** trial / mastery systems,
-- the unlock and onboarding flow across the Strand's services,
-- the final physical ownership of run-preparation interactibles such as the Aspect selection station, Prosthetic selection station, Relic Reliquary, Forge Bench, and Boat,
-- and whether the four persistent / run currencies have enough meaningful uses without creating unnecessary upgrade economies.
+- the unlock and onboarding flow across Strand services,
+- the physical preparation interactibles for Aspect selection, Prosthetic selection, Relic selection, the Forge Bench, and the Boat,
+- and whether Mist, Scrolls, Boss Emblems, and Gold each have sufficiently clear ownership without creating unnecessary upgrade economies.
 
-After this package is coherent, narrow into individual Forge paths, rank counts, costs, trial rewards, mastery thresholds, exact unlock timing, and interface states.
+The current preparation direction favors separate small physical selection interactibles, while the Boat remains focused on a simple run-start confirmation.
 
-# 3. Full-run integration, encounter, and pacing package
+After this package is coherent, narrow into exact trial counts, mastery thresholds, unlock timing, permanent-upgrade values, interface states, and currency costs.
+
+# 4. Full-run integration, rewards, encounters, and pacing
 
 Review Oathbound as one complete playable run from the Strand through Hushiro, Yomori, Kagutsuchi, the Eclipse Shogun, and eventual Heart progression.
 
@@ -100,14 +117,18 @@ At broad scope, verify:
 
 - the three-region sequence provides enough change in combat demands and pacing,
 - standard combat rooms, Shrines, Rest rooms, Shops, treasure / miniboss rooms, regional bosses, and transition spaces each have a clear purpose,
-- regional-boss transitions provide the correct recovery / preparation opportunities without becoming overloaded menus,
-- enemy, miniboss, boss, Aspect, Technique, Prosthetic, Relic, Shrine, and economy systems can coexist without any one layer invalidating the others,
+- regional-boss transitions provide appropriate recovery and limited preparation opportunities without becoming overloaded menus,
+- enemy, miniboss, boss, Aspect, Technique, Prosthetic, Relic, Shrine, and economy systems can coexist without one layer invalidating the others,
+- Techniques, Relics, Shrines, economy, survival rewards, and route choices compete for attention at a healthy level,
+- whether consumables add enough value to justify launch inclusion,
 - the current 45–50 minute successful-run target still appears plausible once the full system set is playable,
 - and no major encounter, room, reward, or run-flow system is missing from launch scope.
 
-Exact room counts, route algorithms, branch frequency, reward probabilities, encounter compositions, enemy values, and pacing numbers remain prototype / playtest work unless testing reveals a production-scope change.
+This is also where the remaining Technique reward cadence, eligible-pool generation, rarity/source weighting, rare replacement behavior, and full 50-Technique compatibility/readability audit should be resolved when enough of the complete run exists to judge them properly.
 
-# 4. Narrative delivery and campaign-presentation package
+Exact room counts, route algorithms, branch frequency, reward probabilities, encounter compositions, enemy values, prices, and pacing numbers remain prototype / playtest work unless testing reveals a production-scope change.
+
+# 5. Narrative delivery and campaign presentation
 
 The story spine, Heart Binding structure, major lore, Shogun motivation, Returning Blood foundation, and ending are already approved at high level.
 
@@ -125,7 +146,7 @@ Define how much authored content is actually required to deliver that story acro
 
 Detailed line counts and final scripts should follow only after this delivery package is scoped.
 
-# 5. Endgame, postgame, and release package
+# 6. Endgame, postgame, and release scope
 
 Define what the player can do after the first canonical Heart victory and what presentation is required for a complete initial release.
 

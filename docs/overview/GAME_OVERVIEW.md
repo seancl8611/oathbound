@@ -113,9 +113,9 @@ A normal successful Binding run currently targets roughly 45-50 minutes. Exact r
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md) and are intentionally organized as broad game packages before subsystem details.
+The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). Top-level questions stay broad, but the existing design sequence is preserved rather than replaced by smaller tuning work.
 
-The current design focus is the **launch run-build and pre-run preparation package**: finish the Relic / consumable boundary, preparation interactibles, and the overall relationship among Aspects, Prosthetics, Techniques, Relics, Shrines, economy, survival rewards, and route decisions. Technique reward cadence and roster validation remain nested details within that broader package rather than the game's headline question.
+The current design focus is to **finish the Relic system and launch roster** at qualitative paper-design depth. After that, the next major gameplay-system pass is **permanent Prosthetic / Forge progression** for the eight launch tools. Technique reward cadence, exact Relic rank/swap values, and other narrow tuning questions remain nested for later integration or playtesting.
 
 ## Source links
 
