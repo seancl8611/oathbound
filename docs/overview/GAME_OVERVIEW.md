@@ -113,7 +113,9 @@ A normal successful Binding run currently targets roughly 45-50 minutes. Exact r
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). The immediate Technique task is now **reward structure and roster validation**: reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and the complete 50-Technique audit.
+The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md) and are intentionally organized as broad game packages before subsystem details.
+
+The current design focus is the **launch run-build and pre-run preparation package**: finish the Relic / consumable boundary, preparation interactibles, and the overall relationship among Aspects, Prosthetics, Techniques, Relics, Shrines, economy, survival rewards, and route decisions. Technique reward cadence and roster validation remain nested details within that broader package rather than the game's headline question.
 
 ## Source links
 
