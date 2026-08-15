@@ -10,6 +10,7 @@ topics:
   - combat
   - returning-blood
   - techniques
+  - relics
   - blood-aspects
   - heart-bindings
 related:
@@ -17,6 +18,7 @@ related:
   - GAMEPLAY-COMBAT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - GAMEPLAY-RUN-STRUCTURE
   - LORE-RETURNING-BLOOD
 ---
@@ -43,6 +45,8 @@ Akio is a disciplined swordsman who learns to direct a supernatural curse throug
 
 The selected Blood Aspect determines how Akio fundamentally fights. Techniques are the main horizontal run-build layer and reshape his existing sword actions through recurring supernatural effects such as Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct Health damage.
 
+Relics are a smaller supporting layer: collectible one-slot objects that provide simple run-wide benefits without becoming another Technique or Aspect system.
+
 ## Approved gameplay snapshot
 
 - Introductory attempt with a complete base katana kit and no active Blood powers.
@@ -58,7 +62,8 @@ The selected Blood Aspect determines how Akio fundamentally fights. Techniques a
 - The 50 Techniques include 25 direct, 15 same-family Supporting, 5 Cross-family, and 5 Legendary Techniques.
 - Technique rarity distribution is 10 Common, 18 Uncommon, 17 Rare, and 5 Legendary.
 - At most one refinement per eligible slotted Technique.
-- One equipped Prosthetic and one run-scoped Relic.
+- One equipped Prosthetic with persistent Forge progression.
+- One equipped Relic from an approved **10-Relic persistent collection**; Relics have no rarity tiers and provide run-active benefits.
 - Failed runs return Akio to the Strand through Returning Blood reconstruction.
 
 ## Launch Blood Aspect roster
@@ -83,10 +88,11 @@ All three Aspect packages are locked at current qualitative paper-design depth. 
 - Every direct Technique should remain useful even when it is the player's only pickup from that family.
 - Supporting and Cross-family eligibility must avoid dead offers.
 - Family Legendaries require meaningful prior family investment rather than appearing as isolated early pickups.
+- Relics provide one simple supporting advantage and should not directly replace Technique-family, Aspect, or Prosthetic progression.
 - Generic elemental schools are not the target.
 - Focused and hybrid Technique builds should both be viable.
 - Technique-heavy Tier 0-I, Tier II hybrid, Tier III Aspect-heavy, and occasional Tier IV high-roll runs should all be viable.
-- Mandatory encounters do not assume a particular Tier, Blood Art, Technique family, or Legendary.
+- Mandatory encounters do not assume a particular Tier, Blood Art, Technique family, Legendary, or Relic.
 
 ## Campaign structure
 
@@ -113,9 +119,9 @@ A normal successful Binding run currently targets roughly 45-50 minutes. Exact r
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md). Top-level questions stay broad, but the existing design sequence is preserved rather than replaced by smaller tuning work.
+The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md) and are intentionally organized as broad systems/packages before subsystem details.
 
-The current design focus is to **finish the Relic system and launch roster** at qualitative paper-design depth. After that, the next major gameplay-system pass is **permanent Prosthetic / Forge progression** for the eight launch tools. Technique reward cadence, exact Relic rank/swap values, and other narrow tuning questions remain nested for later integration or playtesting.
+The Relic system and 10-Relic launch roster are now complete for current qualitative paper-design scope. The next major gameplay-system pass is **permanent Prosthetic / Forge progression for the eight launch tools**. Technique reward cadence, Relic acquisition allocation, exact Relic rank/swap behavior, and other tuning details remain later integration work rather than current blockers.
 
 ## Source links
 
@@ -125,5 +131,6 @@ The current design focus is to **finish the Relic system and launch roster** at 
 - [Blood Aspects](../gameplay/BLOOD_ASPECTS.md)
 - [Progression](../gameplay/PROGRESSION.md)
 - [Technique System](../gameplay/TECHNIQUES.md)
+- [Relics](../gameplay/RELICS.md)
 - [Run structure](../gameplay/RUN_STRUCTURE.md)
 - [Returning Blood](../lore/RETURNING_BLOOD.md)
