@@ -4,12 +4,13 @@ title: Bloodwell
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-20
+last_reviewed: 2026-08-16
 topics:
   - strand
   - bloodwell
   - returning-blood
   - permanent-progression
+  - run-infrastructure
   - revival
 related:
   - CONTENT-STRAND-INTERACTIBLES
@@ -24,7 +25,14 @@ related:
 
 ## Strand function
 
-The Bloodwell is the primary long-term progression tree and the Strand location where Akio's Returning Blood reformation is presented after failed or successful runs.
+The Bloodwell is the Strand's primary broad permanent-progression station and the location where Akio's Returning Blood reformation is presented after failed or successful runs.
+
+At scope level, the Bloodwell owns two permanent upgrade categories:
+
+1. **Akio** — universal persistent character growth that applies regardless of equipped Aspect, Prosthetic, Relic, or current Technique build.
+2. **Run Infrastructure** — permanent improvements to the support structure and conditions surrounding future runs.
+
+Exact node rosters, branch names, rank counts, values, costs, and unlock timing remain later progression-design and balance work.
 
 ## Lore role
 
@@ -51,68 +59,88 @@ The Bloodwell should feel like the metaphysical heart of the Strand without beco
 
 ## Interaction fantasy
 
-Akio strengthens the traits that Returning Blood will preserve in future bodies.
+Akio strengthens what Returning Blood preserves in future bodies while the Order's accumulated preparation makes later crossings better supported.
+
+## Permanent progression ownership
+
+### Akio progression
+
+The Bloodwell owns broad permanent upgrades to Akio himself. These upgrades should improve universal capability, reliability, or resilience without becoming an Aspect-specific tree or replacing run-earned power.
+
+The exact Akio upgrade roster is intentionally deferred.
+
+### Run Infrastructure
+
+The Bloodwell also owns the broad **Run Infrastructure** upgrade category.
+
+Run Infrastructure may include permanent improvements to areas such as:
+
+- Rest-room support,
+- Shrine support that does not bypass the Resist / Embrace / Tier rules,
+- reward possibilities and special reward support,
+- route information or other routing support,
+- regional-transition recovery or preparation,
+- beneficial run-condition support,
+- and other approved ways the Order can make future expeditions more reliable.
+
+Run Infrastructure is one umbrella progression system rather than separate Rest, Shrine, reward, route, or run-condition upgrade trees.
+
+It must not directly replace or duplicate:
+
+- Blood Aspect permanent progression,
+- the run-only Shrine Tier path,
+- Prosthetic or Relic progression,
+- Technique build progression,
+- or core player execution.
 
 ## Progression structure
 
-The Bloodwell uses three permanent branches:
+The final Bloodwell tree layout is **not yet locked**.
 
-- **Way of Steel**
-- **Way of Secrets**
-- **Way of Vows**
-
-The interface supports:
-
-- clear branch identity,
-- tier gates,
-- node ranks,
-- permanent costs,
-- locked-node previews,
-- purchased and maxed states,
-- selected-node details,
-- side nodes and future branch expansion.
+The former fixed three-branch structure—`Way of Steel`, `Way of Secrets`, and `Way of Vows`—is no longer authoritative. The final interface should instead support the approved high-level ownership split between **Akio** and **Run Infrastructure**, with exact subcategories and node layout deferred until detailed progression design.
 
 ## Currency ownership
 
-- **Mist** is the primary broad Bloodwell currency.
-- **Boss Emblems** gate rare or major progression where appropriate.
-- **Scrolls** remain Forge-focused and should appear here only if a specific node intentionally crosses system ownership.
+- **Mist** remains the primary broad persistent meta-progression currency.
+- **Boss Emblems** may gate rare or major progression where later design assigns them.
+- **Scrolls** remain Forge-focused.
 - **Gold** is run-only and is not a Bloodwell currency.
 
-Earlier `Mist Shards` wording is deprecated unless a separate denomination is deliberately restored. Exact costs and node distribution remain balance data.
+Earlier `Mist Shards` wording is deprecated unless a separate denomination is deliberately restored. Exact costs and resource allocation remain later balance work.
 
 ## Bloodwell screen
 
 ### Primary purpose
 
-Present long-term growth as meaningful blood-path choice.
+Present broad permanent growth through one sacred Strand station without collapsing unrelated progression systems into a generic menu.
 
 ### Core contents
 
-- three branches,
-- tier gates,
-- node costs,
-- current persistent currency totals,
-- purchased ranks,
-- selected-node detail,
-- locked requirements and preview state.
+At scope level, the interface must distinguish:
+
+- Akio permanent progression,
+- Run Infrastructure permanent progression,
+- current relevant persistent resources,
+- locked / available / purchased / maxed states where applicable,
+- and selected-upgrade details.
+
+The final branch count, node layout, tier gates, and progression values remain deferred.
 
 ### Presentation goal
 
-Sacred and consequential, with more reverence than the Forge. The tree should resemble stone-carved ritual paths or blood channels spreading outward from the well.
-
-### Visual notes
-
-- stone-carved branch lines,
-- blood-lit sockets,
-- restrained ceremonial framing,
-- controlled purchased-state and unlock pulses.
+Sacred and consequential, with more reverence than the Forge. The interface should resemble stone-carved ritual paths or blood channels spreading outward from the well.
 
 Node clarity is more important than ornament.
 
-## Relationship to Blood Aspects
+## Relationship to other progression systems
 
-The Bloodwell owns broad permanent meta progression. It does not own normal Aspect selection, which happens at the Boat, or Aspect unlocks and trial mastery, which happen at the Blood Mirror. Future Bloodwell upgrades may lightly support Aspects, but cannot replace the run-only Shrine Tier loop or remove the danger of Embrace.
+- **Bloodwell:** Akio + Run Infrastructure.
+- **Forge Bench:** Prosthetics + Relics.
+- **Blood Mirror:** Blood Aspect permanent progression after the Mirror is unlocked later in the game.
+- **Shrines:** run-only Resist / Embrace / Tier progression.
+- **Techniques:** run-only build progression, with any persistent pool unlocks owned by their separate discovery/trial systems rather than a Bloodwell power tree.
+
+Bloodwell upgrades cannot grant permanent Aspect Tiers, unlock Blood early, or otherwise replace the run-only Embrace path.
 
 ## Revival and successful-return presentation
 
@@ -137,14 +165,13 @@ Successful return should then present the [Run Results and Strand Return](../../
 - restrained red internal glow,
 - slow particle drift,
 - faint pulses traveling through carved channels,
-- controlled node-unlock glow,
+- controlled upgrade-unlock glow,
 - small blood-vein or ritual-light flares,
 - reusable reformation pulse and spawn effect.
 
 ## Technical notes
 
-- The layout supports later branch expansion without a full redesign.
-- Branch and tier relationships remain readable immediately.
+- The layout must support the approved Akio / Run Infrastructure ownership split without assuming final node counts.
 - Permanent rewards and campaign progress save before the return flow completes.
 - Reformation effects communicate danger and consequence rather than effortless resurrection.
-- The successful-return flow remains reusable while the final Binding count and ending are still under design lock.
+- The successful-return flow remains reusable across the Binding campaign.
