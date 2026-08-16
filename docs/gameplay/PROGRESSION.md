@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-15
+last_reviewed: 2026-08-16
 topics:
   - progression
   - persistence
@@ -15,6 +15,7 @@ topics:
   - currencies
   - blood-resource
   - relics
+  - run-infrastructure
   - heart-bindings
 related:
   - GAMEPLAY-RUN-STRUCTURE
@@ -23,7 +24,9 @@ related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
+  - GAMEPLAY-PROSTHETICS
   - GAMEPLAY-ITEMS-REWARDS
+  - CONTENT-STRAND-INTERACTIBLES
   - META-OPEN-QUESTIONS
 ---
 
@@ -32,7 +35,7 @@ related:
 Oathbound uses three connected progression layers:
 
 1. run-only build progression,
-2. persistent character progression,
+2. persistent progression between runs,
 3. persistent campaign progression.
 
 Every system and item family must state whether it survives death and successful completion.
@@ -41,7 +44,7 @@ Every system and item family must state whether it survives death and successful
 
 Temporary run state may include the selected Blood Aspect and current Tier, Corruption, Blood after Tier II, Blood Art state, five core slotted Techniques, slotless Supporting / Cross-family / Legendary Techniques, Technique refinements and replacement state, the currently equipped Relic benefit, Gold, room progress, temporary Health or Spirit capacity, and approved consumables or encounter rewards.
 
-Prosthetic progression is not part of the temporary Technique build. Relic mastery is persistent even though the equipped Relic benefit is run-active.
+Prosthetic progression and Relic permanent progression are not part of the temporary Technique build. Relic collection, mastery, and permanent progression persist even though the equipped Relic benefit is active only while equipped during a run.
 
 These run states reset after failed death-return or successful completion unless explicitly defined otherwise.
 
@@ -108,36 +111,61 @@ There is no global cap on total Technique upgrades. The practical cap comes from
 
 The five core family mechanics—Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage—are defined at qualitative core-rule depth. The current launch Technique roster contains 50 actual Techniques plus 10 refinements and is complete for current paper-design scope.
 
-## Relic persistence and mastery boundary
+Techniques may be permanently unlocked into future reward pools, but their active run build and power reset after each run. Techniques do not receive a separate permanent stat-upgrade tree in the current scope.
 
-Relics use persistent collection and mastery with a run-active equipped benefit:
+# Permanent upgrade architecture
 
-- unlocked or discovered Relics persist in the player's collection,
-- Akio may equip one Relic at a time,
-- the equipped Relic provides its benefit during the run,
-- Relics may be switched during approved run-transition opportunities,
-- only the currently equipped Relic gains persistent mastery,
-- eligible enemy kills earned while a Relic is equipped advance that Relic's mastery,
-- switching redirects later eligible kill progress to the newly equipped Relic,
-- mastery already earned is never lost when switching or when a run ends,
-- Relics are not upgraded at the Forge and do not consume Forge currencies,
-- and mastery strengthens the existing Relic benefit rather than adding branching or unrelated mechanics.
+Current launch scope uses **three permanent upgrade stations** in the Strand.
 
-Relics do not use rarity tiers. The approved launch roster contains 10 Relics. Exact mastery rank count, kill weighting, thresholds, swap locations, and numerical growth remain later tuning work.
+## Bloodwell — Akio + Run Infrastructure
 
-## Prosthetic Forge progression boundary
+The Bloodwell owns two broad persistent upgrade categories:
 
-The eight launch Prosthetics are permanent tactical tools developed through the Forge Bench.
+### Akio
+
+Akio's permanent progression applies universally rather than to one particular Aspect, Technique family, Prosthetic, or Relic.
+
+The exact Akio upgrade roster, node count, values, and layout remain later detailed design.
+
+### Run Infrastructure
+
+Run Infrastructure is one umbrella meta-progression system covering permanent improvements to the support and conditions surrounding future runs.
+
+Its allowed scope may include:
+
+- Rest-room support,
+- Shrine support that does not bypass the fixed Tier path,
+- reward possibilities and special reward support,
+- route information or other routing support,
+- regional-transition recovery or preparation,
+- beneficial run-condition support,
+- and other approved expedition-support improvements.
+
+Run Infrastructure is **not** split into separate permanent Rest, Shrine, reward, or route upgrade systems at current scope.
+
+It must not:
+
+- grant permanent Aspect Tiers,
+- unlock Blood before Tier II,
+- replace Technique choices,
+- upgrade a particular Prosthetic or Relic,
+- or remove the need to read and execute combat.
+
+## Forge Bench — Prosthetics + Relics
+
+The Forge Bench owns permanent progression for both **Prosthetics and Relics**.
+
+### Prosthetics
+
+The eight launch Prosthetics are permanent tactical tools developed through shallow linear Forge paths.
 
 - A Prosthetic is functionally complete when unlocked.
-- The Forge owns permanent individual tool upgrades.
-- Scrolls remain the primary persistent Forge currency.
-- Prosthetic paths are shallow and linear rather than Technique-style branching builds.
 - Two upgrades are the default; a third is used only when the base tool already has multiple existing properties worth improving.
 - Upgrades improve existing properties only and do not add a new tactical role, alternate active ability, unrelated status family, or second moveset.
 - One Prosthetic is equipped at a time in the current launch structure.
+- Scrolls remain the primary persistent currency for Prosthetic development.
 
-The locked qualitative paths are:
+Locked qualitative paths:
 
 - **Beast-Bane Whistle:** stronger interrupt/stagger → larger pulse radius.
 - **Thunder Rod:** stronger direct hit → longer Shock.
@@ -150,22 +178,52 @@ The locked qualitative paths are:
 
 Exact percentages, costs, resource values, damage, status values, and timing remain implementation/playtest work.
 
-## Persistent character progression
+### Relics
 
-The Strand supports permanent growth through:
+Relics use persistent collection, mastery, and permanent progression while remaining a small supporting layer.
 
-- **Bloodwell:** broad meta progression,
-- **Forge Bench:** weapon and permanent Prosthetic development,
-- **Blood Mirror:** Aspect unlocks, mastery, and small capped reliability upgrades,
-- **Blood Cavern:** teaching, fixed-loadout trials, mastery challenges, and approved unlocks,
-- **Relic collection and mastery:** permanently discovered Relics, kill-earned individual mastery, and selection through the Relic Reliquary or equivalent interactible,
-- **Discovery Board:** codex and recovered history,
-- **Merchant and NPC services:** approved stock or service progression,
-- **Mist, Scrolls, and Boss Emblems:** persistent currencies.
+- Akio may equip one Relic at a time.
+- Unlocked or discovered Relics persist in the collection.
+- The equipped Relic provides its benefit during the run.
+- Only the currently equipped Relic gains persistent mastery from eligible enemy kills.
+- Switching during approved transition opportunities redirects later mastery progress to the newly equipped Relic.
+- Earned mastery is never lost when switching or when a run ends.
+- Mastery strengthens the existing Relic benefit rather than adding branching or unrelated mechanics.
+- The **Forge Bench** is the Strand owner for Relic progression, collection management, and upgrade presentation.
 
-Permanent progression improves options, reliability, and resilience. It must not guarantee high Aspect Tier, replace run-build choices, pre-equip major run-only power, or remove the need to read combat.
+Relics do not need to use the same progression method or currency as Prosthetics merely because they share a station. Exact mastery ranks, thresholds, Forge presentation, costs if any, and transition-swap timing remain later detailed design.
+
+No separate Relic Reliquary is part of the approved upgrade-station scope.
+
+## Blood Mirror — Blood Aspects
+
+The Blood Mirror owns permanent progression for **Blood Aspects**.
+
+The Blood Mirror begins **locked at the start of the game** and becomes available later through campaign/onboarding progression. The exact unlock event remains deferred.
+
+Permanent Aspect progression, if included in the final detailed tree, remains small, capped, and reliability-focused. It cannot:
+
+- grant major Tier mechanics early,
+- bypass the fixed Embrace path,
+- unlock Blood before Tier II,
+- reproduce run-only Tier growth as uncapped permanent scaling,
+- or remove a kit's inherent tradeoffs.
 
 No duplicate Blood Art upgrade tree beneath each Aspect is approved.
+
+## Non-upgrade persistent systems
+
+The following may persist or unlock content but are **not separate permanent upgrade stations/trees** in current scope:
+
+- Technique pool unlocks,
+- Blood Cavern trial completion and mastery flags,
+- Discovery Board / codex progress,
+- Merchant stock and service state unless explicitly expanded later,
+- narrative discoveries,
+- destroyed Heart Bindings,
+- and story/postgame state.
+
+The Blood Cavern is a training/trial space. The Discovery Board is a knowledge archive. The Merchant is a purchasing service. The Boat is a run-start confirmation point.
 
 ## Persistent campaign progression
 
@@ -179,14 +237,16 @@ Destroyed Binding progress is not a currency and cannot be lost.
 
 ## Currency ownership
 
-| Currency | Persistence | Primary owner |
+| Currency | Persistence | Primary role |
 |---|---|---|
-| Mist | Persistent | Broad meta progression |
-| Scroll | Persistent | Forge upgrades, including Prosthetics |
-| Boss Emblem | Persistent | Rare major gates or high-value nodes |
+| Mist | Persistent | Broad meta progression, including Bloodwell-owned progression |
+| Scroll | Persistent | Forge-focused Prosthetic development |
+| Boss Emblem | Persistent | Rare major progression gates where explicitly assigned |
 | Gold | Run-only | Shops and run economy |
 
 Corruption, Blood, Relic mastery, and destroyed Heart Bindings are not currencies. `Mist Shards` remains deprecated unless intentionally restored.
+
+Sharing a station does not automatically imply sharing a currency. Exact resource allocation for unresolved detailed nodes remains later design work.
 
 ## Persistence boundaries
 
@@ -195,22 +255,23 @@ Corruption, Blood, Relic mastery, and destroyed Heart Bindings are not currencie
 - Unlocked Aspects persist as loadout choices.
 - Every run begins at Tier 0.
 - Tier, Corruption, and Blood reset after the run.
-- Blood Mirror mastery and small permanent reliability upgrades persist.
+- Blood Mirror permanent progression persists after the Mirror is unlocked.
 - Permanent upgrades cannot replace the fixed in-run Embrace path.
 
 ### Techniques
 
 - Five core combat slots begin empty each run.
 - Slotted, Supporting, Cross-family, Legendary Techniques, refinements, and replacement state reset after the run.
-- Permanent progression may unlock Techniques into future pools but does not pre-equip them.
+- Permanent progression may unlock Techniques into future pools but does not pre-equip them or permanently increase their run power.
 
 ### Relics
 
-- Relic collection ownership and mastery persist.
+- Relic collection ownership, mastery, and permanent progression persist.
 - One Relic is equipped at a time.
-- The equipped effect is run-active, but the Relic and earned kill mastery persist after the run.
+- The equipped effect is run-active.
 - Only the equipped Relic receives eligible kill progress.
-- Relics do not occupy Technique or Prosthetic slots and are not upgraded at the Forge.
+- Relics do not occupy Technique or Prosthetic slots.
+- The Forge Bench owns Strand-side Relic progression and management.
 
 ### Prosthetics
 
@@ -218,9 +279,14 @@ Corruption, Blood, Relic mastery, and destroyed Heart Bindings are not currencie
 - The Forge owns permanent individual tool improvements.
 - Prosthetics do not receive a separate temporary Technique layer during runs.
 
+### Run Infrastructure
+
+- Purchased or unlocked Run Infrastructure improvements persist.
+- They affect approved future-run support conditions without carrying current run-only build state between attempts.
+
 ## Trial reward boundary
 
-Blood Cavern and Blood Mirror rewards may grant Aspect access, Technique-pool unlocks, small capped reliability improvements, modest posture reliability, persistent currency, cosmetics, lore reflections, mastery marks, or approved Relic unlocks where later content design assigns them.
+Blood Cavern and Blood Mirror rewards may grant Aspect access, Technique-pool unlocks, small capped reliability improvements, persistent currency, cosmetics, lore reflections, mastery marks, or approved Relic unlocks where later content design assigns them.
 
 Trials may not add alternate Aspect Tiers, permanently pre-equip a Technique, create persistent Blood, or convert major run-only mechanics into permanent baseline power.
 
@@ -239,22 +305,26 @@ Relic mastery earned from eligible kills is saved regardless of whether the run 
 | Narrative/codex progress | Persists | Persists |
 | Destroyed Bindings | Persists | Persists |
 | Permanent upgrades/unlocks | Persists | Persists |
-| Relic collection/mastery | Persists | Persists |
+| Run Infrastructure upgrades | Persists | Persists |
+| Relic collection/mastery/progression | Persists | Persists |
 | Persistent currencies | Persists | Persists |
 | Blood Aspect Tier | Resets | Resets |
 | Corruption | Resets | Resets |
 | Blood and Blood Art state | Resets | Resets |
 | Techniques/refinements | Resets | Resets |
-| Equipped Relic effect | Ends | Ends |
+| Equipped Relic benefit | Ends with run | Ends with run |
 | Gold | Resets | Resets |
 | Room progress | Resets | Resets |
 | Consumables | Item-specific | Item-specific |
 
-## Current production dependencies
+## Current design dependency
 
-1. Complete the wider Strand, permanent-progression, onboarding, and trial package.
-2. Review full-run integration, rewards, encounters, and pacing, including deferred Technique reward, Relic mastery/acquisition, and Forge tuning.
-3. Lock the authored narrative-delivery package.
-4. Lock endgame, postgame, and release scope.
+The permanent upgrade-station architecture is now scoped at the level needed for full-game planning:
 
-Exact percentages, combat values, resource values, Relic mastery thresholds/kill weighting, Forge costs, timing windows, offer rates, replacement rates, and reward values remain implementation and balance work.
+- Bloodwell → Akio + Run Infrastructure,
+- Forge Bench → Prosthetics + Relics,
+- Blood Mirror → Blood Aspects, unlocked later.
+
+Exact nodes, values, rank counts, costs, mastery thresholds, interface layouts, and precise unlock timing are intentionally deferred.
+
+The next broad design task is to verify whether **every major launch system is scoped at production level**, then proceed into full-run integration, rewards, encounters, pacing, narrative delivery, and release/postgame scope as needed.
