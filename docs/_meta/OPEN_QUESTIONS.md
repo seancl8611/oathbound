@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-15
+last_reviewed: 2026-08-16
 ---
 
 # Current Design Questions
@@ -20,8 +20,9 @@ Top-level questions should represent **large gameplay systems or production-wide
 Examples of details that should remain nested beneath an owning package rather than become headline agenda items include:
 
 - exact Technique reward frequency or rarity probabilities,
-- exact Relic mastery thresholds, kill weighting, acquisition-source counts, or transition-swap timing,
+- exact Relic mastery thresholds, kill weighting, acquisition-source counts, Forge rank presentation, or transition-swap timing,
 - individual Prosthetic upgrade percentages, Scroll costs, Spirit values, or status durations,
+- exact Bloodwell node counts, Run Infrastructure values, or Blood Mirror mastery ranks,
 - exact room counts, route probabilities, shop prices, or reward weights,
 - final animation timings, VFX timing, hitboxes, damage values, and other playtest tuning.
 
@@ -36,10 +37,14 @@ When a major system or package becomes the active design area, finish it at usef
 - Technique rarity, prerequisites, direct-slot ownership, Supporting / Cross-family / Legendary eligibility, and refinement ownership are approved.
 - The launch Relic roster contains **10 Relics**, uses one equipped slot, persistent collection ownership, run-active effects, and **no rarity tiers**.
 - Relics gain persistent mastery from eligible enemy kills while equipped; only the currently equipped Relic advances.
-- Relics may be switched during approved run-transition opportunities and are **not upgraded at the Forge Bench**.
+- Relic permanent progression and Strand-side management belong to the **Forge Bench** alongside Prosthetics. No separate Relic Reliquary is required in approved hub scope.
 - Prosthetic Techniques are removed; Prosthetic progression is persistent and belongs to the Forge.
 - The eight-Prosthetic launch roster and each tool's shallow linear Forge upgrade path are locked at qualitative paper-design depth.
 - Scrolls remain the primary persistent Forge currency for Prosthetic development.
+- The **Bloodwell** owns permanent progression for **Akio** and **Run Infrastructure**.
+- Run Infrastructure is one umbrella covering approved permanent improvements to Rest support, Shrine support, rewards, routing/run conditions, regional transitions, and related expedition support rather than separate upgrade trees.
+- The **Blood Mirror** owns permanent **Blood Aspect** progression, begins locked, and unlocks later through campaign/onboarding progression. Exact unlock timing and Aspect nodes remain later detailed design.
+- Blood Cavern trials, Technique pool unlocks, Discovery Board progress, Merchant services, the Boat, and Heart Binding state are not separate permanent upgrade trees in current scope.
 - Backstabs are a universal positional combat classification based on genuinely striking an enemy from behind.
 - Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, Legendary, Relic, or highly upgraded Prosthetic.
 - The standard successful-run target remains approximately **45–50 minutes**, with exact room and reward cadence deferred to playable validation.
@@ -56,13 +61,11 @@ Remaining Technique reward-frequency, offer-weighting, replacement, and roster-a
 
 `docs/gameplay/RELICS.md` owns the approved **10-Relic launch roster**, system boundaries, and mastery direction.
 
-Relic progression is based on combat use: only the equipped Relic receives persistent mastery from eligible enemy kills earned while it is equipped. Switching during approved run transitions redirects future kill progress to the newly equipped Relic. Relics do not use Forge currencies and are not upgraded at the Forge.
-
-Exact acquisition sources, mastery rank count, kill weighting, thresholds, transition-swap timing, and numerical values remain nested later decisions.
+Relic progression is based on combat use: only the equipped Relic receives persistent mastery from eligible enemy kills earned while it is equipped. Switching during approved run transitions redirects future kill progress to the newly equipped Relic. The **Forge Bench** owns Relic progression / management at the Strand, while exact rank realization, costs if any, mastery thresholds, acquisition sources, and transition-swap timing remain later detailed decisions.
 
 ## Approved Prosthetic / Forge state
 
-`docs/gameplay/PROSTHETICS.md` owns the approved eight-tool roster and permanent Forge paths.
+`docs/gameplay/PROSTHETICS.md` owns the approved eight-tool roster and permanent Prosthetic Forge paths.
 
 The roster remains:
 
@@ -75,47 +78,58 @@ The roster remains:
 - Mist Raven
 - Bloodletting Gourd
 
-The progression structure is locked as **shallow and linear**. Two upgrades are the default; a third is used only when a base tool already contains multiple distinct properties worth improving. Current paths contain no mutually exclusive branches.
+The Prosthetic progression structure is locked as **shallow and linear**. Two upgrades are the default; a third is used only when a base tool already contains multiple distinct properties worth improving. Current paths contain no mutually exclusive branches.
 
 Forge upgrades improve properties already present in the unlocked tool. They do not add alternate attacks, new combat roles, unrelated statuses, new active abilities, or another Technique-style build layer.
 
-Current qualitative paths are:
-
-- **Beast-Bane Whistle:** stronger interrupt/stagger → larger pulse radius.
-- **Thunder Rod:** stronger direct hit → longer Shock.
-- **Smoke Gourd:** larger cloud → longer persistence.
-- **Fang Harpoon:** greater eligible pull → stronger interruption/posture impact.
-- **Mirror Umbrella:** greater pressure storage → improved Spirit efficiency → stronger posture release.
-- **Flame Vent:** greater cone reach → stronger direct Health damage → longer Burn.
-- **Mist Raven:** improved Spirit efficiency → modestly greater fixed short-range blink distance.
-- **Bloodletting Gourd:** stronger immediate heal → longer healing-on-hit window → stronger healing-on-hit return.
-
 Exact costs, percentages, Spirit values, damage, status values, timing, and unlock thresholds remain implementation/playtest tuning rather than top-level design blockers.
+
+## Approved permanent-upgrade station scope
+
+Current launch scope uses three permanent upgrade stations:
+
+1. **Bloodwell — Akio + Run Infrastructure**
+2. **Forge Bench — Prosthetics + Relics**
+3. **Blood Mirror — Blood Aspects**, with the Mirror locked at the beginning and introduced later
+
+Exact node rosters, values, rank counts, currencies beyond already approved ownership, interface layouts, mastery thresholds, and precise unlock timing are intentionally deferred.
+
+The old Forge weapon-development model, fixed Bloodwell `Way of Steel / Way of Secrets / Way of Vows` tree, separate Relic Reliquary direction, and four-active-plus-reserve Technique loadout are not current design.
 
 # Priority order
 
-1. **Complete the wider Strand, permanent-progression, onboarding, and trial package**
+1. **Audit whether every major launch system is scoped at production level**
 2. **Review full-run integration, rewards, encounters, and pacing**
 3. **Define narrative delivery and campaign presentation**
 4. **Define endgame, postgame, and release scope**
 
-# 1. Strand hub, permanent progression, onboarding, and trials
+# 1. Major-system scope audit
 
-With the Relic and Prosthetic progression directions established, review the Strand as the complete between-run layer.
+Review the current repository as a complete game and identify only **missing major systems or production packages**, not tuning details.
 
-At broad scope, establish:
+At broad scope, verify that the game has an approved or intentionally deferred owner for:
 
-- the permanent progression available through the **Bloodwell**,
-- the long-term mastery role, if any, for Blood Aspects beyond their existing run Tier paths,
-- the purpose and launch depth of the **Blood Mirror and Blood Cavern** trial / mastery systems,
-- the unlock and onboarding flow across Strand services,
-- the physical preparation interactibles for Aspect selection, Prosthetic selection, Relic selection, the Forge Bench, and the Boat,
-- how in-run Relic transition swaps are presented without encouraging combat-time micromanagement,
-- and whether Mist, Scrolls, Boss Emblems, and Gold each have sufficiently clear ownership without creating unnecessary upgrade economies.
+- core combat and player actions,
+- Blood Aspects and their run progression,
+- Techniques,
+- Prosthetics,
+- Relics,
+- permanent hub progression and station ownership,
+- training / trials,
+- currencies and rewards,
+- room / route structure,
+- enemies, minibosses, and bosses,
+- all three regions,
+- Strand return / onboarding / preparation,
+- campaign progression and Heart Bindings,
+- narrative delivery,
+- endgame / postgame,
+- required UI / save / completion presentation,
+- and any other launch-critical system category revealed by the audit.
 
-The current preparation direction favors separate small physical selection interactibles, while the Boat remains focused on a simple run-start confirmation.
+Do **not** reopen exact node lists, mastery formulas, costs, reward probabilities, room counts, frame data, or balance values merely to call a system scoped.
 
-After this package is coherent, narrow into exact trial counts, mastery thresholds, unlock timing, permanent-upgrade values, interface states, and currency costs.
+If no major system is missing, close this package and proceed directly to full-run integration.
 
 # 2. Full-run integration, rewards, encounters, and pacing
 
@@ -126,13 +140,13 @@ At broad scope, verify:
 - the three-region sequence provides enough change in combat demands and pacing,
 - standard combat rooms, Shrines, Rest rooms, Shops, treasure / miniboss rooms, regional bosses, and transition spaces each have a clear purpose,
 - regional-boss transitions provide appropriate recovery and limited preparation opportunities without becoming overloaded menus,
-- enemy, miniboss, boss, Aspect, Technique, Prosthetic, Relic, Shrine, and economy systems can coexist without one layer invalidating the others,
+- enemy, miniboss, boss, Aspect, Technique, Prosthetic, Relic, Shrine, Run Infrastructure, and economy systems can coexist without one layer invalidating the others,
 - Techniques, Relics, Shrines, economy, survival rewards, and route choices compete for attention at a healthy level,
 - whether consumables add enough value to justify launch inclusion,
 - the current 45–50 minute successful-run target still appears plausible once the full system set is playable,
 - and no major encounter, room, reward, or run-flow system is missing from launch scope.
 
-This is also where remaining Technique reward cadence, eligible-pool generation, rarity/source weighting, rare replacement behavior, full roster compatibility/readability audit, Relic acquisition allocation, Relic kill/mastery tuning, transition-swap placement, and exact Forge balance should be resolved when enough of the complete run exists to judge them properly.
+This is also where remaining Technique reward cadence, eligible-pool generation, rarity/source weighting, rare replacement behavior, full roster compatibility/readability audit, Relic acquisition allocation, Relic kill/mastery tuning, transition-swap placement, Run Infrastructure detailed effects, and exact Forge balance should be resolved when enough of the complete run exists to judge them properly.
 
 Exact room counts, route algorithms, branch frequency, reward probabilities, encounter compositions, enemy values, prices, and pacing numbers remain prototype/playtest work unless testing reveals a production-scope change.
 
@@ -171,4 +185,4 @@ Do not expand the base game with difficulty modifiers, large variant systems, or
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room probabilities, prices, rarity probabilities, offer weights, replacement rates, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, route probabilities, and final VFX/animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room probabilities, prices, rarity probabilities, offer weights, replacement rates, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, Bloodwell/Run Infrastructure node values, Blood Mirror Aspect-upgrade values, route probabilities, and final VFX/animation timing.
