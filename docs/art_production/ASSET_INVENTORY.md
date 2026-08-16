@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 topics:
   - asset-counts
   - characters
@@ -14,6 +14,7 @@ topics:
   - items
   - techniques
   - relics
+  - progression
   - the-heart
 related:
   - OVERVIEW-FULL-SCOPE
@@ -40,8 +41,9 @@ This file records high-level production groups and known counts. Detailed states
 | Heart Binding campaign | 7 original / 6 player clears | Historical breach plus six removable states |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
 | Environment sets | 4 + Heart subset | Strand, Areas 1–3, Heart chamber |
+| Permanent upgrade stations | 3 | Bloodwell, Forge Bench, later-unlocked Blood Mirror |
 | Prosthetic families | 8 | One family per tool |
-| Technique direct-slot UI | 5 slots | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow; supporting Techniques are slotless |
+| Technique direct-slot UI | 5 slots | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow; Supporting/Cross-family/Legendary Techniques are slotless |
 | Relic capacity | 1 | One equipped Relic |
 | Launch Relics | 10 | Persistent collectible objects; no rarity tiers |
 | Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
@@ -55,8 +57,8 @@ This file records high-level production groups and known counts. Detailed states
 - Blood resource and Blood Art states after Tier II.
 - Shared defense, execution, input, and enemy-response language.
 - Eight Prosthetic icons/VFX families.
-- Technique card, rarity, family, direct-slot, supporting, refinement, replacement, warning, decline, reroll, comparison, and post-fill offer states.
-- Ten Relic object/icon identities plus one shared collection/equip presentation family.
+- Technique card, rarity, family, direct-slot, Supporting, Cross-family, Legendary, refinement, replacement, warning, decline, reroll, comparison, and post-fill offer states.
+- Ten Relic object/icon identities plus one shared collection/equip/mastery presentation family integrated with the Forge.
 
 Additional Aspect families are outside launch scope.
 
@@ -95,8 +97,11 @@ Exact Shogun and Heart attack/animation/VFX counts remain later encounter work.
 
 ## Environment and room art
 
-- Strand hub, docks, NPC stations, Blood Cavern, Blood Mirror.
-- Dedicated preparation interactibles for Aspect, Prosthetic, and Relic selection, including the current Relic Reliquary direction.
+- Strand hub, docks, NPC stations, Blood Cavern, and the later-unlocked Blood Mirror chamber.
+- **Bloodwell** presentation for Akio + Run Infrastructure progression and Returning Blood reformation.
+- **Forge Bench** presentation for Prosthetic + Relic progression/management.
+- No separate Relic Reliquary asset family.
+- No generic weapon-upgrade / weapon-socket station assets.
 - Hushiro modular kit, functional rooms, miniboss spaces, boss arena.
 - Yomori modular kit, functional rooms, miniboss spaces, Twin Maws arena.
 - Kagutsuchi modular kit, functional rooms, miniboss spaces, Shogun arena.
@@ -117,8 +122,10 @@ Required families include:
 - Wolf Feral Momentum/Fanged Guard/Blood Hunt feedback where needed.
 - Wraith Spectral Edge, Wraith's Reach, Spectral Passage, extended deathblow, and Veilstride feedback where needed.
 - Ronin posture-capacity changes through existing posture HUD, Falling Mountain, Measured/Perfect Weight, and Shattering Wake feedback where needed.
-- Five direct Technique slots plus supporting/rarity/refinement/replacement/comparison states.
-- Relic collection/equip states without rarity badges.
+- Five direct Technique slots plus Supporting/Cross-family/Legendary/rarity/refinement/replacement/comparison states.
+- Forge Prosthetic category and Relic collection/equip/mastery/progression states without rarity badges.
+- Bloodwell Akio + Run Infrastructure category states without assuming final node layout.
+- Blood Mirror sealed/locked opening state plus later Aspect progression/trial states.
 - Pause/build overview.
 - Enemy/boss Health and posture.
 - Deathblow prompts.
@@ -132,7 +139,7 @@ Core shared VFX include Parry Spark, Hit Spark, Deathblow Cue, Sword Trail, Post
 
 Aspect VFX follow `ASPECT_VFX.md`; Prosthetic VFX follow `PROSTHETIC_VFX.md`; Technique-family presentation follows `TECHNIQUE_VFX.md`.
 
-Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique UI, formal drawback-badge assets, and Relic rarity-badge families remain excluded.
+Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique UI, formal drawback-badge assets, Crimson Burst-ready/recharge assets, generic weapon-development UI, and Relic rarity-badge/Reliquary families remain excluded.
 
 ## Item and reward art
 
@@ -154,5 +161,6 @@ Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-stat
 - Reuse existing attack, deathblow, movement, and HUD families when a Tier modifies existing actions.
 - No duplicate Aspect-specific Blood Art upgrade tree is included.
 - Do not preserve assets for superseded mechanics.
-- The Technique roster and 10-Relic launch roster are approved for current paper-design scope; Prosthetic progression is the next separate persistent Forge package.
+- The 50-Technique roster, 10-Relic roster/mastery direction, eight Prosthetic Forge paths, and three-station progression ownership are approved for current paper-design scope.
+- Exact permanent-upgrade node counts, mastery thresholds, reward probabilities, and interface density remain later design/playtest work.
 - Additional Aspects, postgame modifiers, enemy variants, challenge systems, and route algorithms are outside initial inventory unless intentionally promoted.
