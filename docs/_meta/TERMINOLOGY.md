@@ -4,7 +4,7 @@ title: Oathbound Terminology
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-16
 ---
 
 # Oathbound Terminology
@@ -33,6 +33,8 @@ last_reviewed: 2026-08-12
 | Technique | Temporary in-run upgrade belonging to the five-slot sword-action build or its slotless supporting layer. |
 | slotted Technique | One direct Technique occupying exactly one of five combat slots: Basic Attack, Held Attack, Dash, Parry / Counter, or Deathblow. |
 | supporting Technique | Slotless run-only Technique that deepens a family mechanic or approved build interaction. It has no separate global inventory cap. |
+| Cross-family Technique | Slotless hybrid Technique requiring established investment in two Technique families. |
+| Legendary Technique | Rare family capstone requiring approved native-family investment and any entry-specific mechanic prerequisite. |
 | refinement | One small slotless improvement to a specific slotted Technique. Maximum one refinement per eligible slotted Technique. |
 | replacement | Rare Technique offer that explicitly overwrites the current direct Technique in the same combat slot. |
 | Echo | Pale-silver family mechanic: delayed additional sword slashes created by qualifying actions. |
@@ -41,12 +43,17 @@ last_reviewed: 2026-08-12
 | Rift | Ivory family mechanic: one visible fracture mark automatically opens after a short fuse for direct Health damage and can be intensified before opening. |
 | backstab | Universal positional hit classification for an eligible sword attack that genuinely contacts an enemy from within that enemy's rear region relative to current facing. Crimson does not create or widen the backstab region. |
 | Vulnerable | Crimson family status: a short enemy state during which genuine backstabs deal substantially increased direct Health damage. Vulnerable does not slow, stun, root, alter facing, suppress movement, or change awareness. |
-| Unseen | Reserved future Crimson Legendary concept for a brief invisibility / enemy-awareness-suppression state. Exact behavior is not yet locked. |
+| Unseen | Reserved Crimson Legendary concept for a brief invisibility / enemy-awareness-suppression state. Exact behavior remains owned by the approved Technique catalog and later tuning. |
 | combat verb | Shared action or behavior used for natural synergy, such as parry, posture, deathblow, dash, backstab, movement, or Spirit. |
+| Relic | Persistent collectible one-slot object with a simple run-active benefit and individual persistent mastery/progression. Strand-side progression and management belong to the Forge Bench. |
+| Relic mastery | Persistent progress earned from eligible enemy kills while that Relic is equipped. Not a currency. |
 | The Order | Akio's religious-military organization. The Shogun predates it. |
 | The Strand | Persistent shoreline hub and controlled barrier threshold. |
-| Bloodwell | Strand permanent-progression and reformation-presentation station. One word. It is not the source of Returning Blood. |
-| Blood Mirror | Strand Aspect trial and mastery system. Two words. |
+| Bloodwell | Strand permanent-progression and reformation-presentation station. Owns Akio and Run Infrastructure upgrades. One word. It is not the source of Returning Blood. |
+| Run Infrastructure | Bloodwell-owned umbrella for permanent improvements to future-run support such as Rest support, Shrine support, rewards, routing/run conditions, regional transitions, and related expedition support. Not separate upgrade trees for each subsystem. |
+| Forge Bench | Strand permanent progression/management station for Prosthetics and Relics. It does not own the retired alternate-weapon development system. |
+| Blood Mirror | Later-unlocked Strand/Blood Cavern station for permanent Blood Aspect progression, Aspect trials, previews, and mastery. Two words. It begins locked. |
+| Blood Cavern | Strand training and trial space containing the Blood Mirror. It is not a separate general upgrade tree. |
 | Blood Moon | Recurring Heart cycle that strengthens existing Beast Blood and pressures the barrier. |
 | Hushiro Gate Village | Area 1; regional theme is rupture. |
 | Yomori Grove | Area 2; regional theme is adaptation. |
@@ -72,11 +79,11 @@ last_reviewed: 2026-08-12
 | Bloodletting Gourd | Spirit-for-healing and temporary healing-on-hit prosthetic. |
 | Burn | Approved damage-over-time status owned by Flame Vent and explicitly documented mechanics. |
 | Shock | Approved status owned by Thunder Rod and explicitly documented mechanics. |
-| Mist | Base persistent meta currency. |
-| Scroll / Scrolls | Persistent Forge-focused currency. |
-| Boss Emblem / Boss Emblems | Rare persistent boss-derived currency. |
+| Mist | Base persistent broad meta currency. |
+| Scroll / Scrolls | Persistent Forge-focused currency primarily used for Prosthetic development. |
+| Boss Emblem / Boss Emblems | Rare persistent boss-derived currency used for explicitly approved major gates. |
 | Gold | Run-only shop currency. |
-| Common, Uncommon, Rare, Legendary | Current Technique rarity tiers. Relic rarity remains a separate provisional decision. |
+| Common, Uncommon, Rare, Legendary | Current Technique rarity tiers. Relics do not use rarity tiers. |
 | posture | Lowercase in prose unless part of an official UI label. |
 | deathblow | One word; lowercase in prose unless used as an official UI label. |
 
@@ -91,10 +98,13 @@ last_reviewed: 2026-08-12
 - `Mist Shards` is deprecated unless intentionally restored as a separate denomination.
 - `Mistveil` is removed from current lore.
 - Use `Technique` instead of `boon` for ordinary run upgrades.
-- `active Technique`, `reserve Technique`, the four-active-plus-reserve loadout, and routine rest-room Technique swapping are superseded by the five direct combat slots plus slotless supporting Techniques.
+- `active Technique`, `reserve Technique`, the four-active-plus-reserve loadout, and routine rest-room Technique swapping are superseded by the five direct combat slots plus slotless Supporting / Cross-family / Legendary Techniques.
 - `Prosthetic Technique` is removed from the run-build system; Prosthetic progression belongs to the persistent Forge package.
 - Crimson `Burst`, Burst-ready targets, per-target Burst recharge, and close-range Burst recovery are superseded by the Vulnerable / backstab / direct-Health-damage family direction.
 - Do not use a widened rear arc, forced facing, scripted enemy activity, or ordinary invisibility as Crimson's core backstab-enabling mechanic.
+- The old alternate-weapon development / weapon-socket Forge system is superseded by Blood Aspects as run weapon identities.
+- The old fixed Bloodwell `Way of Steel`, `Way of Secrets`, and `Way of Vows` branch structure is no longer authoritative; current scope is Akio + Run Infrastructure.
+- A dedicated Relic Reliquary is not part of current approved hub scope; Relic progression/management belongs to the Forge Bench.
 - Storm, Frost, Ember, Hex, and Shadow are removed player stance-system names.
 - Frost and Hex are not baseline player status families.
 - Do not call Akio immune to Beast Blood.
