@@ -4,12 +4,40 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 ---
 
 # Decision Log
 
 This is a concise index of major approved directions that materially changed Oathbound's scope or identity. Complete rules live in authoritative files; superseded wording is recoverable through Git history.
+
+## 2026-08-16 — Permanent progression station architecture locked
+
+Oathbound uses three permanent upgrade stations at current launch scope:
+
+- **Bloodwell:** permanent progression for **Akio** and one combined **Run Infrastructure** system.
+- **Forge Bench:** permanent progression and Strand-side management for **Prosthetics and Relics**.
+- **Blood Mirror:** permanent progression for **Blood Aspects**; the Mirror begins locked and becomes available later through campaign/onboarding progression.
+
+Run Infrastructure is one umbrella for approved permanent improvements to Rest support, Shrine support, rewards, routing/run conditions, regional-transition support, and related expedition support. These are not separate permanent upgrade trees.
+
+Relics retain kill-earned individual mastery while equipped even though their Strand progression/management now belongs to the Forge. Sharing the Forge does not require Relics to use the same currency or linear progression as Prosthetics.
+
+The separate Relic Reliquary direction, the older generic weapon-development/weapon-socket Forge model, and the fixed Bloodwell `Way of Steel / Way of Secrets / Way of Vows` structure are no longer current scope. Exact upgrade nodes, values, rank counts, costs, mastery thresholds, and precise Blood Mirror unlock timing remain deferred.
+
+The next top-level design task is a **major-system production-scope audit**, not detailed permanent-upgrade design.
+
+**Authority:** `docs/gameplay/PROGRESSION.md`, `docs/content/strand/INTERACTIBLES.md`, `docs/content/strand/interactibles/BLOODWELL.md`, `docs/content/strand/interactibles/FORGE_BENCH.md`, `docs/content/strand/interactibles/BLOOD_CAVERN.md`
+
+## 2026-08-15 — Relic mastery and Prosthetic Forge progression locked
+
+Relics gain persistent individual mastery from eligible enemy kills while equipped; only the currently equipped Relic advances. Mastery strengthens the existing Relic benefit rather than adding unrelated mechanics.
+
+The eight launch Prosthetics receive shallow linear permanent Forge paths. A Prosthetic is functionally complete when unlocked; two upgrades are the default and a third is used only where the base tool already has another meaningful existing property to improve. The locked launch roster contains 19 permanent Prosthetic upgrades across the eight tools. Scrolls remain the primary persistent currency for Prosthetic development.
+
+Prosthetic Techniques remain removed from the run-build system.
+
+**Authority:** `docs/gameplay/RELICS.md`, `docs/gameplay/PROSTHETICS.md`, `docs/gameplay/PROGRESSION.md`
 
 ## 2026-07-10 — Seven production milestones and paid Style Test
 
