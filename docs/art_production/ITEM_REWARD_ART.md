@@ -4,7 +4,7 @@ title: Item, Pickup, and Reward Art
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 topics:
   - currencies
   - pickups
@@ -18,6 +18,7 @@ related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
   - UI-TECHNIQUE-REWARDS
+  - UI-HUB-INTERFACES
   - ART-TECHNIQUE-VFX
   - ART-MILESTONE-04
   - ART-MILESTONE-07
@@ -31,9 +32,9 @@ Item art must connect in-world pickups, route markers, HUD icons, Technique card
 
 | Currency | World and icon language |
 |---|---|
-| Mist | Pale blue-white wisp or orb; base meta currency |
-| Scroll | Rolled paper with red Order ribbon; Forge currency |
-| Boss Emblem | Dark ornate metal token with Order sigil; rarest meta currency |
+| Mist | Pale blue-white wisp or orb; broad persistent meta currency |
+| Scroll | Rolled paper with red Order ribbon; Forge-focused Prosthetic currency |
+| Boss Emblem | Dark ornate metal token with Order sigil; rare major-gate currency |
 | Gold | Clear coin silhouette; run economy |
 
 Pickup sprite and HUD icon must share the same core silhouette. Corruption is not a physical pickup.
@@ -118,9 +119,11 @@ The ten approved names are:
 - Scribe's Lens
 - Blood Moon Shard
 
-Each Relic needs a recognizable collection/equip icon and a readable representation in the dedicated Relic Reliquary or equivalent Strand interactible. A separate Common / Rare / Legendary badge family is explicitly unnecessary.
+Each Relic needs a recognizable collection/equip icon and a readable representation within the **Forge Bench's Relic management/progression category**. A separate Relic Reliquary environment or UI family is not required.
 
-Exact object sprite treatment, upgrade-state variants, acquisition presentation, and transition-swap UI remain later production work.
+Relic mastery/progression states should reuse the object's existing identity rather than create rarity-badge families or a Technique-like branching-card language.
+
+Exact object sprite treatment, mastery/upgrade-state variants, acquisition presentation, and transition-swap UI remain later production work.
 
 ## Delivery expectations
 
