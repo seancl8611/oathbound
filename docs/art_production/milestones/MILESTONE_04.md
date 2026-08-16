@@ -4,7 +4,7 @@ title: Milestone 4 — Player Combat Depth
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-16
 ---
 
 # Milestone 4 — Player Combat Depth
@@ -13,7 +13,7 @@ last_reviewed: 2026-08-13
 
 Complete the visual identities and interface support for Akio's major build-shaping systems after the base character, combat VFX hierarchy, Shrine foundation, and core room framework are stable.
 
-The milestone must support optional Aspect Tier investment, five direct Technique slots, and continued Technique development through slotless Supporting Techniques and other approved later-layer rewards.
+The milestone must support optional Aspect Tier investment, five direct Technique slots, continued Technique development through slotless Supporting / Cross-family / Legendary Techniques, Prosthetic use, and the equipped Relic benefit.
 
 ## Authoritative design sources
 
@@ -28,6 +28,7 @@ The milestone must support optional Aspect Tier investment, five direct Techniqu
 - [Technique System](../../gameplay/TECHNIQUES.md)
 - [Technique Catalog](../../gameplay/TECHNIQUE_CATALOG.md)
 - [Prosthetic Tools](../../gameplay/PROSTHETICS.md)
+- [Relics](../../gameplay/RELICS.md)
 - [Blood Aspect VFX](../ASPECT_VFX.md)
 - [Technique VFX](../TECHNIQUE_VFX.md)
 - [Run HUD and Combat Feedback](../../ui_ux/HUD.md)
@@ -39,16 +40,25 @@ The milestone must support optional Aspect Tier investment, five direct Techniqu
 - Tier II Blood buildup, readiness, activation, resolving, consumed, and rebuilding states.
 - Three Blood Art packages.
 - Eight Prosthetic VFX/icon families.
-- Reusable Technique card, rarity, family, direct-slot, Supporting, refinement, replacement, warning, decline, reroll, and comparison states.
+- Reusable Technique card, rarity, family, direct-slot, Supporting, Cross-family, Legendary, refinement, replacement, warning, decline, reroll, and comparison states.
 - Five direct Technique slots: Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow.
-- Post-fill Technique offers including Supporting, refinement, rare same-slot replacement, Cross-family, higher-rarity, and Legendary opportunities as approved by the final catalog.
+- Post-fill Technique offers including Supporting, refinement, rare same-slot replacement, Cross-family, higher-rarity, and Legendary opportunities under the approved catalog rules.
 - Read-only rest/pause build review rather than reserve swapping.
-- Relic card family and one initial Relic slot.
+- Relic card/icon family and one equipped Relic slot; permanent collection/mastery management belongs to the Strand Forge interface in Milestone 3.
 - Currency, Health, Spirit, capacity, route-marker, breakable, treasure, and reward-object art.
 
-The complete **25-Technique direct matrix is approved at qualitative paper-design depth** across Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage.
+The complete Technique roster is approved at qualitative paper-design depth: **50 actual Techniques plus 10 refinements**.
 
-The direct matrix may now guide high-level icon/VFX planning. The complete final Technique icon/VFX production count remains blocked on the later catalog layers: Legendary, Supporting, Cross-family, refinement, replacement, rarity, prerequisite, and eligibility decisions.
+The 50 Techniques comprise:
+
+- 25 direct slotted Techniques,
+- 15 same-family Supporting Techniques,
+- 5 Cross-family Techniques,
+- 5 Legendary family capstones.
+
+Rarity is locked at 10 Common / 18 Uncommon / 17 Rare / 5 Legendary. Prerequisite and eligibility rules are approved.
+
+The roster may guide icon/VFX planning now. Final production counts still require the reward/readability audit, implementation briefs, and prototype validation because not every Technique requires bespoke art.
 
 Crimson production should support Vulnerable target marking, enhanced Vulnerable-backstab feedback, Deep Cut's concentrated rear-hit treatment, Blood Arc's bounded sword-shaped AoE, and Predator's Wake application feedback. The retired Burst-ready / recharge marker and radial Burst language are excluded.
 
@@ -99,10 +109,10 @@ All three packages may guide high-level scoping. Exact counts still require impl
 5. Complete final cross-roster presentation/readability pass.
 6. Complete Blood buildup/readiness and all three Blood Arts.
 7. Complete Prosthetic VFX/icons.
-8. Complete reusable Technique card/build framework for five direct slots plus slotless later-layer upgrades.
-9. Complete Technique reward/replacement/refinement/Supporting states.
+8. Complete reusable Technique card/build framework for five direct slots plus slotless upgrades.
+9. Complete Technique reward/replacement/refinement/Supporting/Cross-family/Legendary states.
 10. Complete currency, pickup, Relic, breakable, treasure, and reward-object families.
-11. Plan approved direct-Technique icons/VFX; finalize the complete Technique production catalog after later layers are locked.
+11. Plan Technique icons/VFX against the approved 50-Technique catalog and determine reuse versus bespoke needs through the audit.
 12. Full HUD, Shrine, reward-screen, and mixed-build integration.
 
 ## Dependency rules
@@ -114,10 +124,10 @@ All three packages may guide high-level scoping. Exact counts still require impl
 - Spectral Passage and Beyond the Veil should reuse existing attack/deathblow/locomotion families wherever practical.
 - Techniques reuse base combat and Aspect VFX before new production is authorized.
 - Crimson backstab presentation must not imply forced enemy facing, scripted rear access, or ordinary invisibility.
-- Prosthetic progression is a separate persistent Forge package and does not create temporary Prosthetic-Technique reward states.
+- Prosthetic and Relic permanent progression belong to the Forge and do not create temporary Technique reward states.
 - Additional Aspects are excluded.
 - No duplicate Aspect-specific Blood Art progression tree is included.
-- Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique assets, and Crimson Burst-ready/recharge assets are excluded.
+- Superseded Prey Mark, Dire Hunt transformation, Apex Feast, Wraith duration-state reach, Veiled Guard, Pale Procession, perfect-dodge/Mist-Step/spinning Art, Ronin Counter Cut/Focus, reserve-Technique assets, Crimson Burst-ready/recharge assets, generic weapon-development assets, and Relic rarity/Reliquary assets are excluded.
 
 ## Completion test
 
@@ -125,6 +135,6 @@ All three packages may guide high-level scoping. Exact counts still require impl
 - Tier 0-I Technique-focused, Tier II hybrid, and deeper Aspect-investment builds remain readable.
 - Blood Arts clearly communicate activation payoff, direction/target, commitment, and resolution.
 - Tier growth is readable without unnecessary extra meters or status families.
-- Technique choices, five direct slots, Supporting upgrades, rarity, refinements, replacements, and warnings remain understandable as the build develops.
+- Technique choices, five direct slots, Supporting/Cross-family/Legendary upgrades, rarity, refinements, replacements, and warnings remain understandable as the build develops.
 - Vulnerable and backstab feedback remain readable without obscuring enemy facing or attack telegraphs.
-- Enemy telegraphs remain readable under mixed Aspect, Technique, Prosthetic, and Blood effects.
+- Enemy telegraphs remain readable under mixed Aspect, Technique, Prosthetic, Relic, and Blood effects.
