@@ -4,10 +4,38 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 ---
 
 # Documentation Changelog
+
+## 2026-08-16 — Permanent progression station scope and repository consistency pass
+
+- Locked the current permanent upgrade-station architecture at full-game scope level:
+  - **Bloodwell → Akio + Run Infrastructure**.
+  - **Forge Bench → Prosthetics + Relics**.
+  - **Blood Mirror → Blood Aspects**, with the Mirror locked at the beginning and unlocked later through campaign/onboarding progression.
+- Defined **Run Infrastructure** as one Bloodwell-owned umbrella for Rest support, Shrine support, reward possibilities, routing/run conditions, regional transitions, and related expedition support rather than separate permanent upgrade trees.
+- Preserved Relic kill-earned mastery while moving Strand-side Relic progression/management into the Forge; sharing the Forge does not require Relics to use Scrolls or Prosthetic-style linear paths.
+- Removed the separate Relic Reliquary from current approved hub scope.
+- Superseded the older generic weapon-development / weapon-socket Forge model because Blood Aspects now own run weapon identity.
+- Superseded the fixed Bloodwell `Way of Steel / Way of Secrets / Way of Vows` structure; exact Akio and Run Infrastructure nodes remain later design.
+- Added the Blood Mirror's opening locked state without choosing the exact unlock event.
+- Removed stale live **Crimson Burst** references from Blood Cavern trial documentation.
+- Removed remaining live four-active-plus-reserve Technique wording from the Boat and dependent UI/production files.
+- Corrected Relic persistence wording in run/pause documentation.
+- Advanced overview, roadmap, gameplay index, art inventory, milestones, and open questions past already-completed Prosthetic/Technique work.
+- Set the next top-level design task to a **major-system production-scope audit** before full-run integration.
+
+## 2026-08-15 — Relic mastery and Prosthetic Forge progression lock
+
+- Locked Relic progression around persistent individual mastery earned from eligible enemy kills while the Relic is equipped; only the equipped Relic advances.
+- Kept Relic mastery focused on strengthening the existing Relic benefit rather than branching into unrelated mechanics.
+- Locked the eight launch Prosthetics as complete when unlocked, with shallow linear Forge progression that improves existing properties only.
+- Locked **19 permanent Prosthetic upgrades** across the eight tools; two upgrades are the default and a third is used only where the base tool already has another meaningful existing property to improve.
+- Kept Scrolls as the primary persistent currency for Prosthetic Forge development.
+- Removed remaining Prosthetic-Technique production guidance and kept Prosthetic progression separate from the run Technique system.
+- Advanced the design dependency from Prosthetic progression to the wider Strand / permanent-progression package.
 
 ## 2026-08-14 — Relic system and launch roster lock
 
