@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-16
 topics:
   - runs
   - first-attempt
@@ -26,6 +26,7 @@ related:
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-STRAND-BLOODWELL
   - CONTENT-STRAND-BOAT
@@ -96,16 +97,19 @@ These are production and pacing targets, not guarantees. Exact room and encounte
 Before departure, the player:
 
 - completes available Strand preparation,
-- confirms one unlocked Blood Aspect at the Boat after the system is unlocked,
-- confirms the current Prosthetic loadout when available,
+- confirms one unlocked Blood Aspect after that system is available,
+- confirms the current Prosthetic and Relic loadouts when those systems are available,
+- uses the Boat as the final run-start confirmation,
 - begins at Blood Aspect Tier 0,
 - begins with five empty direct Technique slots: Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow,
-- starts without the previous run's Corruption, slotted or supporting Techniques, refinements, replacement state, Gold, room progress, or temporary Relic effects,
+- starts without the previous run's Corruption, slotted or Supporting Techniques, refinements, replacement state, Gold, room progress, or previous run-only Relic activation state,
 - and commits to the Keeper-guided barrier crossing by selecting `Start Run`.
 
 The Keeper's contribution remains part of the departure presentation rather than a separate repeated menu or resource cost.
 
-Blood Aspect selection does not appear during the first attempt and need not become available immediately after the first return. Advanced Blood systems unlock through later progression.
+Blood Aspect selection does not appear during the first attempt and need not become available immediately after the first return. The **Blood Mirror** itself begins locked and becomes available later through campaign/onboarding progression; its exact unlock event remains deferred.
+
+The Forge owns permanent Prosthetic and Relic progression / management. The Bloodwell owns Akio and Run Infrastructure progression. The Boat does not duplicate those upgrade interfaces.
 
 ## Room functions
 
@@ -126,21 +130,27 @@ Combat routes may display a previewed primary reward category before entry. Room
 
 Detailed reward ownership and cadence belong in [Items, Currencies, and Rewards](ITEMS_AND_REWARDS.md).
 
+## Run Infrastructure relationship
+
+Permanent Run Infrastructure progression is owned by the Bloodwell and may improve approved support around future runs, including Rest support, Shrine support, reward possibilities, route support, regional-transition support, or other beneficial run conditions.
+
+Run Infrastructure does not itself carry a previous run's temporary build state forward and cannot bypass the fixed Aspect Tier path or replace Technique/routing decisions.
+
 ## Run power curve
 
 After the relevant systems are unlocked:
 
 - **Area 1:** acquire early direct Techniques and establish the first family/build direction.
 - **Area 2:** fill more of the five core slots, gain Aspect Tiers, and begin deepening family synergy through later Technique rewards.
-- **Area 3:** finish or refine the build through remaining direct slots, slotless supporting Techniques, refinements, rare same-slot replacements, and eligible high-rarity or Legendary opportunities.
+- **Area 3:** finish or refine the build through remaining direct slots, slotless Supporting Techniques, refinements, rare same-slot replacements, and eligible high-rarity or Legendary opportunities.
 
-A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. Exact reward frequency remains a later tuning and catalog decision.
+A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. Exact reward frequency remains later tuning work.
 
 ## Failed run
 
 After Returning Blood has awakened, Akio's death reconstructs him at the Strand. Death is a real supernatural event, not a non-canon reset.
 
-A failed run burns away temporary Blood state and run-only progress. Permanent unlocks, upgrades, discoveries, Blood Mirror progress, and persistent currencies survive according to the progression matrix.
+A failed run burns away temporary Blood state and run-only progress. Permanent unlocks, upgrades, Run Infrastructure, Relic collection/mastery/progression, discoveries, Blood Mirror progress after unlock, and persistent currencies survive according to the progression matrix.
 
 Akio may prepare and board the Boat again without the narrative defining an exact elapsed time between attempts.
 
@@ -228,16 +238,16 @@ A run may change through:
 
 - Blood Aspect Tier choices,
 - five direct slotted Techniques,
-- slotless supporting Techniques,
+- slotless Supporting / Cross-family / Legendary Techniques,
 - Technique refinements and rare same-slot replacements,
 - the equipped Prosthetic,
-- run-scoped Relics,
+- the equipped Relic benefit,
 - approved consumables,
-- temporary currencies and materials,
+- run-only currencies and materials,
 - survival and resource-cap rewards,
 - boss, miniboss, treasure, shop, or discovery rewards.
 
-Prosthetic progression itself is persistent and belongs to the Forge rather than a temporary Technique layer.
+Prosthetic and Relic permanent progression belongs to the Forge rather than a temporary Technique layer.
 
 ## Reset boundary
 
@@ -246,11 +256,11 @@ The following reset after death or successful Heart Binding return:
 - Corruption,
 - Blood Aspect Tier,
 - slotted Techniques,
-- supporting Techniques,
+- Supporting / Cross-family / Legendary Techniques,
 - Technique refinements and replacement state,
 - Gold,
 - room progress,
-- temporary Relic effects,
+- the current run's Relic activation state,
 - and other explicitly run-only states.
 
 The following persist:
@@ -258,9 +268,11 @@ The following persist:
 - unlocked Blood Aspects,
 - selected Aspect as an available loadout choice,
 - Techniques unlocked into future reward pools,
-- permanent upgrades,
+- permanent Akio upgrades,
+- permanent Run Infrastructure upgrades,
 - permanent Prosthetic progression,
-- Blood Mirror trial and mastery progress,
+- Relic collection, mastery, and permanent progression,
+- Blood Mirror trial and Aspect-progression state after unlock,
 - narrative discoveries and codex progress,
 - persistent currencies and rewards,
 - destroyed Heart Bindings and campaign progress,

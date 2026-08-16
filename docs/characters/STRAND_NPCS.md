@@ -4,7 +4,7 @@ title: Strand NPC Roster
 category: character
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-08-16
 topics:
   - strand
   - npcs
@@ -22,7 +22,7 @@ The Strand contains six primary recurring NPC roles. The roster is authoritative
 |---|---|---|
 | Keeper | Grave steward, threshold guide, and historical perspective | [Keeper](strand/KEEPER.md) |
 | Peddler | Salvage merchant and stock-based purchasing | [Peddler](strand/PEDDLER.md) |
-| Smith | Forge-master and permanent combat/tool improvement | [Smith](strand/SMITH.md) |
+| Smith | Forge-master for Prosthetic and Relic progression / management | [Smith](strand/SMITH.md) |
 | Raven | Order courier for vows, notices, progress, and rewards | [Raven](strand/RAVEN.md) |
 | Undead Samurai | Combat teacher, trial-giver, and martial repository | [Undead Samurai](strand/UNDEAD_SAMURAI.md) |
 | Scribe | Archivist, codex keeper, and discovery tracker | [Scribe](strand/SCRIBE.md) |

@@ -4,7 +4,7 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 topics:
   - currencies
   - pickups
@@ -13,6 +13,7 @@ topics:
   - blood-resource
   - room-rewards
   - reward-cadence
+  - run-infrastructure
   - heart-binding-completion
 related:
   - GAMEPLAY-PROGRESSION
@@ -42,27 +43,30 @@ The reward framework should:
 
 Major rewards support:
 
-1. **Build growth** — Technique rewards, Relics, and optional Aspect Tier advancement through Shrine routes.
+1. **Build growth** — Technique rewards, Relic opportunities, and optional Aspect Tier advancement through Shrine routes.
 2. **Survival** — Health, Spirit, recovery, temporary capacity.
 3. **Economy** — Gold, shops, rerolls.
-4. **Persistent progress** — Mist, Scrolls, Boss Emblems, unlocks, discoveries, Heart Bindings.
+4. **Persistent progress** — Mist, Scrolls, Boss Emblems, unlocks, discoveries, Heart Bindings, and approved permanent progression.
 
 ## Currency families
 
 | Currency | Persistence | Primary role |
 |---|---|---|
-| Mist | Persistent | Broad meta progression |
-| Scroll | Persistent | Forge upgrades, including permanent Prosthetic development |
-| Boss Emblem | Persistent | Rare major progression gates |
+| Mist | Persistent | Broad meta progression, especially Bloodwell-owned progression |
+| Scroll | Persistent | Forge-focused Prosthetic development |
+| Boss Emblem | Persistent | Rare major progression gates where explicitly assigned |
 | Gold | Run-only | Shops and run economy |
 
-Corruption, Blood, and destroyed Heart Bindings are not currencies.
+Corruption, Blood, Relic mastery, and destroyed Heart Bindings are not currencies.
 
 - **Corruption** governs Shrine-ready Aspect progression.
 - **Blood** is a Tier II-and-later run-only combat resource used to activate the selected Blood Art.
+- **Relic mastery** is persistent progression earned through eligible kills while a Relic is equipped.
 - **Destroyed Heart Bindings** are persistent campaign state.
 
 Blood is not purchased, banked at the Strand, displayed as a route reward, or carried between runs. `Mist Shards` remains deprecated unless intentionally restored.
+
+Sharing the Forge between Prosthetics and Relics does not automatically make Scrolls a Relic currency. Exact Relic upgrade costs, if any, remain later design.
 
 ## Pickups and minor drops
 
@@ -103,15 +107,15 @@ A Technique reward may come from:
 - a regional boss,
 - or another explicitly approved source.
 
-The source does not make the reward inherently a "refinement reward," "Legendary reward," or another separate Technique subtype.
+The source does not make the reward inherently a `refinement reward`, `Legendary reward`, or another separate Technique subtype.
 
 Depending on the current build, an eligible Technique reward screen may offer:
 
 - a Technique for an empty combat slot,
-- a slotless supporting Technique,
+- a slotless Supporting Technique,
 - a refinement for an owned slotted Technique,
 - a rare same-slot replacement,
-- a cross-family Technique,
+- a Cross-family Technique,
 - or an eligible Legendary.
 
 The reward source may later influence rarity or quality weighting, but all sources use the same Technique system rather than separate reward interfaces or subtype-specific reward pools.
@@ -133,15 +137,19 @@ Shrines own Blood Aspect stabilization and optional escalation.
 - Shrines do not normally present ordinary Technique rewards.
 - Blood Art charge is separate from Corruption and does not pay for Embrace.
 
+Permanent **Run Infrastructure** upgrades may later improve approved Shrine support, but they cannot reduce or bypass the fixed Tier path, grant permanent Tier progress, or unlock Blood early.
+
 ## Rest rooms
 
 Rest rooms provide Health and Spirit recovery, read-only build review, and short narrative breathing room where appropriate.
 
-The retired reserve-slot model no longer supports routine Technique swapping at rest rooms.
+The retired reserve-slot model does not support routine Technique swapping at rest rooms.
+
+Permanent **Run Infrastructure** upgrades may later improve Rest support or introduce approved additional recovery opportunities. Exact upgrades remain later detailed design.
 
 ## Shops
 
-Run shops use Gold and may offer recovery, temporary capacity, consumables if included, rerolls, **Technique rewards**, and occasional Relics.
+Run shops use Gold and may offer recovery, temporary capacity, consumables if included, rerolls, **Technique rewards**, and occasional Relic opportunities.
 
 When a shop sells a Technique reward, purchasing it opens the normal Technique reward screen rather than a separate refinement-only or supporting-only screen.
 
@@ -156,7 +164,7 @@ Treasure rooms may provide a Technique reward, Relic choice, large currency bund
 A miniboss guarantees meaningful build development and should never award only ordinary Gold or healing. Possible rewards include:
 
 - a Technique reward,
-- a Relic,
+- a Relic opportunity,
 - a special encounter reward,
 - modest additional Mist or Scrolls.
 
@@ -170,9 +178,11 @@ The Area 1 and Area 2 bosses provide both persistent and current-run value.
 
 Persistent rewards may include Boss Emblems, Mist, Scrolls, unlocks, and narrative or codex progress.
 
-Current-run rewards may include a Technique reward, Relic, or major temporary Health or Spirit improvement.
+Current-run rewards may include a Technique reward, Relic opportunity, or major temporary Health or Spirit improvement.
 
 Regional transitions should restore enough Health or Spirit for the next area to begin from a viable state. Blood is not automatically refilled by the reward system.
+
+Run Infrastructure may later improve approved transition support without removing the need to manage resources during the run.
 
 ## Eclipse Shogun and Heart Binding completion
 
@@ -198,9 +208,27 @@ Relic acquisition sources remain open. Relics may eventually come from run rewar
 
 Relics may be changed through approved limited transition opportunities rather than freely swapped in ordinary rooms. Exact swap timing remains later implementation work.
 
+Relic collection/mastery/progression is managed at the **Forge Bench** when Akio is in the Strand.
+
+## Run Infrastructure reward boundary
+
+Run Infrastructure is a single Bloodwell-owned permanent upgrade category that may affect future-run support around:
+
+- Rest and recovery,
+- Shrine support,
+- reward possibilities,
+- route information or routing assistance,
+- regional transitions,
+- beneficial special encounters or support conditions,
+- and approved persistent-resource opportunities.
+
+This umbrella prevents separate permanent trees for every room or reward subsystem. Exact upgrades and values remain later design.
+
+Run Infrastructure must preserve meaningful route opportunity cost and cannot make high-value rewards, ideal builds, or Aspect advancement automatic.
+
 ## Pacing framework
 
-Within the approved 45-50-minute successful-run target, Technique reward frequency must be tuned against both core-slot filling and later supporting upgrades.
+Within the approved 45–50-minute successful-run target, Technique reward frequency must be tuned against both core-slot filling and later supporting upgrades.
 
 The old assumption of only six to eight Technique decisions is no longer authoritative.
 
@@ -225,7 +253,7 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 - A direct Technique cannot stack with another direct Technique in the same combat slot.
 - Supporting Techniques must be meaningful enough to justify a reward choice.
 - Rare replacement offers must clearly show what current slotted Technique will be lost.
-- Prosthetic upgrades do not belong in Technique reward screens.
+- Prosthetic or Relic permanent upgrades do not belong in Technique reward screens.
 - Relics remain a small separate supporting layer and should not become Technique-family upgrades.
 - Blood is a combat resource, not a currency or route reward.
 - Rare rewards must not invalidate sword combat or boss mechanics.
@@ -233,4 +261,6 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 
 ## Current production dependency
 
-The Technique content roster and launch Relic roster are complete at current qualitative paper-design depth. The next major gameplay-system pass is permanent Prosthetic / Forge progression. Technique reward cadence, reward-source weighting, Relic acquisition allocation, and exact reward probabilities remain later integration and playtest work.
+The Technique roster, Relic roster/mastery direction, Prosthetic Forge paths, and broad permanent-upgrade station ownership are complete at current qualitative paper-design depth.
+
+The next broad task is to verify whether every major launch system has production-level scope, then review full-run integration, reward cadence/source weighting, Relic acquisition/swap details, Run Infrastructure details, and exact reward probabilities during later integration/playtesting.

@@ -49,15 +49,24 @@ The Relic system is also complete at current qualitative paper-design depth:
 - **10 approved launch Relics**,
 - one equipped Relic slot,
 - persistent collection ownership,
+- kill-earned mastery while equipped,
 - run-active benefits,
 - no Relic rarity tiers,
-- simple supporting effects that remain separate from Technique, Aspect, and Prosthetic progression.
+- Strand-side progression and management at the **Forge Bench** alongside Prosthetics.
 
-Exact Relic acquisition allocation, shallow rank/mastery thresholds, transition swap timing, and numerical values remain later design/playtest work.
+Exact Relic acquisition allocation, mastery thresholds, Forge rank presentation, transition swap timing, and numerical values remain later design/playtest work.
 
-The next major gameplay-system pass is **permanent Prosthetic / Forge progression for all eight launch tools**.
+The eight Prosthetic Forge paths are locked as shallow linear permanent progression.
 
-Remaining Technique reward cadence, rarity/source weighting, rare replacement behavior, roster integration testing, and exact run-reward probabilities belong to the later full-run integration/reward pass rather than the current headline agenda.
+Broad permanent-upgrade station ownership is also scoped:
+
+- **Bloodwell:** Akio + Run Infrastructure,
+- **Forge Bench:** Prosthetics + Relics,
+- **Blood Mirror:** Blood Aspects, with the Mirror locked at the beginning and unlocked later.
+
+Exact permanent-upgrade nodes, values, rank counts, costs, and unlock timing remain later detailed design rather than current full-game scope blockers.
+
+The next major gameplay task is to **audit whether every launch-critical system is scoped at production level**. Remaining Technique reward cadence, rarity/source weighting, rare replacement behavior, roster integration testing, Run Infrastructure details, Relic progression tuning, and exact run-reward probabilities belong to later full-run integration and playtesting.
 
 The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
 

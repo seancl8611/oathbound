@@ -4,7 +4,7 @@ title: Core Gameplay Loop
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-16
 topics:
   - core-loop
   - first-attempt
@@ -40,11 +40,11 @@ The opening should reveal the return through brief gameplay presentation and sub
 ## Persistent loop
 
 1. Return to or prepare in the Strand.
-2. Spend permanent resources through the appropriate service: Bloodwell, Forge, Merchant, Discovery Board, or Blood Mirror.
-3. Confirm one unlocked Blood Aspect and the current Prosthetic loadout at the Boat after those systems are available.
+2. Use available persistent services: the Bloodwell for Akio / Run Infrastructure progression, the Forge for Prosthetic / Relic progression and management, the Merchant and Discovery Board for their approved services, and the Blood Mirror for Blood Aspect progression after it is unlocked later in the game.
+3. Prepare and confirm the current Blood Aspect, Prosthetic, and Relic loadout as those systems become available; the Boat remains the final run-start confirmation point.
 4. Cross toward the island beneath the Blood Moon.
 5. Progress through combat, reward, Shrine, rest, shop, miniboss, and boss spaces.
-6. Build run power through Blood Aspect Tier choices, five slotted Techniques, slotless supporting Techniques, refinements, rare same-slot replacements, Relics, resources, and other temporary rewards.
+6. Build run power through Blood Aspect Tier choices, five slotted Techniques, slotless Supporting / Cross-family / Legendary Techniques, refinements, rare same-slot replacements, the equipped Relic benefit, resources, and other temporary rewards.
 7. Fill Corruption through combat accomplishments and choose Resist or Embrace at Shrines.
 8. Route toward previewed rewards that support build growth, survival, economy, or persistent progress.
 9. Die and reform at the Strand, or defeat the Eclipse Shogun and enter the Heart chamber.
@@ -60,7 +60,7 @@ The opening should reveal the return through brief gameplay presentation and sub
 3. Block, dodge, or parry according to the telegraph and response rule.
 4. Use the selected Blood Aspect's Basic Attack sequence, Held Attack, Dash Attack, and Parry Counter according to timing and context.
 5. Build enemy posture while managing Akio's health, posture, Spirit Emblems, Corruption, and space after those systems are active.
-6. Use the equipped Prosthetic and current Technique build to strengthen chosen combat patterns without replacing sword fundamentals.
+6. Use the equipped Prosthetic, Relic benefit, and current Technique build to strengthen chosen combat patterns without replacing sword fundamentals.
 7. Exploit posture breaks and deathblow openings.
 8. Reposition around hazards, ranged pressure, restraints, and multi-enemy combinations.
 9. Claim the previewed reward and make the next routing or build decision.
@@ -71,9 +71,13 @@ After Blood Aspects are unlocked, the selected Aspect is the run's central tacti
 
 The introductory first attempt is the deliberate exception: Akio has no active Blood identity yet.
 
-The player should commonly establish several of the five direct combat slots across Areas 1 and 2, then continue deepening the build through remaining slots, slotless supporting Techniques, refinements, rare replacements, and higher-rarity opportunities through Area 3. Filled direct slots normally stay committed unless a valid replacement offer explicitly overwrites that same slot.
+The player should commonly establish several of the five direct combat slots across Areas 1 and 2, then continue deepening the build through remaining slots, slotless Supporting Techniques, Cross-family Techniques, refinements, rare replacements, and higher-rarity opportunities through Area 3. Filled direct slots normally stay committed unless a valid replacement offer explicitly overwrites that same slot.
 
 The same active build continues from the Shogun into an enabled Heart route. The exact recovery, resource carryover, and encounter tuning between those bosses remain future design work.
+
+## Permanent progression boundary
+
+Permanent progression may improve Akio, Run Infrastructure, Prosthetics, Relics, and later-unlocked Blood Aspect mastery within their owning stations. It should increase options, reliability, or resilience without replacing the run's Aspect Tier choices, Technique build, routing decisions, or combat execution.
 
 ## Design requirement
 

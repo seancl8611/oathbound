@@ -28,27 +28,40 @@ Current Aspect production groups include:
 
 Exact final animation counts, sprite overlays, VFX, audio, icon, HUD, Shrine, selection, and trial requirements still depend on implementation briefs and playable validation rather than reopening the approved qualitative Tier packages.
 
-The Technique system uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless later-layer upgrades. The retired four-active-plus-reserve model and temporary Prosthetic-Technique layer are not production targets.
+The Technique system uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless Supporting, Cross-family, and Legendary Techniques. The retired four-active-plus-reserve model and temporary Prosthetic-Technique layer are not production targets.
 
-All five Technique family mechanics and the full 25-Technique direct matrix are approved at qualitative paper-design depth:
+The complete Technique roster is approved at qualitative paper-design depth:
 
-- Echo,
-- Rupture,
-- Seal,
-- Rift,
-- Crimson Vulnerable / backstab / direct Health damage.
+- 25 direct Techniques,
+- 15 same-family Supporting Techniques,
+- 5 Cross-family Techniques,
+- 5 Legendary Techniques,
+- 10 refinements,
+- 10 Common / 18 Uncommon / 17 Rare / 5 Legendary rarity distribution.
 
-The direct matrix may now guide Technique-specific visual planning. The current design dependency before final Technique production counts are locked is the remaining catalog layer: **Legendary, Supporting, Cross-family, refinement, replacement, rarity, and eligibility decisions**.
+The five family mechanics are Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage.
+
+Final Technique production counts now depend on reward/readability audit, VFX/icon briefs, implementation constraints, and playable validation—not on unfinished roster construction.
 
 Crimson production language requires a readable Vulnerable enemy status, enhanced Vulnerable-backstab hit feedback, a concentrated Deep Cut rear-hit treatment, bounded sword-shaped Blood Arc AoE, and Predator's Wake application feedback. The superseded Burst-ready / recharge presentation is not a production target.
 
-Reusable Technique UI/VFX framework work may proceed at a system level. Final total unique icon and bespoke-effect counts should wait until the later Technique layers and final launch catalog are approved.
+The launch Relic roster is also approved at qualitative depth: 10 Relics, one equipped slot, persistent collection/mastery/progression, no rarity tiers, and Strand-side progression/management at the Forge. No separate Relic Reliquary asset family is required.
+
+The eight Prosthetic launch tools and shallow linear Forge paths are approved at qualitative depth.
+
+Permanent hub upgrade-station scope is:
+
+- **Bloodwell:** Akio + Run Infrastructure,
+- **Forge Bench:** Prosthetics + Relics,
+- **Blood Mirror:** Blood Aspects after the Mirror unlocks later in the game.
+
+The old alternate-weapon development / weapon-socket Forge system is not a production target. The Bloodwell's old fixed three-branch tree is not a production requirement.
 
 Other remaining production dependencies include:
 
-- Relic and consumable launch scope,
-- permanent Prosthetic / Forge progression depth,
-- persistent progression, onboarding, trial, and hub-interface volume,
+- the major-system scope audit,
+- full-run integration and reward/pacing validation,
+- exact permanent-upgrade node/value/interface volume,
 - narrative authored-content, voice, portrait, and cinematic volume,
 - postgame Heart-route access, rewards, records, and presentation,
 - encounter-specific sprite, animation, and bespoke VFX counts once the Shogun and Heart implementation packages are approved.

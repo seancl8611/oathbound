@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-16
 topics:
   - trials
   - training
@@ -26,7 +26,9 @@ related:
 
 Provide repeatable, skill-focused Strand activities that teach approved combat systems, demonstrate selected Technique interactions, and reward mastery without depending on run RNG.
 
-The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, rewards, and production volume remain part of the persistent progression/onboarding package.
+The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, rewards, and production volume remain later content and implementation work rather than full-game scope blockers.
+
+The Blood Cavern is a training / trial space, not a separate general permanent-upgrade station. Permanent Aspect progression belongs to the Blood Mirror inside the Cavern after the Mirror is unlocked later in the game.
 
 ## Trial families
 
@@ -93,7 +95,7 @@ Ronin trials must not teach tracking, required combo completion, generic armor, 
 
 ## Fixed Tier and Blood demonstrations
 
-All three Aspect packages may now be used for high-level Tier 0-IV trial planning.
+All three Aspect packages may be used for high-level Tier 0-IV trial planning.
 
 Trials may teach:
 
@@ -109,12 +111,12 @@ A trial preview does not grant persistent run Tier or Blood state.
 
 ## Technique demonstrations
 
-Selected trials may eventually use fixed approved Techniques to teach:
+Selected trials may use fixed approved Techniques to teach:
 
 - how a direct Technique modifies one of the five combat slots,
-- how Echo, Rupture, Seal, Rift, or Burst reads and resolves in combat,
+- how Echo, Rupture, Seal, Rift, or Crimson Vulnerable / backstab / direct Health damage reads and resolves in combat,
 - how a Technique behaves across different Aspect attack geometry or frequency,
-- and, after those layers are approved, supporting-Technique, refinement, or mixed-family interactions.
+- and approved Supporting, refinement, or mixed-family interactions.
 
 Prosthetic behavior is taught through the Prosthetic system rather than a temporary Prosthetic-Technique layer.
 
@@ -126,7 +128,7 @@ Later challenges may use fixed Aspects, Techniques, Prosthetics, Relics, stricte
 
 ## Reward philosophy
 
-Trials may award Aspect access, Technique-pool unlocks, persistent currency, small capped reliability upgrades, cosmetics, lore reflections, and mastery marks.
+Trials may award Aspect access, Technique-pool unlocks, persistent currency, approved capped reliability upgrades, cosmetics, lore reflections, and mastery marks.
 
 Trials may not:
 
@@ -139,15 +141,18 @@ Trials may not:
 
 ## Permanent Aspect upgrade boundary
 
-Permanent Aspect upgrades, if included, remain small, capped, and reliability-focused. They cannot add major Tier mechanics early, bypass fixed progression, or unlock Blood before Tier II.
+Permanent Blood Aspect progression belongs to the **Blood Mirror** and remains small, capped, and reliability-focused.
 
-Permanent upgrades must not grant Wraith Tier IV reach/deathblow rules early or reproduce Ronin's run-only Tier posture-capacity growth as an uncapped permanent scaling path.
+It cannot add major Tier mechanics early, bypass fixed progression, or unlock Blood before Tier II. Permanent upgrades must not grant Wraith Tier IV reach/deathblow rules early or reproduce Ronin's run-only Tier posture-capacity growth as an uncapped permanent scaling path.
+
+The Blood Mirror begins locked and becomes available later in the game. Exact unlock timing, individual Aspect nodes, mastery ranks, values, and trial requirements remain later detailed design.
 
 ## Technical requirements
 
 - Trials are repeatable.
 - Fixed Aspect/Technique/Prosthetic/Relic loadouts are supported.
-- Progress, unlocks, rewards, and permanent-upgrade ranks persist.
+- Progress, unlocks, rewards, and permanent-upgrade ranks persist where applicable.
 - Temporary trial state clears when the trial ends.
 - Trial rules do not require random room/reward generation.
+- The Blood Mirror supports a persistent locked/unlocked campaign state.
 - Framework supports Tier-specific Spectral Edge eligibility, clear-path extended deathblows, Veilstride, Ronin posture-capacity variants, and other approved Tier states where demonstrations require them.

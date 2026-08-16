@@ -4,7 +4,7 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 ---
 
 # Production Roadmap
@@ -31,7 +31,15 @@ Exact room counts and routing remain prototype work unless they create additiona
 
 Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
 
-Final node counts, trials, unlock flows, mastery states, and permanent-progression depth depend on the persistent progression/onboarding package.
+Current permanent upgrade-station scope is:
+
+- **Bloodwell:** Akio + Run Infrastructure,
+- **Forge Bench:** Prosthetics + Relics,
+- **Blood Mirror:** Blood Aspects, with the Mirror locked at the beginning and unlocked later through campaign/onboarding progression.
+
+The Blood Cavern remains the training/trial space containing the Blood Mirror. The Merchant, Discovery Board, and Boat remain services rather than additional permanent upgrade trees.
+
+Final node counts, exact trial counts, unlock timing, mastery thresholds, and permanent-progression values remain later detailed design.
 
 No duplicate Aspect-specific Blood Art progression tree is assumed.
 
@@ -57,7 +65,7 @@ Ronin production needs include distinct Tier 0 heavy actions, strong guard/postu
 
 Ronin's repeated posture growth should reuse the normal player-posture HUD and capacity language rather than create a separate buff icon or VFX state.
 
-The current working Technique roster is complete at qualitative paper-design depth: **50 actual Techniques plus 10 refinements**.
+The current Technique roster is complete at qualitative paper-design depth: **50 actual Techniques plus 10 refinements**.
 
 The 50 Techniques comprise:
 
@@ -66,9 +74,9 @@ The 50 Techniques comprise:
 - 5 Cross-family Techniques,
 - 5 Legendary family capstones.
 
-Rarity and prerequisite rules are also approved. Final Technique production quotation still depends on the reward-structure audit, final VFX/icon briefs, and prototype validation rather than further roster expansion.
+Rarity and prerequisite rules are approved. Final Technique production quotation depends on the reward-structure audit, VFX/icon briefs, and prototype validation rather than further roster construction.
 
-The launch Relic package is also complete at qualitative paper-design depth: **10 collectible Relics**, one equipped slot, persistent collection ownership, run-active benefits, and no Relic rarity tiers. Exact acquisition allocation, rank values, and transition-swap presentation remain later content/implementation work.
+The launch Relic package is complete at qualitative paper-design depth: **10 collectible Relics**, one equipped slot, persistent collection/mastery/progression, run-active benefits, and no Relic rarity tiers. Relic Strand-side progression/management belongs to the Forge. Exact acquisition allocation, mastery values, Forge presentation, and transition-swap behavior remain later detailed work.
 
 ## Milestone 5 — Complete Area 2
 
@@ -104,7 +112,8 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 - Pale Procession shade/steering/three-lane assets are excluded.
 - Reusable Technique UI may precede final implementation tuning; unique icons and bespoke effects require approved catalog entries and production briefs.
 - The current 50-Technique roster should remain stable unless testing exposes a concrete problem.
-- Relic production uses the approved 10-item roster and does not require rarity-badge families.
+- Relic production uses the approved 10-item roster and does not require rarity-badge families or a separate Reliquary station.
+- The old generic weapon-development / weapon-socket system is excluded; Blood Aspects are the run weapon identities.
 - The standard successful-run pacing target is 45–50 minutes, with exact room/encounter budgets deferred to playtesting.
 - The base Heart Binding ritual is one reusable package.
 - Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
@@ -115,4 +124,6 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 Use the broad-question hierarchy in `docs/_meta/OPEN_QUESTIONS.md` without replacing the established design sequence with narrow tuning work.
 
-The Relic system and launch roster are complete for current qualitative paper-design scope. The next major gameplay-system pass is **permanent Prosthetic / Forge progression** for the eight launch tools. The wider Strand/progression package follows afterward. Technique reward cadence, Relic acquisition/rank/swap details, Prosthetic percentages/costs, and other detailed tuning remain nested until later integration or playable validation.
+The Technique roster, Relic roster/mastery direction, Prosthetic Forge paths, and broad permanent-upgrade station ownership are now complete at current qualitative paper-design depth.
+
+The next major design task is to **audit whether every launch-critical system or production package is scoped at all**. If that audit finds no missing major system, proceed directly to full-run integration, rewards, encounters, and pacing. Exact progression nodes, Technique reward cadence, Relic mastery thresholds, Prosthetic percentages/costs, and other tuning remain nested until later integration or playable validation.

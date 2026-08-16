@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 topics:
   - project-identity
   - combat
@@ -12,6 +12,7 @@ topics:
   - techniques
   - relics
   - blood-aspects
+  - progression
   - heart-bindings
 related:
   - OVERVIEW-DESIGN-PILLARS
@@ -19,6 +20,7 @@ related:
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
+  - GAMEPLAY-PROGRESSION
   - GAMEPLAY-RUN-STRUCTURE
   - LORE-RETURNING-BLOOD
 ---
@@ -45,7 +47,7 @@ Akio is a disciplined swordsman who learns to direct a supernatural curse throug
 
 The selected Blood Aspect determines how Akio fundamentally fights. Techniques are the main horizontal run-build layer and reshape his existing sword actions through recurring supernatural effects such as Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct Health damage.
 
-Relics are a smaller supporting layer: collectible one-slot objects that provide simple run-wide benefits without becoming another Technique or Aspect system.
+Relics are a smaller supporting layer: collectible one-slot objects that provide simple run-wide benefits while also carrying persistent mastery/progression between runs.
 
 ## Approved gameplay snapshot
 
@@ -63,7 +65,9 @@ Relics are a smaller supporting layer: collectible one-slot objects that provide
 - Technique rarity distribution is 10 Common, 18 Uncommon, 17 Rare, and 5 Legendary.
 - At most one refinement per eligible slotted Technique.
 - One equipped Prosthetic with persistent Forge progression.
-- One equipped Relic from an approved **10-Relic persistent collection**; Relics have no rarity tiers and provide run-active benefits.
+- One equipped Relic from an approved **10-Relic persistent collection**; Relics have no rarity tiers and gain persistent mastery from eligible kills while equipped.
+- Permanent upgrade stations are scoped as **Bloodwell = Akio + Run Infrastructure**, **Forge = Prosthetics + Relics**, and **Blood Mirror = Blood Aspects**.
+- The Blood Mirror begins locked and becomes available later through campaign/onboarding progression.
 - Failed runs return Akio to the Strand through Returning Blood reconstruction.
 
 ## Launch Blood Aspect roster
@@ -92,7 +96,19 @@ All three Aspect packages are locked at current qualitative paper-design depth. 
 - Generic elemental schools are not the target.
 - Focused and hybrid Technique builds should both be viable.
 - Technique-heavy Tier 0-I, Tier II hybrid, Tier III Aspect-heavy, and occasional Tier IV high-roll runs should all be viable.
-- Mandatory encounters do not assume a particular Tier, Blood Art, Technique family, Legendary, or Relic.
+- Mandatory encounters do not assume a particular Tier, Blood Art, Technique family, Legendary, Relic, or heavily upgraded persistent state.
+
+## Permanent progression philosophy
+
+Permanent progression is divided by clear Strand ownership rather than one giant meta menu:
+
+- **Bloodwell:** universal Akio progression plus Run Infrastructure improvements to future-run support.
+- **Forge Bench:** Prosthetic and Relic permanent progression / management.
+- **Blood Mirror:** later-unlocked permanent Blood Aspect progression.
+
+Techniques, trials, codex/discovery, Merchant services, Boat confirmation, and Heart Bindings may persist or unlock content but are not separate permanent upgrade trees in current scope.
+
+The older generic weapon-development system is obsolete; Blood Aspects are the run weapon identities.
 
 ## Campaign structure
 
@@ -115,13 +131,13 @@ Destroying the Heart ends the source of Beast Blood, stops the Shogun's reconstr
 - **Final story run:** Shogun followed by the two-form Heart.
 - **Postgame:** repeatable normal runs and optional Heart-route access without changing the completed story.
 
-A normal successful Binding run currently targets roughly 45-50 minutes. Exact room counts, route topology, encounter frequency, and authored layouts remain prototype work.
+A normal successful Binding run currently targets roughly 45–50 minutes. Exact room counts, route topology, encounter frequency, and authored layouts remain prototype work.
 
 ## Current unresolved scope
 
-The remaining production-level questions are maintained in [Current Design Questions](../_meta/OPEN_QUESTIONS.md) and are intentionally organized as broad systems/packages before subsystem details.
+The Technique roster, Relic roster/mastery direction, Prosthetic Forge paths, and broad permanent-upgrade station architecture are complete for current qualitative paper-design scope.
 
-The Relic system and 10-Relic launch roster are now complete for current qualitative paper-design scope. The next major gameplay-system pass is **permanent Prosthetic / Forge progression for the eight launch tools**. Technique reward cadence, Relic acquisition allocation, exact Relic rank/swap behavior, and other tuning details remain later integration work rather than current blockers.
+The next top-level design task is to **audit whether every major launch system is scoped at production level**. Only after that audit should remaining work proceed into full-run integration, narrative delivery, and postgame/release scope. Exact upgrade nodes, reward cadence, mastery thresholds, costs, probabilities, and similar tuning details remain later work rather than current blockers.
 
 ## Source links
 

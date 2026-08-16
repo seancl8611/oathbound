@@ -4,13 +4,14 @@ title: The Boat
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-16
+last_reviewed: 2026-08-16
 topics:
   - strand
   - boat
   - run-start
   - blood-aspect-selection
   - prosthetic-summary
+  - relic-summary
   - blood-moon
   - barrier-crossing
 related:
@@ -19,6 +20,7 @@ related:
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROSTHETICS
+  - GAMEPLAY-RELICS
   - LORE-BARRIER-BLOOD-MOON
   - CHAR-STRAND-KEEPER
 ---
@@ -28,6 +30,8 @@ related:
 ## Strand function
 
 The Boat is the run-start point, island-crossing point, and final loadout-confirmation threshold between the Strand and the run.
+
+It does not own permanent upgrades.
 
 ## Lore role
 
@@ -47,31 +51,46 @@ The seals should feel practical and repeatedly maintained rather than ornate. Th
 
 ## Interaction fantasy
 
-The player commits to another crossing and confirms which unlocked Blood Aspect will be stabilized for the run. The screen also confirms the currently equipped prosthetic when that system is available.
+The player commits to another crossing and confirms the currently prepared run loadout.
+
+After those systems are available, the Boat may summarize:
+
+- the selected Blood Aspect,
+- the equipped Prosthetic,
+- the equipped Relic.
 
 The Keeper facilitates the passage, but the Boat remains the player's final run-start interaction. His contribution should appear through nearby dialogue, a restrained gesture, changing mist, seal light, or a short departure beat rather than a second confirmation menu.
 
-Technique slots are not configured here. They begin empty and are filled through run rewards.
+Technique slots are not configured here. All five direct Technique slots begin empty and are filled through run rewards.
 
 ## Screen behavior
 
-After Blood Aspects are unlocked, the compact run-start screen shows:
+After Blood Aspects are available, the compact run-start screen may show:
 
 - selected Blood Aspect,
 - short Aspect identity text,
-- current equipped prosthetic summary when available,
-- four empty Technique slots and one empty reserve only as a concise run-start expectation when useful,
+- current equipped Prosthetic summary when available,
+- current equipped Relic summary when available,
+- the five empty direct Technique slots only as a concise run-start expectation when useful,
 - `Start Run`,
-- `Change Aspect`,
+- `Change Aspect` or a route back to the appropriate preparation service when applicable,
 - `Cancel`.
 
-The Boat does not provide a permanent Technique loadout or allow pre-equipping run Techniques.
+The five Technique slots are:
+
+1. Basic Attack
+2. Held Attack
+3. Dash / Dash Attack
+4. Parry / Counter
+5. Deathblow
+
+There is **no reserve Technique slot** and no permanent pre-run Technique loadout.
 
 Before Aspects are unlocked, the Boat may start the run directly or show only `Start Run` and `Cancel`.
 
 Only unlocked Aspects may be selected.
 
-The final location for changing the equipped prosthetic remains owned by the Forge/loadout implementation. The Boat may link back to that service later, but should not invent a second permanent upgrade interface.
+The Forge Bench owns permanent Prosthetic and Relic progression / management. The Blood Mirror owns later-unlocked permanent Blood Aspect progression. The Boat may summarize the prepared loadout without duplicating those upgrade interfaces.
 
 ## Animation and environment needs
 
@@ -86,7 +105,7 @@ The final location for changing the equipped prosthetic remains owned by the For
 ## Technical notes
 
 - Repeated departures must remain fast.
-- Selected Aspect and equipped prosthetic must be clear before confirmation.
+- Selected Aspect, equipped Prosthetic, and equipped Relic should be clear before confirmation once those systems are available.
 - Empty Technique capacity should be understandable without creating an unnecessary pre-run menu step.
 - Dock alignment, lantern placement, and interaction marker must make the station immediately readable.
 - The crossing should not require an exact timeline or repeated exposition.
