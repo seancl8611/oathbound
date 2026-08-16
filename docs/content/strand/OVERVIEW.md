@@ -4,13 +4,14 @@ title: The Strand
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-16
+last_reviewed: 2026-08-16
 topics:
   - strand
   - hub
   - shoreline
   - npc-services
   - barrier-threshold
+  - permanent-progression
 related:
   - CHAR-STRAND-NPCS
   - CONTENT-STRAND-INTERACTIBLES
@@ -27,13 +28,25 @@ The Strand is Oathbound's persistent hub, the controlled threshold in the island
 
 - Run preparation and departure
 - Keeper-maintained barrier passage
-- Blood Aspect confirmation at the Boat
+- Final run confirmation at the Boat
 - Persistent progression
 - NPC dialogue and relationship development
 - Training and trials
 - Discovery/codex review
 - Forge, Bloodwell, merchant, and other hub services
-- Blood Mirror Aspect unlocks, previews, trials, and small permanent upgrades
+- Later-unlocked Blood Mirror Aspect progression and mastery
+
+## Permanent progression stations
+
+Current launch scope uses three permanent upgrade stations:
+
+- **Bloodwell:** Akio + Run Infrastructure progression.
+- **Forge Bench:** Prosthetic + Relic progression and management.
+- **Blood Mirror:** Blood Aspect permanent progression after the Mirror unlocks later in the game.
+
+The Blood Cavern is the training/trial space containing the Blood Mirror. The Discovery Board, Merchant Stall, and Boat remain services rather than separate permanent upgrade trees.
+
+The Blood Mirror begins locked; the exact campaign/onboarding unlock event remains deferred.
 
 ## Core fantasy
 
@@ -81,8 +94,10 @@ The Strand should use a few distinct role-specific structures rather than repeat
 - Discovery Board and Scribe study,
 - central Bloodwell shrine marker,
 - cliff stair access,
-- Blood Cavern entrance,
+- Blood Cavern entrance and later-unlocked Blood Mirror chamber,
 - offshore torii aligned with the cursed island.
+
+A separate Relic Reliquary is not part of the current approved hub scope; Relic progression and Strand-side management belong to the Forge.
 
 The Keeper, barrier anchor, Boat, and offshore torii should read as one connected departure composition without requiring a large cinematic sequence.
 
