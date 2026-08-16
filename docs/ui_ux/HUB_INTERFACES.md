@@ -4,7 +4,7 @@ title: Hub Interfaces
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-16
 topics:
   - hub-ui
   - boat
@@ -13,12 +13,14 @@ topics:
   - codex
   - bloodwell
   - blood-mirror
+  - relics
   - techniques
   - run-results
 related:
   - CONTENT-STRAND-INTERACTIBLES
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - UI-STRAND-HUD-PROMPTS
 ---
 
@@ -30,40 +32,72 @@ The Strand's interfaces should feel like services embodied in physical stations,
 
 | Interface | Core purpose | Source |
 |---|---|---|
-| Boat | Fast run start and final Blood Aspect confirmation | [Boat](../content/strand/interactibles/BOAT.md) |
-| Forge Bench | Permanent branch planning and combat/tool improvement | [Forge Bench](../content/strand/interactibles/FORGE_BENCH.md) |
+| Boat | Fast run start and final loadout confirmation | [Boat](../content/strand/interactibles/BOAT.md) |
+| Forge Bench | Permanent Prosthetic + Relic progression and management | [Forge Bench](../content/strand/interactibles/FORGE_BENCH.md) |
 | Merchant Stall | Fast buy, compare, and stock evaluation | [Merchant Stall](../content/strand/interactibles/MERCHANT_STALL.md) |
 | Discovery Board | Knowledge progression and codex reference, including discovered Techniques | [Discovery Board](../content/strand/interactibles/DISCOVERY_BOARD.md) |
-| Bloodwell | Three-branch permanent meta progression and revival anchor | [Bloodwell](../content/strand/interactibles/BLOODWELL.md) |
-| Blood Mirror / Trials | Aspect unlocks, previews, repeatable trials, Technique demonstrations, and light mastery upgrades | [Blood Mirror and Trials](BLOOD_MIRROR_TRIALS.md) |
+| Bloodwell | Akio + Run Infrastructure permanent progression and revival anchor | [Bloodwell](../content/strand/interactibles/BLOODWELL.md) |
+| Blood Mirror / Trials | Later-unlocked Aspect progression, previews, repeatable trials, Technique demonstrations, and mastery | [Blood Mirror and Trials](BLOOD_MIRROR_TRIALS.md) |
 | Run Results | Successful-return rewards and reset summary | [Run Results and Strand Return](RUN_RESULTS.md) |
 | Pause / Overview | Current Aspect, five direct Technique slots, supporting Techniques, refinements, Relic, effects, and control review | [Pause and Build Overview](PAUSE_OVERVIEW.md) |
 | Strand HUD | Persistent resources and interaction prompts outside runs | [Strand HUD and Prompts](STRAND_HUD_AND_PROMPTS.md) |
 
-## Boat Aspect selection and run start
+## Permanent upgrade-screen ownership
+
+Current launch scope uses three permanent upgrade interfaces:
+
+- **Bloodwell:** Akio + Run Infrastructure.
+- **Forge Bench:** Prosthetics + Relics.
+- **Blood Mirror:** Blood Aspects after the Mirror unlocks later in the game.
+
+No separate Relic Reliquary interface is required. The old generic weapon-development / weapon-socket Forge interface is removed. The Bloodwell's former fixed three-branch layout is not authoritative; final Akio and Run Infrastructure substructure remains later design.
+
+## Boat loadout confirmation and run start
 
 The Boat screen is a practical departure confirmation with ritual framing.
 
-Required contents after Aspect unlock:
+Required or supported contents after the relevant systems unlock:
 
 - selected Aspect,
-- list of unlocked Aspects,
-- locked-state requirements without spoilers,
-- concise role description,
-- equipped Prosthetic summary when available,
+- concise Aspect role description,
+- equipped Prosthetic summary,
+- equipped Relic summary,
+- five empty direct Technique slots only as a concise run-start expectation when useful,
 - Start Run,
-- Change Aspect,
+- change/loadout navigation where needed,
 - Cancel/back.
 
-Technique slots begin empty and are not preconfigured at the Boat.
+Technique slots begin empty and are not preconfigured at the Boat. There is no reserve Technique slot.
 
-Visual anchors include the Boat lantern, dark timber, wet rope, mist crossing, and compact Aspect cards or icons. Before Aspect unlock, the screen may remain minimal.
+Visual anchors include the Boat lantern, dark timber, wet rope, mist crossing, and compact loadout summaries. Before Aspect unlock, the screen may remain minimal.
+
+## Bloodwell
+
+The Bloodwell must clearly separate its two approved progression categories:
+
+- **Akio**
+- **Run Infrastructure**
+
+Run Infrastructure is one umbrella for approved permanent improvements to Rest support, Shrine support, rewards, routing/run conditions, regional transitions, and related expedition support. The interface should not present these as unrelated standalone upgrade stations.
+
+Exact node layout, branch names, values, rank counts, and costs remain later detailed design.
+
+## Forge Bench
+
+The Forge interface must clearly separate:
+
+- **Prosthetics** — the locked shallow linear tool paths,
+- **Relics** — persistent collection, equipped state, mastery/progression, and permanent upgrade management.
+
+Sharing a screen does not imply identical currencies or progression structures. The Forge must not show the retired generic weapon tree, weapon sockets, or alternate weapon classes.
 
 ## Blood Mirror and Aspect trials
 
 The Blood Mirror presents self-confrontation rather than shopping or a generic skill tree.
 
-Required contents:
+The **Blood Mirror begins locked**. The interface needs a sealed/unavailable state that can later transition into the full Aspect progression/trial interface after campaign/onboarding unlock.
+
+Unlocked contents may include:
 
 - Aspect list,
 - trial categories,
@@ -71,13 +105,11 @@ Required contents:
 - reward preview,
 - Tier I-IV preview,
 - standardized trial loadout where applicable,
-- permanent upgrade ranks,
+- permanent Aspect progression ranks,
 - Technique-pool unlock state where applicable,
 - completed and mastered states.
 
-The screen uses sparse black stone, reflective water, blood-mineral light, distorted player reflection, and Aspect silhouettes. The data model must support future boss rematches or challenge ladders without rebuilding the interface foundation.
-
-Technique demonstration cards must read as temporary trial conditions and must not resemble a persistent pre-run loadout.
+The screen uses sparse black stone, reflective water, blood-mineral light, distorted player reflection, and Aspect silhouettes. Technique demonstration cards must read as temporary trial conditions and must not resemble a persistent pre-run loadout.
 
 ## Shared requirements
 
@@ -93,14 +125,14 @@ Technique demonstration cards must read as temporary trial conditions and must n
 ## Visual differentiation
 
 - **Boat:** dark timber, wet rope, lantern threshold, compact confirmation.
-- **Forge:** dark iron, ember accents, sockets, branches, and crafted silhouettes.
+- **Forge:** dark iron, ember accents, mounted tools/artifacts, practical progression categories.
 - **Merchant:** tagged salvage, cloth-backed item cards, stock and price clarity.
 - **Discovery Board:** layered paper, notes, sketches, and partial-discovery states.
-- **Bloodwell:** carved stone, blood-lit channels, sacred progression paths.
-- **Blood Mirror:** black stone, reflective water, sparse framing, blood-mineral light.
+- **Bloodwell:** carved stone, blood-lit channels, sacred Akio / Run Infrastructure progression.
+- **Blood Mirror:** black stone, reflective water, sparse framing, blood-mineral light; sealed/dormant before unlock.
 - **Run results:** restrained return summary tied to Bloodwell reformation.
 - **Pause:** dark minimal overlay and direct current-build hierarchy.
 
 ## Data dependency rule
 
-Final layouts follow documented data fields, progression ownership, currency names, Technique capacity, and state behavior. Interface art must not invent upgrade branches, costs, Aspect behavior, Technique ownership, trial rules, or unlock requirements that remain unresolved.
+Final layouts follow documented data fields, progression ownership, currency names, Technique capacity, and state behavior. Interface art must not invent upgrade branches, costs, Aspect behavior, Technique ownership, trial rules, Relic currency rules, or unlock requirements that remain unresolved.
