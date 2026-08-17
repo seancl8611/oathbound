@@ -42,7 +42,7 @@ The current working Technique roster is complete at qualitative paper-design dep
 - **5 Legendary Techniques**,
 - **10 refinements** that are not counted as separate Techniques.
 
-This produces **50 actual Techniques plus 10 refinements**. Rarity and prerequisite / eligibility rules are approved in `TECHNIQUE_CATALOG.md` and `TECHNIQUES.md`.
+This produces **50 actual Techniques plus 10 refinements**. Rarity, prerequisites, eligibility, three-choice reward-screen composition, region/source quality weighting, replacement/refinement limits, Legendary appearance behavior, and reroll rules now have approved prototype definitions in `TECHNIQUES.md`.
 
 The Relic system is also complete at current qualitative paper-design depth:
 
@@ -54,7 +54,7 @@ The Relic system is also complete at current qualitative paper-design depth:
 - no Relic rarity tiers,
 - Strand-side progression and management at the **Forge Bench** alongside Prosthetics.
 
-Exact Relic acquisition allocation, mastery thresholds, Forge rank presentation, transition swap timing, and numerical values remain later design/playtest work.
+Merchant's Seal currently prototypes a **20% discount on the first purchase in each region**. Other Relic acquisition allocation, mastery thresholds, Forge rank presentation, transition swap timing, and most numerical values remain later design/playtest work.
 
 The eight Prosthetic Forge paths are locked as shallow linear permanent progression.
 
@@ -66,7 +66,7 @@ Broad permanent-upgrade station ownership is also scoped:
 
 Exact permanent-upgrade nodes, values, rank counts, costs, and unlock timing remain later detailed design rather than current full-game scope blockers.
 
-The major-system production-scope audit, all three prototype regional chamber structures, and the first full-route generation model are complete. The active gameplay package remains **full-run integration, rewards, encounters, and pacing**.
+The major-system production-scope audit, all three prototype regional chamber structures, first full-route generation model, Technique offer-generation model, Gold/Shop economy, and survival/recovery/capacity prototype are complete. The active gameplay package remains **full-run integration, rewards, encounters, and pacing**.
 
 Current approved prototype regional structure:
 
@@ -74,9 +74,11 @@ Current approved prototype regional structure:
 - **Yomori:** 10 counted chambers, Twin Maws at Chamber 10, approximately 12–14 active minutes.
 - **Kagutsuchi:** 11 counted chambers, Eclipse Shogun at Chamber 11, approximately 15–17 active minutes.
 
-The full regional baseline is **33 counted chambers**. The route-generation prototype now also defines opening/main/pre-boss branch percentages, room-type weights, regional standard-combat reward weights, expected Technique/Shrine/Shop/Rest/Treasure/miniboss cadence, and fairness safeguards. These are implementation/playtest targets, not immutable final balance values.
+The full regional baseline is **33 counted chambers**. The route-generation prototype defines opening/main/pre-boss branch percentages, room-type weights, regional standard-combat reward weights, expected Technique/Shrine/Shop/Rest/Treasure/miniboss cadence, and fairness safeguards.
 
-The next numerical layer is **Technique offer generation and rarity/source weighting** across standard combat rewards, Shops, Treasure, minibosses, and regional bosses. Gold/Shop economy and remaining detailed reward values follow after that.
+The current economy/survival prototype adds **60/70/80 regional Gold rewards**, a three-item Shop with stable prices, temporary capacity rewards, Rest/Shrine/Treasure/miniboss survival values, regional transition recovery floors, and the Shogun-to-Heart recovery handoff. These values are implementation/playtest targets, not immutable final balance values.
+
+The next reward-value layer is **persistent-resource payouts**: Mist and Scroll quantities, Boss Emblem cadence/ownership, and how permanent-progression rewards compete with immediate run power. Remaining integration then includes regional-boss reward mix, Relic acquisition/swap placement, encounter composition/clear-time tuning, and playable pacing validation.
 
 The successful-run duration target remains approximately **45–50 minutes** in [Run Structure](RUN_STRUCTURE.md).
 
