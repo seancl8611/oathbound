@@ -138,10 +138,15 @@ Relics use persistent collection, individual mastery, and permanent progression 
 
 - one Relic equipped at a time,
 - collection ownership persists,
+- all 10 launch Relics are obtainable before the canonical story ending,
+- acquisition uses **4 guaranteed campaign/Strand + 2 Blood Cavern/challenge + 4 run-discovered Relics**,
+- until the collection is complete, eligible discoveries prioritize undiscovered Relics rather than duplicates,
 - only the equipped Relic gains eligible kill mastery,
 - mastery persists through death, success, and swapping,
 - mastery strengthens the Relic's existing benefit rather than adding unrelated branches,
-- Forge Bench owns Strand-side Relic progression and management.
+- Forge Bench owns Strand-side Relic progression and pre-run equipment management.
+
+Normal in-run Relic swaps occur after Keeper and after Twin Maws. A newly discovered Relic also creates an immediate equip-or-keep decision while being permanently collected either way. Rest rooms, Shops, combat, ordinary rooms, and the pause menu do not provide routine free swapping.
 
 Sharing the Forge does **not** automatically make Scrolls a Relic currency. Exact Relic costs, if any, remain later design.
 
@@ -234,6 +239,7 @@ The following may persist or unlock content but are not separate permanent upgra
 
 - Technique-pool unlocks,
 - Blood Cavern / Blood Mirror trial completion,
+- Relic collection unlocks,
 - Discovery Board and codex progress,
 - Merchant stock/service state where approved,
 - narrative discoveries,
@@ -256,6 +262,8 @@ Heart Bindings are campaign state, not currency, and cannot be spent or lost.
 
 Blood Cavern and Blood Mirror trials may award approved persistent currency, Aspect access/progression, Technique-pool unlocks, cosmetics, lore, mastery marks, or Relic unlocks where assigned.
 
+The launch Relic acquisition model reserves **two permanent first-time Relic unlocks** for authored Blood Cavern / challenge milestones. Repeating those challenges does not create duplicate Relics or repeatable Relic currency.
+
 Trials may not:
 
 - permanently pre-equip run Techniques,
@@ -267,7 +275,7 @@ Trials may not:
 
 Returning Blood reconstructs Akio at the Strand after failed runs and successful Binding completions.
 
-Persistent rewards are saved **when earned**, not only on successful completion. This includes Mist, Scrolls, regional boss materials, Relic mastery, and other explicitly persistent rewards.
+Persistent rewards are saved **when earned**, not only on successful completion. This includes Mist, Scrolls, regional boss materials, Relic mastery, newly discovered Relics, and other explicitly persistent rewards.
 
 A successful Binding return additionally saves Binding progress, clears run-only state, presents results, and triggers relevant hub/codex/Heart updates.
 
@@ -296,8 +304,8 @@ There is no death tax on already-earned persistent resources.
 
 # Current design dependency
 
-Permanent station ownership and the first persistent-resource economy are complete at prototype paper-design depth.
+Permanent station ownership, the first persistent-resource economy, regional-boss current-run rewards, and Relic acquisition/swap architecture are complete at prototype paper-design depth.
 
-Remaining progression work is nested under the owning systems rather than a new architecture question: exact Bloodwell nodes, Blood Mirror nodes, Relic mastery/cost realization, boss-material assignment to selected major upgrades, and final numerical tuning after playtests.
+Remaining progression work is nested under the owning systems rather than a new architecture question: exact Bloodwell nodes, Blood Mirror nodes, Relic mastery/cost realization, boss-material assignment to selected major upgrades, exact individual Relic-to-source sequencing inside the approved acquisition buckets, and final numerical tuning after playtests.
 
-The active full-run design dependency is now regional-boss current-run reward composition and Relic acquisition / transition-swap placement.
+The active full-run design dependency is now the **consumables include/cut decision**, followed by encounter composition and pacing validation.
