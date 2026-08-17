@@ -4,11 +4,12 @@ title: The Eclipse Shogun — Boss Encounter
 category: content
 status: draft
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - area-3
   - eclipse-shogun
   - regional-boss
+  - boss-material
   - heart-bindings
   - campaign-clears
   - chamber-11
@@ -16,6 +17,7 @@ related:
   - LORE-ECLIPSE-SHOGUN
   - CONTENT-AREA3-TRUE-FINAL-HEART
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-ITEMS-REWARDS
   - ART-MILESTONE-06
 ---
 
@@ -37,14 +39,14 @@ The fight should expose his false mastery: he can direct mutation and retain dis
 
 ## Repeated relationship
 
-The encounter supports a campaign-level progression rather than resetting narratively after each run:
+The encounter supports campaign-level progression rather than narratively resetting after each run:
 
 1. dismissal,
 2. fascination with Akio's returns and controlled Aspects,
-3. recognition and recruitment through the escaped royal bloodline,
+3. recognition/recruitment through the escaped royal bloodline,
 4. fear and hatred after Akio rejects him and attacks the Heart.
 
-Exact dialogue, branching, voice acting, and cinematic presentation remain part of the narrative-presentation scope question.
+Exact dialogue, branching, voice acting, and cinematic presentation remain part of the narrative-delivery scope question.
 
 ## Character direction
 
@@ -54,60 +56,81 @@ The Shogun should read as:
 - composed before theatrical,
 - disciplined before brutal,
 - elegant before massive,
-- and deliberately inhuman rather than accidentally ruined.
+- deliberately inhuman rather than accidentally ruined.
 
-Kokushibo from *Demon Slayer* remains a high-level reference for aristocratic menace, restraint, martial authority, and controlled escalation. The final design must remain original and must not copy protected anatomy, eyes, costume, weapon, motifs, effects, silhouette, attacks, or exact mannerisms.
+Kokushibo from *Demon Slayer* remains a high-level reference for aristocratic menace, restraint, martial authority, and controlled escalation. The final design must remain original and must not copy protected anatomy, costume, weapon, motifs, effects, silhouette, attacks, or exact mannerisms.
 
 ## Encounter-design boundary
 
-The previous three-phase structure and the labels `Sovereign Duelist`, `Tyrant of the Wellspring`, and `Eclipse Revealed` remain working encounter concepts only.
-
-The exact phase count, phase names, weapon, attacks, transformation anatomy, arena-control rules, posture behavior, transitions, animation list, and VFX requirements are not locked during the current full-game scoping pass.
+The exact phase count, phase names, weapon, attacks, transformation anatomy, arena-control rules, posture behavior, transitions, animation list, and bespoke VFX requirements are not locked during the current full-game scoping pass.
 
 Later encounter design must preserve these boundaries:
 
-- the Shogun begins as a composed sovereign and elite martial opponent,
-- Beast Blood use becomes increasingly visible and mechanically important,
-- the climax is a deliberate inhuman escalation,
-- the Shogun remains intelligent and recognizable,
-- the fight must remain readable within Oathbound's posture, parry, movement, and arena-pressure systems,
-- the fight cannot assume a specific Aspect Tier, Blood Art, Technique family, Legendary, Relic, Prosthetic upgrade level, or exact reward history,
-- and the final design must remain distinct from Akio, the Eternal Swordsman, Keeper of the Gate, and the true-final Heart.
+- begins as a composed sovereign / elite martial opponent,
+- Beast Blood becomes increasingly visible and mechanically important,
+- climax is a deliberate inhuman escalation,
+- Shogun remains intelligent and recognizable,
+- fight remains readable within posture/parry/movement/arena-pressure systems,
+- fight cannot assume a specific Aspect Tier, Blood Art, Technique family, Legendary, Relic, Prosthetic upgrade level, or exact reward history,
+- final design remains distinct from Akio, Eternal Swordsman, Keeper of the Gate, and the true-final Heart.
+
+## Persistent defeat reward
+
+Every completed Eclipse Shogun kill awards:
+
+- **25 Mist**,
+- exactly **1 Shogun-specific regional boss material**.
+
+The material persists immediately and is retained through the Binding ritual / Strand return. It is a low-count secondary requirement for selected late/high-end permanent upgrades rather than general currency. Exact player-facing item naming is deferred.
+
+The Shogun does not create or award a generic Boss Emblem.
 
 ## Arena and post-boss handoff
 
 The fight occurs in a throne-space, ritual sanctum, or equivalent royal arena near the route to the Heart chamber. All Kagutsuchi routes converge here after the Chambers 8–10 final-Court stretch.
 
-The arena must support:
+The arena must support clean martial readability, later Beast Blood escalation, a clear defeat state, and an unmistakable route opening beyond the Shogun.
 
-- clean martial readability,
-- later Beast Blood escalation,
-- a clear defeat state,
-- and an unmistakable route opening beyond the Shogun.
+### First six successful clears
 
-During the first six successful clears, the post-boss sequence leads to the extraction apparatus and Heart Binding ritual. During the seventh story run, it leads directly to the Heart encounter without ending the current build.
+Shogun defeat leads to the extraction apparatus / Heart Binding ritual. The run ends through Akio's dissolution and Strand reconstruction. The Shogun grants his persistent Mist/material rewards but no additional ordinary current-run power because the run is ending.
 
-The Shogun does not grant ordinary current-run power during the first six Binding clears because those runs end through the Binding ritual. Exact recovery and resource carryover before the seventh-run Heart continuation remain later encounter-integration work.
+### Seventh story run
+
+The same active build continues directly toward the true-final Heart.
+
+The approved Shogun→Heart handoff restores:
+
+- **30% max Health**,
+- **50% max Spirit**,
+
+then enforces minimum Heart-entry floors of:
+
+- **40% max Health**,
+- **60% max Spirit**.
+
+This is a partial reset, not a full refill. Blood is not automatically refilled unless later Heart encounter integration explicitly changes that rule.
 
 ## Reconstruction and campaign role
 
 The Shogun reconstructs between the first six successful clears. Existing Beast Blood is sufficient and does not require a new dose or physical channel from the Heart.
 
-The base game does not require a different Shogun fight after every destroyed Binding. Limited dialogue, presentation, VFX intensity, or reconstruction instability may vary if later approved.
+The base game does not require a different Shogun fight after every destroyed Binding. Limited dialogue/presentation/VFX intensity or reconstruction instability may vary if later approved.
 
-Destroying the Heart makes Beast Blood inert, stops the Shogun's reconstruction, and causes his permanent death.
+Destroying the Heart makes Beast Blood inert, stops Shogun reconstruction, and causes his permanent death.
 
 ## Production boundary
 
-The Shogun requires a dedicated concept and encounter-design review before final Milestone 6 quotation.
+The Shogun requires dedicated concept and encounter-design review before final Milestone 6 quotation.
 
 Current production may scope:
 
 - one principal Area 3 boss fixed at Chamber 11,
-- a regal humanoid starting identity,
+- regal humanoid starting identity,
 - controlled Beast Blood escalation,
 - at least one materially inhuman later state,
-- a royal arena,
-- and the post-boss handoff to the Heart chamber.
+- royal arena,
+- persistent boss-material reward representation,
+- post-boss handoff to the Heart chamber.
 
-Final character sheets, phase-specific sprite sets, animation counts, bespoke VFX, and arena states must wait for the approved encounter design.
+Final character sheets, phase-specific sprite sets, animation counts, bespoke VFX, and arena states wait for approved encounter design.
