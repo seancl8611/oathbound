@@ -4,139 +4,161 @@ title: Assistant Update Workflow
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-23
+last_reviewed: 2026-08-17
+topics:
+  - assistant-workflow
+  - repository-search
+  - github-connector
+  - authority
+  - documentation-maintenance
 ---
 
 # Assistant Update Workflow
 
-This repository is organized so an assistant can update Oathbound without relying on one oversized design document or repeating the same rule across many files.
+This repository is organized so an assistant can update Oathbound without relying on one oversized design document or duplicating rules across many files.
 
-## Read order
+# Fast read order
 
-For broad design work, begin with:
+For broad design work:
 
-1. `docs/overview/GAME_OVERVIEW.md`
-2. `docs/overview/FULL_GAME_SCOPE.md`
-3. `docs/_meta/OPEN_QUESTIONS.md`
-4. `docs/_meta/SOURCE_OF_TRUTH.md`
-5. the authoritative file for the affected subject
+1. `docs/_meta/OPEN_QUESTIONS.md` — what is actually unresolved now.
+2. `docs/_meta/SOURCE_OF_TRUTH.md` — which file owns the subject.
+3. `docs/_meta/TERMINOLOGY.md` — canonical and deprecated search terms.
+4. the authoritative file for the affected subject.
+5. `docs/_meta/DOCUMENT_MAP.md` — likely dependent files only when needed.
 
-Use `DOCUMENT_MAP.md` only to seed likely dependencies. Live repository search remains required.
+Read `overview/GAME_OVERVIEW.md` and `overview/FULL_GAME_SCOPE.md` when the request changes game-wide identity, production scope, content counts, or release shape. Do not reread them for every narrow system edit.
 
-## Design-status discipline
+# Design-status discipline
 
-Before treating any statement as settled, check both the document frontmatter and the wording around the statement.
+Before treating a statement as settled, check the owning document and its wording.
 
-- **Approved:** authoritative only to the depth explicitly approved in the file.
-- **Draft:** working material that may be revised, replaced, combined, or cut.
-- **Candidate, likely, proposed, current direction, working, illustrative, or example:** not approved unless the authoritative file explicitly says otherwise.
-- A detailed mechanic, named roster, count, table, trial, asset list, or production note is not automatically approved because it is specific.
-- A dependent file cannot promote a draft statement into a locked decision.
-- Historical commits and decision logs explain prior thinking but do not override current status.
+- **locked** — explicit canon/rule not to change casually.
+- **approved** — accepted current design to the depth stated.
+- **draft** — working direction with unresolved details.
+- words such as `candidate`, `working`, `proposed`, `illustrative`, or `example` do not become approved merely because they are specific.
+- dependent summaries cannot promote draft material into canon.
+- historical logs explain prior decisions but never override current authorities.
 
-When the user reopens a prior decision, downgrade the authoritative status and correct dependent summaries before continuing deeper design.
+When the user explicitly reopens a decision, update the authority and affected summaries rather than preserving two live versions.
 
-## Prerequisite check before proposing the next question
+# Required update process
 
-Before asking or answering a detailed design question:
+1. Identify the authority in `SOURCE_OF_TRUTH.md`.
+2. Read the authority before editing.
+3. Build a search set from:
+   - canonical terms,
+   - synonyms,
+   - deprecated terminology,
+   - proper names,
+   - likely dependent systems.
+4. Find relevant dependencies.
+5. Update the authority first.
+6. Update only dependent files whose meaning or scope actually changed.
+7. Recheck for stale wording and contradictions.
+8. Update `OPEN_QUESTIONS.md` only when unresolved production-relevant work changes.
+9. Record major locked direction in decision history.
+10. Update milestones/assets only when production scope changes.
+11. Use a focused branch and PR.
 
-1. identify its parent decision,
-2. confirm that the parent decision is approved,
-3. confirm that the roster, count, identity, or system boundary it assumes is approved,
-4. and check `OPEN_QUESTIONS.md` for an earlier dependency.
+# Repository-search fallback
 
-Do not design a named character, Aspect, Tier, ability, trial, Technique interaction, or asset package as final while its identity, inclusion, or parent system remains draft.
+GitHub code search may be unavailable or unindexed for this repository. **Do not treat an empty code-search result as proof that no references exist.**
 
-When several questions remain, present the earliest unresolved dependency as one concise question. Do not answer a broad package through an unnecessarily long speculative design.
+When search is unavailable:
 
-## Required process
+1. use `SOURCE_OF_TRUTH.md` to identify the owner,
+2. use canonical/deprecated terms in `TERMINOLOGY.md`,
+3. use `DOCUMENT_MAP.md` to seed likely dependencies,
+4. list the relevant directory when needed,
+5. directly fetch the authority and likely dependent files,
+6. inspect the complete branch-vs-main changed-file list / PR patch before merge,
+7. state in the PR audit that validation used direct reads because live code search was unavailable.
 
-1. Identify the authoritative file in `SOURCE_OF_TRUTH.md`.
-2. Read that file in full.
-3. Search for the current term, older wording, synonyms, affected names, and likely gameplay, lore, UI, art, and milestone consequences.
-4. Classify each match as authoritative definition, dependent summary, production scope, contractor export, historical record, or unrelated.
-5. Update the authoritative file first.
-6. Update only dependent files whose meaning or scope changes.
-7. Search again for contradictions, stale status claims, deprecated terminology, and missed references.
-8. Preserve stable document IDs.
-9. Update the asset inventory and milestone files only when production scope changes.
-10. Use a focused branch and pull request unless a direct commit is explicitly requested.
+This fallback is the approved connector-compatible workflow. It is better to make a bounded, explicit direct-read audit than to claim repository-wide coverage from an unavailable index.
 
-## Question classification
+# Information ownership
 
-Before adding a question, classify the missing decision:
-
-- **Current production-scope decision:** changes initial-release content counts, required systems, authored presentation, interfaces, milestones, or quotation boundaries. Track it in `OPEN_QUESTIONS.md`.
-- **Later system or encounter design:** defines routing, room composition, movesets, detailed effects, or feature behavior that can be resolved when that feature is designed. Record it only in the owning file when useful.
-- **Playtest or balance variable:** depends on real combat feel, timing, economy, probability, or numerical tuning. Keep it out of the top-level tracker.
-- **Resolved direction:** update the authority and remove the question.
-- **Deliberate mystery or creative boundary:** preserve it as canon rather than treating it as missing information.
-
-A question is not important merely because it can be asked. It belongs in the tracker only when answering it is necessary to define the initial game or plan its production.
-
-## Question priority
-
-Order current questions by dependency:
-
-1. foundational system purpose, roster, count, and identity decisions,
-2. content inventories that other systems consume,
-3. unlock, progression, onboarding, and hub scope built around those inventories,
-4. authored narrative and presentation packages,
-5. release-completion and postgame scope.
-
-Do not prioritize a child mechanic above an unresolved parent identity or roster decision simply because the child mechanic is easier to describe.
-
-## Question hygiene
-
-`OPEN_QUESTIONS.md` contains only unresolved decisions that materially affect current scope, content volume, production planning, or authored presentation.
-
-- Remove a question once its authoritative answer is recorded.
-- Do not keep resolved-question summaries in the tracker.
-- Do not promote exact tuning values into top-level scope questions.
-- Keep frame counts, cooldowns, probabilities, attack timings, and playtest values in the owning gameplay or encounter file.
-- Keep exact room counts, route topology, branch frequency, and miniboss frequency out of the tracker until prototyping proves they create a production-scope change.
-- Combine overlapping questions around the production decision they block.
-- Remove subquestions already answered by authoritative files.
-- Preserve deliberate mysteries as canon boundaries rather than treating them as problems that must be answered.
-
-## Information ownership
-
-- Overview files summarize the current game and production shape.
+- Overview files summarize game/production shape.
 - Gameplay files own mechanics and system rules.
-- Lore files own fiction and canon.
+- Lore files own fiction/canon.
 - Character files own recurring named-character identity.
 - Content files own regional rosters and encounter identity.
-- UI files own interaction and presentation behavior.
-- Art files own visual requirements and technical delivery.
+- UI files own interaction/presentation behavior.
+- Art files own visual requirements/technical delivery.
 - Milestone files own outsourcing scope and dependencies.
-- `OPEN_QUESTIONS.md` owns only the current unresolved design agenda.
+- `OPEN_QUESTIONS.md` owns only unresolved design priorities.
 
-When two files conflict, the authority assigned in `SOURCE_OF_TRUTH.md` wins. Correct the dependent summary rather than preserving both versions.
+When files conflict, the authority in `SOURCE_OF_TRUTH.md` wins. Fix the dependent summary rather than preserving parallel definitions.
 
-## Depth rule
+# Duplication rule
 
-Resolve a question only to the level needed for the current design stage.
+Do not copy full definitions into overview, roadmap, milestone, question-tracker, or history files.
 
-A high-level scope pass should establish identity, purpose, boundaries, dependencies, and required content volume. It should not invent final attack lists, exact numerical tuning, frame counts, encounter timings, route probabilities, or final scripts before their design and production stages.
+- authority = complete rule,
+- overview = enough to understand current shape,
+- milestone = what must be produced,
+- question tracker = unresolved decisions only,
+- history = concise record of what changed.
 
-## Duplication rule
+Prefer links and short summaries over duplicate tables.
 
-Do not copy complete definitions into overview, milestone, or tracker files.
+# Question hygiene
 
-- Authoritative files contain the full rule.
-- Overview files contain only what is needed to understand the game.
-- Milestones contain only what must be produced and what must be locked before quotation.
-- Related files should link to the authority instead of maintaining parallel versions.
+Before adding a question, classify it:
 
-## Pull-request audit
+- **production-scope decision** — belongs in `OPEN_QUESTIONS.md`,
+- **later system/encounter design** — belongs in its owning file,
+- **playtest/balance variable** — stays in its owning file,
+- **resolved direction** — remove from the tracker,
+- **deliberate mystery/boundary** — preserve as canon, not a question.
 
-A substantial documentation pull request should state:
+Do not turn every numerical value, room composition, attack timing, rarity percentage, upgrade cost, or UI detail into a top-level agenda item.
 
-- the requested change,
-- authoritative files changed,
-- major dependent files reviewed,
+# Dependency order
+
+When several design questions remain, prefer:
+
+1. system purpose / roster / identity,
+2. content inventory consumed by other systems,
+3. unlock / progression / hub ownership,
+4. full-run integration and reward flow,
+5. narrative delivery,
+6. release/postgame scope,
+7. final tuning after playable evidence.
+
+Do not design a child feature as final while its parent system is unresolved.
+
+# Metadata and searchability
+
+For a material update:
+
+- keep stable document IDs,
+- update `last_reviewed`,
+- add a small number of reusable `topics` when they improve discovery,
+- use canonical terms from `TERMINOLOGY.md`,
+- do not add large alias/keyword blocks that duplicate the body,
+- remove stale `next task` wording when a dependency is resolved.
+
+When introducing a new recurring concept, update `TERMINOLOGY.md` and `SOURCE_OF_TRUTH.md` only if they improve future discovery/ownership.
+
+# Pull-request audit
+
+A substantial documentation PR should state:
+
+- requested design change,
+- authorities changed,
+- major dependencies reviewed,
+- stale/superseded material removed,
 - production-scope impact,
-- questions created, combined, resolved, or deferred,
-- and whether outdated references remain.
+- unresolved consequences / next dependency,
+- search method used, including whether code search was unavailable.
 
-Avoid listing every search term or unchanged file unless it materially helps review.
+Before merge, inspect:
+
+- branch-vs-main changed filenames,
+- key authority patches,
+- review threads,
+- status checks if any.
+
+Do not claim a full repository search when the search index was unavailable.
