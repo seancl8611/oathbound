@@ -4,261 +4,86 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
+topics:
+  - changelog
+  - documentation-history
 ---
 
 # Documentation Changelog
 
-## 2026-08-16 — Technique offer, Gold economy, and survival prototype lock
+This is a concise record of major documentation passes. Detailed file-level history remains available through Git commits and merged pull requests.
 
-- Locked the first Technique offer-generation model around **3-choice reward screens** built through eligibility filtering, Direct/flex composition, rarity/source weighting, specific selection, and final validation.
-- Added build-stage Direct-offer minimums and made Hushiro Chamber 1 present three Direct choices from distinct slots/families where possible.
-- Locked standard-combat Common/Uncommon/Rare Technique weighting at **55/35/10 Hushiro**, **35/45/20 Yomori**, and **20/45/35 Kagutsuchi**.
-- Added stronger Technique quality weighting for Shops, Treasure, minibosses, and regional bosses; added separate Legendary appearance checks; limited refinement/replacement/Cross-family/Legendary cards to one each per screen; and defined reroll behavior.
-- Locked the first Gold economy around **60/70/80 Gold** standard rewards by region, minor 5–10 Gold drops, three-item Shops, stable regional prices, all-affordable-item purchasing, no Shop-inventory reroll, and dead-late-Gold suppression.
-- Locked prototype Shop prices including **100 Gold Technique rewards** and **140 Gold Relic opportunities**.
-- Set Merchant's Seal to a prototype **20% discount on the first purchase in each region**.
-- Locked percentage-based survival values without choosing final base Health/Spirit totals: standard recovery, Rest, below-full Shrine support, normal/premium temporary capacity, Treasure survival rewards, and miniboss capacity rewards.
-- Locked Keeper/Twin Maws transition recovery at **20% Health / 35% Spirit** with **35% Health / 50% Spirit** entry floors.
-- Locked the seventh-story-run Shogun→Heart handoff at **30% Health / 50% Spirit** with **40% Health / 60% Spirit** entry floors.
-- Corrected the remaining live Technique-reward UI reference to superseded Crimson `Burst`; current Crimson language is Vulnerable / backstab / direct Health damage.
-- Advanced the next reward-value dependency to **persistent-resource payout design** for Mist, Scrolls, and Boss Emblems.
-- Updated Technique, Technique UI, Items/Rewards, Run Structure, Corruption/Shrines, Relics, gameplay status, Full Game Scope, Production Roadmap, Open Questions, and Decision Log for consistency.
+## 2026-08-17 — Persistent resources, boss materials, and repository tightening
 
-## 2026-08-16 — Full-route branch and reward-generation prototype lock
+- Removed the generic **Boss Emblem** currency from current design.
+- Locked Mist/Scroll persistent payout targets by region, Treasure, miniboss, and regional boss source.
+- Set ordinary enemy/breakable Mist/Scroll random drops to zero for the first prototype.
+- Locked persistent rewards as saved when earned with no death tax or success-only banking requirement.
+- Added three unique low-count regional boss-material families: one each for Keeper, Twin Maws, and Eclipse Shogun; exactly one material drops per boss kill.
+- Defined boss materials as secondary requirements for a small number of major permanent upgrades, generally using quantities of 1–3; exact player-facing names remain deferred.
+- Locked the first Prosthetic Scroll cost curve at 2 / 4 / 6 sequential Scrolls, 66 total across the current 19 upgrades.
+- Added Mist cost calibration bands for later permanent-tree authoring.
+- Updated boss encounter docs, reward art, results presentation, Full Game Scope, roadmap, gameplay index, terminology, source-of-truth ownership, and progression/reward authorities.
+- Reduced duplicated live rules in `PROGRESSION.md`, `FULL_GAME_SCOPE.md`, and other summaries.
+- Rebuilt `OPEN_QUESTIONS.md` as an unresolved-only agenda instead of a duplicate approved-design database.
+- Tightened `ASSISTANT_WORKFLOW.md`, `DOCUMENT_MAP.md`, and `UPDATE_PROTOCOL.md` with an explicit direct-read fallback for unavailable GitHub code search.
+- Condensed Decision Log / Changelog so detailed iteration remains in Git rather than live design summaries.
+- Advanced the next full-run dependency to regional-boss current-run rewards and Relic acquisition / limited swap placement.
 
-- Locked the first controlled-procedural generation values for the complete 33-chamber regional route.
-- Set branch frequency by chamber band: opening **50% one exit / 50% two exits**; main **25% one exit / 70% two exits / 5% three exits**; pre-boss/final **45% one exit / 55% two exits**.
-- Limited three-exit choices to one per region and main stretches only; targeted roughly **17–19 multi-exit decisions** per normal successful run.
-- Locked base room-type weights by band: opening **82/6/4/2/6**, main **70/8/7/7/8**, pre-boss/final **58/5/13/13/11** for Combat/Shrine/Rest/Shop/Treasure.
-- Kept minibosses as deliberate optional route injections and regional bosses as fixed endpoints rather than percentage rolls.
-- Locked prototype standard-combat reward weights by region, including Technique at **36% Hushiro / 32% Yomori / 28% Kagutsuchi** with later regions shifting more weight toward recovery, capacity, and rerolls.
-- Excluded Relics from the ordinary combat-reward table and set consumables to **0% ordinary primary room-reward weight** for the first prototype.
-- Set working cadence targets of roughly **20–22 standard combat chambers**, **7–9 Technique pickups for a Technique-invested run**, **4–5 visible Shrine opportunities**, and approximately **1–2 normally visited Shops, Rests, Treasures, and minibosses**.
-- Added controlled-generation safeguards against duplicate normal two-door primary rewards, long forced corridors, back-to-back ordinary safe-service rooms, dead late Gold, miniboss routes without a normal alternative, and missing guaranteed regional opportunities.
-- Advanced the next run-design dependency to **Technique offer generation and rarity/source weighting**, followed by Gold/Shop economy and detailed reward-value tuning; those layers were subsequently approved later on 2026-08-16.
-- Updated Run Structure, Items and Rewards, gameplay status, Full Game Scope, Production Roadmap, Open Questions, and Decision Log to remove stale branch/reward-weighting-open language.
+## 2026-08-16 — Full-route generation, Technique offers, economy, and survival
 
-## 2026-08-16 — Kagutsuchi and full three-region run-structure lock
+- Locked the complete **33-chamber** regional route: 12 Hushiro / 10 Yomori / 11 Kagutsuchi.
+- Locked one optional miniboss opportunity per region and pre-boss preparation safeguards.
+- Added first branching probabilities, room-type weights, regional standard-Combat reward weights, and route fairness safeguards.
+- Added the first three-choice Technique offer generator with regional/source rarity weighting and replacement/refinement/Cross-family/Legendary rules.
+- Added Gold/Shop prototype: 60/70/80 regional Gold rewards, three-item Shops, stable prices, Technique/Relic purchase anchors, dead-late-Gold suppression.
+- Added survival/recovery/capacity prototype and regional transition / Shogun-to-Heart recovery floors.
+- Updated dependent regional, UI, scope, roadmap, and history docs for consistency.
 
-- Locked **Kagutsuchi** at 11 counted prototype chambers: Court entrance 1–2, main Court 3–7, final Court / Shogun approach 8–10, Eclipse Shogun at 11.
-- Gave Kagutsuchi one optional miniboss opportunity during Chambers 4–7, selecting Blood Lotus or Eternal Swordsman for that run.
-- Guaranteed the Kagutsuchi route network at least one Shrine, Shop, Rest, miniboss opportunity, two Technique-reward opportunities, and one meaningful final-preparation opportunity across Chambers 9–10.
-- Set Kagutsuchi's current active-time target at approximately 15–17 minutes.
-- Kept Heart approach, Binding-completion spaces, and the true-final Heart outside Kagutsuchi's 11 counted chambers.
-- Locked the current complete regional prototype baseline at **33 counted chambers total: 12 Hushiro + 10 Yomori + 11 Kagutsuchi**.
-- Preserved the first six Shogun clears as Binding-completion runs and the seventh story run as a direct Shogun-to-Heart continuation with the same active build.
-- Advanced the active run-design dependency from regional architecture to provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values. The first prototype for that layer was subsequently approved later on 2026-08-16.
-- Updated Run Structure, Area 3 overview, shared room/reward rules, full-game scope, roadmap, gameplay status, Milestone 6, open questions, and decision history to remove contradictory Area-3-count-deferred language.
+## 2026-08-16 — Permanent progression architecture
 
-## 2026-08-16 — Area 1 / Area 2 prototype run-structure lock
+- Locked three permanent upgrade stations:
+  - Bloodwell → Akio + Run Infrastructure,
+  - Forge Bench → Prosthetics + Relics,
+  - later-unlocked Blood Mirror → Blood Aspects.
+- Removed the separate Relic Reliquary, old generic weapon-development Forge, and fixed Bloodwell three-branch structure from live scope.
+- Defined Run Infrastructure as one umbrella rather than multiple permanent room/reward trees.
 
-- Locked the Hades-like regional routing model around fixed regional endpoints, chamber-index eligibility bands, weighted procedural contents, previewed route choices, and hard minimum-opportunity safeguards.
-- Locked **Hushiro** at 12 counted prototype chambers: opening 1–3, main 4–8, pre-boss 9–11, Keeper of the Gate at 12.
-- Made Hushiro Chamber 1 fixed combat followed by a Technique reward.
-- Gave Hushiro one optional miniboss opportunity during Chambers 5–8, selecting Village Ogre or The Collector for that run.
-- Guaranteed the Hushiro route network at least one Shrine, Shop, Rest, miniboss opportunity, and three Technique-reward opportunities total including Chamber 1.
-- Locked **Yomori** at 10 counted prototype chambers: opening 1–2, main 3–7, pre-boss 8–9, Twin Maws at 10.
-- Gave Yomori one optional miniboss opportunity during Chambers 4–7, selecting The Embered Pilgrim or Rotwood Host for that run.
-- Guaranteed the Yomori route network at least one Shrine, Shop, Rest, miniboss opportunity, and two Technique-reward opportunities.
-- Defined guaranteed opportunities as route-network availability rather than mandatory visits.
-- Kept post-boss regional transitions outside counted chamber totals and scoped them as short safe reward/recovery/preparation connectors rather than secondary hubs.
-- Set current active-time targets at approximately 14–16 minutes for Hushiro and 12–14 minutes for Yomori.
-- Preserved exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Kagutsuchi's chamber budget for the continuing integration/playtest pass. Kagutsuchi's chamber budget and the first branch/reward prototype were subsequently locked later on 2026-08-16.
-- Marked the major-system production-scope audit complete and advanced the active design dependency to Kagutsuchi's route structure, then complete three-region pacing validation.
-- Updated Area 1/2 overviews, room/reward authorities, full scope, roadmap, gameplay index, production milestones, open questions, and decision history to remove contradictory all-counts-deferred language.
-- Corrected the remaining Milestone 2 reference to the superseded four-slot/reserve Technique UI.
+## 2026-08-15 — Relic mastery and Prosthetic Forge progression
 
-## 2026-08-16 — Permanent progression station scope and repository consistency pass
+- Locked kill-earned persistent Relic mastery for the equipped Relic.
+- Locked eight shallow linear Prosthetic paths with 19 total upgrades.
+- Kept Scrolls as the primary Prosthetic Forge currency.
+- Removed Prosthetic Techniques from the run-build system.
 
-- Locked the current permanent upgrade-station architecture at full-game scope level:
-  - **Bloodwell → Akio + Run Infrastructure**.
-  - **Forge Bench → Prosthetics + Relics**.
-  - **Blood Mirror → Blood Aspects**, with the Mirror locked at the beginning and unlocked later through campaign/onboarding progression.
-- Defined **Run Infrastructure** as one Bloodwell-owned umbrella for Rest support, Shrine support, reward possibilities, routing/run conditions, regional transitions, and related expedition support rather than separate permanent upgrade trees.
-- Preserved Relic kill-earned mastery while moving Strand-side Relic progression/management into the Forge; sharing the Forge does not require Relics to use Scrolls or Prosthetic-style linear paths.
-- Removed the separate Relic Reliquary from current approved hub scope.
-- Superseded the older generic weapon-development / weapon-socket Forge model because Blood Aspects now own run weapon identity.
-- Superseded the fixed Bloodwell `Way of Steel / Way of Secrets / Way of Vows` structure; exact Akio and Run Infrastructure nodes remain later design.
-- Added the Blood Mirror's opening locked state without choosing the exact unlock event.
-- Removed stale live **Crimson Burst** references from Blood Cavern trial documentation.
-- Removed remaining live four-active-plus-reserve Technique wording from the Boat and dependent UI/production files.
-- Corrected Relic persistence wording in run/pause documentation.
-- Advanced overview, roadmap, gameplay index, art inventory, milestones, and open questions past already-completed Prosthetic/Technique work.
-- Set the next top-level design task to a **major-system production-scope audit** before full-run integration.
+## 2026-08-14 — Launch Technique and Relic rosters
 
-## 2026-08-15 — Relic mastery and Prosthetic Forge progression lock
+- Locked 50 actual Techniques + 10 refinements and their rarity/prerequisite structure.
+- Locked 10 Relics, one equipped slot, persistent collection/mastery/progression, and no Relic rarity tiers.
 
-- Locked Relic progression around persistent individual mastery earned from eligible enemy kills while the Relic is equipped; only the equipped Relic advances.
-- Kept Relic mastery focused on strengthening the existing Relic benefit rather than branching into unrelated mechanics.
-- Locked the eight launch Prosthetics as complete when unlocked, with shallow linear Forge progression that improves existing properties only.
-- Locked **19 permanent Prosthetic upgrades** across the eight tools; two upgrades are the default and a third is used only where the base tool already has another meaningful existing property to improve.
-- Kept Scrolls as the primary persistent currency for Prosthetic Forge development.
-- Removed remaining Prosthetic-Technique production guidance and kept Prosthetic progression separate from the run Technique system.
-- Advanced the design dependency from Prosthetic progression to the wider Strand / permanent-progression package.
+## 2026-08-12 to 2026-08-13 — Crimson redesign and direct Technique matrix
 
-## 2026-08-14 — Relic system and launch roster lock
+- Superseded Crimson Burst with universal genuine backstabs plus Crimson Vulnerable/direct-Health specialization.
+- Completed the 25-Technique direct five-by-five matrix.
 
-- Locked Relics as a small supporting system with **one equipped slot**, persistent collection ownership, and run-active benefits.
-- Removed the provisional Common / Rare / Legendary Relic rarity model; Relics now have **no rarity tiers**.
-- Locked the current launch roster at **10 Relics**: Traveler's Coin, Merchant's Seal, Iron Prayer Bead, Spirit Tassel, Execution Bead, Wayfarer's Charm, Last Oath, Unbroken Cord, Scribe's Lens, and Blood Moon Shard.
-- Changed **Wayfarer's Charm** to restore a small amount of Health whenever Akio enters a room.
-- Changed **Last Oath** so its once-per-run lethal-damage protection leaves Akio at **25 HP**.
-- Preserved exact acquisition-source allocation, Relic mastery/rank thresholds, swap timing, and numerical balance as later content / playtest work.
-- Registered a dedicated `RELICS.md` authority and synchronized reward, progression, scope, roadmap, gameplay index, item-art, and asset-inventory dependencies.
-- Advanced the next major gameplay-system design area to **permanent Prosthetic / Forge progression** for the eight launch tools.
+## 2026-08-09 to 2026-08-11 — Technique architecture rebuild
 
-## 2026-08-14 — Technique roster, rarity, and eligibility lock
+- Replaced the four-active-plus-reserve Technique model with five direct action slots plus slotless supporting growth.
+- Stabilized Echo, Rupture, Seal, Rift, and later Crimson family identities.
+- Removed Prosthetic Techniques and moved tool progression fully to the persistent Forge.
 
-- Completed the current working launch Technique roster at **50 actual Techniques plus 10 refinements**.
-- Locked the roster composition as 25 direct slotted Techniques, 15 same-family Supporting Techniques, 5 Cross-family Techniques, and 5 family Legendaries.
-- Added the approved same-family Supporting roster and one Legendary capstone for Echo, Rupture, Seal, Rift, and Crimson.
-- Added five Rare Cross-family Techniques: Resonant Break, Fractured Memory, Shattered Scar, Exposed Break, and Bound Wound.
-- Added ten selective refinements; refinements remain small parent-Technique upgrades and do not count as separate Techniques.
-- Locked the rarity distribution at **10 Common / 18 Uncommon / 17 Rare / 5 Legendary**. Refinements have no rarity.
-- Locked direct-Technique eligibility around an empty combat slot with no family prerequisite; Rare direct Techniques may still be the player's first pickup from that family.
-- Locked Supporting eligibility around an already-owned effect that can actually interact with the support, preventing dead support offers.
-- Locked Cross-family eligibility around existing investment in both listed families plus any entry-specific mechanic requirement.
-- Locked Legendary eligibility at **3 native Techniques from that family, including at least 1 slotted Technique**. Same-family Supporting Techniques count; Cross-family Techniques and refinements do not.
-- Advanced the active Technique-system work to reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and the complete roster audit.
-- Kept exact combat values, rarity probabilities, reward weights, and offer frequency deferred to prototyping and reward-system design.
+## 2026-08-05 to 2026-08-07 — Blood Aspect packages completed
 
-## 2026-08-13 — Direct Technique matrix lock and repo cleanup
+- Completed qualitative Tier 0–IV packages for Wolf, Wraith, and Ronin.
 
-- Locked the full **25-Technique direct matrix** at qualitative paper-design depth after final review.
-- Approved all five direct rows across Echo, Rupture, Seal, Rift, and Crimson.
-- Finalized Echo's direct row as Lingering Cut, Second Draw, Passing Shadow, Remembered Reversal, and Final Memory.
-- Finalized Rupture's direct row as Rupturing Edge, Mountain Breaker, Breaching Step, Breaking Reversal, and Shattered Ground.
-- Finalized Seal's direct row as Sealing Cuts, Binding Draw, Warding Step, Counterseal, and Passing Seal.
-- Finalized Rift's direct row as Rift Edge, Deep Rift, Shearing Step, Rift Reversal, and Parting Rift.
-- Kept Crimson's approved row as Open Wound, Deep Cut, Blood Arc, Exposed Guard, and Predator's Wake.
-- Removed stale live-design language that still treated Echo, Rupture, Seal, Rift, or the full matrix as unresolved.
-- Advanced the active Technique task to the later catalog layers: **Legendary, Supporting, Cross-family, refinements, replacements, rarity, prerequisites, and eligibility**.
-- Rebased the Crimson Vulnerable redesign onto the current `main` documentation baseline so the live repo no longer depends on the previously diverged stacked-branch history.
-- Historical Burst entries remain only as explicitly superseded design history.
+## 2026-07-20 to 2026-07-22 — Campaign/run structure
 
-## 2026-08-12 — Crimson Vulnerable / backstab redesign
+- Locked six player Heart Binding clears followed by the seventh true-final Heart story run.
+- Locked the approximately 45–50-minute normal successful-run target.
 
-- Superseded the 2026-08-11 Crimson **Burst** family direction.
-- Locked backstab as a universal positional hit classification based on genuinely striking an enemy from behind; Crimson does not create fake backstab windows through forced facing, widened rear arcs, scripted enemy behavior, or ordinary slow.
-- Rebuilt Crimson around **Vulnerable**, a short enemy status that causes genuine backstabs to deal substantially increased direct Health damage.
-- Kept Vulnerable deliberately narrow: it does not slow, stun, root, alter facing, suppress movement abilities, or change enemy awareness.
-- Established that not every Crimson Technique needs to apply or reference Vulnerable; the family may also use standalone direct Health damage, bounded AoE, and backstab payoffs.
-- Added a standalone-value requirement so a Crimson Technique remains worthwhile even when it is the player's only Crimson pickup.
-- Approved the Crimson direct five-slot row at qualitative depth:
-  - **Basic Attack — Open Wound:** qualifying Basic hits apply Vulnerable.
-  - **Held Attack — Deep Cut:** a Held backstab deals extremely high Health damage and partially bypasses defensive mitigation.
-  - **Dash — Blood Arc:** Dash Attack creates a wide bounded crimson sword arc for direct Health damage and nearby coverage.
-  - **Parry / Counter — Exposed Guard:** a successful Counter applies Vulnerable.
-  - **Deathblow — Predator's Wake:** nearby survivors become Vulnerable after a Deathblow resolves.
-- Reserved brief invisibility / enemy-awareness suppression for a future Crimson **Legendary** through the working Unseen concept; exact Legendary implementation remains deferred.
-- Removed Burst-ready, per-target Burst recharge, close-range Burst recovery, and radial Burst VFX from current production direction.
-- Advanced Crimson from an unresolved direct-row task to a completed qualitative row awaiting the full five-family compatibility/readability audit.
+## 2026-07-10 to 2026-07-11 — Project architecture
 
-## 2026-08-12 — Technique architecture consistency audit
-
-- Audited Technique dependencies after the five family cores were locked.
-- Removed stale four-active-plus-reserve and rest-room swapping language from the core loop, run structure, terminology, art inventory, and Milestone 4 scope.
-- Removed remaining temporary Prosthetic-Technique assumptions from dependent run-build and production documentation; Prosthetic progression remains persistent Forge development.
-- Synchronized full-scope, progression, reward, UI, combat, and production dependencies around five direct combat slots plus slotless supporting Techniques.
-- Updated dependent summaries to recognize the then-current five defined family mechanics: Echo, Rupture, Seal, Rift, and Burst. Crimson Burst was subsequently superseded by the Vulnerable / backstab redesign above.
-- Corrected the art inventory's Relic rarity summary to the currently provisional three-tier Common / Rare / Legendary sketch rather than the four-tier Technique rarity model.
-- Confirmed the active design dependency was the direct five-by-five Technique matrix; that dependency was completed on 2026-08-13.
-
-## 2026-08-11 — Rift and Crimson Burst family lock — Crimson portion superseded 2026-08-12
-
-- Locked the Ivory / blade-circle family around **Rift**.
-- Defined Rift as one visible ivory fracture-line on the enemy that automatically opens after a short fuse for direct Health damage.
-- Further qualifying Rift applications before opening intensify the same visible mark rather than adding exposed stacks; the fracture spreads and becomes more prominent as its eventual burst grows stronger.
-- Positioned Rift as a **strong-upfront, moderate-scaling** family: one pickup is immediately useful, while deeper investment remains viable without requiring the highest synergy ceiling.
-- Previously locked the Crimson / split-blood-drop family around **Burst**; that Crimson direction is now superseded by the 2026-08-12 Vulnerable / backstab redesign.
-- The superseded Burst direction used immediate heavy direct AoE centered on a Burst-ready target, per-target recharge, close-range recovery acceleration, bounded pack behavior, and no persistent base damage zone.
-- Explicitly allowed the five Technique families to use different buildup structures and different early / late power curves rather than forcing all families into stack-based scaling.
-- Advanced the active Technique task to designing and approving the full five-by-five direct combat-slot matrix.
-
-## 2026-08-09 — Core Technique-family mechanics pass
-
-- Reclassified the earlier ~55-Technique concept pool as exploratory rather than the current launch roster.
-- Paused cross-family Techniques and refinements until the five core families and direct combat-slot Techniques are stable.
-- Kept families primarily player-recognizable through symbol, color treatment, effect behavior, VFX, and audio rather than formal school names.
-- Clarified the pale-silver family around **echoes**: delayed additional sword slashes, not literal full-action repetition.
-- Removed the separate `Fracture` term from the gold family.
-- Defined the working **Rupture** rule as a visible buildup meter with no partial effect; full meter triggers a large posture burst, strong allowed hit reaction, and smaller nearby posture shockwave, then resets.
-- Locked the Violet family around discrete **Seal stacks** rather than a buildup meter.
-- Defined one Seal as a minor movement slow, two Seals as stronger movement restriction plus suppression of qualifying movement abilities, and three Seals as a brief **Bind** that roots without stunning and then clears the stacks.
-- Explicitly separated Violet from posture mechanics: Seal does not inherently damage posture, suppress posture recovery, or trigger a posture burst.
-- Defined the enemy-facing Seal visual as one mark, two connected marks, then a completed binding pattern during Bind.
-- Advanced the active family-design question from Violet to the Ivory scalable mechanic.
-- Marked the ivory and crimson families for redesign around concrete scalable mechanics rather than precision-only or Health-risk-only triggers.
-- Clarified that refinements are small buffs to an existing slotted Technique, not separate Techniques.
-- Standardized all Technique sources around the same Technique reward screen; combat rooms are the main source, with shops, treasure, minibosses, and regional bosses able to grant the same reward type.
-- Removed Prosthetic Techniques and temporary Prosthetic specialization from the run-build system.
-- Assigned Prosthetic progression to persistent Forge development using the existing Scroll currency model.
-- Synchronized Technique, catalog, reward, progression, Prosthetic, UI, VFX, full-scope, decision, and open-question documentation.
-
-## 2026-08-09 — Technique architecture overhaul
-
-- Replaced the four unrestricted active Technique slots plus reserve with five direct combat slots: Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow.
-- Limited each direct combat slot to one Technique at a time; ordinary direct Techniques no longer stack within the same action.
-- Added rare same-slot replacement offers and removed the general reserve inventory model.
-- Added slotless supporting Techniques with no global inventory cap; practical growth is limited by reward opportunities, route choices, rarity, prerequisites, and run length.
-- Kept one refinement maximum per eligible slotted Technique while separating refinements from broader supporting upgrades.
-- Kept Common / Uncommon / Rare / Legendary Technique rarity and allowed some Legendary candidates to use family-investment prerequisites, with exact thresholds deferred.
-- Reframed Technique families as internal effect/build structures that must support comparable depth across several core combat actions rather than unequal mechanic buckets.
-- Removed the old Blade / Deflection / Execution / Movement / General launch quotas and the old ~30-Technique count as correctness requirements.
-- Rejected generic elemental schools as the main Technique-family structure; familiar effects such as slow, AoE, extended reach, delayed damage, chaining, restraint, and recovery should use Oathbound-specific presentation.
-
-## 2026-08-07 — Aspect questions closed for current scope
-
-- Treated Wolf, Wraith, and Ronin Tier 0-IV packages as locked at current qualitative paper-design depth after user review.
-- Removed the final cross-roster Aspect comparison and other resolved Aspect/Tier audits from the active question tracker.
-- Kept exact combat values, timings, hitboxes, growth percentages, collision, and presentation tuning deferred to prototyping and implementation.
-- Advanced the active design area to the launch run-build content catalog.
-
-## 2026-08-07 — Ronin package lock and Aspect documentation cleanup
-
-- Approved Ronin's Tier 0 weapon foundation without changing its six-action moveset or strongest-guard/slow-posture-recovery identity.
-- Kept Steadfast Reprisal, Falling Mountain with Deep Rupture, Unbroken Resolve with Measured Weight and Perfect Weight, and Shattering Wake as Ronin's Tier I-IV headline package.
-- Added Ronin's repeated supporting growth rule: every Embrace from Tier I through Tier IV modestly increases maximum player-posture capacity without increasing posture recovery or block efficiency.
-- Marked all three launch Aspect packages complete at qualitative Tier 0-IV paper-design depth.
-
-## 2026-08-06 — Wraith Tier IV Beyond the Veil lock
-
-- Approved Beyond the Veil as Wraith Tier IV.
-- Increased Pale Lance and Ghostline Slash spectral reach within locked Tier IV boundaries.
-- Added extended deathblow initiation through a valid clear frontal path and brief movement-only Veilstride after killing deathblows.
-
-## 2026-08-06 — Wraith Tier III Spectral Passage lock
-
-- Replaced Veiled Guard with Spectral Passage.
-- Made qualifying spectral attacks continue through ordinary-enemy bodies across remaining authored geometry with reduced secondary Health damage and meaningful posture / guard pressure.
-
-## 2026-08-05 — Wraith Tier II corridor Blood Art lock
-
-- Replaced the temporary duration-state version of Wraith's Reach with one immediate sweep-corridor-echo Blood Art.
-
-## 2026-08-05 — Aspect package revision and repository synchronization
-
-- Completed Ronin's working qualitative Tier 0-IV package.
-- Replaced Wolf's Dire Hunt transformation with Blood Hunt and replaced Apex Feast with Apex Mauling.
-- Reopened and then completed Wraith's remaining Tier package audit.
-
-## 2026-07-11 — Blood Aspect, Technique, and room-reward redesign
-
-- Made Wolf, Wraith, and Ronin Blood Aspects the central run identities with fixed Tier 0-IV vertical escalation through Corruption and Shrine Embrace.
-- Removed Storm, Frost, Ember, Hex, and Shadow as player stance families.
-- Replaced the former stance and broad boon layers with temporary Techniques.
-- Introduced the original four-active-plus-reserve Technique model, later superseded by the 2026-08-09 architecture.
-- Added a previewed room-reward framework.
-
-## 2026-07-11 — Production bible completion
-
-- Completed Blood Aspect and Prosthetic VFX briefs, cross-area room identities, HUD requirements, currency naming/persistence, and the polished Milestone 1 Style Test structure.
-
-## 2026-07-10 — Production bible migration
-
-- Expanded overview, scope, gameplay, lore, regions, enemies, bosses, trials, UI, and VFX into version-controlled authoritative documents.
-
-## 2026-07-10 — Repository architecture
-
-- Established version-controlled documentation sections, source-of-truth rules, terminology, decision log, open-question register, and update protocol.
+- Established seven production milestones plus paid Style Test.
+- Established version-controlled Markdown authorities and documentation workflow.
+- Replaced the old stance/alternate-weapon direction with Blood Aspects as the central run weapon identities.
