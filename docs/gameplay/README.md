@@ -66,7 +66,7 @@ Broad permanent-upgrade station ownership is also scoped:
 
 Exact permanent-upgrade nodes, values, rank counts, costs, and unlock timing remain later detailed design rather than current full-game scope blockers.
 
-The major-system production-scope audit and all three prototype regional chamber structures are complete. The active gameplay package is **full-run integration, rewards, encounters, and pacing**.
+The major-system production-scope audit, all three prototype regional chamber structures, and the first full-route generation model are complete. The active gameplay package remains **full-run integration, rewards, encounters, and pacing**.
 
 Current approved prototype regional structure:
 
@@ -74,9 +74,9 @@ Current approved prototype regional structure:
 - **Yomori:** 10 counted chambers, Twin Maws at Chamber 10, approximately 12–14 active minutes.
 - **Kagutsuchi:** 11 counted chambers, Eclipse Shogun at Chamber 11, approximately 15–17 active minutes.
 
-The full regional baseline is therefore **33 counted chambers**. All three regions use fixed chamber-index bands, weighted eligible contents, hard route-opportunity safeguards, optional miniboss routing, previewed exits, and fixed boss endpoints. Keeper and Twin Maws have separate non-counted post-boss transition spaces; the Shogun opens the specialized Heart route.
+The full regional baseline is **33 counted chambers**. The route-generation prototype now also defines opening/main/pre-boss branch percentages, room-type weights, regional standard-combat reward weights, expected Technique/Shrine/Shop/Rest/Treasure/miniboss cadence, and fairness safeguards. These are implementation/playtest targets, not immutable final balance values.
 
-The next run-design layer is to evaluate those 33 chambers together and define provisional branching frequency, room/reward category weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, economy pressure, and related route-generation values. Those numbers remain prototype/playtest targets rather than final balance law.
+The next numerical layer is **Technique offer generation and rarity/source weighting** across standard combat rewards, Shops, Treasure, minibosses, and regional bosses. Gold/Shop economy and remaining detailed reward values follow after that.
 
 The successful-run duration target remains approximately **45–50 minutes** in [Run Structure](RUN_STRUCTURE.md).
 
