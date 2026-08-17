@@ -4,16 +4,18 @@ title: The Eclipse Shogun — Boss Encounter
 category: content
 status: draft
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-16
 topics:
   - area-3
   - eclipse-shogun
   - regional-boss
   - heart-bindings
   - campaign-clears
+  - chamber-11
 related:
   - LORE-ECLIPSE-SHOGUN
   - CONTENT-AREA3-TRUE-FINAL-HEART
+  - GAMEPLAY-RUN-STRUCTURE
   - ART-MILESTONE-06
 ---
 
@@ -23,7 +25,9 @@ related:
 
 The Eclipse Shogun is the principal boss of Kagutsuchi Court and the central character antagonist of Oathbound.
 
-Defeating his current body completes the three-region combat route and opens the path to the Heart chamber. During the first six successful clears, the player proceeds to one Heart Binding completion. During the seventh successful story run, the active run continues into the true-final Heart encounter.
+He is the fixed **Kagutsuchi Chamber 11** endpoint. Defeating his current body completes the 33-counted-chamber three-region combat route and opens the specialized path to the Heart chamber. During the first six successful clears, the player proceeds to one Heart Binding completion. During the seventh successful story run, the active run continues into the true-final Heart encounter.
+
+Heart approach, Binding-completion spaces, and the true-final Heart are outside Kagutsuchi's 11 counted regional chambers.
 
 ## Encounter fantasy
 
@@ -67,11 +71,12 @@ Later encounter design must preserve these boundaries:
 - the climax is a deliberate inhuman escalation,
 - the Shogun remains intelligent and recognizable,
 - the fight must remain readable within Oathbound's posture, parry, movement, and arena-pressure systems,
+- the fight cannot assume a specific Aspect Tier, Blood Art, Technique family, Legendary, Relic, Prosthetic upgrade level, or exact reward history,
 - and the final design must remain distinct from Akio, the Eternal Swordsman, Keeper of the Gate, and the true-final Heart.
 
 ## Arena and post-boss handoff
 
-The fight occurs in a throne-space, ritual sanctum, or equivalent royal arena near the route to the Heart chamber.
+The fight occurs in a throne-space, ritual sanctum, or equivalent royal arena near the route to the Heart chamber. All Kagutsuchi routes converge here after the Chambers 8–10 final-Court stretch.
 
 The arena must support:
 
@@ -81,6 +86,8 @@ The arena must support:
 - and an unmistakable route opening beyond the Shogun.
 
 During the first six successful clears, the post-boss sequence leads to the extraction apparatus and Heart Binding ritual. During the seventh story run, it leads directly to the Heart encounter without ending the current build.
+
+The Shogun does not grant ordinary current-run power during the first six Binding clears because those runs end through the Binding ritual. Exact recovery and resource carryover before the seventh-run Heart continuation remain later encounter-integration work.
 
 ## Reconstruction and campaign role
 
@@ -96,7 +103,7 @@ The Shogun requires a dedicated concept and encounter-design review before final
 
 Current production may scope:
 
-- one principal Area 3 boss,
+- one principal Area 3 boss fixed at Chamber 11,
 - a regal humanoid starting identity,
 - controlled Beast Blood escalation,
 - at least one materially inhuman later state,
