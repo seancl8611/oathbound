@@ -55,9 +55,11 @@ Run-only state includes:
 - Gold,
 - room progress,
 - temporary Health / Spirit capacity,
-- approved run-only consumables or encounter states.
+- encounter-specific temporary states where authored.
 
-These reset after failed death-return or successful completion unless another authority explicitly says otherwise.
+Oathbound does **not** include a general run-consumable inventory or one-use item progression layer at launch.
+
+These run-only states reset after failed death-return or successful completion unless another authority explicitly says otherwise.
 
 ## Run-build investment rule
 
@@ -300,12 +302,11 @@ There is no death tax on already-earned persistent resources.
 | Gold | Resets | Resets |
 | Temporary Health / Spirit capacity | Resets | Resets |
 | Room progress | Resets | Resets |
-| Consumables | Item-specific | Item-specific |
 
 # Current design dependency
 
-Permanent station ownership, the first persistent-resource economy, regional-boss current-run rewards, and Relic acquisition/swap architecture are complete at prototype paper-design depth.
+Permanent station ownership, the first persistent-resource economy, regional-boss current-run rewards, Relic acquisition/swap architecture, and launch reward-system scope are complete at prototype paper-design depth.
 
 Remaining progression work is nested under the owning systems rather than a new architecture question: exact Bloodwell nodes, Blood Mirror nodes, Relic mastery/cost realization, boss-material assignment to selected major upgrades, exact individual Relic-to-source sequencing inside the approved acquisition buckets, and final numerical tuning after playtests.
 
-The active full-run design dependency is now the **consumables include/cut decision**, followed by encounter composition and pacing validation.
+The active full-run design dependency is now **encounter composition and pacing validation**. That pass should connect the approved 33-chamber route to concrete enemy-composition rules, pressure escalation, elite frequency, room-clear times, boss/miniboss budgets, and the 45–50-minute full-run target.
