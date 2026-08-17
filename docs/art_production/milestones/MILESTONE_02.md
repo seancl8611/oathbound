@@ -4,7 +4,7 @@ title: Milestone 2 — Complete Area 1 Production
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-16
 ---
 
 # Milestone 2 — Complete Area 1 Production
@@ -22,6 +22,7 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - [Warden](../../content/area_1/enemies/WARDEN.md)
 - [Area 1 Minibosses](../../content/area_1/MINIBOSSES.md)
 - [Keeper of the Gate](../../content/area_1/BOSS.md)
+- [Run Structure](../../gameplay/RUN_STRUCTURE.md)
 - [Corruption and Shrines](../../gameplay/CORRUPTION_AND_SHRINES.md)
 - [Room Types](../../content/ROOM_TYPES.md)
 - [Shrine Interface](../../ui_ux/SHRINE_INTERFACE.md)
@@ -51,15 +52,17 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - Necessary Hushiro props, breakables, reward object, and arena landmarks
 - Shared Corruption meter and Shrine Resist/Embrace foundation
 - Corruption Full, Embrace Transformation, and Resist Stabilization cues
+- Enough reusable Hushiro room foundations and variants to support the approved **12-counted-chamber** prototype route without requiring unique art for every chamber
 
 ## Explicitly deferred
 
 - Final Wolf, Wraith, and Ronin VFX sets
 - Complete Tier I–IV Aspect mutation overlays
 - Final Aspect-specific iconography and selection presentation
-- Technique cards, four-slot/reserve UI, refinements, replacement states, and route-reward marker family
+- Final Technique cards, five-direct-slot build UI, Supporting/Cross-family/Legendary presentation, refinements, replacement states, and route-reward marker family
 - Full Technique, Relic, currency, temporary-capacity, and consumable art families
 - Strand NPCs and final Peddler character
+- Final room/reward percentage weights and encounter-composition tuning
 
 Milestone 2 may use temporary developer markers to test reward routing. Final shared Technique and route-reward presentation belongs to Milestone 4.
 
@@ -83,5 +86,6 @@ Exact commercial batch grouping may be adjusted during quotation without changin
 - Collector remains oppressive without hiding intent.
 - Keeper's phases preserve identity while changing response rules.
 - All functional room types read at a glance.
+- The modular Hushiro kit can support the 12-chamber prototype route, its optional miniboss branch, and pre-boss convergence without requiring bespoke environment art for every node.
 - Corruption Full, Embrace, and Resist cues remain distinct without prematurely defining final Aspect or Technique identities.
 - Area 1 remains cohesive from entry through boss completion.
