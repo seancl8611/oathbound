@@ -6,13 +6,15 @@ Private source repository for Oathbound game design, lore, content, UI/UX, art p
 
 Authoritative internal documentation lives under [`docs/`](docs/README.md).
 
-Start with:
+For design work, start with:
 
-1. [Game Overview](docs/overview/GAME_OVERVIEW.md)
-2. [Full Game Scope](docs/overview/FULL_GAME_SCOPE.md)
-3. [Current Design Questions](docs/_meta/OPEN_QUESTIONS.md)
-4. [Source of Truth](docs/_meta/SOURCE_OF_TRUTH.md)
-5. [Assistant Update Workflow](docs/_meta/ASSISTANT_WORKFLOW.md)
+1. [Current Design Questions](docs/_meta/OPEN_QUESTIONS.md) — unresolved agenda.
+2. [Source of Truth](docs/_meta/SOURCE_OF_TRUTH.md) — find the owning document.
+3. [Terminology](docs/_meta/TERMINOLOGY.md) — canonical/deprecated search anchors.
+4. The authoritative file for the subject.
+5. [Document Review Map](docs/_meta/DOCUMENT_MAP.md) when dependency hints are needed.
+
+Use [Game Overview](docs/overview/GAME_OVERVIEW.md) and [Full Game Scope](docs/overview/FULL_GAME_SCOPE.md) for broad game/production context rather than as the first stop for every narrow update.
 
 ## Repository model
 
@@ -24,8 +26,10 @@ Start with:
 
 ## Change workflow
 
-Major changes should use focused branches and pull requests.
+Major changes use focused branches and pull requests.
 
-Update the authoritative file first, review live dependencies, remove stale or duplicated statements, and keep unresolved scope decisions in `docs/_meta/OPEN_QUESTIONS.md`.
+Update the authoritative file first, review live dependencies, remove stale/duplicated statements, and keep only unresolved design priorities in `docs/_meta/OPEN_QUESTIONS.md`.
 
-Exact tuning belongs in the gameplay or encounter file that owns it. Word and PDF files are exports; Markdown remains the internal source of truth.
+If GitHub code search is unavailable or unindexed, use the direct-read fallback documented in [`ASSISTANT_WORKFLOW.md`](docs/_meta/ASSISTANT_WORKFLOW.md) rather than treating empty search results as proof of consistency.
+
+Exact tuning belongs in the gameplay or encounter file that owns it. Word/PDF files are exports; Markdown remains the internal source of truth.
