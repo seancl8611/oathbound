@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - runs
   - first-attempt
@@ -272,13 +272,13 @@ The transition should:
 
 - grant the approved regional boss reward,
 - apply the automatic recovery prototype owned by `ITEMS_AND_REWARDS.md`,
-- allow concise read-only build review and any separately approved limited preparation interaction,
+- allow concise build review and an optional **Relic swap** from the player's persistent collection,
 - visually transition into the next region,
 - and preserve run momentum rather than functioning as a second Strand or overloaded menu hub.
 
 The current recovery prototype restores **20% max Health and 35% max Spirit**, then enforces minimum next-region entry floors of **35% max Health and 50% max Spirit**. This is viability support rather than a full reset. Blood is not automatically refilled.
 
-Relic-swap timing, transition interface details, and final recovery tuning remain later implementation/playtest decisions.
+The safe transition after Keeper is the normal in-run Relic swap point before Yomori. The safe transition after Twin Maws is the normal in-run Relic swap point before Kagutsuchi. Newly discovered Relics may also be equipped immediately at discovery; routine swapping is not available in combat, ordinary rooms, Rest rooms, Shops, or the pause menu. Exact transition-interface presentation and final recovery tuning remain later implementation/playtest decisions.
 
 ## Post-Shogun handoff
 
