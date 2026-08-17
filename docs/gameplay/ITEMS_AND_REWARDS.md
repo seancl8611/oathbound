@@ -380,7 +380,34 @@ Regional bosses combine:
 - narrative/codex progression where applicable,
 - and, for Keeper / Twin Maws, a separate current-run boss reward before the regional transition.
 
-The exact **current-run reward mix** for Keeper and Twin Maws remains the next reward-side integration question. Boss materials do not replace those run rewards.
+## Keeper / Twin Maws current-run Boss Reward prototype
+
+After defeating **Keeper of the Gate** or **Twin Maws**, Akio receives a separate **three-card Boss Reward** and chooses exactly one card. The persistent Mist/material payout is already granted and does not consume a card. Automatic regional-transition recovery remains separate and occurs after the reward choice.
+
+The three cards are:
+
+1. **Premium Technique — guaranteed**
+   - Opens the normal three-choice Technique screen.
+   - Uses regional-boss source-quality weighting from `TECHNIQUES.md`.
+2. **Enhanced Capacity — guaranteed**
+   - Rolls Health or Spirit at 50/50.
+   - Health: **+20% starting max Health** plus matching current Health.
+   - Spirit: **+25% starting max Spirit** plus matching current Spirit.
+3. **Flex — generated**
+   - **30%** eligible Relic opportunity,
+   - **35%** second Premium Technique,
+   - **20%** the opposite Enhanced Capacity type from card 2,
+   - **15%** **+2 Technique reroll resources**.
+
+If no eligible Relic opportunity exists, redistribute that 30% proportionally across the remaining Flex outcomes rather than showing a dead option.
+
+Keeper and Twin Maws use the same Boss Reward rules. Their different placement in the run creates the intended functional difference: Keeper tends to establish or stabilize an early build, while Twin Maws tends to refine a more mature build before Kagutsuchi.
+
+Ordinary Gold, Mist, Scrolls, pure healing, consumables, and permanent upgrades are excluded from this three-card current-run Boss Reward.
+
+The exact Boss Reward is **not previewed before the fight**. The route communicates only that the mandatory regional boss grants a premium Boss Reward; the three cards are revealed after victory.
+
+A Relic card is an acquisition opportunity, not an automatic forced swap. Exact newly discovered/equipped Relic behavior and broader in-run swap placement are owned by the next Relic integration pass.
 
 # Regional transition recovery
 
@@ -418,7 +445,7 @@ Heart Binding destruction is campaign progress, not spendable currency.
 
 `RELICS.md` owns the 10-Relic launch roster, one equipped slot, persistent collection/mastery/progression, and run-active benefits. Relics have no rarity tiers.
 
-Relic acquisition remains intentionally uncommon. The current Shop flex slot may occasionally surface a Relic opportunity; final acquisition allocation and transition-swap placement remain later integration work.
+Relic acquisition remains intentionally uncommon. The current Shop flex slot may occasionally surface a Relic opportunity; regional Boss Reward Flex cards may also surface an eligible Relic opportunity. Final acquisition allocation and transition-swap placement remain the next integration work.
 
 # Run Infrastructure boundary
 
@@ -439,6 +466,6 @@ Run Infrastructure may improve approved future-run support around Rest, Shrines,
 
 # Current production dependency
 
-The route structure, room/reward weights, Technique offer generation, Gold/Shop economy, survival/recovery/capacity model, and first persistent-resource payout model are now complete at prototype paper-design depth.
+The route structure, room/reward weights, Technique offer generation, Gold/Shop economy, survival/recovery/capacity model, persistent-resource payout model, and Keeper/Twin Maws current-run Boss Reward prototype are now complete at prototype paper-design depth.
 
-The next reward-side integration layer is **regional-boss current-run reward composition and Relic acquisition / transition-swap placement**. Full-run integration then continues through consumables include/cut confirmation, encounter composition and clear-time tuning, 45–50-minute run simulation, and playable validation of the prototype values.
+The next reward-side integration layer is **Relic acquisition allocation and limited in-run swap placement**. Full-run integration then continues through consumables include/cut confirmation, encounter composition and clear-time tuning, 45–50-minute run simulation, and playable validation of the prototype values.
