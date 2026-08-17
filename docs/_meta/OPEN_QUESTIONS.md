@@ -9,6 +9,7 @@ topics:
   - open-questions
   - design-priority
   - full-run-integration
+  - permanent-progression
   - narrative-delivery
   - postgame
 ---
@@ -17,7 +18,7 @@ topics:
 
 This file contains only unresolved decisions that materially affect launch scope, content volume, production planning, interfaces, or authored presentation.
 
-Resolved rules and prototype values belong in their authoritative files and should **not** be copied here. Playtest tuning belongs in the owning gameplay/encounter file.
+Resolved rules and prototype values belong in their authoritative files and should **not** be copied here. Playtest tuning belongs in the owning gameplay/encounter file. Small cleanup decisions should not be promoted ahead of larger dependency-setting work.
 
 # Approved baseline
 
@@ -31,6 +32,7 @@ The following major architecture is already established and should not be reopen
 - Relic swapping at the Forge before a run, after Keeper, after Twin Maws, or immediately on a new discovery,
 - eight Prosthetics with shallow linear Forge progression,
 - three permanent upgrade stations: Bloodwell, Forge Bench, later-unlocked Blood Mirror,
+- no general launch consumable inventory or one-use item reward layer,
 - three-region 33-chamber prototype route: 12 Hushiro / 10 Yomori / 11 Kagutsuchi,
 - first route-generation and room/reward weighting model,
 - first Technique-offer / rarity-source model,
@@ -49,53 +51,54 @@ Current values and exact rules live in:
 - `docs/gameplay/RELICS.md`
 - `docs/gameplay/PROGRESSION.md`
 
-# Priority order
+# Scope-closure sequence
 
-1. **Complete full-run integration, rewards, encounters, and pacing**
-2. **Define narrative delivery and campaign presentation**
-3. **Define endgame, postgame, and release scope**
+1. **Make the approved 33-chamber run concrete and validate its pacing**
+2. **Close permanent-progression content scope**
+3. **Define narrative delivery and campaign presentation**
+4. **Define endgame, postgame, and release scope**
 
-# 1. Full-run integration, rewards, encounters, and pacing
+This sequence is dependency-driven: first determine what players actually fight and how long the run plays, then finalize the persistent content supporting repeated runs, then scope authored narrative and release presentation.
 
-## Consumables include/cut
+# 1. Playable full-run integration and pacing
 
-Consumables currently have **0% ordinary primary-room reward weight** and are not required by the run architecture.
+## Encounter composition and pacing
 
-Decide whether launch includes a small contained consumable layer through Shops/Treasure or cuts consumables entirely.
+Connect the approved chamber route to concrete encounter rules rather than adding another reward subsystem.
 
-Promote this only if the layer provides a distinct tactical purpose that Techniques, Relics, recovery, and Gold do not already cover.
+Define/prototype:
 
-**Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`.
+- regional enemy-composition rules for opening, main, and pre-boss/final chamber bands,
+- expected enemy-count / threat-budget ranges by region and band,
+- elite / high-pressure encounter frequency and where those spikes may occur,
+- rules preventing repetitive or mechanically bad enemy combinations,
+- standard-room clear-time targets by region,
+- miniboss and regional-boss time budgets,
+- expected reward-choice / Shop / Rest / transition overhead,
+- a complete 33-chamber time-budget simulation against the **45–50 minute** normal successful-run target.
 
-## Encounter composition and pacing validation
+The output of this pass should be an implementable encounter-generation/pacing prototype for all three regions, not final enemy HP/damage tuning.
 
-With the 33-chamber structure established, prototype:
+**Authority:** regional `ENEMIES.md` / encounter content files + `docs/gameplay/RUN_STRUCTURE.md`.
 
-- regional enemy-composition rules by chamber band,
-- elite / high-pressure encounter frequency,
-- expected standard-room clear time,
-- miniboss and boss time budgets,
-- total decision/service-room overhead,
-- three-region run simulation against the 45–50-minute target.
+# 2. Permanent-progression content scope
 
-These are implementation/playtest variables unless testing reveals a new content or production-scope requirement.
+The architecture and currencies are already decided. Close the remaining **content volume and progression-cadence** questions without reopening the station model.
 
-**Authority:** regional encounter files + `docs/gameplay/RUN_STRUCTURE.md`.
+Define:
 
-## Permanent progression detail — later nested pass
+- the number and broad roles of Bloodwell **Akio** nodes,
+- the number and broad roles of **Run Infrastructure** nodes,
+- the number and broad roles of Blood Mirror nodes for each Aspect,
+- the intended Relic mastery rank structure,
+- which small set of major upgrades use Keeper / Twin Maws / Shogun materials,
+- the campaign cadence for unlocking these systems and major node bands.
 
-When the Bloodwell and Blood Mirror trees are authored, assign exact Mist costs and the small number of major upgrades that require regional boss materials.
+Exact percentages, final Mist prices, mastery kill thresholds, and other balance values remain tuning work after the content structure is fixed.
 
-Keep the approved resource boundaries:
+**Authority:** `docs/gameplay/PROGRESSION.md`, Bloodwell/Blood Mirror/Forge authorities.
 
-- Mist = broad progression,
-- Scrolls = primarily Prosthetic Forge progression,
-- regional boss materials = low-count secondary mastery gates on selected major upgrades,
-- no generic Boss Emblem currency.
-
-This is **not** the next top-level question unless full-run integration requires those exact nodes for testing.
-
-# 2. Narrative delivery and campaign presentation
+# 3. Narrative delivery and campaign presentation
 
 The story spine and lore are already approved. Define the authored delivery package required for launch:
 
@@ -111,7 +114,7 @@ The story spine and lore are already approved. Define the authored delivery pack
 
 Detailed scripts and line counts follow only after this delivery package is scoped.
 
-# 3. Endgame, postgame, and release scope
+# 4. Endgame, postgame, and release scope
 
 Define what remains available after the first canonical Heart victory and what is required for a complete initial release:
 
@@ -134,11 +137,10 @@ Do not add separate top-level questions for final:
 - Shop prices,
 - recovery/capacity percentages,
 - Mist/Scroll payout tuning,
-- Scroll/Mist costs,
+- final Scroll/Mist costs,
 - boss-material quantities above the approved low-count model,
-- Relic mastery thresholds,
+- exact Relic mastery thresholds,
 - individual Prosthetic percentages,
-- exact Bloodwell/Blood Mirror node values,
 - frame data, VFX timing, hitboxes, or animation timings.
 
 Those remain in their owning files until testing shows a production-scope consequence.
