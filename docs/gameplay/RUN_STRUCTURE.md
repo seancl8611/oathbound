@@ -464,10 +464,11 @@ A run may change through:
 - Technique refinements and rare same-slot replacements,
 - the equipped Prosthetic,
 - the equipped Relic benefit,
-- approved consumables,
 - run-only currencies and materials,
 - survival and resource-cap rewards,
 - boss, miniboss, treasure, shop, or discovery rewards.
+
+Oathbound does not add a general consumable inventory or one-use item layer to run growth at launch.
 
 Prosthetic and Relic permanent progression belongs to the Forge rather than a temporary Technique layer.
 

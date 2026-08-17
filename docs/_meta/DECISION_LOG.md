@@ -14,6 +14,19 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-08-17 — Launch consumables cut; remaining design refocused on scope closure
+
+Oathbound does **not** include a general run-consumable inventory or one-use item reward layer at launch. Shops, Treasure, recovery/capacity, Technique rerolls, Techniques, Relics, and Prosthetics already cover the intended tactical/reward roles without another inventory/UI subsystem.
+
+The remaining design sequence is now dependency-driven rather than a queue of isolated minor questions:
+
+1. playable 33-chamber encounter composition and pacing,
+2. permanent-progression content scope,
+3. narrative delivery/campaign presentation,
+4. endgame/postgame/release scope.
+
+**Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`, `docs/gameplay/PROGRESSION.md`, `docs/_meta/OPEN_QUESTIONS.md`.
+
 ## 2026-08-17 — Relic acquisition and in-run swapping locked
 
 All **10 launch Relics are obtainable before the canonical story ending**. Acquisition uses a fixed launch allocation:
@@ -40,7 +53,7 @@ The player chooses exactly one of:
 - a guaranteed **Enhanced Capacity** card, rolling Health or Spirit at 50/50,
 - a generated **Flex** card: **30% eligible Relic / 35% Premium Technique / 20% opposite Enhanced Capacity / 15% +2 Technique rerolls**, with unavailable Relic weight redistributed.
 
-Enhanced Capacity uses the existing Treasure-tier values: **+20% starting max Health** or **+25% starting max Spirit**, including matching current resource. Ordinary Gold, Mist, Scrolls, pure healing, consumables, and permanent upgrades are excluded from the three-card reward.
+Enhanced Capacity uses the existing Treasure-tier values: **+20% starting max Health** or **+25% starting max Spirit**, including matching current resource. Ordinary Gold, Mist, Scrolls, pure healing, and permanent upgrades are excluded from the three-card reward.
 
 The exact cards are revealed only after the mandatory boss fight rather than previewed before entry. Keeper naturally functions as early build establishment while Twin Maws uses the same rules to refine a more mature build before Kagutsuchi.
 
