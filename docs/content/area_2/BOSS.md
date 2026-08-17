@@ -4,7 +4,7 @@ title: Twin Maws — Rootfang and Briarthorn
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-08-17
 topics:
   - area-2
   - boss
@@ -12,9 +12,11 @@ topics:
   - briarthorn
   - twin-maws
   - soul-transfer
+  - boss-material
 related:
   - CONTENT-AREA2-OVERVIEW
   - CONTENT-AREA2-MINIBOSSES
+  - GAMEPLAY-ITEMS-REWARDS
   - ART-MILESTONE-05
 ---
 
@@ -30,6 +32,17 @@ Rootfang and Briarthorn share one corrupted bond but express different halves of
 - Empowerment requires an unmistakable transition and visible traces of the fallen twin.
 - The survivor becomes more complete, but must remain recognizable as itself.
 - Arena effects must make simultaneous melee pressure and control zones readable.
+
+## Persistent defeat reward
+
+Every completed Twin Maws victory awards:
+
+- **15 Mist**,
+- exactly **1 Twin-Maws-specific regional boss material**.
+
+The paired encounter creates one material family; Rootfang and Briarthorn do not create separate resource counters. The material persists immediately even if Akio later dies in Kagutsuchi. It is used sparingly as a low-count secondary requirement on selected major permanent upgrades. Exact player-facing item naming is deferred.
+
+Twin Maws' separate current-run reward and automatic Yomori-to-Kagutsuchi transition recovery are owned by `ITEMS_AND_REWARDS.md`.
 
 ## Rootfang
 
@@ -93,4 +106,4 @@ The player must always understand where the arena is being shaped, which lines o
 
 ## Implementation questions still open
 
-The high-level shared-soul structure is approved. Exact transition invulnerability, health and posture handling, inherited move timing, and survivor difficulty normalization require playtest-driven implementation decisions.
+The high-level shared-soul structure is approved. Exact transition invulnerability, Health/posture handling, inherited move timing, and survivor difficulty normalization remain playtest-driven implementation decisions.
