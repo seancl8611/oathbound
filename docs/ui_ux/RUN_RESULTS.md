@@ -4,19 +4,19 @@ title: Run Results and Strand Return
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-17
 topics:
   - run-results
   - successful-return
-  - bloodwell
+  - persistent-rewards
+  - boss-materials
   - heart-bindings
   - true-final-heart
   - postgame
-  - techniques
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-PROGRESSION
-  - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-STRAND-BLOODWELL
   - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
@@ -25,77 +25,101 @@ related:
 
 ## Primary purpose
 
-Explain what a completed attempt accomplished, what permanent rewards and campaign progress were retained, and which temporary run states were lost before control returns fully to the Strand or an ending sequence.
+Explain what an attempt accomplished, which permanent rewards/campaign progress were retained, and which temporary run states were lost.
 
-## Successful Binding-return sequence
+Persistent resources are saved when earned, not only at the results screen. The results presentation summarizes that retained progress.
+
+# Successful Binding-return sequence
 
 After a successful Heart Binding completion:
 
 1. load the Strand,
-2. spawn Akio near the Bloodwell or approved return point,
+2. spawn Akio near the Bloodwell / approved return point,
 3. play a restrained reformation beat,
-4. save permanent rewards and destroyed-Binding campaign progress,
+4. confirm saved permanent rewards and Binding progress,
 5. clear run-only state,
 6. present the results summary,
 7. trigger relevant NPC, codex, Blood Mirror, Heart-state, or world-state updates.
 
-## Required Binding summary information
+# Required Binding summary information
 
-- Shogun manifestation defeated,
+Show:
+
+- Eclipse Shogun defeated,
 - one Heart Binding destroyed,
-- current destroyed-versus-remaining count out of six player Bindings,
-- Boss Emblem or other major reward gained where applicable,
-- permanent currencies and rewards gained,
-- discoveries, Technique-pool entries, or other unlocks earned,
+- destroyed-versus-remaining Binding count,
+- **Mist gained during the run**,
+- **Scrolls gained during the run**,
+- **regional boss materials gained during the run**,
+- Relic mastery / discoveries / Technique-pool unlocks where applicable,
+- other permanent rewards/unlocks,
 - final selected Blood Aspect and highest Tier reached,
 - final five slotted Techniques,
-- owned supporting Techniques and refinements in a readable recap,
+- slotless Techniques/refinements in a readable recap,
 - equipped Prosthetic and Relic,
-- clear indication that Techniques, refinements, Corruption, Tier, Gold, temporary capacity, and temporary Relic effects were burned away.
+- clear indication that Techniques, refinements, Corruption, Tier, Gold, temporary capacity, and other run-only state were lost.
+
+There is no generic Boss Emblem reward line.
 
 Showing the final build is a record of the completed run, not continued ownership.
 
-The Binding-progress display shows six player-destroyed Bindings plus the historical outer breach. It must clearly distinguish the Court's earlier destruction from Akio's campaign progress.
+The Binding display must distinguish the Court's historical outer breach from Akio's six player-destroyed Bindings.
 
-## Final-story Heart completion
+# Failed-run summary
+
+A failed run may use a shorter summary, but it should still make retained progression obvious:
+
+- Mist retained,
+- Scrolls retained,
+- regional boss materials already earned retained,
+- Relic mastery/discoveries retained,
+- run-only state lost,
+- deepest region / major encounter reached where useful.
+
+A player who defeats Keeper or Twin Maws and dies later must clearly understand that the corresponding boss material was already banked.
+
+# Final-story Heart completion
 
 The seventh successful story run does not use the normal Binding-return sequence.
 
-After the player defeats the Shogun's current body and the Heart within the same active run:
+After defeating the Shogun and Heart in the same active run:
 
 1. save story completion and permanent rewards,
 2. record the first true-final Heart victory,
-3. play the canonical curse-ending and Akio-mortality sequence,
-4. trigger the ending and credits,
-5. unlock postgame run continuation and repeatable Heart-route access,
-6. preserve a completed-story marker on the save.
+3. play the canonical curse-ending / Akio-mortality sequence,
+4. trigger ending and credits,
+5. unlock completed-save/postgame behavior,
+6. preserve a completed-story marker.
 
-The first Heart victory should not be presented as one more Binding clear.
+The first Heart victory is not presented as another Binding clear.
 
-## Repeat Heart completion
+# Repeat Heart completion
 
-After story completion, the Heart route may be repeated as a gameplay challenge. A repeat result may record build, time, difficulty, or future challenge information but does not advance the canonical ending again.
+Postgame Heart clears are gameplay challenges only. Results may record build, time, or future approved challenge information without advancing canon again.
 
-## Presentation goal
+# Presentation goal
 
-Successful Binding return should feel consequential rather than celebratory in a generic arcade sense. The final-build recap should help players remember successful combinations without turning into a permanent loadout-save system.
+Binding return should feel consequential rather than generically celebratory. The player should quickly understand:
 
-## Reformation treatment
+1. what permanent progress survived,
+2. what campaign progress changed,
+3. what temporary build was lost.
+
+# Reformation treatment
 
 - deeper crimson pulse through the return point,
-- blood surface or warding marks reacting,
-- mist gathering around the spawn point,
+- blood surface / warding marks reacting,
+- Mist gathering around the spawn point,
 - brief red-black collapse and reconstruction flash,
-- optional momentary residue from the equipped Aspect,
-- controlled return to normal Strand ambience.
+- optional momentary Aspect residue,
+- controlled return to Strand ambience.
 
 The canonical Heart ending instead removes Returning Blood and leaves Akio mortal.
 
-## Technical requirements
+# Technical requirements
 
-- Results data must be assembled from finalized persistence rules.
-- Permanent rewards and Binding progress are saved before the player can leave the screen.
-- Story completion is saved before credits begin.
-- Run-only state is visibly separated from retained progression.
-- The final Technique build may be recorded for run history or summary only if it remains clearly non-equipped and non-recoverable.
-- Binding-return, first Heart clear, and repeat Heart clear require distinct result-state flags.
+- Permanent rewards must be saved at acquisition; the results screen summarizes them.
+- Binding/story completion is saved before the player can leave the sequence.
+- Run-only and persistent information must be visually separated.
+- Final Technique build may be recorded for run history only if clearly non-equipped/non-recoverable.
+- Failed run, Binding return, first Heart clear, and repeat Heart clear require distinct result states.

@@ -4,15 +4,17 @@ title: Strand HUD and Interaction Prompts
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-07-11
+last_reviewed: 2026-08-17
 topics:
   - strand-hud
   - currencies
+  - boss-materials
   - interaction-prompts
 related:
   - UI-HUD
   - UI-HUB-INTERFACES
   - GAMEPLAY-ITEMS-REWARDS
+  - GAMEPLAY-PROGRESSION
   - CONTENT-STRAND-OVERVIEW
 ---
 
@@ -20,34 +22,40 @@ related:
 
 ## Strand HUD
 
-The Strand HUD displays persistent resources while removing combat-state modules. The absence of HP, posture, Spirit, stance, prosthetic, and run-status elements should immediately communicate that Akio is in the hub rather than an active run.
+The Strand HUD shows only persistent information worth monitoring continuously and removes active-combat modules.
 
-### Required modules
+### Required persistent wallet modules
 
-- Mist
-- Scrolls
-- Boss Emblems
-- any future approved persistent currency
+- **Mist**
+- **Scrolls**
 
-Gold is run-only under the current progression rules and should not appear as a persistent Strand wallet.
+Gold is run-only and does not appear as a persistent Strand wallet.
 
-Current currency icons reuse their Run HUD language but may appear slightly larger and calmer. Counters sit in an upper corner so the lower combat area remains clear.
+Regional boss materials are deliberately low-count mastery materials rather than general currencies. They **do not need permanent corner counters**. Show their owned quantity contextually in:
+
+- results summaries,
+- upgrade detail/cost panels that require them,
+- inventory/collection reference if later needed.
+
+There is no generic Boss Emblem counter.
+
+Mist/Scroll counters may sit in an upper corner with calmer presentation than the Run HUD.
 
 ### State transition
 
-Switching between Strand HUD and Run HUD must be clean. Do not allow partial overlap, stale run state, or combat resources to remain visible after return.
+Switching between Strand and Run HUD must remove stale run-only state cleanly.
 
 ## Interaction prompts
 
-Interaction prompts identify usable NPCs, stations, doors, reward objects, and world interactibles in the Strand and during runs.
+Prompts identify usable NPCs, stations, doors, reward objects, and world interactibles.
 
 ### Visual language
 
 - small and ink-inspired,
-- screen-readable but quiet,
-- anchored above or near the interactible,
+- readable but quiet,
+- anchored near the interactible,
 - consistent input-glyph treatment,
-- hidden or suppressed during active combat when interaction is unavailable.
+- suppressed during active combat when unavailable.
 
 ### Required states
 
@@ -55,11 +63,11 @@ Interaction prompts identify usable NPCs, stations, doors, reward objects, and w
 - focused/in range,
 - unavailable,
 - locked,
-- requires resource or condition,
-- hold or confirm where applicable.
+- requires resource/condition,
+- hold/confirm where applicable.
 
-Use one shared template across NPCs and stations. Context-specific variants should be added only where the interaction rule is materially different.
+Use one shared template unless an interaction rule materially differs.
 
-## Accessibility and implementation
+## Accessibility / implementation
 
-Prompts cannot rely on color alone. Input glyphs must update for controller or keyboard use. Godot owns proximity checks, focus priority, prompt text, lock conditions, and show/hide timing; art owns the reusable frame, glyph treatment, and state examples.
+Prompts cannot rely on color alone. Input glyphs update for controller/keyboard. Godot owns focus/proximity/lock/show-hide logic; art owns reusable frames, glyph treatment, and state examples.

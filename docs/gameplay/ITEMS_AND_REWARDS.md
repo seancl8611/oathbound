@@ -4,23 +4,21 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - currencies
-  - pickups
-  - techniques
-  - relics
-  - blood-resource
-  - room-rewards
-  - reward-cadence
-  - reward-weighting
+  - persistent-resources
+  - boss-materials
+  - mist
+  - scrolls
   - gold-economy
+  - room-rewards
+  - reward-weighting
+  - reward-cadence
   - shops
   - recovery
   - temporary-capacity
-  - run-infrastructure
-  - heart-binding-completion
-  - regional-routing
+  - regional-boss-rewards
 related:
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
@@ -33,55 +31,188 @@ related:
 
 # Items, Currencies, and Rewards
 
-This file owns reward categories, currency ownership, room payouts, Gold/Shop economy, survival/recovery values, temporary capacity rewards, and the current reward-cadence framework. `RUN_STRUCTURE.md` owns regional chamber counts, branching-frequency targets, and route-network safeguards. Numerical values below are approved **prototype implementation targets** intended for playtesting rather than immutable final balance law.
+This file owns reward categories, resource ownership, room payouts, Gold/Shop economy, persistent-resource payouts, survival/recovery values, temporary-capacity rewards, and reward cadence. `RUN_STRUCTURE.md` owns chamber counts, branching frequency, route safeguards, and regional opportunity guarantees. Numerical values below are approved **prototype implementation targets** and remain playtest-tunable.
 
 ## Reward goals
 
-The reward framework should:
+Rewards should create meaningful competition between:
 
-- make route choices readable before commitment,
-- build run power gradually,
-- create meaningful competition between Aspect, Technique, survival, economy, and persistent-progression routes,
-- keep Technique rewards valuable after all five core combat slots are filled,
-- support focused and hybrid Technique builds,
-- allow occasional high-roll builds without making ideal builds routine,
-- make survival recovery meaningful without fully erasing poor combat performance,
-- and avoid severe random failure or exact-combination dependence.
-
-Major rewards support:
-
-1. **Build growth** — Technique rewards, Relic opportunities, and optional Aspect Tier advancement through Shrine routes.
+1. **Build growth** — Techniques, Relic opportunities, Shrine/Aspect advancement.
 2. **Survival** — Health, Spirit, recovery, temporary capacity.
-3. **Economy** — Gold, Shops, rerolls.
-4. **Persistent progress** — Mist, Scrolls, Boss Emblems, unlocks, discoveries, Heart Bindings, and approved permanent progression.
+3. **Economy** — Gold, Shops, Technique rerolls.
+4. **Persistent progress** — Mist, Scrolls, regional boss materials, unlocks, discoveries, and campaign progress.
 
-## Currency families
+Persistent rewards should remain worthwhile on failed runs without making the correct route choice automatically `take permanent currency`.
 
-| Currency | Persistence | Primary role |
+# Resource ownership
+
+## General currencies
+
+| Resource | Persistence | Primary role |
 |---|---|---|
-| Mist | Persistent | Broad meta progression, especially Bloodwell-owned progression |
-| Scroll | Persistent | Forge-focused Prosthetic development |
-| Boss Emblem | Persistent | Rare major progression gates where explicitly assigned |
-| Gold | Run-only | Shops and run economy |
+| **Mist** | Persistent | Broad meta progression, especially Bloodwell-owned Akio / Run Infrastructure progression and other approved broad upgrades |
+| **Scroll / Scrolls** | Persistent | Forge-focused Prosthetic development |
+| **Gold** | Run-only | Shops and run economy |
 
-Corruption, Blood, Relic mastery, and destroyed Heart Bindings are not currencies.
+Oathbound does **not** use a general `Boss Emblem` currency.
 
-- **Corruption** governs Shrine-ready Aspect progression.
-- **Blood** is a Tier II-and-later run-only combat resource used to activate the selected Blood Art.
-- **Relic mastery** is persistent progression earned through eligible kills while a Relic is equipped.
-- **Destroyed Heart Bindings** are persistent campaign state.
+## Regional boss materials
 
-Blood is not purchased, banked at the Strand, displayed as a route reward, or carried between runs. `Mist Shards` remains deprecated unless intentionally restored.
+Each of the three regional bosses drops one **boss-specific permanent material** every time that boss is defeated:
 
-Sharing the Forge between Prosthetics and Relics does not automatically make Scrolls a Relic currency. Exact Relic upgrade costs, if any, remain later design.
+- Keeper of the Gate material,
+- Twin Maws material,
+- Eclipse Shogun material.
+
+Exact player-facing item names are intentionally deferred to a later item/content naming pass. Mechanically:
+
+- exactly **1** corresponding material is awarded per boss kill,
+- the material persists immediately when earned even if Akio later dies in the same run,
+- each boss has its own material rather than contributing to one generic boss currency,
+- minibosses do not create additional boss-material families,
+- quantities remain deliberately small,
+- materials are not routine Shop currency and are not used for ordinary repeat purchases,
+- and they serve mainly as **secondary requirements for a small number of major permanent upgrades** alongside the upgrade system's normal currency.
+
+The intended cost language is usually **1 material** for an early significant gate, **2** for a stronger gate, and **3** for a major late gate. Costs above 3 should be exceptional because the system should reward repeated mastery without turning bosses into material farms.
+
+Each regional material should have only a few meaningful uses across the base game—roughly **2–4 uses per material** is the current scope target. Basic progression should remain available through its normal currency; boss materials gate selected high-value upgrades rather than every rank.
+
+Progression timing should follow run mastery:
+
+- Keeper material may support earlier major upgrades,
+- Twin Maws material primarily supports midgame major upgrades,
+- Shogun material primarily supports late-game or high-end upgrades.
+
+## Not currencies
+
+The following are tracked resources or progression states but are not spendable currencies:
+
+- **Corruption** — Shrine-ready Aspect pressure.
+- **Blood** — Tier-II-and-later run-only Blood Art resource.
+- **Relic mastery** — persistent progression earned while the Relic is equipped.
+- **Heart Bindings** — persistent campaign state.
+
+`Mist Shards` remains deprecated.
+
+# Persistent-resource payout prototype
+
+## Standard Combat primary rewards
+
+When a standard Combat room rolls Mist or Scrolls as its previewed primary reward:
+
+| Region | Mist reward | Scroll reward |
+|---|---:|---:|
+| **Hushiro** | 20 Mist | 1 Scroll |
+| **Yomori** | 25 Mist | 1 Scroll |
+| **Kagutsuchi** | 30 Mist | 2 Scrolls |
+
+Later rewards increase modestly because choosing permanent progression deeper in the run gives up increasingly valuable immediate build power.
+
+## No ordinary persistent-resource farming
+
+For the first prototype:
+
+- ordinary enemies do **not** randomly drop Mist or Scrolls,
+- ordinary breakables do **not** randomly drop Mist or Scrolls,
+- persistent progression comes from previewed rewards and deliberate high-value sources.
+
+This prevents enemy farming and avoids making breakable-clearing mandatory for efficient meta progression.
+
+## Treasure persistent rewards
+
+When Treasure resolves into persistent currency, use:
+
+| Region | Mist Treasure | Scroll Treasure |
+|---|---:|---:|
+| **Hushiro** | 50 Mist | 2 Scrolls |
+| **Yomori** | 60 Mist | 2 Scrolls |
+| **Kagutsuchi** | 75 Mist | 3 Scrolls |
+
+These are approximately two to two-and-a-half ordinary persistent-resource rewards and should feel premium without making Treasure automatically superior to every immediate-power reward.
+
+## Miniboss persistent bonus
+
+Every defeated miniboss grants:
+
+- **+10 Mist**,
+- **+1 Scroll**,
+
+in addition to its normal high-value primary reward.
+
+The premium current-run reward remains the main reason to take the harder branch. The persistent bonus ensures the victory still matters if the run later fails.
+
+## Regional boss persistent rewards
+
+Each regional boss kill grants:
+
+| Boss | Mist | Boss material |
+|---|---:|---:|
+| **Keeper of the Gate** | +10 Mist | +1 Keeper material |
+| **Twin Maws** | +15 Mist | +1 Twin Maws material |
+| **Eclipse Shogun** | +25 Mist | +1 Shogun material |
+
+A complete Shogun route therefore provides **50 guaranteed Mist from regional boss kills** before any optional Mist routes, Treasure, or miniboss bonuses.
+
+Boss materials are awarded on every kill, not only first kills and not only successful Binding runs. This lets players progress through repeated mastery of Keeper or Twin Maws even when they have not yet completed the entire island.
+
+## Failed and successful run retention
+
+Mist, Scrolls, regional boss materials, Relic mastery, discoveries, and other explicitly persistent rewards are saved when earned.
+
+There is:
+
+- no death tax,
+- no requirement to finish the run before banking earned persistent resources,
+- no automatic loss percentage on failure,
+- and no generic victory multiplier applied to already-earned resources.
+
+Successful runs naturally earn more because they reach more reward opportunities and bosses. Heart Binding destruction remains campaign progression rather than a spendable completion token.
+
+## Working earnings targets
+
+These ranges are pacing targets, not guarantees:
+
+| Run depth / routing | Mist | Scrolls | Regional boss materials |
+|---|---:|---:|---:|
+| Early Hushiro failure | ~0–25 | ~0–1 | 0 |
+| Failure after Keeper | ~20–50 | ~0–2 | normally 1 Keeper material |
+| Failure after Twin Maws | ~40–80 | ~1–3 | Keeper + Twin Maws materials earned that run |
+| Normal successful Binding run | ~80–120 | ~2–4 | 1 of each regional material |
+| Persistent-focused successful run | ~130–180+ | ~4–6 | 1 of each regional material |
+
+A persistent-focused route should enter later fights with less immediate run power than a Technique/Shrine/survival-focused route. That opportunity cost is intentional.
+
+# Permanent-cost calibration
+
+`PROGRESSION.md` owns upgrade-system boundaries; this section provides reward-economy calibration targets.
+
+## Scroll cost prototype
+
+The current 19 Prosthetic Forge upgrades use the working sequential cost curve:
+
+- first upgrade in a tool path: **2 Scrolls**,
+- second upgrade: **4 Scrolls**,
+- third upgrade where one exists: **6 Scrolls**.
+
+Across the current eight-tool / 19-upgrade roster, this produces a working total of **66 Scrolls** to buy every Prosthetic upgrade. This is a prototype cost horizon, not a requirement that the campaign expect full completion.
+
+## Mist cost calibration
+
+Exact Bloodwell and Blood Mirror node inventories are not yet defined, so individual Mist costs remain later design. Use these working bands when those trees are authored:
+
+- small early upgrade: roughly **40–50 Mist**,
+- normal meaningful upgrade: roughly **75–100 Mist**,
+- major upgrade: roughly **125–175 Mist**,
+- exceptional boss-gated major upgrade: roughly **200–250+ Mist plus 1–3 appropriate regional boss materials**.
+
+Boss materials supplement the normal currency rather than replacing it. A major Wraith, Akio, Run Infrastructure, Relic, or other approved permanent upgrade may use an appropriate regional material when its place in progression justifies that mastery gate; exact assignments belong to the owning progression pass.
 
 # Gold economy prototype
 
-Akio begins a normal run at **0 Gold** unless a Relic or another explicitly approved persistent effect changes starting Gold.
+Akio begins a normal run at **0 Gold** unless an approved effect changes starting Gold.
 
 ## Standard Gold rewards
-
-A standard Combat-room Gold primary reward currently pays:
 
 | Region | Gold reward |
 |---|---:|
@@ -89,51 +220,34 @@ A standard Combat-room Gold primary reward currently pays:
 | **Yomori** | 70 Gold |
 | **Kagutsuchi** | 80 Gold |
 
-Later Gold rewards rise modestly because fewer spending opportunities remain, not because Shop prices inflate by region.
-
-Minor enemy / breakable Gold drops, when generated, are **5–10 Gold**. These are flow-smoothing supplements and must not make the primary Gold route reward irrelevant.
+Minor enemy / breakable Gold drops, when generated, are **5–10 Gold**.
 
 Working successful-run economy targets:
 
-- a typical player deliberately takes roughly **3–4 Gold primary rewards**,
-- a normal successful run has roughly **220–320 Gold** available across its route and minor drops,
-- an economy-focused route may reach roughly **350–450+ Gold**,
-- a player largely ignoring Gold may operate around **100–180 Gold**,
-- a typical successful run makes roughly **2–4 Shop purchases** across **1–2 visited Shops**,
-- and a strongly economy-focused run may make roughly **4–6 purchases**.
+- roughly **3–4** Gold primary rewards taken,
+- roughly **220–320 Gold** available on a normal successful route,
+- roughly **350–450+** on an economy-focused route,
+- roughly **100–180** when largely ignoring Gold,
+- roughly **2–4 Shop purchases** across **1–2 visited Shops**,
+- roughly **4–6 purchases** on a strongly economy-focused route.
 
-These are playtest targets rather than guarantees.
+After the final realistic Shop opportunity has been passed, Gold cannot appear as a primary route reward; its weight is redistributed among eligible rewards.
 
-## Late-Gold suppression
+# Minor pickups
 
-Gold remains eligible only while a realistic Shop spending opportunity remains ahead.
+- minor Health pickup: **5% max Health**,
+- minor Spirit pickup: **10% max Spirit**,
+- minor Gold drop: **5–10 Gold**.
 
-After the run has passed the final possible Shop opportunity, **Gold cannot appear as a primary route reward**. Its weight is redistributed among currently eligible Technique, recovery, capacity, reroll, Mist, Scroll, or other approved rewards.
+Blood is generated through Blood Aspect combat rules rather than as an ordinary pickup. Mist and Scrolls are excluded from ordinary random minor drops in the current prototype.
 
-# Pickups and minor drops
+# Route rewards
 
-- A minor Health pickup restores **5% max Health**.
-- A minor Spirit pickup restores **10% max Spirit**.
-- A minor Gold drop is **5–10 Gold**.
-- Minor enemy and breakable drops may also include small Mist or Scroll value where later approved.
-- Blood is generated through the approved Blood Aspect combat rules rather than treated as an ordinary pickup.
-- Minor drops support flow but do not replace the room's previewed primary reward.
+Route exits preview the primary reward category before commitment. Supported categories include Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, Rest, Shop, Treasure, Miniboss, and Boss.
 
-# Route previews and opportunity cost
-
-The primary reward category should be shown before route commitment through a consistent symbol or environmental marker.
-
-Supported preview categories may include Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, Rest, Shop, Treasure, Miniboss, and Boss.
-
-Choosing a Shrine can mean giving up a Technique, Relic, economy, survival, or persistent-resource opportunity; choosing another route can delay Aspect advancement.
-
-The approved prototype route model uses fixed chamber-index bands, weighted eligible contents, and hard safeguards rather than pure unbounded randomness. All three regional chamber counts, miniboss windows, minimum opportunity safeguards, and branch-count percentages are owned by `RUN_STRUCTURE.md`.
-
-A guaranteed route-network opportunity is not a mandatory room. The player may still choose a competing exit and forgo it.
+`RUN_STRUCTURE.md` owns all regional minimum-opportunity safeguards and branch topology. This file does not duplicate those tables.
 
 ## Prototype room-type weighting
-
-When an ordinary eligible route node is generated, the current chamber band uses these base room-type weights before safeguards and fixed miniboss/boss injections:
 
 | Room type | Opening | Main stretch | Pre-boss / final stretch |
 |---|---:|---:|---:|
@@ -143,66 +257,9 @@ When an ordinary eligible route node is generated, the current chamber band uses
 | Shop | 2% | 7% | 13% |
 | Treasure | 6% | 8% | 11% |
 
-Rules:
+Minibosses are deliberately injected into their approved windows and regional bosses are fixed endpoints rather than rolls from this table.
 
-- miniboss opportunities are not rolled from this table; one optional miniboss opportunity is deliberately injected into each region's approved miniboss window,
-- regional bosses are fixed endpoints and are not rolled,
-- Hushiro's earliest chambers may suppress Rest and Shop when they would have little practical value,
-- safe service-room adjacency is prevented by the route safeguards in `RUN_STRUCTURE.md`,
-- and pre-boss preparation safeguards may override these weights when required.
-
-Across a normal completed 33-chamber regional route, the working target is roughly **20–22 standard Combat chambers**, with the remaining non-boss chambers occupied by Shrines, Rests, Shops, Treasure, and optional minibosses according to routing choices and safeguards. This is an expected range rather than a fixed composition.
-
-# Approved regional opportunity safeguards
-
-## Hushiro
-
-Before Keeper, the generated route network contains at least:
-
-- 1 Shrine opportunity,
-- 1 Shop opportunity,
-- 1 Rest opportunity,
-- 1 optional miniboss opportunity,
-- 3 Technique-reward opportunities total, including the fixed Chamber 1 Technique reward.
-
-The Hushiro miniboss opportunity appears within Chambers 5–8 and selects either Village Ogre or The Collector for that run.
-
-## Yomori
-
-Before Twin Maws, the generated route network contains at least:
-
-- 1 Shrine opportunity,
-- 1 Shop opportunity,
-- 1 Rest opportunity,
-- 1 optional miniboss opportunity,
-- 2 Technique-reward opportunities.
-
-The Yomori miniboss opportunity appears within Chambers 4–7 and selects either The Embered Pilgrim or Rotwood Host for that run.
-
-## Kagutsuchi
-
-Before the Eclipse Shogun, the generated route network contains at least:
-
-- 1 Shrine opportunity,
-- 1 Shop opportunity,
-- 1 Rest opportunity,
-- 1 optional miniboss opportunity,
-- 2 Technique-reward opportunities,
-- 1 meaningful final-preparation opportunity across Chambers 9–10.
-
-The Kagutsuchi miniboss opportunity appears within Chambers 4–7 and selects either Blood Lotus or Eternal Swordsman for that run.
-
-These safeguards define availability across the route network, not guaranteed player pickups.
-
-# Standard Combat rewards
-
-A standard Combat room awards one previewed primary reward after completion.
-
-Eligible rewards include Gold, Mist, Scrolls, Health or Spirit recovery, temporary capacity, a Technique reward, and an approved reroll resource.
-
-Combat rooms are the **primary source of Technique rewards**, but not the only source.
-
-## Prototype standard-combat reward weights
+## Prototype standard-Combat reward weights
 
 | Reward | Hushiro | Yomori | Kagutsuchi |
 |---|---:|---:|---:|
@@ -214,130 +271,87 @@ Combat rooms are the **primary source of Technique rewards**, but not the only s
 | Temporary capacity | 7% | 10% | 11% |
 | Reroll resource | 7% | 8% | 10% |
 
-These weights intentionally shift over the run:
+Relics are not part of the ordinary standard-Combat table. Consumables have **0% ordinary primary-room reward weight** in the first prototype.
 
-- Hushiro emphasizes Techniques so the run gains an identity quickly,
-- Yomori is the balanced build-deepening region,
-- Kagutsuchi slightly reduces raw Technique frequency while increasing survival, capacity, and reroll value for mature-build optimization.
+## Prototype cadence targets
 
-Relics are **not** part of the ordinary standard-Combat reward table. They remain a rarer supporting layer associated with approved Treasure, miniboss, Shop, boss, discovery, or other special sources.
+Across a normal successful 33-chamber route, use these first-pass cadence targets:
 
-Consumables have **0% primary room-reward weight** in the first route-generation prototype. If consumables remain in launch scope, they should initially enter through Shops, Treasure, or another contained source rather than becoming another ordinary primary reward category.
+- roughly **20–22 standard Combat chambers**,
+- roughly **4–5 Shrine opportunities visible**, with about **2–3 normally chosen**,
+- roughly **3–4 Shop opportunities visible**, with about **1–2 normally visited**,
+- roughly **3–4 Rest opportunities visible**, with about **1–2 normally visited**,
+- roughly **1–2 Treasure rooms normally taken**,
+- roughly **1–2 minibosses normally fought** despite one miniboss opportunity existing in each regional route network,
+- roughly **1–2 total temporary-capacity improvements** on a normal successful run, with survival-focused routes able to take roughly **3–4**.
 
-## Standard recovery rewards
+These are expected pacing ranges rather than quotas. A player may intentionally sacrifice one category for another through route choice. Technique cadence is specified below because it also depends on build eligibility and offer generation.
 
-When the recovery category is generated, the route preview identifies **Health** or **Spirit** before commitment.
+# Technique rewards
 
-- **Health Recovery:** restore **25% max Health**.
-- **Spirit Recovery:** restore **35% max Spirit**.
+A Technique reward uses the universal three-choice screen and generation rules in `TECHNIQUES.md` regardless of source. Standard Combat is the primary source; Shops, Treasure, minibosses, regional bosses, and explicitly approved sources may use the same system with their approved source-quality weighting.
 
-Recovery cannot exceed the current maximum.
+Current pickup targets for a Technique-invested successful run are roughly:
 
-## Standard temporary-capacity rewards
+- Hushiro: **3** including the fixed Chamber 1 reward,
+- Yomori: **2–3** more,
+- Kagutsuchi: **2–3** more,
+- full run: roughly **7–9**, with focused routes potentially reaching **10–12+**.
 
-A normal capacity reward lasts until the run ends:
+There is no global Technique inventory cap.
 
-- **Health Capacity:** +**15% of starting max Health**.
-- **Spirit Capacity:** +**20% of starting max Spirit**.
+# Survival and temporary capacity
 
-Capacity rewards also grant the same amount as current resource immediately. For example, a +15% starting-max Health reward raises both maximum and current Health by that amount, up to the new maximum.
+## Standard Combat recovery
 
-Multiple capacity rewards stack **additively from the run's starting maximum**, not multiplicatively. The first prototype uses no separate hard pickup cap; route scarcity and opportunity cost are the constraint.
+- Health: **+25% max Health**.
+- Spirit: **+35% max Spirit**.
 
-# Universal Technique reward
+## Standard temporary capacity
 
-A Technique reward always opens the same underlying three-choice Technique reward screen and follows the eligibility, composition, rarity, source-quality, refinement, replacement, Cross-family, Legendary, and reroll rules in `TECHNIQUES.md`.
+- Health: **+15% of starting max Health**.
+- Spirit: **+20% of starting max Spirit**.
 
-A Technique reward may come from:
+Capacity rewards also grant the same amount as current resource and stack additively from starting maximum.
 
-- a standard Combat room,
-- a Shop purchase,
-- Treasure,
-- a miniboss,
-- a regional boss,
-- or another explicitly approved source.
+## Shrine support below full Corruption
 
-The source does not make the reward inherently a refinement reward, Legendary reward, or another separate Technique subtype.
+- Health support: **+20% max Health**, or
+- Spirit support: **+25% max Spirit**.
 
-There is no global Technique inventory cap. The main cap on Technique growth is how many Technique rewards the player chooses and receives during the run.
+Full-Corruption Resist/Embrace behavior remains owned by `CORRUPTION_AND_SHRINES.md`.
 
-The player may decline all Technique choices for a displayed lower-value fallback when that source allows a decline.
+## Rest
 
-## Prototype Technique cadence
+Rest restores:
 
-The current successful-run target is:
+- **35% max Health**,
+- **50% max Spirit**.
 
-- **Hushiro:** approximately 3 Technique pickups for a player meaningfully investing in Techniques, including the fixed Chamber 1 reward,
-- **Yomori:** approximately 2–3 additional Technique pickups,
-- **Kagutsuchi:** approximately 2–3 additional Technique pickups.
+Rest does not fully reset attrition and does not provide Technique respec behavior.
 
-Typical outcomes:
+## Treasure survival rewards
 
-- a normal Technique-invested successful run ends around **7–9 Technique pickups**,
-- a strongly Technique-focused route may reach roughly **10–12+**,
-- a player prioritizing Shrines, survival, economy, or persistent resources may finish with roughly **4–6**.
+- major Health recovery: **+50% max Health**,
+- major Spirit recovery: **+65% max Spirit**,
+- enhanced Health capacity: **+20% starting max Health** plus matching current Health,
+- enhanced Spirit capacity: **+25% starting max Spirit** plus matching current Spirit.
 
-These are expected pickup ranges, not inventory caps or guaranteed counts. The player should see more Technique opportunities than they actually take because Technique routes compete with Shrine, survival, economy, and other rewards.
+## Miniboss survival rewards
 
-# Shrine rooms
-
-Shrines own Blood Aspect stabilization and optional escalation.
-
-- At full Corruption: present Resist or Embrace.
-- Embrace advances the fixed Aspect Tier.
-- Resist keeps the Tier and provides its separately approved stabilization support.
-- Below full Corruption: the Shrine may provide one modest support result of **20% max Health recovery** or **25% max Spirit recovery**.
-- Shrines do not normally present ordinary Technique rewards.
-- Blood Art charge is separate from Corruption and does not pay for Embrace.
-
-The below-full support values do not create an additional large automatic heal alongside a full-Corruption Resist/Embrace choice.
-
-Permanent **Run Infrastructure** upgrades may later improve approved Shrine support, but they cannot reduce or bypass the fixed Tier path, grant permanent Tier progress, or unlock Blood early.
-
-## Prototype Shrine cadence
-
-The full route should expose roughly **4–5 Shrine opportunities** during a typical run, while a normal player may actually choose approximately **2–3**. An Aspect-focused player may deliberately take four or more when routing and Corruption timing support it.
-
-This cadence should make Tier II a common hybrid outcome, Tier III a deliberate Aspect-heavy investment, and Tier IV possible without becoming automatic. Mandatory encounters continue to support lower-Tier Technique-focused outcomes.
-
-# Rest rooms
-
-Rest rooms provide:
-
-- **35% max Health recovery**,
-- **50% max Spirit recovery**,
-- read-only build review,
-- and short narrative breathing room where appropriate.
-
-A Rest does **not** fully heal or fully refill Spirit by default. Its value comes from restoring both major run resources at once in exchange for choosing the Rest route over another reward.
-
-The retired reserve-slot model does not support routine Technique swapping at Rest rooms.
-
-Permanent **Run Infrastructure** upgrades may later improve Rest support or introduce approved additional recovery opportunities. Exact permanent upgrades remain later detailed design.
-
-## Prototype Rest cadence
-
-The route should expose roughly **3–4 Rest opportunities** across a typical successful run, with approximately **1–2 normally visited**. Increased pre-boss weighting makes recovery more available when it matters without making a free heal automatic.
+A miniboss may use enhanced Health or Spirit capacity as its premium primary reward. Pure healing is not a primary miniboss reward in the first prototype.
 
 # Shops
 
-Run Shops use Gold and present **3 purchasable items**. The player may buy every displayed item they can afford; there is no one-purchase-per-Shop limit.
+Run Shops use Gold and present **3 purchasable items**:
 
-Shop prices remain **stable across regions** in the first prototype. Later regional Gold rewards rise modestly, but the item itself does not become more expensive merely because Akio reached Yomori or Kagutsuchi.
+1. **Survival** — Health/Spirit recovery.
+2. **Build** — Technique, temporary capacity, or reroll.
+3. **Flex / premium** — Technique, capacity, reroll, stronger recovery, occasional Relic, or another approved premium item.
 
-## Shop inventory structure
+The player may buy every displayed item they can afford. Shop inventory itself does not reroll in the first prototype.
 
-Each Shop uses three functional inventory slots:
-
-1. **Survival slot** — Health recovery, Spirit recovery, or an appropriate stronger recovery option.
-2. **Build slot** — Technique reward, temporary max Health, temporary max Spirit, or reroll resource.
-3. **Flex / premium slot** — Technique reward, temporary capacity, reroll, stronger recovery, occasional Relic opportunity, or another later-approved high-value run item.
-
-The first prototype does **not** allow refreshing or rerolling the Shop's three-item inventory. Technique rewards purchased from a Shop may still use Technique-screen rerolls normally.
-
-When an eligible Relic opportunity is available, the flex slot has approximately a **10% chance** to become a Relic opportunity. Seeing zero or one Shop Relic opportunity over a complete run should be normal.
-
-## Prototype Shop prices and values
+When an eligible Relic opportunity exists, the flex slot has approximately a **10%** chance to become one.
 
 | Purchase | Price | Effect |
 |---|---:|---|
@@ -346,174 +360,85 @@ When an eligible Relic opportunity is available, the flex slot has approximately
 | Large Health restore | 55 Gold | +45% max Health |
 | Large Spirit restore | 50 Gold | +50% max Spirit |
 | Reroll resource | 45 Gold | +1 Technique reroll resource |
-| Temporary max Health | 65 Gold | +15% starting max Health and matching current Health |
-| Temporary max Spirit | 60 Gold | +20% starting max Spirit and matching current Spirit |
-| Technique reward | 100 Gold | Open the normal Shop-quality Technique reward screen |
-| Relic opportunity | 140 Gold | Present the approved Relic opportunity when eligible |
+| Temporary max Health | 65 Gold | +15% starting max Health + matching current Health |
+| Temporary max Spirit | 60 Gold | +20% starting max Spirit + matching current Spirit |
+| Technique reward | 100 Gold | Shop-quality Technique screen |
+| Relic opportunity | 140 Gold | Approved Relic opportunity when eligible |
 
-One ordinary Gold reward should therefore provide useful spending power without automatically converting into a Technique. Gold offers flexibility, but immediate Technique routing remains more directly efficient for pure build growth.
+Prices remain stable across regions in this prototype.
 
-# Treasure and miniboss rewards
+# Treasure, miniboss, and boss reward hierarchy
 
-Treasure rooms may provide a Technique reward, Relic opportunity, large currency bundle, major recovery, enhanced temporary capacity, or rare consumable if consumables ship.
+Treasure may provide a Technique, Relic opportunity, persistent-resource bundle, major recovery, enhanced capacity, or approved rare consumable if consumables remain in launch scope.
 
-## Treasure survival values
+A miniboss always provides meaningful build development rather than only ordinary Gold or healing, plus its fixed **+10 Mist / +1 Scroll** persistent bonus.
 
-A Treasure survival reward may be:
+Regional bosses combine:
 
-- **Major Health recovery:** +50% max Health,
-- **Major Spirit recovery:** +65% max Spirit,
-- **Enhanced Health Capacity:** +20% starting max Health and matching current Health,
-- **Enhanced Spirit Capacity:** +25% starting max Spirit and matching current Spirit.
+- their fixed persistent Mist payout,
+- their fixed boss-specific material drop,
+- narrative/codex progression where applicable,
+- and, for Keeper / Twin Maws, a separate current-run boss reward before the regional transition.
 
-Treasure survival rewards intentionally outperform ordinary Combat-room survival rewards.
+The exact **current-run reward mix** for Keeper and Twin Maws remains the next reward-side integration question. Boss materials do not replace those run rewards.
 
-## Miniboss rewards
+# Regional transition recovery
 
-A miniboss guarantees meaningful build development and should never award only ordinary Gold or pure healing.
-
-Possible primary rewards include:
-
-- a premium Technique reward,
-- a Relic opportunity,
-- a special encounter reward,
-- **Enhanced Health Capacity: +20% starting max Health and matching current Health**,
-- **Enhanced Spirit Capacity: +25% starting max Spirit and matching current Spirit**,
-- plus modest additional Mist or Scrolls where approved.
-
-Pure Health or Spirit restoration is not a primary miniboss reward in the first prototype.
-
-Hushiro, Yomori, and Kagutsuchi each generate one optional miniboss route opportunity in their approved prototype windows. The player may route around it and therefore fights 0–1 minibosses in each region.
-
-## Prototype Treasure and miniboss cadence
-
-- Treasure is not region-guaranteed; a normal successful route should usually contain roughly **1–2 Treasure rooms actually taken**.
-- All three miniboss opportunities exist in the generated route network, but the target normal successful run is roughly **1–2 minibosses actually fought**.
-- Miniboss rewards must be valuable enough that choosing the harder branch is tempting, but the competing non-miniboss route must remain legitimate.
-
-# Regional boss rewards and transitions
-
-The Area 1 and Area 2 bosses provide both persistent and current-run value.
-
-Persistent rewards may include Boss Emblems, Mist, Scrolls, unlocks, and narrative or codex progress.
-
-Current-run rewards may include a premium Technique reward, Relic opportunity, or enhanced temporary Health / Spirit capacity. **Boss reward selection is separate from automatic regional-transition recovery**, so the player is not forced to sacrifice the boss's interesting reward merely to enter the next region alive.
-
-## Automatic regional-transition recovery
-
-After Keeper and after Twin Maws, the non-counted safe transition restores:
+After Keeper and Twin Maws, the non-counted safe transition restores:
 
 - **20% max Health**,
-- **35% max Spirit**.
+- **35% max Spirit**,
 
-After applying that restoration, enforce minimum next-region entry floors of:
+then enforces next-region floors of:
 
 - **35% max Health**,
 - **50% max Spirit**.
 
-The floor prevents an otherwise successful boss clear from beginning the next region effectively dead. It does not reset a damaged run to full. Blood is not automatically refilled.
-
-Run Infrastructure may later improve approved transition support without removing the need to manage resources during the run.
+The boss's interesting reward is separate from this automatic viability support.
 
 # Eclipse Shogun and Heart handoff
 
-The Eclipse Shogun is fixed at Kagutsuchi Chamber 11 and does not grant additional ordinary current-run power during the first six successful clears because those runs end after the Binding ritual.
+During the first six successful Binding clears, the Shogun grants his persistent boss rewards but no additional ordinary current-run power because the run proceeds into the Binding-completion sequence.
 
-After defeating him, Akio enters the Heart chamber, offers Returning Blood through the extraction apparatus, breaks one remaining Heart Binding, is dissolved by the Heart, and reconstructs at the Strand.
-
-Heart approach and Binding-completion spaces are outside Kagutsuchi's 11 counted chambers.
-
-After all six Bindings are destroyed, the seventh successful story run continues from the Shogun into the Heart with the same active build. Because this route adds the two-form final encounter after the full island and Shogun, the Heart handoff restores:
+On the seventh story run, the same active build continues from Shogun to the true-final Heart. The handoff restores:
 
 - **30% max Health**,
 - **50% max Spirit**,
 
-then enforces minimum Heart-entry floors of:
+then enforces Heart-entry floors of:
 
 - **40% max Health**,
 - **60% max Spirit**.
 
-This is a partial final-encounter reset, not a full refill. A player who defeats the Shogun in strong condition keeps that advantage; a player who barely survives receives enough recovery for the Heart to remain a legitimate final fight rather than implicitly requiring a near-perfect Shogun clear. Blood is not automatically refilled unless the Heart encounter later explicitly requires a different rule.
+Blood is not automatically refilled unless later Heart encounter integration explicitly changes that rule.
 
-Permanent completion rewards may include destroyed-Binding progress, Mist, Scrolls, Boss Emblems, unlocks, discoveries, codex progress, and results confirmation.
+Heart Binding destruction is campaign progress, not spendable currency.
 
 # Relics
 
-`RELICS.md` owns the Relic system and launch roster.
+`RELICS.md` owns the 10-Relic launch roster, one equipped slot, persistent collection/mastery/progression, and run-active benefits. Relics have no rarity tiers.
 
-The launch structure uses **one equipped Relic**. Relic ownership persists once unlocked or discovered, while the equipped effect is a run benefit. Relics are separate from Techniques and Prosthetics and do not consume a Technique combat slot.
+Relic acquisition remains intentionally uncommon. The current Shop flex slot may occasionally surface a Relic opportunity; final acquisition allocation and transition-swap placement remain later integration work.
 
-The approved launch roster contains **10 Relics**. Relics do **not** use Common / Rare / Legendary rarity tiers.
+# Run Infrastructure boundary
 
-Relic rewards should be relatively uncommon so the system remains a small supporting layer rather than competing constantly with Techniques, Shrines, economy, survival, or Aspect advancement.
-
-Relic acquisition sources remain open beyond the approved occasional Shop opportunity. Relics may eventually come from run rewards, quests, discoveries, collectibles, NPC progression, trials, or another approved source; exact allocation remains later design.
-
-Relics may be changed through approved limited transition opportunities rather than freely swapped in ordinary rooms. Exact swap timing remains later implementation work.
-
-Relic collection/mastery/progression is managed at the **Forge Bench** when Akio is in the Strand.
-
-# Run Infrastructure reward boundary
-
-Run Infrastructure is a single Bloodwell-owned permanent upgrade category that may affect future-run support around:
-
-- Rest and recovery,
-- Shrine support,
-- reward possibilities,
-- route information or routing assistance,
-- regional transitions,
-- beneficial special encounters or support conditions,
-- and approved persistent-resource opportunities.
-
-This umbrella prevents separate permanent trees for every room or reward subsystem. Exact upgrades and values remain later design.
-
-Run Infrastructure must preserve meaningful route opportunity cost and cannot make high-value rewards, ideal builds, recovery, or Aspect advancement automatic.
-
-# Survival and capacity pacing target
-
-A normal successful run should generally take roughly **1–2 temporary max-capacity improvements total** across Health and Spirit.
-
-A player deliberately prioritizing survivability / Spirit capacity may take roughly **3–4** at the cost of Techniques, Shrines, Gold, persistent resources, or other run power.
-
-Because capacity stacks additively from starting maximum, three ordinary Health-capacity rewards produce **145% of starting max Health**, not multiplicative compounding.
-
-The first prototype does not add a unique automatic pre-boss heal. Pre-boss safeguards expose existing Rest, Shop, Technique, Treasure, or other approved preparation choices instead.
-
-# Pacing framework
-
-Within the approved 45–50-minute successful-run target:
-
-- **Hushiro:** 12 counted chambers, approximately 14–16 active minutes; establish early direct-action Technique identity and first family/build direction.
-- **Yomori:** 10 counted chambers, approximately 12–14 active minutes; expand direct-action coverage and deepen the build through later Technique eligibility and Aspect progression.
-- **Kagutsuchi:** 11 counted chambers, approximately 15–17 active minutes; finalize the mature build while facing the most layered standard encounters before the Shogun.
-
-The current regional baseline is **33 counted chambers total**. The route-generation prototype targets roughly **17–19 multi-exit decisions**, **20–22 standard Combat chambers**, **7–9 Technique pickups for a Technique-invested successful run**, **4–5 visible Shrine opportunities**, and approximately **1–2 visits each to Shops, Rests, Treasures, and minibosses** in a typical successful route.
-
-The Gold/Shop and survival/recovery values in this file are now part of the same controlled prototype and should be validated together rather than independently.
-
-# Expected build outcomes
-
-The reward structure should continue supporting Tier 0-I Technique-focused runs, Tier II hybrids, Tier III Aspect-heavy runs, and occasional Tier IV high-rolls.
-
-A Technique-heavy route may accumulate more slotless upgrades than an Aspect-heavy route. An economy-heavy route may convert Gold flexibility into several purchases. A survival-heavy route may accumulate substantially more max Health / Spirit but gives up other reward categories. These are intended opportunity costs.
+Run Infrastructure may improve approved future-run support around Rest, Shrines, reward possibilities, routing, regional transitions, and persistent-resource opportunities. It may not eliminate route opportunity cost or make high-value rewards, ideal builds, recovery, or Aspect advancement automatic.
 
 # Guardrails
 
-- Do not require an exact Technique combination for a viable run.
-- Do not generate unusable Technique choices; detailed offer rules belong to `TECHNIQUES.md`.
-- A direct Technique cannot stack with another direct Technique in the same combat slot.
-- Prosthetic or Relic permanent upgrades do not belong in Technique reward screens.
-- Relics remain a small separate supporting layer and should not become Technique-family upgrades.
+- Persistent currencies and boss materials are retained when earned; do not add a failure tax.
+- Do not reintroduce a generic Boss Emblem currency.
+- Do not create boss-specific materials for minibosses.
+- Keep regional boss material costs low enough that bosses do not become mandatory farming chores.
+- Basic permanent progression should not require repeated late-game boss kills.
+- Scrolls remain Prosthetic-focused unless another use is explicitly approved.
+- Gold remains run-only and disappears at run end.
 - Blood is a combat resource, not a currency or route reward.
-- Rare rewards must not invalidate sword combat or boss mechanics.
-- A Rest or regional transition must not routinely erase all attrition.
-- Gold must not remain a primary reward after its final realistic spending opportunity.
-- Temporary capacity is run-only and must not become disguised permanent character progression.
-- Mandatory encounters must not assume a particular Aspect Tier, Blood Art, Technique family, Relic, ideal economy, or ideal survival build.
-- Final percentages and values may change through playtesting without reopening the underlying reward architecture.
+- Temporary capacity is run-only.
+- Final values may move through playtesting without reopening the ownership model.
 
 # Current production dependency
 
-The major launch-system audit, all three prototype regional chamber structures, the first full-route branch/room/reward weighting model, Technique offer-generation model, Gold/Shop economy, and survival/recovery/capacity prototype are complete at paper-design depth.
+The route structure, room/reward weights, Technique offer generation, Gold/Shop economy, survival/recovery/capacity model, and first persistent-resource payout model are now complete at prototype paper-design depth.
 
-The next reward-value layer is **persistent-resource payout design**: Mist and Scroll quantities, Boss Emblem cadence/ownership, and the opportunity-cost relationship between permanent progression rewards and immediate run power. After that, remaining full-run integration includes regional-boss reward mix, Relic acquisition allocation / transition-swap placement, encounter composition and clear-time tuning, and playable validation of the 45–50-minute successful-run target.
+The next reward-side integration layer is **regional-boss current-run reward composition and Relic acquisition / transition-swap placement**. Full-run integration then continues through consumables include/cut confirmation, encounter composition and clear-time tuning, 45–50-minute run simulation, and playable validation of the prototype values.

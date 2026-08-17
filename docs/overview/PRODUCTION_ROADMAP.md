@@ -4,141 +4,101 @@ title: Production Roadmap
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 ---
 
 # Production Roadmap
 
-Oathbound production is organized by dependency order and meaningful playtest groups. Top-level milestones do not need equal asset counts.
+Oathbound production is organized by dependency order and meaningful playtest groups. Milestones summarize required production; gameplay/content authorities own the underlying design.
 
-## Pre-milestone gate — Paid Style Test
+# Pre-milestone gate — Paid Style Test
 
-Before Milestone 1, a separately paid Style Test locks practical sprite scale, palette, detail density, high-angle perspective, outline treatment, ground shadow, Hushiro tone, and Godot import quality.
+Lock practical sprite scale, palette, detail density, high-angle perspective, outline treatment, ground shadow, Hushiro tone, and Godot import quality before Milestone 1.
 
-## Milestone 1 — Combat vertical slice
+# Milestone 1 — Combat vertical slice
 
 Establish Akio, core combat readability, three representative Area 1 enemies, five shared combat VFX, Combat HUD, and the base Hushiro environment kit.
 
-The Posture Break Cue remains grouped with the Corrupted Swordsman and Deathblow Cue so the posture-break-to-execution loop is reviewed together.
+# Milestone 2 — Complete Area 1
 
-## Milestone 2 — Complete Area 1
+Complete the Hushiro roster, both minibosses, Keeper of the Gate, functional-room skins, Shrine/Corruption foundations, regional props, and boss/miniboss UI.
 
-Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional-room skins, regional props, Shrine/Corruption foundations, and boss/miniboss UI.
+Production supports the approved **12-chamber Hushiro** prototype through reusable room foundations/variants rather than unique art per chamber.
 
-The current Hushiro prototype run structure is **12 counted chambers**: Chambers 1–3 opening, 4–8 main, 9–11 pre-boss, and Keeper at Chamber 12. Production should provide enough reusable room foundations and variants to support that route without requiring unique art for every chamber.
+Keeper's boss-specific persistent material needs one collectible/reward representation, but exact item naming can follow the broader item-art pass.
 
-Final route percentages and encounter compositions remain prototype/playtest work even though the first generation targets are approved.
-
-## Milestone 3 — The Strand
+# Milestone 3 — The Strand
 
 Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
 
-Current permanent upgrade-station scope is:
+Permanent station ownership:
 
 - **Bloodwell:** Akio + Run Infrastructure,
 - **Forge Bench:** Prosthetics + Relics,
-- **Blood Mirror:** Blood Aspects, with the Mirror locked at the beginning and unlocked later through campaign/onboarding progression.
+- **Blood Mirror:** Blood Aspects, initially locked.
 
-The Blood Cavern remains the training/trial space containing the Blood Mirror. The Merchant, Discovery Board, and Boat remain services rather than additional permanent upgrade trees.
+The Blood Cavern remains training/trial space. Merchant, Discovery Board, and Boat remain services rather than extra permanent upgrade trees.
 
-Final node counts, exact trial counts, unlock timing, mastery thresholds, and permanent-progression values remain later detailed design.
+# Milestone 4 — Player combat depth and run-build expression
 
-No duplicate Aspect-specific Blood Art progression tree is assumed.
+Complete:
 
-## Milestone 4 — Player combat depth and run-build expression
+- Wolf / Wraith / Ronin combat-presentation packages,
+- Tier / Blood states,
+- eight Prosthetic families,
+- Technique reward/build UI,
+- Relic presentation,
+- currencies, pickups, regional boss-material reward objects/icons.
 
-Complete the approved Wolf, Wraith, and Ronin combat-presentation families; Tier/Blood states; eight Prosthetic families; Technique reward/build interfaces; Relic presentation; and broad currency/pickup/reward-object art.
+The current Technique roster is **50 actual Techniques + 10 refinements**. The current Relic roster is **10 items** with one equipped slot and no rarity tiers.
 
-### Locked Aspect production packages
+Technique screen composition/source weighting and the first reward/economy prototypes are approved enough for reusable UI planning; final balance values remain playtest work.
 
-| Aspect | Tier I | Tier II | Tier III | Tier IV | Repeated growth |
-|---|---|---|---|---|---|
-| Wolf | Blood Tempo | Blood Hunt | Fanged Guard | Apex Mauling | Feral Momentum |
-| Wraith | Pale Barrage | Wraith's Reach | Spectral Passage | Beyond the Veil | Spectral Edge |
-| Ronin | Steadfast Reprisal | Falling Mountain | Unbroken Resolve | Shattering Wake | Maximum player-posture capacity |
+# Milestone 5 — Complete Area 2
 
-All three Tier 0-IV packages support high-level production planning. Final frame counts, VFX counts, timings, collision, and reuse decisions still require implementation briefs and playable validation.
+Produce Yomori Grove, regional enemies/minibosses, Twin Maws, regional hazards, functional rooms, VFX, and integration.
 
-Wolf production needs include successful-contact continuation, Feral Momentum escalation, Blood Hunt activation/howl/pursuit/Blood Fang, Fanged Guard one-hit protection, Apex Mauling, and Blood resource states.
+Production supports the approved **10-chamber Yomori** prototype. Twin Maws use the approved transition-recovery rules and drop one Twin-Maws-specific persistent material per victory.
 
-Wraith production needs include distinct Tier 0 geometry, Pale Barrage continuation, Spectral Edge contact feedback, Wraith's Reach sweep/corridor/echo, Spectral Passage formation penetration, Beyond the Veil range/deathblow/Veilstride states, and Blood resource states.
+# Milestone 6 — Area 3 and endgame
 
-Ronin production needs include distinct Tier 0 heavy actions, strong guard/posture readability, Steadfast Reprisal opportunity/counter, Falling Mountain posture relief/slam/burst/Deep Rupture, Unbroken Resolve plus Measured/Perfect Weight, Shattering Wake, posture-capacity growth reflected through existing posture UI, and Blood resource states.
+Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart, ending, and repeat-clear presentation.
 
-Ronin's repeated posture growth should reuse the normal player-posture HUD and capacity language rather than create a separate buff icon or VFX state.
+Production supports the approved **11-chamber Kagutsuchi** prototype. The Eclipse Shogun drops one Shogun-specific persistent material per victory.
 
-The current Technique roster is complete at qualitative paper-design depth: **50 actual Techniques plus 10 refinements**.
+The first six clears use the reusable Binding ritual. The seventh story run continues from Shogun into the Heart with the approved partial recovery handoff.
 
-The 50 Techniques comprise:
+Exact Shogun attacks/phase production still require encounter approval.
 
-- 25 direct slotted Techniques,
-- 15 same-family Supporting Techniques,
-- 5 Cross-family Techniques,
-- 5 Legendary family capstones.
+# Milestone 7 — Release presentation and cohesion
 
-Supporting, Cross-family, and Legendary Techniques are slotless, so there is no global Technique inventory cap beyond the five direct action slots.
+Complete front-end UI, approved narrative delivery, achievements/store art where required, missing-asset audit, cross-game readability, settings/credits, and final production cleanup.
 
-Rarity, prerequisite, and first-pass offer-generation rules are approved. The reward UI is now scoped around three-choice screens, build-stage direct/flex composition, regional/source quality weighting, and replacement/refinement/Cross-family/Legendary presentation. Final Technique production quotation depends on VFX/icon briefs and prototype validation rather than further roster construction.
+Final quotation depends on narrative-delivery scope, postgame access/rewards, and required release UI—not on reopening approved canon.
 
-The launch Relic package is complete at qualitative paper-design depth: **10 collectible Relics**, one equipped slot, persistent collection/mastery/progression, run-active benefits, and no Relic rarity tiers. Relic Strand-side progression/management belongs to the Forge. Merchant's Seal currently prototypes a 20% first-purchase-per-region discount. Exact acquisition allocation, mastery values, Forge presentation, and transition-swap behavior remain later detailed work.
+# Production rules
 
-## Milestone 5 — Complete Area 2
+- Wolf, Wraith, Ronin are fixed launch Aspects.
+- Current 50-Technique and 10-Relic rosters remain stable unless testing exposes a concrete gap.
+- No alternate-weapon / weapon-socket system or separate Relic Reliquary.
+- Reuse attack, locomotion, deathblow, HUD, and VFX families where mechanics modify existing actions.
+- Standard successful-run target remains **45–50 minutes**.
+- Regional prototype baseline remains **12 Hushiro / 10 Yomori / 11 Kagutsuchi = 33 counted chambers**.
+- Route branching, room/reward weights, Technique offer generation, Gold/Shop economy, survival/capacity values, and persistent-resource payouts now have first approved prototype models.
+- Persistent economy uses **Mist, Scrolls, and three low-count regional boss materials**; no generic Boss Emblem currency.
+- Final tuned probabilities, prices, payouts, recovery values, upgrade costs, and encounter compositions remain playtest/implementation work.
+- Additional Aspects, large modifier systems, enemy/room variant packages, and other deferred challenge scope are excluded unless explicitly promoted.
+- Markdown remains internal source of truth; Word/PDF are exports.
 
-Produce Yomori Grove, its enemy/encounter roster, regional hazards, functional rooms, VFX, and integration pass.
+# Current pre-production dependency
 
-The current Yomori prototype run structure is **10 counted chambers**: Chambers 1–2 opening, 3–7 main, 8–9 pre-boss, and Twin Maws at Chamber 10. Production should provide enough reusable room foundations and variants to support that route without requiring unique art for every chamber.
+The active full-run design task is now:
 
-Final route percentages and encounter compositions remain implementation/playtest work. Twin Maws now uses the approved regional-transition recovery prototype before Yomori hands off to Kagutsuchi.
+1. **regional-boss current-run reward composition** for Keeper / Twin Maws,
+2. **Relic acquisition allocation and limited transition-swap placement**,
+3. consumables include/cut,
+4. encounter composition / room-clear-time / full-run pacing validation.
 
-## Milestone 6 — Area 3 and endgame
+After full-run integration, proceed to narrative delivery/campaign presentation, then endgame/postgame/release scope.
 
-Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Heart Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart encounter, ending presentation, and repeat-clear presentation.
-
-The current Kagutsuchi prototype run structure is **11 counted chambers**: Chambers 1–2 Court entrance, 3–7 main Court, 8–10 final Court / Shogun approach, and Eclipse Shogun at Chamber 11. One optional miniboss opportunity appears during Chambers 4–7 and selects Blood Lotus or Eternal Swordsman for that run.
-
-Production should provide enough reusable Court room foundations and variants to support the 11-chamber route without requiring unique art for every node. Heart approach, Binding-completion spaces, and the true-final Heart are specialized endgame content outside the 11 counted Court chambers.
-
-The Shogun's high-level identity is approved. Exact attacks, phase structure, transformation anatomy, animation list, and bespoke VFX require later encounter approval.
-
-The Binding package uses one reusable ritual after each of the first six successful clears. The seventh story run continues from the Shogun into the Heart without ending the active build and uses the approved partial Shogun-to-Heart recovery handoff before the two-form final encounter.
-
-## Milestone 7 — Release presentation and cohesion
-
-Complete front-end UI, approved narrative delivery, achievements/store art, missing-asset audit, cross-game readability, and final production cleanup.
-
-Final quotation depends on the authored-content inventory, voice/cinematic boundary, postgame access/rewards, and required release UI—not on reopening approved story canon.
-
-## Production rules
-
-- Character concepts and key poses precede specialized VFX.
-- Base character art precedes Tier/Blood overlays.
-- Wolf, Wraith, and Ronin are the fixed launch Aspect families.
-- All Aspect attacks remain player-directed; presentation must not imply corrective tracking or homing.
-- All three qualitative Tier 0-IV packages may guide high-level scope; final asset counts require implementation briefs.
-- Reuse existing attack, deathblow, locomotion, and HUD families whenever a Tier modifies geometry or values rather than creating a new action.
-- Ronin posture-capacity growth uses existing posture presentation rather than a new status family.
-- Spectral Passage should primarily reuse existing attack geometry/trails with extended collision and impact handling.
-- Beyond the Veil should reuse Pale Lance, Ghostline Slash, shared deathblow, and locomotion presentation.
-- Pale Procession shade/steering/three-lane assets are excluded.
-- Reusable Technique UI may precede final implementation tuning; unique icons and bespoke effects require approved catalog entries and production briefs.
-- The current 50-Technique roster should remain stable unless testing exposes a concrete problem.
-- Relic production uses the approved 10-item roster and does not require rarity-badge families or a separate Reliquary station.
-- The old generic weapon-development / weapon-socket system is excluded; Blood Aspects are the run weapon identities.
-- The standard successful-run pacing target is 45–50 minutes.
-- Current regional prototype targets are Hushiro **12 chambers / 14–16 minutes**, Yomori **10 / 12–14**, and Kagutsuchi **11 / 15–17**, for **33 counted regional chambers total**.
-- The first route-generation prototype targets **17–19 multi-exit decisions**, **20–22 standard Combat chambers**, controlled band-based room weights, and region-specific standard-Combat reward weights.
-- The first Gold/Shop prototype uses **60/70/80 Gold** standard rewards by region, three-item Shops, stable prices, and no Shop-inventory reroll.
-- The first survival prototype defines normal/Rest/Shop/Shrine/Treasure recovery, temporary capacity, regional transition floors, and Shogun-to-Heart partial recovery.
-- Final tuned branch percentages, reward weights, prices, recovery values, and encounter compositions remain playtest work.
-- The base Heart Binding ritual is one reusable package.
-- Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
-- Each milestone uses separately quoted, payable, reviewable internal batches.
-- Markdown remains the internal source of truth; Word/PDF files are exports.
-
-## Current pre-production dependency
-
-Use the broad-question hierarchy in `docs/_meta/OPEN_QUESTIONS.md` without replacing the established design sequence with narrow tuning work.
-
-The major-system production-scope audit, three regional chamber structures, route-generation weighting, Technique offer generation, Gold/Shop economy, and survival/recovery/capacity model are complete at prototype paper-design depth.
-
-The next reward-value task is **persistent-resource payout design**: Mist and Scroll quantities, Boss Emblem cadence/ownership, and the opportunity cost between permanent progression rewards and immediate run power. Remaining full-run integration then includes regional-boss reward mix, Relic acquisition/swap placement, encounter composition/clear-time tuning, and playable validation of the 45–50-minute run.
+Use `docs/_meta/OPEN_QUESTIONS.md` for the current unresolved agenda; do not duplicate resolved prototype tables here.

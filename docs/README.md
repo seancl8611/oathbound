@@ -1,16 +1,18 @@
 # Oathbound Documentation
 
-This directory is the internal source of truth for Oathbound design, lore, content, UI/UX, art production, and production planning.
+Markdown under `docs/` is Oathbound's internal source of truth for design, lore, content, UI/UX, art production, and production planning.
 
-## Start here
+## Fast lookup
 
-Read these files in order for broad design work:
+For most design work, read in this order:
 
-1. [Game overview](overview/GAME_OVERVIEW.md)
-2. [Full game scope](overview/FULL_GAME_SCOPE.md)
-3. [Current design questions](_meta/OPEN_QUESTIONS.md)
-4. [Source of truth](_meta/SOURCE_OF_TRUTH.md)
-5. The authoritative file for the subject being discussed
+1. [Current Design Questions](_meta/OPEN_QUESTIONS.md) — unresolved agenda only.
+2. [Source of Truth](_meta/SOURCE_OF_TRUTH.md) — find the owning file.
+3. [Terminology](_meta/TERMINOLOGY.md) — canonical and deprecated search anchors.
+4. The authoritative file for the subject.
+5. [Document Review Map](_meta/DOCUMENT_MAP.md) — likely dependencies when needed.
+
+Use [Game Overview](overview/GAME_OVERVIEW.md) and [Full Game Scope](overview/FULL_GAME_SCOPE.md) when the question is game-wide or production-wide rather than for every narrow mechanic edit.
 
 ## Authoritative sections
 
@@ -23,15 +25,23 @@ Read these files in order for broad design work:
 
 ## Repository control files
 
-- [`_meta/SOURCE_OF_TRUTH.md`](_meta/SOURCE_OF_TRUTH.md) assigns ownership.
-- [`_meta/OPEN_QUESTIONS.md`](_meta/OPEN_QUESTIONS.md) contains only current unresolved design priorities.
-- [`_meta/ASSISTANT_WORKFLOW.md`](_meta/ASSISTANT_WORKFLOW.md) defines the update and review process.
-- [`_meta/DOCUMENT_MAP.md`](_meta/DOCUMENT_MAP.md) provides non-exhaustive dependency hints.
-- [`_meta/TERMINOLOGY.md`](_meta/TERMINOLOGY.md) defines preferred and deprecated wording.
-- [`_meta/DECISION_LOG.md`](_meta/DECISION_LOG.md) is historical context, not a substitute for current authoritative files.
+- [`_meta/SOURCE_OF_TRUTH.md`](_meta/SOURCE_OF_TRUTH.md) — ownership registry.
+- [`_meta/OPEN_QUESTIONS.md`](_meta/OPEN_QUESTIONS.md) — unresolved priorities only.
+- [`_meta/TERMINOLOGY.md`](_meta/TERMINOLOGY.md) — preferred/deprecated terms and search anchors.
+- [`_meta/ASSISTANT_WORKFLOW.md`](_meta/ASSISTANT_WORKFLOW.md) — assistant read/update workflow, including the fallback when GitHub code search is unavailable.
+- [`_meta/DOCUMENT_MAP.md`](_meta/DOCUMENT_MAP.md) — non-exhaustive dependency hints.
+- [`_meta/UPDATE_PROTOCOL.md`](_meta/UPDATE_PROTOCOL.md) — material-change protocol.
+- [`_meta/DECISION_LOG.md`](_meta/DECISION_LOG.md) — concise major-decision history.
+- [`_meta/CHANGELOG.md`](_meta/CHANGELOG.md) — concise documentation-change history.
 
-Resolved questions should be removed from the tracker after the authoritative documents are updated. Exact tuning remains in the gameplay or encounter file that owns it.
+## Search reliability
 
-## External documents
+If GitHub code search is unavailable or unindexed, do not treat an empty result as proof that a term does not exist. Follow the direct-read fallback in `ASSISTANT_WORKFLOW.md`: authority → terminology → dependency map → relevant files → branch diff / PR patch.
 
-Markdown remains authoritative. Contractor-ready Word and PDF files are generated exports tracked under `docs/external/` and `contractor_docs/`.
+## Documentation hygiene
+
+- Complete rules live only in their authority.
+- Overview/roadmap files summarize; they do not maintain duplicate mechanics tables.
+- `OPEN_QUESTIONS.md` contains unresolved work, not resolved design history.
+- Exact playtest tuning remains in the gameplay/encounter file that owns it.
+- Word/PDF files are exports; Markdown remains authoritative.

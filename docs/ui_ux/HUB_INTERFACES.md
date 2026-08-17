@@ -4,7 +4,7 @@ title: Hub Interfaces
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - hub-ui
   - boat
@@ -14,125 +14,99 @@ topics:
   - bloodwell
   - blood-mirror
   - relics
-  - techniques
+  - boss-materials
   - run-results
 related:
   - CONTENT-STRAND-INTERACTIBLES
   - GAMEPLAY-PROGRESSION
-  - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-ITEMS-REWARDS
   - GAMEPLAY-RELICS
   - UI-STRAND-HUD-PROMPTS
 ---
 
 # Hub Interfaces
 
-The Strand's interfaces should feel like services embodied in physical stations, not disconnected menu screens. Detailed behavior remains in linked content and gameplay documents; this file owns shared UI/UX requirements and cross-screen consistency.
+Strand interfaces should feel like physical services rather than disconnected menus. Gameplay/content authorities own mechanics and costs; this file owns cross-screen UI consistency.
 
-## Current interface set
+## Interface set
 
-| Interface | Core purpose | Source |
-|---|---|---|
-| Boat | Fast run start and final loadout confirmation | [Boat](../content/strand/interactibles/BOAT.md) |
-| Forge Bench | Permanent Prosthetic + Relic progression and management | [Forge Bench](../content/strand/interactibles/FORGE_BENCH.md) |
-| Merchant Stall | Fast buy, compare, and stock evaluation | [Merchant Stall](../content/strand/interactibles/MERCHANT_STALL.md) |
-| Discovery Board | Knowledge progression and codex reference, including discovered Techniques | [Discovery Board](../content/strand/interactibles/DISCOVERY_BOARD.md) |
-| Bloodwell | Akio + Run Infrastructure permanent progression and revival anchor | [Bloodwell](../content/strand/interactibles/BLOODWELL.md) |
-| Blood Mirror / Trials | Later-unlocked Aspect progression, previews, repeatable trials, Technique demonstrations, and mastery | [Blood Mirror and Trials](BLOOD_MIRROR_TRIALS.md) |
-| Run Results | Successful-return rewards and reset summary | [Run Results and Strand Return](RUN_RESULTS.md) |
-| Pause / Overview | Current Aspect, five direct Technique slots, supporting Techniques, refinements, Relic, effects, and control review | [Pause and Build Overview](PAUSE_OVERVIEW.md) |
-| Strand HUD | Persistent resources and interaction prompts outside runs | [Strand HUD and Prompts](STRAND_HUD_AND_PROMPTS.md) |
+| Interface | Purpose |
+|---|---|
+| Boat | Fast run start / final loadout confirmation |
+| Forge Bench | Prosthetic + Relic permanent progression/management |
+| Merchant Stall | Strand purchasing/service stock |
+| Discovery Board | Codex/discovery/Technique records |
+| Bloodwell | Akio + Run Infrastructure permanent progression and return presentation |
+| Blood Mirror / Trials | Later-unlocked Aspect progression/trials/previews |
+| Run Results | Retained rewards / run reset summary |
+| Pause / Overview | Current run build review |
+| Strand HUD | Lightweight persistent wallet / prompts |
 
-## Permanent upgrade-screen ownership
-
-Current launch scope uses three permanent upgrade interfaces:
+## Permanent upgrade ownership
 
 - **Bloodwell:** Akio + Run Infrastructure.
 - **Forge Bench:** Prosthetics + Relics.
-- **Blood Mirror:** Blood Aspects after the Mirror unlocks later in the game.
+- **Blood Mirror:** Blood Aspects after later unlock.
 
-No separate Relic Reliquary interface is required. The old generic weapon-development / weapon-socket Forge interface is removed. The Bloodwell's former fixed three-branch layout is not authoritative; final Akio and Run Infrastructure substructure remains later design.
+No separate Relic Reliquary, generic weapon tree, weapon sockets, or old fixed Bloodwell three-branch UI.
 
-## Boat loadout confirmation and run start
+## Persistent resource presentation
 
-The Boat screen is a practical departure confirmation with ritual framing.
+General persistent currencies are:
 
-Required or supported contents after the relevant systems unlock:
+- **Mist**,
+- **Scrolls**.
 
-- selected Aspect,
-- concise Aspect role description,
-- equipped Prosthetic summary,
-- equipped Relic summary,
-- five empty direct Technique slots only as a concise run-start expectation when useful,
-- Start Run,
-- change/loadout navigation where needed,
-- Cancel/back.
+Gold is run-only.
 
-Technique slots begin empty and are not preconfigured at the Boat. There is no reserve Technique slot.
+The three regional boss materials are low-count specific mastery materials, not a normal persistent wallet. Show them contextually when:
 
-Visual anchors include the Boat lantern, dark timber, wet rope, mist crossing, and compact loadout summaries. Before Aspect unlock, the screen may remain minimal.
+- a result screen reports one earned,
+- an upgrade requires one,
+- a collection/reference screen needs to show ownership.
+
+Do not dedicate always-visible hub counters or a generic Boss Emblem category to them.
+
+## Boat
+
+After systems unlock, the Boat may summarize selected Aspect, equipped Prosthetic, equipped Relic, and run-start expectations, then provide Start Run / loadout navigation / cancel.
+
+Direct Technique slots begin empty. No reserve slot exists.
 
 ## Bloodwell
 
-The Bloodwell must clearly separate its two approved progression categories:
+Clearly separate:
 
-- **Akio**
-- **Run Infrastructure**
+- **Akio**,
+- **Run Infrastructure**.
 
-Run Infrastructure is one umbrella for approved permanent improvements to Rest support, Shrine support, rewards, routing/run conditions, regional transitions, and related expedition support. The interface should not present these as unrelated standalone upgrade stations.
-
-Exact node layout, branch names, values, rank counts, and costs remain later detailed design.
+Show Mist costs and, only for selected major upgrades, a specific regional boss-material requirement when assigned. Do not present boss materials as another broad Bloodwell currency tree.
 
 ## Forge Bench
 
-The Forge interface must clearly separate:
+Clearly separate:
 
-- **Prosthetics** — the locked shallow linear tool paths,
-- **Relics** — persistent collection, equipped state, mastery/progression, and permanent upgrade management.
+- **Prosthetics** — shallow linear paths with the first 2 / 4 / 6 Scroll cost prototype,
+- **Relics** — collection/equip/mastery/permanent progression.
 
-Sharing a screen does not imply identical currencies or progression structures. The Forge must not show the retired generic weapon tree, weapon sockets, or alternate weapon classes.
+Sharing one station does not imply identical currencies or progression structures.
 
-## Blood Mirror and Aspect trials
+## Blood Mirror
 
-The Blood Mirror presents self-confrontation rather than shopping or a generic skill tree.
+Requires sealed/unavailable opening state and later unlocked Aspect progression/trial states.
 
-The **Blood Mirror begins locked**. The interface needs a sealed/unavailable state that can later transition into the full Aspect progression/trial interface after campaign/onboarding unlock.
-
-Unlocked contents may include:
-
-- Aspect list,
-- trial categories,
-- locked and unlocked states,
-- reward preview,
-- Tier I-IV preview,
-- standardized trial loadout where applicable,
-- permanent Aspect progression ranks,
-- Technique-pool unlock state where applicable,
-- completed and mastered states.
-
-The screen uses sparse black stone, reflective water, blood-mineral light, distorted player reflection, and Aspect silhouettes. Technique demonstration cards must read as temporary trial conditions and must not resemble a persistent pre-run loadout.
+Selected major Aspect upgrades may later show a specific boss-material gate alongside their normal cost if the progression design assigns one. Basic Aspect progression must not imply that repeated boss farming is mandatory.
 
 ## Shared requirements
 
-- Reuse typography, frames, icon logic, focus states, confirmation behavior, and input prompts.
-- Keep the physical station and NPC visible where useful so the interface remains grounded in the world.
-- Clearly separate permanent upgrades, run-only choices, discovered Technique records, stock purchases, trials, and currencies.
-- Support locked, available, focused, selected, purchased, maxed, completed, mastered, sold-out, and disabled states where applicable.
-- Show requirements without revealing unintended narrative spoilers.
-- Support controller and keyboard navigation from the first layout pass.
-- Preserve localization-safe text areas and readable hierarchy.
-- Prioritize rapid repeated use over decorative transition length.
-
-## Visual differentiation
-
-- **Boat:** dark timber, wet rope, lantern threshold, compact confirmation.
-- **Forge:** dark iron, ember accents, mounted tools/artifacts, practical progression categories.
-- **Merchant:** tagged salvage, cloth-backed item cards, stock and price clarity.
-- **Discovery Board:** layered paper, notes, sketches, and partial-discovery states.
-- **Bloodwell:** carved stone, blood-lit channels, sacred Akio / Run Infrastructure progression.
-- **Blood Mirror:** black stone, reflective water, sparse framing, blood-mineral light; sealed/dormant before unlock.
-- **Run results:** restrained return summary tied to Bloodwell reformation.
-- **Pause:** dark minimal overlay and direct current-build hierarchy.
+- Reuse typography, frames, focus/confirm behavior, icons, and input prompts.
+- Keep physical station/NPC context visible where useful.
+- Distinguish permanent upgrades, run-only choices, purchases, trials, and discoveries.
+- Support locked / available / focused / selected / purchased / maxed / completed / mastered / sold-out / disabled as applicable.
+- Requirements cannot reveal unintended story spoilers.
+- Support controller/keyboard and localization-safe layouts from the first pass.
+- Optimize for rapid repeated use.
 
 ## Data dependency rule
 
-Final layouts follow documented data fields, progression ownership, currency names, Technique capacity, and state behavior. Interface art must not invent upgrade branches, costs, Aspect behavior, Technique ownership, trial rules, Relic currency rules, or unlock requirements that remain unresolved.
+UI follows documented progression ownership, resource names, costs, Technique capacity, and state behavior. Interface art must not invent upgrade branches, boss-material requirements, Relic currencies, or unlock rules that remain unresolved.

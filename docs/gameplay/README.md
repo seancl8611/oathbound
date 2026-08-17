@@ -24,64 +24,29 @@ Authoritative player-facing mechanics and system rules belong here.
 
 ## Current status
 
-The launch Blood Aspect roster and qualitative Tier 0-IV packages are locked for current paper-design scope:
+Major gameplay architecture is complete at first-pass paper/prototype depth:
 
-- **Wolf:** four-hit fast close-range pressure and pursuit.
-- **Wraith:** two-hit extended spectral reach and frontal control.
-- **Ronin:** three-hit slow heavy impact and defensive stability.
+- **3 Blood Aspects:** Wolf, Wraith, Ronin.
+- **Technique system:** five direct slots + slotless Supporting / Cross-family / Legendary Techniques; 50 Techniques + 10 refinements; three-choice reward generation and source weighting approved for prototype.
+- **Relics:** 10-item launch roster, one equipped slot, persistent collection/mastery/progression, no rarity tiers.
+- **Prosthetics:** 8 tools, 19 shallow linear Forge upgrades.
+- **Permanent stations:** Bloodwell → Akio + Run Infrastructure; Forge → Prosthetics + Relics; later-unlocked Blood Mirror → Blood Aspects.
+- **Run structure:** 12 Hushiro + 10 Yomori + 11 Kagutsuchi = 33 counted chambers; ~45–50 minute normal successful Binding-run target.
+- **Reward model:** first route/room weights, Technique cadence, Gold/Shop economy, recovery/capacity values, and persistent-resource payouts are approved prototype targets.
 
-No further Aspect or Tier audit is active unless prototyping exposes a concrete problem. Exact attack values, timings, hitboxes, growth percentages, and related balance remain implementation work.
+Persistent economy is intentionally small:
 
-The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless Supporting, Cross-family, and Legendary Techniques. There is **no global Technique inventory cap**.
+- **Mist** — broad permanent progression,
+- **Scrolls** — primarily Prosthetic Forge progression,
+- **three regional boss materials** — one unique low-count material per Keeper / Twin Maws / Eclipse Shogun kill, used sparingly as secondary requirements on selected major permanent upgrades,
+- **Gold** — run-only.
 
-The current working Technique roster is complete at qualitative paper-design depth:
+There is **no generic Boss Emblem currency**.
 
-- **25 direct slotted Techniques**,
-- **15 same-family Supporting Techniques**,
-- **5 Cross-family Techniques**,
-- **5 Legendary Techniques**,
-- **10 refinements** that are not counted as separate Techniques.
+The active gameplay package remains **full-run integration, rewards, encounters, and pacing**. The next design dependency is regional-boss current-run reward composition, followed by Relic acquisition / limited swap placement, consumables include/cut, encounter composition, and playable pacing validation.
 
-This produces **50 actual Techniques plus 10 refinements**. Rarity, prerequisites, eligibility, three-choice reward-screen composition, region/source quality weighting, replacement/refinement limits, Legendary appearance behavior, and reroll rules now have approved prototype definitions in `TECHNIQUES.md`.
-
-The Relic system is also complete at current qualitative paper-design depth:
-
-- **10 approved launch Relics**,
-- one equipped Relic slot,
-- persistent collection ownership,
-- kill-earned mastery while equipped,
-- run-active benefits,
-- no Relic rarity tiers,
-- Strand-side progression and management at the **Forge Bench** alongside Prosthetics.
-
-Merchant's Seal currently prototypes a **20% discount on the first purchase in each region**. Other Relic acquisition allocation, mastery thresholds, Forge rank presentation, transition swap timing, and most numerical values remain later design/playtest work.
-
-The eight Prosthetic Forge paths are locked as shallow linear permanent progression.
-
-Broad permanent-upgrade station ownership is also scoped:
-
-- **Bloodwell:** Akio + Run Infrastructure,
-- **Forge Bench:** Prosthetics + Relics,
-- **Blood Mirror:** Blood Aspects, with the Mirror locked at the beginning and unlocked later.
-
-Exact permanent-upgrade nodes, values, rank counts, costs, and unlock timing remain later detailed design rather than current full-game scope blockers.
-
-The major-system production-scope audit, all three prototype regional chamber structures, first full-route generation model, Technique offer-generation model, Gold/Shop economy, and survival/recovery/capacity prototype are complete. The active gameplay package remains **full-run integration, rewards, encounters, and pacing**.
-
-Current approved prototype regional structure:
-
-- **Hushiro:** 12 counted chambers, Keeper at Chamber 12, approximately 14–16 active minutes.
-- **Yomori:** 10 counted chambers, Twin Maws at Chamber 10, approximately 12–14 active minutes.
-- **Kagutsuchi:** 11 counted chambers, Eclipse Shogun at Chamber 11, approximately 15–17 active minutes.
-
-The full regional baseline is **33 counted chambers**. The route-generation prototype defines opening/main/pre-boss branch percentages, room-type weights, regional standard-combat reward weights, expected Technique/Shrine/Shop/Rest/Treasure/miniboss cadence, and fairness safeguards.
-
-The current economy/survival prototype adds **60/70/80 regional Gold rewards**, a three-item Shop with stable prices, temporary capacity rewards, Rest/Shrine/Treasure/miniboss survival values, regional transition recovery floors, and the Shogun-to-Heart recovery handoff. These values are implementation/playtest targets, not immutable final balance values.
-
-The next reward-value layer is **persistent-resource payouts**: Mist and Scroll quantities, Boss Emblem cadence/ownership, and how permanent-progression rewards compete with immediate run power. Remaining integration then includes regional-boss reward mix, Relic acquisition/swap placement, encounter composition/clear-time tuning, and playable pacing validation.
-
-The successful-run duration target remains approximately **45–50 minutes** in [Run Structure](RUN_STRUCTURE.md).
+See `docs/_meta/OPEN_QUESTIONS.md` for unresolved priorities rather than using this index as a parallel tracker.
 
 ## Authority rule
 
-Gameplay files own mechanics. Lore explains fiction, content owns combatant/location identity, UI owns interaction behavior, art owns visual requirements, and milestones own production scope. Summary files must not redefine those authorities.
+Gameplay files own mechanics. Lore owns fiction, content owns combatant/location identity, UI owns interaction behavior, art owns visual requirements, and milestones own production scope. Summary files should link to these authorities rather than duplicate their full rules.

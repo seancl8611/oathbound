@@ -4,17 +4,19 @@ title: Keeper of the Gate
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-19
+last_reviewed: 2026-08-17
 topics:
   - area-1
   - keeper-of-the-gate
   - boss
   - two-phase
   - hushiro
+  - boss-material
 related:
   - CONTENT-AREA1-OVERVIEW
   - CONTENT-AREA1-MINIBOSSES
   - GAMEPLAY-COMBAT
+  - GAMEPLAY-ITEMS-REWARDS
   - ART-MILESTONE-02
 ---
 
@@ -61,6 +63,17 @@ The same warrior frame distorts without becoming an unrelated beast. His style b
 - unblockable 360-degree sweep,
 - leaping slam with shockwave,
 - blood-driven lane charge.
+
+## Persistent defeat reward
+
+Every completed Keeper kill awards:
+
+- **10 Mist**,
+- exactly **1 Keeper-specific regional boss material**.
+
+The boss material is persistent immediately and remains earned even if Akio later dies in Yomori or Kagutsuchi. It is a low-count secondary requirement for selected major permanent upgrades rather than general spending currency. Its exact player-facing item name is deferred.
+
+Keeper's separate current-run reward and the automatic Hushiro→Yomori transition recovery are owned by `ITEMS_AND_REWARDS.md` and remain distinct from this persistent payout.
 
 ## Visual identity
 

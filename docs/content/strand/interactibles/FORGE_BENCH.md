@@ -4,13 +4,15 @@ title: Forge Bench
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - strand
   - forge
   - prosthetics
   - relics
   - permanent-upgrades
+  - scrolls
+  - boss-materials
 related:
   - CONTENT-STRAND-INTERACTIBLES
   - CHAR-STRAND-SMITH
@@ -24,102 +26,78 @@ related:
 
 ## Strand function
 
-The Forge Bench is the Strand's shared permanent progression and management station for **Prosthetics and Relics**.
+The Forge Bench is the Strand's shared permanent progression / management station for **Prosthetics and Relics**.
 
-It does **not** own a separate permanent weapon-development system. The older design in which Akio developed multiple weapon options has been replaced by Blood Aspects.
+It does not own generic weapon development; Blood Aspects are Akio's run weapon identities.
 
-## Lore role
+## Lore / visual role
 
-The Smith's open-sided forge is built into a cliff alcove around blood-tempered steel, salvaged fragments, damaged ritual objects, and island-forged components recovered from repeated expeditions. It is one of the few places capable of turning corrupted material into reliable tools and preserving dangerous artifacts for controlled use.
+The Smith's open-sided cliff forge turns salvaged fragments, blood-tempered steel, damaged ritual tools, and dangerous recovered artifacts into reliable equipment.
 
-## Visual identity
+Visual language: ember glow, worked metal, soot, tongs, mounted tools, artifact trays, practical repair surfaces, and restrained heat shimmer.
 
-- coal bed and ember glow,
-- tongs and worked fragments,
-- dark timber supports,
-- dense practical bench,
-- hammered metal scraps,
-- repaired Relic mounts or storage pieces,
-- soot and heat shimmer.
+## Prosthetic progression
 
-The forge reads as a warm working pocket against the Strand's cold shore.
+The Forge owns all eight Prosthetic permanent paths.
 
-## Interaction fantasy
+- A base Prosthetic is complete when unlocked.
+- Paths are shallow and linear.
+- Two upgrades are the default; selected tools have a third where an existing property justifies it.
+- Upgrades strengthen the existing tactical role rather than adding alternate movesets or another Technique layer.
+- **Scrolls** are the primary Prosthetic currency.
 
-The player brings persistent combat tools and recovered artifacts to the Smith, who makes them dependable enough to carry into future runs.
+First prototype Scroll costs:
 
-## Progression ownership
+- first upgrade: **2 Scrolls**,
+- second upgrade: **4 Scrolls**,
+- third upgrade where present: **6 Scrolls**.
 
-### Prosthetics
+The current 19-upgrade roster therefore costs **66 Scrolls** to fully purchase at prototype values. Final cost tuning may change after playtesting.
 
-The Forge owns the eight launch Prosthetics and their permanent individual upgrade paths.
+Exact tool effects remain owned by `PROSTHETICS.md`.
 
-- A Prosthetic is functionally complete when unlocked.
-- Current paths are shallow and linear.
-- Two upgrades are the default; selected tools use a third only when the base tool already has another meaningful existing property to improve.
-- Upgrades improve the tool's existing role rather than adding alternate attacks, unrelated statuses, new combat roles, or another Technique-style build layer.
-- **Scrolls** remain the primary persistent currency for Prosthetic development.
+## Relic progression
 
-Exact Prosthetic paths are owned by `docs/gameplay/PROSTHETICS.md`.
+The Forge also owns permanent Relic collection/progression and Strand-side equipment management.
 
-### Relics
+- one Relic equipped at a time,
+- collection persists,
+- only the equipped Relic gains eligible kill mastery,
+- mastery persists,
+- sharing the Forge does not force Relics to use Prosthetic progression or Scroll costs.
 
-The Forge also owns permanent **Relic progression and Strand-side Relic management**.
+Exact Relic rank realization, thresholds, costs if any, and transition-swap behavior remain later design.
 
-Relics remain a distinct system from Prosthetics:
+No separate Relic Reliquary is required.
 
-- Relic collection ownership persists.
-- Only one Relic is equipped at a time.
-- Existing kill-earned Relic mastery remains persistent.
-- Sharing the Forge does not make Relics another Prosthetic tree or require them to use the same upgrade structure.
-- The exact way mastery ranks, upgrade realization, costs, or thresholds are presented at the Forge remains later detailed design.
+## Regional boss materials
 
-No separate Relic Reliquary is required in the approved hub scope.
+Regional boss materials may be used only when an explicitly approved major Forge upgrade or Relic progression gate calls for one.
+
+They are **not** a routine Forge currency and are not automatically required by Prosthetic upgrades merely because the Forge handles physical equipment.
+
+If a later major Forge gate uses one, it should require a small quantity—normally 1–3—alongside the owning system's normal progression requirement.
 
 ## Screen behavior
 
-The Forge interface should clearly separate two categories:
+Two clear categories:
 
-1. **Prosthetics** — tool selection, permanent upgrade paths, and owned-state review.
-2. **Relics** — collection, equipped Relic, mastery/progression state, and permanent upgrade management.
+1. **Prosthetics** — selection, owned state, linear upgrade path, Scroll costs.
+2. **Relics** — collection, equipped item, mastery/progression state, permanent management.
 
-The interface must not assume:
+Do not imply generic weapons, sockets, branching weapon classes, or identical Prosthetic/Relic progression rules.
 
-- a generic weapon tree,
-- weapon sockets,
-- branching weapon classes,
-- a second Technique system,
-- or identical progression rules for Prosthetics and Relics.
+## Resource ownership
 
-Final Relic rank presentation, exact costs, thresholds, and final selection-flow details remain deferred.
+- Scrolls → primary Prosthetic progression.
+- Relic mastery → persistent progress, not currency.
+- Regional boss materials → only explicitly assigned rare major gates.
+- Gold → run-only, not normal Forge currency.
+- Generic Boss Emblems → not current design.
 
-## Currency ownership
+## Technical / production notes
 
-- **Scrolls** are the primary Forge currency for Prosthetic development.
-- Relic mastery is not itself a currency.
-- Any future Relic cost or gate must be explicitly approved rather than inferred from the Prosthetic system.
-- **Gold** is run-only and is not a normal Forge currency.
-
-## Presentation goal
-
-Craft-forward and practical: the player should feel that the Smith is reinforcing dangerous equipment and recovered artifacts rather than presenting a generic RPG skill tree.
-
-## Visual language
-
-Dark iron, ember accents, forged silhouettes, mounted tools, artifact trays, and practical repair language support rapid category readability.
-
-## Animation and environment needs
-
-- forge ember flicker,
-- heat shimmer,
-- faint smoke,
-- intermittent tool placement,
-- Prosthetic inspection / repair states,
-- Relic handling or mounting states,
-- Smith work loops integrated with the station.
-
-## Technical notes
-
-- Prosthetic and Relic progression must remain visually distinct within the shared station.
-- Tooltips, prerequisites, mastery states, cost states where applicable, and controller/keyboard navigation should be planned from the start.
-- The Forge should support future content within the two approved categories without reviving generic weapon development.
+- Prosthetic and Relic categories must remain visually distinct.
+- Support the approved 2 / 4 / 6 Scroll cost curve without hard-coding it as unchangeable final balance.
+- Support occasional specific boss-material requirements without presenting a large crafting inventory.
+- Future content should remain within the two approved Forge categories unless scope is explicitly reopened.
