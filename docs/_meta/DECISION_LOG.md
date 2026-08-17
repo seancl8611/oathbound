@@ -14,6 +14,22 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-08-17 — Keeper and Twin Maws current-run Boss Rewards locked
+
+Keeper of the Gate and Twin Maws now use the same separate **three-card current-run Boss Reward** after victory. Persistent Mist/material payouts and automatic regional-transition recovery remain separate.
+
+The player chooses exactly one of:
+
+- a guaranteed **Premium Technique** card using the normal three-choice Technique screen with regional-boss source quality,
+- a guaranteed **Enhanced Capacity** card, rolling Health or Spirit at 50/50,
+- a generated **Flex** card: **30% eligible Relic / 35% Premium Technique / 20% opposite Enhanced Capacity / 15% +2 Technique rerolls**, with unavailable Relic weight redistributed.
+
+Enhanced Capacity uses the existing Treasure-tier values: **+20% starting max Health** or **+25% starting max Spirit**, including matching current resource. Ordinary Gold, Mist, Scrolls, pure healing, consumables, and permanent upgrades are excluded from the three-card reward.
+
+The exact cards are revealed only after the mandatory boss fight rather than previewed before entry. Keeper naturally functions as early build establishment while Twin Maws uses the same rules to refine a more mature build before Kagutsuchi.
+
+**Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`.
+
 ## 2026-08-17 — Persistent-resource economy and regional boss materials locked
 
 Oathbound's general currencies are **Mist, Scrolls, and run-only Gold**. The generic `Boss Emblem` currency is removed.
