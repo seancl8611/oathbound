@@ -66,17 +66,17 @@ Broad permanent-upgrade station ownership is also scoped:
 
 Exact permanent-upgrade nodes, values, rank counts, costs, and unlock timing remain later detailed design rather than current full-game scope blockers.
 
-The major-system production-scope audit is complete. The active gameplay package is **full-run integration, rewards, encounters, and pacing**.
+The major-system production-scope audit and all three prototype regional chamber structures are complete. The active gameplay package is **full-run integration, rewards, encounters, and pacing**.
 
 Current approved prototype regional structure:
 
 - **Hushiro:** 12 counted chambers, Keeper at Chamber 12, approximately 14–16 active minutes.
 - **Yomori:** 10 counted chambers, Twin Maws at Chamber 10, approximately 12–14 active minutes.
-- **Kagutsuchi:** exact chamber structure remains the next regional integration decision.
+- **Kagutsuchi:** 11 counted chambers, Eclipse Shogun at Chamber 11, approximately 15–17 active minutes.
 
-Hushiro and Yomori use fixed chamber-index bands, weighted eligible contents, hard route-opportunity safeguards, optional miniboss routing, previewed exits, fixed boss endpoints, and separate non-counted post-boss transition spaces.
+The full regional baseline is therefore **33 counted chambers**. All three regions use fixed chamber-index bands, weighted eligible contents, hard route-opportunity safeguards, optional miniboss routing, previewed exits, and fixed boss endpoints. Keeper and Twin Maws have separate non-counted post-boss transition spaces; the Shogun opens the specialized Heart route.
 
-After Kagutsuchi is structured at the same level, the run package can move into exact Technique reward cadence, rarity/source weighting, replacement behavior, room/reward percentages, encounter composition, economy, and other prototype/playtest tuning.
+The next run-design layer is to evaluate those 33 chambers together and define provisional branching frequency, room/reward category weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, economy pressure, and related route-generation values. Those numbers remain prototype/playtest targets rather than final balance law.
 
 The successful-run duration target remains approximately **45–50 minutes** in [Run Structure](RUN_STRUCTURE.md).
 
