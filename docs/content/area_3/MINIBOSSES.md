@@ -4,7 +4,7 @@ title: Area 3 Minibosses
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-08-16
 topics:
   - area-3
   - minibosses
@@ -13,12 +13,15 @@ topics:
 related:
   - CONTENT-AREA3-OVERVIEW
   - CONTENT-AREA3-BOSS
+  - GAMEPLAY-RUN-STRUCTURE
   - ART-MILESTONE-06
 ---
 
 # Area 3 Minibosses
 
-Kagutsuchi Court contains two miniboss encounters before the Eclipse Shogun. The Blood Lotus is a multi-cycle objective fight built around defensive stalks and exposed-core deathblow windows. The Eternal Swordsman is a focused duel built around timing, restraint, and preserved martial excellence.
+Kagutsuchi Court has two authored launch miniboss encounters: Blood Lotus and Eternal Swordsman. Under the approved prototype route, each run generates **one optional miniboss opportunity during Chambers 4–7** and selects one of these two encounters for that opportunity. The player may route around it, so a normal Kagutsuchi run fights **0–1 minibosses** rather than both.
+
+The Blood Lotus is a multi-cycle objective fight built around defensive stalks and exposed-core deathblow windows. The Eternal Swordsman is a focused duel built around timing, restraint, and preserved martial excellence.
 
 ## Blood Lotus
 
@@ -108,6 +111,6 @@ Use a quiet ceremonial duel space: side courtyard, moonlit terrace, old training
 
 Attack families need distinct startup, recovery, and punish states. Spectral repositioning cannot become cheap teleportation and must preserve orientation. Counters should punish impatience without discouraging engagement. Animation quality, sword angle, posture, and rhythm are more important than spectacle.
 
-## Encounter sequence
+## Encounter placement
 
-The current production-bible order classifies Blood Lotus as Area 3 Miniboss #1 and Eternal Swordsman as Area 3 Miniboss #2 before the Eclipse Shogun.
+Both minibosses remain part of the launch content package and production plan. Their numbering in production documentation is organizational only; it does not mean both are mandatory in sequence during one run. The route system chooses one candidate for the optional Chambers 4–7 miniboss opportunity.
