@@ -4,7 +4,7 @@ title: Blood Cavern and Blood Mirror
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - strand
   - blood-cavern
@@ -13,11 +13,13 @@ topics:
   - aspect-trials
   - technique-trials
   - aspect-progression
+  - boss-materials
 related:
   - CONTENT-STRAND-INTERACTIBLES
   - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROGRESSION
+  - GAMEPLAY-ITEMS-REWARDS
   - UI-BLOOD-MIRROR-TRIALS
   - CHAR-STRAND-UNDEAD-SAMURAI
 ---
@@ -26,79 +28,56 @@ related:
 
 ## Strand function
 
-The Blood Cavern is the Strand's training, tutorial-refresh, combat-trial, Aspect-trial, Technique-demonstration, mastery, and build-testing space. It moves from practical instruction in the outer hall to self-confrontation in the deeper Blood Mirror chamber.
+The Blood Cavern is the Strand's training, tutorial-refresh, combat-trial, Aspect-trial, Technique-demonstration, mastery, and build-testing space. The deeper **Blood Mirror** owns permanent Blood Aspect progression after it unlocks later in the campaign.
 
-The **Blood Mirror is not available at the beginning of the game**. It remains locked until later campaign/onboarding progression. The exact unlock event is intentionally deferred.
+The outer training space may function before the Blood Mirror becomes available.
 
-## Lore role
+## Lore / spatial role
 
-The cavern is an Order training and anti-corruption site. Its deeper chamber contains the Blood Mirror, an older artifact used to reveal corruption within body and soul. The Undead Samurai serves as the primary martial instructor and trial-giver.
+The cavern is an Order training and anti-corruption site. The outer hall is practical and scarred; the inner Mirror chamber is older, quieter, reflective, and unsettling.
 
-The outer training space may function before the Blood Mirror itself becomes available.
-
-## Spatial structure
-
-### Outer training hall
-
-- scarred wooden platforms,
-- training dummies and weapon racks,
-- old ropes and restraint fixtures,
-- dim practical lanterns,
-- controlled space for repeatable fundamentals and standardized challenges.
-
-### Inner mirror chamber
-
-- raw black stone,
-- shallow reflective water,
-- red mineral seams,
-- sparse ritual architecture,
-- colder and stranger light than the outer hall,
-- strong visual separation between practical training and Blood-based self-examination.
-
-The inner chamber must support a clear locked / unavailable state before its campaign unlock.
+The Blood Mirror must have a clear locked state before its campaign/onboarding unlock.
 
 ## Interaction fantasy
 
-The player descends from learning how to fight into proving how much of the Beast Blood can be controlled. The outer hall teaches and tests execution; once unlocked, the Blood Mirror reveals, previews, tests, and permanently improves Blood Aspects within the approved capped progression boundary.
-
-Fixed-loadout demonstrations may temporarily assign approved Techniques to teach one of the five direct combat-slot modifications, family behavior such as Echo, Rupture, Seal, Rift, or Crimson Vulnerable / backstab / direct Health damage, and approved Supporting or mixed-build interactions. Prosthetic behavior remains part of the separate Prosthetic system rather than a temporary Prosthetic-Technique layer. Temporary trial loadouts do not become an equipped run build.
+The player moves from learning execution to proving how much Beast Blood can be controlled. Trials may temporarily assign fixed Aspect/Technique/Prosthetic/Relic loadouts for teaching or mastery, but temporary trial loadouts never become the player's run build.
 
 ## System states
 
-- **Training Hall:** basic combat lessons, refreshers, Technique demonstrations, and general mastery trials.
-- **Blood Mirror — locked:** unavailable during the opening portion of the game until later campaign/onboarding progression.
-- **Blood Mirror — unlocked:** Blood Aspect unlocks or access where assigned, Aspect trials, Tier previews, permanent Aspect progression, approved Technique-pool unlocks, and completion rewards.
+- **Training Hall:** fundamentals, refreshers, Technique demos, general mastery trials.
+- **Blood Mirror — locked:** unavailable during the opening portion of the game.
+- **Blood Mirror — unlocked:** Aspect access/progression, Aspect trials/previews, approved Technique-pool unlocks, mastery/completion rewards.
 
-## Progression ownership
+## Permanent Aspect progression boundary
 
-The Blood Mirror is the Strand station that owns **Blood Aspect permanent progression**.
+Every normal run still begins at Tier 0. Blood Mirror permanent progression cannot:
 
-Permanent Aspect progression must remain distinct from the run-only Shrine path:
+- grant Tier mechanics early,
+- unlock Blood before Tier II,
+- replace Resist / Embrace decisions,
+- remove an Aspect's core commitments/tradeoffs,
+- create uncapped permanent versions of run Tier growth.
 
-- every run still begins at Tier 0,
-- permanent progression cannot grant Tier abilities early,
-- Blood cannot become available before Tier II,
-- and permanent upgrades cannot replace Resist / Embrace decisions or remove an Aspect's core tradeoffs.
+Exact permanent Aspect nodes/values remain later detailed design.
 
-Exact permanent Aspect upgrades, mastery ranks, unlock conditions, and values remain later detailed design.
+Selected **major** Aspect upgrades may later require an appropriate regional boss material alongside Mist or another explicitly approved owning-system cost. Boss materials are low-count mastery gates, not a separate Blood Mirror currency tree. Basic Aspect progression should not require repeated late-game boss farming.
 
-## Environment and animation needs
+A later example could assign Twin Maws material to a major Wraith upgrade if the detailed progression design supports that relationship; exact assignments are not locked by this document.
 
-- restrained training ambience in the outer hall,
-- still reflective water in the inner chamber,
-- subtle mineral pulse,
-- faint red reflection and resonance,
-- a clear sealed / dormant presentation before Blood Mirror unlock,
-- standardized trial-start and trial-complete presentation,
-- clear visual state for locked, available, loadout-previewed, active, completed, and mastered trials.
+## Environment / animation needs
 
-Stillness is important. The inner chamber should feel older, more intimate, and more unsettling than a shop or upgrade station.
+- practical outer training ambience,
+- still reflective inner water,
+- restrained mineral/red resonance,
+- sealed/dormant Mirror state,
+- reusable trial-start / trial-complete states,
+- clear locked / available / active / completed / mastered presentation.
 
 ## Technical requirements
 
-- Repeatable trials must support fixed conditions and standardized Aspect, Technique, Prosthetic, and Relic loadouts.
-- Temporary trial Techniques clear when the trial ends.
-- Trial completion, reward, unlock, Technique-pool access, and mastery flags must persist.
-- Blood Mirror availability must support a persistent campaign-gated locked/unlocked state.
-- The system should allow future challenge ladders, boss rematches, or score-based modes without requiring the space or data structure to be rebuilt.
-- Blood Mirror functions must remain distinct from Boat confirmation, Shrine Tier progression, Technique rewards during runs, Bloodwell Akio/Run Infrastructure progression, and Forge Prosthetic/Relic progression.
+- Repeatable trials support fixed standardized conditions/loadouts.
+- Temporary trial Techniques clear after the trial.
+- Trial completion/reward/unlock/mastery flags persist.
+- Blood Mirror locked/unlocked campaign state persists.
+- Progression UI must support ordinary Mist-based nodes and occasional specific regional-boss-material requirements if later assigned.
+- Blood Mirror functions remain distinct from Boat confirmation, Shrine Tier progression, run Technique rewards, Bloodwell Akio/Run Infrastructure progression, and Forge Prosthetic/Relic progression.
