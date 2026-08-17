@@ -4,7 +4,7 @@ title: Kagutsuchi Court
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-16
 topics:
   - area-3
   - kagutsuchi-court
@@ -14,6 +14,7 @@ topics:
   - false-ascendancy
   - heart-bindings
   - true-final-heart
+  - chamber-structure
 related:
   - ART-DIRECTION
   - ART-MILESTONE-06
@@ -21,6 +22,7 @@ related:
   - CONTENT-AREA3-MINIBOSSES
   - CONTENT-AREA3-BOSS
   - CONTENT-AREA3-TRUE-FINAL-HEART
+  - GAMEPLAY-RUN-STRUCTURE
 ---
 
 # Kagutsuchi Court
@@ -73,19 +75,36 @@ Movement is precise, elegant, and unnaturally controlled. Wrongness comes from i
 - [Hollow Vessel](enemies/HOLLOW_VESSEL.md)
 - [Court Sentinel](enemies/COURT_SENTINEL.md)
 
+## Prototype regional route
+
+Kagutsuchi uses **11 counted chambers** with an active-time target of approximately **15–17 minutes**.
+
+- **Chambers 1–2 — Court entrance:** immediate branching and introduction of the Court's disciplined layered combat language.
+- **Chambers 3–7 — Main Court:** full room/reward pool and mature-build development.
+- **Chambers 4–7 — Miniboss window:** one optional route opportunity selects either Blood Lotus or Eternal Swordsman for that run.
+- **Chambers 8–10 — Final Court / Shogun approach:** strongest normal compositions, no minibosses, and final build/recovery preparation.
+- **Chamber 11 — Eclipse Shogun:** fixed regional endpoint.
+
+Before the Shogun, the generated route network contains at least one Shrine, Shop, Rest, optional miniboss opportunity, two Technique-reward opportunities, and one meaningful final-preparation opportunity across Chambers 9–10. These are route-network opportunities rather than mandatory visits.
+
+Exact branch frequency, room/reward percentage weights, encounter compositions, and numerical tuning remain part of the complete three-region integration/playtest pass. `RUN_STRUCTURE.md` owns the shared chamber-generation rules and full regional details.
+
 ## Major encounter sequence
 
-1. [Blood Lotus](MINIBOSSES.md#blood-lotus) — multi-cycle objective miniboss
-2. [Eternal Swordsman](MINIBOSSES.md#eternal-swordsman) — focused duel miniboss
-3. [Eclipse Shogun](BOSS.md) — regional boss and central character antagonist
-4. Heart chamber and one Binding completion during the first six successful clears
-5. [True-Final Heart](TRUE_FINAL_HEART.md) after all six Bindings are destroyed
+1. [Blood Lotus](MINIBOSSES.md#blood-lotus) or [Eternal Swordsman](MINIBOSSES.md#eternal-swordsman) as the run's optional Kagutsuchi miniboss route
+2. [Eclipse Shogun](BOSS.md) — fixed Chamber 11 regional boss and central character antagonist
+3. Heart approach and one Binding completion during the first six successful clears
+4. [True-Final Heart](TRUE_FINAL_HEART.md) after all six Bindings are destroyed
+
+Blood Lotus is a multi-cycle objective miniboss and Eternal Swordsman is a focused duel miniboss. Both remain authored launch encounters even though a normal Kagutsuchi route offers only one of them as the optional miniboss opportunity for that run.
 
 The Eclipse Shogun's exact phase structure remains draft encounter-design work. His approved high-level identity is a regal, composed false master whose deliberate inhuman escalation preserves intelligence and recognizable character identity.
 
 During the first six successful clears, Akio uses the extraction apparatus and Returning Blood to break one ancient Heart Binding, is dissolved by the Heart, and reconstructs at the Strand with permanent progress preserved.
 
 On the seventh successful story run, Akio defeats the Shogun's current body and continues directly into the two-form Heart encounter. Destroying the Heart ends Beast Blood and completes the story.
+
+Heart approach, Binding completion, and the true-final Heart are specialized endgame content outside Kagutsuchi's 11 counted chambers.
 
 After completion, normal runs and the Heart continuation may be repeated without further canonical story progression.
 
@@ -107,4 +126,4 @@ After completion, normal runs and the Heart continuation may be repeated without
 
 Rich Court detail must not compete with attack startup, shield orientation, weapon lines, projectiles, spawn ownership, revival states, hazards, or safe-space reads.
 
-The Shogun and Heart remain separate Milestone 6 batch chains. The Binding ritual uses one reusable sequence. Exact Shogun production counts wait for encounter approval, and the Heart uses established combat systems without a one-off weak-point mechanic.
+The modular Court environment package must support the approved 11-chamber prototype route without requiring unique environment art for every chamber. The Shogun and Heart remain separate Milestone 6 batch chains. The Binding ritual uses one reusable sequence. Exact Shogun production counts wait for encounter approval, and the Heart uses established combat systems without a one-off weak-point mechanic.
