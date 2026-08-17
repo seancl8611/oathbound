@@ -4,7 +4,7 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-17
 ---
 
 # Source of Truth
@@ -32,9 +32,10 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Individual Technique catalog and refinements | `docs/gameplay/TECHNIQUE_CATALOG.md` |
 | Relic mechanics and launch roster | `docs/gameplay/RELICS.md` |
 | Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
+| Currency/material ownership and permanent upgrade gates | `docs/gameplay/PROGRESSION.md` |
+| Reward payouts, Gold/Shop economy, Mist/Scroll payouts, regional boss-material drops | `docs/gameplay/ITEMS_AND_REWARDS.md` |
 | Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
 | Prosthetic mechanics | `docs/gameplay/PROSTHETICS.md` |
-| Items, currencies, and rewards | `docs/gameplay/ITEMS_AND_REWARDS.md` |
 | World and island setting | `docs/lore/WORLD.md` |
 | Story spine | `docs/lore/STORY_OVERVIEW.md` |
 | Beast Blood canon | `docs/lore/BEAST_BLOOD.md` |
@@ -68,7 +69,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Blood Aspect VFX | `docs/art_production/ASPECT_VFX.md` |
 | Prosthetic VFX | `docs/art_production/PROSTHETIC_VFX.md` |
 | Technique VFX | `docs/art_production/TECHNIQUE_VFX.md` |
-| Item and reward art | `docs/art_production/ITEM_REWARD_ART.md` |
+| Item, reward, currency, and boss-material art | `docs/art_production/ITEM_REWARD_ART.md` |
 | Art asset inventory | `docs/art_production/ASSET_INVENTORY.md` |
 | Outsourcing process | `docs/art_production/OUTSOURCING_WORKFLOW.md` |
 | Milestone scope | `docs/art_production/milestones/MILESTONE_*.md` |
