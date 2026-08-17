@@ -61,6 +61,8 @@ The build should strengthen decisions the player already makes—timing, spacing
 - Supporting / Cross-family / Legendary Techniques are slotless; no global Technique inventory cap exists.
 - One equipped Prosthetic from an eight-tool roster with persistent Forge progression.
 - One equipped Relic from a 10-item persistent collection with individual kill-earned mastery/progression.
+- Relic acquisition uses 4 campaign/Strand + 2 Blood Cavern/challenge + 4 run-discovered unlocks, with limited regional-transition swapping.
+- No general launch consumable inventory or one-use item reward layer.
 - Permanent stations: **Bloodwell = Akio + Run Infrastructure**, **Forge Bench = Prosthetics + Relics**, **Blood Mirror = Blood Aspects** after later unlock.
 
 # Persistent progression economy
@@ -86,7 +88,7 @@ The approved first regional prototype contains **33 counted chambers**:
 
 Each region offers one optional miniboss opportunity from two authored candidates. Branches preview room/reward information, normally offer one or two exits, and may reconverge without routine backtracking.
 
-The first controlled-generation, Technique-offer, Gold/Shop, survival/capacity, and persistent-resource payout models are approved as prototype implementation targets. Exact values remain playtest-tunable.
+The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, and persistent-resource payout models are approved as prototype implementation targets. Exact values remain playtest-tunable.
 
 A normal successful Binding run targets approximately **45–50 minutes of active time**.
 
@@ -112,19 +114,16 @@ Completed saves remain playable. Repeat normal runs and optional repeat Heart ro
 
 # Current design focus
 
-Major game-system architecture and the first full-run reward/economy prototypes are already scoped.
+Major run-build, reward/economy, route, boss-reward, and Relic architecture are already scoped.
 
-The active design sequence is now:
+The remaining sequence is now:
 
-1. finish full-run integration:
-   - Keeper / Twin Maws current-run reward composition,
-   - Relic acquisition and limited in-run swap placement,
-   - consumables include/cut,
-   - encounter composition, clear-time, full-run simulation, and playable validation;
-2. define narrative delivery / campaign presentation;
-3. define endgame / postgame / release scope.
+1. **make the full 33-chamber route concrete and validate pacing** — enemy compositions, threat escalation, elite frequency, clear-time budgets, boss/miniboss budgets, and full-run simulation;
+2. **close permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery structure, boss-material gates, unlock cadence;
+3. **define narrative delivery / campaign presentation**;
+4. **define endgame / postgame / release scope**.
 
-Exact permanent upgrade nodes, boss-material assignment to particular upgrades, final balance values, mastery thresholds, encounter timings, frame data, and final scripts remain later work under their owning authorities.
+Exact final balance values, mastery thresholds, frame data, and final scripts remain later work under their owning authorities.
 
 # Source links
 
