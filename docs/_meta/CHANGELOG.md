@@ -9,6 +9,24 @@ last_reviewed: 2026-08-16
 
 # Documentation Changelog
 
+## 2026-08-16 — Area 1 / Area 2 prototype run-structure lock
+
+- Locked the Hades-like regional routing model around fixed regional endpoints, chamber-index eligibility bands, weighted procedural contents, previewed route choices, and hard minimum-opportunity safeguards.
+- Locked **Hushiro** at 12 counted prototype chambers: opening 1–3, main 4–8, pre-boss 9–11, Keeper of the Gate at 12.
+- Made Hushiro Chamber 1 fixed combat followed by a Technique reward.
+- Gave Hushiro one optional miniboss opportunity during Chambers 5–8, selecting Village Ogre or The Collector for that run.
+- Guaranteed the Hushiro route network at least one Shrine, Shop, Rest, miniboss opportunity, and three Technique-reward opportunities total including Chamber 1.
+- Locked **Yomori** at 10 counted prototype chambers: opening 1–2, main 3–7, pre-boss 8–9, Twin Maws at 10.
+- Gave Yomori one optional miniboss opportunity during Chambers 4–7, selecting The Embered Pilgrim or Rotwood Host for that run.
+- Guaranteed the Yomori route network at least one Shrine, Shop, Rest, miniboss opportunity, and two Technique-reward opportunities.
+- Defined guaranteed opportunities as route-network availability rather than mandatory visits.
+- Kept post-boss regional transitions outside counted chamber totals and scoped them as short safe reward/recovery/preparation connectors rather than secondary hubs.
+- Set current active-time targets at approximately 14–16 minutes for Hushiro and 12–14 minutes for Yomori.
+- Preserved exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Kagutsuchi's chamber budget for the continuing integration/playtest pass.
+- Marked the major-system production-scope audit complete and advanced the active design dependency to Kagutsuchi's route structure, then complete three-region pacing validation.
+- Updated Area 1/2 overviews, room/reward authorities, full scope, roadmap, gameplay index, production milestones, open questions, and decision history to remove contradictory all-counts-deferred language.
+- Corrected the remaining Milestone 2 reference to the superseded four-slot/reserve Technique UI.
+
 ## 2026-08-16 — Permanent progression station scope and repository consistency pass
 
 - Locked the current permanent upgrade-station architecture at full-game scope level:
@@ -109,7 +127,7 @@ last_reviewed: 2026-08-16
 
 - Locked the Ivory / blade-circle family around **Rift**.
 - Defined Rift as one visible ivory fracture-line on the enemy that automatically opens after a short fuse for direct Health damage.
-- Further qualifying Rift applications intensify the same visible mark rather than adding exposed stacks; the fracture spreads and becomes more prominent as its eventual burst grows stronger.
+- Further qualifying Rift applications before opening intensify the same visible mark rather than adding exposed stacks; the fracture spreads and becomes more prominent as its eventual burst grows stronger.
 - Positioned Rift as a **strong-upfront, moderate-scaling** family: one pickup is immediately useful, while deeper investment remains viable without requiring the highest synergy ceiling.
 - Previously locked the Crimson / split-blood-drop family around **Burst**; that Crimson direction is now superseded by the 2026-08-12 Vulnerable / backstab redesign.
 - The superseded Burst direction used immediate heavy direct AoE centered on a Burst-ready target, per-target recharge, close-range recovery acceleration, bounded pack behavior, and no persistent base damage zone.
