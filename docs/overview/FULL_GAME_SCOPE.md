@@ -4,13 +4,14 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - full-scope
   - techniques
   - relics
   - prosthetics
   - progression
+  - boss-materials
   - areas
   - strand
   - the-heart
@@ -32,293 +33,225 @@ related:
 
 # Full Game Scope
 
-This document defines Oathbound's current production-level shape. Prototype percentages and reward values may change through playable validation without reopening the underlying system architecture. Final combat values, frame data, permanent-upgrade values, and other implementation details remain later work.
+This document summarizes Oathbound's current production-level shape. Detailed mechanics live in their gameplay/content authorities. Prototype percentages and values may change through playable validation without reopening the underlying architecture.
 
-## Master scope
+# Master scope
 
-| Asset group | Planned count | Current boundary |
+| Asset / system group | Planned count | Current boundary |
 |---|---:|---|
-| Player character | 1 | Akio concept, final sprite, introductory combat, three Aspect combat libraries |
+| Player character | 1 | Akio; base sword kit + three Aspect combat libraries |
 | Blood Aspects | 3 | Wolf, Wraith, Ronin |
-| Core Technique slots | 5 | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow |
-| Direct Technique matrix | 25 approved Techniques | Five families × five direct combat slots |
-| Same-family Supporting Techniques | 15 approved Techniques | Three per family |
-| Cross-family Techniques | 5 approved Techniques | Rare hybrid-build effects |
-| Legendary Techniques | 5 approved Techniques | One family capstone per family |
-| Refinements | 10 approved concepts | Small parent-Technique upgrades; not separate Techniques |
-| Working Technique roster | 50 actual Techniques | 10 Common / 18 Uncommon / 17 Rare / 5 Legendary |
-| Prosthetic tools | 8 | One equipped at a time; permanent Forge progression |
-| Relic slot | 1 | One equipped Relic at a time |
-| Launch Relic roster | 10 approved Relics | Persistent collection/mastery/progression; run-active benefit; no rarity tiers |
+| Direct Technique slots | 5 | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow |
+| Direct Techniques | 25 | Five families × five direct slots |
+| Supporting Techniques | 15 | Three per family |
+| Cross-family Techniques | 5 | Rare hybrid effects |
+| Legendary Techniques | 5 | One family capstone each |
+| Refinements | 10 | One small eligible parent upgrade each |
+| Total Technique roster | 50 + 10 refinements | 10 Common / 18 Uncommon / 17 Rare / 5 Legendary |
+| Prosthetic tools | 8 | One equipped at a time; 19 permanent Forge upgrades |
+| Relic roster | 10 | One equipped; persistent collection/mastery/progression; no rarity tiers |
 | Permanent upgrade stations | 3 | Bloodwell, Forge Bench, later-unlocked Blood Mirror |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
-| Area 1 standard enemies | 6 | Hushiro rupture roster |
-| Area 2 standard enemies | 4 | Yomori spirit/predator roster |
-| Area 3 standard enemies | 5 | Kagutsuchi court roster |
-| Area 1 prototype chambers | 12 | Opening 1–3, main 4–8, pre-boss 9–11, Keeper at 12 |
-| Area 2 prototype chambers | 10 | Opening 1–2, main 3–7, pre-boss 8–9, Twin Maws at 10 |
-| Area 3 prototype chambers | 11 | Entrance 1–2, main 3–7, final Court 8–10, Eclipse Shogun at 11 |
-| Total regional prototype chambers | 33 | 12 Hushiro + 10 Yomori + 11 Kagutsuchi |
-| Miniboss encounters | 6 | Two designed encounters per area; each region offers one optional candidate per run |
+| Area 1 standard enemies | 6 | Hushiro |
+| Area 2 standard enemies | 4 | Yomori |
+| Area 3 standard enemies | 5 | Kagutsuchi |
+| Regional minibosses | 6 authored | Two per region; one optional candidate offered per region/run |
 | Regional bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
-| Heart Binding campaign | 7 original / 6 player clears | One historical breach and six player-destroyed Bindings |
+| Prototype regional chambers | 33 | 12 Hushiro + 10 Yomori + 11 Kagutsuchi |
+| Heart Binding campaign | 7 original / 6 player clears | One historical breach, six player-destroyed Bindings |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
-| Currency families | 4 | Mist, Scroll, Boss Emblem, Gold |
+| General currencies | 3 | Mist, Scrolls, Gold |
+| Regional boss-material families | 3 | One unique low-count permanent material per regional boss; exact item names TBD |
 
-## Player and run build
+# Player and run build
 
-Akio begins with a complete introductory katana kit. Core combat includes parry, player/enemy posture, stagger, deathblow, block, dash, universal rear-hit / backstab classification, and Prosthetic support.
+Akio's combat foundation is sword-first and posture/parry/deathblow driven.
 
-After Returning Blood awakens, launch scope includes:
+After the relevant systems unlock, a run may build through:
 
-- one selected Blood Aspect as the immediate Tier 0 weapon foundation,
-- three complete Aspect packages from Tier 0 through Tier IV,
-- optional fixed Aspect advancement through Shrine Resist/Embrace decisions,
-- Blood as a run-only resource unavailable before Tier II,
-- five direct Technique slots tied to Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow,
-- one direct Technique maximum per slot,
-- the approved 25-Technique direct matrix across five families,
-- 15 slotless same-family Supporting Techniques,
-- 5 Rare Cross-family Techniques,
-- 5 Legendary family capstones,
-- 10 selective refinements with one refinement maximum per eligible parent Technique,
-- rare same-slot replacement offers,
-- four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
-- one equipped Prosthetic with permanent Forge progression,
-- one equipped Relic from the persistent 10-Relic collection,
-- Gold/Shop economy,
-- and temporary Health/Spirit recovery and capacity rewards.
+- one selected Blood Aspect beginning at Tier 0,
+- optional Shrine/Corruption advancement through Tier IV,
+- five direct Technique slots,
+- slotless Supporting / Cross-family / Legendary Techniques,
+- refinements and rare same-slot replacements,
+- one Prosthetic,
+- one Relic,
+- Gold/Shop decisions,
+- temporary Health/Spirit recovery and capacity.
 
-There is **no global Technique inventory cap**. Direct combat actions remain limited by their five action-specific slots, while eligible Supporting, Cross-family, Legendary, and refinement growth is constrained by reward access, prerequisites, route choices, and run length.
+There is **no global Technique inventory cap** beyond the five direct action slots. Mandatory content cannot assume a specific Tier, Blood Art, Technique family, Legendary, Relic, highly upgraded Prosthetic, ideal economy, or ideal survival route.
 
-Prosthetic Techniques are not part of the run-build system. Techniques do not add separate temporary upgrade layers to Prosthetics or Relics.
+Detailed Technique mechanics/roster belong to `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md`. Detailed Aspect packages belong to the Aspect authorities.
 
-The current Technique content roster is **50 actual Techniques plus 10 refinements**. The roster is complete for paper-design scope and should not be expanded without a concrete audit or prototype need.
+# Permanent progression
 
-## Locked Aspect scope
+Launch scope uses exactly three permanent upgrade stations:
 
-| Tier | Wolf | Wraith | Ronin |
-|---|---|---|---|
-| **Tier 0** | Four-hit close pressure/pursuit kit | Two-hit extended reach/control kit | Three-hit heavy impact/stability kit |
-| **Tier I** | Blood Tempo | Pale Barrage | Steadfast Reprisal |
-| **Growth** | Feral Momentum | Spectral Edge | Maximum player-posture capacity |
-| **Tier II** | Blood Hunt / Blood Fang | Wraith's Reach | Falling Mountain / Deep Rupture |
-| **Tier III** | Fanged Guard | Spectral Passage | Unbroken Resolve / Measured Weight / Perfect Weight |
-| **Tier IV** | Apex Mauling | Beyond the Veil | Shattering Wake |
+## Bloodwell
 
-All three packages are locked at current qualitative paper-design depth. Final animation counts, VFX counts, frame data, combat values, collision, and effect timing still require playable validation.
+Owns:
 
-## Technique scope boundary
+- Akio,
+- Run Infrastructure.
 
-Technique design uses five broad internal effect families. The families do not need formal player-facing names; recognition should rely on symbols, color treatment, effect behavior, VFX, and audio language.
+Run Infrastructure is one umbrella for approved Rest, Shrine, reward, route, transition, and expedition support. It is not split into separate permanent subsystem trees.
 
-All five family mechanics are approved:
+## Forge Bench
 
-- **Pale silver / twin slash — Echo:** delayed additional sword slashes created by qualifying actions.
-- **Gold / cracked crest — Rupture:** buildup fills a visible enemy meter; completion triggers a large posture-impact proc and bounded nearby posture pressure.
-- **Violet / binding knot — Seal:** discrete visible marks progressively restrict movement; three complete the pattern and briefly Bind the target without stunning it.
-- **Ivory / blade circle — Rift:** one visible fracture mark automatically opens after a short fuse for direct Health damage; further qualifying applications intensify the same mark before it opens.
-- **Crimson / split blood drop — Vulnerable / direct Health damage:** Vulnerable is a short enemy status that makes genuine backstabs deal substantially increased Health damage. Other Crimson Techniques may instead provide standalone direct Health damage, bounded AoE, or stronger backstab payoffs.
+Owns:
 
-Backstabs remain universal positional hits based on actually reaching the enemy's rear. Crimson does not create fake rear-angle windows, force enemy facing, or rely on ordinary slow to manufacture backstabs.
+- Prosthetics,
+- Relics.
 
-`TECHNIQUE_CATALOG.md` owns the complete 50-Technique roster, rarity assignments, prerequisites, and refinements.
+The eight Prosthetics use shallow linear paths. Relics retain their own mastery/progression logic despite sharing the station.
 
-Technique reward frequency and first-pass offer generation are now approved at prototype depth:
+The old alternate-weapon / weapon-socket Forge direction and separate Relic Reliquary are not current scope.
 
-- the normal Technique screen presents **3 choices**,
-- eligibility is resolved before screen composition and rarity,
-- early screens protect direct build formation while mature builds shift toward flex offers,
-- Hushiro/Yomori/Kagutsuchi use progressively higher Rare weighting,
-- Shops, Treasure, minibosses, and regional bosses use stronger source-quality weighting,
-- refinements, replacements, Cross-family Techniques, and Legendaries have explicit screen limits and prototype appearance behavior,
-- and rerolls regenerate the complete screen without automatically improving quality.
+## Blood Mirror
 
-Final offer rates remain playtest-tunable.
+Owns permanent Blood Aspect progression, begins locked, and becomes available later through campaign/onboarding progression.
 
-## Relic scope boundary
+Permanent Aspect progression cannot bypass the run's Tier 0–IV Shrine path or unlock Blood before Tier II.
 
-Relics are a small supporting layer rather than another build family.
+# Persistent resource scope
 
-Launch scope uses:
+The current persistent economy is intentionally small:
 
-- **one equipped Relic**,
-- a persistent collection of **10 approved Relics**,
-- persistent kill-earned individual mastery,
-- simple run-wide benefits that remain broadly usable across Aspects,
-- no Common / Rare / Legendary Relic tiers,
-- permanent Relic progression / Strand-side management at the **Forge Bench** alongside Prosthetics,
-- and limited in-run replacement opportunities rather than free swapping in ordinary rooms.
+- **Mist** — broad meta progression,
+- **Scrolls** — primarily Prosthetic Forge development,
+- **three regional boss materials** — low-count secondary requirements on a small number of major permanent upgrades.
 
-The approved roster is Traveler's Coin, Merchant's Seal, Iron Prayer Bead, Spirit Tassel, Execution Bead, Wayfarer's Charm, Last Oath, Unbroken Cord, Scribe's Lens, and Blood Moon Shard.
+There is **no generic Boss Emblem currency**.
 
-Merchant's Seal currently prototypes a **20% discount on the first purchase in each region**. No separate Relic Reliquary is required in current hub scope. Exact acquisition allocation, mastery ranks, Forge presentation, costs if any, swap timing, and most numerical values remain later implementation/content work.
+Every Keeper, Twin Maws, and Eclipse Shogun kill awards exactly one boss-specific material. Materials persist immediately even if the run later fails. They use small costs—normally 1–3—and should not turn bosses into farming chores.
 
-## Permanent progression scope
+Gold remains run-only.
 
-The launch hub uses three permanent upgrade stations:
+`ITEMS_AND_REWARDS.md` owns payout values; `PROGRESSION.md` owns persistence and spending boundaries.
 
-### Bloodwell
+# Run structure and pacing
 
-Upgrades:
+Normal successful Binding-run target: approximately **45–50 active minutes**.
 
-- **Akio**
-- **Run Infrastructure**
+Prototype region budgets:
 
-Run Infrastructure is one umbrella covering approved permanent improvements to Rest support, Shrine support, reward possibilities, routing/run conditions, regional transitions, and related expedition support. It is not split into separate permanent upgrade trees for each room/reward subsystem.
+- **Hushiro:** 12 chambers / ~14–16 min,
+- **Yomori:** 10 / ~12–14 min,
+- **Kagutsuchi:** 11 / ~15–17 min.
 
-The exact Bloodwell tree, Akio nodes, Run Infrastructure nodes, values, rank counts, and costs remain later detailed design.
+The complete regional route is **33 counted chambers** before specialized Heart-route spaces.
 
-### Forge Bench
+Current controlled-generation prototype includes:
 
-Upgrades / manages:
+- opening: 50% one exit / 50% two exits,
+- main: 25% one / 70% two / 5% three,
+- pre-boss/final: 45% one / 55% two,
+- roughly 17–19 multi-exit decisions,
+- roughly 20–22 standard Combat chambers,
+- roughly 7–9 Technique pickups for a Technique-invested successful run,
+- roughly 4–5 visible Shrine opportunities,
+- roughly 1–2 normally visited Shops, Rests, Treasures, and minibosses.
 
-- **Prosthetics**
-- **Relics**
+Exact route rules and safeguards belong to `RUN_STRUCTURE.md`.
 
-The eight Prosthetic paths are already locked as shallow and linear. Relics keep their own mastery/progression logic even though they share the Forge station.
+# Reward / economy prototype
 
-The old generic weapon-development, weapon-socket, and alternate-weapon progression model is removed from current scope. Blood Aspects are Akio's run weapon identities.
+Approved first-pass reward integration includes:
 
-### Blood Mirror
+- region-specific Combat reward weights,
+- three-choice Technique reward generation with region/source quality weighting,
+- 60 / 70 / 80 regional Gold primary rewards,
+- three-item Shops with stable regional prices,
+- percentage-based recovery/capacity values,
+- automatic post-Keeper / post-Twin-Maws viability recovery,
+- partial Shogun→Heart recovery on the final story run,
+- Mist primary rewards of 20 / 25 / 30,
+- Scroll primary rewards of 1 / 1 / 2,
+- premium Treasure persistent-resource bundles,
+- +10 Mist / +1 Scroll per defeated miniboss,
+- regional boss Mist + boss-material drops,
+- persistent resources retained when earned even if the run later fails.
 
-Upgrades:
+These are prototype implementation targets, not immutable final balance law.
 
-- **Blood Aspects**
+# Relic scope
 
-The Blood Mirror is physically inside the Blood Cavern, begins locked, and becomes available later through campaign/onboarding progression. The exact unlock point and permanent Aspect nodes remain later detailed design.
+Launch Relics:
 
-Permanent Aspect progression cannot bypass the Tier 0-IV Shrine path or unlock Blood before Tier II.
+- 10 approved items,
+- one equipped slot,
+- persistent collection,
+- kill-earned mastery for the equipped Relic,
+- run-active benefit,
+- no Relic rarity tiers,
+- Forge Bench progression/management.
 
-### Non-upgrade persistent systems
+Exact acquisition allocation and limited in-run swap placement remain open full-run integration work.
 
-Technique pool unlocks, Blood Cavern trial completion, Discovery Board/codex progress, Merchant services, Boat confirmation, Heart Bindings, and story/postgame state may persist but are not separate permanent upgrade trees in current launch scope.
-
-## Optional investment outcomes
-
-Launch balance must support:
-
-- Tier 0-I with a strong coherent Technique build,
-- Tier II with a solid Technique build as a common hybrid,
-- Tier III with less-developed horizontal upgrades as deliberate Aspect specialization,
-- occasional Tier IV high-roll runs,
-- economy-focused routes that exchange immediate rewards for flexible Shop purchasing,
-- and survival-focused routes that increase recovery/capacity at meaningful opportunity cost.
-
-Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, Relic, heavily developed permanent progression, ideal economy, or ideal survival build.
-
-## Run-duration, route, economy, and survival target
-
-A normal successful Binding run targets approximately **45–50 minutes** of active time.
-
-The current regional prototype budgets are:
-
-- **Hushiro:** 12 counted chambers, approximately 14–16 active minutes.
-- **Yomori:** 10 counted chambers, approximately 12–14 active minutes.
-- **Kagutsuchi:** 11 counted chambers, approximately 15–17 active minutes.
-
-The complete regional route contains **33 counted chambers** before specialized Heart-route spaces.
-
-The approved route-generation prototype adds:
-
-- opening branch frequency: **50% one exit / 50% two exits**,
-- main-stretch branch frequency: **25% one exit / 70% two exits / 5% three exits**,
-- pre-boss/final branch frequency: **45% one exit / 55% two exits**,
-- a target of roughly **17–19 multi-exit decisions** per normal successful run,
-- room-type weighting that keeps Combat dominant while increasing Shop/Rest access near bosses,
-- region-specific standard-Combat reward weights with Technique emphasis decreasing from Hushiro to Kagutsuchi,
-- a target of roughly **20–22 standard Combat chambers** on a completed route,
-- approximately **7–9 Technique pickups** for a Technique-invested successful run,
-- roughly **4–5 Shrine opportunities** across a typical run,
-- and approximately **1–2 normally visited Shops, Rests, Treasures, and minibosses**.
-
-The approved first Gold/Shop prototype uses:
-
-- standard Gold rewards of **60 Hushiro / 70 Yomori / 80 Kagutsuchi**,
-- **3 purchasable items** per Shop across Survival / Build / Flex roles,
-- stable regional prices,
-- **100 Gold** for a Technique reward and **140 Gold** for an eligible Relic opportunity,
-- no Shop inventory reroll in the first prototype,
-- and no primary Gold reward after the final realistic Shop opportunity.
-
-The approved first survival/recovery prototype uses percentage-based Health/Spirit values so final base stats remain open. It defines standard recovery, Rest, Shop, Shrine, Treasure, temporary capacity, miniboss capacity rewards, post-Keeper/post-Twin-Maws recovery floors, and the partial Shogun-to-Heart recovery handoff. Temporary capacity stacks additively from starting maximum and resets at run end.
-
-Controlled-generation safeguards prevent repeated forced corridors, duplicate normal two-door rewards, back-to-back ordinary safe-service rooms, missing required regional opportunities, and dead late Gold. Consumables have 0% ordinary primary-room reward weight in this first prototype.
-
-These are implementation/playtest targets, not immutable final balance law.
-
-## The Strand
+# The Strand
 
 Persistent NPCs:
 
-- Keeper
-- Peddler
-- Smith
-- Raven
-- Undead Samurai
-- Scribe
+- Keeper,
+- Peddler,
+- Smith,
+- Raven,
+- Undead Samurai,
+- Scribe.
 
-Primary services and landmarks:
+Primary services/landmarks:
 
-- Boat / run confirmation
-- Forge Bench — Prosthetics + Relics
-- Merchant Stall
-- Discovery Board
-- Bloodwell — Akio + Run Infrastructure
-- Blood Cavern
-- later-unlocked Blood Mirror — Blood Aspects
+- Boat / run confirmation,
+- Forge Bench,
+- Merchant Stall,
+- Discovery Board,
+- Bloodwell,
+- Blood Cavern,
+- later-unlocked Blood Mirror.
 
-The Boat remains focused on fast run-start confirmation rather than becoming a combined permanent-progression screen.
+The Boat remains a fast run-start confirmation point rather than another combined permanent-progression interface.
 
-Exact onboarding timing, trial counts, permanent-upgrade node values, mastery thresholds, and final UI layouts remain detailed design rather than full-game scope blockers.
+# Regional roles
 
-## Area roster and run role
+- **Hushiro Gate Village / Rupture:** 6 standard enemies, 2 authored minibosses, Keeper; establishes first Technique/family direction.
+- **Yomori Grove / Adaptation:** 4 standard enemies, 2 authored minibosses, Twin Maws; expands/deepens the build.
+- **Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 authored minibosses, Eclipse Shogun; finalizes the mature build under the most layered normal pressure.
 
-- **Area 1 — Hushiro Gate Village / Rupture:** 6 standard enemies, 2 designed minibosses, Keeper of the Gate; 12 counted chambers; establishes the first direct-action Technique modifications and family/build direction.
-- **Area 2 — Yomori Grove / Adaptation:** 4 standard enemies, 2 designed minibosses, Twin Maws; 10 counted chambers; expands direct-action coverage and deepens the build through later Technique eligibility and Aspect progression.
-- **Area 3 — Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 designed minibosses, Eclipse Shogun; 11 counted chambers; finalizes/refines the mature run build under the most layered normal encounter pressure.
+Each region generates one optional miniboss opportunity from its two candidates.
 
-Each region generates one optional miniboss opportunity from its two authored candidates. Final encounter composition remains prototype/playtest work.
+# Heart Binding campaign and ending
 
-## Heart Binding campaign
+The Court historically destroyed one of seven Heart Bindings. Six remain when Akio begins.
 
-The Heart's prison originally contained seven Bindings. The Court destroyed the outermost Binding during the plague, leaving six intact when Akio begins.
+The first six successful Binding runs each destroy one remaining Binding. After all six are gone, the seventh successful story route continues from the Eclipse Shogun into the true-final Heart with the same active build.
 
-Each of the first six successful clears destroys one remaining Binding and permanently preserves that progress.
-
-After the sixth remaining Binding is destroyed, the next successful run becomes the seventh and final story run and continues from the Eclipse Shogun into the Heart.
-
-Heart approach, Binding-completion spaces, and the true-final Heart are specialized endgame content beyond the 33 counted regional chambers rather than additional Kagutsuchi chambers.
+Heart approach, Binding-completion spaces, and the Heart encounter are outside the 33 counted regional chambers.
 
 The true-final Heart has two conceptual forms:
 
-1. **The Unbound Heart**
-2. **The Vessel of Continuance**
+1. The Unbound Heart,
+2. The Vessel of Continuance.
 
 Destroying the Heart ends Beast Blood, stops the Shogun's reconstruction, ends the Blood Moon, and leaves Akio mortal.
 
-Postgame retains repeatable normal runs and optional Heart-route access without changing the completed ending.
+Completed saves remain playable; repeat normal/Heart runs do not create additional canon.
 
-## Run-build and persistence boundary
+# Current open production scope
 
-Temporary run state includes Aspect Tier, Corruption, Blood, slotted Techniques, Supporting / Cross-family / Legendary Techniques, refinements, the equipped Relic benefit, Gold, temporary capacities, and room progress.
+The major system architecture and first full-route reward/economy prototypes are complete at paper-design depth.
 
-Persistent state includes destroyed Bindings, story/codex progress, Aspect unlocks and later Blood Mirror progression, the Relic collection/mastery/progression, permanent Akio and Run Infrastructure upgrades, permanent Prosthetic progression, and persistent currencies.
+Current sequence:
 
-## Current open production scope
+1. finish full-run integration:
+   - Keeper / Twin Maws current-run reward composition,
+   - Relic acquisition and transition-swap placement,
+   - consumables include/cut,
+   - encounter composition / clear-time / run simulation and playable validation;
+2. define narrative delivery/campaign presentation;
+3. define endgame/postgame/release package.
 
-The major-system production-scope audit, all three regional chamber structures, first controlled-procedural route-generation/reward-weighting model, Technique offer-generation/source-quality model, Gold/Shop economy, and survival/recovery/capacity prototype are complete at paper-design depth.
+`OPEN_QUESTIONS.md` owns the current unresolved agenda and should not duplicate resolved prototype tables.
 
-Current broad sequence:
+# Deferred implementation / tuning
 
-1. **Continue full-run integration, rewards, encounters, and pacing** with persistent-resource payouts: Mist and Scroll quantities, Boss Emblem cadence/ownership, and the opportunity cost between permanent progression and immediate run power. Then resolve regional-boss reward mix, Relic acquisition/swap placement, encounter composition/clear-time tuning, and playable pacing validation.
-2. **Define narrative delivery and campaign presentation.**
-3. **Define endgame, postgame, and release scope.**
-
-Exact Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, Blood Mirror Aspect ranks, combat damage/stats, and similar subsystem values remain nested until their owning implementation/playtest pass requires them.
-
-## Deferred implementation work
-
-Final frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, Blood values, Tier-growth percentages, collision, pathing, final tuned route-generation percentages after prototype validation, final Technique rarity/source weights, final Shop prices, final recovery/capacity values, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
-
-The removed Storm, Frost, Ember, Hex, and Shadow stance system and the older alternate-weapon development model are not part of the game.
+Final frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, upgrade costs, boss-material assignments to exact nodes, Relic mastery values, permanent progression nodes, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
