@@ -15,6 +15,7 @@ topics:
   - strand
   - the-heart
   - postgame
+  - regional-routing
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
@@ -22,12 +23,13 @@ related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
   - GAMEPLAY-PROGRESSION
+  - GAMEPLAY-RUN-STRUCTURE
   - META-OPEN-QUESTIONS
 ---
 
 # Full Game Scope
 
-This document defines Oathbound's current production-level shape. It does not lock exact balance values, route algorithms, frame data, final attack timings, permanent-upgrade values, or other implementation details that require prototyping and playtesting.
+This document defines Oathbound's current production-level shape. It does not lock final balance values, final route algorithms, frame data, final attack timings, permanent-upgrade values, or other implementation details that require prototyping and playtesting.
 
 ## Master scope
 
@@ -50,7 +52,9 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Area 1 standard enemies | 6 | Hushiro rupture roster |
 | Area 2 standard enemies | 4 | Yomori spirit/predator roster |
 | Area 3 standard enemies | 5 | Kagutsuchi court roster |
-| Miniboss encounters | 6 | Two designed encounters per area |
+| Area 1 prototype chambers | 12 | Opening 1–3, main 4–8, pre-boss 9–11, Keeper at 12 |
+| Area 2 prototype chambers | 10 | Opening 1–2, main 3–7, pre-boss 8–9, Twin Maws at 10 |
+| Miniboss encounters | 6 | Two designed encounters per area; Area 1/2 each offer one optional candidate per run |
 | Regional bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
 | Heart Binding campaign | 7 original / 6 player clears | One historical breach and six player-destroyed Bindings |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
@@ -77,6 +81,8 @@ After Returning Blood awakens, launch scope includes:
 - four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
 - one equipped Prosthetic with permanent Forge progression,
 - and one equipped Relic from the persistent 10-Relic collection.
+
+There is **no global Technique inventory cap**. Direct combat actions remain limited by their five action-specific slots, while eligible Supporting, Cross-family, Legendary, and refinement growth is constrained by reward access, prerequisites, route choices, and run length.
 
 Prosthetic Techniques are not part of the run-build system. Techniques do not add separate temporary upgrade layers to Prosthetics or Relics.
 
@@ -182,11 +188,19 @@ Launch balance must support:
 
 Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, Relic, or heavily developed permanent progression.
 
-## Run-duration target
+## Run-duration and route target
 
 A normal successful Binding run targets approximately **45–50 minutes** of active time.
 
-The final number of Technique reward opportunities must be tuned against the 50-Technique roster and competition with Shrines, Relics, economy, and survival routes.
+The current regional prototype budgets are:
+
+- **Hushiro:** 12 counted chambers, approximately 14–16 active minutes.
+- **Yomori:** 10 counted chambers, approximately 12–14 active minutes.
+- **Kagutsuchi:** exact counted-chamber and time budget still to be locked during the current full-run integration pass.
+
+Hushiro and Yomori use fixed chamber-index bands, weighted eligible contents, hard minimum-opportunity safeguards, previewed route choices, optional miniboss routing, fixed boss endpoints, and separate non-counted regional transition spaces.
+
+The final number of Technique reward opportunities must be tuned against the 50-Technique roster and competition with Shrines, Relics, economy, survival, and Aspect routes. Exact percentage weights remain later playtest work.
 
 ## The Strand
 
@@ -213,13 +227,13 @@ The Boat remains focused on fast run-start confirmation rather than becoming a c
 
 Exact onboarding timing, trial counts, permanent-upgrade node values, mastery thresholds, and final UI layouts remain detailed design rather than full-game scope blockers.
 
-## Area roster
+## Area roster and run role
 
-- **Area 1 — Hushiro Gate Village / Rupture:** 6 standard enemies, 2 minibosses, Keeper of the Gate.
-- **Area 2 — Yomori Grove / Adaptation:** 4 standard enemies, 2 minibosses, Twin Maws.
-- **Area 3 — Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 minibosses, Eclipse Shogun.
+- **Area 1 — Hushiro Gate Village / Rupture:** 6 standard enemies, 2 designed minibosses, Keeper of the Gate; 12 counted chambers; establishes the first direct-action Technique modifications and family/build direction.
+- **Area 2 — Yomori Grove / Adaptation:** 4 standard enemies, 2 designed minibosses, Twin Maws; 10 counted chambers; expands direct-action coverage and deepens the build through later Technique eligibility and Aspect progression.
+- **Area 3 — Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 minibosses, Eclipse Shogun; exact chamber structure remains the next regional integration decision and should finalize/refine the mature run build.
 
-Exact encounter pacing and authored room distribution remain prototype work.
+Hushiro and Yomori each generate one optional miniboss opportunity from their two candidates. Exact encounter composition and route percentage weights remain prototype work.
 
 ## Heart Binding campaign
 
@@ -246,19 +260,20 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Current open production scope
 
-The permanent progression station architecture is now scoped at the level required for full-game planning. The next top-level task is not to design individual upgrade nodes; it is to determine whether **every major launch system or production package is represented at all**.
+The major-system production-scope audit is complete. No additional core gameplay system is currently required before continuing the run-design pass.
 
 Current broad sequence:
 
-1. **Audit whether every major launch system is scoped at production level.**
-2. **Review full-run integration, rewards, encounters, and pacing.**
-3. **Define narrative delivery and campaign presentation.**
-4. **Define endgame, postgame, and release scope.**
+1. **Complete full-run integration, rewards, encounters, and pacing**, beginning with Kagutsuchi's prototype chamber structure and then validating the combined three-region 45–50-minute route.
+2. **Define narrative delivery and campaign presentation.**
+3. **Define endgame, postgame, and release scope.**
 
-Exact Technique probabilities, Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, Blood Mirror Aspect ranks, room counts, route probabilities, and similar subsystem details remain nested until their owning later design or playtest pass requires them.
+Once all three regions have structural route budgets, the run package may move into detailed prototype values such as reward cadence, room/reward percentage weights, eligible-pool generation, encounter compositions, prices, and other balance-sensitive variables.
+
+Exact Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, Blood Mirror Aspect ranks, and similar subsystem values remain nested until their owning implementation/playtest pass requires them.
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, room algorithms, route probabilities, reward probabilities, prices, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, Area 3 chamber count until approved, route-generation percentage weights, reward probabilities, prices, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system and the older alternate-weapon development model are not part of the game.
