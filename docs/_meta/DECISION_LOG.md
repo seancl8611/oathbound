@@ -11,6 +11,20 @@ last_reviewed: 2026-08-16
 
 This is a concise index of major approved directions that materially changed Oathbound's scope or identity. Complete rules live in authoritative files; superseded wording is recoverable through Git history.
 
+## 2026-08-16 — Technique offers, Gold economy, and survival prototype locked
+
+The next three numerical run-design layers are approved as prototype implementation targets rather than final balance law.
+
+**Technique reward generation** now uses a three-choice screen built in the order **eligibility → Direct/flex composition → rarity/source weighting → specific selection → validation**. Early rewards protect direct build formation; mature rewards allow more flex options. Standard-combat Common/Uncommon/Rare weighting is 55/35/10 in Hushiro, 35/45/20 in Yomori, and 20/45/35 in Kagutsuchi. Shops, Treasure, minibosses, and regional bosses receive progressively stronger quality weighting. Eligible Legendaries use a separate source-specific appearance check. Refinements, replacements, Cross-family cards, and Legendaries are limited to one each per screen. Rerolls regenerate the full screen without automatically upgrading quality.
+
+**Gold / Shop economy** now starts normal runs at 0 Gold unless an approved effect changes it. Standard Gold rewards are **60 Hushiro / 70 Yomori / 80 Kagutsuchi**, with minor 5–10 Gold drops. Shops present three purchasable items across Survival / Build / Flex roles, allow all affordable displayed purchases, use stable regional prices, and do not reroll inventory in the first prototype. Core prices include 100 Gold for a Technique reward and 140 Gold for an eligible Relic opportunity. Gold is suppressed as a primary reward after the final realistic Shop opportunity. Merchant's Seal prototypes a **20% discount on the first purchase in each region**.
+
+**Survival / recovery / capacity** now uses percentage-based prototype values so final base Health and Spirit totals remain open. Standard recovery is 25% max Health or 35% max Spirit; Rest restores 35% Health and 50% Spirit; below-full-Corruption Shrine support is 20% Health or 25% Spirit. Normal temporary capacity is +15% starting max Health or +20% starting max Spirit and also grants the same current resource, stacking additively from starting maximum. Treasure/miniboss premium capacity is +20% Health / +25% Spirit. Keeper and Twin Maws transitions restore 20% Health / 35% Spirit with 35% Health / 50% Spirit entry floors. The seventh-story-run Shogun→Heart handoff restores 30% Health / 50% Spirit with 40% Health / 60% Spirit entry floors.
+
+The next reward-value layer is **persistent-resource payout design** for Mist, Scrolls, and Boss Emblems, including their opportunity cost against immediate run power.
+
+**Authority:** `docs/gameplay/TECHNIQUES.md`, `docs/ui_ux/TECHNIQUE_REWARDS.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`, `docs/gameplay/RUN_STRUCTURE.md`, `docs/gameplay/CORRUPTION_AND_SHRINES.md`, `docs/gameplay/RELICS.md`
+
 ## 2026-08-16 — Full-route branching and reward-generation prototype locked
 
 The first controlled-procedural generation model for the complete **33-chamber** regional route is approved as a prototype target.
@@ -25,7 +39,7 @@ Current full-route cadence targets include roughly **20–22 standard combat cha
 
 Controlled-generation safeguards prevent duplicate normal two-door primary rewards, more than two consecutive ordinary forced one-exit chambers in a main stretch, back-to-back ordinary safe service rooms, miniboss routes without a non-miniboss alternative, missing required regional opportunities, and dead late Gold when no realistic Shop remains ahead.
 
-These values are approved implementation/playtest targets rather than immutable final balance law. The next run-design layer is **Technique offer generation and rarity/source weighting**.
+These values are approved implementation/playtest targets rather than immutable final balance law. At this decision point the next run-design layer was Technique offer generation and rarity/source weighting; that layer and the following Gold/Shop and survival prototypes have since been approved.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`
 
@@ -253,7 +267,7 @@ Direct Techniques require only an empty relevant combat slot and can be the play
 
 A Legendary requires **3 native Techniques from its family, including at least 1 slotted Technique**. Same-family Supporting Techniques count toward the three; Cross-family Techniques and refinements do not. Individual Legendaries may impose a mechanic-specific requirement so the capstone cannot appear in a build unable to use it.
 
-The current Technique content roster should remain stable unless audit or prototyping identifies a concrete problem. At this decision point the remaining Technique-system decisions included reward frequency, offer-generation order, rarity/source weighting, rare replacement behavior, and full-roster validation. Reward frequency now has a first route-level prototype; offer generation/source weighting remains next.
+The current Technique content roster should remain stable unless audit or prototyping identifies a concrete problem. At this decision point the remaining Technique-system decisions included reward frequency, offer-generation order, rarity/source weighting, rare replacement behavior, and full-roster validation. Reward frequency and the first offer-generation/source-weighting model have since been approved.
 
 **Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/_meta/OPEN_QUESTIONS.md`
 
