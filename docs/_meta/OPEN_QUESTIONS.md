@@ -11,7 +11,7 @@ last_reviewed: 2026-08-16
 
 This file tracks unresolved decisions that materially affect launch scope, content volume, production planning, interfaces, or authored presentation.
 
-Resolved rules belong in their authoritative files. Exact numerical tuning and playtest variables do not belong here.
+Resolved rules belong in their authoritative files. Exact numerical tuning and playtest variables do not belong here unless they expose a larger production-scope decision.
 
 ## Question hierarchy rule
 
@@ -23,16 +23,18 @@ Examples of details that should remain nested beneath an owning package rather t
 - exact Relic mastery thresholds, kill weighting, acquisition-source counts, Forge rank presentation, or transition-swap timing,
 - individual Prosthetic upgrade percentages, Scroll costs, Spirit values, or status durations,
 - exact Bloodwell node counts, Run Infrastructure values, or Blood Mirror mastery ranks,
-- exact room counts, route probabilities, shop prices, or reward weights,
+- exact room/reward percentage weights, branch probabilities, shop prices, or encounter values,
+- exact Area 3 chamber count until the current full-run integration pass reaches that region,
 - final animation timings, VFX timing, hitboxes, damage values, and other playtest tuning.
 
-When a major system or package becomes the active design area, finish it at useful qualitative paper-design depth before moving to the next major area.
+When a major system or package becomes the active design area, finish it at useful paper-design depth before moving to narrow balance work.
 
 ## Approved dependencies
 
 - Launch Blood Aspects are **Wolf, Wraith, and Ronin**.
 - All three Tier 0-IV Aspect packages are locked at qualitative paper-design depth.
 - Five direct Technique slots are locked: **Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow**.
+- Supporting, Cross-family, and Legendary Techniques are slotless; there is **no global Technique inventory cap**.
 - The launch Technique catalog contains **50 actual Techniques plus 10 refinements** and is complete for current paper-design scope.
 - Technique rarity, prerequisites, direct-slot ownership, Supporting / Cross-family / Legendary eligibility, and refinement ownership are approved.
 - The launch Relic roster contains **10 Relics**, uses one equipped slot, persistent collection ownership, run-active effects, and **no rarity tiers**.
@@ -47,7 +49,41 @@ When a major system or package becomes the active design area, finish it at usef
 - Blood Cavern trials, Technique pool unlocks, Discovery Board progress, Merchant services, the Boat, and Heart Binding state are not separate permanent upgrade trees in current scope.
 - Backstabs are a universal positional combat classification based on genuinely striking an enemy from behind.
 - Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, Legendary, Relic, or highly upgraded Prosthetic.
-- The standard successful-run target remains approximately **45–50 minutes**, with exact room and reward cadence deferred to playable validation.
+- The standard successful-run target remains approximately **45–50 minutes**.
+- The major-system production-scope audit is complete; no additional core gameplay system is currently required before continuing run integration.
+
+## Approved Area 1 / Area 2 run-structure state
+
+`docs/gameplay/RUN_STRUCTURE.md` owns the current regional chamber model.
+
+### Hushiro Gate Village
+
+- **12 counted chambers**.
+- Chambers **1–3** opening, **4–8** main, **9–11** pre-boss, **12** Keeper of the Gate.
+- Chamber 1 is fixed combat followed by a Technique reward.
+- One optional miniboss opportunity appears during Chambers **5–8**, selecting Village Ogre or The Collector for that run.
+- Route network contains at least one Shrine, Shop, Rest, miniboss opportunity, and three Technique-reward opportunities total including Chamber 1.
+- Chamber 11 guarantees access to meaningful pre-boss preparation.
+- Current active-time target: approximately **14–16 minutes**.
+
+### Yomori Grove
+
+- **10 counted chambers**.
+- Chambers **1–2** opening, **3–7** main, **8–9** pre-boss, **10** Twin Maws.
+- Branching begins immediately; Chamber 1 does not force a Technique reward.
+- One optional miniboss opportunity appears during Chambers **4–7**, selecting The Embered Pilgrim or Rotwood Host for that run.
+- Route network contains at least one Shrine, Shop, Rest, miniboss opportunity, and two Technique-reward opportunities.
+- Chambers 8–9 ensure at least one meaningful pre-boss preparation route.
+- Current active-time target: approximately **12–14 minutes**.
+
+### Shared regional rules
+
+- Fixed chamber-index bands + weighted eligible contents + hard opportunity safeguards.
+- Previewed route choices; one or two exits are the normal language, with no routine backtracking.
+- Guaranteed opportunities are present in the generated route network but may be skipped by choosing a competing route.
+- Keeper and Twin Maws are fixed regional endpoints.
+- Post-boss regional transitions are safe spaces and do **not** count as additional chambers.
+- Exact room/reward percentage weights, branch frequency, encounter compositions, and final tuning remain open.
 
 ## Approved Technique roster state
 
@@ -55,7 +91,7 @@ The Technique content roster is complete for current paper-design scope. `docs/g
 
 The roster should not be expanded merely to hit a larger count. New or replacement Techniques should be added only when prototype or integration testing exposes a concrete gap, overlap, balance issue, readability problem, or compatibility problem.
 
-Remaining Technique reward-frequency, offer-weighting, replacement, and roster-audit work is later integration/tuning work.
+Remaining Technique reward-frequency, offer-weighting, replacement, and roster-audit work belongs to later run integration/tuning.
 
 ## Approved Relic state
 
@@ -98,59 +134,39 @@ The old Forge weapon-development model, fixed Bloodwell `Way of Steel / Way of S
 
 # Priority order
 
-1. **Audit whether every major launch system is scoped at production level**
-2. **Review full-run integration, rewards, encounters, and pacing**
-3. **Define narrative delivery and campaign presentation**
-4. **Define endgame, postgame, and release scope**
+1. **Complete full-run integration, rewards, encounters, and pacing**
+2. **Define narrative delivery and campaign presentation**
+3. **Define endgame, postgame, and release scope**
 
-# 1. Major-system scope audit
-
-Review the current repository as a complete game and identify only **missing major systems or production packages**, not tuning details.
-
-At broad scope, verify that the game has an approved or intentionally deferred owner for:
-
-- core combat and player actions,
-- Blood Aspects and their run progression,
-- Techniques,
-- Prosthetics,
-- Relics,
-- permanent hub progression and station ownership,
-- training / trials,
-- currencies and rewards,
-- room / route structure,
-- enemies, minibosses, and bosses,
-- all three regions,
-- Strand return / onboarding / preparation,
-- campaign progression and Heart Bindings,
-- narrative delivery,
-- endgame / postgame,
-- required UI / save / completion presentation,
-- and any other launch-critical system category revealed by the audit.
-
-Do **not** reopen exact node lists, mastery formulas, costs, reward probabilities, room counts, frame data, or balance values merely to call a system scoped.
-
-If no major system is missing, close this package and proceed directly to full-run integration.
-
-# 2. Full-run integration, rewards, encounters, and pacing
+# 1. Full-run integration, rewards, encounters, and pacing
 
 Review Oathbound as one complete playable run from the Strand through Hushiro, Yomori, Kagutsuchi, the Eclipse Shogun, and eventual Heart progression.
 
-At broad scope, verify:
+The Hushiro and Yomori prototype route structures are now approved. Continue by:
 
-- the three-region sequence provides enough change in combat demands and pacing,
-- standard combat rooms, Shrines, Rest rooms, Shops, treasure / miniboss rooms, regional bosses, and transition spaces each have a clear purpose,
-- regional-boss transitions provide appropriate recovery and limited preparation opportunities without becoming overloaded menus,
-- enemy, miniboss, boss, Aspect, Technique, Prosthetic, Relic, Shrine, Run Infrastructure, and economy systems can coexist without one layer invalidating the others,
-- Techniques, Relics, Shrines, economy, survival rewards, and route choices compete for attention at a healthy level,
-- whether consumables add enough value to justify launch inclusion,
-- the current 45–50 minute successful-run target still appears plausible once the full system set is playable,
-- and no major encounter, room, reward, or run-flow system is missing from launch scope.
+- defining **Kagutsuchi** at the same chamber/band/miniboss/transition level,
+- validating the combined three-region route against the 45–50-minute successful-run target,
+- confirming that the three regions provide enough change in combat demands and pacing,
+- confirming standard combat rooms, Shrines, Rest rooms, Shops, treasure/miniboss routes, bosses, and transition spaces each have a clear place in the complete run,
+- checking that enemy, Aspect, Technique, Prosthetic, Relic, Shrine, Run Infrastructure, and economy systems coexist without one layer invalidating the others,
+- deciding whether consumables add enough value to justify launch inclusion,
+- and confirming that no encounter/reward/run-flow gap appears once all three regions are structured together.
 
-This is also where remaining Technique reward cadence, eligible-pool generation, rarity/source weighting, rare replacement behavior, full roster compatibility/readability audit, Relic acquisition allocation, Relic kill/mastery tuning, transition-swap placement, Run Infrastructure detailed effects, and exact Forge balance should be resolved when enough of the complete run exists to judge them properly.
+Once the full three-region structural route exists, this package may move into the next numerical layer:
 
-Exact room counts, route algorithms, branch frequency, reward probabilities, encounter compositions, enemy values, prices, and pacing numbers remain prototype/playtest work unless testing reveals a production-scope change.
+- Technique reward cadence and eligible-pool generation,
+- rarity/source weighting,
+- rare replacement behavior,
+- Relic acquisition allocation and transition-swap placement,
+- Run Infrastructure detailed effects,
+- Forge balance,
+- exact room/reward probabilities,
+- encounter compositions,
+- prices and economy tuning.
 
-# 3. Narrative delivery and campaign presentation
+Those values should be treated as prototype/playtest targets rather than immutable design law.
+
+# 2. Narrative delivery and campaign presentation
 
 The story spine, Heart Binding structure, major lore, Shogun motivation, Returning Blood foundation, and ending are already approved at high level.
 
@@ -168,7 +184,7 @@ Define how much authored content is actually required to deliver that story acro
 
 Detailed line counts and final scripts should follow only after this delivery package is scoped.
 
-# 4. Endgame, postgame, and release scope
+# 3. Endgame, postgame, and release scope
 
 Define what the player can do after the first canonical Heart victory and what presentation is required for a complete initial release.
 
@@ -185,4 +201,4 @@ Do not expand the base game with difficulty modifiers, large variant systems, or
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room probabilities, prices, rarity probabilities, offer weights, replacement rates, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, Bloodwell/Run Infrastructure node values, Blood Mirror Aspect-upgrade values, route probabilities, and final VFX/animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room/reward probability weights, prices, rarity probabilities, offer weights, replacement rates, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, Bloodwell/Run Infrastructure node values, Blood Mirror Aspect-upgrade values, Area 3's exact chamber budget until approved, and final VFX/animation timing.

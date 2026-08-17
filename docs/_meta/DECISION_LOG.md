@@ -11,6 +11,20 @@ last_reviewed: 2026-08-16
 
 This is a concise index of major approved directions that materially changed Oathbound's scope or identity. Complete rules live in authoritative files; superseded wording is recoverable through Git history.
 
+## 2026-08-16 — Area 1 and Area 2 prototype run structure locked
+
+Oathbound's regional run routing now uses a Hades-like model of broadly fixed regional length, fixed boss destinations, previewed route choices, chamber-index eligibility bands, weighted procedural contents, and hard opportunity safeguards.
+
+**Hushiro Gate Village** uses 12 counted chambers: opening Chambers 1–3, main Chambers 4–8, pre-boss Chambers 9–11, and Keeper of the Gate at Chamber 12. Chamber 1 is fixed combat followed by a Technique reward. One optional miniboss opportunity appears during Chambers 5–8 and selects Village Ogre or The Collector for that run. The generated route network contains at least one Shrine, Shop, Rest, miniboss opportunity, and three Technique-reward opportunities total including Chamber 1. Current active-time target: approximately 14–16 minutes.
+
+**Yomori Grove** uses 10 counted chambers: opening Chambers 1–2, main Chambers 3–7, pre-boss Chambers 8–9, and Twin Maws at Chamber 10. Branching begins immediately without a forced Chamber 1 Technique reward. One optional miniboss opportunity appears during Chambers 4–7 and selects The Embered Pilgrim or Rotwood Host for that run. The route network contains at least one Shrine, Shop, Rest, miniboss opportunity, and two Technique-reward opportunities. Current active-time target: approximately 12–14 minutes.
+
+Guaranteed opportunities exist in the generated route network but are not mandatory visits. Keeper and Twin Maws each lead to a brief safe regional transition space that is not counted as an additional chamber. Exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Area 3's chamber budget remain later integration/playtest work.
+
+The major-system production-scope audit is treated as complete. The next regional run-design task is Kagutsuchi at the same structural depth, followed by validation of the complete three-region 45–50-minute route.
+
+**Authority:** `docs/gameplay/RUN_STRUCTURE.md`, `docs/content/ROOM_TYPES.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`
+
 ## 2026-08-16 — Permanent progression station architecture locked
 
 Oathbound uses three permanent upgrade stations at current launch scope:
@@ -25,7 +39,7 @@ Relics retain kill-earned individual mastery while equipped even though their St
 
 The separate Relic Reliquary direction, the older generic weapon-development/weapon-socket Forge model, and the fixed Bloodwell `Way of Steel / Way of Secrets / Way of Vows` structure are no longer current scope. Exact upgrade nodes, values, rank counts, costs, mastery thresholds, and precise Blood Mirror unlock timing remain deferred.
 
-The next top-level design task is a **major-system production-scope audit**, not detailed permanent-upgrade design.
+The next top-level design task at this decision point was a **major-system production-scope audit**, not detailed permanent-upgrade design. That audit has since been completed and run integration is now active.
 
 **Authority:** `docs/gameplay/PROGRESSION.md`, `docs/content/strand/INTERACTIBLES.md`, `docs/content/strand/interactibles/BLOODWELL.md`, `docs/content/strand/interactibles/FORGE_BENCH.md`, `docs/content/strand/interactibles/BLOOD_CAVERN.md`
 
@@ -89,7 +103,7 @@ The seventh successful story run continues from the Shogun into the two-form Hea
 
 ## 2026-07-22 — Successful-run duration
 
-A normal successful Binding run targets roughly 45-50 minutes. Exact room counts, topology, branch frequency, and encounter budgets remain prototype/playtest work.
+A normal successful Binding run targets roughly 45-50 minutes. Exact room counts, topology, branch frequency, and encounter budgets were originally left to prototype/playtest work; Hushiro and Yomori prototype chamber budgets were later approved on 2026-08-16.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`
 

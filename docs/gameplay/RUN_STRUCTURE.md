@@ -19,6 +19,8 @@ topics:
   - techniques
   - room-rewards
   - blood-moon
+  - regional-routing
+  - chamber-structure
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -28,6 +30,9 @@ related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
   - GAMEPLAY-ITEMS-REWARDS
+  - CONTENT-ROOM-TYPES
+  - CONTENT-AREA1-OVERVIEW
+  - CONTENT-AREA2-OVERVIEW
   - CONTENT-STRAND-BLOODWELL
   - CONTENT-STRAND-BOAT
   - UI-RUN-RESULTS
@@ -72,7 +77,131 @@ The intended full route is:
 
 The introductory attempt may use only a short portion of Hushiro rather than the complete regional flow.
 
-Exact room counts, route topology, branch frequency, miniboss frequency, rerouting, and authored room-variant counts are deferred to environment prototyping, encounter pacing, and playtesting. They are not current full-game scope blockers.
+Hushiro and Yomori now have approved **prototype chamber structures** defined below. Their chamber counts and structural bands are planning targets for implementation and playtesting, not immutable final balance values. Kagutsuchi's exact chamber count and the final route-generation weights remain open until the full three-region pacing pass is completed.
+
+## Chamber and route model
+
+A **counted chamber** is a room that represents an actual run node. Standard combat rooms, Shrine, Rest, Shop, Treasure, Miniboss, and regional Boss rooms can count as chambers. Small entrance corridors, boss exits, loading connectors, and regional transition spaces do not count toward the regional chamber total.
+
+The run uses a Hades-like chamber-routing model:
+
+- each region has a broadly fixed chamber destination and fixed final boss,
+- chamber-index bands determine what room and encounter types are eligible,
+- eligible contents are selected procedurally through weighted generation,
+- hard generation safeguards prevent important opportunity types from disappearing from the full route network,
+- route exits preview the upcoming room function and/or primary reward before commitment,
+- one or two exits are the normal route presentation, with occasional wider choices allowed where useful,
+- branches may reconverge later,
+- and there is no routine backtracking after choosing an exit.
+
+A guaranteed **opportunity** means the generated route network contains at least one accessible offer of that type. It does not mean the player is forced to enter that room. Choosing a competing route can intentionally give up the guaranteed opportunity.
+
+Exact percentage weights, branch frequency, reward weights, encounter compositions, and authored room-variant counts remain prototype and playtest tuning.
+
+## Area 1 — Hushiro Gate Village prototype structure
+
+Hushiro uses **12 counted chambers**, including Keeper of the Gate at Chamber 12. The current active-time target is approximately **14–16 minutes**.
+
+### Chambers 1–3 — Opening stretch
+
+- **Chamber 1 is fixed:** a standard combat encounter followed by a guaranteed Technique reward.
+- Chambers 2–3 introduce the normal previewed route-choice structure.
+- Early encounter generation favors simpler Hushiro combinations so the player can establish the run before the region uses its full mixed-enemy pressure.
+- Hushiro's build purpose is to establish the first direct-action modifications and the first recognizable family/build direction, not to finish the build.
+
+### Chambers 4–8 — Main stretch
+
+The complete normal Hushiro room/reward pool is eligible here. Combat remains the majority experience, while route choices may lead toward Technique, Gold, Mist, Scrolls, Shrine, Rest, Shop, Treasure, or Miniboss opportunities.
+
+Hushiro's single miniboss opportunity is eligible during **Chambers 5–8**. Each run selects one candidate from:
+
+- Village Ogre
+- The Collector
+
+The miniboss path is optional. A normal Hushiro run therefore contains **0–1 fought minibosses**, even though one miniboss opportunity is generated into the route network.
+
+### Chambers 9–11 — Pre-boss stretch
+
+- Minibosses leave the eligible pool.
+- Encounter generation may use the strongest normal Hushiro compositions and should visually move toward the old gate.
+- No new major system is introduced here; the purpose is to consolidate the current build and prepare for Keeper.
+- **Chamber 11 guarantees a meaningful pre-boss support opportunity in the available route**, such as Rest, Shop, or another approved high-value preparation choice. This does not require a free full heal.
+
+### Chamber 12 — Keeper of the Gate
+
+Keeper is fixed at Chamber 12 and ends Hushiro. All routes converge on the old gate boss encounter.
+
+### Hushiro route-network safeguards
+
+Before Keeper, the generated route network must contain at least:
+
+- **1 Shrine opportunity**,
+- **1 Shop opportunity**,
+- **1 Rest opportunity**,
+- **1 optional miniboss opportunity**,
+- **3 Technique-reward opportunities total**, including the fixed Chamber 1 Technique reward.
+
+These are network opportunities rather than mandatory visits. Exact reward odds outside the safeguards remain later tuning.
+
+## Area 2 — Yomori Grove prototype structure
+
+Yomori uses **10 counted chambers**, including Twin Maws at Chamber 10. The current active-time target is approximately **12–14 minutes**.
+
+Yomori is intentionally shorter than Hushiro because its normal encounters, minibosses, and paired regional boss are expected to be denser and mechanically more complex.
+
+### Chambers 1–2 — Opening stretch
+
+- Branching begins immediately.
+- There is no fixed guaranteed Technique reward on Yomori Chamber 1; the player already enters with an established run build.
+- Early Yomori encounters introduce its spirit manifestation, mist, stalking, predator, and positional-control language before the main stretch combines those pressures more aggressively.
+
+### Chambers 3–7 — Main stretch
+
+The main Yomori room/reward pool is active here. Area 2's build purpose is to expand direct-action coverage where still open and deepen the existing build through Supporting Techniques, refinements, Cross-family eligibility, continued Aspect progression, and other reward choices.
+
+Yomori's single miniboss opportunity is eligible during **Chambers 4–7**. Each run selects one candidate from:
+
+- The Embered Pilgrim
+- Rotwood Host
+
+The miniboss path is optional. A normal Yomori run therefore contains **0–1 fought minibosses**, even though one miniboss opportunity is generated into the route network.
+
+### Chambers 8–9 — Pre-boss stretch
+
+- Minibosses leave the eligible pool.
+- Encounter generation may use Yomori's strongest normal combinations.
+- At least one available route across Chambers 8–9 should provide meaningful pre-boss preparation without making full recovery automatic.
+- The stretch should feel like convergence toward the grove's heart rather than the introduction of another system.
+
+### Chamber 10 — Twin Maws
+
+Twin Maws — Rootfang and Briarthorn are fixed at Chamber 10 and end Yomori. All routes converge on the paired boss encounter.
+
+### Yomori route-network safeguards
+
+Before Twin Maws, the generated route network must contain at least:
+
+- **1 Shrine opportunity**,
+- **1 Shop opportunity**,
+- **1 Rest opportunity**,
+- **1 optional miniboss opportunity**,
+- **2 Technique-reward opportunities**.
+
+These are network opportunities rather than mandatory visits. Treasure remains an eligible high-value route rather than a guaranteed regional service.
+
+## Regional boss transitions
+
+Defeating Keeper or Twin Maws leads into a brief **safe regional transition space** that does not count as an additional chamber.
+
+The transition should:
+
+- grant the approved regional boss reward,
+- restore enough Health and/or Spirit for the next area to begin from a viable state,
+- allow concise read-only build review and any separately approved limited preparation interaction,
+- visually transition into the next region,
+- and preserve run momentum rather than functioning as a second Strand or overloaded menu hub.
+
+The exact recovery values, Relic-swap timing if retained, and transition interface remain later implementation decisions.
 
 ## Approved duration target
 
@@ -90,7 +219,7 @@ The two-form Heart continuation should add approximately 8–12 minutes to the e
 
 Active run time includes combat, reward choices, shops, rests, transitions, bosses, and the Binding or Heart completion sequence. It excludes Strand preparation, trials, codex reading, and time spent paused.
 
-These are production and pacing targets, not guarantees. Exact room and encounter budgets must be validated in playable builds.
+The approved Hushiro and Yomori chamber budgets are prototype targets within this larger duration goal. Kagutsuchi and the final cross-region pacing budget still require the same integration pass before the full 45–50-minute structure is considered numerically complete.
 
 ## Standard run start
 
@@ -140,11 +269,11 @@ Run Infrastructure does not itself carry a previous run's temporary build state 
 
 After the relevant systems are unlocked:
 
-- **Area 1:** acquire early direct Techniques and establish the first family/build direction.
-- **Area 2:** fill more of the five core slots, gain Aspect Tiers, and begin deepening family synergy through later Technique rewards.
-- **Area 3:** finish or refine the build through remaining direct slots, slotless Supporting Techniques, refinements, rare same-slot replacements, and eligible high-rarity or Legendary opportunities.
+- **Area 1:** establish the first direct-action Technique modifications and recognizable family/build direction while leaving substantial room for later growth.
+- **Area 2:** expand direct-action coverage where still open, gain Aspect Tiers, and deepen family or hybrid synergy through slotless Supporting Techniques, refinements, and later eligibility.
+- **Area 3:** finish or refine the mature build through remaining direct opportunities, Supporting Techniques, refinements, rare same-slot replacements, Cross-family Techniques, and eligible high-rarity or Legendary opportunities.
 
-A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. Exact reward frequency remains later tuning work.
+A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. There is no global Technique inventory cap; practical Technique growth is constrained by reward opportunities, route competition, prerequisites, and run length. Exact reward probabilities remain later tuning work.
 
 ## Failed run
 

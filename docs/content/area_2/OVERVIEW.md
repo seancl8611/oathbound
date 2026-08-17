@@ -4,7 +4,7 @@ title: Yomori Grove
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-08-16
 topics:
   - area-2
   - yomori-grove
@@ -12,12 +12,15 @@ topics:
   - spirits
   - predators
   - adaptation
+  - chamber-structure
 related:
   - ART-DIRECTION
   - ART-MILESTONE-05
   - CONTENT-AREA2-ENEMIES
   - CONTENT-AREA2-MINIBOSSES
   - CONTENT-AREA2-BOSS
+  - GAMEPLAY-RUN-STRUCTURE
+  - CONTENT-ROOM-TYPES
 ---
 
 # Yomori Grove
@@ -94,10 +97,28 @@ The Embered Pilgrim and Rotwood Host are the region's two minibosses. Rootfang a
 - simultaneous melee and arena-control pressure,
 - soul-transfer empowerment.
 
+## Approved prototype run structure
+
+Yomori uses **10 counted chambers** in the current prototype structure:
+
+- **Chambers 1–2:** opening stretch
+- **Chambers 3–7:** main stretch
+- **Chambers 8–9:** pre-boss stretch
+- **Chamber 10:** Twin Maws
+
+Branching begins immediately, and Yomori Chamber 1 does not force a Technique reward because the player already arrives with an established run build. One optional miniboss opportunity is generated during Chambers 4–7, selecting either The Embered Pilgrim or Rotwood Host for that run. The player may route around it, so a normal Yomori run contains 0–1 fought minibosses.
+
+The route network must contain at least one Shrine, one Shop, one Rest, one miniboss opportunity, and two Technique-reward opportunities. These are route opportunities rather than mandatory visits. Across Chambers 8–9, at least one available route should provide meaningful pre-boss preparation without making full recovery automatic.
+
+Yomori is intentionally shorter than Hushiro because its normal encounters, minibosses, and Twin Maws are expected to be denser and mechanically more complex. The region currently targets approximately **12–14 minutes** of active run time.
+
+Detailed generation rules, chamber eligibility, and transition behavior are owned by `docs/gameplay/RUN_STRUCTURE.md`; exact percentage weights and encounter compositions remain playtest tuning.
+
 ## Production dependencies
 
-- Area 1 establishes shared scale, VFX hierarchy, and room readability.
+- Area 1 establishes shared scale, VFX hierarchy, room readability, and the longer opening-region route template.
 - Area 2 requires its own environment kit before final room variants.
+- The Yomori room kit must support the approved 10-chamber prototype route without requiring unique art for every chamber.
 - Spirit effects must preserve attack direction, targetability, and safe-space readability.
 - Audio is a functional readability layer for enemies such as the Mist Shepherd.
 - Twin Maws arena effects must support two active roles and a clear survivor-empowerment transition.

@@ -25,7 +25,9 @@ The Posture Break Cue remains grouped with the Corrupted Swordsman and Deathblow
 
 Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, character-dependent VFX, Hushiro functional-room skins, regional props, Shrine/Corruption foundations, and boss/miniboss UI.
 
-Exact room counts and routing remain prototype work unless they create additional asset requirements.
+The current Hushiro prototype run structure is **12 counted chambers**: Chambers 1–3 opening, 4–8 main, 9–11 pre-boss, and Keeper at Chamber 12. Production should provide enough reusable room foundations and variants to support that route without requiring unique art for every chamber.
+
+Exact route percentage weights, encounter compositions, and final branch frequency remain prototype/playtest work.
 
 ## Milestone 3 — The Strand
 
@@ -74,6 +76,8 @@ The 50 Techniques comprise:
 - 5 Cross-family Techniques,
 - 5 Legendary family capstones.
 
+Supporting, Cross-family, and Legendary Techniques are slotless, so there is no global Technique inventory cap beyond the five direct action slots.
+
 Rarity and prerequisite rules are approved. Final Technique production quotation depends on the reward-structure audit, VFX/icon briefs, and prototype validation rather than further roster construction.
 
 The launch Relic package is complete at qualitative paper-design depth: **10 collectible Relics**, one equipped slot, persistent collection/mastery/progression, run-active benefits, and no Relic rarity tiers. Relic Strand-side progression/management belongs to the Forge. Exact acquisition allocation, mastery values, Forge presentation, and transition-swap behavior remain later detailed work.
@@ -82,11 +86,15 @@ The launch Relic package is complete at qualitative paper-design depth: **10 col
 
 Produce Yomori Grove, its enemy/encounter roster, regional hazards, functional rooms, VFX, and integration pass.
 
-Exact routing and Twin Maws transition values remain implementation/playtest work.
+The current Yomori prototype run structure is **10 counted chambers**: Chambers 1–2 opening, 3–7 main, 8–9 pre-boss, and Twin Maws at Chamber 10. Production should provide enough reusable room foundations and variants to support that route without requiring unique art for every chamber.
+
+Exact route percentage weights, encounter compositions, and Twin Maws transition values remain implementation/playtest work.
 
 ## Milestone 6 — Area 3 and endgame
 
 Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Heart Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart encounter, ending presentation, and repeat-clear presentation.
+
+Kagutsuchi's exact prototype chamber structure remains the next regional full-run integration decision. It should be locked before final Area 3 room-volume quotation so production can distinguish reusable room variants from actual route-node count.
 
 The Shogun's high-level identity is approved. Exact attacks, phase structure, transformation anatomy, animation list, and bespoke VFX require later encounter approval.
 
@@ -114,7 +122,9 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 - The current 50-Technique roster should remain stable unless testing exposes a concrete problem.
 - Relic production uses the approved 10-item roster and does not require rarity-badge families or a separate Reliquary station.
 - The old generic weapon-development / weapon-socket system is excluded; Blood Aspects are the run weapon identities.
-- The standard successful-run pacing target is 45–50 minutes, with exact room/encounter budgets deferred to playtesting.
+- The standard successful-run pacing target is 45–50 minutes.
+- Hushiro currently targets 12 counted chambers / approximately 14–16 active minutes; Yomori targets 10 counted chambers / approximately 12–14 active minutes.
+- Exact room/reward percentage weights and Area 3's chamber budget remain part of the continuing run integration/playtest pass.
 - The base Heart Binding ritual is one reusable package.
 - Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
 - Each milestone uses separately quoted, payable, reviewable internal batches.
@@ -124,6 +134,6 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 Use the broad-question hierarchy in `docs/_meta/OPEN_QUESTIONS.md` without replacing the established design sequence with narrow tuning work.
 
-The Technique roster, Relic roster/mastery direction, Prosthetic Forge paths, and broad permanent-upgrade station ownership are now complete at current qualitative paper-design depth.
+The major-system production-scope audit is complete. Hushiro and Yomori now have approved prototype chamber structures.
 
-The next major design task is to **audit whether every launch-critical system or production package is scoped at all**. If that audit finds no missing major system, proceed directly to full-run integration, rewards, encounters, and pacing. Exact progression nodes, Technique reward cadence, Relic mastery thresholds, Prosthetic percentages/costs, and other tuning remain nested until later integration or playable validation.
+The next major design task is to **complete full-run integration** by defining Kagutsuchi at the same structural level and validating the combined three-region 45–50-minute route. Once that structure is complete, move into exact reward cadence, route percentages, encounter composition, economy, and other prototype tuning rather than reopening already-scoped systems.
