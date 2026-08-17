@@ -64,9 +64,12 @@ The Forge also owns permanent Relic collection/progression and Strand-side equip
 - collection persists,
 - only the equipped Relic gains eligible kill mastery,
 - mastery persists,
+- the Forge is the normal place to choose the Relic equipped when a run begins,
 - sharing the Forge does not force Relics to use Prosthetic progression or Scroll costs.
 
-Exact Relic rank realization, thresholds, costs if any, and transition-swap behavior remain later design.
+During a run, normal Relic swaps are limited to the safe transitions after Keeper and Twin Maws; a newly discovered Relic also creates an immediate one-time equip-or-keep decision. The Forge does not need to reproduce those run-transition interfaces.
+
+Exact Relic rank realization, thresholds, and costs if any remain later design.
 
 No separate Relic Reliquary is required.
 
@@ -100,4 +103,5 @@ Do not imply generic weapons, sockets, branching weapon classes, or identical Pr
 - Prosthetic and Relic categories must remain visually distinct.
 - Support the approved 2 / 4 / 6 Scroll cost curve without hard-coding it as unchangeable final balance.
 - Support occasional specific boss-material requirements without presenting a large crafting inventory.
+- Support pre-run Relic selection from the persistent collection.
 - Future content should remain within the two approved Forge categories unless scope is explicitly reopened.
