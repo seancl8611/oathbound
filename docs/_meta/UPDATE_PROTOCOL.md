@@ -4,32 +4,33 @@ title: Documentation Update Protocol
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-07-10
+last_reviewed: 2026-08-17
 ---
 
 # Documentation Update Protocol
 
-Use this process for all material design, lore, content, UI, or production changes.
+Use this process for material design, lore, content, UI, or production changes.
 
-1. Identify the authoritative file using `SOURCE_OF_TRUTH.md`.
-2. Read that file before editing.
-3. Build a live search set from exact terms, synonyms, legacy wording, proper names, and likely system consequences.
-4. Search the current repository and open only relevant matches.
-5. Use `DOCUMENT_MAP.md` as a non-exhaustive review hint, not as proof of coverage.
-6. Update the authoritative definition first.
-7. Update dependent summaries and production documents only where meaning or scope actually changes.
-8. Search again for contradictions, stale wording, and missed references.
-9. Add major locked decisions to `DECISION_LOG.md`.
-10. Add unresolved consequences or questions to `OPEN_QUESTIONS.md`.
-11. Update milestone or asset documents only when production scope changes.
-12. Use a focused branch and commit message.
-13. Open a pull request with the search terms used, files reviewed, files changed, design impact, and unresolved issues.
+1. Identify authority in `SOURCE_OF_TRUTH.md`.
+2. Read the authoritative file before editing.
+3. Build a search set from canonical terms, synonyms, deprecated wording, proper names, and likely consequences. Use `TERMINOLOGY.md` as a search anchor.
+4. Search the repository when live search is available.
+5. If code search is unavailable/unindexed, use the approved direct-read fallback in `ASSISTANT_WORKFLOW.md`: authority → terminology → dependency map → relevant directory/files → branch diff/PR patch.
+6. Use `DOCUMENT_MAP.md` only as a non-exhaustive dependency hint.
+7. Update the authority first.
+8. Update only dependent summaries/production docs whose meaning or scope changes.
+9. Recheck for contradictions, stale status wording, and deprecated terms.
+10. Record major locked decisions in decision history and keep unresolved production-relevant consequences in `OPEN_QUESTIONS.md`.
+11. Update milestone/asset files only when production scope changes.
+12. Use a focused branch and pull request.
+13. Review changed filenames, key patches, review threads, and checks before merge.
 
 ## Safety rules
 
-- Do not convert a draft idea into locked canon without explicit approval.
+- Do not convert a draft example into approved canon without explicit user approval.
 - Do not silently change gameplay while revising lore, or lore while revising gameplay.
-- Do not remove content solely because it appears redundant until its authoritative replacement is confirmed.
-- Preserve stable document IDs when renaming files.
-- Mark obsolete material as `deprecated` before deletion when historical context may matter.
-- Do not claim repository-wide consistency without a post-edit live search.
+- Do not remove apparently redundant material until its authoritative replacement is confirmed.
+- Preserve stable document IDs when rewriting or renaming files.
+- Historical context may remain in decision history even after live design language is removed.
+- Do not claim repository-wide live-search coverage when the search index was unavailable; state the bounded direct-read audit instead.
+- Prefer deleting stale duplicate definitions from summaries over maintaining parallel rules.
