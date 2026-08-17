@@ -4,230 +4,155 @@ title: Document Review Map
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-07-26
+last_reviewed: 2026-08-17
+topics:
+  - dependency-map
+  - repository-navigation
+  - review-hints
 ---
 
 # Document Review Map
 
-This file provides common dependency starting points. It is non-exhaustive and never replaces live repository search or the ownership registry in `SOURCE_OF_TRUTH.md`.
+This is a **non-exhaustive dependency map**. `SOURCE_OF_TRUTH.md` decides ownership. `TERMINOLOGY.md` supplies canonical/deprecated search anchors. Current repository content determines the final review set.
 
-## Foundational story or lore change
-
-Begin with the relevant authority under `docs/lore/` or `docs/characters/`.
-
-Usually review:
-
-- `overview/GAME_OVERVIEW.md`
-- `overview/FULL_GAME_SCOPE.md`
-- `lore/STORY_OVERVIEW.md`
-- affected character and regional files
-- `gameplay/RUN_STRUCTURE.md` when the campaign loop changes
-- relevant UI, asset inventory, and milestone files when presentation scope changes
-- terminology and current design questions
-
-The core story and lore are currently approved. New questions should not reopen canon unless a genuine contradiction or missing campaign decision is found.
+# Gameplay systems
 
 ## Combat rule change
 
-Authority:
+**Authority:** `gameplay/COMBAT.md`
 
-- `gameplay/COMBAT.md`
+Likely dependencies:
 
-Usually review:
+- Aspect weapon-kit model + affected Aspect files,
+- Akio,
+- Techniques / Prosthetics,
+- affected enemies/bosses,
+- HUD / core VFX,
+- animation/technical standards when production changes.
 
-- Aspect Weapon-Kit Model when shared action or defensive boundaries change
-- individual Aspect files when a kit is affected
-- Akio
-- affected Techniques and prosthetics
-- affected enemies and bosses
-- HUD and core VFX
-- animation requirements
-- technical standards
-- asset inventory and assigned milestones
+## Blood Aspect / Corruption change
 
-## Blood Aspect or Corruption change
+**Authorities:**
 
-Authorities:
+- `gameplay/BLOOD_ASPECTS.md`
+- `gameplay/ASPECT_WEAPON_KIT_MODEL.md`
+- affected `WOLF_ASPECT.md`, `WRAITH_ASPECT.md`, `RONIN_ASPECT.md`
+- `gameplay/CORRUPTION_AND_SHRINES.md`
 
-- `gameplay/BLOOD_ASPECTS.md` for the overall system
-- `gameplay/ASPECT_WEAPON_KIT_MODEL.md` for shared kit rules
-- `gameplay/ASPECT_IDENTITY_GUIDELINES.md` for roster evaluation
-- `gameplay/WOLF_ASPECT.md`, `WRAITH_ASPECT.md`, or `RONIN_ASPECT.md` for individual qualitative kits
-- `gameplay/CORRUPTION_AND_SHRINES.md` for Corruption and Shrine mechanics
+Likely dependencies: Combat, Techniques, Progression, Run Structure, Shrine UI, Blood Mirror/Cavern, Aspect VFX.
 
-Usually review:
+## Technique change
 
-- Combat shared rules
-- Returning Blood and Akio
-- Techniques and shared action tags
-- progression and run structure
-- Shrine ownership and UI
-- Blood Aspect VFX
-- Blood Mirror and Blood Cavern
-- game overview and full scope when roster status changes
-- source-of-truth registry and current design questions
-- Milestones 2–4 when production scope changes
-
-## Technique, prosthetic, Relic, or reward change
-
-Authorities:
+**Authorities:**
 
 - `gameplay/TECHNIQUES.md`
-- `gameplay/PROSTHETICS.md`
-- `gameplay/ITEMS_AND_REWARDS.md`
+- `gameplay/TECHNIQUE_CATALOG.md`
 
-Usually review:
+Likely dependencies: Items/Rewards, Technique reward UI, pause/HUD, Technique VFX, affected Aspect/combat interactions.
 
-- progression and persistence
-- room types and route previews
-- Technique reward and pause UI
-- HUD feedback
-- item, Technique, and prosthetic art
-- asset inventory
-- Milestone 4
-- launch run-build content catalog
+## Prosthetic change
 
-## Run structure or campaign change
+**Authority:** `gameplay/PROSTHETICS.md`
 
-Authorities:
+Likely dependencies: Progression, Items/Rewards for Scroll economy, Forge content/UI, Prosthetic VFX, Milestone 4.
 
-- `gameplay/RUN_STRUCTURE.md`
-- `lore/STORY_OVERVIEW.md` for narrative consequences
+## Relic change
 
-Usually review:
+**Authority:** `gameplay/RELICS.md`
 
-- game overview and full scope
-- Returning Blood
-- progression and rewards
-- Boat, Keeper, results, and Strand return
-- Heart Binding and postgame presentation
-- asset inventory and Milestones 3, 6, and 7
+Likely dependencies: Progression, Items/Rewards, Forge content/UI, pause/results, item art.
 
-The successful-run duration target is approved. Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain prototype and playtest work unless they create a verified new production package.
+## Reward / currency / boss-material change
 
-## Character, enemy, miniboss, or boss change
+**Authorities:**
 
-Authority:
+- `gameplay/ITEMS_AND_REWARDS.md` — payouts/economy/reward rules,
+- `gameplay/PROGRESSION.md` — persistence/station/resource ownership.
 
-- recurring named character: `docs/characters/`
-- combatant: relevant `docs/content/area_*` file
+Search anchors: Mist; Scroll / Scrolls; Gold; regional boss material; boss material / boss drop / boss resource; deprecated `Boss Emblem`.
 
-Usually review:
+Likely dependencies:
 
-- lore relationships
-- regional overview and roster
-- encounter rules
-- animation and VFX requirements
-- UI nameplates or portraits
-- asset inventory
-- assigned milestone
+- affected regional `BOSS.md` files,
+- `ui_ux/RUN_RESULTS.md`, HUD/pause if display behavior changes,
+- `art_production/ITEM_REWARD_ART.md`,
+- Full Game Scope / Roadmap when production shape changes,
+- Bloodwell / Forge / Blood Mirror content when a resource becomes spendable there.
 
-Exact timing, tuning, and movesets should remain in the encounter file rather than being added to `OPEN_QUESTIONS.md` unless they change production scope.
+## Run structure change
 
-## Area or room change
+**Authority:** `gameplay/RUN_STRUCTURE.md`
 
-Authorities:
+Likely dependencies: Items/Rewards, Room Types, regional overviews, Core Loop, results/Boat/transition presentation, production milestones if room content volume changes.
 
-- relevant regional folder
-- `content/ROOM_TYPES.md` for shared room functions
+# Persistent progression / Strand
 
-Usually review:
+## Permanent progression ownership or upgrade-tree change
 
-- full game scope
-- run structure and reward cadence
-- regional environment files
-- route markers and interaction prompts
-- asset inventory
-- assigned milestone
+**Authorities:** `gameplay/PROGRESSION.md`, affected Strand interactible file, and the owning gameplay authority for the upgraded system.
 
-Do not treat every possible room-layout or routing choice as a production-scope question. The top-level tracker is updated only when the decision changes required asset families, interfaces, or release content.
+Likely dependencies: Items/Rewards, hub UI, asset inventory, Milestone 3/4.
 
-## Strand service or persistent-progression change
+Current station split:
 
-Authorities:
+- Bloodwell → Akio + Run Infrastructure,
+- Forge Bench → Prosthetics + Relics,
+- Blood Mirror → Blood Aspects.
 
-- `content/strand/INTERACTIBLES.md`
-- relevant `content/strand/interactibles/*.md`
-- `gameplay/PROGRESSION.md`
+# Content
 
-Usually review:
+## Character / enemy / miniboss / boss change
 
-- currencies and reward ownership
-- Blood Mirror and Blood Cavern
-- NPC ownership
-- hub UI and Strand HUD
-- asset inventory
-- Milestone 3
-- persistent progression, onboarding, and trial package
+**Authority:** relevant `characters/` or regional `content/area_*` file.
+
+Likely dependencies: regional overview/roster, lore relationships, UI nameplates, VFX/animation requirements, asset inventory, assigned milestone.
+
+## Area / room change
+
+**Authorities:** relevant regional folder + `content/ROOM_TYPES.md` for shared room functions.
+
+Likely dependencies: Run Structure, Items/Rewards, regional environment files, route markers, asset inventory, assigned milestone.
+
+# Story and campaign
+
+## Foundational lore/story change
+
+**Authority:** affected file under `lore/` or `characters/`.
+
+Likely dependencies: Game/Full Scope, Run Structure when campaign flow changes, affected regions/characters, presentation UI, milestones when authored content scope changes.
+
+Approved canon should not be reopened by a dependent summary.
 
 ## Narrative delivery change
 
-Authorities:
+Lore authorities own facts; presentation files own delivery.
 
-- relevant lore and character files for canon
-- relevant UI, content, or milestone file for presentation ownership
+Likely dependencies: first-death/Returning Blood presentation, Shogun dialogue states, NPC/codex/results, ending/credits, Milestones 6–7.
 
-Usually review:
+# Release / production
 
-- first-death and Returning Blood presentation
-- bloodline-confirmation delivery
-- Shogun dialogue and reconstruction states
-- NPC, codex, results, and Heart-chamber updates
-- ending and credits
-- portraits, voice, cinematics, and in-engine dialogue
-- Milestones 6 and 7
-- narrative delivery and authored-content package
+## Postgame or release change
 
-Presentation changes should not silently redefine approved story facts.
+**Authorities:** `gameplay/RUN_STRUCTURE.md`, `content/area_3/TRUE_FINAL_HEART.md`, affected reward/UI files.
 
-## Postgame release change
-
-Authorities:
-
-- `gameplay/RUN_STRUCTURE.md`
-- `content/area_3/TRUE_FINAL_HEART.md`
-- relevant reward, Boat, results, and save-state UI files
-
-Usually review:
-
-- Heart-route access control
-- repeat-clear rewards and records
-- completed-save behavior
-- canonical-versus-repeat presentation
-- asset inventory
-- Milestones 6 and 7
-- postgame release package
-
-Deferred modifiers, enemy variants, room variants, and challenge restrictions remain outside the initial release unless intentionally promoted.
+Likely dependencies: Heart access, repeat rewards/records, completed-save behavior, Milestones 6–7.
 
 ## Art milestone change
 
-Authority:
+**Authority:** relevant `art_production/milestones/MILESTONE_*.md`.
 
-- relevant `art_production/milestones/MILESTONE_*.md`
+Likely dependencies: Production Roadmap, Asset Inventory, technical standards, and the gameplay/content/UI authorities that created the production requirement.
 
-Usually review:
+# New major system or content family
 
-- production roadmap
-- asset inventory
-- technical standards
-- outsourcing workflow
-- authoritative gameplay, lore, content, and UI files
+Create one authority with a stable ID, then update only applicable dependencies:
 
-Milestones summarize what must be produced. They do not own the underlying mechanic or fiction.
+- `SOURCE_OF_TRUTH.md`,
+- `TERMINOLOGY.md` if a recurring search term is introduced,
+- Full Game Scope / Roadmap if production shape changes,
+- Asset Inventory / milestone if new production work is created,
+- `OPEN_QUESTIONS.md` only if the new system creates a real unresolved launch decision.
 
-## New system, region, or major content family
+# Reliability rule
 
-Create one authoritative file and stable document ID, then update only applicable dependencies:
-
-- `SOURCE_OF_TRUTH.md`
-- game overview or full scope
-- production roadmap
-- asset inventory
-- assigned milestone
-- terminology
-- current design questions when the new content creates a genuine production-scope decision
-
-## Reliability rule
-
-The presence of a file in this map does not mean it must be edited. The absence of a file does not mean it is unaffected. Current repository content and live search determine the actual review set.
+The presence of a file here does not require editing it. The absence of a file does not prove it is unaffected. When code search is unavailable, follow the direct-read fallback in `ASSISTANT_WORKFLOW.md` and document that limitation in the PR audit.
