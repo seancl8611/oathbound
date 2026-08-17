@@ -14,6 +14,22 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-08-17 — Relic acquisition and in-run swapping locked
+
+All **10 launch Relics are obtainable before the canonical story ending**. Acquisition uses a fixed launch allocation:
+
+- **4** guaranteed campaign / Strand unlocks through NPC progression, discoveries, or campaign milestones,
+- **2** Blood Cavern / challenge unlocks,
+- **4** run-discovered Relics through approved Relic opportunities such as Treasure, Keeper/Twin Maws Boss Reward Flex cards, and occasional Shop Flex slots.
+
+Until the collection is complete, eligible discoveries prioritize undiscovered Relics rather than duplicates. A newly discovered Relic is permanently added immediately; the player may equip it now or keep the current Relic without forfeiting the discovery.
+
+Normal Relic swaps are limited to the **Forge before a run**, the safe transition **after Keeper**, and the safe transition **after Twin Maws**. A new discovery itself is also a one-time equip opportunity. Rest rooms, Shops, ordinary rooms, combat, and the pause menu do not provide routine swapping.
+
+Only the currently equipped Relic earns future mastery kills; previously earned mastery remains permanent when swapping.
+
+**Authority:** `docs/gameplay/RELICS.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`.
+
 ## 2026-08-17 — Keeper and Twin Maws current-run Boss Rewards locked
 
 Keeper of the Gate and Twin Maws now use the same separate **three-card current-run Boss Reward** after victory. Persistent Mist/material payouts and automatic regional-transition recovery remain separate.

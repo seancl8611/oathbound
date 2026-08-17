@@ -19,6 +19,7 @@ topics:
   - recovery
   - temporary-capacity
   - regional-boss-rewards
+  - relic-acquisition
 related:
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
@@ -407,7 +408,7 @@ Ordinary Gold, Mist, Scrolls, pure healing, consumables, and permanent upgrades 
 
 The exact Boss Reward is **not previewed before the fight**. The route communicates only that the mandatory regional boss grants a premium Boss Reward; the three cards are revealed after victory.
 
-A Relic card is an acquisition opportunity, not an automatic forced swap. Exact newly discovered/equipped Relic behavior and broader in-run swap placement are owned by the next Relic integration pass.
+A Relic card is an acquisition opportunity, not an automatic forced swap. If the Relic is newly discovered, it is permanently added to the collection immediately and the player may **Equip Now** or **Keep Current Relic** without losing the discovery.
 
 # Regional transition recovery
 
@@ -422,6 +423,8 @@ then enforces next-region floors of:
 - **50% max Spirit**.
 
 The boss's interesting reward is separate from this automatic viability support.
+
+These safe transitions are also the two approved normal in-run Relic swap moments: after Keeper before Yomori, and after Twin Maws before Kagutsuchi.
 
 # Eclipse Shogun and Heart handoff
 
@@ -443,9 +446,17 @@ Heart Binding destruction is campaign progress, not spendable currency.
 
 # Relics
 
-`RELICS.md` owns the 10-Relic launch roster, one equipped slot, persistent collection/mastery/progression, and run-active benefits. Relics have no rarity tiers.
+`RELICS.md` owns the 10-Relic launch roster, one equipped slot, persistent collection/mastery/progression, acquisition allocation, and swap rules. Relics have no rarity tiers.
 
-Relic acquisition remains intentionally uncommon. The current Shop flex slot may occasionally surface a Relic opportunity; regional Boss Reward Flex cards may also surface an eligible Relic opportunity. Final acquisition allocation and transition-swap placement remain the next integration work.
+All 10 launch Relics are obtainable before the canonical story ending. Acquisition uses the approved **4 / 2 / 4 split**:
+
+- **4** guaranteed campaign / Strand unlocks,
+- **2** Blood Cavern / challenge unlocks,
+- **4** run-discovered Relics through approved opportunities such as Treasure, Keeper/Twin Maws Boss Reward Flex cards, and the occasional Shop Flex slot.
+
+Until the collection is complete, eligible discoveries prioritize undiscovered Relics instead of duplicate discoveries.
+
+A newly discovered Relic is permanently banked immediately and may be equipped at once or declined while retaining the discovery. Outside a new discovery, routine swaps occur only at the Forge before a run and in the safe transitions after Keeper and Twin Maws. Rest rooms, Shops, ordinary rooms, combat, and the pause menu do not provide free Relic swapping.
 
 # Run Infrastructure boundary
 
@@ -462,10 +473,11 @@ Run Infrastructure may improve approved future-run support around Rest, Shrines,
 - Gold remains run-only and disappears at run end.
 - Blood is a combat resource, not a currency or route reward.
 - Temporary capacity is run-only.
+- Relics do not use duplicate-copy progression, rarity tiers, or a separate acquisition currency.
 - Final values may move through playtesting without reopening the ownership model.
 
 # Current production dependency
 
-The route structure, room/reward weights, Technique offer generation, Gold/Shop economy, survival/recovery/capacity model, persistent-resource payout model, and Keeper/Twin Maws current-run Boss Reward prototype are now complete at prototype paper-design depth.
+The route structure, room/reward weights, Technique offer generation, Gold/Shop economy, survival/recovery/capacity model, persistent-resource payout model, Keeper/Twin Maws current-run Boss Reward prototype, and Relic acquisition/swap model are now complete at prototype paper-design depth.
 
-The next reward-side integration layer is **Relic acquisition allocation and limited in-run swap placement**. Full-run integration then continues through consumables include/cut confirmation, encounter composition and clear-time tuning, 45–50-minute run simulation, and playable validation of the prototype values.
+The next full-run integration decision is **consumables include/cut confirmation**. After that, integration continues through encounter composition and clear-time tuning, 45–50-minute run simulation, and playable validation of the prototype values.

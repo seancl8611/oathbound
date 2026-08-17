@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - trials
   - training
@@ -12,11 +12,13 @@ topics:
   - techniques
   - blood-mirror
   - mastery
+  - relics
 related:
   - CONTENT-STRAND-BLOOD-CAVERN
   - GAMEPLAY-COMBAT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-RELICS
   - GAMEPLAY-PROGRESSION
 ---
 
@@ -26,7 +28,7 @@ related:
 
 Provide repeatable, skill-focused Strand activities that teach approved combat systems, demonstrate selected Technique interactions, and reward mastery without depending on run RNG.
 
-The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, rewards, and production volume remain later content and implementation work rather than full-game scope blockers.
+The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, most rewards, and production volume remain later content and implementation work rather than full-game scope blockers. The Relic system now reserves **2 of the 10 launch Relics** for authored Blood Cavern / challenge unlock milestones; exact Relic identities and exact challenge assignments remain later content sequencing.
 
 The Blood Cavern is a training / trial space, not a separate general permanent-upgrade station. Permanent Aspect progression belongs to the Blood Mirror inside the Cavern after the Mirror is unlocked later in the game.
 
@@ -126,9 +128,11 @@ Temporary trial loadouts do not become persistent equipped builds.
 
 Later challenges may use fixed Aspects, Techniques, Prosthetics, Relics, stricter execution goals, or boss-rematch structures. They should remain deterministic enough that failure teaches a clear lesson.
 
+Two authored Blood Cavern / challenge milestones across the launch progression award **permanent first-time Relic unlocks**. These are guaranteed challenge acquisitions rather than repeatable reward farming. Repeating those challenges does not create duplicate Relics or another Relic currency.
+
 ## Reward philosophy
 
-Trials may award Aspect access, Technique-pool unlocks, persistent currency, approved capped reliability upgrades, cosmetics, lore reflections, and mastery marks.
+Trials may award Aspect access, Technique-pool unlocks, persistent currency, the two approved first-time Relic unlocks, approved capped reliability upgrades, cosmetics, lore reflections, and mastery marks.
 
 Trials may not:
 
@@ -137,6 +141,7 @@ Trials may not:
 - permanently pre-equip a run Technique,
 - create persistent Blood,
 - duplicate the Blood Art system as a permanent tree,
+- create duplicate-copy Relic progression,
 - or remove a kit's core tradeoffs.
 
 ## Permanent Aspect upgrade boundary
@@ -152,6 +157,7 @@ The Blood Mirror begins locked and becomes available later in the game. Exact un
 - Trials are repeatable.
 - Fixed Aspect/Technique/Prosthetic/Relic loadouts are supported.
 - Progress, unlocks, rewards, and permanent-upgrade ranks persist where applicable.
+- The two launch Relic challenge rewards are first-time permanent unlocks rather than repeatable payouts.
 - Temporary trial state clears when the trial ends.
 - Trial rules do not require random room/reward generation.
 - The Blood Mirror supports a persistent locked/unlocked campaign state.
