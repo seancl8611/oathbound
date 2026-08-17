@@ -120,7 +120,7 @@ Additional route-generation safeguards:
 
 Across the 33-chamber regional route, the current prototype target is roughly **17–19 multi-exit routing decisions** on a normal successful run. This is a pacing target rather than a hard per-run quota.
 
-`ITEMS_AND_REWARDS.md` owns prototype room-type weights, standard-combat reward weights, and expected reward cadence. Final percentages remain subject to playtesting.
+`ITEMS_AND_REWARDS.md` owns prototype room-type weights, standard-combat reward weights, Gold/Shop values, recovery/capacity values, and expected reward cadence. Final values remain subject to playtesting.
 
 ## Area 1 — Hushiro Gate Village prototype structure
 
@@ -271,12 +271,14 @@ Defeating Keeper or Twin Maws leads into a brief **safe regional transition spac
 The transition should:
 
 - grant the approved regional boss reward,
-- restore enough Health and/or Spirit for the next area to begin from a viable state,
+- apply the automatic recovery prototype owned by `ITEMS_AND_REWARDS.md`,
 - allow concise read-only build review and any separately approved limited preparation interaction,
 - visually transition into the next region,
 - and preserve run momentum rather than functioning as a second Strand or overloaded menu hub.
 
-The exact recovery values, Relic-swap timing if retained, and transition interface remain later implementation decisions.
+The current recovery prototype restores **20% max Health and 35% max Spirit**, then enforces minimum next-region entry floors of **35% max Health and 50% max Spirit**. This is viability support rather than a full reset. Blood is not automatically refilled.
+
+Relic-swap timing, transition interface details, and final recovery tuning remain later implementation/playtest decisions.
 
 ## Post-Shogun handoff
 
@@ -290,7 +292,9 @@ After all six remaining Bindings are destroyed, the seventh successful story run
 
 **Shogun → Heart approach → true-final Heart encounter**, carrying the same active run build forward.
 
-Heart approach spaces, the Binding-completion chamber, and the true-final Heart encounter are specialized endgame content outside Kagutsuchi's 11 counted chambers. The Shogun does not provide ordinary current-run power during the first six Binding clears because those runs end through the Binding ritual. Exact recovery/resource handling before the true-final Heart remains later encounter integration work.
+Heart approach spaces, the Binding-completion chamber, and the true-final Heart encounter are specialized endgame content outside Kagutsuchi's 11 counted chambers. The Shogun does not provide ordinary current-run power during the first six Binding clears because those runs end through the Binding ritual.
+
+For the seventh story run, the Shogun-to-Heart handoff uses the partial final-encounter recovery prototype owned by `ITEMS_AND_REWARDS.md`: restore **30% max Health and 50% max Spirit**, then enforce minimum Heart-entry floors of **40% max Health and 60% max Spirit**. This preserves a strong Shogun clear as an advantage while keeping the Heart viable after a narrow Shogun victory. Blood is not automatically refilled unless later Heart encounter design explicitly requires a different rule.
 
 ## Approved duration target
 
