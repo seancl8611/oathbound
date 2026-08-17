@@ -4,7 +4,7 @@ title: Run HUD and Combat Feedback
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-09
+last_reviewed: 2026-08-16
 topics:
   - hud
   - posture
@@ -15,6 +15,7 @@ topics:
   - deathblow
   - damage-numbers
   - enemy-indicators
+  - temporary-capacity
 related:
   - GAMEPLAY-COMBAT
   - GAMEPLAY-BLOOD-ASPECTS
@@ -31,9 +32,9 @@ The Run HUD displays immediate combat state, current build tools, and run-only p
 
 ## Core modules
 
-- Player HP bar
+- Player HP bar with support for temporary maximum-Health growth
 - Player posture bar
-- Ten Spirit emblem segments in the current Milestone 1 baseline
+- Spirit-emblem resource display using ten starting segments in the current Milestone 1 baseline, with support for temporary maximum-Spirit growth
 - Equipped Prosthetic icon and cooldown or charge state
 - Compact Technique-state indicators only where immediate combat tracking is needed
 - Run currency counters
@@ -64,7 +65,7 @@ Show a Technique indicator during combat only when the player needs immediate st
 
 When no state requires tracking, the Technique remains visible only in the build overview and reward screens.
 
-The HUD must support simultaneous state from the five core combat slots plus slotless supporting Techniques without implying five new ability buttons. Contextual indicators are preferred over a permanent icon strip when possible.
+The HUD must support simultaneous state from the five core combat slots plus slotless Supporting Techniques without implying five new ability buttons. Contextual indicators are preferred over a permanent icon strip when possible.
 
 ## Information hierarchy
 
@@ -83,7 +84,9 @@ Corruption becomes more prominent when full and Shrine-ready, but it remains sec
 
 ### HP bar
 
-Muted warm life-red with a clear low-HP reference state. Low health should read even if pulse animation is missed. Frame and fill may use restrained segmented divisions.
+Muted warm life-red with a clear low-HP reference state. Low Health should read even if pulse animation is missed. Frame and fill may use restrained segmented divisions.
+
+The HUD must visually support **run-only maximum-Health increases** without implying permanent character growth. The underlying bar may extend, add restrained capacity markers, or use another readable method, but current Health and increased maximum Health must remain immediately understandable.
 
 ### Posture bar
 
@@ -91,7 +94,11 @@ Must use a different shape, fill behavior, or framing language from HP. It shoul
 
 ### Spirit emblems
 
-Ten countable segments in the current baseline, with unmistakable full and empty states. The row should inherit Order ritual language rather than modern ammunition UI.
+Ten countable segments are the current **starting baseline**, with unmistakable full and empty states. The row should inherit Order ritual language rather than modern ammunition UI.
+
+Temporary maximum-Spirit rewards may raise the resource above that starting ten-segment capacity. The HUD must therefore support additional capacity without treating ten as a permanent run ceiling. Acceptable implementation directions include adding compact extra segments, extending the row, or another equally countable presentation that preserves the player's understanding of current versus maximum Spirit.
+
+Final baseline Spirit count and exact capacity-display implementation remain subject to combat/UI prototyping; the approved reward system only requires that temporary percentage-based capacity growth can be represented cleanly.
 
 ## Corruption and Blood Aspect module
 
