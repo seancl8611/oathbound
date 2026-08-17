@@ -272,7 +272,7 @@ Minibosses are deliberately injected into their approved windows and regional bo
 | Temporary capacity | 7% | 10% | 11% |
 | Reroll resource | 7% | 8% | 10% |
 
-Relics are not part of the ordinary standard-Combat table. Consumables have **0% ordinary primary-room reward weight** in the first prototype.
+Relics are not part of the ordinary standard-Combat table. **Consumables are not part of Oathbound's launch run-reward or inventory model.**
 
 ## Prototype cadence targets
 
@@ -370,7 +370,7 @@ Prices remain stable across regions in this prototype.
 
 # Treasure, miniboss, and boss reward hierarchy
 
-Treasure may provide a Technique, Relic opportunity, persistent-resource bundle, major recovery, enhanced capacity, or approved rare consumable if consumables remain in launch scope.
+Treasure may provide a Technique, Relic opportunity, persistent-resource bundle, major recovery, or enhanced capacity.
 
 A miniboss always provides meaningful build development rather than only ordinary Gold or healing, plus its fixed **+10 Mist / +1 Scroll** persistent bonus.
 
@@ -404,7 +404,7 @@ If no eligible Relic opportunity exists, redistribute that 30% proportionally ac
 
 Keeper and Twin Maws use the same Boss Reward rules. Their different placement in the run creates the intended functional difference: Keeper tends to establish or stabilize an early build, while Twin Maws tends to refine a more mature build before Kagutsuchi.
 
-Ordinary Gold, Mist, Scrolls, pure healing, consumables, and permanent upgrades are excluded from this three-card current-run Boss Reward.
+Ordinary Gold, Mist, Scrolls, pure healing, and permanent upgrades are excluded from this three-card current-run Boss Reward.
 
 The exact Boss Reward is **not previewed before the fight**. The route communicates only that the mandatory regional boss grants a premium Boss Reward; the three cards are revealed after victory.
 
@@ -458,6 +458,12 @@ Until the collection is complete, eligible discoveries prioritize undiscovered R
 
 A newly discovered Relic is permanently banked immediately and may be equipped at once or declined while retaining the discovery. Outside a new discovery, routine swaps occur only at the Forge before a run and in the safe transitions after Keeper and Twin Maws. Rest rooms, Shops, ordinary rooms, combat, and the pause menu do not provide free Relic swapping.
 
+# Consumables — excluded from launch
+
+Oathbound does **not** include a general run-consumable inventory or one-use item layer at launch. Shops, Treasure, recovery, temporary capacity, Technique rerolls, Relics, Prosthetics, and Techniques already cover the intended tactical and reward roles without another inventory/UI system.
+
+Do not create consumable route rewards, Shop consumable stock, Treasure consumables, consumable inventory slots, or persistence rules unless launch scope is deliberately reopened after playable evidence shows a clear missing role.
+
 # Run Infrastructure boundary
 
 Run Infrastructure may improve approved future-run support around Rest, Shrines, reward possibilities, routing, regional transitions, and persistent-resource opportunities. It may not eliminate route opportunity cost or make high-value rewards, ideal builds, recovery, or Aspect advancement automatic.
@@ -474,10 +480,11 @@ Run Infrastructure may improve approved future-run support around Rest, Shrines,
 - Blood is a combat resource, not a currency or route reward.
 - Temporary capacity is run-only.
 - Relics do not use duplicate-copy progression, rarity tiers, or a separate acquisition currency.
+- No general consumable inventory or one-use item reward layer is in launch scope.
 - Final values may move through playtesting without reopening the ownership model.
 
 # Current production dependency
 
-The route structure, room/reward weights, Technique offer generation, Gold/Shop economy, survival/recovery/capacity model, persistent-resource payout model, Keeper/Twin Maws current-run Boss Reward prototype, and Relic acquisition/swap model are now complete at prototype paper-design depth.
+The route structure, room/reward weights, Technique offer generation, Gold/Shop economy, survival/recovery/capacity model, persistent-resource payout model, Keeper/Twin Maws current-run Boss Reward prototype, Relic acquisition/swap model, and launch reward-system scope are now complete at prototype paper-design depth.
 
-The next full-run integration decision is **consumables include/cut confirmation**. After that, integration continues through encounter composition and clear-time tuning, 45–50-minute run simulation, and playable validation of the prototype values.
+The active full-run integration task is now **encounter composition and pacing validation**: regional enemy mixes by chamber band, elite/high-pressure frequency, standard-room clear-time targets, miniboss/boss time budgets, decision/service overhead, and simulation of the complete 33-chamber route against the 45–50-minute target.
