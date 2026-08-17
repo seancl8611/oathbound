@@ -9,6 +9,18 @@ last_reviewed: 2026-08-16
 
 # Documentation Changelog
 
+## 2026-08-16 — Kagutsuchi and full three-region run-structure lock
+
+- Locked **Kagutsuchi** at 11 counted prototype chambers: Court entrance 1–2, main Court 3–7, final Court / Shogun approach 8–10, Eclipse Shogun at 11.
+- Gave Kagutsuchi one optional miniboss opportunity during Chambers 4–7, selecting Blood Lotus or Eternal Swordsman for that run.
+- Guaranteed the Kagutsuchi route network at least one Shrine, Shop, Rest, miniboss opportunity, two Technique-reward opportunities, and one meaningful final-preparation opportunity across Chambers 9–10.
+- Set Kagutsuchi's current active-time target at approximately 15–17 minutes.
+- Kept Heart approach, Binding-completion spaces, and the true-final Heart outside Kagutsuchi's 11 counted chambers.
+- Locked the current complete regional prototype baseline at **33 counted chambers total: 12 Hushiro + 10 Yomori + 11 Kagutsuchi**.
+- Preserved the first six Shogun clears as Binding-completion runs and the seventh story run as a direct Shogun-to-Heart continuation with the same active build.
+- Advanced the active run-design dependency from regional architecture to provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values.
+- Updated Run Structure, Area 3 overview, shared room/reward rules, full-game scope, roadmap, gameplay status, Milestone 6, open questions, and decision history to remove contradictory Area-3-count-deferred language.
+
 ## 2026-08-16 — Area 1 / Area 2 prototype run-structure lock
 
 - Locked the Hades-like regional routing model around fixed regional endpoints, chamber-index eligibility bands, weighted procedural contents, previewed route choices, and hard minimum-opportunity safeguards.
@@ -22,7 +34,7 @@ last_reviewed: 2026-08-16
 - Defined guaranteed opportunities as route-network availability rather than mandatory visits.
 - Kept post-boss regional transitions outside counted chamber totals and scoped them as short safe reward/recovery/preparation connectors rather than secondary hubs.
 - Set current active-time targets at approximately 14–16 minutes for Hushiro and 12–14 minutes for Yomori.
-- Preserved exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Kagutsuchi's chamber budget for the continuing integration/playtest pass.
+- Preserved exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Kagutsuchi's chamber budget for the continuing integration/playtest pass. Kagutsuchi's chamber budget was subsequently locked later on 2026-08-16.
 - Marked the major-system production-scope audit complete and advanced the active design dependency to Kagutsuchi's route structure, then complete three-region pacing validation.
 - Updated Area 1/2 overviews, room/reward authorities, full scope, roadmap, gameplay index, production milestones, open questions, and decision history to remove contradictory all-counts-deferred language.
 - Corrected the remaining Milestone 2 reference to the superseded four-slot/reserve Technique UI.
