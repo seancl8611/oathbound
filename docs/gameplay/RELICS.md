@@ -4,7 +4,7 @@ title: Relics
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - relics
   - run-builds
@@ -13,11 +13,14 @@ topics:
   - forge
   - preparation
   - mastery
+  - acquisition
+  - swapping
 related:
   - GAMEPLAY-ITEMS-REWARDS
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROSTHETICS
+  - GAMEPLAY-BLOOD-CAVERN-TRIALS
   - CONTENT-STRAND-FORGE-BENCH
   - META-OPEN-QUESTIONS
 ---
@@ -36,8 +39,42 @@ They should add personality, discovery, and light strategic choice without becom
 - Relics use a separate slot from Techniques and Prosthetics.
 - Relics do **not** use Common / Rare / Legendary rarity tiers.
 - Relic effects should usually be understandable in one concise sentence.
-- Relics may be switched during a run through approved transition opportunities rather than freely during active combat.
-- Exact acquisition sources, mastery thresholds, transition-swap timing, and most numerical values remain later content / implementation work.
+- Relics may not be freely swapped during active combat or from the pause menu.
+- Exact mastery thresholds and most numerical values remain later content / implementation work.
+
+## Launch acquisition model
+
+All **10 launch Relics are obtainable before the canonical story ending**. The launch collection is split across dependable campaign progress and less predictable run discovery:
+
+- **4 guaranteed campaign / Strand unlocks** through NPC progression, discoveries, or campaign milestones,
+- **2 Blood Cavern / challenge unlocks** tied to authored challenge milestones,
+- **4 run-discovered Relics** surfaced through approved Relic opportunities such as Treasure, Keeper/Twin Maws Boss Reward Flex cards, and the occasional Shop Flex slot.
+
+Exact Relic-to-source assignment within those buckets may be authored during content sequencing, but the **4 / 2 / 4 acquisition split** is the approved launch structure.
+
+Until all 10 Relics are collected, eligible discovery opportunities prioritize **undiscovered Relics** rather than duplicate discoveries. Relics do not gain a duplicate-copy upgrade system, rarity ladder, or separate acquisition currency.
+
+When Akio discovers a Relic during a run:
+
+1. the Relic is **immediately added permanently to the collection**,
+2. the player may **Equip Now** or **Keep Current Relic**,
+3. declining to equip the new Relic does not forfeit the discovery.
+
+A discovery itself is therefore a valid one-time swap opportunity even when it occurs outside a normal regional transition.
+
+## In-run swap rules
+
+Outside a new discovery, equipped Relic changes are intentionally limited.
+
+Approved swap moments are:
+
+- at the **Forge Bench before starting a run**,
+- in the safe regional transition **after Keeper of the Gate**,
+- in the safe regional transition **after Twin Maws**.
+
+Do **not** provide routine Relic swapping at Rest rooms, Shops, ordinary reward rooms, during combat, or through the pause menu.
+
+This creates one committed Relic choice for each region while still allowing the player to adapt before Yomori and Kagutsuchi.
 
 ## Mastery and permanent progression
 
@@ -75,7 +112,7 @@ At the Strand, the **Forge Bench** is the approved home for:
 
 The Boat remains focused on quick final run-start confirmation rather than becoming another upgrade interface.
 
-In-run Relic switching may still use approved transition opportunities. Exact transition locations and presentation remain later integration work and do not require a second permanent hub station.
+The two regional transition swap opportunities are run-only management moments and do not require a second permanent hub station.
 
 ## Approved launch roster
 
@@ -119,6 +156,6 @@ This value is a prototype economy target and may be tuned after Shop behavior is
 
 ## Production boundary
 
-The 10 approved Relics may guide icon, object, Forge collection/mastery display, and basic selection-interface planning.
+The 10 approved Relics and the 4 / 2 / 4 acquisition structure may guide icon, object, discovery, Forge collection/mastery display, run-reward, and transition-swap interface planning.
 
-Do not create Relic rarity-badge families. Exact object designs, acquisition scenes, mastery-state art, numerical values beyond explicitly approved prototypes, kill thresholds, Forge upgrade presentation, and transition-swap presentation remain later production decisions.
+Do not create Relic rarity-badge families or duplicate-copy upgrade presentation. Exact object designs, individual Relic-to-source assignment inside the approved acquisition buckets, mastery-state art, numerical values beyond explicitly approved prototypes, kill thresholds, and Forge upgrade presentation remain later production decisions.
