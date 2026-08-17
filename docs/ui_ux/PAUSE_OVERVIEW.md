@@ -12,10 +12,12 @@ topics:
   - relics
   - controls
   - status-effects
+  - temporary-capacity
 related:
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-ITEMS-REWARDS
   - GAMEPLAY-RELICS
   - UI-TECHNIQUE-REWARDS
   - UI-HUD
@@ -36,17 +38,20 @@ Let the player review the current build and controls without overwhelming combat
 - Technique refinements,
 - equipped Prosthetic and current tool state,
 - equipped Relic and its currently active benefit,
+- current / maximum Health and Spirit, including any temporary run-only capacity increases,
 - run currencies,
 - active effects and status conditions,
 - control/help section.
 
 The equipped Relic is a persistent owned object with persistent mastery/progression; only its **equipped run benefit** is part of the current run state.
 
+Temporary maximum Health and Spirit are run-only build state. The overview should make the increased maximum understandable without implying that the capacity persists after the run.
+
 ## Technique behavior
 
 The pause screen is read-only for Technique loadout management.
 
-It may show full Technique descriptions, affected combat slot, rarity, refinement state, supporting-family relationships, and current trigger / stack / cooldown state where relevant.
+It may show full Technique descriptions, affected combat slot, rarity, refinement state, Supporting-family relationships, and current trigger / stack / cooldown state where relevant.
 
 It does not permit arbitrary Technique replacement. A filled combat slot is changed only through a valid replacement reward or another explicitly approved system.
 
@@ -70,12 +75,13 @@ Functional, clean, and more stripped back than the major progression interfaces.
 - readable icon-and-text pairings,
 - five core combat slots visually grouped together,
 - Supporting / Cross-family / Legendary Technique upgrades visually separated from the five core slots,
+- temporary Health/Spirit capacity visually separated from permanent progression,
 - clear distinction between equipped, run-active, and persistent information.
 
 ## Technical requirements
 
 - Support controller and keyboard navigation.
 - Keep the most important current-build information visible without deep submenu navigation.
-- Allow Supporting Technique, Relic, and status complexity to expand without forcing a full layout redesign.
+- Allow Supporting Technique, Relic, status, and temporary-capacity complexity to expand without forcing a full layout redesign.
 - Do not expose hidden information or imply ownership rules different from the authoritative gameplay files.
 - Keep descriptions localization-safe and allow scroll or focus expansion without shrinking critical text.

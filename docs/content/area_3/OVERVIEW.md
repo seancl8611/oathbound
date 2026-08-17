@@ -23,6 +23,7 @@ related:
   - CONTENT-AREA3-BOSS
   - CONTENT-AREA3-TRUE-FINAL-HEART
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-ITEMS-REWARDS
 ---
 
 # Kagutsuchi Court
@@ -87,7 +88,7 @@ Kagutsuchi uses **11 counted chambers** with an active-time target of approximat
 
 Before the Shogun, the generated route network contains at least one Shrine, Shop, Rest, optional miniboss opportunity, two Technique-reward opportunities, and one meaningful final-preparation opportunity across Chambers 9–10. These are route-network opportunities rather than mandatory visits.
 
-Exact branch frequency, room/reward percentage weights, encounter compositions, and numerical tuning remain part of the complete three-region integration/playtest pass. `RUN_STRUCTURE.md` owns the shared chamber-generation rules and full regional details.
+`RUN_STRUCTURE.md` owns chamber eligibility/branching and `ITEMS_AND_REWARDS.md` owns the approved first room/reward/economy/recovery prototype, including the seventh-story-run Shogun→Heart recovery handoff. Final tuned percentages, encounter compositions, and numerical balance remain playtest work.
 
 ## Major encounter sequence
 
@@ -102,7 +103,7 @@ The Eclipse Shogun's exact phase structure remains draft encounter-design work. 
 
 During the first six successful clears, Akio uses the extraction apparatus and Returning Blood to break one ancient Heart Binding, is dissolved by the Heart, and reconstructs at the Strand with permanent progress preserved.
 
-On the seventh successful story run, Akio defeats the Shogun's current body and continues directly into the two-form Heart encounter. Destroying the Heart ends Beast Blood and completes the story.
+On the seventh successful story run, Akio defeats the Shogun's current body and continues directly into the two-form Heart encounter with the same active build and the approved partial recovery handoff. Destroying the Heart ends Beast Blood and completes the story.
 
 Heart approach, Binding completion, and the true-final Heart are specialized endgame content outside Kagutsuchi's 11 counted chambers.
 

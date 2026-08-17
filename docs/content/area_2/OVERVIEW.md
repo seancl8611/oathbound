@@ -20,6 +20,7 @@ related:
   - CONTENT-AREA2-MINIBOSSES
   - CONTENT-AREA2-BOSS
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-ROOM-TYPES
 ---
 
@@ -112,7 +113,7 @@ The route network must contain at least one Shrine, one Shop, one Rest, one mini
 
 Yomori is intentionally shorter than Hushiro because its normal encounters, minibosses, and Twin Maws are expected to be denser and mechanically more complex. The region currently targets approximately **12–14 minutes** of active run time.
 
-Detailed generation rules, chamber eligibility, and transition behavior are owned by `docs/gameplay/RUN_STRUCTURE.md`; exact percentage weights and encounter compositions remain playtest tuning.
+`RUN_STRUCTURE.md` owns chamber eligibility/branching and `ITEMS_AND_REWARDS.md` owns the approved first room/reward/economy/recovery prototype. Final tuned percentages, encounter compositions, transition recovery, and clear times remain playtest work.
 
 ## Production dependencies
 

@@ -4,7 +4,7 @@ title: Technique System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-14
+last_reviewed: 2026-08-16
 topics:
   - techniques
   - run-builds
@@ -16,6 +16,8 @@ topics:
   - technique-families
   - rarity
   - eligibility
+  - offer-generation
+  - rarity-weighting
 related:
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUE-CATALOG
@@ -125,9 +127,7 @@ The current 50-Technique roster is distributed as:
 
 Rarity represents unusualness, transformation, specialization, prerequisite depth, and reward restriction rather than only numerical strength.
 
-Refinements do not receive rarity labels.
-
-Exact rarity **probabilities** and source weighting remain later reward-system tuning.
+Refinements do not receive rarity labels. Legendary generation uses a separate eligible-capstone check rather than the ordinary Common / Uncommon / Rare card roll.
 
 ## Eligibility and prerequisites
 
@@ -176,22 +176,179 @@ A refinement:
 
 A slotted Technique may receive at most one refinement.
 
-## Technique reward screens
+# Technique reward screens
 
-A **Technique reward** always uses the same underlying reward screen and eligibility rules regardless of source.
+A **Technique reward** always uses the same underlying three-choice reward screen and eligibility rules regardless of source.
 
-A valid offer may include an appropriate combination of:
+A Technique reward may come from standard combat, a Shop purchase, Treasure, a miniboss, a regional boss, or another explicitly approved source. Reward source changes quality weighting; it does not create a separate Technique subtype or interface.
 
-- a Technique for an empty combat slot,
-- an eligible Supporting Technique,
-- an eligible refinement,
-- a rare same-slot replacement,
-- an eligible Cross-family Technique,
-- or an eligible Legendary.
+## Offer-generation order
 
-Combat rooms are the most common source, while shops, treasure, minibosses, regional bosses, or other approved sources may grant the same reward type. Source does not create a separate Technique system.
+The prototype generator resolves a Technique reward in this order:
 
-The exact order of operations for rarity rolling versus eligible-pool construction, offer weights, reward frequency, and replacement frequency remains open.
+1. **Build the valid eligible pool first.** Remove Techniques whose slot or prerequisite rules are not currently satisfied.
+2. **Determine required screen composition** from the number of empty direct combat slots.
+3. **Roll rarity / source quality** for each baseline card after its direct-or-flex role is known.
+4. **Select specific eligible Techniques**, applying family weighting and the special flex-card rules for refinements, replacements, Cross-family Techniques, and Legendaries.
+5. **Validate the final screen** against duplicate, functionality, family-diversity, and special-card limits before presentation.
+
+If a rolled rarity has no valid Technique for the required card role, that rarity's weight is redistributed across rarities with valid candidates. The generator does not reroll unusable cards indefinitely or display dead choices.
+
+## Base screen composition
+
+The standard reward screen presents **3 choices**.
+
+| Empty direct combat slots | Required screen composition |
+|---|---|
+| 3–5 empty | At least **2 Direct** offers + 1 flex offer |
+| 1–2 empty | At least **1 Direct** offer + 2 flex offers |
+| 0 empty | 3 flex offers |
+
+A **flex offer** may be another eligible Direct Technique, Supporting Technique, refinement, Cross-family Technique, rare same-slot replacement, or eligible Legendary.
+
+### First Hushiro Technique reward
+
+Hushiro Chamber 1 remains the fixed opening Technique reward. Its screen is deliberately stricter:
+
+- **3 Direct Techniques**,
+- from **3 different combat slots**,
+- and from **3 different families**, where the eligible pool allows it.
+
+The first reward is intended to present clearly different build directions rather than three near-identical openings.
+
+## Prototype ordinary rarity weighting
+
+For standard-combat Technique rewards, ordinary non-Legendary cards use:
+
+| Region | Common | Uncommon | Rare |
+|---|---:|---:|---:|
+| **Hushiro** | 55% | 35% | 10% |
+| **Yomori** | 35% | 45% | 20% |
+| **Kagutsuchi** | 20% | 45% | 35% |
+
+This progression lets Hushiro favor reliable direct starters while later regions increasingly surface specialized Rare build development.
+
+## Prototype source-quality weighting
+
+Shop Technique rewards shift **10 percentage points from Common into Rare** relative to the current region:
+
+| Region | Shop Common | Shop Uncommon | Shop Rare |
+|---|---:|---:|---:|
+| Hushiro | 45% | 35% | 20% |
+| Yomori | 25% | 45% | 30% |
+| Kagutsuchi | 10% | 45% | 45% |
+
+Other premium sources use:
+
+| Source | Common | Uncommon | Rare |
+|---|---:|---:|---:|
+| **Treasure** | 10% | 40% | 50% |
+| **Miniboss** | 0% | 35% | 65% |
+| **Regional boss** | 0% | 25% | 75% |
+
+Keeper and Twin Maws may grant current-run Technique rewards under this table. The Eclipse Shogun does not grant ordinary current-run power on the first six Binding clears because those runs end after the Binding ritual.
+
+## Family weighting and diversity
+
+After the player owns at least one Technique:
+
+- when a valid candidate exists, **at least one card should advance a family the player already owns**,
+- focused builds may receive multiple cards from the same family,
+- but a normal three-choice screen should not contain **three cards from the same family** when another meaningful eligible family option exists,
+- and no exact Technique may appear twice on one screen.
+
+This biases toward build coherence without locking the player into the first family chosen.
+
+## Cross-family weighting
+
+All current Cross-family Techniques remain Rare and must pass their catalog prerequisites.
+
+When eligible, a Cross-family Technique receives **1.5× selection weight within the Rare candidate pool**. A reward screen may contain **at most 1 Cross-family Technique**.
+
+The weighting compensates for their already restrictive hybrid prerequisites without guaranteeing the hybrid payoff.
+
+## Refinement appearance
+
+A refinement may occupy only a **flex** card and a screen may contain **at most 1 refinement**.
+
+When at least one refinement is eligible, the prototype chance for one flex slot to become a refinement opportunity is:
+
+| Source | Refinement chance |
+|---|---:|
+| Standard combat | 25% |
+| Shop | 25% |
+| Treasure | 20% |
+| Miniboss | 10% |
+| Regional boss | 10% |
+
+Premium sources intentionally favor complete Techniques over small refinements.
+
+## Rare same-slot replacements
+
+Replacement offers are uncommon late-build opportunities rather than routine respecs.
+
+Requirements:
+
+- at least **3 direct combat slots are already filled**,
+- a valid different Technique exists for an occupied slot,
+- maximum **1 replacement card per screen**,
+- and the replacement must show the Technique that will be overwritten before confirmation.
+
+Prototype screen-level replacement chance:
+
+| Region | Standard Technique reward |
+|---|---:|
+| Hushiro | **0%** |
+| Yomori | **8%** |
+| Kagutsuchi | **12%** |
+
+Hushiro replacements remain disabled even from premium sources. In Yomori and Kagutsuchi, Shop, Treasure, miniboss, and regional-boss Technique rewards add **+5 percentage points** to the regional replacement chance.
+
+## Legendary appearance
+
+Legendary Techniques are checked separately from ordinary rarity. A Legendary must first satisfy its normal family and mechanic prerequisites.
+
+When at least one Legendary is eligible, each Technique reward screen has the following chance to replace one appropriate flex offer with an eligible Legendary:
+
+| Source | Legendary chance |
+|---|---:|
+| Standard combat | 5% |
+| Shop | 7% |
+| Treasure | 10% |
+| Miniboss | 12% |
+| Regional boss | 15% |
+
+A screen may contain **at most 1 Legendary**. The first prototype uses **no Legendary pity system**; eligibility makes the capstone possible rather than guaranteed.
+
+## Final screen-quality safeguards
+
+Every Technique reward screen must satisfy:
+
+- no duplicate exact Techniques,
+- maximum 1 refinement,
+- maximum 1 replacement,
+- maximum 1 Cross-family Technique,
+- maximum 1 Legendary,
+- at least one immediately functional, non-replacement Technique when one exists,
+- Supporting Techniques only when an owned effect can actually use them,
+- Cross-family and Legendary prerequisites before card generation,
+- and the direct-offer minimum required by the current number of empty combat slots.
+
+The generator should avoid screens made entirely of narrow optimization choices when healthy build-development options remain available.
+
+## Decline and rerolls
+
+The player may decline all Technique choices for a displayed lower-value fallback when that source allows a decline.
+
+A Technique reroll regenerates the **entire three-card screen** while preserving:
+
+- the same reward source,
+- the same region/source rarity weighting,
+- the same direct/flex composition rules,
+- the same eligibility and special-card rules,
+- and the same decline reward.
+
+Where the eligible pool permits it, cards from the immediately previous screen are excluded from the reroll. Rerolling does not automatically improve rarity or quality. The prototype imposes no additional per-screen reroll cap beyond the player's available reroll resource.
 
 ## Construction direction
 
@@ -227,14 +384,13 @@ Permanent progression may unlock Techniques into future reward pools but does no
 
 ## Current design package
 
-Technique **content creation, rarity assignment, and prerequisite design are complete for current paper-design scope**.
+Technique **content creation, rarity assignment, prerequisites, reward frequency, and first-pass offer generation / source weighting are complete at prototype paper-design depth**.
 
-The next Technique-system work is:
+Remaining Technique-system work is:
 
-1. define reward frequency and offer-generation logic, including when rarity is selected relative to eligibility,
-2. define rare same-slot replacement frequency / presentation,
-3. audit the 50-Technique roster across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, mixed-family builds, AoE/control limits, backstab access, and visual readability,
-4. tune exact values through prototyping,
-5. change or add roster entries only if that audit exposes a concrete gap or problem.
+1. audit the 50-Technique roster across Wolf, Wraith, Ronin, bosses, groups, trigger frequency, mixed-family builds, AoE/control limits, backstab access, and visual readability,
+2. validate the prototype offer percentages and replacement/Legendary frequency in playable runs,
+3. tune exact combat values through prototyping,
+4. change or add roster entries only if that audit exposes a concrete gap or problem.
 
-Exact numerical values, status durations, buildup rates, Rift timing, backstab multiplier, damage, posture values, rarity probabilities, offer weights, replacement frequency, and final UI identifiers remain later design and playtest work.
+The percentages in this file are prototype implementation targets, not immutable final balance law. Final rarity rates, offer weights, replacement frequency, status durations, buildup rates, Rift timing, backstab multiplier, damage, posture values, and final UI identifiers remain subject to playtesting.

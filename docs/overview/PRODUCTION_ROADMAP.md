@@ -27,7 +27,7 @@ Complete the remaining Area 1 roster, both minibosses, Keeper of the Gate, chara
 
 The current Hushiro prototype run structure is **12 counted chambers**: Chambers 1–3 opening, 4–8 main, 9–11 pre-boss, and Keeper at Chamber 12. Production should provide enough reusable room foundations and variants to support that route without requiring unique art for every chamber.
 
-Final route percentages and encounter compositions remain prototype/playtest work even though the first generation targets are now approved.
+Final route percentages and encounter compositions remain prototype/playtest work even though the first generation targets are approved.
 
 ## Milestone 3 — The Strand
 
@@ -78,9 +78,9 @@ The 50 Techniques comprise:
 
 Supporting, Cross-family, and Legendary Techniques are slotless, so there is no global Technique inventory cap beyond the five direct action slots.
 
-Rarity and prerequisite rules are approved. Final Technique production quotation depends on the offer-generation/source-weighting pass, VFX/icon briefs, and prototype validation rather than further roster construction.
+Rarity, prerequisite, and first-pass offer-generation rules are approved. The reward UI is now scoped around three-choice screens, build-stage direct/flex composition, regional/source quality weighting, and replacement/refinement/Cross-family/Legendary presentation. Final Technique production quotation depends on VFX/icon briefs and prototype validation rather than further roster construction.
 
-The launch Relic package is complete at qualitative paper-design depth: **10 collectible Relics**, one equipped slot, persistent collection/mastery/progression, run-active benefits, and no Relic rarity tiers. Relic Strand-side progression/management belongs to the Forge. Exact acquisition allocation, mastery values, Forge presentation, and transition-swap behavior remain later detailed work.
+The launch Relic package is complete at qualitative paper-design depth: **10 collectible Relics**, one equipped slot, persistent collection/mastery/progression, run-active benefits, and no Relic rarity tiers. Relic Strand-side progression/management belongs to the Forge. Merchant's Seal currently prototypes a 20% first-purchase-per-region discount. Exact acquisition allocation, mastery values, Forge presentation, and transition-swap behavior remain later detailed work.
 
 ## Milestone 5 — Complete Area 2
 
@@ -88,7 +88,7 @@ Produce Yomori Grove, its enemy/encounter roster, regional hazards, functional r
 
 The current Yomori prototype run structure is **10 counted chambers**: Chambers 1–2 opening, 3–7 main, 8–9 pre-boss, and Twin Maws at Chamber 10. Production should provide enough reusable room foundations and variants to support that route without requiring unique art for every chamber.
 
-Final route percentages, encounter compositions, and Twin Maws transition values remain implementation/playtest work.
+Final route percentages and encounter compositions remain implementation/playtest work. Twin Maws now uses the approved regional-transition recovery prototype before Yomori hands off to Kagutsuchi.
 
 ## Milestone 6 — Area 3 and endgame
 
@@ -100,7 +100,7 @@ Production should provide enough reusable Court room foundations and variants to
 
 The Shogun's high-level identity is approved. Exact attacks, phase structure, transformation anatomy, animation list, and bespoke VFX require later encounter approval.
 
-The Binding package uses one reusable ritual after each of the first six successful clears. The seventh story run continues from the Shogun into the Heart without ending the active build.
+The Binding package uses one reusable ritual after each of the first six successful clears. The seventh story run continues from the Shogun into the Heart without ending the active build and uses the approved partial Shogun-to-Heart recovery handoff before the two-form final encounter.
 
 ## Milestone 7 — Release presentation and cohesion
 
@@ -126,8 +126,10 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 - The old generic weapon-development / weapon-socket system is excluded; Blood Aspects are the run weapon identities.
 - The standard successful-run pacing target is 45–50 minutes.
 - Current regional prototype targets are Hushiro **12 chambers / 14–16 minutes**, Yomori **10 / 12–14**, and Kagutsuchi **11 / 15–17**, for **33 counted regional chambers total**.
-- The first route-generation prototype now targets **17–19 multi-exit decisions**, **20–22 standard combat chambers**, controlled band-based room weights, and region-specific standard-combat reward weights.
-- Final tuned branch percentages, reward weights, and encounter compositions remain playtest work.
+- The first route-generation prototype targets **17–19 multi-exit decisions**, **20–22 standard Combat chambers**, controlled band-based room weights, and region-specific standard-Combat reward weights.
+- The first Gold/Shop prototype uses **60/70/80 Gold** standard rewards by region, three-item Shops, stable prices, and no Shop-inventory reroll.
+- The first survival prototype defines normal/Rest/Shop/Shrine/Treasure recovery, temporary capacity, regional transition floors, and Shogun-to-Heart partial recovery.
+- Final tuned branch percentages, reward weights, prices, recovery values, and encounter compositions remain playtest work.
 - The base Heart Binding ritual is one reusable package.
 - Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
 - Each milestone uses separately quoted, payable, reviewable internal batches.
@@ -137,6 +139,6 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 Use the broad-question hierarchy in `docs/_meta/OPEN_QUESTIONS.md` without replacing the established design sequence with narrow tuning work.
 
-The major-system production-scope audit, all three regional chamber structures, and the first full-route branching/room/reward weighting model are complete at prototype depth.
+The major-system production-scope audit, three regional chamber structures, route-generation weighting, Technique offer generation, Gold/Shop economy, and survival/recovery/capacity model are complete at prototype paper-design depth.
 
-The next run-design task is **Technique offer generation and rarity/source weighting**, followed by Gold/Shop economy, remaining reward-value tuning, encounter composition, and playable validation of the 45–50-minute run.
+The next reward-value task is **persistent-resource payout design**: Mist and Scroll quantities, Boss Emblem cadence/ownership, and the opportunity cost between permanent progression rewards and immediate run power. Remaining full-run integration then includes regional-boss reward mix, Relic acquisition/swap placement, encounter composition/clear-time tuning, and playable validation of the 45–50-minute run.

@@ -19,6 +19,7 @@ related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
+  - GAMEPLAY-ITEMS-REWARDS
   - GAMEPLAY-PROGRESSION
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -43,8 +44,8 @@ The opening should reveal the return through brief gameplay presentation and sub
 2. Use available persistent services: the Bloodwell for Akio / Run Infrastructure progression, the Forge for Prosthetic / Relic progression and management, the Merchant and Discovery Board for their approved services, and the Blood Mirror for Blood Aspect progression after it is unlocked later in the game.
 3. Prepare and confirm the current Blood Aspect, Prosthetic, and Relic loadout as those systems become available; the Boat remains the final run-start confirmation point.
 4. Cross toward the island beneath the Blood Moon.
-5. Progress through combat, reward, Shrine, rest, shop, miniboss, and boss spaces.
-6. Build run power through Blood Aspect Tier choices, five slotted Techniques, slotless Supporting / Cross-family / Legendary Techniques, refinements, rare same-slot replacements, the equipped Relic benefit, resources, and other temporary rewards.
+5. Progress through Combat, reward, Shrine, Rest, Shop, miniboss, and boss spaces.
+6. Build run power through Blood Aspect Tier choices, five slotted Techniques, slotless Supporting / Cross-family / Legendary Techniques, refinements, rare same-slot replacements, the equipped Relic benefit, Gold/Shop decisions, temporary survival/capacity rewards, and other run-only rewards.
 7. Fill Corruption through combat accomplishments and choose Resist or Embrace at Shrines.
 8. Route toward previewed rewards that support build growth, survival, economy, or persistent progress.
 9. Die and reform at the Strand, or defeat the Eclipse Shogun and enter the Heart chamber.
@@ -59,7 +60,7 @@ The opening should reveal the return through brief gameplay presentation and sub
 2. Pressure enemies with katana attacks and movement.
 3. Block, dodge, or parry according to the telegraph and response rule.
 4. Use the selected Blood Aspect's Basic Attack sequence, Held Attack, Dash Attack, and Parry Counter according to timing and context.
-5. Build enemy posture while managing Akio's health, posture, Spirit Emblems, Corruption, and space after those systems are active.
+5. Build enemy posture while managing Akio's Health, posture, Spirit Emblems, Corruption, and space after those systems are active.
 6. Use the equipped Prosthetic, Relic benefit, and current Technique build to strengthen chosen combat patterns without replacing sword fundamentals.
 7. Exploit posture breaks and deathblow openings.
 8. Reposition around hazards, ranged pressure, restraints, and multi-enemy combinations.
@@ -73,7 +74,7 @@ The introductory first attempt is the deliberate exception: Akio has no active B
 
 The player should commonly establish several of the five direct combat slots across Areas 1 and 2, then continue deepening the build through remaining slots, slotless Supporting Techniques, Cross-family Techniques, refinements, rare replacements, and higher-rarity opportunities through Area 3. Filled direct slots normally stay committed unless a valid replacement offer explicitly overwrites that same slot.
 
-The same active build continues from the Shogun into an enabled Heart route. The exact recovery, resource carryover, and encounter tuning between those bosses remain future design work.
+The same active build continues from the Shogun into an enabled Heart route. The current survival prototype partially restores Health and Spirit before the Heart, with exact values owned by `ITEMS_AND_REWARDS.md`; all other temporary build state continues unless its owning system explicitly says otherwise. Final encounter tuning remains later work.
 
 ## Permanent progression boundary
 
@@ -81,8 +82,8 @@ Permanent progression may improve Akio, Run Infrastructure, Prosthetics, Relics,
 
 ## Design requirement
 
-Run systems should deepen the sword-combat loop rather than bypass it. A successful build may change timing, mobility, resource use, pressure, area coverage, control, delayed damage, or punish options, but Akio should still feel like a swordsman whose survival depends on reading combat correctly.
+Run systems should deepen the sword-combat loop rather than bypass it. A successful build may change timing, mobility, resource use, pressure, area coverage, control, delayed damage, punish options, economy, or survivability, but Akio should still feel like a swordsman whose survival depends on reading combat correctly.
 
 The seven-original/six-remaining Binding count, six Binding clears, seventh final-story run, two-phase Heart concept, canonical first-clear ending, and repeatable non-progressing postgame route are locked.
 
-The Heart encounter uses established combat systems and does not add a separate weak-point subsystem. Exact attacks, tuning, postgame route controls, and deferred modifiers or variants remain future design work.
+The Heart encounter uses established combat systems and does not add a separate weak-point subsystem. Exact attacks, final tuning, postgame route controls, and deferred modifiers or variants remain future design work.

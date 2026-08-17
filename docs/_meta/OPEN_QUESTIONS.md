@@ -15,47 +15,50 @@ Resolved rules belong in their authoritative files. Exact numerical tuning and p
 
 ## Question hierarchy rule
 
-Top-level questions should represent **large gameplay systems or production-wide packages**, not isolated subsystem details.
+Top-level questions should represent **large gameplay systems or production-wide packages**, not isolated subsystem tuning.
 
 Examples of details that should remain nested beneath an owning package rather than become headline agenda items include:
 
-- final Technique rarity probabilities or exact offer weights,
+- final Technique rarity probabilities or final offer weights after prototype validation,
+- final Shop prices, Gold values, recovery percentages, or capacity percentages,
 - exact Relic mastery thresholds, kill weighting, acquisition-source counts, Forge rank presentation, or transition-swap timing,
 - individual Prosthetic upgrade percentages, Scroll costs, Spirit values, or status durations,
 - exact Bloodwell node counts, Run Infrastructure values, or Blood Mirror mastery ranks,
-- final shop prices, encounter values, or tuned route percentages after prototype validation,
+- final encounter values, route-generation percentages, and room-clear timing,
 - final animation timings, VFX timing, hitboxes, damage values, and other playtest tuning.
 
 When a major system or package becomes the active design area, finish it at useful paper-design depth before moving to narrow balance work.
 
-## Approved dependencies
+# Approved dependencies
+
+## Core run build and progression
 
 - Launch Blood Aspects are **Wolf, Wraith, and Ronin**.
 - All three Tier 0-IV Aspect packages are locked at qualitative paper-design depth.
 - Five direct Technique slots are locked: **Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow**.
 - Supporting, Cross-family, and Legendary Techniques are slotless; there is **no global Technique inventory cap**.
 - The launch Technique catalog contains **50 actual Techniques plus 10 refinements** and is complete for current paper-design scope.
-- Technique rarity, prerequisites, direct-slot ownership, Supporting / Cross-family / Legendary eligibility, and refinement ownership are approved.
-- The launch Relic roster contains **10 Relics**, uses one equipped slot, persistent collection ownership, run-active effects, and **no rarity tiers**.
+- Technique rarity, prerequisites, direct-slot ownership, Supporting / Cross-family / Legendary eligibility, refinement ownership, and first-pass reward-screen generation are approved.
+- The launch Relic roster contains **10 Relics**, uses one equipped slot, persistent collection ownership, run-active effects, and no rarity tiers.
 - Relics gain persistent mastery from eligible enemy kills while equipped; only the currently equipped Relic advances.
-- Relic permanent progression and Strand-side management belong to the **Forge Bench** alongside Prosthetics. No separate Relic Reliquary is required in approved hub scope.
+- Relic permanent progression and Strand-side management belong to the **Forge Bench** alongside Prosthetics. No separate Relic Reliquary is required.
+- Merchant's Seal currently prototypes a **20% discount on the first purchase in each region**.
 - Prosthetic Techniques are removed; Prosthetic progression is persistent and belongs to the Forge.
 - The eight-Prosthetic launch roster and each tool's shallow linear Forge upgrade path are locked at qualitative paper-design depth.
 - Scrolls remain the primary persistent Forge currency for Prosthetic development.
 - The **Bloodwell** owns permanent progression for **Akio** and **Run Infrastructure**.
 - Run Infrastructure is one umbrella covering approved permanent improvements to Rest support, Shrine support, rewards, routing/run conditions, regional transitions, and related expedition support rather than separate upgrade trees.
-- The **Blood Mirror** owns permanent **Blood Aspect** progression, begins locked, and unlocks later through campaign/onboarding progression. Exact unlock timing and Aspect nodes remain later detailed design.
-- Blood Cavern trials, Technique pool unlocks, Discovery Board progress, Merchant services, the Boat, and Heart Binding state are not separate permanent upgrade trees in current scope.
+- The **Blood Mirror** owns permanent Blood Aspect progression, begins locked, and unlocks later through campaign/onboarding progression.
+- Blood Cavern trials, Technique-pool unlocks, Discovery Board progress, Merchant services, the Boat, and Heart Binding state are not separate permanent upgrade trees.
 - Backstabs are a universal positional combat classification based on genuinely striking an enemy from behind.
-- Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, Legendary, Relic, or highly upgraded Prosthetic.
+- Mandatory encounters cannot assume a particular Aspect Tier, Blood Art, Technique family, Legendary, Relic, highly upgraded Prosthetic, ideal economy, or ideal survival build.
 - The standard successful-run target remains approximately **45–50 minutes**.
-- The major-system production-scope audit is complete; no additional core gameplay system is currently required before continuing run integration.
 
-## Approved three-region run-structure state
+# Approved three-region run structure
 
-`docs/gameplay/RUN_STRUCTURE.md` owns the regional chamber and branching model. `docs/gameplay/ITEMS_AND_REWARDS.md` owns prototype room/reward weights and cadence.
+`docs/gameplay/RUN_STRUCTURE.md` owns the regional chamber and branching model. `docs/gameplay/ITEMS_AND_REWARDS.md` owns prototype room/reward weights, economy, recovery, and capacity values.
 
-### Hushiro Gate Village
+## Hushiro Gate Village
 
 - **12 counted chambers**.
 - Chambers **1–3** opening, **4–8** main, **9–11** pre-boss, **12** Keeper of the Gate.
@@ -65,7 +68,7 @@ When a major system or package becomes the active design area, finish it at usef
 - Chamber 11 guarantees access to meaningful pre-boss preparation.
 - Current active-time target: approximately **14–16 minutes**.
 
-### Yomori Grove
+## Yomori Grove
 
 - **10 counted chambers**.
 - Chambers **1–2** opening, **3–7** main, **8–9** pre-boss, **10** Twin Maws.
@@ -75,7 +78,7 @@ When a major system or package becomes the active design area, finish it at usef
 - Chambers 8–9 ensure at least one meaningful pre-boss preparation route.
 - Current active-time target: approximately **12–14 minutes**.
 
-### Kagutsuchi Court
+## Kagutsuchi Court
 
 - **11 counted chambers**.
 - Chambers **1–2** Court entrance, **3–7** main Court, **8–10** final Court / Shogun approach, **11** Eclipse Shogun.
@@ -85,7 +88,7 @@ When a major system or package becomes the active design area, finish it at usef
 - Heart approach, Binding completion, and the true-final Heart are outside Kagutsuchi's counted chamber total.
 - Current active-time target: approximately **15–17 minutes**.
 
-### Shared route-generation prototype
+## Shared route-generation prototype
 
 - Current regional baseline is **33 counted chambers total: 12 + 10 + 11**.
 - Branch count prototype:
@@ -99,56 +102,70 @@ When a major system or package becomes the active design area, finish it at usef
   - main: **70% Combat / 8% Shrine / 7% Rest / 7% Shop / 8% Treasure**,
   - pre-boss/final: **58% Combat / 5% Shrine / 13% Rest / 13% Shop / 11% Treasure**.
 - Minibosses and bosses are injected/fixed rather than rolled from the room table.
-- Standard-combat Technique weight declines from **36% Hushiro → 32% Yomori → 28% Kagutsuchi** as survival/optimization value rises.
-- Normal successful-route targets include roughly **20–22 standard combat chambers**, **7–9 Technique pickups for a Technique-invested run**, **4–5 Shrine opportunities**, and approximately **1–2 visits each to Shops, Rests, Treasures, and minibosses**.
+- Standard-Combat Technique weight declines from **36% Hushiro → 32% Yomori → 28% Kagutsuchi** as survival/optimization value rises.
+- Normal successful-route targets include roughly **20–22 standard Combat chambers**, **7–9 Technique pickups for a Technique-invested run**, **4–5 Shrine opportunities**, and approximately **1–2 visits each to Shops, Rests, Treasures, and minibosses**.
 - Consumables have **0% primary room-reward weight** in this first prototype.
 - Previewed choices, hard opportunity safeguards, no routine backtracking, no duplicate primary rewards on normal two-door choices, no back-to-back ordinary safe-service rooms, and dead-late-Gold suppression remain part of controlled generation.
 - These percentages are approved prototype values and may be tuned through playtesting without reopening the underlying architecture.
 
-## Approved Technique roster state
+# Approved Technique offer-generation state
 
-The Technique content roster is complete for current paper-design scope. `docs/gameplay/TECHNIQUE_CATALOG.md` owns the full 50-Technique roster, individual rarities, Supporting / Cross-family / Legendary prerequisites, and the 10 refinements.
+`docs/gameplay/TECHNIQUES.md` owns the first Technique offer-generation prototype.
 
-The roster should not be expanded merely to hit a larger count. New or replacement Techniques should be added only when prototype or integration testing exposes a concrete gap, overlap, balance issue, readability problem, or compatibility problem.
+- A normal Technique reward presents **3 choices**.
+- Generation order is **eligibility → required Direct/flex composition → rarity/source weighting → specific selection → final screen validation**.
+- With 3–5 direct slots empty, at least 2 offers are Direct; with 1–2 empty, at least 1 is Direct; with none empty, all 3 may be flex offers.
+- Hushiro Chamber 1 presents 3 Direct options from different slots and families where possible.
+- Standard-Combat Common/Uncommon/Rare weighting is **55/35/10 Hushiro**, **35/45/20 Yomori**, and **20/45/35 Kagutsuchi**.
+- Shops shift 10 percentage points from Common into Rare. Treasure uses **10/40/50**, minibosses **0/35/65**, and regional bosses **0/25/75**.
+- Eligible Legendaries use a separate source-specific appearance check; no Legendary pity exists in the first prototype.
+- Cross-family Techniques receive 1.5× selection weight inside the Rare pool when eligible.
+- Refinements, replacements, Cross-family cards, and Legendaries each have one-card-per-screen limits.
+- Hushiro replacements are disabled. Yomori/Kagutsuchi replacements use low regional chances, with a modest premium-source bonus.
+- Rerolls regenerate the full screen while preserving source quality and build-stage composition rather than automatically upgrading rarity.
+- Final offer percentages remain playtest-tunable.
 
-The active Technique-system question is now **offer generation and rarity/source weighting**: how eligible Techniques are selected into the reward screen, how rarity changes by source and region, and how replacement/refinement/Legendary opportunities are prevented from crowding out basic build formation.
+# Approved Gold / Shop and survival state
 
-## Approved Relic state
+`docs/gameplay/ITEMS_AND_REWARDS.md` owns the current economy and survival prototypes.
 
-`docs/gameplay/RELICS.md` owns the approved **10-Relic launch roster**, system boundaries, and mastery direction.
+## Gold / Shops
 
-Relic progression is based on combat use: only the equipped Relic receives persistent mastery from eligible enemy kills earned while it is equipped. Switching during approved run transitions redirects future kill progress to the newly equipped Relic. The **Forge Bench** owns Relic progression / management at the Strand, while exact rank realization, costs if any, mastery thresholds, acquisition sources, and transition-swap timing remain later detailed decisions.
+- Normal runs begin at 0 Gold unless an approved effect changes starting Gold.
+- Standard Gold rewards are **60 Hushiro / 70 Yomori / 80 Kagutsuchi**.
+- Minor Gold drops are **5–10**.
+- A Shop presents **3 purchasable items** across Survival / Build / Flex roles.
+- All affordable displayed items may be purchased; there is no one-purchase limit.
+- Prototype prices are stable across regions: moderate recovery 30–35, large recovery 50–55, reroll 45, temporary capacity 60–65, Technique 100, eligible Relic opportunity 140 Gold.
+- Shop inventory itself does not reroll in the first prototype.
+- An eligible flex slot has roughly a 10% chance to become a Relic opportunity.
+- Gold cannot appear as a primary reward after the final realistic Shop opportunity.
 
-## Approved Prosthetic / Forge state
+## Survival / recovery / capacity
 
-`docs/gameplay/PROSTHETICS.md` owns the approved eight-tool roster and permanent Prosthetic Forge paths.
+- Standard recovery: **25% max Health** or **35% max Spirit**.
+- Rest: **35% max Health + 50% max Spirit**.
+- Below-full-Corruption Shrine support: **20% max Health** or **25% max Spirit**.
+- Normal temporary capacity: **+15% starting max Health** or **+20% starting max Spirit**, also adding the same amount to current resource.
+- Capacity stacks additively from starting maximum.
+- Treasure major recovery: **50% Health / 65% Spirit**; enhanced capacity **+20% Health / +25% Spirit**.
+- Minibosses may grant enhanced capacity but do not use pure healing as a primary reward.
+- Keeper/Twin Maws transitions restore **20% Health / 35% Spirit** and enforce **35% Health / 50% Spirit** next-region floors.
+- The seventh-story-run Shogun→Heart handoff restores **30% Health / 50% Spirit** and enforces **40% Health / 60% Spirit** Heart-entry floors.
+- A normal successful run is expected to take roughly 1–2 capacity improvements; a survival-focused route may take roughly 3–4.
+- No special automatic pre-boss heal is added; preparation remains an existing Rest/Shop/Technique/Treasure route choice.
 
-The roster remains:
+# Approved Relic / Prosthetic / station state
 
-- Beast-Bane Whistle
-- Thunder Rod
-- Smoke Gourd
-- Fang Harpoon
-- Mirror Umbrella
-- Flame Vent
-- Mist Raven
-- Bloodletting Gourd
+The approved launch Relic roster remains 10 items with one equipped slot and persistent individual mastery. Exact Relic acquisition allocation, mastery thresholds, Forge rank realization, most values, and transition-swap timing remain later design.
 
-The Prosthetic progression structure is locked as **shallow and linear**. Two upgrades are the default; a third is used only when a base tool already contains multiple distinct properties worth improving. Current paths contain no mutually exclusive branches.
+The approved eight Prosthetics remain functionally complete when unlocked with shallow linear Forge paths that improve existing properties only. Exact percentages, costs, Spirit values, damage, status values, timing, and unlock thresholds remain implementation/playtest tuning.
 
-Forge upgrades improve properties already present in the unlocked tool. They do not add alternate attacks, new combat roles, unrelated statuses, new active abilities, or another Technique-style build layer.
-
-Exact costs, percentages, Spirit values, damage, status values, timing, and unlock thresholds remain implementation/playtest tuning rather than top-level design blockers.
-
-## Approved permanent-upgrade station scope
-
-Current launch scope uses three permanent upgrade stations:
+Current launch permanent-upgrade stations remain:
 
 1. **Bloodwell — Akio + Run Infrastructure**
 2. **Forge Bench — Prosthetics + Relics**
 3. **Blood Mirror — Blood Aspects**, with the Mirror locked at the beginning and introduced later
-
-Exact node rosters, values, rank counts, currencies beyond already approved ownership, interface layouts, mastery thresholds, and precise unlock timing are intentionally deferred.
 
 The old Forge weapon-development model, fixed Bloodwell `Way of Steel / Way of Secrets / Way of Vows` tree, separate Relic Reliquary direction, and four-active-plus-reserve Technique loadout are not current design.
 
@@ -160,32 +177,27 @@ The old Forge weapon-development model, fixed Bloodwell `Way of Steel / Way of S
 
 # 1. Full-run integration, rewards, encounters, and pacing
 
-The 33-chamber structure and first controlled-procedural branch/room/reward weighting model are approved at prototype level.
+The regional chamber structure, route generation, Technique offer generation, Gold/Shop economy, and survival/recovery/capacity model are now approved at prototype paper-design depth.
 
-Continue one layer deeper by defining **Technique offer generation and rarity/source weighting**:
+The next reward-value layer is **persistent-resource payout design**:
 
-- number of Technique choices shown per reward,
-- rarity probabilities by region and reward source,
-- offer-generation order after eligibility filtering,
-- how empty direct slots compete with Supporting/refinement/Cross-family opportunities,
-- rare same-slot replacement frequency,
-- Legendary appearance behavior after prerequisites are met,
-- duplicate/repeat-family handling,
-- source quality bonuses for Treasure, minibosses, Shops, and regional bosses,
-- reroll behavior,
-- and safeguards against reward screens that are technically valid but strategically dead.
+- Mist quantity for ordinary primary rewards,
+- Scroll quantity for ordinary primary rewards,
+- Treasure/miniboss/boss persistent-resource bonuses,
+- Boss Emblem cadence and which progression gates actually consume them,
+- expected persistent-resource earnings on failed versus successful runs,
+- and how attractive persistent-resource routes should be relative to immediate Technique, Shrine, economy, and survival power.
 
-After that, continue into:
+After persistent-resource payouts, continue full-run integration with:
 
-- Gold income and Shop pricing,
-- exact Shop inventory structure,
-- regional boss current-run reward weighting,
-- Relic acquisition allocation and transition-swap placement,
-- remaining recovery/capacity values,
-- encounter composition and expected clear-time tuning,
-- and playable validation of the 45–50-minute successful-run target.
+- regional-boss current-run reward mix,
+- final Relic acquisition allocation and transition-swap placement,
+- consumables include/cut confirmation if still needed,
+- encounter composition and expected room-clear-time tuning,
+- full-run simulation against the 45–50-minute target,
+- and playable validation of all prototype route/economy/recovery values.
 
-The numerical values in this package remain **prototype targets**, not immutable final balance law. Final combat damage/stats, economy tuning, and generation percentages require playable validation.
+The numerical values in this package remain **prototype targets**, not immutable final balance law.
 
 # 2. Narrative delivery and campaign presentation
 
@@ -222,4 +234,4 @@ Do not expand the base game with difficulty modifiers, large variant systems, or
 
 ## Deferred implementation and balance work
 
-Keep final values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, tuned room/reward probability weights after prototype validation, prices, final rarity probabilities, final offer weights, replacement rates, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, Bloodwell/Run Infrastructure node values, Blood Mirror Aspect-upgrade values, and final VFX/animation timing.
+Keep final values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, final route/reward percentages after prototype validation, final Technique offer rates, final Shop prices and recovery/capacity values, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, Bloodwell/Run Infrastructure node values, Blood Mirror Aspect-upgrade values, and final VFX/animation timing.

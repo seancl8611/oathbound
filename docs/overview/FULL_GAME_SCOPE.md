@@ -16,6 +16,8 @@ topics:
   - the-heart
   - postgame
   - regional-routing
+  - economy
+  - survival
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
@@ -24,12 +26,13 @@ related:
   - GAMEPLAY-RELICS
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-ITEMS-REWARDS
   - META-OPEN-QUESTIONS
 ---
 
 # Full Game Scope
 
-This document defines Oathbound's current production-level shape. It does not lock final balance values, final route algorithms, frame data, final attack timings, permanent-upgrade values, or other implementation details that require prototyping and playtesting.
+This document defines Oathbound's current production-level shape. Prototype percentages and reward values may change through playable validation without reopening the underlying system architecture. Final combat values, frame data, permanent-upgrade values, and other implementation details remain later work.
 
 ## Master scope
 
@@ -82,7 +85,9 @@ After Returning Blood awakens, launch scope includes:
 - rare same-slot replacement offers,
 - four Technique rarity tiers: Common, Uncommon, Rare, Legendary,
 - one equipped Prosthetic with permanent Forge progression,
-- and one equipped Relic from the persistent 10-Relic collection.
+- one equipped Relic from the persistent 10-Relic collection,
+- Gold/Shop economy,
+- and temporary Health/Spirit recovery and capacity rewards.
 
 There is **no global Technique inventory cap**. Direct combat actions remain limited by their five action-specific slots, while eligible Supporting, Cross-family, Legendary, and refinement growth is constrained by reward access, prerequisites, route choices, and run length.
 
@@ -119,7 +124,17 @@ Backstabs remain universal positional hits based on actually reaching the enemy'
 
 `TECHNIQUE_CATALOG.md` owns the complete 50-Technique roster, rarity assignments, prerequisites, and refinements.
 
-Technique reward cadence now has a first approved prototype target through the full-route reward model. The next Technique-specific integration layer is **offer generation and rarity/source weighting**, including replacement/refinement/Legendary appearance behavior and source-quality differences.
+Technique reward frequency and first-pass offer generation are now approved at prototype depth:
+
+- the normal Technique screen presents **3 choices**,
+- eligibility is resolved before screen composition and rarity,
+- early screens protect direct build formation while mature builds shift toward flex offers,
+- Hushiro/Yomori/Kagutsuchi use progressively higher Rare weighting,
+- Shops, Treasure, minibosses, and regional bosses use stronger source-quality weighting,
+- refinements, replacements, Cross-family Techniques, and Legendaries have explicit screen limits and prototype appearance behavior,
+- and rerolls regenerate the complete screen without automatically improving quality.
+
+Final offer rates remain playtest-tunable.
 
 ## Relic scope boundary
 
@@ -137,7 +152,7 @@ Launch scope uses:
 
 The approved roster is Traveler's Coin, Merchant's Seal, Iron Prayer Bead, Spirit Tassel, Execution Bead, Wayfarer's Charm, Last Oath, Unbroken Cord, Scribe's Lens, and Blood Moon Shard.
 
-No separate Relic Reliquary is required in current hub scope. Exact acquisition allocation, mastery ranks, Forge presentation, costs if any, swap timing, and numerical values remain later implementation/content work.
+Merchant's Seal currently prototypes a **20% discount on the first purchase in each region**. No separate Relic Reliquary is required in current hub scope. Exact acquisition allocation, mastery ranks, Forge presentation, costs if any, swap timing, and most numerical values remain later implementation/content work.
 
 ## Permanent progression scope
 
@@ -186,11 +201,13 @@ Launch balance must support:
 - Tier 0-I with a strong coherent Technique build,
 - Tier II with a solid Technique build as a common hybrid,
 - Tier III with less-developed horizontal upgrades as deliberate Aspect specialization,
-- occasional Tier IV high-roll runs.
+- occasional Tier IV high-roll runs,
+- economy-focused routes that exchange immediate rewards for flexible Shop purchasing,
+- and survival-focused routes that increase recovery/capacity at meaningful opportunity cost.
 
-Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, Relic, or heavily developed permanent progression.
+Mandatory encounters must not assume a particular Tier, Blood Art, Technique family, Legendary, Relic, heavily developed permanent progression, ideal economy, or ideal survival build.
 
-## Run-duration and route target
+## Run-duration, route, economy, and survival target
 
 A normal successful Binding run targets approximately **45–50 minutes** of active time.
 
@@ -202,22 +219,33 @@ The current regional prototype budgets are:
 
 The complete regional route contains **33 counted chambers** before specialized Heart-route spaces.
 
-The approved first route-generation prototype adds:
+The approved route-generation prototype adds:
 
 - opening branch frequency: **50% one exit / 50% two exits**,
 - main-stretch branch frequency: **25% one exit / 70% two exits / 5% three exits**,
 - pre-boss/final branch frequency: **45% one exit / 55% two exits**,
 - a target of roughly **17–19 multi-exit decisions** per normal successful run,
 - room-type weighting that keeps Combat dominant while increasing Shop/Rest access near bosses,
-- region-specific standard-combat reward weights with Technique emphasis decreasing from Hushiro to Kagutsuchi,
-- a target of roughly **20–22 standard combat chambers** on a completed route,
+- region-specific standard-Combat reward weights with Technique emphasis decreasing from Hushiro to Kagutsuchi,
+- a target of roughly **20–22 standard Combat chambers** on a completed route,
 - approximately **7–9 Technique pickups** for a Technique-invested successful run,
 - roughly **4–5 Shrine opportunities** across a typical run,
 - and approximately **1–2 normally visited Shops, Rests, Treasures, and minibosses**.
 
+The approved first Gold/Shop prototype uses:
+
+- standard Gold rewards of **60 Hushiro / 70 Yomori / 80 Kagutsuchi**,
+- **3 purchasable items** per Shop across Survival / Build / Flex roles,
+- stable regional prices,
+- **100 Gold** for a Technique reward and **140 Gold** for an eligible Relic opportunity,
+- no Shop inventory reroll in the first prototype,
+- and no primary Gold reward after the final realistic Shop opportunity.
+
+The approved first survival/recovery prototype uses percentage-based Health/Spirit values so final base stats remain open. It defines standard recovery, Rest, Shop, Shrine, Treasure, temporary capacity, miniboss capacity rewards, post-Keeper/post-Twin-Maws recovery floors, and the partial Shogun-to-Heart recovery handoff. Temporary capacity stacks additively from starting maximum and resets at run end.
+
 Controlled-generation safeguards prevent repeated forced corridors, duplicate normal two-door rewards, back-to-back ordinary safe-service rooms, missing required regional opportunities, and dead late Gold. Consumables have 0% ordinary primary-room reward weight in this first prototype.
 
-These are prototype values for implementation and playtesting, not final balance law.
+These are implementation/playtest targets, not immutable final balance law.
 
 ## The Strand
 
@@ -279,11 +307,11 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Current open production scope
 
-The major-system production-scope audit, all three regional chamber structures, and the first controlled-procedural route-generation/reward-weighting model are complete at prototype depth.
+The major-system production-scope audit, all three regional chamber structures, first controlled-procedural route-generation/reward-weighting model, Technique offer-generation/source-quality model, Gold/Shop economy, and survival/recovery/capacity prototype are complete at paper-design depth.
 
 Current broad sequence:
 
-1. **Continue full-run integration, rewards, encounters, and pacing** with Technique offer generation and rarity/source weighting, followed by Gold/Shop economy, remaining reward values, encounter composition, and playable pacing validation.
+1. **Continue full-run integration, rewards, encounters, and pacing** with persistent-resource payouts: Mist and Scroll quantities, Boss Emblem cadence/ownership, and the opportunity cost between permanent progression and immediate run power. Then resolve regional-boss reward mix, Relic acquisition/swap placement, encounter composition/clear-time tuning, and playable pacing validation.
 2. **Define narrative delivery and campaign presentation.**
 3. **Define endgame, postgame, and release scope.**
 
@@ -291,6 +319,6 @@ Exact Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, B
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, final tuned route-generation percentages after prototype validation, Technique rarity/source weights, Shop prices, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Final frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, Blood values, Tier-growth percentages, collision, pathing, final tuned route-generation percentages after prototype validation, final Technique rarity/source weights, final Shop prices, final recovery/capacity values, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system and the older alternate-weapon development model are not part of the game.

@@ -18,6 +18,7 @@ related:
   - ART-MILESTONE-01
   - ART-MILESTONE-02
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-ROOM-TYPES
 ---
 
@@ -118,7 +119,7 @@ Chamber 1 is a fixed standard combat encounter followed by a Technique reward. O
 
 The route network must contain at least one Shrine, one Shop, one Rest, one miniboss opportunity, and three Technique-reward opportunities total including Chamber 1. These are route opportunities rather than mandatory visits. Chamber 11 guarantees access to a meaningful pre-boss preparation option without requiring automatic full recovery.
 
-The region currently targets approximately **14–16 minutes** of active run time. Detailed generation rules, chamber eligibility, and transition behavior are owned by `docs/gameplay/RUN_STRUCTURE.md`; exact percentage weights and encounter compositions remain playtest tuning.
+The region currently targets approximately **14–16 minutes** of active run time. `RUN_STRUCTURE.md` owns chamber eligibility/branching and `ITEMS_AND_REWARDS.md` owns the approved first room/reward/economy/recovery prototype. Final tuned percentages, encounter compositions, and clear times remain playtest work.
 
 ## Production relationship
 
