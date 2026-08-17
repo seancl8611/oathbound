@@ -14,6 +14,7 @@ topics:
   - gold-economy
   - room-rewards
   - reward-weighting
+  - reward-cadence
   - shops
   - recovery
   - temporary-capacity
@@ -272,6 +273,20 @@ Minibosses are deliberately injected into their approved windows and regional bo
 
 Relics are not part of the ordinary standard-Combat table. Consumables have **0% ordinary primary-room reward weight** in the first prototype.
 
+## Prototype cadence targets
+
+Across a normal successful 33-chamber route, use these first-pass cadence targets:
+
+- roughly **20–22 standard Combat chambers**,
+- roughly **4–5 Shrine opportunities visible**, with about **2–3 normally chosen**,
+- roughly **3–4 Shop opportunities visible**, with about **1–2 normally visited**,
+- roughly **3–4 Rest opportunities visible**, with about **1–2 normally visited**,
+- roughly **1–2 Treasure rooms normally taken**,
+- roughly **1–2 minibosses normally fought** despite one miniboss opportunity existing in each regional route network,
+- roughly **1–2 total temporary-capacity improvements** on a normal successful run, with survival-focused routes able to take roughly **3–4**.
+
+These are expected pacing ranges rather than quotas. A player may intentionally sacrifice one category for another through route choice. Technique cadence is specified below because it also depends on build eligibility and offer generation.
+
 # Technique rewards
 
 A Technique reward uses the universal three-choice screen and generation rules in `TECHNIQUES.md` regardless of source. Standard Combat is the primary source; Shops, Treasure, minibosses, regional bosses, and explicitly approved sources may use the same system with their approved source-quality weighting.
@@ -325,8 +340,6 @@ Rest does not fully reset attrition and does not provide Technique respec behavi
 ## Miniboss survival rewards
 
 A miniboss may use enhanced Health or Spirit capacity as its premium primary reward. Pure healing is not a primary miniboss reward in the first prototype.
-
-A normal successful run is expected to take roughly **1–2** capacity improvements total; a survival-focused route may take roughly **3–4** at the cost of other rewards.
 
 # Shops
 
