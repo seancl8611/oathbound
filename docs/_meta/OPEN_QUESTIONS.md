@@ -27,6 +27,8 @@ The following major architecture is already established and should not be reopen
 - five direct Technique slots plus slotless Supporting / Cross-family / Legendary Techniques,
 - 50-Technique launch roster plus 10 refinements,
 - 10-Relic launch roster with one equipped slot,
+- Relic acquisition split of 4 guaranteed campaign/Strand, 2 Blood Cavern/challenge, and 4 run-discovered Relics,
+- Relic swapping at the Forge before a run, after Keeper, after Twin Maws, or immediately on a new discovery,
 - eight Prosthetics with shallow linear Forge progression,
 - three permanent upgrade stations: Bloodwell, Forge Bench, later-unlocked Blood Mirror,
 - three-region 33-chamber prototype route: 12 Hushiro / 10 Yomori / 11 Kagutsuchi,
@@ -44,6 +46,7 @@ Current values and exact rules live in:
 - `docs/gameplay/RUN_STRUCTURE.md`
 - `docs/gameplay/TECHNIQUES.md`
 - `docs/gameplay/ITEMS_AND_REWARDS.md`
+- `docs/gameplay/RELICS.md`
 - `docs/gameplay/PROGRESSION.md`
 
 # Priority order
@@ -53,21 +56,6 @@ Current values and exact rules live in:
 3. **Define endgame, postgame, and release scope**
 
 # 1. Full-run integration, rewards, encounters, and pacing
-
-## Relic acquisition and in-run swap placement
-
-The 10-Relic roster and one-slot mastery model are approved. Keeper and Twin Maws Boss Reward Flex cards may now surface eligible Relic opportunities, and the Shop Flex slot may also do so.
-
-Still decide:
-
-- launch acquisition allocation across boss rewards, Treasure, trials, discoveries, NPC progression, or other approved sources,
-- whether all 10 must be obtainable before story completion,
-- the limited in-run moments where an equipped Relic may be replaced/swapped,
-- how newly discovered Relics interact with the currently equipped Relic.
-
-Do not create another Relic rarity/currency system to solve acquisition.
-
-**Authority:** `docs/gameplay/RELICS.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`.
 
 ## Consumables include/cut
 
