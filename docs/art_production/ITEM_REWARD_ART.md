@@ -4,9 +4,10 @@ title: Item, Pickup, and Reward Art
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - currencies
+  - boss-materials
   - pickups
   - techniques
   - relics
@@ -15,6 +16,7 @@ topics:
   - reward-markers
 related:
   - GAMEPLAY-ITEMS-REWARDS
+  - GAMEPLAY-PROGRESSION
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
   - UI-TECHNIQUE-REWARDS
@@ -26,33 +28,51 @@ related:
 
 # Item, Pickup, and Reward Art
 
-Item art must connect in-world pickups, route markers, HUD icons, Technique cards, Relic objects, and reward containers through one readable visual language. Silhouette and economic role take priority over decorative detail.
+Item art connects world pickups, route markers, HUD icons, Technique cards, Relic objects, boss rewards, and reward containers through one readable language. Silhouette and gameplay/economic role take priority over decoration.
 
-## Currency items
+# Currency items
 
 | Currency | World and icon language |
 |---|---|
 | Mist | Pale blue-white wisp or orb; broad persistent meta currency |
 | Scroll | Rolled paper with red Order ribbon; Forge-focused Prosthetic currency |
-| Boss Emblem | Dark ornate metal token with Order sigil; rare major-gate currency |
 | Gold | Clear coin silhouette; run economy |
 
-Pickup sprite and HUD icon must share the same core silhouette. Corruption is not a physical pickup.
+There is no generic Boss Emblem token/icon family.
 
-## Health, Spirit, and temporary capacity
+# Regional boss materials
+
+Keeper of the Gate, Twin Maws, and Eclipse Shogun each require **one distinct persistent boss-material representation**.
+
+These are low-count physical remnants/trophies rather than another uniform currency-token family.
+
+Production direction:
+
+- each material should visibly belong to its source boss,
+- the three materials should remain distinguishable at small UI scale,
+- they may share a restrained `major permanent material` frame/icon treatment without sharing the same object silhouette,
+- exact object concepts and player-facing item names remain deferred until the item naming/art brief pass,
+- Rootfang and Briarthorn share one Twin Maws material family rather than creating two separate counters,
+- minibosses do not require their own permanent material families.
+
+The material should read as valuable and scarce without implying a crafting inventory full of dozens of monster parts.
+
+# Health, Spirit, and temporary capacity
 
 - **Health:** warm muted red, paired to the HP bar.
-- **Spirit:** warm amber with restrained ember flicker, paired to Spirit emblems.
+- **Spirit:** warm amber with restrained ember flicker, paired to Spirit presentation.
 
 Temporary maximum-Health and maximum-Spirit rewards must be more substantial than ordinary recovery pickups while remaining visibly related to their underlying resource.
 
-## Route reward markers
+# Route reward markers
 
-Branching routes need preview symbols for Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss rewards where those categories are available.
+Branching routes need preview symbols for Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, Rest, Shop, Treasure, Miniboss, and Boss where available.
+
+Regional boss materials are fixed post-boss persistent rewards and do **not** need their own normal route-choice marker.
 
 Markers should feel like ritual signs, hanging tags, lantern emblems, carved seals, or regionally integrated wayfinding rather than abstract neon game icons. Color cannot be the only differentiator.
 
-## Technique presentation
+# Technique presentation
 
 Techniques appear as temporary blood-stabilized martial knowledge represented through ritual slips, inked action diagrams, seals, tokens, or offering objects rather than modern floating loot cards.
 
@@ -61,52 +81,38 @@ A Technique card may need to communicate:
 - icon,
 - name,
 - rarity,
-- affected combat slot when direct,
+- affected direct combat slot,
 - concise effect,
-- prerequisite or supporting relationship when relevant,
-- refinement or replacement state when relevant.
+- prerequisite/supporting relationship,
+- refinement/replacement state.
 
-The five direct combat slots are Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow.
+The five direct slots are Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow. Supporting / Cross-family / Legendary Techniques are slotless.
 
-Supporting Techniques consume no combat slot and require a visually distinct relationship from direct slotted Techniques without becoming a completely separate visual product family.
+The current roster is **50 actual Techniques + 10 refinements**. Reusable card templates should be approved before unique icon production.
 
-The five approved family mechanics are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**. The current roster contains **50 actual Techniques plus 10 refinements**. Exact player-facing family names, symbols, colors, and final card treatment remain provisional; recognition may use symbols, color, seals, motion language, VFX motifs, or effect wording. Color alone is insufficient.
+Required reusable states include offered, focused, selected, slotted, supporting, refined, unavailable/invalid, replacement preview, declined/fallback, and reroll-ready.
 
-Required Technique UI art states currently include offered, focused, selected, slotted, supporting, refined, unavailable or invalid, replacement preview, declined/fallback reward, and reroll-ready when implemented.
+The retired reserve/inactive Technique state is not required.
 
-The retired reserve/inactive Technique state and reserve-overwrite warning are no longer required.
-
-## Refinement presentation
-
-A refinement should look like a deeper or completed version of the same slotted Technique rather than a separate unrelated card family.
-
-Possible treatment includes a second ink pass, completed seal mark, stronger border knot, attached notation strip, restrained Blood channel, or clear refinement icon.
-
-## Breakable props
+# Breakables
 
 - **Area 1:** wood crates, barrels, ceramic jars, damaged village containers.
 - **Area 2:** rotted stumps, cracked Shrine offerings, bone piles, root-bound containers.
 - **Area 3:** ornamental urns, lacquered boxes, ceremonial jars.
 
-Each breakable needs intact and broken states; a damaged middle state is optional where cost-effective.
+Each breakable needs intact and broken states; a middle damaged state is optional.
 
-## Treasure chests and reward objects
-
-Major rewards are larger and more prominent than breakables:
+# Treasure and high-value reward objects
 
 - **Area 1:** bound wooden lockbox with iron banding.
 - **Area 2:** root-grown offering bowl or Shrine container.
 - **Area 3:** ornate lacquered chest with gold trim.
 
-Required states are unopened and opened/spent. Treasure, miniboss, and regional boss reward frames should use increasing presentation hierarchy while reusing the same card and icon language where appropriate.
+Treasure, miniboss, and regional boss rewards should use increasing presentation hierarchy while reusing the same underlying reward-card/icon language where appropriate.
 
-## Relic visual family
+# Relics
 
-The approved launch roster contains **10 Relics**. Relics do **not** use rarity tiers.
-
-Relics should read as distinct collectible physical objects rather than another Technique-card family. The working object language may include coins, seals, beads, tassels, cords, charms, lenses, shards, and other small recovered artifacts appropriate to each named Relic.
-
-The ten approved names are:
+The launch roster contains **10 Relics** with no rarity tiers:
 
 - Traveler's Coin
 - Merchant's Seal
@@ -119,16 +125,14 @@ The ten approved names are:
 - Scribe's Lens
 - Blood Moon Shard
 
-Each Relic needs a recognizable collection/equip icon and a readable representation within the **Forge Bench's Relic management/progression category**. A separate Relic Reliquary environment or UI family is not required.
+Relics should read as collectible physical objects, not Technique cards or boss materials. Each needs a recognizable collection/equip icon and representation within the Forge Bench's Relic management/progression UI.
 
-Relic mastery/progression states should reuse the object's existing identity rather than create rarity-badge families or a Technique-like branching-card language.
+A separate Relic Reliquary environment/UI family is not required.
 
-Exact object sprite treatment, mastery/upgrade-state variants, acquisition presentation, and transition-swap UI remain later production work.
+# Delivery expectations
 
-## Delivery expectations
-
-- Icons must work at HUD scale and selection-interface scale.
-- World pickups, route markers, and corresponding UI icons must remain visibly related where a Relic appears as an in-run reward.
+- Icons must work at HUD/result/interface scale.
+- World pickups and matching UI icons should share the same silhouette language.
+- Persistent boss materials require three source-specific object/icon concepts, not a generic emblem recolor.
 - Area-specific objects inherit regional material language.
-- Reusable Technique card, combat-slot, supporting-upgrade, refinement, comparison, and warning templates should be approved before producing a full catalog.
-- The approved 50-Technique roster and 10-Relic roster may guide individual icon planning now; exact animation/VFX treatment still follows implementation briefs.
+- Markdown gameplay authorities determine resource ownership; art documents do not create currencies or reward mechanics.
