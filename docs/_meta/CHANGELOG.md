@@ -9,6 +9,22 @@ last_reviewed: 2026-08-16
 
 # Documentation Changelog
 
+## 2026-08-16 — Technique offer, Gold economy, and survival prototype lock
+
+- Locked the first Technique offer-generation model around **3-choice reward screens** built through eligibility filtering, Direct/flex composition, rarity/source weighting, specific selection, and final validation.
+- Added build-stage Direct-offer minimums and made Hushiro Chamber 1 present three Direct choices from distinct slots/families where possible.
+- Locked standard-combat Common/Uncommon/Rare Technique weighting at **55/35/10 Hushiro**, **35/45/20 Yomori**, and **20/45/35 Kagutsuchi**.
+- Added stronger Technique quality weighting for Shops, Treasure, minibosses, and regional bosses; added separate Legendary appearance checks; limited refinement/replacement/Cross-family/Legendary cards to one each per screen; and defined reroll behavior.
+- Locked the first Gold economy around **60/70/80 Gold** standard rewards by region, minor 5–10 Gold drops, three-item Shops, stable regional prices, all-affordable-item purchasing, no Shop-inventory reroll, and dead-late-Gold suppression.
+- Locked prototype Shop prices including **100 Gold Technique rewards** and **140 Gold Relic opportunities**.
+- Set Merchant's Seal to a prototype **20% discount on the first purchase in each region**.
+- Locked percentage-based survival values without choosing final base Health/Spirit totals: standard recovery, Rest, below-full Shrine support, normal/premium temporary capacity, Treasure survival rewards, and miniboss capacity rewards.
+- Locked Keeper/Twin Maws transition recovery at **20% Health / 35% Spirit** with **35% Health / 50% Spirit** entry floors.
+- Locked the seventh-story-run Shogun→Heart handoff at **30% Health / 50% Spirit** with **40% Health / 60% Spirit** entry floors.
+- Corrected the remaining live Technique-reward UI reference to superseded Crimson `Burst`; current Crimson language is Vulnerable / backstab / direct Health damage.
+- Advanced the next reward-value dependency to **persistent-resource payout design** for Mist, Scrolls, and Boss Emblems.
+- Updated Technique, Technique UI, Items/Rewards, Run Structure, Corruption/Shrines, Relics, gameplay status, Full Game Scope, Production Roadmap, Open Questions, and Decision Log for consistency.
+
 ## 2026-08-16 — Full-route branch and reward-generation prototype lock
 
 - Locked the first controlled-procedural generation values for the complete 33-chamber regional route.
@@ -20,7 +36,7 @@ last_reviewed: 2026-08-16
 - Excluded Relics from the ordinary combat-reward table and set consumables to **0% ordinary primary room-reward weight** for the first prototype.
 - Set working cadence targets of roughly **20–22 standard combat chambers**, **7–9 Technique pickups for a Technique-invested run**, **4–5 visible Shrine opportunities**, and approximately **1–2 normally visited Shops, Rests, Treasures, and minibosses**.
 - Added controlled-generation safeguards against duplicate normal two-door primary rewards, long forced corridors, back-to-back ordinary safe-service rooms, dead late Gold, miniboss routes without a normal alternative, and missing guaranteed regional opportunities.
-- Advanced the next run-design dependency to **Technique offer generation and rarity/source weighting**, followed by Gold/Shop economy and detailed reward-value tuning.
+- Advanced the next run-design dependency to **Technique offer generation and rarity/source weighting**, followed by Gold/Shop economy and detailed reward-value tuning; those layers were subsequently approved later on 2026-08-16.
 - Updated Run Structure, Items and Rewards, gameplay status, Full Game Scope, Production Roadmap, Open Questions, and Decision Log to remove stale branch/reward-weighting-open language.
 
 ## 2026-08-16 — Kagutsuchi and full three-region run-structure lock
