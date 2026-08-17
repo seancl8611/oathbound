@@ -4,7 +4,7 @@ title: Corruption and Shrines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-01
+last_reviewed: 2026-08-16
 topics:
   - corruption
   - shrine
@@ -55,7 +55,7 @@ Resist stabilizes Returning Blood without advancing the Aspect.
 
 Resist is a recovery option and pacing valve. It may stabilize a difficult run, preserve a preferred current Tier, or postpone advancement until a later Shrine. It is not a parallel permanent-power path, and repeated Resist choices do not stack Aspect power or improve the Blood Art.
 
-The exact reduction and support table remain tuning work.
+The exact Resist reduction and full-Corruption support table remain tuning work.
 
 ## Embrace
 
@@ -94,12 +94,16 @@ At full Corruption while already at Tier IV:
 
 ## Shrine support below full Corruption
 
-A Shrine encountered below full Corruption provides approved support such as:
+A Shrine encountered below full Corruption uses the first survival prototype rather than becoming a second Rest room.
 
-- Health recovery,
-- Spirit recovery,
-- a small stabilizing benefit,
-- or another approved Shrine-table result.
+Its support result may be:
+
+- **20% max Health recovery**, or
+- **25% max Spirit recovery**.
+
+The specific Health-versus-Spirit selection behavior remains implementation tuning, but the route preview / interaction should make the support readable before it is accepted.
+
+These below-full support values do not automatically stack on top of a full-Corruption Resist/Embrace decision. Full-Corruption Resist and Stabilize retain their own separately tuned support behavior.
 
 Shrines do not normally present ordinary Technique selections.
 
@@ -126,8 +130,8 @@ Shrines do not normally present ordinary Technique selections.
 ## Open balance variables
 
 - Corruption gain and threshold pacing,
-- Shrine frequency and route competition,
+- final Shrine frequency after prototype validation,
 - Resist and Stabilize reduction values,
-- support-reward tables,
+- full-Corruption Resist / Stabilize support tables,
 - exact benefit values for each Aspect Tier,
 - and the frequency with which successful runs reach Tiers I-IV.
