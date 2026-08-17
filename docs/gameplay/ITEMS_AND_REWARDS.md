@@ -13,6 +13,7 @@ topics:
   - blood-resource
   - room-rewards
   - reward-cadence
+  - reward-weighting
   - run-infrastructure
   - heart-binding-completion
   - regional-routing
@@ -28,7 +29,7 @@ related:
 
 # Items, Currencies, and Rewards
 
-This file owns reward categories, currency ownership, room payouts, and the current reward-cadence framework. `RUN_STRUCTURE.md` owns approved regional chamber counts and route-network safeguards. Exact rates, prices, percentage weights, and numerical reward values remain balance and implementation work unless explicitly approved elsewhere.
+This file owns reward categories, currency ownership, room payouts, and the current reward-cadence framework. `RUN_STRUCTURE.md` owns regional chamber counts, branching-frequency targets, and route-network safeguards. The percentages below are approved **prototype generation values** intended for implementation and playtesting; final balance values remain tunable.
 
 ## Reward goals
 
@@ -85,9 +86,31 @@ Supported preview categories may include Technique, Relic, Gold, Mist, Scroll, H
 
 Choosing a Shrine can mean giving up a Technique, Relic, economy, or survival opportunity; choosing another route can delay Aspect advancement.
 
-The approved prototype route model uses fixed chamber-index bands, weighted eligible contents, and hard safeguards rather than pure unbounded randomness. All three regional chamber counts, miniboss windows, and minimum opportunity safeguards are owned by `RUN_STRUCTURE.md`. Exact percentage weights, branch frequency, and reward distribution remain later run-design and playtest decisions.
+The approved prototype route model uses fixed chamber-index bands, weighted eligible contents, and hard safeguards rather than pure unbounded randomness. All three regional chamber counts, miniboss windows, minimum opportunity safeguards, and branch-count percentages are owned by `RUN_STRUCTURE.md`.
 
 A guaranteed route-network opportunity is not a mandatory room. The player may still choose a competing exit and forgo it.
+
+## Prototype room-type weighting
+
+When an ordinary eligible route node is generated, the current chamber band uses these base room-type weights before safeguards and fixed miniboss/boss injections:
+
+| Room type | Opening | Main stretch | Pre-boss / final stretch |
+|---|---:|---:|---:|
+| Standard Combat | 82% | 70% | 58% |
+| Shrine | 6% | 8% | 5% |
+| Rest | 4% | 7% | 13% |
+| Shop | 2% | 7% | 13% |
+| Treasure | 6% | 8% | 11% |
+
+Rules:
+
+- miniboss opportunities are not rolled from this table; one optional miniboss opportunity is deliberately injected into each region's approved miniboss window,
+- regional bosses are fixed endpoints and are not rolled,
+- Hushiro's earliest chambers may suppress Rest and Shop when they would have little practical value,
+- safe service-room adjacency is prevented by the route safeguards in `RUN_STRUCTURE.md`,
+- and pre-boss preparation safeguards may override these weights when required.
+
+Across a normal completed 33-chamber regional route, the working target is roughly **20–22 standard combat chambers**, with the remaining non-boss chambers occupied by Shrines, Rests, Shops, Treasure, and optional minibosses according to routing choices and safeguards. This is an expected range rather than a fixed composition.
 
 ## Approved regional opportunity safeguards
 
@@ -128,7 +151,7 @@ Before the Eclipse Shogun, the generated route network contains at least:
 
 The Kagutsuchi miniboss opportunity appears within Chambers 4–7 and selects either Blood Lotus or Eternal Swordsman for that run.
 
-These safeguards define availability across the route network, not guaranteed player pickups. Exact probabilities beyond them remain open.
+These safeguards define availability across the route network, not guaranteed player pickups.
 
 ## Standard combat rewards
 
@@ -137,6 +160,30 @@ A standard combat room awards one previewed primary reward after completion.
 Eligible rewards include Gold, Mist, Scrolls, Health or Spirit recovery, temporary capacity, a Technique reward, and an approved reroll resource.
 
 Combat rooms are the **primary source of Technique rewards**, but not the only source.
+
+### Prototype standard-combat reward weights
+
+| Reward | Hushiro | Yomori | Kagutsuchi |
+|---|---:|---:|---:|
+| Technique | 36% | 32% | 28% |
+| Gold | 20% | 20% | 18% |
+| Mist | 11% | 10% | 9% |
+| Scrolls | 7% | 8% | 8% |
+| Health / Spirit recovery | 12% | 12% | 16% |
+| Temporary capacity | 7% | 10% | 11% |
+| Reroll resource | 7% | 8% | 10% |
+
+These weights intentionally shift over the run:
+
+- Hushiro emphasizes Techniques so the run gains an identity quickly,
+- Yomori is the balanced build-deepening region,
+- Kagutsuchi slightly reduces raw Technique frequency while increasing survival, capacity, and reroll value for mature-build optimization.
+
+Gold reward weight should fall sharply when no realistic Shop opportunity remains ahead. The generator should not offer late Gold as a dead primary reward immediately before the Shogun.
+
+Relics are **not** part of the ordinary standard-combat reward table. They remain a rarer supporting layer associated with approved Treasure, miniboss, Shop, boss, discovery, or other special sources.
+
+Consumables have **0% primary room-reward weight** in the first route-generation prototype. If consumables remain in launch scope, they should initially enter through Shops, Treasure, or another contained source rather than becoming another ordinary primary reward category.
 
 ## Universal Technique reward
 
@@ -162,13 +209,29 @@ Depending on the current build, an eligible Technique reward screen may offer:
 - a Cross-family Technique,
 - or an eligible Legendary.
 
-The reward source may later influence rarity or quality weighting, but all sources use the same Technique system rather than separate reward interfaces or subtype-specific reward pools.
+The reward source may influence rarity or quality weighting, but all sources use the same Technique system rather than separate reward interfaces or subtype-specific reward pools.
 
 There is no global Technique inventory cap. The main cap on Technique growth is how many Technique rewards the player chooses and receives during the run.
 
 The player may decline all Technique choices for a displayed lower-value fallback when that source allows a decline.
 
 Detailed slot, rarity, replacement, family, and refinement rules belong in `TECHNIQUES.md`.
+
+## Prototype Technique cadence
+
+The current successful-run target is:
+
+- **Hushiro:** approximately 3 Technique pickups for a player meaningfully investing in Techniques, including the fixed Chamber 1 reward,
+- **Yomori:** approximately 2–3 additional Technique pickups,
+- **Kagutsuchi:** approximately 2–3 additional Technique pickups.
+
+Typical outcomes:
+
+- a normal Technique-invested successful run ends around **7–9 Technique pickups**,
+- a strongly Technique-focused route may reach roughly **10–12+**,
+- a player prioritizing Shrines, survival, economy, or persistent resources may finish with roughly **4–6**.
+
+These are expected pickup ranges, not inventory caps or guaranteed counts. The player should see more Technique opportunities than they actually take because Technique routes compete with Shrine, survival, economy, and other rewards.
 
 ## Shrine rooms
 
@@ -183,6 +246,12 @@ Shrines own Blood Aspect stabilization and optional escalation.
 
 Permanent **Run Infrastructure** upgrades may later improve approved Shrine support, but they cannot reduce or bypass the fixed Tier path, grant permanent Tier progress, or unlock Blood early.
 
+### Prototype Shrine cadence
+
+The full route should expose roughly **4–5 Shrine opportunities** during a typical run, while a normal player may actually choose approximately **2–3**. An Aspect-focused player may deliberately take four or more when routing and Corruption timing support it.
+
+This cadence should make Tier II a common hybrid outcome, Tier III a deliberate Aspect-heavy investment, and Tier IV possible without becoming automatic. Mandatory encounters continue to support lower-Tier Technique-focused outcomes.
+
 ## Rest rooms
 
 Rest rooms provide Health and Spirit recovery, read-only build review, and short narrative breathing room where appropriate.
@@ -190,6 +259,10 @@ Rest rooms provide Health and Spirit recovery, read-only build review, and short
 The retired reserve-slot model does not support routine Technique swapping at rest rooms.
 
 Permanent **Run Infrastructure** upgrades may later improve Rest support or introduce approved additional recovery opportunities. Exact upgrades remain later detailed design.
+
+### Prototype Rest cadence
+
+The route should expose roughly **3–4 Rest opportunities** across a typical successful run, with approximately **1–2 normally visited**. Increased pre-boss weighting makes recovery more available when it matters without making a free heal automatic.
 
 ## Shops
 
@@ -200,6 +273,10 @@ When a shop sells a Technique reward, purchasing it opens the normal Technique r
 Technique purchases should be expensive enough that Gold routing is a meaningful strategy rather than an automatic purchase path.
 
 Blood is not directly bought or sold.
+
+### Prototype Shop cadence
+
+The route should expose roughly **3–4 Shop opportunities** across a typical successful run, with approximately **1–2 normally visited**. Gold generation and Shop pricing must be tuned together so a Shop choice is meaningful rather than automatically optimal or frequently unusable.
 
 ## Treasure and miniboss rewards
 
@@ -212,9 +289,15 @@ A miniboss guarantees meaningful build development and should never award only o
 - a special encounter reward,
 - modest additional Mist or Scrolls.
 
-A miniboss Technique reward may later receive better rarity weighting, but it still uses the universal Technique reward screen.
+A miniboss Technique reward may receive better rarity weighting, but it still uses the universal Technique reward screen.
 
 Hushiro, Yomori, and Kagutsuchi each generate one optional miniboss route opportunity in their approved prototype windows. The player may route around it and therefore fights 0–1 minibosses in each region.
+
+### Prototype Treasure and miniboss cadence
+
+- Treasure is not region-guaranteed; a normal successful route should usually contain roughly **1–2 Treasure rooms actually taken**.
+- All three miniboss opportunities exist in the generated route network, but the target normal successful run is roughly **1–2 minibosses actually fought**.
+- Miniboss rewards must be valuable enough that choosing the harder branch is tempting, but the competing non-miniboss route must remain legitimate.
 
 ## Regional boss rewards
 
@@ -280,9 +363,9 @@ Within the approved 45–50-minute successful-run target:
 - **Yomori:** 10 counted chambers, approximately 12–14 active minutes; expand direct-action coverage and deepen the build through later Technique eligibility and Aspect progression.
 - **Kagutsuchi:** 11 counted chambers, approximately 15–17 active minutes; finalize the mature build while facing the most layered standard encounters before the Shogun.
 
-The current regional baseline is **33 counted chambers total**. Technique reward frequency must be tuned against both direct-action coverage and later slotless Supporting/Cross-family/Legendary growth. The old assumption of only six to eight Technique decisions is not authoritative.
+The current regional baseline is **33 counted chambers total**. The route-generation prototype targets roughly **17–19 multi-exit decisions**, **20–22 standard combat chambers**, **7–9 Technique pickups for a Technique-invested successful run**, **4–5 visible Shrine opportunities**, and approximately **1–2 visits each to Shops, Rests, Treasures, and minibosses** in a typical successful route.
 
-The approved regional safeguards establish minimum Technique opportunities but do not set the final average Technique count. Exact branching frequency, reward probabilities, source weighting, and room-category weights are the next full-route integration layer.
+These are controlled-procedural prototype targets rather than immutable final counts. The next numerical layer is **Technique offer generation and rarity/source weighting**, followed by Gold/Shop economy and the remaining detailed reward-value tuning.
 
 ## Expected build outcomes
 
@@ -293,7 +376,7 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 ## Guardrails
 
 - Do not require an exact Technique combination for a viable run.
-- Do not generate three invalid choices.
+- Do not generate three invalid Technique choices.
 - A direct Technique cannot stack with another direct Technique in the same combat slot.
 - Supporting Techniques must be meaningful enough to justify a reward choice.
 - Rare replacement offers must clearly show what current slotted Technique will be lost.
@@ -302,9 +385,10 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 - Blood is a combat resource, not a currency or route reward.
 - Rare rewards must not invalidate sword combat or boss mechanics.
 - Mandatory encounters must not assume a particular Aspect Tier, Blood Art, Technique family, Relic, or ideal build.
+- Final percentages may change through playtesting without reopening the underlying routing architecture.
 
 ## Current production dependency
 
-The major launch-system audit and all three prototype regional chamber structures are complete at scope level. The active package remains **full-run integration, rewards, encounters, and pacing**.
+The major launch-system audit, all three prototype regional chamber structures, and the first full-route branch/room/reward weighting model are complete at prototype scope.
 
-The next run-design layer is to evaluate the complete **12 + 10 + 11** route together and define provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, and related route-generation values before later combat/economy balance tuning.
+The next run-design layer is **Technique offer generation and rarity/source weighting** across standard combat rewards, Shops, Treasure, minibosses, and regional bosses. Gold/Shop economy values and detailed combat/economy balance follow after that.
