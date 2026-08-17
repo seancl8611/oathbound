@@ -35,15 +35,15 @@ The Heart Binding completion space after the Shogun is a specialized endgame spa
 
 Room function and primary reward are related but separate.
 
-- A combat room defines the encounter space.
+- A Combat room defines the encounter space.
 - A reward marker previews the main payout for clearing it.
-- Shrine, rest, shop, treasure, miniboss, and boss spaces retain their own stable service or encounter identity.
+- Shrine, Rest, Shop, Treasure, Miniboss, and Boss spaces retain their own stable service or encounter identity.
 
 Where the route branches, the player should understand the upcoming room function and previewed primary reward before committing. Reward markers cannot rely on color alone.
 
-The exact economy and reward-generation rules belong in [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md).
+The approved economy, reward-generation, recovery, and temporary-capacity rules belong in [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md). Technique-card generation belongs in [Technique System](../gameplay/TECHNIQUES.md).
 
-`RUN_STRUCTURE.md` owns regional chamber counts, chamber-index bands, miniboss windows, route-network safeguards, and boss-transition structure. The approved prototype route uses **12 Hushiro chambers, 10 Yomori chambers, and 11 Kagutsuchi chambers**, for **33 counted regional chambers total**. Exact branch frequency, percentage weights, reward odds, encounter compositions, and authored layout counts remain later integration/playtest work.
+`RUN_STRUCTURE.md` owns regional chamber counts, chamber-index bands, miniboss windows, route-network safeguards, branch-frequency targets, and boss-transition structure. The approved prototype route uses **12 Hushiro chambers, 10 Yomori chambers, and 11 Kagutsuchi chambers**, for **33 counted regional chambers total**. Final tuned generation percentages, encounter compositions, and authored layout counts remain playtest work.
 
 ## Shared chamber-routing rules
 
@@ -52,16 +52,16 @@ The exact economy and reward-generation rules belong in [Items, Currencies, and 
 - Eligible room types depend on the current region and chamber-index band.
 - Procedural weighting determines the contents of eligible chambers, while hard safeguards ensure approved route opportunities exist somewhere in the generated network.
 - A guaranteed opportunity is not a mandatory visit; the player may choose a competing route and give it up.
-- One or two previewed exits are the normal routing language, branches may reconverge later, and ordinary backtracking is not part of the run loop.
+- One or two previewed exits are the normal routing language, with rare approved three-exit main-stretch choices; branches may reconverge later, and ordinary backtracking is not part of the run loop.
 - Hushiro, Yomori, and Kagutsuchi each generate one optional miniboss opportunity from their two regional miniboss candidates; a normal route therefore fights 0–1 minibosses in each region.
 
-Exact generation percentages and encounter compositions remain playtest tuning.
+Current generation percentages are prototype targets owned by the gameplay authorities and remain tunable through playtesting.
 
 ## Combat Room
 
 **Function:** standard enemy encounter drawn from the current area's roster.
 
-**Reward behavior:** one previewed primary reward after completion. Eligible categories include a Technique reward, Gold, Mist, Scrolls, recovery, temporary capacity, or another approved standard-combat payout.
+**Reward behavior:** one previewed primary reward after completion. Eligible categories include a Technique reward, Gold, Mist, Scrolls, Health/Spirit recovery, temporary capacity, reroll resource, or another approved standard-Combat payout. The current region-specific weights and payout values belong to `ITEMS_AND_REWARDS.md`.
 
 **Shared read:** moderately sized open footprint, clear central sightlines, minimal combat clutter, and modular area-specific dressing around the perimeter. A route marker or entrance treatment communicates the primary payout without making the space look like a modern loot chamber.
 
@@ -71,13 +71,13 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 - **Yomori:** forest clearing, widened hunting path, or shrine approach.
 - **Kagutsuchi:** lacquered chamber, bridge expanse, or blossom courtyard.
 
-**Production rules:** ambient fog, mist, fungal pulse, petals, water, or lantern motion cannot crowd the combat footprint. Build reusable templates with perimeter variants rather than unique room art for every encounter. Technique-marked combat rooms use the same environment kit as other combat rooms; their identity comes from route preview and reward presentation.
+**Production rules:** ambient fog, mist, fungal pulse, petals, water, or lantern motion cannot crowd the combat footprint. Build reusable templates with perimeter variants rather than unique room art for every encounter. Technique-marked Combat rooms use the same environment kit as other Combat rooms; their identity comes from route preview and reward presentation.
 
 ## Shrine Room
 
 **Function:** in-run recovery and Corruption decision point.
 
-**Reward behavior:** if Corruption is full, present Resist or Embrace. Otherwise grant approved Shrine support such as Health or Spirit recovery. Shrines do not normally offer Techniques.
+**Reward behavior:** if Corruption is full, present Resist or Embrace under the Shrine system. Below full Corruption, the current survival prototype offers **20% max Health recovery or 25% max Spirit recovery**. Shrines do not normally offer Techniques.
 
 **Shared read:** small quiet ritual room centered on an immediately visible Shrine object. Safe, but not conventionally holy. If Corruption is full, the Shrine visibly reacts and presents Resist or Embrace. Otherwise it still grants normal support so the room never feels dead.
 
@@ -93,7 +93,7 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 
 **Function:** Health and Spirit recovery, read-only build review, and short narrative breathing room between pressure sequences.
 
-**Reward behavior:** restore approved Health and Spirit values. Rest rooms do not generate new Techniques, recover discarded Techniques, or permit routine swapping between filled combat slots.
+**Reward behavior:** the current prototype restores **35% max Health and 50% max Spirit**. Rest rooms do not generate new Techniques, recover discarded Techniques, or permit routine swapping between filled combat slots.
 
 **Shared read:** enclosed or sheltered space with one bright inviting rest focal point and softer composition than neighboring combat spaces.
 
@@ -109,9 +109,9 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 
 **Function:** mid-run merchant offering limited run-scoped goods for Gold.
 
-**Reward behavior:** stock may include healing, Spirit, temporary capacity, approved consumables, rerolls, **Technique rewards**, and occasional Relic opportunities. Purchasing a Technique reward opens the same universal Technique reward screen used by other approved sources.
+**Reward behavior:** the current prototype presents **3 purchasable items** across Survival / Build / Flex-premium roles. Stock may include Health/Spirit recovery, temporary capacity, reroll resources, Technique rewards, and occasional eligible Relic opportunities. Purchasing a Technique reward opens the same universal Technique reward screen used by other approved sources. Shop inventory itself does not reroll in the first prototype, and the player may buy every displayed item they can afford.
 
-**Shared read:** compact safe space with merchant figure, merchandise spread, and lantern-warm purchase focal point. It inherits the Strand Merchant Stall's internal layout language in a smaller temporary form.
+**Shared read:** compact safe space with merchant figure, merchandise spread, and lantern-warm purchase focal point. It inherits the Strand Merchant Stall's visual language in a smaller temporary form without sharing the Strand stall's exact service inventory.
 
 **Area skins:**
 
@@ -119,17 +119,17 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 - **Yomori:** traveling altar or moss-bed display.
 - **Kagutsuchi:** refined courtier display table in a lacquered alcove.
 
-**Production rules:** merchant and merchandise dominate the center. Enemies do not spawn here. It is a purchase-decision space, not an exploration room. Technique purchases use the normal reward-card language rather than a shop-specific refinement or Prosthetic-Technique interface.
+**Production rules:** merchant and merchandise dominate the center. Enemies do not spawn here. It is a purchase-decision space, not an exploration room. Technique purchases use the normal reward-card language rather than a Shop-specific refinement or Prosthetic-Technique interface.
 
 ## Treasure and Miniboss Rooms
 
 **Function:** risk/reward spaces culminating in a clearly presented high-value payout.
 
-**Treasure behavior:** may provide a Technique reward, Relic choice, large currency bundle, major temporary capacity increase, approved rare consumable, or another previewed high-value reward.
+**Treasure behavior:** may provide a premium Technique reward, Relic opportunity, large currency bundle, major recovery, enhanced temporary capacity, approved rare consumable, or another previewed high-value reward. The current premium survival values belong to `ITEMS_AND_REWARDS.md`.
 
-**Miniboss behavior:** victory guarantees meaningful build development such as a Technique reward, Relic opportunity, special regional reward, or modest persistent currency in addition to the main payout. It should not award only ordinary Gold or healing. A miniboss Technique reward may later receive better rarity or quality weighting, but it still uses the universal Technique reward screen.
+**Miniboss behavior:** victory guarantees meaningful build development such as a premium Technique reward, Relic opportunity, special regional reward, enhanced capacity, or modest persistent currency in addition to the main payout. It should not award only ordinary Gold or pure healing. Miniboss Technique rewards use the universal Technique screen with the approved premium source-quality weighting.
 
-**Shared read:** larger and more dramatic than a standard combat room, with landmark framing, deliberate arena footprint, and an unmistakable reward object revealed before or after victory.
+**Shared read:** larger and more dramatic than a standard Combat room, with landmark framing, deliberate arena footprint, and an unmistakable reward object revealed before or after victory.
 
 **Area skins:**
 
@@ -137,7 +137,7 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 - **Yomori:** root-choked arena, corrupted Shrine circle, or old hunting ground.
 - **Kagutsuchi:** lacquered terrace, blossom courtyard, or ceremonial approach.
 
-**Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard combat reward without implying a separate Technique subtype interface.
+**Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard Combat reward without implying a separate Technique subtype interface.
 
 For the approved prototype routing:
 
@@ -151,7 +151,7 @@ Each path is optional and may be routed around.
 
 **Function:** the area's culminating boss encounter.
 
-**Reward behavior:** regional bosses that lead into another area provide persistent progression, a major current-run reward, and approved transition recovery. Defeating the Eclipse Shogun opens temporary access to the Heart chamber and the successful-run Binding ritual or true-final continuation.
+**Reward behavior:** Keeper and Twin Maws provide persistent progression, a major current-run reward, and automatic regional-transition recovery as separately defined in the gameplay reward authority. Defeating the Eclipse Shogun opens temporary access to the Heart chamber and the successful-run Binding ritual or true-final continuation.
 
 **Shared read:** largest and most thematically saturated authored space in the region, designed first around boss mechanics and only then dressed outward.
 
@@ -173,7 +173,7 @@ Keeper of the Gate is fixed at Hushiro Chamber 12. Twin Maws are fixed at Yomori
 
 **Approved campaign states:** the Court historically destroyed the outermost of seven original Bindings. Six remain when Akio begins, producing six player-destroyed states followed by the fully exposed Heart and true-final encounter.
 
-Heart approach and Binding-completion spaces do not count toward Kagutsuchi's 11 regional chambers. On the seventh story run, the true-final Heart is likewise a continuation beyond the completed three-region route rather than an additional Kagutsuchi chamber.
+Heart approach and Binding-completion spaces do not count toward Kagutsuchi's 11 regional chambers. On the seventh story run, the true-final Heart is likewise a continuation beyond the completed three-region route rather than an additional Kagutsuchi chamber. Its partial Shogun→Heart recovery is a gameplay rule owned by `ITEMS_AND_REWARDS.md`, not a separate common-room reward.
 
 **Shared read:** unmistakably deeper and older than the Shogun's court. Ancient Binding architecture and the later Court-built extraction apparatus must read as distinct historical layers.
 
