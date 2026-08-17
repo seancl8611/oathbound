@@ -15,6 +15,7 @@ topics:
   - reward-cadence
   - run-infrastructure
   - heart-binding-completion
+  - regional-routing
 related:
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-BLOOD-ASPECTS
@@ -27,7 +28,7 @@ related:
 
 # Items, Currencies, and Rewards
 
-This file owns reward categories, currency ownership, room payouts, and the current reward-cadence framework. Exact rates, prices, route probabilities, room counts, and numerical values remain balance and implementation work unless explicitly approved elsewhere.
+This file owns reward categories, currency ownership, room payouts, and the current reward-cadence framework. `RUN_STRUCTURE.md` owns approved regional chamber counts and route-network safeguards. Exact rates, prices, percentage weights, and numerical reward values remain balance and implementation work unless explicitly approved elsewhere.
 
 ## Reward goals
 
@@ -80,11 +81,41 @@ Sharing the Forge between Prosthetics and Relics does not automatically make Scr
 
 The primary reward category should be shown before route commitment through a consistent symbol or environmental marker.
 
-Supported preview categories may include Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, rest, shop, treasure, miniboss, and boss.
+Supported preview categories may include Technique, Relic, Gold, Mist, Scroll, Health, Spirit, temporary capacity, Shrine, Rest, Shop, Treasure, Miniboss, and Boss.
 
 Choosing a Shrine can mean giving up a Technique, Relic, economy, or survival opportunity; choosing another route can delay Aspect advancement.
 
-Exact route topology and reward distribution remain later run-design and playtest decisions.
+The approved prototype route model uses fixed chamber-index bands, weighted eligible contents, and hard safeguards rather than pure unbounded randomness. Hushiro and Yomori chamber counts, miniboss windows, and minimum opportunity safeguards are owned by `RUN_STRUCTURE.md`. Exact percentage weights, branch frequency, and reward distribution remain later run-design and playtest decisions.
+
+A guaranteed route-network opportunity is not a mandatory room. The player may still choose a competing exit and forgo it.
+
+## Approved Area 1 and Area 2 opportunity safeguards
+
+### Hushiro
+
+Before Keeper, the generated route network contains at least:
+
+- 1 Shrine opportunity,
+- 1 Shop opportunity,
+- 1 Rest opportunity,
+- 1 optional miniboss opportunity,
+- 3 Technique-reward opportunities total, including the fixed Chamber 1 Technique reward.
+
+The Hushiro miniboss opportunity appears within Chambers 5–8 and selects either Village Ogre or The Collector for that run.
+
+### Yomori
+
+Before Twin Maws, the generated route network contains at least:
+
+- 1 Shrine opportunity,
+- 1 Shop opportunity,
+- 1 Rest opportunity,
+- 1 optional miniboss opportunity,
+- 2 Technique-reward opportunities.
+
+The Yomori miniboss opportunity appears within Chambers 4–7 and selects either The Embered Pilgrim or Rotwood Host for that run.
+
+These safeguards define availability across the route network, not guaranteed player pickups. Exact probabilities beyond them remain open.
 
 ## Standard combat rewards
 
@@ -170,7 +201,7 @@ A miniboss guarantees meaningful build development and should never award only o
 
 A miniboss Technique reward may later receive better rarity weighting, but it still uses the universal Technique reward screen.
 
-Miniboss frequency and route placement remain later gameplay decisions.
+Hushiro and Yomori each generate one optional miniboss route opportunity in their approved prototype windows; the player may route around it and therefore fights 0–1 minibosses in each region. Kagutsuchi miniboss placement remains part of the continuing full-run integration pass.
 
 ## Regional boss rewards
 
@@ -181,6 +212,8 @@ Persistent rewards may include Boss Emblems, Mist, Scrolls, unlocks, and narrati
 Current-run rewards may include a Technique reward, Relic opportunity, or major temporary Health or Spirit improvement.
 
 Regional transitions should restore enough Health or Spirit for the next area to begin from a viable state. Blood is not automatically refilled by the reward system.
+
+Keeper and Twin Maws transition into short safe spaces that are **not counted chambers**. These transitions provide the boss reward, viable-state recovery, concise build review, and any separately approved limited preparation without becoming secondary hubs.
 
 Run Infrastructure may later improve approved transition support without removing the need to manage resources during the run.
 
@@ -228,17 +261,15 @@ Run Infrastructure must preserve meaningful route opportunity cost and cannot ma
 
 ## Pacing framework
 
-Within the approved 45–50-minute successful-run target, Technique reward frequency must be tuned against both core-slot filling and later supporting upgrades.
+Within the approved 45–50-minute successful-run target:
 
-The old assumption of only six to eight Technique decisions is no longer authoritative.
+- **Hushiro:** 12 counted chambers, approximately 14–16 active minutes; establish early direct-action Technique identity and first family/build direction.
+- **Yomori:** 10 counted chambers, approximately 12–14 active minutes; expand direct-action coverage and deepen the build through later Technique eligibility and Aspect progression.
+- **Kagutsuchi:** exact chamber budget remains to be locked during the continuing full-run integration pass; refine, deepen, pursue rare replacements or Legendaries, and finalize the mature build.
 
-Regional direction remains:
+Technique reward frequency must be tuned against both direct-action coverage and later slotless Supporting/Cross-family/Legendary growth. The old assumption of only six to eight Technique decisions is not authoritative.
 
-- **Area 1:** establish early core Technique identity.
-- **Area 2:** fill more core slots and begin family/build deepening.
-- **Area 3:** refine, deepen, pursue rare replacements or Legendaries, and finalize the build.
-
-Exact counts and probabilities remain open.
+The approved regional safeguards establish minimum Technique opportunities but do not set the final average Technique count. Exact reward probabilities and source weighting remain open.
 
 ## Expected build outcomes
 
@@ -261,6 +292,6 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 
 ## Current production dependency
 
-The Technique roster, Relic roster/mastery direction, Prosthetic Forge paths, and broad permanent-upgrade station ownership are complete at current qualitative paper-design depth.
+The major launch-system audit is complete at scope level. The active package is **full-run integration, rewards, encounters, and pacing**.
 
-The next broad task is to verify whether every major launch system has production-level scope, then review full-run integration, reward cadence/source weighting, Relic acquisition/swap details, Run Infrastructure details, and exact reward probabilities during later integration/playtesting.
+Hushiro and Yomori now have approved prototype chamber structures. The next run-structure work is to define Kagutsuchi at the same level, then validate the complete three-region 45–50-minute route before locking exact reward weights, room percentages, encounter compositions, economy values, and other detailed tuning.
