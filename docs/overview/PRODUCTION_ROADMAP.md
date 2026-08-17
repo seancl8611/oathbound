@@ -94,7 +94,9 @@ Exact route percentage weights, encounter compositions, and Twin Maws transition
 
 Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Heart Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart encounter, ending presentation, and repeat-clear presentation.
 
-Kagutsuchi's exact prototype chamber structure remains the next regional full-run integration decision. It should be locked before final Area 3 room-volume quotation so production can distinguish reusable room variants from actual route-node count.
+The current Kagutsuchi prototype run structure is **11 counted chambers**: Chambers 1–2 Court entrance, 3–7 main Court, 8–10 final Court / Shogun approach, and Eclipse Shogun at Chamber 11. One optional miniboss opportunity appears during Chambers 4–7 and selects Blood Lotus or Eternal Swordsman for that run.
+
+Production should provide enough reusable Court room foundations and variants to support the 11-chamber route without requiring unique art for every node. Heart approach, Binding-completion spaces, and the true-final Heart are specialized endgame content outside the 11 counted Court chambers.
 
 The Shogun's high-level identity is approved. Exact attacks, phase structure, transformation anatomy, animation list, and bespoke VFX require later encounter approval.
 
@@ -123,8 +125,8 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 - Relic production uses the approved 10-item roster and does not require rarity-badge families or a separate Reliquary station.
 - The old generic weapon-development / weapon-socket system is excluded; Blood Aspects are the run weapon identities.
 - The standard successful-run pacing target is 45–50 minutes.
-- Hushiro currently targets 12 counted chambers / approximately 14–16 active minutes; Yomori targets 10 counted chambers / approximately 12–14 active minutes.
-- Exact room/reward percentage weights and Area 3's chamber budget remain part of the continuing run integration/playtest pass.
+- Current regional prototype targets are Hushiro **12 chambers / 14–16 minutes**, Yomori **10 / 12–14**, and Kagutsuchi **11 / 15–17**, for **33 counted regional chambers total**.
+- Exact branch frequency, room/reward percentage weights, and encounter compositions remain part of the continuing full-route integration/playtest pass.
 - The base Heart Binding ritual is one reusable package.
 - Additional Aspects, challenge modifiers, variants, and deferred route algorithms remain outside the initial quote unless explicitly promoted.
 - Each milestone uses separately quoted, payable, reviewable internal batches.
@@ -134,6 +136,6 @@ Final quotation depends on the authored-content inventory, voice/cinematic bound
 
 Use the broad-question hierarchy in `docs/_meta/OPEN_QUESTIONS.md` without replacing the established design sequence with narrow tuning work.
 
-The major-system production-scope audit is complete. Hushiro and Yomori now have approved prototype chamber structures.
+The major-system production-scope audit and all three regional prototype chamber structures are complete.
 
-The next major design task is to **complete full-run integration** by defining Kagutsuchi at the same structural level and validating the combined three-region 45–50-minute route. Once that structure is complete, move into exact reward cadence, route percentages, encounter composition, economy, and other prototype tuning rather than reopening already-scoped systems.
+The next major design task is to **continue full-run integration across the complete 33-chamber route** by defining provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values. Those values remain prototype targets subject to playable validation rather than final balance law.

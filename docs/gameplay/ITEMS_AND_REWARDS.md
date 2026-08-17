@@ -85,11 +85,11 @@ Supported preview categories may include Technique, Relic, Gold, Mist, Scroll, H
 
 Choosing a Shrine can mean giving up a Technique, Relic, economy, or survival opportunity; choosing another route can delay Aspect advancement.
 
-The approved prototype route model uses fixed chamber-index bands, weighted eligible contents, and hard safeguards rather than pure unbounded randomness. Hushiro and Yomori chamber counts, miniboss windows, and minimum opportunity safeguards are owned by `RUN_STRUCTURE.md`. Exact percentage weights, branch frequency, and reward distribution remain later run-design and playtest decisions.
+The approved prototype route model uses fixed chamber-index bands, weighted eligible contents, and hard safeguards rather than pure unbounded randomness. All three regional chamber counts, miniboss windows, and minimum opportunity safeguards are owned by `RUN_STRUCTURE.md`. Exact percentage weights, branch frequency, and reward distribution remain later run-design and playtest decisions.
 
 A guaranteed route-network opportunity is not a mandatory room. The player may still choose a competing exit and forgo it.
 
-## Approved Area 1 and Area 2 opportunity safeguards
+## Approved regional opportunity safeguards
 
 ### Hushiro
 
@@ -114,6 +114,19 @@ Before Twin Maws, the generated route network contains at least:
 - 2 Technique-reward opportunities.
 
 The Yomori miniboss opportunity appears within Chambers 4–7 and selects either The Embered Pilgrim or Rotwood Host for that run.
+
+### Kagutsuchi
+
+Before the Eclipse Shogun, the generated route network contains at least:
+
+- 1 Shrine opportunity,
+- 1 Shop opportunity,
+- 1 Rest opportunity,
+- 1 optional miniboss opportunity,
+- 2 Technique-reward opportunities,
+- 1 meaningful final-preparation opportunity across Chambers 9–10.
+
+The Kagutsuchi miniboss opportunity appears within Chambers 4–7 and selects either Blood Lotus or Eternal Swordsman for that run.
 
 These safeguards define availability across the route network, not guaranteed player pickups. Exact probabilities beyond them remain open.
 
@@ -201,7 +214,7 @@ A miniboss guarantees meaningful build development and should never award only o
 
 A miniboss Technique reward may later receive better rarity weighting, but it still uses the universal Technique reward screen.
 
-Hushiro and Yomori each generate one optional miniboss route opportunity in their approved prototype windows; the player may route around it and therefore fights 0–1 minibosses in each region. Kagutsuchi miniboss placement remains part of the continuing full-run integration pass.
+Hushiro, Yomori, and Kagutsuchi each generate one optional miniboss route opportunity in their approved prototype windows. The player may route around it and therefore fights 0–1 minibosses in each region.
 
 ## Regional boss rewards
 
@@ -219,13 +232,13 @@ Run Infrastructure may later improve approved transition support without removin
 
 ## Eclipse Shogun and Heart Binding completion
 
-The Eclipse Shogun does not grant additional current-run power during the first six successful clears because the run ends after the Binding ritual.
+The Eclipse Shogun is fixed at Kagutsuchi Chamber 11 and does not grant additional current-run power during the first six successful clears because the run ends after the Binding ritual.
 
 After defeating him, Akio enters the Heart chamber, offers Returning Blood through the extraction apparatus, breaks one remaining Heart Binding, is dissolved by the Heart, and reconstructs at the Strand.
 
-Permanent completion rewards may include destroyed-Binding progress, Mist, Scrolls, Boss Emblems, unlocks, discoveries, codex progress, and results confirmation.
+Heart approach and Binding-completion spaces are outside Kagutsuchi's 11 counted chambers. After all six Bindings are destroyed, the seventh successful story run continues from the Shogun into the Heart with the same active build. Exact recovery/resource handling before that final Heart encounter remains later integration work.
 
-After all six Bindings are destroyed, the seventh successful story run continues from the Shogun into the Heart.
+Permanent completion rewards may include destroyed-Binding progress, Mist, Scrolls, Boss Emblems, unlocks, discoveries, codex progress, and results confirmation.
 
 ## Relics
 
@@ -265,11 +278,11 @@ Within the approved 45–50-minute successful-run target:
 
 - **Hushiro:** 12 counted chambers, approximately 14–16 active minutes; establish early direct-action Technique identity and first family/build direction.
 - **Yomori:** 10 counted chambers, approximately 12–14 active minutes; expand direct-action coverage and deepen the build through later Technique eligibility and Aspect progression.
-- **Kagutsuchi:** exact chamber budget remains to be locked during the continuing full-run integration pass; refine, deepen, pursue rare replacements or Legendaries, and finalize the mature build.
+- **Kagutsuchi:** 11 counted chambers, approximately 15–17 active minutes; finalize the mature build while facing the most layered standard encounters before the Shogun.
 
-Technique reward frequency must be tuned against both direct-action coverage and later slotless Supporting/Cross-family/Legendary growth. The old assumption of only six to eight Technique decisions is not authoritative.
+The current regional baseline is **33 counted chambers total**. Technique reward frequency must be tuned against both direct-action coverage and later slotless Supporting/Cross-family/Legendary growth. The old assumption of only six to eight Technique decisions is not authoritative.
 
-The approved regional safeguards establish minimum Technique opportunities but do not set the final average Technique count. Exact reward probabilities and source weighting remain open.
+The approved regional safeguards establish minimum Technique opportunities but do not set the final average Technique count. Exact branching frequency, reward probabilities, source weighting, and room-category weights are the next full-route integration layer.
 
 ## Expected build outcomes
 
@@ -292,6 +305,6 @@ A Technique-heavy route may accumulate more slotless upgrades than an Aspect-hea
 
 ## Current production dependency
 
-The major launch-system audit is complete at scope level. The active package is **full-run integration, rewards, encounters, and pacing**.
+The major launch-system audit and all three prototype regional chamber structures are complete at scope level. The active package remains **full-run integration, rewards, encounters, and pacing**.
 
-Hushiro and Yomori now have approved prototype chamber structures. The next run-structure work is to define Kagutsuchi at the same level, then validate the complete three-region 45–50-minute route before locking exact reward weights, room percentages, encounter compositions, economy values, and other detailed tuning.
+The next run-design layer is to evaluate the complete **12 + 10 + 11** route together and define provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, and related route-generation values before later combat/economy balance tuning.

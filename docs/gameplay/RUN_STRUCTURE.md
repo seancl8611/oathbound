@@ -33,6 +33,7 @@ related:
   - CONTENT-ROOM-TYPES
   - CONTENT-AREA1-OVERVIEW
   - CONTENT-AREA2-OVERVIEW
+  - CONTENT-AREA3-OVERVIEW
   - CONTENT-STRAND-BLOODWELL
   - CONTENT-STRAND-BOAT
   - UI-RUN-RESULTS
@@ -77,11 +78,11 @@ The intended full route is:
 
 The introductory attempt may use only a short portion of Hushiro rather than the complete regional flow.
 
-Hushiro and Yomori now have approved **prototype chamber structures** defined below. Their chamber counts and structural bands are planning targets for implementation and playtesting, not immutable final balance values. Kagutsuchi's exact chamber count and the final route-generation weights remain open until the full three-region pacing pass is completed.
+All three regions now have approved **prototype chamber structures** defined below. Their chamber counts and structural bands are planning targets for implementation and playtesting, not immutable final balance values. Exact route-generation weights, branch frequency, encounter compositions, and reward probabilities remain open for the complete three-region integration pass.
 
 ## Chamber and route model
 
-A **counted chamber** is a room that represents an actual run node. Standard combat rooms, Shrine, Rest, Shop, Treasure, Miniboss, and regional Boss rooms can count as chambers. Small entrance corridors, boss exits, loading connectors, and regional transition spaces do not count toward the regional chamber total.
+A **counted chamber** is a room that represents an actual run node. Standard combat rooms, Shrine, Rest, Shop, Treasure, Miniboss, and regional Boss rooms can count as chambers. Small entrance corridors, boss exits, loading connectors, regional transition spaces, Heart approach spaces, and Binding-completion spaces do not count toward the regional chamber total.
 
 The run uses a Hades-like chamber-routing model:
 
@@ -189,6 +190,57 @@ Before Twin Maws, the generated route network must contain at least:
 
 These are network opportunities rather than mandatory visits. Treasure remains an eligible high-value route rather than a guaranteed regional service.
 
+## Area 3 — Kagutsuchi Court prototype structure
+
+Kagutsuchi uses **11 counted chambers**, including the Eclipse Shogun at Chamber 11. The current active-time target is approximately **15–17 minutes**.
+
+Kagutsuchi is the mature-build region. Its standard encounters are expected to take longer and demand more from the player because Court enemies combine revival, ranged ritual pressure, directional defense, spawning, frenzy, and more disciplined coordinated behavior.
+
+### Chambers 1–2 — Court entrance
+
+- Branching begins immediately.
+- There is no fixed opening Technique reward; the player enters with an established build from Hushiro and Yomori.
+- Early encounters introduce the Court's disciplined, layered threat language before the main stretch combines revival, source-priority, guard-direction, ranged, and bruiser pressure more aggressively.
+- Kagutsuchi should become dangerous immediately through enemy behavior and composition rather than simple Health inflation.
+
+### Chambers 3–7 — Main Court
+
+The complete normal Kagutsuchi room/reward pool is eligible here. The region's build purpose is to **finish or sharpen the mature run build** through remaining direct-action Techniques, Supporting Techniques, refinements, Cross-family Techniques, rare replacements, eligible Legendaries, continued Shrine decisions, and competing economy/survival rewards.
+
+Kagutsuchi's single miniboss opportunity is eligible during **Chambers 4–7**. Each run selects one candidate from:
+
+- Blood Lotus
+- Eternal Swordsman
+
+The miniboss path is optional. A normal Kagutsuchi run therefore contains **0–1 fought minibosses**, even though one miniboss opportunity is generated into the route network.
+
+### Chambers 8–10 — Final Court / Shogun approach
+
+- Minibosses leave the eligible pool.
+- Encounter generation may use the strongest normal Court compositions and should escalate visually and mechanically toward the Shogun's inner Court.
+- No new run-build system is introduced here; the purpose is maximum normal-room pressure, final build decisions, and preparation for the Shogun.
+- Across **Chambers 9–10**, the generated route must expose at least one meaningful final-preparation opportunity such as Rest, Shop, Technique, Treasure, or another approved high-value preparation choice.
+- This safeguard does not guarantee a full heal or automatic ideal build.
+
+### Chamber 11 — Eclipse Shogun
+
+The Eclipse Shogun is fixed at Chamber 11 and completes the normal three-region combat route. All Kagutsuchi routes converge on his royal arena.
+
+The Shogun must test a mature run build without assuming a specific Aspect Tier, Blood Art, Technique family, Legendary, Relic, Prosthetic upgrade level, or exact reward history.
+
+### Kagutsuchi route-network safeguards
+
+Before the Shogun, the generated route network must contain at least:
+
+- **1 Shrine opportunity**,
+- **1 Shop opportunity**,
+- **1 Rest opportunity**,
+- **1 optional miniboss opportunity**,
+- **2 Technique-reward opportunities**,
+- **1 meaningful final-preparation opportunity across Chambers 9–10**.
+
+These are network opportunities rather than mandatory visits. Exact reward odds outside the safeguards remain later tuning.
+
 ## Regional boss transitions
 
 Defeating Keeper or Twin Maws leads into a brief **safe regional transition space** that does not count as an additional chamber.
@@ -202,6 +254,20 @@ The transition should:
 - and preserve run momentum rather than functioning as a second Strand or overloaded menu hub.
 
 The exact recovery values, Relic-swap timing if retained, and transition interface remain later implementation decisions.
+
+## Post-Shogun handoff
+
+The Eclipse Shogun does **not** lead to another counted regional transition chamber.
+
+During the first six successful clears:
+
+**Shogun → Heart approach → Binding chamber / extraction ritual → one Binding breaks → Akio is dissolved → Strand return.**
+
+After all six remaining Bindings are destroyed, the seventh successful story run instead continues:
+
+**Shogun → Heart approach → true-final Heart encounter**, carrying the same active run build forward.
+
+Heart approach spaces, the Binding-completion chamber, and the true-final Heart encounter are specialized endgame content outside Kagutsuchi's 11 counted chambers. The Shogun does not provide ordinary current-run power during the first six Binding clears because those runs end through the Binding ritual. Exact recovery/resource handling before the true-final Heart remains later encounter integration work.
 
 ## Approved duration target
 
@@ -219,7 +285,7 @@ The two-form Heart continuation should add approximately 8–12 minutes to the e
 
 Active run time includes combat, reward choices, shops, rests, transitions, bosses, and the Binding or Heart completion sequence. It excludes Strand preparation, trials, codex reading, and time spent paused.
 
-The approved Hushiro and Yomori chamber budgets are prototype targets within this larger duration goal. Kagutsuchi and the final cross-region pacing budget still require the same integration pass before the full 45–50-minute structure is considered numerically complete.
+The current three-region prototype budget is **33 counted chambers total**: 12 Hushiro + 10 Yomori + 11 Kagutsuchi. Regional active-time targets are approximately 14–16, 12–14, and 15–17 minutes respectively. These values now form the structural baseline for the next full-route pass, where branching frequency, room/reward weighting, encounter pacing, and actual average clear time must be validated against the 45–50-minute target.
 
 ## Standard run start
 

@@ -43,17 +43,17 @@ Where the route branches, the player should understand the upcoming room functio
 
 The exact economy and reward-generation rules belong in [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md).
 
-`RUN_STRUCTURE.md` owns regional chamber counts, chamber-index bands, miniboss windows, route-network safeguards, and boss-transition structure. Hushiro currently uses a 12-chamber prototype structure and Yomori uses a 10-chamber prototype structure. Kagutsuchi's exact chamber count, exact branch frequency, percentage weights, reward odds, and authored layout counts remain later integration/playtest work.
+`RUN_STRUCTURE.md` owns regional chamber counts, chamber-index bands, miniboss windows, route-network safeguards, and boss-transition structure. The approved prototype route uses **12 Hushiro chambers, 10 Yomori chambers, and 11 Kagutsuchi chambers**, for **33 counted regional chambers total**. Exact branch frequency, percentage weights, reward odds, encounter compositions, and authored layout counts remain later integration/playtest work.
 
 ## Shared chamber-routing rules
 
-- Counted chambers are actual run nodes; small connectors and regional transition spaces do not add to the regional chamber total.
+- Counted chambers are actual run nodes; small connectors, regional transition spaces, Heart approach spaces, and Binding-completion spaces do not add to regional chamber totals.
 - Each region ends at a fixed regional boss chamber.
 - Eligible room types depend on the current region and chamber-index band.
 - Procedural weighting determines the contents of eligible chambers, while hard safeguards ensure approved route opportunities exist somewhere in the generated network.
 - A guaranteed opportunity is not a mandatory visit; the player may choose a competing route and give it up.
 - One or two previewed exits are the normal routing language, branches may reconverge later, and ordinary backtracking is not part of the run loop.
-- Hushiro and Yomori each generate one optional miniboss opportunity from their two regional miniboss candidates; a normal route therefore fights 0–1 minibosses in each of those regions.
+- Hushiro, Yomori, and Kagutsuchi each generate one optional miniboss opportunity from their two regional miniboss candidates; a normal route therefore fights 0–1 minibosses in each region.
 
 Exact generation percentages and encounter compositions remain playtest tuning.
 
@@ -139,7 +139,13 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 
 **Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard combat reward without implying a separate Technique subtype interface.
 
-For the approved prototype routing, Hushiro offers its miniboss path during Chambers 5–8 and Yomori during Chambers 4–7. Each region selects one of its two miniboss candidates for that run, and the player may route around the encounter.
+For the approved prototype routing:
+
+- Hushiro offers its miniboss path during Chambers **5–8** and selects Village Ogre or The Collector.
+- Yomori offers its miniboss path during Chambers **4–7** and selects The Embered Pilgrim or Rotwood Host.
+- Kagutsuchi offers its miniboss path during Chambers **4–7** and selects Blood Lotus or Eternal Swordsman.
+
+Each path is optional and may be routed around.
 
 ## Boss Room
 
@@ -157,7 +163,7 @@ For the approved prototype routing, Hushiro offers its miniboss path during Cham
 
 **Production rules:** perimeter art and ambient particles never compete with the boss silhouette or attack telegraphs. The arena may evolve during phase changes, but geometry, hazard boundaries, and safe space stay readable. Each boss room receives a dedicated environment brief.
 
-Keeper of the Gate is fixed at Hushiro Chamber 12. Twin Maws are fixed at Yomori Chamber 10. Their post-boss transition spaces are safe connectors rather than additional counted chambers.
+Keeper of the Gate is fixed at Hushiro Chamber 12. Twin Maws are fixed at Yomori Chamber 10. Eclipse Shogun is fixed at Kagutsuchi Chamber 11. Keeper and Twin Maws lead to safe regional connectors rather than additional counted chambers; the Shogun instead opens the specialized Heart route.
 
 ## Heart Binding Completion Space
 
@@ -166,6 +172,8 @@ Keeper of the Gate is fixed at Hushiro Chamber 12. Twin Maws are fixed at Yomori
 **Current behavior:** Akio reaches the Heart chamber, uses the Shogun-built extraction apparatus to offer Returning Blood, breaks one ancient Heart Binding through the Heart's rejection response, is dissolved by the retaliation, and reconstructs at the Strand.
 
 **Approved campaign states:** the Court historically destroyed the outermost of seven original Bindings. Six remain when Akio begins, producing six player-destroyed states followed by the fully exposed Heart and true-final encounter.
+
+Heart approach and Binding-completion spaces do not count toward Kagutsuchi's 11 regional chambers. On the seventh story run, the true-final Heart is likewise a continuation beyond the completed three-region route rather than an additional Kagutsuchi chamber.
 
 **Shared read:** unmistakably deeper and older than the Shogun's court. Ancient Binding architecture and the later Court-built extraction apparatus must read as distinct historical layers.
 

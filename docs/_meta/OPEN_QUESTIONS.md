@@ -24,7 +24,6 @@ Examples of details that should remain nested beneath an owning package rather t
 - individual Prosthetic upgrade percentages, Scroll costs, Spirit values, or status durations,
 - exact Bloodwell node counts, Run Infrastructure values, or Blood Mirror mastery ranks,
 - exact room/reward percentage weights, branch probabilities, shop prices, or encounter values,
-- exact Area 3 chamber count until the current full-run integration pass reaches that region,
 - final animation timings, VFX timing, hitboxes, damage values, and other playtest tuning.
 
 When a major system or package becomes the active design area, finish it at useful paper-design depth before moving to narrow balance work.
@@ -52,7 +51,7 @@ When a major system or package becomes the active design area, finish it at usef
 - The standard successful-run target remains approximately **45–50 minutes**.
 - The major-system production-scope audit is complete; no additional core gameplay system is currently required before continuing run integration.
 
-## Approved Area 1 / Area 2 run-structure state
+## Approved three-region run-structure state
 
 `docs/gameplay/RUN_STRUCTURE.md` owns the current regional chamber model.
 
@@ -76,13 +75,25 @@ When a major system or package becomes the active design area, finish it at usef
 - Chambers 8–9 ensure at least one meaningful pre-boss preparation route.
 - Current active-time target: approximately **12–14 minutes**.
 
+### Kagutsuchi Court
+
+- **11 counted chambers**.
+- Chambers **1–2** Court entrance, **3–7** main Court, **8–10** final Court / Shogun approach, **11** Eclipse Shogun.
+- Branching begins immediately; no fixed opening Technique reward.
+- One optional miniboss opportunity appears during Chambers **4–7**, selecting Blood Lotus or Eternal Swordsman for that run.
+- Route network contains at least one Shrine, Shop, Rest, miniboss opportunity, two Technique-reward opportunities, and one meaningful final-preparation opportunity across Chambers 9–10.
+- Heart approach, Binding completion, and the true-final Heart are outside Kagutsuchi's counted chamber total.
+- Current active-time target: approximately **15–17 minutes**.
+
 ### Shared regional rules
 
+- Current regional baseline is **33 counted chambers total: 12 + 10 + 11**.
 - Fixed chamber-index bands + weighted eligible contents + hard opportunity safeguards.
 - Previewed route choices; one or two exits are the normal language, with no routine backtracking.
 - Guaranteed opportunities are present in the generated route network but may be skipped by choosing a competing route.
-- Keeper and Twin Maws are fixed regional endpoints.
-- Post-boss regional transitions are safe spaces and do **not** count as additional chambers.
+- Keeper, Twin Maws, and Eclipse Shogun are fixed regional endpoints.
+- Keeper and Twin Maws post-boss transitions are safe spaces and do **not** count as additional chambers.
+- The Shogun opens the specialized Heart route rather than another counted regional transition.
 - Exact room/reward percentage weights, branch frequency, encounter compositions, and final tuning remain open.
 
 ## Approved Technique roster state
@@ -142,29 +153,27 @@ The old Forge weapon-development model, fixed Bloodwell `Way of Steel / Way of S
 
 Review Oathbound as one complete playable run from the Strand through Hushiro, Yomori, Kagutsuchi, the Eclipse Shogun, and eventual Heart progression.
 
-The Hushiro and Yomori prototype route structures are now approved. Continue by:
+All three prototype regional chamber structures are now approved. Continue by evaluating the **complete 33-chamber regional route** and defining provisional values for:
 
-- defining **Kagutsuchi** at the same chamber/band/miniboss/transition level,
-- validating the combined three-region route against the 45–50-minute successful-run target,
-- confirming that the three regions provide enough change in combat demands and pacing,
-- confirming standard combat rooms, Shrines, Rest rooms, Shops, treasure/miniboss routes, bosses, and transition spaces each have a clear place in the complete run,
-- checking that enemy, Aspect, Technique, Prosthetic, Relic, Shrine, Run Infrastructure, and economy systems coexist without one layer invalidating the others,
-- deciding whether consumables add enough value to justify launch inclusion,
-- and confirming that no encounter/reward/run-flow gap appears once all three regions are structured together.
+- branching frequency and how often one-exit versus two-exit chambers appear,
+- room/reward category weighting by region and chamber band,
+- Technique reward cadence across the complete run,
+- Shrine opportunity cadence relative to Corruption and Aspect Tier progression,
+- Shop and Rest frequency,
+- Treasure and miniboss reward weighting,
+- persistent-resource competition against current-run power,
+- regional transition support,
+- encounter pacing and expected room-clear time,
+- and the combined route's actual fit against the 45–50-minute successful-run target.
 
-Once the full three-region structural route exists, this package may move into the next numerical layer:
+Also verify:
 
-- Technique reward cadence and eligible-pool generation,
-- rarity/source weighting,
-- rare replacement behavior,
-- Relic acquisition allocation and transition-swap placement,
-- Run Infrastructure detailed effects,
-- Forge balance,
-- exact room/reward probabilities,
-- encounter compositions,
-- prices and economy tuning.
+- the three regions provide enough change in combat demands and pacing,
+- enemy, Aspect, Technique, Prosthetic, Relic, Shrine, Run Infrastructure, and economy systems coexist without one layer invalidating the others,
+- consumables add enough value to justify launch inclusion,
+- and no encounter/reward/run-flow gap appears when the full route is modeled numerically.
 
-Those values should be treated as prototype/playtest targets rather than immutable design law.
+The next numerical layer should remain **prototype targets**, not immutable final balance. Exact combat damage/stats, final economy values, and detailed encounter tuning still require playable validation.
 
 # 2. Narrative delivery and campaign presentation
 
@@ -201,4 +210,4 @@ Do not expand the base game with difficulty modifiers, large variant systems, or
 
 ## Deferred implementation and balance work
 
-Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, room/reward probability weights, prices, rarity probabilities, offer weights, replacement rates, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, Bloodwell/Run Infrastructure node values, Blood Mirror Aspect-upgrade values, Area 3's exact chamber budget until approved, and final VFX/animation timing.
+Keep exact values in their owning files, including damage, posture, Rupture buildup/decay, Seal slow/duration/expiry, protected-enemy control resistance, Rift fuse/intensity/damage, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc damage/width, Predator's Wake radius, Legendary durations, final room/reward probability weights, prices, rarity probabilities, offer weights, replacement rates, Relic mastery thresholds/kill weighting/acquisition allocation, Prosthetic upgrade percentages/costs, Bloodwell/Run Infrastructure node values, Blood Mirror Aspect-upgrade values, and final VFX/animation timing.

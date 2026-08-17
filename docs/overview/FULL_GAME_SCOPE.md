@@ -54,7 +54,9 @@ This document defines Oathbound's current production-level shape. It does not lo
 | Area 3 standard enemies | 5 | Kagutsuchi court roster |
 | Area 1 prototype chambers | 12 | Opening 1–3, main 4–8, pre-boss 9–11, Keeper at 12 |
 | Area 2 prototype chambers | 10 | Opening 1–2, main 3–7, pre-boss 8–9, Twin Maws at 10 |
-| Miniboss encounters | 6 | Two designed encounters per area; Area 1/2 each offer one optional candidate per run |
+| Area 3 prototype chambers | 11 | Entrance 1–2, main 3–7, final Court 8–10, Eclipse Shogun at 11 |
+| Total regional prototype chambers | 33 | 12 Hushiro + 10 Yomori + 11 Kagutsuchi |
+| Miniboss encounters | 6 | Two designed encounters per area; each region offers one optional candidate per run |
 | Regional bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
 | Heart Binding campaign | 7 original / 6 player clears | One historical breach and six player-destroyed Bindings |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
@@ -196,11 +198,11 @@ The current regional prototype budgets are:
 
 - **Hushiro:** 12 counted chambers, approximately 14–16 active minutes.
 - **Yomori:** 10 counted chambers, approximately 12–14 active minutes.
-- **Kagutsuchi:** exact counted-chamber and time budget still to be locked during the current full-run integration pass.
+- **Kagutsuchi:** 11 counted chambers, approximately 15–17 active minutes.
 
-Hushiro and Yomori use fixed chamber-index bands, weighted eligible contents, hard minimum-opportunity safeguards, previewed route choices, optional miniboss routing, fixed boss endpoints, and separate non-counted regional transition spaces.
+The complete regional route therefore contains **33 counted chambers** before specialized Heart-route spaces. All three regions use fixed chamber-index bands, weighted eligible contents, hard minimum-opportunity safeguards, previewed route choices, optional miniboss routing, and fixed boss endpoints. Keeper and Twin Maws lead to separate non-counted regional transition spaces; the Shogun opens the specialized Heart route.
 
-The final number of Technique reward opportunities must be tuned against the 50-Technique roster and competition with Shrines, Relics, economy, survival, and Aspect routes. Exact percentage weights remain later playtest work.
+The final number of Technique reward opportunities must be tuned against the 50-Technique roster and competition with Shrines, Relics, economy, survival, and Aspect routes. Exact branch frequency and percentage weights are the next full-run integration layer.
 
 ## The Strand
 
@@ -231,9 +233,9 @@ Exact onboarding timing, trial counts, permanent-upgrade node values, mastery th
 
 - **Area 1 — Hushiro Gate Village / Rupture:** 6 standard enemies, 2 designed minibosses, Keeper of the Gate; 12 counted chambers; establishes the first direct-action Technique modifications and family/build direction.
 - **Area 2 — Yomori Grove / Adaptation:** 4 standard enemies, 2 designed minibosses, Twin Maws; 10 counted chambers; expands direct-action coverage and deepens the build through later Technique eligibility and Aspect progression.
-- **Area 3 — Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 minibosses, Eclipse Shogun; exact chamber structure remains the next regional integration decision and should finalize/refine the mature run build.
+- **Area 3 — Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 designed minibosses, Eclipse Shogun; 11 counted chambers; finalizes/refines the mature run build under the most layered normal encounter pressure.
 
-Hushiro and Yomori each generate one optional miniboss opportunity from their two candidates. Exact encounter composition and route percentage weights remain prototype work.
+Each region generates one optional miniboss opportunity from its two authored candidates. Exact encounter composition and route percentage weights remain prototype work.
 
 ## Heart Binding campaign
 
@@ -242,6 +244,8 @@ The Heart's prison originally contained seven Bindings. The Court destroyed the 
 Each of the first six successful clears destroys one remaining Binding and permanently preserves that progress.
 
 After the sixth remaining Binding is destroyed, the next successful run becomes the seventh and final story run and continues from the Eclipse Shogun into the Heart.
+
+Heart approach, Binding-completion spaces, and the true-final Heart are specialized endgame content beyond the 33 counted regional chambers rather than additional Kagutsuchi chambers.
 
 The true-final Heart has two conceptual forms:
 
@@ -260,20 +264,18 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Current open production scope
 
-The major-system production-scope audit is complete. No additional core gameplay system is currently required before continuing the run-design pass.
+The major-system production-scope audit and all three regional prototype chamber structures are complete. No additional core gameplay system or regional route skeleton is currently required before moving deeper into the run-design pass.
 
 Current broad sequence:
 
-1. **Complete full-run integration, rewards, encounters, and pacing**, beginning with Kagutsuchi's prototype chamber structure and then validating the combined three-region 45–50-minute route.
+1. **Continue full-run integration, rewards, encounters, and pacing** by evaluating the complete 33-chamber route and defining provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values.
 2. **Define narrative delivery and campaign presentation.**
 3. **Define endgame, postgame, and release scope.**
 
-Once all three regions have structural route budgets, the run package may move into detailed prototype values such as reward cadence, room/reward percentage weights, eligible-pool generation, encounter compositions, prices, and other balance-sensitive variables.
-
-Exact Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, Blood Mirror Aspect ranks, and similar subsystem values remain nested until their owning implementation/playtest pass requires them.
+These next run values remain prototype targets subject to playable validation. Exact Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, Blood Mirror Aspect ranks, combat damage/stats, and similar subsystem values remain nested until their owning implementation/playtest pass requires them.
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, Area 3 chamber count until approved, route-generation percentage weights, reward probabilities, prices, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, route-generation percentage weights, reward probabilities, prices, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system and the older alternate-weapon development model are not part of the game.

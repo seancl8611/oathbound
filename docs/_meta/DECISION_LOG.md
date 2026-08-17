@@ -11,6 +11,18 @@ last_reviewed: 2026-08-16
 
 This is a concise index of major approved directions that materially changed Oathbound's scope or identity. Complete rules live in authoritative files; superseded wording is recoverable through Git history.
 
+## 2026-08-16 — Kagutsuchi and full three-region prototype route locked
+
+**Kagutsuchi Court** uses **11 counted chambers**: Court entrance Chambers 1–2, main Court Chambers 3–7, final Court / Shogun approach Chambers 8–10, and Eclipse Shogun at Chamber 11. One optional miniboss opportunity appears during Chambers 4–7 and selects Blood Lotus or Eternal Swordsman for that run.
+
+The Kagutsuchi route network contains at least one Shrine, Shop, Rest, optional miniboss opportunity, two Technique-reward opportunities, and one meaningful final-preparation opportunity across Chambers 9–10. Current active-time target: approximately **15–17 minutes**.
+
+Heart approach, Binding-completion spaces, and the true-final Heart are specialized endgame content outside Kagutsuchi's 11 counted chambers. The first six successful clears proceed from the Shogun into the Binding ritual; the seventh story run continues from the Shogun into the true-final Heart with the same active build.
+
+Together with the previously locked regional budgets, Oathbound's current prototype regional route is **33 counted chambers total: 12 Hushiro + 10 Yomori + 11 Kagutsuchi**. The next run-integration layer is provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values rather than additional regional architecture.
+
+**Authority:** `docs/gameplay/RUN_STRUCTURE.md`, `docs/content/area_3/OVERVIEW.md`, `docs/content/ROOM_TYPES.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`
+
 ## 2026-08-16 — Area 1 and Area 2 prototype run structure locked
 
 Oathbound's regional run routing now uses a Hades-like model of broadly fixed regional length, fixed boss destinations, previewed route choices, chamber-index eligibility bands, weighted procedural contents, and hard opportunity safeguards.
@@ -19,9 +31,9 @@ Oathbound's regional run routing now uses a Hades-like model of broadly fixed re
 
 **Yomori Grove** uses 10 counted chambers: opening Chambers 1–2, main Chambers 3–7, pre-boss Chambers 8–9, and Twin Maws at Chamber 10. Branching begins immediately without a forced Chamber 1 Technique reward. One optional miniboss opportunity appears during Chambers 4–7 and selects The Embered Pilgrim or Rotwood Host for that run. The route network contains at least one Shrine, Shop, Rest, miniboss opportunity, and two Technique-reward opportunities. Current active-time target: approximately 12–14 minutes.
 
-Guaranteed opportunities exist in the generated route network but are not mandatory visits. Keeper and Twin Maws each lead to a brief safe regional transition space that is not counted as an additional chamber. Exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Area 3's chamber budget remain later integration/playtest work.
+Guaranteed opportunities exist in the generated route network but are not mandatory visits. Keeper and Twin Maws each lead to a brief safe regional transition space that is not counted as an additional chamber. Exact room/reward percentage weights, branch frequency, encounter compositions, and transition values remain later integration/playtest work. Kagutsuchi's chamber budget was subsequently locked later on 2026-08-16.
 
-The major-system production-scope audit is treated as complete. The next regional run-design task is Kagutsuchi at the same structural depth, followed by validation of the complete three-region 45–50-minute route.
+The major-system production-scope audit is treated as complete. At this decision point the next regional run-design task was Kagutsuchi; that regional structure has since been completed.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`, `docs/content/ROOM_TYPES.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`
 
@@ -103,7 +115,7 @@ The seventh successful story run continues from the Shogun into the two-form Hea
 
 ## 2026-07-22 — Successful-run duration
 
-A normal successful Binding run targets roughly 45-50 minutes. Exact room counts, topology, branch frequency, and encounter budgets were originally left to prototype/playtest work; Hushiro and Yomori prototype chamber budgets were later approved on 2026-08-16.
+A normal successful Binding run targets roughly 45-50 minutes. Exact room counts, topology, branch frequency, and encounter budgets were originally left to prototype/playtest work; all three prototype regional chamber budgets were later approved on 2026-08-16.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`
 
