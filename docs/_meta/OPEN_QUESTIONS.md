@@ -35,6 +35,7 @@ The following major architecture is already established and should not be reopen
 - first Gold/Shop economy,
 - first survival/recovery/capacity model,
 - first persistent-resource economy using Mist, Scrolls, and three regional boss materials,
+- Keeper/Twin Maws three-card current-run Boss Reward prototype,
 - six player-destroyed Heart Bindings followed by the seventh story run into the true-final Heart,
 - approximately 45–50 minute normal successful Binding-run target.
 
@@ -53,29 +54,9 @@ Current values and exact rules live in:
 
 # 1. Full-run integration, rewards, encounters, and pacing
 
-## Regional-boss current-run rewards
-
-Define the current-run reward package after **Keeper of the Gate** and **Twin Maws**.
-
-Already fixed:
-
-- each boss has its persistent Mist payout,
-- each boss drops one boss-specific permanent material per kill,
-- automatic regional-transition recovery is separate from the interesting boss reward,
-- the Eclipse Shogun does not grant ordinary current-run power on the first six Binding clears.
-
-Still decide:
-
-- what current-run reward categories Keeper and Twin Maws can present,
-- whether the reward is always one premium choice or uses another compact presentation,
-- how often Technique / Relic / enhanced capacity or another approved category appears,
-- whether the boss reward should be previewable before the fight.
-
-**Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`, affected regional `BOSS.md` files.
-
 ## Relic acquisition and in-run swap placement
 
-The 10-Relic roster and one-slot mastery model are approved.
+The 10-Relic roster and one-slot mastery model are approved. Keeper and Twin Maws Boss Reward Flex cards may now surface eligible Relic opportunities, and the Shop Flex slot may also do so.
 
 Still decide:
 
