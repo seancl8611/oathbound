@@ -32,7 +32,7 @@ The launch Blood Aspect roster and qualitative Tier 0-IV packages are locked for
 
 No further Aspect or Tier audit is active unless prototyping exposes a concrete problem. Exact attack values, timings, hitboxes, growth percentages, and related balance remain implementation work.
 
-The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless Supporting, Cross-family, and Legendary Techniques.
+The Technique architecture uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless Supporting, Cross-family, and Legendary Techniques. There is **no global Technique inventory cap**.
 
 The current working Technique roster is complete at qualitative paper-design depth:
 
@@ -66,9 +66,19 @@ Broad permanent-upgrade station ownership is also scoped:
 
 Exact permanent-upgrade nodes, values, rank counts, costs, and unlock timing remain later detailed design rather than current full-game scope blockers.
 
-The next major gameplay task is to **audit whether every launch-critical system is scoped at production level**. Remaining Technique reward cadence, rarity/source weighting, rare replacement behavior, roster integration testing, Run Infrastructure details, Relic progression tuning, and exact run-reward probabilities belong to later full-run integration and playtesting.
+The major-system production-scope audit is complete. The active gameplay package is **full-run integration, rewards, encounters, and pacing**.
 
-The successful-run duration target is approved in [Run Structure](RUN_STRUCTURE.md). Exact route topology, room counts, probabilities, prices, and other playtest variables remain in their owning files.
+Current approved prototype regional structure:
+
+- **Hushiro:** 12 counted chambers, Keeper at Chamber 12, approximately 14–16 active minutes.
+- **Yomori:** 10 counted chambers, Twin Maws at Chamber 10, approximately 12–14 active minutes.
+- **Kagutsuchi:** exact chamber structure remains the next regional integration decision.
+
+Hushiro and Yomori use fixed chamber-index bands, weighted eligible contents, hard route-opportunity safeguards, optional miniboss routing, previewed exits, fixed boss endpoints, and separate non-counted post-boss transition spaces.
+
+After Kagutsuchi is structured at the same level, the run package can move into exact Technique reward cadence, rarity/source weighting, replacement behavior, room/reward percentages, encounter composition, economy, and other prototype/playtest tuning.
+
+The successful-run duration target remains approximately **45–50 minutes** in [Run Structure](RUN_STRUCTURE.md).
 
 ## Authority rule
 
