@@ -4,7 +4,7 @@ title: Hushiro Gate Village
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-08-16
 topics:
   - area-1
   - hushiro
@@ -12,10 +12,13 @@ topics:
   - garrison
   - environment
   - rupture
+  - chamber-structure
 related:
   - ART-DIRECTION
   - ART-MILESTONE-01
   - ART-MILESTONE-02
+  - GAMEPLAY-RUN-STRUCTURE
+  - CONTENT-ROOM-TYPES
 ---
 
 # Hushiro Gate Village
@@ -102,6 +105,21 @@ Hushiro teaches and tests:
 - Treasure and miniboss spaces
 - Boss approach and old gate arena
 
+## Approved prototype run structure
+
+Hushiro uses **12 counted chambers** in the current prototype structure:
+
+- **Chambers 1–3:** opening stretch
+- **Chambers 4–8:** main stretch
+- **Chambers 9–11:** pre-boss stretch
+- **Chamber 12:** Keeper of the Gate
+
+Chamber 1 is a fixed standard combat encounter followed by a Technique reward. One optional miniboss opportunity is generated during Chambers 5–8, selecting either Village Ogre or The Collector for that run. The player may route around it, so a normal Hushiro run contains 0–1 fought minibosses.
+
+The route network must contain at least one Shrine, one Shop, one Rest, one miniboss opportunity, and three Technique-reward opportunities total including Chamber 1. These are route opportunities rather than mandatory visits. Chamber 11 guarantees access to a meaningful pre-boss preparation option without requiring automatic full recovery.
+
+The region currently targets approximately **14–16 minutes** of active run time. Detailed generation rules, chamber eligibility, and transition behavior are owned by `docs/gameplay/RUN_STRUCTURE.md`; exact percentage weights and encounter compositions remain playtest tuning.
+
 ## Production relationship
 
-Milestone 1 establishes the base Hushiro combat kit and three enemies. Milestone 2 completes the remaining regional art, shared Shrine foundation, functional room skins, both minibosses, and Keeper of the Gate.
+Milestone 1 establishes the base Hushiro combat kit and three enemies. Milestone 2 completes the remaining regional art, shared Shrine foundation, functional room skins, both minibosses, Keeper of the Gate, and enough modular layouts to support the approved 12-chamber prototype route without requiring unique art for every chamber.
