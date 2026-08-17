@@ -50,6 +50,7 @@ This document summarizes Oathbound's current production-level shape. Detailed me
 | Total Technique roster | 50 + 10 refinements | 10 Common / 18 Uncommon / 17 Rare / 5 Legendary |
 | Prosthetic tools | 8 | One equipped at a time; 19 permanent Forge upgrades |
 | Relic roster | 10 | One equipped; persistent collection/mastery/progression; no rarity tiers |
+| General consumables | 0 | No launch consumable inventory or one-use item reward layer |
 | Permanent upgrade stations | 3 | Bloodwell, Forge Bench, later-unlocked Blood Mirror |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
 | Area 1 standard enemies | 6 | Hushiro |
@@ -80,6 +81,8 @@ After the relevant systems unlock, a run may build through:
 - temporary Health/Spirit recovery and capacity.
 
 There is **no global Technique inventory cap** beyond the five direct action slots. Mandatory content cannot assume a specific Tier, Blood Art, Technique family, Legendary, Relic, highly upgraded Prosthetic, ideal economy, or ideal survival route.
+
+Oathbound does not add a separate general consumable inventory to this build stack at launch.
 
 Detailed Technique mechanics/roster belong to `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md`. Detailed Aspect packages belong to the Aspect authorities.
 
@@ -170,7 +173,10 @@ Approved first-pass reward integration includes:
 - premium Treasure persistent-resource bundles,
 - +10 Mist / +1 Scroll per defeated miniboss,
 - regional boss Mist + boss-material drops,
+- Keeper/Twin Maws three-card current-run Boss Rewards,
 - persistent resources retained when earned even if the run later fails.
+
+General one-use consumables are excluded from Shops, Treasure, route rewards, and inventory scope at launch.
 
 These are prototype implementation targets, not immutable final balance law.
 
@@ -184,9 +190,10 @@ Launch Relics:
 - kill-earned mastery for the equipped Relic,
 - run-active benefit,
 - no Relic rarity tiers,
-- Forge Bench progression/management.
-
-Exact acquisition allocation and limited in-run swap placement remain open full-run integration work.
+- Forge Bench progression/management,
+- acquisition split of **4 campaign/Strand + 2 Blood Cavern/challenge + 4 run-discovered**,
+- all 10 obtainable before the canonical story ending,
+- routine swaps at the Forge before a run and after Keeper/Twin Maws, plus immediate equip-or-keep on a new discovery.
 
 # The Strand
 
@@ -238,20 +245,17 @@ Completed saves remain playable; repeat normal/Heart runs do not create addition
 
 # Current open production scope
 
-The major system architecture and first full-route reward/economy prototypes are complete at paper-design depth.
+The run-build, reward/economy, boss-reward, Relic-acquisition, and major route architecture are complete at paper-design depth.
 
-Current sequence:
+The remaining scope closes in dependency order:
 
-1. finish full-run integration:
-   - Keeper / Twin Maws current-run reward composition,
-   - Relic acquisition and transition-swap placement,
-   - consumables include/cut,
-   - encounter composition / clear-time / run simulation and playable validation;
-2. define narrative delivery/campaign presentation;
-3. define endgame/postgame/release package.
+1. **Playable full-run integration and pacing** — define regional enemy-composition/threat rules, elite pressure, clear-time budgets, boss/miniboss budgets, service overhead, and validate the 33-chamber route against 45–50 minutes.
+2. **Permanent-progression content scope** — define Bloodwell/Blood Mirror node counts and roles, Relic mastery rank structure, boss-material gate assignments, and unlock cadence without final balance tuning.
+3. **Narrative delivery/campaign presentation** — define the authored launch package and production volume.
+4. **Endgame/postgame/release package** — define repeat Heart access/rewards, completion goals, and release UI/presentation.
 
 `OPEN_QUESTIONS.md` owns the current unresolved agenda and should not duplicate resolved prototype tables.
 
 # Deferred implementation / tuning
 
-Final frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, upgrade costs, boss-material assignments to exact nodes, Relic mastery values, permanent progression nodes, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
+Final frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, final upgrade costs, exact mastery thresholds, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
