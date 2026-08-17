@@ -4,7 +4,7 @@ title: Cross-Area Room Types
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-16
 topics:
   - rooms
   - combat-room
@@ -15,6 +15,7 @@ topics:
   - boss-room
   - heart-binding-completion
   - reward-preview
+  - chamber-routing
 related:
   - CONTENT-AREA1-OVERVIEW
   - CONTENT-AREA2-OVERVIEW
@@ -42,7 +43,19 @@ Where the route branches, the player should understand the upcoming room functio
 
 The exact economy and reward-generation rules belong in [Items, Currencies, and Rewards](../gameplay/ITEMS_AND_REWARDS.md).
 
-Exact room counts, route topology, branch frequency, miniboss frequency, and authored layout counts remain prototype and playtest decisions. The initial production boundary is the reusable room-family and modular regional-kit requirement defined below.
+`RUN_STRUCTURE.md` owns regional chamber counts, chamber-index bands, miniboss windows, route-network safeguards, and boss-transition structure. Hushiro currently uses a 12-chamber prototype structure and Yomori uses a 10-chamber prototype structure. Kagutsuchi's exact chamber count, exact branch frequency, percentage weights, reward odds, and authored layout counts remain later integration/playtest work.
+
+## Shared chamber-routing rules
+
+- Counted chambers are actual run nodes; small connectors and regional transition spaces do not add to the regional chamber total.
+- Each region ends at a fixed regional boss chamber.
+- Eligible room types depend on the current region and chamber-index band.
+- Procedural weighting determines the contents of eligible chambers, while hard safeguards ensure approved route opportunities exist somewhere in the generated network.
+- A guaranteed opportunity is not a mandatory visit; the player may choose a competing route and give it up.
+- One or two previewed exits are the normal routing language, branches may reconverge later, and ordinary backtracking is not part of the run loop.
+- Hushiro and Yomori each generate one optional miniboss opportunity from their two regional miniboss candidates; a normal route therefore fights 0–1 minibosses in each of those regions.
+
+Exact generation percentages and encounter compositions remain playtest tuning.
 
 ## Combat Room
 
@@ -126,6 +139,8 @@ Exact room counts, route topology, branch frequency, miniboss frequency, and aut
 
 **Production rules:** signal increased importance immediately on entry. Reuse approved miniboss arena foundations where practical. Reward objects must not be mistaken for decoration or breakables. Miniboss reward presentation should read as more valuable than a standard combat reward without implying a separate Technique subtype interface.
 
+For the approved prototype routing, Hushiro offers its miniboss path during Chambers 5–8 and Yomori during Chambers 4–7. Each region selects one of its two miniboss candidates for that run, and the player may route around the encounter.
+
 ## Boss Room
 
 **Function:** the area's culminating boss encounter.
@@ -141,6 +156,8 @@ Exact room counts, route topology, branch frequency, miniboss frequency, and aut
 - **Kagutsuchi:** royal throne-space or ritual sanctum guarding the Heart route.
 
 **Production rules:** perimeter art and ambient particles never compete with the boss silhouette or attack telegraphs. The arena may evolve during phase changes, but geometry, hazard boundaries, and safe space stay readable. Each boss room receives a dedicated environment brief.
+
+Keeper of the Gate is fixed at Hushiro Chamber 12. Twin Maws are fixed at Yomori Chamber 10. Their post-boss transition spaces are safe connectors rather than additional counted chambers.
 
 ## Heart Binding Completion Space
 
