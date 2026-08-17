@@ -109,7 +109,7 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 
 **Function:** mid-run merchant offering limited run-scoped goods for Gold.
 
-**Reward behavior:** stock may include healing, Spirit, temporary capacity, approved consumables, rerolls, **Technique rewards**, and occasional run-scoped Relics. Purchasing a Technique reward opens the same universal Technique reward screen used by other approved sources.
+**Reward behavior:** stock may include healing, Spirit, temporary capacity, approved consumables, rerolls, **Technique rewards**, and occasional Relic opportunities. Purchasing a Technique reward opens the same universal Technique reward screen used by other approved sources.
 
 **Shared read:** compact safe space with merchant figure, merchandise spread, and lantern-warm purchase focal point. It inherits the Strand Merchant Stall's internal layout language in a smaller temporary form.
 
@@ -127,7 +127,7 @@ Exact generation percentages and encounter compositions remain playtest tuning.
 
 **Treasure behavior:** may provide a Technique reward, Relic choice, large currency bundle, major temporary capacity increase, approved rare consumable, or another previewed high-value reward.
 
-**Miniboss behavior:** victory guarantees meaningful build development such as a Technique reward, run-scoped Relic, special regional reward, or modest persistent currency in addition to the main payout. It should not award only ordinary Gold or healing. A miniboss Technique reward may later receive better rarity or quality weighting, but it still uses the universal Technique reward screen.
+**Miniboss behavior:** victory guarantees meaningful build development such as a Technique reward, Relic opportunity, special regional reward, or modest persistent currency in addition to the main payout. It should not award only ordinary Gold or healing. A miniboss Technique reward may later receive better rarity or quality weighting, but it still uses the universal Technique reward screen.
 
 **Shared read:** larger and more dramatic than a standard combat room, with landmark framing, deliberate arena footprint, and an unmistakable reward object revealed before or after victory.
 
