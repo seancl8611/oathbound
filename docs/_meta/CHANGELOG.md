@@ -9,6 +9,20 @@ last_reviewed: 2026-08-16
 
 # Documentation Changelog
 
+## 2026-08-16 — Full-route branch and reward-generation prototype lock
+
+- Locked the first controlled-procedural generation values for the complete 33-chamber regional route.
+- Set branch frequency by chamber band: opening **50% one exit / 50% two exits**; main **25% one exit / 70% two exits / 5% three exits**; pre-boss/final **45% one exit / 55% two exits**.
+- Limited three-exit choices to one per region and main stretches only; targeted roughly **17–19 multi-exit decisions** per normal successful run.
+- Locked base room-type weights by band: opening **82/6/4/2/6**, main **70/8/7/7/8**, pre-boss/final **58/5/13/13/11** for Combat/Shrine/Rest/Shop/Treasure.
+- Kept minibosses as deliberate optional route injections and regional bosses as fixed endpoints rather than percentage rolls.
+- Locked prototype standard-combat reward weights by region, including Technique at **36% Hushiro / 32% Yomori / 28% Kagutsuchi** with later regions shifting more weight toward recovery, capacity, and rerolls.
+- Excluded Relics from the ordinary combat-reward table and set consumables to **0% ordinary primary room-reward weight** for the first prototype.
+- Set working cadence targets of roughly **20–22 standard combat chambers**, **7–9 Technique pickups for a Technique-invested run**, **4–5 visible Shrine opportunities**, and approximately **1–2 normally visited Shops, Rests, Treasures, and minibosses**.
+- Added controlled-generation safeguards against duplicate normal two-door primary rewards, long forced corridors, back-to-back ordinary safe-service rooms, dead late Gold, miniboss routes without a normal alternative, and missing guaranteed regional opportunities.
+- Advanced the next run-design dependency to **Technique offer generation and rarity/source weighting**, followed by Gold/Shop economy and detailed reward-value tuning.
+- Updated Run Structure, Items and Rewards, gameplay status, Full Game Scope, Production Roadmap, Open Questions, and Decision Log to remove stale branch/reward-weighting-open language.
+
 ## 2026-08-16 — Kagutsuchi and full three-region run-structure lock
 
 - Locked **Kagutsuchi** at 11 counted prototype chambers: Court entrance 1–2, main Court 3–7, final Court / Shogun approach 8–10, Eclipse Shogun at 11.
@@ -18,7 +32,7 @@ last_reviewed: 2026-08-16
 - Kept Heart approach, Binding-completion spaces, and the true-final Heart outside Kagutsuchi's 11 counted chambers.
 - Locked the current complete regional prototype baseline at **33 counted chambers total: 12 Hushiro + 10 Yomori + 11 Kagutsuchi**.
 - Preserved the first six Shogun clears as Binding-completion runs and the seventh story run as a direct Shogun-to-Heart continuation with the same active build.
-- Advanced the active run-design dependency from regional architecture to provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values.
+- Advanced the active run-design dependency from regional architecture to provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values. The first prototype for that layer was subsequently approved later on 2026-08-16.
 - Updated Run Structure, Area 3 overview, shared room/reward rules, full-game scope, roadmap, gameplay status, Milestone 6, open questions, and decision history to remove contradictory Area-3-count-deferred language.
 
 ## 2026-08-16 — Area 1 / Area 2 prototype run-structure lock
@@ -34,7 +48,7 @@ last_reviewed: 2026-08-16
 - Defined guaranteed opportunities as route-network availability rather than mandatory visits.
 - Kept post-boss regional transitions outside counted chamber totals and scoped them as short safe reward/recovery/preparation connectors rather than secondary hubs.
 - Set current active-time targets at approximately 14–16 minutes for Hushiro and 12–14 minutes for Yomori.
-- Preserved exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Kagutsuchi's chamber budget for the continuing integration/playtest pass. Kagutsuchi's chamber budget was subsequently locked later on 2026-08-16.
+- Preserved exact room/reward percentage weights, branch frequency, encounter compositions, transition values, and Kagutsuchi's chamber budget for the continuing integration/playtest pass. Kagutsuchi's chamber budget and the first branch/reward prototype were subsequently locked later on 2026-08-16.
 - Marked the major-system production-scope audit complete and advanced the active design dependency to Kagutsuchi's route structure, then complete three-region pacing validation.
 - Updated Area 1/2 overviews, room/reward authorities, full scope, roadmap, gameplay index, production milestones, open questions, and decision history to remove contradictory all-counts-deferred language.
 - Corrected the remaining Milestone 2 reference to the superseded four-slot/reserve Technique UI.

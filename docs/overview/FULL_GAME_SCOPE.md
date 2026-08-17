@@ -119,7 +119,7 @@ Backstabs remain universal positional hits based on actually reaching the enemy'
 
 `TECHNIQUE_CATALOG.md` owns the complete 50-Technique roster, rarity assignments, prerequisites, and refinements.
 
-Remaining Technique reward-frequency, offer-generation, rarity/source weighting, replacement, compatibility, and readability work belongs to the later full-run integration/reward pass.
+Technique reward cadence now has a first approved prototype target through the full-route reward model. The next Technique-specific integration layer is **offer generation and rarity/source weighting**, including replacement/refinement/Legendary appearance behavior and source-quality differences.
 
 ## Relic scope boundary
 
@@ -200,9 +200,24 @@ The current regional prototype budgets are:
 - **Yomori:** 10 counted chambers, approximately 12–14 active minutes.
 - **Kagutsuchi:** 11 counted chambers, approximately 15–17 active minutes.
 
-The complete regional route therefore contains **33 counted chambers** before specialized Heart-route spaces. All three regions use fixed chamber-index bands, weighted eligible contents, hard minimum-opportunity safeguards, previewed route choices, optional miniboss routing, and fixed boss endpoints. Keeper and Twin Maws lead to separate non-counted regional transition spaces; the Shogun opens the specialized Heart route.
+The complete regional route contains **33 counted chambers** before specialized Heart-route spaces.
 
-The final number of Technique reward opportunities must be tuned against the 50-Technique roster and competition with Shrines, Relics, economy, survival, and Aspect routes. Exact branch frequency and percentage weights are the next full-run integration layer.
+The approved first route-generation prototype adds:
+
+- opening branch frequency: **50% one exit / 50% two exits**,
+- main-stretch branch frequency: **25% one exit / 70% two exits / 5% three exits**,
+- pre-boss/final branch frequency: **45% one exit / 55% two exits**,
+- a target of roughly **17–19 multi-exit decisions** per normal successful run,
+- room-type weighting that keeps Combat dominant while increasing Shop/Rest access near bosses,
+- region-specific standard-combat reward weights with Technique emphasis decreasing from Hushiro to Kagutsuchi,
+- a target of roughly **20–22 standard combat chambers** on a completed route,
+- approximately **7–9 Technique pickups** for a Technique-invested successful run,
+- roughly **4–5 Shrine opportunities** across a typical run,
+- and approximately **1–2 normally visited Shops, Rests, Treasures, and minibosses**.
+
+Controlled-generation safeguards prevent repeated forced corridors, duplicate normal two-door rewards, back-to-back ordinary safe-service rooms, missing required regional opportunities, and dead late Gold. Consumables have 0% ordinary primary-room reward weight in this first prototype.
+
+These are prototype values for implementation and playtesting, not final balance law.
 
 ## The Strand
 
@@ -235,7 +250,7 @@ Exact onboarding timing, trial counts, permanent-upgrade node values, mastery th
 - **Area 2 — Yomori Grove / Adaptation:** 4 standard enemies, 2 designed minibosses, Twin Maws; 10 counted chambers; expands direct-action coverage and deepens the build through later Technique eligibility and Aspect progression.
 - **Area 3 — Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 designed minibosses, Eclipse Shogun; 11 counted chambers; finalizes/refines the mature run build under the most layered normal encounter pressure.
 
-Each region generates one optional miniboss opportunity from its two authored candidates. Exact encounter composition and route percentage weights remain prototype work.
+Each region generates one optional miniboss opportunity from its two authored candidates. Final encounter composition remains prototype/playtest work.
 
 ## Heart Binding campaign
 
@@ -264,18 +279,18 @@ Persistent state includes destroyed Bindings, story/codex progress, Aspect unloc
 
 ## Current open production scope
 
-The major-system production-scope audit and all three regional prototype chamber structures are complete. No additional core gameplay system or regional route skeleton is currently required before moving deeper into the run-design pass.
+The major-system production-scope audit, all three regional chamber structures, and the first controlled-procedural route-generation/reward-weighting model are complete at prototype depth.
 
 Current broad sequence:
 
-1. **Continue full-run integration, rewards, encounters, and pacing** by evaluating the complete 33-chamber route and defining provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values.
+1. **Continue full-run integration, rewards, encounters, and pacing** with Technique offer generation and rarity/source weighting, followed by Gold/Shop economy, remaining reward values, encounter composition, and playable pacing validation.
 2. **Define narrative delivery and campaign presentation.**
 3. **Define endgame, postgame, and release scope.**
 
-These next run values remain prototype targets subject to playable validation. Exact Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, Blood Mirror Aspect ranks, combat damage/stats, and similar subsystem values remain nested until their owning implementation/playtest pass requires them.
+Exact Relic ranks, Prosthetic node values, Bloodwell/Run Infrastructure nodes, Blood Mirror Aspect ranks, combat damage/stats, and similar subsystem values remain nested until their owning implementation/playtest pass requires them.
 
 ## Deferred implementation work
 
-Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, route-generation percentage weights, reward probabilities, prices, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
+Exact frame data, hitboxes, damage, posture, Rupture buildup, Seal behavior, Rift fuse/intensity/damage, backstab rear-angle threshold, Vulnerable duration/refresh/backstab multiplier, Deep Cut mitigation bypass, Blood Arc footprint, Predator's Wake radius, Legendary durations, Relic values/rank thresholds, stagger, movement, recovery, Blood values, Tier-growth percentages, collision, pathing, final tuned route-generation percentages after prototype validation, Technique rarity/source weights, Shop prices, permanent-upgrade values, animation frames, VFX density, audio timing, and final HUD layout remain implementation and playtesting work.
 
 The removed Storm, Frost, Ember, Hex, and Shadow stance system and the older alternate-weapon development model are not part of the game.

@@ -21,6 +21,7 @@ topics:
   - blood-moon
   - regional-routing
   - chamber-structure
+  - branching-frequency
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -78,7 +79,7 @@ The intended full route is:
 
 The introductory attempt may use only a short portion of Hushiro rather than the complete regional flow.
 
-All three regions now have approved **prototype chamber structures** defined below. Their chamber counts and structural bands are planning targets for implementation and playtesting, not immutable final balance values. Exact route-generation weights, branch frequency, encounter compositions, and reward probabilities remain open for the complete three-region integration pass.
+All three regions have approved **prototype chamber structures**. Their chamber counts, structural bands, and the prototype branching-frequency model below are planning targets for implementation and playtesting rather than immutable final balance values. Exact encounter compositions, authored room-variant counts, and final tuned percentages remain playable-validation work.
 
 ## Chamber and route model
 
@@ -91,13 +92,35 @@ The run uses a Hades-like chamber-routing model:
 - eligible contents are selected procedurally through weighted generation,
 - hard generation safeguards prevent important opportunity types from disappearing from the full route network,
 - route exits preview the upcoming room function and/or primary reward before commitment,
-- one or two exits are the normal route presentation, with occasional wider choices allowed where useful,
+- one or two exits are the normal route presentation,
 - branches may reconverge later,
 - and there is no routine backtracking after choosing an exit.
 
 A guaranteed **opportunity** means the generated route network contains at least one accessible offer of that type. It does not mean the player is forced to enter that room. Choosing a competing route can intentionally give up the guaranteed opportunity.
 
-Exact percentage weights, branch frequency, reward weights, encounter compositions, and authored room-variant counts remain prototype and playtest tuning.
+## Prototype branching frequency
+
+Branch count is rolled from the current chamber band before room/reward contents are generated:
+
+| Chamber band | 1 exit | 2 exits | 3 exits |
+|---|---:|---:|---:|
+| Opening | 50% | 50% | 0% |
+| Main stretch | 25% | 70% | 5% |
+| Pre-boss / final stretch | 45% | 55% | 0% |
+
+Additional route-generation safeguards:
+
+- three-exit choices may occur only during a region's main stretch and are capped at **one per region**,
+- a normal two-exit choice should present different primary reward categories rather than duplicate the same choice,
+- no region main stretch should generate more than two consecutive ordinary forced one-exit chambers,
+- ordinary routing should not place two safe service rooms such as Rest and Shop back-to-back,
+- a miniboss route must compete against at least one non-miniboss route,
+- if a guaranteed regional opportunity has not appeared by the end of its valid window, generation forces it into an upcoming eligible branch,
+- and pre-boss preparation safeguards override ordinary weights when needed.
+
+Across the 33-chamber regional route, the current prototype target is roughly **17–19 multi-exit routing decisions** on a normal successful run. This is a pacing target rather than a hard per-run quota.
+
+`ITEMS_AND_REWARDS.md` owns prototype room-type weights, standard-combat reward weights, and expected reward cadence. Final percentages remain subject to playtesting.
 
 ## Area 1 — Hushiro Gate Village prototype structure
 
@@ -142,7 +165,7 @@ Before Keeper, the generated route network must contain at least:
 - **1 optional miniboss opportunity**,
 - **3 Technique-reward opportunities total**, including the fixed Chamber 1 Technique reward.
 
-These are network opportunities rather than mandatory visits. Exact reward odds outside the safeguards remain later tuning.
+These are network opportunities rather than mandatory visits.
 
 ## Area 2 — Yomori Grove prototype structure
 
@@ -239,7 +262,7 @@ Before the Shogun, the generated route network must contain at least:
 - **2 Technique-reward opportunities**,
 - **1 meaningful final-preparation opportunity across Chambers 9–10**.
 
-These are network opportunities rather than mandatory visits. Exact reward odds outside the safeguards remain later tuning.
+These are network opportunities rather than mandatory visits.
 
 ## Regional boss transitions
 
@@ -285,7 +308,7 @@ The two-form Heart continuation should add approximately 8–12 minutes to the e
 
 Active run time includes combat, reward choices, shops, rests, transitions, bosses, and the Binding or Heart completion sequence. It excludes Strand preparation, trials, codex reading, and time spent paused.
 
-The current three-region prototype budget is **33 counted chambers total**: 12 Hushiro + 10 Yomori + 11 Kagutsuchi. Regional active-time targets are approximately 14–16, 12–14, and 15–17 minutes respectively. These values now form the structural baseline for the next full-route pass, where branching frequency, room/reward weighting, encounter pacing, and actual average clear time must be validated against the 45–50-minute target.
+The current three-region prototype budget is **33 counted chambers total**: 12 Hushiro + 10 Yomori + 11 Kagutsuchi. Regional active-time targets are approximately 14–16, 12–14, and 15–17 minutes respectively. The route-generation prototype targets roughly 17–19 multi-exit decisions and, together with the reward model in `ITEMS_AND_REWARDS.md`, roughly 20–22 standard combat chambers on a normal completed route. These values must be validated in playable builds against the 45–50-minute target.
 
 ## Standard run start
 
@@ -339,7 +362,7 @@ After the relevant systems are unlocked:
 - **Area 2:** expand direct-action coverage where still open, gain Aspect Tiers, and deepen family or hybrid synergy through slotless Supporting Techniques, refinements, and later eligibility.
 - **Area 3:** finish or refine the mature build through remaining direct opportunities, Supporting Techniques, refinements, rare same-slot replacements, Cross-family Techniques, and eligible high-rarity or Legendary opportunities.
 
-A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. There is no global Technique inventory cap; practical Technique growth is constrained by reward opportunities, route competition, prerequisites, and run length. Exact reward probabilities remain later tuning work.
+A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. There is no global Technique inventory cap; practical Technique growth is constrained by reward opportunities, route competition, prerequisites, and run length. Prototype reward cadence is owned by `ITEMS_AND_REWARDS.md`; exact final balance remains playtest work.
 
 ## Failed run
 
