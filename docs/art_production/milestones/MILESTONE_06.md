@@ -4,7 +4,7 @@ title: Milestone 6 — Area 3 and Endgame
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-16
 ---
 
 # Milestone 6 — Area 3 and Endgame
@@ -12,6 +12,16 @@ last_reviewed: 2026-07-21
 ## Goal
 
 Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, Heart chamber, reusable Heart Binding completion sequence, true-final Heart confrontation, ending presentation, and repeat-clear presentation.
+
+## Authoritative design sources
+
+- [Kagutsuchi Court](../../content/area_3/OVERVIEW.md)
+- [Area 3 Enemies](../../content/area_3/ENEMIES.md)
+- [Area 3 Minibosses](../../content/area_3/MINIBOSSES.md)
+- [Eclipse Shogun](../../content/area_3/BOSS.md)
+- [True-Final Heart](../../content/area_3/TRUE_FINAL_HEART.md)
+- [Run Structure](../../gameplay/RUN_STRUCTURE.md)
+- [Room Types](../../content/ROOM_TYPES.md)
 
 ## Planned scope
 
@@ -30,14 +40,25 @@ Complete Kagutsuchi Court, its combat roster, major encounters, Eclipse Shogun, 
 - Eternal Swordsman duel space
 - Shogun royal arena
 - regional projectiles, zones, revive states, spawning, shield coverage, frenzy, and encounter UI
+- enough reusable Court room foundations and variants to support the approved **11-counted-chamber** prototype route without requiring unique art for every node
 
 The Elite Defender remains a pure shield-and-spear positional defender and does not use the Court Guard and Court Caster revival mechanic.
+
+The approved Kagutsuchi prototype route is:
+
+- Chambers **1–2** Court entrance,
+- Chambers **3–7** main Court,
+- Chambers **4–7** optional miniboss window selecting Blood Lotus or Eternal Swordsman,
+- Chambers **8–10** final Court / Shogun approach,
+- Chamber **11** Eclipse Shogun.
+
+Heart approach, Binding-completion spaces, and the true-final Heart are specialized endgame content outside the 11 counted Court chambers.
 
 ### Eclipse Shogun
 
 The current production boundary includes:
 
-- one principal Area 3 boss,
+- one principal Area 3 boss fixed at Chamber 11,
 - a regal and composed starting identity,
 - controlled Beast Blood escalation,
 - at least one materially inhuman later state,
@@ -89,6 +110,7 @@ Exact Heart attacks, movement, posture behavior, arena rules, animation counts, 
 
 The initial milestone does not require:
 
+- unique environment art for every one of the 11 Court chambers,
 - island-wide visual transformations after each Binding,
 - universal enemy modifiers,
 - rebuilt regional environment sets,
@@ -99,20 +121,23 @@ The initial milestone does not require:
 - enemy or room variants,
 - or special Heart-route reward systems before those mechanics are approved.
 
+Final branch frequency, room/reward percentage weights, encounter compositions, and numerical pacing values remain prototype/playtest work rather than additional art-scope requirements unless they create a concrete asset need.
+
 ## Suggested internal order
 
 1. Standard enemies and shared Court effects
-2. Blood Lotus encounter package
-3. Eternal Swordsman package
-4. Eclipse Shogun concept and encounter-design lock
-5. Eclipse Shogun production after design approval
-6. Heart chamber and extraction apparatus
-7. Reusable Binding-completion sequence
-8. Six Binding states and campaign-progress UI
-9. True-final Heart encounter design
-10. True-final Heart production
-11. Ending and credits presentation
-12. Repeat-clear and postgame route UI after system approval
+2. Reusable Court room/environment foundations for the 11-chamber route
+3. Blood Lotus encounter package
+4. Eternal Swordsman package
+5. Eclipse Shogun concept and encounter-design lock
+6. Eclipse Shogun production after design approval
+7. Heart chamber and extraction apparatus
+8. Reusable Binding-completion sequence
+9. Six Binding states and campaign-progress UI
+10. True-final Heart encounter design
+11. True-final Heart production
+12. Ending and credits presentation
+13. Repeat-clear and postgame route UI after system approval
 
 ## Dependency rules
 
@@ -122,6 +147,7 @@ The initial milestone does not require:
 - Court Sentinel frenzy needs a clear transition and recovery state.
 - Blood Lotus requires synchronized Heart, Stalk, fissure, punishment, posture, and UI states.
 - Eternal Swordsman readability and animation quality take priority over spectacle.
+- The modular Court kit must support entrance, main-Court, final-Court, miniboss, and Shogun-approach needs without requiring bespoke art for every route node.
 - The Shogun must receive concept and encounter approval before final character quotation.
 - The Heart Bindings and Court-built extraction apparatus require distinct visual languages.
 - The Shogun and Heart receive separate internal batches.
@@ -133,6 +159,7 @@ Milestone 6 is complete when:
 
 - all five standard-enemy roles remain distinct,
 - revive, guard, spawn, and frenzy states are readable,
+- the Court environment package can support the approved 11-chamber route, optional miniboss branch, final preparation stretch, and Shogun convergence,
 - Blood Lotus communicates its complete encounter-state loop,
 - Eternal Swordsman remains a clean duel,
 - the Shogun reads as the central character antagonist and deliberate false master,
