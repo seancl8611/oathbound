@@ -52,7 +52,7 @@ Complete:
 
 The current Technique roster is **50 actual Techniques + 10 refinements**. The current Relic roster is **10 items** with one equipped slot and no rarity tiers.
 
-Technique screen composition/source weighting and the first reward/economy prototypes are approved enough for reusable UI planning; final balance values remain playtest work.
+Technique screen composition/source weighting and the first reward/economy prototypes are approved enough for reusable UI planning; final balance values remain playtest work. A general consumable inventory/one-use item layer is not part of launch production scope.
 
 # Milestone 5 — Complete Area 2
 
@@ -81,10 +81,11 @@ Final quotation depends on narrative-delivery scope, postgame access/rewards, an
 - Wolf, Wraith, Ronin are fixed launch Aspects.
 - Current 50-Technique and 10-Relic rosters remain stable unless testing exposes a concrete gap.
 - No alternate-weapon / weapon-socket system or separate Relic Reliquary.
+- No launch consumable inventory or one-use item reward family.
 - Reuse attack, locomotion, deathblow, HUD, and VFX families where mechanics modify existing actions.
 - Standard successful-run target remains **45–50 minutes**.
 - Regional prototype baseline remains **12 Hushiro / 10 Yomori / 11 Kagutsuchi = 33 counted chambers**.
-- Route branching, room/reward weights, Technique offer generation, Gold/Shop economy, survival/capacity values, and persistent-resource payouts now have first approved prototype models.
+- Route branching, room/reward weights, Technique offer generation, Gold/Shop economy, survival/capacity values, boss rewards, Relic acquisition/swapping, and persistent-resource payouts have first approved prototype models.
 - Persistent economy uses **Mist, Scrolls, and three low-count regional boss materials**; no generic Boss Emblem currency.
 - Final tuned probabilities, prices, payouts, recovery values, upgrade costs, and encounter compositions remain playtest/implementation work.
 - Additional Aspects, large modifier systems, enemy/room variant packages, and other deferred challenge scope are excluded unless explicitly promoted.
@@ -92,13 +93,11 @@ Final quotation depends on narrative-delivery scope, postgame access/rewards, an
 
 # Current pre-production dependency
 
-The active full-run design task is now:
+The remaining design work should close scope in dependency order rather than promoting isolated minor questions:
 
-1. **regional-boss current-run reward composition** for Keeper / Twin Maws,
-2. **Relic acquisition allocation and limited transition-swap placement**,
-3. consumables include/cut,
-4. encounter composition / room-clear-time / full-run pacing validation.
-
-After full-run integration, proceed to narrative delivery/campaign presentation, then endgame/postgame/release scope.
+1. **Playable full-run integration and pacing** — regional enemy mixes/threat budgets, elite pressure, clear-time targets, miniboss/boss time budgets, service overhead, and a complete 33-chamber pacing simulation.
+2. **Permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery ranks, boss-material gate assignments, and unlock cadence.
+3. **Narrative delivery/campaign presentation** — authored scene/dialogue/codex/ending production package.
+4. **Endgame/postgame/release scope** — repeat Heart access/rewards, completion goals, settings/front-end/credits, and any launch challenge layer.
 
 Use `docs/_meta/OPEN_QUESTIONS.md` for the current unresolved agenda; do not duplicate resolved prototype tables here.
