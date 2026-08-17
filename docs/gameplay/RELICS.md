@@ -37,7 +37,7 @@ They should add personality, discovery, and light strategic choice without becom
 - Relics do **not** use Common / Rare / Legendary rarity tiers.
 - Relic effects should usually be understandable in one concise sentence.
 - Relics may be switched during a run through approved transition opportunities rather than freely during active combat.
-- Exact acquisition sources, mastery thresholds, transition-swap timing, and numerical values remain later content / implementation work.
+- Exact acquisition sources, mastery thresholds, transition-swap timing, and most numerical values remain later content / implementation work.
 
 ## Mastery and permanent progression
 
@@ -81,10 +81,10 @@ In-run Relic switching may still use approved transition opportunities. Exact tr
 
 The current launch roster is **10 Relics** at qualitative paper-design depth.
 
-| Relic | Approved qualitative effect | Primary role |
+| Relic | Approved effect | Primary role |
 |---|---|---|
-| **Traveler's Coin** | Begin each run with additional Gold. | Economy |
-| **Merchant's Seal** | The first purchase in each region costs less Gold. | Economy |
+| **Traveler's Coin** | Begin each run with additional Gold. Exact amount remains later tuning. | Economy |
+| **Merchant's Seal** | The first purchase in each region costs **20% less Gold** in the current economy prototype. | Economy |
 | **Iron Prayer Bead** | Increase Akio's maximum Health. | Survival |
 | **Spirit Tassel** | Increase Akio's maximum Spirit capacity. | Prosthetic-resource support |
 | **Execution Bead** | Deathblows restore a small amount of Spirit. | Combat sustain |
@@ -93,6 +93,18 @@ The current launch roster is **10 Relics** at qualitative paper-design depth.
 | **Unbroken Cord** | Clearing a combat room without taking Health damage grants bonus Gold. | Clean-play reward |
 | **Scribe's Lens** | The first Technique reward in each region presents one additional choice. | Build consistency |
 | **Blood Moon Shard** | Using a Blood Art restores a small amount of Spirit. | Blood / Spirit interaction |
+
+### Merchant's Seal prototype rule
+
+The 20% discount applies to the **first item actually purchased in each region**. It does not reduce all prices for the region and does not carry an unused regional discount into a later region.
+
+Examples under the current Shop prototype:
+
+- 100-Gold Technique reward → **80 Gold**,
+- 140-Gold Relic opportunity → **112 Gold**,
+- 65-Gold max-Health purchase → **52 Gold**.
+
+This value is a prototype economy target and may be tuned after Shop behavior is playable.
 
 ## Roster guardrails
 
@@ -109,4 +121,4 @@ The current launch roster is **10 Relics** at qualitative paper-design depth.
 
 The 10 approved Relics may guide icon, object, Forge collection/mastery display, and basic selection-interface planning.
 
-Do not create Relic rarity-badge families. Exact object designs, acquisition scenes, mastery-state art, numerical values, kill thresholds, Forge upgrade presentation, and transition-swap presentation remain later production decisions.
+Do not create Relic rarity-badge families. Exact object designs, acquisition scenes, mastery-state art, numerical values beyond explicitly approved prototypes, kill thresholds, Forge upgrade presentation, and transition-swap presentation remain later production decisions.
