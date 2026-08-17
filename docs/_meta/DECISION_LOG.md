@@ -11,6 +11,24 @@ last_reviewed: 2026-08-16
 
 This is a concise index of major approved directions that materially changed Oathbound's scope or identity. Complete rules live in authoritative files; superseded wording is recoverable through Git history.
 
+## 2026-08-16 — Full-route branching and reward-generation prototype locked
+
+The first controlled-procedural generation model for the complete **33-chamber** regional route is approved as a prototype target.
+
+Branch frequency is band-based: opening chambers use **50% one exit / 50% two exits**; main stretches use **25% one exit / 70% two exits / 5% three exits**; pre-boss/final stretches use **45% one exit / 55% two exits**. Three-exit choices are main-stretch only and capped at one per region. The current target is roughly **17–19 multi-exit decisions** during a normal successful run.
+
+Base room-type weights are **82/6/4/2/6** for Combat/Shrine/Rest/Shop/Treasure in opening stretches, **70/8/7/7/8** in main stretches, and **58/5/13/13/11** in pre-boss/final stretches. Minibosses are deliberately injected through each region's approved optional window and bosses remain fixed endpoints.
+
+Standard-combat reward weighting shifts by region. Technique weight is **36% Hushiro / 32% Yomori / 28% Kagutsuchi**, with later regions giving relatively more weight to recovery, temporary capacity, and rerolls. Relics are excluded from the ordinary combat-reward table. Consumables have **0% ordinary primary room-reward weight** in the first prototype.
+
+Current full-route cadence targets include roughly **20–22 standard combat chambers**, **7–9 Technique pickups for a Technique-invested successful run**, **4–5 visible Shrine opportunities**, and approximately **1–2 normally visited Shops, Rests, Treasures, and minibosses**. Strongly Technique-focused routes may exceed this Technique range; there is no global Technique inventory cap.
+
+Controlled-generation safeguards prevent duplicate normal two-door primary rewards, more than two consecutive ordinary forced one-exit chambers in a main stretch, back-to-back ordinary safe service rooms, miniboss routes without a non-miniboss alternative, missing required regional opportunities, and dead late Gold when no realistic Shop remains ahead.
+
+These values are approved implementation/playtest targets rather than immutable final balance law. The next run-design layer is **Technique offer generation and rarity/source weighting**.
+
+**Authority:** `docs/gameplay/RUN_STRUCTURE.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`
+
 ## 2026-08-16 — Kagutsuchi and full three-region prototype route locked
 
 **Kagutsuchi Court** uses **11 counted chambers**: Court entrance Chambers 1–2, main Court Chambers 3–7, final Court / Shogun approach Chambers 8–10, and Eclipse Shogun at Chamber 11. One optional miniboss opportunity appears during Chambers 4–7 and selects Blood Lotus or Eternal Swordsman for that run.
@@ -19,21 +37,21 @@ The Kagutsuchi route network contains at least one Shrine, Shop, Rest, optional 
 
 Heart approach, Binding-completion spaces, and the true-final Heart are specialized endgame content outside Kagutsuchi's 11 counted chambers. The first six successful clears proceed from the Shogun into the Binding ritual; the seventh story run continues from the Shogun into the true-final Heart with the same active build.
 
-Together with the previously locked regional budgets, Oathbound's current prototype regional route is **33 counted chambers total: 12 Hushiro + 10 Yomori + 11 Kagutsuchi**. The next run-integration layer is provisional branching frequency, room/reward weighting, Technique cadence, Shrine/Shop/Rest frequency, encounter pacing, and related route-generation values rather than additional regional architecture.
+Together with the previously locked regional budgets, Oathbound's current prototype regional route is **33 counted chambers total: 12 Hushiro + 10 Yomori + 11 Kagutsuchi**. At this decision point the next integration layer was branching frequency and reward weighting; that layer has since received its first approved prototype model.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`, `docs/content/area_3/OVERVIEW.md`, `docs/content/ROOM_TYPES.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`
 
 ## 2026-08-16 — Area 1 and Area 2 prototype run structure locked
 
-Oathbound's regional run routing now uses a Hades-like model of broadly fixed regional length, fixed boss destinations, previewed route choices, chamber-index eligibility bands, weighted procedural contents, and hard opportunity safeguards.
+Oathbound's regional run routing uses a Hades-like model of broadly fixed regional length, fixed boss destinations, previewed route choices, chamber-index eligibility bands, weighted procedural contents, and hard opportunity safeguards.
 
 **Hushiro Gate Village** uses 12 counted chambers: opening Chambers 1–3, main Chambers 4–8, pre-boss Chambers 9–11, and Keeper of the Gate at Chamber 12. Chamber 1 is fixed combat followed by a Technique reward. One optional miniboss opportunity appears during Chambers 5–8 and selects Village Ogre or The Collector for that run. The generated route network contains at least one Shrine, Shop, Rest, miniboss opportunity, and three Technique-reward opportunities total including Chamber 1. Current active-time target: approximately 14–16 minutes.
 
 **Yomori Grove** uses 10 counted chambers: opening Chambers 1–2, main Chambers 3–7, pre-boss Chambers 8–9, and Twin Maws at Chamber 10. Branching begins immediately without a forced Chamber 1 Technique reward. One optional miniboss opportunity appears during Chambers 4–7 and selects The Embered Pilgrim or Rotwood Host for that run. The route network contains at least one Shrine, Shop, Rest, miniboss opportunity, and two Technique-reward opportunities. Current active-time target: approximately 12–14 minutes.
 
-Guaranteed opportunities exist in the generated route network but are not mandatory visits. Keeper and Twin Maws each lead to a brief safe regional transition space that is not counted as an additional chamber. Exact room/reward percentage weights, branch frequency, encounter compositions, and transition values remain later integration/playtest work. Kagutsuchi's chamber budget was subsequently locked later on 2026-08-16.
+Guaranteed opportunities exist in the generated route network but are not mandatory visits. Keeper and Twin Maws each lead to a brief safe regional transition space that is not counted as an additional chamber. Exact room/reward percentage weights, branch frequency, encounter compositions, and transition values were left to later integration at this decision point; the first branch/reward prototype was subsequently approved on 2026-08-16.
 
-The major-system production-scope audit is treated as complete. At this decision point the next regional run-design task was Kagutsuchi; that regional structure has since been completed.
+The major-system production-scope audit was treated as complete. At this decision point the next regional run-design task was Kagutsuchi; that regional structure has since been completed.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`, `docs/content/ROOM_TYPES.md`, `docs/gameplay/ITEMS_AND_REWARDS.md`
 
@@ -115,7 +133,7 @@ The seventh successful story run continues from the Shogun into the two-form Hea
 
 ## 2026-07-22 — Successful-run duration
 
-A normal successful Binding run targets roughly 45-50 minutes. Exact room counts, topology, branch frequency, and encounter budgets were originally left to prototype/playtest work; all three prototype regional chamber budgets were later approved on 2026-08-16.
+A normal successful Binding run targets roughly 45-50 minutes. Exact room counts, topology, branch frequency, and encounter budgets were originally left to prototype/playtest work; all three regional chamber budgets and the first branch/reward-generation prototype were later approved on 2026-08-16.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`
 
@@ -235,7 +253,7 @@ Direct Techniques require only an empty relevant combat slot and can be the play
 
 A Legendary requires **3 native Techniques from its family, including at least 1 slotted Technique**. Same-family Supporting Techniques count toward the three; Cross-family Techniques and refinements do not. Individual Legendaries may impose a mechanic-specific requirement so the capstone cannot appear in a build unable to use it.
 
-The current Technique content roster should remain stable unless audit or prototyping identifies a concrete problem. The next Technique-system decisions are reward frequency, offer-generation order, rarity probabilities/source weighting, rare replacement behavior, and full-roster validation.
+The current Technique content roster should remain stable unless audit or prototyping identifies a concrete problem. At this decision point the remaining Technique-system decisions included reward frequency, offer-generation order, rarity/source weighting, rare replacement behavior, and full-roster validation. Reward frequency now has a first route-level prototype; offer generation/source weighting remains next.
 
 **Authority:** `docs/gameplay/TECHNIQUE_CATALOG.md`, `docs/gameplay/TECHNIQUES.md`, `docs/_meta/OPEN_QUESTIONS.md`
 
