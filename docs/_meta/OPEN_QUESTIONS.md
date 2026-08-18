@@ -35,44 +35,73 @@ After that:
 - **Blood Aspects — COMPLETE:** `ASPECT_IMPLEMENTATION_BASELINES.md` plus the three Aspect authorities
 - **Techniques — COMPLETE FOR PLANNING:** `TECHNIQUE_CATALOG.md` + `TECHNIQUE_IMPLEMENTATION_BASELINES.md`
 - **Prosthetics — COMPLETE FOR PLANNING:** `PROSTHETICS.md`
+- **Relics — COMPLETE FOR PLANNING:** `RELICS.md` + `RELIC_IMPLEMENTATION_BASELINE.md`
 
-The Prosthetic authority now includes first-playtest Spirit costs, cooldowns, timings, geometry, Health/posture effects, Shock/Burn/control behavior, boss/elite restrictions, and all 19 approved upgrade values.
+The Relic baseline supplies Base / Mastery I / Mastery II values for all 10 Relics, shared 75 / 200 eligible-kill mastery thresholds, and the trigger/reset rules needed for implementation.
 
-Do not create new sub-passes for these packages unless implementation exposes a structural gap.
+Do not create new sub-passes for completed packages unless implementation exposes a structural gap.
 
-# Current question — Relic implementation baseline
+# Current question — final player-build resource/state contract
 
-**Question:** What first-playtest values make the existing **10 Relics and two mastery ranks each** directly implementable?
+This is the last shared player-build implementation question before Hushiro.
 
-Use the existing roster in `docs/gameplay/RELICS.md`. For each Relic, define only what code/data still needs:
+Corruption/Shrines and Blood are **related by progression dependency but remain separate mechanics**:
 
-- Base effect,
-- Mastery I effect,
-- Mastery II effect,
-- qualifying trigger,
-- reset/cooldown/once-per-room behavior where applicable,
-- stacking/exclusivity rule where applicable,
-- mastery thresholds only if they are needed for implementation now.
+- Corruption fills through combat and makes a Shrine progression decision available.
+- Embrace spends full Corruption to advance the selected Aspect.
+- Tier II unlocks Blood.
+- Blood is then a separate combat meter used to activate the selected Aspect's Blood Art.
 
-Do not redesign the roster, acquisition structure, one-equipped-slot rule, or mastery architecture.
+Do not merge their meters, gains, or UI identities.
 
-**Exit condition:** each Relic can be represented as one Base effect plus two permanent mastery improvements without a coder inventing gameplay behavior.
+## A. Corruption pacing and Shrine resolution
 
-# Next question — Corruption / Shrine / Blood completion
+**Question:** What first-playtest Corruption values and exact Shrine state transitions make Tier progression directly implementable?
 
-**Question:** What shared numeric/state values are still missing after the combat, Aspect, Technique, Prosthetic, and Relic baselines?
+Already decided and not to be reopened:
 
-Fill only unresolved implementation data for:
+- Corruption is run-only and absent on the first attempt.
+- Tier 0 is the starting Aspect state.
+- Full Corruption makes Shrine progression available.
+- Resist keeps the current Tier.
+- Embrace advances exactly one Tier and empties Corruption.
+- Tier IV is maximum; later full states use Stabilize.
+- A below-full Shrine gives **20% max Health** or **25% max Spirit** support.
+- Tier identities/effects are owned by the Aspect authorities.
 
-- Corruption thresholds and gain/loss,
-- Resist / Embrace / Stabilize behavior,
-- Blood generation/storage,
-- Blood availability / ready / spent / rebuilding states,
-- any shared Shrine/Blood rule not already owned by another authority.
+Only define the remaining implementation gaps:
 
-Do not duplicate Aspect-specific Blood Art values already documented elsewhere.
+- numeric Corruption maximum/full threshold,
+- exact gain values for approved combat/progression events,
+- any necessary anti-farming/per-event cap,
+- exact post-Resist Corruption value and full-Corruption support result,
+- exact post-Stabilize Corruption value and support result,
+- deterministic rule for whether below-full support resolves as Health or Spirit,
+- precise reset/state transitions needed by HUD/Shrine code.
 
-**Player-build exit condition:** the complete launch player-build layer can be instantiated without new design decisions in code.
+## B. Blood meter and generation
+
+**Question:** What first-playtest Blood meter and generation rules make the already-approved Tier-II Blood Arts usable without per-Aspect code invention?
+
+Already decided and not to be reopened:
+
+- Blood is unavailable before Tier II.
+- stored Blood persists between rooms,
+- a Blood Art requires a full meter and consumes it on manual activation,
+- no Blood is generated while the Blood Art is resolving,
+- Blood resets at run end,
+- Blood Art identity, damage/posture, geometry, and Tier behavior are already owned by the Aspect authorities and implementation baselines.
+
+Only define the remaining implementation gaps:
+
+- Blood meter maximum,
+- exact generation from approved combat events,
+- Aspect-specific weighting/normalization needed so Wolf/Wraith/Ronin fill at comparable intended pacing despite different hit profiles,
+- whether overfill is discarded,
+- ready → spent → rebuilding state behavior,
+- any necessary anti-recursion/secondary-damage exclusions.
+
+**Player-build exit condition:** after A and B are answered, the complete launch player-build layer can be instantiated without another shared design pass. Final gain rates and pacing remain playtest-tunable.
 
 # Hushiro implementation-ready package
 
@@ -98,7 +127,7 @@ Then implementation and documentation proceed together.
 
 # Later implementation-content packages
 
-- **Strand / permanent progression:** Bloodwell/Blood Mirror effects and prices, Relic mastery thresholds if deferred, Prosthetic unlock sequence, Relic source assignments, Blood Cavern trials/rewards, save/progression flags.
+- **Strand / permanent progression:** Bloodwell/Blood Mirror effects and prices, Prosthetic unlock sequence, Relic source assignments, Blood Cavern trials/rewards, save/progression flags.
 - **Yomori:** encounter pool/layout inventory, Embered Pilgrim, Rotwood Host, Twin Maws, regional hazards.
 - **Kagutsuchi / Shogun / Heart:** encounter pool/layout inventory, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding states, both Heart forms, first-clear/repeat-suppression differences.
 - **Authored presentation content:** exact dialogue, lore/records, achievements, tutorial/help text, ending/postgame lines, credits/legal when dependencies are known.
@@ -114,6 +143,8 @@ Do not promote these back into the design queue unless testing reveals a structu
 - final enemy Health/damage,
 - final proc coefficients/status durations,
 - final Prosthetic magnitudes/cooldowns,
+- final Relic values/mastery pacing,
+- final Corruption/Blood gain pacing after a coherent baseline exists,
 - final route/reward/rarity weights,
 - final economy/progression prices,
 - final encounter-volume adjustments,
