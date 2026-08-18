@@ -160,7 +160,7 @@ Akio never speaks or supplies written responses, dialogue choices, or internal m
 
 The story is told around and through him. NPCs, intelligent enemies, and bosses may speak; Akio's character and decisions are expressed through action, stillness, physical reaction, combat, refusal, and the player's continued movement through the campaign.
 
-His silence continues through the bloodline reveal, Shogun recruitment, Heart confrontation, and ending.
+His silence continues through the bloodline reveal, Shogun recruitment, Heart confrontation, ending, and postgame.
 
 ## Akio and the Shogun
 
@@ -209,23 +209,27 @@ The Heart encounter has two conceptual forms:
 1. **The Unbound Heart** — the Heart tears free and becomes a mobile beastlike organ with malformed limbs.
 2. **The Vessel of Continuance** — the Heart creates an enormous nonhuman defensive beast body around itself while remaining visibly central.
 
-Destroying the Heart makes active Beast Blood inert across the island.
+Akio destroys the Heart's manifested combat body and permanently cripples its supernatural reach.
 
-The Shogun's reconstruction stops and his unnaturally sustained body dies. Corrupted inhabitants and beasts lose their supernatural sustain. Yomori's spirits pass on. The Blood Moon ends, and the barrier weakens safely.
+The Heart survives only as a faint regenerating remnant, but it can **never again produce, release, or spread new Beast Blood**. The extraction cycle is ended permanently, the Shogun's mainland expansion plan is broken, and the curse can no longer create new bearers.
 
-Akio survives in his current complete human body but loses Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction. He becomes mortal.
+Existing Beast Blood remains active. Akio retains Returning Blood and reconstruction. The Shogun and other existing Beast Blood bearers retain the benefits and sustain already present in their bodies. The Shogun may therefore reconstruct again after his final-story defeat.
 
-Akio remains silent. The ending communicates his acceptance of mortality through action rather than a final speech. A strong final image is his return through the weakening barrier alive rather than another reconstruction at the Strand.
+The ending must make the victory unmistakable: the Heart has been reduced from an expanding existential threat to a contained remnant whose activity can be monitored and suppressed. Akio has not erased the island's existing cursed population; he has permanently ended the possibility of the curse spreading beyond it or being given to anyone new.
 
-The ending and credits follow.
+Akio remains silent. The ending and credits follow.
 
-## Postgame
+## Canonical postgame
 
-The completed save remains playable. Normal runs and the Heart route may be repeated for gameplay challenge.
+The completed save continues **canonically** after the ending.
 
-Repeat Heart victories do not advance the story, create additional canonical endings, reverse the island's fate, or imply another Heart.
+The Heart slowly regenerates physical tissue because regeneration is fundamental to its nature, but it cannot recover the lost ability to create or propagate Beast Blood. Its postgame pulse is faint and local.
 
-The exact postgame route control and repeat-clear reward structure remain the next full-scope design question.
+Akio continues returning to the island to monitor existing Beast Blood threats and periodically suppress the Heart's regrowth. Existing bearers—including the Shogun—remain valid recurring threats because their Blood never became inert.
+
+Postgame runs do not create a new ending or undo the story victory. Their purpose is continued containment of a permanently non-propagating curse.
+
+The postgame/release authority owns route selection, repeat Heart suppression, completion goals, records, achievements, and release-scope rules.
 
 ## Deliberate mysteries and deferred implementation
 
@@ -239,6 +243,4 @@ The following remain intentionally undefined or implementation-level:
 - exact dialogue scripts and line counts,
 - exact camera timing and portrait implementation,
 - exact Shogun and Heart movesets,
-- postgame route control and rewards.
-
-These boundaries preserve mystery or await their owning writing, encounter, or postgame design pass.
+- the exact mechanism by which the crippled Heart regrows its postgame combat manifestation.
