@@ -8,7 +8,7 @@ last_reviewed: 2026-08-17
 topics:
   - open-questions
   - design-priority
-  - full-run-integration
+  - enemy-availability
   - permanent-progression
   - narrative-delivery
   - postgame
@@ -34,6 +34,9 @@ The following major architecture is already established and should not be reopen
 - three permanent upgrade stations: Bloodwell, Forge Bench, later-unlocked Blood Mirror,
 - no general launch consumable inventory or one-use item reward layer,
 - three-region 33-chamber prototype route: 12 Hushiro / 10 Yomori / 11 Kagutsuchi,
+- standard Combat rooms use deliberately authored encounter scripts selected from a regional encounter pool,
+- no mandatory opening/main/pre-boss split for standard encounter pools,
+- encounter-specific minimum-chamber eligibility may be added later only where a particular authored encounter needs it,
 - first route-generation and room/reward weighting model,
 - first Technique-offer / rarity-source model,
 - first Gold/Shop economy,
@@ -53,33 +56,46 @@ Current values and exact rules live in:
 
 # Scope-closure sequence
 
-1. **Make the approved 33-chamber run concrete and validate its pacing**
+1. **Make cross-region enemy availability explicit**
 2. **Close permanent-progression content scope**
 3. **Define narrative delivery and campaign presentation**
 4. **Define endgame, postgame, and release scope**
 
-This sequence is dependency-driven: first determine what players actually fight and how long the run plays, then finalize the persistent content supporting repeated runs, then scope authored narrative and release presentation.
+Detailed standard-encounter authoring and final clear-time validation are later content/playtest work after the enemy availability matrix and broader launch scope are established.
 
-# 1. Playable full-run integration and pacing
+# 1. Cross-region standard-enemy availability
 
-## Encounter composition and pacing
+The individual regional enemy rosters are already defined:
 
-Connect the approved chamber route to concrete encounter rules rather than adding another reward subsystem.
+- Hushiro: 6 standard enemies,
+- Yomori: 4 standard enemies,
+- Kagutsuchi: 5 standard enemies.
 
-Define/prototype:
+What is not currently explicit is **which enemies are region-exclusive and which may reappear in later regions**.
 
-- regional enemy-composition rules for opening, main, and pre-boss/final chamber bands,
-- expected enemy-count / threat-budget ranges by region and band,
-- elite / high-pressure encounter frequency and where those spikes may occur,
-- rules preventing repetitive or mechanically bad enemy combinations,
-- standard-room clear-time targets by region,
-- miniboss and regional-boss time budgets,
-- expected reward-choice / Shop / Rest / transition overhead,
-- a complete 33-chamber time-budget simulation against the **45–50 minute** normal successful-run target.
+Define a simple launch availability matrix for the 15 standard enemy types:
 
-The output of this pass should be an implementable encounter-generation/pacing prototype for all three regions, not final enemy HP/damage tuning.
+- native region,
+- additional later regions where the enemy may appear,
+- enemies that remain exclusive to their native region.
 
-**Authority:** regional `ENEMIES.md` / encounter content files + `docs/gameplay/RUN_STRUCTURE.md`.
+Do **not** define encounter counts, every encounter script, or opening/main/final encounter buckets during this pass. Those belong to the later encounter-authoring pass.
+
+**Authority:** regional `docs/content/area_*/ENEMIES.md` files + `docs/gameplay/RUN_STRUCTURE.md`.
+
+# Encounter authoring and pacing — later content/playtest pass
+
+Once enemy availability is explicit and encounter production begins:
+
+- author the actual regional standard-encounter pools,
+- give each encounter a coherent tactical theme/enemy combination,
+- add encounter-specific minimum-chamber restrictions only where needed,
+- determine how many authored encounters are required for sufficient run variety,
+- tune individual enemy counts/waves/spawn sequencing,
+- measure standard-room, miniboss, boss, reward-choice, Shop, Rest, and transition times,
+- validate the complete route against the **45–50 minute** successful-run target.
+
+This is not the current top-level design question because the game does not yet need every individual combat room authored to close launch scope.
 
 # 2. Permanent-progression content scope
 
