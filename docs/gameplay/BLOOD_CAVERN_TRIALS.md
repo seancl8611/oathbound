@@ -28,9 +28,9 @@ related:
 
 Provide repeatable, skill-focused Strand activities that teach approved combat systems, demonstrate selected Technique interactions, and reward mastery without depending on run RNG.
 
-The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, most rewards, and production volume remain later content and implementation work rather than full-game scope blockers. The Relic system reserves **2 of the 10 launch Relics** for authored Blood Cavern / challenge unlock milestones.
+The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, most rewards, and production volume remain later content and implementation work rather than full-game scope blockers. The Relic system reserves **2 of the 10 launch Relics** for authored Blood Cavern / challenge unlock milestones; exact Relic identities and exact challenge assignments remain later content sequencing.
 
-The Blood Cavern is a training / trial space, not a separate general permanent-upgrade station. Permanent Aspect progression belongs to the Blood Mirror inside the Cavern.
+The Blood Cavern is a training / trial space, not a separate general permanent-upgrade station. Permanent Aspect progression belongs to the Blood Mirror inside the Cavern after the Mirror is unlocked following the first Keeper defeat.
 
 ## Trial families
 
@@ -66,7 +66,13 @@ Tier 0 lessons:
 - Veil Reversal for posture-focused parry conversion,
 - maintaining useful spacing without tracking or teleportation.
 
-Tier lessons cover Pale Barrage, Spectral Edge, Wraith's Reach, Spectral Passage, and Beyond the Veil while preserving their authored Tier requirements.
+Tier lessons:
+
+- **Pale Barrage:** choose between single thrust, partial continuation, and full stationary commitment.
+- **Spectral Edge:** distinguish physical contact from eligible spectral-only contact and its Tier-scaled posture/guard payoff.
+- **Wraith's Reach:** use the opening sweep, select one valuable corridor, and predict the delayed same-geometry echo.
+- **Spectral Passage:** align layered ordinary enemies and learn stopping rules against elites, bosses, protected heavies, and geometry.
+- **Beyond the Veil:** use longer Pale Lance/Ghostline geometry, Tier IV Spectral Edge eligibility, valid clear-path extended deathblows, and brief Veilstride movement after a killing deathblow.
 
 ### Ronin Trials
 
@@ -79,7 +85,15 @@ Tier 0 lessons:
 - understand strongest-guard stability, accumulated posture, and slow posture recovery,
 - respect fixed attack lines and severe miss recovery.
 
-Tier lessons cover posture-capacity growth, Steadfast Reprisal, Falling Mountain, Unbroken Resolve, and Shattering Wake while preserving their authored Tier requirements.
+Tier lessons:
+
+- **Posture-capacity growth:** recognize that each Embrace allows Ronin to absorb more posture before breaking while recovery speed remains unchanged.
+- **Steadfast Reprisal:** block, read whether pressure has ended, then decide whether Reprisal Cut is safe.
+- **Falling Mountain:** use partial posture relief, aim the planted slam, and understand the delayed fixed-point Deep Rupture.
+- **Unbroken Resolve:** distinguish the costly one-hit commitment-preservation route from clean Measured Weight → Perfect Weight execution.
+- **Shattering Wake:** line enemies behind a directly struck or guarding primary target and understand that the wake cannot double-hit the primary target.
+
+Ronin trials must not teach tracking, required combo completion, generic armor, or a persistent Focus state.
 
 ## Fixed Tier and Blood demonstrations
 
@@ -99,15 +113,22 @@ A trial preview does not grant persistent run Tier or Blood state.
 
 ## Technique demonstrations
 
-Selected trials may use fixed approved Techniques to teach direct slots, family mechanics, refinements, Supporting Techniques, and mixed-family interactions.
+Selected trials may use fixed approved Techniques to teach:
 
-Prosthetic behavior is taught through the Prosthetic system rather than a temporary Prosthetic-Technique layer. Temporary trial loadouts do not become persistent equipped builds.
+- how a direct Technique modifies one of the five combat slots,
+- how Echo, Rupture, Seal, Rift, or Crimson Vulnerable / backstab / direct Health damage reads and resolves in combat,
+- how a Technique behaves across different Aspect attack geometry or frequency,
+- and approved Supporting, refinement, or mixed-family interactions.
+
+Prosthetic behavior is taught through the Prosthetic system rather than a temporary Prosthetic-Technique layer.
+
+Temporary trial loadouts do not become persistent equipped builds.
 
 ## Advanced and mastery trials
 
 Later challenges may use fixed Aspects, Techniques, Prosthetics, Relics, stricter execution goals, or boss-rematch structures. They should remain deterministic enough that failure teaches a clear lesson.
 
-Two authored Blood Cavern / challenge milestones across the launch progression award **permanent first-time Relic unlocks**. Working sequencing uses one earlier challenge and one more advanced challenge. Exact Relic identities and exact trial assignments remain later content sequencing.
+Two authored Blood Cavern / challenge milestones across the launch progression award **permanent first-time Relic unlocks**. Working sequencing uses one earlier challenge and one more advanced challenge; exact Relic identities and exact challenge assignments remain later content sequencing.
 
 Repeating those challenges does not create duplicate Relics or another Relic currency.
 
@@ -127,6 +148,8 @@ Trials may not:
 
 ## Blood Mirror permanent progression
 
+Permanent Blood Aspect progression belongs to the **Blood Mirror** and remains small, capped, and reliability-focused.
+
 The Blood Mirror begins locked and **unlocks after the first Keeper defeat**.
 
 Launch scope is exactly **3 permanent nodes per Aspect / 9 total**:
@@ -141,9 +164,11 @@ Availability cadence:
 - **after first Twin Maws:** Node 2 available,
 - **after first Shogun / first Binding clear:** Node 3 available.
 
-Permanent Aspect progression remains small, capped, and reliability-focused. It cannot add major Tier mechanics early, bypass fixed progression, unlock Blood before Tier II, grant Wraith Tier-IV reach/deathblow rules early, reproduce Ronin's run-only posture-capacity growth as uncapped permanent scaling, or remove an Aspect's inherent commitments.
+Permanent upgrades must not grant major Tier mechanics early, bypass fixed progression, unlock Blood before Tier II, grant Wraith Tier IV reach/deathblow rules early, reproduce Ronin's run-only Tier posture-capacity growth as uncapped permanent scaling, or remove a kit's core tradeoffs.
 
-Exact individual node effects, values, normal currency costs, and any trial-completion requirements remain later detailed tuning under `PROGRESSION.md` and the relevant Aspect authorities.
+Regional boss materials are not normal Blood Mirror progression requirements at launch; the six approved boss-material permanent gates belong to the Bloodwell.
+
+Exact individual Aspect-node effects, values, normal currency costs, and any trial requirements remain later detailed tuning.
 
 ## Technical requirements
 
@@ -153,5 +178,6 @@ Exact individual node effects, values, normal currency costs, and any trial-comp
 - The two launch Relic challenge rewards are first-time permanent unlocks rather than repeatable payouts.
 - Temporary trial state clears when the trial ends.
 - Trial rules do not require random room/reward generation.
-- The Blood Mirror supports locked/unlocked campaign state plus three staged node bands per Aspect.
+- The Blood Mirror supports a persistent locked/unlocked campaign state keyed to the first Keeper defeat.
+- The Blood Mirror supports three staged permanent progression nodes per Aspect.
 - Framework supports Tier-specific Spectral Edge eligibility, clear-path extended deathblows, Veilstride, Ronin posture-capacity variants, and other approved Tier states where demonstrations require them.
