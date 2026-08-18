@@ -16,11 +16,7 @@ topics:
 
 This file contains only decisions that materially block implementation or authored launch content.
 
-The launch architecture is already scoped. The goal is to make each remaining package concrete enough to implement, then let Godot playtesting drive revision.
-
-# Queue rules
-
-A package leaves this queue once its authorities provide a coherent first-playtest implementation contract.
+The launch architecture is already scoped. A package leaves this queue once its authorities provide a coherent first-playtest implementation contract.
 
 After that:
 
@@ -29,89 +25,42 @@ After that:
 - treat hitbox polish, frame tuning, VFX synchronization, minor coefficients, and ordinary balance as implementation/playtest work,
 - reopen only for a genuine missing rule, contradiction, unusable interaction, or scope problem.
 
-# Completed player-build packages
+# Player-build layer — COMPLETE FOR PLANNING
 
-- **Core combat — COMPLETE:** `COMBAT_IMPLEMENTATION_BASELINE.md`
-- **Blood Aspects — COMPLETE:** `ASPECT_IMPLEMENTATION_BASELINES.md` plus the three Aspect authorities
-- **Techniques — COMPLETE FOR PLANNING:** `TECHNIQUE_CATALOG.md` + `TECHNIQUE_IMPLEMENTATION_BASELINES.md`
-- **Prosthetics — COMPLETE FOR PLANNING:** `PROSTHETICS.md`
-- **Relics — COMPLETE FOR PLANNING:** `RELICS.md` + `RELIC_IMPLEMENTATION_BASELINE.md`
+The launch player-build layer now has coherent first-playtest implementation contracts for:
 
-The Relic baseline supplies Base / Mastery I / Mastery II values for all 10 Relics, shared 75 / 200 eligible-kill mastery thresholds, and the trigger/reset rules needed for implementation.
+- **Core combat:** `COMBAT_IMPLEMENTATION_BASELINE.md`
+- **Blood Aspects:** `ASPECT_IMPLEMENTATION_BASELINES.md` plus the three Aspect authorities
+- **Techniques:** `TECHNIQUE_CATALOG.md` + `TECHNIQUE_IMPLEMENTATION_BASELINES.md`
+- **Prosthetics:** `PROSTHETICS.md`
+- **Relics:** `RELICS.md` + `RELIC_IMPLEMENTATION_BASELINE.md`
+- **Corruption / Shrines:** `CORRUPTION_AND_SHRINES.md`
+- **Blood meter / generation:** `BLOOD_ASPECTS.md`
 
-Do not create new sub-passes for completed packages unless implementation exposes a structural gap.
+The final shared resource/state contract now defines:
 
-# Current question — final player-build resource/state contract
+- 100-point Corruption meter and first-playtest event gain/caps,
+- exact Resist / Embrace / Stabilize transitions,
+- fixed Shrine recovery that restores both Health and Spirit while skipping already-full resources,
+- 100-point Tier-II Blood meter,
+- normalized Wolf / Wraith / Ronin Blood generation,
+- multi-target limits, exclusions, overfill, ready/spent/rebuilding behavior.
 
-This is the last shared player-build implementation question before Hushiro.
+Do not create another shared player-build planning pass unless implementation exposes a structural gap. Final Corruption/Blood rates and other ordinary tuning belong to playtesting.
 
-Corruption/Shrines and Blood are **related by progression dependency but remain separate mechanics**:
+# Current question — Hushiro implementation-ready package
 
-- Corruption fills through combat and makes a Shrine progression decision available.
-- Embrace spends full Corruption to advance the selected Aspect.
-- Tier II unlocks Blood.
-- Blood is then a separate combat meter used to activate the selected Aspect's Blood Art.
+**Question:** What exact authored encounter pool, reusable gameplay spaces, and miniboss/boss combat contracts are required to build Hushiro as the first complete repeatable region?
 
-Do not merge their meters, gains, or UI identities.
+Resolve Hushiro as one connected package:
 
-## A. Corruption pacing and Shrine resolution
+1. **Authored standard encounters** — launch pool, exact enemy compositions, waves/spawns where used, tactical purpose, and only necessary eligibility/anti-repeat restrictions.
+2. **Reusable gameplay-space inventory** — the actual Combat, Shrine, Rest, Shop, Treasure, miniboss, Keeper, and transition layouts needed to support the approved 12-chamber route without unique art per chamber.
+3. **Village Ogre / Collector / Keeper contracts** — move/state lists, attack selection conditions, block/parry/perilous classes, escalation/phases, arena behavior, posture/deathblow/death rules.
 
-**Question:** What first-playtest Corruption values and exact Shrine state transitions make Tier progression directly implementable?
+Do not reopen Hushiro's approved 12-chamber route, six-enemy roster, room weighting, miniboss window, Keeper endpoint, or reward architecture unless a concrete production incompatibility appears.
 
-Already decided and not to be reopened:
-
-- Corruption is run-only and absent on the first attempt.
-- Tier 0 is the starting Aspect state.
-- Full Corruption makes Shrine progression available.
-- Resist keeps the current Tier.
-- Embrace advances exactly one Tier and empties Corruption.
-- Tier IV is maximum; later full states use Stabilize.
-- A below-full Shrine gives **20% max Health** or **25% max Spirit** support.
-- Tier identities/effects are owned by the Aspect authorities.
-
-Only define the remaining implementation gaps:
-
-- numeric Corruption maximum/full threshold,
-- exact gain values for approved combat/progression events,
-- any necessary anti-farming/per-event cap,
-- exact post-Resist Corruption value and full-Corruption support result,
-- exact post-Stabilize Corruption value and support result,
-- deterministic rule for whether below-full support resolves as Health or Spirit,
-- precise reset/state transitions needed by HUD/Shrine code.
-
-## B. Blood meter and generation
-
-**Question:** What first-playtest Blood meter and generation rules make the already-approved Tier-II Blood Arts usable without per-Aspect code invention?
-
-Already decided and not to be reopened:
-
-- Blood is unavailable before Tier II.
-- stored Blood persists between rooms,
-- a Blood Art requires a full meter and consumes it on manual activation,
-- no Blood is generated while the Blood Art is resolving,
-- Blood resets at run end,
-- Blood Art identity, damage/posture, geometry, and Tier behavior are already owned by the Aspect authorities and implementation baselines.
-
-Only define the remaining implementation gaps:
-
-- Blood meter maximum,
-- exact generation from approved combat events,
-- Aspect-specific weighting/normalization needed so Wolf/Wraith/Ronin fill at comparable intended pacing despite different hit profiles,
-- whether overfill is discarded,
-- ready → spent → rebuilding state behavior,
-- any necessary anti-recursion/secondary-damage exclusions.
-
-**Player-build exit condition:** after A and B are answered, the complete launch player-build layer can be instantiated without another shared design pass. Final gain rates and pacing remain playtest-tunable.
-
-# Hushiro implementation-ready package
-
-After the player-build layer, resolve Hushiro as one connected package:
-
-1. **Authored standard encounters** — launch pool, exact compositions, waves/spawns, only necessary eligibility restrictions.
-2. **Reusable gameplay-space inventory** — Combat, Shrine, Rest, Shop, Treasure, miniboss, Keeper, transition spaces.
-3. **Village Ogre / Collector / Keeper contracts** — moves/states, selection rules, perilous/defensive classifications, escalation, arena behavior, posture/deathblow/death rules.
-
-**Exit condition:** Hushiro can be built as a complete repeatable region and used for serious end-to-end Godot testing.
+**Exit condition:** Hushiro can be built as a complete repeatable region and used for serious end-to-end Godot testing without a combat/content author inventing major encounter rules.
 
 # Implementation restart gate
 
@@ -119,7 +68,7 @@ Do not wait for later regions.
 
 Return seriously to implementation when:
 
-- the player-build layer is implementation-ready,
+- the player-build layer is implementation-ready — **complete for planning**,
 - Hushiro is implementation-ready,
 - the existing Godot project is audited against current authorities.
 
@@ -144,7 +93,7 @@ Do not promote these back into the design queue unless testing reveals a structu
 - final proc coefficients/status durations,
 - final Prosthetic magnitudes/cooldowns,
 - final Relic values/mastery pacing,
-- final Corruption/Blood gain pacing after a coherent baseline exists,
+- final Corruption/Blood gain pacing,
 - final route/reward/rarity weights,
 - final economy/progression prices,
 - final encounter-volume adjustments,
