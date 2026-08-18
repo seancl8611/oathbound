@@ -82,22 +82,26 @@ Final quotation depends on narrative-delivery scope, postgame access/rewards, an
 - Current 50-Technique and 10-Relic rosters remain stable unless testing exposes a concrete gap.
 - No alternate-weapon / weapon-socket system or separate Relic Reliquary.
 - No launch consumable inventory or one-use item reward family.
+- Standard Combat rooms use deliberately authored encounter scripts selected from regional encounter pools; they are not procedurally assembled from threat budgets.
+- Route opening/main/final bands do not require separate standard-encounter pools; individual encounters may receive minimum-chamber eligibility later where needed.
 - Reuse attack, locomotion, deathblow, HUD, and VFX families where mechanics modify existing actions.
 - Standard successful-run target remains **45–50 minutes**.
 - Regional prototype baseline remains **12 Hushiro / 10 Yomori / 11 Kagutsuchi = 33 counted chambers**.
 - Route branching, room/reward weights, Technique offer generation, Gold/Shop economy, survival/capacity values, boss rewards, Relic acquisition/swapping, and persistent-resource payouts have first approved prototype models.
 - Persistent economy uses **Mist, Scrolls, and three low-count regional boss materials**; no generic Boss Emblem currency.
-- Final tuned probabilities, prices, payouts, recovery values, upgrade costs, and encounter compositions remain playtest/implementation work.
+- Final tuned probabilities, prices, payouts, recovery values, upgrade costs, authored encounter counts/scripts, and encounter timings remain playtest/implementation work.
 - Additional Aspects, large modifier systems, enemy/room variant packages, and other deferred challenge scope are excluded unless explicitly promoted.
 - Markdown remains internal source of truth; Word/PDF are exports.
 
 # Current pre-production dependency
 
-The remaining design work should close scope in dependency order rather than promoting isolated minor questions:
+The remaining design work should close scope in dependency order rather than promoting encounter-production details before they are needed:
 
-1. **Playable full-run integration and pacing** — regional enemy mixes/threat budgets, elite pressure, clear-time targets, miniboss/boss time budgets, service overhead, and a complete 33-chamber pacing simulation.
+1. **Cross-region enemy availability** — explicitly decide which standard enemies are region-exclusive and which may reappear in later regions.
 2. **Permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery ranks, boss-material gate assignments, and unlock cadence.
 3. **Narrative delivery/campaign presentation** — authored scene/dialogue/codex/ending production package.
 4. **Endgame/postgame/release scope** — repeat Heart access/rewards, completion goals, settings/front-end/credits, and any launch challenge layer.
+
+The actual standard-encounter roster, encounter-pool sizes, enemy counts/waves, and full-run clear-time validation belong to the later encounter-authoring/playtest pass.
 
 Use `docs/_meta/OPEN_QUESTIONS.md` for the current unresolved agenda; do not duplicate resolved prototype tables here.
