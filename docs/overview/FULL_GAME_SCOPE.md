@@ -17,6 +17,7 @@ topics:
   - the-heart
   - postgame
   - regional-routing
+  - authored-encounters
   - economy
   - survival
 related:
@@ -155,6 +156,10 @@ Current controlled-generation prototype includes:
 - roughly 4–5 visible Shrine opportunities,
 - roughly 1–2 normally visited Shops, Rests, Treasures, and minibosses.
 
+Standard Combat uses **authored encounters**, not procedural enemy assembly. Each region will have a finite pool of deliberately scripted encounter compositions; when a Combat chamber is generated, an eligible encounter is selected from that pool. The route's opening/main/final bands do **not** require separate encounter pools. An individual encounter may later receive a minimum-chamber restriction when its teaching role or difficulty requires one.
+
+Encounter-pool counts and individual scripts are deferred until the encounter-authoring production pass. The remaining scope prerequisite is to make explicit which of the 15 standard enemies are region-exclusive and which may reappear in later regions.
+
 Exact route rules and safeguards belong to `RUN_STRUCTURE.md`.
 
 # Reward / economy prototype
@@ -224,7 +229,7 @@ The Boat remains a fast run-start confirmation point rather than another combine
 - **Yomori Grove / Adaptation:** 4 standard enemies, 2 authored minibosses, Twin Maws; expands/deepens the build.
 - **Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 authored minibosses, Eclipse Shogun; finalizes the mature build under the most layered normal pressure.
 
-Each region generates one optional miniboss opportunity from its two candidates.
+Each region generates one optional miniboss opportunity from its two candidates. Cross-region reuse among the 15 standard enemies remains to be explicitly assigned.
 
 # Heart Binding campaign and ending
 
@@ -245,17 +250,19 @@ Completed saves remain playable; repeat normal/Heart runs do not create addition
 
 # Current open production scope
 
-The run-build, reward/economy, boss-reward, Relic-acquisition, and major route architecture are complete at paper-design depth.
+The run-build, reward/economy, boss-reward, Relic-acquisition, route, and standard-encounter architecture are complete at paper-design depth.
 
 The remaining scope closes in dependency order:
 
-1. **Playable full-run integration and pacing** — define regional enemy-composition/threat rules, elite pressure, clear-time budgets, boss/miniboss budgets, service overhead, and validate the 33-chamber route against 45–50 minutes.
+1. **Cross-region enemy availability** — explicitly assign which standard enemies are region-exclusive and which may reappear in later regions; do not author every encounter yet.
 2. **Permanent-progression content scope** — define Bloodwell/Blood Mirror node counts and roles, Relic mastery rank structure, boss-material gate assignments, and unlock cadence without final balance tuning.
 3. **Narrative delivery/campaign presentation** — define the authored launch package and production volume.
 4. **Endgame/postgame/release package** — define repeat Heart access/rewards, completion goals, and release UI/presentation.
+
+Detailed standard-encounter authoring, encounter-pool counts, clear-time tuning, and full-run time validation remain a later content/playtest pass once those encounters are actually being produced.
 
 `OPEN_QUESTIONS.md` owns the current unresolved agenda and should not duplicate resolved prototype tables.
 
 # Deferred implementation / tuning
 
-Final frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, final upgrade costs, exact mastery thresholds, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
+Final encounter scripts/counts, frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, final upgrade costs, exact mastery thresholds, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
