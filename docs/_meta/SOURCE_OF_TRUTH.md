@@ -16,6 +16,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Game identity and pitch | `docs/overview/GAME_OVERVIEW.md` |
 | Design pillars | `docs/overview/DESIGN_PILLARS.md` |
 | Full production scope | `docs/overview/FULL_GAME_SCOPE.md` |
+| Endgame, canonical postgame, completion, and release package | `docs/overview/ENDGAME_POSTGAME_RELEASE.md` |
 | Current unresolved design priorities | `docs/_meta/OPEN_QUESTIONS.md` |
 | Top-level production order | `docs/overview/PRODUCTION_ROADMAP.md` |
 | Core gameplay loop | `docs/gameplay/CORE_LOOP.md` |
@@ -86,7 +87,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 
 ## Conflict rule
 
-When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules.
+When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements.
 
 If the current design genuinely does not answer a conflict and the decision affects scope, add one concise question to `OPEN_QUESTIONS.md`.
 
