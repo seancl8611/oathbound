@@ -99,7 +99,7 @@ Because Akio has no active Returning Blood, Corruption, or selected Aspect on th
 - no Corruption meter is shown,
 - and the Shrine uses its approved below-full support behavior rather than an Aspect progression decision.
 
-The current support prototype remains Health or Spirit recovery according to the normal Shrine support rules. This lets the room remain useful without pretending that Akio can evolve a Blood Aspect he does not yet possess.
+The current support prototype restores **20% max Health + 25% max Spirit**. Each resource resolves independently; if one is already full, that portion is simply skipped.
 
 # First death and awakening
 

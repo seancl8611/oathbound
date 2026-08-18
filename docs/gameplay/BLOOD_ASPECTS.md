@@ -4,7 +4,7 @@ title: Blood Aspect System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-07
+last_reviewed: 2026-08-18
 topics:
   - blood-aspects
   - blood-arts
@@ -15,6 +15,8 @@ topics:
   - corruption
   - run-progression
   - techniques
+  - implementation
+  - first-playtest
 related:
   - GAMEPLAY-ASPECT-WEAPON-KIT-MODEL
   - GAMEPLAY-ASPECT-IDENTITY-GUIDELINES
@@ -111,20 +113,88 @@ Wraith remains direction-dependent, restrained in movement, and vulnerable to cl
 
 Ronin remains slow, grounded, fixed-direction, and severely punishable on bad heavy commitments.
 
-## Blood contract
+# Blood contract
 
-Blood is a run-only combat resource owned by the selected Aspect.
+Blood is a separate run-only combat resource owned by the selected Aspect. It is unlocked by reaching Tier II through Shrine Embrace; it is not Corruption and never shares Corruption gain or meter state.
+
+## Meter and state
 
 - Blood is unavailable before Tier II.
+- Reaching Tier II enables Blood at **0 / 100**.
+- maximum / ready threshold: **100 Blood**.
 - Stored Blood persists between rooms until spent or the run ends.
+- Blood does not passively decay.
+- Gain above 100 is discarded.
+- At 100, the selected Aspect's Blood Art becomes Ready.
+- Manual Blood Art activation commits the full meter and sets Blood to **0**.
+- No Blood is generated while the Blood Art is active/resolving.
+- Generation resumes only after the Blood Art has completely finished and normal player control returns.
 - Blood and Blood Art state reset after death or successful completion.
-- A Blood Art normally requires a full meter, activates manually, consumes the stored Blood, and generates no Blood while resolving.
-- Generation is weighted around meaningful combat contribution rather than equal gain per hit.
 - Runs that do not reach Tier II remain viable without Blood.
 
-Shared generation foundation includes meaningful katana Health damage, enemy-posture contribution, Parry Counters, posture breaks, and deathblows, with Aspect-specific weighting.
+HUD states are: unavailable → empty/building → near-ready → ready → committed/resolving → spent/rebuilding.
 
-## Blood Art distinction
+## Shared Blood generation
+
+Blood uses actual meaningful katana contribution rather than raw hit count.
+
+For an eligible direct katana contact:
+
+`Blood = (actual direct Health damage × 0.035 + actual posture/guard pressure × 0.015) × Aspect multiplier`
+
+Aspect normalization:
+
+- **Wolf: ×0.90**,
+- **Wraith: ×1.00**,
+- **Ronin: ×1.10**.
+
+Additional event gain:
+
+- connected Parry Counter: **+2 Blood**,
+- enemy posture break: **+4 Blood**,
+- successful Deathblow: **+6 Blood**.
+
+Use actual applied Health/posture values, not nominal pre-mitigation damage or overkill/overbreak values.
+
+The normalization multipliers exist only to keep expected fill pace comparable across Wolf's rapid sequence, Wraith's broader geometry, and Ronin's fewer heavy commitments. They are first-playtest tuning values, not part of Aspect identity.
+
+## Multi-target / multi-hit normalization
+
+For one originating sword action:
+
+- primary valid contact contributes normal Blood,
+- additional targets contribute **35% of their otherwise-valid Blood generation**,
+- total damage-derived Blood from that originating action is capped at approximately **1.5× the primary full-value contribution**,
+- repeated subhits use existing proc/multi-hit normalization where already defined.
+
+## Blood-generation exclusions
+
+The following do **not** generate Blood:
+
+- Blood Arts or their secondary stages,
+- Echo damage,
+- Rift bursts,
+- Rupture events,
+- Burn or other status damage,
+- Prosthetic damage,
+- Technique-created secondary proc/AoE damage,
+- Shattering Wake secondary targets,
+- Apex Mauling's secondary proc package,
+- environmental damage,
+- enemy-on-enemy damage,
+- no-credit summons or farming targets.
+
+A Technique that increases the originating direct sword hit may affect Blood through that hit's actual applied Health/posture result. A separate spawned/secondary damage packet does not.
+
+Deathblows use the fixed **+6 Blood** event value rather than arbitrary execution damage.
+
+## First-playtest pacing target
+
+The working target is roughly one Blood Art every **3–4 meaningful combat chambers** during ordinary mixed play, with skilled posture/deathblow-heavy play sometimes reaching roughly **2–3 chambers**.
+
+Final Blood coefficients and Aspect multipliers are playtest-tuning variables once this coherent shared contract is implemented.
+
+# Blood Art distinction
 
 > **Wolf moves through the battlefield → Wraith controls a chosen corridor → Ronin dominates a chosen point.**
 
@@ -159,8 +229,8 @@ Techniques are temporary horizontal customization. Ordinary Techniques use unive
 
 They should not duplicate Blood Tempo, Feral Momentum, Blood Hunt, Fanged Guard, Apex Mauling, Pale Barrage, Spectral Edge, Wraith's Reach, Spectral Passage, Beyond the Veil, Steadfast Reprisal, Falling Mountain, Unbroken Resolve/Perfect Weight, or Shattering Wake without explicit approval.
 
-## Current design dependency
+# Planning status
 
-The three qualitative Tier 0-IV Aspect packages are locked for current paper-design scope. The next active design area is the launch run-build content catalog in `docs/_meta/OPEN_QUESTIONS.md`.
+The shared Tier/Blood resource contract is **complete for planning** at first-playtest depth.
 
-Exact frame data, hitboxes, damage, posture, stagger, movement, recovery, collision, Blood values, proc weighting, Tier-growth percentages, deathblow pathing, VFX timing, and animation counts remain implementation and playtesting work.
+The three qualitative Tier 0-IV Aspect packages and their Blood Arts remain locked. Blood gain rates, normalization coefficients, and final cadence may be tuned in Godot without creating another shared player-build planning pass unless implementation exposes a structural gap.

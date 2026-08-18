@@ -4,7 +4,7 @@ title: Items, Currencies, and Rewards
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - currencies
   - persistent-resources
@@ -317,10 +317,10 @@ Capacity rewards also grant the same amount as current resource and stack additi
 
 ## Shrine support below full Corruption
 
-- Health support: **+20% max Health**, or
+- Health support: **+20% max Health**,
 - Spirit support: **+25% max Spirit**.
 
-Full-Corruption Resist/Embrace behavior remains owned by `CORRUPTION_AND_SHRINES.md`.
+Both restore together. If one resource is already full, that portion is skipped. Full-Corruption Resist / Embrace / Stabilize behavior remains owned by `CORRUPTION_AND_SHRINES.md`.
 
 ## Rest
 

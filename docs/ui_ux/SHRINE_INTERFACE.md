@@ -46,33 +46,23 @@ A separate mandatory drawback field is not required. The interface should explai
 
 ## Resist presentation
 
-Resist keeps the current Aspect Tier, reduces Corruption to approximately 75%, and provides its approved short-term stabilization support.
+Resist keeps the current Aspect Tier, sets Corruption to **75 / 100**, restores **25% max Health + 35% max Spirit**, and leaves Akio eligible to Embrace later.
 
-It should feel:
+If Health or Spirit is already full, that portion of the recovery simply has no effect.
 
-- controlled,
-- stabilizing,
-- contained,
-- quieter than Embrace,
-- useful as recovery or pacing support.
+It should feel controlled, stabilizing, contained, quieter than Embrace, and useful as recovery or pacing support.
 
 Resist is not an equal alternate long-term power path. It is a safety valve for a damaged run, a way to remain at a preferred Tier, or a way to postpone advancement until a later Shrine.
 
 The confirmed choice uses the [Resist Stabilization Cue](../art_production/CORE_VFX.md#resist-stabilization-cue): a cooler, paler ritual pulse that pushes Returning Blood pressure back and resolves like an exhale.
 
-Resist does not grant a normal Technique selection. Its exact full-Corruption support result remains separate tuning under the Shrine gameplay authority.
+Resist does not grant a normal Technique selection.
 
 ## Embrace presentation
 
 Embrace advances the selected Aspect by one Tier, empties Corruption, and applies the next benefit immediately.
 
-It should feel:
-
-- intensifying,
-- mutating,
-- visually assertive,
-- controlled rather than explosive,
-- desirable and consequential without reading as a generic evil choice.
+It should feel intensifying, mutating, visually assertive, controlled rather than explosive, and desirable without reading as a generic evil choice.
 
 Every Tier is clearly net-positive. The preview may describe an action becoming more committed, slower, more directional, or less defensive only when that behavior is part of how the upgraded action produces its stronger payoff. It should not be framed as a separate added drawback.
 
@@ -82,14 +72,26 @@ Embrace does not consume or create a Technique slot.
 
 ## Support state when Corruption is not full
 
-The Shrine uses the approved survival prototype rather than an open-ended support table. It presents one readable support result:
+A Shrine below full Corruption restores both resources:
 
-- **20% max Health recovery**, or
-- **25% max Spirit recovery**.
+- **20% max Health**, and
+- **25% max Spirit**.
 
-The interface must clearly identify which resource will be restored before confirmation and must not imitate the three-card Technique-selection layout.
+Each resource resolves independently. If one is already full, that portion is skipped. The Shrine does not ask the player to choose Health versus Spirit.
 
-These below-full support values do not automatically stack on top of a full-Corruption Resist/Embrace decision.
+These below-full support values do not stack on top of a full-Corruption Resist/Embrace decision.
+
+## Tier-IV Stabilize presentation
+
+At Tier IV and full Corruption, Embrace is unavailable and the Shrine presents Stabilize.
+
+Stabilize:
+
+- sets Corruption to **50 / 100**,
+- restores **30% max Health + 40% max Spirit**,
+- grants no additional Tier or Aspect power.
+
+Already-full resources simply skip their recovery portion.
 
 ## First-attempt no-Aspect support state
 
@@ -101,10 +103,9 @@ Required behavior:
 - do not show Tier or Corruption values,
 - do not show Resist,
 - do not show Embrace,
-- present the same clear Health-or-Spirit support result used by the below-full support state,
+- restore the same **20% max Health + 25% max Spirit** support used by the below-full state,
+- skip either resource if already full,
 - communicate that deeper Shrine interaction is not yet available without explaining future story spoilers.
-
-This state allows the first attempt to use the normal route network while preserving the canon that Blood Aspect progression begins only after the first death/Returning Blood awakening.
 
 ## Interface states
 
@@ -117,7 +118,7 @@ This state allows the first attempt to use the normal route network while preser
 - Maximum Tier
 - Tier-preview state
 - Corruption-not-full support state
-- **First-attempt no-Aspect support state**
+- First-attempt no-Aspect support state
 
 After Returning Blood/Aspect selection is active, a no-active-Aspect state should not be required during normal runs because the Boat confirms one unlocked Aspect before departure.
 
@@ -131,7 +132,7 @@ During normal post-awakening Shrine use, the player should understand, before co
 4. how the upgraded action or state behaves,
 5. whether the Aspect is already at Tier IV.
 
-During the first attempt, the player only needs to understand which support resource the Shrine restores.
+During the first attempt, the player only needs to understand the fixed Health + Spirit support.
 
 Technique loadout management does not belong on this screen. A small read-only current-build summary may be accessible through the normal pause input, but it should not compete with the Shrine decision.
 

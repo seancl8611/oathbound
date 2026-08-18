@@ -13,6 +13,8 @@ topics:
   - stabilize
   - blood-aspects
   - first-attempt
+  - implementation
+  - first-playtest
 related:
   - LORE-RETURNING-BLOOD
   - GAMEPLAY-FIRST-ATTEMPT
@@ -29,52 +31,95 @@ Corruption is the run-only pressure of **awakened Returning Blood**. It controls
 
 Corruption does not exist on Akio's first pre-awakening attempt.
 
-## Corruption gain
+The values below are approved first-playtest implementation targets. Final pacing may move through Godot testing without reopening the Corruption/Shrine architecture.
 
-After Returning Blood and Blood Aspects are active, current sources are combat accomplishment and progression events:
+# Corruption meter
 
-- kills and elite kills,
-- successful parries,
-- posture breaks,
-- deathblows,
-- miniboss progress,
-- boss progress.
+- maximum / full threshold: **100 Corruption**,
+- awakened runs begin at **0 / 100**,
+- Corruption persists between chambers,
+- Corruption does not passively decay,
+- gain above 100 is discarded,
+- while full, further gain is discarded until a Shrine resolves the state,
+- death or successful run completion resets Corruption to 0.
 
-Taking damage is not a universal source. Exact gain values and pacing remain balance variables.
+# Corruption gain
 
-## Shrine-ready state
+First-playtest event values:
 
-At full Corruption, the player receives a clear non-disruptive indication that a Shrine decision is available.
+| Event | Corruption |
+|---|---:|
+| Ordinary enemy defeated | **+1** |
+| Elite enemy defeated | **+3 instead of +1** |
+| Successful parry | **+1** |
+| First posture break on an enemy | **+2** |
+| Successful Deathblow | **+3** |
+| Standard combat clear | **+4** |
+| Miniboss clear | **+10** |
+| Authored regional-boss progress checkpoint | **+5** |
+| Regional boss defeat | **+10** |
 
-Choosing a Shrine route is the main opportunity cost of Aspect advancement. A Shrine route competes with Technique, refinement, Relic, economy, survival, and other previewed rewards. The internal Resist-or-Embrace decision is not required to represent two equal build paths.
+Encounter caps:
 
-## Resist
+- standard Combat chamber: **16 Corruption maximum**,
+- miniboss encounter: **24 maximum**,
+- regional boss encounter: **30 maximum**,
+- successful parries contribute at most **4 Corruption per chamber**.
 
-Resist stabilizes Returning Blood without advancing the Aspect.
+## Anti-farming / credit rules
+
+Combatants use a progression-credit eligibility flag.
+
+No Corruption is awarded from endlessly generated targets, respawned farming targets, decorative units, or summons explicitly marked no-credit.
+
+An ordinary enemy may award the posture-break Corruption bonus only once per life and the Deathblow bonus only once. An authored boss phase may explicitly refresh break-credit eligibility when that phase represents a genuine new combat state.
+
+Taking Health damage is not a universal Corruption source.
+
+# Shrine-ready state
+
+At **100 Corruption**, the player receives a clear non-disruptive indication that a Shrine progression decision is available.
+
+Choosing a Shrine route is the main opportunity cost of Aspect advancement. A Shrine route competes with Technique, refinement, Relic, economy, survival, and other previewed rewards.
+
+# Shrine support below full Corruption
+
+A Shrine encountered below 100 Corruption provides fixed support and does not change Corruption:
+
+- restore **20% max Health**, and
+- restore **25% max Spirit**.
+
+Each resource resolves independently. If Health or Spirit is already full, that part simply has no effect; the other resource still restores normally. There is no Health-versus-Spirit selection rule.
+
+Shrines do not normally present ordinary Technique selections.
+
+# Resist
+
+At full Corruption, Resist stabilizes Returning Blood without advancing the Aspect:
 
 - keep the current Tier,
-- reduce Corruption to approximately 75%,
-- receive approved immediate support such as Health or Spirit recovery,
+- set Corruption to **75 / 100**,
+- restore **25% max Health**,
+- restore **35% max Spirit**,
 - remain eligible to Embrace later.
 
-Resist is a recovery option and pacing valve. It may stabilize a difficult run, preserve a preferred current Tier, or postpone advancement until a later Shrine. It is not a parallel permanent-power path, and repeated Resist choices do not stack Aspect power or improve the Blood Art.
+Health and Spirit restoration resolve independently and simply do nothing for a resource already at maximum.
 
-The exact Resist reduction and full-Corruption support table remain tuning work.
+Resist is a recovery option and pacing valve. It does not stack Aspect power or improve the Blood Art.
 
-## Embrace
+# Embrace
 
-Embrace advances the selected Aspect by one fixed Tier, up to Tier IV.
+Embrace advances the selected Aspect by one fixed Tier, up to Tier IV:
 
-- empty Corruption,
-- apply the new headline benefit immediately,
-- preserve the Aspect's inherent weapon-kit limitations and commitments,
-- communicate controlled escalation rather than a morality choice.
+- advance exactly **one Tier**,
+- set Corruption to **0 / 100**,
+- apply the new approved Tier package immediately.
 
-Each Tier has one headline improvement and at most one minor supporting rule. Every Tier should be clearly net-positive and desirable when the player chooses to invest in the Aspect. Tiers do not require separate named drawbacks or additional penalty attributes. Their limits should come from the actions and playstyle they strengthen.
+Every Tier remains clearly net-positive. The Aspect authorities own the actual Tier behavior and values.
 
-## Optional Aspect investment
+Reaching **Tier II** makes the selected Aspect's Blood meter available under `BLOOD_ASPECTS.md`.
 
-The selected Aspect is always Akio's central weapon foundation after the first awakening, but deeper Tier investment is one run-development route rather than a mandatory completion checklist.
+# Optional Aspect investment
 
 - Tier 0 is a complete and viable weapon kit.
 - Technique-focused Tier 0-I builds must remain capable of completing a run.
@@ -83,78 +128,59 @@ The selected Aspect is always Akio's central weapon foundation after the first a
 - Tier IV is powerful and occasional rather than the expected endpoint of every successful run.
 - Mandatory encounters must not assume a specific Tier or Blood Art is present.
 
-A player who assembles a strong Technique build early may rationally choose more Shrine investment later. A player who prioritizes Shrines accepts fewer opportunities to refine, replace, or complete the Technique build.
-
-## Maximum Tier: Stabilize
+# Maximum Tier: Stabilize
 
 There is no Tier V. Corruption may continue filling at Tier IV so the Shrine loop remains relevant.
 
-At full Corruption while already at Tier IV:
+At Tier IV and 100 Corruption:
 
 - Embrace is unavailable,
 - the Shrine presents **Stabilize**,
-- Stabilize reduces Corruption and grants approved support,
-- and no additional Aspect power, Blood Art, Tier, or permanent scaling is awarded.
+- set Corruption to **50 / 100**,
+- restore **30% max Health**,
+- restore **40% max Spirit**,
+- grant no additional Tier, Aspect power, Blood Art improvement, or permanent scaling.
 
-## Shrine support below full Corruption
+Health and Spirit restoration again resolve independently and skip any resource already full.
 
-A Shrine encountered below full Corruption uses the first survival prototype rather than becoming a second Rest room.
-
-Its support result may be:
-
-- **20% max Health recovery**, or
-- **25% max Spirit recovery**.
-
-The specific Health-versus-Spirit selection behavior remains implementation tuning, but the route preview / interaction should make the support readable before it is accepted.
-
-These below-full support values do not automatically stack on top of a full-Corruption Resist/Embrace decision. Full-Corruption Resist and Stabilize retain their own separately tuned support behavior.
-
-Shrines do not normally present ordinary Technique selections.
-
-## First-attempt pre-awakening Shrine state
+# First-attempt pre-awakening Shrine state
 
 Shrines remain valid route rooms on the unscripted first attempt even though Returning Blood has not awakened.
 
 Because no Corruption or Blood Aspect exists yet:
 
 - no Corruption meter is shown,
-- Resist is not required because there is no Returning Blood pressure to stabilize,
-- **Embrace is unavailable**,
+- Resist is unavailable,
+- Embrace is unavailable,
 - no Aspect Tier can be gained,
-- the Shrine resolves through the same readable **below-full support state** described above.
-
-This preserves normal route value without pretending Akio has access to Blood progression before his first death.
+- the Shrine restores **20% max Health + 25% max Spirit** using the same independent-resource rule as an ordinary below-full Shrine.
 
 `FIRST_ATTEMPT.md` owns the complete pre-awakening run exception.
 
-## Run behavior
+# Run-state transitions
 
 After the first awakening:
 
-- Select an unlocked Aspect at the Boat.
-- Begin at Tier 0.
-- Advance only through Shrine Embrace choices.
-- Use route selection to decide how heavily the run invests in Aspect Tiers versus other rewards.
-- Reset Corruption and temporary Tier state after death or successful completion.
-- Technique and Blood state reset under their owning systems.
+1. select an unlocked Aspect at the Boat,
+2. begin the run at Tier 0 and 0 Corruption,
+3. gain Corruption through approved combat/progression events,
+4. at 100, enter the full / Shrine-ready state,
+5. a Shrine resolves that state through Resist or Embrace; at Tier IV use Stabilize,
+6. death or successful completion resets Corruption and temporary Tier state.
 
-## Presentation requirements
+The HUD must support hidden/pre-awakening, empty, filling, near-full, full/Shrine-ready, post-Resist, post-Embrace, and Tier-IV maximum states.
+
+# Presentation requirements
 
 - Resist, Embrace, and Stabilize must be distinguishable before text is read.
 - Show current Aspect, current Tier, and the next headline benefit when an Aspect is active.
-- Explain any action-specific commitment, movement, defense, or control change that is part of the benefit itself.
-- Do not present a separate mandatory drawback category.
-- The player must not combine historical Tier descriptions to understand the active state.
 - Resist should feel controlled and stabilizing.
 - Embrace should feel forceful and desirable without appearing generically evil.
 - The Shrine interface must remain distinct from Technique card selection.
 - The first-attempt no-Aspect support state must be readable without showing nonexistent Corruption/Tier data.
 
-## Open balance variables
+# First-playtest pacing target
 
-- Corruption gain and threshold pacing,
-- final Shrine frequency after prototype validation,
-- Resist and Stabilize reduction values,
-- full-Corruption Resist / Stabilize support tables,
-- exact benefit values for each Aspect Tier,
-- and the frequency with which successful runs reach Tiers I-IV.
+The current gain values should make Tier I reliably accessible, Tier II a common mid-run investment target, Tier III a deeper investment, and Tier IV achievable but not routine.
+
+Final gain rates, encounter caps, and successful-run Tier distributions are playtest-tuning variables. They do not require another planning pass unless implementation exposes a structural problem.
