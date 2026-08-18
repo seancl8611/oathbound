@@ -4,7 +4,7 @@ title: Blood Mirror and Trials Interface
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-17
 topics:
   - blood-mirror
   - trials
@@ -24,7 +24,7 @@ related:
 
 ## Primary purpose
 
-After the Blood Mirror is unlocked later in the game, it supports Blood Aspect permanent progression, Aspect previews, mastery/trial content, and selected Technique-pool unlock rewards.
+After the Blood Mirror is unlocked following the player's **first Keeper defeat**, it supports Blood Aspect permanent progression, Aspect previews, mastery/trial content, and selected Technique-pool unlock rewards.
 
 The Blood Mirror is **locked at the beginning of the game**. The interface therefore needs both a sealed/unavailable state and the later full progression/trial state.
 
@@ -34,14 +34,12 @@ The Blood Cavern's outer training functions may exist independently of the Mirro
 
 ### Locked state
 
-Before campaign/onboarding unlock:
+Before the first Keeper defeat:
 
 - clear unavailable / sealed state,
 - restrained requirement text without narrative spoilers,
 - no access to permanent Aspect upgrades,
 - no implication that the player can purchase an early unlock.
-
-The exact unlock event remains deferred.
 
 ### Unlocked state
 
@@ -54,12 +52,24 @@ The exact unlock event remains deferred.
 - standardized Aspect, Technique, Prosthetic, or Relic loadout where applicable,
 - rewards,
 - completion and mastery state,
-- permanent Aspect-progression ranks where applicable,
+- permanent Aspect-progression nodes,
 - Technique-pool unlock state where applicable.
 
 ## Permanent Aspect progression boundary
 
 The Blood Mirror is the approved permanent-upgrade station for **Blood Aspects**.
+
+Launch interface scope is exactly **3 nodes per Aspect / 9 total**:
+
+1. **Tier 0 Handling**
+2. **Signature Reliability**
+3. **Blood Discipline**
+
+Availability is staged by campaign progress:
+
+- Node 1 after first Keeper,
+- Node 2 after first Twin Maws,
+- Node 3 after first Shogun / first Binding clear.
 
 Permanent Aspect upgrades remain small, capped, and reliability-focused. The interface must not imply that permanent progression:
 
@@ -67,9 +77,10 @@ Permanent Aspect upgrades remain small, capped, and reliability-focused. The int
 - grants Tier headline abilities early,
 - unlocks Blood before Tier II,
 - replaces Shrine Resist / Embrace progression,
-- or removes an Aspect's inherent combat tradeoffs.
+- removes an Aspect's inherent combat tradeoffs,
+- or requires regional boss materials for normal Blood Mirror nodes at launch.
 
-Exact node count, rank count, mastery requirements, values, and costs remain later detailed design.
+Exact effect values, final Mist costs if any, and any trial-completion prerequisites remain later tuning.
 
 ## Presentation goal
 
@@ -103,7 +114,8 @@ Technique demonstration loadouts are presented as temporary trial conditions, no
 
 ## Technical requirements
 
-- Support a persistent Blood Mirror locked/unlocked campaign state.
+- Support a persistent Blood Mirror locked/unlocked campaign state keyed to first Keeper defeat.
+- Support exactly three permanent progression nodes per Aspect with staged campaign eligibility.
 - Support multiple trials per Aspect.
 - Support repeatable attempts and standardized Aspect, Technique, Prosthetic, and Relic loadouts.
 - Preserve unlock, completion, reward, Technique-pool access, and permanent Aspect-progression state.
