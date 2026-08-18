@@ -4,16 +4,18 @@ title: Prosthetic Tools
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - prosthetics
   - spirit-emblems
   - combat-tools
+  - first-attempt
   - forge-progression
   - scrolls
 related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROGRESSION
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-ITEMS-REWARDS
   - ART-PROSTHETIC-VFX
   - CHAR-AKIO
@@ -38,6 +40,14 @@ Akio carries eight ritualized combat tools. Each solves a distinct tactical prob
 | Bloodletting Gourd | Risky recovery / aggression sustain | Trades Spirit for healing + short healing-on-hit window |
 
 One Prosthetic is equipped at a time in the current launch structure.
+
+## Starting Prosthetic
+
+**Beast-Bane Whistle is the default starting Prosthetic** and is equipped on Akio's first attempt.
+
+It is used as the opening tool because its short-radius interrupt / anti-beast stagger role is simple, broadly readable, useful without a specialized build, and does not pre-select a later Blood Aspect or Technique-family identity.
+
+The first attempt therefore teaches the shared Spirit/Prosthetic input with a straightforward utility tool while the remaining Prosthetic roster becomes part of later Forge/unlock progression.
 
 # Shared resource model
 
