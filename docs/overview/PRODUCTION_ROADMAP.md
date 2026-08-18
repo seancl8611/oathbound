@@ -31,11 +31,13 @@ Keeper's boss-specific persistent material needs one collectible/reward represen
 
 Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, revival presentation, and permanent-progression interfaces.
 
-Permanent station ownership:
+Permanent station scope is now concrete enough for interface/content planning:
 
-- **Bloodwell:** Akio + Run Infrastructure,
-- **Forge Bench:** Prosthetics + Relics,
-- **Blood Mirror:** Blood Aspects, initially locked.
+- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes,
+- **Forge Bench:** 19 Prosthetic upgrades + 10 Relics with two mastery ranks each,
+- **Blood Mirror:** 3 nodes per Aspect / 9 total, unlocked after first Keeper.
+
+The Bloodwell progression bands advance after first return, first Keeper, first Twin Maws, and first Shogun / first Binding clear. Exactly six Bloodwell nodes use regional boss-material gates.
 
 The Blood Cavern remains training/trial space. Merchant, Discovery Board, and Boat remain services rather than extra permanent upgrade trees.
 
@@ -47,10 +49,11 @@ Complete:
 - Tier / Blood states,
 - eight Prosthetic families,
 - Technique reward/build UI,
-- Relic presentation,
-- currencies, pickups, regional boss-material reward objects/icons.
+- Relic presentation and Base/Mastery I/Mastery II states,
+- currencies, pickups, regional boss-material reward objects/icons,
+- Blood Mirror presentation for the three staged reliability nodes per Aspect.
 
-The current Technique roster is **50 actual Techniques + 10 refinements**. The current Relic roster is **10 items** with one equipped slot and no rarity tiers.
+The current Technique roster is **50 actual Techniques + 10 refinements**. The current Relic roster is **10 items** with one equipped slot and two mastery ranks per Relic.
 
 Technique screen composition/source weighting and the first reward/economy prototypes are approved enough for reusable UI planning; final balance values remain playtest work. A general consumable inventory/one-use item layer is not part of launch production scope.
 
@@ -74,34 +77,36 @@ Exact Shogun attacks/phase production still require encounter approval.
 
 Complete front-end UI, approved narrative delivery, achievements/store art where required, missing-asset audit, cross-game readability, settings/credits, and final production cleanup.
 
-Final quotation depends on narrative-delivery scope, postgame access/rewards, and required release UI—not on reopening approved canon.
+Final quotation depends primarily on narrative-delivery scope, postgame access/rewards, and required release UI—not on reopening approved gameplay/progression architecture.
 
 # Production rules
 
 - Wolf, Wraith, Ronin are fixed launch Aspects.
 - Current 50-Technique and 10-Relic rosters remain stable unless testing exposes a concrete gap.
+- Permanent progression launch scope is **10 Akio + 8 Infrastructure + 9 Blood Mirror + 20 Relic mastery milestones + 19 Prosthetic upgrades**.
+- Exactly six Bloodwell nodes use regional boss-material gates; normal Prosthetic, Relic mastery, and Blood Mirror ranks do not use boss materials at launch.
+- Blood Mirror unlocks after first Keeper; all permanent progression systems are structurally available after first Shogun / first Binding clear.
 - No alternate-weapon / weapon-socket system or separate Relic Reliquary.
 - No launch consumable inventory or one-use item reward family.
 - Standard Combat rooms use deliberately authored encounter scripts selected from regional encounter pools; they are not procedurally assembled from threat budgets.
 - Route opening/main/final bands do not require separate standard-encounter pools; individual encounters may receive minimum-chamber eligibility later where needed.
 - Standard enemies are region-native by default; cross-region continuation requires a deliberately authored evolved regional variant rather than automatic reuse or stat scaling.
-- The only approved launch standard-enemy lineage across regions is **Blighted Hounds → Stalker Hound** in Yomori. No earlier-region continuation into Kagutsuchi is currently approved.
+- The only approved launch standard-enemy lineage across regions is **Blighted Hounds → Stalker Hound** in Yomori.
 - Reuse attack, locomotion, deathblow, HUD, and VFX families where mechanics modify existing actions.
 - Standard successful-run target remains **45–50 minutes**.
 - Regional prototype baseline remains **12 Hushiro / 10 Yomori / 11 Kagutsuchi = 33 counted chambers**.
-- Route branching, room/reward weights, Technique offer generation, Gold/Shop economy, survival/capacity values, boss rewards, Relic acquisition/swapping, and persistent-resource payouts have first approved prototype models.
+- Route branching, room/reward weights, Technique offer generation, Gold/Shop economy, survival/capacity values, boss rewards, Relic acquisition/swapping, persistent-resource payouts, and permanent-progression content volume have approved prototype/paper-design models.
 - Persistent economy uses **Mist, Scrolls, and three low-count regional boss materials**; no generic Boss Emblem currency.
-- Final tuned probabilities, prices, payouts, recovery values, upgrade costs, authored encounter counts/scripts, and encounter timings remain playtest/implementation work.
+- Final tuned probabilities, prices, payouts, recovery values, upgrade percentages/costs, mastery thresholds, authored encounter counts/scripts, and encounter timings remain playtest/implementation work.
 - Additional Aspects, large modifier systems, enemy/room variant packages, and other deferred challenge scope are excluded unless explicitly promoted.
 - Markdown remains internal source of truth; Word/PDF are exports.
 
 # Current pre-production dependency
 
-The remaining design work should close scope in dependency order rather than promoting encounter-production details before they are needed:
+The remaining design work should close scope in dependency order:
 
-1. **Permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery ranks, boss-material gate assignments, and unlock cadence.
-2. **Narrative delivery/campaign presentation** — authored scene/dialogue/codex/ending production package.
-3. **Endgame/postgame/release scope** — repeat Heart access/rewards, completion goals, settings/front-end/credits, and any launch challenge layer.
+1. **Narrative delivery/campaign presentation** — define the authored introductory-death, Returning Blood reveal, repeat-Shogun/Binding, Strand NPC/codex, Heart unlock, ending, credits, portrait/cinematic/voice, and writing/localization production package.
+2. **Endgame/postgame/release scope** — repeat Heart access/rewards, completion goals, settings/front-end/credits, and any launch challenge layer.
 
 The actual standard-encounter roster, encounter-pool sizes, enemy counts/waves, and full-run clear-time validation belong to the later encounter-authoring/playtest pass.
 

@@ -28,9 +28,9 @@ related:
 
 Provide repeatable, skill-focused Strand activities that teach approved combat systems, demonstrate selected Technique interactions, and reward mastery without depending on run RNG.
 
-The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, most rewards, and production volume remain later content and implementation work rather than full-game scope blockers. The Relic system now reserves **2 of the 10 launch Relics** for authored Blood Cavern / challenge unlock milestones; exact Relic identities and exact challenge assignments remain later content sequencing.
+The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, most rewards, and production volume remain later content and implementation work rather than full-game scope blockers. The Relic system reserves **2 of the 10 launch Relics** for authored Blood Cavern / challenge unlock milestones; exact Relic identities and exact challenge assignments remain later content sequencing.
 
-The Blood Cavern is a training / trial space, not a separate general permanent-upgrade station. Permanent Aspect progression belongs to the Blood Mirror inside the Cavern after the Mirror is unlocked later in the game.
+The Blood Cavern is a training / trial space, not a separate general permanent-upgrade station. Permanent Aspect progression belongs to the Blood Mirror inside the Cavern after the Mirror is unlocked following the first Keeper defeat.
 
 ## Trial families
 
@@ -128,7 +128,9 @@ Temporary trial loadouts do not become persistent equipped builds.
 
 Later challenges may use fixed Aspects, Techniques, Prosthetics, Relics, stricter execution goals, or boss-rematch structures. They should remain deterministic enough that failure teaches a clear lesson.
 
-Two authored Blood Cavern / challenge milestones across the launch progression award **permanent first-time Relic unlocks**. These are guaranteed challenge acquisitions rather than repeatable reward farming. Repeating those challenges does not create duplicate Relics or another Relic currency.
+Two authored Blood Cavern / challenge milestones across the launch progression award **permanent first-time Relic unlocks**. Working sequencing uses one earlier challenge and one more advanced challenge; exact Relic identities and exact challenge assignments remain later content sequencing.
+
+Repeating those challenges does not create duplicate Relics or another Relic currency.
 
 ## Reward philosophy
 
@@ -144,13 +146,29 @@ Trials may not:
 - create duplicate-copy Relic progression,
 - or remove a kit's core tradeoffs.
 
-## Permanent Aspect upgrade boundary
+## Blood Mirror permanent progression
 
 Permanent Blood Aspect progression belongs to the **Blood Mirror** and remains small, capped, and reliability-focused.
 
-It cannot add major Tier mechanics early, bypass fixed progression, or unlock Blood before Tier II. Permanent upgrades must not grant Wraith Tier IV reach/deathblow rules early or reproduce Ronin's run-only Tier posture-capacity growth as an uncapped permanent scaling path.
+The Blood Mirror begins locked and **unlocks after the first Keeper defeat**.
 
-The Blood Mirror begins locked and becomes available later in the game. Exact unlock timing, individual Aspect nodes, mastery ranks, values, and trial requirements remain later detailed design.
+Launch scope is exactly **3 permanent nodes per Aspect / 9 total**:
+
+1. **Tier 0 Handling** — base-kit reliability without removing the Aspect's defining weakness.
+2. **Signature Reliability** — support for the Aspect's characteristic run-earned Tier mechanics after they are earned normally.
+3. **Blood Discipline** — support for Blood Art reliability/recovery/resource consistency after Tier II/Blood is reached normally.
+
+Availability cadence:
+
+- **after first Keeper:** Node 1 available for each unlocked Aspect,
+- **after first Twin Maws:** Node 2 available,
+- **after first Shogun / first Binding clear:** Node 3 available.
+
+Permanent upgrades must not grant major Tier mechanics early, bypass fixed progression, unlock Blood before Tier II, grant Wraith Tier IV reach/deathblow rules early, reproduce Ronin's run-only Tier posture-capacity growth as uncapped permanent scaling, or remove a kit's core tradeoffs.
+
+Regional boss materials are not normal Blood Mirror progression requirements at launch; the six approved boss-material permanent gates belong to the Bloodwell.
+
+Exact individual Aspect-node effects, values, normal currency costs, and any trial requirements remain later detailed tuning.
 
 ## Technical requirements
 
@@ -160,5 +178,6 @@ The Blood Mirror begins locked and becomes available later in the game. Exact un
 - The two launch Relic challenge rewards are first-time permanent unlocks rather than repeatable payouts.
 - Temporary trial state clears when the trial ends.
 - Trial rules do not require random room/reward generation.
-- The Blood Mirror supports a persistent locked/unlocked campaign state.
+- The Blood Mirror supports a persistent locked/unlocked campaign state keyed to the first Keeper defeat.
+- The Blood Mirror supports three staged permanent progression nodes per Aspect.
 - Framework supports Tier-specific Spectral Edge eligibility, clear-path extended deathblows, Veilstride, Ronin posture-capacity variants, and other approved Tier states where demonstrations require them.

@@ -61,11 +61,28 @@ The build should strengthen decisions the player already makes—timing, spacing
 - Five direct Technique slots: **Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow**.
 - Technique roster: **50 actual Techniques + 10 refinements** across Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct-Health identities.
 - Supporting / Cross-family / Legendary Techniques are slotless; no global Technique inventory cap exists.
-- One equipped Prosthetic from an eight-tool roster with persistent Forge progression.
-- One equipped Relic from a 10-item persistent collection with individual kill-earned mastery/progression.
+- One equipped Prosthetic from an eight-tool roster with 19 permanent Forge upgrades.
+- One equipped Relic from a 10-item persistent collection with **Base → Mastery I → Mastery II** use-based progression.
 - Relic acquisition uses 4 campaign/Strand + 2 Blood Cavern/challenge + 4 run-discovered unlocks, with limited regional-transition swapping.
 - No general launch consumable inventory or one-use item reward layer.
-- Permanent stations: **Bloodwell = Akio + Run Infrastructure**, **Forge Bench = Prosthetics + Relics**, **Blood Mirror = Blood Aspects** after later unlock.
+
+# Permanent progression shape
+
+Permanent progression is intentionally compact and supports execution rather than replacing it.
+
+- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes.
+- **Forge Bench:** 19 Prosthetic upgrades + 20 Relic mastery milestones across 10 Relics.
+- **Blood Mirror:** 3 nodes per Aspect / 9 total, focused on Tier 0 Handling, Signature Reliability, and Blood Discipline.
+- **Boss materials:** exactly six Bloodwell gates at launch—one Akio mastery node and one regional-passage Infrastructure node per regional boss material.
+
+Unlock cadence:
+
+- first return → Bloodwell foundation,
+- first Keeper → second Bloodwell band + Blood Mirror Node 1,
+- first Twin Maws → third band + Blood Mirror Node 2,
+- first Shogun / first Binding clear → final boss-material gates + Blood Mirror Node 3.
+
+All foundational permanent progression systems are structurally available after the first Binding clear; later Binding clears emphasize completion, mastery, Relic collection, Prosthetic development, trials, and player consistency rather than introducing another meta tree.
 
 # Persistent progression economy
 
@@ -73,12 +90,12 @@ Oathbound keeps the permanent resource model deliberately small:
 
 - **Mist** — broad persistent meta progression,
 - **Scrolls** — primarily Prosthetic Forge progression,
-- **three regional boss materials** — one unique low-count material from Keeper, Twin Maws, and Eclipse Shogun, used sparingly as secondary requirements on selected major permanent upgrades,
+- **three regional boss materials** — one unique low-count material from Keeper, Twin Maws, and Eclipse Shogun, used on the six approved Bloodwell mastery gates,
 - **Gold** — run-only Shop economy.
 
 There is no generic Boss Emblem currency.
 
-Boss materials are earned every time their boss is defeated and are saved immediately, so defeating Keeper or Twin Maws still advances persistent progression even when the run later fails. They are mastery gates rather than a monster-part crafting economy.
+Boss materials are earned every time their boss is defeated and are saved immediately. They are mastery keys rather than a monster-part crafting economy.
 
 # Run structure
 
@@ -94,7 +111,7 @@ Standard Combat rooms use **deliberately authored encounter scripts**. When a Co
 
 Standard enemies are region-native by default. Cross-region continuation uses a separately authored evolved regional variant rather than carrying the unchanged enemy forward or simply increasing its statistics. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's five standard enemies are all native Court units.
 
-The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, and persistent-resource payout models are approved as prototype implementation targets. Exact values remain playtest-tunable.
+The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, and permanent-progression content-volume models are approved as prototype/paper-design targets. Exact values remain playtest-tunable.
 
 A normal successful Binding run targets approximately **45–50 minutes of active time**. Encounter-pool counts and individual encounter scripts remain later content-production/playtest work.
 
@@ -120,13 +137,12 @@ Completed saves remain playable. Repeat normal runs and optional repeat Heart ro
 
 # Current design focus
 
-Major run-build, reward/economy, route, boss-reward, Relic, standard-encounter architecture, and regional enemy-availability rules are already scoped.
+Major run-build, reward/economy, route, boss-reward, Relic, standard-encounter architecture, regional enemy-availability rules, and permanent-progression content structure are scoped.
 
 The remaining sequence is now:
 
-1. **close permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery structure, boss-material gates, unlock cadence;
-2. **define narrative delivery / campaign presentation**;
-3. **define endgame / postgame / release scope**.
+1. **define narrative delivery / campaign presentation** — introductory death, Returning Blood/bloodline reveal, Shogun/Binding progression, Strand NPC/codex updates, Heart unlock/ending presentation, and narrative production tiers;
+2. **define endgame / postgame / release scope**.
 
 The actual standard-encounter roster, encounter counts, enemy wave/count tuning, and full-run clear-time validation are intentionally deferred until encounter production.
 

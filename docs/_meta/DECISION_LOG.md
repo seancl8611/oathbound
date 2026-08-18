@@ -14,6 +14,34 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-08-17 — Launch permanent-progression content package locked
+
+Permanent progression remains deliberately compact and execution-supportive rather than becoming another oversized power tree.
+
+Approved launch content volume:
+
+- **10 Akio Bloodwell nodes**: 3 foundation, 4 combat-stability, 3 regional mastery,
+- **8 Run Infrastructure nodes**,
+- **3 Blood Mirror nodes per Aspect / 9 total**, using Tier 0 Handling → Signature Reliability → Blood Discipline roles,
+- **2 Relic mastery ranks per Relic** after Base, creating 20 mastery milestones across the 10-Relic roster,
+- existing **19 Prosthetic upgrades** remain unchanged,
+- exactly **6 regional-boss-material-gated Bloodwell nodes**: one Akio mastery node and one Infrastructure passage node per regional boss material.
+
+Campaign cadence is staged:
+
+- first return opens the Bloodwell foundation,
+- first Keeper opens the next Bloodwell band and Blood Mirror Node 1,
+- first Twin Maws opens the next band and Blood Mirror Node 2,
+- first Shogun / first Binding clear opens the final boss-material gates and Blood Mirror Node 3.
+
+All foundational permanent systems are therefore structurally available after the first Binding clear. Later Binding clears focus on completion/mastery rather than introducing additional meta trees.
+
+Relic mastery is earned through eligible kills while equipped and normally spends no Mist, Scrolls, boss material, duplicate Relic, or separate mastery currency. Normal Prosthetic ranks, Relic mastery, and Blood Mirror nodes do not use regional boss materials at launch.
+
+Exact numerical values, Mist prices, mastery kill thresholds, and individual Blood Mirror effect values remain later tuning.
+
+**Authority:** `docs/gameplay/PROGRESSION.md`, `docs/gameplay/RELICS.md`, Strand Bloodwell/Forge authorities, `docs/gameplay/BLOOD_CAVERN_TRIALS.md`.
+
 ## 2026-08-17 — Regional enemy lineage rule restored from production bible
 
 Standard enemies are **region-native by default** rather than automatically carrying forward unchanged as the run progresses. When an earlier enemy concept continues into a later region, it does so through a deliberately authored evolved regional variant whose new behavior expresses the later area's identity instead of through simple Health/damage scaling.

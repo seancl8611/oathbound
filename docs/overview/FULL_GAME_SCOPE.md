@@ -51,12 +51,16 @@ This document summarizes Oathbound's current production-level shape. Detailed me
 | Refinements | 10 | One small eligible parent upgrade each |
 | Total Technique roster | 50 + 10 refinements | 10 Common / 18 Uncommon / 17 Rare / 5 Legendary |
 | Prosthetic tools | 8 | One equipped at a time; 19 permanent Forge upgrades |
-| Relic roster | 10 | One equipped; persistent collection/mastery/progression; no rarity tiers |
+| Relic roster | 10 | One equipped; Base + 2 mastery ranks each |
+| Bloodwell Akio nodes | 10 | 3 foundation + 4 combat-stability + 3 regional mastery nodes |
+| Run Infrastructure nodes | 8 | Rest/Shrine/preparation/route/resource support + 3 regional passage nodes |
+| Blood Mirror nodes | 9 | 3 per Aspect: Tier 0 Handling / Signature Reliability / Blood Discipline |
+| Boss-material-gated permanent nodes | 6 | Two Bloodwell gates per regional boss material |
 | General consumables | 0 | No launch consumable inventory or one-use item reward layer |
-| Permanent upgrade stations | 3 | Bloodwell, Forge Bench, later-unlocked Blood Mirror |
+| Permanent upgrade stations | 3 | Bloodwell, Forge Bench, Blood Mirror after first Keeper |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
 | Area 1 standard enemies | 6 | Hushiro-native roster |
-| Area 2 standard enemies | 4 | Yomori-native roster; Stalker Hound continues the Blighted Hound lineage as a separate evolved variant |
+| Area 2 standard enemies | 4 | Yomori-native roster; Stalker Hound is evolved Blighted Hound lineage |
 | Area 3 standard enemies | 5 | Kagutsuchi-native Court roster |
 | Regional minibosses | 6 authored | Two per region; one optional candidate offered per region/run |
 | Regional bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
@@ -64,7 +68,7 @@ This document summarizes Oathbound's current production-level shape. Detailed me
 | Heart Binding campaign | 7 original / 6 player clears | One historical breach, six player-destroyed Bindings |
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
 | General currencies | 3 | Mist, Scrolls, Gold |
-| Regional boss-material families | 3 | One unique low-count permanent material per regional boss; exact item names TBD |
+| Regional boss-material families | 3 | One unique low-count permanent material per regional boss |
 
 # Player and run build
 
@@ -86,53 +90,74 @@ There is **no global Technique inventory cap** beyond the five direct action slo
 
 Oathbound does not add a separate general consumable inventory to this build stack at launch.
 
-Detailed Technique mechanics/roster belong to `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md`. Detailed Aspect packages belong to the Aspect authorities.
-
 # Permanent progression
 
-Launch scope uses exactly three permanent upgrade stations:
+Launch scope uses exactly three permanent upgrade stations.
 
 ## Bloodwell
 
-Owns:
+Owns **10 Akio nodes + 8 Run Infrastructure nodes**.
 
-- Akio,
-- Run Infrastructure.
+Akio progression:
 
-Run Infrastructure is one umbrella for approved Rest, Shrine, reward, route, transition, and expedition support. It is not split into separate permanent subsystem trees.
+- 3 foundation nodes,
+- 4 combat-stability nodes,
+- 3 regional mastery nodes.
+
+Run Infrastructure:
+
+- Field Rest,
+- Shrine Stabilization,
+- Expedition Preparation,
+- Route Intelligence,
+- Salvage Protocol,
+- Keeper Passage,
+- Twin Passage,
+- Heart Passage.
+
+Exactly six Bloodwell nodes use regional boss materials: one Akio mastery node and one passage node per boss material. Mist remains the primary Bloodwell currency.
 
 ## Forge Bench
 
 Owns:
 
-- Prosthetics,
-- Relics.
+- eight Prosthetics with the approved **19 shallow linear upgrades**,
+- ten Relics with **Base → Mastery I → Mastery II / Complete** progression.
 
-The eight Prosthetics use shallow linear paths. Relics retain their own mastery/progression logic despite sharing the station.
+Relic mastery comes from eligible kills while equipped and does not normally spend Mist, Scrolls, boss materials, duplicate Relics, or a separate mastery currency.
 
 The old alternate-weapon / weapon-socket Forge direction and separate Relic Reliquary are not current scope.
 
 ## Blood Mirror
 
-Owns permanent Blood Aspect progression, begins locked, and becomes available later through campaign/onboarding progression.
+Unlocks after the **first Keeper defeat** and owns exactly **3 permanent nodes per Aspect / 9 total**:
 
-Permanent Aspect progression cannot bypass the run's Tier 0–IV Shrine path or unlock Blood before Tier II.
+1. Tier 0 Handling,
+2. Signature Reliability,
+3. Blood Discipline.
+
+Availability advances after first Keeper, first Twin Maws, and first Shogun / first Binding clear respectively.
+
+Permanent Aspect progression cannot bypass the run's Tier 0–IV Shrine path, grant major Tier mechanics early, or unlock Blood before Tier II.
+
+## Campaign progression cadence
+
+- **First return:** Bloodwell opens with foundation Akio nodes plus initial Infrastructure.
+- **First Keeper:** second Bloodwell band + Keeper material gates + Blood Mirror Node 1.
+- **First Twin Maws:** third Bloodwell band + Twin material gates + Blood Mirror Node 2.
+- **First Shogun / first Binding clear:** final Shogun material gates + Blood Mirror Node 3.
+- **Remaining Binding clears:** no new foundational progression system; player works toward completion/mastery within established systems.
 
 # Persistent resource scope
 
-The current persistent economy is intentionally small:
-
-- **Mist** — broad meta progression,
-- **Scrolls** — primarily Prosthetic Forge development,
-- **three regional boss materials** — low-count secondary requirements on a small number of major permanent upgrades.
+- **Mist** — broad meta progression, primarily Bloodwell and approved broad permanent upgrades.
+- **Scrolls** — primarily Prosthetic Forge development.
+- **three regional boss materials** — low-count secondary requirements on the six approved Bloodwell mastery gates.
+- **Gold** — run-only.
 
 There is **no generic Boss Emblem currency**.
 
-Every Keeper, Twin Maws, and Eclipse Shogun kill awards exactly one boss-specific material. Materials persist immediately even if the run later fails. They use small costs—normally 1–3—and should not turn bosses into farming chores.
-
-Gold remains run-only.
-
-`ITEMS_AND_REWARDS.md` owns payout values; `PROGRESSION.md` owns persistence and spending boundaries.
+Every Keeper, Twin Maws, and Eclipse Shogun kill awards exactly one boss-specific material. Materials persist immediately even if the run later fails. Exact low-count requirements remain tuning within the approved six-gate structure.
 
 # Run structure and pacing
 
@@ -157,13 +182,11 @@ Current controlled-generation prototype includes:
 - roughly 4–5 visible Shrine opportunities,
 - roughly 1–2 normally visited Shops, Rests, Treasures, and minibosses.
 
-Standard Combat uses **authored encounters**, not procedural enemy assembly. Each region will have a finite pool of deliberately scripted encounter compositions; when a Combat chamber is generated, an eligible encounter is selected from that pool. The route's opening/main/final bands do **not** require separate encounter pools. An individual encounter may later receive a minimum-chamber restriction when its teaching role or difficulty requires one.
+Standard Combat uses **authored encounters**, not procedural enemy assembly. Each region has a finite pool of deliberately scripted encounter compositions; route bands do not require separate encounter pools, while individual encounters may later receive minimum-chamber restrictions where needed.
 
-Standard enemies are region-native by default. Cross-region continuation is handled through a deliberately authored evolved variant rather than automatically reusing the unchanged earlier enemy. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove. No other Hushiro-to-Yomori continuation and no earlier-enemy continuation into Kagutsuchi is currently approved.
+Standard enemies are region-native by default. The only approved launch cross-region lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove.
 
 Encounter-pool counts and individual scripts are deferred until the encounter-authoring production pass.
-
-Exact route rules and safeguards belong to `RUN_STRUCTURE.md`.
 
 # Reward / economy prototype
 
@@ -186,8 +209,6 @@ Approved first-pass reward integration includes:
 
 General one-use consumables are excluded from Shops, Treasure, route rewards, and inventory scope at launch.
 
-These are prototype implementation targets, not immutable final balance law.
-
 # Relic scope
 
 Launch Relics:
@@ -195,8 +216,8 @@ Launch Relics:
 - 10 approved items,
 - one equipped slot,
 - persistent collection,
+- **2 mastery ranks after Base per Relic / 20 mastery milestones total**,
 - kill-earned mastery for the equipped Relic,
-- run-active benefit,
 - no Relic rarity tiers,
 - Forge Bench progression/management,
 - acquisition split of **4 campaign/Strand + 2 Blood Cavern/challenge + 4 run-discovered**,
@@ -222,15 +243,15 @@ Primary services/landmarks:
 - Discovery Board,
 - Bloodwell,
 - Blood Cavern,
-- later-unlocked Blood Mirror.
+- Blood Mirror inside the Cavern after first Keeper.
 
 The Boat remains a fast run-start confirmation point rather than another combined permanent-progression interface.
 
 # Regional roles
 
 - **Hushiro Gate Village / Rupture:** 6 native standard enemies, 2 authored minibosses, Keeper; establishes first Technique/family direction.
-- **Yomori Grove / Adaptation:** 4 native standard enemies, including Stalker Hound as the evolved continuation of the Blighted Hound lineage; 2 authored minibosses, Twin Maws; expands/deepens the build.
-- **Kagutsuchi Court / False Ascendancy:** 5 native Court standard enemies with no approved earlier-region carryover; 2 authored minibosses, Eclipse Shogun; finalizes the mature build under the most layered normal pressure.
+- **Yomori Grove / Adaptation:** 4 native standard enemies, including Stalker Hound as evolved Blighted Hound lineage; 2 authored minibosses, Twin Maws; expands/deepens the build.
+- **Kagutsuchi Court / False Ascendancy:** 5 native Court standard enemies; 2 authored minibosses, Eclipse Shogun; finalizes the mature build.
 
 Each region generates one optional miniboss opportunity from its two candidates.
 
@@ -253,18 +274,17 @@ Completed saves remain playable; repeat normal/Heart runs do not create addition
 
 # Current open production scope
 
-The run-build, reward/economy, boss-reward, Relic-acquisition, route, standard-encounter architecture, and regional enemy-availability rule are complete at paper-design depth.
+The run-build, reward/economy, boss-reward, Relic-acquisition, route, standard-encounter architecture, regional enemy-availability rule, and **permanent-progression content structure** are complete at paper-design depth.
 
 The remaining scope closes in dependency order:
 
-1. **Permanent-progression content scope** — define Bloodwell/Blood Mirror node counts and roles, Relic mastery rank structure, boss-material gate assignments, and unlock cadence without final balance tuning.
-2. **Narrative delivery/campaign presentation** — define the authored launch package and production volume.
-3. **Endgame/postgame/release package** — define repeat Heart access/rewards, completion goals, and release UI/presentation.
+1. **Narrative delivery/campaign presentation** — define the authored scene/dialogue/codex/Binding/ending package and production volume.
+2. **Endgame/postgame/release package** — define repeat Heart access/rewards, completion goals, and release UI/presentation.
 
 Detailed standard-encounter authoring, encounter-pool counts, clear-time tuning, and full-run time validation remain a later content/playtest pass once those encounters are actually being produced.
 
-`OPEN_QUESTIONS.md` owns the current unresolved agenda and should not duplicate resolved prototype tables.
+`OPEN_QUESTIONS.md` owns the current unresolved agenda.
 
 # Deferred implementation / tuning
 
-Final encounter scripts/counts, frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, final upgrade costs, exact mastery thresholds, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
+Final encounter scripts/counts, frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, final upgrade costs, exact Relic mastery thresholds, exact Bloodwell/Blood Mirror percentages, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.

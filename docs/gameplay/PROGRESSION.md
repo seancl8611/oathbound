@@ -78,32 +78,55 @@ Mandatory encounters cannot assume a specific Tier, Blood Art, Technique family,
 
 # Permanent upgrade architecture
 
-Current launch scope uses exactly **three permanent upgrade stations**.
+Current launch scope uses exactly **three permanent upgrade stations**:
 
-## Bloodwell — Akio + Run Infrastructure
+1. **Bloodwell — Akio + Run Infrastructure**
+2. **Forge Bench — Prosthetics + Relics**
+3. **Blood Mirror — Blood Aspects**, unlocked after the first Keeper defeat
 
-The Bloodwell owns:
+The launch permanent-progression package is deliberately compact. Permanent growth should improve reliability, resilience, and long-term goals without replacing sword execution, route decisions, run-built Techniques, Aspect Tier progression, or Prosthetic/Relic choices.
 
-- **Akio** permanent progression,
-- **Run Infrastructure** permanent progression.
+# Bloodwell — Akio
 
-### Akio
+The Bloodwell contains **10 Akio nodes**. Akio upgrades apply broadly rather than to one Aspect, Technique family, Prosthetic, or Relic.
 
-Akio upgrades apply broadly rather than to one Aspect, Technique family, Prosthetic, or Relic. Exact node inventory and values remain a later detailed-design pass.
+## Foundation nodes
 
-### Run Infrastructure
+1. **Vitality** — permanent maximum-Health growth.
+2. **Composure** — permanent maximum player-posture growth.
+3. **Spirit Reserve** — permanent maximum-Spirit growth.
 
-Run Infrastructure is one umbrella for persistent improvements to future-run support, including approved improvements to:
+These form the first Bloodwell band after Akio's first return to the Strand.
 
-- Rest support,
-- Shrine support without bypassing Tier rules,
-- reward possibilities,
-- routing information/support,
-- regional-transition support,
-- beneficial expedition conditions,
-- persistent-resource opportunities.
+## Combat-stability nodes
 
-It is **not** split into separate permanent Rest, Shrine, route, reward, or transition trees.
+4. **Posture Recovery** — modestly improves Akio's normal posture recovery.
+5. **Recovery Efficiency** — modestly improves approved Health recovery received from Rest and recovery rewards.
+6. **Deflection Stability** — successful parries provide a small player-posture stabilization benefit.
+7. **Execution Stability** — Deathblows clear a modest amount of accumulated player posture.
+
+These reinforce successful use of the existing combat loop rather than providing passive damage scaling.
+
+## Major mastery nodes
+
+8. **Body Mastery** — major universal Health/posture resilience upgrade; requires Mist plus a Keeper-specific material.
+9. **Resource Mastery** — major universal Spirit/resource-management upgrade; requires Mist plus a Twin-Maws-specific material.
+10. **Returning Blood Mastery** — high-end universal resilience upgrade; requires Mist plus a Shogun-specific material.
+
+Exact numerical values and final Mist prices remain tuning work. These nodes may not become permanent attack-speed scaling, large damage multipliers, enlarged parry windows, repeatable permanent revives, or other effects that remove core combat risk.
+
+# Bloodwell — Run Infrastructure
+
+Run Infrastructure remains one umbrella rather than separate Rest, Shrine, route, reward, or transition trees. Launch scope contains **8 Run Infrastructure nodes**.
+
+1. **Field Rest** — improves Rest-room recovery/support.
+2. **Shrine Stabilization** — improves the benefit of choosing Resist without changing Embrace requirements, Tier limits, or Blood availability.
+3. **Expedition Preparation** — begins a normal run with **+1 Technique reroll**.
+4. **Route Intelligence** — improves approved route-choice information without allowing unrestricted route rewriting.
+5. **Salvage Protocol** — modestly improves persistent-resource efficiency from approved reward sources; it does not create random enemy/breakable Mist or Scroll drops.
+6. **Keeper Passage** — improves the existing Keeper → Yomori transition support; requires Mist plus Keeper material.
+7. **Twin Passage** — improves the existing Twin Maws → Kagutsuchi transition support; requires Mist plus Twin Maws material.
+8. **Heart Passage** — improves the existing Shogun → Heart support package; requires Mist plus Shogun material.
 
 Run Infrastructure cannot:
 
@@ -111,18 +134,18 @@ Run Infrastructure cannot:
 - unlock Blood before Tier II,
 - replace Technique choices,
 - directly upgrade a particular Prosthetic or Relic,
-- or remove the need for combat execution.
+- remove the need for combat execution,
+- or guarantee an ideal route/build.
 
-## Forge Bench — Prosthetics + Relics
+Exact percentages and final Mist costs remain later tuning.
 
-The Forge owns permanent progression/management for:
+# Forge Bench — Prosthetics + Relics
 
-- **Prosthetics**,
-- **Relics**.
+The Forge owns permanent progression/management for **Prosthetics** and **Relics**.
 
-### Prosthetics
+## Prosthetics
 
-The eight launch Prosthetics are functionally complete when unlocked and use shallow linear permanent paths. Exact upgrade effects belong to `PROSTHETICS.md`.
+The eight launch Prosthetics are functionally complete when unlocked and use the already-approved shallow linear permanent paths. Exact upgrade effects belong to `PROSTHETICS.md`.
 
 Scrolls remain the primary Prosthetic upgrade currency.
 
@@ -134,9 +157,11 @@ Working Forge cost curve:
 
 The current 19-upgrade roster therefore has a working full-purchase cost of **66 Scrolls**. The campaign does not assume the player buys all 19 upgrades.
 
-### Relics
+Regional boss materials are not part of normal Prosthetic ranks in the launch package.
 
-Relics use persistent collection, individual mastery, and permanent progression while remaining a small supporting system.
+## Relics
+
+Relics use persistent collection and use-based mastery while remaining a small supporting system.
 
 - one Relic equipped at a time,
 - collection ownership persists,
@@ -148,77 +173,99 @@ Relics use persistent collection, individual mastery, and permanent progression 
 - mastery strengthens the Relic's existing benefit rather than adding unrelated branches,
 - Forge Bench owns Strand-side Relic progression and pre-run equipment management.
 
+Each launch Relic has exactly **two mastery ranks after its base state**:
+
+- **Base**
+- **Mastery I**
+- **Mastery II / complete**
+
+Mastery progression is earned through eligible kills while equipped. It does **not** normally cost Mist, Scrolls, boss materials, or duplicate Relics. Exact kill thresholds and numerical improvement per rank remain later tuning.
+
 Normal in-run Relic swaps occur after Keeper and after Twin Maws. A newly discovered Relic also creates an immediate equip-or-keep decision while being permanently collected either way. Rest rooms, Shops, combat, ordinary rooms, and the pause menu do not provide routine free swapping.
 
-Sharing the Forge does **not** automatically make Scrolls a Relic currency. Exact Relic costs, if any, remain later design.
+# Blood Mirror — Blood Aspects
 
-There is no separate Relic Reliquary.
+The Blood Mirror owns permanent Blood Aspect progression. It begins locked and **unlocks after the player's first Keeper defeat**.
 
-## Blood Mirror — Blood Aspects
+Launch scope contains exactly **3 permanent nodes per Aspect**, for **9 Blood Mirror nodes total** across Wolf, Wraith, and Ronin.
 
-The Blood Mirror owns permanent Blood Aspect progression.
+Each Aspect uses the same structural roles while receiving Aspect-specific effects:
 
-- it begins locked,
-- unlocks later through campaign/onboarding progression,
-- its exact unlock event remains deferred,
-- permanent Aspect progression remains small, capped, and reliability-oriented.
+1. **Tier 0 Handling** — modest reliability/handling improvement to the base Aspect without removing its defining weakness.
+2. **Signature Reliability** — modestly supports the Aspect's characteristic run-earned Tier mechanics after those mechanics have been earned normally.
+3. **Blood Discipline** — modestly improves reliability, recovery, or resource consistency surrounding that Aspect's Blood Art after Tier II/Blood has been reached normally.
 
-Blood Mirror progression cannot:
+Broad intended identities:
+
+- **Wolf:** pursuit/commitment handling → pressure reliability → Blood Hunt recovery/control.
+- **Wraith:** spectral-attack handling → spectral commitment/reposition reliability → Wraith's Reach recovery/control.
+- **Ronin:** heavy-contact handling → defensive/posture reliability → Falling Mountain recovery/control.
+
+Blood Mirror progression is small, capped, and reliability-oriented. It cannot:
 
 - grant major Tier mechanics early,
 - bypass the Tier 0–IV Shrine/Embrace path,
 - unlock Blood before Tier II,
 - turn run Tier growth into uncapped permanent scaling,
-- remove a kit's inherent commitments/tradeoffs.
+- remove a kit's inherent commitments/tradeoffs,
+- grant Wraith's Tier-IV range/deathblow rules early,
+- reproduce Ronin's run-only Tier posture-capacity growth as uncapped permanent scaling,
+- or create a separate permanent Blood Art tree.
 
-No separate permanent Blood Art upgrade tree is approved.
+The first Blood Mirror node for each unlocked Aspect becomes available after the first Keeper defeat, the second after the first Twin Maws defeat, and the third after the first Shogun defeat / first Binding clear. Exact individual effects, values, and any normal Mist costs remain later detailed tuning.
+
+# Regional boss-material gate structure
+
+Oathbound uses exactly **six boss-material-gated permanent nodes** in the launch progression package: two uses for each regional boss material.
+
+| Boss material | Akio gate | Run Infrastructure gate |
+|---|---|---|
+| Keeper material | Body Mastery | Keeper Passage |
+| Twin Maws material | Resource Mastery | Twin Passage |
+| Shogun material | Returning Blood Mastery | Heart Passage |
+
+Each gate uses the appropriate boss material as a secondary mastery requirement **alongside Mist**. Boss materials remain low-count keys rather than routine currency.
+
+No normal Prosthetic rank, Relic mastery rank, or ordinary Blood Mirror node requires a regional boss material at launch.
 
 # Persistent resource architecture
 
 ## Mist
 
-Mist is the broad persistent meta currency. It is the natural currency for Bloodwell-owned progression and may support other approved broad permanent upgrades.
+Mist is the broad persistent meta currency. It is the natural currency for Bloodwell-owned progression and may support approved Blood Mirror purchases where later tuning calls for it.
 
-Exact node costs are authored with the owning tree. Current economy calibration targets are:
+Current economy calibration targets remain:
 
 - small early upgrade: roughly **40–50 Mist**,
 - normal meaningful upgrade: roughly **75–100 Mist**,
 - major upgrade: roughly **125–175 Mist**,
 - exceptional boss-gated major upgrade: roughly **200–250+ Mist** plus an appropriate low-count regional boss material.
 
-These are prototype cost bands rather than a finished upgrade tree.
+These are prototype cost bands rather than final node prices.
 
 ## Scrolls
 
 Scrolls are persistent and remain primarily focused on Prosthetic Forge development. Their current 2 / 4 / 6 sequential cost curve is approved for the first prototype.
 
-Do not casually add unrelated Scroll sinks; doing so would weaken their clear ownership.
+Do not casually add unrelated Scroll sinks.
 
 ## Regional boss materials
-
-Oathbound uses **three boss-specific permanent materials**, one from each regional boss, rather than a generic Boss Emblem currency.
 
 - Keeper of the Gate drops exactly 1 Keeper-specific material per kill.
 - Twin Maws drop exactly 1 Twin-Maws-specific material per kill.
 - Eclipse Shogun drops exactly 1 Shogun-specific material per kill.
 
-Exact player-facing item names are deferred.
+Exact player-facing item names remain deferred.
 
 Boss materials:
 
 - persist immediately when earned,
 - are retained even if the run later fails,
 - are low-count upgrade materials rather than general spending currency,
-- are mainly secondary requirements attached to selected major permanent upgrades,
-- normally use costs of **1–3 materials**,
-- should have only a few meaningful uses per boss material,
+- normally use costs of **1–3 materials** when attached to an approved gate,
 - are never created for minibosses in the current scope.
 
-Basic progression should not require repeated late-game boss farming. Keeper material may support earlier gates, Twin Maws material midgame gates, and Shogun material late/high-end gates.
-
-A major upgrade may require its normal Mist or other owning-system currency **plus** the relevant boss material. Boss material requirements prove repeated mastery; they do not replace the normal economy.
-
-`ITEMS_AND_REWARDS.md` owns exact payout values and expected run earnings.
+The six-node gate table above is the complete launch boss-material assignment unless scope is deliberately reopened.
 
 ## Gold
 
@@ -235,6 +282,68 @@ The following are not spendable currencies:
 
 `Mist Shards` and generic `Boss Emblems` are not current resources.
 
+# Campaign unlock cadence
+
+Permanent progression is introduced in stages so the player does not receive every meta system at once.
+
+## Introductory attempt
+
+No permanent upgrade interface is active. Akio fights as an ordinary Order swordsman and dies for the first time.
+
+## First return to the Strand
+
+The **Bloodwell opens**.
+
+Initial available Bloodwell content:
+
+- Vitality,
+- Composure,
+- Spirit Reserve,
+- Field Rest,
+- Expedition Preparation.
+
+This gives early Mist an immediate purpose while keeping onboarding focused.
+
+## First Keeper defeat
+
+Unlock the second progression band:
+
+- Akio combat-stability nodes begin opening,
+- Shrine Stabilization and Route Intelligence become available,
+- Keeper-material gates Body Mastery and Keeper Passage become visible/eligible according to their normal Mist/material requirements,
+- the **Blood Mirror unlocks**,
+- Blood Mirror Node 1 / Tier 0 Handling becomes available for each unlocked Aspect.
+
+## First Twin Maws defeat
+
+Unlock the third progression band:
+
+- remaining midgame Bloodwell support becomes available, including Salvage Protocol,
+- Twin-Maws-material gates Resource Mastery and Twin Passage become visible/eligible,
+- Blood Mirror Node 2 / Signature Reliability becomes available for each unlocked Aspect.
+
+## First Shogun defeat / first Binding clear
+
+Unlock the final permanent-progression band:
+
+- Shogun-material gates Returning Blood Mastery and Heart Passage become visible/eligible,
+- Blood Mirror Node 3 / Blood Discipline becomes available for each unlocked Aspect,
+- all permanent progression systems are now structurally available.
+
+The remaining Binding clears do **not** need to introduce additional foundational permanent systems. Repeated runs instead support completing favored Bloodwell nodes, Prosthetic paths, Relic mastery, Blood Mirror progression, Relic collection, trials, and other already-approved persistent goals before the seventh story run into the Heart.
+
+# Relic acquisition cadence
+
+The approved **4 / 2 / 4** acquisition split remains unchanged.
+
+Working sequencing direction:
+
+- the **4 guaranteed campaign/Strand Relics** are distributed across early-to-mid campaign progression rather than awarded together; one may arrive soon after the first return, one around Keeper progression, one around Twin Maws progression, and one by the first Binding clear,
+- the **2 Blood Cavern/challenge Relics** come from two authored first-time challenge milestones, with one earlier and one more advanced,
+- the **4 run-discovered Relics** continue to appear through approved Treasure, Boss Reward Flex, and occasional Shop Flex opportunities, prioritizing undiscovered Relics until the collection is complete.
+
+Exact Relic identities within those acquisition slots remain content sequencing rather than progression architecture.
+
 # Non-upgrade persistent systems
 
 The following may persist or unlock content but are not separate permanent upgrade trees:
@@ -250,7 +359,7 @@ The following may persist or unlock content but are not separate permanent upgra
 
 The Blood Cavern is a training/trial space. The Discovery Board is a knowledge archive. The Merchant is a service. The Boat is run-start confirmation.
 
-# Campaign progression
+# Heart Binding campaign progression
 
 The Heart was imprisoned by seven Bindings. The Court destroyed the outermost before the game, leaving six intact.
 
@@ -303,10 +412,18 @@ There is no death tax on already-earned persistent resources.
 | Temporary Health / Spirit capacity | Resets | Resets |
 | Room progress | Resets | Resets |
 
-# Current design dependency
+# Locked launch permanent-progression scope
 
-Permanent station ownership, the first persistent-resource economy, regional-boss current-run rewards, Relic acquisition/swap architecture, and launch reward-system scope are complete at prototype paper-design depth.
+The permanent-progression content structure is now complete at paper-design depth:
 
-Remaining progression work is nested under the owning systems rather than a new architecture question: exact Bloodwell nodes, Blood Mirror nodes, Relic mastery/cost realization, boss-material assignment to selected major upgrades, exact individual Relic-to-source sequencing inside the approved acquisition buckets, and final numerical tuning after playtests.
+- **10 Akio nodes**,
+- **8 Run Infrastructure nodes**,
+- **3 Blood Mirror nodes per Aspect / 9 total**,
+- **2 mastery ranks per Relic / 20 mastery milestones across 10 Relics**,
+- existing **19 Prosthetic upgrades**,
+- exactly **6 boss-material-gated Bloodwell nodes**,
+- staged availability from first return → Keeper → Twin Maws → first Binding clear.
 
-The active full-run design dependency is now **encounter composition and pacing validation**. That pass should connect the approved 33-chamber route to concrete enemy-composition rules, pressure escalation, elite frequency, room-clear times, boss/miniboss budgets, and the 45–50-minute full-run target.
+Remaining work is balance/content realization: exact numerical values, final Mist prices, mastery kill thresholds, individual Blood Mirror effects within the approved node roles, exact Relic-to-source sequencing, UI polish, and playtest tuning.
+
+The next top-level scope dependency is **narrative delivery and campaign presentation**, as tracked in `docs/_meta/OPEN_QUESTIONS.md`.

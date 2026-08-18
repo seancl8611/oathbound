@@ -37,16 +37,16 @@ Strand interfaces should feel like physical services rather than disconnected me
 | Merchant Stall | Strand purchasing/service stock |
 | Discovery Board | Codex/discovery/Technique records |
 | Bloodwell | Akio + Run Infrastructure permanent progression and return presentation |
-| Blood Mirror / Trials | Later-unlocked Aspect progression/trials/previews |
+| Blood Mirror / Trials | Aspect progression/trials/previews after first Keeper |
 | Run Results | Retained rewards / run reset summary |
 | Pause / Overview | Current run build review |
 | Strand HUD | Lightweight persistent wallet / prompts |
 
 ## Permanent upgrade ownership
 
-- **Bloodwell:** Akio + Run Infrastructure.
-- **Forge Bench:** Prosthetics + Relics.
-- **Blood Mirror:** Blood Aspects after later unlock.
+- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes.
+- **Forge Bench:** 19 Prosthetic upgrades + 10 Relics with Base / Mastery I / Mastery II progression.
+- **Blood Mirror:** 3 nodes per Aspect / 9 total, unlocked after first Keeper.
 
 No separate Relic Reliquary, generic weapon tree, weapon sockets, or old fixed Bloodwell three-branch UI.
 
@@ -59,10 +59,12 @@ General persistent currencies are:
 
 Gold is run-only.
 
-The three regional boss materials are low-count specific mastery materials, not a normal persistent wallet. Show them contextually when:
+The three regional boss materials are low-count specific mastery materials, not a normal persistent wallet. At launch they are assigned only to the six approved Bloodwell mastery gates: one Akio mastery node and one Infrastructure passage node per regional boss.
+
+Show them contextually when:
 
 - a result screen reports one earned,
-- an upgrade requires one,
+- one of those Bloodwell upgrades requires one,
 - a collection/reference screen needs to show ownership.
 
 Do not dedicate always-visible hub counters or a generic Boss Emblem category to them.
@@ -77,25 +79,35 @@ Direct Technique slots begin empty. No reserve slot exists.
 
 Clearly separate:
 
-- **Akio**,
-- **Run Infrastructure**.
+- **Akio — 10 nodes**,
+- **Run Infrastructure — 8 nodes**.
 
-Show Mist costs and, only for selected major upgrades, a specific regional boss-material requirement when assigned. Do not present boss materials as another broad Bloodwell currency tree.
+The interface must support campaign-gated bands across first return, first Keeper, first Twin Maws, and first Shogun / first Binding clear.
+
+Show Mist costs and, only for the six approved major gates, the specific regional boss-material requirement. Do not present boss materials as another broad Bloodwell currency tree.
 
 ## Forge Bench
 
 Clearly separate:
 
 - **Prosthetics** — shallow linear paths with the first 2 / 4 / 6 Scroll cost prototype,
-- **Relics** — collection/equip/mastery/permanent progression.
+- **Relics** — collection/equip plus Base → Mastery I → Mastery II / Complete progression.
+
+Relic mastery progress is earned through eligible kills while equipped; normal mastery ranks do not display Mist, Scroll, boss-material, duplicate-copy, or mastery-currency costs.
 
 Sharing one station does not imply identical currencies or progression structures.
 
 ## Blood Mirror
 
-Requires sealed/unavailable opening state and later unlocked Aspect progression/trial states.
+Requires sealed/unavailable opening state until the **first Keeper defeat**, then shows the three permanent nodes for each unlocked Aspect.
 
-Selected major Aspect upgrades may later show a specific boss-material gate alongside their normal cost if the progression design assigns one. Basic Aspect progression must not imply that repeated boss farming is mandatory.
+Node availability:
+
+- Tier 0 Handling after first Keeper,
+- Signature Reliability after first Twin Maws,
+- Blood Discipline after first Shogun / first Binding clear.
+
+Normal Blood Mirror nodes do not use regional boss materials at launch. The interface must not imply that permanent Aspect progression grants Tier mechanics or Blood early.
 
 ## Shared requirements
 
@@ -109,4 +121,4 @@ Selected major Aspect upgrades may later show a specific boss-material gate alon
 
 ## Data dependency rule
 
-UI follows documented progression ownership, resource names, costs, Technique capacity, and state behavior. Interface art must not invent upgrade branches, boss-material requirements, Relic currencies, or unlock rules that remain unresolved.
+UI follows documented progression ownership, resource names, costs, Technique capacity, and state behavior. Interface art must not invent upgrade branches, boss-material requirements, Relic currencies, or unlock rules beyond the approved progression authorities.
