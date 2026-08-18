@@ -4,7 +4,7 @@ title: Returning Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-18
 topics:
   - returning-blood
   - akio
@@ -12,6 +12,7 @@ topics:
   - blood-aspects
   - inherited-beast-blood
   - strand
+  - first-attempt
   - heart-bindings
   - ending
   - postgame
@@ -22,7 +23,9 @@ related:
   - LORE-ECLIPSE-SHOGUN
   - LORE-BARRIER-BLOOD-MOON
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
+  - NARRATIVE-DELIVERY
   - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
@@ -44,7 +47,7 @@ This does not create a second source of Beast Blood and does not make the curse 
 
 ## First awakening
 
-Akio begins the game without active Beast Blood abilities.
+Akio begins the game without active Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
 
 He is the first known descendant of the escaped bloodline to:
 
@@ -52,7 +55,9 @@ He is the first known descendant of the escaped bloodline to:
 - do so during a Blood Moon, when existing Beast Blood is unusually active,
 - and suffer death while the inherited condition is fully stirred by those circumstances.
 
-His first attempt therefore uses only his normal sword training and available Order equipment. When that attempt ends in death, the dormant Blood's regenerative instinct activates for the first time.
+His first attempt is a real run rather than a fixed prologue. He uses his normal sword training, the default Beast-Bane Whistle, ordinary run Technique rewards, and the normal route/room flow while the Blood-specific progression systems remain dormant.
+
+When that attempt eventually ends in death, the dormant Blood's regenerative instinct activates for the first time.
 
 Because Akio's body developed naturally around the inherited condition, the Blood reconstructs his established human form instead of immediately replacing it with a fixed corrupted form. He reforms at the Strand carrying the first known Returning Blood.
 
@@ -85,17 +90,23 @@ Other bearers may retain intelligence, memory, loyalty, speech, ambition, martia
 
 ## First-attempt progression
 
-The first attempt precedes the normal Blood-powered run loop:
+`FIRST_ATTEMPT.md` owns the pre-awakening gameplay rules.
 
-1. Akio crosses from the Strand as an ordinary Order swordsman.
-2. The player uses the base sword kit without Blood Aspects, Shrine evolution, or Blood Techniques.
-3. The attempt ends in Akio's first death.
-4. Dormant inherited Beast Blood awakens and reconstructs him at the Strand.
-5. The first reconstruction establishes the stable human pattern and return point used by later returns.
-6. Subtle physical and environmental signs establish that something has changed.
-7. The player gradually unlocks and learns the Blood systems during later runs.
+The first attempt uses the normal full route rather than a special tutorial route:
 
-The exact cause, location, and presentation of the first death remain production and opening-sequence decisions. It should not require a long cutscene or extensive explanation.
+1. Akio begins directly in the normal Hushiro route as an ordinary Order swordsman carrying dormant inherited Blood.
+2. The player uses the base katana kit, default Beast-Bane Whistle, normal Technique rewards, and ordinary route/room interactions.
+3. Blood Aspects, Corruption, Embrace/Tier growth, Blood, Blood Arts, Relic loadout, and permanent upgrades are not yet active.
+4. Shrines remain usable for their non-Aspect support behavior, but they cannot Embrace or advance a Tier.
+5. The player's first death may happen anywhere the normal route allows.
+6. Dormant inherited Beast Blood awakens and reconstructs Akio at the Strand.
+7. The first reconstruction establishes the stable human pattern and return point used by later returns.
+8. Subtle physical and environmental signs establish that something has changed.
+9. The normal Blood-powered progression loop begins after the return.
+
+A mastery-level player may defeat the entire regional route and reach the Heart before dying. In that exceptional case, no Binding can yet be broken because the rejection ritual requires awakened Returning Blood; the Heart destroys Akio there, causing the first awakening without advancing Binding progress.
+
+There is no authored requirement that the first death occur at a specific enemy, room, miniboss, or boss.
 
 ## Failed-run return
 
@@ -109,7 +120,7 @@ Akio may then board the Boat and cross again while the campaign remains beneath 
 
 ## Successful Binding-run return
 
-During each of the first six successful clears, Akio defeats the Eclipse Shogun and reaches the Heart chamber and extraction apparatus built by the Shogun's civilization.
+During each of the first six successful clears after Returning Blood has awakened, Akio defeats the Eclipse Shogun and reaches the Heart chamber and extraction apparatus built by the Shogun's civilization.
 
 The successful Binding-run sequence is:
 
@@ -154,7 +165,9 @@ Neither Akio nor the Shogun begins the campaign knowing their blood relationship
 
 The Shogun's fascination with Akio's repeated returns and unusual control eventually develops into recognition that Akio descends from the royal child who escaped before containment. This deepens his attempt to claim Akio as an heir and continuation of the kingdom.
 
-Akio's refusal remains more important than the lineage itself. He does not need extensive family exposition or a new royal identity; he remains the quiet Order swordsman the player controls.
+Akio's refusal remains more important than the lineage itself. Because Akio is silent, that refusal is expressed entirely through his continued opposition rather than spoken debate or a dialogue choice.
+
+`NARRATIVE_DELIVERY.md` owns the seven awakened Shogun progression states and reveal timing.
 
 ## Canon restrictions
 
@@ -166,7 +179,9 @@ Akio's refusal remains more important than the lineage itself. He does not need 
 - Do not describe the Keeper, Boat, Bloodwell, or Strand as the source of Returning Blood.
 - Do not turn the Strand return into a separate technical anchor system.
 - Do not call Akio half-human or require him to be nonhuman.
-- Do not give Akio Blood Aspects or advanced Blood Techniques before the first awakening.
+- Do not give Akio Blood Aspects, Corruption/Tier progression, Blood, or Blood Arts before the first awakening.
+- Do not forbid ordinary Technique rewards, normal room flow, or the default Beast-Bane Whistle on the first attempt.
+- Do not force the first death at a predetermined normal-route enemy or chamber.
 - Do not describe revival as consequence-free or imply that the current body survives death.
 - Do not treat Blood Aspects as unrelated magical classes.
 - Do not describe intelligent or deliberate mutation use by another bearer as genuine control equal to Akio's.
@@ -177,7 +192,6 @@ Akio's refusal remains more important than the lineage itself. He does not need 
 
 - the exact identity and fate of the escaped child's mother and retainer,
 - how the bloodline remained hidden across generations,
-- the exact cause and location of Akio's first death,
 - the deeper metaphysics behind the first reconstruction and preserved return imprint,
-- when and how Akio and the Shogun confirm their relationship,
-- and whether any other dormant descendants still exist.
+- whether any other dormant descendants still exist,
+- and exact implementation details of first-return visuals beyond the approved narrative-delivery package.
