@@ -234,13 +234,13 @@ Use these as the first-playtest mathematical identities:
 - **Rift:** one 1.5-second fracture progressing through 16 → 24 → 34 direct-Health burst values.
 - **Crimson:** 3-second Vulnerable with a 1.75x genuine-backstab payoff plus separate direct-Health/AoE tools.
 
-# Remaining Technique implementation work
+# Planning status — COMPLETE
 
-The family constants are now sufficient to stop treating family mechanics as open design.
+The current Technique package is complete for implementation planning when read together with `TECHNIQUE_CATALOG.md`, `TECHNIQUES.md`, and the Aspect/combat implementation baselines.
 
-The next implementation pass must apply these shared rules to the **existing individual catalog**, beginning with the 25 Direct Techniques. For each Technique, define only remaining per-entry fields that the family constants do not already answer, such as exact secondary geometry, direct bonus value, status application count, cooldown where genuinely required, per-Aspect host normalization, and refinement-specific numeric changes.
+Do **not** create another open planning pass merely to assign one-off values already implied by these family constants and the catalog's qualitative entries. When wiring an individual Technique into Godot, ordinary host-specific geometry, animation synchronization, exact hitbox width, proc polish, and similar low-level values are implementation/playtest work.
 
-Do not redesign names, family identity, slot ownership, rarity, prerequisites, or roster composition during that pass unless a concrete incompatibility is found.
+A Technique design question should reopen only if implementation exposes a genuinely missing behavior, contradiction, unusable interaction, or balance problem that cannot be solved by tuning an existing field.
 
 # Deferred to playtesting
 
