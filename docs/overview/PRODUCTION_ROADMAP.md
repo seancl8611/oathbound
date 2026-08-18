@@ -11,29 +11,26 @@ last_reviewed: 2026-08-18
 
 Oathbound production is organized by dependency order and meaningful playtest groups. Milestones summarize required production; gameplay/content/narrative/release authorities own the underlying design.
 
-# Current phase — implementation handoff
+# Current phase — Godot reconciliation and implementation restart
 
-Top-level game architecture is complete enough to stop treating documentation as a prerequisite to every implementation task.
+Top-level game architecture, the complete launch player-build layer, and the first-playtest Hushiro content package are now complete for planning.
 
-The complete launch player-build layer is now **complete for planning at first-playtest depth**:
+Hushiro now has:
 
-- shared combat baseline,
-- Wolf / Wraith / Ronin Aspect baselines,
-- Technique catalog + family implementation constants,
-- all 8 Prosthetics + 19 permanent upgrade implementation values,
-- all 10 Relics + Base / Mastery I / Mastery II values and mastery trigger rules,
-- Corruption / Shrine progression values and state transitions,
-- Tier-II Blood meter / generation / normalization rules.
+- 10 authored multi-wave standard encounters,
+- a six-active-enemy readability ceiling with roughly 10-18 total enemies in normal rooms,
+- five reusable standard Combat footprints plus functional/special spaces,
+- Village Ogre and Collector implementation contracts,
+- a complete two-phase Keeper implementation contract.
 
 The remaining handoff sequence is:
 
-1. make **Hushiro** a complete authored region on paper,
-2. reconcile the existing Godot project against current documentation,
-3. resume implementation/playtesting while later-region content continues to be authored.
+1. audit the existing **Godot `game/` project** against current authorities,
+2. produce the shortest prioritized backlog to a complete 12-chamber Hushiro run,
+3. resume implementation/playtesting immediately,
+4. author later-region and permanent-progression content in parallel as dependencies become useful.
 
-`OPEN_QUESTIONS.md` owns the exact implementation-facing queue and exit conditions.
-
-Approved first-playtest values are expected to move when playtesting provides better evidence. Do not delay implementation while attempting to solve final balance on paper.
+`OPEN_QUESTIONS.md` owns the exact audit scope and exit condition. Approved first-playtest values are expected to move when playtesting provides better evidence.
 
 # Pre-milestone gate — Paid Style Test
 
@@ -53,9 +50,9 @@ Complete the Hushiro roster, authored encounter pool, reusable gameplay-space/la
 
 Production supports the approved **12-chamber Hushiro** prototype through reusable room foundations/variants rather than unique art per chamber.
 
-The first attempt uses this same normal route with base katana combat, default Beast-Bane Whistle, normal Technique rewards/room flow, and Shrine support without Aspect Embrace/Tier presentation.
+The authored gameplay package is now owned by `docs/content/area_1/HUSHIRO_IMPLEMENTATION_BASELINE.md`. The first attempt uses this same normal route with base katana combat, default Beast-Bane Whistle, normal Technique rewards/room flow, and Shrine support without Aspect Embrace/Tier presentation.
 
-**Implementation restart target:** a documentation-ready Hushiro package plus the shared combat/player-build baseline is sufficient to begin serious end-to-end Godot playtesting. Later milestones do not need to be fully numerically tuned first.
+**Implementation restart target:** the player-build package and Hushiro package are now documentation-ready. Complete the Godot delta audit, then begin serious end-to-end implementation/playtesting without waiting for later milestones.
 
 # Milestone 3 — The Strand
 
@@ -95,7 +92,7 @@ Produce Yomori Grove, its authored encounter pool and reusable gameplay-space/la
 
 Production supports the approved **10-chamber Yomori** prototype. Stalker Hound remains the sole approved evolved Hushiro lineage continuation.
 
-Yomori content should be authored after the Hushiro encounter/layout method has proven useful rather than inventing a separate documentation format.
+Yomori content should reuse the proven Hushiro encounter/layout method rather than inventing a separate documentation format.
 
 # Milestone 6 — Area 3, campaign climax, Heart, and postgame suppression
 
@@ -184,16 +181,17 @@ Completed for planning:
 - **Pass 2B:** Techniques,
 - **Pass 2C:** Prosthetics,
 - **Pass 2D:** Relics,
-- **Pass 2E:** Corruption / Shrines / Blood resource-state contract.
+- **Pass 2E:** Corruption / Shrines / Blood resource-state contract,
+- **Pass 3:** Hushiro authored encounter/layout/miniboss/boss package.
 
 Current implementation-facing order:
 
-1. **complete Hushiro encounter/layout/miniboss/boss package**,
-2. **Godot documentation-to-code delta audit and implementation restart**,
+1. **Godot documentation-to-code delta audit and implementation backlog**,
+2. **implementation restart: complete Hushiro end-to-end**,
 3. **Strand/permanent-progression exact content**,
 4. **Yomori package**,
 5. **Kagutsuchi/Shogun/Heart package**,
 6. **exact narrative/achievement/content lists**,
 7. **playtest-driven tuning and final pacing validation**.
 
-Use `docs/_meta/OPEN_QUESTIONS.md` for exact exit conditions. Use `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
+Use `docs/_meta/OPEN_QUESTIONS.md` for the exact audit scope. Use `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
