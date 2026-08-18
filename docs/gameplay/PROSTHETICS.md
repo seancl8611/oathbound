@@ -12,11 +12,14 @@ topics:
   - first-attempt
   - forge-progression
   - scrolls
+  - implementation
+  - first-playtest
 related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-ITEMS-REWARDS
+  - GAMEPLAY-COMBAT-IMPLEMENTATION-BASELINE
   - ART-PROSTHETIC-VFX
   - CHAR-AKIO
   - ART-MILESTONE-04
@@ -25,6 +28,10 @@ related:
 # Prosthetic Tools
 
 Akio carries eight ritualized combat tools. Each solves a distinct tactical problem rather than serving as a generic damage button.
+
+This file owns both the approved Prosthetic roster/progression rules and the **first-playtest implementation values** for the eight base tools and nineteen permanent upgrades.
+
+These values are prototype implementation targets, not immutable final balance law. Once implemented, ordinary magnitude/cooldown/timing tuning belongs to Godot playtesting unless a structural problem appears.
 
 # Launch roster
 
@@ -47,11 +54,35 @@ One Prosthetic is equipped at a time in the current launch structure.
 
 It is used as the opening tool because its short-radius interrupt / anti-beast stagger role is simple, broadly readable, useful without a specialized build, and does not pre-select a later Blood Aspect or Technique-family identity.
 
-The first attempt therefore teaches the shared Spirit/Prosthetic input with a straightforward utility tool while the remaining Prosthetic roster becomes part of later Forge/unlock progression.
+# Shared Spirit and repeat-use model
 
-# Shared resource model
+Akio uses the shared **100 Spirit** combat baseline in `COMBAT_IMPLEMENTATION_BASELINE.md` and has no passive Spirit regeneration unless another approved effect explicitly restores Spirit.
 
-Prosthetics use Spirit emblems / the project's final shared tool resource. Exact Spirit costs, cooldowns/charges, damage, status values, and timings remain playtest variables.
+Prosthetics use **Spirit plus cooldown**, not charge inventories.
+
+Shared rules:
+
+- Spirit is spent when Prosthetic activation is committed.
+- Cooldown begins when the Prosthetic action finishes and control returns.
+- A Prosthetic cannot be activated without its full Spirit cost.
+- Prosthetic damage and status damage have **0 ordinary Technique-family proc coefficient** unless an explicit future rule says otherwise.
+- Burn and Shock refresh their own duration rather than stacking magnitude.
+- Directional tools use the player's chosen direction and do not home or correct toward targets after activation.
+- Bosses and protected heavy enemies may still receive Health/posture/status effects while ignoring ordinary pull, target-break, or forced-interrupt behavior.
+- Upgrades improve the base tool's existing role; they do not create new Technique-family interactions or alternate attacks.
+
+# First-playtest summary
+
+| Prosthetic | Spirit | Cooldown | Startup | Recovery | Core result |
+|---|---:|---:|---:|---:|---|
+| Beast-Bane Whistle | **16** | **3.0 s** | **0.18 s** | **0.25 s** | 110 px posture/interrupt pulse; stronger vs beasts |
+| Thunder Rod | **22** | **3.0 s** | **0.24 s** | **0.32 s** | 260 px first-target line; 22 Health / 18 posture + Shock |
+| Smoke Gourd | **24** | **7.0 s** | **0.25 s** | **0.30 s** | 115 px targeting-disruption field for 3.0 s |
+| Fang Harpoon | **18** | **2.5 s** | **0.22 s** | **0.32 s** | 220 px shot; 10 Health / 20 posture + 45 px eligible pull |
+| Mirror Umbrella | **20** | **4.5 s** | **0.10 s** | **0.25 s** | up to 1.25 s frontal guard storing block-posture pressure |
+| Flame Vent | **20** | **3.5 s** | **0.25 s** | **0.35 s** | 100 px / 70° cone; 18 Health / 8 posture + Burn |
+| Mist Raven | **26** | **4.5 s** | **0.06 s** | **0.16 s** | 72 px fixed-direction invulnerable blink |
+| Bloodletting Gourd | **30** | **8.0 s** | **0.30 s** | **0.30 s** | heal 15 + 4.0 s healing-on-hit window |
 
 # Forge progression
 
@@ -60,82 +91,232 @@ Prosthetic Techniques are removed from the run Technique system.
 - Forge Bench owns permanent Prosthetic unlocks/upgrades.
 - Scrolls are the primary Prosthetic upgrade currency.
 - A base Prosthetic is functionally complete when unlocked.
-- Upgrades improve properties already present in the base tool.
-- Paths are linear with no mutually exclusive branches.
+- Upgrade paths are linear with no mutually exclusive branches.
 - Two upgrades are the default; a third is used only when another existing property is worth improving.
 
-First prototype Scroll costs:
+First prototype Scroll costs remain:
 
 - **Upgrade 1: 2 Scrolls**
 - **Upgrade 2: 4 Scrolls**
 - **Upgrade 3 where present: 6 Scrolls**
 
-The current 19-upgrade launch roster therefore has a working full-purchase cost of **66 Scrolls**. Final costs may move through playtesting without reopening the progression structure.
+The 19-upgrade launch roster therefore has a working full-purchase cost of **66 Scrolls**.
 
 Regional boss materials are **not automatically required** for Prosthetic ranks. A boss-material requirement would need explicit approval for a specific exceptional major Forge gate.
 
-# Locked upgrade paths
+# Beast-Bane Whistle
 
-## Beast-Bane Whistle
+## Base
 
-**Base:** short-radius interrupt/stagger pulse; stronger response against beasts.
+- Spirit: **16**
+- cooldown: **3.0 s**
+- startup / recovery: **0.18 / 0.25 s**
+- radius: **110 px**
+- Health damage: **0**
+- normal posture pressure: **18**
+- beast posture pressure: **28**
+- eligible ordinary enemies receive a short interrupt/stagger response
+- beasts receive the stronger authored beast reaction
+- elites/bosses receive posture pressure but ignore forced interruption where protected
 
-1. **Reinforced Resonance** — stronger existing interrupt/stagger.
-2. **Broad Resonance** — larger existing pulse radius.
+Use an enemy `beast` classification rather than per-enemy hardcoded exceptions.
 
-## Thunder Rod
+## Upgrades
 
-**Base:** aimed line strike hitting first target and applying Shock.
+1. **Reinforced Resonance** — normal posture pressure **18 → 24**; beast posture pressure **28 → 38**.
+2. **Broad Resonance** — pulse radius **110 → 145 px**.
 
-1. **Charged Conductor** — stronger direct Health/posture impact.
-2. **Lingering Current** — longer existing Shock.
+# Thunder Rod
 
-## Smoke Gourd
+## Base
 
-**Base:** short-lived smoke field disrupting enemy targeting.
+- Spirit: **22**
+- cooldown: **3.0 s**
+- startup / recovery: **0.24 / 0.32 s**
+- aimed line range: **260 px**
+- hits the first valid enemy intersecting the line
+- Health damage: **22**
+- posture damage: **18**
+- applies **Shock for 3.0 s**
 
-1. **Expanded Cloud** — larger field.
-2. **Dense Mixture** — longer persistence.
+### Shock
 
-## Fang Harpoon
+Shock is a setup status, not a stun.
 
-**Base:** medium-range interrupt with modest pull on eligible targets.
+The next direct sword hit against the Shocked enemy:
 
-1. **Reinforced Chain** — greater eligible pull distance.
-2. **Heavy Barb** — stronger interruption/posture impact.
+- consumes Shock,
+- deals **+12 posture damage**,
+- receives no extra Health damage from Shock.
 
-## Mirror Umbrella
+If Shock expires first, no bonus occurs. Reapplication refreshes the duration rather than stacking multiple charges.
 
-**Base:** protected guard that stores pressure and releases posture pressure on close.
+## Upgrades
 
-1. **Reinforced Canopy** — greater safe stored-pressure capacity.
-2. **Efficient Mechanism** — improved Spirit efficiency.
-3. **Weighted Release** — stronger closing posture release.
+1. **Charged Conductor** — direct impact **22 → 28 Health** and **18 → 24 posture**.
+2. **Lingering Current** — Shock duration **3.0 → 5.0 s**.
 
-## Flame Vent
+# Smoke Gourd
 
-**Base:** short forward cone dealing direct Health damage and Burn.
+## Base
 
-1. **Pressurized Vent** — modestly greater cone reach.
-2. **Refined Fuel** — greater direct Health damage.
-3. **Persistent Burn** — longer Burn duration.
+- Spirit: **24**
+- cooldown: **7.0 s**
+- startup / recovery: **0.25 / 0.30 s**
+- field radius: **115 px**
+- persistence: **3.0 s**
+- no Health/posture damage
 
-## Mist Raven
+Ordinary enemies inside the field:
 
-**Base:** very short fixed-distance invulnerable blink.
+- cannot begin new player-targeted attacks from beyond approximately **50 px**,
+- lose normal player targeting after approximately **0.25 s** in smoke,
+- continue already-committed attacks normally.
 
-1. **Efficient Passage** — improved Spirit efficiency.
-2. **Farther Passage** — modestly greater fixed blink distance while remaining short-range repositioning.
+Smoke never hides or cancels essential attack telegraphs.
 
-## Bloodletting Gourd
+Bosses and protected elites ignore the target-break effect unless an encounter explicitly allows it.
 
-**Base:** spends Spirit for immediate healing plus short healing-on-hit window.
+## Upgrades
 
-1. **Deeper Draught** — stronger immediate heal.
-2. **Longer Bloodletting** — longer healing-on-hit window.
-3. **Stronger Return** — stronger qualifying healing-on-hit return.
+1. **Expanded Cloud** — radius **115 → 155 px**.
+2. **Dense Mixture** — persistence **3.0 → 4.5 s**.
 
-# Guardrails
+# Fang Harpoon
+
+## Base
+
+- Spirit: **18**
+- cooldown: **2.5 s**
+- startup / recovery: **0.22 / 0.32 s**
+- range: **220 px**
+- projectile speed target: approximately **700 px/sec**
+- fixed firing direction; hits first valid target
+- Health damage: **10**
+- posture damage: **20**
+- eligible pull distance: **45 px toward Akio**
+- eligible ordinary enemies receive an interrupt response
+
+Heavy/protected enemies and bosses remain stationary but still take applicable Health/posture damage.
+
+## Upgrades
+
+1. **Reinforced Chain** — eligible pull distance **45 → 65 px**.
+2. **Heavy Barb** — posture damage **20 → 28** and increases eligible ordinary-enemy interrupt strength.
+
+# Mirror Umbrella
+
+Mirror Umbrella is a timed guard/conversion tool, not a second parry system.
+
+## Base
+
+- Spirit: **20**
+- cooldown: **4.5 s**
+- startup / recovery: **0.10 / 0.25 s**
+- frontal coverage: approximately **180°**
+- maximum active hold: **1.25 s**
+- stored-pressure capacity: **50 incoming block-posture damage**
+
+While active against a valid blockable frontal hit:
+
+- Akio takes **0 Health damage**,
+- Akio receives only **25% of the hit's normal block-posture damage**,
+- the incoming hit's normal block-posture value is added to Umbrella storage, up to capacity.
+
+On release/close:
+
+- emit a compact approximately **90 px frontal posture release**,
+- release posture pressure equals **75% of stored pressure**,
+- base release is capped at **38 posture damage**.
+
+If an incoming hit exceeds the Umbrella's remaining storage capacity, the Umbrella fails against that hit and normal defense/block consequences resolve instead.
+
+Mirror Umbrella does not automatically answer grabs, perilous attacks, or authored unblockables.
+
+## Upgrades
+
+1. **Reinforced Canopy** — storage capacity **50 → 70**.
+2. **Efficient Mechanism** — Spirit cost **20 → 15**.
+3. **Weighted Release** — release becomes **100% of stored pressure**, capped at **55 posture damage**.
+
+# Flame Vent
+
+## Base
+
+- Spirit: **20**
+- cooldown: **3.5 s**
+- startup / recovery: **0.25 / 0.35 s**
+- cone reach: **100 px**
+- cone angle: approximately **70°**
+- immediate Health damage: **18**
+- posture damage: **8**
+- applies **Burn for 4.0 s**
+
+### Burn
+
+- **3 Health damage/sec**
+- base duration **4.0 s** = **12 total Burn damage** if uninterrupted
+- Burn does not stack magnitude
+- reapplication refreshes duration
+- Burn damage has **0 ordinary Technique proc coefficient**
+
+## Upgrades
+
+1. **Pressurized Vent** — cone reach **100 → 130 px**.
+2. **Refined Fuel** — immediate Health damage **18 → 25**.
+3. **Persistent Burn** — Burn duration **4.0 → 6.0 s**, for **18 total Burn damage** at the unchanged tick rate.
+
+# Mist Raven
+
+## Base
+
+- Spirit: **26**
+- cooldown: **4.5 s**
+- startup / recovery: **0.06 / 0.16 s**
+- fixed-direction blink distance: **72 px**
+- Akio is invulnerable from disappearance through reappearance, approximately **0.20 s** total
+- may pass through enemies
+- cannot pass through solid world geometry
+- deals no damage
+- does not automatically place Akio behind a target or create backstab classification
+
+Mist Raven remains a short tactical reposition and does not replace the shared 96 px dash as the normal mobility foundation.
+
+## Upgrades
+
+1. **Efficient Passage** — Spirit cost **26 → 20**.
+2. **Farther Passage** — blink distance **72 → 92 px**.
+
+# Bloodletting Gourd
+
+## Base
+
+- Spirit: **30**
+- cooldown: **8.0 s**
+- startup / recovery: **0.30 / 0.30 s**
+- immediate heal: **15 Health**
+- healing-on-hit duration: **4.0 s**
+
+During the healing-on-hit window:
+
+- direct sword Health damage heals Akio for **12% of actual direct Health damage dealt**,
+- additional healing from the window is capped at **12 Health per activation**,
+- healing cannot exceed Akio's current maximum Health.
+
+Excluded from healing-on-hit:
+
+- Technique-created secondary damage,
+- Echo/Rift/Burn and other proc/status damage,
+- Prosthetic damage,
+- Deathblow execution damage.
+
+## Upgrades
+
+1. **Deeper Draught** — immediate heal **15 → 22 Health**.
+2. **Longer Bloodletting** — healing-on-hit window **4.0 → 6.0 s**.
+3. **Stronger Return** — healing-on-hit **12% → 18%** and per-activation window cap **12 → 18 Health**.
+
+# Implementation guardrails
 
 - Upgrades do not add alternate attacks, new status families, autonomous effects, Technique-family interactions, or new combat roles.
 - Base tools must be useful before upgrades.
@@ -145,17 +326,15 @@ Regional boss materials are **not automatically required** for Prosthetic ranks.
 - Pull/blink/interrupt behavior respects boss/elite immunity rules.
 - Mist Raven remains distinct from Wraith Aspect.
 - Smoke cannot hide essential attack tells.
+- Mirror Umbrella remains distinct from the universal parry and does not bypass perilous-response rules.
+- Shock and Burn are Prosthetic statuses unless another authority explicitly creates a separate interaction.
 
-# Required implementation data per tool
+# Planning exit condition
 
-- Spirit cost,
-- cooldown/charge rule,
-- startup/active/recovery timing,
-- valid targets/immunity,
-- geometry,
-- status behavior,
-- Health/posture effects,
-- permanent upgrade values,
-- icon/world object/VFX/sound/animation dependencies.
+The Prosthetic package is **complete for planning** at first-playtest depth.
 
-The authoritative visual requirements belong in `art_production/PROSTHETIC_VFX.md`.
+The eight base tools and nineteen upgrades now have enough Spirit, repeat-use, timing, geometry, Health/posture, status, control, and upgrade data to instantiate in Godot.
+
+Do not create a follow-up Prosthetic planning pass merely to refine final cooldowns, hitboxes, VFX synchronization, projectile speed, status magnitudes, or balance. Those values should move through implementation/playtesting unless a genuine missing rule or structural incompatibility appears.
+
+The authoritative visual requirements remain in `art_production/PROSTHETIC_VFX.md`.
