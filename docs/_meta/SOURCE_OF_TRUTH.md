@@ -34,6 +34,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
 | Technique mechanics | `docs/gameplay/TECHNIQUES.md` |
 | Individual Technique catalog and refinements | `docs/gameplay/TECHNIQUE_CATALOG.md` |
+| Shared Technique-family first-playtest implementation values | `docs/gameplay/TECHNIQUE_IMPLEMENTATION_BASELINES.md` |
 | Relic mechanics and launch roster | `docs/gameplay/RELICS.md` |
 | Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
 | Currency/material ownership and permanent upgrade gates | `docs/gameplay/PROGRESSION.md` |
@@ -89,7 +90,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 
 ## Conflict rule
 
-When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior.
+When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior. `TECHNIQUE_IMPLEMENTATION_BASELINES.md` owns shared first-playtest Technique-family constants and normalization while `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md` own system rules and the individual roster.
 
 If the current design genuinely does not answer a conflict and the decision affects scope, add one concise question to `OPEN_QUESTIONS.md`.
 
