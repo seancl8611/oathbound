@@ -15,26 +15,25 @@ Oathbound production is organized by dependency order and meaningful playtest gr
 
 Top-level game architecture is complete enough to stop treating documentation as a prerequisite to every implementation task.
 
-The following first-playtest player-build packages are now complete for planning:
+The complete launch player-build layer is now **complete for planning at first-playtest depth**:
 
 - shared combat baseline,
 - Wolf / Wraith / Ronin Aspect baselines,
 - Technique catalog + family implementation constants,
 - all 8 Prosthetics + 19 permanent upgrade implementation values,
-- all 10 Relics + Base / Mastery I / Mastery II values and mastery trigger rules.
+- all 10 Relics + Base / Mastery I / Mastery II values and mastery trigger rules,
+- Corruption / Shrine progression values and state transitions,
+- Tier-II Blood meter / generation / normalization rules.
 
 The remaining handoff sequence is:
 
-1. finish the small shared **Corruption/Shrine progression + Blood meter/generation contract**,
-2. make Hushiro a complete authored region on paper,
-3. reconcile the existing Godot project against current documentation,
-4. resume implementation/playtesting while later-region content continues to be authored.
-
-Corruption/Shrines and Blood remain separate mechanics. They are handled together only because Shrine Embrace unlocks Tier II, which is the dependency boundary that activates Blood.
+1. make **Hushiro** a complete authored region on paper,
+2. reconcile the existing Godot project against current documentation,
+3. resume implementation/playtesting while later-region content continues to be authored.
 
 `OPEN_QUESTIONS.md` owns the exact implementation-facing queue and exit conditions.
 
-Approved design remains the source of truth, but prototype values are expected to move when playtesting provides better evidence. Do not delay implementation while attempting to solve final balance on paper.
+Approved first-playtest values are expected to move when playtesting provides better evidence. Do not delay implementation while attempting to solve final balance on paper.
 
 # Pre-milestone gate — Paid Style Test
 
@@ -88,7 +87,7 @@ Complete:
 
 Current roster remains **50 Techniques + 10 refinements**, **10 Relics**, and **8 Prosthetics / 19 upgrades** unless testing exposes a concrete gap.
 
-The current implementation-handoff pass should provide every player-build item with enough first-playtest data to instantiate. Final numerical balance remains playtest work.
+The player-build implementation-handoff package now provides enough first-playtest data to instantiate these systems. Final numerical balance remains playtest work.
 
 # Milestone 5 — Complete Area 2
 
@@ -184,17 +183,17 @@ Completed for planning:
 - **Pass 2A:** Blood Aspects,
 - **Pass 2B:** Techniques,
 - **Pass 2C:** Prosthetics,
-- **Pass 2D:** Relics.
+- **Pass 2D:** Relics,
+- **Pass 2E:** Corruption / Shrines / Blood resource-state contract.
 
 Current implementation-facing order:
 
-1. **final player-build resource/state contract — Corruption/Shrines + Blood generation**,
-2. **complete Hushiro encounter/layout/miniboss/boss package**,
-3. **Godot documentation-to-code delta audit and implementation restart**,
-4. **Strand/permanent-progression exact content**,
-5. **Yomori package**,
-6. **Kagutsuchi/Shogun/Heart package**,
-7. **exact narrative/achievement/content lists**,
-8. **playtest-driven tuning and final pacing validation**.
+1. **complete Hushiro encounter/layout/miniboss/boss package**,
+2. **Godot documentation-to-code delta audit and implementation restart**,
+3. **Strand/permanent-progression exact content**,
+4. **Yomori package**,
+5. **Kagutsuchi/Shogun/Heart package**,
+6. **exact narrative/achievement/content lists**,
+7. **playtest-driven tuning and final pacing validation**.
 
 Use `docs/_meta/OPEN_QUESTIONS.md` for exact exit conditions. Use `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
