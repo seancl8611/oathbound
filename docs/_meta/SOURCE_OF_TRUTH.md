@@ -40,7 +40,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Currency/material ownership and permanent upgrade gates | `docs/gameplay/PROGRESSION.md` |
 | Reward payouts, Gold/Shop economy, Mist/Scroll payouts, regional boss-material drops | `docs/gameplay/ITEMS_AND_REWARDS.md` |
 | Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
-| Prosthetic mechanics | `docs/gameplay/PROSTHETICS.md` |
+| Prosthetic mechanics, first-playtest values, and 19 upgrade values | `docs/gameplay/PROSTHETICS.md` |
 | World and island setting | `docs/lore/WORLD.md` |
 | Story spine | `docs/lore/STORY_OVERVIEW.md` |
 | Narrative delivery and campaign presentation | `docs/narrative/NARRATIVE_DELIVERY.md` |
@@ -90,7 +90,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 
 ## Conflict rule
 
-When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior. `TECHNIQUE_IMPLEMENTATION_BASELINES.md` owns shared first-playtest Technique-family constants and normalization while `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md` own system rules and the individual roster.
+When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior. `TECHNIQUE_IMPLEMENTATION_BASELINES.md` owns shared first-playtest Technique-family constants and normalization while `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md` own system rules and the individual roster. `PROSTHETICS.md` owns both the Prosthetic roster/progression rules and the approved first-playtest values for all eight tools and nineteen upgrades.
 
 If the current design genuinely does not answer a conflict and the decision affects scope, add one concise question to `OPEN_QUESTIONS.md`.
 
