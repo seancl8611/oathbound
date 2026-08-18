@@ -14,6 +14,7 @@ topics:
   - blood-aspects
   - progression
   - boss-materials
+  - authored-encounters
   - heart-bindings
 related:
   - OVERVIEW-DESIGN-PILLARS
@@ -88,9 +89,11 @@ The approved first regional prototype contains **33 counted chambers**:
 
 Each region offers one optional miniboss opportunity from two authored candidates. Branches preview room/reward information, normally offer one or two exits, and may reconverge without routine backtracking.
 
+Standard Combat rooms use **deliberately authored encounter scripts**. When a Combat chamber is selected, the game chooses an eligible encounter from that region's authored pool rather than procedurally constructing an enemy mix from a threat budget. Opening/main/final route bands do not require separate encounter pools; individual encounters may later receive minimum-chamber eligibility where their mechanics or teaching role require it.
+
 The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, and persistent-resource payout models are approved as prototype implementation targets. Exact values remain playtest-tunable.
 
-A normal successful Binding run targets approximately **45–50 minutes of active time**.
+A normal successful Binding run targets approximately **45–50 minutes of active time**. Encounter-pool counts and individual encounter scripts remain later content-production/playtest work.
 
 # Campaign structure
 
@@ -114,14 +117,16 @@ Completed saves remain playable. Repeat normal runs and optional repeat Heart ro
 
 # Current design focus
 
-Major run-build, reward/economy, route, boss-reward, and Relic architecture are already scoped.
+Major run-build, reward/economy, route, boss-reward, Relic, and standard-encounter architecture are already scoped.
 
 The remaining sequence is now:
 
-1. **make the full 33-chamber route concrete and validate pacing** — enemy compositions, threat escalation, elite frequency, clear-time budgets, boss/miniboss budgets, and full-run simulation;
+1. **make standard-enemy regional availability explicit** — decide which of the 15 standard enemies are region-exclusive and which may reappear in later regions;
 2. **close permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery structure, boss-material gates, unlock cadence;
 3. **define narrative delivery / campaign presentation**;
 4. **define endgame / postgame / release scope**.
+
+The actual standard-encounter roster, encounter counts, enemy wave/count tuning, and full-run clear-time validation are intentionally deferred until encounter production.
 
 Exact final balance values, mastery thresholds, frame data, and final scripts remain later work under their owning authorities.
 
