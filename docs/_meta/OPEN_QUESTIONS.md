@@ -16,252 +16,226 @@ topics:
 
 This file is the implementation-facing design queue for Oathbound.
 
-Oathbound's launch architecture is already scoped. From this point forward, an item belongs here only if answering it will materially reduce implementation ambiguity, prevent predictable rework, define authored launch content, or create a useful first-playtest baseline.
+Oathbound's launch architecture is already scoped. An item belongs here only if answering it will materially reduce implementation ambiguity, prevent predictable rework, define authored launch content, or create a useful first-playtest baseline.
 
-The goal is **not** to fully solve balance on paper. The goal is to make the documented game concrete enough that implementation becomes filling in known pieces, then let Godot playtesting drive revisions.
+The goal is **not** to solve final balance on paper. The goal is to make the documented game concrete enough that implementation becomes filling in known pieces, then let Godot playtesting drive revisions.
 
 # Planning-to-implementation rule
 
-Approved documents are the **current source of truth**, but they are not promises that every prototype value will survive playtesting unchanged.
+Approved documents are the current source of truth, but prototype values are expected to move when playtesting provides better evidence.
 
 Use three decision classes:
 
-1. **Define before implementation** — content/state/rule decisions that code, data, UI, art, or authored encounters need in order to exist.
-2. **Set a first-playtest baseline** — numerical values needed to make the game playable; choose a reasonable prototype instead of debating final balance indefinitely.
-3. **Defer to playtesting** — final damage, timing, frequency, pacing, economy, and difficulty tuning that is better answered by the playable game.
+1. **Define before implementation** — rules/content/data that code, UI, art, or authored encounters need in order to exist.
+2. **Set a first-playtest baseline** — values needed to make the game playable; choose a reasonable prototype rather than debating final balance indefinitely.
+3. **Defer to playtesting** — final damage, timing, frequency, pacing, economy, and difficulty tuning that the playable game can answer better.
 
-A question should leave this file once it has enough of an answer to implement. It does not need to be mathematically final.
+A question leaves this file once it has enough of an answer to implement.
 
-# Current implementation-readiness assessment
+# Completed implementation pass
 
-## Already sufficiently scoped at architecture level
+## Pass 1 — Core combat implementation baseline — COMPLETE
 
-Do **not** reopen these without a concrete playtest or implementation problem:
+The shared first-playtest combat contract is now approved in:
 
-- three launch Blood Aspects,
-- shared combat/action-slot model,
-- 50 Techniques + 10 refinements,
-- 8 Prosthetics / 19 permanent upgrades,
-- 10 Relics / two mastery ranks each,
-- Bloodwell / Forge / Blood Mirror progression architecture,
-- currencies and boss-material model,
-- 33-chamber three-region route,
-- route branching / room / reward / Shop / survival prototypes,
-- authored regional standard-encounter model,
-- regional enemy rosters and enemy-lineage rule,
-- six Binding clears + seventh story Heart route,
-- silent-protagonist and narrative-delivery scope,
-- Heart-suppression ending and canonical postgame,
-- launch release / settings / accessibility / save / achievement scope.
+- `docs/gameplay/COMBAT.md` — shared combat rules/vocabulary,
+- `docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md` — first-playtest numeric/common-behavior values.
 
-## Still needs concrete implementation content
+The baseline now defines:
 
-The largest remaining gaps are:
+- Akio Health/Posture/Spirit,
+- neutral movement and dash values,
+- parry/block/posture-break behavior,
+- normalized standard-enemy Health/posture profiles,
+- enemy posture recovery/deathblow readiness,
+- Deathblow execution safety,
+- shared attack data fields and modifier convention,
+- proc normalization,
+- universal backstab geometry/payoff,
+- perilous-response classes,
+- shared status-refresh conventions.
 
-- first-playtest combat/system values,
-- exact authored standard encounter pools,
-- practical room-layout / arena inventories,
-- codable miniboss/boss/Heart encounter packages,
-- exact Bloodwell/Blood Mirror effects and first-playtest prices,
-- exact trial roster and rewards,
-- final Relic source assignments,
-- exact narrative / codex / achievement content,
-- implementation-vs-documentation delta once the Godot project is connected.
+Do not reopen these values as planning questions unless implementation/playtesting exposes a concrete problem.
 
-# Priority sequence
-
-Work through these in order unless implementation exposes a stronger dependency.
-
-## 1. Core combat implementation baseline
-
-**Question:** What exact first-playtest data should the shared combat system use?
-
-Define a coherent prototype table for the values needed by implementation, including:
-
-- Akio base Health, posture, Spirit, movement, dash, block, parry, posture-break, deathblow, and recovery rules,
-- baseline enemy Health/posture relationship and common response rules,
-- backstab rear-angle / baseline treatment,
-- perilous attack response contracts,
-- shared status-duration / proc conventions where systems depend on them,
-- any global damage/posture coefficient conventions used by Aspects, Techniques, enemies, or bosses.
-
-**Exit condition:** the common combat layer can be implemented/tested without inventing missing rules in code.
-
-**Do not require:** final frame-perfect tuning or final difficulty balance.
-
-## 2. Player-build implementation sheets
+# Current priority — Pass 2: Player-build implementation sheets
 
 **Question:** What first-playtest values and exact implementation behavior complete the already-approved player content?
 
-Fill the remaining data fields for:
+This pass should make every launch player-build item instantiable in Godot without inventing missing combat behavior inside code.
 
-- Wolf, Wraith, and Ronin attacks/Tier mechanics,
-- 50 Techniques + 10 refinements,
-- 8 Prosthetics and 19 upgrade effects,
-- 10 Relics and two mastery ranks each,
-- Corruption / Shrine / Blood / Blood Art values where still qualitative.
+## 2A. Blood Aspect implementation sheets — NEXT
 
-Prefer reusable shared rules, coefficients, and data fields over one-off exceptions.
+Define first-playtest data for **Wolf, Wraith, and Ronin**.
 
-**Exit condition:** every launch player-build item has enough data to instantiate in Godot, even if values remain prototype tuning targets.
+For every Tier 0 sword action and relevant Tier mechanic, define the implementation fields actually needed by Godot, including:
 
-## 3. Hushiro implementation-ready content package
+- Health damage,
+- posture damage,
+- block-posture damage,
+- startup / active / recovery timing,
+- reach / geometry,
+- movement or fixed-position behavior,
+- tracking/facing rule,
+- stagger level,
+- proc coefficient,
+- cancel/commitment behavior,
+- Blood/Tier values where applicable,
+- Aspect-specific posture/guard adjustments already allowed by the shared combat rules.
 
-This is the first complete regional production target and should be finished before spending equal detail on every later region.
+Prefer one consistent data-sheet format across all three Aspects.
 
-### 3A. Standard encounter pool
+**Exit condition:** Wolf, Wraith, and Ronin can each be implemented from their documentation without a coder deciding what an attack mechanically does.
 
-**Question:** What authored standard encounters ship in Hushiro?
+## 2B. Technique implementation sheet
 
-Define:
+After the Aspect attacks are numeric enough to serve as hosts, fill the implementation fields for:
 
-- practical launch pool count,
-- each encounter's tactical purpose,
+- 25 Direct Techniques,
+- 15 Supporting Techniques,
+- 5 Cross-family Techniques,
+- 5 Legendaries,
+- 10 refinements.
+
+Define exact first-playtest values for damage/posture bonuses, proc thresholds, status duration, internal cooldowns, normalization/proc coefficients, replacement behavior, and other missing implementation fields.
+
+Do not redesign the approved roster merely because numbers are being assigned.
+
+## 2C. Prosthetic implementation sheet
+
+Define for all 8 Prosthetics and 19 upgrades:
+
+- Spirit cost,
+- cooldown/charge behavior,
+- startup / active / recovery,
+- geometry/range,
+- valid targets/immunity,
+- Health/posture effects,
+- status values/durations,
+- exact first-playtest upgrade improvements.
+
+## 2D. Relic implementation sheet
+
+Define for all 10 Relics:
+
+- Base effect value,
+- Mastery I value,
+- Mastery II value,
+- qualifying trigger rules,
+- any once-per-room/run/reset behavior,
+- first-playtest mastery thresholds if needed for implementation.
+
+## 2E. Corruption / Shrine / Blood numeric sheet
+
+Fill any remaining first-playtest values required to instantiate:
+
+- Corruption gain/loss,
+- Resist/Embrace/Stabilize behavior,
+- Tier thresholds,
+- Blood generation/storage,
+- Blood Art costs/effects,
+- interaction with the three approved Aspects.
+
+**Pass 2 exit condition:** every launch player-build item has enough data to instantiate in Godot, even though values remain playtest-tunable.
+
+# Pass 3 — Hushiro implementation-ready content package
+
+This is the first complete regional production target.
+
+## 3A. Standard encounter pool
+
+Define the authored Hushiro launch encounters:
+
+- practical pool count,
+- tactical purpose,
 - exact enemy composition,
-- wave/spawn sequence if any,
+- waves/spawn sequence if any,
 - layout/space requirement,
-- minimum-chamber restriction only where genuinely needed,
-- anti-repeat/eligibility rule only if the route requires one.
+- minimum-chamber restriction only where needed,
+- anti-repeat/eligibility rule only if needed.
 
-### 3B. Room-layout inventory
+## 3B. Room-layout inventory
 
-**Question:** What reusable Hushiro gameplay spaces must actually exist?
-
-Define the implementation-facing layout set for:
+Define the reusable Hushiro gameplay spaces actually required for:
 
 - standard Combat,
 - Shrine,
 - Rest,
 - Shop,
 - Treasure,
-- miniboss spaces,
-- Keeper arena,
-- transition spaces.
+- minibosses,
+- Keeper,
+- transitions.
 
-This is a layout inventory, not a requirement for unique art per chamber.
+This is a reusable layout inventory, not unique art per chamber.
 
-### 3C. Miniboss and Keeper packages
+## 3C. Village Ogre, Collector, and Keeper implementation packages
 
-**Question:** What exact state/move package makes Village Ogre, Collector, and Keeper codable?
-
-The qualitative identities are already approved. Add only the implementation details still missing:
+For each, finish:
 
 - complete move/state list,
 - targeting/selection conditions,
-- parryable / dodge-focused / perilous classifications,
+- parryable/dodge/perilous classifications,
 - phase/escalation transitions,
 - arena interactions,
-- add/hazard rules where applicable,
-- death/posture/deathblow behavior.
+- add/hazard rules,
+- posture/deathblow/death behavior.
 
-**Exit condition for Pass 3:** Hushiro can be built as a complete repeatable region and used as the first serious end-to-end balance environment.
-
-## 4. Strand and permanent-progression implementation package
-
-**Question:** What exact content must the between-run loop instantiate?
-
-Define:
-
-- exact individual effects for 10 Akio Bloodwell nodes,
-- exact individual effects for 8 Run Infrastructure nodes,
-- exact 9 Blood Mirror node effects,
-- first-playtest Mist prices / boss-material requirements within the approved structure,
-- Relic mastery thresholds,
-- Prosthetic unlock/source sequencing where still unresolved,
-- exact Relic-to-source assignment for the approved 4 / 2 / 4 acquisition split,
-- exact Blood Cavern trial roster, unlock cadence, first-time rewards, and the two challenge Relic assignments,
-- save/progression flags required by these states.
-
-**Exit condition:** the Strand/meta loop can be implemented without placeholder progression content beyond numerical tuning.
-
-## 5. Yomori implementation-ready content package
-
-Repeat the Hushiro process for Yomori:
-
-- authored standard encounter pool,
-- reusable gameplay-space/layout inventory,
-- Embered Pilgrim package,
-- Rotwood Host package,
-- Twin Maws package,
-- any region-specific hazard rules required by those encounters.
-
-Do not add new systems merely to differentiate Area 2; use the approved enemy/region identity.
-
-## 6. Kagutsuchi + Shogun + Heart implementation-ready package
-
-Define:
-
-- Kagutsuchi authored standard encounter pool,
-- reusable gameplay-space/layout inventory,
-- Blood Lotus package,
-- Eternal Swordsman package,
-- Eclipse Shogun complete encounter package,
-- Binding-space implementation states,
-- Unbound Heart complete encounter package,
-- Vessel of Continuance complete encounter package,
-- canonical first-clear vs repeat Heart-suppression presentation/state differences.
-
-This pass should make the full combat route content-complete on paper without requiring final balance.
-
-## 7. Exact authored presentation/content lists
-
-Finish content that is scoped by volume but not yet individually written/assigned:
-
-- NPC and Shogun dialogue scripts,
-- Discovery Board / Lore entries,
-- approximately 30 achievement names/triggers,
-- tutorial/help text,
-- exact records labels,
-- final Relic acquisition presentation,
-- ending/postgame Keeper/Scribe lines,
-- credits/legal text once contributors/dependencies are known.
-
-This work should not block combat implementation unless a specific UI/data structure depends on it.
+**Pass 3 exit condition:** Hushiro can be built as a complete repeatable region and used as the first serious end-to-end balance environment.
 
 # Implementation restart gate
 
-**Do not wait for every item in Passes 5–7 before returning to Godot.**
+Do **not** wait for all later-region documentation before returning to Godot.
 
 The documentation-first phase has done its job once:
 
-- Pass 1 provides a usable common combat baseline,
+- Pass 1 is complete,
 - Pass 2 makes player-build content instantiable,
-- Pass 3 makes Hushiro fully implementation-ready,
-- and the current Godot project is audited against the repo.
+- Pass 3 makes Hushiro implementation-ready,
+- the existing Godot project is audited against current documentation.
 
-At that point, implementation and documentation should proceed together. Build/playtest Hushiro and the run loop while later-region content packages are completed in dependency order.
+At that point implementation and documentation proceed together.
 
-When the game-code repository becomes available, the first implementation task is a **documentation-to-code delta audit**:
+# Later implementation-content passes
 
-- what already exists and still matches,
-- what exists but reflects superseded design,
-- what is partially implemented,
-- what is missing,
-- what should be deleted rather than updated.
+## Pass 4 — Strand and permanent progression
 
-The Oathbound documentation remains the design authority during that audit.
+Define exact Bloodwell/Blood Mirror effects, first-playtest prices, Relic mastery thresholds, Prosthetic unlock sequencing, Relic 4/2/4 source assignments, Blood Cavern trial roster/rewards, and save/progression flags.
+
+## Pass 5 — Yomori
+
+Define Yomori encounter pool/layout inventory, Embered Pilgrim, Rotwood Host, Twin Maws, and required region-specific hazard rules.
+
+## Pass 6 — Kagutsuchi + Shogun + Heart
+
+Define Kagutsuchi encounter pool/layout inventory, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding-space states, Unbound Heart, Vessel of Continuance, and first-clear vs repeat-suppression presentation/state differences.
+
+## Pass 7 — Exact authored presentation/content
+
+Finish NPC/Shogun scripts, Discovery Board/Lore entries, achievement names/triggers, tutorial/help text, records labels, ending/postgame lines, and final credits/legal text when dependencies are known.
+
+This pass should not block combat implementation unless a specific interface requires the content earlier.
 
 # Playtest-only tuning backlog
 
-These should **not** become planning blockers before a playable build exists:
+Do not turn these into planning blockers before the playable build can measure them:
 
-- final damage/posture numbers,
-- final attack/frame timings,
+- final damage/posture values,
+- final attack/frame timing,
 - final parry/dash windows,
 - final enemy Health/damage,
-- final encounter counts if variety testing indicates adjustment,
+- final encounter count/variety adjustments,
 - final route/reward weights,
 - final Technique rarity/source percentages,
 - final Shop prices,
-- final recovery/capacity percentages,
-- final Mist/Scroll payouts and prices,
-- final Relic mastery thresholds,
+- final recovery/capacity values,
+- final Mist/Scroll payouts/prices,
+- final mastery thresholds,
 - final Bloodwell/Blood Mirror percentages,
-- final Prosthetic costs/effect magnitudes,
+- final Prosthetic magnitudes,
 - exact 45–50 / 55–60 minute pacing validation,
-- VFX density, hitbox polish, camera timing, and animation timing.
+- VFX density, hitbox polish, camera timing, animation timing.
 
-Use first-playtest values, implement them, measure them, then update the owning authority when evidence supports a change.
+Use the approved first-playtest values, implement them, measure them, then update the owning authority when evidence supports a change.
 
 # Question-quality filter
 
@@ -272,4 +246,4 @@ Before adding a new item here, ask:
 3. Would answering it now prevent meaningful rework?
 4. Can playtesting answer it more reliably than documentation?
 
-If the answer to #4 is yes and the first three are no, **do not add it as an open design question**.
+If #4 is yes and the first three are no, do **not** add it as an open design question.
