@@ -8,7 +8,6 @@ last_reviewed: 2026-08-17
 topics:
   - open-questions
   - design-priority
-  - permanent-progression
   - narrative-delivery
   - postgame
 ---
@@ -29,8 +28,14 @@ The following major architecture is already established and should not be reopen
 - 10-Relic launch roster with one equipped slot,
 - Relic acquisition split of 4 guaranteed campaign/Strand, 2 Blood Cavern/challenge, and 4 run-discovered Relics,
 - Relic swapping at the Forge before a run, after Keeper, after Twin Maws, or immediately on a new discovery,
-- eight Prosthetics with shallow linear Forge progression,
+- Relic progression uses **Base → Mastery I → Mastery II / Complete**, two mastery milestones per Relic,
+- eight Prosthetics with 19 shallow linear Forge upgrades,
 - three permanent upgrade stations: Bloodwell, Forge Bench, later-unlocked Blood Mirror,
+- Bloodwell launch scope of **10 Akio nodes + 8 Run Infrastructure nodes**,
+- Blood Mirror launch scope of **3 nodes per Aspect / 9 total**,
+- exactly **6 regional-boss-material-gated Bloodwell nodes**, one Akio mastery node and one Infrastructure passage node per regional boss,
+- permanent progression unlock cadence of first return → first Keeper → first Twin Maws → first Shogun / first Binding clear,
+- all foundational permanent progression systems structurally available after the first Binding clear,
 - no general launch consumable inventory or one-use item reward layer,
 - three-region 33-chamber prototype route: 12 Hushiro / 10 Yomori / 11 Kagutsuchi,
 - standard Combat rooms use deliberately authored encounter scripts selected from a regional encounter pool,
@@ -59,9 +64,8 @@ Current values and exact rules live in:
 
 # Scope-closure sequence
 
-1. **Close permanent-progression content scope**
-2. **Define narrative delivery and campaign presentation**
-3. **Define endgame, postgame, and release scope**
+1. **Define narrative delivery and campaign presentation**
+2. **Define endgame, postgame, and release scope**
 
 Detailed standard-encounter authoring and final clear-time validation remain later content/playtest work after broader launch scope is established.
 
@@ -79,40 +83,28 @@ When encounter production begins:
 
 This is not the current top-level design question because the game does not yet need every individual combat room authored to close launch scope.
 
-# 1. Permanent-progression content scope
+# 1. Narrative delivery and campaign presentation
 
-The architecture and currencies are already decided. Close the remaining **content volume and progression-cadence** questions without reopening the station model.
+The story spine and lore are already approved. The next question is to define the **complete authored narrative-delivery package required for launch** without writing every line of dialogue yet.
 
-Define as one connected progression package:
+Define as one connected campaign-presentation plan:
 
-- the number and broad roles of Bloodwell **Akio** nodes,
-- the number and broad roles of **Run Infrastructure** nodes,
-- the number and broad roles of Blood Mirror nodes for each Aspect,
-- the intended Relic mastery rank structure,
-- which small set of major upgrades use Keeper / Twin Maws / Shogun materials,
-- the campaign cadence for unlocking these systems and major node bands.
+- how the introductory attempt begins and where the first death occurs,
+- what the player sees/understands during the first Returning Blood reconstruction,
+- when Akio's bloodline and Returning Blood truth are revealed,
+- how much Shogun dialogue/progression changes across repeat encounters and Binding clears,
+- how the six Strand NPCs update across failures, regional milestones, and Binding clears,
+- what the Discovery Board/codex owns versus what must be communicated directly in play,
+- how each Binding clear communicates permanent campaign progress without requiring six unique missions,
+- what presentation is required for the seventh-run Heart unlock, true-final Heart, ending, and credits,
+- what uses portraits, in-engine scenes, still illustrations, text boxes, voice acting, or no cinematic treatment,
+- the broad writing/localization inventory needed for launch.
 
-The output should be a coherent launch progression map showing what permanent goals the player works toward across repeated runs and when those goals become available. Exact percentages, final Mist prices, mastery kill thresholds, and other balance values remain tuning work after the content structure is fixed.
+The goal is to establish **scene/dialogue/state counts and presentation tiers** so narrative production volume can be estimated. Detailed scripts, exact line counts, final prose, shot timing, and voice casting follow only after this package is scoped.
 
-**Authority:** `docs/gameplay/PROGRESSION.md`, Bloodwell/Blood Mirror/Forge authorities.
+**Authority:** `docs/lore/STORY_OVERVIEW.md`, character/NPC authorities, `docs/gameplay/RUN_STRUCTURE.md`, Strand/Heart content authorities, and relevant UI files.
 
-# 2. Narrative delivery and campaign presentation
-
-The story spine and lore are already approved. Define the authored delivery package required for launch:
-
-- introductory attempt / first death,
-- Returning Blood and bloodline reveal timing,
-- Shogun dialogue progression across repeat encounters,
-- NPC / Strand dialogue updates,
-- Discovery Board / codex ownership,
-- Binding-clear presentation and campaign-state communication,
-- portrait, cinematic, and voice-acting scope,
-- ending and credits presentation,
-- final writing/localization inventory.
-
-Detailed scripts and line counts follow only after this delivery package is scoped.
-
-# 3. Endgame, postgame, and release scope
+# 2. Endgame, postgame, and release scope
 
 Define what remains available after the first canonical Heart victory and what is required for a complete initial release:
 
@@ -136,8 +128,9 @@ Do not add separate top-level questions for final:
 - recovery/capacity percentages,
 - Mist/Scroll payout tuning,
 - final Scroll/Mist costs,
-- boss-material quantities above the approved low-count model,
-- exact Relic mastery thresholds,
+- exact boss-material quantities within the approved low-count model,
+- exact Relic mastery kill thresholds,
+- exact Bloodwell/Blood Mirror percentages,
 - individual Prosthetic percentages,
 - frame data, VFX timing, hitboxes, or animation timings.
 
