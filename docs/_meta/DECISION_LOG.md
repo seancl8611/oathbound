@@ -14,16 +14,25 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-08-17 — Authored standard-encounter model locked
+
+Standard Combat rooms use **deliberately authored encounter scripts**, not procedurally assembled enemy threat budgets. One encounter is one Combat-room sequence from combat start until room completion and owns its intended enemy composition/theme plus counts, waves, or spawn sequencing where applicable.
+
+Each region will have a finite authored encounter pool. When the route generates a standard Combat chamber, it selects an eligible encounter from that regional pool.
+
+The route's opening/main/pre-boss bands do **not** create a mandatory three-tier encounter-pool structure. By default, an authored encounter may appear throughout its region; an individual encounter may later receive a minimum-chamber or narrow eligibility rule when its teaching role or difficulty clearly requires one.
+
+Regional escalation comes primarily from the enemies and encounter compositions authored for later regions rather than automatic threat-budget inflation. Encounter counts and every individual script are deferred until encounter production.
+
+The 6 Hushiro, 4 Yomori, and 5 Kagutsuchi standard-enemy rosters are already defined, but cross-region reuse is not explicit in the current repository. The next scope question is therefore which enemies remain region-exclusive and which may reappear in later regions.
+
+**Authority:** `docs/gameplay/RUN_STRUCTURE.md`, regional `docs/content/area_*/ENEMIES.md`, `docs/_meta/OPEN_QUESTIONS.md`.
+
 ## 2026-08-17 — Launch consumables cut; remaining design refocused on scope closure
 
 Oathbound does **not** include a general run-consumable inventory or one-use item reward layer at launch. Shops, Treasure, recovery/capacity, Technique rerolls, Techniques, Relics, and Prosthetics already cover the intended tactical/reward roles without another inventory/UI subsystem.
 
-The remaining design sequence is now dependency-driven rather than a queue of isolated minor questions:
-
-1. playable 33-chamber encounter composition and pacing,
-2. permanent-progression content scope,
-3. narrative delivery/campaign presentation,
-4. endgame/postgame/release scope.
+The remaining design sequence was refocused away from isolated minor questions. Later decisions further clarified which encounter work belongs to design scope versus encounter production.
 
 **Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`, `docs/gameplay/PROGRESSION.md`, `docs/_meta/OPEN_QUESTIONS.md`.
 
