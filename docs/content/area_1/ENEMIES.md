@@ -4,7 +4,7 @@ title: Area 1 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-13
+last_reviewed: 2026-08-17
 topics:
   - area-1
   - hushiro
@@ -65,6 +65,14 @@ Area 1 enemies move like defenders first and corrupted beings second. Soldiers h
 | Hollow | Fragile civilian swarm pressure | [Hollow](enemies/HOLLOW.md) |
 | Cellar Bilemass | Persistent area denial | [Cellar Bilemass](enemies/CELLAR_BILEMASS.md) |
 | Warden | Chain restraint and crowd control | [Warden](enemies/WARDEN.md) |
+
+## Regional availability and lineage
+
+All six enemies above are **native Hushiro standard enemies**. Standard enemies are region-native by default and do not automatically carry forward unchanged into later regional encounter pools.
+
+A later region may deliberately author an **evolved variant** of an earlier enemy concept when the new unit expresses that region's identity through new behavior rather than simple stat inflation. For launch, the only approved lineage of this kind is **Blighted Hounds → Stalker Hound** in Yomori Grove. The Blighted Hound itself remains a Hushiro enemy; Stalker Hound is a separate Area 2 enemy built from the same family lineage.
+
+No other Hushiro standard enemy currently has an approved launch continuation in Yomori or Kagutsuchi.
 
 ## Mixed-encounter rules
 
