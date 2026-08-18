@@ -11,23 +11,43 @@ last_reviewed: 2026-08-18
 
 Oathbound production is organized by dependency order and meaningful playtest groups. Milestones summarize required production; gameplay/content/narrative/release authorities own the underlying design.
 
+# Current phase — implementation handoff
+
+Top-level game architecture is complete enough to stop treating documentation as a prerequisite to every implementation task.
+
+The current goal is to convert approved qualitative design into **implementation-ready prototype contracts**:
+
+1. establish first-playtest shared combat values,
+2. fill the remaining player-build data required by Godot,
+3. make Hushiro a complete authored region on paper,
+4. reconcile the existing Godot project against the current documentation,
+5. resume implementation/playtesting while later-region content continues to be authored.
+
+`OPEN_QUESTIONS.md` owns this implementation-facing queue.
+
+Approved design remains the source of truth, but prototype values are expected to move when playtesting provides better evidence. Do not delay implementation while attempting to solve final balance on paper.
+
 # Pre-milestone gate — Paid Style Test
 
-Lock practical sprite scale, palette, detail density, high-angle perspective, outline treatment, ground shadow, Hushiro tone, and Godot import quality before Milestone 1.
+Lock practical sprite scale, palette, detail density, high-angle perspective, outline treatment, ground shadow, Hushiro tone, and Godot import quality before Milestone 1 art production where those items are still outstanding.
 
 # Milestone 1 — Combat vertical slice
 
 Establish Akio, core combat readability, three representative Area 1 enemies, five shared combat VFX, Combat HUD, and the base Hushiro environment kit.
 
-Akio's launch presentation already supports the silent-protagonist rule: no dialogue mouth cycles, response UI, or player-dialogue system is required.
+Akio's launch presentation supports the silent-protagonist rule: no dialogue mouth cycles, response UI, or player-dialogue system is required.
+
+During the implementation-handoff pass, current combat code should be reconciled against the approved combat/Aspect authorities rather than assumed current merely because it already exists.
 
 # Milestone 2 — Complete Area 1
 
-Complete the Hushiro roster, authored encounter pool, both minibosses, Keeper of the Gate, functional-room skins, Shrine/Corruption foundations, regional props, and boss/miniboss UI.
+Complete the Hushiro roster, authored encounter pool, reusable gameplay-space/layout inventory, both minibosses, Keeper of the Gate, functional-room skins, Shrine/Corruption foundations, regional props, and boss/miniboss UI.
 
 Production supports the approved **12-chamber Hushiro** prototype through reusable room foundations/variants rather than unique art per chamber.
 
 The first attempt uses this same normal route with base katana combat, default Beast-Bane Whistle, normal Technique rewards/room flow, and Shrine support without Aspect Embrace/Tier presentation.
+
+**Implementation restart target:** a documentation-ready Hushiro package plus the shared combat/player-build baseline is sufficient to begin serious end-to-end Godot playtesting. Later milestones do not need to be fully numerically tuned first.
 
 # Milestone 3 — The Strand
 
@@ -38,6 +58,8 @@ Permanent station scope:
 - Bloodwell — 10 Akio + 8 Infrastructure,
 - Forge Bench — 19 Prosthetic upgrades + 10 Relics with two mastery ranks each,
 - Blood Mirror — 9 nodes total, unlocked after first Keeper.
+
+Implementation-content work must still define the exact Bloodwell/Blood Mirror effects, first-playtest costs, Relic mastery thresholds, trial roster/rewards, Relic source assignments, and save/progression flags.
 
 Narrative production uses approximately 30–36 major Strand conversations, 4–6 reactive line sets per NPC, final pre-Heart states, and a concise post-ending Keeper/Scribe explanation that the Heart still pulses but can never create/spread new Beast Blood again.
 
@@ -55,15 +77,19 @@ Complete:
 
 Current roster remains **50 Techniques + 10 refinements**, **10 Relics**, and **8 Prosthetics / 19 upgrades** unless testing exposes a concrete gap.
 
+The implementation-handoff pass should provide every player-build item with enough first-playtest data to instantiate. Final numerical balance remains playtest work.
+
 # Milestone 5 — Complete Area 2
 
-Produce Yomori Grove, its authored encounter pool, regional enemies/minibosses, Twin Maws, hazards, functional rooms, VFX, and integration.
+Produce Yomori Grove, its authored encounter pool and reusable gameplay-space/layout inventory, regional enemies/minibosses, Twin Maws, hazards, functional rooms, VFX, and integration.
 
 Production supports the approved **10-chamber Yomori** prototype. Stalker Hound remains the sole approved evolved Hushiro lineage continuation.
 
+Yomori content should be authored after the Hushiro encounter/layout method has proven useful rather than inventing a separate documentation format.
+
 # Milestone 6 — Area 3, campaign climax, Heart, and postgame suppression
 
-Produce Kagutsuchi Court, its authored encounter pool, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Binding ritual, six Binding states, two-form true-final Heart, canonical ending, and repeat Heart-suppression presentation.
+Produce Kagutsuchi Court, its authored encounter pool/layout inventory, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Binding ritual, six Binding states, two-form true-final Heart, canonical ending, and repeat Heart-suppression presentation.
 
 Production supports the approved **11-chamber Kagutsuchi** prototype.
 
@@ -80,7 +106,7 @@ Narrative/endgame production includes:
 
 The first six clears use the Binding ritual. The seventh story run continues from Shogun into the Heart. Postgame Heart Suppression uses the same approved Shogun-to-Heart handoff and a shortened repeat-clear presentation.
 
-Exact Shogun/Heart attacks and encounter tuning remain the dedicated encounter-design pass.
+Exact Shogun/Heart attacks and encounter tuning remain the dedicated encounter-content pass.
 
 # Milestone 7 — Release presentation and cohesion
 
@@ -101,6 +127,8 @@ Complete:
 Launch narrative remains approximately 15,000–20,000 words, text-led, with no Akio dialogue and no full spoken-dialogue VO requirement.
 
 English is the required launch language; additional languages are optional promotion according to budget/platform needs, but text systems must be localization-ready.
+
+Exact dialogue, codex entries, achievement triggers/names, and other presentation content can be authored after the combat implementation restart unless a specific interface depends on them earlier.
 
 # Locked launch exclusions
 
@@ -133,17 +161,22 @@ These may be revisited only after playable testing or post-launch player demand 
 - Postgame is canonical continued containment with Standard Expedition and Heart Suppression run goals.
 - No full spoken-dialogue VO is required.
 - Markdown remains internal source of truth; Word/PDF are exports.
+- First-playtest values are implementation baselines, not immutable final balance law.
 
-# Current pre-production dependency
+# Current dependency sequence
 
 There is no remaining top-level architecture question.
 
-The next production-design work is:
+Current implementation-facing order:
 
-1. author the actual regional standard-encounter pools,
-2. design playable miniboss/boss encounter packages,
-3. design the two-form Heart encounter,
-4. realize exact narrative/achievement/trial content,
-5. playtest/tune numerical values and full-run pacing.
+1. **core combat first-playtest baseline**,
+2. **player-build implementation sheets**,
+3. **complete Hushiro encounter/layout/miniboss/boss package**,
+4. **Godot documentation-to-code delta audit and implementation restart**,
+5. **Strand/permanent-progression exact content**,
+6. **Yomori package**,
+7. **Kagutsuchi/Shogun/Heart package**,
+8. **exact narrative/achievement/content lists**,
+9. **playtest-driven tuning and final pacing validation**.
 
-Use `docs/_meta/OPEN_QUESTIONS.md` for the active content-production sequence and `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
+Use `docs/_meta/OPEN_QUESTIONS.md` for the exact exit conditions and question-quality filter. Use `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
