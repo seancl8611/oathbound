@@ -40,7 +40,6 @@ They should add personality, discovery, and light strategic choice without becom
 - Relics do **not** use Common / Rare / Legendary rarity tiers.
 - Relic effects should usually be understandable in one concise sentence.
 - Relics may not be freely swapped during active combat or from the pause menu.
-- Exact mastery thresholds and most numerical values remain later content / implementation work.
 
 ## Launch acquisition model
 
@@ -50,9 +49,9 @@ All **10 launch Relics are obtainable before the canonical story ending**. The l
 - **2 Blood Cavern / challenge unlocks** tied to authored challenge milestones,
 - **4 run-discovered Relics** surfaced through approved Relic opportunities such as Treasure, Keeper/Twin Maws Boss Reward Flex cards, and the occasional Shop Flex slot.
 
-Exact Relic-to-source assignment within those buckets may be authored during content sequencing, but the **4 / 2 / 4 acquisition split** is the approved launch structure.
-
 Until all 10 Relics are collected, eligible discovery opportunities prioritize **undiscovered Relics** rather than duplicate discoveries. Relics do not gain a duplicate-copy upgrade system, rarity ladder, or separate acquisition currency.
+
+Working campaign sequencing distributes the four guaranteed Relics across early-to-mid progression rather than awarding them together: one may arrive soon after the first return, one around Keeper progression, one around Twin Maws progression, and one by the first Binding clear. The two challenge Relics should likewise use one earlier and one more advanced authored milestone. Exact Relic identities within these slots remain content sequencing.
 
 When Akio discovers a Relic during a run:
 
@@ -60,38 +59,49 @@ When Akio discovers a Relic during a run:
 2. the player may **Equip Now** or **Keep Current Relic**,
 3. declining to equip the new Relic does not forfeit the discovery.
 
-A discovery itself is therefore a valid one-time swap opportunity even when it occurs outside a normal regional transition.
-
 ## In-run swap rules
-
-Outside a new discovery, equipped Relic changes are intentionally limited.
 
 Approved swap moments are:
 
 - at the **Forge Bench before starting a run**,
 - in the safe regional transition **after Keeper of the Gate**,
-- in the safe regional transition **after Twin Maws**.
+- in the safe regional transition **after Twin Maws**,
+- immediately when a new Relic is discovered.
 
 Do **not** provide routine Relic swapping at Rest rooms, Shops, ordinary reward rooms, during combat, or through the pause menu.
-
-This creates one committed Relic choice for each region while still allowing the player to adapt before Yomori and Kagutsuchi.
 
 ## Mastery and permanent progression
 
 Relic progression is earned primarily through combat use rather than simply for winning a run.
 
-- Each Relic owns persistent individual mastery progress.
-- **Only the currently equipped Relic gains mastery.**
-- Eligible enemy kills earned while that Relic is equipped advance its mastery.
-- Switching Relics during a run redirects subsequent eligible kill progress to the newly equipped Relic.
-- Progress already earned on another Relic is permanent and is not lost when the player switches.
-- Mastery should strengthen the Relic's existing benefit rather than add unrelated mechanics, branching trees, or a second active ability.
+Each launch Relic has exactly three persistent states:
 
-The **Forge Bench** is the Strand station that owns Relic collection management, permanent progression, and upgrade presentation alongside Prosthetics.
+1. **Base** — effect available immediately when the Relic is acquired.
+2. **Mastery I** — first permanent improvement to the same effect.
+3. **Mastery II / Complete** — second and final permanent improvement to the same effect.
 
-Sharing the Forge does **not** mean Relics must use Scrolls or the same linear path structure as Prosthetics. Relic mastery remains a distinct progression source. Exact mastery rank count, thresholds, Forge interaction flow, costs if any, and numerical improvement per rank remain later tuning and implementation work.
+This creates **2 mastery milestones per Relic / 20 mastery milestones across the 10-Relic launch roster**.
 
-No separate Relic Reliquary is required in the approved Strand upgrade-station scope.
+Mastery rules:
+
+- each Relic owns persistent individual mastery progress,
+- **only the currently equipped Relic gains mastery**,
+- eligible enemy kills earned while that Relic is equipped advance its mastery,
+- switching Relics during a run redirects subsequent eligible kill progress to the newly equipped Relic,
+- progress already earned on another Relic is permanent,
+- Mastery I and II strengthen the Relic's existing benefit rather than adding unrelated mechanics, branching trees, or active abilities,
+- normal mastery ranks do **not** cost Mist, Scrolls, regional boss materials, duplicate Relics, or a separate mastery currency,
+- exact kill thresholds and numerical improvements remain playtest tuning.
+
+The **Forge Bench** owns Relic collection management, mastery display, permanent progression presentation, and pre-run equipment management alongside Prosthetics.
+
+No separate Relic Reliquary is required.
+
+## Mastery effect rule
+
+Simple numeric Relics become better versions of the same effect: more starting Gold, more maximum Health/Spirit, stronger recovery, or a stronger clean-play payout.
+
+For Relics whose effect is not naturally a single number, mastery may improve the frequency, scope, or reliability of the **same core effect**. It may not introduce an unrelated second passive merely to create a rank.
 
 ## System boundaries
 
@@ -106,13 +116,10 @@ Relics may instead support broad resources, economy, survivability, clean-play r
 At the Strand, the **Forge Bench** is the approved home for:
 
 - viewing the persistent Relic collection,
-- reviewing mastery / permanent progression,
-- managing the equipped Relic for run preparation,
-- and presenting later approved Relic upgrade states.
+- reviewing Base / Mastery I / Mastery II state and progress,
+- managing the equipped Relic for run preparation.
 
 The Boat remains focused on quick final run-start confirmation rather than becoming another upgrade interface.
-
-The two regional transition swap opportunities are run-only management moments and do not require a second permanent hub station.
 
 ## Approved launch roster
 
@@ -156,6 +163,6 @@ This value is a prototype economy target and may be tuned after Shop behavior is
 
 ## Production boundary
 
-The 10 approved Relics and the 4 / 2 / 4 acquisition structure may guide icon, object, discovery, Forge collection/mastery display, run-reward, and transition-swap interface planning.
+The 10 approved Relics, 4 / 2 / 4 acquisition structure, and Base → Mastery I → Mastery II progression may guide icon, object, discovery, Forge collection/mastery display, run-reward, and transition-swap interface planning.
 
-Do not create Relic rarity-badge families or duplicate-copy upgrade presentation. Exact object designs, individual Relic-to-source assignment inside the approved acquisition buckets, mastery-state art, numerical values beyond explicitly approved prototypes, kill thresholds, and Forge upgrade presentation remain later production decisions.
+Do not create Relic rarity-badge families, duplicate-copy upgrades, branching mastery trees, or mastery currency. Exact object designs, exact Relic-to-source assignment, numerical mastery values, kill thresholds, mastery-state art treatment, and final Forge presentation remain later production/tuning decisions.
