@@ -15,17 +15,22 @@ Oathbound production is organized by dependency order and meaningful playtest gr
 
 Top-level game architecture is complete enough to stop treating documentation as a prerequisite to every implementation task.
 
-The shared first-playtest combat baseline is now complete in `COMBAT_IMPLEMENTATION_BASELINE.md`.
+The following first-playtest player-build packages are now complete for planning:
 
-The current goal is to convert the remaining approved qualitative player/build design into **implementation-ready prototype contracts**:
+- shared combat baseline,
+- Wolf / Wraith / Ronin Aspect baselines,
+- Technique catalog + family implementation constants,
+- all 8 Prosthetics + 19 permanent upgrade implementation values.
 
-1. fill the Wolf / Wraith / Ronin implementation sheets,
-2. fill Technique / Prosthetic / Relic / Corruption-Blood implementation data,
+The remaining handoff sequence is:
+
+1. finish the **10 Relic Base / Mastery I / Mastery II implementation values**,
+2. fill only the remaining shared **Corruption / Shrine / Blood** state/numeric gaps,
 3. make Hushiro a complete authored region on paper,
-4. reconcile the existing Godot project against the current documentation,
+4. reconcile the existing Godot project against current documentation,
 5. resume implementation/playtesting while later-region content continues to be authored.
 
-`OPEN_QUESTIONS.md` owns this implementation-facing queue.
+`OPEN_QUESTIONS.md` owns the exact implementation-facing queue and exit conditions.
 
 Approved design remains the source of truth, but prototype values are expected to move when playtesting provides better evidence. Do not delay implementation while attempting to solve final balance on paper.
 
@@ -61,7 +66,7 @@ Permanent station scope:
 - Forge Bench — 19 Prosthetic upgrades + 10 Relics with two mastery ranks each,
 - Blood Mirror — 9 nodes total, unlocked after first Keeper.
 
-Implementation-content work must still define the exact Bloodwell/Blood Mirror effects, first-playtest costs, Relic mastery thresholds, trial roster/rewards, Relic source assignments, and save/progression flags.
+Implementation-content work must still define the exact Bloodwell/Blood Mirror effects, first-playtest costs, Relic mastery thresholds where not already locked, trial roster/rewards, Relic source assignments, and save/progression flags.
 
 Narrative production uses approximately 30–36 major Strand conversations, 4–6 reactive line sets per NPC, final pre-Heart states, and a concise post-ending Keeper/Scribe explanation that the Heart still pulses but can never create/spread new Beast Blood again.
 
@@ -169,17 +174,23 @@ These may be revisited only after playable testing or post-launch player demand 
 
 There is no remaining top-level architecture question.
 
-**Pass 1 — shared combat first-playtest baseline is complete.**
+Completed for planning:
+
+- **Pass 1:** shared combat baseline,
+- **Pass 2A:** Blood Aspects,
+- **Pass 2B:** Techniques,
+- **Pass 2C:** Prosthetics.
 
 Current implementation-facing order:
 
-1. **player-build implementation sheets** — Aspect attacks first, then Techniques/Prosthetics/Relics/Corruption-Blood,
-2. **complete Hushiro encounter/layout/miniboss/boss package**,
-3. **Godot documentation-to-code delta audit and implementation restart**,
-4. **Strand/permanent-progression exact content**,
-5. **Yomori package**,
-6. **Kagutsuchi/Shogun/Heart package**,
-7. **exact narrative/achievement/content lists**,
-8. **playtest-driven tuning and final pacing validation**.
+1. **Relic implementation baseline**,
+2. **Corruption / Shrine / Blood completion**,
+3. **complete Hushiro encounter/layout/miniboss/boss package**,
+4. **Godot documentation-to-code delta audit and implementation restart**,
+5. **Strand/permanent-progression exact content**,
+6. **Yomori package**,
+7. **Kagutsuchi/Shogun/Heart package**,
+8. **exact narrative/achievement/content lists**,
+9. **playtest-driven tuning and final pacing validation**.
 
-Use `docs/_meta/OPEN_QUESTIONS.md` for the exact exit conditions and question-quality filter. Use `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
+Use `docs/_meta/OPEN_QUESTIONS.md` for exact exit conditions. Use `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
