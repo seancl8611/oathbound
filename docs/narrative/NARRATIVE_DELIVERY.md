@@ -15,6 +15,7 @@ topics:
   - heart-bindings
   - discovery-board
   - ending
+  - postgame
   - localization
 related:
   - GAMEPLAY-FIRST-ATTEMPT
@@ -26,6 +27,7 @@ related:
   - CONTENT-STRAND-DISCOVERY-BOARD
   - UI-RUN-RESULTS
   - CONTENT-AREA3-TRUE-FINAL-HEART
+  - OVERVIEW-ENDGAME-POSTGAME-RELEASE
 ---
 
 # Narrative Delivery and Campaign Presentation
@@ -67,13 +69,15 @@ The player must directly understand:
 - Akio died and returned,
 - Returning Blood is unprecedented and dangerous,
 - the Shogun also reconstructs,
-- the Heart exists and sustains active Beast Blood,
+- the Heart exists and originally produces Beast Blood,
 - six ancient Heart Bindings remain,
 - Returning Blood can break those Bindings,
 - Akio descends from the escaped royal bloodline,
 - the Shogun wants to preserve and spread Beast Blood,
 - destroying all six Bindings exposes the true Heart route,
-- destroying the Heart ends the curse and Akio's ability to return.
+- the final Heart victory permanently ends the Heart's ability to create or spread **new Beast Blood**,
+- existing Beast Blood remains active afterward,
+- Akio and the Shogun can therefore continue reconstructing after the story.
 
 ## Strand character development
 
@@ -137,7 +141,8 @@ The campaign uses the following major narrative states:
 5. **Binding 3** — the Shogun recognizes the escaped royal bloodline and attempts recruitment.
 6. **Bindings 4–6** — recruitment collapses into possession, fear, and hatred as Akio continues damaging the Heart.
 7. **Seventh story run** — final Shogun confrontation followed directly by the true Heart.
-8. **Canonical ending** — Beast Blood ends; Akio becomes mortal; credits follow.
+8. **Canonical ending** — the Heart is permanently crippled as a source of new Beast Blood; existing bearers survive; credits follow.
+9. **Canonical postgame** — Akio continues returning to suppress the Heart's physical regrowth and monitor the remaining Beast Blood population.
 
 Failed runs do not need to advance the core plot every time. They may trigger reactive dialogue, discoveries, mastery/trial content, or relationship lines while major story movement remains milestone-driven.
 
@@ -171,11 +176,11 @@ The Shogun reframes Akio's existence as proof that Beast Blood can succeed and t
 
 ## Shogun state 5 — Fear beneath contempt
 
-Multiple Bindings are gone. The Shogun understands that Akio may actually end Beast Blood. His composure remains, but his language becomes defensive and less curious.
+Multiple Bindings are gone. The Shogun understands that Akio may permanently destroy the Heart's ability to expand Beast Blood beyond the existing population. His composure remains, but his language becomes defensive and less curious.
 
 ## Shogun state 6 — Hatred and desperation
 
-Only one Binding remains before the Heart is unbound. Recruitment is over. Akio is now an existential threat to the Shogun's kingdom, identity, and immortality.
+Only one Binding remains before the Heart is unbound. Recruitment is over. Akio is now an existential threat to the Shogun's plan to create a new Beast Blood kingdom beyond the island.
 
 ## Shogun state 7 — Final confrontation
 
@@ -232,7 +237,8 @@ Owns:
 - containment and crossing context,
 - guilt over the kingdom's fall,
 - interpretation of Akio's repeated returns,
-- eventual corroboration of the royal-lineage reveal.
+- eventual corroboration of the royal-lineage reveal,
+- postgame recognition that the Heart still pulses but can no longer spread its curse.
 
 He carries the heaviest NPC story burden.
 
@@ -245,7 +251,8 @@ Owns:
 - Heart/Binding documentation,
 - bloodline corroboration,
 - Discovery Board updates,
-- distinctions between known fact, reconstructed history, and unresolved theory.
+- distinctions between known fact, reconstructed history, and unresolved theory,
+- postgame confirmation that the Heart regenerates tissue but no longer produces new Beast Blood.
 
 ## Raven — outside Order and duty
 
@@ -255,11 +262,12 @@ Owns:
 - Order reactions,
 - formal progress acknowledgement,
 - warnings/rewards/vows where appropriate,
-- the continuing existence of the mainland and Order without adding another recurring commander character.
+- the continuing existence of the mainland and Order without adding another recurring commander character,
+- the Order's shift from preventing an expanding threat to monitoring a contained one.
 
 ## Undead Samurai — discipline and control
 
-Owns the martial interpretation of Akio's transformation. His late-campaign perspective should reinforce that genuine control is demonstrated not by accumulating the greatest Blood power, but by remaining capable of rejecting and ultimately surrendering it.
+Owns the martial interpretation of Akio's transformation. His late-campaign perspective should reinforce that genuine control is demonstrated not by accumulating the greatest Blood power, but by remaining capable of rejecting the Heart's authority and using that power without surrendering independent purpose.
 
 ## Smith — physical consequences
 
@@ -288,7 +296,8 @@ Working launch target:
 - approximately **30–36 major Strand conversations total** across the six NPCs,
 - Keeper and Scribe receive the largest share,
 - approximately **4–6 short reactive line sets per NPC** across failures, regional milestones, boss progress, discoveries, trials, or related events,
-- one final pre-Heart conversation/state for each of the six NPCs after Binding 6.
+- one final pre-Heart conversation/state for each of the six NPCs after Binding 6,
+- one concise post-ending explanation package, primarily Keeper/Scribe, establishing the Heart's faint regrowth and permanent loss of propagation.
 
 Major conversations should usually be short exchanges from the speaking NPC directed at a silent Akio, not multi-character scenes.
 
@@ -306,7 +315,9 @@ Direct story delivery owns:
 - bloodline reveal,
 - Shogun's goal,
 - final Heart unlock,
-- curse-ending consequence.
+- permanent severance of new-Beast-Blood creation/spread,
+- continued survival of existing bearers,
+- postgame Heart-suppression purpose.
 
 Discovery Board entries may own:
 
@@ -340,24 +351,39 @@ The first canonical seventh run does not require a route-toggle choice. The Boat
 
 The Heart does **not speak**. Its behavior communicates survival, pain, rage, continuation, and the instinct to reclaim Returning Blood.
 
-After the true-final Heart dies:
+After the true-final Heart combat body is destroyed:
 
-1. the Heart collapses and active Beast Blood loses supernatural activity,
-2. Akio's visible Returning Blood effects disappear,
-3. brief in-engine/environmental cuts show the curse ending across the island,
-4. Yomori spirits pass on,
-5. corrupted bodies/beasts lose supernatural sustain,
-6. the Blood Moon breaks,
-7. the Shogun's defeated body is shown failing to reconstruct,
-8. Akio remains alive in his complete human body but can no longer return.
+1. the Vessel and exposed Heart manifestation collapse,
+2. the extraction apparatus and Beast-Blood-producing exchange fail permanently,
+3. the Heart's wider influence visibly contracts rather than vanishing,
+4. the player sees that the Heart has been reduced to a faint remnant/pulse,
+5. Akio's Returning Blood remains active and controlled,
+6. the Shogun's current defeat is not framed as permanent death,
+7. the mainland-spread threat is clearly over,
+8. credits follow the completed main campaign.
 
-The thematic payoff is action rather than dialogue: the Shogun could not accept a future without Beast Blood or immortality; Akio wins while accepting mortality.
+The ending must communicate a decisive accomplishment: **the Heart can regenerate flesh, but it can never again create or spread Beast Blood.**
+
+Existing Beast Blood does not disappear. Akio, the Shogun, and existing bearers retain their established supernatural sustain and regeneration.
 
 Akio does not speak during the ending.
 
-A strong final inversion is for Akio to leave the island and return through the weakening barrier **alive**, rather than appearing at the Strand through another death/reconstruction.
+# Postgame reveal and continuity
 
-Credits follow the canonical ending.
+After Story Complete, one concise Keeper/Scribe postgame beat establishes the new state:
+
+- the Heart still has a faint pulse,
+- it is slowly regrowing tissue,
+- its former reach is gone,
+- it cannot produce new Beast Blood,
+- existing bearers remain unchanged,
+- Akio can continue returning to keep its activity suppressed.
+
+The exact prose may vary, but the core player understanding is:
+
+> The Heart survived. Its curse cannot spread.
+
+This is enough to make postgame runs canonical without requiring a new campaign arc.
 
 # Presentation tiers
 
@@ -371,7 +397,7 @@ Working target: approximately **5 major sequences**:
 2. first Heart discovery / Binding 1 establishment,
 3. bloodline recognition / recruitment emphasis,
 4. Binding 6 / unbound-Heart final-run setup,
-5. Heart death / canonical ending.
+5. Heart crippling / canonical ending.
 
 The normal opening is intentionally **not** another Tier-A cinematic.
 
@@ -384,7 +410,8 @@ Used for:
 - Strand NPC conversations,
 - Shogun pre-fight progression,
 - miniboss/boss lines,
-- important intelligent-enemy interactions.
+- important intelligent-enemy interactions,
+- the concise post-ending Keeper/Scribe suppression explanation.
 
 Speaker portraits or focused text presentation may be used where helpful. Akio requires no dialogue portrait or response box because he never speaks.
 
@@ -397,7 +424,8 @@ Used for:
 - milestone acknowledgements,
 - Raven notices,
 - short combat/encounter barks,
-- minor contextual observations.
+- minor contextual observations,
+- postgame suppression/rematch reactions.
 
 These should interrupt play as little as possible.
 
@@ -432,8 +460,10 @@ The approved paper-design narrative package is:
 - 4–6 short reactive line sets per Strand NPC,
 - approximately 20–25 substantive Lore / Records entries,
 - one final pre-Heart state/conversation per Strand NPC,
+- one concise post-ending suppression explanation,
 - approximately five major controlled in-engine sequences,
 - text-led dialogue with no full-VO requirement,
-- one canonical Heart ending and credits presentation.
+- one canonical Heart-crippling ending and credits presentation,
+- canonical postgame continuity based on Heart regrowth/suppression rather than a non-canonical reset.
 
 This closes narrative-delivery scope at production-planning depth. Detailed scriptwriting follows later without reopening the campaign structure unless implementation reveals a concrete problem.

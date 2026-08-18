@@ -38,7 +38,7 @@ Oathbound requires distinct presentation states for:
 - ordinary failed runs after awakening,
 - successful Binding returns,
 - the first canonical Heart victory,
-- repeat postgame Heart clears.
+- repeat postgame Heart-suppression clears.
 
 # First-return sequence
 
@@ -115,25 +115,39 @@ After defeating the Shogun and Heart in the same active run:
 
 1. save story completion and permanent rewards,
 2. record the first true-final Heart victory,
-3. play the canonical curse-ending / Akio-mortality sequence,
-4. trigger ending and credits,
-5. unlock completed-save/postgame behavior,
-6. preserve a completed-story marker.
+3. play the canonical Heart-crippling / propagation-severance ending,
+4. communicate that the Heart can no longer create or spread new Beast Blood,
+5. preserve Akio's Returning Blood and the existing Beast Blood population,
+6. trigger ending and credits,
+7. unlock completed-save/postgame behavior,
+8. preserve a completed-story marker.
 
 The first Heart victory is not presented as another Binding clear.
 
 Akio remains silent throughout the ending/results presentation.
 
-# Repeat Heart completion
+# Repeat Heart-suppression completion
 
-Postgame Heart clears are gameplay challenges only. Results may record build, time, or future approved challenge information without advancing canon again.
+Postgame Heart clears represent canonical suppression of the same weakened regenerating Heart remnant.
+
+A repeat suppression result may show:
+
+- Heart Suppression Clear,
+- final build,
+- selected Aspect,
+- clear time,
+- personal-best improvement where applicable,
+- existing persistent resources/mastery earned during the run,
+- Heart-suppression clear count.
+
+Repeat suppression does not create another ending, restore new-Beast-Blood production, or alter the completed campaign state.
 
 # Presentation goal
 
 Returning to the Strand should feel consequential rather than generically celebratory. The player should quickly understand:
 
 1. what permanent progress survived,
-2. what campaign progress changed,
+2. what campaign/postgame progress changed,
 3. what temporary build was lost.
 
 The first return adds a fourth message before those three: **Akio actually died and somehow came back.**
@@ -151,14 +165,15 @@ Ordinary post-awakening reformation may use:
 
 The **first** reconstruction should be the most narratively emphasized version because the event is unprecedented. Later returns should become faster and more routine without feeling consequence-free.
 
-The canonical Heart ending instead removes Returning Blood and leaves Akio mortal.
+The canonical Heart ending does not remove Returning Blood. Postgame deaths continue using the established reconstruction logic.
 
 # Technical requirements
 
 - Permanent rewards must be saved at acquisition; the results screen summarizes them.
 - First-awakening state must be saved before the player regains normal Strand control.
 - Binding/story completion is saved before the player can leave the sequence.
+- Story Complete and Heart-suppression records persist independently of repeat-run state.
 - Run-only and persistent information must be visually separated.
 - Final Technique build may be recorded for run history only if clearly non-equipped/non-recoverable.
-- First return, failed run, Binding return, first Heart clear, and repeat Heart clear require distinct result states.
+- First return, failed run, Binding return, first Heart clear, and repeat Heart-suppression clear require distinct result states.
 - The exceptional pre-awakening Shogun/Heart route records no destroyed Binding.

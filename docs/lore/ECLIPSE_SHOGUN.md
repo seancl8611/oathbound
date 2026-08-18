@@ -13,6 +13,7 @@ topics:
   - final-boss
   - heart-bindings
   - narrative-delivery
+  - postgame
 related:
   - CONTENT-AREA3-BOSS
   - LORE-BEAST-BLOOD
@@ -82,7 +83,9 @@ Many corrupted inhabitants retain memory, culture, hierarchy, skill, ambition, a
 
 The Shogun treats the Heart as a supernatural power his Court discovered and brought under royal control. The Heart does not need to speak to or directly command him. His sincere ambitions now protect it, preserve Beast Blood, and spread its influence.
 
-Existing Beast Blood does not require renewed doses or a continuous physical channel. The Heart remains the supernatural source sustaining it as an active curse. Destroying the Heart makes Beast Blood inert and stops the Shogun's reconstruction.
+Existing Beast Blood does not require renewed doses or a continuous physical channel. Once Beast Blood exists in a bearer, its established healing, mutation, longevity, and regenerative effects remain part of that bearer even after the Heart is permanently crippled at the end of the campaign.
+
+The canonical Heart victory instead prevents the Heart from producing or releasing **new Beast Blood** and permanently stops the curse from spreading to new bearers. It does not remove Beast Blood already present in the Shogun or other existing bearers.
 
 ## Relationship to Akio
 
@@ -134,7 +137,7 @@ The Shogun should read as a sovereign and false master before he reads as a heav
 
 This is sufficient for current full-game scope. His exact body design, costume, weapon, phase count, phase names, attack patterns, transformation anatomy, animation list, and VFX requirements remain later character-concept and encounter-design work.
 
-## Successful clears and permanent death
+## Successful clears and postgame reconstruction
 
 The Shogun reconstructs between the first six successful Heart Binding clears so he remains the repeated run climax. His existing Beast Blood is sufficient; no new dose or physical connection is required.
 
@@ -142,9 +145,9 @@ Narrative presentation should let later encounters acknowledge the fact that bot
 
 After the sixth Binding is destroyed, the seventh successful story run defeats the Shogun's current body and continues directly into the true-final Heart encounter.
 
-The Shogun does not require a separate permanent-death mechanic. Destroying the Heart makes Beast Blood inert, stops his attempted reconstruction, releases him from the Blood's influence, and allows his unnaturally sustained body to die permanently.
+The final Heart victory does **not** permanently kill the Shogun. Akio cripples the Heart's ability to create and spread new Beast Blood, but the Shogun already carries Beast Blood and retains its regenerative/reconstructive benefits. His current defeated body may therefore reconstruct again after the canonical ending.
 
-The canonical ending should explicitly show or strongly communicate the first failure of his reconstruction.
+This supports canonical postgame continuity: the Shogun and other existing Beast Blood bearers remain on the island, while the possibility of creating new bearers or spreading the curse beyond the existing population has been permanently removed.
 
 ## Current boundaries
 
@@ -161,8 +164,9 @@ Locked:
 - bloodline reveal at the third awakened Shogun encounter,
 - regal and controlled character direction,
 - deliberate intelligent inhuman escalation,
-- reconstruction between the first six Binding clears,
-- permanent death through destruction of the Heart.
+- reconstruction throughout the Binding campaign,
+- continued reconstruction after the canonical ending because existing Beast Blood remains active,
+- permanent loss of the Heart's ability to create/spread new Beast Blood after the story victory.
 
 Deferred:
 

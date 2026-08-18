@@ -4,7 +4,7 @@ title: The Unbound Heart — True-Final Encounter
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-18
 topics:
   - area-3
   - the-heart
@@ -25,9 +25,9 @@ related:
 
 ## Encounter role
 
-The Heart is the deeper supernatural threat beneath the Eclipse Shogun and the source sustaining Beast Blood's curse.
+The Heart is the deeper supernatural threat beneath the Eclipse Shogun and the source that originally produced Beast Blood.
 
-The true-final encounter unlocks only after Akio destroys all six remaining Heart Bindings. The first victory completes the canonical story. After completion, the encounter remains repeatable as an optional endgame challenge without advancing or changing the story again.
+The true-final encounter unlocks only after Akio destroys all six remaining Heart Bindings. The first victory completes the canonical main story. After completion, the Heart can regenerate a weakened combat manifestation and remains repeatable as a canonical postgame suppression challenge.
 
 The Heart does not replace the Shogun as the central character antagonist. The final story run requires the player to complete the established island route, defeat the Shogun's current body, and then defeat the Heart without ending or losing the run between those bosses.
 
@@ -35,7 +35,7 @@ The Heart does not replace the Shogun as the central character antagonist. The f
 
 The Heart is a large nonhuman beast encounter rather than another duel against a swordsman.
 
-Its direction should evoke the scale, physical danger, and monstrous freedom of a boss such as the Demon of Hatred from _Sekiro_, while remaining an original creature built from Oathbound's Heart, Beast Blood, ancient-prison, and Japanese-gothic visual languages.
+Its direction should evoke the scale, physical danger, and monstrous freedom of a boss such as the Demon of Hatred from *Sekiro*, while remaining an original creature built from Oathbound's Heart, Beast Blood, ancient-prison, and Japanese-gothic visual languages.
 
 The Heart does not speak, reveal a human personality, or form a warrior who copies the Shogun. Its behavior expresses survival, pain, rage, hunger, continuation, and the instinct to reclaim Returning Blood.
 
@@ -61,7 +61,7 @@ The final vessel may be asymmetrical, hunched, quadrupedal, partially upright, o
 
 ## Gameplay-design boundary
 
-This document locks the encounter's role, two-phase structure, scale, and creature identity without prematurely defining its moveset.
+This document locks the encounter's role, two-phase structure, scale, creature identity, final-story consequence, and postgame regeneration role without prematurely defining its moveset.
 
 Still open for later encounter design and playtesting:
 
@@ -71,7 +71,6 @@ Still open for later encounter design and playtesting:
 - posture and stagger behavior,
 - phase transition rules,
 - arena size and boundaries,
-- recovery between the Shogun and Heart,
 - health, damage, Spirit, and Corruption tuning,
 - animation list,
 - VFX list,
@@ -80,42 +79,54 @@ Still open for later encounter design and playtesting:
 
 The encounter must use Oathbound's established combat systems. It does not introduce a separate weak-point mechanic, body-part targeting system, or one-off subsystem that exists only for this boss.
 
-Returning Blood's established rejection of the Heart may support the final narrative and visual resolution, but it does not automatically create a new player mechanic.
+Returning Blood's established rejection of the Heart supports the final severance of its propagation ability without creating a new player mechanic.
 
 ## First victory and canonical ending
 
-The first true-final Heart victory is the canonical end of the story.
+The first true-final Heart victory is the canonical end of the main campaign.
 
-Destroying the Heart makes active Beast Blood inert across the island. This:
+Akio destroys the Heart's manifested combat body and reduces the ancient source to a faint regenerating remnant. The victory permanently severs the Heart's ability to:
 
-- stops the Shogun's reconstruction and allows his body to die permanently,
-- releases corrupted inhabitants from the curse before their unnaturally sustained bodies fail,
-- collapses corrupted beasts and failed bodies,
-- allows Yomori's lingering spirits to pass on,
-- ends the supernatural Blood Moon cycle,
-- and allows the containment barrier to weaken safely.
+- produce or release new Beast Blood,
+- support future extraction,
+- create new Beast Blood bearers,
+- spread its curse to the mainland or any new population,
+- restore the Shogun's original expansion plan.
 
-Akio survives in his current complete human body. Because the source is gone, Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction end. Akio becomes mortal.
+This is an irreversible story victory. The Heart may regenerate tissue, but it can never regenerate the lost ability to create or propagate Beast Blood.
+
+Existing Beast Blood remains active. Akio retains Returning Blood, Blood Aspects, supernatural regeneration, and reconstruction. The Eclipse Shogun and other existing Beast Blood bearers retain the Blood already within them and may continue to regenerate according to their established abilities.
+
+The ending should clearly communicate that Akio has transformed the Heart from an expanding existential threat into a contained remnant. The wider-world threat is over even though the island's existing cursed population is not erased.
 
 The ending and credits follow this first victory.
 
-## Repeatable postgame challenge
+## Canonical postgame suppression
 
-After the story is complete, the save remains playable. Normal roguelite runs continue, and the Heart route may be challenged again.
+After the story is complete, the save remains playable and postgame runs are canonical containment expeditions.
+
+The Heart's surviving remnant slowly regenerates physical tissue and may eventually form another weakened combat manifestation. Akio periodically returns to the island to destroy that regrowth and keep the Heart's activity suppressed.
 
 Repeat Heart victories:
 
-- do not advance the story,
-- do not produce additional canonical endings,
-- do not imply that another Heart existed,
-- do not reverse the completed ending,
-- and do not change the island's canonical fate.
+- do not create additional endings,
+- do not restore the Heart's ability to create Beast Blood,
+- do not create new bearers,
+- do not undo the canonical campaign victory,
+- do represent continued suppression of the same regenerating remnant.
 
-They exist for gameplay mastery, build experimentation, rewards, records, and future challenge systems.
+The Heart remains a gameplay mastery target and a continuing containment responsibility rather than a resurrected world-ending threat.
 
-The postgame should eventually provide a clear choice or condition that determines whether a run ends after the Shogun or continues into the Heart. The exact Boat control, modifier, menu label, unlock presentation, and reward structure remain future design work.
+## Postgame route boundary
 
-## Deferred postgame expansion ideas
+The postgame provides two run goals selected before departure:
+
+- a normal expedition that ends after the Shogun,
+- a Heart-suppression expedition that continues from the Shogun into the regenerated Heart manifestation.
+
+The postgame/release authority owns exact labels, records, rewards, completion goals, and release UI.
+
+## Deferred expansion ideas
 
 Future development may explore additional systems tied to challenging the Heart, including:
 
@@ -126,9 +137,9 @@ Future development may explore additional systems tied to challenging the Heart,
 - challenge restrictions,
 - alternate controls or run conditions,
 - special rewards,
-- and mastery records.
+- and deeper mastery records.
 
-These ideas are intentionally noted for later exploration and are not part of the initial game scope.
+These are intentionally post-launch possibilities and are not part of the initial release.
 
 ## Production boundary
 
@@ -140,7 +151,7 @@ The initial encounter requires concept and production planning for:
 - a Heart-chamber arena capable of supporting both forms,
 - boss UI with two phases,
 - first-clear ending presentation,
-- and shortened repeat-clear presentation.
+- shortened repeat-clear/suppression presentation.
 
 The initial scope does not require:
 
@@ -149,5 +160,5 @@ The initial scope does not require:
 - a weak-point subsystem,
 - a fully specified attack list before encounter design,
 - multiple alternate Heart forms,
-- story progression after repeat victories,
-- or the deferred postgame modifiers and variants listed above.
+- story progression after repeat suppression clears,
+- or launch Heat/NG+/modifier systems.

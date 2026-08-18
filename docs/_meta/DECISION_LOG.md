@@ -14,6 +14,33 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-08-18 — Heart suppression ending, canonical postgame, and launch release package locked
+
+The first true-final Heart victory no longer destroys all Beast Blood or makes Akio mortal.
+
+Akio destroys the Heart's manifested combat body and permanently cripples the ancient source so it can **never again produce, release, or spread new Beast Blood**. No new bearer can ever be created, extraction is permanently ended, and the Shogun's mainland expansion plan is defeated.
+
+Existing Beast Blood remains active. Akio retains Returning Blood/reconstruction; the Eclipse Shogun and other existing bearers retain their established regeneration and supernatural sustain. The Heart survives as a faint regenerating remnant that can regrow a local combat manifestation but can never recover its lost propagation ability.
+
+Postgame is therefore canonical continued containment rather than a non-canonical reset. The Boat offers:
+
+- **Standard Expedition** — normal route ending after the Shogun,
+- **Heart Suppression** — continues from Shogun into the regenerated Heart manifestation.
+
+Postgame adds no new currency or permanent tree. Completion uses existing systems: Bloodwell, Blood Mirror, Prosthetics, Relics/mastery, Technique/refinement discovery, trials, Discovery Board, and Heart victory with Wolf/Wraith/Ronin.
+
+Launch also locks:
+
+- approximately **30 achievements**,
+- **3 save slots**,
+- front-end/settings/accessibility/localization/credits requirements,
+- English as required launch language with localization-ready text systems,
+- no required launch Heat/Pact system, New Game+, endless mode, daily challenge, postgame enemy/room variant package, fourth Aspect, second campaign, new meta tree, or new persistent currency.
+
+This closes **top-level launch architecture at paper-design depth**. The active design sequence now moves to authored standard encounters, miniboss/boss/Heart encounter design, exact content realization, and playable tuning.
+
+**Authority:** `docs/overview/ENDGAME_POSTGAME_RELEASE.md`, `docs/lore/BEAST_BLOOD.md`, `docs/lore/RETURNING_BLOOD.md`, `docs/lore/ECLIPSE_SHOGUN.md`, `docs/lore/STORY_OVERVIEW.md`, `docs/gameplay/RUN_STRUCTURE.md`, `docs/content/area_3/TRUE_FINAL_HEART.md`.
+
 ## 2026-08-18 — Silent protagonist, unscripted first attempt, and launch narrative delivery locked
 
 Akio is now explicitly a **fully silent protagonist**. He has no spoken dialogue, written responses, dialogue choices, internal monologue, or narrated thoughts. NPCs, intelligent enemies, minibosses, and bosses may speak; Akio communicates through action, stillness, physical reaction, and continued opposition.
@@ -43,7 +70,7 @@ Launch narrative delivery is now scoped at production-planning depth:
 - approximately **15,000–20,000 narrative words**,
 - text-led dialogue with **no full spoken-dialogue VO requirement**.
 
-Mandatory story information is communicated directly; the Discovery Board owns optional depth. The Heart does not speak. The ending remains action-led: destroying the Heart ends Returning Blood, stops Shogun reconstruction, and leaves Akio mortal and silent.
+Mandatory story information is communicated directly; the Discovery Board owns optional depth. The Heart does not speak. The ending direction recorded at this stage—destroying the Heart ending Returning Blood, stopping Shogun reconstruction, and leaving Akio mortal—was **superseded later on 2026-08-18** by the Heart-suppression/postgame decision above.
 
 This closes narrative-delivery scope and advances the remaining top-level question to endgame/postgame/release scope.
 
@@ -256,6 +283,8 @@ Wolf, Wraith, and Ronin each reached complete qualitative Tier 0–IV paper-desi
 The Court historically destroyed one of seven Heart Bindings. Akio destroys the remaining six across six successful Binding runs. The seventh successful story run continues from Shogun into the two-form Heart; first Heart victory canonically ends the story while the save remains playable.
 
 Normal successful Binding runs target roughly **45–50 active minutes**.
+
+The original assumption that the first Heart victory would eliminate active Beast Blood was later superseded by the 2026-08-18 Heart-suppression/postgame lock above.
 
 **Authority:** `RUN_STRUCTURE.md`, story/Heart authorities.
 

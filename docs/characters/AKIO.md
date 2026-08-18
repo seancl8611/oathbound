@@ -13,6 +13,7 @@ topics:
   - inherited-beast-blood
   - animation
   - order
+  - postgame
 related:
   - LORE-RETURNING-BLOOD
   - LORE-THE-ORDER
@@ -21,6 +22,7 @@ related:
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-FIRST-ATTEMPT
   - NARRATIVE-DELIVERY
+  - OVERVIEW-ENDGAME-POSTGAME-RELEASE
   - ART-MILESTONE-01
 ---
 
@@ -108,7 +110,7 @@ His discipline and resolve are communicated through:
 - changing relationships with Strand NPCs and the Order,
 - physical signs of Returning Blood,
 - the player's repeated choice to continue the mission,
-- and the final willingness to destroy the source even though doing so ends Returning Blood.
+- and the final ability to use Returning Blood against its own source strongly enough to permanently stop that source from creating or spreading new Beast Blood.
 
 He does not need a large tragic biography, voiced philosophy, or branching morality choices.
 
@@ -116,7 +118,7 @@ He does not need a large tragic biography, voiced philosophy, or branching moral
 
 The Order sends Akio from the Strand on what it considers a one-way extermination mission. He is commanded to cross the barrier, destroy the island's hostile Beast Blood forces and any ruler directing them, and find and destroy the source that allows the curse and its apparently deathless bearers to persist.
 
-Akio begins without knowledge of the Heart, the plague-era history, the extraction process, the Shogun's mainland ambitions, his own hidden lineage, or the consequences of destroying the source.
+Akio begins without knowledge of the Heart, the plague-era history, the extraction process, the Shogun's mainland ambitions, his own hidden lineage, or the true nature of what can ultimately be accomplished against the Heart.
 
 The Order also does not know that Akio carries dormant inherited Beast Blood. It supplies his training, equipment, warding, and initial command rather than intentionally creating Returning Blood.
 
@@ -144,7 +146,7 @@ Over time, the Shogun realizes that Akio descends from the royal child who escap
 
 Akio never verbally accepts, rejects, or debates the offer. His defining answer is silent refusal through continued opposition.
 
-As Akio survives, wins, and damages the Heart, the Shogun's fascination becomes envy, fear, and hatred. Akio represents the choice the Shogun can no longer make: carrying Beast Blood while remaining able to reject its continuation.
+As Akio survives, wins, and damages the Heart, the Shogun's fascination becomes envy, fear, and hatred. Akio represents a bearer who can use Beast Blood while remaining able to oppose the Heart's authority and prevent the curse from spreading further.
 
 The broad relationship progression remains dismissal, fascination, recognition/recruitment, and fear/hatred. `NARRATIVE_DELIVERY.md` owns the campaign timing and presentation states.
 
@@ -191,6 +193,16 @@ Afterward:
 - permanent progression and persistent campaign damage survive.
 
 A mastery-level player may theoretically defeat the Shogun and reach the Heart before dying for the first time. In that exceptional case, no Binding can yet be broken because Returning Blood has not awakened; Heart contact destroys Akio and triggers the first reconstruction without advancing the Binding count.
+
+## Ending and postgame identity
+
+The first true-final Heart victory does not remove Returning Blood.
+
+Akio destroys the Heart's manifested combat body and permanently ends its ability to create or spread new Beast Blood. Existing Beast Blood remains active, including Akio's inherited Returning Blood.
+
+Akio therefore remains capable of reconstruction, Aspect expression, and continued island expeditions after Story Complete. His postgame role is to monitor the existing cursed population and repeatedly suppress the Heart's faint physical regrowth.
+
+His accomplishment is not personal purification. It is permanent containment of propagation: no new bearer can ever be created even though existing bearers remain.
 
 ## Combat readability
 
@@ -285,4 +297,6 @@ Frame counts are working contractor estimates. Final timing is tuned in Godot an
 - Blood Aspects are controlled mutations of Returning Blood, not unrelated magical classes.
 - Akio is the only known bearer with genuine control over Beast Blood.
 - Do not equate another character's retained intelligence or deliberate mutation use with Akio's sovereignty.
+- Do not remove Returning Blood or reconstruction from Akio after the canonical Heart victory.
+- Do not allow the Heart to create/spread new Beast Blood after Story Complete.
 - Do not require Akio to adopt a conventional royal-heir personality after the lineage reveal.

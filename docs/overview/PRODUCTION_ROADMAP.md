@@ -9,7 +9,7 @@ last_reviewed: 2026-08-18
 
 # Production Roadmap
 
-Oathbound production is organized by dependency order and meaningful playtest groups. Milestones summarize required production; gameplay/content/narrative authorities own the underlying design.
+Oathbound production is organized by dependency order and meaningful playtest groups. Milestones summarize required production; gameplay/content/narrative/release authorities own the underlying design.
 
 # Pre-milestone gate — Paid Style Test
 
@@ -19,35 +19,27 @@ Lock practical sprite scale, palette, detail density, high-angle perspective, ou
 
 Establish Akio, core combat readability, three representative Area 1 enemies, five shared combat VFX, Combat HUD, and the base Hushiro environment kit.
 
-Akio's launch presentation must already support the **silent-protagonist rule**: no dialogue mouth cycles, response UI, or player-dialogue system is required.
+Akio's launch presentation already supports the silent-protagonist rule: no dialogue mouth cycles, response UI, or player-dialogue system is required.
 
 # Milestone 2 — Complete Area 1
 
-Complete the Hushiro roster, both minibosses, Keeper of the Gate, functional-room skins, Shrine/Corruption foundations, regional props, and boss/miniboss UI.
+Complete the Hushiro roster, authored encounter pool, both minibosses, Keeper of the Gate, functional-room skins, Shrine/Corruption foundations, regional props, and boss/miniboss UI.
 
 Production supports the approved **12-chamber Hushiro** prototype through reusable room foundations/variants rather than unique art per chamber.
 
-The first attempt uses this same normal route rather than a bespoke tutorial environment. Hushiro must therefore support a pre-awakening state with base katana combat, default Beast-Bane Whistle, normal Technique rewards/room flow, and Shrine support without Aspect Embrace/Tier presentation.
-
-Keeper's boss-specific persistent material needs one collectible/reward representation, but exact item naming can follow the broader item-art pass.
+The first attempt uses this same normal route with base katana combat, default Beast-Bane Whistle, normal Technique rewards/room flow, and Shrine support without Aspect Embrace/Tier presentation.
 
 # Milestone 3 — The Strand
 
-Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, first-return/revival presentation, and permanent-progression interfaces.
+Produce the six recurring NPCs, Strand environment, physical interactibles, training spaces, first-return/revival presentation, permanent-progression interfaces, and completed-save/postgame route-selection support.
 
-Permanent station scope is concrete enough for interface/content planning:
+Permanent station scope:
 
-- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes,
-- **Forge Bench:** 19 Prosthetic upgrades + 10 Relics with two mastery ranks each,
-- **Blood Mirror:** 3 nodes per Aspect / 9 total, unlocked after first Keeper.
+- Bloodwell — 10 Akio + 8 Infrastructure,
+- Forge Bench — 19 Prosthetic upgrades + 10 Relics with two mastery ranks each,
+- Blood Mirror — 9 nodes total, unlocked after first Keeper.
 
-The Bloodwell progression bands advance after first return, first Keeper, first Twin Maws, and first Shogun / first Binding clear. Exactly six Bloodwell nodes use regional boss-material gates.
-
-Narrative production at the Strand uses six recurring NPCs with approximately **30–36 major conversations total**, approximately **4–6 short reactive line sets per NPC**, and one final pre-Heart state/conversation per NPC. Keeper and Scribe carry the largest story load.
-
-The first Returning Blood reconstruction is one of the approved major controlled in-engine sequences and should reuse the Strand/Bloodwell environment rather than requiring a separate cinematic pipeline.
-
-The Blood Cavern remains training/trial space. Merchant, Discovery Board, and Boat remain services rather than extra permanent upgrade trees.
+Narrative production uses approximately 30–36 major Strand conversations, 4–6 reactive line sets per NPC, final pre-Heart states, and a concise post-ending Keeper/Scribe explanation that the Heart still pulses but can never create/spread new Beast Blood again.
 
 # Milestone 4 — Player combat depth and run-build expression
 
@@ -57,96 +49,101 @@ Complete:
 - Tier / Blood states,
 - eight Prosthetic families,
 - Technique reward/build UI,
-- Relic presentation and Base/Mastery I/Mastery II states,
-- currencies, pickups, regional boss-material reward objects/icons,
-- Blood Mirror presentation for the three staged reliability nodes per Aspect.
+- Relic presentation and mastery states,
+- currencies/pickups/boss-material art,
+- Blood Mirror presentation.
 
-The current Technique roster is **50 actual Techniques + 10 refinements**. The current Relic roster is **10 items** with one equipped slot and two mastery ranks per Relic.
-
-Beast-Bane Whistle is the default starting Prosthetic and therefore needs to be production-ready early enough to support the first attempt.
-
-Technique screen composition/source weighting and the first reward/economy prototypes are approved enough for reusable UI planning; final balance values remain playtest work. A general consumable inventory/one-use item layer is not part of launch production scope.
+Current roster remains **50 Techniques + 10 refinements**, **10 Relics**, and **8 Prosthetics / 19 upgrades** unless testing exposes a concrete gap.
 
 # Milestone 5 — Complete Area 2
 
-Produce Yomori Grove, regional enemies/minibosses, Twin Maws, regional hazards, functional rooms, VFX, and integration.
+Produce Yomori Grove, its authored encounter pool, regional enemies/minibosses, Twin Maws, hazards, functional rooms, VFX, and integration.
 
-Production supports the approved **10-chamber Yomori** prototype. Stalker Hound is the explicitly authored evolved Area 2 continuation of the Blighted Hound lineage rather than the unchanged Hushiro enemy carrying forward. Twin Maws use the approved transition-recovery rules and drop one Twin-Maws-specific persistent material per victory.
+Production supports the approved **10-chamber Yomori** prototype. Stalker Hound remains the sole approved evolved Hushiro lineage continuation.
 
-The first attempt does not artificially block Yomori. A sufficiently skilled pre-awakening player may reach and complete the region through the same normal route.
+# Milestone 6 — Area 3, campaign climax, Heart, and postgame suppression
 
-# Milestone 6 — Area 3, campaign climax, and ending
+Produce Kagutsuchi Court, its authored encounter pool, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Binding ritual, six Binding states, two-form true-final Heart, canonical ending, and repeat Heart-suppression presentation.
 
-Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart, ending, and repeat-clear presentation.
+Production supports the approved **11-chamber Kagutsuchi** prototype.
 
-Production supports the approved **11-chamber Kagutsuchi** prototype. Its five standard enemies are native Court units; no earlier-region standard enemy or evolved continuation is currently part of the launch Kagutsuchi roster. The Eclipse Shogun drops one Shogun-specific persistent material per victory.
+Narrative/endgame production includes:
 
-Narrative scope for this milestone includes:
+- 7 awakened Shogun states + rare pre-awakening fallback,
+- bloodline reveal at Shogun state 3,
+- 6 states of one reusable Binding ritual,
+- Binding 6 / final-run setup,
+- first Heart victory that permanently ends **new Beast Blood creation/spread** without erasing existing Beast Blood,
+- ending/credits,
+- postgame Heart regrowth/suppression state,
+- continued Shogun/Akio reconstruction continuity.
 
-- **7 awakened Shogun confrontation dialogue states**,
-- **1 rare pre-awakening Shogun fallback** for an exceptional first-attempt clear,
-- the bloodline recognition/recruitment reveal at the third awakened Shogun confrontation,
-- **6 escalating states of one reusable Binding ritual**,
-- Binding 6 / zero-Binding final-run setup,
-- approximately five total major controlled in-engine story sequences across the game, including the first-return and ending beats,
-- the canonical Heart-death / curse-ending presentation.
+The first six clears use the Binding ritual. The seventh story run continues from Shogun into the Heart. Postgame Heart Suppression uses the same approved Shogun-to-Heart handoff and a shortened repeat-clear presentation.
 
-The first six post-awakening clears use the reusable Binding ritual. The seventh story run continues from Shogun into the Heart with the approved partial recovery handoff.
-
-If a mastery-level player reaches the Heart before Akio's first death, the pre-awakening Heart state must allow arrival but cannot break a Binding; Heart contact triggers the first death/Returning Blood awakening without advancing campaign Binding progress.
-
-Akio remains silent through all Shogun/Heart/ending presentation. The Heart does not speak.
-
-Exact Shogun and Heart attack production still requires encounter approval.
+Exact Shogun/Heart attacks and encounter tuning remain the dedicated encounter-design pass.
 
 # Milestone 7 — Release presentation and cohesion
 
-Complete front-end UI, approved narrative implementation, achievements/store art where required, missing-asset audit, cross-game readability, settings/credits, localization integration, and final production cleanup.
+Complete:
 
-Narrative production boundary is now established:
+- front-end and 3 save slots,
+- Story Complete/completion-percentage presentation,
+- Standard Expedition vs Heart Suppression Boat selection after Story Complete,
+- approximately 30 achievements,
+- records/personal-best presentation,
+- settings/accessibility package,
+- localization-ready text integration,
+- credits/legal notices,
+- store/platform art where required,
+- missing-asset/readability audit,
+- final production cleanup and QA.
 
-- approximately **15,000–20,000 narrative words**,
-- approximately **20–25 substantive Lore / Records entries** beyond normal gameplay codex text,
-- text-led NPC/enemy/boss dialogue,
-- **no Akio dialogue or dialogue-choice system**,
-- **no full spoken-dialogue voice-acting requirement**,
-- reuse gameplay environments/cameras/VFX rather than building a separate pre-rendered cinematic pipeline.
+Launch narrative remains approximately 15,000–20,000 words, text-led, with no Akio dialogue and no full spoken-dialogue VO requirement.
 
-Final quotation no longer depends on narrative-delivery architecture. The remaining major scope dependency is the exact **endgame/postgame/release package**: repeat Heart access/rewards, completed-save behavior, achievements/completion goals, required front-end/settings/accessibility/credits scope, and whether any modifier/challenge system belongs at launch.
+English is the required launch language; additional languages are optional promotion according to budget/platform needs, but text systems must be localization-ready.
+
+# Locked launch exclusions
+
+Initial release does **not** require:
+
+- Heat/Pact-style modifiers,
+- New Game+,
+- endless mode,
+- daily challenges,
+- postgame enemy/room variant packages,
+- another Blood Aspect,
+- another campaign,
+- another permanent progression tree,
+- another persistent currency,
+- a general consumable inventory.
+
+These may be revisited only after playable testing or post-launch player demand establishes a concrete need.
 
 # Production rules
 
 - Wolf, Wraith, Ronin are fixed launch Aspects.
-- Akio is fully silent: no dialogue, response text, dialogue choices, or internal monologue.
-- The first attempt is the normal full route, not a scripted prologue or forced early loss.
-- Beast-Bane Whistle is the default starting Prosthetic.
-- Technique rewards and ordinary route interactions remain active on the first attempt; Blood Aspect/Corruption/Tier/Blood/Blood-Art progression does not.
-- Current 50-Technique and 10-Relic rosters remain stable unless testing exposes a concrete gap.
-- Permanent progression launch scope is **10 Akio + 8 Infrastructure + 9 Blood Mirror + 20 Relic mastery milestones + 19 Prosthetic upgrades**.
-- Exactly six Bloodwell nodes use regional boss-material gates; normal Prosthetic, Relic mastery, and Blood Mirror ranks do not use boss materials at launch.
-- Blood Mirror unlocks after first Keeper; all permanent progression systems are structurally available after first Shogun / first Binding clear.
-- No alternate-weapon / weapon-socket system or separate Relic Reliquary.
-- No launch consumable inventory or one-use item reward family.
-- Standard Combat rooms use deliberately authored encounter scripts selected from regional encounter pools; they are not procedurally assembled from threat budgets.
-- Route opening/main/final bands do not require separate standard-encounter pools; individual encounters may receive minimum-chamber eligibility later where needed.
-- Standard enemies are region-native by default; cross-region continuation requires a deliberately authored evolved regional variant rather than automatic reuse or stat scaling.
-- The only approved launch standard-enemy lineage across regions is **Blighted Hounds → Stalker Hound** in Yomori.
-- Reuse attack, locomotion, deathblow, HUD, VFX, environment, and camera families where mechanics/narrative modify existing content.
-- Standard successful-run target remains **45–50 minutes**.
-- Regional prototype baseline remains **12 Hushiro / 10 Yomori / 11 Kagutsuchi = 33 counted chambers**.
-- Route branching, room/reward weights, Technique offer generation, Gold/Shop economy, survival/capacity values, boss rewards, Relic acquisition/swapping, persistent-resource payouts, permanent-progression content volume, first-attempt behavior, and narrative-delivery volume have approved prototype/paper-design models.
-- Persistent economy uses **Mist, Scrolls, and three low-count regional boss materials**; no generic Boss Emblem currency.
-- Full spoken-dialogue VO is not required for launch.
-- Final tuned probabilities, prices, payouts, recovery values, upgrade percentages/costs, mastery thresholds, authored encounter counts/scripts, encounter timings, and exact narrative scripts remain playtest/implementation work.
-- Additional Aspects, large modifier systems, enemy/room variant packages, and other deferred challenge scope are excluded unless explicitly promoted.
+- Akio is fully silent.
+- The first attempt is the normal full route.
+- Beast-Bane Whistle is the starting Prosthetic.
+- Standard Combat uses authored encounter scripts selected from regional pools.
+- Regional route baseline remains 12 / 10 / 11 = 33 counted chambers.
+- Normal successful Binding-run target remains 45–50 minutes; Heart/Suppression target remains 55–60.
+- Existing permanent progression/economy/reward architectures remain stable unless testing exposes a concrete problem.
+- The canonical Heart victory permanently prevents creation/propagation of **new Beast Blood** while preserving existing bearers and regeneration.
+- Postgame is canonical continued containment with Standard Expedition and Heart Suppression run goals.
+- No full spoken-dialogue VO is required.
 - Markdown remains internal source of truth; Word/PDF are exports.
 
 # Current pre-production dependency
 
-The remaining top-level design work is:
+There is no remaining top-level architecture question.
 
-1. **Endgame/postgame/release scope** — repeat Heart access/rewards, completed-save behavior, completion goals/achievements, settings/front-end/credits/accessibility requirements, and any launch challenge/modifier layer.
+The next production-design work is:
 
-The actual standard-encounter roster, encounter-pool sizes, enemy counts/waves, and full-run clear-time validation belong to the later encounter-authoring/playtest pass.
+1. author the actual regional standard-encounter pools,
+2. design playable miniboss/boss encounter packages,
+3. design the two-form Heart encounter,
+4. realize exact narrative/achievement/trial content,
+5. playtest/tune numerical values and full-run pacing.
 
-Use `docs/_meta/OPEN_QUESTIONS.md` for the current unresolved agenda; do not duplicate resolved prototype tables here.
+Use `docs/_meta/OPEN_QUESTIONS.md` for the active content-production sequence and `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
