@@ -14,233 +14,122 @@ topics:
 
 # Current Design Questions
 
-This file is the implementation-facing design queue for Oathbound.
+This file contains only the remaining decisions that materially block implementation or authored launch content.
 
-Oathbound's launch architecture is already scoped. An item belongs here only if answering it will materially reduce implementation ambiguity, prevent predictable rework, define authored launch content, or create a useful first-playtest baseline.
+The launch architecture is already scoped. The goal is not to solve final balance on paper; the goal is to make each system concrete enough to implement, then let Godot playtesting drive revision.
 
-The goal is **not** to solve final balance on paper. The goal is to make the documented game concrete enough that implementation becomes filling in known pieces, then let Godot playtesting drive revisions.
+# Queue rules
 
-# Planning-to-implementation rule
+A question belongs here only when leaving it unanswered would force implementation/content work to invent a meaningful design rule.
 
-Approved documents are the current source of truth, but prototype values are expected to move when playtesting provides better evidence.
+A package is **complete for planning** once its current authorities provide a coherent first-playtest implementation contract. After that:
 
-Use three decision classes:
+- do not reopen it as smaller follow-up questions merely because some hitbox, timing, coefficient, radius, or balance value can still be tuned,
+- do not create a second pass that repeats values already supplied by shared family/system constants,
+- treat ordinary data-entry, animation synchronization, hitbox polish, and balance adjustment as implementation/playtest work,
+- reopen a completed package only when implementation exposes a genuinely missing rule, contradiction, unusable interaction, or scope problem.
 
-1. **Define before implementation** — rules/content/data that code, UI, art, or authored encounters need in order to exist.
-2. **Set a first-playtest baseline** — values needed to make the game playable; choose a reasonable prototype rather than debating final balance indefinitely.
-3. **Defer to playtesting** — final damage, timing, frequency, pacing, economy, and difficulty tuning that the playable game can answer better.
+This rule is specifically intended to prevent completed systems from being repeatedly subdivided into near-duplicate planning passes.
 
-A question leaves this file once it has enough of an answer to implement.
+# Completed implementation packages
 
-# Completed implementation passes
+## Core combat — COMPLETE
 
-## Pass 1 — Core combat implementation baseline — COMPLETE
+`docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md` supplies the shared first-playtest combat contract: Health/Posture/Spirit, movement/dash/parry/block, posture break, enemy posture, deathblow safety, backstab, perilous responses, modifiers, and common status/proc behavior.
 
-Approved in `docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md`.
+## Blood Aspects — COMPLETE
 
-The common combat layer now has first-playtest Health/Posture/Spirit normalization, movement/dash/parry/block rules, enemy posture/deathblow rules, backstab geometry/payoff, perilous response classes, proc conventions, and shared status behavior.
+`docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md` supplies first-playtest values for Wolf, Wraith, and Ronin on top of their qualitative Aspect authorities.
 
-## Pass 2A — Blood Aspect implementation baselines — COMPLETE
+Do not create separate follow-up questions for individual Aspect attacks unless implementation exposes a missing behavior.
 
-Approved in `docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md`, implementing the qualitative Aspect authorities.
+## Techniques — COMPLETE FOR PLANNING
 
-The first-playtest package now gives Wolf, Wraith, and Ronin concrete Tier 0 attack values, startup/recovery targets, reach/movement targets, defensive differences, Tier I-IV first-playtest values, Blood Art targets, repeated-growth values, and cross-roster balance targets.
+`docs/gameplay/TECHNIQUE_CATALOG.md` owns the existing **50 Techniques + 10 refinements**. `docs/gameplay/TECHNIQUE_IMPLEMENTATION_BASELINES.md` supplies the shared first-playtest implementation constants for Echo, Rupture, Seal, Rift, Crimson, proc normalization, and the approved Cross-family interactions.
 
-Do not reopen the three Aspect identities or these prototype values as planning questions unless implementation/playtesting exposes a concrete problem.
+The combination is sufficient to begin implementation. Individual geometry/polish values that naturally emerge while wiring a catalog entry to an Aspect host attack are implementation/playtest data, not another open design pass.
 
-## Pass 2B.1 — Technique-family implementation constants — COMPLETE
+Do not reopen the roster, family identities, slot ownership, rarity, prerequisites, or numeric family contract unless a concrete implementation/playtest problem requires it.
 
-Approved in `docs/gameplay/TECHNIQUE_IMPLEMENTATION_BASELINES.md`.
+# Current question — Prosthetic implementation baseline
 
-The five existing Technique families now have shared first-playtest implementation rules for:
+**Question:** What exact first-playtest values make the existing **8 Prosthetics and 19 approved upgrades** directly implementable?
 
-- proc coefficients and multi-hit normalization,
-- Echo delay / replication / propagation,
-- Rupture meter / buildup / trigger payoff,
-- Seal duration / movement restriction / Bind,
-- Rift fuse / intensity / burst progression,
-- Crimson Vulnerable / genuine-backstab payoff / direct-Health conventions,
-- the five approved Cross-family interactions.
+Use the existing roster and upgrade paths in `docs/gameplay/PROSTHETICS.md`. Define only what implementation still needs:
 
-The Technique roster itself remains unchanged: 25 Direct, 15 Supporting, 5 Cross-family, 5 Legendary, and 10 refinements.
+- Spirit cost and repeat-use rule,
+- startup / active / recovery timing,
+- range / radius / geometry,
+- Health and posture effects,
+- Burn / Shock / targeting-disruption / pull / guard-storage / blink / healing behavior,
+- boss/elite restrictions where required,
+- exact effect of each of the 19 existing upgrades.
 
-# Current priority — Pass 2B.2: Individual Direct Technique implementation values — NEXT
+Do not redesign the tools or add new upgrade branches.
 
-**Question:** What exact first-playtest values and remaining per-entry rules should the existing **25 Direct Techniques** use on top of the approved family constants and Wolf/Wraith/Ronin host attacks?
+**Exit condition:** each Prosthetic can be represented as one base data package plus its approved linear upgrades without a coder inventing its combat behavior.
 
-Do not redesign the roster. Work through the five Direct slots in the existing catalog for each family and fill only fields still needed for implementation, including where relevant:
+# Next questions
 
-- exact application count or family contribution,
-- direct bonus Health/posture value,
-- secondary geometry/radius/width,
-- internal cooldown only where needed,
-- host-action proc normalization,
-- boss/elite treatment only when shared rules are insufficient,
-- interaction with the five host action slots,
-- any required once-per-action/sequence cap.
+## Relic implementation baseline
 
-Use `TECHNIQUE_IMPLEMENTATION_BASELINES.md` whenever a shared family value already answers the question; do not duplicate new one-off constants unnecessarily.
+**Question:** What first-playtest values make the existing **10 Relics and two mastery ranks each** directly implementable?
 
-**Exit condition:** all 25 Direct Techniques can be represented as data/rules on top of Wolf, Wraith, and Ronin without a coder inventing Technique behavior.
+Define Base / Mastery I / Mastery II values, qualifying triggers, reset rules, and mastery thresholds only where needed. Keep the existing roster intact.
 
-## Pass 2B.3 — Supporting / Legendary / refinement implementation values
+## Corruption / Shrine / Blood completion
 
-After the Direct Techniques are concrete, finish the remaining already-approved catalog:
+**Question:** What remaining numeric/state values are still missing after the combat, Aspect, and Technique baselines?
 
-- 15 Supporting Techniques,
-- 5 Legendary Techniques,
-- 10 refinements.
+Fill only unresolved implementation data for Corruption thresholds/gain, Resist/Embrace/Stabilize, Blood generation/storage, and any shared Shrine/Blood state behavior not already owned elsewhere.
 
-The 5 Cross-family Techniques already have their shared first-playtest numeric constants and need only any remaining per-entry implementation fields exposed by the Direct/support pass.
+**Pass 2 exit condition:** the complete player-build layer can be instantiated without new design decisions in code.
 
-**Pass 2B exit condition:** all 50 Techniques + 10 refinements are directly instantiable in Godot while preserving the approved roster, rarity, prerequisites, family identity, and slot ownership.
-
-# Remaining Pass 2 player-build work
-
-## Pass 2C — Prosthetic implementation sheet
-
-Define for all 8 Prosthetics and 19 upgrades:
-
-- Spirit cost,
-- cooldown/charge behavior,
-- startup / active / recovery,
-- geometry/range,
-- valid targets/immunity,
-- Health/posture effects,
-- status values/durations,
-- exact first-playtest upgrade improvements.
-
-## Pass 2D — Relic implementation sheet
-
-Define for all 10 Relics:
-
-- Base effect value,
-- Mastery I value,
-- Mastery II value,
-- qualifying trigger rules,
-- any once-per-room/run/reset behavior,
-- first-playtest mastery thresholds if needed for implementation.
-
-## Pass 2E — Corruption / Shrine / Blood numeric sheet
-
-Fill any remaining first-playtest values required to instantiate:
-
-- Corruption gain/loss,
-- Resist/Embrace/Stabilize behavior,
-- Tier thresholds,
-- Blood generation/storage,
-- Blood Art costs/effects not already owned by the Aspect baseline,
-- interaction with the three approved Aspects.
-
-**Pass 2 exit condition:** every launch player-build item has enough data to instantiate in Godot, even though values remain playtest-tunable.
-
-# Pass 3 — Hushiro implementation-ready content package
+# Pass 3 — Hushiro implementation-ready package
 
 This is the first complete regional production target.
 
-## 3A. Standard encounter pool
+Resolve Hushiro as one connected package:
 
-Define the authored Hushiro launch encounters:
+1. **Authored standard encounters** — practical launch pool, exact compositions, waves/spawns, and only necessary eligibility restrictions.
+2. **Reusable gameplay-space inventory** — Combat, Shrine, Rest, Shop, Treasure, miniboss, Keeper, and transition spaces; not unique art per chamber.
+3. **Village Ogre / Collector / Keeper implementation contracts** — move/state lists, selection rules, perilous/defensive classifications, escalation, arena behavior, posture/deathblow/death rules.
 
-- practical pool count,
-- tactical purpose,
-- exact enemy composition,
-- waves/spawn sequence if any,
-- layout/space requirement,
-- minimum-chamber restriction only where needed,
-- anti-repeat/eligibility rule only if needed.
-
-## 3B. Room-layout inventory
-
-Define the reusable Hushiro gameplay spaces actually required for:
-
-- standard Combat,
-- Shrine,
-- Rest,
-- Shop,
-- Treasure,
-- minibosses,
-- Keeper,
-- transitions.
-
-This is a reusable layout inventory, not unique art per chamber.
-
-## 3C. Village Ogre, Collector, and Keeper implementation packages
-
-For each, finish:
-
-- complete move/state list,
-- targeting/selection conditions,
-- parryable/dodge/perilous classifications,
-- phase/escalation transitions,
-- arena interactions,
-- add/hazard rules,
-- posture/deathblow/death behavior.
-
-**Pass 3 exit condition:** Hushiro can be built as a complete repeatable region and used as the first serious end-to-end balance environment.
+**Exit condition:** Hushiro can be built as a complete repeatable region and used for serious end-to-end Godot testing.
 
 # Implementation restart gate
 
-Do **not** wait for all later-region documentation before returning to Godot.
+Do not wait for later-region documentation before returning to Godot.
 
-The documentation-first phase has done its job once:
+The documentation-first phase has done its job when:
 
-- Pass 1 is complete,
-- Pass 2 makes player-build content instantiable,
-- Pass 3 makes Hushiro implementation-ready,
-- the existing Godot project is audited against current documentation.
+- player-build Pass 2 is implementation-ready,
+- Hushiro Pass 3 is implementation-ready,
+- the existing Godot project is audited against current authorities.
 
-At that point implementation and documentation proceed together.
+Then implementation and documentation proceed together.
 
-# Later implementation-content passes
+# Later implementation-content packages
 
-## Pass 4 — Strand and permanent progression
+- **Strand / permanent progression:** exact Bloodwell/Blood Mirror effects, prices, Relic mastery thresholds, Prosthetic unlock sequence, Relic source assignments, Blood Cavern trial roster/rewards, save/progression flags.
+- **Yomori:** encounter pool/layout inventory, Embered Pilgrim, Rotwood Host, Twin Maws, regional hazards.
+- **Kagutsuchi / Shogun / Heart:** encounter pool/layout inventory, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding states, both Heart forms, first-clear/repeat-suppression state differences.
+- **Authored presentation content:** exact dialogue, lore/records, achievements, tutorial/help text, ending/postgame lines, credits/legal when dependencies are known.
 
-Define exact Bloodwell/Blood Mirror effects, first-playtest prices, Relic mastery thresholds, Prosthetic unlock sequencing, Relic 4/2/4 source assignments, Blood Cavern trial roster/rewards, and save/progression flags.
+# Playtest backlog — not open design questions
 
-## Pass 5 — Yomori
-
-Define Yomori encounter pool/layout inventory, Embered Pilgrim, Rotwood Host, Twin Maws, and required region-specific hazard rules.
-
-## Pass 6 — Kagutsuchi + Shogun + Heart
-
-Define Kagutsuchi encounter pool/layout inventory, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding-space states, Unbound Heart, Vessel of Continuance, and first-clear vs repeat-suppression presentation/state differences.
-
-## Pass 7 — Exact authored presentation/content
-
-Finish NPC/Shogun scripts, Discovery Board/Lore entries, achievement names/triggers, tutorial/help text, records labels, ending/postgame lines, and final credits/legal text when dependencies are known.
-
-This pass should not block combat implementation unless a specific interface requires the content earlier.
-
-# Playtest-only tuning backlog
-
-Do not turn these into planning blockers before the playable build can measure them:
+Do not promote these back into the design queue unless testing reveals a structural problem:
 
 - final damage/posture values,
 - final attack/frame timing,
+- final hitbox widths and VFX synchronization,
 - final parry/dash windows,
 - final enemy Health/damage,
-- final encounter count/variety adjustments,
-- final route/reward weights,
-- final Technique rarity/source percentages,
-- final Shop prices,
-- final recovery/capacity values,
-- final Mist/Scroll payouts/prices,
-- final mastery thresholds,
-- final Bloodwell/Blood Mirror percentages,
-- final Prosthetic magnitudes,
-- exact 45–50 / 55–60 minute pacing validation,
-- VFX density, hitbox polish, camera timing, animation timing.
+- final proc coefficients and status durations,
+- final Prosthetic magnitudes/cooldowns,
+- final route/reward/rarity weights,
+- final economy and progression prices,
+- final encounter-volume adjustments,
+- exact 45–50 / 55–60 minute pacing validation.
 
-Use the approved first-playtest values, implement them, measure them, then update the owning authority when evidence supports a change.
-
-# Question-quality filter
-
-Before adding a new item here, ask:
-
-1. Does implementation need this answer now?
-2. Would leaving it undefined force a coder/content author to invent design?
-3. Would answering it now prevent meaningful rework?
-4. Can playtesting answer it more reliably than documentation?
-
-If #4 is yes and the first three are no, do **not** add it as an open design question.
+Use current first-playtest values, implement them, measure them, and revise the owning authority when evidence supports a change.
