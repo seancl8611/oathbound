@@ -23,6 +23,7 @@ topics:
   - chamber-structure
   - branching-frequency
   - authored-encounters
+  - enemy-lineage
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -115,7 +116,9 @@ Launch encounter construction follows these rules:
 - regional difficulty progression comes primarily from the enemies and encounter compositions designed for that region; later regions naturally contain more demanding enemy mechanics rather than relying on automatic threat-budget inflation,
 - encounter-pool size and every individual encounter script are intentionally deferred until the dedicated encounter-authoring pass.
 
-The regional enemy rosters are already defined, but the current repository does **not** yet explicitly define which standard enemies are region-exclusive and which may reappear in later regions. That cross-region availability matrix must be established before detailed encounter authoring.
+Standard enemies are **region-native by default**. An enemy does not automatically carry forward unchanged into later regions simply because the run has progressed. When an earlier enemy concept continues, it should do so through a separately authored evolved regional variant whose behavior expresses the later area's identity rather than through simple stat inflation.
+
+For launch, the only approved standard-enemy lineage across regions is **Blighted Hounds → Stalker Hound** in Yomori Grove. Stalker Hound is a separate Area 2 enemy built on the earlier hound family with new stalking, mist-repositioning, and pounce behavior. No other Hushiro standard enemy has an approved Yomori continuation, and no earlier-region standard enemy or evolved continuation is currently approved for Kagutsuchi. Regional `ENEMIES.md` files own the detailed roster boundary.
 
 ## Prototype branching frequency
 
