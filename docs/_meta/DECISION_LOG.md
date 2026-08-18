@@ -14,6 +14,16 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-08-17 — Regional enemy lineage rule restored from production bible
+
+Standard enemies are **region-native by default** rather than automatically carrying forward unchanged as the run progresses. When an earlier enemy concept continues into a later region, it does so through a deliberately authored evolved regional variant whose new behavior expresses the later area's identity instead of through simple Health/damage scaling.
+
+The only approved launch lineage currently defined is **Blighted Hounds → Stalker Hound** in Yomori Grove. Stalker Hound is a separate Area 2 elite predator that retains recognizable hound-family foundations while adding stalking, mist repositioning, and pounce timing. No other Hushiro enemy has an approved Yomori continuation, and Kagutsuchi's five standard enemies remain a fully native Court roster with no approved earlier-region continuation.
+
+This resolves the cross-region availability question without inventing a 15-enemy reuse matrix. Detailed standard-encounter authoring remains deferred until encounter production.
+
+**Authority:** regional `docs/content/area_*/ENEMIES.md`, `docs/gameplay/RUN_STRUCTURE.md`.
+
 ## 2026-08-17 — Authored standard-encounter model locked
 
 Standard Combat rooms use **deliberately authored encounter scripts**, not procedurally assembled enemy threat budgets. One encounter is one Combat-room sequence from combat start until room completion and owns its intended enemy composition/theme plus counts, waves, or spawn sequencing where applicable.
@@ -24,7 +34,7 @@ The route's opening/main/pre-boss bands do **not** create a mandatory three-tier
 
 Regional escalation comes primarily from the enemies and encounter compositions authored for later regions rather than automatic threat-budget inflation. Encounter counts and every individual script are deferred until encounter production.
 
-The 6 Hushiro, 4 Yomori, and 5 Kagutsuchi standard-enemy rosters are already defined, but cross-region reuse is not explicit in the current repository. The next scope question is therefore which enemies remain region-exclusive and which may reappear in later regions.
+Regional enemy availability is governed by the later-restored native-roster/evolved-variant rule above rather than an unrestricted cross-region reuse matrix.
 
 **Authority:** `docs/gameplay/RUN_STRUCTURE.md`, regional `docs/content/area_*/ENEMIES.md`, `docs/_meta/OPEN_QUESTIONS.md`.
 
