@@ -4,7 +4,7 @@ title: Beast Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-18
 topics:
   - beast-blood
   - the-heart
@@ -14,6 +14,7 @@ topics:
   - heart-bindings
   - extraction
   - ending
+  - postgame
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -34,8 +35,9 @@ Beast Blood is a rare supernatural power drawn from the Heart, an ancient living
 - Strong resolve can delay transformation, but ordinary bearers do not achieve Akio's true control.
 - A bearer who remains intelligent or composed may still be enslaved to desires reshaped by the Blood.
 - Beast Blood becomes naturally more powerful during the Blood Moon.
-- Once active in a bearer, Beast Blood does not require repeated doses or continued transfer from the Heart while the Heart remains alive.
-- The Heart remains the supernatural source sustaining Beast Blood as an active curse. Destroying it makes all active Beast Blood inert.
+- Once active in a bearer, Beast Blood does not require repeated doses or continued transfer from the Heart.
+- Existing Beast Blood remains active in its bearer even after the Heart is permanently crippled at the end of the campaign.
+- The canonical Heart victory prevents the Heart from producing, releasing, or propagating **new Beast Blood**. It does not erase Beast Blood already present in Akio, the Shogun, or other existing bearers.
 
 ## Discovery of the imprisoned Heart
 
@@ -173,23 +175,24 @@ The Heart possesses primal agency rather than a human personality. It does not r
 
 It gives genuine life and healing, but its form of preservation gradually rewrites the bearer according to that nature. Whether the Heart is malicious, instinctive, defensive, or simply incompatible with human life remains intentionally unresolved.
 
-## Destruction of the source
+## Canonical crippling of the source
 
-The first true-final Heart victory canonically destroys the source sustaining Beast Blood.
+The first true-final Heart victory canonically destroys the Heart's manifested combat body and reduces the source to a faint regenerating remnant.
 
-When the Heart dies:
+The victory permanently changes what the Heart is capable of:
 
-- active Beast Blood becomes inert,
-- regeneration and transformation can no longer sustain corrupted bodies,
-- the Shogun's reconstruction stops,
-- corrupted inhabitants are released from the Blood's influence before their bodies fail,
-- corrupted beasts and failed bodies collapse,
-- Yomori's spirits can pass on,
-- and the Blood Moon cycle ends.
+- it can no longer produce or release new Beast Blood,
+- Beast Blood can no longer be deliberately extracted from it,
+- no new person or creature can become a Beast Blood bearer,
+- its influence can no longer expand beyond the existing infected population,
+- the Shogun's plan to spread Beast Blood to the mainland is permanently defeated,
+- the Heart's remaining activity is reduced to a local containment/suppression problem.
 
-Akio's current complete human body survives, but Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction end. He becomes mortal.
+Existing Beast Blood is **not** erased. Akio, the Shogun, corrupted inhabitants, altered beasts, and other existing bearers retain the supernatural effects already sustained by the Blood within them, including regeneration where their established form supports it.
 
-Repeat postgame Heart victories are gameplay challenges and do not represent additional canonical destructions of the source.
+The Heart itself can regenerate physical tissue over time because regeneration is fundamental to its nature, but it can never regenerate the lost ability to create or propagate Beast Blood. Postgame Heart encounters represent Akio returning to suppress this regrowth before it becomes locally dangerous.
+
+The permanent story victory is therefore containment of propagation, not extermination of every existing bearer.
 
 ## Worship
 
@@ -207,7 +210,7 @@ Other bearers may retain humanity, intelligence, or technical use of mutations, 
 
 After a Shogun victory during the first six successful clears, Akio can place Returning Blood into the Court's extraction apparatus. The Heart attempts to reclaim that Blood, but Akio's controlled Blood rejects its authority. The resulting pulse destroys one remaining Heart Binding before the Heart retaliates and dissolves Akio's current body.
 
-Returning Blood's established rejection of the Heart may support the final narrative and visual resolution without becoming a separate one-off player mechanic.
+Returning Blood's established rejection of the Heart supports the final severance of the Heart's ability to create/spread Beast Blood without becoming a separate one-off player mechanic.
 
 ## Visual discipline
 
