@@ -15,10 +15,12 @@ Oathbound production is organized by dependency order and meaningful playtest gr
 
 Top-level game architecture is complete enough to stop treating documentation as a prerequisite to every implementation task.
 
-The current goal is to convert approved qualitative design into **implementation-ready prototype contracts**:
+The shared first-playtest combat baseline is now complete in `COMBAT_IMPLEMENTATION_BASELINE.md`.
 
-1. establish first-playtest shared combat values,
-2. fill the remaining player-build data required by Godot,
+The current goal is to convert the remaining approved qualitative player/build design into **implementation-ready prototype contracts**:
+
+1. fill the Wolf / Wraith / Ronin implementation sheets,
+2. fill Technique / Prosthetic / Relic / Corruption-Blood implementation data,
 3. make Hushiro a complete authored region on paper,
 4. reconcile the existing Godot project against the current documentation,
 5. resume implementation/playtesting while later-region content continues to be authored.
@@ -77,7 +79,7 @@ Complete:
 
 Current roster remains **50 Techniques + 10 refinements**, **10 Relics**, and **8 Prosthetics / 19 upgrades** unless testing exposes a concrete gap.
 
-The implementation-handoff pass should provide every player-build item with enough first-playtest data to instantiate. Final numerical balance remains playtest work.
+The current implementation-handoff pass should provide every player-build item with enough first-playtest data to instantiate. Final numerical balance remains playtest work.
 
 # Milestone 5 — Complete Area 2
 
@@ -167,16 +169,17 @@ These may be revisited only after playable testing or post-launch player demand 
 
 There is no remaining top-level architecture question.
 
+**Pass 1 — shared combat first-playtest baseline is complete.**
+
 Current implementation-facing order:
 
-1. **core combat first-playtest baseline**,
-2. **player-build implementation sheets**,
-3. **complete Hushiro encounter/layout/miniboss/boss package**,
-4. **Godot documentation-to-code delta audit and implementation restart**,
-5. **Strand/permanent-progression exact content**,
-6. **Yomori package**,
-7. **Kagutsuchi/Shogun/Heart package**,
-8. **exact narrative/achievement/content lists**,
-9. **playtest-driven tuning and final pacing validation**.
+1. **player-build implementation sheets** — Aspect attacks first, then Techniques/Prosthetics/Relics/Corruption-Blood,
+2. **complete Hushiro encounter/layout/miniboss/boss package**,
+3. **Godot documentation-to-code delta audit and implementation restart**,
+4. **Strand/permanent-progression exact content**,
+5. **Yomori package**,
+6. **Kagutsuchi/Shogun/Heart package**,
+7. **exact narrative/achievement/content lists**,
+8. **playtest-driven tuning and final pacing validation**.
 
 Use `docs/_meta/OPEN_QUESTIONS.md` for the exact exit conditions and question-quality filter. Use `docs/overview/ENDGAME_POSTGAME_RELEASE.md` for the locked release/postgame package.
