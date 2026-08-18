@@ -22,6 +22,7 @@ topics:
   - regional-routing
   - chamber-structure
   - branching-frequency
+  - authored-encounters
 related:
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
@@ -79,7 +80,7 @@ The intended full route is:
 
 The introductory attempt may use only a short portion of Hushiro rather than the complete regional flow.
 
-All three regions have approved **prototype chamber structures**. Their chamber counts, structural bands, and the prototype branching-frequency model below are planning targets for implementation and playtesting rather than immutable final balance values. Exact encounter compositions, authored room-variant counts, and final tuned percentages remain playable-validation work.
+All three regions have approved **prototype chamber structures**. Their chamber counts, structural bands, and the prototype branching-frequency model below are planning targets for implementation and playtesting rather than immutable final balance values. Exact standard-combat encounter scripts, encounter-pool counts, authored room-variant counts, and final tuned percentages remain later content/playable-validation work.
 
 ## Chamber and route model
 
@@ -88,8 +89,9 @@ A **counted chamber** is a room that represents an actual run node. Standard com
 The run uses a Hades-like chamber-routing model:
 
 - each region has a broadly fixed chamber destination and fixed final boss,
-- chamber-index bands determine what room and encounter types are eligible,
-- eligible contents are selected procedurally through weighted generation,
+- chamber-index bands determine which room functions and special opportunities are eligible,
+- eligible room functions and rewards are selected procedurally through weighted generation,
+- when a standard Combat chamber is selected, its combat content comes from the region's authored encounter pool rather than from an automatically assembled threat budget,
 - hard generation safeguards prevent important opportunity types from disappearing from the full route network,
 - route exits preview the upcoming room function and/or primary reward before commitment,
 - one or two exits are the normal route presentation,
@@ -97,6 +99,23 @@ The run uses a Hades-like chamber-routing model:
 - and there is no routine backtracking after choosing an exit.
 
 A guaranteed **opportunity** means the generated route network contains at least one accessible offer of that type. It does not mean the player is forced to enter that room. Choosing a competing route can intentionally give up the guaranteed opportunity.
+
+## Standard combat encounter model
+
+A normal **encounter** is one authored Combat-room sequence from combat start until the room is cleared. The encounter definition owns the intended enemy composition, theme, counts, waves/spawn sequencing where applicable, and any encounter-specific restrictions.
+
+Launch encounter construction follows these rules:
+
+- each region has a finite pool of deliberately authored and playtested standard encounters,
+- the route generator selects an eligible authored encounter when it creates a standard Combat chamber,
+- encounters should usually center on a coherent enemy combination or tactical idea rather than being arbitrary mixes,
+- there is **no required opening/main/pre-boss encounter-pool split** merely because the route itself has chamber bands,
+- by default, an encounter in a regional pool may appear throughout that region,
+- an individual authored encounter may later receive a minimum-chamber or other narrow eligibility requirement when its mechanics, teaching role, or difficulty clearly require one,
+- regional difficulty progression comes primarily from the enemies and encounter compositions designed for that region; later regions naturally contain more demanding enemy mechanics rather than relying on automatic threat-budget inflation,
+- encounter-pool size and every individual encounter script are intentionally deferred until the dedicated encounter-authoring pass.
+
+The regional enemy rosters are already defined, but the current repository does **not** yet explicitly define which standard enemies are region-exclusive and which may reappear in later regions. That cross-region availability matrix must be established before detailed encounter authoring.
 
 ## Prototype branching frequency
 
@@ -130,7 +149,7 @@ Hushiro uses **12 counted chambers**, including Keeper of the Gate at Chamber 12
 
 - **Chamber 1 is fixed:** a standard combat encounter followed by a guaranteed Technique reward.
 - Chambers 2–3 introduce the normal previewed route-choice structure.
-- Early encounter generation favors simpler Hushiro combinations so the player can establish the run before the region uses its full mixed-enemy pressure.
+- Chamber 1's authored encounter should function as an accessible opening combat test; further encounter-specific early gating is assigned only during encounter authoring when needed.
 - Hushiro's build purpose is to establish the first direct-action modifications and the first recognizable family/build direction, not to finish the build.
 
 ### Chambers 4–8 — Main stretch
@@ -147,7 +166,7 @@ The miniboss path is optional. A normal Hushiro run therefore contains **0–1 f
 ### Chambers 9–11 — Pre-boss stretch
 
 - Minibosses leave the eligible pool.
-- Encounter generation may use the strongest normal Hushiro compositions and should visually move toward the old gate.
+- Standard Combat still draws from the authored Hushiro encounter pool; any encounter reserved for later Hushiro chambers must be explicitly tagged that way during encounter authoring rather than belonging to a mandatory separate pre-boss pool.
 - No new major system is introduced here; the purpose is to consolidate the current build and prepare for Keeper.
 - **Chamber 11 guarantees a meaningful pre-boss support opportunity in the available route**, such as Rest, Shop, or another approved high-value preparation choice. This does not require a free full heal.
 
@@ -171,13 +190,13 @@ These are network opportunities rather than mandatory visits.
 
 Yomori uses **10 counted chambers**, including Twin Maws at Chamber 10. The current active-time target is approximately **12–14 minutes**.
 
-Yomori is intentionally shorter than Hushiro because its normal encounters, minibosses, and paired regional boss are expected to be denser and mechanically more complex.
+Yomori is intentionally shorter than Hushiro because its normal enemies, minibosses, and paired regional boss are mechanically more complex.
 
 ### Chambers 1–2 — Opening stretch
 
 - Branching begins immediately.
 - There is no fixed guaranteed Technique reward on Yomori Chamber 1; the player already enters with an established run build.
-- Early Yomori encounters introduce its spirit manifestation, mist, stalking, predator, and positional-control language before the main stretch combines those pressures more aggressively.
+- Standard Combat draws from the authored Yomori encounter pool. Any encounter that must be delayed until later chambers receives an explicit encounter-level eligibility requirement during authoring rather than relying on a universal opening encounter tier.
 
 ### Chambers 3–7 — Main stretch
 
@@ -193,7 +212,7 @@ The miniboss path is optional. A normal Yomori run therefore contains **0–1 fo
 ### Chambers 8–9 — Pre-boss stretch
 
 - Minibosses leave the eligible pool.
-- Encounter generation may use Yomori's strongest normal combinations.
+- Standard Combat continues using eligible authored Yomori encounters rather than switching to a separate mandatory late-region encounter pool.
 - At least one available route across Chambers 8–9 should provide meaningful pre-boss preparation without making full recovery automatic.
 - The stretch should feel like convergence toward the grove's heart rather than the introduction of another system.
 
@@ -217,13 +236,13 @@ These are network opportunities rather than mandatory visits. Treasure remains a
 
 Kagutsuchi uses **11 counted chambers**, including the Eclipse Shogun at Chamber 11. The current active-time target is approximately **15–17 minutes**.
 
-Kagutsuchi is the mature-build region. Its standard encounters are expected to take longer and demand more from the player because Court enemies combine revival, ranged ritual pressure, directional defense, spawning, frenzy, and more disciplined coordinated behavior.
+Kagutsuchi is the mature-build region. Its standard enemies are inherently more demanding because Court enemies combine revival, ranged ritual pressure, directional defense, spawning, frenzy, and more disciplined coordinated behavior.
 
 ### Chambers 1–2 — Court entrance
 
 - Branching begins immediately.
 - There is no fixed opening Technique reward; the player enters with an established build from Hushiro and Yomori.
-- Early encounters introduce the Court's disciplined, layered threat language before the main stretch combines revival, source-priority, guard-direction, ranged, and bruiser pressure more aggressively.
+- Standard Combat draws from the authored Kagutsuchi encounter pool. Encounter-specific minimum-chamber restrictions may be added later when a particular composition needs them.
 - Kagutsuchi should become dangerous immediately through enemy behavior and composition rather than simple Health inflation.
 
 ### Chambers 3–7 — Main Court
@@ -240,8 +259,8 @@ The miniboss path is optional. A normal Kagutsuchi run therefore contains **0–
 ### Chambers 8–10 — Final Court / Shogun approach
 
 - Minibosses leave the eligible pool.
-- Encounter generation may use the strongest normal Court compositions and should escalate visually and mechanically toward the Shogun's inner Court.
-- No new run-build system is introduced here; the purpose is maximum normal-room pressure, final build decisions, and preparation for the Shogun.
+- Standard Combat continues using eligible authored Court encounters rather than a separate mandatory final encounter tier; the environment and chosen encounter compositions should still support the approach to the Shogun.
+- No new run-build system is introduced here; the purpose is final build decisions and preparation for the Shogun.
 - Across **Chambers 9–10**, the generated route must expose at least one meaningful final-preparation opportunity such as Rest, Shop, Technique, Treasure, or another approved high-value preparation choice.
 - This safeguard does not guarantee a full heal or automatic ideal build.
 
@@ -312,7 +331,7 @@ The two-form Heart continuation should add approximately 8–12 minutes to the e
 
 Active run time includes combat, reward choices, shops, rests, transitions, bosses, and the Binding or Heart completion sequence. It excludes Strand preparation, trials, codex reading, and time spent paused.
 
-The current three-region prototype budget is **33 counted chambers total**: 12 Hushiro + 10 Yomori + 11 Kagutsuchi. Regional active-time targets are approximately 14–16, 12–14, and 15–17 minutes respectively. The route-generation prototype targets roughly 17–19 multi-exit decisions and, together with the reward model in `ITEMS_AND_REWARDS.md`, roughly 20–22 standard combat chambers on a normal completed route. These values must be validated in playable builds against the 45–50-minute target.
+The current three-region prototype budget is **33 counted chambers total**: 12 Hushiro + 10 Yomori + 11 Kagutsuchi. Regional active-time targets are approximately 14–16, 12–14, and 15–17 minutes respectively. The route-generation prototype targets roughly 17–19 multi-exit decisions and, together with the reward model in `ITEMS_AND_REWARDS.md`, roughly 20–22 standard combat chambers on a normal completed route. These values must be validated in playable builds against the 45–50-minute target once the authored encounter roster exists.
 
 ## Standard run start
 
