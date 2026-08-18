@@ -4,7 +4,7 @@ title: Area 3 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-17
 topics:
   - area-3
   - kagutsuchi-court
@@ -46,6 +46,12 @@ Retained humanity does not mean freedom from Beast Blood.
 | Elite Defender | Shield-and-spear positional defender | Directional guard coverage; no revival |
 | Hollow Vessel | Stationary source-priority unit | Spawns Spillborn |
 | Court Sentinel | Heavy bruiser | Low-health frenzy |
+
+## Regional availability
+
+All five standard enemies are **native Kagutsuchi Court enemies** and form the launch Court encounter pool. Earlier Hushiro or Yomori standard enemies do not carry into Kagutsuchi unchanged, and no evolved continuation of an earlier standard enemy is currently approved for Area 3.
+
+This keeps the final region mechanically and visually centered on the Court's own preserved hierarchy. Any future cross-region lineage must be deliberately authored as a new regional variant rather than assumed through progression.
 
 ## Role-separation rules
 
