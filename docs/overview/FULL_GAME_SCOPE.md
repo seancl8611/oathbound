@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: draft
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - full-scope
   - techniques
@@ -12,6 +12,9 @@ topics:
   - prosthetics
   - progression
   - boss-materials
+  - narrative-delivery
+  - silent-protagonist
+  - first-attempt
   - areas
   - strand
   - the-heart
@@ -24,24 +27,26 @@ topics:
 related:
   - ART-ASSET-INVENTORY
   - OVERVIEW-PRODUCTION-ROADMAP
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-ITEMS-REWARDS
+  - NARRATIVE-DELIVERY
   - META-OPEN-QUESTIONS
 ---
 
 # Full Game Scope
 
-This document summarizes Oathbound's current production-level shape. Detailed mechanics live in their gameplay/content authorities. Prototype percentages and values may change through playable validation without reopening the underlying architecture.
+This document summarizes Oathbound's current production-level shape. Detailed mechanics and narrative delivery rules live in their owning authorities. Prototype percentages and values may change through playable validation without reopening the underlying architecture.
 
 # Master scope
 
 | Asset / system group | Planned count | Current boundary |
 |---|---:|---|
-| Player character | 1 | Akio; base sword kit + three Aspect combat libraries |
+| Player character | 1 | Akio; silent protagonist; base sword kit + three Aspect combat libraries |
 | Blood Aspects | 3 | Wolf, Wraith, Ronin |
 | Direct Technique slots | 5 | Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow |
 | Direct Techniques | 25 | Five families × five direct slots |
@@ -50,7 +55,7 @@ This document summarizes Oathbound's current production-level shape. Detailed me
 | Legendary Techniques | 5 | One family capstone each |
 | Refinements | 10 | One small eligible parent upgrade each |
 | Total Technique roster | 50 + 10 refinements | 10 Common / 18 Uncommon / 17 Rare / 5 Legendary |
-| Prosthetic tools | 8 | One equipped at a time; 19 permanent Forge upgrades |
+| Prosthetic tools | 8 | Beast-Bane Whistle is starting default; one equipped at a time; 19 permanent upgrades |
 | Relic roster | 10 | One equipped; Base + 2 mastery ranks each |
 | Bloodwell Akio nodes | 10 | 3 foundation + 4 combat-stability + 3 regional mastery nodes |
 | Run Infrastructure nodes | 8 | Rest/Shrine/preparation/route/resource support + 3 regional passage nodes |
@@ -69,6 +74,12 @@ This document summarizes Oathbound's current production-level shape. Detailed me
 | True-final Heart | 1 encounter / 2 forms | Unbound Heart, Vessel of Continuance |
 | General currencies | 3 | Mist, Scrolls, Gold |
 | Regional boss-material families | 3 | One unique low-count permanent material per regional boss |
+| Major narrative sequences | ~5 | In-engine, reuse gameplay assets/cameras/VFX |
+| Awakened Shogun dialogue states | 7 | Plus 1 rare pre-awakening fallback |
+| Binding presentation states | 6 | Six states of one reusable ritual |
+| Major Strand conversations | ~30–36 | Short, optional milestone-driven conversations |
+| Lore / Records entries | ~20–25 | Substantive optional history beyond gameplay codex text |
+| Narrative writing target | ~15k–20k words | No Akio dialogue; no full spoken-dialogue VO requirement |
 
 # Player and run build
 
@@ -89,6 +100,22 @@ After the relevant systems unlock, a run may build through:
 There is **no global Technique inventory cap** beyond the five direct action slots. Mandatory content cannot assume a specific Tier, Blood Art, Technique family, Legendary, Relic, highly upgraded Prosthetic, ideal economy, or ideal survival route.
 
 Oathbound does not add a separate general consumable inventory to this build stack at launch.
+
+# First-attempt scope
+
+The first attempt is a **normal full run**, not a bespoke tutorial route.
+
+- player control starts directly in Hushiro,
+- all three regions and the Shogun are reachable,
+- normal route generation, room types, authored encounters, rewards, minibosses, and bosses remain active,
+- Akio starts with the base katana and **Beast-Bane Whistle**,
+- Technique rewards remain available and modify the base katana,
+- Rest/Shop/Treasure/Gold/Mist/Scroll flow remains active where meaningful,
+- Shrines provide their non-Aspect support state,
+- Blood Aspects, Corruption/Tier progression, Blood/Blood Arts, Relic loadout, and permanent upgrades are not yet active,
+- the first death can occur anywhere.
+
+The game does not force an early loss. An extremely skilled player may defeat the Shogun and reach the Heart before dying. Without awakened Returning Blood, no Binding can be broken; the Heart becomes the exceptional first-death/awakening endpoint and the normal six-Binding campaign begins afterward.
 
 # Permanent progression
 
@@ -224,6 +251,52 @@ Launch Relics:
 - all 10 obtainable before the canonical story ending,
 - routine swaps at the Forge before a run and after Keeper/Twin Maws, plus immediate equip-or-keep on a new discovery.
 
+# Narrative delivery scope
+
+Akio is a **silent protagonist** for the entire game:
+
+- no spoken dialogue,
+- no response text,
+- no dialogue choices,
+- no internal monologue.
+
+NPCs, intelligent enemies, minibosses, and bosses may speak. Akio's decisions are communicated through action and the player's continuation of the mission.
+
+The Shogun relationship uses **7 awakened confrontation states**:
+
+1. dismissal,
+2. fascination,
+3. bloodline recognition/recruitment,
+4. possessive anger,
+5. fear beneath contempt,
+6. hatred/desperation,
+7. final confrontation.
+
+The bloodline reveal occurs at the third awakened Shogun encounter. A rare pre-awakening Shogun state exists for a first-attempt mastery clear without replacing campaign progression.
+
+The six Binding clears use **one reusable ritual with six visual/campaign states**. Binding 1 establishes the objective; later states escalate the Heart/prison presentation; Binding 6 leaves zero remaining restraints and activates the seventh-run Heart route.
+
+Strand narrative ownership remains divided by role:
+
+- Keeper — old Court history/guilt,
+- Scribe — evidence/records/corroboration,
+- Raven — Order/duty/mission notices,
+- Undead Samurai — discipline/control,
+- Smith — material/physical consequences,
+- Peddler — salvage/human cost.
+
+Mandatory campaign facts are told directly. The Discovery Board carries optional depth.
+
+Working narrative volume:
+
+- ~5 major controlled in-engine sequences,
+- ~30–36 major Strand conversations,
+- ~4–6 short reactive line sets per Strand NPC,
+- ~20–25 substantive Lore / Records entries,
+- one final pre-Heart state/conversation per Strand NPC,
+- ~15,000–20,000 narrative words,
+- no full spoken-dialogue voice-acting requirement.
+
 # The Strand
 
 Persistent NPCs:
@@ -259,7 +332,7 @@ Each region generates one optional miniboss opportunity from its two candidates.
 
 The Court historically destroyed one of seven Heart Bindings. Six remain when Akio begins.
 
-The first six successful Binding runs each destroy one remaining Binding. After all six are gone, the seventh successful story route continues from the Eclipse Shogun into the true-final Heart with the same active build.
+After Returning Blood awakens, the first six successful Binding runs each destroy one remaining Binding. After all six are gone, the seventh successful story route continues from the Eclipse Shogun into the true-final Heart with the same active build.
 
 Heart approach, Binding-completion spaces, and the Heart encounter are outside the 33 counted regional chambers.
 
@@ -270,16 +343,17 @@ The true-final Heart has two conceptual forms:
 
 Destroying the Heart ends Beast Blood, stops the Shogun's reconstruction, ends the Blood Moon, and leaves Akio mortal.
 
+Akio remains silent through the ending. A strong final visual inversion is his return through the weakening barrier alive rather than through another reconstruction.
+
 Completed saves remain playable; repeat normal/Heart runs do not create additional canon.
 
 # Current open production scope
 
-The run-build, reward/economy, boss-reward, Relic-acquisition, route, standard-encounter architecture, regional enemy-availability rule, and **permanent-progression content structure** are complete at paper-design depth.
+The run-build, reward/economy, boss-reward, Relic-acquisition, route, standard-encounter architecture, regional enemy-availability rule, permanent-progression content structure, first-attempt behavior, and **narrative-delivery package** are complete at paper-design depth.
 
-The remaining scope closes in dependency order:
+The remaining top-level scope pass is:
 
-1. **Narrative delivery/campaign presentation** — define the authored scene/dialogue/codex/Binding/ending package and production volume.
-2. **Endgame/postgame/release package** — define repeat Heart access/rewards, completion goals, and release UI/presentation.
+1. **Endgame/postgame/release package** — repeat Heart access/rewards, completed-save behavior, completion goals/achievements, front-end/settings/credits requirements, and whether any launch modifier/challenge layer is required.
 
 Detailed standard-encounter authoring, encounter-pool counts, clear-time tuning, and full-run time validation remain a later content/playtest pass once those encounters are actually being produced.
 
@@ -287,4 +361,4 @@ Detailed standard-encounter authoring, encounter-pool counts, clear-time tuning,
 
 # Deferred implementation / tuning
 
-Final encounter scripts/counts, frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, final upgrade costs, exact Relic mastery thresholds, exact Bloodwell/Blood Mirror percentages, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
+Final encounter scripts/counts, frame data, hitboxes, damage/posture values, status durations, Blood values, route percentages, Technique offer rates, economy/recovery values, Mist/Scroll quantities, final upgrade costs, exact Relic mastery thresholds, exact Bloodwell/Blood Mirror percentages, exact dialogue scripts, localization line counts, animation timing, VFX density, audio timing, and final HUD layout remain implementation/playtest work under their owning authorities.
