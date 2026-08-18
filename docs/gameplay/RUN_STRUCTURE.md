@@ -35,6 +35,7 @@ related:
   - GAMEPLAY-RELICS
   - GAMEPLAY-ITEMS-REWARDS
   - NARRATIVE-DELIVERY
+  - OVERVIEW-ENDGAME-POSTGAME-RELEASE
   - CONTENT-ROOM-TYPES
   - CONTENT-AREA1-OVERVIEW
   - CONTENT-AREA2-OVERVIEW
@@ -48,7 +49,7 @@ related:
 
 A standard post-awakening run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
 
-A run ends through death, successful destruction of one Heart Binding after the Shogun, completion of an unlocked true-final Heart route, or another explicitly designed return condition.
+A run ends through death, successful destruction of one Heart Binding after the Shogun, completion of the first true-final Heart route, a postgame Shogun-ending expedition, or a postgame Heart-suppression clear.
 
 The campaign takes place beneath the Blood Moon. The game does not define how much ordinary time passes between repeated runs.
 
@@ -86,7 +87,7 @@ The intended full route is:
 3. Kagutsuchi Court
 4. Eclipse Shogun
 5. temporary access to the Heart chamber
-6. one Binding completion during the first six successful post-awakening clears, or the unlocked true-final Heart encounter after all six Bindings are destroyed
+6. one Binding completion during the first six successful post-awakening clears, the canonical true-final Heart encounter after all six Bindings are destroyed, or an approved postgame endpoint after Story Complete
 
 The introductory first attempt uses this **same complete regional flow**. It is not restricted to a short Hushiro-only path.
 
@@ -338,7 +339,7 @@ After all six remaining Bindings are destroyed, the seventh successful story run
 
 Heart approach spaces, the Binding-completion chamber, and the true-final Heart encounter are specialized endgame content outside Kagutsuchi's 11 counted chambers. The Shogun does not provide ordinary current-run power during the first six Binding clears because those runs end through the Binding ritual.
 
-For the seventh story run, the Shogun-to-Heart handoff uses the partial final-encounter recovery prototype owned by `ITEMS_AND_REWARDS.md`: restore **30% max Health and 50% max Spirit**, then enforce minimum Heart-entry floors of **40% max Health and 60% max Spirit**. This preserves a strong Shogun clear as an advantage while keeping the Heart viable after a narrow Shogun victory. Blood is not automatically refilled unless later Heart encounter design explicitly requires a different rule.
+For the seventh story run and postgame Heart-suppression routes, the Shogun-to-Heart handoff uses the partial final-encounter recovery prototype owned by `ITEMS_AND_REWARDS.md`: restore **30% max Health and 50% max Spirit**, then enforce minimum Heart-entry floors of **40% max Health and 60% max Spirit**. This preserves a strong Shogun clear as an advantage while keeping the Heart viable after a narrow Shogun victory. Blood is not automatically refilled unless later Heart encounter design explicitly requires a different rule.
 
 ## Approved duration target
 
@@ -350,7 +351,7 @@ Supporting targets:
 - typical successful Binding run: approximately 45–50 minutes,
 - cautious or first successful clear: approximately 50–60 minutes,
 - standard successful-run ceiling: runs should not routinely exceed 60 minutes,
-- seventh story run with the Heart: approximately 55–60 minutes, with slower successful attempts able to approach 65 minutes.
+- Heart route / Heart-suppression run: approximately 55–60 minutes, with slower successful attempts able to approach 65 minutes.
 
 The two-form Heart continuation should add approximately 8–12 minutes to the established Shogun route rather than functioning as another full region.
 
@@ -456,8 +457,6 @@ After Returning Blood awakens, the main campaign requires six successful Binding
 
 After the sixth Binding is destroyed, the next successful full run becomes the seventh and final story run. No Binding remains, so Akio does not repeat the extraction ritual or automatically dissolve after the Shogun. He continues directly into the Heart encounter with the same active build.
 
-The Shogun is not permanently killed through a separate anti-regeneration method before the Heart. Destroying the Heart makes Beast Blood inert, stops his reconstruction, frees him from the Blood's influence, and allows his body to die permanently.
-
 The six-clear requirement is a roguelite mastery target rather than six unique story missions. Continued play is supported through alternate Blood Aspects, Techniques, Prosthetics, Relics, routes, rewards, persistent upgrades, and increasing player consistency.
 
 The base game does not require island-wide visual transformations, universal enemy modifiers, new regional environment sets, or new enemy families after every Binding clear.
@@ -475,34 +474,44 @@ The Heart encounter has exactly two conceptual forms:
 
 The Heart is not a humanoid swordsman and does not add a separate weak-point subsystem. Exact attacks, timings, posture behavior, transitions, arena rules, animation lists, and tuning remain later encounter-design and playtest work.
 
-Returning Blood's rejection of the Heart may support the final narrative and visual resolution without creating a new one-off player mechanic.
+Returning Blood's rejection of the Heart supports the final severance of its ability to create and spread new Beast Blood without creating a new one-off player mechanic.
 
 ## First Heart victory and ending
 
-The first true-final Heart victory canonically completes the story.
+The first true-final Heart victory canonically completes the main story.
 
-Destroying the Heart makes active Beast Blood inert across the island. Its death:
+Akio destroys the Heart's manifested combat body and reduces it to a faint regenerating remnant. The permanent victory is that the Heart can never again produce, release, or spread **new Beast Blood**.
 
-- stops the Shogun's reconstruction and allows him to die permanently,
-- releases corrupted inhabitants before their unnaturally sustained bodies fail,
-- collapses corrupted beasts and failed bodies,
-- allows Yomori's lingering spirits to pass on,
-- ends the supernatural Blood Moon cycle,
-- and allows the containment barrier to weaken safely.
+Consequences:
 
-Akio survives in his current complete human body, but Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction end with the source. He becomes mortal.
+- the Shogun's plan to spread Beast Blood to the mainland is permanently defeated,
+- the Court extraction cycle can never create new bearers again,
+- Beast Blood can no longer expand beyond the existing population,
+- the Heart's future activity is reduced to a local suppression/containment problem,
+- existing Beast Blood remains fully active in Akio, the Shogun, and other existing bearers.
+
+Akio retains Returning Blood, Blood Aspects, supernatural regeneration, and reconstruction. The Shogun retains his established reconstruction. Existing corrupted enemies and other bearers are not erased by the ending.
 
 Akio remains silent. The ending and credits follow the first Heart victory.
 
-## Postgame runs
+## Canonical postgame runs
 
-After the story is completed, the save remains playable. Akio may continue normal roguelite runs and may repeat the Heart route.
+After Story Complete, Akio continues returning to the island to monitor existing Beast Blood threats and suppress the Heart's physical regrowth.
 
-Repeat Heart victories are gameplay challenges only. They do not advance the story, create another canonical ending, imply another Heart, or reverse the completed ending.
+The Boat provides two postgame run goals before departure:
 
-The postgame must provide a clear choice or condition determining whether a completed run ends after the Shogun or continues into the Heart. The exact access control, repeat rewards, records, completed-save framing, and required UI belong to the postgame/release-package decision.
+1. **Standard Expedition** — the normal three-region route ends after defeating the Shogun.
+2. **Heart Suppression** — the normal route continues from the Shogun into the regenerated Heart manifestation.
 
-Additional difficulty settings, run modifiers, enemy variants, room variants, challenge restrictions, and special challenge systems are deferred beyond the initial release unless deliberately promoted later.
+These labels are approved working player-facing names and may receive final copy polish without reopening the structure.
+
+A repeat Heart-suppression clear is canonical containment activity. It does not create another ending or restore the Heart's ability to make new Beast Blood.
+
+Postgame does not add a new currency or permanent progression tree. Runs continue to support existing Mist/Scroll/boss-material progression, Relic mastery, Prosthetic completion, Blood Mirror completion, Technique discovery, trials, records, and build experimentation.
+
+The launch game does **not** require Heat/Pact-style modifiers, New Game+, endless mode, daily challenges, enemy/room variant packages, an additional Aspect, or another postgame campaign. Those remain post-launch possibilities only if testing/player demand justifies them.
+
+`ENDGAME_POSTGAME_RELEASE.md` owns postgame records, completion goals, achievements, launch front-end/settings/accessibility/credits scope, and explicit deferred features.
 
 ## Run growth
 
@@ -524,7 +533,7 @@ Prosthetic and Relic permanent progression belongs to the Forge rather than a te
 
 ## Reset boundary
 
-The following reset after death or successful Heart Binding return:
+The following reset after death, successful Heart Binding return, Standard Expedition clear, or Heart Suppression clear:
 
 - Corruption where active,
 - Blood Aspect Tier where active,
@@ -549,6 +558,8 @@ The following persist:
 - narrative discoveries and codex progress,
 - persistent currencies and rewards,
 - destroyed Heart Bindings and campaign progress,
-- story-completion state and unlocked postgame Heart access.
+- story-completion state,
+- postgame route access,
+- postgame records and completion progress.
 
 See [Progression](PROGRESSION.md) for system ownership and the persistence matrix.
