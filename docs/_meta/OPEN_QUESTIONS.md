@@ -44,47 +44,56 @@ The common combat layer now has first-playtest Health/Posture/Spirit normalizati
 
 Approved in `docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md`, implementing the qualitative Aspect authorities.
 
-The first-playtest package now gives Wolf, Wraith, and Ronin concrete:
-
-- Tier 0 attack Health/posture/block-posture values,
-- startup/recovery targets,
-- reach/movement targets,
-- Aspect defensive differences,
-- Tier I-IV first-playtest values where approved,
-- Blood Art damage/recovery/geometry targets,
-- repeated-growth values,
-- cross-roster balance targets.
+The first-playtest package now gives Wolf, Wraith, and Ronin concrete Tier 0 attack values, startup/recovery targets, reach/movement targets, defensive differences, Tier I-IV first-playtest values, Blood Art targets, repeated-growth values, and cross-roster balance targets.
 
 Do not reopen the three Aspect identities or these prototype values as planning questions unless implementation/playtesting exposes a concrete problem.
 
-# Current priority — Pass 2B: Technique implementation sheet — NEXT
+## Pass 2B.1 — Technique-family implementation constants — COMPLETE
 
-**Question:** What exact first-playtest values and implementation behavior make all approved Techniques and refinements directly instantiable in Godot?
+Approved in `docs/gameplay/TECHNIQUE_IMPLEMENTATION_BASELINES.md`.
 
-Numericize the existing roster without redesigning it:
+The five existing Technique families now have shared first-playtest implementation rules for:
 
-- 25 Direct Techniques,
+- proc coefficients and multi-hit normalization,
+- Echo delay / replication / propagation,
+- Rupture meter / buildup / trigger payoff,
+- Seal duration / movement restriction / Bind,
+- Rift fuse / intensity / burst progression,
+- Crimson Vulnerable / genuine-backstab payoff / direct-Health conventions,
+- the five approved Cross-family interactions.
+
+The Technique roster itself remains unchanged: 25 Direct, 15 Supporting, 5 Cross-family, 5 Legendary, and 10 refinements.
+
+# Current priority — Pass 2B.2: Individual Direct Technique implementation values — NEXT
+
+**Question:** What exact first-playtest values and remaining per-entry rules should the existing **25 Direct Techniques** use on top of the approved family constants and Wolf/Wraith/Ronin host attacks?
+
+Do not redesign the roster. Work through the five Direct slots in the existing catalog for each family and fill only fields still needed for implementation, including where relevant:
+
+- exact application count or family contribution,
+- direct bonus Health/posture value,
+- secondary geometry/radius/width,
+- internal cooldown only where needed,
+- host-action proc normalization,
+- boss/elite treatment only when shared rules are insufficient,
+- interaction with the five host action slots,
+- any required once-per-action/sequence cap.
+
+Use `TECHNIQUE_IMPLEMENTATION_BASELINES.md` whenever a shared family value already answers the question; do not duplicate new one-off constants unnecessarily.
+
+**Exit condition:** all 25 Direct Techniques can be represented as data/rules on top of Wolf, Wraith, and Ronin without a coder inventing Technique behavior.
+
+## Pass 2B.3 — Supporting / Legendary / refinement implementation values
+
+After the Direct Techniques are concrete, finish the remaining already-approved catalog:
+
 - 15 Supporting Techniques,
-- 5 Cross-family Techniques,
 - 5 Legendary Techniques,
 - 10 refinements.
 
-For each Technique, define only the implementation fields it actually needs, such as:
+The 5 Cross-family Techniques already have their shared first-playtest numeric constants and need only any remaining per-entry implementation fields exposed by the Direct/support pass.
 
-- Health/posture bonus or secondary damage,
-- status magnitude/duration,
-- family buildup/proc threshold,
-- internal cooldown where needed,
-- proc coefficient / multi-hit normalization,
-- geometry or secondary coverage,
-- target/eligibility restrictions,
-- replacement/refinement behavior,
-- interaction with the five host action slots,
-- boss/elite scaling where a special rule is genuinely required.
-
-Prefer shared family-level constants where multiple Techniques use the same mechanic rather than inventing unique numbers for every effect.
-
-**Exit condition:** every Technique and refinement can be represented as data/rules on top of the approved Wolf/Wraith/Ronin host attacks without a coder inventing missing behavior.
+**Pass 2B exit condition:** all 50 Techniques + 10 refinements are directly instantiable in Godot while preserving the approved roster, rarity, prerequisites, family identity, and slot ownership.
 
 # Remaining Pass 2 player-build work
 
