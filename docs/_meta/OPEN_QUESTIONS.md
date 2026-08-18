@@ -32,75 +32,63 @@ Use three decision classes:
 
 A question leaves this file once it has enough of an answer to implement.
 
-# Completed implementation pass
+# Completed implementation passes
 
 ## Pass 1 — Core combat implementation baseline — COMPLETE
 
-The shared first-playtest combat contract is now approved in:
+Approved in `docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md`.
 
-- `docs/gameplay/COMBAT.md` — shared combat rules/vocabulary,
-- `docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md` — first-playtest numeric/common-behavior values.
+The common combat layer now has first-playtest Health/Posture/Spirit normalization, movement/dash/parry/block rules, enemy posture/deathblow rules, backstab geometry/payoff, perilous response classes, proc conventions, and shared status behavior.
 
-The baseline now defines:
+## Pass 2A — Blood Aspect implementation baselines — COMPLETE
 
-- Akio Health/Posture/Spirit,
-- neutral movement and dash values,
-- parry/block/posture-break behavior,
-- normalized standard-enemy Health/posture profiles,
-- enemy posture recovery/deathblow readiness,
-- Deathblow execution safety,
-- shared attack data fields and modifier convention,
-- proc normalization,
-- universal backstab geometry/payoff,
-- perilous-response classes,
-- shared status-refresh conventions.
+Approved in `docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md`, implementing the qualitative Aspect authorities.
 
-Do not reopen these values as planning questions unless implementation/playtesting exposes a concrete problem.
+The first-playtest package now gives Wolf, Wraith, and Ronin concrete:
 
-# Current priority — Pass 2: Player-build implementation sheets
+- Tier 0 attack Health/posture/block-posture values,
+- startup/recovery targets,
+- reach/movement targets,
+- Aspect defensive differences,
+- Tier I-IV first-playtest values where approved,
+- Blood Art damage/recovery/geometry targets,
+- repeated-growth values,
+- cross-roster balance targets.
 
-**Question:** What first-playtest values and exact implementation behavior complete the already-approved player content?
+Do not reopen the three Aspect identities or these prototype values as planning questions unless implementation/playtesting exposes a concrete problem.
 
-This pass should make every launch player-build item instantiable in Godot without inventing missing combat behavior inside code.
+# Current priority — Pass 2B: Technique implementation sheet — NEXT
 
-## 2A. Blood Aspect implementation sheets — NEXT
+**Question:** What exact first-playtest values and implementation behavior make all approved Techniques and refinements directly instantiable in Godot?
 
-Define first-playtest data for **Wolf, Wraith, and Ronin**.
-
-For every Tier 0 sword action and relevant Tier mechanic, define the implementation fields actually needed by Godot, including:
-
-- Health damage,
-- posture damage,
-- block-posture damage,
-- startup / active / recovery timing,
-- reach / geometry,
-- movement or fixed-position behavior,
-- tracking/facing rule,
-- stagger level,
-- proc coefficient,
-- cancel/commitment behavior,
-- Blood/Tier values where applicable,
-- Aspect-specific posture/guard adjustments already allowed by the shared combat rules.
-
-Prefer one consistent data-sheet format across all three Aspects.
-
-**Exit condition:** Wolf, Wraith, and Ronin can each be implemented from their documentation without a coder deciding what an attack mechanically does.
-
-## 2B. Technique implementation sheet
-
-After the Aspect attacks are numeric enough to serve as hosts, fill the implementation fields for:
+Numericize the existing roster without redesigning it:
 
 - 25 Direct Techniques,
 - 15 Supporting Techniques,
 - 5 Cross-family Techniques,
-- 5 Legendaries,
+- 5 Legendary Techniques,
 - 10 refinements.
 
-Define exact first-playtest values for damage/posture bonuses, proc thresholds, status duration, internal cooldowns, normalization/proc coefficients, replacement behavior, and other missing implementation fields.
+For each Technique, define only the implementation fields it actually needs, such as:
 
-Do not redesign the approved roster merely because numbers are being assigned.
+- Health/posture bonus or secondary damage,
+- status magnitude/duration,
+- family buildup/proc threshold,
+- internal cooldown where needed,
+- proc coefficient / multi-hit normalization,
+- geometry or secondary coverage,
+- target/eligibility restrictions,
+- replacement/refinement behavior,
+- interaction with the five host action slots,
+- boss/elite scaling where a special rule is genuinely required.
 
-## 2C. Prosthetic implementation sheet
+Prefer shared family-level constants where multiple Techniques use the same mechanic rather than inventing unique numbers for every effect.
+
+**Exit condition:** every Technique and refinement can be represented as data/rules on top of the approved Wolf/Wraith/Ronin host attacks without a coder inventing missing behavior.
+
+# Remaining Pass 2 player-build work
+
+## Pass 2C — Prosthetic implementation sheet
 
 Define for all 8 Prosthetics and 19 upgrades:
 
@@ -113,7 +101,7 @@ Define for all 8 Prosthetics and 19 upgrades:
 - status values/durations,
 - exact first-playtest upgrade improvements.
 
-## 2D. Relic implementation sheet
+## Pass 2D — Relic implementation sheet
 
 Define for all 10 Relics:
 
@@ -124,7 +112,7 @@ Define for all 10 Relics:
 - any once-per-room/run/reset behavior,
 - first-playtest mastery thresholds if needed for implementation.
 
-## 2E. Corruption / Shrine / Blood numeric sheet
+## Pass 2E — Corruption / Shrine / Blood numeric sheet
 
 Fill any remaining first-playtest values required to instantiate:
 
@@ -132,7 +120,7 @@ Fill any remaining first-playtest values required to instantiate:
 - Resist/Embrace/Stabilize behavior,
 - Tier thresholds,
 - Blood generation/storage,
-- Blood Art costs/effects,
+- Blood Art costs/effects not already owned by the Aspect baseline,
 - interaction with the three approved Aspects.
 
 **Pass 2 exit condition:** every launch player-build item has enough data to instantiate in Godot, even though values remain playtest-tunable.
