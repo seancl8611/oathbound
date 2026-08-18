@@ -4,7 +4,7 @@ title: Progression
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - progression
   - persistence
@@ -18,6 +18,7 @@ topics:
   - relics
   - run-infrastructure
   - heart-bindings
+  - postgame
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-BLOOD-ASPECTS
@@ -28,6 +29,7 @@ related:
   - GAMEPLAY-PROSTHETICS
   - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-STRAND-INTERACTIBLES
+  - OVERVIEW-ENDGAME-POSTGAME-RELEASE
   - META-OPEN-QUESTIONS
 ---
 
@@ -37,9 +39,9 @@ Oathbound uses three progression layers:
 
 1. **run-only build progression**,
 2. **persistent progression between runs**,
-3. **persistent campaign progression**.
+3. **persistent campaign/postgame progression**.
 
-This file owns persistence and progression-system boundaries. Detailed Aspect kits, Technique content, Prosthetic upgrade effects, Relic effects, and reward payouts remain in their own authoritative files.
+This file owns persistence and progression-system boundaries. Detailed Aspect kits, Technique content, Prosthetic upgrade effects, Relic effects, reward payouts, and postgame presentation remain in their own authoritative files.
 
 # Run-only progression
 
@@ -288,7 +290,7 @@ Permanent progression is introduced in stages so the player does not receive eve
 
 ## Introductory attempt
 
-No permanent upgrade interface is active. Akio fights as an ordinary Order swordsman and dies for the first time.
+No permanent upgrade interface is active. Akio fights as an ordinary Order swordsman until his first death/Returning Blood awakening, wherever that occurs in the normal route.
 
 ## First return to the Strand
 
@@ -330,7 +332,7 @@ Unlock the final permanent-progression band:
 - Blood Mirror Node 3 / Blood Discipline becomes available for each unlocked Aspect,
 - all permanent progression systems are now structurally available.
 
-The remaining Binding clears do **not** need to introduce additional foundational permanent systems. Repeated runs instead support completing favored Bloodwell nodes, Prosthetic paths, Relic mastery, Blood Mirror progression, Relic collection, trials, and other already-approved persistent goals before the seventh story run into the Heart.
+The remaining Binding clears and postgame do **not** introduce additional foundational permanent systems. Repeated runs instead support completing Bloodwell nodes, Prosthetic paths, Relic mastery, Blood Mirror progression, Relic collection, trials, Technique discovery, records, and 100% completion goals.
 
 # Relic acquisition cadence
 
@@ -348,24 +350,31 @@ Exact Relic identities within those acquisition slots remain content sequencing 
 
 The following may persist or unlock content but are not separate permanent upgrade trees:
 
-- Technique-pool unlocks,
+- Technique-pool unlocks and discovery records,
 - Blood Cavern / Blood Mirror trial completion,
 - Relic collection unlocks,
 - Discovery Board and codex progress,
 - Merchant stock/service state where approved,
 - narrative discoveries,
 - Heart Binding campaign state,
-- story and postgame state.
+- Story Complete state,
+- postgame route access,
+- records/personal bests,
+- achievement/completion progress.
 
-The Blood Cavern is a training/trial space. The Discovery Board is a knowledge archive. The Merchant is a service. The Boat is run-start confirmation.
+The Blood Cavern is a training/trial space. The Discovery Board is a knowledge/archive/records surface. The Merchant is a service. The Boat remains run-start confirmation and postgame run-goal selection.
 
-# Heart Binding campaign progression
+# Heart Binding and postgame progression
 
 The Heart was imprisoned by seven Bindings. The Court destroyed the outermost before the game, leaving six intact.
 
 Each successful Binding run destroys one remaining Binding. Failed runs do not advance the Binding count.
 
 After all six are destroyed, the next successful full route becomes the seventh and final story run and continues from the Eclipse Shogun into the Heart.
+
+The first Heart victory sets **Story Complete** and permanently ends the Heart's ability to produce/spread new Beast Blood. Existing Beast Blood remains active.
+
+After Story Complete, postgame progression tracks Standard Expedition clears, Heart Suppression clears, personal bests, collection/mastery completion, and 100% goals. Postgame does not create another campaign currency or progression tree.
 
 Heart Bindings are campaign state, not currency, and cannot be spent or lost.
 
@@ -384,11 +393,11 @@ Trials may not:
 
 # Return processing
 
-Returning Blood reconstructs Akio at the Strand after failed runs and successful Binding completions.
+Returning Blood reconstructs Akio at the Strand after failed runs and successful Binding completions. Returning Blood remains active after Story Complete, so postgame deaths use the same established reconstruction logic.
 
 Persistent rewards are saved **when earned**, not only on successful completion. This includes Mist, Scrolls, regional boss materials, Relic mastery, newly discovered Relics, and other explicitly persistent rewards.
 
-A successful Binding return additionally saves Binding progress, clears run-only state, presents results, and triggers relevant hub/codex/Heart updates.
+Successful Binding, Standard Expedition, and Heart Suppression completions save their appropriate campaign/postgame records, clear run-only state, present results, and trigger relevant hub/codex updates.
 
 There is no death tax on already-earned persistent resources.
 
@@ -398,6 +407,8 @@ There is no death tax on already-earned persistent resources.
 |---|---:|---:|
 | Narrative / codex progress | Persists | Persists |
 | Destroyed Bindings | Persists | Persists |
+| Story Complete / postgame access | Persists | Persists |
+| Records / achievement / completion progress | Persists | Persists |
 | Permanent upgrades / unlocks | Persists | Persists |
 | Run Infrastructure upgrades | Persists | Persists |
 | Relic collection / mastery / progression | Persists | Persists |
@@ -414,7 +425,7 @@ There is no death tax on already-earned persistent resources.
 
 # Locked launch permanent-progression scope
 
-The permanent-progression content structure is now complete at paper-design depth:
+The permanent-progression content structure is complete at paper-design depth:
 
 - **10 Akio nodes**,
 - **8 Run Infrastructure nodes**,
@@ -424,6 +435,6 @@ The permanent-progression content structure is now complete at paper-design dept
 - exactly **6 boss-material-gated Bloodwell nodes**,
 - staged availability from first return → Keeper → Twin Maws → first Binding clear.
 
-Remaining work is balance/content realization: exact numerical values, final Mist prices, mastery kill thresholds, individual Blood Mirror effects within the approved node roles, exact Relic-to-source sequencing, UI polish, and playtest tuning.
+Remaining work is balance/content realization: exact numerical values, final Mist prices, mastery kill thresholds, individual Blood Mirror effects within approved node roles, exact Relic-to-source sequencing, UI polish, and playtest tuning.
 
-The next top-level scope dependency is **narrative delivery and campaign presentation**, as tracked in `docs/_meta/OPEN_QUESTIONS.md`.
+Top-level progression/postgame architecture is closed. The active design sequence is now encounter authoring and content realization under `docs/_meta/OPEN_QUESTIONS.md`.
