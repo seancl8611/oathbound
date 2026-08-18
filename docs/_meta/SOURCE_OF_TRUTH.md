@@ -25,6 +25,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 | Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
 | Introductory first-attempt rules and pre-awakening exceptions | `docs/gameplay/FIRST_ATTEMPT.md` |
 | Blood Aspect system mechanics | `docs/gameplay/BLOOD_ASPECTS.md` |
+| Shared Blood Aspect first-playtest implementation values | `docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md` |
 | Shared Blood Aspect weapon-kit model | `docs/gameplay/ASPECT_WEAPON_KIT_MODEL.md` |
 | Blood Aspect evaluation and roster-comparison guidelines | `docs/gameplay/ASPECT_IDENTITY_GUIDELINES.md` |
 | Wolf qualitative Tier 0 weapon kit | `docs/gameplay/WOLF_ASPECT.md` |
@@ -88,7 +89,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 
 ## Conflict rule
 
-When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement.
+When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior.
 
 If the current design genuinely does not answer a conflict and the decision affects scope, add one concise question to `OPEN_QUESTIONS.md`.
 
