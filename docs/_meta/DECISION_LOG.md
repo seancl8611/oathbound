@@ -4,7 +4,7 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - decisions
   - design-history
@@ -13,6 +13,41 @@ topics:
 # Decision Log
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
+
+## 2026-08-18 — Silent protagonist, unscripted first attempt, and launch narrative delivery locked
+
+Akio is now explicitly a **fully silent protagonist**. He has no spoken dialogue, written responses, dialogue choices, internal monologue, or narrated thoughts. NPCs, intelligent enemies, minibosses, and bosses may speak; Akio communicates through action, stillness, physical reaction, and continued opposition.
+
+The first attempt is **not a scripted prologue route**. The player begins directly in the normal Hushiro route and may progress through the complete 12 / 10 / 11 regional structure using normal routing, authored encounters, Technique rewards, Rest/Shop/Treasure/miniboss flow, persistent rewards, and other eligible run systems.
+
+Pre-awakening loadout/rules:
+
+- base katana core kit,
+- **Beast-Bane Whistle** as the default starting Prosthetic,
+- ordinary Technique rewards remain available and modify the base-katana action tags,
+- Shrines remain valid rooms and use their no-Aspect/below-full support result,
+- Blood Aspects, Corruption/Tier growth, Blood, Blood Arts, Relic loadout, and permanent upgrades are not active yet.
+
+The first death is not forced at any normal-route enemy or chamber. A mastery-level player may theoretically defeat Keeper, Twin Maws, and the Eclipse Shogun and reach the Heart before dying. Without awakened Returning Blood the player cannot break a Binding; Heart contact becomes the exceptional first-death/awakening endpoint, and the normal six-Binding campaign begins afterward with no Binding progress skipped.
+
+Launch narrative delivery is now scoped at production-planning depth:
+
+- approximately **5 major controlled in-engine sequences**,
+- **7 awakened Shogun confrontation states + 1 rare pre-awakening fallback**,
+- bloodline recognition/recruitment at the third awakened Shogun confrontation,
+- **6 visual/campaign states of one reusable Binding ritual**,
+- approximately **30–36 major Strand conversations**,
+- approximately **4–6 short reactive line sets per Strand NPC**,
+- approximately **20–25 substantive Lore / Records entries** beyond normal gameplay codex descriptions,
+- one final pre-Heart state/conversation for each Strand NPC,
+- approximately **15,000–20,000 narrative words**,
+- text-led dialogue with **no full spoken-dialogue VO requirement**.
+
+Mandatory story information is communicated directly; the Discovery Board owns optional depth. The Heart does not speak. The ending remains action-led: destroying the Heart ends Returning Blood, stops Shogun reconstruction, and leaves Akio mortal and silent.
+
+This closes narrative-delivery scope and advances the remaining top-level question to endgame/postgame/release scope.
+
+**Authority:** `docs/gameplay/FIRST_ATTEMPT.md`, `docs/narrative/NARRATIVE_DELIVERY.md`, `docs/characters/AKIO.md`, `docs/lore/RETURNING_BLOOD.md`, `docs/lore/ECLIPSE_SHOGUN.md`.
 
 ## 2026-08-17 — Launch permanent-progression content package locked
 
@@ -62,15 +97,13 @@ The route's opening/main/pre-boss bands do **not** create a mandatory three-tier
 
 Regional escalation comes primarily from the enemies and encounter compositions authored for later regions rather than automatic threat-budget inflation. Encounter counts and every individual script are deferred until encounter production.
 
-Regional enemy availability is governed by the later-restored native-roster/evolved-variant rule above rather than an unrestricted cross-region reuse matrix.
-
-**Authority:** `docs/gameplay/RUN_STRUCTURE.md`, regional `docs/content/area_*/ENEMIES.md`, `docs/_meta/OPEN_QUESTIONS.md`.
+**Authority:** `docs/gameplay/RUN_STRUCTURE.md`, regional `docs/content/area_*/ENEMIES.md`.
 
 ## 2026-08-17 — Launch consumables cut; remaining design refocused on scope closure
 
 Oathbound does **not** include a general run-consumable inventory or one-use item reward layer at launch. Shops, Treasure, recovery/capacity, Technique rerolls, Techniques, Relics, and Prosthetics already cover the intended tactical/reward roles without another inventory/UI subsystem.
 
-The remaining design sequence was refocused away from isolated minor questions. Later decisions further clarified which encounter work belongs to design scope versus encounter production.
+The remaining design sequence was refocused away from isolated minor questions and toward connected launch-scope passes.
 
 **Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`, `docs/gameplay/PROGRESSION.md`, `docs/_meta/OPEN_QUESTIONS.md`.
 
@@ -92,7 +125,7 @@ Only the currently equipped Relic earns future mastery kills; previously earned 
 
 ## 2026-08-17 — Keeper and Twin Maws current-run Boss Rewards locked
 
-Keeper of the Gate and Twin Maws now use the same separate **three-card current-run Boss Reward** after victory. Persistent Mist/material payouts and automatic regional-transition recovery remain separate.
+Keeper of the Gate and Twin Maws use the same separate **three-card current-run Boss Reward** after victory. Persistent Mist/material payouts and automatic regional-transition recovery remain separate.
 
 The player chooses exactly one of:
 
@@ -102,7 +135,7 @@ The player chooses exactly one of:
 
 Enhanced Capacity uses the existing Treasure-tier values: **+20% starting max Health** or **+25% starting max Spirit**, including matching current resource. Ordinary Gold, Mist, Scrolls, pure healing, and permanent upgrades are excluded from the three-card reward.
 
-The exact cards are revealed only after the mandatory boss fight rather than previewed before entry. Keeper naturally functions as early build establishment while Twin Maws uses the same rules to refine a more mature build before Kagutsuchi.
+The exact cards are revealed only after the mandatory boss fight rather than previewed before entry.
 
 **Authority:** `docs/gameplay/ITEMS_AND_REWARDS.md`.
 
