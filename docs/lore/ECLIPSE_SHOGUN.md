@@ -4,7 +4,7 @@ title: Eclipse Shogun
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-18
 topics:
   - eclipse-shogun
   - beast-blood
@@ -12,11 +12,13 @@ topics:
   - royal-bloodline
   - final-boss
   - heart-bindings
+  - narrative-delivery
 related:
   - CONTENT-AREA3-BOSS
   - LORE-BEAST-BLOOD
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
+  - NARRATIVE-DELIVERY
 ---
 
 # Eclipse Shogun
@@ -41,7 +43,7 @@ Their child developed while the mother already carried Beast Blood and inherited
 
 That bloodline survived outside containment and eventually produced Akio.
 
-The child's gender, name, protectors, escape details, and later life remain intentionally undefined until the narrative presentation requires them.
+The child's gender, name, protectors, escape details, and later life remain intentionally undefined.
 
 ## Responsibility and false mastery
 
@@ -72,7 +74,7 @@ He believes Beast Blood overcame disease, injury, age, and natural death. In his
 
 He intends to incorporate those who accept his salvation and defeat or transform those who resist.
 
-The exact method and timing of his attempt to overcome the barrier remain future narrative design.
+The exact method and timing of his attempt to overcome the barrier remain future narrative detail rather than current gameplay scope.
 
 ## Relationship to the island and Heart
 
@@ -86,16 +88,32 @@ Existing Beast Blood does not require renewed doses or a continuous physical cha
 
 Neither Akio nor the Shogun initially understands their blood relationship.
 
-Their repeated encounters develop through:
+Their relationship develops through four broad emotional stages:
 
 1. **Dismissal** — the Shogun sees Akio as another restrained Order warrior.
 2. **Fascination** — Akio's returns and controlled Aspects reveal an unprecedented bearer.
 3. **Recognition and recruitment** — the Shogun recognizes the escaped royal bloodline and attempts to claim Akio as an heir, champion, or proof of his future kingdom.
-4. **Fear and hatred** — Akio rejects that inheritance, repeatedly defeats him, and attacks the Heart.
+4. **Fear and hatred** — Akio silently rejects that inheritance, repeatedly defeats him, and attacks the Heart.
 
 The Shogun's offer is sincere within his corrupted worldview but possessive rather than loving or equal. Akio's refusal proves that bloodline does not create ownership or allegiance.
 
-Exact reveal timing, dialogue allocation, conversation count, and cinematic presentation remain part of the narrative-presentation scope question.
+Akio is a silent protagonist and never answers the Shogun verbally. The Shogun therefore carries the spoken side of their relationship while Akio's refusal is expressed through continued action.
+
+## Seven campaign confrontation states
+
+`NARRATIVE_DELIVERY.md` owns the detailed delivery, but the approved story cadence is:
+
+1. **Shogun 1 — Dismissal**
+2. **Shogun 2 — Fascination with Akio's return/control**
+3. **Shogun 3 — Bloodline recognition and recruitment**
+4. **Shogun 4 — Possessive anger after refusal**
+5. **Shogun 5 — Fear beneath contempt as Bindings fall**
+6. **Shogun 6 — Hatred/desperation before the final Binding**
+7. **Shogun 7 — Brief final confrontation before the Heart**
+
+A rare additional pre-awakening dialogue state may occur if an exceptionally skilled player reaches the Shogun on Akio's first attempt before any death. It does not advance or replace the seven-state awakened campaign sequence.
+
+The bloodline reveal occurs at the third awakened Shogun confrontation. Keeper/Scribe evidence may corroborate the claim afterward without exhaustively defining the escaped child's life.
 
 ## Character and encounter identity
 
@@ -120,11 +138,13 @@ This is sufficient for current full-game scope. His exact body design, costume, 
 
 The Shogun reconstructs between the first six successful Heart Binding clears so he remains the repeated run climax. His existing Beast Blood is sufficient; no new dose or physical connection is required.
 
-The exact reconstruction presentation is part of the narrative-presentation scope question.
+Narrative presentation should let later encounters acknowledge the fact that both Akio and the Shogun return, without requiring a separate Shogun-reconstruction cinematic after every clear.
 
 After the sixth Binding is destroyed, the seventh successful story run defeats the Shogun's current body and continues directly into the true-final Heart encounter.
 
 The Shogun does not require a separate permanent-death mechanic. Destroying the Heart makes Beast Blood inert, stops his attempted reconstruction, releases him from the Blood's influence, and allows his unnaturally sustained body to die permanently.
+
+The canonical ending should explicitly show or strongly communicate the first failure of his reconstruction.
 
 ## Current boundaries
 
@@ -136,6 +156,9 @@ Locked:
 - escaped royal bloodline,
 - false mastery,
 - repeated relationship with Akio,
+- silent Akio / spoken Shogun relationship,
+- seven awakened confrontation states plus rare pre-awakening fallback,
+- bloodline reveal at the third awakened Shogun encounter,
 - regal and controlled character direction,
 - deliberate intelligent inhuman escalation,
 - reconstruction between the first six Binding clears,
@@ -144,8 +167,7 @@ Locked:
 Deferred:
 
 - exact barrier-breach plan,
-- bloodline reveal presentation,
-- repeated dialogue count,
-- reconstruction presentation,
+- exact dialogue scripts/line counts,
+- exact reconstruction visual treatment beyond narrative scope,
 - exact encounter structure and moveset,
 - final visual concept and production list.
