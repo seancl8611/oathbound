@@ -4,7 +4,7 @@ title: The Eclipse Shogun — Boss Encounter
 category: content
 status: draft
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - area-3
   - eclipse-shogun
@@ -13,11 +13,13 @@ topics:
   - heart-bindings
   - campaign-clears
   - chamber-11
+  - postgame
 related:
   - LORE-ECLIPSE-SHOGUN
   - CONTENT-AREA3-TRUE-FINAL-HEART
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-ITEMS-REWARDS
+  - OVERVIEW-ENDGAME-POSTGAME-RELEASE
   - ART-MILESTONE-06
 ---
 
@@ -28,6 +30,8 @@ related:
 The Eclipse Shogun is the principal boss of Kagutsuchi Court and the central character antagonist of Oathbound.
 
 He is the fixed **Kagutsuchi Chamber 11** endpoint. Defeating his current body completes the 33-counted-chamber three-region combat route and opens the specialized path to the Heart chamber. During the first six successful clears, the player proceeds to one Heart Binding completion. During the seventh successful story run, the active run continues into the true-final Heart encounter.
+
+After Story Complete, Standard Expedition ends after this fight while Heart Suppression continues from the Shogun into the regenerated Heart manifestation.
 
 Heart approach, Binding-completion spaces, and the true-final Heart are outside Kagutsuchi's 11 counted regional chambers.
 
@@ -46,7 +50,7 @@ The encounter supports campaign-level progression rather than narratively resett
 3. recognition/recruitment through the escaped royal bloodline,
 4. fear and hatred after Akio rejects him and attacks the Heart.
 
-Exact dialogue, branching, voice acting, and cinematic presentation remain part of the narrative-delivery scope question.
+Exact dialogue and cinematic implementation remain owned by `NARRATIVE_DELIVERY.md`.
 
 ## Character direction
 
@@ -62,7 +66,7 @@ Kokushibo from *Demon Slayer* remains a high-level reference for aristocratic me
 
 ## Encounter-design boundary
 
-The exact phase count, phase names, weapon, attacks, transformation anatomy, arena-control rules, posture behavior, transitions, animation list, and bespoke VFX requirements are not locked during the current full-game scoping pass.
+The exact phase count, phase names, weapon, attacks, transformation anatomy, arena-control rules, posture behavior, transitions, animation list, and bespoke VFX requirements are not yet locked.
 
 Later encounter design must preserve these boundaries:
 
@@ -95,9 +99,9 @@ The arena must support clean martial readability, later Beast Blood escalation, 
 
 Shogun defeat leads to the extraction apparatus / Heart Binding ritual. The run ends through Akio's dissolution and Strand reconstruction. The Shogun grants his persistent Mist/material rewards but no additional ordinary current-run power because the run is ending.
 
-### Seventh story run
+### Seventh story run and postgame Heart Suppression
 
-The same active build continues directly toward the true-final Heart.
+The same active build continues directly toward the Heart.
 
 The approved Shogun→Heart handoff restores:
 
@@ -113,15 +117,13 @@ This is a partial reset, not a full refill. Blood is not automatically refilled 
 
 ## Reconstruction and campaign role
 
-The Shogun reconstructs between the first six successful clears. Existing Beast Blood is sufficient and does not require a new dose or physical channel from the Heart.
+The Shogun reconstructs between successful clears. Existing Beast Blood is sufficient and does not require a new dose or physical channel from the Heart.
 
-The base game does not require a different Shogun fight after every destroyed Binding. Limited dialogue/presentation/VFX intensity or reconstruction instability may vary if later approved.
+The first canonical Heart victory permanently prevents the Heart from creating or spreading **new Beast Blood**, but existing Beast Blood remains active. The Shogun therefore retains reconstruction after Story Complete and remains a canonical postgame threat.
 
-Destroying the Heart makes Beast Blood inert, stops Shogun reconstruction, and causes his permanent death.
+The base game does not require a different Shogun fight after every Binding or postgame clear. Dialogue/presentation may become more repeat-focused after Story Complete without creating another story arc.
 
 ## Production boundary
-
-The Shogun requires dedicated concept and encounter-design review before final Milestone 6 quotation.
 
 Current production may scope:
 
@@ -131,6 +133,7 @@ Current production may scope:
 - at least one materially inhuman later state,
 - royal arena,
 - persistent boss-material reward representation,
-- post-boss handoff to the Heart chamber.
+- post-boss handoff to the Heart chamber,
+- repeat/postgame presentation support.
 
 Final character sheets, phase-specific sprite sets, animation counts, bespoke VFX, and arena states wait for approved encounter design.
