@@ -4,7 +4,7 @@ title: Hushiro Gate Village
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-18
 topics:
   - area-1
   - hushiro
@@ -20,6 +20,7 @@ related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-ITEMS-REWARDS
   - CONTENT-ROOM-TYPES
+  - CONTENT-AREA1-IMPLEMENTATION-BASELINE
 ---
 
 # Hushiro Gate Village
@@ -108,7 +109,7 @@ Hushiro teaches and tests:
 
 ## Approved prototype run structure
 
-Hushiro uses **12 counted chambers** in the current prototype structure:
+Hushiro uses **12 counted chambers**:
 
 - **Chambers 1–3:** opening stretch
 - **Chambers 4–8:** main stretch
@@ -119,8 +120,21 @@ Chamber 1 is a fixed standard combat encounter followed by a Technique reward. O
 
 The route network must contain at least one Shrine, one Shop, one Rest, one miniboss opportunity, and three Technique-reward opportunities total including Chamber 1. These are route opportunities rather than mandatory visits. Chamber 11 guarantees access to a meaningful pre-boss preparation option without requiring automatic full recovery.
 
-The region currently targets approximately **14–16 minutes** of active run time. `RUN_STRUCTURE.md` owns chamber eligibility/branching and `ITEMS_AND_REWARDS.md` owns the approved first room/reward/economy/recovery prototype. Final tuned percentages, encounter compositions, and clear times remain playtest work.
+The region targets approximately **14–16 minutes** of active run time. `RUN_STRUCTURE.md` owns chamber eligibility/branching and `ITEMS_AND_REWARDS.md` owns room/reward/economy/recovery rules.
+
+## First-playtest implementation package
+
+`HUSHIRO_IMPLEMENTATION_BASELINE.md` now defines the implementation-ready gameplay package:
+
+- 10 authored multi-wave standard encounters,
+- roughly 10–18 total enemies in normal encounters with a six-active-enemy readability ceiling,
+- five reusable standard Combat footprints,
+- functional/special-room inventory,
+- Village Ogre and Collector combat contracts,
+- complete two-phase Keeper combat contract.
+
+Final encounter volume, enemy attack damage, exact wave delay, spawn positioning, and timing remain Godot playtest tuning rather than another paper-design pass.
 
 ## Production relationship
 
-Milestone 1 establishes the base Hushiro combat kit and three enemies. Milestone 2 completes the remaining regional art, shared Shrine foundation, functional room skins, both minibosses, Keeper of the Gate, and enough modular layouts to support the approved 12-chamber prototype route without requiring unique art for every chamber.
+Milestone 1 establishes the base Hushiro combat kit and three enemies. Milestone 2 extends that language into the full standard roster, functional room skins, additional props, miniboss spaces, and the boss arena rather than remaking the regional foundation.
