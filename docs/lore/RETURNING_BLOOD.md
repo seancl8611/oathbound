@@ -143,21 +143,26 @@ After all six remaining Bindings are destroyed, the seventh successful story run
 
 Akio defeats the Shogun's current body and continues into the true-final Heart encounter while the same run remains active.
 
-Returning Blood's established rejection of the Heart may support the final narrative and visual resolution. It does not require a separate new player mechanic or weak-point subsystem.
+Returning Blood's established rejection of the Heart supports the final narrative resolution without requiring a separate new player mechanic or weak-point subsystem.
 
-The first Heart victory destroys the source sustaining Beast Blood.
+The first Heart victory destroys the Heart's manifested combat body and permanently cripples the source's ability to produce, release, or spread **new Beast Blood**. It does not erase Beast Blood already present in existing bearers.
 
-## End of Returning Blood
+## Returning Blood after the ending
 
-When the Heart dies, active Beast Blood becomes inert. Returning Blood can no longer reconstruct Akio, express Blood Aspects, or provide supernatural regeneration.
+Akio retains Returning Blood after the canonical ending.
 
-Akio's current body survives because it is already a complete living human body at the moment the source is destroyed. He does not dissolve or transform into an ordinary corrupted corpse.
+The final victory severs the Heart's ability to create new bearers or extend its curse beyond the existing Beast Blood population, but Akio's inherited active Blood remains part of him. His established benefits therefore remain intact:
 
-Akio becomes mortal. Any later death would be final within the canonical story.
+- Returning Blood reconstruction,
+- Blood Aspects,
+- supernatural regeneration,
+- and the run systems built around them.
 
-This choice completes his contrast with the Shogun: Akio gives up the power to return rather than preserve himself through the curse.
+The same rule applies to the Eclipse Shogun and other existing Beast Blood bearers. Their existing Blood does not disappear merely because the Heart can no longer make more.
 
-After the ending, completed saves may repeat normal runs and the Heart route for gameplay. Those postgame runs do not canonically restore Returning Blood or reverse Akio's mortality. The first Heart victory remains the story's true conclusion.
+The Heart itself is reduced to a faint regenerating remnant. Akio can continue returning to the island after the story to monitor and suppress that regrowth before its local activity becomes dangerous. These postgame expeditions are canonical continuations of the completed story rather than a non-canonical restoration of powers that were lost.
+
+The key permanent consequence is **containment of propagation**: Beast Blood can no longer infect, transform, or be deliberately given to anyone new.
 
 ## Relationship to the Shogun
 
@@ -185,8 +190,9 @@ Akio's refusal remains more important than the lineage itself. Because Akio is s
 - Do not describe revival as consequence-free or imply that the current body survives death.
 - Do not treat Blood Aspects as unrelated magical classes.
 - Do not describe intelligent or deliberate mutation use by another bearer as genuine control equal to Akio's.
-- Do not canonically restore Returning Blood after the Heart has been destroyed.
-- Do not treat repeat postgame Heart runs as additional story events.
+- Do not describe the final Heart victory as making existing Beast Blood inert.
+- Do not remove Returning Blood, Shogun reconstruction, or existing-bearer regeneration after the ending.
+- Do not allow the Heart to create or release new Beast Blood after the canonical ending.
 
 ## Deliberately unresolved
 
@@ -194,4 +200,5 @@ Akio's refusal remains more important than the lineage itself. Because Akio is s
 - how the bloodline remained hidden across generations,
 - the deeper metaphysics behind the first reconstruction and preserved return imprint,
 - whether any other dormant descendants still exist,
+- the exact biological/supernatural mechanism by which the crippled Heart regrows its postgame manifestations,
 - and exact implementation details of first-return visuals beyond the approved narrative-delivery package.
