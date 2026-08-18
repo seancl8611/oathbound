@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - project-identity
   - combat
@@ -13,7 +13,9 @@ topics:
   - relics
   - blood-aspects
   - progression
-  - boss-materials
+  - narrative-delivery
+  - silent-protagonist
+  - first-attempt
   - authored-encounters
   - enemy-lineage
   - heart-bindings
@@ -21,6 +23,7 @@ related:
   - OVERVIEW-DESIGN-PILLARS
   - OVERVIEW-FULL-SCOPE
   - GAMEPLAY-COMBAT
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
@@ -28,6 +31,7 @@ related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-ITEMS-REWARDS
   - LORE-RETURNING-BLOOD
+  - NARRATIVE-DELIVERY
 ---
 
 # Oathbound Game Overview
@@ -38,9 +42,9 @@ The game should feel disciplined, dangerous, elegant, and cursed. Combat readabi
 
 # Premise
 
-Akio is a warrior of the Order sent through a containment barrier onto a cursed Japanese-gothic island whose kingdom once used Beast Blood from the Heart to survive a plague.
+Akio is a silent warrior of the Order sent through a containment barrier onto a cursed Japanese-gothic island whose kingdom once used Beast Blood from the Heart to survive a plague.
 
-Akio unknowingly descends from the royal bloodline that escaped containment. He begins without active Blood powers; his first death during the Blood Moon awakens inherited **Returning Blood** and reconstructs him at the Strand.
+Akio unknowingly descends from the royal bloodline that escaped containment. He begins without active Returning Blood powers; his first death during the Blood Moon awakens inherited **Returning Blood** and reconstructs him at the Strand.
 
 His lineage explains why the power awakens. His discipline and inherited expression explain why he can preserve agency and direct it differently from other Beast Blood users.
 
@@ -50,13 +54,29 @@ Akio remains a swordsman first. Blood Aspects reshape the weapon kit, Techniques
 
 The build should strengthen decisions the player already makes—timing, spacing, posture pressure, parries, movement, deathblows, targeting, and resource use—rather than replace combat fundamentals.
 
+Akio never speaks, supplies dialogue choices, or uses internal monologue. NPCs, intelligent enemies, and bosses carry spoken/written dialogue; Akio is characterized through action, stillness, physical reaction, and refusal.
+
+# First attempt
+
+The first attempt is a **real normal run**, not a scripted prologue route.
+
+- Player control begins directly in the normal Hushiro route.
+- The complete 12 / 10 / 11 regional route remains reachable.
+- Akio uses the base katana kit and starts with **Beast-Bane Whistle** as the default equipped Prosthetic.
+- Blood Aspects, Corruption/Tier progression, Blood, Blood Arts, Relic loadout, and permanent upgrades are not yet active.
+- Technique rewards are available and modify the base katana's normal five action tags.
+- Rest, Shop, Treasure, miniboss, Gold, Mist/Scroll rewards, routing, and other normal room flow remain active where meaningful.
+- Shrines remain usable for their below-full support result, but Embrace/Tier advancement is unavailable before Returning Blood awakens.
+- The first death may happen anywhere the player's actual skill allows.
+
+A mastery-level player may theoretically clear all three regions and defeat the Shogun before dying. Such a player may reach the Heart, but cannot break a Binding without awakened Returning Blood; Heart contact causes the first death/awakening and the normal six-Binding campaign begins afterward.
+
 # Current gameplay shape
 
-- Introductory attempt with base katana combat and no active Blood powers.
-- Returning Blood awakens after the first death and begins the repeated-run loop.
+- Returning Blood awakens after the first death and begins the repeated-run progression loop.
 - Shared combat includes parry, Health/posture, block, dash, stagger, deathblow, genuine rear-hit/backstab classification, and Prosthetic support.
 - Launch Blood Aspects: **Wolf, Wraith, Ronin**.
-- Every normal run begins at Aspect Tier 0; optional Shrine Resist/Embrace progression reaches Tier IV maximum.
+- Every post-awakening normal run begins at Aspect Tier 0; optional Shrine Resist/Embrace progression reaches Tier IV maximum.
 - Blood/Blood Art becomes available only from Tier II onward.
 - Five direct Technique slots: **Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow**.
 - Technique roster: **50 actual Techniques + 10 refinements** across Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct-Health identities.
@@ -111,7 +131,7 @@ Standard Combat rooms use **deliberately authored encounter scripts**. When a Co
 
 Standard enemies are region-native by default. Cross-region continuation uses a separately authored evolved regional variant rather than carrying the unchanged enemy forward or simply increasing its statistics. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's five standard enemies are all native Court units.
 
-The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, and permanent-progression content-volume models are approved as prototype/paper-design targets. Exact values remain playtest-tunable.
+The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, permanent-progression content-volume, first-attempt, and narrative-delivery models are approved as prototype/paper-design targets. Exact values remain playtest-tunable.
 
 A normal successful Binding run targets approximately **45–50 minutes of active time**. Encounter-pool counts and individual encounter scripts remain later content-production/playtest work.
 
@@ -119,13 +139,34 @@ A normal successful Binding run targets approximately **45–50 minutes of activ
 
 The Heart was imprisoned by seven ancient Bindings. The Court destroyed the outermost before the game, leaving six intact.
 
-During each of the first six successful Binding runs, Akio defeats the Eclipse Shogun, reaches the Heart, uses Returning Blood through the Court's extraction apparatus, breaks one remaining Binding, is dissolved by the Heart, and reconstructs at the Strand.
+After Returning Blood awakens, each of the first six successful Binding runs has Akio defeat the Eclipse Shogun, reach the Heart, use Returning Blood through the Court's extraction apparatus, break one remaining Binding, be dissolved by the Heart, and reconstruct at the Strand.
+
+The same ritual uses six escalating visual/campaign states rather than six different mechanisms or missions.
+
+The Shogun relationship uses seven awakened confrontation states: dismissal → fascination → bloodline recognition/recruitment → possessive anger → fear → hatred/desperation → final confrontation. Akio remains silent throughout.
 
 After all six remaining Bindings are destroyed, the seventh successful story run continues directly from the Shogun into the two-form true-final Heart encounter with the same active build.
 
 Destroying the Heart ends Beast Blood, stops Shogun reconstruction, ends the Blood Moon, and leaves Akio mortal in his current human body.
 
 Completed saves remain playable. Repeat normal runs and optional repeat Heart routes do not create additional canon.
+
+# Narrative production shape
+
+The launch narrative package is intentionally bounded:
+
+- silent Akio with zero dialogue/choice/internal-monologue content,
+- approximately **5 major controlled in-engine sequences**,
+- **7 awakened Shogun dialogue states + 1 rare pre-awakening fallback**,
+- **6 visual states** of one reusable Binding ritual,
+- approximately **30–36 major Strand conversations**,
+- approximately **4–6 short reactive line sets per Strand NPC**,
+- approximately **20–25 substantive Lore / Records entries** beyond normal gameplay-codex descriptions,
+- one final pre-Heart conversation/state for each Strand NPC,
+- text-led dialogue with **no full spoken-dialogue VO requirement**,
+- approximately **15,000–20,000 narrative words** as a working writing target.
+
+Mandatory campaign information is communicated directly; the Discovery Board carries optional historical depth rather than required plot comprehension.
 
 # World structure
 
@@ -137,22 +178,22 @@ Completed saves remain playable. Repeat normal runs and optional repeat Heart ro
 
 # Current design focus
 
-Major run-build, reward/economy, route, boss-reward, Relic, standard-encounter architecture, regional enemy-availability rules, and permanent-progression content structure are scoped.
+Major run-build, reward/economy, route, boss-reward, Relic, standard-encounter architecture, regional enemy-availability rules, permanent-progression content structure, first-attempt behavior, and narrative-delivery package are scoped.
 
-The remaining sequence is now:
+The remaining top-level scope question is now:
 
-1. **define narrative delivery / campaign presentation** — introductory death, Returning Blood/bloodline reveal, Shogun/Binding progression, Strand NPC/codex updates, Heart unlock/ending presentation, and narrative production tiers;
-2. **define endgame / postgame / release scope**.
+1. **define endgame / postgame / release scope** — repeat Heart access/rewards, completion goals, completed-save communication, front-end/settings/credits requirements, and whether any launch challenge/modifier layer is actually required.
 
 The actual standard-encounter roster, encounter counts, enemy wave/count tuning, and full-run clear-time validation are intentionally deferred until encounter production.
 
-Exact final balance values, mastery thresholds, frame data, and final scripts remain later work under their owning authorities.
+Exact final balance values, mastery thresholds, frame data, detailed scripts, and final localization/audio implementation remain later work under their owning authorities.
 
 # Source links
 
 - [Design pillars](DESIGN_PILLARS.md)
 - [Full game scope](FULL_GAME_SCOPE.md)
 - [Current design questions](../_meta/OPEN_QUESTIONS.md)
+- [First attempt](../gameplay/FIRST_ATTEMPT.md)
 - [Combat](../gameplay/COMBAT.md)
 - [Blood Aspects](../gameplay/BLOOD_ASPECTS.md)
 - [Progression](../gameplay/PROGRESSION.md)
@@ -161,3 +202,4 @@ Exact final balance values, mastery thresholds, frame data, and final scripts re
 - [Relics](../gameplay/RELICS.md)
 - [Run structure](../gameplay/RUN_STRUCTURE.md)
 - [Returning Blood](../lore/RETURNING_BLOOD.md)
+- [Narrative delivery](../narrative/NARRATIVE_DELIVERY.md)
