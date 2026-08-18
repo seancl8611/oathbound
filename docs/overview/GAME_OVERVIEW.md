@@ -19,9 +19,11 @@ topics:
   - authored-encounters
   - enemy-lineage
   - heart-bindings
+  - postgame
 related:
   - OVERVIEW-DESIGN-PILLARS
   - OVERVIEW-FULL-SCOPE
+  - OVERVIEW-ENDGAME-POSTGAME-RELEASE
   - GAMEPLAY-COMBAT
   - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
@@ -131,9 +133,9 @@ Standard Combat rooms use **deliberately authored encounter scripts**. When a Co
 
 Standard enemies are region-native by default. Cross-region continuation uses a separately authored evolved regional variant rather than carrying the unchanged enemy forward or simply increasing its statistics. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's five standard enemies are all native Court units.
 
-The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, permanent-progression content-volume, first-attempt, and narrative-delivery models are approved as prototype/paper-design targets. Exact values remain playtest-tunable.
+The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, permanent-progression content-volume, first-attempt, narrative-delivery, and postgame/release models are approved as prototype/paper-design targets. Exact values remain playtest-tunable.
 
-A normal successful Binding run targets approximately **45–50 minutes of active time**. Encounter-pool counts and individual encounter scripts remain later content-production/playtest work.
+A normal successful Binding run targets approximately **45–50 minutes of active time**. Heart/Suppression routes target approximately **55–60 minutes**. Encounter-pool counts and individual encounter scripts remain later content-production/playtest work.
 
 # Campaign structure
 
@@ -147,9 +149,22 @@ The Shogun relationship uses seven awakened confrontation states: dismissal → 
 
 After all six remaining Bindings are destroyed, the seventh successful story run continues directly from the Shogun into the two-form true-final Heart encounter with the same active build.
 
-Destroying the Heart ends Beast Blood, stops Shogun reconstruction, ends the Blood Moon, and leaves Akio mortal in his current human body.
+The first Heart victory **does not erase existing Beast Blood**. Akio destroys the Heart's manifested body and permanently removes its ability to produce, release, or spread new Beast Blood. The Heart survives as a faint regenerating remnant. Existing bearers—including Akio and the Shogun—retain their established Blood and reconstruction.
 
-Completed saves remain playable. Repeat normal runs and optional repeat Heart routes do not create additional canon.
+The main story ends because the curse can no longer expand to anyone new or threaten the mainland through propagation.
+
+# Canonical postgame
+
+After Story Complete, Akio canonically continues containment work on the island.
+
+The Boat offers:
+
+- **Standard Expedition** — ends after the Shogun,
+- **Heart Suppression** — continues from the Shogun into the Heart's regenerated manifestation.
+
+Postgame uses existing progression/mastery systems rather than adding another currency/tree. Completion supports full permanent progression, Relic/Prosthetic mastery, Technique/refinement discovery, trials, Discovery Board collection, and Heart victory with all three Aspects.
+
+Launch does not require Heat/Pact-style modifiers, New Game+, endless mode, daily challenges, a fourth Aspect, or another postgame progression layer.
 
 # Narrative production shape
 
@@ -163,6 +178,7 @@ The launch narrative package is intentionally bounded:
 - approximately **4–6 short reactive line sets per Strand NPC**,
 - approximately **20–25 substantive Lore / Records entries** beyond normal gameplay-codex descriptions,
 - one final pre-Heart conversation/state for each Strand NPC,
+- one concise post-ending Heart-regrowth/suppression explanation,
 - text-led dialogue with **no full spoken-dialogue VO requirement**,
 - approximately **15,000–20,000 narrative words** as a working writing target.
 
@@ -178,13 +194,15 @@ Mandatory campaign information is communicated directly; the Discovery Board car
 
 # Current design focus
 
-Major run-build, reward/economy, route, boss-reward, Relic, standard-encounter architecture, regional enemy-availability rules, permanent-progression content structure, first-attempt behavior, and narrative-delivery package are scoped.
+Oathbound's **top-level launch architecture is closed at paper-design depth**.
 
-The remaining top-level scope question is now:
+The next work is content realization and playable validation:
 
-1. **define endgame / postgame / release scope** — repeat Heart access/rewards, completion goals, completed-save communication, front-end/settings/credits requirements, and whether any launch challenge/modifier layer is actually required.
-
-The actual standard-encounter roster, encounter counts, enemy wave/count tuning, and full-run clear-time validation are intentionally deferred until encounter production.
+1. author the regional standard-encounter pools,
+2. define playable miniboss and boss encounter packages,
+3. define the two-form Heart moveset/arena package,
+4. realize exact narrative/achievement/trial content,
+5. tune numbers and validate clear-time/economy/combat targets.
 
 Exact final balance values, mastery thresholds, frame data, detailed scripts, and final localization/audio implementation remain later work under their owning authorities.
 
@@ -192,6 +210,7 @@ Exact final balance values, mastery thresholds, frame data, detailed scripts, an
 
 - [Design pillars](DESIGN_PILLARS.md)
 - [Full game scope](FULL_GAME_SCOPE.md)
+- [Endgame, postgame, and release](ENDGAME_POSTGAME_RELEASE.md)
 - [Current design questions](../_meta/OPEN_QUESTIONS.md)
 - [First attempt](../gameplay/FIRST_ATTEMPT.md)
 - [Combat](../gameplay/COMBAT.md)
