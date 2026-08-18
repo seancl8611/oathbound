@@ -34,7 +34,7 @@ It owns:
 1. **Akio** — universal permanent character growth.
 2. **Run Infrastructure** — permanent improvements to future-run support and expedition conditions.
 
-Exact node inventories remain later detailed design.
+Launch scope is **10 Akio nodes + 8 Run Infrastructure nodes**. `PROGRESSION.md` owns the authoritative node roles, unlock cadence, resource boundaries, and final balance deferrals.
 
 ## Lore role
 
@@ -48,52 +48,69 @@ A carved stone well in the central Strand with old ritual cuts, anti-corruption 
 
 ## Permanent progression ownership
 
-### Akio
+### Akio — 10 nodes
 
-Broad upgrades improve universal capability, reliability, or resilience without becoming Aspect-specific or replacing run-earned power.
+The launch Akio package is organized around:
 
-### Run Infrastructure
+- **3 foundation nodes:** Vitality, Composure, Spirit Reserve,
+- **4 combat-stability nodes:** Posture Recovery, Recovery Efficiency, Deflection Stability, Execution Stability,
+- **3 regional mastery nodes:** Body Mastery, Resource Mastery, Returning Blood Mastery.
 
-One umbrella may improve approved:
+The three mastery nodes use the appropriate regional boss material plus Mist. Exact values remain tuning work.
 
-- Rest support,
-- Shrine support without bypassing Resist/Embrace/Tier rules,
-- reward possibilities,
-- route information/support,
-- regional-transition support,
-- beneficial run conditions,
-- persistent-resource opportunities.
+### Run Infrastructure — 8 nodes
 
-Run Infrastructure is not split into separate Rest, Shrine, route, reward, or transition permanent trees.
+The launch Infrastructure package is:
+
+- Field Rest,
+- Shrine Stabilization,
+- Expedition Preparation,
+- Route Intelligence,
+- Salvage Protocol,
+- Keeper Passage,
+- Twin Passage,
+- Heart Passage.
+
+Keeper Passage, Twin Passage, and Heart Passage use the corresponding regional boss material plus Mist.
+
+Run Infrastructure remains one umbrella and is not split into separate Rest, Shrine, route, reward, or transition permanent trees.
 
 It cannot replace Blood Aspect progression, Prosthetic/Relic progression, Technique build choices, or core execution.
 
-## Progression structure
+## Unlock presentation
 
-The final Bloodwell node layout is not yet locked. The old `Way of Steel / Way of Secrets / Way of Vows` structure is superseded.
+The Bloodwell opens after Akio's first return to the Strand.
 
-The final interface must support the approved ownership split between **Akio** and **Run Infrastructure** without assuming final subcategories or node counts.
+- **First return:** foundation Akio nodes plus Field Rest and Expedition Preparation.
+- **First Keeper defeat:** second Bloodwell band, including Keeper-material mastery gates and additional combat/support nodes.
+- **First Twin Maws defeat:** third band, including Twin-Maws-material mastery gates and remaining midgame support.
+- **First Shogun defeat / first Binding clear:** final Shogun-material mastery gates become available.
+
+The remaining Binding clears do not add another Bloodwell branch or new permanent station.
 
 ## Resource ownership
 
 - **Mist** is the primary Bloodwell currency.
-- Selected major Akio or Run Infrastructure upgrades may later require **1–3 appropriate regional boss materials** in addition to Mist when the detailed tree assigns that mastery gate.
-- Regional boss materials are not a second routine Bloodwell currency and should appear only on a small number of major upgrades.
+- Exactly **six launch Bloodwell nodes** also use regional boss materials: one Akio mastery node and one Run Infrastructure passage node per regional boss.
+- Regional boss materials are mastery keys rather than routine currency.
 - **Scrolls** remain primarily Prosthetic/Forge-focused.
 - **Gold** is run-only and is not a Bloodwell currency.
 - Generic **Boss Emblems** are not current design.
 
-Current Mist cost calibration lives in `PROGRESSION.md` / `ITEMS_AND_REWARDS.md`; exact node costs are assigned when the Bloodwell tree is authored.
+Current Mist cost calibration lives in `PROGRESSION.md` / `ITEMS_AND_REWARDS.md`; exact node prices remain later balance tuning.
 
 ## Screen requirements
 
-At scope level, show:
+The Bloodwell interface must support:
 
-- Akio progression,
-- Run Infrastructure progression,
-- relevant persistent resource costs,
+- a clear **Akio** category with 10 nodes,
+- a clear **Run Infrastructure** category with 8 nodes,
+- campaign-gated node visibility/availability,
+- relevant Mist and boss-material costs,
 - locked / available / purchased / maxed states,
 - selected upgrade details.
+
+The interface does not need to imply a huge branching skill tree. A compact staged layout is preferred.
 
 When a major upgrade requires a regional boss material, the requirement should read as a specific scarce mastery component, not as a generic currency balance.
 
@@ -101,7 +118,7 @@ When a major upgrade requires a regional boss material, the requirement should r
 
 - **Bloodwell:** Akio + Run Infrastructure.
 - **Forge Bench:** Prosthetics + Relics.
-- **Blood Mirror:** permanent Blood Aspect progression after unlock.
+- **Blood Mirror:** permanent Blood Aspect progression after first Keeper defeat.
 - **Shrines:** run-only Resist/Embrace/Tier progression.
 - **Techniques:** run-only build progression plus separately owned pool unlocks.
 
@@ -117,7 +134,8 @@ Visual treatment may include a deeper crimson pulse, surface ripple, Mist gather
 
 ## Technical notes
 
-- Support Akio / Run Infrastructure ownership without assuming final node counts.
-- Support Mist-only upgrades and occasional Mist + regional-boss-material gates.
+- Support exactly 10 Akio and 8 Run Infrastructure launch nodes without hard-coding final numerical values.
+- Support campaign-gated node bands.
+- Support Mist-only upgrades and the six approved Mist + regional-boss-material gates.
 - Persistent rewards must not depend on reaching this screen before being saved.
 - Reformation should communicate consequence rather than effortless resurrection.
