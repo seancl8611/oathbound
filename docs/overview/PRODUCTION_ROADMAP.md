@@ -58,13 +58,13 @@ Technique screen composition/source weighting and the first reward/economy proto
 
 Produce Yomori Grove, regional enemies/minibosses, Twin Maws, regional hazards, functional rooms, VFX, and integration.
 
-Production supports the approved **10-chamber Yomori** prototype. Twin Maws use the approved transition-recovery rules and drop one Twin-Maws-specific persistent material per victory.
+Production supports the approved **10-chamber Yomori** prototype. Stalker Hound is the explicitly authored evolved Area 2 continuation of the Blighted Hound lineage rather than the unchanged Hushiro enemy carrying forward. Twin Maws use the approved transition-recovery rules and drop one Twin-Maws-specific persistent material per victory.
 
 # Milestone 6 — Area 3 and endgame
 
 Produce Kagutsuchi Court, its roster, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Heart chamber, extraction apparatus, reusable Binding ritual, six Binding states, fully exposed Heart, two-form true-final Heart, ending, and repeat-clear presentation.
 
-Production supports the approved **11-chamber Kagutsuchi** prototype. The Eclipse Shogun drops one Shogun-specific persistent material per victory.
+Production supports the approved **11-chamber Kagutsuchi** prototype. Its five standard enemies are native Court units; no earlier-region standard enemy or evolved continuation is currently part of the launch Kagutsuchi roster. The Eclipse Shogun drops one Shogun-specific persistent material per victory.
 
 The first six clears use the reusable Binding ritual. The seventh story run continues from Shogun into the Heart with the approved partial recovery handoff.
 
@@ -84,6 +84,8 @@ Final quotation depends on narrative-delivery scope, postgame access/rewards, an
 - No launch consumable inventory or one-use item reward family.
 - Standard Combat rooms use deliberately authored encounter scripts selected from regional encounter pools; they are not procedurally assembled from threat budgets.
 - Route opening/main/final bands do not require separate standard-encounter pools; individual encounters may receive minimum-chamber eligibility later where needed.
+- Standard enemies are region-native by default; cross-region continuation requires a deliberately authored evolved regional variant rather than automatic reuse or stat scaling.
+- The only approved launch standard-enemy lineage across regions is **Blighted Hounds → Stalker Hound** in Yomori. No earlier-region continuation into Kagutsuchi is currently approved.
 - Reuse attack, locomotion, deathblow, HUD, and VFX families where mechanics modify existing actions.
 - Standard successful-run target remains **45–50 minutes**.
 - Regional prototype baseline remains **12 Hushiro / 10 Yomori / 11 Kagutsuchi = 33 counted chambers**.
@@ -97,10 +99,9 @@ Final quotation depends on narrative-delivery scope, postgame access/rewards, an
 
 The remaining design work should close scope in dependency order rather than promoting encounter-production details before they are needed:
 
-1. **Cross-region enemy availability** — explicitly decide which standard enemies are region-exclusive and which may reappear in later regions.
-2. **Permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery ranks, boss-material gate assignments, and unlock cadence.
-3. **Narrative delivery/campaign presentation** — authored scene/dialogue/codex/ending production package.
-4. **Endgame/postgame/release scope** — repeat Heart access/rewards, completion goals, settings/front-end/credits, and any launch challenge layer.
+1. **Permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery ranks, boss-material gate assignments, and unlock cadence.
+2. **Narrative delivery/campaign presentation** — authored scene/dialogue/codex/ending production package.
+3. **Endgame/postgame/release scope** — repeat Heart access/rewards, completion goals, settings/front-end/credits, and any launch challenge layer.
 
 The actual standard-encounter roster, encounter-pool sizes, enemy counts/waves, and full-run clear-time validation belong to the later encounter-authoring/playtest pass.
 

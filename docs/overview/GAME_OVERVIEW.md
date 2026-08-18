@@ -15,6 +15,7 @@ topics:
   - progression
   - boss-materials
   - authored-encounters
+  - enemy-lineage
   - heart-bindings
 related:
   - OVERVIEW-DESIGN-PILLARS
@@ -91,6 +92,8 @@ Each region offers one optional miniboss opportunity from two authored candidate
 
 Standard Combat rooms use **deliberately authored encounter scripts**. When a Combat chamber is selected, the game chooses an eligible encounter from that region's authored pool rather than procedurally constructing an enemy mix from a threat budget. Opening/main/final route bands do not require separate encounter pools; individual encounters may later receive minimum-chamber eligibility where their mechanics or teaching role require it.
 
+Standard enemies are region-native by default. Cross-region continuation uses a separately authored evolved regional variant rather than carrying the unchanged enemy forward or simply increasing its statistics. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's five standard enemies are all native Court units.
+
 The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, and persistent-resource payout models are approved as prototype implementation targets. Exact values remain playtest-tunable.
 
 A normal successful Binding run targets approximately **45–50 minutes of active time**. Encounter-pool counts and individual encounter scripts remain later content-production/playtest work.
@@ -111,20 +114,19 @@ Completed saves remain playable. Repeat normal runs and optional repeat Heart ro
 
 - **The Strand** — persistent hub, preparation, progression, and return point.
 - **Hushiro Gate Village / Rupture** — recent human/community collapse.
-- **Yomori Grove / Adaptation** — long-term predator/spirit consequences.
-- **Kagutsuchi Court / False Ascendancy** — disciplined elite mutation mistaken for mastery.
+- **Yomori Grove / Adaptation** — long-term predator/spirit consequences; includes Stalker Hound as an evolved continuation of the earlier hound lineage.
+- **Kagutsuchi Court / False Ascendancy** — disciplined elite mutation mistaken for mastery; uses its own five-enemy Court roster.
 - **Heart spaces** — specialized post-Shogun campaign/endgame content outside the 33 counted regional chambers.
 
 # Current design focus
 
-Major run-build, reward/economy, route, boss-reward, Relic, and standard-encounter architecture are already scoped.
+Major run-build, reward/economy, route, boss-reward, Relic, standard-encounter architecture, and regional enemy-availability rules are already scoped.
 
 The remaining sequence is now:
 
-1. **make standard-enemy regional availability explicit** — decide which of the 15 standard enemies are region-exclusive and which may reappear in later regions;
-2. **close permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery structure, boss-material gates, unlock cadence;
-3. **define narrative delivery / campaign presentation**;
-4. **define endgame / postgame / release scope**.
+1. **close permanent-progression content scope** — Bloodwell/Blood Mirror content volume, Relic mastery structure, boss-material gates, unlock cadence;
+2. **define narrative delivery / campaign presentation**;
+3. **define endgame / postgame / release scope**.
 
 The actual standard-encounter roster, encounter counts, enemy wave/count tuning, and full-run clear-time validation are intentionally deferred until encounter production.
 

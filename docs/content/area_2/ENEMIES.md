@@ -4,13 +4,14 @@ title: Area 2 Enemies
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-07-15
+last_reviewed: 2026-08-17
 topics:
   - area-2
   - yomori-grove
   - enemies
   - spirits
   - predators
+  - evolved-variants
 related:
   - CONTENT-AREA2-OVERVIEW
   - GAMEPLAY-COMBAT
@@ -51,6 +52,8 @@ Area 2 spirits belong to the same curse but do not require a separate magic syst
 
 Enemies stalk, circle, flicker, glide, relocate, emerge from obscured angles, or use the forest to constrain paths. Even support units should feel embedded in a hostile living landscape. Uncertainty comes from positioning and manifestation, not from hiding the rules.
 
+Yomori may use evolved variants of earlier enemy concepts when the new version genuinely expresses the Grove's predatory, mist-driven identity through new behavior. These are separate regional enemies, not the unchanged earlier unit with higher statistics.
+
 ## Readability priorities
 
 - targetable and untargetable states must be explicit,
@@ -68,3 +71,11 @@ Enemies stalk, circle, flicker, glide, relocate, emerge from obscured angles, or
 | Lantern Wraith | Ranged spirit pressure and area control | [Lantern Wraith](enemies/LANTERN_WRAITH.md) |
 | Mist Shepherd | Support buffer and encounter escalation | [Mist Shepherd](enemies/MIST_SHEPHERD.md) |
 | Stalker Hound | Elite predator with mist-stalk pounce | [Stalker Hound](enemies/STALKER_HOUND.md) |
+
+## Regional availability and lineage
+
+All four enemies above are **native Yomori standard enemies** for encounter-pool purposes. Hushiro enemies do not automatically appear unchanged in Yomori.
+
+**Stalker Hound is the approved evolved Area 2 continuation of the Blighted Hound lineage.** It preserves recognizable hound-family movement and pressure foundations while adding Yomori-specific stalking, mist disengagement, repositioning, and pounce timing. It is a separate enemy and should usually function as an elite predator rather than ordinary pack filler.
+
+No other cross-region enemy lineage is currently approved for the launch roster. Additional evolved variants may be considered later only through an explicit content decision; they are not implied by the general rule.

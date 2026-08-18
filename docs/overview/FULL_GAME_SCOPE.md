@@ -18,6 +18,7 @@ topics:
   - postgame
   - regional-routing
   - authored-encounters
+  - enemy-lineage
   - economy
   - survival
 related:
@@ -54,9 +55,9 @@ This document summarizes Oathbound's current production-level shape. Detailed me
 | General consumables | 0 | No launch consumable inventory or one-use item reward layer |
 | Permanent upgrade stations | 3 | Bloodwell, Forge Bench, later-unlocked Blood Mirror |
 | Strand NPCs | 6 | Keeper, Peddler, Smith, Raven, Undead Samurai, Scribe |
-| Area 1 standard enemies | 6 | Hushiro |
-| Area 2 standard enemies | 4 | Yomori |
-| Area 3 standard enemies | 5 | Kagutsuchi |
+| Area 1 standard enemies | 6 | Hushiro-native roster |
+| Area 2 standard enemies | 4 | Yomori-native roster; Stalker Hound continues the Blighted Hound lineage as a separate evolved variant |
+| Area 3 standard enemies | 5 | Kagutsuchi-native Court roster |
 | Regional minibosses | 6 authored | Two per region; one optional candidate offered per region/run |
 | Regional bosses | 3 | Keeper of the Gate, Twin Maws, Eclipse Shogun |
 | Prototype regional chambers | 33 | 12 Hushiro + 10 Yomori + 11 Kagutsuchi |
@@ -158,7 +159,9 @@ Current controlled-generation prototype includes:
 
 Standard Combat uses **authored encounters**, not procedural enemy assembly. Each region will have a finite pool of deliberately scripted encounter compositions; when a Combat chamber is generated, an eligible encounter is selected from that pool. The route's opening/main/final bands do **not** require separate encounter pools. An individual encounter may later receive a minimum-chamber restriction when its teaching role or difficulty requires one.
 
-Encounter-pool counts and individual scripts are deferred until the encounter-authoring production pass. The remaining scope prerequisite is to make explicit which of the 15 standard enemies are region-exclusive and which may reappear in later regions.
+Standard enemies are region-native by default. Cross-region continuation is handled through a deliberately authored evolved variant rather than automatically reusing the unchanged earlier enemy. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove. No other Hushiro-to-Yomori continuation and no earlier-enemy continuation into Kagutsuchi is currently approved.
+
+Encounter-pool counts and individual scripts are deferred until the encounter-authoring production pass.
 
 Exact route rules and safeguards belong to `RUN_STRUCTURE.md`.
 
@@ -225,11 +228,11 @@ The Boat remains a fast run-start confirmation point rather than another combine
 
 # Regional roles
 
-- **Hushiro Gate Village / Rupture:** 6 standard enemies, 2 authored minibosses, Keeper; establishes first Technique/family direction.
-- **Yomori Grove / Adaptation:** 4 standard enemies, 2 authored minibosses, Twin Maws; expands/deepens the build.
-- **Kagutsuchi Court / False Ascendancy:** 5 standard enemies, 2 authored minibosses, Eclipse Shogun; finalizes the mature build under the most layered normal pressure.
+- **Hushiro Gate Village / Rupture:** 6 native standard enemies, 2 authored minibosses, Keeper; establishes first Technique/family direction.
+- **Yomori Grove / Adaptation:** 4 native standard enemies, including Stalker Hound as the evolved continuation of the Blighted Hound lineage; 2 authored minibosses, Twin Maws; expands/deepens the build.
+- **Kagutsuchi Court / False Ascendancy:** 5 native Court standard enemies with no approved earlier-region carryover; 2 authored minibosses, Eclipse Shogun; finalizes the mature build under the most layered normal pressure.
 
-Each region generates one optional miniboss opportunity from its two candidates. Cross-region reuse among the 15 standard enemies remains to be explicitly assigned.
+Each region generates one optional miniboss opportunity from its two candidates.
 
 # Heart Binding campaign and ending
 
@@ -250,14 +253,13 @@ Completed saves remain playable; repeat normal/Heart runs do not create addition
 
 # Current open production scope
 
-The run-build, reward/economy, boss-reward, Relic-acquisition, route, and standard-encounter architecture are complete at paper-design depth.
+The run-build, reward/economy, boss-reward, Relic-acquisition, route, standard-encounter architecture, and regional enemy-availability rule are complete at paper-design depth.
 
 The remaining scope closes in dependency order:
 
-1. **Cross-region enemy availability** — explicitly assign which standard enemies are region-exclusive and which may reappear in later regions; do not author every encounter yet.
-2. **Permanent-progression content scope** — define Bloodwell/Blood Mirror node counts and roles, Relic mastery rank structure, boss-material gate assignments, and unlock cadence without final balance tuning.
-3. **Narrative delivery/campaign presentation** — define the authored launch package and production volume.
-4. **Endgame/postgame/release package** — define repeat Heart access/rewards, completion goals, and release UI/presentation.
+1. **Permanent-progression content scope** — define Bloodwell/Blood Mirror node counts and roles, Relic mastery rank structure, boss-material gate assignments, and unlock cadence without final balance tuning.
+2. **Narrative delivery/campaign presentation** — define the authored launch package and production volume.
+3. **Endgame/postgame/release package** — define repeat Heart access/rewards, completion goals, and release UI/presentation.
 
 Detailed standard-encounter authoring, encounter-pool counts, clear-time tuning, and full-run time validation remain a later content/playtest pass once those encounters are actually being produced.
 
