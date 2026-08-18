@@ -14,65 +14,70 @@ topics:
 
 # Current Design Questions
 
-This file contains only decisions that materially block implementation or authored launch content.
+This file contains only decisions or audits that materially block implementation or authored launch content.
 
-The launch architecture is already scoped. A package leaves this queue once its authorities provide a coherent first-playtest implementation contract.
-
-After that:
-
-- do not reopen it as smaller follow-up passes merely because values can still be tuned,
-- do not repeat work already answered by shared system/family constants,
-- treat hitbox polish, frame tuning, VFX synchronization, minor coefficients, and ordinary balance as implementation/playtest work,
-- reopen only for a genuine missing rule, contradiction, unusable interaction, or scope problem.
+A package leaves this queue once its authorities provide a coherent first-playtest implementation contract. After that, do not subdivide it into more planning passes merely because ordinary tuning remains.
 
 # Player-build layer — COMPLETE FOR PLANNING
 
-The launch player-build layer now has coherent first-playtest implementation contracts for:
+Implementation-ready first-playtest contracts now exist for:
 
-- **Core combat:** `COMBAT_IMPLEMENTATION_BASELINE.md`
-- **Blood Aspects:** `ASPECT_IMPLEMENTATION_BASELINES.md` plus the three Aspect authorities
-- **Techniques:** `TECHNIQUE_CATALOG.md` + `TECHNIQUE_IMPLEMENTATION_BASELINES.md`
-- **Prosthetics:** `PROSTHETICS.md`
-- **Relics:** `RELICS.md` + `RELIC_IMPLEMENTATION_BASELINE.md`
-- **Corruption / Shrines:** `CORRUPTION_AND_SHRINES.md`
-- **Blood meter / generation:** `BLOOD_ASPECTS.md`
+- core combat,
+- Blood Aspects,
+- Techniques,
+- Prosthetics,
+- Relics,
+- Corruption / Shrines,
+- Blood meter / generation.
 
-The final shared resource/state contract now defines:
+Do not reopen these packages unless implementation exposes a structural contradiction.
 
-- 100-point Corruption meter and first-playtest event gain/caps,
-- exact Resist / Embrace / Stabilize transitions,
-- fixed Shrine recovery that restores both Health and Spirit while skipping already-full resources,
-- 100-point Tier-II Blood meter,
-- normalized Wolf / Wraith / Ronin Blood generation,
-- multi-target limits, exclusions, overfill, ready/spent/rebuilding behavior.
+# Hushiro — COMPLETE FOR PLANNING
 
-Do not create another shared player-build planning pass unless implementation exposes a structural gap. Final Corruption/Blood rates and other ordinary tuning belong to playtesting.
+`docs/content/area_1/HUSHIRO_IMPLEMENTATION_BASELINE.md` now supplies:
 
-# Current question — Hushiro implementation-ready package
+- **10 authored standard encounters**,
+- discrete 2-4-wave chamber scripts with the next wave beginning only after the prior wave is cleared,
+- roughly **10-18 total enemies** in normal rooms, with a lightweight Hound-heavy room reaching 19,
+- a normal **6-active-enemy readability cap**,
+- five reusable standard Combat footprints plus the required functional/special spaces,
+- first-playtest standard-enemy durability calibration,
+- complete Village Ogre and Collector combat contracts,
+- complete two-phase Keeper contract.
 
-**Question:** What exact authored encounter pool, reusable gameplay spaces, and miniboss/boss combat contracts are required to build Hushiro as the first complete repeatable region?
+Do not create another Hushiro planning pass for final wave timing, exact enemy attack damage, active frames, minor spawn positions, or final room volume. Those belong to Godot playtesting unless a structural problem appears.
 
-Resolve Hushiro as one connected package:
+# Current question — Godot documentation-to-code delta audit
 
-1. **Authored standard encounters** — launch pool, exact enemy compositions, waves/spawns where used, tactical purpose, and only necessary eligibility/anti-repeat restrictions.
-2. **Reusable gameplay-space inventory** — the actual Combat, Shrine, Rest, Shop, Treasure, miniboss, Keeper, and transition layouts needed to support the approved 12-chamber route without unique art per chamber.
-3. **Village Ogre / Collector / Keeper contracts** — move/state lists, attack selection conditions, block/parry/perilous classes, escalation/phases, arena behavior, posture/deathblow/death rules.
+**Question:** What currently exists in the Godot project, how does it differ from the approved documentation, and what is the shortest implementation order that produces the first complete Hushiro run?
 
-Do not reopen Hushiro's approved 12-chamber route, six-enemy roster, room weighting, miniboss window, Keeper endpoint, or reward architecture unless a concrete production incompatibility appears.
+Audit the current `game/` project against the approved authorities and classify each relevant item as:
 
-**Exit condition:** Hushiro can be built as a complete repeatable region and used for serious end-to-end Godot testing without a combat/content author inventing major encounter rules.
+- **matches current authority**,
+- **implemented from superseded design**,
+- **partially implemented**,
+- **missing**,
+- **obsolete / remove**.
+
+Audit in dependency order:
+
+1. project/bootstrap/input/save foundations needed to run the current build,
+2. Akio movement, dash, block/parry, posture, deathblow, Spirit, and combat-state foundations,
+3. Wolf / Wraith / Ronin action-kit support and shared action tags,
+4. Technique, Prosthetic, Relic, Corruption/Shrine, and Blood state/data support,
+5. Hushiro six-enemy roster and shared enemy AI/combat hooks,
+6. authored multi-wave encounter runner and room-clear/reward flow,
+7. Hushiro reusable rooms/routing integration,
+8. Village Ogre, Collector, and Keeper,
+9. HUD/UI states required for the first end-to-end region test.
+
+For each mismatch, prefer changing code to the approved authority. Do not silently revive superseded design because it already exists in the old Godot implementation.
+
+**Exit condition:** produce one prioritized implementation backlog that identifies what can be retained, what must be refactored, what must be added, and the minimum path to a playable 12-chamber Hushiro run.
 
 # Implementation restart gate
 
-Do not wait for later regions.
-
-Return seriously to implementation when:
-
-- the player-build layer is implementation-ready — **complete for planning**,
-- Hushiro is implementation-ready,
-- the existing Godot project is audited against current authorities.
-
-Then implementation and documentation proceed together.
+The player-build layer and Hushiro are now complete for planning. After the Godot delta audit, implementation should resume immediately rather than waiting for Yomori, Kagutsuchi, permanent-progression polish, final narrative, or final balance.
 
 # Later implementation-content packages
 
@@ -88,13 +93,8 @@ Do not promote these back into the design queue unless testing reveals a structu
 - final damage/posture values,
 - final attack/frame timing,
 - final hitbox widths and VFX synchronization,
-- final parry/dash windows,
 - final enemy Health/damage,
-- final proc coefficients/status durations,
-- final Prosthetic magnitudes/cooldowns,
-- final Relic values/mastery pacing,
-- final Corruption/Blood gain pacing,
-- final route/reward/rarity weights,
-- final economy/progression prices,
-- final encounter-volume adjustments,
+- final encounter volume/wave timing,
+- final Corruption/Blood pacing,
+- final route/reward/economy weights,
 - exact run-duration validation.
