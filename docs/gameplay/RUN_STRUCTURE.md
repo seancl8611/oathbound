@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - runs
   - first-attempt
@@ -25,6 +25,7 @@ topics:
   - authored-encounters
   - enemy-lineage
 related:
+  - GAMEPLAY-FIRST-ATTEMPT
   - LORE-RETURNING-BLOOD
   - LORE-STORY-OVERVIEW
   - LORE-BARRIER-BLOOD-MOON
@@ -33,6 +34,7 @@ related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-RELICS
   - GAMEPLAY-ITEMS-REWARDS
+  - NARRATIVE-DELIVERY
   - CONTENT-ROOM-TYPES
   - CONTENT-AREA1-OVERVIEW
   - CONTENT-AREA2-OVERVIEW
@@ -44,7 +46,7 @@ related:
 
 # Run Structure
 
-A standard run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
+A standard post-awakening run begins after preparation and final confirmation at the Boat in the Strand. The Keeper stabilizes the controlled passage through the barrier, and the Boat carries Akio to the island.
 
 A run ends through death, successful destruction of one Heart Binding after the Shogun, completion of an unlocked true-final Heart route, or another explicitly designed return condition.
 
@@ -52,21 +54,28 @@ The campaign takes place beneath the Blood Moon. The game does not define how mu
 
 ## Introductory first attempt
 
-Before the normal roguelite loop begins, Akio enters as an ordinary Order swordsman with dormant inherited Beast Blood but no knowledge of it and no active Blood powers.
+The first attempt is **not a scripted prologue route**. `FIRST_ATTEMPT.md` owns its pre-awakening exceptions.
+
+The player begins directly in the normal Hushiro route as an ordinary Order swordsman carrying dormant inherited Beast Blood but no active Returning Blood powers.
 
 During this attempt:
 
-- the player uses the base katana kit and available Order equipment,
+- the player uses the base katana kit,
+- **Beast-Bane Whistle** is the default equipped Prosthetic,
+- normal Technique rewards are available and modify the base-katana action tags,
+- normal Combat, Rest, Shop, Treasure, miniboss, Gold, Mist/Scroll, reward, and route-choice flow remains available where meaningful,
+- Shrines remain valid route rooms and use their no-Aspect/below-full support behavior,
 - Blood Aspects are unavailable,
-- Shrine Resist and Embrace progression is unavailable,
-- Blood-derived Techniques are unavailable,
-- and the player is introduced to the island and core combat without a full run build.
+- Corruption, Resist/Embrace Tier progression, Blood, and Blood Arts are unavailable,
+- Relic loadout and permanent upgrade systems are not yet active.
 
-The attempt ends in Akio's first death. Its exact enemy, location, length, and scripted-versus-played endpoint belong to the narrative-delivery and opening-production package rather than the standard run model.
+The game does **not** force Akio's first death at a predetermined room, enemy, miniboss, or boss. A new player is expected to die relatively early because they lack knowledge, permanent progression, Blood Aspects, Relics, and a developed toolkit, but the route itself remains honest.
 
-Death awakens the inherited Beast Blood and reconstructs Akio at the Strand as Returning Blood. The return should be brief and striking rather than a long explanatory cutscene. Akio and the player understand that he died and returned, but not yet his ancestry or the full Blood system.
+A highly skilled player may progress through all three regions, defeat Keeper, Twin Maws, and the Eclipse Shogun, and reach the Heart before dying. In that exceptional case, no Binding can yet be broken because the rejection ritual requires awakened Returning Blood. Heart contact destroys Akio's current body, triggers his first Returning Blood reconstruction, and begins the normal six-Binding campaign without advancing Binding progress.
 
-The normal repeated-run structure begins after this return.
+Whenever the first death occurs, dormant inherited Beast Blood awakens and reconstructs Akio at the Strand as Returning Blood. The return is brief and striking rather than a long explanatory cutscene. Akio remains silent; the player understands that he died and returned, but not yet his ancestry or the full Blood system.
+
+The normal repeated-run preparation/progression loop begins after this return. Persistent rewards already earned on the first attempt remain saved under their normal rules.
 
 ## Regional flow
 
@@ -77,9 +86,9 @@ The intended full route is:
 3. Kagutsuchi Court
 4. Eclipse Shogun
 5. temporary access to the Heart chamber
-6. one Binding completion during the first six successful clears, or the unlocked true-final Heart encounter after all six Bindings are destroyed
+6. one Binding completion during the first six successful post-awakening clears, or the unlocked true-final Heart encounter after all six Bindings are destroyed
 
-The introductory attempt may use only a short portion of Hushiro rather than the complete regional flow.
+The introductory first attempt uses this **same complete regional flow**. It is not restricted to a short Hushiro-only path.
 
 All three regions have approved **prototype chamber structures**. Their chamber counts, structural bands, and the prototype branching-frequency model below are planning targets for implementation and playtesting rather than immutable final balance values. Exact standard-combat encounter scripts, encounter-pool counts, authored room-variant counts, and final tuned percentages remain later content/playable-validation work.
 
@@ -154,6 +163,7 @@ Hushiro uses **12 counted chambers**, including Keeper of the Gate at Chamber 12
 - Chambers 2–3 introduce the normal previewed route-choice structure.
 - Chamber 1's authored encounter should function as an accessible opening combat test; further encounter-specific early gating is assigned only during encounter authoring when needed.
 - Hushiro's build purpose is to establish the first direct-action modifications and the first recognizable family/build direction, not to finish the build.
+- On the first attempt, this same guaranteed Technique reward modifies the base katana rather than a Blood Aspect weapon kit.
 
 ### Chambers 4–8 — Main stretch
 
@@ -203,7 +213,7 @@ Yomori is intentionally shorter than Hushiro because its normal enemies, minibos
 
 ### Chambers 3–7 — Main stretch
 
-The main Yomori room/reward pool is active here. Area 2's build purpose is to expand direct-action coverage where still open and deepen the existing build through Supporting Techniques, refinements, Cross-family eligibility, continued Aspect progression, and other reward choices.
+The main Yomori room/reward pool is active here. Area 2's build purpose is to expand direct-action coverage where still open and deepen the existing build through Supporting Techniques, refinements, Cross-family eligibility, continued Aspect progression after awakening, and other reward choices.
 
 Yomori's single miniboss opportunity is eligible during **Chambers 4–7**. Each run selects one candidate from:
 
@@ -250,7 +260,7 @@ Kagutsuchi is the mature-build region. Its standard enemies are inherently more 
 
 ### Chambers 3–7 — Main Court
 
-The complete normal Kagutsuchi room/reward pool is eligible here. The region's build purpose is to **finish or sharpen the mature run build** through remaining direct-action Techniques, Supporting Techniques, refinements, Cross-family Techniques, rare replacements, eligible Legendaries, continued Shrine decisions, and competing economy/survival rewards.
+The complete normal Kagutsuchi room/reward pool is eligible here. The region's build purpose is to **finish or sharpen the mature run build** through remaining direct-action Techniques, Supporting Techniques, refinements, Cross-family Techniques, rare replacements, eligible Legendaries, continued Shrine decisions after awakening, and competing economy/survival rewards.
 
 Kagutsuchi's single miniboss opportunity is eligible during **Chambers 4–7**. Each run selects one candidate from:
 
@@ -273,6 +283,8 @@ The Eclipse Shogun is fixed at Chamber 11 and completes the normal three-region 
 
 The Shogun must test a mature run build without assuming a specific Aspect Tier, Blood Art, Technique family, Legendary, Relic, Prosthetic upgrade level, or exact reward history.
 
+A rare pre-awakening dialogue state exists if an exceptional first-attempt player reaches him before Akio's first death. It does not replace the seven awakened-campaign confrontation states.
+
 ### Kagutsuchi route-network safeguards
 
 Before the Shogun, the generated route network must contain at least:
@@ -294,19 +306,29 @@ The transition should:
 
 - grant the approved regional boss reward,
 - apply the automatic recovery prototype owned by `ITEMS_AND_REWARDS.md`,
-- allow concise build review and an optional **Relic swap** from the player's persistent collection,
+- allow concise build review and an optional **Relic swap** when the Relic system/collection is available,
 - visually transition into the next region,
 - and preserve run momentum rather than functioning as a second Strand or overloaded menu hub.
 
 The current recovery prototype restores **20% max Health and 35% max Spirit**, then enforces minimum next-region entry floors of **35% max Health and 50% max Spirit**. This is viability support rather than a full reset. Blood is not automatically refilled.
 
-The safe transition after Keeper is the normal in-run Relic swap point before Yomori. The safe transition after Twin Maws is the normal in-run Relic swap point before Kagutsuchi. Newly discovered Relics may also be equipped immediately at discovery; routine swapping is not available in combat, ordinary rooms, Rest rooms, Shops, or the pause menu. Exact transition-interface presentation and final recovery tuning remain later implementation/playtest decisions.
+The safe transition after Keeper is the normal in-run Relic swap point before Yomori. The safe transition after Twin Maws is the normal in-run Relic swap point before Kagutsuchi. Newly discovered Relics may also be equipped immediately at discovery; routine swapping is not available in combat, ordinary rooms, Rest rooms, Shops, or the pause menu. If Relics are not yet available on the first attempt, the transition simply omits that management step.
+
+Exact transition-interface presentation and final recovery tuning remain later implementation/playtest decisions.
 
 ## Post-Shogun handoff
 
 The Eclipse Shogun does **not** lead to another counted regional transition chamber.
 
-During the first six successful clears:
+### Exceptional pre-awakening first-attempt clear
+
+If Akio reaches the Heart before his first death:
+
+**Shogun → Heart approach → pre-awakening Heart chamber → no Binding ritual available → Heart destroys Akio → first Returning Blood reconstruction at the Strand.**
+
+No Heart Binding is destroyed in this exceptional sequence.
+
+### First six successful post-awakening clears
 
 **Shogun → Heart approach → Binding chamber / extraction ritual → one Binding breaks → Akio is dissolved → Strand return.**
 
@@ -338,10 +360,10 @@ The current three-region prototype budget is **33 counted chambers total**: 12 H
 
 ## Standard run start
 
-Before departure, the player:
+Before a normal **post-awakening** departure, the player:
 
 - completes available Strand preparation,
-- confirms one unlocked Blood Aspect after that system is available,
+- confirms one unlocked Blood Aspect,
 - confirms the current Prosthetic and Relic loadouts when those systems are available,
 - uses the Boat as the final run-start confirmation,
 - begins at Blood Aspect Tier 0,
@@ -351,7 +373,9 @@ Before departure, the player:
 
 The Keeper's contribution remains part of the departure presentation rather than a separate repeated menu or resource cost.
 
-Blood Aspect selection does not appear during the first attempt and need not become available immediately after the first return. The **Blood Mirror** itself begins locked and becomes available later through campaign/onboarding progression; its exact unlock event remains deferred.
+The first attempt is the one exception: it starts directly in the normal Hushiro route without a Blood Aspect or normal persistent loadout preparation, using Beast-Bane Whistle as the default Prosthetic.
+
+After Returning Blood awakens, Blood Aspect selection becomes part of subsequent run preparation. The **Blood Mirror** is a separate permanent-Aspect progression station and remains locked until the first Keeper defeat.
 
 The Forge owns permanent Prosthetic and Relic progression / management. The Bloodwell owns Akio and Run Infrastructure progression. The Boat does not duplicate those upgrade interfaces.
 
@@ -388,6 +412,8 @@ After the relevant systems are unlocked:
 - **Area 2:** expand direct-action coverage where still open, gain Aspect Tiers, and deepen family or hybrid synergy through slotless Supporting Techniques, refinements, and later eligibility.
 - **Area 3:** finish or refine the mature build through remaining direct opportunities, Supporting Techniques, refinements, rare same-slot replacements, Cross-family Techniques, and eligible high-rarity or Legendary opportunities.
 
+On the first attempt, the same Technique-growth cadence operates on the base katana while Aspect-specific growth remains absent.
+
 A successful run should create several meaningful Technique decisions without awarding a Technique after every combat room. There is no global Technique inventory cap; practical Technique growth is constrained by reward opportunities, route competition, prerequisites, and run length. Prototype reward cadence is owned by `ITEMS_AND_REWARDS.md`; exact final balance remains playtest work.
 
 ## Failed run
@@ -398,9 +424,11 @@ A failed run burns away temporary Blood state and run-only progress. Permanent u
 
 Akio may prepare and board the Boat again without the narrative defining an exact elapsed time between attempts.
 
+Akio's **first** death is handled by `FIRST_ATTEMPT.md`: it awakens Returning Blood and begins this repeated return structure.
+
 ## Successful Binding run
 
-On a successful Binding run, Akio:
+On a successful post-awakening Binding run, Akio:
 
 1. defeats the Eclipse Shogun's current manifestation,
 2. enters the Heart chamber and reaches the Shogun-built extraction apparatus,
@@ -414,7 +442,7 @@ On a successful Binding run, Akio:
 10. receives a results summary,
 11. triggers relevant NPC, codex, Blood Mirror, Heart-state, or hub updates.
 
-The ritual is one reusable completion sequence: blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. Clear-to-clear escalation uses greater Heart exposure, stronger room-local reaction, damaged Binding states, and concise narrative updates rather than a different mechanism or puzzle every time.
+The ritual is one reusable completion sequence: blood offering, Heart reaction, one Binding rupture, Akio's dissolution, and Strand reconstruction. Clear-to-clear escalation uses the six approved visual/campaign states in `NARRATIVE_DELIVERY.md` rather than a different mechanism or puzzle every time.
 
 The destroyed Binding remains gone because it is an external ancient restraint that the Heart did not create and cannot regenerate. Akio destroys only one per run because the retaliation immediately kills his current body.
 
@@ -424,7 +452,7 @@ Successful completion and failed death both return Akio to the Strand, but they 
 
 The Heart's prison originally contained seven Heart Bindings. The Court destroyed the outermost Binding before the game, leaving six intact when Akio begins the campaign.
 
-The main campaign requires six successful Binding runs. Each destroys one remaining restraint. Failed runs do not advance the count.
+After Returning Blood awakens, the main campaign requires six successful Binding runs. Each destroys one remaining restraint. Failed runs do not advance the count.
 
 After the sixth Binding is destroyed, the next successful full run becomes the seventh and final story run. No Binding remains, so Akio does not repeat the extraction ritual or automatically dissolve after the Shogun. He continues directly into the Heart encounter with the same active build.
 
@@ -436,7 +464,7 @@ The base game does not require island-wide visual transformations, universal ene
 
 ## True-final Heart route
 
-The true-final Heart encounter unlocks only after all six remaining Bindings are destroyed.
+The true-final Heart **encounter** unlocks only after all six remaining Bindings are destroyed. Merely reaching the Heart chamber during an exceptional pre-awakening first attempt does not unlock or start this encounter.
 
 The first unlocked Heart route is the final story run. The player must complete the established island route, defeat the Eclipse Shogun, and defeat the Heart without ending or losing the run between those encounters.
 
@@ -464,7 +492,7 @@ Destroying the Heart makes active Beast Blood inert across the island. Its death
 
 Akio survives in his current complete human body, but Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction end with the source. He becomes mortal.
 
-The ending and credits follow the first Heart victory.
+Akio remains silent. The ending and credits follow the first Heart victory.
 
 ## Postgame runs
 
@@ -472,7 +500,7 @@ After the story is completed, the save remains playable. Akio may continue norma
 
 Repeat Heart victories are gameplay challenges only. They do not advance the story, create another canonical ending, imply another Heart, or reverse the completed ending.
 
-The postgame must provide a clear choice or condition determining whether a completed run ends after the Shogun or continues into the Heart. The exact access control, repeat rewards, records, and required UI belong to the postgame release-package decision.
+The postgame must provide a clear choice or condition determining whether a completed run ends after the Shogun or continues into the Heart. The exact access control, repeat rewards, records, completed-save framing, and required UI belong to the postgame/release-package decision.
 
 Additional difficulty settings, run modifiers, enemy variants, room variants, challenge restrictions, and special challenge systems are deferred beyond the initial release unless deliberately promoted later.
 
@@ -480,12 +508,12 @@ Additional difficulty settings, run modifiers, enemy variants, room variants, ch
 
 A run may change through:
 
-- Blood Aspect Tier choices,
+- Blood Aspect Tier choices after the first awakening,
 - five direct slotted Techniques,
 - slotless Supporting / Cross-family / Legendary Techniques,
 - Technique refinements and rare same-slot replacements,
 - the equipped Prosthetic,
-- the equipped Relic benefit,
+- the equipped Relic benefit after that system is available,
 - run-only currencies and materials,
 - survival and resource-cap rewards,
 - boss, miniboss, treasure, shop, or discovery rewards.
@@ -498,14 +526,14 @@ Prosthetic and Relic permanent progression belongs to the Forge rather than a te
 
 The following reset after death or successful Heart Binding return:
 
-- Corruption,
-- Blood Aspect Tier,
+- Corruption where active,
+- Blood Aspect Tier where active,
 - slotted Techniques,
 - Supporting / Cross-family / Legendary Techniques,
 - Technique refinements and replacement state,
 - Gold,
 - room progress,
-- the current run's Relic activation state,
+- the current run's Relic activation state where applicable,
 - and other explicitly run-only states.
 
 The following persist:

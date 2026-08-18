@@ -4,7 +4,7 @@ title: Story Overview
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-08-18
 topics:
   - story
   - blood-moon
@@ -13,6 +13,7 @@ topics:
   - the-heart
   - royal-bloodline
   - heart-bindings
+  - silent-protagonist
   - ending
   - postgame
 related:
@@ -21,6 +22,8 @@ related:
   - LORE-RETURNING-BLOOD
   - LORE-ECLIPSE-SHOGUN
   - CHAR-AKIO
+  - GAMEPLAY-FIRST-ATTEMPT
+  - NARRATIVE-DELIVERY
   - CONTENT-AREA3-TRUE-FINAL-HEART
 ---
 
@@ -83,7 +86,7 @@ Their child developed while the mother already carried Beast Blood and inherited
 
 Before the barrier was completed, the mother and a trusted retainer secretly took the child from the island. The bloodline survived outside containment for generations and eventually produced Akio.
 
-The child's gender, name, protectors, escape route, and later life remain undefined until the narrative presentation requires them.
+The child's gender, name, protectors, escape route, and later life remain intentionally undefined.
 
 ## The Shogun's fall and present goal
 
@@ -137,15 +140,27 @@ The Order knows that organized regenerative cursed forces remain on the island a
 
 Akio's mission is to destroy the island's hostile cursed forces and ruler and find and destroy whatever source sustains them. The mission is considered one-way.
 
-Akio begins without active Beast Blood powers. His first attempt uses his base sword training and available Order equipment.
+Akio begins without active Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
+
+His first attempt is not a scripted tutorial route. He enters the normal Hushiro → Yomori → Kagutsuchi route using his base sword kit, the default Beast-Bane Whistle, ordinary Technique rewards, and normal room/routing interactions. A new player is expected to die early because they lack knowledge and progression, but the game does not force the death at a particular room.
 
 He is the first known descendant of the escaped bloodline to return inside the barrier during a Blood Moon and die after the dormant inherited Blood has been fully stirred.
 
-His first death awakens Returning Blood. Because his body developed naturally around the dormant condition, it reconstructs his established human form at the Strand rather than fixing him into an ordinary corrupted transformation.
+His first death—wherever it actually occurs—awakens Returning Blood. Because his body developed naturally around the dormant condition, it reconstructs his established human form at the Strand rather than fixing him into an ordinary corrupted transformation.
 
 That first reconstruction establishes the human pattern and Strand destination used by later returns. The deeper metaphysics remain deliberately mysterious.
 
+A mastery-level player may theoretically defeat the Shogun and reach the Heart before dying. In that exceptional case, the Heart destroys Akio before any Binding ritual can occur, awakening Returning Blood without reducing the six remaining player Bindings.
+
 Akio's lineage explains why he returns. His discipline and resolve explain why he can later control and evolve the Blood without surrendering himself to it.
+
+## Akio as silent protagonist
+
+Akio never speaks or supplies written responses, dialogue choices, or internal monologue.
+
+The story is told around and through him. NPCs, intelligent enemies, and bosses may speak; Akio's character and decisions are expressed through action, stillness, physical reaction, combat, refusal, and the player's continued movement through the campaign.
+
+His silence continues through the bloodline reveal, Shogun recruitment, Heart confrontation, and ending.
 
 ## Akio and the Shogun
 
@@ -156,17 +171,17 @@ Their repeated relationship develops through:
 1. dismissal,
 2. fascination with Akio's returns and controlled Aspects,
 3. recognition of the escaped royal bloodline and recruitment,
-4. fear and hatred after Akio rejects him and attacks the Heart.
+4. fear and hatred after Akio silently rejects him through continued opposition and attacks the Heart.
 
 Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while retaining the ability to oppose its continuation.
 
-Exact reveal timing and dialogue scope remain part of the narrative-presentation design question.
+`NARRATIVE_DELIVERY.md` owns the seven awakened Shogun dialogue states, the rare pre-awakening fallback, and the reveal cadence.
 
 ## Heart Binding campaign
 
 The Court destroyed one of the seven ancient Bindings before the game. Six remain when Akio begins the campaign.
 
-After each of the first six successful Shogun victories:
+After Returning Blood awakens, each of the first six successful Shogun victories follows the same underlying ritual:
 
 1. Akio enters the Heart chamber.
 2. He offers Returning Blood through the Court-built extraction apparatus.
@@ -177,13 +192,15 @@ After each of the first six successful Shogun victories:
 7. Returning Blood reconstructs him at the Strand.
 8. Permanent rewards and Binding progress persist.
 
-The ritual is simple and reusable. The Heart can regenerate living tissue but cannot rebuild the external ancient restraints created by an unknown power.
+The ritual is simple and reusable. `NARRATIVE_DELIVERY.md` defines six escalating visual/campaign states of this same sequence rather than six unique mechanisms.
+
+The Heart can regenerate living tissue but cannot rebuild the external ancient restraints created by an unknown power.
 
 The Shogun reconstructs between these clears through existing Beast Blood. No renewed dose or physical channel is required.
 
 ## Final story run and ending
 
-After the sixth remaining Binding is destroyed, the next successful full run becomes the seventh and final story run.
+After the sixth remaining Binding is destroyed, the next successful full route becomes the seventh and final story run.
 
 Akio defeats the Shogun's current body and continues directly into the exposed Heart chamber without ending the active run.
 
@@ -198,6 +215,8 @@ The Shogun's reconstruction stops and his unnaturally sustained body dies. Corru
 
 Akio survives in his current complete human body but loses Returning Blood, Blood Aspects, supernatural regeneration, and future reconstruction. He becomes mortal.
 
+Akio remains silent. The ending communicates his acceptance of mortality through action rather than a final speech. A strong final image is his return through the weakening barrier alive rather than another reconstruction at the Strand.
+
 The ending and credits follow.
 
 ## Postgame
@@ -206,21 +225,20 @@ The completed save remains playable. Normal runs and the Heart route may be repe
 
 Repeat Heart victories do not advance the story, create additional canonical endings, reverse the island's fate, or imply another Heart.
 
-The exact postgame route control and repeat-clear reward structure remain current design questions.
+The exact postgame route control and repeat-clear reward structure remain the next full-scope design question.
 
-## Deliberate mysteries and deferred presentation
+## Deliberate mysteries and deferred implementation
 
-The following are intentionally undefined or deferred:
+The following remain intentionally undefined or implementation-level:
 
 - the Heart's ultimate origin,
 - the ancient builders and full purpose of the complex,
 - the escaped child's identity and exact escape,
 - the deeper metaphysics of Strand reconstruction,
 - the Shogun's exact barrier-breach plan,
-- Akio's first-death scene,
-- bloodline reveal timing,
-- clear-to-clear dialogue and reconstruction presentation,
-- exact Shogun and Heart encounter design,
+- exact dialogue scripts and line counts,
+- exact camera timing and portrait implementation,
+- exact Shogun and Heart movesets,
 - postgame route control and rewards.
 
-These boundaries preserve mystery or await the appropriate narrative, encounter, or implementation design stage.
+These boundaries preserve mystery or await their owning writing, encounter, or postgame design pass.

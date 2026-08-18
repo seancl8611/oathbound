@@ -4,12 +4,12 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-18
 topics:
   - open-questions
   - design-priority
-  - narrative-delivery
   - postgame
+  - release-scope
 ---
 
 # Current Design Questions
@@ -30,6 +30,7 @@ The following major architecture is already established and should not be reopen
 - Relic swapping at the Forge before a run, after Keeper, after Twin Maws, or immediately on a new discovery,
 - Relic progression uses **Base → Mastery I → Mastery II / Complete**, two mastery milestones per Relic,
 - eight Prosthetics with 19 shallow linear Forge upgrades,
+- **Beast-Bane Whistle** as the default starting Prosthetic,
 - three permanent upgrade stations: Bloodwell, Forge Bench, later-unlocked Blood Mirror,
 - Bloodwell launch scope of **10 Akio nodes + 8 Run Infrastructure nodes**,
 - Blood Mirror launch scope of **3 nodes per Aspect / 9 total**,
@@ -51,21 +52,29 @@ The following major architecture is already established and should not be reopen
 - first persistent-resource economy using Mist, Scrolls, and three regional boss materials,
 - Keeper/Twin Maws three-card current-run Boss Reward prototype,
 - six player-destroyed Heart Bindings followed by the seventh story run into the true-final Heart,
-- approximately 45–50 minute normal successful Binding-run target.
+- approximately 45–50 minute normal successful Binding-run target,
+- **Akio is a silent protagonist with zero dialogue, dialogue choices, or internal monologue**,
+- the first attempt is a full normal route rather than a scripted prologue; it uses the base katana, Beast-Bane Whistle, normal Technique rewards and room flow, but no Blood Aspect/Corruption/Blood Art progression,
+- the first death may occur anywhere; a mastery-level first-attempt player may reach the Heart, but cannot break a Binding before Returning Blood awakens,
+- narrative campaign cadence uses seven awakened Shogun confrontation states plus one rare pre-awakening fallback,
+- the six Binding clears use six visual states of one reusable ritual rather than six unique missions,
+- working narrative production scope is approximately five major in-engine sequences, 30–36 major Strand conversations, 4–6 reactive line sets per Strand NPC, 20–25 substantive Lore/Records entries, and 15,000–20,000 narrative words,
+- launch narrative is text-led with no full spoken-dialogue VO requirement.
 
 Current values and exact rules live in:
 
+- `docs/gameplay/FIRST_ATTEMPT.md`
 - `docs/gameplay/RUN_STRUCTURE.md`
 - `docs/gameplay/TECHNIQUES.md`
 - `docs/gameplay/ITEMS_AND_REWARDS.md`
 - `docs/gameplay/RELICS.md`
 - `docs/gameplay/PROGRESSION.md`
+- `docs/narrative/NARRATIVE_DELIVERY.md`
 - regional `docs/content/area_*/ENEMIES.md` authorities.
 
 # Scope-closure sequence
 
-1. **Define narrative delivery and campaign presentation**
-2. **Define endgame, postgame, and release scope**
+1. **Define endgame, postgame, and release scope**
 
 Detailed standard-encounter authoring and final clear-time validation remain later content/playtest work after broader launch scope is established.
 
@@ -83,39 +92,27 @@ When encounter production begins:
 
 This is not the current top-level design question because the game does not yet need every individual combat room authored to close launch scope.
 
-# 1. Narrative delivery and campaign presentation
+# 1. Endgame, postgame, and release scope
 
-The story spine and lore are already approved. The next question is to define the **complete authored narrative-delivery package required for launch** without writing every line of dialogue yet.
+Define what remains available after the first canonical Heart victory and what is required for a complete initial release.
 
-Define as one connected campaign-presentation plan:
+Answer as one connected final scope package:
 
-- how the introductory attempt begins and where the first death occurs,
-- what the player sees/understands during the first Returning Blood reconstruction,
-- when Akio's bloodline and Returning Blood truth are revealed,
-- how much Shogun dialogue/progression changes across repeat encounters and Binding clears,
-- how the six Strand NPCs update across failures, regional milestones, and Binding clears,
-- what the Discovery Board/codex owns versus what must be communicated directly in play,
-- how each Binding clear communicates permanent campaign progress without requiring six unique missions,
-- what presentation is required for the seventh-run Heart unlock, true-final Heart, ending, and credits,
-- what uses portraits, in-engine scenes, still illustrations, text boxes, voice acting, or no cinematic treatment,
-- the broad writing/localization inventory needed for launch.
+- how completed saves continue after Akio canonically becomes mortal,
+- how the player chooses a normal Shogun-ending run versus a repeat Heart-route run in postgame,
+- what repeat Heart clears award or record without creating new canon,
+- what permanent progression, Relic mastery, trials, records, and collection goals remain meaningful after story completion,
+- the launch achievement/completion-goal package,
+- completed-save / story-complete communication,
+- front-end requirements,
+- settings/accessibility requirements,
+- credits/legal/localization requirements,
+- whether any run-modifier, challenge-heat, New Game+, or other difficulty-layer system is actually required for launch,
+- and which tempting postgame features are explicitly deferred so release scope remains controlled.
 
-The goal is to establish **scene/dialogue/state counts and presentation tiers** so narrative production volume can be estimated. Detailed scripts, exact line counts, final prose, shot timing, and voice casting follow only after this package is scoped.
+The output should define a **complete shippable launch/endgame package** without adding large modifier systems, enemy-variant packages, room-variant packages, extra Aspects, or another campaign merely to manufacture postgame volume.
 
-**Authority:** `docs/lore/STORY_OVERVIEW.md`, character/NPC authorities, `docs/gameplay/RUN_STRUCTURE.md`, Strand/Heart content authorities, and relevant UI files.
-
-# 2. Endgame, postgame, and release scope
-
-Define what remains available after the first canonical Heart victory and what is required for a complete initial release:
-
-- repeat Heart-route access,
-- repeat-clear rewards / records / mastery value,
-- launch achievements or completion goals,
-- completed-save communication,
-- front-end / settings / credits requirements,
-- whether any modifier/challenge/New-Game-style system is actually required for launch or should remain post-launch.
-
-Do not add large difficulty-modifier, enemy-variant, room-variant, or extra-Aspect packages merely to create postgame volume unless playable testing demonstrates a clear need.
+**Authority:** `docs/lore/STORY_OVERVIEW.md`, `docs/content/area_3/TRUE_FINAL_HEART.md`, progression/run/results authorities, and release UI/production documents.
 
 # Balance work kept out of this tracker
 
@@ -132,6 +129,7 @@ Do not add separate top-level questions for final:
 - exact Relic mastery kill thresholds,
 - exact Bloodwell/Blood Mirror percentages,
 - individual Prosthetic percentages,
+- exact narrative scripts/line counts,
 - frame data, VFX timing, hitboxes, or animation timings.
 
 Those remain in their owning files until testing shows a production-scope consequence.

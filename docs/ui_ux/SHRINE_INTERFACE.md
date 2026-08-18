@@ -4,15 +4,17 @@ title: Shrine Interface
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-18
 topics:
   - shrine
   - resist
   - embrace
   - blood-aspects
   - corruption
+  - first-attempt
 related:
   - GAMEPLAY-CORRUPTION-SHRINES
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
@@ -22,11 +24,13 @@ related:
 
 # Shrine Interface
 
-The Shrine screen presents a focused in-run decision about whether Akio advances the selected Blood Aspect now. It is visually and functionally separate from Technique-card rewards.
+The Shrine screen normally presents a focused in-run decision about whether Akio advances the selected Blood Aspect now. It is visually and functionally separate from Technique-card rewards.
 
 The larger build-path decision primarily occurs through route selection: entering a Shrine can mean giving up a Technique, refinement, Relic, economy, survival, or other previewed reward.
 
-## Required information
+The unscripted first attempt uses a specific **no-active-Aspect support state** because Returning Blood has not awakened yet.
+
+## Required information — normal post-awakening state
 
 - Active Blood Aspect
 - Current Tier
@@ -87,6 +91,21 @@ The interface must clearly identify which resource will be restored before confi
 
 These below-full support values do not automatically stack on top of a full-Corruption Resist/Embrace decision.
 
+## First-attempt no-Aspect support state
+
+Before Returning Blood awakens, the Shrine remains usable but does **not** show a fake Blood progression screen.
+
+Required behavior:
+
+- do not show an active Aspect,
+- do not show Tier or Corruption values,
+- do not show Resist,
+- do not show Embrace,
+- present the same clear Health-or-Spirit support result used by the below-full support state,
+- communicate that deeper Shrine interaction is not yet available without explaining future story spoilers.
+
+This state allows the first attempt to use the normal route network while preserving the canon that Blood Aspect progression begins only after the first death/Returning Blood awakening.
+
 ## Interface states
 
 - Default
@@ -98,12 +117,13 @@ These below-full support values do not automatically stack on top of a full-Corr
 - Maximum Tier
 - Tier-preview state
 - Corruption-not-full support state
+- **First-attempt no-Aspect support state**
 
-A no-active-Aspect state should not be required during normal post-unlock runs because the Boat confirms one unlocked Aspect before departure. Pre-unlock and tutorial cases may use a simplified flow.
+After Returning Blood/Aspect selection is active, a no-active-Aspect state should not be required during normal runs because the Boat confirms one unlocked Aspect before departure.
 
 ## Information hierarchy
 
-The player should understand, before confirming:
+During normal post-awakening Shrine use, the player should understand, before confirming:
 
 1. current Tier,
 2. what Resist does now,
@@ -111,11 +131,13 @@ The player should understand, before confirming:
 4. how the upgraded action or state behaves,
 5. whether the Aspect is already at Tier IV.
 
+During the first attempt, the player only needs to understand which support resource the Shrine restores.
+
 Technique loadout management does not belong on this screen. A small read-only current-build summary may be accessible through the normal pause input, but it should not compete with the Shrine decision.
 
 ## Production boundary
 
-Milestone 2 may establish the shared screen framework and generic Shrine effects. Final Wolf, Wraith, and Ronin iconography and complete Tier-specific presentation belong to Milestone 4.
+Milestone 2 establishes the shared screen framework, generic Shrine effects, and the first-attempt no-Aspect support state. Final Wolf, Wraith, and Ronin iconography and complete Tier-specific presentation belong to Milestone 4.
 
 Technique reward UI also belongs to Milestone 4 but uses its own three-choice screen language.
 

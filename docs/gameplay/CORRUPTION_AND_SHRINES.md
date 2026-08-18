@@ -4,7 +4,7 @@ title: Corruption and Shrines
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-18
 topics:
   - corruption
   - shrine
@@ -12,8 +12,10 @@ topics:
   - embrace
   - stabilize
   - blood-aspects
+  - first-attempt
 related:
   - LORE-RETURNING-BLOOD
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
@@ -23,11 +25,13 @@ related:
 
 # Corruption and Shrines
 
-Corruption is the run-only pressure of Returning Blood. It controls Shrine-ready states and optional Aspect Tier advancement; it is not morality, currency, Blood Art charge, or a Technique resource.
+Corruption is the run-only pressure of **awakened Returning Blood**. It controls Shrine-ready states and optional Aspect Tier advancement; it is not morality, currency, Blood Art charge, or a Technique resource.
+
+Corruption does not exist on Akio's first pre-awakening attempt.
 
 ## Corruption gain
 
-Current sources are combat accomplishment and progression events:
+After Returning Blood and Blood Aspects are active, current sources are combat accomplishment and progression events:
 
 - kills and elite kills,
 - successful parries,
@@ -70,7 +74,7 @@ Each Tier has one headline improvement and at most one minor supporting rule. Ev
 
 ## Optional Aspect investment
 
-The selected Aspect is always Akio's central weapon foundation, but deeper Tier investment is one run-development route rather than a mandatory completion checklist.
+The selected Aspect is always Akio's central weapon foundation after the first awakening, but deeper Tier investment is one run-development route rather than a mandatory completion checklist.
 
 - Tier 0 is a complete and viable weapon kit.
 - Technique-focused Tier 0-I builds must remain capable of completing a run.
@@ -107,7 +111,25 @@ These below-full support values do not automatically stack on top of a full-Corr
 
 Shrines do not normally present ordinary Technique selections.
 
+## First-attempt pre-awakening Shrine state
+
+Shrines remain valid route rooms on the unscripted first attempt even though Returning Blood has not awakened.
+
+Because no Corruption or Blood Aspect exists yet:
+
+- no Corruption meter is shown,
+- Resist is not required because there is no Returning Blood pressure to stabilize,
+- **Embrace is unavailable**,
+- no Aspect Tier can be gained,
+- the Shrine resolves through the same readable **below-full support state** described above.
+
+This preserves normal route value without pretending Akio has access to Blood progression before his first death.
+
+`FIRST_ATTEMPT.md` owns the complete pre-awakening run exception.
+
 ## Run behavior
+
+After the first awakening:
 
 - Select an unlocked Aspect at the Boat.
 - Begin at Tier 0.
@@ -119,13 +141,14 @@ Shrines do not normally present ordinary Technique selections.
 ## Presentation requirements
 
 - Resist, Embrace, and Stabilize must be distinguishable before text is read.
-- Show current Aspect, current Tier, and the next headline benefit.
+- Show current Aspect, current Tier, and the next headline benefit when an Aspect is active.
 - Explain any action-specific commitment, movement, defense, or control change that is part of the benefit itself.
 - Do not present a separate mandatory drawback category.
 - The player must not combine historical Tier descriptions to understand the active state.
 - Resist should feel controlled and stabilizing.
 - Embrace should feel forceful and desirable without appearing generically evil.
 - The Shrine interface must remain distinct from Technique card selection.
+- The first-attempt no-Aspect support state must be readable without showing nonexistent Corruption/Tier data.
 
 ## Open balance variables
 
