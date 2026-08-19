@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://dox0sbq8e7eay"]
+
+[sub_resource type="GDScript" id="GDScript_frru1"]
+script/source = "extends Control
+
+@onready var gold_value: Label   = $MarginContainer/VBoxContainer/GoldRow/Value
+@onready var mist_value: Label   = $MarginContainer/VBoxContainer/MistRow/Value
+@onready var omen_value: Label   = $MarginContainer/VBoxContainer/OmenRow/Value
+@onready var emblem_value: Label = $MarginContainer/VBoxContainer/EmblemRow/Value
+
+
+func _ready() -> void:
+	# Listen for any currency changes
+	CurrencyManager.currency_changed.connect(_on_currency_changed)
+	_refresh_all()
+
+
+func _refresh_all() -> void:
+	_update_label(CurrencyManager.Currency.GOLD)
+	_update_label(CurrencyManager.Currency.MIST_SHARDS)
+
+
+func _on_currency_changed(currency: int, _new_amount: int) -> void:
+	_update_label(currency)
+
+
+func _update_label(currency: int) -> void:
+	match currency:
+		CurrencyManager.Currency.GOLD:
+			gold_value.text = str(
+				CurrencyManager.get_amount(CurrencyManager.Currency.GOLD)
+			)
+		CurrencyManager.Currency.MIST_SHARDS:
+			mist_value.text = str(
+				CurrencyManager.get_amount(CurrencyManager.Currency.MIST_SHARDS)
+			)
+"
+
+[node name="CurrencyHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = SubResource("GDScript_frru1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="GoldRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/GoldRow"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/GoldRow"]
+layout_mode = 2
+
+[node name="MistRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/MistRow"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/MistRow"]
+layout_mode = 2
+
+[node name="OmenRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/OmenRow"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/OmenRow"]
+layout_mode = 2
+
+[node name="EmblemRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/EmblemRow"]
+layout_mode = 2
+
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/EmblemRow"]
+layout_mode = 2
