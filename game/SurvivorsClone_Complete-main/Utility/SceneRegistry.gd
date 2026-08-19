@@ -11,12 +11,19 @@ var rooms := {
 
 var enemies_by_area := {
 	1: {
-		"soldier": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
+		# Canonical Hushiro roster keys used by the approved authored encounter catalog.
+		"swordsman": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
 		"archer": preload("res://Enemy/Area 1/Encounter/corrupted_archer.tscn"),
-		"dog":    preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
+		"hound": preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
+		"bilemass": preload("res://Enemy/Area 1/Encounter/Cellar_Bilemass.tscn"),
+		"hollow": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
+		"warden": preload("res://Enemy/Area 1/Encounter/warden.tscn"),
+
+		# Compatibility aliases for older debug/prototype encounter definitions.
+		"soldier": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
+		"dog": preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
 		"akaname": preload("res://Enemy/Area 1/Encounter/Cellar_Bilemass.tscn"),
 		"shade": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
-		"warden": preload("res://Enemy/Area 1/Encounter/warden.tscn"),
 	},
 	2: {
 		"soldier": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
