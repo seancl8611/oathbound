@@ -29,11 +29,13 @@ class_name BlightedHound
 # POSTURE / DEATHBLOW
 # =============================================================================
 @export var parry_posture_gain: float = 35.0
-@export var max_posture: float = 100.0
-@export var posture_decay_rate: float = 8.0
-@export var posture_break_duration: float = 3.0
+@export var max_posture: float = 60.0
+@export var posture_recovery_delay: float = 1.5
+@export var posture_decay_rate: float = 20.0
+@export var posture_break_duration: float = 2.5
 
 var posture: float = 0.0
+var _posture_recovery_ready_at: float = 0.0
 var _dbroken_active: bool = false
 var _dbreak_until: float = 0.0
 
@@ -121,7 +123,7 @@ func _apply_hound_defaults() -> void:
 	# Only overwrite untouched base defaults.
 	# This avoids fighting Inspector overrides on existing scenes.
 	if hp == 200:
-		hp = 60
+		hp = 65
 	
 	if movement_speed == 55.0:
 		movement_speed = 85.0
@@ -144,7 +146,7 @@ func _ready() -> void:
 	
 	_setup_hitbox()
 	
-	print("[BlightedHound] v5.5 - BeastEnemyBase migrated")
+	print("[BlightedHound] v5.6 - Hushiro baseline")
 
 func _setup_posture_bar() -> void:
 	if _posture_ui != null:
@@ -225,8 +227,8 @@ func _physics_process(delta: float) -> void:
 	if _dbroken_active and now >= _dbreak_until:
 		_end_posture_break()
 	
-	# Posture decay
-	if state != State.STAGGER and posture > 0:
+	# Hushiro baseline: posture waits 1.5s after pressure, then recovers at 20/s.
+	if state != State.STAGGER and posture > 0 and now >= _posture_recovery_ready_at:
 		posture = max(0.0, posture - posture_decay_rate * delta)
 		_update_hound_posture_bar()
 	
@@ -806,8 +808,9 @@ func on_parried(parrier_pos: Vector2) -> void:
 	var now = Time.get_ticks_msec() * 0.001
 	stunned_until = now + parry_recoil_time
 	
-	# Add posture from parry
+	# Add posture from parry and delay recovery after fresh pressure.
 	posture = min(posture + parry_posture_gain, max_posture)
+	_posture_recovery_ready_at = now + posture_recovery_delay
 	_update_hound_posture_bar()
 	
 	if posture >= max_posture:

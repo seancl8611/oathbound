@@ -4,8 +4,8 @@ extends Node2D
 
 # Choice UI (created dynamically)
 var _choice_panel: Control = null
-# Add at the top of RunScene.gd
-@export var debug_start_area: int = 2  # 0 = normal, 2 = skip to area 2, etc.
+# Debug area warp is opt-in. Normal playtests must begin in Area 1 / Hushiro.
+@export var debug_start_area: int = 0  # 0 = normal, 2 = skip to area 2, etc.
 
 func _ready() -> void:
 	get_tree().paused = false
