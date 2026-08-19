@@ -6,7 +6,7 @@ extends "res://Areas/Area1/CombatRoom.gd"
 ## encounter selection and pressure coordination live here so Area 1 follows the
 ## approved authored multi-wave model instead of the imported strict-duel preset.
 
-const HUSHIRO_CATALOG = preload("res://Areas/Area1/HushiroEncounterCatalog.gd")
+const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 
 const HUSHIRO_MELEE_COOLDOWN: float = 1.20
 const HUSHIRO_ADVANCE_COOLDOWN: float = 0.55
@@ -26,25 +26,20 @@ func _pick_encounter_for_area(area_id: int) -> Dictionary:
 	if area_id != 1:
 		return super._pick_encounter_for_area(area_id)
 
-	var chamber_number: int = 1
-	if typeof(GameFlow) == TYPE_OBJECT:
-		chamber_number = maxi(1, int(GameFlow.current_index) + 1)
-	elif typeof(RunData) == TYPE_OBJECT:
-		chamber_number = maxi(1, int(RunData.depth) + 1)
-
-	var seen: Array[String] = []
-	if typeof(RunData) == TYPE_OBJECT:
-		seen = RunData.hushiro_encounters_seen
-
-	var encounter: Dictionary = HUSHIRO_CATALOG.pick_for_chamber(chamber_number, seen)
+	var chamber_number: int = maxi(1, int(RunData.depth) + 1)
+	var encounter: Dictionary = HUSHIRO_CATALOG.pick_for_chamber(
+		chamber_number,
+		RunData.hushiro_encounters_seen
+	)
 	if encounter.is_empty():
-		push_warning("[HushiroCombatRoom] No unseen eligible encounter for chamber %d; using Broken Patrol fallback" % chamber_number)
-		encounter = HUSHIRO_CATALOG.get_by_id("H01_broken_patrol")
+		# This should only occur after unusual debug warp/reload sequences exhaust all
+		# unseen eligible encounters. Use an explicit fallback so the room remains usable.
+		push_warning("[HushiroCombatRoom] No unseen eligible encounter for chamber %d; using Firing Line fallback" % chamber_number)
+		encounter = HUSHIRO_CATALOG.get_by_id("H02_firing_line")
 
 	var encounter_id: String = str(encounter.get("id", ""))
-	if typeof(RunData) == TYPE_OBJECT and not encounter_id.is_empty():
-		if not RunData.hushiro_encounters_seen.has(encounter_id):
-			RunData.hushiro_encounters_seen.append(encounter_id)
+	if not encounter_id.is_empty() and not RunData.hushiro_encounters_seen.has(encounter_id):
+		RunData.hushiro_encounters_seen.append(encounter_id)
 
 	print("[HushiroCombatRoom] Chamber %d -> %s (%s)" % [
 		chamber_number,
