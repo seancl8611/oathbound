@@ -13,10 +13,15 @@ func _ready() -> void:
 
 	GameFlow.setup($RoomContainer)
 
-	var player_scene = "res://Player/player.tscn"
+	# Run combat uses the current Oathbound bridge without mutating the validated
+	# imported player.tscn from the Godot 4.7.2 migration.
+	var player_scene = "res://Player/OathboundPlayer.tscn"
 	if ResourceLoader.exists(player_scene):
-		var p = load(player_scene).instantiate()
+		var packed: PackedScene = load(player_scene)
+		var p = packed.instantiate()
 		GameFlow.set_player(p)
+		# Keep GameFlow's fallback/debug respawns on the same current player scene.
+		GameFlow._player_packed = packed
 
 	# Connect signals
 	if not GameFlow.is_connected("room_changed", Callable(self, "_on_room_changed")):
