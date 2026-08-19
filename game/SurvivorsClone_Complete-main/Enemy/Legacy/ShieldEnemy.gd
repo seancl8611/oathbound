@@ -16,7 +16,10 @@ var facing: Vector2 = Vector2.RIGHT
 var knockback: Vector2 = Vector2.ZERO
 
 
-func configure_as_ring_guard(slot_position: Vector2, center: Vector2, _wall_radius: float, _arc_half: float) -> void:
+func configure_as_ring_guard(slot_position: Vector2, center: Vector2, _legacy_mode = null, _legacy_arc = null) -> void:
+	# The imported ShieldFormationController calls this legacy method with three
+	# arguments, while older variants used four. Optional compatibility parameters
+	# intentionally accept either shape until this obsolete formation system is removed.
 	home = slot_position
 	var to_center := center - global_position
 	if to_center.length_squared() > 0.001:
