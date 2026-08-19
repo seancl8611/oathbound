@@ -2,13 +2,17 @@ extends Resource
 class_name CombatConfig
 
 ## =============================================================================
-## COMBAT CONFIG - v5.0 TRUE SEKIRO COMBAT
+## COMBAT CONFIG - OATHBOUND FIRST-PLAYTEST BASELINE
 ## =============================================================================
-## Key Sekiro principles:
-## - Enemies BLOCK by default, requiring posture breaks
-## - Posture damage is the primary combat mechanic
-## - HP damage only when posture is broken OR enemy isn't blocking
-## - Recovery curves tied to HP (low HP = slow posture recovery)
+## Shared combat values mirror docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md.
+## Individual attacks, enemies, minibosses, bosses, Aspects, Techniques, Relics,
+## and Prosthetics may author explicit values on top of this baseline.
+##
+## Important rules:
+## - Health and Posture are independent defeat/pressure tracks.
+## - Standard enemy posture recovery is NOT tied to remaining Health.
+## - A posture break opens a temporary Deathblow opportunity, then resets Posture.
+## - There is no universal critical-hit system in the shared combat layer.
 ## =============================================================================
 
 # =============================================================================
@@ -16,73 +20,82 @@ class_name CombatConfig
 # =============================================================================
 @export_group("Posture")
 @export var posture_max: float = 100.0
-@export var posture_recover_rate: float = 8.0         # Base recovery per second
-@export var posture_recover_delay: float = 2.0        # Seconds after hit before recovery starts
-@export var posture_break_duration: float = 4.0       # How long deathblow window lasts
+@export var posture_recover_rate: float = 20.0
+@export var posture_recover_delay: float = 1.5
+@export var posture_break_duration: float = 2.5
+@export var posture_break_reset_ratio: float = 0.50
 
 @export_group("Posture Damage")
-@export var hit_posture_gain: float = 15.0            # Posture damage from attacks (on block)
-@export var parry_posture_spike: float = 45.0         # Posture damage when parried
-@export var deflect_streak_bonus: float = 5.0         # Bonus per consecutive parry
+# Legacy-compatible defaults. AttackEvents should author posture/block pressure directly.
+@export var hit_posture_gain: float = 15.0
+@export var parry_posture_spike: float = 25.0
+@export var deflect_streak_bonus: float = 0.0
 
-## HP-based recovery multipliers (Sekiro core mechanic)
-## At full HP, enemies recover posture quickly
-## At low HP, recovery is nearly stopped
-@export var recovery_mult_high_hp: float = 1.0        # >75% HP
-@export var recovery_mult_mid_hp: float = 0.25        # 50-75% HP
-@export var recovery_mult_low_hp: float = 0.05        # 25-50% HP
-@export var recovery_mult_critical_hp: float = 0.01   # <25% HP
+# Deprecated compatibility fields. Oathbound's baseline does not use an HP-based
+# posture-recovery curve; all values remain 1.0 so old callers stay neutral.
+@export_group("Legacy Recovery Compatibility")
+@export var recovery_mult_high_hp: float = 1.0
+@export var recovery_mult_mid_hp: float = 1.0
+@export var recovery_mult_low_hp: float = 1.0
+@export var recovery_mult_critical_hp: float = 1.0
 
 # =============================================================================
 # INPUT BUFFERING
 # =============================================================================
 @export_group("Input Buffer")
-@export var input_buffer_ms: int = 100                # Attack buffer ~6 frames
-@export var dodge_buffer_ms: int = 83                 # Dodge buffer ~5 frames
-@export var parry_buffer_ms: int = 0                  # NO parry buffer (precision)
+@export var input_buffer_ms: int = 100
+@export var dodge_buffer_ms: int = 100
+@export var parry_buffer_ms: int = 0
 
 # =============================================================================
 # ATTACK SYSTEM
 # =============================================================================
 @export_group("Attack Timing")
-@export var attack_cancel_at: float = 0.60            # When dodge cancel becomes available
-@export var combo_window_start: float = 0.55          # When combo input opens
-@export var combo_window_end: float = 0.85            # When combo input closes
+@export var attack_cancel_at: float = 0.60
+@export var combo_window_start: float = 0.55
+@export var combo_window_end: float = 0.85
 @export var max_combo_hits: int = 3
-@export var combo_link_window: float = 0.20           # Window after attack ends
+@export var combo_link_window: float = 0.20
 
 @export_group("Attack Movement")
-@export var attack_lunge_distance: float = 16.0       # Short lunge
+@export var attack_lunge_distance: float = 16.0
 @export var combo_lunge_multipliers = [1.0, 1.1, 1.3]
-@export var attack_movement_mult: float = 0.0         # NO movement during attack
+@export var attack_movement_mult: float = 0.0
 
 @export_group("Attack Damage")
-@export var combo_damage = [10, 12, 18]               # HP damage per hit
-@export var combo_posture_damage = [12.0, 14.0, 20.0] # Posture damage per hit
+@export var combo_damage = [10, 12, 18]
+@export var combo_posture_damage = [12.0, 14.0, 20.0]
 
 # =============================================================================
 # STEP-DODGE
 # =============================================================================
 @export_group("Step-Dodge")
-@export var dodge_distance: float = 85.0
+@export var dodge_distance: float = 96.0
 @export var dodge_duration: float = 0.18
-@export var dodge_cooldown: float = 0.45
-@export var dodge_speed: float = 470.0
+# Repeat interval is measured from the prior dash start.
+@export var dodge_cooldown: float = 0.30
+@export var dodge_speed: float = 533.3333
 
 @export_group("I-Frames")
-@export var iframes_start_frame: int = 1
+# Kept for compatibility with older callers; the canonical duration is 0.12 s.
+@export var iframes_start_frame: int = 0
 @export var iframes_end_frame: int = 7
-@export var iframes_duration: float = 0.0             # Auto-calculated
+@export var iframes_duration: float = 0.12
 
 # =============================================================================
-# PARRY SYSTEM
+# PARRY / BLOCK
 # =============================================================================
 @export_group("Parry Timing")
-@export var parry_window_base: float = 0.18           # ~11 frames
-@export var perfect_parry_window: float = 0.05        # ~3 frames
-@export var parry_window_min: float = 0.08            # Minimum after spam penalty
-@export var parry_spam_penalty: float = 0.03          # Per spam press
-@export var parry_spam_recovery: float = 0.5          # Time to restore window
+@export var parry_window_base: float = 0.12
+# Oathbound does not have a separate universal "perfect parry" rules layer.
+@export var perfect_parry_window: float = 0.0
+@export var parry_window_min: float = 0.12
+@export var parry_spam_penalty: float = 0.0
+@export var parry_spam_recovery: float = 0.0
+@export var counter_window: float = 0.24
+
+@export_group("Block")
+@export var block_arc_degrees: float = 150.0
 
 # =============================================================================
 # FEEDBACK
@@ -116,9 +129,9 @@ class_name CombatConfig
 # MOVEMENT REFERENCE
 # =============================================================================
 @export_group("Movement Reference")
-@export var movement_speed: float = 220.0             # Controlled movement
+@export var movement_speed: float = 200.0
 @export var acceleration_time: float = 0.06
-@export var deceleration_time: float = 0.04           # Fast stop, no skating
+@export var deceleration_time: float = 0.04
 
 
 ## =============================================================================
@@ -126,10 +139,7 @@ class_name CombatConfig
 ## =============================================================================
 
 func get_iframes_duration() -> float:
-	if iframes_duration > 0.0:
-		return iframes_duration
-	var frames = iframes_end_frame - iframes_start_frame
-	return frames / 60.0
+	return iframes_duration
 
 
 func get_combo_damage(hit_index: int) -> int:
@@ -151,18 +161,9 @@ func get_combo_lunge(hit_index: int) -> float:
 	return attack_lunge_distance * mult
 
 
-## Calculate posture recovery multiplier based on HP ratio
-func get_recovery_multiplier(hp_ratio: float) -> float:
-	hp_ratio = clamp(hp_ratio, 0.0, 1.0)
-	
-	if hp_ratio > 0.75:
-		return recovery_mult_high_hp
-	elif hp_ratio > 0.50:
-		return recovery_mult_mid_hp
-	elif hp_ratio > 0.25:
-		return recovery_mult_low_hp
-	else:
-		return recovery_mult_critical_hp
+## Deprecated compatibility helper. Health does not modify baseline Posture recovery.
+func get_recovery_multiplier(_hp_ratio: float) -> float:
+	return 1.0
 
 
 ## =============================================================================
@@ -171,28 +172,19 @@ func get_recovery_multiplier(hp_ratio: float) -> float:
 
 static func create_player_config() -> CombatConfig:
 	var cfg = CombatConfig.new()
-	
-	# Posture - Player is more resilient
 	cfg.posture_max = 100.0
-	cfg.posture_recover_rate = 20.0      # Fast recovery
-	cfg.posture_recover_delay = 1.0
-	cfg.posture_break_duration = 2.5
-	cfg.hit_posture_gain = 8.0           # Takes less posture damage
+	cfg.posture_recover_rate = 25.0
+	cfg.posture_recover_delay = 0.75
+	cfg.posture_break_duration = 0.75
+	cfg.posture_break_reset_ratio = 0.40
+	cfg.hit_posture_gain = 8.0
 	cfg.parry_posture_spike = 25.0
-	cfg.deflect_streak_bonus = 4.0
-	
-	# Recovery curve (player doesn't have HP-based recovery penalty)
-	cfg.recovery_mult_high_hp = 1.0
-	cfg.recovery_mult_mid_hp = 1.0
-	cfg.recovery_mult_low_hp = 0.8
-	cfg.recovery_mult_critical_hp = 0.5
-	
-	# Input buffer
+	cfg.deflect_streak_bonus = 0.0
+
 	cfg.input_buffer_ms = 100
-	cfg.dodge_buffer_ms = 83
+	cfg.dodge_buffer_ms = 100
 	cfg.parry_buffer_ms = 0
-	
-	# Attacks
+
 	cfg.attack_cancel_at = 0.60
 	cfg.combo_window_start = 0.55
 	cfg.combo_window_end = 0.85
@@ -203,23 +195,23 @@ static func create_player_config() -> CombatConfig:
 	cfg.attack_movement_mult = 0.0
 	cfg.combo_damage = [10, 12, 18]
 	cfg.combo_posture_damage = [12.0, 14.0, 20.0]
-	
-	# Dodge
-	cfg.dodge_distance = 85.0
+
+	cfg.dodge_distance = 96.0
 	cfg.dodge_duration = 0.18
-	cfg.dodge_cooldown = 0.45
-	cfg.dodge_speed = 470.0
-	cfg.iframes_start_frame = 1
+	cfg.dodge_cooldown = 0.30
+	cfg.dodge_speed = 533.3333
+	cfg.iframes_start_frame = 0
 	cfg.iframes_end_frame = 7
-	
-	# Parry
-	cfg.parry_window_base = 0.18
-	cfg.perfect_parry_window = 0.05
-	cfg.parry_window_min = 0.08
-	cfg.parry_spam_penalty = 0.03
-	cfg.parry_spam_recovery = 0.5
-	
-	# Feedback
+	cfg.iframes_duration = 0.12
+
+	cfg.parry_window_base = 0.12
+	cfg.perfect_parry_window = 0.0
+	cfg.parry_window_min = 0.12
+	cfg.parry_spam_penalty = 0.0
+	cfg.parry_spam_recovery = 0.0
+	cfg.counter_window = 0.24
+	cfg.block_arc_degrees = 150.0
+
 	cfg.hitstop_light = 0.08
 	cfg.hitstop_heavy = 0.18
 	cfg.hitstop_parry = 0.25
@@ -228,128 +220,82 @@ static func create_player_config() -> CombatConfig:
 	cfg.shake_heavy = 5.0
 	cfg.shake_parry = 5.0
 	cfg.shake_posture_break = 8.0
-	
-	# Deathblow
+
 	cfg.can_do_finisher = true
-	
-	# Movement
-	cfg.movement_speed = 220.0
+	cfg.movement_speed = 200.0
 	cfg.acceleration_time = 0.06
 	cfg.deceleration_time = 0.04
-	
 	return cfg
 
 
 static func create_enemy_config() -> CombatConfig:
-	## Standard enemy - blocks by default, posture-based combat
+	## Standard enemy reference baseline: 100 Health / 100 Posture.
 	var cfg = CombatConfig.new()
-	
-	# Posture - The core Sekiro mechanic
-	cfg.posture_max = 80.0               # Standard enemy posture
-	cfg.posture_recover_rate = 10.0      # Moderate recovery
-	cfg.posture_recover_delay = 2.0      # Delay before recovery starts
-	cfg.posture_break_duration = 4.0     # Deathblow window
-	cfg.hit_posture_gain = 15.0          # Posture damage from hits
-	cfg.parry_posture_spike = 45.0       # Big spike when parried
-	cfg.deflect_streak_bonus = 5.0
-	
-	# HP-based recovery (Sekiro core mechanic)
-	cfg.recovery_mult_high_hp = 1.0      # Full recovery at high HP
-	cfg.recovery_mult_mid_hp = 0.25      # Much slower at mid HP
-	cfg.recovery_mult_low_hp = 0.05      # Nearly stopped at low HP
-	cfg.recovery_mult_critical_hp = 0.01 # Basically stopped
-	
+	cfg.posture_max = 100.0
+	cfg.posture_recover_rate = 20.0
+	cfg.posture_recover_delay = 1.5
+	cfg.posture_break_duration = 2.5
+	cfg.posture_break_reset_ratio = 0.50
+	cfg.hit_posture_gain = 15.0
+	cfg.parry_posture_spike = 25.0
+	cfg.deflect_streak_bonus = 0.0
 	cfg.can_do_finisher = false
-	
 	return cfg
 
 
 static func create_miniboss_config() -> CombatConfig:
-	## Miniboss - tougher posture, requires more sustained pressure
+	## Actual miniboss Health/Posture are authored on the enemy contract.
 	var cfg = CombatConfig.new()
-	
-	# Posture - Harder to break
-	cfg.posture_max = 120.0              # Higher posture
-	cfg.posture_recover_rate = 8.0       # Slower recovery
-	cfg.posture_recover_delay = 2.5
-	cfg.posture_break_duration = 4.5
-	cfg.hit_posture_gain = 12.0          # Takes more to fill
-	cfg.parry_posture_spike = 50.0       # But parries are still effective
-	cfg.deflect_streak_bonus = 7.0
-	
-	# HP-based recovery
-	cfg.recovery_mult_high_hp = 1.0
-	cfg.recovery_mult_mid_hp = 0.20
-	cfg.recovery_mult_low_hp = 0.03
-	cfg.recovery_mult_critical_hp = 0.005
-	
-	cfg.can_do_finisher = true           # Has deathblow
-	
+	cfg.posture_max = 150.0
+	cfg.posture_recover_rate = 20.0
+	cfg.posture_recover_delay = 1.5
+	cfg.posture_break_duration = 2.5
+	cfg.posture_break_reset_ratio = 0.50
+	cfg.hit_posture_gain = 12.0
+	cfg.parry_posture_spike = 30.0
+	cfg.deflect_streak_bonus = 0.0
+	cfg.can_do_finisher = true
 	return cfg
 
 
 static func create_boss_config() -> CombatConfig:
-	## Boss - highest posture, strictest HP recovery curve
+	## Actual boss Health/Posture and phase checkpoints are authored per boss.
 	var cfg = CombatConfig.new()
-	
-	# Posture - Very hard to break without whittling HP
-	cfg.posture_max = 150.0
-	cfg.posture_recover_rate = 6.0
-	cfg.posture_recover_delay = 3.0
-	cfg.posture_break_duration = 5.0
+	cfg.posture_max = 175.0
+	cfg.posture_recover_rate = 20.0
+	cfg.posture_recover_delay = 1.5
+	cfg.posture_break_duration = 2.5
+	cfg.posture_break_reset_ratio = 0.50
 	cfg.hit_posture_gain = 10.0
-	cfg.parry_posture_spike = 55.0
-	cfg.deflect_streak_bonus = 8.0
-	
-	# HP-based recovery - must damage HP to prevent recovery
-	cfg.recovery_mult_high_hp = 1.0
-	cfg.recovery_mult_mid_hp = 0.15
-	cfg.recovery_mult_low_hp = 0.02
-	cfg.recovery_mult_critical_hp = 0.0  # No recovery at critical HP!
-	
+	cfg.parry_posture_spike = 30.0
+	cfg.deflect_streak_bonus = 0.0
 	cfg.can_do_finisher = true
-	
 	return cfg
 
 
 static func create_fodder_config() -> CombatConfig:
-	## Fodder - easy to stagger, simple combat
+	## Fragile reference band: 50-70 Posture.
 	var cfg = CombatConfig.new()
-	
-	cfg.posture_max = 40.0               # Very low posture
-	cfg.posture_recover_rate = 5.0
+	cfg.posture_max = 60.0
+	cfg.posture_recover_rate = 20.0
 	cfg.posture_recover_delay = 1.5
-	cfg.posture_break_duration = 3.0
-	cfg.hit_posture_gain = 20.0          # Breaks easily
-	cfg.parry_posture_spike = 35.0
-	
-	# Less strict HP curve
-	cfg.recovery_mult_high_hp = 1.0
-	cfg.recovery_mult_mid_hp = 0.5
-	cfg.recovery_mult_low_hp = 0.2
-	cfg.recovery_mult_critical_hp = 0.1
-	
-	cfg.can_do_finisher = false          # No deathblow, just dies
-	
+	cfg.posture_break_duration = 2.5
+	cfg.posture_break_reset_ratio = 0.50
+	cfg.hit_posture_gain = 20.0
+	cfg.parry_posture_spike = 25.0
+	cfg.can_do_finisher = false
 	return cfg
 
 
 static func create_aggressive_enemy_config() -> CombatConfig:
-	## Aggressive enemy - less defensive but also breaks easier
+	## Compatibility preset for lighter aggressive enemies; no HP recovery curve.
 	var cfg = CombatConfig.new()
-	
-	cfg.posture_max = 60.0               # Lower posture than standard
-	cfg.posture_recover_rate = 12.0      # But recovers faster
+	cfg.posture_max = 80.0
+	cfg.posture_recover_rate = 20.0
 	cfg.posture_recover_delay = 1.5
-	cfg.posture_break_duration = 3.5
+	cfg.posture_break_duration = 2.5
+	cfg.posture_break_reset_ratio = 0.50
 	cfg.hit_posture_gain = 18.0
-	cfg.parry_posture_spike = 40.0
-	
-	cfg.recovery_mult_high_hp = 1.0
-	cfg.recovery_mult_mid_hp = 0.3
-	cfg.recovery_mult_low_hp = 0.08
-	cfg.recovery_mult_critical_hp = 0.02
-	
+	cfg.parry_posture_spike = 25.0
 	cfg.can_do_finisher = false
-	
 	return cfg
