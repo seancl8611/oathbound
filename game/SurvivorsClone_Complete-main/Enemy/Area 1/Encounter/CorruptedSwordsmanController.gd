@@ -94,8 +94,9 @@ func receive_deathblow(attacker: Node) -> void:
 func on_parried(player_pos: Vector2) -> void:
 	var was_perilous_thrust: bool = _current_attack_type == AttackType.QUICK_THRUST
 
-	# The inherited controller applies the shared normal 25-point parry response via
-	# CombatController. Capture the attack class before it resets its attack runtime.
+	# The inherited controller applies the shared normal 25-point parry response before
+	# its recoil await. Do not await here: preserving that inherited async recoil flow
+	# lets this current rules layer add only the perilous-thrust bonus immediately.
 	super.on_parried(player_pos)
 
 	if was_perilous_thrust:
