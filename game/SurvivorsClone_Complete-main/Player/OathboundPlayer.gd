@@ -1,0 +1,406 @@
+extends "res://Player/player.gd"
+
+## =============================================================================
+## OATHBOUND PLAYER - CURRENT COMBAT BASELINE BRIDGE
+## =============================================================================
+## The imported player.gd contains a large amount of useful animation/input/combat
+## plumbing, but also many superseded prototype rules. This bridge keeps that proven
+## implementation intact while overriding the first-playtest rules owned by
+## docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md.
+##
+## Once the old build/progression systems are removed, player.gd can be split into
+## smaller components and this migration bridge can disappear.
+## =============================================================================
+
+const CURRENT_MAX_SPIRIT := 100
+const CURRENT_MOVE_SPEED := 200.0
+const CURRENT_DASH_DISTANCE := 96.0
+const CURRENT_DASH_DURATION := 0.18
+const CURRENT_DASH_REPEAT_INTERVAL := 0.30
+const CURRENT_DASH_IFRAMES := 0.12
+const CURRENT_DASH_SPEED := CURRENT_DASH_DISTANCE / CURRENT_DASH_DURATION
+const CURRENT_INPUT_BUFFER := 0.10
+const CURRENT_PARRY_WINDOW := 0.12
+const CURRENT_COUNTER_WINDOW := 0.24
+const CURRENT_BLOCK_ARC_DEGREES := 150.0
+const CURRENT_POSTURE_RECOVER_DELAY := 0.75
+const CURRENT_POSTURE_RECOVER_RATE := 25.0
+const CURRENT_POSTURE_BREAK_DURATION := 0.75
+const CURRENT_POSTURE_BREAK_RESET_RATIO := 0.40
+
+
+func _ready() -> void:
+	# Set baseline resources before the inherited setup builds HUD/config references.
+	maxhp = 100
+	hp = 100
+	stagger_max = 100.0
+	stagger = 0.0
+	stagger_regen_rate = CURRENT_POSTURE_RECOVER_RATE
+	stagger_regen_blocked = 0.0
+
+	super._ready()
+
+	# Force the imported CombatController child onto the current shared preset even
+	# if the scene carried an older serialized config.
+	if combat:
+		combat.config = CombatConfig.create_player_config()
+
+	# Spirit currently lives inside the imported Prosthetic executor. Normalize the
+	# shared resource here without prematurely rewriting the Prosthetic content layer.
+	if prosthetic_executor:
+		prosthetic_executor.max_spirit = CURRENT_MAX_SPIRIT
+		prosthetic_executor.current_spirit = CURRENT_MAX_SPIRIT
+		if prosthetic_executor.has_signal("spirit_changed"):
+			prosthetic_executor.emit_signal("spirit_changed", CURRENT_MAX_SPIRIT, CURRENT_MAX_SPIRIT)
+
+	_update_health_bar()
+	_update_stagger_ui()
+
+
+# =============================================================================
+# MOVEMENT
+# =============================================================================
+
+func _state_idle(delta: float):
+	if _move_input.length() > 0.1:
+		_change_state(State.MOVING)
+		return
+
+	_current_speed = move_toward(_current_speed, 0.0, CURRENT_MOVE_SPEED / DECEL_TIME * delta)
+	if _current_speed < STOP_THRESHOLD:
+		_current_speed = 0.0
+	_move_velocity = _facing_dir * _current_speed
+	_play_anim("idle")
+
+
+func _state_moving(delta: float):
+	if _move_input.length() < 0.1:
+		_change_state(State.IDLE)
+		return
+
+	_facing_dir = _move_input.normalized()
+	_current_speed = move_toward(_current_speed, CURRENT_MOVE_SPEED, CURRENT_MOVE_SPEED / ACCEL_TIME * delta)
+	_move_velocity = _facing_dir * _current_speed
+
+	_update_sprite_facing(_facing_dir)
+	_play_anim("walk")
+
+
+func _calculate_velocity(delta: float):
+	var final_vel = Vector2.ZERO
+
+	if knockback.length() > 1.0:
+		final_vel = knockback
+		knockback = knockback.move_toward(Vector2.ZERO, knockback_decay * 100.0 * delta)
+	else:
+		knockback = Vector2.ZERO
+
+	match _state:
+		State.IDLE, State.MOVING:
+			final_vel += _move_velocity
+
+		State.DODGING:
+			final_vel = _dodge_dir * CURRENT_DASH_SPEED
+
+		State.ATTACKING:
+			if _is_attack_lunge_active():
+				var lunge_speed := float(_attack_profile.get("lunge_speed", 0.0))
+				final_vel += _attack_aim_dir * lunge_speed
+
+		State.ATTACK_RECOVERY:
+			final_vel += _move_velocity * 0.12
+
+		State.USING_PROSTHETIC:
+			pass
+
+	if has_meta("puddle_slow_amount"):
+		var slow_amount = get_meta("puddle_slow_amount")
+		if slow_amount > 0.0:
+			final_vel *= (1.0 - slow_amount)
+
+	# Legacy Mist Raven movement modifier remains until the Prosthetic package is
+	# reconciled; preserving it here avoids changing a separate system accidentally.
+	if has_meta("_mist_raven_boost_until"):
+		var boost_until = float(get_meta("_mist_raven_boost_until"))
+		var now_mr = Time.get_ticks_msec() * 0.001
+		if now_mr < boost_until:
+			var boost_amt = float(get_meta("_mist_raven_boost", 0.0))
+			var remaining = boost_until - now_mr
+			var decay = remaining / 1.2
+			final_vel *= (1.0 + boost_amt * decay)
+		else:
+			remove_meta("_mist_raven_boost")
+			remove_meta("_mist_raven_boost_until")
+
+	velocity = final_vel
+
+
+func _get_effective_move_speed() -> float:
+	var base_speed = CURRENT_MOVE_SPEED
+	var puddle_slow = get_meta("puddle_slow_amount", 0.0)
+	if puddle_slow > 0.0:
+		base_speed *= (1.0 - puddle_slow)
+	return base_speed
+
+
+# =============================================================================
+# INPUT BUFFER
+# =============================================================================
+
+func _buffer_input(action: String):
+	_buffered_action = action
+	_buffer_timer = CURRENT_INPUT_BUFFER
+
+
+# =============================================================================
+# DASH
+# =============================================================================
+
+func _start_dodge():
+	_drop_combo()
+
+	_dash_slash_consumed = false
+	_clear_dash_slash_window()
+
+	if _move_input.length() > 0.1:
+		_dodge_dir = _move_input.normalized()
+	else:
+		_dodge_dir = _facing_dir
+
+	_dodge_timer = CURRENT_DASH_DURATION
+	_dodge_cooldown = CURRENT_DASH_REPEAT_INTERVAL
+	_current_speed = 0.0
+	_move_velocity = Vector2.ZERO
+	_lunge_timer = 0.0
+
+	# Invulnerability begins with dash commitment and lasts exactly 0.12 s.
+	_is_invincible = true
+	set_invincibility(true)
+
+	_update_sprite_facing(_dodge_dir)
+	_play_anim("dash")
+	_change_state(State.DODGING)
+	_setup_dodge_exceptions()
+
+
+func _state_dodging(delta: float):
+	_dodge_timer -= delta
+	var elapsed := CURRENT_DASH_DURATION - max(_dodge_timer, 0.0)
+
+	if elapsed <= CURRENT_DASH_IFRAMES:
+		if not _is_invincible:
+			_is_invincible = true
+			set_invincibility(true)
+	elif _is_invincible:
+		_is_invincible = false
+		set_invincibility(false)
+
+	if _dodge_timer <= 0.0:
+		_end_dodge()
+
+
+# =============================================================================
+# PARRY / COUNTER
+# =============================================================================
+
+func _get_effective_parry_window() -> float:
+	return CURRENT_PARRY_WINDOW
+
+
+func _start_parry(_window_s: float):
+	_drop_combo()
+	_clear_counter_cut_window()
+
+	_parry_active = true
+	_parry_timer = CURRENT_PARRY_WINDOW
+	_perfect_parry_available = false
+	_parry_spam_count = 0
+	_parry_spam_reset_timer = 0.0
+
+	_current_speed = 0.0
+	_move_velocity = Vector2.ZERO
+
+	var now = Time.get_ticks_msec() * 0.001
+	if now <= _post_dodge_block_priority_until and Input.is_action_pressed("parry"):
+		_block_held = true
+		_change_state(State.BLOCKING)
+		if combat:
+			combat.start_block()
+		_play_block_animation()
+		return
+
+	_change_state(State.PARRYING)
+
+	if Input.is_action_pressed("parry"):
+		_play_block_animation()
+	else:
+		_play_anim("parry")
+
+
+func _state_parrying(delta: float):
+	_parry_timer -= delta
+	_perfect_parry_available = false
+
+	if _parry_timer <= 0.0:
+		_parry_active = false
+		if Input.is_action_pressed("parry"):
+			_current_speed = 0.0
+			_move_velocity = Vector2.ZERO
+			_change_state(State.BLOCKING)
+			if combat:
+				combat.start_block()
+		else:
+			_change_state(State.IDLE)
+
+
+func _open_counter_cut_window(target: Node = null) -> void:
+	_counter_cut_until = Time.get_ticks_msec() * 0.001 + CURRENT_COUNTER_WINDOW
+	_counter_cut_target = target
+
+
+func _handle_parry_success(area: Area2D, attacker: Node, dmg_type: String, atk_pos: Vector2, _is_perfect: bool):
+	# Reuse the mature projectile/feedback/attacker notification flow, but force the
+	# single Oathbound parry result rather than the old perfect/grace tiers.
+	super._handle_parry_success(area, attacker, dmg_type, atk_pos, false)
+	_perfect_parry_available = false
+	_parry_grace_until = -1.0
+	set_invincibility(false)
+	_open_counter_cut_window(_resolve_attacker(area, attacker))
+
+
+# =============================================================================
+# BLOCK
+# =============================================================================
+
+func _is_attack_inside_block_arc(atk_pos: Vector2) -> bool:
+	var to_attacker := atk_pos - global_position
+	if to_attacker.length_squared() <= 0.001:
+		return true
+	var facing := _facing_dir.normalized()
+	if facing.length_squared() <= 0.001:
+		facing = Vector2.RIGHT
+	var angle_deg := abs(rad_to_deg(facing.angle_to(to_attacker.normalized())))
+	return angle_deg <= CURRENT_BLOCK_ARC_DEGREES * 0.5
+
+
+func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk_pos: Vector2):
+	# Blocking only protects the authored 150-degree frontal arc.
+	if not _is_attack_inside_block_arc(atk_pos):
+		take_damage(dmg)
+		var rear_kb_dir = (global_position - atk_pos).normalized()
+		knockback += rear_kb_dir * 120.0
+		if combat:
+			combat.notify_got_hit({"damage": dmg, "type": dmg_type})
+		return
+
+	var block_posture := 12.0
+	if area:
+		if area.has_meta("block_posture_damage"):
+			block_posture = float(area.get_meta("block_posture_damage"))
+		elif area.has_meta("stagger_on_block"):
+			block_posture = float(area.get_meta("stagger_on_block"))
+	if attacker and block_posture == 12.0:
+		if attacker.has_meta("block_posture_damage"):
+			block_posture = float(attacker.get_meta("block_posture_damage"))
+		elif attacker.has_meta("stagger_on_block"):
+			block_posture = float(attacker.get_meta("stagger_on_block"))
+
+	# No universal multiplier, per-hit cap, or diminishing-return system: authored
+	# block_posture_damage is the pressure that is applied.
+	stagger = clamp(stagger + max(0.0, block_posture), 0.0, stagger_max)
+	var now := Time.get_ticks_msec() * 0.001
+	_stagger_suppress_until = now + CURRENT_POSTURE_RECOVER_DELAY
+
+	apply_hitstop(HITSTOP_BLOCKED)
+	_shake_camera(SHAKE_BLOCKED, HITSTOP_BLOCKED)
+	_flash_player(Color(0.8, 0.8, 1.0), 0.06)
+
+	var kb_dir = (global_position - atk_pos).normalized()
+	knockback += kb_dir * 50.0
+
+	if attacker and is_instance_valid(attacker):
+		if attacker.has_method("on_blocked"):
+			attacker.on_blocked()
+		elif attacker.is_in_group("enemy_projectile") or attacker.is_in_group("deflectable"):
+			attacker.queue_free()
+
+	if stagger >= stagger_max - 0.001:
+		_posture_break()
+
+
+# =============================================================================
+# PLAYER POSTURE
+# =============================================================================
+
+func _tick_stagger(delta: float):
+	if stagger <= 0.0:
+		return
+	if _state == State.BLOCKING:
+		return
+
+	var now = Time.get_ticks_msec() * 0.001
+	if now < _stagger_suppress_until:
+		return
+	if _state == State.STUNNED:
+		return
+
+	stagger = max(0.0, stagger - CURRENT_POSTURE_RECOVER_RATE * delta)
+
+
+func _posture_break():
+	var now = Time.get_ticks_msec() * 0.001
+
+	# Keep the bar broken/full through the vulnerability rather than clearing it at
+	# break start. It resets to 40% when the 0.75 s vulnerability ends.
+	stagger = stagger_max
+	_stun_until = now + CURRENT_POSTURE_BREAK_DURATION
+	_stun_started_at = now
+
+	_parry_active = false
+	_block_held = false
+	_current_speed = 0.0
+	_move_velocity = Vector2.ZERO
+
+	_change_state(State.STUNNED)
+	apply_hitstop(HITSTOP_POSTURE_BREAK)
+	_shake_camera(SHAKE_HEAVY, 0.20)
+	_play_anim("hurt")
+	emit_signal("posture_broken_player")
+
+
+func _recover_from_stun():
+	if sprite:
+		sprite.offset = Vector2.ZERO
+
+	stagger = stagger_max * CURRENT_POSTURE_BREAK_RESET_RATIO
+	var now := Time.get_ticks_msec() * 0.001
+	_stagger_suppress_until = now + CURRENT_POSTURE_RECOVER_DELAY
+	_stun_until = 0.0
+	_stun_started_at = 0.0
+	_drop_combo()
+	_change_state(State.IDLE)
+
+
+# =============================================================================
+# CURRENT BASELINE INTROSPECTION (debug/playtest tooling)
+# =============================================================================
+
+func get_core_combat_baseline() -> Dictionary:
+	return {
+		"max_health": maxhp,
+		"max_posture": stagger_max,
+		"max_spirit": CURRENT_MAX_SPIRIT,
+		"move_speed": CURRENT_MOVE_SPEED,
+		"dash_distance": CURRENT_DASH_DISTANCE,
+		"dash_duration": CURRENT_DASH_DURATION,
+		"dash_iframes": CURRENT_DASH_IFRAMES,
+		"dash_repeat_interval": CURRENT_DASH_REPEAT_INTERVAL,
+		"input_buffer": CURRENT_INPUT_BUFFER,
+		"parry_window": CURRENT_PARRY_WINDOW,
+		"counter_window": CURRENT_COUNTER_WINDOW,
+		"block_arc_degrees": CURRENT_BLOCK_ARC_DEGREES,
+		"posture_recover_delay": CURRENT_POSTURE_RECOVER_DELAY,
+		"posture_recover_rate": CURRENT_POSTURE_RECOVER_RATE,
+		"posture_break_duration": CURRENT_POSTURE_BREAK_DURATION,
+		"posture_break_reset_ratio": CURRENT_POSTURE_BREAK_RESET_RATIO,
+	}
