@@ -4,16 +4,12 @@ extends "res://Enemy/Area 1/Encounter/corrupted_swordsman.gd"
 ## CORRUPTED SWORDSMAN - CURRENT HUSHIRO RULES LAYER
 ## =============================================================================
 ## The imported swordsman controller still owns its animation/HFSM plumbing while
-## Area 1 is reconciled. This script is the current Hushiro behavior authority for
-## rules that have already been approved and playtested:
-## - guard must be an explicit defend state, not permanent frontal invulnerability;
-## - Quick Thrust is perilous: no block, yes parry/dash;
-## - perilous-thrust parries apply 1.5x normal parry posture pressure;
-## - ordinary posture break exposes a 2.5 second Deathblow window;
-## - enemy -> Player contacts are emitted into structured playtest telemetry.
+## Area 1 is reconciled. This script owns approved current Hushiro behavior:
+## explicit guard state, perilous thrust response, ordinary Deathblow timing, and
+## structured enemy -> Player contact telemetry.
 ##
 ## This is intentionally a temporary inheritance bridge, not a second Swordsman
-## implementation. Once the imported HFSM/animation plumbing has been replaced,
+## implementation. When the imported HFSM/animation plumbing is replaced,
 ## corrupted_swordsman.gd can be retired and this controller can stand alone.
 ## =============================================================================
 
@@ -66,8 +62,8 @@ func receive_deathblow(attacker: Node) -> void:
 
 func on_parried(player_pos: Vector2) -> void:
 	var was_perilous_thrust: bool = _current_attack_type == AttackType.QUICK_THRUST
-	# The inherited controller applies the shared normal 25-point response before its
-	# recoil await. Preserve that async flow and add only the perilous-thrust bonus.
+	# Parent applies the shared 25-point response before its recoil await. Preserve
+	# that async flow and add only the 0.5x perilous-thrust bonus here.
 	super.on_parried(player_pos)
 	if was_perilous_thrust:
 		var bonus_posture: float = HUSHIRO_NORMAL_PARRY_POSTURE * (HUSHIRO_PERILOUS_THRUST_PARRY_MULT - 1.0)
