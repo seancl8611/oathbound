@@ -244,6 +244,10 @@ func _on_area_entered(area: Area2D) -> void:
 	var dmg_once = _read_health_damage(area)
 	var dmg_type = str(area.get_meta("damage_type")) if area.has_meta("damage_type") else "normal"
 	var canonical_event := _is_canonical_attack_event(area)
+	var receiver: Node = get_parent()
+	var telemetry_before: Dictionary = {}
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		telemetry_before = CombatTelemetry.snapshot_actor(receiver)
 
 	# Legacy EnemyBase contains an old damage-type response table that scales HP and
 	# Posture. Canonical events already authored those values, so use a neutral legacy
@@ -252,6 +256,9 @@ func _on_area_entered(area: Area2D) -> void:
 	var event_combat: Node = _begin_attack_event_transaction() if canonical_event else null
 	_emit_hurt_once_per_frame(dmg_once, receiver_damage_type, attacker)
 	_end_attack_event_transaction(event_combat)
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_contact(receiver, area, attacker, telemetry_before)
 
 	# Legacy imported stance layer remains connected until the Technique-system
 	# reconciliation replaces it. Keeping this here avoids breaking the old build
