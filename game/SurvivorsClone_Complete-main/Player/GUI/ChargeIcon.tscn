@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy2v5bgb688d4"]
+
+[ext_resource type="Texture2D" uid="uid://ywij2rnwq47s" path="res://icon.svg" id="1_l7dah"]
+
+[node name="TextureRect" type="TextureRect"]
+custom_minimum_size = Vector2(16, 16)
+offset_right = 128.0
+offset_bottom = 137.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_l7dah")
+expand_mode = 1
+stretch_mode = 5

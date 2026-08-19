@@ -1,0 +1,162 @@
+[gd_scene load_steps=4 format=3 uid="uid://si6mtdf1vjjm"]
+
+[sub_resource type="GDScript" id="GDScript_gr1yc"]
+script/source = "extends Area2D
+
+signal armory_opened
+
+var player_near = false
+var panel_tween: Tween = null
+var menu_opened = false
+var player_ref = null  # Tracks player node
+
+@onready var interact_popup = $InteractPopup
+
+const INTERACT_DISTANCE = 64
+
+func _ready():
+	interact_popup.visible = false
+	interact_popup.modulate.a = 0.0
+
+func _process(_delta):
+	if player_ref:
+		var distance = global_position.distance_to(player_ref.global_position)
+
+		if distance > INTERACT_DISTANCE:
+			if player_near:
+				player_near = false
+				if not menu_opened:
+					hide_interact_popup()
+		else:
+			if not player_near:
+				player_near = true
+				if not menu_opened:
+					show_interact_popup()
+
+	if player_near and not menu_opened:
+		if Input.is_action_just_pressed(\"interact\") and interact_popup.visible:
+			open_armory_menu()
+
+func _on_body_entered(body):
+	if body.is_in_group(\"player\"):
+		player_ref = body
+		player_near = true
+		if not menu_opened:
+			show_interact_popup()
+
+func _on_body_exited(body):
+	if body == player_ref:
+		player_near = false
+		if not menu_opened:
+			hide_interact_popup()
+
+func open_armory_menu():
+	if menu_opened:
+		return
+
+	menu_opened = true
+	hide_interact_popup()
+
+	var armory_menu = preload(\"res://Player/GUI/ArmoryMenu.tscn\").instantiate()
+	var canvas_layer = get_tree().current_scene.get_node(\"UILayer\")
+	canvas_layer.add_child(armory_menu)
+
+	armory_menu.weapon_selected.connect(_on_weapon_selected)
+	armory_menu.tree_exited.connect(_on_menu_closed)
+
+func _on_weapon_selected(weapon_name: String):
+	if Engine.has_singleton(\"Global\"):
+		Global.selected_weapon_name = weapon_name
+	else:
+		print(\"[WARNING] Global singleton not found - weapon choice not saved.\")
+
+	# Equip on current player if available
+	if player_ref and player_ref.has_method(\"change_weapon\"):
+		player_ref.change_weapon(weapon_name)
+	else:
+		print(\"[ERROR] player_ref is invalid or missing change_weapon()\")
+
+func _on_menu_closed():
+	menu_opened = false
+	if player_near:
+		show_interact_popup()
+	else:
+		hide_interact_popup()
+
+func show_interact_popup():
+	if panel_tween and panel_tween.is_running():
+		panel_tween.kill()
+	
+	interact_popup.visible = true
+	panel_tween = create_tween()
+	panel_tween.tween_property(interact_popup, \"modulate:a\", 1.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func hide_interact_popup():
+	if not is_inside_tree():
+		return
+
+	if panel_tween and panel_tween.is_running():
+		panel_tween.kill()
+
+	panel_tween = create_tween()
+	panel_tween.tween_property(interact_popup, \"modulate:a\", 0.0, 0.3).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await panel_tween.finished
+
+	if is_instance_valid(interact_popup):
+		interact_popup.visible = false
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p66hn"]
+size = Vector2(123, 67)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l4hy3"]
+bg_color = Color(0, 0, 0, 0.00392157)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[node name="ArmoryObject" type="Area2D"]
+script = SubResource("GDScript_gr1yc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p66hn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="InteractPopup" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="InteractPopup"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 0
+offset_left = -77.0
+offset_top = -76.0
+offset_right = 73.0
+offset_bottom = -36.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l4hy3")
+
+[node name="Label" type="Label" parent="InteractPopup/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.5
+offset_top = -13.0
+offset_right = 75.5
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press [E] to Interact"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

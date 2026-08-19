@@ -1,0 +1,202 @@
+[gd_scene load_steps=38 format=3]
+
+[ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="1_cbb3p"]
+[ext_resource type="PackedScene" uid="uid://mgtaninnhcss" path="res://Player/player.tscn" id="2_o2yha"]
+[ext_resource type="PackedScene" path="res://Utility/enemy_spawner.tscn" id="3_qvpwk"]
+[ext_resource type="PackedScene" path="res://Enemy/captain.tscn" id="4_s44pi"]
+[ext_resource type="Script" path="res://Utility/spawn_info.gd" id="5_w24db"]
+[ext_resource type="PackedScene" uid="uid://b0lkgxc2vsacq" path="res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn" id="6_jurrk"]
+[ext_resource type="PackedScene" uid="uid://crgeeakwaelj1" path="res://Enemy/Area 2/Encounter/Mist_Shepherd.tscn" id="7_t6hhs"]
+[ext_resource type="PackedScene" path="res://Enemy/shield_enemy.tscn" id="8_lo0da"]
+[ext_resource type="PackedScene" path="res://Enemy/brute.tscn" id="9_0l6fl"]
+[ext_resource type="PackedScene" path="res://Enemy/shogun.tscn" id="10_uha0i"]
+[ext_resource type="PackedScene" path="res://Enemy/tengu2.tscn" id="11_cl2q0"]
+[ext_resource type="PackedScene" path="res://Enemy/tengu1.tscn" id="12_di3dy"]
+[ext_resource type="PackedScene" path="res://Enemy/archer.tscn" id="13_n20c3"]
+[ext_resource type="PackedScene" path="res://Enemy/flying_demon.tscn" id="14_5n4uf"]
+[ext_resource type="PackedScene" path="res://Enemy/enemy_kobold_strong.tscn" id="15_irrlf"]
+[ext_resource type="PackedScene" path="res://Enemy/enemy_cyclops.tscn" id="16_augl2"]
+[ext_resource type="PackedScene" path="res://Enemy/enemy_juggernaut.tscn" id="17_o0lpx"]
+[ext_resource type="PackedScene" path="res://Enemy/enemy_super.tscn" id="18_6b3r7"]
+[ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="19_vtnk4"]
+
+[sub_resource type="Resource" id="Resource_vek5q"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("4_s44pi")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_sqm42"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("6_jurrk")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_vv141"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("7_t6hhs")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_tre4p"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("8_lo0da")
+enemy_num = 54
+enemy_spawn_delay = 0
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_hg33d"]
+script = ExtResource("5_w24db")
+time_start = 0
+time_end = 2
+enemy = ExtResource("9_0l6fl")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_anewo"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("10_uha0i")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_hhvvq"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("11_cl2q0")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_e1clk"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("12_di3dy")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_1ej3o"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("13_n20c3")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_jiphi"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("14_5n4uf")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_noq1o"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 62
+enemy = ExtResource("6_jurrk")
+enemy_num = 1
+enemy_spawn_delay = 0
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_6hmay"]
+script = ExtResource("5_w24db")
+time_start = 60
+time_end = 180
+enemy = ExtResource("15_irrlf")
+enemy_num = 1
+enemy_spawn_delay = 1
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_vbu3y"]
+script = ExtResource("5_w24db")
+time_start = 180
+time_end = 210
+enemy = ExtResource("16_augl2")
+enemy_num = 1
+enemy_spawn_delay = 2
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_t4jv8"]
+script = ExtResource("5_w24db")
+time_start = 210
+time_end = 240
+enemy = ExtResource("15_irrlf")
+enemy_num = 2
+enemy_spawn_delay = 0
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_n6qgw"]
+script = ExtResource("5_w24db")
+time_start = 240
+time_end = 270
+enemy = ExtResource("16_augl2")
+enemy_num = 1
+enemy_spawn_delay = 0
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_l7ga1"]
+script = ExtResource("5_w24db")
+time_start = 240
+time_end = 240
+enemy = ExtResource("17_o0lpx")
+enemy_num = 1
+enemy_spawn_delay = 0
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_saoty"]
+script = ExtResource("5_w24db")
+time_start = 270
+time_end = 300
+enemy = ExtResource("15_irrlf")
+enemy_num = 4
+enemy_spawn_delay = 0
+has_spawned = false
+
+[sub_resource type="Resource" id="Resource_03ean"]
+script = ExtResource("5_w24db")
+time_start = 300
+time_end = 300
+enemy = ExtResource("18_6b3r7")
+enemy_num = 1
+enemy_spawn_delay = 0
+has_spawned = false
+
+[node name="Area 1" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+texture = ExtResource("1_cbb3p")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+
+[node name="Player" parent="." instance=ExtResource("2_o2yha")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_qvpwk")]
+spawns = Array[ExtResource("5_w24db")]([SubResource("Resource_vek5q"), SubResource("Resource_sqm42"), SubResource("Resource_vv141"), SubResource("Resource_tre4p"), SubResource("Resource_hg33d"), SubResource("Resource_anewo"), SubResource("Resource_hhvvq"), SubResource("Resource_e1clk"), SubResource("Resource_1ej3o"), SubResource("Resource_jiphi"), SubResource("Resource_noq1o"), SubResource("Resource_6hmay"), SubResource("Resource_vbu3y"), SubResource("Resource_t4jv8"), SubResource("Resource_n6qgw"), SubResource("Resource_l7ga1"), SubResource("Resource_saoty"), SubResource("Resource_03ean")])
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="DamageNumberManager" type="Node2D" parent="."]
+script = ExtResource("19_vtnk4")

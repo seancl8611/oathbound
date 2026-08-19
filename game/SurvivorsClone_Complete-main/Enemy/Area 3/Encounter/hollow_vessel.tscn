@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsvoqw8u0ifun"]
+
+[ext_resource type="Script" path="res://Enemy/Area 3/Encounter/hollow_vessel.gd" id="1_pakt6"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_vtrjr"]
+[ext_resource type="Texture2D" uid="uid://c7poj351xa6xy" path="res://Textures/Enemy/corruptedden/corruptedden.png" id="3_3rb1h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jyfeg"]
+radius = 32.249
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uwi1n"]
+radius = 32.311
+
+[node name="hollow_vessel" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_pakt6")
+max_hp = null
+start_active = null
+counts_as_enemy_for_room_clear = null
+spawn_interval = null
+max_active_spawns = null
+spawn_radius_min = null
+spawn_radius_max = null
+spawn_attempts = null
+auto_aggro_spawned_shades = null
+spawn_parent_path = null
+experience_on_death = null
+gold_drop_min = null
+gold_drop_max = null
+hit_flash_color = null
+idle_pulse_enabled = null
+idle_pulse_speed = null
+idle_pulse_strength = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8.22544e-06, 7.62939e-06)
+scale = Vector2(0.317308, 0.317308)
+texture = ExtResource("3_3rb1h")
+
+[node name="HurtBox" parent="." instance=ExtResource("2_vtrjr")]
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape2D_jyfeg")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="FlashTimer" type="Timer" parent="."]
+
+[node name="HealthBarRoot" type="Node2D" parent="."]
+
+[node name="PlacementBody" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlacementBody"]
+shape = SubResource("CircleShape2D_uwi1n")
+
+[editable path="HurtBox"]

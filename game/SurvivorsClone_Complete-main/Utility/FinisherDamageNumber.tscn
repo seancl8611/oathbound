@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ch7s78fkfsfyd"]
+
+[node name="FinisherDamageNumber" type="Control" groups=["damage_numbers"]]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="NumberLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.866667, 0.580392, 0, 1)
