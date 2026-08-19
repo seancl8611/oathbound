@@ -1,15 +1,12 @@
-extends "res://Player/player.gd"
+extends "res://Player/LegacyPlayerController.gd"
 
 ## =============================================================================
-## OATHBOUND PLAYER - CURRENT COMBAT BASELINE BRIDGE
+## OATHBOUND PLAYER - CURRENT COMBAT CONTROLLER
 ## =============================================================================
-## The imported player.gd contains a large amount of useful animation/input/combat
-## plumbing, but also many superseded prototype rules. This bridge keeps that proven
-## implementation intact while overriding the first-playtest rules owned by
-## docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md.
-##
-## Once the old build/progression systems are removed, player.gd can be split into
-## smaller components and this migration bridge can disappear.
+## This is the current player-facing rules layer. It intentionally inherits the
+## imported legacy controller while we replace that implementation in smaller,
+## testable pieces. The dependency is explicit: LegacyPlayerController.gd is active
+## runtime plumbing, not an alternate/stale Player implementation.
 ## =============================================================================
 
 const CURRENT_MAX_SPIRIT := 100
@@ -28,9 +25,10 @@ const CURRENT_POSTURE_RECOVER_RATE := 25.0
 const CURRENT_POSTURE_BREAK_DURATION := 0.75
 const CURRENT_POSTURE_BREAK_RESET_RATIO := 0.40
 
+var _playtest_invulnerable := false
+
 
 func _ready() -> void:
-	# Set baseline resources before the inherited setup builds HUD/config references.
 	maxhp = 100
 	hp = 100
 	stagger_max = 100.0
@@ -40,13 +38,9 @@ func _ready() -> void:
 
 	super._ready()
 
-	# Force the imported CombatController child onto the current shared preset even
-	# if the scene carried an older serialized config.
 	if combat:
 		combat.config = CombatConfig.create_player_config()
 
-	# Spirit currently lives inside the imported Prosthetic executor. Normalize the
-	# shared resource here without prematurely rewriting the Prosthetic content layer.
 	if prosthetic_executor:
 		prosthetic_executor.max_spirit = CURRENT_MAX_SPIRIT
 		prosthetic_executor.current_spirit = CURRENT_MAX_SPIRIT
@@ -118,8 +112,6 @@ func _calculate_velocity(delta: float):
 		if slow_amount > 0.0:
 			final_vel *= (1.0 - slow_amount)
 
-	# Legacy Mist Raven movement modifier remains until the Prosthetic package is
-	# reconciled; preserving it here avoids changing a separate system accidentally.
 	if has_meta("_mist_raven_boost_until"):
 		var boost_until = float(get_meta("_mist_raven_boost_until"))
 		var now_mr = Time.get_ticks_msec() * 0.001
@@ -158,7 +150,6 @@ func _buffer_input(action: String):
 
 func _start_dodge():
 	_drop_combo()
-
 	_dash_slash_consumed = false
 	_clear_dash_slash_window()
 
@@ -173,7 +164,6 @@ func _start_dodge():
 	_move_velocity = Vector2.ZERO
 	_lunge_timer = 0.0
 
-	# Invulnerability begins with dash commitment and lasts exactly 0.12 s.
 	_is_invincible = true
 	set_invincibility(true)
 
@@ -191,7 +181,7 @@ func _state_dodging(delta: float):
 		if not _is_invincible:
 			_is_invincible = true
 			set_invincibility(true)
-	elif _is_invincible:
+	elif _is_invincible and not _playtest_invulnerable:
 		_is_invincible = false
 		set_invincibility(false)
 
@@ -259,12 +249,11 @@ func _open_counter_cut_window(target: Node = null) -> void:
 
 
 func _handle_parry_success(area: Area2D, attacker: Node, dmg_type: String, atk_pos: Vector2, _is_perfect: bool):
-	# Reuse the mature projectile/feedback/attacker notification flow, but force the
-	# single Oathbound parry result rather than the old perfect/grace tiers.
 	super._handle_parry_success(area, attacker, dmg_type, atk_pos, false)
 	_perfect_parry_available = false
 	_parry_grace_until = -1.0
-	set_invincibility(false)
+	if not _playtest_invulnerable:
+		set_invincibility(false)
 	_open_counter_cut_window(_resolve_attacker(area, attacker))
 
 
@@ -284,7 +273,6 @@ func _is_attack_inside_block_arc(atk_pos: Vector2) -> bool:
 
 
 func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk_pos: Vector2):
-	# Blocking only protects the authored 150-degree frontal arc.
 	if not _is_attack_inside_block_arc(atk_pos):
 		take_damage(dmg)
 		var rear_kb_dir = (global_position - atk_pos).normalized()
@@ -305,8 +293,6 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 		elif attacker.has_meta("stagger_on_block"):
 			block_posture = float(attacker.get_meta("stagger_on_block"))
 
-	# No universal multiplier, per-hit cap, or diminishing-return system: authored
-	# block_posture_damage is the pressure that is applied.
 	stagger = clamp(stagger + max(0.0, block_posture), 0.0, stagger_max)
 	var now := Time.get_ticks_msec() * 0.001
 	_stagger_suppress_until = now + CURRENT_POSTURE_RECOVER_DELAY
@@ -349,9 +335,6 @@ func _tick_stagger(delta: float):
 
 func _posture_break():
 	var now = Time.get_ticks_msec() * 0.001
-
-	# Keep the bar broken/full through the vulnerability rather than clearing it at
-	# break start. It resets to 40% when the 0.75 s vulnerability ends.
 	stagger = stagger_max
 	_stun_until = now + CURRENT_POSTURE_BREAK_DURATION
 	_stun_started_at = now
@@ -382,7 +365,69 @@ func _recover_from_stun():
 
 
 # =============================================================================
-# CURRENT BASELINE INTROSPECTION (debug/playtest tooling)
+# PLAYTEST LAB API
+# =============================================================================
+
+func take_damage(amount: int, show_feedback: bool = true):
+	if _playtest_invulnerable:
+		return
+	super.take_damage(amount, show_feedback)
+
+
+func set_playtest_invulnerable(enabled: bool) -> void:
+	_playtest_invulnerable = enabled
+	_is_invincible = enabled
+	set_invincibility(enabled)
+
+
+func is_playtest_invulnerable() -> bool:
+	return _playtest_invulnerable
+
+
+func playtest_restore_full() -> void:
+	hp = maxhp
+	stagger = 0.0
+	_stun_until = 0.0
+	_stun_started_at = 0.0
+	if prosthetic_executor:
+		prosthetic_executor.current_spirit = prosthetic_executor.max_spirit
+		if prosthetic_executor.has_signal("spirit_changed"):
+			prosthetic_executor.emit_signal("spirit_changed", prosthetic_executor.current_spirit, prosthetic_executor.max_spirit)
+	_update_health_bar()
+	_update_stagger_ui()
+
+
+func playtest_set_resources(health: float, posture: float, spirit: float) -> void:
+	hp = clampi(int(health), 0, maxhp)
+	stagger = clamp(posture, 0.0, stagger_max)
+	if prosthetic_executor:
+		prosthetic_executor.current_spirit = clampi(int(spirit), 0, prosthetic_executor.max_spirit)
+		if prosthetic_executor.has_signal("spirit_changed"):
+			prosthetic_executor.emit_signal("spirit_changed", prosthetic_executor.current_spirit, prosthetic_executor.max_spirit)
+	_update_health_bar()
+	_update_stagger_ui()
+
+
+func get_playtest_snapshot() -> Dictionary:
+	var spirit := 0
+	var spirit_max := CURRENT_MAX_SPIRIT
+	if prosthetic_executor:
+		spirit = int(prosthetic_executor.current_spirit)
+		spirit_max = int(prosthetic_executor.max_spirit)
+	return {
+		"health": hp,
+		"max_health": maxhp,
+		"posture": stagger,
+		"max_posture": stagger_max,
+		"spirit": spirit,
+		"max_spirit": spirit_max,
+		"state": State.keys()[_state] if _state >= 0 and _state < State.size() else str(_state),
+		"invulnerable": _playtest_invulnerable,
+	}
+
+
+# =============================================================================
+# CURRENT BASELINE INTROSPECTION
 # =============================================================================
 
 func get_core_combat_baseline() -> Dictionary:
