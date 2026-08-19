@@ -78,6 +78,7 @@ func _build_ui() -> void:
 	panel_style.set_border_width_all(1)
 	panel_style.set_corner_radius_all(6)
 	panel_style.set_content_margin_all(10)
+	panel_style.set_content_margin_all(10)
 	panel.add_theme_stylebox_override("panel", panel_style)
 
 	var vbox := VBoxContainer.new()
@@ -395,10 +396,14 @@ func _spawn_selected_enemy(count: int) -> void:
 
 	for i in range(max(1, count)):
 		var enemy := packed.instantiate()
-		parent.add_child(enemy)
+		var angle := TAU * float(i) / float(max(1, count))
+		var spawn_global := (player as Node2D).global_position + Vector2.RIGHT.rotated(angle) * 90.0
 		if enemy is Node2D:
-			var angle := TAU * float(i) / float(max(1, count))
-			(enemy as Node2D).global_position = (player as Node2D).global_position + Vector2.RIGHT.rotated(angle) * 90.0
+			if parent is Node2D:
+				(enemy as Node2D).position = (parent as Node2D).to_local(spawn_global)
+			else:
+				(enemy as Node2D).position = spawn_global
+		parent.add_child(enemy)
 		if not enemy.is_in_group("enemy"):
 			enemy.add_to_group("enemy")
 
