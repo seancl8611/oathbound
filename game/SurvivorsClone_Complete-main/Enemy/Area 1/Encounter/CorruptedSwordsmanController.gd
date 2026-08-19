@@ -62,8 +62,6 @@ func _update_blocking(_delta: float, now: float) -> void:
 
 
 func _is_frontal_attack(attacker: Variant) -> bool:
-	# The legacy receiver used this as a second automatic-block path. Current Hushiro
-	# only permits frontal guarding while the explicit guard state is active.
 	if not _block_active:
 		return false
 	return super._is_frontal_attack(attacker)
@@ -96,7 +94,7 @@ func on_parried(player_pos: Vector2) -> void:
 
 	# The inherited controller applies the shared normal 25-point parry response before
 	# its recoil await. Do not await here: preserving that inherited async recoil flow
-	# lets this current rules layer add only the perilous-thrust bonus immediately.
+	# lets this rules layer add only the perilous-thrust bonus immediately.
 	super.on_parried(player_pos)
 
 	if was_perilous_thrust:
@@ -140,7 +138,6 @@ func _on_thrust_area_entered(player_hurtbox: Area2D) -> void:
 	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("damage"):
 		damage = int(_current_swipe_area.get_meta("damage"))
 
-	# Approved response class: cannot be blocked, can be parried or dashed.
 	_stamp_current_attack_event(damage, "perilous", false)
 	_emit_player_hurt_and_record(player_hurtbox, damage, "perilous")
 
