@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://l5e2xiq5f46t"]
+
+[ext_resource type="Script" path="res://Enemy/Effects/fire_trail.gd" id="1_ebram"]
+[ext_resource type="Texture2D" uid="uid://b6k1yt6ai1a5v" path="res://Enemy/Effects/fire.png" id="2_lcf75"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iptgk"]
+size = Vector2(57, 12)
+
+[node name="FireTrail" type="Node2D"]
+script = ExtResource("1_ebram")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_lcf75")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["fire_damage"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_iptgk")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

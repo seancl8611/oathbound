@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://udr3dwet136f"]
+
+[ext_resource type="Script" path="res://Enemy/Effects/shockwave.gd" id="1_0ebn8"]
+[ext_resource type="Texture2D" uid="uid://byf5fojupevv0" path="res://Textures/Enemy/tengu/shockwave.png" id="2_bdrnf"]
+[ext_resource type="Script" path="res://Enemy/Effects/ShockwaveArea.gd" id="3_16tky"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5khjs"]
+
+[node name="Shockwave" type="Node2D"]
+script = ExtResource("1_0ebn8")
+
+[node name="ShockwaveSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.125, 5.1409e-07)
+scale = Vector2(0.2025, 0.2)
+texture = ExtResource("2_bdrnf")
+
+[node name="ShockwaveTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
+[node name="ShockwaveArea" type="Area2D" parent="." groups=["attack"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_16tky")
+
+[node name="ShockwaveCollision" type="CollisionShape2D" parent="ShockwaveArea" groups=["attack"]]
+shape = SubResource("CircleShape2D_5khjs")
+
+[connection signal="timeout" from="ShockwaveTimer" to="." method="_on_timer_timeout"]

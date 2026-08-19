@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1bwm5uwcy50i"]
+
+[ext_resource type="Script" path="res://Enemy/Effects/laser_beam.gd" id="1_8m7va"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3q07n"]
+
+[node name="LaserBeam" type="Node2D"]
+script = ExtResource("1_8m7va")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="." groups=["laser_damage"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_3q07n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
