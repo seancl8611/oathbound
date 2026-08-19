@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Player/GUI/ChargeBar.gd" id="1_e7132"]
+
+[node name="ChargeBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_e7132")
+
+[node name="Flow" type="HFlowContainer" parent="."]
+custom_minimum_size = Vector2(150, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = -18.0
+offset_right = 40.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme_override_constants/h_separation = 6
+alignment = 1

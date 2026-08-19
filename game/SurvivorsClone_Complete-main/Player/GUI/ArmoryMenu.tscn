@@ -1,0 +1,166 @@
+[gd_scene load_steps=2 format=3 uid="uid://diir2h7cpl7ma"]
+
+[sub_resource type="GDScript" id="GDScript_1nus0"]
+script/source = "extends Control
+
+@onready var btn_sword = $Panel/VBoxContainer/Button
+@onready var btn_close = $Panel/VBoxContainer/Button2
+@onready var btn_blossom = $Panel/VBoxContainer/Button3
+@onready var btn_phantom_bow = $Panel/VBoxContainer/Button4
+@onready var btn_crimson_fang = $Panel/VBoxContainer/Button5
+@onready var btn_scorching_spear = $Panel/VBoxContainer/Button6
+
+signal weapon_selected(weapon_name: String)
+
+func _ready():
+	# Fullscreen setup
+	anchor_left = 0
+	anchor_top = 0
+	anchor_right = 1
+	anchor_bottom = 1
+	offset_left = 0
+	offset_top = 0
+	offset_right = 0
+	offset_bottom = 0
+	size = get_viewport_rect().size
+	position = Vector2.ZERO
+
+	# Add dim background
+	var dim_bg := ColorRect.new()
+	dim_bg.color = Color(0, 0, 0, 0.5)
+	dim_bg.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(dim_bg)
+	move_child(dim_bg, 0)
+
+	dim_bg.anchor_left = 0
+	dim_bg.anchor_top = 0
+	dim_bg.anchor_right = 1
+	dim_bg.anchor_bottom = 1
+	dim_bg.offset_left = 0
+	dim_bg.offset_top = 0
+	dim_bg.offset_right = 0
+	dim_bg.offset_bottom = 0
+
+	# Center and scale panel
+	if has_node(\"Panel\"):
+		var panel = $Panel
+		panel.anchor_left = 0.25
+		panel.anchor_top = 0.25
+		panel.anchor_right = 0.75
+		panel.anchor_bottom = 0.75
+		panel.offset_left = 0
+		panel.offset_top = 0
+		panel.offset_right = 0
+		panel.offset_bottom = 0
+
+	# Connect button presses
+	btn_sword.pressed.connect(_on_sword_pressed)
+	btn_close.pressed.connect(_on_close_pressed)
+	btn_blossom.pressed.connect(_on_blossom_pressed)
+	btn_phantom_bow.pressed.connect(_on_phantom_bow_pressed)
+	btn_crimson_fang.pressed.connect(_on_crimson_fang_pressed)
+	btn_scorching_spear.pressed.connect(_on_scorching_spear_pressed)
+
+	# Pause game
+	get_tree().paused = true
+
+func _on_sword_pressed():
+	print(\"[ARMORY] Sword selected\")
+	Global.selected_weapon_name = \"sword\"
+	emit_signal(\"weapon_selected\", \"sword\")
+	close_menu()
+
+func _on_blossom_pressed():
+	print(\"[ARMORY] Blossom Needle selected\")
+	Global.selected_weapon_name = \"blossom_needle\"
+	emit_signal(\"weapon_selected\", \"blossom_needle\")
+	close_menu()
+
+func _on_close_pressed():
+	print(\"[ARMORY] Closing without weapon switch\")
+	close_menu()
+
+func close_menu():
+	get_tree().paused = false
+	queue_free()
+
+func _on_phantom_bow_pressed():
+	print(\"[ARMORY] Phantom Bow selected\")
+	Global.selected_weapon_name = \"phantom_bow\"
+	emit_signal(\"weapon_selected\", \"phantom_bow\")
+	close_menu()
+
+func _on_crimson_fang_pressed():
+	print(\"[ARMORY] Crimson Fang selected\")
+	Global.selected_weapon_name = \"crimson_fang\"
+	emit_signal(\"weapon_selected\", \"crimson_fang\")
+	close_menu()
+
+func _on_scorching_spear_pressed():
+	print(\"[ARMORY] Scorching Spear selected\")
+	Global.selected_weapon_name = \"scorching_spear\"
+	emit_signal(\"weapon_selected\", \"scorching_spear\")
+	close_menu()
+"
+
+[node name="Control" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_1nus0")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -5.0
+offset_right = 640.0
+offset_bottom = 359.0
+color = Color(0, 0, 0, 0.164706)
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 80.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Sword"
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[node name="Button3" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Blossom Needle"
+
+[node name="Button4" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Phantom Bow"
+
+[node name="Button5" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Crimson Fang"
+
+[node name="Button6" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Scorching Spear"

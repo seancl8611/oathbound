@@ -1,0 +1,223 @@
+[gd_scene load_steps=32 format=3]
+
+[ext_resource type="Script" path="res://Player/CombatTrainer.gd" id="1_4hk3y"]
+[ext_resource type="Texture2D" uid="uid://bemn0qfk5v624" path="res://Textures/Enemy/shield_captain/overhead_windup1.png" id="2_rxf5k"]
+[ext_resource type="Texture2D" uid="uid://p3hmg0g5yglj" path="res://Textures/Player/player_dash.png" id="3_m1mt7"]
+[ext_resource type="Script" path="res://Utility/hurt_box_trainer.gd" id="4_5ohhk"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="4_rfh4e"]
+[ext_resource type="Texture2D" uid="uid://gf1ud3e1m2ln" path="res://Textures/player_attack_sword1.png" id="14_flbp2"]
+[ext_resource type="Script" path="res://Player/SwordHitBoxTrainer.gd" id="15_3wxum"]
+[ext_resource type="Texture2D" uid="uid://b32aw0rnktbyp" path="res://Textures/player_attack_sword8.png" id="15_pxwh0"]
+[ext_resource type="Texture2D" uid="uid://b8qmt4umeh8vh" path="res://Textures/Enemy/indicator1.png" id="16_2pede"]
+[ext_resource type="Script" path="res://Player/InteractionZone.gd" id="16_bq35e"]
+[ext_resource type="Texture2D" uid="uid://bwtsxtwaxsv0n" path="res://Textures/player_attack_sword2.png" id="16_y4l7a"]
+[ext_resource type="Texture2D" uid="uid://cw4xub45pwn4p" path="res://Textures/player_attack_sword4.png" id="17_6ruq7"]
+[ext_resource type="Texture2D" uid="uid://dywht2g7y1iva" path="res://Textures/player_attack_sword5.png" id="18_7y2gn"]
+[ext_resource type="Texture2D" uid="uid://ixbr22ojn30s" path="res://Textures/player_attack_sword6.png" id="19_wy83t"]
+[ext_resource type="Texture2D" uid="uid://u1km83ie2cm6" path="res://Textures/player_attack_sword.png" id="20_23lmd"]
+[ext_resource type="Texture2D" uid="uid://bn4oyl445i004" path="res://Textures/Player/player_walk1.png" id="21_3s7c7"]
+[ext_resource type="Texture2D" uid="uid://dw0gic41c13ks" path="res://Textures/player_walk2.png" id="22_0c4iu"]
+[ext_resource type="Texture2D" uid="uid://box0me3n4p3vr" path="res://Textures/player_walk3.png" id="23_1yood"]
+[ext_resource type="Texture2D" uid="uid://cx0afg1fp2yva" path="res://Textures/player_walk4.png" id="24_pdrkm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nffdp"]
+radius = 4.0
+height = 19.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfi4i"]
+size = Vector2(15, 28.75)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_anwqc"]
+radius = 370.951
+
+[sub_resource type="Animation" id="Animation_xpfg8"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_omkut"]
+resource_name = "attack"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.0002, 0.1, 0.15, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("14_flbp2"), ExtResource("15_pxwh0"), ExtResource("14_flbp2"), ExtResource("16_y4l7a"), ExtResource("17_6ruq7"), ExtResource("18_7y2gn"), ExtResource("19_wy83t"), ExtResource("15_pxwh0")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordHitBox")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.15, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"activate_hitbox"
+}, {
+"args": [],
+"method": &"deactivate_hitbox"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5pny8"]
+resource_name = "dash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_m1mt7"), ExtResource("21_3s7c7")]
+}
+
+[sub_resource type="Animation" id="Animation_uny8g"]
+resource_name = "idle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("20_23lmd"), ExtResource("20_23lmd"), ExtResource("20_23lmd")]
+}
+
+[sub_resource type="Animation" id="Animation_ffx36"]
+resource_name = "walk"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.1001, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("21_3s7c7"), ExtResource("20_23lmd"), ExtResource("22_0c4iu"), ExtResource("23_1yood"), ExtResource("24_pdrkm")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7u328"]
+_data = {
+"RESET": SubResource("Animation_xpfg8"),
+"attack": SubResource("Animation_omkut"),
+"dash": SubResource("Animation_5pny8"),
+"idle": SubResource("Animation_uny8g"),
+"walk": SubResource("Animation_ffx36")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxwlb"]
+radius = 675.176
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ptaoj"]
+radius = 64.141
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_63l2g"]
+size = Vector2(58.125, 21.25)
+
+[node name="CombatTrainer" type="CharacterBody2D" groups=["enemy"]]
+scale = Vector2(0.8, 0.8)
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_4hk3y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rxf5k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.75, -0.75)
+shape = SubResource("CapsuleShape2D_nffdp")
+
+[node name="walkTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[node name="HurtBox" parent="." groups=["trainer_hurtbox"] instance=ExtResource("4_rfh4e")]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("4_5ohhk")
+
+[node name="CollisionShape2D" parent="HurtBox" index="0" groups=["player_hurtbox"]]
+position = Vector2(1.25, 3.125)
+shape = SubResource("RectangleShape2D_yfi4i")
+
+[node name="EnemyDetectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
+shape = SubResource("CircleShape2D_anwqc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7u328")
+}
+
+[node name="EnemyDetectionArea2" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea2"]
+shape = SubResource("CircleShape2D_yxwlb")
+
+[node name="DuelPopup" type="ConfirmationDialog" parent="."]
+process_mode = 3
+title = "Start the duel?"
+
+[node name="InteractionZone" type="Area2D" parent="."]
+script = ExtResource("16_bq35e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone"]
+shape = SubResource("CircleShape2D_ptaoj")
+
+[node name="attack_indicator" type="Sprite2D" parent="."]
+scale = Vector2(1.3718, 2.6383)
+texture = ExtResource("16_2pede")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HonorBar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+
+[node name="SwordHitBox" type="Area2D" parent="." groups=["attack"]]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("15_3wxum")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordHitBox"]
+position = Vector2(28.4375, -0.624999)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_63l2g")
+disabled = true
+
+[connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+
+[editable path="HurtBox"]
