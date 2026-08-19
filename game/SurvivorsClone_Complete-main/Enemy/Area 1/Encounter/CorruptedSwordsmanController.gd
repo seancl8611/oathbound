@@ -25,7 +25,6 @@ const HUSHIRO_BLOCK_POSTURE_DAMAGE: float = 12.0
 @export_group("Hushiro Guard")
 @export var hushiro_guard_range: float = 95.0
 
-
 func _update_blocking(_delta: float, now: float) -> void:
 	if not can_block or _dbroken_active:
 		_set_blocking(false)
@@ -45,21 +44,17 @@ func _update_blocking(_delta: float, now: float) -> void:
 	if ai_state != AIState.DEFEND:
 		_set_blocking(false)
 		return
-
 	var distance_to_player: float = global_position.distance_to(player.global_position)
 	_set_blocking(distance_to_player <= minf(hushiro_guard_range, deaggro_radius))
-
 
 func _is_frontal_attack(attacker: Variant) -> bool:
 	if not _block_active:
 		return false
 	return super._is_frontal_attack(attacker)
 
-
 func _on_base_posture_meter_filled() -> void:
 	if not _dbroken_active:
 		_trigger_posture_break(HUSHIRO_DEATHBLOW_WINDOW)
-
 
 func receive_deathblow(attacker: Node) -> void:
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
@@ -69,14 +64,11 @@ func receive_deathblow(attacker: Node) -> void:
 		})
 	super.receive_deathblow(attacker)
 
-
 func on_parried(player_pos: Vector2) -> void:
 	var was_perilous_thrust: bool = _current_attack_type == AttackType.QUICK_THRUST
-
-	# The inherited controller applies the shared normal 25-point parry response before
-	# its recoil await. Preserve that async recoil flow and add only the thrust bonus.
+	# The inherited controller applies the shared normal 25-point response before its
+	# recoil await. Preserve that async flow and add only the perilous-thrust bonus.
 	super.on_parried(player_pos)
-
 	if was_perilous_thrust:
 		var bonus_posture: float = HUSHIRO_NORMAL_PARRY_POSTURE * (HUSHIRO_PERILOUS_THRUST_PARRY_MULT - 1.0)
 		add_posture_damage(bonus_posture)
@@ -87,36 +79,28 @@ func on_parried(player_pos: Vector2) -> void:
 				"target_total_pressure": HUSHIRO_NORMAL_PARRY_POSTURE * HUSHIRO_PERILOUS_THRUST_PARRY_MULT,
 			})
 
-
 func _on_swipe_area_entered(player_hurtbox: Area2D) -> void:
 	if player_hurtbox == null or not player_hurtbox.is_in_group("player_hurtbox"):
 		return
 	if not _consume_current_attack_contact():
 		return
-
 	var damage: int = swipe_damage
 	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("damage"):
 		damage = int(_current_swipe_area.get_meta("damage"))
-
 	_stamp_current_attack_event(damage, "melee", true)
 	_emit_player_hurt_and_record(player_hurtbox, damage, "melee")
-
 
 func _on_thrust_area_entered(player_hurtbox: Area2D) -> void:
 	if player_hurtbox == null or not player_hurtbox.is_in_group("player_hurtbox"):
 		return
 	if not _consume_current_attack_contact():
 		return
-
 	_thrust_hit_player = true
-
 	var damage: int = thrust_damage
 	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("damage"):
 		damage = int(_current_swipe_area.get_meta("damage"))
-
 	_stamp_current_attack_event(damage, "perilous", false)
 	_emit_player_hurt_and_record(player_hurtbox, damage, "perilous")
-
 
 func _consume_current_attack_contact() -> bool:
 	if not is_instance_valid(_current_swipe_area):
@@ -126,11 +110,9 @@ func _consume_current_attack_contact() -> bool:
 	_current_swipe_area.set_meta("consumed", true)
 	return true
 
-
 func _stamp_current_attack_event(damage: int, damage_type: String, blockable: bool) -> void:
 	if not is_instance_valid(_current_swipe_area):
 		return
-
 	_current_swipe_area.set_meta("attack_id", _current_hushiro_attack_id())
 	_current_swipe_area.set_meta("health_damage", damage)
 	_current_swipe_area.set_meta("posture_damage", 0.0)
@@ -140,7 +122,6 @@ func _stamp_current_attack_event(damage: int, damage_type: String, blockable: bo
 	_current_swipe_area.set_meta("blockable", blockable)
 	_current_swipe_area.set_meta("perilous", damage_type == "perilous")
 	_current_swipe_area.set_meta("proc_coefficient", 1.0)
-
 
 func _current_hushiro_attack_id() -> String:
 	match _current_attack_type:
@@ -155,14 +136,11 @@ func _current_hushiro_attack_id() -> String:
 		_:
 			return "swordsman_attack"
 
-
 func _emit_player_hurt_and_record(player_hurtbox: Area2D, damage: int, damage_type: String) -> void:
 	var receiver: Node = player_hurtbox.get_parent()
 	var before: Dictionary = {}
 	if CombatTelemetry != null and CombatTelemetry.is_capturing() and receiver != null:
 		before = CombatTelemetry.snapshot_actor(receiver)
-
 	player_hurtbox.emit_signal("hurt", damage, damage_type, self)
-
 	if CombatTelemetry != null and CombatTelemetry.is_capturing() and receiver != null and is_instance_valid(_current_swipe_area):
 		CombatTelemetry.record_contact(receiver, _current_swipe_area, self, before)
