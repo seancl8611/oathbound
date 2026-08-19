@@ -1,65 +1,64 @@
 extends "res://Areas/Area1/CombatRoom.gd"
 
 ## Current Area 1 combat-room rules layer.
-## Legacy CombatRoom still supplies reward/gate plumbing while Hushiro-specific
-## encounter selection and pressure coordination are reconciled here.
+##
+## Legacy CombatRoom still owns reward/gate/room plumbing. Hushiro-specific
+## encounter selection and pressure coordination live here so Area 1 follows the
+## approved authored multi-wave model instead of the imported strict-duel preset.
 
-const HushiroEncounterCatalog = preload("res://Areas/Area1/HushiroEncounterCatalog.gd")
+const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
+
+const HUSHIRO_MELEE_COOLDOWN: float = 1.20
+const HUSHIRO_ADVANCE_COOLDOWN: float = 0.55
+const HUSHIRO_RANGED_COOLDOWN: float = 1.60
+const HUSHIRO_GRANT_GAP: float = 0.35
+const HUSHIRO_TURNOVER_DELAY: float = 0.50
 
 
 func _ready() -> void:
-	print("[HushiroCombatRoom] Authored multi-wave combat active")
-	add_child(ui)
-	ui.visible = false
-	ui.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	ui.layer = 100
-
-	var cam: Camera2D = get_viewport().get_camera_2d()
-	if cam and room_bounds and room_bounds.has_method("apply_camera_limits"):
-		room_bounds.call("apply_camera_limits", cam)
-
-	if room_bounds and room_bounds.has_method("get_rect_global"):
-		_spawn_rect = room_bounds.call("get_rect_global") as Rect2
-	else:
-		_spawn_rect = Rect2(global_position - Vector2(800, 450), Vector2(1600, 900))
-
-	_push_spawn_rect_to_spawner(_spawn_rect)
-	lock_all_gates()
-	_configure_duel_tokens()
-	_start_encounter()
+	# The inherited ready path still owns bounds, gates, rewards and encounter startup.
+	# Its virtual calls dispatch to the Hushiro overrides below.
+	super._ready()
+	print("[HushiroCombatRoom] Authored Hushiro encounter coordination active")
 
 
-# Keep the inherited method name because legacy CombatRoom calls it, but configure
-# readable Hushiro group pressure rather than the old long-cooldown duel preset.
+func _pick_encounter_for_area(area_id: int) -> Dictionary:
+	if area_id == 1:
+		return HUSHIRO_CATALOG.pick_for_current_run()
+	return super._pick_encounter_for_area(area_id)
+
+
+func _default_template() -> Dictionary:
+	return HUSHIRO_CATALOG.get_by_id("H01_broken_patrol")
+
+
+# Keep the inherited method name because CombatRoom invokes it virtually.
 func _configure_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 
 	AttackDir.set_role_limits({
 		"melee_attack": 1,
+		"dog_lunge": 1,
 		"advance_move": 3,
 		"ranged_attack": 1,
 		"frontal": 1,
 		"flank_left": 1,
 		"flank_right": 1,
 	})
-	AttackDir.set_role_cooldowns({
-		"melee_attack": 1.6,
-		"advance_move": 0.8,
-		"ranged_attack": 1.8,
-		"frontal": 0.8,
-		"flank_left": 0.8,
-		"flank_right": 0.8,
-	})
+	_apply_hushiro_role_cooldowns()
 
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = 0.55
+		AttackDir.grant_gap_sec = HUSHIRO_GRANT_GAP
 	if _has_property(AttackDir, "attack_turnover_delay"):
-		AttackDir.attack_turnover_delay = 0.65
+		AttackDir.attack_turnover_delay = HUSHIRO_TURNOVER_DELAY
+	if _has_property(AttackDir, "max_frontline"):
+		AttackDir.max_frontline = 4
 
-	print("[HushiroCombatRoom] Coordination: 1 committed melee, 3 advance, 1 ranged")
+	print("[HushiroCombatRoom] Pressure baseline: adaptive melee/ranged roles, Hound lunge cap=1")
 
 
+# The imported autoscale timer calls this method as the current wave population changes.
 func _update_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
@@ -69,58 +68,45 @@ func _update_duel_tokens() -> void:
 		if is_instance_valid(enemy) and is_ancestor_of(enemy):
 			alive += 1
 
-	var advance_limit: int = clampi(alive, 1, 3)
+	# Low-body-count exchanges remain precise. The authored 4-6 body waves may permit
+	# modest overlap so Hushiro does not collapse back into sequential one-on-one duels.
+	var melee_limit: int = 1 if alive <= 3 else 2
+	var ranged_limit: int = 1 if alive <= 4 else 2
+	var advance_limit: int = clampi(alive, 1, 4)
+
 	AttackDir.set_role_limits({
-		"melee_attack": 1,
+		"melee_attack": melee_limit,
+		"dog_lunge": 1,
 		"advance_move": advance_limit,
-		"ranged_attack": 1,
+		"ranged_attack": ranged_limit,
 		"frontal": 1,
 		"flank_left": 1,
 		"flank_right": 1,
 	})
-	AttackDir.set_role_cooldowns({
-		"melee_attack": 1.6,
-		"advance_move": 0.8,
-		"ranged_attack": 1.8,
-		"frontal": 0.8,
-		"flank_left": 0.8,
-		"flank_right": 0.8,
-	})
+	_apply_hushiro_role_cooldowns()
+
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = 0.55
+		AttackDir.grant_gap_sec = HUSHIRO_GRANT_GAP
+	if _has_property(AttackDir, "attack_turnover_delay"):
+		AttackDir.attack_turnover_delay = HUSHIRO_TURNOVER_DELAY
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("hushiro_pressure_limits", {
+			"alive": alive,
+			"melee_limit": melee_limit,
+			"ranged_limit": ranged_limit,
+			"advance_limit": advance_limit,
+			"dog_lunge_limit": 1,
+		})
 
 
-func _pick_encounter_for_area(area_id: int) -> Dictionary:
-	if area_id != 1:
-		return super._pick_encounter_for_area(area_id)
-
-	var chamber_number: int = 1
-	if typeof(GameFlow) == TYPE_OBJECT:
-		chamber_number = maxi(1, int(GameFlow.current_index) + 1)
-	elif typeof(RunData) == TYPE_OBJECT:
-		chamber_number = maxi(1, int(RunData.depth) + 1)
-
-	var seen: Array[String] = []
-	if typeof(RunData) == TYPE_OBJECT:
-		seen = RunData.hushiro_encounters_seen
-
-	var encounter: Dictionary = HushiroEncounterCatalog.pick_for_chamber(chamber_number, seen)
-	if encounter.is_empty():
-		push_warning("[HushiroCombatRoom] No unseen eligible encounter for chamber %d; using Broken Patrol fallback" % chamber_number)
-		encounter = HushiroEncounterCatalog.get_by_id("H01_broken_patrol")
-
-	var encounter_id: String = str(encounter.get("id", ""))
-	if typeof(RunData) == TYPE_OBJECT and not encounter_id.is_empty():
-		if not RunData.hushiro_encounters_seen.has(encounter_id):
-			RunData.hushiro_encounters_seen.append(encounter_id)
-
-	print("[HushiroCombatRoom] Chamber %d -> %s (%s)" % [
-		chamber_number,
-		str(encounter.get("name", encounter_id)),
-		encounter_id,
-	])
-	return encounter
-
-
-func _default_template() -> Dictionary:
-	return HushiroEncounterCatalog.get_by_id("H01_broken_patrol")
+func _apply_hushiro_role_cooldowns() -> void:
+	AttackDir.set_role_cooldowns({
+		"melee_attack": HUSHIRO_MELEE_COOLDOWN,
+		"dog_lunge": 2.20,
+		"advance_move": HUSHIRO_ADVANCE_COOLDOWN,
+		"ranged_attack": HUSHIRO_RANGED_COOLDOWN,
+		"frontal": 0.80,
+		"flank_left": 0.80,
+		"flank_right": 0.80,
+	})
