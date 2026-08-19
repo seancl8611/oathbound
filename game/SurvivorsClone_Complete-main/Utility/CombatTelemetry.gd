@@ -2,16 +2,8 @@ extends Node
 
 ## Structured development-only combat capture for Godot playtests.
 ##
-## Every debug run writes a JSONL file under res://playtest_logs/. The file is
-## intentionally machine-readable so a playtest can be compared against approved
-## combat/encounter contracts without relying only on subjective descriptions.
-##
-## Captured facts include:
-## - actor positions, velocities, Health/Posture and combat state at 10 Hz,
-## - attack hitbox spawn/end and activation/shape changes,
-## - hitbox positions and attack metadata,
-## - receiver/attacker geometry at contact,
-## - explicit parry/block/posture-break events emitted by current combat code.
+## Debug runs write JSONL under res://playtest_logs/. The capture is intended for
+## post-playtest analysis against the approved combat and encounter contracts.
 
 const SAMPLE_INTERVAL: float = 0.10
 const LOG_DIR: String = "res://playtest_logs"
@@ -84,7 +76,6 @@ func _start_capture() -> void:
 func _stop_capture() -> void:
 	if not _capturing:
 		return
-
 	record_event("session_end", {"event_counts": _event_counts.duplicate(true)})
 	_capturing = false
 	if _capture_file != null:
@@ -104,11 +95,11 @@ func record_event(event_name: String, data: Dictionary = {}) -> void:
 		"physics_frame": Engine.get_physics_frames(),
 		"scene": _current_scene_path(),
 	}
-	for key: Variant in data.keys():
-		payload[key] = data[key]
+	var data_keys: Array = data.keys()
+	for key_value: Variant in data_keys:
+		payload[key_value] = data[key_value]
 
-	var count: int = int(_event_counts.get(event_name, 0)) + 1
-	_event_counts[event_name] = count
+	_event_counts[event_name] = int(_event_counts.get(event_name, 0)) + 1
 	_capture_file.store_line(JSON.stringify(payload))
 	_capture_file.flush()
 
@@ -149,8 +140,8 @@ func snapshot_actor(actor: Node) -> Dictionary:
 	if combat_node != null:
 		if combat_node.has_method("get_posture"):
 			data["posture"] = float(combat_node.call("get_posture"))
-		var config_value: Variant = combat_node.get("config")
-		if config_value != null and config_value is Resource:
+		var config_value: Variant = _property_value(combat_node, "config")
+		if config_value is Resource:
 			var config_resource: Resource = config_value as Resource
 			var posture_max_value: Variant = _first_property(config_resource, ["posture_max"])
 			if posture_max_value != null:
@@ -158,16 +149,21 @@ func snapshot_actor(actor: Node) -> Dictionary:
 
 	var state_value: Variant = _first_property(actor, ["state", "_state", "ai_state"])
 	if state_value != null:
-		data["state"] = state_value
+		data["state"] = _json_safe_variant(state_value)
 
-	for flag_name: String in ["is_attacking", "telegraphing", "swinging", "has_attack_token", "_block_active", "_parry_active"]:
-		var flag_value: Variant = _first_property(actor, [flag_name])
+	var flag_names: Array[String] = [
+		"is_attacking", "telegraphing", "swinging", "has_attack_token",
+		"_block_active", "_parry_active"
+	]
+	for flag_name: String in flag_names:
+		var flag_value: Variant = _property_value(actor, flag_name)
 		if flag_value != null:
 			data[flag_name] = bool(flag_value)
 
 	var facing_value: Variant = _first_property(actor, ["_facing_dir", "facing_dir", "spawn_forward"])
-	if facing_value is Vector2:
-		data["facing"] = _vec2(facing_value as Vector2)
+	if typeof(facing_value) == TYPE_VECTOR2:
+		var facing_vector: Vector2 = facing_value
+		data["facing"] = _vec2(facing_vector)
 
 	var sprite_node: Sprite2D = actor.get_node_or_null("Sprite2D") as Sprite2D
 	if sprite_node != null:
@@ -193,11 +189,12 @@ func snapshot_hitbox(hitbox: Node) -> Dictionary:
 		data["collision_layer"] = area.collision_layer
 		data["collision_mask"] = area.collision_mask
 
-	for meta_name: String in [
+	var meta_names: Array[String] = [
 		"attack_id", "damage_type", "health_damage", "damage", "posture_damage",
 		"block_posture_damage", "stagger_on_block", "stagger_level", "proc_coefficient",
 		"parryable", "parry_only", "blockable", "unblockable", "combo_index"
-	]:
+	]
+	for meta_name: String in meta_names:
 		if hitbox.has_meta(meta_name):
 			data[meta_name] = _json_safe_variant(hitbox.get_meta(meta_name))
 
@@ -219,10 +216,11 @@ func snapshot_hitbox(hitbox: Node) -> Dictionary:
 func record_contact(receiver: Node, hitbox: Node, attacker: Node, before: Dictionary) -> void:
 	if not _capturing:
 		return
+
 	var after: Dictionary = snapshot_actor(receiver)
 	var data: Dictionary = {
-		"receiver": after,
 		"receiver_before": before,
+		"receiver": after,
 		"attacker": _node_identity(attacker) if attacker != null else {},
 		"hitbox": snapshot_hitbox(hitbox),
 	}
@@ -247,8 +245,9 @@ func record_resolution(kind: String, receiver: Node, attacker: Node, hitbox: Nod
 		"attacker": _node_identity(attacker) if attacker != null else {},
 		"hitbox": snapshot_hitbox(hitbox),
 	}
-	for key: Variant in extra.keys():
-		data[key] = extra[key]
+	var extra_keys: Array = extra.keys()
+	for key_value: Variant in extra_keys:
+		data[key_value] = extra[key_value]
 	record_event(kind, data)
 
 
@@ -271,15 +270,20 @@ func _scan_hitboxes() -> void:
 		var hitbox: Node = node_value as Node
 		if not is_instance_valid(hitbox):
 			continue
+
 		var instance_id: int = int(hitbox.get_instance_id())
 		seen[instance_id] = true
 		var state: Dictionary = snapshot_hitbox(hitbox)
 		var signature: String = _hitbox_signature(state)
+
 		if not _known_hitboxes.has(instance_id):
 			_known_hitboxes[instance_id] = {"signature": signature, "last": state}
 			record_event("hitbox_spawn", {"hitbox": state})
 		else:
 			var previous_value: Variant = _known_hitboxes[instance_id]
+			if typeof(previous_value) != TYPE_DICTIONARY:
+				_known_hitboxes[instance_id] = {"signature": signature, "last": state}
+				continue
 			var previous: Dictionary = previous_value as Dictionary
 			var previous_signature: String = str(previous.get("signature", ""))
 			if signature != previous_signature:
@@ -295,8 +299,13 @@ func _scan_hitboxes() -> void:
 		if seen.has(known_id):
 			continue
 		var last_value: Variant = _known_hitboxes.get(known_id, {})
-		var last_entry: Dictionary = last_value as Dictionary
-		record_event("hitbox_end", {"hitbox": last_entry.get("last", {})})
+		var last_state: Dictionary = {}
+		if typeof(last_value) == TYPE_DICTIONARY:
+			var last_entry: Dictionary = last_value as Dictionary
+			var nested_last: Variant = last_entry.get("last", {})
+			if typeof(nested_last) == TYPE_DICTIONARY:
+				last_state = nested_last as Dictionary
+		record_event("hitbox_end", {"hitbox": last_state})
 		_known_hitboxes.erase(known_id)
 
 
@@ -315,16 +324,17 @@ func _record_world_sample() -> void:
 	var hitbox_snapshots: Array = []
 	var attack_nodes: Array = get_tree().get_nodes_in_group("attack")
 	for hitbox_value: Variant in attack_nodes:
-		if hitbox_value is Node and is_instance_valid(hitbox_value):
-			var hitbox: Node = hitbox_value as Node
-			var minimal: Dictionary = _node_identity(hitbox)
-			if hitbox is Node2D:
-				minimal["pos"] = _vec2((hitbox as Node2D).global_position)
-			if hitbox is Area2D:
-				minimal["monitoring"] = (hitbox as Area2D).monitoring
-			if hitbox.has_meta("attack_id"):
-				minimal["attack_id"] = str(hitbox.get_meta("attack_id"))
-			hitbox_snapshots.append(minimal)
+		if not (hitbox_value is Node) or not is_instance_valid(hitbox_value):
+			continue
+		var hitbox: Node = hitbox_value as Node
+		var minimal: Dictionary = _node_identity(hitbox)
+		if hitbox is Node2D:
+			minimal["pos"] = _vec2((hitbox as Node2D).global_position)
+		if hitbox is Area2D:
+			minimal["monitoring"] = (hitbox as Area2D).monitoring
+		if hitbox.has_meta("attack_id"):
+			minimal["attack_id"] = str(hitbox.get_meta("attack_id"))
+		hitbox_snapshots.append(minimal)
 
 	if player_snapshot.is_empty() and enemy_snapshots.is_empty() and hitbox_snapshots.is_empty():
 		return
@@ -343,6 +353,7 @@ func _shape_snapshots(root: Node) -> Array:
 		var collision_shape: CollisionShape2D = shape_node as CollisionShape2D
 		if collision_shape == null:
 			continue
+
 		var shape_data: Dictionary = {
 			"name": String(collision_shape.name),
 			"disabled": collision_shape.disabled,
@@ -387,16 +398,13 @@ func _resolve_attacker(hitbox: Node) -> Node:
 		var meta_attacker: Variant = hitbox.get_meta("attacker")
 		if meta_attacker is Node and is_instance_valid(meta_attacker):
 			return meta_attacker as Node
-	var parent: Node = hitbox.get_parent()
-	if parent != null:
-		return parent
-	return null
+	return hitbox.get_parent()
 
 
 func _actor_facing(actor: Node) -> Vector2:
 	var facing_value: Variant = _first_property(actor, ["_facing_dir", "facing_dir", "spawn_forward"])
-	if facing_value is Vector2:
-		return facing_value as Vector2
+	if typeof(facing_value) == TYPE_VECTOR2:
+		return facing_value
 	return Vector2.ZERO
 
 
@@ -429,9 +437,16 @@ func _first_property(object: Object, property_names: Array) -> Variant:
 		return null
 	for name_value: Variant in property_names:
 		var property_name: String = str(name_value)
-		if _has_property(object, property_name):
-			return object.get(property_name)
+		var value: Variant = _property_value(object, property_name)
+		if value != null:
+			return value
 	return null
+
+
+func _property_value(object: Object, property_name: String) -> Variant:
+	if not _has_property(object, property_name):
+		return null
+	return object.get(property_name)
 
 
 func _has_property(object: Object, property_name: String) -> bool:
@@ -449,12 +464,14 @@ func _vec2(value: Vector2) -> Array:
 
 
 func _json_safe_variant(value: Variant) -> Variant:
-	if value is Vector2:
-		return _vec2(value as Vector2)
+	var value_type: int = typeof(value)
+	if value_type == TYPE_VECTOR2:
+		var vector_value: Vector2 = value
+		return _vec2(vector_value)
+	if value_type == TYPE_STRING_NAME:
+		return str(value)
 	if value is Node:
 		return _node_identity(value as Node)
-	if value is StringName:
-		return str(value)
 	return value
 
 
