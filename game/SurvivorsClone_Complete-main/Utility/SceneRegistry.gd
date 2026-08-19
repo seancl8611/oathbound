@@ -11,25 +11,28 @@ var rooms := {
 
 var enemies_by_area := {
 	1: {
-		"soldier": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
+		# Canonical Hushiro keys used by HushiroEncounterCatalog.
+		"swordsman": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
 		"archer": preload("res://Enemy/Area 1/Encounter/corrupted_archer.tscn"),
-		"dog":    preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
-		"akaname": preload("res://Enemy/Area 1/Encounter/Cellar_Bilemass.tscn"),
-		"shade": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
+		"hound": preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
+		"bilemass": preload("res://Enemy/Area 1/Encounter/Cellar_Bilemass.tscn"),
+		"hollow": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
 		"warden": preload("res://Enemy/Area 1/Encounter/warden.tscn"),
 	},
 	2: {
+		# Area 2 remains on its imported registry until the Yomori reconciliation pass.
 		"soldier": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
 		"soldier2": preload("res://Enemy/Area 2/Encounter/lingering_wraith.tscn"),
 		"archer": preload("res://Enemy/Area 1/Encounter/corrupted_archer.tscn"),
 		"archer2": preload("res://Enemy/Area 2/Encounter/lantern_wraith.tscn"),
-		"dog":    preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
+		"dog": preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
 		"shade": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
 		"warden": preload("res://Enemy/Area 1/Encounter/warden.tscn"),
 		"healer": preload("res://Enemy/Area 2/Encounter/Mist_Shepherd.tscn"),
 		"stalker": preload("res://Enemy/Area 2/Encounter/stalker_hound.tscn")
 	},
 	3: {
+		# Area 3 likewise remains legacy until its own content pass.
 		"soldier2": preload("res://Enemy/Area 2/Encounter/lingering_wraith.tscn"),
 		"archer2": preload("res://Enemy/Area 2/Encounter/lantern_wraith.tscn"),
 		"shade": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),

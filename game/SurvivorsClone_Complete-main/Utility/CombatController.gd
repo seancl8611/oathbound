@@ -96,8 +96,11 @@ var _consecutive_deflects = 0
 # =============================================================================
 var _posture = 0.0
 var _last_posture_hit_ts = -1.0
+# Host's own Posture-break timer. This must never be reused for an external target.
 var _break_until_ts = -1.0
 var _deathblow_target: Node = null
+# Independent timer for another actor that this CombatController may execute.
+var _deathblow_until_ts = -1.0
 var _recovery_suppressed_until = -1.0
 
 # =============================================================================
@@ -285,10 +288,15 @@ func tick(delta: float) -> void:
 
 	_posture_passive_recover(delta)
 
+	# Host posture-break recovery and an external deathblow opportunity are separate
+	# state machines. Expiring one must never mutate the other.
 	if _break_until_ts > 0.0 and now >= _break_until_ts:
 		_break_until_ts = -1.0
-		_deathblow_target = null
 		_reset_posture_after_break()
+
+	if _deathblow_until_ts > 0.0 and now >= _deathblow_until_ts:
+		_deathblow_until_ts = -1.0
+		_deathblow_target = null
 		emit_signal("deathblow_cleared")
 
 
@@ -398,11 +406,11 @@ func set_deathblow_target(target: Node, duration_s: float) -> void:
 	if not config or not config.can_do_finisher:
 		return
 	_deathblow_target = target
-	_break_until_ts = _now_s() + max(0.0, duration_s)
+	_deathblow_until_ts = _now_s() + max(0.0, duration_s)
 	emit_signal("deathblow_available", target, duration_s)
 
 func is_deathblow_window() -> bool:
-	return _break_until_ts > 0.0 and _now_s() < _break_until_ts
+	return _deathblow_until_ts > 0.0 and _now_s() < _deathblow_until_ts
 
 func get_deathblow_target() -> Node:
 	return _deathblow_target

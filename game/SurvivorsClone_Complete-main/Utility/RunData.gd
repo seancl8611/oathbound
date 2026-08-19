@@ -11,6 +11,10 @@ var scrolls: int = 0
 var path_history: Array[String] = []
 var acquired_upgrades: Array = []
 
+# Authored encounter history. Regional encounter selectors use these lists to
+# enforce the approved "at most once per run" rule without leaking state between runs.
+var hushiro_encounters_seen: Array[String] = []
+
 # Combat stats
 var enemies_killed: int = 0
 var parries_performed: int = 0
@@ -50,6 +54,7 @@ func reset_for_new_run(area_id: int = 1) -> void:
 	scrolls = 0
 	path_history.clear()
 	acquired_upgrades.clear()
+	hushiro_encounters_seen.clear()
 	
 	enemies_killed = 0
 	parries_performed = 0
@@ -97,6 +102,7 @@ func get_run_summary() -> Dictionary:
 		"mist_shards": mist_shards,
 		"scrolls": scrolls,
 		"path": path_history.duplicate(),
+		"hushiro_encounters": hushiro_encounters_seen.duplicate(),
 		"enemies_killed": enemies_killed,
 		"parries": parries_performed,
 		"perfect_parries": perfect_parries,

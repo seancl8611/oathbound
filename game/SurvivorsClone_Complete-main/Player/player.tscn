@@ -371,7 +371,6 @@ script = ExtResource("56_yphc4")
 [node name="ProstheticExecutor" type="Node" parent="."]
 script = ExtResource("56_ir287")
 
-[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
 [connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
 [connection signal="timeout" from="Attack/TornadoTimer" to="." method="_on_tornado_timer_timeout"]
