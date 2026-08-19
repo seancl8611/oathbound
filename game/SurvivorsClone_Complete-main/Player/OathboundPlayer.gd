@@ -25,7 +25,7 @@ const CURRENT_POSTURE_RECOVER_RATE := 25.0
 const CURRENT_POSTURE_BREAK_DURATION := 0.75
 const CURRENT_POSTURE_BREAK_RESET_RATIO := 0.40
 
-var _playtest_invulnerable := false
+var _playtest_invulnerable: bool = false
 
 
 func _ready() -> void:
@@ -81,7 +81,7 @@ func _state_moving(delta: float):
 
 
 func _calculate_velocity(delta: float):
-	var final_vel = Vector2.ZERO
+	var final_vel: Vector2 = Vector2.ZERO
 
 	if knockback.length() > 1.0:
 		final_vel = knockback
@@ -98,7 +98,7 @@ func _calculate_velocity(delta: float):
 
 		State.ATTACKING:
 			if _is_attack_lunge_active():
-				var lunge_speed := float(_attack_profile.get("lunge_speed", 0.0))
+				var lunge_speed: float = float(_attack_profile.get("lunge_speed", 0.0))
 				final_vel += _attack_aim_dir * lunge_speed
 
 		State.ATTACK_RECOVERY:
@@ -108,17 +108,17 @@ func _calculate_velocity(delta: float):
 			pass
 
 	if has_meta("puddle_slow_amount"):
-		var slow_amount = get_meta("puddle_slow_amount")
+		var slow_amount: float = float(get_meta("puddle_slow_amount"))
 		if slow_amount > 0.0:
 			final_vel *= (1.0 - slow_amount)
 
 	if has_meta("_mist_raven_boost_until"):
-		var boost_until = float(get_meta("_mist_raven_boost_until"))
-		var now_mr = Time.get_ticks_msec() * 0.001
+		var boost_until: float = float(get_meta("_mist_raven_boost_until"))
+		var now_mr: float = Time.get_ticks_msec() * 0.001
 		if now_mr < boost_until:
-			var boost_amt = float(get_meta("_mist_raven_boost", 0.0))
-			var remaining = boost_until - now_mr
-			var decay = remaining / 1.2
+			var boost_amt: float = float(get_meta("_mist_raven_boost", 0.0))
+			var remaining: float = boost_until - now_mr
+			var decay: float = remaining / 1.2
 			final_vel *= (1.0 + boost_amt * decay)
 		else:
 			remove_meta("_mist_raven_boost")
@@ -128,8 +128,8 @@ func _calculate_velocity(delta: float):
 
 
 func _get_effective_move_speed() -> float:
-	var base_speed = CURRENT_MOVE_SPEED
-	var puddle_slow = get_meta("puddle_slow_amount", 0.0)
+	var base_speed: float = CURRENT_MOVE_SPEED
+	var puddle_slow: float = float(get_meta("puddle_slow_amount", 0.0))
 	if puddle_slow > 0.0:
 		base_speed *= (1.0 - puddle_slow)
 	return base_speed
@@ -175,7 +175,7 @@ func _start_dodge():
 
 func _state_dodging(delta: float):
 	_dodge_timer -= delta
-	var elapsed := CURRENT_DASH_DURATION - max(_dodge_timer, 0.0)
+	var elapsed: float = CURRENT_DASH_DURATION - maxf(_dodge_timer, 0.0)
 
 	if elapsed <= CURRENT_DASH_IFRAMES:
 		if not _is_invincible:
@@ -210,7 +210,7 @@ func _start_parry(_window_s: float):
 	_current_speed = 0.0
 	_move_velocity = Vector2.ZERO
 
-	var now = Time.get_ticks_msec() * 0.001
+	var now: float = Time.get_ticks_msec() * 0.001
 	if now <= _post_dodge_block_priority_until and Input.is_action_pressed("parry"):
 		_block_held = true
 		_change_state(State.BLOCKING)
@@ -262,26 +262,26 @@ func _handle_parry_success(area: Area2D, attacker: Node, dmg_type: String, atk_p
 # =============================================================================
 
 func _is_attack_inside_block_arc(atk_pos: Vector2) -> bool:
-	var to_attacker := atk_pos - global_position
+	var to_attacker: Vector2 = atk_pos - global_position
 	if to_attacker.length_squared() <= 0.001:
 		return true
-	var facing := _facing_dir.normalized()
+	var facing: Vector2 = _facing_dir.normalized()
 	if facing.length_squared() <= 0.001:
 		facing = Vector2.RIGHT
-	var angle_deg := abs(rad_to_deg(facing.angle_to(to_attacker.normalized())))
+	var angle_deg: float = absf(rad_to_deg(facing.angle_to(to_attacker.normalized())))
 	return angle_deg <= CURRENT_BLOCK_ARC_DEGREES * 0.5
 
 
 func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk_pos: Vector2):
 	if not _is_attack_inside_block_arc(atk_pos):
 		take_damage(dmg)
-		var rear_kb_dir = (global_position - atk_pos).normalized()
+		var rear_kb_dir: Vector2 = (global_position - atk_pos).normalized()
 		knockback += rear_kb_dir * 120.0
 		if combat:
 			combat.notify_got_hit({"damage": dmg, "type": dmg_type})
 		return
 
-	var block_posture := 12.0
+	var block_posture: float = 12.0
 	if area:
 		if area.has_meta("block_posture_damage"):
 			block_posture = float(area.get_meta("block_posture_damage"))
@@ -293,15 +293,15 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 		elif attacker.has_meta("stagger_on_block"):
 			block_posture = float(attacker.get_meta("stagger_on_block"))
 
-	stagger = clamp(stagger + max(0.0, block_posture), 0.0, stagger_max)
-	var now := Time.get_ticks_msec() * 0.001
+	stagger = clampf(stagger + maxf(0.0, block_posture), 0.0, stagger_max)
+	var now: float = Time.get_ticks_msec() * 0.001
 	_stagger_suppress_until = now + CURRENT_POSTURE_RECOVER_DELAY
 
 	apply_hitstop(HITSTOP_BLOCKED)
 	_shake_camera(SHAKE_BLOCKED, HITSTOP_BLOCKED)
 	_flash_player(Color(0.8, 0.8, 1.0), 0.06)
 
-	var kb_dir = (global_position - atk_pos).normalized()
+	var kb_dir: Vector2 = (global_position - atk_pos).normalized()
 	knockback += kb_dir * 50.0
 
 	if attacker and is_instance_valid(attacker):
@@ -324,17 +324,17 @@ func _tick_stagger(delta: float):
 	if _state == State.BLOCKING:
 		return
 
-	var now = Time.get_ticks_msec() * 0.001
+	var now: float = Time.get_ticks_msec() * 0.001
 	if now < _stagger_suppress_until:
 		return
 	if _state == State.STUNNED:
 		return
 
-	stagger = max(0.0, stagger - CURRENT_POSTURE_RECOVER_RATE * delta)
+	stagger = maxf(0.0, stagger - CURRENT_POSTURE_RECOVER_RATE * delta)
 
 
 func _posture_break():
-	var now = Time.get_ticks_msec() * 0.001
+	var now: float = Time.get_ticks_msec() * 0.001
 	stagger = stagger_max
 	_stun_until = now + CURRENT_POSTURE_BREAK_DURATION
 	_stun_started_at = now
@@ -356,7 +356,7 @@ func _recover_from_stun():
 		sprite.offset = Vector2.ZERO
 
 	stagger = stagger_max * CURRENT_POSTURE_BREAK_RESET_RATIO
-	var now := Time.get_ticks_msec() * 0.001
+	var now: float = Time.get_ticks_msec() * 0.001
 	_stagger_suppress_until = now + CURRENT_POSTURE_RECOVER_DELAY
 	_stun_until = 0.0
 	_stun_started_at = 0.0
@@ -399,7 +399,7 @@ func playtest_restore_full() -> void:
 
 func playtest_set_resources(health: float, posture: float, spirit: float) -> void:
 	hp = clampi(int(health), 0, maxhp)
-	stagger = clamp(posture, 0.0, stagger_max)
+	stagger = clampf(posture, 0.0, stagger_max)
 	if prosthetic_executor:
 		prosthetic_executor.current_spirit = clampi(int(spirit), 0, prosthetic_executor.max_spirit)
 		if prosthetic_executor.has_signal("spirit_changed"):
@@ -409,8 +409,8 @@ func playtest_set_resources(health: float, posture: float, spirit: float) -> voi
 
 
 func get_playtest_snapshot() -> Dictionary:
-	var spirit := 0
-	var spirit_max := CURRENT_MAX_SPIRIT
+	var spirit: int = 0
+	var spirit_max: int = CURRENT_MAX_SPIRIT
 	if prosthetic_executor:
 		spirit = int(prosthetic_executor.current_spirit)
 		spirit_max = int(prosthetic_executor.max_spirit)
