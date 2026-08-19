@@ -17,7 +17,7 @@ texture = ExtResource("2_2wlxx")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 
-[node name="Loot" type="Node2D" parent="." groups=["loot"]
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
 [node name="DamageNumberManager" type="Node2D" parent="."]
 script = ExtResource("20_xw04x")
