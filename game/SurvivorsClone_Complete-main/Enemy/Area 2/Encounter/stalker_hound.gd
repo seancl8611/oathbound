@@ -45,12 +45,13 @@ class_name StalkerHound
 @export var mist_reposition_distance: float = 125.0
 @export var mist_reposition_side_bias: float = 0.75
 @export var mist_backout_speed: float = 95.0
+@export var mist_room_margin: float = 24.0
 
 @export var mist_pounce_parry_posture_gain: float = 70.0
 @export var mist_pounce_parry_recoil_time: float = 0.95
 @export var mist_pounce_parry_knockback_force: float = 135.0
 
-@export var debug_mist_pounce: bool = true
+@export var debug_mist_pounce: bool = false
 
 
 # =============================================================================
@@ -92,7 +93,7 @@ func _ready() -> void:
 	if sprite:
 		_mist_original_sprite_modulate = sprite.modulate
 
-	print("[StalkerHound] v1.1 - Area 2 hound variant active")
+	print("[StalkerHound] v1.2 - Area 2 hound variant active")
 
 
 # =============================================================================
@@ -225,8 +226,35 @@ func _pick_mist_reappear_position() -> Vector2:
 	# Pick a flank angle instead of directly behind the player every time.
 	var side := 1.0 if randf() > 0.5 else -1.0
 	var flank_dir := base_dir.rotated(side * PI * 0.5 * mist_reposition_side_bias).normalized()
+	var candidate := player.global_position + flank_dir * mist_reposition_distance
 
-	return player.global_position + flank_dir * mist_reposition_distance
+	return _clamp_to_active_combat_bounds(candidate)
+
+
+func _clamp_to_active_combat_bounds(candidate: Vector2) -> Vector2:
+	# CombatRoom is added to the "room" group by GameFlow. Its RoomBounds already
+	# defines the legal spawn/camera rectangle, so reuse that authority for
+	# teleport-like repositioning rather than allowing a direct global-position
+	# write to escape the room.
+	var room: Node = get_tree().get_first_node_in_group("room")
+	if room == null:
+		return candidate
+
+	var bounds: Node = room.get_node_or_null("RoomBounds")
+	if bounds == null or not bounds.has_method("get_rect_global"):
+		return candidate
+
+	var rect: Rect2 = bounds.call("get_rect_global")
+	var max_margin := min(rect.size.x, rect.size.y) * 0.25
+	var margin := clamp(mist_room_margin, 0.0, max_margin)
+	var safe_rect := rect.grow(-margin)
+	if safe_rect.size.x <= 0.0 or safe_rect.size.y <= 0.0:
+		safe_rect = rect
+
+	return Vector2(
+		clamp(candidate.x, safe_rect.position.x, safe_rect.end.x),
+		clamp(candidate.y, safe_rect.position.y, safe_rect.end.y)
+	)
 
 
 func _state_lunge_windup(delta: float, now: float) -> void:
