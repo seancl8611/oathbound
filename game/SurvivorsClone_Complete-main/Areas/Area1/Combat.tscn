@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c7hdlxttxkrep"]
 
-[ext_resource type="Script" path="res://Areas/Area1/CombatRoom.gd" id="1_6qnrf"]
+[ext_resource type="Script" path="res://Areas/Area1/HushiroCombatRoom.gd" id="1_6qnrf"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_2wlxx"]
 [ext_resource type="Script" path="res://Areas/Area1/EnemyEncounterSpawner.gd" id="5_0cb17"]
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="7_qym0e"]
