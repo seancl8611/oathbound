@@ -26,33 +26,22 @@ const HUSHIRO_BLOCK_POSTURE_DAMAGE: float = 12.0
 @export var hushiro_guard_range: float = 95.0
 
 
-# =============================================================================
-# EXPLICIT GUARD OWNERSHIP
-# =============================================================================
-
 func _update_blocking(_delta: float, now: float) -> void:
 	if not can_block or _dbroken_active:
 		_set_blocking(false)
 		return
-
 	if telegraphing or (is_attacking and not _attack_recovery):
 		_set_blocking(false)
 		return
-
 	if ProstheticEffects.is_confused(self):
 		_set_blocking(false)
 		return
-
 	if now < _block_stagger_until:
 		_set_blocking(false)
 		return
-
 	if not is_instance_valid(player):
 		_set_blocking(false)
 		return
-
-	# "Blocks often" means the Swordsman deliberately enters a defensive state.
-	# Merely standing in front of it must not grant permanent frontal immunity.
 	if ai_state != AIState.DEFEND:
 		_set_blocking(false)
 		return
@@ -66,10 +55,6 @@ func _is_frontal_attack(attacker: Variant) -> bool:
 		return false
 	return super._is_frontal_attack(attacker)
 
-
-# =============================================================================
-# POSTURE / DEATHBLOW
-# =============================================================================
 
 func _on_base_posture_meter_filled() -> void:
 	if not _dbroken_active:
@@ -85,16 +70,11 @@ func receive_deathblow(attacker: Node) -> void:
 	super.receive_deathblow(attacker)
 
 
-# =============================================================================
-# PARRY RESPONSE
-# =============================================================================
-
 func on_parried(player_pos: Vector2) -> void:
 	var was_perilous_thrust: bool = _current_attack_type == AttackType.QUICK_THRUST
 
 	# The inherited controller applies the shared normal 25-point parry response before
-	# its recoil await. Do not await here: preserving that inherited async recoil flow
-	# lets this rules layer add only the perilous-thrust bonus immediately.
+	# its recoil await. Preserve that async recoil flow and add only the thrust bonus.
 	super.on_parried(player_pos)
 
 	if was_perilous_thrust:
@@ -107,10 +87,6 @@ func on_parried(player_pos: Vector2) -> void:
 				"target_total_pressure": HUSHIRO_NORMAL_PARRY_POSTURE * HUSHIRO_PERILOUS_THRUST_PARRY_MULT,
 			})
 
-
-# =============================================================================
-# PLAYER CONTACT DELIVERY + TELEMETRY
-# =============================================================================
 
 func _on_swipe_area_entered(player_hurtbox: Area2D) -> void:
 	if player_hurtbox == null or not player_hurtbox.is_in_group("player_hurtbox"):
