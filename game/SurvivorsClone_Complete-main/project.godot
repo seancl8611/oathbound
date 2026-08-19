@@ -39,6 +39,7 @@ QuestManager="*res://Utility/QuestManager.gd"
 ProstheticEffects="*res://Utility/ProstheticEffects.gd"
 StanceEffects="*res://autoload/stance_effects.gd"
 PlaytestLab="*res://Utility/PlaytestLab.gd"
+CombatTelemetry="*res://Utility/CombatTelemetry.gd"
 FlameProgress="*res://autoload/FlameProgress.gd"
 PlayerState="*res://Utility/PlayerState.gd"
 
