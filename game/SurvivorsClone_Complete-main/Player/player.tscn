@@ -1,6 +1,6 @@
 [gd_scene load_steps=70 format=3 uid="uid://mgtaninnhcss"]
 
-[ext_resource type="Script" path="res://Player/player.gd" id="1_37q80"]
+[ext_resource type="Script" path="res://Player/OathboundPlayer.gd" id="1_37q80"]
 [ext_resource type="Texture2D" path="res://Textures/Player/player_dash.png" id="2_ke75m"]
 [ext_resource type="PackedScene" path="res://Utility/hurt_box.tscn" id="3_gs51i"]
 [ext_resource type="Script" path="res://Utility/CameraFollow.gd" id="4_6lcks"]
