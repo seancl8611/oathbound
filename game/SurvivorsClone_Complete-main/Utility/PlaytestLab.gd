@@ -34,7 +34,7 @@ func _ready() -> void:
 		set_process_unhandled_input(false)
 		return
 	call_deferred("_build_ui")
-	print("[PlaytestLab] Ready. Press F8 to toggle.")
+	print("[PlaytestLab] Ready. Press ` (backtick) to toggle.")
 
 
 func _process(delta: float) -> void:
@@ -78,7 +78,6 @@ func _build_ui() -> void:
 	panel_style.set_border_width_all(1)
 	panel_style.set_corner_radius_all(6)
 	panel_style.set_content_margin_all(10)
-	panel_style.set_content_margin_all(10)
 	panel.add_theme_stylebox_override("panel", panel_style)
 
 	var vbox := VBoxContainer.new()
@@ -107,7 +106,7 @@ func _build_ui() -> void:
 	_build_build_tab(tabs)
 
 	var footer := Label.new()
-	footer.text = "F8 closes the lab. Gameplay pauses while the lab is open."
+	footer.text = "` closes the lab. Gameplay pauses while the lab is open."
 	footer.modulate = Color(0.68, 0.7, 0.75)
 	vbox.add_child(footer)
 
