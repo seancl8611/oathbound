@@ -1,17 +1,8 @@
 extends "res://Enemy/Area 1/Encounter/corrupted_swordsman.gd"
 
-## =============================================================================
-## CORRUPTED SWORDSMAN - CURRENT HUSHIRO RULES LAYER
-## =============================================================================
-## The imported swordsman controller still owns its animation/HFSM plumbing while
-## Area 1 is reconciled. This script owns approved current Hushiro behavior:
-## explicit guard state, perilous thrust response, ordinary Deathblow timing, and
-## structured enemy -> Player contact telemetry.
-##
-## This is intentionally a temporary inheritance bridge, not a second Swordsman
-## implementation. When the imported HFSM/animation plumbing is replaced,
-## corrupted_swordsman.gd can be retired and this controller can stand alone.
-## =============================================================================
+## Current Hushiro rules layer for the Corrupted Swordsman.
+## The imported controller still owns active HFSM/animation plumbing until that
+## implementation is replaced; this layer owns approved current combat rules.
 
 const HUSHIRO_DEATHBLOW_WINDOW: float = 2.5
 const HUSHIRO_NORMAL_PARRY_POSTURE: float = 25.0
