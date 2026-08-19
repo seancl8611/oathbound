@@ -3,6 +3,10 @@ extends "res://Enemy/Area 1/Encounter/corrupted_swordsman.gd"
 ## Current Hushiro rules layer for the Corrupted Swordsman.
 ## The imported controller still owns active HFSM/animation plumbing until that
 ## implementation is replaced; this layer owns approved current combat rules.
+##
+## Targeting contract: each discrete attack beat may acquire Akio during its own
+## windup, then locks that snapshot through active frames. Multi-hit attacks must
+## never reuse the opening move's stale target snapshot for later swings.
 
 const HUSHIRO_DEATHBLOW_WINDOW: float = 2.5
 const HUSHIRO_NORMAL_PARRY_POSTURE: float = 25.0
@@ -14,6 +18,17 @@ const HUSHIRO_BLOCK_POSTURE_DAMAGE: float = 12.0
 
 var _hushiro_attack_id_override: String = ""
 
+
+func _ready() -> void:
+	super._ready()
+	if combat:
+		combat.config = CombatConfig.create_enemy_config()
+		combat.set_posture(0.0)
+
+
+# =============================================================================
+# EXPLICIT GUARD OWNERSHIP
+# =============================================================================
 
 func _update_blocking(_delta: float, now: float) -> void:
 	if not can_block or _dbroken_active:
@@ -44,6 +59,10 @@ func _is_frontal_attack(attacker: Variant) -> bool:
 	return super._is_frontal_attack(attacker)
 
 
+# =============================================================================
+# POSTURE / DEATHBLOW
+# =============================================================================
+
 func _on_base_posture_meter_filled() -> void:
 	if not _dbroken_active:
 		_trigger_posture_break(HUSHIRO_DEATHBLOW_WINDOW)
@@ -58,11 +77,24 @@ func receive_deathblow(attacker: Node) -> void:
 	super.receive_deathblow(attacker)
 
 
+# =============================================================================
+# PARRY CLASSIFICATION
+# =============================================================================
+
 func on_parried(player_pos: Vector2) -> void:
-	var was_perilous_thrust: bool = _current_attack_type == AttackType.QUICK_THRUST
-	# Parent applies the shared normal parry response before its recoil await. Preserve
-	# that async flow and add only the 0.5x perilous-thrust bonus here.
+	# Read the actual active attack beat, not the parent combo's original enum.
+	# A thrust-follow-up slash still lives inside QUICK_THRUST legacy state, but it is
+	# an ordinary blockable/parryable slash and must not receive the perilous bonus.
+	var was_perilous_thrust: bool = false
+	if is_instance_valid(_current_swipe_area):
+		was_perilous_thrust = (
+			str(_current_swipe_area.get_meta("attack_id", "")) == "quick_thrust"
+			and str(_current_swipe_area.get_meta("damage_type", "")) == "perilous"
+		)
+
+	# Parent applies the shared normal parry response before its recoil await.
 	super.on_parried(player_pos)
+
 	if was_perilous_thrust:
 		var bonus_posture: float = HUSHIRO_NORMAL_PARRY_POSTURE * (HUSHIRO_PERILOUS_THRUST_PARRY_MULT - 1.0)
 		add_posture_damage(bonus_posture)
@@ -192,61 +224,31 @@ func _perform_cross_swing_hit(hit_num: int, gen: int) -> void:
 
 		telegraphing = false
 		_set_anim_speed_safe(1.0)
-		_perform_cross_swing_hit(2, gen)
+		await _perform_cross_swing_hit(2, gen)
 	else:
 		_hushiro_attack_id_override = ""
 		_finish_attack()
 
 
-# Stamp attack metadata as soon as an active hitbox is created. This makes misses
-# diagnosable too; previously attack_id/type were added only after a collision.
+# =============================================================================
+# HITBOX AUTHORING
+# =============================================================================
+# Stamp attack metadata when the hitbox is created, not only after a collision.
+# This makes misses and bad geometry measurable in CombatTelemetry.
+
 func _spawn_attack_hitbox(dmg: int, range_val: float, is_telegraph: bool) -> void:
 	super._spawn_attack_hitbox(dmg, range_val, is_telegraph)
-	if not is_telegraph:
-		_stamp_current_attack_event(dmg, "melee", true)
+	if is_instance_valid(_current_swipe_area):
+		_stamp_current_attack_event(dmg, "melee", true, is_telegraph)
 
 
 func _spawn_thrust_hitbox(dmg: int, range_val: float, is_telegraph: bool) -> void:
 	super._spawn_thrust_hitbox(dmg, range_val, is_telegraph)
-	if not is_telegraph:
-		_stamp_current_attack_event(dmg, "perilous", false)
+	if is_instance_valid(_current_swipe_area):
+		_stamp_current_attack_event(dmg, "perilous", false, is_telegraph)
 
 
-func _on_swipe_area_entered(player_hurtbox: Area2D) -> void:
-	if player_hurtbox == null or not player_hurtbox.is_in_group("player_hurtbox"):
-		return
-	if not _consume_current_attack_contact():
-		return
-	var damage: int = swipe_damage
-	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("damage"):
-		damage = int(_current_swipe_area.get_meta("damage"))
-	_stamp_current_attack_event(damage, "melee", true)
-	_emit_player_hurt_and_record(player_hurtbox, damage, "melee")
-
-
-func _on_thrust_area_entered(player_hurtbox: Area2D) -> void:
-	if player_hurtbox == null or not player_hurtbox.is_in_group("player_hurtbox"):
-		return
-	if not _consume_current_attack_contact():
-		return
-	_thrust_hit_player = true
-	var damage: int = thrust_damage
-	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("damage"):
-		damage = int(_current_swipe_area.get_meta("damage"))
-	_stamp_current_attack_event(damage, "perilous", false)
-	_emit_player_hurt_and_record(player_hurtbox, damage, "perilous")
-
-
-func _consume_current_attack_contact() -> bool:
-	if not is_instance_valid(_current_swipe_area):
-		return false
-	if _current_swipe_area.has_meta("consumed") and bool(_current_swipe_area.get_meta("consumed")):
-		return false
-	_current_swipe_area.set_meta("consumed", true)
-	return true
-
-
-func _stamp_current_attack_event(damage: int, damage_type: String, blockable: bool) -> void:
+func _stamp_current_attack_event(damage: int, damage_type: String, blockable: bool, is_telegraph: bool = false) -> void:
 	if not is_instance_valid(_current_swipe_area):
 		return
 	_current_swipe_area.set_meta("attack_id", _current_hushiro_attack_id())
@@ -257,7 +259,9 @@ func _stamp_current_attack_event(damage: int, damage_type: String, blockable: bo
 	_current_swipe_area.set_meta("parryable", true)
 	_current_swipe_area.set_meta("blockable", blockable)
 	_current_swipe_area.set_meta("perilous", damage_type == "perilous")
+	_current_swipe_area.set_meta("stagger_level", 0)
 	_current_swipe_area.set_meta("proc_coefficient", 1.0)
+	_current_swipe_area.set_meta("is_telegraph", is_telegraph)
 
 
 func _current_hushiro_attack_id() -> String:
@@ -276,11 +280,57 @@ func _current_hushiro_attack_id() -> String:
 			return "swordsman_attack"
 
 
+# =============================================================================
+# PLAYER CONTACT DELIVERY + TELEMETRY
+# =============================================================================
+
+func _on_swipe_area_entered(player_hurtbox: Area2D) -> void:
+	if player_hurtbox == null or not player_hurtbox.is_in_group("player_hurtbox"):
+		return
+	if not _consume_current_attack_contact():
+		return
+	var damage: int = swipe_damage
+	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("health_damage"):
+		damage = int(_current_swipe_area.get_meta("health_damage"))
+	elif is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("damage"):
+		damage = int(_current_swipe_area.get_meta("damage"))
+	_emit_player_hurt_and_record(player_hurtbox, damage, "melee")
+
+
+func _on_thrust_area_entered(player_hurtbox: Area2D) -> void:
+	if player_hurtbox == null or not player_hurtbox.is_in_group("player_hurtbox"):
+		return
+	if not _consume_current_attack_contact():
+		return
+	_thrust_hit_player = true
+	var damage: int = thrust_damage
+	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("health_damage"):
+		damage = int(_current_swipe_area.get_meta("health_damage"))
+	elif is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("damage"):
+		damage = int(_current_swipe_area.get_meta("damage"))
+	_emit_player_hurt_and_record(player_hurtbox, damage, "perilous")
+
+
+func _consume_current_attack_contact() -> bool:
+	if not is_instance_valid(_current_swipe_area):
+		return false
+	if _current_swipe_area.has_meta("consumed") and bool(_current_swipe_area.get_meta("consumed")):
+		return false
+	_current_swipe_area.set_meta("consumed", true)
+	return true
+
+
 func _emit_player_hurt_and_record(player_hurtbox: Area2D, damage: int, damage_type: String) -> void:
+	if not is_instance_valid(_current_swipe_area):
+		return
 	var receiver: Node = player_hurtbox.get_parent()
 	var before: Dictionary = {}
 	if CombatTelemetry != null and CombatTelemetry.is_capturing() and receiver != null:
 		before = CombatTelemetry.snapshot_actor(receiver)
-	player_hurtbox.emit_signal("hurt", damage, damage_type, self)
-	if CombatTelemetry != null and CombatTelemetry.is_capturing() and receiver != null and is_instance_valid(_current_swipe_area):
+
+	# Pass the actual hitbox so Player defense reads the same attack metadata that
+	# telemetry sees. `_resolve_attacker()` follows its `attacker` meta back to us.
+	player_hurtbox.emit_signal("hurt", damage, damage_type, _current_swipe_area)
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing() and receiver != null:
 		CombatTelemetry.record_contact(receiver, _current_swipe_area, self, before)
