@@ -302,7 +302,6 @@ unique_name_in_owner = true
 process_mode = 2
 visible = false
 layout_mode = 0
-primed = false
 offset_left = 230.0
 offset_top = -266.0
 offset_right = 430.0
