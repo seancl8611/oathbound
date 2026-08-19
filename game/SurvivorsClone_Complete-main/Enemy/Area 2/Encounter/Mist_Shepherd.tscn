@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://crgeeakwaelj1"]
+
+[ext_resource type="Script" path="res://Enemy/Area 2/Encounter/Mist_Shepherd.gd" id="1_su2d5"]
+[ext_resource type="Texture2D" uid="uid://ddwaxh7fkp6yg" path="res://Textures/Enemy/spirit_monk/spirit_monk.png" id="2_20mkg"]
+[ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_o5yd2"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="8_31xju"]
+[ext_resource type="PackedScene" uid="uid://uhr6mtuisqm1" path="res://Utility/hit_box.tscn" id="9_j0f76"]
+[ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="10_6dain"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ingj8"]
+shader = ExtResource("2_o5yd2")
+shader_parameter/glow_color = Quaternion(1, 1, 0.4, 1)
+shader_parameter/is_buffed = false
+shader_parameter/intensity = 0.3
+shader_parameter/pulse_speed = 4.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_24u87"]
+radius = 18.0
+height = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rborl"]
+size = Vector2(38, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucec4"]
+size = Vector2(39, 65)
+
+[sub_resource type="Animation" id="Animation_2vgcy"]
+resource_name = "teleport"
+
+[sub_resource type="Animation" id="Animation_6db63"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lwsxq"]
+_data = {
+"teleport": SubResource("Animation_2vgcy"),
+"walk": SubResource("Animation_6db63")
+}
+
+[node name="spirit monk" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_su2d5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ingj8")
+position = Vector2(2.375, -1.88448)
+scale = Vector2(0.261076, 0.261076)
+texture = ExtResource("2_20mkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 3)
+shape = SubResource("CapsuleShape2D_24u87")
+
+[node name="HurtBox" parent="." groups=["hurtbox"] instance=ExtResource("8_31xju")]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_rborl")
+
+[node name="HitBox" parent="." instance=ExtResource("9_j0f76")]
+collision_layer = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_ucec4")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_6dain")
+volume_db = -20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lwsxq")
+}
+
+[node name="BuffTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]
