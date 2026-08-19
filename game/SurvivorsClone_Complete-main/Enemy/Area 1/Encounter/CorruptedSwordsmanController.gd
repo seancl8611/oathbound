@@ -160,7 +160,7 @@ func _stamp_current_attack_event(damage: int, damage_type: String, blockable: bo
 	_current_swipe_area.set_meta("damage_type", damage_type)
 	_current_swipe_area.set_meta("parryable", true)
 	_current_swipe_area.set_meta("blockable", blockable)
-	_current_swipe_area.set_meta("unblockable", not blockable)
+	_current_swipe_area.set_meta("perilous", damage_type == "perilous")
 	_current_swipe_area.set_meta("proc_coefficient", 1.0)
 
 
