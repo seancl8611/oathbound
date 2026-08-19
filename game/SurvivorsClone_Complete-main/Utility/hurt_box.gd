@@ -248,7 +248,7 @@ func _on_area_entered(area: Area2D) -> void:
 	# Legacy EnemyBase contains an old damage-type response table that scales HP and
 	# Posture. Canonical events already authored those values, so use a neutral legacy
 	# type for the compatibility callback while retaining the real type in cached meta.
-	var receiver_damage_type := "oathbound_attack" if canonical_event else dmg_type
+	var receiver_damage_type: String = "oathbound_attack" if canonical_event else str(dmg_type)
 	var event_combat: Node = _begin_attack_event_transaction() if canonical_event else null
 	_emit_hurt_once_per_frame(dmg_once, receiver_damage_type, attacker)
 	_end_attack_event_transaction(event_combat)

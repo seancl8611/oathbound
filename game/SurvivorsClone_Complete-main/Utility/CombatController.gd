@@ -136,13 +136,13 @@ func _resolve_authored_posture_amount(fallback: float) -> float:
 	if _incoming_attack_event.is_empty():
 		return fallback
 
-	var host := get_parent()
-	var blocked := _is_blocking
+	var host: Node = get_parent()
+	var blocked: bool = _is_blocking
 	if host and host.has_method("is_blocking"):
 		blocked = bool(host.call("is_blocking"))
 
-	var key := "block_posture_damage" if blocked else "posture_damage"
-	return max(0.0, float(_incoming_attack_event.get(key, fallback)))
+	var key: String = "block_posture_damage" if blocked else "posture_damage"
+	return maxf(0.0, float(_incoming_attack_event.get(key, fallback)))
 
 
 # =============================================================================

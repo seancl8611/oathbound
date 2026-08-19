@@ -245,15 +245,15 @@ func _clamp_to_active_combat_bounds(candidate: Vector2) -> Vector2:
 		return candidate
 
 	var rect: Rect2 = bounds.call("get_rect_global")
-	var max_margin := min(rect.size.x, rect.size.y) * 0.25
-	var margin := clamp(mist_room_margin, 0.0, max_margin)
-	var safe_rect := rect.grow(-margin)
+	var max_margin: float = minf(rect.size.x, rect.size.y) * 0.25
+	var margin: float = clampf(mist_room_margin, 0.0, max_margin)
+	var safe_rect: Rect2 = rect.grow(-margin)
 	if safe_rect.size.x <= 0.0 or safe_rect.size.y <= 0.0:
 		safe_rect = rect
 
 	return Vector2(
-		clamp(candidate.x, safe_rect.position.x, safe_rect.end.x),
-		clamp(candidate.y, safe_rect.position.y, safe_rect.end.y)
+		clampf(candidate.x, safe_rect.position.x, safe_rect.end.x),
+		clampf(candidate.y, safe_rect.position.y, safe_rect.end.y)
 	)
 
 
