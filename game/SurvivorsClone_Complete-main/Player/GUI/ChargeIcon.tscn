@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cy2v5bgb688d4"]
 
-[ext_resource type="Texture2D" uid="uid://ywij2rnwq47s" path="res://icon.svg" id="1_l7dah"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="1_l7dah"]
 
 [node name="TextureRect" type="TextureRect"]
 custom_minimum_size = Vector2(16, 16)
