@@ -41,10 +41,9 @@ func _ready() -> void:
 	if not is_connected("body_entered", Callable(self, "_on_body_entered")):
 		connect("body_entered", Callable(self, "_on_body_entered"))
 
-	var owner_node := get_parent()
-	if owner_node and owner_node.has_method("_on_hurt_box_hurt"):
-		if not is_connected("hurt", Callable(owner_node, "_on_hurt_box_hurt")):
-			connect("hurt", Callable(owner_node, "_on_hurt_box_hurt"))
+	# HurtBox owns collision detection and event emission only. The owning Player/enemy
+	# scene/base owns its hurt-signal connection. Auto-connecting here races inherited
+	# PackedScene connections and can deliver one physical hit twice.
 
 
 func _determine_faction() -> void:
