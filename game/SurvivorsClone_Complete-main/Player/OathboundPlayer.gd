@@ -167,6 +167,14 @@ func _start_dodge():
 	_is_invincible = true
 	set_invincibility(true)
 
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("player_dash_start", {
+			"player": CombatTelemetry.snapshot_actor(self),
+			"direction": [_dodge_dir.x, _dodge_dir.y],
+			"duration": CURRENT_DASH_DURATION,
+			"iframe_duration": CURRENT_DASH_IFRAMES,
+		})
+
 	_update_sprite_facing(_dodge_dir)
 	_play_anim("dash")
 	_change_state(State.DODGING)
@@ -210,6 +218,13 @@ func _start_parry(_window_s: float):
 	_current_speed = 0.0
 	_move_velocity = Vector2.ZERO
 
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("player_parry_open", {
+			"player": CombatTelemetry.snapshot_actor(self),
+			"window_sec": CURRENT_PARRY_WINDOW,
+			"defense_held": Input.is_action_pressed("parry"),
+		})
+
 	var now: float = Time.get_ticks_msec() * 0.001
 	if now <= _post_dodge_block_priority_until and Input.is_action_pressed("parry"):
 		_block_held = true
@@ -217,6 +232,11 @@ func _start_parry(_window_s: float):
 		if combat:
 			combat.start_block()
 		_play_block_animation()
+		if CombatTelemetry != null and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("player_block_start", {
+				"player": CombatTelemetry.snapshot_actor(self),
+				"source": "post_dash_priority",
+			})
 		return
 
 	_change_state(State.PARRYING)
@@ -239,6 +259,11 @@ func _state_parrying(delta: float):
 			_change_state(State.BLOCKING)
 			if combat:
 				combat.start_block()
+			if CombatTelemetry != null and CombatTelemetry.is_capturing():
+				CombatTelemetry.record_event("player_block_start", {
+					"player": CombatTelemetry.snapshot_actor(self),
+					"source": "parry_window_expired_while_held",
+				})
 		else:
 			_change_state(State.IDLE)
 
@@ -249,12 +274,20 @@ func _open_counter_cut_window(target: Node = null) -> void:
 
 
 func _handle_parry_success(area: Area2D, attacker: Node, dmg_type: String, atk_pos: Vector2, _is_perfect: bool):
+	var resolved_attacker: Node = _resolve_attacker(area, attacker)
 	super._handle_parry_success(area, attacker, dmg_type, atk_pos, false)
 	_perfect_parry_available = false
 	_parry_grace_until = -1.0
 	if not _playtest_invulnerable:
 		set_invincibility(false)
-	_open_counter_cut_window(_resolve_attacker(area, attacker))
+	_open_counter_cut_window(resolved_attacker)
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_resolution("parry_success", self, resolved_attacker, area, {
+			"damage_type": dmg_type,
+			"attack_position": [atk_pos.x, atk_pos.y],
+			"counter_window_sec": CURRENT_COUNTER_WINDOW,
+		})
 
 
 # =============================================================================
@@ -273,7 +306,23 @@ func _is_attack_inside_block_arc(atk_pos: Vector2) -> bool:
 
 
 func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk_pos: Vector2):
+	var to_attacker: Vector2 = atk_pos - global_position
+	var block_angle_deg: float = 0.0
+	if to_attacker.length_squared() > 0.001:
+		var facing_for_angle: Vector2 = _facing_dir.normalized()
+		if facing_for_angle.length_squared() <= 0.001:
+			facing_for_angle = Vector2.RIGHT
+		block_angle_deg = absf(rad_to_deg(facing_for_angle.angle_to(to_attacker.normalized())))
+
 	if not _is_attack_inside_block_arc(atk_pos):
+		if CombatTelemetry != null and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_resolution("block_failed_outside_arc", self, attacker, area, {
+				"damage": dmg,
+				"damage_type": dmg_type,
+				"attack_position": [atk_pos.x, atk_pos.y],
+				"relative_angle_deg": block_angle_deg,
+				"block_half_arc_deg": CURRENT_BLOCK_ARC_DEGREES * 0.5,
+			})
 		take_damage(dmg)
 		var rear_kb_dir: Vector2 = (global_position - atk_pos).normalized()
 		knockback += rear_kb_dir * 120.0
@@ -281,6 +330,7 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 			combat.notify_got_hit({"damage": dmg, "type": dmg_type})
 		return
 
+	var posture_before: float = stagger
 	var block_posture: float = 12.0
 	if area:
 		if area.has_meta("block_posture_damage"):
@@ -296,6 +346,17 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 	stagger = clampf(stagger + maxf(0.0, block_posture), 0.0, stagger_max)
 	var now: float = Time.get_ticks_msec() * 0.001
 	_stagger_suppress_until = now + CURRENT_POSTURE_RECOVER_DELAY
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_resolution("block_success", self, attacker, area, {
+			"damage_type": dmg_type,
+			"health_damage_received": 0,
+			"posture_before": posture_before,
+			"posture_damage": block_posture,
+			"posture_after": stagger,
+			"attack_position": [atk_pos.x, atk_pos.y],
+			"relative_angle_deg": block_angle_deg,
+		})
 
 	apply_hitstop(HITSTOP_BLOCKED)
 	_shake_camera(SHAKE_BLOCKED, HITSTOP_BLOCKED)
@@ -334,6 +395,7 @@ func _tick_stagger(delta: float):
 
 
 func _posture_break():
+	var posture_before: float = stagger
 	var now: float = Time.get_ticks_msec() * 0.001
 	stagger = stagger_max
 	_stun_until = now + CURRENT_POSTURE_BREAK_DURATION
@@ -350,6 +412,14 @@ func _posture_break():
 	_play_anim("hurt")
 	emit_signal("posture_broken_player")
 
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("player_posture_break", {
+			"player": CombatTelemetry.snapshot_actor(self),
+			"posture_before": posture_before,
+			"break_duration_sec": CURRENT_POSTURE_BREAK_DURATION,
+			"reset_ratio": CURRENT_POSTURE_BREAK_RESET_RATIO,
+		})
+
 
 func _recover_from_stun():
 	if sprite:
@@ -362,6 +432,12 @@ func _recover_from_stun():
 	_stun_started_at = 0.0
 	_drop_combo()
 	_change_state(State.IDLE)
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("player_posture_recovered_from_break", {
+			"player": CombatTelemetry.snapshot_actor(self),
+			"posture_after": stagger,
+		})
 
 
 # =============================================================================
