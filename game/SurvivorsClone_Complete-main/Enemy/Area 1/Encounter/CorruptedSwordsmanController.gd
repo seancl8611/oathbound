@@ -11,6 +11,10 @@ extends "res://Enemy/Area 1/Encounter/corrupted_swordsman.gd"
 ## - perilous-thrust parries apply 1.5x normal parry posture pressure;
 ## - ordinary posture break exposes a 2.5 second Deathblow window;
 ## - enemy -> Player contacts are emitted into structured playtest telemetry.
+##
+## This is intentionally a temporary inheritance bridge, not a second Swordsman
+## implementation. Once the imported HFSM/animation plumbing has been replaced,
+## corrupted_swordsman.gd can be retired and this controller can stand alone.
 ## =============================================================================
 
 const HUSHIRO_DEATHBLOW_WINDOW: float = 2.5
