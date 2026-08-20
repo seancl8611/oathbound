@@ -1,10 +1,10 @@
-extends "res://Areas/Area1/CombatRoom.gd"
+extends "res://Core/Chambers/CombatChamberBase.gd"
 
-## Current Area 1 combat-room rules layer.
+## Hushiro combat-chamber rules layer.
 ##
-## Legacy CombatRoom still owns general gate/room plumbing. Hushiro-specific encounter
-## selection, pressure coordination, and current reward compatibility live here so
-## Area 1 follows the approved authored model without reviving old route authority.
+## The shared CombatChamberBase owns general gate/chamber plumbing. Hushiro-specific
+## encounter selection, pressure coordination, and current reward compatibility live
+## here so the region follows its approved authored encounter model.
 
 const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 
@@ -25,7 +25,7 @@ func _ready() -> void:
 	# The inherited ready path still owns bounds, gates and encounter startup.
 	# Its virtual calls dispatch to the Hushiro overrides below.
 	super._ready()
-	print("[HushiroCombatRoom] Authored Hushiro encounter coordination active")
+	print("[HushiroCombatChamber] Authored encounter coordination active")
 
 
 func _pick_encounter_for_area(area_id: int) -> Dictionary:
@@ -42,15 +42,15 @@ func _pick_encounter_for_area(area_id: int) -> Dictionary:
 	)
 	if encounter.is_empty():
 		# This should only occur after unusual debug warp/reload sequences exhaust all
-		# unseen eligible encounters. Use an explicit fallback so the room remains usable.
-		push_warning("[HushiroCombatRoom] No unseen eligible encounter for chamber %d; using Firing Line fallback" % chamber_number)
+		# unseen eligible encounters. Use an explicit fallback so the chamber remains usable.
+		push_warning("[HushiroCombatChamber] No unseen eligible encounter for chamber %d; using Firing Line fallback" % chamber_number)
 		encounter = HUSHIRO_CATALOG.get_by_id("H02_firing_line")
 
 	var encounter_id: String = str(encounter.get("id", ""))
 	if not encounter_id.is_empty() and not RunData.hushiro_encounters_seen.has(encounter_id):
 		RunData.hushiro_encounters_seen.append(encounter_id)
 
-	print("[HushiroCombatRoom] Chamber %d -> %s (%s)" % [
+	print("[HushiroCombatChamber] Chamber %d -> %s (%s)" % [
 		chamber_number,
 		str(encounter.get("name", encounter_id)),
 		encounter_id,
@@ -62,10 +62,10 @@ func _default_template() -> Dictionary:
 	return HUSHIRO_CATALOG.get_by_id("H01_broken_patrol")
 
 
-# Canonical Area 1 route tokens are Technique / Gold / Mist / Scroll. Technique still
-# enters the existing UpgradeChoiceUI as a compatibility bridge until the current
-# Technique screen is connected; the route itself no longer exposes the old "boon"
-# vocabulary. Payout values match ITEMS_AND_REWARDS.md.
+# Canonical Hushiro combat rewards are Technique / Gold / Mist / Scroll. Technique
+# still enters the existing UpgradeChoiceUI as a compatibility bridge until the
+# current Technique screen is connected; the route itself no longer exposes the old
+# "boon" vocabulary. Payout values match ITEMS_AND_REWARDS.md.
 func post_clear() -> void:
 	var reward_key: String = str(get_meta("reward_key") if has_meta("reward_key") else "")
 	if reward_key.is_empty():
@@ -96,10 +96,10 @@ func post_clear() -> void:
 
 	await pickup.collected
 	unlock_all_gates()
-	print("[HushiroCombatRoom] Reward collected: %s -> gates unlocked" % reward_key)
+	print("[HushiroCombatChamber] Reward collected: %s -> gates unlocked" % reward_key)
 
 
-# Keep the inherited method name because CombatRoom invokes it virtually.
+# Keep the inherited method name because CombatChamberBase invokes it virtually.
 func _configure_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
@@ -122,10 +122,10 @@ func _configure_duel_tokens() -> void:
 	if _has_property(AttackDir, "max_frontline"):
 		AttackDir.max_frontline = 4
 
-	print("[HushiroCombatRoom] Pressure baseline: adaptive melee/ranged roles, Hound lunge cap=1")
+	print("[HushiroCombatChamber] Pressure baseline: adaptive melee/ranged roles, Hound lunge cap=1")
 
 
-# The imported autoscale timer calls this method as the current wave population changes.
+# The shared autoscale timer calls this method as the current wave population changes.
 func _update_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
