@@ -1,6 +1,6 @@
 [gd_scene load_steps=56 format=3 uid="uid://morirckm2b2h"]
 
-[ext_resource type="Script" path="res://Enemy/Area 1/Minibosses/the_collector.gd" id="1_w1aps"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Minibosses/TheCollector.gd" id="1_w1aps"]
 [ext_resource type="Texture2D" uid="uid://d15bfod7lrl8p" path="res://Textures/Enemy/chaincollector/attack/atk_1_1.png" id="2_d8e2e"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="3_2cc3d"]
 [ext_resource type="Script" path="res://Utility/CombatController.gd" id="4_m8ej8"]
@@ -127,7 +127,7 @@ _data = {
 "walk": SubResource("Animation_vmyfm")
 }
 
-[node name="The_Collector" type="CharacterBody2D" groups=["enemy", "miniboss"]]
+[node name="TheCollector" type="CharacterBody2D" groups=["enemy", "miniboss"]]
 script = ExtResource("1_w1aps")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
