@@ -32,7 +32,10 @@ func _pick_encounter_for_area(area_id: int) -> Dictionary:
 	if area_id != 1:
 		return super._pick_encounter_for_area(area_id)
 
-	var chamber_number: int = maxi(1, int(RunData.depth) + 1)
+	# GameFlow's route index is the authoritative counted-chamber position. RunData.depth
+	# is retained for run summaries but legacy direct choice traversal can update it one
+	# callback later, which must not change encounter minimum-chamber eligibility.
+	var chamber_number: int = maxi(1, int(GameFlow.current_index) + 1) if typeof(GameFlow) == TYPE_OBJECT else maxi(1, int(RunData.depth) + 1)
 	var encounter: Dictionary = HUSHIRO_CATALOG.pick_for_chamber(
 		chamber_number,
 		RunData.hushiro_encounters_seen
