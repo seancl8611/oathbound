@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://ble63woaq857a"]
 
-[ext_resource type="Script" path="res://Enemy/Area 1/Encounter/warden.gd" id="1_ujwvx"]
+[ext_resource type="Script" path="res://Enemy/Area 1/Encounter/HushiroWarden.gd" id="1_ujwvx"]
 [ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_3uthg"]
 [ext_resource type="Texture2D" uid="uid://v3ifh4w5yafq" path="res://Textures/Enemy/warden/Attack.png" id="4_yllye"]
 [ext_resource type="Texture2D" uid="uid://bdy3xledp1486" path="res://Textures/Enemy/warden/walk2.png" id="5_e4cbl"]
