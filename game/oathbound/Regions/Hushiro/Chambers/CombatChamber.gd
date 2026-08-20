@@ -22,6 +22,10 @@ const HUSHIRO_COMBAT_PAYOUTS: Dictionary = {
 
 
 func _ready() -> void:
+	# Keep telemetry and runtime paths aligned with the canonical Chamber vocabulary,
+	# even if this scene is reached through a compatibility wrapper.
+	name = "CombatChamber"
+
 	# The inherited ready path still owns bounds, gates and encounter startup.
 	# Its virtual calls dispatch to the Hushiro overrides below.
 	super._ready()
