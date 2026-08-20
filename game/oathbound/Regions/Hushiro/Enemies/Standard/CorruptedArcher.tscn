@@ -1,6 +1,6 @@
 [gd_scene load_steps=51 format=3 uid="uid://c4oux80d7y6n"]
 
-[ext_resource type="Script" path="res://Enemy/Area 1/Encounter/HushiroArcher.gd" id="1_archer"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CorruptedArcherRules.gd" id="1_archer"]
 [ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack_windup1.png" id="2_wind1"]
 [ext_resource type="PackedScene" path="res://Utility/hurt_box.tscn" id="3_hurtbox"]
 [ext_resource type="AudioStream" path="res://Audio/SoundEffect/enemy_hit.ogg" id="4_hit"]
