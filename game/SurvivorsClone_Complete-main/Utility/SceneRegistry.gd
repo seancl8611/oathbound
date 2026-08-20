@@ -5,6 +5,9 @@ var rooms := {
 	"shrine":   preload("res://Areas/Area1/Shrine.tscn"),
 	"shop":     preload("res://Areas/Area1/Shop.tscn"),
 	"treasure": preload("res://Areas/Area1/Treasure.tscn"),
+	# Hushiro's Treasure room is also the authored miniboss challenge room.
+	# Keep this alias until the next naming/organization pass standardizes room IDs.
+	"miniboss": preload("res://Areas/Area1/Treasure.tscn"),
 	"rest":     preload("res://Areas/Area1/Rest.tscn"),
 	"boss":     preload("res://Areas/Area1/Boss.tscn")
 }
