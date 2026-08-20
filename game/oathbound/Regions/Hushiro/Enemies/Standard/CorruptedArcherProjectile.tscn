@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpinkbjo8urot"]
 
 [ext_resource type="Texture2D" uid="uid://hlxiky35qias" path="res://Textures/Enemy/archer/arrow.png" id="1_7e5kv"]
-[ext_resource type="Script" path="res://Enemy/Area 1/Encounter/corrupted_archer_projectile.gd" id="1_np50t"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CorruptedArcherProjectile.gd" id="1_np50t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4n1pl"]
 size = Vector2(1.46809, 13.3649)
