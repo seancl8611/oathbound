@@ -1,6 +1,6 @@
 [gd_scene load_steps=42 format=3 uid="uid://bug7scwr4htcg"]
 
-[ext_resource type="Script" path="res://Enemy/Area 1/Encounter/blighted_hound.gd" id="1_xvvvy"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/BlightedHound.gd" id="1_xvvvy"]
 [ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_map1g"]
 [ext_resource type="Texture2D" uid="uid://bdqbmvx2l52bj" path="res://Textures/Enemy/dog/walk1.png" id="3_a7u1x"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="4_83omp"]
@@ -180,7 +180,7 @@ deceleration_time = 0.04
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lob7u"]
 size = Vector2(21, 9)
 
-[node name="blighted_hound" type="CharacterBody2D" groups=["enemy"]]
+[node name="BlightedHound" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 5
 collision_mask = 5
 motion_mode = 1
