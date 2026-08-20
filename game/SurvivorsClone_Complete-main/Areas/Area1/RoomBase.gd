@@ -137,6 +137,11 @@ func _ensure_third_gate(gate1: Node, gate2: Node) -> Node:
 	gate3.name = "ExitGate3"
 	add_child(gate3)
 
+	# The authored gates were locked earlier in room _ready(). A dynamically-created
+	# third gate must enter the same locked state so it cannot bypass combat/reward clear.
+	if gate3.has_method("lock"):
+		gate3.lock()
+
 	if gate3 is Node2D:
 		var p3 := (gate3 as Node2D).position
 		if gate1 is Node2D and gate2 is Node2D:
