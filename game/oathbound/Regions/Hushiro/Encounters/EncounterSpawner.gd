@@ -1,10 +1,10 @@
-extends "res://Areas/Area1/EnemyEncounterSpawner.gd"
+extends "res://Core/Encounters/EncounterSpawner.gd"
 
-## Area 1 spawn-geometry and enemy-contract reconciliation.
+## Hushiro-specific spawn geometry and standard-enemy contract reconciliation.
 ##
-## EnemyEncounterSpawner assigns position before add_child(), but its ring fallback can
-## still produce a point outside authored RoomBounds and the legacy CombatRoom would
-## then clamp the enemy only AFTER _ready(). Hushiro clamps the proposed spawn first.
+## The shared EncounterSpawner assigns position before add_child(), but its ring
+## fallback can still produce a point outside authored Chamber bounds. Hushiro clamps
+## the proposed spawn first, before the enemy enters the tree.
 ##
 ## The inherited spawner emits enemy_spawned after _ready() has run. We use that exact
 ## point to normalize Hushiro durability/Posture so stale imported controller defaults
@@ -55,22 +55,25 @@ func _infer_hushiro_enemy_type(enemy: Node) -> String:
 	if enemy == null:
 		return ""
 
+	var scene_path := enemy.scene_file_path.to_lower()
+	var script_path := ""
 	var script_value: Variant = enemy.get_script()
-	var script_path: String = ""
 	if script_value is Script:
 		script_path = (script_value as Script).resource_path.to_lower()
 
-	if script_path.contains("corruptedswordsmancontroller") or script_path.contains("corrupted_swordsman"):
+	var identity := scene_path + "|" + script_path
+
+	if identity.contains("corrupted_swordsman") or identity.contains("corruptedswordsman"):
 		return "swordsman"
-	if script_path.contains("corrupted_archer"):
+	if identity.contains("corrupted_archer") or identity.contains("corruptedarcher") or identity.contains("hushiroarcher"):
 		return "archer"
-	if script_path.contains("blighted_hound"):
+	if identity.contains("blighted_hound") or identity.contains("blightedhound"):
 		return "hound"
-	if script_path.contains("cellar_bilemass"):
+	if identity.contains("cellar_bilemass") or identity.contains("cellarbilemass"):
 		return "bilemass"
-	if script_path.contains("hollow.gd"):
+	if identity.contains("/hollow.tscn") or identity.contains("/hollow.gd"):
 		return "hollow"
-	if script_path.contains("warden.gd"):
+	if identity.contains("/warden.tscn") or identity.contains("wardenrules") or identity.contains("hushirowarden") or identity.contains("/warden.gd"):
 		return "warden"
 
 	return ""
