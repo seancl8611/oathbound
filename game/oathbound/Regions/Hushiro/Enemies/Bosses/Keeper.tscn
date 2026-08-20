@@ -1,0 +1,330 @@
+[gd_scene load_steps=69 format=3 uid="uid://hdimf1b4ui6f"]
+
+[ext_resource type="Script" path="res://Enemy/Area 1/Boss/Keeper.gd" id="1_j2cxi"]
+[ext_resource type="Texture2D" uid="uid://xg1i4istxt8l" path="res://Textures/Enemy/shield_captain/death9.png" id="2_uolji"]
+[ext_resource type="Texture2D" uid="uid://bko174o6ib0u7" path="res://Textures/Enemy/shield_captain/cannon_mark1.png" id="3_gfo2m"]
+[ext_resource type="Texture2D" uid="uid://bb24xasa7ki2e" path="res://Textures/Enemy/shield_captain/cannon_mark2.png" id="4_4awcc"]
+[ext_resource type="Texture2D" uid="uid://chuvh68t2ei3a" path="res://Textures/Enemy/shield_captain/cannon_mark3.png" id="5_tw5kp"]
+[ext_resource type="Texture2D" uid="uid://b7456s3w7hu67" path="res://Textures/Enemy/shield_captain/cannon_mark4.png" id="6_0hr68"]
+[ext_resource type="Texture2D" uid="uid://ddm2jv1efvhr7" path="res://Textures/Enemy/shield_captain/cannon_mark5.png" id="7_63oxq"]
+[ext_resource type="Texture2D" uid="uid://ucnqsg7krf4k" path="res://Textures/Enemy/shield_captain/overhead_impact1.png" id="8_ep2m6"]
+[ext_resource type="Texture2D" uid="uid://ba6u5y1ekriwt" path="res://Textures/Enemy/shield_captain/overhead_impact2.png" id="9_anir5"]
+[ext_resource type="Texture2D" uid="uid://dofsduibkjdmc" path="res://Textures/Enemy/shield_captain/overhead_impact3.png" id="10_4aj1b"]
+[ext_resource type="Texture2D" uid="uid://c8qq3hr5f3kdk" path="res://Textures/Enemy/shield_captain/overhead_impact4.png" id="11_hnivi"]
+[ext_resource type="Texture2D" uid="uid://cridje2cn43sa" path="res://Textures/Enemy/shield_captain/overhead_impact5.png" id="12_kv4m2"]
+[ext_resource type="Texture2D" uid="uid://cg03ya857o6n1" path="res://Textures/Enemy/shield_captain/overhead_impact6.png" id="13_rhb5p"]
+[ext_resource type="Texture2D" uid="uid://bo0d5tj5kgf31" path="res://Textures/Enemy/shield_captain/death1.png" id="14_6n27r"]
+[ext_resource type="Texture2D" uid="uid://cwkm74ylru2bk" path="res://Textures/Enemy/shield_captain/death2.png" id="15_my1ys"]
+[ext_resource type="Texture2D" uid="uid://cdooikxv3gvsq" path="res://Textures/Enemy/shield_captain/death3.png" id="16_jj2p4"]
+[ext_resource type="Texture2D" uid="uid://boyo75ra7yf0p" path="res://Textures/Enemy/shield_captain/death4.png" id="17_8j3ut"]
+[ext_resource type="Texture2D" uid="uid://brt502rgnr2n" path="res://Textures/Enemy/shield_captain/death5.png" id="18_iqg4u"]
+[ext_resource type="Texture2D" uid="uid://bu6y6mkcuoqqg" path="res://Textures/Enemy/shield_captain/death6.png" id="19_qiw0i"]
+[ext_resource type="Texture2D" uid="uid://cp731nei02vx0" path="res://Textures/Enemy/shield_captain/death7.png" id="20_npwad"]
+[ext_resource type="Texture2D" uid="uid://dkmbhywr64spk" path="res://Textures/Enemy/shield_captain/death8.png" id="21_mwq2e"]
+[ext_resource type="Texture2D" uid="uid://dcfdsarr2pnbw" path="res://Textures/Enemy/shield_captain/idle1.png" id="22_e878v"]
+[ext_resource type="Texture2D" uid="uid://cqrsut6y5aon7" path="res://Textures/Enemy/shield_captain/idle2.png" id="23_6ud1u"]
+[ext_resource type="Texture2D" uid="uid://7x27wijso46v" path="res://Textures/Enemy/shield_captain/idle3.png" id="24_ddn4h"]
+[ext_resource type="Texture2D" uid="uid://djnn4k2f6bm73" path="res://Textures/Enemy/shield_captain/idle4.png" id="25_rjnx7"]
+[ext_resource type="Texture2D" uid="uid://dgteqvxjvsybd" path="res://Textures/Enemy/shield_captain/idle5.png" id="26_3ms0m"]
+[ext_resource type="Texture2D" uid="uid://bemn0qfk5v624" path="res://Textures/Enemy/shield_captain/overhead_windup1.png" id="27_f4xcb"]
+[ext_resource type="Texture2D" uid="uid://3w3swjt0eil7" path="res://Textures/Enemy/shield_captain/overhead_windup2.png" id="28_k3j03"]
+[ext_resource type="Texture2D" uid="uid://o5npipo8ua2i" path="res://Textures/Enemy/shield_captain/overhead_windup3.png" id="29_8s7xu"]
+[ext_resource type="Texture2D" uid="uid://c82bymhjls7tx" path="res://Textures/Enemy/shield_captain/shield_advance1.png" id="30_li5kp"]
+[ext_resource type="Texture2D" uid="uid://ce833sbnmwqwm" path="res://Textures/Enemy/shield_captain/shield_advance2.png" id="31_52lbn"]
+[ext_resource type="Texture2D" uid="uid://dnnodvm3gycqy" path="res://Textures/Enemy/shield_captain/shield_advance3.png" id="32_774qc"]
+[ext_resource type="Texture2D" uid="uid://sykf6qgoas6l" path="res://Textures/Enemy/shield_captain/shield_advance4.png" id="33_8tgjo"]
+[ext_resource type="Texture2D" uid="uid://dh26d2ihe84c2" path="res://Textures/Enemy/shield_captain/shield_advance5.png" id="34_mlu3w"]
+[ext_resource type="Texture2D" uid="uid://b6s5kihqhcvoq" path="res://Textures/Enemy/shield_captain/shield_advance6.png" id="35_38yjt"]
+[ext_resource type="Texture2D" uid="uid://bx2k8slwkrh37" path="res://Textures/Enemy/shield_captain/shield_advance_windup1.png" id="36_rs1by"]
+[ext_resource type="Texture2D" uid="uid://dv4gya50dkk13" path="res://Textures/Enemy/shield_captain/shield_advance_windup2.png" id="37_ga7u0"]
+[ext_resource type="Texture2D" uid="uid://bpy77fmgexeso" path="res://Textures/Enemy/shield_captain/shield_advance_windup3.png" id="38_3r75v"]
+[ext_resource type="Texture2D" uid="uid://db2ikrkjogsy2" path="res://Textures/Enemy/shield_captain/shield_advance_windup4.png" id="39_w0h27"]
+[ext_resource type="Texture2D" uid="uid://d2r5ujqqf1dcc" path="res://Textures/Enemy/shield_captain/shield_advance_windup5.png" id="40_rsdwc"]
+[ext_resource type="Texture2D" uid="uid://be4dqfxjgojds" path="res://Textures/Enemy/shield_captain/walk1.png" id="41_5444g"]
+[ext_resource type="Texture2D" uid="uid://5hj4kcjvdqqa" path="res://Textures/Enemy/shield_captain/walk2.png" id="42_ijpb5"]
+[ext_resource type="Texture2D" uid="uid://b57undubkpp2g" path="res://Textures/Enemy/shield_captain/walk3.png" id="43_7unmf"]
+[ext_resource type="Texture2D" uid="uid://bah40ol5i61bn" path="res://Textures/Enemy/shield_captain/walk4.png" id="44_8d4fr"]
+[ext_resource type="Texture2D" uid="uid://bw5tyii67byfj" path="res://Textures/Enemy/shield_captain/walk5.png" id="45_ovusn"]
+[ext_resource type="Texture2D" uid="uid://2t5ysd2uoari" path="res://Textures/Enemy/shield_captain/walk6.png" id="46_renrj"]
+[ext_resource type="Texture2D" uid="uid://bau0r4eere1fg" path="res://Textures/Enemy/shield_captain/walk7.png" id="47_iqjp3"]
+[ext_resource type="Texture2D" uid="uid://dvis01vj82fgp" path="res://Textures/Enemy/shield_captain/walk8.png" id="48_5jxk0"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="49_vvq0f"]
+[ext_resource type="Script" path="res://Utility/CombatController.gd" id="50_soekv"]
+[ext_resource type="Script" path="res://Utility/parry_indicator.gd" id="51_k7pfu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fglev"]
+height = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5b5x1"]
+
+[sub_resource type="Animation" id="Animation_haha0"]
+resource_name = "cannon_mark"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_gfo2m"), ExtResource("4_4awcc"), ExtResource("5_tw5kp"), ExtResource("6_0hr68"), ExtResource("7_63oxq")]
+}
+
+[sub_resource type="Animation" id="Animation_wft7a"]
+resource_name = "combo_hit1"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_ep2m6"), ExtResource("9_anir5"), ExtResource("10_4aj1b"), ExtResource("11_hnivi"), ExtResource("12_kv4m2"), ExtResource("13_rhb5p")]
+}
+
+[sub_resource type="Animation" id="Animation_cbqcn"]
+resource_name = "combo_hit2"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_ep2m6"), ExtResource("9_anir5"), ExtResource("10_4aj1b"), ExtResource("11_hnivi"), ExtResource("12_kv4m2"), ExtResource("13_rhb5p")]
+}
+
+[sub_resource type="Animation" id="Animation_am8ap"]
+resource_name = "combo_start"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_ep2m6"), ExtResource("9_anir5"), ExtResource("10_4aj1b"), ExtResource("11_hnivi"), ExtResource("12_kv4m2"), ExtResource("13_rhb5p")]
+}
+
+[sub_resource type="Animation" id="Animation_obae4"]
+resource_name = "death"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.2001, 0.4, 0.5, 0.7, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("14_6n27r"), ExtResource("15_my1ys"), ExtResource("7_63oxq"), ExtResource("16_jj2p4"), ExtResource("17_8j3ut"), ExtResource("18_iqg4u"), ExtResource("19_qiw0i"), ExtResource("20_npwad"), ExtResource("21_mwq2e"), ExtResource("2_uolji")]
+}
+
+[sub_resource type="Animation" id="Animation_v00bh"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("22_e878v"), ExtResource("23_6ud1u"), ExtResource("24_ddn4h"), ExtResource("25_rjnx7"), ExtResource("26_3ms0m")]
+}
+
+[sub_resource type="Animation" id="Animation_i43qu"]
+resource_name = "overhead_impact"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_ep2m6"), ExtResource("9_anir5"), ExtResource("10_4aj1b"), ExtResource("11_hnivi"), ExtResource("12_kv4m2"), ExtResource("13_rhb5p")]
+}
+
+[sub_resource type="Animation" id="Animation_iglby"]
+resource_name = "overhead_windup"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("27_f4xcb"), ExtResource("28_k3j03"), ExtResource("29_8s7xu")]
+}
+
+[sub_resource type="Animation" id="Animation_i55xc"]
+resource_name = "shield_advance"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("30_li5kp"), ExtResource("31_52lbn"), ExtResource("32_774qc"), ExtResource("33_8tgjo"), ExtResource("34_mlu3w"), ExtResource("35_38yjt")]
+}
+
+[sub_resource type="Animation" id="Animation_3pif1"]
+resource_name = "shield_advance_windup"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("36_rs1by"), ExtResource("37_ga7u0"), ExtResource("38_3r75v"), ExtResource("39_w0h27"), ExtResource("40_rsdwc")]
+}
+
+[sub_resource type="Animation" id="Animation_pt1sh"]
+resource_name = "spin_end"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_k3j03")]
+}
+
+[sub_resource type="Animation" id="Animation_kk6lb"]
+resource_name = "spin_loop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("27_f4xcb")]
+}
+
+[sub_resource type="Animation" id="Animation_ghibd"]
+resource_name = "spin_windup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_rhb5p")]
+}
+
+[sub_resource type="Animation" id="Animation_3fbe6"]
+resource_name = "walk"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.1001, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("41_5444g"), ExtResource("40_rsdwc"), ExtResource("42_ijpb5"), ExtResource("43_7unmf"), ExtResource("44_8d4fr"), ExtResource("45_ovusn"), ExtResource("46_renrj"), ExtResource("47_iqjp3"), ExtResource("48_5jxk0")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ks1oa"]
+_data = {
+"cannon_mark": SubResource("Animation_haha0"),
+"combo_hit1": SubResource("Animation_wft7a"),
+"combo_hit2": SubResource("Animation_cbqcn"),
+"combo_start": SubResource("Animation_am8ap"),
+"death": SubResource("Animation_obae4"),
+"idle": SubResource("Animation_v00bh"),
+"overhead_impact": SubResource("Animation_i43qu"),
+"overhead_windup": SubResource("Animation_iglby"),
+"shield_advance": SubResource("Animation_i55xc"),
+"shield_advance_windup": SubResource("Animation_3pif1"),
+"spin_end": SubResource("Animation_pt1sh"),
+"spin_loop": SubResource("Animation_kk6lb"),
+"spin_windup": SubResource("Animation_ghibd"),
+"walk": SubResource("Animation_3fbe6")
+}
+
+[node name="Keeper" type="CharacterBody2D" groups=["boss", "enemy"]]
+script = ExtResource("1_j2cxi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.25, -0.0367641)
+scale = Vector2(1.10294, 1.10294)
+texture = ExtResource("8_ep2m6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_fglev")
+
+[node name="HurtBox" parent="." groups=["hurtbox"] instance=ExtResource("49_vvq0f")]
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CapsuleShape2D_5b5x1")
+
+[node name="Combat" type="Node" parent="."]
+script = ExtResource("50_soekv")
+
+[node name="ParryIndicator" type="Node2D" parent="."]
+script = ExtResource("51_k7pfu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ks1oa")
+}
+
+[editable path="HurtBox"]

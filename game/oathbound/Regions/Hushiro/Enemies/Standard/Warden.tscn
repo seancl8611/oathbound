@@ -1,0 +1,202 @@
+[gd_scene load_steps=23 format=3 uid="uid://ble63woaq857a"]
+
+[ext_resource type="Script" path="res://Enemy/Area 1/Encounter/HushiroWarden.gd" id="1_ujwvx"]
+[ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_3uthg"]
+[ext_resource type="Texture2D" uid="uid://v3ifh4w5yafq" path="res://Textures/Enemy/warden/Attack.png" id="4_yllye"]
+[ext_resource type="Texture2D" uid="uid://bdy3xledp1486" path="res://Textures/Enemy/warden/walk2.png" id="5_e4cbl"]
+[ext_resource type="Texture2D" uid="uid://vcflfacfqm31" path="res://Textures/Enemy/warden/hurt.png" id="6_ac8np"]
+[ext_resource type="Texture2D" uid="uid://boisbbhch0ibi" path="res://Textures/Enemy/warden/walk1.png" id="7_lcxiv"]
+[ext_resource type="Texture2D" uid="uid://co6y30dii11ey" path="res://Textures/Enemy/warden/walk3.png" id="8_80ait"]
+[ext_resource type="Texture2D" uid="uid://7bh08sjen1n7" path="res://Textures/Enemy/warden/walk4.png" id="9_woxpq"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="24_yavi4"]
+[ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="25_uw763"]
+[ext_resource type="Script" path="res://Utility/CombatController.gd" id="26_n17ye"]
+[ext_resource type="Script" path="res://Utility/CombatConfig.gd" id="27_h20f2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfba4"]
+shader = ExtResource("2_3uthg")
+shader_parameter/glow_color = Quaternion(1, 1, 0.4, 1)
+shader_parameter/is_buffed = false
+shader_parameter/intensity = 0.3
+shader_parameter/pulse_speed = 4.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_24u87"]
+radius = 8.0
+height = 22.0
+
+[sub_resource type="Animation" id="Animation_xfnyu"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_jtl7l"]
+resource_name = "attack_slash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_yllye")]
+}
+
+[sub_resource type="Animation" id="Animation_h8xmn"]
+resource_name = "attack_windup"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_e4cbl")]
+}
+
+[sub_resource type="Animation" id="Animation_p5fdg"]
+resource_name = "parried"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_ac8np")]
+}
+
+[sub_resource type="Animation" id="Animation_w8hns"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_lcxiv"), ExtResource("5_e4cbl"), ExtResource("8_80ait"), ExtResource("9_woxpq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_regpg"]
+_data = {
+"RESET": SubResource("Animation_xfnyu"),
+"attack_slash": SubResource("Animation_jtl7l"),
+"attack_windup": SubResource("Animation_h8xmn"),
+"parried": SubResource("Animation_p5fdg"),
+"walk": SubResource("Animation_w8hns")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rborl"]
+size = Vector2(17.5, 22)
+
+[sub_resource type="Resource" id="Resource_jeyhv"]
+script = ExtResource("27_h20f2")
+posture_max = 80.0
+posture_recover_rate = 18.0
+posture_recover_delay = 1.0
+posture_break_duration = 1.2
+hit_posture_gain = 8.0
+parry_posture_spike = 60.0
+deflect_streak_bonus = 5.0
+recovery_mult_high_hp = 1.0
+recovery_mult_mid_hp = 0.25
+recovery_mult_low_hp = 0.05
+recovery_mult_critical_hp = 0.01
+input_buffer_ms = 100
+dodge_buffer_ms = 83
+parry_buffer_ms = 0
+attack_cancel_at = 0.6
+combo_window_start = 0.55
+combo_window_end = 0.85
+max_combo_hits = 3
+combo_link_window = 0.2
+attack_lunge_distance = 16.0
+combo_lunge_multipliers = [1.0, 1.1, 1.3]
+attack_movement_mult = 0.0
+combo_damage = [10, 12, 18]
+combo_posture_damage = [12.0, 14.0, 20.0]
+dodge_distance = 85.0
+dodge_duration = 0.18
+dodge_cooldown = 0.45
+dodge_speed = 470.0
+iframes_start_frame = 1
+iframes_end_frame = 7
+iframes_duration = 0.0
+parry_window_base = 0.18
+perfect_parry_window = 0.05
+parry_window_min = 0.08
+parry_spam_penalty = 0.03
+parry_spam_recovery = 0.5
+hitstop_light = 0.08
+hitstop_heavy = 0.18
+hitstop_parry = 0.25
+hitstop_posture_break = 0.35
+shake_light = 2.0
+shake_heavy = 5.0
+shake_parry = 5.0
+shake_posture_break = 8.0
+shake_decay = 10.0
+hit_flash_duration = 0.06
+damage_flash_color = Color(1, 0.3, 0.3, 0.85)
+parry_flash_color = Color(1, 0.9, 0.5, 0.85)
+perfect_parry_flash_color = Color(1, 1, 0.85, 1)
+can_do_finisher = false
+movement_speed = 220.0
+acceleration_time = 0.06
+deceleration_time = 0.04
+
+[node name="wardens" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_ujwvx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rfba4")
+position = Vector2(0.399846, -0.428778)
+scale = Vector2(1.45002, 1.45002)
+texture = ExtResource("4_yllye")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_24u87")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_regpg")
+}
+
+[node name="HurtBox" parent="." groups=["hurtbox"] instance=ExtResource("24_yavi4")]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0.25, 1)
+shape = SubResource("RectangleShape2D_rborl")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_uw763")
+volume_db = -20.0
+
+[node name="Combat" type="Node" parent="."]
+script = ExtResource("26_n17ye")
+config = SubResource("Resource_jeyhv")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]

@@ -1,0 +1,164 @@
+[gd_scene load_steps=37 format=3 uid="uid://b0lkgxc2vsacq"]
+
+[ext_resource type="Script" path="res://Enemy/Area 1/Encounter/CorruptedSwordsmanController.gd" id="1_s55wi"]
+[ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_pg7dc"]
+[ext_resource type="Texture2D" uid="uid://bpij4m6oy8u2m" path="res://Textures/Enemy/foot_soldier/parried1.png" id="3_dbmx2"]
+[ext_resource type="Texture2D" uid="uid://bgr2y08wrdlcs" path="res://Textures/Enemy/foot_soldier/Attack10.png" id="4_xy833"]
+[ext_resource type="Texture2D" uid="uid://b1hg73eujif5w" path="res://Textures/Enemy/foot_soldier/Attack11.png" id="5_gl7ss"]
+[ext_resource type="Texture2D" uid="uid://ba3si8q0fkgt0" path="res://Textures/Enemy/foot_soldier/Attack12.png" id="6_ex2tk"]
+[ext_resource type="Texture2D" uid="uid://l8meq76qb4rr" path="res://Textures/Enemy/foot_soldier/Attack1.png" id="7_rkyik"]
+[ext_resource type="Texture2D" uid="uid://bqrdtpd3xjwh5" path="res://Textures/Enemy/foot_soldier/Attack2.png" id="8_krei8"]
+[ext_resource type="Texture2D" uid="uid://bcihcgd82eh8a" path="res://Textures/Enemy/foot_soldier/Attack3.png" id="9_klos1"]
+[ext_resource type="Texture2D" uid="uid://b8432dhqai1vt" path="res://Textures/Enemy/foot_soldier/Attack4.png" id="10_nvlih"]
+[ext_resource type="Texture2D" uid="uid://bt4wdyhf8fnq5" path="res://Textures/Enemy/foot_soldier/Attack5.png" id="11_5282n"]
+[ext_resource type="Texture2D" uid="uid://fbb4icsegyd8" path="res://Textures/Enemy/foot_soldier/Attack6.png" id="12_j7pds"]
+[ext_resource type="Texture2D" uid="uid://whlygb5hmopg" path="res://Textures/Enemy/foot_soldier/Attack7.png" id="13_oaaf7"]
+[ext_resource type="Texture2D" uid="uid://dbtshqywd8crt" path="res://Textures/Enemy/foot_soldier/Attack8.png" id="14_nfybg"]
+[ext_resource type="Texture2D" uid="uid://b1w2i5n6v4ae5" path="res://Textures/Enemy/foot_soldier/Attack9.png" id="15_7g2iv"]
+[ext_resource type="Texture2D" uid="uid://dvsclcx0kkf2p" path="res://Textures/Enemy/foot_soldier/parried2.png" id="16_bftss"]
+[ext_resource type="Texture2D" uid="uid://bwj4uma3ntgeu" path="res://Textures/Enemy/foot_soldier/parried3.png" id="17_2h1af"]
+[ext_resource type="Texture2D" uid="uid://nvws2b34nq3n" path="res://Textures/Enemy/foot_soldier/walk1.png" id="18_g5kba"]
+[ext_resource type="Texture2D" uid="uid://cs7ka2l0ujh5b" path="res://Textures/Enemy/foot_soldier/walk2.png" id="19_i41ou"]
+[ext_resource type="Texture2D" uid="uid://cjfudc8vbl3fb" path="res://Textures/Enemy/foot_soldier/walk3.png" id="20_a854s"]
+[ext_resource type="Texture2D" uid="uid://3gkjo7lfcuxd" path="res://Textures/Enemy/foot_soldier/walk4.png" id="21_ngbwe"]
+[ext_resource type="Texture2D" uid="uid://ctkh4i5kd7h81" path="res://Textures/Enemy/foot_soldier/walk5.png" id="22_w5lsu"]
+[ext_resource type="Texture2D" uid="uid://2l1dslkwebk3" path="res://Textures/Enemy/foot_soldier/walk6.png" id="23_ncw1j"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="24_tbahc"]
+[ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="25_wll7h"]
+[ext_resource type="Script" path="res://Utility/CombatController.gd" id="26_1n5h4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfba4"]
+shader = ExtResource("2_pg7dc")
+shader_parameter/glow_color = Quaternion(1, 1, 0.4, 1)
+shader_parameter/is_buffed = false
+shader_parameter/intensity = 0.3
+shader_parameter/pulse_speed = 4.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_24u87"]
+radius = 9.0
+
+[sub_resource type="Animation" id="Animation_xfnyu"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_jtl7l"]
+resource_name = "attack_slash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_xy833"), ExtResource("5_gl7ss"), ExtResource("6_ex2tk")]
+}
+
+[sub_resource type="Animation" id="Animation_h8xmn"]
+resource_name = "attack_windup"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_rkyik"), ExtResource("8_krei8"), ExtResource("9_klos1"), ExtResource("10_nvlih"), ExtResource("11_5282n"), ExtResource("12_j7pds"), ExtResource("13_oaaf7"), ExtResource("14_nfybg"), ExtResource("15_7g2iv")]
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tjjs6"]
+
+[sub_resource type="Animation" id="Animation_p5fdg"]
+resource_name = "parried"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.2001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_dbmx2"), ExtResource("16_bftss"), ExtResource("17_2h1af"), SubResource("CompressedTexture2D_tjjs6")]
+}
+
+[sub_resource type="Animation" id="Animation_w8hns"]
+resource_name = "walk"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("18_g5kba"), ExtResource("19_i41ou"), ExtResource("20_a854s"), ExtResource("21_ngbwe"), ExtResource("22_w5lsu"), ExtResource("23_ncw1j")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_regpg"]
+_data = {
+"RESET": SubResource("Animation_xfnyu"),
+"attack_slash": SubResource("Animation_jtl7l"),
+"attack_windup": SubResource("Animation_h8xmn"),
+"parried": SubResource("Animation_p5fdg"),
+"walk": SubResource("Animation_w8hns")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rborl"]
+size = Vector2(17, 34)
+
+[node name="Corrupted_Swordsman" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_s55wi")
+hp = 100
+parry_posture_gain = 0.0
+counter_attack_chance = 0.35
+counter_attack_delay = 0.45
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_rfba4")
+position = Vector2(-14.9684, -0.0605335)
+scale = Vector2(0.903989, 0.903989)
+texture = ExtResource("3_dbmx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("CapsuleShape2D_24u87")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_regpg")
+}
+
+[node name="HurtBox" parent="." groups=["hurtbox"] instance=ExtResource("24_tbahc")]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(1.5, 1)
+shape = SubResource("RectangleShape2D_rborl")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_wll7h")
+volume_db = -20.0
+
+[node name="Combat" type="Node" parent="."]
+script = ExtResource("26_1n5h4")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
