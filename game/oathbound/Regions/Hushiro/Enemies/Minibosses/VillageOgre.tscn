@@ -1,6 +1,6 @@
 [gd_scene load_steps=69 format=3 uid="uid://dlwhm8ytpiogu"]
 
-[ext_resource type="Script" path="res://Enemy/Area 1/Minibosses/VillageOgre.gd" id="1_qld0t"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Minibosses/VillageOgre.gd" id="1_qld0t"]
 [ext_resource type="Texture2D" uid="uid://be4dqfxjgojds" path="res://Textures/Enemy/shield_captain/walk1.png" id="2_p84lo"]
 [ext_resource type="Texture2D" uid="uid://bx2k8slwkrh37" path="res://Textures/Enemy/shield_captain/shield_advance_windup1.png" id="3_p0v86"]
 [ext_resource type="Texture2D" uid="uid://dv4gya50dkk13" path="res://Textures/Enemy/shield_captain/shield_advance_windup2.png" id="4_4hubp"]
@@ -299,7 +299,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5b5x1"]
 
-[node name="ShieldCaptain" type="CharacterBody2D" groups=["enemy", "miniboss"]]
+[node name="VillageOgre" type="CharacterBody2D" groups=["enemy", "miniboss"]]
 script = ExtResource("1_qld0t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
