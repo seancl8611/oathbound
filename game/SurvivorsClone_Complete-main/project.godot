@@ -40,6 +40,7 @@ ProstheticEffects="*res://Utility/ProstheticEffects.gd"
 StanceEffects="*res://autoload/stance_effects.gd"
 PlaytestLab="*res://Utility/PlaytestLab.gd"
 CombatTelemetry="*res://Utility/CombatTelemetry.gd"
+HushiroEnemyRuntime="*res://Utility/HushiroEnemyRuntime.gd"
 FlameProgress="*res://autoload/FlameProgress.gd"
 PlayerState="*res://Utility/PlayerState.gd"
 
