@@ -1,4 +1,4 @@
-extends "res://Enemy/Area 1/Encounter/corrupted_swordsman.gd"
+extends "res://Regions/Hushiro/Enemies/Legacy/CorruptedSwordsmanLegacy.gd"
 
 ## Current Hushiro rules layer for the Corrupted Swordsman.
 ## The imported controller still owns active HFSM/animation plumbing until that
