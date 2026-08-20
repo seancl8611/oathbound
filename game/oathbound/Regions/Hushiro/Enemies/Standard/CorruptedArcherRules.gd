@@ -6,9 +6,14 @@ extends "res://Regions/Hushiro/Enemies/Standard/CorruptedArcherController.gd"
 ## the scene is instantiated, including direct Playtest Lab spawns.
 
 const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
+const HUSHIRO_PROJECTILE = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcherProjectile.tscn")
 
 
 func _ready() -> void:
+	# Keep current Hushiro runtime identity and dependencies on canonical resources.
+	name = "CorruptedArcher"
+	projectile_scene = HUSHIRO_PROJECTILE
+
 	super._ready()
 	HUSHIRO_ENEMY_CONTRACT.apply(self, "archer")
 
