@@ -1,4 +1,4 @@
-extends "res://Enemy/Area 1/Encounter/warden.gd"
+extends "res://Regions/Hushiro/Enemies/Standard/WardenController.gd"
 
 ## Current Hushiro rules layer for the imported Warden controller.
 ##
@@ -36,7 +36,7 @@ func _ready() -> void:
 	block_by_default = false
 	block_chance_on_hit = 0.35
 
-	print("[HushiroWarden] Current restraint contract active")
+	print("[WardenRules] Current Hushiro restraint contract active")
 
 
 func _start_restrain(p: Node2D) -> void:
