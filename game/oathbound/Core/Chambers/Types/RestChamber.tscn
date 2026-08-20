@@ -1,16 +1,16 @@
 [gd_scene load_steps=9 format=3 uid="uid://ch1nch64gq1uf"]
 
-[ext_resource type="Script" path="res://Areas/Area1/RestRoom.gd" id="1_i7tbk"]
+[ext_resource type="Script" path="res://Core/Chambers/Types/RestChamber.gd" id="1_i7tbk"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_m4780"]
-[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Areas/Area1/MistGate.tscn" id="2_t55v3"]
+[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_t55v3"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="3_fgyuw"]
-[ext_resource type="Script" path="res://Areas/Area1/EnemyEncounterSpawner.gd" id="4_xgjnc"]
+[ext_resource type="Script" path="res://Core/Encounters/EncounterSpawner.gd" id="4_xgjnc"]
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="5_afbyi"]
-[ext_resource type="Script" path="res://Areas/Area1/RestHealer.gd" id="7_vf65i"]
+[ext_resource type="Script" path="res://Core/Chambers/Types/RestPoint.gd" id="7_vf65i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cvbc3"]
 
-[node name="Rest" type="Node2D"]
+[node name="RestChamber" type="Node2D"]
 script = ExtResource("1_i7tbk")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -47,15 +47,15 @@ offset_bottom = 23.0
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 
-[node name="RestHealer" type="Node2D" parent="."]
+[node name="RestPoint" type="Node2D" parent="."]
 script = ExtResource("7_vf65i")
 
-[node name="Area2D" type="Area2D" parent="RestHealer"]
+[node name="Area2D" type="Area2D" parent="RestPoint"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RestHealer/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RestPoint/Area2D"]
 position = Vector2(0, -53)
 shape = SubResource("CircleShape2D_cvbc3")
 
-[node name="Prompt" type="Label" parent="RestHealer/Area2D"]
+[node name="Prompt" type="Label" parent="RestPoint/Area2D"]
 offset_right = 40.0
 offset_bottom = 23.0
