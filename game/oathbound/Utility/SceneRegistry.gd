@@ -1,36 +1,44 @@
 extends Node
 
+## Canonical runtime scene registry.
+##
+## Current Hushiro content uses the professional Core/Regions layout. `shop` and
+## `treasure` remain temporary route-token aliases only; new code should use
+## `merchant` and `miniboss`.
+
 var rooms := {
-	"combat":   preload("res://Areas/Area1/Combat.tscn"),
-	"shrine":   preload("res://Areas/Area1/Shrine.tscn"),
-	"shop":     preload("res://Areas/Area1/Shop.tscn"),
-	"treasure": preload("res://Areas/Area1/Treasure.tscn"),
-	# Hushiro's Treasure room is also the authored miniboss challenge room.
-	# Keep this alias until the next naming/organization pass standardizes room IDs.
-	"miniboss": preload("res://Areas/Area1/Treasure.tscn"),
-	"rest":     preload("res://Areas/Area1/Rest.tscn"),
-	"boss":     preload("res://Areas/Area1/Boss.tscn")
+	"combat": preload("res://Regions/Hushiro/Chambers/CombatChamber.tscn"),
+	"shrine": preload("res://Core/Chambers/Types/ShrineChamber.tscn"),
+	"merchant": preload("res://Core/Chambers/Types/MerchantChamber.tscn"),
+	"miniboss": preload("res://Core/Chambers/Types/MinibossChamber.tscn"),
+	"rest": preload("res://Core/Chambers/Types/RestChamber.tscn"),
+	"boss": preload("res://Core/Chambers/Types/BossChamber.tscn"),
+
+	# Imported route compatibility. Remove when Yomori/Kagutsuchi routing is reconciled.
+	"shop": preload("res://Core/Chambers/Types/MerchantChamber.tscn"),
+	"treasure": preload("res://Core/Chambers/Types/MinibossChamber.tscn"),
 }
 
 var enemies_by_area := {
 	1: {
 		# Canonical Hushiro keys used by HushiroEncounterCatalog.
-		"swordsman": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
-		"archer": preload("res://Enemy/Area 1/Encounter/corrupted_archer.tscn"),
-		"hound": preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
-		"bilemass": preload("res://Enemy/Area 1/Encounter/Cellar_Bilemass.tscn"),
-		"hollow": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
-		"warden": preload("res://Enemy/Area 1/Encounter/warden.tscn"),
+		"swordsman": preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn"),
+		"archer": preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcher.tscn"),
+		"hound": preload("res://Regions/Hushiro/Enemies/Standard/BlightedHound.tscn"),
+		"bilemass": preload("res://Regions/Hushiro/Enemies/Standard/CellarBilemass.tscn"),
+		"hollow": preload("res://Regions/Hushiro/Enemies/Standard/Hollow.tscn"),
+		"warden": preload("res://Regions/Hushiro/Enemies/Standard/Warden.tscn"),
 	},
 	2: {
 		# Area 2 remains on its imported registry until the Yomori reconciliation pass.
-		"soldier": preload("res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn"),
+		# Temporary Hushiro reuse points at canonical Hushiro scenes rather than shims.
+		"soldier": preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn"),
 		"soldier2": preload("res://Enemy/Area 2/Encounter/lingering_wraith.tscn"),
-		"archer": preload("res://Enemy/Area 1/Encounter/corrupted_archer.tscn"),
+		"archer": preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcher.tscn"),
 		"archer2": preload("res://Enemy/Area 2/Encounter/lantern_wraith.tscn"),
-		"dog": preload("res://Enemy/Area 1/Encounter/blighted_hound.tscn"),
-		"shade": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
-		"warden": preload("res://Enemy/Area 1/Encounter/warden.tscn"),
+		"dog": preload("res://Regions/Hushiro/Enemies/Standard/BlightedHound.tscn"),
+		"shade": preload("res://Regions/Hushiro/Enemies/Standard/Hollow.tscn"),
+		"warden": preload("res://Regions/Hushiro/Enemies/Standard/Warden.tscn"),
 		"healer": preload("res://Enemy/Area 2/Encounter/Mist_Shepherd.tscn"),
 		"stalker": preload("res://Enemy/Area 2/Encounter/stalker_hound.tscn")
 	},
@@ -38,7 +46,7 @@ var enemies_by_area := {
 		# Area 3 likewise remains legacy until its own content pass.
 		"soldier2": preload("res://Enemy/Area 2/Encounter/lingering_wraith.tscn"),
 		"archer2": preload("res://Enemy/Area 2/Encounter/lantern_wraith.tscn"),
-		"shade": preload("res://Enemy/Area 1/Encounter/hollow.tscn"),
+		"shade": preload("res://Regions/Hushiro/Enemies/Standard/Hollow.tscn"),
 		"healer": preload("res://Enemy/Area 2/Encounter/Mist_Shepherd.tscn"),
 		"soldier3": preload("res://Enemy/Area 3/Encounter/court_guard.tscn"),
 		"archer3": preload("res://Enemy/Area 3/Encounter/court_caster.tscn"),
