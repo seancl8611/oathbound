@@ -7,12 +7,12 @@ extends Node
 const HUB_SCENE := "res://World/HubScene.tscn"
 
 const HUSHIRO_ENEMIES := {
-	"Swordsman": "res://Enemy/Area 1/Encounter/corrupted_swordsman.tscn",
-	"Archer": "res://Enemy/Area 1/Encounter/corrupted_archer.tscn",
-	"Blighted Hound": "res://Enemy/Area 1/Encounter/blighted_hound.tscn",
-	"Hollow": "res://Enemy/Area 1/Encounter/hollow.tscn",
-	"Bilemass": "res://Enemy/Area 1/Encounter/Cellar_Bilemass.tscn",
-	"Warden": "res://Enemy/Area 1/Encounter/warden.tscn",
+	"Swordsman": "res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn",
+	"Archer": "res://Regions/Hushiro/Enemies/Standard/CorruptedArcher.tscn",
+	"Blighted Hound": "res://Regions/Hushiro/Enemies/Standard/BlightedHound.tscn",
+	"Hollow": "res://Regions/Hushiro/Enemies/Standard/Hollow.tscn",
+	"Bilemass": "res://Regions/Hushiro/Enemies/Standard/CellarBilemass.tscn",
+	"Warden": "res://Regions/Hushiro/Enemies/Standard/Warden.tscn",
 }
 
 var _ui: CanvasLayer
@@ -215,13 +215,13 @@ func _build_enemy_tab(tabs: TabContainer) -> void:
 
 
 func _build_room_tab(tabs: TabContainer) -> void:
-	var vbox := _make_tab(tabs, "Room")
+	var vbox := _make_tab(tabs, "Chambers")
 
 	var row := HBoxContainer.new()
 	vbox.add_child(row)
 
 	var reload_button := Button.new()
-	reload_button.text = "Reload Current Room"
+	reload_button.text = "Reload Current Chamber"
 	reload_button.pressed.connect(_reload_current_room)
 	row.add_child(reload_button)
 
@@ -231,12 +231,12 @@ func _build_room_tab(tabs: TabContainer) -> void:
 	row.add_child(hub_button)
 
 	_room_dropdown = OptionButton.new()
-	for room_type in ["combat", "shrine", "treasure", "rest", "shop", "boss"]:
+	for room_type in ["combat", "shrine", "merchant", "rest", "miniboss", "boss"]:
 		_room_dropdown.add_item(room_type.capitalize())
 	vbox.add_child(_room_dropdown)
 
 	var warp_button := Button.new()
-	warp_button.text = "Warp to Area 1 Room"
+	warp_button.text = "Warp to Hushiro Chamber"
 	warp_button.pressed.connect(_warp_area1_room)
 	vbox.add_child(warp_button)
 
@@ -310,7 +310,7 @@ func _refresh_status() -> void:
 
 	if player and player.has_method("get_playtest_snapshot"):
 		var snapshot: Dictionary = player.get_playtest_snapshot()
-		_status_label.text = "Area %d | Room %s | Enemies %d\nHP %s/%s | Posture %.0f/%.0f | Spirit %s/%s | %s" % [
+		_status_label.text = "Region %d | Chamber %s | Enemies %d\nHP %s/%s | Posture %.0f/%.0f | Spirit %s/%s | %s" % [
 			area,
 			room_text,
 			enemy_count,
@@ -323,7 +323,7 @@ func _refresh_status() -> void:
 			str(snapshot.get("state", "?")),
 		]
 	else:
-		_status_label.text = "Area %d | Room %s | Enemies %d\nPlayer not available in this scene." % [area, room_text, enemy_count]
+		_status_label.text = "Region %d | Chamber %s | Enemies %d\nPlayer not available in this scene." % [area, room_text, enemy_count]
 
 
 func _sync_player_controls() -> void:
@@ -424,7 +424,7 @@ func _reload_current_room() -> void:
 	if GameFlow and GameFlow.has_method("_load_current_room"):
 		GameFlow.call_deferred("_load_current_room")
 	else:
-		push_warning("[PlaytestLab] GameFlow cannot reload the current room.")
+		push_warning("[PlaytestLab] GameFlow cannot reload the current chamber.")
 
 
 func _return_to_hub() -> void:
