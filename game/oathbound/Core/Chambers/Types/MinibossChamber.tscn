@@ -1,20 +1,20 @@
 [gd_scene load_steps=13 format=3 uid="uid://ylt6a3xbmpu4"]
 
-[ext_resource type="Script" path="res://Areas/Area1/TreasureRoom.gd" id="1_cfj3m"]
-[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Areas/Area1/MistGate.tscn" id="2_6vxrw"]
+[ext_resource type="Script" path="res://Core/Chambers/Types/MinibossChamber.gd" id="1_cfj3m"]
+[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_6vxrw"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_e32wq"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="3_2upxn"]
-[ext_resource type="Script" path="res://Areas/Area1/EnemyEncounterSpawner.gd" id="4_jrmq4"]
+[ext_resource type="Script" path="res://Core/Encounters/EncounterSpawner.gd" id="4_jrmq4"]
 [ext_resource type="PackedScene" uid="uid://dfsw8niprg5hg" path="res://Enemy/Area 2/Minibosses/rotwood_host.tscn" id="5_vyc75"]
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_7kxys"]
-[ext_resource type="Script" path="res://Areas/Area1/TreasureChest.gd" id="7_h0kaj"]
-[ext_resource type="PackedScene" uid="uid://dlwhm8ytpiogu" path="res://Enemy/Area 1/Minibosses/VillageOgre.tscn" id="8_wywlb"]
-[ext_resource type="PackedScene" uid="uid://morirckm2b2h" path="res://Enemy/Area 1/Minibosses/the_collector.tscn" id="9_wxuy4"]
+[ext_resource type="Script" path="res://Core/Chambers/Types/MinibossRewardChest.gd" id="7_h0kaj"]
+[ext_resource type="PackedScene" uid="uid://dlwhm8ytpiogu" path="res://Regions/Hushiro/Enemies/Minibosses/VillageOgre.tscn" id="8_wywlb"]
+[ext_resource type="PackedScene" uid="uid://morirckm2b2h" path="res://Regions/Hushiro/Enemies/Minibosses/TheCollector.tscn" id="9_wxuy4"]
 [ext_resource type="PackedScene" uid="uid://cylpghuis1nsl" path="res://Enemy/Area 2/Minibosses/embered_pilgrim.tscn" id="10_n0svn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_71lnl"]
 
-[node name="Treasure" type="Node2D"]
+[node name="MinibossChamber" type="Node2D"]
 script = ExtResource("1_cfj3m")
 area_1_minibosses = Array[PackedScene]([ExtResource("8_wywlb"), ExtResource("9_wxuy4")])
 area_2_minibosses = Array[PackedScene]([ExtResource("10_n0svn"), ExtResource("5_vyc75")])
@@ -35,8 +35,6 @@ script = ExtResource("3_2upxn")
 [node name="EnemyEncounterSpawner" type="Node2D" parent="."]
 script = ExtResource("4_jrmq4")
 opener_delay = 0.0
-wave_spacing_min = 0.0
-wave_spacing_max = 0.0
 group_spacing = 0.0
 active_cap = 0
 ring_radius = 0.0
