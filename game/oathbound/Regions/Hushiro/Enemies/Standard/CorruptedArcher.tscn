@@ -1,0 +1,203 @@
+[gd_scene load_steps=51 format=3 uid="uid://c4oux80d7y6n"]
+
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CorruptedArcherRules.gd" id="1_archer"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack_windup1.png" id="2_wind1"]
+[ext_resource type="PackedScene" path="res://Utility/hurt_box.tscn" id="3_hurtbox"]
+[ext_resource type="AudioStream" path="res://Audio/SoundEffect/enemy_hit.ogg" id="4_hit"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack_windup2.png" id="5_wind2"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack_windup3.png" id="6_wind3"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack_windup4.png" id="7_wind4"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/death1.png" id="8_death1"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/death2.png" id="9_death2"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/death3.png" id="10_death3"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/death4.png" id="11_death4"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/death5.png" id="12_death5"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/death6.png" id="13_death6"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/hurt1.png" id="14_hurt1"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/hurt2.png" id="15_hurt2"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/hurt3.png" id="16_hurt3"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/hurt4.png" id="17_hurt4"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle1.png" id="18_idle1"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle2.png" id="19_idle2"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle3.png" id="20_idle3"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle4.png" id="21_idle4"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle5.png" id="22_idle5"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle6.png" id="23_idle6"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle7.png" id="24_idle7"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/idle8.png" id="25_idle8"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack1.png" id="26_attack1"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack2.png" id="27_attack2"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack3.png" id="28_attack3"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack4.png" id="29_attack4"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack5.png" id="30_attack5"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack6.png" id="31_attack6"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run1.png" id="32_run1"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run2.png" id="33_run2"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run3.png" id="34_run3"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run4.png" id="35_run4"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run5.png" id="36_run5"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run6.png" id="37_run6"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run7.png" id="38_run7"]
+[ext_resource type="Texture2D" path="res://Textures/Enemy/archer/run8.png" id="39_run8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 4.0
+height = 18.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(12, 25)
+
+[sub_resource type="Animation" id="Animation_attack_windup"]
+resource_name = "attack_windup"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_wind1"), ExtResource("5_wind2"), ExtResource("6_wind3"), ExtResource("7_wind4")]
+}
+
+[sub_resource type="Animation" id="Animation_death"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("8_death1"), ExtResource("9_death2"), ExtResource("10_death3"), ExtResource("11_death4"), ExtResource("12_death5"), ExtResource("13_death6")]
+}
+
+[sub_resource type="Animation" id="Animation_hurt"]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("14_hurt1"), ExtResource("15_hurt2"), ExtResource("16_hurt3"), ExtResource("17_hurt4")]
+}
+
+[sub_resource type="Animation" id="Animation_idle"]
+resource_name = "idle"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("18_idle1"), ExtResource("19_idle2"), ExtResource("20_idle3"), ExtResource("21_idle4"), ExtResource("22_idle5"), ExtResource("23_idle6"), ExtResource("24_idle7"), ExtResource("25_idle8")]
+}
+
+[sub_resource type="Animation" id="Animation_shoot"]
+resource_name = "shoot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("26_attack1"), ExtResource("27_attack2"), ExtResource("28_attack3"), ExtResource("29_attack4"), ExtResource("30_attack5"), ExtResource("31_attack6")]
+}
+
+[sub_resource type="Animation" id="Animation_walk"]
+resource_name = "walk"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("32_run1"), ExtResource("33_run2"), ExtResource("34_run3"), ExtResource("35_run4"), ExtResource("36_run5"), ExtResource("37_run6"), ExtResource("38_run7"), ExtResource("39_run8")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_archer"]
+_data = {
+"attack_windup": SubResource("Animation_attack_windup"),
+"death": SubResource("Animation_death"),
+"hurt": SubResource("Animation_hurt"),
+"idle": SubResource("Animation_idle"),
+"shoot": SubResource("Animation_shoot"),
+"walk": SubResource("Animation_walk")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_range"]
+radius = 115.017
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_range2"]
+radius = 156.115
+
+[node name="corrupted_archer" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_archer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.00918198, -0.0571423)
+scale = Vector2(1.13878, 1.13878)
+texture = ExtResource("2_wind1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="HurtBox" parent="." groups=["hurtbox"] instance=ExtResource("3_hurtbox")]
+position = Vector2(5, -3)
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(-5, 5.5)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hit")
+volume_db = -20.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_archer")
+}
+
+[node name="Range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_range")
+
+[node name="Range2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range2"]
+shape = SubResource("CircleShape2D_range2")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
