@@ -435,7 +435,9 @@ func _hushiro_band(chamber_number: int) -> String:
 
 
 func _pick_hushiro_miniboss_token() -> String:
-	return "miniboss:ogre" if rng.randf() < 0.5 else "miniboss:collector"
+	# The MinibossChamber already selects Village Ogre or The Collector from its Hushiro
+	# pool. The route identifies the chamber role, not the implementation-specific foe.
+	return "miniboss"
 
 
 func _miniboss_runtime_available() -> bool:
@@ -555,10 +557,6 @@ func get_room_display_info(room_type: String) -> Dictionary:
 		"scroll":
 			out["icon"] = "S"
 			out["desc"] = "Fight for a Scroll" if base == "combat" else "Claim Scrolls"
-		"ogre":
-			out["desc"] = "Village Ogre"
-		"collector":
-			out["desc"] = "The Collector"
 		# Later-area compatibility only.
 		"boon":
 			out["icon"] = "T"
