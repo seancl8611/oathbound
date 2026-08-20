@@ -19,10 +19,13 @@ const HUSHIRO_BRANCH_WEIGHTS: Dictionary = {
 	"preboss": {1: 45.0, 2: 55.0, 3: 0.0},
 }
 
+# Hushiro uses one canonical miniboss opportunity in Chambers 5-8. The old
+# "treasure" room was the miniboss chamber itself, so it must not also appear as an
+# ordinary weighted room or the route can generate unintended extra miniboss fights.
 const HUSHIRO_ROOM_WEIGHTS: Dictionary = {
-	"opening": {"combat": 82.0, "shrine": 6.0, "rest": 4.0, "shop": 2.0, "treasure": 6.0},
-	"main": {"combat": 70.0, "shrine": 8.0, "rest": 7.0, "shop": 7.0, "treasure": 8.0},
-	"preboss": {"combat": 58.0, "shrine": 5.0, "rest": 13.0, "shop": 13.0, "treasure": 11.0},
+	"opening": {"combat": 88.0, "shrine": 6.0, "rest": 4.0, "merchant": 2.0},
+	"main": {"combat": 78.0, "shrine": 8.0, "rest": 7.0, "merchant": 7.0},
+	"preboss": {"combat": 69.0, "shrine": 5.0, "rest": 13.0, "merchant": 13.0},
 }
 
 # These are the approved Hushiro Standard Combat reward weights for the reward
@@ -37,8 +40,8 @@ const HUSHIRO_COMBAT_REWARD_WEIGHTS: Dictionary = {
 	"scroll": 7.0,
 }
 
-const HUSHIRO_SAFE_SERVICES: Array[String] = ["rest", "shop"]
-const HUSHIRO_PREBOSS_SUPPORT: Array[String] = ["rest", "shop", "treasure"]
+const HUSHIRO_SAFE_SERVICES: Array[String] = ["rest", "merchant"]
+const HUSHIRO_PREBOSS_SUPPORT: Array[String] = ["rest", "merchant"]
 
 # =============================================================================
 # LEGACY LATER-AREA COMPATIBILITY
@@ -166,7 +169,7 @@ func _generate_hushiro_route() -> void:
 	_hushiro_miniboss_token = _pick_hushiro_miniboss_token() if _miniboss_runtime_available() else ""
 
 	if _hushiro_miniboss_token.is_empty():
-		push_warning("[RouteGenerator] Hushiro miniboss route is structurally supported but no Area 1 miniboss room is registered yet; skipping the runtime offer instead of generating a dead route.")
+		push_warning("[RouteGenerator] Hushiro miniboss chamber is unavailable; skipping its route opportunity rather than generating a dead path.")
 
 	# Chamber 1 is fixed by authority: authored standard Combat + Technique reward.
 	current_route.append("combat:technique")
@@ -215,7 +218,7 @@ func _generate_hushiro_route() -> void:
 
 func _build_hushiro_guarantee_slots() -> Dictionary:
 	# Spread required network opportunities across Chambers 2-10. Service slots are
-	# selected so Shrine/Shop/Rest do not become a predetermined back-to-back safe run.
+	# selected so Shrine/Merchant/Rest do not become a predetermined back-to-back safe run.
 	var service_slots: Array[int] = []
 	var service_candidates: Array[int] = [2, 3, 4, 5, 6, 7, 8, 9, 10]
 	_shuffle_in_place(service_candidates)
@@ -258,7 +261,7 @@ func _build_hushiro_guarantee_slots() -> Dictionary:
 
 	return {
 		"shrine": service_slots[0],
-		"shop": service_slots[1],
+		"merchant": service_slots[1],
 		"rest": service_slots[2],
 		"technique_a": technique_a,
 		"technique_b": technique_b,
@@ -271,8 +274,8 @@ func _forced_hushiro_tokens(chamber_number: int) -> Array[String]:
 
 	if chamber_number == int(_hushiro_guarantee_slots.get("shrine", -1)):
 		forced.append("shrine")
-	if chamber_number == int(_hushiro_guarantee_slots.get("shop", -1)):
-		forced.append("shop")
+	if chamber_number == int(_hushiro_guarantee_slots.get("merchant", -1)):
+		forced.append("merchant")
 	if chamber_number == int(_hushiro_guarantee_slots.get("rest", -1)):
 		forced.append("rest")
 	if chamber_number == int(_hushiro_guarantee_slots.get("technique_a", -1)):
@@ -410,7 +413,7 @@ func _primary_category(token: String) -> String:
 
 
 func _fallback_distinct_option(options: Array[String]) -> String:
-	for candidate: String in ["combat:technique", "combat:gold", "combat:mist", "combat:scroll", "shrine", "rest", "shop", "treasure"]:
+	for candidate: String in ["combat:technique", "combat:gold", "combat:mist", "combat:scroll", "shrine", "rest", "merchant"]:
 		if not _same_primary_category_exists(candidate, options):
 			return candidate
 	return ""
@@ -525,13 +528,16 @@ func get_room_display_info(room_type: String) -> Dictionary:
 	var info = {
 		"combat": {"icon": "⚔", "color": Color(0.9, 0.2, 0.2), "desc": "Battle awaits"},
 		"shrine": {"icon": "✦", "color": Color(0.8, 0.2, 0.2), "desc": "Face the Shrine"},
-		"shop": {"icon": "$", "color": Color(0.9, 0.8, 0.2), "desc": "Spend Gold"},
-		"treasure": {"icon": "◆", "color": Color(0.2, 0.8, 0.9), "desc": "Claim a premium reward"},
+		"merchant": {"icon": "$", "color": Color(0.9, 0.8, 0.2), "desc": "Visit the Merchant"},
 		"rest": {"icon": "+", "color": Color(0.7, 0.9, 0.7), "desc": "Recover Health and Spirit"},
-		"miniboss": {"icon": "!", "color": Color(0.85, 0.35, 0.2), "desc": "Optional elite challenge"},
+		"miniboss": {"icon": "!", "color": Color(0.85, 0.35, 0.2), "desc": "Optional miniboss challenge"},
 		"boss": {"icon": "X", "color": Color(0.6, 0.1, 0.1), "desc": "Keeper of the Gate"},
 		"choice": {"icon": "?", "color": Color(0.7, 0.7, 0.9), "desc": "Choose among three routes"},
 		"end": {"icon": "✓", "color": Color(0.3, 0.9, 0.3), "desc": "Victory"},
+
+		# Later-area compatibility aliases only.
+		"shop": {"icon": "$", "color": Color(0.9, 0.8, 0.2), "desc": "Legacy merchant room"},
+		"treasure": {"icon": "◆", "color": Color(0.2, 0.8, 0.9), "desc": "Legacy treasure room"},
 	}
 
 	var out: Dictionary = info.get(base, {"icon": "?", "color": Color.WHITE, "desc": "Unknown"}).duplicate()
