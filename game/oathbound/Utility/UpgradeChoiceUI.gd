@@ -41,7 +41,7 @@ const RARITY_COLORS := {
 var options: Array = []
 var _source: String = ""
 var _area_id: int = 1
-var _focused_index := 0
+var _focused_index: int = 0
 
 var _overlay: ColorRect
 var _root_container: VBoxContainer
@@ -66,7 +66,7 @@ func _build_ui() -> void:
 	_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(_overlay)
 
-	var center := CenterContainer.new()
+	var center: CenterContainer = CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(center)
 
@@ -92,8 +92,8 @@ func _build_ui() -> void:
 	_cards_container.add_theme_constant_override("separation", 12)
 	_root_container.add_child(_cards_container)
 
-	for index in range(3):
-		var card := Button.new()
+	for index: int in range(3):
+		var card: Button = Button.new()
 		card.custom_minimum_size = Vector2(CARD_WIDTH, CARD_HEIGHT)
 		card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		card.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
@@ -135,25 +135,27 @@ func _open(list: Array) -> void:
 
 
 func _refresh_cards() -> void:
-	for index in range(_cards.size()):
-		var card := _cards[index]
+	for index: int in range(_cards.size()):
+		var card: Button = _cards[index]
 		if index >= options.size():
 			card.visible = false
 			continue
 		card.visible = true
 		var data: Dictionary = options[index]
-		var family := str(data.get("family", "neutral"))
-		var family_label := FAMILY_NAMES.get(family, family.to_upper())
+		var family: String = str(data.get("family", "neutral"))
+		var family_label: String = str(FAMILY_NAMES.get(family, family.to_upper()))
 		if family == "cross":
 			var names: Array[String] = []
-			for family_name in data.get("families", []):
-				names.append(str(family_name).capitalize())
+			var families_value: Variant = data.get("families", [])
+			if families_value is Array:
+				for family_name: Variant in families_value:
+					names.append(str(family_name).capitalize())
 			if not names.is_empty():
 				family_label = " + ".join(names).to_upper()
 
-		var rarity := str(data.get("rarity", "common")).to_lower()
-		var rarity_label := rarity.capitalize()
-		var kind_label := _kind_label(data)
+		var rarity: String = str(data.get("rarity", "common")).to_lower()
+		var rarity_label: String = rarity.capitalize()
+		var kind_label: String = _kind_label(data)
 		card.text = "%s\n%s\n\n%s\n\n%s\n%s" % [
 			family_label,
 			kind_label,
@@ -170,10 +172,10 @@ func _refresh_cards() -> void:
 
 
 func _kind_label(data: Dictionary) -> String:
-	var kind := str(data.get("kind", ""))
+	var kind: String = str(data.get("kind", ""))
 	match kind:
 		"action":
-			var action := str(data.get("action", ""))
+			var action: String = str(data.get("action", ""))
 			match action:
 				"basic": return "BASIC ATTACK"
 				"held": return "HELD ATTACK"
@@ -189,7 +191,7 @@ func _kind_label(data: Dictionary) -> String:
 
 
 func _refresh_reroll() -> void:
-	var count := 0
+	var count: int = 0
 	if RunData != null:
 		count = int(RunData.technique_rerolls)
 	_reroll_button.text = "Reroll Entire Screen (%d)" % count
@@ -200,7 +202,7 @@ func _refresh_reroll() -> void:
 func _on_reroll_pressed() -> void:
 	if _source.is_empty():
 		return
-	var rerolled := UpgradeService.reroll_three_choices(_source, _area_id, options)
+	var rerolled: Array = UpgradeService.reroll_three_choices(_source, _area_id, options)
 	if rerolled.is_empty():
 		_refresh_reroll()
 		return
