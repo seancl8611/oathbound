@@ -208,7 +208,7 @@ func _grant_technique() -> void:
 
 	var source := str(get_meta("technique_source", UpgradeService.SOURCE_STANDARD))
 	var choices := UpgradeService.get_three_choices_for_source(source, area_id)
-	technique_ui.open_with_choices(choices)
+	technique_ui.open_with_context(choices, source, area_id)
 
 	var picked: Dictionary = await technique_ui.choice_made
 	UpgradeService.apply_upgrade(picked)
