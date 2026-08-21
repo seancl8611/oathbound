@@ -1,40 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://dox0sbq8e7eay"]
 
 [sub_resource type="GDScript" id="GDScript_frru1"]
-script/source = "extends Control
-
-@onready var gold_value: Label   = $MarginContainer/VBoxContainer/GoldRow/Value
-@onready var mist_value: Label   = $MarginContainer/VBoxContainer/MistRow/Value
-@onready var omen_value: Label   = $MarginContainer/VBoxContainer/OmenRow/Value
-@onready var emblem_value: Label = $MarginContainer/VBoxContainer/EmblemRow/Value
-
-
-func _ready() -> void:
-	# Listen for any currency changes
-	CurrencyManager.currency_changed.connect(_on_currency_changed)
-	_refresh_all()
-
-
-func _refresh_all() -> void:
-	_update_label(CurrencyManager.Currency.GOLD)
-	_update_label(CurrencyManager.Currency.MIST_SHARDS)
-
-
-func _on_currency_changed(currency: int, _new_amount: int) -> void:
-	_update_label(currency)
-
-
-func _update_label(currency: int) -> void:
-	match currency:
-		CurrencyManager.Currency.GOLD:
-			gold_value.text = str(
-				CurrencyManager.get_amount(CurrencyManager.Currency.GOLD)
-			)
-		CurrencyManager.Currency.MIST_SHARDS:
-			mist_value.text = str(
-				CurrencyManager.get_amount(CurrencyManager.Currency.MIST_SHARDS)
-			)
-"
+script/source = "extends Control\n\n@onready var gold_value: Label = $MarginContainer/VBoxContainer/GoldRow/Value\n@onready var mist_value: Label = $MarginContainer/VBoxContainer/MistRow/Value\n@onready var scroll_value: Label = $MarginContainer/VBoxContainer/ScrollRow/Value\n\n\nfunc _ready() -> void:\n\tCurrencyManager.currency_changed.connect(_on_currency_changed)\n\t_refresh_all()\n\n\nfunc _refresh_all() -> void:\n\tgold_value.text = str(CurrencyManager.get_amount(CurrencyManager.Currency.GOLD))\n\tmist_value.text = str(MetaProgress.mist)\n\tscroll_value.text = str(MetaProgress.scrolls)\n\n\nfunc _on_currency_changed(_currency: int, _new_amount: int) -> void:\n\t_refresh_all()\n"
 
 [node name="CurrencyHUD" type="Control"]
 layout_mode = 3
@@ -43,8 +10,8 @@ script = SubResource("GDScript_frru1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 120.0
+offset_bottom = 72.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -54,33 +21,30 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer/GoldRow"]
 layout_mode = 2
+text = "Gold  "
 
 [node name="Value" type="Label" parent="MarginContainer/VBoxContainer/GoldRow"]
 layout_mode = 2
+text = "0"
 
 [node name="MistRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer/MistRow"]
 layout_mode = 2
+text = "Mist  "
 
 [node name="Value" type="Label" parent="MarginContainer/VBoxContainer/MistRow"]
 layout_mode = 2
+text = "0"
 
-[node name="OmenRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/OmenRow"]
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/ScrollRow"]
 layout_mode = 2
+text = "Scrolls  "
 
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/OmenRow"]
+[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/ScrollRow"]
 layout_mode = 2
-
-[node name="EmblemRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/EmblemRow"]
-layout_mode = 2
-
-[node name="Value" type="Label" parent="MarginContainer/VBoxContainer/EmblemRow"]
-layout_mode = 2
+text = "0"
