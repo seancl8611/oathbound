@@ -41,11 +41,11 @@ func _ready() -> void:
 
 
 func _on_hurt_box_hurt(damage: int, damage_type: String, attacker: Node = null) -> void:
-	var hp_before := hp
+	var hp_before: int = int(hp)
 	super._on_hurt_box_hurt(damage, damage_type, attacker)
-	if has_died or hp <= 0 or _dbroken_active:
+	if has_died or int(hp) <= 0 or _dbroken_active:
 		return
-	if hp >= hp_before:
+	if int(hp) >= hp_before:
 		return
 	_apply_sword_hit_reaction(damage, damage_type)
 
@@ -61,13 +61,13 @@ func _apply_sword_hit_reaction(damage: int, damage_type: String) -> void:
 	_commitment_until = 0.0
 	_force_attack_soon = false
 
-	var reaction := LIGHT_HIT_STUN
+	var reaction: float = LIGHT_HIT_STUN
 	if damage >= 18 or damage_type in ["heavy", "counter", "thrust"]:
 		reaction = HEAVY_HIT_STUN
 	elif damage >= 11:
 		reaction = MEDIUM_HIT_STUN
 
-	var now := Time.get_ticks_msec() * 0.001
+	var now: float = Time.get_ticks_msec() * 0.001
 	stunned_until = maxf(stunned_until, now + reaction)
 	next_swipe_time = maxf(next_swipe_time, stunned_until + POST_HIT_BREATHING_ROOM)
 	_last_attack_ended_at = maxf(_last_attack_ended_at, now)
