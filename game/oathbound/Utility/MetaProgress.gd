@@ -41,6 +41,10 @@ func mark_boss_clear(id: int) -> void:
 	_save_progress()
 
 
+func has_cleared_boss(id: int) -> bool:
+	return bool(boss_clears.get(id, false))
+
+
 func add_mist(amount: int) -> void:
 	if amount <= 0:
 		return
@@ -84,6 +88,30 @@ func add_boss_material(material_key: String, amount: int = 1) -> void:
 
 func get_boss_material(material_key: String) -> int:
 	return int(boss_materials.get(material_key, 0))
+
+
+func has_boss_material(material_key: String, amount: int = 1) -> bool:
+	if amount <= 0:
+		return true
+	return get_boss_material(material_key) >= amount
+
+
+func spend_boss_material(material_key: String, amount: int = 1) -> bool:
+	if amount <= 0:
+		return true
+	if not boss_materials.has(material_key) or not has_boss_material(material_key, amount):
+		return false
+	boss_materials[material_key] = get_boss_material(material_key) - amount
+	_commit_persistent_change()
+	return true
+
+
+func get_resource_snapshot() -> Dictionary:
+	return {
+		"mist": mist,
+		"scrolls": scrolls,
+		"boss_materials": boss_materials.duplicate(true),
+	}
 
 
 func _commit_persistent_change() -> void:
