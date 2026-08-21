@@ -1,39 +1,33 @@
 extends CanvasLayer
 
-## HubHUD — Hub-only currency display, built entirely via script.
-##
-## Shows stacked currency rows: Gold, Mist Shards, Boss Emblems.
-## Only instantiated in the Hub scene. Replaces the old CurrencyHUD.tscn.
-##
-## Usage (from hub.gd):
-##   var hud = load("res://GUI/HubHUD.gd").new()
-##   get_tree().root.add_child(hud)
+## Strand-only persistent progression display.
+## Gold is run-only and is not a Strand currency. Mist, Scrolls, and the three
+## regional boss materials are read directly from MetaProgress.
 
-# ─── Colors ───
-const COL_BG = Color(0.06, 0.06, 0.09, 0.85)
-const COL_BORDER = Color(0.12, 0.12, 0.18, 1.0)
-const COL_GOLD = Color(0.91, 0.77, 0.29, 1.0)
-const COL_MIST = Color(0.66, 0.48, 0.87, 1.0)
-const COL_EMBLEM = Color(0.87, 0.66, 0.27, 1.0)
-const COL_TEXT = Color(0.85, 0.85, 0.88, 1.0)
-const COL_TEXT_DIM = Color(0.42, 0.42, 0.48, 1.0)
-const COL_SCROLL = Color(0.87, 0.78, 0.55, 1.0)
+const COL_BG := Color(0.06, 0.06, 0.09, 0.85)
+const COL_BORDER := Color(0.12, 0.12, 0.18, 1.0)
+const COL_MIST := Color(0.66, 0.48, 0.87, 1.0)
+const COL_SCROLL := Color(0.87, 0.78, 0.55, 1.0)
+const COL_MATERIAL := Color(0.78, 0.62, 0.36, 1.0)
 
-# ─── UI refs ───
 var _root: Control
-var _gold_label: Label
 var _mist_label: Label
-var _emblem_label: Label
 var _scroll_label: Label
+var _keeper_label: Label
+var _twin_label: Label
+var _shogun_label: Label
+
 
 func _ready() -> void:
 	layer = 50
 	name = "HubHUD"
 	add_to_group("game_hud")
 	_build_ui()
-	_connect_signals()
+	if MetaProgress != null and MetaProgress.has_signal("persistent_resources_changed"):
+		MetaProgress.persistent_resources_changed.connect(_refresh_all)
 	_refresh_all()
-	
+
+
 func _build_ui() -> void:
 	_root = Control.new()
 	_root.name = "HubHUDRoot"
@@ -41,78 +35,55 @@ func _build_ui() -> void:
 	_root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(_root)
 
-	var panel = VBoxContainer.new()
+	var panel := VBoxContainer.new()
 	panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	panel.position = Vector2(-70, 12)
+	panel.position = Vector2(-175, 12)
 	panel.add_theme_constant_override("separation", 2)
 	_root.add_child(panel)
 
-	_gold_label = _make_currency_row(panel, COL_GOLD)
-	_mist_label = _make_currency_row(panel, COL_MIST)
-	_scroll_label = _make_currency_row(panel, COL_SCROLL)
-	_emblem_label = _make_currency_row(panel, COL_EMBLEM)
-	
-func _make_currency_row(parent: Control, value_color: Color) -> Label:
-	var row = HBoxContainer.new()
-	row.add_theme_constant_override("separation", 4)
-	parent.add_child(row)
+	_mist_label = _make_resource_row(panel, "Mist", COL_MIST)
+	_scroll_label = _make_resource_row(panel, "Scrolls", COL_SCROLL)
+	_keeper_label = _make_resource_row(panel, "Keeper Material", COL_MATERIAL)
+	_twin_label = _make_resource_row(panel, "Twin Maws Material", COL_MATERIAL)
+	_shogun_label = _make_resource_row(panel, "Shogun Material", COL_MATERIAL)
 
-	# Small background
-	var bg = PanelContainer.new()
-	var style = StyleBoxFlat.new()
+
+func _make_resource_row(parent: Control, resource_name: String, value_color: Color) -> Label:
+	var bg := PanelContainer.new()
+	var style := StyleBoxFlat.new()
 	style.bg_color = COL_BG
 	style.border_color = COL_BORDER
-	style.border_width_left = 1
-	style.border_width_right = 1
-	style.border_width_top = 1
-	style.border_width_bottom = 1
-	style.corner_radius_top_left = 2
-	style.corner_radius_top_right = 2
-	style.corner_radius_bottom_left = 2
-	style.corner_radius_bottom_right = 2
-	style.content_margin_left = 6
-	style.content_margin_right = 6
-	style.content_margin_top = 2
-	style.content_margin_bottom = 2
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(2)
+	style.set_content_margin_all(4)
 	bg.add_theme_stylebox_override("panel", style)
-	row.add_child(bg)
+	parent.add_child(bg)
 
-	var inner = HBoxContainer.new()
-	inner.add_theme_constant_override("separation", 5)
-	bg.add_child(inner)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 6)
+	bg.add_child(row)
 
-	# Tiny icon square
-	var icon = ColorRect.new()
-	icon.custom_minimum_size = Vector2(8, 8)
-	icon.color = value_color
-	inner.add_child(icon)
+	var name_label := Label.new()
+	name_label.text = resource_name
+	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name_label.add_theme_font_size_override("font_size", 9)
+	name_label.add_theme_color_override("font_color", value_color)
+	row.add_child(name_label)
 
-	# Value only — no name text
-	var val_lbl = Label.new()
-	val_lbl.add_theme_font_size_override("font_size", 10)
-	val_lbl.add_theme_color_override("font_color", value_color)
-	val_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	val_lbl.custom_minimum_size = Vector2(24, 0)
-	inner.add_child(val_lbl)
+	var value_label := Label.new()
+	value_label.custom_minimum_size = Vector2(28, 0)
+	value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	value_label.add_theme_font_size_override("font_size", 9)
+	value_label.add_theme_color_override("font_color", value_color)
+	row.add_child(value_label)
+	return value_label
 
-	return val_lbl
-	
-func _connect_signals() -> void:
-	CurrencyManager.currency_changed.connect(_on_currency_changed)
 
 func _refresh_all() -> void:
-	_gold_label.text = str(CurrencyManager.get_amount(CurrencyManager.Currency.GOLD))
-	_mist_label.text = str(CurrencyManager.get_amount(CurrencyManager.Currency.MIST_SHARDS))
-	_scroll_label.text = str(CurrencyManager.get_amount(CurrencyManager.Currency.SCROLLS))
-	_emblem_label.text = str(CurrencyManager.get_amount(CurrencyManager.Currency.BOSS_EMBLEM))
-	
-func _on_currency_changed(currency: int, new_amount: int) -> void:
-	match currency:
-		CurrencyManager.Currency.GOLD:
-			_gold_label.text = str(new_amount)
-		CurrencyManager.Currency.MIST_SHARDS:
-			_mist_label.text = str(new_amount)
-		CurrencyManager.Currency.SCROLLS:
-			_scroll_label.text = str(new_amount)
-		CurrencyManager.Currency.BOSS_EMBLEM:
-			_emblem_label.text = str(new_amount)
+	if _mist_label == null:
+		return
+	_mist_label.text = str(MetaProgress.mist)
+	_scroll_label.text = str(MetaProgress.scrolls)
+	_keeper_label.text = str(MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_KEEPER))
+	_twin_label.text = str(MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_TWIN_MAWS))
+	_shogun_label.text = str(MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN))
