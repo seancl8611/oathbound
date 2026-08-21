@@ -1,11 +1,15 @@
 extends Node
 
-## Structured development-only combat capture for Godot playtests.
+## Lightweight structured combat telemetry for development playtests.
 ##
-## Debug runs write JSONL under res://playtest_logs/. The capture is intended for
-## post-playtest analysis against the approved combat and encounter contracts.
+## The previous capture scanned and serialized every moving hitbox every physics frame
+## and flushed the file after every event. That made the diagnostic tool capable of
+## changing the combat it was measuring. Current capture keeps high-value contacts,
+## resolutions, authored events, and low-frequency world samples while batching disk
+## flushes and avoiding per-frame hitbox scans.
 
-const SAMPLE_INTERVAL: float = 0.10
+const SAMPLE_INTERVAL: float = 0.25
+const FLUSH_INTERVAL: float = 1.0
 const LOG_DIR: String = "res://playtest_logs"
 
 var _capturing: bool = false
@@ -13,7 +17,7 @@ var _capture_file: FileAccess = null
 var _capture_path: String = ""
 var _capture_start_ms: int = 0
 var _sample_accumulator: float = 0.0
-var _known_hitboxes: Dictionary = {}
+var _flush_accumulator: float = 0.0
 var _event_counts: Dictionary = {}
 
 
@@ -44,13 +48,13 @@ func get_capture_path_absolute() -> String:
 
 
 func _start_capture() -> void:
-	var absolute_dir: String = ProjectSettings.globalize_path(LOG_DIR)
-	var dir_error: Error = DirAccess.make_dir_recursive_absolute(absolute_dir)
+	var absolute_dir := ProjectSettings.globalize_path(LOG_DIR)
+	var dir_error := DirAccess.make_dir_recursive_absolute(absolute_dir)
 	if dir_error != OK and dir_error != ERR_ALREADY_EXISTS:
 		push_warning("[CombatTelemetry] Could not create playtest log directory: %s" % absolute_dir)
 		return
 
-	var stamp: int = int(Time.get_unix_time_from_system())
+	var stamp := int(Time.get_unix_time_from_system())
 	_capture_path = "%s/combat_%d.jsonl" % [LOG_DIR, stamp]
 	_capture_file = FileAccess.open(_capture_path, FileAccess.WRITE)
 	if _capture_file == null:
@@ -60,26 +64,28 @@ func _start_capture() -> void:
 
 	_capture_start_ms = Time.get_ticks_msec()
 	_sample_accumulator = 0.0
-	_known_hitboxes.clear()
+	_flush_accumulator = 0.0
 	_event_counts.clear()
 	_capturing = true
 
-	var version_info: Dictionary = Engine.get_version_info()
+	var version_info := Engine.get_version_info()
 	record_event("session_start", {
 		"engine": str(version_info.get("string", "unknown")),
 		"project": str(ProjectSettings.get_setting("application/config/name", "Oathbound")),
 		"capture_path": _capture_path,
+		"telemetry_mode": "lightweight",
 	})
-	print("[CombatTelemetry] Capturing structured combat data: ", get_capture_path_absolute())
+	_flush_now()
+	print("[CombatTelemetry] Lightweight capture: ", get_capture_path_absolute())
 
 
 func _stop_capture() -> void:
 	if not _capturing:
 		return
 	record_event("session_end", {"event_counts": _event_counts.duplicate(true)})
+	_flush_now()
 	_capturing = false
 	if _capture_file != null:
-		_capture_file.flush()
 		_capture_file.close()
 		_capture_file = null
 	print("[CombatTelemetry] Capture saved: ", get_capture_path_absolute())
@@ -88,127 +94,97 @@ func _stop_capture() -> void:
 func record_event(event_name: String, data: Dictionary = {}) -> void:
 	if not _capturing or _capture_file == null:
 		return
-
 	var payload: Dictionary = {
 		"event": event_name,
 		"t_ms": Time.get_ticks_msec() - _capture_start_ms,
 		"physics_frame": Engine.get_physics_frames(),
 		"scene": _current_scene_path(),
 	}
-	var data_keys: Array = data.keys()
-	for key_value: Variant in data_keys:
+	for key_value in data.keys():
 		payload[key_value] = data[key_value]
-
 	_event_counts[event_name] = int(_event_counts.get(event_name, 0)) + 1
 	_capture_file.store_line(JSON.stringify(payload))
-	_capture_file.flush()
 
 
 func snapshot_actor(actor: Node) -> Dictionary:
 	if actor == null or not is_instance_valid(actor):
 		return {}
-
-	var data: Dictionary = _node_identity(actor)
+	var data := _node_identity(actor)
 	data["role"] = _actor_role(actor)
-
 	if actor is Node2D:
-		var actor_2d: Node2D = actor as Node2D
-		data["pos"] = _vec2(actor_2d.global_position)
-		data["rotation_deg"] = rad_to_deg(actor_2d.global_rotation)
-
+		data["pos"] = _vec2((actor as Node2D).global_position)
+		data["rotation_deg"] = rad_to_deg((actor as Node2D).global_rotation)
 	if actor is CharacterBody2D:
-		var body: CharacterBody2D = actor as CharacterBody2D
-		data["velocity"] = _vec2(body.velocity)
-		data["speed"] = body.velocity.length()
+		data["velocity"] = _vec2((actor as CharacterBody2D).velocity)
+		data["speed"] = (actor as CharacterBody2D).velocity.length()
 
-	var hp_value: Variant = _first_property(actor, ["hp", "health"])
+	var hp_value = _first_property(actor, ["hp", "health"])
 	if hp_value != null:
 		data["health"] = float(hp_value)
-
-	var max_hp_value: Variant = _first_property(actor, ["maxhp", "max_health", "_max_hp"])
+	var max_hp_value = _first_property(actor, ["maxhp", "max_health", "_max_hp"])
 	if max_hp_value != null:
 		data["max_health"] = float(max_hp_value)
+	var posture_value = _first_property(actor, ["stagger"])
+	var posture_max_value = _first_property(actor, ["stagger_max"])
+	if posture_value != null:
+		data["posture"] = float(posture_value)
+	if posture_max_value != null:
+		data["max_posture"] = float(posture_max_value)
 
-	var player_posture: Variant = _first_property(actor, ["stagger"])
-	var player_posture_max: Variant = _first_property(actor, ["stagger_max"])
-	if player_posture != null:
-		data["posture"] = float(player_posture)
-	if player_posture_max != null:
-		data["max_posture"] = float(player_posture_max)
-
-	var combat_node: Node = actor.get_node_or_null("Combat")
+	var combat_node := actor.get_node_or_null("Combat")
 	if combat_node != null:
 		if combat_node.has_method("get_posture"):
 			data["posture"] = float(combat_node.call("get_posture"))
-		var config_value: Variant = _property_value(combat_node, "config")
+		var config_value = _property_value(combat_node, "config")
 		if config_value is Resource:
-			var config_resource: Resource = config_value as Resource
-			var posture_max_value: Variant = _first_property(config_resource, ["posture_max"])
-			if posture_max_value != null:
-				data["max_posture"] = float(posture_max_value)
+			var max_value = _first_property(config_value, ["posture_max"])
+			if max_value != null:
+				data["max_posture"] = float(max_value)
 
-	var state_value: Variant = _first_property(actor, ["state", "_state", "ai_state"])
+	var state_value = _first_property(actor, ["state", "_state", "ai_state"])
 	if state_value != null:
 		data["state"] = _json_safe_variant(state_value)
 
-	var flag_names: Array[String] = [
-		"is_attacking", "telegraphing", "swinging", "has_attack_token",
-		"_block_active", "_parry_active"
-	]
-	for flag_name: String in flag_names:
-		var flag_value: Variant = _property_value(actor, flag_name)
+	for flag_name in ["is_attacking", "telegraphing", "swinging", "has_attack_token", "_block_active", "_parry_active"]:
+		var flag_value = _property_value(actor, str(flag_name))
 		if flag_value != null:
-			data[flag_name] = bool(flag_value)
+			data[str(flag_name)] = bool(flag_value)
 
-	var facing_value: Variant = _first_property(actor, ["_facing_dir", "facing_dir", "spawn_forward"])
+	var facing_value = _first_property(actor, ["_facing_dir", "facing_dir", "spawn_forward"])
 	if typeof(facing_value) == TYPE_VECTOR2:
-		var facing_vector: Vector2 = facing_value
-		data["facing"] = _vec2(facing_vector)
-
-	var sprite_node: Sprite2D = actor.get_node_or_null("Sprite2D") as Sprite2D
+		data["facing"] = _vec2(facing_value)
+	var sprite_node := actor.get_node_or_null("Sprite2D") as Sprite2D
 	if sprite_node != null:
 		data["sprite_flip_h"] = sprite_node.flip_h
-
 	return data
 
 
 func snapshot_hitbox(hitbox: Node) -> Dictionary:
 	if hitbox == null or not is_instance_valid(hitbox):
 		return {}
-
-	var data: Dictionary = _node_identity(hitbox)
+	var data := _node_identity(hitbox)
 	if hitbox is Node2D:
-		var hitbox_2d: Node2D = hitbox as Node2D
-		data["pos"] = _vec2(hitbox_2d.global_position)
-		data["rotation_deg"] = rad_to_deg(hitbox_2d.global_rotation)
-
+		data["pos"] = _vec2((hitbox as Node2D).global_position)
+		data["rotation_deg"] = rad_to_deg((hitbox as Node2D).global_rotation)
 	if hitbox is Area2D:
-		var area: Area2D = hitbox as Area2D
-		data["monitoring"] = area.monitoring
-		data["monitorable"] = area.monitorable
-		data["collision_layer"] = area.collision_layer
-		data["collision_mask"] = area.collision_mask
+		data["monitoring"] = (hitbox as Area2D).monitoring
+		data["collision_layer"] = (hitbox as Area2D).collision_layer
+		data["collision_mask"] = (hitbox as Area2D).collision_mask
 
-	var meta_names: Array[String] = [
-		"attack_id", "damage_type", "health_damage", "damage", "posture_damage",
-		"block_posture_damage", "stagger_on_block", "stagger_level", "proc_coefficient",
-		"parryable", "parry_only", "blockable", "unblockable", "combo_index"
-	]
-	for meta_name: String in meta_names:
+	for meta_name in ["attack_id", "damage_type", "health_damage", "damage", "posture_damage", "block_posture_damage", "stagger_on_block", "parryable", "blockable", "unblockable", "combo_index"]:
 		if hitbox.has_meta(meta_name):
 			data[meta_name] = _json_safe_variant(hitbox.get_meta(meta_name))
 
-	var attacker: Node = _resolve_attacker(hitbox)
+	var attacker := _resolve_attacker(hitbox)
 	if attacker != null:
 		data["attacker"] = _node_identity(attacker)
 		if attacker is Node2D and hitbox is Node2D:
-			var attacker_2d: Node2D = attacker as Node2D
-			var hitbox_2d_for_offset: Node2D = hitbox as Node2D
-			var offset: Vector2 = hitbox_2d_for_offset.global_position - attacker_2d.global_position
+			var offset := (hitbox as Node2D).global_position - (attacker as Node2D).global_position
 			data["offset_from_attacker"] = _vec2(offset)
-			data["offset_angle_deg"] = rad_to_deg(offset.angle()) if offset.length_squared() > 0.001 else 0.0
 			data["offset_distance"] = offset.length()
 
+	# Shapes are useful at actual contact/resolution time, but are no longer scanned
+	# every frame merely because the attack Area2D moved.
 	data["shapes"] = _shape_snapshots(hitbox)
 	return data
 
@@ -216,26 +192,19 @@ func snapshot_hitbox(hitbox: Node) -> Dictionary:
 func record_contact(receiver: Node, hitbox: Node, attacker: Node, before: Dictionary) -> void:
 	if not _capturing:
 		return
-
-	var after: Dictionary = snapshot_actor(receiver)
+	var after := snapshot_actor(receiver)
 	var data: Dictionary = {
 		"receiver_before": before,
 		"receiver": after,
 		"attacker": _node_identity(attacker) if attacker != null else {},
 		"hitbox": snapshot_hitbox(hitbox),
 	}
-
 	if receiver is Node2D and attacker is Node2D:
-		var receiver_2d: Node2D = receiver as Node2D
-		var attacker_2d: Node2D = attacker as Node2D
-		var attack_vector: Vector2 = attacker_2d.global_position - receiver_2d.global_position
+		var attack_vector := (attacker as Node2D).global_position - (receiver as Node2D).global_position
 		data["attacker_to_receiver_distance"] = attack_vector.length()
-		data["attacker_world_angle_deg"] = rad_to_deg(attack_vector.angle()) if attack_vector.length_squared() > 0.001 else 0.0
-
-		var facing: Vector2 = _actor_facing(receiver)
+		var facing := _actor_facing(receiver)
 		if facing.length_squared() > 0.001 and attack_vector.length_squared() > 0.001:
 			data["receiver_relative_attack_angle_deg"] = rad_to_deg(facing.normalized().angle_to(attack_vector.normalized()))
-
 	record_event("contact_resolved", data)
 
 
@@ -245,8 +214,7 @@ func record_resolution(kind: String, receiver: Node, attacker: Node, hitbox: Nod
 		"attacker": _node_identity(attacker) if attacker != null else {},
 		"hitbox": snapshot_hitbox(hitbox),
 	}
-	var extra_keys: Array = extra.keys()
-	for key_value: Variant in extra_keys:
+	for key_value in extra.keys():
 		data[key_value] = extra[key_value]
 	record_event(kind, data)
 
@@ -254,113 +222,53 @@ func record_resolution(kind: String, receiver: Node, attacker: Node, hitbox: Nod
 func _physics_process(delta: float) -> void:
 	if not _capturing:
 		return
-	_scan_hitboxes()
 	_sample_accumulator += delta
+	_flush_accumulator += delta
 	if _sample_accumulator >= SAMPLE_INTERVAL:
 		_sample_accumulator = 0.0
 		_record_world_sample()
+	if _flush_accumulator >= FLUSH_INTERVAL:
+		_flush_accumulator = 0.0
+		_flush_now()
 
 
-func _scan_hitboxes() -> void:
-	var seen: Dictionary = {}
-	var attack_nodes: Array = get_tree().get_nodes_in_group("attack")
-	for node_value: Variant in attack_nodes:
-		if not (node_value is Node):
-			continue
-		var hitbox: Node = node_value as Node
-		if not is_instance_valid(hitbox):
-			continue
-
-		var instance_id: int = int(hitbox.get_instance_id())
-		seen[instance_id] = true
-		var state: Dictionary = snapshot_hitbox(hitbox)
-		var signature: String = _hitbox_signature(state)
-
-		if not _known_hitboxes.has(instance_id):
-			_known_hitboxes[instance_id] = {"signature": signature, "last": state}
-			record_event("hitbox_spawn", {"hitbox": state})
-		else:
-			var previous_value: Variant = _known_hitboxes[instance_id]
-			if typeof(previous_value) != TYPE_DICTIONARY:
-				_known_hitboxes[instance_id] = {"signature": signature, "last": state}
-				continue
-			var previous: Dictionary = previous_value as Dictionary
-			var previous_signature: String = str(previous.get("signature", ""))
-			if signature != previous_signature:
-				record_event("hitbox_state_change", {
-					"before": previous.get("last", {}),
-					"after": state,
-				})
-			_known_hitboxes[instance_id] = {"signature": signature, "last": state}
-
-	var known_ids: Array = _known_hitboxes.keys()
-	for id_value: Variant in known_ids:
-		var known_id: int = int(id_value)
-		if seen.has(known_id):
-			continue
-		var last_value: Variant = _known_hitboxes.get(known_id, {})
-		var last_state: Dictionary = {}
-		if typeof(last_value) == TYPE_DICTIONARY:
-			var last_entry: Dictionary = last_value as Dictionary
-			var nested_last: Variant = last_entry.get("last", {})
-			if typeof(nested_last) == TYPE_DICTIONARY:
-				last_state = nested_last as Dictionary
-		record_event("hitbox_end", {"hitbox": last_state})
-		_known_hitboxes.erase(known_id)
+func _flush_now() -> void:
+	if _capture_file != null:
+		_capture_file.flush()
 
 
 func _record_world_sample() -> void:
 	var player_snapshot: Dictionary = {}
-	var player_nodes: Array = get_tree().get_nodes_in_group("player")
-	if not player_nodes.is_empty() and player_nodes[0] is Node:
-		player_snapshot = snapshot_actor(player_nodes[0] as Node)
+	var player_node := get_tree().get_first_node_in_group("player")
+	if player_node is Node:
+		player_snapshot = snapshot_actor(player_node)
 
 	var enemy_snapshots: Array = []
-	var enemy_nodes: Array = get_tree().get_nodes_in_group("enemy")
-	for enemy_value: Variant in enemy_nodes:
-		if enemy_value is Node and is_instance_valid(enemy_value):
-			enemy_snapshots.append(snapshot_actor(enemy_value as Node))
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if enemy is Node and is_instance_valid(enemy):
+			enemy_snapshots.append(snapshot_actor(enemy))
 
-	var hitbox_snapshots: Array = []
-	var attack_nodes: Array = get_tree().get_nodes_in_group("attack")
-	for hitbox_value: Variant in attack_nodes:
-		if not (hitbox_value is Node) or not is_instance_valid(hitbox_value):
-			continue
-		var hitbox: Node = hitbox_value as Node
-		var minimal: Dictionary = _node_identity(hitbox)
-		if hitbox is Node2D:
-			minimal["pos"] = _vec2((hitbox as Node2D).global_position)
-		if hitbox is Area2D:
-			minimal["monitoring"] = (hitbox as Area2D).monitoring
-		if hitbox.has_meta("attack_id"):
-			minimal["attack_id"] = str(hitbox.get_meta("attack_id"))
-		hitbox_snapshots.append(minimal)
-
-	if player_snapshot.is_empty() and enemy_snapshots.is_empty() and hitbox_snapshots.is_empty():
+	if player_snapshot.is_empty() and enemy_snapshots.is_empty():
 		return
-
 	record_event("world_sample", {
 		"player": player_snapshot,
 		"enemies": enemy_snapshots,
-		"hitboxes": hitbox_snapshots,
+		"active_attack_count": get_tree().get_nodes_in_group("attack").size(),
 	})
 
 
 func _shape_snapshots(root: Node) -> Array:
 	var result: Array = []
-	var shape_nodes: Array[Node] = root.find_children("*", "CollisionShape2D", true, false)
-	for shape_node: Node in shape_nodes:
-		var collision_shape: CollisionShape2D = shape_node as CollisionShape2D
+	for node in root.find_children("*", "CollisionShape2D", true, false):
+		var collision_shape := node as CollisionShape2D
 		if collision_shape == null:
 			continue
-
 		var shape_data: Dictionary = {
 			"name": String(collision_shape.name),
 			"disabled": collision_shape.disabled,
 			"pos": _vec2(collision_shape.global_position),
-			"rotation_deg": rad_to_deg(collision_shape.global_rotation),
 		}
-		var shape: Shape2D = collision_shape.shape
+		var shape := collision_shape.shape
 		if shape is RectangleShape2D:
 			shape_data["type"] = "rectangle"
 			shape_data["size"] = _vec2((shape as RectangleShape2D).size)
@@ -377,35 +285,19 @@ func _shape_snapshots(root: Node) -> Array:
 	return result
 
 
-func _hitbox_signature(state: Dictionary) -> String:
-	var signature_data: Dictionary = {
-		"monitoring": state.get("monitoring", null),
-		"monitorable": state.get("monitorable", null),
-		"attack_id": state.get("attack_id", ""),
-		"damage_type": state.get("damage_type", ""),
-		"health_damage": state.get("health_damage", state.get("damage", null)),
-		"posture_damage": state.get("posture_damage", null),
-		"block_posture_damage": state.get("block_posture_damage", state.get("stagger_on_block", null)),
-		"shapes": state.get("shapes", []),
-	}
-	return JSON.stringify(signature_data)
-
-
 func _resolve_attacker(hitbox: Node) -> Node:
 	if hitbox == null:
 		return null
 	if hitbox.has_meta("attacker"):
-		var meta_attacker: Variant = hitbox.get_meta("attacker")
-		if meta_attacker is Node and is_instance_valid(meta_attacker):
-			return meta_attacker as Node
+		var value = hitbox.get_meta("attacker")
+		if value is Node and is_instance_valid(value):
+			return value
 	return hitbox.get_parent()
 
 
 func _actor_facing(actor: Node) -> Vector2:
-	var facing_value: Variant = _first_property(actor, ["_facing_dir", "facing_dir", "spawn_forward"])
-	if typeof(facing_value) == TYPE_VECTOR2:
-		return facing_value
-	return Vector2.ZERO
+	var value = _first_property(actor, ["_facing_dir", "facing_dir", "spawn_forward"])
+	return value if typeof(value) == TYPE_VECTOR2 else Vector2.ZERO
 
 
 func _actor_role(actor: Node) -> String:
@@ -426,7 +318,7 @@ func _node_identity(node: Node) -> Dictionary:
 		"name": String(node.name),
 		"path": str(node.get_path()),
 	}
-	var script_resource: Script = node.get_script() as Script
+	var script_resource := node.get_script() as Script
 	if script_resource != null:
 		data["script"] = script_resource.resource_path
 	return data
@@ -435,9 +327,8 @@ func _node_identity(node: Node) -> Dictionary:
 func _first_property(object: Object, property_names: Array) -> Variant:
 	if object == null:
 		return null
-	for name_value: Variant in property_names:
-		var property_name: String = str(name_value)
-		var value: Variant = _property_value(object, property_name)
+	for property_name in property_names:
+		var value = _property_value(object, str(property_name))
 		if value != null:
 			return value
 	return null
@@ -452,8 +343,7 @@ func _property_value(object: Object, property_name: String) -> Variant:
 func _has_property(object: Object, property_name: String) -> bool:
 	if object == null:
 		return false
-	var property_list: Array[Dictionary] = object.get_property_list()
-	for property_data: Dictionary in property_list:
+	for property_data in object.get_property_list():
 		if str(property_data.get("name", "")) == property_name:
 			return true
 	return false
@@ -464,19 +354,15 @@ func _vec2(value: Vector2) -> Array:
 
 
 func _json_safe_variant(value: Variant) -> Variant:
-	var value_type: int = typeof(value)
-	if value_type == TYPE_VECTOR2:
-		var vector_value: Vector2 = value
-		return _vec2(vector_value)
-	if value_type == TYPE_STRING_NAME:
+	if typeof(value) == TYPE_VECTOR2:
+		return _vec2(value)
+	if typeof(value) == TYPE_STRING_NAME:
 		return str(value)
 	if value is Node:
-		return _node_identity(value as Node)
+		return _node_identity(value)
 	return value
 
 
 func _current_scene_path() -> String:
-	var scene: Node = get_tree().current_scene
-	if scene == null:
-		return ""
-	return scene.scene_file_path
+	var scene := get_tree().current_scene
+	return scene.scene_file_path if scene != null else ""
