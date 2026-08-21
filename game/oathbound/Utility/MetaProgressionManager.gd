@@ -29,6 +29,10 @@ const STAGE_AFTER_TWIN_MAWS := "after_twin_maws"
 const STAGE_AFTER_SHOGUN := "after_shogun"
 const STAGE_AFTER_KEEPER_OR_LATER := "after_keeper_or_later"
 
+const MATERIAL_KEEPER := "keeper"
+const MATERIAL_TWIN_MAWS := "twin_maws"
+const MATERIAL_ECLIPSE_SHOGUN := "eclipse_shogun"
+
 const STRUCTURAL_NODES := [
 	# Bloodwell — Akio
 	{"id": "vitality", "name": "Vitality", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_FIRST_RETURN},
@@ -38,9 +42,9 @@ const STRUCTURAL_NODES := [
 	{"id": "recovery_efficiency", "name": "Recovery Efficiency", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
 	{"id": "deflection_stability", "name": "Deflection Stability", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
 	{"id": "execution_stability", "name": "Execution Stability", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
-	{"id": "body_mastery", "name": "Body Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER, "boss_material": MetaProgress.BOSS_MATERIAL_KEEPER},
-	{"id": "resource_mastery", "name": "Resource Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_TWIN_MAWS, "boss_material": MetaProgress.BOSS_MATERIAL_TWIN_MAWS},
-	{"id": "returning_blood_mastery", "name": "Returning Blood Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_SHOGUN, "boss_material": MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN},
+	{"id": "body_mastery", "name": "Body Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER, "boss_material": MATERIAL_KEEPER},
+	{"id": "resource_mastery", "name": "Resource Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_TWIN_MAWS, "boss_material": MATERIAL_TWIN_MAWS},
+	{"id": "returning_blood_mastery", "name": "Returning Blood Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_SHOGUN, "boss_material": MATERIAL_ECLIPSE_SHOGUN},
 
 	# Bloodwell — Run Infrastructure
 	{"id": "field_rest", "name": "Field Rest", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_FIRST_RETURN},
@@ -48,9 +52,9 @@ const STRUCTURAL_NODES := [
 	{"id": "expedition_preparation", "name": "Expedition Preparation", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_FIRST_RETURN},
 	{"id": "route_intelligence", "name": "Route Intelligence", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_KEEPER},
 	{"id": "salvage_protocol", "name": "Salvage Protocol", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_TWIN_MAWS},
-	{"id": "keeper_passage", "name": "Keeper Passage", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_KEEPER, "boss_material": MetaProgress.BOSS_MATERIAL_KEEPER},
-	{"id": "twin_passage", "name": "Twin Passage", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_TWIN_MAWS, "boss_material": MetaProgress.BOSS_MATERIAL_TWIN_MAWS},
-	{"id": "heart_passage", "name": "Heart Passage", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_SHOGUN, "boss_material": MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN},
+	{"id": "keeper_passage", "name": "Keeper Passage", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_KEEPER, "boss_material": MATERIAL_KEEPER},
+	{"id": "twin_passage", "name": "Twin Passage", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_TWIN_MAWS, "boss_material": MATERIAL_TWIN_MAWS},
+	{"id": "heart_passage", "name": "Heart Passage", "station": STATION_BLOODWELL, "group": "run_infrastructure", "stage": STAGE_AFTER_SHOGUN, "boss_material": MATERIAL_ECLIPSE_SHOGUN},
 
 	# Blood Mirror — three structural nodes per Aspect. Exact effects/prices are later tuning.
 	{"id": "wolf_tier0_handling", "name": "Wolf Tier 0 Handling", "station": STATION_BLOOD_MIRROR, "group": "wolf", "stage": STAGE_AFTER_KEEPER},
