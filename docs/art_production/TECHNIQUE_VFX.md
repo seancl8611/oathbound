@@ -4,7 +4,7 @@ title: Technique VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-13
+last_reviewed: 2026-08-20
 topics:
   - techniques
   - vfx
@@ -29,8 +29,8 @@ Techniques reshape existing sword actions through repeatable family effects. The
 
 Technique presentation has two layers:
 
-- **selection and build communication:** combat-slot identity, rarity, refinement state, supporting-upgrade relationships, and family symbol / color treatment,
-- **combat feedback:** readable effects that show Echoes, Rupture, Seal stacks, Rift development, Vulnerable state, backstab payoff, altered footprints, or other approved family behavior.
+- **selection and build communication:** action-trigger identity where relevant, rarity/refinement state, Supporting-Technique relationships, and family symbol / color treatment,
+- **combat feedback:** readable effects that show Echoes, Rupture, Seal marks, Rift development, Vulnerable state, backstab payoff, altered footprints, or other approved family behavior.
 
 The former elemental stance families remain removed from scope. Prosthetic effects remain in their own visual system.
 
@@ -77,17 +77,19 @@ The family should communicate opened defense, severe Health damage, and position
 
 A later Crimson Legendary may introduce a brief **Unseen** state with its own clear player-state treatment.
 
-## Slot treatment
+## Action-trigger treatment
+
+The five action labels are trigger classifications, **not Technique slots**. Multiple owned Techniques may respond to the same action and their VFX must therefore layer cleanly.
 
 - **Basic Attack:** frequent effects stay visually light.
 - **Held Attack:** may support heavier fixed geometry, impact, Rift application, or concentrated payoff.
-- **Dash:** effects stay tied to the actual dash path or Dash Attack contact and must not imply hidden movement or automatic rear positioning.
+- **Dash / Dash Attack:** effects stay tied to the actual dash path or contact and must not imply hidden movement or automatic rear positioning.
 - **Parry / Counter:** feedback occurs after or around the successful defensive read and never widens the apparent parry window.
 - **Deathblow:** Technique effects resolve after the execution read remains clear.
 
 ## Later-layer Techniques
 
-The direct 25-Technique matrix is approved. Supporting, Cross-family, Legendary, and refinement presentation may now be designed.
+The 25 Action-Technique matrix is approved. Supporting, Cross-family, Legendary, and refinement presentation may now be designed.
 
 Supporting effects should normally modify existing family cues. Legendary effects may justify more dramatic presentation when genuinely run-shaping, but enemy telegraphs and core combat reads remain higher priority.
 
@@ -98,7 +100,7 @@ A refinement should look like a small improvement to the same Technique, not a s
 ## Readability constraints
 
 - Technique feedback cannot hide enemy telegraphs, safe zones, projectiles, posture state, or Akio's final position.
-- Multiple Technique effects must layer cleanly.
+- Multiple Technique effects must layer cleanly, including multiple Techniques triggered by the same combat action.
 - Seal marks must remain readable on moving enemies.
 - Rift marks must not be mistaken for Echo slashes.
 - Vulnerable must not obscure enemy facing because the player still has to genuinely reach the target's back.
@@ -107,6 +109,6 @@ A refinement should look like a small improvement to the same Technique, not a s
 
 ## Delivery planning
 
-The approved 25 direct Techniques may now receive high-level unique icon/VFX planning. Do not lock the **final total** Technique icon or bespoke-effect count until the later Legendary, Supporting, Cross-family, refinement, replacement, rarity, and eligibility layers are complete.
+The approved 25 Action Techniques may now receive high-level unique icon/VFX planning. Do not lock the **final total** Technique icon or bespoke-effect count until the Supporting, Cross-family, Legendary, and refinement layers are production-audited.
 
-Every production-ready Technique must specify its combat slot or supporting role, trigger, target / footprint, existing VFX reuse, added family cue, Aspect interaction, and mixed-build readability risk.
+Every production-ready Technique must specify its action trigger or Supporting/Cross/Legendary role, trigger condition, target / footprint, existing VFX reuse, added family cue, Aspect interaction, and mixed-build readability risk. Nothing in the art specification should imply exclusive Technique slots or a global Technique inventory cap.
