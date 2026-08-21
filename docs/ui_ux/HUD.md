@@ -4,7 +4,7 @@ title: Run HUD and Combat Feedback
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-20
 topics:
   - hud
   - posture
@@ -47,7 +47,7 @@ The Run HUD displays immediate combat state, current build tools, and run-only p
 - Damage numbers
 - Deathblow prompt
 
-The HUD does not need five permanently visible Technique icons. Full build review belongs in the pause and reward interfaces.
+The HUD does not need a permanently visible icon for every owned Technique. Full build review belongs in the pause and reward interfaces.
 
 ## Technique HUD behavior
 
@@ -61,11 +61,11 @@ Show a Technique indicator during combat only when the player needs immediate st
 - a stored charge,
 - a marked target,
 - a ready refinement payoff,
-- or a short-lived supporting-Technique state.
+- or a short-lived Supporting-Technique state.
 
 When no state requires tracking, the Technique remains visible only in the build overview and reward screens.
 
-The HUD must support simultaneous state from the five core combat slots plus slotless Supporting Techniques without implying five new ability buttons. Contextual indicators are preferred over a permanent icon strip when possible.
+The HUD must support simultaneous state from any number of owned Action, Supporting, Cross-family, Legendary, and refined Techniques without implying new ability buttons or exclusive action slots. Contextual indicators are preferred over a permanent icon strip when possible.
 
 ## Information hierarchy
 
@@ -145,11 +145,15 @@ Full-width presentation with name, health, posture, and phase markers where requ
 
 Use a hand-inked, gameplay-readable style rather than a clean modern UI font. Numbers rise and fade quickly to avoid stacking.
 
-Current approved color language includes red for HP damage, pale yellow for posture damage, orange for Burn, pale blue for Shock, and separate restrained treatment for healing and critical hits.
+Current core damage readability uses red-family treatment for Health damage, pale yellow for posture damage, and a separate restrained treatment for healing. Technique-specific feedback must follow the approved family language rather than the retired elemental prototype:
 
-Generic elemental Technique families are not part of the current Technique direction. Any new status, restraint, mark, wound, or family-specific state introduced by the Technique roster must receive a consistent definition before HUD treatment is added.
+- Echo — pale silver / twin-slash language,
+- Rupture — gold / cracked-crest posture pressure,
+- Seal — violet / binding-knot marks,
+- Rift — ivory / blade-fracture language,
+- Crimson — split-blood-drop / Vulnerable / direct Health-damage language.
 
-Color cannot be the only differentiator; weight, outline, prefix, icon, or motion should reinforce type where practical.
+Color cannot be the only differentiator; weight, outline, symbol, prefix, animation, or motion should reinforce type where practical.
 
 ## Deathblow prompt
 
