@@ -3,16 +3,19 @@ extends Node
 const BOSS_REWARD_UI = preload("res://Core/Rewards/BossRewardUI.gd")
 const TECHNIQUE_REWARD_UI = preload("res://Core/Rewards/TechniqueRewardUI.gd")
 
+# Current Oathbound player baseline. Store these on first Boss Reward application so
+# Keeper and Twin Maws capacity rewards never compound against an already-increased
+# mid-run maximum. Future pre-run max-capacity progression should set the metadata at
+# run start and will automatically override these compatibility defaults.
+const CURRENT_STARTING_MAX_HEALTH := 100
+const CURRENT_STARTING_MAX_SPIRIT := 100
+
 const HEALTH_CAPACITY_RATIO := 0.20
 const SPIRIT_CAPACITY_RATIO := 0.25
 const TRANSITION_HEALTH_RECOVERY := 0.20
 const TRANSITION_SPIRIT_RECOVERY := 0.35
 const TRANSITION_HEALTH_FLOOR := 0.35
 const TRANSITION_SPIRIT_FLOOR := 0.50
-
-const FLEX_SECOND_TECHNIQUE := "second_technique"
-const FLEX_OPPOSITE_CAPACITY := "opposite_capacity"
-const FLEX_REROLLS := "rerolls"
 
 
 func present_after_boss(area_id: int) -> void:
@@ -106,7 +109,8 @@ func _apply_health_capacity() -> void:
 	var player := get_tree().get_first_node_in_group("player")
 	if player == null or not ("maxhp" in player) or not ("hp" in player):
 		return
-	var starting_max := int(player.get_meta("run_start_max_health", player.maxhp))
+	var starting_max := int(player.get_meta("run_start_max_health", CURRENT_STARTING_MAX_HEALTH))
+	player.set_meta("run_start_max_health", starting_max)
 	var increase := maxi(1, roundi(float(starting_max) * HEALTH_CAPACITY_RATIO))
 	player.maxhp += increase
 	player.hp = mini(player.maxhp, player.hp + increase)
@@ -122,7 +126,8 @@ func _apply_spirit_capacity() -> void:
 	var executor = player.prosthetic_executor
 	if not ("max_spirit" in executor) or not ("current_spirit" in executor):
 		return
-	var starting_max := int(player.get_meta("run_start_max_spirit", executor.max_spirit))
+	var starting_max := int(player.get_meta("run_start_max_spirit", CURRENT_STARTING_MAX_SPIRIT))
+	player.set_meta("run_start_max_spirit", starting_max)
 	var increase := maxi(1, roundi(float(starting_max) * SPIRIT_CAPACITY_RATIO))
 	executor.max_spirit += increase
 	executor.current_spirit = mini(executor.max_spirit, executor.current_spirit + increase)
