@@ -14,6 +14,14 @@ const COLOR_ACCENT := Color(0.66, 0.48, 0.87, 1.0)
 const COLOR_TEXT := Color(0.90, 0.90, 0.88, 1.0)
 const COLOR_TEXT_DIM := Color(0.56, 0.54, 0.60, 1.0)
 
+const STAGE_AFTER_KEEPER := "after_keeper"
+const STAGE_AFTER_KEEPER_OR_LATER := "after_keeper_or_later"
+const STAGE_AFTER_TWIN_MAWS := "after_twin_maws"
+const STAGE_AFTER_SHOGUN := "after_shogun"
+const MATERIAL_KEEPER := "keeper"
+const MATERIAL_TWIN_MAWS := "twin_maws"
+const MATERIAL_ECLIPSE_SHOGUN := "eclipse_shogun"
+
 var _prev_paused := false
 var _active_group := "akio"
 var _content: VBoxContainer
@@ -143,9 +151,9 @@ func _refresh() -> void:
 
 	_resource_label.text = "Mist %d   Keeper %d   Twin Maws %d   Shogun %d" % [
 		int(MetaProgress.mist),
-		MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_KEEPER),
-		MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_TWIN_MAWS),
-		MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN),
+		MetaProgress.get_boss_material(MATERIAL_KEEPER),
+		MetaProgress.get_boss_material(MATERIAL_TWIN_MAWS),
+		MetaProgress.get_boss_material(MATERIAL_ECLIPSE_SHOGUN),
 	]
 
 	_akio_button.disabled = _active_group == "akio"
@@ -154,7 +162,7 @@ func _refresh() -> void:
 	for child in _content.get_children():
 		child.queue_free()
 
-	for data in MetaProgressionManager.get_structural_nodes(MetaProgressionManager.STATION_BLOODWELL):
+	for data in MetaProgressionManager.get_structural_nodes("bloodwell"):
 		if str(data.get("group", "")) != _active_group:
 			continue
 		_content.add_child(_build_node_card(data))
@@ -212,11 +220,11 @@ func _build_node_card(data: Dictionary) -> Control:
 
 func _stage_reached(stage: String) -> bool:
 	match stage:
-		MetaProgressionManager.STAGE_AFTER_KEEPER, MetaProgressionManager.STAGE_AFTER_KEEPER_OR_LATER:
+		STAGE_AFTER_KEEPER, STAGE_AFTER_KEEPER_OR_LATER:
 			return MetaProgress.has_cleared_boss(1)
-		MetaProgressionManager.STAGE_AFTER_TWIN_MAWS:
+		STAGE_AFTER_TWIN_MAWS:
 			return MetaProgress.has_cleared_boss(2)
-		MetaProgressionManager.STAGE_AFTER_SHOGUN:
+		STAGE_AFTER_SHOGUN:
 			return MetaProgress.has_cleared_boss(3)
 		_:
 			# Bloodwell is only presented after Returning Blood has opened the station.
@@ -227,11 +235,11 @@ func _stage_text(stage: String, available: bool) -> String:
 	if available:
 		return "Available progression band"
 	match stage:
-		MetaProgressionManager.STAGE_AFTER_KEEPER, MetaProgressionManager.STAGE_AFTER_KEEPER_OR_LATER:
+		STAGE_AFTER_KEEPER, STAGE_AFTER_KEEPER_OR_LATER:
 			return "Unlocks after the first Keeper defeat"
-		MetaProgressionManager.STAGE_AFTER_TWIN_MAWS:
+		STAGE_AFTER_TWIN_MAWS:
 			return "Unlocks after the first Twin Maws defeat"
-		MetaProgressionManager.STAGE_AFTER_SHOGUN:
+		STAGE_AFTER_SHOGUN:
 			return "Unlocks after the first Shogun defeat / Binding clear"
 		_:
 			return "Locked"
@@ -239,11 +247,11 @@ func _stage_text(stage: String, available: bool) -> String:
 
 func _material_display_name(material_key: String) -> String:
 	match material_key:
-		MetaProgress.BOSS_MATERIAL_KEEPER:
+		MATERIAL_KEEPER:
 			return "Keeper"
-		MetaProgress.BOSS_MATERIAL_TWIN_MAWS:
+		MATERIAL_TWIN_MAWS:
 			return "Twin Maws"
-		MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN:
+		MATERIAL_ECLIPSE_SHOGUN:
 			return "Shogun"
 		_:
 			return "Regional boss"
