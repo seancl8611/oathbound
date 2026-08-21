@@ -30,10 +30,15 @@ func _ready() -> void:
 	deathblow_pips = 1
 
 	# Cannonfire Mark is an imported prototype move and is not part of the approved
-	# Village Ogre roster. Spinning Sweep remains the controller's HAMMER_SPIN path.
+	# Village Ogre roster. The imported HAMMER_SPIN implementation is constrained here
+	# into one stationary, perilous Spinning Sweep instead of a long moving spin state.
 	cannon_base_chance = 0.0
 	_cannon_desire = 0.0
 	spin_min_range = 0.0
+	spin_duration = 0.65
+	spin_move_speed = 0.0
+	spin_turn_rate_deg = 0.0
+	spin_hit_cooldown = 1.0
 
 	_hushiro_base_min_cooldown = min_attack_cooldown
 	_hushiro_base_max_cooldown = max_attack_cooldown
