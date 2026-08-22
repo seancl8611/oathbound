@@ -5,12 +5,9 @@ extends "res://autoload/UpgradeService.gd"
 ## where N is 1 at Base and first-playtest mastery tuning may increase its frequency.
 ## All eligibility/rarity/family rules remain owned by the canonical parent service.
 
-const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
-
-
 func get_three_choices_for_source(source: String, area_id: int = 1, exclude_ids: Array = []) -> Array:
 	var choices: Array = super.get_three_choices_for_source(source, area_id, exclude_ids)
-	var runtime := _relic_runtime()
+	var runtime: Node = _relic_runtime()
 	if runtime == null or choices.size() < 3:
 		return choices
 	if not bool(runtime.call("consume_scribe_extra_choice", area_id)):
@@ -59,8 +56,6 @@ func _append_extra_choice(base_choices: Array, source: String, area_id: int, exc
 		var id: String = str(choice.get("id", ""))
 		if not id.is_empty() and id not in excluded:
 			excluded.append(id)
-		if str(choice.get("kind", "")) == RELIC_CATALOG.get_name("__never__"):
-			pass
 		if str(choice.get("kind", "")) == "cross":
 			existing_cross = true
 
