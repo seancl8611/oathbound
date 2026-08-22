@@ -8,6 +8,7 @@ const DEFENSIVE_AIM_MIN_DISTANCE: float = 6.0
 const CURRENT_PROSTHETIC_EXECUTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticExecutor.gd")
 const EXPECTED_PROSTHETIC_EXECUTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticExecutor.gd"
 const CURRENT_RUN_HUD_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundRunHUD.gd")
+const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
 
 func _enter_tree() -> void:
@@ -22,9 +23,11 @@ func _ready() -> void:
 	super._ready()
 	_install_current_run_hud()
 	_assert_prosthetic_runtime()
-	_apply_current_relic_capacity()
+	_connect_relic_runtime()
+	_refresh_relic_capacity(true)
+	_capture_run_start_capacity()
 	_assert_relic_runtime()
-	print("[OathboundCombatPlayer] v1.3 - canonical Aspect Player + defense/deathblow/Prosthetic/Relic bridge")
+	print("[OathboundCombatPlayer] v1.4 - canonical Aspect Player + defense/deathblow/Prosthetic/Relic bridge")
 
 
 func _install_current_run_hud() -> void:
@@ -59,15 +62,86 @@ func _assert_prosthetic_runtime() -> void:
 		})
 
 
-func _apply_current_relic_capacity() -> void:
+# =============================================================================
+# RELIC CAPACITY / LIVE EQUIP
+# =============================================================================
+
+func _connect_relic_runtime() -> void:
 	var runtime: Node = _relic_runtime()
-	if runtime != null and runtime.has_method("apply_player_capacity"):
-		runtime.call("apply_player_capacity", self)
-	# Relic capacity may change Spirit after the HUD was initially synchronized.
-	if prosthetic_executor != null and run_hud != null and run_hud.has_method("update_spirit"):
-		var spirit: int = int(prosthetic_executor.call("get_spirit")) if prosthetic_executor.has_method("get_spirit") else 100
-		var spirit_max: int = int(prosthetic_executor.call("get_max_spirit")) if prosthetic_executor.has_method("get_max_spirit") else 100
-		run_hud.call("update_spirit", spirit, spirit_max)
+	if runtime == null:
+		return
+	var equip_cb := Callable(self, "_on_relic_equipped_changed")
+	if runtime.has_signal("equipped_changed") and not runtime.is_connected("equipped_changed", equip_cb):
+		runtime.connect("equipped_changed", equip_cb)
+	var mastery_cb := Callable(self, "_on_relic_mastery_changed")
+	if runtime.has_signal("mastery_changed") and not runtime.is_connected("mastery_changed", mastery_cb):
+		runtime.connect("mastery_changed", mastery_cb)
+
+
+func _on_relic_equipped_changed(_relic_id: String) -> void:
+	_refresh_relic_capacity(false)
+
+
+func _on_relic_mastery_changed(relic_id: String, _kills: int, _rank: int) -> void:
+	var runtime: Node = _relic_runtime()
+	if runtime != null and str(runtime.get("equipped_relic_id")) == relic_id:
+		_refresh_relic_capacity(false)
+
+
+func _refresh_relic_capacity(fill_added_capacity: bool) -> void:
+	var runtime: Node = _relic_runtime()
+	if runtime == null:
+		return
+	var equipped: String = str(runtime.get("equipped_relic_id"))
+
+	# Health: subtract only the previously applied Relic bonus, preserving permanent
+	# progression and temporary Shop capacity, then add the new Relic bonus.
+	var old_hp_bonus: int = int(get_meta("_oathbound_relic_health_bonus", 0))
+	var new_hp_bonus: int = 0
+	if equipped == RELIC_CATALOG.IRON_PRAYER_BEAD:
+		new_hp_bonus = maxi(0, int(round(float(runtime.call("get_effective_value", equipped)))))
+	var non_relic_hp_max: int = maxi(1, int(maxhp) - old_hp_bonus)
+	var new_hp_max: int = non_relic_hp_max + new_hp_bonus
+	var hp_bonus_delta: int = new_hp_bonus - old_hp_bonus
+	maxhp = new_hp_max
+	if fill_added_capacity and hp_bonus_delta > 0:
+		hp = mini(maxhp, int(hp) + hp_bonus_delta)
+	else:
+		hp = mini(int(hp), maxhp)
+	set_meta("_oathbound_relic_health_bonus", new_hp_bonus)
+	_update_health_bar()
+
+	# Spirit follows the same isolated-bonus rule through the canonical executor.
+	if prosthetic_executor != null:
+		var old_spirit_bonus: int = int(prosthetic_executor.get_meta("_oathbound_relic_spirit_bonus", 0))
+		var new_spirit_bonus: int = 0
+		if equipped == RELIC_CATALOG.SPIRIT_TASSEL:
+			new_spirit_bonus = maxi(0, int(round(float(runtime.call("get_effective_value", equipped)))))
+		var current_max: int = int(prosthetic_executor.call("get_max_spirit")) if prosthetic_executor.has_method("get_max_spirit") else 100
+		var current_spirit: int = int(prosthetic_executor.call("get_spirit")) if prosthetic_executor.has_method("get_spirit") else current_max
+		var non_relic_spirit_max: int = maxi(1, current_max - old_spirit_bonus)
+		var new_spirit_max: int = non_relic_spirit_max + new_spirit_bonus
+		var spirit_bonus_delta: int = new_spirit_bonus - old_spirit_bonus
+		var new_current_spirit: int = mini(current_spirit, new_spirit_max)
+		if fill_added_capacity and spirit_bonus_delta > 0:
+			new_current_spirit = mini(new_spirit_max, current_spirit + spirit_bonus_delta)
+		prosthetic_executor.set("max_spirit", new_spirit_max)
+		prosthetic_executor.set("current_spirit", new_current_spirit)
+		prosthetic_executor.set_meta("_oathbound_relic_spirit_bonus", new_spirit_bonus)
+		if prosthetic_executor.has_signal("spirit_changed"):
+			prosthetic_executor.emit_signal("spirit_changed", new_current_spirit, new_spirit_max)
+		if run_hud != null and run_hud.has_method("update_spirit"):
+			run_hud.call("update_spirit", new_current_spirit, new_spirit_max)
+
+
+func _capture_run_start_capacity() -> void:
+	# Current Shop temporary-capacity purchases are percentages of the run-start max.
+	# Capture after pre-run Relic capacity has been applied, before any Shop purchase.
+	if not has_meta("_oathbound_run_start_max_health"):
+		set_meta("_oathbound_run_start_max_health", int(maxhp))
+	if prosthetic_executor != null and not prosthetic_executor.has_meta("_oathbound_run_start_max_spirit"):
+		var current_max: int = int(prosthetic_executor.call("get_max_spirit")) if prosthetic_executor.has_method("get_max_spirit") else 100
+		prosthetic_executor.set_meta("_oathbound_run_start_max_spirit", current_max)
 
 
 func _assert_relic_runtime() -> void:
