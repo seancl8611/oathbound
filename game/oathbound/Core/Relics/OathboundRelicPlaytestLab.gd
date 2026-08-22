@@ -64,6 +64,7 @@ func _build_relic_tab(tabs: TabContainer) -> void:
 	note.modulate = Color(0.62, 0.64, 0.70)
 	vbox.add_child(note)
 	_refresh_relic_status()
+	print("[OathboundPlaytestLab] Relics tab built with %d relics" % RELIC_CATALOG.IDS.size())
 
 
 func _selected_relic_id() -> String:
