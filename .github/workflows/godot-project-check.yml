@@ -31,3 +31,15 @@ jobs:
 
       - name: Compile and load editor project
         run: godot --headless --editor --path game/oathbound --quit-after 3
+
+      - name: Smoke current RunScene and assert Player ownership
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee runscene-smoke.log
+          grep -F "[OathboundCombatPlayer]" runscene-smoke.log
+          grep -F "player_factory_assigned script=res://Player/OathboundCombatPlayer.gd" runscene-smoke.log
+          if grep -F "Wrong active Player script" runscene-smoke.log; then
+            echo "Canonical Player ownership assertion failed."
+            exit 1
+          fi
