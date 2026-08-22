@@ -64,6 +64,19 @@ func _state_blocking(delta: float) -> void:
 	super._state_blocking(delta)
 
 
+func _on_attack_hit(target: Node, combo_idx: int) -> void:
+	var was_blocked: bool = false
+	if target != null and target.has_method("is_blocking"):
+		was_blocked = bool(target.call("is_blocking"))
+	super._on_attack_hit(target, combo_idx)
+	if prosthetic_executor == null or not prosthetic_executor.has_method("on_direct_sword_contact"):
+		return
+	var actual_health_damage: int = 0
+	if not was_blocked and sword_hitbox != null and sword_hitbox.has_method("get_current_damage"):
+		actual_health_damage = int(sword_hitbox.call("get_current_damage"))
+	prosthetic_executor.call("on_direct_sword_contact", target, actual_health_damage, sword_hitbox)
+
+
 func _on_hurt(dmg: int, dmg_type: String, attacker: Node = null) -> void:
 	if prosthetic_executor != null and prosthetic_executor.has_method("try_umbrella_absorb"):
 		if bool(prosthetic_executor.call("try_umbrella_absorb", dmg, dmg_type, attacker)):
