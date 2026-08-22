@@ -3,6 +3,8 @@ extends "res://Utility/hurt_box.gd"
 ## Aspect-aware contact adapter. The parent remains the collision/event authority; this
 ## layer transforms direct Wraith passage contacts before damage resolution and reports
 ## actual applied Health/Posture deltas to AspectRuntime after the event transaction.
+## It also records authored-vs-applied posture for every canonical contact so recovery
+## between contacts is not mistaken for inconsistent per-hit scaling.
 
 var _aspect_before_hp: float = 0.0
 var _aspect_before_posture: float = 0.0
@@ -51,23 +53,60 @@ func _end_attack_event_transaction(combat_node: Node) -> void:
 	if not _aspect_pending_contact:
 		return
 	_aspect_pending_contact = false
-	var area = get_meta("last_attack_area", null)
-	var attacker = get_meta("last_attack_source", null)
+	var area_value: Variant = get_meta("last_attack_area", null)
+	var attacker_value: Variant = get_meta("last_attack_source", null)
 	var receiver: Node = get_parent()
-	if area is Area2D and is_instance_valid(area) and typeof(AspectRuntime) == TYPE_OBJECT:
-		AspectRuntime.record_sword_contact(receiver, area, attacker, _aspect_before_hp, _aspect_before_posture)
+	if area_value is Area2D and is_instance_valid(area_value):
+		var area: Area2D = area_value as Area2D
+		_record_posture_resolution(receiver, area)
+		if typeof(AspectRuntime) == TYPE_OBJECT:
+			AspectRuntime.record_sword_contact(receiver, area, attacker_value as Node, _aspect_before_hp, _aspect_before_posture)
+
+func _record_posture_resolution(receiver: Node, area: Area2D) -> void:
+	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
+		return
+	var after_posture: float = _read_actor_posture(receiver)
+	var actual_delta: float = maxf(0.0, after_posture - _aspect_before_posture)
+	var authored: float = float(get_meta("last_posture_damage", area.get_meta("posture_damage", 0.0)))
+	var maximum: float = _read_actor_posture_max(receiver)
+	CombatTelemetry.record_event("canonical_posture_resolution", {
+		"receiver": CombatTelemetry.snapshot_actor(receiver),
+		"attack_id": str(area.get_meta("attack_id", "")),
+		"action_trigger": str(area.get_meta("action_trigger", "")),
+		"posture_before": _aspect_before_posture,
+		"authored_posture": authored,
+		"actual_posture_delta": actual_delta,
+		"posture_after": after_posture,
+		"posture_max": maximum,
+		"entered_break": maximum > 0.0 and _aspect_before_posture < maximum - 0.001 and after_posture >= maximum - 0.001,
+	})
 
 func _read_actor_hp(actor: Node) -> float:
 	if actor == null:
 		return 0.0
-	var value = actor.get("hp")
+	var value: Variant = actor.get("hp")
 	return float(value) if value != null else 0.0
 
 func _read_actor_posture(actor: Node) -> float:
 	if actor == null:
 		return 0.0
 	var combat_node: Node = actor.get_node_or_null("Combat")
-	if combat_node != null and combat_node.get("posture") != null:
-		return float(combat_node.get("posture"))
-	var value = actor.get("stagger")
+	if combat_node != null:
+		if combat_node.has_method("get_posture"):
+			return float(combat_node.call("get_posture"))
+		var internal_value: Variant = combat_node.get("_posture")
+		if internal_value != null:
+			return float(internal_value)
+	var value: Variant = actor.get("stagger")
+	return float(value) if value != null else 0.0
+
+func _read_actor_posture_max(actor: Node) -> float:
+	if actor == null:
+		return 0.0
+	var combat_node: Node = actor.get_node_or_null("Combat")
+	if combat_node != null:
+		var cfg: CombatConfig = combat_node.get("config") as CombatConfig
+		if cfg != null:
+			return float(cfg.posture_max)
+	var value: Variant = actor.get("stagger_max")
 	return float(value) if value != null else 0.0
