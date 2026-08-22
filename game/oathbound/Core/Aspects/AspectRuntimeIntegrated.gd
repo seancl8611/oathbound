@@ -6,6 +6,34 @@ extends "res://Core/Aspects/AspectRuntime.gd"
 func _physics_process(_delta: float) -> void:
 	call_deferred("_enforce_aspect_enemy_slow")
 
+func record_sword_contact(target: Node, area: Area2D, attacker: Node, before_hp: float, before_posture: float) -> void:
+	if not _is_current_player_sword(area, attacker) or not is_instance_valid(target):
+		return
+	var trigger := str(area.get_meta("action_trigger", ""))
+	var attack_id := str(area.get_meta("attack_id", ""))
+
+	# Apply Spectral Edge first, then re-read the actor. Blood must use actual applied
+	# values after clamping so overkill/overbreak never inflate the meter.
+	_apply_wraith_spectral_edge(target, area, attacker, attack_id)
+	var after_hp := _read_hp(target)
+	var after_posture := _read_posture(target)
+	var actual_health := maxf(0.0, before_hp - after_hp)
+	var actual_posture := maxf(0.0, after_posture - before_posture)
+
+	if bool(area.get_meta("blood_generation", true)):
+		_record_damage_blood(area, target, actual_health, actual_posture, is_secondary_passage_contact(area, target))
+
+	var token := str(area.get_meta("swing_token", "%d" % area.get_instance_id()))
+	if trigger == "counter" and not _counter_bonus_tokens.has(token):
+		_counter_bonus_tokens[token] = Time.get_ticks_msec() * 0.001
+		add_blood(2.0, "parry_counter")
+
+	var posture_max := _read_posture_max(target)
+	if before_posture < posture_max - 0.001 and after_posture >= posture_max - 0.001:
+		add_blood(4.0, "enemy_posture_break")
+
+	_apply_post_contact_tier_effects(target, area, attacker, attack_id)
+
 func begin_wraith_reach(player: Node, direction: Vector2) -> void:
 	# Stage 1 only. The primary corridor itself is the player's authored blood-art
 	# attack profile; the delayed repetition is scheduled when that corridor finishes.
