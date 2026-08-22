@@ -5,6 +5,7 @@ extends Node
 ## obsolete boon/stance controls are deliberately not carried forward.
 
 const HUB_SCENE := "res://World/HubScene.tscn"
+const TECHNIQUE_CATALOG = preload("res://Core/Techniques/TechniqueCatalog.gd")
 
 const HUSHIRO_ENEMIES := {
 	"Swordsman": "res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn",
@@ -68,7 +69,7 @@ func _build_ui() -> void:
 
 	var panel := PanelContainer.new()
 	panel.position = Vector2(12, 12)
-	panel.custom_minimum_size = Vector2(430, 330)
+	panel.custom_minimum_size = Vector2(520, 350)
 	panel.process_mode = Node.PROCESS_MODE_ALWAYS
 	_ui.add_child(panel)
 
@@ -92,11 +93,11 @@ func _build_ui() -> void:
 
 	_status_label = Label.new()
 	_status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status_label.custom_minimum_size = Vector2(395, 42)
+	_status_label.custom_minimum_size = Vector2(485, 42)
 	vbox.add_child(_status_label)
 
 	var tabs := TabContainer.new()
-	tabs.custom_minimum_size = Vector2(405, 225)
+	tabs.custom_minimum_size = Vector2(495, 240)
 	tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vbox.add_child(tabs)
 
@@ -245,19 +246,111 @@ func _build_build_tab(tabs: TabContainer) -> void:
 	var vbox := _make_tab(tabs, "Build")
 
 	var title := Label.new()
-	title.text = "Current build-system adapters"
+	title.text = "Canonical Technique test kits"
 	vbox.add_child(title)
 
 	var status := Label.new()
-	status.text = "Aspects: not connected yet\nTechniques: not connected yet\nRelics: not connected yet\nProsthetics: legacy runtime only\nCorruption/Blood: not connected yet"
+	status.text = "Techniques: connected to current 50-Technique catalog + refinements\nAspects/Relics/Corruption/Blood: later runtime passes\nProsthetics: current compatibility runtime"
 	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(status)
 
+	var family_row_a := HBoxContainer.new()
+	vbox.add_child(family_row_a)
+	for family in ["echo", "rupture", "seal"]:
+		var button := Button.new()
+		button.text = "Grant %s Kit" % family.capitalize()
+		button.pressed.connect(_grant_technique_family.bind(family))
+		family_row_a.add_child(button)
+
+	var family_row_b := HBoxContainer.new()
+	vbox.add_child(family_row_b)
+	for family in ["rift", "crimson"]:
+		var button := Button.new()
+		button.text = "Grant %s Kit" % family.capitalize()
+		button.pressed.connect(_grant_technique_family.bind(family))
+		family_row_b.add_child(button)
+
+	var cross_button := Button.new()
+	cross_button.text = "Grant Eligible Cross-family Techniques"
+	cross_button.pressed.connect(_grant_cross_techniques)
+	family_row_b.add_child(cross_button)
+
+	var clear_button := Button.new()
+	clear_button.text = "Clear Run Techniques"
+	clear_button.pressed.connect(_clear_run_techniques)
+	vbox.add_child(clear_button)
+
 	var note := Label.new()
-	note.text = "Controls become active as each current Oathbound system is implemented. The lab will not manipulate obsolete boon/stance data."
+	note.text = "Family kits deliberately bypass reward prerequisites and grant every native Technique/refinement in that family for focused runtime testing. Normal runs still use UpgradeService eligibility and reward rules."
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	note.modulate = Color(0.72, 0.74, 0.8)
 	vbox.add_child(note)
+
+
+func _grant_technique_family(family: String) -> void:
+	var all_entries: Dictionary = TECHNIQUE_CATALOG.all_entries()
+	var granted := 0
+	for id in all_entries.keys():
+		var data: Dictionary = all_entries[id]
+		if str(data.get("family", "")) != family:
+			continue
+		if _grant_technique_for_playtest(str(id), data):
+			granted += 1
+	print("[PlaytestLab] Granted %s Technique kit (%d new entries)." % [family, granted])
+	_refresh_status()
+
+
+func _grant_cross_techniques() -> void:
+	var all_entries: Dictionary = TECHNIQUE_CATALOG.all_entries()
+	var granted := 0
+	for id in all_entries.keys():
+		var data: Dictionary = all_entries[id]
+		if str(data.get("kind", "")) != TECHNIQUE_CATALOG.KIND_CROSS:
+			continue
+		if _grant_technique_for_playtest(str(id), data):
+			granted += 1
+	print("[PlaytestLab] Granted %d Cross-family Techniques." % granted)
+	_refresh_status()
+
+
+func _grant_technique_for_playtest(id: String, source_data: Dictionary) -> bool:
+	if typeof(RunData) != TYPE_OBJECT or id in RunData.get_acquired_upgrades():
+		return false
+	var choice := source_data.duplicate(true)
+	choice["id"] = id
+	if typeof(UpgradeService) == TYPE_OBJECT and UpgradeService.has_method("apply_upgrade"):
+		UpgradeService.apply_upgrade(choice)
+	else:
+		RunData.record_upgrade(id)
+	return true
+
+
+func _clear_run_techniques() -> void:
+	if typeof(RunData) == TYPE_OBJECT:
+		RunData.acquired_upgrades.clear()
+	var player := _get_player()
+	if player != null and "collected_upgrades" in player:
+		player.collected_upgrades.clear()
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if not is_instance_valid(enemy):
+			continue
+		for key in [
+			"_tech_rupture", "_tech_seal_count", "_tech_seal_expire_at", "_tech_bound_until",
+			"_tech_bound_anchor", "_tech_rift_intensity", "_tech_rift_open_at", "_tech_rift_secondary",
+			"_tech_rift_scar", "_tech_vulnerable_until", "_tech_echo_pending"
+		]:
+			enemy.remove_meta(key)
+		var label := enemy.get_node_or_null("TechniqueStatus")
+		if label != null:
+			label.queue_free()
+	if player != null:
+		player.remove_meta("_tech_unseen_until")
+		player.remove_meta("_tech_unseen_active")
+		player.remove_meta("_tech_unseen_attack_bonus_pending")
+		if player is CanvasItem:
+			(player as CanvasItem).modulate.a = 1.0
+	print("[PlaytestLab] Cleared run Techniques and active Technique status state.")
+	_refresh_status()
 
 
 func _toggle_lab() -> void:
@@ -307,13 +400,17 @@ func _refresh_status() -> void:
 	if RunData:
 		area = int(RunData.current_area_id)
 	var room_text := str(room.name) if room else "none"
+	var technique_count := 0
+	if typeof(RunData) == TYPE_OBJECT:
+		technique_count = RunData.get_acquired_upgrades().size()
 
 	if player and player.has_method("get_playtest_snapshot"):
 		var snapshot: Dictionary = player.get_playtest_snapshot()
-		_status_label.text = "Region %d | Chamber %s | Enemies %d\nHP %s/%s | Posture %.0f/%.0f | Spirit %s/%s | %s" % [
+		_status_label.text = "Region %d | Chamber %s | Enemies %d | Techniques %d\nHP %s/%s | Posture %.0f/%.0f | Spirit %s/%s | %s" % [
 			area,
 			room_text,
 			enemy_count,
+			technique_count,
 			str(snapshot.get("health", "?")),
 			str(snapshot.get("max_health", "?")),
 			float(snapshot.get("posture", 0.0)),
@@ -323,7 +420,7 @@ func _refresh_status() -> void:
 			str(snapshot.get("state", "?")),
 		]
 	else:
-		_status_label.text = "Region %d | Chamber %s | Enemies %d\nPlayer not available in this scene." % [area, room_text, enemy_count]
+		_status_label.text = "Region %d | Chamber %s | Enemies %d | Techniques %d\nPlayer not available in this scene." % [area, room_text, enemy_count, technique_count]
 
 
 func _sync_player_controls() -> void:
