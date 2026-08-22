@@ -54,6 +54,7 @@ jobs:
           assert_log "current ProstheticManager" "prosthetic_manager script=res://Core/Prosthetics/OathboundProstheticManager.gd"
           assert_log "current AttackDirector" "attack_director script=res://Core/Prosthetics/OathboundAttackDirector.gd"
           assert_log "current Prosthetic executor" "prosthetic_executor script=res://Core/Prosthetics/OathboundProstheticExecutor.gd"
+          assert_log "current RunHUD" "run_hud script=res://Core/Prosthetics/OathboundRunHUD.gd"
           assert_log "current RelicRuntime" "relic_runtime script=res://Core/Relics/OathboundRelicRuntime.gd"
           assert_log "current UpgradeService" "upgrade_service script=res://Core/Relics/OathboundUpgradeService.gd"
           assert_log "current PlaytestLab" "playtest_lab script=res://Core/Relics/OathboundRelicPlaytestLab.gd"
@@ -67,8 +68,12 @@ jobs:
             echo "FAIL: Legacy Stability Player was instantiated by the current run."
             exit 1
           fi
-          if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong RelicRuntime script|Wrong UpgradeService script|Wrong PlaytestLab script" runscene-smoke.log; then
+          if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong RunHUD script|Wrong RelicRuntime script|Wrong UpgradeService script|Wrong PlaytestLab script" runscene-smoke.log; then
             echo "FAIL: Canonical runtime ownership assertion emitted an error."
+            exit 1
+          fi
+          if grep -F "SCRIPT ERROR:" runscene-smoke.log; then
+            echo "FAIL: RunScene emitted a GDScript runtime error."
             exit 1
           fi
 
@@ -87,6 +92,10 @@ jobs:
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 8 res://Core/Chambers/Types/MerchantChamber.tscn 2>&1 | tee merchant-smoke.log
           grep -F "[OathboundMerchant] current offers" merchant-smoke.log
+          if grep -F "SCRIPT ERROR:" merchant-smoke.log; then
+            echo "FAIL: Merchant smoke emitted a GDScript runtime error."
+            exit 1
+          fi
 
       - name: Smoke current Forge Relic menu
         shell: bash
@@ -94,3 +103,7 @@ jobs:
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 8 res://Core/Relics/OathboundForgeMenu.tscn 2>&1 | tee forge-smoke.log
           grep -F "[OathboundForgeMenu] v1.0 - Forge Relic collection/mastery management" forge-smoke.log
+          if grep -F "SCRIPT ERROR:" forge-smoke.log; then
+            echo "FAIL: Forge smoke emitted a GDScript runtime error."
+            exit 1
+          fi
