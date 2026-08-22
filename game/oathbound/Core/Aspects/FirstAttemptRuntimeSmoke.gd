@@ -6,6 +6,7 @@ extends Node
 
 const CATALOG = preload("res://Core/Aspects/AspectCatalog.gd")
 const PLAYER_SCENE = preload("res://Player/aspect_player.tscn")
+const HUB_SCENE = preload("res://World/HubScene.tscn")
 
 var _failures: Array[String] = []
 
@@ -99,6 +100,34 @@ func _run_contract() -> void:
 	_expect(not bool(AspectRuntime.has_active_aspect()), "awakening alone must not auto-select an Aspect")
 	_expect(str(AspectRuntime.selected_aspect).is_empty(), "post-death handoff must wait for explicit Aspect selection")
 	_expect(int(AspectRuntime.tier) == 0 and float(AspectRuntime.blood) == 0.0, "awakening handoff must start from Tier 0 / Blood 0")
+
+	# The current Strand implementation uses The Well as the run-preparation surface.
+	# An awakened player must be able to open the three-Aspect selector without an
+	# Aspect already being active, and cancelling must clean up the root-level modal.
+	var hub: Node = HUB_SCENE.instantiate()
+	add_child(hub)
+	await get_tree().process_frame
+	var well: Node = hub.get_node_or_null("TheWell")
+	if well == null:
+		_fail("Hub must expose TheWell run-preparation station")
+	else:
+		well.call("_open_aspect_menu")
+		await get_tree().process_frame
+		var selector: Node = get_tree().root.get_node_or_null("AspectRunSetup")
+		_expect(selector != null, "awakened The Well must open the Blood Aspect selector")
+		if selector != null:
+			var aspect_buttons: Array[Node] = selector.find_children("*", "Button", true, false)
+			var aspect_labels: Array[String] = []
+			for button_node: Node in aspect_buttons:
+				var button := button_node as Button
+				if button.text in ["Wolf", "Wraith", "Ronin"]:
+					aspect_labels.append(button.text)
+			_expect(aspect_labels.size() == 3, "awakened selector must offer Wolf, Wraith, and Ronin")
+		well.call("_cancel_aspect_menu")
+		await get_tree().process_frame
+		_expect(get_tree().root.get_node_or_null("AspectRunSetup") == null, "cancelling Aspect selection must clean up the modal")
+	hub.queue_free()
+	await get_tree().process_frame
 
 	_expect(bool(AspectRuntime.select_aspect(CATALOG.WOLF)), "awakened runtime must allow explicit Wolf selection")
 	_expect(bool(AspectRuntime.has_active_aspect()), "explicit post-awakening selection must activate the Aspect runtime")
