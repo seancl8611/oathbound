@@ -72,6 +72,7 @@ func _build_prosthetic_tab(tabs: TabContainer) -> void:
 	_prosthetic_status.modulate = Color(0.72, 0.74, 0.8)
 	vbox.add_child(_prosthetic_status)
 	_refresh_prosthetic_status()
+	print("[OathboundPlaytestLab] Prosthetics tab built with %d tools" % CURRENT_PROSTHETICS.size())
 
 
 func _selected_prosthetic_id() -> String:
