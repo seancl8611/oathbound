@@ -5,22 +5,25 @@ extends "res://autoload/GameFlow.gd"
 ## The imported GameFlow remains route/room compatibility plumbing. Current runtime
 ## systems are first-class project autoloads and are verified here so legacy scene
 ## paths cannot silently own a run. GameFlow owns the canonical Player factory and
-## coordinates run/room Relic events without mutating other autoload scripts at runtime.
+## coordinates current Relic and Corruption run/room events without mutating other
+## autoload scripts at runtime.
 
 const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
 const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticManager.gd"
 const EXPECTED_ATTACK_DIRECTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundAttackDirector.gd"
 const EXPECTED_RELIC_RUNTIME_SCRIPT: String = "res://Core/Relics/OathboundRelicRuntime.gd"
+const EXPECTED_CORRUPTION_RUNTIME_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionRuntime.gd"
 const EXPECTED_UPGRADE_SERVICE_SCRIPT: String = "res://Core/Relics/OathboundUpgradeService.gd"
-const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Relics/OathboundRelicPlaytestLab.gd"
+const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionPlaytestLab.gd"
 const RELIC_SWAP_UI_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicSwapUI.gd")
 
 
 func _ready() -> void:
-	# AttackDir and RelicRuntime are declared before GameFlow in project.godot.
+	# AttackDir, RelicRuntime, and CorruptionRuntime are declared before GameFlow.
 	_assert_current_attack_director()
 	_assert_current_relic_runtime()
+	_assert_current_corruption_runtime()
 
 	# These services are declared after GameFlow. Assert them once the autoload setup
 	# pass has completed instead of replacing their scripts after _ready().
@@ -28,12 +31,20 @@ func _ready() -> void:
 	call_deferred("_assert_current_prosthetic_manager")
 	call_deferred("_assert_current_playtest_lab")
 
+	var run_complete_cb := Callable(self, "_on_current_run_completed")
+	if not run_completed.is_connected(run_complete_cb):
+		run_completed.connect(run_complete_cb)
+
 	set_player_scene(CURRENT_PLAYER_SCENE)
 	print("[OathboundGameFlow] canonical Player factory -> res://Player/aspect_player.tscn")
 
 
 func _assert_current_relic_runtime() -> void:
 	_assert_autoload_script("RelicRuntime", EXPECTED_RELIC_RUNTIME_SCRIPT, false)
+
+
+func _assert_current_corruption_runtime() -> void:
+	_assert_autoload_script("CorruptionRuntime", EXPECTED_CORRUPTION_RUNTIME_SCRIPT, false)
 
 
 func _assert_current_prosthetic_manager() -> void:
@@ -71,9 +82,12 @@ func _assert_autoload_script(autoload_name: String, expected_script: String, war
 
 
 func start_run() -> void:
+	var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else 1
+	var corruption_runtime: Node = _corruption_runtime()
+	if corruption_runtime != null and corruption_runtime.has_method("on_new_run"):
+		corruption_runtime.call("on_new_run", area_id)
 	var relic_runtime: Node = _relic_runtime()
 	if relic_runtime != null and relic_runtime.has_method("on_new_run"):
-		var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else 1
 		relic_runtime.call("on_new_run", area_id)
 	super.start_run()
 
@@ -115,15 +129,23 @@ func _load_current_room() -> void:
 	if player != null and is_instance_valid(player):
 		_record_player_runtime("player_factory_assigned", player)
 
+	var room_token: String = str(route[current_index]) if current_index >= 0 and current_index < route.size() else ""
+	var corruption_runtime: Node = _corruption_runtime()
+	if corruption_runtime != null and corruption_runtime.has_method("on_room_entered"):
+		corruption_runtime.call("on_room_entered", room_token)
+
 	var relic_runtime: Node = _relic_runtime()
 	if relic_runtime != null and relic_runtime.has_method("on_room_entered"):
 		var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else current_area
-		var room_token: String = str(route[current_index]) if current_index >= 0 and current_index < route.size() else ""
 		relic_runtime.call("on_room_entered", player, area_id, room_token)
 
 
 func _on_room_cleared(room: Node) -> void:
 	var room_token: String = str(route[current_index]) if current_index >= 0 and current_index < route.size() else ""
+	var corruption_runtime: Node = _corruption_runtime()
+	if corruption_runtime != null and corruption_runtime.has_method("on_room_cleared"):
+		corruption_runtime.call("on_room_cleared", room_token)
+
 	var base_key: String = RouteGenerator.get_base_room_type(room_token).to_lower() if not room_token.is_empty() else ""
 	if base_key == "combat":
 		var relic_runtime: Node = _relic_runtime()
@@ -131,6 +153,14 @@ func _on_room_cleared(room: Node) -> void:
 			var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else current_area
 			relic_runtime.call("on_combat_room_cleared", area_id, room_token)
 	await super._on_room_cleared(room)
+
+
+func _on_current_run_completed(area_id: int) -> void:
+	if area_id < max_area:
+		return
+	var corruption_runtime: Node = _corruption_runtime()
+	if corruption_runtime != null and corruption_runtime.has_method("on_successful_run_completed"):
+		corruption_runtime.call("on_successful_run_completed")
 
 
 func _advance_to_next_area() -> void:
@@ -193,3 +223,7 @@ func _script_path(instance: Object) -> String:
 
 func _relic_runtime() -> Node:
 	return get_node_or_null("/root/RelicRuntime")
+
+
+func _corruption_runtime() -> Node:
+	return get_node_or_null("/root/CorruptionRuntime")

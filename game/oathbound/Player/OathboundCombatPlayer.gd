@@ -2,13 +2,14 @@ extends "res://Player/OathboundAspectPlayerRuntime.gd"
 
 ## Final current Player integration layer.
 ## Owns current defensive aim/deathblow compatibility, canonical Prosthetic execution,
-## and Player-side Relic hooks without changing the imported base scene.
+## Player-side Relic hooks, and Corruption combat/lifecycle credit.
 
 const DEFENSIVE_AIM_MIN_DISTANCE: float = 6.0
 const CURRENT_PROSTHETIC_EXECUTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticExecutor.gd")
 const EXPECTED_PROSTHETIC_EXECUTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticExecutor.gd"
 const CURRENT_RUN_HUD_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundRunHUD.gd")
 const EXPECTED_RUN_HUD_SCRIPT: String = "res://Core/Prosthetics/OathboundRunHUD.gd"
+const EXPECTED_CORRUPTION_RUNTIME_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionRuntime.gd"
 const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
 
@@ -28,7 +29,8 @@ func _ready() -> void:
 	_refresh_relic_capacity(true)
 	_capture_run_start_capacity()
 	_assert_relic_runtime()
-	print("[OathboundCombatPlayer] v1.4 - canonical Aspect Player + defense/deathblow/Prosthetic/Relic bridge")
+	_assert_corruption_runtime()
+	print("[OathboundCombatPlayer] v1.5 - canonical Aspect Player + defense/deathblow/Prosthetic/Relic/Corruption bridge")
 
 
 func _install_current_run_hud() -> void:
@@ -188,39 +190,78 @@ func _assert_relic_runtime() -> void:
 		})
 
 
+func _assert_corruption_runtime() -> void:
+	var runtime: Node = _corruption_runtime()
+	if runtime == null:
+		push_error("[OathboundCombatPlayer] CorruptionRuntime missing")
+		return
+	var script_path: String = ""
+	var script_value: Variant = runtime.get_script()
+	if script_value is Script:
+		script_path = (script_value as Script).resource_path
+	print("[OathboundCombatPlayer] corruption_runtime script=%s awakened=%s" % [script_path, str(runtime.call("is_awakened"))])
+	if script_path != EXPECTED_CORRUPTION_RUNTIME_SCRIPT:
+		push_error("[OathboundCombatPlayer] Wrong CorruptionRuntime script: %s" % script_path)
+
+
 # =============================================================================
-# RELIC COMBAT EVENTS
+# RELIC / CORRUPTION COMBAT EVENTS
 # =============================================================================
 
 func take_damage(amount: int, show_feedback: bool = true) -> void:
 	var hp_before: int = int(hp)
 	var actual_damage: int = maxi(0, amount - int(armor))
-	var runtime: Node = _relic_runtime()
-	if runtime != null and runtime.has_method("try_last_oath"):
-		var survivor_hp: int = int(runtime.call("try_last_oath", hp_before, actual_damage))
+	var relic_runtime: Node = _relic_runtime()
+	if relic_runtime != null and relic_runtime.has_method("try_last_oath"):
+		var survivor_hp: int = int(relic_runtime.call("try_last_oath", hp_before, actual_damage))
 		if survivor_hp >= 0:
 			hp = mini(int(maxhp), survivor_hp)
-			if actual_damage > 0 and runtime.has_method("on_player_health_damage"):
-				runtime.call("on_player_health_damage", actual_damage)
+			if actual_damage > 0 and relic_runtime.has_method("on_player_health_damage"):
+				relic_runtime.call("on_player_health_damage", actual_damage)
 			if show_feedback:
 				_flash_player(Color(1, 0.3, 0.3), 0.12)
 				_shake_camera(SHAKE_MEDIUM, 0.12)
 			_update_health_bar()
 			return
 
+	# Last Oath has already had the chance to convert lethal damage. Only a genuinely
+	# lethal hit reaches the Corruption death/awakening transition.
+	if hp_before > 0 and actual_damage >= hp_before:
+		var corruption_runtime: Node = _corruption_runtime()
+		if corruption_runtime != null and corruption_runtime.has_method("on_player_death"):
+			corruption_runtime.call("on_player_death")
+
 	super.take_damage(amount, show_feedback)
 	var hp_lost: int = maxi(0, hp_before - int(hp))
-	if hp_lost > 0 and runtime != null and runtime.has_method("on_player_health_damage"):
-		runtime.call("on_player_health_damage", hp_lost)
+	if hp_lost > 0 and relic_runtime != null and relic_runtime.has_method("on_player_health_damage"):
+		relic_runtime.call("on_player_health_damage", hp_lost)
 
 
 func _try_deathblow() -> bool:
+	var target: Node = _get_deathblow_target()
 	var started: bool = super._try_deathblow()
 	if started:
-		var runtime: Node = _relic_runtime()
-		if runtime != null and runtime.has_method("on_deathblow"):
-			runtime.call("on_deathblow", self)
+		var corruption_runtime: Node = _corruption_runtime()
+		if corruption_runtime != null and corruption_runtime.has_method("on_deathblow"):
+			corruption_runtime.call("on_deathblow", target)
+		var relic_runtime: Node = _relic_runtime()
+		if relic_runtime != null and relic_runtime.has_method("on_deathblow"):
+			relic_runtime.call("on_deathblow", self)
 	return started
+
+
+func _handle_parry_success(area: Area2D, attacker: Node, dmg_type: String, atk_pos: Vector2, is_perfect: bool) -> void:
+	super._handle_parry_success(area, attacker, dmg_type, atk_pos, is_perfect)
+	var runtime: Node = _corruption_runtime()
+	if runtime != null and runtime.has_method("on_successful_parry"):
+		runtime.call("on_successful_parry")
+
+
+func _handle_grace_parry(area: Area2D, attacker: Node, dmg_type: String, atk_pos: Vector2) -> void:
+	super._handle_grace_parry(area, attacker, dmg_type, atk_pos)
+	var runtime: Node = _corruption_runtime()
+	if runtime != null and runtime.has_method("on_successful_parry"):
+		runtime.call("on_successful_parry")
 
 
 func _try_activate_blood_art() -> void:
@@ -343,3 +384,7 @@ func _record_guard_aim(source: String) -> void:
 
 func _relic_runtime() -> Node:
 	return get_node_or_null("/root/RelicRuntime")
+
+
+func _corruption_runtime() -> Node:
+	return get_node_or_null("/root/CorruptionRuntime")
