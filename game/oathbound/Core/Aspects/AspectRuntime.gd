@@ -42,7 +42,7 @@ func _process(_delta: float) -> void:
 # =============================================================================
 
 func select_aspect(aspect: String) -> bool:
-	var normalized := aspect.to_lower()
+	var normalized: String = aspect.to_lower()
 	if normalized not in CATALOG.ASPECTS:
 		return false
 	selected_aspect = normalized
@@ -111,7 +111,7 @@ func blood_state() -> String:
 func add_blood(amount: float, source: String = "combat") -> void:
 	if amount <= 0.0 or tier < 2 or blood_art_resolving:
 		return
-	var before := blood
+	var before: float = blood
 	blood = minf(BLOOD_MAX, blood + amount)
 	if blood > before:
 		_emit_state()
@@ -143,18 +143,18 @@ func record_deathblow() -> void:
 # =============================================================================
 
 func transform_sword_contact(area: Area2D, target: Node, attacker: Node, event: Dictionary) -> Dictionary:
-	var out := event.duplicate(true)
+	var out: Dictionary = event.duplicate(true)
 	if not _is_current_player_sword(area, attacker):
 		return out
 	if selected_aspect != CATALOG.WRAITH or tier < 3 or not bool(area.get_meta("aspect_passage", false)):
 		return out
 
-	var token := str(area.get_meta("swing_token", "%d" % area.get_instance_id()))
+	var token: String = str(area.get_meta("swing_token", "%d" % area.get_instance_id()))
 	var data: Dictionary = _passage_actions.get(token, {"targets": []})
-	var target_id := target.get_instance_id() if is_instance_valid(target) else 0
+	var target_id: int = target.get_instance_id() if is_instance_valid(target) else 0
 	if target_id in data["targets"]:
 		return out
-	var index := data["targets"].size()
+	var index: int = int(data["targets"].size())
 	data["targets"].append(target_id)
 	data["time"] = Time.get_ticks_msec() * 0.001
 	_passage_actions[token] = data
@@ -173,16 +173,16 @@ func transform_sword_contact(area: Area2D, target: Node, attacker: Node, event: 
 func record_sword_contact(target: Node, area: Area2D, attacker: Node, before_hp: float, before_posture: float) -> void:
 	if not _is_current_player_sword(area, attacker) or not is_instance_valid(target):
 		return
-	var after_hp := _read_hp(target)
-	var after_posture := _read_posture(target)
-	var actual_health := maxf(0.0, before_hp - after_hp)
-	var actual_posture := maxf(0.0, after_posture - before_posture)
-	var trigger := str(area.get_meta("action_trigger", ""))
-	var attack_id := str(area.get_meta("attack_id", ""))
+	var after_hp: float = _read_hp(target)
+	var after_posture: float = _read_posture(target)
+	var actual_health: float = maxf(0.0, before_hp - after_hp)
+	var actual_posture: float = maxf(0.0, after_posture - before_posture)
+	var trigger: String = str(area.get_meta("action_trigger", ""))
+	var attack_id: String = str(area.get_meta("attack_id", ""))
 
 	# Wraith Spectral Edge is direct posture/guard pressure from the originating katana
 	# action and therefore contributes to Blood like other direct Aspect-owned pressure.
-	var spectral_bonus := _apply_wraith_spectral_edge(target, area, attacker, attack_id)
+	var spectral_bonus: float = _apply_wraith_spectral_edge(target, area, attacker, attack_id)
 	actual_posture += spectral_bonus
 
 	if bool(area.get_meta("blood_generation", true)) and not bool(area.get_meta("aspect_secondary_contact", false)):
@@ -190,12 +190,12 @@ func record_sword_contact(target: Node, area: Area2D, attacker: Node, before_hp:
 	elif bool(area.get_meta("blood_generation", true)):
 		_record_damage_blood(area, target, actual_health, actual_posture, true)
 
-	var token := str(area.get_meta("swing_token", "%d" % area.get_instance_id()))
+	var token: String = str(area.get_meta("swing_token", "%d" % area.get_instance_id()))
 	if trigger == "counter" and not _counter_bonus_tokens.has(token):
 		_counter_bonus_tokens[token] = Time.get_ticks_msec() * 0.001
 		add_blood(2.0, "parry_counter")
 
-	var posture_max := _read_posture_max(target)
+	var posture_max: float = _read_posture_max(target)
 	if before_posture < posture_max - 0.001 and after_posture >= posture_max - 0.001:
 		add_blood(4.0, "enemy_posture_break")
 
@@ -204,22 +204,22 @@ func record_sword_contact(target: Node, area: Area2D, attacker: Node, before_hp:
 func _record_damage_blood(area: Area2D, target: Node, health: float, posture: float, forced_secondary: bool = false) -> void:
 	if health <= 0.0 and posture <= 0.0:
 		return
-	var raw := (health * 0.035 + posture * 0.015) * CATALOG.blood_multiplier(selected_aspect)
+	var raw: float = (health * 0.035 + posture * 0.015) * CATALOG.blood_multiplier(selected_aspect)
 	if raw <= 0.0:
 		return
-	var token := str(area.get_meta("swing_token", "%d" % area.get_instance_id()))
+	var token: String = str(area.get_meta("swing_token", "%d" % area.get_instance_id()))
 	var data: Dictionary = _blood_actions.get(token, {"targets": [], "primary": 0.0, "awarded": 0.0, "time": 0.0})
-	var target_id := target.get_instance_id()
+	var target_id: int = target.get_instance_id()
 	if target_id in data["targets"]:
 		return
-	var secondary := forced_secondary or not data["targets"].is_empty()
+	var secondary: bool = forced_secondary or not data["targets"].is_empty()
 	data["targets"].append(target_id)
 	if not secondary:
 		data["primary"] = raw
-	var scaled := raw * (0.35 if secondary else 1.0)
-	var cap := maxf(raw, float(data.get("primary", raw))) * 1.5
-	var room := maxf(0.0, cap - float(data.get("awarded", 0.0)))
-	var award := minf(scaled, room)
+	var scaled: float = raw * (0.35 if secondary else 1.0)
+	var cap: float = maxf(raw, float(data.get("primary", raw))) * 1.5
+	var room: float = maxf(0.0, cap - float(data.get("awarded", 0.0)))
+	var award: float = minf(scaled, room)
 	data["awarded"] = float(data.get("awarded", 0.0)) + award
 	data["time"] = Time.get_ticks_msec() * 0.001
 	_blood_actions[token] = data
@@ -236,12 +236,12 @@ func _apply_wraith_spectral_edge(target: Node, area: Area2D, attacker: Node, att
 		return 0.0
 	if not (target is Node2D) or not (attacker is Node2D):
 		return 0.0
-	var min_range := float(area.get_meta("spectral_min_range", 0.0))
+	var min_range: float = float(area.get_meta("spectral_min_range", 0.0))
 	if min_range <= 0.0 or (target as Node2D).global_position.distance_to((attacker as Node2D).global_position) < min_range:
 		return 0.0
-	var pct := [0.0, 0.15, 0.20, 0.25, 0.30][clampi(tier, 0, 4)]
-	var base_posture := float(area.get_meta("posture_damage", 0.0))
-	var bonus := base_posture * pct
+	var pct: float = float([0.0, 0.15, 0.20, 0.25, 0.30][clampi(tier, 0, 4)])
+	var base_posture: float = float(area.get_meta("posture_damage", 0.0))
+	var bonus: float = base_posture * pct
 	_apply_posture(target, bonus, "spectral_edge")
 	_record("spectral_edge", {"target": target.get_instance_id(), "bonus_posture": bonus, "tier": tier})
 	return bonus
@@ -263,17 +263,17 @@ func _apply_post_contact_tier_effects(target: Node, area: Area2D, attacker: Node
 func _apply_shattering_wake(primary: Node, area: Area2D, attacker: Node) -> void:
 	if not (primary is Node2D) or not (attacker is Node2D):
 		return
-	var direction := ((primary as Node2D).global_position - (attacker as Node2D).global_position).normalized()
+	var direction: Vector2 = ((primary as Node2D).global_position - (attacker as Node2D).global_position).normalized()
 	if direction.length_squared() <= 0.001:
 		return
-	var origin := (primary as Node2D).global_position
-	var source_health := int(area.get_meta("health_damage", 0))
-	var source_posture := float(area.get_meta("posture_damage", 0.0))
+	var origin: Vector2 = (primary as Node2D).global_position
+	var source_health: int = int(area.get_meta("health_damage", 0))
+	var source_posture: float = float(area.get_meta("posture_damage", 0.0))
 	for enemy in _enemy_nodes():
 		if enemy == primary or not (enemy is Node2D) or _is_dead(enemy):
 			continue
-		var offset := (enemy as Node2D).global_position - origin
-		var dist := offset.length()
+		var offset: Vector2 = (enemy as Node2D).global_position - origin
+		var dist: float = offset.length()
 		if dist <= 1.0 or dist > 120.0 or direction.dot(offset.normalized()) < 0.72:
 			continue
 		_apply_health(enemy, int(round(source_health * 0.50)), "shattering_wake")
@@ -297,7 +297,7 @@ func resolve_wolf_blood_fang(player: Node, direction: Vector2) -> void:
 	if not is_instance_valid(player):
 		finish_blood_art()
 		return
-	var target := _nearest_enemy(_position(player), null, 62.0)
+	var target: Node = _nearest_enemy(_position(player), null, 62.0)
 	if target != null:
 		_apply_health(target, 36, "wolf_blood_fang")
 		_apply_posture(target, 40.0, "wolf_blood_fang")
@@ -314,8 +314,8 @@ func begin_wraith_reach(player: Node, direction: Vector2) -> void:
 	for enemy in _enemies_in_front(_position(player), direction, 105.0, 0.35):
 		_apply_health(enemy, 8, "wraith_reach_sweep")
 		_apply_posture(enemy, 22.0, "wraith_reach_sweep")
-	var origin := _position(player)
-	var fixed_direction := direction.normalized()
+	var origin: Vector2 = _position(player)
+	var fixed_direction: Vector2 = direction.normalized()
 	get_tree().create_timer(WRAITH_ECHO_DELAY).timeout.connect(func():
 		for enemy in _enemies_in_corridor(origin, fixed_direction, WRAITH_CORRIDOR_LENGTH, WRAITH_CORRIDOR_HALF_WIDTH):
 			_apply_health(enemy, 14, "wraith_reach_echo")
@@ -327,7 +327,7 @@ func begin_wraith_reach(player: Node, direction: Vector2) -> void:
 func begin_ronin_falling_mountain(player: Node) -> void:
 	if not is_instance_valid(player):
 		return
-	var current_posture := float(player.get("stagger")) if player.get("stagger") != null else 0.0
+	var current_posture: float = float(player.get("stagger")) if player.get("stagger") != null else 0.0
 	player.set("stagger", maxf(0.0, current_posture - 35.0))
 	_record("ronin_falling_mountain_posture_clear", {"before": current_posture, "after": float(player.get("stagger"))})
 
@@ -361,7 +361,7 @@ func _is_current_player_sword(area: Area2D, attacker: Node) -> bool:
 	return area.has_meta("attack_id")
 
 func _apply_to_live_player() -> void:
-	var player := get_tree().get_first_node_in_group("player")
+	var player: Node = get_tree().get_first_node_in_group("player")
 	if player != null and player.has_method("apply_aspect_configuration"):
 		player.call_deferred("apply_aspect_configuration")
 
@@ -375,11 +375,11 @@ func _clear_contact_cache() -> void:
 	_counter_bonus_tokens.clear()
 
 func _cleanup_action_cache() -> void:
-	var now := Time.get_ticks_msec() * 0.001
+	var now: float = Time.get_ticks_msec() * 0.001
 	for table in [_blood_actions, _passage_actions, _counter_bonus_tokens]:
 		for key in table.keys():
 			var value = table[key]
-			var timestamp := float(value.get("time", 0.0)) if value is Dictionary else float(value)
+			var timestamp: float = float(value.get("time", 0.0)) if value is Dictionary else float(value)
 			if now - timestamp > 3.0:
 				table.erase(key)
 
@@ -388,14 +388,14 @@ func _read_hp(target: Node) -> float:
 	return float(value) if value != null else 0.0
 
 func _read_posture(target: Node) -> float:
-	var combat := target.get_node_or_null("Combat")
+	var combat: Node = target.get_node_or_null("Combat")
 	if combat != null and combat.get("posture") != null:
 		return float(combat.get("posture"))
 	var value = target.get("stagger")
 	return float(value) if value != null else 0.0
 
 func _read_posture_max(target: Node) -> float:
-	var combat := target.get_node_or_null("Combat")
+	var combat: Node = target.get_node_or_null("Combat")
 	if combat != null and combat.get("max_posture") != null:
 		return maxf(1.0, float(combat.get("max_posture")))
 	var value = target.get("stagger_max")
@@ -420,7 +420,7 @@ func _apply_posture(target: Node, amount: float, source: String) -> void:
 	if target.has_method("add_posture_damage"):
 		target.call("add_posture_damage", amount)
 	else:
-		var combat := target.get_node_or_null("Combat")
+		var combat: Node = target.get_node_or_null("Combat")
 		if combat != null and combat.has_method("add_posture"):
 			combat.call("add_posture", amount)
 	_record("aspect_posture_damage", {"source": source, "amount": amount, "target": target.get_instance_id()})
@@ -448,28 +448,28 @@ func _nearby_enemies(position: Vector2, exclude: Node, radius: float, limit: int
 	return out
 
 func _nearest_enemy(position: Vector2, exclude: Node, radius: float) -> Node:
-	var out := _nearby_enemies(position, exclude, radius, 1)
+	var out: Array[Node] = _nearby_enemies(position, exclude, radius, 1)
 	return out[0] if not out.is_empty() else null
 
 func _enemies_in_front(origin: Vector2, direction: Vector2, radius: float, min_dot: float) -> Array[Node]:
 	var out: Array[Node] = []
-	var facing := direction.normalized()
+	var facing: Vector2 = direction.normalized()
 	for enemy in _nearby_enemies(origin, null, radius, 12):
-		var offset := _position(enemy) - origin
+		var offset: Vector2 = _position(enemy) - origin
 		if offset.length_squared() > 0.001 and facing.dot(offset.normalized()) >= min_dot:
 			out.append(enemy)
 	return out
 
 func _enemies_in_corridor(origin: Vector2, direction: Vector2, length: float, half_width: float) -> Array[Node]:
 	var out: Array[Node] = []
-	var axis := direction.normalized()
-	var perpendicular := axis.orthogonal()
+	var axis: Vector2 = direction.normalized()
+	var perpendicular: Vector2 = axis.orthogonal()
 	for enemy in _enemy_nodes():
 		if not (enemy is Node2D) or _is_dead(enemy):
 			continue
-		var offset := _position(enemy) - origin
-		var forward := axis.dot(offset)
-		var lateral := absf(perpendicular.dot(offset))
+		var offset: Vector2 = _position(enemy) - origin
+		var forward: float = axis.dot(offset)
+		var lateral: float = absf(perpendicular.dot(offset))
 		if forward >= 0.0 and forward <= length and lateral <= half_width:
 			out.append(enemy)
 	return out
@@ -508,7 +508,7 @@ func _build_hud() -> void:
 func _refresh_hud() -> void:
 	if _hud_label == null:
 		return
-	var aspect_name := selected_aspect.capitalize()
+	var aspect_name: String = selected_aspect.capitalize()
 	if tier < 2:
 		_hud_label.text = "%s  T%d | Blood: locked" % [aspect_name, tier]
 	else:
@@ -517,7 +517,7 @@ func _refresh_hud() -> void:
 func _record(event_name: String, data: Dictionary) -> void:
 	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
 		return
-	var payload := data.duplicate(true)
+	var payload: Dictionary = data.duplicate(true)
 	payload["aspect"] = selected_aspect
 	payload["tier"] = tier
 	payload["blood"] = blood
