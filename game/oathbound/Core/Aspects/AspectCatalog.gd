@@ -3,7 +3,10 @@ class_name AspectCatalog
 
 ## Canonical first-playtest Blood Aspect weapon-kit data.
 ## Values come from docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md.
+## The empty Aspect id is the approved pre-awakening base-katana kit from
+## FIRST_ATTEMPT.md / the current core-combat controller.
 
+const NO_ASPECT := ""
 const WOLF := "wolf"
 const WRAITH := "wraith"
 const RONIN := "ronin"
@@ -11,6 +14,8 @@ const ASPECTS := [WOLF, WRAITH, RONIN]
 
 static func get_basic_profiles(aspect: String, tier: int = 0) -> Array:
 	match aspect:
+		NO_ASPECT:
+			return _base_basic_profiles()
 		WOLF:
 			return [
 				_profile("wolf_fang_slash", "Fang Slash", "basic", 12, 10.0, 14.0, 0.14, 0.08, 0.20, "attack", "slash_small", Vector2(0.92, 0.92), 22.0, 120.0, 0.15, true),
@@ -33,6 +38,8 @@ static func get_basic_profiles(aspect: String, tier: int = 0) -> Array:
 
 static func get_held_profile(aspect: String, tier: int = 0) -> Dictionary:
 	match aspect:
+		NO_ASPECT:
+			return _base_held_profile()
 		WOLF:
 			return _profile("wolf_predators_passage", "Predator's Passage", "held", 28, 30.0, 42.0, 0.45, 0.10, 0.50, "thrust", "thrust_long", Vector2(1.18, 0.75), 32.0, 500.0, 0.30, false)
 		WRAITH:
@@ -44,6 +51,8 @@ static func get_held_profile(aspect: String, tier: int = 0) -> Dictionary:
 
 static func get_dash_profile(aspect: String, tier: int = 0) -> Dictionary:
 	match aspect:
+		NO_ASPECT:
+			return _base_dash_profile()
 		WOLF:
 			return _profile("wolf_hunting_slash", "Hunting Slash", "dash", 15, 13.0, 18.0, 0.10, 0.09, 0.20, "dash_slash", "dash_forward", Vector2(1.02, 1.22), 28.0, 300.0, 0.15, true)
 		WRAITH:
@@ -55,6 +64,8 @@ static func get_dash_profile(aspect: String, tier: int = 0) -> Dictionary:
 
 static func get_counter_profile(aspect: String, tier: int = 0) -> Dictionary:
 	match aspect:
+		NO_ASPECT:
+			return _base_counter_profile()
 		WOLF:
 			return _profile("wolf_fang_reversal", "Fang Reversal", "counter", 16, 24.0, 32.0, 0.10, 0.08, 0.24, "counter_cut", "counter_short", Vector2(1.18, 1.02), 24.0, 120.0, 0.10, true)
 		WRAITH:
@@ -117,6 +128,30 @@ static func feral_bonus(combo_index: int, tier: int) -> float:
 		2: return 0.10 + tier_growth
 		3: return 0.15 + tier_growth
 	return 0.0
+
+static func _base_basic_profiles() -> Array:
+	return [
+		_base_profile({"id":"quick_slash","display_name":"Quick Slash","action_trigger":"basic","anim":"attack","anim_speed":1.08,"duration":0.36,"startup":0.055,"active":0.075,"recovery":0.19,"queue_start":0.36,"combo_start":0.46,"combo_end":0.94,"cancel_at":0.80,"lunge_start":0.055,"lunge_speed":34.0,"lunge_time":0.035,"health_damage":9,"damage":9,"posture_damage":10.0,"posture":10.0,"block_posture_damage":10.0,"stagger_level":0,"proc_coefficient":1.0,"knockback":105.0,"hitstop":0.060,"hitbox_offset":19.0,"hitbox_shape":"slash_small","hitbox_scale":Vector2(0.90,0.90),"shake":2.0,"can_combo":true}),
+		_base_profile({"id":"cross_cut","display_name":"Cross Cut","action_trigger":"basic","anim":"attack_2","anim_speed":0.90,"duration":0.46,"startup":0.085,"active":0.105,"recovery":0.24,"queue_start":0.40,"combo_start":0.50,"combo_end":0.92,"cancel_at":0.84,"lunge_start":0.085,"lunge_speed":46.0,"lunge_time":0.055,"health_damage":12,"damage":12,"posture_damage":16.0,"posture":16.0,"block_posture_damage":16.0,"stagger_level":0,"proc_coefficient":1.0,"knockback":145.0,"hitstop":0.095,"hitbox_offset":23.0,"hitbox_shape":"slash_wide","hitbox_scale":Vector2(1.25,1.08),"shake":4.0,"can_combo":true}),
+		_base_profile({"id":"heavy_cleave","display_name":"Heavy Cleave","action_trigger":"basic","anim":"attack_3","anim_speed":0.70,"duration":0.68,"startup":0.180,"active":0.135,"recovery":0.37,"queue_start":1.00,"combo_start":1.00,"combo_end":1.00,"cancel_at":0.94,"lunge_start":0.180,"lunge_speed":24.0,"lunge_time":0.085,"health_damage":21,"damage":21,"posture_damage":36.0,"posture":36.0,"block_posture_damage":36.0,"stagger_level":1,"proc_coefficient":1.0,"knockback":230.0,"hitstop":0.170,"hitbox_offset":28.0,"hitbox_shape":"cleave_heavy","hitbox_scale":Vector2(1.55,1.25),"shake":8.0,"can_combo":false}),
+	]
+
+static func _base_held_profile() -> Dictionary:
+	return _base_profile({"id":"hold_thrust","display_name":"Thrust","action_trigger":"held","anim":"thrust","anim_speed":0.96,"duration":0.58,"startup":0.135,"active":0.095,"recovery":0.29,"queue_start":1.00,"combo_start":1.00,"combo_end":1.00,"cancel_at":0.90,"lunge_start":0.130,"lunge_speed":76.0,"lunge_time":0.080,"health_damage":14,"damage":14,"posture_damage":34.0,"posture":34.0,"block_posture_damage":34.0,"stagger_level":1,"proc_coefficient":1.0,"knockback":155.0,"hitstop":0.130,"hitbox_offset":30.0,"hitbox_shape":"thrust_long","hitbox_scale":Vector2(1.00,1.00),"shake":5.5,"can_combo":false,"restart_lockout":0.18})
+
+static func _base_dash_profile() -> Dictionary:
+	return _base_profile({"id":"dash_slash","display_name":"Dash Slash","action_trigger":"dash","anim":"dash_slash","anim_speed":1.12,"duration":0.40,"startup":0.050,"active":0.085,"recovery":0.20,"queue_start":0.44,"combo_start":0.46,"combo_end":0.96,"cancel_at":0.84,"lunge_start":0.020,"lunge_speed":105.0,"lunge_time":0.110,"health_damage":9,"damage":9,"posture_damage":14.0,"posture":14.0,"block_posture_damage":14.0,"stagger_level":0,"proc_coefficient":1.0,"knockback":125.0,"hitstop":0.070,"hitbox_offset":28.0,"hitbox_shape":"dash_forward","hitbox_scale":Vector2(0.95,1.20),"shake":3.0,"can_combo":true,"restart_lockout":0.14})
+
+static func _base_counter_profile() -> Dictionary:
+	return _base_profile({"id":"counter_cut","display_name":"Counter Cut","action_trigger":"counter","anim":"counter_cut","anim_speed":1.25,"duration":0.28,"startup":0.040,"active":0.080,"recovery":0.11,"queue_start":1.00,"combo_start":1.00,"combo_end":1.00,"cancel_at":0.80,"lunge_start":0.040,"lunge_speed":54.0,"lunge_time":0.045,"health_damage":10,"damage":10,"posture_damage":24.0,"posture":24.0,"block_posture_damage":24.0,"stagger_level":1,"proc_coefficient":1.0,"knockback":120.0,"hitstop":0.105,"hitbox_offset":21.0,"hitbox_shape":"counter_short","hitbox_scale":Vector2(1.10,1.00),"shake":4.5,"can_combo":false,"restart_lockout":0.10})
+
+static func _base_profile(values: Dictionary) -> Dictionary:
+	var out := values.duplicate(true)
+	out["blood_generation"] = false
+	out["spectral_min_range"] = 0.0
+	out["spectral_edge"] = false
+	out["aspect_passage"] = false
+	return out
 
 static func _profile(id: String, display_name: String, trigger: String, health: int, posture: float, block_posture: float, startup: float, active: float, recovery: float, anim: String, shape: String, scale: Vector2, offset: float, lunge_speed: float, lunge_time: float, can_combo: bool, spectral_min_range: float = 0.0, spectral_edge: bool = false) -> Dictionary:
 	var duration := startup + active + recovery
