@@ -21,6 +21,7 @@ const CURRENT_UPGRADE_SERVICE_SCRIPT: Script = preload("res://Core/Relics/Oathbo
 const EXPECTED_UPGRADE_SERVICE_SCRIPT: String = "res://Core/Relics/OathboundUpgradeService.gd"
 const CURRENT_PLAYTEST_LAB_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicPlaytestLab.gd")
 const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Relics/OathboundRelicPlaytestLab.gd"
+const RELIC_SWAP_UI_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicSwapUI.gd")
 
 
 func _ready() -> void:
@@ -59,15 +60,10 @@ func _install_current_prosthetic_manager() -> void:
 	if manager == null:
 		push_error("[OathboundGameFlow] ProstheticManager autoload missing")
 		return
-
-	var current_path: String = _script_path(manager)
-	if current_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
+	if _script_path(manager) != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
 		manager.set_script(CURRENT_PROSTHETIC_MANAGER_SCRIPT)
-		# set_script() changes the runtime authority after the imported autoload may
-		# already have initialized, so rebuild the current registry explicitly.
 		if manager.has_method("_ready"):
 			manager.call("_ready")
-
 	var installed_path: String = _script_path(manager)
 	print("[OathboundGameFlow] prosthetic_manager script=%s" % installed_path)
 	if installed_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
@@ -174,6 +170,40 @@ func _on_room_cleared(room: Node) -> void:
 			var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else current_area
 			relic_runtime.call("on_combat_room_cleared", area_id, room_token)
 	await super._on_room_cleared(room)
+
+
+func _advance_to_next_area() -> void:
+	# RELICS.md explicitly allows a safe Relic swap after Keeper and after Twin Maws.
+	# Offer the already-unlocked collection before the parent transitions areas.
+	var completed_area: int = current_area
+	if completed_area == 1:
+		await _offer_safe_relic_swap("keeper_transition")
+	elif completed_area == 2:
+		await _offer_safe_relic_swap("twin_transition")
+	await super._advance_to_next_area()
+
+
+func _offer_safe_relic_swap(context: String) -> void:
+	var runtime: Node = _relic_runtime()
+	if runtime == null:
+		return
+	var unlocked_value: Variant = runtime.get("unlocked_relics")
+	if not (unlocked_value is Dictionary) or (unlocked_value as Dictionary).is_empty():
+		return
+
+	var ui_value: Variant = RELIC_SWAP_UI_SCRIPT.new()
+	if not (ui_value is CanvasLayer):
+		push_error("[OathboundGameFlow] Could not instantiate Relic safe-swap UI")
+		return
+	var ui: CanvasLayer = ui_value as CanvasLayer
+	get_tree().root.add_child(ui)
+	if not ui.has_method("present") or not ui.has_signal("selection_finished"):
+		ui.queue_free()
+		push_error("[OathboundGameFlow] Relic safe-swap UI contract invalid")
+		return
+	var finished_signal := Signal(ui, &"selection_finished")
+	ui.call("present", context)
+	await finished_signal
 
 
 func _record_player_runtime(event_name: String, instance: Node) -> void:
