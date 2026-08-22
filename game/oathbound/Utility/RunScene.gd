@@ -12,13 +12,8 @@ func _ready() -> void:
 	print("[RunScene] _ready() — paused=%s container=%s" % [get_tree().paused, $RoomContainer])
 
 	GameFlow.setup($RoomContainer)
-
-	# There is one canonical Player scene. It directly uses OathboundPlayer.gd.
-	var player_scene = "res://Player/player.tscn"
-	if ResourceLoader.exists(player_scene):
-		var packed: PackedScene = load(player_scene)
-		var p = packed.instantiate()
-		GameFlow.set_player(p)
+	# Do not instantiate a Player here. OathboundGameFlow is the single current Player
+	# factory and will create res://Player/aspect_player.tscn when the first room loads.
 
 	# Connect signals
 	if not GameFlow.is_connected("room_changed", Callable(self, "_on_room_changed")):

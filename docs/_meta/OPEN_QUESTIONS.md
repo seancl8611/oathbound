@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-21
+last_reviewed: 2026-08-22
 topics:
   - open-questions
   - implementation-readiness
@@ -50,7 +50,9 @@ The former delta-audit gate has materially been executed through the implementat
 - canonical persistent Mist / Scroll / boss-material ownership and Bloodwell structure;
 - the current 50-Technique catalog, no-slot acquisition model, eligibility, rarity/source weighting, rerolls, and reward UI;
 - first-playtest Echo / Rupture / Seal / Rift / Crimson combat execution;
-- first-playtest Wolf / Wraith / Ronin weapon kits, Tier 0-IV runtime rules, shared Blood generation, and Blood Arts.
+- first-playtest Wolf / Wraith / Ronin weapon kits, Tier 0-IV runtime rules, shared Blood generation, and Blood Arts;
+- current Prosthetic roster, Spirit runtime, permanent upgrade contract, and test controls;
+- current persistent Relic slot/mastery/effect runtime, Forge management, safe swap windows, and current Shop economy surface.
 
 Do not return to a broad audit as a prerequisite for ordinary implementation. Remaining mismatches should be handled in dependency-sized implementation packages and documented when found.
 
@@ -60,11 +62,11 @@ Do not return to a broad audit as a prerequisite for ordinary implementation. Re
 
 The active implementation order is now:
 
-1. **Technique runtime stabilization** — the five canonical families, mixed-family interactions, universal action triggers, reward acquisition, and long-run cleanup are implemented at first-playtest depth. `TECHNIQUE_RUNTIME_IMPLEMENTATION.md` records the boundary; remaining work is runtime validation/tuning rather than another design pass.
-2. **Blood Aspect runtime reconciliation** — Wolf / Wraith / Ronin now have current Tier 0 weapon kits, Tier I-IV mechanics, shared action-trigger metadata, applied-result Blood generation, Blood Arts, and debug Tier/Blood controls. `ASPECT_RUNTIME_IMPLEMENTATION.md` records the boundary. Natural Tier advancement intentionally waits for the approved Corruption Shrine Embrace caller.
-3. **Current Prosthetic runtime reconciliation — NEXT IMPLEMENTATION PACKAGE** — preserve the approved equipped-tool behavior and Spirit contract while retiring superseded imported Prosthetic assumptions/call paths.
-4. **Relic runtime reconciliation** — connect the approved run-scoped passive rules and acquisition/source behavior.
-5. **Corruption / Shrine integration** — replace remaining prototype state with the approved Resist / Embrace flow, have Embrace call the existing Aspect Tier API, empty Corruption correctly, and connect related HUD feedback. Blood itself is already owned by the Aspect runtime rather than this later package.
+1. **Technique runtime stabilization — IMPLEMENTED / VALIDATION-TUNING** — the five canonical families, mixed-family interactions, universal action triggers, reward acquisition, and long-run cleanup are implemented at first-playtest depth. `TECHNIQUE_RUNTIME_IMPLEMENTATION.md` records the boundary; remaining work is runtime validation/tuning rather than another design pass.
+2. **Blood Aspect runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — Wolf / Wraith / Ronin have current Tier 0 weapon kits, Tier I-IV mechanics, shared action-trigger metadata, applied-result Blood generation, Blood Arts, and debug Tier/Blood controls. `ASPECT_RUNTIME_IMPLEMENTATION.md` records the boundary. Natural Tier advancement intentionally waits for the approved Corruption Shrine Embrace caller.
+3. **Current Prosthetic runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — the current eight-tool roster, 100-Spirit runtime, permanent upgrade contract, Shop/HUD integration surface, and focused Playtest Lab controls are implemented on the current stack. Remaining work is long-run interaction validation rather than reopening Prosthetic planning.
+4. **Relic runtime reconciliation — IMPLEMENTED ON CURRENT STACK / VALIDATION-TUNING** — the one-slot persistent runtime, ten approved launch effects, kill mastery, Forge management, safe Keeper/Twin swap windows, Scribe four-card rewards, current Merchant economy integration, and generic immediate-persistence discovery flow are implemented. `RELIC_RUNTIME_IMPLEMENTATION.md` records the boundary. Exact 4 / 2 / 4 Relic source identity assignment remains intentionally deferred to permanent-progression/content sequencing.
+5. **Corruption / Shrine integration — NEXT IMPLEMENTATION PACKAGE** — replace remaining prototype state with the approved Resist / Embrace flow, have Embrace call the existing Aspect Tier API, empty Corruption correctly, and connect related HUD feedback. Blood itself is already owned by the Aspect runtime rather than this later package.
 6. **First complete Hushiro run validation** — play the 12-chamber route through Keeper with the current build layer active and resolve structural/runtime defects found across the package.
 7. **Compatibility retirement** — remove old UpgradeDb/StanceEffects and other imported authorities only after no current caller requires them.
 
