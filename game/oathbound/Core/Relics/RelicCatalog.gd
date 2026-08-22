@@ -129,7 +129,7 @@ static func get_data(relic_id: String) -> Dictionary:
 	return copy
 
 
-static func get_name(relic_id: String) -> String:
+static func get_display_name(relic_id: String) -> String:
 	return str(DATA.get(relic_id, {}).get("name", relic_id))
 
 
