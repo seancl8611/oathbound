@@ -5,6 +5,7 @@ extends Node
 ## earned, and each regional boss has its own material instead of a generic emblem.
 
 signal persistent_resources_changed
+signal returning_blood_awakened_changed(awakened: bool)
 
 const SAVE_PATH := "user://oathbound_meta_progress.cfg"
 const SAVE_SECTION := "progress"
@@ -16,6 +17,7 @@ const BOSS_MATERIAL_ECLIPSE_SHOGUN := "eclipse_shogun"
 var areas_unlocked: Array[int] = [1]
 var boss_clears := {1: false, 2: false, 3: false}
 var trainer_key_owned: bool = false
+var returning_blood_awakened: bool = false
 
 var mist: int = 0
 var scrolls: int = 0
@@ -43,6 +45,19 @@ func mark_boss_clear(id: int) -> void:
 
 func has_cleared_boss(id: int) -> bool:
 	return bool(boss_clears.get(id, false))
+
+
+func awaken_returning_blood() -> bool:
+	if returning_blood_awakened:
+		return false
+	returning_blood_awakened = true
+	_save_progress()
+	returning_blood_awakened_changed.emit(true)
+	return true
+
+
+func is_returning_blood_awakened() -> bool:
+	return returning_blood_awakened
 
 
 func add_mist(amount: int) -> void:
@@ -111,6 +126,7 @@ func get_resource_snapshot() -> Dictionary:
 		"mist": mist,
 		"scrolls": scrolls,
 		"boss_materials": boss_materials.duplicate(true),
+		"returning_blood_awakened": returning_blood_awakened,
 	}
 
 
@@ -124,6 +140,7 @@ func _save_progress() -> void:
 	file.set_value(SAVE_SECTION, "areas_unlocked", areas_unlocked)
 	file.set_value(SAVE_SECTION, "boss_clears", boss_clears)
 	file.set_value(SAVE_SECTION, "trainer_key_owned", trainer_key_owned)
+	file.set_value(SAVE_SECTION, "returning_blood_awakened", returning_blood_awakened)
 	file.set_value(SAVE_SECTION, "mist", mist)
 	file.set_value(SAVE_SECTION, "scrolls", scrolls)
 	file.set_value(SAVE_SECTION, "boss_materials", boss_materials)
@@ -146,6 +163,7 @@ func _load_progress() -> void:
 		boss_clears = loaded_clears
 
 	trainer_key_owned = bool(file.get_value(SAVE_SECTION, "trainer_key_owned", trainer_key_owned))
+	returning_blood_awakened = bool(file.get_value(SAVE_SECTION, "returning_blood_awakened", returning_blood_awakened))
 	mist = maxi(0, int(file.get_value(SAVE_SECTION, "mist", 0)))
 	scrolls = maxi(0, int(file.get_value(SAVE_SECTION, "scrolls", 0)))
 

@@ -56,19 +56,22 @@ jobs:
           assert_log "current Prosthetic executor" "prosthetic_executor script=res://Core/Prosthetics/OathboundProstheticExecutor.gd"
           assert_log "current RunHUD" "run_hud script=res://Core/Prosthetics/OathboundRunHUD.gd"
           assert_log "current RelicRuntime" "relic_runtime script=res://Core/Relics/OathboundRelicRuntime.gd"
+          assert_log "current CorruptionRuntime" "corruption_runtime script=res://Core/Corruption/OathboundCorruptionRuntime.gd"
           assert_log "current UpgradeService" "upgrade_service script=res://Core/Relics/OathboundUpgradeService.gd"
-          assert_log "current PlaytestLab" "playtest_lab script=res://Core/Relics/OathboundRelicPlaytestLab.gd"
+          assert_log "current PlaytestLab" "playtest_lab script=res://Core/Corruption/OathboundCorruptionPlaytestLab.gd"
           assert_log "Prosthetics Playtest tab" "[OathboundPlaytestLab] Prosthetics tab built with 8 tools"
           assert_log "Relics Playtest tab" "[OathboundPlaytestLab] Relics tab built with 10 relics"
+          assert_log "Corruption Playtest tab" "[OathboundPlaytestLab] Corruption tab built"
           assert_log "Prosthetic registry" "[OathboundProstheticManager] registry validation PASS"
           assert_log "100-Spirit executor" "[OathboundProstheticExecutor] v1.0 - canonical 100 Spirit runtime"
           assert_log "persistent Relic runtime" "[OathboundRelicRuntime] v1.0 - one-slot persistent Relic runtime"
+          assert_log "Corruption runtime" "[OathboundCorruptionRuntime] v1.0 - 0/100 run pressure + Shrine authority"
 
           if grep -E "player_factory_(created|assigned).*OathboundPlayerStability.gd" runscene-smoke.log; then
             echo "FAIL: Legacy Stability Player was instantiated by the current run."
             exit 1
           fi
-          if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong RunHUD script|Wrong RelicRuntime script|Wrong UpgradeService script|Wrong PlaytestLab script" runscene-smoke.log; then
+          if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong RunHUD script|Wrong RelicRuntime script|Wrong CorruptionRuntime script|Wrong UpgradeService script|Wrong PlaytestLab script" runscene-smoke.log; then
             echo "FAIL: Canonical runtime ownership assertion emitted an error."
             exit 1
           fi
@@ -89,6 +92,36 @@ jobs:
           path: runscene-smoke.log
           if-no-files-found: warn
           retention-days: 7
+
+      - name: Verify Corruption state-machine contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Corruption/CorruptionRuntimeSmoke.tscn 2>&1 | tee corruption-smoke.log
+          grep -F "[CorruptionRuntimeSmoke] PASS - caps awakening support Resist Embrace Stabilize" corruption-smoke.log
+          if grep -F "SCRIPT ERROR:" corruption-smoke.log; then
+            echo "FAIL: Corruption contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" corruption-smoke.log; then
+            echo "FAIL: Corruption contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Smoke current Shrine chamber
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --quit-after 8 res://Core/Chambers/Types/ShrineChamber.tscn 2>&1 | tee shrine-smoke.log
+          grep -F "[OathboundShrine] v1.0 - Corruption support / Resist / Embrace / Stabilize" shrine-smoke.log
+          if grep -F "SCRIPT ERROR:" shrine-smoke.log; then
+            echo "FAIL: Shrine smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" shrine-smoke.log; then
+            echo "FAIL: Shrine smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
 
       - name: Smoke current Merchant chamber
         shell: bash

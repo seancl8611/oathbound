@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://di2ul2jp6hsla"]
 
-[ext_resource type="Script" path="res://Core/Chambers/Types/ShrineChamber.gd" id="1_h0jh0"]
+[ext_resource type="Script" path="res://Core/Corruption/OathboundShrineChamber.gd" id="1_h0jh0"]
 [ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_7w8e4"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_lgp4s"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="3_5mubu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_30rpd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_stwty"]
+radius = 44.0
 
 [node name="ShrineChamber" type="Node2D"]
 script = ExtResource("1_h0jh0")
@@ -54,6 +55,6 @@ shape = SubResource("CircleShape2D_stwty")
 
 [node name="Prompt" type="Label" parent="InteractShrine"]
 visible = false
-offset_right = 40.0
+offset_right = 190.0
 offset_bottom = 23.0
-text = "Press E to Pray"
+text = "Press E to approach Shrine"
