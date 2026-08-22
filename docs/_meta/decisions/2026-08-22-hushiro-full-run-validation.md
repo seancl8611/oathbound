@@ -18,19 +18,18 @@ The historical `c9f602818abc80d1c8a21ca134735a606def3885` record remains the pre
 - Pull request: `#112` — `Validate complete Hushiro route integration and restore fixed opening encounter`
 - Exact tested implementation head: `093d36bb022bd946f6bd73fd6863ee9416a2305e`
 - Validation run: GitHub Actions run `32584906486` — `success`
-- Workflow: `.github/workflows/godot-validation.yml`
-- Job: `Godot 4.7.2 Validation` (`97059708207`)
-- Deterministic Hushiro route validation: passed across 256 seeds.
-- Full Hushiro run smoke validation: passed a complete 12-counted-chamber traversal through the Chamber 12 Keeper/boss endpoint.
-- Full Hushiro determinism validation: passed.
-- Headless boot smoke: passed.
+- Workflow: `Godot 4.7.2 Project Check` in `.github/workflows/godot-project-check.yml`
+- Job: `project-check` (`97059708207`)
+- `Verify Hushiro seeded route contract`: passed deterministic Hushiro route validation across 256 seeds.
+- `Traverse one complete generated Hushiro route`: passed a complete 12-counted-chamber traversal through the Chamber 12 Keeper/boss endpoint.
+- The same exact-head job also passed Godot 4.7.2 setup/version verification, headless import, editor compile/load, current RunScene ownership smoke, Corruption state-machine verification, Shrine smoke, Merchant smoke, Forge smoke, and the Hushiro validation-log upload step.
 
 ## Gate Result
 
-This closes the Hushiro full-run validation milestone. The repository now has automated evidence for deterministic route generation over 256 seeds and a complete automated 12-chamber Hushiro traversal, with the relevant Godot 4.7.2 gate green on the exact implementation head above.
+This closes the Hushiro full-run validation milestone. The repository now has automated evidence for deterministic route generation over 256 seeds and a complete automated 12-chamber Hushiro traversal, with the current Godot 4.7.2 project gate green on the exact implementation head above.
 
 The traversal is a structural/runtime integration gate. It does not replace longer interactive playtesting for combat feel, pacing, balance, encounter pressure, or economy tuning.
 
 ## Final PR Validation
 
-This record and the implementation-queue update are documentation-only follow-up changes on PR #112. PR #112 must also pass the full `Godot 4.7.2 Validation` workflow on the new exact documentation head before it is marked ready for review.
+This record and the implementation-queue update are documentation follow-up changes on PR #112. PR #112 must also pass the full `Godot 4.7.2 Project Check` workflow on the new exact documentation head before it is marked ready for review.
