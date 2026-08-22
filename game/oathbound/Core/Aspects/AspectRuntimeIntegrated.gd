@@ -81,3 +81,32 @@ func _enforce_aspect_enemy_slow() -> void:
 			continue
 		var multiplier: float = clampf(float(enemy.get_meta("_aspect_slow_mult", 1.0)), 0.0, 1.0)
 		(enemy as CharacterBody2D).velocity *= multiplier
+
+
+# The imported AspectRuntime originally looked for a public `posture` property on the
+# Combat node. Current CombatController owns `_posture` behind get_posture(), so use
+# that shared API or Blood/posture-break accounting silently reads zero on most enemies.
+func _read_posture(target: Node) -> float:
+	if target == null:
+		return 0.0
+	var target_combat: Node = target.get_node_or_null("Combat")
+	if target_combat != null:
+		if target_combat.has_method("get_posture"):
+			return float(target_combat.call("get_posture"))
+		var internal_value: Variant = target_combat.get("_posture")
+		if internal_value != null:
+			return float(internal_value)
+	var fallback: Variant = target.get("stagger")
+	return float(fallback) if fallback != null else 0.0
+
+
+func _read_posture_max(target: Node) -> float:
+	if target == null:
+		return 100.0
+	var target_combat: Node = target.get_node_or_null("Combat")
+	if target_combat != null:
+		var cfg: CombatConfig = target_combat.get("config") as CombatConfig
+		if cfg != null:
+			return maxf(1.0, float(cfg.posture_max))
+	var fallback: Variant = target.get("stagger_max")
+	return maxf(1.0, float(fallback)) if fallback != null else 100.0
