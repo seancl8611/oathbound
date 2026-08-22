@@ -246,13 +246,28 @@ jobs:
             exit 1
           fi
 
-      - name: Smoke current Forge Relic menu
+      - name: Smoke current Forge menu
         shell: bash
         run: |
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 8 res://Core/Relics/OathboundForgeMenu.tscn 2>&1 | tee forge-smoke.log
-          grep -F "[OathboundForgeMenu] v1.0 - Forge Relic collection/mastery management" forge-smoke.log
+          grep -F "[OathboundForgeMenu] v1.1 - Scroll Prosthetics + one-slot Relic collection/mastery" forge-smoke.log
           if grep -F "SCRIPT ERROR:" forge-smoke.log; then
             echo "FAIL: Forge smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Verify Strand permanent progression contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Progression/StrandProgressionRuntimeSmoke.tscn 2>&1 | tee strand-progression-smoke.log
+          grep -F "[StrandProgressionRuntimeSmoke] PASS - Bloodwell Mirror Forge 18+9 66-Scroll 4/2/4 contract" strand-progression-smoke.log
+          if grep -F "SCRIPT ERROR:" strand-progression-smoke.log; then
+            echo "FAIL: Strand progression contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" strand-progression-smoke.log; then
+            echo "FAIL: Strand progression contract emitted a deferred-call runtime error."
             exit 1
           fi
