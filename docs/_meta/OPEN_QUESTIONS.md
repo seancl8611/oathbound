@@ -53,13 +53,14 @@ The former delta-audit gate has materially been executed through the implementat
 - first-playtest Wolf / Wraith / Ronin weapon kits, Tier 0-IV runtime rules, shared Blood generation, and Blood Arts;
 - current Prosthetic roster, Spirit runtime, permanent upgrade contract, and test controls;
 - current persistent Relic slot/mastery/effect runtime, Forge management, safe swap windows, and current Shop economy surface;
-- current run-scoped Corruption authority, first-death Returning Blood awakening, Shrine support / Resist / Embrace / Stabilize flow, and Aspect Tier advancement bridge.
+- current run-scoped Corruption authority, first-death Returning Blood awakening, Shrine support / Resist / Embrace / Stabilize flow, and Aspect Tier advancement bridge;
+- explicit first-attempt base-katana / no-Aspect runtime state and first-death handoff into pre-run Aspect selection.
 
 Do not return to a broad audit as a prerequisite for ordinary implementation. Remaining mismatches should be handled in dependency-sized implementation packages and documented when found.
 
-# Current implementation question — reconcile the first-attempt base-katana / no-Aspect boundary
+# Current implementation question — reconcile Strand / permanent progression
 
-**Question:** Does the current new-run / first-attempt runtime correctly preserve the approved pre-awakening base-katana, no-Aspect state until Returning Blood awakens the Aspect layer, without leaking post-awakening combat-loadout assumptions into that opening attempt?
+**Question:** Does the current Strand runtime implement the approved staged permanent-progression package coherently across Bloodwell, Forge, Blood Mirror, persistent resources, Prosthetic unlocks, Relic acquisition sequencing, Blood Cavern challenge rewards, and campaign save flags without leaking later-campaign systems into the opening attempt?
 
 The active implementation order is now:
 
@@ -70,13 +71,13 @@ The active implementation order is now:
 5. **Corruption / Shrine integration — IMPLEMENTED / VALIDATION-TUNING** — the approved 0 / 100 Corruption state, encounter credit/caps, first-death Returning Blood awakening, support Shrine, Resist, Embrace, Tier-IV Stabilize, awakened-only HUD state, and Aspect Tier bridge are implemented. `CORRUPTION_RUNTIME_IMPLEMENTATION.md` records the runtime contract and explicit authored-boss checkpoint boundary.
 6. **First complete Hushiro run validation — EXECUTED / VALIDATED** — PR #112 passed deterministic Hushiro route validation across 256 seeds and a complete automated 12-counted-chamber traversal through the Chamber 12 Keeper/boss endpoint on implementation head `093d36bb022bd946f6bd73fd6863ee9416a2305e`. `docs/_meta/decisions/2026-08-22-hushiro-full-run-validation.md` records the permanent evidence and validation boundary. Longer interactive playtesting remains appropriate for feel, pacing, balance, encounter pressure, and economy tuning, but this structural/runtime gate is closed.
 7. **Compatibility retirement — EXECUTED / VALIDATED** — PR #113 removes the obsolete `UpgradeDb` / `StanceEffects` prototype authorities, dead UpgradeDb item-card surface, moved Area1 prototypes, and Hushiro-only Area1 forwarding trees while preserving the canonical current runtime. The exact implementation head `bec2ab584a18233e42d495915060d17ea5a51a06` passed the full Godot 4.7.2 project gate, including canonical RunScene ownership, Corruption, the 256-seed Hushiro contract, complete 12-chamber traversal, Shrine, Merchant, and Forge validation. `docs/_meta/decisions/2026-08-22-compatibility-retirement.md` records the permanent evidence and the one explicitly contained inert imported-Archer fallback.
-8. **First-attempt base-katana / no-Aspect runtime reconciliation — NEXT** — verify and reconcile the opening-attempt combat-loadout boundary so a new run remains on the approved base-katana / no-Aspect state before Returning Blood awakening, while the existing first-death awakening cleanly hands control to the already-implemented Aspect / Corruption runtime. Keep this as a runtime-integration package: do not redesign the approved Corruption, Shrine, Aspect, Technique, or Hushiro contracts merely to make the boundary easier to implement.
+8. **First-attempt base-katana / no-Aspect runtime reconciliation — EXECUTED / VALIDATED** — PR #114 implements a genuine pre-awakening base-katana/no-Aspect state, prevents pre-awakening Tier/Blood/Aspect leakage, preserves Beast-Bane Whistle and universal Technique triggers, and adds explicit awakened Aspect selection at The Well. The exact implementation head `81c651a5e1909225f9456b6e681ae090e2b187c8` passed the full Godot 4.7.2 project gate including the focused first-attempt contract, 256-seed Hushiro route validation, complete 12-chamber traversal, Shrine, Merchant, and Forge validation. `docs/_meta/decisions/2026-08-22-first-attempt-runtime-reconciliation.md` records the permanent evidence.
+9. **Strand / permanent progression — NEXT** — reconcile the approved staged persistent-progression package across the Bloodwell, Forge, Blood Mirror, resources, unlock cadence, Relic source sequencing, Blood Cavern challenge rewards, and campaign/save flags. Preserve the approved introduction cadence: no permanent-upgrade interface on the introductory attempt, Bloodwell on first return, Blood Mirror after first Keeper defeat, later bands after Twin Maws and Shogun/first Binding clear.
 
 The goal is not to require a separate playtest after every micro-fix. Build coherent dependency-sized batches, then use longer telemetry-backed playtests to find interacting defects together. Accuracy and consistency with approved authorities still take precedence over merely increasing change volume.
 
-# Next content packages after the current-runtime integration pass
+# Next content packages after Strand / permanent progression
 
-- **Strand / permanent progression:** final Bloodwell/Blood Mirror effects and prices, Prosthetic unlock sequence, Relic source assignments, Blood Cavern trials/rewards, and save/progression flags.
 - **Yomori:** encounter pool/layout implementation, Embered Pilgrim, Rotwood Host, Twin Maws, and regional hazards.
 - **Kagutsuchi / Shogun / Heart:** encounter pool/layout implementation, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding states, both Heart forms, and first-clear/repeat-suppression differences.
 - **Authored presentation content:** exact dialogue, lore/records, achievements, tutorial/help text, ending/postgame lines, credits/legal when dependencies are known.
