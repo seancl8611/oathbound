@@ -1,10 +1,12 @@
 extends "res://Player/OathboundPlayer.gd"
 
 ## First combat-stability layer over the current Player controller.
-## Owns hard death-state behavior and authoritative block-origin resolution while the
-## larger imported LegacyPlayerController is replaced incrementally.
+## Owns hard death-state behavior, authoritative block-origin resolution, and the
+## timing bridge needed by current Technique effects while the larger imported
+## LegacyPlayerController is replaced incrementally.
 
 const DEATH_RETURN_DELAY := 0.45
+const TECHNIQUE_DEATHBLOW_GRACE := 2.0
 var _combat_dead: bool = false
 
 
@@ -12,6 +14,44 @@ func take_damage(amount: int, show_feedback: bool = true) -> void:
 	if _combat_dead:
 		return
 	super.take_damage(amount, show_feedback)
+
+
+func _try_deathblow() -> bool:
+	var started: bool = super._try_deathblow()
+	if started:
+		# Enemy scenes have different death animation/free delays. Preserve a short,
+		# explicit execution-origin window so Deathblow Techniques do not depend on the
+		# exact frame that an enemy node leaves the tree.
+		set_meta("_technique_deathblow_until", Time.get_ticks_msec() * 0.001 + TECHNIQUE_DEATHBLOW_GRACE)
+		if CombatTelemetry != null and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("player_deathblow_technique_window", {
+				"player": CombatTelemetry.snapshot_actor(self),
+				"duration": TECHNIQUE_DEATHBLOW_GRACE,
+			})
+	return started
+
+
+func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
+	# Unseen ends when an attack is committed, not when it eventually connects. Keep a
+	# one-attack pending token so that this exact attack can still earn the documented
+	# Unseen backstab payoff if it lands from behind. A miss clears the token in
+	# _end_attack().
+	if bool(get_meta("_tech_unseen_active", false)):
+		set_meta("_tech_unseen_attack_bonus_pending", true)
+		set_meta("_tech_unseen_active", false)
+		set_meta("_tech_unseen_until", 0.0)
+		modulate.a = 1.0
+		if CombatTelemetry != null and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("technique_unseen_attack_committed", {
+				"attack_id": str(profile.get("id", "")),
+			})
+	super._start_profile_attack(profile, combo_idx)
+
+
+func _end_attack() -> void:
+	super._end_attack()
+	if bool(get_meta("_tech_unseen_attack_bonus_pending", false)):
+		set_meta("_tech_unseen_attack_bonus_pending", false)
 
 
 func _die() -> void:
@@ -26,6 +66,10 @@ func _die() -> void:
 	set_invincibility(true)
 	_drop_combo()
 	_deactivate_current_attack_hitbox()
+	set_meta("_tech_unseen_attack_bonus_pending", false)
+	set_meta("_tech_unseen_active", false)
+	set_meta("_tech_unseen_until", 0.0)
+	modulate.a = 1.0
 	velocity = Vector2.ZERO
 	_move_velocity = Vector2.ZERO
 	knockback = Vector2.ZERO
