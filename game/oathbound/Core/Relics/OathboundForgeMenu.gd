@@ -1,7 +1,9 @@
 extends "res://GUI/ForgeMenu.gd"
 
-## Current Forge overlay: keeps the imported Prosthetic Forge UI as compatibility
-## presentation and adds the approved one-slot Relic collection/mastery management.
+## Canonical Forge presentation.
+## - Prosthetic unlocks/ranks use the approved persistent Scroll economy.
+## - Imported per-Prosthetic Relic sockets are suppressed.
+## - The approved one-slot Relic collection/mastery surface remains Forge-owned.
 
 const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
@@ -12,12 +14,128 @@ var _relic_detail_effect: Label
 var _relic_detail_mastery: Label
 var _relic_equip_button: Button
 var _selected_relic_id: String = ""
+var _scroll_label: Label
 
 
 func _ready() -> void:
 	super._ready()
+	_build_scroll_status()
 	_build_relic_management_overlay()
-	print("[OathboundForgeMenu] v1.0 - Forge Relic collection/mastery management")
+	if typeof(MetaProgress) == TYPE_OBJECT and MetaProgress.has_signal("persistent_resources_changed"):
+		var cb := Callable(self, "_refresh_scroll_status")
+		if not MetaProgress.is_connected("persistent_resources_changed", cb):
+			MetaProgress.connect("persistent_resources_changed", cb)
+	print("[OathboundForgeMenu] v1.1 - Scroll Prosthetics + one-slot Relic collection/mastery")
+
+
+func _build_scroll_status() -> void:
+	_scroll_label = Label.new()
+	_scroll_label.name = "ForgeScrollBalance"
+	_scroll_label.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	_scroll_label.position = Vector2(-215, 12)
+	_scroll_label.custom_minimum_size = Vector2(100, 24)
+	_scroll_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	_scroll_label.z_index = 30
+	_scroll_label.add_theme_font_size_override("font_size", 10)
+	add_child(_scroll_label)
+	_refresh_scroll_status()
+
+
+func _refresh_scroll_status() -> void:
+	if _scroll_label != null:
+		_scroll_label.text = "Scrolls: %d" % (int(MetaProgress.scrolls) if typeof(MetaProgress) == TYPE_OBJECT else 0)
+
+
+# The imported Forge exposed socketed Relics per Prosthetic. Current RELICS.md owns a
+# single player-wide Relic slot, so do not build or reveal that retired UI path.
+func _build_relic_popup() -> void:
+	pass
+
+
+func _refresh_relic_slots(_data: ProstheticData) -> void:
+	if relic_slots_container == null:
+		return
+	for child in relic_slots_container.get_children():
+		child.queue_free()
+
+
+func _show_detail_elements(visible_state: bool) -> void:
+	super._show_detail_elements(visible_state)
+	var relic_section := detail_container.get_node_or_null("RelicSection")
+	if relic_section != null:
+		relic_section.visible = false
+
+
+func _refresh_upgrades(data: ProstheticData) -> void:
+	for child in upgrade_container.get_children():
+		child.queue_free()
+
+	if data.upgrade_nodes.is_empty():
+		var empty_label := Label.new()
+		empty_label.text = "No upgrades available."
+		empty_label.add_theme_font_size_override("font_size", 9)
+		empty_label.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+		upgrade_container.add_child(empty_label)
+		return
+
+	for node_value in data.upgrade_nodes:
+		var node_data: Dictionary = node_value as Dictionary
+		var node_id := str(node_data.get("id", ""))
+		var node_name := str(node_data.get("name", node_id))
+		var node_desc := str(node_data.get("description", ""))
+		var cost: Dictionary = ProstheticManager.get_upgrade_cost(data.id, node_id)
+		var cost_scrolls := int(cost.get("scrolls", node_data.get("cost_scrolls", 0)))
+		var is_bought := bool(ProstheticManager.is_upgrade_purchased(data.id, node_id))
+		var can_buy := bool(ProstheticManager.can_purchase_upgrade(data.id, node_id))
+
+		var row_btn := Button.new()
+		row_btn.custom_minimum_size = Vector2(0, 28)
+		row_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row_btn.disabled = is_bought or not can_buy
+		row_btn.text = ""
+		var bg_col: Color = COLOR_UPGRADE_BOUGHT if is_bought else (COLOR_UPGRADE_AVAILABLE if can_buy else COLOR_UPGRADE_LOCKED)
+		var style := _make_stylebox(bg_col, 3)
+		row_btn.add_theme_stylebox_override("normal", style)
+		row_btn.add_theme_stylebox_override("disabled", style)
+		row_btn.add_theme_stylebox_override("hover", _make_stylebox(bg_col.lightened(0.1), 3))
+
+		var row_vbox := VBoxContainer.new()
+		row_vbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row_vbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		row_btn.add_child(row_vbox)
+
+		var name_lbl := Label.new()
+		name_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		name_lbl.add_theme_font_size_override("font_size", 8)
+		if is_bought:
+			name_lbl.text = node_name + "  [OWNED]"
+			name_lbl.add_theme_color_override("font_color", COLOR_EQUIPPED)
+		elif can_buy:
+			name_lbl.text = node_name
+			name_lbl.add_theme_color_override("font_color", COLOR_TEXT)
+		else:
+			name_lbl.text = node_name + "  [LOCKED]"
+			name_lbl.add_theme_color_override("font_color", COLOR_LOCKED)
+		row_vbox.add_child(name_lbl)
+
+		var info_lbl := Label.new()
+		info_lbl.text = node_desc if is_bought else "%s  |  %d Scroll%s" % [node_desc, cost_scrolls, "" if cost_scrolls == 1 else "s"]
+		info_lbl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		info_lbl.add_theme_font_size_override("font_size", 7)
+		info_lbl.add_theme_color_override("font_color", COLOR_TEXT_DIM)
+		info_lbl.clip_text = true
+		row_vbox.add_child(info_lbl)
+
+		if can_buy and not is_bought:
+			row_btn.pressed.connect(_on_current_upgrade_pressed.bind(data.id, node_id))
+		upgrade_container.add_child(row_btn)
+
+
+func _on_current_upgrade_pressed(prosthetic_id: String, upgrade_id: String) -> void:
+	if not ProstheticManager.purchase_upgrade(prosthetic_id, upgrade_id):
+		print("[OathboundForgeMenu] Cannot purchase Scroll upgrade: %s" % upgrade_id)
+	_refresh_scroll_status()
+	_refresh_detail()
 
 
 func _build_relic_management_overlay() -> void:
@@ -140,19 +258,15 @@ func _refresh_relic_list() -> void:
 		missing.text = "Relic runtime unavailable."
 		_relic_list.add_child(missing)
 		return
-	var found: bool = false
+	var found := false
 	for relic_id: String in RELIC_CATALOG.IDS:
 		if not bool(runtime.call("is_unlocked", relic_id)):
 			continue
 		found = true
 		var data: Dictionary = RELIC_CATALOG.get_data(relic_id)
-		var rank: int = int(runtime.call("get_mastery_rank", relic_id))
+		var rank := int(runtime.call("get_mastery_rank", relic_id))
 		var button := Button.new()
-		button.text = "%s%s  —  %s" % [
-			"◆ " if str(runtime.get("equipped_relic_id")) == relic_id else "",
-			str(data.get("name", relic_id)),
-			_mastery_label(rank),
-		]
+		button.text = "%s%s  —  %s" % ["◆ " if str(runtime.get("equipped_relic_id")) == relic_id else "", str(data.get("name", relic_id)), _mastery_label(rank)]
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.pressed.connect(_select_relic.bind(relic_id))
 		_relic_list.add_child(button)
@@ -178,18 +292,12 @@ func _refresh_relic_details() -> void:
 		_relic_equip_button.disabled = true
 		return
 	var data: Dictionary = RELIC_CATALOG.get_data(_selected_relic_id)
-	var rank: int = int(runtime.call("get_mastery_rank", _selected_relic_id))
-	var kills: int = int(runtime.call("get_mastery_kills", _selected_relic_id))
+	var rank := int(runtime.call("get_mastery_rank", _selected_relic_id))
+	var kills := int(runtime.call("get_mastery_kills", _selected_relic_id))
 	_relic_detail_name.text = str(data.get("name", _selected_relic_id))
 	_relic_detail_effect.text = "%s\n\nRole: %s" % [str(data.get("approved", "")), str(data.get("role", ""))]
-	_relic_detail_mastery.text = "%s | %d eligible kills\nMastery I: %d kills | Mastery II: %d kills\nCurrent first-playtest effect value: %s" % [
-		_mastery_label(rank),
-		kills,
-		RELIC_CATALOG.MASTERY_I_KILLS,
-		RELIC_CATALOG.MASTERY_II_KILLS,
-		str(runtime.call("get_effective_value", _selected_relic_id)),
-	]
-	var equipped: bool = str(runtime.get("equipped_relic_id")) == _selected_relic_id
+	_relic_detail_mastery.text = "%s | %d eligible kills\nMastery I: %d kills | Mastery II: %d kills\nCurrent first-playtest effect value: %s" % [_mastery_label(rank), kills, RELIC_CATALOG.MASTERY_I_KILLS, RELIC_CATALOG.MASTERY_II_KILLS, str(runtime.call("get_effective_value", _selected_relic_id))]
+	var equipped := str(runtime.get("equipped_relic_id")) == _selected_relic_id
 	_relic_equip_button.text = "Equipped" if equipped else "Equip Relic"
 	_relic_equip_button.disabled = equipped
 
