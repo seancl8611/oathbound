@@ -11,10 +11,13 @@ const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.ts
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
 const CURRENT_PROSTHETIC_MANAGER_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticManager.gd")
 const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticManager.gd"
+const CURRENT_ATTACK_DIRECTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundAttackDirector.gd")
+const EXPECTED_ATTACK_DIRECTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundAttackDirector.gd"
 
 
 func _ready() -> void:
 	_install_current_prosthetic_manager()
+	_install_current_attack_director()
 	set_player_scene(CURRENT_PLAYER_SCENE)
 	print("[OathboundGameFlow] canonical Player factory -> res://Player/aspect_player.tscn")
 
@@ -44,6 +47,26 @@ func _install_current_prosthetic_manager() -> void:
 	print("[OathboundGameFlow] prosthetic_manager script=%s" % installed_script_path)
 	if installed_script_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
 		push_error("[OathboundGameFlow] Wrong ProstheticManager script: %s" % installed_script_path)
+
+
+func _install_current_attack_director() -> void:
+	var director: Node = get_node_or_null("/root/AttackDir")
+	if director == null:
+		push_error("[OathboundGameFlow] AttackDir autoload missing")
+		return
+	var script_path: String = ""
+	var script_value: Variant = director.get_script()
+	if script_value is Script:
+		script_path = (script_value as Script).resource_path
+	if script_path != EXPECTED_ATTACK_DIRECTOR_SCRIPT:
+		director.set_script(CURRENT_ATTACK_DIRECTOR_SCRIPT)
+	var installed_path: String = ""
+	var installed_script: Variant = director.get_script()
+	if installed_script is Script:
+		installed_path = (installed_script as Script).resource_path
+	print("[OathboundGameFlow] attack_director script=%s" % installed_path)
+	if installed_path != EXPECTED_ATTACK_DIRECTOR_SCRIPT:
+		push_error("[OathboundGameFlow] Wrong AttackDir script: %s" % installed_path)
 
 
 func set_player_scene(scene: PackedScene) -> void:
