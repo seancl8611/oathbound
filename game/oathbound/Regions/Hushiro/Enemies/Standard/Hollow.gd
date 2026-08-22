@@ -290,10 +290,12 @@ func _on_bite_area_entered(hurtbox: Area2D) -> void:
 
 func _cleanup_attack_area() -> void:
 	if _attack_area != null and is_instance_valid(_attack_area):
-		_attack_area.monitoring = false
-		_attack_area.monitorable = false
+		# This function can be reached from Area2D area_entered callbacks (parry/hurt).
+		# Godot 4.7 forbids changing monitoring synchronously during signal traversal.
 		_attack_area.set_meta("consumed", true)
-		_attack_area.queue_free()
+		_attack_area.set_deferred("monitoring", false)
+		_attack_area.set_deferred("monitorable", false)
+		_attack_area.call_deferred("queue_free")
 	_attack_area = null
 
 
