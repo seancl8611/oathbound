@@ -43,6 +43,7 @@ jobs:
           grep -F "attack_director script=res://Core/Prosthetics/OathboundAttackDirector.gd" runscene-smoke.log
           grep -F "prosthetic_executor script=res://Core/Prosthetics/OathboundProstheticExecutor.gd" runscene-smoke.log
           grep -F "playtest_lab script=res://Core/Prosthetics/OathboundPlaytestLab.gd" runscene-smoke.log
+          grep -F "[OathboundPlaytestLab] Prosthetics tab built with 8 tools" runscene-smoke.log
           grep -F "[OathboundProstheticManager] registry validation PASS" runscene-smoke.log
           grep -F "[OathboundProstheticExecutor] v1.0 - canonical 100 Spirit runtime" runscene-smoke.log
           if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong PlaytestLab script" runscene-smoke.log; then
