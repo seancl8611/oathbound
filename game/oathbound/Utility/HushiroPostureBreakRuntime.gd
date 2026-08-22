@@ -44,13 +44,19 @@ func _physics_process(_delta: float) -> void:
 		enemy.set_meta("_oathbound_deathblow_ready", true)
 
 
+func _combat_config() -> CombatConfig:
+	if combat == null:
+		return null
+	return combat.get("config") as CombatConfig
+
+
 func _is_shared_posture_broken() -> bool:
 	if combat == null or not combat.has_method("get_posture"):
 		return false
-	var cfg_value: Variant = combat.get("config")
-	if cfg_value == null:
+	var cfg: CombatConfig = _combat_config()
+	if cfg == null:
 		return false
-	var maximum: float = float(cfg_value.get("posture_max"))
+	var maximum: float = float(cfg.posture_max)
 	var current: float = float(combat.call("get_posture"))
 	return maximum > 0.0 and current >= maximum - 0.001
 
@@ -96,9 +102,9 @@ func _forward_deathblow_window() -> void:
 	if player_combat == null or not player_combat.has_method("set_deathblow_target"):
 		return
 	var duration: float = 2.5
-	var cfg_value: Variant = combat.get("config") if combat != null else null
-	if cfg_value != null:
-		duration = float(cfg_value.get("posture_break_duration"))
+	var cfg: CombatConfig = _combat_config()
+	if cfg != null:
+		duration = float(cfg.posture_break_duration)
 	player_combat.call("set_deathblow_target", enemy, duration)
 
 
@@ -123,9 +129,9 @@ func _record(event_name: String) -> void:
 		return
 	var current: float = float(combat.call("get_posture")) if combat != null and combat.has_method("get_posture") else 0.0
 	var maximum: float = 0.0
-	var cfg_value: Variant = combat.get("config") if combat != null else null
-	if cfg_value != null:
-		maximum = float(cfg_value.get("posture_max"))
+	var cfg: CombatConfig = _combat_config()
+	if cfg != null:
+		maximum = float(cfg.posture_max)
 	CombatTelemetry.record_event(event_name, {
 		"enemy_type": enemy_type,
 		"enemy": CombatTelemetry.snapshot_actor(enemy),
