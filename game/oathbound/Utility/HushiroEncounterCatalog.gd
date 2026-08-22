@@ -7,15 +7,40 @@ class_name HushiroEncounterCatalog
 ##
 ## Imported EncounterDB remains available for unreconciled Area 2/3 content. Area 1
 ## uses this catalog directly and RunData owns the per-run seen list.
+##
+## The opening combat now has a small opening-safe pool rather than a single forced
+## template. Opening variants deliberately use only the currently stabilized
+## Swordsman/Hollow pair; later enemy types enter through the normal chamber gates.
 
 const ENCOUNTERS: Array[Dictionary] = [
 	{
 		"id": "H01_broken_patrol",
 		"name": "Broken Patrol",
 		"min_chamber": 1,
+		"opening_only": true,
 		"waves": [
 			{"groups": [{"type": "swordsman", "count": 1}, {"type": "hollow", "count": 3}]},
 			{"groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 4}]},
+		],
+	},
+	{
+		"id": "H01_scattered_stragglers",
+		"name": "Scattered Stragglers",
+		"min_chamber": 1,
+		"opening_only": true,
+		"waves": [
+			{"groups": [{"type": "hollow", "count": 4}]},
+			{"groups": [{"type": "swordsman", "count": 1}, {"type": "hollow", "count": 4}]},
+		],
+	},
+	{
+		"id": "H01_split_watch",
+		"name": "Split Watch",
+		"min_chamber": 1,
+		"opening_only": true,
+		"waves": [
+			{"groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
+			{"groups": [{"type": "swordsman", "count": 1}, {"type": "hollow", "count": 4}]},
 		],
 	},
 	{
@@ -121,16 +146,18 @@ static func get_by_id(encounter_id: String) -> Dictionary:
 
 
 static func pick_for_chamber(chamber_number: int, seen_ids: Array[String]) -> Dictionary:
-	# Broken Patrol owns the first standard-combat teaching slot. The current route
-	# may still place a service room first, so use encounter history rather than the
-	# raw route index to identify the first actual combat.
-	if seen_ids.is_empty():
-		return get_by_id("H01_broken_patrol")
-
+	var first_standard_combat: bool = seen_ids.is_empty()
 	var eligible: Array[Dictionary] = []
+
 	for encounter: Dictionary in ENCOUNTERS:
 		var encounter_id: String = str(encounter.get("id", ""))
 		if seen_ids.has(encounter_id):
+			continue
+
+		var opening_only: bool = bool(encounter.get("opening_only", false))
+		if first_standard_combat and not opening_only:
+			continue
+		if not first_standard_combat and opening_only:
 			continue
 		if chamber_number < int(encounter.get("min_chamber", 1)):
 			continue

@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://cgntbdt1da8kp"]
 
-[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/Hollow.gd" id="1_lvujb"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/HollowStability.gd" id="1_lvujb"]
 [ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_2iona"]
 [ext_resource type="Texture2D" uid="uid://cr6wcjuwe3lb" path="res://Textures/Enemy/shade/walk1.png" id="3_1q121"]
 [ext_resource type="Texture2D" uid="uid://uayjsa8kkgmr" path="res://Textures/Enemy/shade/attack4.png" id="4_ul1ab"]

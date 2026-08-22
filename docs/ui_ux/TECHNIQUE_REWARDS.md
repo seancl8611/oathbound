@@ -4,15 +4,15 @@ title: Technique Rewards and Build Management
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-20
 topics:
   - techniques
   - reward-screen
-  - combat-slots
-  - replacement
+  - action-techniques
   - refinement
   - supporting-techniques
   - offer-generation
+  - rerolls
 related:
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
@@ -28,142 +28,131 @@ All Technique rewards use one shared reward-screen system regardless of source.
 
 A Technique reward may come from a combat room, Shop, Treasure, miniboss, regional boss, or another approved source. The source affects rarity / quality weighting but does not create a separate refinement-only, Legendary-only, or Supporting-only interface.
 
-The prototype reward screen presents **3 Technique choices**. `TECHNIQUES.md` owns the generation rules, including direct/flex composition, rarity weighting, refinement/replacement/Cross-family/Legendary limits, and reroll behavior.
+The prototype reward screen presents **3 Technique choices**. `TECHNIQUES.md` owns generation rules, rarity weighting, family cohesion/diversity, refinement/Cross-family/Legendary limits, and reroll behavior.
 
-## Required persistent context
+# Required persistent context
 
 Every Technique reward screen must be able to show:
 
 - active Blood Aspect and current Tier,
-- the five core combat slots: Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow,
-- owned Supporting Technique upgrades,
+- the combat-action trigger associated with an Action Technique when relevant: Basic Attack, Held Attack, Dash / Dash Attack, Parry / Counter, or Deathblow,
+- owned Supporting and Cross-family Techniques when build review is available,
 - current refinements,
 - equipped Relic,
-- rerolls remaining when available,
-- decline / fallback reward when that source allows declining,
+- Technique rerolls remaining when available,
+- decline / fallback reward when that source explicitly allows declining,
 - controller and keyboard prompts.
 
-## Technique card fields
+The five combat actions are **trigger classifications, not Technique slots**. The UI must not imply that selecting one Technique prevents later acquisition of another Technique tied to the same action.
+
+# Technique card fields
 
 Each card should communicate:
 
-- icon,
+- icon when available,
 - Technique name,
-- rarity,
-- affected combat slot when it directly modifies one,
+- rarity or Refinement state,
+- effect family or connected families,
+- affected combat-action trigger when it is an Action Technique,
 - concise practical effect description,
-- relevant prerequisite or existing-family interaction,
-- refinement or replacement state when relevant.
+- relevant prerequisite or existing-family interaction.
 
-The five effect families do not need formal player-facing names. The current family mechanics are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**; recognition should use symbol, color treatment, effect behavior, and VFX / audio language. Color cannot be the only identifier.
+The current family mechanics are **Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage**. Recognition should use symbol, color treatment, effect behavior, and VFX / audio language. Color cannot be the only identifier.
 
-## Build-stage composition
+# Screen composition
 
-The UI does not need to expose the generator's percentages, but the presented three-card screen must reflect the approved build-stage rules:
+Because Oathbound has no Technique slot system, screen composition does not depend on empty combat slots.
 
-- with **3–5 direct slots empty**, at least 2 cards are Direct offers,
-- with **1–2 direct slots empty**, at least 1 card is a Direct offer,
-- with **0 direct slots empty**, all 3 cards may be flex offers.
+A normal three-card screen should contain **at least 1 Action Technique whenever an eligible unowned Action Technique remains**, with the other cards allowed to be eligible Action, Supporting, Cross-family, refinement, or Legendary opportunities.
 
-Hushiro's fixed Chamber 1 Technique reward presents **3 Direct Techniques from different combat slots and different families** where the eligible pool allows it.
+Hushiro's fixed Chamber 1 Technique reward presents:
+
+- **3 Action Techniques**,
+- from **3 different combat-action triggers**,
+- and from **3 different families** where the eligible pool permits it.
 
 The player should not need to understand hidden generation math to understand why every displayed card is currently usable.
 
-## Empty combat slot
+# Unlimited Technique ownership
 
-When a card directly modifies an empty combat slot, confirmation fills that slot.
+There is **no global Technique inventory cap** and no per-action Technique slot.
 
-A slot may contain only one direct Technique. Choosing a Basic Attack Technique does not prevent later acquisition of Held Attack, Dash, Parry / Counter, Deathblow, or slotless Supporting Techniques.
+A player may own multiple Basic Attack Techniques, multiple Dash-related Techniques, or several Techniques tied to any other action during the same run. Each exact Technique is normally acquired once; acquisition never overwrites another Technique merely because both use the same trigger.
 
-## Filled combat slot
+The removed same-slot replacement flow must not appear in current UI.
 
-Ordinary offers do not stack a second direct Technique onto a filled slot.
+# Supporting Techniques
 
-A rare replacement offer may propose a new Technique for that same slot. Before confirmation, the interface must show:
+Supporting Techniques use no special inventory slot and are displayed only when the current build can actually use them.
 
-- current Technique,
-- proposed Technique,
-- effect and rarity differences,
-- a clear **current → replacement** comparison,
-- and the fact that the current Technique will be lost.
+The reward screen should show which owned family mechanic or interaction they deepen and why the choice is currently functional.
 
-Replacement requires explicit confirmation and is not a general free-respec system.
+# Cross-family Techniques
 
-## Supporting Techniques
-
-Supporting Techniques consume no combat slot.
-
-The reward screen should show which owned family effect or interaction they deepen and why the choice is currently useful. Supporting Techniques are never displayed when the current build cannot use them.
-
-## Cross-family Techniques
-
-Cross-family cards must clearly identify the two existing family mechanics they connect. The interface should communicate the practical interaction rather than exposing the internal 1.5× Rare-pool selection weight.
+Cross-family cards must clearly identify the two existing family mechanics they connect. The interface should communicate the practical interaction rather than exposing the internal 1.5x Rare-pool selection weight.
 
 A screen contains at most one Cross-family Technique under the prototype generator.
 
-## Refinements
+# Refinements
 
-A slotted Technique may receive at most one refinement.
+A parent Action Technique may receive at most one refinement.
 
 A refinement card must show:
 
 - the specific owned Technique being improved,
-- the current effect,
-- the refined effect,
-- and confirmation that no additional combat slot is consumed.
+- the practical refinement effect,
+- and clear Refinement labeling so it does not read as a separate full Technique.
 
-A refinement should read as a **small improvement to the same Technique**, not another Technique or a second major mechanic. A screen contains at most one refinement.
+A refinement should read as a **small improvement to the same Technique**, not another major mechanic. A screen contains at most one refinement.
 
-## Legendary / prerequisite presentation
+# Legendary / prerequisite presentation
 
 Legendary Techniques remain prerequisite-gated capstones. When an eligible Legendary appears, the UI should present it as a rare high-impact opportunity without exposing the hidden source-specific appearance percentage.
 
 The player should be able to understand why the card functions with the current build from its effect and prerequisite context. A screen contains at most one Legendary.
 
-## Screen-quality safeguards
+# Screen-quality safeguards
 
 The presentation layer assumes the gameplay generator has already validated the screen. The UI should never receive or display:
 
 - duplicate exact Techniques,
 - an unusable Supporting Technique,
 - more than one refinement,
-- more than one replacement,
 - more than one Cross-family Technique,
 - more than one Legendary,
-- or a replacement-only / optimization-only screen when a healthy immediately functional Technique option exists.
+- a three-card single-family screen when another meaningful eligible family option exists,
+- or an optimization-only screen when an eligible unowned Action Technique remains.
 
-## Decline and rerolls
+# Decline and rerolls
 
-When the current reward source permits declining, the player may reject all Technique choices and take the displayed smaller fallback reward.
+When the current reward source explicitly permits declining, the player may reject all Technique choices and take the displayed smaller fallback reward.
 
 When rerolls are available:
 
-- show the remaining count or cost,
+- show the remaining count,
 - reroll all 3 unselected choices together,
 - preserve the same reward source and its quality rules,
-- preserve the same direct/flex composition rules,
+- preserve the same eligibility and family-diversity rules,
 - do not alter owned Techniques,
 - do not guarantee an exact family or higher rarity,
 - preserve the decline reward unless gameplay documentation changes it.
 
 Where the eligible pool allows it, the immediately previous three cards should not simply repeat after a reroll.
 
-## Rest-room and pause relationship
+# Rest-room and pause relationship
 
-The retired reserve-slot model no longer supports routine Technique swapping at Rest rooms.
+Rest and pause interfaces may provide build review but do not provide routine Technique swapping or removal. Techniques are additive run-build knowledge and normally remain owned until the run ends.
 
-Rest and pause interfaces may provide build review, but filled combat slots are normally committed unless a valid replacement reward is being resolved.
-
-## Presentation direction
+# Presentation direction
 
 Technique rewards should feel like temporary martial knowledge rather than modern collectible cards floating without context.
 
-Use readable combat-slot identifiers and strong visual family recognition. Exact family colors, symbols, layout, and card art remain provisional even though the five family mechanics and three-choice reward structure are defined.
+Use readable action-trigger identifiers and strong visual family recognition. Exact family colors, symbols, layout, and card art remain provisional even though the five family mechanics and three-choice reward structure are defined.
 
-## Accessibility and clarity
+# Accessibility and clarity
 
-- Rarity, combat slot, replacement state, refinement, and family identity cannot rely on color alone.
-- Replacement and loss warnings require clear text, icon, and focus treatment.
+- Rarity/refinement state, action trigger, Technique kind, and family identity cannot rely on color alone.
 - Long descriptions must remain localization-safe.
 - The player must understand a Technique's practical immediate effect before confirming.
-- The screen must distinguish direct combat-slot Techniques from slotless Supporting, Cross-family, Legendary, and refinement upgrades.
+- The screen must distinguish Action, Supporting, Cross-family, Legendary, and refinement opportunities.
+- Nothing in the interface should imply a Technique inventory cap or exclusive action slots.

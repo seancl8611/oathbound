@@ -1,66 +1,55 @@
 extends CanvasLayer
 
-## =============================================================================
-## UPGRADE CHOICE UI — Polished Boon Selection Screen (Code-Built)
-## =============================================================================
-## No scene tree dependency — builds all UI through code.
-## Delete any child nodes (Panel, VBoxContainer, Btn1-3) from the scene.
-## =============================================================================
+## Canonical three-card Technique reward UI.
+## Keeps the legacy `choice_made` / `open_with_choices` API so existing chamber code
+## can transition incrementally, while current callers should use `open_with_context`
+## to preserve source-quality rules across whole-screen rerolls.
 
 signal choice_made(choice: Dictionary)
 
-var options: Array = []
+const CARD_WIDTH := 190.0
+const CARD_HEIGHT := 205.0
 
-# ─── References (created in code) ──────────────────────────
+const FAMILY_COLORS := {
+	"echo": Color(0.82, 0.84, 0.88),
+	"rupture": Color(0.90, 0.72, 0.25),
+	"seal": Color(0.58, 0.36, 0.82),
+	"rift": Color(0.90, 0.87, 0.72),
+	"crimson": Color(0.78, 0.20, 0.22),
+	"cross": Color(0.68, 0.66, 0.74),
+	"neutral": Color(0.70, 0.70, 0.70),
+}
+
+const FAMILY_NAMES := {
+	"echo": "ECHO",
+	"rupture": "RUPTURE",
+	"seal": "SEAL",
+	"rift": "RIFT",
+	"crimson": "CRIMSON",
+	"cross": "HYBRID",
+	"neutral": "TECHNIQUE",
+}
+
+const RARITY_COLORS := {
+	"common": Color(0.72, 0.72, 0.72),
+	"uncommon": Color(0.42, 0.82, 0.48),
+	"rare": Color(0.45, 0.62, 1.0),
+	"legendary": Color(1.0, 0.82, 0.2),
+	"refinement": Color(0.80, 0.62, 0.92),
+}
+
+var options: Array = []
+var _source: String = ""
+var _area_id: int = 1
+var _focused_index: int = 0
+
 var _overlay: ColorRect
 var _root_container: VBoxContainer
 var _title_label: Label
+var _subtitle_label: Label
 var _cards_container: HBoxContainer
-var _cards: Array = []      # Array of PanelContainer
-var _focused_index: int = 0
-
-# ─── Domain Colors ─────────────────────────────────────────
-const DOMAIN_COLORS = {
-	"storm":  Color(0.3, 0.72, 1.0),
-	"frost":  Color(0.5, 0.82, 1.0),
-	"hex":    Color(0.65, 0.32, 0.85),
-	"ember":  Color(1.0, 0.52, 0.2),
-	"shadow": Color(0.52, 0.32, 0.65),
-	"item":   Color(0.9, 0.8, 0.35),
-}
-
-const DOMAIN_NAMES = {
-	"storm": "Storm", "frost": "Frost", "hex": "Hex",
-	"ember": "Ember", "shadow": "Shadow", "item": "Item",
-}
-
-# ─── Rarity Colors ─────────────────────────────────────────
-const RARITY_COLORS = {
-	"common":    Color(0.7, 0.7, 0.7),
-	"uncommon":  Color(0.4, 0.85, 0.4),
-	"rare":      Color(0.45, 0.6, 1.0),
-	"legendary": Color(1.0, 0.82, 0.2),
-}
-
-const RARITY_NAMES = {
-	"common": "Common", "uncommon": "Uncommon",
-	"rare": "Rare", "legendary": "Legendary",
-}
-
-# ─── Card Sizing ───────────────────────────────────────────
-const CARD_WIDTH = 180
-const CARD_MIN_HEIGHT = 185
-const CARD_SEPARATION = 12
-const CARD_PADDING = 10
-
-# ─── Style Colors ──────────────────────────────────────────
-const BG_COLOR = Color(0.08, 0.07, 0.1, 0.92)
-const CARD_BG_COLOR = Color(0.12, 0.11, 0.16, 0.95)
-const CARD_HOVER_COLOR = Color(0.18, 0.16, 0.24, 0.97)
-const CARD_BORDER_COLOR = Color(0.3, 0.28, 0.38, 0.6)
-const OVERLAY_COLOR = Color(0.0, 0.0, 0.0, 0.6)
-const TEXT_COLOR = Color(0.88, 0.86, 0.92)
-const DETAIL_COLOR = Color(0.65, 0.62, 0.72)
+var _cards: Array[Button] = []
+var _reroll_button: Button
 
 
 func _ready() -> void:
@@ -71,275 +60,187 @@ func _ready() -> void:
 
 
 func _build_ui() -> void:
-	var vp_size = get_viewport().get_visible_rect().size
-
-	# === DARK OVERLAY (manually sized to viewport) ===
 	_overlay = ColorRect.new()
-	_overlay.color = OVERLAY_COLOR
+	_overlay.color = Color(0.0, 0.0, 0.0, 0.72)
+	_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-	_overlay.position = Vector2.ZERO
-	_overlay.size = vp_size
-	_overlay.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	add_child(_overlay)
 
-	# === ROOT CONTAINER (positioned manually at screen center) ===
+	var center: CenterContainer = CenterContainer.new()
+	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(center)
+
 	_root_container = VBoxContainer.new()
 	_root_container.alignment = BoxContainer.ALIGNMENT_CENTER
-	_root_container.add_theme_constant_override("separation", 16)
-	_root_container.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	add_child(_root_container)
+	_root_container.add_theme_constant_override("separation", 12)
+	center.add_child(_root_container)
 
-	# === TITLE ===
 	_title_label = Label.new()
-	_title_label.text = "Choose a Boon"
+	_title_label.text = "Choose a Technique"
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.add_theme_font_size_override("font_size", 18)
-	_title_label.add_theme_color_override("font_color", Color(0.9, 0.85, 0.7))
+	_title_label.add_theme_font_size_override("font_size", 20)
 	_root_container.add_child(_title_label)
 
-	# === CARDS CONTAINER ===
+	_subtitle_label = Label.new()
+	_subtitle_label.text = "Techniques are run-only and have no inventory or action-slot cap."
+	_subtitle_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_subtitle_label.add_theme_font_size_override("font_size", 10)
+	_root_container.add_child(_subtitle_label)
+
 	_cards_container = HBoxContainer.new()
 	_cards_container.alignment = BoxContainer.ALIGNMENT_CENTER
-	_cards_container.add_theme_constant_override("separation", CARD_SEPARATION)
+	_cards_container.add_theme_constant_override("separation", 12)
 	_root_container.add_child(_cards_container)
 
-	# === BUILD 3 CARDS ===
-	_cards.clear()
-	for i in 3:
-		var card = _build_card(i)
+	for index: int in range(3):
+		var card: Button = Button.new()
+		card.custom_minimum_size = Vector2(CARD_WIDTH, CARD_HEIGHT)
+		card.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		card.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		card.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		card.pressed.connect(_select_choice.bind(index))
+		card.focus_entered.connect(_set_focus.bind(index))
 		_cards_container.add_child(card)
 		_cards.append(card)
 
-	_position_root()
-	
-func _build_card(index: int) -> PanelContainer:
-	var card = PanelContainer.new()
-	card.custom_minimum_size = Vector2(CARD_WIDTH, CARD_MIN_HEIGHT)
-	card.mouse_filter = Control.MOUSE_FILTER_STOP
-	card.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	_reroll_button = Button.new()
+	_reroll_button.custom_minimum_size = Vector2(180, 28)
+	_reroll_button.pressed.connect(_on_reroll_pressed)
+	_root_container.add_child(_reroll_button)
 
-	# Base style
-	var style = StyleBoxFlat.new()
-	style.bg_color = CARD_BG_COLOR
-	style.border_color = CARD_BORDER_COLOR
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(4)
-	style.set_content_margin_all(0)
-	card.add_theme_stylebox_override("panel", style)
-
-	# Inner layout
-	var vbox = VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 4)
-	card.add_child(vbox)
-
-	# --- Rarity color bar (top stripe) ---
-	var rarity_bar = ColorRect.new()
-	rarity_bar.name = "RarityBar"
-	rarity_bar.custom_minimum_size = Vector2(0, 3)
-	rarity_bar.color = RARITY_COLORS["common"]
-	vbox.add_child(rarity_bar)
-
-	# --- Content margin container ---
-	var margin = MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", CARD_PADDING)
-	margin.add_theme_constant_override("margin_right", CARD_PADDING)
-	margin.add_theme_constant_override("margin_top", 6)
-	margin.add_theme_constant_override("margin_bottom", CARD_PADDING)
-	vbox.add_child(margin)
-
-	var content = VBoxContainer.new()
-	content.add_theme_constant_override("separation", 6)
-	margin.add_child(content)
-
-	# --- Domain tag ---
-	var domain_label = Label.new()
-	domain_label.name = "DomainLabel"
-	domain_label.add_theme_font_size_override("font_size", 10)
-	domain_label.add_theme_color_override("font_color", DOMAIN_COLORS.get("storm", TEXT_COLOR))
-	domain_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	content.add_child(domain_label)
-
-	# --- Boon name ---
-	var name_label = Label.new()
-	name_label.name = "NameLabel"
-	name_label.add_theme_font_size_override("font_size", 13)
-	name_label.add_theme_color_override("font_color", TEXT_COLOR)
-	name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	content.add_child(name_label)
-
-	# --- Thin separator ---
-	var sep = ColorRect.new()
-	sep.custom_minimum_size = Vector2(0, 1)
-	sep.color = Color(0.35, 0.32, 0.42, 0.5)
-	content.add_child(sep)
-
-	# --- Description ---
-	var desc_label = Label.new()
-	desc_label.name = "DescLabel"
-	desc_label.add_theme_font_size_override("font_size", 10)
-	desc_label.add_theme_color_override("font_color", DETAIL_COLOR)
-	desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	desc_label.custom_minimum_size = Vector2(CARD_WIDTH - CARD_PADDING * 2 - 2, 0)
-	content.add_child(desc_label)
-
-	# --- Spacer to push rarity tag to bottom ---
-	var spacer = Control.new()
-	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	content.add_child(spacer)
-
-	# --- Rarity label (bottom) ---
-	var rarity_label = Label.new()
-	rarity_label.name = "RarityLabel"
-	rarity_label.add_theme_font_size_override("font_size", 9)
-	rarity_label.add_theme_color_override("font_color", RARITY_COLORS["common"])
-	rarity_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	content.add_child(rarity_label)
-
-	# --- Hover / Click signals ---
-	card.mouse_entered.connect(_on_card_hover.bind(index, true))
-	card.mouse_exited.connect(_on_card_hover.bind(index, false))
-	card.gui_input.connect(_on_card_input.bind(index))
-
-	return card
-
-func _position_root() -> void:
-	# Wait one frame so the container knows its own size after children are added
-	await get_tree().process_frame
-	var vp_size = get_viewport().get_visible_rect().size
-	var container_size = _root_container.size
-	_root_container.position = (vp_size - container_size) * 0.5
-	# Also resize overlay in case viewport changed
-	_overlay.size = vp_size
-	
-# =============================================================================
-# PUBLIC API
-# =============================================================================
 
 func open_with_choices(list: Array) -> void:
-	get_tree().paused = true
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	visible = true
-	options = list
+	_source = ""
+	_area_id = 1
+	_open(list)
+
+
+func open_with_context(list: Array, source: String, area_id: int) -> void:
+	_source = source
+	_area_id = area_id
+	_open(list)
+
+
+func _open(list: Array) -> void:
+	options = list.duplicate(true)
 	_focused_index = 0
-
-	for i in 3:
-		if i < list.size():
-			_populate_card(i, list[i])
-
-	_update_focus_visuals()
-	_position_root()
-	print("[UpgradeChoiceUI] opened — tree paused, showing %d choices" % list.size())
-
-
-func _populate_card(index: int, data: Dictionary) -> void:
-	var card = _cards[index]
-	var vbox = card.get_child(0)  # The outer VBoxContainer
-
-	# Get the child nodes by name path
-	var rarity_bar = vbox.get_node("RarityBar")
-	var margin = vbox.get_child(1)
-	var content = margin.get_child(0)
-	var domain_label = content.get_node("DomainLabel")
-	var name_label = content.get_node("NameLabel")
-	var desc_label = content.get_node("DescLabel")
-	var rarity_label = content.get_node("RarityLabel")
-
-	var domain = data.get("domain", "item")
-	var rarity = data.get("rarity", "common")
-	var domain_color = DOMAIN_COLORS.get(domain, TEXT_COLOR)
-	var rarity_color = RARITY_COLORS.get(rarity, RARITY_COLORS["common"])
-
-	# Rarity bar color
-	rarity_bar.color = rarity_color
-
-	# Domain tag
-	var domain_name = DOMAIN_NAMES.get(domain, domain.capitalize())
-	domain_label.text = domain_name.to_upper()
-	domain_label.add_theme_color_override("font_color", domain_color)
-
-	# Boon name
-	name_label.text = data.get("displayname", data.get("name", "???"))
-
-	# Description
-	desc_label.text = data.get("details", "")
-
-	# Rarity tag
-	var rarity_name = RARITY_NAMES.get(rarity, rarity.capitalize())
-	rarity_label.text = rarity_name
-	rarity_label.add_theme_color_override("font_color", rarity_color)
-
-	# Border color matches domain
-	var style = card.get_theme_stylebox("panel").duplicate()
-	style.border_color = Color(domain_color.r, domain_color.g, domain_color.b, 0.35)
-	card.add_theme_stylebox_override("panel", style)
+	_refresh_cards()
+	_refresh_reroll()
+	visible = true
+	get_tree().paused = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if not _cards.is_empty():
+		_cards[0].grab_focus()
+	print("[TechniqueRewardUI] opened — %d choices | source=%s" % [options.size(), _source if not _source.is_empty() else "legacy"])
 
 
-# =============================================================================
-# INPUT — Keyboard + Mouse
-# =============================================================================
+func _refresh_cards() -> void:
+	for index: int in range(_cards.size()):
+		var card: Button = _cards[index]
+		if index >= options.size():
+			card.visible = false
+			continue
+		card.visible = true
+		var data: Dictionary = options[index]
+		var family: String = str(data.get("family", "neutral"))
+		var family_label: String = str(FAMILY_NAMES.get(family, family.to_upper()))
+		if family == "cross":
+			var names: Array[String] = []
+			var families_value: Variant = data.get("families", [])
+			if families_value is Array:
+				for family_name: Variant in families_value:
+					names.append(str(family_name).capitalize())
+			if not names.is_empty():
+				family_label = " + ".join(names).to_upper()
+
+		var rarity: String = str(data.get("rarity", "common")).to_lower()
+		var rarity_label: String = rarity.capitalize()
+		var kind_label: String = _kind_label(data)
+		card.text = "%s\n%s\n\n%s\n\n%s\n%s" % [
+			family_label,
+			kind_label,
+			str(data.get("displayname", "Technique")),
+			str(data.get("details", "")),
+			rarity_label,
+		]
+
+		var family_color: Color = FAMILY_COLORS.get(family, FAMILY_COLORS["neutral"])
+		var rarity_color: Color = RARITY_COLORS.get(rarity, RARITY_COLORS["common"])
+		card.add_theme_color_override("font_color", family_color)
+		card.add_theme_color_override("font_focus_color", rarity_color)
+		card.add_theme_color_override("font_hover_color", rarity_color)
+
+
+func _kind_label(data: Dictionary) -> String:
+	var kind: String = str(data.get("kind", ""))
+	match kind:
+		"action":
+			var action: String = str(data.get("action", ""))
+			match action:
+				"basic": return "BASIC ATTACK"
+				"held": return "HELD ATTACK"
+				"dash": return "DASH ATTACK"
+				"counter": return "PARRY / COUNTER"
+				"deathblow": return "DEATHBLOW"
+			return "ACTION TECHNIQUE"
+		"support": return "SUPPORTING TECHNIQUE"
+		"cross": return "CROSS-FAMILY TECHNIQUE"
+		"legendary": return "LEGENDARY TECHNIQUE"
+		"refinement": return "REFINEMENT"
+		_: return "TECHNIQUE"
+
+
+func _refresh_reroll() -> void:
+	var count: int = 0
+	if RunData != null:
+		count = int(RunData.technique_rerolls)
+	_reroll_button.text = "Reroll Entire Screen (%d)" % count
+	_reroll_button.disabled = _source.is_empty() or count <= 0
+	_reroll_button.visible = not _source.is_empty()
+
+
+func _on_reroll_pressed() -> void:
+	if _source.is_empty():
+		return
+	var rerolled: Array = UpgradeService.reroll_three_choices(_source, _area_id, options)
+	if rerolled.is_empty():
+		_refresh_reroll()
+		return
+	options = rerolled
+	_focused_index = 0
+	_refresh_cards()
+	_refresh_reroll()
+	if not _cards.is_empty():
+		_cards[0].grab_focus()
+	print("[TechniqueRewardUI] rerolled entire screen")
+
 
 func _input(event: InputEvent) -> void:
-	if not visible:
+	if not visible or not event.is_pressed():
 		return
-
-	if event is InputEventKey and event.pressed:
-		match event.keycode:
-			KEY_LEFT, KEY_A:
-				_focused_index = max(0, _focused_index - 1)
-				_update_focus_visuals()
-				get_viewport().set_input_as_handled()
-			KEY_RIGHT, KEY_D:
-				_focused_index = min(2, _focused_index + 1)
-				_update_focus_visuals()
-				get_viewport().set_input_as_handled()
-			KEY_ENTER, KEY_SPACE, KEY_E:
-				_select_choice(_focused_index)
-				get_viewport().set_input_as_handled()
+	if event.is_action_pressed("left"):
+		_focused_index = maxi(0, _focused_index - 1)
+		_cards[_focused_index].grab_focus()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("right"):
+		_focused_index = mini(_cards.size() - 1, _focused_index + 1)
+		_cards[_focused_index].grab_focus()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("interact"):
+		_select_choice(_focused_index)
+		get_viewport().set_input_as_handled()
 
 
-func _on_card_hover(index: int, entering: bool) -> void:
-	if entering:
-		_focused_index = index
-		_update_focus_visuals()
+func _set_focus(index: int) -> void:
+	_focused_index = index
 
-
-func _on_card_input(event: InputEvent, index: int) -> void:
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		_select_choice(index)
-
-
-func _update_focus_visuals() -> void:
-	for i in _cards.size():
-		var card = _cards[i]
-		var style = card.get_theme_stylebox("panel").duplicate()
-		if i == _focused_index:
-			style.bg_color = CARD_HOVER_COLOR
-			style.set_border_width_all(2)
-			# Brighten border for focused card
-			var base_border = style.border_color
-			style.border_color = Color(base_border.r, base_border.g, base_border.b, 0.85)
-		else:
-			style.bg_color = CARD_BG_COLOR
-			style.set_border_width_all(1)
-			var base_border = style.border_color
-			style.border_color = Color(base_border.r, base_border.g, base_border.b, 0.35)
-		card.add_theme_stylebox_override("panel", style)
-
-
-# =============================================================================
-# SELECTION
-# =============================================================================
 
 func _select_choice(index: int) -> void:
 	if index < 0 or index >= options.size():
 		return
-	var choice = options[index]
-	print("[UpgradeChoiceUI] selected: %s" % choice.get("displayname", "?"))
+	var choice: Dictionary = options[index]
+	if str(choice.get("id", "")) == "technique_none":
+		return
 	visible = false
 	get_tree().paused = false
-	emit_signal("choice_made", choice)
-
-
-func _on_Btn1_pressed() -> void: _select_choice(0)
-func _on_Btn2_pressed() -> void: _select_choice(1)
-func _on_Btn3_pressed() -> void: _select_choice(2)
+	choice_made.emit(choice)
