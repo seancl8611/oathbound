@@ -10,7 +10,8 @@ extends "res://autoload/GameFlow.gd"
 
 const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
-const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticManager.gd"
+const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Progression/OathboundPersistentProstheticManager.gd"
+const EXPECTED_STRAND_PROGRESSION_SCRIPT: String = "res://Core/Progression/OathboundStrandProgressionManager.gd"
 const EXPECTED_ATTACK_DIRECTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundAttackDirector.gd"
 const EXPECTED_RELIC_RUNTIME_SCRIPT: String = "res://Core/Relics/OathboundRelicRuntime.gd"
 const EXPECTED_CORRUPTION_RUNTIME_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionRuntime.gd"
@@ -29,6 +30,7 @@ func _ready() -> void:
 	# pass has completed instead of replacing their scripts after _ready().
 	call_deferred("_assert_current_upgrade_service")
 	call_deferred("_assert_current_prosthetic_manager")
+	call_deferred("_assert_current_strand_progression_manager")
 	call_deferred("_assert_current_playtest_lab")
 
 	var run_complete_cb := Callable(self, "_on_current_run_completed")
@@ -49,6 +51,10 @@ func _assert_current_corruption_runtime() -> void:
 
 func _assert_current_prosthetic_manager() -> void:
 	_assert_autoload_script("ProstheticManager", EXPECTED_PROSTHETIC_MANAGER_SCRIPT, false)
+
+
+func _assert_current_strand_progression_manager() -> void:
+	_assert_autoload_script("MetaProgressionManager", EXPECTED_STRAND_PROGRESSION_SCRIPT, false)
 
 
 func _assert_current_attack_director() -> void:
