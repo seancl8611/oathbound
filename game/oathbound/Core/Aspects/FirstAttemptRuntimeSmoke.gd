@@ -40,6 +40,18 @@ func _run_contract() -> void:
 	_expect(str(CorruptionRuntime.get_corruption_state()) == "hidden", "pre-awakening Corruption must remain hidden")
 	_expect(not bool(AspectRuntime.select_aspect(CATALOG.WOLF)), "Aspect selection must be locked before Returning Blood awakens")
 
+	var aspect_hud_value: Variant = AspectRuntime.get("_hud")
+	if aspect_hud_value is CanvasLayer:
+		_expect(not (aspect_hud_value as CanvasLayer).visible, "pre-awakening Aspect HUD must be hidden")
+
+	# FIRST_ATTEMPT.md also excludes Relics from the first-ever loadout. On the clean
+	# campaign used by this contract, the persistent Relic authority must therefore be
+	# empty rather than silently supplying a post-awakening item.
+	if typeof(RelicRuntime) == TYPE_OBJECT:
+		_expect(str(RelicRuntime.equipped_relic_id).is_empty(), "fresh first attempt must have no equipped Relic")
+		var unlocked_value: Variant = RelicRuntime.unlocked_relics
+		_expect(unlocked_value is Dictionary and (unlocked_value as Dictionary).is_empty(), "fresh first attempt must have no unlocked Relics")
+
 	AspectRuntime.set_tier(4)
 	AspectRuntime.set_blood_for_playtest(100.0)
 	_expect(int(AspectRuntime.tier) == 0, "pre-awakening Tier mutation must be rejected")
