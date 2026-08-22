@@ -12,6 +12,7 @@ extends "res://Player/OathboundAspectPlayerRuntime.gd"
 const DEFENSIVE_AIM_MIN_DISTANCE: float = 6.0
 const CURRENT_PROSTHETIC_EXECUTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticExecutor.gd")
 const EXPECTED_PROSTHETIC_EXECUTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticExecutor.gd"
+const CURRENT_RUN_HUD_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundRunHUD.gd")
 
 
 func _enter_tree() -> void:
@@ -24,8 +25,22 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	super._ready()
+	_install_current_run_hud()
 	_assert_prosthetic_runtime()
 	print("[OathboundCombatPlayer] v1.2 - canonical Aspect Player + defense/deathblow/Prosthetic bridge")
+
+
+func _install_current_run_hud() -> void:
+	if run_hud == null:
+		return
+	run_hud.set_script(CURRENT_RUN_HUD_SCRIPT)
+	if prosthetic_executor != null and run_hud.has_method("update_spirit"):
+		var spirit: int = int(prosthetic_executor.call("get_spirit")) if prosthetic_executor.has_method("get_spirit") else 100
+		var spirit_max: int = int(prosthetic_executor.call("get_max_spirit")) if prosthetic_executor.has_method("get_max_spirit") else 100
+		run_hud.call("update_spirit", spirit, spirit_max)
+	if prosthetic_executor != null and prosthetic_executor.has_method("get_equipped_info") and run_hud.has_method("update_prosthetic_info"):
+		var info: Dictionary = prosthetic_executor.call("get_equipped_info")
+		run_hud.call("update_prosthetic_info", str(info.get("id", "")), int(info.get("spirit_cost", 0)), 0, 0)
 
 
 func _assert_prosthetic_runtime() -> void:
