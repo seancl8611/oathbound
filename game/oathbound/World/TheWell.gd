@@ -28,6 +28,10 @@ func _open_menu():
 		_start_run()
 
 
+func _on_menu_closed_custom() -> void:
+	_close_aspect_menu()
+
+
 func _returning_blood_awakened() -> bool:
 	if typeof(MetaProgress) != TYPE_OBJECT:
 		return true
@@ -137,7 +141,3 @@ func _start_run():
 	print("[TheWell] Starting run...")
 	get_tree().change_scene_to_file("res://Utility/RunScene.tscn")
 	close_menu()
-
-
-func _exit_tree() -> void:
-	_close_aspect_menu()
