@@ -29,6 +29,8 @@ AreaDB="*res://Utility/AreaDB.gd"
 EncounterDB="*res://Utility/EncounterDB.gd"
 RouteGenerator="*res://Utility/RouteGenerator.gd"
 GameFlow="*res://autoload/GameFlow.gd"
+AspectRuntime="*res://Core/Aspects/AspectRuntimeIntegrated.gd"
+AspectBootstrap="*res://Core/Aspects/AspectBootstrap.gd"
 UpgradeService="*res://autoload/UpgradeService.gd"
 CurrencyManager="*res://Utility/CurrencyManager.gd"
 ProstheticManager="*res://autoload/ProstheticManager.gd"
@@ -37,9 +39,10 @@ CodexManager="*res://Utility/CodexManager.gd"
 MetaProgressionManager="*res://Utility/MetaProgressionManager.gd"
 QuestManager="*res://Utility/QuestManager.gd"
 ProstheticEffects="*res://Utility/ProstheticEffects.gd"
-TechniqueEffects="*res://Core/Techniques/TechniqueEffectsRuntime.gd"
+TechniqueEffects="*res://Core/Techniques/AspectTechniqueEffectsRuntime.gd"
 StanceEffects="*res://autoload/stance_effects.gd"
 PlaytestLab="*res://Utility/PlaytestLab.gd"
+AspectPlaytestLabBridge="*res://Core/Aspects/AspectPlaytestLabBridge.gd"
 CombatTelemetry="*res://Utility/CombatTelemetry.gd"
 HushiroEnemyRuntime="*res://Utility/HushiroEnemyRuntime.gd"
 FlameProgress="*res://autoload/FlameProgress.gd"
@@ -79,7 +82,7 @@ right={
 }
 click={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(72, 44),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
 ]
 }
 attack={
