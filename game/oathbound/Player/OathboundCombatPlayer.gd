@@ -1,13 +1,8 @@
 extends "res://Player/OathboundAspectPlayerRuntime.gd"
 
-## Final current Player integration layer for the combat-contract stabilization pass.
-## Defensive facing follows the same mouse/world aim language as sword attacks instead
-## of preserving the last movement vector while Akio stands still and blocks.
-## Hushiro's explicit posture-break runtime marker is also accepted as a Deathblow
-## target so imported family-specific readiness methods cannot hide a valid break.
-## This layer also installs the current Prosthetic executor before the inherited Player
-## child nodes reach _ready(), keeping legacy scene structure while giving the live run
-## one explicit Prosthetic combat authority.
+## Final current Player integration layer.
+## Owns current defensive aim/deathblow compatibility, canonical Prosthetic execution,
+## and Player-side Relic hooks without changing the imported base scene.
 
 const DEFENSIVE_AIM_MIN_DISTANCE: float = 6.0
 const CURRENT_PROSTHETIC_EXECUTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticExecutor.gd")
@@ -27,7 +22,9 @@ func _ready() -> void:
 	super._ready()
 	_install_current_run_hud()
 	_assert_prosthetic_runtime()
-	print("[OathboundCombatPlayer] v1.2 - canonical Aspect Player + defense/deathblow/Prosthetic bridge")
+	_apply_current_relic_capacity()
+	_assert_relic_runtime()
+	print("[OathboundCombatPlayer] v1.3 - canonical Aspect Player + defense/deathblow/Prosthetic/Relic bridge")
 
 
 func _install_current_run_hud() -> void:
@@ -61,6 +58,84 @@ func _assert_prosthetic_runtime() -> void:
 			"matches_expected": script_path == EXPECTED_PROSTHETIC_EXECUTOR_SCRIPT,
 		})
 
+
+func _apply_current_relic_capacity() -> void:
+	var runtime: Node = _relic_runtime()
+	if runtime != null and runtime.has_method("apply_player_capacity"):
+		runtime.call("apply_player_capacity", self)
+	# Relic capacity may change Spirit after the HUD was initially synchronized.
+	if prosthetic_executor != null and run_hud != null and run_hud.has_method("update_spirit"):
+		var spirit: int = int(prosthetic_executor.call("get_spirit")) if prosthetic_executor.has_method("get_spirit") else 100
+		var spirit_max: int = int(prosthetic_executor.call("get_max_spirit")) if prosthetic_executor.has_method("get_max_spirit") else 100
+		run_hud.call("update_spirit", spirit, spirit_max)
+
+
+func _assert_relic_runtime() -> void:
+	var runtime: Node = _relic_runtime()
+	if runtime == null:
+		push_error("[OathboundCombatPlayer] RelicRuntime missing")
+		return
+	var script_path: String = ""
+	var script_value: Variant = runtime.get_script()
+	if script_value is Script:
+		script_path = (script_value as Script).resource_path
+	var equipped: String = str(runtime.get("equipped_relic_id"))
+	print("[OathboundCombatPlayer] relic_runtime script=%s equipped=%s" % [script_path, equipped if not equipped.is_empty() else "none"])
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("relic_runtime_assigned", {
+			"script": script_path,
+			"equipped": equipped,
+		})
+
+
+# =============================================================================
+# RELIC COMBAT EVENTS
+# =============================================================================
+
+func take_damage(amount: int, show_feedback: bool = true) -> void:
+	var hp_before: int = int(hp)
+	var actual_damage: int = maxi(0, amount - int(armor))
+	var runtime: Node = _relic_runtime()
+	if runtime != null and runtime.has_method("try_last_oath"):
+		var survivor_hp: int = int(runtime.call("try_last_oath", hp_before, actual_damage))
+		if survivor_hp >= 0:
+			hp = mini(int(maxhp), survivor_hp)
+			if actual_damage > 0 and runtime.has_method("on_player_health_damage"):
+				runtime.call("on_player_health_damage", actual_damage)
+			if show_feedback:
+				_flash_player(Color(1, 0.3, 0.3), 0.12)
+				_shake_camera(SHAKE_MEDIUM, 0.12)
+			_update_health_bar()
+			return
+
+	super.take_damage(amount, show_feedback)
+	var hp_lost: int = maxi(0, hp_before - int(hp))
+	if hp_lost > 0 and runtime != null and runtime.has_method("on_player_health_damage"):
+		runtime.call("on_player_health_damage", hp_lost)
+
+
+func _try_deathblow() -> bool:
+	var started: bool = super._try_deathblow()
+	if started:
+		var runtime: Node = _relic_runtime()
+		if runtime != null and runtime.has_method("on_deathblow"):
+			runtime.call("on_deathblow", self)
+	return started
+
+
+func _try_activate_blood_art() -> void:
+	var was_resolving: bool = bool(AspectRuntime.blood_art_resolving) if typeof(AspectRuntime) == TYPE_OBJECT else false
+	super._try_activate_blood_art()
+	var now_resolving: bool = bool(AspectRuntime.blood_art_resolving) if typeof(AspectRuntime) == TYPE_OBJECT else false
+	if not was_resolving and now_resolving:
+		var runtime: Node = _relic_runtime()
+		if runtime != null and runtime.has_method("on_blood_art_used"):
+			runtime.call("on_blood_art_used", self)
+
+
+# =============================================================================
+# CURRENT DEFENSE / PROSTHETIC BRIDGES
+# =============================================================================
 
 func _start_parry(window_s: float) -> void:
 	_update_defensive_facing()
@@ -164,3 +239,7 @@ func _record_guard_aim(source: String) -> void:
 		"mouse_world": [get_global_mouse_position().x, get_global_mouse_position().y],
 		"player": CombatTelemetry.snapshot_actor(self),
 	})
+
+
+func _relic_runtime() -> Node:
+	return get_node_or_null("/root/RelicRuntime")
