@@ -3,10 +3,6 @@ extends Node
 const BOSS_REWARD_UI = preload("res://Core/Rewards/BossRewardUI.gd")
 const TECHNIQUE_REWARD_UI = preload("res://Core/Rewards/TechniqueRewardUI.gd")
 
-# Current Oathbound player baseline. Store these on first Boss Reward application so
-# Keeper and Twin Maws capacity rewards never compound against an already-increased
-# mid-run maximum. Future pre-run max-capacity progression should set the metadata at
-# run start and will automatically override these compatibility defaults.
 const CURRENT_STARTING_MAX_HEALTH := 100
 const CURRENT_STARTING_MAX_SPIRIT := 100
 
@@ -62,9 +58,6 @@ func _make_capacity_card(capacity_type: String) -> Dictionary:
 
 
 func _make_flex_card(opposite_capacity: String) -> Dictionary:
-	# Current run-Relic acquisition is not implemented yet. Per ITEMS_AND_REWARDS.md,
-	# redistribute the unavailable 30% Relic outcome proportionally over the remaining
-	# 35/20/15 outcomes: 50%, 28.57%, 21.43%.
 	var roll := randf()
 	if roll < 0.50:
 		return {
@@ -98,8 +91,9 @@ func _present_premium_technique(area_id: int) -> void:
 	ui.layer = 115
 	ui.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 	get_tree().current_scene.add_child(ui)
-	var choices := UpgradeService.get_three_choices_for_source(UpgradeService.SOURCE_REGIONAL_BOSS, area_id)
-	ui.open_with_choices(choices)
+	var source := UpgradeService.SOURCE_REGIONAL_BOSS
+	var choices := UpgradeService.get_three_choices_for_source(source, area_id)
+	ui.open_with_context(choices, source, area_id)
 	var picked: Dictionary = await ui.choice_made
 	UpgradeService.apply_upgrade(picked)
 	ui.queue_free()

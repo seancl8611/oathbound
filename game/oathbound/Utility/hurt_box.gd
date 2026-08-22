@@ -259,16 +259,16 @@ func _on_area_entered(area: Area2D) -> void:
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_contact(receiver, area, attacker, telemetry_before)
 
-	# Legacy imported stance layer remains connected until the Technique-system
-	# reconciliation replaces it. Keeping this here avoids breaking the old build
-	# while core combat is migrated in isolation.
+	# Current player sword contacts route through the canonical Technique executor.
+	# The imported elemental StanceEffects singleton remains temporarily autoloaded for
+	# unreconciled compatibility callers, but it no longer owns current sword effects.
 	if _is_enemy_hurtbox and not area.has_meta("prosthetic_source"):
 		if is_instance_valid(attacker) and attacker.is_in_group("player"):
 			var enemy_node = get_parent()
 			if is_instance_valid(enemy_node):
-				var se = get_node_or_null("/root/StanceEffects")
-				if se:
-					se.on_player_hit(enemy_node, attacker)
+				var technique_effects = get_node_or_null("/root/TechniqueEffects")
+				if technique_effects and technique_effects.has_method("on_player_hit"):
+					technique_effects.on_player_hit(enemy_node, attacker, area)
 
 func _on_area_exited(area: Area2D) -> void:
 	if _dot_sources.has(area):

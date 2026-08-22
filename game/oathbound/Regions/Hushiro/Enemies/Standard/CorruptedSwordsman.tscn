@@ -1,6 +1,6 @@
 [gd_scene load_steps=37 format=3 uid="uid://b0lkgxc2vsacq"]
 
-[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanController.gd" id="1_s55wi"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanStability.gd" id="1_s55wi"]
 [ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_pg7dc"]
 [ext_resource type="Texture2D" uid="uid://bpij4m6oy8u2m" path="res://Textures/Enemy/foot_soldier/parried1.png" id="3_dbmx2"]
 [ext_resource type="Texture2D" uid="uid://bgr2y08wrdlcs" path="res://Textures/Enemy/foot_soldier/Attack10.png" id="4_xy833"]
