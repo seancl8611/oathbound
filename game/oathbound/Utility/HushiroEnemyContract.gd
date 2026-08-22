@@ -12,6 +12,7 @@ const POSTURE_RECOVER_DELAY: float = 1.5
 const POSTURE_RECOVER_RATE: float = 20.0
 const POSTURE_BREAK_DURATION: float = 2.5
 const POSTURE_BREAK_RESET_RATIO: float = 0.50
+const POSTURE_BREAK_RUNTIME = preload("res://Utility/HushiroPostureBreakRuntime.gd")
 
 const BASELINES: Dictionary = {
 	"hollow": {"health": 60, "posture": 50.0},
@@ -80,6 +81,8 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 		combat.set("config", cfg)
 		combat.set("_posture", 0.0)
 
+	_attach_posture_break_runtime(enemy, key)
+
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("hushiro_enemy_contract_applied", {
 			"enemy_type": key,
@@ -89,7 +92,18 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 			"posture_recover_delay": POSTURE_RECOVER_DELAY,
 			"posture_recover_rate": POSTURE_RECOVER_RATE,
 			"posture_break_duration": POSTURE_BREAK_DURATION,
+			"posture_break_runtime": true,
 		})
+
+
+static func _attach_posture_break_runtime(enemy: Node, enemy_type: String) -> void:
+	if enemy.get_node_or_null("HushiroPostureBreakRuntime") != null:
+		return
+	var runtime: Node = POSTURE_BREAK_RUNTIME.new()
+	runtime.name = "HushiroPostureBreakRuntime"
+	if runtime.has_method("configure"):
+		runtime.call("configure", enemy, enemy_type)
+	enemy.add_child(runtime)
 
 
 static func _set_property_if_present(object: Object, property_name: String, value: Variant) -> void:
