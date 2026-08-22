@@ -15,24 +15,17 @@ var scrolls: int = 0
 # remaining UI/progression migration is complete, but new code must use Mist.
 var mist_shards: int = 0
 
-# Run-only Technique reroll resource. The current Technique UI will consume this once
-# its documented reroll flow is reconciled.
+# Run-only Technique reroll resource.
 var technique_rerolls: int = 0
 
 var path_history: Array[String] = []
 var acquired_upgrades: Array = []
-
-# Authored encounter history. Regional encounter selectors use these lists to
-# enforce the approved "at most once per run" rule without leaking state between runs.
 var hushiro_encounters_seen: Array[String] = []
 
-# Combat stats
 var enemies_killed: int = 0
 var parries_performed: int = 0
 var perfect_parries: int = 0
 var damage_taken: int = 0
-
-# Chamber stats
 var combat_rooms_cleared: int = 0
 var blessings_received: int = 0
 var treasures_opened: int = 0
@@ -44,18 +37,12 @@ func advance_depth(room_type: String) -> void:
 	var base := token
 	if base.find(":") != -1:
 		base = base.split(":", false)[0]
-
 	path_history.append(token)
 	depth += 1
-
 	match base:
-		"combat", "miniboss":
-			combat_rooms_cleared += 1
-		"shrine":
-			blessings_received += 1
-		"treasure":
-			treasures_opened += 1
-
+		"combat", "miniboss": combat_rooms_cleared += 1
+		"shrine": blessings_received += 1
+		"treasure": treasures_opened += 1
 	print("[RunData] Depth: %d | Chamber: %s | Path: %s" % [depth, token, path_history])
 
 
@@ -64,25 +51,22 @@ func reset_for_new_run(area_id: int = 1) -> void:
 	depth = 0
 	gold = 0
 	technique_rerolls = 0
+	if typeof(MetaProgressionManager) == TYPE_OBJECT and MetaProgressionManager.has_method("get_starting_reroll_bonus"):
+		technique_rerolls = maxi(0, int(MetaProgressionManager.call("get_starting_reroll_bonus")))
 	path_history.clear()
 	acquired_upgrades.clear()
 	hushiro_encounters_seen.clear()
-
 	enemies_killed = 0
 	parries_performed = 0
 	perfect_parries = 0
 	damage_taken = 0
-
 	combat_rooms_cleared = 0
 	blessings_received = 0
 	treasures_opened = 0
 	items_purchased = 0
-
-	# Gold is run-only. Mist and Scrolls remain banked immediately when earned.
 	CurrencyManager.set_amount(CurrencyManager.Currency.GOLD, 0)
 	sync_persistent_resources()
-
-	print("[RunData] New run started - Region %d | Banked Mist %d | Scrolls %d" % [area_id, mist, scrolls])
+	print("[RunData] New run started - Region %d | Banked Mist %d | Scrolls %d | Rerolls %d" % [area_id, mist, scrolls, technique_rerolls])
 
 
 func sync_persistent_resources() -> void:
@@ -91,9 +75,6 @@ func sync_persistent_resources() -> void:
 	mist = int(MetaProgress.mist)
 	scrolls = int(MetaProgress.scrolls)
 	mist_shards = mist
-
-	# Compatibility mirrors for old HUD/progression code. CurrencyManager's
-	# MIST_SHARDS enum entry is deprecated and must not be used as source of truth.
 	CurrencyManager.set_amount(CurrencyManager.Currency.MIST_SHARDS, mist)
 	CurrencyManager.set_amount(CurrencyManager.Currency.SCROLLS, scrolls)
 
@@ -121,7 +102,6 @@ func add_mist(amount: int) -> void:
 	print("[RunData] Mist: %d (+%d persistent)" % [mist, amount])
 
 
-# Deprecated compatibility API.
 func add_mist_shards(amount: int) -> void:
 	add_mist(amount)
 
@@ -133,7 +113,6 @@ func spend_mist(amount: int) -> bool:
 	return true
 
 
-# Deprecated compatibility API.
 func spend_mist_shards(amount: int) -> bool:
 	return spend_mist(amount)
 
