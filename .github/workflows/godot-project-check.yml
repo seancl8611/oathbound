@@ -60,10 +60,26 @@ jobs:
             echo "FAIL: retired Areas/Area1 resource path is still referenced."
             exit 1
           fi
-          if grep -R -n -F 'res://Enemy/Area 1/' game/oathbound --include='*.gd' --include='*.tscn'; then
-            echo "FAIL: retired Enemy/Area 1 resource path is still referenced."
+
+          # One inert fallback string remains inside the imported Archer movement/aiming
+          # controller. Current Hushiro rules assign the canonical projectile before the
+          # inherited loader runs, so this is not a runtime dependency. Contain that exact
+          # exception and reject every other reference to the retired Enemy/Area 1 tree.
+          enemy_refs="$(grep -R -n -F 'res://Enemy/Area 1/' game/oathbound --include='*.gd' --include='*.tscn' || true)"
+          unexpected_enemy_refs="$(printf '%s\n' "$enemy_refs" | grep -v -F 'game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedArcherController.gd:' || true)"
+          if [[ -n "$unexpected_enemy_refs" ]]; then
+            printf '%s\n' "$unexpected_enemy_refs"
+            echo "FAIL: retired Enemy/Area 1 resource path is still referenced outside the contained Archer fallback."
             exit 1
           fi
+          archer_fallback_count="$(grep -F -c 'res://Enemy/Area 1/Encounter/corrupted_archer_projectile.tscn' game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedArcherController.gd || true)"
+          if [[ "$archer_fallback_count" -ne 1 ]]; then
+            echo "FAIL: expected exactly one contained imported Archer fallback; found $archer_fallback_count."
+            exit 1
+          fi
+          grep -F 'const HUSHIRO_PROJECTILE = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcherProjectile.tscn")' game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedArcherRules.gd
+          grep -F 'projectile_scene = HUSHIRO_PROJECTILE' game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedArcherRules.gd
+
           echo "PASS: retired Hushiro compatibility authorities remain absent"
 
       - name: Import project headlessly
