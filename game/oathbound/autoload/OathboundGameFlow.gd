@@ -55,6 +55,8 @@ func _assert_current_playtest_lab() -> void:
 func _assert_autoload_script(autoload_name: String, expected_script: String, warn_if_missing: bool) -> void:
 	var instance: Node = get_node_or_null("/root/%s" % autoload_name)
 	var log_name: String = autoload_name.to_snake_case()
+	if autoload_name == "AttackDir":
+		log_name = "attack_director"
 	if instance == null:
 		var message := "[OathboundGameFlow] %s autoload missing" % autoload_name
 		if warn_if_missing:
