@@ -3,110 +3,69 @@ extends "res://autoload/GameFlow.gd"
 ## Current Oathbound GameFlow integration authority.
 ##
 ## The imported GameFlow remains route/room compatibility plumbing. Current runtime
-## systems are installed/verified here so legacy scene paths cannot silently own a run.
-## In particular, there is one canonical Player creation path and one current runtime
-## authority each for Prosthetics, Relics, Technique offers, and combat pressure.
+## systems are first-class project autoloads and are verified here so legacy scene
+## paths cannot silently own a run. GameFlow owns the canonical Player factory and
+## coordinates run/room Relic events without mutating other autoload scripts at runtime.
 
 const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
-
-const CURRENT_PROSTHETIC_MANAGER_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticManager.gd")
 const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticManager.gd"
-const CURRENT_ATTACK_DIRECTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundAttackDirector.gd")
 const EXPECTED_ATTACK_DIRECTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundAttackDirector.gd"
-
-const CURRENT_RELIC_RUNTIME_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicRuntime.gd")
 const EXPECTED_RELIC_RUNTIME_SCRIPT: String = "res://Core/Relics/OathboundRelicRuntime.gd"
-const CURRENT_UPGRADE_SERVICE_SCRIPT: Script = preload("res://Core/Relics/OathboundUpgradeService.gd")
 const EXPECTED_UPGRADE_SERVICE_SCRIPT: String = "res://Core/Relics/OathboundUpgradeService.gd"
-const CURRENT_PLAYTEST_LAB_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicPlaytestLab.gd")
 const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Relics/OathboundRelicPlaytestLab.gd"
 const RELIC_SWAP_UI_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicSwapUI.gd")
 
 
 func _ready() -> void:
-	_install_current_relic_runtime()
-	_install_current_prosthetic_manager()
-	_install_current_attack_director()
+	# AttackDir and RelicRuntime are declared before GameFlow in project.godot.
+	_assert_current_attack_director()
+	_assert_current_relic_runtime()
 
-	# These autoloads are declared after GameFlow in project.godot. Defer their script
-	# replacement until every autoload node exists, then assert the live script paths.
-	call_deferred("_install_current_upgrade_service")
-	call_deferred("_install_current_playtest_lab")
+	# These services are declared after GameFlow. Assert them once the autoload setup
+	# pass has completed instead of replacing their scripts after _ready().
+	call_deferred("_assert_current_upgrade_service")
+	call_deferred("_assert_current_prosthetic_manager")
+	call_deferred("_assert_current_playtest_lab")
 
 	set_player_scene(CURRENT_PLAYER_SCENE)
 	print("[OathboundGameFlow] canonical Player factory -> res://Player/aspect_player.tscn")
 
 
-func _install_current_relic_runtime() -> void:
-	var runtime: Node = get_node_or_null("/root/RelicRuntime")
-	if runtime == null:
-		var runtime_value: Variant = CURRENT_RELIC_RUNTIME_SCRIPT.new()
-		if not (runtime_value is Node):
-			push_error("[OathboundGameFlow] Could not instantiate current RelicRuntime")
-			return
-		runtime = runtime_value as Node
-		runtime.name = "RelicRuntime"
-		get_tree().root.add_child(runtime)
-
-	var installed_path: String = _script_path(runtime)
-	print("[OathboundGameFlow] relic_runtime script=%s" % installed_path)
-	if installed_path != EXPECTED_RELIC_RUNTIME_SCRIPT:
-		push_error("[OathboundGameFlow] Wrong RelicRuntime script: %s" % installed_path)
+func _assert_current_relic_runtime() -> void:
+	_assert_autoload_script("RelicRuntime", EXPECTED_RELIC_RUNTIME_SCRIPT, false)
 
 
-func _install_current_prosthetic_manager() -> void:
-	var manager: Node = get_node_or_null("/root/ProstheticManager")
-	if manager == null:
-		push_error("[OathboundGameFlow] ProstheticManager autoload missing")
+func _assert_current_prosthetic_manager() -> void:
+	_assert_autoload_script("ProstheticManager", EXPECTED_PROSTHETIC_MANAGER_SCRIPT, false)
+
+
+func _assert_current_attack_director() -> void:
+	_assert_autoload_script("AttackDir", EXPECTED_ATTACK_DIRECTOR_SCRIPT, false)
+
+
+func _assert_current_upgrade_service() -> void:
+	_assert_autoload_script("UpgradeService", EXPECTED_UPGRADE_SERVICE_SCRIPT, false)
+
+
+func _assert_current_playtest_lab() -> void:
+	_assert_autoload_script("PlaytestLab", EXPECTED_PLAYTEST_LAB_SCRIPT, true)
+
+
+func _assert_autoload_script(autoload_name: String, expected_script: String, warn_if_missing: bool) -> void:
+	var instance: Node = get_node_or_null("/root/%s" % autoload_name)
+	var log_name: String = autoload_name.to_snake_case()
+	if instance == null:
+		var message := "[OathboundGameFlow] %s autoload missing" % autoload_name
+		if warn_if_missing:
+			push_warning(message)
+		else:
+			push_error(message)
 		return
-	if _script_path(manager) != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
-		manager.set_script(CURRENT_PROSTHETIC_MANAGER_SCRIPT)
-		if manager.has_method("_ready"):
-			manager.call("_ready")
-	var installed_path: String = _script_path(manager)
-	print("[OathboundGameFlow] prosthetic_manager script=%s" % installed_path)
-	if installed_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
-		push_error("[OathboundGameFlow] Wrong ProstheticManager script: %s" % installed_path)
-
-
-func _install_current_attack_director() -> void:
-	var director: Node = get_node_or_null("/root/AttackDir")
-	if director == null:
-		push_error("[OathboundGameFlow] AttackDir autoload missing")
-		return
-	if _script_path(director) != EXPECTED_ATTACK_DIRECTOR_SCRIPT:
-		director.set_script(CURRENT_ATTACK_DIRECTOR_SCRIPT)
-	var installed_path: String = _script_path(director)
-	print("[OathboundGameFlow] attack_director script=%s" % installed_path)
-	if installed_path != EXPECTED_ATTACK_DIRECTOR_SCRIPT:
-		push_error("[OathboundGameFlow] Wrong AttackDir script: %s" % installed_path)
-
-
-func _install_current_upgrade_service() -> void:
-	var service: Node = get_node_or_null("/root/UpgradeService")
-	if service == null:
-		push_error("[OathboundGameFlow] UpgradeService autoload missing")
-		return
-	if _script_path(service) != EXPECTED_UPGRADE_SERVICE_SCRIPT:
-		service.set_script(CURRENT_UPGRADE_SERVICE_SCRIPT)
-	var installed_path: String = _script_path(service)
-	print("[OathboundGameFlow] upgrade_service script=%s" % installed_path)
-	if installed_path != EXPECTED_UPGRADE_SERVICE_SCRIPT:
-		push_error("[OathboundGameFlow] Wrong UpgradeService script: %s" % installed_path)
-
-
-func _install_current_playtest_lab() -> void:
-	var lab: Node = get_node_or_null("/root/PlaytestLab")
-	if lab == null:
-		push_warning("[OathboundGameFlow] PlaytestLab autoload missing; current test controls unavailable")
-		return
-	if _script_path(lab) != EXPECTED_PLAYTEST_LAB_SCRIPT:
-		lab.set_script(CURRENT_PLAYTEST_LAB_SCRIPT)
-	var installed_path: String = _script_path(lab)
-	print("[OathboundGameFlow] playtest_lab script=%s" % installed_path)
-	if installed_path != EXPECTED_PLAYTEST_LAB_SCRIPT:
-		push_error("[OathboundGameFlow] Wrong PlaytestLab script: %s" % installed_path)
+	var installed_path: String = _script_path(instance)
+	print("[OathboundGameFlow] %s script=%s" % [log_name, installed_path])
+	if installed_path != expected_script:
+		push_error("[OathboundGameFlow] Wrong %s script: %s (expected %s)" % [autoload_name, installed_path, expected_script])
 
 
 func start_run() -> void:
