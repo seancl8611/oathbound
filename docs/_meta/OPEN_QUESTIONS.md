@@ -49,7 +49,8 @@ The former delta-audit gate has materially been executed through the implementat
 - Village Ogre / Collector miniboss integration and Keeper reward flow;
 - canonical persistent Mist / Scroll / boss-material ownership and Bloodwell structure;
 - the current 50-Technique catalog, no-slot acquisition model, eligibility, rarity/source weighting, rerolls, and reward UI;
-- first-playtest Echo / Rupture / Seal / Rift / Crimson combat execution.
+- first-playtest Echo / Rupture / Seal / Rift / Crimson combat execution;
+- first-playtest Wolf / Wraith / Ronin weapon kits, Tier 0-IV runtime rules, shared Blood generation, and Blood Arts.
 
 Do not return to a broad audit as a prerequisite for ordinary implementation. Remaining mismatches should be handled in dependency-sized implementation packages and documented when found.
 
@@ -57,13 +58,13 @@ Do not return to a broad audit as a prerequisite for ordinary implementation. Re
 
 **Question:** Which remaining current player-build/runtime systems prevent a complete Hushiro run from representing the approved documentation rather than imported prototype behavior?
 
-The active implementation order is:
+The active implementation order is now:
 
-1. **Technique runtime stabilization** — validate the five canonical families, mixed-family interactions, all action triggers, reward acquisition, and long-run state cleanup. `TECHNIQUE_RUNTIME_IMPLEMENTATION.md` records the current boundary.
-2. **Blood Aspect runtime reconciliation** — ensure Wolf / Wraith / Ronin current action kits and Tier progression drive the same shared action tags used by Techniques.
-3. **Current Prosthetic runtime reconciliation** — preserve approved equipped-tool behavior while retiring superseded imported assumptions.
+1. **Technique runtime stabilization** — the five canonical families, mixed-family interactions, universal action triggers, reward acquisition, and long-run cleanup are implemented at first-playtest depth. `TECHNIQUE_RUNTIME_IMPLEMENTATION.md` records the boundary; remaining work is runtime validation/tuning rather than another design pass.
+2. **Blood Aspect runtime reconciliation** — Wolf / Wraith / Ronin now have current Tier 0 weapon kits, Tier I-IV mechanics, shared action-trigger metadata, applied-result Blood generation, Blood Arts, and debug Tier/Blood controls. `ASPECT_RUNTIME_IMPLEMENTATION.md` records the boundary. Natural Tier advancement intentionally waits for the approved Corruption Shrine Embrace caller.
+3. **Current Prosthetic runtime reconciliation — NEXT IMPLEMENTATION PACKAGE** — preserve the approved equipped-tool behavior and Spirit contract while retiring superseded imported Prosthetic assumptions/call paths.
 4. **Relic runtime reconciliation** — connect the approved run-scoped passive rules and acquisition/source behavior.
-5. **Corruption / Shrine / Blood runtime reconciliation** — replace remaining prototype state with the approved Corruption choices, Blood generation/spend rules, and related HUD feedback.
+5. **Corruption / Shrine integration** — replace remaining prototype state with the approved Resist / Embrace flow, have Embrace call the existing Aspect Tier API, empty Corruption correctly, and connect related HUD feedback. Blood itself is already owned by the Aspect runtime rather than this later package.
 6. **First complete Hushiro run validation** — play the 12-chamber route through Keeper with the current build layer active and resolve structural/runtime defects found across the package.
 7. **Compatibility retirement** — remove old UpgradeDb/StanceEffects and other imported authorities only after no current caller requires them.
 

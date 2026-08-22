@@ -29,6 +29,8 @@ AreaDB="*res://Utility/AreaDB.gd"
 EncounterDB="*res://Utility/EncounterDB.gd"
 RouteGenerator="*res://Utility/RouteGenerator.gd"
 GameFlow="*res://autoload/GameFlow.gd"
+AspectRuntime="*res://Core/Aspects/AspectRuntimeIntegrated.gd"
+AspectBootstrap="*res://Core/Aspects/AspectBootstrap.gd"
 UpgradeService="*res://autoload/UpgradeService.gd"
 CurrencyManager="*res://Utility/CurrencyManager.gd"
 ProstheticManager="*res://autoload/ProstheticManager.gd"
@@ -37,9 +39,10 @@ CodexManager="*res://Utility/CodexManager.gd"
 MetaProgressionManager="*res://Utility/MetaProgressionManager.gd"
 QuestManager="*res://Utility/QuestManager.gd"
 ProstheticEffects="*res://Utility/ProstheticEffects.gd"
-TechniqueEffects="*res://Core/Techniques/TechniqueEffectsRuntime.gd"
+TechniqueEffects="*res://Core/Techniques/AspectTechniqueEffectsRuntime.gd"
 StanceEffects="*res://autoload/stance_effects.gd"
 PlaytestLab="*res://Utility/PlaytestLab.gd"
+AspectPlaytestLabBridge="*res://Core/Aspects/AspectPlaytestLabBridge.gd"
 CombatTelemetry="*res://Utility/CombatTelemetry.gd"
 HushiroEnemyRuntime="*res://Utility/HushiroEnemyRuntime.gd"
 FlameProgress="*res://autoload/FlameProgress.gd"
@@ -54,6 +57,10 @@ window/size/borderless=true
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+
+[debug]
+
+gdscript/warnings/inference_on_variant=1
 
 [input]
 
