@@ -1,8 +1,10 @@
 extends Node
 
 ## Headless contract smoke for FIRST_ATTEMPT.md's combat-loadout boundary.
-## The runner uses a disposable user dir, but this test still forces campaign state so
-## local direct launches cannot inherit an old Returning Blood save.
+## The runner uses a disposable user dir, but the project-check workflow intentionally
+## runs several independent smoke processes in sequence. This contract therefore
+## resets in-memory campaign-owned loadout state before asserting a clean first attempt
+## so an earlier smoke that awakens Returning Blood cannot contaminate this process.
 
 const CATALOG = preload("res://Core/Aspects/AspectCatalog.gd")
 const PLAYER_SCENE = preload("res://Player/aspect_player.tscn")
@@ -28,6 +30,15 @@ func _run_contract() -> void:
 	if typeof(MetaProgress) != TYPE_OBJECT or typeof(AspectRuntime) != TYPE_OBJECT or typeof(CorruptionRuntime) != TYPE_OBJECT:
 		_fail("required campaign runtimes missing")
 		return
+
+	# CorruptionRuntimeSmoke intentionally runs before this contract in CI and can
+	# awaken Returning Blood, causing Strand progression to discover its first-return
+	# campaign Relic. A genuine first-ever attempt has no Relic collection, so isolate
+	# this smoke in memory without deleting the persistent file used by later tests.
+	if typeof(RelicRuntime) == TYPE_OBJECT:
+		RelicRuntime.unlocked_relics.clear()
+		RelicRuntime.mastery_kills.clear()
+		RelicRuntime.equipped_relic_id = ""
 
 	MetaProgress.returning_blood_awakened = false
 	AspectRuntime.synchronize_campaign_state(false)
