@@ -4,21 +4,21 @@ extends "res://Utility/hurt_box.gd"
 ## layer transforms direct Wraith passage contacts before damage resolution and reports
 ## actual applied Health/Posture deltas to AspectRuntime after the event transaction.
 
-var _aspect_before_hp := 0.0
-var _aspect_before_posture := 0.0
-var _aspect_pending_contact := false
+var _aspect_before_hp: float = 0.0
+var _aspect_before_posture: float = 0.0
+var _aspect_pending_contact: bool = false
 
 func _cache_attack_event(area: Area2D, resolved_attacker: Node) -> void:
 	if area == null:
 		return
-	var event := {
+	var event: Dictionary = {
 		"health_damage": int(area.get_meta("health_damage", area.get_meta("damage", 0))),
 		"posture_damage": float(area.get_meta("posture_damage", 0.0)),
 		"block_posture_damage": float(area.get_meta("block_posture_damage", area.get_meta("posture_damage", 0.0))),
 		"stagger_level": int(area.get_meta("stagger_level", 0)),
 		"proc_coefficient": float(area.get_meta("proc_coefficient", 1.0)),
 	}
-	var receiver := get_parent()
+	var receiver: Node = get_parent()
 	if typeof(AspectRuntime) == TYPE_OBJECT:
 		event = AspectRuntime.transform_sword_contact(area, receiver, resolved_attacker, event)
 
@@ -53,7 +53,7 @@ func _end_attack_event_transaction(combat_node: Node) -> void:
 	_aspect_pending_contact = false
 	var area = get_meta("last_attack_area", null)
 	var attacker = get_meta("last_attack_source", null)
-	var receiver := get_parent()
+	var receiver: Node = get_parent()
 	if area is Area2D and is_instance_valid(area) and typeof(AspectRuntime) == TYPE_OBJECT:
 		AspectRuntime.record_sword_contact(receiver, area, attacker, _aspect_before_hp, _aspect_before_posture)
 
@@ -66,7 +66,7 @@ func _read_actor_hp(actor: Node) -> float:
 func _read_actor_posture(actor: Node) -> float:
 	if actor == null:
 		return 0.0
-	var combat_node := actor.get_node_or_null("Combat")
+	var combat_node: Node = actor.get_node_or_null("Combat")
 	if combat_node != null and combat_node.get("posture") != null:
 		return float(combat_node.get("posture"))
 	var value = actor.get("stagger")
