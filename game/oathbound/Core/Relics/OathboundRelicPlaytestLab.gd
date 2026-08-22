@@ -22,7 +22,7 @@ func _build_relic_tab(tabs: TabContainer) -> void:
 
 	_relic_dropdown = OptionButton.new()
 	for relic_id: String in RELIC_CATALOG.IDS:
-		_relic_dropdown.add_item(RELIC_CATALOG.get_name(relic_id))
+		_relic_dropdown.add_item(RELIC_CATALOG.get_display_name(relic_id))
 		_relic_dropdown.set_item_metadata(_relic_dropdown.item_count - 1, relic_id)
 	_relic_dropdown.item_selected.connect(func(_index: int) -> void: _refresh_relic_status())
 	vbox.add_child(_relic_dropdown)
