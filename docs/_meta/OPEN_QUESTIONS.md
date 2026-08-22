@@ -52,7 +52,8 @@ The former delta-audit gate has materially been executed through the implementat
 - first-playtest Echo / Rupture / Seal / Rift / Crimson combat execution;
 - first-playtest Wolf / Wraith / Ronin weapon kits, Tier 0-IV runtime rules, shared Blood generation, and Blood Arts;
 - current Prosthetic roster, Spirit runtime, permanent upgrade contract, and test controls;
-- current persistent Relic slot/mastery/effect runtime, Forge management, safe swap windows, and current Shop economy surface.
+- current persistent Relic slot/mastery/effect runtime, Forge management, safe swap windows, and current Shop economy surface;
+- current run-scoped Corruption authority, first-death Returning Blood awakening, Shrine support / Resist / Embrace / Stabilize flow, and Aspect Tier advancement bridge.
 
 Do not return to a broad audit as a prerequisite for ordinary implementation. Remaining mismatches should be handled in dependency-sized implementation packages and documented when found.
 
@@ -63,12 +64,14 @@ Do not return to a broad audit as a prerequisite for ordinary implementation. Re
 The active implementation order is now:
 
 1. **Technique runtime stabilization — IMPLEMENTED / VALIDATION-TUNING** — the five canonical families, mixed-family interactions, universal action triggers, reward acquisition, and long-run cleanup are implemented at first-playtest depth. `TECHNIQUE_RUNTIME_IMPLEMENTATION.md` records the boundary; remaining work is runtime validation/tuning rather than another design pass.
-2. **Blood Aspect runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — Wolf / Wraith / Ronin have current Tier 0 weapon kits, Tier I-IV mechanics, shared action-trigger metadata, applied-result Blood generation, Blood Arts, and debug Tier/Blood controls. `ASPECT_RUNTIME_IMPLEMENTATION.md` records the boundary. Natural Tier advancement intentionally waits for the approved Corruption Shrine Embrace caller.
+2. **Blood Aspect runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — Wolf / Wraith / Ronin have current Tier 0 weapon kits, Tier I-IV mechanics, shared action-trigger metadata, applied-result Blood generation, Blood Arts, and debug Tier/Blood controls. `ASPECT_RUNTIME_IMPLEMENTATION.md` records the boundary. Natural Tier advancement is now called by the approved Corruption Shrine Embrace flow.
 3. **Current Prosthetic runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — the current eight-tool roster, 100-Spirit runtime, permanent upgrade contract, Shop/HUD integration surface, and focused Playtest Lab controls are implemented on the current stack. Remaining work is long-run interaction validation rather than reopening Prosthetic planning.
 4. **Relic runtime reconciliation — IMPLEMENTED ON CURRENT STACK / VALIDATION-TUNING** — the one-slot persistent runtime, ten approved launch effects, kill mastery, Forge management, safe Keeper/Twin swap windows, Scribe four-card rewards, current Merchant economy integration, and generic immediate-persistence discovery flow are implemented. `RELIC_RUNTIME_IMPLEMENTATION.md` records the boundary. Exact 4 / 2 / 4 Relic source identity assignment remains intentionally deferred to permanent-progression/content sequencing.
-5. **Corruption / Shrine integration — NEXT IMPLEMENTATION PACKAGE** — replace remaining prototype state with the approved Resist / Embrace flow, have Embrace call the existing Aspect Tier API, empty Corruption correctly, and connect related HUD feedback. Blood itself is already owned by the Aspect runtime rather than this later package.
-6. **First complete Hushiro run validation** — play the 12-chamber route through Keeper with the current build layer active and resolve structural/runtime defects found across the package.
-7. **Compatibility retirement** — remove old UpgradeDb/StanceEffects and other imported authorities only after no current caller requires them.
+5. **Corruption / Shrine integration — IMPLEMENTED / VALIDATION-TUNING** — the approved 0 / 100 Corruption state, encounter credit/caps, first-death Returning Blood awakening, support Shrine, Resist, Embrace, Tier-IV Stabilize, awakened-only HUD state, and Aspect Tier bridge are implemented. `CORRUPTION_RUNTIME_IMPLEMENTATION.md` records the runtime contract and explicit authored-boss checkpoint boundary.
+6. **First complete Hushiro run validation — NEXT** — play the 12-chamber route through Keeper with the current build layer active and resolve structural/runtime defects found across the package. This is a validation/integration pass, not another player-build planning pass.
+7. **Compatibility retirement** — remove old UpgradeDb/StanceEffects and other imported authorities only after the complete current Hushiro run confirms no current caller requires them.
+
+The first-attempt pre-awakening Shrine/Corruption state is implemented, but complete first-attempt base-katana/no-Aspect combat-loadout reconciliation remains a separate onboarding/runtime integration boundary rather than something to approximate inside the Corruption package.
 
 The goal is not to require a separate playtest after every micro-fix. Build coherent dependency-sized batches, then use longer telemetry-backed playtests to find interacting defects together. Accuracy and consistency with approved authorities still take precedence over merely increasing change volume.
 
