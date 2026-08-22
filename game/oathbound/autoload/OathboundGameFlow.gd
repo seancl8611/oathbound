@@ -8,6 +8,7 @@ extends "res://autoload/GameFlow.gd"
 ## runtime expects the Blood-Aspect player.
 
 const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
+const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
 
 
 func _ready() -> void:
@@ -53,9 +54,11 @@ func _record_player_runtime(event_name: String, instance: Node) -> void:
 	if script_value is Script:
 		script_path = (script_value as Script).resource_path
 	print("[OathboundGameFlow] %s script=%s" % [event_name, script_path])
+	if script_path != EXPECTED_PLAYER_SCRIPT:
+		push_error("[OathboundGameFlow] Wrong active Player script: %s (expected %s)" % [script_path, EXPECTED_PLAYER_SCRIPT])
 	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event(event_name, {
 			"player_script": script_path,
-			"expected_player_script": "res://Player/OathboundAspectPlayerRuntime.gd",
-			"matches_expected": script_path == "res://Player/OathboundAspectPlayerRuntime.gd",
+			"expected_player_script": EXPECTED_PLAYER_SCRIPT,
+			"matches_expected": script_path == EXPECTED_PLAYER_SCRIPT,
 		})
