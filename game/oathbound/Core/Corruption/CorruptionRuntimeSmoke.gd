@@ -33,16 +33,22 @@ func _run_contract() -> void:
 	# Explicitly force the disposable runner into the first-attempt state so this test
 	# does not depend on any user save that might exist during a local direct launch.
 	MetaProgress.returning_blood_awakened = false
+	if AspectRuntime.has_method("synchronize_campaign_state"):
+		AspectRuntime.synchronize_campaign_state(false)
 	CorruptionRuntime.on_new_run(1)
 	_expect(not bool(CorruptionRuntime.call("is_awakened")), "first attempt must begin pre-awakening")
 	_expect(str(CorruptionRuntime.call("get_corruption_state")) == "hidden", "pre-awakening Corruption state must be hidden")
 	_expect(int(CorruptionRuntime.call("get_corruption")) == 0, "new run must begin at 0 Corruption")
 
-	# The first genuine death awakens Returning Blood and resets run pressure.
+	# The first genuine death awakens Returning Blood and resets run pressure. Awakening
+	# unlocks Aspect selection but does not silently choose a weapon kit for the player.
 	CorruptionRuntime.set_corruption_for_playtest(67)
 	CorruptionRuntime.on_player_death()
 	_expect(bool(CorruptionRuntime.call("is_awakened")), "first death must awaken Returning Blood")
 	_expect(int(CorruptionRuntime.call("get_corruption")) == 0, "death must reset Corruption to 0")
+	if AspectRuntime.has_method("has_active_aspect"):
+		_expect(not bool(AspectRuntime.has_active_aspect()), "first death must wait for explicit Aspect selection")
+	_expect(bool(AspectRuntime.select_aspect("wolf")), "awakened test run must allow explicit Wolf selection")
 
 	# Successful parries are +1 with at most four points per chamber.
 	CorruptionRuntime.on_room_entered("combat:technique")
