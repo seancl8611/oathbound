@@ -9,11 +9,41 @@ extends "res://autoload/GameFlow.gd"
 
 const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
+const CURRENT_PROSTHETIC_MANAGER_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticManager.gd")
+const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticManager.gd"
 
 
 func _ready() -> void:
+	_install_current_prosthetic_manager()
 	set_player_scene(CURRENT_PLAYER_SCENE)
 	print("[OathboundGameFlow] canonical Player factory -> res://Player/aspect_player.tscn")
+
+
+func _install_current_prosthetic_manager() -> void:
+	var manager: Node = get_node_or_null("/root/ProstheticManager")
+	if manager == null:
+		push_error("[OathboundGameFlow] ProstheticManager autoload missing")
+		return
+
+	var current_script_path: String = ""
+	var current_script: Variant = manager.get_script()
+	if current_script is Script:
+		current_script_path = (current_script as Script).resource_path
+
+	if current_script_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
+		manager.set_script(CURRENT_PROSTHETIC_MANAGER_SCRIPT)
+		# set_script() changes the runtime authority after the imported autoload has
+		# already entered the tree, so initialize the current registry explicitly.
+		if manager.has_method("_ready"):
+			manager.call("_ready")
+
+	var installed_script_path: String = ""
+	var installed_script: Variant = manager.get_script()
+	if installed_script is Script:
+		installed_script_path = (installed_script as Script).resource_path
+	print("[OathboundGameFlow] prosthetic_manager script=%s" % installed_script_path)
+	if installed_script_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
+		push_error("[OathboundGameFlow] Wrong ProstheticManager script: %s" % installed_script_path)
 
 
 func set_player_scene(scene: PackedScene) -> void:
