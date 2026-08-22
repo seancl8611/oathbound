@@ -8,6 +8,7 @@ const DEFENSIVE_AIM_MIN_DISTANCE: float = 6.0
 const CURRENT_PROSTHETIC_EXECUTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticExecutor.gd")
 const EXPECTED_PROSTHETIC_EXECUTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticExecutor.gd"
 const CURRENT_RUN_HUD_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundRunHUD.gd")
+const EXPECTED_RUN_HUD_SCRIPT: String = "res://Core/Prosthetics/OathboundRunHUD.gd"
 const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
 
@@ -31,9 +32,34 @@ func _ready() -> void:
 
 
 func _install_current_run_hud() -> void:
-	if run_hud == null:
+	# LegacyPlayerController creates and initializes the imported RunHUD during
+	# super._ready(). Replacing that node's script afterwards clears the script-owned
+	# UI references, so replace the whole HUD with a freshly initialized current HUD.
+	var old_hud: Node = run_hud
+	var hud_value: Variant = CURRENT_RUN_HUD_SCRIPT.new()
+	if not (hud_value is CanvasLayer):
+		push_error("[OathboundCombatPlayer] Could not instantiate current RunHUD")
 		return
-	run_hud.set_script(CURRENT_RUN_HUD_SCRIPT)
+
+	if old_hud != null and is_instance_valid(old_hud):
+		if old_hud.get_parent() != null:
+			old_hud.get_parent().remove_child(old_hud)
+		old_hud.free()
+
+	run_hud = hud_value as CanvasLayer
+	run_hud.name = "RunHUD"
+	add_child(run_hud)
+	if run_hud.has_method("setup"):
+		run_hud.call("setup", self)
+
+	var hud_script_path: String = ""
+	var hud_script_value: Variant = run_hud.get_script()
+	if hud_script_value is Script:
+		hud_script_path = (hud_script_value as Script).resource_path
+	print("[OathboundCombatPlayer] run_hud script=%s" % hud_script_path)
+	if hud_script_path != EXPECTED_RUN_HUD_SCRIPT:
+		push_error("[OathboundCombatPlayer] Wrong RunHUD script: %s" % hud_script_path)
+
 	if prosthetic_executor != null and run_hud.has_method("update_spirit"):
 		var spirit: int = int(prosthetic_executor.call("get_spirit")) if prosthetic_executor.has_method("get_spirit") else 100
 		var spirit_max: int = int(prosthetic_executor.call("get_max_spirit")) if prosthetic_executor.has_method("get_max_spirit") else 100
