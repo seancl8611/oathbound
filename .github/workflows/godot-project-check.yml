@@ -164,6 +164,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify first-attempt base-katana contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Aspects/FirstAttemptRuntimeSmoke.tscn 2>&1 | tee first-attempt-smoke.log
+          grep -F "[FirstAttemptRuntimeSmoke] PASS - base katana no Aspect awakening handoff" first-attempt-smoke.log
+          if grep -F "SCRIPT ERROR:" first-attempt-smoke.log; then
+            echo "FAIL: First-attempt contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" first-attempt-smoke.log; then
+            echo "FAIL: First-attempt contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Hushiro seeded route contract
         shell: bash
         run: |
@@ -202,6 +217,7 @@ jobs:
           path: |
             hushiro-route-contract.log
             hushiro-full-run.log
+            first-attempt-smoke.log
           if-no-files-found: warn
           retention-days: 7
 
