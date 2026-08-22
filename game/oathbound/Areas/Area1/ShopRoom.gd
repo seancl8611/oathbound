@@ -1,2 +1,3 @@
-# Deprecated compatibility shim. New code: res://Core/Chambers/Types/MerchantChamber.gd
-extends "res://Core/Chambers/Types/MerchantChamber.gd"
+# Deprecated scene-path compatibility shim.
+# Current implementation: res://Core/Relics/OathboundMerchantChamber.gd
+extends "res://Core/Relics/OathboundMerchantChamber.gd"
