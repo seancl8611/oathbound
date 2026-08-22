@@ -350,13 +350,22 @@ func get_runtime_snapshot() -> Dictionary:
 func _on_tree_node_added(node: Node) -> void:
 	if node == null:
 		return
-	call_deferred("_try_track_enemy", node)
+	# node_added can include setup nodes that are freed before the deferred callback.
+	# Defer the stable instance ID and resolve it only if the Node is still alive.
+	call_deferred("_try_track_enemy_id", node.get_instance_id())
 
 
 func _track_existing_enemies() -> void:
 	for group_name: String in ["enemy", "miniboss"]:
 		for enemy: Node in get_tree().get_nodes_in_group(group_name):
 			_try_track_enemy(enemy)
+
+
+func _try_track_enemy_id(instance_id: int) -> void:
+	var object: Object = instance_from_id(instance_id)
+	if object == null or not is_instance_valid(object) or not (object is Node):
+		return
+	_try_track_enemy(object as Node)
 
 
 func _try_track_enemy(enemy: Node) -> void:
@@ -368,16 +377,18 @@ func _try_track_enemy(enemy: Node) -> void:
 	if _tracked_enemies.has(id):
 		return
 	_tracked_enemies[id] = weakref(enemy)
-	if not enemy.tree_exiting.is_connected(_on_tracked_enemy_exiting.bind(enemy)):
-		enemy.tree_exiting.connect(_on_tracked_enemy_exiting.bind(enemy), CONNECT_ONE_SHOT)
+	var exit_cb := Callable(self, "_on_tracked_enemy_exiting").bind(id)
+	if not enemy.tree_exiting.is_connected(exit_cb):
+		enemy.tree_exiting.connect(exit_cb, CONNECT_ONE_SHOT)
 
 
-func _on_tracked_enemy_exiting(enemy: Node) -> void:
-	if enemy == null:
-		return
-	if _enemy_is_dead(enemy):
-		_record_enemy_kill_once(enemy)
-	_tracked_enemies.erase(enemy.get_instance_id())
+func _on_tracked_enemy_exiting(instance_id: int) -> void:
+	var object: Object = instance_from_id(instance_id)
+	if object is Node and is_instance_valid(object):
+		var enemy: Node = object as Node
+		if _enemy_is_dead(enemy):
+			_record_enemy_kill_once(enemy)
+	_tracked_enemies.erase(instance_id)
 
 
 func _record_enemy_kill_once(enemy: Node) -> void:
