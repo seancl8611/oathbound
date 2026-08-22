@@ -26,6 +26,46 @@ jobs:
       - name: Verify Godot version
         run: godot --version
 
+      - name: Verify retired Hushiro compatibility authorities stay absent
+        shell: bash
+        run: |
+          set -euo pipefail
+          retired_paths=(
+            "game/oathbound/Utility/upgrade_db.gd"
+            "game/oathbound/Utility/upgrade_db.tscn"
+            "game/oathbound/autoload/stance_effects.gd"
+            "game/oathbound/Utility/item_option.gd"
+            "game/oathbound/Utility/item_option.tscn"
+            "game/oathbound/Utility/Area1(old).tscn"
+            "game/oathbound/Legacy/Area1"
+            "game/oathbound/Areas/Area1"
+            "game/oathbound/Enemy/Area 1"
+          )
+          for path in "${retired_paths[@]}"; do
+            if [[ -e "$path" ]]; then
+              echo "FAIL: retired compatibility path returned: $path"
+              exit 1
+            fi
+          done
+
+          if grep -F 'UpgradeDb=' game/oathbound/project.godot; then
+            echo "FAIL: UpgradeDb autoload returned."
+            exit 1
+          fi
+          if grep -F 'StanceEffects=' game/oathbound/project.godot; then
+            echo "FAIL: StanceEffects autoload returned."
+            exit 1
+          fi
+          if grep -R -n -F 'res://Areas/Area1/' game/oathbound --include='*.gd' --include='*.tscn'; then
+            echo "FAIL: retired Areas/Area1 resource path is still referenced."
+            exit 1
+          fi
+          if grep -R -n -F 'res://Enemy/Area 1/' game/oathbound --include='*.gd' --include='*.tscn'; then
+            echo "FAIL: retired Enemy/Area 1 resource path is still referenced."
+            exit 1
+          fi
+          echo "PASS: retired Hushiro compatibility authorities remain absent"
+
       - name: Import project headlessly
         run: godot --headless --path game/oathbound --import
 
