@@ -37,16 +37,40 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee runscene-smoke.log
-          grep -F "[OathboundCombatPlayer]" runscene-smoke.log
+
+          grep -F "player_factory_created script=res://Player/OathboundCombatPlayer.gd" runscene-smoke.log
           grep -F "player_factory_assigned script=res://Player/OathboundCombatPlayer.gd" runscene-smoke.log
           grep -F "prosthetic_manager script=res://Core/Prosthetics/OathboundProstheticManager.gd" runscene-smoke.log
           grep -F "attack_director script=res://Core/Prosthetics/OathboundAttackDirector.gd" runscene-smoke.log
           grep -F "prosthetic_executor script=res://Core/Prosthetics/OathboundProstheticExecutor.gd" runscene-smoke.log
-          grep -F "playtest_lab script=res://Core/Prosthetics/OathboundPlaytestLab.gd" runscene-smoke.log
+          grep -F "relic_runtime script=res://Core/Relics/OathboundRelicRuntime.gd" runscene-smoke.log
+          grep -F "upgrade_service script=res://Core/Relics/OathboundUpgradeService.gd" runscene-smoke.log
+          grep -F "playtest_lab script=res://Core/Relics/OathboundRelicPlaytestLab.gd" runscene-smoke.log
           grep -F "[OathboundPlaytestLab] Prosthetics tab built with 8 tools" runscene-smoke.log
+          grep -F "[OathboundPlaytestLab] Relics tab built with 10 relics" runscene-smoke.log
           grep -F "[OathboundProstheticManager] registry validation PASS" runscene-smoke.log
           grep -F "[OathboundProstheticExecutor] v1.0 - canonical 100 Spirit runtime" runscene-smoke.log
-          if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong PlaytestLab script" runscene-smoke.log; then
+          grep -F "[OathboundRelicRuntime] v1.0 - one-slot persistent Relic runtime" runscene-smoke.log
+
+          if grep -E "player_factory_(created|assigned).*OathboundPlayerStability.gd" runscene-smoke.log; then
+            echo "Legacy Stability Player was instantiated by the current run."
+            exit 1
+          fi
+          if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong RelicRuntime script|Wrong UpgradeService script|Wrong PlaytestLab script" runscene-smoke.log; then
             echo "Canonical runtime ownership assertion failed."
             exit 1
           fi
+
+      - name: Smoke current Merchant chamber
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --quit-after 8 res://Core/Chambers/Types/MerchantChamber.tscn 2>&1 | tee merchant-smoke.log
+          grep -F "[OathboundMerchant] current offers" merchant-smoke.log
+
+      - name: Smoke current Forge Relic menu
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --quit-after 8 res://Core/Relics/OathboundForgeMenu.tscn 2>&1 | tee forge-smoke.log
+          grep -F "[OathboundForgeMenu] v1.0 - Forge Relic collection/mastery management" forge-smoke.log
