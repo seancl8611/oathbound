@@ -9,11 +9,89 @@ extends "res://autoload/GameFlow.gd"
 
 const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
+const CURRENT_PROSTHETIC_MANAGER_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundProstheticManager.gd")
+const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticManager.gd"
+const CURRENT_ATTACK_DIRECTOR_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundAttackDirector.gd")
+const EXPECTED_ATTACK_DIRECTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundAttackDirector.gd"
+const CURRENT_PLAYTEST_LAB_SCRIPT: Script = preload("res://Core/Prosthetics/OathboundPlaytestLab.gd")
+const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Prosthetics/OathboundPlaytestLab.gd"
 
 
 func _ready() -> void:
+	_install_current_prosthetic_manager()
+	_install_current_attack_director()
+	# PlaytestLab appears later in the autoload list. Install its current overlay on the
+	# deferred pass before the lab's own deferred UI build executes.
+	call_deferred("_install_current_playtest_lab")
 	set_player_scene(CURRENT_PLAYER_SCENE)
 	print("[OathboundGameFlow] canonical Player factory -> res://Player/aspect_player.tscn")
+
+
+func _install_current_prosthetic_manager() -> void:
+	var manager: Node = get_node_or_null("/root/ProstheticManager")
+	if manager == null:
+		push_error("[OathboundGameFlow] ProstheticManager autoload missing")
+		return
+
+	var current_script_path: String = ""
+	var current_script: Variant = manager.get_script()
+	if current_script is Script:
+		current_script_path = (current_script as Script).resource_path
+
+	if current_script_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
+		manager.set_script(CURRENT_PROSTHETIC_MANAGER_SCRIPT)
+		# set_script() changes the runtime authority after the imported autoload has
+		# already entered the tree, so initialize the current registry explicitly.
+		if manager.has_method("_ready"):
+			manager.call("_ready")
+
+	var installed_script_path: String = ""
+	var installed_script: Variant = manager.get_script()
+	if installed_script is Script:
+		installed_script_path = (installed_script as Script).resource_path
+	print("[OathboundGameFlow] prosthetic_manager script=%s" % installed_script_path)
+	if installed_script_path != EXPECTED_PROSTHETIC_MANAGER_SCRIPT:
+		push_error("[OathboundGameFlow] Wrong ProstheticManager script: %s" % installed_script_path)
+
+
+func _install_current_attack_director() -> void:
+	var director: Node = get_node_or_null("/root/AttackDir")
+	if director == null:
+		push_error("[OathboundGameFlow] AttackDir autoload missing")
+		return
+	var script_path: String = ""
+	var script_value: Variant = director.get_script()
+	if script_value is Script:
+		script_path = (script_value as Script).resource_path
+	if script_path != EXPECTED_ATTACK_DIRECTOR_SCRIPT:
+		director.set_script(CURRENT_ATTACK_DIRECTOR_SCRIPT)
+	var installed_path: String = ""
+	var installed_script: Variant = director.get_script()
+	if installed_script is Script:
+		installed_path = (installed_script as Script).resource_path
+	print("[OathboundGameFlow] attack_director script=%s" % installed_path)
+	if installed_path != EXPECTED_ATTACK_DIRECTOR_SCRIPT:
+		push_error("[OathboundGameFlow] Wrong AttackDir script: %s" % installed_path)
+
+
+func _install_current_playtest_lab() -> void:
+	var lab: Node = get_node_or_null("/root/PlaytestLab")
+	if lab == null:
+		push_warning("[OathboundGameFlow] PlaytestLab autoload missing; Prosthetic test controls unavailable")
+		return
+	var current_path: String = ""
+	var current_script: Variant = lab.get_script()
+	if current_script is Script:
+		current_path = (current_script as Script).resource_path
+	if current_path != EXPECTED_PLAYTEST_LAB_SCRIPT:
+		lab.set_script(CURRENT_PLAYTEST_LAB_SCRIPT)
+	var installed_path: String = ""
+	var installed_script: Variant = lab.get_script()
+	if installed_script is Script:
+		installed_path = (installed_script as Script).resource_path
+	print("[OathboundGameFlow] playtest_lab script=%s" % installed_path)
+	if installed_path != EXPECTED_PLAYTEST_LAB_SCRIPT:
+		push_error("[OathboundGameFlow] Wrong PlaytestLab script: %s" % installed_path)
 
 
 func set_player_scene(scene: PackedScene) -> void:

@@ -32,14 +32,21 @@ jobs:
       - name: Compile and load editor project
         run: godot --headless --editor --path game/oathbound --quit-after 3
 
-      - name: Smoke current RunScene and assert Player ownership
+      - name: Smoke current RunScene and assert runtime ownership
         shell: bash
         run: |
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee runscene-smoke.log
           grep -F "[OathboundCombatPlayer]" runscene-smoke.log
           grep -F "player_factory_assigned script=res://Player/OathboundCombatPlayer.gd" runscene-smoke.log
-          if grep -F "Wrong active Player script" runscene-smoke.log; then
-            echo "Canonical Player ownership assertion failed."
+          grep -F "prosthetic_manager script=res://Core/Prosthetics/OathboundProstheticManager.gd" runscene-smoke.log
+          grep -F "attack_director script=res://Core/Prosthetics/OathboundAttackDirector.gd" runscene-smoke.log
+          grep -F "prosthetic_executor script=res://Core/Prosthetics/OathboundProstheticExecutor.gd" runscene-smoke.log
+          grep -F "playtest_lab script=res://Core/Prosthetics/OathboundPlaytestLab.gd" runscene-smoke.log
+          grep -F "[OathboundPlaytestLab] Prosthetics tab built with 8 tools" runscene-smoke.log
+          grep -F "[OathboundProstheticManager] registry validation PASS" runscene-smoke.log
+          grep -F "[OathboundProstheticExecutor] v1.0 - canonical 100 Spirit runtime" runscene-smoke.log
+          if grep -E "Wrong active Player script|Wrong ProstheticManager script|Wrong AttackDir script|Wrong Prosthetic executor script|Wrong PlaytestLab script" runscene-smoke.log; then
+            echo "Canonical runtime ownership assertion failed."
             exit 1
           fi
