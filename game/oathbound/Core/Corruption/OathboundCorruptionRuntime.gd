@@ -466,7 +466,7 @@ func _award(amount: int, source: String, enemy: Node = null, extra: Dictionary =
 	var cap_remaining: int = maxi(0, encounter_cap - _encounter_awarded)
 	if cap_remaining <= 0:
 		return 0
-	var actual: int = mini(amount, cap_remaining, CORRUPTION_MAX - corruption)
+	var actual: int = mini(mini(amount, cap_remaining), CORRUPTION_MAX - corruption)
 	if actual <= 0:
 		return 0
 	var was_ready: bool = is_shrine_ready()
