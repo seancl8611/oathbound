@@ -76,6 +76,10 @@ jobs:
             echo "FAIL: RunScene emitted a GDScript runtime error."
             exit 1
           fi
+          if grep -F "ERROR: Error calling deferred method:" runscene-smoke.log; then
+            echo "FAIL: RunScene emitted a deferred-call runtime error."
+            exit 1
+          fi
 
       - name: Upload RunScene smoke log
         if: always()
