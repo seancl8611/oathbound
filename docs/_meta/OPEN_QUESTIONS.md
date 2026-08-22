@@ -57,9 +57,9 @@ The former delta-audit gate has materially been executed through the implementat
 
 Do not return to a broad audit as a prerequisite for ordinary implementation. Remaining mismatches should be handled in dependency-sized implementation packages and documented when found.
 
-# Current implementation question — complete the first current Hushiro run
+# Current implementation question — retire imported compatibility authorities
 
-**Question:** Which remaining current player-build/runtime systems prevent a complete Hushiro run from representing the approved documentation rather than imported prototype behavior?
+**Question:** Which imported prototype authorities and compatibility paths can now be safely removed after the current Hushiro run has passed its complete structural/runtime validation gate?
 
 The active implementation order is now:
 
@@ -68,10 +68,10 @@ The active implementation order is now:
 3. **Current Prosthetic runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — the current eight-tool roster, 100-Spirit runtime, permanent upgrade contract, Shop/HUD integration surface, and focused Playtest Lab controls are implemented on the current stack. Remaining work is long-run interaction validation rather than reopening Prosthetic planning.
 4. **Relic runtime reconciliation — IMPLEMENTED ON CURRENT STACK / VALIDATION-TUNING** — the one-slot persistent runtime, ten approved launch effects, kill mastery, Forge management, safe Keeper/Twin swap windows, Scribe four-card rewards, current Merchant economy integration, and generic immediate-persistence discovery flow are implemented. `RELIC_RUNTIME_IMPLEMENTATION.md` records the boundary. Exact 4 / 2 / 4 Relic source identity assignment remains intentionally deferred to permanent-progression/content sequencing.
 5. **Corruption / Shrine integration — IMPLEMENTED / VALIDATION-TUNING** — the approved 0 / 100 Corruption state, encounter credit/caps, first-death Returning Blood awakening, support Shrine, Resist, Embrace, Tier-IV Stabilize, awakened-only HUD state, and Aspect Tier bridge are implemented. `CORRUPTION_RUNTIME_IMPLEMENTATION.md` records the runtime contract and explicit authored-boss checkpoint boundary.
-6. **First complete Hushiro run validation — NEXT** — play the 12-chamber route through Keeper with the current build layer active and resolve structural/runtime defects found across the package. This is a validation/integration pass, not another player-build planning pass.
-7. **Compatibility retirement** — remove old UpgradeDb/StanceEffects and other imported authorities only after the complete current Hushiro run confirms no current caller requires them.
+6. **First complete Hushiro run validation — EXECUTED / VALIDATED** — PR #112 passed deterministic Hushiro route validation across 256 seeds and a complete automated 12-counted-chamber traversal through the Chamber 12 Keeper/boss endpoint on implementation head `093d36bb022bd946f6bd73fd6863ee9416a2305e`. `docs/_meta/decisions/2026-08-22-hushiro-full-run-validation.md` records the permanent evidence and validation boundary. Longer interactive playtesting remains appropriate for feel, pacing, balance, encounter pressure, and economy tuning, but this structural/runtime gate is closed.
+7. **Compatibility retirement — NEXT** — remove old UpgradeDb/StanceEffects and other imported authorities now that the complete current Hushiro run has confirmed the current stack can traverse the region without relying on them. Keep this dependency-sized: prove each legacy path has no current caller, remove it and its compatibility surface, and retain current authority/runtime behavior unchanged.
 
-The first-attempt pre-awakening Shrine/Corruption state is implemented, but complete first-attempt base-katana/no-Aspect combat-loadout reconciliation remains a separate onboarding/runtime integration boundary rather than something to approximate inside the Corruption package.
+The first-attempt pre-awakening Shrine/Corruption state is implemented, but complete first-attempt base-katana/no-Aspect combat-loadout reconciliation remains a separate onboarding/runtime integration boundary rather than something to approximate inside compatibility retirement.
 
 The goal is not to require a separate playtest after every micro-fix. Build coherent dependency-sized batches, then use longer telemetry-backed playtests to find interacting defects together. Accuracy and consistency with approved authorities still take precedence over merely increasing change volume.
 
