@@ -1,7 +1,7 @@
 extends Node
 
-## Adds Blood Aspect controls to the existing Playtest Lab Build tab without making
-## the Lab itself own Aspect rules. The bridge is debug-only UI around AspectRuntime.
+## Adds a dedicated Blood Aspect tab to the existing Playtest Lab without making the
+## Lab itself own Aspect rules. The bridge is debug-only UI around AspectRuntime.
 
 var _attached := false
 var _status: Label = null
@@ -27,15 +27,24 @@ func _try_attach() -> void:
 	var ui = PlaytestLab.get("_ui")
 	if ui == null or not is_instance_valid(ui):
 		return
-	var build_tab := _find_named(ui, "Build")
-	if build_tab == null:
+	var tabs := _find_tabs(ui)
+	if tabs == null:
 		return
-	var container := _find_vbox(build_tab)
-	if container == null:
+	if tabs.get_node_or_null("Aspects") != null:
+		_attached = true
 		return
 
-	var separator := HSeparator.new()
-	container.add_child(separator)
+	var margin := MarginContainer.new()
+	margin.name = "Aspects"
+	margin.add_theme_constant_override("margin_left", 8)
+	margin.add_theme_constant_override("margin_right", 8)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_bottom", 8)
+	tabs.add_child(margin)
+
+	var container := VBoxContainer.new()
+	container.add_theme_constant_override("separation", 6)
+	margin.add_child(container)
 
 	var title := Label.new()
 	title.text = "Blood Aspect runtime"
@@ -77,7 +86,7 @@ func _try_attach() -> void:
 	blood_row.add_child(next_tier)
 
 	var note := Label.new()
-	note.text = "Q activates the Tier II Blood Art when Blood is Ready. Aspect selection resets Tier/Blood."
+	note.text = "Q activates the Tier II Blood Art when Blood is Ready. Selecting an Aspect resets that run to Tier 0 / Blood 0."
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	container.add_child(note)
 
@@ -102,20 +111,11 @@ func _refresh_status() -> void:
 		AspectRuntime.blood_state(),
 	]
 
-func _find_named(root: Node, wanted: String) -> Node:
-	if root.name == wanted:
-		return root
+func _find_tabs(root: Node) -> TabContainer:
+	if root is TabContainer:
+		return root as TabContainer
 	for child in root.get_children():
-		var found := _find_named(child, wanted)
-		if found != null:
-			return found
-	return null
-
-func _find_vbox(root: Node) -> VBoxContainer:
-	if root is VBoxContainer:
-		return root as VBoxContainer
-	for child in root.get_children():
-		var found := _find_vbox(child)
+		var found := _find_tabs(child)
 		if found != null:
 			return found
 	return null
