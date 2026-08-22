@@ -109,13 +109,25 @@ func _on_hurt(dmg: int, dmg_type: String, attacker: Node = null) -> void:
 	var attack_id := str(_attack_profile.get("id", ""))
 	var hp_before := hp
 	var resolve_allowed := was_attacking and _aspect_resolve_available and _ronin_resolve_hit_eligible(dmg_type, attacker)
-	var falling_mountain_allowed := was_attacking and attack_id == "ronin_falling_mountain" and dmg_type not in ["grab", "mass", "unblockable", "perilous"]
+	var ordinary_hit := dmg_type not in ["grab", "mass", "unblockable", "perilous"]
+	var blood_hunt_allowed := was_attacking and attack_id == "wolf_blood_hunt" and ordinary_hit
+	var falling_mountain_allowed := was_attacking and attack_id == "ronin_falling_mountain" and ordinary_hit
+	var blood_art_attack := attack_id in ["wolf_blood_hunt", "wraith_reach_corridor", "ronin_falling_mountain"]
 
 	super._on_hurt(dmg, dmg_type, attacker)
 
+	# Posture break/death/overriding attacks may transition state inside the inherited
+	# damage resolver. Blood Arts must leave resolving state even if the interruption
+	# happened before this layer could explicitly cancel the attack.
+	if was_attacking and blood_art_attack and _state != State.ATTACKING:
+		if attack_id == "wolf_blood_hunt":
+			_clear_blood_hunt_exceptions()
+		AspectRuntime.finish_blood_art()
+		return
+
 	if not was_attacking or hp >= hp_before or hp <= 0 or _state != State.ATTACKING:
 		return
-	if resolve_allowed or falling_mountain_allowed:
+	if resolve_allowed or blood_hunt_allowed or falling_mountain_allowed:
 		return
 	_interrupt_current_aspect_attack(attack_id)
 
