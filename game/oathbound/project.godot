@@ -30,7 +30,7 @@ RouteGenerator="*res://Utility/RouteGenerator.gd"
 RelicRuntime="*res://Core/Relics/OathboundRelicRuntime.gd"
 CorruptionRuntime="*res://Core/Corruption/OathboundCorruptionRuntime.gd"
 GameFlow="*res://autoload/OathboundGameFlow.gd"
-AspectRuntime="*res://Core/Aspects/AspectRuntimeIntegrated.gd"
+AspectRuntime="*res://Core/Aspects/FirstAttemptAspectRuntime.gd"
 AspectBootstrap="*res://Core/Aspects/AspectBootstrap.gd"
 UpgradeService="*res://Core/Relics/OathboundUpgradeService.gd"
 CurrencyManager="*res://Utility/CurrencyManager.gd"
@@ -91,7 +91,7 @@ click={
 }
 attack={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(68, 1),"global_position":Vector2(72, 44),"factor":1.0,"button_index":1,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"button_mask":1,"position":Vector2(68, 1),"global_position":Vector2(72, 44),"factor":1.0,"button_index":1,"pressed":true,"double_click":false,"script":null)
 ]
 }
 dash={
@@ -121,7 +121,7 @@ execute_finisher={
 }
 parry={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(117, 0),"global_position":Vector2(121, 43),"factor":1.0,"button_index":2,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"button_mask":2,"position":Vector2(117, 0),"global_position":Vector2(121, 43),"factor":1.0,"button_index":2,"pressed":true,"double_click":false,"script":null)
 ]
 }
 prosthetic={
