@@ -5,12 +5,12 @@ extends "res://autoload/GameFlow.gd"
 ## The imported GameFlow remains route/room compatibility plumbing. Current runtime
 ## systems are first-class project autoloads and are verified here so legacy scene
 ## paths cannot silently own a run. GameFlow owns the canonical Player factory and
-## coordinates current Relic and Corruption run/room events without mutating other
-## autoload scripts at runtime.
+## coordinates current persistent/run systems without mutating autoload scripts.
 
 const CURRENT_PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
-const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Prosthetics/OathboundProstheticManager.gd"
+const EXPECTED_PROSTHETIC_MANAGER_SCRIPT: String = "res://Core/Progression/OathboundPersistentProstheticManager.gd"
+const EXPECTED_STRAND_PROGRESSION_SCRIPT: String = "res://Core/Progression/OathboundStrandProgressionManager.gd"
 const EXPECTED_ATTACK_DIRECTOR_SCRIPT: String = "res://Core/Prosthetics/OathboundAttackDirector.gd"
 const EXPECTED_RELIC_RUNTIME_SCRIPT: String = "res://Core/Relics/OathboundRelicRuntime.gd"
 const EXPECTED_CORRUPTION_RUNTIME_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionRuntime.gd"
@@ -20,15 +20,12 @@ const RELIC_SWAP_UI_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicSw
 
 
 func _ready() -> void:
-	# AttackDir, RelicRuntime, and CorruptionRuntime are declared before GameFlow.
 	_assert_current_attack_director()
 	_assert_current_relic_runtime()
 	_assert_current_corruption_runtime()
-
-	# These services are declared after GameFlow. Assert them once the autoload setup
-	# pass has completed instead of replacing their scripts after _ready().
 	call_deferred("_assert_current_upgrade_service")
 	call_deferred("_assert_current_prosthetic_manager")
+	call_deferred("_assert_current_strand_progression_manager")
 	call_deferred("_assert_current_playtest_lab")
 
 	var run_complete_cb := Callable(self, "_on_current_run_completed")
@@ -49,6 +46,10 @@ func _assert_current_corruption_runtime() -> void:
 
 func _assert_current_prosthetic_manager() -> void:
 	_assert_autoload_script("ProstheticManager", EXPECTED_PROSTHETIC_MANAGER_SCRIPT, false)
+
+
+func _assert_current_strand_progression_manager() -> void:
+	_assert_autoload_script("MetaProgressionManager", EXPECTED_STRAND_PROGRESSION_SCRIPT, false)
 
 
 func _assert_current_attack_director() -> void:
@@ -104,19 +105,33 @@ func create_player_instance() -> Node:
 		_player_packed = CURRENT_PLAYER_SCENE
 	var instance: Node = _player_packed.instantiate()
 	_record_player_runtime("player_factory_created", instance)
+	# Apply permanent capacity only after the Player's own _ready chain has installed
+	# its Prosthetic executor and Relic capacity. This runs once for each fresh Player
+	# instance and keeps the Strand bonus isolated via manager-owned metadata.
+	call_deferred("_apply_strand_progression_to_player", instance)
 	return instance
 
 
+func _apply_strand_progression_to_player(instance: Node) -> void:
+	if instance == null or not is_instance_valid(instance):
+		return
+	if not instance.is_node_ready():
+		await instance.ready
+	if instance == null or not is_instance_valid(instance):
+		return
+	var progression: Node = get_node_or_null("/root/MetaProgressionManager")
+	if progression != null and progression.has_method("apply_player_capacity"):
+		progression.call("apply_player_capacity", instance)
+		print("[OathboundGameFlow] Strand capacity applied to canonical Player")
+
+
 func set_player(p: Node) -> void:
-	# Compatibility callers may still supply a Player, but current RunScene no longer
-	# does so. Assert any supplied instance immediately rather than accepting fallback.
 	super.set_player(p)
 	if p != null and is_instance_valid(p):
 		_record_player_runtime("player_factory_assigned", p)
 
 
 func _load_current_room() -> void:
-	# A freed Player reference must not block creation of a fresh current instance.
 	if player != null and not is_instance_valid(player):
 		player = null
 	if _player_packed == null:
@@ -164,8 +179,6 @@ func _on_current_run_completed(area_id: int) -> void:
 
 
 func _advance_to_next_area() -> void:
-	# RELICS.md explicitly allows a safe Relic swap after Keeper and after Twin Maws.
-	# Offer the already-unlocked collection before the parent transitions areas.
 	var completed_area: int = current_area
 	if completed_area == 1:
 		await _offer_safe_relic_swap("keeper_transition")

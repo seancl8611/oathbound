@@ -34,10 +34,10 @@ AspectRuntime="*res://Core/Aspects/FirstAttemptAspectRuntime.gd"
 AspectBootstrap="*res://Core/Aspects/AspectBootstrap.gd"
 UpgradeService="*res://Core/Relics/OathboundUpgradeService.gd"
 CurrencyManager="*res://Utility/CurrencyManager.gd"
-ProstheticManager="*res://Core/Prosthetics/OathboundProstheticManager.gd"
+ProstheticManager="*res://Core/Progression/OathboundPersistentProstheticManager.gd"
 MerchantManager="*res://Utility/MerchantManager.gd"
 CodexManager="*res://Utility/CodexManager.gd"
-MetaProgressionManager="*res://Utility/MetaProgressionManager.gd"
+MetaProgressionManager="*res://Core/Progression/OathboundStrandProgressionManager.gd"
 QuestManager="*res://Utility/QuestManager.gd"
 ProstheticEffects="*res://Utility/ProstheticEffects.gd"
 TechniqueEffects="*res://Core/Techniques/AspectTechniqueEffectsRuntime.gd"
@@ -86,12 +86,12 @@ right={
 }
 click={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
 ]
 }
 attack={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"button_mask":1,"position":Vector2(68, 1),"global_position":Vector2(72, 44),"factor":1.0,"button_index":1,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(68, 1),"global_position":Vector2(72, 44),"factor":1.0,"button_index":1,"pressed":true,"double_click":false,"script":null)
 ]
 }
 dash={
@@ -121,7 +121,7 @@ execute_finisher={
 }
 parry={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"button_mask":2,"position":Vector2(117, 0),"global_position":Vector2(121, 43),"factor":1.0,"button_index":2,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(117, 0),"global_position":Vector2(121, 43),"factor":1.0,"button_index":2,"pressed":true,"double_click":false,"script":null)
 ]
 }
 prosthetic={

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://World/Hub.gd" id="1_qm1wv"]
 [ext_resource type="Texture2D" uid="uid://brh8sgxga6n5m" path="res://Textures/hub.png" id="2_uc1vc"]
@@ -7,9 +7,10 @@
 [ext_resource type="Script" path="res://World/ForgeBench.gd" id="5_4dxfo"]
 [ext_resource type="Script" path="res://World/CodexBoard.gd" id="6_wu1q6"]
 [ext_resource type="Script" path="res://World/QuestAltar.gd" id="7_rx06b"]
-[ext_resource type="Script" path="res://World/MetaShrine.gd" id="8_wklb0"]
+[ext_resource type="Script" path="res://World/Bloodwell.gd" id="8_wklb0"]
 [ext_resource type="Script" path="res://World/MerchantStall.gd" id="9_bbnwo"]
 [ext_resource type="Script" path="res://World/PracticeGrounds.gd" id="10_2hmrb"]
+[ext_resource type="Script" path="res://World/BloodMirror.gd" id="11_blood_mirror"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qekqq"]
 size = Vector2(39, 52)
@@ -48,8 +49,7 @@ offset_left = -75.0
 offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
-text = "Forge [E] 
-"
+text = "Forge [E] \n"
 horizontal_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ForgeBench"]
@@ -90,22 +90,36 @@ offset_bottom = -39.0
 text = "Quest [E]"
 horizontal_alignment = 1
 
-[node name="MetaShrine" type="Area2D" parent="."]
+[node name="Bloodwell" type="Area2D" parent="."]
 position = Vector2(-46, 80)
 script = ExtResource("8_wklb0")
-interact_distance = null
-popup_label_text = null
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MetaShrine"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bloodwell"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_qekqq")
 
-[node name="InteractPopup" type="Label" parent="MetaShrine"]
+[node name="InteractPopup" type="Label" parent="Bloodwell"]
 offset_left = -75.0
 offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
-text = "Meta [E]"
+text = "Bloodwell [E]"
+horizontal_alignment = 1
+
+[node name="BloodMirror" type="Area2D" parent="."]
+position = Vector2(-132, 86)
+script = ExtResource("11_blood_mirror")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodMirror"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="BloodMirror"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Blood Mirror [E]"
 horizontal_alignment = 1
 
 [node name="MerchantStall" type="Area2D" parent="."]
@@ -146,6 +160,7 @@ horizontal_alignment = 1
 [connection signal="body_entered" from="ForgeBench" to="ForgeBench" method="_on_body_entered"]
 [connection signal="body_entered" from="CodexBoard" to="CodexBoard" method="_on_body_entered"]
 [connection signal="body_entered" from="QuestAltar" to="QuestAltar" method="_on_body_entered"]
-[connection signal="body_entered" from="MetaShrine" to="MetaShrine" method="_on_body_entered"]
+[connection signal="body_entered" from="Bloodwell" to="Bloodwell" method="_on_body_entered"]
+[connection signal="body_entered" from="BloodMirror" to="BloodMirror" method="_on_body_entered"]
 [connection signal="body_entered" from="MerchantStall" to="MerchantStall" method="_on_body_entered"]
 [connection signal="body_entered" from="PracticeGrounds" to="PracticeGrounds" method="_on_body_entered"]
