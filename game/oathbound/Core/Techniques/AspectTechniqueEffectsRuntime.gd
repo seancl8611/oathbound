@@ -10,7 +10,7 @@ func on_player_hit(target: Node, player: Node, attack_area: Area2D = null) -> vo
 		super.on_player_hit(target, player, attack_area)
 		return
 
-	var trigger := str(attack_area.get_meta("action_trigger", ""))
+	var trigger: String = str(attack_area.get_meta("action_trigger", ""))
 	if trigger == "blood_art":
 		return
 	if typeof(AspectRuntime) == TYPE_OBJECT and AspectRuntime.has_method("is_secondary_passage_contact"):
@@ -24,8 +24,8 @@ func on_player_hit(target: Node, player: Node, attack_area: Area2D = null) -> vo
 		super.on_player_hit(target, player, attack_area)
 		return
 
-	var original_id := str(attack_area.get_meta("attack_id", ""))
-	var universal_id := _universal_attack_id(trigger)
+	var original_id: String = str(attack_area.get_meta("attack_id", ""))
+	var universal_id: String = _universal_attack_id(trigger)
 	if universal_id.is_empty():
 		super.on_player_hit(target, player, attack_area)
 		return
