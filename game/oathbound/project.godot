@@ -17,7 +17,6 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-UpgradeDb="*res://Utility/upgrade_db.tscn"
 Global="*res://World/Global.gd"
 BloodStackManager="*res://World/BloodStackManager.gd"
 DamageNumberManager="*res://Utility/DamageNumberManager.gd"
@@ -42,7 +41,6 @@ MetaProgressionManager="*res://Utility/MetaProgressionManager.gd"
 QuestManager="*res://Utility/QuestManager.gd"
 ProstheticEffects="*res://Utility/ProstheticEffects.gd"
 TechniqueEffects="*res://Core/Techniques/AspectTechniqueEffectsRuntime.gd"
-StanceEffects="*res://autoload/stance_effects.gd"
 PlaytestLab="*res://Core/Corruption/OathboundCorruptionPlaytestLab.gd"
 AspectPlaytestLabBridge="*res://Core/Aspects/AspectPlaytestLabBridge.gd"
 CombatTelemetry="*res://Utility/CombatTelemetry.gd"
