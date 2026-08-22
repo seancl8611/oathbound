@@ -108,6 +108,47 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Hushiro seeded route contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroRouteContractSmoke.tscn 2>&1 | tee hushiro-route-contract.log
+          grep -F "[HushiroRouteContractSmoke] PASS" hushiro-route-contract.log
+          if grep -F "SCRIPT ERROR:" hushiro-route-contract.log; then
+            echo "FAIL: Hushiro route contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-route-contract.log; then
+            echo "FAIL: Hushiro route contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Traverse one complete generated Hushiro route
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroFullRunSmoke.tscn 2>&1 | tee hushiro-full-run.log
+          grep -F "[HushiroFullRunSmoke] PASS" hushiro-full-run.log
+          if grep -F "SCRIPT ERROR:" hushiro-full-run.log; then
+            echo "FAIL: Full Hushiro traversal emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-full-run.log; then
+            echo "FAIL: Full Hushiro traversal emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload Hushiro validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hushiro-validation-${{ github.run_id }}
+          path: |
+            hushiro-route-contract.log
+            hushiro-full-run.log
+          if-no-files-found: warn
+          retention-days: 7
+
       - name: Smoke current Shrine chamber
         shell: bash
         run: |
