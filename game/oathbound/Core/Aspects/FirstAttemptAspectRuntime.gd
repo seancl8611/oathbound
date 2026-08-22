@@ -15,9 +15,15 @@ func _ready() -> void:
 		var callback := Callable(self, "_on_returning_blood_awakened_changed")
 		if not MetaProgress.is_connected("returning_blood_awakened_changed", callback):
 			MetaProgress.connect("returning_blood_awakened_changed", callback)
+
+	# The inherited prototype runtime defaulted to Wolf. Never let that default become
+	# a player choice: every application session starts with no active Aspect until the
+	# current run-preparation flow explicitly selects one. Pre-awakening this is also
+	# the canonical first-attempt state.
+	selected_aspect = NO_ASPECT
 	synchronize_campaign_state(false)
 	super._ready()
-	print("[FirstAttemptAspectRuntime] pre-awakening base-katana gate active")
+	print("[FirstAttemptAspectRuntime] base-katana / explicit-selection gate active")
 
 
 func is_returning_blood_awakened() -> bool:
