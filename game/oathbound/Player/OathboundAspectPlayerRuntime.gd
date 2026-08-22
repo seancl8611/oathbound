@@ -13,7 +13,7 @@ func _ready() -> void:
 	super._ready()
 
 func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
-	var authored_index := int(profile.get("aspect_combo_index", combo_idx))
+	var authored_index: int = int(profile.get("aspect_combo_index", combo_idx))
 	super._start_profile_attack(profile, authored_index)
 	# LegacyPlayerController clamps to its imported MAX_COMBO_HITS=3. Restore the
 	# authored Wolf index after legacy initialization so the fourth Basic remains real.
@@ -47,10 +47,10 @@ func _can_queue_next_combo_attack() -> bool:
 		return false
 	if _attack_profile.is_empty() or not bool(_attack_profile.get("can_combo", true)):
 		return false
-	var duration := float(_attack_profile.get("duration", 0.30))
-	var queue_start := float(_attack_profile.get("queue_start", 0.40))
-	var combo_end := float(_attack_profile.get("combo_end", 1.00))
-	var progress := _attack_elapsed / maxf(duration, 0.001)
+	var duration: float = float(_attack_profile.get("duration", 0.30))
+	var queue_start: float = float(_attack_profile.get("queue_start", 0.40))
+	var combo_end: float = float(_attack_profile.get("combo_end", 1.00))
+	var progress: float = _attack_elapsed / maxf(duration, 0.001)
 	if _state == State.ATTACKING:
 		return progress >= queue_start and progress <= combo_end
 	if _state == State.ATTACK_RECOVERY:
@@ -72,10 +72,10 @@ func _can_queue_sword_branch() -> bool:
 		return false
 	if _attack_profile.is_empty() or not bool(_attack_profile.get("can_combo", true)):
 		return false
-	var duration := float(_attack_profile.get("duration", 0.30))
-	var queue_start := float(_attack_profile.get("queue_start", 0.40))
-	var combo_end := float(_attack_profile.get("combo_end", 1.00))
-	var progress := _attack_elapsed / maxf(duration, 0.001)
+	var duration: float = float(_attack_profile.get("duration", 0.30))
+	var queue_start: float = float(_attack_profile.get("queue_start", 0.40))
+	var combo_end: float = float(_attack_profile.get("combo_end", 1.00))
+	var progress: float = _attack_elapsed / maxf(duration, 0.001)
 	if _state == State.ATTACKING:
 		return progress >= queue_start and progress <= combo_end
 	if _state == State.ATTACK_RECOVERY:
@@ -85,11 +85,11 @@ func _can_queue_sword_branch() -> bool:
 func _queue_next_combo_attack() -> void:
 	if not _can_queue_next_combo_attack():
 		return
-	var next_index := _combo_index + 1
+	var next_index: int = int(_combo_index) + 1
 	if next_index >= 3:
 		# The imported recovery resolver rejects queued combo indices >=3. Queue the
 		# fourth Wolf attack as an authored profile instead and carry its true index.
-		var profile := _get_combo_profile(next_index).duplicate(true)
+		var profile: Dictionary = _get_combo_profile(next_index).duplicate(true)
 		profile["aspect_combo_index"] = next_index
 		_queued_attack_profile = profile
 		_queued_combo_index = -1
@@ -105,14 +105,14 @@ func _queue_next_combo_attack() -> void:
 # =============================================================================
 
 func _on_hurt(dmg: int, dmg_type: String, attacker: Node = null) -> void:
-	var was_attacking := _state == State.ATTACKING
-	var attack_id := str(_attack_profile.get("id", ""))
-	var hp_before := hp
-	var resolve_allowed := was_attacking and _aspect_resolve_available and _ronin_resolve_hit_eligible(dmg_type, attacker)
-	var ordinary_hit := dmg_type not in ["grab", "mass", "unblockable", "perilous"]
-	var blood_hunt_allowed := was_attacking and attack_id == "wolf_blood_hunt" and ordinary_hit
-	var falling_mountain_allowed := was_attacking and attack_id == "ronin_falling_mountain" and ordinary_hit
-	var blood_art_attack := attack_id in ["wolf_blood_hunt", "wraith_reach_corridor", "ronin_falling_mountain"]
+	var was_attacking: bool = _state == State.ATTACKING
+	var attack_id: String = str(_attack_profile.get("id", ""))
+	var hp_before: int = int(hp)
+	var resolve_allowed: bool = was_attacking and _aspect_resolve_available and _ronin_resolve_hit_eligible(dmg_type, attacker)
+	var ordinary_hit: bool = dmg_type not in ["grab", "mass", "unblockable", "perilous"]
+	var blood_hunt_allowed: bool = was_attacking and attack_id == "wolf_blood_hunt" and ordinary_hit
+	var falling_mountain_allowed: bool = was_attacking and attack_id == "ronin_falling_mountain" and ordinary_hit
+	var blood_art_attack: bool = attack_id in ["wolf_blood_hunt", "wraith_reach_corridor", "ronin_falling_mountain"]
 
 	super._on_hurt(dmg, dmg_type, attacker)
 
@@ -164,14 +164,14 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 	if resolved_attacker is Node2D and is_instance_valid(resolved_attacker):
 		attack_origin = (resolved_attacker as Node2D).global_position
 
-	var to_attacker := attack_origin - global_position
-	var facing := _facing_dir.normalized()
+	var to_attacker: Vector2 = attack_origin - global_position
+	var facing: Vector2 = _facing_dir.normalized()
 	if facing.length_squared() <= 0.001:
 		facing = Vector2.RIGHT
-	var relative_angle := 0.0
+	var relative_angle: float = 0.0
 	if to_attacker.length_squared() > 0.001:
 		relative_angle = absf(rad_to_deg(facing.angle_to(to_attacker.normalized())))
-	var inside_arc := to_attacker.length_squared() <= 0.001 or relative_angle <= CURRENT_BLOCK_ARC_DEGREES * 0.5
+	var inside_arc: bool = to_attacker.length_squared() <= 0.001 or relative_angle <= CURRENT_BLOCK_ARC_DEGREES * 0.5
 
 	if not inside_arc:
 		if CombatTelemetry != null and CombatTelemetry.is_capturing():
@@ -187,7 +187,7 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 			combat.notify_got_hit({"damage": dmg, "type": dmg_type})
 		return
 
-	var block_posture := 12.0
+	var block_posture: float = 12.0
 	if area != null:
 		if area.has_meta("block_posture_damage"):
 			block_posture = float(area.get_meta("block_posture_damage"))
@@ -199,8 +199,8 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 		elif resolved_attacker.has_meta("stagger_on_block"):
 			block_posture = float(resolved_attacker.get_meta("stagger_on_block"))
 
-	var posture_before := float(stagger)
-	var effective_posture := maxf(0.0, block_posture) * ASPECT_CATALOG.block_posture_multiplier(ASPECT_CATALOG.RONIN)
+	var posture_before: float = float(stagger)
+	var effective_posture: float = maxf(0.0, block_posture) * ASPECT_CATALOG.block_posture_multiplier(ASPECT_CATALOG.RONIN)
 	stagger = clampf(stagger + effective_posture, 0.0, stagger_max)
 	_stagger_suppress_until = Time.get_ticks_msec() * 0.001 + ASPECT_CATALOG.posture_recovery_delay(ASPECT_CATALOG.RONIN)
 
