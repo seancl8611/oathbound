@@ -1,10 +1,11 @@
 extends HubInteractable
 
-## Forge Bench — Equip prosthetics, attach relics, unlock upgrade nodes.
+## Forge Bench — approved home for Prosthetic upgrades/equipment and persistent Relic
+## collection/mastery/equipment management.
 
 signal prosthetic_equipped(prosthetic_id: String)
 
-var forge_menu_scene = preload("res://GUI/ForgeMenu.tscn")
+var forge_menu_scene = preload("res://Core/Relics/OathboundForgeMenu.tscn")
 
 func _on_ready_custom():
 	pass

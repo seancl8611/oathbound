@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b36bb2w1t6wgk"]
 
-[ext_resource type="Script" path="res://Utility/UpgradeChoiceUI.gd" id="1_1xv2i"]
+[ext_resource type="Script" path="res://Core/Relics/OathboundUpgradeChoiceUI.gd" id="1_1xv2i"]
 
 [node name="UpgradeChoiceUI" type="CanvasLayer"]
 visible = false

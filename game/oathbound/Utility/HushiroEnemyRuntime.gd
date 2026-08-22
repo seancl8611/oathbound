@@ -17,13 +17,21 @@ func _ready() -> void:
 func _on_tree_node_added(node: Node) -> void:
 	if node == null:
 		return
-	# Wait until the enemy's own _ready() and scene-owned defaults have completed.
-	call_deferred("_apply_if_hushiro_enemy", node)
+	# node_added also fires for short-lived setup nodes. Defer only the stable instance
+	# ID so a freed Node is never serialized into the deferred message queue.
+	call_deferred("_apply_if_hushiro_enemy_id", node.get_instance_id())
 
 
 func _apply_existing_enemies() -> void:
 	for node: Node in get_tree().get_nodes_in_group("enemy"):
 		_apply_if_hushiro_enemy(node)
+
+
+func _apply_if_hushiro_enemy_id(instance_id: int) -> void:
+	var object: Object = instance_from_id(instance_id)
+	if object == null or not is_instance_valid(object) or not (object is Node):
+		return
+	_apply_if_hushiro_enemy(object as Node)
 
 
 func _apply_if_hushiro_enemy(node: Node) -> void:
