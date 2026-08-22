@@ -81,7 +81,7 @@ func is_strand_progression_unlocked() -> bool:
 	return typeof(MetaProgress) == TYPE_OBJECT and bool(MetaProgress.is_returning_blood_awakened())
 
 
-func get_node(node_id: String) -> Dictionary:
+func get_progression_node(node_id: String) -> Dictionary:
 	var structural := get_structural_node(node_id)
 	if structural.is_empty():
 		return {}
@@ -96,7 +96,7 @@ func get_node(node_id: String) -> Dictionary:
 func get_nodes_for_station(station: String) -> Array:
 	var out: Array = []
 	for structural in get_structural_nodes(station):
-		out.append(get_node(str(structural.get("id", ""))))
+		out.append(get_progression_node(str(structural.get("id", ""))))
 	return out
 
 
@@ -330,7 +330,7 @@ func is_unlocked(upgrade_id: String) -> bool:
 
 
 func get_upgrade(upgrade_id: String) -> Dictionary:
-	return get_node(upgrade_id)
+	return get_progression_node(upgrade_id)
 
 
 func get_upgrade_cost(upgrade_id: String) -> Dictionary:
