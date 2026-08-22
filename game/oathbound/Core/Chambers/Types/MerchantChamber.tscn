@@ -1,10 +1,10 @@
 [gd_scene load_steps=42 format=3 uid="uid://d3loht5wvkch2"]
 
-[ext_resource type="Script" path="res://Areas/Area1/ShopRoom.gd" id="1_2gtju"]
+[ext_resource type="Script" path="res://Core/Relics/OathboundMerchantChamber.gd" id="1_2gtju"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_0mpls"]
-[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Areas/Area1/MistGate.tscn" id="2_2l3a7"]
+[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_2l3a7"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="3_5vpa1"]
-[ext_resource type="Script" path="res://Areas/Area1/EnemyEncounterSpawner.gd" id="4_0ejmm"]
+[ext_resource type="Script" path="res://Core/Encounters/EncounterSpawner.gd" id="4_0ejmm"]
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_u81hh"]
 [ext_resource type="Texture2D" uid="uid://dofqprq5nl2kl" path="res://Textures/Items/mat.png" id="7_eosti"]
 [ext_resource type="Texture2D" uid="uid://x5rc5lpubrwc" path="res://Textures/Items/heart6.png" id="7_luif5"]
