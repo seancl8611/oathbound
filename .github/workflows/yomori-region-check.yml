@@ -8,6 +8,9 @@ on:
     paths:
       - "game/oathbound/Regions/Yomori/**"
       - "game/oathbound/Enemy/Area 2/**"
+      - "game/oathbound/Textures/Enemy/foot_soldier/**"
+      - "game/oathbound/Textures/Enemy/shield_captain/**"
+      - "game/oathbound/Textures/Enemy/spirit_monk/**"
       - "game/oathbound/Core/Chambers/**"
       - "game/oathbound/Utility/SceneRegistry.gd"
       - "game/oathbound/Utility/RunData.gd"
@@ -40,6 +43,21 @@ jobs:
           godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee yomori-editor.log
           if grep -F "SCRIPT ERROR:" yomori-import.log yomori-editor.log; then
             echo "FAIL: Yomori package introduced a GDScript import/editor error."
+            exit 1
+          fi
+
+      - name: Verify Yomori post-import visual assets
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Yomori/Validation/YomoriVisualAssetSmoke.tscn 2>&1 | tee yomori-visual-assets.log
+          grep -F "[YomoriVisualAssetSmoke] PASS" yomori-visual-assets.log
+          if grep -F "SCRIPT ERROR:" yomori-visual-assets.log; then
+            echo "FAIL: Yomori visual asset smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" yomori-visual-assets.log; then
+            echo "FAIL: Yomori visual asset smoke emitted a deferred-call runtime error."
             exit 1
           fi
 
@@ -96,6 +114,7 @@ jobs:
           path: |
             yomori-import.log
             yomori-editor.log
+            yomori-visual-assets.log
             yomori-route-contract.log
             twin-maws-contract.log
             yomori-full-run.log
