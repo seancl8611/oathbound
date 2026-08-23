@@ -17,6 +17,7 @@ const EXPECTED_CORRUPTION_RUNTIME_SCRIPT: String = "res://Core/Corruption/Oathbo
 const EXPECTED_UPGRADE_SERVICE_SCRIPT: String = "res://Core/Relics/OathboundUpgradeService.gd"
 const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionPlaytestLab.gd"
 const RELIC_SWAP_UI_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicSwapUI.gd")
+const YOMORI_ROUTE_AUTHORITY: Script = preload("res://Regions/Yomori/Routes/YomoriRouteAuthority.gd")
 
 
 func _ready() -> void:
@@ -131,6 +132,23 @@ func set_player(p: Node) -> void:
 		_record_player_runtime("player_factory_assigned", p)
 
 
+func build_route_for_area(area_id: int) -> Array[String]:
+	current_area = area_id
+	if area_id == 2:
+		var generated_value: Variant = YOMORI_ROUTE_AUTHORITY.generate(RouteGenerator)
+		var generated: Array[String] = []
+		if generated_value is Array:
+			for token_value: Variant in generated_value:
+				generated.append(str(token_value))
+		route = generated
+	else:
+		route = RouteGenerator.generate_area_route(area_id)
+	current_index = 0
+	_awaiting_choice = false
+	_choice_slot = -1
+	return route
+
+
 func _load_current_room() -> void:
 	if player != null and not is_instance_valid(player):
 		player = null
@@ -138,6 +156,10 @@ func _load_current_room() -> void:
 		_player_packed = CURRENT_PLAYER_SCENE
 	if player == null:
 		player = create_player_instance()
+
+	var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else current_area
+	if typeof(SceneRegistry) == TYPE_OBJECT and SceneRegistry.has_method("activate_area"):
+		SceneRegistry.call("activate_area", area_id)
 
 	await super._load_current_room()
 
@@ -151,7 +173,6 @@ func _load_current_room() -> void:
 
 	var relic_runtime: Node = _relic_runtime()
 	if relic_runtime != null and relic_runtime.has_method("on_room_entered"):
-		var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else current_area
 		relic_runtime.call("on_room_entered", player, area_id, room_token)
 
 
@@ -184,7 +205,15 @@ func _advance_to_next_area() -> void:
 		await _offer_safe_relic_swap("keeper_transition")
 	elif completed_area == 2:
 		await _offer_safe_relic_swap("twin_transition")
-	await super._advance_to_next_area()
+
+	current_area += 1
+	print("[OathboundGameFlow] Advancing to Area %d" % current_area)
+	if typeof(RunData) == TYPE_OBJECT:
+		RunData.current_area_id = current_area
+
+	await _show_area_transition(current_area)
+	build_route_for_area(current_area)
+	_load_current_room()
 
 
 func _offer_safe_relic_swap(context: String) -> void:
