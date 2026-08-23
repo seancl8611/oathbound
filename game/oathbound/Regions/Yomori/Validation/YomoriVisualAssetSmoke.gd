@@ -73,19 +73,25 @@ func _validate_actor_scenes() -> void:
 		var actor: Node = (scene_value as PackedScene).instantiate()
 		_expect(actor != null, "Yomori actor scene failed instantiate: %s" % scene_path)
 		if actor != null:
-			_expect(_has_visible_sprite_resource(actor), "Yomori actor has no loadable sprite resource: %s" % scene_path)
+			_expect(_has_visible_renderable(actor), "Yomori actor has no loadable visible renderable: %s" % scene_path)
 			actor.free()
 		_loaded_actors += 1
 
 
-func _has_visible_sprite_resource(root: Node) -> bool:
+func _has_visible_renderable(root: Node) -> bool:
 	if root is Sprite2D:
-		return (root as Sprite2D).texture != null
-	if root is AnimatedSprite2D:
+		if (root as Sprite2D).texture != null:
+			return true
+	elif root is AnimatedSprite2D:
 		var animated := root as AnimatedSprite2D
-		return animated.sprite_frames != null and not animated.sprite_frames.get_animation_names().is_empty()
+		if animated.sprite_frames != null and not animated.sprite_frames.get_animation_names().is_empty():
+			return true
+	elif root is Polygon2D:
+		if not (root as Polygon2D).polygon.is_empty():
+			return true
+
 	for child: Node in root.get_children():
-		if _has_visible_sprite_resource(child):
+		if _has_visible_renderable(child):
 			return true
 	return false
 
