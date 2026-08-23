@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://Core/Chambers/Types/BossChamber.gd" id="1_boss"]
+[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_gate"]
+[ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="3_bg"]
+[ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="4_damage"]
+[ext_resource type="Script" path="res://Core/Encounters/EncounterSpawner.gd" id="5_spawner"]
+[ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_bounds"]
+[ext_resource type="Script" path="res://Utility/duo_boss_manager.gd" id="7_duo"]
+[ext_resource type="PackedScene" uid="uid://blcu3eyoyar5i" path="res://Enemy/Area 2/Boss/rootfang.tscn" id="8_rootfang"]
+[ext_resource type="PackedScene" uid="uid://gt2oqnnlotxj" path="res://Enemy/Area 2/Boss/briarthorn.tscn" id="9_briarthorn"]
+
+[node name="TwinMawsChamber" type="Node2D"]
+script = ExtResource("1_boss")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+texture = ExtResource("3_bg")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+modulate = Color(0.68, 0.75, 0.63, 1)
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="DamageNumberManager" type="Node2D" parent="."]
+visible = false
+script = ExtResource("4_damage")
+
+[node name="EnemyEncounterSpawner" type="Node2D" parent="."]
+script = ExtResource("5_spawner")
+
+[node name="ExitGate" parent="." groups=["mist_gates"] instance=ExtResource("2_gate")]
+
+[node name="Label" type="Label" parent="ExitGate"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RoomBounds" type="Node2D" parent="."]
+script = ExtResource("6_bounds")
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 90)
+
+[node name="TwinMaws" type="Node2D" parent="."]
+metadata/boss_area = 2
+
+[node name="TwinMawsManager" type="Node2D" parent="TwinMaws"]
+script = ExtResource("7_duo")
+
+[node name="Rootfang" parent="TwinMaws" instance=ExtResource("8_rootfang")]
+position = Vector2(-120, -65)
+
+[node name="Briarthorn" parent="TwinMaws" instance=ExtResource("9_briarthorn")]
+position = Vector2(120, -65)
