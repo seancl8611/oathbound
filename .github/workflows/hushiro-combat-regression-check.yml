@@ -6,6 +6,7 @@ on:
       - main
       - "agent/**"
     paths:
+      - "game/oathbound/Core/Encounters/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/**"
@@ -14,6 +15,7 @@ on:
       - ".github/workflows/hushiro-combat-regression-check.yml"
   pull_request:
     paths:
+      - "game/oathbound/Core/Encounters/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/**"
@@ -78,11 +80,36 @@ jobs:
             exit 1
           fi
 
-      - name: Upload regression log
+      - name: Verify combat lifecycle safety
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroCombatLifecycleSmoke.tscn 2>&1 | tee hushiro-combat-lifecycle.log
+          grep -F "[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred" hushiro-combat-lifecycle.log
+          if grep -F "SCRIPT ERROR:" hushiro-combat-lifecycle.log; then
+            echo "FAIL: combat lifecycle regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "Invalid access to property or key 'process_frame'" hushiro-combat-lifecycle.log; then
+            echo "FAIL: detached EncounterSpawner resumed against a null SceneTree."
+            exit 1
+          fi
+          if grep -F "Function blocked during in/out signal" hushiro-combat-lifecycle.log; then
+            echo "FAIL: SwordHitBox changed Area2D monitoring state during a physics signal."
+            exit 1
+          fi
+          if grep -F "Can't change this state while flushing queries" hushiro-combat-lifecycle.log; then
+            echo "FAIL: SwordHitBox changed collision state while physics queries were flushing."
+            exit 1
+          fi
+
+      - name: Upload regression logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: hushiro-combat-regression-${{ github.run_id }}
-          path: hushiro-archer-deathblow.log
+          path: |
+            hushiro-archer-deathblow.log
+            hushiro-combat-lifecycle.log
           if-no-files-found: warn
           retention-days: 7
