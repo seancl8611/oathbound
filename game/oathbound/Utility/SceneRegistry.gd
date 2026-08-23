@@ -25,6 +25,7 @@ var _rooms_by_area := {
 	},
 	2: {
 		"combat": preload("res://Regions/Yomori/Chambers/CombatChamber.tscn"),
+		"boss": preload("res://Regions/Yomori/Chambers/TwinMawsChamber.tscn"),
 	},
 }
 
@@ -39,7 +40,7 @@ func activate_area(area_id: int) -> void:
 	if overrides_value is Dictionary:
 		for key_value: Variant in (overrides_value as Dictionary).keys():
 			rooms[key_value] = (overrides_value as Dictionary)[key_value]
-	print("[SceneRegistry] active area=%d combat=%s" % [area_id, _scene_path(rooms.get("combat"))])
+	print("[SceneRegistry] active area=%d combat=%s boss=%s" % [area_id, _scene_path(rooms.get("combat")), _scene_path(rooms.get("boss"))])
 
 
 func get_room_scene(area_id: int, room_key: String) -> PackedScene:
