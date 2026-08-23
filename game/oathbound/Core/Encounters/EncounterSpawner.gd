@@ -21,13 +21,26 @@ var _running: bool = false
 var _alive: int = 0
 var _waves: Array = []
 var _encounter_hint: Dictionary = {}
+var _lifecycle_cancelled: bool = false
 
 var _spawn_rect: Rect2 = Rect2()
 var _use_spawn_rect: bool = false
 
 
 func _ready() -> void:
-	_player = get_tree().get_first_node_in_group("player") as Node2D
+	_lifecycle_cancelled = false
+	var tree: SceneTree = get_tree()
+	if tree != null:
+		_player = tree.get_first_node_in_group("player") as Node2D
+
+
+func _exit_tree() -> void:
+	# Async authored-wave routines can still be suspended when the room is removed
+	# (most notably when Akio dies mid-wave). Mark the encounter cancelled before
+	# any coroutine resumes so detached spawners never dereference a null SceneTree
+	# or emit a ghost encounter clear after the room has already been discarded.
+	_lifecycle_cancelled = true
+	_running = false
 
 
 func is_running() -> bool:
@@ -35,7 +48,7 @@ func is_running() -> bool:
 
 
 func start_template(template: Dictionary, area_id: int = 1) -> void:
-	if _running:
+	if _running or not _can_continue():
 		return
 	_running = true
 	_encounter_hint = template.duplicate(true)
@@ -51,6 +64,10 @@ func start_template(template: Dictionary, area_id: int = 1) -> void:
 
 	emit_signal("encounter_started")
 	await _run_authored_waves()
+
+	if not _can_continue():
+		_running = false
+		return
 
 	_running = false
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
@@ -125,27 +142,39 @@ func _pattern_for_type(type_name: String) -> String:
 
 
 func _run_authored_waves() -> void:
-	if _waves.is_empty():
+	if _waves.is_empty() or not _can_continue():
 		return
 
-	if opener_delay > 0.0:
-		await get_tree().create_timer(opener_delay).timeout
+	if opener_delay > 0.0 and not await _await_seconds(opener_delay):
+		return
 
 	# Opening wave enters unalerted. Once any member spots Akio, the whole authored
 	# wave engages. Later waves enter already engaged.
 	await _spawn_wave(_waves[0] as Dictionary, false, 0)
+	if not _can_continue():
+		return
 	await _wait_for_player_spotted()
+	if not _can_continue():
+		return
 	_force_all_enemies_engage()
 	await _wait_until_current_wave_cleared()
+	if not _can_continue():
+		return
 
 	for wave_index: int in range(1, _waves.size()):
-		if wave_clear_delay > 0.0:
-			await get_tree().create_timer(wave_clear_delay).timeout
+		if wave_clear_delay > 0.0 and not await _await_seconds(wave_clear_delay):
+			return
 		await _spawn_wave(_waves[wave_index] as Dictionary, true, wave_index)
+		if not _can_continue():
+			return
 		await _wait_until_current_wave_cleared()
+		if not _can_continue():
+			return
 
 
 func _spawn_wave(wave: Dictionary, auto_aggro_on_spawn: bool, wave_index: int) -> void:
+	if not _can_continue():
+		return
 	var groups_value: Variant = wave.get("groups", [])
 	if typeof(groups_value) != TYPE_ARRAY:
 		return
@@ -166,14 +195,20 @@ func _spawn_wave(wave: Dictionary, auto_aggro_on_spawn: bool, wave_index: int) -
 		})
 
 	for group_value: Variant in groups:
+		if not _can_continue():
+			return
 		if typeof(group_value) != TYPE_DICTIONARY:
 			continue
 		await _spawn_group(group_value as Dictionary, auto_aggro_on_spawn)
-		if group_spacing > 0.0:
-			await get_tree().create_timer(group_spacing).timeout
+		if not _can_continue():
+			return
+		if group_spacing > 0.0 and not await _await_seconds(group_spacing):
+			return
 
 
 func _spawn_group(group: Dictionary, auto_aggro_on_spawn: bool) -> void:
+	if not _can_continue():
+		return
 	var scene_value: Variant = group.get("scene", null)
 	var scene: PackedScene = scene_value as PackedScene
 	var count: int = int(group.get("count", 1))
@@ -183,8 +218,11 @@ func _spawn_group(group: Dictionary, auto_aggro_on_spawn: bool) -> void:
 
 	for unit_index: int in range(count):
 		while _alive >= active_cap:
-			await get_tree().process_frame
+			if not await _await_process_frame():
+				return
 
+		if not _can_continue():
+			return
 		var spawn_pos: Vector2 = _ring_spawn_pos(unit_index, count) if pattern == "ring" else _edge_spawn_pos()
 		var enemy: Node = scene.instantiate()
 
@@ -203,6 +241,9 @@ func _spawn_group(group: Dictionary, auto_aggro_on_spawn: bool) -> void:
 				var forward: Vector2 = (_player.global_position - spawn_pos).normalized()
 				enemy.set("spawn_forward", forward)
 
+		if not _can_continue():
+			enemy.queue_free()
+			return
 		add_child(enemy)
 		_alive += 1
 
@@ -220,8 +261,8 @@ func _spawn_group(group: Dictionary, auto_aggro_on_spawn: bool) -> void:
 		if auto_aggro_on_spawn and enemy.has_method("engage"):
 			enemy.call_deferred("engage")
 
-		if unit_stagger > 0.0:
-			await get_tree().create_timer(unit_stagger).timeout
+		if unit_stagger > 0.0 and not await _await_seconds(unit_stagger):
+			return
 
 
 func _on_enemy_died(_enemy: Variant = null) -> void:
@@ -230,7 +271,8 @@ func _on_enemy_died(_enemy: Variant = null) -> void:
 
 func _wait_until_current_wave_cleared() -> void:
 	while _alive > 0:
-		await get_tree().process_frame
+		if not await _await_process_frame():
+			return
 
 
 func _ring_spawn_pos(index: int, count: int) -> Vector2:
@@ -282,8 +324,12 @@ func set_spawn_rect(rect: Rect2) -> void:
 
 func _wait_for_player_spotted() -> void:
 	while _alive > 0:
-		await get_tree().process_frame
-		var enemy_nodes: Array = get_tree().get_nodes_in_group("enemy")
+		if not await _await_process_frame():
+			return
+		var tree: SceneTree = get_tree()
+		if tree == null:
+			return
+		var enemy_nodes: Array = tree.get_nodes_in_group("enemy")
 		for enemy_value: Variant in enemy_nodes:
 			if not (enemy_value is Node):
 				continue
@@ -306,7 +352,12 @@ func _wait_for_player_spotted() -> void:
 
 
 func _force_all_enemies_engage() -> void:
-	var enemy_nodes: Array = get_tree().get_nodes_in_group("enemy")
+	if not _can_continue():
+		return
+	var tree: SceneTree = get_tree()
+	if tree == null:
+		return
+	var enemy_nodes: Array = tree.get_nodes_in_group("enemy")
 	for enemy_value: Variant in enemy_nodes:
 		if not (enemy_value is Node):
 			continue
@@ -319,6 +370,33 @@ func _force_all_enemies_engage() -> void:
 			enemy.set("auto_aggro_on_spawn", true)
 		if enemy.has_method("engage"):
 			enemy.call_deferred("engage")
+
+
+func _can_continue() -> bool:
+	return not _lifecycle_cancelled and not is_queued_for_deletion() and is_inside_tree() and get_tree() != null
+
+
+func _await_process_frame() -> bool:
+	if not _can_continue():
+		return false
+	var tree: SceneTree = get_tree()
+	if tree == null:
+		return false
+	await tree.process_frame
+	return _can_continue()
+
+
+func _await_seconds(seconds: float) -> bool:
+	if seconds <= 0.0:
+		return _can_continue()
+	if not _can_continue():
+		return false
+	var tree: SceneTree = get_tree()
+	if tree == null:
+		return false
+	var timer: SceneTreeTimer = tree.create_timer(seconds)
+	await timer.timeout
+	return _can_continue()
 
 
 func _prop_exists(object: Object, property_name: String) -> bool:
