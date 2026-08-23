@@ -208,14 +208,30 @@ jobs:
             exit 1
           fi
 
-      - name: Upload Hushiro validation logs
+      - name: Verify Yomori seeded route and roster contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Yomori/Validation/YomoriRouteContractSmoke.tscn 2>&1 | tee yomori-route-contract.log
+          grep -F "[YomoriRouteContractSmoke] PASS" yomori-route-contract.log
+          if grep -F "SCRIPT ERROR:" yomori-route-contract.log; then
+            echo "FAIL: Yomori route contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" yomori-route-contract.log; then
+            echo "FAIL: Yomori route contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload regional validation logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: hushiro-validation-${{ github.run_id }}
+          name: regional-validation-${{ github.run_id }}
           path: |
             hushiro-route-contract.log
             hushiro-full-run.log
+            yomori-route-contract.log
             first-attempt-smoke.log
           if-no-files-found: warn
           retention-days: 7
