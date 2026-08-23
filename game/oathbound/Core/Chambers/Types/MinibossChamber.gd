@@ -2,7 +2,8 @@ extends "res://Core/Chambers/Types/MinibossChamberController.gd"
 
 ## Canonical miniboss-chamber rules layer.
 ## The imported TreasureRoom controller keeps scene/chest plumbing temporarily; this
-## layer enforces the current reward contract and Hushiro-facing chamber identity.
+## layer enforces the current premium Technique + persistent bonus contract for the
+## reconciled Hushiro and Yomori regions.
 
 const MINIBOSS_PERSISTENT_MIST := 10
 const MINIBOSS_PERSISTENT_SCROLLS := 1
@@ -10,14 +11,17 @@ const MINIBOSS_PERSISTENT_SCROLLS := 1
 var _persistent_bonus_granted := false
 
 
+func _uses_current_miniboss_reward() -> bool:
+	return _get_area_id() in [1, 2]
+
+
 func _setup_treasure_chests() -> void:
 	super._setup_treasure_chests()
-	if _get_area_id() != 1 or _treasure_chests.is_empty():
+	if not _uses_current_miniboss_reward() or _treasure_chests.is_empty():
 		return
 
-	# Hushiro's miniboss has one premium primary reward, not three cosmetic chests
-	# that all resolve to the same legacy reward key. Keep the first chest as the
-	# compatibility interaction point and suppress the unused duplicates.
+	# Current minibosses have one premium primary reward, not three cosmetic chests
+	# that all resolve through legacy reward keys. Keep the first chest only.
 	var primary: Node = _treasure_chests[0]
 	if "chest_category_name" in primary:
 		primary.set("chest_category_name", "Technique Reward")
@@ -61,7 +65,7 @@ func _on_miniboss_defeated() -> void:
 
 
 func _on_chest_opened(opened_chest: Node) -> void:
-	if _get_area_id() != 1:
+	if not _uses_current_miniboss_reward():
 		super._on_chest_opened(opened_chest)
 		return
 	if _reward_claimed:
@@ -73,15 +77,13 @@ func _on_chest_opened(opened_chest: Node) -> void:
 		if chest.has_method("permanent_lock"):
 			chest.call("permanent_lock")
 
-	# First-playtest Hushiro miniboss primary reward is a premium Technique
-	# opportunity. `boon` remains only as the current RewardPickup compatibility key.
 	var pickup_script = load("res://Objects/RewardPickup.gd")
 	if pickup_script == null:
 		push_warning("[MinibossChamber] RewardPickup.gd could not be loaded.")
 		return
 
 	var pickup = pickup_script.new()
-	pickup.setup("boon", 0, 1)
+	pickup.setup("boon", 0, _get_area_id())
 	pickup.set_meta("technique_source", UpgradeService.SOURCE_MINIBOSS)
 	var spawn_pos := global_position
 	if opened_chest is Node2D:
