@@ -216,7 +216,7 @@ static func _roll_room_token(route_generator: Node, chamber_number: int, existin
 		var base: String = route_generator.get_base_room_type(option)
 		if base != "combat":
 			blocked.append(base)
-	var room_type := route_generator._weighted_pick_string(weights, blocked)
+	var room_type: String = str(route_generator._weighted_pick_string(weights, blocked))
 	if room_type.is_empty():
 		room_type = "combat"
 	if room_type == "combat":
@@ -232,7 +232,7 @@ static func _roll_room_token(route_generator: Node, chamber_number: int, existin
 
 
 static func _roll_combat_reward(route_generator: Node) -> String:
-	return route_generator._weighted_pick_string(COMBAT_REWARD_WEIGHTS, [])
+	return str(route_generator._weighted_pick_string(COMBAT_REWARD_WEIGHTS, []))
 
 
 static func _fallback_distinct(route_generator: Node, options: Array[String]) -> String:
