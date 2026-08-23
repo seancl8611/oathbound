@@ -12,6 +12,7 @@
 
 [node name="TwinMawsChamber" type="Node2D"]
 script = ExtResource("1_boss")
+metadata/area_id = 2
 
 [node name="Background" type="Sprite2D" parent="."]
 texture_filter = 2
@@ -47,6 +48,8 @@ metadata/boss_area = 2
 
 [node name="TwinMawsManager" type="Node2D" parent="TwinMaws"]
 script = ExtResource("7_duo")
+twin_a_path = NodePath("../Rootfang")
+twin_b_path = NodePath("../Briarthorn")
 
 [node name="Rootfang" parent="TwinMaws" instance=ExtResource("8_rootfang")]
 position = Vector2(-120, -65)
