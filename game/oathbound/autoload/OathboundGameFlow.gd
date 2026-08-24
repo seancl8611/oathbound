@@ -15,9 +15,10 @@ const EXPECTED_ATTACK_DIRECTOR_SCRIPT: String = "res://Core/Prosthetics/Oathboun
 const EXPECTED_RELIC_RUNTIME_SCRIPT: String = "res://Core/Relics/OathboundRelicRuntime.gd"
 const EXPECTED_CORRUPTION_RUNTIME_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionRuntime.gd"
 const EXPECTED_UPGRADE_SERVICE_SCRIPT: String = "res://Core/Relics/OathboundUpgradeService.gd"
-const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Corruption/OathboundCorruptionPlaytestLab.gd"
+const EXPECTED_PLAYTEST_LAB_SCRIPT: String = "res://Core/Regions/OathboundRegionPlaytestLab.gd"
 const RELIC_SWAP_UI_SCRIPT: Script = preload("res://Core/Relics/OathboundRelicSwapUI.gd")
 const YOMORI_ROUTE_AUTHORITY: Script = preload("res://Regions/Yomori/Routes/YomoriRouteAuthority.gd")
+const KAGUTSUCHI_ROUTE_AUTHORITY: Script = preload("res://Regions/Kagutsuchi/Routes/KagutsuchiRouteAuthority.gd")
 
 
 func _ready() -> void:
@@ -134,15 +135,19 @@ func set_player(p: Node) -> void:
 
 func build_route_for_area(area_id: int) -> Array[String]:
 	current_area = area_id
+	var generated_value: Variant = []
 	if area_id == 2:
-		var generated_value: Variant = YOMORI_ROUTE_AUTHORITY.generate(RouteGenerator)
-		var generated: Array[String] = []
-		if generated_value is Array:
-			for token_value: Variant in generated_value:
-				generated.append(str(token_value))
-		route = generated
+		generated_value = YOMORI_ROUTE_AUTHORITY.generate(RouteGenerator)
+	elif area_id == 3:
+		generated_value = KAGUTSUCHI_ROUTE_AUTHORITY.generate(RouteGenerator)
 	else:
-		route = RouteGenerator.generate_area_route(area_id)
+		generated_value = RouteGenerator.generate_area_route(area_id)
+
+	var generated: Array[String] = []
+	if generated_value is Array:
+		for token_value: Variant in generated_value:
+			generated.append(str(token_value))
+	route = generated
 	current_index = 0
 	_awaiting_choice = false
 	_choice_slot = -1
