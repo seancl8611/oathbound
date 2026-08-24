@@ -13,6 +13,8 @@ on:
       - "game/oathbound/Utility/CombatController.gd"
       - "game/oathbound/Utility/DamageNumberManager.gd"
       - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
       - "game/oathbound/World/BloodStackManager.gd"
       - ".github/workflows/hushiro-combat-regression-check.yml"
   pull_request:
@@ -24,6 +26,8 @@ on:
       - "game/oathbound/Utility/CombatController.gd"
       - "game/oathbound/Utility/DamageNumberManager.gd"
       - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
       - "game/oathbound/World/BloodStackManager.gd"
       - ".github/workflows/hushiro-combat-regression-check.yml"
   workflow_dispatch:
