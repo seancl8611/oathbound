@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-22
+last_reviewed: 2026-08-23
 topics:
   - open-questions
   - implementation-readiness
@@ -40,48 +40,39 @@ Do not create another Hushiro planning pass for final wave timing, exact enemy a
 
 # Godot documentation-to-code delta audit — EXECUTED
 
-The former delta-audit gate has materially been executed through the implementation sequence that now includes:
+The former broad delta-audit gate has materially been executed through the current implementation sequence. Do not return to a broad audit as a prerequisite for ordinary implementation. Remaining mismatches should be handled in dependency-sized implementation packages and documented when found.
 
-- the Godot 4.7.2 project baseline and canonical `game/oathbound/` root;
-- Akio's current core-combat rules layer, combat telemetry, and Playtest Lab;
-- the Hushiro 12-chamber route and authored multi-wave encounter flow;
-- all six Hushiro standard-enemy contracts and current pressure coordination;
-- Village Ogre / Collector miniboss integration and Keeper reward flow;
-- canonical persistent Mist / Scroll / boss-material ownership and staged Strand progression;
-- the current 50-Technique catalog, no-slot acquisition model, eligibility, rarity/source weighting, rerolls, and reward UI;
-- first-playtest Echo / Rupture / Seal / Rift / Crimson combat execution;
-- first-playtest Wolf / Wraith / Ronin weapon kits, Tier 0-IV runtime rules, shared Blood generation, and Blood Arts;
-- current Prosthetic roster, Spirit runtime, persistent 2 / 4 / 6 Scroll upgrade contract, and test controls;
-- current persistent Relic slot/mastery/effect runtime, Forge management, safe swap windows, and 4 / 2 / 4 source partition;
-- current run-scoped Corruption authority, first-death Returning Blood awakening, Shrine support / Resist / Embrace / Stabilize flow, and Aspect Tier advancement bridge;
-- explicit first-attempt base-katana / no-Aspect runtime state and first-death handoff into pre-run Aspect selection;
-- current Bloodwell, Forge Bench, and Keeper-gated Blood Mirror persistent-progression stations with campaign/save state and focused CI coverage.
+# Active implementation order
 
-Do not return to a broad audit as a prerequisite for ordinary implementation. Remaining mismatches should be handled in dependency-sized implementation packages and documented when found.
+1. **Technique runtime stabilization — IMPLEMENTED / VALIDATION-TUNING** — the five canonical families, mixed-family interactions, universal action triggers, reward acquisition, and long-run cleanup are implemented at first-playtest depth. `TECHNIQUE_RUNTIME_IMPLEMENTATION.md` records the boundary.
+2. **Blood Aspect runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — Wolf / Wraith / Ronin have current Tier 0 weapon kits, Tier I-IV mechanics, shared action-trigger metadata, applied-result Blood generation, Blood Arts, and debug Tier/Blood controls. `ASPECT_RUNTIME_IMPLEMENTATION.md` records the boundary.
+3. **Current Prosthetic runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — the current eight-tool roster, 100-Spirit runtime, permanent 2 / 4 / 6 Scroll upgrade contract, HUD integration surface, and focused Playtest Lab controls are implemented.
+4. **Relic runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — the one-slot persistent runtime, ten approved launch effects, kill mastery, Forge management, safe Keeper/Twin swap windows, Scribe rewards, Merchant integration, immediate-persistence discovery, and 4 / 2 / 4 source partition are implemented. `RELIC_RUNTIME_IMPLEMENTATION.md` records the boundary.
+5. **Corruption / Shrine integration — IMPLEMENTED / VALIDATION-TUNING** — the approved 0 / 100 Corruption state, encounter credit/caps, first-death Returning Blood awakening, support Shrine, Resist, Embrace, Tier-IV Stabilize, awakened-only HUD state, and Aspect Tier bridge are implemented. `CORRUPTION_RUNTIME_IMPLEMENTATION.md` records the boundary.
+6. **First complete Hushiro run validation — EXECUTED / VALIDATED** — PR #112 passed deterministic Hushiro route validation across 256 seeds and a complete automated 12-counted-chamber traversal through the Chamber 12 Keeper endpoint. `docs/_meta/decisions/2026-08-22-hushiro-full-run-validation.md` records the evidence.
+7. **Compatibility retirement — EXECUTED / VALIDATED** — PR #113 removes obsolete Hushiro prototype authorities and forwarding trees while preserving the canonical current runtime. `docs/_meta/decisions/2026-08-22-compatibility-retirement.md` records the evidence.
+8. **First-attempt base-katana / no-Aspect runtime reconciliation — EXECUTED / VALIDATED** — PR #114 implements the pre-awakening base-katana/no-Aspect state and first-death handoff into pre-run Aspect selection. `docs/_meta/decisions/2026-08-22-first-attempt-runtime-reconciliation.md` records the evidence.
+9. **Strand / permanent progression — EXECUTED / VALIDATED** — PR #115 implements persistent Mist/Scroll/boss-material ownership, Bloodwell, Blood Mirror, persistent Forge progression, Blood Cavern first-clear claims, staged campaign gates, and all three canonical Strand progression stations. `docs/_meta/decisions/2026-08-22-strand-permanent-progression.md` records the boundary.
+10. **Yomori region reconciliation — EXECUTED / VALIDATED** — PR #116 establishes the approved 10-counted-chamber route, four-enemy encounter authority, Embered Pilgrim / Rotwood Host opportunity, genuine Treasure chamber, Twin Maws endpoint, current Region 2 SceneRegistry ownership, focused visual/runtime validation, and region-aware targeted Playtest Lab controls. `docs/_meta/decisions/2026-08-23-yomori-region-reconciliation.md` records the boundary.
+11. **Kagutsuchi / Shogun / Heart reconciliation — NEXT** — implement/reconcile the approved Region 3 route/layout, encounter pool, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding states, both Heart forms, first-clear/repeat-suppression differences, transitions, rewards, and current runtime ownership. Retire Region 3 compatibility aliases only when direct current authorities replace them and regression coverage proves the replacement.
 
-# Current implementation question — reconcile Yomori
+# Current implementation question — reconcile Kagutsuchi / Shogun / Heart
 
-**Question:** Does the current Region 2 / Yomori runtime implement the approved authored first-playtest package coherently across its route/layout, encounter pool, Embered Pilgrim, Rotwood Host, Twin Maws, regional hazards, transitions, rewards, and current runtime ownership without relying on obsolete forwarding aliases or imported prototype authorities?
+**Question:** Does the current Region 3 / Kagutsuchi runtime implement the approved authored first-playtest package coherently across route/layout, standard encounters, minibosses, Eclipse Shogun, Binding/Heart sequence, first-clear vs repeat behavior, transitions, rewards, and current runtime ownership without relying on obsolete imported prototype authorities?
 
-The active implementation order is now:
+The next implementation package should answer that question in code rather than creating another planning pass where the approved documentation already supplies enough authority.
 
-1. **Technique runtime stabilization — IMPLEMENTED / VALIDATION-TUNING** — the five canonical families, mixed-family interactions, universal action triggers, reward acquisition, and long-run cleanup are implemented at first-playtest depth. `TECHNIQUE_RUNTIME_IMPLEMENTATION.md` records the boundary; remaining work is runtime validation/tuning rather than another design pass.
-2. **Blood Aspect runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — Wolf / Wraith / Ronin have current Tier 0 weapon kits, Tier I-IV mechanics, shared action-trigger metadata, applied-result Blood generation, Blood Arts, and debug Tier/Blood controls. `ASPECT_RUNTIME_IMPLEMENTATION.md` records the boundary. Natural Tier advancement is called by the approved Corruption Shrine Embrace flow.
-3. **Current Prosthetic runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — the current eight-tool roster, 100-Spirit runtime, permanent 2 / 4 / 6 Scroll upgrade contract, HUD integration surface, and focused Playtest Lab controls are implemented. Remaining work is long-run interaction validation rather than reopening Prosthetic planning.
-4. **Relic runtime reconciliation — IMPLEMENTED / VALIDATION-TUNING** — the one-slot persistent runtime, ten approved launch effects, kill mastery, Forge management, safe Keeper/Twin swap windows, Scribe four-card rewards, current Merchant economy integration, immediate-persistence discovery, and 4 / 2 / 4 source partition are implemented. `RELIC_RUNTIME_IMPLEMENTATION.md` records the core runtime boundary.
-5. **Corruption / Shrine integration — IMPLEMENTED / VALIDATION-TUNING** — the approved 0 / 100 Corruption state, encounter credit/caps, first-death Returning Blood awakening, support Shrine, Resist, Embrace, Tier-IV Stabilize, awakened-only HUD state, and Aspect Tier bridge are implemented. `CORRUPTION_RUNTIME_IMPLEMENTATION.md` records the runtime contract and explicit authored-boss checkpoint boundary.
-6. **First complete Hushiro run validation — EXECUTED / VALIDATED** — PR #112 passed deterministic Hushiro route validation across 256 seeds and a complete automated 12-counted-chamber traversal through the Chamber 12 Keeper/boss endpoint. `docs/_meta/decisions/2026-08-22-hushiro-full-run-validation.md` records the permanent evidence and validation boundary.
-7. **Compatibility retirement — EXECUTED / VALIDATED** — PR #113 removes obsolete Hushiro prototype authorities and forwarding trees while preserving the canonical current runtime. `docs/_meta/decisions/2026-08-22-compatibility-retirement.md` records the evidence and the one explicitly contained inert imported-Archer fallback.
-8. **First-attempt base-katana / no-Aspect runtime reconciliation — EXECUTED / VALIDATED** — PR #114 implements a genuine pre-awakening base-katana/no-Aspect state, prevents pre-awakening Tier/Blood/Aspect leakage, preserves Beast-Bane Whistle and universal Technique triggers, and adds explicit awakened Aspect selection at The Well. `docs/_meta/decisions/2026-08-22-first-attempt-runtime-reconciliation.md` records the evidence.
-9. **Strand / permanent progression — EXECUTED / VALIDATED** — PR #115 implements persistent Mist/Scroll/boss-material ownership, the 18-node Bloodwell, 9-node Keeper-gated Blood Mirror, persistent Forge Prosthetic state and 66-Scroll rank economy, the 4 / 2 / 4 Relic source partition, Blood Cavern first-clear claims, staged campaign gates, and all three canonical Strand progression stations. Exact implementation head `eed625addf7ffee606e8289e34e2a57ca7972a20` passed the full Godot 4.7.2 project gate including the dedicated Strand progression contract. `docs/_meta/decisions/2026-08-22-strand-permanent-progression.md` records the permanent boundary.
-10. **Yomori region reconciliation — NEXT** — implement/reconcile the approved Region 2 route/layout, encounter pool, Embered Pilgrim, Rotwood Host, Twin Maws, regional hazards, transitions, and reward integration. Retire Yomori compatibility aliases only when current direct authorities replace them and regression coverage proves the replacement.
+# Content package after Kagutsuchi
 
-The goal is not to require a separate playtest after every micro-fix. Build coherent dependency-sized batches, then use longer telemetry-backed playtests to find interacting defects together. Accuracy and consistency with approved authorities still take precedence over merely increasing change volume.
-
-# Next content packages after Yomori
-
-- **Kagutsuchi / Shogun / Heart:** encounter pool/layout implementation, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding states, both Heart forms, and first-clear/repeat-suppression differences.
 - **Authored presentation content:** exact dialogue, lore/records, achievements, tutorial/help text, ending/postgame lines, credits/legal when dependencies are known.
+
+# Playtest workflow during content buildout
+
+Do **not** require repeated full-route manual runs while major content packages are still being integrated.
+
+Use the backtick Playtest Lab to isolate risky variables and regional content directly. Prefer short checks such as one enemy, one encounter, one room type, one miniboss, one boss phase, one reward path, or one transition. Automated route/contract validation remains the primary structural gate during buildout.
+
+A complete Hushiro -> Yomori -> Kagutsuchi -> Shogun / Heart manual run is a milestone validation after the remaining region content is integrated. At that point, use the full route to evaluate cross-region state persistence, interacting systems, economy, difficulty curve, and total run duration.
 
 # Playtest backlog — not open design questions
 
@@ -94,4 +85,5 @@ Do not promote these back into the design queue unless testing reveals a structu
 - final encounter volume/wave timing,
 - final Corruption/Blood pacing,
 - final route/reward/economy weights,
-- exact run-duration validation.
+- exact per-region and full-run duration validation,
+- final presentation-art replacement for prototype visual scaffolding.
