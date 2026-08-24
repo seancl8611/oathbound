@@ -4,7 +4,8 @@ extends "res://Core/Prosthetics/OathboundProstheticManager.gd"
 ## The underlying manager remains combat/upgrade authority; this layer owns campaign
 ## unlock cadence and durable unlock/equip/upgrade state.
 
-const SAVE_PATH := "user://oathbound_prosthetic_progress.cfg"
+const LEGACY_SAVE_PATH := "user://oathbound_prosthetic_progress.cfg"
+const SLOT_FILE := "prosthetic_progress.cfg"
 const SAVE_SECTION := "prosthetics"
 
 const FIRST_RETURN_UNLOCKS: Array[String] = ["thunder_rod"]
@@ -29,6 +30,30 @@ func _ready() -> void:
 		if not MetaProgress.is_connected("returning_blood_awakened_changed", awaken_cb):
 			MetaProgress.connect("returning_blood_awakened_changed", awaken_cb)
 	print("[OathboundPersistentProstheticManager] durable Forge progression | unlocked=%d" % unlocked_prosthetics.size())
+
+
+func _save_path() -> String:
+	if typeof(SaveSlots) == TYPE_OBJECT and SaveSlots.has_method("get_slot_file"):
+		return str(SaveSlots.call("get_slot_file", SLOT_FILE))
+	return LEGACY_SAVE_PATH
+
+
+func reload_from_active_slot() -> void:
+	_loading_progress = true
+	unlocked_prosthetics.clear()
+	equipped_prosthetic_id = ""
+	purchased_upgrades.clear()
+	socketed_relics.clear()
+	unlocked_relics.clear()
+	_loading_progress = false
+	_load_current_progress()
+	_ensure_starting_loadout()
+	_synchronize_campaign_unlocks()
+	prosthetic_equipped.emit(equipped_prosthetic_id)
+
+
+func flush_save() -> void:
+	_save_current_progress()
 
 
 func _on_campaign_progression_changed() -> void:
@@ -102,14 +127,14 @@ func purchase_upgrade(prosthetic_id: String, upgrade_id: String) -> bool:
 func _save_current_progress() -> void:
 	var file := ConfigFile.new()
 	file.set_value(SAVE_SECTION, "state", get_save_data())
-	var err := file.save(SAVE_PATH)
+	var err := file.save(_save_path())
 	if err != OK:
 		push_warning("[OathboundPersistentProstheticManager] Could not save Forge progression: %s" % error_string(err))
 
 
 func _load_current_progress() -> void:
 	var file := ConfigFile.new()
-	if file.load(SAVE_PATH) != OK:
+	if file.load(_save_path()) != OK:
 		return
 	var state_value: Variant = file.get_value(SAVE_SECTION, "state", {})
 	if not (state_value is Dictionary):
@@ -117,10 +142,8 @@ func _load_current_progress() -> void:
 	_loading_progress = true
 	load_save_data(state_value as Dictionary)
 	_loading_progress = false
-	# Ignore retired socketed-Prosthetic Relic state even if an old save contains it.
 	socketed_relics.clear()
 	unlocked_relics.clear()
-	# Drop unknown/deprecated IDs rather than allowing an imported save to re-enable them.
 	for prosthetic_id in unlocked_prosthetics.keys().duplicate():
 		if prosthetic_id not in CURRENT_IDS:
 			unlocked_prosthetics.erase(prosthetic_id)
