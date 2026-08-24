@@ -197,7 +197,6 @@ func _apply_action_binding(action: String) -> void:
 	var stored: Array = stored_value
 	if stored.is_empty():
 		return
-	# Keep project defaults for any device family the player has not overridden.
 	var overridden_families: Dictionary = {}
 	for encoded_value: Variant in stored:
 		if encoded_value is Dictionary:
@@ -216,8 +215,6 @@ func _apply_action_binding(action: String) -> void:
 
 
 func _reset_bindings_to_project_defaults() -> void:
-	# Project defaults are restored on the next launch after the custom binding section
-	# is cleared. During the current session, reload project.godot's InputMap settings.
 	for action: String in BINDABLE_ACTIONS:
 		if not InputMap.has_action(action):
 			continue
@@ -272,15 +269,15 @@ func _decode_event(encoded: Dictionary) -> InputEvent:
 			return event
 		"mouse_button":
 			var event := InputEventMouseButton.new()
-			event.button_index = int(encoded.get("button_index", MOUSE_BUTTON_LEFT)) as MouseButton
+			event.button_index = int(encoded.get("button_index", MOUSE_BUTTON_LEFT))
 			return event
 		"joy_button":
 			var event := InputEventJoypadButton.new()
-			event.button_index = int(encoded.get("button_index", 0)) as JoyButton
+			event.button_index = int(encoded.get("button_index", 0))
 			return event
 		"joy_axis":
 			var event := InputEventJoypadMotion.new()
-			event.axis = int(encoded.get("axis", 0)) as JoyAxis
+			event.axis = int(encoded.get("axis", 0))
 			event.axis_value = float(encoded.get("axis_value", 1.0))
 			return event
 	return null
