@@ -6,10 +6,17 @@ extends "res://autoload/OathboundRegionGameFlow.gd"
 ## frozen scene tree.
 
 const CHECKPOINT_VERSION := 1
+const EXPECTED_RELEASE_RELIC_RUNTIME_SCRIPT := "res://Core/Release/OathboundSlotRelicRuntime.gd"
 
 var _resume_checkpoint_pending: Dictionary = {}
 var _resume_in_progress := false
 var _resume_player_state: Dictionary = {}
+
+
+# OathboundGameFlow's ready chain calls this virtual assertion. The release adapter is
+# now the persistence owner while inheriting the exact same Relic combat rules.
+func _assert_current_relic_runtime() -> void:
+	_assert_autoload_script("RelicRuntime", EXPECTED_RELEASE_RELIC_RUNTIME_SCRIPT, false)
 
 
 func prepare_resume_checkpoint(checkpoint: Dictionary) -> bool:
