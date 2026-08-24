@@ -38,9 +38,9 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Kennel Break",
 		"min_chamber": 2,
 		"waves": [
-			{"groups": [{"type": "hound", "count": 4}]},
-			{"groups": [{"type": "hound", "count": 3}, {"type": "swordsman", "count": 1}]},
-			{"groups": [{"type": "hound", "count": 4}, {"type": "swordsman", "count": 1}]},
+			{"groups": [{"type": "hound", "count": 2}, {"type": "hollow", "count": 2}]},
+			{"groups": [{"type": "hound", "count": 2}, {"type": "swordsman", "count": 1}, {"type": "hollow", "count": 1}]},
+			{"groups": [{"type": "hound", "count": 2}, {"type": "swordsman", "count": 1}, {"type": "hollow", "count": 2}]},
 		],
 	},
 	{
@@ -88,10 +88,10 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Hounds in the Mud",
 		"min_chamber": 4,
 		"waves": [
-			{"groups": [{"type": "hound", "count": 4}]},
-			{"groups": [{"type": "hound", "count": 3}, {"type": "archer", "count": 1}]},
-			{"groups": [{"type": "hound", "count": 4}, {"type": "swordsman", "count": 1}]},
-			{"groups": [{"type": "hound", "count": 4}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 1}]},
+			{"groups": [{"type": "hound", "count": 2}, {"type": "hollow", "count": 2}]},
+			{"groups": [{"type": "hound", "count": 2}, {"type": "archer", "count": 1}, {"type": "hollow", "count": 1}]},
+			{"groups": [{"type": "hound", "count": 2}, {"type": "swordsman", "count": 1}, {"type": "hollow", "count": 1}]},
+			{"groups": [{"type": "hound", "count": 2}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 1}, {"type": "hollow", "count": 1}]},
 		],
 	},
 	{
