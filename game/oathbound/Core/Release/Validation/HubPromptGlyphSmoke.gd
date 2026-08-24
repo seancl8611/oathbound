@@ -26,6 +26,7 @@ func _run() -> void:
 	var keeper_prompt: Label = hub.get_node_or_null("KeeperNPC/InteractPopup") as Label
 	_expect(well_prompt != null and well_prompt.text == "The Well [E]", "live Strand Well prompt did not use keyboard binding")
 	_expect(keeper_prompt != null and keeper_prompt.text == "Keeper [E]", "live Strand NPC prompt did not use keyboard binding")
+	_expect(hub.get_node_or_null("QuestAltar") == null, "legacy Quest Altar is still authored into the live Strand")
 
 	hub.call("_set_prompt_input_family_for_playtest", INPUT_GLYPHS.FAMILY_CONTROLLER)
 	_expect(well_prompt != null and well_prompt.text == "The Well [A]", "live Strand Well prompt did not switch to controller glyph")
@@ -48,7 +49,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[HubPromptGlyphSmoke] PASS - keyboard [E] | controller [A] | live rebind [Y] | text-labelled prompts")
+	print("[HubPromptGlyphSmoke] PASS - keyboard [E] | controller [A] | live rebind [Y] | text-labelled prompts | no stale Quest Altar")
 	get_tree().quit(0)
 
 

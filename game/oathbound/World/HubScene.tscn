@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://World/Hub.gd" id="1_qm1wv"]
 [ext_resource type="Texture2D" uid="uid://brh8sgxga6n5m" path="res://Textures/hub.png" id="2_uc1vc"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://World/TheWell.gd" id="4_qky78"]
 [ext_resource type="Script" path="res://World/ForgeBench.gd" id="5_4dxfo"]
 [ext_resource type="Script" path="res://World/CodexBoard.gd" id="6_wu1q6"]
-[ext_resource type="Script" path="res://World/QuestAltar.gd" id="7_rx06b"]
 [ext_resource type="Script" path="res://World/Bloodwell.gd" id="8_wklb0"]
 [ext_resource type="Script" path="res://World/MerchantStall.gd" id="9_bbnwo"]
 [ext_resource type="Script" path="res://World/PracticeGrounds.gd" id="10_2hmrb"]
@@ -71,24 +70,6 @@ offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
 text = "Discovery Board [E]"
-horizontal_alignment = 1
-
-[node name="QuestAltar" type="Area2D" parent="."]
-position = Vector2(46, 91)
-script = ExtResource("7_rx06b")
-interact_distance = null
-popup_label_text = null
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestAltar"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_qekqq")
-
-[node name="InteractPopup" type="Label" parent="QuestAltar"]
-offset_left = -75.0
-offset_top = -65.0
-offset_right = 76.0
-offset_bottom = -39.0
-text = "Quest [E]"
 horizontal_alignment = 1
 
 [node name="Bloodwell" type="Area2D" parent="."]
@@ -262,7 +243,6 @@ horizontal_alignment = 1
 [connection signal="body_entered" from="TheWell" to="TheWell" method="_on_body_entered"]
 [connection signal="body_entered" from="ForgeBench" to="ForgeBench" method="_on_body_entered"]
 [connection signal="body_entered" from="CodexBoard" to="CodexBoard" method="_on_body_entered"]
-[connection signal="body_entered" from="QuestAltar" to="QuestAltar" method="_on_body_entered"]
 [connection signal="body_entered" from="Bloodwell" to="Bloodwell" method="_on_body_entered"]
 [connection signal="body_entered" from="BloodMirror" to="BloodMirror" method="_on_body_entered"]
 [connection signal="body_entered" from="MerchantStall" to="MerchantStall" method="_on_body_entered"]
