@@ -9,6 +9,7 @@ const SETTINGS_SCRIPT = preload("res://Core/Release/OathboundSettingsManager.gd"
 const RUN_DATA_SCRIPT = preload("res://Core/Release/OathboundReleaseRunData.gd")
 const FLOW_SCRIPT = preload("res://Core/Release/OathboundReleaseGameFlow.gd")
 const TITLE_SCENE = preload("res://TitleScreen/menu.tscn")
+const PAUSE_SCRIPT = preload("res://Core/Release/OathboundPauseOverview.gd")
 
 const REQUIRED_SETTINGS: Array[String] = [
 	"master_volume", "music_volume", "sfx_volume", "ambience_volume",
@@ -43,6 +44,7 @@ func _run_contract() -> void:
 	_validate_checkpoint_round_trip()
 	_validate_records_contract()
 	await _validate_front_end_contract()
+	await _validate_pause_overview_contract()
 
 	if _failed:
 		get_tree().quit(1)
@@ -175,6 +177,35 @@ func _validate_front_end_contract() -> void:
 
 	front_end.queue_free()
 	await get_tree().process_frame
+
+
+func _validate_pause_overview_contract() -> void:
+	var overlay_value: Variant = PAUSE_SCRIPT.new()
+	_expect(overlay_value is CanvasLayer, "Pause / Build Overview did not instantiate as a CanvasLayer")
+	if not (overlay_value is CanvasLayer):
+		return
+	var overlay := overlay_value as CanvasLayer
+	add_child(overlay)
+	await get_tree().process_frame
+	_expect(get_tree().paused, "Pause / Build Overview did not pause gameplay")
+	var title_found := false
+	var resume_found := false
+	var technique_overview_found := false
+	for label_node: Node in overlay.find_children("*", "Label", true, false):
+		if label_node is Label and (label_node as Label).text == "PAUSE / BUILD OVERVIEW":
+			title_found = true
+	for button_node: Node in overlay.find_children("*", "Button", true, false):
+		if button_node is Button and (button_node as Button).text == "Resume":
+			resume_found = true
+	for rich_node: Node in overlay.find_children("*", "RichTextLabel", true, false):
+		if rich_node is RichTextLabel and (rich_node as RichTextLabel).text.find("Owned Techniques") != -1:
+			technique_overview_found = true
+	_expect(title_found, "Pause / Build Overview missing title")
+	_expect(resume_found, "Pause / Build Overview missing Resume action")
+	_expect(technique_overview_found, "Pause / Build Overview missing Technique grouping")
+	overlay.call("_close")
+	await get_tree().process_frame
+	_expect(not get_tree().paused, "Pause / Build Overview did not restore gameplay pause state")
 
 
 func _total(breakdown: Dictionary, key: String) -> int:
