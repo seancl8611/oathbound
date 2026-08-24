@@ -13,7 +13,6 @@ const INTERACTION_PROMPTS: Dictionary = {
 	"TheWell": {"key": "ui.strand.station.well", "fallback": "The Well"},
 	"ForgeBench": {"key": "ui.strand.station.forge", "fallback": "Forge"},
 	"CodexBoard": {"key": "ui.strand.station.discovery_board", "fallback": "Discovery Board"},
-	"QuestAltar": {"key": "ui.strand.station.quest", "fallback": "Quest"},
 	"Bloodwell": {"key": "ui.strand.station.bloodwell", "fallback": "Bloodwell"},
 	"BloodMirror": {"key": "ui.strand.station.blood_mirror", "fallback": "Blood Mirror"},
 	"MerchantStall": {"key": "ui.strand.station.merchant", "fallback": "Merchant"},
@@ -160,10 +159,6 @@ func _connect_stations() -> void:
 	if forge and forge.has_signal("prosthetic_equipped"):
 		forge.connect("prosthetic_equipped", Callable(self, "_on_prosthetic_equipped"))
 
-	var altar: Node = get_node_or_null("QuestAltar")
-	if altar and altar.has_signal("reward_claimed"):
-		altar.connect("reward_claimed", Callable(self, "_on_quest_reward_claimed"))
-
 	var shrine: Node = get_node_or_null("MetaShrine")
 	if shrine and shrine.has_signal("upgrade_purchased"):
 		shrine.connect("upgrade_purchased", Callable(self, "_on_meta_upgrade_purchased"))
@@ -189,10 +184,6 @@ func _on_run_started() -> void:
 func _on_prosthetic_equipped(prosthetic_id: String) -> void:
 	print("[Hub] Prosthetic equipped: ", prosthetic_id)
 	Global.selected_weapon_name = prosthetic_id
-
-
-func _on_quest_reward_claimed(quest_id: String) -> void:
-	print("[Hub] Quest reward claimed: ", quest_id)
 
 
 func _on_meta_upgrade_purchased(upgrade_id: String) -> void:
