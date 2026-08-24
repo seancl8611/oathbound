@@ -22,8 +22,11 @@ func _run() -> void:
 	await _verify_damage_number_scene_teardown()
 	if _failed:
 		return
+	await _verify_blood_stack_target_teardown()
+	if _failed:
+		return
 
-	print("[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred | transient damage-number tween dies with scene node")
+	print("[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred | transient damage-number tween dies with scene node | freed blood-stack target pruned")
 	get_tree().quit(0)
 
 
@@ -130,6 +133,33 @@ func _verify_damage_number_scene_teardown() -> void:
 	# The old animation completed at 0.6 s. Wait beyond that boundary so CI captures
 	# any delayed freed-lambda diagnostic emitted by Godot.
 	await get_tree().create_timer(0.75).timeout
+
+
+func _verify_blood_stack_target_teardown() -> void:
+	if typeof(BloodStackManager) != TYPE_OBJECT:
+		_fail("BloodStackManager autoload unavailable")
+		return
+
+	# This singleton also survives scene changes. Reproduce an enemy registering with
+	# it and disappearing with the outgoing room without an explicit unregister call.
+	var target := Node.new()
+	target.name = "BloodStackLifetimeProbe"
+	add_child(target)
+	BloodStackManager.call("register_enemy", target)
+	await get_tree().process_frame
+
+	target.queue_free()
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var targets_value: Variant = BloodStackManager.get("blood_targets")
+	if not (targets_value is Array):
+		_fail("BloodStackManager target registry is not an Array")
+		return
+	for registered: Variant in targets_value as Array:
+		if registered == null or not is_instance_valid(registered):
+			_fail("BloodStackManager retained a freed scene target")
+			return
 
 
 func _on_probe_area_entered(area: Area2D) -> void:
