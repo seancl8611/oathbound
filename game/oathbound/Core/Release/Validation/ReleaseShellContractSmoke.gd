@@ -24,6 +24,11 @@ const REQUIRED_BINDINGS: Array[String] = [
 const REQUIRED_FRONT_END_BUTTONS: Array[String] = [
 	"Continue", "New Game", "Settings", "Credits", "Quit",
 ]
+const REQUIRED_SETTINGS_METHODS: Array[String] = [
+	"get_controller_glyph_label", "get_screen_shake_scale", "should_reduce_flashing",
+	"should_reduce_intense_vfx", "is_high_contrast_enabled", "should_show_damage_numbers",
+	"get_dialogue_text_speed", "uses_instant_text", "get_block_mode",
+]
 
 var _failed := false
 
@@ -69,9 +74,13 @@ func _validate_settings_contract() -> void:
 		_expect(SETTINGS_SCRIPT.DEFAULTS.has(key), "required setting missing: %s" % key)
 	for action: String in REQUIRED_BINDINGS:
 		_expect(action in SETTINGS_SCRIPT.BINDABLE_ACTIONS, "required rebindable action missing: %s" % action)
+	for method_name: String in REQUIRED_SETTINGS_METHODS:
+		_expect(SettingsManager.has_method(method_name), "live settings API missing: %s" % method_name)
 	_expect(float(SETTINGS_SCRIPT.DEFAULTS.get("ui_scale", 0.0)) > 0.0, "UI scale default invalid")
 	_expect(float(SETTINGS_SCRIPT.DEFAULTS.get("text_scale", 0.0)) > 0.0, "text scale default invalid")
 	_expect(str(SETTINGS_SCRIPT.DEFAULTS.get("block_mode", "")) in ["hold", "toggle"], "block-mode default invalid")
+	_expect(ThemeDB.fallback_base_scale > 0.0, "ThemeDB UI fallback scale was not initialized")
+	_expect(ThemeDB.fallback_font_size > 0, "ThemeDB text fallback size was not initialized")
 
 
 func _validate_checkpoint_round_trip() -> void:
@@ -148,6 +157,22 @@ func _validate_front_end_contract() -> void:
 	_expect(title_found, "front end does not present the OATHBOUND title")
 	for label: String in REQUIRED_FRONT_END_BUTTONS:
 		_expect(label in button_texts, "front end missing required action: %s" % label)
+
+	front_end.call("_build_settings_menu")
+	await get_tree().process_frame
+	var block_mode_button_found := false
+	var rebinding_button_found := false
+	for button_node: Node in front_end.find_children("*", "Button", true, false):
+		if not (button_node is Button):
+			continue
+		var text := (button_node as Button).text
+		if text.begins_with("Block Input:"):
+			block_mode_button_found = true
+		if text == "Controls / Rebinding":
+			rebinding_button_found = true
+	_expect(block_mode_button_found, "Settings UI does not expose Hold/Toggle block preference")
+	_expect(rebinding_button_found, "Settings UI does not expose controls/rebinding")
+
 	front_end.queue_free()
 	await get_tree().process_frame
 
