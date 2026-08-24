@@ -13,12 +13,15 @@ extends Node
 ## - absorb legacy parry posture into the same shared meter;
 ## - mirror the shared value back to the existing Hound posture UI;
 ## - expose the shared stagger/deathblow state through the Hound's legacy readiness
-##   fields so DeathblowSystem sees the same delayed readiness as every other enemy.
+##   fields so DeathblowSystem sees the same delayed readiness as every other enemy;
+## - record actual Hound -> player hitbox contacts so future playtest logs can measure
+##   the pressure that was previously invisible in combat telemetry.
 
 var enemy: Node = null
 var combat: Node = null
 var posture_runtime: Node = null
 var hurtbox: Area2D = null
+var attack_hitbox: Area2D = null
 
 
 func configure(owner_enemy: Node) -> void:
@@ -27,6 +30,7 @@ func configure(owner_enemy: Node) -> void:
 		combat = enemy.get_node_or_null("Combat")
 		posture_runtime = enemy.get_node_or_null("HushiroPostureBreakRuntime")
 		hurtbox = enemy.get_node_or_null("HurtBox") as Area2D
+		attack_hitbox = enemy.get_node_or_null("HitBox") as Area2D
 
 
 func _ready() -> void:
@@ -39,10 +43,16 @@ func _ready() -> void:
 		posture_runtime = enemy.get_node_or_null("HushiroPostureBreakRuntime")
 	if hurtbox == null and enemy != null:
 		hurtbox = enemy.get_node_or_null("HurtBox") as Area2D
+	if attack_hitbox == null and enemy != null:
+		attack_hitbox = enemy.get_node_or_null("HitBox") as Area2D
 	if hurtbox != null and hurtbox.has_signal("hurt"):
-		var callback := Callable(self, "_on_hound_hurt")
-		if not hurtbox.is_connected("hurt", callback):
-			hurtbox.connect("hurt", callback)
+		var hurt_callback := Callable(self, "_on_hound_hurt")
+		if not hurtbox.is_connected("hurt", hurt_callback):
+			hurtbox.connect("hurt", hurt_callback)
+	if attack_hitbox != null and attack_hitbox.has_signal("area_entered"):
+		var contact_callback := Callable(self, "_on_hound_attack_area_entered")
+		if not attack_hitbox.is_connected("area_entered", contact_callback):
+			attack_hitbox.connect("area_entered", contact_callback)
 	_sync_local_from_shared()
 	_update_legacy_posture_visual()
 
@@ -102,6 +112,33 @@ func _on_hound_hurt(_damage: int, _damage_type: String, _attacker: Node = null) 
 			"shared_posture": _shared_posture(),
 			"shared_posture_max": _shared_posture_max(),
 		})
+
+
+func _on_hound_attack_area_entered(area: Area2D) -> void:
+	if enemy == null or attack_hitbox == null or not is_instance_valid(area):
+		return
+	if not area.is_in_group("player_hurtbox"):
+		return
+	# BlightedHound connected its own area_entered handler before this adapter is
+	# attached. Therefore `_hitbox_consumed == true` means this overlap was the actual
+	# one-per-swing contact that emitted player HurtBox.hurt, not merely a nearby area.
+	if _has_property(enemy, "_hitbox_consumed") and not bool(enemy.get("_hitbox_consumed")):
+		return
+	if CombatTelemetry == null or not CombatTelemetry.is_capturing():
+		return
+
+	var player_node: Node = area.get_parent()
+	var damage: int = int(attack_hitbox.get_meta("damage", 0))
+	var damage_type: String = str(attack_hitbox.get_meta("damage_type", "melee"))
+	var state_value: int = int(enemy.get("state")) if _has_property(enemy, "state") else -1
+	CombatTelemetry.record_event("hound_attack_contact", {
+		"enemy": CombatTelemetry.snapshot_actor(enemy),
+		"player": CombatTelemetry.snapshot_actor(player_node) if player_node != null else {},
+		"damage": damage,
+		"damage_type": damage_type,
+		"hound_state": state_value,
+		"swing_token": attack_hitbox.get_meta("swing_token", 0),
+	})
 
 
 func _absorb_legacy_parry_posture() -> void:
