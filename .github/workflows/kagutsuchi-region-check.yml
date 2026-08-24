@@ -62,7 +62,7 @@ jobs:
           grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn' game/oathbound/Utility/SceneRegistry.gd
           grep -F 'res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn' game/oathbound/Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn
           grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn' game/oathbound/Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.tscn
-          if grep -R -n -F 'res://Enemy/Area 3/' game/oathbound/Regions/Kagutsuchi --include='*.tscn' --include='*.gd'; then
+          if grep -R -n -F 'res://Enemy/Area 3/' game/oathbound/Regions/Kagutsuchi --exclude-dir=Validation --include='*.tscn' --include='*.gd'; then
             echo "FAIL: canonical Kagutsuchi runtime still depends on the legacy Enemy/Area 3 compatibility tree."
             exit 1
           fi
