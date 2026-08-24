@@ -43,7 +43,7 @@ func _ready() -> void:
 	_connect_input_settings()
 	_refresh_prompt()
 	call_deferred("_apply_readability")
-	print("[OathboundShrine] v1.1 - localized Corruption support / Resist / Embrace / Stabilize + binding-aware prompt")
+	print("[OathboundShrine] v1.0 - Corruption support / Resist / Embrace / Stabilize")
 
 
 func _input(event: InputEvent) -> void:
