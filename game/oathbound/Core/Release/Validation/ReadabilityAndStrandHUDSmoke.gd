@@ -5,6 +5,7 @@ const INPUT_GLYPHS = preload("res://Core/Release/OathboundInputGlyphs.gd")
 const HUB_HUD_SCRIPT = preload("res://GUI/HubHUD.gd")
 const RUN_HUD_SCRIPT = preload("res://Core/Prosthetics/OathboundRunHUD.gd")
 const TITLE_SCENE = preload("res://TitleScreen/menu.tscn")
+const SHRINE_SCENE = preload("res://Core/Chambers/Types/ShrineChamber.tscn")
 
 var _failed: bool = false
 
@@ -26,13 +27,14 @@ func _run() -> void:
 	await _validate_front_end()
 	await _validate_strand_hud()
 	await _validate_run_hud_release_presentation()
+	await _validate_shrine_release_presentation()
 
 	SettingsManager.set_value("high_contrast", previous_high_contrast)
 	if _failed:
 		get_tree().quit(1)
 		return
 
-	print("[ReadabilityAndStrandHUDSmoke] PASS - high contrast active | front end styled | Strand wallet Mist+Scrolls only | Run HUD localization+glyphs")
+	print("[ReadabilityAndStrandHUDSmoke] PASS - high contrast active | front end styled | Strand wallet Mist+Scrolls only | Run HUD localization+glyphs | Shrine localization+glyphs")
 	get_tree().quit(0)
 
 
@@ -158,6 +160,80 @@ func _validate_run_hud_release_presentation() -> void:
 		hud.queue_free()
 		await get_tree().process_frame
 
+	TranslationServer.set_locale(previous_locale)
+	TranslationServer.remove_translation(translation)
+
+
+func _validate_shrine_release_presentation() -> void:
+	if typeof(MetaProgress) != TYPE_OBJECT or typeof(AspectRuntime) != TYPE_OBJECT or typeof(CorruptionRuntime) != TYPE_OBJECT:
+		_expect(false, "Shrine presentation test requires MetaProgress, AspectRuntime, and CorruptionRuntime")
+		return
+
+	var previous_locale: String = TranslationServer.get_locale()
+	var previous_awakened: bool = bool(MetaProgress.returning_blood_awakened)
+	var previous_aspect: String = str(AspectRuntime.selected_aspect)
+	var previous_tier: int = int(AspectRuntime.tier)
+	var previous_corruption: int = int(CorruptionRuntime.call("get_corruption"))
+
+	var translation := Translation.new()
+	translation.locale = "fr"
+	translation.add_message(&"ui.shrine.prompt", &"SANCTUAIRE TEST %s")
+	translation.add_message(&"ui.shrine.title.returning_blood", &"SANCTUAIRE SANG TEST")
+	translation.add_message(&"ui.shrine.state.summary", &"%s NIVEAU %d CORRUPTION %d TEST")
+	translation.add_message(&"ui.shrine.current", &"ACTUEL TEST: %s")
+	translation.add_message(&"ui.shrine.next", &"SUIVANT TEST: %s")
+	translation.add_message(&"ui.shrine.detail.full_choice", &"CHOIX PLEIN TEST")
+	translation.add_message(&"ui.shrine.action.resist_values", &"RESISTER TEST")
+	translation.add_message(&"ui.shrine.action.embrace_values", &"EMBRASSER TEST %d")
+	translation.add_message(&"ui.shrine.action.leave", &"QUITTER SANCTUAIRE TEST")
+	translation.add_message(&"aspect.wolf.name", &"LOUP SANCTUAIRE TEST")
+	translation.add_message(&"shrine.tier_headline.wolf.1", &"TIER UN TEST")
+	translation.add_message(&"shrine.tier_headline.wolf.2", &"TIER DEUX TEST")
+	TranslationServer.add_translation(translation)
+	TranslationServer.set_locale("fr")
+
+	MetaProgress.returning_blood_awakened = true
+	if AspectRuntime.has_method("synchronize_campaign_state"):
+		AspectRuntime.call("synchronize_campaign_state", false)
+	_expect(bool(AspectRuntime.call("select_aspect", "wolf")), "Shrine test could not select awakened Wolf Aspect")
+	AspectRuntime.call("set_tier", 1)
+	CorruptionRuntime.call("set_corruption_for_playtest", 100)
+
+	var shrine: Node = SHRINE_SCENE.instantiate()
+	add_child(shrine)
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	shrine.call("_set_input_family_for_playtest", INPUT_GLYPHS.FAMILY_KEYBOARD_MOUSE)
+	_expect(str(shrine.call("_prompt_text_for_playtest")) == "SANCTUAIRE TEST [E]", "Shrine prompt did not resolve localized keyboard binding")
+	shrine.call("_set_input_family_for_playtest", INPUT_GLYPHS.FAMILY_CONTROLLER)
+	_expect(str(shrine.call("_prompt_text_for_playtest")) == "SANCTUAIRE TEST [A]", "Shrine prompt did not switch to localized controller binding")
+
+	var snapshot: Dictionary = shrine.call("_presentation_snapshot_for_playtest")
+	_expect(str(snapshot.get("title", "")) == "SANCTUAIRE SANG TEST", "Shrine title did not resolve stable UI key")
+	_expect(str(snapshot.get("state", "")) == "LOUP SANCTUAIRE TEST NIVEAU 1 CORRUPTION 100 TEST", "Shrine state summary did not resolve stable Aspect/UI keys")
+	_expect(str(snapshot.get("current", "")) == "ACTUEL TEST: TIER UN TEST", "Shrine current Tier headline did not resolve Aspect+Tier key")
+	_expect(str(snapshot.get("next", "")) == "SUIVANT TEST: TIER DEUX TEST", "Shrine next Tier headline did not resolve Aspect+Tier key")
+	_expect(str(snapshot.get("detail", "")) == "CHOIX PLEIN TEST", "Shrine full-choice explanation did not resolve state key")
+	_expect(str(snapshot.get("resist", "")) == "RESISTER TEST", "Shrine Resist action did not resolve stable UI key")
+	_expect(str(snapshot.get("embrace", "")) == "EMBRASSER TEST 2", "Shrine Embrace action did not resolve stable UI key")
+	_expect(str(snapshot.get("leave", "")) == "QUITTER SANCTUAIRE TEST", "Shrine Leave action did not resolve stable UI key")
+	_expect(bool(snapshot.get("resist_visible", false)) and bool(snapshot.get("embrace_visible", false)), "Shrine full-choice state did not expose Resist + Embrace")
+
+	var prompt: Label = shrine.get_node_or_null("InteractShrine/Prompt") as Label
+	if prompt != null:
+		_expect(prompt.get_theme_color("font_color") == Color.WHITE, "Shrine prompt did not receive High Contrast styling")
+
+	shrine.queue_free()
+	await get_tree().process_frame
+
+	MetaProgress.returning_blood_awakened = previous_awakened
+	if AspectRuntime.has_method("synchronize_campaign_state"):
+		AspectRuntime.call("synchronize_campaign_state", false)
+	if previous_awakened and not previous_aspect.is_empty():
+		AspectRuntime.call("select_aspect", previous_aspect)
+		AspectRuntime.call("set_tier", previous_tier)
+	CorruptionRuntime.call("set_corruption_for_playtest", previous_corruption)
 	TranslationServer.set_locale(previous_locale)
 	TranslationServer.remove_translation(translation)
 
