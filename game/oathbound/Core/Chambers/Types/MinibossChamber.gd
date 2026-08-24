@@ -2,8 +2,8 @@ extends "res://Core/Chambers/Types/MinibossChamberController.gd"
 
 ## Canonical miniboss-chamber rules layer.
 ## The imported TreasureRoom controller keeps scene/chest plumbing temporarily; this
-## layer enforces the current premium Technique + persistent bonus contract for the
-## reconciled Hushiro and Yomori regions.
+## layer enforces the current premium Technique + persistent bonus contract for all
+## three reconciled launch regions.
 
 const MINIBOSS_PERSISTENT_MIST := 10
 const MINIBOSS_PERSISTENT_SCROLLS := 1
@@ -12,7 +12,7 @@ var _persistent_bonus_granted := false
 
 
 func _uses_current_miniboss_reward() -> bool:
-	return _get_area_id() in [1, 2]
+	return _get_area_id() in [1, 2, 3]
 
 
 func _setup_treasure_chests() -> void:
