@@ -76,12 +76,12 @@ var enemies_by_area := {
 		"stalker_hound": preload("res://Enemy/Area 2/Encounter/stalker_hound.tscn"),
 	},
 	3: {
-		# Approved native Kagutsuchi Court roster only. No earlier-region standard
-		# enemy or evolved continuation is currently approved for Area 3.
-		"court_guard": preload("res://Enemy/Area 3/Encounter/court_guard.tscn"),
-		"court_caster": preload("res://Enemy/Area 3/Encounter/court_caster.tscn"),
-		"elite_defender": preload("res://Enemy/Area 3/Encounter/elite_defender.tscn"),
-		"hollow_vessel": preload("res://Enemy/Area 3/Encounter/hollow_vessel.tscn"),
-		"court_sentinel": preload("res://Enemy/Area 3/Encounter/court_sentinel.tscn"),
+		# Approved native Kagutsuchi Court roster. Scene authority now lives under the
+		# canonical Region 3 package; legacy Area 3 scripts are compatibility shims only.
+		"court_guard": preload("res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn"),
+		"court_caster": preload("res://Regions/Kagutsuchi/Enemies/Standard/CourtCaster.tscn"),
+		"elite_defender": preload("res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.tscn"),
+		"hollow_vessel": preload("res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.tscn"),
+		"court_sentinel": preload("res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn"),
 	}
 }
