@@ -52,6 +52,20 @@ func _run() -> void:
 	translation.add_message(&"ui.front_end.settings", &"PARAMETRES TEST")
 	translation.add_message(&"ui.front_end.credits", &"CREDITS TEST")
 	translation.add_message(&"ui.front_end.quit", &"QUITTER TEST")
+	translation.add_message(&"ui.front_end.build_label", &"BUILD FRONT TEST")
+	translation.add_message(&"ui.front_end.slot", &"EMPLACEMENT %d")
+	translation.add_message(&"ui.front_end.slot.empty", &"VIDE TEST")
+	translation.add_message(&"ui.front_end.slot.state.returning_blood", &"SANG RETOUR TEST")
+	translation.add_message(&"ui.front_end.slot.completion", &"%d%% COMPLETION TEST")
+	translation.add_message(&"ui.front_end.slot.safe_checkpoint", &"CHECKPOINT TEST")
+	translation.add_message(&"ui.front_end.delete_warning", &"EMPLACEMENT %d AVERTISSEMENT TEST")
+	translation.add_message(&"ui.front_end.credits.body", &"CREDITS BODY TEST")
+	translation.add_message(&"ui.settings.section.audio", &"AUDIO SECTION TEST")
+	translation.add_message(&"ui.settings.master_volume", &"MASTER TEST")
+	translation.add_message(&"ui.settings.high_contrast", &"CONTRASTE TEST")
+	translation.add_message(&"ui.settings.block_mode", &"BLOCAGE TEST: %s")
+	translation.add_message(&"ui.settings.block_mode.hold", &"TENIR TEST")
+	translation.add_message(&"ui.controls.action.attack", &"ATTAQUE TEST")
 	translation.add_message(&"ui.pause.title", &"PAUSE TEST")
 	translation.add_message(&"ui.pause.resume", &"REPRENDRE TEST")
 	translation.add_message(&"ui.pause.current_run", &"COURSE ACTUELLE TEST")
@@ -87,7 +101,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback | Forge Scroll costs | Strand wallet | front end | Pause overview | Run Results")
+	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback | Forge Scroll costs | Strand wallet | front end | Pause overview | Run Results | complete front-end shell")
 	get_tree().quit(0)
 
 
@@ -258,6 +272,42 @@ func _validate_front_end_surface() -> void:
 	_expect(_contains_text(texts, "PARAMETRES TEST"), "front-end Settings action did not resolve stable UI key")
 	_expect(_contains_text(texts, "CREDITS TEST"), "front-end Credits action did not resolve stable UI key")
 	_expect(_contains_text(texts, "QUITTER TEST"), "front-end Quit action did not resolve stable UI key")
+	_expect(_contains_text(texts, "BUILD FRONT TEST"), "front-end build label did not resolve stable UI key")
+
+	var empty_card: String = str(front_end.call("_slot_card_text", 2, {"exists": false}))
+	_expect(empty_card.contains("EMPLACEMENT 2") and empty_card.contains("VIDE TEST"), "empty save-slot card did not resolve stable UI keys")
+	var active_card: String = str(front_end.call("_slot_card_text", 3, {
+		"exists": true,
+		"playtime_seconds": 3600.0,
+		"state_label": "Returning Blood Awakened",
+		"completion_percent": 45,
+		"story_complete": false,
+		"has_active_run": true,
+	}))
+	_expect(active_card.contains("SANG RETOUR TEST"), "save-slot state did not resolve stable UI key")
+	_expect(active_card.contains("45% COMPLETION TEST"), "save-slot completion text did not resolve stable UI key")
+	_expect(active_card.contains("CHECKPOINT TEST"), "save-slot checkpoint text did not resolve stable UI key")
+	var warning: String = str(front_end.call("_localized_subtitle", "Slot 2 contains persistent progress. This action cannot be undone."))
+	_expect(warning == "EMPLACEMENT 2 AVERTISSEMENT TEST", "save-slot deletion warning did not resolve stable UI key")
+
+	front_end.call("_build_settings_menu")
+	await get_tree().process_frame
+	texts = _all_control_texts(front_end)
+	_expect(_contains_text(texts, "AUDIO SECTION TEST"), "settings section did not resolve stable UI key")
+	_expect(_contains_text(texts, "MASTER TEST"), "settings slider label did not resolve stable setting key")
+	_expect(_contains_text(texts, "CONTRASTE TEST"), "settings toggle label did not resolve stable setting key")
+	_expect(_contains_text(texts, "BLOCAGE TEST:"), "settings Block Input action did not resolve stable UI key")
+
+	front_end.call("_build_controls_menu")
+	await get_tree().process_frame
+	texts = _all_control_texts(front_end)
+	_expect(_contains_text(texts, "ATTAQUE TEST"), "controls action label did not resolve stable input-action key")
+
+	front_end.call("_build_credits_menu")
+	await get_tree().process_frame
+	texts = _all_control_texts(front_end)
+	_expect(_contains_text(texts, "CREDITS BODY TEST"), "credits body did not resolve stable UI key")
+
 	front_end.queue_free()
 	await get_tree().process_frame
 
