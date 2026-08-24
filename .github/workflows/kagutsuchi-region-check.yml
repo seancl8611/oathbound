@@ -10,6 +10,8 @@ on:
       - "game/oathbound/Enemy/Area 3/**"
       - "game/oathbound/Core/Chambers/**"
       - "game/oathbound/Core/Regions/**"
+      - "game/oathbound/Core/Endgame/**"
+      - "game/oathbound/World/TheWell.gd"
       - "game/oathbound/Utility/SceneRegistry.gd"
       - "game/oathbound/Utility/RunData.gd"
       - "game/oathbound/Utility/RunScene.gd"
@@ -89,6 +91,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Binding, seventh-run Heart, and postgame contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Endgame/Validation/EndgameCampaignContractSmoke.tscn 2>&1 | tee endgame-campaign-contract.log
+          grep -F "[EndgameCampaignContractSmoke] PASS" endgame-campaign-contract.log
+          if grep -F "SCRIPT ERROR:" endgame-campaign-contract.log; then
+            echo "FAIL: Endgame campaign contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" endgame-campaign-contract.log; then
+            echo "FAIL: Endgame campaign contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Kagutsuchi validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -100,5 +117,6 @@ jobs:
             kagutsuchi-route-contract.log
             kagutsuchi-miniboss-contract.log
             kagutsuchi-full-run.log
+            endgame-campaign-contract.log
           if-no-files-found: warn
           retention-days: 7
