@@ -3,6 +3,7 @@ extends Node
 const MINIBOSS_CHAMBER: PackedScene = preload("res://Core/Chambers/Types/MinibossChamber.tscn")
 const BLOOD_LOTUS_PATH := "res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotus.tscn"
 const ETERNAL_SWORDSMAN_PATH := "res://Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.tscn"
+const COURT_GUARD_PATH := "res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn"
 const STALK_PATH := "res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotusStalk.tscn"
 
 var _failures: Array[String] = []
@@ -80,8 +81,8 @@ func _validate_eternal_swordsman() -> void:
 	var sword_runtime := duel.get_node_or_null("Swordsman")
 	_expect(sword_runtime != null, "Eternal Swordsman missing mature Court sword child")
 	if sword_runtime != null:
-		var script_value: Variant = sword_runtime.get_script()
-		_expect(script_value is Script and (script_value as Script).resource_path == "res://Enemy/Area 3/Encounter/court_guard.gd", "Eternal Swordsman must reuse mature Court sword runtime")
+		_expect(sword_runtime is CourtGuard, "Eternal Swordsman must reuse canonical Court Guard runtime")
+		_expect(String(sword_runtime.scene_file_path) == COURT_GUARD_PATH, "Eternal Swordsman Court Guard child must originate from canonical Kagutsuchi scene")
 	duel.free()
 
 
