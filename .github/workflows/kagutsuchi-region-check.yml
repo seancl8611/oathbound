@@ -61,6 +61,11 @@ jobs:
           grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.tscn' game/oathbound/Utility/SceneRegistry.gd
           grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn' game/oathbound/Utility/SceneRegistry.gd
           grep -F 'res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn' game/oathbound/Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn' game/oathbound/Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.tscn
+          if grep -R -n -E 'res://Enemy/Area 3/.*\.tscn' game/oathbound/Regions/Kagutsuchi --include='*.tscn'; then
+            echo "FAIL: canonical Kagutsuchi scene still points at a retired legacy Area 3 scene."
+            exit 1
+          fi
           if grep -F 'res://Enemy/Area 3/Minibosses/' game/oathbound/Regions/Kagutsuchi/Enemies/Minibosses/BloodLotus.tscn; then
             echo "FAIL: Blood Lotus still depends on the retired legacy miniboss path."
             exit 1
