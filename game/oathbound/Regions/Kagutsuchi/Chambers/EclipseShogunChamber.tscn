@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://Core/Chambers/Types/BossChamber.gd" id="1_boss"]
+[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_gate"]
+[ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="3_bg"]
+[ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="4_damage"]
+[ext_resource type="Script" path="res://Core/Encounters/EncounterSpawner.gd" id="5_spawner"]
+[ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_bounds"]
+[ext_resource type="PackedScene" uid="uid://d0d3e5rkh4fyp" path="res://Enemy/Area 3/Boss/eclipse_shogun.tscn" id="7_shogun"]
+
+[node name="EclipseShogunChamber" type="Node2D"]
+script = ExtResource("1_boss")
+metadata/area_id = 3
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+texture = ExtResource("3_bg")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+modulate = Color(0.58, 0.38, 0.38, 1)
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="DamageNumberManager" type="Node2D" parent="."]
+script = ExtResource("4_damage")
+
+[node name="EnemyEncounterSpawner" type="Node2D" parent="."]
+script = ExtResource("5_spawner")
+
+[node name="ExitGate" parent="." groups=["mist_gates"] instance=ExtResource("2_gate")]
+position = Vector2(80, 0)
+
+[node name="Label" type="Label" parent="ExitGate"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RoomBounds" type="Node2D" parent="."]
+script = ExtResource("6_bounds")
+size = Vector2(3200, 1800)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(-100, 0)
+
+[node name="ShogunBoss" type="Node2D" parent="."]
+metadata/boss_area = 3
+
+[node name="EclipseShogun" parent="ShogunBoss" instance=ExtResource("7_shogun")]
+position = Vector2(120, 0)
