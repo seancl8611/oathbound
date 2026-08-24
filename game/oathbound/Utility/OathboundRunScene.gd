@@ -6,12 +6,14 @@ extends "res://Utility/RunScene.gd"
 ## approved read-only Pause / Build Overview.
 
 const PAUSE_OVERVIEW_SCRIPT = preload("res://Core/Release/OathboundAccessiblePauseOverview.gd")
+const INPUT_GLYPHS = preload("res://Core/Release/OathboundInputGlyphs.gd")
 
 var _pause_overview: CanvasLayer = null
 
 
 func _ready() -> void:
 	get_tree().paused = false
+	INPUT_GLYPHS.ensure_controller_defaults()
 	print("[OathboundRunScene] _ready() — paused=%s container=%s" % [get_tree().paused, $RoomContainer])
 	_record_playtest_build_identity()
 
