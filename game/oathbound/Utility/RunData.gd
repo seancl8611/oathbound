@@ -2,9 +2,25 @@
 # Autoload - Tracks run-only state/statistics and mirrors persistent resource totals.
 extends Node
 
+const RUN_GOAL_CAMPAIGN := "campaign"
+const RUN_GOAL_STANDARD_EXPEDITION := "standard_expedition"
+const RUN_GOAL_HEART_SUPPRESSION := "heart_suppression"
+const VALID_RUN_GOALS: Array[String] = [
+	RUN_GOAL_CAMPAIGN,
+	RUN_GOAL_STANDARD_EXPEDITION,
+	RUN_GOAL_HEART_SUPPRESSION,
+]
+
 var current_area_id: int = 1
 var depth: int = 0
 var gold: int = 0
+
+# Run objective is chosen before departure. Before Story Complete the campaign owns
+# the endpoint automatically. Postgame explicitly chooses Standard Expedition or
+# Heart Suppression at The Well before RunScene resets the rest of run state.
+var requested_run_goal: String = ""
+var run_goal: String = RUN_GOAL_CAMPAIGN
+var run_completion_kind: String = ""
 
 # Canonical persistent names. These mirror MetaProgress for existing run HUD callers;
 # they are NOT reset at run start.
@@ -34,6 +50,39 @@ var treasures_opened: int = 0
 var items_purchased: int = 0
 
 
+func request_run_goal(goal: String) -> bool:
+	var normalized := goal.to_lower()
+	if not VALID_RUN_GOALS.has(normalized):
+		return false
+	# Campaign is the only legal pre-Story-Complete objective. This keeps debug/UI
+	# callers from accidentally skipping Binding progression.
+	if typeof(MetaProgress) == TYPE_OBJECT and not bool(MetaProgress.is_story_complete()):
+		if normalized != RUN_GOAL_CAMPAIGN:
+			return false
+	requested_run_goal = normalized
+	return true
+
+
+func get_run_goal() -> String:
+	return run_goal
+
+
+func mark_run_completion(kind: String) -> void:
+	run_completion_kind = kind.to_lower()
+
+
+func _resolve_requested_run_goal() -> String:
+	var story_complete := typeof(MetaProgress) == TYPE_OBJECT and bool(MetaProgress.is_story_complete())
+	if not story_complete:
+		requested_run_goal = ""
+		return RUN_GOAL_CAMPAIGN
+	var resolved := requested_run_goal.to_lower()
+	requested_run_goal = ""
+	if resolved in [RUN_GOAL_STANDARD_EXPEDITION, RUN_GOAL_HEART_SUPPRESSION]:
+		return resolved
+	return RUN_GOAL_STANDARD_EXPEDITION
+
+
 func advance_depth(room_type: String) -> void:
 	var token := str(room_type).to_lower()
 	var base := token
@@ -50,6 +99,8 @@ func advance_depth(room_type: String) -> void:
 
 func reset_for_new_run(area_id: int = 1) -> void:
 	current_area_id = area_id
+	run_goal = _resolve_requested_run_goal()
+	run_completion_kind = ""
 	depth = 0
 	gold = 0
 	technique_rerolls = 0
@@ -70,7 +121,7 @@ func reset_for_new_run(area_id: int = 1) -> void:
 	items_purchased = 0
 	CurrencyManager.set_amount(CurrencyManager.Currency.GOLD, 0)
 	sync_persistent_resources()
-	print("[RunData] New run started - Region %d | Banked Mist %d | Scrolls %d | Rerolls %d" % [area_id, mist, scrolls, technique_rerolls])
+	print("[RunData] New run started - Region %d | goal=%s | Banked Mist %d | Scrolls %d | Rerolls %d" % [area_id, run_goal, mist, scrolls, technique_rerolls])
 
 
 func sync_persistent_resources() -> void:
@@ -174,6 +225,8 @@ func get_run_summary() -> Dictionary:
 	return {
 		"area": current_area_id,
 		"depth": depth,
+		"run_goal": run_goal,
+		"completion_kind": run_completion_kind,
 		"gold": gold,
 		"mist": mist,
 		"mist_shards": mist_shards,
@@ -194,8 +247,8 @@ func get_run_summary() -> Dictionary:
 func print_summary() -> void:
 	var s = get_run_summary()
 	print("\n=== RUN SUMMARY ===")
-	print("  Region: %d | Depth: %d | Gold: %d" % [s.area, s.depth, s.gold])
-	print("  Banked Mist: %d | Scrolls: %d" % [s.mist, s.scrolls])
+	print("  Region: %d | Depth: %d | Goal: %s | Completion: %s" % [s.area, s.depth, s.run_goal, s.completion_kind])
+	print("  Gold: %d | Banked Mist: %d | Scrolls: %d" % [s.gold, s.mist, s.scrolls])
 	print("  Enemies: %d | Parries: %d (Perfect: %d)" % [s.enemies_killed, s.parries, s.perfect_parries])
 	print("  Path: %s" % str(s.path))
 	print("===================\n")
