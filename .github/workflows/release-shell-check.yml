@@ -1,0 +1,75 @@
+name: Release Shell Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Release/**"
+      - "game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd"
+      - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
+      - "game/oathbound/GUI/DiscoveryBoardMenu.gd"
+      - "game/oathbound/TitleScreen/**"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/OathboundRunScene.gd"
+      - "game/oathbound/World/Hub.gd"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/release-shell-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Release/**"
+      - "game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd"
+      - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
+      - "game/oathbound/GUI/DiscoveryBoardMenu.gd"
+      - "game/oathbound/TitleScreen/**"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/OathboundRunScene.gd"
+      - "game/oathbound/World/Hub.gd"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/release-shell-check.yml"
+  workflow_dispatch:
+
+jobs:
+  release-shell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify release shell contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/ReleaseShellContractSmoke.tscn 2>&1 | tee release-shell-contract.log
+          grep -F "[ReleaseShellContractSmoke] PASS - 3 slots | settings/rebinding | safe checkpoint | records/completion | Oathbound front end" release-shell-contract.log
+          if grep -F "SCRIPT ERROR:" release-shell-contract.log; then
+            echo "FAIL: release-shell contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" release-shell-contract.log; then
+            echo "FAIL: release-shell contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload release shell log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-shell-${{ github.run_id }}
+          path: release-shell-contract.log
+          if-no-files-found: warn
+          retention-days: 7
