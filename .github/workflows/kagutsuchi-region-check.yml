@@ -67,6 +67,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Kagutsuchi standard enemy contracts
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Kagutsuchi/Validation/KagutsuchiEnemyContractSmoke.tscn 2>&1 | tee kagutsuchi-enemy-contract.log
+          grep -F "[KagutsuchiEnemyContractSmoke] PASS" kagutsuchi-enemy-contract.log
+          if grep -F "SCRIPT ERROR:" kagutsuchi-enemy-contract.log; then
+            echo "FAIL: Kagutsuchi enemy contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" kagutsuchi-enemy-contract.log; then
+            echo "FAIL: Kagutsuchi enemy contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Kagutsuchi seeded route and roster contract
         shell: bash
         run: |
@@ -135,6 +150,7 @@ jobs:
           path: |
             kagutsuchi-import.log
             kagutsuchi-editor.log
+            kagutsuchi-enemy-contract.log
             kagutsuchi-route-contract.log
             kagutsuchi-miniboss-contract.log
             kagutsuchi-full-run.log
