@@ -5,14 +5,15 @@ extends "res://Regions/Hushiro/Enemies/Standard/Hollow.gd"
 ## Hollow.gd owns its authored swarm behavior. This layer ensures the shared
 ## CombatController is actually ticked every frame, so the Hushiro 1.5 s posture
 ## recovery delay / 20 posture-per-second recovery contract functions. It also records
-## explicit parry posture before/after values and refreshes the posture bar immediately.
+## explicit parry posture before/after values and uses the shared Hushiro stagger-first
+## Deathblow contract.
 
 const HOLLOW_PARRY_POSTURE_DAMAGE: float = 20.0
 
 
 func _ready() -> void:
 	super._ready()
-	print("[Hollow] v2.1 - posture runtime active")
+	print("[Hollow] v2.2 - posture + stagger-first deathblow runtime active")
 
 
 func _physics_process(delta: float) -> void:
@@ -28,6 +29,15 @@ func _tick_hollow_combat_runtime(delta: float) -> void:
 	var attacking: bool = state == HollowState.WINDUP or state == HollowState.ATTACK
 	combat.update_host_state(attacking, false, false, true)
 	combat.tick(delta)
+
+
+func is_deathblow_ready() -> bool:
+	if has_died or state == HollowState.DEAD or int(hp) <= 0:
+		return false
+	var runtime: Node = get_node_or_null("HushiroPostureBreakRuntime")
+	if runtime != null and runtime.has_method("is_deathblow_armed"):
+		return bool(runtime.call("is_deathblow_armed"))
+	return bool(get_meta("_oathbound_deathblow_ready", false))
 
 
 func on_parried(parrier_pos: Vector2) -> void:
