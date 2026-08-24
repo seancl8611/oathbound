@@ -46,6 +46,26 @@ jobs:
             exit 1
           fi
 
+      - name: Verify canonical Kagutsuchi scene ownership
+        shell: bash
+        run: |
+          set -o pipefail
+          legacy_scene="$(find 'game/oathbound/Enemy/Area 3' -type f -name '*.tscn' -print -quit 2>/dev/null || true)"
+          if [ -n "$legacy_scene" ]; then
+            echo "FAIL: legacy Area 3 runtime scene remains outside Regions/Kagutsuchi: $legacy_scene"
+            exit 1
+          fi
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtCaster.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn' game/oathbound/Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn
+          if grep -F 'res://Enemy/Area 3/Minibosses/' game/oathbound/Regions/Kagutsuchi/Enemies/Minibosses/BloodLotus.tscn; then
+            echo "FAIL: Blood Lotus still depends on the retired legacy miniboss path."
+            exit 1
+          fi
+
       - name: Verify Kagutsuchi seeded route and roster contract
         shell: bash
         run: |
