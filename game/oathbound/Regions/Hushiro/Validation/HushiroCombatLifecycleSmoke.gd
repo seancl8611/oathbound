@@ -19,8 +19,11 @@ func _run() -> void:
 	await _verify_hitbox_deactivation_from_physics_signal()
 	if _failed:
 		return
+	await _verify_damage_number_scene_teardown()
+	if _failed:
+		return
 
-	print("[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred")
+	print("[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred | transient damage-number tween dies with scene node")
 	get_tree().quit(0)
 
 
@@ -101,6 +104,32 @@ func _verify_hitbox_deactivation_from_physics_signal() -> void:
 	_sword.queue_free()
 	_sword = null
 	await get_tree().process_frame
+
+
+func _verify_damage_number_scene_teardown() -> void:
+	if typeof(DamageNumberManager) != TYPE_OBJECT:
+		_fail("DamageNumberManager autoload unavailable")
+		return
+
+	# DamageNumberManager survives scene changes. The animated number does not. The
+	# tween therefore has to be owned by this transient Control so freeing it also
+	# kills every delayed property/callback step. The old manager-owned tween would
+	# reach its anonymous completion lambda after this node had already been freed.
+	var transient := Control.new()
+	transient.name = "TransientDamageNumberLifetimeProbe"
+	add_child(transient)
+	await get_tree().process_frame
+
+	DamageNumberManager.call("_animate_damage_number", transient)
+	transient.queue_free()
+	await get_tree().process_frame
+	if is_instance_valid(transient):
+		_fail("transient damage number did not leave the tree")
+		return
+
+	# The old animation completed at 0.6 s. Wait beyond that boundary so CI captures
+	# any delayed freed-lambda diagnostic emitted by Godot.
+	await get_tree().create_timer(0.75).timeout
 
 
 func _on_probe_area_entered(area: Area2D) -> void:
