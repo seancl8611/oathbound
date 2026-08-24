@@ -10,7 +10,7 @@ const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 
 const INTERACTION_PROMPTS: Dictionary = {
-	"TheWell": {"key": "ui.strand.station.well", "fallback": "The Well"},
+	"Boat": {"key": "ui.strand.station.boat", "fallback": "Boat"},
 	"ForgeBench": {"key": "ui.strand.station.forge", "fallback": "Forge"},
 	"CodexBoard": {"key": "ui.strand.station.discovery_board", "fallback": "Discovery Board"},
 	"Bloodwell": {"key": "ui.strand.station.bloodwell", "fallback": "Bloodwell"},
@@ -49,8 +49,6 @@ func _input(event: InputEvent) -> void:
 	_prompt_input_family = family
 	_refresh_interaction_prompts()
 
-
-# --- Player Setup ---
 
 func _find_player() -> void:
 	player = get_node_or_null("Player")
@@ -101,8 +99,6 @@ func _show_pending_run_result() -> void:
 	overlay.present(result)
 
 
-# --- Interaction prompt presentation ---
-
 func _connect_prompt_settings() -> void:
 	if typeof(SettingsManager) != TYPE_OBJECT:
 		return
@@ -148,12 +144,10 @@ func _set_prompt_input_family_for_playtest(family: String) -> void:
 	_refresh_interaction_prompts()
 
 
-# --- Station Connections ---
-
 func _connect_stations() -> void:
-	var well: Node = get_node_or_null("TheWell")
-	if well and well.has_signal("run_started"):
-		well.connect("run_started", Callable(self, "_on_run_started"))
+	var boat: Node = get_node_or_null("Boat")
+	if boat and boat.has_signal("run_started"):
+		boat.connect("run_started", Callable(self, "_on_run_started"))
 
 	var forge: Node = get_node_or_null("ForgeBench")
 	if forge and forge.has_signal("prosthetic_equipped"):
@@ -174,8 +168,6 @@ func _connect_stations() -> void:
 		if practice.has_signal("practice_ended"):
 			practice.connect("practice_ended", Callable(self, "_on_practice_ended"))
 
-
-# --- Signal Handlers ---
 
 func _on_run_started() -> void:
 	print("[Hub] Run started — transitioning to dungeon...")

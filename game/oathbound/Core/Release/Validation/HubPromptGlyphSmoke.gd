@@ -22,26 +22,34 @@ func _run() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
-	var well_prompt: Label = hub.get_node_or_null("TheWell/InteractPopup") as Label
+	var boat: Node = hub.get_node_or_null("Boat")
+	var boat_prompt: Label = hub.get_node_or_null("Boat/InteractPopup") as Label
 	var keeper_prompt: Label = hub.get_node_or_null("KeeperNPC/InteractPopup") as Label
-	_expect(well_prompt != null and well_prompt.text == "The Well [E]", "live Strand Well prompt did not use keyboard binding")
+	_expect(boat != null, "canonical Boat departure node is missing from the live Strand")
+	if boat != null:
+		var script_value: Variant = boat.get_script()
+		var script_path: String = (script_value as Script).resource_path if script_value is Script else ""
+		_expect(script_path == "res://World/Boat.gd", "live Strand departure node is not owned by Boat.gd")
+		_expect(boat.has_method("_confirmation_snapshot_for_playtest"), "Boat final loadout confirmation contract is missing")
+	_expect(boat_prompt != null and boat_prompt.text == "Boat [E]", "live Strand Boat prompt did not use keyboard binding")
 	_expect(keeper_prompt != null and keeper_prompt.text == "Keeper [E]", "live Strand NPC prompt did not use keyboard binding")
+	_expect(hub.get_node_or_null("TheWell") == null, "legacy The Well departure node is still authored into the live Strand")
 	_expect(hub.get_node_or_null("QuestAltar") == null, "legacy Quest Altar is still authored into the live Strand")
 
 	hub.call("_set_prompt_input_family_for_playtest", INPUT_GLYPHS.FAMILY_CONTROLLER)
-	_expect(well_prompt != null and well_prompt.text == "The Well [A]", "live Strand Well prompt did not switch to controller glyph")
+	_expect(boat_prompt != null and boat_prompt.text == "Boat [A]", "live Strand Boat prompt did not switch to controller glyph")
 	_expect(keeper_prompt != null and keeper_prompt.text == "Keeper [A]", "live Strand NPC prompt did not switch to controller glyph")
 
 	var custom_interact := InputEventJoypadButton.new()
 	custom_interact.device = -1
 	custom_interact.button_index = 3
 	_expect(SettingsManager.bind_event("interact", custom_interact), "controller Interact rebind was rejected")
-	_expect(well_prompt != null and well_prompt.text == "The Well [Y]", "live Strand prompt did not update after controller Interact rebind")
+	_expect(boat_prompt != null and boat_prompt.text == "Boat [Y]", "live Strand prompt did not update after controller Interact rebind")
 
 	SettingsManager.reset_defaults()
 	INPUT_GLYPHS.ensure_controller_defaults()
 	hub.call("_set_prompt_input_family_for_playtest", INPUT_GLYPHS.FAMILY_CONTROLLER)
-	_expect(well_prompt != null and well_prompt.text == "The Well [A]", "controller default did not recover after settings reset")
+	_expect(boat_prompt != null and boat_prompt.text == "Boat [A]", "controller default did not recover after settings reset")
 
 	hub.queue_free()
 	await get_tree().process_frame
@@ -50,6 +58,7 @@ func _run() -> void:
 		get_tree().quit(1)
 		return
 	print("[HubPromptGlyphSmoke] PASS - keyboard [E] | controller [A] | live rebind [Y] | text-labelled prompts | no stale Quest Altar")
+	print("[HubPromptGlyphSmoke] Boat departure authority PASS - final confirmation contract | no live TheWell node")
 	get_tree().quit(0)
 
 
