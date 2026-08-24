@@ -11,6 +11,7 @@ on:
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/**"
       - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DamageNumberManager.gd"
       - "game/oathbound/Utility/DeathblowSystem.gd"
       - ".github/workflows/hushiro-combat-regression-check.yml"
   pull_request:
@@ -20,6 +21,7 @@ on:
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/**"
       - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DamageNumberManager.gd"
       - "game/oathbound/Utility/DeathblowSystem.gd"
       - ".github/workflows/hushiro-combat-regression-check.yml"
   workflow_dispatch:
@@ -85,9 +87,13 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroCombatLifecycleSmoke.tscn 2>&1 | tee hushiro-combat-lifecycle.log
-          grep -F "[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred" hushiro-combat-lifecycle.log
+          grep -F "[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred | transient damage-number tween dies with scene node" hushiro-combat-lifecycle.log
           if grep -F "SCRIPT ERROR:" hushiro-combat-lifecycle.log; then
             echo "FAIL: combat lifecycle regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "Lambda capture at index" hushiro-combat-lifecycle.log; then
+            echo "FAIL: persistent runtime invoked a lambda after one of its captured scene objects was freed."
             exit 1
           fi
           if grep -F "Invalid access to property or key 'process_frame'" hushiro-combat-lifecycle.log; then
