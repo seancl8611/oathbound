@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://World/Hub.gd" id="1_qm1wv"]
 [ext_resource type="Texture2D" uid="uid://brh8sgxga6n5m" path="res://Textures/hub.png" id="2_uc1vc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://World/MerchantStall.gd" id="9_bbnwo"]
 [ext_resource type="Script" path="res://World/PracticeGrounds.gd" id="10_2hmrb"]
 [ext_resource type="Script" path="res://World/BloodMirror.gd" id="11_blood_mirror"]
+[ext_resource type="Script" path="res://World/NarrativeNPC.gd" id="12_narrative"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qekqq"]
 size = Vector2(39, 52)
@@ -69,7 +70,7 @@ offset_left = -75.0
 offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
-text = "Codex [E]"
+text = "Discovery Board [E]"
 horizontal_alignment = 1
 
 [node name="QuestAltar" type="Area2D" parent="."]
@@ -152,6 +153,108 @@ offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
 text = "Practice Grounds [E]"
+horizontal_alignment = 1
+
+[node name="KeeperNPC" type="Area2D" parent="."]
+position = Vector2(-176, -54)
+script = ExtResource("12_narrative")
+npc_id = "keeper"
+display_name = "Keeper"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KeeperNPC"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="KeeperNPC"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Keeper [E]"
+horizontal_alignment = 1
+
+[node name="ScribeNPC" type="Area2D" parent="."]
+position = Vector2(-180, 20)
+script = ExtResource("12_narrative")
+npc_id = "scribe"
+display_name = "Scribe"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScribeNPC"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="ScribeNPC"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Scribe [E]"
+horizontal_alignment = 1
+
+[node name="RavenNPC" type="Area2D" parent="."]
+position = Vector2(154, -142)
+script = ExtResource("12_narrative")
+npc_id = "raven"
+display_name = "Raven"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RavenNPC"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="RavenNPC"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Raven / Notices [E]"
+horizontal_alignment = 1
+
+[node name="UndeadSamuraiNPC" type="Area2D" parent="."]
+position = Vector2(118, -238)
+script = ExtResource("12_narrative")
+npc_id = "undead_samurai"
+display_name = "Undead Samurai"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UndeadSamuraiNPC"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="UndeadSamuraiNPC"]
+offset_left = -90.0
+offset_top = -65.0
+offset_right = 91.0
+offset_bottom = -39.0
+text = "Undead Samurai [E]"
+horizontal_alignment = 1
+
+[node name="SmithNPC" type="Area2D" parent="."]
+position = Vector2(146, -56)
+script = ExtResource("12_narrative")
+npc_id = "smith"
+display_name = "Smith"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmithNPC"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="SmithNPC"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Smith [E]"
+horizontal_alignment = 1
+
+[node name="PeddlerNPC" type="Area2D" parent="."]
+position = Vector2(-136, -126)
+script = ExtResource("12_narrative")
+npc_id = "peddler"
+display_name = "Peddler"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PeddlerNPC"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="PeddlerNPC"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Peddler [E]"
 horizontal_alignment = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
