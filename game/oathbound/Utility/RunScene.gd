@@ -27,7 +27,9 @@ func _ready() -> void:
 	_create_choice_ui()
 
 	# Debug: set debug_start_area in editor to skip to that area (0 = normal).
-	# Route through current GameFlow so Yomori does not fall back to legacy Area 2 data.
+	# Always route through current GameFlow so all three regions use their reconciled
+	# authorities. This also resets GameFlow.current_area explicitly; a previous debug or
+	# validation session must never make a normal F5 run start with stale Area 2/3 state.
 	if debug_start_area >= 2:
 		RunData.reset_for_new_run(debug_start_area)
 		if GameFlow.has_method("build_route_for_area"):
@@ -38,7 +40,11 @@ func _ready() -> void:
 			GameFlow.current_index = 0
 	else:
 		RunData.reset_for_new_run(1)
-		GameFlow.build_area1_route()
+		if GameFlow.has_method("build_route_for_area"):
+			GameFlow.build_route_for_area(1)
+		else:
+			GameFlow.current_area = 1
+			GameFlow.build_area1_route()
 
 	print("[RunScene] starting run… area=%d" % GameFlow.current_area)
 	GameFlow.start_run()
