@@ -22,6 +22,7 @@ var path_history: Array[String] = []
 var acquired_upgrades: Array = []
 var hushiro_encounters_seen: Array[String] = []
 var yomori_encounters_seen: Array[String] = []
+var kagutsuchi_encounters_seen: Array[String] = []
 
 var enemies_killed: int = 0
 var parries_performed: int = 0
@@ -58,6 +59,7 @@ func reset_for_new_run(area_id: int = 1) -> void:
 	acquired_upgrades.clear()
 	hushiro_encounters_seen.clear()
 	yomori_encounters_seen.clear()
+	kagutsuchi_encounters_seen.clear()
 	enemies_killed = 0
 	parries_performed = 0
 	perfect_parries = 0
@@ -180,6 +182,7 @@ func get_run_summary() -> Dictionary:
 		"path": path_history.duplicate(),
 		"hushiro_encounters": hushiro_encounters_seen.duplicate(),
 		"yomori_encounters": yomori_encounters_seen.duplicate(),
+		"kagutsuchi_encounters": kagutsuchi_encounters_seen.duplicate(),
 		"enemies_killed": enemies_killed,
 		"parries": parries_performed,
 		"perfect_parries": perfect_parries,
