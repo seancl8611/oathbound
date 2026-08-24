@@ -3,6 +3,7 @@ extends Control
 signal sequence_finished(sequence_id: String)
 
 const BASE_DIALOGUE_CHARS_PER_SECOND: float = 42.0
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 
 var _entry: Dictionary = {}
 var _lines: Array = []
@@ -71,14 +72,19 @@ func _show_current_line() -> void:
 		return
 	var speaker: String = str(_entry.get("speaker", ""))
 	if bool(_entry.get("notice", false)):
-		speaker = "ORDER NOTICE"
-	if speaker.is_empty() and _entry.has("npc"):
+		speaker = LOCALIZATION.ui("order_notice", "ORDER NOTICE")
+	elif speaker.is_empty() and _entry.has("npc"):
 		speaker = _npc_display_name(str(_entry.get("npc", "")))
-	_speaker_label.text = tr(str(_entry.get("speaker_loc_key", speaker))) if not speaker.is_empty() else ""
-	_full_line = str(_lines[_line_index])
+	if not bool(_entry.get("notice", false)) and not speaker.is_empty():
+		speaker = LOCALIZATION.narrative_speaker(_entry, speaker)
+	_speaker_label.text = speaker
+
+	var fallback_line: String = str(_lines[_line_index])
+	_full_line = LOCALIZATION.narrative_line(_entry, _line_index, fallback_line)
 	_body_label.text = _full_line
 	_begin_reveal()
-	_advance_label.text = "Continue  [%d/%d]" % [_line_index + 1, _lines.size()]
+	var continue_label: String = LOCALIZATION.ui("dialogue.continue", "Continue")
+	_advance_label.text = "%s  [%d/%d]" % [continue_label, _line_index + 1, _lines.size()]
 
 
 func _begin_reveal() -> void:
