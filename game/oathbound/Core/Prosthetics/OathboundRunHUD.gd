@@ -4,6 +4,9 @@ extends "res://GUI/RunHUD.gd"
 ## - preserves the imported HUD layout
 ## - presents canonical 0-100 Prosthetic Spirit
 ## - adds the approved awakened-only Corruption / Shrine-ready state
+## - applies the launch High Contrast readability treatment without changing HUD semantics
+
+const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 
 var _corruption_root: Control
 var _corruption_panel: PanelContainer
@@ -17,6 +20,7 @@ func _ready() -> void:
 	_build_corruption_hud()
 	_connect_corruption_runtime()
 	_refresh_corruption_hud()
+	call_deferred("_apply_readability")
 
 
 func update_spirit(current: int, maximum: int) -> void:
@@ -137,3 +141,10 @@ func _refresh_corruption_hud() -> void:
 		_corruption_detail.text = "%s Tier %d  —  Near full" % [aspect, tier]
 	else:
 		_corruption_detail.text = "%s Tier %d" % [aspect, tier]
+
+
+func _apply_readability() -> void:
+	if _root != null:
+		READABILITY_STYLER.apply(_root)
+	if _corruption_root != null:
+		READABILITY_STYLER.apply(_corruption_root)
