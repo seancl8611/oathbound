@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://World/Global.gd"
+SaveSlots="*res://Core/Release/OathboundSaveSlotManager.gd"
+SettingsManager="*res://Core/Release/OathboundSettingsManager.gd"
 BloodStackManager="*res://World/BloodStackManager.gd"
 DamageNumberManager="*res://Utility/DamageNumberManager.gd"
 AttackDir="*res://Core/Prosthetics/OathboundAttackDirector.gd"
@@ -27,7 +29,7 @@ SceneRegistry="*res://Utility/SceneRegistry.gd"
 AreaDB="*res://Utility/AreaDB.gd"
 EncounterDB="*res://Utility/EncounterDB.gd"
 RouteGenerator="*res://Utility/RouteGenerator.gd"
-RelicRuntime="*res://Core/Relics/OathboundRelicRuntime.gd"
+RelicRuntime="*res://Core/Release/OathboundSlotRelicRuntime.gd"
 CorruptionRuntime="*res://Core/Corruption/OathboundCorruptionRuntime.gd"
 GameFlow="*res://autoload/OathboundRegionGameFlow.gd"
 AspectRuntime="*res://Core/Aspects/FirstAttemptAspectRuntime.gd"
@@ -88,7 +90,7 @@ right={
 }
 click={
 "deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
 attack={
