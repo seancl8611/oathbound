@@ -8,6 +8,8 @@ extends Node
 ## - Falls back to NORMAL for unknown damage types instead of returning null
 ## - Adds support for stance effect types (lightning, shock)
 ## - Adds support for prosthetic types (burn, prosthetic)
+## - Owns each animation tween from the transient damage-number node so a scene
+##   transition kills the tween before it can call back into a freed capture.
 ## =============================================================================
 
 # Damage number scenes for each type
@@ -120,11 +122,14 @@ func _create_damage_number(damage_type: String) -> Control:
 
 
 func _animate_damage_number(damage_number: Control) -> void:
-	var tween = create_tween()
+	if damage_number == null or not is_instance_valid(damage_number) or not damage_number.is_inside_tree():
+		return
+
+	# This tween must belong to the transient number, not this persistent autoload.
+	# Scene changes free the number and therefore kill the tween before any completion
+	# callback can outlive the object it targets.
+	var tween := damage_number.create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(damage_number, "position:y", damage_number.position.y - 40, 0.6)
 	tween.tween_property(damage_number, "modulate:a", 0.0, 0.6)
-	tween.chain().tween_callback(func():
-		if is_instance_valid(damage_number):
-			damage_number.queue_free()
-	)
+	tween.chain().tween_callback(Callable(damage_number, "queue_free"))
