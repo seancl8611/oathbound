@@ -4,6 +4,7 @@ extends CanvasLayer
 ## Gold is run-only and is not a Strand currency. The always-visible Strand wallet is
 ## intentionally limited to Mist + Scrolls; regional boss materials stay contextual.
 
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 
 const COL_BG := Color(0.06, 0.06, 0.09, 0.85)
@@ -40,8 +41,8 @@ func _build_ui() -> void:
 	panel.add_theme_constant_override("separation", 2)
 	_root.add_child(panel)
 
-	_mist_label = _make_resource_row(panel, "Mist", COL_MIST)
-	_scroll_label = _make_resource_row(panel, "Scrolls", COL_SCROLL)
+	_mist_label = _make_resource_row(panel, LOCALIZATION.ui("currency.mist", "Mist"), COL_MIST)
+	_scroll_label = _make_resource_row(panel, LOCALIZATION.ui("currency.scrolls", "Scrolls"), COL_SCROLL)
 
 
 func _make_resource_row(parent: Control, resource_name: String, value_color: Color) -> Label:

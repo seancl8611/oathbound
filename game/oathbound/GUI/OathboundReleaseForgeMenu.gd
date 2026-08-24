@@ -132,8 +132,11 @@ func _refresh_upgrades(data: ProstheticData) -> void:
 			var info_text: String = localized_desc
 			if not ProstheticManager.is_upgrade_purchased(data.id, upgrade_id):
 				var cost_parts: Array[String] = []
+				var cost_scrolls: int = int(node_data.get("cost_scrolls", 0))
 				var cost_mist: int = int(node_data.get("cost_mist_shards", 0))
 				var cost_gold: int = int(node_data.get("cost_gold", 0))
+				if cost_scrolls > 0:
+					cost_parts.append("%d %s" % [cost_scrolls, LOCALIZATION.ui("currency.scrolls", "Scrolls")])
 				if cost_mist > 0:
 					cost_parts.append("%d %s" % [cost_mist, LOCALIZATION.ui("currency.mist", "Mist")])
 				if cost_gold > 0:

@@ -4,6 +4,9 @@ const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 const DIALOGUE_SCENE = preload("res://GUI/OathboundDialogueOverlay.tscn")
 const TECHNIQUE_REWARD_SCENE = preload("res://Utility/UpgradeChoiceUI.tscn")
 const DISCOVERY_BOARD_SCENE = preload("res://GUI/DiscoveryBoardMenu.tscn")
+const FORGE_SCENE = preload("res://GUI/ForgeMenu.tscn")
+const FRONT_END_SCENE = preload("res://TitleScreen/menu.tscn")
+const HUB_HUD_SCRIPT = preload("res://GUI/HubHUD.gd")
 const THE_WELL_SCRIPT = preload("res://World/TheWell.gd")
 
 var _failed: bool = false
@@ -35,6 +38,18 @@ func _run() -> void:
 	translation.add_message(&"ui.discovery.tab.help", &"Aide Test")
 	translation.add_message(&"ui.discovery.tab.achievements", &"Succes Test")
 	translation.add_message(&"ui.discovery.records.run_records", &"Records Test")
+	translation.add_message(&"ui.currency.mist", &"Brume Test")
+	translation.add_message(&"ui.currency.scrolls", &"Parchemins Test")
+	translation.add_message(&"ui.forge.title", &"FORGE TEST")
+	translation.add_message(&"ui.forge.prosthetics", &"PROTHESES FORGE TEST")
+	translation.add_message(&"catalog.prosthetic.beast_whistle.name", &"SIFFLET TEST")
+	translation.add_message(&"catalog.prosthetic_upgrade.beast_whistle.reinforced_resonance.name", &"RESONANCE TEST")
+	translation.add_message(&"catalog.prosthetic_upgrade.beast_whistle.reinforced_resonance.details", &"DESCRIPTION FORGE TEST")
+	translation.add_message(&"ui.front_end.continue", &"CONTINUER FRONT TEST")
+	translation.add_message(&"ui.front_end.new_game", &"NOUVELLE PARTIE TEST")
+	translation.add_message(&"ui.front_end.settings", &"PARAMETRES TEST")
+	translation.add_message(&"ui.front_end.credits", &"CREDITS TEST")
+	translation.add_message(&"ui.front_end.quit", &"QUITTER TEST")
 	TranslationServer.add_translation(translation)
 	TranslationServer.set_locale("fr")
 	if typeof(SettingsManager) == TYPE_OBJECT:
@@ -44,8 +59,11 @@ func _run() -> void:
 	_expect(LOCALIZATION.resolve("npc.keeper.name", "Keeper") == "Gardien Test", "registered translation key did not resolve")
 	await _validate_dialogue_surface()
 	_validate_technique_reward_surface()
+	await _validate_forge_surface()
 	await _validate_well_surface()
 	await _validate_discovery_surface()
+	await _validate_strand_wallet_surface()
+	await _validate_front_end_surface()
 
 	if typeof(SettingsManager) == TYPE_OBJECT:
 		SettingsManager.set_value("instant_text", previous_instant)
@@ -56,7 +74,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback")
+	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback | Forge Scroll costs | Strand wallet | front end")
 	get_tree().quit(0)
 
 
@@ -119,6 +137,36 @@ func _validate_technique_reward_surface() -> void:
 	reward.queue_free()
 
 
+func _validate_forge_surface() -> void:
+	var previous_equipped: String = str(ProstheticManager.equipped_prosthetic_id)
+	var previous_unlocked: Dictionary = ProstheticManager.unlocked_prosthetics.duplicate(true)
+	var previous_upgrades: Dictionary = ProstheticManager.purchased_upgrades.duplicate(true)
+	ProstheticManager.unlocked_prosthetics["beast_whistle"] = true
+	ProstheticManager.equipped_prosthetic_id = "beast_whistle"
+	ProstheticManager.purchased_upgrades.erase("beast_whistle")
+
+	var forge: Node = FORGE_SCENE.instantiate()
+	add_child(forge)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var texts := _all_control_texts(forge)
+	_expect(_contains_text(texts, "FORGE TEST"), "Forge title did not resolve stable UI localization key")
+	_expect(_contains_text(texts, "PROTHESES FORGE TEST"), "Forge Prosthetics heading did not resolve stable UI localization key")
+	_expect(_contains_text(texts, "SIFFLET TEST"), "Forge Prosthetic name did not resolve stable catalog ID")
+	_expect(_contains_text(texts, "RESONANCE TEST"), "Forge upgrade name did not resolve stable Prosthetic-upgrade ID")
+	_expect(_contains_text(texts, "DESCRIPTION FORGE TEST"), "Forge upgrade details did not resolve stable Prosthetic-upgrade ID")
+	_expect(_contains_text(texts, "2 Parchemins Test"), "Forge current Scroll upgrade cost was not presented/localized")
+
+	if forge.has_method("_close"):
+		forge.call("_close")
+	await get_tree().process_frame
+	get_tree().paused = false
+
+	ProstheticManager.equipped_prosthetic_id = previous_equipped
+	ProstheticManager.unlocked_prosthetics = previous_unlocked
+	ProstheticManager.purchased_upgrades = previous_upgrades
+
+
 func _validate_well_surface() -> void:
 	var well_value: Variant = THE_WELL_SCRIPT.new()
 	_expect(well_value is Node, "The Well localization test could not instantiate runtime")
@@ -169,6 +217,36 @@ func _validate_discovery_surface() -> void:
 		board.call("_close")
 	await get_tree().process_frame
 	get_tree().paused = false
+
+
+func _validate_strand_wallet_surface() -> void:
+	var hud_value: Variant = HUB_HUD_SCRIPT.new()
+	_expect(hud_value is Node, "Strand wallet localization test could not instantiate HubHUD")
+	if not (hud_value is Node):
+		return
+	var hud: Node = hud_value as Node
+	add_child(hud)
+	await get_tree().process_frame
+	var texts := _all_control_texts(hud)
+	_expect(_contains_text(texts, "Brume Test"), "Strand wallet Mist label did not resolve stable currency key")
+	_expect(_contains_text(texts, "Parchemins Test"), "Strand wallet Scrolls label did not resolve stable currency key")
+	hud.queue_free()
+	await get_tree().process_frame
+
+
+func _validate_front_end_surface() -> void:
+	var front_end: Node = FRONT_END_SCENE.instantiate()
+	add_child(front_end)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var texts := _all_control_texts(front_end)
+	_expect(_contains_text(texts, "CONTINUER FRONT TEST"), "front-end Continue action did not resolve stable UI key")
+	_expect(_contains_text(texts, "NOUVELLE PARTIE TEST"), "front-end New Game action did not resolve stable UI key")
+	_expect(_contains_text(texts, "PARAMETRES TEST"), "front-end Settings action did not resolve stable UI key")
+	_expect(_contains_text(texts, "CREDITS TEST"), "front-end Credits action did not resolve stable UI key")
+	_expect(_contains_text(texts, "QUITTER TEST"), "front-end Quit action did not resolve stable UI key")
+	front_end.queue_free()
+	await get_tree().process_frame
 
 
 func _label_texts(root: Node) -> Array[String]:
