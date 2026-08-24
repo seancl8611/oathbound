@@ -134,7 +134,7 @@ func _run_contract() -> void:
 				if button.text in ["Wolf", "Wraith", "Ronin"]:
 					aspect_labels.append(button.text)
 			_expect(aspect_labels.size() == 3, "awakened selector must offer Wolf, Wraith, and Ronin")
-		well.call("_cancel_aspect_menu")
+		well.call("_cancel_departure_menu")
 		await get_tree().process_frame
 		_expect(get_tree().root.get_node_or_null("AspectRunSetup") == null, "cancelling Aspect selection must clean up the modal")
 	hub.queue_free()
