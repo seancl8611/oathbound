@@ -5,6 +5,25 @@ extends "res://autoload/UpgradeService.gd"
 ## where N is 1 at Base and first-playtest mastery tuning may increase its frequency.
 ## All eligibility/rarity/family rules remain owned by the canonical parent service.
 
+const CURRENT_TECHNIQUE_CATALOG = preload("res://Core/Techniques/TechniqueCatalog.gd")
+const TECHNIQUE_RECORD_PREFIX := "technique_record/"
+
+
+func apply_upgrade(choice: Dictionary) -> void:
+	var technique_id := str(choice.get("id", ""))
+	super.apply_upgrade(choice)
+	if technique_id.is_empty() or technique_id == "technique_none":
+		return
+	if not CURRENT_TECHNIQUE_CATALOG.TECHNIQUES.has(technique_id) and not CURRENT_TECHNIQUE_CATALOG.REFINEMENTS.has(technique_id):
+		return
+	if typeof(MetaProgress) == TYPE_OBJECT:
+		var flag := TECHNIQUE_RECORD_PREFIX + technique_id
+		if not bool(MetaProgress.get_progression_flag(flag, false)):
+			MetaProgress.set_progression_flag(flag, true)
+	if typeof(RecordsRuntime) == TYPE_OBJECT and RecordsRuntime.has_method("recalculate_completion"):
+		RecordsRuntime.recalculate_completion()
+
+
 func get_three_choices_for_source(source: String, area_id: int = 1, exclude_ids: Array = []) -> Array:
 	var choices: Array = super.get_three_choices_for_source(source, area_id, exclude_ids)
 	var runtime: Node = _relic_runtime()
@@ -28,8 +47,6 @@ func reroll_three_choices(source: String, area_id: int, previous_choices: Array)
 			if not id.is_empty():
 				excluded.append(id)
 
-	# Do not consume another Scribe's Lens regional use on reroll. Preserve the screen
-	# width the player already earned on the original reward.
 	var rerolled: Array = super.get_three_choices_for_source(source, area_id, excluded)
 	if previous_choices.size() >= 4:
 		rerolled = _append_extra_choice(rerolled, source, area_id, excluded)
@@ -69,8 +86,6 @@ func _append_extra_choice(base_choices: Array, source: String, area_id: int, exc
 		var kind: String = str(item.get("kind", ""))
 		if opening_hushiro and kind != "action":
 			continue
-		# Preserve Legendary screen insertion as a special parent-service event rather
-		# than making the extra Relic card a free Legendary roll.
 		if kind == "legendary" or kind == "refinement":
 			continue
 		if existing_cross and kind == "cross":
