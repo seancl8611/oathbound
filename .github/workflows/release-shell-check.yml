@@ -1,0 +1,76 @@
+name: Release Shell Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  release-shell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee release-import.log
+          godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee release-editor.log
+          if grep -F "SCRIPT ERROR:" release-import.log release-editor.log; then
+            echo "FAIL: release shell introduced a GDScript import/editor error."
+            exit 1
+          fi
+
+      - name: Verify release shell contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/OathboundReleaseShellContractSmoke.tscn 2>&1 | tee release-shell.log
+          grep -F "[OathboundReleaseShellContractSmoke] PASS - 3 slots settings completion title postgame" release-shell.log
+          if grep -F "SCRIPT ERROR:" release-shell.log; then
+            echo "FAIL: release shell contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" release-shell.log; then
+            echo "FAIL: release shell contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify launch-facing source boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F 'config/name="Oathbound"' game/oathbound/project.godot
+          if grep -R -n -F 'Samurai Beast Hunter' game/oathbound/TitleScreen --include='*.gd' --include='*.tscn'; then
+            echo "FAIL: retired prototype title remains in the launch front end."
+            exit 1
+          fi
+          grep -F 'const SLOT_COUNT := 3' game/oathbound/Core/Release/OathboundSaveSlotManager.gd
+          grep -F 'Standard Expedition' game/oathbound/World/TheWell.gd
+          grep -F 'Heart Suppression' game/oathbound/World/TheWell.gd
+          echo "PASS: launch-facing source boundaries"
+
+      - name: Upload release shell logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-shell-${{ github.run_id }}
+          path: |
+            release-import.log
+            release-editor.log
+            release-shell.log
+          if-no-files-found: warn
+          retention-days: 7

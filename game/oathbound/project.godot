@@ -49,6 +49,9 @@ FlameProgress="*res://autoload/FlameProgress.gd"
 PlayerState="*res://Utility/PlayerState.gd"
 NarrativeRuntime="*res://Core/Presentation/OathboundNarrativeRuntime.gd"
 AchievementRuntime="*res://Core/Presentation/OathboundAchievementRuntime.gd"
+SettingsRuntime="*res://Core/Release/OathboundSettingsRuntime.gd"
+CompletionRuntime="*res://Core/Release/OathboundCompletionRuntime.gd"
+SaveSlots="*res://Core/Release/OathboundSaveSlotManager.gd"
 
 [display]
 
