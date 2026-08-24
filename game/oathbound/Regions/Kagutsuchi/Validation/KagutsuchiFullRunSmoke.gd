@@ -3,12 +3,15 @@ extends Node
 ## Headless structural traversal of one legitimate generated Kagutsuchi route.
 ## Combat/reward completion is bypassed; this exercises the real GameFlow,
 ## SceneRegistry, route choices, persistent Player ownership, all 11 counted chambers,
-## authored Court encounter selection, miniboss loading, and Eclipse Shogun endpoint.
+## authored Court encounter selection, miniboss loading, Eclipse Shogun endpoint, and
+## the non-counted post-Shogun Heart handoff boundary.
 
 const KAGUTSUCHI_CATALOG = preload("res://Regions/Kagutsuchi/Encounters/KagutsuchiEncounterCatalog.gd")
+const ENDGAME_FLOW = preload("res://Core/Endgame/OathboundEndgameFlow.gd")
 const EXPECTED_PLAYER_SCRIPT := "res://Player/OathboundCombatPlayer.gd"
 const EXPECTED_COMBAT_SCENE := "res://Regions/Kagutsuchi/Chambers/CombatChamber.tscn"
 const EXPECTED_BOSS_SCENE := "res://Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn"
+const EXPECTED_HANDOFF_SCENE := "res://Core/Endgame/HeartHandoffChamber.tscn"
 const EXPECTED_TREASURE_SCENE := "res://Core/Chambers/Types/TreasureChamber.tscn"
 const REQUIRED_ROLES: Array[String] = ["combat", "shrine", "merchant", "rest", "treasure", "miniboss", "boss"]
 const SEARCH_SEED_LIMIT := 4096
@@ -26,7 +29,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await _run_traversal()
 	if _failures.is_empty():
-		print("[KagutsuchiFullRunSmoke] PASS - seed=%d | 11 chambers | roles=%s | Eclipse Shogun endpoint | persistent canonical Player=%d" % [_coverage_seed, str(_visited_roles.keys()), _player_instance_id])
+		print("[KagutsuchiFullRunSmoke] PASS - seed=%d | 11 chambers | roles=%s | Eclipse Shogun -> non-counted Heart handoff | persistent canonical Player=%d" % [_coverage_seed, str(_visited_roles.keys()), _player_instance_id])
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -88,10 +91,14 @@ func _run_traversal() -> void:
 	for encounter_id: String in RunData.kagutsuchi_encounters_seen:
 		_expect(not KAGUTSUCHI_CATALOG.get_by_id(encounter_id).is_empty(), "Unknown Kagutsuchi encounter %s" % encounter_id)
 
+	await _validate_post_shogun_handoff()
+
 
 func _prepare_awakened_run_state() -> void:
 	if typeof(MetaProgress) == TYPE_OBJECT:
 		MetaProgress.set("returning_blood_awakened", true)
+		MetaProgress.set("heart_bindings_destroyed", 0)
+		MetaProgress.set("story_complete", false)
 	if typeof(AspectRuntime) == TYPE_OBJECT and AspectRuntime.has_method("select_aspect"):
 		AspectRuntime.call("select_aspect", "wolf")
 	if typeof(CorruptionRuntime) == TYPE_OBJECT and CorruptionRuntime.has_method("set_corruption_for_playtest"):
@@ -197,6 +204,34 @@ func _validate_shogun_room(room: Node, index: int) -> void:
 		_expect(shogun != null, "Eclipse Shogun actor missing")
 		_expect(shogun != null and shogun.has_signal("defeated"), "Eclipse Shogun must expose defeated signal")
 		_expect(room.get("_boss") == shogun, "BossChamber did not select Eclipse Shogun as defeat authority")
+
+
+func _validate_post_shogun_handoff() -> void:
+	var bindings_before := int(MetaProgress.get_heart_bindings_destroyed()) if typeof(MetaProgress) == TYPE_OBJECT else -1
+	GameFlow.next_room()
+	await _wait_frames(10)
+
+	_expect(int(GameFlow.current_index) == 10, "Post-Shogun handoff must not create a counted Chamber 12")
+	_expect(int(RunData.depth) == 11, "Counted run depth must finish at exactly 11 Kagutsuchi chambers, got %d" % int(RunData.depth))
+	_expect(RunData.path_history.size() == 11, "Counted path history must contain exactly 11 Kagutsuchi entries")
+	_expect(int(MetaProgress.get_heart_bindings_destroyed()) == bindings_before, "Loading the Binding handoff must not destroy a Binding before player interaction")
+
+	var handoff: Node = null
+	for child: Node in _room_container.get_children():
+		if child.scene_file_path == EXPECTED_HANDOFF_SCENE:
+			handoff = child
+			break
+	_expect(handoff != null, "Shogun next_room() did not load the non-counted Heart handoff scene")
+	if handoff != null:
+		_expect(str(handoff.get("outcome")) == ENDGAME_FLOW.OUTCOME_BINDING_COMPLETION, "Awakened zero-Binding run must enter Binding completion handoff")
+		_expect(handoff.get_node_or_null("PlayerSpawn") != null, "Heart handoff missing PlayerSpawn")
+		_expect(handoff.get_node_or_null("ExitGate") != null, "Heart handoff missing explicit interaction gate")
+
+	var player: Node = GameFlow.player
+	_expect(player != null and is_instance_valid(player), "Player lost during Shogun -> Heart handoff")
+	if player != null and is_instance_valid(player):
+		_expect(player.get_instance_id() == _player_instance_id, "Shogun -> Heart handoff recreated the Player/build")
+		_expect(_script_path(player) == EXPECTED_PLAYER_SCRIPT, "Wrong Player script after Shogun -> Heart handoff")
 
 
 func _slot_options(slot_index: int, token: String) -> Array[String]:
