@@ -18,6 +18,9 @@ on:
       - "game/oathbound/GUI/ForgeMenu.gd"
       - "game/oathbound/GUI/OathboundReleaseForgeMenu.gd"
       - "game/oathbound/GUI/ForgeMenu.tscn"
+      - "game/oathbound/GUI/CodexMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseCodexMenu.gd"
+      - "game/oathbound/GUI/CodexMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
@@ -42,6 +45,9 @@ on:
       - "game/oathbound/GUI/ForgeMenu.gd"
       - "game/oathbound/GUI/OathboundReleaseForgeMenu.gd"
       - "game/oathbound/GUI/ForgeMenu.tscn"
+      - "game/oathbound/GUI/CodexMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseCodexMenu.gd"
+      - "game/oathbound/GUI/CodexMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
@@ -147,6 +153,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Codex release presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/CodexReleasePresentationSmoke.tscn 2>&1 | tee codex-release.log
+          grep -F "[CodexReleasePresentationSmoke] PASS - localized Codex tabs | stable release wrapper | High Contrast" codex-release.log
+          if grep -F "SCRIPT ERROR:" codex-release.log; then
+            echo "FAIL: Codex release presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" codex-release.log; then
+            echo "FAIL: Codex release presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Strand prompt glyph switching
         shell: bash
         run: |
@@ -173,6 +194,7 @@ jobs:
             dialogue-accessibility.log
             readability-strand-hud.log
             localization-readiness.log
+            codex-release.log
             hub-prompt-glyph.log
           if-no-files-found: warn
           retention-days: 7
