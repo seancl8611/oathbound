@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://Core/Endgame/HeartHandoffChamber.gd" id="1_endgame"]
+[ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_bg"]
+[ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="3_gate"]
+[ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="4_bounds"]
+
+[node name="HeartHandoffChamber" type="Node2D"]
+script = ExtResource("1_endgame")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+texture = ExtResource("2_bg")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+modulate = Color(0.42, 0.34, 0.38, 1)
+
+[node name="RoomBounds" type="Node2D" parent="."]
+script = ExtResource("4_bounds")
+size = Vector2(1600, 900)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(-90, 0)
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = -220.0
+offset_top = -130.0
+offset_right = 220.0
+offset_bottom = -70.0
+text = "Heart Approach"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExitGate" parent="." groups=["mist_gates"] instance=ExtResource("3_gate")]
+position = Vector2(110, 0)
+gate_type = "Event"
+locked = false
+
+[node name="Label" type="Label" parent="ExitGate"]
+offset_left = -65.0
+offset_top = -48.0
+offset_right = 65.0
+offset_bottom = -20.0
+text = "Continue"
+horizontal_alignment = 1
