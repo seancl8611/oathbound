@@ -9,9 +9,13 @@ on:
       - "game/oathbound/Core/Release/**"
       - "game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd"
       - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Prosthetics/OathboundRunHUD.gd"
       - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
       - "game/oathbound/GUI/DiscoveryBoardMenu.gd"
+      - "game/oathbound/GUI/OathboundAccessibleDiscoveryBoardMenu.gd"
       - "game/oathbound/GUI/OathboundDialogueOverlay.gd"
+      - "game/oathbound/GUI/OathboundAccessibleDialogueOverlay.gd"
+      - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
@@ -23,9 +27,13 @@ on:
       - "game/oathbound/Core/Release/**"
       - "game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd"
       - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Prosthetics/OathboundRunHUD.gd"
       - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
       - "game/oathbound/GUI/DiscoveryBoardMenu.gd"
+      - "game/oathbound/GUI/OathboundAccessibleDiscoveryBoardMenu.gd"
       - "game/oathbound/GUI/OathboundDialogueOverlay.gd"
+      - "game/oathbound/GUI/OathboundAccessibleDialogueOverlay.gd"
+      - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
@@ -97,6 +105,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify high contrast and Strand wallet
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/ReadabilityAndStrandHUDSmoke.tscn 2>&1 | tee readability-strand-hud.log
+          grep -F "[ReadabilityAndStrandHUDSmoke] PASS - high contrast active | front end styled | Strand wallet Mist+Scrolls only" readability-strand-hud.log
+          if grep -F "SCRIPT ERROR:" readability-strand-hud.log; then
+            echo "FAIL: readability / Strand HUD smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" readability-strand-hud.log; then
+            echo "FAIL: readability / Strand HUD smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload release shell logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -106,5 +129,6 @@ jobs:
             release-shell-contract.log
             run-results-overlay.log
             dialogue-accessibility.log
+            readability-strand-hud.log
           if-no-files-found: warn
           retention-days: 7
