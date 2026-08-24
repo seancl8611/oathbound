@@ -8,11 +8,15 @@ extends "res://Core/Chambers/CombatChamberBase.gd"
 
 const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 
-const HUSHIRO_MELEE_COOLDOWN: float = 1.20
-const HUSHIRO_ADVANCE_COOLDOWN: float = 0.55
+# One enemy should own the immediate melee exchange. Individual enemies can be active
+# inside that turn, but the room director prevents several bodies from simultaneously
+# collapsing onto Akio. This is especially important for Hound packs.
+const HUSHIRO_MELEE_COOLDOWN: float = 0.95
+const HUSHIRO_ADVANCE_COOLDOWN: float = 0.70
 const HUSHIRO_RANGED_COOLDOWN: float = 1.60
-const HUSHIRO_GRANT_GAP: float = 0.35
-const HUSHIRO_TURNOVER_DELAY: float = 0.50
+const HUSHIRO_DOG_LUNGE_COOLDOWN: float = 3.00
+const HUSHIRO_GRANT_GAP: float = 0.40
+const HUSHIRO_TURNOVER_DELAY: float = 0.45
 
 const HUSHIRO_COMBAT_PAYOUTS: Dictionary = {
 	"gold": 60,
@@ -111,7 +115,7 @@ func _configure_duel_tokens() -> void:
 	AttackDir.set_role_limits({
 		"melee_attack": 1,
 		"dog_lunge": 1,
-		"advance_move": 3,
+		"advance_move": 2,
 		"ranged_attack": 1,
 		"frontal": 1,
 		"flank_left": 1,
@@ -124,9 +128,9 @@ func _configure_duel_tokens() -> void:
 	if _has_property(AttackDir, "attack_turnover_delay"):
 		AttackDir.attack_turnover_delay = HUSHIRO_TURNOVER_DELAY
 	if _has_property(AttackDir, "max_frontline"):
-		AttackDir.max_frontline = 4
+		AttackDir.max_frontline = 2
 
-	print("[HushiroCombatChamber] Pressure baseline: adaptive melee/ranged roles, Hound lunge cap=1")
+	print("[HushiroCombatChamber] Pressure baseline: one melee turn, max two advancing, Hound lunge cap=1")
 
 
 # The shared autoscale timer calls this method as the current wave population changes.
@@ -135,15 +139,21 @@ func _update_duel_tokens() -> void:
 		return
 
 	var alive: int = 0
+	var hounds: int = 0
 	for enemy: Node in get_tree().get_nodes_in_group("enemy"):
-		if is_instance_valid(enemy) and is_ancestor_of(enemy):
-			alive += 1
+		if not (is_instance_valid(enemy) and is_ancestor_of(enemy)):
+			continue
+		alive += 1
+		if str(enemy.get_meta("hushiro_enemy_type", "")) == "hound":
+			hounds += 1
 
-	# Low-body-count exchanges remain precise. The authored 4-6 body waves may permit
-	# modest overlap so Hushiro does not collapse back into sequential one-on-one duels.
-	var melee_limit: int = 1 if alive <= 3 else 2
-	var ranged_limit: int = 1 if alive <= 4 else 2
-	var advance_limit: int = clampi(alive, 1, 4)
+	# Sekiro-style group control: one enemy owns the committed melee exchange. Other
+	# bodies may reposition or provide one ranged layer, but Hound packs are restricted
+	# to one advancing dog so the player can actually read/parry/punish the current turn.
+	var melee_limit: int = 1
+	var ranged_limit: int = 1
+	var advance_limit: int = 1 if hounds >= 2 else clampi(alive, 1, 2)
+	var frontline_limit: int = 2 if hounds >= 2 else 3
 
 	AttackDir.set_role_limits({
 		"melee_attack": melee_limit,
@@ -160,13 +170,17 @@ func _update_duel_tokens() -> void:
 		AttackDir.grant_gap_sec = HUSHIRO_GRANT_GAP
 	if _has_property(AttackDir, "attack_turnover_delay"):
 		AttackDir.attack_turnover_delay = HUSHIRO_TURNOVER_DELAY
+	if _has_property(AttackDir, "max_frontline"):
+		AttackDir.max_frontline = frontline_limit
 
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("hushiro_pressure_limits", {
 			"alive": alive,
+			"hounds": hounds,
 			"melee_limit": melee_limit,
 			"ranged_limit": ranged_limit,
 			"advance_limit": advance_limit,
+			"frontline_limit": frontline_limit,
 			"dog_lunge_limit": 1,
 		})
 
@@ -174,7 +188,7 @@ func _update_duel_tokens() -> void:
 func _apply_hushiro_role_cooldowns() -> void:
 	AttackDir.set_role_cooldowns({
 		"melee_attack": HUSHIRO_MELEE_COOLDOWN,
-		"dog_lunge": 2.20,
+		"dog_lunge": HUSHIRO_DOG_LUNGE_COOLDOWN,
 		"advance_move": HUSHIRO_ADVANCE_COOLDOWN,
 		"ranged_attack": HUSHIRO_RANGED_COOLDOWN,
 		"frontal": 0.80,

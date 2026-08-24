@@ -24,7 +24,7 @@ func _on_boss_defeated() -> void:
 
 	# Keeper and Twin Maws receive the documented three-card current-run Boss Reward,
 	# then the safe-transition recovery. Eclipse Shogun's current Binding handoff does
-	# not grant additional ordinary run power.
+	# not grant additional ordinary run power because first-six campaign clears end there.
 	if area_id in [1, 2]:
 		var reward_service := BOSS_REWARD_SERVICE.new()
 		add_child(reward_service)
@@ -64,11 +64,18 @@ func _grant_persistent_boss_rewards(area_id: int) -> void:
 
 	if not material_key.is_empty():
 		MetaProgress.add_boss_material(material_key, 1)
-	MetaProgress.mark_boss_clear(area_id)
+	if MetaProgress.has_method("record_boss_defeat"):
+		MetaProgress.record_boss_defeat(area_id)
+	else:
+		MetaProgress.mark_boss_clear(area_id)
 	if typeof(RunData) == TYPE_OBJECT and RunData.has_method("sync_persistent_resources"):
 		RunData.sync_persistent_resources()
 
-	print("[BossChamber] Persistent boss payout: +%d Mist / +1 %s material" % [mist_amount, material_key])
+	print("[BossChamber] Persistent boss payout: +%d Mist / +1 %s material | defeats=%d" % [
+		mist_amount,
+		material_key,
+		MetaProgress.get_boss_defeat_count(area_id) if MetaProgress.has_method("get_boss_defeat_count") else 1,
+	])
 
 
 func _unlock_boss_gate() -> void:

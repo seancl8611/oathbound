@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://Utility/duo_boss_manager.gd" id="8_0cfjw"]
 [ext_resource type="PackedScene" uid="uid://blcu3eyoyar5i" path="res://Enemy/Area 2/Boss/rootfang.tscn" id="9_g8jqn"]
 [ext_resource type="PackedScene" uid="uid://gt2oqnnlotxj" path="res://Enemy/Area 2/Boss/briarthorn.tscn" id="10_acunx"]
-[ext_resource type="PackedScene" uid="uid://d0d3e5rkh4fyp" path="res://Enemy/Area 3/Boss/eclipse_shogun.tscn" id="11_jdyjl"]
+[ext_resource type="PackedScene" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn" id="11_jdyjl"]
 
 [node name="BossChamber" type="Node2D"]
 script = ExtResource("1_iropj")

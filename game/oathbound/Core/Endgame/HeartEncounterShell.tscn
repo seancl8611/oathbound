@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Core/Endgame/HeartEncounterShell.gd" id="1_shell"]
+[ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_bg"]
+[ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="3_bounds"]
+
+[node name="HeartEncounterShell" type="Node2D"]
+script = ExtResource("1_shell")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 2
+texture_repeat = 2
+texture = ExtResource("2_bg")
+region_enabled = true
+region_rect = Rect2(-4000, -4000, 4000, 4000)
+modulate = Color(0.28, 0.12, 0.16, 1)
+
+[node name="RoomBounds" type="Node2D" parent="."]
+script = ExtResource("3_bounds")
+size = Vector2(1800, 1000)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(0, 80)
+
+[node name="StatusLabel" type="Label" parent="."]
+offset_left = -220.0
+offset_top = -130.0
+offset_right = 220.0
+offset_bottom = -85.0
+text = "The Unbound Heart"
+horizontal_alignment = 1
+vertical_alignment = 1

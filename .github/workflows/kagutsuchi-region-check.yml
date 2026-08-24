@@ -1,0 +1,159 @@
+name: Kagutsuchi Region Check
+
+on:
+  push:
+    branches:
+      - "agent/kagutsuchi-region-reconciliation"
+  pull_request:
+    paths:
+      - "game/oathbound/Regions/Kagutsuchi/**"
+      - "game/oathbound/Enemy/Area 3/**"
+      - "game/oathbound/Core/Chambers/**"
+      - "game/oathbound/Core/Regions/**"
+      - "game/oathbound/Core/Endgame/**"
+      - "game/oathbound/World/TheWell.gd"
+      - "game/oathbound/Utility/SceneRegistry.gd"
+      - "game/oathbound/Utility/RunData.gd"
+      - "game/oathbound/Utility/RunScene.gd"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/autoload/OathboundGameFlow.gd"
+      - ".github/workflows/kagutsuchi-region-check.yml"
+  workflow_dispatch:
+
+jobs:
+  kagutsuchi-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee kagutsuchi-import.log
+          godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee kagutsuchi-editor.log
+          if grep -F "SCRIPT ERROR:" kagutsuchi-import.log kagutsuchi-editor.log; then
+            echo "FAIL: Kagutsuchi package introduced a GDScript import/editor error."
+            exit 1
+          fi
+
+      - name: Verify canonical Kagutsuchi scene ownership
+        shell: bash
+        run: |
+          set -o pipefail
+          legacy_scene="$(find 'game/oathbound/Enemy/Area 3' -type f -name '*.tscn' -print -quit 2>/dev/null || true)"
+          if [ -n "$legacy_scene" ]; then
+            echo "FAIL: legacy Area 3 runtime scene remains outside Regions/Kagutsuchi: $legacy_scene"
+            exit 1
+          fi
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtCaster.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn' game/oathbound/Utility/SceneRegistry.gd
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn' game/oathbound/Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn
+          grep -F 'res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn' game/oathbound/Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.tscn
+          if grep -R -n -F 'res://Enemy/Area 3/' game/oathbound/Regions/Kagutsuchi --exclude-dir=Validation --include='*.tscn' --include='*.gd'; then
+            echo "FAIL: canonical Kagutsuchi runtime still depends on the legacy Enemy/Area 3 compatibility tree."
+            exit 1
+          fi
+
+      - name: Verify Kagutsuchi standard enemy contracts
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Kagutsuchi/Validation/KagutsuchiEnemyContractSmoke.tscn 2>&1 | tee kagutsuchi-enemy-contract.log
+          grep -F "[KagutsuchiEnemyContractSmoke] PASS" kagutsuchi-enemy-contract.log
+          if grep -F "SCRIPT ERROR:" kagutsuchi-enemy-contract.log; then
+            echo "FAIL: Kagutsuchi enemy contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" kagutsuchi-enemy-contract.log; then
+            echo "FAIL: Kagutsuchi enemy contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify Kagutsuchi seeded route and roster contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Kagutsuchi/Validation/KagutsuchiRouteContractSmoke.tscn 2>&1 | tee kagutsuchi-route-contract.log
+          grep -F "[KagutsuchiRouteContractSmoke] PASS" kagutsuchi-route-contract.log
+          if grep -F "SCRIPT ERROR:" kagutsuchi-route-contract.log; then
+            echo "FAIL: Kagutsuchi route contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" kagutsuchi-route-contract.log; then
+            echo "FAIL: Kagutsuchi route contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify Kagutsuchi miniboss contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Kagutsuchi/Validation/KagutsuchiMinibossContractSmoke.tscn 2>&1 | tee kagutsuchi-miniboss-contract.log
+          grep -F "[KagutsuchiMinibossContractSmoke] PASS" kagutsuchi-miniboss-contract.log
+          if grep -F "SCRIPT ERROR:" kagutsuchi-miniboss-contract.log; then
+            echo "FAIL: Kagutsuchi miniboss contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" kagutsuchi-miniboss-contract.log; then
+            echo "FAIL: Kagutsuchi miniboss contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Traverse one complete generated Kagutsuchi route
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Kagutsuchi/Validation/KagutsuchiFullRunSmoke.tscn 2>&1 | tee kagutsuchi-full-run.log
+          grep -F "[KagutsuchiFullRunSmoke] PASS" kagutsuchi-full-run.log
+          if grep -F "SCRIPT ERROR:" kagutsuchi-full-run.log; then
+            echo "FAIL: Full Kagutsuchi traversal emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" kagutsuchi-full-run.log; then
+            echo "FAIL: Full Kagutsuchi traversal emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify Binding, seventh-run Heart, and postgame contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Endgame/Validation/EndgameCampaignContractSmoke.tscn 2>&1 | tee endgame-campaign-contract.log
+          grep -F "[EndgameCampaignContractSmoke] PASS" endgame-campaign-contract.log
+          if grep -F "SCRIPT ERROR:" endgame-campaign-contract.log; then
+            echo "FAIL: Endgame campaign contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" endgame-campaign-contract.log; then
+            echo "FAIL: Endgame campaign contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload Kagutsuchi validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kagutsuchi-validation-${{ github.run_id }}
+          path: |
+            kagutsuchi-import.log
+            kagutsuchi-editor.log
+            kagutsuchi-enemy-contract.log
+            kagutsuchi-route-contract.log
+            kagutsuchi-miniboss-contract.log
+            kagutsuchi-full-run.log
+            endgame-campaign-contract.log
+          if-no-files-found: warn
+          retention-days: 7

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://c2xw5jcfasip4"]
 
-[ext_resource type="Script" path="res://Enemy/Area 3/Encounter/elite_defender.gd" id="1_n0krw"]
+[ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.gd" id="1_n0krw"]
 [ext_resource type="Texture2D" uid="uid://bvvgttpl7c2r" path="res://Textures/Enemy/shield/shield.png" id="2_nhw8h"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="3_7kkqq"]
 [ext_resource type="PackedScene" uid="uid://uhr6mtuisqm1" path="res://Utility/hit_box.tscn" id="4_xapdq"]

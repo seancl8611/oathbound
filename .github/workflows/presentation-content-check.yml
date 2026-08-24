@@ -1,0 +1,66 @@
+name: Authored Presentation Content Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  presentation-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Compile editor project
+        run: godot --headless --editor --path game/oathbound --quit-after 3
+
+      - name: Verify authored presentation contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Presentation/Validation/OathboundPresentationContractSmoke.tscn 2>&1 | tee presentation-contract.log
+          grep -F "[OathboundPresentationContractSmoke] PASS - Shogun Strand lore achievements help ending" presentation-contract.log
+          if grep -F "SCRIPT ERROR:" presentation-contract.log; then
+            echo "FAIL: presentation contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" presentation-contract.log; then
+            echo "FAIL: presentation contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify silent-protagonist and Heart boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -R -n '"speaker"[[:space:]]*:[[:space:]]*"Akio"' game/oathbound/Core/Presentation --include='*.gd'; then
+            echo "FAIL: Akio received authored dialogue."
+            exit 1
+          fi
+          grep -F 'The Heart survived. Its curse cannot spread.' game/oathbound/Core/Presentation/OathboundPresentationCatalog.gd
+          grep -F 'launch achievement catalog must contain exactly 30 achievements' game/oathbound/Core/Presentation/Validation/OathboundPresentationContractSmoke.gd
+          echo "PASS: silent protagonist and ending boundaries"
+
+      - name: Upload presentation validation log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: presentation-validation-${{ github.run_id }}
+          path: presentation-contract.log
+          if-no-files-found: warn
+          retention-days: 7

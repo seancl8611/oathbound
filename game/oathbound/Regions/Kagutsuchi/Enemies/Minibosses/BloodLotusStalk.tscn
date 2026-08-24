@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotusStalk.gd" id="1_stalk"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_hurt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape_stalk"]
+radius = 24.0
+
+[node name="BloodLotusStalk" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_stalk")
+
+[node name="PrototypeVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-13, 22, -18, 3, -10, -20, 0, -34, 10, -20, 18, 3, 13, 22, 0, 30)
+color = Color(0.48, 0.08, 0.12, 1)
+
+[node name="HurtBox" parent="." groups=["hurtbox"] instance=ExtResource("2_hurt")]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape_stalk")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]

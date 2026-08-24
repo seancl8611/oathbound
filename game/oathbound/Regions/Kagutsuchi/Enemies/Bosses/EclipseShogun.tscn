@@ -1,6 +1,6 @@
 [gd_scene load_steps=69 format=3 uid="uid://d0d3e5rkh4fyp"]
 
-[ext_resource type="Script" path="res://Enemy/Area 3/Boss/eclipse_shogun.gd" id="1_8a7u6"]
+[ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.gd" id="1_8a7u6"]
 [ext_resource type="Texture2D" uid="uid://bko174o6ib0u7" path="res://Textures/Enemy/shield_captain/cannon_mark1.png" id="2_e1i3e"]
 [ext_resource type="Texture2D" uid="uid://bb24xasa7ki2e" path="res://Textures/Enemy/shield_captain/cannon_mark2.png" id="3_2pae2"]
 [ext_resource type="Texture2D" uid="uid://chuvh68t2ei3a" path="res://Textures/Enemy/shield_captain/cannon_mark3.png" id="4_mtrqx"]

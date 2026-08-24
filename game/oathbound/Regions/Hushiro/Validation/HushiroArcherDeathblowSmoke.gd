@@ -1,8 +1,8 @@
 extends Node
 
-## Regression for the manual 2026-08-23 Hushiro playtest blocker:
-## a Corrupted Archer reached 65/65 Posture and was selected for a finisher, but
-## survived because its inherited EnemyBase.receive_deathblow() was a no-op.
+## Regression for the manual 2026-08-23 Hushiro playtest blockers:
+## - a Corrupted Archer must actually die when a valid Deathblow executes;
+## - reaching 65/65 Posture must enter a real stagger before the finisher arms.
 
 const ARCHER_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcher.tscn")
 
@@ -46,14 +46,29 @@ func _run_contract() -> void:
 		_fail("expected Archer posture_max=65, got %.3f" % posture_max)
 		return
 
+	var break_runtime: Node = archer_value.get_node_or_null("HushiroPostureBreakRuntime")
+	if break_runtime == null:
+		_fail("canonical Archer missing shared posture-break runtime")
+		return
+
 	combat_controller.add_posture(posture_max)
-	await get_tree().process_frame
+	await get_tree().physics_frame
 
 	if combat_controller.get_posture_ratio() < 0.999:
 		_fail("Archer did not reach full Posture")
 		return
+	if not bool(break_runtime.call("is_break_active")):
+		_fail("full-Posture Archer did not enter posture-broken stagger")
+		return
+	if bool(archer_value.call("is_deathblow_ready")):
+		_fail("Archer became Deathblow-ready on the same frame as Posture break")
+		return
+
+	await get_tree().create_timer(0.24).timeout
+	await get_tree().physics_frame
+
 	if not bool(archer_value.call("is_deathblow_ready")):
-		_fail("full-Posture Archer did not report deathblow-ready")
+		_fail("staggered Archer did not become Deathblow-ready after readability beat")
 		return
 
 	archer_value.connect("enemy_died", Callable(self, "_on_enemy_died"))
@@ -61,6 +76,9 @@ func _run_contract() -> void:
 
 	if _death_signal_count != 1:
 		_fail("deathblow did not synchronously resolve exactly one Archer death")
+		return
+	if bool(archer_value.call("is_deathblow_ready")):
+		_fail("dead Archer remained Deathblow-ready")
 		return
 
 	print("[HushiroArcherDeathblowSmoke] PASS - 65/65 Posture -> deathblow -> enemy_died")
