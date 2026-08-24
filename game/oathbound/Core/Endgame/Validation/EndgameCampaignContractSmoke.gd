@@ -25,6 +25,7 @@ class DummyPlayer:
 
 var _failures: Array[String] = []
 var _snapshot: Dictionary = {}
+var _heart_defeat_signal_count := 0
 
 
 func _ready() -> void:
@@ -162,18 +163,22 @@ func _run_scene_contract() -> void:
 	var shell := HEART_SHELL_SCENE.instantiate()
 	shell.set_meta("postgame_suppression", false)
 	shell.set_meta("contract_test", true)
-	var defeated_count := 0
-	shell.heart_defeated.connect(func(_postgame: bool): defeated_count += 1)
+	_heart_defeat_signal_count = 0
+	shell.heart_defeated.connect(_on_contract_heart_defeated)
 	add_child(shell)
 	await get_tree().process_frame
 	_expect(shell.is_in_group("heart_encounter_shell"), "Heart encounter shell did not identify itself")
 	shell.complete_for_contract_test()
 	await get_tree().process_frame
-	_expect(defeated_count == 1, "Heart encounter shell completion signal must emit exactly once")
+	_expect(_heart_defeat_signal_count == 1, "Heart encounter shell completion signal must emit exactly once")
 	shell.complete_for_contract_test()
 	await get_tree().process_frame
-	_expect(defeated_count == 1, "Heart encounter shell allowed duplicate completion")
+	_expect(_heart_defeat_signal_count == 1, "Heart encounter shell allowed duplicate completion")
 	shell.queue_free()
+
+
+func _on_contract_heart_defeated(_postgame: bool) -> void:
+	_heart_defeat_signal_count += 1
 
 
 func _expect(condition: bool, message: String) -> void:
