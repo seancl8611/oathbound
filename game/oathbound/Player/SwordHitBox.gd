@@ -43,6 +43,7 @@ var _hit_targets: Array = []
 var _base_collision_scale: Vector2 = Vector2.ONE
 var _base_collision_position: Vector2 = Vector2.ZERO
 var _current_hitbox_shape: String = "default"
+var _active_requested: bool = false
 
 @onready var collision_shape = $CollisionShape2D
 
@@ -56,6 +57,7 @@ func _ready():
 	collision_mask = 0
 	monitoring = false
 	monitorable = false
+	_active_requested = false
 
 	if collision_shape:
 		_base_collision_scale = collision_shape.scale
@@ -163,11 +165,15 @@ func _get_damage_type() -> String:
 # ACTIVATION / DEACTIVATION
 # =============================================================================
 func activate_hitbox() -> void:
-	monitoring = true
-	monitorable = true
+	# Monitoring state changes are deferred because attack interruption can happen
+	# from inside an Area2D body/area signal while Godot is flushing physics queries.
+	# The requested flag preserves immediate gameplay semantics while the physics
+	# server applies the actual state safely at the end of the frame.
+	_active_requested = true
+	set_deferred("monitoring", true)
+	set_deferred("monitorable", true)
 
 	if collision_shape:
-		collision_shape.disabled = false
 		collision_shape.set_deferred("disabled", false)
 
 	_swing_token = "%d_%d" % [get_instance_id(), Time.get_ticks_msec()]
@@ -270,14 +276,14 @@ func activate_for_combo(combo_index: int) -> void:
 	activate_hitbox()
 
 func deactivate_hitbox() -> void:
-	monitoring = false
-	monitorable = false
+	_active_requested = false
+	set_deferred("monitoring", false)
+	set_deferred("monitorable", false)
 
 	if collision_shape:
-		collision_shape.disabled = true
 		collision_shape.set_deferred("disabled", true)
-		collision_shape.scale = _base_collision_scale
-		collision_shape.position = _base_collision_position
+		collision_shape.set_deferred("scale", _base_collision_scale)
+		collision_shape.set_deferred("position", _base_collision_position)
 
 	_current_hitbox_shape = "default"
 	_hit_targets.clear()
@@ -287,6 +293,8 @@ func deactivate_hitbox() -> void:
 # =============================================================================
 
 func _on_area_entered(area: Area2D) -> void:
+	if not _active_requested:
+		return
 	if area == null:
 		return
 	if collision_shape and collision_shape.disabled:
@@ -373,4 +381,4 @@ func get_current_attack_event() -> Dictionary:
 	}
 
 func is_active() -> bool:
-	return collision_shape and not collision_shape.disabled
+	return _active_requested

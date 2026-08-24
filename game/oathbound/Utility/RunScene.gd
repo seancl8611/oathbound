@@ -26,12 +26,16 @@ func _ready() -> void:
 	# Create choice UI
 	_create_choice_ui()
 
-	# Debug: set debug_start_area in editor to skip to that area (0 = normal)
+	# Debug: set debug_start_area in editor to skip to that area (0 = normal).
+	# Route through current GameFlow so Yomori does not fall back to legacy Area 2 data.
 	if debug_start_area >= 2:
-		GameFlow.current_area = debug_start_area
 		RunData.reset_for_new_run(debug_start_area)
-		GameFlow.route = RouteGenerator.generate_area_route(debug_start_area)
-		GameFlow.current_index = 0
+		if GameFlow.has_method("build_route_for_area"):
+			GameFlow.build_route_for_area(debug_start_area)
+		else:
+			GameFlow.current_area = debug_start_area
+			GameFlow.route = RouteGenerator.generate_area_route(debug_start_area)
+			GameFlow.current_index = 0
 	else:
 		RunData.reset_for_new_run(1)
 		GameFlow.build_area1_route()

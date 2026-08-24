@@ -1,0 +1,115 @@
+name: Hushiro Combat Regression Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Encounters/**"
+      - "game/oathbound/Enemy/Base/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/**"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DeathblowSystem.gd"
+      - ".github/workflows/hushiro-combat-regression-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Encounters/**"
+      - "game/oathbound/Enemy/Base/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/**"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DeathblowSystem.gd"
+      - ".github/workflows/hushiro-combat-regression-check.yml"
+  workflow_dispatch:
+
+jobs:
+  combat-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Verify retired UpgradeDb UI stays absent
+        shell: bash
+        run: |
+          set -euo pipefail
+          retired_paths=(
+            "game/oathbound/Player/GUI/item_container.gd"
+            "game/oathbound/Player/GUI/item_container.tscn"
+          )
+          for path in "${retired_paths[@]}"; do
+            if [[ -e "$path" ]]; then
+              echo "FAIL: retired UpgradeDb UI returned: $path"
+              exit 1
+            fi
+          done
+
+          stale_refs="$(grep -R -n -F 'UpgradeDb' game/oathbound --include='*.gd' --include='*.tscn' || true)"
+          if [[ -n "$stale_refs" ]]; then
+            printf '%s\n' "$stale_refs"
+            echo "FAIL: retired UpgradeDb reference remains in current Godot resources."
+            exit 1
+          fi
+          echo "PASS: no retired UpgradeDb UI or references"
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify Hushiro Archer deathblow contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroArcherDeathblowSmoke.tscn 2>&1 | tee hushiro-archer-deathblow.log
+          grep -F "[HushiroArcherDeathblowSmoke] PASS - 65/65 Posture -> deathblow -> enemy_died" hushiro-archer-deathblow.log
+          if grep -F "SCRIPT ERROR:" hushiro-archer-deathblow.log; then
+            echo "FAIL: Archer deathblow regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-archer-deathblow.log; then
+            echo "FAIL: Archer deathblow regression emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify combat lifecycle safety
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroCombatLifecycleSmoke.tscn 2>&1 | tee hushiro-combat-lifecycle.log
+          grep -F "[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred" hushiro-combat-lifecycle.log
+          if grep -F "SCRIPT ERROR:" hushiro-combat-lifecycle.log; then
+            echo "FAIL: combat lifecycle regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "Invalid access to property or key 'process_frame'" hushiro-combat-lifecycle.log; then
+            echo "FAIL: detached EncounterSpawner resumed against a null SceneTree."
+            exit 1
+          fi
+          if grep -F "Function blocked during in/out signal" hushiro-combat-lifecycle.log; then
+            echo "FAIL: SwordHitBox changed Area2D monitoring state during a physics signal."
+            exit 1
+          fi
+          if grep -F "Can't change this state while flushing queries" hushiro-combat-lifecycle.log; then
+            echo "FAIL: SwordHitBox changed collision state while physics queries were flushing."
+            exit 1
+          fi
+
+      - name: Upload regression logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hushiro-combat-regression-${{ github.run_id }}
+          path: |
+            hushiro-archer-deathblow.log
+            hushiro-combat-lifecycle.log
+          if-no-files-found: warn
+          retention-days: 7

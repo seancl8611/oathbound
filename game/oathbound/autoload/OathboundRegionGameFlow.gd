@@ -1,0 +1,85 @@
+extends "res://autoload/OathboundGameFlow.gd"
+
+## Region-aware debug/playtest ownership layered on the current Oathbound GameFlow.
+## Normal runs still use OathboundGameFlow's authored route progression. This layer
+## only changes debug warps so targeted tests use current regional authorities rather
+## than the imported RouteGenerator path for Region 2+.
+
+const EXPECTED_REGION_PLAYTEST_LAB_SCRIPT := "res://Core/Regions/OathboundRegionPlaytestLab.gd"
+
+
+func _assert_current_playtest_lab() -> void:
+	_assert_autoload_script("PlaytestLab", EXPECTED_REGION_PLAYTEST_LAB_SCRIPT, true)
+
+
+func _execute_debug_warp(area_id: int, room_token: String) -> void:
+	current_area = area_id
+	_awaiting_choice = false
+	_choice_slot = -1
+
+	if typeof(RunData) == TYPE_OBJECT:
+		RunData.reset_for_new_run(area_id)
+		RunData.current_area_id = area_id
+
+	if typeof(SceneRegistry) == TYPE_OBJECT and SceneRegistry.has_method("activate_area"):
+		SceneRegistry.call("activate_area", area_id)
+
+	# Critical difference from the imported debug warp: use the current regional
+	# route authority. Region 2 therefore uses YomoriRouteAuthority rather than the
+	# legacy generic RouteGenerator implementation.
+	build_route_for_area(area_id)
+
+	var requested_base := room_token.to_lower()
+	var target_index := -1
+
+	# Prefer a fixed/resolved slot already present in the authored route.
+	for i in range(route.size()):
+		var token := str(route[i])
+		if token.begins_with("CHOICE_"):
+			continue
+		if RouteGenerator.get_base_room_type(token).to_lower() == requested_base:
+			target_index = i
+			break
+
+	# Then inspect authored choice opportunities and resolve the requested option.
+	if target_index == -1:
+		for slot_value: Variant in RouteGenerator.pending_choices.keys():
+			var slot := int(slot_value)
+			var options_value: Variant = RouteGenerator.pending_choices.get(slot, [])
+			if not (options_value is Array):
+				continue
+			for option_value: Variant in options_value:
+				var option := str(option_value)
+				if RouteGenerator.get_base_room_type(option).to_lower() != requested_base:
+					continue
+				RouteGenerator.resolve_choice(slot, option)
+				if slot >= 0 and slot < route.size():
+					route[slot] = option
+					target_index = slot
+				break
+			if target_index != -1:
+				break
+
+	# Treasure is eligible but intentionally not guaranteed in Yomori. Other future
+	# authored regions can have similar optional room types. For a targeted debug
+	# test, load that current room authority directly instead of silently warping to
+	# an unrelated chamber.
+	if target_index == -1:
+		route = [requested_base]
+		target_index = 0
+		print("[OathboundGameFlow] DEBUG WARP direct isolated room: Area %d -> '%s'" % [area_id, requested_base])
+	else:
+		# Resolve unresolved choice slots before the target so route metadata remains
+		# coherent if the tester exits the isolated chamber and continues briefly.
+		for i in range(target_index + 1):
+			if not str(route[i]).begins_with("CHOICE_"):
+				continue
+			var slot := int(str(route[i]).split("_")[1])
+			var options := RouteGenerator.get_choice_options(slot)
+			if options.size() > 0:
+				RouteGenerator.resolve_choice(slot, str(options[0]))
+				route[i] = str(options[0])
+
+	current_index = target_index
+	_load_current_room()
+	print("[OathboundGameFlow] DEBUG WARP current authority: Area %d -> '%s' (index %d)" % [area_id, requested_base, target_index])
