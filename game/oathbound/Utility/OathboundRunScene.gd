@@ -2,7 +2,13 @@ extends "res://Utility/RunScene.gd"
 
 ## Current run-start integration layer. The imported RunScene owns route/choice UI
 ## compatibility, while this layer owns canonical Player creation, current regional
-## route authorities, release-shell safe-checkpoint resume, and failed-run closure.
+## route authorities, release-shell safe-checkpoint resume, failed-run closure, and the
+## approved read-only Pause / Build Overview.
+
+const PAUSE_OVERVIEW_SCRIPT = preload("res://Core/Release/OathboundPauseOverview.gd")
+
+var _pause_overview: CanvasLayer = null
+
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -57,6 +63,32 @@ func _ready() -> void:
 
 	print("[OathboundRunScene] starting run… area=%d" % GameFlow.current_area)
 	GameFlow.start_run()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("ui_cancel"):
+		return
+	if _choice_panel != null and is_instance_valid(_choice_panel) and _choice_panel.visible:
+		return
+	if _pause_overview != null and is_instance_valid(_pause_overview):
+		return
+	_open_pause_overview()
+	get_viewport().set_input_as_handled()
+
+
+func _open_pause_overview() -> void:
+	var overlay_value: Variant = PAUSE_OVERVIEW_SCRIPT.new()
+	if not (overlay_value is CanvasLayer):
+		push_error("[OathboundRunScene] Could not create Pause / Build Overview")
+		return
+	_pause_overview = overlay_value as CanvasLayer
+	_pause_overview.name = "PauseBuildOverview"
+	_pause_overview.closed.connect(_on_pause_overview_closed)
+	get_tree().root.add_child(_pause_overview)
+
+
+func _on_pause_overview_closed() -> void:
+	_pause_overview = null
 
 
 func _process(_delta: float) -> void:
