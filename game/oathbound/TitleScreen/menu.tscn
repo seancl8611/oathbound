@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://TitleScreen/menu.gd" id="1_release"]
+[ext_resource type="Script" path="res://TitleScreen/OathboundFrontEnd.gd" id="1_release"]
 
 [node name="OathboundFrontEnd" type="Control"]
 layout_mode = 3
