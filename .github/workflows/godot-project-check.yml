@@ -111,7 +111,7 @@ jobs:
           assert_log "current RelicRuntime" "relic_runtime script=res://Core/Relics/OathboundRelicRuntime.gd"
           assert_log "current CorruptionRuntime" "corruption_runtime script=res://Core/Corruption/OathboundCorruptionRuntime.gd"
           assert_log "current UpgradeService" "upgrade_service script=res://Core/Relics/OathboundUpgradeService.gd"
-          assert_log "current PlaytestLab" "playtest_lab script=res://Core/Corruption/OathboundCorruptionPlaytestLab.gd"
+          assert_log "current PlaytestLab" "playtest_lab script=res://Core/Regions/OathboundRegionPlaytestLab.gd"
           assert_log "Prosthetics Playtest tab" "[OathboundPlaytestLab] Prosthetics tab built with 8 tools"
           assert_log "Relics Playtest tab" "[OathboundPlaytestLab] Relics tab built with 10 relics"
           assert_log "Corruption Playtest tab" "[OathboundPlaytestLab] Corruption tab built"
