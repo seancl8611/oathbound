@@ -2,7 +2,7 @@ extends "res://Utility/RunScene.gd"
 
 ## Current run-start integration layer. The imported RunScene owns route/choice UI
 ## compatibility, while this layer owns canonical Player creation, current regional
-## route authorities, and release-shell safe-checkpoint resume.
+## route authorities, release-shell safe-checkpoint resume, and failed-run closure.
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -57,3 +57,18 @@ func _ready() -> void:
 
 	print("[OathboundRunScene] starting run… area=%d" % GameFlow.current_area)
 	GameFlow.start_run()
+
+
+func _process(_delta: float) -> void:
+	# Ordinary combat death may be handled by the imported Player scene transition
+	# rather than GameFlow._return_to_strand(). Close the run as soon as the canonical
+	# Player reaches zero HP. RecordsRuntime remembers whether this run began as the
+	# first attempt and presents the correct first-return result state.
+	if typeof(RecordsRuntime) != TYPE_OBJECT or not RecordsRuntime.is_run_active():
+		return
+	var active_player: Node = GameFlow.player if typeof(GameFlow) == TYPE_OBJECT else null
+	if active_player == null or not is_instance_valid(active_player):
+		return
+	var hp_value: Variant = active_player.get("hp")
+	if hp_value != null and int(hp_value) <= 0:
+		RecordsRuntime.on_run_finished(false, "failed")
