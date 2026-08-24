@@ -7,6 +7,8 @@ const DISCOVERY_BOARD_SCENE = preload("res://GUI/DiscoveryBoardMenu.tscn")
 const FORGE_SCENE = preload("res://GUI/ForgeMenu.tscn")
 const FRONT_END_SCENE = preload("res://TitleScreen/menu.tscn")
 const HUB_HUD_SCRIPT = preload("res://GUI/HubHUD.gd")
+const PAUSE_OVERVIEW_SCRIPT = preload("res://Core/Release/OathboundAccessiblePauseOverview.gd")
+const RUN_RESULTS_SCRIPT = preload("res://Core/Release/OathboundAccessibleRunResultsOverlay.gd")
 const THE_WELL_SCRIPT = preload("res://World/TheWell.gd")
 
 var _failed: bool = false
@@ -50,6 +52,15 @@ func _run() -> void:
 	translation.add_message(&"ui.front_end.settings", &"PARAMETRES TEST")
 	translation.add_message(&"ui.front_end.credits", &"CREDITS TEST")
 	translation.add_message(&"ui.front_end.quit", &"QUITTER TEST")
+	translation.add_message(&"ui.pause.title", &"PAUSE TEST")
+	translation.add_message(&"ui.pause.resume", &"REPRENDRE TEST")
+	translation.add_message(&"ui.pause.current_run", &"COURSE ACTUELLE TEST")
+	translation.add_message(&"ui.pause.run_resources", &"RESSOURCES COURSE TEST")
+	translation.add_message(&"ui.run_results.title.failed", &"FIN DE COURSE TEST")
+	translation.add_message(&"ui.run_results.section.permanent_progress", &"PROGRES PERMANENT TEST")
+	translation.add_message(&"ui.run_results.section.final_build", &"BUILD FINAL TEST")
+	translation.add_message(&"ui.run_results.label.time", &"TEMPS TEST")
+	translation.add_message(&"ui.run_results.return_strand", &"RETOUR STRAND TEST")
 	TranslationServer.add_translation(translation)
 	TranslationServer.set_locale("fr")
 	if typeof(SettingsManager) == TYPE_OBJECT:
@@ -64,6 +75,8 @@ func _run() -> void:
 	await _validate_discovery_surface()
 	await _validate_strand_wallet_surface()
 	await _validate_front_end_surface()
+	await _validate_pause_surface()
+	await _validate_run_results_surface()
 
 	if typeof(SettingsManager) == TYPE_OBJECT:
 		SettingsManager.set_value("instant_text", previous_instant)
@@ -74,7 +87,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback | Forge Scroll costs | Strand wallet | front end")
+	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback | Forge Scroll costs | Strand wallet | front end | Pause overview | Run Results")
 	get_tree().quit(0)
 
 
@@ -247,6 +260,62 @@ func _validate_front_end_surface() -> void:
 	_expect(_contains_text(texts, "QUITTER TEST"), "front-end Quit action did not resolve stable UI key")
 	front_end.queue_free()
 	await get_tree().process_frame
+
+
+func _validate_pause_surface() -> void:
+	var pause_value: Variant = PAUSE_OVERVIEW_SCRIPT.new()
+	_expect(pause_value is CanvasLayer, "Pause localization test could not instantiate release overlay")
+	if not (pause_value is CanvasLayer):
+		return
+	var pause_overlay: CanvasLayer = pause_value as CanvasLayer
+	add_child(pause_overlay)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var texts := _all_control_texts(pause_overlay)
+	_expect(_contains_text(texts, "PAUSE TEST"), "Pause title did not resolve stable UI key")
+	_expect(_contains_text(texts, "REPRENDRE TEST"), "Pause Resume action did not resolve stable UI key")
+	_expect(_contains_text(texts, "COURSE ACTUELLE TEST"), "Pause run-summary heading did not resolve stable UI key")
+	_expect(_contains_text(texts, "RESSOURCES COURSE TEST"), "Pause resources heading did not resolve stable UI key")
+	pause_overlay.call("_close")
+	await get_tree().process_frame
+	get_tree().paused = false
+
+
+func _validate_run_results_surface() -> void:
+	var result_value: Variant = RUN_RESULTS_SCRIPT.new()
+	_expect(result_value is CanvasLayer, "Run Results localization test could not instantiate release overlay")
+	if not (result_value is CanvasLayer):
+		return
+	var result_overlay: CanvasLayer = result_value as CanvasLayer
+	add_child(result_overlay)
+	result_overlay.call("present", {
+		"completion_kind": "failed",
+		"successful": false,
+		"clear_time_seconds": 61.0,
+		"area": 1,
+		"deepest_chamber_reached": 3,
+		"mist_gained": 4,
+		"scrolls_gained": 1,
+		"boss_materials_gained": {},
+		"aspect": "wolf",
+		"highest_tier": 1,
+		"equipped_prosthetic": "beast_whistle",
+		"equipped_relic": "",
+		"techniques": [],
+		"run_only_lost": ["Gold", "Techniques"],
+	})
+	await get_tree().process_frame
+	var texts := _all_control_texts(result_overlay)
+	_expect(_contains_text(texts, "FIN DE COURSE TEST"), "Run Results title did not resolve stable completion-kind key")
+	_expect(_contains_text(texts, "PROGRES PERMANENT TEST"), "Run Results permanent-progress section did not resolve stable UI key")
+	_expect(_contains_text(texts, "BUILD FINAL TEST"), "Run Results final-build section did not resolve stable UI key")
+	_expect(_contains_text(texts, "TEMPS TEST"), "Run Results line label did not resolve stable UI key")
+	_expect(_contains_text(texts, "Loup Test"), "Run Results Aspect did not resolve stable Aspect key")
+	_expect(_contains_text(texts, "SIFFLET TEST"), "Run Results Prosthetic did not resolve stable catalog ID")
+	_expect(_contains_text(texts, "RETOUR STRAND TEST"), "Run Results Strand-return action did not resolve stable UI key")
+	result_overlay.call("_dismiss")
+	await get_tree().process_frame
+	get_tree().paused = false
 
 
 func _label_texts(root: Node) -> Array[String]:
