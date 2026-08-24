@@ -2,7 +2,8 @@ extends Node
 
 ## Launch-facing settings/accessibility authority.
 ## ENDGAME_POSTGAME_RELEASE.md owns the required option categories. This runtime keeps
-## settings global across save slots and provides a reusable input-rebinding API.
+## settings global across save slots and provides reusable input, readability, VFX,
+## vibration, and controller-glyph APIs for current gameplay/presentation surfaces.
 
 signal settings_changed
 signal binding_changed(action: String)
@@ -10,6 +11,7 @@ signal binding_changed(action: String)
 const SAVE_PATH: String = "user://oathbound_settings.cfg"
 const SECTION: String = "settings"
 const BINDINGS_SECTION: String = "bindings"
+const BASE_FALLBACK_FONT_SIZE: int = 16
 
 const BINDABLE_ACTIONS: Array[String] = [
 	"up", "down", "left", "right",
@@ -42,6 +44,7 @@ var _custom_bindings: Dictionary = {}
 func _ready() -> void:
 	_load()
 	_apply_audio()
+	_apply_visual_readability()
 	_apply_bindings()
 
 
@@ -61,6 +64,8 @@ func set_value(key: String, value: Variant) -> bool:
 	_save()
 	if key.ends_with("_volume"):
 		_apply_audio()
+	if key in ["ui_scale", "text_scale"]:
+		_apply_visual_readability()
 	settings_changed.emit()
 	return true
 
@@ -70,6 +75,7 @@ func reset_defaults() -> void:
 	_custom_bindings.clear()
 	_save()
 	_apply_audio()
+	_apply_visual_readability()
 	_reset_bindings_to_project_defaults()
 	settings_changed.emit()
 
@@ -108,6 +114,15 @@ func get_binding_labels(action: String) -> Array[String]:
 	return labels
 
 
+func get_controller_glyph_label(action: String) -> String:
+	if not InputMap.has_action(action):
+		return ""
+	for event: InputEvent in InputMap.action_get_events(action):
+		if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+			return _event_label(event)
+	return ""
+
+
 func get_ui_scale() -> float:
 	return float(values.get("ui_scale", 1.0))
 
@@ -118,6 +133,34 @@ func get_text_scale() -> float:
 
 func should_show_damage_numbers() -> bool:
 	return bool(values.get("damage_numbers", true))
+
+
+func get_screen_shake_scale() -> float:
+	return float(values.get("screen_shake", 1.0))
+
+
+func should_reduce_flashing() -> bool:
+	return bool(values.get("reduced_flashing", false))
+
+
+func should_reduce_intense_vfx() -> bool:
+	return bool(values.get("reduced_intense_vfx", false))
+
+
+func is_high_contrast_enabled() -> bool:
+	return bool(values.get("high_contrast", false))
+
+
+func get_dialogue_text_speed() -> float:
+	return float(values.get("dialogue_text_speed", 1.0))
+
+
+func uses_instant_text() -> bool:
+	return bool(values.get("instant_text", false))
+
+
+func get_block_mode() -> String:
+	return str(values.get("block_mode", "hold"))
 
 
 func vibration_enabled() -> bool:
@@ -156,6 +199,13 @@ func _apply_bus(bus_name: String, linear: float) -> void:
 		return
 	AudioServer.set_bus_volume_db(index, linear_to_db(maxf(0.0001, linear)))
 	AudioServer.set_bus_mute(index, linear <= 0.0001)
+
+
+func _apply_visual_readability() -> void:
+	# Godot 4.7 ThemeDB fallbacks affect Controls that do not provide a more specific
+	# theme override. Explicit authored font sizes remain under their owning UI surface.
+	ThemeDB.fallback_base_scale = get_ui_scale()
+	ThemeDB.fallback_font_size = maxi(1, int(round(float(BASE_FALLBACK_FONT_SIZE) * get_text_scale())))
 
 
 func _save() -> void:
@@ -197,6 +247,7 @@ func _apply_action_binding(action: String) -> void:
 	var stored: Array = stored_value
 	if stored.is_empty():
 		return
+	# Keep project defaults for any device family the player has not overridden.
 	var overridden_families: Dictionary = {}
 	for encoded_value: Variant in stored:
 		if encoded_value is Dictionary:
@@ -215,6 +266,8 @@ func _apply_action_binding(action: String) -> void:
 
 
 func _reset_bindings_to_project_defaults() -> void:
+	# Project defaults are restored on the next launch after the custom binding section
+	# is cleared. During the current session, reload project.godot's InputMap settings.
 	for action: String in BINDABLE_ACTIONS:
 		if not InputMap.has_action(action):
 			continue
@@ -299,8 +352,29 @@ func _event_label(event: InputEvent) -> String:
 	if event is InputEventMouseButton:
 		return "Mouse %d" % int((event as InputEventMouseButton).button_index)
 	if event is InputEventJoypadButton:
-		return "Pad Button %d" % int((event as InputEventJoypadButton).button_index)
+		return _joy_button_glyph(int((event as InputEventJoypadButton).button_index))
 	if event is InputEventJoypadMotion:
 		var axis := event as InputEventJoypadMotion
-		return "Pad Axis %d %s" % [int(axis.axis), "+" if axis.axis_value > 0.0 else "-"]
+		return "[Axis %d %s]" % [int(axis.axis), "+" if axis.axis_value > 0.0 else "-"]
 	return event.as_text()
+
+
+func _joy_button_glyph(button_index: int) -> String:
+	var labels: Dictionary = {
+		0: "[A]",
+		1: "[B]",
+		2: "[X]",
+		3: "[Y]",
+		4: "[Back]",
+		5: "[Guide]",
+		6: "[Start]",
+		7: "[L3]",
+		8: "[R3]",
+		9: "[LB]",
+		10: "[RB]",
+		11: "[D-Pad Up]",
+		12: "[D-Pad Down]",
+		13: "[D-Pad Left]",
+		14: "[D-Pad Right]",
+	}
+	return str(labels.get(button_index, "[Pad %d]" % button_index))
