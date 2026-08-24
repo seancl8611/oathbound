@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bsvoqw8u0ifun"]
 
-[ext_resource type="Script" path="res://Enemy/Area 3/Encounter/hollow_vessel.gd" id="1_pakt6"]
+[ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.gd" id="1_pakt6"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_vtrjr"]
 [ext_resource type="Texture2D" uid="uid://c7poj351xa6xy" path="res://Textures/Enemy/corruptedden/corruptedden.png" id="3_3rb1h"]
 
