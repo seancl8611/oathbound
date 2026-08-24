@@ -195,9 +195,14 @@ func _build_settings_menu() -> void:
 	_add_slider(column, "Dialogue Speed", "dialogue_text_speed", 0.50, 2.0, 0.10)
 	_add_toggle(column, "Instant Text", "instant_text")
 
-	_add_section_label(column, "Controller")
+	_add_section_label(column, "Controller / Input Comfort")
 	_add_toggle(column, "Vibration", "vibration_enabled")
 	_add_slider(column, "Vibration Strength", "vibration_strength", 0.0, 1.0, 0.1)
+	if typeof(SettingsManager) == TYPE_OBJECT:
+		var block_mode := _menu_button("Block Input: %s" % SettingsManager.get_block_mode().capitalize())
+		block_mode.tooltip_text = "Hold keeps block active while the input is held. Toggle keeps block active until the input is pressed again."
+		block_mode.pressed.connect(_toggle_block_mode)
+		column.add_child(block_mode)
 
 	var controls := _menu_button("Controls / Rebinding")
 	controls.pressed.connect(_build_controls_menu)
@@ -205,6 +210,14 @@ func _build_settings_menu() -> void:
 	var back := _menu_button("Back")
 	back.pressed.connect(_build_main_menu)
 	column.add_child(back)
+
+
+func _toggle_block_mode() -> void:
+	if typeof(SettingsManager) != TYPE_OBJECT:
+		return
+	var current := SettingsManager.get_block_mode()
+	SettingsManager.set_value("block_mode", "toggle" if current == "hold" else "hold")
+	_build_settings_menu()
 
 
 func _build_controls_menu() -> void:
