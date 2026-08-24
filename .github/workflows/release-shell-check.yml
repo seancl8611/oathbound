@@ -15,11 +15,16 @@ on:
       - "game/oathbound/GUI/OathboundAccessibleDiscoveryBoardMenu.gd"
       - "game/oathbound/GUI/OathboundDialogueOverlay.gd"
       - "game/oathbound/GUI/OathboundAccessibleDialogueOverlay.gd"
+      - "game/oathbound/GUI/ForgeMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseForgeMenu.gd"
+      - "game/oathbound/GUI/ForgeMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
+      - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/World/Hub.gd"
+      - "game/oathbound/World/HubScene.tscn"
       - "game/oathbound/project.godot"
       - ".github/workflows/release-shell-check.yml"
   pull_request:
@@ -33,11 +38,16 @@ on:
       - "game/oathbound/GUI/OathboundAccessibleDiscoveryBoardMenu.gd"
       - "game/oathbound/GUI/OathboundDialogueOverlay.gd"
       - "game/oathbound/GUI/OathboundAccessibleDialogueOverlay.gd"
+      - "game/oathbound/GUI/ForgeMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseForgeMenu.gd"
+      - "game/oathbound/GUI/ForgeMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
+      - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/World/Hub.gd"
+      - "game/oathbound/World/HubScene.tscn"
       - "game/oathbound/project.godot"
       - ".github/workflows/release-shell-check.yml"
   workflow_dispatch:
@@ -120,7 +130,7 @@ jobs:
             exit 1
           fi
 
-      - name: Verify localization-ready dialogue path
+      - name: Verify localization-ready dialogue and Technique paths
         shell: bash
         run: |
           set -o pipefail
@@ -135,6 +145,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Strand prompt glyph switching
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/HubPromptGlyphSmoke.tscn 2>&1 | tee hub-prompt-glyph.log
+          grep -F "[HubPromptGlyphSmoke] PASS - keyboard [E] | controller [A] | live rebind [Y] | text-labelled prompts" hub-prompt-glyph.log
+          if grep -F "SCRIPT ERROR:" hub-prompt-glyph.log; then
+            echo "FAIL: Strand prompt glyph smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hub-prompt-glyph.log; then
+            echo "FAIL: Strand prompt glyph smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload release shell logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -146,5 +171,6 @@ jobs:
             dialogue-accessibility.log
             readability-strand-hud.log
             localization-readiness.log
+            hub-prompt-glyph.log
           if-no-files-found: warn
           retention-days: 7
