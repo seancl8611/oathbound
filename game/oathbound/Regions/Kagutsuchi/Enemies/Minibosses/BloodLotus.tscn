@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3]
 
-[ext_resource type="Script" path="res://Enemy/Area 3/Minibosses/blood_lotus_heart.gd" id="1_heart"]
+[ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotusHeart.gd" id="1_heart"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_hurt"]
 [ext_resource type="Script" path="res://Utility/CombatController.gd" id="3_combat"]
 [ext_resource type="PackedScene" path="res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotusStalk.tscn" id="4_stalk"]
