@@ -65,11 +65,28 @@ jobs:
             exit 1
           fi
 
-      - name: Upload release shell log
+      - name: Verify run-results presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/RunResultsOverlaySmoke.tscn 2>&1 | tee run-results-overlay.log
+          grep -F "[RunResultsOverlaySmoke] PASS - failed run summary | retained progress | final build | Strand return" run-results-overlay.log
+          if grep -F "SCRIPT ERROR:" run-results-overlay.log; then
+            echo "FAIL: run-results presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" run-results-overlay.log; then
+            echo "FAIL: run-results presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload release shell logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: release-shell-${{ github.run_id }}
-          path: release-shell-contract.log
+          path: |
+            release-shell-contract.log
+            run-results-overlay.log
           if-no-files-found: warn
           retention-days: 7
