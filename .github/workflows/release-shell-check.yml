@@ -21,9 +21,13 @@ on:
       - "game/oathbound/GUI/CodexMenu.gd"
       - "game/oathbound/GUI/OathboundReleaseCodexMenu.gd"
       - "game/oathbound/GUI/CodexMenu.tscn"
+      - "game/oathbound/GUI/MerchantMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseMerchantMenu.gd"
+      - "game/oathbound/GUI/MerchantMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/World/Hub.gd"
@@ -48,9 +52,13 @@ on:
       - "game/oathbound/GUI/CodexMenu.gd"
       - "game/oathbound/GUI/OathboundReleaseCodexMenu.gd"
       - "game/oathbound/GUI/CodexMenu.tscn"
+      - "game/oathbound/GUI/MerchantMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseMerchantMenu.gd"
+      - "game/oathbound/GUI/MerchantMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/World/Hub.gd"
@@ -168,6 +176,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Merchant release presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/MerchantReleasePresentationSmoke.tscn 2>&1 | tee merchant-release.log
+          grep -F "[MerchantReleasePresentationSmoke] PASS - localized Merchant shell | stable catalog IDs | High Contrast" merchant-release.log
+          if grep -F "SCRIPT ERROR:" merchant-release.log; then
+            echo "FAIL: Merchant release presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" merchant-release.log; then
+            echo "FAIL: Merchant release presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Strand prompt glyph switching
         shell: bash
         run: |
@@ -195,6 +218,7 @@ jobs:
             readability-strand-hud.log
             localization-readiness.log
             codex-release.log
+            merchant-release.log
             hub-prompt-glyph.log
           if-no-files-found: warn
           retention-days: 7
