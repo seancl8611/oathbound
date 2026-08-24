@@ -65,4 +65,5 @@ func _on_gate_used(_gate_type: String) -> void:
 		return
 	_used = true
 	if exit_gate != null and exit_gate.has_method("lock"):
-		exit_gate.call("lock")	handoff_completed.emit(outcome)
+		exit_gate.call("lock")
+	handoff_completed.emit(outcome)
