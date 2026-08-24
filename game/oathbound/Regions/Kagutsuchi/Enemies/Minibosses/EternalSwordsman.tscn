@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.gd" id="1_wrapper"]
+[ext_resource type="PackedScene" uid="uid://pcsqj8jlqd5j" path="res://Enemy/Area 3/Encounter/court_guard.tscn" id="2_swordsman"]
+
+[node name="EternalSwordsman" type="Node2D" groups=["miniboss"]]
+script = ExtResource("1_wrapper")
+
+[node name="Swordsman" parent="." instance=ExtResource("2_swordsman")]
