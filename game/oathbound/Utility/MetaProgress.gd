@@ -10,7 +10,8 @@ signal progression_changed
 signal campaign_changed
 signal returning_blood_awakened_changed(awakened: bool)
 
-const SAVE_PATH := "user://oathbound_meta_progress.cfg"
+const LEGACY_SAVE_PATH := "user://oathbound_meta_progress.cfg"
+const SLOT_FILE := "meta_progress.cfg"
 const SAVE_SECTION := "progress"
 
 const BOSS_MATERIAL_KEEPER := "keeper"
@@ -25,9 +26,6 @@ var boss_defeat_counts := {1: 0, 2: 0, 3: 0}
 var trainer_key_owned: bool = false
 var returning_blood_awakened: bool = false
 
-# Canonical campaign/postgame progression. The Court destroyed the original outer
-# Binding before play begins, so the tracked launch campaign contains exactly six
-# remaining Bindings. Destroyed Bindings cannot be spent, lost, or repeated.
 var heart_bindings_destroyed: int = 0
 var story_complete: bool = false
 var standard_expedition_clears: int = 0
@@ -41,8 +39,6 @@ var boss_materials: Dictionary = {
 	BOSS_MATERIAL_ECLIPSE_SHOGUN: 0,
 }
 
-# Canonical persistent Strand state. Values are intentionally generic identifiers so
-# station-specific runtimes remain the authority for what a node/claim actually does.
 var purchased_progression_nodes: Dictionary = {}
 var progression_flags: Dictionary = {}
 var blood_cavern_trial_completions: Dictionary = {}
@@ -50,6 +46,49 @@ var blood_cavern_trial_completions: Dictionary = {}
 
 func _ready() -> void:
 	_load_progress()
+
+
+func _save_path() -> String:
+	if typeof(SaveSlots) == TYPE_OBJECT and SaveSlots.has_method("get_slot_file"):
+		return str(SaveSlots.call("get_slot_file", SLOT_FILE))
+	return LEGACY_SAVE_PATH
+
+
+func reload_from_active_slot() -> void:
+	_reset_defaults()
+	_load_progress()
+	persistent_resources_changed.emit()
+	progression_changed.emit()
+	campaign_changed.emit()
+	returning_blood_awakened_changed.emit(returning_blood_awakened)
+	if typeof(RunData) == TYPE_OBJECT and RunData.has_method("sync_persistent_resources"):
+		RunData.call("sync_persistent_resources")
+
+
+func flush_save() -> void:
+	_save_progress()
+
+
+func _reset_defaults() -> void:
+	areas_unlocked = [1]
+	boss_clears = {1: false, 2: false, 3: false}
+	boss_defeat_counts = {1: 0, 2: 0, 3: 0}
+	trainer_key_owned = false
+	returning_blood_awakened = false
+	heart_bindings_destroyed = 0
+	story_complete = false
+	standard_expedition_clears = 0
+	heart_suppression_clears = 0
+	mist = 0
+	scrolls = 0
+	boss_materials = {
+		BOSS_MATERIAL_KEEPER: 0,
+		BOSS_MATERIAL_TWIN_MAWS: 0,
+		BOSS_MATERIAL_ECLIPSE_SHOGUN: 0,
+	}
+	purchased_progression_nodes.clear()
+	progression_flags.clear()
+	blood_cavern_trial_completions.clear()
 
 
 func unlock_area(id: int) -> void:
@@ -96,10 +135,6 @@ func is_returning_blood_awakened() -> bool:
 	return returning_blood_awakened
 
 
-# =============================================================================
-# HEART BINDING / STORY / POSTGAME CAMPAIGN STATE
-# =============================================================================
-
 func get_heart_bindings_destroyed() -> int:
 	return clampi(heart_bindings_destroyed, 0, TOTAL_HEART_BINDINGS)
 
@@ -129,8 +164,6 @@ func is_story_complete() -> bool:
 
 
 func mark_story_complete() -> bool:
-	# Story Complete is only valid after the six Binding campaign has already been
-	# exhausted. The Heart encounter runtime, not the Shogun, owns calling this.
 	if story_complete or get_heart_bindings_destroyed() < TOTAL_HEART_BINDINGS:
 		return false
 	story_complete = true
@@ -227,10 +260,6 @@ func spend_boss_material(material_key: String, amount: int = 1) -> bool:
 	return true
 
 
-# =============================================================================
-# STRAND / CAMPAIGN PERSISTENCE
-# =============================================================================
-
 func is_progression_node_owned(node_id: String) -> bool:
 	return bool(purchased_progression_nodes.get(node_id, false))
 
@@ -316,14 +345,14 @@ func _save_progress() -> void:
 	file.set_value(SAVE_SECTION, "purchased_progression_nodes", purchased_progression_nodes)
 	file.set_value(SAVE_SECTION, "progression_flags", progression_flags)
 	file.set_value(SAVE_SECTION, "blood_cavern_trial_completions", blood_cavern_trial_completions)
-	var err := file.save(SAVE_PATH)
+	var err := file.save(_save_path())
 	if err != OK:
 		push_warning("[MetaProgress] Could not save persistent progress: %s" % error_string(err))
 
 
 func _load_progress() -> void:
 	var file := ConfigFile.new()
-	if file.load(SAVE_PATH) != OK:
+	if file.load(_save_path()) != OK:
 		return
 
 	var loaded_areas = file.get_value(SAVE_SECTION, "areas_unlocked", areas_unlocked)
@@ -344,7 +373,6 @@ func _load_progress() -> void:
 	returning_blood_awakened = bool(file.get_value(SAVE_SECTION, "returning_blood_awakened", returning_blood_awakened))
 	heart_bindings_destroyed = clampi(int(file.get_value(SAVE_SECTION, "heart_bindings_destroyed", 0)), 0, TOTAL_HEART_BINDINGS)
 	story_complete = bool(file.get_value(SAVE_SECTION, "story_complete", false))
-	# Defensive migration: a Story Complete save necessarily exhausted all six Bindings.
 	if story_complete:
 		heart_bindings_destroyed = TOTAL_HEART_BINDINGS
 	standard_expedition_clears = maxi(0, int(file.get_value(SAVE_SECTION, "standard_expedition_clears", 0)))
