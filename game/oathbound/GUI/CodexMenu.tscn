@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://GUI/CodexMenu.gd" id="1_jwdun"]
+[ext_resource type="Script" path="res://GUI/OathboundReleaseCodexMenu.gd" id="1_jwdun"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
