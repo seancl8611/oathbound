@@ -1,6 +1,7 @@
 extends Node
 
 const ENDGAME_FLOW = preload("res://Core/Endgame/OathboundEndgameFlow.gd")
+const BOSS_CHAMBER_SCRIPT = preload("res://Core/Chambers/Types/BossChamber.gd")
 const HANDOFF_SCENE = preload("res://Core/Endgame/HeartHandoffChamber.tscn")
 const HEART_SHELL_SCENE = preload("res://Core/Endgame/HeartEncounterShell.tscn")
 
@@ -32,12 +33,13 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_snapshot_state()
 	_run_campaign_contract()
+	_run_shogun_reward_contract()
 	_run_recovery_contract()
 	await _run_scene_contract()
 	_restore_state()
 
 	if _failures.is_empty():
-		print("[EndgameCampaignContractSmoke] PASS - six Bindings | seventh Heart route | postgame goals | 30/50 recovery + 40/60 floors")
+		print("[EndgameCampaignContractSmoke] PASS - six Bindings | seventh Heart route | postgame goals | Shogun +25 Mist/material | 30/50 recovery + 40/60 floors")
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -55,6 +57,8 @@ func _snapshot_state() -> void:
 		"heart_suppression_clears": int(MetaProgress.heart_suppression_clears),
 		"boss_clears": MetaProgress.boss_clears.duplicate(true),
 		"boss_defeat_counts": MetaProgress.boss_defeat_counts.duplicate(true),
+		"mist": int(MetaProgress.mist),
+		"boss_materials": MetaProgress.boss_materials.duplicate(true),
 		"requested_run_goal": str(RunData.requested_run_goal),
 		"run_goal": str(RunData.run_goal),
 		"completion_kind": str(RunData.run_completion_kind),
@@ -69,9 +73,12 @@ func _restore_state() -> void:
 	MetaProgress.heart_suppression_clears = int(_snapshot.get("heart_suppression_clears", 0))
 	MetaProgress.boss_clears = (_snapshot.get("boss_clears", {}) as Dictionary).duplicate(true)
 	MetaProgress.boss_defeat_counts = (_snapshot.get("boss_defeat_counts", {}) as Dictionary).duplicate(true)
+	MetaProgress.mist = int(_snapshot.get("mist", 0))
+	MetaProgress.boss_materials = (_snapshot.get("boss_materials", {}) as Dictionary).duplicate(true)
 	RunData.requested_run_goal = str(_snapshot.get("requested_run_goal", ""))
 	RunData.run_goal = str(_snapshot.get("run_goal", RunData.RUN_GOAL_CAMPAIGN))
 	RunData.run_completion_kind = str(_snapshot.get("completion_kind", ""))
+	RunData.sync_persistent_resources()
 	# The smoke intentionally exercises persistence methods. Restore the caller's exact
 	# campaign state before exiting so a local validation run is save-safe.
 	if MetaProgress.has_method("_save_progress"):
@@ -126,6 +133,19 @@ func _run_campaign_contract() -> void:
 	_expect(RunData.request_run_goal(RunData.RUN_GOAL_HEART_SUPPRESSION), "Postgame Heart Suppression request was rejected")
 	RunData.reset_for_new_run(1)
 	_expect(RunData.get_run_goal() == RunData.RUN_GOAL_HEART_SUPPRESSION, "Requested postgame run goal did not survive RunData reset")
+
+
+func _run_shogun_reward_contract() -> void:
+	var mist_before := int(MetaProgress.mist)
+	var material_before := MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN)
+	var defeats_before := MetaProgress.get_boss_defeat_count(3)
+	var chamber := BOSS_CHAMBER_SCRIPT.new()
+	chamber.call("_grant_persistent_boss_rewards", 3)
+	_expect(int(MetaProgress.mist) == mist_before + 25, "Eclipse Shogun must award exactly 25 persistent Mist")
+	_expect(MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN) == material_before + 1, "Eclipse Shogun must award exactly one Shogun-specific boss material")
+	_expect(MetaProgress.get_boss_defeat_count(3) == defeats_before + 1, "Eclipse Shogun defeat count must increment exactly once")
+	_expect(int(RunData.mist) == int(MetaProgress.mist), "RunData persistent Mist mirror must sync after Shogun payout")
+	chamber.free()
 
 
 func _run_recovery_contract() -> void:
