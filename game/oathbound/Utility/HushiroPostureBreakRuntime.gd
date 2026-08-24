@@ -12,6 +12,8 @@ var combat: Node = null
 var enemy_type: String = ""
 var _break_active: bool = false
 var _deathblow_armed: bool = false
+var _break_elapsed: float = 0.0
+var _break_duration: float = 0.0
 var _break_started_at: float = -1.0
 var _break_ends_at: float = -1.0
 
@@ -49,7 +51,7 @@ func _on_shared_posture_broken(_duration_s: float) -> void:
 	_enter_break()
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if enemy == null or not is_instance_valid(enemy) or combat == null or not is_instance_valid(combat):
 		return
 
@@ -79,7 +81,11 @@ func _physics_process(_delta: float) -> void:
 	if enemy is CharacterBody2D:
 		(enemy as CharacterBody2D).velocity = Vector2.ZERO
 
-	if not _deathblow_armed and _now() >= _break_started_at + DEATHBLOW_ARM_DELAY:
+	# Gameplay timing must advance from the physics clock, not wall-clock milliseconds.
+	# Headless validation can process simulated frames faster than real time, and pausing
+	# or frame hitches should never make the readability beat nondeterministic.
+	_break_elapsed += maxf(0.0, delta)
+	if not _deathblow_armed and _break_elapsed >= DEATHBLOW_ARM_DELAY:
 		_arm_deathblow()
 
 	enemy.set_meta("_oathbound_deathblow_ready", _deathblow_armed)
@@ -123,12 +129,14 @@ func _enemy_is_alive() -> bool:
 func _enter_break() -> void:
 	_break_active = true
 	_deathblow_armed = false
+	_break_elapsed = 0.0
 	_break_started_at = _now()
-	var duration: float = 2.5
+	_break_duration = 2.5
 	var cfg: CombatConfig = _combat_config()
 	if cfg != null:
-		duration = float(cfg.posture_break_duration)
-	_break_ends_at = _break_started_at + maxf(duration, DEATHBLOW_ARM_DELAY + 0.05)
+		_break_duration = float(cfg.posture_break_duration)
+	_break_duration = maxf(_break_duration, DEATHBLOW_ARM_DELAY + 0.05)
+	_break_ends_at = _break_started_at + _break_duration
 
 	_clear_ready_marker()
 	_cancel_current_offense()
@@ -153,6 +161,8 @@ func _exit_break() -> void:
 	_clear_forwarded_target_if_owned()
 	if was_active:
 		_record("enemy_posture_break_exit")
+	_break_elapsed = 0.0
+	_break_duration = 0.0
 	_break_started_at = -1.0
 	_break_ends_at = -1.0
 
@@ -186,7 +196,7 @@ func _forward_deathblow_window() -> void:
 	var player_combat: Node = player.get_node_or_null("Combat")
 	if player_combat == null or not player_combat.has_method("set_deathblow_target"):
 		return
-	var remaining: float = maxf(0.05, _break_ends_at - _now())
+	var remaining: float = maxf(0.05, _break_duration - _break_elapsed)
 	player_combat.call("set_deathblow_target", enemy, remaining)
 
 
