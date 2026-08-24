@@ -29,6 +29,24 @@ func _ready() -> void:
 		enemy = get_parent()
 	if combat == null and enemy != null:
 		combat = enemy.get_node_or_null("Combat")
+	_bind_combat_signals()
+
+
+func _bind_combat_signals() -> void:
+	if combat == null or not combat.has_signal("posture_broken"):
+		return
+	var callback := Callable(self, "_on_shared_posture_broken")
+	if not combat.is_connected("posture_broken", callback):
+		combat.connect("posture_broken", callback)
+
+
+func _on_shared_posture_broken(_duration_s: float) -> void:
+	# CombatController emits posture_broken synchronously from add_posture(). Enter the
+	# real stagger in that same hit transaction instead of waiting for a later physics
+	# poll. The execution remains deliberately unavailable until DEATHBLOW_ARM_DELAY.
+	if _break_active or not _enemy_is_alive():
+		return
+	_enter_break()
 
 
 func _physics_process(_delta: float) -> void:
@@ -44,6 +62,9 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	var ready: bool = _is_shared_posture_broken()
+	# Signal entry is authoritative. This poll is retained as a recovery/debug fallback
+	# for tests, restores, or imported code that sets full Posture without emitting the
+	# CombatController posture_broken signal.
 	if ready and not _break_active:
 		_enter_break()
 	elif not ready and _break_active:
@@ -53,7 +74,7 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	# Parent enemy physics runs before this child component. Re-cancel every frame so
-	# no AI can begin a new attack in the same frame that it is posture-broken.
+	# no AI can begin a new attack while it is posture-broken.
 	_cancel_current_offense()
 	if enemy is CharacterBody2D:
 		(enemy as CharacterBody2D).velocity = Vector2.ZERO
@@ -193,7 +214,7 @@ func _play_break_animation_if_available() -> void:
 		animation = enemy.get_node_or_null("AnimationPlayer") as AnimationPlayer
 	if animation == null:
 		return
-	for animation_name: String in ["deathblow_ready", "posture_broken", "parried_recoil", "parried", "hurt"]:
+	for animation_name: String in ["posture_broken", "parried_recoil", "parried", "hurt", "deathblow_ready"]:
 		if animation.has_animation(animation_name):
 			animation.play(animation_name)
 			return
