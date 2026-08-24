@@ -10,6 +10,8 @@ extends HubInteractable
 signal run_started
 
 const ASPECT_IDS: Array[String] = ["wolf", "wraith", "ronin"]
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
+const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 
 var _aspect_menu: CanvasLayer = null
 var _goal_menu: CanvasLayer = null
@@ -84,20 +86,20 @@ func _open_aspect_menu() -> void:
 	margin.add_child(column)
 
 	var title := Label.new()
-	title.text = "Choose Blood Aspect"
+	title.text = LOCALIZATION.ui("well.aspect.title", "Choose Blood Aspect")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 20)
 	column.add_child(title)
 
 	var subtitle := Label.new()
-	subtitle.text = "Returning Blood is awake. Choose Akio's weapon foundation for this run."
+	subtitle.text = LOCALIZATION.ui("well.aspect.subtitle", "Returning Blood is awake. Choose Akio's weapon foundation for this run.")
 	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	column.add_child(subtitle)
 
 	for aspect_id: String in ASPECT_IDS:
 		var button := Button.new()
-		button.text = aspect_id.capitalize()
+		button.text = LOCALIZATION.resolve("aspect.%s.name" % aspect_id, aspect_id.capitalize())
 		button.custom_minimum_size = Vector2(0, 38)
 		button.pressed.connect(_select_aspect_for_departure.bind(aspect_id))
 		column.add_child(button)
@@ -105,21 +107,22 @@ func _open_aspect_menu() -> void:
 	var current_id: String = str(AspectRuntime.selected_aspect)
 	if current_id in ASPECT_IDS:
 		var current := Label.new()
-		current.text = "Current selection: %s" % current_id.capitalize()
+		current.text = LOCALIZATION.ui("well.aspect.current", "Current selection: %s") % LOCALIZATION.resolve("aspect.%s.name" % current_id, current_id.capitalize())
 		current.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		column.add_child(current)
 
 	if _story_complete():
 		var postgame_hint := Label.new()
-		postgame_hint.text = "After choosing an Aspect, select Standard Expedition or Heart Suppression."
+		postgame_hint.text = LOCALIZATION.ui("well.aspect.postgame_hint", "After choosing an Aspect, select Standard Expedition or Heart Suppression.")
 		postgame_hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		postgame_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		column.add_child(postgame_hint)
 
 	var cancel := Button.new()
-	cancel.text = "Cancel"
+	cancel.text = LOCALIZATION.ui("common.cancel", "Cancel")
 	cancel.pressed.connect(_cancel_departure_menu)
 	column.add_child(cancel)
+	READABILITY_STYLER.apply(_aspect_menu)
 
 
 func _select_aspect_for_departure(aspect_id: String) -> void:
@@ -173,33 +176,40 @@ func _open_run_goal_menu() -> void:
 	margin.add_child(column)
 
 	var title := Label.new()
-	title.text = "Choose Expedition Goal"
+	title.text = LOCALIZATION.ui("well.goal.title", "Choose Expedition Goal")
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 20)
 	column.add_child(title)
 
 	var standard := Button.new()
-	standard.text = "Standard Expedition\nEnd after the Eclipse Shogun"
+	standard.text = "%s\n%s" % [
+		LOCALIZATION.ui("well.goal.standard.name", "Standard Expedition"),
+		LOCALIZATION.ui("well.goal.standard.details", "End after the Eclipse Shogun"),
+	]
 	standard.custom_minimum_size = Vector2(0, 56)
 	standard.pressed.connect(_select_run_goal_and_start.bind(RunData.RUN_GOAL_STANDARD_EXPEDITION))
 	column.add_child(standard)
 
 	var suppression := Button.new()
-	suppression.text = "Heart Suppression\nContinue from the Shogun into the regenerated Heart"
+	suppression.text = "%s\n%s" % [
+		LOCALIZATION.ui("well.goal.suppression.name", "Heart Suppression"),
+		LOCALIZATION.ui("well.goal.suppression.details", "Continue from the Shogun into the regenerated Heart"),
+	]
 	suppression.custom_minimum_size = Vector2(0, 64)
 	suppression.pressed.connect(_select_run_goal_and_start.bind(RunData.RUN_GOAL_HEART_SUPPRESSION))
 	column.add_child(suppression)
 
 	var note := Label.new()
-	note.text = "The route goal is committed before departure. Both objectives use the same three-region run until the Shogun."
+	note.text = LOCALIZATION.ui("well.goal.note", "The route goal is committed before departure. Both objectives use the same three-region run until the Shogun.")
 	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	column.add_child(note)
 
 	var back := Button.new()
-	back.text = "Back"
+	back.text = LOCALIZATION.ui("common.back", "Back")
 	back.pressed.connect(_back_to_aspect_menu)
 	column.add_child(back)
+	READABILITY_STYLER.apply(_goal_menu)
 
 
 func _select_run_goal_and_start(goal: String) -> void:
