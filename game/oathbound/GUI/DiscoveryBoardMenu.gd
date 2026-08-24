@@ -4,6 +4,7 @@ signal menu_closed
 signal codex_requested
 
 const Catalog = preload("res://Core/Presentation/OathboundPresentationCatalog.gd")
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 
 const COMPLETION_LABELS: Dictionary = {
 	"story": "Story Complete",
@@ -82,22 +83,22 @@ func _build_ui() -> void:
 	var title_row := HBoxContainer.new()
 	root.add_child(title_row)
 	var title := Label.new()
-	title.text = tr("DISCOVERY BOARD")
+	title.text = LOCALIZATION.ui("discovery.title", "DISCOVERY BOARD")
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title.add_theme_font_size_override("font_size", 18)
 	title_row.add_child(title)
 	var close := Button.new()
-	close.text = tr("Close")
+	close.text = LOCALIZATION.ui("common.close", "Close")
 	close.pressed.connect(_close)
 	title_row.add_child(close)
 
 	var tabs := HBoxContainer.new()
 	root.add_child(tabs)
-	_add_tab_button(tabs, "Records", "records")
-	_add_tab_button(tabs, "Help", "help")
-	_add_tab_button(tabs, "Achievements", "achievements")
+	_add_tab_button(tabs, LOCALIZATION.ui("discovery.tab.records", "Records"), "records")
+	_add_tab_button(tabs, LOCALIZATION.ui("discovery.tab.help", "Help"), "help")
+	_add_tab_button(tabs, LOCALIZATION.ui("discovery.tab.achievements", "Achievements"), "achievements")
 	var codex := Button.new()
-	codex.text = tr("Bestiary / Equipment")
+	codex.text = LOCALIZATION.ui("discovery.tab.codex", "Bestiary / Equipment")
 	codex.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	codex.pressed.connect(_request_codex)
 	tabs.add_child(codex)
@@ -124,7 +125,7 @@ func _build_ui() -> void:
 
 func _add_tab_button(parent: HBoxContainer, label: String, tab_id: String) -> void:
 	var button := Button.new()
-	button.text = tr(label)
+	button.text = label
 	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	button.pressed.connect(_select_tab.bind(tab_id))
 	parent.add_child(button)
@@ -150,14 +151,14 @@ func _show_records() -> void:
 		RecordsRuntime.recalculate_completion()
 
 	var run_records := Button.new()
-	run_records.text = tr("Run Records")
+	run_records.text = LOCALIZATION.ui("discovery.records.run_records", "Run Records")
 	run_records.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	run_records.pressed.connect(_show_run_records)
 	_content.add_child(run_records)
 
 	var completion := Button.new()
 	var percent := int(RecordsRuntime.get_completion_percent()) if typeof(RecordsRuntime) == TYPE_OBJECT else 0
-	completion.text = "%s — %d%%" % [tr("100% Completion"), percent]
+	completion.text = "%s — %d%%" % [LOCALIZATION.ui("discovery.records.completion", "100% Completion"), percent]
 	completion.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	completion.pressed.connect(_show_completion)
 	_content.add_child(completion)
@@ -165,7 +166,7 @@ func _show_records() -> void:
 	var divider := HSeparator.new()
 	_content.add_child(divider)
 	var discovery_heading := Label.new()
-	discovery_heading.text = tr("Discovery Records")
+	discovery_heading.text = LOCALIZATION.ui("discovery.records.discovery_records", "Discovery Records")
 	discovery_heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	discovery_heading.add_theme_font_size_override("font_size", 13)
 	_content.add_child(discovery_heading)
@@ -174,7 +175,7 @@ func _show_records() -> void:
 		var record_id := str(record.get("id", ""))
 		var unlocked := NarrativeRuntime.is_lore_unlocked(record_id)
 		var button := Button.new()
-		button.text = str(record.get("title", "")) if unlocked else "???"
+		button.text = _catalog_name("lore", record_id, str(record.get("title", ""))) if unlocked else "???"
 		button.disabled = not unlocked
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		if unlocked:
@@ -186,7 +187,7 @@ func _show_records() -> void:
 
 func _show_run_records() -> void:
 	if typeof(RecordsRuntime) != TYPE_OBJECT:
-		_detail.text = tr("Run records are unavailable.")
+		_detail.text = LOCALIZATION.ui("discovery.records.unavailable", "Run records are unavailable.")
 		return
 	var records: Dictionary = RecordsRuntime.get_records_snapshot()
 	var boss_counts_value: Variant = records.get("boss_defeat_counts", {})
@@ -196,38 +197,38 @@ func _show_run_records() -> void:
 	var story_recorded := bool(records.get("first_heart_victory", false))
 
 	_detail.text = "[font_size=20]%s[/font_size]\n[color=gray]%s[/color]\n\n" % [
-		tr("Run Records"),
-		tr("Persistent mastery records for this save slot."),
+		LOCALIZATION.ui("discovery.records.run_records", "Run Records"),
+		LOCALIZATION.ui("discovery.records.subtitle", "Persistent mastery records for this save slot."),
 	]
-	_detail.text += "%s: %d\n" % [tr("Total Attempts"), int(records.get("total_attempts", 0))]
-	_detail.text += "%s: %d\n" % [tr("Standard Expedition Clears"), int(records.get("standard_expedition_clears", 0))]
-	_detail.text += "%s: %d\n" % [tr("Heart Suppression Clears"), int(records.get("heart_suppression_clears", 0))]
-	_detail.text += "%s: %s\n" % [tr("Fastest Standard Expedition"), _format_record_time(float(records.get("fastest_standard_seconds", 0.0)))]
-	_detail.text += "%s: %s\n\n" % [tr("Fastest Heart Suppression"), _format_record_time(float(records.get("fastest_suppression_seconds", 0.0)))]
-	_detail.text += "%s\n" % tr("Heart Victories")
-	_detail.text += "  Wolf: %s\n" % _record_mark(bool(records.get("heart_wolf", false)))
-	_detail.text += "  Wraith: %s\n" % _record_mark(bool(records.get("heart_wraith", false)))
-	_detail.text += "  Ronin: %s\n\n" % _record_mark(bool(records.get("heart_ronin", false)))
-	_detail.text += "%s\n" % tr("Regional Boss Defeats")
-	_detail.text += "  Keeper: %d\n" % _boss_count(boss_counts, 1)
-	_detail.text += "  Twin Maws: %d\n" % _boss_count(boss_counts, 2)
-	_detail.text += "  Eclipse Shogun: %d\n" % _boss_count(boss_counts, 3)
-	_detail.text += "%s: %d\n\n" % [tr("Miniboss Defeats"), int(records.get("miniboss_defeats", 0))]
-	_detail.text += "%s: %s\n" % [tr("Deepest First-Attempt Chamber"), first_depth_text]
-	_detail.text += "%s: %s\n" % [tr("First Canonical Heart Victory"), tr("Recorded") if story_recorded else tr("Not Yet")]
-	_detail.text += "%s: %d%%" % [tr("Overall Completion"), int(records.get("completion_percent", 0))]
+	_detail.text += "%s: %d\n" % [LOCALIZATION.ui("records.total_attempts", "Total Attempts"), int(records.get("total_attempts", 0))]
+	_detail.text += "%s: %d\n" % [LOCALIZATION.ui("records.standard_clears", "Standard Expedition Clears"), int(records.get("standard_expedition_clears", 0))]
+	_detail.text += "%s: %d\n" % [LOCALIZATION.ui("records.suppression_clears", "Heart Suppression Clears"), int(records.get("heart_suppression_clears", 0))]
+	_detail.text += "%s: %s\n" % [LOCALIZATION.ui("records.fastest_standard", "Fastest Standard Expedition"), _format_record_time(float(records.get("fastest_standard_seconds", 0.0)))]
+	_detail.text += "%s: %s\n\n" % [LOCALIZATION.ui("records.fastest_suppression", "Fastest Heart Suppression"), _format_record_time(float(records.get("fastest_suppression_seconds", 0.0)))]
+	_detail.text += "%s\n" % LOCALIZATION.ui("records.heart_victories", "Heart Victories")
+	_detail.text += "  %s: %s\n" % [LOCALIZATION.resolve("aspect.wolf.name", "Wolf"), _record_mark(bool(records.get("heart_wolf", false)))]
+	_detail.text += "  %s: %s\n" % [LOCALIZATION.resolve("aspect.wraith.name", "Wraith"), _record_mark(bool(records.get("heart_wraith", false)))]
+	_detail.text += "  %s: %s\n\n" % [LOCALIZATION.resolve("aspect.ronin.name", "Ronin"), _record_mark(bool(records.get("heart_ronin", false)))]
+	_detail.text += "%s\n" % LOCALIZATION.ui("records.regional_boss_defeats", "Regional Boss Defeats")
+	_detail.text += "  %s: %d\n" % [LOCALIZATION.resolve("boss.keeper.name", "Keeper"), _boss_count(boss_counts, 1)]
+	_detail.text += "  %s: %d\n" % [LOCALIZATION.resolve("boss.twin_maws.name", "Twin Maws"), _boss_count(boss_counts, 2)]
+	_detail.text += "  %s: %d\n" % [LOCALIZATION.resolve("boss.eclipse_shogun.name", "Eclipse Shogun"), _boss_count(boss_counts, 3)]
+	_detail.text += "%s: %d\n\n" % [LOCALIZATION.ui("records.miniboss_defeats", "Miniboss Defeats"), int(records.get("miniboss_defeats", 0))]
+	_detail.text += "%s: %s\n" % [LOCALIZATION.ui("records.deepest_first_attempt", "Deepest First-Attempt Chamber"), first_depth_text]
+	_detail.text += "%s: %s\n" % [LOCALIZATION.ui("records.first_heart_victory", "First Canonical Heart Victory"), LOCALIZATION.ui("status.recorded", "Recorded") if story_recorded else LOCALIZATION.ui("status.not_yet", "Not Yet")]
+	_detail.text += "%s: %d%%" % [LOCALIZATION.ui("records.overall_completion", "Overall Completion"), int(records.get("completion_percent", 0))]
 
 
 func _show_completion() -> void:
 	if typeof(RecordsRuntime) != TYPE_OBJECT:
-		_detail.text = tr("Completion records are unavailable.")
+		_detail.text = LOCALIZATION.ui("discovery.completion.unavailable", "Completion records are unavailable.")
 		return
 	var percent := int(RecordsRuntime.recalculate_completion())
 	var breakdown: Dictionary = RecordsRuntime.get_completion_breakdown()
 	_detail.text = "[font_size=20]%s — %d%%[/font_size]\n[color=gray]%s[/color]\n\n" % [
-		tr("100% Completion"),
+		LOCALIZATION.ui("discovery.records.completion", "100% Completion"),
 		percent,
-		tr("Launch completion uses authored progression, collection, trial, Discovery, and Heart-mastery goals."),
+		LOCALIZATION.ui("discovery.completion.subtitle", "Launch completion uses authored progression, collection, trial, Discovery, and Heart-mastery goals."),
 	]
 	for key: String in COMPLETION_ORDER:
 		var value: Variant = breakdown.get(key, {})
@@ -237,17 +238,22 @@ func _show_completion() -> void:
 		var owned := maxi(0, int(entry.get("owned", 0)))
 		var total := maxi(0, int(entry.get("total", 0)))
 		var complete := total == 0 or owned >= total
-		var label := tr(str(COMPLETION_LABELS.get(key, key.capitalize())))
+		var fallback_label := str(COMPLETION_LABELS.get(key, key.capitalize()))
+		var label := LOCALIZATION.resolve("completion.%s.name" % key, fallback_label)
 		_detail.text += "%s %s: %d / %d\n" % [_record_mark(complete), label, owned, total]
 
-	_detail.text += "\n[color=gray]%s[/color]" % tr("Currency hoarding, extreme speedrun records, no-hit clears, and repeated-clear grind are not required for 100%.")
+	_detail.text += "\n[color=gray]%s[/color]" % LOCALIZATION.ui("discovery.completion.exclusions", "Currency hoarding, extreme speedrun records, no-hit clears, and repeated-clear grind are not required for 100%.")
 
 
 func _show_record(record_id: String) -> void:
 	var record := NarrativeRuntime.get_lore_record(record_id)
 	if record.is_empty():
 		return
-	_detail.text = "[font_size=20]%s[/font_size]\n[color=gray]%s[/color]\n\n%s" % [str(record.get("title", "")), str(record.get("category", "")), str(record.get("body", ""))]
+	_detail.text = "[font_size=20]%s[/font_size]\n[color=gray]%s[/color]\n\n%s" % [
+		_catalog_name("lore", record_id, str(record.get("title", ""))),
+		LOCALIZATION.resolve("catalog.lore.%s.category" % record_id, str(record.get("category", ""))),
+		LOCALIZATION.catalog_details("lore", record_id, str(record.get("body", ""))),
+	]
 
 
 func _show_help() -> void:
@@ -256,7 +262,7 @@ func _show_help() -> void:
 	for topic in topics:
 		var topic_id := str(topic.get("id", ""))
 		var button := Button.new()
-		button.text = str(topic.get("title", ""))
+		button.text = _catalog_name("help", topic_id, str(topic.get("title", "")))
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.pressed.connect(_show_help_topic.bind(topic_id))
 		_content.add_child(button)
@@ -268,7 +274,10 @@ func _show_help_topic(topic_id: String) -> void:
 	for topic in Catalog.help_topics():
 		if str(topic.get("id", "")) != topic_id:
 			continue
-		_detail.text = "[font_size=20]%s[/font_size]\n\n%s" % [str(topic.get("title", "")), str(topic.get("body", ""))]
+		_detail.text = "[font_size=20]%s[/font_size]\n\n%s" % [
+			_catalog_name("help", topic_id, str(topic.get("title", ""))),
+			LOCALIZATION.catalog_details("help", topic_id, str(topic.get("body", ""))),
+		]
 		return
 
 
@@ -276,12 +285,17 @@ func _show_achievements() -> void:
 	_clear()
 	var unlocked := AchievementRuntime.get_unlocked_count()
 	var total := Catalog.achievements().size()
-	_detail.text = "[font_size=18]%s[/font_size]\n%d / %d %s" % [tr("Achievements"), unlocked, total, tr("unlocked")]
+	_detail.text = "[font_size=18]%s[/font_size]\n%d / %d %s" % [
+		LOCALIZATION.ui("discovery.tab.achievements", "Achievements"),
+		unlocked,
+		total,
+		LOCALIZATION.ui("status.unlocked_lower", "unlocked"),
+	]
 	for achievement in Catalog.achievements():
 		var achievement_id := str(achievement.get("id", ""))
 		var is_unlocked := AchievementRuntime.is_unlocked(achievement_id)
 		var button := Button.new()
-		button.text = ("✓ " if is_unlocked else "□ ") + str(achievement.get("name", ""))
+		button.text = ("✓ " if is_unlocked else "□ ") + _catalog_name("achievement", achievement_id, str(achievement.get("name", "")))
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.pressed.connect(_show_achievement.bind(achievement_id))
 		_content.add_child(button)
@@ -291,9 +305,17 @@ func _show_achievement(achievement_id: String) -> void:
 	for achievement in Catalog.achievements():
 		if str(achievement.get("id", "")) != achievement_id:
 			continue
-		var status := tr("UNLOCKED") if AchievementRuntime.is_unlocked(achievement_id) else tr("LOCKED")
-		_detail.text = "[font_size=20]%s[/font_size]\n[color=gray]%s[/color]\n\n%s" % [str(achievement.get("name", "")), status, str(achievement.get("description", ""))]
+		var status := LOCALIZATION.ui("status.unlocked", "UNLOCKED") if AchievementRuntime.is_unlocked(achievement_id) else LOCALIZATION.ui("status.locked", "LOCKED")
+		_detail.text = "[font_size=20]%s[/font_size]\n[color=gray]%s[/color]\n\n%s" % [
+			_catalog_name("achievement", achievement_id, str(achievement.get("name", ""))),
+			status,
+			LOCALIZATION.catalog_details("achievement", achievement_id, str(achievement.get("description", ""))),
+		]
 		return
+
+
+func _catalog_name(category: String, stable_id: String, fallback: String) -> String:
+	return LOCALIZATION.catalog_name(category, stable_id, fallback)
 
 
 func _format_record_time(seconds: float) -> String:
