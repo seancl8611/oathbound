@@ -39,13 +39,33 @@ const DEFAULTS: Dictionary = {
 
 var values: Dictionary = DEFAULTS.duplicate(true)
 var _custom_bindings: Dictionary = {}
+var _block_toggle_latched: bool = false
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_load()
 	_apply_audio()
 	_apply_visual_readability()
 	_apply_bindings()
+
+
+func _input(event: InputEvent) -> void:
+	if get_block_mode() != "toggle":
+		return
+	if event is InputEventKey and (event as InputEventKey).echo:
+		return
+	if not event.is_action_pressed("parry"):
+		return
+
+	# The current combat controller already treats a held parry action as the block
+	# state. Toggle mode therefore latches the same canonical action instead of adding
+	# a second block action or changing combat timing rules.
+	_block_toggle_latched = not _block_toggle_latched
+	if _block_toggle_latched:
+		Input.action_press("parry")
+	else:
+		Input.action_release("parry")
 
 
 func get_value(key: String, fallback: Variant = null) -> Variant:
@@ -61,6 +81,8 @@ func set_value(key: String, value: Variant) -> bool:
 	if values.get(key) == normalized:
 		return true
 	values[key] = normalized
+	if key == "block_mode" and str(normalized) != "toggle":
+		_clear_block_toggle_latch()
 	_save()
 	if key.ends_with("_volume"):
 		_apply_audio()
@@ -71,6 +93,7 @@ func set_value(key: String, value: Variant) -> bool:
 
 
 func reset_defaults() -> void:
+	_clear_block_toggle_latch()
 	values = DEFAULTS.duplicate(true)
 	_custom_bindings.clear()
 	_save()
@@ -169,6 +192,12 @@ func vibration_enabled() -> bool:
 
 func get_vibration_strength() -> float:
 	return float(values.get("vibration_strength", 1.0))
+
+
+func _clear_block_toggle_latch() -> void:
+	if _block_toggle_latched:
+		Input.action_release("parry")
+	_block_toggle_latched = false
 
 
 func _normalize_setting(key: String, value: Variant) -> Variant:
