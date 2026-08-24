@@ -1,14 +1,19 @@
 extends Node
 
 ## Runtime component attached by HushiroEnemyContract to every current Hushiro
-## standard enemy. It turns a full shared CombatController posture meter into an
-## explicit, observable Deathblow-ready state and prevents ordinary AI movement or
-## attack commitment from visually overriding that break window.
+## standard enemy. A full shared CombatController posture meter now enters a real
+## stagger first, then arms the Deathblow after a short readability beat. This keeps
+## the posture-break cue and the execution cue mechanically distinct.
+
+const DEATHBLOW_ARM_DELAY: float = 0.20
 
 var enemy: Node = null
 var combat: Node = null
 var enemy_type: String = ""
 var _break_active: bool = false
+var _deathblow_armed: bool = false
+var _break_started_at: float = -1.0
+var _break_ends_at: float = -1.0
 
 
 func configure(owner_enemy: Node, type_id: String) -> void:
@@ -30,18 +35,37 @@ func _physics_process(_delta: float) -> void:
 	if enemy == null or not is_instance_valid(enemy) or combat == null or not is_instance_valid(combat):
 		return
 
+	if not _enemy_is_alive():
+		if _break_active:
+			_exit_break()
+		else:
+			_clear_ready_marker()
+		_clear_forwarded_target_if_owned()
+		return
+
 	var ready: bool = _is_shared_posture_broken()
 	if ready and not _break_active:
 		_enter_break()
 	elif not ready and _break_active:
 		_exit_break()
 
-	if ready:
-		# Parent enemy physics runs before this child component. Zeroing velocity here
-		# ensures a broken enemy cannot continue a chase/lunge after its own AI update.
-		if enemy is CharacterBody2D:
-			(enemy as CharacterBody2D).velocity = Vector2.ZERO
-		enemy.set_meta("_oathbound_deathblow_ready", true)
+	if not ready:
+		return
+
+	# Parent enemy physics runs before this child component. Re-cancel every frame so
+	# no AI can begin a new attack in the same frame that it is posture-broken.
+	_cancel_current_offense()
+	if enemy is CharacterBody2D:
+		(enemy as CharacterBody2D).velocity = Vector2.ZERO
+
+	if not _deathblow_armed and _now() >= _break_started_at + DEATHBLOW_ARM_DELAY:
+		_arm_deathblow()
+
+	enemy.set_meta("_oathbound_deathblow_ready", _deathblow_armed)
+
+
+func _now() -> float:
+	return Time.get_ticks_msec() * 0.001
 
 
 func _combat_config() -> CombatConfig:
@@ -51,6 +75,8 @@ func _combat_config() -> CombatConfig:
 
 
 func _is_shared_posture_broken() -> bool:
+	if not _enemy_is_alive():
+		return false
 	if combat == null or not combat.has_method("get_posture"):
 		return false
 	var cfg: CombatConfig = _combat_config()
@@ -61,20 +87,58 @@ func _is_shared_posture_broken() -> bool:
 	return maximum > 0.0 and current >= maximum - 0.001
 
 
+func _enemy_is_alive() -> bool:
+	if enemy == null or not is_instance_valid(enemy) or enemy.is_queued_for_deletion():
+		return false
+	if _has_property(enemy, "has_died") and bool(enemy.get("has_died")):
+		return false
+	# This runtime is attached only to standard Hushiro enemies. Unlike bosses, they do
+	# not intentionally remain executable at zero Health.
+	if _has_property(enemy, "hp") and float(enemy.get("hp")) <= 0.0:
+		return false
+	return true
+
+
 func _enter_break() -> void:
 	_break_active = true
-	enemy.set_meta("_oathbound_deathblow_ready", true)
+	_deathblow_armed = false
+	_break_started_at = _now()
+	var duration: float = 2.5
+	var cfg: CombatConfig = _combat_config()
+	if cfg != null:
+		duration = float(cfg.posture_break_duration)
+	_break_ends_at = _break_started_at + maxf(duration, DEATHBLOW_ARM_DELAY + 0.05)
+
+	_clear_ready_marker()
 	_cancel_current_offense()
-	_forward_deathblow_window()
 	_play_break_animation_if_available()
 	_record("enemy_posture_break_enter")
 
 
+func _arm_deathblow() -> void:
+	if not _break_active or _deathblow_armed or not _enemy_is_alive():
+		return
+	_deathblow_armed = true
+	enemy.set_meta("_oathbound_deathblow_ready", true)
+	_forward_deathblow_window()
+	_record("enemy_deathblow_armed")
+
+
 func _exit_break() -> void:
+	var was_active: bool = _break_active
 	_break_active = false
+	_deathblow_armed = false
+	_clear_ready_marker()
+	_clear_forwarded_target_if_owned()
+	if was_active:
+		_record("enemy_posture_break_exit")
+	_break_started_at = -1.0
+	_break_ends_at = -1.0
+
+
+func _clear_ready_marker() -> void:
 	if enemy != null and is_instance_valid(enemy):
 		enemy.set_meta("_oathbound_deathblow_ready", false)
-	_record("enemy_posture_break_exit")
 
 
 func _cancel_current_offense() -> void:
@@ -101,11 +165,22 @@ func _forward_deathblow_window() -> void:
 	var player_combat: Node = player.get_node_or_null("Combat")
 	if player_combat == null or not player_combat.has_method("set_deathblow_target"):
 		return
-	var duration: float = 2.5
-	var cfg: CombatConfig = _combat_config()
-	if cfg != null:
-		duration = float(cfg.posture_break_duration)
-	player_combat.call("set_deathblow_target", enemy, duration)
+	var remaining: float = maxf(0.05, _break_ends_at - _now())
+	player_combat.call("set_deathblow_target", enemy, remaining)
+
+
+func _clear_forwarded_target_if_owned() -> void:
+	var player: Node = get_tree().get_first_node_in_group("player")
+	if player == null or not is_instance_valid(player):
+		return
+	var player_combat: Node = player.get_node_or_null("Combat")
+	if player_combat == null:
+		return
+	if not player_combat.has_method("get_deathblow_target") or not player_combat.has_method("set_deathblow_target"):
+		return
+	var current: Node = player_combat.call("get_deathblow_target")
+	if current == enemy:
+		player_combat.call("set_deathblow_target", null, 0.0)
 
 
 func _play_break_animation_if_available() -> void:
@@ -124,6 +199,18 @@ func _play_break_animation_if_available() -> void:
 			return
 
 
+func is_break_active() -> bool:
+	return _break_active
+
+
+func is_deathblow_armed() -> bool:
+	return _break_active and _deathblow_armed and _enemy_is_alive()
+
+
+func get_break_ends_at() -> float:
+	return _break_ends_at
+
+
 func _record(event_name: String) -> void:
 	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
 		return
@@ -137,5 +224,14 @@ func _record(event_name: String) -> void:
 		"enemy": CombatTelemetry.snapshot_actor(enemy),
 		"posture": current,
 		"posture_max": maximum,
-		"deathblow_ready": _break_active,
+		"break_active": _break_active,
+		"deathblow_ready": _deathblow_armed,
+		"deathblow_arm_delay": DEATHBLOW_ARM_DELAY,
 	})
+
+
+func _has_property(object: Object, property_name: String) -> bool:
+	for property_data: Dictionary in object.get_property_list():
+		if str(property_data.get("name", "")) == property_name:
+			return true
+	return false
