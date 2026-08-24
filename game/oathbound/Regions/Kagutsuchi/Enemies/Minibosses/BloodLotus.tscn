@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Enemy/Area 3/Minibosses/blood_lotus_heart.gd" id="1_heart"]
+[ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_hurt"]
+[ext_resource type="Script" path="res://Utility/CombatController.gd" id="3_combat"]
+[ext_resource type="PackedScene" path="res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotusStalk.tscn" id="4_stalk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape_heart"]
+radius = 34.0
+
+[node name="BloodLotus" type="CharacterBody2D" groups=["enemy", "miniboss"]]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_heart")
+stalk_scene = ExtResource("4_stalk")
+
+[node name="PrototypeVisual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-38, 0, -25, -18, -9, -11, 0, -34, 9, -11, 25, -18, 38, 0, 25, 18, 9, 11, 0, 34, -9, 11, -25, 18)
+color = Color(0.34, 0.035, 0.075, 1)
+
+[node name="CoreGlow" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-12, 0, -6, -11, 6, -11, 12, 0, 6, 11, -6, 11)
+color = Color(0.86, 0.14, 0.22, 0.9)
+
+[node name="HurtBox" parent="." groups=["hurtbox"] instance=ExtResource("2_hurt")]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+shape = SubResource("CircleShape_heart")
+
+[node name="Combat" type="Node" parent="."]
+script = ExtResource("3_combat")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
