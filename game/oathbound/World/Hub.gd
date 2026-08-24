@@ -15,7 +15,7 @@ extends Node2D
 ##   ├── PracticeGrounds
 ##   └── UILayer (CanvasLayer)
 
-const RUN_RESULTS_OVERLAY = preload("res://Core/Release/OathboundRunResultsOverlay.gd")
+const RUN_RESULTS_OVERLAY = preload("res://Core/Release/OathboundAccessibleRunResultsOverlay.gd")
 
 @onready var player: Node = null
 var _currency_hud: Node
