@@ -13,6 +13,7 @@ var _pause_overview: CanvasLayer = null
 func _ready() -> void:
 	get_tree().paused = false
 	print("[OathboundRunScene] _ready() — paused=%s container=%s" % [get_tree().paused, $RoomContainer])
+	_record_playtest_build_identity()
 
 	GameFlow.setup($RoomContainer)
 
@@ -63,6 +64,25 @@ func _ready() -> void:
 
 	print("[OathboundRunScene] starting run… area=%d" % GameFlow.current_area)
 	GameFlow.start_run()
+
+
+func _record_playtest_build_identity() -> void:
+	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
+		return
+
+	var sha_output: Array = []
+	var branch_output: Array = []
+	var sha_exit: int = OS.execute("git", PackedStringArray(["rev-parse", "HEAD"]), sha_output, true)
+	var branch_exit: int = OS.execute("git", PackedStringArray(["rev-parse", "--abbrev-ref", "HEAD"]), branch_output, true)
+	var git_sha: String = str(sha_output[0]).strip_edges() if sha_exit == 0 and not sha_output.is_empty() else "unavailable"
+	var git_branch: String = str(branch_output[0]).strip_edges() if branch_exit == 0 and not branch_output.is_empty() else "unavailable"
+
+	CombatTelemetry.record_event("build_identity", {
+		"git_sha": git_sha,
+		"git_branch": git_branch,
+		"identity_source": "git_rev_parse" if git_sha != "unavailable" else "unavailable",
+	})
+	print("[OathboundRunScene] playtest build sha=%s branch=%s" % [git_sha, git_branch])
 
 
 func _unhandled_input(event: InputEvent) -> void:
