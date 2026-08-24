@@ -5,7 +5,7 @@ extends "res://Utility/RunScene.gd"
 ## route authorities, release-shell safe-checkpoint resume, failed-run closure, and the
 ## approved read-only Pause / Build Overview.
 
-const PAUSE_OVERVIEW_SCRIPT = preload("res://Core/Release/OathboundPauseOverview.gd")
+const PAUSE_OVERVIEW_SCRIPT = preload("res://Core/Release/OathboundAccessiblePauseOverview.gd")
 
 var _pause_overview: CanvasLayer = null
 
