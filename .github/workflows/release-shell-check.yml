@@ -9,6 +9,7 @@ on:
       - "game/oathbound/Core/Release/**"
       - "game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd"
       - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
       - "game/oathbound/Core/Prosthetics/OathboundRunHUD.gd"
       - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
       - "game/oathbound/GUI/DiscoveryBoardMenu.gd"
@@ -24,9 +25,16 @@ on:
       - "game/oathbound/GUI/MerchantMenu.gd"
       - "game/oathbound/GUI/OathboundReleaseMerchantMenu.gd"
       - "game/oathbound/GUI/MerchantMenu.tscn"
+      - "game/oathbound/GUI/BloodwellMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseBloodwellMenu.gd"
+      - "game/oathbound/GUI/BloodwellMenu.tscn"
+      - "game/oathbound/GUI/BloodMirrorMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseBloodMirrorMenu.gd"
+      - "game/oathbound/GUI/BloodMirrorMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
@@ -40,6 +48,7 @@ on:
       - "game/oathbound/Core/Release/**"
       - "game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd"
       - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
       - "game/oathbound/Core/Prosthetics/OathboundRunHUD.gd"
       - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
       - "game/oathbound/GUI/DiscoveryBoardMenu.gd"
@@ -55,9 +64,16 @@ on:
       - "game/oathbound/GUI/MerchantMenu.gd"
       - "game/oathbound/GUI/OathboundReleaseMerchantMenu.gd"
       - "game/oathbound/GUI/MerchantMenu.tscn"
+      - "game/oathbound/GUI/BloodwellMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseBloodwellMenu.gd"
+      - "game/oathbound/GUI/BloodwellMenu.tscn"
+      - "game/oathbound/GUI/BloodMirrorMenu.gd"
+      - "game/oathbound/GUI/OathboundReleaseBloodMirrorMenu.gd"
+      - "game/oathbound/GUI/BloodMirrorMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
@@ -191,6 +207,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Strand progression release presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/StrandProgressionPresentationSmoke.tscn 2>&1 | tee strand-progression-release.log
+          grep -F "[StrandProgressionPresentationSmoke] PASS - Bloodwell localization | Blood Mirror localization | stable progression IDs | High Contrast" strand-progression-release.log
+          if grep -F "SCRIPT ERROR:" strand-progression-release.log; then
+            echo "FAIL: Strand progression release presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" strand-progression-release.log; then
+            echo "FAIL: Strand progression release presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Strand prompt glyph switching
         shell: bash
         run: |
@@ -219,6 +250,7 @@ jobs:
             localization-readiness.log
             codex-release.log
             merchant-release.log
+            strand-progression-release.log
             hub-prompt-glyph.log
           if-no-files-found: warn
           retention-days: 7
