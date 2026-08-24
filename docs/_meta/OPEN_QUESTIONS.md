@@ -4,7 +4,7 @@ title: Current Design Questions
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-23
+last_reviewed: 2026-08-24
 topics:
   - open-questions
   - implementation-readiness
@@ -54,25 +54,24 @@ The former broad delta-audit gate has materially been executed through the curre
 8. **First-attempt base-katana / no-Aspect runtime reconciliation — EXECUTED / VALIDATED** — PR #114 implements the pre-awakening base-katana/no-Aspect state and first-death handoff into pre-run Aspect selection. `docs/_meta/decisions/2026-08-22-first-attempt-runtime-reconciliation.md` records the evidence.
 9. **Strand / permanent progression — EXECUTED / VALIDATED** — PR #115 implements persistent Mist/Scroll/boss-material ownership, Bloodwell, Blood Mirror, persistent Forge progression, Blood Cavern first-clear claims, staged campaign gates, and all three canonical Strand progression stations. `docs/_meta/decisions/2026-08-22-strand-permanent-progression.md` records the boundary.
 10. **Yomori region reconciliation — EXECUTED / VALIDATED** — PR #116 establishes the approved 10-counted-chamber route, four-enemy encounter authority, Embered Pilgrim / Rotwood Host opportunity, genuine Treasure chamber, Twin Maws endpoint, current Region 2 SceneRegistry ownership, focused visual/runtime validation, and region-aware targeted Playtest Lab controls. `docs/_meta/decisions/2026-08-23-yomori-region-reconciliation.md` records the boundary.
-11. **Kagutsuchi / Shogun / Heart reconciliation — NEXT** — implement/reconcile the approved Region 3 route/layout, encounter pool, Blood Lotus, Eternal Swordsman, Eclipse Shogun, Binding states, both Heart forms, first-clear/repeat-suppression differences, transitions, rewards, and current runtime ownership. Retire Region 3 compatibility aliases only when direct current authorities replace them and regression coverage proves the replacement.
+11. **Kagutsuchi / Shogun / Heart reconciliation — EXECUTED / VALIDATED** — PR #117 establishes the approved 11-counted-chamber Region 3 route, five-enemy Court roster, Blood Lotus / Eternal Swordsman opportunity, Eclipse Shogun endpoint, six-Binding campaign, seventh-run Heart handoff, Story Complete/postgame flow, Shogun rewards, Heart-entry recovery, canonical runtime ownership, and deterministic full-route/endgame validation.
+12. **Authored presentation content — IMPLEMENTED / VALIDATION-TUNING** — PR #117 now includes the seven awakened Shogun states plus rare pre-awakening fallback, 30 major Strand conversations, 24 reactive line sets, 24 substantive Lore / Records entries, 30 launch achievement contracts, tutorial/help copy, ending/postgame text, campaign-aware narrative persistence, player-facing Strand interactions, and Discovery Board access. A dedicated Godot presentation contract protects the silent-Akio and ending boundaries.
+13. **Release presentation / saves / records / settings — NEXT** — replace the prototype title screen with Oathbound front-end flow, implement three save slots and safe metadata/resume boundaries, implement completion/record tracking and Run Results, expose the required settings/accessibility/audio/text controls, wire completed-save Standard Expedition vs Heart Suppression selection, and add Credits/legal surfaces using only verified contributor/dependency information.
+14. **Final integration / playtest tuning — AFTER RELEASE SHELL** — perform full-route manual validation, numerical balance/economy tuning, final presentation-art replacement audit, readability/accessibility pass, and release QA without reopening already-closed system architecture unless testing finds a structural defect.
 
-# Current implementation question — reconcile Kagutsuchi / Shogun / Heart
+# Current implementation question — release presentation / saves / records / settings
 
-**Question:** Does the current Region 3 / Kagutsuchi runtime implement the approved authored first-playtest package coherently across route/layout, standard encounters, minibosses, Eclipse Shogun, Binding/Heart sequence, first-clear vs repeat behavior, transitions, rewards, and current runtime ownership without relying on obsolete imported prototype authorities?
+**Question:** Does the current Godot project provide the approved launch-facing shell around the already implemented game: Oathbound title identity, Continue/New Game with three save slots, safe persistent slot metadata and quit/resume boundaries, Story Complete/completion/records presentation, postgame run-goal selection, Run Results, settings/accessibility/audio/text controls, and Credits/legal surfaces?
 
-The next implementation package should answer that question in code rather than creating another planning pass where the approved documentation already supplies enough authority.
-
-# Content package after Kagutsuchi
-
-- **Authored presentation content:** exact dialogue, lore/records, achievements, tutorial/help text, ending/postgame lines, credits/legal when dependencies are known.
+The next implementation package should answer that question in code. It should reuse the existing MetaProgress, RunData, GameFlow, progression managers, and presentation catalog rather than introducing a parallel progression model.
 
 # Playtest workflow during content buildout
 
 Do **not** require repeated full-route manual runs while major content packages are still being integrated.
 
-Use the backtick Playtest Lab to isolate risky variables and regional content directly. Prefer short checks such as one enemy, one encounter, one room type, one miniboss, one boss phase, one reward path, or one transition. Automated route/contract validation remains the primary structural gate during buildout.
+Use the backtick Playtest Lab to isolate risky variables and regional content directly. Prefer short checks such as one enemy, one encounter, one room type, one miniboss, one boss phase, one reward path, one transition, one narrative state, or one save/settings surface. Automated route/contract validation remains the primary structural gate during buildout.
 
-A complete Hushiro -> Yomori -> Kagutsuchi -> Shogun / Heart manual run is a milestone validation after the remaining region content is integrated. At that point, use the full route to evaluate cross-region state persistence, interacting systems, economy, difficulty curve, and total run duration.
+A complete Hushiro -> Yomori -> Kagutsuchi -> Shogun / Heart manual run is a milestone validation after the release-facing shell is integrated. At that point, use the full route to evaluate cross-region state persistence, interacting systems, economy, difficulty curve, total run duration, return/results flow, and completed-save behavior.
 
 # Playtest backlog — not open design questions
 
