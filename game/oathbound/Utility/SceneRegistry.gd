@@ -3,8 +3,8 @@ extends Node
 ## Canonical runtime scene registry.
 ##
 ## Shared service chambers remain common across regions. Region-specific combat/boss
-## ownership is selected explicitly before GameFlow loads a chamber so Hushiro no
-## longer acts as the implementation authority for later regions.
+## ownership is selected explicitly before GameFlow loads a chamber so no earlier
+## region acts as the implementation authority for later content.
 
 var _shared_rooms := {
 	"combat": preload("res://Regions/Hushiro/Chambers/CombatChamber.tscn"),
@@ -14,8 +14,6 @@ var _shared_rooms := {
 	"rest": preload("res://Core/Chambers/Types/RestChamber.tscn"),
 	"boss": preload("res://Core/Chambers/Types/BossChamber.tscn"),
 	"treasure": preload("res://Core/Chambers/Types/TreasureChamber.tscn"),
-
-	# Kagutsuchi still uses the imported `shop` token until its own reconciliation.
 	"shop": preload("res://Core/Chambers/Types/MerchantChamber.tscn"),
 }
 
@@ -26,6 +24,10 @@ var _rooms_by_area := {
 	2: {
 		"combat": preload("res://Regions/Yomori/Chambers/CombatChamber.tscn"),
 		"boss": preload("res://Regions/Yomori/Chambers/TwinMawsChamber.tscn"),
+	},
+	3: {
+		"combat": preload("res://Regions/Kagutsuchi/Chambers/CombatChamber.tscn"),
+		"boss": preload("res://Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn"),
 	},
 }
 
@@ -66,24 +68,20 @@ var enemies_by_area := {
 		"warden": preload("res://Regions/Hushiro/Enemies/Standard/Warden.tscn"),
 	},
 	2: {
-		# Approved native Yomori roster only. These mature enemy implementations are
-		# retained in their imported physical paths during this migration, but Hushiro
-		# enemies are no longer valid Area 2 encounter keys.
+		# Approved native Yomori roster only. Mature implementations remain in their
+		# imported physical paths while runtime ownership belongs to Yomori.
 		"lingering_wraith": preload("res://Enemy/Area 2/Encounter/lingering_wraith.tscn"),
 		"lantern_wraith": preload("res://Enemy/Area 2/Encounter/lantern_wraith.tscn"),
 		"mist_shepherd": preload("res://Enemy/Area 2/Encounter/Mist_Shepherd.tscn"),
 		"stalker_hound": preload("res://Enemy/Area 2/Encounter/stalker_hound.tscn"),
 	},
 	3: {
-		# Area 3 remains legacy until the Kagutsuchi reconciliation package.
-		"soldier2": preload("res://Enemy/Area 2/Encounter/lingering_wraith.tscn"),
-		"archer2": preload("res://Enemy/Area 2/Encounter/lantern_wraith.tscn"),
-		"shade": preload("res://Regions/Hushiro/Enemies/Standard/Hollow.tscn"),
-		"healer": preload("res://Enemy/Area 2/Encounter/Mist_Shepherd.tscn"),
-		"soldier3": preload("res://Enemy/Area 3/Encounter/court_guard.tscn"),
-		"archer3": preload("res://Enemy/Area 3/Encounter/court_caster.tscn"),
-		"vessel": preload("res://Enemy/Area 3/Encounter/hollow_vessel.tscn"),
-		"brute": preload("res://Enemy/Area 3/Encounter/court_sentinel.tscn"),
-		"shield": preload("res://Enemy/Area 3/Encounter/elite_defender.tscn")
+		# Approved native Kagutsuchi Court roster only. No earlier-region standard
+		# enemy or evolved continuation is currently approved for Area 3.
+		"court_guard": preload("res://Enemy/Area 3/Encounter/court_guard.tscn"),
+		"court_caster": preload("res://Enemy/Area 3/Encounter/court_caster.tscn"),
+		"elite_defender": preload("res://Enemy/Area 3/Encounter/elite_defender.tscn"),
+		"hollow_vessel": preload("res://Enemy/Area 3/Encounter/hollow_vessel.tscn"),
+		"court_sentinel": preload("res://Enemy/Area 3/Encounter/court_sentinel.tscn"),
 	}
 }
