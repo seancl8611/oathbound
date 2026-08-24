@@ -9,6 +9,7 @@ const Catalog = preload("res://Core/Presentation/OathboundPresentationCatalog.gd
 const UNLOCK_PREFIX := "achievement_unlocked/"
 const METRIC_PREFIX := "achievement_metric/"
 const HEART_ASPECT_PREFIX := "heart_clear_aspect/"
+const MINIBOSS_COUNTS_FLAG := "records/miniboss_defeat_counts"
 
 
 func _ready() -> void:
@@ -69,9 +70,24 @@ func record_heart_clear(aspect_id: String) -> void:
 func record_miniboss_defeat(miniboss_id: String) -> void:
 	if miniboss_id.is_empty():
 		return
-	MetaProgress.set_progression_flag("miniboss_defeated/" + miniboss_id, true)
-	increment_metric("unique_minibosses", 1 if not bool(MetaProgress.get_progression_flag("miniboss_metric_seen/" + miniboss_id, false)) else 0)
-	MetaProgress.set_progression_flag("miniboss_metric_seen/" + miniboss_id, true)
+	var normalized := miniboss_id.to_lower()
+	var counts_value: Variant = MetaProgress.get_progression_flag(MINIBOSS_COUNTS_FLAG, {})
+	var counts: Dictionary = (counts_value as Dictionary).duplicate(true) if counts_value is Dictionary else {}
+	counts[normalized] = maxi(0, int(counts.get(normalized, 0))) + 1
+	MetaProgress.set_progression_flag(MINIBOSS_COUNTS_FLAG, counts)
+	increment_metric("miniboss_defeats", 1)
+
+	var seen_flag := "miniboss_metric_seen/" + normalized
+	var first_defeat := not bool(MetaProgress.get_progression_flag(seen_flag, false))
+	MetaProgress.set_progression_flag("miniboss_defeated/" + normalized, true)
+	if first_defeat:
+		increment_metric("unique_minibosses", 1)
+		MetaProgress.set_progression_flag(seen_flag, true)
+
+
+func get_miniboss_defeat_counts() -> Dictionary:
+	var value: Variant = MetaProgress.get_progression_flag(MINIBOSS_COUNTS_FLAG, {})
+	return (value as Dictionary).duplicate(true) if value is Dictionary else {}
 
 
 func evaluate() -> void:
