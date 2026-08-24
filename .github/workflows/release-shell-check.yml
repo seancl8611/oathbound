@@ -120,6 +120,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify localization-ready dialogue path
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/LocalizationReadinessSmoke.tscn 2>&1 | tee localization-readiness.log
+          grep -F "[LocalizationReadinessSmoke] PASS - stable keys | English fallback | translated speaker/line/advance label" localization-readiness.log
+          if grep -F "SCRIPT ERROR:" localization-readiness.log; then
+            echo "FAIL: localization readiness smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" localization-readiness.log; then
+            echo "FAIL: localization readiness smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload release shell logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -130,5 +145,6 @@ jobs:
             run-results-overlay.log
             dialogue-accessibility.log
             readability-strand-hud.log
+            localization-readiness.log
           if-no-files-found: warn
           retention-days: 7
