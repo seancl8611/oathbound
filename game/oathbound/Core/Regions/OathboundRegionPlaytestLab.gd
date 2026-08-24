@@ -16,14 +16,14 @@ const YOMORI_TEST_ACTORS := [
 ]
 
 const KAGUTSUCHI_TEST_ACTORS := [
-	{"id": "court_guard", "name": "Court Guard", "scene": "res://Enemy/Area 3/Encounter/court_guard.tscn"},
-	{"id": "court_caster", "name": "Court Caster", "scene": "res://Enemy/Area 3/Encounter/court_caster.tscn"},
-	{"id": "elite_defender", "name": "Elite Defender", "scene": "res://Enemy/Area 3/Encounter/elite_defender.tscn"},
-	{"id": "hollow_vessel", "name": "Hollow Vessel", "scene": "res://Enemy/Area 3/Encounter/hollow_vessel.tscn"},
-	{"id": "court_sentinel", "name": "Court Sentinel", "scene": "res://Enemy/Area 3/Encounter/court_sentinel.tscn"},
+	{"id": "court_guard", "name": "Court Guard", "scene": "res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.tscn"},
+	{"id": "court_caster", "name": "Court Caster", "scene": "res://Regions/Kagutsuchi/Enemies/Standard/CourtCaster.tscn"},
+	{"id": "elite_defender", "name": "Elite Defender", "scene": "res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.tscn"},
+	{"id": "hollow_vessel", "name": "Hollow Vessel", "scene": "res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.tscn"},
+	{"id": "court_sentinel", "name": "Court Sentinel", "scene": "res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn"},
 	{"id": "blood_lotus", "name": "Blood Lotus", "scene": "res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotus.tscn"},
 	{"id": "eternal_swordsman", "name": "Eternal Swordsman", "scene": "res://Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.tscn"},
-	{"id": "eclipse_shogun", "name": "Eclipse Shogun", "scene": "res://Enemy/Area 3/Boss/eclipse_shogun.tscn"},
+	{"id": "eclipse_shogun", "name": "Eclipse Shogun", "scene": "res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn"},
 ]
 
 var _yomori_actor_dropdown: OptionButton
