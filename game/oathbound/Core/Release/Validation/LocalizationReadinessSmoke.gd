@@ -125,6 +125,11 @@ func _validate_well_surface() -> void:
 	if not (well_value is Node):
 		return
 	var well: Node = well_value as Node
+	# The live Well is authored inline in HubScene and HubInteractable requires this
+	# child during _ready(). Mirror that structural contract before entering the tree.
+	var interact_popup := Label.new()
+	interact_popup.name = "InteractPopup"
+	well.add_child(interact_popup)
 	add_child(well)
 	await get_tree().process_frame
 	well.call("_open_aspect_menu")
