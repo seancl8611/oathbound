@@ -10,6 +10,7 @@ extends Node
 ## - Adds support for prosthetic types (burn, prosthetic)
 ## - Owns each animation tween from the transient damage-number node so a scene
 ##   transition kills the tween before it can call back into a freed capture.
+## - Honors the launch damage-number accessibility toggle before creating UI.
 ## =============================================================================
 
 # Damage number scenes for each type
@@ -51,6 +52,10 @@ func _ready() -> void:
 
 
 func show_damage_number(amount: int, position: Vector2, damage_type: String = "normal", target: Node = null) -> void:
+	if typeof(SettingsManager) == TYPE_OBJECT and SettingsManager.has_method("should_show_damage_numbers"):
+		if not bool(SettingsManager.call("should_show_damage_numbers")):
+			return
+
 	# Prevent duplicate damage numbers using cooldown per target+type
 	if target and is_instance_valid(target):
 		var current_time = Time.get_ticks_msec() / 1000.0
