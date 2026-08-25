@@ -6,6 +6,7 @@ extends "res://GUI/RunHUD.gd"
 ## - adds the approved awakened-only Corruption / Shrine-ready state
 ## - localizes player-facing run HUD copy without changing combat/runtime ownership
 ## - keeps the Prosthetic input hint synchronized with active input family + rebindings
+## - suppresses deprecated generic Boss Emblem reward presentation
 ## - applies the launch High Contrast readability treatment without changing HUD semantics
 
 const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
@@ -75,6 +76,10 @@ func update_prosthetic_info(prosthetic_id: String, spirit_cost: int, sockets: in
 
 
 func show_currency_toast(reward_key: String, amount: int) -> void:
+	# Generic Boss Emblems are legacy-only. CurrencyManager intentionally ignores
+	# them, so presenting a toast would falsely imply the player received a reward.
+	if reward_key == "emblem":
+		return
 	super.show_currency_toast(reward_key, amount)
 	if _toast_container == null or _toast_container.get_child_count() <= 0:
 		return
@@ -161,7 +166,7 @@ func _localized_reward_label(reward_key: String) -> String:
 		"scroll": return LOCALIZATION.ui("currency.scrolls", "Scrolls")
 		"maxhp": return LOCALIZATION.ui("run_hud.max_hp", "Max HP")
 		"maxposture": return LOCALIZATION.ui("run_hud.max_posture", "Max Posture")
-		"emblem": return LOCALIZATION.ui("run_hud.legacy_boss_material", "Boss material")
+		"emblem": return ""
 		_: return LOCALIZATION.ui("run_hud.reward.%s" % reward_key, reward_key.capitalize())
 
 
