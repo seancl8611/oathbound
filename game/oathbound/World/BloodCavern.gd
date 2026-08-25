@@ -28,6 +28,9 @@ const TRAINING_TARGET = preload("res://World/BloodCavernTrainingTarget.tscn")
 
 const TECHNIQUE_RECORD_PREFIX := "technique_record/"
 const TRIAL_EXECUTION := "execution_trial"
+# Keep the live combat lane to the west of the Cavern station. The east-side lane is
+# occupied by the Undead Samurai trainer in the current Strand layout.
+const TRAINING_TARGET_OFFSET := Vector2(-112.0, 0.0)
 const REFRESHER_TOPICS: Array[String] = [
 	"execution",
 	"parry",
@@ -645,7 +648,7 @@ func _spawn_training_target(mode: String) -> void:
 		var deathblow_cb := Callable(self, "_on_training_deathblow_completed")
 		if not _training_target.is_connected("training_deathblow_completed", deathblow_cb):
 			_training_target.connect("training_deathblow_completed", deathblow_cb)
-	_training_target.global_position = global_position + Vector2(112.0, 0.0)
+	_training_target.global_position = global_position + TRAINING_TARGET_OFFSET
 	_training_active = true
 	training_started.emit(mode)
 	print("[BloodCavern] %s training target active — rewards disabled" % mode)
@@ -656,7 +659,7 @@ func _reset_training_target() -> void:
 		return
 	if _training_target.has_method("reset_training_target"):
 		_training_target.call("reset_training_target")
-	_training_target.global_position = global_position + Vector2(112.0, 0.0)
+	_training_target.global_position = global_position + TRAINING_TARGET_OFFSET
 	print("[BloodCavern] Training target reset")
 
 
