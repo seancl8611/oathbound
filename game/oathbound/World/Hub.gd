@@ -153,10 +153,6 @@ func _connect_stations() -> void:
 	if forge and forge.has_signal("prosthetic_equipped"):
 		forge.connect("prosthetic_equipped", Callable(self, "_on_prosthetic_equipped"))
 
-	var shrine: Node = get_node_or_null("MetaShrine")
-	if shrine and shrine.has_signal("upgrade_purchased"):
-		shrine.connect("upgrade_purchased", Callable(self, "_on_meta_upgrade_purchased"))
-
 	var merchant: Node = get_node_or_null("MerchantStall")
 	if merchant and merchant.has_signal("item_purchased"):
 		merchant.connect("item_purchased", Callable(self, "_on_merchant_item_purchased"))
@@ -176,12 +172,6 @@ func _on_run_started() -> void:
 func _on_prosthetic_equipped(prosthetic_id: String) -> void:
 	print("[Hub] Prosthetic equipped: ", prosthetic_id)
 	Global.selected_weapon_name = prosthetic_id
-
-
-func _on_meta_upgrade_purchased(upgrade_id: String) -> void:
-	print("[Hub] Meta upgrade purchased: ", upgrade_id)
-	if typeof(RecordsRuntime) == TYPE_OBJECT:
-		RecordsRuntime.recalculate_completion()
 
 
 func _on_merchant_item_purchased(item_id: String) -> void:
