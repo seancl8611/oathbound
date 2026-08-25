@@ -4,7 +4,7 @@ title: Release Attribution Audit
 category: external
 status: working
 authority: secondary
-last_reviewed: 2026-08-24
+last_reviewed: 2026-08-25
 ---
 
 # Release Attribution Audit
@@ -51,14 +51,50 @@ Required evidence before shipping:
 - any required attribution wording;
 - retained copy or durable reference to the license evidence.
 
+### GUI audio inventory
+
+The following non-import source files are currently present under `game/oathbound/Audio/GUI/`:
+
+- `game/oathbound/Audio/GUI/click.wav`
+- `game/oathbound/Audio/GUI/hover.wav`
+
+Their adjacent `.import` files establish that they are Godot-imported assets but do not establish creator, source, ownership, license, commercial-use permission, redistribution permission, or required attribution.
+
+**Release status:** BLOCKED pending provenance/license evidence for each source audio file.
+
+### Sound-effect inventory
+
+The repository inventory reviewed on 2026-08-25 includes at least the following non-import source files under `game/oathbound/Audio/SoundEffect/`:
+
+- `game/oathbound/Audio/SoundEffect/Lose.ogg`
+- `game/oathbound/Audio/SoundEffect/Victory.wav`
+- `game/oathbound/Audio/SoundEffect/collectgem.mp3`
+- `game/oathbound/Audio/SoundEffect/enemy_death.ogg`
+- `game/oathbound/Audio/SoundEffect/enemy_hit.ogg`
+- `game/oathbound/Audio/SoundEffect/ice.wav`
+
+This list records the concrete files observed during the repository audit; it is not yet asserted to be the complete SoundEffect tree. Their Godot `.import` files are build metadata only and are not provenance/license evidence.
+
+**Release status:** BLOCKED pending asset-by-asset provenance/license evidence.
+
+For each listed GUI/SFX source file, verify:
+
+- source asset/title and creator/vendor;
+- source location or purchase record;
+- exact license/version or ownership evidence;
+- commercial-use permission;
+- modification permission where relevant;
+- redistribution permission in the game build;
+- required attribution/notice text;
+- retained evidence location and verification date.
+
 ## Remaining inventory work
 
-The following repository areas still require asset-by-asset provenance review before credits/legal can be considered release-complete:
+The following repository areas still require additional asset-by-asset provenance review before credits/legal can be considered release-complete:
 
-- `game/oathbound/Audio/GUI/`
-- `game/oathbound/Audio/SoundEffect/`
-- `game/oathbound/Textures/`
-- imported visual/UI assets outside `Textures/`
+- the remainder of `game/oathbound/Audio/SoundEffect/` beyond the concrete files enumerated above;
+- `game/oathbound/Textures/`;
+- imported visual/UI assets outside `Textures/`;
 - any external shaders, code snippets, plugins, or tools that are redistributed with the build;
 - store/platform art and marketing assets when those are added.
 
