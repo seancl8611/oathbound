@@ -32,15 +32,16 @@ on:
       - "game/oathbound/GUI/OathboundReleaseBloodMirrorMenu.gd"
       - "game/oathbound/GUI/BloodMirrorMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
+      - "game/oathbound/GUI/RunHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
+      - "game/oathbound/World/Boat.gd"
       - "game/oathbound/World/Hub.gd"
       - "game/oathbound/World/HubScene.tscn"
-      - "game/oathbound/World/TheWell.gd"
       - "game/oathbound/project.godot"
       - ".github/workflows/release-shell-check.yml"
   pull_request:
@@ -71,15 +72,16 @@ on:
       - "game/oathbound/GUI/OathboundReleaseBloodMirrorMenu.gd"
       - "game/oathbound/GUI/BloodMirrorMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
+      - "game/oathbound/GUI/RunHUD.gd"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
+      - "game/oathbound/World/Boat.gd"
       - "game/oathbound/World/Hub.gd"
       - "game/oathbound/World/HubScene.tscn"
-      - "game/oathbound/World/TheWell.gd"
       - "game/oathbound/project.godot"
       - ".github/workflows/release-shell-check.yml"
   workflow_dispatch:
@@ -167,13 +169,28 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/LocalizationReadinessSmoke.tscn 2>&1 | tee localization-readiness.log
-          grep -F "[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback" localization-readiness.log
+          grep -F "[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Boat departure | Discovery Board | English fallback" localization-readiness.log
           if grep -F "SCRIPT ERROR:" localization-readiness.log; then
             echo "FAIL: localization readiness smoke emitted a GDScript runtime error."
             exit 1
           fi
           if grep -F "ERROR: Error calling deferred method:" localization-readiness.log; then
             echo "FAIL: localization readiness smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify canonical Run HUD rewards
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/RunHUDRewardSurfaceSmoke.tscn 2>&1 | tee run-hud-rewards.log
+          grep -F "[RunHUDRewardSurfaceSmoke] PASS - canonical reward toast | deprecated generic Boss Emblem suppressed" run-hud-rewards.log
+          if grep -F "SCRIPT ERROR:" run-hud-rewards.log; then
+            echo "FAIL: Run HUD reward surface emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" run-hud-rewards.log; then
+            echo "FAIL: Run HUD reward surface emitted a deferred-call runtime error."
             exit 1
           fi
 
@@ -248,6 +265,7 @@ jobs:
             dialogue-accessibility.log
             readability-strand-hud.log
             localization-readiness.log
+            run-hud-rewards.log
             codex-release.log
             merchant-release.log
             strand-progression-release.log
