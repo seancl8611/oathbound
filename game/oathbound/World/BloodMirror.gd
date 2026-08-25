@@ -1,8 +1,8 @@
 extends HubInteractable
 
-## Blood Mirror — permanent Blood Aspect progression station.
-## The station is visible in the Strand from the start, but remains dormant until the
-## first Keeper defeat. The menu itself owns the visible campaign-gate explanation.
+## Blood Mirror — permanent Blood Aspect progression mechanism inside Blood Cavern.
+## The outer Cavern remains usable before the first Keeper defeat; the deeper Mirror
+## stays dormant until that campaign gate and its menu owns the visible locked state.
 
 signal upgrade_purchased(upgrade_id: String)
 
