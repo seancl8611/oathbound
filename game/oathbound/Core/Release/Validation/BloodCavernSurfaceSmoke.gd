@@ -7,6 +7,7 @@ var _failed: bool = false
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	call_deferred("_run")
 
 
@@ -63,8 +64,10 @@ func _run() -> void:
 		_expect(str(snapshot.get("training_target", "")) == "Start Passive Combat Target", "Blood Cavern training action fallback is not stable")
 		_expect(str(snapshot.get("blood_mirror", "")) == "Enter Blood Mirror", "Blood Cavern does not expose the deeper Blood Mirror route")
 		_validate_localized_snapshot(cavern)
+		await _validate_actual_menu_transition(cavern)
 	hub.queue_free()
 	await get_tree().process_frame
+	get_tree().paused = false
 
 	if _failed:
 		get_tree().quit(1)
@@ -88,6 +91,28 @@ func _validate_localized_snapshot(cavern: Node) -> void:
 	_expect(str(localized.get("blood_mirror", "")) == "MIROIR TEST", "Blood Cavern Blood Mirror action did not resolve stable localization key")
 	TranslationServer.set_locale(previous_locale)
 	TranslationServer.remove_translation(translation)
+
+
+func _validate_actual_menu_transition(cavern: Node) -> void:
+	cavern.call("_open_menu")
+	await get_tree().process_frame
+	var ui_layer: Node = get_node_or_null("UILayer")
+	var cavern_menu: Node = ui_layer.get_node_or_null("BloodCavernMenu") if ui_layer != null else null
+	_expect(cavern_menu != null, "Blood Cavern did not build its actual menu surface")
+	if cavern_menu != null:
+		_expect(cavern_menu.find_child("StartTrainingTarget", true, false) is Button, "Blood Cavern menu is missing the passive training action")
+		_expect(cavern_menu.find_child("OpenBloodMirror", true, false) is Button, "Blood Cavern menu is missing the deeper Blood Mirror action")
+
+	cavern.call("_open_blood_mirror")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(ui_layer == null or ui_layer.get_node_or_null("BloodCavernMenu") == null, "Blood Cavern menu did not close before entering Blood Mirror")
+	var mirror_menu: Node = ui_layer.get_node_or_null("BloodMirrorMenu") if ui_layer != null else null
+	_expect(mirror_menu != null, "Blood Cavern route did not open the nested Blood Mirror progression surface")
+	if mirror_menu != null and mirror_menu.has_method("_close"):
+		mirror_menu.call("_close")
+	await get_tree().process_frame
+	get_tree().paused = false
 
 
 func _expect(condition: bool, message: String) -> void:
