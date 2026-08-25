@@ -144,7 +144,7 @@ func _translate_direct_copy(result: Dictionary) -> void:
 		elif label.text.begins_with("Overall completion: "):
 			var template := LOCALIZATION.ui("run_results.overall_completion", "Overall completion: %d%%")
 			label.text = template % RecordsRuntime.get_completion_percent() if typeof(RecordsRuntime) == TYPE_OBJECT else label.text
-		elif label.text == "Postgame unlocked: choose Standard Expedition or Heart Suppression at The Well before departure.":
+		elif label.text == "Postgame unlocked: choose Standard Expedition or Heart Suppression at the Boat before departure.":
 			label.text = LOCALIZATION.ui("run_results.postgame_unlocked", label.text)
 	for node: Node in find_children("*", "Button", true, false):
 		if node is Button and (node as Button).text == "Return to The Strand":
