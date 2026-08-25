@@ -197,7 +197,7 @@ func _open_confirmation_menu() -> void:
 	if _story_complete():
 		column.add_child(_summary_label(LOCALIZATION.ui("boat.confirm.goal", "Expedition Goal: %s") % _prepared_goal_name()))
 
-	column.add_child(_body_label(LOCALIZATION.ui("boat.confirm.techniques", "Direct Techniques begin empty and are acquired during the run.")))
+	column.add_child(_body_label(LOCALIZATION.ui("boat.confirm.techniques", "Techniques begin empty and are acquired during the run.")))
 
 	var start := Button.new()
 	start.text = LOCALIZATION.ui("boat.confirm.start", "Start Run")
@@ -279,7 +279,7 @@ func _confirmation_snapshot_for_playtest() -> Dictionary:
 		"prosthetic": _prepared_prosthetic_name(),
 		"relic": _prepared_relic_name(),
 		"goal": _prepared_goal_name(),
-		"techniques": LOCALIZATION.ui("boat.confirm.techniques", "Direct Techniques begin empty and are acquired during the run."),
+		"techniques": LOCALIZATION.ui("boat.confirm.techniques", "Techniques begin empty and are acquired during the run."),
 		"start": LOCALIZATION.ui("boat.confirm.start", "Start Run"),
 	}
 
@@ -391,5 +391,5 @@ func _start_run() -> void:
 	_close_confirmation_menu()
 	run_started.emit()
 	print("[Boat] Starting run with Aspect=%s Prosthetic=%s Relic=%s" % [_prepared_aspect_name(), _prepared_prosthetic_name(), _prepared_relic_name()])
-	get_tree().change_scene_to_file("res://Utility/RunScene.tscn")
 	close_menu()
+	get_tree().change_scene_to_file("res://Utility/RunScene.tscn")
