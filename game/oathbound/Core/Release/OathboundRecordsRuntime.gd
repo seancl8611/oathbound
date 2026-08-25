@@ -24,12 +24,12 @@ const FLAG_RESULT_PENDING := FLAG_PREFIX + "result_pending"
 const TECHNIQUE_RECORD_PREFIX := "technique_record/"
 const HEART_ASPECT_PREFIX := "heart_clear_aspect/"
 
-# These are the two authored first-playtest Blood Cavern challenge IDs currently
-# exposed by OathboundStrandProgressionManager. If launch trial content expands, the
-# owning trial authority should update this list rather than inventing extra goals here.
+# Completion counts only Blood Cavern trials that are actually playable in the current
+# release runtime. `last_oath_trial` remains reserved challenge/Relic sequencing data in
+# OathboundStrandProgressionManager, but it must not make 100% completion impossible
+# before an authored player-facing trial path exists.
 const REQUIRED_BLOOD_CAVERN_TRIALS: Array[String] = [
 	"execution_trial",
-	"last_oath_trial",
 ]
 
 var _run_active := false
@@ -323,26 +323,11 @@ func _build_run_result(successful: bool, completion_kind: String, elapsed: float
 	var current_materials_value: Variant = current_resources.get("boss_materials", {})
 	var start_materials: Dictionary = start_materials_value if start_materials_value is Dictionary else {}
 	var current_materials: Dictionary = current_materials_value if current_materials_value is Dictionary else {}
-	var material_delta: Dictionary = {}
-	for key: Variant in current_materials.keys():
-		material_delta[str(key)] = maxi(0, int(current_materials.get(key, 0)) - int(start_materials.get(key, 0)))
-
-	var aspect := "base_katana"
-	var tier := 0
-	if typeof(AspectRuntime) == TYPE_OBJECT:
-		var selected_value: Variant = AspectRuntime.get("selected_aspect")
-		if selected_value != null and not str(selected_value).is_empty():
-			aspect = str(selected_value)
-		var tier_value: Variant = AspectRuntime.get("tier")
-		if tier_value != null:
-			tier = int(tier_value)
-
-	var prosthetic := ""
-	if typeof(ProstheticManager) == TYPE_OBJECT:
-		prosthetic = str(ProstheticManager.get("equipped_prosthetic_id"))
-	var relic := ""
-	if typeof(RelicRuntime) == TYPE_OBJECT:
-		relic = str(RelicRuntime.get("equipped_relic_id"))
+	var gained_materials: Dictionary = {}
+	for material_id in current_materials.keys():
+		var delta := int(current_materials.get(material_id, 0)) - int(start_materials.get(material_id, 0))
+		if delta > 0:
+			gained_materials[str(material_id)] = delta
 
 	return {
 		"successful": successful,
@@ -350,63 +335,68 @@ func _build_run_result(successful: bool, completion_kind: String, elapsed: float
 		"clear_time_seconds": elapsed,
 		"area": int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else 1,
 		"depth": int(RunData.depth) if typeof(RunData) == TYPE_OBJECT else 0,
-		"run_goal": str(RunData.run_goal) if typeof(RunData) == TYPE_OBJECT else "campaign",
-		"aspect": aspect,
-		"highest_tier": tier,
-		"techniques": RunData.get_acquired_upgrades().duplicate() if typeof(RunData) == TYPE_OBJECT else [],
-		"equipped_prosthetic": prosthetic,
-		"equipped_relic": relic,
+		"run_goal": str(RunData.run_goal) if typeof(RunData) == TYPE_OBJECT else "",
 		"mist_gained": maxi(0, int(current_resources.get("mist", 0)) - int(_run_resource_start.get("mist", 0))),
 		"scrolls_gained": maxi(0, int(current_resources.get("scrolls", 0)) - int(_run_resource_start.get("scrolls", 0))),
-		"boss_materials_gained": material_delta,
-		"bindings_destroyed": MetaProgress.get_heart_bindings_destroyed() if typeof(MetaProgress) == TYPE_OBJECT else 0,
-		"bindings_remaining": MetaProgress.get_heart_bindings_remaining() if typeof(MetaProgress) == TYPE_OBJECT else 6,
-		"story_complete": MetaProgress.is_story_complete() if typeof(MetaProgress) == TYPE_OBJECT else false,
-		"run_only_lost": ["Gold", "Techniques", "Refinements", "Corruption", "Aspect Tier", "temporary Health/Spirit capacity"],
+		"boss_materials_gained": gained_materials,
+		"bindings_destroyed": int(MetaProgress.heart_bindings_destroyed) if typeof(MetaProgress) == TYPE_OBJECT else 0,
+		"bindings_remaining": int(MetaProgress.remaining_heart_bindings()) if typeof(MetaProgress) == TYPE_OBJECT else 6,
+		"story_complete": bool(MetaProgress.is_story_complete()) if typeof(MetaProgress) == TYPE_OBJECT else false,
+		"aspect": str(AspectRuntime.selected_aspect) if typeof(AspectRuntime) == TYPE_OBJECT else "",
+		"highest_tier": int(AspectRuntime.tier) if typeof(AspectRuntime) == TYPE_OBJECT else 0,
+		"techniques": RunData.get_acquired_upgrades().duplicate() if typeof(RunData) == TYPE_OBJECT else [],
+		"equipped_prosthetic": str(ProstheticManager.equipped_prosthetic_id) if typeof(ProstheticManager) == TYPE_OBJECT else "",
+		"equipped_relic": str(RelicRuntime.equipped_relic_id) if typeof(RelicRuntime) == TYPE_OBJECT else "",
+		"run_only_lost": ["Gold", "Techniques", "Refinements", "Tier", "Blood", "Corruption", "Temporary Capacity"],
 	}
 
 
 func _count_technique_records() -> int:
-	if typeof(MetaProgress) != TYPE_OBJECT:
-		return 0
 	var count := 0
-	for technique_id_value: Variant in TECHNIQUE_CATALOG.TECHNIQUES.keys():
-		if bool(MetaProgress.get_progression_flag(TECHNIQUE_RECORD_PREFIX + str(technique_id_value), false)):
+	if typeof(MetaProgress) != TYPE_OBJECT:
+		return count
+	for technique_id in TECHNIQUE_CATALOG.TECHNIQUES.keys():
+		if bool(MetaProgress.get_progression_flag(TECHNIQUE_RECORD_PREFIX + str(technique_id), false)):
 			count += 1
-	for refinement_id_value: Variant in TECHNIQUE_CATALOG.REFINEMENTS.keys():
-		if bool(MetaProgress.get_progression_flag(TECHNIQUE_RECORD_PREFIX + str(refinement_id_value), false)):
+	for refinement_id in TECHNIQUE_CATALOG.REFINEMENTS.keys():
+		if bool(MetaProgress.get_progression_flag(TECHNIQUE_RECORD_PREFIX + str(refinement_id), false)):
 			count += 1
 	return count
 
 
 func _heart_aspect_clear(aspect_id: String) -> bool:
-	return typeof(MetaProgress) == TYPE_OBJECT and bool(MetaProgress.get_progression_flag(HEART_ASPECT_PREFIX + aspect_id, false))
+	if typeof(MetaProgress) != TYPE_OBJECT:
+		return false
+	return bool(MetaProgress.get_progression_flag(HEART_ASPECT_PREFIX + aspect_id, false))
 
 
-func _set_personal_best(flag_id: String, elapsed: float) -> void:
-	if elapsed <= 0.0:
-		return
-	var previous := _record_float(flag_id)
-	if previous <= 0.0 or elapsed < previous:
-		MetaProgress.set_progression_flag(flag_id, elapsed)
+func _record_int(flag: String) -> int:
+	if typeof(MetaProgress) != TYPE_OBJECT:
+		return 0
+	return maxi(0, int(MetaProgress.get_progression_flag(flag, 0)))
 
 
-func _record_int(flag_id: String) -> int:
-	return maxi(0, int(MetaProgress.get_progression_flag(flag_id, 0))) if typeof(MetaProgress) == TYPE_OBJECT else 0
+func _record_float(flag: String) -> float:
+	if typeof(MetaProgress) != TYPE_OBJECT:
+		return 0.0
+	return maxf(0.0, float(MetaProgress.get_progression_flag(flag, 0.0)))
 
 
-func _record_float(flag_id: String) -> float:
-	return maxf(0.0, float(MetaProgress.get_progression_flag(flag_id, 0.0))) if typeof(MetaProgress) == TYPE_OBJECT else 0.0
+func _set_record_int(flag: String, value: int) -> void:
+	MetaProgress.set_progression_flag(flag, maxi(0, value))
 
 
-func _set_record_int(flag_id: String, value: int) -> void:
-	if typeof(MetaProgress) == TYPE_OBJECT:
-		MetaProgress.set_progression_flag(flag_id, maxi(0, value))
+func _set_personal_best(flag: String, value: float) -> void:
+	var current := _record_float(flag)
+	if current <= 0.0 or value < current:
+		MetaProgress.set_progression_flag(flag, maxf(0.0, value))
 
 
-func _set_achievement_metric(metric_id: String, value: int) -> void:
+func _set_achievement_metric(metric_id: String, value: Variant) -> void:
 	if typeof(AchievementRuntime) == TYPE_OBJECT and AchievementRuntime.has_method("set_metric"):
-		AchievementRuntime.set_metric(metric_id, maxi(0, value))
+		AchievementRuntime.set_metric(metric_id, value)
+	else:
+		MetaProgress.set_progression_flag("achievement_metric/%s" % metric_id, value)
 
 
 func _breakdown_owned(breakdown: Dictionary, key: String) -> int:
