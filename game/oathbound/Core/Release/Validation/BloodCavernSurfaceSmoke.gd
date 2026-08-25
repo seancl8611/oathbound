@@ -3,7 +3,9 @@ extends Node
 const HUB_SCENE = preload("res://World/HubScene.tscn")
 const TRAINING_TARGET = preload("res://World/BloodCavernTrainingTarget.tscn")
 const INPUT_GLYPHS = preload("res://Core/Release/OathboundInputGlyphs.gd")
+const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
+const TRIAL_EXECUTION := "execution_trial"
 const EXPECTED_REFRESHERS: Array[String] = [
 	"execution",
 	"parry",
@@ -15,6 +17,7 @@ const EXPECTED_REFRESHERS: Array[String] = [
 ]
 
 var _failed: bool = false
+var _trial_deathblow_events: int = 0
 
 
 func _ready() -> void:
@@ -56,6 +59,8 @@ func _run() -> void:
 		var snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
 		_expect(str(snapshot.get("title", "")) == "BLOOD CAVERN", "Blood Cavern title fallback is not stable")
 		_expect(str(snapshot.get("training_target", "")) == "Start Passive Combat Target", "Blood Cavern training action fallback is not stable")
+		_expect(str(snapshot.get("trials", "")) == "BASIC TRIALS", "Blood Cavern trial heading fallback is not stable")
+		_expect(str(snapshot.get("execution_trial", "")) == "Start Execution Trial", "Blood Cavern Execution Trial action fallback is not stable")
 		_expect(str(snapshot.get("refreshers", "")) == "TUTORIAL REFRESHERS", "Blood Cavern refresher heading fallback is not stable")
 		_expect(_same_string_set(snapshot.get("refresher_topics", []), EXPECTED_REFRESHERS), "Blood Cavern must expose exactly the seven approved refresher topics")
 		_expect(str(snapshot.get("technique_demos", "")) == "TECHNIQUE DEMOS", "Blood Cavern Technique-demo heading fallback is not stable")
@@ -63,6 +68,8 @@ func _run() -> void:
 		_validate_localized_snapshot(cavern)
 		_validate_refresher_contract(cavern)
 		await _validate_technique_demo_contract(cavern)
+		await _validate_execution_trial_contract(cavern, gold_before, mist_before, scrolls_before)
+		await _validate_trial_mirror_boundary(cavern)
 		await _validate_actual_training_lifecycle(cavern, gold_before, mist_before, scrolls_before)
 		await _validate_actual_menu_transition(cavern)
 	hub.queue_free()
@@ -72,7 +79,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface | tutorial refreshers | discovered Technique demos")
+	print("[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface | tutorial refreshers | discovered Technique demos | real Execution Trial | training-state isolation")
 	get_tree().quit(0)
 
 
@@ -85,16 +92,42 @@ func _validate_standalone_training_target() -> void:
 	add_child(target)
 	await get_tree().process_frame
 	_expect(target.has_method("is_training_target") and bool(target.call("is_training_target")), "training target did not expose its sandbox contract")
+	_expect(target.has_method("configure_training_mode") and target.has_method("get_training_mode"), "training target has no structured-mode contract")
+	_expect(target.has_signal("training_deathblow_completed"), "training target has no real-deathblow observation signal")
 	_expect(not target.is_physics_processing(), "passive training target still has autonomous enemy physics enabled")
 	_expect(int(target.get("experience")) == 0, "training target retained normal enemy experience reward")
+
+	_trial_deathblow_events = 0
+	var deathblow_cb := Callable(self, "_on_test_training_deathblow")
+	if target.has_signal("training_deathblow_completed") and not target.is_connected("training_deathblow_completed", deathblow_cb):
+		target.connect("training_deathblow_completed", deathblow_cb)
+
+	target.call("configure_training_mode", "passive_target")
+	target.call("receive_deathblow", self)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(_trial_deathblow_events == 0, "passive training deathblow incorrectly emitted structured-trial completion")
+
+	target.call("configure_training_mode", TRIAL_EXECUTION)
+	_expect(str(target.call("get_training_mode")) == TRIAL_EXECUTION, "training target did not retain Execution Trial mode")
 	target.call("death")
 	await get_tree().process_frame
 	await get_tree().process_frame
+	_expect(_trial_deathblow_events == 0, "ordinary target death incorrectly counted as an Execution Trial deathblow")
+
+	target.call("receive_deathblow", self)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(_trial_deathblow_events == 1, "Execution Trial target did not surface the real receive_deathblow path exactly once")
 	_expect(is_instance_valid(target), "training target used the normal enemy free-on-death path")
 	if is_instance_valid(target):
-		_expect(int(target.get("hp")) > 0 and not bool(target.get("has_died")), "training target did not reset after defeat")
+		_expect(int(target.get("hp")) > 0 and not bool(target.get("has_died")), "training target did not reset after execution")
 		target.queue_free()
 	await get_tree().process_frame
+
+
+func _on_test_training_deathblow(_attacker: Node) -> void:
+	_trial_deathblow_events += 1
 
 
 func _validate_localized_snapshot(cavern: Node) -> void:
@@ -103,6 +136,8 @@ func _validate_localized_snapshot(cavern: Node) -> void:
 	translation.locale = "fr"
 	translation.add_message(&"ui.blood_cavern.title", &"CAVERNE TEST")
 	translation.add_message(&"ui.blood_cavern.training_target", &"CIBLE TEST")
+	translation.add_message(&"ui.blood_cavern.trials.title", &"EPREUVES TEST")
+	translation.add_message(&"ui.blood_cavern.trials.execution.start", &"EXECUTION TEST")
 	translation.add_message(&"ui.blood_cavern.refreshers.title", &"RAPPELS TEST")
 	translation.add_message(&"ui.blood_cavern.refresher.parry.title", &"PARADE TEST")
 	translation.add_message(&"ui.blood_cavern.technique_demos.title", &"DEMOS TECHNIQUE TEST")
@@ -112,6 +147,8 @@ func _validate_localized_snapshot(cavern: Node) -> void:
 	var localized: Dictionary = cavern.call("_menu_snapshot_for_playtest")
 	_expect(str(localized.get("title", "")) == "CAVERNE TEST", "Blood Cavern title did not resolve stable localization key")
 	_expect(str(localized.get("training_target", "")) == "CIBLE TEST", "Blood Cavern training action did not resolve stable localization key")
+	_expect(str(localized.get("trials", "")) == "EPREUVES TEST", "Blood Cavern trial heading did not resolve stable localization key")
+	_expect(str(localized.get("execution_trial", "")) == "EXECUTION TEST", "Blood Cavern Execution Trial action did not resolve stable localization key")
 	_expect(str(localized.get("refreshers", "")) == "RAPPELS TEST", "Blood Cavern refresher heading did not resolve stable localization key")
 	_expect(str(localized.get("technique_demos", "")) == "DEMOS TECHNIQUE TEST", "Blood Cavern Technique-demo heading did not resolve stable localization key")
 	_expect(str(localized.get("blood_mirror", "")) == "MIROIR TEST", "Blood Cavern Blood Mirror action did not resolve stable localization key")
@@ -200,8 +237,124 @@ func _validate_technique_demo_contract(cavern: Node) -> void:
 	_expect(_same_string_set(RunData.acquired_upgrades, prior_demo_state), "End Training did not restore the exact prior Technique list")
 	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").is_empty(), "Technique demo target survived End Training")
 
+	# A Technique demo is temporary Cavern state. Entering the nested Blood Mirror must
+	# terminate it just as explicitly as End Training so no demo loadout leaks into
+	# permanent progression UI or later run setup.
+	RunData.acquired_upgrades = prior_demo_state.duplicate(true)
+	cavern.call("_start_technique_demo", "echo_lingering_cut")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	cavern.call("_open_menu")
+	await get_tree().process_frame
+	cavern.call("_open_blood_mirror")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(_same_string_set(RunData.acquired_upgrades, prior_demo_state), "Blood Mirror transition did not restore the prior Technique list")
+	var mirror_snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+	_expect(str(mirror_snapshot.get("active_demo_technique", "")) == "", "Technique demo remained active inside Blood Mirror")
+	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").is_empty(), "Technique demo target survived Blood Mirror transition")
+	_close_mirror_menu_if_present()
+
 	RunData.acquired_upgrades = original_upgrades
 	MetaProgress.progression_flags = original_flags
+
+
+func _validate_execution_trial_contract(cavern: Node, gold_before: int, mist_before: int, scrolls_before: int) -> void:
+	if typeof(MetaProgress) != TYPE_OBJECT or typeof(RelicRuntime) != TYPE_OBJECT:
+		_expect(false, "Execution Trial validation requires MetaProgress and RelicRuntime")
+		return
+
+	var original_completions: Dictionary = MetaProgress.blood_cavern_trial_completions.duplicate(true)
+	var original_unlocked: Dictionary = RelicRuntime.unlocked_relics.duplicate(true)
+	var original_mastery: Dictionary = RelicRuntime.mastery_kills.duplicate(true)
+	var original_equipped: String = str(RelicRuntime.equipped_relic_id)
+
+	MetaProgress.blood_cavern_trial_completions.erase(TRIAL_EXECUTION)
+	RelicRuntime.unlocked_relics.erase(RELIC_CATALOG.EXECUTION_BEAD)
+	RelicRuntime.mastery_kills.erase(RELIC_CATALOG.EXECUTION_BEAD)
+
+	cavern.call("_start_execution_trial")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var active: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+	_expect(str(active.get("active_trial", "")) == TRIAL_EXECUTION, "Execution Trial did not expose active trial state")
+	_expect(bool(active.get("training_active", false)), "Execution Trial did not spawn a live training target")
+	var targets: Array[Node] = get_tree().get_nodes_in_group("blood_cavern_training_target")
+	_expect(targets.size() == 1, "Execution Trial must own exactly one target")
+	if targets.size() == 1:
+		var target: Node = targets[0]
+		_expect(target.has_method("get_training_mode") and str(target.call("get_training_mode")) == TRIAL_EXECUTION, "Execution Trial target was not configured for execution observation")
+		# Health-only defeat is deliberately insufficient. It must reset and leave the
+		# trial active, proving completion is tied to the production receive_deathblow path.
+		target.call("death")
+		await get_tree().process_frame
+		await get_tree().process_frame
+		var after_plain_death: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+		_expect(str(after_plain_death.get("active_trial", "")) == TRIAL_EXECUTION, "ordinary target death incorrectly completed the Execution Trial")
+		_expect(not MetaProgress.has_completed_blood_cavern_trial(TRIAL_EXECUTION), "ordinary target death persisted Execution Trial completion")
+		_expect(not RelicRuntime.is_unlocked(RELIC_CATALOG.EXECUTION_BEAD), "ordinary target death unlocked the Execution Bead")
+
+		target.call("receive_deathblow", self)
+		await get_tree().process_frame
+		await get_tree().process_frame
+		await get_tree().process_frame
+		var first_clear: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+		var first_result_value: Variant = first_clear.get("last_trial_result", {})
+		var first_result: Dictionary = first_result_value as Dictionary if first_result_value is Dictionary else {}
+		_expect(str(first_clear.get("active_trial", "")) == "", "real deathblow did not end the Execution Trial")
+		_expect(not bool(first_clear.get("training_active", true)), "Execution Trial target survived real completion")
+		_expect(bool(first_result.get("first_clear", false)), "Execution Trial real deathblow was not recorded as first clear")
+		_expect(str(first_result.get("relic_id", "")) == RELIC_CATALOG.EXECUTION_BEAD, "Execution Trial first clear did not route through the current challenge Relic mapping")
+		_expect(MetaProgress.has_completed_blood_cavern_trial(TRIAL_EXECUTION), "Execution Trial first clear was not persisted")
+		_expect(RelicRuntime.is_unlocked(RELIC_CATALOG.EXECUTION_BEAD), "Execution Trial first clear did not unlock the Execution Bead")
+
+	# Repeat clears are practice, not a farmable reward source.
+	cavern.call("_start_execution_trial")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var repeat_targets: Array[Node] = get_tree().get_nodes_in_group("blood_cavern_training_target")
+	_expect(repeat_targets.size() == 1, "repeat Execution Trial did not spawn exactly one target")
+	if repeat_targets.size() == 1:
+		repeat_targets[0].call("receive_deathblow", self)
+		await get_tree().process_frame
+		await get_tree().process_frame
+		await get_tree().process_frame
+		var repeat_snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+		var repeat_result_value: Variant = repeat_snapshot.get("last_trial_result", {})
+		var repeat_result: Dictionary = repeat_result_value as Dictionary if repeat_result_value is Dictionary else {}
+		_expect(not bool(repeat_result.get("first_clear", true)), "repeat Execution Trial incorrectly became another first clear")
+		_expect(str(repeat_result.get("relic_id", "")) == "", "repeat Execution Trial attempted to grant another Relic")
+
+	_expect(int(RunData.gold) == gold_before if typeof(RunData) == TYPE_OBJECT else true, "Execution Trial changed run Gold")
+	_expect(int(MetaProgress.mist) == mist_before, "Execution Trial changed persistent Mist")
+	_expect(int(MetaProgress.scrolls) == scrolls_before, "Execution Trial changed persistent Scrolls")
+	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").is_empty(), "Execution Trial target survived completion")
+
+	# Restore the exact persistent state the smoke inherited, including the on-disk
+	# snapshots touched by the real first-clear APIs.
+	MetaProgress.blood_cavern_trial_completions = original_completions
+	MetaProgress.flush_save()
+	RelicRuntime.unlocked_relics = original_unlocked
+	RelicRuntime.mastery_kills = original_mastery
+	RelicRuntime.equipped_relic_id = original_equipped
+	if RelicRuntime.has_method("_save_progress"):
+		RelicRuntime.call("_save_progress")
+
+
+func _validate_trial_mirror_boundary(cavern: Node) -> void:
+	cavern.call("_start_execution_trial")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").size() == 1, "Mirror-boundary trial setup did not spawn a target")
+	cavern.call("_open_menu")
+	await get_tree().process_frame
+	cavern.call("_open_blood_mirror")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+	_expect(str(snapshot.get("active_trial", "")) == "", "Execution Trial remained active inside Blood Mirror")
+	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").is_empty(), "Execution Trial target survived Blood Mirror transition")
+	_close_mirror_menu_if_present()
 
 
 func _validate_actual_training_lifecycle(cavern: Node, gold_before: int, mist_before: int, scrolls_before: int) -> void:
@@ -240,6 +393,7 @@ func _validate_actual_menu_transition(cavern: Node) -> void:
 	_expect(cavern_menu != null, "Blood Cavern did not build its actual menu surface")
 	if cavern_menu != null:
 		_expect(cavern_menu.find_child("StartTrainingTarget", true, false) is Button, "Blood Cavern menu is missing the passive training action")
+		_expect(cavern_menu.find_child("StartExecutionTrial", true, false) is Button, "Blood Cavern menu is missing the Execution Trial action")
 		_expect(cavern_menu.find_child("OpenBloodMirror", true, false) is Button, "Blood Cavern menu is missing the deeper Blood Mirror action")
 		var buttons: Node = cavern_menu.find_child("RefresherButtons", true, false)
 		_expect(buttons is GridContainer and buttons.get_child_count() == EXPECTED_REFRESHERS.size(), "Blood Cavern menu does not render all seven refresher actions")
@@ -259,10 +413,16 @@ func _validate_actual_menu_transition(cavern: Node) -> void:
 	_expect(ui_layer == null or ui_layer.get_node_or_null("BloodCavernMenu") == null, "Blood Cavern menu did not close before entering Blood Mirror")
 	var mirror_menu: Node = ui_layer.get_node_or_null("BloodMirrorMenu") if ui_layer != null else null
 	_expect(mirror_menu != null, "Blood Cavern route did not open the nested Blood Mirror progression surface")
-	if mirror_menu != null and mirror_menu.has_method("_close"):
-		mirror_menu.call("_close")
+	_close_mirror_menu_if_present()
 	await get_tree().process_frame
 	get_tree().paused = false
+
+
+func _close_mirror_menu_if_present() -> void:
+	var ui_layer: Node = get_node_or_null("UILayer")
+	var mirror_menu: Node = ui_layer.get_node_or_null("BloodMirrorMenu") if ui_layer != null else null
+	if mirror_menu != null and mirror_menu.has_method("_close"):
+		mirror_menu.call("_close")
 
 
 func _same_string_set(actual_value: Variant, expected: Array) -> bool:
