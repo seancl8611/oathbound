@@ -1,0 +1,86 @@
+name: Blood Cavern Execution Trial Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
+      - "game/oathbound/Core/Relics/**"
+      - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
+      - "game/oathbound/Enemy/Base/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*"
+      - "game/oathbound/Utility/CombatConfig.gd"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MetaProgressionManager.gd"
+      - "game/oathbound/World/BloodCavern.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.tscn"
+      - "game/oathbound/World/HubScene.tscn"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/blood-cavern-execution-trial-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
+      - "game/oathbound/Core/Relics/**"
+      - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
+      - "game/oathbound/Enemy/Base/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*"
+      - "game/oathbound/Utility/CombatConfig.gd"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MetaProgressionManager.gd"
+      - "game/oathbound/World/BloodCavern.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.tscn"
+      - "game/oathbound/World/HubScene.tscn"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/blood-cavern-execution-trial-check.yml"
+  workflow_dispatch:
+
+jobs:
+  execution-trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify playable Execution Trial chain
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernExecutionTrialSmoke.tscn 2>&1 | tee blood-cavern-execution-trial.log
+          grep -F "[BloodCavernExecutionTrialSmoke] PASS - shared Hushiro posture break | real Player deathblow | first-clear Relic | repeat practice | completion feedback | no currency leakage" blood-cavern-execution-trial.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-execution-trial.log; then
+            echo "FAIL: Blood Cavern Execution Trial emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-execution-trial.log; then
+            echo "FAIL: Blood Cavern Execution Trial emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "Lambda capture at index" blood-cavern-execution-trial.log; then
+            echo "FAIL: Execution Trial reintroduced the freed-lambda lifetime failure class."
+            exit 1
+          fi
