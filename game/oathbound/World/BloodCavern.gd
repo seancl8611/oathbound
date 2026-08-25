@@ -173,7 +173,7 @@ func _build_menu_surface() -> Control:
 	var mirror_button := Button.new()
 	mirror_button.name = "OpenBloodMirror"
 	mirror_button.text = LOCALIZATION.ui("blood_cavern.blood_mirror", "Enter Blood Mirror")
-	mirror_button.disabled = _find_blood_mirror() == null
+	mirror_button.disabled = _find_blood_mirror() == null or not _blood_mirror_unlocked()
 	mirror_button.pressed.connect(_open_blood_mirror)
 	content.add_child(mirror_button)
 
@@ -330,138 +330,121 @@ func _refresher_copy_for_playtest(topic_id: String, family: String) -> Dictionar
 	var down: String = INPUT_GLYPHS.preferred_label("down", family)
 	var left: String = INPUT_GLYPHS.preferred_label("left", family)
 	var right: String = INPUT_GLYPHS.preferred_label("right", family)
-	match topic_id:
-		"execution":
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refresher.execution.title", "Execution"),
-				"body": LOCALIZATION.ui(
-					"blood_cavern.refresher.execution.body",
-					"Break enemy Posture, then use %s when the deathblow prompt appears. Execution ends the target's current life state; Cavern targets immediately reset instead of granting rewards."
-				) % execution,
-			}
-		"parry":
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refresher.parry.title", "Parry"),
-				"body": LOCALIZATION.ui(
-					"blood_cavern.refresher.parry.body",
-					"Use %s just before a blockable strike lands. A clean parry pressures enemy Posture more efficiently than simply absorbing pressure."
-				) % parry,
-			}
-		"dodge_red":
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refresher.dodge_red.title", "Dodge / Red Attacks"),
-				"body": LOCALIZATION.ui(
-					"blood_cavern.refresher.dodge_red.body",
-					"Red attacks are unblockable. Read the warning, reposition, and use %s to evade instead of trying to guard the hit."
-				) % dash,
-			}
-		"posture_guard":
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refresher.posture_guard.title", "Posture / Guard"),
-				"body": LOCALIZATION.ui(
-					"blood_cavern.refresher.posture_guard.body",
-					"Use %s for the current guard/parry action. Your Posture measures defensive pressure; enemy Posture creates the opening for an Execution. Hold/Toggle behavior follows your Settings choice."
-				) % parry,
-			}
-		"targeting":
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refresher.targeting.title", "Targeting"),
-				"body": LOCALIZATION.ui(
-					"blood_cavern.refresher.targeting.body",
-					"The current build uses facing and proximity rather than a dedicated lock-on button. Reposition with %s %s %s %s so Akio is oriented toward the target you intend to pressure."
-				) % [up, down, left, right],
-			}
-		"prosthetic_spirit":
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refresher.prosthetic_spirit.title", "Prosthetic / Spirit"),
-				"body": LOCALIZATION.ui(
-					"blood_cavern.refresher.prosthetic_spirit.body",
-					"Use %s to fire the equipped Prosthetic when you have enough Spirit. The Run HUD shows current Spirit and the equipped tool's cost."
-				) % prosthetic,
-			}
-		"blood_aspects":
-			if not _returning_blood_awakened():
-				return {
-					"title": LOCALIZATION.ui("blood_cavern.refresher.blood_aspects.title", "Blood / Aspects"),
-					"body": LOCALIZATION.ui("blood_cavern.refresher.blood_aspects.locked", "This refresher unlocks after Returning Blood awakens."),
-				}
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refresher.blood_aspects.title", "Blood / Aspects"),
-				"body": LOCALIZATION.ui(
-					"blood_cavern.refresher.blood_aspects.body",
-					"Returning Blood enables Aspect selection before a run. Corruption is run pressure, while permanent Aspect reliability upgrades remain owned by the Blood Mirror inside this Cavern."
-				),
-			}
-		_:
-			return {
-				"title": LOCALIZATION.ui("blood_cavern.refreshers.title", "Tutorial Refreshers"),
-				"body": LOCALIZATION.ui("blood_cavern.refreshers.unknown", "No refresher is authored for this topic."),
-			}
+	var topics: Dictionary = {
+		"execution": {
+			"title": LOCALIZATION.ui("blood_cavern.refresher.execution.title", "Execution / Deathblow"),
+			"body": LOCALIZATION.ui("blood_cavern.refresher.execution.body", "Break enemy Posture, then press %s during the deathblow prompt. Health-only defeats are not the execution condition.") % execution,
+		},
+		"parry": {
+			"title": LOCALIZATION.ui("blood_cavern.refresher.parry.title", "Parry / Deflect"),
+			"body": LOCALIZATION.ui("blood_cavern.refresher.parry.body", "Tap %s as a blockable strike arrives. Clean deflects pressure enemy Posture and preserve your own guard stability.") % parry,
+		},
+		"dodge_red": {
+			"title": LOCALIZATION.ui("blood_cavern.refresher.dodge_red.title", "Dodge Red Attacks"),
+			"body": LOCALIZATION.ui("blood_cavern.refresher.dodge_red.body", "Red attacks cannot be guarded normally. Read the warning, then use %s to evade the danger window.") % dash,
+		},
+		"posture_guard": {
+			"title": LOCALIZATION.ui("blood_cavern.refresher.posture_guard.title", "Posture / Guard"),
+			"body": LOCALIZATION.ui("blood_cavern.refresher.posture_guard.body", "Guarding prevents normal damage but builds Posture. Release pressure and reposition before your Posture breaks."),
+		},
+		"targeting": {
+			"title": LOCALIZATION.ui("blood_cavern.refresher.targeting.title", "Targeting / Movement"),
+			"body": LOCALIZATION.ui("blood_cavern.refresher.targeting.body", "Move with %s / %s / %s / %s. Keep threats framed and use spacing before committing to long attack strings.") % [up, left, down, right],
+		},
+		"prosthetic_spirit": {
+			"title": LOCALIZATION.ui("blood_cavern.refresher.prosthetic_spirit.title", "Prosthetic / Spirit"),
+			"body": LOCALIZATION.ui("blood_cavern.refresher.prosthetic_spirit.body", "Press %s to use the equipped Prosthetic. Tools consume Spirit, so spend them deliberately around enemy openings.") % prosthetic,
+		},
+		"blood_aspects": {
+			"title": LOCALIZATION.ui("blood_cavern.refresher.blood_aspects.title", "Blood Aspects"),
+			"body": LOCALIZATION.ui("blood_cavern.refresher.blood_aspects.body", "Blood Aspects alter Akio's combat identity after Returning Blood awakens. The Blood Mirror owns their permanent reliability progression."),
+		},
+	}
+	return (topics.get(topic_id, {}) as Dictionary).duplicate(true)
 
 
 func _discovered_action_techniques_for_playtest() -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
-	if typeof(MetaProgress) != TYPE_OBJECT:
-		return out
-	for id_value: Variant in TECHNIQUE_CATALOG.TECHNIQUES.keys():
-		var technique_id: String = str(id_value)
-		if not bool(MetaProgress.get_progression_flag(TECHNIQUE_RECORD_PREFIX + technique_id, false)):
+	var seen: Dictionary = {}
+	var upgrades: Array = RunData.player_upgrades if typeof(RunData) == TYPE_OBJECT else []
+	for upgrade_value: Variant in upgrades:
+		var upgrade_id: String = str(upgrade_value)
+		if not TECHNIQUE_CATALOG.has_entry(upgrade_id):
 			continue
-		var data: Dictionary = TECHNIQUE_CATALOG.get_entry(technique_id)
-		if str(data.get("kind", "")) != TECHNIQUE_CATALOG.KIND_ACTION:
+		var data: Dictionary = TECHNIQUE_CATALOG.get_entry(upgrade_id)
+		if str(data.get("equip_class", "")) != TECHNIQUE_CATALOG.EQUIP_ACTION:
 			continue
+		if seen.has(upgrade_id):
+			continue
+		seen[upgrade_id] = true
 		out.append({
-			"id": technique_id,
-			"name": LOCALIZATION.catalog_name("technique", technique_id, str(data.get("displayname", technique_id.capitalize()))),
-			"details": LOCALIZATION.catalog_details("technique", technique_id, str(data.get("details", ""))),
-			"family": str(data.get("family", "")),
-			"action": str(data.get("action", "")),
-			"action_label": _technique_action_label(str(data.get("action", ""))),
+			"id": upgrade_id,
+			"name": LOCALIZATION.catalog_name("technique", upgrade_id, str(data.get("displayname", upgrade_id.capitalize()))),
+			"action_label": _technique_action_label(data),
+			"details": LOCALIZATION.catalog_description("technique", upgrade_id, str(data.get("description", ""))),
 		})
-	out.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
-		return str(a.get("name", "")) < str(b.get("name", ""))
-	)
+	for record: Variant in _discovered_technique_records():
+		var record_id: String = str(record)
+		if seen.has(record_id) or not TECHNIQUE_CATALOG.has_entry(record_id):
+			continue
+		var record_data: Dictionary = TECHNIQUE_CATALOG.get_entry(record_id)
+		if str(record_data.get("equip_class", "")) != TECHNIQUE_CATALOG.EQUIP_ACTION:
+			continue
+		seen[record_id] = true
+		out.append({
+			"id": record_id,
+			"name": LOCALIZATION.catalog_name("technique", record_id, str(record_data.get("displayname", record_id.capitalize()))),
+			"action_label": _technique_action_label(record_data),
+			"details": LOCALIZATION.catalog_description("technique", record_id, str(record_data.get("description", ""))),
+		})
+	out.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return str(a.get("name", "")) < str(b.get("name", "")))
 	return out
 
 
-func _technique_action_label(action: String) -> String:
-	match action:
-		"basic": return LOCALIZATION.ui("technique.kind.basic", "Basic Attack")
-		"held": return LOCALIZATION.ui("technique.kind.held", "Held Attack")
-		"dash": return LOCALIZATION.ui("technique.kind.dash", "Dash Attack")
-		"counter": return LOCALIZATION.ui("technique.kind.counter", "Parry / Counter")
-		"deathblow": return LOCALIZATION.ui("technique.kind.deathblow", "Deathblow")
-		_: return LOCALIZATION.ui("technique.kind.action", "Action Technique")
+func _discovered_technique_records() -> Array:
+	var out: Array = []
+	if typeof(RecordsManager) != TYPE_OBJECT or not RecordsManager.has_method("get_run_milestones"):
+		return out
+	for milestone_value: Variant in RecordsManager.call("get_run_milestones"):
+		var milestone: String = str(milestone_value)
+		if milestone.begins_with(TECHNIQUE_RECORD_PREFIX):
+			out.append(milestone.trim_prefix(TECHNIQUE_RECORD_PREFIX))
+	return out
 
 
-func _is_discovered_action_technique(technique_id: String) -> bool:
-	for demo: Dictionary in _discovered_action_techniques_for_playtest():
-		if str(demo.get("id", "")) == technique_id:
-			return true
-	return false
+func _technique_action_label(data: Dictionary) -> String:
+	var channel: String = str(data.get("action_channel", ""))
+	match channel:
+		TECHNIQUE_CATALOG.CHANNEL_FINISHER:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.finisher", "Finisher")
+		TECHNIQUE_CATALOG.CHANNEL_PARRY:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.parry", "Parry")
+		TECHNIQUE_CATALOG.CHANNEL_DASH:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.dash", "Dash")
+		TECHNIQUE_CATALOG.CHANNEL_ATTACK:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.attack", "Attack")
+	return LOCALIZATION.ui("blood_cavern.technique_demos.action.general", "Action")
 
 
 func _start_technique_demo(technique_id: String) -> void:
-	if not _is_discovered_action_technique(technique_id):
-		push_warning("[BloodCavern] Technique demo rejected because it is not a discovered Action Technique: %s" % technique_id)
+	if not TECHNIQUE_CATALOG.has_entry(technique_id):
+		return
+	var data: Dictionary = TECHNIQUE_CATALOG.get_entry(technique_id)
+	if str(data.get("equip_class", "")) != TECHNIQUE_CATALOG.EQUIP_ACTION:
 		return
 	_clear_trial_completion_banner()
 	_close_menu_surface()
-	_clear_training_target()
+	if not _demo_snapshot_active:
+		_demo_original_upgrades = RunData.player_upgrades.duplicate(true) if typeof(RunData) == TYPE_OBJECT else []
+		_demo_snapshot_active = true
 	_active_trial_id = ""
 	_trial_completion_queued = false
-	_begin_demo_loadout(technique_id)
-	_spawn_training_target("technique_demo")
-
-
-func _begin_demo_loadout(technique_id: String) -> void:
-	if typeof(RunData) != TYPE_OBJECT:
-		return
-	if not _demo_snapshot_active:
-		_demo_original_upgrades = RunData.acquired_upgrades.duplicate(true)
-		_demo_snapshot_active = true
-	RunData.acquired_upgrades = [technique_id]
 	_active_demo_technique_id = technique_id
+	if typeof(RunData) == TYPE_OBJECT:
+		RunData.player_upgrades = [technique_id]
+	if _has_training_target():
+		_clear_training_target()
+	_spawn_training_target("technique_demo")
 	print("[BloodCavern] Technique demo loadout active: %s" % technique_id)
 
 
@@ -470,7 +453,7 @@ func _restore_demo_loadout() -> void:
 		_active_demo_technique_id = ""
 		return
 	if typeof(RunData) == TYPE_OBJECT:
-		RunData.acquired_upgrades = _demo_original_upgrades.duplicate(true)
+		RunData.player_upgrades = _demo_original_upgrades.duplicate(true)
 	_demo_original_upgrades.clear()
 	_demo_snapshot_active = false
 	_active_demo_technique_id = ""
@@ -480,22 +463,22 @@ func _restore_demo_loadout() -> void:
 func _start_execution_trial() -> void:
 	_clear_trial_completion_banner()
 	_close_menu_surface()
-	_clear_training_target()
 	_restore_demo_loadout()
+	_stop_training_state()
 	_active_trial_id = TRIAL_EXECUTION
 	_trial_completion_queued = false
-	_last_trial_result = {}
+	_last_trial_result.clear()
 	_spawn_training_target(TRIAL_EXECUTION)
 
 
-func _on_training_deathblow_completed(_attacker: Node) -> void:
-	if _active_trial_id != TRIAL_EXECUTION or _trial_completion_queued:
+func _on_training_deathblow_completed(mode: String) -> void:
+	if mode != TRIAL_EXECUTION or _active_trial_id != TRIAL_EXECUTION or _trial_completion_queued:
 		return
 	_trial_completion_queued = true
-	call_deferred("_complete_active_trial", TRIAL_EXECUTION)
+	call_deferred("_complete_trial", TRIAL_EXECUTION)
 
 
-func _complete_active_trial(trial_id: String) -> void:
+func _complete_trial(trial_id: String) -> void:
 	_trial_completion_queued = false
 	if _active_trial_id != trial_id:
 		return
@@ -709,14 +692,19 @@ func _find_blood_mirror() -> Node:
 	return get_node_or_null("BloodMirror")
 
 
+func _blood_mirror_unlocked() -> bool:
+	return (
+		typeof(MetaProgressionManager) == TYPE_OBJECT
+		and MetaProgressionManager.has_method("is_blood_mirror_unlocked")
+		and bool(MetaProgressionManager.call("is_blood_mirror_unlocked"))
+	)
+
+
 func _blood_mirror_status_text() -> String:
-	var unlocked: bool = false
-	if typeof(MetaProgressionManager) == TYPE_OBJECT and MetaProgressionManager.has_method("is_blood_mirror_unlocked"):
-		unlocked = bool(MetaProgressionManager.is_blood_mirror_unlocked())
 	return LOCALIZATION.ui(
 		"blood_cavern.mirror.available",
 		"Blood Mirror — awakened after the Keeper. Permanent Aspect reliability progression is available inside."
-	) if unlocked else LOCALIZATION.ui(
+	) if _blood_mirror_unlocked() else LOCALIZATION.ui(
 		"blood_cavern.mirror.locked",
 		"Blood Mirror — dormant until the first Keeper defeat. The outer Training Hall remains available."
 	)
@@ -818,5 +806,3 @@ func _exit_tree() -> void:
 	_clear_trial_completion_banner()
 	_clear_training_target()
 	_restore_demo_loadout()
-	_active_trial_id = ""
-	_trial_completion_queued = false
