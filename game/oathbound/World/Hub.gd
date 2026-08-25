@@ -14,7 +14,6 @@ const INTERACTION_PROMPTS: Dictionary = {
 	"ForgeBench": {"key": "ui.strand.station.forge", "fallback": "Forge"},
 	"CodexBoard": {"key": "ui.strand.station.discovery_board", "fallback": "Discovery Board"},
 	"Bloodwell": {"key": "ui.strand.station.bloodwell", "fallback": "Bloodwell"},
-	"BloodMirror": {"key": "ui.strand.station.blood_mirror", "fallback": "Blood Mirror"},
 	"MerchantStall": {"key": "ui.strand.station.merchant", "fallback": "Merchant"},
 	"BloodCavern": {"key": "ui.strand.station.blood_cavern", "fallback": "Blood Cavern"},
 	"KeeperNPC": {"key": "npc.keeper.name", "fallback": "Keeper"},
