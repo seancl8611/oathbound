@@ -11,9 +11,22 @@ const Catalog = preload("res://Core/Presentation/OathboundPresentationCatalog.gd
 const SEEN_PREFIX := "narrative_seen/"
 const LORE_PREFIX := "lore_unlocked/"
 
+var _lore_sync_queued := false
+
 
 func _ready() -> void:
-	print("[OathboundNarrativeRuntime] v1.0 - campaign dialogue + lore presentation")
+	if typeof(MetaProgress) == TYPE_OBJECT:
+		for signal_name: String in ["progression_changed", "campaign_changed"]:
+			if MetaProgress.has_signal(signal_name):
+				var cb := Callable(self, "_queue_lore_sync")
+				if not MetaProgress.is_connected(signal_name, cb):
+					MetaProgress.connect(signal_name, cb)
+	if typeof(RelicRuntime) == TYPE_OBJECT and RelicRuntime.has_signal("collection_changed"):
+		var relic_cb := Callable(self, "_queue_lore_sync")
+		if not RelicRuntime.is_connected("collection_changed", relic_cb):
+			RelicRuntime.connect("collection_changed", relic_cb)
+	_queue_lore_sync()
+	print("[OathboundNarrativeRuntime] v1.1 - campaign dialogue + reachable Discovery Board lore")
 
 
 func get_shogun_confrontation() -> Dictionary:
@@ -80,14 +93,45 @@ func unlock_lore(record_id: String) -> bool:
 
 func unlock_lore_for_campaign_state() -> Array[String]:
 	var ids: Array[String] = []
+
+	# The Board becomes a useful archive after Akio's first return. These entries are
+	# background knowledge the Strand can already document without exposing later twists.
 	if MetaProgress.is_returning_blood_awakened():
-		ids.append_array(["record_order_crossings", "record_returning_blood"])
+		ids.append_array([
+			"record_order_crossings",
+			"record_returning_blood",
+			"record_keeper_oath",
+			"record_blood_aspects",
+			"record_prosthetic_craft",
+		])
+
+	# Hushiro's first successful crossing gives the Scribe enough evidence to contextualize
+	# the old plague, the spread of Beast Blood, and why containment became necessary.
 	if MetaProgress.has_cleared_boss(1):
-		ids.append_array(["record_hushiro", "record_keeper_gate"])
+		ids.append_array([
+			"record_hushiro",
+			"record_keeper_gate",
+			"record_plague_year",
+			"record_beast_blood_spread",
+			"record_containment",
+		])
 	if MetaProgress.has_cleared_boss(2):
 		ids.append_array(["record_yomori", "record_twin_maws"])
 	if MetaProgress.has_cleared_boss(3):
 		ids.append_array(["record_kagutsuchi", "record_eclipse_shogun"])
+
+	# Relic provenance becomes relevant once the player has actually obtained one. The
+	# live Relic runtime is already slot-scoped, so this discovery follows the active save.
+	if _has_any_relic():
+		ids.append("record_relic_provenance")
+
+	# Named Court threats use the same durable miniboss flags that drive the launch
+	# miniboss-hunter achievement; no parallel codex progression model is introduced.
+	if bool(MetaProgress.get_progression_flag("miniboss_defeated/blood_lotus", false)):
+		ids.append("record_blood_lotus")
+	if bool(MetaProgress.get_progression_flag("miniboss_defeated/eternal_swordsman", false)):
+		ids.append("record_eternal_swordsman")
+
 	var bindings := MetaProgress.get_heart_bindings_destroyed()
 	if bindings >= 1:
 		ids.append_array(["record_first_extraction", "record_seven_bindings", "record_heart_rejection"])
@@ -97,6 +141,7 @@ func unlock_lore_for_campaign_state() -> Array[String]:
 		ids.append("record_unbound_heart")
 	if MetaProgress.is_story_complete():
 		ids.append("record_after_heart")
+
 	var newly_unlocked: Array[String] = []
 	for record_id in ids:
 		if unlock_lore(record_id):
@@ -144,6 +189,25 @@ func get_ending_sequence() -> Array[Dictionary]:
 
 func get_postgame_explanation() -> Array[Dictionary]:
 	return Catalog.postgame_explanation()
+
+
+func _queue_lore_sync() -> void:
+	if _lore_sync_queued:
+		return
+	_lore_sync_queued = true
+	call_deferred("_run_queued_lore_sync")
+
+
+func _run_queued_lore_sync() -> void:
+	_lore_sync_queued = false
+	unlock_lore_for_campaign_state()
+
+
+func _has_any_relic() -> bool:
+	if typeof(RelicRuntime) != TYPE_OBJECT:
+		return false
+	var unlocked_value: Variant = RelicRuntime.get("unlocked_relics")
+	return unlocked_value is Dictionary and not (unlocked_value as Dictionary).is_empty()
 
 
 func _conversation_is_available(conversation: Dictionary) -> bool:
