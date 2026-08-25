@@ -49,6 +49,8 @@ The current runtime implements the reusable boundary and one real Basic Combat T
 
 Not yet authored by this runtime slice: final trial count, final fixed Aspect/Technique/Prosthetic/Relic challenge loadouts, full Aspect trial scripting, full mastery presentation/rewards, and final sequencing for both challenge-Relic milestones.
 
+For release-completion accounting, only **player-accessible authored trials** count toward required trial completion. A reserved challenge ID or Relic mapping does not become a 100% requirement until a playable trial path exists for it. The currently reserved second challenge milestone therefore remains future authored content rather than an inaccessible completion blocker.
+
 ## Trial families
 
 ### Basic Combat Trials
