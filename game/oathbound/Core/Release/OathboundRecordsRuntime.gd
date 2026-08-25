@@ -11,6 +11,7 @@ signal records_changed
 signal run_result_ready(result: Dictionary)
 
 const TECHNIQUE_CATALOG = preload("res://Core/Techniques/TechniqueCatalog.gd")
+const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
 const FLAG_PREFIX := "records/"
 const FLAG_TOTAL_ATTEMPTS := FLAG_PREFIX + "total_attempts"
@@ -30,6 +31,23 @@ const HEART_ASPECT_PREFIX := "heart_clear_aspect/"
 # before an authored player-facing trial path exists.
 const REQUIRED_BLOOD_CAVERN_TRIALS: Array[String] = [
 	"execution_trial",
+]
+
+# The approved launch catalog contains ten Relics, but Last Oath is currently reserved
+# behind the not-yet-authored `last_oath_trial`. Completion therefore counts the nine
+# Relics that have player-accessible acquisition paths today and their two mastery ranks.
+# When the second challenge becomes playable, add Last Oath here rather than changing
+# the 10-Relic catalog or inventing a temporary acquisition source.
+const REQUIRED_OBTAINABLE_RELICS: Array[String] = [
+	RELIC_CATALOG.TRAVELERS_COIN,
+	RELIC_CATALOG.MERCHANTS_SEAL,
+	RELIC_CATALOG.IRON_PRAYER_BEAD,
+	RELIC_CATALOG.SPIRIT_TASSEL,
+	RELIC_CATALOG.EXECUTION_BEAD,
+	RELIC_CATALOG.WAYFARERS_CHARM,
+	RELIC_CATALOG.UNBROKEN_CORD,
+	RELIC_CATALOG.SCRIBES_LENS,
+	RELIC_CATALOG.BLOOD_MOON_SHARD,
 ]
 
 var _run_active := false
@@ -229,20 +247,16 @@ func get_completion_breakdown() -> Dictionary:
 					if ProstheticManager.is_upgrade_purchased(prosthetic_id, upgrade_id):
 						prosthetic_upgrades_owned += 1
 
-	var relics_total := 10
+	var relics_total := REQUIRED_OBTAINABLE_RELICS.size()
 	var relics_owned := 0
-	var relic_mastery_total := 20
+	var relic_mastery_total := REQUIRED_OBTAINABLE_RELICS.size() * 2
 	var relic_mastery_owned := 0
 	if typeof(RelicRuntime) == TYPE_OBJECT:
-		var unlocked_value: Variant = RelicRuntime.get("unlocked_relics")
-		if unlocked_value is Dictionary:
-			relics_owned = (unlocked_value as Dictionary).size()
-		var mastery_value: Variant = RelicRuntime.get("mastery_kills")
-		if mastery_value is Dictionary:
-			for relic_id_value: Variant in (mastery_value as Dictionary).keys():
-				var relic_id := str(relic_id_value)
-				if RelicRuntime.has_method("get_mastery_rank"):
-					relic_mastery_owned += clampi(int(RelicRuntime.get_mastery_rank(relic_id)), 0, 2)
+		for relic_id: String in REQUIRED_OBTAINABLE_RELICS:
+			if RelicRuntime.has_method("is_unlocked") and bool(RelicRuntime.call("is_unlocked", relic_id)):
+				relics_owned += 1
+			if RelicRuntime.has_method("get_mastery_rank"):
+				relic_mastery_owned += clampi(int(RelicRuntime.call("get_mastery_rank", relic_id)), 0, 2)
 
 	var technique_total := TECHNIQUE_CATALOG.TECHNIQUES.size() + TECHNIQUE_CATALOG.REFINEMENTS.size()
 	var technique_owned := _count_technique_records()
