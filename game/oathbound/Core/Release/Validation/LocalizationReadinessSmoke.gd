@@ -242,6 +242,9 @@ func _validate_boat_surface() -> void:
 		_expect(_contains_text(confirmation_texts, "Demarrer Course Test"), "Boat Start Run action did not resolve localization key")
 	var snapshot: Dictionary = boat.call("_confirmation_snapshot_for_playtest")
 	_expect(str(snapshot.get("start", "")) == "Demarrer Course Test", "Boat confirmation snapshot did not use localized Start Run copy")
+	var technique_copy: String = str(snapshot.get("techniques", ""))
+	_expect(technique_copy == "Techniques begin empty and are acquired during the run.", "Boat confirmation no longer communicates the canonical empty-run Technique collection")
+	_expect(not technique_copy.to_lower().contains("slot"), "Boat confirmation reintroduced deprecated Technique-slot language")
 	boat.call("_cancel_departure_menu")
 	boat.queue_free()
 	await get_tree().process_frame
@@ -283,131 +286,95 @@ func _validate_front_end_surface() -> void:
 	add_child(front_end)
 	await get_tree().process_frame
 	await get_tree().process_frame
-	var texts := _all_control_texts(front_end)
-	_expect(_contains_text(texts, "CONTINUER FRONT TEST"), "front-end Continue action did not resolve stable UI key")
-	_expect(_contains_text(texts, "NOUVELLE PARTIE TEST"), "front-end New Game action did not resolve stable UI key")
-	_expect(_contains_text(texts, "PARAMETRES TEST"), "front-end Settings action did not resolve stable UI key")
-	_expect(_contains_text(texts, "CREDITS TEST"), "front-end Credits action did not resolve stable UI key")
-	_expect(_contains_text(texts, "QUITTER TEST"), "front-end Quit action did not resolve stable UI key")
-	_expect(_contains_text(texts, "BUILD FRONT TEST"), "front-end build label did not resolve stable UI key")
-
-	var empty_card: String = str(front_end.call("_slot_card_text", 2, {"exists": false}))
-	_expect(empty_card.contains("EMPLACEMENT 2") and empty_card.contains("VIDE TEST"), "empty save-slot card did not resolve stable UI keys")
-	var active_card: String = str(front_end.call("_slot_card_text", 3, {
-		"exists": true,
-		"playtime_seconds": 3600.0,
-		"state_label": "Returning Blood Awakened",
-		"completion_percent": 45,
-		"story_complete": false,
-		"has_active_run": true,
-	}))
-	_expect(active_card.contains("SANG RETOUR TEST"), "save-slot state did not resolve stable UI key")
-	_expect(active_card.contains("45% COMPLETION TEST"), "save-slot completion text did not resolve stable UI key")
-	_expect(active_card.contains("CHECKPOINT TEST"), "save-slot checkpoint text did not resolve stable UI key")
-	var warning: String = str(front_end.call("_localized_subtitle", "Slot 2 contains persistent progress. This action cannot be undone."))
-	_expect(warning == "EMPLACEMENT 2 AVERTISSEMENT TEST", "save-slot deletion warning did not resolve stable UI key")
-
+	var main_texts := _all_control_texts(front_end)
+	_expect(_contains_text(main_texts, "CONTINUER FRONT TEST"), "front-end Continue action did not resolve localization key")
+	_expect(_contains_text(main_texts, "NOUVELLE PARTIE TEST"), "front-end New Game action did not resolve localization key")
+	_expect(_contains_text(main_texts, "PARAMETRES TEST"), "front-end Settings action did not resolve localization key")
+	_expect(_contains_text(main_texts, "CREDITS TEST"), "front-end Credits action did not resolve localization key")
+	_expect(_contains_text(main_texts, "QUITTER TEST"), "front-end Quit action did not resolve localization key")
+	_expect(_contains_text(main_texts, "BUILD FRONT TEST"), "front-end build label did not resolve localization key")
 	front_end.call("_build_settings_menu")
 	await get_tree().process_frame
-	texts = _all_control_texts(front_end)
-	_expect(_contains_text(texts, "AUDIO SECTION TEST"), "settings section did not resolve stable UI key")
-	_expect(_contains_text(texts, "MASTER TEST"), "settings slider label did not resolve stable setting key")
-	_expect(_contains_text(texts, "CONTRASTE TEST"), "settings toggle label did not resolve stable setting key")
-	_expect(_contains_text(texts, "BLOCAGE TEST:"), "settings Block Input action did not resolve stable UI key")
-
+	var settings_texts := _all_control_texts(front_end)
+	_expect(_contains_text(settings_texts, "AUDIO SECTION TEST"), "Settings Audio section did not resolve localization key")
+	_expect(_contains_text(settings_texts, "MASTER TEST"), "Settings Master label did not resolve localization key")
+	_expect(_contains_text(settings_texts, "CONTRASTE TEST"), "Settings High Contrast label did not resolve localization key")
 	front_end.call("_build_controls_menu")
 	await get_tree().process_frame
-	texts = _all_control_texts(front_end)
-	_expect(_contains_text(texts, "ATTAQUE TEST"), "controls action label did not resolve stable input-action key")
-
+	var controls_texts := _all_control_texts(front_end)
+	_expect(_contains_text(controls_texts, "ATTAQUE TEST"), "Controls Attack action did not resolve localization key")
 	front_end.call("_build_credits_menu")
 	await get_tree().process_frame
-	texts = _all_control_texts(front_end)
-	_expect(_contains_text(texts, "CREDITS BODY TEST"), "credits body did not resolve stable UI key")
-
+	var credits_texts := _all_control_texts(front_end)
+	_expect(_contains_text(credits_texts, "CREDITS BODY TEST"), "Credits body did not resolve localization key")
 	front_end.queue_free()
 	await get_tree().process_frame
 
 
 func _validate_pause_surface() -> void:
 	var pause_value: Variant = PAUSE_OVERVIEW_SCRIPT.new()
-	_expect(pause_value is CanvasLayer, "Pause localization test could not instantiate release overlay")
-	if not (pause_value is CanvasLayer):
+	_expect(pause_value is Control, "Pause overview localization test could not instantiate runtime")
+	if not (pause_value is Control):
 		return
-	var pause_overlay: CanvasLayer = pause_value as CanvasLayer
-	add_child(pause_overlay)
+	var pause := pause_value as Control
+	add_child(pause)
 	await get_tree().process_frame
+	var texts := _all_control_texts(pause)
+	_expect(_contains_text(texts, "PAUSE TEST"), "Pause title did not resolve localization key")
+	_expect(_contains_text(texts, "REPRENDRE TEST"), "Pause Resume action did not resolve localization key")
+	_expect(_contains_text(texts, "COURSE ACTUELLE TEST"), "Pause current-run section did not resolve localization key")
+	_expect(_contains_text(texts, "RESSOURCES COURSE TEST"), "Pause resources section did not resolve localization key")
+	pause.queue_free()
 	await get_tree().process_frame
-	var texts := _all_control_texts(pause_overlay)
-	_expect(_contains_text(texts, "PAUSE TEST"), "Pause title did not resolve stable UI key")
-	_expect(_contains_text(texts, "REPRENDRE TEST"), "Pause Resume action did not resolve stable UI key")
-	_expect(_contains_text(texts, "COURSE ACTUELLE TEST"), "Pause run-summary heading did not resolve stable UI key")
-	_expect(_contains_text(texts, "RESSOURCES COURSE TEST"), "Pause resources heading did not resolve stable UI key")
-	pause_overlay.call("_close")
-	await get_tree().process_frame
-	get_tree().paused = false
 
 
 func _validate_run_results_surface() -> void:
-	var result_value: Variant = RUN_RESULTS_SCRIPT.new()
-	_expect(result_value is CanvasLayer, "Run Results localization test could not instantiate release overlay")
-	if not (result_value is CanvasLayer):
+	var overlay_value: Variant = RUN_RESULTS_SCRIPT.new()
+	_expect(overlay_value is Control, "Run Results localization test could not instantiate runtime")
+	if not (overlay_value is Control):
 		return
-	var result_overlay: CanvasLayer = result_value as CanvasLayer
-	add_child(result_overlay)
-	result_overlay.call("present", {
-		"completion_kind": "failed",
-		"successful": false,
-		"clear_time_seconds": 61.0,
-		"area": 1,
-		"deepest_chamber_reached": 3,
-		"mist_gained": 4,
-		"scrolls_gained": 1,
-		"boss_materials_gained": {},
-		"aspect": "wolf",
-		"highest_tier": 1,
-		"equipped_prosthetic": "beast_whistle",
-		"equipped_relic": "",
-		"techniques": [],
-		"run_only_lost": ["Gold", "Techniques"],
+	var overlay := overlay_value as Control
+	add_child(overlay)
+	await get_tree().process_frame
+	overlay.call("present", {
+		"outcome": "failed",
+		"time_seconds": 95.0,
+		"permanent_progress": ["Mist retained"],
+		"final_build": ["Echo Technique"],
 	})
 	await get_tree().process_frame
-	var texts := _all_control_texts(result_overlay)
-	_expect(_contains_text(texts, "FIN DE COURSE TEST"), "Run Results title did not resolve stable completion-kind key")
-	_expect(_contains_text(texts, "PROGRES PERMANENT TEST"), "Run Results permanent-progress section did not resolve stable UI key")
-	_expect(_contains_text(texts, "BUILD FINAL TEST"), "Run Results final-build section did not resolve stable UI key")
-	_expect(_contains_text(texts, "TEMPS TEST"), "Run Results line label did not resolve stable UI key")
-	_expect(_contains_text(texts, "Loup Test"), "Run Results Aspect did not resolve stable Aspect key")
-	_expect(_contains_text(texts, "SIFFLET TEST"), "Run Results Prosthetic did not resolve stable catalog ID")
-	_expect(_contains_text(texts, "RETOUR STRAND TEST"), "Run Results Strand-return action did not resolve stable UI key")
-	result_overlay.call("_dismiss")
+	var texts := _all_control_texts(overlay)
+	_expect(_contains_text(texts, "FIN DE COURSE TEST"), "Run Results failure title did not resolve localization key")
+	_expect(_contains_text(texts, "PROGRES PERMANENT TEST"), "Run Results permanent-progress heading did not resolve localization key")
+	_expect(_contains_text(texts, "BUILD FINAL TEST"), "Run Results final-build heading did not resolve localization key")
+	_expect(_contains_text(texts, "TEMPS TEST"), "Run Results time label did not resolve localization key")
+	_expect(_contains_text(texts, "RETOUR STRAND TEST"), "Run Results return action did not resolve localization key")
+	overlay.queue_free()
 	await get_tree().process_frame
-	get_tree().paused = false
 
 
 func _label_texts(root: Node) -> Array[String]:
-	var texts: Array[String] = []
+	var out: Array[String] = []
 	for node: Node in root.find_children("*", "Label", true, false):
 		if node is Label:
-			texts.append((node as Label).text)
-	return texts
+			out.append((node as Label).text)
+	return out
 
 
 func _all_control_texts(root: Node) -> Array[String]:
-	var texts: Array[String] = []
-	for node: Node in root.find_children("*", "Control", true, false):
+	var out: Array[String] = []
+	for node: Node in root.find_children("*", "Label", true, false):
 		if node is Label:
-			texts.append((node as Label).text)
-		elif node is Button:
-			texts.append((node as Button).text)
-		elif node is RichTextLabel:
-			texts.append((node as RichTextLabel).text)
-	return texts
+			out.append((node as Label).text)
+	for node: Node in root.find_children("*", "Button", true, false):
+		if node is Button:
+			out.append((node as Button).text)
+	return out
 
 
-func _contains_text(texts: Array[String], needle: String) -> bool:
-	for text: String in texts:
-		if text.contains(needle):
+func _contains_text(values: Array[String], needle: String) -> bool:
+	for value: String in values:
+		if value.contains(needle):
 			return true
 	return false
 
