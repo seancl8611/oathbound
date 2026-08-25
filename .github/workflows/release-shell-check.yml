@@ -42,6 +42,7 @@ on:
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/World/BloodCavern*"
+      - "game/oathbound/World/BloodMirror.gd"
       - "game/oathbound/World/Boat.gd"
       - "game/oathbound/World/Hub.gd"
       - "game/oathbound/World/HubScene.tscn"
@@ -85,6 +86,7 @@ on:
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/World/BloodCavern*"
+      - "game/oathbound/World/BloodMirror.gd"
       - "game/oathbound/World/Boat.gd"
       - "game/oathbound/World/Hub.gd"
       - "game/oathbound/World/HubScene.tscn"
@@ -205,7 +207,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernSurfaceSmoke.tscn 2>&1 | tee blood-cavern-surface.log
-          grep -F "[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | Blood Mirror route" blood-cavern-surface.log
+          grep -F "[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface" blood-cavern-surface.log
           if grep -F "SCRIPT ERROR:" blood-cavern-surface.log; then
             echo "FAIL: Blood Cavern surface emitted a GDScript runtime error."
             exit 1
