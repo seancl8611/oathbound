@@ -77,10 +77,32 @@ This list records the concrete files observed during the repository audit; it is
 
 **Release status:** BLOCKED pending asset-by-asset provenance/license evidence.
 
-For each listed GUI/SFX source file, verify:
+### Top-level texture / source-art inventory
+
+The repository inventory reviewed on 2026-08-25 confirms at least these non-import source assets directly under `game/oathbound/Textures/`:
+
+- `game/oathbound/Textures/NightBorne.aseprite`
+- `game/oathbound/Textures/captain_test.aseprite`
+- `game/oathbound/Textures/dirt_full_new.png`
+- `game/oathbound/Textures/hub.png`
+
+The same tree also contains nested asset directories requiring separate enumeration, including:
+
+- `game/oathbound/Textures/Enemy/`
+- `game/oathbound/Textures/GUI/`
+- `game/oathbound/Textures/Items/`
+- `game/oathbound/Textures/Player/`
+- `game/oathbound/Textures/flying_demon/`
+- `game/oathbound/Textures/foot_soldier/`
+
+Aseprite source files can be useful evidence of editable project/source art, but their presence alone does **not** establish who created the art, whether external source material was incorporated, or what redistribution/commercial-use rights apply. PNG files and Godot `.import` metadata likewise do not establish provenance.
+
+**Release status:** BLOCKED pending asset-by-asset provenance/license/ownership evidence for shipped texture and source-art files.
+
+For each listed GUI/SFX/texture source file, verify:
 
 - source asset/title and creator/vendor;
-- source location or purchase record;
+- source location, original project record, or purchase record;
 - exact license/version or ownership evidence;
 - commercial-use permission;
 - modification permission where relevant;
@@ -93,7 +115,8 @@ For each listed GUI/SFX source file, verify:
 The following repository areas still require additional asset-by-asset provenance review before credits/legal can be considered release-complete:
 
 - the remainder of `game/oathbound/Audio/SoundEffect/` beyond the concrete files enumerated above;
-- `game/oathbound/Textures/`;
+- all nested `game/oathbound/Textures/` directories, including the concrete directories listed above;
+- any additional top-level texture/source-art files not yet enumerated by this audit;
 - imported visual/UI assets outside `Textures/`;
 - any external shaders, code snippets, plugins, or tools that are redistributed with the build;
 - store/platform art and marketing assets when those are added.
