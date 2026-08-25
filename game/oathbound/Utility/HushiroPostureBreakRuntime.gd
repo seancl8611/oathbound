@@ -167,6 +167,27 @@ func _exit_break() -> void:
 	_break_ends_at = -1.0
 
 
+func reset_posture_break_state() -> void:
+	# Training/restoration callers need one explicit boundary that clears both halves
+	# of the Hushiro break contract: this component's armed/forwarded state and the
+	# shared CombatController's host-break timers. CombatController.reset_posture()
+	# intentionally only changes the meter value, so the compatibility timer fields
+	# are normalized here beside the runtime that owns their Hushiro interpretation.
+	_exit_break()
+	if combat == null or not is_instance_valid(combat):
+		return
+	if combat.has_method("reset_posture"):
+		combat.call("reset_posture")
+	_reset_combat_timer("_break_until_ts")
+	_reset_combat_timer("_last_posture_hit_ts")
+	_reset_combat_timer("_recovery_suppressed_until")
+
+
+func _reset_combat_timer(property_name: String) -> void:
+	if combat != null and is_instance_valid(combat) and _has_property(combat, property_name):
+		combat.set(property_name, -1.0)
+
+
 func _clear_ready_marker() -> void:
 	if enemy != null and is_instance_valid(enemy):
 		enemy.set_meta("_oathbound_deathblow_ready", false)
