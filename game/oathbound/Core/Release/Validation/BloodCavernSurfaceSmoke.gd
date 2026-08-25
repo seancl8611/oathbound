@@ -58,9 +58,11 @@ func _run() -> void:
 		_expect(str(snapshot.get("training_target", "")) == "Start Passive Combat Target", "Blood Cavern training action fallback is not stable")
 		_expect(str(snapshot.get("refreshers", "")) == "TUTORIAL REFRESHERS", "Blood Cavern refresher heading fallback is not stable")
 		_expect(_same_string_set(snapshot.get("refresher_topics", []), EXPECTED_REFRESHERS), "Blood Cavern must expose exactly the seven approved refresher topics")
+		_expect(str(snapshot.get("technique_demos", "")) == "TECHNIQUE DEMOS", "Blood Cavern Technique-demo heading fallback is not stable")
 		_expect(str(snapshot.get("blood_mirror", "")) == "Enter Blood Mirror", "Blood Cavern does not expose the deeper Blood Mirror route")
 		_validate_localized_snapshot(cavern)
 		_validate_refresher_contract(cavern)
+		await _validate_technique_demo_contract(cavern)
 		await _validate_actual_training_lifecycle(cavern, gold_before, mist_before, scrolls_before)
 		await _validate_actual_menu_transition(cavern)
 	hub.queue_free()
@@ -70,7 +72,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface | tutorial refreshers")
+	print("[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface | tutorial refreshers | discovered Technique demos")
 	get_tree().quit(0)
 
 
@@ -103,6 +105,7 @@ func _validate_localized_snapshot(cavern: Node) -> void:
 	translation.add_message(&"ui.blood_cavern.training_target", &"CIBLE TEST")
 	translation.add_message(&"ui.blood_cavern.refreshers.title", &"RAPPELS TEST")
 	translation.add_message(&"ui.blood_cavern.refresher.parry.title", &"PARADE TEST")
+	translation.add_message(&"ui.blood_cavern.technique_demos.title", &"DEMOS TECHNIQUE TEST")
 	translation.add_message(&"ui.blood_cavern.blood_mirror", &"MIROIR TEST")
 	TranslationServer.add_translation(translation)
 	TranslationServer.set_locale("fr")
@@ -110,6 +113,7 @@ func _validate_localized_snapshot(cavern: Node) -> void:
 	_expect(str(localized.get("title", "")) == "CAVERNE TEST", "Blood Cavern title did not resolve stable localization key")
 	_expect(str(localized.get("training_target", "")) == "CIBLE TEST", "Blood Cavern training action did not resolve stable localization key")
 	_expect(str(localized.get("refreshers", "")) == "RAPPELS TEST", "Blood Cavern refresher heading did not resolve stable localization key")
+	_expect(str(localized.get("technique_demos", "")) == "DEMOS TECHNIQUE TEST", "Blood Cavern Technique-demo heading did not resolve stable localization key")
 	_expect(str(localized.get("blood_mirror", "")) == "MIROIR TEST", "Blood Cavern Blood Mirror action did not resolve stable localization key")
 	var parry_copy: Dictionary = cavern.call("_refresher_copy_for_playtest", "parry", INPUT_GLYPHS.FAMILY_CONTROLLER)
 	_expect(str(parry_copy.get("title", "")) == "PARADE TEST", "Blood Cavern refresher topic did not resolve stable localization key")
@@ -150,6 +154,54 @@ func _validate_refresher_contract(cavern: Node) -> void:
 		_expect(str(rebound.get("body", "")).contains("[Y]"), "Parry refresher did not follow live controller rebind")
 		SettingsManager.reset_defaults()
 		INPUT_GLYPHS.ensure_controller_defaults()
+
+
+func _validate_technique_demo_contract(cavern: Node) -> void:
+	if typeof(MetaProgress) != TYPE_OBJECT or typeof(RunData) != TYPE_OBJECT:
+		_expect(false, "Technique demo validation requires MetaProgress and RunData")
+		return
+	var original_flags: Dictionary = MetaProgress.progression_flags.duplicate(true)
+	var original_upgrades: Array = RunData.acquired_upgrades.duplicate(true)
+	for key_value: Variant in MetaProgress.progression_flags.keys():
+		var key: String = str(key_value)
+		if key.begins_with("technique_record/"):
+			MetaProgress.progression_flags.erase(key_value)
+	MetaProgress.progression_flags["technique_record/echo_lingering_cut"] = true
+	MetaProgress.progression_flags["technique_record/echo_passing_memory"] = true
+
+	var demos_value: Variant = cavern.call("_discovered_action_techniques_for_playtest")
+	_expect(demos_value is Array, "Technique demo discovery did not return an array")
+	var demos: Array = demos_value as Array if demos_value is Array else []
+	_expect(demos.size() == 1, "Technique demos must expose discovered Action Techniques but exclude discovered supporting Techniques")
+	if demos.size() == 1 and demos[0] is Dictionary:
+		_expect(str((demos[0] as Dictionary).get("id", "")) == "echo_lingering_cut", "Technique demo discovery returned the wrong Action Technique")
+
+	var surface_value: Variant = cavern.call("_build_menu_surface")
+	_expect(surface_value is Control, "Technique demo menu surface could not be built")
+	if surface_value is Control:
+		var surface := surface_value as Control
+		var demo_buttons: Node = surface.find_child("TechniqueDemoButtons", true, false)
+		_expect(demo_buttons is GridContainer and demo_buttons.get_child_count() == 1, "Technique demo menu did not render exactly the discovered Action Technique")
+		surface.queue_free()
+
+	var prior_demo_state: Array = ["preexisting_test_technique", "second_test_technique"]
+	RunData.acquired_upgrades = prior_demo_state.duplicate(true)
+	cavern.call("_start_technique_demo", "echo_lingering_cut")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(_same_string_set(RunData.acquired_upgrades, ["echo_lingering_cut"]), "Technique demo did not isolate the selected Technique")
+	var active_snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+	_expect(str(active_snapshot.get("active_demo_technique", "")) == "echo_lingering_cut", "Technique demo did not expose active demo state")
+	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").size() == 1, "Technique demo did not spawn the passive combat target")
+
+	cavern.call("_end_training")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(_same_string_set(RunData.acquired_upgrades, prior_demo_state), "End Training did not restore the exact prior Technique list")
+	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").is_empty(), "Technique demo target survived End Training")
+
+	RunData.acquired_upgrades = original_upgrades
+	MetaProgress.progression_flags = original_flags
 
 
 func _validate_actual_training_lifecycle(cavern: Node, gold_before: int, mist_before: int, scrolls_before: int) -> void:
@@ -198,6 +250,8 @@ func _validate_actual_menu_transition(cavern: Node) -> void:
 			var detail_text: String = (detail as RichTextLabel).text
 			_expect(detail_text.contains("Parry"), "actual Blood Cavern refresher panel did not switch to Parry")
 			_expect(detail_text.contains(INPUT_GLYPHS.preferred_label("parry", INPUT_GLYPHS.FAMILY_CONTROLLER)), "actual Blood Cavern refresher panel omitted current controller binding")
+		var demo_buttons: Node = cavern_menu.find_child("TechniqueDemoButtons", true, false)
+		_expect(demo_buttons is GridContainer, "Blood Cavern menu is missing the Technique-demo section")
 
 	cavern.call("_open_blood_mirror")
 	await get_tree().process_frame
@@ -219,10 +273,11 @@ func _same_string_set(actual_value: Variant, expected: Array[String]) -> bool:
 		return false
 	var observed: Dictionary = {}
 	for value: Variant in actual:
-		observed[str(value)] = true
+		observed[str(value)] = int(observed.get(str(value), 0)) + 1
 	for value: String in expected:
-		if not observed.has(value):
+		if int(observed.get(value, 0)) <= 0:
 			return false
+		observed[value] = int(observed[value]) - 1
 	return true
 
 
