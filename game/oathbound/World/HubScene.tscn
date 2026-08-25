@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://World/CodexBoard.gd" id="6_wu1q6"]
 [ext_resource type="Script" path="res://World/Bloodwell.gd" id="8_wklb0"]
 [ext_resource type="Script" path="res://World/MerchantStall.gd" id="9_bbnwo"]
-[ext_resource type="Script" path="res://World/PracticeGrounds.gd" id="10_2hmrb"]
+[ext_resource type="Script" path="res://World/BloodCavern.gd" id="10_2hmrb"]
 [ext_resource type="Script" path="res://World/BloodMirror.gd" id="11_blood_mirror"]
 [ext_resource type="Script" path="res://World/NarrativeNPC.gd" id="12_narrative"]
 
@@ -120,20 +120,20 @@ offset_bottom = -39.0
 text = "Merchant [E]"
 horizontal_alignment = 1
 
-[node name="PracticeGrounds" type="Area2D" parent="."]
+[node name="BloodCavern" type="Area2D" parent="."]
 position = Vector2(1, -216)
 script = ExtResource("10_2hmrb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PracticeGrounds"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodCavern"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_qekqq")
 
-[node name="InteractPopup" type="Label" parent="PracticeGrounds"]
+[node name="InteractPopup" type="Label" parent="BloodCavern"]
 offset_left = -75.0
 offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
-text = "Practice Grounds [E]"
+text = "Blood Cavern [E]"
 horizontal_alignment = 1
 
 [node name="KeeperNPC" type="Area2D" parent="."]
@@ -246,4 +246,4 @@ horizontal_alignment = 1
 [connection signal="body_entered" from="Bloodwell" to="Bloodwell" method="_on_body_entered"]
 [connection signal="body_entered" from="BloodMirror" to="BloodMirror" method="_on_body_entered"]
 [connection signal="body_entered" from="MerchantStall" to="MerchantStall" method="_on_body_entered"]
-[connection signal="body_entered" from="PracticeGrounds" to="PracticeGrounds" method="_on_body_entered"]
+[connection signal="body_entered" from="BloodCavern" to="BloodCavern" method="_on_body_entered"]
