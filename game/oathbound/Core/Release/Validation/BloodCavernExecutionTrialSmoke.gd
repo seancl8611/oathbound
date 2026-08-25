@@ -12,6 +12,8 @@ const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
 const TRIAL_EXECUTION := "execution_trial"
 const EXPECTED_RELIC := RELIC_CATALOG.EXECUTION_BEAD
+const ARM_WAIT_FRAMES := 18
+const EXECUTION_SETTLE_SECONDS := 0.55
 
 var _failed: bool = false
 
@@ -72,6 +74,12 @@ func _run() -> void:
 
 	var target: Node = targets[0]
 	_expect(target.has_method("get_training_mode") and str(target.call("get_training_mode")) == TRIAL_EXECUTION, "target is not configured for Execution Trial mode")
+	var target_label: Label = target.get_node_or_null("TrainingModeLabel") as Label
+	_expect(target_label != null, "Execution Trial target has no in-world mode label")
+	if target_label != null:
+		_expect(target_label.text.contains("EXECUTION TRIAL"), "in-world target label lost Execution Trial identity")
+		_expect(target_label.text.contains("BREAK POSTURE"), "in-world target label no longer communicates the posture objective")
+
 	var break_runtime: Node = target.get_node_or_null("HushiroPostureBreakRuntime")
 	_expect(break_runtime != null, "Execution Trial target lost shared Hushiro posture-break runtime")
 	var combat: Node = target.get_node_or_null("Combat")
@@ -84,41 +92,47 @@ func _run() -> void:
 	var plain_death_snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
 	_expect(str(plain_death_snapshot.get("active_trial", "")) == TRIAL_EXECUTION, "Health-only target defeat completed the Execution Trial")
 	_expect(not MetaProgress.has_completed_blood_cavern_trial(TRIAL_EXECUTION), "Health-only target defeat persisted trial completion")
+	if combat != null and combat.has_method("get_posture"):
+		_expect(float(combat.call("get_posture")) <= 0.001, "Health-only training reset left shared Posture behind")
+	if break_runtime != null and break_runtime.has_method("is_break_active"):
+		_expect(not bool(break_runtime.call("is_break_active")), "Health-only training reset left a Hushiro break active")
+	if target_label != null:
+		_expect(target_label.text.contains("EXECUTION TRIAL"), "training reset lost the active trial label")
 
 	# Fill the canonical shared Posture meter instead of directly toggling a deathblow
 	# flag. HushiroPostureBreakRuntime owns the 0.20 s readability beat and then forwards
 	# the target to the current Player CombatController.
-	var posture_max: float = 90.0
-	if combat != null:
-		var cfg_value: Variant = combat.get("config")
-		if cfg_value is CombatConfig:
-			posture_max = float((cfg_value as CombatConfig).posture_max)
+	var posture_max: float = _posture_max_for_target(combat)
 	target.call("add_posture_damage", posture_max)
-	for _frame: int in range(18):
-		await get_tree().physics_frame
+	await _wait_for_deathblow_arm()
+	_expect_target_armed(target, break_runtime, player, "first break")
 
-	_expect(target.has_method("is_deathblow_ready") and bool(target.call("is_deathblow_ready")), "canonical posture break never armed the trial target for execution")
-	if break_runtime != null and break_runtime.has_method("is_deathblow_armed"):
-		_expect(bool(break_runtime.call("is_deathblow_armed")), "shared Hushiro readability beat never armed its deathblow state")
-
+	# Reset once while the target is actually armed. This is the lifecycle seam that a
+	# reusable training dummy must own: no stale shared break timer, ready marker, or
+	# Player target may leak into the next attempt.
+	target.call("death")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(str((cavern.call("_menu_snapshot_for_playtest") as Dictionary).get("active_trial", "")) == TRIAL_EXECUTION, "armed Health defeat completed the Execution Trial")
+	if combat != null and combat.has_method("get_posture"):
+		_expect(float(combat.call("get_posture")) <= 0.001, "armed training reset left shared Posture behind")
+	if break_runtime != null and break_runtime.has_method("is_break_active"):
+		_expect(not bool(break_runtime.call("is_break_active")), "armed training reset left Hushiro break state active")
 	var player_combat: Node = player.get_node_or_null("Combat")
-	_expect(player_combat != null, "player has no CombatController")
 	if player_combat != null and player_combat.has_method("get_deathblow_target"):
-		_expect(player_combat.call("get_deathblow_target") == target, "posture break did not forward the executable target to Akio")
+		_expect(player_combat.call("get_deathblow_target") != target, "armed training reset left Akio targeting a stale execution target")
+
+	# The same reusable target must be immediately breakable again after that reset.
+	target.call("add_posture_damage", posture_max)
+	await _wait_for_deathblow_arm()
+	_expect_target_armed(target, break_runtime, player, "post-reset break")
 
 	# Move inside the existing FINISHER_RADIUS, then use the actual Player entrypoint.
-	if player is Node2D and target is Node2D:
-		(player as Node2D).global_position = (target as Node2D).global_position + Vector2(-40.0, 0.0)
+	_move_player_into_finisher_range(player, target)
 	_expect(player.has_method("_try_deathblow"), "current Player runtime has no deathblow entrypoint")
 	var executed: bool = bool(player.call("_try_deathblow")) if player.has_method("_try_deathblow") else false
 	_expect(executed, "current Player deathblow entrypoint rejected an armed nearby trial target")
-
-	# DeathblowSystem performs a short real-time hitstop/slash sequence before calling
-	# target.receive_deathblow(). This timer processes while paused so the smoke observes
-	# the same production execution path without hanging in the cinematic hitstop.
-	await get_tree().create_timer(0.55, true, false, true).timeout
-	await get_tree().process_frame
-	await get_tree().process_frame
+	await _settle_execution()
 
 	var completed: Dictionary = cavern.call("_menu_snapshot_for_playtest")
 	var result_value: Variant = completed.get("last_trial_result", {})
@@ -130,7 +144,8 @@ func _run() -> void:
 	_expect(MetaProgress.has_completed_blood_cavern_trial(TRIAL_EXECUTION), "real Player execution did not persist trial completion")
 	_expect(RelicRuntime.is_unlocked(EXPECTED_RELIC), "real Player execution did not unlock the first-clear Relic")
 
-	var banner: Node = get_node_or_null("UILayer/BloodCavernTrialResult")
+	# Completion feedback belongs to the live Hub UI, not this validation node.
+	var banner: Node = hub.get_node_or_null("UILayer/BloodCavernTrialResult")
 	_expect(banner != null, "successful Execution Trial did not create immediate completion feedback")
 	if banner != null:
 		var title: Label = banner.find_child("Title", true, false) as Label
@@ -138,24 +153,33 @@ func _run() -> void:
 		_expect(title != null and title.text.contains("EXECUTION TRIAL COMPLETE"), "first-clear banner lost Execution Trial identity")
 		_expect(detail != null and detail.text.contains(RELIC_CATALOG.get_display_name(EXPECTED_RELIC)), "first-clear banner did not name the unlocked Relic")
 
-	# Re-run through the Cavern completion boundary to prove repeat clears remain
-	# practice-only. The first path above already proves the actual Player/deathblow chain.
+	# Repeat clears use the same production Posture/readability/Player execution chain.
+	# Only persistence/reward semantics differ after the first clear.
 	cavern.call("_start_execution_trial")
 	await get_tree().process_frame
 	await get_tree().process_frame
 	var repeat_targets: Array[Node] = get_tree().get_nodes_in_group("blood_cavern_training_target")
 	_expect(repeat_targets.size() == 1, "repeat Execution Trial did not spawn exactly one target")
 	if repeat_targets.size() == 1:
-		repeat_targets[0].call("receive_deathblow", player)
-		await get_tree().process_frame
-		await get_tree().process_frame
-		await get_tree().process_frame
+		var repeat_target: Node = repeat_targets[0]
+		var repeat_runtime: Node = repeat_target.get_node_or_null("HushiroPostureBreakRuntime")
+		var repeat_combat: Node = repeat_target.get_node_or_null("Combat")
+		var repeat_label: Label = repeat_target.get_node_or_null("TrainingModeLabel") as Label
+		_expect(repeat_label != null and repeat_label.text.contains("EXECUTION TRIAL"), "repeat target lost in-world trial communication")
+		repeat_target.call("add_posture_damage", _posture_max_for_target(repeat_combat))
+		await _wait_for_deathblow_arm()
+		_expect_target_armed(repeat_target, repeat_runtime, player, "repeat break")
+		_move_player_into_finisher_range(player, repeat_target)
+		var repeat_executed: bool = bool(player.call("_try_deathblow")) if player.has_method("_try_deathblow") else false
+		_expect(repeat_executed, "repeat trial did not accept the real Player deathblow entrypoint")
+		await _settle_execution()
+
 		var repeat_snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
 		var repeat_value: Variant = repeat_snapshot.get("last_trial_result", {})
 		var repeat_result: Dictionary = repeat_value as Dictionary if repeat_value is Dictionary else {}
 		_expect(not bool(repeat_result.get("first_clear", true)), "repeat clear incorrectly became another first clear")
 		_expect(str(repeat_result.get("relic_id", "")) == "", "repeat clear attempted to grant a duplicate Relic")
-		var repeat_banner: Node = get_node_or_null("UILayer/BloodCavernTrialResult")
+		var repeat_banner: Node = hub.get_node_or_null("UILayer/BloodCavernTrialResult")
 		_expect(repeat_banner != null, "repeat clear did not produce practice feedback")
 		if repeat_banner != null:
 			var repeat_detail: Label = repeat_banner.find_child("Detail", true, false) as Label
@@ -172,6 +196,43 @@ func _run() -> void:
 	await get_tree().process_frame
 	get_tree().paused = false
 	_finish()
+
+
+func _posture_max_for_target(combat: Node) -> float:
+	if combat != null:
+		var cfg_value: Variant = combat.get("config")
+		if cfg_value is CombatConfig:
+			return float((cfg_value as CombatConfig).posture_max)
+	return 90.0
+
+
+func _wait_for_deathblow_arm() -> void:
+	for _frame: int in range(ARM_WAIT_FRAMES):
+		await get_tree().physics_frame
+
+
+func _expect_target_armed(target: Node, break_runtime: Node, player: Node, context: String) -> void:
+	_expect(target.has_method("is_deathblow_ready") and bool(target.call("is_deathblow_ready")), "%s never armed the trial target for execution" % context)
+	if break_runtime != null and break_runtime.has_method("is_deathblow_armed"):
+		_expect(bool(break_runtime.call("is_deathblow_armed")), "%s never armed shared Hushiro deathblow state" % context)
+	var player_combat: Node = player.get_node_or_null("Combat") if player != null else null
+	_expect(player_combat != null, "player has no CombatController")
+	if player_combat != null and player_combat.has_method("get_deathblow_target"):
+		_expect(player_combat.call("get_deathblow_target") == target, "%s did not forward the executable target to Akio" % context)
+
+
+func _move_player_into_finisher_range(player: Node, target: Node) -> void:
+	if player is Node2D and target is Node2D:
+		(player as Node2D).global_position = (target as Node2D).global_position + Vector2(-40.0, 0.0)
+
+
+func _settle_execution() -> void:
+	# DeathblowSystem performs a short real-time hitstop/slash sequence before calling
+	# target.receive_deathblow(). Process while paused and ignore time scale so the
+	# smoke observes the production execution path without hanging in cinematic hitstop.
+	await get_tree().create_timer(EXECUTION_SETTLE_SECONDS, true, false, true).timeout
+	await get_tree().process_frame
+	await get_tree().process_frame
 
 
 func _restore_progression(completions: Dictionary, unlocked: Dictionary, mastery: Dictionary, equipped: String) -> void:
@@ -199,5 +260,5 @@ func _finish() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[BloodCavernExecutionTrialSmoke] PASS - shared Hushiro posture break | real Player deathblow | first-clear Relic | repeat practice | completion feedback | no currency leakage")
+	print("[BloodCavernExecutionTrialSmoke] PASS - shared Hushiro posture break | reusable target reset | real Player deathblow | first-clear Relic | repeat practice | completion feedback | no currency leakage")
 	get_tree().quit(0)
