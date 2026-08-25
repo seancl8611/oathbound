@@ -202,8 +202,6 @@ func _validate_boat_surface() -> void:
 	if not (boat_value is Node):
 		return
 	var boat: Node = boat_value as Node
-	# HubInteractable requires the authored InteractPopup child during _ready().
-	# Mirror the live Boat structural contract before entering the tree.
 	var interact_popup := Label.new()
 	interact_popup.name = "InteractPopup"
 	boat.add_child(interact_popup)
@@ -318,6 +316,10 @@ func _validate_pause_surface() -> void:
 		return
 	var pause := pause_value as CanvasLayer
 	add_child(pause)
+	# The accessibility wrapper localizes RichText content from a deferred presentation
+	# pass after the base CanvasLayer has built its authored UI. Settle both stages before
+	# asserting translated section copy.
+	await get_tree().process_frame
 	await get_tree().process_frame
 	var texts := _all_control_texts(pause)
 	_expect(_contains_text(texts, "PAUSE TEST"), "Pause title did not resolve localization key")
@@ -370,6 +372,9 @@ func _all_control_texts(root: Node) -> Array[String]:
 	for node: Node in root.find_children("*", "Button", true, false):
 		if node is Button:
 			out.append((node as Button).text)
+	for node: Node in root.find_children("*", "RichTextLabel", true, false):
+		if node is RichTextLabel:
+			out.append((node as RichTextLabel).text)
 	return out
 
 
