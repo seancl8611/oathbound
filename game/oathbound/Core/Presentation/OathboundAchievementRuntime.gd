@@ -11,6 +11,12 @@ const METRIC_PREFIX := "achievement_metric/"
 const HEART_ASPECT_PREFIX := "heart_clear_aspect/"
 const MINIBOSS_COUNTS_FLAG := "records/miniboss_defeat_counts"
 
+# Last Oath remains reserved behind the not-yet-authored second Blood Cavern challenge.
+# Launch achievements therefore follow the same currently obtainable Relic pool used by
+# RecordsRuntime completion: nine Relics and two mastery ranks for each.
+const REQUIRED_OBTAINABLE_RELIC_COUNT := 9
+const REQUIRED_OBTAINABLE_RELIC_MASTERY_RANKS := 18
+
 
 func _ready() -> void:
 	if MetaProgress != null:
@@ -119,9 +125,9 @@ func evaluate() -> void:
 	_unlock_if("mirror_all", get_metric("mirror_nodes") >= 9)
 	_unlock_if("prosthetics_all", get_metric("prosthetics") >= 8)
 	_unlock_if("prosthetic_upgrades_all", get_metric("prosthetic_upgrades") >= 19)
-	_unlock_if("relics_all", get_metric("relics") >= 10)
+	_unlock_if("relics_all", get_metric("relics") >= REQUIRED_OBTAINABLE_RELIC_COUNT)
 	_unlock_if("relic_mastery_first", get_metric("relic_masteries") >= 1)
-	_unlock_if("relic_mastery_all", get_metric("relic_masteries") >= 20)
+	_unlock_if("relic_mastery_all", get_metric("relic_masteries") >= REQUIRED_OBTAINABLE_RELIC_MASTERY_RANKS)
 	_unlock_if("techniques_ten", get_metric("technique_records") >= 10)
 	_unlock_if("techniques_all", get_metric("technique_records") >= 60)
 	_unlock_if("trial_first", get_metric("trials") >= 1)
