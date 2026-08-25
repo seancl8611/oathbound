@@ -9,8 +9,11 @@ extends "res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanStability.gd"
 signal training_target_reset
 signal training_deathblow_completed(attacker: Node)
 
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
+
 var _training_reset_queued: bool = false
 var _training_mode: String = "passive_target"
+var _training_mode_label: Label = null
 
 
 func _ready() -> void:
@@ -25,16 +28,61 @@ func _ready() -> void:
 	death_anim = null
 	exp_gem = null
 	add_to_group("blood_cavern_training_target")
+	_build_training_mode_label()
 	reset_training_target()
 
 
 func configure_training_mode(mode: String) -> void:
 	_training_mode = mode if not mode.is_empty() else "passive_target"
+	_refresh_training_mode_label()
 	reset_training_target()
 
 
 func get_training_mode() -> String:
 	return _training_mode
+
+
+func _build_training_mode_label() -> void:
+	if _training_mode_label != null and is_instance_valid(_training_mode_label):
+		return
+	_training_mode_label = Label.new()
+	_training_mode_label.name = "TrainingModeLabel"
+	_training_mode_label.position = Vector2(-88.0, -66.0)
+	_training_mode_label.size = Vector2(176.0, 44.0)
+	_training_mode_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_training_mode_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_training_mode_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_training_mode_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_training_mode_label.z_index = 110
+	_training_mode_label.add_theme_font_size_override("font_size", 11)
+	_training_mode_label.add_theme_constant_override("outline_size", 4)
+	add_child(_training_mode_label)
+	_refresh_training_mode_label()
+
+
+func _refresh_training_mode_label() -> void:
+	if _training_mode_label == null or not is_instance_valid(_training_mode_label):
+		return
+	match _training_mode:
+		"execution_trial":
+			_training_mode_label.text = LOCALIZATION.ui(
+				"blood_cavern.target.execution_trial",
+				"EXECUTION TRIAL\nBREAK POSTURE → EXECUTE"
+			)
+		"technique_demo":
+			_training_mode_label.text = LOCALIZATION.ui(
+				"blood_cavern.target.technique_demo",
+				"TECHNIQUE DEMO"
+			)
+		_:
+			_training_mode_label.text = LOCALIZATION.ui(
+				"blood_cavern.target.passive",
+				"TRAINING TARGET"
+			)
+
+
+func _training_label_text_for_playtest() -> String:
+	return _training_mode_label.text if _training_mode_label != null else ""
 
 
 func death() -> void:
@@ -82,6 +130,7 @@ func reset_training_target() -> void:
 		anim.stop()
 		if anim.has_animation("walk"):
 			anim.play("walk")
+	_refresh_training_mode_label()
 	training_target_reset.emit()
 
 
