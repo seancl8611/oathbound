@@ -7,8 +7,10 @@ extends "res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanStability.gd"
 ## enemy AI, rewards, run statistics, and permanent progression side effects.
 
 signal training_target_reset
+signal training_deathblow_completed(attacker: Node)
 
 var _training_reset_queued: bool = false
+var _training_mode: String = "passive_target"
 
 
 func _ready() -> void:
@@ -26,6 +28,15 @@ func _ready() -> void:
 	reset_training_target()
 
 
+func configure_training_mode(mode: String) -> void:
+	_training_mode = mode if not mode.is_empty() else "passive_target"
+	reset_training_target()
+
+
+func get_training_mode() -> String:
+	return _training_mode
+
+
 func death() -> void:
 	# Never call the humanoid death path here: it notifies stance death effects,
 	# spawns experience, awards area Gold, and frees the enemy. A training reset is
@@ -33,10 +44,12 @@ func death() -> void:
 	_queue_training_reset()
 
 
-func receive_deathblow(_attacker: Node) -> void:
-	# Deathblow practice should be repeatable without emitting enemy_died or awarding
-	# anything. The target resets on the next deferred turn so the execution can
-	# complete its current call stack cleanly.
+func receive_deathblow(attacker: Node) -> void:
+	# This override is reached only through the production Player deathblow path.
+	# Structured trials may observe that real execution event, but the target still
+	# never emits enemy_died or enters the normal reward/free path.
+	if _training_mode == "execution_trial":
+		training_deathblow_completed.emit(attacker)
 	_queue_training_reset()
 
 
