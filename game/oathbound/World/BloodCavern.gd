@@ -2,19 +2,22 @@ extends HubInteractable
 
 ## Blood Cavern — canonical Strand training / trial entry.
 ##
-## Launch framework provides a production-combat passive target, replayable tutorial
-## refreshers, discovered Action-Technique demos, and the existing Blood Mirror
-## progression surface. Exact authored trial tuning, fixed challenge loadouts, and
-## mastery content remain later content work per the approved Blood Cavern authority.
+## Launch framework provides a production-combat passive target, one deterministic
+## execution trial, replayable tutorial refreshers, discovered Action-Technique demos,
+## and the existing Blood Mirror progression surface. Exact authored trial tuning,
+## broader challenge volume, fixed challenge loadouts, and mastery content remain later
+## content work per the approved Blood Cavern authority.
 ##
 ## Guardrails:
 ## - training targets never award Gold, XP, Mist, Scrolls, boss materials, or records;
 ## - temporary Technique demos restore the exact prior run Technique array on exit;
+## - trial completion is observed from the production deathblow path, not a fake button;
 ## - refreshers describe current runtime controls and never create a second tutorial state;
 ## - Blood Mirror progression remains owned by BloodMirror.gd/Menu, not this station.
 
 signal training_started(mode: String)
 signal training_ended
+signal trial_completed(trial_id: String, first_clear: bool, relic_id: String)
 
 const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
@@ -23,6 +26,7 @@ const TECHNIQUE_CATALOG = preload("res://Core/Techniques/TechniqueCatalog.gd")
 const TRAINING_TARGET = preload("res://World/BloodCavernTrainingTarget.tscn")
 
 const TECHNIQUE_RECORD_PREFIX := "technique_record/"
+const TRIAL_EXECUTION := "execution_trial"
 const REFRESHER_TOPICS: Array[String] = [
 	"execution",
 	"parry",
@@ -40,6 +44,9 @@ var _previous_paused: bool = false
 var _demo_snapshot_active: bool = false
 var _demo_original_upgrades: Array = []
 var _active_demo_technique_id: String = ""
+var _active_trial_id: String = ""
+var _trial_completion_queued: bool = false
+var _last_trial_result: Dictionary = {}
 
 
 func _on_ready_custom() -> void:
@@ -146,6 +153,8 @@ func _build_menu_surface() -> Control:
 	content.add_child(end_button)
 
 	content.add_child(HSeparator.new())
+	_build_trial_section(content)
+	content.add_child(HSeparator.new())
 	_build_refresher_section(content)
 	content.add_child(HSeparator.new())
 	_build_technique_demo_section(content)
@@ -170,6 +179,37 @@ func _build_menu_surface() -> Control:
 	close_button.pressed.connect(_close_menu_surface)
 	content.add_child(close_button)
 	return root
+
+
+func _build_trial_section(content: VBoxContainer) -> void:
+	var heading := Label.new()
+	heading.text = LOCALIZATION.ui("blood_cavern.trials.title", "BASIC TRIALS")
+	heading.add_theme_font_size_override("font_size", 16)
+	content.add_child(heading)
+
+	var note := Label.new()
+	note.text = LOCALIZATION.ui(
+		"blood_cavern.trials.note",
+		"Opt-in deterministic challenges use real combat rules. Trial targets never grant normal run rewards or enemy drops."
+	)
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(note)
+
+	var status := Label.new()
+	status.name = "TrialStatus"
+	status.text = _trial_status_text()
+	status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(status)
+
+	var execution_button := Button.new()
+	execution_button.name = "StartExecutionTrial"
+	execution_button.text = LOCALIZATION.ui("blood_cavern.trials.execution.start", "Start Execution Trial")
+	execution_button.tooltip_text = LOCALIZATION.ui(
+		"blood_cavern.trials.execution.details",
+		"Break the target's Posture and land a real deathblow. Health-only defeats reset the target and do not complete the trial."
+	)
+	execution_button.pressed.connect(_start_execution_trial)
+	content.add_child(execution_button)
 
 
 func _build_refresher_section(content: VBoxContainer) -> void:
@@ -403,6 +443,8 @@ func _start_technique_demo(technique_id: String) -> void:
 		return
 	_close_menu_surface()
 	_clear_training_target()
+	_active_trial_id = ""
+	_trial_completion_queued = false
 	_begin_demo_loadout(technique_id)
 	_spawn_training_target("technique_demo")
 
@@ -430,9 +472,49 @@ func _restore_demo_loadout() -> void:
 	print("[BloodCavern] Technique demo loadout restored")
 
 
+func _start_execution_trial() -> void:
+	_close_menu_surface()
+	_clear_training_target()
+	_restore_demo_loadout()
+	_active_trial_id = TRIAL_EXECUTION
+	_trial_completion_queued = false
+	_last_trial_result = {}
+	_spawn_training_target(TRIAL_EXECUTION)
+
+
+func _on_training_deathblow_completed(_attacker: Node) -> void:
+	if _active_trial_id != TRIAL_EXECUTION or _trial_completion_queued:
+		return
+	_trial_completion_queued = true
+	call_deferred("_complete_active_trial", TRIAL_EXECUTION)
+
+
+func _complete_active_trial(trial_id: String) -> void:
+	_trial_completion_queued = false
+	if _active_trial_id != trial_id:
+		return
+	var result: Dictionary = {"first_clear": false, "relic_id": ""}
+	if typeof(MetaProgressionManager) == TYPE_OBJECT and MetaProgressionManager.has_method("complete_blood_cavern_trial"):
+		var result_value: Variant = MetaProgressionManager.call("complete_blood_cavern_trial", trial_id)
+		if result_value is Dictionary:
+			result = (result_value as Dictionary).duplicate(true)
+	else:
+		push_error("[BloodCavern] MetaProgressionManager cannot complete Blood Cavern trials")
+	_last_trial_result = result.duplicate(true)
+	_active_trial_id = ""
+	_clear_training_target()
+	var first_clear: bool = bool(result.get("first_clear", false))
+	var relic_id: String = str(result.get("relic_id", ""))
+	training_ended.emit()
+	trial_completed.emit(trial_id, first_clear, relic_id)
+	print("[BloodCavern] Execution Trial complete — first_clear=%s relic=%s" % [str(first_clear), relic_id if not relic_id.is_empty() else "none"])
+
+
 func _start_passive_target() -> void:
 	_close_menu_surface()
 	_restore_demo_loadout()
+	_active_trial_id = ""
+	_trial_completion_queued = false
 	if _has_training_target():
 		_reset_training_target()
 		return
@@ -441,7 +523,10 @@ func _start_passive_target() -> void:
 
 func _spawn_training_target(mode: String) -> void:
 	if _has_training_target():
-		_reset_training_target()
+		if _training_target.has_method("configure_training_mode"):
+			_training_target.call("configure_training_mode", mode)
+		else:
+			_reset_training_target()
 		_training_active = true
 		training_started.emit(mode)
 		return
@@ -449,6 +534,7 @@ func _spawn_training_target(mode: String) -> void:
 	if not (target_value is Node2D):
 		push_error("[BloodCavern] Training target scene did not instantiate as Node2D")
 		_restore_demo_loadout()
+		_active_trial_id = ""
 		return
 	_training_target = target_value as Node2D
 	_training_target.name = "BloodCavernTrainingTarget"
@@ -457,8 +543,15 @@ func _spawn_training_target(mode: String) -> void:
 		_training_target.queue_free()
 		_training_target = null
 		_restore_demo_loadout()
+		_active_trial_id = ""
 		return
 	current_scene.add_child(_training_target)
+	if _training_target.has_method("configure_training_mode"):
+		_training_target.call("configure_training_mode", mode)
+	if _training_target.has_signal("training_deathblow_completed"):
+		var deathblow_cb := Callable(self, "_on_training_deathblow_completed")
+		if not _training_target.is_connected("training_deathblow_completed", deathblow_cb):
+			_training_target.connect("training_deathblow_completed", deathblow_cb)
 	_training_target.global_position = global_position + Vector2(112.0, 0.0)
 	_training_active = true
 	training_started.emit(mode)
@@ -481,18 +574,29 @@ func _clear_training_target() -> void:
 	_training_active = false
 
 
-func _end_training() -> void:
-	var was_active: bool = _training_active or _has_training_target() or _demo_snapshot_active
+func _stop_training_state() -> bool:
+	var was_active: bool = _training_active or _has_training_target() or _demo_snapshot_active or not _active_trial_id.is_empty()
 	_clear_training_target()
 	_restore_demo_loadout()
+	_active_trial_id = ""
+	_trial_completion_queued = false
 	if was_active:
 		training_ended.emit()
+	return was_active
+
+
+func _end_training() -> void:
+	var was_active: bool = _stop_training_state()
+	if was_active:
 		print("[BloodCavern] Training ended — no run or permanent rewards granted")
 	_close_menu_surface()
 
 
 func _open_blood_mirror() -> void:
 	var mirror: Node = _find_blood_mirror()
+	var stopped_training: bool = _stop_training_state()
+	if stopped_training:
+		print("[BloodCavern] Training state cleared before entering Blood Mirror")
 	_close_menu_surface()
 	if mirror != null and mirror.has_method("_open_menu"):
 		mirror.call_deferred("_open_menu")
@@ -521,7 +625,37 @@ func _blood_mirror_status_text() -> String:
 	)
 
 
+func _trial_status_text() -> String:
+	if _active_trial_id == TRIAL_EXECUTION:
+		return LOCALIZATION.ui(
+			"blood_cavern.trials.execution.active",
+			"Execution Trial active — break the target's Posture, then land the real deathblow prompt. A Health-only defeat simply resets the target."
+		)
+	if not _last_trial_result.is_empty():
+		if bool(_last_trial_result.get("first_clear", false)):
+			return LOCALIZATION.ui(
+				"blood_cavern.trials.execution.first_clear",
+				"Execution Trial cleared. The current first-clear challenge Relic has been unlocked; repeats grant no duplicate reward."
+			)
+		return LOCALIZATION.ui(
+			"blood_cavern.trials.execution.repeat_clear",
+			"Execution Trial cleared again. Repeat clears grant no duplicate Relic or run currency."
+		)
+	var completed: bool = typeof(MetaProgress) == TYPE_OBJECT and MetaProgress.has_method("has_completed_blood_cavern_trial") and bool(MetaProgress.call("has_completed_blood_cavern_trial", TRIAL_EXECUTION))
+	if completed:
+		return LOCALIZATION.ui(
+			"blood_cavern.trials.execution.completed",
+			"Execution Trial completed previously. It remains repeatable for practice with no duplicate first-clear reward."
+		)
+	return LOCALIZATION.ui(
+		"blood_cavern.trials.execution.ready",
+		"Execution Trial — break the passive target's Posture and complete a real deathblow."
+	)
+
+
 func _training_status_text() -> String:
+	if _active_trial_id == TRIAL_EXECUTION:
+		return _trial_status_text()
 	if not _active_demo_technique_id.is_empty():
 		var data: Dictionary = TECHNIQUE_CATALOG.get_entry(_active_demo_technique_id)
 		var technique_name: String = LOCALIZATION.catalog_name(
@@ -568,6 +702,10 @@ func _menu_snapshot_for_playtest() -> Dictionary:
 		"training_target": LOCALIZATION.ui("blood_cavern.training_target", "Start Passive Combat Target"),
 		"reset_target": LOCALIZATION.ui("blood_cavern.reset_target", "Reset Training Target"),
 		"end_training": LOCALIZATION.ui("blood_cavern.end_training", "End Training"),
+		"trials": LOCALIZATION.ui("blood_cavern.trials.title", "BASIC TRIALS"),
+		"execution_trial": LOCALIZATION.ui("blood_cavern.trials.execution.start", "Start Execution Trial"),
+		"active_trial": _active_trial_id,
+		"last_trial_result": _last_trial_result.duplicate(true),
 		"refreshers": LOCALIZATION.ui("blood_cavern.refreshers.title", "TUTORIAL REFRESHERS"),
 		"refresher_topics": REFRESHER_TOPICS.duplicate(),
 		"technique_demos": LOCALIZATION.ui("blood_cavern.technique_demos.title", "TECHNIQUE DEMOS"),
@@ -582,3 +720,5 @@ func _menu_snapshot_for_playtest() -> Dictionary:
 func _exit_tree() -> void:
 	_clear_training_target()
 	_restore_demo_loadout()
+	_active_trial_id = ""
+	_trial_completion_queued = false
