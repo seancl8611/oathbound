@@ -48,10 +48,9 @@ func _run() -> void:
 
 	var validation_scene: Node = get_tree().current_scene
 	var hub: Node = HUB_SCENE.instantiate()
-	add_child(hub)
-	# Blood Cavern presentation correctly resolves the current live scene's UILayer.
-	# This validation scene embeds HubScene instead of launching it directly, so point
-	# SceneTree.current_scene at the Hub while exercising the real station UI boundary.
+	# SceneTree.current_scene must be a direct child of the tree root. Host the live Hub
+	# there so Blood Cavern resolves the same UILayer boundary used in normal play.
+	get_tree().root.add_child(hub)
 	get_tree().current_scene = hub
 	await get_tree().process_frame
 	await get_tree().process_frame
