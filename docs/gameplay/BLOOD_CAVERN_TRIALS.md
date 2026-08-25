@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-24
+last_reviewed: 2026-08-25
 topics:
   - trials
   - training
@@ -40,7 +40,7 @@ The current runtime implements the reusable boundary and one real Basic Combat T
 - each spawned target communicates its current mode in-world. The first Basic Combat Trial keeps **Execution Trial — Break Posture → Execute** visible while combat is active rather than relying on the closed menu for the objective;
 - target reset is a full reusable combat-state boundary: Health/Posture return to baseline, the shared Hushiro posture-break/readability state is cleared, deathblow readiness is removed, and Akio cannot retain the reset target as a stale executable target;
 - the seven approved tutorial refresher topics are surfaced from the Cavern with live keyboard/controller binding labels;
-- discovered **Action Techniques** are currently the safe standalone Technique-demo subset. A demo temporarily substitutes that single Technique into current run Technique state, then restores the exact prior list at End Training, Blood Mirror entry, or Cavern teardown;
+- discovered **Action Techniques** are currently the safe standalone Technique-demo subset. A demo temporarily isolates that single Technique in the current run's unlimited Technique collection, then restores the exact prior collection at End Training, Blood Mirror entry, or Cavern teardown. This is temporary sandbox state, not a Technique equipment slot;
 - `execution_trial` is the first implemented Basic Combat Trial. Its objective is intentionally minimal and deterministic: create the normal execution opening and land the real deathblow. Health-only defeat resets the target and does not satisfy the trial;
 - first-clear persistence routes through the existing Blood Cavern challenge-completion API. The current first-playtest data mapping assigns that challenge to the current Execution Bead slot; repeat clears grant no duplicate Relic or normal run currency;
 - trial completion produces immediate non-pausing feedback. First-clear feedback identifies the unlocked Relic from the current prototype mapping, while repeat-clear feedback explicitly identifies the result as practice-only;
@@ -132,10 +132,12 @@ A trial preview does not grant persistent run Tier or Blood state.
 
 Selected trials may use fixed approved Techniques to teach:
 
-- how a direct Technique modifies one of the five combat slots,
+- how a direct Technique modifies or responds to one of the five major combat-action **trigger classifications** (Basic Attack, Held Attack, Dash / Dash Attack, Parry / Counter, or Deathblow),
 - how Echo, Rupture, Seal, Rift, or Crimson Vulnerable / backstab / direct Health damage reads and resolves in combat,
 - how a Technique behaves across different Aspect attack geometry or frequency,
 - and approved Supporting, refinement, or mixed-family interactions.
+
+These trigger classifications are not equipment slots. Multiple owned Techniques may modify or respond to the same combat action when their individual effects permit it, consistent with `TECHNIQUES.md`.
 
 Prosthetic behavior is taught through the Prosthetic system rather than a temporary Prosthetic-Technique layer.
 
