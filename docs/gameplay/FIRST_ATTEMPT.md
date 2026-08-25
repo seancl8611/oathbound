@@ -4,7 +4,7 @@ title: First Attempt
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-08-25
 topics:
   - first-attempt
   - onboarding
@@ -42,9 +42,11 @@ Any initial mission framing from the Order, Strand Keeper, Raven, environment, o
 Akio begins with:
 
 - the **base katana core combat kit**,
-- the normal five empty Technique-bearing combat actions,
+- the normal five Technique trigger classifications available to run rewards: Basic Attack, Held Attack, Dash / Dash Attack, Parry / Counter, and Deathblow,
 - **Beast-Bane Whistle** as the single default equipped Prosthetic,
 - normal Health, posture, Spirit, dash, block, parry, counter, deathblow, and other universal combat rules.
+
+Those five combat actions are trigger classifications, not Technique equipment slots. The first attempt begins with no acquired Techniques, and multiple later Techniques may modify or respond to the same trigger under the normal Technique rules.
 
 Akio does **not** begin with:
 
@@ -64,9 +66,11 @@ The first attempt preserves the normal run loop wherever the required system is 
 
 ## Techniques
 
-Technique rewards are fully available. Direct Techniques modify the equivalent base-katana combat actions before Blood Aspects unlock, using the same universal Basic / Held / Dash / Parry-Counter / Deathblow action tags.
+Technique rewards are fully available. **Action Techniques** modify or respond to the equivalent base-katana combat triggers before Blood Aspects unlock, using the same universal Basic / Held / Dash / Parry-Counter / Deathblow action classifications.
 
-Hushiro Chamber 1 therefore keeps its normal guaranteed three-choice Direct Technique reward. Supporting, Cross-family, refinement, replacement, and Legendary eligibility continues to follow the normal Technique rules if the player somehow develops a qualifying first-attempt build.
+Hushiro Chamber 1 therefore keeps its normal guaranteed three-choice **Action Technique** reward. Supporting, Cross-family, refinement, and Legendary eligibility continues to follow the normal Technique rules if the player somehow develops a qualifying first-attempt build.
+
+There is no Technique inventory cap or action-slot occupancy on the first attempt. Acquiring one Technique for a trigger does not close that trigger to other eligible Techniques.
 
 All first-attempt Techniques remain run-only and are lost when the attempt ends.
 
