@@ -132,7 +132,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/RunResultsOverlaySmoke.tscn 2>&1 | tee run-results-overlay.log
-          grep -F "[RunResultsOverlaySmoke] PASS - failed run summary | retained progress | final build | Strand return" run-results-overlay.log
+          grep -F "[RunResultsOverlaySmoke] PASS - failed run summary | retained progress | final build | Strand return | Boat-owned postgame guidance" run-results-overlay.log
           if grep -F "SCRIPT ERROR:" run-results-overlay.log; then
             echo "FAIL: run-results presentation emitted a GDScript runtime error."
             exit 1
