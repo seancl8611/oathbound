@@ -71,7 +71,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernExecutionTrialSmoke.tscn 2>&1 | tee blood-cavern-execution-trial.log
-          grep -F "[BloodCavernExecutionTrialSmoke] PASS - shared Hushiro posture break | real Player deathblow | first-clear Relic | repeat practice | completion feedback | no currency leakage" blood-cavern-execution-trial.log
+          grep -F "[BloodCavernExecutionTrialSmoke] PASS - shared Hushiro posture break | reusable target reset | real Player deathblow | first-clear Relic | repeat practice | completion feedback | no currency leakage" blood-cavern-execution-trial.log
           if grep -F "SCRIPT ERROR:" blood-cavern-execution-trial.log; then
             echo "FAIL: Blood Cavern Execution Trial emitted a GDScript runtime error."
             exit 1
