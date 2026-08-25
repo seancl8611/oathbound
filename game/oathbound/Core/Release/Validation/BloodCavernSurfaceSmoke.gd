@@ -2,6 +2,17 @@ extends Node
 
 const HUB_SCENE = preload("res://World/HubScene.tscn")
 const TRAINING_TARGET = preload("res://World/BloodCavernTrainingTarget.tscn")
+const INPUT_GLYPHS = preload("res://Core/Release/OathboundInputGlyphs.gd")
+
+const EXPECTED_REFRESHERS: Array[String] = [
+	"execution",
+	"parry",
+	"dodge_red",
+	"posture_guard",
+	"targeting",
+	"prosthetic_spirit",
+	"blood_aspects",
+]
 
 var _failed: bool = false
 
@@ -45,8 +56,11 @@ func _run() -> void:
 		var snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
 		_expect(str(snapshot.get("title", "")) == "BLOOD CAVERN", "Blood Cavern title fallback is not stable")
 		_expect(str(snapshot.get("training_target", "")) == "Start Passive Combat Target", "Blood Cavern training action fallback is not stable")
+		_expect(str(snapshot.get("refreshers", "")) == "TUTORIAL REFRESHERS", "Blood Cavern refresher heading fallback is not stable")
+		_expect(_same_string_set(snapshot.get("refresher_topics", []), EXPECTED_REFRESHERS), "Blood Cavern must expose exactly the seven approved refresher topics")
 		_expect(str(snapshot.get("blood_mirror", "")) == "Enter Blood Mirror", "Blood Cavern does not expose the deeper Blood Mirror route")
 		_validate_localized_snapshot(cavern)
+		_validate_refresher_contract(cavern)
 		await _validate_actual_training_lifecycle(cavern, gold_before, mist_before, scrolls_before)
 		await _validate_actual_menu_transition(cavern)
 	hub.queue_free()
@@ -56,7 +70,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface")
+	print("[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | tutorial refreshers | nested Blood Mirror | localized surface")
 	get_tree().quit(0)
 
 
@@ -87,15 +101,55 @@ func _validate_localized_snapshot(cavern: Node) -> void:
 	translation.locale = "fr"
 	translation.add_message(&"ui.blood_cavern.title", &"CAVERNE TEST")
 	translation.add_message(&"ui.blood_cavern.training_target", &"CIBLE TEST")
+	translation.add_message(&"ui.blood_cavern.refreshers.title", &"RAPPELS TEST")
+	translation.add_message(&"ui.blood_cavern.refresher.parry.title", &"PARADE TEST")
 	translation.add_message(&"ui.blood_cavern.blood_mirror", &"MIROIR TEST")
 	TranslationServer.add_translation(translation)
 	TranslationServer.set_locale("fr")
 	var localized: Dictionary = cavern.call("_menu_snapshot_for_playtest")
 	_expect(str(localized.get("title", "")) == "CAVERNE TEST", "Blood Cavern title did not resolve stable localization key")
 	_expect(str(localized.get("training_target", "")) == "CIBLE TEST", "Blood Cavern training action did not resolve stable localization key")
+	_expect(str(localized.get("refreshers", "")) == "RAPPELS TEST", "Blood Cavern refresher heading did not resolve stable localization key")
 	_expect(str(localized.get("blood_mirror", "")) == "MIROIR TEST", "Blood Cavern Blood Mirror action did not resolve stable localization key")
+	var parry_copy: Dictionary = cavern.call("_refresher_copy_for_playtest", "parry", INPUT_GLYPHS.FAMILY_CONTROLLER)
+	_expect(str(parry_copy.get("title", "")) == "PARADE TEST", "Blood Cavern refresher topic did not resolve stable localization key")
 	TranslationServer.set_locale(previous_locale)
 	TranslationServer.remove_translation(translation)
+
+
+func _validate_refresher_contract(cavern: Node) -> void:
+	INPUT_GLYPHS.ensure_controller_defaults()
+	for topic_id: String in EXPECTED_REFRESHERS:
+		var copy: Dictionary = cavern.call("_refresher_copy_for_playtest", topic_id, INPUT_GLYPHS.FAMILY_KEYBOARD_MOUSE)
+		_expect(not str(copy.get("title", "")).is_empty(), "refresher %s has no title" % topic_id)
+		_expect(not str(copy.get("body", "")).is_empty(), "refresher %s has no body" % topic_id)
+
+	var execution_keyboard: Dictionary = cavern.call("_refresher_copy_for_playtest", "execution", INPUT_GLYPHS.FAMILY_KEYBOARD_MOUSE)
+	var execution_controller: Dictionary = cavern.call("_refresher_copy_for_playtest", "execution", INPUT_GLYPHS.FAMILY_CONTROLLER)
+	_expect(str(execution_keyboard.get("body", "")).contains(INPUT_GLYPHS.preferred_label("execute_finisher", INPUT_GLYPHS.FAMILY_KEYBOARD_MOUSE)), "Execution refresher ignored current keyboard binding")
+	_expect(str(execution_controller.get("body", "")).contains(INPUT_GLYPHS.preferred_label("execute_finisher", INPUT_GLYPHS.FAMILY_CONTROLLER)), "Execution refresher ignored current controller binding")
+
+	var original_awakened: bool = bool(MetaProgress.returning_blood_awakened) if typeof(MetaProgress) == TYPE_OBJECT else false
+	if typeof(MetaProgress) == TYPE_OBJECT:
+		MetaProgress.returning_blood_awakened = false
+	var locked: Dictionary = cavern.call("_refresher_copy_for_playtest", "blood_aspects", INPUT_GLYPHS.FAMILY_KEYBOARD_MOUSE)
+	_expect(str(locked.get("body", "")).contains("unlocks after Returning Blood"), "Blood/Aspects refresher was not gated before awakening")
+	if typeof(MetaProgress) == TYPE_OBJECT:
+		MetaProgress.returning_blood_awakened = true
+	var awakened: Dictionary = cavern.call("_refresher_copy_for_playtest", "blood_aspects", INPUT_GLYPHS.FAMILY_KEYBOARD_MOUSE)
+	_expect(str(awakened.get("body", "")).contains("Aspect selection"), "Blood/Aspects refresher did not become available after awakening")
+	if typeof(MetaProgress) == TYPE_OBJECT:
+		MetaProgress.returning_blood_awakened = original_awakened
+
+	if typeof(SettingsManager) == TYPE_OBJECT:
+		var custom_parry := InputEventJoypadButton.new()
+		custom_parry.device = -1
+		custom_parry.button_index = 3
+		_expect(SettingsManager.bind_event("parry", custom_parry), "test controller Parry rebind was rejected")
+		var rebound: Dictionary = cavern.call("_refresher_copy_for_playtest", "parry", INPUT_GLYPHS.FAMILY_CONTROLLER)
+		_expect(str(rebound.get("body", "")).contains("[Y]"), "Parry refresher did not follow live controller rebind")
+		SettingsManager.reset_defaults()
+		INPUT_GLYPHS.ensure_controller_defaults()
 
 
 func _validate_actual_training_lifecycle(cavern: Node, gold_before: int, mist_before: int, scrolls_before: int) -> void:
@@ -135,6 +189,15 @@ func _validate_actual_menu_transition(cavern: Node) -> void:
 	if cavern_menu != null:
 		_expect(cavern_menu.find_child("StartTrainingTarget", true, false) is Button, "Blood Cavern menu is missing the passive training action")
 		_expect(cavern_menu.find_child("OpenBloodMirror", true, false) is Button, "Blood Cavern menu is missing the deeper Blood Mirror action")
+		var buttons: Node = cavern_menu.find_child("RefresherButtons", true, false)
+		_expect(buttons is GridContainer and buttons.get_child_count() == EXPECTED_REFRESHERS.size(), "Blood Cavern menu does not render all seven refresher actions")
+		var detail: Node = cavern_menu.find_child("RefresherDetail", true, false)
+		_expect(detail is RichTextLabel, "Blood Cavern menu is missing refresher detail presentation")
+		cavern.call("_show_refresher", "parry")
+		if detail is RichTextLabel:
+			var detail_text: String = (detail as RichTextLabel).text
+			_expect(detail_text.contains("Parry"), "actual Blood Cavern refresher panel did not switch to Parry")
+			_expect(detail_text.contains(INPUT_GLYPHS.preferred_label("parry", INPUT_GLYPHS.FAMILY_CONTROLLER)), "actual Blood Cavern refresher panel omitted current controller binding")
 
 	cavern.call("_open_blood_mirror")
 	await get_tree().process_frame
@@ -146,6 +209,21 @@ func _validate_actual_menu_transition(cavern: Node) -> void:
 		mirror_menu.call("_close")
 	await get_tree().process_frame
 	get_tree().paused = false
+
+
+func _same_string_set(actual_value: Variant, expected: Array[String]) -> bool:
+	if not (actual_value is Array):
+		return false
+	var actual: Array = actual_value as Array
+	if actual.size() != expected.size():
+		return false
+	var observed: Dictionary = {}
+	for value: Variant in actual:
+		observed[str(value)] = true
+	for value: String in expected:
+		if not observed.has(value):
+			return false
+	return true
 
 
 func _expect(condition: bool, message: String) -> void:
