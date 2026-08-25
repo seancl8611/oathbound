@@ -4,7 +4,7 @@ title: Blood Cavern and Blood Mirror
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-24
 topics:
   - strand
   - blood-cavern
@@ -46,6 +46,19 @@ The player moves from learning execution to proving how much Beast Blood can be 
 - **Training Hall:** fundamentals, refreshers, Technique demos, general mastery trials.
 - **Blood Mirror — locked:** unavailable until first Keeper defeat.
 - **Blood Mirror — unlocked:** Aspect progression, Aspect trials/previews, approved Technique-pool unlocks, mastery/completion rewards.
+
+## Current first-playtest runtime slice
+
+The current implementation intentionally establishes the reusable Cavern boundary before full authored trial volume:
+
+- the Training Hall provides a passive target built on the current Hushiro humanoid combat stack with AI, enemy damage, XP, Gold/drop rewards, and normal enemy-death side effects disabled;
+- the seven approved tutorial refresher topics are available from the Cavern and resolve current keyboard/controller bindings rather than hard-coding stale controls;
+- discovered **Action Techniques** can be demonstrated on the passive target by temporarily replacing the active run Technique list; the exact prior list is restored when training ends, the Cavern exits, or the player enters the Blood Mirror;
+- **Execution Trial** is the first implemented Basic Combat Trial. It completes only when the target receives a real production deathblow after the player creates the execution opening; an ordinary Health defeat only resets the target and cannot complete the trial;
+- the current progression prototype routes the first `execution_trial` clear through the existing challenge-Relic allocation and makes repeat clears practice-only. That specific Relic sequencing remains first-playtest implementation data rather than a new paper-design lock;
+- entering the Blood Mirror always terminates active target/demo/trial state before permanent progression UI opens.
+
+This slice does **not** define the final number of trials, final fixed challenge loadouts, full Aspect-trial scripting, final mastery rewards, or final challenge-to-Relic sequencing.
 
 ## Permanent Aspect progression boundary
 
