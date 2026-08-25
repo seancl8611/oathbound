@@ -16,24 +16,7 @@ func _run() -> void:
 	var mist_before: int = int(MetaProgress.mist) if typeof(MetaProgress) == TYPE_OBJECT else 0
 	var scrolls_before: int = int(MetaProgress.scrolls) if typeof(MetaProgress) == TYPE_OBJECT else 0
 
-	var target_value: Variant = TRAINING_TARGET.instantiate()
-	_expect(target_value is Node2D, "Blood Cavern training target did not instantiate")
-	if target_value is Node2D:
-		var target := target_value as Node2D
-		add_child(target)
-		await get_tree().process_frame
-		_expect(target.has_method("is_training_target") and bool(target.call("is_training_target")), "training target did not expose its sandbox contract")
-		_expect(not target.is_physics_processing(), "passive training target still has autonomous enemy physics enabled")
-		_expect(int(target.get("experience")) == 0, "training target retained normal enemy experience reward")
-		target.call("death")
-		await get_tree().process_frame
-		await get_tree().process_frame
-		_expect(is_instance_valid(target), "training target used the normal enemy free-on-death path")
-		if is_instance_valid(target):
-			_expect(int(target.get("hp")) > 0 and not bool(target.get("has_died")), "training target did not reset after defeat")
-			target.queue_free()
-		await get_tree().process_frame
-
+	await _validate_standalone_training_target()
 	_expect(int(RunData.gold) == gold_before if typeof(RunData) == TYPE_OBJECT else true, "training target defeat changed run Gold")
 	_expect(int(MetaProgress.mist) == mist_before if typeof(MetaProgress) == TYPE_OBJECT else true, "training target defeat changed persistent Mist")
 	_expect(int(MetaProgress.scrolls) == scrolls_before if typeof(MetaProgress) == TYPE_OBJECT else true, "training target defeat changed persistent Scrolls")
@@ -64,6 +47,7 @@ func _run() -> void:
 		_expect(str(snapshot.get("training_target", "")) == "Start Passive Combat Target", "Blood Cavern training action fallback is not stable")
 		_expect(str(snapshot.get("blood_mirror", "")) == "Enter Blood Mirror", "Blood Cavern does not expose the deeper Blood Mirror route")
 		_validate_localized_snapshot(cavern)
+		await _validate_actual_training_lifecycle(cavern, gold_before, mist_before, scrolls_before)
 		await _validate_actual_menu_transition(cavern)
 	hub.queue_free()
 	await get_tree().process_frame
@@ -74,6 +58,27 @@ func _run() -> void:
 		return
 	print("[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface")
 	get_tree().quit(0)
+
+
+func _validate_standalone_training_target() -> void:
+	var target_value: Variant = TRAINING_TARGET.instantiate()
+	_expect(target_value is Node2D, "Blood Cavern training target did not instantiate")
+	if not (target_value is Node2D):
+		return
+	var target := target_value as Node2D
+	add_child(target)
+	await get_tree().process_frame
+	_expect(target.has_method("is_training_target") and bool(target.call("is_training_target")), "training target did not expose its sandbox contract")
+	_expect(not target.is_physics_processing(), "passive training target still has autonomous enemy physics enabled")
+	_expect(int(target.get("experience")) == 0, "training target retained normal enemy experience reward")
+	target.call("death")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(is_instance_valid(target), "training target used the normal enemy free-on-death path")
+	if is_instance_valid(target):
+		_expect(int(target.get("hp")) > 0 and not bool(target.get("has_died")), "training target did not reset after defeat")
+		target.queue_free()
+	await get_tree().process_frame
 
 
 func _validate_localized_snapshot(cavern: Node) -> void:
@@ -91,6 +96,34 @@ func _validate_localized_snapshot(cavern: Node) -> void:
 	_expect(str(localized.get("blood_mirror", "")) == "MIROIR TEST", "Blood Cavern Blood Mirror action did not resolve stable localization key")
 	TranslationServer.set_locale(previous_locale)
 	TranslationServer.remove_translation(translation)
+
+
+func _validate_actual_training_lifecycle(cavern: Node, gold_before: int, mist_before: int, scrolls_before: int) -> void:
+	cavern.call("_start_passive_target")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+	_expect(bool(snapshot.get("training_active", false)), "Blood Cavern did not enter active training state")
+	var targets: Array[Node] = get_tree().get_nodes_in_group("blood_cavern_training_target")
+	_expect(targets.size() == 1, "Blood Cavern must own exactly one live passive training target")
+	if targets.size() == 1:
+		var target: Node = targets[0]
+		target.call("death")
+		await get_tree().process_frame
+		await get_tree().process_frame
+		_expect(is_instance_valid(target), "live Cavern target escaped into normal free-on-death behavior")
+		if is_instance_valid(target):
+			_expect(int(target.get("hp")) > 0 and not bool(target.get("has_died")), "live Cavern target did not reset after defeat")
+
+	_expect(int(RunData.gold) == gold_before if typeof(RunData) == TYPE_OBJECT else true, "live Blood Cavern training changed run Gold")
+	_expect(int(MetaProgress.mist) == mist_before if typeof(MetaProgress) == TYPE_OBJECT else true, "live Blood Cavern training changed persistent Mist")
+	_expect(int(MetaProgress.scrolls) == scrolls_before if typeof(MetaProgress) == TYPE_OBJECT else true, "live Blood Cavern training changed persistent Scrolls")
+	cavern.call("_end_training")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var ended_snapshot: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+	_expect(not bool(ended_snapshot.get("training_active", true)), "Blood Cavern did not leave active training state")
+	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").is_empty(), "Blood Cavern target survived End Training")
 
 
 func _validate_actual_menu_transition(cavern: Node) -> void:
