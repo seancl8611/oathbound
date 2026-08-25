@@ -4,7 +4,7 @@ title: Blood Cavern Trial System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-24
 topics:
   - trials
   - training
@@ -31,6 +31,20 @@ Provide repeatable, skill-focused Strand activities that teach approved combat s
 The framework and three-Aspect launch roster are approved. Exact trial counts, scripts, most rewards, and production volume remain later content and implementation work rather than full-game scope blockers. The Relic system reserves **2 of the 10 launch Relics** for authored Blood Cavern / challenge unlock milestones; exact Relic identities and exact challenge assignments remain later content sequencing.
 
 The Blood Cavern is a training / trial space, not a separate general permanent-upgrade station. Permanent Aspect progression belongs to the Blood Mirror inside the Cavern after the Mirror is unlocked following the first Keeper defeat.
+
+## Current first-playtest runtime slice
+
+The current runtime implements the reusable boundary and one real Basic Combat Trial without treating its temporary sequencing choices as final authored volume:
+
+- baseline training uses a passive target backed by current production humanoid hurt, posture, posture-break, and deathblow plumbing while disabling AI, enemy damage, XP, Gold/drop rewards, and normal enemy-death side effects;
+- the seven approved tutorial refresher topics are surfaced from the Cavern with live keyboard/controller binding labels;
+- discovered **Action Techniques** are currently the safe standalone Technique-demo subset. A demo temporarily substitutes that single Technique into current run Technique state, then restores the exact prior list at End Training, Blood Mirror entry, or Cavern teardown;
+- `execution_trial` is the first implemented Basic Combat Trial. Its objective is intentionally minimal and deterministic: create the normal execution opening and land the real deathblow. Health-only defeat resets the target and does not satisfy the trial;
+- first-clear persistence routes through the existing Blood Cavern challenge-completion API. The current first-playtest data mapping assigns that challenge to the current Execution Bead slot; repeat clears grant no duplicate Relic or normal run currency;
+- the current challenge-to-Relic identity mapping is **implementation sequencing**, not a replacement for this document's authority that final challenge identities/assignments remain later content work;
+- entering the Blood Mirror terminates any active target, Technique demo, or trial before permanent progression UI opens.
+
+Not yet authored by this runtime slice: final trial count, final fixed Aspect/Technique/Prosthetic/Relic challenge loadouts, full Aspect trial scripting, full mastery presentation/rewards, and final sequencing for both challenge-Relic milestones.
 
 ## Trial families
 
