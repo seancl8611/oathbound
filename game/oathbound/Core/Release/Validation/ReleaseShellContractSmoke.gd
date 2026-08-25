@@ -96,12 +96,12 @@ func _validate_checkpoint_round_trip() -> void:
 	source.technique_rerolls = 2
 	source.path_history.append("combat:technique")
 	source.path_history.append("shrine")
-	# Technique ownership is slotless. Keep multiple Action Techniques that share the
-	# same Basic trigger plus another trigger to prove checkpoint serialization preserves
-	# the collection exactly instead of collapsing it into five positional entries.
+	# Technique ownership is slotless. These are three real launch Action Techniques
+	# sharing the Basic trigger, proving checkpoint serialization preserves the exact
+	# collection instead of collapsing same-trigger Techniques into positional entries.
 	source.acquired_upgrades.append("echo_lingering_cut")
-	source.acquired_upgrades.append("rupture_cracking_edge")
-	source.acquired_upgrades.append("seal_binding_step")
+	source.acquired_upgrades.append("rupture_rupturing_edge")
+	source.acquired_upgrades.append("seal_sealing_cuts")
 	source.enemies_killed = 14
 	source.perfect_parries = 6
 	var checkpoint: Dictionary = source.get_checkpoint_state()
