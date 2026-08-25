@@ -90,11 +90,18 @@ func _validate_checkpoint_round_trip() -> void:
 	source.current_area_id = 2
 	source.depth = 7
 	source.gold = 133
-	source.run_goal = source.RUN_GOAL_STANDARD_EXPEDITION
+	# Postgame run-goal selection is Boat-owned and must survive a safe quit/resume.
+	source.requested_run_goal = source.RUN_GOAL_HEART_SUPPRESSION
+	source.run_goal = source.RUN_GOAL_HEART_SUPPRESSION
 	source.technique_rerolls = 2
 	source.path_history.append("combat:technique")
 	source.path_history.append("shrine")
-	source.acquired_upgrades.append("release_shell_test_technique")
+	# Technique ownership is slotless. Keep multiple Action Techniques that share the
+	# same Basic trigger plus another trigger to prove checkpoint serialization preserves
+	# the collection exactly instead of collapsing it into five positional entries.
+	source.acquired_upgrades.append("echo_lingering_cut")
+	source.acquired_upgrades.append("rupture_cracking_edge")
+	source.acquired_upgrades.append("seal_binding_step")
 	source.enemies_killed = 14
 	source.perfect_parries = 6
 	var checkpoint: Dictionary = source.get_checkpoint_state()
@@ -104,10 +111,12 @@ func _validate_checkpoint_round_trip() -> void:
 	_expect(restored.current_area_id == 2, "checkpoint lost current region")
 	_expect(restored.depth == 7, "checkpoint lost chamber depth")
 	_expect(restored.gold == 133, "checkpoint lost Gold")
-	_expect(restored.run_goal == source.RUN_GOAL_STANDARD_EXPEDITION, "checkpoint lost run goal")
+	_expect(restored.requested_run_goal == source.RUN_GOAL_HEART_SUPPRESSION, "checkpoint lost requested postgame run goal")
+	_expect(restored.run_goal == source.RUN_GOAL_HEART_SUPPRESSION, "checkpoint lost resolved postgame run goal")
 	_expect(restored.technique_rerolls == 2, "checkpoint lost Technique rerolls")
 	_expect(restored.path_history == source.path_history, "checkpoint lost route history")
-	_expect(restored.acquired_upgrades == source.acquired_upgrades, "checkpoint lost Techniques")
+	_expect(restored.acquired_upgrades == source.acquired_upgrades, "checkpoint lost or collapsed the slotless Technique collection")
+	_expect(restored.acquired_upgrades.size() == 3, "checkpoint did not preserve all same-run Techniques")
 	_expect(restored.enemies_killed == 14 and restored.perfect_parries == 6, "checkpoint lost run statistics")
 
 	var flow: Node = FLOW_SCRIPT.new()
