@@ -50,6 +50,29 @@ const REQUIRED_OBTAINABLE_RELICS: Array[String] = [
 	RELIC_CATALOG.BLOOD_MOON_SHARD,
 ]
 
+# The presentation catalog currently contains 24 lore entries, while the authored release
+# runtime exposes campaign unlock paths for these 15 through
+# NarrativeRuntime.unlock_lore_for_campaign_state(). The remaining catalog entries stay
+# intact for future authored discovery sources, but they cannot block 100% completion
+# before a player-facing unlock path exists. Add an ID here when its unlock path ships.
+const REQUIRED_DISCOVERY_RECORDS: Array[String] = [
+	"record_order_crossings",
+	"record_returning_blood",
+	"record_hushiro",
+	"record_keeper_gate",
+	"record_yomori",
+	"record_twin_maws",
+	"record_kagutsuchi",
+	"record_eclipse_shogun",
+	"record_first_extraction",
+	"record_seven_bindings",
+	"record_heart_rejection",
+	"record_escaped_child",
+	"record_false_mastery",
+	"record_unbound_heart",
+	"record_after_heart",
+]
+
 var _run_active := false
 var _run_started_msec: int = 0
 var _run_elapsed_before_resume: float = 0.0
@@ -266,15 +289,10 @@ func get_completion_breakdown() -> Dictionary:
 		if MetaProgress.has_completed_blood_cavern_trial(trial_id):
 			trial_owned += 1
 
-	var records_total := 0
+	var records_total := REQUIRED_DISCOVERY_RECORDS.size()
 	var records_owned := 0
-	if typeof(NarrativeRuntime) == TYPE_OBJECT and NarrativeRuntime.has_method("get_all_lore"):
-		var lore: Array = NarrativeRuntime.get_all_lore()
-		records_total = lore.size()
-		for entry_value: Variant in lore:
-			if not (entry_value is Dictionary):
-				continue
-			var record_id := str((entry_value as Dictionary).get("id", ""))
+	if typeof(NarrativeRuntime) == TYPE_OBJECT and NarrativeRuntime.has_method("is_lore_unlocked"):
+		for record_id: String in REQUIRED_DISCOVERY_RECORDS:
 			if NarrativeRuntime.is_lore_unlocked(record_id):
 				records_owned += 1
 

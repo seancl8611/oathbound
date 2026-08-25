@@ -141,7 +141,7 @@ func _validate_records_contract() -> void:
 	_expect(_total(breakdown, "techniques") == 60, "completion contract must include 50 Techniques + 10 refinements")
 	_expect(_total(breakdown, "trials") == 1, "completion contract must require only the currently playable Execution Trial")
 	_expect(_total(breakdown, "heart_aspects") == 3, "completion contract must include Wolf/Wraith/Ronin Heart victories")
-	_expect(_total(breakdown, "discovery_records") > 0, "completion contract must include Discovery Board records")
+	_expect(_total(breakdown, "discovery_records") == 15, "completion contract must include the 15 campaign-reachable Discovery Board records")
 
 	var records: Dictionary = RecordsRuntime.get_records_snapshot()
 	for key: String in [
