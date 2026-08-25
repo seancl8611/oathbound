@@ -452,8 +452,8 @@ func _start_execution_trial() -> void:
 	_spawn_training_target(TRIAL_EXECUTION)
 
 
-func _on_training_deathblow_completed(mode: String) -> void:
-	if mode != TRIAL_EXECUTION or _active_trial_id != TRIAL_EXECUTION or _trial_completion_queued:
+func _on_training_deathblow_completed(_attacker: Node) -> void:
+	if _active_trial_id != TRIAL_EXECUTION or _trial_completion_queued:
 		return
 	_trial_completion_queued = true
 	call_deferred("_complete_trial", TRIAL_EXECUTION)
