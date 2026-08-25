@@ -50,25 +50,33 @@ const REQUIRED_OBTAINABLE_RELICS: Array[String] = [
 	RELIC_CATALOG.BLOOD_MOON_SHARD,
 ]
 
-# The presentation catalog currently contains 24 lore entries, while the authored release
-# runtime exposes campaign unlock paths for these 15 through
-# NarrativeRuntime.unlock_lore_for_campaign_state(). The remaining catalog entries stay
-# intact for future authored discovery sources, but they cannot block 100% completion
-# before a player-facing unlock path exists. Add an ID here when its unlock path ships.
+# All 24 authored launch Lore / Records entries now have deterministic player-facing
+# unlock paths through existing campaign, Relic, and miniboss state. Keep this list in
+# lockstep with those reachable authored records; a future catalog entry must gain a
+# real discovery path before it becomes part of required completion.
 const REQUIRED_DISCOVERY_RECORDS: Array[String] = [
-	"record_order_crossings",
-	"record_returning_blood",
-	"record_hushiro",
-	"record_keeper_gate",
-	"record_yomori",
-	"record_twin_maws",
-	"record_kagutsuchi",
-	"record_eclipse_shogun",
+	"record_plague_year",
 	"record_first_extraction",
 	"record_seven_bindings",
-	"record_heart_rejection",
+	"record_beast_blood_spread",
+	"record_containment",
+	"record_keeper_oath",
 	"record_escaped_child",
+	"record_returning_blood",
 	"record_false_mastery",
+	"record_order_crossings",
+	"record_hushiro",
+	"record_yomori",
+	"record_kagutsuchi",
+	"record_keeper_gate",
+	"record_twin_maws",
+	"record_eclipse_shogun",
+	"record_blood_lotus",
+	"record_eternal_swordsman",
+	"record_relic_provenance",
+	"record_prosthetic_craft",
+	"record_blood_aspects",
+	"record_heart_rejection",
 	"record_unbound_heart",
 	"record_after_heart",
 ]
@@ -78,10 +86,37 @@ var _run_started_msec: int = 0
 var _run_elapsed_before_resume: float = 0.0
 var _run_resource_start: Dictionary = {}
 var _first_attempt_at_start := false
+var _completion_recalc_queued := false
 
 
 func _ready() -> void:
-	call_deferred("recalculate_completion")
+	if typeof(MetaProgress) == TYPE_OBJECT and MetaProgress.has_signal("progression_changed"):
+		var progression_cb := Callable(self, "_queue_completion_recalc")
+		if not MetaProgress.is_connected("progression_changed", progression_cb):
+			MetaProgress.connect("progression_changed", progression_cb)
+	if typeof(RelicRuntime) == TYPE_OBJECT:
+		if RelicRuntime.has_signal("collection_changed"):
+			var collection_cb := Callable(self, "_queue_completion_recalc")
+			if not RelicRuntime.is_connected("collection_changed", collection_cb):
+				RelicRuntime.connect("collection_changed", collection_cb)
+		if RelicRuntime.has_signal("mastery_changed"):
+			var mastery_cb := Callable(self, "_on_relic_mastery_changed")
+			if not RelicRuntime.is_connected("mastery_changed", mastery_cb):
+				RelicRuntime.connect("mastery_changed", mastery_cb)
+	if typeof(ProstheticManager) == TYPE_OBJECT:
+		if ProstheticManager.has_signal("prosthetic_unlocked"):
+			var unlock_cb := Callable(self, "_on_prosthetic_changed")
+			if not ProstheticManager.is_connected("prosthetic_unlocked", unlock_cb):
+				ProstheticManager.connect("prosthetic_unlocked", unlock_cb)
+		if ProstheticManager.has_signal("prosthetic_equipped"):
+			var equip_cb := Callable(self, "_on_prosthetic_changed")
+			if not ProstheticManager.is_connected("prosthetic_equipped", equip_cb):
+				ProstheticManager.connect("prosthetic_equipped", equip_cb)
+		if ProstheticManager.has_signal("upgrade_purchased"):
+			var upgrade_cb := Callable(self, "_on_prosthetic_upgrade_changed")
+			if not ProstheticManager.is_connected("upgrade_purchased", upgrade_cb):
+				ProstheticManager.connect("upgrade_purchased", upgrade_cb)
+	_queue_completion_recalc()
 
 
 func on_run_started(resumed: bool = false, elapsed_before_resume: float = 0.0, resource_start: Dictionary = {}) -> void:
@@ -230,6 +265,8 @@ func get_completion_percent() -> int:
 func get_completion_breakdown() -> Dictionary:
 	var bloodwell_total := 0
 	var bloodwell_owned := 0
+	var infrastructure_total := 0
+	var infrastructure_owned := 0
 	var mirror_total := 0
 	var mirror_owned := 0
 	if typeof(MetaProgressionManager) == TYPE_OBJECT and MetaProgressionManager.has_method("get_structural_nodes"):
@@ -238,11 +275,17 @@ func get_completion_breakdown() -> Dictionary:
 				continue
 			var node: Dictionary = node_value as Dictionary
 			var station := str(node.get("station", ""))
+			var group := str(node.get("group", ""))
 			var node_id := str(node.get("id", ""))
 			if station == "bloodwell":
-				bloodwell_total += 1
-				if MetaProgress.is_progression_node_owned(node_id):
-					bloodwell_owned += 1
+				if group == "run_infrastructure":
+					infrastructure_total += 1
+					if MetaProgress.is_progression_node_owned(node_id):
+						infrastructure_owned += 1
+				else:
+					bloodwell_total += 1
+					if MetaProgress.is_progression_node_owned(node_id):
+						bloodwell_owned += 1
 			elif station == "blood_mirror":
 				mirror_total += 1
 				if MetaProgress.is_progression_node_owned(node_id):
@@ -302,6 +345,7 @@ func get_completion_breakdown() -> Dictionary:
 	return {
 		"story": {"owned": 1 if MetaProgress.is_story_complete() else 0, "total": 1},
 		"bloodwell": {"owned": bloodwell_owned, "total": bloodwell_total},
+		"run_infrastructure": {"owned": infrastructure_owned, "total": infrastructure_total},
 		"blood_mirror": {"owned": mirror_owned, "total": mirror_total},
 		"prosthetics": {"owned": prosthetics_owned, "total": prosthetics_total},
 		"prosthetic_upgrades": {"owned": prosthetic_upgrades_owned, "total": prosthetic_upgrades_total},
@@ -333,7 +377,7 @@ func recalculate_completion() -> int:
 	MetaProgress.set_progression_flag("required_records_complete", records_complete)
 
 	if typeof(AchievementRuntime) == TYPE_OBJECT:
-		_set_achievement_metric("bloodwell_nodes", _breakdown_owned(breakdown, "bloodwell"))
+		_set_achievement_metric("bloodwell_nodes", _breakdown_owned(breakdown, "bloodwell") + _breakdown_owned(breakdown, "run_infrastructure"))
 		_set_achievement_metric("mirror_nodes", _breakdown_owned(breakdown, "blood_mirror"))
 		_set_achievement_metric("prosthetics", _breakdown_owned(breakdown, "prosthetics"))
 		_set_achievement_metric("prosthetic_upgrades", _breakdown_owned(breakdown, "prosthetic_upgrades"))
@@ -429,6 +473,30 @@ func _set_achievement_metric(metric_id: String, value: Variant) -> void:
 		AchievementRuntime.set_metric(metric_id, value)
 	else:
 		MetaProgress.set_progression_flag("achievement_metric/%s" % metric_id, value)
+
+
+func _queue_completion_recalc() -> void:
+	if _completion_recalc_queued:
+		return
+	_completion_recalc_queued = true
+	call_deferred("_run_queued_completion_recalc")
+
+
+func _run_queued_completion_recalc() -> void:
+	_completion_recalc_queued = false
+	recalculate_completion()
+
+
+func _on_relic_mastery_changed(_relic_id: String, _kills: int, _rank: int) -> void:
+	_queue_completion_recalc()
+
+
+func _on_prosthetic_changed(_prosthetic_id: String) -> void:
+	_queue_completion_recalc()
+
+
+func _on_prosthetic_upgrade_changed(_prosthetic_id: String, _upgrade_id: String) -> void:
+	_queue_completion_recalc()
 
 
 func _breakdown_owned(breakdown: Dictionary, key: String) -> int:
