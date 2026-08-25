@@ -44,6 +44,13 @@ func _run_contract() -> void:
 	AspectRuntime.synchronize_campaign_state(false)
 	CorruptionRuntime.on_new_run(1)
 
+	# FIRST_ATTEMPT.md and TECHNIQUES.md define a slotless Technique collection. A clean
+	# first attempt starts with no acquired Techniques; the five combat actions below are
+	# trigger classifications only and must not imply pre-filled or reserved slots.
+	if typeof(RunData) == TYPE_OBJECT:
+		RunData.acquired_upgrades.clear()
+		_expect(RunData.acquired_upgrades.is_empty(), "fresh first attempt must begin with zero acquired Techniques")
+
 	_expect(not bool(AspectRuntime.has_active_aspect()), "first attempt must have no active Aspect")
 	_expect(str(AspectRuntime.selected_aspect).is_empty(), "pre-awakening selected Aspect id must be empty")
 	_expect(int(AspectRuntime.tier) == 0, "pre-awakening Tier must remain 0")
@@ -56,9 +63,6 @@ func _run_contract() -> void:
 	if aspect_hud_value is CanvasLayer:
 		_expect(not (aspect_hud_value as CanvasLayer).visible, "pre-awakening Aspect HUD must be hidden")
 
-	# FIRST_ATTEMPT.md also excludes Relics from the first-ever loadout. On the clean
-	# campaign used by this contract, the persistent Relic authority must therefore be
-	# empty rather than silently supplying a post-awakening item.
 	if typeof(RelicRuntime) == TYPE_OBJECT:
 		_expect(str(RelicRuntime.equipped_relic_id).is_empty(), "fresh first attempt must have no equipped Relic")
 		var unlocked_value: Variant = RelicRuntime.unlocked_relics
@@ -113,8 +117,8 @@ func _run_contract() -> void:
 	_expect(int(AspectRuntime.tier) == 0 and float(AspectRuntime.blood) == 0.0, "awakening handoff must start from Tier 0 / Blood 0")
 
 	# After awakening, the canonical Boat owns repeated-run preparation. It must offer
-	# all three Blood Aspects without one already being active, and cancelling must
-	# clean up the root-level departure modal without starting a run.
+	# all three Blood Aspects without one already being active, and its final confirmation
+	# must describe an empty run Technique collection without resurrecting slot language.
 	var hub: Node = HUB_SCENE.instantiate()
 	add_child(hub)
 	await get_tree().process_frame
@@ -134,9 +138,16 @@ func _run_contract() -> void:
 				if button.text in ["Wolf", "Wraith", "Ronin"]:
 					aspect_labels.append(button.text)
 			_expect(aspect_labels.size() == 3, "awakened selector must offer Wolf, Wraith, and Ronin")
+		boat.call("_close_aspect_menu")
+		boat.call("_open_confirmation_menu")
+		await get_tree().process_frame
+		var confirmation: Dictionary = boat.call("_confirmation_snapshot_for_playtest")
+		var technique_copy := str(confirmation.get("techniques", ""))
+		_expect(technique_copy == "Techniques begin empty and are acquired during the run.", "Boat confirmation must describe the empty run Technique collection")
+		_expect(not technique_copy.to_lower().contains("slot"), "Boat confirmation must not describe Technique slots")
 		boat.call("_cancel_departure_menu")
 		await get_tree().process_frame
-		_expect(get_tree().root.get_node_or_null("BoatAspectRunSetup") == null, "cancelling Aspect selection must clean up the Boat modal")
+		_expect(get_tree().root.get_node_or_null("BoatRunConfirmation") == null, "cancelling Boat confirmation must clean up the departure modal")
 	hub.queue_free()
 	await get_tree().process_frame
 
