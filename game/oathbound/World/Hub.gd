@@ -16,7 +16,7 @@ const INTERACTION_PROMPTS: Dictionary = {
 	"Bloodwell": {"key": "ui.strand.station.bloodwell", "fallback": "Bloodwell"},
 	"BloodMirror": {"key": "ui.strand.station.blood_mirror", "fallback": "Blood Mirror"},
 	"MerchantStall": {"key": "ui.strand.station.merchant", "fallback": "Merchant"},
-	"PracticeGrounds": {"key": "ui.strand.station.practice", "fallback": "Practice Grounds"},
+	"BloodCavern": {"key": "ui.strand.station.blood_cavern", "fallback": "Blood Cavern"},
 	"KeeperNPC": {"key": "npc.keeper.name", "fallback": "Keeper"},
 	"ScribeNPC": {"key": "npc.scribe.name", "fallback": "Scribe"},
 	"RavenNPC": {"key": "ui.strand.station.raven_notices", "fallback": "Raven / Notices"},
@@ -157,12 +157,12 @@ func _connect_stations() -> void:
 	if merchant and merchant.has_signal("item_purchased"):
 		merchant.connect("item_purchased", Callable(self, "_on_merchant_item_purchased"))
 
-	var practice: Node = get_node_or_null("PracticeGrounds")
-	if practice:
-		if practice.has_signal("practice_started"):
-			practice.connect("practice_started", Callable(self, "_on_practice_started"))
-		if practice.has_signal("practice_ended"):
-			practice.connect("practice_ended", Callable(self, "_on_practice_ended"))
+	var cavern: Node = get_node_or_null("BloodCavern")
+	if cavern:
+		if cavern.has_signal("training_started"):
+			cavern.connect("training_started", Callable(self, "_on_training_started"))
+		if cavern.has_signal("training_ended"):
+			cavern.connect("training_ended", Callable(self, "_on_training_ended"))
 
 
 func _on_run_started() -> void:
@@ -178,12 +178,12 @@ func _on_merchant_item_purchased(item_id: String) -> void:
 	print("[Hub] Merchant purchase: ", item_id)
 
 
-func _on_practice_started() -> void:
-	print("[Hub] Practice mode entered")
+func _on_training_started(mode: String) -> void:
+	print("[Hub] Blood Cavern training started: ", mode)
 
 
-func _on_practice_ended() -> void:
-	print("[Hub] Practice mode exited")
+func _on_training_ended() -> void:
+	print("[Hub] Blood Cavern training ended")
 
 
 func _exit_tree() -> void:
