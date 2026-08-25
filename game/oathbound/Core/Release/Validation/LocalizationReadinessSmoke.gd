@@ -73,10 +73,12 @@ func _run() -> void:
 	translation.add_message(&"ui.pause.current_run", &"COURSE ACTUELLE TEST")
 	translation.add_message(&"ui.pause.run_resources", &"RESSOURCES COURSE TEST")
 	translation.add_message(&"ui.run_results.title.failed", &"FIN DE COURSE TEST")
+	translation.add_message(&"ui.run_results.title.story_complete", &"HISTOIRE TERMINEE TEST")
 	translation.add_message(&"ui.run_results.section.permanent_progress", &"PROGRES PERMANENT TEST")
 	translation.add_message(&"ui.run_results.section.final_build", &"BUILD FINAL TEST")
 	translation.add_message(&"ui.run_results.label.time", &"TEMPS TEST")
 	translation.add_message(&"ui.run_results.return_strand", &"RETOUR STRAND TEST")
+	translation.add_message(&"ui.run_results.postgame_unlocked", &"POSTGAME BATEAU TEST")
 	TranslationServer.add_translation(translation)
 	TranslationServer.set_locale("fr")
 	if typeof(SettingsManager) == TYPE_OBJECT:
@@ -316,9 +318,6 @@ func _validate_pause_surface() -> void:
 		return
 	var pause := pause_value as CanvasLayer
 	add_child(pause)
-	# The accessibility wrapper localizes RichText content from a deferred presentation
-	# pass after the base CanvasLayer has built its authored UI. Settle both stages before
-	# asserting translated section copy.
 	await get_tree().process_frame
 	await get_tree().process_frame
 	var texts := _all_control_texts(pause)
@@ -354,6 +353,41 @@ func _validate_run_results_surface() -> void:
 	_expect(_contains_text(texts, "RETOUR STRAND TEST"), "Run Results return action did not resolve localization key")
 	overlay.queue_free()
 	await get_tree().process_frame
+	get_tree().paused = false
+
+	var story_value: Variant = RUN_RESULTS_SCRIPT.new()
+	_expect(story_value is CanvasLayer, "Story Complete localization test could not instantiate Run Results")
+	if not (story_value is CanvasLayer):
+		return
+	var story := story_value as CanvasLayer
+	add_child(story)
+	await get_tree().process_frame
+	story.call("present", {
+		"completion_kind": "story_complete",
+		"successful": true,
+		"clear_time_seconds": 1200.0,
+		"area": 3,
+		"depth": 33,
+		"deepest_chamber_reached": 33,
+		"mist_gained": 0,
+		"scrolls_gained": 0,
+		"boss_materials_gained": {},
+		"aspect": "wolf",
+		"highest_tier": 4,
+		"equipped_prosthetic": "beast_whistle",
+		"equipped_relic": "",
+		"techniques": [],
+		"run_only_lost": ["Gold", "Techniques"],
+	})
+	await get_tree().process_frame
+	var story_texts := _all_control_texts(story)
+	_expect(_contains_text(story_texts, "HISTOIRE TERMINEE TEST"), "Story Complete title did not resolve localization key")
+	_expect(_contains_text(story_texts, "POSTGAME BATEAU TEST"), "localized Story Complete guidance did not resolve Boat-owned postgame key")
+	for text: String in story_texts:
+		_expect(not text.contains("The Well"), "localized Story Complete guidance reintroduced retired The Well")
+	story.queue_free()
+	await get_tree().process_frame
+	get_tree().paused = false
 
 
 func _label_texts(root: Node) -> Array[String]:
