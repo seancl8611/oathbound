@@ -115,6 +115,16 @@ func reset_training_target() -> void:
 	has_died = false
 	hp = get_max_hp()
 	set_posture_value(0.0)
+	# The visible legacy meter is only half of the current Hushiro contract. Clear the
+	# shared CombatController break timer, readability beat, ready marker, and any
+	# executable target that was forwarded to Akio before this target is reused.
+	var break_runtime: Node = get_node_or_null("HushiroPostureBreakRuntime")
+	if break_runtime != null and break_runtime.has_method("reset_posture_break_state"):
+		break_runtime.call("reset_posture_break_state")
+	else:
+		var shared_combat: Node = get_node_or_null("Combat")
+		if shared_combat != null and shared_combat.has_method("reset_posture"):
+			shared_combat.call("reset_posture")
 	clear_hitstop_state()
 	knockback = Vector2.ZERO
 	velocity = Vector2.ZERO
