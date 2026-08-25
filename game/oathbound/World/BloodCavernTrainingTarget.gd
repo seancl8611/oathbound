@@ -17,8 +17,11 @@ var _training_mode_label: Label = null
 
 
 func _ready() -> void:
-	# Initialize the production combat/hurtbox stack first, then freeze autonomous AI.
+	# Initialize the production combat/hurtbox stack first. Normal Hushiro room spawns
+	# receive HushiroEnemyContract from the region pipeline; Cavern targets are spawned
+	# directly in the Strand, so apply that same contract here before disabling AI.
 	super._ready()
+	HushiroEnemyContract.apply(self, "swordsman")
 	set_physics_process(false)
 	auto_aggro_on_spawn = false
 	can_block = false
