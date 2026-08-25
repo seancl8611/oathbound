@@ -15,7 +15,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await _run_contract()
 	if _failures.is_empty():
-		print("[StrandProgressionRuntimeSmoke] PASS - Bloodwell Cavern/Mirror Forge 18+9 66-Scroll 4/2/4 contract")
+		print("[StrandProgressionRuntimeSmoke] PASS - Bloodwell Mirror Forge 18+9 66-Scroll 4/2/4 contract")
 		get_tree().quit(0)
 	else:
 		for failure in _failures:
