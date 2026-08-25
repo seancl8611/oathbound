@@ -4,7 +4,7 @@ title: The Boat
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-25
 topics:
   - strand
   - boat
@@ -61,7 +61,7 @@ After those systems are available, the Boat may summarize:
 
 The Keeper facilitates the passage, but the Boat remains the player's final run-start interaction. His contribution should appear through nearby dialogue, a restrained gesture, changing mist, seal light, or a short departure beat rather than a second confirmation menu.
 
-Technique slots are not configured here. All five direct Technique slots begin empty and are filled through run rewards.
+Techniques are not configured at the Boat. A new run begins with an empty run Technique collection and Techniques are acquired through run rewards. The five major sword-action categories are trigger classifications, not equipment slots.
 
 ## Screen behavior
 
@@ -71,12 +71,12 @@ After Blood Aspects are available, the compact run-start screen may show:
 - short Aspect identity text,
 - current equipped Prosthetic summary when available,
 - current equipped Relic summary when available,
-- the five empty direct Technique slots only as a concise run-start expectation when useful,
+- a concise reminder that Techniques begin empty and are acquired during the run,
 - `Start Run`,
 - `Change Aspect` or a route back to the appropriate preparation service when applicable,
 - `Cancel`.
 
-The five Technique slots are:
+The five major combat-action Technique triggers are:
 
 1. Basic Attack
 2. Held Attack
@@ -84,7 +84,7 @@ The five Technique slots are:
 4. Parry / Counter
 5. Deathblow
 
-There is **no reserve Technique slot** and no permanent pre-run Technique loadout.
+These are not Technique inventory slots. Multiple owned Techniques may modify or respond to the same trigger when their individual effects allow it, and there is no global Technique inventory cap.
 
 Before Aspects are unlocked, the Boat may start the run directly or show only `Start Run` and `Cancel`.
 
@@ -106,6 +106,6 @@ The Forge Bench owns permanent Prosthetic and Relic progression / management. Th
 
 - Repeated departures must remain fast.
 - Selected Aspect, equipped Prosthetic, and equipped Relic should be clear before confirmation once those systems are available.
-- Empty Technique capacity should be understandable without creating an unnecessary pre-run menu step.
+- The empty run Technique collection should be understandable without creating an unnecessary pre-run menu step.
 - Dock alignment, lantern placement, and interaction marker must make the station immediately readable.
 - The crossing should not require an exact timeline or repeated exposition.
