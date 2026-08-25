@@ -284,8 +284,6 @@ func _validate_execution_trial_contract(cavern: Node, gold_before: int, mist_bef
 	if targets.size() == 1:
 		var target: Node = targets[0]
 		_expect(target.has_method("get_training_mode") and str(target.call("get_training_mode")) == TRIAL_EXECUTION, "Execution Trial target was not configured for execution observation")
-		# Health-only defeat is deliberately insufficient. It must reset and leave the
-		# trial active, proving completion is tied to the production receive_deathblow path.
 		target.call("death")
 		await get_tree().process_frame
 		await get_tree().process_frame
@@ -308,7 +306,6 @@ func _validate_execution_trial_contract(cavern: Node, gold_before: int, mist_bef
 		_expect(MetaProgress.has_completed_blood_cavern_trial(TRIAL_EXECUTION), "Execution Trial first clear was not persisted")
 		_expect(RelicRuntime.is_unlocked(RELIC_CATALOG.EXECUTION_BEAD), "Execution Trial first clear did not unlock the Execution Bead")
 
-	# Repeat clears are practice, not a farmable reward source.
 	cavern.call("_start_execution_trial")
 	await get_tree().process_frame
 	await get_tree().process_frame
@@ -330,8 +327,6 @@ func _validate_execution_trial_contract(cavern: Node, gold_before: int, mist_bef
 	_expect(int(MetaProgress.scrolls) == scrolls_before, "Execution Trial changed persistent Scrolls")
 	_expect(get_tree().get_nodes_in_group("blood_cavern_training_target").is_empty(), "Execution Trial target survived completion")
 
-	# Restore the exact persistent state the smoke inherited, including the on-disk
-	# snapshots touched by the real first-clear APIs.
 	MetaProgress.blood_cavern_trial_completions = original_completions
 	MetaProgress.flush_save()
 	RelicRuntime.unlocked_relics = original_unlocked
@@ -386,15 +381,26 @@ func _validate_actual_training_lifecycle(cavern: Node, gold_before: int, mist_be
 
 
 func _validate_actual_menu_transition(cavern: Node) -> void:
+	if typeof(MetaProgress) != TYPE_OBJECT:
+		_expect(false, "Blood Mirror route validation requires MetaProgress")
+		return
+	var original_boss_clears: Dictionary = MetaProgress.boss_clears.duplicate(true)
+	var ui_layer: Node = get_node_or_null("UILayer")
+
+	# Before the first Keeper clear, the nested Mirror must remain visible as a destination
+	# but unavailable, matching BloodMirror.gd's physical dormancy contract.
+	MetaProgress.boss_clears[1] = false
 	cavern.call("_open_menu")
 	await get_tree().process_frame
-	var ui_layer: Node = get_node_or_null("UILayer")
 	var cavern_menu: Node = ui_layer.get_node_or_null("BloodCavernMenu") if ui_layer != null else null
 	_expect(cavern_menu != null, "Blood Cavern did not build its actual menu surface")
 	if cavern_menu != null:
 		_expect(cavern_menu.find_child("StartTrainingTarget", true, false) is Button, "Blood Cavern menu is missing the passive training action")
 		_expect(cavern_menu.find_child("StartExecutionTrial", true, false) is Button, "Blood Cavern menu is missing the Execution Trial action")
-		_expect(cavern_menu.find_child("OpenBloodMirror", true, false) is Button, "Blood Cavern menu is missing the deeper Blood Mirror action")
+		var mirror_button: Node = cavern_menu.find_child("OpenBloodMirror", true, false)
+		_expect(mirror_button is Button, "Blood Cavern menu is missing the deeper Blood Mirror action")
+		if mirror_button is Button:
+			_expect((mirror_button as Button).disabled, "Blood Mirror action is enabled before the first Keeper clear")
 		var buttons: Node = cavern_menu.find_child("RefresherButtons", true, false)
 		_expect(buttons is GridContainer and buttons.get_child_count() == EXPECTED_REFRESHERS.size(), "Blood Cavern menu does not render all seven refresher actions")
 		var detail: Node = cavern_menu.find_child("RefresherDetail", true, false)
@@ -410,11 +416,27 @@ func _validate_actual_menu_transition(cavern: Node) -> void:
 	cavern.call("_open_blood_mirror")
 	await get_tree().process_frame
 	await get_tree().process_frame
+	var locked_mirror_menu: Node = ui_layer.get_node_or_null("BloodMirrorMenu") if ui_layer != null else null
+	_expect(locked_mirror_menu == null, "Blood Cavern opened Blood Mirror before the Keeper gate")
+
+	# Stage only the in-memory Keeper clear to prove the same route opens once progression
+	# permits it. Restore the exact inherited campaign state before leaving the smoke.
+	MetaProgress.boss_clears[1] = true
+	cavern.call("_open_menu")
+	await get_tree().process_frame
+	cavern_menu = ui_layer.get_node_or_null("BloodCavernMenu") if ui_layer != null else null
+	if cavern_menu != null:
+		var unlocked_button: Node = cavern_menu.find_child("OpenBloodMirror", true, false)
+		_expect(unlocked_button is Button and not (unlocked_button as Button).disabled, "Blood Mirror action did not enable after the Keeper gate")
+	cavern.call("_open_blood_mirror")
+	await get_tree().process_frame
+	await get_tree().process_frame
 	_expect(ui_layer == null or ui_layer.get_node_or_null("BloodCavernMenu") == null, "Blood Cavern menu did not close before entering Blood Mirror")
 	var mirror_menu: Node = ui_layer.get_node_or_null("BloodMirrorMenu") if ui_layer != null else null
-	_expect(mirror_menu != null, "Blood Cavern route did not open the nested Blood Mirror progression surface")
+	_expect(mirror_menu != null, "Blood Cavern route did not open the nested Blood Mirror progression surface after the Keeper gate")
 	_close_mirror_menu_if_present()
 	await get_tree().process_frame
+	MetaProgress.boss_clears = original_boss_clears
 	get_tree().paused = false
 
 
