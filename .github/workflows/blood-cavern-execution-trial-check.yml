@@ -40,6 +40,10 @@ on:
       - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/MetaProgressionManager.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/World/BloodCavern.gd"
       - "game/oathbound/World/BloodCavernTrainingTarget.gd"
       - "game/oathbound/World/BloodCavernTrainingTarget.tscn"
@@ -84,3 +88,11 @@ jobs:
             echo "FAIL: Execution Trial reintroduced the freed-lambda lifetime failure class."
             exit 1
           fi
+
+      - name: Upload Execution Trial diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blood-cavern-execution-trial-log
+          path: blood-cavern-execution-trial.log
+          if-no-files-found: warn
