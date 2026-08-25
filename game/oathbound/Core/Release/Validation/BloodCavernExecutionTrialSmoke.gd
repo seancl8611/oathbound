@@ -46,8 +46,13 @@ func _run() -> void:
 	if RelicRuntime.has_method("_save_progress"):
 		RelicRuntime.call("_save_progress")
 
+	var validation_scene: Node = get_tree().current_scene
 	var hub: Node = HUB_SCENE.instantiate()
 	add_child(hub)
+	# Blood Cavern presentation correctly resolves the current live scene's UILayer.
+	# This validation scene embeds HubScene instead of launching it directly, so point
+	# SceneTree.current_scene at the Hub while exercising the real station UI boundary.
+	get_tree().current_scene = hub
 	await get_tree().process_frame
 	await get_tree().process_frame
 
@@ -57,6 +62,7 @@ func _run() -> void:
 	_expect(player != null, "live Hub has no player actor")
 	if cavern == null or player == null:
 		_restore_progression(original_completions, original_unlocked, original_mastery, original_equipped)
+		get_tree().current_scene = validation_scene
 		hub.queue_free()
 		_finish()
 		return
@@ -68,6 +74,7 @@ func _run() -> void:
 	_expect(targets.size() == 1, "Execution Trial did not spawn exactly one training target")
 	if targets.size() != 1:
 		_restore_progression(original_completions, original_unlocked, original_mastery, original_equipped)
+		get_tree().current_scene = validation_scene
 		hub.queue_free()
 		_finish()
 		return
@@ -103,7 +110,7 @@ func _run() -> void:
 	# flag. HushiroPostureBreakRuntime owns the 0.20 s readability beat and then forwards
 	# the target to the current Player CombatController.
 	var posture_max: float = _posture_max_for_target(combat)
-	target.call("add_posture_damage", posture_max)
+	_add_shared_posture(combat, posture_max, "first break")
 	await _wait_for_deathblow_arm()
 	_expect_target_armed(target, break_runtime, player, "first break")
 
@@ -123,7 +130,7 @@ func _run() -> void:
 		_expect(player_combat.call("get_deathblow_target") != target, "armed training reset left Akio targeting a stale execution target")
 
 	# The same reusable target must be immediately breakable again after that reset.
-	target.call("add_posture_damage", posture_max)
+	_add_shared_posture(combat, posture_max, "post-reset break")
 	await _wait_for_deathblow_arm()
 	_expect_target_armed(target, break_runtime, player, "post-reset break")
 
@@ -144,7 +151,6 @@ func _run() -> void:
 	_expect(MetaProgress.has_completed_blood_cavern_trial(TRIAL_EXECUTION), "real Player execution did not persist trial completion")
 	_expect(RelicRuntime.is_unlocked(EXPECTED_RELIC), "real Player execution did not unlock the first-clear Relic")
 
-	# Completion feedback belongs to the live Hub UI, not this validation node.
 	var banner: Node = hub.get_node_or_null("UILayer/BloodCavernTrialResult")
 	_expect(banner != null, "successful Execution Trial did not create immediate completion feedback")
 	if banner != null:
@@ -166,7 +172,7 @@ func _run() -> void:
 		var repeat_combat: Node = repeat_target.get_node_or_null("Combat")
 		var repeat_label: Label = repeat_target.get_node_or_null("TrainingModeLabel") as Label
 		_expect(repeat_label != null and repeat_label.text.contains("EXECUTION TRIAL"), "repeat target lost in-world trial communication")
-		repeat_target.call("add_posture_damage", _posture_max_for_target(repeat_combat))
+		_add_shared_posture(repeat_combat, _posture_max_for_target(repeat_combat), "repeat break")
 		await _wait_for_deathblow_arm()
 		_expect_target_armed(repeat_target, repeat_runtime, player, "repeat break")
 		_move_player_into_finisher_range(player, repeat_target)
@@ -192,6 +198,7 @@ func _run() -> void:
 	if cavern.has_method("_clear_trial_completion_banner"):
 		cavern.call("_clear_trial_completion_banner")
 	_restore_progression(original_completions, original_unlocked, original_mastery, original_equipped)
+	get_tree().current_scene = validation_scene
 	hub.queue_free()
 	await get_tree().process_frame
 	get_tree().paused = false
@@ -204,6 +211,12 @@ func _posture_max_for_target(combat: Node) -> float:
 		if cfg_value is CombatConfig:
 			return float((cfg_value as CombatConfig).posture_max)
 	return 90.0
+
+
+func _add_shared_posture(combat: Node, amount: float, context: String) -> void:
+	_expect(combat != null and combat.has_method("add_posture"), "%s has no shared CombatController posture API" % context)
+	if combat != null and combat.has_method("add_posture"):
+		combat.call("add_posture", amount)
 
 
 func _wait_for_deathblow_arm() -> void:
