@@ -112,20 +112,20 @@ func _run_contract() -> void:
 	_expect(str(AspectRuntime.selected_aspect).is_empty(), "post-death handoff must wait for explicit Aspect selection")
 	_expect(int(AspectRuntime.tier) == 0 and float(AspectRuntime.blood) == 0.0, "awakening handoff must start from Tier 0 / Blood 0")
 
-	# The current Strand implementation uses The Well as the run-preparation surface.
-	# An awakened player must be able to open the three-Aspect selector without an
-	# Aspect already being active, and cancelling must clean up the root-level modal.
+	# After awakening, the canonical Boat owns repeated-run preparation. It must offer
+	# all three Blood Aspects without one already being active, and cancelling must
+	# clean up the root-level departure modal without starting a run.
 	var hub: Node = HUB_SCENE.instantiate()
 	add_child(hub)
 	await get_tree().process_frame
-	var well: Node = hub.get_node_or_null("TheWell")
-	if well == null:
-		_fail("Hub must expose TheWell run-preparation station")
+	var boat: Node = hub.get_node_or_null("Boat")
+	if boat == null:
+		_fail("Hub must expose Boat run-preparation station")
 	else:
-		well.call("_open_aspect_menu")
+		boat.call("_open_aspect_menu")
 		await get_tree().process_frame
-		var selector: Node = get_tree().root.get_node_or_null("AspectRunSetup")
-		_expect(selector != null, "awakened The Well must open the Blood Aspect selector")
+		var selector: Node = get_tree().root.get_node_or_null("BoatAspectRunSetup")
+		_expect(selector != null, "awakened Boat must open the Blood Aspect selector")
 		if selector != null:
 			var aspect_buttons: Array[Node] = selector.find_children("*", "Button", true, false)
 			var aspect_labels: Array[String] = []
@@ -134,9 +134,9 @@ func _run_contract() -> void:
 				if button.text in ["Wolf", "Wraith", "Ronin"]:
 					aspect_labels.append(button.text)
 			_expect(aspect_labels.size() == 3, "awakened selector must offer Wolf, Wraith, and Ronin")
-		well.call("_cancel_departure_menu")
+		boat.call("_cancel_departure_menu")
 		await get_tree().process_frame
-		_expect(get_tree().root.get_node_or_null("AspectRunSetup") == null, "cancelling Aspect selection must clean up the modal")
+		_expect(get_tree().root.get_node_or_null("BoatAspectRunSetup") == null, "cancelling Aspect selection must clean up the Boat modal")
 	hub.queue_free()
 	await get_tree().process_frame
 
