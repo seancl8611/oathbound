@@ -313,10 +313,10 @@ func _validate_front_end_surface() -> void:
 
 func _validate_pause_surface() -> void:
 	var pause_value: Variant = PAUSE_OVERVIEW_SCRIPT.new()
-	_expect(pause_value is Control, "Pause overview localization test could not instantiate runtime")
-	if not (pause_value is Control):
+	_expect(pause_value is CanvasLayer, "Pause overview localization test could not instantiate canonical CanvasLayer runtime")
+	if not (pause_value is CanvasLayer):
 		return
-	var pause := pause_value as Control
+	var pause := pause_value as CanvasLayer
 	add_child(pause)
 	await get_tree().process_frame
 	var texts := _all_control_texts(pause)
@@ -330,14 +330,15 @@ func _validate_pause_surface() -> void:
 
 func _validate_run_results_surface() -> void:
 	var overlay_value: Variant = RUN_RESULTS_SCRIPT.new()
-	_expect(overlay_value is Control, "Run Results localization test could not instantiate runtime")
-	if not (overlay_value is Control):
+	_expect(overlay_value is CanvasLayer, "Run Results localization test could not instantiate canonical CanvasLayer runtime")
+	if not (overlay_value is CanvasLayer):
 		return
-	var overlay := overlay_value as Control
+	var overlay := overlay_value as CanvasLayer
 	add_child(overlay)
 	await get_tree().process_frame
 	overlay.call("present", {
 		"outcome": "failed",
+		"completion_kind": "failed",
 		"time_seconds": 95.0,
 		"permanent_progress": ["Mist retained"],
 		"final_build": ["Echo Technique"],
