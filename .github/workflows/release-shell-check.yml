@@ -33,12 +33,15 @@ on:
       - "game/oathbound/GUI/BloodMirrorMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/GUI/RunHUD.gd"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*.gd"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
+      - "game/oathbound/World/BloodCavern*"
       - "game/oathbound/World/Boat.gd"
       - "game/oathbound/World/Hub.gd"
       - "game/oathbound/World/HubScene.tscn"
@@ -73,12 +76,15 @@ on:
       - "game/oathbound/GUI/BloodMirrorMenu.tscn"
       - "game/oathbound/GUI/HubHUD.gd"
       - "game/oathbound/GUI/RunHUD.gd"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*.gd"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn"
       - "game/oathbound/TitleScreen/**"
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/Utility/MerchantManager.gd"
       - "game/oathbound/Utility/OathboundRunScene.gd"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
+      - "game/oathbound/World/BloodCavern*"
       - "game/oathbound/World/Boat.gd"
       - "game/oathbound/World/Hub.gd"
       - "game/oathbound/World/HubScene.tscn"
@@ -194,6 +200,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Blood Cavern training boundary
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernSurfaceSmoke.tscn 2>&1 | tee blood-cavern-surface.log
+          grep -F "[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | Blood Mirror route" blood-cavern-surface.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-surface.log; then
+            echo "FAIL: Blood Cavern surface emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-surface.log; then
+            echo "FAIL: Blood Cavern surface emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Codex release presentation
         shell: bash
         run: |
@@ -245,6 +266,7 @@ jobs:
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/HubPromptGlyphSmoke.tscn 2>&1 | tee hub-prompt-glyph.log
           grep -F "[HubPromptGlyphSmoke] PASS - keyboard [E] | controller [A] | live rebind [Y] | text-labelled prompts" hub-prompt-glyph.log
+          grep -F "[HubPromptGlyphSmoke] Blood Cavern authority PASS - canonical station | no live PracticeGrounds node" hub-prompt-glyph.log
           if grep -F "SCRIPT ERROR:" hub-prompt-glyph.log; then
             echo "FAIL: Strand prompt glyph smoke emitted a GDScript runtime error."
             exit 1
@@ -266,6 +288,7 @@ jobs:
             readability-strand-hud.log
             localization-readiness.log
             run-hud-rewards.log
+            blood-cavern-surface.log
             codex-release.log
             merchant-release.log
             strand-progression-release.log
