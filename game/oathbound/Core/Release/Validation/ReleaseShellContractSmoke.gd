@@ -132,7 +132,8 @@ func _validate_checkpoint_round_trip() -> void:
 func _validate_records_contract() -> void:
 	var breakdown: Dictionary = RecordsRuntime.get_completion_breakdown()
 	_expect(_total(breakdown, "story") == 1, "completion contract must include Story Complete")
-	_expect(_total(breakdown, "bloodwell") == 18, "completion contract must include 18 Bloodwell nodes")
+	_expect(_total(breakdown, "bloodwell") == 10, "completion contract must include 10 Akio Bloodwell nodes")
+	_expect(_total(breakdown, "run_infrastructure") == 8, "completion contract must include 8 Run Infrastructure nodes")
 	_expect(_total(breakdown, "blood_mirror") == 9, "completion contract must include 9 Blood Mirror nodes")
 	_expect(_total(breakdown, "prosthetics") == 8, "completion contract must include 8 Prosthetics")
 	_expect(_total(breakdown, "prosthetic_upgrades") == 19, "completion contract must include 19 Prosthetic upgrades")
@@ -141,7 +142,8 @@ func _validate_records_contract() -> void:
 	_expect(_total(breakdown, "techniques") == 60, "completion contract must include 50 Techniques + 10 refinements")
 	_expect(_total(breakdown, "trials") == 1, "completion contract must require only the currently playable Execution Trial")
 	_expect(_total(breakdown, "heart_aspects") == 3, "completion contract must include Wolf/Wraith/Ronin Heart victories")
-	_expect(_total(breakdown, "discovery_records") == 15, "completion contract must include the 15 campaign-reachable Discovery Board records")
+	_expect(_total(breakdown, "discovery_records") == 24, "completion contract must include all 24 authored reachable Discovery Board records")
+	_expect(RecordsRuntime.REQUIRED_DISCOVERY_RECORDS.size() == NarrativeRuntime.get_all_lore().size(), "required Discovery Board list drifted from the authored lore catalog")
 
 	var records: Dictionary = RecordsRuntime.get_records_snapshot()
 	for key: String in [
