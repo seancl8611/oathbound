@@ -9,7 +9,7 @@ const FRONT_END_SCENE = preload("res://TitleScreen/menu.tscn")
 const HUB_HUD_SCRIPT = preload("res://GUI/HubHUD.gd")
 const PAUSE_OVERVIEW_SCRIPT = preload("res://Core/Release/OathboundAccessiblePauseOverview.gd")
 const RUN_RESULTS_SCRIPT = preload("res://Core/Release/OathboundAccessibleRunResultsOverlay.gd")
-const THE_WELL_SCRIPT = preload("res://World/TheWell.gd")
+const BOAT_SCRIPT = preload("res://World/Boat.gd")
 
 var _failed: bool = false
 
@@ -32,10 +32,12 @@ func _run() -> void:
 	translation.add_message(&"ui.rarity.common", &"Commun Test")
 	translation.add_message(&"catalog.technique.echo_lingering_cut.name", &"Coupe Persistante Test")
 	translation.add_message(&"catalog.technique.echo_lingering_cut.details", &"Description Technique Traduite")
-	translation.add_message(&"ui.well.aspect.title", &"Aspect Test Traduit")
+	translation.add_message(&"ui.boat.aspect.title", &"Aspect Test Traduit")
 	translation.add_message(&"aspect.wolf.name", &"Loup Test")
-	translation.add_message(&"ui.well.goal.title", &"Objectif Test Traduit")
-	translation.add_message(&"ui.well.goal.standard.name", &"Expedition Standard Test")
+	translation.add_message(&"ui.boat.goal.title", &"Objectif Test Traduit")
+	translation.add_message(&"ui.boat.goal.standard.name", &"Expedition Standard Test")
+	translation.add_message(&"ui.boat.confirm.title", &"Bateau Test Pret")
+	translation.add_message(&"ui.boat.confirm.start", &"Demarrer Course Test")
 	translation.add_message(&"ui.discovery.title", &"TABLEAU TEST")
 	translation.add_message(&"ui.discovery.tab.help", &"Aide Test")
 	translation.add_message(&"ui.discovery.tab.achievements", &"Succes Test")
@@ -85,7 +87,7 @@ func _run() -> void:
 	await _validate_dialogue_surface()
 	_validate_technique_reward_surface()
 	await _validate_forge_surface()
-	await _validate_well_surface()
+	await _validate_boat_surface()
 	await _validate_discovery_surface()
 	await _validate_strand_wallet_surface()
 	await _validate_front_end_surface()
@@ -101,7 +103,7 @@ func _run() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Well departure | Discovery Board | English fallback | Forge Scroll costs | Strand wallet | front end | Pause overview | Run Results | complete front-end shell")
+	print("[LocalizationReadinessSmoke] PASS - dialogue | Technique rewards | Boat departure | Discovery Board | English fallback | Forge Scroll costs | Strand wallet | front end | Pause overview | Run Results | complete front-end shell")
 	get_tree().quit(0)
 
 
@@ -194,39 +196,54 @@ func _validate_forge_surface() -> void:
 	ProstheticManager.purchased_upgrades = previous_upgrades
 
 
-func _validate_well_surface() -> void:
-	var well_value: Variant = THE_WELL_SCRIPT.new()
-	_expect(well_value is Node, "The Well localization test could not instantiate runtime")
-	if not (well_value is Node):
+func _validate_boat_surface() -> void:
+	var boat_value: Variant = BOAT_SCRIPT.new()
+	_expect(boat_value is Node, "Boat localization test could not instantiate runtime")
+	if not (boat_value is Node):
 		return
-	var well: Node = well_value as Node
-	# The live Well is authored inline in HubScene and HubInteractable requires this
-	# child during _ready(). Mirror that structural contract before entering the tree.
+	var boat: Node = boat_value as Node
+	# HubInteractable requires the authored InteractPopup child during _ready().
+	# Mirror the live Boat structural contract before entering the tree.
 	var interact_popup := Label.new()
 	interact_popup.name = "InteractPopup"
-	well.add_child(interact_popup)
-	add_child(well)
+	boat.add_child(interact_popup)
+	add_child(boat)
 	await get_tree().process_frame
-	well.call("_open_aspect_menu")
+
+	boat.call("_open_aspect_menu")
 	await get_tree().process_frame
-	var aspect_menu: Node = get_tree().root.get_node_or_null("AspectRunSetup")
-	_expect(aspect_menu != null, "The Well did not open Aspect setup")
+	var aspect_menu: Node = get_tree().root.get_node_or_null("BoatAspectRunSetup")
+	_expect(aspect_menu != null, "Boat did not open canonical Aspect setup")
 	if aspect_menu != null:
 		var texts := _all_control_texts(aspect_menu)
-		_expect(_contains_text(texts, "Aspect Test Traduit"), "The Well Aspect title did not resolve localization key")
-		_expect(_contains_text(texts, "Loup Test"), "The Well Aspect choice did not resolve stable Aspect key")
-	well.call("_close_aspect_menu")
+		_expect(_contains_text(texts, "Aspect Test Traduit"), "Boat Aspect title did not resolve localization key")
+		_expect(_contains_text(texts, "Loup Test"), "Boat Aspect choice did not resolve stable Aspect key")
+	boat.call("_close_aspect_menu")
 	await get_tree().process_frame
-	well.call("_open_run_goal_menu")
+
+	boat.call("_open_run_goal_menu")
 	await get_tree().process_frame
-	var goal_menu: Node = get_tree().root.get_node_or_null("PostgameRunGoalSetup")
-	_expect(goal_menu != null, "The Well did not open postgame goal setup")
+	var goal_menu: Node = get_tree().root.get_node_or_null("BoatPostgameRunGoalSetup")
+	_expect(goal_menu != null, "Boat did not open canonical postgame goal setup")
 	if goal_menu != null:
 		var goal_texts := _all_control_texts(goal_menu)
-		_expect(_contains_text(goal_texts, "Objectif Test Traduit"), "The Well goal title did not resolve localization key")
-		_expect(_contains_text(goal_texts, "Expedition Standard Test"), "The Well Standard Expedition label did not resolve localization key")
-	well.call("_close_goal_menu")
-	well.queue_free()
+		_expect(_contains_text(goal_texts, "Objectif Test Traduit"), "Boat goal title did not resolve localization key")
+		_expect(_contains_text(goal_texts, "Expedition Standard Test"), "Boat Standard Expedition label did not resolve localization key")
+	boat.call("_close_goal_menu")
+	await get_tree().process_frame
+
+	boat.call("_open_confirmation_menu")
+	await get_tree().process_frame
+	var confirmation: Node = get_tree().root.get_node_or_null("BoatRunConfirmation")
+	_expect(confirmation != null, "Boat did not open canonical final run confirmation")
+	if confirmation != null:
+		var confirmation_texts := _all_control_texts(confirmation)
+		_expect(_contains_text(confirmation_texts, "Bateau Test Pret"), "Boat confirmation title did not resolve localization key")
+		_expect(_contains_text(confirmation_texts, "Demarrer Course Test"), "Boat Start Run action did not resolve localization key")
+	var snapshot: Dictionary = boat.call("_confirmation_snapshot_for_playtest")
+	_expect(str(snapshot.get("start", "")) == "Demarrer Course Test", "Boat confirmation snapshot did not use localized Start Run copy")
+	boat.call("_cancel_departure_menu")
+	boat.queue_free()
 	await get_tree().process_frame
 
 
