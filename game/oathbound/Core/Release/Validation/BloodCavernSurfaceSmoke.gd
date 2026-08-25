@@ -265,7 +265,7 @@ func _validate_actual_menu_transition(cavern: Node) -> void:
 	get_tree().paused = false
 
 
-func _same_string_set(actual_value: Variant, expected: Array[String]) -> bool:
+func _same_string_set(actual_value: Variant, expected: Array) -> bool:
 	if not (actual_value is Array):
 		return false
 	var actual: Array = actual_value as Array
@@ -274,10 +274,11 @@ func _same_string_set(actual_value: Variant, expected: Array[String]) -> bool:
 	var observed: Dictionary = {}
 	for value: Variant in actual:
 		observed[str(value)] = int(observed.get(str(value), 0)) + 1
-	for value: String in expected:
-		if int(observed.get(value, 0)) <= 0:
+	for value: Variant in expected:
+		var expected_value: String = str(value)
+		if int(observed.get(expected_value, 0)) <= 0:
 			return false
-		observed[value] = int(observed[value]) - 1
+		observed[expected_value] = int(observed[expected_value]) - 1
 	return true
 
 
