@@ -2,18 +2,9 @@ extends HubInteractable
 
 ## Blood Cavern — canonical Strand training / trial entry.
 ##
-## Launch framework provides a production-combat passive target, one deterministic
-## execution trial, replayable tutorial refreshers, discovered Action-Technique demos,
-## and the existing Blood Mirror progression surface. Exact authored trial tuning,
-## broader challenge volume, fixed challenge loadouts, and mastery content remain later
-## content work per the approved Blood Cavern authority.
-##
-## Guardrails:
-## - training targets never award Gold, XP, Mist, Scrolls, boss materials, or records;
-## - temporary Technique demos restore the exact prior run Technique array on exit;
-## - trial completion is observed from the production deathblow path, not a fake button;
-## - refreshers describe current runtime controls and never create a second tutorial state;
-## - Blood Mirror progression remains owned by BloodMirror.gd/Menu, not this station.
+## This station owns sandbox combat practice and challenge entry. It deliberately reuses
+## production combat targets while suppressing normal enemy/run rewards. Permanent Blood
+## Mirror progression remains owned by the nested BloodMirror node and its Keeper gate.
 
 signal training_started(mode: String)
 signal training_ended
@@ -28,8 +19,6 @@ const TRAINING_TARGET = preload("res://World/BloodCavernTrainingTarget.tscn")
 
 const TECHNIQUE_RECORD_PREFIX := "technique_record/"
 const TRIAL_EXECUTION := "execution_trial"
-# Keep the live combat lane to the west of the Cavern station. The east-side lane is
-# occupied by the Undead Samurai trainer in the current Strand layout.
 const TRAINING_TARGET_OFFSET := Vector2(-112.0, 0.0)
 const REFRESHER_TOPICS: Array[String] = [
 	"execution",
@@ -67,7 +56,6 @@ func _open_menu() -> void:
 		push_error("[BloodCavern] Hub UILayer missing")
 		close_menu()
 		return
-
 	_previous_paused = get_tree().paused
 	get_tree().paused = true
 	_menu = _build_menu_surface()
@@ -330,6 +318,13 @@ func _refresher_copy_for_playtest(topic_id: String, family: String) -> Dictionar
 	var down: String = INPUT_GLYPHS.preferred_label("down", family)
 	var left: String = INPUT_GLYPHS.preferred_label("left", family)
 	var right: String = INPUT_GLYPHS.preferred_label("right", family)
+	var blood_body := LOCALIZATION.ui(
+		"blood_cavern.refresher.blood_aspects.awakened",
+		"Aspect selection is available after Returning Blood awakens. The Blood Mirror owns permanent Aspect reliability progression."
+	) if _returning_blood_awakened() else LOCALIZATION.ui(
+		"blood_cavern.refresher.blood_aspects.locked",
+		"Blood Aspects unlocks after Returning Blood awakens. Continue the campaign before practicing Aspect selection."
+	)
 	var topics: Dictionary = {
 		"execution": {
 			"title": LOCALIZATION.ui("blood_cavern.refresher.execution.title", "Execution / Deathblow"),
@@ -357,7 +352,7 @@ func _refresher_copy_for_playtest(topic_id: String, family: String) -> Dictionar
 		},
 		"blood_aspects": {
 			"title": LOCALIZATION.ui("blood_cavern.refresher.blood_aspects.title", "Blood Aspects"),
-			"body": LOCALIZATION.ui("blood_cavern.refresher.blood_aspects.body", "Blood Aspects alter Akio's combat identity after Returning Blood awakens. The Blood Mirror owns their permanent reliability progression."),
+			"body": blood_body,
 		},
 	}
 	return (topics.get(topic_id, {}) as Dictionary).duplicate(true)
@@ -366,36 +361,23 @@ func _refresher_copy_for_playtest(topic_id: String, family: String) -> Dictionar
 func _discovered_action_techniques_for_playtest() -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
 	var seen: Dictionary = {}
-	var upgrades: Array = RunData.player_upgrades if typeof(RunData) == TYPE_OBJECT else []
-	for upgrade_value: Variant in upgrades:
-		var upgrade_id: String = str(upgrade_value)
-		if not TECHNIQUE_CATALOG.has_entry(upgrade_id):
+	var candidates: Array = []
+	if typeof(RunData) == TYPE_OBJECT:
+		candidates.append_array(RunData.acquired_upgrades)
+	candidates.append_array(_discovered_technique_records())
+	for technique_value: Variant in candidates:
+		var technique_id := str(technique_value)
+		if seen.has(technique_id):
 			continue
-		var data: Dictionary = TECHNIQUE_CATALOG.get_entry(upgrade_id)
-		if str(data.get("equip_class", "")) != TECHNIQUE_CATALOG.EQUIP_ACTION:
+		var data: Dictionary = TECHNIQUE_CATALOG.get_entry(technique_id)
+		if data.is_empty() or str(data.get("kind", "")) != TECHNIQUE_CATALOG.KIND_ACTION:
 			continue
-		if seen.has(upgrade_id):
-			continue
-		seen[upgrade_id] = true
+		seen[technique_id] = true
 		out.append({
-			"id": upgrade_id,
-			"name": LOCALIZATION.catalog_name("technique", upgrade_id, str(data.get("displayname", upgrade_id.capitalize()))),
+			"id": technique_id,
+			"name": LOCALIZATION.catalog_name("technique", technique_id, str(data.get("displayname", technique_id.capitalize()))),
 			"action_label": _technique_action_label(data),
-			"details": LOCALIZATION.catalog_description("technique", upgrade_id, str(data.get("description", ""))),
-		})
-	for record: Variant in _discovered_technique_records():
-		var record_id: String = str(record)
-		if seen.has(record_id) or not TECHNIQUE_CATALOG.has_entry(record_id):
-			continue
-		var record_data: Dictionary = TECHNIQUE_CATALOG.get_entry(record_id)
-		if str(record_data.get("equip_class", "")) != TECHNIQUE_CATALOG.EQUIP_ACTION:
-			continue
-		seen[record_id] = true
-		out.append({
-			"id": record_id,
-			"name": LOCALIZATION.catalog_name("technique", record_id, str(record_data.get("displayname", record_id.capitalize()))),
-			"action_label": _technique_action_label(record_data),
-			"details": LOCALIZATION.catalog_description("technique", record_id, str(record_data.get("description", ""))),
+			"details": LOCALIZATION.catalog_details("technique", technique_id, str(data.get("details", ""))),
 		})
 	out.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return str(a.get("name", "")) < str(b.get("name", "")))
 	return out
@@ -403,45 +385,44 @@ func _discovered_action_techniques_for_playtest() -> Array[Dictionary]:
 
 func _discovered_technique_records() -> Array:
 	var out: Array = []
-	if typeof(RecordsManager) != TYPE_OBJECT or not RecordsManager.has_method("get_run_milestones"):
+	if typeof(MetaProgress) != TYPE_OBJECT:
 		return out
-	for milestone_value: Variant in RecordsManager.call("get_run_milestones"):
-		var milestone: String = str(milestone_value)
-		if milestone.begins_with(TECHNIQUE_RECORD_PREFIX):
-			out.append(milestone.trim_prefix(TECHNIQUE_RECORD_PREFIX))
+	for key_value: Variant in MetaProgress.progression_flags.keys():
+		var key := str(key_value)
+		if key.begins_with(TECHNIQUE_RECORD_PREFIX) and bool(MetaProgress.progression_flags.get(key_value, false)):
+			out.append(key.trim_prefix(TECHNIQUE_RECORD_PREFIX))
 	return out
 
 
 func _technique_action_label(data: Dictionary) -> String:
-	var channel: String = str(data.get("action_channel", ""))
-	match channel:
-		TECHNIQUE_CATALOG.CHANNEL_FINISHER:
+	match str(data.get("action", "")):
+		TECHNIQUE_CATALOG.ACTION_DEATHBLOW:
 			return LOCALIZATION.ui("blood_cavern.technique_demos.action.finisher", "Finisher")
-		TECHNIQUE_CATALOG.CHANNEL_PARRY:
-			return LOCALIZATION.ui("blood_cavern.technique_demos.action.parry", "Parry")
-		TECHNIQUE_CATALOG.CHANNEL_DASH:
-			return LOCALIZATION.ui("blood_cavern.technique_demos.action.dash", "Dash")
-		TECHNIQUE_CATALOG.CHANNEL_ATTACK:
-			return LOCALIZATION.ui("blood_cavern.technique_demos.action.attack", "Attack")
+		TECHNIQUE_CATALOG.ACTION_COUNTER:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.counter", "Counter")
+		TECHNIQUE_CATALOG.ACTION_DASH:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.dash", "Dash Attack")
+		TECHNIQUE_CATALOG.ACTION_HELD:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.held", "Held Attack")
+		TECHNIQUE_CATALOG.ACTION_BASIC:
+			return LOCALIZATION.ui("blood_cavern.technique_demos.action.basic", "Basic Attack")
 	return LOCALIZATION.ui("blood_cavern.technique_demos.action.general", "Action")
 
 
 func _start_technique_demo(technique_id: String) -> void:
-	if not TECHNIQUE_CATALOG.has_entry(technique_id):
-		return
 	var data: Dictionary = TECHNIQUE_CATALOG.get_entry(technique_id)
-	if str(data.get("equip_class", "")) != TECHNIQUE_CATALOG.EQUIP_ACTION:
+	if data.is_empty() or str(data.get("kind", "")) != TECHNIQUE_CATALOG.KIND_ACTION:
 		return
 	_clear_trial_completion_banner()
 	_close_menu_surface()
 	if not _demo_snapshot_active:
-		_demo_original_upgrades = RunData.player_upgrades.duplicate(true) if typeof(RunData) == TYPE_OBJECT else []
+		_demo_original_upgrades = RunData.acquired_upgrades.duplicate(true) if typeof(RunData) == TYPE_OBJECT else []
 		_demo_snapshot_active = true
 	_active_trial_id = ""
 	_trial_completion_queued = false
 	_active_demo_technique_id = technique_id
 	if typeof(RunData) == TYPE_OBJECT:
-		RunData.player_upgrades = [technique_id]
+		RunData.acquired_upgrades = [technique_id]
 	if _has_training_target():
 		_clear_training_target()
 	_spawn_training_target("technique_demo")
@@ -453,7 +434,7 @@ func _restore_demo_loadout() -> void:
 		_active_demo_technique_id = ""
 		return
 	if typeof(RunData) == TYPE_OBJECT:
-		RunData.player_upgrades = _demo_original_upgrades.duplicate(true)
+		RunData.acquired_upgrades = _demo_original_upgrades.duplicate(true)
 	_demo_original_upgrades.clear()
 	_demo_snapshot_active = false
 	_active_demo_technique_id = ""
@@ -492,8 +473,8 @@ func _complete_trial(trial_id: String) -> void:
 	_last_trial_result = result.duplicate(true)
 	_active_trial_id = ""
 	_clear_training_target()
-	var first_clear: bool = bool(result.get("first_clear", false))
-	var relic_id: String = str(result.get("relic_id", ""))
+	var first_clear := bool(result.get("first_clear", false))
+	var relic_id := str(result.get("relic_id", ""))
 	_show_trial_completion_banner(trial_id, result)
 	training_ended.emit()
 	trial_completed.emit(trial_id, first_clear, relic_id)
@@ -501,26 +482,20 @@ func _complete_trial(trial_id: String) -> void:
 
 
 func _trial_completion_copy_for_playtest(trial_id: String, result: Dictionary) -> Dictionary:
-	var title: String = LOCALIZATION.ui("blood_cavern.trials.complete", "TRIAL COMPLETE")
+	var title := LOCALIZATION.ui("blood_cavern.trials.complete", "TRIAL COMPLETE")
 	if trial_id == TRIAL_EXECUTION:
 		title = LOCALIZATION.ui("blood_cavern.trials.execution.complete", "EXECUTION TRIAL COMPLETE")
-	var first_clear: bool = bool(result.get("first_clear", false))
-	var relic_id: String = str(result.get("relic_id", ""))
+	var first_clear := bool(result.get("first_clear", false))
+	var relic_id := str(result.get("relic_id", ""))
 	if first_clear and not relic_id.is_empty():
-		var relic_name: String = LOCALIZATION.catalog_name("relic", relic_id, RELIC_CATALOG.get_display_name(relic_id))
+		var relic_name := LOCALIZATION.catalog_name("relic", relic_id, RELIC_CATALOG.get_display_name(relic_id))
 		return {
 			"title": title,
-			"detail": LOCALIZATION.ui(
-				"blood_cavern.trials.first_clear_reward",
-				"%s unlocked. First-clear challenge reward claimed."
-			) % relic_name,
+			"detail": LOCALIZATION.ui("blood_cavern.trials.first_clear_reward", "%s unlocked. First-clear challenge reward claimed.") % relic_name,
 		}
 	return {
 		"title": title,
-		"detail": LOCALIZATION.ui(
-			"blood_cavern.trials.repeat_clear_reward",
-			"Practice clear. The first-clear reward was already claimed."
-		),
+		"detail": LOCALIZATION.ui("blood_cavern.trials.repeat_clear_reward", "Practice clear. The first-clear reward was already claimed."),
 	}
 
 
@@ -530,8 +505,7 @@ func _show_trial_completion_banner(trial_id: String, result: Dictionary) -> void
 	if ui_layer == null:
 		return
 	_clear_trial_completion_banner()
-	var copy: Dictionary = _trial_completion_copy_for_playtest(trial_id, result)
-
+	var copy := _trial_completion_copy_for_playtest(trial_id, result)
 	var panel := PanelContainer.new()
 	panel.name = "BloodCavernTrialResult"
 	panel.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -654,7 +628,7 @@ func _clear_training_target() -> void:
 
 
 func _stop_training_state() -> bool:
-	var was_active: bool = _training_active or _has_training_target() or _demo_snapshot_active or not _active_trial_id.is_empty()
+	var was_active := _training_active or _has_training_target() or _demo_snapshot_active or not _active_trial_id.is_empty()
 	_clear_training_target()
 	_restore_demo_loadout()
 	_active_trial_id = ""
@@ -665,15 +639,15 @@ func _stop_training_state() -> bool:
 
 
 func _end_training() -> void:
-	var was_active: bool = _stop_training_state()
+	var was_active := _stop_training_state()
 	if was_active:
 		print("[BloodCavern] Training ended — no run or permanent rewards granted")
 	_close_menu_surface()
 
 
 func _open_blood_mirror() -> void:
-	var mirror: Node = _find_blood_mirror()
-	var stopped_training: bool = _stop_training_state()
+	var mirror := _find_blood_mirror()
+	var stopped_training := _stop_training_state()
 	if stopped_training:
 		print("[BloodCavern] Training state cleared before entering Blood Mirror")
 	_clear_trial_completion_banner()
@@ -686,7 +660,7 @@ func _find_blood_mirror() -> Node:
 	var current_scene: Node = get_tree().current_scene
 	if current_scene == null:
 		return null
-	var mirror: Node = current_scene.get_node_or_null("BloodMirror")
+	var mirror := current_scene.get_node_or_null("BloodMirror")
 	if mirror != null:
 		return mirror
 	return get_node_or_null("BloodMirror")
@@ -718,32 +692,20 @@ func _trial_status_text() -> String:
 		)
 	if not _last_trial_result.is_empty():
 		if bool(_last_trial_result.get("first_clear", false)):
-			return LOCALIZATION.ui(
-				"blood_cavern.trials.execution.first_clear",
-				"Execution Trial cleared. The current first-clear challenge Relic has been unlocked; repeats grant no duplicate reward."
-			)
-		return LOCALIZATION.ui(
-			"blood_cavern.trials.execution.repeat_clear",
-			"Execution Trial cleared again. Repeat clears grant no duplicate Relic or run currency."
-		)
-	var completed: bool = typeof(MetaProgress) == TYPE_OBJECT and MetaProgress.has_method("has_completed_blood_cavern_trial") and bool(MetaProgress.call("has_completed_blood_cavern_trial", TRIAL_EXECUTION))
+			return LOCALIZATION.ui("blood_cavern.trials.execution.first_clear", "Execution Trial cleared. The current first-clear challenge Relic has been unlocked; repeats grant no duplicate reward.")
+		return LOCALIZATION.ui("blood_cavern.trials.execution.repeat_clear", "Execution Trial cleared again. Repeat clears grant no duplicate Relic or run currency.")
+	var completed := typeof(MetaProgress) == TYPE_OBJECT and MetaProgress.has_method("has_completed_blood_cavern_trial") and bool(MetaProgress.call("has_completed_blood_cavern_trial", TRIAL_EXECUTION))
 	if completed:
-		return LOCALIZATION.ui(
-			"blood_cavern.trials.execution.completed",
-			"Execution Trial completed previously. It remains repeatable for practice with no duplicate first-clear reward."
-		)
-	return LOCALIZATION.ui(
-		"blood_cavern.trials.execution.ready",
-		"Execution Trial — break the passive target's Posture and complete a real deathblow."
-	)
+		return LOCALIZATION.ui("blood_cavern.trials.execution.completed", "Execution Trial completed previously. It remains repeatable for practice with no duplicate first-clear reward.")
+	return LOCALIZATION.ui("blood_cavern.trials.execution.ready", "Execution Trial — break the passive target's Posture and complete a real deathblow.")
 
 
 func _training_status_text() -> String:
 	if _active_trial_id == TRIAL_EXECUTION:
 		return _trial_status_text()
 	if not _active_demo_technique_id.is_empty():
-		var data: Dictionary = TECHNIQUE_CATALOG.get_entry(_active_demo_technique_id)
-		var technique_name: String = LOCALIZATION.catalog_name(
+		var data := TECHNIQUE_CATALOG.get_entry(_active_demo_technique_id)
+		var technique_name := LOCALIZATION.catalog_name(
 			"technique",
 			_active_demo_technique_id,
 			str(data.get("displayname", _active_demo_technique_id.capitalize()))
