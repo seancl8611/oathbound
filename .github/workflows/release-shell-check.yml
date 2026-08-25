@@ -207,7 +207,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernSurfaceSmoke.tscn 2>&1 | tee blood-cavern-surface.log
-          grep -F "[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface" blood-cavern-surface.log
+          grep -F "[BloodCavernSurfaceSmoke] PASS - live Blood Cavern | passive production-combat target | no enemy rewards | nested Blood Mirror | localized surface | tutorial refreshers | discovered Technique demos | real Execution Trial | training-state isolation" blood-cavern-surface.log
           if grep -F "SCRIPT ERROR:" blood-cavern-surface.log; then
             echo "FAIL: Blood Cavern surface emitted a GDScript runtime error."
             exit 1
