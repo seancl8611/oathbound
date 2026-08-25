@@ -88,22 +88,6 @@ offset_bottom = -39.0
 text = "Bloodwell [E]"
 horizontal_alignment = 1
 
-[node name="BloodMirror" type="Area2D" parent="."]
-position = Vector2(-132, 86)
-script = ExtResource("11_blood_mirror")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodMirror"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_qekqq")
-
-[node name="InteractPopup" type="Label" parent="BloodMirror"]
-offset_left = -82.0
-offset_top = -65.0
-offset_right = 83.0
-offset_bottom = -39.0
-text = "Blood Mirror [E]"
-horizontal_alignment = 1
-
 [node name="MerchantStall" type="Area2D" parent="."]
 position = Vector2(-7, -95)
 script = ExtResource("9_bbnwo")
@@ -134,6 +118,21 @@ offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
 text = "Blood Cavern [E]"
+horizontal_alignment = 1
+
+[node name="BloodMirror" type="Area2D" parent="BloodCavern"]
+position = Vector2(0, 72)
+script = ExtResource("11_blood_mirror")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodCavern/BloodMirror"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="BloodCavern/BloodMirror"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Blood Mirror"
 horizontal_alignment = 1
 
 [node name="KeeperNPC" type="Area2D" parent="."]
@@ -244,6 +243,5 @@ horizontal_alignment = 1
 [connection signal="body_entered" from="ForgeBench" to="ForgeBench" method="_on_body_entered"]
 [connection signal="body_entered" from="CodexBoard" to="CodexBoard" method="_on_body_entered"]
 [connection signal="body_entered" from="Bloodwell" to="Bloodwell" method="_on_body_entered"]
-[connection signal="body_entered" from="BloodMirror" to="BloodMirror" method="_on_body_entered"]
 [connection signal="body_entered" from="MerchantStall" to="MerchantStall" method="_on_body_entered"]
 [connection signal="body_entered" from="BloodCavern" to="BloodCavern" method="_on_body_entered"]
