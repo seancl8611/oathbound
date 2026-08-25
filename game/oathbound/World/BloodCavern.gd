@@ -23,6 +23,7 @@ const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 const INPUT_GLYPHS = preload("res://Core/Release/OathboundInputGlyphs.gd")
 const TECHNIQUE_CATALOG = preload("res://Core/Techniques/TechniqueCatalog.gd")
+const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 const TRAINING_TARGET = preload("res://World/BloodCavernTrainingTarget.tscn")
 
 const TECHNIQUE_RECORD_PREFIX := "technique_record/"
@@ -441,6 +442,7 @@ func _start_technique_demo(technique_id: String) -> void:
 	if not _is_discovered_action_technique(technique_id):
 		push_warning("[BloodCavern] Technique demo rejected because it is not a discovered Action Technique: %s" % technique_id)
 		return
+	_clear_trial_completion_banner()
 	_close_menu_surface()
 	_clear_training_target()
 	_active_trial_id = ""
@@ -473,6 +475,7 @@ func _restore_demo_loadout() -> void:
 
 
 func _start_execution_trial() -> void:
+	_clear_trial_completion_banner()
 	_close_menu_surface()
 	_clear_training_target()
 	_restore_demo_loadout()
@@ -505,12 +508,102 @@ func _complete_active_trial(trial_id: String) -> void:
 	_clear_training_target()
 	var first_clear: bool = bool(result.get("first_clear", false))
 	var relic_id: String = str(result.get("relic_id", ""))
+	_show_trial_completion_banner(trial_id, result)
 	training_ended.emit()
 	trial_completed.emit(trial_id, first_clear, relic_id)
 	print("[BloodCavern] Execution Trial complete — first_clear=%s relic=%s" % [str(first_clear), relic_id if not relic_id.is_empty() else "none"])
 
 
+func _trial_completion_copy_for_playtest(trial_id: String, result: Dictionary) -> Dictionary:
+	var title: String = LOCALIZATION.ui("blood_cavern.trials.complete", "TRIAL COMPLETE")
+	if trial_id == TRIAL_EXECUTION:
+		title = LOCALIZATION.ui("blood_cavern.trials.execution.complete", "EXECUTION TRIAL COMPLETE")
+	var first_clear: bool = bool(result.get("first_clear", false))
+	var relic_id: String = str(result.get("relic_id", ""))
+	if first_clear and not relic_id.is_empty():
+		var relic_name: String = LOCALIZATION.catalog_name("relic", relic_id, RELIC_CATALOG.get_display_name(relic_id))
+		return {
+			"title": title,
+			"detail": LOCALIZATION.ui(
+				"blood_cavern.trials.first_clear_reward",
+				"%s unlocked. First-clear challenge reward claimed."
+			) % relic_name,
+		}
+	return {
+		"title": title,
+		"detail": LOCALIZATION.ui(
+			"blood_cavern.trials.repeat_clear_reward",
+			"Practice clear. The first-clear reward was already claimed."
+		),
+	}
+
+
+func _show_trial_completion_banner(trial_id: String, result: Dictionary) -> void:
+	var current_scene: Node = get_tree().current_scene
+	var ui_layer: Node = current_scene.get_node_or_null("UILayer") if current_scene != null else null
+	if ui_layer == null:
+		return
+	_clear_trial_completion_banner()
+	var copy: Dictionary = _trial_completion_copy_for_playtest(trial_id, result)
+
+	var panel := PanelContainer.new()
+	panel.name = "BloodCavernTrialResult"
+	panel.process_mode = Node.PROCESS_MODE_ALWAYS
+	panel.anchor_left = 0.5
+	panel.anchor_right = 0.5
+	panel.anchor_top = 0.0
+	panel.offset_left = -240.0
+	panel.offset_right = 240.0
+	panel.offset_top = 28.0
+	panel.offset_bottom = 116.0
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var style := StyleBoxFlat.new()
+	style.bg_color = Color(0.055, 0.035, 0.05, 0.96)
+	style.border_color = Color(0.68, 0.28, 0.34, 0.95)
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(6)
+	style.set_content_margin_all(10)
+	panel.add_theme_stylebox_override("panel", style)
+	ui_layer.add_child(panel)
+
+	var content := VBoxContainer.new()
+	content.alignment = BoxContainer.ALIGNMENT_CENTER
+	content.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(content)
+	var title := Label.new()
+	title.name = "Title"
+	title.text = str(copy.get("title", ""))
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 16)
+	content.add_child(title)
+	var detail := Label.new()
+	detail.name = "Detail"
+	detail.text = str(copy.get("detail", ""))
+	detail.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	detail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	content.add_child(detail)
+	READABILITY_STYLER.apply(panel)
+
+	var timer := Timer.new()
+	timer.name = "DismissTimer"
+	timer.one_shot = true
+	timer.wait_time = 3.0
+	timer.process_callback = Timer.TIMER_PROCESS_IDLE
+	panel.add_child(timer)
+	timer.timeout.connect(Callable(panel, "queue_free"))
+	timer.start()
+
+
+func _clear_trial_completion_banner() -> void:
+	var current_scene: Node = get_tree().current_scene
+	var ui_layer: Node = current_scene.get_node_or_null("UILayer") if current_scene != null else null
+	var banner: Node = ui_layer.get_node_or_null("BloodCavernTrialResult") if ui_layer != null else null
+	if banner != null and is_instance_valid(banner):
+		banner.queue_free()
+
+
 func _start_passive_target() -> void:
+	_clear_trial_completion_banner()
 	_close_menu_surface()
 	_restore_demo_loadout()
 	_active_trial_id = ""
@@ -597,6 +690,7 @@ func _open_blood_mirror() -> void:
 	var stopped_training: bool = _stop_training_state()
 	if stopped_training:
 		print("[BloodCavern] Training state cleared before entering Blood Mirror")
+	_clear_trial_completion_banner()
 	_close_menu_surface()
 	if mirror != null and mirror.has_method("_open_menu"):
 		mirror.call_deferred("_open_menu")
@@ -718,6 +812,7 @@ func _menu_snapshot_for_playtest() -> Dictionary:
 
 
 func _exit_tree() -> void:
+	_clear_trial_completion_banner()
 	_clear_training_target()
 	_restore_demo_loadout()
 	_active_trial_id = ""
