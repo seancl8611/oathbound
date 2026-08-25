@@ -167,7 +167,7 @@ func _add_story_complete_sequence(column: VBoxContainer) -> void:
 		line.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		column.add_child(line)
 	var postgame := Label.new()
-	postgame.text = "Postgame unlocked: choose Standard Expedition or Heart Suppression at The Well before departure."
+	postgame.text = "Postgame unlocked: choose Standard Expedition or Heart Suppression at the Boat before departure."
 	postgame.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	column.add_child(postgame)
 
