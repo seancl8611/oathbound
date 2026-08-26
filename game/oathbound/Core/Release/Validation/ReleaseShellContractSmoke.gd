@@ -134,6 +134,8 @@ func _validate_checkpoint_round_trip() -> void:
 	_expect(not flow.prepare_resume_checkpoint({"version": flow.CHECKPOINT_VERSION}), "release GameFlow accepted an incomplete current-version checkpoint")
 	_expect(flow.prepare_resume_checkpoint(valid_checkpoint), "release GameFlow rejected a structurally valid current checkpoint")
 	_expect(flow.has_prepared_resume_checkpoint(), "release GameFlow did not retain prepared checkpoint")
+	_expect(not flow.prepare_resume_checkpoint({"version": flow.CHECKPOINT_VERSION}), "release GameFlow accepted a later incomplete checkpoint")
+	_expect(not flow.has_prepared_resume_checkpoint(), "rejected checkpoint retained a stale previously prepared resume")
 
 	source.free()
 	restored.free()
