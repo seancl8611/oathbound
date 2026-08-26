@@ -11,6 +11,8 @@ extends Node
 ## - Owns each animation tween from the transient damage-number node so a scene
 ##   transition kills the tween before it can call back into a freed capture.
 ## - Honors the launch damage-number accessibility toggle before creating UI.
+## - Treats floating numbers as HP-loss feedback only; zero/posture-only contacts
+##   never create a damage-number node.
 ## =============================================================================
 
 # Damage number scenes for each type
@@ -52,6 +54,11 @@ func _ready() -> void:
 
 
 func show_damage_number(amount: int, position: Vector2, damage_type: String = "normal", target: Node = null) -> void:
+	# Floating numbers communicate real HP loss only. Guard/posture feedback uses
+	# posture bars, sparks, sound, and hitstop instead of a misleading "damage" value.
+	if amount <= 0:
+		return
+
 	if typeof(SettingsManager) == TYPE_OBJECT and SettingsManager.has_method("should_show_damage_numbers"):
 		if not bool(SettingsManager.call("should_show_damage_numbers")):
 			return
