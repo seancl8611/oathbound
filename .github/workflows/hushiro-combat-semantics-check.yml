@@ -49,6 +49,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Hushiro defense contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroDefenseContractSmoke.tscn 2>&1 | tee hushiro-defense-contract.log
+          grep -F "[HushiroDefenseContractSmoke] PASS - ordinary player block HP-exclusive | enemy guard HP-exclusive | perilous thrust bypass + warning" hushiro-defense-contract.log
+          if grep -F "SCRIPT ERROR:" hushiro-defense-contract.log; then
+            echo "FAIL: Hushiro defense contract emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-defense-contract.log; then
+            echo "FAIL: Hushiro defense contract emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,5 +73,6 @@ jobs:
             hushiro-combat-import.log
             hushiro-combat-editor.log
             hushiro-combat-semantics.log
+            hushiro-defense-contract.log
           if-no-files-found: warn
           retention-days: 7
