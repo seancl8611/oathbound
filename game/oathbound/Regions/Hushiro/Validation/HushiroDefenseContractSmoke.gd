@@ -17,6 +17,7 @@ func _run() -> void:
 		_finish()
 		return
 
+	await _verify_damage_number_manager_rejects_non_hp_values()
 	await _verify_player_ordinary_block(player)
 	await _verify_player_perilous_thrust_bypasses_block(player)
 	await _verify_enemy_guard_is_hp_exclusive(player)
@@ -65,6 +66,30 @@ func _make_attack_origin(player: Node, damage_type: String, blockable: bool, per
 	hitbox.set_meta("perilous", perilous)
 	origin.add_child(hitbox)
 	return origin
+
+
+func _make_player_sword_hitbox(player: Node, suffix: String) -> Area2D:
+	var hitbox := Area2D.new()
+	hitbox.name = "PlayerSwordHitbox%s" % suffix
+	hitbox.add_to_group("attack")
+	hitbox.set_meta("attacker", player)
+	hitbox.set_meta("health_damage", 12)
+	hitbox.set_meta("posture_damage", 10.0)
+	hitbox.set_meta("block_posture_damage", 14.0)
+	hitbox.set_meta("attack_id", "wolf_fang_slash")
+	hitbox.set_meta("damage_type", "sword_light")
+	return hitbox
+
+
+func _verify_damage_number_manager_rejects_non_hp_values() -> void:
+	var count_before: int = _count_damage_number_nodes()
+	DamageNumberManager.show_damage_number(0, Vector2.ZERO, "normal", null)
+	DamageNumberManager.show_damage_number(-14, Vector2.ZERO, "normal", null)
+	await get_tree().process_frame
+	_expect(
+		_count_damage_number_nodes() == count_before,
+		"DamageNumberManager created floating UI for zero/negative non-HP values"
+	)
 
 
 func _verify_player_ordinary_block(player: Node) -> void:
@@ -131,21 +156,42 @@ func _verify_enemy_guard_is_hp_exclusive(player: Node) -> void:
 	sword_origin.name = "PlayerSwordOrigin"
 	sword_origin.global_position = player.global_position
 	add_child(sword_origin)
-	var sword_hitbox := Area2D.new()
-	sword_hitbox.name = "PlayerSwordHitbox"
-	sword_hitbox.add_to_group("attack")
-	sword_hitbox.set_meta("attacker", player)
-	sword_hitbox.set_meta("health_damage", 12)
-	sword_hitbox.set_meta("posture_damage", 10.0)
-	sword_hitbox.set_meta("block_posture_damage", 14.0)
-	sword_hitbox.set_meta("attack_id", "wolf_fang_slash")
-	sword_hitbox.set_meta("damage_type", "sword_light")
-	sword_origin.add_child(sword_hitbox)
+	var guarded_hitbox: Area2D = _make_player_sword_hitbox(player, "Guarded")
+	sword_origin.add_child(guarded_hitbox)
 
-	enemy.call("_on_hurt_box_hurt", 12, "sword_light", sword_hitbox)
+	var guarded_number_count_before: int = _count_damage_number_nodes()
+	enemy.call("_on_hurt_box_hurt", 12, "sword_light", guarded_hitbox)
+	await get_tree().process_frame
 
 	_expect(int(enemy.get("hp")) == 90, "active enemy guard leaked HP damage")
 	_expect(float(combat.call("get_posture")) > 0.0, "active enemy guard did not take Posture pressure")
+	_expect(
+		_count_damage_number_nodes() == guarded_number_count_before,
+		"posture-only enemy guard incorrectly created a floating damage number"
+	)
+
+	# A real unguarded HP hit must still create one number, and that number must
+	# equal the HP actually removed rather than Posture pressure or raw attack power.
+	enemy.call("_set_blocking", false)
+	enemy.set("can_block", false)
+	var unguarded_hitbox: Area2D = _make_player_sword_hitbox(player, "Unguarded")
+	sword_origin.add_child(unguarded_hitbox)
+	var hp_before: int = int(enemy.get("hp"))
+	var real_number_count_before: int = _count_damage_number_nodes()
+	enemy.call("_on_hurt_box_hurt", 12, "sword_light", unguarded_hitbox)
+	await get_tree().process_frame
+	var hp_after: int = int(enemy.get("hp"))
+	var hp_lost: int = maxi(0, hp_before - hp_after)
+
+	_expect(hp_lost > 0, "unguarded control hit did not remove enemy HP")
+	_expect(
+		_count_damage_number_nodes() == real_number_count_before + 1,
+		"real enemy HP loss did not create exactly one floating damage number"
+	)
+	_expect(
+		_latest_damage_number_text() == str(hp_lost),
+		"floating damage number did not equal actual enemy HP lost"
+	)
 
 	sword_origin.queue_free()
 	enemy.queue_free()
@@ -178,9 +224,32 @@ func _verify_perilous_thrust_warning(player: Node) -> void:
 	await get_tree().process_frame
 
 
+func _count_damage_number_nodes() -> int:
+	var scene: Node = get_tree().current_scene
+	if scene == null:
+		return 0
+	var count: int = 0
+	for child: Node in scene.get_children():
+		if child.get_node_or_null("NumberLabel") != null:
+			count += 1
+	return count
+
+
+func _latest_damage_number_text() -> String:
+	var scene: Node = get_tree().current_scene
+	if scene == null:
+		return ""
+	var latest: String = ""
+	for child: Node in scene.get_children():
+		var label: Node = child.get_node_or_null("NumberLabel")
+		if label != null and "text" in label:
+			latest = str(label.get("text"))
+	return latest
+
+
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HushiroDefenseContractSmoke] PASS - ordinary player block HP-exclusive | enemy guard HP-exclusive | perilous thrust bypass + warning")
+		print("[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | enemy guard posture-only/no damage number | real HP hit number exact | perilous thrust bypass + warning")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
