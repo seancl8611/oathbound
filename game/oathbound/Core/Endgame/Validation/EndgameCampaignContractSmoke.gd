@@ -39,7 +39,7 @@ func _ready() -> void:
 	_restore_state()
 
 	if _failures.is_empty():
-		print("[EndgameCampaignContractSmoke] PASS - six Bindings | seventh Heart route | postgame goals | Shogun +25 Mist/material | 30/50 recovery + 40/60 floors")
+		print("[EndgameCampaignContractSmoke] PASS - six Bindings | seventh Heart route | postgame goals | Shogun +25 Mist/material | 30/50 recovery + 40/60 floors | Heart completion test-only")
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -180,6 +180,23 @@ func _run_scene_contract() -> void:
 	handoff.queue_free()
 	await get_tree().process_frame
 
+	# The current Heart is deliberately an integration shell, not a playable boss.
+	# Prove that the contract shortcut cannot complete a normal gameplay instance.
+	var normal_shell := HEART_SHELL_SCENE.instantiate()
+	normal_shell.set_meta("postgame_suppression", false)
+	_heart_defeat_signal_count = 0
+	normal_shell.heart_defeated.connect(_on_contract_heart_defeated)
+	add_child(normal_shell)
+	await get_tree().process_frame
+	_expect(normal_shell.is_in_group("heart_encounter_shell"), "Normal Heart encounter shell did not identify itself")
+	normal_shell.complete_for_contract_test()
+	await get_tree().process_frame
+	_expect(_heart_defeat_signal_count == 0, "Normal Heart shell accepted the contract-only completion shortcut")
+	normal_shell.queue_free()
+	await get_tree().process_frame
+
+	# Downstream Story Complete/postgame continuity may be driven only by explicit
+	# test metadata until authored Heart combat supplies the real victory signal.
 	var shell := HEART_SHELL_SCENE.instantiate()
 	shell.set_meta("postgame_suppression", false)
 	shell.set_meta("contract_test", true)
@@ -190,7 +207,7 @@ func _run_scene_contract() -> void:
 	_expect(shell.is_in_group("heart_encounter_shell"), "Heart encounter shell did not identify itself")
 	shell.complete_for_contract_test()
 	await get_tree().process_frame
-	_expect(_heart_defeat_signal_count == 1, "Heart encounter shell completion signal must emit exactly once")
+	_expect(_heart_defeat_signal_count == 1, "Heart encounter shell completion signal must emit exactly once in contract mode")
 	shell.complete_for_contract_test()
 	await get_tree().process_frame
 	_expect(_heart_defeat_signal_count == 1, "Heart encounter shell allowed duplicate completion")
