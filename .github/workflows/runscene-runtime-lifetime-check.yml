@@ -32,13 +32,14 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
-      - name: Build temporary Area 2 / 3 RunScene fixtures
+      - name: Build deterministic regional RunScene fixtures
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
 
-          source = Path("game/oathbound/Utility/RunScene.tscn").read_text()
+          scene_path = Path("game/oathbound/Utility/RunScene.tscn")
+          source = scene_path.read_text()
           marker = 'script = ExtResource("1_v5377")\n'
           if source.count(marker) != 1:
               raise SystemExit("RunScene fixture marker drifted; refusing to create debug-area lifetime fixtures")
@@ -46,6 +47,23 @@ jobs:
           for area in (2, 3):
               fixture = source.replace(marker, marker + f"debug_start_area = {area}\n", 1)
               Path(f"game/oathbound/Utility/.ci_RunSceneArea{area}.tscn").write_text(fixture)
+
+          # Area 2 and Area 3 can legitimately begin on an authored route choice. In CI,
+          # choose the first authored option without pausing so the lifetime check enters
+          # a real chamber and exercises the canonical Player/room ownership path.
+          runscene_path = Path("game/oathbound/Utility/RunScene.gd")
+          runscene = runscene_path.read_text()
+          needle = '\t_show_choice_ui(options)\n'
+          replacement = (
+              '\tif options.is_empty():\n'
+              '\t\tpush_error("[RunSceneCI] Choice presented without options")\n'
+              '\t\treturn\n'
+              '\tprint("[RunSceneCI] auto-selecting first authored option: %s" % str(options[0]))\n'
+              '\tGameFlow.call_deferred("make_choice", str(options[0]))\n'
+          )
+          if runscene.count(needle) != 1:
+              raise SystemExit("RunScene choice hook drifted; refusing to inject deterministic CI selection")
+          runscene_path.write_text(runscene.replace(needle, replacement, 1))
           PY
 
       - name: Exercise current RunScene in all authored regions
@@ -58,18 +76,13 @@ jobs:
               scene="res://Utility/.ci_RunSceneArea${area}.tscn"
             fi
             log="runscene-area${area}-runtime-lifetime.log"
+            status_file="runscene-area${area}-exit-status.txt"
             echo "=== RunScene lifetime: Area ${area} ==="
+            set +e
             godot --headless --verbose --path game/oathbound --quit-after 30 "$scene" 2>&1 | tee "$log"
-            grep -F "player_factory_assigned script=res://Player/OathboundCombatPlayer.gd" "$log"
-            grep -F "[OathboundRunScene] starting run… area=${area}" "$log"
-            if grep -F "SCRIPT ERROR:" "$log"; then
-              echo "FAIL: Area ${area} RunScene emitted a GDScript runtime error."
-              exit 1
-            fi
-            if grep -F "ERROR: Error calling deferred method:" "$log"; then
-              echo "FAIL: Area ${area} RunScene emitted a deferred-call runtime error."
-              exit 1
-            fi
+            status=${PIPESTATUS[0]}
+            set -e
+            echo "$status" > "$status_file"
           done
 
       - name: Upload verbose RunScene lifetime logs
@@ -77,25 +90,58 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: runscene-runtime-lifetime-${{ github.run_id }}
-          path: runscene-area*-runtime-lifetime.log
+          path: |
+            runscene-area*-runtime-lifetime.log
+            runscene-area*-exit-status.txt
           if-no-files-found: warn
           retention-days: 7
 
-      - name: Assert clean RunScene teardown in all authored regions
+      - name: Assert clean RunScene execution and teardown in all authored regions
         shell: bash
         run: |
           failed=0
-          for log in runscene-area*-runtime-lifetime.log; do
-            if grep -F "ObjectDB instance was leaked at exit" "$log"; then
-              echo "FAIL: $log leaked an ObjectDB instance at shutdown."
+          for area in 1 2 3; do
+            log="runscene-area${area}-runtime-lifetime.log"
+            status_file="runscene-area${area}-exit-status.txt"
+
+            if [ ! -f "$log" ] || [ ! -f "$status_file" ]; then
+              echo "FAIL: Area ${area} did not produce complete lifetime diagnostics."
+              failed=1
+              continue
+            fi
+
+            status=$(cat "$status_file")
+            if [ "$status" -ne 0 ]; then
+              echo "FAIL: Area ${area} RunScene exited with status ${status}."
               failed=1
             fi
-            if grep -F "ERROR: Cannot get path of node as it is not in a scene tree." "$log"; then
-              echo "FAIL: $log queried the path of a detached node during teardown."
+            if ! grep -F "player_factory_assigned script=res://Player/OathboundCombatPlayer.gd" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} never assigned the canonical OathboundCombatPlayer."
+              failed=1
+            fi
+            if ! grep -F "[OathboundRunScene] starting run… area=${area}" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} did not boot through the production OathboundRunScene authority."
+              failed=1
+            fi
+            if grep -F "SCRIPT ERROR:" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} emitted a GDScript runtime error."
+              failed=1
+            fi
+            if grep -F "ERROR: Error calling deferred method:" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} emitted a deferred-call runtime error."
+              failed=1
+            fi
+            if grep -F "ObjectDB instance was leaked at exit" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} leaked ObjectDB instances at shutdown."
+              failed=1
+            fi
+            if grep -F "ERROR: Cannot get path of node as it is not in a scene tree." "$log" >/dev/null; then
+              echo "FAIL: Area ${area} queried the path of a detached node during teardown."
               failed=1
             fi
           done
+
           if [ "$failed" -ne 0 ]; then
             exit 1
           fi
-          echo "PASS: RunScene exits with clean runtime ownership in Areas 1, 2, and 3"
+          echo "PASS: production RunScene boots a real chamber and exits with clean runtime ownership in Areas 1, 2, and 3"
