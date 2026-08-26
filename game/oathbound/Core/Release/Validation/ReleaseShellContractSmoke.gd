@@ -120,8 +120,19 @@ func _validate_checkpoint_round_trip() -> void:
 	_expect(restored.enemies_killed == 14 and restored.perfect_parries == 6, "checkpoint lost run statistics")
 
 	var flow: Node = FLOW_SCRIPT.new()
+	var valid_checkpoint := {
+		"version": flow.CHECKPOINT_VERSION,
+		"run_data": checkpoint,
+		"gameflow": {
+			"current_area": int(checkpoint.get("current_area_id", 2)),
+			"current_index": 0,
+			"route": ["combat", "boss"],
+			"pending_choices": {},
+		},
+	}
 	_expect(not flow.prepare_resume_checkpoint({"version": 0}), "release GameFlow accepted an obsolete checkpoint version")
-	_expect(flow.prepare_resume_checkpoint({"version": flow.CHECKPOINT_VERSION}), "release GameFlow rejected the current checkpoint version")
+	_expect(not flow.prepare_resume_checkpoint({"version": flow.CHECKPOINT_VERSION}), "release GameFlow accepted an incomplete current-version checkpoint")
+	_expect(flow.prepare_resume_checkpoint(valid_checkpoint), "release GameFlow rejected a structurally valid current checkpoint")
 	_expect(flow.has_prepared_resume_checkpoint(), "release GameFlow did not retain prepared checkpoint")
 
 	source.free()
