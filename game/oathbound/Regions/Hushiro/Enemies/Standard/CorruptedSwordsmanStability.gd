@@ -38,7 +38,27 @@ func _ready() -> void:
 	orbit_speed = 24.0
 	watch_orbit_speed = 30.0
 	super._ready()
+	_arm_legacy_timer_cleanup()
 	print("[CorruptedSwordsman] v2.1 - active controlled Hushiro duel cadence")
+
+
+func _arm_legacy_timer_cleanup() -> void:
+	# The imported legacy controller exposes `attack_timer` for compatibility, but
+	# constructs it with Timer.new() and never parents it. Preserve that surface for
+	# the Swordsman's active lifetime, then explicitly release the orphan when this
+	# enemy leaves the tree so room transitions and process shutdown cannot leak it.
+	if not is_instance_valid(attack_timer):
+		return
+	if attack_timer.get_parent() != null:
+		return
+	if not tree_exiting.is_connected(_release_legacy_attack_timer):
+		tree_exiting.connect(_release_legacy_attack_timer, CONNECT_ONE_SHOT)
+
+
+func _release_legacy_attack_timer() -> void:
+	if is_instance_valid(attack_timer) and attack_timer.get_parent() == null:
+		attack_timer.free()
+	attack_timer = null
 
 
 func _current_attack_requires_perilous_warning(requested_unblockable: bool = false) -> bool:
