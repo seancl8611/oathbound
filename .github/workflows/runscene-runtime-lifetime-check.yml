@@ -59,6 +59,9 @@ jobs:
                   ("\tvar crowd_timer := Timer.new()\n", "\tvar crowd_timer := Timer.new()\n\tprint(\"[TimerProbe] AttackDirector.CrowdTick id=%s\" % crowd_timer.get_instance_id())\n"),
                   ("\tvar stall_timer := Timer.new()\n", "\tvar stall_timer := Timer.new()\n\tprint(\"[TimerProbe] AttackDirector.StallPrevention id=%s\" % stall_timer.get_instance_id())\n"),
               ],
+              "game/oathbound/Regions/Hushiro/Enemies/Legacy/CorruptedSwordsmanLegacy.gd": [
+                  ("\t_humanoid_base_ready()\n", "\t_humanoid_base_ready()\n\tprint(\"[TimerProbe] CorruptedSwordsmanLegacy.attack_timer id=%s parent=%s\" % [attack_timer.get_instance_id(), attack_timer.get_parent().name if attack_timer.get_parent() else \"none\"])\n"),
+              ],
           }
 
           for raw_path, replacements in probes.items():
