@@ -230,7 +230,15 @@ func _clear_forwarded_target_if_owned() -> void:
 		return
 	if not player_combat.has_method("get_deathblow_target") or not player_combat.has_method("set_deathblow_target"):
 		return
-	var current: Node = player_combat.call("get_deathblow_target")
+
+	# The target may have left the scene between the previous physics tick and this
+	# cleanup pass. A typed Node local attempts to re-bind that freed Object and Godot
+	# raises `Trying to assign invalid previously freed instance` before we can test it.
+	# Keep the dynamic return as Variant long enough to validate its lifetime first.
+	var current: Variant = player_combat.call("get_deathblow_target")
+	if current != null and not is_instance_valid(current):
+		player_combat.call("set_deathblow_target", null, 0.0)
+		return
 	if current == enemy:
 		player_combat.call("set_deathblow_target", null, 0.0)
 
