@@ -212,7 +212,6 @@ func _new_harness(node_name: String) -> Node:
 	var flow: Node = flow_value as Node
 	flow.name = node_name
 	add_child(flow)
-	await get_tree().process_frame
 	return flow
 
 
