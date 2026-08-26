@@ -190,15 +190,8 @@ func end_gameplay_session() -> void:
 
 
 func save_safe_checkpoint(checkpoint: Dictionary) -> bool:
-	var file := ConfigFile.new()
 	var path := get_slot_file(SLOT_META_FILE)
-	file.load(path)
-	for key: Variant in checkpoint.keys():
-		file.set_value(CHECKPOINT_SECTION, str(key), checkpoint[key])
-	file.set_value(SLOT_META_SECTION, "has_active_run", true)
-	file.set_value(SLOT_META_SECTION, "playtime_seconds", _playtime_seconds)
-	file.set_value(SLOT_META_SECTION, "last_played_unix", int(Time.get_unix_time_from_system()))
-	var err := file.save(path)
+	var err := _write_safe_checkpoint_file(path, checkpoint)
 	if err != OK:
 		push_warning("[SaveSlots] Could not save safe checkpoint: %s" % error_string(err))
 		return false
@@ -208,15 +201,7 @@ func save_safe_checkpoint(checkpoint: Dictionary) -> bool:
 
 func load_safe_checkpoint(slot: int = 0) -> Dictionary:
 	var resolved := active_slot if slot <= 0 else clampi(slot, 1, SLOT_COUNT)
-	var file := ConfigFile.new()
-	if file.load(get_slot_file(SLOT_META_FILE, resolved)) != OK:
-		return {}
-	if not bool(file.get_value(SLOT_META_SECTION, "has_active_run", false)):
-		return {}
-	var data: Dictionary = {}
-	for key: String in file.get_section_keys(CHECKPOINT_SECTION):
-		data[key] = file.get_value(CHECKPOINT_SECTION, key)
-	return data
+	return _read_safe_checkpoint_file(get_slot_file(SLOT_META_FILE, resolved))
 
 
 func clear_safe_checkpoint() -> void:
@@ -230,6 +215,36 @@ func clear_safe_checkpoint() -> void:
 	file.set_value(SLOT_META_SECTION, "last_played_unix", int(Time.get_unix_time_from_system()))
 	file.save(path)
 	slot_metadata_changed.emit(active_slot)
+
+
+# File-path helpers keep the exact production ConfigFile format testable without
+# selecting, overwriting, or even opening a real player slot. The integration smoke
+# uses a temporary user:// file and calls these same helpers directly.
+func _write_safe_checkpoint_file(path: String, checkpoint: Dictionary) -> int:
+	var file := ConfigFile.new()
+	file.load(path)
+	# A checkpoint is a complete snapshot. Remove the previous section before writing
+	# so fields retired by a later schema cannot survive as stale resume state.
+	if file.has_section(CHECKPOINT_SECTION):
+		file.erase_section(CHECKPOINT_SECTION)
+	for key: Variant in checkpoint.keys():
+		file.set_value(CHECKPOINT_SECTION, str(key), checkpoint[key])
+	file.set_value(SLOT_META_SECTION, "has_active_run", true)
+	file.set_value(SLOT_META_SECTION, "playtime_seconds", _playtime_seconds)
+	file.set_value(SLOT_META_SECTION, "last_played_unix", int(Time.get_unix_time_from_system()))
+	return file.save(path)
+
+
+func _read_safe_checkpoint_file(path: String) -> Dictionary:
+	var file := ConfigFile.new()
+	if file.load(path) != OK:
+		return {}
+	if not bool(file.get_value(SLOT_META_SECTION, "has_active_run", false)):
+		return {}
+	var data: Dictionary = {}
+	for key: String in file.get_section_keys(CHECKPOINT_SECTION):
+		data[key] = file.get_value(CHECKPOINT_SECTION, key)
+	return data
 
 
 func reload_persistent_managers() -> void:
