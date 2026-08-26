@@ -162,15 +162,28 @@ func _start_new_game(slot: int) -> void:
 	get_tree().change_scene_to_file(RUN_SCENE)
 
 
+func _prepare_continue_checkpoint(checkpoint: Dictionary) -> bool:
+	if checkpoint.is_empty():
+		return false
+	if typeof(GameFlow) != TYPE_OBJECT or not GameFlow.has_method("prepare_resume_checkpoint"):
+		return false
+	return bool(GameFlow.call("prepare_resume_checkpoint", checkpoint))
+
+
 func _continue_slot(slot: int) -> void:
 	if typeof(SaveSlots) != TYPE_OBJECT or not SaveSlots.select_slot(slot, true):
 		return
 	SaveSlots.begin_gameplay_session()
 	var checkpoint: Dictionary = SaveSlots.load_safe_checkpoint(slot)
-	if not checkpoint.is_empty() and typeof(GameFlow) == TYPE_OBJECT and GameFlow.has_method("prepare_resume_checkpoint"):
-		GameFlow.call("prepare_resume_checkpoint", checkpoint)
-		get_tree().change_scene_to_file(RUN_SCENE)
-		return
+	if not checkpoint.is_empty():
+		if _prepare_continue_checkpoint(checkpoint):
+			get_tree().change_scene_to_file(RUN_SCENE)
+			return
+		# A slot's permanent progression is still valid when only its safe-run snapshot
+		# is stale/corrupt. Retire that checkpoint and continue from the Strand rather
+		# than launching RunScene with no prepared resume or deleting the save slot.
+		push_warning("[OathboundFrontEnd] Safe run checkpoint was rejected; continuing from The Strand")
+		SaveSlots.clear_safe_checkpoint()
 	get_tree().change_scene_to_file(HUB_SCENE)
 
 
@@ -417,7 +430,6 @@ func _format_playtime(seconds: float) -> String:
 	var hours := total_minutes / 60
 	var minutes := total_minutes % 60
 	return "%dh %02dm" % [hours, minutes]
-
 
 func _quit_game() -> void:
 	if typeof(SaveSlots) == TYPE_OBJECT:
