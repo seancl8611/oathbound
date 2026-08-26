@@ -20,9 +20,32 @@ func _assert_current_relic_runtime() -> void:
 
 
 func prepare_resume_checkpoint(checkpoint: Dictionary) -> bool:
-	if checkpoint.is_empty() or int(checkpoint.get("version", 0)) != CHECKPOINT_VERSION:
+	if not _is_resume_checkpoint_structurally_valid(checkpoint):
 		return false
 	_resume_checkpoint_pending = checkpoint.duplicate(true)
+	return true
+
+
+func _is_resume_checkpoint_structurally_valid(checkpoint: Dictionary) -> bool:
+	if checkpoint.is_empty() or int(checkpoint.get("version", 0)) != CHECKPOINT_VERSION:
+		return false
+	var run_state_value: Variant = checkpoint.get("run_data", {})
+	var flow_value: Variant = checkpoint.get("gameflow", {})
+	if not (run_state_value is Dictionary) or not (flow_value is Dictionary):
+		return false
+	var run_state: Dictionary = run_state_value as Dictionary
+	var flow: Dictionary = flow_value as Dictionary
+	if run_state.is_empty() or flow.is_empty():
+		return false
+	var route_value: Variant = flow.get("route", [])
+	if not (route_value is Array) or (route_value as Array).is_empty():
+		return false
+	var run_area := clampi(int(run_state.get("current_area_id", 1)), 1, max_area)
+	var flow_area := clampi(int(flow.get("current_area", run_area)), 1, max_area)
+	# Production snapshots write these from two authorities at the same boundary. A
+	# disagreement indicates a corrupt/stale checkpoint and must not partially restore.
+	if run_area != flow_area:
+		return false
 	return true
 
 
@@ -115,14 +138,10 @@ func _return_to_strand(successful: bool) -> void:
 	super._return_to_strand(successful)
 
 
-func _save_safe_checkpoint() -> void:
-	if typeof(SaveSlots) != TYPE_OBJECT or not SaveSlots.has_method("save_safe_checkpoint"):
-		return
+func _build_safe_checkpoint() -> Dictionary:
 	if typeof(RunData) != TYPE_OBJECT or not RunData.has_method("get_checkpoint_state"):
-		return
-	if typeof(RecordsRuntime) == TYPE_OBJECT and RecordsRuntime.has_method("is_run_active") and not RecordsRuntime.is_run_active():
-		return
-	var checkpoint := {
+		return {}
+	return {
 		"version": CHECKPOINT_VERSION,
 		"gameflow": {
 			"current_area": current_area,
@@ -136,6 +155,16 @@ func _save_safe_checkpoint() -> void:
 		"player": _capture_player_state(),
 		"records": RecordsRuntime.get_run_resume_record_state() if typeof(RecordsRuntime) == TYPE_OBJECT and RecordsRuntime.has_method("get_run_resume_record_state") else {},
 	}
+
+
+func _save_safe_checkpoint() -> void:
+	if typeof(SaveSlots) != TYPE_OBJECT or not SaveSlots.has_method("save_safe_checkpoint"):
+		return
+	if typeof(RecordsRuntime) == TYPE_OBJECT and RecordsRuntime.has_method("is_run_active") and not RecordsRuntime.is_run_active():
+		return
+	var checkpoint := _build_safe_checkpoint()
+	if checkpoint.is_empty():
+		return
 	SaveSlots.save_safe_checkpoint(checkpoint)
 
 
