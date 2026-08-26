@@ -93,9 +93,13 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroCombatLifecycleSmoke.tscn 2>&1 | tee hushiro-combat-lifecycle.log
-          grep -F "[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred | transient damage-number tween dies with scene node | freed blood-stack target pruned" hushiro-combat-lifecycle.log
+          grep -F "[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred | transient damage-number tween dies with scene node | freed blood-stack target pruned | freed deathblow target cleared safely" hushiro-combat-lifecycle.log
           if grep -F "SCRIPT ERROR:" hushiro-combat-lifecycle.log; then
             echo "FAIL: combat lifecycle regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "Trying to assign invalid previously freed instance" hushiro-combat-lifecycle.log; then
+            echo "FAIL: Hushiro deathblow cleanup rebound a freed target reference."
             exit 1
           fi
           if grep -F "Lambda capture at index" hushiro-combat-lifecycle.log; then
