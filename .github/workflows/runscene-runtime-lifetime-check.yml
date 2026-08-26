@@ -32,6 +32,14 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
+      - name: Inventory dynamic Timer ownership
+        shell: bash
+        run: |
+          echo "=== Timer.new() ==="
+          grep -RIn --include='*.gd' -F 'Timer.new()' game/oathbound || true
+          echo "=== remove_child() ==="
+          grep -RIn --include='*.gd' -F 'remove_child(' game/oathbound || true
+
       - name: Exercise current RunScene with verbose lifetime diagnostics
         shell: bash
         run: |
