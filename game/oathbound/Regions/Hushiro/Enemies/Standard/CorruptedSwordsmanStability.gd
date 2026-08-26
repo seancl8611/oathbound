@@ -41,6 +41,18 @@ func _ready() -> void:
 	print("[CorruptedSwordsman] v2.1 - active controlled Hushiro duel cadence")
 
 
+func _show_parry_indicator(duration: float, is_unblockable: bool = false) -> void:
+	# The inherited Quick Thrust windup historically passed `false` here even though
+	# the current Hushiro rules layer stamps that exact hitbox as perilous/blockable=false.
+	# Drive the warning from the authored live hitbox metadata so the visual language
+	# cannot contradict the contact resolver. Follow-up slashes are stamped non-perilous
+	# and therefore keep the normal indicator even though they occur inside a thrust combo.
+	var show_perilous_warning: bool = is_unblockable
+	if is_instance_valid(_current_swipe_area):
+		show_perilous_warning = show_perilous_warning or bool(_current_swipe_area.get_meta("perilous", false))
+	super._show_parry_indicator(duration, show_perilous_warning)
+
+
 func is_deathblow_ready() -> bool:
 	# Legacy Swordsman marks `_dbroken_active` on the same frame posture fills. The
 	# shared Hushiro runtime owns the player-facing contract: stagger first, then arm.
