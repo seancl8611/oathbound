@@ -10,7 +10,7 @@ extends "res://Core/Release/OathboundReleaseGameFlow.gd"
 var transition_areas: Array[int] = []
 var relic_swap_contexts: Array[String] = []
 var loaded_areas: Array[int] = []
-var loaded_routes: Array[Array] = []
+var loaded_routes: Array = []
 
 
 func _ready() -> void:
