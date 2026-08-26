@@ -193,8 +193,27 @@ func _verify_enemy_guard_is_hp_exclusive(player: Node) -> void:
 		"floating damage number did not equal actual enemy HP lost"
 	)
 
+	# Killing blows are part of the same contract. If only 5 HP remain, a 12-damage
+	# attack must show 5 rather than the requested 12.
+	enemy.set("hp", 5)
+	var overkill_hitbox: Area2D = _make_player_sword_hitbox(player, "Overkill")
+	sword_origin.add_child(overkill_hitbox)
+	var overkill_number_count_before: int = _count_damage_number_nodes()
+	enemy.call("_on_hurt_box_hurt", 12, "sword_light", overkill_hitbox)
+	_expect(int(enemy.get("hp")) == 0, "overkill control hit did not clamp enemy HP to zero")
+	await get_tree().process_frame
+	_expect(
+		_count_damage_number_nodes() == overkill_number_count_before + 1,
+		"overkill HP loss did not create exactly one floating damage number"
+	)
+	_expect(
+		_latest_damage_number_text() == "5",
+		"overkill floating number exceeded the enemy HP actually removed"
+	)
+
 	sword_origin.queue_free()
-	enemy.queue_free()
+	if is_instance_valid(enemy):
+		enemy.queue_free()
 	await get_tree().process_frame
 
 
