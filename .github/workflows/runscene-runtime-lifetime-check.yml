@@ -35,10 +35,12 @@ jobs:
       - name: Inventory dynamic Timer ownership
         shell: bash
         run: |
-          echo "=== Timer.new() ==="
-          grep -RIn --include='*.gd' -F 'Timer.new()' game/oathbound || true
-          echo "=== remove_child() ==="
-          grep -RIn --include='*.gd' -F 'remove_child(' game/oathbound || true
+          {
+            echo "=== Timer.new() ==="
+            grep -RIn --include='*.gd' -F 'Timer.new()' game/oathbound || true
+            echo "=== remove_child() ==="
+            grep -RIn --include='*.gd' -F 'remove_child(' game/oathbound || true
+          } | tee runscene-timer-inventory.log
 
       - name: Exercise current RunScene with verbose lifetime diagnostics
         shell: bash
@@ -55,12 +57,14 @@ jobs:
             exit 1
           fi
 
-      - name: Upload verbose RunScene lifetime log
+      - name: Upload RunScene lifetime diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: runscene-runtime-lifetime-${{ github.run_id }}
-          path: runscene-runtime-lifetime.log
+          path: |
+            runscene-runtime-lifetime.log
+            runscene-timer-inventory.log
           if-no-files-found: warn
           retention-days: 7
 
