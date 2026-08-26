@@ -20,6 +20,9 @@ func _assert_current_relic_runtime() -> void:
 
 
 func prepare_resume_checkpoint(checkpoint: Dictionary) -> bool:
+	# Preparation is a replacement operation. Never let a previously selected slot's
+	# pending snapshot survive a rejected checkpoint from a later Continue attempt.
+	_resume_checkpoint_pending.clear()
 	if not _is_resume_checkpoint_structurally_valid(checkpoint):
 		return false
 	_resume_checkpoint_pending = checkpoint.duplicate(true)
