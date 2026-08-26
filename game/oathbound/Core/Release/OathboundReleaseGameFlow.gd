@@ -119,17 +119,32 @@ func resume_prepared_run() -> bool:
 
 	await _load_current_room()
 	_resume_in_progress = false
-	print("[ReleaseGameFlow] Safe run resumed - Region %d chamber %d/%d" % [current_area, current_index + 1, route.size()])
+	if _awaiting_choice:
+		print("[ReleaseGameFlow] Safe run resumed - Region %d route choice %d/%d" % [current_area, current_index + 1, route.size()])
+	else:
+		print("[ReleaseGameFlow] Safe run resumed - Region %d chamber %d/%d" % [current_area, current_index + 1, route.size()])
 	return true
 
 
 func _load_current_room() -> void:
 	await super._load_current_room()
-	if _resume_in_progress and not _resume_player_state.is_empty():
-		_apply_resume_player_state(_resume_player_state)
-		_resume_player_state.clear()
+	# Choice-first regional routes can resume before a concrete chamber exists. Keep
+	# the saved Player snapshot pending until the choice resolves and the canonical
+	# Player is actually parented into a room; otherwise Continue would silently reset
+	# Health/Posture/Spirit at the first Yomori or Kagutsuchi choice.
+	_apply_pending_resume_player_state_if_ready()
 	await get_tree().process_frame
 	_save_safe_checkpoint()
+
+
+func _apply_pending_resume_player_state_if_ready() -> bool:
+	if _resume_player_state.is_empty():
+		return false
+	if player == null or not is_instance_valid(player) or player.get_parent() == null:
+		return false
+	_apply_resume_player_state(_resume_player_state)
+	_resume_player_state.clear()
+	return true
 
 
 func _return_to_strand(successful: bool) -> void:
@@ -209,6 +224,11 @@ func _restore_corruption_state(value: Variant) -> void:
 
 func _capture_player_state() -> Dictionary:
 	if player == null or not is_instance_valid(player):
+		# On a resumed unresolved choice there is deliberately no Player yet. Preserve
+		# the saved snapshot in any checkpoint written at that boundary so another quit
+		# before choosing a chamber cannot erase the Player's persisted combat state.
+		if not _resume_player_state.is_empty():
+			return _resume_player_state.duplicate(true)
 		return {}
 	var result := {
 		"hp": int(player.get("hp")) if player.get("hp") != null else 1,
