@@ -17,6 +17,7 @@ const INDEX_SECTION: String = "save_slots"
 const SLOT_META_FILE: String = "slot_meta.cfg"
 const SLOT_META_SECTION: String = "meta"
 const CHECKPOINT_SECTION: String = "checkpoint"
+const SLOT_RUNTIME_RESET: Script = preload("res://Core/Release/OathboundSlotRuntimeReset.gd")
 
 const LEGACY_FILES: Dictionary = {
 	"user://oathbound_meta_progress.cfg": "meta_progress.cfg",
@@ -73,6 +74,9 @@ func select_slot(slot: int, reload_managers: bool = true) -> bool:
 			reload_persistent_managers()
 		return true
 	_flush_slot_meta()
+	# Slot selection is also a gameplay-session boundary. A caller must explicitly
+	# begin the newly selected slot's session after selection succeeds.
+	_gameplay_session_active = false
 	active_slot = slot
 	_ensure_slot_dir(active_slot)
 	if active_slot == 1:
@@ -248,16 +252,20 @@ func _read_safe_checkpoint_file(path: String) -> Dictionary:
 
 
 func reload_persistent_managers() -> void:
+	# Durable authorities load first so the transient reset sees the newly selected
+	# campaign/progression state, not the slot that was active a moment earlier.
 	for autoload_name: String in ["MetaProgress", "ProstheticManager", "RelicRuntime"]:
 		var manager := get_node_or_null("/root/%s" % autoload_name)
 		if manager != null and manager.has_method("reload_from_active_slot"):
 			manager.call("reload_from_active_slot")
-	var run_data := get_node_or_null("/root/RunData")
-	if run_data != null and run_data.has_method("sync_persistent_resources"):
-		run_data.call("sync_persistent_resources")
+	_reset_run_scoped_managers()
 	var achievements := get_node_or_null("/root/AchievementRuntime")
 	if achievements != null and achievements.has_method("evaluate"):
 		achievements.call("evaluate")
+
+
+func _reset_run_scoped_managers() -> void:
+	SLOT_RUNTIME_RESET.reset_run_scoped_state(get_tree().root)
 
 
 func _read_slot_meta(slot: int) -> Dictionary:
