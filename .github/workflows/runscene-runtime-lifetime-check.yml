@@ -42,6 +42,35 @@ jobs:
             grep -RIn --include='*.gd' -F 'remove_child(' game/oathbound || true
           } | tee runscene-timer-inventory.log
 
+      - name: Inject runtime Timer instance probes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          probes = {
+              "game/oathbound/Core/Chambers/CombatChamberBase.gd": [
+                  ("\t\tvar t = Timer.new()\n", "\t\tvar t = Timer.new()\n\t\tprint(\"[TimerProbe] CombatChamberBase.TokenTick id=%s\" % t.get_instance_id())\n"),
+              ],
+              "game/oathbound/Utility/CombatController.gd": [
+                  ("\t_parry_series_timer = Timer.new()\n", "\t_parry_series_timer = Timer.new()\n\tprint(\"[TimerProbe] CombatController.ParrySeries id=%s host=%s\" % [_parry_series_timer.get_instance_id(), get_parent().name if get_parent() else \"none\"])\n"),
+              ],
+              "game/oathbound/Utility/AttackDirector.gd": [
+                  ("\tvar crowd_timer := Timer.new()\n", "\tvar crowd_timer := Timer.new()\n\tprint(\"[TimerProbe] AttackDirector.CrowdTick id=%s\" % crowd_timer.get_instance_id())\n"),
+                  ("\tvar stall_timer := Timer.new()\n", "\tvar stall_timer := Timer.new()\n\tprint(\"[TimerProbe] AttackDirector.StallPrevention id=%s\" % stall_timer.get_instance_id())\n"),
+              ],
+          }
+
+          for raw_path, replacements in probes.items():
+              path = Path(raw_path)
+              text = path.read_text()
+              for needle, replacement in replacements:
+                  if needle not in text:
+                      raise SystemExit(f"probe target not found: {raw_path}: {needle!r}")
+                  text = text.replace(needle, replacement, 1)
+              path.write_text(text)
+          PY
+
       - name: Exercise current RunScene with verbose lifetime diagnostics
         shell: bash
         run: |
