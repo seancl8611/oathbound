@@ -31,6 +31,26 @@ const REQUIRED_SETTINGS_METHODS: Array[String] = [
 	"get_dialogue_text_speed", "uses_instant_text", "get_block_mode",
 ]
 
+class CheckpointExecutor:
+	extends Node
+	signal spirit_changed(current: int, maximum: int)
+	var current_spirit: int = 37
+	var max_spirit: int = 120
+	func get_spirit() -> int:
+		return current_spirit
+	func get_max_spirit() -> int:
+		return max_spirit
+
+class CheckpointPlayer:
+	extends Node
+	var hp: int = 46
+	var maxhp: int = 130
+	var stagger_max: float = 84.0
+	var collected_upgrades: Array = []
+	var prosthetic_executor: Node = null
+	func _update_health_bar() -> void:
+		pass
+
 var _failed := false
 
 
@@ -137,6 +157,34 @@ func _validate_checkpoint_round_trip() -> void:
 	_expect(not flow.prepare_resume_checkpoint({"version": flow.CHECKPOINT_VERSION}), "release GameFlow accepted a later incomplete checkpoint")
 	_expect(not flow.has_prepared_resume_checkpoint(), "rejected checkpoint retained a stale previously prepared resume")
 
+	# Player vitals are part of the safe chamber snapshot even though the broader
+	# handoff harness intentionally avoids scene/player creation. Exercise the exact
+	# production capture/apply helpers in memory so resume cannot silently reset them.
+	var checkpoint_player := CheckpointPlayer.new()
+	var checkpoint_executor := CheckpointExecutor.new()
+	checkpoint_player.prosthetic_executor = checkpoint_executor
+	checkpoint_player.add_child(checkpoint_executor)
+	flow.player = checkpoint_player
+	var player_state: Dictionary = flow.call("_capture_player_state")
+	_expect(int(player_state.get("hp", -1)) == 46, "checkpoint player capture lost Health")
+	_expect(int(player_state.get("maxhp", -1)) == 130, "checkpoint player capture lost max Health")
+	_expect(is_equal_approx(float(player_state.get("stagger_max", -1.0)), 84.0), "checkpoint player capture lost Posture capacity")
+	_expect(int(player_state.get("spirit", -1)) == 37, "checkpoint player capture lost Spirit")
+	_expect(int(player_state.get("max_spirit", -1)) == 120, "checkpoint player capture lost max Spirit")
+
+	checkpoint_player.hp = 99
+	checkpoint_player.maxhp = 99
+	checkpoint_player.stagger_max = 1.0
+	checkpoint_executor.current_spirit = 2
+	checkpoint_executor.max_spirit = 20
+	flow.call("_apply_resume_player_state", player_state)
+	_expect(checkpoint_player.hp == 46, "checkpoint player restore lost Health")
+	_expect(checkpoint_player.maxhp == 130, "checkpoint player restore lost max Health")
+	_expect(is_equal_approx(checkpoint_player.stagger_max, 84.0), "checkpoint player restore lost Posture capacity")
+	_expect(checkpoint_executor.current_spirit == 37, "checkpoint player restore lost Spirit")
+	_expect(checkpoint_executor.max_spirit == 120, "checkpoint player restore lost max Spirit")
+
+	checkpoint_player.free()
 	source.free()
 	restored.free()
 	flow.free()
