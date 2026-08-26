@@ -61,7 +61,7 @@ jobs:
             echo "=== RunScene lifetime: Area ${area} ==="
             godot --headless --verbose --path game/oathbound --quit-after 30 "$scene" 2>&1 | tee "$log"
             grep -F "player_factory_assigned script=res://Player/OathboundCombatPlayer.gd" "$log"
-            grep -F "[RunScene] starting run… area=${area}" "$log"
+            grep -F "[OathboundRunScene] starting run… area=${area}" "$log"
             if grep -F "SCRIPT ERROR:" "$log"; then
               echo "FAIL: Area ${area} RunScene emitted a GDScript runtime error."
               exit 1
