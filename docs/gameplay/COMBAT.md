@@ -4,7 +4,7 @@ title: Combat System
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-12
+last_reviewed: 2026-08-25
 topics:
   - katana
   - posture
@@ -201,9 +201,9 @@ A **backstab** is a universal positional hit classification, not a Crimson-only 
 
 Approved mechanics may reward the classification. The Crimson status **Vulnerable**, for example, causes genuine backstabs against that enemy to deal substantially increased direct Health damage while the status is active.
 
-## Technique relationship
+## Technique trigger relationship
 
-The direct Technique layer is tied to exactly five shared combat slots:
+The run Technique layer may react to exactly five shared combat-action trigger classifications:
 
 - Basic Attack,
 - Held Attack,
@@ -211,9 +211,9 @@ The direct Technique layer is tied to exactly five shared combat slots:
 - Parry / Counter,
 - Deathblow.
 
-One direct Technique may occupy each slot. Ordinary direct Techniques do not create additional action buttons or stack multiple direct modifications into the same slot.
+These are **trigger classifications, not equipment slots**. Oathbound has no global Technique inventory cap, and multiple owned Techniques may modify or respond to the same combat action when their individual effects permit it. Acquiring a Technique associated with one trigger does not make other Techniques associated with that trigger ineligible.
 
-Slotless supporting Techniques may interact with approved shared combat states such as posture, movement, family buildup, target state, backstab classification, or other existing mechanics, but they do not create extra direct combat slots. Prosthetic progression is separate and persistent; ordinary Techniques do not temporarily upgrade a particular Prosthetic.
+Slotless Supporting Techniques may interact with approved shared combat states such as posture, movement, family buildup, target state, backstab classification, or other existing mechanics. Prosthetic progression is separate and persistent; ordinary Techniques do not temporarily upgrade a particular Prosthetic.
 
 A Technique uses one rule across every Aspect. It may produce different practical value because the underlying moves differ, so high-frequency and multi-hit interactions require normalization.
 
@@ -226,7 +226,7 @@ Techniques must not:
 - depend on an exact multi-Technique combination to function,
 - or require separate Wolf, Wraith, and Ronin versions of an ordinary effect.
 
-The [Technique System](TECHNIQUES.md) owns Technique rules. This file owns shared controls, movement, defense, deathblows, backstab classification, response language, and action-slot vocabulary. The selected Aspect owns the sword attacks assigned to the offensive slots.
+The [Technique System](TECHNIQUES.md) owns Technique rules. This file owns shared controls, movement, defense, deathblows, backstab classification, response language, and action-trigger vocabulary. The selected Aspect owns the sword attacks assigned to the offensive actions.
 
 ## Response rules
 
@@ -244,6 +244,16 @@ Enemy attacks should communicate intended responses through silhouette, timing, 
 Enemy posture is not a second health bar. It represents control of the exchange. When posture breaks, the enemy enters a visually distinct execution-vulnerable state and may become deathblow-ready. This posture-break state is separate from the capitalized Crimson status **Vulnerable**.
 
 Deathblows are punctuation and reward. Their cues, animation weight, and contact points must remain clear even in crowded encounters or when Deathblow Techniques add effects.
+
+## Damage-number feedback contract
+
+Floating enemy damage numbers represent **Health damage only**. They are not posture numbers, attack-power readouts, or a generic confirmation that a hit connected.
+
+- A blocked strike that removes no enemy Health may still add enemy posture, but it produces **no floating damage number**.
+- Pure posture pressure from attacks, parries, deflects, Techniques, or other effects produces no floating damage number by itself.
+- A hit that removes Health and also adds posture may show a floating number for its Health-damage component; the posture portion remains separate presentation.
+- Enemy posture is communicated through the posture bar, guard/block reactions, hitstop, VFX, and audio rather than through Health-style numbers.
+- The damage-number accessibility setting may hide Health numbers entirely without changing Health or posture mechanics.
 
 ## Animation requirements
 
@@ -282,4 +292,4 @@ From quietest to strongest visual priority:
 
 Exact frame data, damage values, posture formulas, invulnerability durations, input buffers, cancel rules, rear-angle thresholds, Technique values, and encounter tuning belong in implementation documentation or code.
 
-This file owns the shared control, neutral movement, defense, deathblow, backstab, response, and action-slot contracts. The Aspect documents own the exact sword kits.
+This file owns the shared control, neutral movement, defense, deathblow, backstab, response, damage-number feedback, and action-trigger contracts. The Aspect documents own the exact sword kits.
