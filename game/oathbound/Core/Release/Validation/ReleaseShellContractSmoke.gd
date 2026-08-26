@@ -181,6 +181,12 @@ func _validate_front_end_contract() -> void:
 	_expect(title_found, "front end does not present the OATHBOUND title")
 	for label: String in REQUIRED_FRONT_END_BUTTONS:
 		_expect(label in button_texts, "front end missing required action: %s" % label)
+	_expect(front_end.has_method("_prepare_continue_checkpoint"), "front end lacks safe checkpoint preparation gate")
+	if front_end.has_method("_prepare_continue_checkpoint"):
+		_expect(
+			not bool(front_end.call("_prepare_continue_checkpoint", {"version": FLOW_SCRIPT.CHECKPOINT_VERSION})),
+			"front end accepted an incomplete checkpoint instead of falling back safely"
+		)
 
 	front_end.call("_build_settings_menu")
 	await get_tree().process_frame
