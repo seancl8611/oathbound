@@ -1,9 +1,10 @@
 extends "res://autoload/OathboundGameFlow.gd"
 
-## Region-aware debug/playtest ownership layered on the current Oathbound GameFlow.
-## Normal runs still use OathboundGameFlow's authored route progression. This layer
-## only changes debug warps so targeted tests use current regional authorities rather
-## than the imported RouteGenerator path for Region 2+.
+## Region-aware run lifecycle layered on the current Oathbound GameFlow.
+## Normal progression still uses OathboundGameFlow's room/player authorities, while
+## this layer owns regional choice boundaries and debug warps so unresolved route
+## choices cannot instantiate orphan Players and Region 2+ use their authored route
+## authorities rather than the imported generic RouteGenerator path.
 
 const EXPECTED_REGION_PLAYTEST_LAB_SCRIPT := "res://Core/Regions/OathboundRegionPlaytestLab.gd"
 
