@@ -4,7 +4,7 @@ title: Blood Cavern and Blood Mirror
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-24
+last_reviewed: 2026-08-27
 topics:
   - strand
   - blood-cavern
@@ -56,12 +56,15 @@ The current implementation intentionally establishes the reusable Cavern boundar
 - training-target resets restore Health/Posture and also clear shared Hushiro posture-break timing, deathblow readiness, and any executable target forwarded to Akio. A target can therefore be defeated, reset, posture-broken, and executed repeatedly without stale execution state carrying between attempts;
 - the seven approved tutorial refresher topics are available from the Cavern and resolve current keyboard/controller bindings rather than hard-coding stale controls;
 - discovered **Action Techniques** can be demonstrated on the passive target by temporarily replacing the active run Technique list; the exact prior list is restored when training ends, the Cavern exits, or the player enters the Blood Mirror;
+- the reusable trial runtime now supports deterministic temporary **Aspect/Tier/Blood, unlimited Technique collection, Prosthetic, and Relic** loadouts. Starting a fixed-loadout sandbox deep-snapshots the pre-trial build, stages only runtime state, suppresses Prosthetic/Relic save writes and Relic mastery accrual while practice is active, and restores the exact prior build at trial cleanup;
+- temporary fixed loadouts may use valid Prosthetics or Relics without permanently unlocking or equipping them. Their normal persistent equip APIs are deliberately bypassed during the sandbox, so a trial cannot silently rewrite Forge/Relic slot files;
+- fixed-loadout cleanup is owned by the live Blood Cavern lifecycle: End Training, Blood Mirror entry, normal trial completion, spawn/setup failure, and Cavern teardown all return control to the player's pre-trial build. The current Execution Trial enters this lifecycle with no authored fixed override, preserving current behavior until its final challenge loadout is actually designed;
 - **Execution Trial** is the first implemented Basic Combat Trial. It completes only when the target receives a real production deathblow after the player creates the execution opening; an ordinary Health defeat only resets the target and cannot complete the trial;
 - successful Execution Trial clears produce immediate non-pausing completion feedback. A first clear names the Relic unlocked by the current prototype mapping; repeat clears explicitly report a practice clear and grant no duplicate Relic;
 - the current progression prototype routes the first `execution_trial` clear through the existing challenge-Relic allocation and makes repeat clears practice-only. That specific Relic sequencing remains first-playtest implementation data rather than a new paper-design lock;
-- entering the Blood Mirror always terminates active target/demo/trial state before permanent progression UI opens.
+- entering the Blood Mirror always terminates active target/demo/trial state and restores temporary fixed-loadout state before permanent progression UI or its Keeper gate is evaluated.
 
-This slice does **not** define the final number of trials, final fixed challenge loadouts, full Aspect-trial scripting, final mastery rewards, or final challenge-to-Relic sequencing.
+This slice does **not** define the final number of trials, final authored fixed challenge loadouts, full Aspect-trial scripting, final mastery rewards, or final challenge-to-Relic sequencing. The fixed-loadout runtime capability is implemented; the content that will use it remains later authored work.
 
 ## Permanent Aspect progression boundary
 
@@ -101,10 +104,12 @@ Exact individual Aspect-node effects, values, final Mist costs if any, and any t
 ## Technical requirements
 
 - Repeatable trials support fixed standardized conditions/loadouts.
+- Fixed trial loadouts support Aspect/Tier/Blood, the slotless Technique collection, Prosthetic, and Relic state without granting those temporary selections permanently.
+- Temporary fixed-loadout state snapshots and restores the pre-trial build exactly and suppresses persistent Prosthetic/Relic writes and Relic mastery accrual while the sandbox is active.
 - Reusable training targets reset both visible combat meters and shared posture-break/deathblow runtime state between attempts.
 - Active training/trial mode and the immediate objective remain readable after the Cavern menu closes.
-- Temporary trial Techniques clear after the trial.
-- Trial completion/reward/unlock/mastery flags persist.
+- Temporary trial Techniques and other fixed build state clear on completion, End Training, Blood Mirror entry, and Cavern teardown.
+- Trial completion/reward/unlock/mastery flags persist where the authored trial explicitly grants them; restoring a temporary build must not erase a legitimate first-clear reward.
 - First-clear and repeat-clear feedback clearly distinguish permanent unlocks from practice-only clears.
 - Blood Mirror locked/unlocked campaign state persists and keys to first Keeper defeat.
 - Progression UI supports exactly three staged permanent nodes per Aspect without hard-coding final balance values.
