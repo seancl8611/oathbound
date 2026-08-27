@@ -2,8 +2,8 @@ extends "res://Core/Relics/OathboundRelicRuntime.gd"
 
 ## Save-slot persistence adapter for the current Relic runtime. Relic rules/effects stay
 ## in OathboundRelicRuntime; this layer only redirects durable collection/mastery data.
-## Blood Cavern fixed-loadout sandboxes may stage a Relic without changing the slot file
-## or accruing permanent mastery from practice targets.
+## Blood Cavern fixed-loadout sandboxes may stage a Relic without changing the slot file,
+## accruing permanent mastery, or invoking durable collection/equip mutations.
 
 const LEGACY_RELIC_SAVE_PATH: String = "user://oathbound_relic_progress.cfg"
 const RELIC_SLOT_FILE: String = "relic_progress.cfg"
@@ -47,6 +47,21 @@ func set_temporary_equipped_relic(relic_id: String) -> bool:
 	equipped_relic_id = relic_id
 	equipped_changed.emit(relic_id)
 	return true
+
+
+func discover_relic(relic_id: String, equip_now: bool = false) -> bool:
+	# Trial fixed-loadout state must never masquerade as a collection unlock. Block the
+	# durable mutation surface itself so collection/discovery signals cannot escape and
+	# trigger other permanent-progression consumers before the sandbox restores memory.
+	if is_temporary_loadout_sandbox_active():
+		return false
+	return super.discover_relic(relic_id, equip_now)
+
+
+func equip_relic(relic_id: String, context: String = EQUIP_CONTEXT_FORGE) -> bool:
+	if is_temporary_loadout_sandbox_active():
+		return false
+	return super.equip_relic(relic_id, context)
 
 
 func record_eligible_kill(enemy: Node = null) -> void:
