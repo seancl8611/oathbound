@@ -2,9 +2,13 @@ extends "res://Core/Relics/OathboundRelicRuntime.gd"
 
 ## Save-slot persistence adapter for the current Relic runtime. Relic rules/effects stay
 ## in OathboundRelicRuntime; this layer only redirects durable collection/mastery data.
+## Blood Cavern fixed-loadout sandboxes may stage a Relic without changing the slot file
+## or accruing permanent mastery from practice targets.
 
 const LEGACY_RELIC_SAVE_PATH: String = "user://oathbound_relic_progress.cfg"
 const RELIC_SLOT_FILE: String = "relic_progress.cfg"
+
+var _temporary_loadout_sandbox_depth: int = 0
 
 
 func _relic_save_path() -> String:
@@ -23,7 +27,37 @@ func flush_save() -> void:
 	_save_progress()
 
 
+func begin_temporary_loadout_sandbox() -> void:
+	_temporary_loadout_sandbox_depth += 1
+
+
+func end_temporary_loadout_sandbox() -> void:
+	_temporary_loadout_sandbox_depth = maxi(0, _temporary_loadout_sandbox_depth - 1)
+
+
+func is_temporary_loadout_sandbox_active() -> bool:
+	return _temporary_loadout_sandbox_depth > 0
+
+
+func set_temporary_equipped_relic(relic_id: String) -> bool:
+	if not is_temporary_loadout_sandbox_active():
+		return false
+	if not relic_id.is_empty() and not CATALOG.has(relic_id):
+		return false
+	equipped_relic_id = relic_id
+	equipped_changed.emit(relic_id)
+	return true
+
+
+func record_eligible_kill(enemy: Node = null) -> void:
+	if is_temporary_loadout_sandbox_active():
+		return
+	super.record_eligible_kill(enemy)
+
+
 func _save_progress() -> void:
+	if is_temporary_loadout_sandbox_active():
+		return
 	var file := ConfigFile.new()
 	file.set_value(SAVE_SECTION, "version", RUNTIME_VERSION)
 	file.set_value(SAVE_SECTION, "unlocked_relics", unlocked_relics)
