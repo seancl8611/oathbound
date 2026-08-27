@@ -21,7 +21,7 @@ func _run() -> void:
 	var cavern: Node = hub.get_node_or_null("BloodCavern")
 	_expect(cavern != null, "live Hub has no Blood Cavern")
 	if cavern == null:
-		_finish(validation_scene, hub)
+		await _finish(validation_scene, hub)
 		return
 
 	var original := _capture_runtime_state()
@@ -55,6 +55,29 @@ func _run() -> void:
 	_expect(not bool(ended.get("trial_loadout_sandbox_active", true)), "End Training left trial sandbox active")
 	_expect(not bool(ended.get("training_active", true)), "End Training left a training target active")
 
+	# Blood Mirror entry is another approved hard boundary. Cleanup must happen before
+	# the Mirror checks its Keeper gate or opens permanent progression UI.
+	cavern.call("_start_execution_trial")
+	await get_tree().process_frame
+	_expect(
+		bool(cavern.call("_stage_fixed_trial_loadout_for_playtest", {
+			"aspect_id": "wolf",
+			"aspect_tier": 2,
+			"blood": 64.0,
+			"technique_ids": ["crimson_open_wound", "rupture_guardbreaker"],
+			"prosthetic_id": "flame_vent",
+			"relic_id": "execution_bead",
+		})),
+		"Blood Mirror cleanup fixture rejected a valid fixed loadout"
+	)
+	cavern.call("_open_blood_mirror")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(_capture_runtime_state() == original, "Blood Mirror entry did not restore the exact pre-trial build")
+	var mirror_cleanup: Dictionary = cavern.call("_menu_snapshot_for_playtest")
+	_expect(not bool(mirror_cleanup.get("trial_loadout_sandbox_active", true)), "Blood Mirror entry left trial sandbox active")
+	_expect(not bool(mirror_cleanup.get("training_active", true)), "Blood Mirror entry left a training target active")
+
 	# Repeat with a different staged build and remove the whole Hub. _exit_tree must be
 	# a final safety net even if normal End Training / Blood Mirror cleanup is skipped.
 	cavern.call("_start_execution_trial")
@@ -68,7 +91,7 @@ func _run() -> void:
 			"prosthetic_id": "mist_raven",
 			"relic_id": "last_oath",
 		})),
-		"second active trial rejected a valid fixed loadout"
+		"teardown fixture rejected a valid fixed loadout"
 	)
 	get_tree().current_scene = validation_scene
 	hub.queue_free()
@@ -77,7 +100,7 @@ func _run() -> void:
 	_expect(_capture_runtime_state() == original, "Blood Cavern teardown did not restore the exact pre-trial build")
 
 	if _failures.is_empty():
-		print("[BloodCavernTrialLoadoutLifecycleSmoke] PASS - real Hub ownership | active fixed loadout | End Training restore | Cavern teardown restore")
+		print("[BloodCavernTrialLoadoutLifecycleSmoke] PASS - real Hub ownership | active fixed loadout | End Training restore | Blood Mirror restore | Cavern teardown restore")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
