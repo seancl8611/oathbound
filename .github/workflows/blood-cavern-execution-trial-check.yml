@@ -106,7 +106,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernTrialDurableMutationSmoke.tscn 2>&1 | tee blood-cavern-durable-mutation.log
-          grep -F "[BloodCavernTrialDurableMutationSmoke] PASS - durable Prosthetic/Relic APIs blocked | Scrolls preserved | no persistence writes | no durable signals | exact restoration" blood-cavern-durable-mutation.log
+          grep -F "[BloodCavernTrialDurableMutationSmoke] PASS - durable Prosthetic/Relic APIs blocked | Scrolls preserved | no persistence writes | no durable signals | campaign Forge sync deferred | exact restoration" blood-cavern-durable-mutation.log
           if grep -F "SCRIPT ERROR:" blood-cavern-durable-mutation.log; then
             echo "FAIL: Blood Cavern durable-mutation sandbox emitted a GDScript runtime error."
             exit 1
