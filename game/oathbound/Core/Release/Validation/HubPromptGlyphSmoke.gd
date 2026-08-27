@@ -37,7 +37,8 @@ func _run() -> void:
 	if cavern != null:
 		var cavern_script_value: Variant = cavern.get_script()
 		var cavern_script_path: String = (cavern_script_value as Script).resource_path if cavern_script_value is Script else ""
-		_expect(cavern_script_path == "res://World/BloodCavern.gd", "live Strand training node is not owned by BloodCavern.gd")
+		_expect(cavern_script_path == "res://World/OathboundBloodCavern.gd", "live Strand training node is not owned by OathboundBloodCavern.gd")
+		_expect(cavern.has_method("_stage_fixed_trial_loadout_for_playtest"), "live Blood Cavern fixed-loadout staging seam is missing")
 	_expect(boat_prompt != null and boat_prompt.text == "Boat [E]", "live Strand Boat prompt did not use keyboard binding")
 	_expect(cavern_prompt != null and cavern_prompt.text == "Blood Cavern [E]", "live Strand Blood Cavern prompt did not use keyboard binding")
 	_expect(keeper_prompt != null and keeper_prompt.text == "Keeper [E]", "live Strand NPC prompt did not use keyboard binding")
