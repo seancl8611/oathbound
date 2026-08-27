@@ -104,7 +104,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.tscn 2>&1 | tee blood-cavern-loadout-lifecycle.log
-          grep -F "[BloodCavernTrialLoadoutLifecycleSmoke] PASS - real Hub ownership | active fixed loadout | End Training restore | Cavern teardown restore" blood-cavern-loadout-lifecycle.log
+          grep -F "[BloodCavernTrialLoadoutLifecycleSmoke] PASS - real Hub ownership | active fixed loadout | End Training restore | Blood Mirror restore | Cavern teardown restore" blood-cavern-loadout-lifecycle.log
           if grep -F "SCRIPT ERROR:" blood-cavern-loadout-lifecycle.log; then
             echo "FAIL: live Blood Cavern loadout lifecycle emitted a GDScript runtime error."
             exit 1
