@@ -13,6 +13,7 @@ on:
       - "game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd"
       - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
       - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.*"
       - "game/oathbound/Core/Trials/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
@@ -25,6 +26,7 @@ on:
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/World/BloodCavern.gd"
+      - "game/oathbound/World/OathboundBloodCavern.gd"
       - "game/oathbound/World/BloodCavernTrainingTarget.gd"
       - "game/oathbound/World/BloodCavernTrainingTarget.tscn"
       - "game/oathbound/World/HubScene.tscn"
@@ -39,6 +41,7 @@ on:
       - "game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd"
       - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
       - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.*"
       - "game/oathbound/Core/Trials/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
@@ -51,6 +54,7 @@ on:
       - "game/oathbound/Utility/MetaProgress.gd"
       - "game/oathbound/Utility/MetaProgressionManager.gd"
       - "game/oathbound/World/BloodCavern.gd"
+      - "game/oathbound/World/OathboundBloodCavern.gd"
       - "game/oathbound/World/BloodCavernTrainingTarget.gd"
       - "game/oathbound/World/BloodCavernTrainingTarget.tscn"
       - "game/oathbound/World/HubScene.tscn"
@@ -95,6 +99,25 @@ jobs:
             exit 1
           fi
 
+      - name: Verify live Cavern loadout lifecycle
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.tscn 2>&1 | tee blood-cavern-loadout-lifecycle.log
+          grep -F "[BloodCavernTrialLoadoutLifecycleSmoke] PASS - real Hub ownership | active fixed loadout | End Training restore | Cavern teardown restore" blood-cavern-loadout-lifecycle.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-loadout-lifecycle.log; then
+            echo "FAIL: live Blood Cavern loadout lifecycle emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-loadout-lifecycle.log; then
+            echo "FAIL: live Blood Cavern loadout lifecycle emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "ObjectDB instances leaked at exit" blood-cavern-loadout-lifecycle.log; then
+            echo "FAIL: live Blood Cavern loadout lifecycle leaked runtime objects."
+            exit 1
+          fi
+
       - name: Verify playable Execution Trial chain
         shell: bash
         run: |
@@ -121,5 +144,6 @@ jobs:
           name: blood-cavern-runtime-logs
           path: |
             blood-cavern-loadout-sandbox.log
+            blood-cavern-loadout-lifecycle.log
             blood-cavern-execution-trial.log
           if-no-files-found: warn
