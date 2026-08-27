@@ -1,6 +1,7 @@
 extends Node
 
 const SANDBOX = preload("res://Core/Trials/BloodCavernTrialLoadoutSandbox.gd")
+const PROSTHETIC_EXECUTOR = preload("res://Core/Prosthetics/OathboundProstheticExecutor.gd")
 
 var _failures: Array[String] = []
 
@@ -38,6 +39,28 @@ func _run() -> void:
 	_expect(str(RelicRuntime.equipped_relic_id) == "last_oath", "fixed Relic should be staged without requiring a permanent unlock")
 	_expect(bool(ProstheticManager.call("is_temporary_loadout_sandbox_active")), "Prosthetic persistence suppression should be active")
 	_expect(bool(RelicRuntime.call("is_temporary_loadout_sandbox_active")), "Relic persistence suppression should be active")
+
+	# A fixed Prosthetic must be functionally admitted by the canonical combat executor,
+	# not merely displayed as equipped. Explicitly remove the permanent unlock while the
+	# sandbox is active, then prove the runtime registry/equipped-id path still starts the
+	# staged Mirror Umbrella and spends its canonical Spirit cost. Snapshot restoration
+	# below puts the unlock collection back exactly as it was before the trial.
+	ProstheticManager.unlocked_prosthetics.erase("mirror_umbrella")
+	_expect(not ProstheticManager.unlocked_prosthetics.has("mirror_umbrella"), "fixture should exercise a genuinely locked temporary Prosthetic")
+	var staged_prosthetic: ProstheticData = ProstheticManager.get_equipped_data()
+	_expect(staged_prosthetic != null and staged_prosthetic.id == "mirror_umbrella", "temporary locked Prosthetic should remain resolvable through the equipped runtime lookup")
+	var executor_value: Variant = PROSTHETIC_EXECUTOR.new()
+	if executor_value is Node:
+		var executor: Node = executor_value as Node
+		add_child(executor)
+		var spirit_before := int(executor.call("get_spirit"))
+		var expected_cost := int(ProstheticManager.get_effective_spirit_cost("mirror_umbrella"))
+		executor.call("_on_prosthetic_requested")
+		_expect(str(executor.get("_active_prosthetic_id")) == "mirror_umbrella", "canonical Prosthetic executor should admit the fixed locked Mirror Umbrella")
+		_expect(int(executor.call("get_spirit")) == spirit_before - expected_cost, "temporary fixed Prosthetic should spend its canonical Spirit cost")
+		executor.free()
+	else:
+		_expect(false, "canonical Prosthetic executor could not be instantiated")
 
 	# Force normally durable paths while the fixed loadout is active. The slot files
 	# must remain byte-for-byte unchanged, and practice kills must not accrue mastery.
@@ -126,7 +149,7 @@ func _run() -> void:
 	)
 
 	if _failures.is_empty():
-		print("[BloodCavernTrialLoadoutSandboxSmoke] PASS - fixed Aspect/Tier/Blood | unlimited Techniques | fixed Prosthetic | fixed Relic | save suppression | mastery suppression | exact restoration | replacement lifecycle | Aspect invariants")
+		print("[BloodCavernTrialLoadoutSandboxSmoke] PASS - fixed Aspect/Tier/Blood | unlimited Techniques | fixed Prosthetic | fixed Relic | save suppression | mastery suppression | exact restoration | replacement lifecycle | Aspect invariants | locked Prosthetic combat admission")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
