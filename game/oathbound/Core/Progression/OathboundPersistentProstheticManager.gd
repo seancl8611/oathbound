@@ -14,6 +14,7 @@ const TWIN_UNLOCKS: Array[String] = ["mirror_umbrella", "flame_vent"]
 const SHOGUN_UNLOCKS: Array[String] = ["mist_raven", "bloodletting_gourd"]
 
 var _loading_progress := false
+var _temporary_loadout_sandbox_depth: int = 0
 
 
 func _ready() -> void:
@@ -54,6 +55,28 @@ func reload_from_active_slot() -> void:
 
 func flush_save() -> void:
 	_save_current_progress()
+
+
+func begin_temporary_loadout_sandbox() -> void:
+	_temporary_loadout_sandbox_depth += 1
+
+
+func end_temporary_loadout_sandbox() -> void:
+	_temporary_loadout_sandbox_depth = maxi(0, _temporary_loadout_sandbox_depth - 1)
+
+
+func is_temporary_loadout_sandbox_active() -> bool:
+	return _temporary_loadout_sandbox_depth > 0
+
+
+func set_temporary_equipped_prosthetic(prosthetic_id: String) -> bool:
+	if not is_temporary_loadout_sandbox_active():
+		return false
+	if not prosthetic_id.is_empty() and not _registry.has(prosthetic_id):
+		return false
+	equipped_prosthetic_id = prosthetic_id
+	prosthetic_equipped.emit(prosthetic_id)
+	return true
 
 
 func _on_campaign_progression_changed() -> void:
@@ -125,6 +148,8 @@ func purchase_upgrade(prosthetic_id: String, upgrade_id: String) -> bool:
 
 
 func _save_current_progress() -> void:
+	if is_temporary_loadout_sandbox_active():
+		return
 	var file := ConfigFile.new()
 	file.set_value(SAVE_SECTION, "state", get_save_data())
 	var err := file.save(_save_path())
