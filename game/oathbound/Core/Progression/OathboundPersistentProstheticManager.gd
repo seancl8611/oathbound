@@ -15,6 +15,7 @@ const SHOGUN_UNLOCKS: Array[String] = ["mist_raven", "bloodletting_gourd"]
 
 var _loading_progress := false
 var _temporary_loadout_sandbox_depth: int = 0
+var _campaign_sync_deferred_for_sandbox: bool = false
 
 
 func _ready() -> void:
@@ -63,6 +64,13 @@ func begin_temporary_loadout_sandbox() -> void:
 
 func end_temporary_loadout_sandbox() -> void:
 	_temporary_loadout_sandbox_depth = maxi(0, _temporary_loadout_sandbox_depth - 1)
+	if _temporary_loadout_sandbox_depth == 0 and _campaign_sync_deferred_for_sandbox:
+		# BloodCavernTrialLoadoutSandbox restores its exact pre-trial Prosthetic snapshot
+		# before releasing this suppression depth. Replaying the campaign sync here means
+		# legitimate progression earned during the temporary lifetime is applied after the
+		# restore boundary instead of being mutated early and then erased by restoration.
+		_campaign_sync_deferred_for_sandbox = false
+		_synchronize_campaign_unlocks()
 
 
 func is_temporary_loadout_sandbox_active() -> bool:
@@ -95,6 +103,9 @@ func _ensure_starting_loadout() -> void:
 
 func _synchronize_campaign_unlocks() -> void:
 	if typeof(MetaProgress) != TYPE_OBJECT:
+		return
+	if is_temporary_loadout_sandbox_active():
+		_campaign_sync_deferred_for_sandbox = true
 		return
 	var changed := false
 	if MetaProgress.is_returning_blood_awakened():
