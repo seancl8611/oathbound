@@ -121,6 +121,12 @@ func _unlock_set(ids: Array[String]) -> bool:
 
 
 func unlock_prosthetic(prosthetic_id: String) -> bool:
+	# A Blood Cavern fixed-loadout lifetime is explicitly non-durable. Block the
+	# production Forge mutation surface itself, not only its file write, so accidental
+	# calls cannot emit permanent-unlock semantics while the sandbox later restores the
+	# in-memory dictionary.
+	if is_temporary_loadout_sandbox_active():
+		return false
 	var changed := super.unlock_prosthetic(prosthetic_id)
 	if changed and not _loading_progress:
 		_save_current_progress()
@@ -128,6 +134,8 @@ func unlock_prosthetic(prosthetic_id: String) -> bool:
 
 
 func equip_prosthetic(prosthetic_id: String) -> bool:
+	if is_temporary_loadout_sandbox_active():
+		return false
 	var changed := super.equip_prosthetic(prosthetic_id)
 	if changed and not _loading_progress:
 		_save_current_progress()
@@ -135,12 +143,19 @@ func equip_prosthetic(prosthetic_id: String) -> bool:
 
 
 func unequip_prosthetic() -> void:
+	if is_temporary_loadout_sandbox_active():
+		return
 	super.unequip_prosthetic()
 	if not _loading_progress:
 		_save_current_progress()
 
 
 func purchase_upgrade(prosthetic_id: String, upgrade_id: String) -> bool:
+	# The base purchase path spends permanent Scrolls before this adapter saves its
+	# Prosthetic state. Returning before super is therefore required for true trial
+	# isolation; save suppression alone would still allow permanent currency loss.
+	if is_temporary_loadout_sandbox_active():
+		return false
 	var changed := super.purchase_upgrade(prosthetic_id, upgrade_id)
 	if changed and not _loading_progress:
 		_save_current_progress()
