@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://World/CodexBoard.gd" id="6_wu1q6"]
 [ext_resource type="Script" path="res://World/Bloodwell.gd" id="8_wklb0"]
 [ext_resource type="Script" path="res://World/MerchantStall.gd" id="9_bbnwo"]
-[ext_resource type="Script" path="res://World/BloodCavern.gd" id="10_2hmrb"]
+[ext_resource type="Script" path="res://World/OathboundBloodCavern.gd" id="10_2hmrb"]
 [ext_resource type="Script" path="res://World/BloodMirror.gd" id="11_blood_mirror"]
 [ext_resource type="Script" path="res://World/NarrativeNPC.gd" id="12_narrative"]
 
