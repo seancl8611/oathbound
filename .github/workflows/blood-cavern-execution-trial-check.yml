@@ -7,8 +7,13 @@ on:
       - "agent/**"
     paths:
       - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
+      - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Prosthetics/**"
       - "game/oathbound/Core/Relics/**"
+      - "game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd"
       - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.*"
+      - "game/oathbound/Core/Trials/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*"
@@ -28,8 +33,13 @@ on:
   pull_request:
     paths:
       - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
+      - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Prosthetics/**"
       - "game/oathbound/Core/Relics/**"
+      - "game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd"
       - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.*"
+      - "game/oathbound/Core/Trials/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*"
@@ -66,6 +76,25 @@ jobs:
       - name: Import project headlessly
         run: godot --headless --path game/oathbound --import
 
+      - name: Verify fixed loadout sandbox isolation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.tscn 2>&1 | tee blood-cavern-loadout-sandbox.log
+          grep -F "[BloodCavernTrialLoadoutSandboxSmoke] PASS - fixed Aspect/Tier/Blood | unlimited Techniques | fixed Prosthetic | fixed Relic | save suppression | mastery suppression | exact restoration" blood-cavern-loadout-sandbox.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-loadout-sandbox.log; then
+            echo "FAIL: Blood Cavern fixed-loadout sandbox emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-loadout-sandbox.log; then
+            echo "FAIL: Blood Cavern fixed-loadout sandbox emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "ObjectDB instances leaked at exit" blood-cavern-loadout-sandbox.log; then
+            echo "FAIL: Blood Cavern fixed-loadout sandbox leaked runtime objects."
+            exit 1
+          fi
+
       - name: Verify playable Execution Trial chain
         shell: bash
         run: |
@@ -85,10 +114,12 @@ jobs:
             exit 1
           fi
 
-      - name: Upload Execution Trial diagnostics
+      - name: Upload Blood Cavern diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: blood-cavern-execution-trial-log
-          path: blood-cavern-execution-trial.log
+          name: blood-cavern-runtime-logs
+          path: |
+            blood-cavern-loadout-sandbox.log
+            blood-cavern-execution-trial.log
           if-no-files-found: warn
