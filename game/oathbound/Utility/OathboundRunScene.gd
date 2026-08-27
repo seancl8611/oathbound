@@ -1,9 +1,10 @@
 extends "res://Utility/RunScene.gd"
 
 ## Current run-start integration layer. The imported RunScene owns route/choice UI
-## compatibility, while this layer owns canonical Player creation, current regional
-## route authorities, release-shell safe-checkpoint resume, failed-run closure, and the
-## approved read-only Pause / Build Overview.
+## compatibility, while this layer owns current regional route authorities, release-shell
+## safe-checkpoint resume, failed-run closure, and the approved read-only Pause / Build
+## Overview. Canonical Player creation is deliberately deferred to GameFlow's concrete
+## chamber loader so unresolved route choices never own an unparented Player subtree.
 
 const PAUSE_OVERVIEW_SCRIPT = preload("res://Core/Release/OathboundAccessiblePauseOverview.gd")
 const INPUT_GLYPHS = preload("res://Core/Release/OathboundInputGlyphs.gd")
@@ -37,17 +38,10 @@ func _ready() -> void:
 			get_tree().change_scene_to_file("res://World/HubScene.tscn")
 		return
 
-	var current_player: Node = null
-	if GameFlow.has_method("create_player_instance"):
-		current_player = GameFlow.create_player_instance()
-	else:
-		push_error("[OathboundRunScene] GameFlow lacks canonical create_player_instance()")
-		return
-	if current_player == null:
-		push_error("[OathboundRunScene] Canonical Player factory returned null")
-		return
-	GameFlow.set_player(current_player)
-
+	# Build the route before any Player instance exists. Areas 2/3 may open on an
+	# authored CHOICE_* slot; in that state GameFlow presents the choice and waits.
+	# Once a concrete chamber is selected, OathboundGameFlow._load_current_room()
+	# creates the canonical OathboundCombatPlayer and parents it into RoomContainer.
 	if debug_start_area >= 2:
 		RunData.reset_for_new_run(debug_start_area)
 		if GameFlow.has_method("build_route_for_area"):
