@@ -35,7 +35,7 @@ func begin(
 		restore()
 	if not _runtime_contract_is_valid(aspect_runtime, run_data, prosthetic_manager, relic_runtime):
 		return false
-	var normalized := _validate_loadout(loadout, prosthetic_manager)
+	var normalized := _validate_loadout(loadout, aspect_runtime, prosthetic_manager)
 	if normalized.has("error"):
 		push_warning("[BloodCavernTrialLoadoutSandbox] %s" % str(normalized.get("error", "Invalid trial loadout")))
 		return false
@@ -127,8 +127,9 @@ func _runtime_contract_is_valid(
 	return true
 
 
-func _validate_loadout(loadout: Dictionary, prosthetic_manager: Node) -> Dictionary:
+func _validate_loadout(loadout: Dictionary, aspect_runtime: Node, prosthetic_manager: Node) -> Dictionary:
 	var out := loadout.duplicate(true)
+	var touches_aspect_state := out.has("aspect_id") or out.has("aspect_tier") or out.has("blood")
 	if out.has("aspect_id"):
 		var aspect_id := str(out.get("aspect_id", "")).to_lower()
 		if not aspect_id.is_empty() and aspect_id not in ASPECT_CATALOG.ASPECTS:
@@ -140,7 +141,31 @@ func _validate_loadout(loadout: Dictionary, prosthetic_manager: Node) -> Diction
 			return {"error": "Fixed Aspect Tier must be 0-IV"}
 		out["aspect_tier"] = tier
 	if out.has("blood"):
-		out["blood"] = clampf(float(out.get("blood", 0.0)), 0.0, 100.0)
+		var requested_blood := float(out.get("blood", 0.0))
+		if requested_blood < 0.0 or requested_blood > 100.0:
+			return {"error": "Fixed Blood must be between 0 and 100"}
+		out["blood"] = requested_blood
+
+	# Validate the effective Aspect state before snapshotting or enabling save
+	# suppression. This keeps authored trial data from creating combinations that the
+	# canonical runtime itself considers impossible. Partial overrides remain valid:
+	# lowering Tier below II automatically carries zero Blood when Blood was omitted.
+	if touches_aspect_state:
+		var effective_aspect := str(out.get("aspect_id", aspect_runtime.get("selected_aspect")))
+		var effective_tier := int(out.get("aspect_tier", aspect_runtime.get("tier")))
+		var effective_blood := float(out.get("blood", aspect_runtime.get("blood")))
+		if effective_aspect.is_empty():
+			if out.has("aspect_tier") and effective_tier != 0:
+				return {"error": "A fixed loadout without an Aspect cannot use Tier %d" % effective_tier}
+			if out.has("blood") and effective_blood > 0.0:
+				return {"error": "A fixed loadout without an Aspect cannot carry Blood"}
+			out["aspect_tier"] = 0
+			out["blood"] = 0.0
+		elif effective_tier < 2:
+			if out.has("blood") and effective_blood > 0.0:
+				return {"error": "Fixed Blood is unavailable before Aspect Tier II"}
+			if out.has("aspect_id") or out.has("aspect_tier"):
+				out["blood"] = 0.0
 
 	if out.has("technique_ids"):
 		var technique_value: Variant = out.get("technique_ids")
