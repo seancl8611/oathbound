@@ -19,6 +19,7 @@ func _ready() -> void:
 func _run() -> void:
 	var original := _capture_runtime_state()
 	var original_scrolls := int(MetaProgress.scrolls)
+	var original_boss_clears: Dictionary = MetaProgress.boss_clears.duplicate(true)
 	var prosthetic_save_path := str(ProstheticManager.call("_save_path"))
 	var relic_save_path := str(RelicRuntime.call("_relic_save_path"))
 	var meta_save_path := str(MetaProgress.call("_save_path"))
@@ -115,6 +116,29 @@ func _run() -> void:
 		"rejected permanent Relic equip mutation must preserve the staged trial Relic"
 	)
 
+	# Campaign progression owns several automatic Forge unlocks and reaches the manager
+	# through signals rather than the guarded public unlock API. Simulate a Twin Maws
+	# clear in memory and emit the real progression signal. The manager must defer that
+	# synchronization until the Blood Cavern restores its exact pre-trial snapshot.
+	MetaProgress.boss_clears[2] = true
+	MetaProgress.progression_changed.emit()
+	_expect(
+		bool(ProstheticManager.get("_campaign_sync_deferred_for_sandbox")),
+		"campaign-to-Forge synchronization should be marked pending while the trial sandbox owns state"
+	)
+	_expect(
+		not ProstheticManager.unlocked_prosthetics.has("mirror_umbrella"),
+		"campaign progression must not mutate snapshot-owned Prosthetic unlocks before trial restoration"
+	)
+	_expect(
+		_prosthetic_unlocked_signals == 0,
+		"deferred campaign synchronization must not emit a permanent Prosthetic unlock signal during the trial"
+	)
+	_expect(
+		_file_snapshot(prosthetic_save_path) == prosthetic_file_before,
+		"deferred campaign synchronization must not write the Forge slot file during the trial"
+	)
+
 	_expect(_prosthetic_unlocked_signals == 0, "rejected Prosthetic unlock must not emit a durable unlock signal")
 	_expect(_prosthetic_equipped_signals == 0, "rejected Prosthetic equip/unequip must not emit a durable equip signal")
 	_expect(_prosthetic_upgrade_signals == 0, "rejected Prosthetic upgrade must not emit a purchase signal")
@@ -125,14 +149,21 @@ func _run() -> void:
 	_expect(_file_snapshot(prosthetic_save_path) == prosthetic_file_before, "durable Prosthetic API rejection must leave the Forge slot file unchanged")
 	_expect(_file_snapshot(relic_save_path) == relic_file_before, "durable Relic API rejection must leave the Relic slot file unchanged")
 
-	# Restore the fixture-only MetaProgress value directly; correct sandbox guards never
-	# saved it. Then restore the sandbox-owned Prosthetic/Relic state exactly.
+	# Restore fixture-only MetaProgress values before the sandbox releases suppression.
+	# The pending campaign sync must replay against the restored canonical campaign state,
+	# not the temporary fixture state used to prove deferral.
 	MetaProgress.scrolls = original_scrolls
+	MetaProgress.boss_clears = original_boss_clears.duplicate(true)
 	_disconnect_mutation_signal_probes()
 	sandbox.restore()
 
+	_expect(
+		not bool(ProstheticManager.get("_campaign_sync_deferred_for_sandbox")),
+		"pending campaign-to-Forge synchronization should be consumed when sandbox restoration releases ownership"
+	)
 	_expect(_capture_runtime_state() == original, "durable-mutation smoke should restore exact pre-trial Prosthetic/Relic state")
 	_expect(int(MetaProgress.scrolls) == original_scrolls, "fixture should restore the original Scroll balance")
+	_expect(MetaProgress.boss_clears == original_boss_clears, "fixture should restore the original campaign boss-clear state")
 	_expect(not bool(ProstheticManager.call("is_temporary_loadout_sandbox_active")), "Prosthetic sandbox suppression should be fully released")
 	_expect(not bool(RelicRuntime.call("is_temporary_loadout_sandbox_active")), "Relic sandbox suppression should be fully released")
 	_expect(_file_snapshot(prosthetic_save_path) == prosthetic_file_before, "Forge slot file should remain byte-for-byte unchanged")
@@ -140,7 +171,7 @@ func _run() -> void:
 	_expect(_file_snapshot(meta_save_path) == meta_file_before, "MetaProgress slot file should remain byte-for-byte unchanged")
 
 	if _failures.is_empty():
-		print("[BloodCavernTrialDurableMutationSmoke] PASS - durable Prosthetic/Relic APIs blocked | Scrolls preserved | no persistence writes | no durable signals | exact restoration")
+		print("[BloodCavernTrialDurableMutationSmoke] PASS - durable Prosthetic/Relic APIs blocked | Scrolls preserved | no persistence writes | no durable signals | campaign Forge sync deferred | exact restoration")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
