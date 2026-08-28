@@ -49,6 +49,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify complete release route to Heart Approach
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/FullRunHeartHandoffSmoke.tscn 2>&1 | tee full-run-heart-handoff.log
+          grep -F "[FullRunHeartHandoffSmoke] PASS - release GameFlow Region 1->2->3->Heart Approach | 33 counted chambers | build continuity | single final handoff | no Heart combat simulation" full-run-heart-handoff.log
+          if grep -F "SCRIPT ERROR:" full-run-heart-handoff.log; then
+            echo "FAIL: full release route handoff emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" full-run-heart-handoff.log; then
+            echo "FAIL: full release route handoff emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload run handoff validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,5 +73,6 @@ jobs:
             run-handoff-import.log
             run-handoff-editor.log
             run-region-handoff.log
+            full-run-heart-handoff.log
           if-no-files-found: warn
           retention-days: 7

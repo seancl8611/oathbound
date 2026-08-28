@@ -1,0 +1,42 @@
+name: Final Integration Readiness Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "docs/art_production/ASSET_INVENTORY.md"
+      - "docs/art_production/TECHNIQUE_VFX.md"
+      - "docs/art_production/milestones/MILESTONE_04.md"
+      - "docs/art_production/milestones/MILESTONE_07.md"
+      - "docs/ui_ux/TECHNIQUE_REWARDS.md"
+      - "docs/external/RELEASE_ATTRIBUTION_AUDIT.md"
+      - "game/oathbound/Core/Endgame/HeartEncounterShell.gd"
+      - "game/oathbound/Core/Endgame/Validation/EndgameCampaignContractSmoke.gd"
+      - "tools/release/check_final_integration_readiness.py"
+      - ".github/workflows/final-integration-readiness-check.yml"
+  pull_request:
+    paths:
+      - "docs/art_production/ASSET_INVENTORY.md"
+      - "docs/art_production/TECHNIQUE_VFX.md"
+      - "docs/art_production/milestones/MILESTONE_04.md"
+      - "docs/art_production/milestones/MILESTONE_07.md"
+      - "docs/ui_ux/TECHNIQUE_REWARDS.md"
+      - "docs/external/RELEASE_ATTRIBUTION_AUDIT.md"
+      - "game/oathbound/Core/Endgame/HeartEncounterShell.gd"
+      - "game/oathbound/Core/Endgame/Validation/EndgameCampaignContractSmoke.gd"
+      - "tools/release/check_final_integration_readiness.py"
+      - ".github/workflows/final-integration-readiness-check.yml"
+  workflow_dispatch:
+
+jobs:
+  readiness-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify final-integration readiness contracts
+        run: python3 tools/release/check_final_integration_readiness.py

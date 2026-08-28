@@ -4,7 +4,7 @@ title: Asset Inventory
 category: art-production
 status: draft
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-08-28
 topics:
   - asset-counts
   - characters
@@ -42,7 +42,7 @@ High-level production groups and known counts only. Detailed states, moves, timi
 | Environment sets | 4 + Heart subset | Strand + Areas 1–3 + Heart spaces |
 | Permanent upgrade stations | 3 | Bloodwell, Forge Bench, later-unlocked Blood Mirror |
 | Prosthetics | 8 | One production family per tool |
-| Technique roster | 50 + 10 refinements | Five direct slots + slotless supporting layers |
+| Technique roster | 50 + 10 refinements | Unlimited run-owned collection; five action-trigger classifications + Supporting/Cross-family/Legendary layers |
 | Relics | 10 | One equipped; no rarity tiers |
 | General currency icon families | 3 | Mist, Scrolls, Gold |
 | Regional boss-material object/icon families | 3 | One each for Keeper, Twin Maws, Shogun; exact names/concepts TBD |
@@ -56,7 +56,7 @@ Requires:
 - three approved Aspect presentation families through Tier IV,
 - Blood resource/Blood Art states after Tier II,
 - eight Prosthetic icon/VFX families,
-- reusable Technique card/rarity/direct-slot/support/refinement/replacement/reroll states,
+- reusable Technique card/rarity/action-trigger/Supporting/Cross-family/Legendary/refinement/reroll states for an additive unlimited collection,
 - ten Relic object/icon identities plus Forge collection/equip/mastery presentation,
 - recovery/capacity/persistent-resource reward icons.
 
@@ -89,8 +89,8 @@ Current route budgets are 12 / 10 / 11 counted chambers; production uses reusabl
 
 - Run HUD / combat feedback.
 - Aspect / Tier / Corruption / Blood states.
-- Five direct Technique slots plus slotless Technique groups.
-- Technique offer/refinement/replacement/reroll presentation.
+- Unlimited Technique collection with action-trigger labels plus Supporting/Cross-family/Legendary/refinement groups.
+- Technique offer/refinement/reroll presentation; acquisition is additive and never overwrites another Technique because it shares an action trigger.
 - Forge Prosthetic + Relic management.
 - Bloodwell Akio + Run Infrastructure categories.
 - Blood Mirror locked/unlocked progression/trial states.
@@ -131,6 +131,7 @@ There is **no generic Boss Emblem token family**.
 Do not preserve asset scope for:
 
 - four-active-plus-reserve Technique UI,
+- exclusive per-action Technique equipment/replacement presentation,
 - Prosthetic Techniques,
 - Crimson Burst-ready/recharge states,
 - old Storm/Frost/Ember/Hex/Shadow stance system,
@@ -144,5 +145,6 @@ Do not preserve asset scope for:
 - Add a production group only after its gameplay/narrative role is approved.
 - Reuse existing animation/VFX/UI families when mechanics modify existing actions rather than create new actions.
 - Do not create separate UI/VFX for balance values that can reuse existing presentation.
+- Technique art/UI must communicate action triggers without implying exclusive per-action equipment or a global inventory cap.
 - Current 50-Technique, 10-Relic, eight-Prosthetic, three-station, 33-chamber, and three-boss-material structures are sufficient for current high-level production planning.
 - Final interface density, exact permanent node counts, mastery thresholds, reward probabilities, and tuning remain later work.
