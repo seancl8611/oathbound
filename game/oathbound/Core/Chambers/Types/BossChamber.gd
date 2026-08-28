@@ -2,11 +2,34 @@ extends "res://Core/Chambers/Types/BossChamberController.gd"
 
 ## Canonical regional boss-chamber rules layer.
 ## The imported controller still selects/hosts regional boss scenes; this layer owns
-## the approved persistent payouts, Boss Reward timing, transition recovery, and gate.
+## the approved persistent payouts, Boss Reward timing, transition recovery, gate, and
+## non-blocking release title presentation for the selected live boss.
 
 const BOSS_REWARD_SERVICE = preload("res://Core/Rewards/BossRewardService.gd")
+const BOSS_TITLE_CARD = preload("res://Core/Presentation/OathboundBossTitleCard.gd")
 
 var _reward_resolution_started := false
+var _boss_title_card: CanvasLayer = null
+
+
+func _select_area_boss() -> void:
+	super._select_area_boss()
+	if _boss == null or not is_instance_valid(_boss):
+		return
+	_present_boss_title(_get_current_area_id())
+
+
+func _present_boss_title(area_id: int) -> void:
+	if _boss_title_card != null and is_instance_valid(_boss_title_card):
+		_boss_title_card.queue_free()
+	var card_value: Variant = BOSS_TITLE_CARD.new()
+	if not (card_value is CanvasLayer):
+		push_error("[BossChamber] Could not create boss title presentation")
+		return
+	_boss_title_card = card_value as CanvasLayer
+	get_tree().root.add_child(_boss_title_card)
+	if not _boss_title_card.has_method("present") or not bool(_boss_title_card.call("present", area_id)):
+		push_error("[BossChamber] Boss title presentation rejected area %d" % area_id)
 
 
 func _on_boss_defeated() -> void:
@@ -83,3 +106,9 @@ func _unlock_boss_gate() -> void:
 	_reward_resolution_started = false
 	if exit_gate and exit_gate.has_method("unlock"):
 		exit_gate.call_deferred("unlock")
+
+
+func _exit_tree() -> void:
+	if _boss_title_card != null and is_instance_valid(_boss_title_card):
+		_boss_title_card.queue_free()
+		_boss_title_card = null

@@ -59,6 +59,23 @@ jobs:
             exit 1
           fi
 
+      - name: Verify boss title presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Presentation/Validation/OathboundBossTitleCardSmoke.tscn 2>&1 | tee boss-title-card.log
+          grep -F "[OathboundBossTitleCardSmoke] PASS - Keeper | Twin Maws | Eclipse Shogun | localization fallbacks | readability scaling | non-blocking presentation" boss-title-card.log
+          grep -F 'const BOSS_TITLE_CARD = preload("res://Core/Presentation/OathboundBossTitleCard.gd")' game/oathbound/Core/Chambers/Types/BossChamber.gd
+          grep -F '_present_boss_title(_get_current_area_id())' game/oathbound/Core/Chambers/Types/BossChamber.gd
+          if grep -F "SCRIPT ERROR:" boss-title-card.log; then
+            echo "FAIL: boss title presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" boss-title-card.log; then
+            echo "FAIL: boss title presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify silent-protagonist and Heart boundaries
         shell: bash
         run: |
@@ -79,5 +96,6 @@ jobs:
           path: |
             presentation-contract.log
             achievement-toast.log
+            boss-title-card.log
           if-no-files-found: warn
           retention-days: 7
