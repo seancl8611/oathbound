@@ -22,46 +22,41 @@ DO NOT use conversational memory as project state authority. Chat/project memory
 
 ```yaml
 state_schema: 1
-state_updated_utc: 2026-08-28T02:13:00Z
+state_updated_utc: 2026-08-28T02:38:53Z
 control_ref: main
 repo: seancl8611/oathbound
 active_branch: agent/runtime-lifetime-reconciliation
 active_pr: 119
-covered_through_substantive_commit: 9a42a3ba8f4c57bf1fd5a74d4be4f3812c65ed97
+covered_through_substantive_commit: fcc6dda72efaf0cc51657ede4b9514d97332020c
 known_good_checkpoint: a4b4313f2af66b47e0a541592683ac79df606c45
 
 current_objective: >-
-  Finish Blood Cavern fixed-trial-loadout persistence/lifetime isolation on PR #119,
-  currently blocked only by the durable mutation smoke failure.
+  Validate the Blood Cavern durable-persistence isolation fix on PR #119, then finish
+  this oversized PR at the next stable green boundary instead of continuing to grow it.
 next_action: >-
-  Download/read the small blood-cavern-runtime-logs artifact from failed run 33124240603,
-  inspect blood-cavern-durable-mutation.log, identify the exact assertion/runtime error,
-  then patch only the relevant Prosthetic/Relic durable-vs-temporary mutation boundary.
+  Check commit-specific CI for fcc6dda72efaf0cc51657ede4b9514d97332020c.
+  If Blood Cavern durable mutation still fails, inspect only its newest small runtime-log
+  artifact. If all workflows pass, perform only bounded final readiness checks for PR #119.
 
 ci:
-  commit: 9a42a3ba8f4c57bf1fd5a74d4be4f3812c65ed97
-  workflows_total: 12
-  passing: 11
-  failing: 1
-  failing_workflow: Blood Cavern Execution Trial Check
-  failing_run_id: 33124240603
-  failing_job_id: 98698390129
-  failing_step: Verify durable trial mutation isolation
-  artifact_id: 9667693788
-  artifact_name: blood-cavern-runtime-logs
-  target_log: blood-cavern-durable-mutation.log
+  commit: fcc6dda72efaf0cc51657ede4b9514d97332020c
+  status: pending_validation
+  previous_failure:
+    workflow: Blood Cavern Execution Trial Check
+    run_id: 33124240603
+    job_id: 98698390129
+    step: Verify durable trial mutation isolation
+    artifact_id: 9667693788
+    target_log: blood-cavern-durable-mutation.log
+    exact_error: MetaProgress slot file should remain byte-for-byte unchanged
 
 working_set:
+  - game/oathbound/Utility/MetaProgress.gd
   - game/oathbound/Core/Trials/BloodCavernTrialLoadoutSandbox.gd
+  - game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd
   - game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd
-  - game/oathbound/autoload/ProstheticManager.gd
   - game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd
   - game/oathbound/Core/Release/Validation/BloodCavernTrialDurableMutationSmoke.gd
-  - game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.gd
-  - game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.gd
-  - game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.gd
-  - game/oathbound/World/OathboundBloodCavern.gd
-  - game/oathbound/World/BloodCavern.gd
   - .github/workflows/blood-cavern-execution-trial-check.yml
 
 confirmed_state:
@@ -70,25 +65,25 @@ confirmed_state:
   - Blood Cavern fixed trial sandbox supports temporary Aspect/Tier/Blood, unlimited Techniques, Prosthetic, Relic.
   - Permanent/direct progression writes must be blocked during active fixed-trial sandbox.
   - Trial-local/runtime Prosthetic selection/cooldown state must remain writable.
-  - Restore exact temporary + durable state before legitimate first-clear reward processing.
+  - Restore temporary state before legitimate first-clear reward processing.
   - Do not invent unresolved authored fixed-loadout IDs, final trial count, mastery currency, or reward sequencing.
   - Execution Trial completion requires real receive_deathblow; health-only defeat resets target.
+  - Failure at 9a42a3b was caused by AchievementRuntime reacting to a temporary MetaProgress progression signal and persisting achievement_unlocked/twin_maws_fallen.
+  - fcc6dda adds explicit MetaProgress temporary-persistence sandbox depth, blocks durable MetaProgress mutation APIs/save writes while active, keeps suppression through restoration, and blocks achievement evaluation/recording from temporary state.
 
 current_hypothesis_unconfirmed:
-  - Durable mutation guard may be too broad and may block sanctioned temporary/runtime mutation,
-    or deferred campaign Forge sync may be escaping the suppression boundary.
-  - Confirm from target log before editing.
+  - No remaining root-cause hypothesis; fcc6dda requires runtime/CI validation.
 
 do_not_reopen_without_evidence:
   - Technique slot/cap architecture.
-  - Unrelated combat architecture while current failure is Blood Cavern persistence isolation.
+  - Unrelated combat architecture while current work is Blood Cavern persistence isolation.
   - Final authored Blood Cavern fixed loadout IDs/count/reward sequencing.
 
 tooling_performance_context:
-  pr_119_commits: 298
-  pr_119_changed_files: 129
-  pr_119_additions: 13229
-  pr_119_deletions: 1368
+  pr_119_commits_before_current_fix: 298
+  pr_119_changed_files_before_current_fix: 129
+  pr_119_additions_before_current_fix: 13229
+  pr_119_deletions_before_current_fix: 1368
   repo_size_kb_approx: 16730
   conclusion: >-
     Repo size is not the main bottleneck. Mega-PR/full-diff/full-log payloads are.
