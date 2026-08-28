@@ -16,51 +16,54 @@ Repository state is authority. Conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 2
-updated_utc: 2026-08-28T03:31:00Z
+updated_utc: 2026-08-28T03:38:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
   pr: 119
-  feature_head: fcc6dda72efaf0cc51657ede4b9514d97332020c
   merge_commit: 959d2da7f05b9dd46b6947bc75497df1b67306fd
-  validation: 12/12 workflows green at feature head
 active_branch: agent/final-integration-readiness
 active_pr: null
-covered_through_substantive_commit: a86e3f5975b81d67320c9012b155e99951c8ce3d
-known_good_checkpoint: 0ea515dc349f81a978ba0217289f7d01a82c5930
+covered_through_substantive_commit: 3b24dbfa04b315273c5076e40af19dd09eba19e2
+known_good_checkpoint: a86e3f5975b81d67320c9012b155e99951c8ce3d
 current_objective: >-
   Prepare merged build for first long player-facing integration run without guessing
   balance/reopening architecture. Current slice: final integration-readiness/release-QA,
-  prototype/presentation drift cleanup, and automated regression boundaries.
+  presentation drift cleanup, and missing cross-system runtime regression boundaries.
 next_action: >-
-  Validate a86e3f59 CI, then continue bounded player-facing scene/asset audit. Fix only
-  resolvable readiness defects using approved behavior/assets; record true external-art/
-  provenance blockers rather than inventing replacements. No numerical tuning before playtest.
+  Validate 3b24dbfa CI, especially Run Region Handoff Check and Godot 4.7.2 Project Check.
+  If green, continue bounded readiness audit; if the slice is coherent/green, create a
+  small PR rather than growing this branch. No numerical tuning before playtest evidence.
 current_batches:
-  - 0ea515dc: corrected stale Technique-slot art-production authorities; added Final Integration Readiness static CI; Heart test-only and attribution blocker guard.
-  - a86e3f59: release wrapper replaces internal title/settings/credits engineering copy with intentional player-facing development copy; readiness guard extended.
+  - 0ea515dc: corrected stale Technique-slot art-production authorities; added Final Integration Readiness static CI; Heart test-only + attribution blocker guard.
+  - a86e3f59: cleaned player-facing title/settings/credits engineering copy; readiness guard extended.
+  - 3b24dbfa: added single release-GameFlow Region 1->2->3->Heart Approach smoke; verifies 33rd counted Shogun chamber exactly once, build continuity, safe Relic transitions, one Heart handoff, no Heart combat simulation.
 ci_known:
-  0ea515dc:
+  a86e3f59:
+    workflows_total: 7
+    failures: 0
     final_integration_readiness_check: success
+    release_shell_check: success
     godot_4_7_2_project_check: success
+    run_region_handoff_check: success
 working_set:
+  - game/oathbound/Core/Release/Validation/OathboundFullRunHandoffHarness.gd
+  - game/oathbound/Core/Release/Validation/FullRunHeartHandoffSmoke.gd
+  - game/oathbound/Core/Release/Validation/FullRunHeartHandoffSmoke.tscn
+  - .github/workflows/run-region-handoff-check.yml
+  - game/oathbound/TitleScreen/OathboundFrontEnd.gd
+  - tools/release/check_final_integration_readiness.py
   - docs/art_production/ASSET_INVENTORY.md
   - docs/art_production/milestones/MILESTONE_04.md
-  - docs/art_production/milestones/MILESTONE_07.md
-  - docs/external/RELEASE_ATTRIBUTION_AUDIT.md
-  - game/oathbound/TitleScreen/OathboundFrontEnd.gd
-  - game/oathbound/Core/Endgame/HeartEncounterShell.gd
-  - game/oathbound/Core/Endgame/Validation/EndgameCampaignContractSmoke.gd
-  - tools/release/check_final_integration_readiness.py
-  - .github/workflows/final-integration-readiness-check.yml
 confirmed:
   - PR #119 merged; never continue old branch.
   - Godot 4.7.2.
   - Techniques slotless/unlimited; five action labels are trigger classifications, never equipment slots.
   - Blood Cavern persistence/MetaProgress isolation green.
-  - Real-player route ends at unauthored Heart shell; contract-test Heart completion cannot be normal gameplay.
-  - Endgame smoke protects Heart completion boundary; Kagutsuchi smoke protects 11 chambers + non-counted Heart handoff + persistent build.
-  - Attribution audit has unresolved font/music/audio/texture provenance blockers; never fabricate evidence.
+  - Real-player endpoint is Heart Approach/current unauthored Heart shell; do not simulate/invent Heart combat.
+  - Endgame smoke protects contract-test Heart completion; Kagutsuchi smoke protects physical 11-chamber -> Heart seam.
+  - New 3b24dbfa smoke closes missing single-release-GameFlow 1->2->3->Heart seam, pending CI.
+  - Strand main background hub.png is a known attribution/provenance blocker; do not fabricate replacement/license evidence.
   - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 avoid_without_evidence:
   - reopening implemented combat/Aspect/Technique/Prosthetic/Relic architecture
