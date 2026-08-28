@@ -117,6 +117,14 @@ func _localized_line_label(fallback: String) -> String:
 		"Prosthetic": return LOCALIZATION.ui("run_results.label.prosthetic", fallback)
 		"Relic": return LOCALIZATION.ui("run_results.label.relic", fallback)
 		"Techniques": return LOCALIZATION.ui("run_results.label.techniques", fallback)
+		"Enemies defeated": return LOCALIZATION.ui("run_results.label.enemies_defeated", fallback)
+		"Parries": return LOCALIZATION.ui("run_results.label.parries", fallback)
+		"Perfect parries": return LOCALIZATION.ui("run_results.label.perfect_parries", fallback)
+		"Damage taken": return LOCALIZATION.ui("run_results.label.damage_taken", fallback)
+		"Combat rooms cleared": return LOCALIZATION.ui("run_results.label.combat_rooms_cleared", fallback)
+		"Blessings received": return LOCALIZATION.ui("run_results.label.blessings_received", fallback)
+		"Treasures opened": return LOCALIZATION.ui("run_results.label.treasures_opened", fallback)
+		"Items purchased": return LOCALIZATION.ui("run_results.label.items_purchased", fallback)
 		"Best Standard": return LOCALIZATION.ui("run_results.label.best_standard", fallback)
 		"Best Suppression": return LOCALIZATION.ui("run_results.label.best_suppression", fallback)
 		_: return fallback
@@ -126,6 +134,7 @@ func _localized_section(fallback: String) -> String:
 	match fallback:
 		"Permanent progress retained": return LOCALIZATION.ui("run_results.section.permanent_progress", fallback)
 		"Final build": return LOCALIZATION.ui("run_results.section.final_build", fallback)
+		"Run performance": return LOCALIZATION.ui("run_results.section.run_performance", fallback)
 		"Ending": return LOCALIZATION.ui("run_results.section.ending", fallback)
 		_: return fallback
 
