@@ -22,33 +22,37 @@ DO NOT use conversational memory as project state authority. Chat/project memory
 
 ```yaml
 state_schema: 1
-state_updated_utc: 2026-08-28T02:38:53Z
+state_updated_utc: 2026-08-28T02:40:15Z
 control_ref: main
 repo: seancl8611/oathbound
 active_branch: agent/runtime-lifetime-reconciliation
 active_pr: 119
 covered_through_substantive_commit: fcc6dda72efaf0cc51657ede4b9514d97332020c
-known_good_checkpoint: a4b4313f2af66b47e0a541592683ac79df606c45
+known_good_checkpoint: fcc6dda72efaf0cc51657ede4b9514d97332020c
 
 current_objective: >-
-  Validate the Blood Cavern durable-persistence isolation fix on PR #119, then finish
-  this oversized PR at the next stable green boundary instead of continuing to grow it.
+  PR #119 has reached its green stabilization cutoff. Do not add unrelated or speculative
+  implementation to this oversized PR. Preserve it as the completed runtime-lifetime/Blood
+  Cavern stabilization slice until the user explicitly chooses the merge/closure action.
 next_action: >-
-  Check commit-specific CI for fcc6dda72efaf0cc51657ede4b9514d97332020c.
-  If Blood Cavern durable mutation still fails, inspect only its newest small runtime-log
-  artifact. If all workflows pass, perform only bounded final readiness checks for PR #119.
+  Do not continue growing PR #119. If Sean explicitly asks to merge it, perform only
+  bounded current-head/CI/mergeability checks and merge. Otherwise, after PR #119 is
+  closed/merged, begin subsequent game work on a fresh coherent branch/PR using this
+  control-plane bootstrap instead of extending the mega-PR.
 
 ci:
   commit: fcc6dda72efaf0cc51657ede4b9514d97332020c
-  status: pending_validation
-  previous_failure:
-    workflow: Blood Cavern Execution Trial Check
-    run_id: 33124240603
-    job_id: 98698390129
-    step: Verify durable trial mutation isolation
-    artifact_id: 9667693788
-    target_log: blood-cavern-durable-mutation.log
-    exact_error: MetaProgress slot file should remain byte-for-byte unchanged
+  status: all_green
+  workflows_total: 12
+  passing: 12
+  failing: 0
+  blood_cavern_execution_trial_check: success
+  godot_4_7_2_project_check: success
+  release_shell_check: success
+  validation_note: >-
+    Full Godot project job completed clean headless import, editor load/compile, RunScene
+    runtime ownership smoke, Corruption/first-attempt/route checks, Shrine/Merchant/Forge
+    smokes, and Strand permanent progression validation.
 
 working_set:
   - game/oathbound/Utility/MetaProgress.gd
@@ -63,21 +67,23 @@ confirmed_state:
   - Godot baseline is 4.7.2.
   - Technique collection is slotless/unlimited; never reintroduce Technique slots/caps.
   - Blood Cavern fixed trial sandbox supports temporary Aspect/Tier/Blood, unlimited Techniques, Prosthetic, Relic.
-  - Permanent/direct progression writes must be blocked during active fixed-trial sandbox.
-  - Trial-local/runtime Prosthetic selection/cooldown state must remain writable.
-  - Restore temporary state before legitimate first-clear reward processing.
+  - Permanent/direct progression writes are blocked during the active fixed-trial sandbox.
+  - Trial-local/runtime Prosthetic selection/cooldown state remains writable.
+  - Temporary state restores before legitimate first-clear reward processing.
   - Do not invent unresolved authored fixed-loadout IDs, final trial count, mastery currency, or reward sequencing.
   - Execution Trial completion requires real receive_deathblow; health-only defeat resets target.
   - Failure at 9a42a3b was caused by AchievementRuntime reacting to a temporary MetaProgress progression signal and persisting achievement_unlocked/twin_maws_fallen.
   - fcc6dda adds explicit MetaProgress temporary-persistence sandbox depth, blocks durable MetaProgress mutation APIs/save writes while active, keeps suppression through restoration, and blocks achievement evaluation/recording from temporary state.
+  - Blood Cavern durable mutation smoke and all other commit-specific workflows pass at fcc6dda.
 
 current_hypothesis_unconfirmed:
-  - No remaining root-cause hypothesis; fcc6dda requires runtime/CI validation.
+  - none
 
 do_not_reopen_without_evidence:
   - Technique slot/cap architecture.
-  - Unrelated combat architecture while current work is Blood Cavern persistence isolation.
+  - Unrelated combat architecture while reviewing this stabilized PR.
   - Final authored Blood Cavern fixed loadout IDs/count/reward sequencing.
+  - Additional feature work on PR #119 after the all-green cutoff.
 
 tooling_performance_context:
   pr_119_commits_before_current_fix: 298
@@ -87,8 +93,8 @@ tooling_performance_context:
   repo_size_kb_approx: 16730
   conclusion: >-
     Repo size is not the main bottleneck. Mega-PR/full-diff/full-log payloads are.
-    Work in bounded exact-file/adjacent-commit mode. Once PR #119 is green/stable,
-    finish it instead of continuing to grow it.
+    Work in bounded exact-file/adjacent-commit mode. PR #119 is now at its green cutoff;
+    do not continue to grow it.
 ```
 
 ## CHECKPOINT_PROTOCOL
