@@ -24,39 +24,38 @@ Repository state is authority. Conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 3
-updated_utc: 2026-08-28T04:02:00Z
+updated_utc: 2026-08-28T04:09:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
   pr: 121
-  feature_head: 31d21bcad82accb9902b90c71e35a9635d3e3347
   merge_commit: 0805a0363e8857424e84316be5962649afbc286e
-  validation: PR-triggered suite green; mergeable_state clean
-active_branch: null
-active_pr: null
-covered_through_substantive_commit: null
-known_good_checkpoint: 0805a0363e8857424e84316be5962649afbc286e
+active_branch: agent/boss-title-presentation
+active_pr: 122
+covered_through_substantive_commit: 7091d2913c8aa9bffd65001365961bdb88055065
+known_good_checkpoint: 7091d2913c8aa9bffd65001365961bdb88055065
 current_objective: >-
-  Continue pre-playtest release-presentation/readiness work that is explicitly supported
-  by existing authorities and runtime evidence. Merge each bounded green PR autonomously.
-  Long manual integration run remains the next source of balance/tuning evidence.
+  Finish and autonomously merge PR #122, which adds non-blocking canonical boss title
+  presentation for Keeper, Twin Maws, and Eclipse Shogun with localization/readability
+  coverage. Then start a fresh branch from merged main for long-run diagnostic telemetry.
 next_action: >-
-  Select the next concrete Milestone 7/release-QA omission using exact authorities/files.
-  Prefer player-facing presentation/accessibility or missing regression coverage that can
-  be implemented without new balance values, fabricated art provenance, or unauthored Heart combat.
+  Check the seven PR-triggered workflows for PR #122. Branch/push validation is already
+  green. If PR checks are green and mergeability is clean, merge #122 at exact head
+  7091d2913c8aa9bffd65001365961bdb88055065. Then checkpoint main and implement diagnostic-
+  only region/Heart Approach integration snapshots using existing RecordsRuntime/GameFlow state.
 recent_batches:
   - pr_120: final integration readiness; full 1->2->3->Heart Approach GameFlow smoke; front-end copy cleanup.
-  - pr_121: global queued achievement-unlock presenter using existing catalog/localization/readability settings; dedicated headless smoke.
+  - pr_121: queued achievement-unlock presenter using existing catalog/localization/readability settings.
+  - pr_122: canonical non-blocking regional boss title cards; PR checks running.
 confirmed:
   - PR #119, #120, and #121 are merged; never continue their old feature branches.
+  - PR #122 branch validation is green; presentation smoke covers all three boss titles.
   - Godot 4.7.2.
   - Techniques are slotless/unlimited; five action labels are trigger classifications, never equipment slots.
   - Blood Cavern persistence/MetaProgress isolation is green.
   - Real-player endpoint is Heart Approach/current unauthored Heart shell; do not invent Heart combat.
   - Single release-GameFlow Region 1->2->3->Heart Approach seam is covered and green.
-  - Achievement unlocks now have player-facing queued presentation; AchievementRuntime remains progression owner.
-  - Strand interaction prompts adapt to active keyboard/controller binding.
-  - Custom Oathbound app icon already exists; do not replace it merely for activity.
+  - Achievement unlocks have player-facing queued presentation; AchievementRuntime remains progression owner.
   - Known font/music/audio/texture provenance blockers must remain explicit; never fabricate license evidence.
   - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 avoid_without_evidence:
