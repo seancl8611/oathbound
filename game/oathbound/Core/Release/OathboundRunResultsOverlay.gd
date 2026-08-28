@@ -86,6 +86,19 @@ func present(result: Dictionary) -> void:
 	var technique_names := _technique_names(result.get("techniques", []))
 	_add_line(column, "Techniques", ", ".join(technique_names) if not technique_names.is_empty() else "None")
 
+	var performance_value: Variant = result.get("performance", {})
+	var performance: Dictionary = performance_value as Dictionary if performance_value is Dictionary else {}
+	_add_separator(column)
+	_add_section(column, "Run performance")
+	_add_line(column, "Enemies defeated", str(int(performance.get("enemies_defeated", 0))))
+	_add_line(column, "Parries", str(int(performance.get("parries", 0))))
+	_add_line(column, "Perfect parries", str(int(performance.get("perfect_parries", 0))))
+	_add_line(column, "Damage taken", str(int(performance.get("damage_taken", 0))))
+	_add_line(column, "Combat rooms cleared", str(int(performance.get("combat_rooms_cleared", 0))))
+	_add_line(column, "Blessings received", str(int(performance.get("blessings_received", 0))))
+	_add_line(column, "Treasures opened", str(int(performance.get("treasures_opened", 0))))
+	_add_line(column, "Items purchased", str(int(performance.get("items_purchased", 0))))
+
 	if kind == "standard_expedition" and typeof(RecordsRuntime) == TYPE_OBJECT:
 		_add_line(column, "Best Standard", _format_time(RecordsRuntime.get_fastest_standard_seconds()))
 	elif kind == "heart_suppression" and typeof(RecordsRuntime) == TYPE_OBJECT:
