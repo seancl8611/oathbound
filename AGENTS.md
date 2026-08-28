@@ -16,7 +16,7 @@ Repository state is authority. Conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 2
-updated_utc: 2026-08-28T03:45:00Z
+updated_utc: 2026-08-28T03:50:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -28,20 +28,20 @@ covered_through_substantive_commit: 3b24dbfa04b315273c5076e40af19dd09eba19e2
 known_good_checkpoint: 3b24dbfa04b315273c5076e40af19dd09eba19e2
 current_objective: >-
   Final integration-readiness/release-QA slice is complete and isolated in PR #120.
-  Preserve this branch as a small green boundary; do not grow it into another mega-PR.
+  Preserve this branch as a small fully-green boundary; do not grow it into another mega-PR.
 next_action: >-
-  Recheck PR #120 mergeability/PR-triggered checks and review metadata only. Do not add
-  unrelated work to this branch. PR #120 has not been explicitly authorized for merge;
-  after it is merged, start the next coherent slice from updated main. No numerical tuning
-  before long player-facing playtest evidence.
+  PR #120 is mergeable and all PR-triggered checks are green. Await explicit merge
+  authorization; do not add unrelated work to this branch. After merge, start the next
+  coherent slice from updated main. No numerical tuning before long player-facing playtest evidence.
 current_batches:
   - 0ea515dc: corrected stale Technique-slot art-production authorities; added Final Integration Readiness static CI; Heart test-only + attribution blocker guard.
   - a86e3f59: cleaned player-facing title/settings/credits engineering copy; readiness guard extended.
   - 3b24dbfa: added single release-GameFlow Region 1->2->3->Heart Approach smoke; verifies 33rd counted Shogun chamber exactly once, build continuity, safe Relic transitions, one Heart handoff, no Heart combat simulation.
 ci_known:
   3b24dbfa:
-    workflows_total: 6
+    pr_triggered_workflows_total: 7
     failures: 0
+    final_integration_readiness_check: success
     run_region_handoff_check: success
     godot_4_7_2_project_check: success
     release_shell_check: success
@@ -51,13 +51,13 @@ ci_known:
 pr_120:
   state: open
   draft: false
+  mergeable: true
+  rebaseable: true
   commits: 3
   changed_files: 9
   additions: 415
   deletions: 21
   head: 3b24dbfa04b315273c5076e40af19dd09eba19e2
-  initial_mergeable_value: false
-  note: initial value was returned immediately at PR creation; recheck after GitHub calculation before treating as conflict.
 working_set:
   - game/oathbound/Core/Release/Validation/OathboundFullRunHandoffHarness.gd
   - game/oathbound/Core/Release/Validation/FullRunHeartHandoffSmoke.gd
@@ -74,8 +74,8 @@ confirmed:
   - Blood Cavern persistence/MetaProgress isolation green.
   - Real-player endpoint is Heart Approach/current unauthored Heart shell; do not simulate/invent Heart combat.
   - Endgame smoke protects contract-test Heart completion; Kagutsuchi smoke protects physical 11-chamber -> Heart seam.
-  - 3b24dbfa closes missing single-release-GameFlow 1->2->3->Heart seam and is green.
-  - Strand prompt glyphs are already runtime-owned by Hub.gd and adapt to active keyboard/controller binding; scene `[E]` values are only defaults.
+  - 3b24dbfa closes missing single-release-GameFlow 1->2->3->Heart seam and is fully green.
+  - Strand prompt glyphs are runtime-owned by Hub.gd and adapt to active keyboard/controller binding; scene `[E]` values are only defaults.
   - Strand main background hub.png is a known attribution/provenance blocker; do not fabricate replacement/license evidence.
   - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 avoid_without_evidence:
