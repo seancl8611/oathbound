@@ -46,6 +46,7 @@ func begin(
 	_relic_runtime = relic_runtime
 	_snapshot = _capture_snapshot()
 
+	MetaProgress.call("begin_temporary_persistence_sandbox")
 	_prosthetic_manager.call("begin_temporary_loadout_sandbox")
 	_relic_runtime.call("begin_temporary_loadout_sandbox")
 	_active = true
@@ -79,13 +80,15 @@ func restore() -> void:
 		if _relic_runtime.has_signal("collection_changed"):
 			_relic_runtime.emit_signal("collection_changed")
 
-	# End save suppression only after every durable/runtime field is back to its exact
-	# pre-trial value. The persistent files already contain the original state and do
-	# not need a write during restoration.
+	# End save/mutation suppression only after every durable/runtime field is back to
+	# its exact pre-trial value. MetaProgress releases last so restoration signals cannot
+	# accidentally commit achievements, records, or other permanent progression.
 	if _prosthetic_manager != null and is_instance_valid(_prosthetic_manager):
 		_prosthetic_manager.call("end_temporary_loadout_sandbox")
 	if _relic_runtime != null and is_instance_valid(_relic_runtime):
 		_relic_runtime.call("end_temporary_loadout_sandbox")
+	if typeof(MetaProgress) == TYPE_OBJECT and MetaProgress.has_method("end_temporary_persistence_sandbox"):
+		MetaProgress.call("end_temporary_persistence_sandbox")
 
 	_clear_refs()
 
@@ -108,6 +111,17 @@ func _runtime_contract_is_valid(
 	if relic_runtime == null or not is_instance_valid(relic_runtime):
 		push_warning("[BloodCavernTrialLoadoutSandbox] RelicRuntime unavailable")
 		return false
+	if typeof(MetaProgress) != TYPE_OBJECT:
+		push_warning("[BloodCavernTrialLoadoutSandbox] MetaProgress unavailable")
+		return false
+	for method_name: String in [
+		"begin_temporary_persistence_sandbox",
+		"end_temporary_persistence_sandbox",
+		"is_temporary_persistence_sandbox_active",
+	]:
+		if not MetaProgress.has_method(method_name):
+			push_warning("[BloodCavernTrialLoadoutSandbox] MetaProgress missing %s" % method_name)
+			return false
 	for method_name: String in [
 		"begin_temporary_loadout_sandbox",
 		"end_temporary_loadout_sandbox",

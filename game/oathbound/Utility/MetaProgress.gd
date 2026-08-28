@@ -42,6 +42,7 @@ var boss_materials: Dictionary = {
 var purchased_progression_nodes: Dictionary = {}
 var progression_flags: Dictionary = {}
 var blood_cavern_trial_completions: Dictionary = {}
+var _temporary_persistence_sandbox_depth: int = 0
 
 
 func _ready() -> void:
@@ -69,6 +70,18 @@ func flush_save() -> void:
 	_save_progress()
 
 
+func begin_temporary_persistence_sandbox() -> void:
+	_temporary_persistence_sandbox_depth += 1
+
+
+func end_temporary_persistence_sandbox() -> void:
+	_temporary_persistence_sandbox_depth = maxi(0, _temporary_persistence_sandbox_depth - 1)
+
+
+func is_temporary_persistence_sandbox_active() -> bool:
+	return _temporary_persistence_sandbox_depth > 0
+
+
 func _reset_defaults() -> void:
 	areas_unlocked = [1]
 	boss_clears = {1: false, 2: false, 3: false}
@@ -92,12 +105,16 @@ func _reset_defaults() -> void:
 
 
 func unlock_area(id: int) -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	if not areas_unlocked.has(id):
 		areas_unlocked.append(id)
 		_commit_progression_change()
 
 
 func mark_boss_clear(id: int) -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	if bool(boss_clears.get(id, false)):
 		return
 	boss_clears[id] = true
@@ -105,6 +122,8 @@ func mark_boss_clear(id: int) -> void:
 
 
 func record_boss_defeat(id: int) -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	if id not in [1, 2, 3]:
 		return
 	boss_defeat_counts[id] = maxi(0, int(boss_defeat_counts.get(id, 0))) + 1
@@ -121,6 +140,8 @@ func get_boss_defeat_count(id: int) -> int:
 
 
 func awaken_returning_blood() -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if returning_blood_awakened:
 		return false
 	returning_blood_awakened = true
@@ -148,6 +169,8 @@ func can_destroy_heart_binding() -> bool:
 
 
 func destroy_next_heart_binding() -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if not can_destroy_heart_binding():
 		return false
 	heart_bindings_destroyed = mini(TOTAL_HEART_BINDINGS, heart_bindings_destroyed + 1)
@@ -164,6 +187,8 @@ func is_story_complete() -> bool:
 
 
 func mark_story_complete() -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if story_complete or get_heart_bindings_destroyed() < TOTAL_HEART_BINDINGS:
 		return false
 	story_complete = true
@@ -172,6 +197,8 @@ func mark_story_complete() -> bool:
 
 
 func record_standard_expedition_clear() -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if not story_complete:
 		return false
 	standard_expedition_clears += 1
@@ -180,6 +207,8 @@ func record_standard_expedition_clear() -> bool:
 
 
 func record_heart_suppression_clear() -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if not story_complete:
 		return false
 	heart_suppression_clears += 1
@@ -200,6 +229,8 @@ func get_campaign_snapshot() -> Dictionary:
 
 
 func add_mist(amount: int) -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	if amount <= 0:
 		return
 	mist += amount
@@ -207,6 +238,8 @@ func add_mist(amount: int) -> void:
 
 
 func spend_mist(amount: int) -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if amount <= 0:
 		return true
 	if mist < amount:
@@ -217,6 +250,8 @@ func spend_mist(amount: int) -> bool:
 
 
 func add_scrolls(amount: int) -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	if amount <= 0:
 		return
 	scrolls += amount
@@ -224,6 +259,8 @@ func add_scrolls(amount: int) -> void:
 
 
 func spend_scrolls(amount: int) -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if amount <= 0:
 		return true
 	if scrolls < amount:
@@ -234,6 +271,8 @@ func spend_scrolls(amount: int) -> bool:
 
 
 func add_boss_material(material_key: String, amount: int = 1) -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	if amount <= 0 or not boss_materials.has(material_key):
 		return
 	boss_materials[material_key] = int(boss_materials.get(material_key, 0)) + amount
@@ -251,6 +290,8 @@ func has_boss_material(material_key: String, amount: int = 1) -> bool:
 
 
 func spend_boss_material(material_key: String, amount: int = 1) -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if amount <= 0:
 		return true
 	if not boss_materials.has(material_key) or not has_boss_material(material_key, amount):
@@ -265,6 +306,8 @@ func is_progression_node_owned(node_id: String) -> bool:
 
 
 func mark_progression_node_owned(node_id: String) -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if node_id.is_empty() or is_progression_node_owned(node_id):
 		return false
 	purchased_progression_nodes[node_id] = true
@@ -277,6 +320,8 @@ func get_progression_flag(flag_id: String, default_value: Variant = false) -> Va
 
 
 func set_progression_flag(flag_id: String, value: Variant = true) -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	if flag_id.is_empty() or progression_flags.get(flag_id, null) == value:
 		return
 	progression_flags[flag_id] = value
@@ -288,6 +333,8 @@ func has_completed_blood_cavern_trial(trial_id: String) -> bool:
 
 
 func mark_blood_cavern_trial_complete(trial_id: String) -> bool:
+	if is_temporary_persistence_sandbox_active():
+		return false
 	if trial_id.is_empty() or has_completed_blood_cavern_trial(trial_id):
 		return false
 	blood_cavern_trial_completions[trial_id] = true
@@ -313,22 +360,30 @@ func get_resource_snapshot() -> Dictionary:
 
 
 func _commit_persistent_change() -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	_save_progress()
 	persistent_resources_changed.emit()
 
 
 func _commit_progression_change() -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	_save_progress()
 	progression_changed.emit()
 
 
 func _commit_campaign_change() -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	_save_progress()
 	campaign_changed.emit()
 	progression_changed.emit()
 
 
 func _save_progress() -> void:
+	if is_temporary_persistence_sandbox_active():
+		return
 	var file := ConfigFile.new()
 	file.set_value(SAVE_SECTION, "areas_unlocked", areas_unlocked)
 	file.set_value(SAVE_SECTION, "boss_clears", boss_clears)

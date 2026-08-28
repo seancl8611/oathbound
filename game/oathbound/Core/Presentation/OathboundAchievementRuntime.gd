@@ -48,6 +48,8 @@ func get_unlocked_count() -> int:
 func set_metric(metric_id: String, value: int) -> void:
 	if metric_id.is_empty():
 		return
+	if _temporary_persistence_sandbox_active():
+		return
 	var current := get_metric(metric_id)
 	if value == current:
 		return
@@ -66,6 +68,8 @@ func get_metric(metric_id: String) -> int:
 
 
 func record_heart_clear(aspect_id: String) -> void:
+	if _temporary_persistence_sandbox_active():
+		return
 	var normalized := aspect_id.to_lower()
 	if normalized not in ["wolf", "wraith", "ronin"]:
 		return
@@ -74,6 +78,8 @@ func record_heart_clear(aspect_id: String) -> void:
 
 
 func record_miniboss_defeat(miniboss_id: String) -> void:
+	if _temporary_persistence_sandbox_active():
+		return
 	if miniboss_id.is_empty():
 		return
 	var normalized := miniboss_id.to_lower()
@@ -97,7 +103,7 @@ func get_miniboss_defeat_counts() -> Dictionary:
 
 
 func evaluate() -> void:
-	if MetaProgress == null:
+	if MetaProgress == null or _temporary_persistence_sandbox_active():
 		return
 	var bindings := MetaProgress.get_heart_bindings_destroyed()
 	_unlock_if("first_return", MetaProgress.is_returning_blood_awakened())
@@ -135,6 +141,14 @@ func evaluate() -> void:
 	_unlock_if("records_all", bool(MetaProgress.get_progression_flag("required_records_complete", false)))
 	_unlock_if("miniboss_hunter", get_metric("unique_minibosses") >= 6)
 	_unlock_if("completion_100", get_metric("completion_percent") >= 100)
+
+
+func _temporary_persistence_sandbox_active() -> bool:
+	return (
+		typeof(MetaProgress) == TYPE_OBJECT
+		and MetaProgress.has_method("is_temporary_persistence_sandbox_active")
+		and bool(MetaProgress.call("is_temporary_persistence_sandbox_active"))
+	)
 
 
 func _unlock_if(achievement_id: String, condition: bool) -> void:
