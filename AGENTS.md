@@ -31,7 +31,7 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-28T04:30:00Z
+updated_utc: 2026-08-28T14:28:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -39,21 +39,27 @@ merged_cutoff:
   feature_head: 3a5347d309c4ca7923f6eccde13f077211e87a44
   merge_commit: 97267db2c3daa77e35f11013f795e2a2bffecb83
   validation: 6/6 PR-triggered workflows green; mergeable_state clean
-active_branch: null
+active_branch: agent/run-results-performance-summary
 active_pr: null
-covered_through_substantive_commit: null
+covered_through_substantive_commit: e18dddd5b4414b53d6cf638604b219a67eeb7c52
 known_good_checkpoint: 97267db2c3daa77e35f11013f795e2a2bffecb83
 current_objective: >-
-  Continue pre-playtest release QA without tuning gameplay. Next bounded slice exposes already-
-  tracked canonical run performance counters on the run-results overlay so the long integration
-  test returns both structured checkpoint logs and an immediate human-readable summary.
+  Finish the bounded pre-playtest run-results performance summary without changing gameplay.
+  RecordsRuntime now persists the existing run counters before teardown; the accessible results
+  overlay renders a localized Run performance section; the existing release-shell smoke verifies
+  the eight-key API shape and persisted player-visible values.
 next_action: >-
-  Create agent/run-results-performance-summary from updated main. Extend RecordsRuntime run-result
-  payload with existing RunData counters, render a localized/readable Run performance section,
-  extend the existing run-results smoke/release-shell validation, then open and autonomously merge
-  the PR when targeted and PR-triggered checks are green. Because the previous user turn was cut off
-  after substantial tool work, treat this next PR as the single CI-heavy cycle for its turn and
-  finalize after its safe checkpoint instead of beginning another implementation slice.
+  Validate feature head e18dddd5b4414b53d6cf638604b219a67eeb7c52 with commit-specific CI,
+  prioritizing Release Shell Check and Godot 4.7.2 Project Check. Fix only evidenced parser/runtime
+  defects. If green, open PR #124, verify PR-triggered validation and mergeability, merge autonomously,
+  then checkpoint main and finalize this turn instead of starting another implementation slice.
+current_batch:
+  - RecordsRuntime.get_current_run_performance_snapshot reads eight existing RunData counters only.
+  - End-of-run result payload persists that snapshot before run teardown.
+  - Run-results overlay adds Enemies defeated, Parries, Perfect parries, Damage taken, Combat rooms cleared, Blessings received, Treasures opened, and Items purchased.
+  - Accessible wrapper localizes the new section/labels through existing English-fallback localization.
+  - Existing RunResultsOverlaySmoke now uses the accessible wrapper and verifies API keys plus persisted synthetic values.
+  - Existing workflow PASS marker remains compatible; no new workflow added.
 recent_batches:
   - pr_121: queued achievement-unlock presenter.
   - pr_122: canonical non-blocking regional boss title cards.
