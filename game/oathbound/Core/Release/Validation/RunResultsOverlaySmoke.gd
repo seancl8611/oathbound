@@ -156,7 +156,7 @@ func _run_smoke() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[RunResultsOverlaySmoke] PASS - failed run summary | retained progress | final build | run performance | Strand return | Boat-owned postgame guidance")
+	print("[RunResultsOverlaySmoke] PASS - failed run summary | retained progress | final build | Strand return | Boat-owned postgame guidance | run performance")
 	get_tree().quit(0)
 
 
