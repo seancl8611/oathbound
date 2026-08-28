@@ -19,7 +19,7 @@ func _build_main_menu() -> void:
 	super._build_main_menu()
 	for node: Node in find_children("*", "Label", true, false):
 		if node is Label and (node as Label).text == "Release-shell implementation build":
-			(node as Label).text = LOCALIZATION.ui("front_end.build_label", "Release-shell implementation build")
+			(node as Label).text = LOCALIZATION.ui("front_end.build_label", "Development Build")
 	_apply_readability()
 
 
@@ -57,9 +57,10 @@ func _build_controls_menu() -> void:
 func _build_credits_menu() -> void:
 	super._build_credits_menu()
 	var fallback_body := "OATHBOUND\n\nBuilt with Godot Engine 4.7.2.\n\nContributor, contractor, music, sound, asset, font, localization, and third-party license entries are not guessed. Final release credits will list only identities and notices verified from project records and applicable licenses."
+	var release_body := "OATHBOUND\n\nBuilt with Godot Engine 4.7.2.\n\nCredits, licenses, and third-party notices are being finalized for release."
 	for node: Node in find_children("*", "Label", true, false):
 		if node is Label and (node as Label).text == fallback_body:
-			(node as Label).text = LOCALIZATION.ui("front_end.credits.body", fallback_body)
+			(node as Label).text = LOCALIZATION.ui("front_end.credits.body", release_body)
 	_apply_readability()
 
 
@@ -152,11 +153,11 @@ func _localized_subtitle(fallback: String) -> String:
 		"Choose one of three save slots. Permanent progress is isolated per slot.":
 			return LOCALIZATION.ui("front_end.slot_select.subtitle", fallback)
 		"Launch accessibility, audio, readability, and input settings.":
-			return LOCALIZATION.ui("front_end.settings.subtitle", fallback)
+			return LOCALIZATION.ui("front_end.settings.subtitle", "Audio, accessibility, readability, and input.")
 		"Select an action, then press a keyboard, mouse, or controller input. Escape cancels capture.":
 			return LOCALIZATION.ui("front_end.controls.subtitle", fallback)
 		"Verified release-credit surface":
-			return LOCALIZATION.ui("front_end.credits.subtitle", fallback)
+			return LOCALIZATION.ui("front_end.credits.subtitle", "Credits and acknowledgements")
 	if fallback.begins_with("Slot ") and fallback.contains(" contains persistent progress. This action cannot be undone."):
 		var parts: PackedStringArray = fallback.split(" ")
 		var slot := int(parts[1]) if parts.size() > 1 else 0

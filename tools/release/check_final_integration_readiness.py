@@ -12,6 +12,7 @@ UI = ROOT / "docs/ui_ux/TECHNIQUE_REWARDS.md"
 VFX = ROOT / "docs/art_production/TECHNIQUE_VFX.md"
 HEART = ROOT / "game/oathbound/Core/Endgame/HeartEncounterShell.gd"
 ENDGAME_SMOKE = ROOT / "game/oathbound/Core/Endgame/Validation/EndgameCampaignContractSmoke.gd"
+FRONT_END = ROOT / "game/oathbound/TitleScreen/OathboundFrontEnd.gd"
 ATTRIBUTION = ROOT / "docs/external/RELEASE_ATTRIBUTION_AUDIT.md"
 MILESTONE_7 = ROOT / "docs/art_production/milestones/MILESTONE_07.md"
 
@@ -39,6 +40,7 @@ def main() -> int:
     vfx = read(VFX)
     heart = read(HEART)
     endgame_smoke = read(ENDGAME_SMOKE)
+    front_end = read(FRONT_END)
     attribution = read(ATTRIBUTION)
     milestone_7 = read(MILESTONE_7)
 
@@ -72,6 +74,13 @@ def main() -> int:
     require(endgame_smoke, "Normal Heart shell accepted the contract-only completion shortcut", "EndgameCampaignContractSmoke")
     require(endgame_smoke, 'set_meta("contract_test", true)', "EndgameCampaignContractSmoke")
 
+    # The release wrapper may still recognize base-menu implementation sentinels, but
+    # those internal strings must be replaced before reaching the player.
+    require(front_end, 'LOCALIZATION.ui("front_end.build_label", "Development Build")', "OathboundFrontEnd")
+    require(front_end, 'LOCALIZATION.ui("front_end.settings.subtitle", "Audio, accessibility, readability, and input.")', "OathboundFrontEnd")
+    require(front_end, 'LOCALIZATION.ui("front_end.credits.subtitle", "Credits and acknowledgements")', "OathboundFrontEnd")
+    require(front_end, "Credits, licenses, and third-party notices are being finalized for release.", "OathboundFrontEnd")
+
     # Final art milestone says major placeholder art must be gone, but external asset
     # provenance is not allowed to disappear from the release checklist just to make a
     # readiness check look green. Known unresolved evidence stays explicit until solved.
@@ -92,7 +101,7 @@ def main() -> int:
 
     print(
         "[FinalIntegrationReadiness] PASS - slotless Technique production aligned | "
-        "Heart completion test-only | attribution blockers explicit"
+        "Heart completion test-only | player-facing front end clean | attribution blockers explicit"
     )
     return 0
 
