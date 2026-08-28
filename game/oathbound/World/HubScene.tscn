@@ -1,15 +1,14 @@
-[gd_scene load_steps=14 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://World/Hub.gd" id="1_qm1wv"]
 [ext_resource type="Texture2D" uid="uid://brh8sgxga6n5m" path="res://Textures/hub.png" id="2_uc1vc"]
 [ext_resource type="PackedScene" path="res://Player/player.tscn" id="2_wdemo"]
-[ext_resource type="Script" path="res://World/TheWell.gd" id="4_qky78"]
+[ext_resource type="Script" path="res://World/Boat.gd" id="4_qky78"]
 [ext_resource type="Script" path="res://World/ForgeBench.gd" id="5_4dxfo"]
 [ext_resource type="Script" path="res://World/CodexBoard.gd" id="6_wu1q6"]
-[ext_resource type="Script" path="res://World/QuestAltar.gd" id="7_rx06b"]
 [ext_resource type="Script" path="res://World/Bloodwell.gd" id="8_wklb0"]
 [ext_resource type="Script" path="res://World/MerchantStall.gd" id="9_bbnwo"]
-[ext_resource type="Script" path="res://World/PracticeGrounds.gd" id="10_2hmrb"]
+[ext_resource type="Script" path="res://World/OathboundBloodCavern.gd" id="10_2hmrb"]
 [ext_resource type="Script" path="res://World/BloodMirror.gd" id="11_blood_mirror"]
 [ext_resource type="Script" path="res://World/NarrativeNPC.gd" id="12_narrative"]
 
@@ -25,20 +24,20 @@ texture = ExtResource("2_uc1vc")
 
 [node name="Player" parent="." instance=ExtResource("2_wdemo")]
 
-[node name="TheWell" type="Area2D" parent="."]
+[node name="Boat" type="Area2D" parent="."]
 position = Vector2(76, 0)
 script = ExtResource("4_qky78")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TheWell"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boat"]
 position = Vector2(9.5, -1)
 shape = SubResource("RectangleShape2D_qekqq")
 
-[node name="InteractPopup" type="Label" parent="TheWell"]
+[node name="InteractPopup" type="Label" parent="Boat"]
 offset_left = -75.0
 offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
-text = "The Well [E]"
+text = "Boat [E]"
 horizontal_alignment = 1
 
 [node name="ForgeBench" type="Area2D" parent="."]
@@ -73,24 +72,6 @@ offset_bottom = -39.0
 text = "Discovery Board [E]"
 horizontal_alignment = 1
 
-[node name="QuestAltar" type="Area2D" parent="."]
-position = Vector2(46, 91)
-script = ExtResource("7_rx06b")
-interact_distance = null
-popup_label_text = null
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestAltar"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_qekqq")
-
-[node name="InteractPopup" type="Label" parent="QuestAltar"]
-offset_left = -75.0
-offset_top = -65.0
-offset_right = 76.0
-offset_bottom = -39.0
-text = "Quest [E]"
-horizontal_alignment = 1
-
 [node name="Bloodwell" type="Area2D" parent="."]
 position = Vector2(-46, 80)
 script = ExtResource("8_wklb0")
@@ -105,22 +86,6 @@ offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
 text = "Bloodwell [E]"
-horizontal_alignment = 1
-
-[node name="BloodMirror" type="Area2D" parent="."]
-position = Vector2(-132, 86)
-script = ExtResource("11_blood_mirror")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodMirror"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_qekqq")
-
-[node name="InteractPopup" type="Label" parent="BloodMirror"]
-offset_left = -82.0
-offset_top = -65.0
-offset_right = 83.0
-offset_bottom = -39.0
-text = "Blood Mirror [E]"
 horizontal_alignment = 1
 
 [node name="MerchantStall" type="Area2D" parent="."]
@@ -139,20 +104,35 @@ offset_bottom = -39.0
 text = "Merchant [E]"
 horizontal_alignment = 1
 
-[node name="PracticeGrounds" type="Area2D" parent="."]
+[node name="BloodCavern" type="Area2D" parent="."]
 position = Vector2(1, -216)
 script = ExtResource("10_2hmrb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PracticeGrounds"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodCavern"]
 position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_qekqq")
 
-[node name="InteractPopup" type="Label" parent="PracticeGrounds"]
+[node name="InteractPopup" type="Label" parent="BloodCavern"]
 offset_left = -75.0
 offset_top = -65.0
 offset_right = 76.0
 offset_bottom = -39.0
-text = "Practice Grounds [E]"
+text = "Blood Cavern [E]"
+horizontal_alignment = 1
+
+[node name="BloodMirror" type="Area2D" parent="BloodCavern"]
+position = Vector2(0, 72)
+script = ExtResource("11_blood_mirror")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BloodCavern/BloodMirror"]
+shape = SubResource("RectangleShape2D_qekqq")
+
+[node name="InteractPopup" type="Label" parent="BloodCavern/BloodMirror"]
+offset_left = -82.0
+offset_top = -65.0
+offset_right = 83.0
+offset_bottom = -39.0
+text = "Blood Mirror"
 horizontal_alignment = 1
 
 [node name="KeeperNPC" type="Area2D" parent="."]
@@ -259,11 +239,9 @@ horizontal_alignment = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[connection signal="body_entered" from="TheWell" to="TheWell" method="_on_body_entered"]
+[connection signal="body_entered" from="Boat" to="Boat" method="_on_body_entered"]
 [connection signal="body_entered" from="ForgeBench" to="ForgeBench" method="_on_body_entered"]
 [connection signal="body_entered" from="CodexBoard" to="CodexBoard" method="_on_body_entered"]
-[connection signal="body_entered" from="QuestAltar" to="QuestAltar" method="_on_body_entered"]
 [connection signal="body_entered" from="Bloodwell" to="Bloodwell" method="_on_body_entered"]
-[connection signal="body_entered" from="BloodMirror" to="BloodMirror" method="_on_body_entered"]
 [connection signal="body_entered" from="MerchantStall" to="MerchantStall" method="_on_body_entered"]
-[connection signal="body_entered" from="PracticeGrounds" to="PracticeGrounds" method="_on_body_entered"]
+[connection signal="body_entered" from="BloodCavern" to="BloodCavern" method="_on_body_entered"]

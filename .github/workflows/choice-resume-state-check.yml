@@ -1,0 +1,65 @@
+name: Choice Resume State Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
+      - "game/oathbound/Core/Release/Validation/ChoiceResumePlayerStateSmoke.*"
+      - "game/oathbound/autoload/OathboundRegionGameFlow.gd"
+      - ".github/workflows/choice-resume-state-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
+      - "game/oathbound/Core/Release/Validation/ChoiceResumePlayerStateSmoke.*"
+      - "game/oathbound/autoload/OathboundRegionGameFlow.gd"
+      - ".github/workflows/choice-resume-state-check.yml"
+  workflow_dispatch:
+
+jobs:
+  choice-resume-state:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify choice-boundary resume state
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --verbose --path game/oathbound res://Core/Release/Validation/ChoiceResumePlayerStateSmoke.tscn 2>&1 | tee choice-resume-state.log
+          grep -F "[ChoiceResumePlayerStateSmoke] PASS - choice boundary preserves snapshot | chamber ownership applies once | Health/Posture/Spirit restored" choice-resume-state.log
+          if grep -F "SCRIPT ERROR:" choice-resume-state.log; then
+            echo "FAIL: choice resume smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" choice-resume-state.log; then
+            echo "FAIL: choice resume smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "ObjectDB instance was leaked at exit" choice-resume-state.log; then
+            echo "FAIL: choice resume smoke leaked ObjectDB instances."
+            exit 1
+          fi
+
+      - name: Upload choice resume log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: choice-resume-state-${{ github.run_id }}
+          path: choice-resume-state.log
+          if-no-files-found: warn
+          retention-days: 7

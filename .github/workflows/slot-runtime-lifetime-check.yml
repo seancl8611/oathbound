@@ -1,0 +1,77 @@
+name: Slot Runtime Lifetime Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Release/OathboundSaveSlotManager.gd"
+      - "game/oathbound/Core/Release/OathboundSlotRuntimeReset.gd"
+      - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
+      - "game/oathbound/Core/Release/OathboundReleaseRunData.gd"
+      - "game/oathbound/Core/Release/OathboundRecordsRuntime.gd"
+      - "game/oathbound/Core/Release/Validation/SlotRuntimeLifetimeSmoke.gd"
+      - "game/oathbound/Core/Release/Validation/SlotRuntimeLifetimeSmoke.tscn"
+      - "game/oathbound/Core/Aspects/FirstAttemptAspectRuntime.gd"
+      - "game/oathbound/Core/Corruption/OathboundCorruptionRuntime.gd"
+      - "game/oathbound/Utility/RouteGenerator.gd"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/slot-runtime-lifetime-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Release/OathboundSaveSlotManager.gd"
+      - "game/oathbound/Core/Release/OathboundSlotRuntimeReset.gd"
+      - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
+      - "game/oathbound/Core/Release/OathboundReleaseRunData.gd"
+      - "game/oathbound/Core/Release/OathboundRecordsRuntime.gd"
+      - "game/oathbound/Core/Release/Validation/SlotRuntimeLifetimeSmoke.gd"
+      - "game/oathbound/Core/Release/Validation/SlotRuntimeLifetimeSmoke.tscn"
+      - "game/oathbound/Core/Aspects/FirstAttemptAspectRuntime.gd"
+      - "game/oathbound/Core/Corruption/OathboundCorruptionRuntime.gd"
+      - "game/oathbound/Utility/RouteGenerator.gd"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/slot-runtime-lifetime-check.yml"
+  workflow_dispatch:
+
+jobs:
+  slot-runtime-lifetime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify save-slot runtime lifetime isolation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/SlotRuntimeLifetimeSmoke.tscn 2>&1 | tee slot-runtime-lifetime.log
+          grep -F "[SlotRuntimeLifetimeSmoke] PASS - Gold/Techniques | Aspect/Blood | Corruption | route/resume | run timer isolated across slots" slot-runtime-lifetime.log
+          if grep -F "SCRIPT ERROR:" slot-runtime-lifetime.log; then
+            echo "FAIL: slot runtime lifetime smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" slot-runtime-lifetime.log; then
+            echo "FAIL: slot runtime lifetime smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload slot runtime lifetime log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: slot-runtime-lifetime-${{ github.run_id }}
+          path: slot-runtime-lifetime.log
+          if-no-files-found: warn
+          retention-days: 7

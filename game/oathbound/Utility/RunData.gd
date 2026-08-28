@@ -17,7 +17,7 @@ var gold: int = 0
 
 # Run objective is chosen before departure. Before Story Complete the campaign owns
 # the endpoint automatically. Postgame explicitly chooses Standard Expedition or
-# Heart Suppression at The Well before RunScene resets the rest of run state.
+# Heart Suppression at the Boat before RunScene resets the rest of run state.
 var requested_run_goal: String = ""
 var run_goal: String = RUN_GOAL_CAMPAIGN
 var run_completion_kind: String = ""

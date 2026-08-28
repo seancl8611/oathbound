@@ -7,6 +7,8 @@ extends CanvasLayer
 
 signal choice_made(choice: Dictionary)
 
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
+const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 const CARD_WIDTH := 190.0
 const CARD_HEIGHT := 205.0
 
@@ -57,6 +59,7 @@ func _ready() -> void:
 	add_to_group("upgrade_ui")
 	_build_ui()
 	visible = false
+	call_deferred("_apply_readability")
 
 
 func _build_ui() -> void:
@@ -76,13 +79,13 @@ func _build_ui() -> void:
 	center.add_child(_root_container)
 
 	_title_label = Label.new()
-	_title_label.text = "Choose a Technique"
+	_title_label.text = LOCALIZATION.ui("technique.choose", "Choose a Technique")
 	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_title_label.add_theme_font_size_override("font_size", 20)
 	_root_container.add_child(_title_label)
 
 	_subtitle_label = Label.new()
-	_subtitle_label.text = "Techniques are run-only and have no inventory or action-slot cap."
+	_subtitle_label.text = LOCALIZATION.ui("technique.no_slot_cap", "Techniques are run-only and have no inventory or action-slot cap.")
 	_subtitle_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_subtitle_label.add_theme_font_size_override("font_size", 10)
 	_root_container.add_child(_subtitle_label)
@@ -126,6 +129,7 @@ func _open(list: Array) -> void:
 	_focused_index = 0
 	_refresh_cards()
 	_refresh_reroll()
+	_apply_readability()
 	visible = true
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -142,25 +146,33 @@ func _refresh_cards() -> void:
 			continue
 		card.visible = true
 		var data: Dictionary = options[index]
+		var technique_id: String = str(data.get("id", ""))
 		var family: String = str(data.get("family", "neutral"))
-		var family_label: String = str(FAMILY_NAMES.get(family, family.to_upper()))
+		var family_fallback: String = str(FAMILY_NAMES.get(family, family.to_upper()))
+		var family_label: String = LOCALIZATION.ui("technique.family.%s" % family, family_fallback)
 		if family == "cross":
 			var names: Array[String] = []
 			var families_value: Variant = data.get("families", [])
 			if families_value is Array:
 				for family_name: Variant in families_value:
-					names.append(str(family_name).capitalize())
+					var family_name_id: String = str(family_name)
+					var translated_family: String = LOCALIZATION.ui("technique.family.%s" % family_name_id, family_name_id.capitalize())
+					names.append(translated_family)
 			if not names.is_empty():
 				family_label = " + ".join(names).to_upper()
 
 		var rarity: String = str(data.get("rarity", "common")).to_lower()
-		var rarity_label: String = rarity.capitalize()
+		var rarity_label: String = LOCALIZATION.ui("rarity.%s" % rarity, rarity.capitalize())
 		var kind_label: String = _kind_label(data)
+		var fallback_name: String = str(data.get("displayname", "Technique"))
+		var fallback_details: String = str(data.get("details", ""))
+		var technique_name: String = LOCALIZATION.catalog_name("technique", technique_id, fallback_name) if not technique_id.is_empty() else fallback_name
+		var technique_details: String = LOCALIZATION.catalog_details("technique", technique_id, fallback_details) if not technique_id.is_empty() else fallback_details
 		card.text = "%s\n%s\n\n%s\n\n%s\n%s" % [
 			family_label,
 			kind_label,
-			str(data.get("displayname", "Technique")),
-			str(data.get("details", "")),
+			technique_name,
+			technique_details,
 			rarity_label,
 		]
 
@@ -170,6 +182,8 @@ func _refresh_cards() -> void:
 		card.add_theme_color_override("font_focus_color", rarity_color)
 		card.add_theme_color_override("font_hover_color", rarity_color)
 
+	_apply_readability()
+
 
 func _kind_label(data: Dictionary) -> String:
 	var kind: String = str(data.get("kind", ""))
@@ -177,24 +191,25 @@ func _kind_label(data: Dictionary) -> String:
 		"action":
 			var action: String = str(data.get("action", ""))
 			match action:
-				"basic": return "BASIC ATTACK"
-				"held": return "HELD ATTACK"
-				"dash": return "DASH ATTACK"
-				"counter": return "PARRY / COUNTER"
-				"deathblow": return "DEATHBLOW"
-			return "ACTION TECHNIQUE"
-		"support": return "SUPPORTING TECHNIQUE"
-		"cross": return "CROSS-FAMILY TECHNIQUE"
-		"legendary": return "LEGENDARY TECHNIQUE"
-		"refinement": return "REFINEMENT"
-		_: return "TECHNIQUE"
+				"basic": return LOCALIZATION.ui("technique.kind.basic", "BASIC ATTACK")
+				"held": return LOCALIZATION.ui("technique.kind.held", "HELD ATTACK")
+				"dash": return LOCALIZATION.ui("technique.kind.dash", "DASH ATTACK")
+				"counter": return LOCALIZATION.ui("technique.kind.counter", "PARRY / COUNTER")
+				"deathblow": return LOCALIZATION.ui("technique.kind.deathblow", "DEATHBLOW")
+			return LOCALIZATION.ui("technique.kind.action", "ACTION TECHNIQUE")
+		"support": return LOCALIZATION.ui("technique.kind.support", "SUPPORTING TECHNIQUE")
+		"cross": return LOCALIZATION.ui("technique.kind.cross", "CROSS-FAMILY TECHNIQUE")
+		"legendary": return LOCALIZATION.ui("technique.kind.legendary", "LEGENDARY TECHNIQUE")
+		"refinement": return LOCALIZATION.ui("technique.kind.refinement", "REFINEMENT")
+		_: return LOCALIZATION.ui("technique.kind.generic", "TECHNIQUE")
 
 
 func _refresh_reroll() -> void:
 	var count: int = 0
 	if RunData != null:
 		count = int(RunData.technique_rerolls)
-	_reroll_button.text = "Reroll Entire Screen (%d)" % count
+	var reroll_template: String = LOCALIZATION.ui("technique.reroll", "Reroll Entire Screen (%d)")
+	_reroll_button.text = reroll_template % count
 	_reroll_button.disabled = _source.is_empty() or count <= 0
 	_reroll_button.visible = not _source.is_empty()
 
@@ -244,3 +259,8 @@ func _select_choice(index: int) -> void:
 	visible = false
 	get_tree().paused = false
 	choice_made.emit(choice)
+
+
+func _apply_readability() -> void:
+	if _root_container != null:
+		READABILITY_STYLER.apply(_root_container)

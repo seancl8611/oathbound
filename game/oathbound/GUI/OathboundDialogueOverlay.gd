@@ -2,13 +2,19 @@ extends Control
 
 signal sequence_finished(sequence_id: String)
 
+const BASE_DIALOGUE_CHARS_PER_SECOND: float = 42.0
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
+
 var _entry: Dictionary = {}
 var _lines: Array = []
-var _line_index := 0
+var _line_index: int = 0
 var _speaker_label: Label
 var _body_label: Label
 var _advance_label: Label
-var _previous_paused := false
+var _previous_paused: bool = false
+var _full_line: String = ""
+var _reveal_progress: float = 0.0
+var _revealing: bool = false
 
 
 func _ready() -> void:
@@ -16,6 +22,16 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_build_ui()
+
+
+func _process(delta: float) -> void:
+	if not _revealing or _body_label == null:
+		return
+	_reveal_progress += maxf(0.0, delta) * _dialogue_chars_per_second()
+	var revealed: int = mini(_full_line.length(), int(floor(_reveal_progress)))
+	_body_label.visible_characters = revealed
+	if revealed >= _full_line.length():
+		_finish_reveal()
 
 
 func present(entry: Dictionary) -> void:
@@ -39,6 +55,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _advance() -> void:
+	# A first confirm while text is revealing completes the current line. A second
+	# confirm advances, preserving the normal readable dialogue cadence at any speed.
+	if _revealing:
+		_finish_reveal()
+		return
 	_line_index += 1
 	if _line_index >= _lines.size():
 		_finish()
@@ -49,19 +70,57 @@ func _advance() -> void:
 func _show_current_line() -> void:
 	if _body_label == null or _speaker_label == null:
 		return
-	var speaker := str(_entry.get("speaker", ""))
+	var speaker: String = str(_entry.get("speaker", ""))
 	if bool(_entry.get("notice", false)):
-		speaker = "ORDER NOTICE"
-	if speaker.is_empty() and _entry.has("npc"):
+		speaker = LOCALIZATION.ui("order_notice", "ORDER NOTICE")
+	elif speaker.is_empty() and _entry.has("npc"):
 		speaker = _npc_display_name(str(_entry.get("npc", "")))
-	_speaker_label.text = tr(str(_entry.get("speaker_loc_key", speaker))) if not speaker.is_empty() else ""
-	_body_label.text = str(_lines[_line_index])
-	_advance_label.text = "Continue  [%d/%d]" % [_line_index + 1, _lines.size()]
+	if not bool(_entry.get("notice", false)) and not speaker.is_empty():
+		speaker = LOCALIZATION.narrative_speaker(_entry, speaker)
+	_speaker_label.text = speaker
+
+	var fallback_line: String = str(_lines[_line_index])
+	_full_line = LOCALIZATION.narrative_line(_entry, _line_index, fallback_line)
+	_body_label.text = _full_line
+	_begin_reveal()
+	var continue_label: String = LOCALIZATION.ui("dialogue.continue", "Continue")
+	_advance_label.text = "%s  [%d/%d]" % [continue_label, _line_index + 1, _lines.size()]
+
+
+func _begin_reveal() -> void:
+	_reveal_progress = 0.0
+	if _body_label == null:
+		_revealing = false
+		return
+	if _full_line.is_empty() or _uses_instant_text():
+		_finish_reveal()
+		return
+	_revealing = true
+	_body_label.visible_characters = 0
+
+
+func _finish_reveal() -> void:
+	_revealing = false
+	_reveal_progress = float(_full_line.length())
+	if _body_label != null:
+		_body_label.visible_characters = -1
+
+
+func _dialogue_chars_per_second() -> float:
+	var speed_scale: float = 1.0
+	if typeof(SettingsManager) == TYPE_OBJECT and SettingsManager.has_method("get_dialogue_text_speed"):
+		speed_scale = clampf(float(SettingsManager.get_dialogue_text_speed()), 0.50, 2.00)
+	return BASE_DIALOGUE_CHARS_PER_SECOND * speed_scale
+
+
+func _uses_instant_text() -> bool:
+	return typeof(SettingsManager) == TYPE_OBJECT and SettingsManager.has_method("uses_instant_text") and bool(SettingsManager.uses_instant_text())
 
 
 func _finish() -> void:
 	if not is_inside_tree():
 		return
+	_revealing = false
 	get_tree().paused = _previous_paused
 	sequence_finished.emit(str(_entry.get("id", "")))
 	queue_free()

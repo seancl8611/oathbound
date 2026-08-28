@@ -4,7 +4,7 @@ title: Run Results and Strand Return
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-08-25
 topics:
   - run-results
   - first-return
@@ -19,6 +19,7 @@ related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-PROGRESSION
   - GAMEPLAY-ITEMS-REWARDS
+  - GAMEPLAY-TECHNIQUES
   - NARRATIVE-DELIVERY
   - CONTENT-STRAND-BLOODWELL
   - CONTENT-AREA3-TRUE-FINAL-HEART
@@ -83,10 +84,11 @@ Show:
 - Relic mastery / discoveries / Technique-pool unlocks where applicable,
 - other permanent rewards/unlocks,
 - final selected Blood Aspect and highest Tier reached,
-- final five slotted Techniques,
-- slotless Techniques/refinements in a readable recap,
+- complete final run Technique collection in a readable recap, including Action Techniques grouped by trigger where useful plus Supporting, Cross-family, Legendary, and refinement entries,
 - equipped Prosthetic and Relic,
 - clear indication that Techniques, refinements, Corruption, Tier, Gold, temporary capacity, and other run-only state were lost.
+
+The final Technique recap is **slotless**. The five major combat actions are trigger classifications, not equipment positions, and multiple owned Action Techniques may be recorded under the same trigger.
 
 There is no generic Boss Emblem reward line.
 
@@ -174,6 +176,6 @@ The canonical Heart ending does not remove Returning Blood. Postgame deaths cont
 - Binding/story completion is saved before the player can leave the sequence.
 - Story Complete and Heart-suppression records persist independently of repeat-run state.
 - Run-only and persistent information must be visually separated.
-- Final Technique build may be recorded for run history only if clearly non-equipped/non-recoverable.
+- Final Technique build may be recorded for run history only if clearly non-equipped/non-recoverable and must preserve slotless ownership semantics.
 - First return, failed run, Binding return, first Heart clear, and repeat Heart-suppression clear require distinct result states.
 - The exceptional pre-awakening Shogun/Heart route records no destroyed Binding.

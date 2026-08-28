@@ -4,7 +4,7 @@ title: The Strand
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-08-24
 topics:
   - strand
   - hub
@@ -46,13 +46,11 @@ Current launch scope uses three permanent upgrade stations:
 
 The Blood Cavern is the training/trial space containing the Blood Mirror. The Discovery Board, Merchant Stall, and Boat remain services rather than separate permanent upgrade trees.
 
-The Blood Mirror begins locked; the exact campaign/onboarding unlock event remains deferred.
+The outer Blood Cavern training space is available before the Mirror awakens. The Blood Mirror unlocks after the first Keeper defeat; deeper permanent Aspect nodes continue to follow the approved boss-gated campaign cadence.
 
 ## Core fantasy
 
 A practical Order threshold station built around an ancient containment anchor on a cold shoreline: black sand, salt, lantern warmth, worn wood, old ritual function, and quiet dread.
-
-The Strand is stable enough to recover in, but it exists only because generations of the Order have maintained the barrier and prepared for the next Blood Moon crossing. Sacred threshold structures should feel older and more permanent than the working outpost built around them.
 
 ## Barrier role
 

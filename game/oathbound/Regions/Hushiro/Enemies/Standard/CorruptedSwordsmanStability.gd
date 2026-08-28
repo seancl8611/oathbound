@@ -38,7 +38,43 @@ func _ready() -> void:
 	orbit_speed = 24.0
 	watch_orbit_speed = 30.0
 	super._ready()
+	_arm_legacy_timer_cleanup()
 	print("[CorruptedSwordsman] v2.1 - active controlled Hushiro duel cadence")
+
+
+func _arm_legacy_timer_cleanup() -> void:
+	# The imported legacy controller exposes `attack_timer` for compatibility, but
+	# constructs it with Timer.new() and never parents it. Preserve that surface for
+	# the Swordsman's active lifetime, then explicitly release the orphan when this
+	# enemy leaves the tree so room transitions and process shutdown cannot leak it.
+	if not is_instance_valid(attack_timer):
+		return
+	if attack_timer.get_parent() != null:
+		return
+	if not tree_exiting.is_connected(_release_legacy_attack_timer):
+		tree_exiting.connect(_release_legacy_attack_timer, CONNECT_ONE_SHOT)
+
+
+func _release_legacy_attack_timer() -> void:
+	if is_instance_valid(attack_timer) and attack_timer.get_parent() == null:
+		attack_timer.free()
+	attack_timer = null
+
+
+func _current_attack_requires_perilous_warning(requested_unblockable: bool = false) -> bool:
+	var show_perilous_warning: bool = requested_unblockable
+	if is_instance_valid(_current_swipe_area):
+		show_perilous_warning = show_perilous_warning or bool(_current_swipe_area.get_meta("perilous", false))
+	return show_perilous_warning
+
+
+func _show_parry_indicator(duration: float, is_unblockable: bool = false) -> void:
+	# The inherited Quick Thrust windup historically passed `false` here even though
+	# the current Hushiro rules layer stamps that exact hitbox as perilous/blockable=false.
+	# Drive the warning from the authored live hitbox metadata so the visual language
+	# cannot contradict the contact resolver. Follow-up slashes are stamped non-perilous
+	# and therefore keep the normal indicator even though they occur inside a thrust combo.
+	super._show_parry_indicator(duration, _current_attack_requires_perilous_warning(is_unblockable))
 
 
 func is_deathblow_ready() -> bool:

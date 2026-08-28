@@ -1,0 +1,62 @@
+name: Run Region Handoff Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  run-region-handoff:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee run-handoff-import.log
+          godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee run-handoff-editor.log
+          if grep -F "SCRIPT ERROR:" run-handoff-import.log run-handoff-editor.log; then
+            echo "FAIL: run handoff import/compile emitted a GDScript error."
+            exit 1
+          fi
+
+      - name: Verify Region 1 to 2 to 3 run handoff
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/RunRegionHandoffSmoke.tscn 2>&1 | tee run-region-handoff.log
+          grep -F "[RunRegionHandoffSmoke] PASS - release GameFlow Region 1->2->3 authority | RunData/build continuity | safe Relic boundaries" run-region-handoff.log
+          if grep -F "SCRIPT ERROR:" run-region-handoff.log; then
+            echo "FAIL: run region handoff emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" run-region-handoff.log; then
+            echo "FAIL: run region handoff emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload run handoff validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-region-handoff-${{ github.run_id }}
+          path: |
+            run-handoff-import.log
+            run-handoff-editor.log
+            run-region-handoff.log
+          if-no-files-found: warn
+          retention-days: 7

@@ -9,6 +9,13 @@ const Catalog = preload("res://Core/Presentation/OathboundPresentationCatalog.gd
 const UNLOCK_PREFIX := "achievement_unlocked/"
 const METRIC_PREFIX := "achievement_metric/"
 const HEART_ASPECT_PREFIX := "heart_clear_aspect/"
+const MINIBOSS_COUNTS_FLAG := "records/miniboss_defeat_counts"
+
+# Last Oath remains reserved behind the not-yet-authored second Blood Cavern challenge.
+# Launch achievements therefore follow the same currently obtainable Relic pool used by
+# RecordsRuntime completion: nine Relics and two mastery ranks for each.
+const REQUIRED_OBTAINABLE_RELIC_COUNT := 9
+const REQUIRED_OBTAINABLE_RELIC_MASTERY_RANKS := 18
 
 
 func _ready() -> void:
@@ -41,6 +48,8 @@ func get_unlocked_count() -> int:
 func set_metric(metric_id: String, value: int) -> void:
 	if metric_id.is_empty():
 		return
+	if _temporary_persistence_sandbox_active():
+		return
 	var current := get_metric(metric_id)
 	if value == current:
 		return
@@ -59,6 +68,8 @@ func get_metric(metric_id: String) -> int:
 
 
 func record_heart_clear(aspect_id: String) -> void:
+	if _temporary_persistence_sandbox_active():
+		return
 	var normalized := aspect_id.to_lower()
 	if normalized not in ["wolf", "wraith", "ronin"]:
 		return
@@ -67,15 +78,32 @@ func record_heart_clear(aspect_id: String) -> void:
 
 
 func record_miniboss_defeat(miniboss_id: String) -> void:
+	if _temporary_persistence_sandbox_active():
+		return
 	if miniboss_id.is_empty():
 		return
-	MetaProgress.set_progression_flag("miniboss_defeated/" + miniboss_id, true)
-	increment_metric("unique_minibosses", 1 if not bool(MetaProgress.get_progression_flag("miniboss_metric_seen/" + miniboss_id, false)) else 0)
-	MetaProgress.set_progression_flag("miniboss_metric_seen/" + miniboss_id, true)
+	var normalized := miniboss_id.to_lower()
+	var counts_value: Variant = MetaProgress.get_progression_flag(MINIBOSS_COUNTS_FLAG, {})
+	var counts: Dictionary = (counts_value as Dictionary).duplicate(true) if counts_value is Dictionary else {}
+	counts[normalized] = maxi(0, int(counts.get(normalized, 0))) + 1
+	MetaProgress.set_progression_flag(MINIBOSS_COUNTS_FLAG, counts)
+	increment_metric("miniboss_defeats", 1)
+
+	var seen_flag := "miniboss_metric_seen/" + normalized
+	var first_defeat := not bool(MetaProgress.get_progression_flag(seen_flag, false))
+	MetaProgress.set_progression_flag("miniboss_defeated/" + normalized, true)
+	if first_defeat:
+		increment_metric("unique_minibosses", 1)
+		MetaProgress.set_progression_flag(seen_flag, true)
+
+
+func get_miniboss_defeat_counts() -> Dictionary:
+	var value: Variant = MetaProgress.get_progression_flag(MINIBOSS_COUNTS_FLAG, {})
+	return (value as Dictionary).duplicate(true) if value is Dictionary else {}
 
 
 func evaluate() -> void:
-	if MetaProgress == null:
+	if MetaProgress == null or _temporary_persistence_sandbox_active():
 		return
 	var bindings := MetaProgress.get_heart_bindings_destroyed()
 	_unlock_if("first_return", MetaProgress.is_returning_blood_awakened())
@@ -103,9 +131,9 @@ func evaluate() -> void:
 	_unlock_if("mirror_all", get_metric("mirror_nodes") >= 9)
 	_unlock_if("prosthetics_all", get_metric("prosthetics") >= 8)
 	_unlock_if("prosthetic_upgrades_all", get_metric("prosthetic_upgrades") >= 19)
-	_unlock_if("relics_all", get_metric("relics") >= 10)
+	_unlock_if("relics_all", get_metric("relics") >= REQUIRED_OBTAINABLE_RELIC_COUNT)
 	_unlock_if("relic_mastery_first", get_metric("relic_masteries") >= 1)
-	_unlock_if("relic_mastery_all", get_metric("relic_masteries") >= 20)
+	_unlock_if("relic_mastery_all", get_metric("relic_masteries") >= REQUIRED_OBTAINABLE_RELIC_MASTERY_RANKS)
 	_unlock_if("techniques_ten", get_metric("technique_records") >= 10)
 	_unlock_if("techniques_all", get_metric("technique_records") >= 60)
 	_unlock_if("trial_first", get_metric("trials") >= 1)
@@ -113,6 +141,14 @@ func evaluate() -> void:
 	_unlock_if("records_all", bool(MetaProgress.get_progression_flag("required_records_complete", false)))
 	_unlock_if("miniboss_hunter", get_metric("unique_minibosses") >= 6)
 	_unlock_if("completion_100", get_metric("completion_percent") >= 100)
+
+
+func _temporary_persistence_sandbox_active() -> bool:
+	return (
+		typeof(MetaProgress) == TYPE_OBJECT
+		and MetaProgress.has_method("is_temporary_persistence_sandbox_active")
+		and bool(MetaProgress.call("is_temporary_persistence_sandbox_active"))
+	)
 
 
 func _unlock_if(achievement_id: String, condition: bool) -> void:

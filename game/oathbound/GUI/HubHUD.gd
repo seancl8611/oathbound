@@ -1,21 +1,20 @@
 extends CanvasLayer
 
 ## Strand-only persistent progression display.
-## Gold is run-only and is not a Strand currency. Mist, Scrolls, and the three
-## regional boss materials are read directly from MetaProgress.
+## Gold is run-only and is not a Strand currency. The always-visible Strand wallet is
+## intentionally limited to Mist + Scrolls; regional boss materials stay contextual.
+
+const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
+const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 
 const COL_BG := Color(0.06, 0.06, 0.09, 0.85)
 const COL_BORDER := Color(0.12, 0.12, 0.18, 1.0)
 const COL_MIST := Color(0.66, 0.48, 0.87, 1.0)
 const COL_SCROLL := Color(0.87, 0.78, 0.55, 1.0)
-const COL_MATERIAL := Color(0.78, 0.62, 0.36, 1.0)
 
 var _root: Control
 var _mist_label: Label
 var _scroll_label: Label
-var _keeper_label: Label
-var _twin_label: Label
-var _shogun_label: Label
 
 
 func _ready() -> void:
@@ -26,6 +25,7 @@ func _ready() -> void:
 	if MetaProgress != null and MetaProgress.has_signal("persistent_resources_changed"):
 		MetaProgress.persistent_resources_changed.connect(_refresh_all)
 	_refresh_all()
+	call_deferred("_apply_readability")
 
 
 func _build_ui() -> void:
@@ -41,11 +41,8 @@ func _build_ui() -> void:
 	panel.add_theme_constant_override("separation", 2)
 	_root.add_child(panel)
 
-	_mist_label = _make_resource_row(panel, "Mist", COL_MIST)
-	_scroll_label = _make_resource_row(panel, "Scrolls", COL_SCROLL)
-	_keeper_label = _make_resource_row(panel, "Keeper Material", COL_MATERIAL)
-	_twin_label = _make_resource_row(panel, "Twin Maws Material", COL_MATERIAL)
-	_shogun_label = _make_resource_row(panel, "Shogun Material", COL_MATERIAL)
+	_mist_label = _make_resource_row(panel, LOCALIZATION.ui("currency.mist", "Mist"), COL_MIST)
+	_scroll_label = _make_resource_row(panel, LOCALIZATION.ui("currency.scrolls", "Scrolls"), COL_SCROLL)
 
 
 func _make_resource_row(parent: Control, resource_name: String, value_color: Color) -> Label:
@@ -84,6 +81,8 @@ func _refresh_all() -> void:
 		return
 	_mist_label.text = str(MetaProgress.mist)
 	_scroll_label.text = str(MetaProgress.scrolls)
-	_keeper_label.text = str(MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_KEEPER))
-	_twin_label.text = str(MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_TWIN_MAWS))
-	_shogun_label.text = str(MetaProgress.get_boss_material(MetaProgress.BOSS_MATERIAL_ECLIPSE_SHOGUN))
+
+
+func _apply_readability() -> void:
+	if _root != null:
+		READABILITY_STYLER.apply(_root)

@@ -8,6 +8,11 @@ extends Node
 ## - Falls back to NORMAL for unknown damage types instead of returning null
 ## - Adds support for stance effect types (lightning, shock)
 ## - Adds support for prosthetic types (burn, prosthetic)
+## - Owns each animation tween from the transient damage-number node so a scene
+##   transition kills the tween before it can call back into a freed capture.
+## - Honors the launch damage-number accessibility toggle before creating UI.
+## - Treats floating numbers as HP-loss feedback only; zero/posture-only contacts
+##   never create a damage-number node.
 ## =============================================================================
 
 # Damage number scenes for each type
@@ -49,6 +54,15 @@ func _ready() -> void:
 
 
 func show_damage_number(amount: int, position: Vector2, damage_type: String = "normal", target: Node = null) -> void:
+	# Floating numbers communicate real HP loss only. Guard/posture feedback uses
+	# posture bars, sparks, sound, and hitstop instead of a misleading "damage" value.
+	if amount <= 0:
+		return
+
+	if typeof(SettingsManager) == TYPE_OBJECT and SettingsManager.has_method("should_show_damage_numbers"):
+		if not bool(SettingsManager.call("should_show_damage_numbers")):
+			return
+
 	# Prevent duplicate damage numbers using cooldown per target+type
 	if target and is_instance_valid(target):
 		var current_time = Time.get_ticks_msec() / 1000.0
@@ -120,11 +134,14 @@ func _create_damage_number(damage_type: String) -> Control:
 
 
 func _animate_damage_number(damage_number: Control) -> void:
-	var tween = create_tween()
+	if damage_number == null or not is_instance_valid(damage_number) or not damage_number.is_inside_tree():
+		return
+
+	# This tween must belong to the transient number, not this persistent autoload.
+	# Scene changes free the number and therefore kill the tween before any completion
+	# callback can outlive the object it targets.
+	var tween := damage_number.create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(damage_number, "position:y", damage_number.position.y - 40, 0.6)
 	tween.tween_property(damage_number, "modulate:a", 0.0, 0.6)
-	tween.chain().tween_callback(func():
-		if is_instance_valid(damage_number):
-			damage_number.queue_free()
-	)
+	tween.chain().tween_callback(Callable(damage_number, "queue_free"))

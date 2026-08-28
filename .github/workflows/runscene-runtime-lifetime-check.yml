@@ -1,0 +1,220 @@
+name: RunScene Runtime Lifetime Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/**"
+      - ".github/workflows/runscene-runtime-lifetime-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/**"
+      - ".github/workflows/runscene-runtime-lifetime-check.yml"
+  workflow_dispatch:
+
+jobs:
+  runscene-runtime-lifetime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Build regional RunScene fixtures
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          scene_path = Path("game/oathbound/Utility/RunScene.tscn")
+          source = scene_path.read_text()
+          marker = 'script = ExtResource("1_v5377")\n'
+          if source.count(marker) != 1:
+              raise SystemExit("RunScene fixture marker drifted; refusing to create debug-area lifetime fixtures")
+
+          for area in (2, 3):
+              fixture = source.replace(marker, marker + f"debug_start_area = {area}\n", 1)
+              Path(f"game/oathbound/Utility/.ci_RunSceneArea{area}.tscn").write_text(fixture)
+          PY
+
+      - name: Exercise unresolved regional choice boundaries
+        shell: bash
+        run: |
+          set -o pipefail
+          for area in 2 3; do
+            scene="res://Utility/.ci_RunSceneArea${area}.tscn"
+            log="runscene-choice-area${area}-runtime-lifetime.log"
+            status_file="runscene-choice-area${area}-exit-status.txt"
+            echo "=== RunScene unresolved choice lifetime: Area ${area} ==="
+            set +e
+            godot --headless --verbose --path game/oathbound --quit-after 30 "$scene" 2>&1 | tee "$log"
+            status=${PIPESTATUS[0]}
+            set -e
+            echo "$status" > "$status_file"
+          done
+
+      - name: Inject deterministic regional choice selection
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # Area 2 and Area 3 can legitimately begin on an authored route choice. After
+          # the unresolved-boundary pass above, choose the first authored option without
+          # pausing so CI also enters a real chamber and exercises Player/room ownership.
+          runscene_path = Path("game/oathbound/Utility/RunScene.gd")
+          runscene = runscene_path.read_text()
+          needle = '\t_show_choice_ui(options)\n'
+          replacement = (
+              '\tif options.is_empty():\n'
+              '\t\tpush_error("[RunSceneCI] Choice presented without options")\n'
+              '\t\treturn\n'
+              '\tprint("[RunSceneCI] auto-selecting first authored option: %s" % str(options[0]))\n'
+              '\tGameFlow.call_deferred("make_choice", str(options[0]))\n'
+          )
+          if runscene.count(needle) != 1:
+              raise SystemExit("RunScene choice hook drifted; refusing to inject deterministic CI selection")
+          runscene_path.write_text(runscene.replace(needle, replacement, 1))
+          PY
+
+      - name: Exercise current RunScene in all authored regions
+        shell: bash
+        run: |
+          set -o pipefail
+          for area in 1 2 3; do
+            scene="res://Utility/RunScene.tscn"
+            if [ "$area" != "1" ]; then
+              scene="res://Utility/.ci_RunSceneArea${area}.tscn"
+            fi
+            log="runscene-area${area}-runtime-lifetime.log"
+            status_file="runscene-area${area}-exit-status.txt"
+            echo "=== RunScene lifetime: Area ${area} ==="
+            set +e
+            godot --headless --verbose --path game/oathbound --quit-after 30 "$scene" 2>&1 | tee "$log"
+            status=${PIPESTATUS[0]}
+            set -e
+            echo "$status" > "$status_file"
+          done
+
+      - name: Upload verbose RunScene lifetime logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: runscene-runtime-lifetime-${{ github.run_id }}
+          path: |
+            runscene-area*-runtime-lifetime.log
+            runscene-area*-exit-status.txt
+            runscene-choice-area*-runtime-lifetime.log
+            runscene-choice-area*-exit-status.txt
+          if-no-files-found: warn
+          retention-days: 7
+
+      - name: Assert clean unresolved choice ownership
+        shell: bash
+        run: |
+          failed=0
+          for area in 2 3; do
+            log="runscene-choice-area${area}-runtime-lifetime.log"
+            status_file="runscene-choice-area${area}-exit-status.txt"
+
+            if [ ! -f "$log" ] || [ ! -f "$status_file" ]; then
+              echo "FAIL: Area ${area} choice boundary did not produce complete diagnostics."
+              failed=1
+              continue
+            fi
+            status=$(cat "$status_file")
+            if [ "$status" -ne 0 ]; then
+              echo "FAIL: Area ${area} unresolved choice RunScene exited with status ${status}."
+              failed=1
+            fi
+            if ! grep -F "[OathboundRunScene] starting run… area=${area}" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} unresolved choice did not boot through OathboundRunScene."
+              failed=1
+            fi
+            if ! grep -F "[RunScene] Choice presented at slot" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} did not remain on its authored unresolved route choice."
+              failed=1
+            fi
+            if grep -F "player_factory_created script=res://Player/OathboundCombatPlayer.gd" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} instantiated Player before a concrete chamber was selected."
+              failed=1
+            fi
+            if grep -F "ObjectDB instance was leaked at exit" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} unresolved choice leaked ObjectDB instances."
+              failed=1
+            fi
+            if grep -F "ERROR: Cannot get path of node as it is not in a scene tree." "$log" >/dev/null; then
+              echo "FAIL: Area ${area} unresolved choice queried a detached node during teardown."
+              failed=1
+            fi
+            if grep -F "SCRIPT ERROR:" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} unresolved choice emitted a GDScript runtime error."
+              failed=1
+            fi
+          done
+          if [ "$failed" -ne 0 ]; then
+            exit 1
+          fi
+          echo "PASS: Areas 2 and 3 hold unresolved route choices without constructing an orphan Player"
+
+      - name: Assert clean RunScene execution and teardown in all authored regions
+        shell: bash
+        run: |
+          failed=0
+          for area in 1 2 3; do
+            log="runscene-area${area}-runtime-lifetime.log"
+            status_file="runscene-area${area}-exit-status.txt"
+
+            if [ ! -f "$log" ] || [ ! -f "$status_file" ]; then
+              echo "FAIL: Area ${area} did not produce complete lifetime diagnostics."
+              failed=1
+              continue
+            fi
+
+            status=$(cat "$status_file")
+            if [ "$status" -ne 0 ]; then
+              echo "FAIL: Area ${area} RunScene exited with status ${status}."
+              failed=1
+            fi
+            if ! grep -F "player_factory_assigned script=res://Player/OathboundCombatPlayer.gd" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} never assigned the canonical OathboundCombatPlayer."
+              failed=1
+            fi
+            if ! grep -F "[OathboundRunScene] starting run… area=${area}" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} did not boot through the production OathboundRunScene authority."
+              failed=1
+            fi
+            if grep -F "SCRIPT ERROR:" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} emitted a GDScript runtime error."
+              failed=1
+            fi
+            if grep -F "ERROR: Error calling deferred method:" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} emitted a deferred-call runtime error."
+              failed=1
+            fi
+            if grep -F "ObjectDB instance was leaked at exit" "$log" >/dev/null; then
+              echo "FAIL: Area ${area} leaked ObjectDB instances at shutdown."
+              failed=1
+            fi
+            if grep -F "ERROR: Cannot get path of node as it is not in a scene tree." "$log" >/dev/null; then
+              echo "FAIL: Area ${area} queried the path of a detached node during teardown."
+              failed=1
+            fi
+          done
+
+          if [ "$failed" -ne 0 ]; then
+            exit 1
+          fi
+          echo "PASS: production RunScene boots a real chamber and exits with clean runtime ownership in Areas 1, 2, and 3"

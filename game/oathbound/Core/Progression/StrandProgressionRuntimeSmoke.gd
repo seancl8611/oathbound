@@ -113,13 +113,17 @@ func _run_contract() -> void:
 	_expect(bool(first_claim.get("first_clear", false)), "Blood Cavern challenge must award its first-clear claim once")
 	_expect(not bool(repeat_claim.get("first_clear", true)), "Blood Cavern challenge claim must not repeat")
 
-	# The Strand scene must expose the three authored permanent-progression stations.
+	# The Strand scene must expose Bloodwell and Forge directly, while permanent
+	# Blood Aspect progression lives deeper inside the authored Blood Cavern.
 	var hub: Node = HUB_SCENE.instantiate()
 	add_child(hub)
 	await get_tree().process_frame
 	_expect(hub.get_node_or_null("Bloodwell") != null, "Hub must expose Bloodwell station")
 	_expect(hub.get_node_or_null("ForgeBench") != null, "Hub must expose Forge Bench station")
-	_expect(hub.get_node_or_null("BloodMirror") != null, "Hub must expose Blood Mirror station")
+	var cavern: Node = hub.get_node_or_null("BloodCavern")
+	_expect(cavern != null, "Hub must expose Blood Cavern training/trial station")
+	_expect(hub.get_node_or_null("BloodMirror") == null, "Blood Mirror must not return as a standalone Strand root station")
+	_expect(hub.get_node_or_null("BloodCavern/BloodMirror") != null, "Blood Cavern must contain the permanent Blood Mirror progression mechanism")
 	hub.queue_free()
 	await get_tree().process_frame
 

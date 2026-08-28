@@ -1,15 +1,35 @@
 extends "res://autoload/OathboundGameFlow.gd"
 
-## Region-aware debug/playtest ownership layered on the current Oathbound GameFlow.
-## Normal runs still use OathboundGameFlow's authored route progression. This layer
-## only changes debug warps so targeted tests use current regional authorities rather
-## than the imported RouteGenerator path for Region 2+.
+## Region-aware run lifecycle layered on the current Oathbound GameFlow.
+## Normal progression still uses OathboundGameFlow's room/player authorities, while
+## this layer owns regional choice boundaries and debug warps so unresolved route
+## choices cannot instantiate orphan Players and Region 2+ use their authored route
+## authorities rather than the imported generic RouteGenerator path.
 
 const EXPECTED_REGION_PLAYTEST_LAB_SCRIPT := "res://Core/Regions/OathboundRegionPlaytestLab.gd"
 
 
 func _assert_current_playtest_lab() -> void:
 	_assert_autoload_script("PlaytestLab", EXPECTED_REGION_PLAYTEST_LAB_SCRIPT, true)
+
+
+func _load_current_room() -> void:
+	# OathboundGameFlow creates the canonical Player before delegating to the imported
+	# router. If the current route slot is still an unresolved choice, the imported
+	# router returns without loading a room, leaving that freshly instantiated Player
+	# unparented. Intercept choice slots before the Player factory runs. A Player should
+	# only exist once a concrete chamber has been selected and can own it.
+	if current_index >= 0 and current_index < route.size():
+		var token := str(route[current_index])
+		if token.begins_with("CHOICE_"):
+			var area_id: int = int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else current_area
+			if typeof(SceneRegistry) == TYPE_OBJECT and SceneRegistry.has_method("activate_area"):
+				SceneRegistry.call("activate_area", area_id)
+			var slot := int(token.split("_")[1])
+			_present_choice(slot)
+			return
+
+	await super._load_current_room()
 
 
 func _execute_debug_warp(area_id: int, room_token: String) -> void:

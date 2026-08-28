@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn" id="1_swordsman"]
+[ext_resource type="Script" path="res://World/BloodCavernTrainingTarget.gd" id="2_training"]
+
+[node name="BloodCavernTrainingTarget" instance=ExtResource("1_swordsman")]
+script = ExtResource("2_training")

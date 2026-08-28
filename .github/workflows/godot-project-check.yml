@@ -108,7 +108,7 @@ jobs:
           assert_log "current AttackDirector" "attack_director script=res://Core/Prosthetics/OathboundAttackDirector.gd"
           assert_log "current Prosthetic executor" "prosthetic_executor script=res://Core/Prosthetics/OathboundProstheticExecutor.gd"
           assert_log "current RunHUD" "run_hud script=res://Core/Prosthetics/OathboundRunHUD.gd"
-          assert_log "current RelicRuntime" "relic_runtime script=res://Core/Relics/OathboundRelicRuntime.gd"
+          assert_log "current RelicRuntime" "relic_runtime script=res://Core/Release/OathboundSlotRelicRuntime.gd"
           assert_log "current CorruptionRuntime" "corruption_runtime script=res://Core/Corruption/OathboundCorruptionRuntime.gd"
           assert_log "current UpgradeService" "upgrade_service script=res://Core/Relics/OathboundUpgradeService.gd"
           assert_log "current PlaytestLab" "playtest_lab script=res://Core/Regions/OathboundRegionPlaytestLab.gd"

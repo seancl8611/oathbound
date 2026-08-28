@@ -1,0 +1,171 @@
+name: Blood Cavern Execution Trial Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
+      - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Prosthetics/**"
+      - "game/oathbound/Core/Relics/**"
+      - "game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd"
+      - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialDurableMutationSmoke.*"
+      - "game/oathbound/Core/Trials/**"
+      - "game/oathbound/Enemy/Base/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*"
+      - "game/oathbound/Utility/CombatConfig.gd"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MetaProgressionManager.gd"
+      - "game/oathbound/World/BloodCavern.gd"
+      - "game/oathbound/World/OathboundBloodCavern.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.tscn"
+      - "game/oathbound/World/HubScene.tscn"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/blood-cavern-execution-trial-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Progression/OathboundStrandProgressionManager.gd"
+      - "game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd"
+      - "game/oathbound/Core/Prosthetics/**"
+      - "game/oathbound/Core/Relics/**"
+      - "game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd"
+      - "game/oathbound/Core/Release/Validation/BloodCavernExecutionTrialSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.*"
+      - "game/oathbound/Core/Release/Validation/BloodCavernTrialDurableMutationSmoke.*"
+      - "game/oathbound/Core/Trials/**"
+      - "game/oathbound/Enemy/Base/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/Enemies/Standard/CorruptedSwordsman*"
+      - "game/oathbound/Utility/CombatConfig.gd"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
+      - "game/oathbound/Utility/MetaProgress.gd"
+      - "game/oathbound/Utility/MetaProgressionManager.gd"
+      - "game/oathbound/World/BloodCavern.gd"
+      - "game/oathbound/World/OathboundBloodCavern.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.gd"
+      - "game/oathbound/World/BloodCavernTrainingTarget.tscn"
+      - "game/oathbound/World/HubScene.tscn"
+      - "game/oathbound/project.godot"
+      - ".github/workflows/blood-cavern-execution-trial-check.yml"
+  workflow_dispatch:
+
+jobs:
+  execution-trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify fixed loadout sandbox isolation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernTrialLoadoutSandboxSmoke.tscn 2>&1 | tee blood-cavern-loadout-sandbox.log
+          grep -F "[BloodCavernTrialLoadoutSandboxSmoke] PASS - fixed Aspect/Tier/Blood | unlimited Techniques | fixed Prosthetic | fixed Relic | save suppression | mastery suppression | exact restoration" blood-cavern-loadout-sandbox.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-loadout-sandbox.log; then
+            echo "FAIL: Blood Cavern fixed-loadout sandbox emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-loadout-sandbox.log; then
+            echo "FAIL: Blood Cavern fixed-loadout sandbox emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "ObjectDB instances leaked at exit" blood-cavern-loadout-sandbox.log; then
+            echo "FAIL: Blood Cavern fixed-loadout sandbox leaked runtime objects."
+            exit 1
+          fi
+
+      - name: Verify durable trial mutation isolation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernTrialDurableMutationSmoke.tscn 2>&1 | tee blood-cavern-durable-mutation.log
+          grep -F "[BloodCavernTrialDurableMutationSmoke] PASS - durable Prosthetic/Relic APIs blocked | Scrolls preserved | no persistence writes | no durable signals | campaign Forge sync deferred | exact restoration" blood-cavern-durable-mutation.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-durable-mutation.log; then
+            echo "FAIL: Blood Cavern durable-mutation sandbox emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-durable-mutation.log; then
+            echo "FAIL: Blood Cavern durable-mutation sandbox emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "ObjectDB instances leaked at exit" blood-cavern-durable-mutation.log; then
+            echo "FAIL: Blood Cavern durable-mutation sandbox leaked runtime objects."
+            exit 1
+          fi
+
+      - name: Verify live Cavern loadout lifecycle
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernTrialLoadoutLifecycleSmoke.tscn 2>&1 | tee blood-cavern-loadout-lifecycle.log
+          grep -F "[BloodCavernTrialLoadoutLifecycleSmoke] PASS - real Hub ownership | active fixed loadout | End Training restore | Blood Mirror restore | Cavern teardown restore" blood-cavern-loadout-lifecycle.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-loadout-lifecycle.log; then
+            echo "FAIL: live Blood Cavern loadout lifecycle emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-loadout-lifecycle.log; then
+            echo "FAIL: live Blood Cavern loadout lifecycle emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "ObjectDB instances leaked at exit" blood-cavern-loadout-lifecycle.log; then
+            echo "FAIL: live Blood Cavern loadout lifecycle leaked runtime objects."
+            exit 1
+          fi
+
+      - name: Verify playable Execution Trial chain
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/BloodCavernExecutionTrialSmoke.tscn 2>&1 | tee blood-cavern-execution-trial.log
+          grep -F "[BloodCavernExecutionTrialSmoke] PASS - shared Hushiro posture break | reusable target reset | real Player deathblow | first-clear Relic | repeat practice | completion feedback | no currency leakage" blood-cavern-execution-trial.log
+          if grep -F "SCRIPT ERROR:" blood-cavern-execution-trial.log; then
+            echo "FAIL: Blood Cavern Execution Trial emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" blood-cavern-execution-trial.log; then
+            echo "FAIL: Blood Cavern Execution Trial emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "Lambda capture at index" blood-cavern-execution-trial.log; then
+            echo "FAIL: Execution Trial reintroduced the freed-lambda lifetime failure class."
+            exit 1
+          fi
+
+      - name: Upload Blood Cavern diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: blood-cavern-runtime-logs
+          path: |
+            blood-cavern-loadout-sandbox.log
+            blood-cavern-durable-mutation.log
+            blood-cavern-loadout-lifecycle.log
+            blood-cavern-execution-trial.log
+          if-no-files-found: warn

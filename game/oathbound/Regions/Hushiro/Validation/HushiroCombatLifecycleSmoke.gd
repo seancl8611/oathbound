@@ -2,6 +2,8 @@ extends Node
 
 const ENCOUNTER_SPAWNER_SCRIPT: Script = preload("res://Core/Encounters/EncounterSpawner.gd")
 const SWORD_HITBOX_SCRIPT: Script = preload("res://Player/SwordHitBox.gd")
+const COMBAT_CONTROLLER_SCRIPT: Script = preload("res://Utility/CombatController.gd")
+const POSTURE_BREAK_RUNTIME_SCRIPT: Script = preload("res://Utility/HushiroPostureBreakRuntime.gd")
 
 var _sword: Area2D = null
 var _physics_contact_count: int = 0
@@ -19,8 +21,17 @@ func _run() -> void:
 	await _verify_hitbox_deactivation_from_physics_signal()
 	if _failed:
 		return
+	await _verify_damage_number_scene_teardown()
+	if _failed:
+		return
+	await _verify_blood_stack_target_teardown()
+	if _failed:
+		return
+	await _verify_stale_deathblow_target_cleanup()
+	if _failed:
+		return
 
-	print("[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred")
+	print("[HushiroCombatLifecycleSmoke] PASS - mid-wave detach cancels await | physics-signal hitbox shutdown deferred | transient damage-number tween dies with scene node | freed blood-stack target pruned | freed deathblow target cleared safely")
 	get_tree().quit(0)
 
 
@@ -100,6 +111,104 @@ func _verify_hitbox_deactivation_from_physics_signal() -> void:
 	probe.queue_free()
 	_sword.queue_free()
 	_sword = null
+	await get_tree().process_frame
+
+
+func _verify_damage_number_scene_teardown() -> void:
+	if typeof(DamageNumberManager) != TYPE_OBJECT:
+		_fail("DamageNumberManager autoload unavailable")
+		return
+
+	# DamageNumberManager survives scene changes. The animated number does not. The
+	# tween therefore has to be owned by this transient Control so freeing it also
+	# kills every delayed property/callback step. The old manager-owned tween would
+	# reach its anonymous completion lambda after this node had already been freed.
+	var transient := Control.new()
+	transient.name = "TransientDamageNumberLifetimeProbe"
+	add_child(transient)
+	await get_tree().process_frame
+
+	DamageNumberManager.call("_animate_damage_number", transient)
+	transient.queue_free()
+	await get_tree().process_frame
+	if is_instance_valid(transient):
+		_fail("transient damage number did not leave the tree")
+		return
+
+	# The old animation completed at 0.6 s. Wait beyond that boundary so CI captures
+	# any delayed freed-lambda diagnostic emitted by Godot.
+	await get_tree().create_timer(0.75).timeout
+
+
+func _verify_blood_stack_target_teardown() -> void:
+	if typeof(BloodStackManager) != TYPE_OBJECT:
+		_fail("BloodStackManager autoload unavailable")
+		return
+
+	# This singleton also survives scene changes. Reproduce an enemy registering with
+	# it and disappearing with the outgoing room without an explicit unregister call.
+	var target := Node.new()
+	target.name = "BloodStackLifetimeProbe"
+	add_child(target)
+	BloodStackManager.call("register_enemy", target)
+	await get_tree().process_frame
+
+	target.queue_free()
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var targets_value: Variant = BloodStackManager.get("blood_targets")
+	if not (targets_value is Array):
+		_fail("BloodStackManager target registry is not an Array")
+		return
+	for registered: Variant in targets_value as Array:
+		if registered == null or not is_instance_valid(registered):
+			_fail("BloodStackManager retained a freed scene target")
+			return
+
+
+func _verify_stale_deathblow_target_cleanup() -> void:
+	# Reproduce the August 25 manual-playtest crash exactly: one Hushiro posture runtime
+	# performs cleanup while the Player CombatController still holds a reference to a
+	# different enemy that was already freed. Binding that stale return directly to a
+	# typed Node caused `Trying to assign invalid previously freed instance`.
+	var player := Node2D.new()
+	player.name = "DeathblowLifetimePlayer"
+	player.add_to_group("player")
+	add_child(player)
+
+	var player_combat: Node = COMBAT_CONTROLLER_SCRIPT.new()
+	player_combat.name = "Combat"
+	player_combat.set("config", CombatConfig.create_player_config())
+	player.add_child(player_combat)
+
+	var live_enemy := Node2D.new()
+	live_enemy.name = "LiveCleanupOwner"
+	add_child(live_enemy)
+
+	var runtime: Node = POSTURE_BREAK_RUNTIME_SCRIPT.new()
+	runtime.name = "HushiroPostureBreakRuntime"
+	runtime.call("configure", live_enemy, "lifetime_probe")
+	live_enemy.add_child(runtime)
+
+	var stale_target := Node2D.new()
+	stale_target.name = "FreedDeathblowTarget"
+	add_child(stale_target)
+	await get_tree().process_frame
+
+	player_combat.call("set_deathblow_target", stale_target, 2.5)
+	stale_target.queue_free()
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	runtime.call("_clear_forwarded_target_if_owned")
+	var target_after: Variant = player_combat.call("get_deathblow_target")
+	if target_after != null:
+		_fail("Player CombatController retained freed deathblow target after Hushiro cleanup")
+		return
+
+	live_enemy.queue_free()
+	player.queue_free()
 	await get_tree().process_frame
 
 

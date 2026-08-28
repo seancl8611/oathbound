@@ -8,6 +8,27 @@ extends "res://Core/Chambers/Types/MinibossChamberController.gd"
 const MINIBOSS_PERSISTENT_MIST := 10
 const MINIBOSS_PERSISTENT_SCROLLS := 1
 
+# Stable completion/achievement IDs for the six authored launch minibosses. Scene paths
+# are the authority here because runtime node names can be edited independently of
+# persistent record keys. Unknown/debug minibosses must not inflate the six-target
+# Named Threats achievement.
+const LAUNCH_MINIBOSS_SCENE_IDS := {
+	"res://Regions/Hushiro/Enemies/Minibosses/VillageOgre.tscn": "village_ogre",
+	"res://Regions/Hushiro/Enemies/Minibosses/TheCollector.tscn": "the_collector",
+	"res://Enemy/Area 2/Minibosses/embered_pilgrim.tscn": "embered_pilgrim",
+	"res://Enemy/Area 2/Minibosses/rotwood_host.tscn": "rotwood_host",
+	"res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotus.tscn": "blood_lotus",
+	"res://Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.tscn": "eternal_swordsman",
+}
+const LAUNCH_MINIBOSS_IDS: Array[String] = [
+	"village_ogre",
+	"the_collector",
+	"embered_pilgrim",
+	"rotwood_host",
+	"blood_lotus",
+	"eternal_swordsman",
+]
+
 var _persistent_bonus_granted := false
 
 
@@ -48,11 +69,14 @@ func _setup_treasure_chests() -> void:
 
 func _on_miniboss_defeated() -> void:
 	var first_resolution := not _miniboss_defeated
+	var miniboss_id := _current_miniboss_record_id()
 	super._on_miniboss_defeated()
 	if not first_resolution or _persistent_bonus_granted:
 		return
 
 	_persistent_bonus_granted = true
+	_record_miniboss_progress(miniboss_id)
+
 	var rd := get_node_or_null("/root/RunData")
 	if rd != null and rd.has_method("add_mist"):
 		rd.add_mist(MINIBOSS_PERSISTENT_MIST)
@@ -61,7 +85,24 @@ func _on_miniboss_defeated() -> void:
 		MetaProgress.add_mist(MINIBOSS_PERSISTENT_MIST)
 		MetaProgress.add_scrolls(MINIBOSS_PERSISTENT_SCROLLS)
 
-	print("[MinibossChamber] Persistent bonus banked: +10 Mist / +1 Scroll")
+	print("[MinibossChamber] Persistent bonus banked: +10 Mist / +1 Scroll | miniboss=%s" % miniboss_id)
+
+
+func _record_miniboss_progress(miniboss_id: String) -> void:
+	if miniboss_id not in LAUNCH_MINIBOSS_IDS:
+		push_warning("[MinibossChamber] Defeated miniboss has no launch record ID; completion not credited: %s" % miniboss_id)
+		return
+	if typeof(AchievementRuntime) == TYPE_OBJECT and AchievementRuntime.has_method("record_miniboss_defeat"):
+		AchievementRuntime.record_miniboss_defeat(miniboss_id)
+	if typeof(RecordsRuntime) == TYPE_OBJECT and RecordsRuntime.has_method("record_miniboss_defeat"):
+		RecordsRuntime.record_miniboss_defeat()
+
+
+func _current_miniboss_record_id() -> String:
+	if miniboss == null or not is_instance_valid(miniboss):
+		return ""
+	var scene_path := str(miniboss.scene_file_path)
+	return str(LAUNCH_MINIBOSS_SCENE_IDS.get(scene_path, ""))
 
 
 func _on_chest_opened(opened_chest: Node) -> void:

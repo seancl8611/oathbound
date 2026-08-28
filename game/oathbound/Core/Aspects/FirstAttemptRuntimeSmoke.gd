@@ -44,6 +44,13 @@ func _run_contract() -> void:
 	AspectRuntime.synchronize_campaign_state(false)
 	CorruptionRuntime.on_new_run(1)
 
+	# FIRST_ATTEMPT.md and TECHNIQUES.md define a slotless Technique collection. A clean
+	# first attempt starts with no acquired Techniques; the five combat actions below are
+	# trigger classifications only and must not imply pre-filled or reserved slots.
+	if typeof(RunData) == TYPE_OBJECT:
+		RunData.acquired_upgrades.clear()
+		_expect(RunData.acquired_upgrades.is_empty(), "fresh first attempt must begin with zero acquired Techniques")
+
 	_expect(not bool(AspectRuntime.has_active_aspect()), "first attempt must have no active Aspect")
 	_expect(str(AspectRuntime.selected_aspect).is_empty(), "pre-awakening selected Aspect id must be empty")
 	_expect(int(AspectRuntime.tier) == 0, "pre-awakening Tier must remain 0")
@@ -56,9 +63,6 @@ func _run_contract() -> void:
 	if aspect_hud_value is CanvasLayer:
 		_expect(not (aspect_hud_value as CanvasLayer).visible, "pre-awakening Aspect HUD must be hidden")
 
-	# FIRST_ATTEMPT.md also excludes Relics from the first-ever loadout. On the clean
-	# campaign used by this contract, the persistent Relic authority must therefore be
-	# empty rather than silently supplying a post-awakening item.
 	if typeof(RelicRuntime) == TYPE_OBJECT:
 		_expect(str(RelicRuntime.equipped_relic_id).is_empty(), "fresh first attempt must have no equipped Relic")
 		var unlocked_value: Variant = RelicRuntime.unlocked_relics
@@ -112,20 +116,20 @@ func _run_contract() -> void:
 	_expect(str(AspectRuntime.selected_aspect).is_empty(), "post-death handoff must wait for explicit Aspect selection")
 	_expect(int(AspectRuntime.tier) == 0 and float(AspectRuntime.blood) == 0.0, "awakening handoff must start from Tier 0 / Blood 0")
 
-	# The current Strand implementation uses The Well as the run-preparation surface.
-	# An awakened player must be able to open the three-Aspect selector without an
-	# Aspect already being active, and cancelling must clean up the root-level modal.
+	# After awakening, the canonical Boat owns repeated-run preparation. It must offer
+	# all three Blood Aspects without one already being active, and its final confirmation
+	# must describe an empty run Technique collection without resurrecting slot language.
 	var hub: Node = HUB_SCENE.instantiate()
 	add_child(hub)
 	await get_tree().process_frame
-	var well: Node = hub.get_node_or_null("TheWell")
-	if well == null:
-		_fail("Hub must expose TheWell run-preparation station")
+	var boat: Node = hub.get_node_or_null("Boat")
+	if boat == null:
+		_fail("Hub must expose Boat run-preparation station")
 	else:
-		well.call("_open_aspect_menu")
+		boat.call("_open_aspect_menu")
 		await get_tree().process_frame
-		var selector: Node = get_tree().root.get_node_or_null("AspectRunSetup")
-		_expect(selector != null, "awakened The Well must open the Blood Aspect selector")
+		var selector: Node = get_tree().root.get_node_or_null("BoatAspectRunSetup")
+		_expect(selector != null, "awakened Boat must open the Blood Aspect selector")
 		if selector != null:
 			var aspect_buttons: Array[Node] = selector.find_children("*", "Button", true, false)
 			var aspect_labels: Array[String] = []
@@ -134,9 +138,16 @@ func _run_contract() -> void:
 				if button.text in ["Wolf", "Wraith", "Ronin"]:
 					aspect_labels.append(button.text)
 			_expect(aspect_labels.size() == 3, "awakened selector must offer Wolf, Wraith, and Ronin")
-		well.call("_cancel_departure_menu")
+		boat.call("_close_aspect_menu")
+		boat.call("_open_confirmation_menu")
 		await get_tree().process_frame
-		_expect(get_tree().root.get_node_or_null("AspectRunSetup") == null, "cancelling Aspect selection must clean up the modal")
+		var confirmation: Dictionary = boat.call("_confirmation_snapshot_for_playtest")
+		var technique_copy := str(confirmation.get("techniques", ""))
+		_expect(technique_copy == "Techniques begin empty and are acquired during the run.", "Boat confirmation must describe the empty run Technique collection")
+		_expect(not technique_copy.to_lower().contains("slot"), "Boat confirmation must not describe Technique slots")
+		boat.call("_cancel_departure_menu")
+		await get_tree().process_frame
+		_expect(get_tree().root.get_node_or_null("BoatRunConfirmation") == null, "cancelling Boat confirmation must clean up the departure modal")
 	hub.queue_free()
 	await get_tree().process_frame
 

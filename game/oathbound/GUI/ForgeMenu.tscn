@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://heu74hecb0s2"]
 
-[ext_resource type="Script" path="res://GUI/ForgeMenu.gd" id="1_07h3o"]
+[ext_resource type="Script" path="res://GUI/OathboundReleaseForgeMenu.gd" id="1_07h3o"]
 
 [node name="ForgeMenu" type="Control"]
 layout_mode = 3

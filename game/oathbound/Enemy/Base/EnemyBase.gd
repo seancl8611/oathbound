@@ -29,6 +29,8 @@ var _base_hurtbox_signals_connected: bool = false
 
 var _max_hp: int = 0
 var has_died: bool = false
+var _pending_hp_damage_display: bool = false
+var _last_applied_hp_damage: int = 0
 
 # =============================================================================
 # SHARED NODE REFERENCES
@@ -584,10 +586,18 @@ func force_kill_hp() -> void:
 	
 func apply_hp_damage(amount: int) -> int:
 	var dmg = max(0, amount)
+	var hp_before := hp
 	if dmg <= 0:
+		_last_applied_hp_damage = 0
+		_pending_hp_damage_display = true
 		return 0
 	
 	hp = max(0, hp - dmg)
+	_last_applied_hp_damage = maxi(0, hp_before - hp)
+	_pending_hp_damage_display = true
+	# Preserve the legacy return contract for callers that use this helper as an
+	# acknowledgement of the requested damage. Floating-number presentation uses
+	# _last_applied_hp_damage instead so overkill can never inflate the visible value.
 	return dmg
 
 func heal_hp(amount: int) -> int:
@@ -683,12 +693,17 @@ func notify_combat_got_hit(event: Dictionary) -> void:
 		combat.notify_got_hit(event)
 
 func show_enemy_damage_number(amount: int, damage_type: String, y_offset: float = -20.0) -> void:
-	if amount <= 0:
+	var display_amount := amount
+	if _pending_hp_damage_display:
+		display_amount = mini(display_amount, _last_applied_hp_damage)
+		_pending_hp_damage_display = false
+		_last_applied_hp_damage = 0
+	if display_amount <= 0:
 		return
 	
 	if DamageNumberManager:
 		DamageNumberManager.show_damage_number(
-			amount,
+			display_amount,
 			global_position + Vector2(randf_range(-10, 10), y_offset),
 			damage_type,
 			self
