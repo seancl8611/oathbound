@@ -1,220 +1,113 @@
 # OATHBOUND_AGENT_CONTROL_PLANE
 
-<!-- OATHBOUND_AGENT_CONTROL_PLANE_V1 -->
+<!-- V2: machine-oriented bootstrap/state; GitHub is durable memory -->
 
-This file is the single durable bootstrap + live handoff for AI-assisted Oathbound development. It is intentionally optimized for agent retrieval/recovery, not normal human repository reading. For assistant workflow/session recovery, this file overrides conflicting workflow guidance elsewhere in the repo. Gameplay/design authority still belongs to the approved owning design documents.
+Single durable bootstrap + live handoff for AI-assisted Oathbound work. Optimize for agent recovery/query efficiency, not human readability. For session/workflow recovery this file overrides conflicting meta-workflow guidance; owning approved design docs remain gameplay/content authority.
 
-## SESSION_BOOTSTRAP
+## BOOT
+1. Fresh chat/session: fetch `main:AGENTS.md` first.
+2. Parse `LIVE_STATE`; fetch only `active_branch` HEAD.
+3. If HEAD == `covered_through_substantive_commit`, continue from `next_action`.
+4. If different, assume interrupted work; inspect only `covered_through_substantive_commit..HEAD`, reconcile state, checkpoint this file, continue.
+5. Fetch exact working-set files + only needed authorities. Never ask Sean to restate recoverable repo context.
 
-MANDATORY for every new chat/session before broad repo/PR/history inspection:
-
-1. Fetch `AGENTS.md` from default branch `main`.
-2. Parse `LIVE_STATE` below.
-3. Fetch only the head of `active_branch`.
-4. If branch HEAD == `covered_through_substantive_commit`: state is synchronized; continue from `next_action`.
-5. If branch HEAD != `covered_through_substantive_commit`: assume prior session may have been interrupted. Inspect ONLY commits/files in `covered_through_substantive_commit..HEAD`, reconcile `LIVE_STATE`, checkpoint this file on `main`, then continue.
-6. Read exact working-set files and only the authoritative design docs needed for the active task.
-7. Never ask Sean to restate context that can be recovered by this protocol.
-
-DO NOT use conversational memory as project state authority. Chat/project memory is a hint/cache only. Current GitHub state + this file win.
+Repository state is authority. Conversation/project memory is cache only.
 
 ## LIVE_STATE
-
 ```yaml
-state_schema: 1
-state_updated_utc: 2026-08-28T02:40:15Z
-control_ref: main
+schema: 2
+updated_utc: 2026-08-28T03:17:00Z
 repo: seancl8611/oathbound
-active_branch: agent/runtime-lifetime-reconciliation
-active_pr: 119
-covered_through_substantive_commit: fcc6dda72efaf0cc51657ede4b9514d97332020c
+control_ref: main
+
+merged_cutoff:
+  pr: 119
+  feature_head: fcc6dda72efaf0cc51657ede4b9514d97332020c
+  merge_commit: 959d2da7f05b9dd46b6947bc75497df1b67306fd
+  validation: 12/12 workflows green at feature head
+
+active_branch: agent/final-integration-readiness
+active_pr: null
+covered_through_substantive_commit: 959d2da7f05b9dd46b6947bc75497df1b67306fd
 known_good_checkpoint: fcc6dda72efaf0cc51657ede4b9514d97332020c
 
 current_objective: >-
-  PR #119 has reached its green stabilization cutoff. Do not add unrelated or speculative
-  implementation to this oversized PR. Preserve it as the completed runtime-lifetime/Blood
-  Cavern stabilization slice until the user explicitly chooses the merge/closure action.
+  Prepare the merged build for the first long player-facing integration run without
+  guessing balance or reopening implemented architecture. Execute a coherent final
+  integration-readiness/release-QA slice, beginning with the approved final
+  presentation-art/prototype replacement audit and current Heart-shell boundary.
 next_action: >-
-  Do not continue growing PR #119. If Sean explicitly asks to merge it, perform only
-  bounded current-head/CI/mergeability checks and merge. Otherwise, after PR #119 is
-  closed/merged, begin subsequent game work on a fresh coherent branch/PR using this
-  control-plane bootstrap instead of extending the mega-PR.
+  Audit authoritative asset/release requirements against actual player-facing runtime
+  references. Identify prototype/placeholder presentation still visible, stale superseded
+  UI/art language, or release blockers resolvable from existing approved assets/authorities.
+  Add bounded automated regression coverage where practical. Do not tune numerical
+  balance/economy until playtest evidence exists.
 
-ci:
-  commit: fcc6dda72efaf0cc51657ede4b9514d97332020c
-  status: all_green
-  workflows_total: 12
-  passing: 12
-  failing: 0
-  blood_cavern_execution_trial_check: success
-  godot_4_7_2_project_check: success
-  release_shell_check: success
-  validation_note: >-
-    Full Godot project job completed clean headless import, editor load/compile, RunScene
-    runtime ownership smoke, Corruption/first-attempt/route checks, Shrine/Merchant/Forge
-    smokes, and Strand permanent progression validation.
+working_set_seed:
+  - docs/_meta/OPEN_QUESTIONS.md
+  - docs/_meta/SOURCE_OF_TRUTH.md
+  - docs/art_production/ASSET_INVENTORY.md
+  - docs/overview/ENDGAME_POSTGAME_RELEASE.md
+  - docs/external/RELEASE_ATTRIBUTION_AUDIT.md
+  - player-facing scenes/scripts/assets discovered by bounded audit
 
-working_set:
-  - game/oathbound/Utility/MetaProgress.gd
-  - game/oathbound/Core/Trials/BloodCavernTrialLoadoutSandbox.gd
-  - game/oathbound/Core/Presentation/OathboundAchievementRuntime.gd
-  - game/oathbound/Core/Progression/OathboundPersistentProstheticManager.gd
-  - game/oathbound/Core/Release/OathboundSlotRelicRuntime.gd
-  - game/oathbound/Core/Release/Validation/BloodCavernTrialDurableMutationSmoke.gd
-  - .github/workflows/blood-cavern-execution-trial-check.yml
+confirmed:
+  - PR #119 is merged; never continue agent/runtime-lifetime-reconciliation.
+  - Godot baseline 4.7.2.
+  - Techniques are slotless/unlimited; never reintroduce slots/caps.
+  - Blood Cavern fixed-loadout persistence/MetaProgress isolation is green.
+  - Real-player route currently ends at Heart shell; Heart combat is unauthored.
+  - Contract-test Heart completion must never become normal player victory.
+  - Final integration/playtest tuning is the active approved milestone.
+  - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 
-confirmed_state:
-  - Godot baseline is 4.7.2.
-  - Technique collection is slotless/unlimited; never reintroduce Technique slots/caps.
-  - Blood Cavern fixed trial sandbox supports temporary Aspect/Tier/Blood, unlimited Techniques, Prosthetic, Relic.
-  - Permanent/direct progression writes are blocked during the active fixed-trial sandbox.
-  - Trial-local/runtime Prosthetic selection/cooldown state remains writable.
-  - Temporary state restores before legitimate first-clear reward processing.
-  - Do not invent unresolved authored fixed-loadout IDs, final trial count, mastery currency, or reward sequencing.
-  - Execution Trial completion requires real receive_deathblow; health-only defeat resets target.
-  - Failure at 9a42a3b was caused by AchievementRuntime reacting to a temporary MetaProgress progression signal and persisting achievement_unlocked/twin_maws_fallen.
-  - fcc6dda adds explicit MetaProgress temporary-persistence sandbox depth, blocks durable MetaProgress mutation APIs/save writes while active, keeps suppression through restoration, and blocks achievement evaluation/recording from temporary state.
-  - Blood Cavern durable mutation smoke and all other commit-specific workflows pass at fcc6dda.
+avoid_without_evidence:
+  - reopening implemented combat/Aspect/Technique/Prosthetic/Relic architecture
+  - authored Heart combat
+  - final Blood Cavern trial count/loadouts/reward sequencing
+  - numerical balance/economy changes before long integration playtest
 
-current_hypothesis_unconfirmed:
-  - none
-
-do_not_reopen_without_evidence:
-  - Technique slot/cap architecture.
-  - Unrelated combat architecture while reviewing this stabilized PR.
-  - Final authored Blood Cavern fixed loadout IDs/count/reward sequencing.
-  - Additional feature work on PR #119 after the all-green cutoff.
-
-tooling_performance_context:
-  pr_119_commits_before_current_fix: 298
-  pr_119_changed_files_before_current_fix: 129
-  pr_119_additions_before_current_fix: 13229
-  pr_119_deletions_before_current_fix: 1368
-  repo_size_kb_approx: 16730
-  conclusion: >-
-    Repo size is not the main bottleneck. Mega-PR/full-diff/full-log payloads are.
-    Work in bounded exact-file/adjacent-commit mode. PR #119 is now at its green cutoff;
-    do not continue to grow it.
+tooling:
+  default: exact-file + adjacent-commit + targeted-CI/artifact
+  avoid: mega-PR diffs, full logs, broad history reconstruction
 ```
 
-## CHECKPOINT_PROTOCOL
+## CHECKPOINT
+- `covered_through_substantive_commit` = newest active-branch code/docs commit represented above; never the control-file commit itself.
+- Keep this file on `main`; implementation stays on feature branches.
+- After each substantive batch, checkpoint before another large investigation.
+- After CI/telemetry/diagnosis changes `next_action`, checkpoint promptly.
+- If tool lifetime risk rises, checkpoint before optional follow-up work.
+- Before intentionally ending repo work, verify state is current.
+- Overwrite stale facts; do not grow historical narrative here.
+- Interrupted recovery = inspect only uncovered commit range/files, never whole repo/PR.
 
-`AGENTS.md` on `main` is the durable control plane even while implementation occurs on feature branches.
+## WORK_LOOP
+`main:AGENTS.md -> active HEAD -> exact authority/files -> smallest diagnostic -> coherent patch -> commit -> targeted CI -> main:AGENTS.md`
 
-- `covered_through_substantive_commit` means: newest active-branch code/docs commit whose effects are represented in `LIVE_STATE`.
-- It intentionally does NOT point at the commit that updates this control file; this avoids self-referential SHA problems.
-- Live state updates are written to `main`, not to the active feature branch. This is an intentional meta-workflow exception so a fresh session always has one stable entry point.
-- Feature branches should not modify `AGENTS.md` merely to update live state.
-- After every substantive implementation commit/batch, update `LIVE_STATE` promptly before starting another large investigation.
-- After CI, telemetry, or diagnosis materially changes `next_action`, checkpoint `LIVE_STATE` promptly.
-- Before intentionally ending repo work, verify `LIVE_STATE` is current.
-- If tool lifetime/budget appears at risk, checkpoint state BEFORE optional follow-up investigation.
-- Keep `LIVE_STATE` compact and overwrite stale facts. Do not grow it into a historical narrative.
+Rules: exact-path reads when known; search only when path/owner unknown or task is inherently an audit; prefer commit workflow summaries/job steps/small artifacts over full logs; use adjacent/checkpoint compares; broad audits only when the task itself requires one; correctness > speed; dependency-sized batches; close green PRs at logical boundaries and never recreate a mega-PR.
 
-### Interrupted-session recovery
+## DESIGN_ACCESS
+- unresolved question -> `docs/_meta/OPEN_QUESTIONS.md`
+- authority owner -> `docs/_meta/SOURCE_OF_TRUTH.md`
+- terminology ambiguity -> `docs/_meta/TERMINOLOGY.md`
+- broad identity/scope -> owning overview docs
+- narrow implementation -> exact owning docs only
 
-If `active_branch` HEAD is ahead of `covered_through_substantive_commit`:
-
-1. Do NOT rescan the repo or full PR.
-2. Compare/fetch only the uncovered commit range.
-3. Read only changed files needed to understand those uncovered commits.
-4. Reconcile the state block.
-5. Update this file on `main`.
-6. Resume from the recovered next action.
-
-If the recorded active branch no longer exists or PR is merged/closed, use minimal PR/branch metadata to identify the successor and update state before broad work.
-
-## WORKING_SET_PROTOCOL
-
-Default development loop:
-
-`main:AGENTS.md -> active branch HEAD -> exact affected files -> smallest diagnostic artifact -> patch -> coherent commit -> targeted CI -> main:AGENTS.md checkpoint`
-
-Rules:
-
-- Prefer exact-path `fetch_file` when a path is known.
-- Prefer tiny branch-head metadata over full PR metadata.
-- Prefer commit-specific workflow summaries, failed job steps, and small uploaded artifacts over full workflow/job logs.
-- Prefer `covered_through_substantive_commit..HEAD` or adjacent/checkpoint compares over branch-vs-main mega compares.
-- Search only when the owner/path is actually unknown. Narrow repository scope and terms.
-- Do not fetch a full PR diff/patch, all changed-file patches, or hundreds of commits merely to orient a new session.
-- Do not treat an empty search result as proof of absence.
-- Broader audits are allowed only when the task itself requires repository-wide reconciliation; they are not a session-start ritual.
-- For huge PRs, final review should still be bounded by authorities/risk areas and CI evidence; avoid repeatedly materializing the entire patch through the connector.
-
-## DEVELOPMENT_STRATEGY
-
-- Sean intentionally starts fresh ChatGPT chats/sessions frequently as chats become large/slow. Design all agent process around that fact.
-- Optimize repository metadata/process for AI retrieval efficiency over conventional human readability.
-- Prefer coherent dependency-sized implementation batches and longer telemetry-backed playtests over one-error-at-a-time trial-and-error PR churn.
-- Correctness > speed, but do not require Sean to manually playtest every small change when CI/spec authority can validate it.
-- Do not allow a coherent PR to become indefinitely large. Once a logical slice is green/stable, finish it and continue on a fresh branch/PR.
-- When several playtest defects arrive together, inspect the complete supplied telemetry capture and group related fixes into a stabilization batch.
-
-## DESIGN_AUTHORITY_ACCESS
-
-Do not preload multiple meta docs every session. Read them only when needed:
-
-- unresolved design question -> `docs/_meta/OPEN_QUESTIONS.md`
-- need owning authority -> `docs/_meta/SOURCE_OF_TRUTH.md`
-- ambiguous/deprecated terminology -> `docs/_meta/TERMINOLOGY.md`
-- broad game-wide scope/identity change -> overview authority docs
-- narrow implementation with known owning docs -> fetch those exact docs only
-
-Approved gameplay docs are design authority. Imported/legacy code is compatibility plumbing only when a current Oathbound layer still depends on it.
-
-## ENGINEERING_GUARDRAILS
-
-### Project / validation
-
-- Active Godot project: `game/oathbound/`.
-- Pinned engine: Godot 4.7.2.
-- Before asking Sean to pull/playtest Godot code, `.github/workflows/godot-project-check.yml` must pass clean import + editor load/compile unless CI is unavailable; if unavailable, state that explicitly.
-- Validate runtime ownership, not compilation alone. Use runtime markers/telemetry where ownership matters.
-- Combat changes require telemetry that distinguishes changed behavior (`block_success`, posture delta/break, Deathblow-ready entry, active Player script, etc.).
-- GitHub mergeability alone is not playtest readiness.
-
-### GDScript 4.7.2
-
-- `Cannot infer the type of ...` is a hard parser error.
-- Explicitly type locals fed by Variant, `Dictionary.get()`, untyped inherited calls/properties, conditional expressions, generic indexing, etc.
-- Warning suppression must not hide parser/type failures.
-- On inheritance failures, fix the first/root parent parser error before rewriting children.
-
-### Physics/signal mutation
-
-- Do not synchronously mutate `Area2D.monitoring`, `monitorable`, collision disabled state, or similar physics registration from active contact/signal traversal.
-- Use deferred mutation/teardown (`set_deferred`, `call_deferred`, deferred `queue_free`).
-
-### Runtime ownership
-
-- Never assume an autoload/override owns runtime merely because it compiles; trace creation paths.
-- Maintain one canonical Player creation path.
-- Validate live caller/owner paths for Player, Technique, Aspect, Prosthetic, enemy, reward, and route authorities.
-
-### Combat contract
-
-- Canonical sword contacts use canonical `AttackEvent` fields; do not apply a second independent posture/damage scaling pass.
-- Track authored posture, actual applied posture delta, and posture-break entry separately from between-hit recovery.
-- Enemy posture break is shared real state and must expose Deathblow readiness for the approved duration.
-- Child hurt/stagger reactions must not overwrite shared posture-break/Deathblow-ready state.
-- Sustained block uses current defensive aim/facing, not stale movement facing.
-- Parry/block/posture break/Deathblow execution stay shared across Wolf/Wraith/Ronin unless approved docs explicitly say otherwise.
-
-### Resources/import
-
-- `.godot/` and `.import/` stay untracked.
-- Verify source assets exist in Git + clean CI import before declaring missing assets.
-- Repair stale UID/resource references when practical; do not delete source textures merely to silence warnings.
+## ENGINEERING_GUARDS
+- Project `game/oathbound/`; Godot 4.7.2.
+- Before manual Godot playtest, `godot-project-check.yml` must pass clean import + editor load/compile unless CI unavailable and explicitly stated.
+- Validate live runtime ownership, not compilation alone; use markers/telemetry where needed.
+- Combat changes need telemetry distinguishing block/parry/posture/deathblow behavior.
+- GDScript `Cannot infer the type` is hard parser failure; explicitly type Variant/Dictionary.get/untyped-call/generic-index locals.
+- Never synchronously mutate Area2D monitoring/collision registration during active contact/signal traversal; defer it.
+- Freed-object/lambda ownership errors are runtime-lifetime defects.
+- Trace actual creation/caller paths; maintain one canonical Player creation path.
+- Canonical sword contacts use canonical AttackEvent fields; no second independent damage/posture pass.
+- Posture-break/Deathblow-ready is shared state; child hurt reactions cannot overwrite it.
+- Sustained block uses current defensive aim/facing.
+- Parry/block/posture break/Deathblow stay shared across Wolf/Wraith/Ronin unless authority says otherwise.
+- `.godot/`/`.import/` untracked; verify source assets + clean import before declaring missing; repair stale UID references rather than deleting assets to silence warnings.
 
 ## PLAYTEST_HANDOFF
-
-When a playtest is genuinely needed, provide:
-
-- exact branch;
-- expected head SHA when useful;
-- expected active runtime marker/script where relevant;
-- meaningful systems to exercise in one longer run;
-- telemetry/log files to return.
-
-Do not fall back to tiny repeated manual playtests when a larger coherent validation pass is more efficient.
+When manual validation is genuinely needed, provide exact branch/head, expected runtime marker where relevant, systems to exercise in one coherent run, and telemetry/log files to return. Prefer one larger integration pass over repeated micro-playtests.
