@@ -44,6 +44,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify achievement unlock presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Presentation/Validation/OathboundAchievementToastSmoke.tscn 2>&1 | tee achievement-toast.log
+          grep -F "[OathboundAchievementToastSmoke] PASS - unlock signal presentation | queued toasts | localization fallback | readability scaling" achievement-toast.log
+          if grep -F "SCRIPT ERROR:" achievement-toast.log; then
+            echo "FAIL: achievement presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" achievement-toast.log; then
+            echo "FAIL: achievement presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify silent-protagonist and Heart boundaries
         shell: bash
         run: |
@@ -61,6 +76,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: presentation-validation-${{ github.run_id }}
-          path: presentation-contract.log
+          path: |
+            presentation-contract.log
+            achievement-toast.log
           if-no-files-found: warn
           retention-days: 7
