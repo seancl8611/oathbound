@@ -32,7 +32,11 @@ func _process(_delta: float) -> void:
 
 
 func _observe_runtime_state() -> void:
-	var area := _current_area()
+	_observe_state(_current_area(), _has_heart_approach())
+
+
+func _observe_state(area: int, heart_approach: bool) -> void:
+	area = clampi(area, 1, 3)
 	if _last_area <= 0:
 		_last_area = area
 	elif area > _last_area:
@@ -46,7 +50,7 @@ func _observe_runtime_state() -> void:
 		# completion events for regions that were not traversed in this observer lifetime.
 		_last_area = area
 
-	if _has_heart_approach():
+	if heart_approach:
 		_emit_checkpoint("heart_approach")
 
 
@@ -184,14 +188,23 @@ func _resource_delta(start: Dictionary, current: Dictionary) -> Dictionary:
 	}
 
 
-# Test-only seams. These expose read-only capture/dedup behavior without mutating any
-# canonical authority or requiring a synthetic save/progression setup.
+# Test-only seams. These expose the same read-only capture/dedup/state-transition logic
+# without mutating any canonical authority or requiring a synthetic save setup.
 func capture_snapshot_for_playtest(stage: String) -> Dictionary:
 	return _build_snapshot(stage)
 
 
 func emit_checkpoint_for_playtest(stage: String) -> bool:
 	return _emit_checkpoint(stage)
+
+
+func observe_state_for_playtest(area: int, heart_approach: bool = false) -> void:
+	_observe_state(area, heart_approach)
+
+
+func set_area_baseline_for_playtest(area: int) -> void:
+	_last_area = clampi(area, 1, 3)
+	_initialized = true
 
 
 func reset_emitted_stages_for_playtest() -> void:
