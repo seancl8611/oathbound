@@ -31,44 +31,42 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-28T14:37:00Z
+updated_utc: 2026-08-28T14:39:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 123
-  feature_head: 3a5347d309c4ca7923f6eccde13f077211e87a44
-  merge_commit: 97267db2c3daa77e35f11013f795e2a2bffecb83
-  validation: 6/6 PR-triggered workflows green; mergeable_state clean
-active_branch: agent/run-results-performance-summary
-active_pr: 124
-covered_through_substantive_commit: e18dddd5b4414b53d6cf638604b219a67eeb7c52
-known_good_checkpoint: 97267db2c3daa77e35f11013f795e2a2bffecb83
+  pr: 124
+  feature_head: e18dddd5b4414b53d6cf638604b219a67eeb7c52
+  merge_commit: 1921dcbd487922e31faf2f5ca7c3ee09ec941b4f
+  validation: 7/7 PR-triggered workflows green; mergeable_state clean
+active_branch: null
+active_pr: null
+covered_through_substantive_commit: null
+known_good_checkpoint: 1921dcbd487922e31faf2f5ca7c3ee09ec941b4f
 current_objective: >-
-  Finish PR #124: persist and present the eight already-tracked run performance counters at run end,
-  with no gameplay or numerical changes.
+  Gather the first long player-facing integration evidence from the now-instrumented release path before
+  numerical balance/economy/difficulty tuning or reopening combat architecture. The runtime now provides
+  structured Region 1/Region 2/Heart Approach checkpoints plus a localized end-of-run performance summary.
 next_action: >-
-  PR #124 is open at exact head e18dddd5b4414b53d6cf638604b219a67eeb7c52. Branch validation
-  is 6/6 green, including Release Shell and Godot 4.7.2 Project Check. Check the seven PR-triggered
-  workflows once; if green and mergeable_state clean, merge #124 autonomously with this exact head,
-  checkpoint main, and finalize the turn. If any check fails, inspect only that workflow/job.
-current_batch:
-  - RecordsRuntime.get_current_run_performance_snapshot reads eight existing RunData counters only.
-  - End-of-run result payload persists that snapshot before run teardown.
-  - Run-results overlay adds Enemies defeated, Parries, Perfect parries, Damage taken, Combat rooms cleared, Blessings received, Treasures opened, and Items purchased.
-  - Accessible wrapper localizes the new section/labels through existing English-fallback localization.
-  - Existing RunResultsOverlaySmoke uses the accessible wrapper and verifies API keys plus persisted synthetic values.
-  - PR #124: 5 commits, 4 files, +82/-2; no new workflow/state owner.
+  Run one coherent player-facing integration playtest from the current main build through Region 1 -> Region 2
+  -> Region 3 -> Heart Approach (or until a real failure stops the run). Exercise ordinary combat, block/parry,
+  room choices, rewards, Technique/build growth, boss transitions, and run-end/return presentation. Preserve the
+  CombatTelemetry/log output including IntegrationCheckpoint markers and the final Run performance summary.
+  Use that evidence for the next bounded fixes/tuning batch; do not invent Heart combat or tune numbers beforehand.
 recent_batches:
   - pr_121: queued achievement-unlock presenter.
   - pr_122: canonical non-blocking regional boss title cards.
   - pr_123: debug-only Region 1/Region 2/Heart Approach structured integration checkpoints.
+  - pr_124: persisted/localized end-of-run performance summary from eight existing RunData counters.
 confirmed:
-  - PR #119 through #123 merged; never continue old branches.
-  - Godot 4.7.2.
+  - PR #119 through #124 merged; never continue old feature branches.
+  - PR #124 branch validation 6/6 green; PR validation 7/7 green; mergeable_state clean.
+  - Godot 4.7.2 clean import/editor/runtime ownership validation passed on PR #124.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
   - Numerical balance/economy/difficulty tuning waits for long player-facing evidence.
   - Known provenance blockers remain explicit; never fabricate license evidence.
+  - Run performance now records Enemies defeated, Parries, Perfect parries, Damage taken, Combat rooms cleared, Blessings received, Treasures opened, and Items purchased in the persisted run result.
 avoid_without_evidence:
   - combat/Aspect/Technique/Prosthetic/Relic architecture reopen
   - authored Heart combat
