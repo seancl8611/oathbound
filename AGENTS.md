@@ -16,36 +16,48 @@ Repository state is authority. Conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 2
-updated_utc: 2026-08-28T03:38:00Z
+updated_utc: 2026-08-28T03:45:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
   pr: 119
   merge_commit: 959d2da7f05b9dd46b6947bc75497df1b67306fd
 active_branch: agent/final-integration-readiness
-active_pr: null
+active_pr: 120
 covered_through_substantive_commit: 3b24dbfa04b315273c5076e40af19dd09eba19e2
-known_good_checkpoint: a86e3f5975b81d67320c9012b155e99951c8ce3d
+known_good_checkpoint: 3b24dbfa04b315273c5076e40af19dd09eba19e2
 current_objective: >-
-  Prepare merged build for first long player-facing integration run without guessing
-  balance/reopening architecture. Current slice: final integration-readiness/release-QA,
-  presentation drift cleanup, and missing cross-system runtime regression boundaries.
+  Final integration-readiness/release-QA slice is complete and isolated in PR #120.
+  Preserve this branch as a small green boundary; do not grow it into another mega-PR.
 next_action: >-
-  Validate 3b24dbfa CI, especially Run Region Handoff Check and Godot 4.7.2 Project Check.
-  If green, continue bounded readiness audit; if the slice is coherent/green, create a
-  small PR rather than growing this branch. No numerical tuning before playtest evidence.
+  Recheck PR #120 mergeability/PR-triggered checks and review metadata only. Do not add
+  unrelated work to this branch. PR #120 has not been explicitly authorized for merge;
+  after it is merged, start the next coherent slice from updated main. No numerical tuning
+  before long player-facing playtest evidence.
 current_batches:
   - 0ea515dc: corrected stale Technique-slot art-production authorities; added Final Integration Readiness static CI; Heart test-only + attribution blocker guard.
   - a86e3f59: cleaned player-facing title/settings/credits engineering copy; readiness guard extended.
   - 3b24dbfa: added single release-GameFlow Region 1->2->3->Heart Approach smoke; verifies 33rd counted Shogun chamber exactly once, build continuity, safe Relic transitions, one Heart handoff, no Heart combat simulation.
 ci_known:
-  a86e3f59:
-    workflows_total: 7
+  3b24dbfa:
+    workflows_total: 6
     failures: 0
-    final_integration_readiness_check: success
-    release_shell_check: success
-    godot_4_7_2_project_check: success
     run_region_handoff_check: success
+    godot_4_7_2_project_check: success
+    release_shell_check: success
+    runscene_runtime_lifetime_check: success
+    authored_presentation_content_check: success
+    hushiro_combat_semantics_check: success
+pr_120:
+  state: open
+  draft: false
+  commits: 3
+  changed_files: 9
+  additions: 415
+  deletions: 21
+  head: 3b24dbfa04b315273c5076e40af19dd09eba19e2
+  initial_mergeable_value: false
+  note: initial value was returned immediately at PR creation; recheck after GitHub calculation before treating as conflict.
 working_set:
   - game/oathbound/Core/Release/Validation/OathboundFullRunHandoffHarness.gd
   - game/oathbound/Core/Release/Validation/FullRunHeartHandoffSmoke.gd
@@ -62,10 +74,12 @@ confirmed:
   - Blood Cavern persistence/MetaProgress isolation green.
   - Real-player endpoint is Heart Approach/current unauthored Heart shell; do not simulate/invent Heart combat.
   - Endgame smoke protects contract-test Heart completion; Kagutsuchi smoke protects physical 11-chamber -> Heart seam.
-  - New 3b24dbfa smoke closes missing single-release-GameFlow 1->2->3->Heart seam, pending CI.
+  - 3b24dbfa closes missing single-release-GameFlow 1->2->3->Heart seam and is green.
+  - Strand prompt glyphs are already runtime-owned by Hub.gd and adapt to active keyboard/controller binding; scene `[E]` values are only defaults.
   - Strand main background hub.png is a known attribution/provenance blocker; do not fabricate replacement/license evidence.
   - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 avoid_without_evidence:
+  - unrelated additions to PR #120
   - reopening implemented combat/Aspect/Technique/Prosthetic/Relic architecture
   - authored Heart combat
   - final Blood Cavern trial count/loadouts/reward sequencing
@@ -99,4 +113,4 @@ Rules: exact-path reads; search only when path unknown/task inherently audit; ta
 - `.godot/`/`.import/` untracked; verify source assets + clean import before declaring missing; repair stale UID refs instead of deleting assets.
 
 ## PLAYTEST_HANDOFF
-When manual validation is genuinely needed, provide exact branch/head, runtime marker where relevant, systems for one coherent run, telemetry/logs to return. Prefer one larger integration pass over micro-playtests.
+When manual validation is genuinely needed, provide exact branch/head, runtime marker where relevant, systems for one coherent run, and telemetry/logs to return. Prefer one larger integration pass over micro-playtests.
