@@ -16,7 +16,7 @@ Repository state is authority. Conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 2
-updated_utc: 2026-08-28T03:17:00Z
+updated_utc: 2026-08-28T03:24:00Z
 repo: seancl8611/oathbound
 control_ref: main
 
@@ -28,36 +28,52 @@ merged_cutoff:
 
 active_branch: agent/final-integration-readiness
 active_pr: null
-covered_through_substantive_commit: 959d2da7f05b9dd46b6947bc75497df1b67306fd
+covered_through_substantive_commit: 0ea515dc349f81a978ba0217289f7d01a82c5930
 known_good_checkpoint: fcc6dda72efaf0cc51657ede4b9514d97332020c
 
 current_objective: >-
   Prepare the merged build for the first long player-facing integration run without
-  guessing balance or reopening implemented architecture. Execute a coherent final
-  integration-readiness/release-QA slice, beginning with the approved final
-  presentation-art/prototype replacement audit and current Heart-shell boundary.
+  guessing balance or reopening implemented architecture. Current slice is final
+  integration-readiness/release-QA and prototype/presentation drift cleanup.
 next_action: >-
-  Audit authoritative asset/release requirements against actual player-facing runtime
-  references. Identify prototype/placeholder presentation still visible, stale superseded
-  UI/art language, or release blockers resolvable from existing approved assets/authorities.
-  Add bounded automated regression coverage where practical. Do not tune numerical
-  balance/economy until playtest evidence exists.
+  Validate commit 0ea515dc with the new Final Integration Readiness Check. If green,
+  continue the bounded player-facing presentation/prototype asset audit and package
+  resolvable readiness defects on this branch. Do not tune numerical balance/economy
+  until playtest evidence exists.
 
-working_set_seed:
-  - docs/_meta/OPEN_QUESTIONS.md
-  - docs/_meta/SOURCE_OF_TRUTH.md
+current_batch:
+  commit: 0ea515dc349f81a978ba0217289f7d01a82c5930
+  changes:
+    - corrected ASSET_INVENTORY Technique production from retired slots/replacement to unlimited additive action-trigger model
+    - corrected MILESTONE_04 Technique production language and roster classification
+    - added tools/release/check_final_integration_readiness.py
+    - added .github/workflows/final-integration-readiness-check.yml
+  static_contracts:
+    - retired Technique-slot/replacement production language cannot return in the two corrected authorities
+    - Heart contract-test completion remains unavailable to normal gameplay
+    - known release attribution/provenance blockers remain explicit
+
+working_set:
   - docs/art_production/ASSET_INVENTORY.md
-  - docs/overview/ENDGAME_POSTGAME_RELEASE.md
+  - docs/art_production/milestones/MILESTONE_04.md
+  - docs/art_production/TECHNIQUE_VFX.md
+  - docs/ui_ux/TECHNIQUE_REWARDS.md
+  - docs/art_production/milestones/MILESTONE_07.md
   - docs/external/RELEASE_ATTRIBUTION_AUDIT.md
-  - player-facing scenes/scripts/assets discovered by bounded audit
+  - game/oathbound/Core/Endgame/HeartEncounterShell.gd
+  - game/oathbound/Core/Endgame/Validation/EndgameCampaignContractSmoke.gd
+  - tools/release/check_final_integration_readiness.py
+  - .github/workflows/final-integration-readiness-check.yml
 
 confirmed:
   - PR #119 is merged; never continue agent/runtime-lifetime-reconciliation.
   - Godot baseline 4.7.2.
-  - Techniques are slotless/unlimited; never reintroduce slots/caps.
+  - Techniques are slotless/unlimited; five action labels are trigger classifications, never equipment slots.
+  - UI/VFX authorities already matched slotless model; stale drift was in art-production inventory/Milestone 4.
   - Blood Cavern fixed-loadout persistence/MetaProgress isolation is green.
   - Real-player route currently ends at Heart shell; Heart combat is unauthored.
-  - Contract-test Heart completion must never become normal player victory.
+  - Existing EndgameCampaignContractSmoke already proves normal Heart shell rejects contract-only completion.
+  - Existing KagutsuchiFullRunSmoke already proves 11 counted chambers then non-counted Heart handoff with persistent Player/build.
   - Final integration/playtest tuning is the active approved milestone.
   - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 
