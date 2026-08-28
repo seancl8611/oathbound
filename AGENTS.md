@@ -24,34 +24,39 @@ Repository state is authority. Conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 3
-updated_utc: 2026-08-28T03:40:00Z
+updated_utc: 2026-08-28T04:02:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 120
-  feature_head: 3b24dbfa04b315273c5076e40af19dd09eba19e2
-  merge_commit: a24fbed77b40c53b3b613451ba9481a0506491ab
-  validation: 7/7 PR-triggered workflows green at feature head
+  pr: 121
+  feature_head: 31d21bcad82accb9902b90c71e35a9635d3e3347
+  merge_commit: 0805a0363e8857424e84316be5962649afbc286e
+  validation: PR-triggered suite green; mergeable_state clean
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: a24fbed77b40c53b3b613451ba9481a0506491ab
+known_good_checkpoint: 0805a0363e8857424e84316be5962649afbc286e
 current_objective: >-
-  Continue progressing the implemented game toward the approved documentation and first
-  long player-facing integration run. Work autonomously in bounded coherent PRs; merge
-  green PRs without waiting for Sean. Do not guess unresolved design or numerical tuning.
+  Continue pre-playtest release-presentation/readiness work that is explicitly supported
+  by existing authorities and runtime evidence. Merge each bounded green PR autonomously.
+  Long manual integration run remains the next source of balance/tuning evidence.
 next_action: >-
-  Read only docs/_meta/OPEN_QUESTIONS.md plus the minimum owning authority needed to select
-  the next implementation-ready slice. Create a fresh branch from current main, implement,
-  validate, open/merge the PR autonomously, then continue to another coherent slice if useful.
+  Select the next concrete Milestone 7/release-QA omission using exact authorities/files.
+  Prefer player-facing presentation/accessibility or missing regression coverage that can
+  be implemented without new balance values, fabricated art provenance, or unauthored Heart combat.
+recent_batches:
+  - pr_120: final integration readiness; full 1->2->3->Heart Approach GameFlow smoke; front-end copy cleanup.
+  - pr_121: global queued achievement-unlock presenter using existing catalog/localization/readability settings; dedicated headless smoke.
 confirmed:
-  - PR #119 and PR #120 are merged; never continue either old feature branch.
+  - PR #119, #120, and #121 are merged; never continue their old feature branches.
   - Godot 4.7.2.
   - Techniques are slotless/unlimited; five action labels are trigger classifications, never equipment slots.
   - Blood Cavern persistence/MetaProgress isolation is green.
   - Real-player endpoint is Heart Approach/current unauthored Heart shell; do not invent Heart combat.
   - Single release-GameFlow Region 1->2->3->Heart Approach seam is covered and green.
-  - Strand interaction prompts already adapt to active keyboard/controller binding.
+  - Achievement unlocks now have player-facing queued presentation; AchievementRuntime remains progression owner.
+  - Strand interaction prompts adapt to active keyboard/controller binding.
+  - Custom Oathbound app icon already exists; do not replace it merely for activity.
   - Known font/music/audio/texture provenance blockers must remain explicit; never fabricate license evidence.
   - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 avoid_without_evidence:
