@@ -196,6 +196,21 @@ func get_run_resume_record_state() -> Dictionary:
 	}
 
 
+func get_current_run_performance_snapshot() -> Dictionary:
+	if typeof(RunData) != TYPE_OBJECT:
+		return {}
+	return {
+		"enemies_defeated": int(RunData.enemies_killed),
+		"parries": int(RunData.parries_performed),
+		"perfect_parries": int(RunData.perfect_parries),
+		"damage_taken": int(RunData.damage_taken),
+		"combat_rooms_cleared": int(RunData.combat_rooms_cleared),
+		"blessings_received": int(RunData.blessings_received),
+		"treasures_opened": int(RunData.treasures_opened),
+		"items_purchased": int(RunData.items_purchased),
+	}
+
+
 func consume_pending_result() -> Dictionary:
 	if typeof(MetaProgress) != TYPE_OBJECT:
 		return {}
@@ -412,6 +427,7 @@ func _build_run_result(successful: bool, completion_kind: String, elapsed: float
 		"area": int(RunData.current_area_id) if typeof(RunData) == TYPE_OBJECT else 1,
 		"depth": int(RunData.depth) if typeof(RunData) == TYPE_OBJECT else 0,
 		"run_goal": str(RunData.run_goal) if typeof(RunData) == TYPE_OBJECT else "",
+		"performance": get_current_run_performance_snapshot(),
 		"mist_gained": maxi(0, int(current_resources.get("mist", 0)) - int(_run_resource_start.get("mist", 0))),
 		"scrolls_gained": maxi(0, int(current_resources.get("scrolls", 0)) - int(_run_resource_start.get("scrolls", 0))),
 		"boss_materials_gained": gained_materials,
