@@ -1,104 +1,78 @@
 # OATHBOUND_AGENT_CONTROL_PLANE
 
-<!-- V2: machine-oriented bootstrap/state; GitHub is durable memory -->
+<!-- V3: machine-oriented bootstrap/state; GitHub is durable memory -->
 
 Single durable bootstrap + live handoff for AI-assisted Oathbound work. Optimize for agent recovery/query efficiency, not human readability. For session/workflow recovery this file overrides conflicting meta-workflow guidance; owning approved design docs remain gameplay/content authority.
 
 ## BOOT
 1. Fresh chat/session: fetch `main:AGENTS.md` first.
-2. Parse `LIVE_STATE`; fetch only `active_branch` HEAD.
+2. Parse `LIVE_STATE`; if `active_branch` is set, fetch only that branch HEAD.
 3. If HEAD == `covered_through_substantive_commit`, continue from `next_action`.
-4. If different, assume interrupted work; inspect only `covered_through_substantive_commit..HEAD`, reconcile state, checkpoint this file, continue.
+4. If different, assume interrupted work; inspect only the uncovered commit range/files, reconcile state, checkpoint this file, continue.
 5. Fetch exact working-set files + only needed authorities. Never ask Sean to restate recoverable repo context.
 
 Repository state is authority. Conversation/project memory is cache only.
 
+## AUTONOMOUS_PR_POLICY
+- Sean does **not** need to approve routine PR merges. Do not stop merely to ask whether a green PR may be merged.
+- When a PR is coherent, mergeable, and its required/targeted validation is green, merge it autonomously using the exact verified head SHA.
+- If CI fails, diagnose/fix it; if mergeability is uncertain, resolve it. Ask Sean only when a genuine design/product decision or external/manual evidence is required.
+- Multiple PR cycles in one assistant response/session are encouraged when useful: `branch -> implement -> validate -> PR -> merge -> fresh main -> next branch`.
+- Prefer substantial coherent slices, but keep PRs bounded. Never recreate a #119-style mega-PR merely to reduce PR count.
+- After every autonomous merge, start subsequent implementation from the new `main`, not the merged feature branch.
+
 ## LIVE_STATE
 ```yaml
-schema: 2
-updated_utc: 2026-08-28T03:50:00Z
+schema: 3
+updated_utc: 2026-08-28T03:40:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 119
-  merge_commit: 959d2da7f05b9dd46b6947bc75497df1b67306fd
-active_branch: agent/final-integration-readiness
-active_pr: 120
-covered_through_substantive_commit: 3b24dbfa04b315273c5076e40af19dd09eba19e2
-known_good_checkpoint: 3b24dbfa04b315273c5076e40af19dd09eba19e2
+  pr: 120
+  feature_head: 3b24dbfa04b315273c5076e40af19dd09eba19e2
+  merge_commit: a24fbed77b40c53b3b613451ba9481a0506491ab
+  validation: 7/7 PR-triggered workflows green at feature head
+active_branch: null
+active_pr: null
+covered_through_substantive_commit: null
+known_good_checkpoint: a24fbed77b40c53b3b613451ba9481a0506491ab
 current_objective: >-
-  Final integration-readiness/release-QA slice is complete and isolated in PR #120.
-  Preserve this branch as a small fully-green boundary; do not grow it into another mega-PR.
+  Continue progressing the implemented game toward the approved documentation and first
+  long player-facing integration run. Work autonomously in bounded coherent PRs; merge
+  green PRs without waiting for Sean. Do not guess unresolved design or numerical tuning.
 next_action: >-
-  PR #120 is mergeable and all PR-triggered checks are green. Await explicit merge
-  authorization; do not add unrelated work to this branch. After merge, start the next
-  coherent slice from updated main. No numerical tuning before long player-facing playtest evidence.
-current_batches:
-  - 0ea515dc: corrected stale Technique-slot art-production authorities; added Final Integration Readiness static CI; Heart test-only + attribution blocker guard.
-  - a86e3f59: cleaned player-facing title/settings/credits engineering copy; readiness guard extended.
-  - 3b24dbfa: added single release-GameFlow Region 1->2->3->Heart Approach smoke; verifies 33rd counted Shogun chamber exactly once, build continuity, safe Relic transitions, one Heart handoff, no Heart combat simulation.
-ci_known:
-  3b24dbfa:
-    pr_triggered_workflows_total: 7
-    failures: 0
-    final_integration_readiness_check: success
-    run_region_handoff_check: success
-    godot_4_7_2_project_check: success
-    release_shell_check: success
-    runscene_runtime_lifetime_check: success
-    authored_presentation_content_check: success
-    hushiro_combat_semantics_check: success
-pr_120:
-  state: open
-  draft: false
-  mergeable: true
-  rebaseable: true
-  commits: 3
-  changed_files: 9
-  additions: 415
-  deletions: 21
-  head: 3b24dbfa04b315273c5076e40af19dd09eba19e2
-working_set:
-  - game/oathbound/Core/Release/Validation/OathboundFullRunHandoffHarness.gd
-  - game/oathbound/Core/Release/Validation/FullRunHeartHandoffSmoke.gd
-  - game/oathbound/Core/Release/Validation/FullRunHeartHandoffSmoke.tscn
-  - .github/workflows/run-region-handoff-check.yml
-  - game/oathbound/TitleScreen/OathboundFrontEnd.gd
-  - tools/release/check_final_integration_readiness.py
-  - docs/art_production/ASSET_INVENTORY.md
-  - docs/art_production/milestones/MILESTONE_04.md
+  Read only docs/_meta/OPEN_QUESTIONS.md plus the minimum owning authority needed to select
+  the next implementation-ready slice. Create a fresh branch from current main, implement,
+  validate, open/merge the PR autonomously, then continue to another coherent slice if useful.
 confirmed:
-  - PR #119 merged; never continue old branch.
+  - PR #119 and PR #120 are merged; never continue either old feature branch.
   - Godot 4.7.2.
-  - Techniques slotless/unlimited; five action labels are trigger classifications, never equipment slots.
-  - Blood Cavern persistence/MetaProgress isolation green.
-  - Real-player endpoint is Heart Approach/current unauthored Heart shell; do not simulate/invent Heart combat.
-  - Endgame smoke protects contract-test Heart completion; Kagutsuchi smoke protects physical 11-chamber -> Heart seam.
-  - 3b24dbfa closes missing single-release-GameFlow 1->2->3->Heart seam and is fully green.
-  - Strand prompt glyphs are runtime-owned by Hub.gd and adapt to active keyboard/controller binding; scene `[E]` values are only defaults.
-  - Strand main background hub.png is a known attribution/provenance blocker; do not fabricate replacement/license evidence.
+  - Techniques are slotless/unlimited; five action labels are trigger classifications, never equipment slots.
+  - Blood Cavern persistence/MetaProgress isolation is green.
+  - Real-player endpoint is Heart Approach/current unauthored Heart shell; do not invent Heart combat.
+  - Single release-GameFlow Region 1->2->3->Heart Approach seam is covered and green.
+  - Strand interaction prompts already adapt to active keyboard/controller binding.
+  - Known font/music/audio/texture provenance blockers must remain explicit; never fabricate license evidence.
   - Numerical balance/economy/difficulty tuning requires player-facing evidence.
 avoid_without_evidence:
-  - unrelated additions to PR #120
   - reopening implemented combat/Aspect/Technique/Prosthetic/Relic architecture
   - authored Heart combat
   - final Blood Cavern trial count/loadouts/reward sequencing
   - numerical balance/economy changes before long integration playtest
-tooling:
-  default: exact-file + adjacent-commit + targeted-CI/artifact
-  avoid: mega-PR diffs, full logs, broad history reconstruction
+  - waiting for Sean to approve routine PR merges
+  - accumulating unrelated changes into a large PR
 ```
 
 ## CHECKPOINT
-- `covered_through_substantive_commit` = newest active-branch code/docs commit represented above; never control-file commit itself.
+- `covered_through_substantive_commit` = newest active-branch code/docs commit represented above; never the control-file commit itself.
 - Keep this file on `main`; implementation on feature branches.
-- After each substantive batch/CI diagnosis, checkpoint promptly; if tool lifetime risk rises, checkpoint before optional work.
+- After each substantive batch/CI diagnosis/merge, checkpoint promptly; if tool lifetime risk rises, checkpoint before optional work.
 - Before intentionally ending repo work, verify state current. Overwrite stale facts; no historical narrative.
 - Interrupted recovery: inspect only uncovered commit range/files, never whole repo/PR.
 
 ## WORK_LOOP
-`main:AGENTS.md -> active HEAD -> exact authority/files -> smallest diagnostic -> coherent patch -> commit -> targeted CI -> main:AGENTS.md`
-Rules: exact-path reads; search only when path unknown/task inherently audit; targeted CI/job steps/artifacts; adjacent compares; correctness > speed; dependency-sized batches; close green PRs at logical boundaries; never recreate mega-PR.
+`main:AGENTS.md -> active HEAD -> exact authority/files -> smallest diagnostic -> coherent patch -> commit -> targeted CI -> PR -> autonomous merge -> updated main -> main:AGENTS.md`
+Rules: exact-path reads; search only when path unknown/task inherently audit; targeted CI/job steps/artifacts; adjacent compares; correctness > speed; dependency-sized batches; close green PRs at logical boundaries; multiple PRs per response are allowed; never recreate mega-PR.
 
 ## DESIGN_ACCESS
 - unresolved -> `docs/_meta/OPEN_QUESTIONS.md`; owner -> `docs/_meta/SOURCE_OF_TRUTH.md`; terms -> `docs/_meta/TERMINOLOGY.md`; narrow work -> exact authority only.
