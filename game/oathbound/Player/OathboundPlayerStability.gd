@@ -10,6 +10,18 @@ const TECHNIQUE_DEATHBLOW_GRACE := 2.0
 var _combat_dead: bool = false
 
 
+func _ready() -> void:
+	# player.tscn still carries the imported 10-Spirit compatibility executor. Current
+	# Oathbound gameplay is 100 Spirit, so synchronize that child before the inherited
+	# controller builds its HUD. Doing this silently prevents scene/bootstrap setup from
+	# being presented as a +90 Spirit pickup while preserving later real gain signals.
+	var executor_node: Node = get_node_or_null("ProstheticExecutor")
+	if executor_node != null:
+		executor_node.set("max_spirit", CURRENT_MAX_SPIRIT)
+		executor_node.set("current_spirit", CURRENT_MAX_SPIRIT)
+	super._ready()
+
+
 func take_damage(amount: int, show_feedback: bool = true) -> void:
 	if _combat_dead:
 		return
