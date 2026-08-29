@@ -4,7 +4,7 @@ title: First Attempt
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-25
+last_reviewed: 2026-08-29
 topics:
   - first-attempt
   - onboarding
@@ -33,13 +33,17 @@ A highly skilled player may progress arbitrarily far on the first attempt, inclu
 
 # Start presentation
 
-The player's first playable control should begin directly in the normal Hushiro route, at or immediately before Hushiro Chamber 1. Do not require a bespoke tutorial dungeon, fixed introductory encounter sequence, forced early boss loss, or long opening cutscene.
+A newly created save slot, including a slot created by overwriting an existing save, starts in **The Strand**. This gives the player a stable home-space introduction before the first expedition and makes New Game behavior consistent with the hub-centered run loop.
 
-Any initial mission framing from the Order, Strand Keeper, Raven, environment, or UI should be brief and non-blocking. The player learns primarily by playing the same route they will later repeat.
+The first **expedition** still begins in the normal Hushiro route at Chamber 1. Do not require a bespoke tutorial dungeon, fixed introductory encounter sequence, forced early boss loss, or long opening cutscene between The Strand and that first run.
+
+The Strand visit does not implicitly grant later progression. Akio remains in the fresh-save state described below until the player launches the first expedition; locked systems remain locked under their normal requirements.
+
+Any initial mission framing from the Order, Strand Keeper, Raven, environment, or UI should be brief and non-blocking. The player learns primarily by entering and playing the same route they will later repeat.
 
 # First-attempt loadout
 
-Akio begins with:
+Akio begins the first expedition with:
 
 - the **base katana core combat kit**,
 - the normal five Technique trigger classifications available to run rewards: Basic Attack, Held Attack, Dash / Dash Attack, Parry / Counter, and Deathblow,
@@ -141,6 +145,7 @@ This exceptional endpoint exists only to keep the full first attempt mechanicall
 
 The first attempt follows the same philosophy as the rest of Oathbound:
 
+- establish The Strand as the player's persistent home before the first expedition,
 - teach through the real game rather than a disposable tutorial route,
 - allow player skill to exceed expected progression,
 - do not fake an unwinnable encounter merely to trigger the roguelite loop,
