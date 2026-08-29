@@ -31,7 +31,7 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T06:08:00Z
+updated_utc: 2026-08-29T14:29:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -39,39 +39,35 @@ merged_cutoff:
   feature_head: 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52
   merge_commit: 62bcf3dc5d7557ff0a2b86934f06b96444d97319
   validation: 5/5 final-head push workflows green; 11/11 PR-triggered workflows green; mergeable_state clean
-active_branch: null
-active_pr: null
-covered_through_substantive_commit: null
+active_branch: agent/restore-first-attempt-start
+active_pr: 127
+covered_through_substantive_commit: cf5322c0f1b2f07165a0147d45f8f9be3dd7621c
 known_good_checkpoint: 62bcf3dc5d7557ff0a2b86934f06b96444d97319
 current_objective: >-
-  Gather the next player-facing integration evidence from main after the first long playtest stabilization batch.
-  PR #126 fixed the failed-run crash, fresh-save/overwrite routing, Archer arrow block-vs-parry response, and duplicate
-  Rest route ownership. Re-test those exact behaviors first, then continue the coherent Region 1 -> Region 2 ->
-  Region 3 -> Heart Approach integration route if no real blocker stops the run.
+  Restore the approved direct first-attempt start after Sean clarified that the fresh-save jump directly into Hushiro
+  was intentional design, not a bug. Keep every other evidence-backed PR #126 stabilization fix intact.
 next_action: >-
-  Run `oathbound-playtest.cmd main` and wait for IMPORT PREFLIGHT PASSED. Verify a fresh New Game or overwritten slot
-  opens The Strand, then launch the first expedition and confirm it enters the normal unscripted Hushiro route. In
-  Archer encounters, ordinary block must absorb/despawn the arrow without reflection while a real parry must reflect.
-  Use at least one Rest exit and watch for the retired duplicate make_choice warning. On player death, confirm run-result
-  construction and return presentation complete without the prior Heart Binding API crash. If stable, continue through
-  Region 1 -> Region 2 -> Region 3 -> Heart Approach or until another real failure. Preserve runtime log and CombatTelemetry.
+  PR #127 is open at exact feature head cf5322c0f1b2f07165a0147d45f8f9be3dd7621c after all 5 final-head push
+  workflows passed. Check only PR-triggered workflow completion and mergeability. If all are green and
+  mergeable_state is clean, merge autonomously with exact expected head SHA, checkpoint main, and hand main back
+  for playtesting. Fresh New Game/overwrite must begin directly in the normal unscripted Hushiro first attempt.
 current_batch:
-  - PR #126 merged from exact feature head 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52 at merge commit 62bcf3dc5d7557ff0a2b86934f06b96444d97319.
-  - Failed-run result construction now uses MetaProgress.get_heart_bindings_remaining(); the stale nonexistent remaining_heart_bindings call is gone.
-  - Fresh New Game and overwrite route to res://World/HubScene.tscn. FIRST_ATTEMPT authority now establishes The Strand before the first expedition while preserving the normal unscripted Hushiro first run.
-  - Corrupted Archer projectile defense now treats canonical is_parrying/is_blocking state as authoritative. Normal block absorbs/despawns the arrow; only parry reflects it. Compatibility fallback uses BLOCKING=6 / PARRYING=7.
-  - RestChamber no longer duplicates GameFlow route-gate ownership, retiring the observed make_choice-not-awaiting-choice warning path.
-  - PostPlaytestStabilitySmoke covers failed-run result build, fresh-save Strand destination, and Rest single-owner routing.
-  - HushiroProjectileDefenseSmoke reproduces the observed state=6/parry=false block and separately validates true parry reflection.
-  - Exact feature head passed 5/5 triggered push workflows and PR #126 passed all 11 PR-triggered workflows, including Godot 4.7.2 Project Check, Release Shell, both Hushiro gates, Yomori/Kagutsuchi, lifetime, presentation, region handoff, and dedicated stability validation.
+  - Sean clarified the original First Attempt design was intentional: a fresh or overwritten save should begin directly in the normal Hushiro run, not The Strand.
+  - PR #127 restores docs/gameplay/FIRST_ATTEMPT.md to the approved direct-Hushiro first-control authority.
+  - TitleScreen keeps PR #126's get_new_game_destination_path() test seam but returns res://Utility/RunScene.tscn again; _start_new_game continues routing through that seam.
+  - PostPlaytestStabilitySmoke now directly verifies the front-end seam resolves fresh New Game/overwrite to RunScene and still checks failed-run result construction plus Rest single-owner routing.
+  - Post-playtest Stability Check marker now requires `fresh save -> first run`; its projectile block/parry regression remains unchanged.
+  - Exact feature head cf5322c0f1b2f07165a0147d45f8f9be3dd7621c passed all 5 push-triggered workflows: Stability, Godot 4.7.2 Project, Hushiro Combat Semantics, Run Region Handoff, and Authored Presentation Content.
+  - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix are intentionally preserved.
 recent_batches:
-  - pr_124: persisted/localized end-of-run performance summary from eight existing RunData counters.
   - pr_125: clean playtest import preflight + explicit Hushiro enemy guard cue + canonical guard transaction smoke.
-  - pr_126: first long-playtest stabilization for death/run-results, fresh-save Strand routing, Archer projectile defense, and Rest gate ownership.
+  - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
+  - pr_127_open: bounded correction restoring the approved direct first-attempt run start while preserving the other PR #126 fixes.
 confirmed:
   - PR #119 through #126 merged; never continue old feature branches.
-  - Aug 29 player log had one SCRIPT ERROR at RecordsRuntime.on_run_finished from stale remaining_heart_bindings and one duplicate Rest make_choice warning; both exact paths are covered by PR #126 regressions.
-  - Uploaded combat telemetry showed five Archer arrow block_success contacts with _parry_active=false, state=6, zero HP loss, and posture-only damage; projectile-local misclassification caused reflection.
+  - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
+  - Aug 29 player log had one SCRIPT ERROR at RecordsRuntime.on_run_finished from stale remaining_heart_bindings and one duplicate Rest make_choice warning; both exact paths remain covered by PR #126 regressions.
+  - Uploaded combat telemetry showed five Archer arrow block_success contacts with _parry_active=false, state=6, zero HP loss, and posture-only damage; projectile-local misclassification caused reflection and remains fixed.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
