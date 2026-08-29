@@ -31,46 +31,44 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T18:12:00Z
+updated_utc: 2026-08-29T19:24:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 128
-  feature_head: 5b76be7f9724e334de80ec430baa1c6182333741
-  merge_commit: 84469b1b584852176e7ad7654192fb2208eabaef
-  validation: 7/7 final-head push workflows green; 9/9 PR-triggered workflows green; mergeable_state clean
+  pr: 129
+  feature_head: 848196dc1ea4515652fb5f513a55097c3cb187ab
+  merge_commit: a98824b276e4044ae8ddc232e45d1e700ad4906a
+  validation: 10/10 PR-triggered workflows green; mergeable true
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: 84469b1b584852176e7ad7654192fb2208eabaef
+known_good_checkpoint: a98824b276e4044ae8ddc232e45d1e700ad4906a
 current_objective: >-
-  Gather the next coherent player-facing integration evidence from main after the Aug 29 follow-up stabilization pass.
-  The latest supplied log is materially clean: no SCRIPT ERROR/ERROR/WARNING signature, and the false +90 Spirit
-  bootstrap popup is now fixed. Continue evidence-driven integration validation rather than speculative tuning.
+  Audit the authored Region 2 and Region 3 enemy roster against the corrected Hushiro combat contracts before the player
+  reaches those regions. Look for the same classes of defects found during Region 1 playtesting: missing or duplicated authored
+  posture, inconsistent parry/block reactions, Deathblow readiness/receive routing, HP-at-zero stalls, death/defeat signaling,
+  boss phase transitions, manager/container lifecycle mistakes, and progression gates. Preserve intentional regional mechanics
+  and difficulty; fix ownership/contract defects rather than speculative numerical balance.
 next_action: >-
-  On the next meaningful playtest, use `oathbound-playtest.cmd main` and wait for IMPORT PREFLIGHT PASSED. Confirm that
-  entering The Strand and beginning a run no longer displays a false +90 Spirit popup, while real Spirit restoration
-  can still produce legitimate gain feedback. Continue the broader run through normal combat, rewards, rooms, bosses,
-  transitions, death/return, and toward Region 1 -> Region 2 -> Region 3 -> Heart Approach or until a genuine blocker.
-  Preserve the Godot log, CombatTelemetry, IntegrationCheckpoint markers, and run-performance summary when available.
+  Branch from current main and inspect the live Region 2/3 enemy scripts and scenes, prioritizing shared combat/death/posture APIs
+  plus miniboss/boss progression. Add cross-region live Godot regression coverage for any concrete mismatches, then open and merge
+  a bounded PR if validation is green. Do not claim Region 2/3 player-facing balance is proven until those regions are actually played.
 current_batch:
-  - PR #128 merged from exact feature head 5b76be7f9724e334de80ec430baa1c6182333741 at merge commit 84469b1b584852176e7ad7654192fb2208eabaef.
-  - Aug 29 follow-up Godot log from main 6e4caaca594220cdfd1b22c8265be0a6454271d8 contains no SCRIPT ERROR, ERROR, or WARNING entries; prior death crash and Rest ownership warning did not recur.
-  - Combat telemetry contains no repeated Spirit award/mutation signal. The observed +90 popup was presentation-only bootstrap feedback, not an economy/resource award.
-  - Root cause: player.tscn used the imported 10-Spirit compatibility baseline before current Oathbound rules promoted the Player to canonical 100 Spirit during _ready(), making bootstrap synchronization look like a +90 pickup.
-  - OathboundPlayerStability now silently synchronizes the ProstheticExecutor child to CURRENT_MAX_SPIRIT before inherited HUD construction, covering both Strand player.tscn and run aspect_player.tscn inheritance paths.
-  - RunHUDRewardSurfaceSmoke instantiates both live Player paths, requires bootstrap 100/100 with no popup, requires no popup on a decrease, and separately proves 90/100 -> 100/100 still shows a real +10 gain.
-  - Exact feature head passed all 7 push-triggered workflows; PR #128 passed all 9 PR-triggered workflows, including Release Shell, both Hushiro gates, runtime lifetime, region handoff, post-playtest stability, Blood Cavern execution, authored presentation, and Godot 4.7.2 Project Check.
-  - The same playtest log prints New run started three times during overwrite/startup. This was traced to pre-departure save-slot run-scope resets plus the real RunScene departure reset. No duplicated live run state or Spirit award was observed, so save-slot lifecycle ownership remains unchanged without stronger evidence.
+  - PR #129 merged from exact feature head 848196dc1ea4515652fb5f513a55097c3cb187ab at merge commit a98824b276e4044ae8ddc232e45d1e700ad4906a.
+  - PR #129 passed all 10 PR-triggered workflows, including Godot 4.7.2 Project Check, both Hushiro checks, the new Hushiro Elite Boss Progression Check, Yomori Region Check, region handoff, runtime lifetime, post-playtest stability, Blood Cavern execution, and authored presentation.
+  - Collector parry posture now receives one authored posture award only when the imported reaction path failed to mutate posture; normal sword posture remains one-pass.
+  - Keeper normal authored sword posture is no longer dropped, Keeper parries no longer double-award posture, and Keeper exposes canonical Deathblow readiness/receive routing so first execution transitions to Phase 2 and second execution can defeat the boss.
+  - Area 2 DuoBossManager now stays inactive when its boss container is not the active regional boss, preventing its Keeper-room startup warning.
+  - The new HushiroEliteBossProgressionSmoke instantiates live Player/Collector/Keeper/duo-manager paths and covers the repaired posture and boss progression semantics.
 recent_batches:
   - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
   - pr_127: restored approved direct first-attempt run start while preserving the other PR #126 stabilization fixes.
   - pr_128: suppressed false Spirit bootstrap feedback while preserving real Spirit gain presentation.
+  - pr_129: repaired Collector/Keeper posture and Keeper Deathblow progression; gated inactive Area 2 duo manager startup.
 confirmed:
-  - PR #119 through #128 merged; never continue old feature branches.
+  - PR #119 through #129 merged; never continue old feature branches.
   - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
-  - Follow-up Aug 29 playtest showed no new runtime error/warning signature in the provided Godot log.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
