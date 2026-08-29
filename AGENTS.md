@@ -31,7 +31,7 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T06:04:00Z
+updated_utc: 2026-08-29T06:06:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -40,7 +40,7 @@ merged_cutoff:
   merge_commit: 630502879451b33d84273f85ffe95c12ee0be363
   validation: 8/8 PR-triggered workflows green; 8/8 push-triggered workflows green; mergeable_state clean
 active_branch: agent/post-playtest-stability
-active_pr: null
+active_pr: 126
 covered_through_substantive_commit: 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52
 known_good_checkpoint: 630502879451b33d84273f85ffe95c12ee0be363
 current_objective: >-
@@ -49,11 +49,11 @@ current_objective: >-
   routes directly into RunScene instead of The Strand, ordinary blocked Archer arrows are locally misclassified and
   reflected, and Rest Chamber duplicates GameFlow route-gate ownership and emits a stale make_choice warning.
 next_action: >-
-  Validate agent/post-playtest-stability at exact head 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52. Prioritize the
-  new Post-playtest Stability Check, then Godot 4.7.2 Project Check, Hushiro combat gates, and Release Shell. Fix only
-  evidence-backed failures. When branch validation is green, open the next PR, verify PR-triggered workflows and clean
-  mergeability, merge autonomously with exact expected head SHA, checkpoint main, then hand main back for another
-  integration playtest focused on death/run-results, fresh-save Strand routing, and arrow block/parry behavior.
+  PR #126 is open at exact feature head 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52 after all 5 final-head push
+  workflows passed, including Post-playtest Stability Check, Godot 4.7.2 Project Check, and Hushiro Combat Semantics.
+  Eleven PR-triggered workflows are running. Check only their completion/failures and PR mergeability. If all are green
+  and mergeable_state is clean, merge autonomously with exact expected head SHA, checkpoint main, then return main for
+  another integration playtest focused on death/run-results, fresh-save Strand routing, Rest exit, and arrow defense.
 current_batch:
   - Failed-run crash root: OathboundRecordsRuntime called nonexistent MetaProgress.remaining_heart_bindings(); branch now uses canonical get_heart_bindings_remaining().
   - Fresh New Game and overwrite now create/select the slot then route to res://World/HubScene.tscn; FIRST_ATTEMPT authority now starts fresh saves in The Strand and begins the unscripted Hushiro first-attempt contract when the first expedition launches.
@@ -63,6 +63,7 @@ current_batch:
   - Added PostPlaytestStabilitySmoke for failed-run result construction, fresh-save Strand destination, and Rest single-owner gate state.
   - Added HushiroProjectileDefenseSmoke reproducing canonical block state 6 / parry false and separately proving real parry reflection.
   - Added dedicated Post-playtest Stability Check workflow with clean Godot 4.7.2 import/editor load and both new regressions.
+  - Exact final branch head passed all 5 triggered push workflows; PR #126 now has 11 PR-triggered workflows queued/running.
 recent_batches:
   - pr_123: debug-only Region 1/Region 2/Heart Approach structured integration checkpoints.
   - pr_124: persisted/localized end-of-run performance summary from eight existing RunData counters.
