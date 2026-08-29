@@ -31,7 +31,7 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T01:07:00Z
+updated_utc: 2026-08-29T06:04:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -39,48 +39,48 @@ merged_cutoff:
   feature_head: 933e2eef3539cb9ed720772d8380c74ea6d15e18
   merge_commit: 630502879451b33d84273f85ffe95c12ee0be363
   validation: 8/8 PR-triggered workflows green; 8/8 push-triggered workflows green; mergeable_state clean
-active_branch: null
+active_branch: agent/post-playtest-stability
 active_pr: null
-covered_through_substantive_commit: null
+covered_through_substantive_commit: 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52
 known_good_checkpoint: 630502879451b33d84273f85ffe95c12ee0be363
 current_objective: >-
-  Gather the first long player-facing integration evidence from the current main build now that cold-worktree
-  import bootstrap and Hushiro enemy-guard readability are fixed. Use the existing structured integration checkpoints
-  and end-of-run performance summary to identify evidence-backed fixes/tuning; do not pre-tune numerical balance.
+  Stabilize the first long player-facing integration evidence from main. The Aug 29 playtest exposed four bounded
+  defects: failed-run result construction crashes on a stale MetaProgress Heart Binding API, fresh New Game/overwrite
+  routes directly into RunScene instead of The Strand, ordinary blocked Archer arrows are locally misclassified and
+  reflected, and Rest Chamber duplicates GameFlow route-gate ownership and emits a stale make_choice warning.
 next_action: >-
-  Run the tracked root `oathbound-playtest.cmd main`. Let its clean-worktree import/editor-load preflight finish and
-  only continue if it reports IMPORT PREFLIGHT PASSED. Then play one coherent run through Region 1 -> Region 2 ->
-  Region 3 -> Heart Approach, or until a real gameplay failure stops the run. Exercise ordinary combat, enemy guards,
-  block/parry, room choices, rewards, Technique/build growth, boss transitions, and run-end/return presentation.
-  Preserve CombatTelemetry/log output including IntegrationCheckpoint markers and the final Run performance summary.
-  Stop at the current Heart shell because Heart combat is not authored. Use that evidence for the next bounded batch.
+  Validate agent/post-playtest-stability at exact head 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52. Prioritize the
+  new Post-playtest Stability Check, then Godot 4.7.2 Project Check, Hushiro combat gates, and Release Shell. Fix only
+  evidence-backed failures. When branch validation is green, open the next PR, verify PR-triggered workflows and clean
+  mergeability, merge autonomously with exact expected head SHA, checkpoint main, then hand main back for another
+  integration playtest focused on death/run-results, fresh-save Strand routing, and arrow block/parry behavior.
 current_batch:
-  - PR #125 merged: clean-worktree import bootstrap + enemy guard readability + canonical guard regression.
-  - Added tracked root oathbound-playtest.cmd: recreate exact remote worktree, headless import, clean post-import editor-load gate, then launch Godot.
-  - Cold import artifacts confirmed scary PNG load messages happen during initial scan before Godot completes a 340-step successful reimport; post-import clean load is authoritative.
-  - Corrupted Swordsman active guard now has an explicit procedural shield-outline cue because the imported foot-soldier sheet has no authored block animation.
-  - HushiroGuardReadabilitySmoke exercises the real HurtBox canonical AttackEvent transaction and proves guarded wolf_fang_slash produces 0 HP, exactly 14 Posture, zero floating HP damage numbers, and a guard cue that tracks active guard state.
-  - Captured player telemetry evidence remains: guarded wolf_fang_slash held enemy HP at 77 while Posture rose 37 -> 51; no HP+Posture leak was present in that observed block.
-  - Godot 4.7.2 parser regression discovered during branch validation was fixed by constructing PackedVector2Array guard points at runtime rather than in a const expression.
+  - Failed-run crash root: OathboundRecordsRuntime called nonexistent MetaProgress.remaining_heart_bindings(); branch now uses canonical get_heart_bindings_remaining().
+  - Fresh New Game and overwrite now create/select the slot then route to res://World/HubScene.tscn; FIRST_ATTEMPT authority now starts fresh saves in The Strand and begins the unscripted Hushiro first-attempt contract when the first expedition launches.
+  - Uploaded combat telemetry recorded five Archer arrow block_success contacts with _parry_active=false, state=6, zero Health damage, and posture-only damage; no arrow parry_success events occurred.
+  - CorruptedArcherProjectile now treats canonical defense methods as authoritative, preserves legitimate active/grace parries, and limits numeric fallback to BLOCKING=6 / PARRYING=7 compatibility states. Normal block absorbs/despawns; parry reflects.
+  - RestChamber no longer connects its route gate through RoomBase; live GameFlow remains sole route-transition owner.
+  - Added PostPlaytestStabilitySmoke for failed-run result construction, fresh-save Strand destination, and Rest single-owner gate state.
+  - Added HushiroProjectileDefenseSmoke reproducing canonical block state 6 / parry false and separately proving real parry reflection.
+  - Added dedicated Post-playtest Stability Check workflow with clean Godot 4.7.2 import/editor load and both new regressions.
 recent_batches:
-  - pr_122: canonical non-blocking regional boss title cards.
   - pr_123: debug-only Region 1/Region 2/Heart Approach structured integration checkpoints.
   - pr_124: persisted/localized end-of-run performance summary from eight existing RunData counters.
   - pr_125: clean playtest import preflight + explicit Hushiro enemy guard cue + canonical guard transaction smoke.
 confirmed:
   - PR #119 through #125 merged; never continue old feature branches.
-  - PR #125 passed 8/8 push and 8/8 PR workflows; Godot 4.7.2 clean import/editor/runtime ownership validation is green.
+  - Aug 29 runtime log had one SCRIPT ERROR: stale remaining_heart_bindings call during RecordsRuntime.on_run_finished; it also had the duplicate Rest make_choice warning.
+  - Shared player defense correctly classified the observed Archer contacts as block_success with zero HP loss; projectile-local response caused the false reflection.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
-  - Canonical guarded enemy sword contact is posture-only in the tested path and cannot create a floating HP number.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
-  - Numerical balance/economy/difficulty tuning waits for long player-facing evidence.
+  - Numerical balance/economy/difficulty tuning remains evidence-driven rather than speculative.
   - Known provenance blockers remain explicit; never fabricate license evidence.
 avoid_without_evidence:
   - combat/Aspect/Technique/Prosthetic/Relic architecture reopen
   - authored Heart combat
   - final Blood Cavern trial count/loadouts/reward sequencing
-  - numerical tuning before long playtest
+  - broad numerical tuning without integration evidence
   - waiting for routine PR merge approval
   - unrelated PR growth
   - bulk scene UID rewriting while tracked assets exist and clean-import preflight remains the supported resolution
