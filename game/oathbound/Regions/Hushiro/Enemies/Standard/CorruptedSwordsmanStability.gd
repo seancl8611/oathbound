@@ -9,14 +9,6 @@ const MEDIUM_HIT_STUN := 0.22
 const HEAVY_HIT_STUN := 0.30
 const POST_HIT_BREATHING_ROOM := 0.24
 const GUARD_CUE_COLOR := Color(0.86, 0.94, 1.0, 0.95)
-const GUARD_CUE_POINTS := PackedVector2Array([
-	Vector2(-6.0, -5.0),
-	Vector2(-6.0, 1.0),
-	Vector2(0.0, 7.0),
-	Vector2(6.0, 1.0),
-	Vector2(6.0, -5.0),
-	Vector2(-6.0, -5.0),
-])
 
 var _guard_cue: Line2D = null
 
@@ -94,7 +86,14 @@ func _ensure_guard_cue() -> void:
 	_guard_cue.name = "GuardCue"
 	_guard_cue.width = 2.0
 	_guard_cue.default_color = GUARD_CUE_COLOR
-	_guard_cue.points = GUARD_CUE_POINTS
+	_guard_cue.points = PackedVector2Array([
+		Vector2(-6.0, -5.0),
+		Vector2(-6.0, 1.0),
+		Vector2(0.0, 7.0),
+		Vector2(6.0, 1.0),
+		Vector2(6.0, -5.0),
+		Vector2(-6.0, -5.0),
+	])
 	_guard_cue.position = Vector2(0.0, -28.0)
 	_guard_cue.z_index = 125
 	_guard_cue.visible = false
