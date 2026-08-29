@@ -2,7 +2,7 @@ extends Node
 
 const TITLE_SCENE: PackedScene = preload("res://TitleScreen/menu.tscn")
 const REST_SCENE: PackedScene = preload("res://Core/Chambers/Types/RestChamber.tscn")
-const EXPECTED_FRESH_SAVE_DESTINATION := "res://World/HubScene.tscn"
+const EXPECTED_FRESH_SAVE_DESTINATION := "res://Utility/RunScene.tscn"
 
 var _failures: Array[String] = []
 
@@ -14,7 +14,7 @@ func _ready() -> void:
 func _run() -> void:
 	await get_tree().process_frame
 	_validate_run_result_build()
-	await _validate_fresh_save_destination()
+	_validate_fresh_save_destination()
 	await _validate_rest_gate_ownership()
 	_finish()
 
@@ -45,16 +45,14 @@ func _validate_fresh_save_destination() -> void:
 	_expect(front_end != null, "could not instantiate launch front end")
 	if front_end == null:
 		return
-	add_child(front_end)
-	await get_tree().process_frame
-	_expect(front_end.has_method("get_new_game_destination_path"), "front end lacks explicit fresh-save destination contract")
+	_expect(front_end.has_method("get_new_game_destination_path"), "launch front end destination seam is unavailable")
 	if front_end.has_method("get_new_game_destination_path"):
+		var destination: String = str(front_end.call("get_new_game_destination_path"))
 		_expect(
-			str(front_end.call("get_new_game_destination_path")) == EXPECTED_FRESH_SAVE_DESTINATION,
-			"New Game / overwrite does not route to The Strand"
+			destination == EXPECTED_FRESH_SAVE_DESTINATION,
+			"New Game / overwrite no longer begins directly in the first Hushiro run"
 		)
-	front_end.queue_free()
-	await get_tree().process_frame
+	front_end.free()
 
 
 func _validate_rest_gate_ownership() -> void:
@@ -78,7 +76,7 @@ func _validate_rest_gate_ownership() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[PostPlaytestStabilitySmoke] PASS - failed-run result builds | fresh save -> Strand | Rest gate single-owner")
+		print("[PostPlaytestStabilitySmoke] PASS - failed-run result builds | fresh save -> first run | Rest gate single-owner")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

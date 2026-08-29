@@ -154,9 +154,9 @@ func _delete_slot_confirmed(slot: int, start_after: bool) -> void:
 
 
 func get_new_game_destination_path() -> String:
-	# A newly created or overwritten slot always starts from the persistent hub. The
-	# first-attempt combat contract begins when that fresh save launches its first run.
-	return HUB_SCENE
+	# FIRST_ATTEMPT.md: a fresh save begins directly in the normal Hushiro route,
+	# without a Strand preparation lap before Returning Blood awakens.
+	return RUN_SCENE
 
 
 func _start_new_game(slot: int) -> void:
