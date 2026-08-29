@@ -31,7 +31,7 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-28T14:39:00Z
+updated_utc: 2026-08-29T00:42:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -39,20 +39,28 @@ merged_cutoff:
   feature_head: e18dddd5b4414b53d6cf638604b219a67eeb7c52
   merge_commit: 1921dcbd487922e31faf2f5ca7c3ee09ec941b4f
   validation: 7/7 PR-triggered workflows green; mergeable_state clean
-active_branch: null
+active_branch: agent/preplaytest-import-guard-feedback
 active_pr: null
-covered_through_substantive_commit: null
+covered_through_substantive_commit: 63584640a918012fc0e7d0df7be9d41af976fd94
 known_good_checkpoint: 1921dcbd487922e31faf2f5ca7c3ee09ec941b4f
 current_objective: >-
-  Gather the first long player-facing integration evidence from the now-instrumented release path before
-  numerical balance/economy/difficulty tuning or reopening combat architecture. The runtime now provides
-  structured Region 1/Region 2/Heart Approach checkpoints plus a localized end-of-run performance summary.
+  Resolve player-observed pre-playtest cold-import noise and Hushiro enemy-guard readability before
+  returning to the long integration run. Uploaded telemetry proved the captured guarded Wolf Fang Slash
+  preserved HP while applying Posture; the defect is player-facing guard/readability plus a local clean-worktree
+  launcher that opened the editor before building its import cache.
 next_action: >-
-  Run one coherent player-facing integration playtest from the current main build through Region 1 -> Region 2
-  -> Region 3 -> Heart Approach (or until a real failure stops the run). Exercise ordinary combat, block/parry,
-  room choices, rewards, Technique/build growth, boss transitions, and run-end/return presentation. Preserve the
-  CombatTelemetry/log output including IntegrationCheckpoint markers and the final Run performance summary.
-  Use that evidence for the next bounded fixes/tuning batch; do not invent Heart combat or tune numbers beforehand.
+  Validate branch head 63584640a918012fc0e7d0df7be9d41af976fd94. Prioritize Hushiro Combat Semantics
+  and Godot 4.7.2 Project Check. The new guard smoke must prove the canonical HurtBox transaction produces
+  0 HP, exactly 14 Posture, zero floating damage numbers, and a visible guard cue. If branch validation is green,
+  open the next PR, verify PR-triggered checks/mergeability, merge autonomously, checkpoint main, then hand the
+  updated main build back for the long playtest.
+current_batch:
+  - Added tracked root oathbound-playtest.cmd so clean worktrees run the same headless import and editor-load preflight as CI before launching Godot.
+  - The launcher rejects unresolved SCRIPT ERROR / Failed loading resource / deferred-call errors after the import pass and preserves logs in C:\OathboundPlaytest.
+  - Corrupted Swordsman active guard now has a procedural shield-outline cue because the imported foot-soldier sheet has no authored block animation.
+  - Added HushiroGuardReadabilitySmoke through the real HurtBox canonical AttackEvent transaction.
+  - Captured telemetry evidence: guarded wolf_fang_slash held enemy HP at 77 while Posture rose 37 -> 51; no HP+Posture leak was present in that observed block.
+  - Uploaded import log listed many missing-resource messages on initial cold editor open, while affected PNG sources are tracked and the subsequent runtime successfully instantiated those enemies.
 recent_batches:
   - pr_121: queued achievement-unlock presenter.
   - pr_122: canonical non-blocking regional boss title cards.
@@ -60,13 +68,13 @@ recent_batches:
   - pr_124: persisted/localized end-of-run performance summary from eight existing RunData counters.
 confirmed:
   - PR #119 through #124 merged; never continue old feature branches.
-  - PR #124 branch validation 6/6 green; PR validation 7/7 green; mergeable_state clean.
   - Godot 4.7.2 clean import/editor/runtime ownership validation passed on PR #124.
+  - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
+  - Existing HushiroDefenseContractSmoke already asserts enemy guard posture-only/no damage number; new smoke closes the gap at the live canonical HurtBox route and visual guard state.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
   - Numerical balance/economy/difficulty tuning waits for long player-facing evidence.
   - Known provenance blockers remain explicit; never fabricate license evidence.
-  - Run performance now records Enemies defeated, Parries, Perfect parries, Damage taken, Combat rooms cleared, Blessings received, Treasures opened, and Items purchased in the persisted run result.
 avoid_without_evidence:
   - combat/Aspect/Technique/Prosthetic/Relic architecture reopen
   - authored Heart combat
@@ -74,7 +82,7 @@ avoid_without_evidence:
   - numerical tuning before long playtest
   - waiting for routine PR merge approval
   - unrelated PR growth
-  - indefinite same-turn PR/tool chaining after a safe checkpoint
+  - bulk scene UID rewriting while tracked assets exist and clean-import preflight remains the supported resolution
 ```
 
 ## WORK_LOOP
