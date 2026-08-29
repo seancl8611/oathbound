@@ -1,18 +1,19 @@
 extends Area2D
 
 ## =============================================================================
-## ARCHER PROJECTILE - v2.5 TIMING BUG FIX
+## ARCHER PROJECTILE - v2.6 DEFENSE CLASSIFICATION FIX
 ## =============================================================================
-## BUG FOUND: Arrow waits 2 frames before enabling monitoring, but it's already
-## moving during that time. If it reaches the player before monitoring enables,
-## area_entered never fires (signal only fires on ENTRY, not pre-existing overlap).
-##
-## FIX: Check for overlaps after arming AND every frame in _physics_process.
+## Projectile response follows the Player's canonical defense API. Legacy numeric
+## state fallback remains only for older test/compatibility actors and uses the
+## canonical BLOCKING=6 / PARRYING=7 values.
 ## =============================================================================
 
 @export var speed: float = 140.0
 @export var damage: int = 2
 @export var lifetime: float = 3.0
+
+const LEGACY_BLOCKING_STATE: int = 6
+const LEGACY_PARRYING_STATE: int = 7
 
 var velocity = Vector2.ZERO
 var direction = Vector2.ZERO
@@ -180,7 +181,7 @@ func _handle_player_collision(hurtbox: Area2D) -> void:
 	set_meta("damage", damage)
 	set_meta("attack_type", "arrow")
 	
-	# Check player state DIRECTLY
+	# Resolve the defense once. A normal block absorbs the arrow; only a parry reflects.
 	var player_is_parrying = _check_player_parrying(player)
 	var player_is_blocking = _check_player_blocking(player)
 	
@@ -211,43 +212,43 @@ func _get_player(hurtbox: Area2D) -> Node:
 		return player
 	return get_tree().get_first_node_in_group("player")
 
+
 func _check_player_parrying(player: Node) -> bool:
 	if player == null:
 		return false
-	
-	if player.has_method("is_parrying"):
-		if player.is_parrying():
-			return true
-	
-	var parry_active = player.get("_parry_active")
+
+	var has_canonical_api: bool = player.has_method("is_parrying")
+	if has_canonical_api and bool(player.call("is_parrying")):
+		return true
+
+	# The current Player exposes the active window/grace fields used by the shared
+	# resolver. Preserve grace-parry behavior, but never let a normal blocking state
+	# override a canonical `is_parrying() == false` result.
+	var parry_active: Variant = player.get("_parry_active")
 	if parry_active != null and bool(parry_active):
 		return true
-	
-	var state_value = player.get("_state")
-	if state_value != null and int(state_value) == 6:
-		return true
-	
-	var grace_until = player.get("_parry_grace_until")
+	var grace_until: Variant = player.get("_parry_grace_until")
 	if grace_until != null:
-		var now = Time.get_ticks_msec() * 0.001
+		var now: float = Time.get_ticks_msec() * 0.001
 		if now < float(grace_until):
 			return true
-	
-	return false
+	if has_canonical_api:
+		return false
+
+	var state_value: Variant = player.get("_state")
+	return state_value != null and int(state_value) == LEGACY_PARRYING_STATE
+
 
 func _check_player_blocking(player: Node) -> bool:
 	if player == null:
 		return false
-	
+
 	if player.has_method("is_blocking"):
-		if player.is_blocking():
-			return true
-	
-	var state_value = player.get("_state")
-	if state_value != null and int(state_value) == 5:
-		return true
-	
-	return false
+		return bool(player.call("is_blocking"))
+
+	var state_value: Variant = player.get("_state")
+	return state_value != null and int(state_value) == LEGACY_BLOCKING_STATE
+
 
 func _do_blocked_despawn() -> void:
 	_is_blocked = true

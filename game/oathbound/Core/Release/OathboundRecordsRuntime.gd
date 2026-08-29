@@ -432,7 +432,7 @@ func _build_run_result(successful: bool, completion_kind: String, elapsed: float
 		"scrolls_gained": maxi(0, int(current_resources.get("scrolls", 0)) - int(_run_resource_start.get("scrolls", 0))),
 		"boss_materials_gained": gained_materials,
 		"bindings_destroyed": int(MetaProgress.heart_bindings_destroyed) if typeof(MetaProgress) == TYPE_OBJECT else 0,
-		"bindings_remaining": int(MetaProgress.remaining_heart_bindings()) if typeof(MetaProgress) == TYPE_OBJECT else 6,
+		"bindings_remaining": int(MetaProgress.get_heart_bindings_remaining()) if typeof(MetaProgress) == TYPE_OBJECT else 6,
 		"story_complete": bool(MetaProgress.is_story_complete()) if typeof(MetaProgress) == TYPE_OBJECT else false,
 		"aspect": str(AspectRuntime.selected_aspect) if typeof(AspectRuntime) == TYPE_OBJECT else "",
 		"highest_tier": int(AspectRuntime.tier) if typeof(AspectRuntime) == TYPE_OBJECT else 0,

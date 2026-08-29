@@ -6,9 +6,10 @@ class_name RestRoom
 @onready var rest_healer: RestHealer = $RestHealer
 
 func _ready() -> void:
-	# Start with the gate locked & closed, and hook it into the run flow
+	# GameFlow owns route-gate signals for the live room. Rest only owns when the
+	# gate becomes available; connecting it to RoomBase as well causes a duplicate
+	# make_choice callback after GameFlow has already advanced the route.
 	lock_all_gates()
-	connect_exit_gates_to_flow()
 
 	# Listen for the rest being used once
 	if rest_healer and rest_healer.has_signal("rest_used"):

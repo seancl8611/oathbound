@@ -1,0 +1,78 @@
+name: Post-playtest Stability Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  post-playtest-stability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee post-playtest-import.log
+          godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee post-playtest-editor.log
+          if grep -F "SCRIPT ERROR:" post-playtest-import.log post-playtest-editor.log; then
+            echo "FAIL: post-playtest import/editor load emitted a GDScript error."
+            exit 1
+          fi
+
+      - name: Verify release stability regressions
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/PostPlaytestStabilitySmoke.tscn 2>&1 | tee post-playtest-release.log
+          grep -F "[PostPlaytestStabilitySmoke] PASS - failed-run result builds | fresh save -> Strand | Rest gate single-owner" post-playtest-release.log
+          if grep -F "SCRIPT ERROR:" post-playtest-release.log; then
+            echo "FAIL: release stability smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "WARNING: [GameFlow] make_choice called but not awaiting choice" post-playtest-release.log; then
+            echo "FAIL: duplicate Rest route ownership warning returned."
+            exit 1
+          fi
+
+      - name: Verify projectile block versus parry
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroProjectileDefenseSmoke.tscn 2>&1 | tee projectile-defense.log
+          grep -F "[HushiroProjectileDefenseSmoke] PASS - block absorbs arrow | parry reflects arrow | canonical state 6 is not parry" projectile-defense.log
+          if grep -F "SCRIPT ERROR:" projectile-defense.log; then
+            echo "FAIL: projectile defense smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" projectile-defense.log; then
+            echo "FAIL: projectile defense smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload stability logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: post-playtest-stability-${{ github.run_id }}
+          path: |
+            post-playtest-import.log
+            post-playtest-editor.log
+            post-playtest-release.log
+            projectile-defense.log
+          if-no-files-found: warn
+          retention-days: 7
