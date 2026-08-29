@@ -64,6 +64,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify live guard readability path
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroGuardReadabilitySmoke.tscn 2>&1 | tee hushiro-guard-readability.log
+          grep -F "[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical block 0 HP + 14 Posture | no posture-only damage number" hushiro-guard-readability.log
+          if grep -F "SCRIPT ERROR:" hushiro-guard-readability.log; then
+            echo "FAIL: Guard readability smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-guard-readability.log; then
+            echo "FAIL: Guard readability smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -74,5 +89,6 @@ jobs:
             hushiro-combat-editor.log
             hushiro-combat-semantics.log
             hushiro-defense-contract.log
+            hushiro-guard-readability.log
           if-no-files-found: warn
           retention-days: 7
