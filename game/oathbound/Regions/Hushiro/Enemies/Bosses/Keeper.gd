@@ -34,6 +34,102 @@ func _ready() -> void:
 	print("[Keeper] Hushiro contract active: Phase 1 = 600/325, Phase 2 = 700/375")
 
 
+func _on_hurt_box_hurt(damage: int, damage_type: String, attacker: Node = null) -> void:
+	# The imported Keeper receiver still calls notify_got_hit(), whose current contract
+	# intentionally does not add ordinary hit posture. Detect that no posture was
+	# consumed and route exactly one add_posture() while HurtBox's canonical AttackEvent
+	# transaction is still active. Canonical sword contacts therefore resolve to their
+	# authored 10/16/36/etc values instead of 0, while non-canonical callers use the
+	# conservative legacy damage-based fallback.
+	var player_owned: bool = _hushiro_is_player_owned_source(attacker)
+	var posture_before: float = combat.get_posture() if combat != null else 0.0
+	super._on_hurt_box_hurt(damage, damage_type, attacker)
+	if not player_owned or damage <= 0 or combat == null or _boss_phase == BossPhase.DEAD or _dbroken_active:
+		return
+	var posture_after: float = combat.get_posture()
+	if absf(posture_after - posture_before) > 0.001:
+		return
+	combat.add_posture(maxf(1.0, float(damage) * 0.5))
+	combat.suppress_recovery(0.6)
+
+
+func _hushiro_is_player_owned_source(attacker: Node) -> bool:
+	if attacker == null or not is_instance_valid(attacker):
+		return false
+	if attacker.is_in_group("player"):
+		return true
+	if attacker is Area2D and attacker.has_meta("attacker"):
+		var owner_value: Variant = attacker.get_meta("attacker")
+		if owner_value is Node and is_instance_valid(owner_value) and (owner_value as Node).is_in_group("player"):
+			return true
+	if attacker.is_in_group("attack"):
+		var owner_check: Node = attacker.get_parent()
+		while owner_check != null:
+			if owner_check.is_in_group("player"):
+				return true
+			if owner_check.is_in_group("enemy"):
+				return false
+			owner_check = owner_check.get_parent()
+	return false
+
+
+func on_parried(parry_source_pos: Vector2) -> void:
+	# KeeperController previously applied parry_posture_damage explicitly and then sent
+	# notify_got_hit(parried=true), which added a second configured parry spike. The
+	# playtest telemetry showed a single parry jumping Keeper from 0 to 60 posture.
+	# Keep one authored parry posture mutation and the existing recoil/AI reaction.
+	if _dbroken_active or _boss_phase == BossPhase.DEAD:
+		return
+	_hide_parry_indicator()
+
+	if combat:
+		combat.add_posture(parry_posture_damage)
+		combat.suppress_recovery(1.0)
+
+	_cleanup_hitbox()
+	_parry_flash_tint()
+
+	if _current_attack in [AttackType.BLADE_DANCE, AttackType.FERAL_ONSLAUGHT]:
+		_combo_is_frozen = true
+		_combo_parry_freeze_until = Time.get_ticks_msec() * 0.001 + parry_hitstop_duration
+		return
+
+	_combo_interrupted = true
+	_attack_sequence_id += 1
+	_start_parry_recoil(parry_source_pos)
+
+	if anim:
+		if anim.has_animation("parried"):
+			anim.play("parried")
+		elif anim.has_animation("stagger"):
+			anim.play("stagger")
+		else:
+			anim.play("idle")
+
+	await get_tree().create_timer(0.25).timeout
+	if not is_instance_valid(self) or _boss_phase == BossPhase.DEAD or _dbroken_active:
+		return
+
+	_parry_recoil_until = 0.0
+	_parry_recoil_velocity = Vector2.ZERO
+	velocity = Vector2.ZERO
+	_behavior_state = BehaviorState.IDLE
+	_current_attack = AttackType.NONE
+	_combat_phase = CombatPhase.NONE
+	_play_anim("idle")
+	_attack_cooldown = _rng.randf_range(phase1_min_cooldown * 0.8, phase1_max_cooldown * 1.2)
+
+
+func is_deathblow_ready() -> bool:
+	return _dbroken_active and _boss_phase != BossPhase.DEAD
+
+
+func receive_deathblow(attacker: Node) -> void:
+	# DeathblowSystem prefers this interface. Without it, its generic fallback sees
+	# Keeper.death() and can bypass the authored Phase-1 -> Phase-2 transition.
+	take_deathblow(attacker)
+
+
 func _apply_damage(damage: int, damage_type: String, attacker: Node) -> void:
 	if _hushiro_finisher_kill:
 		super._apply_damage(damage, damage_type, attacker)
