@@ -45,13 +45,11 @@ func _validate_fresh_save_destination() -> void:
 	_expect(front_end != null, "could not instantiate launch front end")
 	if front_end == null:
 		return
-	var script_value: Variant = front_end.get_script()
-	_expect(script_value is Script, "launch front end script is unavailable")
-	if script_value is Script:
-		var source: String = (script_value as Script).source_code
-		_expect(source.contains('const RUN_SCENE := "%s"' % EXPECTED_FRESH_SAVE_DESTINATION), "front end RunScene constant changed")
+	_expect(front_end.has_method("get_new_game_destination_path"), "launch front end destination seam is unavailable")
+	if front_end.has_method("get_new_game_destination_path"):
+		var destination: String = str(front_end.call("get_new_game_destination_path"))
 		_expect(
-			source.contains("get_tree().change_scene_to_file(RUN_SCENE)"),
+			destination == EXPECTED_FRESH_SAVE_DESTINATION,
 			"New Game / overwrite no longer begins directly in the first Hushiro run"
 		)
 	front_end.free()
