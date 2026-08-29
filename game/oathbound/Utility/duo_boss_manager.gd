@@ -29,6 +29,13 @@ var _twins_dead = 0
 
 
 func _ready() -> void:
+	# BossChamber contains all regional boss containers until it selects the current
+	# area one frame later. Do not initialize the Area-2 duo manager while Keeper or
+	# Eclipse Shogun is the active fight; that produced a false missing-twins warning
+	# before the non-selected container was removed.
+	if not _is_current_boss_area():
+		return
+
 	add_to_group("boss")
 
 	if twin_a_path != NodePath(""):
@@ -45,7 +52,7 @@ func _ready() -> void:
 			or child.is_in_group("rootfang_duo_twin") \
 			or child.is_in_group("shell_duo_twin"):
 				twins.append(child)
-		
+
 		if twins.size() >= 2:
 			_twin_a = twins[0]
 			_twin_b = twins[1]
@@ -63,6 +70,16 @@ func _ready() -> void:
 	if _twin_b.has_method("set_manager"):
 		_twin_b.set_manager(self)
 
+
+func _is_current_boss_area() -> bool:
+	var container: Node = get_parent()
+	if container == null or not container.has_meta("boss_area"):
+		return true
+	if typeof(RunData) != TYPE_OBJECT:
+		return true
+	return int(container.get_meta("boss_area", 0)) == int(RunData.current_area_id)
+
+
 ## Called by a twin when it crosses 50% HP and wants to shell.
 ## Returns true if shell starts now, false if deferred.
 func request_special_mode(who: Node) -> bool:
@@ -71,7 +88,7 @@ func request_special_mode(who: Node) -> bool:
 		emit_signal("special_mode_started", who)
 		emit_signal("shell_started", who) # backward-compatible
 		return true
-	
+
 	_pending_special_twin = who
 	return false
 
@@ -91,19 +108,19 @@ func request_shell(who: Node) -> bool:
 func notify_special_mode_ended(who: Node) -> void:
 	if _active_special_twin == who:
 		_active_special_twin = null
-	
+
 	emit_signal("special_mode_ended", who)
 	emit_signal("shell_ended", who) # backward-compatible
-	
+
 	if _pending_special_twin != null and is_instance_valid(_pending_special_twin):
 		var pending = _pending_special_twin
 		_pending_special_twin = null
-		
+
 		if not _is_alive(pending):
 			return
-		
+
 		_active_special_twin = pending
-		
+
 		if pending.has_method("trigger_deferred_briarthorn"):
 			pending.call_deferred("trigger_deferred_briarthorn")
 		elif pending.has_method("trigger_deferred_rootfang"):
