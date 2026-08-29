@@ -1,0 +1,65 @@
+name: Hushiro Elite Boss Progression Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Player/OathboundCombatPlayer.gd"
+      - "game/oathbound/Regions/Hushiro/Enemies/Minibosses/**"
+      - "game/oathbound/Regions/Hushiro/Enemies/Bosses/**"
+      - "game/oathbound/Regions/Hushiro/Validation/HushiroEliteBossProgressionSmoke.*"
+      - "game/oathbound/Utility/duo_boss_manager.gd"
+      - ".github/workflows/hushiro-elite-boss-progression-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Player/OathboundCombatPlayer.gd"
+      - "game/oathbound/Regions/Hushiro/Enemies/Minibosses/**"
+      - "game/oathbound/Regions/Hushiro/Enemies/Bosses/**"
+      - "game/oathbound/Regions/Hushiro/Validation/HushiroEliteBossProgressionSmoke.*"
+      - "game/oathbound/Utility/duo_boss_manager.gd"
+      - ".github/workflows/hushiro-elite-boss-progression-check.yml"
+  workflow_dispatch:
+
+jobs:
+  elite-boss-progression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify Hushiro elite and boss progression
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroEliteBossProgressionSmoke.tscn 2>&1 | tee hushiro-elite-boss-progression.log
+          grep -F "[HushiroEliteBossProgressionSmoke] PASS - Collector parry posture | Keeper authored posture | single parry posture | Phase 1->2 Deathblow | final defeat | duo manager scoped" hushiro-elite-boss-progression.log
+          if grep -F "SCRIPT ERROR:" hushiro-elite-boss-progression.log; then
+            echo "FAIL: elite/boss progression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "[ShellDuoManager] Could not find both twins!" hushiro-elite-boss-progression.log; then
+            echo "FAIL: inactive Area-2 duo manager emitted a false warning during Hushiro validation."
+            exit 1
+          fi
+
+      - name: Upload progression log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hushiro-elite-boss-progression-${{ github.run_id }}
+          path: hushiro-elite-boss-progression.log
+          if-no-files-found: warn
+          retention-days: 7
