@@ -31,48 +31,53 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T19:24:00Z
+updated_utc: 2026-08-29T19:44:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 129
-  feature_head: 848196dc1ea4515652fb5f513a55097c3cb187ab
-  merge_commit: a98824b276e4044ae8ddc232e45d1e700ad4906a
+  pr: 130
+  feature_head: 6bcee893275cdcb97e883e90f054b99823cf18e5
+  merge_commit: 114f306a70568cf764b71b572df512fcb68fd079
   validation: 10/10 PR-triggered workflows green; mergeable true
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: a98824b276e4044ae8ddc232e45d1e700ad4906a
+known_good_checkpoint: 114f306a70568cf764b71b572df512fcb68fd079
 current_objective: >-
-  Audit the authored Region 2 and Region 3 enemy roster against the corrected Hushiro combat contracts before the player
-  reaches those regions. Look for the same classes of defects found during Region 1 playtesting: missing or duplicated authored
-  posture, inconsistent parry/block reactions, Deathblow readiness/receive routing, HP-at-zero stalls, death/defeat signaling,
-  boss phase transitions, manager/container lifecycle mistakes, and progression gates. Preserve intentional regional mechanics
-  and difficulty; fix ownership/contract defects rather than speculative numerical balance.
+  Resume player-facing integration evidence from the corrected main build. Region 1 has now driven two combat-contract repair passes;
+  Region 2 and Region 3 received a preemptive code audit and shared posture-contract repair, but their player-facing difficulty,
+  encounter behavior, boss phase presentation, and full progression still require actual playtest evidence before numerical tuning.
 next_action: >-
-  Branch from current main and inspect the live Region 2/3 enemy scripts and scenes, prioritizing shared combat/death/posture APIs
-  plus miniboss/boss progression. Add cross-region live Godot regression coverage for any concrete mismatches, then open and merge
-  a bounded PR if validation is green. Do not claim Region 2/3 player-facing balance is proven until those regions are actually played.
+  Run from current main through the remaining Hushiro path and Keeper, then continue into Yomori/Region 2 if progression succeeds.
+  Player invulnerability may stay enabled for broad encounter coverage. Exercise standard enemies, Embered Pilgrim/Rotwood Host if
+  encountered, Twin Maws, ordinary sword hits, parries, blocking, posture breaks, Deathblows, room clear/progression, and rewards.
+  Preserve CombatTelemetry/logs and stop at the first genuine blocker. If Region 2 is healthy, continue the same evidence-driven
+  process toward Kagutsuchi; do not claim Region 2/3 balance is proven from static audit/CI alone.
 current_batch:
-  - PR #129 merged from exact feature head 848196dc1ea4515652fb5f513a55097c3cb187ab at merge commit a98824b276e4044ae8ddc232e45d1e700ad4906a.
-  - PR #129 passed all 10 PR-triggered workflows, including Godot 4.7.2 Project Check, both Hushiro checks, the new Hushiro Elite Boss Progression Check, Yomori Region Check, region handoff, runtime lifetime, post-playtest stability, Blood Cavern execution, and authored presentation.
-  - Collector parry posture now receives one authored posture award only when the imported reaction path failed to mutate posture; normal sword posture remains one-pass.
-  - Keeper normal authored sword posture is no longer dropped, Keeper parries no longer double-award posture, and Keeper exposes canonical Deathblow readiness/receive routing so first execution transitions to Phase 2 and second execution can defeat the boss.
-  - Area 2 DuoBossManager now stays inactive when its boss container is not the active regional boss, preventing its Keeper-room startup warning.
-  - The new HushiroEliteBossProgressionSmoke instantiates live Player/Collector/Keeper/duo-manager paths and covers the repaired posture and boss progression semantics.
+  - PR #130 merged from exact feature head 6bcee893275cdcb97e883e90f054b99823cf18e5 at merge commit 114f306a70568cf764b71b572df512fcb68fd079.
+  - PR #130 passed all 10 PR-triggered workflows, including Godot 4.7.2 Project Check, Cross-Region Enemy Contract Check, Hushiro regression/semantics, region handoff, runtime lifetime, post-playtest stability, Blood Cavern execution, release shell, and authored presentation.
+  - Cross-region audit covered Region 2 standards (Mist Shepherd, Lantern Wraith, Lingering Wraith, Stalker Hound), minibosses (Embered Pilgrim, Rotwood Host), Twin Maws (Briarthorn, Rootfang), and canonical Kagutsuchi standards/minibosses/boss/summon roster.
+  - Concrete stale posture ownership was found in Embered Pilgrim, Rotwood Host, Briarthorn, Rootfang, Blood Lotus Heart core, Eclipse Shogun, and Court Sentinel parry handling.
+  - CombatController now fills canonical hit/block Posture for legacy notify-only receivers only when no receiver already consumed the active AttackEvent; modern EnemyBase receivers remain exactly one pass.
+  - Receiver-authored parry Posture is now idempotent with legacy notify_got_hit(parried=true), preventing the old explicit-plus-generic double spike while preserving notify-only legacy parry compatibility.
+  - Blood Lotus Heart's exposed core can now receive canonical sword Posture through its existing notify-only path instead of potentially never filling its core Posture meter.
+  - Audit found no equivalent structural repair needed for current Court Guard, Court Caster, Elite Defender, Eternal Swordsman wrapper, Mist Shepherd, Stalker Hound, or intentionally HP-only Hollow Vessel/Blood Lotus Stalk/Spillborn contracts.
+  - Death/defeat routing inspected for Twin Maws and Eclipse Shogun remains connected to manager/defeated/enemy_died progression paths; no Keeper-style missing receive interface was found on the later miniboss/boss scripts inspected.
 recent_batches:
   - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
   - pr_127: restored approved direct first-attempt run start while preserving the other PR #126 stabilization fixes.
   - pr_128: suppressed false Spirit bootstrap feedback while preserving real Spirit gain presentation.
   - pr_129: repaired Collector/Keeper posture and Keeper Deathblow progression; gated inactive Area 2 duo manager startup.
+  - pr_130: preemptively reconciled stale Region 2/3 hit/parry posture contracts through the shared canonical AttackEvent bridge.
 confirmed:
-  - PR #119 through #129 merged; never continue old feature branches.
+  - PR #119 through #130 merged; never continue old feature branches.
   - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
   - Numerical balance/economy/difficulty tuning remains evidence-driven rather than speculative.
+  - Region 2/3 static audit and CI do not replace player-facing playtest validation.
   - Known provenance blockers remain explicit; never fabricate license evidence.
 avoid_without_evidence:
   - combat/Aspect/Technique/Prosthetic/Relic architecture reopen
