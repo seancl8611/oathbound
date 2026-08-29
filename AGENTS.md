@@ -31,7 +31,7 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T00:42:00Z
+updated_utc: 2026-08-29T01:05:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -40,8 +40,8 @@ merged_cutoff:
   merge_commit: 1921dcbd487922e31faf2f5ca7c3ee09ec941b4f
   validation: 7/7 PR-triggered workflows green; mergeable_state clean
 active_branch: agent/preplaytest-import-guard-feedback
-active_pr: null
-covered_through_substantive_commit: 63584640a918012fc0e7d0df7be9d41af976fd94
+active_pr: 125
+covered_through_substantive_commit: 933e2eef3539cb9ed720772d8380c74ea6d15e18
 known_good_checkpoint: 1921dcbd487922e31faf2f5ca7c3ee09ec941b4f
 current_objective: >-
   Resolve player-observed pre-playtest cold-import noise and Hushiro enemy-guard readability before
@@ -49,18 +49,19 @@ current_objective: >-
   preserved HP while applying Posture; the defect is player-facing guard/readability plus a local clean-worktree
   launcher that opened the editor before building its import cache.
 next_action: >-
-  Validate branch head 63584640a918012fc0e7d0df7be9d41af976fd94. Prioritize Hushiro Combat Semantics
-  and Godot 4.7.2 Project Check. The new guard smoke must prove the canonical HurtBox transaction produces
-  0 HP, exactly 14 Posture, zero floating damage numbers, and a visible guard cue. If branch validation is green,
-  open the next PR, verify PR-triggered checks/mergeability, merge autonomously, checkpoint main, then hand the
-  updated main build back for the long playtest.
+  PR #125 is open at exact head 933e2eef3539cb9ed720772d8380c74ea6d15e18 after 8/8 push-triggered workflows
+  passed, including Hushiro live guard readability, Godot 4.7.2 Project Check, and Release Shell Check. Verify only
+  the PR-triggered workflows and recalculated mergeability. If green/clean, merge autonomously with exact expected
+  head SHA, checkpoint main, then hand the updated main build back for the long player-facing integration playtest.
 current_batch:
-  - Added tracked root oathbound-playtest.cmd so clean worktrees run the same headless import and editor-load preflight as CI before launching Godot.
+  - Added tracked root oathbound-playtest.cmd so clean worktrees run a headless import, then require a clean post-import editor load before launching Godot.
+  - Cold import artifacts confirmed the scary PNG load errors happen during the initial scan before Godot completes a 340-step successful reimport; the launcher hides that expected first-pass noise and treats the post-import load as authoritative.
   - The launcher rejects unresolved SCRIPT ERROR / Failed loading resource / deferred-call errors after the import pass and preserves logs in C:\OathboundPlaytest.
   - Corrupted Swordsman active guard now has a procedural shield-outline cue because the imported foot-soldier sheet has no authored block animation.
   - Added HushiroGuardReadabilitySmoke through the real HurtBox canonical AttackEvent transaction.
-  - Captured telemetry evidence: guarded wolf_fang_slash held enemy HP at 77 while Posture rose 37 -> 51; no HP+Posture leak was present in that observed block.
-  - Uploaded import log listed many missing-resource messages on initial cold editor open, while affected PNG sources are tracked and the subsequent runtime successfully instantiated those enemies.
+  - The new guard smoke is green: guarded wolf_fang_slash produces 0 HP, exactly 14 Posture, zero floating HP damage numbers, and the guard cue tracks active guard state.
+  - Captured player telemetry evidence: guarded wolf_fang_slash held enemy HP at 77 while Posture rose 37 -> 51; no HP+Posture leak was present in that observed block.
+  - CI caught and fixed one branch-local parser defect: PackedVector2Array construction cannot initialize a GDScript const in Godot 4.7.2, so guard cue points are now built at runtime.
 recent_batches:
   - pr_121: queued achievement-unlock presenter.
   - pr_122: canonical non-blocking regional boss title cards.
@@ -68,9 +69,10 @@ recent_batches:
   - pr_124: persisted/localized end-of-run performance summary from eight existing RunData counters.
 confirmed:
   - PR #119 through #124 merged; never continue old feature branches.
-  - Godot 4.7.2 clean import/editor/runtime ownership validation passed on PR #124.
+  - PR #125 feature head has 8/8 push-triggered workflows green.
+  - Godot 4.7.2 clean import/editor/runtime ownership validation passes at PR #125 feature head.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
-  - Existing HushiroDefenseContractSmoke already asserts enemy guard posture-only/no damage number; new smoke closes the gap at the live canonical HurtBox route and visual guard state.
+  - Existing HushiroDefenseContractSmoke asserts enemy guard posture-only/no damage number; new smoke closes the gap at the live canonical HurtBox route and visual guard state.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
   - Numerical balance/economy/difficulty tuning waits for long player-facing evidence.
