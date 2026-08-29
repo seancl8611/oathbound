@@ -8,6 +8,17 @@ const LIGHT_HIT_STUN := 0.16
 const MEDIUM_HIT_STUN := 0.22
 const HEAVY_HIT_STUN := 0.30
 const POST_HIT_BREATHING_ROOM := 0.24
+const GUARD_CUE_COLOR := Color(0.86, 0.94, 1.0, 0.95)
+const GUARD_CUE_POINTS := PackedVector2Array([
+	Vector2(-6.0, -5.0),
+	Vector2(-6.0, 1.0),
+	Vector2(0.0, 7.0),
+	Vector2(6.0, 1.0),
+	Vector2(6.0, -5.0),
+	Vector2(-6.0, -5.0),
+])
+
+var _guard_cue: Line2D = null
 
 
 func _ready() -> void:
@@ -39,7 +50,9 @@ func _ready() -> void:
 	watch_orbit_speed = 30.0
 	super._ready()
 	_arm_legacy_timer_cleanup()
-	print("[CorruptedSwordsman] v2.1 - active controlled Hushiro duel cadence")
+	_ensure_guard_cue()
+	_sync_guard_cue(false)
+	print("[CorruptedSwordsman] v2.2 - active duel cadence + explicit guard cue")
 
 
 func _arm_legacy_timer_cleanup() -> void:
@@ -59,6 +72,43 @@ func _release_legacy_attack_timer() -> void:
 	if is_instance_valid(attack_timer) and attack_timer.get_parent() == null:
 		attack_timer.free()
 	attack_timer = null
+
+
+# =============================================================================
+# PLAYER-FACING GUARD READABILITY
+# =============================================================================
+# The imported foot-soldier sheet has no authored block animation. Previously the
+# Swordsman could be mechanically guarding while still displaying its walk frame,
+# making a posture-only block look like an ordinary HP hit. Keep combat ownership in
+# HumanoidEnemyBase, but expose the active guard state with a small shield outline.
+
+func _set_blocking(active: bool) -> void:
+	super._set_blocking(active)
+	_sync_guard_cue(bool(_block_active))
+
+
+func _ensure_guard_cue() -> void:
+	if _guard_cue != null and is_instance_valid(_guard_cue):
+		return
+	_guard_cue = Line2D.new()
+	_guard_cue.name = "GuardCue"
+	_guard_cue.width = 2.0
+	_guard_cue.default_color = GUARD_CUE_COLOR
+	_guard_cue.points = GUARD_CUE_POINTS
+	_guard_cue.position = Vector2(0.0, -28.0)
+	_guard_cue.z_index = 125
+	_guard_cue.visible = false
+	add_child(_guard_cue)
+
+
+func _sync_guard_cue(active: bool) -> void:
+	_ensure_guard_cue()
+	if _guard_cue != null and is_instance_valid(_guard_cue):
+		_guard_cue.visible = active
+
+
+func is_guard_cue_visible() -> bool:
+	return _guard_cue != null and is_instance_valid(_guard_cue) and _guard_cue.visible
 
 
 func _current_attack_requires_perilous_warning(requested_unblockable: bool = false) -> bool:
