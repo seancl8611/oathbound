@@ -31,43 +31,43 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T18:10:00Z
+updated_utc: 2026-08-29T18:12:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 127
-  feature_head: cf5322c0f1b2f07165a0147d45f8f9be3dd7621c
-  merge_commit: 140ff89ce99bfeda33c8da59883f8132a57e2817
-  validation: 5/5 final-head push workflows green; 7/7 PR-triggered workflows green; mergeable_state clean
-active_branch: agent/spirit-bootstrap-presentation
-active_pr: 128
-covered_through_substantive_commit: 5b76be7f9724e334de80ec430baa1c6182333741
-known_good_checkpoint: 140ff89ce99bfeda33c8da59883f8132a57e2817
+  pr: 128
+  feature_head: 5b76be7f9724e334de80ec430baa1c6182333741
+  merge_commit: 84469b1b584852176e7ad7654192fb2208eabaef
+  validation: 7/7 final-head push workflows green; 9/9 PR-triggered workflows green; mergeable_state clean
+active_branch: null
+active_pr: null
+covered_through_substantive_commit: null
+known_good_checkpoint: 84469b1b584852176e7ad7654192fb2208eabaef
 current_objective: >-
-  Finish the evidence-backed Spirit bootstrap presentation fix from the Aug 29 follow-up playtest. The playtest itself
-  is materially clean: no SCRIPT ERROR/ERROR/WARNING signatures were observed. The concrete defect is a false +90
-  Spirit popup caused by the imported 10-Spirit compatibility baseline being raised to the canonical 100-Spirit
-  runtime while Player/HUD initialization is still visible.
+  Gather the next coherent player-facing integration evidence from main after the Aug 29 follow-up stabilization pass.
+  The latest supplied log is materially clean: no SCRIPT ERROR/ERROR/WARNING signature, and the false +90 Spirit
+  bootstrap popup is now fixed. Continue evidence-driven integration validation rather than speculative tuning.
 next_action: >-
-  Check PR #128 validation at exact head 5b76be7f9724e334de80ec430baa1c6182333741. Branch validation is 7/7 green,
-  including Release Shell's live Spirit regression and Godot 4.7.2 validation. If PR-triggered validation is green and
-  GitHub reports mergeable_state clean, merge autonomously using the exact head SHA. Then checkpoint main:AGENTS.md and
-  return to the next coherent player-facing integration playtest rather than starting unrelated tuning.
+  On the next meaningful playtest, use `oathbound-playtest.cmd main` and wait for IMPORT PREFLIGHT PASSED. Confirm that
+  entering The Strand and beginning a run no longer displays a false +90 Spirit popup, while real Spirit restoration
+  can still produce legitimate gain feedback. Continue the broader run through normal combat, rewards, rooms, bosses,
+  transitions, death/return, and toward Region 1 -> Region 2 -> Region 3 -> Heart Approach or until a genuine blocker.
+  Preserve the Godot log, CombatTelemetry, IntegrationCheckpoint markers, and run-performance summary when available.
 current_batch:
-  - PR #128 is open from agent/spirit-bootstrap-presentation at exact head 5b76be7f9724e334de80ec430baa1c6182333741.
+  - PR #128 merged from exact feature head 5b76be7f9724e334de80ec430baa1c6182333741 at merge commit 84469b1b584852176e7ad7654192fb2208eabaef.
   - Aug 29 follow-up Godot log from main 6e4caaca594220cdfd1b22c8265be0a6454271d8 contains no SCRIPT ERROR, ERROR, or WARNING entries; prior death crash and Rest ownership warning did not recur.
-  - Combat telemetry contains no repeated Spirit award/mutation signal. The observed +90 popup is presentation-only bootstrap feedback, not an economy/resource award.
-  - Root cause: player.tscn uses the imported executor/HUD compatibility path with a 10-Spirit baseline; current Oathbound rules promote that Player to 100 Spirit during _ready(), causing 10 -> 100 to look like a +90 pickup.
+  - Combat telemetry contains no repeated Spirit award/mutation signal. The observed +90 popup was presentation-only bootstrap feedback, not an economy/resource award.
+  - Root cause: player.tscn used the imported 10-Spirit compatibility baseline before current Oathbound rules promoted the Player to canonical 100 Spirit during _ready(), making bootstrap synchronization look like a +90 pickup.
   - OathboundPlayerStability now silently synchronizes the ProstheticExecutor child to CURRENT_MAX_SPIRIT before inherited HUD construction, covering both Strand player.tscn and run aspect_player.tscn inheritance paths.
-  - RunHUDRewardSurfaceSmoke now instantiates both live Player paths, requires bootstrap 100/100 with no popup, requires no popup on a decrease, and separately proves 90/100 -> 100/100 still shows a real +10 gain.
-  - Exact feature head passed all 7 push-triggered workflows; Release Shell explicitly passed the new canonical Run HUD reward/Spirit regression.
-  - The same playtest log prints New run started three times during overwrite/startup. This was traced to pre-departure save-slot run-scope resets plus the real RunScene departure reset. No duplicated live run state or Spirit award was observed, so save-slot lifecycle ownership is intentionally unchanged without stronger evidence.
+  - RunHUDRewardSurfaceSmoke instantiates both live Player paths, requires bootstrap 100/100 with no popup, requires no popup on a decrease, and separately proves 90/100 -> 100/100 still shows a real +10 gain.
+  - Exact feature head passed all 7 push-triggered workflows; PR #128 passed all 9 PR-triggered workflows, including Release Shell, both Hushiro gates, runtime lifetime, region handoff, post-playtest stability, Blood Cavern execution, authored presentation, and Godot 4.7.2 Project Check.
+  - The same playtest log prints New run started three times during overwrite/startup. This was traced to pre-departure save-slot run-scope resets plus the real RunScene departure reset. No duplicated live run state or Spirit award was observed, so save-slot lifecycle ownership remains unchanged without stronger evidence.
 recent_batches:
   - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
   - pr_127: restored approved direct first-attempt run start while preserving the other PR #126 stabilization fixes.
-  - pr_128_pending: suppress false Spirit bootstrap feedback while preserving real Spirit gain presentation.
+  - pr_128: suppressed false Spirit bootstrap feedback while preserving real Spirit gain presentation.
 confirmed:
-  - PR #119 through #127 merged; never continue old feature branches.
+  - PR #119 through #128 merged; never continue old feature branches.
   - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
   - Follow-up Aug 29 playtest showed no new runtime error/warning signature in the provided Godot log.
