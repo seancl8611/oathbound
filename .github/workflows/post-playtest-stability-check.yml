@@ -39,7 +39,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Release/Validation/PostPlaytestStabilitySmoke.tscn 2>&1 | tee post-playtest-release.log
-          grep -F "[PostPlaytestStabilitySmoke] PASS - failed-run result builds | fresh save -> Strand | Rest gate single-owner" post-playtest-release.log
+          grep -F "[PostPlaytestStabilitySmoke] PASS - failed-run result builds | fresh save -> first run | Rest gate single-owner" post-playtest-release.log
           if grep -F "SCRIPT ERROR:" post-playtest-release.log; then
             echo "FAIL: release stability smoke emitted a GDScript runtime error."
             exit 1
