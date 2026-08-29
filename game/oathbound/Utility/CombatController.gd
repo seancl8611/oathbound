@@ -60,6 +60,17 @@ var _health_ratio = 1.0
 # same collision. This lets old enemy code keep calling add_posture(amount) while the
 # shared runtime uses the authored event value instead of old response-table scaling.
 var _incoming_attack_event: Dictionary = {}
+# Some later imported elites still only call notify_got_hit() and expect that call to
+# consume hit Posture. Track whether the receiver already claimed this canonical event
+# through add_posture()/set_posture() so the compatibility fallback can never become a
+# second Posture pass.
+var _incoming_attack_posture_applied: bool = false
+
+# Receiver-authored Posture mutations and compatibility notifications are intentionally
+# separate concepts. This serial lets notify_got_hit(parried=true) detect that an old
+# enemy already applied its authored parry amount before sending the legacy notification.
+var _receiver_posture_increase_serial: int = 0
+var _receiver_posture_increase_serial_at_last_notify: int = 0
 
 # =============================================================================
 # PROSTHETIC SYSTEM
@@ -125,9 +136,11 @@ func _now_s() -> float:
 
 func begin_attack_event(event: Dictionary) -> void:
 	_incoming_attack_event = event.duplicate(true)
+	_incoming_attack_posture_applied = false
 
 func end_attack_event() -> void:
 	_incoming_attack_event.clear()
+	_incoming_attack_posture_applied = false
 
 func has_active_attack_event() -> bool:
 	return not _incoming_attack_event.is_empty()
@@ -387,15 +400,29 @@ func notify_hit(_event: Dictionary) -> void:
 	pass
 
 func notify_got_hit(event: Dictionary) -> void:
-	# Imported receivers generally apply their explicit Posture pressure through
-	# add_posture() before calling this method. Do not add a second generic amount.
-	# Parries are the one compatibility path that may still route their authored
-	# posture spike through this notification.
+	# A canonical HurtBox transaction may arrive at either a modern receiver that has
+	# already called add_posture(), or an older Area 2/3 receiver that still expects this
+	# notification to apply hit posture. Fill the latter gap only once, using the exact
+	# authored AttackEvent value rather than the receiver's legacy damage scaling.
 	_recovery_suppressed_until = _now_s() + (config.posture_recover_delay if config else 1.5)
 
-	if event.has("parried") and event["parried"] == true:
-		var parry_spike = config.parry_posture_spike if config else 25.0
-		_add_posture(parry_spike)
+	var parried: bool = bool(event.get("parried", false))
+	var receiver_already_added_posture: bool = _receiver_posture_increase_serial != _receiver_posture_increase_serial_at_last_notify
+
+	if parried:
+		# Several imported elites manually set/add their authored parry posture and then
+		# send this legacy notification. Only provide the generic compatibility spike if
+		# there has been no receiver-authored increase since the preceding notification.
+		if not receiver_already_added_posture:
+			var parry_spike: float = config.parry_posture_spike if config else 25.0
+			_add_posture(parry_spike)
+	elif not _incoming_attack_event.is_empty() and not _incoming_attack_posture_applied:
+		_incoming_attack_posture_applied = true
+		var legacy_fallback: float = config.hit_posture_gain if config else 12.0
+		var canonical_posture: float = _resolve_authored_posture_amount(legacy_fallback)
+		_add_posture(canonical_posture)
+
+	_receiver_posture_increase_serial_at_last_notify = _receiver_posture_increase_serial
 
 
 # =============================================================================
@@ -484,11 +511,24 @@ func get_posture_ratio() -> float:
 
 func set_posture(value: float) -> void:
 	var maxv = config.posture_max if config else 100.0
+	var before: float = _posture
 	_posture = clamp(value, 0.0, maxv)
+	if _posture > before + 0.001:
+		_receiver_posture_increase_serial += 1
+		if not _incoming_attack_event.is_empty():
+			_incoming_attack_posture_applied = true
 	emit_signal("posture_changed", _posture, maxv)
 
 func add_posture(amount: float) -> void:
+	# Public add_posture() means the receiver explicitly owns this posture mutation.
+	# During a canonical contact, mark it consumed before resolving the authored amount
+	# so notify_got_hit() cannot add a second copy later in the same transaction.
+	if not _incoming_attack_event.is_empty():
+		_incoming_attack_posture_applied = true
+	var before: float = _posture
 	_add_posture(_resolve_authored_posture_amount(amount))
+	if _posture > before + 0.001:
+		_receiver_posture_increase_serial += 1
 
 func reset_posture() -> void:
 	_posture = 0.0

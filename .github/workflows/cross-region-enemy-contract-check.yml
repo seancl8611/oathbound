@@ -1,0 +1,67 @@
+name: Cross-Region Enemy Contract Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Enemy/**"
+      - "game/oathbound/Regions/Kagutsuchi/**"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/hurt_box.gd"
+      - "game/oathbound/Core/Release/Validation/CrossRegionEnemyContractSmoke.gd"
+      - "game/oathbound/Core/Release/Validation/CrossRegionEnemyContractSmoke.tscn"
+      - ".github/workflows/cross-region-enemy-contract-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Enemy/**"
+      - "game/oathbound/Regions/Kagutsuchi/**"
+      - "game/oathbound/Utility/CombatController.gd"
+      - "game/oathbound/Utility/hurt_box.gd"
+      - "game/oathbound/Core/Release/Validation/CrossRegionEnemyContractSmoke.gd"
+      - "game/oathbound/Core/Release/Validation/CrossRegionEnemyContractSmoke.tscn"
+      - ".github/workflows/cross-region-enemy-contract-check.yml"
+  workflow_dispatch:
+
+jobs:
+  cross-region-enemy-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify shared Region 2 and Region 3 enemy contracts
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/CrossRegionEnemyContractSmoke.tscn 2>&1 | tee cross-region-enemy-contract.log
+          grep -F "[CrossRegionEnemyContractSmoke] PASS - canonical legacy hit fallback | modern one-pass posture | canonical block posture | explicit parry idempotence | notify-only parry compatibility | Region 2/3 receiver inventory" cross-region-enemy-contract.log
+          if grep -F "SCRIPT ERROR:" cross-region-enemy-contract.log; then
+            echo "FAIL: cross-region enemy contract regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" cross-region-enemy-contract.log; then
+            echo "FAIL: cross-region enemy contract regression emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload contract log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-region-enemy-contract-${{ github.run_id }}
+          path: cross-region-enemy-contract.log
+          if-no-files-found: warn
+          retention-days: 7
