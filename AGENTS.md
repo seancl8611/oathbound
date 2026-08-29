@@ -31,47 +31,47 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T06:06:00Z
+updated_utc: 2026-08-29T06:08:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 125
-  feature_head: 933e2eef3539cb9ed720772d8380c74ea6d15e18
-  merge_commit: 630502879451b33d84273f85ffe95c12ee0be363
-  validation: 8/8 PR-triggered workflows green; 8/8 push-triggered workflows green; mergeable_state clean
-active_branch: agent/post-playtest-stability
-active_pr: 126
-covered_through_substantive_commit: 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52
-known_good_checkpoint: 630502879451b33d84273f85ffe95c12ee0be363
+  pr: 126
+  feature_head: 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52
+  merge_commit: 62bcf3dc5d7557ff0a2b86934f06b96444d97319
+  validation: 5/5 final-head push workflows green; 11/11 PR-triggered workflows green; mergeable_state clean
+active_branch: null
+active_pr: null
+covered_through_substantive_commit: null
+known_good_checkpoint: 62bcf3dc5d7557ff0a2b86934f06b96444d97319
 current_objective: >-
-  Stabilize the first long player-facing integration evidence from main. The Aug 29 playtest exposed four bounded
-  defects: failed-run result construction crashes on a stale MetaProgress Heart Binding API, fresh New Game/overwrite
-  routes directly into RunScene instead of The Strand, ordinary blocked Archer arrows are locally misclassified and
-  reflected, and Rest Chamber duplicates GameFlow route-gate ownership and emits a stale make_choice warning.
+  Gather the next player-facing integration evidence from main after the first long playtest stabilization batch.
+  PR #126 fixed the failed-run crash, fresh-save/overwrite routing, Archer arrow block-vs-parry response, and duplicate
+  Rest route ownership. Re-test those exact behaviors first, then continue the coherent Region 1 -> Region 2 ->
+  Region 3 -> Heart Approach integration route if no real blocker stops the run.
 next_action: >-
-  PR #126 is open at exact feature head 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52 after all 5 final-head push
-  workflows passed, including Post-playtest Stability Check, Godot 4.7.2 Project Check, and Hushiro Combat Semantics.
-  Eleven PR-triggered workflows are running. Check only their completion/failures and PR mergeability. If all are green
-  and mergeable_state is clean, merge autonomously with exact expected head SHA, checkpoint main, then return main for
-  another integration playtest focused on death/run-results, fresh-save Strand routing, Rest exit, and arrow defense.
+  Run `oathbound-playtest.cmd main` and wait for IMPORT PREFLIGHT PASSED. Verify a fresh New Game or overwritten slot
+  opens The Strand, then launch the first expedition and confirm it enters the normal unscripted Hushiro route. In
+  Archer encounters, ordinary block must absorb/despawn the arrow without reflection while a real parry must reflect.
+  Use at least one Rest exit and watch for the retired duplicate make_choice warning. On player death, confirm run-result
+  construction and return presentation complete without the prior Heart Binding API crash. If stable, continue through
+  Region 1 -> Region 2 -> Region 3 -> Heart Approach or until another real failure. Preserve runtime log and CombatTelemetry.
 current_batch:
-  - Failed-run crash root: OathboundRecordsRuntime called nonexistent MetaProgress.remaining_heart_bindings(); branch now uses canonical get_heart_bindings_remaining().
-  - Fresh New Game and overwrite now create/select the slot then route to res://World/HubScene.tscn; FIRST_ATTEMPT authority now starts fresh saves in The Strand and begins the unscripted Hushiro first-attempt contract when the first expedition launches.
-  - Uploaded combat telemetry recorded five Archer arrow block_success contacts with _parry_active=false, state=6, zero Health damage, and posture-only damage; no arrow parry_success events occurred.
-  - CorruptedArcherProjectile now treats canonical defense methods as authoritative, preserves legitimate active/grace parries, and limits numeric fallback to BLOCKING=6 / PARRYING=7 compatibility states. Normal block absorbs/despawns; parry reflects.
-  - RestChamber no longer connects its route gate through RoomBase; live GameFlow remains sole route-transition owner.
-  - Added PostPlaytestStabilitySmoke for failed-run result construction, fresh-save Strand destination, and Rest single-owner gate state.
-  - Added HushiroProjectileDefenseSmoke reproducing canonical block state 6 / parry false and separately proving real parry reflection.
-  - Added dedicated Post-playtest Stability Check workflow with clean Godot 4.7.2 import/editor load and both new regressions.
-  - Exact final branch head passed all 5 triggered push workflows; PR #126 now has 11 PR-triggered workflows queued/running.
+  - PR #126 merged from exact feature head 1d47c77a5651421f8d14fdb85cbeb2eb522f3c52 at merge commit 62bcf3dc5d7557ff0a2b86934f06b96444d97319.
+  - Failed-run result construction now uses MetaProgress.get_heart_bindings_remaining(); the stale nonexistent remaining_heart_bindings call is gone.
+  - Fresh New Game and overwrite route to res://World/HubScene.tscn. FIRST_ATTEMPT authority now establishes The Strand before the first expedition while preserving the normal unscripted Hushiro first run.
+  - Corrupted Archer projectile defense now treats canonical is_parrying/is_blocking state as authoritative. Normal block absorbs/despawns the arrow; only parry reflects it. Compatibility fallback uses BLOCKING=6 / PARRYING=7.
+  - RestChamber no longer duplicates GameFlow route-gate ownership, retiring the observed make_choice-not-awaiting-choice warning path.
+  - PostPlaytestStabilitySmoke covers failed-run result build, fresh-save Strand destination, and Rest single-owner routing.
+  - HushiroProjectileDefenseSmoke reproduces the observed state=6/parry=false block and separately validates true parry reflection.
+  - Exact feature head passed 5/5 triggered push workflows and PR #126 passed all 11 PR-triggered workflows, including Godot 4.7.2 Project Check, Release Shell, both Hushiro gates, Yomori/Kagutsuchi, lifetime, presentation, region handoff, and dedicated stability validation.
 recent_batches:
-  - pr_123: debug-only Region 1/Region 2/Heart Approach structured integration checkpoints.
   - pr_124: persisted/localized end-of-run performance summary from eight existing RunData counters.
   - pr_125: clean playtest import preflight + explicit Hushiro enemy guard cue + canonical guard transaction smoke.
+  - pr_126: first long-playtest stabilization for death/run-results, fresh-save Strand routing, Archer projectile defense, and Rest gate ownership.
 confirmed:
-  - PR #119 through #125 merged; never continue old feature branches.
-  - Aug 29 runtime log had one SCRIPT ERROR: stale remaining_heart_bindings call during RecordsRuntime.on_run_finished; it also had the duplicate Rest make_choice warning.
-  - Shared player defense correctly classified the observed Archer contacts as block_success with zero HP loss; projectile-local response caused the false reflection.
+  - PR #119 through #126 merged; never continue old feature branches.
+  - Aug 29 player log had one SCRIPT ERROR at RecordsRuntime.on_run_finished from stale remaining_heart_bindings and one duplicate Rest make_choice warning; both exact paths are covered by PR #126 regressions.
+  - Uploaded combat telemetry showed five Archer arrow block_success contacts with _parry_active=false, state=6, zero HP loss, and posture-only damage; projectile-local misclassification caused reflection.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
