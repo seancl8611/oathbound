@@ -31,7 +31,7 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T14:31:00Z
+updated_utc: 2026-08-29T18:10:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
@@ -39,38 +39,38 @@ merged_cutoff:
   feature_head: cf5322c0f1b2f07165a0147d45f8f9be3dd7621c
   merge_commit: 140ff89ce99bfeda33c8da59883f8132a57e2817
   validation: 5/5 final-head push workflows green; 7/7 PR-triggered workflows green; mergeable_state clean
-active_branch: null
-active_pr: null
-covered_through_substantive_commit: null
+active_branch: agent/spirit-bootstrap-presentation
+active_pr: 128
+covered_through_substantive_commit: 5b76be7f9724e334de80ec430baa1c6182333741
 known_good_checkpoint: 140ff89ce99bfeda33c8da59883f8132a57e2817
 current_objective: >-
-  Gather the next player-facing integration evidence from main. The approved First Attempt behavior is restored:
-  a fresh or overwritten save begins directly in the normal unscripted Hushiro route. Keep validating the other
-  first-long-playtest stabilization fixes from PR #126 without pre-tuning numerical balance.
+  Finish the evidence-backed Spirit bootstrap presentation fix from the Aug 29 follow-up playtest. The playtest itself
+  is materially clean: no SCRIPT ERROR/ERROR/WARNING signatures were observed. The concrete defect is a false +90
+  Spirit popup caused by the imported 10-Spirit compatibility baseline being raised to the canonical 100-Spirit
+  runtime while Player/HUD initialization is still visible.
 next_action: >-
-  Run `oathbound-playtest.cmd main` and wait for IMPORT PREFLIGHT PASSED. On a fresh New Game or overwritten slot,
-  confirm the game enters the normal Hushiro first attempt directly rather than The Strand. In Archer encounters,
-  ordinary block must absorb/despawn the arrow while a real parry reflects it. Use at least one Rest exit and watch
-  for the retired duplicate make_choice warning. On player death, confirm run-result construction and return
-  presentation complete without the prior Heart Binding API crash. If stable, continue through Region 1 -> Region 2 ->
-  Region 3 -> Heart Approach or until another real failure. Preserve runtime log and CombatTelemetry.
+  Check PR #128 validation at exact head 5b76be7f9724e334de80ec430baa1c6182333741. Branch validation is 7/7 green,
+  including Release Shell's live Spirit regression and Godot 4.7.2 validation. If PR-triggered validation is green and
+  GitHub reports mergeable_state clean, merge autonomously using the exact head SHA. Then checkpoint main:AGENTS.md and
+  return to the next coherent player-facing integration playtest rather than starting unrelated tuning.
 current_batch:
-  - PR #127 merged from exact feature head cf5322c0f1b2f07165a0147d45f8f9be3dd7621c at merge commit 140ff89ce99bfeda33c8da59883f8132a57e2817.
-  - Sean clarified the original First Attempt design was intentional: fresh New Game/overwrite begins directly in the normal Hushiro run before Returning Blood awakens.
-  - docs/gameplay/FIRST_ATTEMPT.md is restored to the approved direct-Hushiro first-control authority.
-  - TitleScreen preserves PR #126's get_new_game_destination_path() test seam but now canonically returns res://Utility/RunScene.tscn; _start_new_game routes through that seam.
-  - PostPlaytestStabilitySmoke and its workflow now explicitly require `fresh save -> first run` while retaining failed-run result, Rest single-owner, and projectile block/parry regression coverage.
-  - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
-  - Exact feature head passed all 5 push-triggered workflows and PR #127 passed all 7 PR-triggered workflows, including Godot 4.7.2 Project Check and Release Shell.
+  - PR #128 is open from agent/spirit-bootstrap-presentation at exact head 5b76be7f9724e334de80ec430baa1c6182333741.
+  - Aug 29 follow-up Godot log from main 6e4caaca594220cdfd1b22c8265be0a6454271d8 contains no SCRIPT ERROR, ERROR, or WARNING entries; prior death crash and Rest ownership warning did not recur.
+  - Combat telemetry contains no repeated Spirit award/mutation signal. The observed +90 popup is presentation-only bootstrap feedback, not an economy/resource award.
+  - Root cause: player.tscn uses the imported executor/HUD compatibility path with a 10-Spirit baseline; current Oathbound rules promote that Player to 100 Spirit during _ready(), causing 10 -> 100 to look like a +90 pickup.
+  - OathboundPlayerStability now silently synchronizes the ProstheticExecutor child to CURRENT_MAX_SPIRIT before inherited HUD construction, covering both Strand player.tscn and run aspect_player.tscn inheritance paths.
+  - RunHUDRewardSurfaceSmoke now instantiates both live Player paths, requires bootstrap 100/100 with no popup, requires no popup on a decrease, and separately proves 90/100 -> 100/100 still shows a real +10 gain.
+  - Exact feature head passed all 7 push-triggered workflows; Release Shell explicitly passed the new canonical Run HUD reward/Spirit regression.
+  - The same playtest log prints New run started three times during overwrite/startup. This was traced to pre-departure save-slot run-scope resets plus the real RunScene departure reset. No duplicated live run state or Spirit award was observed, so save-slot lifecycle ownership is intentionally unchanged without stronger evidence.
 recent_batches:
-  - pr_125: clean playtest import preflight + explicit Hushiro enemy guard cue + canonical guard transaction smoke.
   - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
   - pr_127: restored approved direct first-attempt run start while preserving the other PR #126 stabilization fixes.
+  - pr_128_pending: suppress false Spirit bootstrap feedback while preserving real Spirit gain presentation.
 confirmed:
   - PR #119 through #127 merged; never continue old feature branches.
   - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
-  - Aug 29 player log had one SCRIPT ERROR at RecordsRuntime.on_run_finished from stale remaining_heart_bindings and one duplicate Rest make_choice warning; both exact paths remain covered by regressions and fixed.
-  - Uploaded combat telemetry showed five Archer arrow block_success contacts with _parry_active=false, state=6, zero HP loss, and posture-only damage; projectile-local misclassification caused reflection and remains fixed.
+  - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
+  - Follow-up Aug 29 playtest showed no new runtime error/warning signature in the provided Godot log.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
@@ -83,6 +83,7 @@ avoid_without_evidence:
   - broad numerical tuning without integration evidence
   - waiting for routine PR merge approval
   - unrelated PR growth
+  - save-slot lifecycle rewrites based only on duplicate startup reset logging when no duplicated live state is observed
   - bulk scene UID rewriting while tracked assets exist and clean-import preflight remains the supported resolution
 ```
 
