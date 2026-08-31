@@ -1,0 +1,67 @@
+name: Playtest Procedural FX Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Presentation/OathboundPlaytestFxPrimitive.gd"
+      - "game/oathbound/Core/Presentation/OathboundPlaytestFxStatus.gd"
+      - "game/oathbound/Core/Presentation/OathboundPlaytestFxRuntime.gd"
+      - "game/oathbound/Core/Presentation/Validation/OathboundPlaytestFxSmoke.gd"
+      - "game/oathbound/Core/Presentation/Validation/OathboundPlaytestFxSmoke.tscn"
+      - "game/oathbound/Core/Techniques/AspectTechniqueEffectsRuntime.gd"
+      - ".github/workflows/playtest-procedural-fx-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Presentation/OathboundPlaytestFxPrimitive.gd"
+      - "game/oathbound/Core/Presentation/OathboundPlaytestFxStatus.gd"
+      - "game/oathbound/Core/Presentation/OathboundPlaytestFxRuntime.gd"
+      - "game/oathbound/Core/Presentation/Validation/OathboundPlaytestFxSmoke.gd"
+      - "game/oathbound/Core/Presentation/Validation/OathboundPlaytestFxSmoke.tscn"
+      - "game/oathbound/Core/Techniques/AspectTechniqueEffectsRuntime.gd"
+      - ".github/workflows/playtest-procedural-fx-check.yml"
+  workflow_dispatch:
+
+jobs:
+  playtest-procedural-fx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify debug-only procedural FX runtime
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Presentation/Validation/OathboundPlaytestFxSmoke.tscn 2>&1 | tee playtest-procedural-fx.log
+          grep -F "[OathboundPlaytestFxSmoke] PASS - code-only primitives | persistent Technique/status markers | transition bursts | debug-only runtime attachment" playtest-procedural-fx.log
+          if grep -F "SCRIPT ERROR:" playtest-procedural-fx.log; then
+            echo "FAIL: procedural FX validation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" playtest-procedural-fx.log; then
+            echo "FAIL: procedural FX validation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload FX validation log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playtest-procedural-fx-${{ github.run_id }}
+          path: playtest-procedural-fx.log
+          if-no-files-found: warn
+          retention-days: 7
