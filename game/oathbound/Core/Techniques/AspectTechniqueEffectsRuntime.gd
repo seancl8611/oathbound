@@ -5,6 +5,22 @@ extends "res://Core/Techniques/TechniqueEffectsRuntime.gd"
 ## move name. Blood Arts and Wraith secondary passage contacts deliberately do not
 ## receive ordinary full Technique triggers.
 
+const PLAYTEST_FX_RUNTIME: Script = preload("res://Core/Presentation/OathboundPlaytestFxRuntime.gd")
+
+
+func _ready() -> void:
+	super._ready()
+	# Temporary playtest-readability layer. It is debug-build only and purely
+	# observational, so authored release visuals can replace it without touching the
+	# Technique rules/executor.
+	if OS.is_debug_build() and get_node_or_null("PlaytestFxRuntime") == null:
+		var runtime_value: Variant = PLAYTEST_FX_RUNTIME.new()
+		if runtime_value is Node:
+			var runtime := runtime_value as Node
+			runtime.name = "PlaytestFxRuntime"
+			add_child(runtime)
+
+
 func on_player_hit(target: Node, player: Node, attack_area: Area2D = null) -> void:
 	if attack_area == null:
 		super.on_player_hit(target, player, attack_area)
@@ -33,6 +49,7 @@ func on_player_hit(target: Node, player: Node, attack_area: Area2D = null) -> vo
 	attack_area.set_meta("attack_id", universal_id)
 	super.on_player_hit(target, player, attack_area)
 	attack_area.set_meta("attack_id", original_id)
+
 
 func _universal_attack_id(trigger: String) -> String:
 	match trigger:
