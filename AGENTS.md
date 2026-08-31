@@ -31,46 +31,47 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-08-29T19:44:00Z
+updated_utc: 2026-08-31T00:37:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 130
-  feature_head: 6bcee893275cdcb97e883e90f054b99823cf18e5
-  merge_commit: 114f306a70568cf764b71b572df512fcb68fd079
-  validation: 10/10 PR-triggered workflows green; mergeable true
+  pr: 131
+  feature_head: c1c2116f9056a6bf3065c6fdc4da91bbc34f2716
+  merge_commit: a169572df3ebf67e6e3862880e947aedf2f50a54
+  validation: 7/7 PR-triggered workflows green; mergeable true
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: 114f306a70568cf764b71b572df512fcb68fd079
+known_good_checkpoint: a169572df3ebf67e6e3862880e947aedf2f50a54
 current_objective: >-
-  Resume player-facing integration evidence from the corrected main build. Region 1 has now driven two combat-contract repair passes;
-  Region 2 and Region 3 received a preemptive code audit and shared posture-contract repair, but their player-facing difficulty,
-  encounter behavior, boss phase presentation, and full progression still require actual playtest evidence before numerical tuning.
+  Resume player-facing integration evidence from the corrected main build with the temporary debug-only procedural FX readability layer active.
+  Region 1 has driven two combat-contract repair passes; Region 2 and Region 3 received a preemptive code audit and shared posture-contract
+  repair, but their player-facing behavior still requires real playtest evidence. Use the new code-only FX to distinguish whether Techniques,
+  Aspects, Prosthetics, statuses, and Deathblow opportunities are actually firing while progressing into later regions.
 next_action: >-
-  Run from current main through the remaining Hushiro path and Keeper, then continue into Yomori/Region 2 if progression succeeds.
-  Player invulnerability may stay enabled for broad encounter coverage. Exercise standard enemies, Embered Pilgrim/Rotwood Host if
-  encountered, Twin Maws, ordinary sword hits, parries, blocking, posture breaks, Deathblows, room clear/progression, and rewards.
-  Preserve CombatTelemetry/logs and stop at the first genuine blocker. If Region 2 is healthy, continue the same evidence-driven
-  process toward Kagutsuchi; do not claim Region 2/3 balance is proven from static audit/CI alone.
+  Run the current main build through the remaining Hushiro path and Keeper, then continue into Yomori/Region 2 if progression succeeds.
+  Player invulnerability may stay enabled for broad encounter coverage. Exercise Technique families, all available Aspect/Prosthetic effects,
+  ordinary sword hits, parries, blocking, posture breaks, Deathblows, room clear/progression, and rewards. Watch specifically for either
+  (a) an underlying effect firing with no readable procedural cue or (b) a cue appearing when the underlying effect did not occur. Preserve
+  CombatTelemetry/logs and stop at the first genuine blocker. Do not treat the temporary procedural FX as final authored art.
 current_batch:
-  - PR #130 merged from exact feature head 6bcee893275cdcb97e883e90f054b99823cf18e5 at merge commit 114f306a70568cf764b71b572df512fcb68fd079.
-  - PR #130 passed all 10 PR-triggered workflows, including Godot 4.7.2 Project Check, Cross-Region Enemy Contract Check, Hushiro regression/semantics, region handoff, runtime lifetime, post-playtest stability, Blood Cavern execution, release shell, and authored presentation.
-  - Cross-region audit covered Region 2 standards (Mist Shepherd, Lantern Wraith, Lingering Wraith, Stalker Hound), minibosses (Embered Pilgrim, Rotwood Host), Twin Maws (Briarthorn, Rootfang), and canonical Kagutsuchi standards/minibosses/boss/summon roster.
-  - Concrete stale posture ownership was found in Embered Pilgrim, Rotwood Host, Briarthorn, Rootfang, Blood Lotus Heart core, Eclipse Shogun, and Court Sentinel parry handling.
-  - CombatController now fills canonical hit/block Posture for legacy notify-only receivers only when no receiver already consumed the active AttackEvent; modern EnemyBase receivers remain exactly one pass.
-  - Receiver-authored parry Posture is now idempotent with legacy notify_got_hit(parried=true), preventing the old explicit-plus-generic double spike while preserving notify-only legacy parry compatibility.
-  - Blood Lotus Heart's exposed core can now receive canonical sword Posture through its existing notify-only path instead of potentially never filling its core Posture meter.
-  - Audit found no equivalent structural repair needed for current Court Guard, Court Caster, Elite Defender, Eternal Swordsman wrapper, Mist Shepherd, Stalker Hound, or intentionally HP-only Hollow Vessel/Blood Lotus Stalk/Spillborn contracts.
-  - Death/defeat routing inspected for Twin Maws and Eclipse Shogun remains connected to manager/defeated/enemy_died progression paths; no Keeper-style missing receive interface was found on the later miniboss/boss scripts inspected.
+  - PR #131 merged from exact feature head c1c2116f9056a6bf3065c6fdc4da91bbc34f2716 at merge commit a169572df3ebf67e6e3862880e947aedf2f50a54.
+  - PR #131 passed all 7 PR-triggered workflows, including Playtest Procedural FX Check, Godot 4.7.2 Project Check, Hushiro Combat Semantics, RunScene Runtime Lifetime, Run Region Handoff, Post-playtest Stability, and Authored Presentation Content.
+  - Added a debug-only OathboundPlaytestFx runtime under the current TechniqueEffects autoload; release builds do not instantiate the temporary layer.
+  - All temporary FX are generated entirely in Godot code with CanvasItem drawing primitives; no external textures, spritesheets, shaders, particles, or user-supplied visual assets are required.
+  - Technique readability now includes persistent and transient cues for Echo, Rupture, Seal/Bind, Rift, Vulnerable, Shock, Burn, Aspect slow, Deathblow readiness, Unseen, and Bloodletting while retaining terse TechniqueStatus text as a diagnostic fallback.
+  - Added code-drawn activation silhouettes for all eight current Prosthetics: Beast Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, and Bloodletting Gourd.
+  - Added temporary Aspect/Blood Art cues for Wolf, Wraith, and Ronin, including Blood Art readiness plus Blood Hunt, Wraith Reach corridor, and Falling Mountain silhouettes.
+  - The FX layer is observational only and does not mutate damage, Posture, combat timing, status ownership, rewards, progression, or encounter behavior.
 recent_batches:
   - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
   - pr_127: restored approved direct first-attempt run start while preserving the other PR #126 stabilization fixes.
   - pr_128: suppressed false Spirit bootstrap feedback while preserving real Spirit gain presentation.
   - pr_129: repaired Collector/Keeper posture and Keeper Deathblow progression; gated inactive Area 2 duo manager startup.
   - pr_130: preemptively reconciled stale Region 2/3 hit/parry posture contracts through the shared canonical AttackEvent bridge.
+  - pr_131: added temporary debug-only code-generated playtest FX for Techniques, Aspects, Prosthetics, statuses, and Deathblow readability.
 confirmed:
-  - PR #119 through #130 merged; never continue old feature branches.
+  - PR #119 through #131 merged; never continue old feature branches.
   - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
@@ -78,6 +79,7 @@ confirmed:
   - Heart combat unauthored; do not invent it.
   - Numerical balance/economy/difficulty tuning remains evidence-driven rather than speculative.
   - Region 2/3 static audit and CI do not replace player-facing playtest validation.
+  - PR #131 procedural FX are temporary debug/playtest presentation, not final authored art or visual authority.
   - Known provenance blockers remain explicit; never fabricate license evidence.
 avoid_without_evidence:
   - combat/Aspect/Technique/Prosthetic/Relic architecture reopen
