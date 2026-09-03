@@ -1,9 +1,9 @@
 extends Node
 
 ## Focused structural/behavior contract for the Region 2 boss.
-## Uses lightweight test twins for manager state transitions so the assertions are
-## deterministic, while separately inspecting the authored Twin Maws scene to ensure
-## the real Rootfang/Briarthorn nodes are wired to the same manager contract.
+## Uses lightweight test twins for deterministic manager state transitions, inspects
+## the authored Twin Maws scene, and now also runs that real chamber through its
+## Area-2 _ready() lifecycle so manager/boss ownership is covered end-to-end.
 
 const DUO_MANAGER_SCRIPT: Script = preload("res://Utility/duo_boss_manager.gd")
 const TWIN_MAWS_SCENE: PackedScene = preload("res://Regions/Yomori/Chambers/TwinMawsChamber.tscn")
@@ -36,10 +36,11 @@ var _twin_died_count: int = 0
 
 func _ready() -> void:
 	_validate_authored_scene()
+	await _validate_live_authored_scene()
 	await _validate_manager_behavior()
 
 	if _failures.is_empty():
-		print("[TwinMawsContractSmoke] PASS - explicit twins | serialized special | survivor empowered | defeat after both")
+		print("[TwinMawsContractSmoke] PASS - authored Area-2 initialization | explicit twins | serialized special | survivor empowered | defeat after both")
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -69,6 +70,48 @@ func _validate_authored_scene() -> void:
 		_expect(str(manager.get("twin_a_path")) == "../Rootfang", "Twin Maws manager must explicitly target Rootfang")
 		_expect(str(manager.get("twin_b_path")) == "../Briarthorn", "Twin Maws manager must explicitly target Briarthorn")
 	chamber.free()
+
+
+func _validate_live_authored_scene() -> void:
+	if typeof(RunData) != TYPE_OBJECT:
+		_fail("RunData autoload missing; cannot validate Area-2 manager gating")
+		return
+
+	var previous_area: int = int(RunData.current_area_id)
+	RunData.current_area_id = 2
+
+	var chamber: Node = TWIN_MAWS_SCENE.instantiate()
+	chamber.name = "LiveTwinMawsChamber"
+	add_child(chamber)
+	# BossChamber deliberately waits one frame before selecting its regional boss.
+	# Give child _ready(), the chamber selection pass, and deferred setup time to settle.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	var container: Node = chamber.get_node_or_null("TwinMaws")
+	_expect(container != null, "Live Area-2 Twin Maws container disappeared during initialization")
+	if container != null:
+		var manager: Node = container.get_node_or_null("TwinMawsManager")
+		var rootfang: Node = container.get_node_or_null("Rootfang")
+		var briarthorn: Node = container.get_node_or_null("Briarthorn")
+		_expect(manager != null, "Live Area-2 TwinMawsManager missing after _ready()")
+		_expect(rootfang != null, "Live Area-2 Rootfang missing after _ready()")
+		_expect(briarthorn != null, "Live Area-2 Briarthorn missing after _ready()")
+		if manager != null and rootfang != null and briarthorn != null:
+			_expect(manager.is_in_group("boss"), "Live Area-2 manager did not become the boss authority")
+			_expect(manager.call("get_partner", rootfang) == briarthorn, "Live manager did not bind Rootfang -> Briarthorn")
+			_expect(manager.call("get_partner", briarthorn) == rootfang, "Live manager did not bind Briarthorn -> Rootfang")
+			_expect(rootfang.get("_manager") == manager, "Live Rootfang did not retain the authored TwinMawsManager")
+			_expect(briarthorn.get("_manager") == manager, "Live Briarthorn did not retain the authored TwinMawsManager")
+			var selected_boss_value: Variant = chamber.get("_boss")
+			_expect(selected_boss_value == manager, "Live BossChamber did not select TwinMawsManager as defeat authority")
+			var defeat_callback := Callable(chamber, "_on_boss_defeated")
+			_expect(manager.is_connected("defeated", defeat_callback), "Live TwinMawsManager defeat signal is not connected to BossChamber")
+
+	chamber.queue_free()
+	await get_tree().process_frame
+	RunData.current_area_id = previous_area
 
 
 func _validate_manager_behavior() -> void:
