@@ -31,50 +31,49 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-03T20:52:00Z
+updated_utc: 2026-09-03T21:52:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 133
-  feature_head: 864d539e062a1f8d8f0322ebd00c44b7252d723b
-  merge_commit: e6f97d8c1c88d1d82da125ed951599e15de1a93c
+  pr: 134
+  feature_head: 6153221ac0f6f79ce287e1212e04db442866a70c
+  merge_commit: 8bb3e417adf98599cc78b7e9bd2ca200437130cb
   validation: 9/9 PR-triggered workflows green; mergeable true
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: e6f97d8c1c88d1d82da125ed951599e15de1a93c
+known_good_checkpoint: 8bb3e417adf98599cc78b7e9bd2ca200437130cb
 current_objective: >-
-  Continue player-facing integration evidence in Yomori/Region 2 and then Kagutsuchi/Region 3 from the repaired September 3 main.
-  The later September 3 playtest on checkpoint 6c2931b5952e5a67e988cfe20ba3dd8c6af47437 reached Keeper's final persistent payout but then exposed
-  a stale cached loot-parent crash in Keeper death rewards. PR #133 repairs that evidence-backed failure and makes direct Area 1/2/3 chamber warps
-  obvious in the primary Playtest Lab Chambers tab, so later-region validation no longer depends on replaying or killing Keeper first. Keep the
-  temporary debug-only procedural FX active while comparing visible cues against underlying combat events.
+  Continue player-facing Yomori/Region 2 integration from the September 3 blocker-repair main, then proceed to Kagutsuchi/Region 3.
+  The first direct-warp Yomori playtest on checkpoint a5cd8119e584b22ee1b1c5782a903ff39b0fc431 proved later-region entry works and exposed three concrete runtime blockers:
+  Mist Shepherd could not receive player damage, Merchant could auto-exit during room load, and Lantern Wraith temporary attack timers emitted freed-lambda errors.
+  PR #134 repairs all three without numerical tuning or combat-architecture changes. Keep the temporary debug-only procedural FX active while comparing visible cues against combat events.
 next_action: >-
-  Run updated main and open the Playtest Lab with backtick. In Chambers, choose Target Region "Area 2 - Yomori" and Target Chamber "Combat",
-  then use "Warp Directly to Selected Region / Chamber". Exercise the Area 2 ordinary roster, Techniques, Aspects, Prosthetics, sword hits,
-  parries, blocking, posture breaks, Deathblows, room clear/progression, rewards, and procedural FX. Then directly warp to Area 2 Boss/Twin Maws
-  and validate the real duo fight. Preserve CombatTelemetry and the Godot log and stop at the first genuine blocker. If Yomori is clean, directly
-  continue to Area 3/Kagutsuchi combat and Eclipse Shogun. A separate Keeper boss retest is useful for end-to-end Hushiro progression confidence,
-  but it is no longer a prerequisite for reaching Area 2 or 3 during integration testing.
+  Run updated main and use Playtest Lab Chambers -> Area 2 - Yomori -> Combat. Confirm the Mist Shepherd in Pale Procession can take Health damage and die,
+  and confirm Lantern Wraith encounters no longer emit "Lambda capture at index 0 was freed". Also directly warp to Area 2 -> Merchant and confirm the Shop remains active long enough to inspect/interact with its three offers instead of auto-transitioning.
+  Then continue through the Yomori route and the real Twin Maws fight, exercising Techniques, Aspects, Prosthetics, blocking/parry, posture breaks, Deathblows, rewards, gates, and procedural FX.
+  Preserve CombatTelemetry and the Godot log and stop at the first genuine blocker. If Region 2 completes cleanly, continue directly into Area 3/Kagutsuchi and Eclipse Shogun in the same integration pass.
 current_batch:
-  - PR #133 merged from exact feature head 864d539e062a1f8d8f0322ebd00c44b7252d723b at merge commit e6f97d8c1c88d1d82da125ed951599e15de1a93c.
-  - PR #133 passed all 9 PR-triggered workflows: Godot 4.7.2 Project Check, Hushiro Combat Semantics, Hushiro Combat Regression, Hushiro Elite Boss Progression, Post-playtest Stability, Authored Presentation Content, Kagutsuchi Region Check, Run Region Handoff, and RunScene Runtime Lifetime.
-  - The supplied later September 3 Godot 4.7.2 playtest ran exact checkpoint 6c2931b5952e5a67e988cfe20ba3dd8c6af47437 and reached Keeper's persistent payout (+10 Mist / +1 keeper material / keeper_fallen) before one concrete SCRIPT ERROR stopped the run.
-  - The concrete failure was HumanoidEnemyBase._run_humanoid_death_rewards passing Keeper's cached loot_base as argument 2 to spawn_experience_gem after that Object had already been freed.
-  - ExperienceGem itself belongs to the broad "loot" group also used by chamber Loot containers, so first-group-member caching is not a durable boss-lifetime ownership guarantee.
-  - PR #133 makes canonical Keeper refresh its reward parent at death time, preferring the live chamber node named Loot and falling back to Keeper's live parent before delegating to the inherited reward implementation.
-  - HushiroCombatSemanticsSmoke now deliberately assigns Keeper a loot parent, frees it, invokes the reward path, and proves the experience gem is recovered into the live chamber Loot container without a runtime error.
-  - The supplied combat_1788467816.jsonl contained 363 valid JSON rows plus one truncated final row at the crash boundary; no separate explicit telemetry error/warning was present, so no additional combat bug is inferred from that truncation alone.
-  - The primary Playtest Lab Chambers tab now exposes Target Region Area 1/Hushiro, Area 2/Yomori, or Area 3/Kagutsuchi plus a chamber selector and direct warp button. The existing dedicated Regions tab remains available.
-  - Direct region warps continue to use the existing region-aware GameFlow.debug_warp authority: Area 2 uses YomoriRouteAuthority and Area 3 uses KagutsuchiRouteAuthority while resetting run-scoped state for the isolated test.
-  - Duplicate "New run started" startup logging was observed but not changed because no duplicated live run state was demonstrated; retain the existing guardrail against lifecycle rewrites from logging alone.
+  - PR #134 merged from exact feature head 6153221ac0f6f79ce287e1212e04db442866a70c at merge commit 8bb3e417adf98599cc78b7e9bd2ca200437130cb.
+  - PR #134 passed all 9 PR-triggered workflows: Yomori Region Check, Cross-Region Enemy Contract Check, Godot 4.7.2 Project Check, Hushiro Combat Semantics, RunScene Runtime Lifetime, Run Region Handoff, Kagutsuchi Region Check, Post-playtest Stability, and Authored Presentation Content.
+  - The supplied September 3 Yomori playtest ran exact main checkpoint a5cd8119e584b22ee1b1c5782a903ff39b0fc431 and successfully used the new direct Area 2 combat warp with player invulnerability enabled.
+  - Runtime evidence proved the reported Shop routing itself was correct: GameFlow resolved `merchant`, loaded MerchantChamber.tscn, and OathboundMerchant rolled current offers. Telemetry then showed the merchant room survive only about 31 ms before an unlocked exit fired and loaded combat, with no purchase interaction.
+  - The merchant failure was a room-entry timing race: GameFlow temporarily re-parents the persistent Player at previous-room coordinates for a frame before moving it to PlayerSpawn; immediately unlocked Merchant exits could observe that stale overlap. RouteGate now supports an opt-in entry grace and both Merchant exits use 0.25 s, leaving other gate behavior unchanged.
+  - The final captured Yomori encounter was Y05_pale_procession with Mist Shepherd plus two Lingering Wraiths. Telemetry showed the Wraiths take sword damage and die while Mist Shepherd remained at 20/20 Health with no resolved player contact.
+  - Mist Shepherd's scene root lacked the authored `enemy` group when its child HurtBox ran `_ready()`. The generic HurtBox therefore fell back to default HurtBoxType=Player and rejected player-owned attacks as friendly fire. The scene now authors the root into `enemy` before ready and explicitly sets HurtBoxType=Enemy.
+  - Repeated `Lambda capture at index 0 was freed. Passed null instead.` errors were traced to Lantern Wraith SceneTreeTimer lambdas retaining temporary wave/pulse Area2D captures after contact or room cleanup freed those objects.
+  - The live lantern_wraith.tscn still resolves through the archer_v2.gd compatibility shim. PR #134 overrides only temporary wave/pulse lifetime wiring there, replacing Object-capturing SceneTreeTimer lambdas with child-owned Timers and integer instance handles.
+  - YomoriPlaytestRegressionSmoke reproduces all three observed blockers: Mist Shepherd targetability, Merchant stale-position gate entry, and early-freed Lantern wave/pulse callback lifetimes. The focused Yomori CI passed the regression and rejects any `Lambda capture` output.
+  - No combat numbers, economy prices, route weights, encounter composition, Aspect/Technique/Prosthetic/Relic architecture, or Heart behavior changed in PR #134.
+  - PR #133 remains intact: Keeper stale reward-parent death crash is repaired and primary Playtest Lab Chambers exposes direct Area 1/2/3 warps.
   - PR #132 remains intact and proves the real authored Twin Maws chamber initializes under Area 2 with TwinMawsManager, Rootfang, Briarthorn, BossChamber defeat authority, and defeat-signal ownership intact.
-  - PR #131's debug-only OathboundPlaytestFx runtime remains observational only and is not final authored art.
 recent_batches:
+  - pr_134: repaired Mist Shepherd targetability, Merchant room-entry auto-exit, and Lantern Wraith freed temporary callback captures from the first direct-warp Yomori playtest; added exact CI regression coverage.
   - pr_133: fixed Keeper stale reward-parent death crash, added exact regression coverage, and exposed obvious direct Area 1/2/3 chamber warps.
   - pr_132: added live Area-2 Twin Maws initialization/ownership regression using the real authored chamber; no gameplay changes.
-  - sept_3_playtest_latest: checkpoint 6c2931b5 reached Keeper payout then crashed in stale reward-parent handling; this is the evidence repaired by PR #133.
-  - sept_3_playtest: earlier live main integration cleared Region 1/Keeper and crossed into Area 2; later-region validation remains the active evidence gap.
+  - sept_3_yomori_playtest: direct Area 2 warp worked; reached deep Yomori route and exposed Mist Shepherd immunity, Merchant 31 ms auto-exit, and Lantern freed-lambda errors repaired by PR #134.
+  - sept_3_playtest_latest: checkpoint 6c2931b5 reached Keeper payout then crashed in stale reward-parent handling; repaired by PR #133.
+  - sept_3_playtest: earlier live main integration cleared Region 1/Keeper and crossed into Area 2.
   - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
   - pr_127: restored approved direct first-attempt run start while preserving the other PR #126 stabilization fixes.
   - pr_128: suppressed false Spirit bootstrap feedback while preserving real Spirit gain presentation.
@@ -82,9 +81,12 @@ recent_batches:
   - pr_130: preemptively reconciled stale Region 2/3 hit/parry posture contracts through the shared canonical AttackEvent bridge.
   - pr_131: added temporary debug-only code-generated playtest FX for Techniques, Aspects, Prosthetics, statuses, and Deathblow readability.
 confirmed:
-  - PR #119 through #133 merged; never continue old feature branches.
-  - PR #133 CI reproduces and passes the Keeper previously-freed loot-parent reward condition that crashed the supplied checkpoint 6c2931b5 playtest.
-  - Playtest Lab direct Area 2/3 warps are now intentionally exposed in the primary Chambers tab; killing Keeper is not required for targeted later-region testing.
+  - PR #119 through #134 merged; never continue old feature branches.
+  - Direct Playtest Lab Area 2/3 warps are intentionally exposed; killing Keeper is not required for targeted later-region testing.
+  - The reported Yomori Shop incident was not a merchant-to-combat routing alias: the real Merchant chamber loaded and rolled offers, then its open exit was consumed during the Player room-entry position race.
+  - Mist Shepherd is the Area 2 support buffer/encounter-escalation caster represented by the live `spirit monk` node; its player-damage immunity was a HurtBox faction-initialization bug, not an intended targetability state.
+  - PR #134 CI proves the repaired Mist Shepherd accepts a player-owned sword contact, Merchant ignores the initial stale-position gate contact, and early-freed Lantern temporary attacks produce no freed-lambda error in the regression.
+  - PR #133 CI reproduces and passes the Keeper previously-freed loot-parent reward condition.
   - PR #132 CI proves the real Twin Maws authored chamber initializes correctly under Area 2 and the manager/twin/BossChamber defeat-ownership chain is intact; this does not replace manual Twin Maws combat validation.
   - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
@@ -92,7 +94,7 @@ confirmed:
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
   - Numerical balance/economy/difficulty tuning remains evidence-driven rather than speculative.
-  - Region 2/3 static audit and CI do not replace player-facing playtest validation; Region 2/3 are the active integration evidence gap.
+  - Region 2/3 CI does not replace player-facing playtest validation; Region 2 remains the current manual integration boundary until Twin Maws is proven in combat.
   - PR #131 procedural FX are temporary debug/playtest presentation, not final authored art or visual authority.
   - Current approved Wraith authority is the long-reach frontal posture/control Aspect; do not silently replace it with older Crimson/backstab design notes without an explicit design reopen.
   - Known provenance blockers remain explicit; never fabricate license evidence.
