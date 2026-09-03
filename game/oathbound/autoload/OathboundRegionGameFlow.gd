@@ -7,7 +7,19 @@ extends "res://autoload/OathboundGameFlow.gd"
 ## authorities rather than the imported generic RouteGenerator path.
 
 const EXPECTED_REGION_PLAYTEST_LAB_SCRIPT := "res://Core/Regions/OathboundRegionPlaytestLab.gd"
+const KEEPER_READABILITY_RUNTIME: Script = preload("res://Core/Release/OathboundKeeperReadabilityRuntime.gd")
 const AREA_TRANSITION_CLEANUP_TIMEOUT := 2.0
+
+
+func _ready() -> void:
+	super._ready()
+	var runtime_value: Variant = KEEPER_READABILITY_RUNTIME.new()
+	if runtime_value is Node:
+		var runtime := runtime_value as Node
+		runtime.name = "KeeperReadabilityRuntime"
+		add_child(runtime)
+	else:
+		push_error("[OathboundGameFlow] Could not instantiate Keeper readability runtime")
 
 
 func _assert_current_playtest_lab() -> void:
