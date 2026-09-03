@@ -1,6 +1,6 @@
 [gd_scene load_steps=69 format=3 uid="uid://hdimf1b4ui6f"]
 
-[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Bosses/KeeperReadability.gd" id="1_j2cxi"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Bosses/Keeper.gd" id="1_j2cxi"]
 [ext_resource type="Texture2D" uid="uid://xg1i4istxt8l" path="res://Textures/Enemy/shield_captain/death9.png" id="2_uolji"]
 [ext_resource type="Texture2D" uid="uid://bko174o6ib0u7" path="res://Textures/Enemy/shield_captain/cannon_mark1.png" id="3_gfo2m"]
 [ext_resource type="Texture2D" uid="uid://bb24xasa7ki2e" path="res://Textures/Enemy/shield_captain/cannon_mark2.png" id="4_4awcc"]
@@ -70,7 +70,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_gfo2m"), ExtResource("4_4aj1b"), ExtResource("5_tw5kp"), ExtResource("6_0hr68"), ExtResource("7_63oxq")]
+"values": [ExtResource("3_gfo2m"), ExtResource("4_4awcc"), ExtResource("5_tw5kp"), ExtResource("6_0hr68"), ExtResource("7_63oxq")]
 }
 
 [sub_resource type="Animation" id="Animation_wft7a"]
