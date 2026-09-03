@@ -185,6 +185,27 @@ func take_deathblow(attacker: Node) -> void:
 	super._die()
 
 
+func _run_humanoid_death_rewards() -> void:
+	# The inherited humanoid reward code caches the first node in the broad "loot"
+	# group during _ready(). Collectible ExperienceGem nodes also belong to that group,
+	# so a long-lived boss can retain a gem that is collected/freed before the boss dies.
+	# Refresh the parent at reward time and prefer the chamber's named Loot container.
+	var live_loot_base: Node = null
+	for candidate_value: Variant in get_tree().get_nodes_in_group("loot"):
+		if not (candidate_value is Node):
+			continue
+		var candidate := candidate_value as Node
+		if is_instance_valid(candidate) and candidate.name == "Loot":
+			live_loot_base = candidate
+			break
+	if live_loot_base == null:
+		var parent := get_parent()
+		if is_instance_valid(parent):
+			live_loot_base = parent
+	loot_base = live_loot_base
+	super._run_humanoid_death_rewards()
+
+
 func _begin_hushiro_phase_two() -> void:
 	# The first Deathblow always transforms Keeper and establishes a completely new
 	# authored life rather than carrying Phase-1 Health/Posture forward.

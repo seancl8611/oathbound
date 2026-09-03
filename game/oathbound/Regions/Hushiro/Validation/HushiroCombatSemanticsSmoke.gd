@@ -1,14 +1,17 @@
 extends Node
 
-## Regression smoke for the combat issues reproduced from the August 23 playtest:
+## Regression smoke for the combat issues reproduced from live playtests:
 ## - canonical sword Posture must affect Blighted Hounds;
 ## - a full Posture meter enters stagger before Deathblow readiness;
 ## - dead standard enemies cannot remain Deathblow-ready;
-## - Hound-heavy authored encounters never put more than two Hounds in one wave.
+## - Hound-heavy authored encounters never put more than two Hounds in one wave;
+## - Keeper death rewards must recover from a stale/freed cached loot parent.
 
 const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
 const HUSHIRO_ENCOUNTER_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 const HOUND_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/BlightedHound.tscn")
+const KEEPER_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Bosses/Keeper.tscn")
+const EXPERIENCE_GEM_SCENE: PackedScene = preload("res://Objects/experience_gem.tscn")
 
 var _failures: Array[String] = []
 
@@ -18,6 +21,7 @@ func _ready() -> void:
 	_validate_current_burst_baseline()
 	_validate_hound_encounter_caps()
 	await _validate_hound_shared_posture_and_stagger()
+	await _validate_keeper_stale_loot_reward_parent()
 
 	if _failures.is_empty():
 		print("[HushiroCombatSemanticsSmoke] PASS - shared Hound posture stagger-first deathblow pack cap")
@@ -118,6 +122,44 @@ func _validate_hound_shared_posture_and_stagger() -> void:
 	_expect(not bool(hound.call("is_deathblow_ready")), "Dead Hound remained legacy Deathblow-ready")
 
 	hound.queue_free()
+	await get_tree().process_frame
+
+
+func _validate_keeper_stale_loot_reward_parent() -> void:
+	# Reproduce the September 3 crash directly: Keeper's inherited loot_base property
+	# points at an Object that has already been freed when the death reward method runs.
+	# A live chamber Loot container remains available and must become the new parent.
+	var live_loot := Node2D.new()
+	live_loot.name = "Loot"
+	add_child(live_loot)
+	live_loot.add_to_group("loot")
+
+	var keeper: Node = KEEPER_SCENE.instantiate()
+	keeper.name = "KeeperRewardRegression"
+	add_child(keeper)
+	await get_tree().process_frame
+	keeper.set("death_anim", null)
+	keeper.set("exp_gem", EXPERIENCE_GEM_SCENE)
+
+	var stale_loot := Node2D.new()
+	stale_loot.name = "CollectedExperienceGem"
+	add_child(stale_loot)
+	stale_loot.add_to_group("loot")
+	keeper.set("loot_base", stale_loot)
+	stale_loot.free()
+	_expect(not is_instance_valid(stale_loot), "Keeper stale-loot regression did not create a freed cached parent")
+
+	var child_count_before := live_loot.get_child_count()
+	keeper.call("_run_humanoid_death_rewards")
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_expect(live_loot.get_child_count() == child_count_before + 1, "Keeper death reward did not recover to the live chamber Loot container")
+	if live_loot.get_child_count() > child_count_before:
+		var spawned_gem: Node = live_loot.get_child(live_loot.get_child_count() - 1)
+		_expect(spawned_gem.scene_file_path == "res://Objects/experience_gem.tscn", "Keeper recovered reward parent but spawned an unexpected reward scene")
+
+	keeper.queue_free()
+	live_loot.queue_free()
 	await get_tree().process_frame
 
 
