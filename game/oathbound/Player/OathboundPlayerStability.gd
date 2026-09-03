@@ -22,6 +22,26 @@ func _ready() -> void:
 	super._ready()
 
 
+func _on_hurt(dmg: int, dmg_type: String, attacker: Node = null) -> void:
+	# HurtBox resolves Area2D attacks to their owning enemy before emitting its legacy
+	# hurt signal. That is useful for source ownership, but the inherited Player defense
+	# resolver also reads per-contact flags such as `unblockable` from the object passed
+	# here. Keeper therefore reached the Player as the Keeper actor and lost the actual
+	# BossHitbox's unblockable/parryable contract; telemetry showed a Leaping Slam being
+	# blocked and an unblockable lane attack being parried. Recover the exact cached
+	# attack area only when HurtBox confirms that it belongs to this same emitted source.
+	var defense_source: Node = attacker
+	var hurtbox: Area2D = get_node_or_null("HurtBox") as Area2D
+	if hurtbox != null and attacker != null:
+		var cached_source: Variant = hurtbox.get_meta("last_attack_source", null)
+		var cached_area: Variant = hurtbox.get_meta("last_attack_area", null)
+		if cached_source == attacker and cached_area is Area2D and is_instance_valid(cached_area):
+			var attack_area := cached_area as Area2D
+			if attack_area.is_in_group("attack"):
+				defense_source = attack_area
+	super._on_hurt(dmg, dmg_type, defense_source)
+
+
 func take_damage(amount: int, show_feedback: bool = true) -> void:
 	if _combat_dead:
 		return
