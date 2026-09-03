@@ -6,15 +6,18 @@ signal gate_used(gate_type: String)
 
 @export var gate_type: String = "Combat"
 @export var locked: bool = true
+@export var entry_grace_seconds: float = 0.0
 
 @onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
 @onready var area: Area2D = get_node_or_null("Area2D")
 @onready var shape: CollisionShape2D = get_node_or_null("Area2D/CollisionShape2D")
 
 var _used: bool = false
+var _entry_grace_until_msec: int = 0
 
 func _ready() -> void:
 	add_to_group("mist_gates")
+	_entry_grace_until_msec = Time.get_ticks_msec() + int(round(maxf(0.0, entry_grace_seconds) * 1000.0))
 	if area and not area.body_entered.is_connected(Callable(self, "_on_Area2D_body_entered")):
 		area.body_entered.connect(_on_Area2D_body_entered)
 	_apply_indicator()
@@ -78,6 +81,12 @@ func _apply_indicator() -> void:
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if locked or _used:
+		return
+	# During chamber transitions the persistent Player is briefly re-parented at its
+	# previous room coordinates before GameFlow places it at the new PlayerSpawn.
+	# Merchant exits are intentionally open immediately, so they opt into a tiny
+	# scene-authored grace window to ignore that stale-position overlap.
+	if Time.get_ticks_msec() < _entry_grace_until_msec:
 		return
 	print("[MistGate] body_entered=", body.name, " locked=", locked, " is_player=", _is_player_body(body))
 	if _is_player_body(body):
