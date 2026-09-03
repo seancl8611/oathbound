@@ -7,8 +7,8 @@ on:
       - "agent/**"
     paths:
       - "game/oathbound/Regions/Hushiro/Enemies/Bosses/Keeper.gd"
-      - "game/oathbound/Regions/Hushiro/Enemies/Bosses/KeeperReadability.gd"
       - "game/oathbound/Regions/Hushiro/Enemies/Bosses/Keeper.tscn"
+      - "game/oathbound/Core/Release/OathboundKeeperReadabilityRuntime.gd"
       - "game/oathbound/Player/OathboundPlayerStability.gd"
       - "game/oathbound/autoload/OathboundRegionGameFlow.gd"
       - "game/oathbound/Core/Release/Validation/KeeperTransitionReadabilitySmoke.gd"
@@ -17,8 +17,8 @@ on:
   pull_request:
     paths:
       - "game/oathbound/Regions/Hushiro/Enemies/Bosses/Keeper.gd"
-      - "game/oathbound/Regions/Hushiro/Enemies/Bosses/KeeperReadability.gd"
       - "game/oathbound/Regions/Hushiro/Enemies/Bosses/Keeper.tscn"
+      - "game/oathbound/Core/Release/OathboundKeeperReadabilityRuntime.gd"
       - "game/oathbound/Player/OathboundPlayerStability.gd"
       - "game/oathbound/autoload/OathboundRegionGameFlow.gd"
       - "game/oathbound/Core/Release/Validation/KeeperTransitionReadabilitySmoke.gd"
