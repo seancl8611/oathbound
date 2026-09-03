@@ -7,10 +7,32 @@ extends "res://autoload/OathboundGameFlow.gd"
 ## authorities rather than the imported generic RouteGenerator path.
 
 const EXPECTED_REGION_PLAYTEST_LAB_SCRIPT := "res://Core/Regions/OathboundRegionPlaytestLab.gd"
+const AREA_TRANSITION_CLEANUP_TIMEOUT := 2.0
 
 
 func _assert_current_playtest_lab() -> void:
 	_assert_autoload_script("PlaytestLab", EXPECTED_REGION_PLAYTEST_LAB_SCRIPT, true)
+
+
+func _show_area_transition(area_id: int) -> void:
+	# Imported GameFlow returns from its transition presentation after the title hold,
+	# while its layer-200 fade-out is still running for roughly another second. Yomori
+	# and Kagutsuchi intentionally begin on an immediate CHOICE_ slot. RunScene pauses
+	# the tree as soon as that choice is presented, which used to freeze the higher
+	# transition layer over the layer-100 choice UI and make the run look softlocked.
+	# Keep the imported presentation, but do not allow regional routing to continue
+	# until that presentation is actually gone.
+	await super._show_area_transition(area_id)
+	var started_at: float = Time.get_ticks_msec() * 0.001
+	var overlay: Node = get_tree().root.get_node_or_null("AreaTransition")
+	while overlay != null and is_instance_valid(overlay):
+		if Time.get_ticks_msec() * 0.001 - started_at >= AREA_TRANSITION_CLEANUP_TIMEOUT:
+			push_warning("[OathboundGameFlow] Area transition overlay exceeded cleanup timeout; removing stale presentation layer")
+			overlay.queue_free()
+			await get_tree().process_frame
+			break
+		await get_tree().process_frame
+		overlay = get_tree().root.get_node_or_null("AreaTransition")
 
 
 func _load_current_room() -> void:
