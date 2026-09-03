@@ -31,45 +31,43 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-03T15:32:00Z
+updated_utc: 2026-09-03T18:25:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 131
-  feature_head: c1c2116f9056a6bf3065c6fdc4da91bbc34f2716
-  merge_commit: a169572df3ebf67e6e3862880e947aedf2f50a54
+  pr: 132
+  feature_head: ae900eaf161dc02652efb698fcbe84b5587a375d
+  merge_commit: 1cf77288a1025d254cab7853bf739ccef484e680
   validation: 7/7 PR-triggered workflows green; mergeable true
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: e71fbb362fd0d9e2a921fb8b7f009e76cb5b7123
+known_good_checkpoint: 1cf77288a1025d254cab7853bf739ccef484e680
 current_objective: >-
   Continue player-facing integration evidence from the September 3 corrected-main playtest into Yomori/Region 2 and then Kagutsuchi/Region 3.
-  Hushiro/Region 1 is now live-playtest proven through Keeper and the region handoff. Region 2 and Region 3 received the preemptive shared
-  posture-contract audit in PR #130, but their full player-facing behavior still requires real evidence. Keep the temporary debug-only
-  procedural FX active so Techniques, Aspects, Prosthetics, statuses, vulnerable/backstab state, and Deathblow opportunities can be compared
-  against the underlying combat events while progressing through later regions.
+  Hushiro/Region 1 is live-playtest proven through Keeper and the region handoff. PR #132 now also proves the real authored Twin Maws chamber
+  initializes under Area 2 with TwinMawsManager, Rootfang, Briarthorn, BossChamber defeat authority, and defeat-signal ownership intact.
+  Region 2 and Region 3 still require player-facing combat evidence. Keep the temporary debug-only procedural FX active so Techniques, Aspects,
+  Prosthetics, statuses, vulnerable/backstab state, and Deathblow opportunities can be compared against the underlying combat events.
 next_action: >-
-  Resume from the Area 2 handoff reached by the September 3 playtest and continue through Yomori/Region 2, including Twin Maws if reached.
-  Player invulnerability may stay enabled for broad encounter coverage. Exercise Technique families, all available Aspect/Prosthetic effects,
-  ordinary sword hits, parries, blocking, posture breaks, Deathblows, room clear/progression, and rewards. Watch specifically for either
-  (a) an underlying effect firing with no readable procedural cue or (b) a cue appearing when the underlying effect did not occur. Preserve
-  CombatTelemetry/logs and stop at the first genuine blocker. If Region 2 completes cleanly, continue into Kagutsuchi/Region 3 in the same
-  integration pass rather than restarting Hushiro. Do not treat the temporary procedural FX as final authored art.
+  Resume from the Area 2 handoff reached by the September 3 playtest and continue through Yomori/Region 2, including Twin Maws.
+  Player invulnerability may stay enabled for broad encounter coverage. Exercise the Area 2 ordinary roster, Technique families, all available
+  Aspect/Prosthetic effects, ordinary sword hits, parries, blocking, posture breaks, Deathblows, room clear/progression, rewards, and the real
+  Twin Maws fight. Watch specifically for either (a) an underlying effect firing with no readable procedural cue or (b) a cue appearing when
+  the underlying effect did not occur. Preserve CombatTelemetry/logs and stop at the first genuine blocker. If Region 2 completes cleanly,
+  continue into Kagutsuchi/Region 3 in the same integration pass rather than restarting Hushiro. Do not treat temporary procedural FX as final art.
 current_batch:
+  - PR #132 merged from exact feature head ae900eaf161dc02652efb698fcbe84b5587a375d at merge commit 1cf77288a1025d254cab7853bf739ccef484e680.
+  - PR #132 passed all 7 PR-triggered workflows, including Yomori Region Check and Godot 4.7.2 Project Check.
+  - TwinMawsContractSmoke now instantiates the real authored TwinMawsChamber while RunData.current_area_id=2 and waits through its actual runtime initialization.
+  - The live regression proves TwinMawsManager becomes boss authority, binds Rootfang and Briarthorn bidirectionally, remains assigned to both real twins, is selected by BossChamber, and owns the chamber defeat signal.
+  - PR #132 changes validation only: no gameplay behavior, combat values, encounter tuning, Aspect/Technique/Prosthetic architecture, or progression ownership changed.
   - September 3 manual integration playtest ran exact main checkpoint e71fbb362fd0d9e2a921fb8b7f009e76cb5b7123 on Godot 4.7.2 with CombatTelemetry and PlaytestFx initialized.
-  - The September 3 run cleared Hushiro/Region 1 through Keeper and reached run stage region_1_complete with boss defeat count 1 for Region 1, Keeper material 1, Mist 10, and the Keeper Fallen progression flag recorded.
-  - The same run advanced into SceneRegistry area 2, instantiated combat content including TwinMawsChamber, and reached the next route choice [combat:gold, rest] before the captured evidence ended.
-  - The retrieved September 3 runtime excerpt contains no concrete SCRIPT ERROR, assertion failure, or warning blocker. The JSONL event rows were not available in-session, so no unobserved combat-contract or procedural-FX mismatch is being inferred from the summary alone.
-  - PR #131 merged from exact feature head c1c2116f9056a6bf3065c6fdc4da91bbc34f2716 at merge commit a169572df3ebf67e6e3862880e947aedf2f50a54.
-  - PR #131 passed all 7 PR-triggered workflows, including Playtest Procedural FX Check, Godot 4.7.2 Project Check, Hushiro Combat Semantics, RunScene Runtime Lifetime, Run Region Handoff, Post-playtest Stability, and Authored Presentation Content.
-  - Added a debug-only OathboundPlaytestFx runtime under the current TechniqueEffects autoload; release builds do not instantiate the temporary layer.
-  - All temporary FX are generated entirely in Godot code with CanvasItem drawing primitives; no external textures, spritesheets, shaders, particles, or user-supplied visual assets are required.
-  - Technique readability includes persistent and transient cues for Echo, Rupture, Seal/Bind, Rift, Vulnerable, Shock, Burn, Aspect slow, Deathblow readiness, Unseen, and Bloodletting while retaining terse TechniqueStatus text as a diagnostic fallback.
-  - Added code-drawn activation silhouettes for all eight current Prosthetics: Beast Whistle, Thunder Rod, Smoke Gourd, Fang Harpoon, Mirror Umbrella, Flame Vent, Mist Raven, and Bloodletting Gourd.
-  - Added temporary Aspect/Blood Art cues for Wolf, Wraith, and Ronin, including Blood Art readiness plus Blood Hunt, Wraith Reach corridor, and Falling Mountain silhouettes.
-  - The FX layer is observational only and does not mutate damage, Posture, combat timing, status ownership, rewards, progression, or encounter behavior.
+  - The September 3 run cleared Hushiro/Region 1 through Keeper, reached region_1_complete, advanced into SceneRegistry area 2, instantiated Area 2 content including TwinMawsChamber, and reached the next route choice [combat:gold, rest].
+  - The retrieved September 3 runtime excerpt contains no concrete SCRIPT ERROR, assertion failure, or warning blocker. The JSONL event rows were not available in-session, so no unobserved combat-contract or procedural-FX mismatch is inferred from the summary alone.
+  - PR #131's debug-only OathboundPlaytestFx runtime remains active in debug builds and observational only; release builds do not instantiate it.
 recent_batches:
+  - pr_132: added live Area-2 Twin Maws initialization/ownership regression using the real authored chamber; no gameplay changes.
   - sept_3_playtest: live main integration cleared Region 1/Keeper and crossed into Area 2; later-region validation is now the active evidence gap.
   - pr_126: first long-playtest stabilization for death/run-results, fresh-save routing, Archer projectile defense, and Rest gate ownership.
   - pr_127: restored approved direct first-attempt run start while preserving the other PR #126 stabilization fixes.
@@ -78,15 +76,16 @@ recent_batches:
   - pr_130: preemptively reconciled stale Region 2/3 hit/parry posture contracts through the shared canonical AttackEvent bridge.
   - pr_131: added temporary debug-only code-generated playtest FX for Techniques, Aspects, Prosthetics, statuses, and Deathblow readability.
 confirmed:
-  - PR #119 through #131 merged; never continue old feature branches.
+  - PR #119 through #132 merged; never continue old feature branches.
   - September 3 live playtest proves current main can clear Hushiro/Region 1 through Keeper and enter Area 2 without the prior Region 1 progression blocker recurring.
+  - PR #132 CI proves the real Twin Maws authored chamber initializes correctly under Area 2 and the manager/twin/BossChamber defeat-ownership chain is intact; this does not replace manual Twin Maws combat validation.
   - FIRST_ATTEMPT authority says first playable control begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - PR #126's failed-run Heart Binding API fix, Archer block-vs-parry projectile fix, and Rest duplicate gate-ownership fix remain intact.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques slotless/unlimited.
   - Heart combat unauthored; do not invent it.
   - Numerical balance/economy/difficulty tuning remains evidence-driven rather than speculative.
-  - Region 2/3 static audit and CI do not replace player-facing playtest validation; Region 2/3 are now the active integration evidence gap.
+  - Region 2/3 static audit and CI do not replace player-facing playtest validation; Region 2/3 are the active integration evidence gap.
   - PR #131 procedural FX are temporary debug/playtest presentation, not final authored art or visual authority.
   - Current approved Wraith authority is the long-reach frontal posture/control Aspect; do not silently replace it with older Crimson/backstab design notes without an explicit design reopen.
   - Known provenance blockers remain explicit; never fabricate license evidence.
