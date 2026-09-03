@@ -2,7 +2,7 @@ extends Node
 
 const KEEPER_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Bosses/Keeper.tscn")
 const PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
-const EXPECTED_KEEPER_SCRIPT := "res://Regions/Hushiro/Enemies/Bosses/KeeperReadability.gd"
+const EXPECTED_KEEPER_SCRIPT := "res://Regions/Hushiro/Enemies/Bosses/Keeper.gd"
 
 var _failures: Array[String] = []
 
@@ -24,23 +24,27 @@ func _ready() -> void:
 
 
 func _verify_keeper_geometry_and_timing() -> void:
+	var runtime := GameFlow.get_node_or_null("KeeperReadabilityRuntime")
+	_expect(runtime != null, "Keeper readability runtime was not installed by current GameFlow")
+
 	var keeper := KEEPER_SCENE.instantiate()
 	add_child(keeper)
 	await get_tree().process_frame
 	var script_value: Variant = keeper.get_script()
 	var script_path := (script_value as Script).resource_path if script_value is Script else ""
-	_expect(script_path == EXPECTED_KEEPER_SCRIPT, "Keeper scene script is %s" % script_path)
-
+	_expect(script_path == EXPECTED_KEEPER_SCRIPT, "Canonical Keeper scene was unexpectedly rewritten to %s" % script_path)
+	_expect(bool(keeper.get_meta("_oathbound_readability_timing_applied", false)), "Keeper readability timing was not applied on spawn")
 	_expect(float(keeper.get("discipline_windup")) >= 0.38, "Discipline Cut windup below readability floor")
 	_expect(float(keeper.get("blade_dance_hit2_anticipation")) >= 0.32, "Blade Dance hit 2 anticipation below readability floor")
 	_expect(float(keeper.get("feral_hit5_anticipation")) >= 0.26, "Feral Onslaught final anticipation below readability floor")
 	_expect(float(keeper.get("phase2_min_cooldown")) >= 0.65, "Phase 2 rhythm gap below readability floor")
 
 	keeper.call("_spawn_ring_hitbox", 30.0, 60.0, 19)
+	await get_tree().process_frame
 	var ring: Area2D = keeper.get("_current_hitbox") as Area2D
 	_expect(ring != null, "Keeper shockwave did not create a hitbox")
 	if ring != null:
-		_expect(str(ring.get_meta("collision_kind", "")) == "annular_ring", "Shockwave is not tagged as annular geometry")
+		_expect(str(ring.get_meta("collision_kind", "")) == "annular_ring", "Shockwave stayed a filled disk instead of annular geometry")
 		_expect(bool(ring.get_meta("unblockable", false)), "Shockwave lost unblockable metadata")
 		_expect(_collision_polygon_count(ring) >= 12, "Shockwave did not build annular collision segments")
 		_expect(_minimum_polygon_radius(ring) >= 29.0, "Outer shockwave band still covers the center like a filled disk")
@@ -48,10 +52,11 @@ func _verify_keeper_geometry_and_timing() -> void:
 	await get_tree().process_frame
 
 	keeper.call("_spawn_sweep_hitbox", 30.0, 100.0, 270.0, 20)
+	await get_tree().process_frame
 	var sweep: Area2D = keeper.get("_current_hitbox") as Area2D
 	_expect(sweep != null, "Keeper sweep did not create a hitbox")
 	if sweep != null:
-		_expect(str(sweep.get_meta("collision_kind", "")) == "annular_sector", "Sweep is not tagged as annular-sector geometry")
+		_expect(str(sweep.get_meta("collision_kind", "")) == "annular_sector", "Sweep stayed a filled disk instead of annular-sector geometry")
 		_expect(absf(float(sweep.get_meta("arc_degrees", 0.0)) - 270.0) <= 0.01, "Sweep collision arc does not match 270-degree telegraph")
 		_expect(_collision_polygon_count(sweep) >= 12, "Sweep did not build sector collision segments")
 		_expect(_minimum_polygon_radius(sweep) >= 29.0, "Sweep collision still ignores its inner safe radius")
