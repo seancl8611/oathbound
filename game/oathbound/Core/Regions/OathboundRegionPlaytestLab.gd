@@ -29,11 +29,76 @@ const KAGUTSUCHI_TEST_ACTORS := [
 var _yomori_actor_dropdown: OptionButton
 var _kagutsuchi_actor_dropdown: OptionButton
 var _region_status: Label
+var _chamber_area_dropdown: OptionButton
 
 
 func _build_build_tab(tabs: TabContainer) -> void:
 	super._build_build_tab(tabs)
 	_build_region_tab(tabs)
+
+
+func _build_room_tab(tabs: TabContainer) -> void:
+	# Replace the imported Hushiro-only chamber warp with one obvious selector that
+	# can jump directly into any current region. This is the primary manual-integration
+	# path; the dedicated Regions tab below remains useful for one-click named targets.
+	var vbox: VBoxContainer = _make_tab(tabs, "Chambers")
+
+	var row := HBoxContainer.new()
+	vbox.add_child(row)
+
+	var reload_button := Button.new()
+	reload_button.text = "Reload Current Chamber"
+	reload_button.pressed.connect(_reload_current_room)
+	row.add_child(reload_button)
+
+	var hub_button := Button.new()
+	hub_button.text = "Return to Hub"
+	hub_button.pressed.connect(_return_to_hub)
+	row.add_child(hub_button)
+
+	var area_label := Label.new()
+	area_label.text = "Target Region"
+	vbox.add_child(area_label)
+
+	_chamber_area_dropdown = OptionButton.new()
+	for entry: Dictionary in [
+		{"label": "Area 1 - Hushiro", "id": 1},
+		{"label": "Area 2 - Yomori", "id": 2},
+		{"label": "Area 3 - Kagutsuchi", "id": 3},
+	]:
+		_chamber_area_dropdown.add_item(str(entry.get("label", "")))
+		_chamber_area_dropdown.set_item_metadata(_chamber_area_dropdown.item_count - 1, int(entry.get("id", 1)))
+	vbox.add_child(_chamber_area_dropdown)
+
+	var room_label := Label.new()
+	room_label.text = "Target Chamber"
+	vbox.add_child(room_label)
+
+	_room_dropdown = OptionButton.new()
+	for room_type: String in ["combat", "shrine", "merchant", "rest", "miniboss", "boss"]:
+		_room_dropdown.add_item(room_type.capitalize())
+	vbox.add_child(_room_dropdown)
+
+	var warp_button := Button.new()
+	warp_button.text = "Warp Directly to Selected Region / Chamber"
+	warp_button.pressed.connect(_warp_selected_region_chamber)
+	vbox.add_child(warp_button)
+
+	var note := Label.new()
+	note.text = "Debug warp resets run-scoped state for the selected region. You do not need to clear Hushiro or kill Keeper before testing Yomori or Kagutsuchi."
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.modulate = Color(0.70, 0.74, 0.82)
+	vbox.add_child(note)
+
+
+func _warp_selected_region_chamber() -> void:
+	if _chamber_area_dropdown == null or _chamber_area_dropdown.item_count <= 0:
+		return
+	if _room_dropdown == null or _room_dropdown.item_count <= 0:
+		return
+	var area_id := int(_chamber_area_dropdown.get_item_metadata(_chamber_area_dropdown.selected))
+	var room_token := _room_dropdown.get_item_text(_room_dropdown.selected).to_lower()
+	_warp_region_room(area_id, room_token)
 
 
 func _build_region_tab(tabs: TabContainer) -> void:
