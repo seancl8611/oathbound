@@ -91,6 +91,25 @@ jobs:
             exit 1
           fi
 
+      - name: Verify reproduced Yomori playtest blockers
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Yomori/Validation/YomoriPlaytestRegressionSmoke.tscn 2>&1 | tee yomori-playtest-regression.log
+          grep -F "[YomoriPlaytestRegressionSmoke] PASS" yomori-playtest-regression.log
+          if grep -F "SCRIPT ERROR:" yomori-playtest-regression.log; then
+            echo "FAIL: Yomori playtest regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "Lambda capture" yomori-playtest-regression.log; then
+            echo "FAIL: Lantern Wraith retained a freed lambda capture."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" yomori-playtest-regression.log; then
+            echo "FAIL: Yomori playtest regression emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Traverse one complete generated Yomori route
         shell: bash
         run: |
@@ -117,6 +136,7 @@ jobs:
             yomori-visual-assets.log
             yomori-route-contract.log
             twin-maws-contract.log
+            yomori-playtest-regression.log
             yomori-full-run.log
           if-no-files-found: warn
           retention-days: 7
