@@ -1,12 +1,13 @@
 extends Node
 
-const RouteGateScript = preload("res://Core/Chambers/RouteGate.gd")
+const ROUTE_GATE_SCENE: PackedScene = preload("res://Core/Chambers/RouteGate.tscn")
 const LingeringWraithRuntime = preload("res://Enemy/Area 2/Encounter/lingering_wraith_runtime.gd")
 
 const PASS_LINE := "[FullRunCombatStabilitySmoke] PASS - deferred gate emission | Lingering Wraith range authority"
 
 var _failures: Array[String] = []
 var _gate_signal_count: int = 0
+var _gate_test_player: CharacterBody2D = null
 
 
 func _ready() -> void:
@@ -24,9 +25,14 @@ func _ready() -> void:
 
 
 func _check_route_gate_deferred_emission() -> void:
-	var gate_value: Variant = RouteGateScript.new()
+	# Use the real authored gate scene and let Godot generate the body_entered signal
+	# from an actual physics overlap. The listener deliberately frees a CollisionObject,
+	# mirroring the Heart-Handoff scene replacement that produced the September 4
+	# engine error. If gate_used is still emitted inside the physics callback, Godot will
+	# print the same CollisionObject-removal ERROR and CI rejects this smoke's log.
+	var gate_value: Variant = ROUTE_GATE_SCENE.instantiate()
 	if not (gate_value is Node2D):
-		_failures.append("could not instantiate RouteGate")
+		_failures.append("could not instantiate authored RouteGate scene")
 		return
 	var gate := gate_value as Node2D
 	gate.set("locked", false)
@@ -34,35 +40,47 @@ func _check_route_gate_deferred_emission() -> void:
 	gate.connect("gate_used", Callable(self, "_on_test_gate_used"))
 	add_child(gate)
 
-	var player := CharacterBody2D.new()
-	player.name = "GateSmokePlayer"
-	player.add_to_group("player")
-	add_child(player)
-
-	# Let the newly added nodes complete their first idle/tree turn before simulating
-	# contact. Production body_entered can only occur after a gate has entered the tree;
-	# invoking the callback from this smoke's own _ready() stack is an artificial timing
-	# that can postpone call_deferred() differently in headless Godot.
-	await get_tree().process_frame
+	_gate_test_player = CharacterBody2D.new()
+	_gate_test_player.name = "GateSmokePlayer"
+	_gate_test_player.add_to_group("player")
+	_gate_test_player.collision_layer = 1
+	_gate_test_player.collision_mask = 1
+	var collision := CollisionShape2D.new()
+	collision.name = "CollisionShape2D"
+	var shape := CircleShape2D.new()
+	shape.radius = 8.0
+	collision.shape = shape
+	_gate_test_player.add_child(collision)
+	add_child(_gate_test_player)
 
 	_gate_signal_count = 0
-	gate.call("_on_Area2D_body_entered", player)
-	if _gate_signal_count != 0:
-		_failures.append("RouteGate emitted gate_used synchronously inside body_entered")
+	# RouteGate._ready() applies monitoring/shape state with deferred physics-server
+	# mutation. Give those changes one idle turn, then let the next real physics tick
+	# detect the overlapping Player body.
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 
-	# The production guarantee is two-part: never emit in the contact callback itself,
-	# then emit exactly once after Godot returns to the deferred/idle queue.
-	await get_tree().process_frame
-	await get_tree().process_frame
 	if _gate_signal_count != 1:
-		_failures.append("RouteGate deferred gate_used did not emit exactly once")
+		_failures.append("authored RouteGate overlap did not defer and emit gate_used exactly once")
 
-	player.free()
-	gate.free()
+	if is_instance_valid(_gate_test_player):
+		_gate_test_player.free()
+	_gate_test_player = null
+	if is_instance_valid(gate):
+		gate.free()
 
 
 func _on_test_gate_used(_gate_type: String) -> void:
 	_gate_signal_count += 1
+	# This is intentionally immediate. The production fix's responsibility is to make
+	# sure listeners reach this point only after leaving Area2D.body_entered. If this
+	# executes from the physics callback, Godot itself emits the exact error we saw in
+	# the full run and the workflow's ERROR grep fails.
+	if is_instance_valid(_gate_test_player):
+		_gate_test_player.free()
+		_gate_test_player = null
 
 
 func _check_lingering_wraith_attack_ranges() -> void:
