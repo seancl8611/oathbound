@@ -3,23 +3,29 @@ extends Node
 ## Shared physical-overlap guard for player-facing enemy bodies.
 ##
 ## September 3-4 telemetry repeatedly sampled moving bosses deep inside the player's
-## physical body (roughly 12-15 px center distance where the authored body extents are
-## about 30 px). The attack Area2Ds should be allowed to reach the player; the enemy
-## CharacterBody2D itself should not continue driving through or pinning the player.
+## physical body. The September 4 full-run telemetry also captured a stronger solver
+## failure: Rotwood Host reported zero authored velocity for several seconds while its
+## world position was carried almost exactly with the moving Player at ~23-26 px. That
+## means Godot's CharacterBody contact recovery itself can keep two top-down bodies
+## glued together even after the enemy stops driving inward.
 ##
 ## This guard is deliberately geometric rather than balance-driven:
-## - clearance is derived from the live root CollisionShape2D extents;
+## - clearance is derived from the live root CollisionShape2D extents plus a small
+##   top-down body buffer supported by the observed sticky-contact distance;
+## - enemy CharacterBody2D motion mode is normalized to FLOATING for top-down combat;
 ## - attack damage/range/timing/selection are untouched;
-## - only enemy-driven inward motion is corrected;
+## - inward enemy velocity is removed when present;
+## - existing penetration is corrected even when authored enemy velocity is zero;
 ## - deathblow-ready/dead enemies are skipped so finishers are not repositioned.
 
 const MAX_POSITION_CORRECTION_PER_TICK: float = 10.0
 const PENETRATION_EPSILON: float = 0.5
+const BODY_CLEARANCE_BUFFER: float = 8.0
 
 
 func _ready() -> void:
 	# Run after ordinary enemy physics so this observes the position produced by the
-	# enemy's authored movement for the current physics tick.
+	# enemy's authored movement and Godot contact recovery for the current physics tick.
 	process_priority = 1000
 
 
@@ -44,6 +50,12 @@ func _physics_process(_delta: float) -> void:
 			continue
 
 		var enemy := enemy_value as CharacterBody2D
+		# All current combat is top-down. Leaving imported/bespoke enemies in the
+		# CharacterBody2D default grounded mode gives Godot platform-style floor/wall
+		# contact classification that can contribute to sticky body recovery.
+		if enemy.motion_mode != CharacterBody2D.MOTION_MODE_FLOATING:
+			enemy.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
+
 		if _should_skip_enemy(enemy):
 			continue
 
@@ -53,7 +65,7 @@ func _physics_process(_delta: float) -> void:
 
 		var to_player := player_body.global_position - enemy.global_position
 		var dist := to_player.length()
-		var clearance := player_extent + enemy_extent
+		var clearance := player_extent + enemy_extent + BODY_CLEARANCE_BUFFER
 		if dist >= clearance - PENETRATION_EPSILON:
 			continue
 
@@ -63,16 +75,19 @@ func _physics_process(_delta: float) -> void:
 		elif enemy.velocity.length_squared() > 0.001:
 			toward_player = enemy.velocity.normalized()
 		else:
-			continue
+			# Perfectly coincident stationary bodies have no stable geometric direction.
+			# Use a deterministic axis rather than leaving them permanently interpenetrating.
+			toward_player = Vector2.RIGHT
 
-		# Do not make the player shove stationary/retreating enemies around. This guard
-		# only repairs penetration caused by the enemy moving into the player.
+		# If authored movement is still driving into Akio, remove only that inward
+		# component. Retreating/tangential authored movement is preserved.
 		var inward_speed := enemy.velocity.dot(toward_player)
-		if inward_speed <= 0.01:
-			continue
+		if inward_speed > 0.01:
+			enemy.velocity -= toward_player * inward_speed
 
-		enemy.velocity -= toward_player * inward_speed
-
+		# Crucially, do not require positive authored velocity before depenetrating.
+		# Godot can carry a zero-velocity CharacterBody along another moving body during
+		# collision recovery; the Rotwood full-run capture reproduced exactly that case.
 		var penetration := clearance - dist
 		var correction := minf(penetration, MAX_POSITION_CORRECTION_PER_TICK)
 		enemy.global_position -= toward_player * correction

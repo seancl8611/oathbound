@@ -113,6 +113,7 @@ func _check_shared_body_clearance(failures: Array[String]) -> void:
 	player.name = "SmokePlayer"
 	player.add_to_group("player")
 	player.global_position = Vector2.ZERO
+	player.motion_mode = CharacterBody2D.MOTION_MODE_FLOATING
 	var player_collision := CollisionShape2D.new()
 	player_collision.name = "CollisionShape2D"
 	var player_shape := CircleShape2D.new()
@@ -126,6 +127,7 @@ func _check_shared_body_clearance(failures: Array[String]) -> void:
 	enemy.add_to_group("enemy")
 	enemy.global_position = Vector2(10.0, 0.0)
 	enemy.velocity = Vector2(-100.0, 0.0)
+	enemy.motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
 	var enemy_collision := CollisionShape2D.new()
 	enemy_collision.name = "CollisionShape2D"
 	var enemy_shape := CircleShape2D.new()
@@ -141,6 +143,7 @@ func _check_shared_body_clearance(failures: Array[String]) -> void:
 		enemy.free()
 		return
 
+	# Existing inward-drive case: remove authored velocity into Akio and separate.
 	var before := enemy.global_position.distance_to(player.global_position)
 	runtime.call("_physics_process", 1.0 / 60.0)
 	var after := enemy.global_position.distance_to(player.global_position)
@@ -150,6 +153,22 @@ func _check_shared_body_clearance(failures: Array[String]) -> void:
 	var toward_player := (player.global_position - enemy.global_position).normalized()
 	if enemy.velocity.dot(toward_player) > 0.01:
 		failures.append("shared enemy body clearance left inward body velocity active")
+	if enemy.motion_mode != CharacterBody2D.MOTION_MODE_FLOATING:
+		failures.append("shared enemy body clearance did not normalize top-down motion mode")
+
+	# September 4 full-run case: Rotwood reported zero authored velocity while Godot's
+	# contact recovery carried its world position with the moving Player. A stationary
+	# overlapping enemy must still be separated; positive inward velocity is not a
+	# prerequisite for correcting the physical overlap.
+	enemy.global_position = Vector2(12.0, 0.0)
+	enemy.velocity = Vector2.ZERO
+	var stationary_before := enemy.global_position.distance_to(player.global_position)
+	runtime.call("_physics_process", 1.0 / 60.0)
+	var stationary_after := enemy.global_position.distance_to(player.global_position)
+	if stationary_after <= stationary_before:
+		failures.append("shared enemy body clearance did not release a stationary sticky overlap")
+	if enemy.velocity.length_squared() > 0.001:
+		failures.append("stationary body clearance invented authored enemy velocity")
 
 	player.free()
 	enemy.free()

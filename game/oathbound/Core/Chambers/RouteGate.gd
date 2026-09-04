@@ -90,8 +90,18 @@ func _on_Area2D_body_entered(body: Node) -> void:
 		return
 	print("[MistGate] body_entered=", body.name, " locked=", locked, " is_player=", _is_player_body(body))
 	if _is_player_body(body):
+		# body_entered runs while the 2D physics server is flushing contact callbacks.
+		# A gate listener is allowed to replace a chamber or change the whole scene, but
+		# removing CollisionObjects from this callback is illegal in Godot. Mark the gate
+		# consumed now, then emit on the deferred queue so every gate-driven transition
+		# (ordinary room, regional boss, Heart handoff, future gates) leaves physics first.
 		_used = true
-		emit_signal("gate_used", gate_type)
+		call_deferred("_emit_gate_used", gate_type)
+
+func _emit_gate_used(type_at_contact: String) -> void:
+	if not is_inside_tree():
+		return
+	emit_signal("gate_used", type_at_contact)
 
 func _is_player_body(n: Node) -> bool:
 	var cur := n

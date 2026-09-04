@@ -1,6 +1,6 @@
 [gd_scene load_steps=37 format=3 uid="uid://27wtippjed10"]
 
-[ext_resource type="Script" path="res://Enemy/Area 2/Encounter/lingering_wraith.gd" id="1_e54f1"]
+[ext_resource type="Script" path="res://Enemy/Area 2/Encounter/lingering_wraith_runtime.gd" id="1_e54f1"]
 [ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_r223u"]
 [ext_resource type="Texture2D" uid="uid://bpij4m6oy8u2m" path="res://Textures/Enemy/foot_soldier/parried1.png" id="3_eyy3w"]
 [ext_resource type="Texture2D" uid="uid://bgr2y08wrdlcs" path="res://Textures/Enemy/foot_soldier/Attack10.png" id="4_g0e34"]
