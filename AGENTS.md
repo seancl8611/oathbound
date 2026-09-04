@@ -25,32 +25,32 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-04T16:50:00Z
+updated_utc: 2026-09-04T23:12:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 139
-  feature_head: 0ed5bd073ee7732fe57a5211f9b3adf6cee886cd
-  merge_commit: d947dfc5634264a56d3b276dbe3fa28a20751286
-  validation: 10/10 PR-triggered workflows green, including Post-playtest Stability, Yomori, Kagutsuchi, Cross-Region Enemy Contract, Region Transition Presentation, RunScene Lifetime, Hushiro Combat Semantics, Authored Presentation, Run Region Handoff, and Godot 4.7.2 Project Check
+  pr: 140
+  feature_head: 69137f82b120540a61b443712dbffd520aa18905
+  merge_commit: d62fd5bdbd7ba809a3c53ed1750a1ec3ab245556
+  validation: 10/10 PR-triggered workflows green on exact feature head, including Post-playtest Stability, Yomori, Kagutsuchi, Cross-Region Enemy Contract, Region Transition Presentation, RunScene Lifetime, Hushiro Combat Semantics, Authored Presentation, Run Region Handoff, and Godot 4.7.2 Project Check
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: d947dfc5634264a56d3b276dbe3fa28a20751286
+known_good_checkpoint: d62fd5bdbd7ba809a3c53ed1750a1ec3ab245556
 current_objective: >-
-  Validate the PR #139 full-run combat-stability repairs player-facing on updated main. The September 4 full boss-room run already proved the major campaign path end-to-end: Keeper -> Yomori, Twin Maws -> Kagutsuchi, Eclipse Shogun defeat, Heart Approach, Heart Binding destruction, successful-run handoff, and return to The Strand. It also manually proves PR #138's previously blocked Region 1->2 and Region 2->3 transition presentation. PR #139 addresses the three concrete defects recovered from that run: physics-unsafe gate emission at the final successful-run handoff, solver-driven enemy/boss body sticking, and Lingering Wraith ordinary attack selection from charge-range distances.
+  Player-facing integration validation of the combined PR #139 full-run combat-stability repairs and PR #140 enemy temporary-object lifetime hardening on updated main. PR #139 addresses the three concrete defects recovered from the September 4 full route: physics-unsafe final gate emission, solver-driven enemy/boss body sticking, and Lingering Wraith ordinary attacks beginning from charge-only range. PR #140 then removes the remaining orphanable delayed temporary-object callbacks from live Rootfang, Briarthorn, Rotwood Host, Embered Pilgrim, Stalker Hound, and Eclipse Shogun runtime paths without changing authored combat balance.
 next_action: >-
-  Run updated main for one focused integration replay. Use Playtest Lab Recommended 5x + Invulnerable unless Fast Clear 10x is needed only to accelerate teardown. Specifically exercise Area 2 ordinary enemies/Lingering Wraith at medium and long range, sustained close-contact movement against bosses/enemies that previously stuck to Akio, and the final Heart Binding -> Strand gate. Confirm ordinary Wraith attacks no longer begin from charge-only distance, overlapping bosses release instead of being carried with the Player, and the successful-run return emits no CollisionObject-removal physics error. Preserve CombatTelemetry and the Godot log. Do not add a separate Area-2 visibility/disappearing fix unless a replay supplies concrete visibility/teleport state evidence.
+  Run one fresh full-route integration replay on updated main. Use Playtest Lab Recommended 5x Health + 5x Posture + Invulnerable; use Fast Clear 10x only when needed to accelerate teardown/transition coverage. Exercise Area 2 ordinary enemies and Lingering Wraith at medium/long range; sustain close contact against enemies/bosses that previously stuck to Akio; deliberately allow Rootfang/Briarthorn/Rotwood Host/Embered Pilgrim/Stalker Hound temporary attacks to spawn and expire; complete Eclipse Shogun while allowing Blood Halo, Blade Dance, and Black Wing temporary hazards to execute; then complete Heart Binding -> Strand. Confirm no freed-lambda/deferred-call errors, no ordinary Wraith attacks from charge-only distance, overlapping bodies release instead of being carried with the Player, and the successful-run return emits no CollisionObject-removal physics error. Preserve CombatTelemetry and the Godot log. Do not add a separate Area-2 visibility/disappearing fix unless the replay supplies concrete visibility/teleport state evidence.
 current_batch:
-  - PR #139 merged from exact head 0ed5bd073ee7732fe57a5211f9b3adf6cee886cd at merge commit d947dfc5634264a56d3b276dbe3fa28a20751286.
-  - All 10 final PR-triggered workflows are green on the exact feature head, including the new FullRunCombatStabilitySmoke under Post-playtest Stability and the complete Godot 4.7.2 Project Check.
-  - September 4 live full-run evidence on build cc5c1b34cfd35936d1e3efeaf88af750cbf4f415 cleared Area 1, Area 2, Area 3, Eclipse Shogun, Heart Approach, Heart Binding destruction, and the successful-run return path. Keeper->Yomori and Twin Maws->Kagutsuchi transition presentation both completed player-facing, closing the PR #138 manual evidence gap.
-  - Final-run engine error root cause: RouteGate emitted gate_used synchronously from Area2D.body_entered; downstream successful-run scene replacement removed CollisionObjects while Godot was still flushing the physics callback. PR #139 consumes the gate immediately but defers the shared gate_used emission outside physics. The regression uses the real authored RouteGate overlap and deliberately frees a CharacterBody from the listener so CI reproduces the original engine ERROR if the callback becomes unsafe again.
-  - Sticky-body evidence: Rotwood Host telemetry showed authored velocity at zero while its world position was carried with the moving Player for several seconds at roughly 23-26 px separation. PR #139 extends EnemyBodyClearanceRuntime to normalize enemy CharacterBody2D motion mode to FLOATING, remove inward authored velocity when present, and depenetrate existing overlap even when authored velocity is zero. The regression covers the stationary sticky-contact case without inventing enemy velocity.
-  - Lingering Wraith evidence: ordinary windups were observed beginning around 160-178 px even though normal sword actions are authored around 48-62 px. The generic start gate had used the 180 px perilous-charge range for every attack. PR #139 splits range authority so ordinary attacks use normal start range, Running Swing uses only its legitimate gap-closing reach, and the intended perilous charge remains legal through 180 px when ready.
-  - The reported Area 2 enemy disappearing behavior did not yield a separate concrete visibility/modulate/teleport defect in the supplied capture. Some perceived off-range/disappearing behavior is consistent with the confirmed Lingering Wraith range defect. Do not invent an unrelated visibility fix without new evidence.
-  - No Health/damage/posture numbers, boss phases, Technique/Aspect/Prosthetic rules, rewards, route authority, or authored Heart combat changed in PR #139.
+  - PR #140 merged from exact head 69137f82b120540a61b443712dbffd520aa18905 at merge commit d62fd5bdbd7ba809a3c53ed1750a1ec3ab245556.
+  - All 10 final PR-triggered workflows are green on exact PR #140 feature head. Kagutsuchi specifically passes clean import/editor compile, canonical scene ownership, standard-enemy contracts, seeded route/roster, miniboss, full generated-route traversal, and Binding/seventh-run/postgame contract. Godot 4.7.2 Project Check passes RunScene ownership, Hushiro/Yomori route coverage, Shrine/Merchant/Forge smokes, and Strand permanent progression.
+  - PR #140 hardens Rootfang empowered-beam overlap probe; Briarthorn AOE/beam overlap and cleanup timers; Rotwood Host spirit-trail fade/cleanup; Embered Pilgrim afterimages, ember patches, and homing-orb lifetimes; Stalker Hound mist-pounce delayed hitbox shutdown; and Eclipse Shogun Blood Halo, Blade Dance, and Black Wing temporary hazard cleanup. Temporary nodes own their timers/tweens or cross delayed boundaries via stable instance IDs instead of orphanable object-capturing lambdas.
+  - During final CI repair, EclipseShogunRuntime.gd required explicit Godot 4.7 typing for end_pos, out_time, my_seq, dist, and travel_time. The fix is type-only and does not alter values or authored timing.
+  - Kagutsuchi's boss chamber retains canonical scene authority through res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn while overriding that canonical scene instance with EclipseShogunRuntime.gd for hardened live behavior. This satisfies the existing canonical-ownership contract instead of weakening validation.
+  - PR #139 remains the preceding live-stability layer: deferred shared RouteGate emission outside physics callbacks, solver-safe enemy body depenetration/FLOATING motion mode, and Lingering Wraith attack-specific range authority.
+  - No Health/damage/posture numbers, boss phases, attack-selection probabilities, rewards, route rules, Technique/Aspect/Prosthetic behavior, or authored Heart combat changed in PR #140.
 recent_batches:
+  - pr_140: hardened remaining live enemy temporary-object lifetimes across Rootfang, Briarthorn, Rotwood Host, Embered Pilgrim, Stalker Hound, and Eclipse Shogun; preserved canonical Kagutsuchi boss scene ownership; 10/10 workflows green.
   - pr_139: fixed physics-safe shared gate emission, stationary solver-driven enemy body sticking, and Lingering Wraith out-of-range ordinary attack selection; added exact regressions.
   - pr_138: fixed the shared Keeper/Twin-Maws region-transition choice deadlock and added real presentation regression coverage.
   - pr_137: made Playtest Lab viewport-safe/scrollable and added neutral-by-default 1x-10x sword/Blood-Aspect Health/Posture debug power presets.
@@ -60,15 +60,15 @@ recent_batches:
   - pr_132: added live Area-2 Twin Maws initialization/ownership regression using the real authored chamber.
   - pr_131: added temporary debug-only procedural FX for Techniques, Aspects, Prosthetics, statuses, and Deathblow readability.
 confirmed:
-  - PR #119 through #139 merged; never continue old feature branches.
-  - A live September 4 boss-room run now completes all three authored regions through Eclipse Shogun and the existing Heart Binding successful-run handoff back to The Strand.
-  - PR #138's Region 1->2 and Region 2->3 transition presentation is now manually proven player-facing by that full run.
-  - PR #139's three repairs are CI-proven on exact feature head 0ed5bd073ee7732fe57a5211f9b3adf6cee886cd but still need one player-facing replay to validate feel/behavior under the original scenarios.
+  - PR #119 through #140 merged; never continue old feature branches.
+  - A live September 4 boss-room run before PR #139/#140 completed all three authored regions through Eclipse Shogun and the existing Heart Binding successful-run handoff back to The Strand, providing the evidence that drove the current stability repairs.
+  - PR #138's Region 1->2 and Region 2->3 transition presentation is manually proven player-facing by that full run.
+  - PR #139's three repairs and PR #140's remaining temporary-lifetime hardening are CI-proven but still need one combined player-facing replay on updated main to validate feel and the original live failure boundaries.
   - No independent Area 2 invisibility/disappearing defect is currently evidenced; require concrete visibility/teleport state before changing that system.
   - Direct Playtest Lab Area 2/3 warps are intentional; killing Keeper is not required for targeted later-region testing.
   - Playtest Lab tabs are scrollable and the shell is viewport-constrained.
   - Playtest Power defaults to 1x and is debug-session only. Recommended integration preset is 5x Health + 5x Posture + Invulnerable; Fast Clear is 10x + Invulnerable for teardown/reward/transition checks only.
-  - PR #139 builds on PR #136 stale partner/special-owner boundaries, live reward-parent resolution, and EnemyBodyClearanceRuntime; do not regress those lifetime guarantees.
+  - PR #140 builds on PR #139/#136 stale partner/special-owner, live reward-parent, gate-safety, body-clearance, and attack-range guarantees; do not regress those lifetime or physics guarantees.
   - FIRST_ATTEMPT begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques are slotless/unlimited.
