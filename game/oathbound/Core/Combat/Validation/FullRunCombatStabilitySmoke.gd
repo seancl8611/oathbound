@@ -39,15 +39,19 @@ func _check_route_gate_deferred_emission() -> void:
 	player.add_to_group("player")
 	add_child(player)
 
+	# Let the newly added nodes complete their first idle/tree turn before simulating
+	# contact. Production body_entered can only occur after a gate has entered the tree;
+	# invoking the callback from this smoke's own _ready() stack is an artificial timing
+	# that can postpone call_deferred() differently in headless Godot.
+	await get_tree().process_frame
+
 	_gate_signal_count = 0
 	gate.call("_on_Area2D_body_entered", player)
 	if _gate_signal_count != 0:
 		_failures.append("RouteGate emitted gate_used synchronously inside body_entered")
 
-	# call_deferred() is guaranteed to leave the originating callback, but a headless
-	# smoke can observe it on the following idle turn rather than the first process
-	# frame boundary. Give the deferred queue two frames without weakening the key
-	# assertion above that emission never happens synchronously.
+	# The production guarantee is two-part: never emit in the contact callback itself,
+	# then emit exactly once after Godot returns to the deferred/idle queue.
 	await get_tree().process_frame
 	await get_tree().process_frame
 	if _gate_signal_count != 1:
