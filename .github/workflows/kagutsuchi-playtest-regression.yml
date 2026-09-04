@@ -1,0 +1,67 @@
+name: Kagutsuchi Playtest Regression
+
+on:
+  pull_request:
+    paths:
+      - "game/oathbound/Regions/Kagutsuchi/Enemies/Bosses/**"
+      - "game/oathbound/Enemy/Area 2/Boss/**"
+      - "game/oathbound/Regions/Kagutsuchi/Validation/KagutsuchiPlaytestRegressionSmoke.*"
+      - ".github/workflows/kagutsuchi-playtest-regression.yml"
+  workflow_dispatch:
+
+jobs:
+  boss-playtest-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee boss-regression-import.log
+          godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee boss-regression-editor.log
+          if grep -F "SCRIPT ERROR:" boss-regression-import.log boss-regression-editor.log; then
+            echo "FAIL: boss regression package introduced a GDScript import/editor error."
+            exit 1
+          fi
+
+      - name: Verify final-boss death, temporary hazards, and body clearance
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Kagutsuchi/Validation/KagutsuchiPlaytestRegressionSmoke.tscn 2>&1 | tee boss-playtest-regression.log
+          grep -F "[KagutsuchiPlaytestRegressionSmoke] PASS" boss-playtest-regression.log
+          if grep -F "SCRIPT ERROR:" boss-playtest-regression.log; then
+            echo "FAIL: boss playtest regression emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "Lambda capture" boss-playtest-regression.log; then
+            echo "FAIL: boss temporary hazard retained a freed lambda capture."
+            exit 1
+          fi
+          if grep -F "previously freed" boss-playtest-regression.log; then
+            echo "FAIL: boss reward/hazard path retained a previously-freed Object reference."
+            exit 1
+          fi
+
+      - name: Upload regression logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kagutsuchi-playtest-regression-${{ github.run_id }}
+          path: |
+            boss-regression-import.log
+            boss-regression-editor.log
+            boss-playtest-regression.log
+          if-no-files-found: warn
+          retention-days: 7
