@@ -26,15 +26,221 @@ const KAGUTSUCHI_TEST_ACTORS := [
 	{"id": "eclipse_shogun", "name": "Eclipse Shogun", "scene": "res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn"},
 ]
 
+const PLAYTEST_POWER_MULTIPLIERS: Array[float] = [1.0, 2.0, 3.0, 5.0, 10.0]
+const RECOMMENDED_INTEGRATION_POWER: float = 5.0
+const FAST_CLEAR_POWER: float = 10.0
+
 var _yomori_actor_dropdown: OptionButton
 var _kagutsuchi_actor_dropdown: OptionButton
 var _region_status: Label
 var _chamber_area_dropdown: OptionButton
+var _power_health_dropdown: OptionButton
+var _power_posture_dropdown: OptionButton
+var _power_status: Label
+var _playtest_health_damage_multiplier: float = 1.0
+var _playtest_posture_damage_multiplier: float = 1.0
+
+
+func _build_ui() -> void:
+	super._build_ui()
+	# The inherited lab used a fixed minimum-size panel. At the project's 640x360
+	# authority viewport, taller inherited tabs can extend below the screen. Keep the
+	# shell inside the viewport; each tab is independently scrollable via _make_tab().
+	if _ui == null:
+		return
+	for child: Node in _ui.get_children():
+		if child is PanelContainer:
+			var panel := child as PanelContainer
+			panel.anchor_left = 0.0
+			panel.anchor_top = 0.0
+			panel.anchor_right = 1.0
+			panel.anchor_bottom = 1.0
+			panel.offset_left = 12.0
+			panel.offset_top = 12.0
+			panel.offset_right = -12.0
+			panel.offset_bottom = -12.0
+			panel.custom_minimum_size = Vector2.ZERO
+			break
+
+
+func _make_tab(tabs: TabContainer, title: String) -> VBoxContainer:
+	# Keep the public helper contract used by all inherited Playtest Lab layers while
+	# putting every tab inside a real ScrollContainer. Mouse wheel and scrollbars now
+	# reach controls that do not fit at small viewport/window sizes.
+	var scroll := ScrollContainer.new()
+	scroll.name = title
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	tabs.add_child(scroll)
+
+	var margin := MarginContainer.new()
+	margin.add_theme_constant_override("margin_left", 8)
+	margin.add_theme_constant_override("margin_right", 8)
+	margin.add_theme_constant_override("margin_top", 8)
+	margin.add_theme_constant_override("margin_bottom", 8)
+	margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(margin)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 6)
+	vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	margin.add_child(vbox)
+	return vbox
 
 
 func _build_build_tab(tabs: TabContainer) -> void:
 	super._build_build_tab(tabs)
+	_build_power_tab(tabs)
 	_build_region_tab(tabs)
+
+
+func _build_power_tab(tabs: TabContainer) -> void:
+	var vbox: VBoxContainer = _make_tab(tabs, "Power")
+
+	var title := Label.new()
+	title.text = "Playtest-only combat power"
+	title.add_theme_font_size_override("font_size", 18)
+	vbox.add_child(title)
+
+	var intro := Label.new()
+	intro.text = "Outgoing multipliers are debug-session controls only. 1x is canonical gameplay and remains the default."
+	intro.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	intro.modulate = Color(0.72, 0.74, 0.82)
+	vbox.add_child(intro)
+
+	var health_label := Label.new()
+	health_label.text = "Health damage multiplier"
+	vbox.add_child(health_label)
+	_power_health_dropdown = _make_power_dropdown()
+	_power_health_dropdown.item_selected.connect(func(_index: int) -> void: _apply_custom_power())
+	vbox.add_child(_power_health_dropdown)
+
+	var posture_label := Label.new()
+	posture_label.text = "Posture damage multiplier"
+	vbox.add_child(posture_label)
+	_power_posture_dropdown = _make_power_dropdown()
+	_power_posture_dropdown.item_selected.connect(func(_index: int) -> void: _apply_custom_power())
+	vbox.add_child(_power_posture_dropdown)
+
+	var preset_row := HBoxContainer.new()
+	vbox.add_child(preset_row)
+
+	var normal := Button.new()
+	normal.text = "Normal 1x"
+	normal.pressed.connect(_set_power_preset.bind(1.0, false))
+	preset_row.add_child(normal)
+
+	var recommended := Button.new()
+	recommended.text = "Recommended 5x + Invulnerable"
+	recommended.pressed.connect(_set_power_preset.bind(RECOMMENDED_INTEGRATION_POWER, true))
+	preset_row.add_child(recommended)
+
+	var fast_clear := Button.new()
+	fast_clear.text = "Fast Clear 10x + Invulnerable"
+	fast_clear.pressed.connect(_set_power_preset.bind(FAST_CLEAR_POWER, true))
+	preset_row.add_child(fast_clear)
+
+	var restore := Button.new()
+	restore.text = "Restore HP / Posture / Spirit"
+	restore.pressed.connect(_restore_player)
+	vbox.add_child(restore)
+
+	_power_status = Label.new()
+	_power_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_power_status.modulate = Color(0.78, 0.80, 0.88)
+	vbox.add_child(_power_status)
+
+	var note := Label.new()
+	note.text = "Recommended integration setting: 5x Health + 5x Posture + Invulnerable. Use 10x only when you need to reach teardown, reward, or region-transition logic quickly; it is intentionally too strong for pacing/balance evaluation."
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.modulate = Color(0.66, 0.68, 0.76)
+	vbox.add_child(note)
+
+	_sync_power_dropdowns()
+	_refresh_power_status()
+
+
+func _make_power_dropdown() -> OptionButton:
+	var dropdown := OptionButton.new()
+	for multiplier: float in PLAYTEST_POWER_MULTIPLIERS:
+		dropdown.add_item("%.0fx" % multiplier)
+		dropdown.set_item_metadata(dropdown.item_count - 1, multiplier)
+	return dropdown
+
+
+func _selected_power_multiplier(dropdown: OptionButton) -> float:
+	if dropdown == null or dropdown.item_count <= 0:
+		return 1.0
+	return clampf(float(dropdown.get_item_metadata(dropdown.selected)), 1.0, FAST_CLEAR_POWER)
+
+
+func _apply_custom_power() -> void:
+	_playtest_health_damage_multiplier = _selected_power_multiplier(_power_health_dropdown)
+	_playtest_posture_damage_multiplier = _selected_power_multiplier(_power_posture_dropdown)
+	_refresh_power_status()
+	print("[PlaytestLab] Custom power: Health %.1fx | Posture %.1fx" % [
+		_playtest_health_damage_multiplier,
+		_playtest_posture_damage_multiplier,
+	])
+
+
+func _set_power_preset(multiplier: float, invulnerable: bool) -> void:
+	var clamped := clampf(multiplier, 1.0, FAST_CLEAR_POWER)
+	_playtest_health_damage_multiplier = clamped
+	_playtest_posture_damage_multiplier = clamped
+	_sync_power_dropdowns()
+	var player: Node = _get_player()
+	if player != null:
+		if player.has_method("set_playtest_invulnerable"):
+			player.call("set_playtest_invulnerable", invulnerable)
+		if player.has_method("playtest_restore_full"):
+			player.call("playtest_restore_full")
+	_sync_player_controls()
+	_refresh_status()
+	_refresh_power_status()
+	print("[PlaytestLab] Power preset: %.1fx Health/Posture | Invulnerable=%s" % [clamped, str(invulnerable)])
+
+
+func _sync_power_dropdowns() -> void:
+	_select_power_dropdown_value(_power_health_dropdown, _playtest_health_damage_multiplier)
+	_select_power_dropdown_value(_power_posture_dropdown, _playtest_posture_damage_multiplier)
+
+
+func _select_power_dropdown_value(dropdown: OptionButton, multiplier: float) -> void:
+	if dropdown == null:
+		return
+	for index: int in range(dropdown.item_count):
+		if is_equal_approx(float(dropdown.get_item_metadata(index)), multiplier):
+			dropdown.select(index)
+			return
+
+
+func _refresh_power_status() -> void:
+	if _power_status == null:
+		return
+	var player: Node = _get_player()
+	var invulnerable := false
+	if player != null and player.has_method("is_playtest_invulnerable"):
+		invulnerable = bool(player.call("is_playtest_invulnerable"))
+	_power_status.text = "Current: Health %.1fx | Posture %.1fx | Invulnerable: %s\nPower multipliers stay active across chamber/region warps until changed or the debug session ends." % [
+		_playtest_health_damage_multiplier,
+		_playtest_posture_damage_multiplier,
+		str(invulnerable),
+	]
+
+
+func get_playtest_health_damage_multiplier() -> float:
+	if not OS.is_debug_build():
+		return 1.0
+	return clampf(_playtest_health_damage_multiplier, 1.0, FAST_CLEAR_POWER)
+
+
+func get_playtest_posture_damage_multiplier() -> float:
+	if not OS.is_debug_build():
+		return 1.0
+	return clampf(_playtest_posture_damage_multiplier, 1.0, FAST_CLEAR_POWER)
 
 
 func _build_room_tab(tabs: TabContainer) -> void:

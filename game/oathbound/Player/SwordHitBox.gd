@@ -118,6 +118,29 @@ func _calculate_damage() -> void:
 	var player = _find_player_owner()
 	if player and "sword_damage_mult" in player:
 		_current_damage = int(_current_damage * player.sword_damage_mult)
+	_apply_playtest_power()
+
+
+func _apply_playtest_power() -> void:
+	# Playtest power is intentionally resolved after canonical/player build modifiers.
+	# It therefore never changes authored attack profiles, saves, balance data, or
+	# release builds. The PlaytestLab autoload returns 1x unless a debug-session preset
+	# has been explicitly selected.
+	if not OS.is_debug_build():
+		return
+	var lab := get_node_or_null("/root/PlaytestLab")
+	if lab == null:
+		return
+	var health_mult := 1.0
+	var posture_mult := 1.0
+	if lab.has_method("get_playtest_health_damage_multiplier"):
+		health_mult = clampf(float(lab.call("get_playtest_health_damage_multiplier")), 1.0, 10.0)
+	if lab.has_method("get_playtest_posture_damage_multiplier"):
+		posture_mult = clampf(float(lab.call("get_playtest_posture_damage_multiplier")), 1.0, 10.0)
+	_current_damage = maxi(0, int(round(float(_current_damage) * health_mult)))
+	_current_posture_damage = maxf(0.0, _current_posture_damage * posture_mult)
+	_current_block_posture_damage = maxf(0.0, _current_block_posture_damage * posture_mult)
+
 
 func _update_meta() -> void:
 	# Canonical Oathbound AttackEvent fields.
@@ -261,6 +284,7 @@ func activate_for_profile(profile: Dictionary, combo_index: int = 0) -> void:
 	var player = _find_player_owner()
 	if player and "sword_damage_mult" in player:
 		_current_damage = int(_current_damage * player.sword_damage_mult)
+	_apply_playtest_power()
 
 	activate_hitbox()
 
@@ -291,7 +315,6 @@ func deactivate_hitbox() -> void:
 # =============================================================================
 # HIT DETECTION
 # =============================================================================
-
 func _on_area_entered(area: Area2D) -> void:
 	if not _active_requested:
 		return
@@ -339,7 +362,6 @@ func _trigger_hitstop(target: Node) -> void:
 # =============================================================================
 # EXTERNAL CONFIGURATION
 # =============================================================================
-
 func set_damage_multiplier(mult: float) -> void:
 	set_meta("damage_mult", mult)
 	_calculate_damage()
@@ -357,7 +379,6 @@ func set_size_multiplier(mult: float) -> void:
 # =============================================================================
 # UTILITY
 # =============================================================================
-
 func get_current_damage() -> int:
 	return _current_damage
 
