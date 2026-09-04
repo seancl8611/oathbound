@@ -16,7 +16,14 @@ func _can_start_wraith_attack(dist: float) -> bool:
 		return false
 	if ProstheticEffects.is_confused(self):
 		return false
+	return _has_legal_attack_at_distance(dist)
 
+
+func _has_legal_attack_at_distance(dist: float) -> bool:
+	# Kept as a pure range/cooldown seam so runtime regression tests can validate the
+	# actual selection boundary without status-effect or scene-ready state influencing
+	# the result. _can_start_wraith_attack() remains the gameplay gate and applies all
+	# ordinary death/attack/confusion guards before delegating here.
 	var normal_ready := dist >= attack_start_min_range and dist <= attack_start_max_range
 	var running_ready := dist >= running_min_distance and dist <= _running_start_max_range()
 	var charge_ready := _charge_available_at_distance(dist)
