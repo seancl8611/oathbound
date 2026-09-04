@@ -75,6 +75,29 @@ jobs:
             exit 1
           fi
 
+      - name: Verify enemy temporary lifetime authorities
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/EnemyTemporaryLifetimeSmoke.tscn 2>&1 | tee enemy-temporary-lifetime.log
+          grep -F "[EnemyTemporaryLifetimeSmoke] PASS - live enemy runtime scenes own temporary-object lifetimes" enemy-temporary-lifetime.log
+          if grep -F "SCRIPT ERROR:" enemy-temporary-lifetime.log; then
+            echo "FAIL: enemy temporary lifetime smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "Lambda capture" enemy-temporary-lifetime.log; then
+            echo "FAIL: enemy temporary lifetime smoke emitted a freed-lambda error."
+            exit 1
+          fi
+          if grep -F "previously freed" enemy-temporary-lifetime.log; then
+            echo "FAIL: enemy temporary lifetime smoke emitted a stale-object error."
+            exit 1
+          fi
+          if grep -F "ERROR:" enemy-temporary-lifetime.log; then
+            echo "FAIL: enemy temporary lifetime smoke emitted an engine/runtime error."
+            exit 1
+          fi
+
       - name: Verify full-run combat stability regressions
         shell: bash
         run: |
@@ -101,6 +124,7 @@ jobs:
             post-playtest-release.log
             projectile-defense.log
             enemy-lifetime-hardening.log
+            enemy-temporary-lifetime.log
             full-run-combat-stability.log
           if-no-files-found: warn
           retention-days: 7

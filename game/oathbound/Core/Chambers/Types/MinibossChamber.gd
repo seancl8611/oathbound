@@ -11,12 +11,15 @@ const MINIBOSS_PERSISTENT_SCROLLS := 1
 # Stable completion/achievement IDs for the six authored launch minibosses. Scene paths
 # are the authority here because runtime node names can be edited independently of
 # persistent record keys. Unknown/debug minibosses must not inflate the six-target
-# Named Threats achievement.
+# Named Threats achievement. Runtime-hardening wrappers intentionally map to the same
+# persistent IDs as their authored source scenes.
 const LAUNCH_MINIBOSS_SCENE_IDS := {
 	"res://Regions/Hushiro/Enemies/Minibosses/VillageOgre.tscn": "village_ogre",
 	"res://Regions/Hushiro/Enemies/Minibosses/TheCollector.tscn": "the_collector",
 	"res://Enemy/Area 2/Minibosses/embered_pilgrim.tscn": "embered_pilgrim",
+	"res://Enemy/Area 2/Minibosses/embered_pilgrim_runtime.tscn": "embered_pilgrim",
 	"res://Enemy/Area 2/Minibosses/rotwood_host.tscn": "rotwood_host",
+	"res://Enemy/Area 2/Minibosses/rotwood_host_runtime.tscn": "rotwood_host",
 	"res://Regions/Kagutsuchi/Enemies/Minibosses/BloodLotus.tscn": "blood_lotus",
 	"res://Regions/Kagutsuchi/Enemies/Minibosses/EternalSwordsman.tscn": "eternal_swordsman",
 }
