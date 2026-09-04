@@ -1,0 +1,62 @@
+name: Region Transition Presentation Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  region-transition-presentation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee region-transition-import.log
+          godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee region-transition-editor.log
+          if grep -F "SCRIPT ERROR:" region-transition-import.log region-transition-editor.log; then
+            echo "FAIL: region transition import/compile emitted a GDScript error."
+            exit 1
+          fi
+
+      - name: Verify transition retires before regional choice pause
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/RegionTransitionPresentationSmoke.tscn 2>&1 | tee region-transition-presentation.log
+          grep -F "[RegionTransitionPresentationSmoke] PASS - Region 1->2 and 2->3 overlays fully retire before choice pause | transition survives paused SceneTree" region-transition-presentation.log
+          if grep -F "SCRIPT ERROR:" region-transition-presentation.log; then
+            echo "FAIL: region transition presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" region-transition-presentation.log; then
+            echo "FAIL: region transition presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload transition validation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: region-transition-presentation-${{ github.run_id }}
+          path: |
+            region-transition-import.log
+            region-transition-editor.log
+            region-transition-presentation.log
+          if-no-files-found: warn
+          retention-days: 7
