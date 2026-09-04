@@ -44,6 +44,11 @@ func _check_route_gate_deferred_emission() -> void:
 	if _gate_signal_count != 0:
 		_failures.append("RouteGate emitted gate_used synchronously inside body_entered")
 
+	# call_deferred() is guaranteed to leave the originating callback, but a headless
+	# smoke can observe it on the following idle turn rather than the first process
+	# frame boundary. Give the deferred queue two frames without weakening the key
+	# assertion above that emission never happens synchronously.
+	await get_tree().process_frame
 	await get_tree().process_frame
 	if _gate_signal_count != 1:
 		_failures.append("RouteGate deferred gate_used did not emit exactly once")
@@ -63,17 +68,19 @@ func _check_lingering_wraith_attack_ranges() -> void:
 		return
 	var wraith: Node = wraith_value as Node
 
-	# Make the charge unavailable. At 170 px there must be no legal ordinary sword
-	# attack; this reproduces the full-run 160-178 px normal-windup bug.
+	# Test the pure range/cooldown seam rather than unrelated live-state guards such as
+	# confusion, attack-in-progress, or death state. Production _can_start... delegates
+	# to this exact seam only after those guards pass.
 	var now := Time.get_ticks_msec() * 0.001
 	wraith.set("_last_charge_time", now)
-	if bool(wraith.call("_can_start_wraith_attack", 170.0)):
-		_failures.append("Lingering Wraith can still start a non-charge attack at 170 px")
+	if bool(wraith.call("_has_legal_attack_at_distance", 170.0)):
+		_failures.append("Lingering Wraith still has a legal non-charge attack at 170 px")
 
 	# When charge is ready at the same distance, the long-range perilous attack remains
 	# legal and must be the only selectable attack.
-	wraith.set("_last_charge_time", -99.0)
-	if not bool(wraith.call("_can_start_wraith_attack", 170.0)):
+	var charge_cooldown := float(wraith.get("charge_cooldown"))
+	wraith.set("_last_charge_time", now - charge_cooldown - 1.0)
+	if not bool(wraith.call("_has_legal_attack_at_distance", 170.0)):
 		_failures.append("Lingering Wraith lost its authored long-range charge")
 	else:
 		for _i in range(8):
@@ -83,8 +90,9 @@ func _check_lingering_wraith_attack_ranges() -> void:
 
 	# Around 100 px, with charge on cooldown, the authored running swing is the legal
 	# gap closer; ordinary 48-62 px swings still must not be selected.
+	now = Time.get_ticks_msec() * 0.001
 	wraith.set("_last_charge_time", now)
-	if not bool(wraith.call("_can_start_wraith_attack", 100.0)):
+	if not bool(wraith.call("_has_legal_attack_at_distance", 100.0)):
 		_failures.append("Lingering Wraith running gap-close range became unavailable")
 	else:
 		for _i in range(8):
