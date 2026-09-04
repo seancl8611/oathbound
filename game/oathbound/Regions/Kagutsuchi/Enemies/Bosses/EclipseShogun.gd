@@ -23,6 +23,10 @@ func _run_humanoid_death_rewards() -> void:
 	if exp_gem:
 		var reward_parent: Node = _resolve_live_reward_parent()
 		if reward_parent != null:
+			# Refresh the inherited cache as well. The September 3 crash proved the
+			# original first-group-member cache can outlive its chamber; keeping it on
+			# a live node prevents later inherited teardown from touching a freed Object.
+			loot_base = reward_parent
 			spawn_experience_gem(exp_gem, reward_parent)
 		else:
 			push_warning("[EclipseShogun] No live reward parent; skipping experience gem instead of using stale loot ownership")
