@@ -75,6 +75,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify full-run combat stability regressions
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/FullRunCombatStabilitySmoke.tscn 2>&1 | tee full-run-combat-stability.log
+          grep -F "[FullRunCombatStabilitySmoke] PASS - deferred gate emission | Lingering Wraith range authority" full-run-combat-stability.log
+          if grep -F "SCRIPT ERROR:" full-run-combat-stability.log; then
+            echo "FAIL: full-run combat stability smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR:" full-run-combat-stability.log; then
+            echo "FAIL: full-run combat stability smoke emitted an engine/runtime error."
+            exit 1
+          fi
+
       - name: Upload stability logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -86,5 +101,6 @@ jobs:
             post-playtest-release.log
             projectile-defense.log
             enemy-lifetime-hardening.log
+            full-run-combat-stability.log
           if-no-files-found: warn
           retention-days: 7
