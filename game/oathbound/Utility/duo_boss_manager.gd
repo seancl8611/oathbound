@@ -83,6 +83,12 @@ func _is_current_boss_area() -> bool:
 ## Called by a twin when it crosses 50% HP and wants to shell.
 ## Returns true if shell starts now, false if deferred.
 func request_special_mode(who: Node) -> bool:
+	# A stale special-mode owner should never block the surviving twin. The cached
+	# twin references intentionally outlive phase transitions, so validate them at
+	# every manager boundary rather than relying on truthiness alone.
+	if not _is_alive(_active_special_twin):
+		_active_special_twin = null
+
 	if _active_special_twin == null:
 		_active_special_twin = who
 		emit_signal("special_mode_started", who)
@@ -104,6 +110,7 @@ func request_rootfang(who: Node) -> bool:
 func request_shell(who: Node) -> bool:
 	return request_special_mode(who)
 
+
 ## Called by a twin when its shell sequence finishes.
 func notify_special_mode_ended(who: Node) -> void:
 	if _active_special_twin == who:
@@ -112,21 +119,26 @@ func notify_special_mode_ended(who: Node) -> void:
 	emit_signal("special_mode_ended", who)
 	emit_signal("shell_ended", who) # backward-compatible
 
-	if _pending_special_twin != null and is_instance_valid(_pending_special_twin):
-		var pending = _pending_special_twin
-		_pending_special_twin = null
+	if _pending_special_twin == null:
+		return
 
-		if not _is_alive(pending):
-			return
+	# Keep this local untyped/Variant-safe. A cached Object can become freed between
+	# frames, and passing such a value through a custom `Node`-typed function boundary
+	# raises before `is_instance_valid()` gets a chance to reject it.
+	var pending: Variant = _pending_special_twin
+	_pending_special_twin = null
 
-		_active_special_twin = pending
+	if not _is_alive(pending):
+		return
 
-		if pending.has_method("trigger_deferred_briarthorn"):
-			pending.call_deferred("trigger_deferred_briarthorn")
-		elif pending.has_method("trigger_deferred_rootfang"):
-			pending.call_deferred("trigger_deferred_rootfang")
-		elif pending.has_method("trigger_deferred_shell"):
-			pending.call_deferred("trigger_deferred_shell")
+	_active_special_twin = pending as Node
+
+	if pending.has_method("trigger_deferred_briarthorn"):
+		pending.call_deferred("trigger_deferred_briarthorn")
+	elif pending.has_method("trigger_deferred_rootfang"):
+		pending.call_deferred("trigger_deferred_rootfang")
+	elif pending.has_method("trigger_deferred_shell"):
+		pending.call_deferred("trigger_deferred_shell")
 
 
 func notify_briarthorn_ended(who: Node) -> void:
@@ -140,6 +152,7 @@ func notify_rootfang_ended(who: Node) -> void:
 func notify_shell_ended(who: Node) -> void:
 	notify_special_mode_ended(who)
 
+
 func notify_died(who: Node) -> void:
 	if _active_special_twin == who:
 		_active_special_twin = null
@@ -147,9 +160,15 @@ func notify_died(who: Node) -> void:
 	if _pending_special_twin == who:
 		_pending_special_twin = null
 
+	# Resolve the partner before forgetting the dead twin. The September 4 playtest
+	# killed Rootfang first; by the time Briarthorn died, Rootfang's cached reference
+	# was a previously-freed Object. `_is_alive(Node)` rejected that argument before
+	# its validity guard ran. Keep stale-reference boundaries Variant-safe and clear
+	# the dead cache immediately after the partner lookup.
+	var partner: Variant = get_partner(who)
+	_forget_twin(who)
 	_twins_dead += 1
 
-	var partner = get_partner(who)
 	if _is_alive(partner):
 		if partner.has_method("on_partner_died"):
 			partner.on_partner_died()
@@ -160,7 +179,7 @@ func notify_died(who: Node) -> void:
 		emit_signal("defeated")
 
 
-func get_partner(who: Node) -> Node:
+func get_partner(who: Node) -> Variant:
 	if who == _twin_a:
 		return _twin_b
 	elif who == _twin_b:
@@ -171,11 +190,16 @@ func get_partner(who: Node) -> Node:
 func is_partner_alive(who: Node) -> bool:
 	return _is_alive(get_partner(who))
 
+
 func is_anyone_in_special_mode() -> bool:
+	if not _is_alive(_active_special_twin):
+		_active_special_twin = null
 	return _active_special_twin != null
 
 
-func get_special_mode_twin() -> Node:
+func get_special_mode_twin() -> Variant:
+	if not _is_alive(_active_special_twin):
+		_active_special_twin = null
 	return _active_special_twin
 
 
@@ -184,12 +208,24 @@ func is_anyone_shelled() -> bool:
 	return is_anyone_in_special_mode()
 
 
-func get_shelled_twin() -> Node:
+func get_shelled_twin() -> Variant:
 	return get_special_mode_twin()
 
-func _is_alive(who: Node) -> bool:
-	if who == null or not is_instance_valid(who):
+
+func _forget_twin(who: Node) -> void:
+	if who == _twin_a:
+		_twin_a = null
+	elif who == _twin_b:
+		_twin_b = null
+
+
+func _is_alive(who: Variant) -> bool:
+	if who == null:
+		return false
+	if not is_instance_valid(who):
+		return false
+	if not (who is Node):
 		return false
 	if who.has_method("is_dead"):
-		return not who.is_dead()
+		return not bool(who.is_dead())
 	return true

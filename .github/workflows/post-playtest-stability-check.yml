@@ -64,6 +64,17 @@ jobs:
             exit 1
           fi
 
+      - name: Verify enemy lifetime hardening
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/EnemyLifetimeHardeningSmoke.tscn 2>&1 | tee enemy-lifetime-hardening.log
+          grep -F "[EnemyLifetimeHardeningSmoke] PASS - freed Twin Maws partner | stale reward owner | shared body clearance" enemy-lifetime-hardening.log
+          if grep -F "SCRIPT ERROR:" enemy-lifetime-hardening.log; then
+            echo "FAIL: enemy lifetime hardening smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Upload stability logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -74,5 +85,6 @@ jobs:
             post-playtest-editor.log
             post-playtest-release.log
             projectile-defense.log
+            enemy-lifetime-hardening.log
           if-no-files-found: warn
           retention-days: 7

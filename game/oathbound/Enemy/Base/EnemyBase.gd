@@ -218,8 +218,10 @@ func get_player_ref() -> Node2D:
 # UNIVERSAL HURTBOX / ATTACK METADATA HELPERS
 # =============================================================================
 
-func _resolve_hurt_source(attacker: Node) -> Node:
+func _resolve_hurt_source(attacker: Variant) -> Node:
 	if attacker == null:
+		return null
+	if not is_instance_valid(attacker):
 		return null
 	
 	if attacker is Area2D and attacker.has_meta("attacker"):
@@ -233,7 +235,7 @@ func _resolve_hurt_source(attacker: Node) -> Node:
 		if cached is Node and is_instance_valid(cached):
 			return cached
 	
-	return attacker
+	return attacker as Node if attacker is Node else null
 
 
 func _get_last_hurtbox_string_meta(key: String, fallback: String = "") -> String:
@@ -306,7 +308,7 @@ func get_last_attack_area() -> Node:
 # UNIVERSAL INCOMING ATTACK RESPONSE TABLE
 # =============================================================================
 
-func _get_incoming_attack_response(damage: int, damage_type: String, attacker: Node) -> Dictionary:
+func _get_incoming_attack_response(damage: int, damage_type: String, attacker: Variant) -> Dictionary:
 	var attack_id := get_last_attack_id()
 	var posture_meta := get_last_posture_damage()
 	if posture_meta <= 0.0:
@@ -396,7 +398,7 @@ func _get_incoming_attack_response(damage: int, damage_type: String, attacker: N
 	elif attack_id == "hold_thrust":
 		response["heavy"] = true
 	
-	if attacker and attacker.has_meta("heavy_attack"):
+	if is_instance_valid(attacker) and attacker.has_meta("heavy_attack"):
 		if bool(attacker.get_meta("heavy_attack")):
 			response["heavy"] = true
 	
@@ -483,9 +485,9 @@ func clear_hitstop_state() -> void:
 # SHARED VISUAL HELPERS
 # =============================================================================
 
-func _safe_queue_free(node: Node) -> void:
-	if is_instance_valid(node):
-		node.queue_free()
+func _safe_queue_free(node: Variant) -> void:
+	if node != null and is_instance_valid(node) and node is Node:
+		(node as Node).queue_free()
 
 
 func _flash_sprite(color: Color, duration: float) -> void:
@@ -628,7 +630,17 @@ func _get_player() -> Node:
 
 
 func _do_after(seconds: float, callback: Callable) -> void:
-	get_tree().create_timer(seconds).timeout.connect(callback)
+	if not callback.is_valid():
+		return
+	var timer := Timer.new()
+	timer.one_shot = true
+	timer.wait_time = maxf(0.001, seconds)
+	add_child(timer)
+	# Node-owned timers disappear with the enemy. Method Callables also disconnect
+	# automatically with their target, avoiding orphaned SceneTreeTimer callbacks.
+	timer.timeout.connect(callback)
+	timer.timeout.connect(Callable(timer, "queue_free"))
+	timer.start()
 
 func add_posture_damage(amount: float) -> void:
 	if amount <= 0.0:
@@ -709,31 +721,32 @@ func show_enemy_damage_number(amount: int, damage_type: String, y_offset: float 
 			self
 		)
 
-func object_has_property(obj: Object, property_name: String) -> bool:
-	if obj == null:
+func object_has_property(obj: Variant, property_name: String) -> bool:
+	if obj == null or not is_instance_valid(obj):
 		return false
-	
+	if not (obj is Object):
+		return false
 	return obj.get(property_name) != null
 
 
-func object_get_property(obj: Object, property_name: String, fallback: Variant = null) -> Variant:
-	if obj == null:
+func object_get_property(obj: Variant, property_name: String, fallback: Variant = null) -> Variant:
+	if obj == null or not is_instance_valid(obj):
 		return fallback
-	
+	if not (obj is Object):
+		return fallback
 	var value = obj.get(property_name)
 	if value == null:
 		return fallback
-	
 	return value
 
 
-func object_set_property_if_present(obj: Object, property_name: String, value: Variant) -> void:
-	if obj == null:
+func object_set_property_if_present(obj: Variant, property_name: String, value: Variant) -> void:
+	if obj == null or not is_instance_valid(obj):
 		return
-	
+	if not (obj is Object):
+		return
 	if obj.get(property_name) == null:
 		return
-	
 	obj.set(property_name, value)
 
 # =============================================================================
@@ -805,6 +818,7 @@ func _request_attack_token() -> bool:
 	
 	if bool(ad.request_token(self)):
 		has_attack_token = true
+		_held_roles["melee_attack"] = true
 		return true
 	
 	return false
@@ -817,6 +831,7 @@ func _release_attack_token() -> void:
 		ad.release_token(self)
 	
 	has_attack_token = false
+	_held_roles.erase("melee_attack")
 
 
 func _release_all_attack_director_state() -> void:
@@ -911,7 +926,7 @@ func spawn_death_vfx(death_scene: PackedScene) -> void:
 		return
 	
 	var parent := get_parent()
-	if parent == null:
+	if parent == null or not is_instance_valid(parent):
 		return
 	
 	var enemy_death := death_scene.instantiate() as Node2D
@@ -925,7 +940,34 @@ func spawn_death_vfx(death_scene: PackedScene) -> void:
 	parent.call_deferred("add_child", enemy_death)
 
 
-func spawn_experience_gem(exp_scene: PackedScene, loot_parent: Node) -> void:
+func _resolve_live_loot_parent(preferred: Variant = null) -> Node:
+	# Cached chamber nodes can become freed when RunScene swaps rooms. Resolve a live
+	# owner at the moment a reward is spawned instead of trusting an @onready cache.
+	if preferred != null and is_instance_valid(preferred) and preferred is Node:
+		var preferred_node := preferred as Node
+		if preferred_node.is_inside_tree():
+			return preferred_node
+
+	var ancestor: Node = get_parent()
+	while ancestor != null:
+		if not is_instance_valid(ancestor):
+			break
+		var direct_loot := ancestor.get_node_or_null("Loot")
+		if direct_loot != null and is_instance_valid(direct_loot) and direct_loot.is_inside_tree():
+			return direct_loot
+		ancestor = ancestor.get_parent()
+
+	for candidate in get_tree().get_nodes_in_group("loot"):
+		if candidate is Node and is_instance_valid(candidate) and candidate.is_inside_tree():
+			return candidate
+
+	var fallback := get_parent()
+	if fallback != null and is_instance_valid(fallback) and fallback.is_inside_tree():
+		return fallback
+	return null
+
+
+func spawn_experience_gem(exp_scene: PackedScene, loot_parent: Variant = null) -> void:
 	if exp_scene == null:
 		return
 	
@@ -936,12 +978,12 @@ func spawn_experience_gem(exp_scene: PackedScene, loot_parent: Node) -> void:
 	new_gem.global_position = global_position
 	new_gem.set("experience", experience)
 	
-	if loot_parent:
-		loot_parent.call_deferred("add_child", new_gem)
+	var live_parent := _resolve_live_loot_parent(loot_parent)
+	if live_parent != null:
+		live_parent.call_deferred("add_child", new_gem)
 	else:
-		var parent := get_parent()
-		if parent:
-			parent.call_deferred("add_child", new_gem)
+		# Never leave a detached reward node alive if a room is tearing down.
+		new_gem.queue_free()
 
 
 func award_area_gold_drop() -> void:
