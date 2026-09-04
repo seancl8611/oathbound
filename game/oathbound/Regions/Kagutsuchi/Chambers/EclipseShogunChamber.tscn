@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://Core/Chambers/Types/BossChamber.gd" id="1_boss"]
 [ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_gate"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="4_damage"]
 [ext_resource type="Script" path="res://Core/Encounters/EncounterSpawner.gd" id="5_spawner"]
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_bounds"]
-[ext_resource type="PackedScene" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogunRuntime.tscn" id="7_shogun"]
+[ext_resource type="PackedScene" uid="uid://d0d3e5rkh4fyp" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn" id="7_shogun"]
+[ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogunRuntime.gd" id="8_runtime"]
 
 [node name="EclipseShogunChamber" type="Node2D"]
 script = ExtResource("1_boss")
@@ -47,3 +48,4 @@ metadata/boss_area = 3
 
 [node name="EclipseShogun" parent="ShogunBoss" instance=ExtResource("7_shogun")]
 position = Vector2(120, 0)
+script = ExtResource("8_runtime")
