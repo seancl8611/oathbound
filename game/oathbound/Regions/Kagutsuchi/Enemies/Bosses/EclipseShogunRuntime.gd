@@ -38,8 +38,8 @@ func _spawn_blade_dance_projectile(dir: Vector2) -> void:
 	get_parent().add_child(proj)
 
 	var start_pos := proj.global_position
-	var end_pos := start_pos + dir * bd_projectile_range
-	var out_time := bd_projectile_range / bd_projectile_speed
+	var end_pos: Vector2 = start_pos + dir * float(bd_projectile_range)
+	var out_time: float = float(bd_projectile_range) / float(bd_projectile_speed)
 	var tween := proj.create_tween()
 	tween.tween_property(proj, "global_position", end_pos, out_time)
 	tween.tween_property(proj, "global_position", start_pos, out_time)
@@ -48,7 +48,7 @@ func _spawn_blade_dance_projectile(dir: Vector2) -> void:
 
 
 func _do_blood_halo() -> void:
-	var my_seq := _attack_sequence_id
+	var my_seq: int = int(_attack_sequence_id)
 	if _should_abort_attack(my_seq):
 		return
 
@@ -80,7 +80,7 @@ func _do_blood_halo() -> void:
 			break
 		var player := _get_player()
 		if player and is_instance_valid(player):
-			var dist := player.global_position.distance_to(global_position)
+			var dist: float = float(player.global_position.distance_to(global_position))
 			if dist >= bh_radius * 0.7 and dist <= bh_radius * 1.1:
 				var tick_hit := _spawn_radial_burst(player.global_position, 15.0, bh_damage, true)
 				_arm_shogun_self_free(tick_hit, 0.15, "RuntimeHaloHitLifetime")
@@ -132,7 +132,7 @@ func _spawn_shock_lane(origin: Vector2, dir: Vector2) -> void:
 	get_parent().add_child(lane)
 	_active_hazards.append(lane)
 
-	var travel_time := 200.0 / bwa_lane_speed
+	var travel_time: float = 200.0 / float(bwa_lane_speed)
 	var tween := lane.create_tween()
 	tween.tween_property(lane, "global_position", origin + dir * 200.0, travel_time)
 	tween.tween_callback(Callable(lane, "queue_free"))
