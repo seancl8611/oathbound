@@ -73,7 +73,7 @@ var enemies_by_area := {
 		"lingering_wraith": preload("res://Enemy/Area 2/Encounter/lingering_wraith.tscn"),
 		"lantern_wraith": preload("res://Enemy/Area 2/Encounter/lantern_wraith.tscn"),
 		"mist_shepherd": preload("res://Enemy/Area 2/Encounter/Mist_Shepherd.tscn"),
-		"stalker_hound": preload("res://Enemy/Area 2/Encounter/stalker_hound.tscn"),
+		"stalker_hound": preload("res://Enemy/Area 2/Encounter/stalker_hound_runtime.tscn"),
 	},
 	3: {
 		# Approved native Kagutsuchi Court roster. Scene authority now lives under the
