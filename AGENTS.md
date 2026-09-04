@@ -31,40 +31,38 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-04T01:26:00Z
+updated_utc: 2026-09-04T02:10:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 136
-  feature_head: 6b8af83a7d314cfe9d701092c5a4e51e5edda29c
-  merge_commit: 6ae1de7bbbc84dc21e9ac87e7893517e161077ee
-  validation: 13/13 PR-triggered workflows green; exact EnemyLifetimeHardeningSmoke green; mergeable true before merge
+  pr: 137
+  feature_head: e79b2a21954e421f58b00ab0adb2cd3079919642
+  merge_commit: 7aa715e484495a5fc38c1e2ebccac1fe197e6677
+  validation: 9/9 PR-triggered workflows green; Godot 4.7.2 import/compile and RunScene smoke green; mergeable true before merge
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: 6ae1de7bbbc84dc21e9ac87e7893517e161077ee
+known_good_checkpoint: 7aa715e484495a5fc38c1e2ebccac1fe197e6677
 current_objective: >-
-  Continue player-facing Yomori/Region 2 integration from the PR #136 enemy-lifetime-hardened main, then proceed directly to Kagutsuchi/Region 3 if Yomori holds.
-  The September 3/4 Twin Maws playtest reached the real Area 2 boss and exposed a concrete death crash when Briarthorn died after Rootfang had already been freed.
-  PR #136 fixes that exact stale-partner type boundary, generalizes stale reward-parent handling across shared enemies/minibosses/bosses, and adds shared physical body clearance without numerical combat tuning.
+  Continue player-facing Yomori/Region 2 integration from the PR #136 enemy-lifetime-hardened main using the improved PR #137 Playtest Lab, then proceed directly to Kagutsuchi/Region 3 if Yomori holds.
+  The September 3/4 Twin Maws playtest reached the real Area 2 boss and exposed a concrete death crash when Briarthorn died after Rootfang had already been freed; PR #136 repairs that exact stale-partner path.
+  PR #137 removes the Playtest Lab viewport/clipping obstacle and adds debug-session sword/Blood-Aspect Health and Posture power presets so integration can reach boss teardown/reward/transition logic faster without changing canonical balance.
   Region 2 is still the active manual integration boundary until the repaired Twin Maws fight is replayed successfully.
 next_action: >-
-  Run updated main and use Playtest Lab Chambers to reach Area 2/Yomori Boss -> Twin Maws as directly as practical. Kill Rootfang first and Briarthorn second to reproduce the previously crashing order; if practical, also validate the reverse order.
-  Confirm the fight completes with no `Invalid type in function '_is_alive'`, no previously-freed Object error, no stale reward-parent error, and no enemy body pinning/pass-through. Confirm boss defeat ownership, reward/gate progression, Techniques, Aspects, Prosthetics, blocking/parry, posture breaks, Deathblows, and procedural FX remain intact.
-  Preserve CombatTelemetry and the Godot log. If Twin Maws completes cleanly, continue directly into Area 3/Kagutsuchi and Eclipse Shogun in the same integration pass; stop at the first genuine blocker.
+  Run updated main, open the Playtest Lab with backtick, choose Power -> Recommended 5x + Invulnerable, then use Chambers -> Area 2 - Yomori -> Boss to reach Twin Maws directly.
+  Kill Rootfang first and Briarthorn second to reproduce the previously crashing order; if practical, also validate the reverse order. Confirm no `_is_alive` type crash, previously-freed Object error, stale reward-parent error, or body pinning/pass-through, and confirm boss defeat ownership, reward/gate progression, Techniques, Aspects, Prosthetics, blocking/parry, posture breaks, Deathblows, and procedural FX remain intact.
+  Use Fast Clear 10x + Invulnerable only when specifically validating teardown/reward/region-transition logic; return to Recommended 5x for combat-state integration because 10x can compress intended pacing. Preserve CombatTelemetry and the Godot log. If Twin Maws completes cleanly, continue directly into Area 3/Kagutsuchi and Eclipse Shogun in the same integration pass; stop at the first genuine blocker.
 current_batch:
-  - PR #136 merged from exact feature head 6b8af83a7d314cfe9d701092c5a4e51e5edda29c at merge commit 6ae1de7bbbc84dc21e9ac87e7893517e161077ee.
-  - PR #136 passed all 13 final PR-triggered workflows, including Godot 4.7.2 Project Check, Yomori Region Check, Cross-Region Enemy Contract Check, RunScene Runtime Lifetime Check, Slot Runtime Lifetime Check, Post-playtest Stability Check, Hushiro combat/boss regressions, region handoff, release shell, presentation, and Blood Cavern checks.
-  - The exact Twin Maws crash was a typed stale-reference boundary: after Rootfang was freed, DuoBossManager retained its cached Object and later passed it through `_is_alive(who: Node)` while processing Briarthorn death. GDScript rejected the freed Object before the old validity guard could execute.
-  - DuoBossManager twin and special-mode ownership caches now cross Variant-safe boundaries, validate `is_instance_valid()` before Node calls/signals, clear dead twin caches, and discard freed deferred special owners.
-  - EnemyLifetimeHardeningSmoke reproduces the real acquisition order by caching Rootfang while it is valid, freeing it, then ending deferred special ownership and notifying Briarthorn death. The smoke also validates stale reward-owner replacement and shared body depenetration; it is now part of Post-playtest Stability CI.
-  - Shared EnemyBase reward spawning now accepts stale cached ownership safely and resolves a live current Loot parent at use time. This generalizes the earlier Keeper/Eclipse Shogun stale reward-parent class instead of adding boss-specific wrappers.
-  - Shared EnemyBase object/free helpers reject freed references safely, and `_do_after` now uses enemy-owned Timer lifetime rather than an orphanable SceneTreeTimer callback.
-  - EnemyBodyClearanceRuntime is an autoload applying only to live CharacterBody2D enemies. It derives physical clearance from collision shapes, removes enemy velocity driving farther into the player, and performs bounded outward depenetration while skipping dead/deathblow-ready enemies.
-  - Playtest telemetry sampled Rootfang/Briarthorn at roughly 12-15 px center distance during the reported fight, supporting a physical penetration fix; PR #136 does not change attack damage, range, timing, selection, economy, Aspect/Technique/Prosthetic/Relic architecture, or Heart behavior.
-  - Unwired bespoke Rootfang/temporary-area callback guard experiments were removed before merge rather than shipping speculative code without runtime evidence.
-  - CI proves the code regression and shared lifetime contracts, but does not replace the required manual Twin Maws combat replay.
+  - PR #137 merged from exact feature head e79b2a21954e421f58b00ab0adb2cd3079919642 at merge commit 7aa715e484495a5fc38c1e2ebccac1fe197e6677.
+  - PR #137 passed all 9 PR-triggered workflows: Godot 4.7.2 Project Check, Hushiro Combat Regression, Hushiro Combat Semantics, Kagutsuchi Region Check, RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content, Blood Cavern Execution Trial, and Run Region Handoff.
+  - The Playtest Lab panel now uses viewport-relative 12 px margins instead of a fixed 520x350 minimum, and every inherited tab is wrapped in an independent ScrollContainer while preserving the existing `_make_tab()` VBox contract.
+  - A new Power tab exposes 1x/2x/3x/5x/10x Health and Posture controls plus Normal 1x, Recommended 5x + Invulnerable, Fast Clear 10x + Invulnerable, and one-click HP/Posture/Spirit restore.
+  - Power defaults to neutral 1x and is debug-session only. SwordHitBox applies the selected multiplier after canonical attack-profile and legitimate player-build modifiers, so authored timing, geometry, proc coefficient, attack selection, and saved balance data are untouched.
+  - Current power scaling directly covers the shared sword/Blood Aspect attack-event bridge. Technique/prosthetic architecture and their separately authored direct-effect values were not rewritten merely to support the debug tool.
+  - PR #136 remains intact: DuoBossManager stale partner/special-owner boundaries are Variant-safe; shared reward ownership is resolved live; EnemyBodyClearanceRuntime corrects physical penetration; exact EnemyLifetimeHardeningSmoke remains green.
+  - Manual Twin Maws replay remains required; CI proves compile/regression compatibility, not player-facing feel or the full repaired boss death sequence in a live run.
 recent_batches:
+  - pr_137: made the Playtest Lab viewport-safe and scrollable; added neutral-by-default 1x-10x sword/Blood-Aspect Health/Posture debug power presets; 9/9 workflows green.
   - pr_136: fixed the exact Twin Maws freed-partner death crash; generalized enemy reward/object lifetime safety; added shared body-clearance runtime and exact regression smoke; 13/13 final workflows green.
   - pr_134: repaired Mist Shepherd targetability, Merchant room-entry auto-exit, and Lantern Wraith freed temporary callback captures from the first direct-warp Yomori playtest; added exact CI regression coverage.
   - pr_133: fixed Keeper stale reward-parent death crash, added exact regression coverage, and exposed obvious direct Area 1/2/3 chamber warps.
@@ -79,8 +77,10 @@ recent_batches:
   - pr_130: preemptively reconciled stale Region 2/3 hit/parry posture contracts through the shared canonical AttackEvent bridge.
   - pr_131: added temporary debug-only code-generated playtest FX for Techniques, Aspects, Prosthetics, statuses, and Deathblow readability.
 confirmed:
-  - PR #119 through #136 merged; never continue old feature branches.
+  - PR #119 through #137 merged; never continue old feature branches.
   - Direct Playtest Lab Area 2/3 warps are intentionally exposed; killing Keeper is not required for targeted later-region testing.
+  - Playtest Lab tabs are now scrollable and the shell is constrained to the viewport; the canonical 640x360 project viewport is no longer dependent on the old fixed 520x350 panel minimum.
+  - Playtest Power defaults to 1x and is debug-session only. Recommended integration preset is 5x Health + 5x Posture + Invulnerable; Fast Clear is 10x + Invulnerable for rapid teardown/reward/transition checks only.
   - PR #136 CI reproduces the exact freed Twin Maws partner sequence and passes it without the `_is_alive(Node)` type crash; manual combat replay remains required before calling Region 2 player-facing integration proven.
   - Shared reward parent resolution now covers stale cached Loot ownership for common EnemyBase/HumanoidEnemyBase death rewards, including the previously observed Keeper/Eclipse Shogun class.
   - Shared EnemyBodyClearanceRuntime applies across live CharacterBody2D enemies and only corrects physical penetration; numerical combat tuning remains unchanged.
