@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="4_damage"]
 [ext_resource type="Script" path="res://Core/Encounters/EncounterSpawner.gd" id="5_spawner"]
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_bounds"]
-[ext_resource type="PackedScene" uid="uid://d0d3e5rkh4fyp" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn" id="7_shogun"]
+[ext_resource type="PackedScene" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogunRuntime.tscn" id="7_shogun"]
 
 [node name="EclipseShogunChamber" type="Node2D"]
 script = ExtResource("1_boss")
