@@ -1,13 +1,15 @@
 extends Node
 
 ## Regression coverage for the September 3 direct boss/miniboss playtest on b920e137:
-## - Eclipse Shogun death rewards must not dereference a stale cached Loot node;
+## - Eclipse Shogun must recover when the Loot node cached by HumanoidEnemyBase has
+##   been freed by room lifetime and a current chamber Loot node exists;
 ## - temporary Shogun projectile cleanup must not leave freed Object lambda captures;
 ## - Rootfang and Eclipse Shogun body motion must respect their authored too-close
 ##   boundary even while high-speed attacks are active.
 
 const SHOGUN_SCENE: PackedScene = preload("res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn")
 const ROOTFANG_SCENE: PackedScene = preload("res://Enemy/Area 2/Boss/rootfang.tscn")
+const EXPERIENCE_GEM_SCENE: PackedScene = preload("res://Objects/experience_gem.tscn")
 
 var _failures: Array[String] = []
 var _room: Node2D
@@ -51,33 +53,33 @@ func _build_test_room() -> void:
 
 
 func _verify_shogun_stale_reward_parent() -> void:
+	# Instantiate while the first Loot node is live so HumanoidEnemyBase caches it,
+	# then free that chamber-owned node and create the replacement that should own the
+	# actual death reward. This mirrors the room-transition lifetime bug from the log.
 	var shogun: Node = SHOGUN_SCENE.instantiate()
 	shogun.process_mode = Node.PROCESS_MODE_DISABLED
 	_room.add_child(shogun)
 	await get_tree().process_frame
 
-	var stale_loot := Node2D.new()
-	stale_loot.name = "StaleLoot"
-	_room.add_child(stale_loot)
-	shogun.set("loot_base", stale_loot)
-	stale_loot.free()
+	var cached_loot: Node2D = _loot
+	cached_loot.free()
+	_loot = Node2D.new()
+	_loot.name = "Loot"
+	_loot.add_to_group("loot")
+	_room.add_child(_loot)
+	await get_tree().process_frame
 
-	var gem_root := Node2D.new()
-	gem_root.name = "RegressionExperienceGem"
-	var gem_scene := PackedScene.new()
-	var pack_err := gem_scene.pack(gem_root)
-	gem_root.free()
-	_expect(pack_err == OK, "Could not pack regression experience gem")
-	shogun.set("exp_gem", gem_scene)
+	shogun.set("exp_gem", EXPERIENCE_GEM_SCENE)
 	shogun.set("death_anim", null)
 
 	var resolved: Variant = shogun.call("_resolve_live_reward_parent")
-	_expect(resolved == _loot, "Eclipse Shogun did not prefer the live chamber Loot node over stale cached ownership")
+	_expect(resolved == _loot, "Eclipse Shogun did not prefer the current chamber Loot node after its cached Loot was freed")
 
 	shogun.call("_run_humanoid_death_rewards")
 	await get_tree().process_frame
 	await get_tree().process_frame
-	_expect(_loot.get_child_count() > 0, "Eclipse Shogun reward path did not recover the experience gem into live Loot")
+	_expect(_loot.get_child_count() > 0, "Eclipse Shogun reward path did not recover the experience gem into current Loot")
+	_expect(shogun.get("loot_base") == _loot, "Eclipse Shogun did not refresh inherited loot_base to current Loot before teardown")
 
 	shogun.queue_free()
 	for child: Node in _loot.get_children():
@@ -91,15 +93,14 @@ func _verify_shogun_temporary_hazard_lifetime() -> void:
 	_room.add_child(shogun)
 	await get_tree().process_frame
 
-	# This reproduces the old phase-transition case: a Blade Dance projectile is
-	# removed before its outbound/return tween reaches the cleanup callback.
+	# Reproduce the old phase-transition case: a Blade Dance projectile disappears
+	# before its outbound/return tween reaches cleanup. A node-owned Tween/Callable must
+	# disappear with it instead of later materializing a freed lambda capture.
 	shogun.call("_spawn_blade_dance_projectile", Vector2.RIGHT)
 	shogun.call("_cleanup_all_hazards")
 	await get_tree().process_frame
 	await get_tree().create_timer(1.6).timeout
 
-	# CI additionally rejects the engine's "Lambda capture" text. Reaching this point
-	# also proves early projectile cleanup did not abort the smoke scene.
 	_expect(is_instance_valid(shogun), "Eclipse Shogun was invalidated by early temporary-hazard cleanup")
 	shogun.queue_free()
 	await get_tree().process_frame
