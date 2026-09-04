@@ -31,43 +31,41 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-03T21:52:00Z
+updated_utc: 2026-09-04T01:26:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 134
-  feature_head: 6153221ac0f6f79ce287e1212e04db442866a70c
-  merge_commit: 8bb3e417adf98599cc78b7e9bd2ca200437130cb
-  validation: 9/9 PR-triggered workflows green; mergeable true
+  pr: 136
+  feature_head: 6b8af83a7d314cfe9d701092c5a4e51e5edda29c
+  merge_commit: 6ae1de7bbbc84dc21e9ac87e7893517e161077ee
+  validation: 13/13 PR-triggered workflows green; exact EnemyLifetimeHardeningSmoke green; mergeable true before merge
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: 8bb3e417adf98599cc78b7e9bd2ca200437130cb
+known_good_checkpoint: 6ae1de7bbbc84dc21e9ac87e7893517e161077ee
 current_objective: >-
-  Continue player-facing Yomori/Region 2 integration from the September 3 blocker-repair main, then proceed to Kagutsuchi/Region 3.
-  The first direct-warp Yomori playtest on checkpoint a5cd8119e584b22ee1b1c5782a903ff39b0fc431 proved later-region entry works and exposed three concrete runtime blockers:
-  Mist Shepherd could not receive player damage, Merchant could auto-exit during room load, and Lantern Wraith temporary attack timers emitted freed-lambda errors.
-  PR #134 repairs all three without numerical tuning or combat-architecture changes. Keep the temporary debug-only procedural FX active while comparing visible cues against combat events.
+  Continue player-facing Yomori/Region 2 integration from the PR #136 enemy-lifetime-hardened main, then proceed directly to Kagutsuchi/Region 3 if Yomori holds.
+  The September 3/4 Twin Maws playtest reached the real Area 2 boss and exposed a concrete death crash when Briarthorn died after Rootfang had already been freed.
+  PR #136 fixes that exact stale-partner type boundary, generalizes stale reward-parent handling across shared enemies/minibosses/bosses, and adds shared physical body clearance without numerical combat tuning.
+  Region 2 is still the active manual integration boundary until the repaired Twin Maws fight is replayed successfully.
 next_action: >-
-  Run updated main and use Playtest Lab Chambers -> Area 2 - Yomori -> Combat. Confirm the Mist Shepherd in Pale Procession can take Health damage and die,
-  and confirm Lantern Wraith encounters no longer emit "Lambda capture at index 0 was freed". Also directly warp to Area 2 -> Merchant and confirm the Shop remains active long enough to inspect/interact with its three offers instead of auto-transitioning.
-  Then continue through the Yomori route and the real Twin Maws fight, exercising Techniques, Aspects, Prosthetics, blocking/parry, posture breaks, Deathblows, rewards, gates, and procedural FX.
-  Preserve CombatTelemetry and the Godot log and stop at the first genuine blocker. If Region 2 completes cleanly, continue directly into Area 3/Kagutsuchi and Eclipse Shogun in the same integration pass.
+  Run updated main and use Playtest Lab Chambers to reach Area 2/Yomori Boss -> Twin Maws as directly as practical. Kill Rootfang first and Briarthorn second to reproduce the previously crashing order; if practical, also validate the reverse order.
+  Confirm the fight completes with no `Invalid type in function '_is_alive'`, no previously-freed Object error, no stale reward-parent error, and no enemy body pinning/pass-through. Confirm boss defeat ownership, reward/gate progression, Techniques, Aspects, Prosthetics, blocking/parry, posture breaks, Deathblows, and procedural FX remain intact.
+  Preserve CombatTelemetry and the Godot log. If Twin Maws completes cleanly, continue directly into Area 3/Kagutsuchi and Eclipse Shogun in the same integration pass; stop at the first genuine blocker.
 current_batch:
-  - PR #134 merged from exact feature head 6153221ac0f6f79ce287e1212e04db442866a70c at merge commit 8bb3e417adf98599cc78b7e9bd2ca200437130cb.
-  - PR #134 passed all 9 PR-triggered workflows: Yomori Region Check, Cross-Region Enemy Contract Check, Godot 4.7.2 Project Check, Hushiro Combat Semantics, RunScene Runtime Lifetime, Run Region Handoff, Kagutsuchi Region Check, Post-playtest Stability, and Authored Presentation Content.
-  - The supplied September 3 Yomori playtest ran exact main checkpoint a5cd8119e584b22ee1b1c5782a903ff39b0fc431 and successfully used the new direct Area 2 combat warp with player invulnerability enabled.
-  - Runtime evidence proved the reported Shop routing itself was correct: GameFlow resolved `merchant`, loaded MerchantChamber.tscn, and OathboundMerchant rolled current offers. Telemetry then showed the merchant room survive only about 31 ms before an unlocked exit fired and loaded combat, with no purchase interaction.
-  - The merchant failure was a room-entry timing race: GameFlow temporarily re-parents the persistent Player at previous-room coordinates for a frame before moving it to PlayerSpawn; immediately unlocked Merchant exits could observe that stale overlap. RouteGate now supports an opt-in entry grace and both Merchant exits use 0.25 s, leaving other gate behavior unchanged.
-  - The final captured Yomori encounter was Y05_pale_procession with Mist Shepherd plus two Lingering Wraiths. Telemetry showed the Wraiths take sword damage and die while Mist Shepherd remained at 20/20 Health with no resolved player contact.
-  - Mist Shepherd's scene root lacked the authored `enemy` group when its child HurtBox ran `_ready()`. The generic HurtBox therefore fell back to default HurtBoxType=Player and rejected player-owned attacks as friendly fire. The scene now authors the root into `enemy` before ready and explicitly sets HurtBoxType=Enemy.
-  - Repeated `Lambda capture at index 0 was freed. Passed null instead.` errors were traced to Lantern Wraith SceneTreeTimer lambdas retaining temporary wave/pulse Area2D captures after contact or room cleanup freed those objects.
-  - The live lantern_wraith.tscn still resolves through the archer_v2.gd compatibility shim. PR #134 overrides only temporary wave/pulse lifetime wiring there, replacing Object-capturing SceneTreeTimer lambdas with child-owned Timers and integer instance handles.
-  - YomoriPlaytestRegressionSmoke reproduces all three observed blockers: Mist Shepherd targetability, Merchant stale-position gate entry, and early-freed Lantern wave/pulse callback lifetimes. The focused Yomori CI passed the regression and rejects any `Lambda capture` output.
-  - No combat numbers, economy prices, route weights, encounter composition, Aspect/Technique/Prosthetic/Relic architecture, or Heart behavior changed in PR #134.
-  - PR #133 remains intact: Keeper stale reward-parent death crash is repaired and primary Playtest Lab Chambers exposes direct Area 1/2/3 warps.
-  - PR #132 remains intact and proves the real authored Twin Maws chamber initializes under Area 2 with TwinMawsManager, Rootfang, Briarthorn, BossChamber defeat authority, and defeat-signal ownership intact.
+  - PR #136 merged from exact feature head 6b8af83a7d314cfe9d701092c5a4e51e5edda29c at merge commit 6ae1de7bbbc84dc21e9ac87e7893517e161077ee.
+  - PR #136 passed all 13 final PR-triggered workflows, including Godot 4.7.2 Project Check, Yomori Region Check, Cross-Region Enemy Contract Check, RunScene Runtime Lifetime Check, Slot Runtime Lifetime Check, Post-playtest Stability Check, Hushiro combat/boss regressions, region handoff, release shell, presentation, and Blood Cavern checks.
+  - The exact Twin Maws crash was a typed stale-reference boundary: after Rootfang was freed, DuoBossManager retained its cached Object and later passed it through `_is_alive(who: Node)` while processing Briarthorn death. GDScript rejected the freed Object before the old validity guard could execute.
+  - DuoBossManager twin and special-mode ownership caches now cross Variant-safe boundaries, validate `is_instance_valid()` before Node calls/signals, clear dead twin caches, and discard freed deferred special owners.
+  - EnemyLifetimeHardeningSmoke reproduces the real acquisition order by caching Rootfang while it is valid, freeing it, then ending deferred special ownership and notifying Briarthorn death. The smoke also validates stale reward-owner replacement and shared body depenetration; it is now part of Post-playtest Stability CI.
+  - Shared EnemyBase reward spawning now accepts stale cached ownership safely and resolves a live current Loot parent at use time. This generalizes the earlier Keeper/Eclipse Shogun stale reward-parent class instead of adding boss-specific wrappers.
+  - Shared EnemyBase object/free helpers reject freed references safely, and `_do_after` now uses enemy-owned Timer lifetime rather than an orphanable SceneTreeTimer callback.
+  - EnemyBodyClearanceRuntime is an autoload applying only to live CharacterBody2D enemies. It derives physical clearance from collision shapes, removes enemy velocity driving farther into the player, and performs bounded outward depenetration while skipping dead/deathblow-ready enemies.
+  - Playtest telemetry sampled Rootfang/Briarthorn at roughly 12-15 px center distance during the reported fight, supporting a physical penetration fix; PR #136 does not change attack damage, range, timing, selection, economy, Aspect/Technique/Prosthetic/Relic architecture, or Heart behavior.
+  - Unwired bespoke Rootfang/temporary-area callback guard experiments were removed before merge rather than shipping speculative code without runtime evidence.
+  - CI proves the code regression and shared lifetime contracts, but does not replace the required manual Twin Maws combat replay.
 recent_batches:
+  - pr_136: fixed the exact Twin Maws freed-partner death crash; generalized enemy reward/object lifetime safety; added shared body-clearance runtime and exact regression smoke; 13/13 final workflows green.
   - pr_134: repaired Mist Shepherd targetability, Merchant room-entry auto-exit, and Lantern Wraith freed temporary callback captures from the first direct-warp Yomori playtest; added exact CI regression coverage.
   - pr_133: fixed Keeper stale reward-parent death crash, added exact regression coverage, and exposed obvious direct Area 1/2/3 chamber warps.
   - pr_132: added live Area-2 Twin Maws initialization/ownership regression using the real authored chamber; no gameplay changes.
@@ -81,8 +79,11 @@ recent_batches:
   - pr_130: preemptively reconciled stale Region 2/3 hit/parry posture contracts through the shared canonical AttackEvent bridge.
   - pr_131: added temporary debug-only code-generated playtest FX for Techniques, Aspects, Prosthetics, statuses, and Deathblow readability.
 confirmed:
-  - PR #119 through #134 merged; never continue old feature branches.
+  - PR #119 through #136 merged; never continue old feature branches.
   - Direct Playtest Lab Area 2/3 warps are intentionally exposed; killing Keeper is not required for targeted later-region testing.
+  - PR #136 CI reproduces the exact freed Twin Maws partner sequence and passes it without the `_is_alive(Node)` type crash; manual combat replay remains required before calling Region 2 player-facing integration proven.
+  - Shared reward parent resolution now covers stale cached Loot ownership for common EnemyBase/HumanoidEnemyBase death rewards, including the previously observed Keeper/Eclipse Shogun class.
+  - Shared EnemyBodyClearanceRuntime applies across live CharacterBody2D enemies and only corrects physical penetration; numerical combat tuning remains unchanged.
   - The reported Yomori Shop incident was not a merchant-to-combat routing alias: the real Merchant chamber loaded and rolled offers, then its open exit was consumed during the Player room-entry position race.
   - Mist Shepherd is the Area 2 support buffer/encounter-escalation caster represented by the live `spirit monk` node; its player-damage immunity was a HurtBox faction-initialization bug, not an intended targetability state.
   - PR #134 CI proves the repaired Mist Shepherd accepts a player-owned sword contact, Merchant ignores the initial stale-position gate contact, and early-freed Lantern temporary attacks produce no freed-lambda error in the regression.
