@@ -43,6 +43,11 @@ func _check_freed_twin_boundaries(failures: Array[String]) -> void:
 	manager._twin_b = briarthorn
 	manager._twins_dead = 1
 
+	# Seed both cached-reference classes while Rootfang is still a valid Node, then
+	# free it. This reproduces how the real manager acquired valid Node references in
+	# _ready() and only encountered a previously-freed Object on a later frame.
+	manager._active_special_twin = briarthorn
+	manager._pending_special_twin = rootfang
 	var stale_rootfang: Variant = rootfang
 	rootfang.free()
 	if is_instance_valid(stale_rootfang):
@@ -50,6 +55,14 @@ func _check_freed_twin_boundaries(failures: Array[String]) -> void:
 		briarthorn.free()
 		manager.free()
 		return
+
+	# Deferred special-mode ownership must discard the now-freed pending twin without
+	# crossing a Node-typed helper boundary.
+	manager.notify_special_mode_ended(briarthorn)
+	if manager._pending_special_twin != null:
+		failures.append("Twin Maws manager retained a freed deferred special-mode owner")
+	if manager._active_special_twin != null:
+		failures.append("Twin Maws manager retained an ended active special-mode owner")
 
 	# This is the exact September 4 crash shape: Briarthorn dies after Rootfang has
 	# already been freed, so get_partner() returns a previously-freed Object. The
@@ -61,16 +74,6 @@ func _check_freed_twin_boundaries(failures: Array[String]) -> void:
 	if manager._twin_b != null:
 		failures.append("Twin Maws manager retained the live twin after its death notification")
 
-	# Exercise the other manager cache that may span frames: a deferred special-mode
-	# owner that has already been freed must also be discarded without a typed call.
-	var live_twin := DummyTwin.new()
-	manager._active_special_twin = live_twin
-	manager._pending_special_twin = stale_rootfang
-	manager.notify_special_mode_ended(live_twin)
-	if manager._pending_special_twin != null:
-		failures.append("Twin Maws manager retained a freed deferred special-mode owner")
-
-	live_twin.free()
 	briarthorn.free()
 	manager.free()
 
