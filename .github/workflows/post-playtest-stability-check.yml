@@ -69,7 +69,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/EnemyLifetimeHardeningSmoke.tscn 2>&1 | tee enemy-lifetime-hardening.log
-          grep -F "[EnemyLifetimeHardeningSmoke] PASS - freed Twin Maws partner | stale reward owner | shared body clearance" enemy-lifetime-hardening.log
+          grep -F "[EnemyLifetimeHardeningSmoke] PASS - freed Twin Maws partner | stale reward owner | shared body authority" enemy-lifetime-hardening.log
           if grep -F "SCRIPT ERROR:" enemy-lifetime-hardening.log; then
             echo "FAIL: enemy lifetime hardening smoke emitted a GDScript runtime error."
             exit 1

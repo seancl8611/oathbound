@@ -13,6 +13,7 @@ signal defeated
 
 @onready var swordsman: Node = get_node_or_null("Swordsman")
 var _resolved := false
+var _duel_activated := false
 
 
 func _ready() -> void:
@@ -52,7 +53,38 @@ func _ready() -> void:
 	else:
 		push_error("[EternalSwordsman] Duel runtime exposes no supported defeat signal")
 
-	print("[EternalSwordsman] focused Court duel active | revival disabled")
+	# MinibossChamber adds the wrapper before assigning its final spawn position. The
+	# embedded Court Guard therefore completes _ready() at the pre-spawn transform.
+	# Activate one deferred boundary later so patrol/home state is re-based after the
+	# chamber has moved the wrapper, and explicitly engage this authored solo duel.
+	call_deferred("_activate_duel_runtime")
+
+
+func _activate_duel_runtime() -> void:
+	if _duel_activated or _resolved:
+		return
+	if swordsman == null or not is_instance_valid(swordsman) or not swordsman.is_inside_tree():
+		return
+
+	_duel_activated = true
+	if swordsman is Node2D:
+		var live_position: Vector2 = (swordsman as Node2D).global_position
+		if "_home_pos" in swordsman:
+			swordsman.set("_home_pos", live_position)
+		if "_patrol_target" in swordsman:
+			swordsman.set("_patrol_target", live_position)
+		if "_patrol_last_pos" in swordsman:
+			swordsman.set("_patrol_last_pos", live_position)
+
+	if swordsman.has_method("engage"):
+		swordsman.call("engage")
+	else:
+		if "_saw_player_once" in swordsman:
+			swordsman.set("_saw_player_once", true)
+		if "auto_aggro_on_spawn" in swordsman:
+			swordsman.set("auto_aggro_on_spawn", true)
+
+	print("[EternalSwordsman] focused Court duel active | revival disabled | engagement armed")
 
 
 func _on_swordsman_died(_enemy: Node) -> void:

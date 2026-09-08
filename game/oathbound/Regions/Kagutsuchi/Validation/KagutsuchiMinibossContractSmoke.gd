@@ -14,7 +14,7 @@ func _ready() -> void:
 	_validate_blood_lotus()
 	_validate_eternal_swordsman()
 	if _failures.is_empty():
-		print("[KagutsuchiMinibossContractSmoke] PASS - Blood Lotus objective + Eternal Swordsman duel pool valid")
+		print("[KagutsuchiMinibossContractSmoke] PASS - Blood Lotus objective + Eternal Swordsman placed/engaged duel valid")
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -83,6 +83,21 @@ func _validate_eternal_swordsman() -> void:
 	if sword_runtime != null:
 		_expect(sword_runtime is CourtGuard, "Eternal Swordsman must reuse canonical Court Guard runtime")
 		_expect(String(sword_runtime.scene_file_path) == COURT_GUARD_PATH, "Eternal Swordsman Court Guard child must originate from canonical Kagutsuchi scene")
+
+	# Reproduce MinibossChamber sequencing: adding the wrapper runs child _ready() at
+	# the pre-spawn transform, then the chamber assigns the final global position.
+	add_child(duel)
+	var placed_position := Vector2(173.0, 91.0)
+	if duel is Node2D:
+		(duel as Node2D).global_position = placed_position
+	duel.call("_activate_duel_runtime")
+
+	_expect(bool(duel.get("_duel_activated")), "Eternal Swordsman deferred duel activation did not arm")
+	if sword_runtime != null:
+		_expect(bool(sword_runtime.get("_saw_player_once")), "Eternal Swordsman Court runtime was not explicitly engaged")
+		_expect(bool(sword_runtime.get("auto_aggro_on_spawn")), "Eternal Swordsman Court runtime did not remain engaged after placement")
+		var home_value: Variant = sword_runtime.get("_home_pos")
+		_expect(home_value is Vector2 and (home_value as Vector2).distance_to((sword_runtime as Node2D).global_position) <= 0.01, "Eternal Swordsman Court runtime kept its pre-spawn home position")
 	duel.free()
 
 
