@@ -3,29 +3,30 @@ extends Node
 ## Shared physical-overlap guard for player-facing enemy bodies.
 ##
 ## September 3-4 telemetry repeatedly sampled moving bosses deep inside the player's
-## physical body. The September 4 full-run telemetry also captured a stronger solver
-## failure: Rotwood Host reported zero authored velocity for several seconds while its
-## world position was carried almost exactly with the moving Player at ~23-26 px. That
-## means Godot's CharacterBody contact recovery itself can keep two top-down bodies
-## glued together even after the enemy stops driving inward.
+## physical body. A later September 8 replay proved that always correcting penetration
+## by relocating the enemy fixed sticking but let Akio bulldoze stationary enemies and
+## bosses: zero-authored-velocity enemies moved almost one-for-one with the Player.
 ##
 ## This guard is deliberately geometric rather than balance-driven:
 ## - clearance is derived from the live root CollisionShape2D extents plus a small
 ##   top-down body buffer supported by the observed sticky-contact distance;
 ## - enemy CharacterBody2D motion mode is normalized to FLOATING for top-down combat;
 ## - attack damage/range/timing/selection are untouched;
-## - inward enemy velocity is removed when present;
-## - existing penetration is corrected even when authored enemy velocity is zero;
+## - inward velocity is removed from whichever body is driving into the contact;
+## - normal depenetration moves the body responsible for the stronger inward drive;
+## - a stationary/pre-existing overlap anchors the enemy and moves Akio out instead of
+##   translating the enemy, preventing player-driven boss dragging;
 ## - deathblow-ready/dead enemies are skipped so finishers are not repositioned.
 
 const MAX_POSITION_CORRECTION_PER_TICK: float = 10.0
 const PENETRATION_EPSILON: float = 0.5
 const BODY_CLEARANCE_BUFFER: float = 8.0
+const INWARD_SPEED_EPSILON: float = 0.01
 
 
 func _ready() -> void:
-	# Run after ordinary enemy physics so this observes the position produced by the
-	# enemy's authored movement and Godot contact recovery for the current physics tick.
+	# Run after ordinary enemy/player physics so this observes the positions produced by
+	# authored movement and Godot contact recovery for the current physics tick.
 	process_priority = 1000
 
 
@@ -63,34 +64,58 @@ func _physics_process(_delta: float) -> void:
 		if enemy_extent <= 0.0:
 			continue
 
-		var to_player := player_body.global_position - enemy.global_position
-		var dist := to_player.length()
-		var clearance := player_extent + enemy_extent + BODY_CLEARANCE_BUFFER
-		if dist >= clearance - PENETRATION_EPSILON:
-			continue
+		_resolve_pair_clearance(player_body, player_extent, enemy, enemy_extent)
 
-		var toward_player := Vector2.ZERO
-		if dist > 0.001:
-			toward_player = to_player / dist
-		elif enemy.velocity.length_squared() > 0.001:
-			toward_player = enemy.velocity.normalized()
-		else:
-			# Perfectly coincident stationary bodies have no stable geometric direction.
-			# Use a deterministic axis rather than leaving them permanently interpenetrating.
-			toward_player = Vector2.RIGHT
 
-		# If authored movement is still driving into Akio, remove only that inward
-		# component. Retreating/tangential authored movement is preserved.
-		var inward_speed := enemy.velocity.dot(toward_player)
-		if inward_speed > 0.01:
-			enemy.velocity -= toward_player * inward_speed
+func _resolve_pair_clearance(
+	player_body: CharacterBody2D,
+	player_extent: float,
+	enemy: CharacterBody2D,
+	enemy_extent: float
+) -> void:
+	var to_player: Vector2 = player_body.global_position - enemy.global_position
+	var dist: float = to_player.length()
+	var clearance: float = player_extent + enemy_extent + BODY_CLEARANCE_BUFFER
+	if dist >= clearance - PENETRATION_EPSILON:
+		return
 
-		# Crucially, do not require positive authored velocity before depenetrating.
-		# Godot can carry a zero-velocity CharacterBody along another moving body during
-		# collision recovery; the Rotwood full-run capture reproduced exactly that case.
-		var penetration := clearance - dist
-		var correction := minf(penetration, MAX_POSITION_CORRECTION_PER_TICK)
+	var toward_player := Vector2.ZERO
+	if dist > 0.001:
+		toward_player = to_player / dist
+	elif player_body.velocity.length_squared() > 0.001:
+		# If Akio drove into exact coincidence, away-from-enemy is opposite his inward
+		# travel. This preserves stable player authority even at a zero-distance sample.
+		toward_player = -player_body.velocity.normalized()
+	elif enemy.velocity.length_squared() > 0.001:
+		toward_player = enemy.velocity.normalized()
+	else:
+		# Perfectly coincident stationary bodies have no geometric direction. Keep the
+		# enemy authoritative and eject Akio along a deterministic axis.
+		toward_player = Vector2.RIGHT
+
+	# `toward_player` points enemy -> player. Enemy inward movement therefore projects
+	# positively onto it, while player inward movement projects positively onto its
+	# inverse. Capture both before mutating either velocity so correction authority is
+	# based on authored motion for this tick.
+	var enemy_inward_speed: float = maxf(0.0, enemy.velocity.dot(toward_player))
+	var player_inward_speed: float = maxf(0.0, player_body.velocity.dot(-toward_player))
+
+	if enemy_inward_speed > INWARD_SPEED_EPSILON:
+		enemy.velocity -= toward_player * enemy_inward_speed
+	if player_inward_speed > INWARD_SPEED_EPSILON:
+		player_body.velocity += toward_player * player_inward_speed
+
+	var penetration: float = clearance - dist
+	var correction: float = minf(penetration, MAX_POSITION_CORRECTION_PER_TICK)
+
+	# Attribute overlap recovery to the stronger inward drive. This keeps enemy-authored
+	# lunges from carrying Akio while preventing player-authored movement from translating
+	# a stationary boss. Ties and zero-velocity/pre-existing overlaps favor the enemy as
+	# the obstacle and move the player out.
+	if enemy_inward_speed > player_inward_speed + INWARD_SPEED_EPSILON:
 		enemy.global_position -= toward_player * correction
+	else:
+		player_body.global_position += toward_player * correction
 
 
 func _should_skip_enemy(enemy: CharacterBody2D) -> bool:
