@@ -3,7 +3,7 @@ extends Node
 const DuoBossManagerScript = preload("res://Utility/duo_boss_manager.gd")
 const EnemyBaseScript = preload("res://Enemy/Base/EnemyBase.gd")
 
-const PASS_LINE := "[EnemyLifetimeHardeningSmoke] PASS - freed Twin Maws partner | stale reward owner | shared body clearance"
+const PASS_LINE := "[EnemyLifetimeHardeningSmoke] PASS - freed Twin Maws partner | stale reward owner | shared body authority"
 
 
 class DummyTwin:
@@ -143,32 +143,52 @@ func _check_shared_body_clearance(failures: Array[String]) -> void:
 		enemy.free()
 		return
 
-	# Existing inward-drive case: remove authored velocity into Akio and separate.
-	var before := enemy.global_position.distance_to(player.global_position)
+	# Enemy-authored inward drive: stop the inward component and push the enemy back
+	# out of Akio rather than carrying Akio with the lunge.
+	var player_anchor := player.global_position
+	var enemy_before := enemy.global_position
 	runtime.call("_physics_process", 1.0 / 60.0)
-	var after := enemy.global_position.distance_to(player.global_position)
-	if after <= before:
-		failures.append("shared enemy body clearance did not depenetrate inward enemy movement")
-
+	if enemy.global_position.distance_to(player.global_position) <= enemy_before.distance_to(player_anchor):
+		failures.append("shared body authority did not depenetrate inward enemy movement")
+	if player.global_position.distance_to(player_anchor) > 0.001:
+		failures.append("enemy-authored inward movement displaced the stationary player")
 	var toward_player := (player.global_position - enemy.global_position).normalized()
 	if enemy.velocity.dot(toward_player) > 0.01:
-		failures.append("shared enemy body clearance left inward body velocity active")
+		failures.append("shared body authority left inward enemy velocity active")
 	if enemy.motion_mode != CharacterBody2D.MOTION_MODE_FLOATING:
-		failures.append("shared enemy body clearance did not normalize top-down motion mode")
+		failures.append("shared body authority did not normalize top-down motion mode")
 
-	# September 4 full-run case: Rotwood reported zero authored velocity while Godot's
-	# contact recovery carried its world position with the moving Player. A stationary
-	# overlapping enemy must still be separated; positive inward velocity is not a
-	# prerequisite for correcting the physical overlap.
+	# September 8 telemetry case: a stationary boss was translated almost one-for-one
+	# while Akio drove into it. Stationary enemies must now be authoritative obstacles:
+	# the enemy stays planted, Akio is ejected, and Akio's inward velocity is stripped.
+	player.global_position = Vector2.ZERO
+	player.velocity = Vector2(120.0, 0.0)
 	enemy.global_position = Vector2(12.0, 0.0)
 	enemy.velocity = Vector2.ZERO
-	var stationary_before := enemy.global_position.distance_to(player.global_position)
+	var planted_enemy_position := enemy.global_position
 	runtime.call("_physics_process", 1.0 / 60.0)
-	var stationary_after := enemy.global_position.distance_to(player.global_position)
-	if stationary_after <= stationary_before:
-		failures.append("shared enemy body clearance did not release a stationary sticky overlap")
+	if enemy.global_position.distance_to(planted_enemy_position) > 0.001:
+		failures.append("player-authored overlap translated a stationary enemy")
+	if player.global_position.x >= -0.001:
+		failures.append("player-authored overlap did not eject Akio away from the planted enemy")
+	var toward_enemy := (enemy.global_position - player.global_position).normalized()
+	if player.velocity.dot(toward_enemy) > 0.01:
+		failures.append("shared body authority left inward player velocity active")
 	if enemy.velocity.length_squared() > 0.001:
-		failures.append("stationary body clearance invented authored enemy velocity")
+		failures.append("player-authored body clearance invented enemy velocity")
+
+	# Pre-existing zero-velocity overlap follows the same authority rule. This retains
+	# the anti-sticking guarantee without making a stationary enemy draggable.
+	player.global_position = Vector2.ZERO
+	player.velocity = Vector2.ZERO
+	enemy.global_position = Vector2(12.0, 0.0)
+	enemy.velocity = Vector2.ZERO
+	planted_enemy_position = enemy.global_position
+	runtime.call("_physics_process", 1.0 / 60.0)
+	if enemy.global_position.distance_to(planted_enemy_position) > 0.001:
+		failures.append("stationary overlap moved the enemy instead of treating it as the obstacle")
+	if player.global_position.length_squared() <= 0.001:
+		failures.append("stationary overlap was not separated")
 
 	player.free()
 	enemy.free()
