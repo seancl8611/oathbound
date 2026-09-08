@@ -25,31 +25,31 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-04T23:12:00Z
+updated_utc: 2026-09-08T22:45:47Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 140
-  feature_head: 69137f82b120540a61b443712dbffd520aa18905
-  merge_commit: d62fd5bdbd7ba809a3c53ed1750a1ec3ab245556
-  validation: 10/10 PR-triggered workflows green on exact feature head, including Post-playtest Stability, Yomori, Kagutsuchi, Cross-Region Enemy Contract, Region Transition Presentation, RunScene Lifetime, Hushiro Combat Semantics, Authored Presentation, Run Region Handoff, and Godot 4.7.2 Project Check
+  pr: 141
+  feature_head: 02c6e2d411e28ddbd04d50e845a6838d1af50db2
+  merge_commit: 5700cff639e4ae488747ebc20c0d124f6aa92f8d
+  validation: 9/9 PR-triggered workflows green on exact feature head, including Post-playtest Stability, Kagutsuchi, Cross-Region Enemy Contract, Region Transition Presentation, RunScene Lifetime, Hushiro Combat Semantics, Authored Presentation, Run Region Handoff, and Godot 4.7.2 Project Check; the project check also covers Yomori seeded route/roster validation
 active_branch: null
 active_pr: null
 covered_through_substantive_commit: null
-known_good_checkpoint: d62fd5bdbd7ba809a3c53ed1750a1ec3ab245556
+known_good_checkpoint: 5700cff639e4ae488747ebc20c0d124f6aa92f8d
 current_objective: >-
-  Player-facing integration validation of the combined PR #139 full-run combat-stability repairs and PR #140 enemy temporary-object lifetime hardening on updated main. PR #139 addresses the three concrete defects recovered from the September 4 full route: physics-unsafe final gate emission, solver-driven enemy/boss body sticking, and Lingering Wraith ordinary attacks beginning from charge-only range. PR #140 then removes the remaining orphanable delayed temporary-object callbacks from live Rootfang, Briarthorn, Rotwood Host, Embered Pilgrim, Stalker Hound, and Eclipse Shogun runtime paths without changing authored combat balance.
+  Player-facing integration validation of PR #141's two September 8 telemetry-backed combat repairs on updated main: stationary enemies/bosses must remain planted when Akio drives into them instead of being translated almost one-for-one by the shared body-clearance runtime, while enemy-authored inward movement must still depenetrate without recreating the earlier sticky/carry state; Eternal Swordsman must activate after chamber placement, re-baseline its inherited Court Guard home state, explicitly engage the solo duel, and proceed into normal attack-token/telegraph/swing behavior. Preserve all PR #139/#140 lifetime, gate, range, and temporary-object stability guarantees.
 next_action: >-
-  Run one fresh full-route integration replay on updated main. Use Playtest Lab Recommended 5x Health + 5x Posture + Invulnerable; use Fast Clear 10x only when needed to accelerate teardown/transition coverage. Exercise Area 2 ordinary enemies and Lingering Wraith at medium/long range; sustain close contact against enemies/bosses that previously stuck to Akio; deliberately allow Rootfang/Briarthorn/Rotwood Host/Embered Pilgrim/Stalker Hound temporary attacks to spawn and expire; complete Eclipse Shogun while allowing Blood Halo, Blade Dance, and Black Wing temporary hazards to execute; then complete Heart Binding -> Strand. Confirm no freed-lambda/deferred-call errors, no ordinary Wraith attacks from charge-only distance, overlapping bodies release instead of being carried with the Player, and the successful-run return emits no CollisionObject-removal physics error. Preserve CombatTelemetry and the Godot log. Do not add a separate Area-2 visibility/disappearing fix unless the replay supplies concrete visibility/teleport state evidence.
+  Run one fresh targeted integration replay on updated main. Use Playtest Lab Recommended 5x Health + 5x Posture + Invulnerable; use Fast Clear 10x only to accelerate teardown/transition coverage. First sustain movement directly into a stationary ordinary enemy, Eternal Swordsman, Twin Maws member, and Eclipse Shogun from multiple directions: Akio should stop/slide or be separated, the stationary enemy/boss should not be bulldozed or dragged, and bodies must still release cleanly when either side disengages. Fight Eternal Swordsman long enough to observe multiple normal telegraphs/attacks and confirm it is no longer inert. Then do quick Twin Maws and Eclipse Shogun sanity coverage, allowing representative temporary attacks to spawn/expire, and complete Heart Binding -> Strand if practical. Confirm no freed-lambda/deferred-call/CollisionObject errors. Preserve and return the Godot log plus CombatTelemetry JSONL. Do not reopen numerical balance or add an Area-2 visibility fix without new evidence.
 current_batch:
-  - PR #140 merged from exact head 69137f82b120540a61b443712dbffd520aa18905 at merge commit d62fd5bdbd7ba809a3c53ed1750a1ec3ab245556.
-  - All 10 final PR-triggered workflows are green on exact PR #140 feature head. Kagutsuchi specifically passes clean import/editor compile, canonical scene ownership, standard-enemy contracts, seeded route/roster, miniboss, full generated-route traversal, and Binding/seventh-run/postgame contract. Godot 4.7.2 Project Check passes RunScene ownership, Hushiro/Yomori route coverage, Shrine/Merchant/Forge smokes, and Strand permanent progression.
-  - PR #140 hardens Rootfang empowered-beam overlap probe; Briarthorn AOE/beam overlap and cleanup timers; Rotwood Host spirit-trail fade/cleanup; Embered Pilgrim afterimages, ember patches, and homing-orb lifetimes; Stalker Hound mist-pounce delayed hitbox shutdown; and Eclipse Shogun Blood Halo, Blade Dance, and Black Wing temporary hazard cleanup. Temporary nodes own their timers/tweens or cross delayed boundaries via stable instance IDs instead of orphanable object-capturing lambdas.
-  - During final CI repair, EclipseShogunRuntime.gd required explicit Godot 4.7 typing for end_pos, out_time, my_seq, dist, and travel_time. The fix is type-only and does not alter values or authored timing.
-  - Kagutsuchi's boss chamber retains canonical scene authority through res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn while overriding that canonical scene instance with EclipseShogunRuntime.gd for hardened live behavior. This satisfies the existing canonical-ownership contract instead of weakening validation.
-  - PR #139 remains the preceding live-stability layer: deferred shared RouteGate emission outside physics callbacks, solver-safe enemy body depenetration/FLOATING motion mode, and Lingering Wraith attack-specific range authority.
-  - No Health/damage/posture numbers, boss phases, attack-selection probabilities, rewards, route rules, Technique/Aspect/Prosthetic behavior, or authored Heart combat changed in PR #140.
+  - PR #141 merged from exact head 02c6e2d411e28ddbd04d50e845a6838d1af50db2 at merge commit 5700cff639e4ae488747ebc20c0d124f6aa92f8d.
+  - All 9 PR-triggered workflows are green on the exact PR #141 feature head. Post-playtest Stability passes the strengthened shared body-authority regression plus enemy temporary-lifetime and full-run stability smokes; Kagutsuchi passes the Eternal Swordsman miniboss contract and generated-route/progression checks; Godot 4.7.2 Project Check passes clean import/editor load, RunScene ownership, Hushiro/Yomori route coverage, chamber/menu smokes, and Strand progression.
+  - EnemyBodyClearanceRuntime no longer translates a stationary enemy during ordinary player-authored/pre-existing overlap. It strips inward velocity from the driving body; enemy-authored inward drive can move the enemy out, while player-authored/tied/stationary overlap anchors the enemy and separates Akio. Enemy motion mode remains normalized to FLOATING and deathblow-ready/dead exclusions remain intact. No damage, posture, range, timing, or attack-selection values changed.
+  - Eternal Swordsman activation is deferred until MinibossChamber placement is complete, then its inherited Court Guard home/patrol baseline is refreshed and the solo duel is explicitly engaged. This repairs the lifecycle/engagement path observed in two inert September 8 spawns without changing attack probabilities or aggression tuning.
+  - The only follow-up CI failure was not gameplay: EnemyLifetimeHardeningSmoke renamed its PASS suffix from `shared body clearance` to `shared body authority` while the workflow still grepped the old marker. Commit 02c6e2d411e28ddbd04d50e845a6838d1af50db2 aligned the workflow marker; the actual strengthened body-authority assertions then passed.
+  - September 8 playtest build e71ca9f460d04b215c48e600365c658d16a5b33e showed no recurrence of the freed-object/lambda/deferred/CollisionObject crash class. Its telemetry specifically showed zero-authored-velocity enemies moving with Akio during close overlap and two Eternal Swordsman spawns that never acquired attack-token/telegraph/swing state; Twin Maws and Eclipse Shogun otherwise attacked and completed normally.
 recent_batches:
+  - pr_141: fixed player-vs-enemy physical authority so stationary enemies/bosses are not dragged by Akio; repaired Eternal Swordsman post-placement activation/engagement; added exact regressions; 9/9 triggered workflows green.
   - pr_140: hardened remaining live enemy temporary-object lifetimes across Rootfang, Briarthorn, Rotwood Host, Embered Pilgrim, Stalker Hound, and Eclipse Shogun; preserved canonical Kagutsuchi boss scene ownership; 10/10 workflows green.
   - pr_139: fixed physics-safe shared gate emission, stationary solver-driven enemy body sticking, and Lingering Wraith out-of-range ordinary attack selection; added exact regressions.
   - pr_138: fixed the shared Keeper/Twin-Maws region-transition choice deadlock and added real presentation regression coverage.
@@ -60,15 +60,16 @@ recent_batches:
   - pr_132: added live Area-2 Twin Maws initialization/ownership regression using the real authored chamber.
   - pr_131: added temporary debug-only procedural FX for Techniques, Aspects, Prosthetics, statuses, and Deathblow readability.
 confirmed:
-  - PR #119 through #140 merged; never continue old feature branches.
-  - A live September 4 boss-room run before PR #139/#140 completed all three authored regions through Eclipse Shogun and the existing Heart Binding successful-run handoff back to The Strand, providing the evidence that drove the current stability repairs.
+  - PR #119 through #141 merged; never continue old feature branches.
+  - A live September 4 boss-room run before PR #139/#140 completed all three authored regions through Eclipse Shogun and the existing Heart Binding successful-run handoff back to The Strand, providing the evidence that drove the stability repair sequence.
   - PR #138's Region 1->2 and Region 2->3 transition presentation is manually proven player-facing by that full run.
-  - PR #139's three repairs and PR #140's remaining temporary-lifetime hardening are CI-proven but still need one combined player-facing replay on updated main to validate feel and the original live failure boundaries.
+  - The September 8 replay manually confirmed PR #140's lifetime/deferred-crash class remained clean, but exposed the PR #139 body-clearance authority regression and an inert Eternal Swordsman; PR #141 repairs are CI-proven and still require one player-facing replay for feel/behavior validation.
+  - Twin Maws and Eclipse Shogun produced normal attack/contact activity in the September 8 capture; do not treat either as generally inert. Lingering Wraith was not meaningfully exercised in that replay, so PR #139's range fix remains CI-proven rather than manually revalidated there.
   - No independent Area 2 invisibility/disappearing defect is currently evidenced; require concrete visibility/teleport state before changing that system.
   - Direct Playtest Lab Area 2/3 warps are intentional; killing Keeper is not required for targeted later-region testing.
   - Playtest Lab tabs are scrollable and the shell is viewport-constrained.
   - Playtest Power defaults to 1x and is debug-session only. Recommended integration preset is 5x Health + 5x Posture + Invulnerable; Fast Clear is 10x + Invulnerable for teardown/reward/transition checks only.
-  - PR #140 builds on PR #139/#136 stale partner/special-owner, live reward-parent, gate-safety, body-clearance, and attack-range guarantees; do not regress those lifetime or physics guarantees.
+  - PR #141 builds on PR #139/#140/#136 stale partner/special-owner, live reward-parent, gate-safety, body-clearance, attack-range, and temporary-lifetime guarantees; do not regress those lifetime or physics guarantees.
   - FIRST_ATTEMPT begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
   - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
   - Techniques are slotless/unlimited.
