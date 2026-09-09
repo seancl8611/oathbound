@@ -1,9 +1,214 @@
 extends "res://Enemy/Area 2/Minibosses/embered_pilgrim.gd"
 
-## Runtime lifetime hardening for Embered Pilgrim temporary combat objects.
-## Afterimages, ember patches, and homing orbs previously scheduled SceneTreeTimer
-## lambdas that captured the temporary Area2D. These variants keep the same timings,
-## damage, and visuals while making timers children of the object they govern.
+## Runtime lifetime and attack-presentation hardening for Embered Pilgrim.
+## Temporary-object timings/damage remain authored. The September 9 replay additionally
+## showed that this miniboss's private CombatPhase was not mirrored into the inherited
+## HumanoidEnemyBase attack fields, and that velocity-driven lunges could slide around
+## blocking bodies instead of ending their committed forward travel.
+
+
+func _set_combat_phase(phase: CombatPhase) -> void:
+	super._set_combat_phase(phase)
+	telegraphing = phase == CombatPhase.WINDUP
+	swinging = phase == CombatPhase.ACTIVE
+	is_attacking = phase != CombatPhase.NONE
+	_attack_recovery = phase == CombatPhase.RECOVERY
+
+
+func _runtime_attack_step_blocked(dir: Vector2, speed: float) -> bool:
+	if dir.length_squared() <= 0.001 or speed <= 0.0:
+		return false
+	var dt: float = maxf(get_physics_process_delta_time(), 1.0 / 120.0)
+	return test_move(global_transform, dir.normalized() * speed * dt)
+
+
+func _lunge_phase(dir: Vector2, distance: float, speed: float, duration: float, seq_id: int) -> bool:
+	if dir == Vector2.ZERO or speed <= 0.0:
+		return not _should_abort_attack(seq_id)
+
+	var current_dist: float = _get_current_distance_to_player()
+	var adjusted_distance: float = distance
+	if current_dist >= 0.0:
+		if current_dist < lunge_min_distance:
+			return not _should_abort_attack(seq_id)
+		var distance_ratio: float = clampf(
+			(current_dist - lunge_min_distance) / (ideal_combat_distance - lunge_min_distance),
+			0.0,
+			1.0
+		)
+		adjusted_distance = distance * distance_ratio
+
+	if adjusted_distance < 5.0:
+		return not _should_abort_attack(seq_id)
+
+	var start_pos: Vector2 = global_position
+	var elapsed: float = 0.0
+	var adjusted_duration: float = adjusted_distance / speed if speed > 0.0 else duration
+	while elapsed < adjusted_duration:
+		if _should_abort_attack(seq_id):
+			velocity = Vector2.ZERO
+			return false
+		if _combo_is_frozen:
+			velocity = Vector2.ZERO
+			while _combo_is_frozen:
+				if _should_abort_attack(seq_id):
+					return false
+				await get_tree().physics_frame
+				if not is_instance_valid(self):
+					return false
+			continue
+
+		var traveled: float = global_position.distance_to(start_pos)
+		if traveled >= adjusted_distance or _runtime_attack_step_blocked(dir, speed):
+			velocity = Vector2.ZERO
+			return true
+		velocity = dir.normalized() * speed
+		await get_tree().physics_frame
+		if not is_instance_valid(self):
+			return false
+		elapsed += get_physics_process_delta_time()
+
+	velocity = Vector2.ZERO
+	return not _should_abort_attack(seq_id)
+
+
+func _do_overhead_charge(my_seq: int) -> void:
+	_set_combat_phase(CombatPhase.WINDUP)
+	velocity = Vector2.ZERO
+	var player := _get_player()
+	var dir := Vector2.RIGHT
+	if player:
+		dir = (player.global_position - global_position).normalized()
+	_face_direction(dir)
+
+	var total_duration: float = overhead_windup * _get_attack_speed_mult() * 0.6 + overhead_charge_duration + parry_linger_window
+	_show_parry_indicator(total_duration, true)
+	if anim and anim.has_animation("overhead_windup"):
+		anim.play("overhead_windup")
+
+	var short_windup: float = overhead_windup * _get_attack_speed_mult() * 0.5
+	if not await _wait_duration_interruptible(short_windup, my_seq):
+		return
+
+	_set_combat_phase(CombatPhase.ACTIVE)
+	_current_hitbox = _spawn_charge_hitbox(dir, overhead_slam_damage, true)
+	_is_current_hitbox_melee = true
+
+	var track_pct: float = overhead_charge_track_base
+	if _pyre_phase == PyrePhase.PHASE_1:
+		track_pct = 0.75
+	elif _pyre_phase == PyrePhase.PHASE_2:
+		track_pct = 0.80
+
+	var charge_elapsed: float = 0.0
+	var charge_speed: float = overhead_charge_speed * _get_speed_mult()
+	while charge_elapsed < overhead_charge_duration:
+		if _should_abort_attack(my_seq):
+			velocity = Vector2.ZERO
+			_cleanup_hitbox()
+			_set_combat_phase(CombatPhase.NONE)
+			_finish_attack()
+			return
+		if charge_elapsed < overhead_charge_duration * track_pct and player and is_instance_valid(player):
+			var new_dir: Vector2 = (player.global_position - global_position).normalized()
+			if new_dir != Vector2.ZERO:
+				dir = dir.lerp(new_dir, 0.1).normalized()
+				_face_direction(dir)
+		if _runtime_attack_step_blocked(dir, charge_speed):
+			velocity = Vector2.ZERO
+			break
+		velocity = dir * charge_speed
+		await get_tree().physics_frame
+		if not is_instance_valid(self):
+			return
+		charge_elapsed += get_physics_process_delta_time()
+	velocity = Vector2.ZERO
+
+	if anim and anim.has_animation("overhead_impact"):
+		anim.play("overhead_impact")
+	if not await _wait_duration_interruptible(parry_linger_window, my_seq):
+		return
+	_cleanup_hitbox()
+	if _pyre_phase == PyrePhase.PHASE_2:
+		_spawn_ember_patch(global_position, overhead_slam_radius, 2.0)
+	_set_combat_phase(CombatPhase.RECOVERY)
+	await get_tree().create_timer(overhead_recovery * _get_attack_speed_mult()).timeout
+	_set_combat_phase(CombatPhase.NONE)
+	_finish_attack()
+
+
+func _do_burning_thrust() -> void:
+	var my_seq: int = int(_attack_sequence_id)
+	if _should_abort_attack(my_seq):
+		return
+
+	_set_combat_phase(CombatPhase.WINDUP)
+	velocity = Vector2.ZERO
+	var player := _get_player()
+	var dir := Vector2.RIGHT
+	if player:
+		dir = (player.global_position - global_position).normalized()
+	_face_direction(dir)
+
+	var is_unblockable: bool = _pyre_phase == PyrePhase.PHASE_2
+	var telegraph: float = thrust_telegraph * _get_attack_speed_mult()
+	_show_parry_indicator(telegraph + parry_early_window + thrust_active + parry_linger_window, is_unblockable)
+	if anim and anim.has_animation("thrust_windup"):
+		anim.play("thrust_windup")
+	if not await _wait_duration_interruptible(telegraph, my_seq):
+		return
+	if _should_abort_attack(my_seq):
+		_cleanup_hitbox()
+		_set_combat_phase(CombatPhase.NONE)
+		_finish_attack()
+		return
+
+	if player and is_instance_valid(player):
+		var new_dir: Vector2 = (player.global_position - global_position).normalized()
+		if new_dir != Vector2.ZERO:
+			dir = new_dir
+			_face_direction(dir)
+
+	_set_combat_phase(CombatPhase.ACTIVE)
+	_current_hitbox = _spawn_thrust_hitbox(dir, thrust_range, thrust_damage, is_unblockable)
+	_is_current_hitbox_melee = true
+	if _current_hitbox and not is_unblockable:
+		_current_hitbox.set_meta("burning_thrust_parry_bonus", true)
+	if anim and anim.has_animation("thrust_active"):
+		anim.play("thrust_active")
+
+	var lunge_elapsed: float = 0.0
+	var lunge_time: float = thrust_lunge_distance / thrust_lunge_speed if thrust_lunge_speed > 0.0 else 0.0
+	while lunge_elapsed < lunge_time:
+		if _should_abort_attack(my_seq):
+			velocity = Vector2.ZERO
+			_cleanup_hitbox()
+			_set_combat_phase(CombatPhase.NONE)
+			_finish_attack()
+			return
+		if _runtime_attack_step_blocked(dir, thrust_lunge_speed):
+			velocity = Vector2.ZERO
+			break
+		velocity = dir * thrust_lunge_speed
+		await get_tree().physics_frame
+		if not is_instance_valid(self):
+			return
+		lunge_elapsed += get_physics_process_delta_time()
+	velocity = Vector2.ZERO
+
+	if not await _wait_duration_interruptible(thrust_active, my_seq):
+		return
+	if not await _wait_duration_interruptible(parry_linger_window, my_seq):
+		return
+	_cleanup_hitbox()
+	_set_combat_phase(CombatPhase.RECOVERY)
+	var recovery: float = thrust_recovery_base if _pyre_phase != PyrePhase.PHASE_2 else thrust_recovery_p2
+	recovery *= _get_attack_speed_mult()
+	if anim and anim.has_animation("thrust_recovery"):
+		anim.play("thrust_recovery")
+	await get_tree().create_timer(recovery).timeout
+	_set_combat_phase(CombatPhase.NONE)
+	_finish_attack()
 
 
 func _spawn_afterimage_from_hitbox(hitbox: Area2D) -> void:

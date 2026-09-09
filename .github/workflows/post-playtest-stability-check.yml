@@ -75,6 +75,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify attack cue and lunge readability
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/AttackPresentationReadabilitySmoke.tscn 2>&1 | tee attack-presentation-readability.log
+          grep -F "[AttackPresentationReadabilitySmoke] PASS - phase-driven cue | blocked lunge stop | Timeless viewport overlay" attack-presentation-readability.log
+          if grep -F "SCRIPT ERROR:" attack-presentation-readability.log; then
+            echo "FAIL: attack presentation readability smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR:" attack-presentation-readability.log; then
+            echo "FAIL: attack presentation readability smoke emitted an engine/runtime error."
+            exit 1
+          fi
+
       - name: Verify enemy temporary lifetime authorities
         shell: bash
         run: |
@@ -124,6 +139,7 @@ jobs:
             post-playtest-release.log
             projectile-defense.log
             enemy-lifetime-hardening.log
+            attack-presentation-readability.log
             enemy-temporary-lifetime.log
             full-run-combat-stability.log
           if-no-files-found: warn
