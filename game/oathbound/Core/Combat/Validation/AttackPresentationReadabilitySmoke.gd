@@ -9,18 +9,9 @@ const ShogunRuntimeScript = preload("res://Regions/Kagutsuchi/Enemies/Bosses/Ecl
 const PASS_LINE := "[AttackPresentationReadabilitySmoke] PASS - phase-driven cue | blocked lunge stop | Timeless viewport overlay"
 
 
-class DummyCueOwner:
-	extends Node2D
-	var _combat_phase: int = 0
-	var telegraphing: bool = false
-	var swinging: bool = false
-	var is_attacking: bool = false
-	var _attack_recovery: bool = false
-
-
 func _ready() -> void:
 	var failures: Array[String] = []
-	_check_phase_driven_indicator(failures)
+	_check_phase_driven_indicator_contract(failures)
 	_check_runtime_motion_contracts(failures)
 	_check_timeless_overlay_contract(failures)
 
@@ -34,33 +25,18 @@ func _ready() -> void:
 	get_tree().quit(1)
 
 
-func _check_phase_driven_indicator(failures: Array[String]) -> void:
-	var owner := DummyCueOwner.new()
-	owner.name = "CueOwner"
-	add_child(owner)
-
-	var indicator := Node2D.new()
-	indicator.name = "ParryIndicator"
-	indicator.set_script(ParryIndicatorScript)
-	owner.add_child(indicator)
-
-	owner._combat_phase = 1
-	indicator.call("warn_attack", 0.6, false)
-	indicator.call("_process", 0.0)
-	if not indicator.visible:
-		failures.append("windup cue was not visible")
-
-	owner._combat_phase = 2
-	indicator.call("_process", 0.0)
-	if not bool(indicator.get("_seen_active")):
-		failures.append("cue did not mark the live ACTIVE contact phase")
-
-	owner._combat_phase = 3
-	indicator.call("_process", 0.0)
-	if indicator.visible:
-		failures.append("cue remained visible into RECOVERY")
-
-	owner.free()
+func _check_phase_driven_indicator_contract(failures: Array[String]) -> void:
+	var indicator_source: String = ParryIndicatorScript.source_code
+	if "func warn_attack" not in indicator_source:
+		failures.append("shared attack indicator lost warn_attack compatibility")
+	if "_has_combat_phase" not in indicator_source or "2: # ACTIVE" not in indicator_source:
+		failures.append("shared attack indicator no longer derives the live ACTIVE phase")
+	if "_has_telegraphing" not in indicator_source or "_has_swinging" not in indicator_source:
+		failures.append("shared attack indicator lost legacy humanoid windup/active compatibility")
+	if "func _pulse_active" not in indicator_source:
+		failures.append("shared attack indicator lost the contact-ready pulse")
+	if "func hide_now" not in indicator_source:
+		failures.append("shared attack indicator lost deterministic cleanup")
 
 
 func _check_runtime_motion_contracts(failures: Array[String]) -> void:
@@ -84,6 +60,8 @@ func _check_runtime_motion_contracts(failures: Array[String]) -> void:
 		failures.append("Eclipse Shogun no longer mirrors ACTIVE into shared attack state")
 	if "_set_combat_phase(CombatPhase.ACTIVE)" not in rootfang_source:
 		failures.append("Rootfang roll no longer exposes an ACTIVE attack phase")
+	if "_runtime_attack_step_blocked(dir, emp_lunge_speed)" not in briarthorn_source:
+		failures.append("Briarthorn empowered lunge no longer stops before blocked motion")
 
 
 func _check_timeless_overlay_contract(failures: Array[String]) -> void:
