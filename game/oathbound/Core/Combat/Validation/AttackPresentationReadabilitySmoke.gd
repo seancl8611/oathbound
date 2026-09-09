@@ -1,19 +1,25 @@
 extends Node
 
-const ParryIndicatorScript = preload("res://Combat/parry_indicator.gd")
-const PilgrimRuntimeScript = preload("res://Enemy/Area 2/Minibosses/embered_pilgrim_runtime.gd")
-const RootfangRuntimeScript = preload("res://Enemy/Area 2/Boss/rootfang_runtime.gd")
-const BriarthornRuntimeScript = preload("res://Enemy/Area 2/Boss/briarthorn_runtime.gd")
-const ShogunRuntimeScript = preload("res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogunRuntime.gd")
+const INDICATOR_PATH := "res://Combat/parry_indicator.gd"
+const PILGRIM_PATH := "res://Enemy/Area 2/Minibosses/embered_pilgrim_runtime.gd"
+const ROOTFANG_PATH := "res://Enemy/Area 2/Boss/rootfang_runtime.gd"
+const BRIARTHORN_PATH := "res://Enemy/Area 2/Boss/briarthorn_runtime.gd"
+const SHOGUN_PATH := "res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogunRuntime.gd"
 
 const PASS_LINE := "[AttackPresentationReadabilitySmoke] PASS - phase-driven cue | blocked lunge stop | Timeless viewport overlay"
 
 
 func _ready() -> void:
 	var failures: Array[String] = []
-	_check_phase_driven_indicator_contract(failures)
-	_check_runtime_motion_contracts(failures)
-	_check_timeless_overlay_contract(failures)
+	var indicator_source: String = _read_source(INDICATOR_PATH, failures)
+	var pilgrim_source: String = _read_source(PILGRIM_PATH, failures)
+	var rootfang_source: String = _read_source(ROOTFANG_PATH, failures)
+	var briarthorn_source: String = _read_source(BRIARTHORN_PATH, failures)
+	var shogun_source: String = _read_source(SHOGUN_PATH, failures)
+
+	_check_phase_driven_indicator_contract(indicator_source, failures)
+	_check_runtime_motion_contracts(pilgrim_source, rootfang_source, briarthorn_source, shogun_source, failures)
+	_check_timeless_overlay_contract(shogun_source, failures)
 
 	if failures.is_empty():
 		print(PASS_LINE)
@@ -25,8 +31,15 @@ func _ready() -> void:
 	get_tree().quit(1)
 
 
-func _check_phase_driven_indicator_contract(failures: Array[String]) -> void:
-	var indicator_source: String = ParryIndicatorScript.source_code
+func _read_source(path: String, failures: Array[String]) -> String:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		failures.append("could not read runtime source: %s" % path)
+		return ""
+	return file.get_as_text()
+
+
+func _check_phase_driven_indicator_contract(indicator_source: String, failures: Array[String]) -> void:
 	if "func warn_attack" not in indicator_source:
 		failures.append("shared attack indicator lost warn_attack compatibility")
 	if "_has_combat_phase" not in indicator_source or "2: # ACTIVE" not in indicator_source:
@@ -39,12 +52,13 @@ func _check_phase_driven_indicator_contract(failures: Array[String]) -> void:
 		failures.append("shared attack indicator lost deterministic cleanup")
 
 
-func _check_runtime_motion_contracts(failures: Array[String]) -> void:
-	var pilgrim_source: String = PilgrimRuntimeScript.source_code
-	var rootfang_source: String = RootfangRuntimeScript.source_code
-	var briarthorn_source: String = BriarthornRuntimeScript.source_code
-	var shogun_source: String = ShogunRuntimeScript.source_code
-
+func _check_runtime_motion_contracts(
+	pilgrim_source: String,
+	rootfang_source: String,
+	briarthorn_source: String,
+	shogun_source: String,
+	failures: Array[String]
+) -> void:
 	if "test_move(global_transform" not in pilgrim_source:
 		failures.append("Embered Pilgrim runtime lost predictive blocked-lunge stopping")
 	if "test_move(global_transform" not in rootfang_source:
@@ -64,8 +78,7 @@ func _check_runtime_motion_contracts(failures: Array[String]) -> void:
 		failures.append("Briarthorn empowered lunge no longer stops before blocked motion")
 
 
-func _check_timeless_overlay_contract(failures: Array[String]) -> void:
-	var shogun_source: String = ShogunRuntimeScript.source_code
+func _check_timeless_overlay_contract(shogun_source: String, failures: Array[String]) -> void:
 	if "Control.PRESET_FULL_RECT" not in shogun_source:
 		failures.append("Timeless Zone darkness is not viewport-anchored")
 	if "darkness.position = -viewport_size * 0.5" in shogun_source:
