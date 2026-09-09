@@ -1,9 +1,85 @@
 extends "res://Enemy/Area 2/Boss/briarthorn.gd"
 
-## Runtime lifetime hardening for the live Twin Maws Briarthorn scene.
-## Temporary AOE/beam attacks used orphanable SceneTreeTimer lambdas that captured
-## their Area2D. Their timing and damage stay unchanged; probes/lifetimes now belong
-## to the temporary attack node and cross delayed boundaries by integer instance id.
+## Runtime hardening for the live Twin Maws Briarthorn scene.
+## Temporary AOE/beam attacks keep self-owned lifetimes. Empowered lunge movement now
+## tests its next committed physics step so a player, twin, enemy, or wall stops the
+## charge rather than allowing move_and_slide() to turn it into a sideways skirt.
+
+
+func _runtime_attack_step_blocked(dir: Vector2, speed: float) -> bool:
+	if dir.length_squared() <= 0.001 or speed <= 0.0:
+		return false
+	var dt: float = maxf(get_physics_process_delta_time(), 1.0 / 120.0)
+	return test_move(global_transform, dir.normalized() * speed * dt)
+
+
+func _do_empowered_lunge() -> void:
+	var my_seq: int = int(_attack_sequence_id)
+	if _should_abort_attack(my_seq):
+		return
+
+	_set_combat_phase(CombatPhase.WINDUP)
+	velocity = Vector2.ZERO
+	var player := _get_player()
+	var dir := Vector2.RIGHT
+	if player:
+		dir = (player.global_position - global_position).normalized()
+	if dir == Vector2.ZERO:
+		dir = Vector2.RIGHT
+	_face_direction(dir)
+
+	_show_parry_indicator(emp_lunge_telegraph + parry_early_window + emp_lunge_active + parry_linger_window, false)
+	if anim and anim.has_animation("lunge_antic"):
+		anim.play("lunge_antic")
+	elif anim and anim.has_animation("swipe_antic"):
+		anim.play("swipe_antic")
+	if not await _wait_duration_interruptible(emp_lunge_telegraph, my_seq):
+		return
+	if _should_abort_attack(my_seq):
+		_cleanup_hitbox()
+		_finish_attack()
+		return
+
+	if player and is_instance_valid(player):
+		dir = (player.global_position - global_position).normalized()
+		if dir == Vector2.ZERO:
+			dir = Vector2.RIGHT
+		_face_direction(dir)
+
+	_set_combat_phase(CombatPhase.ACTIVE)
+	_current_hitbox = _spawn_melee_hitbox(dir, emp_lunge_damage, emp_lunge_range, emp_lunge_width, false, false)
+	if anim and anim.has_animation("lunge_active"):
+		anim.play("lunge_active")
+	elif anim and anim.has_animation("swipe_active"):
+		anim.play("swipe_active")
+
+	var lunge_elapsed: float = 0.0
+	var lunge_time: float = emp_lunge_distance / emp_lunge_speed if emp_lunge_speed > 0.0 else 0.0
+	while lunge_elapsed < lunge_time:
+		if _should_abort_attack(my_seq):
+			velocity = Vector2.ZERO
+			_cleanup_hitbox()
+			_finish_attack()
+			return
+		if _runtime_attack_step_blocked(dir, emp_lunge_speed):
+			velocity = Vector2.ZERO
+			break
+		velocity = dir * emp_lunge_speed
+		await get_tree().physics_frame
+		if not is_instance_valid(self):
+			return
+		lunge_elapsed += get_physics_process_delta_time()
+	velocity = Vector2.ZERO
+
+	if not await _wait_duration_interruptible(emp_lunge_active, my_seq):
+		return
+	if not await _wait_duration_interruptible(parry_linger_window, my_seq):
+		return
+	_cleanup_hitbox()
+	_set_combat_phase(CombatPhase.RECOVERY)
+	if not await _wait_duration_interruptible(emp_lunge_recovery, my_seq):
+		return
+	_finish_attack()
 
 
 func _spawn_aoe_detonation(center: Vector2, radius: float, damage: int) -> void:
