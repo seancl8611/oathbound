@@ -80,7 +80,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/AttackPresentationReadabilitySmoke.tscn 2>&1 | tee attack-presentation-readability.log
-          grep -F "[AttackPresentationReadabilitySmoke] PASS - phase-driven cue | blocked lunge stop | Timeless viewport overlay" attack-presentation-readability.log
+          grep -F "[AttackPresentationReadabilitySmoke] PASS - global counter cue | blocked lunge stop | Timeless viewport overlay" attack-presentation-readability.log
           if grep -F "SCRIPT ERROR:" attack-presentation-readability.log; then
             echo "FAIL: attack presentation readability smoke emitted a GDScript runtime error."
             exit 1
