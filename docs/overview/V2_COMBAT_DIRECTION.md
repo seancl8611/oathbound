@@ -11,6 +11,8 @@ topics:
   - player-movement
   - enemy-pressure
   - stagger
+  - poise
+  - guard
   - bosses
   - blood-aspects
   - hunter-fantasy
@@ -133,6 +135,36 @@ Potential implementation concepts include:
 
 Exact meters, thresholds, values, and UI are not locked here.
 
+### Health, posture/stagger, and flinch are independent axes
+
+Combat V2 should **not** force every attack or enemy into one globally balanced Health-to-posture ratio.
+
+A hit can independently determine:
+
+- how much **Health damage** it deals,
+- how much **posture/stagger pressure** it deals,
+- whether it causes a visible **flinch/recoil**,
+- whether it **interrupts** the enemy's current action,
+- and how much knockback or displacement it creates.
+
+This lets Oathbound author enemies by fantasy and role rather than making every defense obey the same mathematical exchange.
+
+For example, a light enemy may take full Health damage and flinch from most sword hits. A heavy beast may take full Health damage but ignore the flinch from weak attacks. An armored elite may take normal Health damage while only high-stagger moves interrupt committed actions. These relationships should be authored deliberately per enemy family and state.
+
+### Poise / armor direction
+
+Combat V2 should explore a **Poise / Armor** layer whose main job is to govern reaction and interruption, not automatically reduce Health damage.
+
+The intended distinction is:
+
+- **Health** answers: how close is the enemy to defeat?
+- **Posture / Stagger** answers: how close is the enemy to losing control or entering a break opportunity?
+- **Poise / Armor** answers: does this particular hit make the enemy flinch or interrupt what it is doing right now?
+
+Poise may be persistent, state-based, temporary, or attack-specific depending on the enemy. A large beast could have high passive poise. A swordsman could gain temporary poise during a committed heavy attack. A shield user could remain easy to flinch when exposed but resistant while braced behind the shield.
+
+Exact naming, meters, thresholds, and whether Poise is visible are open. The important V2 rule is that **taking Health damage and being interrupted are no longer assumed to be the same event**.
+
 ## 5. Parry becomes a high-value aggressive option, not the default answer to combat
 
 Parrying remains part of Oathbound, especially for posture pressure, counters, elite enemies, and bosses.
@@ -149,6 +181,8 @@ Standard enemy attacks should support multiple valid responses where context per
 
 The game should not require the player to stop attacking and enter a parry rhythm against every enemy in order to play correctly.
 
+Parry can remain a strong source of posture/stagger pressure even when it deals little or no direct Health damage. That makes it a distinct route to creating a break/finisher opening rather than a mandatory damage mechanic.
+
 ## 6. Blocking is a fallback or kit-specific tool rather than the preferred default posture
 
 Sustained blocking can remain useful, but Combat V2 should generally favor active movement, attack interruption, dashing, repositioning, and well-timed counters over standing still behind guard.
@@ -156,6 +190,67 @@ Sustained blocking can remain useful, but Combat V2 should generally favor activ
 Blocking may remain particularly valuable to specific Aspect identities, Techniques, enemies, or situations.
 
 Exact universal-versus-Aspect ownership is deliberately open and is recorded below.
+
+### Enemy guard is authored behavior, not a universal damage formula
+
+Enemy blocking should not be balanced through one global rule such as "every block converts X% Health damage into Y% posture damage."
+
+Each relevant enemy can instead own a **guard profile** and **guard behavior**.
+
+A guard profile may define:
+
+- Health damage multiplier while guarding,
+- posture/stagger damage multiplier while guarding,
+- attacks that can break or bypass guard,
+- directional coverage,
+- reaction to heavy attacks,
+- guard-break consequences,
+- and whether special effects still apply through guard.
+
+Guard behavior may independently define:
+
+- how often the enemy chooses to block,
+- how long it may hold guard,
+- what causes it to lower guard,
+- whether it can attack immediately from guard,
+- cooldown before it may guard again,
+- and the tactical situations where guard is appropriate.
+
+This means a **rare, short 100%-Health-negating block can be completely valid** if it does not stall the room and the player's attack still produces meaningful posture/stagger progress.
+
+The problem is not inherently that a blocked hit can deal 0 Health damage. The problem is when enemies guard too often, guard too long, repeatedly erase offensive momentum, or make the player depend on posture/deathblow for ordinary kills.
+
+### Example defensive identities — conceptual, not locked values
+
+These examples describe the design space and are not final enemy assignments or numerical contracts.
+
+**Shield bearer**
+
+- May block frequently or hold guard longer than other enemies.
+- Could negate nearly or completely all frontal Health damage while guarded.
+- Takes strong posture/stagger pressure from attacks into the shield.
+- May have high guard stability but clear flank, break, heavy-attack, or special-tool counterplay.
+- Its shield should be the reason this enemy is unusually defensive.
+
+**Swordsman**
+
+- Guards only in short, deliberate windows rather than living in permanent block.
+- May reduce most Health damage instead of negating all of it.
+- Can still take high posture/stagger pressure while guarding.
+- A guard break, heavy impact, flank, or committed offensive mistake should reopen normal Health damage quickly.
+
+**Fodder / beast**
+
+- Often has no traditional block at all.
+- Defense comes from motion, numbers, spacing, poise, quick attacks, or evasive behavior.
+- Usually takes visible Health progress when struck.
+
+**Elite martial enemy**
+
+- May have a rarer true deflect/parry response that negates a hit and creates a special exchange.
+- This should be authored and readable rather than a universal humanoid reaction or instantaneous AI answer to player input.
+
+The purpose of these profiles is asymmetry. Combat V2 should let enemies feel mechanically different instead of solving every defense with the same HP/posture conversion.
 
 ## 7. Enemy AI should feel purposeful, responsive, and consistent
 
@@ -173,13 +268,15 @@ Combat V2 should favor:
 
 Randomness should modify decisions rather than substitute for them. Enemy behavior should not rely on high-frequency frame-by-frame random checks that produce accidental pacing.
 
+Defensive choices belong in this same authored decision model. A swordsman choosing to guard should be an intentional tactical action with readable start/end conditions, not a permanent proximity state or automatic response to every incoming hit.
+
 ## 8. Crowd pressure should overlap intentions without stacking unfair impacts
 
 The existing single-turn melee model is too duel-oriented for the new direction.
 
 Combat V2 should move toward a **pressure / threat / impact scheduler**:
 
-- several enemies may approach, flank, aim, wind up, or reposition simultaneously,
+- several enemies may approach, flank, aim, wind up, guard, or reposition simultaneously,
 - a primary enemy may create the immediate attack threat,
 - a secondary enemy may begin a readable future threat,
 - ranged or spatial pressure may remain active,
@@ -206,6 +303,8 @@ Beasts, corrupted animals, spirits, and heavily transformed enemies should be fr
 
 Disciplined samurai and elite human enemies become a contrast to this faster, more predatory combat population.
 
+Poise can help distinguish these enemies without turning them into damage sponges. A large beast can continue a dangerous lunge through a weak strike while still taking the full Health damage from that strike.
+
 ## 10. Bosses move toward action-roguelite phase design
 
 Bosses should remain mechanically richer than standard enemies, but their pacing should move away from Soulslike endurance duels as the default model.
@@ -221,10 +320,27 @@ Useful phase-transition tools include:
 - summons/adds when they serve the encounter,
 - changed ranges,
 - new safe zones or pressure zones,
-- changed stagger/posture rules,
+- changed stagger/posture/poise rules,
 - and different punish windows.
 
 A phase transition should be a memorable authored state change. Bosses should remain readable and scriptable enough that the player can learn them without requiring strict Soulslike memorization or constant parry execution.
+
+# Health, posture/stagger, break, and deathblow — V2 direction
+
+Combat V2 should make **Health progress a normal and visible part of ordinary combat** without requiring every enemy or every hit to obey the same relationship between Health and posture/stagger.
+
+The broad direction is:
+
+- ordinary enemies should usually be killable through direct Health damage without requiring a posture break,
+- posture/stagger should create control advantages, break opportunities, and finisher access rather than acting as a mandatory second Health bar,
+- Deathblows should remain fun, high-value, visually important payoffs rather than the compulsory endpoint of every normal enemy exchange,
+- parry-heavy or finisher-focused builds may deliberately make posture/stagger and Deathblows much more central,
+- individual enemies may strongly favor Health damage, posture/stagger pressure, guard breaking, poise management, or a mixture of those interactions,
+- and bosses may use posture/stagger breaks as major punish opportunities without making posture the sole way to advance the encounter.
+
+A posture/stagger break does not need to mean "the player must immediately Deathblow or the interaction was wasted." A broken enemy may also become vulnerable to ordinary attacks, lose poise, lose guard access, take increased damage, or enter another authored punish state. Exact break rewards remain open for later implementation design.
+
+Likewise, enemy posture/stagger recovery does not need one universal rule. Fodder may recover little or not at all during a normal room; disciplined enemies may regain composure; bosses may use authored recovery rules. Recovery should support the enemy's role and the multi-target room cadence rather than forcing the player to maintain Sekiro-style pressure on every target simultaneously.
 
 # Aspect-dependent player mechanics — OPEN V2 DESIGN QUESTION
 
@@ -258,7 +374,7 @@ Preserve unless a later explicit design pass changes them:
 - Relics,
 - Corruption and Shrine progression,
 - Health,
-- player and enemy posture,
+- player posture and the enemy posture/stagger concept,
 - dash,
 - parry and block as available design mechanics,
 - deathblows,
@@ -274,13 +390,14 @@ Individual mechanics may later be redistributed between Aspects, but that requir
 
 The preferred implementation sequence is dependency-driven rather than a whole-game rewrite.
 
-1. **Player Motor V2** — free-flow vector locomotion, action movement contribution, steering/commitment rules, dash integration, and telemetry.
-2. **Combat Action / Intent foundation** — reusable authored actions, input intent buffering/arbitration, phase-aware movement/cancel permissions, and compatibility with existing public combat events.
-3. **Reference enemy migration** — rebuild one standard enemy, preferably the Corrupted Swordsman, around shared Enemy Motor + deliberate tactical intent + formal stagger/interrupt rules.
+1. **Player / action feel audit** — preserve the already-working combo/action foundation where it serves V2, identify only the movement/cancel/controller behaviors that actively prevent free-flow combat, and avoid rewriting player systems merely because they are inherited from V1.
+2. **Reference enemy response package** — rebuild one standard enemy, preferably the Corrupted Swordsman, around authored Health damage response, guard behavior/profile, stagger/interrupt rules, poise behavior, deliberate tactical intent, and clearer recovery.
+3. **Shared Combat Action / response foundation** — make Health damage, posture/stagger pressure, guard conversion, flinch/interrupt, poise, and action commitment independently authorable while preserving useful public combat events.
 4. **Pressure Director V2** — replace whole-attack single-turn ownership with threat/impact scheduling suitable for higher enemy counts.
-5. **Encounter retuning** — raise standard encounter population where readable, reduce ordinary enemy durability, and retune stagger/resistance around the new room-pressure model.
-6. **Boss V2 pass** — redesign boss movement, scripts, phase transitions, and spatial pressure around the action-roguelite philosophy after the shared combat engine is stable.
-7. **Aspect capability pass** — decide whether block, parry, defensive transitions, stagger behavior, or other mechanics should differ fundamentally by equipped Aspect.
+5. **Player Motor V2 where evidence still requires it** — improve free-flow vector locomotion, action movement contribution, steering/commitment rules, dash integration, and telemetry without discarding working attack-combo mechanics.
+6. **Encounter retuning** — raise standard encounter population where readable, reduce ordinary enemy durability where needed, and retune guard/stagger/poise profiles around the new room-pressure model.
+7. **Boss V2 pass** — redesign boss movement, scripts, phase transitions, and spatial pressure around the action-roguelite philosophy after the shared combat engine is stable.
+8. **Aspect capability pass** — decide whether block, parry, defensive transitions, stagger behavior, or other mechanics should differ fundamentally by equipped Aspect.
 
 Each phase should be validated in the Playtest Lab and through CombatTelemetry before broad migration.
 
@@ -288,7 +405,9 @@ Each phase should be validated in the Playtest Lab and through CombatTelemetry b
 
 Do not implement Combat V2 by globally increasing enemy counts, shortening parry windows, lowering enemy Health, or changing damage numbers on top of the current actor/control architecture.
 
-The first problem to solve is the **movement/action/AI foundation**. Numerical encounter changes should follow once actors move, commit, stagger, interrupt, and coordinate correctly.
+Do not replace the current combat economy with another single universal formula either. In particular, do not globally enforce one Health-damage-through-block percentage, one posture multiplier, one poise threshold, or one posture-recovery pattern for all enemies.
+
+The first problem to solve is the **quality and authorability of actor responses**: movement, guard decisions, Health damage, stagger pressure, flinch/interrupt, poise, commitment, and enemy coordination. Numerical encounter changes should follow once those responses are coherent.
 
 Similarly, do not remove current defensive mechanics from any Aspect before the Aspect capability pass explicitly defines the replacement behavior and updates the owning gameplay authorities.
 
@@ -296,6 +415,8 @@ Similarly, do not remove current defensive mechanics from any Aspect before the 
 
 Combat V2 is succeeding when normal play increasingly feels like:
 
-> **Akio enters a room as a supernatural hunter, moves continuously through several readable threats, kills weaker enemies quickly, staggers or interrupts vulnerable actions, changes targets without fighting the controls, uses parry/block/dash according to the situation and equipped kit, and faces bosses whose phase changes create new movement and attack problems rather than longer versions of the same duel.**
+> **Akio enters a room as a supernatural hunter, moves continuously through several readable threats, sees real Health progress on ordinary enemies, kills weaker enemies quickly, staggers or interrupts vulnerable actions, encounters meaningful enemy-specific defenses rather than universal blocking behavior, changes targets without fighting the controls, uses parry/block/dash according to the situation and equipped kit, and faces bosses whose phase changes create new movement and attack problems rather than longer versions of the same duel.**
+
+A shield, sword guard, armored beast, exposed fodder enemy, and elite deflect should not feel like cosmetic versions of the same defensive equation. Their Health, guard, posture/stagger, poise, and interruption relationships should express what they are.
 
 That is the first major V2 direction to preserve as implementation proceeds.
