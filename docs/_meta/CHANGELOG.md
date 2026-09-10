@@ -4,7 +4,7 @@ title: Documentation Changelog
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-09-09
 topics:
   - changelog
   - documentation-history
@@ -13,6 +13,15 @@ topics:
 # Documentation Changelog
 
 This is a concise record of major documentation passes. Detailed file-level history remains available through Git commits and merged pull requests.
+
+## 2026-09-09 — Implementation-status reconciliation
+
+- Synchronized the top-level Game Overview, Full Game Scope, Production Roadmap, and Endgame/Postgame/Release summaries with the current `OPEN_QUESTIONS.md` implementation boundary.
+- Removed obsolete “Godot reconciliation / implementation restart” and future-authoring wording for Hushiro, Yomori, Kagutsuchi, Strand/permanent progression, narrative/achievement contracts, release shell, and checkpoint/resume surfaces that are already implemented at first-playtest or release-contract depth.
+- Preserved all approved scope counts, game rules, release exclusions, and balance authorities.
+- Recorded final integration/playtest tuning, production presentation polish, release QA/legal provenance, and the true-final Heart encounter as the remaining top-level production work.
+- Preserved the Heart as an intentional design boundary: the current runtime owns the Shogun-to-Heart shell, while `TRUE_FINAL_HEART.md` still leaves the exact two-form moveset, arena, phase rules, tuning, VFX/audio, and accessibility details for a dedicated encounter-design pass.
+- Audit used the repository-approved bounded direct-read fallback because GitHub code search returned no usable indexed results.
 
 ## 2026-08-17 — Persistent resources, boss materials, and repository tightening
 
