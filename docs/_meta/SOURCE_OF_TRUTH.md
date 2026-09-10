@@ -4,7 +4,7 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-09-10
 ---
 
 # Source of Truth
@@ -15,6 +15,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 |---|---|
 | Game identity and pitch | `docs/overview/GAME_OVERVIEW.md` |
 | Design pillars | `docs/overview/DESIGN_PILLARS.md` |
+| Combat V2 transition direction | `docs/overview/V2_COMBAT_DIRECTION.md` |
 | Full production scope | `docs/overview/FULL_GAME_SCOPE.md` |
 | Endgame, canonical postgame, completion, and release package | `docs/overview/ENDGAME_POSTGAME_RELEASE.md` |
 | Current unresolved design priorities | `docs/_meta/OPEN_QUESTIONS.md` |
@@ -92,7 +93,7 @@ Each major subject has one authoritative file. Other documents should summarize,
 
 ## Conflict rule
 
-When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior. `TECHNIQUE_IMPLEMENTATION_BASELINES.md` owns shared first-playtest Technique-family constants and normalization while `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md` own system rules and the individual roster. `PROSTHETICS.md` owns both the Prosthetic roster/progression rules and the approved first-playtest values for all eight tools and nineteen upgrades. `RELIC_IMPLEMENTATION_BASELINE.md` owns first-playtest Relic values, mastery thresholds, and trigger/reset behavior while `RELICS.md` owns roster identity, acquisition, swapping, and mastery architecture. `HUSHIRO_IMPLEMENTATION_BASELINE.md` owns Hushiro's first-playtest standard encounter scripts, reusable gameplay-space inventory, and numerical/state contracts for Village Ogre, The Collector, and Keeper while the existing Area 1 files continue to own their qualitative identity and presentation.
+When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `V2_COMBAT_DIRECTION.md` owns the approved direction for the Combat V2 transition, but it does not silently replace current V1 gameplay contracts before the relevant owning authorities and runtime packages are migrated. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior. `TECHNIQUE_IMPLEMENTATION_BASELINES.md` owns shared first-playtest Technique-family constants and normalization while `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md` own system rules and the individual roster. `PROSTHETICS.md` owns both the Prosthetic roster/progression rules and the approved first-playtest values for all eight tools and nineteen upgrades. `RELIC_IMPLEMENTATION_BASELINE.md` owns first-playtest Relic values, mastery thresholds, and trigger/reset behavior while `RELICS.md` owns roster identity, acquisition, swapping, and mastery architecture. `HUSHIRO_IMPLEMENTATION_BASELINE.md` owns Hushiro's first-playtest standard encounter scripts, reusable gameplay-space inventory, and numerical/state contracts for Village Ogre, The Collector, and Keeper while the existing Area 1 files continue to own their qualitative identity and presentation.
 
 If the current design genuinely does not answer a conflict and the decision affects scope, add one concise question to `OPEN_QUESTIONS.md`.
 
