@@ -25,60 +25,57 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-10T01:49:00Z
+updated_utc: 2026-09-10T02:01:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 143
-  feature_head: c64e836530bd6a73214f817aacd483e468daa55c
-  merge_commit: 506b4bef9e3d5a8b1da2063100c5fa4c9a8bbfe6
-  validation: 10/10 PR-triggered workflows green on exact feature head, including Post-playtest Stability with AttackPresentationReadabilitySmoke, Yomori, Kagutsuchi, Cross-Region Enemy Contract, Region Transition Presentation, RunScene Runtime Lifetime, Hushiro Combat Semantics, Authored Presentation Content, Run Region Handoff, and Godot 4.7.2 Project Check
+  pr: 146
+  feature_head: bf4c30b663dbe3866e2c53acbdd5395d08e22f27
+  merge_commit: 2441046c5803e7608e39993e89805c80bbfdf4f0
+  validation: 6/6 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Authored Presentation Content, Region Transition Presentation, Run Region Handoff, Post-playtest Stability, and Godot 4.7.2 Project Check
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: null
-known_good_checkpoint: 59d649ae1113c7341a49218421a0cdbcafa155a3
+covered_through_substantive_commit: 2441046c5803e7608e39993e89805c80bbfdf4f0
+known_good_checkpoint: 2441046c5803e7608e39993e89805c80bbfdf4f0
 current_objective: >-
-  Close player-facing validation of PR #143's September 9 combat-readability repairs without reopening already-proven runtime paths. The September 10 targeted replay on exact build 59d649ae1113c7341a49218421a0cdbcafa155a3 machine-validates the crash/lifetime class, Pilgrim/Shogun inherited attack-state mirroring, and representative blocked committed-motion behavior across Pilgrim and Twin Maws. The only remaining contracts that the returned log/CombatTelemetry cannot prove are intrinsically visual: the shared Hushiro warning/ACTIVE/RECOVERY cue appearance and Eclipse Shogun Timeless Zone's viewport-wide darkness placement.
+  Final integration / playtest tuning with documentation and implementation status synchronized. PR #146 reconciled GAME_OVERVIEW, FULL_GAME_SCOPE, PRODUCTION_ROADMAP, ENDGAME_POSTGAME_RELEASE, and the documentation changelog with the already-authoritative OPEN_QUESTIONS implementation boundary. The broad documentation-to-code audit is closed: there is no currently identified implementation-ready feature package missing from code. The major intentional gameplay-content gap is the true-final Heart encounter, whose authority deliberately does not yet define an implementation-ready moveset/arena/tuning package.
 next_action: >-
-  Do not request another broad repo scan or another full integration replay by default. If Sean already observed the Hushiro cue and Timeless Zone visually and reports them correct, mark PR #143 player-facing validation complete and move to the next design/gameplay objective. If either visual is still wrong, capture only that exact visual defect and inspect only its authority (`res://Combat/parry_indicator.gd` for the shared cue or `res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogunRuntime.gd` for Timeless Zone) before patching. Reopen motion/state timing only if new telemetry contradicts the September 10 evidence.
+  Do not reopen a broad repo/documentation audit. For PR #143, only revisit the shared Hushiro cue or Eclipse Shogun Timeless Zone if Sean reports a concrete visual defect; telemetry/runtime behavior is otherwise validated. The next evidence-backed production work is either (a) one long real-player integration pass from release front end through the current Heart shell boundary for persistence/pacing/readability/economy/feel, or (b) a dedicated design pass for the true-final Heart encounter before any Heart combat implementation. Do not invent Heart attacks in code before that design authority is expanded.
 current_batch:
-  - PR #143 remains the latest substantive gameplay change: feature head c64e836530bd6a73214f817aacd483e468daa55c, merge commit 506b4bef9e3d5a8b1da2063100c5fa4c9a8bbfe6, 10/10 triggered workflows green.
-  - September 10 targeted replay used exact build 59d649ae1113c7341a49218421a0cdbcafa155a3 with Playtest Lab Recommended 5x Health/Posture and Invulnerable. Returned artifacts are `godot(20260910-011635).log` and `combat_1789002883.jsonl`.
-  - Godot log has no SCRIPT ERROR, engine ERROR, freed-object, lambda/deferred-call, CollisionObject, or physics-error recurrence. Preserve the PR #139/#140 lifetime hardening guarantees.
-  - Embered Pilgrim telemetry now visibly mirrors authoritative attack phases into inherited fields: WINDUP samples show `telegraphing=true/swinging=false`, ACTIVE samples show `telegraphing=false/swinging=true`, and recovery samples clear both while the attack lifecycle remains active as appropriate. A sampled high-speed committed Pilgrim attack reached roughly 500 px/s then stopped after only a small additional step at body-contact clearance instead of skating through/around Akio.
-  - Twin Maws telemetry supports the predictive motion-stop repair. Rootfang's approach terminates around body-contact clearance instead of continuing through Akio, and Briarthorn has representative 400 px/s committed movement samples that collapse to zero velocity at close contact instead of tangentially skating around the player.
-  - Eclipse Shogun inherited attack-state mirroring is active in the replay: many direct ACTIVE samples report `is_attacking=true`, `swinging=true`, `telegraphing=false`. An earlier contact sampled with `swinging=false` is consistent with a lingering hazard/contact outside the boss's direct ACTIVE phase and is not evidence of failed mirroring.
-  - PR #143's source authority still maps CombatPhase WINDUP/ACTIVE/RECOVERY/NONE into inherited telemetry/readability fields and uses predictive `test_move()` for committed Shogun movement. Deathly Dash, Predator's Feint/pounce, Eclipse Measure, and Timeless Zone were deliberately overridden without numerical tuning.
-  - Runtime evidence does not justify another gameplay patch at this checkpoint. Hushiro cue rendering and Timeless Zone screen-space placement remain visual-only confirmation items because JSONL/log telemetry cannot establish what Sean actually saw on screen.
-  - No damage, posture, attack-selection weights, cooldowns, authored recovery values, rewards/progression, Aspect/Technique/Prosthetic behavior, or Heart combat changed in PR #143.
+  - PR #146 merged at 2441046c5803e7608e39993e89805c80bbfdf4f0 from exact head bf4c30b663dbe3866e2c53acbdd5395d08e22f27; all 6 triggered workflows green.
+  - PR #146 is documentation/status reconciliation only. It changes no gameplay mechanics, scope counts, balance values, or Heart encounter details.
+  - Updated top-level status-bearing authorities now consistently say the current phase is final integration/playtest tuning/production polish rather than Godot reconciliation or implementation restart.
+  - GAME_OVERVIEW now records authored regional encounter pools/runtime integration and identifies final integration plus Heart encounter design as current work.
+  - FULL_GAME_SCOPE now records that player-build systems, all three regional routes, first-attempt/Strand/campaign flow, release shell, records/settings/accessibility surfaces, and Shogun-to-Heart shell are implemented at first-playtest/release-contract depth.
+  - PRODUCTION_ROADMAP now marks Hushiro, Strand, player-build systems, Yomori, Kagutsuchi/Shogun, narrative/release shell, and structural 1->2->3 handoff as implemented/validated at first-playtest depth; remaining work is tuning/polish/Heart design/release QA.
+  - ENDGAME_POSTGAME_RELEASE now reflects authored achievement contracts and implemented safe checkpoint/resume surfaces while preserving the contract-tested-only Heart victory/postgame boundary until real Heart combat exists.
+  - TRUE_FINAL_HEART remains intentionally non-implementation-ready: it locks role, two-form identity, story/postgame consequence, and constraints, while exact attacks/combinations, movement, parryability, posture/stagger, phase transition, arena, Health/damage, animation, VFX/audio, and accessibility remain open for dedicated encounter design.
+  - GitHub code search returned no usable indexed results during the documentation audit; the approved bounded direct-read fallback was used and recorded in PR #146.
+  - PR #143 remains the latest substantive gameplay change. September 10 telemetry/log validation confirms lifetime/crash stability, Embered Pilgrim/Eclipse Shogun inherited attack-state mirroring, and representative blocked committed-motion stops. Only the Hushiro cue appearance and Timeless Zone placement remain inherently visual confirmation items.
 recent_batches:
-  - pr_143: added phase-driven shared enemy attack cue; synchronized Pilgrim/Shogun attack state; stopped blocked high-speed lunges from skating; fixed Timeless Zone viewport overlay; 10/10 workflows green; September 10 replay machine-validates runtime state/motion/lifetime behavior with only two visual-only checks remaining.
-  - pr_141: fixed player-vs-enemy physical authority so stationary enemies/bosses are not dragged by Akio; repaired Eternal Swordsman post-placement activation/engagement; manually confirmed anti-drag behavior in September 9 replay.
-  - pr_140: hardened remaining live enemy temporary-object lifetimes across Rootfang, Briarthorn, Rotwood Host, Embered Pilgrim, Stalker Hound, and Eclipse Shogun; preserved canonical Kagutsuchi boss scene ownership.
-  - pr_139: fixed physics-safe shared gate emission, solver-driven enemy body sticking, and Lingering Wraith out-of-range ordinary attack selection.
-  - pr_138: fixed shared Keeper/Twin-Maws region-transition choice deadlock and added presentation regression coverage.
-  - pr_137: made Playtest Lab viewport-safe/scrollable and added neutral-by-default 1x-10x Health/Posture debug power presets.
-  - pr_136: fixed Twin Maws freed-partner death crash; generalized enemy reward/object lifetime safety; added shared body-clearance runtime.
+  - pr_146: synchronized top-level implementation-status documentation; 6/6 triggered workflows green; no gameplay changes.
+  - pr_143: added phase-driven shared enemy attack cue; synchronized Pilgrim/Shogun attack state; stopped blocked high-speed lunges from skating; fixed Timeless Zone viewport overlay; 10/10 workflows green; September 10 replay machine-validates runtime state/motion/lifetime behavior.
+  - pr_141: fixed player-vs-enemy physical authority so stationary enemies/bosses are not dragged by Akio; repaired Eternal Swordsman activation/engagement; manually confirmed anti-drag behavior.
+  - pr_140: hardened live enemy temporary-object lifetimes and preserved Kagutsuchi boss scene ownership.
+  - pr_139: fixed gate emission, solver-driven body sticking, and Lingering Wraith out-of-range attack selection.
 confirmed:
-  - PR #119 through #143 merged; never continue old feature branches.
-  - PR #141 stationary enemy/boss anti-drag behavior is manually confirmed by the September 9 replay; preserve this guarantee while refining attack motion.
-  - September 10 build 59d649ae1113c7341a49218421a0cdbcafa155a3 confirms the prior lifetime/deferred/CollisionObject crash class remains clean and provides positive telemetry for PR #143's Pilgrim/Shogun shared attack-state mirroring plus representative blocked-motion stops.
-  - Twin Maws and Eclipse Shogun continue to produce attack/contact activity and can complete their encounters; do not treat either as generally inert.
-  - Direct Playtest Lab Area 2/3 warps are intentional; targeted later-region testing does not require killing Keeper.
-  - Playtest Power defaults to 1x and is debug-session only. Recommended integration preset is 5x Health + 5x Posture + Invulnerable; Fast Clear is 10x + Invulnerable for teardown/reward/transition checks only.
-  - FIRST_ATTEMPT begins directly in the normal Hushiro route at or immediately before Chamber 1; first death awakens Returning Blood and reconstructs at The Strand.
-  - DamageNumberManager rejects zero/non-HP values; EnemyBase floating numbers use actual applied HP loss.
-  - Techniques are slotless/unlimited.
-  - Heart combat remains unauthored; the existing Heart Binding successful-run handoff is progression/presentation, not permission to invent Heart combat.
+  - Substantive gameplay implementation is current through PR #143; PR #146 is the latest merged documentation/status synchronization.
+  - The broad Godot documentation-to-code delta audit is executed/closed. Do not make another broad audit a prerequisite for ordinary work.
+  - No currently identified implementation-ready feature package is missing from code. Remaining launch work is integration validation, tuning, final presentation/art/VFX/audio/readability/accessibility polish, Heart encounter design+implementation, release QA, and legal/provenance completion.
+  - Heart combat remains unauthored by design authority; the existing Heart shell/handoff and downstream Story Complete/postgame behavior are structural/contract-test surfaces, not permission to invent a real Heart kill path.
+  - PR #141 stationary enemy/boss anti-drag behavior is manually confirmed; September 10 replay confirms prior lifetime/deferred/CollisionObject crash class remains clean and supports PR #143 state/motion repairs.
+  - Twin Maws and Eclipse Shogun produce attack/contact activity and can complete their encounters; do not treat either as generally inert.
+  - Direct Playtest Lab Area 2/3 warps are intentional. Playtest Power defaults to 1x; Recommended integration preset is 5x Health + 5x Posture + Invulnerable; Fast Clear is 10x + Invulnerable for teardown/reward/transition checks only.
+  - FIRST_ATTEMPT begins directly in the normal Hushiro route; first death awakens Returning Blood and reconstructs at The Strand.
+  - Techniques are slotless/unlimited outside the five direct action slots as defined by current authorities.
   - Numerical balance/economy/difficulty tuning remains evidence-driven.
   - PR #131 procedural FX are temporary debug/playtest presentation, not final authored art.
   - Current approved Wraith authority is the long-reach frontal posture/control Aspect; do not silently replace it with older Crimson/backstab notes without an explicit design reopen.
-  - No independent Area 2 invisibility/disappearing defect is currently evidenced; require concrete state evidence before changing that system.
+  - No independent Area 2 invisibility/disappearing defect is currently evidenced; require captured state evidence before changing that system.
   - Known provenance blockers remain explicit; never fabricate license evidence.
 avoid_without_evidence:
   - combat/Aspect/Technique/Prosthetic/Relic architecture reopen
-  - authored Heart combat
-  - final Blood Cavern trial count/loadouts/reward sequencing
+  - invented Heart combat before dedicated encounter design
   - broad numerical tuning without integration evidence
   - unrelated PR growth
   - visibility/invisibility rewrites based only on perceived disappearance without captured state evidence
