@@ -4,7 +4,7 @@ title: Endgame, Postgame, and Release Scope
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-09-09
 topics:
   - endgame
   - postgame
@@ -164,7 +164,7 @@ Target approximately **30 launch achievements**, distributed broadly across:
 
 Achievements should reward meaningful play rather than require extreme grind or one-in-a-million first-attempt performance.
 
-Exact names and individual triggers are a later implementation/content pass within this approved volume.
+The launch achievement contract set is now authored at implementation depth within this approved volume. Remaining work is real-player/platform verification and polish rather than another achievement-inventory design pass.
 
 # Launch challenge-system boundary
 
@@ -216,7 +216,7 @@ Deletion requires explicit confirmation.
 
 Autosave should protect permanent rewards and major state changes. Save-safe points include permanent reward acquisition, Strand state changes, boss/campaign milestones, and ending/postgame transitions.
 
-A long 45–60 minute run should support quit-and-resume from safe room/checkpoint boundaries rather than requiring uninterrupted play. Exact checkpoint implementation remains technical design.
+A long 45–60 minute run should support quit-and-resume from safe room/checkpoint boundaries rather than requiring uninterrupted play. The current release runtime implements safe checkpoint/resume boundaries; final integration/QA must validate them under real-player interruption and resume conditions.
 
 # Settings and accessibility
 
@@ -316,13 +316,16 @@ Postgame NPC dialogue may acknowledge containment and repeated suppression, but 
 
 # Scope closure
 
-With this package approved, Oathbound's **top-level launch architecture is closed at paper-design depth**.
+Oathbound's **top-level launch architecture remains closed**, and most of this release package is now realized at first-playtest/release-contract depth.
 
-The next production-detail passes should focus on content realization and playable validation rather than new systems:
+Implemented/validated structurally now includes the three-region route/handoff, six-Binding campaign routing, Shogun-to-Heart shell, authored narrative/records/achievement contracts, release front end, three save slots, Run Results/postgame contract flow, settings/rebinding/accessibility/audio/text surfaces, and completion tracking.
 
-1. author regional standard-encounter pools and encounter compositions,
-2. design/tune regional miniboss and boss encounters,
-3. design/tune the two-form Heart encounter,
-4. realize exact narrative scripts/content,
-5. implement and playtest numerical balance, timing, rewards, and clear-time targets,
-6. final release polish/QA/localization according to this scope.
+The remaining production-detail sequence is:
+
+1. complete real-player integration validation of the currently playable release route and persistence surfaces,
+2. tune regional encounters, bosses, rewards/economy, combat timing/readability, and clear-time targets from playtest evidence,
+3. design the exact two-form Heart combat encounter within `TRUE_FINAL_HEART.md`'s approved boundary, then implement and validate the real player kill path,
+4. finish production-art/VFX/audio/readability/accessibility replacement and localization verification,
+5. complete release QA plus any outstanding third-party legal/provenance evidence.
+
+Until actual Heart combat is authored, downstream Heart victory / Story Complete / postgame behavior remains a contract-tested release surface rather than a normal player-completed combat path.
