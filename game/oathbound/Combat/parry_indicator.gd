@@ -2,151 +2,132 @@ extends Node2D
 
 ## Shared player-facing enemy attack cue.
 ##
-## HumanoidEnemyBase and BeastEnemyBase already look for this script. Until now the
-## tracked file did not exist, so every enemy fell back to a static diamond whose
-## `duration` argument was effectively ignored. This cue derives its important state
-## from the owning enemy's live attack phase instead of trusting inconsistent total-
-## attack-duration values passed by older attacks.
+## `warn_attack()` remains source-compatible with existing enemies, but the supplied
+## legacy duration is translated by CounterCueTiming into seconds until the attack
+## can first contact Akio. Presentation timing is then identical for every enemy:
 ##
-## Contract:
-## - WINDUP: contracting ring/diamond = attack is approaching.
-## - ACTIVE: brief bright pulse = contact/parry timing is live now.
-## - RECOVERY/NONE: cue disappears.
-## - Legacy/special attacks without exposed phase state fall back to the supplied
-##   duration as a best-effort time-to-contact cue.
+## - 0.20 s before contact: fixed-size warning appears.
+## - 0.12 s before contact: fixed-size inner commit mark appears. This matches the
+##   canonical Player parry window.
+## - contact/ACTIVE: cue disappears. There is no contact color flash or scale pulse.
+##
+## Normal and perilous attacks keep different static colors for classification only;
+## color never communicates timing.
+
+const CounterCueTimingScript = preload("res://Combat/CounterCueTiming.gd")
 
 const NORMAL_COLOR := Color(1.0, 0.93, 0.62, 1.0)
 const NORMAL_OUTLINE := Color(0.25, 0.20, 0.10, 0.95)
 const PERILOUS_COLOR := Color(1.0, 0.20, 0.12, 1.0)
 const PERILOUS_OUTLINE := Color(0.38, 0.04, 0.03, 0.98)
-const ACTIVE_COLOR := Color(1.0, 1.0, 1.0, 1.0)
-const ACTIVE_PULSE_SECONDS := 0.14
-const MIN_WARNING_SECONDS := 0.06
 
 var _diamond: Polygon2D = null
 var _outline: Polygon2D = null
 var _ring: Line2D = null
-var _cue_tween: Tween = null
+var _commit_mark: Polygon2D = null
 
 var _armed: bool = false
 var _is_unblockable: bool = false
-var _fallback_ready_at: float = 0.0
-var _fallback_hide_at: float = 0.0
-var _seen_windup: bool = false
-var _seen_active: bool = false
-
-var _has_combat_phase: bool = false
-var _has_telegraphing: bool = false
-var _has_swinging: bool = false
-var _has_is_attacking: bool = false
-var _has_attack_recovery: bool = false
+var _impact_times: Array[float] = []
+var _impact_index: int = 0
+var _warning_visible: bool = false
+var _commit_visible: bool = false
 
 
 func _ready() -> void:
 	position = Vector2(0.0, -45.0)
 	z_index = 150
 	visible = false
+	scale = Vector2.ONE
 	_build_visuals()
-	_cache_owner_contract()
 	set_process(true)
 
 
-func warn_attack(duration: float, is_unblockable: bool = false) -> void:
+func warn_attack(legacy_duration: float, is_unblockable: bool = false) -> void:
 	_is_unblockable = is_unblockable
-	_armed = true
-	_seen_windup = false
-	_seen_active = false
-	var now: float = Time.get_ticks_msec() * 0.001
-	_fallback_ready_at = now + maxf(MIN_WARNING_SECONDS, duration)
-	_fallback_hide_at = 0.0
-	visible = true
-	modulate.a = 1.0
-	_set_warning_colors()
-	scale = Vector2(1.55, 1.55)
+	_impact_times.clear()
+	_impact_index = 0
+	_warning_visible = false
+	_commit_visible = false
 
-	_kill_cue_tween()
-	_cue_tween = create_tween()
-	_cue_tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	_cue_tween.tween_property(self, "scale", Vector2(0.92, 0.92), maxf(MIN_WARNING_SECONDS, duration))
+	var owner := get_parent()
+	var offsets: Array[float] = CounterCueTimingScript.resolve_impact_offsets(owner, legacy_duration)
+	var now: float = Time.get_ticks_msec() * 0.001
+	for offset: float in offsets:
+		_impact_times.append(now + maxf(CounterCueTimingScript.MIN_OFFSET_SECONDS, offset))
+
+	_armed = not _impact_times.is_empty()
+	visible = false
+	scale = Vector2.ONE
+	_set_classification_colors()
+	_set_commit_visible(false)
+	_update_cue(now)
 
 
 func hide_now() -> void:
-	_armed = false
-	_seen_windup = false
-	_seen_active = false
-	_fallback_ready_at = 0.0
-	_fallback_hide_at = 0.0
-	_kill_cue_tween()
-	visible = false
-	scale = Vector2.ONE
-	modulate.a = 1.0
+	_clear_schedule()
 
 
 func _process(_delta: float) -> void:
-	if not _armed or not visible:
+	if not _armed:
+		return
+	_update_cue(Time.get_ticks_msec() * 0.001)
+
+
+func _update_cue(now: float) -> void:
+	while _impact_index < _impact_times.size() and now >= _impact_times[_impact_index]:
+		# The prompt's job is prediction. It disappears when the attack becomes live;
+		# there is intentionally no ACTIVE/contact flash.
+		visible = false
+		_warning_visible = false
+		_commit_visible = false
+		_set_commit_visible(false)
+		_impact_index += 1
+
+	if _impact_index >= _impact_times.size():
+		_clear_schedule()
 		return
 
-	var now: float = Time.get_ticks_msec() * 0.001
-	if _has_combat_phase:
-		var phase: int = int(get_parent().get("_combat_phase"))
-		match phase:
-			1: # WINDUP
-				_seen_windup = true
-				return
-			2: # ACTIVE
-				if not _seen_active:
-					_pulse_active(now)
-				return
-			3: # RECOVERY
-				hide_now()
-				return
-			0: # NONE
-				if _seen_windup or _seen_active:
-					hide_now()
-					return
-
-	if _has_telegraphing or _has_swinging or _has_is_attacking:
-		var winding: bool = _read_owner_bool("telegraphing") if _has_telegraphing else false
-		var swinging_now: bool = _read_owner_bool("swinging") if _has_swinging else false
-		var attacking_now: bool = _read_owner_bool("is_attacking") if _has_is_attacking else false
-		var recovering: bool = _read_owner_bool("_attack_recovery") if _has_attack_recovery else false
-		var active_now: bool = swinging_now or (attacking_now and not winding and not recovering)
-
-		if winding:
-			_seen_windup = true
-			return
-		if active_now:
-			if not _seen_active:
-				_pulse_active(now)
-			return
-		if recovering or ((_seen_windup or _seen_active) and not attacking_now):
-			hide_now()
-			return
-
-	# Special legacy attacks (for example Rootfang's roll mode) do not always expose
-	# a combat phase. Keep those readable without forcing their state machines through
-	# the humanoid contract.
-	if not _seen_active and now >= _fallback_ready_at:
-		_pulse_active(now)
-	if _seen_active and _fallback_hide_at > 0.0 and now >= _fallback_hide_at:
-		hide_now()
+	var remaining: float = _impact_times[_impact_index] - now
+	if remaining <= CounterCueTimingScript.WARNING_LEAD_SECONDS:
+		if not _warning_visible:
+			_show_warning()
+		if remaining <= CounterCueTimingScript.PARRY_BEAT_LEAD_SECONDS and not _commit_visible:
+			_show_commit_mark()
+	else:
+		visible = false
+		_warning_visible = false
+		_commit_visible = false
+		_set_commit_visible(false)
 
 
-func _pulse_active(now: float) -> void:
-	_seen_active = true
-	_fallback_hide_at = now + ACTIVE_PULSE_SECONDS
-	_kill_cue_tween()
-	if _diamond != null:
-		_diamond.color = ACTIVE_COLOR
-	if _ring != null:
-		_ring.default_color = ACTIVE_COLOR
-	if _outline != null:
-		_outline.color = PERILOUS_OUTLINE if _is_unblockable else NORMAL_OUTLINE
-	scale = Vector2(0.82, 0.82)
-	_cue_tween = create_tween()
-	_cue_tween.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	_cue_tween.tween_property(self, "scale", Vector2(1.28, 1.28), 0.07)
-	_cue_tween.tween_property(self, "scale", Vector2.ONE, 0.07)
+func _show_warning() -> void:
+	_warning_visible = true
+	_commit_visible = false
+	visible = true
+	scale = Vector2.ONE
+	_set_classification_colors()
+	_set_commit_visible(false)
+
+
+func _show_commit_mark() -> void:
+	_commit_visible = true
+	visible = true
+	scale = Vector2.ONE
+	# Timing is conveyed only by the appearance of this inner mark. The outer cue
+	# does not resize and its normal/perilous classification color does not change.
+	_set_commit_visible(true)
+
+
+func _clear_schedule() -> void:
+	_armed = false
+	_impact_times.clear()
+	_impact_index = 0
+	_warning_visible = false
+	_commit_visible = false
+	visible = false
+	scale = Vector2.ONE
+	_set_commit_visible(false)
 
 
 func _build_visuals() -> void:
@@ -172,6 +153,20 @@ func _build_visuals() -> void:
 	_ring.z_index = -2
 	add_child(_ring)
 
+	# A small fixed center bar appears only for the final canonical parry beat.
+	# It never scales or changes the classification color of the outer prompt.
+	_commit_mark = Polygon2D.new()
+	_commit_mark.polygon = PackedVector2Array([
+		Vector2(-2.0, -7.0),
+		Vector2(2.0, -7.0),
+		Vector2(2.0, 7.0),
+		Vector2(-2.0, 7.0),
+	])
+	_commit_mark.color = NORMAL_COLOR
+	_commit_mark.visible = false
+	_commit_mark.z_index = 1
+	add_child(_commit_mark)
+
 
 func _diamond_points(size: float) -> PackedVector2Array:
 	return PackedVector2Array([
@@ -182,7 +177,7 @@ func _diamond_points(size: float) -> PackedVector2Array:
 	])
 
 
-func _set_warning_colors() -> void:
+func _set_classification_colors() -> void:
 	var main_color: Color = PERILOUS_COLOR if _is_unblockable else NORMAL_COLOR
 	var outline_color: Color = PERILOUS_OUTLINE if _is_unblockable else NORMAL_OUTLINE
 	if _diamond != null:
@@ -191,34 +186,10 @@ func _set_warning_colors() -> void:
 		_ring.default_color = main_color
 	if _outline != null:
 		_outline.color = outline_color
+	if _commit_mark != null:
+		_commit_mark.color = main_color
 
 
-func _cache_owner_contract() -> void:
-	var owner: Object = get_parent()
-	if owner == null:
-		return
-	_has_combat_phase = _object_has_property(owner, "_combat_phase")
-	_has_telegraphing = _object_has_property(owner, "telegraphing")
-	_has_swinging = _object_has_property(owner, "swinging")
-	_has_is_attacking = _object_has_property(owner, "is_attacking")
-	_has_attack_recovery = _object_has_property(owner, "_attack_recovery")
-
-
-func _object_has_property(object: Object, property_name: String) -> bool:
-	for property_value: Dictionary in object.get_property_list():
-		if String(property_value.get("name", "")) == property_name:
-			return true
-	return false
-
-
-func _read_owner_bool(property_name: String) -> bool:
-	var owner: Object = get_parent()
-	if owner == null:
-		return false
-	return bool(owner.get(property_name))
-
-
-func _kill_cue_tween() -> void:
-	if _cue_tween != null and _cue_tween.is_valid():
-		_cue_tween.kill()
-	_cue_tween = null
+func _set_commit_visible(value: bool) -> void:
+	if _commit_mark != null:
+		_commit_mark.visible = value
