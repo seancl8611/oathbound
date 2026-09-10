@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-09-09
 topics:
   - project-identity
   - combat
@@ -121,7 +121,7 @@ Boss materials are earned every time their boss is defeated and are saved immedi
 
 # Run structure
 
-The approved first regional prototype contains **33 counted chambers**:
+The approved launch regional route contains **33 counted chambers**:
 
 - **Hushiro Gate Village:** 12 chambers, Keeper of the Gate at 12, ~14–16 active minutes.
 - **Yomori Grove:** 10 chambers, Twin Maws at 10, ~12–14 minutes.
@@ -133,9 +133,9 @@ Standard Combat rooms use **deliberately authored encounter scripts**. When a Co
 
 Standard enemies are region-native by default. Cross-region continuation uses a separately authored evolved regional variant rather than carrying the unchanged enemy forward or simply increasing its statistics. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's five standard enemies are all native Court units.
 
-The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, permanent-progression content-volume, first-attempt, narrative-delivery, and postgame/release models are approved as prototype/paper-design targets. Exact values remain playtest-tunable.
+The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, permanent-progression, first-attempt, narrative-delivery, and postgame/release models are approved and implemented at first-playtest/release-contract depth. Exact values remain playtest-tunable.
 
-A normal successful Binding run targets approximately **45–50 minutes of active time**. Heart/Suppression routes target approximately **55–60 minutes**. Encounter-pool counts and individual encounter scripts remain later content-production/playtest work.
+A normal successful Binding run targets approximately **45–50 minutes of active time**. Heart/Suppression routes target approximately **55–60 minutes**. Regional encounter pools and encounter scripts are authored and runtime-integrated; remaining encounter work is playtest-driven tuning, readability, pacing, and final presentation polish.
 
 # Campaign structure
 
@@ -194,17 +194,17 @@ Mandatory campaign information is communicated directly; the Discovery Board car
 
 # Current design focus
 
-Oathbound's **top-level launch architecture is closed at paper-design depth**.
+Oathbound's **top-level launch architecture is closed**, and the planned first-playtest/runtime package is substantially implemented through the Shogun-to-Heart shell.
 
-The next work is content realization and playable validation:
+Current work is:
 
-1. author the regional standard-encounter pools,
-2. define playable miniboss and boss encounter packages,
-3. define the two-form Heart moveset/arena package,
-4. realize exact narrative/achievement/trial content,
-5. tune numbers and validate clear-time/economy/combat targets.
+1. final real-player integration validation and evidence-backed stability/readability fixes,
+2. playtest-driven combat, encounter, economy, reward, and run-duration tuning,
+3. final production-art/VFX/audio/readability/accessibility replacement and polish,
+4. dedicated design of the two-form Heart moveset/arena/tuning package within the approved Heart identity/structure, followed by implementation and real-player validation,
+5. release QA, localization verification, and legal/provenance completion.
 
-Exact final balance values, mastery thresholds, frame data, detailed scripts, and final localization/audio implementation remain later work under their owning authorities.
+The Heart's exact combat design is the major intentional gameplay-content gap. `TRUE_FINAL_HEART.md` explicitly leaves that moveset/arena/tuning work open, so it must be designed before implementation rather than inferred from the current non-combat shell.
 
 # Source links
 

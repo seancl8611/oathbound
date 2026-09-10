@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-09-09
 topics:
   - full-scope
   - techniques
@@ -196,14 +196,23 @@ Launch does **not** require:
 
 # Scope status
 
-**Top-level launch architecture is closed at paper-design depth.**
+**Top-level launch architecture remains closed, and the planned first-playtest runtime is substantially realized.**
 
-Next work is content realization and playable validation:
+Implemented/validated at first-playtest or release-contract depth now includes:
 
-1. author regional standard-encounter pools,
-2. design/tune miniboss and boss encounters,
-3. design/tune the two-form Heart encounter,
-4. realize exact scripts/achievements/trials/content,
-5. tune numerical balance and validate run-time targets.
+1. the shared combat/player-build layer — Blood Aspects, Techniques, Prosthetics, Relics, Corruption/Shrines, Blood generation, and permanent progression bridges,
+2. the authored Hushiro / Yomori / Kagutsuchi regional routes, enemy/miniboss/boss content, rewards, and Region 1 -> 2 -> 3 runtime handoffs,
+3. first-attempt/no-Aspect flow, Returning Blood awakening, Strand progression, six-Binding campaign routing, and the Shogun-to-Heart handoff shell,
+4. authored narrative/presentation contracts, release front end, three save slots, records/completion, settings/accessibility surfaces, and postgame contract flow.
 
-`OPEN_QUESTIONS.md` owns the active content-production sequence.
+Remaining production work is not another broad documentation-to-code pass. It is:
+
+1. final real-player integration validation and evidence-backed stability/readability fixes,
+2. playtest-driven numerical balance, economy, encounter feel, and run-pacing validation,
+3. final production-art/VFX/audio/readability/accessibility replacement and polish,
+4. dedicated design of the true-final two-form Heart combat moveset/arena/tuning, followed by implementation and real-player validation,
+5. release QA plus any outstanding legal/provenance completion.
+
+The current Heart runtime remains a non-combat integration shell. `TRUE_FINAL_HEART.md` intentionally leaves its exact moveset and encounter implementation details open, so code must not invent that encounter merely to close an implementation checklist.
+
+`OPEN_QUESTIONS.md` owns the active integration/playtest boundary; `PRODUCTION_ROADMAP.md` owns the current production order.
