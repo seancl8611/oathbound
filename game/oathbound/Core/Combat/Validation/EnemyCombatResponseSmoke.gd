@@ -51,8 +51,8 @@ func _check_guard_conversion(runtime: Node, failures: Array[String]) -> void:
 		failures.append("guard response decoration did not return a Dictionary")
 		return
 	var decorated: Dictionary = decorated_value as Dictionary
-	if absf(float(decorated.get("posture_on_block", 0.0)) - 13.5) > 0.001:
-		failures.append("Swordsman guard should amplify posture pressure independently")
+	if absf(float(decorated.get("posture_on_block", 0.0)) - 10.0) > 0.001:
+		failures.append("Swordsman V2 slice should preserve canonical block-Posture authoring")
 
 
 func _check_poise(runtime: Node, failures: Array[String]) -> void:
