@@ -172,6 +172,11 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	)
 	_expect(_latest_damage_number_text() == "4", "guarded floating number did not equal actual enemy HP lost")
 
+	# DamageNumberManager intentionally rate-limits duplicate target+type presentation
+	# for 0.1s. These are separate semantic assertions, so wait beyond that UI-only
+	# cooldown before validating the unguarded control contact.
+	await get_tree().create_timer(0.12).timeout
+
 	# A real unguarded HP hit must still create one number, and that number must
 	# equal the HP actually removed rather than Posture pressure or raw attack power.
 	enemy.call("_set_blocking", false)
