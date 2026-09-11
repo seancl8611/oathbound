@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Core/Combat/Validation/PlayerActionMotorSmoke.gd" id="1_player_motor_smoke"]
+
+[node name="PlayerActionMotorSmoke" type="Node"]
+script = ExtResource("1_player_motor_smoke")
