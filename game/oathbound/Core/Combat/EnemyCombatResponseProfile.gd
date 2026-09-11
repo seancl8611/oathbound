@@ -44,3 +44,25 @@ static func corrupted_swordsman_v2() -> EnemyCombatResponseProfile:
 	profile.committed_poise_required = 2
 	profile.guard_break_poise_required = 2
 	return profile
+
+
+static func blighted_hound_v2() -> EnemyCombatResponseProfile:
+	var profile := EnemyCombatResponseProfile.new()
+	profile.profile_id = "blighted_hound_v2"
+
+	# Hounds do not guard. These values are intentionally neutral so the shared response
+	# runtime can still own Poise/interruption without inventing a beast guard mechanic.
+	profile.guard_health_multiplier = 1.0
+	profile.guard_posture_multiplier = 1.0
+	profile.guard_duration = 0.05
+	profile.guard_cooldown = 0.0
+	profile.guard_break_cooldown = 0.0
+	profile.guard_range = 0.0
+
+	# The beast is deliberately easy to knock off neutral movement, but once a pounce or
+	# bite has committed, Akio needs a stronger impact to stop the action. Health damage
+	# and canonical Posture still apply even when the committed attack survives.
+	profile.neutral_poise_required = 1
+	profile.committed_poise_required = 2
+	profile.guard_break_poise_required = 2
+	return profile
