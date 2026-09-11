@@ -66,3 +66,24 @@ static func blighted_hound_v2() -> EnemyCombatResponseProfile:
 	profile.committed_poise_required = 2
 	profile.guard_break_poise_required = 2
 	return profile
+
+
+static func hollow_v2() -> EnemyCombatResponseProfile:
+	var profile := EnemyCombatResponseProfile.new()
+	profile.profile_id = "hollow_v2"
+
+	# Hollows are swarm fodder, not defensive duelists. They never guard, and the shared
+	# response runtime exists only to make their low Poise policy explicit.
+	profile.guard_health_multiplier = 1.0
+	profile.guard_posture_multiplier = 1.0
+	profile.guard_duration = 0.05
+	profile.guard_cooldown = 0.0
+	profile.guard_break_cooldown = 0.0
+	profile.guard_range = 0.0
+
+	# Even a committed Hollow bite remains interruptible by an ordinary canonical sword
+	# hit. Its threat comes from room position and numbers, not armor-like commitment.
+	profile.neutral_poise_required = 1
+	profile.committed_poise_required = 1
+	profile.guard_break_poise_required = 1
+	return profile

@@ -169,6 +169,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 Hollow migration
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/HollowV2MigrationSmoke.tscn 2>&1 | tee hollow-v2-migration.log
+          grep -F "[HollowV2MigrationSmoke] PASS - simple fodder brain | pressure bite | commitment | low poise | Posture preserved" hollow-v2-migration.log
+          if grep -F "SCRIPT ERROR:" hollow-v2-migration.log; then
+            echo "FAIL: Combat V2 Hollow migration smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hollow-v2-migration.log; then
+            echo "FAIL: Combat V2 Hollow migration smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -186,5 +201,6 @@ jobs:
             enemy-brain.log
             pressure-director.log
             hound-v2-migration.log
+            hollow-v2-migration.log
           if-no-files-found: warn
           retention-days: 7
