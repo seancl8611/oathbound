@@ -25,51 +25,51 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-11T00:32:00Z
+updated_utc: 2026-09-11T01:40:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 149
-  feature_head: d4cb53168c4c2febe4e8ea3ebf595711b0388b2d
-  merge_commit: c80aca2560ddb1f01a1fdc9e4eaefaf9b0c97cc4
-  validation: 10/10 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Release Shell, Blood Cavern Execution Trial, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation
+  pr: 150
+  feature_head: 51cd14c5000e71cc31f7399d8959142218c30bbb
+  merge_commit: 7d26116cd3ccc34b8d5ff31227ac9e8d00db2327
+  validation: 9/9 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Blood Cavern Execution Trial, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: c80aca2560ddb1f01a1fdc9e4eaefaf9b0c97cc4
-known_good_checkpoint: c80aca2560ddb1f01a1fdc9e4eaefaf9b0c97cc4
+covered_through_substantive_commit: 7d26116cd3ccc34b8d5ff31227ac9e8d00db2327
+known_good_checkpoint: 7d26116cd3ccc34b8d5ff31227ac9e8d00db2327
 current_objective: >-
-  Combat V2 Phase 1 reference-enemy response is now integrated for the Corrupted Swordsman. The game has a reusable `EnemyCombatResponseProfile` + `EnemyCombatResponseRuntime` boundary that keeps Health damage, Posture/Stagger pressure, guard conversion, and immediate Poise interruption separate while preserving the canonical AttackEvent/CombatController mutation path. Swordsman guard is now a finite authored window with cooldown and partial Health-through-guard; weak hits can damage a committed Swordsman without automatically cancelling the attack, while stronger Poise impacts can interrupt commitment or break guard. Current Player action/motion architecture, Swordsman attack execution/HFSM, and AttackDirector remain V1/legacy until later bounded migration packages.
+  Combat V2 Phase 1 reference-enemy response remains integrated for the Corrupted Swordsman, and PR #150 restores the explicit player-facing Posture readability contract exposed by the September 10 live playtest. Posture and Deathblow were never retired: CombatController Posture remains the mechanical authority and the existing enemy PostureBar remains the canonical player-facing buildup / Deathblow-approach signal until an explicit replacement is designed and approved. Hushiro now attaches `HushiroPostureReadabilityRuntime` after its post-spawn enemy contract so the existing bar is synchronized from the same authoritative posture values even if later runtime layering leaves presentation stale. Current Player action/motion architecture, Swordsman attack execution/HFSM, and AttackDirector remain V1/legacy until later bounded migration packages.
 next_action: >-
-  Manually feel-test the merged Corrupted Swordsman V2 response slice on `main`: first one isolated Swordsman, then Swordsman + Hound and Swordsman + Archer. Confirm short/legible guard windows, visible Health progress through guard, light-hit neutral interruption, Health-without-cancel during committed attacks, stronger interruption/guard break, and intact parry/Posture/Deathblow behavior. Return CombatTelemetry/log evidence if anything feels wrong. If the response model feels coherent, the next CI-heavy implementation package is Phase 2: introduce the reusable `CombatActionRunner` + `EnemyMotor` around the Swordsman while initially preserving its current authored attacks. Do not jump directly to PressureDirectorV2, global encounter-count/Health retuning, Player rewrite, or broad enemy migration.
+  Continue with Combat V2 Phase 2 as the next CI-heavy implementation package: introduce the reusable `CombatActionRunner` + `EnemyMotor` around the Corrupted Swordsman while initially preserving its current authored attacks and all canonical Health/Posture/Deathblow interfaces. The September 10 playtest confirmed that Phase 1 response semantics alone are not expected to transform overall feel because `AttackDirector` still owns stable single-turn combat and Hushiro still limits active melee pressure. After Phase 2, migrate Swordsman tactical decisions into controlled-cadence `EnemyBrain`, then implement PressureDirectorV2. Do not suppress/remove PostureBar unless a later explicit readability replacement is approved and validated.
 current_batch:
-  - PR #149 merged at c80aca2560ddb1f01a1fdc9e4eaefaf9b0c97cc4 from exact head d4cb53168c4c2febe4e8ea3ebf595711b0388b2d; all 10 triggered workflows green.
-  - Added `docs/overview/V2_COMBAT_IMPLEMENTATION_BLUEPRINT.md` as the concrete migration/component authority beneath `docs/overview/V2_COMBAT_DIRECTION.md`.
-  - Added `Core/Combat/EnemyCombatResponseProfile.gd` and `EnemyCombatResponseRuntime.gd`; response policy/timing is now compositional and does not create a second Health/Posture mutation pass.
-  - Corrupted Swordsman is the first V2 reference slice: guard duration 0.34s, guard cooldown 1.15s, guard-break cooldown 1.65s, guard range 95px, and 35% Health-through-guard are initial playtest values rather than global rules.
-  - Canonical incoming `block_posture_damage` remains authoritative during guard; the response profile does not multiply that value in this first slice.
-  - Poise migration currently reads explicit `poise_damage` when present and otherwise bridges canonical `stagger_level` to power (`level + 1`); neutral Swordsman requires power 1 to interrupt, committed offense/guard break require power 2.
-  - Guarded Health feedback is clamped to actual HP removed, including overkill, and existing target+damage-type damage-number presentation cooldown remains unchanged.
-  - Updated Hushiro defense/readability regression contracts and added `EnemyCombatResponseSmoke`; tests prove finite guard timing/cooldown, partial guarded Health, canonical single-pass Posture, neutral-vs-committed Poise behavior, guard break, and exact HP number semantics.
-  - One CI failure during development was traced to the existing 0.1s DamageNumberManager target+type presentation cooldown between two independent test assertions; the test now spaces those assertions beyond the UI-only cooldown rather than altering gameplay.
-  - No Player combo/action rewrite, EnemyMotor/EnemyBrain migration, PressureDirectorV2, global enemy-count/Health retune, stamina system, boss redesign, or Aspect capability removal was included.
+  - PR #150 merged at 7d26116cd3ccc34b8d5ff31227ac9e8d00db2327 from exact head 51cd14c5000e71cc31f7399d8959142218c30bbb; all 9 triggered workflows green.
+  - September 10 playtest build `d0dac425128c0394f02954b7077988cde0e60a4f` showed the mechanical Posture/Deathblow path remained active while Sean could no longer see enemy Posture bars. Telemetry captured real Swordsman Posture growth through 25/35/51/87/90 plus posture-break and Deathblow-armed events, proving this was presentation/readability drift rather than mechanic retirement.
+  - PR #149 did not delete or hide the shared EnemyBase PostureBar implementation; its code matched the pre-#149 baseline. The live-only seam was the later Hushiro post-spawn contract, which owns authoritative regional posture configuration after enemy `_ready()` has already constructed presentation.
+  - Added `Utility/HushiroPostureReadabilityRuntime.gd`, a presentation-only bridge that reads canonical CombatController posture/max and refreshes the existing EnemyBase PostureBar every physics frame. It never mutates posture, break state, Health, or Deathblow eligibility.
+  - `HushiroEnemyContract` now attaches the readability bridge beside the existing `HushiroPostureBreakRuntime`; telemetry records that ownership explicitly.
+  - Strengthened `HushiroGuardReadabilitySmoke` to mirror live Hushiro spawn order, assert the regional readability runtime is attached, verify PostureBar exists, is visible in-tree, has non-zero fill after canonical Posture damage, and can recover from stale hidden presentation while the underlying posture remains non-zero.
+  - The isolated pre-fix test proved EnemyBase still created/updated a visible bar; the strengthened live-order test now protects the post-spawn Hushiro runtime layering that the prior regression suite did not cover.
+  - The same playtest also confirmed why Combat V2 felt only subtly different: Phase 1 changed response/guard/poise semantics but left the legacy single-turn AttackDirector, Swordsman HFSM/motion, and Hushiro one-melee-turn pressure policy intact.
 recent_batches:
+  - pr_150: restored/protected Hushiro PostureBar readability without changing posture/deathblow mechanics; added live-order regional synchronization runtime; 9/9 triggered workflows green.
   - pr_149: implemented first Combat V2 reference-enemy response slice for Corrupted Swordsman; documented implementation blueprint; finite guard + partial Health + state Poise; 10/10 workflows green.
   - pr_148: refined V2 defense, guard, Health/posture, poise, break, and Deathblow direction; 6/6 workflows green; documentation/design only.
   - pr_147: recorded approved Combat V2 hunter direction; 6/6 triggered workflows green; documentation/design only.
   - pr_146: synchronized top-level implementation-status documentation; 6/6 triggered workflows green; no gameplay changes.
-  - pr_143: added phase-driven shared enemy attack cue; synchronized Pilgrim/Shogun attack state; stopped blocked high-speed lunges from skating; fixed Timeless Zone viewport overlay; 10/10 workflows green; September 10 replay machine-validates runtime state/motion/lifetime behavior.
 confirmed:
   - Combat V2 transition direction is approved in `docs/overview/V2_COMBAT_DIRECTION.md`; concrete migration/component order is now in `docs/overview/V2_COMBAT_IMPLEMENTATION_BLUEPRINT.md`.
-  - PR #149 is the first explicit V2 gameplay migration package; current V1 gameplay authorities remain operative outside the bounded Corrupted Swordsman response seam.
+  - PR #149 is the first explicit V2 gameplay migration package; PR #150 repairs the player-facing Posture readability seam discovered immediately afterward.
+  - Enemy PostureBar is still canonical player-facing feedback for Posture buildup and approaching Deathblow availability. It is not retired, optional, or implicitly replaceable by Combat V2 until a dedicated replacement is explicitly approved.
+  - Posture/Deathblow mechanical state remained active in the September 10 live playtest even while the bar was missing; do not interpret missing UI as permission to change/remove the underlying system.
   - Oathbound remains Japanese supernatural dark fantasy in current repository authority, with Akio framed more as an aggressive supernatural hunter than a formal duelist; broader theme changes discussed outside the repo require a dedicated authority update before implementation.
   - Standard V2 combat should create visible Health progress and faster ordinary-enemy kills while preserving posture/stagger, parry, and Deathblow as optional tactical layers.
   - Health, posture/stagger, and poise are not mirror resources: Health governs defeat, posture/stagger governs break/control opportunity, and poise governs immediate flinch/interruption behavior.
   - Guard does not require one universal HP/posture conversion. Enemy-specific defensive identity is an explicit V2 authoring principle.
   - A shield user's strong 0-HP block and a swordsman's partial-damage guard can both be valid if their frequency, duration, stagger pressure, and counterplay fit their roles.
-  - Taking Health damage and being interrupted are not assumed to be the same event in V2; PR #149 now proves that distinction on committed Corrupted Swordsman offense.
+  - Taking Health damage and being interrupted are not assumed to be the same event in V2; PR #149 proves that distinction on committed Corrupted Swordsman offense.
   - Enemy posture/stagger recovery does not need one universal cadence; multi-target combat should not force Sekiro-style continuous pressure on every target.
   - Aspect-specific block/parry/defensive capability ownership remains undecided. No current Aspect loses a shared mechanic until a later explicit capability pass.
-  - Substantive gameplay implementation is current through PR #149 merge c80aca2560ddb1f01a1fdc9e4eaefaf9b0c97cc4.
+  - Substantive gameplay implementation is current through PR #150 merge 7d26116cd3ccc34b8d5ff31227ac9e8d00db2327.
   - The broad Godot documentation-to-code delta audit is executed/closed. Do not make another broad audit a prerequisite for ordinary work.
   - Heart combat remains unauthored by design authority; the existing Heart shell/handoff and downstream Story Complete/postgame behavior are structural/contract-test surfaces, not permission to invent a real Heart kill path.
   - PR #141 stationary enemy/boss anti-drag behavior is manually confirmed; September 10 replay confirms prior lifetime/deferred/CollisionObject crash class remains clean and supports PR #143 state/motion repairs.
@@ -85,6 +85,7 @@ confirmed:
 avoid_without_evidence:
   - unbounded whole-game combat rewrite instead of dependency-sized Combat V2 packages
   - rewriting the working player combo/action foundation before reference-enemy playtest evidence identifies a V2 blocker
+  - suppressing/removing enemy PostureBar before an explicit replacement for Posture buildup / Deathblow-readiness feedback is approved
   - one universal enemy Health-through-guard percentage or posture/poise formula
   - removing or replacing block/parry on an Aspect before the dedicated V2 capability pass
   - globally increasing enemy counts or lowering Health/stagger values before the V2 response/pressure foundations exist
@@ -107,6 +108,7 @@ avoid_without_evidence:
 - Defer physics registration mutation during active contact traversal.
 - One canonical Player creation path; canonical AttackEvent only; no second damage/posture pass.
 - Posture-break/Deathblow shared state; block uses current defensive aim while current V1 contracts remain operative.
+- Enemy PostureBar remains canonical buildup/Deathblow-readiness feedback until an explicit replacement is approved; regional/runtime layers must keep it synchronized with authoritative CombatController posture.
 - `.godot/`/`.import/` untracked; verify source assets + clean import before declaring missing.
 
 ## DESIGN_ACCESS
