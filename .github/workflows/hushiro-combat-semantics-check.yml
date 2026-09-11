@@ -154,6 +154,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 Hound migration
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/HoundV2MigrationSmoke.tscn 2>&1 | tee hound-v2-migration.log
+          grep -F "[HoundV2MigrationSmoke] PASS - predator brain | action commitment | motor ownership | Poise | pressure windows | Posture preservation" hound-v2-migration.log
+          if grep -F "SCRIPT ERROR:" hound-v2-migration.log; then
+            echo "FAIL: Combat V2 Hound migration smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hound-v2-migration.log; then
+            echo "FAIL: Combat V2 Hound migration smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -170,5 +185,6 @@ jobs:
             player-action-motor.log
             enemy-brain.log
             pressure-director.log
+            hound-v2-migration.log
           if-no-files-found: warn
           retention-days: 7
