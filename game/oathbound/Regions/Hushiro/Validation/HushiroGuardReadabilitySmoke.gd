@@ -2,6 +2,7 @@ extends Node
 
 const PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const SWORDSMAN_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn")
+const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
 
 var _failures: Array[String] = []
 
@@ -27,6 +28,11 @@ func _run() -> void:
 	add_child(enemy)
 	await get_tree().process_frame
 
+	# Match the live Hushiro spawner order: enemy _ready() first, then the regional
+	# contract replaces the authoritative CombatController posture configuration.
+	HUSHIRO_ENEMY_CONTRACT.apply(enemy, "swordsman")
+	await get_tree().process_frame
+
 	player.set_physics_process(false)
 	player.set_process_input(false)
 	player.set_process_unhandled_input(false)
@@ -35,11 +41,13 @@ func _run() -> void:
 
 	var combat: Node = enemy.get_node_or_null("Combat")
 	var hurtbox: Node = enemy.get_node_or_null("HurtBox")
+	var readability_runtime: Node = enemy.get_node_or_null("HushiroPostureReadabilityRuntime")
 	if combat == null or hurtbox == null:
 		_fail("Swordsman missing Combat or HurtBox")
 		_cleanup(player, enemy)
 		_finish()
 		return
+	_expect(readability_runtime != null, "live Hushiro contract did not attach posture readability runtime")
 	if combat.has_method("reset_posture"):
 		combat.call("reset_posture")
 
@@ -78,6 +86,28 @@ func _run() -> void:
 	_expect(_count_damage_number_nodes() == numbers_before + 1, "guarded Health loss did not create exactly one damage number")
 	_expect(_latest_damage_number_text() == "4", "guarded damage number did not equal actual Health lost")
 	_expect(bool(enemy.call("is_guard_cue_visible")), "light guarded contact incorrectly collapsed the guard cue")
+
+	# Posture remains a canonical V2 readability mechanic until an explicit replacement
+	# is approved. Numeric posture alone is not sufficient: the player must see the
+	# buildup and therefore understand when a Deathblow opportunity is approaching.
+	var posture_bar: Node2D = enemy.get_node_or_null("PostureBar") as Node2D
+	_expect(posture_bar != null, "Swordsman lost its canonical PostureBar node")
+	if posture_bar != null:
+		_expect(posture_bar.visible, "PostureBar stayed hidden after real Posture damage")
+		_expect(posture_bar.is_visible_in_tree(), "PostureBar is locally visible but not visible in the live scene tree")
+	var posture_fill_value: Variant = enemy.get("_posture_fill")
+	_expect(posture_fill_value is ColorRect, "Swordsman PostureBar is missing its fill")
+	if posture_fill_value is ColorRect:
+		var posture_fill: ColorRect = posture_fill_value as ColorRect
+		_expect(posture_fill.size.x > 0.0, "PostureBar fill did not represent accumulated Posture")
+
+	# Prove the regional bridge can recover presentation if a later runtime layer leaves
+	# the bar stale/hidden while canonical posture remains non-zero.
+	if posture_bar != null and readability_runtime != null:
+		posture_bar.visible = false
+		readability_runtime.call("sync_now")
+		_expect(posture_bar.visible, "Hushiro posture readability runtime did not recover a stale hidden bar")
+		_expect(posture_bar.is_visible_in_tree(), "reconciled PostureBar is still not visible in the scene tree")
 
 	enemy.call("_set_blocking", false)
 	_expect(not bool(enemy.call("is_guard_cue_visible")), "guard cue remained visible after guard ended")
