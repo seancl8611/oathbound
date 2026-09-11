@@ -1,8 +1,12 @@
 extends "res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanController.gd"
 
 ## Readability/stability layer for the current Hushiro Swordsman.
-## Keeps the existing attack implementations and authored sprites while replacing the
-## imported pacing with a controlled Sekiro-like duel cadence and visible hit recoil.
+## Combat V2 reference slice: keeps the existing attack implementations and authored
+## sprites while replacing permanent DEFEND blocking and unconditional hit interruption
+## with authored guard windows and state-dependent poise.
+
+const RESPONSE_PROFILE_SCRIPT = preload("res://Core/Combat/EnemyCombatResponseProfile.gd")
+const RESPONSE_RUNTIME_SCRIPT = preload("res://Core/Combat/EnemyCombatResponseRuntime.gd")
 
 const LIGHT_HIT_STUN := 0.16
 const MEDIUM_HIT_STUN := 0.22
@@ -11,12 +15,13 @@ const POST_HIT_BREATHING_ROOM := 0.24
 const GUARD_CUE_COLOR := Color(0.86, 0.94, 1.0, 0.95)
 
 var _guard_cue: Line2D = null
+var _v2_response: Node = null
 
 
 func _ready() -> void:
 	# Keep the actual tells readable, but shorten the idle/observation gaps. The room
-	# director now controls concurrency, so an individual Swordsman should actively
-	# contest Akio when it owns the turn rather than circle for several seconds.
+	# director still controls concurrency in this first V2 slice; individual response
+	# behavior is migrated before PressureDirector V2 changes encounter admission.
 	telegraph_time = 0.68
 	thrust_telegraph_time = 0.72
 	cross_telegraph_time = 0.68
@@ -41,10 +46,29 @@ func _ready() -> void:
 	orbit_speed = 24.0
 	watch_orbit_speed = 30.0
 	super._ready()
+	_install_v2_response_runtime()
 	_arm_legacy_timer_cleanup()
 	_ensure_guard_cue()
 	_sync_guard_cue(false)
-	print("[CorruptedSwordsman] v2.2 - active duel cadence + explicit guard cue")
+	print("[CorruptedSwordsman] v2.3 - Combat V2 guard/poise reference slice")
+
+
+func _install_v2_response_runtime() -> void:
+	if _v2_response != null and is_instance_valid(_v2_response):
+		return
+	var runtime_value: Variant = RESPONSE_RUNTIME_SCRIPT.new()
+	if not (runtime_value is Node):
+		push_error("[CorruptedSwordsman] Could not create EnemyCombatResponseRuntime")
+		return
+	_v2_response = runtime_value as Node
+	_v2_response.name = "EnemyCombatResponseRuntime"
+	add_child(_v2_response)
+
+	var profile_value: Variant = RESPONSE_PROFILE_SCRIPT.corrupted_swordsman_v2()
+	if profile_value == null:
+		push_error("[CorruptedSwordsman] Could not create V2 response profile")
+		return
+	_v2_response.call("configure", self, profile_value)
 
 
 func _arm_legacy_timer_cleanup() -> void:
@@ -67,17 +91,160 @@ func _release_legacy_attack_timer() -> void:
 
 
 # =============================================================================
-# PLAYER-FACING GUARD READABILITY
+# COMBAT V2 GUARD BEHAVIOR
 # =============================================================================
-# The imported foot-soldier sheet has no authored block animation. Previously the
-# Swordsman could be mechanically guarding while still displaying its walk frame,
-# making a posture-only block look like an ordinary HP hit. Keep combat ownership in
-# HumanoidEnemyBase, but expose the active guard state with a small shield outline.
+# Guard is now a short authored action window with a real cooldown. DEFEND remains the
+# legacy tactical intent for this migration slice, but it no longer means "block for
+# the entire state." Heavy/strong-poise impacts can collapse the guard early.
+
+func _update_blocking(_delta: float, now: float) -> void:
+	if _v2_response == null or not is_instance_valid(_v2_response):
+		super._update_blocking(_delta, now)
+		return
+
+	var wants_guard: bool = true
+	if not can_block or _dbroken_active:
+		wants_guard = false
+	elif telegraphing or (is_attacking and not _attack_recovery):
+		wants_guard = false
+	elif ProstheticEffects.is_confused(self):
+		wants_guard = false
+	elif now < _block_stagger_until:
+		wants_guard = false
+	elif not is_instance_valid(player):
+		wants_guard = false
+	elif ai_state != AIState.DEFEND:
+		wants_guard = false
+	else:
+		var profile_value: Variant = _v2_response.get("profile")
+		var guard_range: float = hushiro_guard_range
+		if profile_value != null:
+			var configured_range: Variant = profile_value.get("guard_range")
+			if configured_range != null:
+				guard_range = minf(guard_range, float(configured_range))
+		wants_guard = global_position.distance_to(player.global_position) <= minf(guard_range, deaggro_radius)
+
+	var active_value: Variant = _v2_response.call("tick_guard", now, wants_guard)
+	_set_blocking(bool(active_value))
+
 
 func _set_blocking(active: bool) -> void:
 	super._set_blocking(active)
 	_sync_guard_cue(bool(_block_active))
 
+
+func _should_resolve_v2_guard_hit(damage: int, damage_type: String, attacker: Node) -> bool:
+	if _v2_response == null or not is_instance_valid(_v2_response) or not _block_active:
+		return false
+	if _dbroken_active or telegraphing or (is_attacking and not _attack_recovery):
+		return false
+	var response: Dictionary = _get_incoming_attack_response(damage, damage_type, attacker)
+	if not bool(response.get("blockable", true)):
+		return false
+	if damage_type in ["true", "unblockable"]:
+		return false
+	return _is_frontal_attack(attacker)
+
+
+func _consume_v2_guard_contact(attacker: Node) -> bool:
+	var frame_now: int = Engine.get_frames_drawn()
+	if frame_now != _last_token_frame:
+		_seen_tokens_this_frame.clear()
+		_last_token_frame = frame_now
+
+	if attacker is Area2D and attacker.has_meta("swing_token"):
+		var token: String = str(attacker.get_meta("swing_token"))
+		if _seen_tokens_this_frame.has(token):
+			return false
+		_seen_tokens_this_frame[token] = true
+
+	if attacker is Area2D:
+		var now_ts: float = Time.get_ticks_msec() * 0.001
+		var key: int = int(attacker.get_instance_id())
+		var expires_at: float = float(_recent_hurt_sources.get(key, 0.0))
+		if now_ts < expires_at:
+			return false
+		_recent_hurt_sources[key] = now_ts + _HURT_SOURCE_TTL
+		if _recent_hurt_sources.size() > 32:
+			for old_key: Variant in _recent_hurt_sources.keys():
+				if float(_recent_hurt_sources[old_key]) <= now_ts:
+					_recent_hurt_sources.erase(old_key)
+	return true
+
+
+func _resolve_v2_guard_hit(damage: int, damage_type: String, attacker: Node) -> void:
+	if not _consume_v2_guard_contact(attacker):
+		return
+	set_meta("_post_break_decay_active", false)
+
+	var source: Node = _resolve_hurt_source(attacker)
+	if source != null and is_instance_valid(source) and source.is_in_group("enemy"):
+		return
+
+	var response: Dictionary = _get_incoming_attack_response(damage, damage_type, attacker)
+	var decorated_value: Variant = _v2_response.call("decorate_guard_response", response)
+	if decorated_value is Dictionary:
+		response = decorated_value as Dictionary
+
+	var now: float = Time.get_ticks_msec() * 0.001
+	var posture_before: float = 0.0
+	if combat != null and combat.has_method("get_posture"):
+		posture_before = float(combat.call("get_posture"))
+
+	var hp_before: int = int(hp)
+	var hp_damage_value: Variant = _v2_response.call("guarded_health_damage", damage)
+	var hp_damage: int = maxi(0, int(hp_damage_value))
+	var is_heavy: bool = bool(response.get("heavy", false))
+
+	_block_stagger_until = now + float(response.get("block_stagger", BLOCK_STAGGER_TIME))
+	_on_block_impact(attacker, is_heavy, response)
+	apply_hp_damage(hp_damage)
+	var actual_hp_lost: int = maxi(0, hp_before - int(hp))
+
+	if actual_hp_lost > 0:
+		var is_crit: bool = source != null and source.has_method("is_critical_strike") and bool(source.call("is_critical_strike"))
+		var display_type: String = "critical" if is_crit else damage_type
+		show_enemy_damage_number(actual_hp_lost, display_type, -20.0)
+
+	notify_combat_got_hit({
+		"damage": damage,
+		"health_damage": actual_hp_lost,
+		"blocked": true,
+		"damage_type": damage_type,
+		"v2_guard": true,
+	})
+
+	var broke_guard: bool = bool(_v2_response.call("on_guard_contact", now, attacker, response))
+	if broke_guard:
+		_set_blocking(false)
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		var posture_after: float = posture_before
+		if combat != null and combat.has_method("get_posture"):
+			posture_after = float(combat.call("get_posture"))
+		CombatTelemetry.record_event("enemy_v2_guard_resolution", {
+			"enemy": CombatTelemetry.snapshot_actor(self),
+			"raw_health_damage": damage,
+			"health_damage_received": actual_hp_lost,
+			"posture_before": posture_before,
+			"posture_after": posture_after,
+			"guard_broken": broke_guard,
+			"damage_type": damage_type,
+		})
+
+	if hp <= 0:
+		death()
+	elif snd_hit != null:
+		snd_hit.play()
+
+
+func _v2_attack_was_committed() -> bool:
+	return telegraphing or (is_attacking and not _attack_recovery) or _in_running_approach
+
+
+# =============================================================================
+# PLAYER-FACING GUARD READABILITY
+# =============================================================================
 
 func _ensure_guard_cue() -> void:
 	if _guard_cue != null and is_instance_valid(_guard_cue):
@@ -138,19 +305,41 @@ func is_deathblow_ready() -> bool:
 
 
 func _on_hurt_box_hurt(damage: int, damage_type: String, attacker: Node = null) -> void:
+	# Guarded hits are resolved here so Combat V2 can independently author partial
+	# Health-through-guard and posture pressure without adding a second damage pass.
+	if _should_resolve_v2_guard_hit(damage, damage_type, attacker):
+		_resolve_v2_guard_hit(damage, damage_type, attacker)
+		return
+
 	var hp_before: int = int(hp)
+	var committed_before: bool = _v2_attack_was_committed()
 	super._on_hurt_box_hurt(damage, damage_type, attacker)
 	if has_died or int(hp) <= 0 or _dbroken_active:
 		return
 	if int(hp) >= hp_before:
 		return
-	_apply_sword_hit_reaction(damage, damage_type)
+	_apply_sword_hit_reaction(damage, damage_type, attacker, committed_before)
 
 
-func _apply_sword_hit_reaction(damage: int, damage_type: String) -> void:
-	# Winning a clean sword contact must visibly interrupt ordinary offense. This is
-	# intentionally short: it gives impact readability without turning light attacks
-	# into permanent stun-lock.
+func _apply_sword_hit_reaction(damage: int, damage_type: String, attacker: Node, committed_before: bool) -> void:
+	var should_interrupt: bool = true
+	var response: Dictionary = _get_incoming_attack_response(damage, damage_type, attacker)
+	if _v2_response != null and is_instance_valid(_v2_response):
+		should_interrupt = bool(_v2_response.call("should_interrupt", attacker, response, committed_before))
+
+	# Combat V2 distinction: Health damage always lands here, but a committed attack
+	# may keep going when the incoming strike lacks enough poise power.
+	if not should_interrupt:
+		if CombatTelemetry != null and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("enemy_v2_hit_absorbed_by_poise", {
+				"enemy": CombatTelemetry.snapshot_actor(self),
+				"damage": damage,
+				"damage_type": damage_type,
+				"committed": committed_before,
+			})
+		return
+
+	# Winning a clean interruptible sword contact visibly cancels ordinary offense.
 	_cancel_attack()
 	_set_blocking(false)
 	_in_running_approach = false
@@ -159,9 +348,9 @@ func _apply_sword_hit_reaction(damage: int, damage_type: String) -> void:
 	_force_attack_soon = false
 
 	var reaction: float = LIGHT_HIT_STUN
-	if damage >= 18 or damage_type in ["heavy", "counter", "thrust"]:
+	if damage >= 18 or damage_type in ["heavy", "counter", "thrust", "sword_heavy", "sword_counter", "sword_thrust"]:
 		reaction = HEAVY_HIT_STUN
-	elif damage >= 11:
+	elif damage >= 11 or damage_type == "sword_medium":
 		reaction = MEDIUM_HIT_STUN
 
 	var now: float = Time.get_ticks_msec() * 0.001
@@ -184,4 +373,5 @@ func _apply_sword_hit_reaction(damage: int, damage_type: String) -> void:
 			"damage": damage,
 			"damage_type": damage_type,
 			"stun_sec": reaction,
+			"combat_v2": true,
 		})

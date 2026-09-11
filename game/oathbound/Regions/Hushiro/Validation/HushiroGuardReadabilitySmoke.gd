@@ -66,15 +66,18 @@ func _run() -> void:
 	var hp_before: int = int(enemy.get("hp"))
 	var numbers_before: int = _count_damage_number_nodes()
 	# Exercise the same canonical HurtBox cache -> CombatController transaction ->
-	# imported receiver compatibility route used by a live player sword collision.
+	# receiver compatibility route used by a live player sword collision.
 	hurtbox.call("_on_area_entered", attack)
 	await get_tree().process_frame
 
 	var hp_after: int = int(enemy.get("hp"))
 	var posture_after: float = float(combat.call("get_posture")) if combat.has_method("get_posture") else 0.0
-	_expect(hp_after == hp_before, "guarded canonical sword contact leaked HP damage")
-	_expect(is_equal_approx(posture_after, 14.0), "guarded canonical sword contact did not apply authored 14 Posture")
-	_expect(_count_damage_number_nodes() == numbers_before, "posture-only guarded contact created a floating HP damage number")
+	var guarded_hp_lost: int = hp_before - hp_after
+	_expect(guarded_hp_lost == 4, "V2 Swordsman guard should pass 35% Health damage (12 -> 4)")
+	_expect(is_equal_approx(posture_after, 14.0), "guarded canonical sword contact did not preserve authored 14 Posture")
+	_expect(_count_damage_number_nodes() == numbers_before + 1, "guarded Health loss did not create exactly one damage number")
+	_expect(_latest_damage_number_text() == "4", "guarded damage number did not equal actual Health lost")
+	_expect(bool(enemy.call("is_guard_cue_visible")), "light guarded contact incorrectly collapsed the guard cue")
 
 	enemy.call("_set_blocking", false)
 	_expect(not bool(enemy.call("is_guard_cue_visible")), "guard cue remained visible after guard ended")
@@ -94,6 +97,18 @@ func _count_damage_number_nodes() -> int:
 	return count
 
 
+func _latest_damage_number_text() -> String:
+	var scene: Node = get_tree().current_scene
+	if scene == null:
+		return ""
+	var latest: String = ""
+	for child: Node in scene.get_children():
+		var label: Node = child.get_node_or_null("NumberLabel")
+		if label != null and "text" in label:
+			latest = str(label.get("text"))
+	return latest
+
+
 func _cleanup(player: Node, enemy: Node) -> void:
 	if is_instance_valid(player):
 		player.queue_free()
@@ -103,7 +118,7 @@ func _cleanup(player: Node, enemy: Node) -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical block 0 HP + 14 Posture | no posture-only damage number")
+		print("[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical partial 4 HP + 14 Posture | exact HP number")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

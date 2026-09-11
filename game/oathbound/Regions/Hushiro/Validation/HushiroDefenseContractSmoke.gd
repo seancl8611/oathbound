@@ -20,7 +20,7 @@ func _run() -> void:
 	await _verify_damage_number_manager_rejects_non_hp_values()
 	await _verify_player_ordinary_block(player)
 	await _verify_player_perilous_thrust_bypasses_block(player)
-	await _verify_enemy_guard_is_hp_exclusive(player)
+	await _verify_enemy_guard_is_partial_health(player)
 	await _verify_perilous_thrust_warning(player)
 
 	player.queue_free()
@@ -76,6 +76,7 @@ func _make_player_sword_hitbox(player: Node, suffix: String) -> Area2D:
 	hitbox.set_meta("health_damage", 12)
 	hitbox.set_meta("posture_damage", 10.0)
 	hitbox.set_meta("block_posture_damage", 14.0)
+	hitbox.set_meta("stagger_level", 0)
 	hitbox.set_meta("attack_id", "wolf_fang_slash")
 	hitbox.set_meta("damage_type", "sword_light")
 	return hitbox
@@ -129,7 +130,7 @@ func _verify_player_perilous_thrust_bypasses_block(player: Node) -> void:
 	await get_tree().process_frame
 
 
-func _verify_enemy_guard_is_hp_exclusive(player: Node) -> void:
+func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	var enemy: Node = SWORDSMAN_SCENE.instantiate()
 	if enemy == null:
 		_fail("could not instantiate current Corrupted Swordsman")
@@ -163,12 +164,18 @@ func _verify_enemy_guard_is_hp_exclusive(player: Node) -> void:
 	enemy.call("_on_hurt_box_hurt", 12, "sword_light", guarded_hitbox)
 	await get_tree().process_frame
 
-	_expect(int(enemy.get("hp")) == 90, "active enemy guard leaked HP damage")
+	_expect(int(enemy.get("hp")) == 86, "V2 Swordsman guard did not pass the authored 35% Health damage")
 	_expect(float(combat.call("get_posture")) > 0.0, "active enemy guard did not take Posture pressure")
 	_expect(
-		_count_damage_number_nodes() == guarded_number_count_before,
-		"posture-only enemy guard incorrectly created a floating damage number"
+		_count_damage_number_nodes() == guarded_number_count_before + 1,
+		"guarded Health loss did not create exactly one floating damage number"
 	)
+	_expect(_latest_damage_number_text() == "4", "guarded floating number did not equal actual enemy HP lost")
+
+	# DamageNumberManager intentionally rate-limits duplicate target+type presentation
+	# for 0.1s. These are separate semantic assertions, so wait beyond that UI-only
+	# cooldown before validating the unguarded control contact.
+	await get_tree().create_timer(0.12).timeout
 
 	# A real unguarded HP hit must still create one number, and that number must
 	# equal the HP actually removed rather than Posture pressure or raw attack power.
@@ -268,7 +275,7 @@ func _latest_damage_number_text() -> String:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | enemy guard posture-only/no damage number | real HP hit number exact | perilous thrust bypass + warning")
+		print("[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture | real HP number exact | perilous thrust bypass + warning")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
