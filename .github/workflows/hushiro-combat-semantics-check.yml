@@ -124,6 +124,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 pressure-window scheduler
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/PressureDirectorSmoke.tscn 2>&1 | tee pressure-director.log
+          grep -F "[PressureDirectorSmoke] PASS - overlapping windups | spaced impacts | perilous safety | legacy compatibility | Swordsman integration" pressure-director.log
+          if grep -F "SCRIPT ERROR:" pressure-director.log; then
+            echo "FAIL: Combat V2 pressure director smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" pressure-director.log; then
+            echo "FAIL: Combat V2 pressure director smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -138,5 +153,6 @@ jobs:
             enemy-combat-response.log
             combat-action-motor.log
             enemy-brain.log
+            pressure-director.log
           if-no-files-found: warn
           retention-days: 7
