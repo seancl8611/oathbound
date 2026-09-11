@@ -68,14 +68,14 @@ func guarded_health_damage(raw_damage: int) -> int:
 
 
 func incoming_poise_power(attacker: Variant, response: Dictionary = {}) -> int:
-	if attacker != null and is_instance_valid(attacker) and attacker is Object:
-		var source: Object = attacker as Object
+	var source: Object = _resolve_attack_event_source(attacker)
+	if source != null:
 		if source.has_meta("poise_damage"):
 			return maxi(0, int(source.get_meta("poise_damage")))
 		if source.has_meta("stagger_level"):
-			# V2 migration bridge: the canonical V1 AttackEvent already publishes
-			# stagger_level. Until attack profiles explicitly author poise_damage,
-			# level 0 maps to power 1 and level 1 maps to power 2.
+			# V2 migration bridge: canonical V1 attacks already publish stagger_level.
+			# Until action profiles explicitly author poise_damage, level 0 maps to power 1
+			# and level 1 maps to power 2. Health/Posture remain otherwise untouched.
 			return maxi(1, int(source.get_meta("stagger_level")) + 1)
 	if bool(response.get("heavy", false)):
 		return 2
@@ -119,6 +119,20 @@ func is_guard_active() -> bool:
 
 func guard_cooldown_remaining(now: float) -> float:
 	return maxf(0.0, _guard_cooldown_until - now)
+
+
+func _resolve_attack_event_source(attacker: Variant) -> Object:
+	# Live HurtBox canonical events emit the resolved attacker (usually Player), while
+	# the attack Area2D carrying stagger/poise metadata remains cached on the receiver.
+	# Prefer that exact attack area when available so direct and live contacts resolve
+	# identical poise power.
+	if enemy != null and is_instance_valid(enemy) and enemy.has_method("get_last_attack_area"):
+		var cached_value: Variant = enemy.call("get_last_attack_area")
+		if cached_value != null and is_instance_valid(cached_value) and cached_value is Object:
+			return cached_value as Object
+	if attacker != null and is_instance_valid(attacker) and attacker is Object:
+		return attacker as Object
+	return null
 
 
 func _end_guard(now: float, cooldown: float, reason: String) -> void:
