@@ -109,6 +109,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 Player action and motor foundation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/PlayerActionMotorSmoke.tscn 2>&1 | tee player-action-motor.log
+          grep -F "[PlayerActionMotorSmoke] PASS - attack locomotion | commit steering | action composition | dash preservation | canonical Player integration" player-action-motor.log
+          if grep -F "SCRIPT ERROR:" player-action-motor.log; then
+            echo "FAIL: Combat V2 Player action/motor smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" player-action-motor.log; then
+            echo "FAIL: Combat V2 Player action/motor smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Combat V2 EnemyBrain cadence
         shell: bash
         run: |
@@ -152,6 +167,7 @@ jobs:
             hushiro-guard-readability.log
             enemy-combat-response.log
             combat-action-motor.log
+            player-action-motor.log
             enemy-brain.log
             pressure-director.log
           if-no-files-found: warn
