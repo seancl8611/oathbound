@@ -25,34 +25,34 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-11T21:12:00Z
+updated_utc: 2026-09-11T21:36:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 154
-  feature_head: 843af5b028a457a19cbda9cd10ab20e6844744fb
-  merge_commit: 01e0f6d8af51558a7596b4752fd51b7f0fd8596b
-  validation: 9/9 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Blood Cavern Execution Trial, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation. Release Shell did not trigger for this file set.
+  pr: 155
+  feature_head: 4a139f581c4d454c255632fc1e33fc235c8642c9
+  merge_commit: bb055cfd9ec91c4367a94bded104a10f45178f11
+  validation: 8/8 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 01e0f6d8af51558a7596b4752fd51b7f0fd8596b
-known_good_checkpoint: 01e0f6d8af51558a7596b4752fd51b7f0fd8596b
+covered_through_substantive_commit: bb055cfd9ec91c4367a94bded104a10f45178f11
+known_good_checkpoint: bb055cfd9ec91c4367a94bded104a10f45178f11
 current_objective: >-
-  Combat V2 Phases 1-5 are integrated. The Corrupted Swordsman reference enemy owns EnemyCombatResponseRuntime + CombatActionRunner + EnemyMotor + EnemyBrain and PressureDirectorV2 attack admission. Phase 5 adds PlayerMotor plus an OathboundPlayerMotion adapter beneath the existing stability/Aspect/runtime chain. Akio's canonical input/combo/Aspect/AttackEvent path remains intact, but attack locomotion is now composed with phase-authored action motion instead of ATTACKING globally discarding locomotion.
+  Combat V2 Phases 1-5 are integrated, and Phase 6 enemy migration has begun. Corrupted Swordsman remains the full humanoid reference enemy. Akio owns PlayerMotor + CombatActionRunner motion seams. The canonical Blighted Hound is now the first beast/predator migration: EnemyCombatResponseRuntime + CombatActionRunner + EnemyMotor + EnemyBrain + PressureDirectorV2 admission are live while its authored bite/lunge hitboxes, parry/readability, Hushiro shared Posture/Deathblow bridge, rewards, and pack identity remain authoritative.
 next_action: >-
-  Continue Combat V2 without waiting for intermediate manual playtests. Begin Phase 6 with one bounded enemy migration, preferably Hound because its beast/predator role is central to the approved faster hunter direction. Migrate it onto the shared response/action/motor/brain/pressure seams while preserving its authored identity, posture/deathblow contract, hitboxes, and pack behavior. Do not migrate every enemy in one PR and do not globally retune encounter counts/Health yet. After Hound is coherent, continue Hollow, Archer, Bilemass, then Warden in separate evidence-backed packages. Player defense mobility and intent-buffer redesign remain later follow-ups unless deterministic evidence makes them blockers.
+  Continue Combat V2 without waiting for intermediate manual playtests. Migrate Hollow next as the first true swarm/fodder standard enemy, preserving its authored hitboxes, canonical Posture/Deathblow contract, and simple role identity while moving response/action/motor/brain/pressure ownership to the shared V2 seams. Keep Hollow intentionally simpler than Swordsman/Hound; the goal is fast readable fodder, not another pseudo-player moveset. After Hollow, continue Archer, Bilemass, then Warden in separate evidence-backed packages. Do not globally increase encounter counts or retune Health/damage until the shared enemy migrations are coherent.
 current_batch:
-  - PR #154 merged at 01e0f6d8af51558a7596b4752fd51b7f0fd8596b from exact head 843af5b028a457a19cbda9cd10ab20e6844744fb; all 9 workflows triggered for this change were green.
-  - Added `Core/Combat/PlayerMotor.gd`, a reusable Player motion resolver that composes desired locomotion, authored action motion, and external impulse while reading CombatActionRunner phase locomotion weights.
-  - Added `Player/OathboundPlayerMotion.gd` between OathboundPlayer and OathboundPlayerStability. Existing input, combo selection, Aspect profiles, SwordHitBox/AttackEvent delivery, block/parry, Techniques, Prosthetics, Blood/Corruption, and run systems remain authoritative.
-  - Ordinary attacks now preserve substantial movement through startup/commit/active/recovery; heavy actions remain more planted; dash-context attacks preserve more locomotion. Per-profile V2 movement/commit overrides are supported without changing the canonical attack catalog yet.
-  - Early attack startup allows capped aim steering; steering locks at the existing CombatActionRunner commitment boundary so movement can create real whiffs rather than full homing.
-  - Legacy attack lunge motion is composed with locomotion and eased through its short authored window instead of replacing all Player locomotion during ATTACKING.
-  - Existing dash distance/speed and dash knockback semantics remain unchanged. Block/parry/prosthetic movement remains stationary in this package; defense mobility was not silently redesigned.
-  - Wraith Pale Barrage remains intentionally stationary as authored by the current Aspect layer.
-  - Added Player motion/action telemetry and playtest snapshot fields plus `PlayerActionMotorSmoke`; Hushiro Combat Semantics proved attack locomotion, commit steering lock, action-motion composition, dash preservation, and canonical Player runtime ownership.
-  - PR #153 immediately precedes this package: PressureDirectorV2 impact-window scheduling + Swordsman migration, 10/10 workflows green.
+  - PR #155 merged at bb055cfd9ec91c4367a94bded104a10f45178f11 from exact head 4a139f581c4d454c255632fc1e33fc235c8642c9; all 8 workflows triggered for this change were green.
+  - Added `Regions/Hushiro/Enemies/Standard/BlightedHoundV2.gd` and routed the canonical Hound scene through it. The imported Hound controller remains the authored bite/lunge/contact source; V2 owns tactical intent, action commitment, motion composition, Poise interruption, and room-pressure admission.
+  - Hound tactical selection now uses controlled-cadence EnemyBrain intents: lunge, bite, approach, orbit/reposition, and retreat. Mid-range pressure favors the authored pounce; cooldown/pressure delays favor orbit rather than frame-by-frame attack-token polling.
+  - Hound attacks no longer require the legacy whole melee token plus `dog_lunge` role in production. Lunge and bite reserve predicted PressureDirectorV2 impact windows; legacy token use exists only as an isolated-scene compatibility fallback.
+  - CombatActionRunner gives Hound windups explicit startup/commitment/active/recovery phases. Early windup may track/creep; target tracking stops at commitment. EnemyMotor composes lunge/bite action motion and recovery repositioning instead of direct constant attack-state velocity.
+  - Added `EnemyCombatResponseProfile.blighted_hound_v2()`. Neutral Hound behavior is easy to interrupt; committed pounce/bite requires stronger Poise impact to stop. Health and canonical Posture still apply independently when a weak hit fails to interrupt.
+  - Existing `HushiroHoundCombatRuntime`, Hushiro Posture max/readability, stagger-first break, delayed Deathblow arm, PostureBar, two-Hound encounter cap, bite/lunge damage metadata, parry posture bridge, and rewards remain intact.
+  - Added `HoundV2MigrationSmoke`; Hushiro Combat Semantics validates predator scoring, action commitment, motor/runtime ownership, Poise behavior, PressureDirectorV2 reachability, and preservation of the shared Posture/Deathblow runtime.
+  - PR #154 immediately precedes this package: PlayerMotor + Player CombatActionRunner motion composition, 9/9 triggered workflows green.
 recent_batches:
+  - pr_155: canonical Blighted Hound V2 predator migration; 8/8 triggered workflows green.
   - pr_154: PlayerMotor + Player CombatActionRunner motion composition; 9/9 triggered workflows green.
   - pr_153: PressureDirectorV2 impact-window scheduling + Swordsman migration; 10/10 workflows green.
   - pr_152: controlled-cadence EnemyBrain for canonical Swordsman; removed frame-by-frame tactical RNG; 10/10 workflows green.
@@ -67,14 +67,16 @@ confirmed:
   - Standard V2 combat should create visible Health progress and faster ordinary-enemy kills while retaining Posture/Stagger, parry, and Deathblow as optional tactical layers.
   - Enemy PostureBar remains canonical player-facing Posture buildup / Deathblow-approach feedback until an explicit replacement is approved.
   - Health, Posture/Stagger, and Poise are separate: Health governs defeat, Posture/Stagger governs break/control opportunity, Poise governs immediate flinch/interruption.
-  - Guard behavior is enemy-authored; no universal Health-through-guard ratio is required.
+  - Guard behavior is enemy-authored; no universal Health-through-guard or Poise formula is required.
   - Corrupted Swordsman owns EnemyCombatResponseRuntime + CombatActionRunner + EnemyMotor + EnemyBrain and uses PressureDirectorV2 for normal attack/counter admission.
+  - Blighted Hound now owns the same shared V2 response/action/motor/brain seams and uses PressureDirectorV2 for bite/lunge admission, while retaining its beast-specific movement/attack authoring and shared Hushiro Posture bridge.
   - PressureDirectorV2 schedules danger, not enemy intent: overlapping approach/windup is allowed when predicted impact windows remain fair.
-  - Akio now owns PlayerMotor + CombatActionRunner motion seams while preserving the existing canonical action-content and damage pipeline.
+  - Akio owns PlayerMotor + CombatActionRunner motion seams while preserving the existing canonical action-content and damage pipeline.
   - Player movement restriction is phase-authored for attacks rather than a universal ATTACKING hard stop. Heavy attacks may still intentionally plant the Player more strongly than fast attacks.
   - Player dash behavior remains current-authority exact. Defense mobility has not yet been redesigned; block/parry remain stationary by explicit package scope.
   - Non-migrated enemies remain on legacy AttackDirector roles/tokens until individually migrated; do not globally raise the old melee token cap as a substitute for V2 pressure scheduling.
   - Taking Health damage does not inherently cancel a committed action; Poise decides immediate interruption on migrated enemies.
+  - Hound neutral actions are deliberately easy to stagger, while committed pounce/bite requires stronger Poise impact; this is archetype-specific, not a global enemy rule.
   - Enemy posture recovery need not use one universal cadence; multi-target combat should not force Sekiro-style continuous pressure on every target.
   - Aspect-specific block/parry/defensive capability ownership remains undecided. No current Aspect loses a shared mechanic before the dedicated capability pass.
   - User explicitly requested continued Combat V2 implementation without waiting for intermediate manual playtests; deterministic CI/telemetry is the gate between bounded packages.
@@ -90,6 +92,7 @@ avoid_without_evidence:
   - broad Player intent-buffer/defense rewrite in the enemy-migration package
   - bypassing CombatActionRunner/PlayerMotor/EnemyMotor/EnemyBrain/PressureDirectorV2 with parallel actor-specific systems
   - globally raising `max_melee_attackers` as a shortcut around PressureDirectorV2
+  - turning Hollow/Hound fodder migrations into humanoid-duel complexity
   - invented Heart combat
   - unrelated PR growth
 ```
@@ -106,6 +109,7 @@ avoid_without_evidence:
 - Posture-break/Deathblow shared state; block uses current defensive aim while V1 compatibility contracts remain operative.
 - Enemy PostureBar remains canonical buildup/Deathblow-readiness feedback until explicit replacement approval.
 - Corrupted Swordsman final motion is mediated by CombatActionRunner + EnemyMotor, tactical choice by EnemyBrain, and attack admission by PressureDirectorV2; future migration must preserve those seams.
+- Blighted Hound bite/lunge contact remains canonical in the imported controller, while V2 tactical choice/action commitment/motion/Poise/pressure are mediated by `BlightedHoundV2.gd`; preserve its Hushiro shared Posture bridge until that responsibility is explicitly consolidated.
 - Canonical Player attack motion is mediated by CombatActionRunner + PlayerMotor through `OathboundPlayerMotion.gd`; future Player changes must preserve Aspect profile and AttackEvent ownership unless explicitly replacing those responsibilities.
 - Legacy AttackDirector remains the compatibility path for non-migrated enemies during phased conversion.
 - `.godot/`/`.import/` untracked; verify source assets + clean import before declaring missing.
