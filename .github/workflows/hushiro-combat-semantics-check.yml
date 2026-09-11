@@ -94,6 +94,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 action and motor foundation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/CombatActionMotorSmoke.tscn 2>&1 | tee combat-action-motor.log
+          grep -F "[CombatActionMotorSmoke] PASS - startup momentum | commit lock | authored action motion | Swordsman integration" combat-action-motor.log
+          if grep -F "SCRIPT ERROR:" combat-action-motor.log; then
+            echo "FAIL: Combat V2 action/motor smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" combat-action-motor.log; then
+            echo "FAIL: Combat V2 action/motor smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -106,5 +121,6 @@ jobs:
             hushiro-defense-contract.log
             hushiro-guard-readability.log
             enemy-combat-response.log
+            combat-action-motor.log
           if-no-files-found: warn
           retention-days: 7
