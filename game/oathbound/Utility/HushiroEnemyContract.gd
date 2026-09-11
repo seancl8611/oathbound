@@ -13,6 +13,7 @@ const POSTURE_RECOVER_RATE: float = 20.0
 const POSTURE_BREAK_DURATION: float = 2.5
 const POSTURE_BREAK_RESET_RATIO: float = 0.50
 const POSTURE_BREAK_RUNTIME = preload("res://Utility/HushiroPostureBreakRuntime.gd")
+const POSTURE_READABILITY_RUNTIME = preload("res://Utility/HushiroPostureReadabilityRuntime.gd")
 const HOUND_COMBAT_RUNTIME = preload("res://Utility/HushiroHoundCombatRuntime.gd")
 
 # BlightedHound still contains an imported local posture-break trigger. The shared
@@ -99,6 +100,7 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 		combat.set("_posture", 0.0)
 
 	_attach_posture_break_runtime(enemy, key)
+	_attach_posture_readability_runtime(enemy)
 	if key == "hound":
 		_attach_hound_combat_runtime(enemy)
 
@@ -112,6 +114,7 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 			"posture_recover_rate": POSTURE_RECOVER_RATE,
 			"posture_break_duration": POSTURE_BREAK_DURATION,
 			"posture_break_runtime": true,
+			"posture_readability_runtime": true,
 			"hound_shared_posture_bridge": key == "hound",
 		})
 
@@ -140,6 +143,16 @@ static func _attach_posture_break_runtime(enemy: Node, enemy_type: String) -> vo
 	runtime.name = "HushiroPostureBreakRuntime"
 	if runtime.has_method("configure"):
 		runtime.call("configure", enemy, enemy_type)
+	enemy.add_child(runtime)
+
+
+static func _attach_posture_readability_runtime(enemy: Node) -> void:
+	if enemy.get_node_or_null("HushiroPostureReadabilityRuntime") != null:
+		return
+	var runtime: Node = POSTURE_READABILITY_RUNTIME.new()
+	runtime.name = "HushiroPostureReadabilityRuntime"
+	if runtime.has_method("configure"):
+		runtime.call("configure", enemy)
 	enemy.add_child(runtime)
 
 
