@@ -1,6 +1,6 @@
 [gd_scene load_steps=51 format=3 uid="uid://c4oux80d7y6n"]
 
-[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CorruptedArcherRules.gd" id="1_archer"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CorruptedArcherV2.gd" id="1_archer"]
 [ext_resource type="Texture2D" path="res://Textures/Enemy/archer/attack_windup1.png" id="2_wind1"]
 [ext_resource type="PackedScene" path="res://Utility/hurt_box.tscn" id="3_hurtbox"]
 [ext_resource type="AudioStream" path="res://Audio/SoundEffect/enemy_hit.ogg" id="4_hit"]
@@ -51,6 +51,7 @@ size = Vector2(12, 25)
 resource_name = "attack_windup"
 length = 0.6
 tracks/0/type = "value"
+tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
@@ -66,6 +67,7 @@ tracks/0/keys = {
 resource_name = "death"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
@@ -81,6 +83,7 @@ tracks/0/keys = {
 resource_name = "hurt"
 length = 0.3
 tracks/0/type = "value"
+tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
@@ -97,6 +100,7 @@ resource_name = "idle"
 length = 0.7
 loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
@@ -112,6 +116,7 @@ tracks/0/keys = {
 resource_name = "shoot"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
@@ -128,6 +133,7 @@ resource_name = "walk"
 length = 0.7
 loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
