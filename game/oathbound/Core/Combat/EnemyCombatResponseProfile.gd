@@ -29,9 +29,10 @@ static func corrupted_swordsman_v2() -> EnemyCombatResponseProfile:
 	profile.profile_id = "corrupted_swordsman_v2"
 
 	# Short sword guards mitigate most Health damage, but never erase the player's
-	# offensive progress. The guard's real defensive value is its timing window.
+	# offensive progress. Canonical attack profiles already author exact block-Posture
+	# pressure, so this first migration slice preserves that value 1:1.
 	profile.guard_health_multiplier = 0.35
-	profile.guard_posture_multiplier = 1.35
+	profile.guard_posture_multiplier = 1.0
 	profile.guard_duration = 0.34
 	profile.guard_cooldown = 1.15
 	profile.guard_break_cooldown = 1.65
