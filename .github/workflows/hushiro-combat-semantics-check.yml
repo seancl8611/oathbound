@@ -184,6 +184,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 Archer migration
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/ArcherV2MigrationSmoke.tscn 2>&1 | tee archer-v2-migration.log
+          grep -F "[ArcherV2MigrationSmoke] PASS - ranged brain | arrival pressure | aim commitment | low poise | Posture preserved" archer-v2-migration.log
+          if grep -F "SCRIPT ERROR:" archer-v2-migration.log; then
+            echo "FAIL: Combat V2 Archer migration smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" archer-v2-migration.log; then
+            echo "FAIL: Combat V2 Archer migration smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -202,5 +217,6 @@ jobs:
             pressure-director.log
             hound-v2-migration.log
             hollow-v2-migration.log
+            archer-v2-migration.log
           if-no-files-found: warn
           retention-days: 7
