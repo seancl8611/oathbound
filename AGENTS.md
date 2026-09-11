@@ -25,82 +25,62 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-11T02:31:00Z
+updated_utc: 2026-09-11T02:47:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 151
-  feature_head: d28a628b4edead16b3889e685d8052376e3880c5
-  merge_commit: 2a83be47a12d3d2b0bb8efdcdfad0a75661f5bd2
+  pr: 152
+  feature_head: d586e55e22d276de26524856366894d9d6e257fb
+  merge_commit: 575fc52388a25fb4e6236a07dee8139c1e689ca5
   validation: 10/10 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Release Shell, Blood Cavern Execution Trial, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 2a83be47a12d3d2b0bb8efdcdfad0a75661f5bd2
-known_good_checkpoint: 2a83be47a12d3d2b0bb8efdcdfad0a75661f5bd2
+covered_through_substantive_commit: 575fc52388a25fb4e6236a07dee8139c1e689ca5
+known_good_checkpoint: 575fc52388a25fb4e6236a07dee8139c1e689ca5
 current_objective: >-
-  Combat V2 Phase 2 is integrated for the Corrupted Swordsman reference enemy. The canonical Swordsman scene now routes through `CorruptedSwordsmanV2Motion.gd`, which attaches reusable `CombatActionRunner` and `EnemyMotor` components while preserving the existing authored attack coroutines, canonical AttackEvent/contact path, Health/Posture/parry/Deathblow behavior, finite V2 guard/poise response, and current AttackDirector ownership. Action execution now exposes STARTUP -> COMMITTED -> ACTIVE -> RECOVERY lifecycle state; early windup may retain locomotion and track Akio, late windup crosses an explicit commitment point and locks targeting, and authored attack displacement is composed through EnemyMotor instead of the legacy constant-speed lunge fields. The Swordsman's tactical HFSM/attack selection and room-level AttackDirector remain V1/legacy.
+  Combat V2 Phases 1-3 are integrated on the Corrupted Swordsman reference enemy. Phase 1 separated Health/Posture/guard/Poise response and preserved Posture/Deathblow. Phase 2 added reusable CombatActionRunner + EnemyMotor, explicit commitment, startup tracking, authored action motion, and final motor composition. Phase 3 adds reusable EnemyBrain and routes the canonical Swordsman through `CorruptedSwordsmanV2Brain.gd`: attack/approach/strafe/guard/retreat are now scored at controlled decision boundaries instead of frame-by-frame ENGAGE/DEFEND random checks. Existing attack coroutines, canonical AttackEvent, PostureBar, parry, Deathblow, guard/poise response, ActionRunner, EnemyMotor, and current room AttackDirector remain operative.
 next_action: >-
-  Manually feel-test the merged Phase 2 Swordsman on `main`: first one isolated Swordsman, then Swordsman + Hound and Swordsman + Archer. Confirm that approach/deceleration and attack entry feel less stop/start, early windup carries some motion and can still be interrupted, late windup visibly commits instead of homing, lateral movement can create fair whiffs after commitment, attack steps ease rather than burst at one constant speed, strong/weak poise distinctions still make sense, and the enemy PostureBar remains visible with normal Posture/Deathblow behavior. Return CombatTelemetry/log evidence from this larger integration pass. If Phase 2 feels coherent, the next CI-heavy package is Phase 3: migrate Swordsman tactical decisions to a controlled-cadence utility `EnemyBrain` while retaining the current ActionRunner/EnemyMotor and AttackDirector; do not jump directly to PressureDirectorV2 before that reference brain is coherent.
+  Continue directly into Combat V2 Phase 4 without waiting for manual playtest: implement a bounded PressureDirectorV2 room-fairness layer that schedules overlapping threat/impact windows instead of whole melee turns, while preserving the existing AttackDirector API as a compatibility facade for non-migrated enemies. Migrate the Corrupted Swordsman first and add deterministic concurrency/fairness telemetry/tests. Do not globally retune enemy counts/Health or rewrite the Player until the pressure layer is coherent.
 current_batch:
-  - PR #151 merged at 2a83be47a12d3d2b0bb8efdcdfad0a75661f5bd2 from exact head d28a628b4edead16b3889e685d8052376e3880c5; all 10 triggered workflows green.
-  - Added `Core/Combat/CombatActionDefinition.gd`, a data-only timing/motion-permission contract. It does not own hitboxes or damage and therefore does not create a second combat pipeline.
-  - Added `Core/Combat/CombatActionRunner.gd` with explicit IDLE/STARTUP/COMMITTED/ACTIVE/RECOVERY phases, commitment/tracking queries, phase-specific locomotion weights, interruption/completion, and CombatTelemetry events.
-  - Added `Core/Combat/EnemyMotor.gd`, which composes smoothed tactical locomotion + authored action motion + external impulse. The initial action-motion curve preserves approximately the authored legacy displacement while replacing constant-speed attack bursts with an eased step.
-  - Added `Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanV2Motion.gd` and routed the canonical Swordsman scene through it. The imported legacy HFSM remains the tactical-intent source for this phase, but its final pre-move virtual seam now lets EnemyMotor author the actual final velocity.
-  - Early Swordsman startup keeps 66% locomotion and may refresh the player target snapshot; after each action's authored commitment fraction the snapshot locks, so late lateral movement can produce genuine whiffs instead of full homing. Committed and active phases sharply reduce free locomotion without forcing every windup frame to zero velocity.
-  - Existing legacy lunge data is adapted into EnemyMotor action motion; `_lunge_dir/_lunge_speed/_lunge_until` are disabled on the migrated Swordsman so the old constant-speed lunge does not run in parallel.
-  - Phase 2 now uses the ActionRunner's actual commitment phase for V2 poise interruption. Early startup is no longer automatically considered committed merely because `telegraphing` is true; late startup/active/recovery remain committed.
-  - Added `Core/Combat/Validation/CombatActionMotorSmoke.gd` + scene and wired it into Hushiro Combat Semantics CI. It proves startup momentum, commitment target-lock semantics, authored action-motion composition, recovery locomotion policy, interruption cleanup, and real canonical Swordsman ActionRunner/EnemyMotor ownership.
-  - Existing Hushiro defense, PostureBar readability, response semantics, combat lifecycle, project-wide integration, stability, and region handoff checks all remained green on the exact PR head.
-  - No `EnemyBrain`, PressureDirectorV2, Player motor/action rewrite, global enemy-count/Health retune, stamina system, boss redesign, or Posture/Deathblow/UI removal was included.
+  - PR #152 merged at 575fc52388a25fb4e6236a07dee8139c1e689ca5 from exact head d586e55e22d276de26524856366894d9d6e257fb; all 10 triggered workflows green.
+  - Added `Core/Combat/EnemyBrain.gd`, a reusable controlled-cadence intent selector. It owns selection cadence and intent persistence only; it does not move actors, execute attacks, mutate combat resources, or bypass room fairness.
+  - Added `Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanV2Brain.gd` and routed the canonical Swordsman scene through it on top of the existing response/action/motor layers.
+  - Swordsman tactical intents are now attack, approach, strafe, guard, retreat/reposition. Scores use distance, attack readiness, player passivity/pressure urgency, posture ratio, other active threats, and guard cooldown.
+  - Removed legacy per-physics-frame `randf() < attack_chance` tactical behavior from the migrated Swordsman path. Intent is held through a minimum interval and reconsidered on a controlled cadence.
+  - Removed the Swordsman-specific mid-swing courtesy gate from `_can_attack_now`; current AttackDirector still owns actual attack admission, preventing duplicated serialization logic while preserving existing room safety until Phase 4.
+  - Removed the legacy random post-attack DEFEND-vs-ENGAGE outcome on the migrated path; EnemyBrain makes the next decision instead.
+  - Added `EnemyBrainSmoke` and wired it into Hushiro Combat Semantics CI. It proves cadence-held intent, post-cadence reconsideration, canonical Swordsman EnemyBrain ownership, and retention of Phase 2 ActionRunner/EnemyMotor components.
+  - No PressureDirectorV2, Player rewrite, global enemy-count/Health retune, boss migration, stamina, or Aspect capability removal was included.
 recent_batches:
-  - pr_151: integrated reusable CombatActionRunner + EnemyMotor for the canonical Corrupted Swordsman reference slice; preserved current attacks/combat pipeline; 10/10 triggered workflows green.
-  - pr_150: restored/protected Hushiro PostureBar readability without changing posture/deathblow mechanics; added live-order regional synchronization runtime; 9/9 triggered workflows green.
-  - pr_149: implemented first Combat V2 reference-enemy response slice for Corrupted Swordsman; documented implementation blueprint; finite guard + partial Health + state Poise; 10/10 workflows green.
-  - pr_148: refined V2 defense, guard, Health/posture, poise, break, and Deathblow direction; 6/6 workflows green; documentation/design only.
-  - pr_147: recorded approved Combat V2 hunter direction; 6/6 triggered workflows green; documentation/design only.
+  - pr_152: controlled-cadence EnemyBrain for canonical Swordsman; removed frame-by-frame tactical RNG; 10/10 workflows green.
+  - pr_151: reusable CombatActionRunner + EnemyMotor for canonical Swordsman; explicit commitment/motion; 10/10 workflows green.
+  - pr_150: restored/protected Hushiro PostureBar readability; 9/9 workflows green.
+  - pr_149: first Combat V2 response/guard/poise slice; 10/10 workflows green.
+  - pr_148: refined V2 defense/guard/Health/Posture/Poise/Deathblow direction; documentation only.
+  - pr_147: recorded approved Combat V2 hunter/hack-and-slash direction; documentation only.
 confirmed:
-  - Combat V2 transition direction is approved in `docs/overview/V2_COMBAT_DIRECTION.md`; concrete migration/component order is in `docs/overview/V2_COMBAT_IMPLEMENTATION_BLUEPRINT.md`.
-  - PR #149 established V2 response semantics, PR #150 repaired/protected Posture readability, and PR #151 establishes the first reusable action lifecycle and enemy-motion foundation on the Corrupted Swordsman.
-  - The canonical Swordsman now owns `CombatActionRunner` + `EnemyMotor`; its attack selection/HFSM and room fairness still remain legacy until the dedicated EnemyBrain and PressureDirectorV2 phases.
-  - Enemy PostureBar is still canonical player-facing feedback for Posture buildup and approaching Deathblow availability. It is not retired, optional, or implicitly replaceable by Combat V2 until a dedicated replacement is explicitly approved.
-  - Posture/Deathblow mechanical state remained active in the September 10 live playtest even while the bar was missing; do not interpret missing UI as permission to change/remove the underlying system.
-  - Oathbound remains Japanese supernatural dark fantasy in current repository authority, with Akio framed more as an aggressive supernatural hunter than a formal duelist; broader theme changes discussed outside the repo require a dedicated authority update before implementation.
-  - Standard V2 combat should create visible Health progress and faster ordinary-enemy kills while preserving posture/stagger, parry, and Deathblow as optional tactical layers.
-  - Health, posture/stagger, and poise are not mirror resources: Health governs defeat, posture/stagger governs break/control opportunity, and poise governs immediate flinch/interruption behavior.
-  - Guard does not require one universal HP/posture conversion. Enemy-specific defensive identity is an explicit V2 authoring principle.
-  - A shield user's strong 0-HP block and a swordsman's partial-damage guard can both be valid if their frequency, duration, stagger pressure, and counterplay fit their roles.
-  - Taking Health damage and being interrupted are not assumed to be the same event in V2; PR #149 proves that distinction and PR #151 now evaluates Swordsman commitment from an explicit action phase.
-  - Enemy posture/stagger recovery does not need one universal cadence; multi-target combat should not force Sekiro-style continuous pressure on every target.
-  - Aspect-specific block/parry/defensive capability ownership remains undecided. No current Aspect loses a shared mechanic until a later explicit capability pass.
-  - Substantive gameplay implementation is current through PR #151 merge 2a83be47a12d3d2b0bb8efdcdfad0a75661f5bd2.
-  - The broad Godot documentation-to-code delta audit is executed/closed. Do not make another broad audit a prerequisite for ordinary work.
-  - Heart combat remains unauthored by design authority; the existing Heart shell/handoff and downstream Story Complete/postgame behavior are structural/contract-test surfaces, not permission to invent a real Heart kill path.
-  - PR #141 stationary enemy/boss anti-drag behavior is manually confirmed; September 10 replay confirms prior lifetime/deferred/CollisionObject crash class remains clean and supports later state/motion repairs.
-  - Twin Maws and Eclipse Shogun produce attack/contact activity and can complete their encounters; do not treat either as generally inert.
-  - Direct Playtest Lab Area 2/3 warps are intentional. Playtest Power defaults to 1x; Recommended integration preset is 5x Health + 5x Posture + Invulnerable; Fast Clear is 10x + Invulnerable for teardown/reward/transition checks only.
-  - FIRST_ATTEMPT begins directly in the normal Hushiro route; first death awakens Returning Blood and reconstructs at The Strand.
-  - Techniques are slotless/unlimited outside the five direct action slots as defined by current authorities.
+  - Combat V2 direction is approved in `docs/overview/V2_COMBAT_DIRECTION.md`; migration/component authority is `docs/overview/V2_COMBAT_IMPLEMENTATION_BLUEPRINT.md`.
+  - Oathbound remains Japanese supernatural dark fantasy; Akio is increasingly framed as an aggressive supernatural hunter rather than a formal duelist.
+  - Standard V2 combat should create visible Health progress and faster ordinary-enemy kills while retaining Posture/Stagger, parry, and Deathblow as optional tactical layers.
+  - Enemy PostureBar remains canonical player-facing Posture buildup / Deathblow-approach feedback until an explicit replacement is approved.
+  - Health, Posture/Stagger, and Poise are separate: Health governs defeat, Posture/Stagger governs break/control opportunity, Poise governs immediate flinch/interruption.
+  - Guard behavior is enemy-authored; no universal Health-through-guard ratio is required.
+  - Corrupted Swordsman now owns EnemyCombatResponseRuntime + CombatActionRunner + EnemyMotor + EnemyBrain. Current room fairness is still legacy AttackDirector until Phase 4.
+  - Taking Health damage does not inherently cancel a committed action; poise decides immediate interruption on migrated enemies.
+  - Enemy posture recovery need not use one universal cadence; multi-target combat should not force Sekiro-style continuous pressure on every target.
+  - Aspect-specific block/parry/defensive capability ownership remains undecided. No current Aspect loses a shared mechanic before the dedicated capability pass.
+  - Heart combat remains intentionally unauthored; do not invent a kill path without dedicated encounter authority.
   - Numerical balance/economy/difficulty tuning remains evidence-driven.
-  - PR #131 procedural FX are temporary debug/playtest presentation, not final authored art.
-  - Current approved Wraith V1 authority is the long-reach frontal posture/control Aspect; future V2 Aspect changes require an explicit capability/kit pass.
-  - No independent Area 2 invisibility/disappearing defect is currently evidenced; require captured state evidence before changing that system.
-  - Known provenance blockers remain explicit; never fabricate license evidence.
 avoid_without_evidence:
-  - unbounded whole-game combat rewrite instead of dependency-sized Combat V2 packages
-  - rewriting the working player combo/action foundation before reference-enemy playtest evidence identifies a V2 blocker
-  - suppressing/removing enemy PostureBar before an explicit replacement for Posture buildup / Deathblow-readiness feedback is approved
-  - one universal enemy Health-through-guard percentage or posture/poise formula
-  - removing or replacing block/parry on an Aspect before the dedicated V2 capability pass
-  - globally increasing enemy counts or lowering Health/stagger values before the V2 response/pressure foundations exist
-  - implementing PressureDirectorV2 before the Swordsman ActionRunner/EnemyMotor and EnemyBrain reference slices are coherent
-  - bypassing CombatActionRunner/EnemyMotor with new Swordsman-only motion state once the Phase 2 reference seam exists
-  - invented Heart combat before dedicated encounter design
-  - broad numerical tuning without integration evidence
+  - unbounded whole-game combat rewrite instead of dependency-sized V2 packages
+  - suppressing/removing PostureBar before an approved replacement
+  - one universal enemy Health-through-guard or Poise formula
+  - removing block/parry from an Aspect before the dedicated capability pass
+  - globally increasing enemy counts or reducing Health before response + pressure foundations exist
+  - rewriting working Player combos before evidence identifies the specific movement/action blocker
+  - bypassing CombatActionRunner/EnemyMotor/EnemyBrain with new Swordsman-only parallel state
+  - invented Heart combat
   - unrelated PR growth
-  - visibility/invisibility rewrites based only on perceived disappearance without captured state evidence
-  - save-slot lifecycle rewrites based only on duplicate startup reset logging when no duplicated live state is observed
-  - bulk scene UID rewriting while tracked assets exist and clean-import preflight remains the supported resolution
 ```
 
 ## WORK_LOOP
@@ -112,13 +92,13 @@ avoid_without_evidence:
 - Explicitly type Variant-derived GDScript locals.
 - Defer physics registration mutation during active contact traversal.
 - One canonical Player creation path; canonical AttackEvent only; no second damage/posture pass.
-- Posture-break/Deathblow shared state; block uses current defensive aim while current V1 contracts remain operative.
-- Enemy PostureBar remains canonical buildup/Deathblow-readiness feedback until an explicit replacement is approved; regional/runtime layers must keep it synchronized with authoritative CombatController posture.
-- Corrupted Swordsman final motion is now mediated by CombatActionRunner + EnemyMotor; future Swordsman migration must preserve that seam rather than revive legacy constant-lunge ownership.
+- Posture-break/Deathblow shared state; block uses current defensive aim while V1 compatibility contracts remain operative.
+- Enemy PostureBar remains canonical buildup/Deathblow-readiness feedback until explicit replacement approval.
+- Corrupted Swordsman final motion is mediated by CombatActionRunner + EnemyMotor and tactical choice by EnemyBrain; future migration must preserve those seams.
 - `.godot/`/`.import/` untracked; verify source assets + clean import before declaring missing.
 
 ## DESIGN_ACCESS
 Unresolved -> `docs/_meta/OPEN_QUESTIONS.md`; ownership -> `SOURCE_OF_TRUTH.md`; Combat V2 high-level direction -> `docs/overview/V2_COMBAT_DIRECTION.md`; Combat V2 migration/components -> `docs/overview/V2_COMBAT_IMPLEMENTATION_BLUEPRINT.md`; terms -> `TERMINOLOGY.md`; otherwise exact authority only.
 
 ## PLAYTEST_HANDOFF
-When manual validation is genuinely needed, provide exact main/head, runtime marker, coherent systems to exercise, and telemetry/logs to return. Prefer one larger integration pass over micro-playtests.
+When manual validation is genuinely needed, provide exact main/head, runtime marker, coherent systems to exercise, and telemetry/logs to return. Prefer one larger integration pass over micro-playtests. User has explicitly requested continued implementation without waiting for intermediate manual playtests during the current Combat V2 migration; use deterministic CI/telemetry gates between bounded packages.
