@@ -109,6 +109,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 EnemyBrain cadence
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/EnemyBrainSmoke.tscn 2>&1 | tee enemy-brain.log
+          grep -F "[EnemyBrainSmoke] PASS - controlled cadence | held intent | Swordsman tactical ownership" enemy-brain.log
+          if grep -F "SCRIPT ERROR:" enemy-brain.log; then
+            echo "FAIL: Combat V2 EnemyBrain smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" enemy-brain.log; then
+            echo "FAIL: Combat V2 EnemyBrain smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -122,5 +137,6 @@ jobs:
             hushiro-guard-readability.log
             enemy-combat-response.log
             combat-action-motor.log
+            enemy-brain.log
           if-no-files-found: warn
           retention-days: 7
