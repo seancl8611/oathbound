@@ -54,7 +54,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroDefenseContractSmoke.tscn 2>&1 | tee hushiro-defense-contract.log
-          grep -F "[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | enemy guard posture-only/no damage number | real HP hit number exact | perilous thrust bypass + warning" hushiro-defense-contract.log
+          grep -F "[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture | real HP number exact | perilous thrust bypass + warning" hushiro-defense-contract.log
           if grep -F "SCRIPT ERROR:" hushiro-defense-contract.log; then
             echo "FAIL: Hushiro defense contract emitted a GDScript runtime error."
             exit 1
@@ -69,13 +69,28 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroGuardReadabilitySmoke.tscn 2>&1 | tee hushiro-guard-readability.log
-          grep -F "[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical block 0 HP + 14 Posture | no posture-only damage number" hushiro-guard-readability.log
+          grep -F "[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical partial 4 HP + 14 Posture | exact HP number" hushiro-guard-readability.log
           if grep -F "SCRIPT ERROR:" hushiro-guard-readability.log; then
             echo "FAIL: Guard readability smoke emitted a GDScript runtime error."
             exit 1
           fi
           if grep -F "ERROR: Error calling deferred method:" hushiro-guard-readability.log; then
             echo "FAIL: Guard readability smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify Combat V2 response foundation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/EnemyCombatResponseSmoke.tscn 2>&1 | tee enemy-combat-response.log
+          grep -F "[EnemyCombatResponseSmoke] PASS - authored guard window | partial guard Health | state poise" enemy-combat-response.log
+          if grep -F "SCRIPT ERROR:" enemy-combat-response.log; then
+            echo "FAIL: Combat V2 response smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" enemy-combat-response.log; then
+            echo "FAIL: Combat V2 response smoke emitted a deferred-call runtime error."
             exit 1
           fi
 
@@ -90,5 +105,6 @@ jobs:
             hushiro-combat-semantics.log
             hushiro-defense-contract.log
             hushiro-guard-readability.log
+            enemy-combat-response.log
           if-no-files-found: warn
           retention-days: 7
