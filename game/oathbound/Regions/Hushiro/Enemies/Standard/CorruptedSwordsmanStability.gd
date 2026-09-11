@@ -199,15 +199,16 @@ func _resolve_v2_guard_hit(damage: int, damage_type: String, attacker: Node) -> 
 	_block_stagger_until = now + float(response.get("block_stagger", BLOCK_STAGGER_TIME))
 	_on_block_impact(attacker, is_heavy, response)
 	apply_hp_damage(hp_damage)
+	var actual_hp_lost: int = maxi(0, hp_before - int(hp))
 
-	if hp_damage > 0:
+	if actual_hp_lost > 0:
 		var is_crit: bool = source != null and source.has_method("is_critical_strike") and bool(source.call("is_critical_strike"))
 		var display_type: String = "critical" if is_crit else damage_type
-		show_enemy_damage_number(hp_damage, display_type, -20.0)
+		show_enemy_damage_number(actual_hp_lost, display_type, -20.0)
 
 	notify_combat_got_hit({
 		"damage": damage,
-		"health_damage": hp_damage,
+		"health_damage": actual_hp_lost,
 		"blocked": true,
 		"damage_type": damage_type,
 		"v2_guard": true,
@@ -224,7 +225,7 @@ func _resolve_v2_guard_hit(damage: int, damage_type: String, attacker: Node) -> 
 		CombatTelemetry.record_event("enemy_v2_guard_resolution", {
 			"enemy": CombatTelemetry.snapshot_actor(self),
 			"raw_health_damage": damage,
-			"health_damage_received": hp_before - int(hp),
+			"health_damage_received": actual_hp_lost,
 			"posture_before": posture_before,
 			"posture_after": posture_after,
 			"guard_broken": broke_guard,
