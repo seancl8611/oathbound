@@ -79,6 +79,19 @@ func _run() -> void:
 	_expect(_latest_damage_number_text() == "4", "guarded damage number did not equal actual Health lost")
 	_expect(bool(enemy.call("is_guard_cue_visible")), "light guarded contact incorrectly collapsed the guard cue")
 
+	# Posture remains a canonical V2 readability mechanic until an explicit replacement
+	# is approved. Numeric posture alone is not sufficient: the player must see the
+	# buildup and therefore understand when a Deathblow opportunity is approaching.
+	var posture_bar: Node2D = enemy.get_node_or_null("PostureBar") as Node2D
+	_expect(posture_bar != null, "Swordsman lost its canonical PostureBar node")
+	if posture_bar != null:
+		_expect(posture_bar.visible, "PostureBar stayed hidden after real Posture damage")
+	var posture_fill_value: Variant = enemy.get("_posture_fill")
+	_expect(posture_fill_value is ColorRect, "Swordsman PostureBar is missing its fill")
+	if posture_fill_value is ColorRect:
+		var posture_fill: ColorRect = posture_fill_value as ColorRect
+		_expect(posture_fill.size.x > 0.0, "PostureBar fill did not represent accumulated Posture")
+
 	enemy.call("_set_blocking", false)
 	_expect(not bool(enemy.call("is_guard_cue_visible")), "guard cue remained visible after guard ended")
 
