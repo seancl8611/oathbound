@@ -8,9 +8,10 @@ extends "res://Core/Chambers/CombatChamberBase.gd"
 
 const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 
-# One enemy should own the immediate melee exchange. Individual enemies can be active
-# inside that turn, but the room director prevents several bodies from simultaneously
-# collapsing onto Akio. This is especially important for Hound packs.
+# Legacy role limits remain as compatibility infrastructure for non-migrated actors.
+# Combat V2 standard enemies schedule damaging impact windows through PressureDirectorV2;
+# Phase 7 therefore allows Hound-heavy waves to occupy more approach/frontline space
+# without raising the legacy one-melee-turn cap or stacking severe impacts.
 const HUSHIRO_MELEE_COOLDOWN: float = 0.95
 const HUSHIRO_ADVANCE_COOLDOWN: float = 0.70
 const HUSHIRO_RANGED_COOLDOWN: float = 1.60
@@ -128,9 +129,36 @@ func _configure_duel_tokens() -> void:
 	if _has_property(AttackDir, "attack_turnover_delay"):
 		AttackDir.attack_turnover_delay = HUSHIRO_TURNOVER_DELAY
 	if _has_property(AttackDir, "max_frontline"):
-		AttackDir.max_frontline = 2
+		AttackDir.max_frontline = 3
 
-	print("[HushiroCombatChamber] Pressure baseline: one melee turn, max two advancing, Hound lunge cap=1")
+	print("[HushiroCombatChamber] Pressure baseline: V2 impact windows + legacy melee cap=1, max three frontline")
+
+
+static func phase7_pressure_limits(alive: int, hounds: int) -> Dictionary:
+	var safe_alive: int = maxi(0, alive)
+	var safe_hounds: int = clampi(hounds, 0, safe_alive)
+
+	# Non-Hound compositions keep the previous conservative Hushiro movement envelope.
+	# Hound packs gain room to hunt from several angles now that their attacks use
+	# PressureDirectorV2 impact windows instead of whole-turn ownership. Even the
+	# four-Hound authored packs stop at three simultaneous advance slots and four
+	# frontline bodies so the 800x450 prototype room retains readable escape lanes.
+	var advance_limit: int = clampi(safe_alive, 1, 2)
+	var frontline_limit: int = 3
+	if safe_hounds >= 3:
+		advance_limit = maxi(1, mini(3, safe_alive))
+		frontline_limit = maxi(2, mini(4, safe_alive))
+	elif safe_hounds == 2:
+		advance_limit = maxi(1, mini(2, safe_alive))
+		frontline_limit = maxi(2, mini(3, safe_alive))
+
+	return {
+		"melee_limit": 1,
+		"ranged_limit": 1,
+		"advance_limit": advance_limit,
+		"frontline_limit": frontline_limit,
+		"dog_lunge_limit": 1,
+	}
 
 
 # The shared autoscale timer calls this method as the current wave population changes.
@@ -147,17 +175,16 @@ func _update_duel_tokens() -> void:
 		if str(enemy.get_meta("hushiro_enemy_type", "")) == "hound":
 			hounds += 1
 
-	# Sekiro-style group control: one enemy owns the committed melee exchange. Other
-	# bodies may reposition or provide one ranged layer, but Hound packs are restricted
-	# to one advancing dog so the player can actually read/parry/punish the current turn.
-	var melee_limit: int = 1
-	var ranged_limit: int = 1
-	var advance_limit: int = 1 if hounds >= 2 else clampi(alive, 1, 2)
-	var frontline_limit: int = 2 if hounds >= 2 else 3
+	var limits: Dictionary = phase7_pressure_limits(alive, hounds)
+	var melee_limit: int = int(limits.get("melee_limit", 1))
+	var ranged_limit: int = int(limits.get("ranged_limit", 1))
+	var advance_limit: int = int(limits.get("advance_limit", 2))
+	var frontline_limit: int = int(limits.get("frontline_limit", 3))
+	var dog_lunge_limit: int = int(limits.get("dog_lunge_limit", 1))
 
 	AttackDir.set_role_limits({
 		"melee_attack": melee_limit,
-		"dog_lunge": 1,
+		"dog_lunge": dog_lunge_limit,
 		"advance_move": advance_limit,
 		"ranged_attack": ranged_limit,
 		"frontal": 1,
@@ -181,7 +208,8 @@ func _update_duel_tokens() -> void:
 			"ranged_limit": ranged_limit,
 			"advance_limit": advance_limit,
 			"frontline_limit": frontline_limit,
-			"dog_lunge_limit": 1,
+			"dog_lunge_limit": dog_lunge_limit,
+			"policy": "phase7_pack_pressure",
 		})
 
 
