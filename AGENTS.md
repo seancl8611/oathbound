@@ -1,6 +1,6 @@
 # OATHBOUND_AGENT_CONTROL_PLANE
 
-<!-- V7: machine-oriented bootstrap/state + turn-survival protocol; GitHub is durable memory -->
+<!-- V8: machine-oriented bootstrap/state + turn-survival protocol; GitHub is durable memory -->
 
 Single durable bootstrap + live handoff for AI-assisted Oathbound work. Repository state is authority; conversation/project memory is cache only.
 
@@ -23,20 +23,20 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 
 ## LIVE_STATE
 ```yaml
-schema: 7
-updated_utc: 2026-09-12T21:30:00Z
+schema: 8
+updated_utc: 2026-09-12T21:40:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 169
-  feature_head: 36a19cdb332b4c38955f8d8fff2e6a6636639c7b
-  merge_commit: 976ff8e0ba0111eac5bd95e3ba616354833798d8
+  pr: 171
+  feature_head: 1fc5586526b5db6ca57c02ce28717fd1994b5dac
+  merge_commit: 4662bca42fedd376cd15a813cf6add75b5d9ff5b
   validation: >-
-    9/9 exact-head workflows green: Hushiro Combat Contract Gate, Godot 4.7.2 Project Check, Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff, RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content, and Region Transition Presentation.
+    Exact PR #171 head finished green across Hushiro Combat Contract Gate, Godot 4.7.2 Project Check, Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff, RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content, and Region Transition Presentation. The first Hushiro Combat Semantics attempt hit a transient DamageNumberManager UI-count timing assertion unrelated to the five-file Archer diff; rerunning that exact unchanged job passed the defense contract and every remaining semantics step.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 976ff8e0ba0111eac5bd95e3ba616354833798d8
-known_good_checkpoint: 976ff8e0ba0111eac5bd95e3ba616354833798d8
+covered_through_substantive_commit: 4662bca42fedd376cd15a813cf6add75b5d9ff5b
+known_good_checkpoint: 4662bca42fedd376cd15a813cf6add75b5d9ff5b
 frozen_playtest:
   branch: playtest/area1-hack-and-slash-2026-09-12
   head: 824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a
@@ -44,26 +44,26 @@ frozen_playtest:
   guide: docs/playtests/AREA1_HACK_AND_SLASH_PLAYTEST_2026-09-12.md
   immutable: true
 current_objective: >-
-  Preserve the merged Area 1 player-paced hack-and-slash target and evaluate it through the frozen manual playtest snapshot. Continue evidence-backed architecture, presentation, and validation cleanup without subjective population/durability/PressureDirector tuning. Counter readability should increasingly derive from explicit Combat V2 timing rather than legacy duration reverse-engineering.
+  Preserve the merged Area 1 player-paced hack-and-slash target and evaluate it through the frozen manual playtest snapshot. Continue evidence-backed architecture, presentation, and validation cleanup without subjective population/durability/PressureDirector tuning. Direct contact, projectile, and hazard readability should each consume the timing authority appropriate to the threat rather than being forced through one universal prompt.
 next_action: >-
-  Keep every frozen playtest branch unchanged. Manual-test `playtest/area1-hack-and-slash-2026-09-12` at exact head `824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a` and return matching Godot `.log` + `combat_*.jsonl` before subjective tuning. Evidence-backed follow-on presentation work may continue: audit Corrupted Archer projectile contact/parry readability because its PressureDirector reservation includes projectile travel while its enemy-attached cue currently ends at arrow launch. Treat Bilemass ground-hazard readability separately; do not turn hazard pressure into a parry prompt.
+  Keep every frozen playtest branch unchanged. Manual-test `playtest/area1-hack-and-slash-2026-09-12` at exact head `824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a` and return matching Godot `.log` + `combat_*.jsonl` before subjective tuning. Evidence-backed presentation work may continue from updated `main`: fix Cellar Bilemass landing-indicator timing/readability. Current code spawns the ground marker after the 0.30 s windup but gives it only `spit_travel_time` (3.0 s), while actual puddle landing occurs after another 0.45 s vomit plus 3.0 s travel. Preserve hazard timing/damage/radius/caps/slow and make the ground warning remain spatial, not a parry prompt.
 current_batch:
-  - PR #169 merged at `976ff8e0ba0111eac5bd95e3ba616354833798d8` from exact head `36a19cdb332b4c38955f8d8fff2e6a6636639c7b`; all 9 triggered exact-head workflows were green.
-  - Current direct close-frontline Hushiro counter cues use the actor's active PressureDirectorV2 reservation as their timing authority. No per-enemy script-name timing table is used.
-  - V2 direct-contact cue contract: fixed warning appears only within 0.20 s of predicted contact; fixed inner mark appears within 0.12 s, matching Akio's canonical `PERFECT_PARRY_WINDOW`; cue hides at predicted contact and does not emit the old ACTIVE/post-contact pulse.
-  - The new V2 cue path applies only to actors carrying `oathbound_frontline_pressure_body=true` (Swordsman/Hollow/Hound/Warden). Archer/Bilemass retain compatibility presentation pending dedicated ranged/hazard treatment.
-  - A multi-hit follow-up does not reuse an already-passed first-impact reservation timestamp; it falls back to existing authored/phase presentation until per-beat pressure ownership is explicitly migrated.
-  - `enemy_v2_counter_cue_armed` telemetry records explicit V2 cue arming with impact/warning/parry timing.
-  - `CounterCuePressureSmoke` and the fail-fast Hushiro Combat Contract Gate protect PressureDirector timing, 0.20/0.12 state boundaries, fixed-scale V2 presentation, and spatial fallback.
-  - PR #145 was audited and closed as superseded. Its own deterministic route traversal had failed with `CounterCueTiming._attach_indicator` dereferencing a nil `parry_indicator`; its 465-line legacy script-path timing adapter must not be revived.
-  - PR #168 merged at `6e445838d96bec95ccc4deb26a4f4486129bac03` and durably recorded the frozen hack-and-slash playtest snapshot.
-  - PR #167 added the fail-fast Hushiro Combat Contract Gate. PR #166 remains the substantive durability/pressure-string/target-handoff package.
+  - PR #171 merged at `4662bca42fedd376cd15a813cf6add75b5d9ff5b` from exact head `1fc5586526b5db6ca57c02ce28717fd1994b5dac`.
+  - Corrupted Archer keeps its shooter-attached aim telegraph through aim, then hands final defensive readability to the canonical arrow after launch via `Core/Combat/ArcherProjectileCounterCue.gd`.
+  - Archer projectile cue uses current relative arrow/Player motion and closest-approach geometry. It appears only when the actual arrow is on a collision course inside the final 0.20 s and reveals the perfect-parry beat inside 0.12 s.
+  - Lateral movement that already moves Akio off the arrow's collision course suppresses the projectile prompt; deflection/block/contact ownership changes clear it immediately.
+  - Archer projectile presentation does not modify canonical projectile speed, damage, lifetime, collision, block, parry, reflection, AttackEvent delivery, enemy cadence, or PressureDirector spacing.
+  - Archer projectile telemetry compares dynamic local ETA with the shooter's still-active PressureDirectorV2 scheduled impact when available.
+  - `ArcherProjectileCounterCueSmoke` protects head-on warning, 0.12 perfect-parry beat, geometric miss, lateral-dodge suppression, deflect cleanup, and scheduler trace through the fail-fast Hushiro Combat Contract Gate.
+  - The first PR #171 Hushiro Combat Semantics attempt failed only the existing floating-damage-number count/value probe. The exact unchanged rerun passed that step and all later semantics checks, while every other exact-head workflow was already green; no gameplay workaround was added for the transient test result.
+  - PR #169 remains the authority for direct close-frontline Hushiro counter cues: active PressureDirectorV2 `impact_at`, final 0.20 s warning, final 0.12 s inner mark, fixed scale, hide at predicted contact.
+  - PR #145 remains closed/superseded and must not be revived; its legacy timing adapter failed its own deterministic traversal before Combat V2 advanced.
   - Base katana Health damage remains 9 -> 12 -> 21; six clean hits total 84. Six-hit pressure is capability, not standard enemy durability.
   - Area 1 Health targets remain Hollow 40 (~3 clean hits), Hound 50 (~4), Archer 45 (~4), Swordsman 60 (5), Bilemass 60 (5), Warden 140 (~11 durable exception).
-  - One meaningful Swordsman guard can deny the clean five-hit kill; hit six may finish the short extension.
-  - Canonical Player remains `res://Player/aspect_player.tscn` -> `res://Player/OathboundCombatPlayer.gd`; `OathboundPlayerTargeting.gd` is assistive basic-sword steering only.
-  - Immediate clear -> next wave, 120-second anti-stall escalation, and burst/staggered/sequence arrivals remain intact.
+  - Immediate clear -> next wave, 120-second anti-stall escalation, burst/staggered/sequence arrivals, and directional basic-attack soft targeting remain intact.
 recent_batches:
+  - pr_171: flight-local Corrupted Archer defensive readability + dynamic collision-course ETA telemetry; exact unchanged semantics rerun green after one transient damage-number UI assertion.
+  - pr_170: durable record of direct V2 counter-cue authority and PR #145 supersession.
   - pr_169: direct Hushiro pre-contact cue timing from PressureDirectorV2 reservations; fixed 0.20 warning / 0.12 parry beat; spatial fallback; 9/9 exact-head workflows green.
   - pr_168: recorded immutable hack-and-slash playtest snapshot on the durable control plane.
   - pr_167: durable checkpoint + fail-fast Hushiro combat contract gate.
@@ -83,12 +83,13 @@ confirmed:
   - PressureDirectorV2 schedules dangerous impact timing, not enemy intent. Multiple enemies may approach/reposition/aim/wind up simultaneously if predicted impact timing remains fair.
   - PressureDirectorV2 `impact_at` is the preferred presentation timing seam for an admitted V2 threat when that predicted impact corresponds to the visualized contact.
   - Do not reverse-engineer current V2 impact timing from controller script names or locally inconsistent total-duration arguments when an explicit reservation exists.
+  - Direct close-frontline Hushiro cues consume the actor's PressureDirectorV2 predicted impact. Projectile threats may require projectile-local relative-motion timing after launch; ground hazards require spatial landing readability. Do not force all three threat classes through one presentation contract.
   - All six canonical Hushiro standard-enemy families use shared V2 response/action/motor/brain seams while preserving species-specific contact/action authoring.
   - Swordsman: EnemyCombatResponseRuntime + CombatActionRunner + EnemyMotor + EnemyBrain + PressureDirectorV2.
   - Hound: shared V2 seams with predator-specific movement/attacks and shared Hushiro Posture.
   - Hollow: simple low-Poise fodder; PressureDirectorV2 bite admission.
-  - Archer: ranged/spatial pressure; reservation includes aim + projectile travel; aim tracking ends at explicit commitment. Its projectile readability requires a dedicated projectile-local treatment rather than leaving a cue over the shooter for the full flight.
-  - Bilemass: delayed ground-hazard pressure; future puddle arrival is the pressure event; committed pre-launch vomit has authored Poise. Hazard readability is not a parry cue.
+  - Archer: ranged/spatial pressure; reservation includes aim + projectile travel; aim tracking ends at explicit commitment. After launch, the canonical projectile owns final defensive cue geometry through `ArcherProjectileCounterCue.gd`; collision/damage/deflect ownership remains in `CorruptedArcherProjectile.gd`.
+  - Bilemass: delayed ground-hazard pressure; future puddle arrival is the pressure event; committed pre-launch vomit has authored Poise. Hazard readability is spatial and must not masquerade as a parry cue.
   - Warden: durable restraint/control exception, not a permanent-block tank.
   - Canonical Player attack motion is mediated by CombatActionRunner + PlayerMotor through `OathboundPlayerMotion.gd`; target assistance is layered through `OathboundPlayerTargeting.gd`.
   - Basic-attack target assistance must respect explicit player redirection immediately and reacquire after invalid/dead targets without becoming sticky auto-lock.
@@ -118,8 +119,9 @@ avoid_without_evidence:
   - globally raising legacy melee/ranged caps as a shortcut around PressureDirectorV2
   - giant script-path timing adapters that infer V2 contact timing from legacy controller internals
   - forcing Archer projectile or Bilemass hazard pressure through the melee/direct-contact cue contract
+  - leaving an Archer cue over the shooter after release when the actual arrow trajectory has diverged from the original scheduler estimate
   - treating Archer pressure as a melee token
-  - treating Bilemass puddle pressure as an ordinary projectile hit
+  - treating Bilemass puddle pressure as an ordinary projectile hit or parryable warning
   - treating Warden as a permanent-block tank
   - invented Heart combat
   - unrelated PR growth
@@ -141,7 +143,7 @@ avoid_without_evidence:
 - Corrupted Swordsman final motion is mediated by CombatActionRunner + EnemyMotor, tactical choice by EnemyBrain, and attack admission by PressureDirectorV2.
 - Blighted Hound bite/lunge contact remains canonical in the imported controller while `BlightedHoundV2.gd` mediates tactical choice/action commitment/motion/Poise/pressure.
 - Hollow bite contact remains canonical in `Hollow.gd`/`HollowStability.gd` while `HollowV2.gd` mediates V2 behavior; preserve fodder identity and shared Hushiro Posture/Deathblow ownership.
-- Corrupted Archer projectile/contact remains canonical in the current Archer projectile/controller stack while `CorruptedArcherV2.gd` mediates V2 behavior; preserve weak reactive guard, smoke behavior, and shared Posture/Deathblow ownership.
+- Corrupted Archer projectile/contact remains canonical in `CorruptedArcherProjectile.gd`; `CorruptedArcherV2.gd` mediates V2 behavior and `ArcherProjectileCounterCue.gd` is presentation/telemetry only. Preserve weak reactive guard, smoke behavior, shared Posture/Deathblow ownership, projectile collision, block/parry, and reflection semantics.
 - Cellar Bilemass puddle construction/contact and skitter goal authoring remain canonical in `CellarBilemass.gd` while `CellarBilemassV2.gd` mediates V2 behavior; preserve the canonical `Combat` child and hazard caps/slow/lifetime.
 - Warden restraint/contact/reward remains canonical in `WardenRules.gd`/`WardenController.gd` while `WardenV2.gd` mediates cadence/commitment/motion/Poise/short guard/control pressure; preserve timed-parry restraint escape and shared Posture/Deathblow ownership.
 - Hushiro room-pressure tuning keeps legacy compatibility movement roles, role-aware close-frontline occupancy, and PressureDirectorV2 damaging-impact admission separate.
@@ -150,7 +152,9 @@ avoid_without_evidence:
 - Legacy damaging roles and V2 reservations are mutually exclusive across different actors during incremental migration.
 - Legacy AttackDirector remains compatibility infrastructure, not a substitute for PressureDirectorV2 in migrated combat.
 - Direct V2 close-frontline counter presentation consumes PressureDirectorV2 predicted `impact_at`; preserve the 0.20 warning / 0.12 perfect-parry-beat / hide-at-contact contract unless explicit evidence changes it.
-- Combat CI must fail hard on a missing expected PASS marker or failed Godot smoke; do not trust a green wrapper if an inner assertion reports FAIL.
+- Archer final flight readability must remain projectile-local and geometry-aware; it is not authority for projectile mechanics.
+- Bilemass ground-hazard readability must stay spatial and synchronized to actual puddle landing; it is not a parry/counter cue.
+- Combat CI must fail hard on a missing expected PASS marker or failed Godot smoke; do not trust a green wrapper if an inner assertion reports FAIL. Diagnose isolated transient UI/timing assertions before modifying unrelated gameplay code.
 - `.godot/`/`.import/` are untracked; verify source assets + clean import before declaring missing.
 
 ## DESIGN_ACCESS
