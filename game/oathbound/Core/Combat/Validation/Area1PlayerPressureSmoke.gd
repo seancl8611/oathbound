@@ -110,7 +110,7 @@ func _restore_aspect() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Area1PlayerPressureSmoke] PASS - canonical Player ownership | six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership")
+		print("[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership | canonical Player ownership")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
