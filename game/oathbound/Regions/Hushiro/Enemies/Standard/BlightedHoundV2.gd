@@ -114,6 +114,15 @@ func _v2_predator_tick(delta: float, now: float) -> void:
 	var direction: Vector2 = to_player / maxf(0.001, distance)
 	_charge_dir = direction if direction.length_squared() > 0.001 else _charge_dir
 
+	# Role-aware crowd spacing, not the sticky V1 `advance_move` role, owns how many
+	# close-pressure bodies may crowd Akio. A selected Hound retreats/orbits until that
+	# authored backoff expires; pressure admission continues to own actual impacts.
+	if now < _backoff_until:
+		if _v2_enemy_brain != null:
+			_v2_enemy_brain.set_intent(&"reposition", now, "crowd_backoff")
+		_v2_move_retreat(delta, direction)
+		return
+
 	var scores: Dictionary = _v2_hound_intent_scores(now, distance)
 	var intent: StringName = &"approach"
 	if _v2_enemy_brain != null and is_instance_valid(_v2_enemy_brain):
@@ -185,9 +194,8 @@ func _v2_hound_intent_scores(now: float, distance: float) -> Dictionary:
 
 
 func _v2_move_approach(delta: float, direction: Vector2, distance: float) -> void:
-	if not _approach_gate_ok():
-		_v2_move_orbit(delta, direction, distance, 1.05)
-		return
+	# V2 approach is ordinary locomotion. Crowd backoff above governs body occupancy;
+	# PressureDirectorV2 governs damaging impact fairness.
 	var speed_scale: float = 1.08 if distance > lunge_range else 0.90
 	_v2_set_motion(delta, direction * movement_speed * speed_scale)
 
@@ -603,4 +611,8 @@ func get_v2_hound_intent() -> String:
 
 
 func uses_legacy_hound_turn_token() -> bool:
+	return false
+
+
+func uses_legacy_advance_move_gate() -> bool:
 	return false
