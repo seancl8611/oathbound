@@ -17,12 +17,13 @@ func _ready() -> void:
 	HUSHIRO_ENEMY_CONTRACT.apply(self, "archer")
 
 	# Archer remains vulnerable once Akio closes cleanly. Keep a weak reactive guard,
-	# never a permanent/default frontal defense.
+	# never a permanent/default frontal defense. The 20% reaction chance is deliberately
+	# lower-frequency than the Swordsman's tactical guard behavior.
 	can_block = true
 	block_by_default = false
 	block_chance_on_hit = 0.20
 
-	print("[CorruptedArcherRules] 75 Health / 65 Posture stagger-first firing-line contract active")
+	print("[CorruptedArcherRules] 60 Health / 65 Posture player-paced firing-line contract active")
 
 
 # =============================================================================
