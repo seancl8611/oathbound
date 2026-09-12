@@ -214,6 +214,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Combat V2 Warden migration
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/WardenV2MigrationSmoke.tscn 2>&1 | tee warden-v2-migration.log
+          grep -F "[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | restraint/Posture preserved" warden-v2-migration.log
+          if grep -F "SCRIPT ERROR:" warden-v2-migration.log; then
+            echo "FAIL: Combat V2 Warden migration smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" warden-v2-migration.log; then
+            echo "FAIL: Combat V2 Warden migration smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Upload Hushiro combat validation logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -234,5 +249,6 @@ jobs:
             hollow-v2-migration.log
             archer-v2-migration.log
             bilemass-v2-migration.log
+            warden-v2-migration.log
           if-no-files-found: warn
           retention-days: 7

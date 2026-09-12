@@ -101,3 +101,25 @@ static func cellar_bilemass_v2() -> EnemyCombatResponseProfile:
 	profile.committed_poise_required = 2
 	profile.guard_break_poise_required = 2
 	return profile
+
+
+static func warden_v2() -> EnemyCombatResponseProfile:
+	var profile := EnemyCombatResponseProfile.new()
+	profile.profile_id = "warden_v2"
+
+	# The Warden is a hulking restraint/support threat, not a shield wall. Preserve the
+	# current full-Health reactive block when it happens, but make guard a short tactical
+	# punctuation mark with meaningful Posture pressure and a long cooldown instead of
+	# inheriting HumanoidEnemyBase's permanent proximity block. Neutral movement remains
+	# interruptible; committed attacks require a stronger impact. The chain cast layers
+	# an additional commitment rule in WardenV2 because its restraint is the identity move.
+	profile.guard_health_multiplier = 0.0
+	profile.guard_posture_multiplier = 1.25
+	profile.guard_duration = 0.22
+	profile.guard_cooldown = 1.55
+	profile.guard_break_cooldown = 1.85
+	profile.guard_range = 68.0
+	profile.neutral_poise_required = 1
+	profile.committed_poise_required = 2
+	profile.guard_break_poise_required = 2
+	return profile
