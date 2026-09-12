@@ -13,6 +13,7 @@ on:
       - "game/oathbound/Utility/CombatController.gd"
       - "game/oathbound/Utility/DamageNumberManager.gd"
       - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEncounterCatalog.gd"
       - "game/oathbound/Utility/HushiroEnemyContract.gd"
       - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
       - "game/oathbound/World/BloodStackManager.gd"
@@ -26,6 +27,7 @@ on:
       - "game/oathbound/Utility/CombatController.gd"
       - "game/oathbound/Utility/DamageNumberManager.gd"
       - "game/oathbound/Utility/DeathblowSystem.gd"
+      - "game/oathbound/Utility/HushiroEncounterCatalog.gd"
       - "game/oathbound/Utility/HushiroEnemyContract.gd"
       - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
       - "game/oathbound/World/BloodStackManager.gd"
@@ -72,6 +74,17 @@ jobs:
 
       - name: Import project headlessly
         run: godot --headless --path game/oathbound --import
+
+      - name: Verify Phase 7 encounter retuning contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroEncounterRetuningSmoke.tscn 2>&1 | tee hushiro-encounter-retuning.log
+          grep -F "[HushiroEncounterRetuningSmoke] PASS - 10 authored encounters | H03=13 | H08=19 | max wave=6 | Hound pack movement=3/4 | impact scheduling preserved" hushiro-encounter-retuning.log
+          if grep -F "SCRIPT ERROR:" hushiro-encounter-retuning.log; then
+            echo "FAIL: Phase 7 encounter retuning smoke emitted a GDScript runtime error."
+            exit 1
+          fi
 
       - name: Verify Hushiro Archer deathblow contract
         shell: bash
@@ -125,6 +138,7 @@ jobs:
         with:
           name: hushiro-combat-regression-${{ github.run_id }}
           path: |
+            hushiro-encounter-retuning.log
             hushiro-archer-deathblow.log
             hushiro-combat-lifecycle.log
           if-no-files-found: warn
