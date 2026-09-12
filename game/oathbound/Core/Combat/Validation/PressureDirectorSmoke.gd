@@ -2,6 +2,7 @@ extends Node
 
 const PRESSURE_DIRECTOR_SCRIPT = preload("res://Core/Combat/PressureDirectorV2.gd")
 const SWORDSMAN_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn")
+const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
 
 var _failures: Array[String] = []
 
@@ -113,6 +114,11 @@ func _test_attackdir_compatibility() -> void:
 	var migrated := Node2D.new()
 	migrated.name = "MigratedPressureRequester"
 	add_child(migrated)
+	HUSHIRO_ENEMY_CONTRACT.apply_pressure_metadata(migrated, "swordsman")
+
+	# Compatibility is bidirectional: an existing legacy melee attack blocks a new V2
+	# reservation, and once V2 is admitted a different legacy attacker cannot enter an
+	# unscheduled damaging role until that reservation is gone.
 	var role_granted: bool = bool(attack_dir.call("request_role", legacy, "melee_attack"))
 	_expect(role_granted, "legacy melee role was not available in clean test state")
 	if role_granted:
@@ -131,8 +137,81 @@ func _test_attackdir_compatibility() -> void:
 			_expect(str(result.get("reason", "")) == "legacy_melee_active", "legacy compatibility denial used wrong reason")
 		attack_dir.call("release_role", legacy, "melee_attack")
 
+	var v2_now: float = Time.get_ticks_msec() * 0.001
+	var admitted_value: Variant = attack_dir.call("request_pressure_threat", migrated, {
+		"attack_id": "v2_then_legacy_guard",
+		"impact_at": v2_now + 0.85,
+		"impact_delay": 0.85,
+		"severity": "normal",
+		"active_duration": 0.12,
+		"threat_cost": 1.0,
+	})
+	_expect(admitted_value is Dictionary, "V2-first compatibility request returned invalid response")
+	if admitted_value is Dictionary:
+		var admitted: Dictionary = admitted_value as Dictionary
+		_expect(bool(admitted.get("admitted", false)), "clean V2 compatibility request was not admitted")
+		if bool(admitted.get("admitted", false)):
+			var own_compat_role: bool = bool(attack_dir.call("request_role", migrated, "dog_lunge"))
+			_expect(own_compat_role, "V2 reservation owner deadlocked against its inherited compatibility role")
+			if own_compat_role:
+				attack_dir.call("release_role", migrated, "dog_lunge")
+
+			var late_legacy_melee: bool = bool(attack_dir.call("request_role", legacy, "melee_attack"))
+			var late_legacy_ranged: bool = bool(attack_dir.call("request_role", legacy, "ranged_attack"))
+			_expect(not late_legacy_melee, "legacy melee role entered after V2 pressure was already admitted")
+			_expect(not late_legacy_ranged, "legacy ranged role entered after V2 pressure was already admitted")
+			if late_legacy_melee:
+				attack_dir.call("release_role", legacy, "melee_attack")
+			if late_legacy_ranged:
+				attack_dir.call("release_role", legacy, "ranged_attack")
+			attack_dir.call("release_pressure_threat", migrated, str(admitted.get("reservation_id", "")), "compatibility_smoke")
+
+	# Hushiro's contract supplies generic role metadata. Close-pressure actors count
+	# toward crowd frontage; ranged/hazard actors do not. Both are migrated V2 actors
+	# and therefore must be invisible to the old single-turn stall nudge.
+	var archer := Node2D.new()
+	archer.name = "MetadataArcher"
+	add_child(archer)
+	HUSHIRO_ENEMY_CONTRACT.apply_pressure_metadata(archer, "archer")
+	var bilemass := Node2D.new()
+	bilemass.name = "MetadataBilemass"
+	add_child(bilemass)
+	HUSHIRO_ENEMY_CONTRACT.apply_pressure_metadata(bilemass, "bilemass")
+
+	_expect(bool(attack_dir.call("_counts_toward_close_frontline", migrated)), "Swordsman metadata did not count as close-frontline pressure")
+	_expect(not bool(attack_dir.call("_counts_toward_close_frontline", archer)), "Archer metadata still consumed close-frontline pressure")
+	_expect(not bool(attack_dir.call("_counts_toward_close_frontline", bilemass)), "Bilemass metadata still consumed close-frontline pressure")
+	_expect(bool(attack_dir.call("_counts_toward_close_frontline", legacy)), "untagged legacy actor lost default frontline compatibility")
+	_expect(bool(attack_dir.call("_uses_v2_pressure_cadence", migrated)), "migrated Swordsman metadata did not disable legacy stall cadence")
+	_expect(bool(attack_dir.call("_uses_v2_pressure_cadence", archer)), "migrated Archer metadata did not disable legacy stall cadence")
+	_expect(not bool(attack_dir.call("_uses_v2_pressure_cadence", legacy)), "untagged legacy actor was incorrectly classified as V2 cadence")
+
+	# Prove the inherited stall-prevention search can still rescue a true legacy actor
+	# in a mixed room without selecting the nearer migrated V2 actor.
+	var player := Node2D.new()
+	player.name = "CompatibilityPlayer"
+	player.add_to_group("player")
+	add_child(player)
+	var selected_player_value: Variant = attack_dir.call("_get_player")
+	var selected_player: Node2D = selected_player_value as Node2D if selected_player_value is Node2D else player
+	migrated.global_position = selected_player.global_position + Vector2(8.0, 0.0)
+	legacy.global_position = selected_player.global_position + Vector2(18.0, 0.0)
+	migrated.add_to_group("enemy")
+	legacy.add_to_group("enemy")
+	var stall_candidate_value: Variant = attack_dir.call("_closest_engaged_enemy")
+	var stall_candidate: Node = stall_candidate_value as Node if stall_candidate_value is Node else null
+	_expect(stall_candidate == legacy, "legacy stall-prevention search selected migrated V2 actor instead of legacy candidate")
+	migrated.remove_from_group("enemy")
+	legacy.remove_from_group("enemy")
+	player.remove_from_group("player")
+
+	attack_dir.call("release_all_for", legacy)
+	attack_dir.call("release_all_for", migrated)
 	legacy.queue_free()
 	migrated.queue_free()
+	archer.queue_free()
+	bilemass.queue_free()
+	player.queue_free()
 
 
 func _test_swordsman_integration() -> void:
@@ -175,7 +254,7 @@ func _test_swordsman_integration() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[PressureDirectorSmoke] PASS - overlapping windups | spaced impacts | perilous safety | legacy compatibility | Swordsman integration")
+		print("[PressureDirectorSmoke] PASS - overlapping windups | spaced impacts | perilous safety | legacy compatibility | Swordsman integration | bidirectional V2 compatibility | role-aware crowd filters")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
