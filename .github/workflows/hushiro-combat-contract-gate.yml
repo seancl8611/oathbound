@@ -84,9 +84,9 @@ jobs:
           }
 
           run_smoke \
-            res://Core/Combat/Validation/SwordsmanV2MigrationSmoke.tscn \
-            "[SwordsmanV2MigrationSmoke] PASS" \
-            swordsman-v2.log
+            res://Core/Combat/Validation/CombatActionMotorSmoke.tscn \
+            "[CombatActionMotorSmoke] PASS - startup momentum | commit lock | authored action motion | Swordsman integration" \
+            swordsman-action-motor.log
           run_smoke \
             res://Core/Combat/Validation/HoundV2MigrationSmoke.tscn \
             "[HoundV2MigrationSmoke] PASS" \
@@ -118,7 +118,7 @@ jobs:
             combat-contract-editor.log
             player-paced.log
             player-pressure.log
-            swordsman-v2.log
+            swordsman-action-motor.log
             hound-v2.log
             hollow-v2.log
             archer-v2.log
