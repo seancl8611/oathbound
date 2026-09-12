@@ -25,35 +25,37 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-11T22:27:00Z
+updated_utc: 2026-09-12T02:35:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 157
-  feature_head: 6d4aad7248e3268645867867927a3267114bb1d7
-  merge_commit: d8043550cda2e9fa29cd806a719a1ca8a6a42ede
+  pr: 158
+  feature_head: 3e997fdb0e2769f8a54c4cbdd222f60bbda2d04a
+  merge_commit: 62bd32e9c895054270604c982afb0cca828f6875
   validation: 8/8 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: d8043550cda2e9fa29cd806a719a1ca8a6a42ede
-known_good_checkpoint: d8043550cda2e9fa29cd806a719a1ca8a6a42ede
+covered_through_substantive_commit: 62bd32e9c895054270604c982afb0cca828f6875
+known_good_checkpoint: 62bd32e9c895054270604c982afb0cca828f6875
 current_objective: >-
-  Combat V2 Phases 1-5 are integrated and Phase 6 standard-enemy migration is underway. Corrupted Swordsman is the full humanoid reference, Blighted Hound the predator reference, Hollow the low-Poise swarm/fodder reference, and Corrupted Archer is now the ranged/spatial-pressure reference. Archer owns shared response/action/motor/brain/pressure seams while its projectile construction, predictive aim, wall avoidance, weak reactive guard, smoke/prosthetic behavior, Hushiro Posture/Deathblow contract, and 75 HP / 65 Posture baseline remain authoritative.
+  Combat V2 Phases 1-5 are integrated and Phase 6 standard-enemy migration is underway. Corrupted Swordsman is the full humanoid reference, Blighted Hound the predator reference, Hollow the low-Poise swarm/fodder reference, Corrupted Archer the ranged/spatial-pressure reference, and Cellar Bilemass is now the delayed area-denial/hazard-pressure reference. Bilemass owns shared response/action/motor/brain/pressure seams while its delayed landing indicator, puddle DoT/slow, skitter movement identity, two-per-enemy/eight-per-room hazard caps, Hushiro Posture/Deathblow contract, rewards, and current 80 HP / 70 Posture baseline remain authoritative.
 next_action: >-
-  Continue Combat V2 without waiting for intermediate manual playtests. Migrate Cellar Bilemass next as the area-denial standard enemy. Preserve its delayed landing indicator, puddle DoT/slow, per-enemy and room hazard caps, skitter identity, current Posture/Deathblow contract, and rewards while moving tactical cadence, spit commitment, movement composition, Poise response, and room-pressure admission onto shared V2 seams. Its reservation should represent future ground-hazard arrival/coverage rather than a melee turn or ordinary projectile hit. After Bilemass, migrate Warden in a separate evidence-backed package. Do not globally increase encounter counts or retune Health/damage until the standard-enemy migrations are coherent.
+  Continue Combat V2 without waiting for intermediate manual playtests. Audit and migrate Warden next as the heavy/elite standard-enemy reference in a separate evidence-backed package. Preserve its actual current Health/Posture, guard/defense identity, attacks, commitments, movement, Posture/Deathblow contract, and rewards; do not copy Hollow/Archer low-Poise behavior by default. Author deliberate tactical cadence, stateful/heavier Poise where supported by its identity, explicit action commitment, EnemyMotor composition, and PressureDirectorV2 admission using the existing shared seams. Add deterministic migration coverage before merge. Do not globally increase encounter counts or retune Health/damage until the standard-enemy migrations are coherent.
 current_batch:
-  - PR #157 merged at d8043550cda2e9fa29cd806a719a1ca8a6a42ede from exact head 6d4aad7248e3268645867867927a3267114bb1d7; all 8 workflows triggered for this change were green.
-  - Added `Regions/Hushiro/Enemies/Standard/CorruptedArcherV2.gd` and routed the canonical Archer scene through it. `CorruptedArcherRules.gd` remains authoritative for the 75 Health / 65 Posture Hushiro contract and Deathblow execution.
-  - Archer tactical selection now uses controlled-cadence EnemyBrain intents: shoot, retreat, approach, reposition, hold. Existing wall avoidance and kite-shot movement identity remain available.
-  - Archer normal shots no longer depend on the legacy `ranged_attack` role in production. Each shot requests a low-cost PressureDirectorV2 spatial reservation whose predicted impact includes both bow aim duration and arrow travel time.
-  - Ranged reservation intentionally survives the shoot animation while the projectile is travelling; already-launched arrows remain spatial pressure even if the Archer is staggered afterward.
-  - CombatActionRunner gives bow shots explicit startup/commitment/active/recovery. Early aim updates the predicted target; after commitment the target freezes, allowing late lateral movement to produce a real miss instead of last-frame homing.
-  - EnemyMotor mediates Archer target locomotion through action-phase weights without replacing the existing wall-avoidance/kiting authoring.
-  - Added `EnemyCombatResponseProfile.corrupted_archer_v2()`. Archer remains low-Poise even while committed to bow preparation: a normal canonical sword hit interrupts the shooter once Akio successfully closes distance.
-  - Existing projectile construction/contact, parry indicator, smoke cancellation, weak reactive guard, PostureBar, HushiroPostureBreakRuntime, delayed Deathblow arm, and rewards remain intact.
-  - Added `ArcherV2MigrationSmoke`; Hushiro Combat Semantics validates ranged intent, arrival-time pressure request, explicit aim commitment/target-lock, committed low-Poise interruption, PressureDirectorV2 reachability, and Posture/Deathblow preservation.
-  - PR #156 immediately precedes this package: canonical Hollow V2 swarm/fodder migration, 8/8 triggered workflows green.
+  - PR #158 merged at 62bd32e9c895054270604c982afb0cca828f6875 from exact head 3e997fdb0e2769f8a54c4cbdd222f60bbda2d04a; all 8 workflows triggered for this change were green.
+  - Added `Regions/Hushiro/Enemies/Standard/CellarBilemassV2.gd` and routed the canonical Bilemass scene through it while preserving the existing puddle construction/contact, DoT/slow, delayed landing indicator, skitter movement authoring, hazard caps, rewards, and 80 Health / 70 Posture Hushiro contract.
+  - Bilemass tactical selection now uses controlled-cadence EnemyBrain hazard intent rather than production dependence on the legacy ranged-role polling path.
+  - Bilemass spit requests PressureDirectorV2 hazard pressure whose predicted danger represents future puddle arrival/coverage (`windup + vomit + travel`) rather than a melee body turn or ordinary projectile impact.
+  - CombatActionRunner gives spit startup/commitment/active/recovery. Early targeting may follow Akio; after commitment the landing target freezes, preserving a real evade window.
+  - EnemyMotor mediates Bilemass locomotion while retaining current skitter-goal, room-edge, and corner-escape behavior.
+  - Added `EnemyCombatResponseProfile.cellar_bilemass_v2()`: neutral Bilemass is easy to interrupt, while committed pre-launch vomit requires stronger Poise impact; Health/Posture still apply independently.
+  - Once the landing indicator/hazard is launched, striking Bilemass no longer retroactively erases already-telegraphed ground pressure; death/cleanup continues to clear pending attack lifecycle state.
+  - Preserved current puddle values: two active puddles per Bilemass, eight per room, 3.5 second lifetime, and 50% slow.
+  - The first exact-head semantic run exposed a real canonical-scene gap: Bilemass had no `CombatController`, so its shared Hushiro contract could not author Posture. The canonical `CellarBilemass.tscn` now owns a `Combat` child using `Utility/CombatController.gd`; the Hushiro contract authors its 70 Posture normally rather than weakening the smoke.
+  - Added `BilemassV2MigrationSmoke`; Hushiro Combat Semantics validates hazard intent, future-arrival pressure, explicit commitment/target lock, committed Poise behavior, canonical CombatController/Posture ownership, hazard caps/slow/lifetime, and Posture/Deathblow preservation.
+  - PR #157 immediately precedes this package: canonical Corrupted Archer V2 ranged/spatial-pressure migration, 8/8 triggered workflows green.
 recent_batches:
+  - pr_158: canonical Cellar Bilemass V2 delayed area-denial/hazard-pressure migration; 8/8 triggered workflows green after canonical CombatController scene wiring fix.
   - pr_157: canonical Corrupted Archer V2 ranged/spatial-pressure migration; 8/8 triggered workflows green.
   - pr_156: canonical Hollow V2 swarm/fodder migration; 8/8 triggered workflows green.
   - pr_155: canonical Blighted Hound V2 predator migration; 8/8 triggered workflows green.
@@ -76,6 +78,7 @@ confirmed:
   - Blighted Hound owns the same shared V2 response/action/motor/brain seams and uses PressureDirectorV2 for bite/lunge admission, while retaining beast-specific movement/attack authoring and the shared Hushiro Posture bridge.
   - Hollow owns shared V2 response/action/motor/brain seams and uses PressureDirectorV2 for bite admission. It remains deliberately simpler and lower-Poise than Swordsman/Hound; multiple Hollows can approach simultaneously while impact scheduling governs fairness.
   - Corrupted Archer owns shared V2 response/action/motor/brain seams and uses PressureDirectorV2 for ranged/spatial pressure. Its pressure timing extends through projectile travel, and aim tracking ends at explicit CombatActionRunner commitment.
+  - Cellar Bilemass owns shared V2 response/action/motor/brain seams and uses PressureDirectorV2 for delayed ground-hazard pressure. Its reservation represents future puddle arrival, committed pre-launch vomit has authored Poise, and its canonical scene now owns the CombatController required by the shared Hushiro Posture contract.
   - PressureDirectorV2 schedules danger, not enemy intent: overlapping approach/windup is allowed when predicted impact windows remain fair.
   - Akio owns PlayerMotor + CombatActionRunner motion seams while preserving the existing canonical action-content and damage pipeline.
   - Player movement restriction is phase-authored for attacks rather than a universal ATTACKING hard stop. Heavy attacks may still intentionally plant the Player more strongly than fast attacks.
@@ -100,6 +103,7 @@ avoid_without_evidence:
   - turning Hollow/Hound fodder migrations into humanoid-duel complexity
   - treating Archer ranged/spatial pressure as if it were just another melee token
   - treating Bilemass puddle pressure as an ordinary projectile hit instead of future area denial
+  - assuming Warden should inherit low-Poise fodder/ranged response instead of auditing its heavy/elite identity
   - invented Heart combat
   - unrelated PR growth
 ```
@@ -119,6 +123,7 @@ avoid_without_evidence:
 - Blighted Hound bite/lunge contact remains canonical in the imported controller, while V2 tactical choice/action commitment/motion/Poise/pressure are mediated by `BlightedHoundV2.gd`; preserve its Hushiro shared Posture bridge until that responsibility is explicitly consolidated.
 - Hollow bite contact remains canonical in `Hollow.gd`/`HollowStability.gd`, while V2 tactical choice/action commitment/motion/Poise/pressure are mediated by `HollowV2.gd`; preserve its one-attack fodder identity and Hushiro shared Posture/Deathblow ownership.
 - Corrupted Archer projectile/contact remains canonical in the current Archer projectile/controller stack, while V2 tactical choice/action commitment/motion/Poise/pressure are mediated by `CorruptedArcherV2.gd`; preserve weak reactive guard, smoke behavior, and Hushiro shared Posture/Deathblow ownership.
+- Cellar Bilemass puddle construction/contact and skitter goal authoring remain canonical in `CellarBilemass.gd`, while V2 tactical choice/action commitment/motion/Poise/hazard pressure are mediated by `CellarBilemassV2.gd`; preserve the canonical `Combat` child, shared Hushiro Posture/Deathblow ownership, and existing hazard caps/slow/lifetime.
 - Canonical Player attack motion is mediated by CombatActionRunner + PlayerMotor through `OathboundPlayerMotion.gd`; future Player changes must preserve Aspect profile and AttackEvent ownership unless explicitly replacing those responsibilities.
 - Legacy AttackDirector remains the compatibility path for non-migrated enemies during phased conversion.
 - `.godot/`/`.import/` untracked; verify source assets + clean import before declaring missing.
