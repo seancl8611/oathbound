@@ -80,7 +80,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroEncounterRetuningSmoke.tscn 2>&1 | tee hushiro-encounter-retuning.log
-          grep -F "[HushiroEncounterRetuningSmoke] PASS - 10 authored encounters | H03=13 | H08=19 | max wave=6 | Hound pack movement=3/4 | impact scheduling preserved" hushiro-encounter-retuning.log
+          grep -F "[HushiroEncounterRetuningSmoke] PASS - 10 authored encounters | H03=13 | H08=19 | max wave=6 | Hound pack movement=3/4 | mixed frontline=4 | impact scheduling preserved" hushiro-encounter-retuning.log
           if grep -F "SCRIPT ERROR:" hushiro-encounter-retuning.log; then
             echo "FAIL: Phase 7 encounter retuning smoke emitted a GDScript runtime error."
             exit 1
