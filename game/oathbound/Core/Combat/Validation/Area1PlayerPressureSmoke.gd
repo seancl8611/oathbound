@@ -1,7 +1,7 @@
 extends Node
 
 const ASPECT_CATALOG = preload("res://Core/Aspects/AspectCatalog.gd")
-const PRESSURE_SCRIPT = preload("res://Player/OathboundPlayerPressure.gd")
+const CANONICAL_PLAYER_SCRIPT = preload("res://Player/OathboundCombatPlayer.gd")
 const PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 
 var _failures: Array[String] = []
@@ -27,9 +27,9 @@ func _run() -> void:
 
 
 func _test_damage_contract() -> void:
-	var target: Array[int] = PRESSURE_SCRIPT.area1_pressure_damage_target()
+	var target: Array[int] = CANONICAL_PLAYER_SCRIPT.area1_pressure_damage_target()
 	_expect(target == [9, 12, 21, 9, 12, 21], "pressure damage sequence is not 9/12/21 repeated")
-	_expect(PRESSURE_SCRIPT.area1_pressure_total_damage_target() == 84, "six-hit pressure target no longer totals 84")
+	_expect(CANONICAL_PLAYER_SCRIPT.area1_pressure_total_damage_target() == 84, "six-hit pressure target no longer totals 84")
 
 	var profiles: Array = ASPECT_CATALOG.get_basic_profiles(ASPECT_CATALOG.NO_ASPECT, 0)
 	_expect(profiles.size() == 3, "base katana profile count changed")
@@ -50,7 +50,8 @@ func _test_live_pressure_string() -> void:
 	if player.has_method("set_physics_process"):
 		player.set_physics_process(false)
 
-	_expect(player.get_script() == PRESSURE_SCRIPT, "canonical aspect Player is not routed through OathboundPlayerPressure")
+	_expect(player.get_script() == CANONICAL_PLAYER_SCRIPT, "canonical aspect Player no longer owns OathboundCombatPlayer.gd")
+	_expect(player.has_method("get_area1_pressure_snapshot"), "canonical Player is missing Area 1 pressure extension")
 	_expect(player.has_method("has_v2_player_action_motor_runtime"), "pressure Player lost V2 PlayerMotor/ActionRunner seam")
 	if player.has_method("has_v2_player_action_motor_runtime"):
 		_expect(bool(player.call("has_v2_player_action_motor_runtime")), "pressure Player failed to attach V2 motion runtime")
@@ -78,9 +79,6 @@ func _test_live_pressure_string() -> void:
 	player.call("_queue_next_combo_attack")
 	_expect(int(player.get("_queued_combo_index")) == 0, "midpoint Heavy did not wrap queued continuation to Quick #4")
 
-	# Simulate the inherited recovery resolver launching the queued Quick. Recovery is
-	# important here because it tells the adapter this is phrase two rather than a new
-	# neutral commitment.
 	player.set("_state", 4) # State.ATTACK_RECOVERY in the imported controller.
 	player.call("_start_profile_attack", quick, 0)
 	_expect(_hits_started(player) == 4, "Quick #4 incorrectly reset the six-hit commitment")
@@ -112,7 +110,7 @@ func _restore_aspect() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership")
+		print("[Area1PlayerPressureSmoke] PASS - canonical Player ownership | six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
