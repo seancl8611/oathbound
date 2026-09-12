@@ -20,7 +20,6 @@ const STAGE_DARK: StringName = &"dark"
 const LIGHT_ALPHA: float = 0.70
 const MEDIUM_ALPHA: float = 0.86
 const DARK_ALPHA: float = 1.00
-const FAILSAFE_SECONDS: float = 0.20
 
 var _active_indicator: Node2D = null
 var _active_sprite: Sprite2D = null
@@ -41,7 +40,11 @@ func _process(_delta: float) -> void:
 		_clear_active_indicator("source_missing")
 		return
 
-	_observe_new_pending_indicator(source)
+	# Preserve the authored LIGHT beat for the entire arming frame. Without this early
+	# return, a busy frame can consume enough wall-clock time for a short warning to jump
+	# directly to MEDIUM before the first rendered/process observation.
+	if _observe_new_pending_indicator(source):
+		return
 
 	if _active_indicator == null or not is_instance_valid(_active_indicator):
 		return
@@ -58,20 +61,21 @@ func _process(_delta: float) -> void:
 		_clear_active_indicator("landing_due")
 
 
-func _observe_new_pending_indicator(source: Node) -> void:
+func _observe_new_pending_indicator(source: Node) -> bool:
 	var pending_value: Variant = source.get("_pending_spit_indicator")
 	if not (pending_value is Node2D):
-		return
+		return false
 	var pending: Node2D = pending_value as Node2D
 	if not is_instance_valid(pending) or not pending.is_inside_tree():
-		return
+		return false
 	var pending_id: int = pending.get_instance_id()
 	if pending_id == _last_pending_id:
-		return
+		return false
 
 	_last_pending_id = pending_id
 	_hide_legacy_indicator_visual(pending)
 	_start_spatial_warning(source, pending.global_position)
+	return true
 
 
 func _start_spatial_warning(source: Node, target_position: Vector2) -> void:
