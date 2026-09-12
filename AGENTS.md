@@ -25,35 +25,33 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-12T02:55:00Z
+updated_utc: 2026-09-12T03:37:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 159
-  feature_head: 3ae3c640a370f2f5beebc9a0916f7a9340b7d669
-  merge_commit: 0c99dd756cc30c9900779eaaeb48d69f996b762f
+  pr: 160
+  feature_head: 43ebc35e710999d28011ae0fa52d2f2a1ba15850
+  merge_commit: eeb509f940bb16b80cab65595f74b4d166011713
   validation: 8/8 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 0c99dd756cc30c9900779eaaeb48d69f996b762f
-known_good_checkpoint: 0c99dd756cc30c9900779eaaeb48d69f996b762f
+covered_through_substantive_commit: eeb509f940bb16b80cab65595f74b4d166011713
+known_good_checkpoint: eeb509f940bb16b80cab65595f74b4d166011713
 current_objective: >-
-  Combat V2 Phases 1-6 are integrated for Hushiro's canonical standard-enemy roster. Corrupted Swordsman is the full humanoid reference, Blighted Hound the predator reference, Hollow the low-Poise swarm/fodder reference, Corrupted Archer the ranged/spatial-pressure reference, Cellar Bilemass the delayed area-denial/hazard-pressure reference, and Warden the restraint/control-heavy reference. Begin Phase 7 encounter retuning from evidence in the current Hushiro room/spawn authoring rather than globally multiplying counts or flattening role identities.
+  Combat V2 Phases 1-6 are integrated for Hushiro's canonical standard-enemy roster, and Phase 7 has begun with the first evidence-backed encounter retune. H03 Kennel Break and H08 Hounds in the Mud now use their approved Hound-heavy compositions again because the previous Hound-to-Hollow substitutions were proven to be a V1 dogpile workaround. Continue Phase 7 by auditing mixed-role rooms and remaining legacy pressure serialization from the current authored data rather than globally multiplying counts or flattening role identities.
 next_action: >-
-  Audit Hushiro encounter population and mixed-role authoring from the current canonical room/spawn pipeline. Identify which rooms currently instantiate the six migrated standard-enemy families, their counts/compositions, arena readability constraints, and any legacy AttackDirector assumptions that still serialize pressure. Then implement the smallest evidence-backed Phase 7 encounter-retuning package: improve mixed-role pressure and population only where spatial clarity supports it, preserve authored early/mid/late progression, and add deterministic room/composition/pressure validation. Do not globally lower Health/damage, raise max_melee_attackers, or apply the blueprint's illustrative 4-5 / 6-8 / 8-12 population examples as universal contracts.
+  Continue Phase 7 from the current HushiroEncounterCatalog and CombatChamber pressure policy. Audit the mixed-role encounters H02/H05/H06/H07/H09/H10 and the opening H01 for role overlap, spatial pressure, active-wave size, and any remaining legacy AttackDirector gates that unnecessarily serialize the six migrated V2 standard-enemy families. Implement only the next smallest evidence-backed mixed-role retune where current 800x450 room geometry, safe-spawn spacing, and PressureDirectorV2 impact scheduling support it. Preserve authored early/mid/late progression and the six-active validation cap unless new evidence justifies changing it. Do not globally lower Health/damage, raise legacy melee/ranged attack caps, or apply illustrative blueprint population numbers as universal contracts.
 current_batch:
-  - PR #159 merged at 0c99dd756cc30c9900779eaaeb48d69f996b762f from exact head 3ae3c640a370f2f5beebc9a0916f7a9340b7d669; all 8 triggered workflows were green.
-  - Added `EnemyCombatResponseProfile.warden_v2()` and routed canonical `Warden.tscn` through `WardenV2.gd` while preserving the existing WardenController/WardenRules attack hitboxes, chain restraint, timed pre-yank parry escape, failure Posture spike, rewards, animations, and death flow.
-  - Warden now owns shared EnemyCombatResponseRuntime + CombatActionRunner + EnemyMotor + EnemyBrain seams and PressureDirectorV2 admission.
-  - Warden tactical intent runs on controlled cadence. Its ready offense outranks guard; chain remains the dominant weighted attack, while thrust/cross/running attacks remain simpler secondary tools.
-  - Replaced inherited proximity-permanent Humanoid guard behavior with a short tactical guard: 0.22s duration, 1.55s cooldown, full Health negation only during the rare active guard, and 1.25x Posture pressure through guard.
-  - Warden Poise is stateful rather than hidden mitigation: neutral/early Warden remains light-hit interruptible, ordinary committed melee requires Poise power 2, and the identity-defining committed chain cast requires Poise power 3. Health/Posture damage still apply independently when the action survives.
-  - Chain restraint requests perilous `control` pressure at 1.50 threat cost; its reservation models the cast impact and survives through the possible restraint window instead of behaving like a light melee token.
-  - EnemyMotor composes Warden locomotion/action motion while preserving its slow approach/orbit identity and authored running lunge. CombatActionRunner freezes target tracking after commitment.
-  - Canonical Hushiro authority remains 140 Health / 150 Posture at runtime. Warden restraint remains timed-parry escape, +25 Posture on failure, and 1.2s Warden stagger on successful escape.
-  - Added `WardenV2MigrationSmoke`; Hushiro Combat Semantics validates runtime ownership, 140/150 Hushiro contract, restraint behavior, control-pressure request, commitment lock, short guard, and three-tier Poise behavior.
-  - Phase 6 standard-enemy migration is now complete for the canonical Hushiro roster: Swordsman, Hound, Hollow, Archer, Bilemass, Warden.
+  - PR #160 merged at eeb509f940bb16b80cab65595f74b4d166011713 from exact head 43ebc35e710999d28011ae0fa52d2f2a1ba15850; all 8 triggered workflows were green.
+  - Began Combat V2 Phase 7 at the actual authored Hushiro encounter layer: `HushiroEncounterCatalog.gd` supplies standard compositions and reusable `CombatChamber.gd` supplies room pressure coordination.
+  - Restored H03 Kennel Break to 4 Hounds; 3 Hounds + 1 Swordsman; 4 Hounds + 1 Swordsman (13 total) and H08 Hounds in the Mud to 4 Hounds; 3 Hounds + 1 Archer; 4 Hounds + 1 Swordsman; 4 Hounds + 1 Archer + 1 Swordsman (19 total), matching the approved Hushiro implementation baseline.
+  - Git history proved the replaced-Hound live compositions came from V1 commit b721a4b89c7d527e356a453c123f117878ac6fd6 (`balance: replace Hushiro Hound dogpiles with controlled packs`) and changed only the encounter catalog as a dogpile mitigation; it was not a newer authored encounter identity.
+  - Replaced the old Hound-heavy one-advance/two-frontline suppression with bounded Phase 7 pack pressure: 3+ Hounds may hold up to 3 `advance_move` slots and 4 frontline bodies; 2 Hounds use 2/3; non-Hound compositions retain the conservative 2-advance/3-frontline envelope.
+  - Legacy `melee_attack`, `ranged_attack`, and `dog_lunge` role caps remain 1. Phase 7 movement/frontline freedom is deliberately separate from dangerous impact concurrency; migrated attacks continue through PressureDirectorV2 spacing/threat admission.
+  - Added `HushiroEncounterRetuningSmoke` and Hushiro Combat Regression CI coverage for all 10 authored standard-encounter totals, exact H03/H08 compositions, the 3-6 active-wave range with six-active cap, pack-pressure policy, and heavy-Hound impact spacing.
+  - The first PR head exposed a stale broad semantics assertion that hard-capped every H03/H08 wave at two Hounds. CI artifacts proved seven failures were exactly that obsolete V1 rule; the smoke was updated rather than weakened to enforce a Phase 7 envelope of at most four Hounds and six total active enemies in those waves.
 recent_batches:
+  - pr_160: first Phase 7 encounter retune; restored authored Hound packs, bounded pack movement/frontline pressure, deterministic composition/pressure validation; 8/8 triggered workflows green.
   - pr_159: canonical Warden V2 restraint/control-heavy migration; 8/8 triggered workflows green.
   - pr_158: canonical Cellar Bilemass V2 delayed area-denial/hazard-pressure migration; 8/8 triggered workflows green after canonical CombatController scene wiring fix.
   - pr_157: canonical Corrupted Archer V2 ranged/spatial-pressure migration; 8/8 triggered workflows green.
@@ -85,6 +83,8 @@ confirmed:
   - Player movement restriction is phase-authored for attacks rather than a universal ATTACKING hard stop. Heavy attacks may still intentionally plant the Player more strongly than fast attacks.
   - Player dash behavior remains current-authority exact. Defense mobility has not yet been redesigned; block/parry remain stationary by explicit package scope.
   - All six canonical Hushiro standard-enemy families have now been migrated to V2 shared seams; legacy AttackDirector remains compatibility infrastructure for non-migrated actors/encounters, not the desired Phase 7 pressure model.
+  - Phase 7 Hound-heavy standard waves may again contain up to four Hounds because actual damaging impact windows are PressureDirectorV2-scheduled. Movement/frontline participation may broaden without raising legacy attack-turn concurrency.
+  - The current standard Hushiro encounter catalog remains bounded to 3-6 active enemies per wave; six active is a protected Phase 7 validation ceiling for now, not a statement that later evidence can never revise it.
   - Taking Health damage does not inherently cancel a committed action; Poise decides immediate interruption on migrated enemies.
   - Enemy posture recovery need not use one universal cadence; multi-target combat should not force Sekiro-style continuous pressure on every target.
   - Aspect-specific block/parry/defensive capability ownership remains undecided. No current Aspect loses a shared mechanic before the dedicated capability pass.
@@ -97,10 +97,11 @@ avoid_without_evidence:
   - one universal enemy Health-through-guard or Poise formula
   - removing block/parry from an Aspect before the dedicated capability pass
   - globally multiplying encounter counts or lowering Health/damage before reading actual Phase 7 room authoring
+  - restoring or changing every encounter simply because an older baseline differs; distinguish authored identity from proven compatibility workarounds before retuning
   - treating the blueprint's illustrative 4-5 / 6-8 / 8-12 room sizes as universal authored targets
   - rewriting working Player combo content instead of using the locomotion/action-motion seam
   - bypassing CombatActionRunner/PlayerMotor/EnemyMotor/EnemyBrain/PressureDirectorV2 with parallel actor-specific systems
-  - globally raising `max_melee_attackers` as a shortcut around PressureDirectorV2
+  - globally raising `max_melee_attackers` or legacy melee/ranged role caps as a shortcut around PressureDirectorV2
   - flattening enemy defensive identities into one HP-through-guard or Poise formula
   - treating Archer ranged/spatial pressure as a melee token
   - treating Bilemass puddle pressure as an ordinary projectile hit
@@ -127,6 +128,7 @@ avoid_without_evidence:
 - Cellar Bilemass puddle construction/contact and skitter goal authoring remain canonical in `CellarBilemass.gd`, while V2 tactical choice/action commitment/motion/Poise/hazard pressure are mediated by `CellarBilemassV2.gd`; preserve the canonical `Combat` child, shared Hushiro Posture/Deathblow ownership, and existing hazard caps/slow/lifetime.
 - Warden restraint/contact/reward behavior remains canonical in `WardenRules.gd`/`WardenController.gd`, while V2 tactical cadence/action commitment/motion/Poise/short guard/control pressure are mediated by `WardenV2.gd`; preserve the timed-parry restraint escape and shared Hushiro Posture/Deathblow ownership.
 - Canonical Player attack motion is mediated by CombatActionRunner + PlayerMotor through `OathboundPlayerMotion.gd`; future Player changes must preserve Aspect profile and AttackEvent ownership unless explicitly replacing those responsibilities.
+- Hushiro Phase 7 room-pressure tuning must keep movement/frontline participation conceptually separate from damaging impact admission. `CombatChamber.gd` may widen approach/frontline slots for proven migrated compositions while PressureDirectorV2 remains the authority for predicted impact spacing/threat cost.
 - Legacy AttackDirector remains a compatibility path, not a substitute for PressureDirectorV2 in migrated combat.
 - `.godot/`/`.import/` untracked; verify source assets + clean import before declaring missing.
 
