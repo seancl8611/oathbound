@@ -79,6 +79,17 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Archer projectile counter readability
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/ArcherProjectileCounterCueSmoke.tscn 2>&1 | tee archer-projectile-counter-cue.log
+          grep -F "[ArcherProjectileCounterCueSmoke] PASS - flight-local collision course | 0.20 warning | 0.12 parry beat | dodge suppression | deflect cleanup | scheduler trace" archer-projectile-counter-cue.log
+          if grep -F "SCRIPT ERROR:" archer-projectile-counter-cue.log; then
+            echo "FAIL: Archer projectile counter cue smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Verify all migrated standard-enemy contracts
         shell: bash
         run: |
@@ -132,6 +143,7 @@ jobs:
             player-paced.log
             player-pressure.log
             counter-cue-pressure.log
+            archer-projectile-counter-cue.log
             swordsman-action-motor.log
             hound-v2.log
             hollow-v2.log
