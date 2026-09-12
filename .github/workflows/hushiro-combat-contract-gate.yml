@@ -6,6 +6,7 @@ on:
       - main
       - "agent/**"
     paths:
+      - "game/oathbound/Combat/**"
       - "game/oathbound/Core/Combat/**"
       - "game/oathbound/Enemy/**"
       - "game/oathbound/Player/**"
@@ -14,6 +15,7 @@ on:
       - ".github/workflows/hushiro-combat-contract-gate.yml"
   pull_request:
     paths:
+      - "game/oathbound/Combat/**"
       - "game/oathbound/Core/Combat/**"
       - "game/oathbound/Enemy/**"
       - "game/oathbound/Player/**"
@@ -63,6 +65,17 @@ jobs:
           grep -F "[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership | canonical Player ownership | directional target handoff" player-pressure.log
           if grep -F "SCRIPT ERROR:" player-pressure.log; then
             echo "FAIL: player pressure/handoff smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Verify V2 pre-contact counter cue contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/CounterCuePressureSmoke.tscn 2>&1 | tee counter-cue-pressure.log
+          grep -F "[CounterCuePressureSmoke] PASS - PressureDirector impact timing | 0.20 warning | 0.12 parry beat | fixed V2 cue | spatial fallback" counter-cue-pressure.log
+          if grep -F "SCRIPT ERROR:" counter-cue-pressure.log; then
+            echo "FAIL: V2 counter cue smoke emitted a GDScript runtime error."
             exit 1
           fi
 
@@ -118,6 +131,7 @@ jobs:
             combat-contract-editor.log
             player-paced.log
             player-pressure.log
+            counter-cue-pressure.log
             swordsman-action-motor.log
             hound-v2.log
             hollow-v2.log
