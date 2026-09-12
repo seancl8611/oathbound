@@ -4,7 +4,7 @@ extends Node
 ## - canonical sword Posture must affect Blighted Hounds;
 ## - a full Posture meter enters stagger before Deathblow readiness;
 ## - dead standard enemies cannot remain Deathblow-ready;
-## - Hound-heavy authored encounters never put more than two Hounds in one wave;
+## - Hound-heavy authored encounters remain inside the Phase 7 pack envelope;
 ## - Keeper death rewards must recover from a stale/freed cached loot parent.
 
 const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
@@ -19,12 +19,12 @@ var _failures: Array[String] = []
 func _ready() -> void:
 	await get_tree().process_frame
 	_validate_current_burst_baseline()
-	_validate_hound_encounter_caps()
+	_validate_hound_encounter_pressure_envelope()
 	await _validate_hound_shared_posture_and_stagger()
 	await _validate_keeper_stale_loot_reward_parent()
 
 	if _failures.is_empty():
-		print("[HushiroCombatSemanticsSmoke] PASS - shared Hound posture stagger-first deathblow pack cap")
+		print("[HushiroCombatSemanticsSmoke] PASS - shared Hound posture stagger-first deathblow bounded pack envelope")
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -43,7 +43,7 @@ func _validate_current_burst_baseline() -> void:
 	_expect(float((baselines.get("swordsman", {}) as Dictionary).get("posture", 0.0)) == 90.0, "Swordsman Posture must be 90")
 
 
-func _validate_hound_encounter_caps() -> void:
+func _validate_hound_encounter_pressure_envelope() -> void:
 	for encounter_id: String in ["H03_kennel_break", "H08_hounds_in_the_mud"]:
 		var encounter: Dictionary = HUSHIRO_ENCOUNTER_CATALOG.get_by_id(encounter_id)
 		_expect(not encounter.is_empty(), "%s missing from Hushiro encounter catalog" % encounter_id)
@@ -54,11 +54,18 @@ func _validate_hound_encounter_caps() -> void:
 				_fail("%s wave %d is not a Dictionary" % [encounter_id, wave_index + 1])
 				continue
 			var hound_count: int = 0
+			var total_count: int = 0
 			var groups: Array = (wave_value as Dictionary).get("groups", [])
 			for group_value: Variant in groups:
-				if group_value is Dictionary and str((group_value as Dictionary).get("type", "")) == "hound":
-					hound_count += int((group_value as Dictionary).get("count", 0))
-			_expect(hound_count <= 2, "%s wave %d exceeds two-Hound cap (%d)" % [encounter_id, wave_index + 1, hound_count])
+				if not (group_value is Dictionary):
+					continue
+				var group: Dictionary = group_value as Dictionary
+				var count: int = int(group.get("count", 0))
+				total_count += count
+				if str(group.get("type", "")) == "hound":
+					hound_count += count
+			_expect(hound_count <= 4, "%s wave %d exceeds Phase 7 four-Hound pack envelope (%d)" % [encounter_id, wave_index + 1, hound_count])
+			_expect(total_count <= 6, "%s wave %d exceeds approved six-active enemy cap (%d)" % [encounter_id, wave_index + 1, total_count])
 
 
 func _validate_hound_shared_posture_and_stagger() -> void:
