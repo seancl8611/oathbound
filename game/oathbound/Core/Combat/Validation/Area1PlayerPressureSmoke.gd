@@ -53,8 +53,11 @@ func _test_live_pressure_string() -> void:
 	_expect(player.get_script() == CANONICAL_PLAYER_SCRIPT, "canonical aspect Player no longer owns OathboundCombatPlayer.gd")
 	_expect(player.has_method("get_area1_pressure_snapshot"), "canonical Player is missing Area 1 pressure extension")
 	_expect(player.has_method("has_v2_player_action_motor_runtime"), "pressure Player lost V2 PlayerMotor/ActionRunner seam")
+	_expect(player.has_method("_v2_acquire_attack_soft_target"), "canonical Player is missing directional target handoff")
 	if player.has_method("has_v2_player_action_motor_runtime"):
 		_expect(bool(player.call("has_v2_player_action_motor_runtime")), "pressure Player failed to attach V2 motion runtime")
+
+	await _test_directional_target_handoff(player)
 
 	var profiles: Array = ASPECT_CATALOG.get_basic_profiles(ASPECT_CATALOG.NO_ASPECT, 0)
 	if profiles.size() < 3:
@@ -95,6 +98,52 @@ func _test_live_pressure_string() -> void:
 		player.queue_free()
 
 
+func _test_directional_target_handoff(player: Node) -> void:
+	if not player.has_method("_v2_acquire_attack_soft_target"):
+		return
+	var player_2d: Node2D = player as Node2D
+	if player_2d == null:
+		_fail("canonical Player is not Node2D for handoff validation")
+		return
+
+	var aligned := CharacterBody2D.new()
+	aligned.name = "HandoffAligned"
+	aligned.global_position = player_2d.global_position + Vector2(82.0, 8.0)
+	aligned.add_to_group("enemy")
+	add_child(aligned)
+
+	var secondary := CharacterBody2D.new()
+	secondary.name = "HandoffSecondary"
+	secondary.global_position = player_2d.global_position + Vector2(70.0, 44.0)
+	secondary.add_to_group("enemy")
+	add_child(secondary)
+
+	var behind := CharacterBody2D.new()
+	behind.name = "HandoffBehind"
+	behind.global_position = player_2d.global_position + Vector2(-54.0, 0.0)
+	behind.add_to_group("enemy")
+	add_child(behind)
+	await get_tree().process_frame
+
+	var first_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.RIGHT)
+	_expect(first_value == aligned, "target handoff did not prefer the enemy most aligned with player intent")
+
+	aligned.queue_free()
+	await get_tree().process_frame
+	var second_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.RIGHT)
+	_expect(second_value == secondary, "target handoff did not reacquire a nearby forward enemy after the first target died")
+
+	var redirected_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.LEFT)
+	_expect(redirected_value == behind, "target handoff ignored explicit opposite-direction player intent")
+
+	var empty_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.DOWN)
+	_expect(empty_value == null, "target handoff acquired an enemy outside the bounded aim cone")
+
+	secondary.queue_free()
+	behind.queue_free()
+	await get_tree().process_frame
+
+
 func _hits_started(player: Node) -> int:
 	var snapshot_value: Variant = player.call("get_area1_pressure_snapshot") if player.has_method("get_area1_pressure_snapshot") else {}
 	if snapshot_value is Dictionary:
@@ -110,7 +159,7 @@ func _restore_aspect() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership | canonical Player ownership")
+		print("[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership | canonical Player ownership | directional target handoff")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
