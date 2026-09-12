@@ -84,6 +84,7 @@ func _test_swordsman_integration() -> void:
 	_expect(enemy.get_node_or_null("EnemyBrain") != null, "canonical Swordsman missing EnemyBrain child")
 	_expect(enemy.get_node_or_null("CombatActionRunner") != null, "canonical Swordsman lost CombatActionRunner child")
 	_expect(enemy.get_node_or_null("EnemyMotor") != null, "canonical Swordsman lost EnemyMotor child")
+	_expect(enemy.has_method("uses_legacy_advance_move_gate") and not bool(enemy.call("uses_legacy_advance_move_gate")), "migrated Swordsman still declares legacy advance_move ownership")
 
 	var now: float = Time.get_ticks_msec() * 0.001
 	enemy.set("_last_attack_ended_at", now - 10.0)
@@ -102,6 +103,23 @@ func _test_swordsman_integration() -> void:
 	else:
 		_fail("Swordsman missing V2 intent scoring surface")
 
+	# Free V2 locomotion must not reacquire the sticky legacy movement token.
+	if enemy.has_method("_v2_move_approach"):
+		enemy.call("_v2_move_approach", 0.016, Vector2.RIGHT, 120.0)
+		var held_roles_value: Variant = enemy.get("_held_roles")
+		if held_roles_value is Dictionary:
+			_expect(not (held_roles_value as Dictionary).has("advance_move"), "Swordsman V2 approach reacquired legacy advance_move")
+
+	# Room crowd backoff is now the authoritative close-body movement brake. It must
+	# preempt tactical attack selection and force reposition without acquiring a role.
+	enemy.set("_backoff_until", now + 1.0)
+	enemy.call("_v2_brain_tick", 0.016)
+	_expect(str(enemy.call("get_v2_brain_intent")) == "reposition", "Swordsman ignored active crowd backoff")
+	var backed_roles_value: Variant = enemy.get("_held_roles")
+	if backed_roles_value is Dictionary:
+		_expect(not (backed_roles_value as Dictionary).has("advance_move"), "backed-off Swordsman acquired legacy advance_move")
+	enemy.set("_backoff_until", -1.0)
+
 	if is_instance_valid(enemy):
 		enemy.queue_free()
 	if is_instance_valid(target):
@@ -110,7 +128,7 @@ func _test_swordsman_integration() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[EnemyBrainSmoke] PASS - controlled cadence | held intent | Swordsman tactical ownership")
+		print("[EnemyBrainSmoke] PASS - controlled cadence | held intent | Swordsman tactical ownership | free V2 approach | crowd backoff")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

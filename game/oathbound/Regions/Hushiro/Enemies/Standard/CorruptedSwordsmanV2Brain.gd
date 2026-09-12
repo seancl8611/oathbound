@@ -75,6 +75,17 @@ func _v2_brain_tick(delta: float) -> void:
 		_switch_state(AIState.IDLE)
 		return
 
+	# Room crowd spacing owns close-body occupancy in Combat V2. A backed-off Swordsman
+	# must not start a fresh attack/counter or immediately reacquire a sticky V1
+	# `advance_move` role; it repositions until the room-authored backoff expires.
+	if now < _backoff_until:
+		if ai_state != AIState.ENGAGE:
+			_switch_state(AIState.ENGAGE)
+		if _v2_enemy_brain != null:
+			_v2_enemy_brain.set_intent(&"reposition", now, "crowd_backoff")
+		_v2_move_retreat(delta, direction)
+		return
+
 	# Smoke and other shared movement overrides remain higher-priority combat effects.
 	if player.has_meta("in_smoke_cloud") and bool(player.get_meta("in_smoke_cloud")):
 		if _v2_enemy_brain != null:
@@ -211,9 +222,9 @@ func _v2_execute_intent(
 # deceleration, action-motion composition, and final velocity.
 
 func _v2_move_approach(delta: float, direction: Vector2, distance: float) -> void:
-	if not _approach_gate_ok():
-		_v2_move_strafe(delta, direction, distance, 0.80)
-		return
+	# Migrated V2 movement no longer acquires the sticky legacy `advance_move` role.
+	# Role-aware room backoff limits close-body occupancy; PressureDirectorV2 separately
+	# limits dangerous impact timing. This lets free locomotion remain free locomotion.
 	var separation: Vector2 = _compute_separation()
 	var avoidance: Vector2 = _compute_wall_avoidance()
 	var speed: float = approach_speed
@@ -315,6 +326,10 @@ func _finish_attack() -> void:
 
 func has_v2_enemy_brain_runtime() -> bool:
 	return _v2_enemy_brain != null and is_instance_valid(_v2_enemy_brain)
+
+
+func uses_legacy_advance_move_gate() -> bool:
+	return false
 
 
 func get_v2_brain_intent() -> String:
