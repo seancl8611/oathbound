@@ -1,0 +1,128 @@
+name: Hushiro Combat Contract Gate
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Core/Combat/**"
+      - "game/oathbound/Enemy/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/**"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - ".github/workflows/hushiro-combat-contract-gate.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Core/Combat/**"
+      - "game/oathbound/Enemy/**"
+      - "game/oathbound/Player/**"
+      - "game/oathbound/Regions/Hushiro/**"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - ".github/workflows/hushiro-combat-contract-gate.yml"
+  workflow_dispatch:
+
+jobs:
+  combat-contract-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import and compile project
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee combat-contract-import.log
+          godot --headless --editor --path game/oathbound --quit-after 3 2>&1 | tee combat-contract-editor.log
+          if grep -F "SCRIPT ERROR:" combat-contract-import.log combat-contract-editor.log; then
+            echo "FAIL: combat contract import/compile emitted a GDScript error."
+            exit 1
+          fi
+
+      - name: Verify player-paced hack-and-slash contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroPlayerPacedCombatSmoke.tscn 2>&1 | tee player-paced.log
+          grep -F "[HushiroPlayerPacedCombatSmoke] PASS - 3-hit Hollow | 4-hit Hound/Archer | 5-hit Swordsman/Bilemass | 11-hit Warden | guard extends kill | immediate clear advance | 120s anti-stall | varied arrivals" player-paced.log
+          if grep -F "SCRIPT ERROR:" player-paced.log; then
+            echo "FAIL: player-paced combat smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+          godot --headless --path game/oathbound res://Core/Combat/Validation/Area1PlayerPressureSmoke.tscn 2>&1 | tee player-pressure.log
+          grep -F "[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership | canonical Player ownership | directional target handoff" player-pressure.log
+          if grep -F "SCRIPT ERROR:" player-pressure.log; then
+            echo "FAIL: player pressure/handoff smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Verify all migrated standard-enemy contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          run_smoke() {
+            local scene="$1"
+            local marker="$2"
+            local logfile="$3"
+            godot --headless --path game/oathbound "$scene" 2>&1 | tee "$logfile"
+            grep -F "$marker" "$logfile"
+            if grep -F "SCRIPT ERROR:" "$logfile"; then
+              echo "FAIL: $scene emitted a GDScript runtime error."
+              exit 1
+            fi
+          }
+
+          run_smoke \
+            res://Core/Combat/Validation/SwordsmanV2MigrationSmoke.tscn \
+            "[SwordsmanV2MigrationSmoke] PASS" \
+            swordsman-v2.log
+          run_smoke \
+            res://Core/Combat/Validation/HoundV2MigrationSmoke.tscn \
+            "[HoundV2MigrationSmoke] PASS" \
+            hound-v2.log
+          run_smoke \
+            res://Core/Combat/Validation/HollowV2MigrationSmoke.tscn \
+            "[HollowV2MigrationSmoke] PASS" \
+            hollow-v2.log
+          run_smoke \
+            res://Core/Combat/Validation/ArcherV2MigrationSmoke.tscn \
+            "[ArcherV2MigrationSmoke] PASS" \
+            archer-v2.log
+          run_smoke \
+            res://Core/Combat/Validation/BilemassV2MigrationSmoke.tscn \
+            "[BilemassV2MigrationSmoke] PASS" \
+            bilemass-v2.log
+          run_smoke \
+            res://Core/Combat/Validation/WardenV2MigrationSmoke.tscn \
+            "[WardenV2MigrationSmoke] PASS" \
+            warden-v2.log
+
+      - name: Upload hard-gate logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hushiro-combat-contract-gate-${{ github.run_id }}
+          path: |
+            combat-contract-import.log
+            combat-contract-editor.log
+            player-paced.log
+            player-pressure.log
+            swordsman-v2.log
+            hound-v2.log
+            hollow-v2.log
+            archer-v2.log
+            bilemass-v2.log
+            warden-v2.log
+          if-no-files-found: warn
+          retention-days: 7
