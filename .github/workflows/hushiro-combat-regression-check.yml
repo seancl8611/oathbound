@@ -93,7 +93,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroPlayerPacedCombatSmoke.tscn 2>&1 | tee hushiro-player-paced-combat.log
-          grep -F "[HushiroPlayerPacedCombatSmoke] PASS - 6-hit Swordsman | 5-hit Archer | 11-hit Warden | guard survival | immediate clear advance | 120s anti-stall | varied arrivals" hushiro-player-paced-combat.log
+          grep -F "[HushiroPlayerPacedCombatSmoke] PASS - 3-hit Hollow | 4-hit Hound/Archer | 5-hit Swordsman/Bilemass | 11-hit Warden | guard extends kill | immediate clear advance | 120s anti-stall | varied arrivals" hushiro-player-paced-combat.log
           if grep -F "SCRIPT ERROR:" hushiro-player-paced-combat.log; then
             echo "FAIL: Area 1 player-paced combat smoke emitted a GDScript runtime error."
             exit 1
