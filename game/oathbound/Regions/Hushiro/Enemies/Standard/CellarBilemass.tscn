@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8xwjmars47oi"]
+[gd_scene load_steps=15 format=3 uid="uid://b8xwjmars47oi"]
 
 [ext_resource type="Script" path="res://Regions/Hushiro/Enemies/Standard/CellarBilemassV2.gd" id="1_vmeot"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_hurt"]
 [ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="3_hit"]
+[ext_resource type="Script" path="res://Utility/CombatController.gd" id="4_combat"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
 radius = 4.0
@@ -88,6 +89,9 @@ volume_db = -20.0
 libraries = {
 "": SubResource("AnimationLibrary_bilemass")
 }
+
+[node name="Combat" type="Node" parent="."]
+script = ExtResource("4_combat")
 
 [node name="Range" type="Area2D" parent="."]
 
