@@ -1,4 +1,4 @@
-extends "res://Player/OathboundPlayerMotion.gd"
+extends "res://Player/OathboundPlayerTargeting.gd"
 
 ## First combat-stability layer over the current Player controller.
 ## Owns hard death-state behavior, authoritative block-origin resolution, and the
