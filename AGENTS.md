@@ -24,35 +24,35 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 4
-updated_utc: 2026-09-12T04:28:00Z
+updated_utc: 2026-09-12T17:14:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 163
-  feature_head: 181871d2d844709ab8be6ad80fe3cb8e130d004b
-  merge_commit: 1af76e9c72f22ea50d84d1d91863b21f0a2a001c
-  validation: 10/10 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Release Shell Check, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, Region Transition Presentation, and Blood Cavern Execution Trial.
+  pr: 164
+  feature_head: b153bcb9fb7ecc500598b773db3fcc2132611b8b
+  merge_commit: c14b3318eff1344e638772fc8221f0a14992d77a
+  validation: 8/8 PR-triggered workflows green on exact feature head — Hushiro Combat Semantics, Hushiro Combat Regression, Godot 4.7.2 Project Check, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, RunScene Runtime Lifetime, and Region Transition Presentation.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 1af76e9c72f22ea50d84d1d91863b21f0a2a001c
-known_good_checkpoint: 1af76e9c72f22ea50d84d1d91863b21f0a2a001c
+covered_through_substantive_commit: c14b3318eff1344e638772fc8221f0a14992d77a
+known_good_checkpoint: c14b3318eff1344e638772fc8221f0a14992d77a
 current_objective: >-
-  Combat V2 Phases 1-6 are integrated for Hushiro's canonical standard-enemy roster. Phase 7 has restored authored Hound packs, made mixed-role frontline occupancy role-aware, removed legacy crowd/stall/admission interference, and retired the sticky `advance_move` gate from migrated Swordsman/Hound locomotion while making room crowd backoff authoritative for Swordsman/Hound/Hollow. Continue removing only compatibility policy that no migrated standard family actually consumes, then audit the resulting standard-room pressure model for any remaining V1 serialization before changing population or numerical balance.
+  Combat V2 Phases 1-6 are integrated for Hushiro's canonical standard-enemy roster, and Phase 7 has now cleaned the major standard-room compatibility seams: authored Hound packs are restored, mixed-role frontline occupancy is role-aware, legacy crowd/stall/admission interference is removed, sticky `advance_move` ownership is retired from migrated actors, and Hushiro now treats `advance_move` as compatibility-only. Prepare a stable manual playtest snapshot so the current multi-enemy Combat V2 feel can be evaluated before any further subjective population or numerical tuning.
 next_action: >-
-  Reconcile Hushiro `CombatChamber` and `HushiroEncounterRetuningSmoke` with PR #163: `advance_move` is now compatibility-only for standard Hushiro because Swordsman/Hound no longer request it, Hollow never used it, and Warden/Archer/Bilemass already use free V2 locomotion. Remove the Hound-specific 3-slot `advance_move` policy/claims while retaining a conservative legacy compatibility limit for any untagged/non-migrated actor. Keep role-aware `max_frontline` crowd occupancy and PressureDirectorV2 impact admission unchanged. After that cleanup, continue auditing any remaining standard-room V1 serialization or stale comments/telemetry before considering population/Health/damage/Posture changes.
+  Keep the requested Combat V2 Phase 7 playtest branch frozen as a stable comparison point. Use manual playtest evidence from standard Hushiro rooms to evaluate whether free locomotion + role-aware crowd backoff + PressureDirectorV2 impact spacing now feels meaningfully different from the V1 duel cadence. Pay special attention to Akio attack mobility, overlapping enemy approach/windup, target switching, Hound packs, Hollow swarms, Archer/Bilemass spatial pressure, Warden control pressure, PostureBar/Deathblow readability, and whether any remaining legacy serialization is visible. Do not change encounter population, Health/damage, Posture, or PressureDirector spacing solely to manufacture a difference before reading the playtest.
 current_batch:
-  - PR #163 merged at 1af76e9c72f22ea50d84d1d91863b21f0a2a001c from exact head 181871d2d844709ab8be6ad80fe3cb8e130d004b; all 10 triggered workflows were green.
-  - Audited inherited `advance_move` ownership and proved it was sticky role ownership rather than a true currently-approaching slot: once granted, an actor could retain it until explicit release/backoff/death, unnecessarily serializing free V2 locomotion.
-  - Corrupted Swordsman V2 no longer calls `_approach_gate_ok()` during normal approach. Active room `_backoff_until` now preempts fresh attack/counter selection and forces reposition/retreat before the tactical brain can start pressure.
-  - Blighted Hound V2 no longer calls `_approach_gate_ok()` during normal approach. Hound already suppressed attack readiness during backoff; the predator loop now makes the room backoff branch explicit and authoritative.
-  - Hollow remains intentionally ungated swarm locomotion, but now actually honors inherited room crowd backoff: active backoff suppresses bite readiness and forces retreat/reposition instead of being ignored.
-  - Existing EnemyBrain/Hound/Hollow migration smokes now assert no migrated `advance_move` acquisition and validate crowd-backoff suppression/reposition behavior. All six-family semantics remained green.
-  - Legacy HumanoidEnemyBase/BeastEnemyBase `advance_move` APIs were deliberately preserved for non-migrated compatibility actors.
-  - No encounter count, Health, damage, Posture, legacy damaging-role cap, or PressureDirector spacing value changed.
+  - PR #164 merged at c14b3318eff1344e638772fc8221f0a14992d77a from exact head b153bcb9fb7ecc500598b773db3fcc2132611b8b; all 8 triggered workflows were green.
+  - Hushiro `advance_move` is now explicitly compatibility-only. The stale Hound-specific three-slot branch and associated telemetry/validation claims were removed; the conservative legacy compatibility limit remains 2.
+  - Role-aware close-frontline occupancy remains unchanged: Swordsman/Hollow/Hound/Warden count as close-pressure bodies; Archer/Bilemass do not; four or more close-pressure bodies may use `max_frontline = 4`.
+  - PressureDirectorV2 remains authoritative for dangerous impact timing. Legacy melee/ranged caps remain 1 and heavy Hound impacts remain spacing-validated.
+  - PR #163 previously retired sticky `advance_move` acquisition from migrated Swordsman/Hound and made room crowd backoff authoritative for Swordsman/Hound/Hollow; all 10 triggered workflows were green.
+  - PR #162 previously removed legacy crowd/stall/admission interference and made legacy/V2 damaging admission bidirectionally safe; all 9 triggered workflows were green.
+  - No encounter count, Health, damage, Posture, `max_frontline`, legacy damaging-role cap, or PressureDirector spacing value changed in PR #164.
 recent_batches:
+  - pr_164: made `advance_move` explicitly compatibility-only in Hushiro chamber policy; role-aware frontline and PressureDirector impact policy unchanged; 8/8 triggered workflows green.
   - pr_163: retired sticky `advance_move` from migrated Swordsman/Hound and made crowd backoff authoritative for Swordsman/Hound/Hollow; 10/10 triggered workflows green.
   - pr_162: removed legacy crowd/stall/admission interference from migrated Hushiro rooms; role metadata + bidirectional compatibility; 9/9 triggered workflows green.
-  - pr_161: role-aware mixed Hushiro frontline pressure; four+ true close-pressure bodies may occupy four frontline slots without raising mixed-room advance or attack caps; 8/8 triggered workflows green.
+  - pr_161: role-aware mixed Hushiro frontline pressure; four+ true close-pressure bodies may occupy four frontline slots without raising attack caps; 8/8 triggered workflows green.
   - pr_160: first Phase 7 encounter retune; restored authored Hound packs, bounded pack movement/frontline pressure, deterministic composition/pressure validation; 8/8 triggered workflows green.
   - pr_159: canonical Warden V2 restraint/control-heavy migration; 8/8 triggered workflows green.
   - pr_158: canonical Cellar Bilemass V2 delayed area-denial/hazard-pressure migration; 8/8 triggered workflows green after canonical CombatController scene wiring fix.
@@ -90,13 +90,14 @@ confirmed:
   - Four or more close-pressure bodies may use `max_frontline = 4`; this is an occupancy/movement rule, not permission for four simultaneous damaging attacks.
   - Hushiro standard enemies carry generic V2 pressure metadata from HushiroEnemyContract. OathboundAttackDirector uses it to keep close-frontline crowd spacing and legacy stall prevention aligned with migrated role ownership without hard-coding Hushiro scene names in the director.
   - Legacy/V2 attack compatibility is bidirectional: a legacy melee holder blocks new V2 pressure, while active V2 pressure blocks other actors from starting legacy damaging roles; the same reservation owner may still use inherited compatibility roles.
-  - Migrated Swordsman, Hound, and Hollow do not use the legacy `advance_move` gate. Warden/Archer/Bilemass already use V2 movement without it. Therefore standard Hushiro `advance_move` limits are compatibility-only after PR #163.
+  - Migrated standard enemies do not consume `advance_move`; standard Hushiro `advance_move` policy is now compatibility-only and fixed conservatively at 2 for any remaining untagged/non-migrated actors.
   - Room crowd backoff is authoritative for excess close-pressure occupancy on Swordsman/Hound/Hollow/Warden; PressureDirectorV2 remains authoritative for damaging impact timing.
   - The current standard Hushiro encounter catalog remains bounded to 3-6 active enemies per wave; six active is a protected Phase 7 validation ceiling for now, not a statement that later evidence can never revise it.
   - Taking Health damage does not inherently cancel a committed action; Poise decides immediate interruption on migrated enemies.
   - Enemy posture recovery need not use one universal cadence; multi-target combat should not force Sekiro-style continuous pressure on every target.
   - Aspect-specific block/parry/defensive capability ownership remains undecided. No current Aspect loses a shared mechanic before the dedicated capability pass.
   - User explicitly requested continued Combat V2 implementation without waiting for intermediate manual playtests and explicitly asked not to stop at arbitrary checkpoints; continue through evidence-backed follow-on work until a real blocker or design decision is reached.
+  - User has now explicitly requested a stable manual playtest branch to evaluate the cumulative new combat feel before further subjective tuning.
   - Heart combat remains intentionally unauthored; do not invent a kill path without dedicated encounter authority.
   - Numerical balance/economy/difficulty tuning remains evidence-driven.
 avoid_without_evidence:
@@ -108,7 +109,7 @@ avoid_without_evidence:
   - restoring or changing every encounter simply because an older baseline differs; distinguish authored identity from proven compatibility workarounds before retuning
   - treating the blueprint's illustrative 4-5 / 6-8 / 8-12 room sizes as universal authored targets
   - counting Archer/Bilemass as close-frontline pressure merely because total wave population is high
-  - treating `advance_move` as active standard-V2 pressure after PR #163; it is now a legacy compatibility path
+  - treating `advance_move` as active standard-V2 pressure; it is now a legacy compatibility path
   - rewriting working Player combo content instead of using the locomotion/action-motion seam
   - bypassing CombatActionRunner/PlayerMotor/EnemyMotor/EnemyBrain/PressureDirectorV2 with parallel actor-specific systems
   - globally raising `max_melee_attackers` or legacy melee/ranged role caps as a shortcut around PressureDirectorV2
@@ -149,4 +150,4 @@ avoid_without_evidence:
 Unresolved -> `docs/_meta/OPEN_QUESTIONS.md`; ownership -> `SOURCE_OF_TRUTH.md`; Combat V2 high-level direction -> `docs/overview/V2_COMBAT_DIRECTION.md`; Combat V2 migration/components -> `docs/overview/V2_COMBAT_IMPLEMENTATION_BLUEPRINT.md`; terms -> `TERMINOLOGY.md`; otherwise exact authority only.
 
 ## PLAYTEST_HANDOFF
-When manual validation is genuinely needed, provide exact main/head, runtime marker, coherent systems to exercise, and telemetry/logs to return. Prefer one larger integration pass over micro-playtests. User has explicitly requested continued implementation without waiting for intermediate manual playtests during the current Combat V2 migration; use deterministic CI/telemetry gates between bounded packages and do not treat a green checkpoint as a reason to stop while evidence-backed work remains.
+When manual validation is genuinely needed, provide exact main/head, runtime marker, coherent systems to exercise, and telemetry/logs to return. Prefer one larger integration pass over micro-playtests. User has explicitly requested a stable Combat V2 Phase 7 manual playtest branch before further subjective combat tuning; keep that branch frozen once cut so its feel remains comparable even if `main` advances later.
