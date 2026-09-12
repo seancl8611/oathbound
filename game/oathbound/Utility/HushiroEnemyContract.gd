@@ -36,6 +36,8 @@ const BASELINES: Dictionary = {
 	"warden": {"health": 140, "posture": 150.0},
 }
 
+const CLOSE_PRESSURE_TYPES: Array[String] = ["swordsman", "hollow", "hound", "warden"]
+
 
 static func apply(enemy: Node, enemy_type: String) -> void:
 	if enemy == null or not is_instance_valid(enemy):
@@ -51,6 +53,7 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 
 	enemy.set_meta("hushiro_enemy_type", key)
 	enemy.set_meta("hushiro_contract", "area1_combat_stabilization")
+	apply_pressure_metadata(enemy, key)
 
 	_set_property_if_present(enemy, "hp", health)
 	_set_property_if_present(enemy, "_max_hp", health)
@@ -116,7 +119,41 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 			"posture_break_runtime": true,
 			"posture_readability_runtime": true,
 			"hound_shared_posture_bridge": key == "hound",
+			"v2_pressure_migrated": true,
+			"frontline_pressure_body": bool(enemy.get_meta("oathbound_frontline_pressure_body", true)),
+			"pressure_role": str(enemy.get_meta("oathbound_pressure_role", "melee")),
 		})
+
+
+static func apply_pressure_metadata(enemy: Node, enemy_type: String) -> void:
+	if enemy == null or not is_instance_valid(enemy):
+		return
+	var key: String = enemy_type.to_lower()
+	if not BASELINES.has(key):
+		return
+
+	# AttackDirector remains compatibility infrastructure around Combat V2. These
+	# generic metadata keys let the Oathbound facade distinguish close-frontline crowd
+	# spacing from ranged/spatial actors without hard-coding Hushiro scene names there.
+	enemy.set_meta("oathbound_v2_pressure_migrated", true)
+	enemy.set_meta("oathbound_frontline_pressure_body", is_frontline_pressure_type(key))
+	enemy.set_meta("oathbound_pressure_role", pressure_role_for_type(key))
+
+
+static func is_frontline_pressure_type(enemy_type: String) -> bool:
+	return CLOSE_PRESSURE_TYPES.has(enemy_type.to_lower())
+
+
+static func pressure_role_for_type(enemy_type: String) -> String:
+	match enemy_type.to_lower():
+		"archer":
+			return "ranged"
+		"bilemass":
+			return "hazard"
+		"warden":
+			return "control"
+		_:
+			return "melee"
 
 
 static func _apply_hound_tuning(enemy: Node) -> void:
