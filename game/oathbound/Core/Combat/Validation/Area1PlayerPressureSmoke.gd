@@ -136,7 +136,7 @@ func _test_directional_target_handoff(player: Node) -> void:
 	var redirected_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.LEFT)
 	_expect(redirected_value == behind, "target handoff ignored explicit opposite-direction player intent")
 
-	var empty_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.DOWN)
+	var empty_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.UP)
 	_expect(empty_value == null, "target handoff acquired an enemy outside the bounded aim cone")
 
 	secondary.queue_free()
