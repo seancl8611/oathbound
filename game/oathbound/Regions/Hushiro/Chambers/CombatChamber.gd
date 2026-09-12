@@ -9,9 +9,9 @@ extends "res://Core/Chambers/CombatChamberBase.gd"
 const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 
 # Legacy role limits remain as compatibility infrastructure for non-migrated actors.
-# Combat V2 standard enemies schedule damaging impact windows through PressureDirectorV2;
-# Phase 7 therefore allows authored close-pressure groups to occupy more frontline space
-# without raising the legacy one-melee-turn cap or stacking severe impacts.
+# Combat V2 standard enemies schedule damaging impact windows through PressureDirectorV2
+# and use free EnemyBrain/EnemyMotor locomotion. Phase 7 therefore treats `advance_move`
+# as compatibility-only while room crowd spacing owns close-body occupancy.
 const HUSHIRO_MELEE_COOLDOWN: float = 0.95
 const HUSHIRO_ADVANCE_COOLDOWN: float = 0.70
 const HUSHIRO_RANGED_COOLDOWN: float = 1.60
@@ -22,8 +22,7 @@ const HUSHIRO_TURNOVER_DELAY: float = 0.45
 # These are the canonical migrated families whose authored combat role can legitimately
 # occupy the player's close-pressure ring. Archers and Bilemass remain ranged/spatial
 # pressure and therefore must not inflate the frontline budget merely because a wave is
-# populous. `advance_move` remains a separate legacy movement gate used chiefly by
-# Swordsmen/Hounds; this Phase 7 slice does not globally increase it for mixed rooms.
+# populous. Migrated standard families do not use the legacy `advance_move` role.
 const PHASE7_FRONTLINE_PRESSURE_TYPES: Array[String] = [
 	"swordsman",
 	"hollow",
@@ -143,32 +142,27 @@ func _configure_duel_tokens() -> void:
 	if _has_property(AttackDir, "max_frontline"):
 		AttackDir.max_frontline = 3
 
-	print("[HushiroCombatChamber] Pressure baseline: V2 impact windows + legacy melee cap=1, role-aware frontline autoscale")
+	print("[HushiroCombatChamber] Pressure baseline: V2 impact windows + role-aware frontline; advance_move is legacy compatibility only")
 
 
-static func phase7_pressure_limits(alive: int, hounds: int, frontline_pressure: int = -1) -> Dictionary:
+static func phase7_pressure_limits(alive: int, _hounds: int, frontline_pressure: int = -1) -> Dictionary:
 	var safe_alive: int = maxi(0, alive)
-	var safe_hounds: int = clampi(hounds, 0, safe_alive)
 	# Keep two-argument callers backward compatible by treating unknown role composition
 	# as the old coarse all-bodies pressure estimate. Live Hushiro runtime supplies the
 	# authored close-pressure count explicitly.
 	var safe_frontline_pressure: int = safe_alive if frontline_pressure < 0 else clampi(frontline_pressure, 0, safe_alive)
 
-	# `advance_move` remains conservative outside Hound packs. Hound-heavy encounters
-	# gain one extra movement slot because their migrated predator attacks use future
-	# impact scheduling rather than whole-turn ownership.
-	var advance_limit: int = clampi(safe_alive, 1, 2)
-	if safe_hounds >= 3:
-		advance_limit = maxi(1, mini(3, safe_alive))
+	# No migrated Hushiro standard family consumes `advance_move` after PR #163. Keep a
+	# conservative two-slot limit solely for any untagged/non-migrated compatibility
+	# actor that may still reach this reusable chamber layer.
+	var advance_limit: int = maxi(1, mini(2, safe_alive))
 
-	# Frontline occupancy is a different concern from attack admission. Four or more
-	# actual close-pressure bodies may now occupy four slots, while ranged/spatial-heavy
-	# waves retain the three-body envelope even when total population reaches six.
+	# Frontline occupancy is independent from attack admission. Four or more actual
+	# close-pressure bodies may occupy four slots, while ranged/spatial-heavy waves retain
+	# the three-body envelope even when total population reaches six.
 	var frontline_limit: int = 3
-	if safe_hounds >= 3 or safe_frontline_pressure >= 4:
+	if safe_frontline_pressure >= 4:
 		frontline_limit = maxi(2, mini(4, safe_alive))
-	elif safe_hounds == 2:
-		frontline_limit = maxi(2, mini(3, safe_alive))
 
 	return {
 		"melee_limit": 1,
@@ -230,9 +224,10 @@ func _update_duel_tokens() -> void:
 			"melee_limit": melee_limit,
 			"ranged_limit": ranged_limit,
 			"advance_limit": advance_limit,
+			"advance_policy": "legacy_compatibility_only",
 			"frontline_limit": frontline_limit,
 			"dog_lunge_limit": dog_lunge_limit,
-			"policy": "phase7_role_aware_frontline",
+			"policy": "phase7_v2_role_aware_frontline",
 		})
 
 
