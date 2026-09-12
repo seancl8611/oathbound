@@ -45,6 +45,7 @@ func _test_canonical_hound_v2_runtime() -> void:
 	_expect(hound.get_node_or_null("EnemyMotor") != null, "Hound missing EnemyMotor")
 	_expect(hound.get_node_or_null("EnemyBrain") != null, "Hound missing EnemyBrain")
 	_expect(hound.has_method("uses_legacy_hound_turn_token") and not bool(hound.call("uses_legacy_hound_turn_token")), "Hound still declares legacy whole-turn token ownership")
+	_expect(hound.has_method("uses_legacy_advance_move_gate") and not bool(hound.call("uses_legacy_advance_move_gate")), "migrated Hound still declares legacy advance_move ownership")
 
 	if hound.has_method("has_v2_hound_pressure_runtime"):
 		_expect(bool(hound.call("has_v2_hound_pressure_runtime")), "canonical Hound cannot reach PressureDirectorV2 facade")
@@ -59,6 +60,25 @@ func _test_canonical_hound_v2_runtime() -> void:
 		_expect(float(scores.get(&"lunge", -INF)) > float(scores.get(&"approach", -INF)), "mid-range Hound intent does not prefer its authored lunge")
 	else:
 		_fail("Hound intent score surface unavailable")
+
+	# Migrated locomotion is free movement: it must not acquire the old sticky
+	# `advance_move` role merely by approaching.
+	hound.call("_v2_move_approach", 0.016, Vector2.RIGHT, 150.0)
+	var held_roles_value: Variant = hound.get("_held_roles")
+	if held_roles_value is Dictionary:
+		_expect(not (held_roles_value as Dictionary).has("advance_move"), "Hound V2 approach reacquired legacy advance_move")
+
+	# Role-aware room crowd backoff is the replacement movement brake. While backed
+	# off, attack intents are suppressed and the predator brain must reposition.
+	hound.set("_backoff_until", now + 1.0)
+	var backed_scores_value: Variant = hound.call("_v2_hound_intent_scores", now, 90.0)
+	if backed_scores_value is Dictionary:
+		var backed_scores: Dictionary = backed_scores_value as Dictionary
+		_expect(is_inf(float(backed_scores.get(&"lunge", -INF))) and float(backed_scores.get(&"lunge", -INF)) < 0.0, "backed-off Hound still offered lunge pressure")
+		_expect(is_inf(float(backed_scores.get(&"bite", -INF))) and float(backed_scores.get(&"bite", -INF)) < 0.0, "backed-off Hound still offered bite pressure")
+	hound.call("_v2_predator_tick", 0.016, now)
+	_expect(str(hound.call("get_v2_hound_intent")) == "reposition", "Hound ignored active crowd backoff")
+	hound.set("_backoff_until", -1.0)
 
 	# Pressure scheduling describes dangerous impact timing rather than owning the full
 	# windup. A lunge is heavier than a bite and predicts impact after startup/travel.
@@ -103,7 +123,7 @@ func _test_canonical_hound_v2_runtime() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HoundV2MigrationSmoke] PASS - predator brain | action commitment | motor ownership | Poise | pressure windows | Posture preservation")
+		print("[HoundV2MigrationSmoke] PASS - predator brain | action commitment | motor ownership | Poise | pressure windows | Posture preservation | free V2 approach | crowd backoff")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
