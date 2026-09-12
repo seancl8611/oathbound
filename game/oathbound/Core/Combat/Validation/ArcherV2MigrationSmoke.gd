@@ -27,7 +27,7 @@ func _run() -> void:
 	_expect(archer.get_node_or_null("HushiroPostureBreakRuntime") != null, "Archer lost shared Posture/Deathblow runtime")
 	_expect(archer.get_node_or_null("PostureBar") != null, "Archer lost canonical PostureBar")
 
-	_expect(int(archer.get("hp")) == 60, "Archer Hushiro Health baseline is not the Area 1 five-hit target")
+	_expect(int(archer.get("hp")) == 45, "Archer Hushiro Health baseline is not the Area 1 four-hit target")
 	var combat: Node = archer.get_node_or_null("Combat")
 	if combat != null:
 		var cfg: CombatConfig = combat.get("config") as CombatConfig
