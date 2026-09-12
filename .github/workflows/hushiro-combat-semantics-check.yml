@@ -39,7 +39,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroCombatSemanticsSmoke.tscn 2>&1 | tee hushiro-combat-semantics.log
-          grep -F "[HushiroCombatSemanticsSmoke] PASS - shared Hound posture stagger-first deathblow pack cap" hushiro-combat-semantics.log
+          grep -F "[HushiroCombatSemanticsSmoke] PASS - shared Hound posture stagger-first deathblow bounded pack envelope" hushiro-combat-semantics.log
           if grep -F "SCRIPT ERROR:" hushiro-combat-semantics.log; then
             echo "FAIL: Hushiro combat semantics emitted a GDScript runtime error."
             exit 1
