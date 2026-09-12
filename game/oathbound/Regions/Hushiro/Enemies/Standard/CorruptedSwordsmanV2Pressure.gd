@@ -12,9 +12,10 @@ const PRESSURE_RETRY_FLOOR: float = 0.08
 # Area 1 guard propensity is pressure-responsive rather than a universal per-hit RNG.
 # At full Health with an attack ready, offense remains the stronger intent. After Akio
 # has already built Health/Posture pressure and the Swordsman's attack is cooling down,
-# its finite guard becomes competitive enough to occasionally save the otherwise lethal
-# six-hit base-katana commitment. Guard duration/cooldown still come from the response
-# profile, so this cannot become a permanent blocking state.
+# its finite guard becomes competitive enough to occasionally deny the otherwise lethal
+# five-hit base-katana line. Hit six remains a pressure extension after a defended hit.
+# Guard duration/cooldown still come from the response profile, so this cannot become a
+# permanent blocking state or turn a normal soldier into a long solo duel.
 const AREA1_GUARD_BASE_SCORE: float = 0.36
 const AREA1_GUARD_POSTURE_WEIGHT: float = 0.24
 const AREA1_GUARD_HEALTH_PRESSURE_WEIGHT: float = 0.62
