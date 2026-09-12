@@ -4,6 +4,7 @@ extends Node
 ## - canonical sword Posture must affect Blighted Hounds;
 ## - a full Posture meter enters stagger before Deathblow readiness;
 ## - dead standard enemies cannot remain Deathblow-ready;
+## - current Area 1 kill-time Health baselines remain explicit;
 ## - Hound-heavy authored encounters remain inside the Phase 7 pack envelope;
 ## - Keeper death rewards must recover from a stale/freed cached loot parent.
 
@@ -39,8 +40,12 @@ func _validate_current_burst_baseline() -> void:
 	_expect(float((baselines.get("hollow", {}) as Dictionary).get("posture", 0.0)) == 40.0, "Hollow Posture must be 40")
 	_expect(int((baselines.get("hound", {}) as Dictionary).get("health", 0)) == 50, "Hound Health must be 50")
 	_expect(float((baselines.get("hound", {}) as Dictionary).get("posture", 0.0)) == 45.0, "Hound Posture must be 45")
-	_expect(int((baselines.get("swordsman", {}) as Dictionary).get("health", 0)) == 90, "Swordsman Health must be 90")
-	_expect(float((baselines.get("swordsman", {}) as Dictionary).get("posture", 0.0)) == 90.0, "Swordsman Posture must be 90")
+	_expect(int((baselines.get("archer", {}) as Dictionary).get("health", 0)) == 60, "Archer Health must be 60 for the Area 1 five-hit target")
+	_expect(float((baselines.get("archer", {}) as Dictionary).get("posture", 0.0)) == 65.0, "Archer Posture must remain 65")
+	_expect(int((baselines.get("swordsman", {}) as Dictionary).get("health", 0)) == 80, "Swordsman Health must be 80 for the Area 1 six-hit target")
+	_expect(float((baselines.get("swordsman", {}) as Dictionary).get("posture", 0.0)) == 90.0, "Swordsman Posture must remain 90")
+	_expect(int((baselines.get("warden", {}) as Dictionary).get("health", 0)) == 140, "Warden Health must remain 140 for the Area 1 10-11-hit durable target")
+	_expect(float((baselines.get("warden", {}) as Dictionary).get("posture", 0.0)) == 150.0, "Warden Posture must remain 150")
 
 
 func _validate_hound_encounter_pressure_envelope() -> void:
