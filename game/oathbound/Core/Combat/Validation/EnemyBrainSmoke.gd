@@ -106,10 +106,11 @@ func _test_swordsman_integration() -> void:
 	# Area 1 guard propensity is pressure-responsive, not a random roll on each hit.
 	# At full Health while its own attack is cooling down, strafe should still beat guard.
 	# After Akio has built meaningful Health/Posture pressure, the finite guard becomes
-	# the preferred defensive punctuation so one block can realistically save the six-hit line.
+	# the preferred defensive punctuation so one block can realistically deny the clean
+	# five-hit kill without making the Swordsman a durable solo threat.
 	if enemy.has_method("area1_guard_score_for_test"):
-		enemy.set("hp", 80)
-		enemy.set("_max_hp", 80)
+		enemy.set("hp", 60)
+		enemy.set("_max_hp", 60)
 		enemy.set("next_swipe_time", now + 1.0)
 		if enemy.has_method("set_posture_value"):
 			enemy.call("set_posture_value", 0.0)
@@ -118,7 +119,7 @@ func _test_swordsman_integration() -> void:
 			var full_scores: Dictionary = full_scores_value as Dictionary
 			_expect(float(full_scores.get(&"guard", -INF)) < float(full_scores.get(&"strafe", -INF)), "full-Health Swordsman over-prioritizes guard during attack cooldown")
 
-		enemy.set("hp", 55)
+		enemy.set("hp", 40)
 		if enemy.has_method("set_posture_value"):
 			enemy.call("set_posture_value", 18.0)
 		var pressured_scores_value: Variant = enemy.call("_v2_build_intent_scores", now, 55.0)
