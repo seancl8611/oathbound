@@ -103,6 +103,32 @@ func _test_swordsman_integration() -> void:
 	else:
 		_fail("Swordsman missing V2 intent scoring surface")
 
+	# Area 1 guard propensity is pressure-responsive, not a random roll on each hit.
+	# At full Health while its own attack is cooling down, strafe should still beat guard.
+	# After Akio has built meaningful Health/Posture pressure, the finite guard becomes
+	# the preferred defensive punctuation so one block can realistically save the six-hit line.
+	if enemy.has_method("area1_guard_score_for_test"):
+		enemy.set("hp", 80)
+		enemy.set("_max_hp", 80)
+		enemy.set("next_swipe_time", now + 1.0)
+		if enemy.has_method("set_posture_value"):
+			enemy.call("set_posture_value", 0.0)
+		var full_scores_value: Variant = enemy.call("_v2_build_intent_scores", now, 55.0)
+		if full_scores_value is Dictionary:
+			var full_scores: Dictionary = full_scores_value as Dictionary
+			_expect(float(full_scores.get(&"guard", -INF)) < float(full_scores.get(&"strafe", -INF)), "full-Health Swordsman over-prioritizes guard during attack cooldown")
+
+		enemy.set("hp", 55)
+		if enemy.has_method("set_posture_value"):
+			enemy.call("set_posture_value", 18.0)
+		var pressured_scores_value: Variant = enemy.call("_v2_build_intent_scores", now, 55.0)
+		if pressured_scores_value is Dictionary:
+			var pressured_scores: Dictionary = pressured_scores_value as Dictionary
+			_expect(float(pressured_scores.get(&"guard", -INF)) > float(pressured_scores.get(&"strafe", -INF)), "damaged/postured Swordsman guard did not become competitive under sustained pressure")
+			_expect(float(pressured_scores.get(&"guard", -INF)) <= 0.98 + 0.001, "Area 1 tactical guard exceeded authored score cap")
+	else:
+		_fail("Swordsman missing Area 1 tactical guard score surface")
+
 	# Free V2 locomotion must not reacquire the sticky legacy movement token.
 	if enemy.has_method("_v2_move_approach"):
 		enemy.call("_v2_move_approach", 0.016, Vector2.RIGHT, 120.0)

@@ -1,14 +1,26 @@
 extends "res://Core/Encounters/EncounterSpawner.gd"
 
-## Hushiro-specific spawn geometry and standard-enemy contract reconciliation.
+## Hushiro-specific encounter pacing, spawn geometry, and standard-enemy contract.
 ##
-## Hushiro uses a room-aware safe-spawn allocator instead of trusting the inherited
-## group-local ring indices. Each wave gets randomized candidates, minimum separation,
-## player clearance, wall/obstacle physics checks, and a deterministic grid fallback.
-## This prevents different enemy groups from sharing the same spawn point and keeps
-## bodies away from the room walls before their _ready() methods cache home positions.
+## Area 1 owns a player-paced wave loop on top of the shared spawner:
+## - normal progression is clear -> immediate next authored wave,
+## - a 120s anti-stall timeout may begin the next wave with survivors still alive,
+## - authored waves choose burst/staggered/sequence arrival timing,
+## - normal active pressure remains capped at six while timeout escalation may briefly
+##   open two overflow slots so the anti-stall rule creates visible pressure.
+##
+## Spawn placement still uses the room-aware safe allocator below. Each wave gets
+## randomized candidates, minimum separation, player clearance, obstacle checks, and a
+## deterministic grid fallback.
 
 const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
+
+const AREA1_ANTI_STALL_SECONDS: float = 120.0
+const AREA1_ANTI_STALL_OVERFLOW_SLOTS: int = 2
+const AREA1_NORMAL_ACTIVE_CAP: int = 6
+const ARRIVAL_BURST: String = "burst"
+const ARRIVAL_STAGGERED: String = "staggered"
+const ARRIVAL_SEQUENCE: String = "sequence"
 
 const SPAWN_WALL_MARGIN: float = 72.0
 const SPAWN_PLAYER_CLEARANCE: float = 145.0
@@ -21,20 +33,178 @@ const EDGE_INSET: float = 18.0
 var _wave_spawn_positions: Array[Vector2] = []
 var _wave_ring_phase: float = 0.0
 var _current_wave_index: int = -1
+var _current_wave_trigger_reason: String = "opening"
 
 
 func _ready() -> void:
+	# Hushiro's new normal cadence has no artificial post-clear pause. The next wave's
+	# own spawn tell/arrival schedule provides readability.
+	wave_clear_delay = 0.0
+	active_cap = AREA1_NORMAL_ACTIVE_CAP
 	super._ready()
 	if not enemy_spawned.is_connected(_on_hushiro_enemy_spawned):
 		enemy_spawned.connect(_on_hushiro_enemy_spawned)
+
+
+# =============================================================================
+# AREA 1 AUTHORED WAVE PACING
+# =============================================================================
+
+func _resolve_template(template: Dictionary, area_id: int) -> Array:
+	var resolved: Array = super._resolve_template(template, area_id)
+	if area_id != 1:
+		return resolved
+
+	# The shared resolver owns scene lookup and canonical group shape. Reattach only the
+	# Hushiro arrival-script metadata that Area 1 uses for player-paced wave timing.
+	var raw_value: Variant = template.get("waves", [])
+	if not (raw_value is Array):
+		return resolved
+	var raw_waves: Array = raw_value as Array
+	var resolved_index: int = 0
+	for raw_value_item: Variant in raw_waves:
+		if not (raw_value_item is Dictionary):
+			continue
+		if resolved_index >= resolved.size():
+			break
+		var raw_wave: Dictionary = raw_value_item as Dictionary
+		var out_value: Variant = resolved[resolved_index]
+		if out_value is Dictionary:
+			var out_wave: Dictionary = out_value as Dictionary
+			for key: String in ["arrival", "unit_interval", "group_interval"]:
+				if raw_wave.has(key):
+					out_wave[key] = raw_wave[key]
+			resolved[resolved_index] = out_wave
+		resolved_index += 1
+	return resolved
+
+
+func _run_authored_waves() -> void:
+	if _waves.is_empty() or not _can_continue():
+		return
+
+	if opener_delay > 0.0 and not await _await_seconds(opener_delay):
+		return
+
+	# Opening wave keeps the existing discovery contract: it enters unalerted, then the
+	# full authored room engages when any member spots Akio.
+	_current_wave_trigger_reason = "opening"
+	await _spawn_wave(_waves[0] as Dictionary, false, 0)
+	if not _can_continue():
+		return
+	await _wait_for_player_spotted()
+	if not _can_continue():
+		return
+	_force_all_enemies_engage()
+	var wave_started_at: float = Time.get_ticks_msec() * 0.001
+
+	for wave_index: int in range(1, _waves.size()):
+		var reason: String = await _wait_for_area1_wave_advance(wave_started_at)
+		if reason.is_empty() or not _can_continue():
+			return
+
+		_current_wave_trigger_reason = reason
+		var normal_cap: int = active_cap
+		if reason == "anti_stall_timeout":
+			active_cap = maxi(active_cap, AREA1_NORMAL_ACTIVE_CAP + AREA1_ANTI_STALL_OVERFLOW_SLOTS)
+
+		if CombatTelemetry != null and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("hushiro_wave_advance", {
+				"from_wave_index": wave_index - 1,
+				"to_wave_index": wave_index,
+				"reason": reason,
+				"survivors_at_trigger": _alive,
+				"active_cap_during_spawn": active_cap,
+				"anti_stall_seconds": AREA1_ANTI_STALL_SECONDS,
+			})
+
+		# A clear starts the next arrival script immediately. A timeout may overlap the
+		# prior pressure; the temporary cap ensures at least some reinforcement can enter
+		# instead of the escalation being queued invisibly behind the normal six-body cap.
+		await _spawn_wave(_waves[wave_index] as Dictionary, true, wave_index)
+		active_cap = normal_cap
+		if not _can_continue():
+			return
+		wave_started_at = Time.get_ticks_msec() * 0.001
+
+	# Encounter completion remains strict: every authored wave must have launched and
+	# every surviving enemy from any overlapped wave must be defeated.
+	await _wait_until_current_wave_cleared()
+
+
+func _wait_for_area1_wave_advance(wave_started_at: float) -> String:
+	while _can_continue():
+		var elapsed: float = maxf(0.0, Time.get_ticks_msec() * 0.001 - wave_started_at)
+		var reason: String = area1_wave_advance_reason(_alive, elapsed, AREA1_ANTI_STALL_SECONDS)
+		if not reason.is_empty():
+			return reason
+		if not await _await_process_frame():
+			return ""
+	return ""
+
+
+static func area1_wave_advance_reason(alive: int, elapsed: float, anti_stall_seconds: float = AREA1_ANTI_STALL_SECONDS) -> String:
+	if alive <= 0:
+		return "cleared"
+	if anti_stall_seconds > 0.0 and elapsed >= anti_stall_seconds:
+		return "anti_stall_timeout"
+	return ""
+
+
+static func area1_arrival_timing(wave: Dictionary) -> Dictionary:
+	var mode: String = str(wave.get("arrival", ARRIVAL_BURST)).to_lower()
+	var unit_interval: float = 0.04
+	var group_interval: float = 0.12
+	match mode:
+		ARRIVAL_STAGGERED:
+			unit_interval = 0.28
+			group_interval = 0.32
+		ARRIVAL_SEQUENCE:
+			unit_interval = 0.65
+			group_interval = 0.55
+		_:
+			mode = ARRIVAL_BURST
+
+	if wave.has("unit_interval"):
+		unit_interval = maxf(0.0, float(wave.get("unit_interval", unit_interval)))
+	if wave.has("group_interval"):
+		group_interval = maxf(0.0, float(wave.get("group_interval", group_interval)))
+	return {
+		"mode": mode,
+		"unit_interval": unit_interval,
+		"group_interval": group_interval,
+	}
 
 
 func _spawn_wave(wave: Dictionary, auto_aggro_on_spawn: bool, wave_index: int) -> void:
 	_wave_spawn_positions.clear()
 	_wave_ring_phase = randf_range(0.0, TAU)
 	_current_wave_index = wave_index
-	await super._spawn_wave(wave, auto_aggro_on_spawn, wave_index)
 
+	var timing: Dictionary = area1_arrival_timing(wave)
+	var old_group_spacing: float = group_spacing
+	var old_unit_stagger: float = unit_stagger
+	group_spacing = float(timing.get("group_interval", old_group_spacing))
+	unit_stagger = float(timing.get("unit_interval", old_unit_stagger))
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("hushiro_wave_arrival_script", {
+			"wave_index": wave_index,
+			"trigger_reason": _current_wave_trigger_reason,
+			"arrival": str(timing.get("mode", ARRIVAL_BURST)),
+			"unit_interval": unit_stagger,
+			"group_interval": group_spacing,
+			"alive_before_spawn": _alive,
+		})
+
+	await super._spawn_wave(wave, auto_aggro_on_spawn, wave_index)
+	group_spacing = old_group_spacing
+	unit_stagger = old_unit_stagger
+
+
+# =============================================================================
+# HUSHIRO SAFE SPAWN GEOMETRY
+# =============================================================================
 
 func _ring_spawn_pos(index: int, count: int) -> Vector2:
 	var safe_rect: Rect2 = _safe_spawn_rect()

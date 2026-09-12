@@ -22,17 +22,21 @@ const HOUND_COMBAT_RUNTIME = preload("res://Utility/HushiroHoundCombatRuntime.gd
 const HOUND_LEGACY_POSTURE_GUARD_MAX: float = 10000.0
 
 const BASELINES: Dictionary = {
-	# Hollows are true swarm fodder: Akio should cut them down quickly rather than spend
-	# a full duel's worth of inputs on each body.
+	# Area 1 player-paced kill-time calibration is anchored to the pre-awakening
+	# base-katana 9 -> 12 -> 21 basic chain (42 per chain / 84 across six clean hits).
+	# Lightweight enemies remain faster to remove than the standard Swordsman.
 	"hollow": {"health": 45, "posture": 40.0},
-	# Hounds are fast pressure pieces, not tanks. One clean parry plus a normal sword
-	# punish now breaks their 45 Posture shared meter.
 	"hound": {"health": 50, "posture": 45.0},
-	"archer": {"health": 75, "posture": 65.0},
-	# Swordsmen remain the Area 1 duel anchor, but 90/90 gives Akio a practical burst
-	# line through parry + held/basic pressure instead of an overly long attrition duel.
-	"swordsman": {"health": 90, "posture": 90.0},
+	# Archer is intentionally squishier once Akio closes: 60 HP dies on the fifth clean
+	# base-katana hit (63 cumulative damage) if its weak reactive guard does not save it.
+	"archer": {"health": 60, "posture": 65.0},
+	# Standard Area 1 soldier target: 80 HP dies on hit six (84 cumulative). The current
+	# Swordsman guard passes 35% Health damage, so one successful guard normally lets it
+	# survive that otherwise lethal six-hit commitment.
+	"swordsman": {"health": 80, "posture": 90.0},
 	"bilemass": {"health": 80, "posture": 70.0},
+	# Warden remains the durable standard-enemy extreme. 140 HP survives ten clean
+	# base-katana hits (135) and dies on the eleventh (147), before guard extension.
 	"warden": {"health": 140, "posture": 150.0},
 }
 
@@ -52,7 +56,7 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 	var posture_max: float = float(baseline.posture)
 
 	enemy.set_meta("hushiro_enemy_type", key)
-	enemy.set_meta("hushiro_contract", "area1_combat_stabilization")
+	enemy.set_meta("hushiro_contract", "area1_player_paced_combat")
 	apply_pressure_metadata(enemy, key)
 
 	_set_property_if_present(enemy, "hp", health)
@@ -122,6 +126,7 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 			"v2_pressure_migrated": true,
 			"frontline_pressure_body": bool(enemy.get_meta("oathbound_frontline_pressure_body", true)),
 			"pressure_role": str(enemy.get_meta("oathbound_pressure_role", "melee")),
+			"kill_time_contract": "area1_player_paced",
 		})
 
 

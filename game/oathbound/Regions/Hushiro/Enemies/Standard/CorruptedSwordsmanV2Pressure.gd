@@ -9,6 +9,20 @@ extends "res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsmanV2Brain.gd"
 
 const PRESSURE_RETRY_FLOOR: float = 0.08
 
+# Area 1 guard propensity is pressure-responsive rather than a universal per-hit RNG.
+# At full Health with an attack ready, offense remains the stronger intent. After Akio
+# has already built Health/Posture pressure and the Swordsman's attack is cooling down,
+# its finite guard becomes competitive enough to occasionally save the otherwise lethal
+# six-hit base-katana commitment. Guard duration/cooldown still come from the response
+# profile, so this cannot become a permanent blocking state.
+const AREA1_GUARD_BASE_SCORE: float = 0.36
+const AREA1_GUARD_POSTURE_WEIGHT: float = 0.24
+const AREA1_GUARD_HEALTH_PRESSURE_WEIGHT: float = 0.62
+const AREA1_GUARD_ATTACK_COOLDOWN_BONUS: float = 0.18
+const AREA1_GUARD_CLOSE_BONUS: float = 0.08
+const AREA1_GUARD_ALLY_ACTIVE_BONUS: float = 0.06
+const AREA1_GUARD_SCORE_CAP: float = 0.98
+
 var _v2_pressure_reservation_id: String = ""
 var _v2_pressure_retry_until: float = -1.0
 var _v2_pending_attack_type: int = -1
@@ -16,7 +30,39 @@ var _v2_pending_attack_type: int = -1
 
 func _ready() -> void:
 	super._ready()
-	print("[CorruptedSwordsman] v2.6 - PressureDirectorV2 impact-window admission")
+	print("[CorruptedSwordsman] v2.7 - player-paced pressure + tactical guard")
+
+
+func _v2_build_intent_scores(now: float, distance: float) -> Dictionary:
+	var scores: Dictionary = super._v2_build_intent_scores(now, distance)
+	if not _v2_guard_ready(now) or distance > hushiro_guard_range:
+		return scores
+
+	var posture_ratio: float = _get_humanoid_posture_ratio_safe()
+	var health_pressure: float = clampf(1.0 - get_hp_ratio(), 0.0, 1.0)
+	var attack_ready: bool = _v2_attack_temporally_ready(now)
+	var another_enemy_active: bool = _is_another_enemy_mid_swing()
+
+	var guard_score: float = AREA1_GUARD_BASE_SCORE
+	guard_score += posture_ratio * AREA1_GUARD_POSTURE_WEIGHT
+	guard_score += health_pressure * AREA1_GUARD_HEALTH_PRESSURE_WEIGHT
+	if not attack_ready:
+		guard_score += AREA1_GUARD_ATTACK_COOLDOWN_BONUS
+	if distance <= close_combat_range:
+		guard_score += AREA1_GUARD_CLOSE_BONUS
+	if another_enemy_active:
+		guard_score += AREA1_GUARD_ALLY_ACTIVE_BONUS
+	guard_score = minf(guard_score, AREA1_GUARD_SCORE_CAP)
+
+	# The base brain still owns all other tactical scoring. This layer only replaces
+	# the Swordsman's guard score with the Area 1 pressure-sensitive version.
+	scores[&"guard"] = guard_score
+	return scores
+
+
+func area1_guard_score_for_test(now: float, distance: float) -> float:
+	var scores: Dictionary = _v2_build_intent_scores(now, distance)
+	return float(scores.get(&"guard", -INF))
 
 
 func _can_attack_now(now: float) -> bool:

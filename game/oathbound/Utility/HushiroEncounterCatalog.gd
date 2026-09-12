@@ -2,15 +2,18 @@ extends RefCounted
 class_name HushiroEncounterCatalog
 
 ## Approved Hushiro standard-encounter catalog.
-## Composition and minimum-chamber eligibility mirror
-## docs/content/area_1/HUSHIRO_IMPLEMENTATION_BASELINE.md.
+## Composition and minimum-chamber eligibility mirror the Area 1 content baseline;
+## arrival metadata follows HUSHIRO_COMBAT_PLAYTEST_TARGET.md.
+##
+## A wave is an authored arrival script, not necessarily a simultaneous packet. The
+## optional `arrival` field is interpreted by the Hushiro EncounterSpawner:
+## - burst: near-simultaneous entry,
+## - staggered: rolling short-interval entry,
+## - sequence: clearly perceptible one-after-another reinforcement entry.
+## `unit_interval` / `group_interval` may override the mode defaults for one wave.
 ##
 ## Imported EncounterDB remains available for unreconciled Area 2/3 content. Area 1
 ## uses this catalog directly and RunData owns the per-run seen list.
-##
-## Chamber 1 is the approved fixed H-01 Broken Patrol encounter. Later standard
-## Combat chambers draw without replacement from H-02 through H-10 subject to their
-## minimum-chamber eligibility.
 
 const ENCOUNTERS: Array[Dictionary] = [
 	{
@@ -19,8 +22,10 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"min_chamber": 1,
 		"opening_only": true,
 		"waves": [
-			{"groups": [{"type": "swordsman", "count": 1}, {"type": "hollow", "count": 3}]},
-			{"groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 4}]},
+			{"arrival": "burst", "groups": [{"type": "swordsman", "count": 1}, {"type": "hollow", "count": 3}]},
+			# Rolling reinforcements make the larger second beat feel continuous rather
+			# than simply dropping all six bodies on the same frame.
+			{"arrival": "staggered", "unit_interval": 0.22, "groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 4}]},
 		],
 	},
 	{
@@ -28,9 +33,10 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Firing Line",
 		"min_chamber": 2,
 		"waves": [
-			{"groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 1}]},
-			{"groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 1}, {"type": "hollow", "count": 2}]},
-			{"groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 2}, {"type": "hollow", "count": 2}]},
+			{"arrival": "burst", "groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 1}]},
+			{"arrival": "staggered", "groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 1}, {"type": "hollow", "count": 2}]},
+			# Final spike arrives together so target priority is immediately legible.
+			{"arrival": "burst", "groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 2}, {"type": "hollow", "count": 2}]},
 		],
 	},
 	{
@@ -38,9 +44,9 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Kennel Break",
 		"min_chamber": 2,
 		"waves": [
-			{"groups": [{"type": "hound", "count": 4}]},
-			{"groups": [{"type": "hound", "count": 3}, {"type": "swordsman", "count": 1}]},
-			{"groups": [{"type": "hound", "count": 4}, {"type": "swordsman", "count": 1}]},
+			{"arrival": "burst", "groups": [{"type": "hound", "count": 4}]},
+			{"arrival": "staggered", "unit_interval": 0.16, "groups": [{"type": "hound", "count": 3}, {"type": "swordsman", "count": 1}]},
+			{"arrival": "burst", "groups": [{"type": "hound", "count": 4}, {"type": "swordsman", "count": 1}]},
 		],
 	},
 	{
@@ -48,9 +54,11 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Barricade Mob",
 		"min_chamber": 2,
 		"waves": [
-			{"groups": [{"type": "hollow", "count": 5}]},
-			{"groups": [{"type": "swordsman", "count": 1}, {"type": "hollow", "count": 5}]},
-			{"groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 4}]},
+			# Feed fragile fodder into Akio one after another so an experienced player
+			# can maintain forward momentum instead of waiting on a static cluster.
+			{"arrival": "sequence", "unit_interval": 0.40, "groups": [{"type": "hollow", "count": 5}]},
+			{"arrival": "staggered", "unit_interval": 0.18, "groups": [{"type": "swordsman", "count": 1}, {"type": "hollow", "count": 5}]},
+			{"arrival": "burst", "groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 4}]},
 		],
 	},
 	{
@@ -58,9 +66,10 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Crossfire Retreat",
 		"min_chamber": 3,
 		"waves": [
-			{"groups": [{"type": "archer", "count": 1}, {"type": "hollow", "count": 3}]},
-			{"groups": [{"type": "archer", "count": 2}, {"type": "hollow", "count": 2}]},
-			{"groups": [{"type": "archer", "count": 2}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
+			# Archer establishes the ranged problem before its Hollow screen arrives.
+			{"arrival": "sequence", "unit_interval": 0.38, "groups": [{"type": "archer", "count": 1}, {"type": "hollow", "count": 3}]},
+			{"arrival": "staggered", "groups": [{"type": "archer", "count": 2}, {"type": "hollow", "count": 2}]},
+			{"arrival": "burst", "groups": [{"type": "archer", "count": 2}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
 		],
 	},
 	{
@@ -68,9 +77,10 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Spoiled Storehouse",
 		"min_chamber": 4,
 		"waves": [
-			{"groups": [{"type": "bilemass", "count": 1}, {"type": "hollow", "count": 3}]},
-			{"groups": [{"type": "bilemass", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
-			{"groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
+			# Let the hazard establish first, then feed the direct-pressure bodies into it.
+			{"arrival": "sequence", "unit_interval": 0.40, "groups": [{"type": "bilemass", "count": 1}, {"type": "hollow", "count": 3}]},
+			{"arrival": "staggered", "unit_interval": 0.30, "groups": [{"type": "bilemass", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
+			{"arrival": "burst", "groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
 		],
 	},
 	{
@@ -78,9 +88,10 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Chain Detail",
 		"min_chamber": 5,
 		"waves": [
-			{"groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
-			{"groups": [{"type": "warden", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
-			{"groups": [{"type": "warden", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
+			{"arrival": "burst", "groups": [{"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
+			# Warden appears first so the restraint threat is readable before support arrives.
+			{"arrival": "sequence", "unit_interval": 0.42, "groups": [{"type": "warden", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
+			{"arrival": "staggered", "unit_interval": 0.26, "groups": [{"type": "warden", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
 		],
 	},
 	{
@@ -88,10 +99,12 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Hounds in the Mud",
 		"min_chamber": 4,
 		"waves": [
-			{"groups": [{"type": "hound", "count": 4}]},
-			{"groups": [{"type": "hound", "count": 3}, {"type": "archer", "count": 1}]},
-			{"groups": [{"type": "hound", "count": 4}, {"type": "swordsman", "count": 1}]},
-			{"groups": [{"type": "hound", "count": 4}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 1}]},
+			# This is Hushiro's highest-tempo standard room; preserve pack bursts rather
+			# than using sequence mode simply because sequence support exists.
+			{"arrival": "burst", "groups": [{"type": "hound", "count": 4}]},
+			{"arrival": "burst", "groups": [{"type": "hound", "count": 3}, {"type": "archer", "count": 1}]},
+			{"arrival": "staggered", "unit_interval": 0.14, "groups": [{"type": "hound", "count": 4}, {"type": "swordsman", "count": 1}]},
+			{"arrival": "burst", "groups": [{"type": "hound", "count": 4}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 1}]},
 		],
 	},
 	{
@@ -99,9 +112,9 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Choked Courtyard",
 		"min_chamber": 6,
 		"waves": [
-			{"groups": [{"type": "bilemass", "count": 1}, {"type": "hollow", "count": 3}]},
-			{"groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}]},
-			{"groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "hollow", "count": 2}, {"type": "swordsman", "count": 2}]},
+			{"arrival": "sequence", "unit_interval": 0.38, "groups": [{"type": "bilemass", "count": 1}, {"type": "hollow", "count": 3}]},
+			{"arrival": "staggered", "groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}]},
+			{"arrival": "burst", "groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "hollow", "count": 2}, {"type": "swordsman", "count": 2}]},
 		],
 	},
 	{
@@ -109,10 +122,10 @@ const ENCOUNTERS: Array[Dictionary] = [
 		"name": "Last Checkpoint",
 		"min_chamber": 7,
 		"waves": [
-			{"groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 1}]},
-			{"groups": [{"type": "warden", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
-			{"groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}]},
-			{"groups": [{"type": "warden", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
+			{"arrival": "burst", "groups": [{"type": "swordsman", "count": 2}, {"type": "archer", "count": 1}]},
+			{"arrival": "sequence", "unit_interval": 0.36, "groups": [{"type": "warden", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 1}]},
+			{"arrival": "staggered", "unit_interval": 0.26, "groups": [{"type": "bilemass", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}]},
+			{"arrival": "burst", "groups": [{"type": "warden", "count": 1}, {"type": "archer", "count": 1}, {"type": "swordsman", "count": 2}, {"type": "hollow", "count": 2}]},
 		],
 	},
 ]

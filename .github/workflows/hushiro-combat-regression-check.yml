@@ -86,6 +86,17 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Area 1 player-paced combat target
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroPlayerPacedCombatSmoke.tscn 2>&1 | tee hushiro-player-paced-combat.log
+          grep -F "[HushiroPlayerPacedCombatSmoke] PASS - 6-hit Swordsman | 5-hit Archer | 11-hit Warden | guard survival | immediate clear advance | 120s anti-stall | varied arrivals" hushiro-player-paced-combat.log
+          if grep -F "SCRIPT ERROR:" hushiro-player-paced-combat.log; then
+            echo "FAIL: Area 1 player-paced combat smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Verify Hushiro Archer deathblow contract
         shell: bash
         run: |
@@ -139,6 +150,7 @@ jobs:
           name: hushiro-combat-regression-${{ github.run_id }}
           path: |
             hushiro-encounter-retuning.log
+            hushiro-player-paced-combat.log
             hushiro-archer-deathblow.log
             hushiro-combat-lifecycle.log
           if-no-files-found: warn
