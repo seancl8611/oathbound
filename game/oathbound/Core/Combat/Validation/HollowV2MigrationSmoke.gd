@@ -32,7 +32,7 @@ func _run() -> void:
 	_expect(hollow.get_node_or_null("HushiroPostureBreakRuntime") != null, "Hollow lost shared Posture/Deathblow runtime")
 	_expect(hollow.get_node_or_null("PostureBar") != null, "Hollow lost canonical PostureBar")
 
-	_expect(int(hollow.get("hp")) == 45, "Hollow Hushiro Health baseline changed during V2 migration")
+	_expect(int(hollow.get("hp")) == 40, "Hollow Hushiro hack-and-slash Health target is not 40")
 	var combat: Node = hollow.get_node_or_null("Combat")
 	if combat != null:
 		var cfg: CombatConfig = combat.get("config") as CombatConfig
