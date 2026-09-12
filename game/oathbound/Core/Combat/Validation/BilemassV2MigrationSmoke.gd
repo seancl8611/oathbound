@@ -31,7 +31,7 @@ func _run() -> void:
 	_expect(bilemass.get_node_or_null("HushiroPostureBreakRuntime") != null, "Bilemass lost shared Posture/Deathblow runtime")
 	_expect(bilemass.get_node_or_null("PostureBar") != null, "Bilemass lost canonical PostureBar")
 
-	_expect(int(bilemass.get("hp")) == 80, "Bilemass Hushiro Health baseline changed during V2 migration")
+	_expect(int(bilemass.get("hp")) == 60, "Bilemass Hushiro hack-and-slash Health target is not 60")
 	var combat: Node = bilemass.get_node_or_null("Combat")
 	if combat != null:
 		var cfg: CombatConfig = combat.get("config") as CombatConfig

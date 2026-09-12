@@ -22,20 +22,23 @@ const HOUND_COMBAT_RUNTIME = preload("res://Utility/HushiroHoundCombatRuntime.gd
 const HOUND_LEGACY_POSTURE_GUARD_MAX: float = 10000.0
 
 const BASELINES: Dictionary = {
-	# Area 1 player-paced kill-time calibration is anchored to the pre-awakening
-	# base-katana 9 -> 12 -> 21 basic chain (42 per chain / 84 across six clean hits).
-	# Lightweight enemies remain faster to remove than the standard Swordsman.
-	"hollow": {"health": 45, "posture": 40.0},
+	# Area 1 hack-and-slash calibration is anchored to the pre-awakening base-katana
+	# 9 -> 12 -> 21 sequence: 42 damage after three hits, 51 after four, 63 after five.
+	# Common bodies should be disposable individually; encounter composition, pressure,
+	# movement, and authored defense create the danger.
+	"hollow": {"health": 40, "posture": 40.0},
 	"hound": {"health": 50, "posture": 45.0},
-	# Archer is intentionally squishier once Akio closes: 60 HP dies on the fifth clean
-	# base-katana hit (63 cumulative damage) if its weak reactive guard does not save it.
-	"archer": {"health": 60, "posture": 65.0},
-	# Standard Area 1 soldier target: 80 HP dies on hit six (84 cumulative). The current
-	# Swordsman guard passes 35% Health damage, so one successful guard normally lets it
-	# survive that otherwise lethal six-hit commitment.
-	"swordsman": {"health": 80, "posture": 90.0},
-	"bilemass": {"health": 80, "posture": 70.0},
-	# Warden remains the durable standard-enemy extreme. 140 HP survives ten clean
+	# Archer is intentionally fragile once Akio closes: 45 HP survives the three-hit
+	# 42-damage phrase but dies on clean hit four (51 cumulative) unless its weak guard helps.
+	"archer": {"health": 45, "posture": 65.0},
+	# Standard Area 1 soldier target: 60 HP survives four clean hits (51) and dies on
+	# hit five (63). A successful 35%-Health guard on even the lightest hit can deny that
+	# five-hit clean kill, while a sixth committed swing can still finish normal pressure.
+	"swordsman": {"health": 60, "posture": 90.0},
+	# Bilemass is a normal hazard body, not a Health sponge. It shares the five-hit
+	# clean-kill envelope while its danger comes from space control and spit commitment.
+	"bilemass": {"health": 60, "posture": 70.0},
+	# Warden remains the deliberate durable exception. 140 HP survives ten clean
 	# base-katana hits (135) and dies on the eleventh (147), before guard extension.
 	"warden": {"health": 140, "posture": 150.0},
 }

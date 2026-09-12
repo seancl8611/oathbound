@@ -6,6 +6,7 @@ on:
       - main
       - "agent/**"
     paths:
+      - "game/oathbound/Core/Combat/**"
       - "game/oathbound/Core/Encounters/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
@@ -20,6 +21,7 @@ on:
       - ".github/workflows/hushiro-combat-regression-check.yml"
   pull_request:
     paths:
+      - "game/oathbound/Core/Combat/**"
       - "game/oathbound/Core/Encounters/**"
       - "game/oathbound/Enemy/Base/**"
       - "game/oathbound/Player/**"
@@ -91,9 +93,20 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroPlayerPacedCombatSmoke.tscn 2>&1 | tee hushiro-player-paced-combat.log
-          grep -F "[HushiroPlayerPacedCombatSmoke] PASS - 6-hit Swordsman | 5-hit Archer | 11-hit Warden | guard survival | immediate clear advance | 120s anti-stall | varied arrivals" hushiro-player-paced-combat.log
+          grep -F "[HushiroPlayerPacedCombatSmoke] PASS - 3-hit Hollow | 4-hit Hound/Archer | 5-hit Swordsman/Bilemass | 11-hit Warden | guard extends kill | immediate clear advance | 120s anti-stall | varied arrivals" hushiro-player-paced-combat.log
           if grep -F "SCRIPT ERROR:" hushiro-player-paced-combat.log; then
             echo "FAIL: Area 1 player-paced combat smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Verify Area 1 six-hit player pressure string
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/Area1PlayerPressureSmoke.tscn 2>&1 | tee area1-player-pressure.log
+          grep -F "[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership" area1-player-pressure.log
+          if grep -F "SCRIPT ERROR:" area1-player-pressure.log; then
+            echo "FAIL: Area 1 player pressure smoke emitted a GDScript runtime error."
             exit 1
           fi
 
@@ -151,6 +164,7 @@ jobs:
           path: |
             hushiro-encounter-retuning.log
             hushiro-player-paced-combat.log
+            area1-player-pressure.log
             hushiro-archer-deathblow.log
             hushiro-combat-lifecycle.log
           if-no-files-found: warn
