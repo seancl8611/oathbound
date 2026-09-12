@@ -87,6 +87,15 @@ func _begin_attack_branch_hold() -> void:
 	super._begin_attack_branch_hold()
 
 
+func _can_queue_next_combo_attack() -> bool:
+	# The imported controller treats combo index 2 as an absolute endpoint. For the
+	# pre-awakening Area 1 pressure string only, the *first* Heavy is instead the
+	# phrase boundary and therefore uses the same authored queue window below.
+	if _area1_is_midpoint_heavy():
+		return _can_queue_sword_branch()
+	return super._can_queue_next_combo_attack()
+
+
 func _can_queue_sword_branch() -> bool:
 	if not _area1_is_midpoint_heavy():
 		return super._can_queue_sword_branch()
