@@ -1,6 +1,6 @@
 # OATHBOUND_AGENT_CONTROL_PLANE
 
-<!-- V6: machine-oriented bootstrap/state + turn-survival protocol; GitHub is durable memory -->
+<!-- V7: machine-oriented bootstrap/state + turn-survival protocol; GitHub is durable memory -->
 
 Single durable bootstrap + live handoff for AI-assisted Oathbound work. Repository state is authority; conversation/project memory is cache only.
 
@@ -23,20 +23,20 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 
 ## LIVE_STATE
 ```yaml
-schema: 6
-updated_utc: 2026-09-12T21:13:00Z
+schema: 7
+updated_utc: 2026-09-12T21:30:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 167
-  feature_head: 11e9f3e344dc56edf5bf02ad40e0ee55afede024
-  merge_commit: 358eacb08dd4414296d7b40664d20213f3f062ed
+  pr: 169
+  feature_head: 36a19cdb332b4c38955f8d8fff2e6a6636639c7b
+  merge_commit: 976ff8e0ba0111eac5bd95e3ba616354833798d8
   validation: >-
-    PR #167 exact head passed every triggered workflow, including the new fail-fast Hushiro Combat Contract Gate, Godot 4.7.2 Project Check, Hushiro Combat Semantics, Run Region Handoff, Authored Presentation Content, Post-playtest Stability, and Region Transition Presentation.
+    9/9 exact-head workflows green: Hushiro Combat Contract Gate, Godot 4.7.2 Project Check, Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff, RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content, and Region Transition Presentation.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 358eacb08dd4414296d7b40664d20213f3f062ed
-known_good_checkpoint: 358eacb08dd4414296d7b40664d20213f3f062ed
+covered_through_substantive_commit: 976ff8e0ba0111eac5bd95e3ba616354833798d8
+known_good_checkpoint: 976ff8e0ba0111eac5bd95e3ba616354833798d8
 frozen_playtest:
   branch: playtest/area1-hack-and-slash-2026-09-12
   head: 824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a
@@ -44,31 +44,32 @@ frozen_playtest:
   guide: docs/playtests/AREA1_HACK_AND_SLASH_PLAYTEST_2026-09-12.md
   immutable: true
 current_objective: >-
-  Preserve the first merged Area 1 player-paced hack-and-slash target and evaluate it as a stable manual playtest snapshot. Ordinary enemies should be individually disposable while danger comes primarily from groups, overlapping intentions, target priority, geometry, hazards, authored defense, and wave pressure. Continue evidence-backed architecture/validation cleanup, but do not perform subjective pressure/population/numerical tuning until manual evidence returns.
+  Preserve the merged Area 1 player-paced hack-and-slash target and evaluate it through the frozen manual playtest snapshot. Continue evidence-backed architecture, presentation, and validation cleanup without subjective population/durability/PressureDirector tuning. Counter readability should increasingly derive from explicit Combat V2 timing rather than legacy duration reverse-engineering.
 next_action: >-
-  Keep every frozen playtest branch unchanged. Manual test `playtest/area1-hack-and-slash-2026-09-12` at exact head `824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a`, then return the matching Godot `.log` and `combat_*.jsonl`. Evaluate solo fodder weakness, 3/4/5-hit standard-enemy kill cadence, Swordsman guard as a short extension rather than a duel, Warden durability, immediate wave chaining, arrival variety, overlapping enemy pressure, and directional target handoff after a target dies. Evidence-backed cleanup may continue meanwhile. Stale pre-V2 PR #145 must not be merged directly; audit/retire it or reimplement any still-valid cue behavior as a fresh package against current `main`.
+  Keep every frozen playtest branch unchanged. Manual-test `playtest/area1-hack-and-slash-2026-09-12` at exact head `824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a` and return matching Godot `.log` + `combat_*.jsonl` before subjective tuning. Evidence-backed follow-on presentation work may continue: audit Corrupted Archer projectile contact/parry readability because its PressureDirector reservation includes projectile travel while its enemy-attached cue currently ends at arrow launch. Treat Bilemass ground-hazard readability separately; do not turn hazard pressure into a parry prompt.
 current_batch:
-  - PR #167 merged at `358eacb08dd4414296d7b40664d20213f3f062ed` from exact head `11e9f3e344dc56edf5bf02ad40e0ee55afede024`.
-  - PR #167 added `.github/workflows/hushiro-combat-contract-gate.yml` with `set -euo pipefail`, so missing PASS markers or failed Godot smokes cannot be hidden by a later shell command.
-  - The hard gate covers current player-paced durability, six-hit pressure + target handoff, canonical Swordsman action/motor integration, and Hound/Hollow/Archer/Bilemass/Warden V2 migration smokes.
-  - Frozen playtest branch `playtest/area1-hack-and-slash-2026-09-12` was cut from PR #167 main and then frozen at `824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a` after adding its playtest guide.
-  - Older frozen branches remain immutable comparison artifacts and must not receive follow-on implementation.
-  - PR #166 remains the substantive combat package: canonical six-hit base-katana pressure continuation, directional basic-attack soft targeting, and revised Area 1 durability.
-  - Base katana Health damage remains 9 -> 12 -> 21; six clean hits total 84. The six-hit string is pressure capability, not normal standard-enemy durability.
-  - Area 1 Health targets: Hollow 40 (~3 clean hits), Hound 50 (~4), Archer 45 (~4), Swordsman 60 (5), Bilemass 60 (5), Warden 140 (~11 durable exception).
-  - One meaningful Swordsman guard can deny the clean five-hit kill, but the player may extend into hit six rather than enter a long duel.
-  - Canonical Player ownership remains `res://Player/aspect_player.tscn` -> `res://Player/OathboundCombatPlayer.gd`.
-  - `OathboundPlayerTargeting.gd` provides bounded directional soft targeting for ordinary basic sword flow only; it is assistive steering, not global lock-on, and does not own damage, hitboxes, AttackEvent delivery, action timing, collision, or enemy pressure.
+  - PR #169 merged at `976ff8e0ba0111eac5bd95e3ba616354833798d8` from exact head `36a19cdb332b4c38955f8d8fff2e6a6636639c7b`; all 9 triggered exact-head workflows were green.
+  - Current direct close-frontline Hushiro counter cues use the actor's active PressureDirectorV2 reservation as their timing authority. No per-enemy script-name timing table is used.
+  - V2 direct-contact cue contract: fixed warning appears only within 0.20 s of predicted contact; fixed inner mark appears within 0.12 s, matching Akio's canonical `PERFECT_PARRY_WINDOW`; cue hides at predicted contact and does not emit the old ACTIVE/post-contact pulse.
+  - The new V2 cue path applies only to actors carrying `oathbound_frontline_pressure_body=true` (Swordsman/Hollow/Hound/Warden). Archer/Bilemass retain compatibility presentation pending dedicated ranged/hazard treatment.
+  - A multi-hit follow-up does not reuse an already-passed first-impact reservation timestamp; it falls back to existing authored/phase presentation until per-beat pressure ownership is explicitly migrated.
+  - `enemy_v2_counter_cue_armed` telemetry records explicit V2 cue arming with impact/warning/parry timing.
+  - `CounterCuePressureSmoke` and the fail-fast Hushiro Combat Contract Gate protect PressureDirector timing, 0.20/0.12 state boundaries, fixed-scale V2 presentation, and spatial fallback.
+  - PR #145 was audited and closed as superseded. Its own deterministic route traversal had failed with `CounterCueTiming._attach_indicator` dereferencing a nil `parry_indicator`; its 465-line legacy script-path timing adapter must not be revived.
+  - PR #168 merged at `6e445838d96bec95ccc4deb26a4f4486129bac03` and durably recorded the frozen hack-and-slash playtest snapshot.
+  - PR #167 added the fail-fast Hushiro Combat Contract Gate. PR #166 remains the substantive durability/pressure-string/target-handoff package.
+  - Base katana Health damage remains 9 -> 12 -> 21; six clean hits total 84. Six-hit pressure is capability, not standard enemy durability.
+  - Area 1 Health targets remain Hollow 40 (~3 clean hits), Hound 50 (~4), Archer 45 (~4), Swordsman 60 (5), Bilemass 60 (5), Warden 140 (~11 durable exception).
+  - One meaningful Swordsman guard can deny the clean five-hit kill; hit six may finish the short extension.
+  - Canonical Player remains `res://Player/aspect_player.tscn` -> `res://Player/OathboundCombatPlayer.gd`; `OathboundPlayerTargeting.gd` is assistive basic-sword steering only.
   - Immediate clear -> next wave, 120-second anti-stall escalation, and burst/staggered/sequence arrivals remain intact.
 recent_batches:
+  - pr_169: direct Hushiro pre-contact cue timing from PressureDirectorV2 reservations; fixed 0.20 warning / 0.12 parry beat; spatial fallback; 9/9 exact-head workflows green.
+  - pr_168: recorded immutable hack-and-slash playtest snapshot on the durable control plane.
   - pr_167: durable checkpoint + fail-fast Hushiro combat contract gate.
   - pr_166: hack-and-slash durability + canonical six-hit pressure continuation + directional target handoff; 11/11 exact-head workflows green.
   - pr_165: player-paced Area 1 readiness target, pressure-responsive Swordsman guard, immediate wave chaining, varied arrivals, 120-second anti-stall.
-  - pr_164: `advance_move` made compatibility-only.
-  - pr_163: sticky `advance_move` retired from migrated Swordsman/Hound; crowd backoff made authoritative for migrated close pressure.
-  - pr_162: legacy crowd/stall/admission interference removed; legacy/V2 damaging admission made bidirectionally safe.
-  - pr_161: role-aware mixed frontline occupancy.
-  - pr_160: authored Hound packs restored.
+  - pr_164..160: compatibility cleanup, role-aware frontline occupancy, and authored Hound pack restoration.
   - pr_159..155: Warden/Bilemass/Archer/Hollow/Hound V2 migrations.
   - pr_154: PlayerMotor + Player CombatActionRunner motion composition.
   - pr_153..149: PressureDirectorV2, EnemyBrain, action/motor, PostureBar protection, and first V2 guard/Poise foundation.
@@ -80,12 +81,14 @@ confirmed:
   - Enemy PostureBar remains canonical player-facing Posture/Deathblow-readiness feedback until explicitly replaced.
   - Guard is enemy-authored; no universal Health-through-guard or Poise formula is required.
   - PressureDirectorV2 schedules dangerous impact timing, not enemy intent. Multiple enemies may approach/reposition/aim/wind up simultaneously if predicted impact timing remains fair.
-  - All six canonical Hushiro standard-enemy families use the shared V2 response/action/motor/brain seams while preserving species-specific contact/action authoring.
+  - PressureDirectorV2 `impact_at` is the preferred presentation timing seam for an admitted V2 threat when that predicted impact corresponds to the visualized contact.
+  - Do not reverse-engineer current V2 impact timing from controller script names or locally inconsistent total-duration arguments when an explicit reservation exists.
+  - All six canonical Hushiro standard-enemy families use shared V2 response/action/motor/brain seams while preserving species-specific contact/action authoring.
   - Swordsman: EnemyCombatResponseRuntime + CombatActionRunner + EnemyMotor + EnemyBrain + PressureDirectorV2.
   - Hound: shared V2 seams with predator-specific movement/attacks and shared Hushiro Posture.
   - Hollow: simple low-Poise fodder; PressureDirectorV2 bite admission.
-  - Archer: ranged/spatial pressure; reservation includes projectile travel; aim tracking ends at explicit commitment.
-  - Bilemass: delayed ground-hazard pressure; future puddle arrival is the pressure event; committed pre-launch vomit has authored Poise.
+  - Archer: ranged/spatial pressure; reservation includes aim + projectile travel; aim tracking ends at explicit commitment. Its projectile readability requires a dedicated projectile-local treatment rather than leaving a cue over the shooter for the full flight.
+  - Bilemass: delayed ground-hazard pressure; future puddle arrival is the pressure event; committed pre-launch vomit has authored Poise. Hazard readability is not a parry cue.
   - Warden: durable restraint/control exception, not a permanent-block tank.
   - Canonical Player attack motion is mediated by CombatActionRunner + PlayerMotor through `OathboundPlayerMotion.gd`; target assistance is layered through `OathboundPlayerTargeting.gd`.
   - Basic-attack target assistance must respect explicit player redirection immediately and reacquire after invalid/dead targets without becoming sticky auto-lock.
@@ -99,7 +102,6 @@ confirmed:
   - Heart combat remains intentionally unauthored; do not invent a kill path without dedicated encounter authority.
   - Numerical balance/economy/difficulty tuning remains evidence-driven.
   - Frozen playtest branches are immutable comparison artifacts.
-  - Stale PR #145 predates the current Combat V2 architecture and cannot be merged directly. Any retained counter-cue design must be re-audited against current action/pressure timing.
 avoid_without_evidence:
   - unbounded whole-game combat rewrite instead of dependency-sized V2 packages
   - suppressing/removing PostureBar before an approved replacement
@@ -114,10 +116,11 @@ avoid_without_evidence:
   - treating `advance_move` as active standard-V2 pressure
   - bypassing CombatActionRunner/PlayerMotor/EnemyMotor/EnemyBrain/PressureDirectorV2 with parallel actor-specific systems
   - globally raising legacy melee/ranged caps as a shortcut around PressureDirectorV2
+  - giant script-path timing adapters that infer V2 contact timing from legacy controller internals
+  - forcing Archer projectile or Bilemass hazard pressure through the melee/direct-contact cue contract
   - treating Archer pressure as a melee token
   - treating Bilemass puddle pressure as an ordinary projectile hit
   - treating Warden as a permanent-block tank
-  - merging stale pre-V2 counter-cue code without a fresh timing/ownership audit
   - invented Heart combat
   - unrelated PR growth
 ```
@@ -146,6 +149,7 @@ avoid_without_evidence:
 - Legacy single-turn stall prevention must not override EnemyBrain/PressureDirector cadence on migrated V2 actors.
 - Legacy damaging roles and V2 reservations are mutually exclusive across different actors during incremental migration.
 - Legacy AttackDirector remains compatibility infrastructure, not a substitute for PressureDirectorV2 in migrated combat.
+- Direct V2 close-frontline counter presentation consumes PressureDirectorV2 predicted `impact_at`; preserve the 0.20 warning / 0.12 perfect-parry-beat / hide-at-contact contract unless explicit evidence changes it.
 - Combat CI must fail hard on a missing expected PASS marker or failed Godot smoke; do not trust a green wrapper if an inner assertion reports FAIL.
 - `.godot/`/`.import/` are untracked; verify source assets + clean import before declaring missing.
 
