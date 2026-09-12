@@ -2,12 +2,14 @@ extends Node
 
 ## Combat V2 Phase 7 structural smoke for Hushiro standard-encounter retuning.
 ##
-## This protects three independent contracts:
+## This protects four independent contracts:
 ## 1. the authored encounter catalog retains its approved progression/body-count identity,
 ## 2. Hound-heavy waves can create pack movement/frontline pressure without reopening
 ##    legacy whole-turn melee concurrency,
-## 3. PressureDirectorV2 still spaces actual damaging impact windows even when several
-##    Hounds are allowed to hunt/reposition at once.
+## 3. mixed-role waves distinguish actual close-pressure bodies from ranged/spatial roles
+##    when autoscaling frontline occupancy,
+## 4. PressureDirectorV2 still spaces actual damaging impact windows even when several
+##    enemies are allowed to hunt/reposition at once.
 
 const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 const HUSHIRO_CHAMBER_SCRIPT = preload("res://Regions/Hushiro/Chambers/CombatChamber.gd")
@@ -26,6 +28,13 @@ const EXPECTED_TOTALS: Dictionary = {
 	"H10_last_checkpoint": 17,
 }
 
+const FRONTLINE_PRESSURE_TYPES: Array[String] = [
+	"swordsman",
+	"hollow",
+	"hound",
+	"warden",
+]
+
 class PressureDummy:
 	extends Node
 	var has_died: bool = false
@@ -39,10 +48,11 @@ func _ready() -> void:
 	_validate_catalog_contract()
 	_validate_hound_pack_compositions()
 	_validate_phase7_room_pressure_policy()
+	_validate_mixed_role_frontline_policy()
 	_validate_v2_impact_spacing()
 
 	if _failures.is_empty():
-		print("[HushiroEncounterRetuningSmoke] PASS - 10 authored encounters | H03=13 | H08=19 | max wave=6 | Hound pack movement=3/4 | impact scheduling preserved")
+		print("[HushiroEncounterRetuningSmoke] PASS - 10 authored encounters | H03=13 | H08=19 | max wave=6 | Hound pack movement=3/4 | mixed frontline=4 | impact scheduling preserved")
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -106,19 +116,68 @@ func _validate_hound_pack_compositions() -> void:
 
 
 func _validate_phase7_room_pressure_policy() -> void:
-	var four_hounds: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(4, 4)
+	var four_hounds: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(4, 4, 4)
 	_expect(int(four_hounds.get("advance_limit", 0)) == 3, "4-Hound wave should allow three simultaneous advance slots")
 	_expect(int(four_hounds.get("frontline_limit", 0)) == 4, "4-Hound wave should allow four frontline bodies")
 	_expect(int(four_hounds.get("melee_limit", 0)) == 1, "Phase 7 must not raise legacy melee-turn cap")
 	_expect(int(four_hounds.get("ranged_limit", 0)) == 1, "Phase 7 must not raise legacy ranged-turn cap")
 
-	var mixed_six: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(6, 4)
+	var mixed_six: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(6, 4, 5)
 	_expect(int(mixed_six.get("advance_limit", 0)) == 3, "Mixed six-body Hound wave should retain three advance slots")
 	_expect(int(mixed_six.get("frontline_limit", 0)) == 4, "Mixed six-body Hound wave should retain four frontline bodies")
 
-	var standard_six: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(6, 0)
-	_expect(int(standard_six.get("advance_limit", 0)) == 2, "Non-Hound six-body wave should retain conservative two-advance envelope")
-	_expect(int(standard_six.get("frontline_limit", 0)) == 3, "Non-Hound six-body wave should retain three-body frontline envelope")
+	var ranged_spatial_six: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(6, 0, 2)
+	_expect(int(ranged_spatial_six.get("advance_limit", 0)) == 2, "Ranged/spatial-heavy six-body wave should retain conservative two-advance envelope")
+	_expect(int(ranged_spatial_six.get("frontline_limit", 0)) == 3, "Ranged/spatial-heavy six-body wave should retain three-body frontline envelope")
+
+	var close_pressure_six: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(6, 0, 4)
+	_expect(int(close_pressure_six.get("advance_limit", 0)) == 2, "Mixed close-pressure retune must not globally raise advance slots")
+	_expect(int(close_pressure_six.get("frontline_limit", 0)) == 4, "Four close-pressure bodies should allow four-body frontline occupancy")
+	_expect(int(close_pressure_six.get("melee_limit", 0)) == 1, "Mixed close-pressure retune must not raise legacy melee-turn cap")
+	_expect(int(close_pressure_six.get("ranged_limit", 0)) == 1, "Mixed close-pressure retune must not raise legacy ranged-turn cap")
+
+
+func _validate_mixed_role_frontline_policy() -> void:
+	# Broken Patrol's second wave is six pure close-pressure bodies: two Swordsmen and
+	# four Hollows. Hollows deliberately bypass the old approach gate, so the chamber
+	# must not reserialize that authored swarm with a three-body crowd-backoff ceiling.
+	_validate_wave_frontline("H01_broken_patrol", 1, 6, 4)
+
+	# Firing Line wave 3 reaches six total bodies but only four are close pressure;
+	# its two Archers stay on the ranged/spatial layer and must not count toward the
+	# room's close-pressure budget.
+	_validate_wave_frontline("H02_firing_line", 2, 4, 4)
+
+	# Crossfire Retreat wave 2 is deliberately ranged-heavy: two Archers + two Hollows.
+	# Population alone must not unlock the wider close-pressure frontline.
+	_validate_wave_frontline("H05_crossfire_retreat", 1, 2, 3)
+
+	# Late mixed rooms exercise the same role-aware rule with hazard/control support.
+	_validate_wave_frontline("H06_spoiled_storehouse", 2, 4, 4)
+	_validate_wave_frontline("H07_chain_detail", 1, 4, 4)
+	_validate_wave_frontline("H09_choked_courtyard", 2, 4, 4)
+	_validate_wave_frontline("H10_last_checkpoint", 3, 5, 4)
+
+
+func _validate_wave_frontline(encounter_id: String, wave_index: int, expected_close_pressure: int, expected_frontline_limit: int) -> void:
+	var encounter: Dictionary = HUSHIRO_CATALOG.get_by_id(encounter_id)
+	var waves: Array = encounter.get("waves", [])
+	_expect(wave_index >= 0 and wave_index < waves.size(), "%s missing wave index %d" % [encounter_id, wave_index])
+	if wave_index < 0 or wave_index >= waves.size():
+		return
+	var wave_value: Variant = waves[wave_index]
+	_expect(wave_value is Dictionary, "%s wave %d is not a Dictionary" % [encounter_id, wave_index + 1])
+	if not (wave_value is Dictionary):
+		return
+	var wave: Dictionary = wave_value as Dictionary
+	var population: int = _wave_population(wave)
+	var hounds: int = _group_count(wave, "hound")
+	var close_pressure: int = _frontline_pressure_count(wave)
+	_expect(close_pressure == expected_close_pressure, "%s wave %d close-pressure count=%d expected=%d" % [encounter_id, wave_index + 1, close_pressure, expected_close_pressure])
+	var limits: Dictionary = HUSHIRO_CHAMBER_SCRIPT.phase7_pressure_limits(population, hounds, close_pressure)
+	_expect(int(limits.get("frontline_limit", 0)) == expected_frontline_limit, "%s wave %d frontline limit=%d expected=%d" % [encounter_id, wave_index + 1, int(limits.get("frontline_limit", 0)), expected_frontline_limit])
+	_expect(int(limits.get("advance_limit", 0)) <= 3, "%s wave %d unexpectedly exceeded three advance slots" % [encounter_id, wave_index + 1])
+	_expect(int(limits.get("melee_limit", 0)) == 1, "%s wave %d raised legacy melee-turn cap" % [encounter_id, wave_index + 1])
 
 
 func _validate_v2_impact_spacing() -> void:
@@ -174,6 +233,21 @@ func _wave_population(wave: Dictionary) -> int:
 	for group_value: Variant in groups_value as Array:
 		if group_value is Dictionary:
 			total += int((group_value as Dictionary).get("count", 0))
+	return total
+
+
+func _frontline_pressure_count(wave: Dictionary) -> int:
+	var total: int = 0
+	var groups_value: Variant = wave.get("groups", [])
+	if not (groups_value is Array):
+		return 0
+	for group_value: Variant in groups_value as Array:
+		if not (group_value is Dictionary):
+			continue
+		var group: Dictionary = group_value as Dictionary
+		var enemy_type: String = str(group.get("type", ""))
+		if FRONTLINE_PRESSURE_TYPES.has(enemy_type):
+			total += int(group.get("count", 0))
 	return total
 
 

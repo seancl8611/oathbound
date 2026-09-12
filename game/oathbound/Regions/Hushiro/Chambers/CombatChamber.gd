@@ -10,7 +10,7 @@ const HUSHIRO_CATALOG = preload("res://Utility/HushiroEncounterCatalog.gd")
 
 # Legacy role limits remain as compatibility infrastructure for non-migrated actors.
 # Combat V2 standard enemies schedule damaging impact windows through PressureDirectorV2;
-# Phase 7 therefore allows Hound-heavy waves to occupy more approach/frontline space
+# Phase 7 therefore allows authored close-pressure groups to occupy more frontline space
 # without raising the legacy one-melee-turn cap or stacking severe impacts.
 const HUSHIRO_MELEE_COOLDOWN: float = 0.95
 const HUSHIRO_ADVANCE_COOLDOWN: float = 0.70
@@ -18,6 +18,18 @@ const HUSHIRO_RANGED_COOLDOWN: float = 1.60
 const HUSHIRO_DOG_LUNGE_COOLDOWN: float = 3.00
 const HUSHIRO_GRANT_GAP: float = 0.40
 const HUSHIRO_TURNOVER_DELAY: float = 0.45
+
+# These are the canonical migrated families whose authored combat role can legitimately
+# occupy the player's close-pressure ring. Archers and Bilemass remain ranged/spatial
+# pressure and therefore must not inflate the frontline budget merely because a wave is
+# populous. `advance_move` remains a separate legacy movement gate used chiefly by
+# Swordsmen/Hounds; this Phase 7 slice does not globally increase it for mixed rooms.
+const PHASE7_FRONTLINE_PRESSURE_TYPES: Array[String] = [
+	"swordsman",
+	"hollow",
+	"hound",
+	"warden",
+]
 
 const HUSHIRO_COMBAT_PAYOUTS: Dictionary = {
 	"gold": 60,
@@ -131,25 +143,31 @@ func _configure_duel_tokens() -> void:
 	if _has_property(AttackDir, "max_frontline"):
 		AttackDir.max_frontline = 3
 
-	print("[HushiroCombatChamber] Pressure baseline: V2 impact windows + legacy melee cap=1, max three frontline")
+	print("[HushiroCombatChamber] Pressure baseline: V2 impact windows + legacy melee cap=1, role-aware frontline autoscale")
 
 
-static func phase7_pressure_limits(alive: int, hounds: int) -> Dictionary:
+static func phase7_pressure_limits(alive: int, hounds: int, frontline_pressure: int = -1) -> Dictionary:
 	var safe_alive: int = maxi(0, alive)
 	var safe_hounds: int = clampi(hounds, 0, safe_alive)
+	# Keep two-argument callers backward compatible by treating unknown role composition
+	# as the old coarse all-bodies pressure estimate. Live Hushiro runtime supplies the
+	# authored close-pressure count explicitly.
+	var safe_frontline_pressure: int = safe_alive if frontline_pressure < 0 else clampi(frontline_pressure, 0, safe_alive)
 
-	# Non-Hound compositions keep the previous conservative Hushiro movement envelope.
-	# Hound packs gain room to hunt from several angles now that their attacks use
-	# PressureDirectorV2 impact windows instead of whole-turn ownership. Even the
-	# four-Hound authored packs stop at three simultaneous advance slots and four
-	# frontline bodies so the 800x450 prototype room retains readable escape lanes.
+	# `advance_move` remains conservative outside Hound packs. Hound-heavy encounters
+	# gain one extra movement slot because their migrated predator attacks use future
+	# impact scheduling rather than whole-turn ownership.
 	var advance_limit: int = clampi(safe_alive, 1, 2)
-	var frontline_limit: int = 3
 	if safe_hounds >= 3:
 		advance_limit = maxi(1, mini(3, safe_alive))
+
+	# Frontline occupancy is a different concern from attack admission. Four or more
+	# actual close-pressure bodies may now occupy four slots, while ranged/spatial-heavy
+	# waves retain the three-body envelope even when total population reaches six.
+	var frontline_limit: int = 3
+	if safe_hounds >= 3 or safe_frontline_pressure >= 4:
 		frontline_limit = maxi(2, mini(4, safe_alive))
 	elif safe_hounds == 2:
-		advance_limit = maxi(1, mini(2, safe_alive))
 		frontline_limit = maxi(2, mini(3, safe_alive))
 
 	return {
@@ -168,14 +186,18 @@ func _update_duel_tokens() -> void:
 
 	var alive: int = 0
 	var hounds: int = 0
+	var frontline_pressure: int = 0
 	for enemy: Node in get_tree().get_nodes_in_group("enemy"):
 		if not (is_instance_valid(enemy) and is_ancestor_of(enemy)):
 			continue
 		alive += 1
-		if str(enemy.get_meta("hushiro_enemy_type", "")) == "hound":
+		var enemy_type: String = str(enemy.get_meta("hushiro_enemy_type", ""))
+		if enemy_type == "hound":
 			hounds += 1
+		if PHASE7_FRONTLINE_PRESSURE_TYPES.has(enemy_type):
+			frontline_pressure += 1
 
-	var limits: Dictionary = phase7_pressure_limits(alive, hounds)
+	var limits: Dictionary = phase7_pressure_limits(alive, hounds, frontline_pressure)
 	var melee_limit: int = int(limits.get("melee_limit", 1))
 	var ranged_limit: int = int(limits.get("ranged_limit", 1))
 	var advance_limit: int = int(limits.get("advance_limit", 2))
@@ -204,12 +226,13 @@ func _update_duel_tokens() -> void:
 		CombatTelemetry.record_event("hushiro_pressure_limits", {
 			"alive": alive,
 			"hounds": hounds,
+			"frontline_pressure": frontline_pressure,
 			"melee_limit": melee_limit,
 			"ranged_limit": ranged_limit,
 			"advance_limit": advance_limit,
 			"frontline_limit": frontline_limit,
 			"dog_lunge_limit": dog_lunge_limit,
-			"policy": "phase7_pack_pressure",
+			"policy": "phase7_role_aware_frontline",
 		})
 
 
