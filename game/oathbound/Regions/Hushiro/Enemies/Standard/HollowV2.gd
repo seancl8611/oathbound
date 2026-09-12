@@ -108,12 +108,22 @@ func _tick_chase(now: float) -> void:
 		return
 
 	var toward: Vector2 = to_player / maxf(0.001, distance)
+	var delta: float = get_physics_process_delta_time()
+
+	# Hollows keep their swarm identity and never acquire the V1 `advance_move` gate,
+	# but the room's role-aware crowd backoff must still be authoritative. Excess swarm
+	# bodies retreat until their selected backoff expires and cannot start a fresh bite.
+	if now < _backoff_until:
+		if _v2_enemy_brain != null:
+			_v2_enemy_brain.set_intent(&"reposition", now, "crowd_backoff")
+		_v2_move_retreat(delta, toward)
+		return
+
 	var scores: Dictionary = _v2_hollow_intent_scores(now, distance)
 	var intent: StringName = &"approach"
 	if _v2_enemy_brain != null and is_instance_valid(_v2_enemy_brain):
 		intent = _v2_enemy_brain.choose_intent(now, scores)
 
-	var delta: float = get_physics_process_delta_time()
 	match intent:
 		&"bite":
 			if _v2_try_start_bite(now, distance, toward):
@@ -128,7 +138,12 @@ func _tick_chase(now: float) -> void:
 
 
 func _v2_hollow_intent_scores(now: float, distance: float) -> Dictionary:
-	var bite_ready: bool = now >= _next_attack_ready and now >= _v2_pressure_retry_until and distance <= attack_range
+	var bite_ready: bool = (
+		now >= _next_attack_ready
+		and now >= _v2_pressure_retry_until
+		and now >= _backoff_until
+		and distance <= attack_range
+	)
 
 	var bite_score: float = -INF
 	if bite_ready:
@@ -452,4 +467,8 @@ func get_v2_hollow_intent() -> String:
 
 
 func uses_legacy_hollow_turn_token() -> bool:
+	return false
+
+
+func uses_legacy_advance_move_gate() -> bool:
 	return false
