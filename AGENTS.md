@@ -24,19 +24,19 @@ Single durable bootstrap + live handoff for AI-assisted Oathbound work. Reposito
 ## LIVE_STATE
 ```yaml
 schema: 8
-updated_utc: 2026-09-13T05:40:00Z
+updated_utc: 2026-09-13T05:50:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 173
-  feature_head: 0ae6a8f5effb1ebb05006745985c7de196943ce0
-  merge_commit: 2adfa0a8f4cf1c4d47ccc05c1120f76af28a1aa5
+  pr: 175
+  feature_head: 75c19c061c91b74b461fe25af14ec08c9ea4e964
+  merge_commit: cd1c2b7c9afddd7e5a53e6f7536d1ab9c6f0da11
   validation: >-
-    Exact PR #173 head finished green across Hushiro Combat Contract Gate, Godot 4.7.2 Project Check, Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff, RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content, and Region Transition Presentation. The dedicated Bilemass landing-readability hard gate passed after replacing sub-second wall-clock sleeps with deterministic elapsed-time stage/deadline boundary helpers used by the runtime itself.
+    Exact PR #175 head finished green across Hushiro Combat Contract Gate, Godot 4.7.2 Project Check, Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff, RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content, and Region Transition Presentation. The modified Hushiro defense-contract step passed with each floating HP-number probe isolated from persistent cooldown bookkeeping and prior 0.6s transient UI nodes; production DamageNumberManager behavior was not changed.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 2adfa0a8f4cf1c4d47ccc05c1120f76af28a1aa5
-known_good_checkpoint: 2adfa0a8f4cf1c4d47ccc05c1120f76af28a1aa5
+covered_through_substantive_commit: cd1c2b7c9afddd7e5a53e6f7536d1ab9c6f0da11
+known_good_checkpoint: cd1c2b7c9afddd7e5a53e6f7536d1ab9c6f0da11
 frozen_playtest:
   branch: playtest/area1-hack-and-slash-2026-09-12
   head: 824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a
@@ -44,27 +44,26 @@ frozen_playtest:
   guide: docs/playtests/AREA1_HACK_AND_SLASH_PLAYTEST_2026-09-12.md
   immutable: true
 current_objective: >-
-  Preserve the merged Area 1 player-paced hack-and-slash target and evaluate it through the frozen manual playtest snapshot. Continue evidence-backed architecture, presentation, and validation cleanup without subjective population/durability/PressureDirector tuning. Direct contact, projectile, and hazard readability should each consume the timing authority appropriate to the threat rather than being forced through one universal prompt.
+  Preserve the merged Area 1 player-paced hack-and-slash target and evaluate it through the frozen manual playtest snapshot. Direct contact, projectile, and ground-hazard readability now each consume the threat-appropriate timing authority and have deterministic hard-gate coverage. Do not begin subjective population/durability/PressureDirector tuning without playtest evidence.
 next_action: >-
-  Keep every frozen playtest branch unchanged. Manual-test `playtest/area1-hack-and-slash-2026-09-12` at exact head `824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a` and return matching Godot `.log` + `combat_*.jsonl` before subjective tuning. Evidence-backed cleanup may continue from updated `main`: isolate the transient `HushiroDefenseContractSmoke` floating-damage-number count/value assertion from `DamageNumberManager` cooldown/lifetime timing without changing damage presentation or gameplay semantics. PR #171 failed that assertion once and passed unchanged on rerun; PR #173 also passed it unchanged.
+  Keep every frozen playtest branch unchanged. The current evidence-backed presentation/validation cleanup queue is clear. Manual-test `playtest/area1-hack-and-slash-2026-09-12` at exact head `824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a` and return the matching Godot `.log` plus `combat_*.jsonl` before subjective combat tuning. If new objective defects are discovered independently, fix them from updated `main` in bounded packages; do not manufacture numerical tuning work merely to keep coding.
 current_batch:
-  - PR #173 merged at `2adfa0a8f4cf1c4d47ccc05c1120f76af28a1aa5` from exact head `0ae6a8f5effb1ebb05006745985c7de196943ce0`.
-  - Cellar Bilemass keeps canonical target selection, spit cadence, hazard launch, puddle construction, DoT, slow, lifetime, radius, caps, and PressureDirector admission unchanged.
-  - `Core/Combat/BilemassLandingReadability.gd` observes the canonical committed `_pending_spit_indicator`, hides only its legacy visual, and mirrors the authored target with spatial ground-hazard presentation.
-  - The warning now spans the full remaining authored launch timeline after the legacy marker appears: `spit_vomit_duration + spit_travel_time`, currently `0.45 + 3.0 = 3.45s`, instead of expiring roughly 0.45s before puddle arrival.
-  - Existing light/medium/dark Bilemass indicator textures advance through deterministic thirds of that remaining timeline; the runtime exposes pure elapsed-time stage/deadline helpers so CI does not depend on sub-second runner sleeps.
-  - The first armed process frame is guaranteed to remain LIGHT even under a long headless frame; later stage selection is computed from elapsed time, and presentation clears at the predicted landing deadline or pre-landing cancellation.
-  - Bilemass warning metadata is explicitly `hazard_language=ground_landing` and `parry_prompt=false`; it is spatial hazard language, not direct-contact or projectile counter language.
-  - Bilemass landing telemetry records arm timing, stage changes, deadline, target, and cleanup reason without spawning/cancelling the canonical hazard.
-  - Exact PR #173 head passed all nine required workflows, including the fail-fast Bilemass landing-readability gate and unchanged Hushiro defense semantics.
-  - The PR #171 one-off floating-damage-number failure remains validation-cleanup evidence only: the exact unchanged rerun passed, and PR #173 passed the same defense contract unchanged.
-  - PR #169 remains the authority for direct close-frontline Hushiro counter cues: active PressureDirectorV2 `impact_at`, final 0.20 s warning, final 0.12 s inner mark, fixed scale, hide at predicted contact.
-  - PR #171 remains the authority for post-launch Corrupted Archer defensive readability: projectile-local collision-course ETA, final 0.20 s warning, final 0.12 s perfect-parry beat, lateral-dodge suppression, and immediate clear after ownership changes.
-  - PR #145 remains closed/superseded and must not be revived; its legacy timing adapter failed its own deterministic traversal before Combat V2 advanced.
+  - PR #175 merged at `cd1c2b7c9afddd7e5a53e6f7536d1ab9c6f0da11` from exact head `75c19c061c91b74b461fe25af14ec08c9ea4e964`.
+  - `HushiroDefenseContractSmoke` now isolates guarded, unguarded, and overkill floating-HP-number probes instead of waiting 0.12s for a production cooldown and accumulating earlier 0.6s transient damage-number nodes.
+  - Test-only isolation clears `DamageNumberManager.damage_display_timer` and queues prior `NumberLabel` presentation nodes free before each independent count/value assertion.
+  - Production `DamageNumberManager.gd` is unchanged: its 0.1s target+type cooldown, 0.6s number animation, accessibility behavior, HP-only policy, scene ownership, and gameplay presentation all remain authoritative.
+  - This resolves the validation weakness exposed when PR #171 failed the existing count/value probe once and then passed the exact unchanged rerun; PRs #173/#174 also passed the old probe unchanged, supporting a test-timing diagnosis rather than gameplay regression.
+  - Exact PR #175 head passed all nine required workflows, including the modified defense-contract step and the fail-fast player-paced/direct/projectile/Bilemass combat contract gate.
+  - PR #173 remains the authority for Cellar Bilemass landing readability: full remaining `spit_vomit_duration + spit_travel_time` warning, staged light/medium/dark spatial presentation, `ground_landing` language, `parry_prompt=false`, and presentation-only telemetry.
+  - PR #171 remains the authority for post-launch Corrupted Archer defensive readability: projectile-local collision-course ETA, final 0.20s warning, final 0.12s perfect-parry beat, lateral-dodge suppression, and immediate clear after ownership changes.
+  - PR #169 remains the authority for direct close-frontline Hushiro counter cues: active PressureDirectorV2 `impact_at`, final 0.20s warning, final 0.12s inner mark, fixed scale, hide at predicted contact.
+  - PR #145 remains closed/superseded and must not be revived.
   - Base katana Health damage remains 9 -> 12 -> 21; six clean hits total 84. Six-hit pressure is capability, not standard enemy durability.
   - Area 1 Health targets remain Hollow 40 (~3 clean hits), Hound 50 (~4), Archer 45 (~4), Swordsman 60 (5), Bilemass 60 (5), Warden 140 (~11 durable exception).
   - Immediate clear -> next wave, 120-second anti-stall escalation, burst/staggered/sequence arrivals, and directional basic-attack soft targeting remain intact.
 recent_batches:
+  - pr_175: deterministic Hushiro defense damage-number smoke isolation; production manager untouched; 9/9 exact-head workflows green.
+  - pr_174: durable control-plane checkpoint after Bilemass landing readability.
   - pr_173: Bilemass ground warning synchronized to full vomit+travel landing timeline; staged spatial/non-parry readability + telemetry; deterministic boundary validation; 9/9 exact-head workflows green.
   - pr_172: durable control-plane checkpoint after Archer projectile readability.
   - pr_171: flight-local Corrupted Archer defensive readability + dynamic collision-course ETA telemetry; exact unchanged semantics rerun green after one transient damage-number UI assertion.
@@ -108,6 +107,7 @@ confirmed:
   - Heart combat remains intentionally unauthored; do not invent a kill path without dedicated encounter authority.
   - Numerical balance/economy/difficulty tuning remains evidence-driven.
   - Frozen playtest branches are immutable comparison artifacts.
+  - Validation-only probes may isolate persistent autoload UI/cooldown state when that state is not the contract under test; never change production behavior merely to satisfy a flaky smoke.
 avoid_without_evidence:
   - unbounded whole-game combat rewrite instead of dependency-sized V2 packages
   - suppressing/removing PostureBar before an approved replacement
@@ -128,6 +128,7 @@ avoid_without_evidence:
   - treating Archer pressure as a melee token
   - treating Bilemass puddle pressure as an ordinary projectile hit or parryable warning
   - treating Warden as a permanent-block tank
+  - changing production cooldown/lifetime behavior to make a validation smoke deterministic
   - invented Heart combat
   - unrelated PR growth
 ```
@@ -160,6 +161,7 @@ avoid_without_evidence:
 - Archer final flight readability must remain projectile-local and geometry-aware; it is not authority for projectile mechanics.
 - Bilemass ground-hazard readability must stay spatial and synchronized to actual puddle landing; it is not a parry/counter cue.
 - Combat CI must fail hard on a missing expected PASS marker or failed Godot smoke; do not trust a green wrapper if an inner assertion reports FAIL. Diagnose isolated transient UI/timing assertions before modifying unrelated gameplay code.
+- Prefer deterministic state isolation/boundary assertions over sub-second wall-clock sleeps when timing itself is not the contract under test.
 - `.godot/`/`.import/` are untracked; verify source assets + clean import before declaring missing.
 
 ## DESIGN_ACCESS
