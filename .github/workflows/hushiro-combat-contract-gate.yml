@@ -90,6 +90,17 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Bilemass landing readability
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/BilemassLandingReadabilitySmoke.tscn 2>&1 | tee bilemass-landing-readability.log
+          grep -F "[BilemassLandingReadabilitySmoke] PASS - full remaining landing timeline | light-medium-dark stages | spatial-only warning | cancel cleanup" bilemass-landing-readability.log
+          if grep -F "SCRIPT ERROR:" bilemass-landing-readability.log; then
+            echo "FAIL: Bilemass landing readability smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Verify all migrated standard-enemy contracts
         shell: bash
         run: |
@@ -144,6 +155,7 @@ jobs:
             player-pressure.log
             counter-cue-pressure.log
             archer-projectile-counter-cue.log
+            bilemass-landing-readability.log
             swordsman-action-motor.log
             hound-v2.log
             hollow-v2.log

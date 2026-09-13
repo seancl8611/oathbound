@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Core/Combat/Validation/BilemassLandingReadabilitySmoke.gd" id="1_smoke"]
+
+[node name="BilemassLandingReadabilitySmoke" type="Node"]
+script = ExtResource("1_smoke")
