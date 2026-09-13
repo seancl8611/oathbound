@@ -132,6 +132,9 @@ func _test_directional_target_handoff(player: Node) -> void:
 	# Player, free that enemy between physics frames, then run the exact steering path.
 	# A typed Node2D re-bind of the stale reference used to throw before viability could
 	# call is_instance_valid(), spamming the debugger and effectively stalling the run.
+	# The steering path's live intent can be mouse-derived, so this assertion protects
+	# lifetime safety only; explicit deterministic reacquisition is checked immediately
+	# below with a supplied Vector2.RIGHT intent.
 	var profiles: Array = ASPECT_CATALOG.get_basic_profiles(ASPECT_CATALOG.NO_ASPECT, 0)
 	if not profiles.is_empty():
 		player.set("_attack_profile", (profiles[0] as Dictionary).duplicate(true))
@@ -141,7 +144,10 @@ func _test_directional_target_handoff(player: Node) -> void:
 	await get_tree().process_frame
 	player.call("_v2_update_attack_steering", 1.0 / 60.0)
 	var recovered_value: Variant = player.call("get_v2_attack_soft_target")
-	_expect(recovered_value == secondary, "steering did not safely reacquire after its stored target was freed")
+	_expect(
+		recovered_value == null or (is_instance_valid(recovered_value) and recovered_value is Node2D),
+		"steering retained an invalid soft-target reference after its stored target was freed"
+	)
 
 	var second_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.RIGHT)
 	_expect(second_value == secondary, "target handoff did not reacquire a nearby forward enemy after the first target died")
