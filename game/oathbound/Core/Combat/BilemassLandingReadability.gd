@@ -21,6 +21,10 @@ const LIGHT_ALPHA: float = 0.70
 const MEDIUM_ALPHA: float = 0.86
 const DARK_ALPHA: float = 1.00
 
+const MEDIUM_STAGE_PROGRESS: float = 1.0 / 3.0
+const DARK_STAGE_PROGRESS: float = 2.0 / 3.0
+const MIN_WARNING_DURATION: float = 0.01
+
 var _active_indicator: Node2D = null
 var _active_sprite: Sprite2D = null
 var _active_stage: StringName = &""
@@ -56,9 +60,11 @@ func _process(_delta: float) -> void:
 		_clear_active_indicator("spit_cancelled")
 		return
 
-	_update_stage(now)
-	if now >= _landing_at:
+	var elapsed: float = maxf(0.0, now - _warning_started_at)
+	if landing_due_for_elapsed(elapsed, _warning_duration):
 		_clear_active_indicator("landing_due")
+		return
+	_update_stage_for_elapsed(elapsed)
 
 
 func _observe_new_pending_indicator(source: Node) -> bool:
@@ -126,21 +132,31 @@ func _start_spatial_warning(source: Node, target_position: Vector2) -> void:
 		})
 
 
-func _update_stage(now: float) -> void:
+func _update_stage_for_elapsed(elapsed: float) -> void:
 	if _warning_duration <= 0.0:
 		return
-	var elapsed: float = clampf(now - _warning_started_at, 0.0, _warning_duration)
-	var progress: float = clampf(elapsed / _warning_duration, 0.0, 1.0)
-	var stage: StringName = STAGE_LIGHT
-	if progress >= (2.0 / 3.0):
-		stage = STAGE_DARK
-	elif progress >= (1.0 / 3.0):
-		stage = STAGE_MEDIUM
+	var stage: StringName = stage_for_elapsed(elapsed, _warning_duration)
 	if stage == _active_stage:
 		return
 	var source: Node = get_parent()
 	if source != null and is_instance_valid(source):
 		_apply_stage(source, stage)
+
+
+static func stage_for_elapsed(elapsed: float, duration: float) -> StringName:
+	var safe_duration: float = maxf(duration, MIN_WARNING_DURATION)
+	var safe_elapsed: float = maxf(elapsed, 0.0)
+	var progress: float = clampf(safe_elapsed / safe_duration, 0.0, 1.0)
+	if progress >= DARK_STAGE_PROGRESS:
+		return STAGE_DARK
+	if progress >= MEDIUM_STAGE_PROGRESS:
+		return STAGE_MEDIUM
+	return STAGE_LIGHT
+
+
+static func landing_due_for_elapsed(elapsed: float, duration: float) -> bool:
+	var safe_duration: float = maxf(duration, MIN_WARNING_DURATION)
+	return maxf(elapsed, 0.0) >= safe_duration
 
 
 func _apply_stage(source: Node, stage: StringName) -> void:
@@ -196,9 +212,9 @@ func _hide_legacy_indicator_visual(pending: Node2D) -> void:
 func expected_warning_duration(source: Node = null) -> float:
 	var actor: Node = source if source != null else get_parent()
 	if actor == null or not is_instance_valid(actor):
-		return 0.01
+		return MIN_WARNING_DURATION
 	return maxf(
-		0.01,
+		MIN_WARNING_DURATION,
 		_read_float(actor, "spit_vomit_duration", 0.0)
 		+ _read_float(actor, "spit_travel_time", 0.0)
 	)
