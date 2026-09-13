@@ -8,6 +8,7 @@ class_name HushiroEnemyContract
 ## and Inspector overrides have run, so imported values cannot silently replace the
 ## current playtest baseline.
 
+const CONTRACT_REVISION: int = 2
 const POSTURE_RECOVER_DELAY: float = 1.5
 const POSTURE_RECOVER_RATE: float = 20.0
 const POSTURE_BREAK_DURATION: float = 2.5
@@ -46,12 +47,21 @@ const BASELINES: Dictionary = {
 const CLOSE_PRESSURE_TYPES: Array[String] = ["swordsman", "hollow", "hound", "warden"]
 
 
-static func apply(enemy: Node, enemy_type: String) -> void:
+static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 	if enemy == null or not is_instance_valid(enemy):
 		return
 
 	var key: String = enemy_type.to_lower()
 	if not BASELINES.has(key):
+		return
+
+	# HushiroEnemyRuntime has two legitimate discovery paths: node_added for new spawns
+	# and a deferred sweep for actors that already existed when the runtime initialized.
+	# Those paths can converge on the same actor in one frame. Re-running this contract
+	# used to duplicate telemetry and could reset live Posture/config state a second time.
+	# Treat the shared contract as an idempotent install boundary. Callers that truly
+	# need to re-normalize an already-installed actor must opt in with force=true.
+	if not force and is_current_contract(enemy, key):
 		return
 
 	var baseline: Dictionary = BASELINES[key]
@@ -114,6 +124,13 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 	if key == "hound":
 		_attach_hound_combat_runtime(enemy)
 
+	# Set the install marker only after normalization/runtime attachment completes so a
+	# partial/failed path can never masquerade as a successful current contract.
+	var application_count: int = int(enemy.get_meta("hushiro_contract_apply_count", 0)) + 1
+	enemy.set_meta("hushiro_contract_revision", CONTRACT_REVISION)
+	enemy.set_meta("hushiro_contract_enemy_type", key)
+	enemy.set_meta("hushiro_contract_apply_count", application_count)
+
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("hushiro_enemy_contract_applied", {
 			"enemy_type": key,
@@ -130,7 +147,19 @@ static func apply(enemy: Node, enemy_type: String) -> void:
 			"frontline_pressure_body": bool(enemy.get_meta("oathbound_frontline_pressure_body", true)),
 			"pressure_role": str(enemy.get_meta("oathbound_pressure_role", "melee")),
 			"kill_time_contract": "area1_player_paced",
+			"contract_revision": CONTRACT_REVISION,
+			"application_count": application_count,
 		})
+
+
+static func is_current_contract(enemy: Node, enemy_type: String) -> bool:
+	if enemy == null or not is_instance_valid(enemy):
+		return false
+	var key: String = enemy_type.to_lower()
+	return (
+		int(enemy.get_meta("hushiro_contract_revision", 0)) == CONTRACT_REVISION
+		and str(enemy.get_meta("hushiro_contract_enemy_type", "")) == key
+	)
 
 
 static func apply_pressure_metadata(enemy: Node, enemy_type: String) -> void:

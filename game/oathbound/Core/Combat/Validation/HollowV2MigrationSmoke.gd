@@ -40,6 +40,17 @@ func _run() -> void:
 	else:
 		_fail("Hollow missing CombatController")
 
+	# HushiroEnemyRuntime can discover one spawn through both node_added and its initial
+	# deferred sweep. The shared contract must make those converging paths a no-op after
+	# the first successful install instead of resetting live state / duplicating telemetry.
+	_expect(int(hollow.get_meta("hushiro_contract_apply_count", 0)) == 1, "Hollow contract was installed more than once during spawn")
+	_expect(bool(HUSHIRO_ENEMY_CONTRACT.is_current_contract(hollow, "hollow")), "Hollow current contract marker is missing")
+	if combat != null and combat.has_method("set_posture") and combat.has_method("get_posture"):
+		combat.call("set_posture", 7.0)
+		HUSHIRO_ENEMY_CONTRACT.apply(hollow, "hollow")
+		_expect(int(hollow.get_meta("hushiro_contract_apply_count", 0)) == 1, "repeated Hollow contract apply was not idempotent")
+		_expect(is_equal_approx(float(combat.call("get_posture")), 7.0), "repeated Hollow contract apply reset live Posture")
+
 	if hollow.has_method("uses_legacy_hollow_turn_token"):
 		_expect(not bool(hollow.call("uses_legacy_hollow_turn_token")), "Hollow still declares legacy whole-turn ownership")
 	else:
