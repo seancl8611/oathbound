@@ -128,8 +128,21 @@ func _test_directional_target_handoff(player: Node) -> void:
 	var first_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.RIGHT)
 	_expect(first_value == aligned, "target handoff did not prefer the enemy most aligned with player intent")
 
+	# Reproduce the manual-playtest lifetime failure: keep the selected target in the
+	# Player, free that enemy between physics frames, then run the exact steering path.
+	# A typed Node2D re-bind of the stale reference used to throw before viability could
+	# call is_instance_valid(), spamming the debugger and effectively stalling the run.
+	var profiles: Array = ASPECT_CATALOG.get_basic_profiles(ASPECT_CATALOG.NO_ASPECT, 0)
+	if not profiles.is_empty():
+		player.set("_attack_profile", (profiles[0] as Dictionary).duplicate(true))
+	player.set("_move_input", Vector2.RIGHT)
+	player.call("_v2_set_attack_soft_target", aligned, Vector2.RIGHT, "smoke_seed")
 	aligned.queue_free()
 	await get_tree().process_frame
+	player.call("_v2_update_attack_steering", 1.0 / 60.0)
+	var recovered_value: Variant = player.call("get_v2_attack_soft_target")
+	_expect(recovered_value == secondary, "steering did not safely reacquire after its stored target was freed")
+
 	var second_value: Variant = player.call("_v2_acquire_attack_soft_target", Vector2.RIGHT)
 	_expect(second_value == secondary, "target handoff did not reacquire a nearby forward enemy after the first target died")
 
