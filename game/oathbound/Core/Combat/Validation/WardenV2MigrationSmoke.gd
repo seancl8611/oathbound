@@ -98,18 +98,24 @@ func _run() -> void:
 			_expect(profile.profile_id == "warden_v2", "Warden attached the wrong response profile")
 			_expect(profile.guard_duration <= 0.25, "Warden guard became a long defensive stall")
 			_expect(profile.guard_cooldown >= 1.50, "Warden guard cooldown is too short for a support/control enemy")
-			_expect(profile.neutral_poise_required == 1, "neutral Warden gained hidden armor")
-			_expect(profile.committed_poise_required == 2, "committed Warden melee lost authored Poise")
+			_expect(profile.neutral_poise_required == 2, "neutral Warden is not using the heavy/control Poise tier")
+			_expect(profile.committed_poise_required == 3, "committed Warden is not using the heavy/control Poise tier")
+			_expect(profile.guard_break_poise_required == 2, "Warden guard-break resistance changed with flinch Poise")
 		else:
 			_fail("Warden response runtime has no authored profile")
 	else:
 		_fail("Warden response runtime unavailable for profile assertion")
 
-	_expect(bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 1, false)), "light clean hit cannot interrupt neutral/early Warden")
+	# Heavy/control role: ordinary power-1 sword pressure cannot flinch a neutral Warden.
+	# Base Heavy power 2 can interrupt neutral behavior, but all committed Warden attacks
+	# now require explicit power 3. The chain's identity-specific override remains aligned.
+	_expect(not bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 1, false)), "light hit incorrectly interrupts neutral Warden")
+	_expect(bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 2, false)), "base Heavy cannot interrupt neutral Warden")
 	_expect(not bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 1, true)), "light hit incorrectly interrupts committed Warden chain")
-	_expect(not bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 2, true)), "medium Poise hit incorrectly interrupts identity-defining committed chain")
+	_expect(not bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 2, true)), "base Heavy incorrectly interrupts identity-defining committed chain")
 	_expect(bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 3, true)), "strong Poise hit cannot interrupt committed Warden chain")
-	_expect(bool(warden.call("should_v2_warden_interrupt_for_test", QUICK_THRUST, 2, true)), "ordinary committed Warden melee requires chain-level Poise")
+	_expect(not bool(warden.call("should_v2_warden_interrupt_for_test", QUICK_THRUST, 2, true)), "base Heavy incorrectly interrupts committed Warden melee")
+	_expect(bool(warden.call("should_v2_warden_interrupt_for_test", QUICK_THRUST, 3, true)), "power-3 impact cannot interrupt committed Warden melee")
 
 	if warden.has_method("has_v2_warden_pressure_runtime"):
 		_expect(bool(warden.call("has_v2_warden_pressure_runtime")), "Warden cannot reach PressureDirectorV2")

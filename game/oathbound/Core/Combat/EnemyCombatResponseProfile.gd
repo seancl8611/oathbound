@@ -33,6 +33,9 @@ static func corrupted_swordsman_v2() -> EnemyCombatResponseProfile:
 	profile.guard_cooldown = 1.15
 	profile.guard_break_cooldown = 1.65
 	profile.guard_range = 95.0
+	# Standard martial body: easy to flinch while neutral, but a committed attack
+	# needs a heavier impact. This keeps authored commitment meaningful without making
+	# ordinary Swordsmen behave like brutes.
 	profile.neutral_poise_required = 1
 	profile.committed_poise_required = 2
 	profile.guard_break_poise_required = 2
@@ -48,8 +51,11 @@ static func blighted_hound_v2() -> EnemyCombatResponseProfile:
 	profile.guard_cooldown = 0.0
 	profile.guard_break_cooldown = 0.0
 	profile.guard_range = 0.0
+	# Light predator: baseline sword pressure should be able to knock it out of a bite
+	# or lunge commitment. Its danger comes from pack pressure, speed, and timing rather
+	# than armor-like interruption resistance.
 	profile.neutral_poise_required = 1
-	profile.committed_poise_required = 2
+	profile.committed_poise_required = 1
 	profile.guard_break_poise_required = 2
 	return profile
 
@@ -63,6 +69,7 @@ static func hollow_v2() -> EnemyCombatResponseProfile:
 	profile.guard_cooldown = 0.0
 	profile.guard_break_cooldown = 0.0
 	profile.guard_range = 0.0
+	# Fodder body: any clean baseline sword contact may flinch or cancel an attack.
 	profile.neutral_poise_required = 1
 	profile.committed_poise_required = 1
 	profile.guard_break_poise_required = 1
@@ -78,6 +85,8 @@ static func corrupted_archer_v2() -> EnemyCombatResponseProfile:
 	profile.guard_cooldown = 1.35
 	profile.guard_break_cooldown = 1.65
 	profile.guard_range = 56.0
+	# Fragile ranged body: closing distance should let Akio suppress its committed shot
+	# with ordinary offense rather than entering a miniature duel.
 	profile.neutral_poise_required = 1
 	profile.committed_poise_required = 1
 	profile.guard_break_poise_required = 1
@@ -110,16 +119,19 @@ static func warden_v2() -> EnemyCombatResponseProfile:
 	# The Warden is a hulking restraint/support threat, not a shield wall. Preserve the
 	# current full-Health reactive block when it happens, but make guard a short tactical
 	# punctuation mark with meaningful Posture pressure and a long cooldown instead of
-	# inheriting HumanoidEnemyBase's permanent proximity block. Neutral movement remains
-	# interruptible; committed attacks require a stronger impact. The chain cast layers
-	# an additional commitment rule in WardenV2 because its restraint is the identity move.
+	# inheriting HumanoidEnemyBase's permanent proximity block.
 	profile.guard_health_multiplier = 0.0
 	profile.guard_posture_multiplier = 1.25
 	profile.guard_duration = 0.22
 	profile.guard_cooldown = 1.55
 	profile.guard_break_cooldown = 1.85
 	profile.guard_range = 68.0
-	profile.neutral_poise_required = 1
-	profile.committed_poise_required = 2
+
+	# Heavy/control exception: light baseline sword contacts still deal full authored
+	# Health/Posture, but do not flinch a neutral Warden. A heavy baseline impact can
+	# interrupt neutral movement, while committed Warden attacks require explicit power 3
+	# or stronger. Guard-break resistance remains separately authored at power 2.
+	profile.neutral_poise_required = 2
+	profile.committed_poise_required = 3
 	profile.guard_break_poise_required = 2
 	return profile

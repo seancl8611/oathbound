@@ -90,8 +90,9 @@ func _test_canonical_hound_v2_runtime() -> void:
 	else:
 		_fail("Hound pressure request surface unavailable")
 
-	# The response model makes the beast easy to stagger while neutral but gives a
-	# committed pounce enough Poise to survive a weak hit. Strong impacts still stop it.
+	# The Hound is now explicitly a light predator in the role-based Poise baseline.
+	# Pack movement and pressure scheduling create its danger; a clean ordinary sword
+	# contact may interrupt even a committed pounce, while strong impacts remain valid.
 	if hound.has_method("_begin_v2_hound_action"):
 		hound.call("_begin_v2_hound_action", &"hound_smoke_lunge", 0.40, 0.20, 0.30, 0.50, 0.34, 0.08, 0.0, 0.58)
 		_expect(str(hound.call("get_v2_hound_action_phase")) == "STARTUP", "Hound action did not enter STARTUP")
@@ -101,7 +102,7 @@ func _test_canonical_hound_v2_runtime() -> void:
 		_expect(str(hound.call("get_v2_hound_action_phase")) == "COMMITTED", "Hound action did not expose commitment boundary")
 		var response: Node = hound.get_node_or_null("EnemyCombatResponseRuntime")
 		if response != null:
-			_expect(not bool(response.call("should_interrupt", null, {}, true)), "weak hit incorrectly interrupts committed Hound action")
+			_expect(bool(response.call("should_interrupt", null, {}, true)), "ordinary hit failed to interrupt committed light Hound action")
 			_expect(bool(response.call("should_interrupt", null, {"heavy": true}, true)), "strong hit failed to interrupt committed Hound action")
 		else:
 			_fail("Hound response runtime unavailable for Poise validation")
