@@ -83,6 +83,7 @@ func _make_player_sword_hitbox(player: Node, suffix: String) -> Area2D:
 
 
 func _verify_damage_number_manager_rejects_non_hp_values() -> void:
+	await _reset_damage_number_probe()
 	var count_before: int = _count_damage_number_nodes()
 	DamageNumberManager.show_damage_number(0, Vector2.ZERO, "normal", null)
 	DamageNumberManager.show_damage_number(-14, Vector2.ZERO, "normal", null)
@@ -160,6 +161,10 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	var guarded_hitbox: Area2D = _make_player_sword_hitbox(player, "Guarded")
 	sword_origin.add_child(guarded_hitbox)
 
+	# The semantic probe owns its own clean presentation baseline. A previous Player hit
+	# may still have a 0.6s transient number alive, and the manager intentionally keeps a
+	# 0.1s target+type cooldown. Neither lifetime is part of the guard/HP-number contract.
+	await _reset_damage_number_probe()
 	var guarded_number_count_before: int = _count_damage_number_nodes()
 	enemy.call("_on_hurt_box_hurt", 12, "sword_light", guarded_hitbox)
 	await get_tree().process_frame
@@ -172,10 +177,10 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	)
 	_expect(_latest_damage_number_text() == "4", "guarded floating number did not equal actual enemy HP lost")
 
-	# DamageNumberManager intentionally rate-limits duplicate target+type presentation
-	# for 0.1s. These are separate semantic assertions, so wait beyond that UI-only
-	# cooldown before validating the unguarded control contact.
-	await get_tree().create_timer(0.12).timeout
+	# These are independent semantic contacts, not a cooldown timing test. Remove the
+	# prior transient UI and cooldown key deterministically instead of sleeping 0.12s and
+	# letting CI frame scheduling decide when the next assertion becomes eligible.
+	await _reset_damage_number_probe()
 
 	# A real unguarded HP hit must still create one number, and that number must
 	# equal the HP actually removed rather than Posture pressure or raw attack power.
@@ -200,8 +205,9 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 		"floating damage number did not equal actual enemy HP lost"
 	)
 
-	# Killing blows are part of the same contract. If only 5 HP remain, a 12-damage
-	# attack must show 5 rather than the requested 12.
+	# Killing blows are part of the same contract. Isolate this probe too so only the
+	# overkill HP-loss number is present when its count/value is asserted.
+	await _reset_damage_number_probe()
 	enemy.set("hp", 5)
 	var overkill_hitbox: Area2D = _make_player_sword_hitbox(player, "Overkill")
 	sword_origin.add_child(overkill_hitbox)
@@ -218,6 +224,7 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 		"overkill floating number exceeded the enemy HP actually removed"
 	)
 
+	await _reset_damage_number_probe()
 	sword_origin.queue_free()
 	if is_instance_valid(enemy):
 		enemy.queue_free()
@@ -247,6 +254,19 @@ func _verify_perilous_thrust_warning(player: Node) -> void:
 		_expect(bool(enemy.call("_current_attack_requires_perilous_warning", false)), "perilous Quick Thrust does not request the perilous warning")
 
 	enemy.queue_free()
+	await get_tree().process_frame
+
+
+func _reset_damage_number_probe() -> void:
+	# Test-only isolation: do not modify DamageNumberManager production behavior. The
+	# smoke validates one HP-number semantic contact at a time, so clear persistent
+	# cooldown bookkeeping and remove prior transient UI before establishing each count.
+	DamageNumberManager.damage_display_timer.clear()
+	var scene: Node = get_tree().current_scene
+	if scene != null:
+		for child: Node in scene.get_children():
+			if child.get_node_or_null("NumberLabel") != null:
+				child.queue_free()
 	await get_tree().process_frame
 
 
