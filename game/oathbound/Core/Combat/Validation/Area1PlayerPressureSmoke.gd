@@ -1,6 +1,7 @@
 extends Node
 
 const ASPECT_CATALOG = preload("res://Core/Aspects/AspectCatalog.gd")
+const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
 const CANONICAL_PLAYER_SCRIPT = preload("res://Player/OathboundCombatPlayer.gd")
 const PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 
@@ -37,6 +38,53 @@ func _test_damage_contract() -> void:
 		_expect(int((profiles[0] as Dictionary).get("health_damage", -1)) == 9, "Quick Slash damage changed")
 		_expect(int((profiles[1] as Dictionary).get("health_damage", -1)) == 12, "Cross Cut damage changed")
 		_expect(int((profiles[2] as Dictionary).get("health_damage", -1)) == 21, "Heavy Cleave damage changed")
+
+		# September 13 manual telemetry showed normal clean strikes opening Posture breaks
+		# before the intended HP kill cadence: a fresh 40-Posture Hollow took 36 from one
+		# Heavy, and Cross + Heavy broke another at 7 HP. Unguarded basics should primarily
+		# advance Health; block/parry interaction remains the faster tactical Posture route.
+		var expected_posture: Array[float] = [6.0, 9.0, 18.0]
+		var expected_block_posture: Array[float] = [10.0, 16.0, 36.0]
+		for index: int in range(3):
+			var profile: Dictionary = profiles[index] as Dictionary
+			_expect(
+				is_equal_approx(float(profile.get("posture_damage", -1.0)), expected_posture[index]),
+				"base katana unguarded Posture target drifted at combo index %d" % index
+			)
+			_expect(
+				is_equal_approx(float(profile.get("posture", -1.0)), expected_posture[index]),
+				"base katana Posture alias drifted at combo index %d" % index
+			)
+			_expect(
+				is_equal_approx(float(profile.get("block_posture_damage", -1.0)), expected_block_posture[index]),
+				"base katana block-Posture pressure changed at combo index %d" % index
+			)
+
+		_test_clean_hp_kill_precedes_fresh_posture_break(profiles)
+
+
+func _test_clean_hp_kill_precedes_fresh_posture_break(profiles: Array) -> void:
+	# This is a conservative no-recovery upper bound. If cumulative Posture from the clean
+	# basic sequence is still below max when cumulative Health damage reaches the authored
+	# kill threshold, ordinary HP removal wins even before normal Posture recovery helps.
+	for enemy_type: String in ["hollow", "hound", "archer", "swordsman", "bilemass", "warden"]:
+		var baseline: Dictionary = HUSHIRO_ENEMY_CONTRACT.BASELINES.get(enemy_type, {}) as Dictionary
+		var target_health: int = int(baseline.get("health", 0))
+		var max_posture: float = float(baseline.get("posture", 0.0))
+		var cumulative_health: int = 0
+		var cumulative_posture: float = 0.0
+		var hit_count: int = 0
+		while cumulative_health < target_health and hit_count < 24:
+			var profile: Dictionary = profiles[hit_count % profiles.size()] as Dictionary
+			cumulative_health += int(profile.get("health_damage", 0))
+			cumulative_posture += float(profile.get("posture_damage", 0.0))
+			hit_count += 1
+
+		_expect(cumulative_health >= target_health, "%s clean basic sequence never reached authored Health" % enemy_type)
+		_expect(
+			cumulative_posture < max_posture,
+			"%s fresh Posture would break before/equal to its clean HP kill (%0.1f/%0.1f at %d hits)" % [enemy_type, cumulative_posture, max_posture, hit_count]
+		)
 
 
 func _test_live_pressure_string() -> void:
