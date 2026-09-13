@@ -23,85 +23,60 @@ Repository state is authority; conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 9
-updated_utc: 2026-09-13T21:45:00Z
+updated_utc: 2026-09-13T21:55:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 183
-  feature_head: d28f30497df78b7f0cdd0af17bfd546d45fa9d64
-  merge_commit: be86ee8f201ce01c87f074853e94e094102c71cc
+  pr: 185
+  feature_head: fd4e3ce15754c18bb7f95d7af176e9db80a7e076
+  merge_commit: 396c21e260672aa55c903f44b9d9f0594f4f6fa7
   validation: >-
-    Exact PR #183 head passed Hushiro Combat Contract Gate, Godot 4.7.2 Project Check,
+    Exact PR #185 head passed Hushiro Combat Contract Gate, Godot 4.7.2 Project Check,
     Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff,
     RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content,
-    Region Transition Presentation, and Blood Cavern Execution Trial. The Hollow
-    migration smoke now proves shared Hushiro contract installation is idempotent and
-    a repeated non-forced apply cannot reset live Posture.
+    and Region Transition Presentation. EnemyBrain smoke now proves a real intent
+    invalidation clears to idle/no scheduled decision and a repeated invalidation is a
+    state/telemetry no-op.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: be86ee8f201ce01c87f074853e94e094102c71cc
-known_good_checkpoint: be86ee8f201ce01c87f074853e94e094102c71cc
+covered_through_substantive_commit: 396c21e260672aa55c903f44b9d9f0594f4f6fa7
+known_good_checkpoint: 396c21e260672aa55c903f44b9d9f0594f4f6fa7
 frozen_playtest:
   branch: playtest/area1-hack-and-slash-2026-09-12
   head: 824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a
   immutable: true
-manual_playtest_2026_09_13:
-  tested_main: 7b93ef1a113b5896f6426d6de039c7d6f9aa0acc
-  godot_log: godot(20260913-194339).log
-  telemetry: combat_1789328514.jsonl
-  confirmed_crash: >-
-    OathboundPlayerTargeting.gd passed a previously freed stored Node2D into typed
-    `_v2_soft_target_viable`, causing repeated physics-frame SCRIPT ERRORs and severe
-    debugger spam/lag before the run stopped.
-  crash_fix: >-
-    PR #177 keeps the stored soft-target reference as Variant until lifetime/type
-    validation succeeds through `_v2_resolve_soft_target`; steering, acquisition,
-    facing, telemetry, clearing, and public reads share that boundary. Target range,
-    aim cone, scoring, attack timing, and movement semantics are unchanged.
-  posture_evidence: >-
-    Hollow max Posture=40. Telemetry recorded Cross Cut adding 16 Posture then Heavy
-    Cleave reaching break while the Hollow still had 7 HP; another fresh Hollow took
-    36/40 Posture from one Heavy while retaining 19 HP. Ordinary clean base-katana
-    strikes were therefore opening Deathblow readiness before intended HP removal.
-  posture_fix: >-
-    PR #179 changes only no-Aspect Tier-0 ordinary basic unguarded Posture pressure:
-    Quick/Cross/Heavy 10/16/36 -> 6/9/18. Health remains 9/12/21 and block-Posture
-    remains 10/16/36. Held Thrust, dash, counter, Blood Aspects, enemy max Posture,
-    Posture recovery/break rules, Deathblow mechanics, Poise, PressureDirector, and
-    encounters remain unchanged.
-manual_playtest_2026_09_13_posture_retest:
+latest_manual_playtest:
   tested_main: 6c9c5b45372517e49166850050ad80dcc3fa69b8
   godot_log: godot(20260913-204954).log
   telemetry: combat_1789332106.jsonl
   runtime_result: >-
-    No SCRIPT ERROR, ERROR, WARNING, or freed-soft-target recurrence was present in the
-    matching Godot log. The prior target-lifetime crash/debugger spam was not reproduced.
+    No SCRIPT ERROR, ERROR, WARNING, or freed-soft-target recurrence. The PR #177
+    target-lifetime fix held during the retest.
   posture_result: >-
-    Only one enemy Posture break occurred in the run. It was a Swordsman already at
-    6 HP, and the same contact sequence immediately removed its remaining Health. The
-    PR #179 base-katana reduction therefore moved ordinary Posture back toward a
-    secondary break/control route instead of a routine standard-enemy kill route.
-  poise_evidence: >-
-    Hollow committed attacks were repeatedly cancelled by ordinary power-1 sword
-    contacts. This supports the intended light-enemy hunter flow where squishy bodies
-    are frequently interruptible. PR #181 locks the first role ladder: Hollow/Hound/
-    Archer 1/1 neutral/committed; Swordsman/Bilemass 1/2; Warden 2/3. Warden guard-break
-    Poise remains separately authored at 2.
-  cleanup_evidence: >-
-    Telemetry also showed duplicate `hushiro_enemy_contract_applied` events for Hollow
-    spawns and 304 `enemy_v2_brain_intent_invalidated` events in about 38 seconds,
-    predominantly repeated `deaggro` invalidations. PR #183 fixes the first issue at
-    the shared contract boundary: one actor/type/revision installs once unless a caller
-    explicitly requests `force=true`; application count/revision are now observable.
+    Only one Posture break occurred; the Swordsman was already at 6 HP and died through
+    Health in the same contact sequence. PR #179's no-Aspect ordinary Posture 6/9/18
+    therefore restored Health-first standard-enemy pacing in this run.
+  poise_result: >-
+    Hollow committed attacks were repeatedly cancelled by ordinary power-1 sword hits.
+    PR #181 locks the first Area 1 role baseline: Hollow/Hound/Archer 1/1 neutral/
+    committed; Swordsman/Bilemass 1/2; Warden 2/3. Warden guard-break remains 2.
+  cleanup_result: >-
+    The run exposed duplicate Hollow `hushiro_enemy_contract_applied` events and 304
+    `enemy_v2_brain_intent_invalidated` events in ~38s, mostly repeated deaggro. PR #183
+    makes Hushiro contract install idempotent per actor/type/revision; PR #185 makes an
+    already-idle/no-schedule EnemyBrain invalidation a no-op. Neither changes combat
+    tuning or actual deaggro transitions.
 current_objective: >-
-  Preserve the validated Health/Posture/Poise baselines while removing repeated no-op
-  EnemyBrain deaggro intent invalidation churn observed in the September 13 telemetry.
+  Manual-retest current merged main as one coherent gate: role-based Poise, Health-first
+  ordinary kills, soft-target handoff stability, idempotent Hushiro contract setup, and
+  reduced no-op brain invalidation telemetry.
 next_action: >-
-  Make `EnemyBrain.invalidate_intent()` idempotent when the brain is already in its
-  invalidated idle state, with deterministic EnemyBrain smoke coverage proving the
-  first invalidation clears decision state while repeated invalidation is a no-op.
-  Preserve actual deaggro transitions, decision cadence after re-engagement, enemy AI,
-  PressureDirector behavior, and all combat tuning. Do not make further numerical
+  Manual-test current merged main after this checkpoint merges. Exercise multi-enemy
+  basic strings and target handoff; deliberately attack Hollow/Hound/Archer during
+  commitments; compare Swordsman/Bilemass committed resistance; test Warden light vs
+  Heavy interruption if encountered. Return matching Godot `.log` + `combat_*.jsonl`.
+  Confirm no freed-target SCRIPT ERROR, one contract application per spawned enemy, and
+  materially reduced repeated deaggro invalidation events. Do not make further numerical
   Health/Posture/Poise/PressureDirector/encounter tuning without new playtest evidence.
 ```
 
@@ -112,52 +87,42 @@ next_action: >-
 - Project root: `game/oathbound/`; engine Godot 4.7.2.
 - Canonical Player: `res://Player/aspect_player.tscn` -> `res://Player/OathboundCombatPlayer.gd`.
 - Canonical AttackEvent only; no parallel Health/Posture damage pass.
+- Health governs defeat; Posture/Stagger governs longer-horizon break/control; Poise governs immediate flinch/interruption.
+- Taking Health damage does not inherently cancel committed actions.
+- Guard-break resistance remains separately authored from flinch Poise.
 - Player attack motion: CombatActionRunner + PlayerMotor via `OathboundPlayerMotion.gd`.
 - Player basic soft targeting: `OathboundPlayerTargeting.gd`; explicit player redirection wins; no sticky lock-on.
 - All six standard Hushiro families use shared V2 action/motor/brain/pressure seams while preserving species-specific contact authoring.
-- HushiroEnemyContract installation is idempotent per actor/type/revision; `force=true` is required for intentional re-normalization.
+- HushiroEnemyContract install is idempotent per actor/type/revision; intentional re-normalization requires `force=true`.
+- EnemyBrain invalidation is idempotent once already idle with no scheduled decision.
 - PressureDirectorV2 schedules dangerous predicted impact timing, not all enemy intent.
 - Direct close-frontline cue: PressureDirectorV2 `impact_at`, final 0.20s warning, final 0.12s parry beat.
 - Archer final defense cue: projectile-local geometry/ETA after launch.
 - Bilemass warning: spatial landing language through full remaining vomit+travel timeline; never parry language.
 - Enemy PostureBar remains canonical player-facing Posture/Deathblow-readiness feedback.
-- Health governs defeat; Posture/Stagger governs break/control opportunity; Poise governs immediate interruption.
-- Taking Health damage does not inherently cancel committed actions; Poise owns interruption.
-- Guard-break resistance remains separately authored from flinch/interruption Poise.
 - Frozen playtest branches are immutable comparison artifacts.
 
 ## AREA_1_TARGETS
 - Base katana Health: Quick 9 -> Cross 12 -> Heavy 21; six-hit string = 84.
 - Base no-Aspect Tier-0 ordinary unguarded Posture: Quick 6 -> Cross 9 -> Heavy 18.
-- Base no-Aspect Tier-0 basic block-Posture remains Quick 10 -> Cross 16 -> Heavy 36.
+- Base no-Aspect Tier-0 basic block-Posture: Quick 10 -> Cross 16 -> Heavy 36.
 - Current Poise power bridge: ordinary Quick/Cross power 1; base Heavy-class impact power 2; explicit `poise_damage=3+` is the stronger future Technique/Prosthetic seam.
 - Area 1 neutral/committed Poise requirements: Hollow 1/1; Hound 1/1; Archer 1/1; Swordsman 1/2; Bilemass 1/2; Warden 2/3.
+- Hollow 40 HP / 40 Posture; Hound 50 / 45; Archer 45 / 65; Swordsman 60 / 90; Bilemass 60 / 70; Warden 140 / 150.
 - Six-hit string is player capability, not standard enemy durability.
-- Hollow: 40 HP / 40 Posture; clean Q+C+H = 42 HP and 33 Posture, so HP removal wins first.
-- Hound: 50 HP / 45 Posture; clean 4-hit HP removal reaches 51 HP damage at 39 Posture.
-- Archer: 45 HP / 65 Posture; clean 4-hit HP removal reaches 51 HP damage at 39 Posture.
-- Swordsman: 60 HP / 90 Posture; clean 5-hit HP removal reaches 63 HP damage at 48 Posture; authored guard may force hit six.
-- Bilemass: 60 HP / 70 Posture; clean 5-hit HP removal reaches 63 HP damage at 48 Posture.
-- Warden: 140 HP / 150 Posture; clean 11-hit HP removal reaches 147 HP damage at 114 Posture; deliberate durable/control exception.
-- The above Posture comparison assumes zero Posture recovery, so live recovery only increases the margin.
 - Difficulty should emerge primarily from compositions, overlapping intentions, movement, target priority, geometry, hazards, authored defense, and waves rather than HP sponges.
 - Immediate clear -> next wave; varied burst/staggered/sequence arrivals; 120s anti-stall fallback.
 
 ## RECENT_MERGES
+- PR #185: idempotent EnemyBrain invalidation; repeated already-idle deaggro checks no longer churn timestamps/telemetry; 9 exact-head workflows green.
+- PR #184: checkpoint after idempotent Hushiro contract.
 - PR #183: idempotent Hushiro enemy-contract installation; repeated apply preserves live Posture and avoids duplicate install telemetry; 10 exact-head workflows green.
-- PR #182: durable checkpoint of PR #181 role-based Poise baseline and September retest evidence.
+- PR #182: checkpoint after role-based Poise baseline.
 - PR #181: telemetry-backed Area 1 role Poise tiers; Hound committed 1, Warden neutral/committed 2/3; guard-break/Health/Posture preserved; 9 exact-head workflows green.
-- PR #180: durable checkpoint after PR #179 September playtest fixes.
-- PR #179: telemetry-backed base-katana ordinary Posture 6/9/18; Health and block-Posture preserved; deterministic HP-before-fresh-Posture contract; 9 exact-head workflows green.
-- PR #178: durable checkpoint of September 13 playtest crash/Posture evidence.
-- PR #177: freed soft-target lifetime crash fix + exact regression; 10 exact-head workflows green.
-- PR #176: checkpoint after deterministic defense validation.
-- PR #175: deterministic Hushiro floating-damage-number smoke isolation; production manager unchanged.
-- PR #173: Bilemass landing readability synchronized to actual landing timeline.
-- PR #171: flight-local Corrupted Archer defensive readability.
-- PR #169: direct V2 pre-contact cue authority.
-- PR #166: player-paced durability, six-hit pressure continuation, directional target handoff.
-- PR #165: player-paced Area 1 wave/pressure baseline.
+- PR #180/#179: September playtest checkpoint + base-katana ordinary Posture 6/9/18 with Health/block-Posture preserved.
+- PR #178/#177: manual-playtest crash checkpoint + freed soft-target lifetime fix.
+- PR #175/#173/#171/#169: deterministic defense validation + Bilemass/Archer/direct-melee readability work.
+- PR #166/#165: player-paced durability/six-hit string/target handoff + Area 1 wave/pressure baseline.
 - PR #159..154: standard-enemy V2 migrations + PlayerMotor/CombatActionRunner foundation.
 
 ## ENGINEERING_GUARDS
@@ -182,4 +147,4 @@ next_action: >-
 `main:AGENTS.md -> active HEAD -> exact authority/files -> smallest diagnostic -> coherent patch -> commit -> targeted CI -> PR -> autonomous merge -> updated main -> AGENTS checkpoint -> continue while evidence-backed work remains`
 
 ## PLAYTEST_HANDOFF
-Request manual playtest only when a meaningful runtime gate is ready. Test the current merged main unless an immutable comparison snapshot is specifically required. Provide the merged checkpoint SHA, coherent systems to exercise, and request the matching Godot `.log` plus `combat_*.jsonl`.
+Request manual playtest only when a meaningful runtime gate is ready. Test current merged main unless an immutable comparison snapshot is specifically required. Provide the merged checkpoint SHA, coherent systems to exercise, and request matching Godot `.log` plus `combat_*.jsonl`.
