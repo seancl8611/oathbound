@@ -49,12 +49,12 @@ jobs:
             exit 1
           fi
 
-      - name: Verify projectile block versus parry
+      - name: Verify ordinary projectile defense and special parry opt-in
         shell: bash
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroProjectileDefenseSmoke.tscn 2>&1 | tee projectile-defense.log
-          grep -F "[HushiroProjectileDefenseSmoke] PASS - block absorbs arrow | parry reflects arrow | canonical state 6 is not parry" projectile-defense.log
+          grep -F "[HushiroProjectileDefenseSmoke] PASS - block absorbs ordinary arrow | ordinary parry does not reflect | explicit special parry reflects | canonical state 6 is not parry" projectile-defense.log
           if grep -F "SCRIPT ERROR:" projectile-defense.log; then
             echo "FAIL: projectile defense smoke emitted a GDScript runtime error."
             exit 1

@@ -1,7 +1,7 @@
 extends Node
 
 const PROJECTILE_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcherProjectile.tscn")
-const PASS_LINE: String = "[ArcherProjectileCounterCueSmoke] PASS - flight-local collision course | 0.20 warning | 0.12 parry beat | dodge suppression | deflect cleanup | scheduler trace"
+const PASS_LINE: String = "[ArcherProjectileCounterCueSmoke] PASS - ordinary arrow cue suppressed | explicit special opt-in | flight-local collision course | dodge suppression | scheduler trace"
 
 class DummyEnemy:
 	extends Node2D
@@ -77,39 +77,45 @@ func _run() -> void:
 		return
 	cue.set_process(false)
 
-	# Head-on 40 px at 220 px/s is ~0.18 s: warning visible but inner beat not yet shown.
+	# Standard arrows are ordinary ranged pressure. Even on a collision course they do
+	# not advertise a parry or reflection skill check.
+	_expect(not bool(projectile.get_meta("special_parry", true)), "standard Archer arrow opted into special parry")
 	cue.call("force_update_for_test")
-	_expect(bool(cue.call("warning_visible_for_test")), "head-on arrow did not show final 0.20 s warning")
-	_expect(not bool(cue.call("parry_beat_visible_for_test")), "0.18 s arrow showed parry beat too early")
-	_expect(float(cue.call("scheduled_pressure_impact_at_for_test")) > 0.0, "projectile cue cannot trace the shooter's scheduler impact")
+	_expect(not bool(cue.call("warning_visible_for_test")), "ordinary Archer arrow rendered a counter warning")
+	_expect(not bool(cue.call("parry_beat_visible_for_test")), "ordinary Archer arrow rendered a parry beat")
 
-	# Move inside the canonical 0.12 s perfect-parry beat.
+	# Future signature projectiles reuse the same geometry-aware runtime by explicitly
+	# opting in. Head-on 40 px at 220 px/s is ~0.18 s: warning but not inner beat yet.
+	projectile.set_meta("special_parry", true)
+	cue.call("force_update_for_test")
+	_expect(bool(cue.call("warning_visible_for_test")), "explicit special arrow did not show final 0.20 s warning")
+	_expect(not bool(cue.call("parry_beat_visible_for_test")), "0.18 s special arrow showed parry beat too early")
+	_expect(float(cue.call("scheduled_pressure_impact_at_for_test")) > 0.0, "special projectile cue cannot trace shooter scheduler impact")
+
 	player.global_position = Vector2(22.0, 0.0)
 	player.velocity = Vector2.ZERO
 	cue.call("force_update_for_test")
-	_expect(bool(cue.call("warning_visible_for_test")), "near-contact arrow lost warning")
-	_expect(bool(cue.call("parry_beat_visible_for_test")), "0.10 s arrow did not expose perfect-parry beat")
+	_expect(bool(cue.call("warning_visible_for_test")), "near-contact special arrow lost warning")
+	_expect(bool(cue.call("parry_beat_visible_for_test")), "0.10 s special arrow did not expose parry beat")
 
-	# A geometrically missed arrow must not keep advertising a defensive prompt.
+	# Geometry remains authoritative after launch: a miss or lateral dodge clears the cue.
 	player.global_position = Vector2(40.0, 50.0)
 	cue.call("force_update_for_test")
-	_expect(not bool(cue.call("warning_visible_for_test")), "off-line arrow kept a false collision warning")
+	_expect(not bool(cue.call("warning_visible_for_test")), "off-line special arrow kept a false collision warning")
 
-	# Current Player motion also matters: a fast lateral dodge should suppress the prompt.
 	player.global_position = Vector2(40.0, 0.0)
 	player.velocity = Vector2(0.0, 400.0)
 	cue.call("force_update_for_test")
-	_expect(not bool(cue.call("warning_visible_for_test")), "lateral dodge did not clear projected collision warning")
+	_expect(not bool(cue.call("warning_visible_for_test")), "lateral dodge did not clear special projectile warning")
 
-	# Reflection transfers threat ownership away from Akio and must clear the cue immediately.
+	# Reflection/consumption still clears any special cue immediately.
 	player.velocity = Vector2.ZERO
 	projectile.set_meta("deflected", true)
 	projectile.set("_is_deflected", true)
 	cue.call("force_update_for_test")
-	_expect(not bool(cue.call("warning_visible_for_test")), "deflected arrow retained player counter warning")
-	_expect(not bool(cue.call("parry_beat_visible_for_test")), "deflected arrow retained parry beat")
+	_expect(not bool(cue.call("warning_visible_for_test")), "deflected special arrow retained player counter warning")
+	_expect(not bool(cue.call("parry_beat_visible_for_test")), "deflected special arrow retained parry beat")
 
-	# Pure prediction contract: an arrow moving away from the player is never threatening.
 	var away_value: Variant = cue.call("predict_collision_course", Vector2(40.0, 0.0), Vector2(220.0, 0.0), 30.0)
 	_expect(away_value is Dictionary and not bool((away_value as Dictionary).get("threatening", true)), "receding projectile classified as collision threat")
 

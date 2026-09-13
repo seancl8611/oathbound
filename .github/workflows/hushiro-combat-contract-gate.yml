@@ -68,25 +68,36 @@ jobs:
             exit 1
           fi
 
-      - name: Verify V2 pre-contact counter cue contract
+      - name: Verify special-only parry policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/SpecialParryPolicySmoke.tscn 2>&1 | tee special-parry-policy.log
+          grep -F "[SpecialParryPolicySmoke] PASS - ordinary default off | legacy parryable ignored | explicit special opt-in | perilous compatibility | explicit opt-out" special-parry-policy.log
+          if grep -F "SCRIPT ERROR:" special-parry-policy.log; then
+            echo "FAIL: special-parry policy smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Verify special counter cue contract
         shell: bash
         run: |
           set -euo pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/CounterCuePressureSmoke.tscn 2>&1 | tee counter-cue-pressure.log
-          grep -F "[CounterCuePressureSmoke] PASS - PressureDirector impact timing | 0.20 warning | 0.12 parry beat | fixed V2 cue | spatial fallback" counter-cue-pressure.log
+          grep -F "[CounterCuePressureSmoke] PASS - ordinary cue suppressed | special PressureDirector timing | 0.20 warning | 0.12 parry beat | special-only fallback" counter-cue-pressure.log
           if grep -F "SCRIPT ERROR:" counter-cue-pressure.log; then
-            echo "FAIL: V2 counter cue smoke emitted a GDScript runtime error."
+            echo "FAIL: special counter cue smoke emitted a GDScript runtime error."
             exit 1
           fi
 
-      - name: Verify Archer projectile counter readability
+      - name: Verify Archer projectile special-counter readability
         shell: bash
         run: |
           set -euo pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/ArcherProjectileCounterCueSmoke.tscn 2>&1 | tee archer-projectile-counter-cue.log
-          grep -F "[ArcherProjectileCounterCueSmoke] PASS - flight-local collision course | 0.20 warning | 0.12 parry beat | dodge suppression | deflect cleanup | scheduler trace" archer-projectile-counter-cue.log
+          grep -F "[ArcherProjectileCounterCueSmoke] PASS - ordinary arrow cue suppressed | explicit special opt-in | flight-local collision course | dodge suppression | scheduler trace" archer-projectile-counter-cue.log
           if grep -F "SCRIPT ERROR:" archer-projectile-counter-cue.log; then
-            echo "FAIL: Archer projectile counter cue smoke emitted a GDScript runtime error."
+            echo "FAIL: Archer projectile special-counter cue smoke emitted a GDScript runtime error."
             exit 1
           fi
 
@@ -153,6 +164,7 @@ jobs:
             combat-contract-editor.log
             player-paced.log
             player-pressure.log
+            special-parry-policy.log
             counter-cue-pressure.log
             archer-projectile-counter-cue.log
             bilemass-landing-readability.log

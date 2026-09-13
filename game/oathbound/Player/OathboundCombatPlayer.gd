@@ -14,6 +14,7 @@ extends "res://Player/OathboundCombatPlayerCore.gd"
 const AREA1_PRESSURE_MAX_HITS: int = 6
 const AREA1_PRESSURE_MIDPOINT_HIT: int = 3
 const BASE_KATANA_IDS: Array[String] = ["quick_slash", "cross_cut", "heavy_cleave"]
+const PARRY_POLICY = preload("res://Core/Combat/OathboundParryPolicy.gd")
 
 var _area1_pressure_hits_started: int = 0
 var _area1_pressure_active: bool = false
@@ -180,6 +181,51 @@ static func area1_pressure_total_damage_target() -> int:
 	for damage: int in area1_pressure_damage_target():
 		total += damage
 	return total
+
+
+# =============================================================================
+# SPECIAL-ONLY PARRY CLASSIFICATION
+# =============================================================================
+
+func can_parry_incoming_attack(source: Node, damage_type: String = "") -> bool:
+	return bool(PARRY_POLICY.is_special_parry_attack(source, damage_type))
+
+
+func _on_hurt(dmg: int, dmg_type: String, attacker: Node = null) -> void:
+	# The imported resolver assumes every non-unblockable attack is parryable. Combat V2
+	# intentionally inverts that default. For ordinary hits, temporarily close only the
+	# parry/grace path while preserving the PARRYING state; the inherited resolver then
+	# routes a held defense input into its existing auto-block path when the attack is
+	# blockable. Explicit specials keep the canonical parry behavior unchanged.
+	if can_parry_incoming_attack(attacker, dmg_type):
+		super._on_hurt(dmg, dmg_type, attacker)
+		return
+
+	var parry_was_active: bool = bool(_parry_active)
+	var grace_until_before: float = float(_parry_grace_until)
+	var perfect_before: bool = bool(_perfect_parry_available)
+	var now: float = Time.get_ticks_msec() * 0.001
+	var defense_was_parry_window: bool = parry_was_active or now < grace_until_before
+
+	_parry_active = false
+	_parry_grace_until = -1.0
+	_perfect_parry_available = false
+	super._on_hurt(dmg, dmg_type, attacker)
+
+	# If the ordinary hit resolved as the inherited PARRYING-state auto-block, keep the
+	# remainder of Akio's input window alive for a later explicitly special attack.
+	if hp > 0 and _state == State.PARRYING:
+		_parry_active = parry_was_active and _parry_timer > 0.0
+		_parry_grace_until = grace_until_before if now < grace_until_before else -1.0
+		_perfect_parry_available = perfect_before
+
+	if defense_was_parry_window and typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("ordinary_attack_parry_bypassed", {
+			"player": CombatTelemetry.snapshot_actor(self),
+			"source": CombatTelemetry.snapshot_actor(attacker) if attacker != null and is_instance_valid(attacker) else {},
+			"damage_type": dmg_type,
+			"blockable_path_preserved": dmg_type not in ["grab", "mass", "unblockable", "perilous"],
+		})
 
 
 func _handle_parry_success(area: Area2D, attacker: Node, dmg_type: String, atk_pos: Vector2, is_perfect: bool):
