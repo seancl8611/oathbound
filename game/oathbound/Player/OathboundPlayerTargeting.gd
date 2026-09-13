@@ -19,7 +19,10 @@ const V2_HANDOFF_MOUSE_DEADZONE: float = 18.0
 const V2_HANDOFF_ALIGNMENT_WEIGHT: float = 2.25
 const V2_HANDOFF_DISTANCE_WEIGHT: float = 0.65
 
-var _v2_attack_soft_target: Node2D = null
+# Keep the stored reference dynamic. Godot can leave a freed Object in a typed Node2D
+# variable until the next typed bind; passing that stale value to a typed function then
+# errors before the function can call is_instance_valid(). Resolve through Variant first.
+var _v2_attack_soft_target: Variant = null
 
 
 func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
@@ -49,10 +52,11 @@ func _v2_update_attack_steering(delta: float) -> void:
 		super._v2_update_attack_steering(delta)
 		return
 
-	if not _v2_soft_target_viable(_v2_attack_soft_target):
+	var current_target: Node2D = _v2_resolve_soft_target(_v2_attack_soft_target)
+	if current_target == null:
 		_v2_set_attack_soft_target(_v2_acquire_attack_soft_target(intent), intent, "target_invalid")
-	elif _v2_attack_soft_target != null:
-		var to_target: Vector2 = _v2_attack_soft_target.global_position - global_position
+	else:
+		var to_target: Vector2 = current_target.global_position - global_position
 		if to_target.length_squared() <= 0.01:
 			_v2_clear_attack_soft_target("target_overlap")
 		else:
@@ -62,8 +66,9 @@ func _v2_update_attack_steering(delta: float) -> void:
 				_v2_clear_attack_soft_target("player_aim_override")
 				_v2_set_attack_soft_target(_v2_acquire_attack_soft_target(intent), intent, "player_redirect")
 
-	if _v2_soft_target_viable(_v2_attack_soft_target):
-		var assisted_dir: Vector2 = (_v2_attack_soft_target.global_position - global_position).normalized()
+	current_target = _v2_resolve_soft_target(_v2_attack_soft_target)
+	if current_target != null:
+		var assisted_dir: Vector2 = (current_target.global_position - global_position).normalized()
 		_v2_turn_attack_toward(assisted_dir, delta)
 		return
 
@@ -102,10 +107,8 @@ func _v2_acquire_attack_soft_target(intent: Vector2) -> Node2D:
 	var best_score: float = -INF
 
 	for candidate_value: Variant in get_tree().get_nodes_in_group("enemy"):
-		if not (candidate_value is Node2D):
-			continue
-		var candidate: Node2D = candidate_value as Node2D
-		if not _v2_soft_target_viable(candidate):
+		var candidate: Node2D = _v2_resolve_soft_target(candidate_value)
+		if candidate == null:
 			continue
 		var offset: Vector2 = candidate.global_position - global_position
 		var distance: float = offset.length()
@@ -124,22 +127,33 @@ func _v2_acquire_attack_soft_target(intent: Vector2) -> Node2D:
 	return best_target
 
 
-func _v2_soft_target_viable(target: Node2D) -> bool:
-	if target == null or not is_instance_valid(target) or target.is_queued_for_deletion():
-		return false
+func _v2_resolve_soft_target(target_value: Variant) -> Node2D:
+	# Lifetime must be checked before a typed Node2D local is created. This is the same
+	# freed-reference boundary used by the Hushiro Posture/Deathblow runtime.
+	if target_value == null or not is_instance_valid(target_value):
+		return null
+	if not (target_value is Node2D):
+		return null
+	var target: Node2D = target_value as Node2D
+	if target.is_queued_for_deletion():
+		return null
 	if not target.is_inside_tree():
-		return false
+		return null
 	if not target.is_in_group("enemy"):
-		return false
+		return null
 	if target is CanvasItem and not (target as CanvasItem).is_visible_in_tree():
-		return false
+		return null
 	if target.has_method("is_dead") and bool(target.call("is_dead")):
-		return false
+		return null
 	if "hp" in target:
 		var hp_value: Variant = target.get("hp")
 		if typeof(hp_value) in [TYPE_INT, TYPE_FLOAT] and float(hp_value) <= 0.0:
-			return false
-	return true
+			return null
+	return target
+
+
+func _v2_soft_target_viable(target_value: Variant) -> bool:
+	return _v2_resolve_soft_target(target_value) != null
 
 
 func _v2_turn_attack_toward(target_dir: Vector2, delta: float) -> void:
@@ -157,8 +171,9 @@ func _v2_turn_attack_toward(target_dir: Vector2, delta: float) -> void:
 	_position_sword_hitbox_for_attack()
 
 
-func _v2_face_soft_target(target: Node2D) -> void:
-	if not _v2_soft_target_viable(target):
+func _v2_face_soft_target(target_value: Variant) -> void:
+	var target: Node2D = _v2_resolve_soft_target(target_value)
+	if target == null:
 		return
 	var direction: Vector2 = target.global_position - global_position
 	if direction.length_squared() <= 0.01:
@@ -169,20 +184,26 @@ func _v2_face_soft_target(target: Node2D) -> void:
 
 
 func _v2_set_attack_soft_target(target: Node2D, intent: Vector2, reason: String) -> void:
-	if target == _v2_attack_soft_target:
+	var previous_value: Variant = _v2_attack_soft_target
+	var previous: Node2D = _v2_resolve_soft_target(previous_value)
+	var resolved_target: Node2D = _v2_resolve_soft_target(target)
+
+	if previous != null and resolved_target != null and previous == resolved_target:
 		return
-	var previous: Node2D = _v2_attack_soft_target
-	_v2_attack_soft_target = target
+	if previous_value == null and target == null:
+		return
+
+	_v2_attack_soft_target = resolved_target
 	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
 		return
 	var payload: Dictionary = {
 		"reason": reason,
 		"intent": [intent.x, intent.y],
-		"previous": CombatTelemetry.snapshot_actor(previous) if previous != null and is_instance_valid(previous) else {},
-		"target": CombatTelemetry.snapshot_actor(target) if target != null and is_instance_valid(target) else {},
+		"previous": CombatTelemetry.snapshot_actor(previous) if previous != null else {},
+		"target": CombatTelemetry.snapshot_actor(resolved_target) if resolved_target != null else {},
 	}
-	if target != null and is_instance_valid(target):
-		payload["distance"] = global_position.distance_to(target.global_position)
+	if resolved_target != null:
+		payload["distance"] = global_position.distance_to(resolved_target.global_position)
 	CombatTelemetry.record_event("player_attack_target_handoff", payload)
 
 
@@ -193,9 +214,7 @@ func _v2_clear_attack_soft_target(reason: String) -> void:
 
 
 func get_v2_attack_soft_target() -> Node2D:
-	if not _v2_soft_target_viable(_v2_attack_soft_target):
-		return null
-	return _v2_attack_soft_target
+	return _v2_resolve_soft_target(_v2_attack_soft_target)
 
 
 func get_playtest_snapshot() -> Dictionary:
