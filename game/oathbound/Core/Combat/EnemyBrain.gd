@@ -103,12 +103,20 @@ func request_immediate_reconsideration() -> void:
 	_next_decision_at = -1.0
 
 
-func invalidate_intent(reason: String = "invalidated") -> void:
+func invalidate_intent(reason: String = "invalidated") -> bool:
+	# Deaggro and other owner-level invalidation checks may legally run every physics
+	# frame. Once the brain is already idle with no scheduled decision, repeating the
+	# invalidation cannot change behavior; treating it as a state transition only creates
+	# telemetry/runtime churn and continuously rewrites the intent start timestamp.
+	if _current_intent == &"idle" and _next_decision_at < 0.0:
+		return false
+
 	var now: float = Time.get_ticks_msec() * 0.001
 	_current_intent = &"idle"
 	_intent_started_at = now
 	_next_decision_at = -1.0
 	_record("enemy_v2_brain_intent_invalidated", {"reason": reason})
+	return true
 
 
 func current_intent() -> StringName:
