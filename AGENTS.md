@@ -23,24 +23,23 @@ Repository state is authority; conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 9
-updated_utc: 2026-09-13T21:55:00Z
+updated_utc: 2026-09-13T22:08:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 185
-  feature_head: fd4e3ce15754c18bb7f95d7af176e9db80a7e076
-  merge_commit: 396c21e260672aa55c903f44b9d9f0594f4f6fa7
+  pr: 187
+  feature_head: ab4ff6d4bff847d9c83e98e8237bf6c7dddf393c
+  merge_commit: 21d889977064aa9becd48762effd215fb5f2dc8e
   validation: >-
-    Exact PR #185 head passed Hushiro Combat Contract Gate, Godot 4.7.2 Project Check,
+    Exact PR #187 head passed Hushiro Combat Contract Gate, Godot 4.7.2 Project Check,
     Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff,
     RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content,
-    and Region Transition Presentation. EnemyBrain smoke now proves a real intent
-    invalidation clears to idle/no scheduled decision and a repeated invalidation is a
-    state/telemetry no-op.
+    and Region Transition Presentation. The new CombatTelemetryDiagnostics smoke passed
+    inside Post-playtest Stability and the project import/editor load remained clean.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 396c21e260672aa55c903f44b9d9f0594f4f6fa7
-known_good_checkpoint: 396c21e260672aa55c903f44b9d9f0594f4f6fa7
+covered_through_substantive_commit: 21d889977064aa9becd48762effd215fb5f2dc8e
+known_good_checkpoint: 21d889977064aa9becd48762effd215fb5f2dc8e
 frozen_playtest:
   branch: playtest/area1-hack-and-slash-2026-09-12
   head: 824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a
@@ -64,19 +63,25 @@ latest_manual_playtest:
     The run exposed duplicate Hollow `hushiro_enemy_contract_applied` events and 304
     `enemy_v2_brain_intent_invalidated` events in ~38s, mostly repeated deaggro. PR #183
     makes Hushiro contract install idempotent per actor/type/revision; PR #185 makes an
-    already-idle/no-schedule EnemyBrain invalidation a no-op. Neither changes combat
-    tuning or actual deaggro transitions.
+    already-idle/no-schedule EnemyBrain invalidation a no-op. PR #187 adds a debug-only
+    end-of-session diagnostic summary so the next JSONL directly reports contract repeat
+    cardinality, invalidation reasons/per-enemy concentration, Poise absorption profiles,
+    and capture duration without changing gameplay.
 current_objective: >-
   Manual-retest current merged main as one coherent gate: role-based Poise, Health-first
   ordinary kills, soft-target handoff stability, idempotent Hushiro contract setup, and
-  reduced no-op brain invalidation telemetry.
+  reduced no-op brain invalidation telemetry. The evidence path is now self-summarizing
+  at `session_end`; do not add speculative combat tuning before that run.
 next_action: >-
   Manual-test current merged main after this checkpoint merges. Exercise multi-enemy
   basic strings and target handoff; deliberately attack Hollow/Hound/Archer during
   commitments; compare Swordsman/Bilemass committed resistance; test Warden light vs
   Heavy interruption if encountered. Return matching Godot `.log` + `combat_*.jsonl`.
-  Confirm no freed-target SCRIPT ERROR, one contract application per spawned enemy, and
-  materially reduced repeated deaggro invalidation events. Do not make further numerical
+  In the JSONL `session_end.diagnostics`, expect Hushiro contract
+  `repeat_application_events=0` and `max_applications_per_enemy=1` during an ordinary
+  run; compare brain invalidation total/deaggro/max-per-enemy against the old 304-event
+  churn; use Poise absorption profile counts as supporting evidence for protected
+  commitments. Confirm no freed-target SCRIPT ERROR. Do not make further numerical
   Health/Posture/Poise/PressureDirector/encounter tuning without new playtest evidence.
 ```
 
@@ -95,6 +100,7 @@ next_action: >-
 - All six standard Hushiro families use shared V2 action/motor/brain/pressure seams while preserving species-specific contact authoring.
 - HushiroEnemyContract install is idempotent per actor/type/revision; intentional re-normalization requires `force=true`.
 - EnemyBrain invalidation is idempotent once already idle with no scheduled decision.
+- CombatTelemetry session-end diagnostics summarize contract repeat cardinality, brain invalidation reasons/concentration, Poise-absorption profiles, and capture duration; they are reporting-only.
 - PressureDirectorV2 schedules dangerous predicted impact timing, not all enemy intent.
 - Direct close-frontline cue: PressureDirectorV2 `impact_at`, final 0.20s warning, final 0.12s parry beat.
 - Archer final defense cue: projectile-local geometry/ETA after launch.
@@ -114,6 +120,8 @@ next_action: >-
 - Immediate clear -> next wave; varied burst/staggered/sequence arrivals; 120s anti-stall fallback.
 
 ## RECENT_MERGES
+- PR #187: debug-only combat telemetry session diagnostics + deterministic smoke; no gameplay tuning; 9 exact-head workflows green.
+- PR #186: checkpoint after EnemyBrain invalidation cleanup.
 - PR #185: idempotent EnemyBrain invalidation; repeated already-idle deaggro checks no longer churn timestamps/telemetry; 9 exact-head workflows green.
 - PR #184: checkpoint after idempotent Hushiro contract.
 - PR #183: idempotent Hushiro enemy-contract installation; repeated apply preserves live Posture and avoids duplicate install telemetry; 10 exact-head workflows green.
