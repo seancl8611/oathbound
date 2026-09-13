@@ -11,6 +11,7 @@ extends Node
 const SAMPLE_INTERVAL: float = 0.25
 const FLUSH_INTERVAL: float = 1.0
 const LOG_DIR: String = "res://playtest_logs"
+const DIAGNOSTICS_SCRIPT = preload("res://Utility/CombatTelemetryDiagnostics.gd")
 
 var _capturing: bool = false
 var _capture_file: FileAccess = null
@@ -19,6 +20,7 @@ var _capture_start_ms: int = 0
 var _sample_accumulator: float = 0.0
 var _flush_accumulator: float = 0.0
 var _event_counts: Dictionary = {}
+var _diagnostics: CombatTelemetryDiagnostics = DIAGNOSTICS_SCRIPT.new()
 
 
 func _ready() -> void:
@@ -47,6 +49,10 @@ func get_capture_path_absolute() -> String:
 	return ProjectSettings.globalize_path(_capture_path)
 
 
+func get_session_diagnostics() -> Dictionary:
+	return _diagnostics.snapshot()
+
+
 func _start_capture() -> void:
 	var absolute_dir := ProjectSettings.globalize_path(LOG_DIR)
 	var dir_error := DirAccess.make_dir_recursive_absolute(absolute_dir)
@@ -66,6 +72,7 @@ func _start_capture() -> void:
 	_sample_accumulator = 0.0
 	_flush_accumulator = 0.0
 	_event_counts.clear()
+	_diagnostics.reset()
 	_capturing = true
 
 	var version_info := Engine.get_version_info()
@@ -82,7 +89,12 @@ func _start_capture() -> void:
 func _stop_capture() -> void:
 	if not _capturing:
 		return
-	record_event("session_end", {"event_counts": _event_counts.duplicate(true)})
+	var duration_ms: int = maxi(0, Time.get_ticks_msec() - _capture_start_ms)
+	record_event("session_end", {
+		"duration_ms": duration_ms,
+		"event_counts": _event_counts.duplicate(true),
+		"diagnostics": _diagnostics.snapshot(),
+	})
 	_flush_now()
 	_capturing = false
 	if _capture_file != null:
@@ -103,6 +115,7 @@ func record_event(event_name: String, data: Dictionary = {}) -> void:
 	for key_value in data.keys():
 		payload[key_value] = data[key_value]
 	_event_counts[event_name] = int(_event_counts.get(event_name, 0)) + 1
+	_diagnostics.observe(event_name, data)
 	_capture_file.store_line(JSON.stringify(payload))
 
 
