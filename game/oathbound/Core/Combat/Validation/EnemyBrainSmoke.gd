@@ -52,8 +52,19 @@ func _test_shared_brain_cadence() -> void:
 	_expect(reconsidered == &"retreat", "brain did not reconsider after cadence elapsed")
 	_expect(int(brain.last_scores().size()) == 2, "brain did not retain latest score snapshot")
 
-	brain.invalidate_intent("smoke")
+	# The first invalidation is a real state transition. Once idle with no scheduled
+	# decision, repeated deaggro-style invalidations must be no-ops so they do not churn
+	# timestamps or emit duplicate invalidation telemetry every physics frame.
+	var first_invalidated: bool = brain.invalidate_intent("smoke")
+	_expect(first_invalidated, "first invalidation did not report a state transition")
 	_expect(brain.current_intent() == &"idle", "invalidating brain intent did not return to idle")
+	_expect(brain.next_decision_at() < 0.0, "invalidating brain intent did not clear decision scheduling")
+	var first_invalidated_at: float = float(brain.get("_intent_started_at"))
+	var repeated_invalidated: bool = brain.invalidate_intent("smoke_repeat")
+	_expect(not repeated_invalidated, "repeated invalidation was not treated as a no-op")
+	_expect(is_equal_approx(float(brain.get("_intent_started_at")), first_invalidated_at), "no-op invalidation rewrote intent timestamp")
+	_expect(brain.next_decision_at() < 0.0, "no-op invalidation reintroduced decision scheduling")
+
 	actor.queue_free()
 
 
