@@ -9,8 +9,7 @@ class_name CombatTelemetryDiagnostics
 
 var _contract_application_counts: Dictionary = {}
 var _contract_application_events: int = 0
-var _contract_forced_application_events: int = 0
-var _contract_unexpected_duplicate_events: int = 0
+var _contract_repeat_application_events: int = 0
 
 var _brain_invalidation_counts: Dictionary = {}
 var _brain_invalidation_reason_counts: Dictionary = {}
@@ -23,8 +22,7 @@ var _poise_absorption_events: int = 0
 func reset() -> void:
 	_contract_application_counts.clear()
 	_contract_application_events = 0
-	_contract_forced_application_events = 0
-	_contract_unexpected_duplicate_events = 0
+	_contract_repeat_application_events = 0
 	_brain_invalidation_counts.clear()
 	_brain_invalidation_reason_counts.clear()
 	_brain_invalidation_events = 0
@@ -47,8 +45,7 @@ func snapshot() -> Dictionary:
 		"hushiro_contract": {
 			"application_events": _contract_application_events,
 			"unique_enemy_count": _contract_application_counts.size(),
-			"forced_application_events": _contract_forced_application_events,
-			"unexpected_duplicate_application_events": _contract_unexpected_duplicate_events,
+			"repeat_application_events": _contract_repeat_application_events,
 			"max_applications_per_enemy": _max_count(_contract_application_counts),
 		},
 		"brain_invalidation": {
@@ -67,20 +64,17 @@ func snapshot() -> Dictionary:
 
 func _observe_contract_application(data: Dictionary) -> void:
 	_contract_application_events += 1
-	var forced: bool = bool(data.get("forced", false))
-	if forced:
-		_contract_forced_application_events += 1
-
 	var enemy_id: int = int(data.get("enemy_id", -1))
 	if enemy_id < 0:
 		return
 	var key: String = str(enemy_id)
 	var previous: int = int(_contract_application_counts.get(key, 0))
 	_contract_application_counts[key] = previous + 1
-	# A repeated forced application is an explicit caller request. The suspicious case
-	# is a second ordinary install for the same actor, which PR #183 made unreachable.
-	if not forced and previous > 0:
-		_contract_unexpected_duplicate_events += 1
+	# PR #183 made repeat ordinary installs unreachable. The summary stays neutral and
+	# reports any repeat event rather than deciding whether a future explicit force=true
+	# re-normalization was expected; normal playtest sessions should remain at zero.
+	if previous > 0:
+		_contract_repeat_application_events += 1
 
 
 func _observe_brain_invalidation(data: Dictionary) -> void:
