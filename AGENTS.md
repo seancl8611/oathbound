@@ -23,24 +23,24 @@ Repository state is authority; conversation/project memory is cache only.
 ## LIVE_STATE
 ```yaml
 schema: 9
-updated_utc: 2026-09-13T21:35:00Z
+updated_utc: 2026-09-13T21:45:00Z
 repo: seancl8611/oathbound
 control_ref: main
 merged_cutoff:
-  pr: 181
-  feature_head: b57067cea9daa43fe100e01b95d4fa417fa34828
-  merge_commit: 3b65224a7ea61060de86fd8e64c448e7300178a8
+  pr: 183
+  feature_head: d28f30497df78b7f0cdd0af17bfd546d45fa9d64
+  merge_commit: be86ee8f201ce01c87f074853e94e094102c71cc
   validation: >-
-    Exact PR #181 head passed Hushiro Combat Contract Gate, Godot 4.7.2 Project Check,
+    Exact PR #183 head passed Hushiro Combat Contract Gate, Godot 4.7.2 Project Check,
     Hushiro Combat Semantics, Hushiro Combat Regression, Run Region Handoff,
     RunScene Runtime Lifetime, Post-playtest Stability, Authored Presentation Content,
-    and Region Transition Presentation. The response smoke and Hound/Warden migration
-    smokes now protect the role-based Area 1 Poise ladder without changing Health,
-    Posture, guard-break thresholds, PressureDirector spacing, or encounter tuning.
+    Region Transition Presentation, and Blood Cavern Execution Trial. The Hollow
+    migration smoke now proves shared Hushiro contract installation is idempotent and
+    a repeated non-forced apply cannot reset live Posture.
 active_branch: null
 active_pr: null
-covered_through_substantive_commit: 3b65224a7ea61060de86fd8e64c448e7300178a8
-known_good_checkpoint: 3b65224a7ea61060de86fd8e64c448e7300178a8
+covered_through_substantive_commit: be86ee8f201ce01c87f074853e94e094102c71cc
+known_good_checkpoint: be86ee8f201ce01c87f074853e94e094102c71cc
 frozen_playtest:
   branch: playtest/area1-hack-and-slash-2026-09-12
   head: 824ef7b099f7fbffb3be72d8169a94c8ffd1eb8a
@@ -90,20 +90,19 @@ manual_playtest_2026_09_13_posture_retest:
   cleanup_evidence: >-
     Telemetry also showed duplicate `hushiro_enemy_contract_applied` events for Hollow
     spawns and 304 `enemy_v2_brain_intent_invalidated` events in about 38 seconds,
-    predominantly repeated `deaggro` invalidations. Treat these as runtime/telemetry
-    cleanup issues, not balance evidence.
+    predominantly repeated `deaggro` invalidations. PR #183 fixes the first issue at
+    the shared contract boundary: one actor/type/revision installs once unless a caller
+    explicitly requests `force=true`; application count/revision are now observable.
 current_objective: >-
-  Preserve the now-validated role-based Poise baseline while cleaning two concrete
-  runtime/telemetry issues from the same playtest: duplicate Hushiro enemy-contract
-  application and repeated no-op deaggro intent invalidation churn.
+  Preserve the validated Health/Posture/Poise baselines while removing repeated no-op
+  EnemyBrain deaggro intent invalidation churn observed in the September 13 telemetry.
 next_action: >-
-  First make Hushiro enemy-contract application idempotent at the shared authority and
-  add deterministic coverage proving a repeated apply does not duplicate attached
-  runtimes or telemetry-side setup. Preserve final HP/Posture/pressure metadata. Then
-  address repeated EnemyBrain deaggro invalidation so a no-op invalidation does not
-  repeatedly churn state/telemetry while actual deaggro behavior remains unchanged.
-  Do not make further numerical Health/Posture/Poise/PressureDirector/encounter tuning
-  until another playtest supplies new evidence.
+  Make `EnemyBrain.invalidate_intent()` idempotent when the brain is already in its
+  invalidated idle state, with deterministic EnemyBrain smoke coverage proving the
+  first invalidation clears decision state while repeated invalidation is a no-op.
+  Preserve actual deaggro transitions, decision cadence after re-engagement, enemy AI,
+  PressureDirector behavior, and all combat tuning. Do not make further numerical
+  Health/Posture/Poise/PressureDirector/encounter tuning without new playtest evidence.
 ```
 
 ## CURRENT AUTHORITIES
@@ -116,6 +115,7 @@ next_action: >-
 - Player attack motion: CombatActionRunner + PlayerMotor via `OathboundPlayerMotion.gd`.
 - Player basic soft targeting: `OathboundPlayerTargeting.gd`; explicit player redirection wins; no sticky lock-on.
 - All six standard Hushiro families use shared V2 action/motor/brain/pressure seams while preserving species-specific contact authoring.
+- HushiroEnemyContract installation is idempotent per actor/type/revision; `force=true` is required for intentional re-normalization.
 - PressureDirectorV2 schedules dangerous predicted impact timing, not all enemy intent.
 - Direct close-frontline cue: PressureDirectorV2 `impact_at`, final 0.20s warning, final 0.12s parry beat.
 - Archer final defense cue: projectile-local geometry/ETA after launch.
@@ -144,6 +144,8 @@ next_action: >-
 - Immediate clear -> next wave; varied burst/staggered/sequence arrivals; 120s anti-stall fallback.
 
 ## RECENT_MERGES
+- PR #183: idempotent Hushiro enemy-contract installation; repeated apply preserves live Posture and avoids duplicate install telemetry; 10 exact-head workflows green.
+- PR #182: durable checkpoint of PR #181 role-based Poise baseline and September retest evidence.
 - PR #181: telemetry-backed Area 1 role Poise tiers; Hound committed 1, Warden neutral/committed 2/3; guard-break/Health/Posture preserved; 9 exact-head workflows green.
 - PR #180: durable checkpoint after PR #179 September playtest fixes.
 - PR #179: telemetry-backed base-katana ordinary Posture 6/9/18; Health and block-Posture preserved; deterministic HP-before-fresh-Posture contract; 9 exact-head workflows green.
