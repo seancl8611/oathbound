@@ -1,7 +1,10 @@
 extends Node
 
 const BILEMASS_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CellarBilemass.tscn")
+const READABILITY_SCRIPT: GDScript = preload("res://Core/Combat/BilemassLandingReadability.gd")
 const PASS_LINE := "[BilemassLandingReadabilitySmoke] PASS - full remaining landing timeline | light-medium-dark stages | spatial-only warning | cancel cleanup"
+const TEST_DURATION: float = 0.45
+const BOUNDARY_EPSILON: float = 0.0001
 
 var _failures: Array[String] = []
 
@@ -34,7 +37,13 @@ func _run() -> void:
 	var canonical_duration: float = float(runtime.call("expected_warning_duration", enemy))
 	_expect(is_equal_approx(canonical_duration, 3.45), "landing warning does not cover vomit + travel (expected 3.45s)")
 
-	# Short deterministic timeline for stage/cleanup validation.
+	# Stage/deadline semantics are tested at exact elapsed-time boundaries rather than
+	# sleeping for sub-second timers. CI frame scheduling must never decide whether a
+	# presentation-contract test lands just before or just after one of these thresholds.
+	_validate_timeline_boundaries(TEST_DURATION)
+
+	# Keep one real runtime arming observation. A busy first process frame must still
+	# expose LIGHT before any later stage is eligible.
 	enemy.set("spit_vomit_duration", 0.18)
 	enemy.set("spit_travel_time", 0.27)
 	enemy.set("beast_is_attacking", true)
@@ -46,7 +55,7 @@ func _run() -> void:
 	await get_tree().process_frame
 
 	_expect(bool(runtime.call("has_active_warning")), "committed hazard did not create staged landing warning")
-	_expect(is_equal_approx(float(runtime.call("active_warning_duration")), 0.45), "staged warning duration drifted from vomit + travel")
+	_expect(is_equal_approx(float(runtime.call("active_warning_duration")), TEST_DURATION), "staged warning duration drifted from vomit + travel")
 	_expect(str(runtime.call("active_stage_name")) == "light", "landing warning did not begin in light stage")
 	_expect(not _legacy_visual_visible(legacy), "legacy early-expiring indicator remained visible under staged warning")
 
@@ -58,17 +67,16 @@ func _run() -> void:
 		_expect(str(active.get_meta("hazard_language", "")) == "ground_landing", "landing warning lost ground-hazard presentation classification")
 		_expect(not bool(active.get_meta("parry_prompt", true)), "Bilemass ground hazard was incorrectly classified as a parry prompt")
 
-	await get_tree().create_timer(0.17).timeout
-	_expect(str(runtime.call("active_stage_name")) == "medium", "landing warning did not progress to medium stage after first third")
+	# A pre-landing cancellation must remove presentation on the next runtime frame.
+	# This is cleanup only; the runtime never cancels or spawns the canonical hazard.
+	enemy.set("beast_is_attacking", false)
+	enemy.set("_v2_hazard_launched", false)
+	await get_tree().process_frame
+	_expect(not bool(runtime.call("has_active_warning")), "cancelled spit left a stale ground warning")
 
-	await get_tree().create_timer(0.16).timeout
-	_expect(str(runtime.call("active_stage_name")) == "dark", "landing warning did not progress to dark final stage")
-
-	await get_tree().create_timer(0.15).timeout
-	_expect(not bool(runtime.call("has_active_warning")), "landing warning remained after predicted puddle arrival")
-
-	# A pre-landing cancellation must remove presentation immediately. This is cleanup
-	# only; the runtime never cancels or spawns the canonical hazard itself.
+	# A later committed hazard must still be able to arm after cleanup and preserve the
+	# same spatial/non-parry classification. This also proves `_last_pending_id` only
+	# suppresses duplicate observation of the same canonical legacy marker.
 	enemy.set("beast_is_attacking", true)
 	enemy.set("_v2_hazard_launched", true)
 	var cancel_target := Vector2(-60.0, 30.0)
@@ -76,16 +84,34 @@ func _run() -> void:
 	enemy.set("_pending_spit_indicator", legacy_cancel)
 	await get_tree().process_frame
 	_expect(bool(runtime.call("has_active_warning")), "second hazard warning did not arm")
+	_expect(str(runtime.call("active_stage_name")) == "light", "second hazard warning did not restart at light stage")
+
 	enemy.set("beast_is_attacking", false)
 	enemy.set("_v2_hazard_launched", false)
 	await get_tree().process_frame
-	_expect(not bool(runtime.call("has_active_warning")), "cancelled spit left a stale ground warning")
+	_expect(not bool(runtime.call("has_active_warning")), "second cancelled spit left a stale ground warning")
 
 	legacy.queue_free()
 	legacy_cancel.queue_free()
 	enemy.queue_free()
 	await get_tree().process_frame
 	_finish()
+
+
+func _validate_timeline_boundaries(duration: float) -> void:
+	var medium_at: float = duration / 3.0
+	var dark_at: float = duration * 2.0 / 3.0
+
+	_expect(String(READABILITY_SCRIPT.stage_for_elapsed(0.0, duration)) == "light", "timeline does not start in light stage")
+	_expect(String(READABILITY_SCRIPT.stage_for_elapsed(medium_at - BOUNDARY_EPSILON, duration)) == "light", "light stage ended before first-third boundary")
+	_expect(String(READABILITY_SCRIPT.stage_for_elapsed(medium_at, duration)) == "medium", "medium stage did not begin at first-third boundary")
+	_expect(String(READABILITY_SCRIPT.stage_for_elapsed(dark_at - BOUNDARY_EPSILON, duration)) == "medium", "medium stage ended before two-thirds boundary")
+	_expect(String(READABILITY_SCRIPT.stage_for_elapsed(dark_at, duration)) == "dark", "dark stage did not begin at two-thirds boundary")
+	_expect(String(READABILITY_SCRIPT.stage_for_elapsed(duration - BOUNDARY_EPSILON, duration)) == "dark", "dark stage did not persist until landing deadline")
+
+	_expect(not READABILITY_SCRIPT.landing_due_for_elapsed(duration - BOUNDARY_EPSILON, duration), "landing deadline fired early")
+	_expect(READABILITY_SCRIPT.landing_due_for_elapsed(duration, duration), "landing deadline did not fire at exact arrival")
+	_expect(READABILITY_SCRIPT.landing_due_for_elapsed(duration + BOUNDARY_EPSILON, duration), "landing deadline did not remain due after arrival")
 
 
 func _make_legacy_indicator(target: Vector2) -> Node2D:
