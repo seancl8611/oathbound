@@ -128,6 +128,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify combat telemetry diagnostics
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/CombatTelemetryDiagnosticsSmoke.tscn 2>&1 | tee combat-telemetry-diagnostics.log
+          grep -F "[CombatTelemetryDiagnosticsSmoke] PASS - contract repeats | brain invalidation reasons | Poise absorption profiles | reset" combat-telemetry-diagnostics.log
+          if grep -F "SCRIPT ERROR:" combat-telemetry-diagnostics.log; then
+            echo "FAIL: combat telemetry diagnostics smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR:" combat-telemetry-diagnostics.log; then
+            echo "FAIL: combat telemetry diagnostics smoke emitted an engine/runtime error."
+            exit 1
+          fi
+
       - name: Upload stability logs
         if: always()
         uses: actions/upload-artifact@v4
@@ -142,5 +157,6 @@ jobs:
             attack-presentation-readability.log
             enemy-temporary-lifetime.log
             full-run-combat-stability.log
+            combat-telemetry-diagnostics.log
           if-no-files-found: warn
           retention-days: 7
