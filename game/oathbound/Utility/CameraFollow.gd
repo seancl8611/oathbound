@@ -28,8 +28,12 @@ extends Camera2D
 const PRESENTATION_SCALE_META := &"_oathbound_three_quarter_base_scale"
 const PRESENTATION_Z_META := &"_oathbound_three_quarter_base_z"
 const PRESENTATION_SHADOW_NAME := &"ThreeQuarterGroundShadow"
-const DEPTH_Z_MIN := -900
-const DEPTH_Z_MAX := 900
+# Existing scenes were authored before world-depth sorting and often leave backgrounds
+# at z=0. Bias projected actors above that legacy floor, then sort actors against one
+# another by Y. Future three-quarter props can opt into explicit foreground Z bands.
+const ACTOR_DEPTH_BIAS := 1000
+const DEPTH_Z_MIN := -4095
+const DEPTH_Z_MAX := 4095
 
 var _target: Node2D
 var _base_zoom := Vector2.ONE
@@ -169,7 +173,7 @@ func _prepare_actor_visual(actor: Node) -> void:
 			sprite.set_meta(PRESENTATION_SCALE_META, sprite.scale)
 		var base_scale_value: Variant = sprite.get_meta(PRESENTATION_SCALE_META)
 		if base_scale_value is Vector2:
-			var base_scale := base_scale_value as Vector2
+			var base_scale: Vector2 = base_scale_value
 			var safe_compression := maxf(0.01, ground_vertical_compression)
 			# Camera Y is compressed. Counter-scale only the vertical dimensions of body
 			# artwork so the actor remains upright while its ground position is projected.
@@ -188,7 +192,7 @@ func _restore_all_actor_visuals() -> void:
 		if sprite != null and sprite.has_meta(PRESENTATION_SCALE_META):
 			var base_scale_value: Variant = sprite.get_meta(PRESENTATION_SCALE_META)
 			if base_scale_value is Vector2:
-				sprite.scale = base_scale_value as Vector2
+				sprite.scale = base_scale_value
 
 		if actor_2d.has_meta(PRESENTATION_Z_META):
 			actor_2d.z_index = int(actor_2d.get_meta(PRESENTATION_Z_META))
@@ -243,7 +247,8 @@ func _update_actor_depth_order() -> void:
 		if not actor_2d.has_meta(PRESENTATION_Z_META):
 			actor_2d.set_meta(PRESENTATION_Z_META, actor_2d.z_index)
 		var base_z := int(actor_2d.get_meta(PRESENTATION_Z_META))
-		actor_2d.z_index = clampi(base_z + int(round(actor_2d.global_position.y)), DEPTH_Z_MIN, DEPTH_Z_MAX)
+		var projected_z := ACTOR_DEPTH_BIAS + base_z + int(round(actor_2d.global_position.y))
+		actor_2d.z_index = clampi(projected_z, DEPTH_Z_MIN, DEPTH_Z_MAX)
 
 
 func _ensure_prototype_badge() -> void:
