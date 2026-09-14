@@ -2,8 +2,8 @@ extends Node
 
 ## Canonical runtime scene registry.
 ##
-## Shared service chambers remain common across regions. Region-specific combat/boss
-## ownership is selected explicitly before GameFlow loads a chamber so no earlier
+## Shared service chambers remain common across regions by default. Region-specific
+## overrides are selected explicitly before GameFlow loads a chamber so no earlier
 ## region acts as the implementation authority for later content.
 
 var _shared_rooms := {
@@ -19,7 +19,16 @@ var _shared_rooms := {
 
 var _rooms_by_area := {
 	1: {
+		# Area 1 adopts the fixed three-quarter presentation across the whole route while
+		# preserving the existing shared chamber gameplay via inherited Hushiro wrappers.
 		"combat": preload("res://Regions/Hushiro/Chambers/CombatChamber.tscn"),
+		"shrine": preload("res://Regions/Hushiro/Chambers/ShrineChamber.tscn"),
+		"merchant": preload("res://Regions/Hushiro/Chambers/MerchantChamber.tscn"),
+		"shop": preload("res://Regions/Hushiro/Chambers/MerchantChamber.tscn"),
+		"miniboss": preload("res://Regions/Hushiro/Chambers/MinibossChamber.tscn"),
+		"rest": preload("res://Regions/Hushiro/Chambers/RestChamber.tscn"),
+		"boss": preload("res://Regions/Hushiro/Chambers/BossChamber.tscn"),
+		"treasure": preload("res://Regions/Hushiro/Chambers/TreasureChamber.tscn"),
 	},
 	2: {
 		"combat": preload("res://Regions/Yomori/Chambers/CombatChamber.tscn"),
@@ -83,5 +92,5 @@ var enemies_by_area := {
 		"elite_defender": preload("res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.tscn"),
 		"hollow_vessel": preload("res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.tscn"),
 		"court_sentinel": preload("res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn"),
-	}
+	},
 }
