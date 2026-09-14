@@ -327,9 +327,9 @@ func begin_wraith_reach(player: Node, direction: Vector2) -> void:
 func begin_ronin_falling_mountain(player: Node) -> void:
 	if not is_instance_valid(player):
 		return
-	var current_posture: float = float(player.get("stagger")) if player.get("stagger") != null else 0.0
-	player.set("stagger", maxf(0.0, current_posture - 35.0))
-	_record("ronin_falling_mountain_posture_clear", {"before": current_posture, "after": float(player.get("stagger"))})
+	# Player-facing Posture is retired. Falling Mountain deliberately has no
+	# defensive-resource clear or Health refund on activation.
+	_record("ronin_falling_mountain_committed", {"player_posture_retired": true})
 
 func resolve_ronin_falling_mountain(impact: Vector2) -> void:
 	for enemy in _nearby_enemies(impact, null, 92.0, 6):
