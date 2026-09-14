@@ -8,6 +8,7 @@ on:
     paths:
       - "game/oathbound/Regions/Kagutsuchi/**"
       - "game/oathbound/Enemy/Area 3/**"
+      - "game/oathbound/Core/Combat/**"
       - "game/oathbound/Core/Chambers/**"
       - "game/oathbound/Core/Regions/**"
       - "game/oathbound/Core/Endgame/**"
@@ -82,6 +83,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Kagutsuchi Health-first standard defense
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Kagutsuchi/Validation/KagutsuchiStandardDefenseSmoke.tscn 2>&1 | tee kagutsuchi-standard-defense.log
+          grep -F "[KagutsuchiStandardDefenseSmoke] PASS" kagutsuchi-standard-defense.log
+          if grep -F "SCRIPT ERROR:" kagutsuchi-standard-defense.log; then
+            echo "FAIL: Kagutsuchi standard defense emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" kagutsuchi-standard-defense.log; then
+            echo "FAIL: Kagutsuchi standard defense emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Kagutsuchi seeded route and roster contract
         shell: bash
         run: |
@@ -151,6 +167,7 @@ jobs:
             kagutsuchi-import.log
             kagutsuchi-editor.log
             kagutsuchi-enemy-contract.log
+            kagutsuchi-standard-defense.log
             kagutsuchi-route-contract.log
             kagutsuchi-miniboss-contract.log
             kagutsuchi-full-run.log
