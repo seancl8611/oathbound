@@ -1,6 +1,6 @@
 # Three-Quarter / 2.5D Presentation Direction
 
-Status: **direction adopted; vertical-slice implementation in progress**
+Status: **direction adopted; V2 combat vertical slice implemented**
 
 Branch: `agent/three-quarter-pov-prototype`
 
@@ -8,7 +8,7 @@ Branch: `agent/three-quarter-pov-prototype`
 
 Oathbound is moving toward a fixed high-angle three-quarter / isometric-like presentation.
 
-The first camera-only playtest was intentionally crude and exposed the main weakness of a projection-only approach: old top-down environment art simply looks compressed when viewed through non-uniform zoom. The useful result of that test was the spatial direction itself. The project should now build authored presentation content around the new view rather than trying to make legacy art carry the conversion.
+The first camera-only playtest was intentionally crude and exposed the main weakness of a projection-only approach: old top-down environment art simply looks compressed when viewed through non-uniform zoom. The useful result of that test was the spatial direction itself. The project now builds authored presentation content around the new view rather than asking legacy art to carry the conversion.
 
 This remains a 2D gameplay simulation:
 
@@ -33,16 +33,17 @@ Current defaults:
 - horizontal camera zoom: `0.94`
 - ground-plane vertical compression: `0.84`
 - framing offset: `Vector2(0, -18)`
-- character art is counter-projected vertically so body sprites do not inherit the floor squash
+- legacy body art is counter-projected vertically when used
 - player/enemy roots receive Y-derived draw order
 - player/enemy contact shadows establish a visible ground plane
-- shadow creation is deferred so GameFlow room construction cannot race `add_child()`
+- shadow/proxy creation is deferred so GameFlow room construction cannot race `add_child()`
+- F9 restores legacy sprites, z-order, zoom and presentation content for a clean A/B comparison
 
 The projection is deliberately gentler than V1 (`0.72` compression). V2 relies more on authored depth cues, vertical silhouettes and foreground occlusion instead of forcing the entire visual effect through camera distortion.
 
 A world-space circle still reads as an ellipse on screen, which is expected for a circular ground-space range viewed from a high angle. Physics remains circular in simulation space.
 
-## Hushiro vertical-slice placeholder art
+## Hushiro vertical-slice environment
 
 `Regions/Hushiro/Presentation/ThreeQuarterHushiroPrototype.gd` provides temporary procedural scenery for the canonical Hushiro combat chamber.
 
@@ -58,6 +59,41 @@ It is presentation-only and adds no collision or combat authority. Current place
 
 This is not intended to become final vector art. Its purpose is to test composition, depth readability and the production rules future painted assets must obey.
 
+## V2 directional actor placeholders
+
+`Utility/ThreeQuarterActorProxy.gd` is the temporary character-art bridge.
+
+While V2 is active, `CameraFollow.gd` can make the old top-down body sprite transparent and attach an upright procedural proxy to the same authoritative actor root. The proxy reads movement and existing animation state but never writes gameplay state.
+
+Current role language:
+
+- **Akio**: dark blue/charcoal upright ronin silhouette, crimson sash/scarf and readable katana;
+- **Swordsman / generic melee**: corrupted humanoid silhouette with blade;
+- **Warden**: heavier humanoid proportion;
+- **Archer**: humanoid silhouette plus bow profile;
+- **Hollow**: smaller pale/ashen humanoid;
+- **Hound**: low quadruped silhouette;
+- **Bilemass**: low organic mass rather than a humanoid stand-in.
+
+Movement direction drives the proxy facing and front/back treatment. This establishes the intended eight-direction production target without pretending these procedural shapes are final animation assets.
+
+## Projected combat readability
+
+`Utility/ThreeQuarterCombatPresentation.gd` provides temporary world-space combat cues underneath actors.
+
+Current cues include:
+
+- enemy arrival ripples;
+- player/enemy melee action rings;
+- Bilemass area-pressure read;
+- Archer projected sightline and target ellipse;
+- hurt/stagger ground feedback;
+- proxy-local slash/guard/dash readability.
+
+The important rule is that ground-space cues are authored in world coordinates. Camera projection turns circles/ranges into the expected screen ellipses automatically, so gameplay geometry stays truthful.
+
+These effects are presentation only. They do not create damage, change range, reserve attack tokens, alter AI or participate in collision.
+
 ## Playtest controls
 
 Press **F9** at runtime to switch instantly between:
@@ -65,41 +101,44 @@ Press **F9** at runtime to switch instantly between:
 1. the three-quarter V2 presentation, and
 2. the legacy top-down presentation.
 
-A small upper-left badge shows which mode is active.
+The comparison switch controls the camera profile, procedural actor proxies, contact shadows, Hushiro scenery/tint and projected combat FX together.
 
-## What the next playtest should answer
+## What the V2 playtest should answer
 
-Judge the V2 slice on:
+Judge the slice on:
 
-- whether the room now reads as a place with a foreground, combat plane and backdrop rather than a stretched texture;
+- whether the room now reads as a place with foreground, combat plane and backdrop rather than a stretched texture;
 - whether Akio/enemies remain readable while moving through Y depth;
+- whether role silhouettes are distinguishable before final art exists;
 - whether foreground props make the scene feel dimensional without obscuring combat unfairly;
 - whether the gentler projection preserves natural movement and spacing;
 - whether attack ranges and enemy pressure still feel correct visually;
-- what size and silhouette future Akio/enemy three-quarter artwork should target;
+- whether projected telegraphs remain understandable during multi-enemy pressure;
+- what size and silhouette production Akio/enemy art should target;
 - whether the fixed camera exposes enough arena context for Hades-like multi-enemy combat.
 
-Do **not** judge the final character-art quality yet. Current sprites were authored for the previous view.
+Do **not** judge final character-art quality. The proxy layer exists specifically because production directional animation has not been authored yet.
 
 ## Production conversion roadmap
 
-### 1. Camera and depth foundation
+### 1. Camera and depth foundation — implemented for V2
 
 - stable fixed three-quarter profile;
 - actor/prop depth anchors;
 - contact shadows;
 - foreground occlusion policy;
-- screen-upright vs ground-projected element policy.
+- screen-upright vs ground-projected element policy;
+- reversible legacy comparison.
 
-### 2. Hushiro presentation vertical slice
+### 2. Hushiro combat presentation vertical slice — implemented for V2
 
-- one deliberately authored combat chamber;
-- Akio placeholder authored for the target angle;
-- Swordsman plus one contrasting enemy placeholder;
-- representative melee/ranged telegraphs;
-- impact, slash and movement VFX adapted to the ground projection.
+- deliberately authored combat chamber placeholder;
+- Akio directional placeholder;
+- six standard Hushiro role placeholders;
+- representative melee/ranged/AoE telegraphs;
+- slash, guard, dash, arrival and pressure readability adapted to projection.
 
-### 3. Character art pipeline
+### 3. Character art pipeline — next production content phase
 
 Initial production target: up to eight directions where silhouette/facing materially matters. Not every animation needs eight unique drawings if mirroring or authored directional reuse remains readable.
 
@@ -108,9 +147,11 @@ Character art needs:
 - stable foot/ground anchors;
 - consistent body height through directional frames;
 - silhouettes that remain readable against dark environments;
-- weapon arcs authored around screen depth rather than top-down radial motion.
+- weapon arcs authored around screen depth rather than top-down radial motion;
+- separate ground shadow from body artwork;
+- animation timing that continues to match existing combat impact windows.
 
-### 4. Environment conversion
+### 4. Environment conversion — next production content phase
 
 Replace procedural placeholders with dimensional Hushiro modules:
 
@@ -118,16 +159,17 @@ Replace procedural placeholders with dimensional Hushiro modules:
 - walls with visible faces and top surfaces;
 - gates, shrines, houses and cliffs with explicit ground anchors;
 - foreground modules designed to occlude only safe combat space;
-- atmospheric background layers outside the simulation bounds.
+- atmospheric background layers outside the simulation bounds;
+- analogous dressing for rest, shrine, merchant, miniboss and boss chambers after the combat slice is approved.
 
-### 5. VFX and UI conversion
+### 5. VFX and UI conversion — baseline implemented, production assets pending
 
 Classify every effect as either:
 
 - **ground-space**: projected with the arena (AoE rings, target zones, floor trails, landing marks), or
 - **screen/upright**: kept visually upright (damage numbers, most HUD, status labels, selected particles).
 
-This classification should prevent the stretched-overlay problem from returning as more content is converted.
+This classification prevents the stretched-overlay problem from returning as more content is converted.
 
 ## Non-goals
 
