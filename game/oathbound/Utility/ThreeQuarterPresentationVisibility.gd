@@ -4,11 +4,9 @@ extends Node2D
 ## presentation mode. This is intentionally presentation-only and safe to remove once
 ## the three-quarter direction no longer needs a legacy A/B toggle.
 
-@export var scenery_path: NodePath = NodePath("Scenery")
 @export var background_path: NodePath = NodePath("../Background")
 @export var active_background_modulate := Color(0.34, 0.29, 0.26, 1.0)
 
-var _scenery: CanvasItem = null
 var _background: CanvasItem = null
 var _background_base_modulate := Color.WHITE
 var _last_active := false
@@ -16,7 +14,6 @@ var _initialized := false
 
 
 func _ready() -> void:
-	_scenery = get_node_or_null(scenery_path) as CanvasItem
 	_background = get_node_or_null(background_path) as CanvasItem
 	if _background != null:
 		_background_base_modulate = _background.modulate
@@ -44,7 +41,14 @@ func _is_three_quarter_active() -> bool:
 func _apply_mode(active: bool) -> void:
 	_initialized = true
 	_last_active = active
-	if _scenery != null:
-		_scenery.visible = active
+
+	# Every CanvasItem child under this controller is three-quarter-only content. This
+	# keeps scenery, combat VFX and future presentation layers on the same F9 A/B switch.
+	for child: Node in get_children():
+		if child is CanvasItem:
+			(child as CanvasItem).visible = active
+		if child.has_method("set_presentation_active"):
+			child.call("set_presentation_active", active)
+
 	if _background != null:
 		_background.modulate = active_background_modulate if active else _background_base_modulate
