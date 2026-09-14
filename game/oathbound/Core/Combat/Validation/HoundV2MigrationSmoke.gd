@@ -109,11 +109,18 @@ func _test_canonical_hound_v2_runtime() -> void:
 	else:
 		_fail("Hound missing V2 action adapter")
 
-	# Existing Hushiro Posture/Deathblow compatibility remains attached; V2 does not
-	# replace the canonical buildup/readability contract.
-	_expect(hound.get_node_or_null("HushiroHoundCombatRuntime") != null, "Hound lost shared Posture adapter")
-	_expect(hound.get_node_or_null("HushiroPostureBreakRuntime") != null, "Hound lost shared Posture-break runtime")
-	_expect(hound.get_node_or_null("PostureBar") != null, "Hound lost canonical PostureBar")
+	# Standard-enemy Posture/Deathblow ownership is retired. Imported compatibility
+	# plumbing may remain, but the no-Posture boundary must suppress buildup, break
+	# state, and player-facing Posture presentation.
+	_expect(hound.get_node_or_null("HushiroHoundCombatRuntime") != null, "Hound lost imported combat compatibility adapter")
+	var no_posture: Node = hound.get_node_or_null("HushiroStandardNoPostureRuntime")
+	_expect(no_posture != null, "Hound missing standard no-Posture runtime")
+	if no_posture != null and no_posture.has_method("is_posture_retired"):
+		_expect(bool(no_posture.call("is_posture_retired")), "Hound no-Posture runtime is not active")
+	_expect(hound.get_node_or_null("HushiroPostureBreakRuntime") == null, "Hound still owns retired standard posture-break runtime")
+	var posture_bar: Node = hound.get_node_or_null("PostureBar")
+	if posture_bar is CanvasItem:
+		_expect(not (posture_bar as CanvasItem).visible, "Hound standard PostureBar is still visible")
 
 	if is_instance_valid(hound):
 		hound.queue_free()
@@ -124,7 +131,7 @@ func _test_canonical_hound_v2_runtime() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HoundV2MigrationSmoke] PASS - predator brain | action commitment | motor ownership | Poise | pressure windows | Posture preservation | free V2 approach | crowd backoff")
+		print("[HoundV2MigrationSmoke] PASS - predator brain | action commitment | motor ownership | Poise | pressure windows | Posture retired | free V2 approach | crowd backoff")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
