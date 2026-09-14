@@ -1,6 +1,6 @@
 # Three-Quarter / 2.5D Presentation Direction
 
-Status: **direction adopted; V2 combat vertical slice implemented**
+Status: **direction adopted; Hushiro V2 route presentation implemented**
 
 Branch: `agent/three-quarter-pov-prototype`
 
@@ -43,7 +43,7 @@ The projection is deliberately gentler than V1 (`0.72` compression). V2 relies m
 
 A world-space circle still reads as an ellipse on screen, which is expected for a circular ground-space range viewed from a high angle. Physics remains circular in simulation space.
 
-## Hushiro vertical-slice environment
+## Hushiro combat environment
 
 `Regions/Hushiro/Presentation/ThreeQuarterHushiroPrototype.gd` provides temporary procedural scenery for the canonical Hushiro combat chamber.
 
@@ -58,6 +58,33 @@ It is presentation-only and adds no collision or combat authority. Current place
 - Y-anchored prop depth using the same broad ordering convention as actors.
 
 This is not intended to become final vector art. Its purpose is to test composition, depth readability and the production rules future painted assets must obey.
+
+## Hushiro route-wide service chamber presentation
+
+Area 1 now overrides the shared service-room scenes through `SceneRegistry` with inherited Hushiro wrappers. The wrappers preserve the existing shared gameplay scripts and interaction nodes, then add only the presentation layer.
+
+Covered Hushiro rooms:
+
+- Combat
+- Rest
+- Shrine
+- Merchant / Shop
+- Miniboss
+- Boss
+- Treasure
+
+`Regions/Hushiro/Presentation/ThreeQuarterServiceChamberScenery.gd` supplies reusable profile-specific scenery:
+
+- **Rest:** ember basin, low bedroll/debris shapes and quiet haze;
+- **Shrine:** blood altar, talisman posts and ritual floor mark;
+- **Merchant:** dimensional stall, crates and lantern silhouettes;
+- **Miniboss:** duel circle and standing stones;
+- **Boss:** larger ritual arena, monumental gate and banners;
+- **Treasure:** dimensional chest proxy and reward-floor glow.
+
+Each wrapper hides its legacy dirt background only while V2 is active. The replacement floor remains in the background z-band so inherited prompts and interaction UI stay visible. Tall props use the same Y-derived depth convention as actors and can create controlled foreground occlusion.
+
+Yomori and Kagutsuchi continue using their existing scenes; Hushiro presentation wrappers are selected only for Area 1.
 
 ## V2 directional actor placeholders
 
@@ -75,7 +102,7 @@ Current role language:
 - **Hound**: low quadruped silhouette;
 - **Bilemass**: low organic mass rather than a humanoid stand-in.
 
-Movement direction drives the proxy facing and front/back treatment. This establishes the intended eight-direction production target without pretending these procedural shapes are final animation assets.
+Movement direction drives the proxy facing and front/back treatment. This establishes the intended directional production target without pretending these procedural shapes are final animation assets.
 
 ## Projected combat readability
 
@@ -101,16 +128,17 @@ Press **F9** at runtime to switch instantly between:
 1. the three-quarter V2 presentation, and
 2. the legacy top-down presentation.
 
-The comparison switch controls the camera profile, procedural actor proxies, contact shadows, Hushiro scenery/tint and projected combat FX together.
+The comparison switch controls the camera profile, procedural actor proxies, contact shadows, Hushiro scenery/background replacement and projected combat FX together.
 
 ## What the V2 playtest should answer
 
-Judge the slice on:
+Judge the route on:
 
-- whether the room now reads as a place with foreground, combat plane and backdrop rather than a stretched texture;
+- whether Hushiro now reads consistently as a dimensional place rather than a stretched texture;
+- whether combat, rest, shrine, merchant and boss-facing rooms feel like members of the same visual language;
 - whether Akio/enemies remain readable while moving through Y depth;
 - whether role silhouettes are distinguishable before final art exists;
-- whether foreground props make the scene feel dimensional without obscuring combat unfairly;
+- whether foreground props make scenes feel dimensional without obscuring combat unfairly;
 - whether the gentler projection preserves natural movement and spacing;
 - whether attack ranges and enemy pressure still feel correct visually;
 - whether projected telegraphs remain understandable during multi-enemy pressure;
@@ -138,7 +166,14 @@ Do **not** judge final character-art quality. The proxy layer exists specificall
 - representative melee/ranged/AoE telegraphs;
 - slash, guard, dash, arrival and pressure readability adapted to projection.
 
-### 3. Character art pipeline — next production content phase
+### 3. Hushiro route presentation — implemented for V2
+
+- Hushiro-specific inherited wrappers for shared service rooms;
+- profile-specific placeholder scenery for rest/shrine/merchant/miniboss/boss/treasure;
+- legacy background replacement only while V2 is active;
+- Area 1 registry overrides isolated from later regions.
+
+### 4. Character art pipeline — next production content phase
 
 Initial production target: up to eight directions where silhouette/facing materially matters. Not every animation needs eight unique drawings if mirroring or authored directional reuse remains readable.
 
@@ -151,7 +186,7 @@ Character art needs:
 - separate ground shadow from body artwork;
 - animation timing that continues to match existing combat impact windows.
 
-### 4. Environment conversion — next production content phase
+### 5. Environment production — next production content phase
 
 Replace procedural placeholders with dimensional Hushiro modules:
 
@@ -160,9 +195,9 @@ Replace procedural placeholders with dimensional Hushiro modules:
 - gates, shrines, houses and cliffs with explicit ground anchors;
 - foreground modules designed to occlude only safe combat space;
 - atmospheric background layers outside the simulation bounds;
-- analogous dressing for rest, shrine, merchant, miniboss and boss chambers after the combat slice is approved.
+- room variants that preserve the same projection/depth contract.
 
-### 5. VFX and UI conversion — baseline implemented, production assets pending
+### 6. VFX and UI production — baseline implemented, production assets pending
 
 Classify every effect as either:
 
