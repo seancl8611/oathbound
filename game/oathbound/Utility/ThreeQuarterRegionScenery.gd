@@ -107,7 +107,6 @@ func _build_yomori_backdrop() -> void:
 		{"p": Vector2(325, -217), "w": 155.0, "h": 44.0},
 	]:
 		_build_wall(spec.p, float(spec.w), float(spec.h))
-
 	_build_crooked_tree(Vector2(-255, -188), -1.0, 1.05)
 	_build_crooked_tree(Vector2(278, -190), 1.0, 0.92)
 	_build_lantern(Vector2(-110, -203), 0.95)
@@ -122,7 +121,6 @@ func _build_yomori_foreground() -> void:
 
 
 func _build_kagutsuchi_backdrop() -> void:
-	# Court wall and elevated red/gold architecture establish the stricter Area 3 space.
 	for x: float in [-330.0, -165.0, 0.0, 165.0, 330.0]:
 		_build_court_wall(Vector2(x, -218.0), 150.0)
 	_build_court_pillar(Vector2(-250, -190), 1.08)
@@ -270,7 +268,7 @@ func _build_root_cluster(base: Vector2, side: float, scale_factor: float) -> voi
 func _build_reeds(base: Vector2, scale_factor: float) -> void:
 	var node := _depth_node("MistReeds", base)
 	node.scale = Vector2.ONE * scale_factor
-	for offset: float in [-15, -8, 0, 8, 15]:
+	for offset: float in [-15.0, -8.0, 0.0, 8.0, 15.0]:
 		var line := Line2D.new()
 		line.points = PackedVector2Array([Vector2(offset, 0), Vector2(offset + sin(offset) * 4, -24 - absf(offset) * 0.25)])
 		line.width = 2.0
@@ -322,8 +320,7 @@ func _build_court_rail(base: Vector2, scale_factor: float) -> void:
 	var node := _depth_node("ForegroundCourtRail", base)
 	node.scale = Vector2.ONE * scale_factor
 	var wood := Color(0.20, 0.055, 0.045, 1.0)
-	draw_set_transform(Vector2.ZERO)
-	for x: float in [-50, 0, 50]:
+	for x: float in [-50.0, 0.0, 50.0]:
 		_add_poly(node, PackedVector2Array([Vector2(x - 4, 0), Vector2(x + 4, 0), Vector2(x + 4, -43), Vector2(x - 4, -43)]), wood, 0)
 	var rail := Line2D.new()
 	rail.points = PackedVector2Array([Vector2(-58, -29), Vector2(58, -29)])
