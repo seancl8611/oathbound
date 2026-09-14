@@ -20,6 +20,7 @@ func _run() -> void:
 
 	await _verify_damage_number_manager_rejects_non_hp_values()
 	await _verify_player_ordinary_block(player)
+	await _verify_ronin_guard_curve(player)
 	await _verify_player_perilous_thrust_bypasses_block(player)
 	await _verify_enemy_guard_is_partial_health(player)
 	await _verify_perilous_thrust_warning(player)
@@ -95,7 +96,7 @@ func _verify_damage_number_manager_rejects_non_hp_values() -> void:
 	)
 
 
-func _verify_player_ordinary_block(player: Node) -> void:
+func _prepare_player_block(player: Node) -> void:
 	player.set("hp", 100)
 	player.set("stagger", 0.0)
 	player.set("_facing_dir", Vector2.RIGHT)
@@ -104,6 +105,13 @@ func _verify_player_ordinary_block(player: Node) -> void:
 	if combat != null and combat.has_method("start_block"):
 		combat.call("start_block")
 
+
+func _verify_player_ordinary_block(player: Node) -> void:
+	if typeof(AspectRuntime) == TYPE_OBJECT:
+		AspectRuntime.select_aspect("wolf")
+	await get_tree().process_frame
+	_prepare_player_block(player)
+
 	var origin := _make_attack_origin(player, "melee", true, false)
 	var hitbox: Area2D = origin.get_node("DefenseAttackHitbox") as Area2D
 	player.call("_on_hurt", 10, "melee", hitbox)
@@ -111,16 +119,50 @@ func _verify_player_ordinary_block(player: Node) -> void:
 	_expect(int(player.get("hp")) == 96, "ordinary frontal block did not pass authored 35% Health chip (10 -> 4)")
 	_expect(is_zero_approx(float(player.get("stagger"))), "ordinary frontal block accumulated retired player Posture")
 	_expect(player.has_method("is_player_posture_retired") and bool(player.call("is_player_posture_retired")), "canonical Player does not report retired Posture")
+	if player.has_method("get_player_block_health_ratio_for_test"):
+		_expect(is_equal_approx(float(player.call("get_player_block_health_ratio_for_test")), 0.35), "shared guard ratio is not 35%")
+	else:
+		_fail("canonical Player missing block Health ratio validation surface")
 
 	origin.queue_free()
 	await get_tree().process_frame
 
 
+func _verify_ronin_guard_curve(player: Node) -> void:
+	if typeof(AspectRuntime) != TYPE_OBJECT:
+		_fail("AspectRuntime unavailable for Ronin guard validation")
+		return
+
+	AspectRuntime.select_aspect("ronin")
+	await get_tree().process_frame
+	_prepare_player_block(player)
+	_expect(is_equal_approx(float(player.call("get_player_block_health_ratio_for_test")), 0.30), "Ronin Tier 0 guard ratio is not 30%")
+	var tier_zero_origin := _make_attack_origin(player, "melee", true, false)
+	var tier_zero_hitbox: Area2D = tier_zero_origin.get_node("DefenseAttackHitbox") as Area2D
+	player.call("_on_hurt", 10, "melee", tier_zero_hitbox)
+	_expect(int(player.get("hp")) == 97, "Ronin Tier 0 guard did not convert 10 incoming Health to 3 chip")
+	_expect(is_zero_approx(float(player.get("stagger"))), "Ronin Tier 0 guard accumulated retired player Posture")
+	tier_zero_origin.queue_free()
+	await get_tree().process_frame
+
+	AspectRuntime.set_tier(4)
+	await get_tree().process_frame
+	_prepare_player_block(player)
+	_expect(is_equal_approx(float(player.call("get_player_block_health_ratio_for_test")), 0.20), "Ronin Tier IV guard ratio is not 20%")
+	var tier_four_origin := _make_attack_origin(player, "melee", true, false)
+	var tier_four_hitbox: Area2D = tier_four_origin.get_node("DefenseAttackHitbox") as Area2D
+	player.call("_on_hurt", 10, "melee", tier_four_hitbox)
+	_expect(int(player.get("hp")) == 98, "Ronin Tier IV guard did not convert 10 incoming Health to 2 chip")
+	_expect(is_zero_approx(float(player.get("stagger"))), "Ronin Tier IV guard accumulated retired player Posture")
+	tier_four_origin.queue_free()
+	await get_tree().process_frame
+
+	AspectRuntime.select_aspect("wolf")
+	await get_tree().process_frame
+
+
 func _verify_player_perilous_thrust_bypasses_block(player: Node) -> void:
-	player.set("hp", 100)
-	player.set("stagger", 0.0)
-	player.set("_facing_dir", Vector2.RIGHT)
-	player.set("_state", 6) # LegacyPlayerController.State.BLOCKING
+	_prepare_player_block(player)
 
 	var origin := _make_attack_origin(player, "perilous", false, true)
 	var hitbox: Area2D = origin.get_node("DefenseAttackHitbox") as Area2D
@@ -274,7 +316,7 @@ func _latest_damage_number_text() -> String:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HushiroDefenseContractSmoke] PASS - player guard 35% Health chip + Posture retired | enemy guard partial HP + Posture retired | exact HP numbers | perilous bypass")
+		print("[HushiroDefenseContractSmoke] PASS - base 35% + Ronin 30->20% Health-chip guard | player/enemy Posture retired | exact HP numbers | perilous bypass")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
