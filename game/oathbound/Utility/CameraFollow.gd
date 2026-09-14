@@ -4,7 +4,7 @@ extends Camera2D
 ##
 ## The simulation remains completely 2D. We project the ground plane by using a
 ## non-uniform Camera2D zoom (Y is compressed relative to X), then counter-scale the
-## main character sprites/proxies so Akio/enemies remain upright instead of being
+## main character sprites/proxies and world-space interface so upright content is not
 ## squashed. Physics, navigation, hitboxes, attack ranges and AI stay authoritative in
 ## their existing world coordinates.
 
@@ -21,6 +21,7 @@ extends Camera2D
 @export var framing_world_offset := Vector2(0.0, -18.0)
 @export var compensate_character_sprites := true
 @export_range(0.0, 1.0, 0.05) var sprite_counter_projection := 1.0
+@export var compensate_world_controls := true
 @export var use_procedural_actor_proxies := true
 @export var hide_legacy_actor_sprites_when_proxying := true
 @export var add_contact_shadows := true
@@ -33,6 +34,7 @@ const ACTOR_PROXY_SCRIPT = preload("res://Utility/ThreeQuarterActorProxy.gd")
 const PRESENTATION_SCALE_META := &"_oathbound_three_quarter_base_scale"
 const PRESENTATION_Z_META := &"_oathbound_three_quarter_base_z"
 const PRESENTATION_SELF_MODULATE_META := &"_oathbound_three_quarter_base_self_modulate"
+const PRESENTATION_WORLD_UI_SCALE_META := &"_oathbound_three_quarter_world_ui_scale"
 const PRESENTATION_SHADOW_PENDING_META := &"_oathbound_three_quarter_shadow_pending"
 const PRESENTATION_PROXY_PENDING_META := &"_oathbound_three_quarter_proxy_pending"
 const PRESENTATION_SHADOW_NAME := &"ThreeQuarterGroundShadow"
@@ -67,8 +69,8 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	# Do not leave actor visuals mutated if this Camera2D is removed while the actors
-	# themselves survive a scene transition/debug reload.
+	# Do not leave actor/UI visuals mutated if this Camera2D is removed while the scene
+	# survives a transition/debug reload.
 	_restore_all_actor_visuals()
 
 
@@ -153,6 +155,8 @@ func _refresh_actor_presentation() -> void:
 		return
 	for actor: Node in _presentation_actors():
 		_prepare_actor_visual(actor)
+	if compensate_world_controls:
+		_refresh_world_controls()
 
 
 func _presentation_actors() -> Array[Node]:
@@ -204,6 +208,55 @@ func _prepare_actor_visual(actor: Node) -> void:
 		_ensure_actor_proxy(actor_2d)
 
 
+func _refresh_world_controls() -> void:
+	# CanvasLayer HUD is already screen-space and must never be counter-projected. Only
+	# Control nodes living in the same world tree as the Player/current room are adjusted.
+	if _target == null:
+		return
+	var world_root := _target.get_parent()
+	if world_root == null:
+		return
+	_prepare_world_controls_recursive(world_root, false)
+
+
+func _prepare_world_controls_recursive(node: Node, inside_canvas_layer: bool) -> void:
+	var now_inside_canvas_layer := inside_canvas_layer or node is CanvasLayer
+	if node is Control and not now_inside_canvas_layer:
+		var control := node as Control
+		if not control.has_meta(PRESENTATION_WORLD_UI_SCALE_META):
+			control.set_meta(PRESENTATION_WORLD_UI_SCALE_META, control.scale)
+		var base_scale_value: Variant = control.get_meta(PRESENTATION_WORLD_UI_SCALE_META)
+		if base_scale_value is Vector2:
+			var base_scale := base_scale_value as Vector2
+			var safe_compression := maxf(0.01, ground_vertical_compression)
+			control.scale = Vector2(base_scale.x, base_scale.y / safe_compression)
+
+	for child: Node in node.get_children():
+		_prepare_world_controls_recursive(child, now_inside_canvas_layer)
+
+
+func _restore_world_controls() -> void:
+	if _target == null:
+		return
+	var world_root := _target.get_parent()
+	if world_root == null:
+		return
+	_restore_world_controls_recursive(world_root, false)
+
+
+func _restore_world_controls_recursive(node: Node, inside_canvas_layer: bool) -> void:
+	var now_inside_canvas_layer := inside_canvas_layer or node is CanvasLayer
+	if node is Control and not now_inside_canvas_layer:
+		var control := node as Control
+		if control.has_meta(PRESENTATION_WORLD_UI_SCALE_META):
+			var base_scale_value: Variant = control.get_meta(PRESENTATION_WORLD_UI_SCALE_META)
+			if base_scale_value is Vector2:
+				control.scale = base_scale_value
+
+	for child: Node in node.get_children():
+		_restore_world_controls_recursive(child, now_inside_canvas_layer)
+
+
 func _restore_all_actor_visuals() -> void:
 	for actor: Node in _presentation_actors():
 		if not (actor is Node2D):
@@ -231,6 +284,8 @@ func _restore_all_actor_visuals() -> void:
 		var proxy := actor_2d.get_node_or_null(NodePath(str(PRESENTATION_PROXY_NAME)))
 		if proxy != null:
 			proxy.queue_free()
+
+	_restore_world_controls()
 
 
 func _find_main_actor_sprite(actor: Node2D) -> Sprite2D:
