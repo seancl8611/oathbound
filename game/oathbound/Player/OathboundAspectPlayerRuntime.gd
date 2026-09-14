@@ -18,8 +18,6 @@ const RONIN_BLOCK_HEALTH_RATIO_MIN: float = 0.20
 
 
 func _ready() -> void:
-	# A new Player instance marks a new run. Keep the player's selected Aspect, but
-	# start the run at Tier 0 with an empty/locked Blood meter as documented.
 	if typeof(AspectRuntime) == TYPE_OBJECT:
 		AspectRuntime.reset_for_new_run()
 	super._ready()
@@ -31,15 +29,11 @@ func _ready() -> void:
 # =============================================================================
 
 func apply_aspect_configuration() -> void:
-	# The parent implementation only changes player-Posture capacity/recovery. Those
-	# bonuses are superseded by the Health-chip guard profile below, so do not re-enable
-	# the retired meter when AspectRuntime changes Aspect or Tier.
+	# Parent configuration only varies the retired player-Posture capacity/recovery.
 	_retire_player_posture_state()
 
 
 func _setup_stagger_ui() -> void:
-	# LegacyPlayerController creates this dynamically. A no-op here prevents the retired
-	# meter from entering the player-facing HUD in the first place.
 	_stagger_ui = null
 	_stagger_bg = null
 	_stagger_fill = null
@@ -53,14 +47,11 @@ func _update_stagger_ui() -> void:
 
 
 func _tick_stagger(_delta: float) -> void:
-	# Imported/special-case code may still write the compatibility field. It may never
-	# persist into gameplay or become a hidden second durability resource.
 	if not is_zero_approx(float(stagger)):
 		stagger = 0.0
 
 
 func _posture_break() -> void:
-	# Compatibility-only override. Player Posture cannot stun Akio in Combat V2.
 	stagger = 0.0
 	_stun_until = 0.0
 	_stun_started_at = 0.0
@@ -75,7 +66,7 @@ func _posture_break() -> void:
 func _retire_player_posture_state() -> void:
 	stagger = 0.0
 	# Keep a non-zero compatibility maximum for inherited comparisons/divisions. It is
-	# intentionally not player-facing and is reported as zero through playtest surfaces.
+	# never exposed as gameplay and never allowed to accumulate.
 	stagger_max = PLAYER_POSTURE_COMPATIBILITY_MAX
 	stagger_regen_rate = 0.0
 	stagger_regen_blocked = 0.0
@@ -143,8 +134,7 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 	var guard_damage: int = _blocked_health_damage(dmg)
 	if guard_damage > 0:
 		take_damage(guard_damage, false)
-	var hp_after: int = int(hp)
-	var actual_health_lost: int = maxi(0, hp_before - hp_after)
+	var actual_health_lost: int = maxi(0, hp_before - int(hp))
 	stagger = 0.0
 
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
@@ -171,15 +161,11 @@ func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk
 		elif block_source.is_in_group("enemy_projectile") or block_source.is_in_group("deflectable"):
 			block_source.queue_free()
 
-	# Ronin keeps its authored block -> Reprisal conversion. Its stronger defensive
-	# identity now comes from reduced Health chip rather than player-Posture capacity.
 	if hp > 0 and typeof(AspectRuntime) == TYPE_OBJECT and AspectRuntime.selected_aspect == ASPECT_CATALOG.RONIN and AspectRuntime.tier >= 1:
 		_aspect_reprisal_until = Time.get_ticks_msec() * 0.001 + 0.85
 
 
 func _try_fanged_guard(dmg: int, dmg_type: String, attacker: Node) -> bool:
-	# Wolf Tier III remains one qualifying frontal normal guard during the authored
-	# commitment window, but it now resolves through Health chip instead of Posture.
 	if not _aspect_fanged_guard_available or _state != State.ATTACKING:
 		return false
 	if dmg_type in ["grab", "mass", "unblockable", "perilous"]:
@@ -214,20 +200,13 @@ func _try_fanged_guard(dmg: int, dmg_type: String, attacker: Node) -> bool:
 	return true
 
 
-func get_playtest_snapshot() -> Dictionary:
-	var snapshot: Dictionary = super.get_playtest_snapshot()
-	snapshot["posture"] = 0.0
-	snapshot["max_posture"] = 0.0
-	snapshot["posture_retired"] = true
-	snapshot["block_health_ratio"] = _block_health_ratio()
-	return snapshot
-
+# =============================================================================
+# VARIABLE-LENGTH BASIC CHAINS
+# =============================================================================
 
 func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
 	var authored_index: int = int(profile.get("aspect_combo_index", combo_idx))
 	super._start_profile_attack(profile, authored_index)
-	# LegacyPlayerController clamps to its imported MAX_COMBO_HITS=3. Restore the
-	# authored Wolf index after legacy initialization so the fourth Basic remains real.
 	_combo_index = authored_index
 
 
@@ -245,10 +224,6 @@ func _activate_current_attack_hitbox() -> void:
 	sword_hitbox.set_meta("perfect_weight", bool(_attack_profile.get("perfect_weight", false)))
 	sword_hitbox.set_meta("blood_tempo_continuation", bool(_attack_profile.get("blood_tempo_continuation", false)))
 
-
-# =============================================================================
-# VARIABLE-LENGTH BASIC CHAINS
-# =============================================================================
 
 func _aspect_basic_count() -> int:
 	return ASPECT_CATALOG.get_basic_profiles(AspectRuntime.selected_aspect, AspectRuntime.tier).size()
@@ -304,8 +279,6 @@ func _queue_next_combo_attack() -> void:
 		return
 	var next_index: int = int(_combo_index) + 1
 	if next_index >= 3:
-		# The imported recovery resolver rejects queued combo indices >=3. Queue the
-		# fourth Wolf attack as an authored profile instead and carry its true index.
 		var profile: Dictionary = _get_combo_profile(next_index).duplicate(true)
 		profile["aspect_combo_index"] = next_index
 		_queued_attack_profile = profile
@@ -335,9 +308,6 @@ func _on_hurt(dmg: int, dmg_type: String, attacker: Node = null) -> void:
 	super._on_hurt(dmg, dmg_type, attacker)
 	stagger = 0.0
 
-	# Health is now the only ordinary player durability resource. Blood Arts still need
-	# to leave resolving state when an overriding hit transitions the player away from
-	# the authored attack.
 	if was_attacking and blood_art_attack and _state != State.ATTACKING:
 		if attack_id == "wolf_blood_hunt":
 			_clear_blood_hunt_exceptions()
@@ -369,3 +339,12 @@ func _interrupt_current_aspect_attack(attack_id: String) -> void:
 			"tier": AspectRuntime.tier,
 			"attack_id": attack_id,
 		})
+
+
+func get_playtest_snapshot() -> Dictionary:
+	var snapshot: Dictionary = super.get_playtest_snapshot()
+	snapshot["posture"] = 0.0
+	snapshot["max_posture"] = 0.0
+	snapshot["posture_retired"] = true
+	snapshot["block_health_ratio"] = _block_health_ratio()
+	return snapshot
