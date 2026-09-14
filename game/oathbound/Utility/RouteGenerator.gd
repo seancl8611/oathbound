@@ -1,5 +1,5 @@
 # RouteGenerator.gd
-# Autoload - current Hushiro route generation + legacy Area 2/3 compatibility
+# Autoload - current Hushiro route generation + legacy later-area compatibility
 extends Node
 
 signal route_generated(route: Array)
@@ -48,9 +48,10 @@ const HUSHIRO_PREBOSS_SUPPORT: Array[String] = ["rest", "merchant"]
 # =============================================================================
 # Yomori/Kagutsuchi are not reconciled in this pass. Keep their imported route data
 # isolated here so replacing Hushiro does not make debug warps or later-area plumbing
-# unusable. These tables are explicitly NOT design authority.
+# unusable. These tables are explicitly NOT design authority. Retired player Posture
+# rewards are intentionally excluded so compatibility routes cannot emit dead rewards.
 
-const LEGACY_TREASURE_SYMBOLS = ["boon", "gold", "mist", "scroll", "maxhp", "maxposture"]
+const LEGACY_TREASURE_SYMBOLS = ["boon", "gold", "mist", "scroll", "maxhp"]
 
 const LEGACY_AREA_CONFIGS = {
 	2: {
@@ -61,7 +62,7 @@ const LEGACY_AREA_CONFIGS = {
 			1: ["combat:mist", "combat:scroll"],
 			2: ["combat:gold", "treasure:boon"],
 			3: ["combat:boon", "shrine"],
-			4: ["combat:maxhp", "combat:maxposture"],
+			4: ["combat:maxhp", "combat:boon"],
 			6: ["combat:gold", "combat:mist"],
 			7: ["combat:boon", "combat:scroll"],
 		}
@@ -73,7 +74,7 @@ const LEGACY_AREA_CONFIGS = {
 			0: ["combat:boon", "combat:scroll"],
 			1: ["combat:gold", "treasure:mist"],
 			2: ["combat:mist", "shrine"],
-			3: ["combat:maxhp", "combat:maxposture"],
+			3: ["combat:maxhp", "combat:boon"],
 			4: ["combat:boon", "combat:gold"],
 			5: ["combat:scroll", "treasure:gold"],
 			6: ["combat:boon", "combat:mist"],
@@ -87,7 +88,7 @@ const LEGACY_AREA_CONFIGS = {
 		"choice_slots": {
 			1: ["combat:gold", "combat:maxhp"],
 			2: ["combat:boon", "combat:mist"],
-			3: ["combat:boon", "combat:maxposture"],
+			3: ["combat:boon", "combat:maxhp"],
 		}
 	},
 }
@@ -563,14 +564,13 @@ func get_room_display_info(room_type: String) -> Dictionary:
 			out["desc"] = "Legacy build reward"
 		"maxhp":
 			out["desc"] = "Legacy vitality reward"
-		"maxposture":
-			out["desc"] = "Legacy posture reward"
 
 	return out
 
 
 func _print_route() -> void:
-	print("\n[RouteGenerator] === AREA %d ROUTE ===" % current_area)
+	print("\
+[RouteGenerator] === AREA %d ROUTE ===" % current_area)
 	for i in range(current_route.size()):
 		var room = current_route[i]
 		var extra = ""
@@ -578,4 +578,5 @@ func _print_route() -> void:
 			var slot = int(room.split("_")[1])
 			extra = " -> %s" % str(pending_choices.get(slot, []))
 		print("  [%d] %s%s" % [i, room, extra])
-	print("================================\n")
+	print("================================\
+")
