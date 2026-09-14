@@ -1,12 +1,13 @@
 extends RoomBase
 
 ## =============================================================================
-## COMBAT ROOM - v2.0 SEKIRO DUEL SYSTEM
+## COMBAT ROOM - HEALTH-FIRST PRESSURE SYSTEM
 ## =============================================================================
-## Philosophy: Support sequential dueling, not crowd management
-## - Strict token limits (1 attacker at a time)
-## - Longer cooldowns for deliberate pacing
-## - Proper wave spacing
+## Philosophy: readable multi-enemy pressure rather than sequential dueling.
+## - concurrency scales with the living roster
+## - short attack turnover keeps the player moving
+## - ranged and melee pressure can overlap without becoming a dogpile
+## - standard enemies resolve through Health + hidden Poise, not Posture rewards
 ## =============================================================================
 
 @onready var ui: CanvasLayer = preload("res://Utility/UpgradeChoiceUI.tscn").instantiate()
@@ -27,11 +28,10 @@ const COMBAT_REWARDS = {
 	"mist":        {1: 4,  2: 5,  3: 6},
 	"scroll":      {1: 1,  2: 2,  3: 3},
 	"maxhp":       {1: 3,  2: 4,  3: 5},
-	"maxposture":  {1: 5,  2: 7,  3: 10},
 }
 
 func _ready() -> void:
-	print("[CombatRoom] v2.0 - Sekiro Duel System")
+	print("[CombatRoom] Health-first pressure combat")
 	add_child(ui)
 	ui.visible = false
 	ui.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
@@ -52,46 +52,44 @@ func _ready() -> void:
 
 	lock_all_gates()
 	
-	# Initialize AttackDirector with duel settings BEFORE starting encounter
+	# Compatibility name retained because region-specific rooms override this hook.
+	# The behavior is pressure-oriented rather than a one-at-a-time duel.
 	_configure_duel_tokens()
 	
 	_start_encounter()
 
 
-## Configure AttackDirector for Sekiro-style dueling
+## Configure the initial AttackDirector pressure envelope.
+## The method name is retained for compatibility with region-specific overrides.
 func _configure_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 	
-	# CORE DUEL SETTINGS - One attacker at a time
 	AttackDir.set_role_limits({
-		"melee_attack": 1,    # Only ONE enemy attacks at a time
-		"advance_move": 2,    # Two can approach (one dueling, one waiting)
-		"ranged_attack": 1,   # One ranged enemy can fire
+		"melee_attack": 1,
+		"advance_move": 3,
+		"ranged_attack": 1,
 		"frontal": 1,
 		"flank_left": 1,
 		"flank_right": 1
 	})
 	
-	# LONG COOLDOWNS - Deliberate pacing
 	AttackDir.set_role_cooldowns({
-		"melee_attack": 4.0,  # Same enemy can't attack again for 4 seconds
-		"advance_move": 2.0,  # Slower approach cycling
-		"ranged_attack": 3.5, # Archers fire less often
-		"frontal": 1.5,
-		"flank_left": 1.5,
-		"flank_right": 1.5
+		"melee_attack": 1.35,
+		"advance_move": 0.65,
+		"ranged_attack": 1.80,
+		"frontal": 0.75,
+		"flank_left": 0.75,
+		"flank_right": 0.75
 	})
 	
-	# Configure global grant gap if available
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = 1.2  # 1.2 seconds between any attack grants
+		AttackDir.grant_gap_sec = 0.38
 	
-	# Configure attack turnover if available
 	if _has_property(AttackDir, "attack_turnover_delay"):
-		AttackDir.attack_turnover_delay = 1.8  # Delay after attack before next enemy can go
+		AttackDir.attack_turnover_delay = 0.48
 	
-	print("[CombatRoom] Duel tokens configured: 1 melee, 2 advance, long cooldowns")
+	print("[CombatRoom] Pressure envelope configured: 1 melee, 3 advance, 1 ranged")
 
 func _start_encounter() -> void:
 	if spawner:
@@ -149,7 +147,6 @@ func _pick_encounter_for_area(area_id: int) -> Dictionary:
 				return EncounterDB.pick_area3()
 			if EncounterDB.has_method("pick_area1"):
 				push_warning("[CombatRoom] No pick_area3() yet — using area 1 encounters")
-				return EncounterDB.pick_area1()
 	
 	return _default_template()
 	
@@ -161,7 +158,7 @@ func _on_encounter_started() -> void:
 			_alive += 1
 			_wire_enemy_signals(e)
 	
-	# Start token management
+	# Start pressure-token management.
 	_start_token_autoscale()
 
 
@@ -225,18 +222,11 @@ func _grant_max_hp(amount: int) -> void:
 				p._update_health_bar()
 
 
-func _grant_max_posture(amount: int) -> void:
-	var players = get_tree().get_nodes_in_group("player")
-	if players.size() > 0:
-		var p = players[0]
-		if "stagger_max" in p:
-			p.stagger_max += amount
-			
-## Default fallback template - simple duel encounter
+## Default fallback template - short pressure ramp.
 func _default_template() -> Dictionary:
 	return {
-		"id": "fallback_duel",
-		"wave_spacing": [8.0, 10.0],
+		"id": "fallback_pressure",
+		"wave_spacing": [3.0, 4.5],
 		"waves": [
 			{"groups": [
 				{"type": "soldier", "count": 1}
@@ -268,7 +258,7 @@ func _start_token_autoscale() -> void:
 	if not has_node("TokenTick"):
 		var t = Timer.new()
 		t.name = "TokenTick"
-		t.wait_time = 1.0  # Slower tick for deliberate combat
+		t.wait_time = 0.5
 		t.one_shot = false
 		add_child(t)
 		t.timeout.connect(_autoscale_tick)
@@ -289,12 +279,11 @@ func _autoscale_tick() -> void:
 	# Check aggro state
 	_update_encounter_aggro_lock()
 	
-	# Update tokens based on enemy count
-	# KEY: Even with more enemies, keep strict duel limits
+	# Update pressure permissions based on the live roster.
 	_update_duel_tokens()
 
 
-## Update tokens maintaining duel feel regardless of enemy count
+## Compatibility hook: dynamically scales pressure instead of enforcing a duel.
 func _update_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
@@ -304,14 +293,9 @@ func _update_duel_tokens() -> void:
 		if is_instance_valid(e) and is_ancestor_of(e):
 			alive += 1
 
-	# SEKIRO DUEL PHILOSOPHY:
-	# - Always keep melee attackers at 1 (true dueling)
-	# - Only slightly increase advance slots with more enemies
-	# - Ranged stays at 1 to not overwhelm
-	
-	var melee = 1                           # ALWAYS 1 - core duel principle
-	var advance = clampi(alive / 2, 1, 2)   # 1-2 can approach
-	var ranged = 1                          # Always 1 ranged
+	var melee := 1 if alive <= 2 else 2
+	var advance := clampi(alive, 1, 4)
+	var ranged := 1 if alive <= 4 else 2
 	
 	AttackDir.set_role_limits({
 		"melee_attack": melee,
@@ -322,18 +306,19 @@ func _update_duel_tokens() -> void:
 		"flank_right": 1
 	})
 
-	# Keep cooldowns long for deliberate pacing
 	AttackDir.set_role_cooldowns({
-		"melee_attack": 4.0,
-		"advance_move": 2.0,
-		"ranged_attack": 3.5,
-		"frontal": 1.5,
-		"flank_left": 1.5,
-		"flank_right": 1.5
+		"melee_attack": 1.35,
+		"advance_move": 0.65,
+		"ranged_attack": 1.80,
+		"frontal": 0.75,
+		"flank_left": 0.75,
+		"flank_right": 0.75
 	})
 
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = 1.2
+		AttackDir.grant_gap_sec = 0.38
+	if _has_property(AttackDir, "attack_turnover_delay"):
+		AttackDir.attack_turnover_delay = 0.48
 
 
 func _on_enemy_spawned(e: Node) -> void:
