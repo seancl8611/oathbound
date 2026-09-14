@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://Core/Chambers/Types/BossChamber.gd" id="1_boss"]
 [ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_gate"]
@@ -8,18 +8,34 @@
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="6_bounds"]
 [ext_resource type="PackedScene" uid="uid://d0d3e5rkh4fyp" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn" id="7_shogun"]
 [ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogunRuntime.gd" id="8_runtime"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="9_visibility"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterRegionScenery.gd" id="10_scenery"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="11_fx"]
 
 [node name="EclipseShogunChamber" type="Node2D"]
 script = ExtResource("1_boss")
 metadata/area_id = 3
 
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -1000
 texture_filter = 2
 texture_repeat = 2
 texture = ExtResource("3_bg")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 modulate = Color(0.58, 0.38, 0.38, 1)
+
+[node name="ThreeQuarterPresentation" type="Node2D" parent="."]
+script = ExtResource("9_visibility")
+hide_background_when_active = true
+
+[node name="Scenery" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("10_scenery")
+region_profile = "kagutsuchi"
+room_profile = "boss"
+
+[node name="CombatFX" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("11_fx")
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
