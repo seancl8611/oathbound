@@ -54,7 +54,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroDefenseContractSmoke.tscn 2>&1 | tee hushiro-defense-contract.log
-          grep -F "[HushiroDefenseContractSmoke] PASS - player guard 35% Health chip + Posture retired | enemy guard partial HP + Posture retired | exact HP numbers | perilous bypass" hushiro-defense-contract.log
+          grep -F "[HushiroDefenseContractSmoke] PASS - base 35% + Ronin 30->20% Health-chip guard | player/enemy Posture retired | exact HP numbers | perilous bypass" hushiro-defense-contract.log
           if grep -F "SCRIPT ERROR:" hushiro-defense-contract.log; then
             echo "FAIL: Hushiro defense contract emitted a GDScript runtime error."
             exit 1
