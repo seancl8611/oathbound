@@ -1,8 +1,10 @@
 extends Node
 
-## Regression for the manual 2026-08-23 Hushiro playtest blockers:
-## - a Corrupted Archer must actually die when a valid Deathblow executes;
-## - reaching 65/65 Posture must enter a real stagger before the finisher arms.
+## Regression for the current standard-enemy defense contract:
+## - Corrupted Archer retains its Health-first durability baseline;
+## - legacy Posture compatibility values cannot accumulate into a break;
+## - standard Archer never becomes Deathblow-ready from Posture;
+## - the canonical death path still emits exactly one enemy_died signal.
 
 const ARCHER_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcher.tscn")
 
@@ -21,12 +23,10 @@ func _run_contract() -> void:
 
 	add_child(archer_value)
 	await get_tree().process_frame
+	await get_tree().physics_frame
 
 	if not archer_value.has_method("is_deathblow_ready"):
-		_fail("canonical Archer has no is_deathblow_ready contract")
-		return
-	if not archer_value.has_method("receive_deathblow"):
-		_fail("canonical Archer has no receive_deathblow contract")
+		_fail("canonical Archer has no compatibility is_deathblow_ready contract")
 		return
 	if not archer_value.has_signal("enemy_died"):
 		_fail("canonical Archer has no enemy_died signal")
@@ -43,45 +43,44 @@ func _run_contract() -> void:
 
 	var posture_max: float = combat_controller.config.posture_max
 	if absf(posture_max - 65.0) > 0.001:
-		_fail("expected Archer posture_max=65, got %.3f" % posture_max)
+		_fail("expected Archer legacy compatibility posture_max=65, got %.3f" % posture_max)
 		return
 
-	var break_runtime: Node = archer_value.get_node_or_null("HushiroPostureBreakRuntime")
-	if break_runtime == null:
-		_fail("canonical Archer missing shared posture-break runtime")
+	var no_posture: Node = archer_value.get_node_or_null("HushiroStandardNoPostureRuntime")
+	if no_posture == null:
+		_fail("canonical Archer missing standard no-Posture runtime")
+		return
+	if no_posture.has_method("is_posture_retired") and not bool(no_posture.call("is_posture_retired")):
+		_fail("canonical Archer no-Posture runtime is not active")
+		return
+	if archer_value.get_node_or_null("HushiroPostureBreakRuntime") != null:
+		_fail("canonical Archer still owns retired standard posture-break runtime")
+		return
+	if archer_value.get_node_or_null("HushiroPostureReadabilityRuntime") != null:
+		_fail("canonical Archer still owns retired standard Posture readability runtime")
 		return
 
 	combat_controller.add_posture(posture_max)
 	await get_tree().physics_frame
-
-	if combat_controller.get_posture_ratio() < 0.999:
-		_fail("Archer did not reach full Posture")
-		return
-	if not bool(break_runtime.call("is_break_active")):
-		_fail("full-Posture Archer did not enter posture-broken stagger")
+	if not is_zero_approx(combat_controller.get_posture()):
+		_fail("Archer accumulated retired standard Posture")
 		return
 	if bool(archer_value.call("is_deathblow_ready")):
-		_fail("Archer became Deathblow-ready on the same frame as Posture break")
+		_fail("standard Archer became Deathblow-ready after retired Posture input")
 		return
 
-	await get_tree().create_timer(0.24).timeout
-	await get_tree().physics_frame
-
-	if not bool(archer_value.call("is_deathblow_ready")):
-		_fail("staggered Archer did not become Deathblow-ready after readability beat")
+	var posture_bar: Node = archer_value.get_node_or_null("PostureBar")
+	if posture_bar is CanvasItem and (posture_bar as CanvasItem).visible:
+		_fail("standard Archer PostureBar is still visible")
 		return
 
 	archer_value.connect("enemy_died", Callable(self, "_on_enemy_died"))
-	archer_value.call("receive_deathblow", null)
-
+	archer_value.call("death")
 	if _death_signal_count != 1:
-		_fail("deathblow did not synchronously resolve exactly one Archer death")
-		return
-	if bool(archer_value.call("is_deathblow_ready")):
-		_fail("dead Archer remained Deathblow-ready")
+		_fail("canonical Archer death path did not synchronously emit exactly one enemy_died signal")
 		return
 
-	print("[HushiroArcherDeathblowSmoke] PASS - 65/65 Posture -> deathblow -> enemy_died")
+	print("[HushiroArcherDeathblowSmoke] PASS - Health defeat | Posture retired | no standard Deathblow")
 	get_tree().quit(0)
 
 

@@ -17,6 +17,7 @@ on:
       - "game/oathbound/Utility/HushiroEncounterCatalog.gd"
       - "game/oathbound/Utility/HushiroEnemyContract.gd"
       - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
+      - "game/oathbound/Utility/HushiroStandardNoPostureRuntime.gd"
       - "game/oathbound/World/BloodStackManager.gd"
       - ".github/workflows/hushiro-combat-regression-check.yml"
   pull_request:
@@ -32,6 +33,7 @@ on:
       - "game/oathbound/Utility/HushiroEncounterCatalog.gd"
       - "game/oathbound/Utility/HushiroEnemyContract.gd"
       - "game/oathbound/Utility/HushiroPostureBreakRuntime.gd"
+      - "game/oathbound/Utility/HushiroStandardNoPostureRuntime.gd"
       - "game/oathbound/World/BloodStackManager.gd"
       - ".github/workflows/hushiro-combat-regression-check.yml"
   workflow_dispatch:
@@ -110,18 +112,18 @@ jobs:
             exit 1
           fi
 
-      - name: Verify Hushiro Archer deathblow contract
+      - name: Verify Hushiro Archer standard defense contract
         shell: bash
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroArcherDeathblowSmoke.tscn 2>&1 | tee hushiro-archer-deathblow.log
-          grep -F "[HushiroArcherDeathblowSmoke] PASS - 65/65 Posture -> deathblow -> enemy_died" hushiro-archer-deathblow.log
+          grep -F "[HushiroArcherDeathblowSmoke] PASS - Health defeat | Posture retired | no standard Deathblow" hushiro-archer-deathblow.log
           if grep -F "SCRIPT ERROR:" hushiro-archer-deathblow.log; then
-            echo "FAIL: Archer deathblow regression emitted a GDScript runtime error."
+            echo "FAIL: Archer standard-defense regression emitted a GDScript runtime error."
             exit 1
           fi
           if grep -F "ERROR: Error calling deferred method:" hushiro-archer-deathblow.log; then
-            echo "FAIL: Archer deathblow regression emitted a deferred-call runtime error."
+            echo "FAIL: Archer standard-defense regression emitted a deferred-call runtime error."
             exit 1
           fi
 

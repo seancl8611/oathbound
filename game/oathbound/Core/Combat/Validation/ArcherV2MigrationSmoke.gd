@@ -15,6 +15,7 @@ func _run() -> void:
 	archer.name = "ArcherV2MigrationSmokeEnemy"
 	add_child(archer)
 	await get_tree().process_frame
+	await get_tree().physics_frame
 	archer.set_physics_process(false)
 
 	_expect(archer.has_method("has_v2_archer_runtime"), "canonical Archer is not routed through CorruptedArcherV2")
@@ -24,14 +25,21 @@ func _run() -> void:
 	_expect(archer.get_node_or_null("CombatActionRunner") != null, "Archer missing CombatActionRunner")
 	_expect(archer.get_node_or_null("EnemyMotor") != null, "Archer missing EnemyMotor")
 	_expect(archer.get_node_or_null("EnemyBrain") != null, "Archer missing EnemyBrain")
-	_expect(archer.get_node_or_null("HushiroPostureBreakRuntime") != null, "Archer lost shared Posture/Deathblow runtime")
-	_expect(archer.get_node_or_null("PostureBar") != null, "Archer lost canonical PostureBar")
+	_expect(archer.get_node_or_null("HushiroStandardNoPostureRuntime") != null, "Archer missing standard no-Posture runtime")
+	_expect(archer.get_node_or_null("HushiroPostureBreakRuntime") == null, "Archer retained retired standard Posture/Deathblow runtime")
+	_expect(archer.get_node_or_null("HushiroPostureReadabilityRuntime") == null, "Archer retained retired standard Posture readability runtime")
+	var posture_bar: Node = archer.get_node_or_null("PostureBar")
+	if posture_bar is CanvasItem:
+		_expect(not (posture_bar as CanvasItem).visible, "Archer standard PostureBar is still visible")
 
 	_expect(int(archer.get("hp")) == 45, "Archer Hushiro Health baseline is not the Area 1 four-hit target")
 	var combat: Node = archer.get_node_or_null("Combat")
 	if combat != null:
 		var cfg: CombatConfig = combat.get("config") as CombatConfig
-		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 65.0), "Archer canonical Posture max is not 65")
+		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 65.0), "Archer legacy compatibility posture_max is not 65")
+		if combat.has_method("add_posture"):
+			combat.call("add_posture", 65.0)
+			_expect(is_zero_approx(float(combat.call("get_posture"))), "Archer accumulated retired standard Posture")
 	else:
 		_fail("Archer missing CombatController")
 
@@ -98,7 +106,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[ArcherV2MigrationSmoke] PASS - ranged brain | arrival pressure | aim commitment | low poise | Posture preserved")
+		print("[ArcherV2MigrationSmoke] PASS - ranged brain | arrival pressure | aim commitment | low poise | Posture retired")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

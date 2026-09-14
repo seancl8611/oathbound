@@ -2,6 +2,7 @@ extends Node
 
 const PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const SWORDSMAN_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn")
+const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
 
 var _failures: Array[String] = []
 
@@ -108,7 +109,7 @@ func _verify_player_ordinary_block(player: Node) -> void:
 	player.call("_on_hurt", 10, "melee", hitbox)
 
 	_expect(int(player.get("hp")) == 100, "ordinary frontal block leaked HP damage")
-	_expect(is_equal_approx(float(player.get("stagger")), 12.0), "ordinary frontal block did not apply authored 12 Posture")
+	_expect(is_equal_approx(float(player.get("stagger")), 12.0), "ordinary frontal block did not apply authored 12 player Posture")
 
 	origin.queue_free()
 	await get_tree().process_frame
@@ -140,6 +141,11 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	enemy.global_position = Vector2(50.0, 0.0)
 	add_child(enemy)
 	await get_tree().process_frame
+
+	# Match live Hushiro spawn normalization instead of testing the imported scene in
+	# isolation. The regional runtime applies this contract after the enemy's _ready().
+	HUSHIRO_ENEMY_CONTRACT.apply(enemy, "swordsman")
+	await get_tree().physics_frame
 	enemy.set_physics_process(false)
 	enemy.set("hp", 90)
 
@@ -151,6 +157,10 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	if combat.has_method("reset_posture"):
 		combat.call("reset_posture")
 
+	var no_posture: Node = enemy.get_node_or_null("HushiroStandardNoPostureRuntime")
+	_expect(no_posture != null, "Corrupted Swordsman missing standard no-Posture boundary")
+	_expect(enemy.get_node_or_null("HushiroPostureBreakRuntime") == null, "Corrupted Swordsman still owns standard posture-break runtime")
+
 	enemy.call("_set_blocking", true)
 	_expect(bool(enemy.call("is_blocking")), "Corrupted Swordsman could not enter active guard")
 
@@ -161,29 +171,21 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	var guarded_hitbox: Area2D = _make_player_sword_hitbox(player, "Guarded")
 	sword_origin.add_child(guarded_hitbox)
 
-	# The semantic probe owns its own clean presentation baseline. A previous Player hit
-	# may still have a 0.6s transient number alive, and the manager intentionally keeps a
-	# 0.1s target+type cooldown. Neither lifetime is part of the guard/HP-number contract.
 	await _reset_damage_number_probe()
 	var guarded_number_count_before: int = _count_damage_number_nodes()
 	enemy.call("_on_hurt_box_hurt", 12, "sword_light", guarded_hitbox)
 	await get_tree().process_frame
 
 	_expect(int(enemy.get("hp")) == 86, "V2 Swordsman guard did not pass the authored 35% Health damage")
-	_expect(float(combat.call("get_posture")) > 0.0, "active enemy guard did not take Posture pressure")
+	_expect(is_zero_approx(float(combat.call("get_posture"))), "active standard-enemy guard accumulated retired Posture")
 	_expect(
 		_count_damage_number_nodes() == guarded_number_count_before + 1,
 		"guarded Health loss did not create exactly one floating damage number"
 	)
 	_expect(_latest_damage_number_text() == "4", "guarded floating number did not equal actual enemy HP lost")
 
-	# These are independent semantic contacts, not a cooldown timing test. Remove the
-	# prior transient UI and cooldown key deterministically instead of sleeping 0.12s and
-	# letting CI frame scheduling decide when the next assertion becomes eligible.
 	await _reset_damage_number_probe()
 
-	# A real unguarded HP hit must still create one number, and that number must
-	# equal the HP actually removed rather than Posture pressure or raw attack power.
 	enemy.call("_set_blocking", false)
 	enemy.set("can_block", false)
 	var unguarded_hitbox: Area2D = _make_player_sword_hitbox(player, "Unguarded")
@@ -196,6 +198,7 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	var hp_lost: int = maxi(0, hp_before - hp_after)
 
 	_expect(hp_lost > 0, "unguarded control hit did not remove enemy HP")
+	_expect(is_zero_approx(float(combat.call("get_posture"))), "unguarded standard hit accumulated retired Posture")
 	_expect(
 		_count_damage_number_nodes() == real_number_count_before + 1,
 		"real enemy HP loss did not create exactly one floating damage number"
@@ -205,8 +208,6 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 		"floating damage number did not equal actual enemy HP lost"
 	)
 
-	# Killing blows are part of the same contract. Isolate this probe too so only the
-	# overkill HP-loss number is present when its count/value is asserted.
 	await _reset_damage_number_probe()
 	enemy.set("hp", 5)
 	var overkill_hitbox: Area2D = _make_player_sword_hitbox(player, "Overkill")
@@ -242,7 +243,6 @@ func _verify_perilous_thrust_warning(player: Node) -> void:
 	await get_tree().process_frame
 	enemy.set_physics_process(false)
 
-	# Current Hushiro layer stamps the live thrust hitbox before the warning is shown.
 	enemy.call("_spawn_thrust_hitbox", 8, 70.0, true)
 	var hitbox_value: Variant = enemy.get("_current_swipe_area")
 	_expect(hitbox_value != null and is_instance_valid(hitbox_value), "Swordsman thrust telegraph did not create its authored hitbox")
@@ -258,9 +258,6 @@ func _verify_perilous_thrust_warning(player: Node) -> void:
 
 
 func _reset_damage_number_probe() -> void:
-	# Test-only isolation: do not modify DamageNumberManager production behavior. The
-	# smoke validates one HP-number semantic contact at a time, so clear persistent
-	# cooldown bookkeeping and remove prior transient UI before establishing each count.
 	DamageNumberManager.damage_display_timer.clear()
 	var scene: Node = get_tree().current_scene
 	if scene != null:
@@ -295,7 +292,7 @@ func _latest_damage_number_text() -> String:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture | real HP number exact | perilous thrust bypass + warning")
+		print("[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture retired | real HP number exact | perilous thrust bypass + warning")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

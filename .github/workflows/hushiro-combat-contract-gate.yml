@@ -12,6 +12,7 @@ on:
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/**"
       - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroStandardNoPostureRuntime.gd"
       - ".github/workflows/hushiro-combat-contract-gate.yml"
   pull_request:
     paths:
@@ -21,6 +22,7 @@ on:
       - "game/oathbound/Player/**"
       - "game/oathbound/Regions/Hushiro/**"
       - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Utility/HushiroStandardNoPostureRuntime.gd"
       - ".github/workflows/hushiro-combat-contract-gate.yml"
   workflow_dispatch:
 
@@ -65,6 +67,17 @@ jobs:
           grep -F "[Area1PlayerPressureSmoke] PASS - six-hit 84-damage pressure string | midpoint Heavy continuation | natural hit-six endpoint | V2 motion ownership | canonical Player ownership | directional target handoff" player-pressure.log
           if grep -F "SCRIPT ERROR:" player-pressure.log; then
             echo "FAIL: player pressure/handoff smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Verify standard-enemy Posture retirement
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/StandardEnemyPostureRetirementSmoke.tscn 2>&1 | tee standard-posture-retirement.log
+          grep -F "[StandardEnemyPostureRetirementSmoke] PASS - six standard roles | no Posture accumulation | no posture break | no standard Posture UI runtime" standard-posture-retirement.log
+          if grep -F "SCRIPT ERROR:" standard-posture-retirement.log; then
+            echo "FAIL: standard-enemy Posture retirement smoke emitted a GDScript runtime error."
             exit 1
           fi
 
@@ -164,6 +177,7 @@ jobs:
             combat-contract-editor.log
             player-paced.log
             player-pressure.log
+            standard-posture-retirement.log
             special-parry-policy.log
             counter-cue-pressure.log
             archer-projectile-counter-cue.log

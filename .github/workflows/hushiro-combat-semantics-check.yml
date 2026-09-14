@@ -39,7 +39,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroCombatSemanticsSmoke.tscn 2>&1 | tee hushiro-combat-semantics.log
-          grep -F "[HushiroCombatSemanticsSmoke] PASS - shared Hound posture stagger-first deathblow bounded pack envelope" hushiro-combat-semantics.log
+          grep -F "[HushiroCombatSemanticsSmoke] PASS - Health-first standard Hound | Posture retired | bounded pack envelope | Keeper reward recovery" hushiro-combat-semantics.log
           if grep -F "SCRIPT ERROR:" hushiro-combat-semantics.log; then
             echo "FAIL: Hushiro combat semantics emitted a GDScript runtime error."
             exit 1
@@ -54,7 +54,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroDefenseContractSmoke.tscn 2>&1 | tee hushiro-defense-contract.log
-          grep -F "[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture | real HP number exact | perilous thrust bypass + warning" hushiro-defense-contract.log
+          grep -F "[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture retired | real HP number exact | perilous thrust bypass + warning" hushiro-defense-contract.log
           if grep -F "SCRIPT ERROR:" hushiro-defense-contract.log; then
             echo "FAIL: Hushiro defense contract emitted a GDScript runtime error."
             exit 1
@@ -69,7 +69,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroGuardReadabilitySmoke.tscn 2>&1 | tee hushiro-guard-readability.log
-          grep -F "[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical partial 4 HP + 14 Posture | exact HP number" hushiro-guard-readability.log
+          grep -F "[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical partial 4 HP | standard Posture hidden | exact HP number" hushiro-guard-readability.log
           if grep -F "SCRIPT ERROR:" hushiro-guard-readability.log; then
             echo "FAIL: Guard readability smoke emitted a GDScript runtime error."
             exit 1
@@ -159,7 +159,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/HoundV2MigrationSmoke.tscn 2>&1 | tee hound-v2-migration.log
-          grep -F "[HoundV2MigrationSmoke] PASS - predator brain | action commitment | motor ownership | Poise | pressure windows | Posture preservation" hound-v2-migration.log
+          grep -F "[HoundV2MigrationSmoke] PASS - predator brain | action commitment | motor ownership | Poise | pressure windows | Posture retired" hound-v2-migration.log
           if grep -F "SCRIPT ERROR:" hound-v2-migration.log; then
             echo "FAIL: Combat V2 Hound migration smoke emitted a GDScript runtime error."
             exit 1
@@ -174,7 +174,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/HollowV2MigrationSmoke.tscn 2>&1 | tee hollow-v2-migration.log
-          grep -F "[HollowV2MigrationSmoke] PASS - simple fodder brain | pressure bite | commitment | low poise | Posture preserved" hollow-v2-migration.log
+          grep -F "[HollowV2MigrationSmoke] PASS - simple fodder brain | pressure bite | commitment | low poise | Posture retired" hollow-v2-migration.log
           if grep -F "SCRIPT ERROR:" hollow-v2-migration.log; then
             echo "FAIL: Combat V2 Hollow migration smoke emitted a GDScript runtime error."
             exit 1
@@ -189,7 +189,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/ArcherV2MigrationSmoke.tscn 2>&1 | tee archer-v2-migration.log
-          grep -F "[ArcherV2MigrationSmoke] PASS - ranged brain | arrival pressure | aim commitment | low poise | Posture preserved" archer-v2-migration.log
+          grep -F "[ArcherV2MigrationSmoke] PASS - ranged brain | arrival pressure | aim commitment | low poise | Posture retired" archer-v2-migration.log
           if grep -F "SCRIPT ERROR:" archer-v2-migration.log; then
             echo "FAIL: Combat V2 Archer migration smoke emitted a GDScript runtime error."
             exit 1
@@ -204,7 +204,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/BilemassV2MigrationSmoke.tscn 2>&1 | tee bilemass-v2-migration.log
-          grep -F "[BilemassV2MigrationSmoke] PASS - hazard brain | landing pressure | spit commitment | Poise | puddle contract | Posture preserved" bilemass-v2-migration.log
+          grep -F "[BilemassV2MigrationSmoke] PASS - hazard brain | landing pressure | spit commitment | Poise | puddle contract | Posture retired" bilemass-v2-migration.log
           if grep -F "SCRIPT ERROR:" bilemass-v2-migration.log; then
             echo "FAIL: Combat V2 Bilemass migration smoke emitted a GDScript runtime error."
             exit 1
@@ -219,7 +219,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/WardenV2MigrationSmoke.tscn 2>&1 | tee warden-v2-migration.log
-          grep -F "[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | restraint/Posture preserved" warden-v2-migration.log
+          grep -F "[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | enemy Posture retired" warden-v2-migration.log
           if grep -F "SCRIPT ERROR:" warden-v2-migration.log; then
             echo "FAIL: Combat V2 Warden migration smoke emitted a GDScript runtime error."
             exit 1

@@ -29,27 +29,33 @@ func _run() -> void:
 	_expect(hollow.get_node_or_null("CombatActionRunner") != null, "Hollow missing CombatActionRunner")
 	_expect(hollow.get_node_or_null("EnemyMotor") != null, "Hollow missing EnemyMotor")
 	_expect(hollow.get_node_or_null("EnemyBrain") != null, "Hollow missing EnemyBrain")
-	_expect(hollow.get_node_or_null("HushiroPostureBreakRuntime") != null, "Hollow lost shared Posture/Deathblow runtime")
-	_expect(hollow.get_node_or_null("PostureBar") != null, "Hollow lost canonical PostureBar")
+	_expect(hollow.get_node_or_null("HushiroStandardNoPostureRuntime") != null, "Hollow missing standard no-Posture runtime")
+	_expect(hollow.get_node_or_null("HushiroPostureBreakRuntime") == null, "Hollow retained retired standard Posture/Deathblow runtime")
+	_expect(hollow.get_node_or_null("HushiroPostureReadabilityRuntime") == null, "Hollow retained retired standard Posture readability runtime")
+	var posture_bar: Node = hollow.get_node_or_null("PostureBar")
+	if posture_bar is CanvasItem:
+		_expect(not (posture_bar as CanvasItem).visible, "Hollow standard PostureBar is still visible")
 
 	_expect(int(hollow.get("hp")) == 40, "Hollow Hushiro hack-and-slash Health target is not 40")
 	var combat: Node = hollow.get_node_or_null("Combat")
 	if combat != null:
 		var cfg: CombatConfig = combat.get("config") as CombatConfig
-		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 40.0), "Hollow canonical Posture max is not 40")
+		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 40.0), "Hollow legacy compatibility posture_max is not 40")
+		if combat.has_method("add_posture"):
+			combat.call("add_posture", 40.0)
+			_expect(is_zero_approx(float(combat.call("get_posture"))), "Hollow accumulated retired standard Posture")
 	else:
 		_fail("Hollow missing CombatController")
 
 	# HushiroEnemyRuntime can discover one spawn through both node_added and its initial
 	# deferred sweep. The shared contract must make those converging paths a no-op after
-	# the first successful install instead of resetting live state / duplicating telemetry.
+	# the first successful install instead of resetting live Health / duplicating telemetry.
 	_expect(int(hollow.get_meta("hushiro_contract_apply_count", 0)) == 1, "Hollow contract was installed more than once during spawn")
 	_expect(bool(HUSHIRO_ENEMY_CONTRACT.is_current_contract(hollow, "hollow")), "Hollow current contract marker is missing")
-	if combat != null and combat.has_method("set_posture") and combat.has_method("get_posture"):
-		combat.call("set_posture", 7.0)
-		HUSHIRO_ENEMY_CONTRACT.apply(hollow, "hollow")
-		_expect(int(hollow.get_meta("hushiro_contract_apply_count", 0)) == 1, "repeated Hollow contract apply was not idempotent")
-		_expect(is_equal_approx(float(combat.call("get_posture")), 7.0), "repeated Hollow contract apply reset live Posture")
+	hollow.set("hp", 31)
+	HUSHIRO_ENEMY_CONTRACT.apply(hollow, "hollow")
+	_expect(int(hollow.get_meta("hushiro_contract_apply_count", 0)) == 1, "repeated Hollow contract apply was not idempotent")
+	_expect(int(hollow.get("hp")) == 31, "repeated Hollow contract apply reset live Health")
 
 	if hollow.has_method("uses_legacy_hollow_turn_token"):
 		_expect(not bool(hollow.call("uses_legacy_hollow_turn_token")), "Hollow still declares legacy whole-turn ownership")
@@ -128,7 +134,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HollowV2MigrationSmoke] PASS - simple fodder brain | pressure bite | commitment | low poise | Posture preserved | crowd backoff")
+		print("[HollowV2MigrationSmoke] PASS - simple fodder brain | pressure bite | commitment | low poise | Posture retired | crowd backoff")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
