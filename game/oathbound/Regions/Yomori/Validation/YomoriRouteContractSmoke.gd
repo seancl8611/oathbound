@@ -41,7 +41,7 @@ func _validate_registry_and_catalog() -> void:
 
 	_expect(_scene_path(rooms.get("combat")) == "res://Regions/Yomori/Chambers/CombatChamber.tscn", "Area 2 combat does not resolve to canonical Yomori chamber")
 	_expect(_scene_path(rooms.get("boss")) == "res://Regions/Yomori/Chambers/TwinMawsChamber.tscn", "Area 2 boss does not resolve to Twin Maws chamber")
-	_expect(_scene_path(rooms.get("treasure")) == "res://Core/Chambers/Types/TreasureChamber.tscn", "Treasure still resolves through a compatibility chamber")
+	_expect(_scene_path(rooms.get("treasure")) == "res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn", "Area 2 Treasure does not resolve through the adopted three-quarter service chamber")
 
 	var all_enemies_value: Variant = SceneRegistry.get("enemies_by_area")
 	if all_enemies_value is Dictionary:
