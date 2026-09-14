@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bxknnlmawot0n"]
+[gd_scene load_steps=15 format=3 uid="uid://bxknnlmawot0n"]
 
 [ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Standard/CourtCaster.gd" id="1_3ne0h"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_hurt"]
 [ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="3_hit"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyDefenseRuntime.gd" id="4_health"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
 radius = 4.0
@@ -98,6 +99,9 @@ shape = SubResource("CircleShape2D_range")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Range2"]
 shape = SubResource("CircleShape2D_range2")
+
+[node name="StandardEnemyDefenseRuntime" type="Node" parent="."]
+script = ExtResource("4_health")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
