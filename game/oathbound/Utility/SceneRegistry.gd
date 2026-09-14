@@ -19,8 +19,7 @@ var _shared_rooms := {
 
 var _rooms_by_area := {
 	1: {
-		# Area 1 adopts the fixed three-quarter presentation across the whole route while
-		# preserving the existing shared chamber gameplay via inherited Hushiro wrappers.
+		# Area 1 keeps its authored Hushiro-specific three-quarter wrappers.
 		"combat": preload("res://Regions/Hushiro/Chambers/CombatChamber.tscn"),
 		"shrine": preload("res://Regions/Hushiro/Chambers/ShrineChamber.tscn"),
 		"merchant": preload("res://Regions/Hushiro/Chambers/MerchantChamber.tscn"),
@@ -31,12 +30,26 @@ var _rooms_by_area := {
 		"treasure": preload("res://Regions/Hushiro/Chambers/TreasureChamber.tscn"),
 	},
 	2: {
+		# Yomori uses native combat/boss authority plus region-aware inherited service rooms.
 		"combat": preload("res://Regions/Yomori/Chambers/CombatChamber.tscn"),
+		"shrine": preload("res://Core/Chambers/ThreeQuarter/ShrineChamber.tscn"),
+		"merchant": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"shop": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"miniboss": preload("res://Core/Chambers/ThreeQuarter/MinibossChamber.tscn"),
+		"rest": preload("res://Core/Chambers/ThreeQuarter/RestChamber.tscn"),
 		"boss": preload("res://Regions/Yomori/Chambers/TwinMawsChamber.tscn"),
+		"treasure": preload("res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn"),
 	},
 	3: {
+		# Kagutsuchi follows the same presentation architecture with court-specific dressing.
 		"combat": preload("res://Regions/Kagutsuchi/Chambers/CombatChamber.tscn"),
+		"shrine": preload("res://Core/Chambers/ThreeQuarter/ShrineChamber.tscn"),
+		"merchant": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"shop": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"miniboss": preload("res://Core/Chambers/ThreeQuarter/MinibossChamber.tscn"),
+		"rest": preload("res://Core/Chambers/ThreeQuarter/RestChamber.tscn"),
 		"boss": preload("res://Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn"),
+		"treasure": preload("res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn"),
 	},
 }
 
