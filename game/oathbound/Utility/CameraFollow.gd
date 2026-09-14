@@ -1,12 +1,11 @@
 extends Camera2D
 
-## Player-follow camera plus the adopted three-quarter presentation.
+## Compatibility player-follow camera for the adopted high-angle presentation.
 ##
-## The simulation remains completely 2D. We project the ground plane by using a
-## non-uniform Camera2D zoom (Y is compressed relative to X), then counter-scale the
-## main character sprites/proxies and world-space interface so upright content is not
-## squashed. Physics, navigation, hitboxes, attack ranges and AI stay authoritative in
-## their existing world coordinates.
+## Oathbound's production target is now stylized 3D with a fixed high-angle Camera3D.
+## This Camera2D stack remains the playable migration bridge for unmigrated scenes:
+## it projects the existing 2D ground plane, counter-scales upright content, and drives
+## temporary actor proxies without changing authoritative combat coordinates.
 
 @export_category("Follow")
 @export var smoothing_on_start := true
@@ -14,8 +13,7 @@ extends Camera2D
 
 @export_category("Three-quarter presentation")
 @export var three_quarter_enabled := true
-# The adopted profile uses a gentler projection than the first stretch-test. Authored
-# room dressing and actor silhouettes carry most of the depth read instead of severe Y squash.
+# Compatibility profile. Production Camera3D framing will be tuned independently.
 @export_range(0.5, 1.5, 0.01) var presentation_zoom := 0.94
 @export_range(0.5, 1.0, 0.01) var ground_vertical_compression := 0.84
 @export var framing_world_offset := Vector2(0.0, -18.0)
@@ -39,11 +37,13 @@ const PRESENTATION_SELF_MODULATE_META := &"_oathbound_three_quarter_base_self_mo
 const PRESENTATION_WORLD_UI_SCALE_META := &"_oathbound_three_quarter_world_ui_scale"
 const PRESENTATION_SHADOW_PENDING_META := &"_oathbound_three_quarter_shadow_pending"
 const PRESENTATION_PROXY_PENDING_META := &"_oathbound_three_quarter_proxy_pending"
+const PRESENTATION_VISUAL_BASE_VISIBLE_META := &"_oathbound_three_quarter_base_visible"
+const PRESENTATION_KEEP_WITH_REPLACEMENT_META := &"oathbound_keep_with_replacement_visual"
 const PRESENTATION_SHADOW_NAME := &"ThreeQuarterGroundShadow"
 const PRESENTATION_PROXY_NAME := &"ThreeQuarterActorProxy"
 # Existing scenes were authored before world-depth sorting and often leave backgrounds
 # at z=0. Bias projected actors above that legacy floor, then sort actors against one
-# another by Y. Future three-quarter props can opt into explicit foreground Z bands.
+# another by Y. Future 3D rooms replace this compatibility behavior entirely.
 const ACTOR_DEPTH_BIAS := 1000
 const DEPTH_Z_MIN := -4095
 const DEPTH_Z_MAX := 4095
@@ -183,31 +183,66 @@ func _prepare_actor_visual(actor: Node) -> void:
 		actor_2d.set_meta(PRESENTATION_Z_META, actor_2d.z_index)
 
 	var sprite := _find_main_actor_sprite(actor_2d)
-	if sprite != null:
-		if compensate_character_sprites:
-			if not sprite.has_meta(PRESENTATION_SCALE_META):
-				sprite.set_meta(PRESENTATION_SCALE_META, sprite.scale)
-			var base_scale_value: Variant = sprite.get_meta(PRESENTATION_SCALE_META)
-			if base_scale_value is Vector2:
-				var base_scale: Vector2 = base_scale_value
-				var safe_compression := maxf(0.01, ground_vertical_compression)
-				# Counter-project only the body artwork. The interpolation knob lets us reduce
-				# correction if compatibility sprites feel too tall.
-				var target_y_factor := 1.0 / safe_compression
-				var y_factor := lerpf(1.0, target_y_factor, clampf(sprite_counter_projection, 0.0, 1.0))
-				sprite.scale = Vector2(base_scale.x, base_scale.y * y_factor)
+	if sprite != null and compensate_character_sprites:
+		if not sprite.has_meta(PRESENTATION_SCALE_META):
+			sprite.set_meta(PRESENTATION_SCALE_META, sprite.scale)
+		var base_scale_value: Variant = sprite.get_meta(PRESENTATION_SCALE_META)
+		if base_scale_value is Vector2:
+			var base_scale: Vector2 = base_scale_value
+			var safe_compression := maxf(0.01, ground_vertical_compression)
+			# Counter-project only the body artwork. The interpolation knob lets us reduce
+			# correction if compatibility sprites feel too tall.
+			var target_y_factor := 1.0 / safe_compression
+			var y_factor := lerpf(1.0, target_y_factor, clampf(sprite_counter_projection, 0.0, 1.0))
+			sprite.scale = Vector2(base_scale.x, base_scale.y * y_factor)
 
-		if use_procedural_actor_proxies and hide_legacy_actor_sprites_when_proxying:
-			if not sprite.has_meta(PRESENTATION_SELF_MODULATE_META):
-				sprite.set_meta(PRESENTATION_SELF_MODULATE_META, sprite.self_modulate)
-			var hidden_color := sprite.self_modulate
-			hidden_color.a = 0.0
-			sprite.self_modulate = hidden_color
+	if use_procedural_actor_proxies and hide_legacy_actor_sprites_when_proxying:
+		_hide_legacy_actor_visuals(actor_2d)
 
 	if add_contact_shadows:
 		_ensure_contact_shadow(actor_2d, sprite)
 	if use_procedural_actor_proxies:
 		_ensure_actor_proxy(actor_2d)
+
+
+func _hide_legacy_actor_visuals(actor: Node2D) -> void:
+	# Replacement body art is exclusive, never additive. The old implementation hid
+	# only one direct Sprite2D, which allowed nested/multipart/AnimatedSprite2D bodies to
+	# show through new proxies. Walk the actor subtree and hide all legacy body sprites.
+	# Intentional auxiliary Sprite2D VFX can opt out by setting
+	# `oathbound_keep_with_replacement_visual = true` on their visual root.
+	var visuals: Array[CanvasItem] = []
+	_collect_legacy_actor_visuals(actor, actor, visuals)
+	for visual: CanvasItem in visuals:
+		if not is_instance_valid(visual):
+			continue
+		if not visual.has_meta(PRESENTATION_VISUAL_BASE_VISIBLE_META):
+			visual.set_meta(PRESENTATION_VISUAL_BASE_VISIBLE_META, visual.visible)
+		visual.visible = false
+
+
+func _collect_legacy_actor_visuals(root: Node2D, node: Node, out: Array[CanvasItem]) -> void:
+	if node != root:
+		if node.name == PRESENTATION_PROXY_NAME or node.name == PRESENTATION_SHADOW_NAME:
+			return
+		if bool(node.get_meta(PRESENTATION_KEEP_WITH_REPLACEMENT_META, false)):
+			return
+
+	if node is Sprite2D or node is AnimatedSprite2D:
+		out.append(node as CanvasItem)
+
+	for child: Node in node.get_children():
+		_collect_legacy_actor_visuals(root, child, out)
+
+
+func _restore_legacy_actor_visuals(actor: Node2D) -> void:
+	var visuals: Array[CanvasItem] = []
+	_collect_legacy_actor_visuals(actor, actor, visuals)
+	for visual: CanvasItem in visuals:
+		if not is_instance_valid(visual):
+			continue
+		if visual.has_meta(PRESENTATION_VISUAL_BASE_VISIBLE_META):
+			visual.visible = bool(visual.get_meta(PRESENTATION_VISUAL_BASE_VISIBLE_META))
 
 
 func _refresh_world_controls() -> void:
@@ -275,10 +310,14 @@ func _restore_all_actor_visuals() -> void:
 				var base_scale_value: Variant = sprite.get_meta(PRESENTATION_SCALE_META)
 				if base_scale_value is Vector2:
 					sprite.scale = base_scale_value
+			# Older compatibility runs hid the direct sprite by alpha. Restore that state
+			# if the metadata exists, then restore the new subtree visibility contract.
 			if sprite.has_meta(PRESENTATION_SELF_MODULATE_META):
 				var base_modulate_value: Variant = sprite.get_meta(PRESENTATION_SELF_MODULATE_META)
 				if base_modulate_value is Color:
 					sprite.self_modulate = base_modulate_value
+
+		_restore_legacy_actor_visuals(actor_2d)
 
 		if actor_2d.has_meta(PRESENTATION_Z_META):
 			actor_2d.z_index = int(actor_2d.get_meta(PRESENTATION_Z_META))
@@ -296,8 +335,8 @@ func _restore_all_actor_visuals() -> void:
 
 
 func _find_main_actor_sprite(actor: Node2D) -> Sprite2D:
-	# Current Akio and migrated standard enemies generally use a direct Sprite2D named
-	# Sprite2D. The fallback keeps the presentation useful for compatibility actors.
+	# Keep the primary Sprite2D for compatibility counter-projection/shadow sizing.
+	# Replacement hiding is handled separately and recursively.
 	var direct := actor.get_node_or_null("Sprite2D") as Sprite2D
 	if direct != null:
 		return direct
@@ -430,6 +469,6 @@ func _update_badge_text() -> void:
 	if _prototype_badge == null:
 		return
 	if _active_three_quarter:
-		_prototype_badge.text = "THREE-QUARTER POV  |  F9: legacy debug view"
+		_prototype_badge.text = "THREE-QUARTER BRIDGE  |  F9: legacy debug view"
 	else:
-		_prototype_badge.text = "LEGACY DEBUG VIEW  |  F9: three-quarter POV"
+		_prototype_badge.text = "LEGACY DEBUG VIEW  |  F9: three-quarter bridge"
