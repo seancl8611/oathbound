@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://Core/Chambers/Types/BossChamber.tscn" id="1_base"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="2_visibility"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Presentation/ThreeQuarterServiceChamberScenery.gd" id="3_scenery"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="4_fx"]
+
+[node name="BossChamber" instance=ExtResource("1_base")]
+
+[node name="ThreeQuarterPresentation" type="Node2D" parent="."]
+script = ExtResource("2_visibility")
+
+[node name="Scenery" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("3_scenery")
+profile = "boss"
+
+[node name="CombatFX" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("4_fx")
