@@ -1,6 +1,6 @@
 extends Camera2D
 
-## Player-follow camera plus the reversible three-quarter presentation prototype.
+## Player-follow camera plus the adopted three-quarter presentation.
 ##
 ## The simulation remains completely 2D. We project the ground plane by using a
 ## non-uniform Camera2D zoom (Y is compressed relative to X), then counter-scale the
@@ -12,10 +12,10 @@ extends Camera2D
 @export var smoothing_on_start := true
 @export var smoothing_speed := 8.0
 
-@export_category("Three-quarter presentation prototype")
+@export_category("Three-quarter presentation")
 @export var three_quarter_enabled := true
-# V2 deliberately uses a gentler projection than the first stretch-test. Authored room
-# dressing and actor proxies now carry most of the depth read instead of severe Y squash.
+# The adopted profile uses a gentler projection than the first stretch-test. Authored
+# room dressing and actor silhouettes carry most of the depth read instead of severe Y squash.
 @export_range(0.5, 1.5, 0.01) var presentation_zoom := 0.94
 @export_range(0.5, 1.0, 0.01) var ground_vertical_compression := 0.84
 @export var framing_world_offset := Vector2(0.0, -18.0)
@@ -26,7 +26,9 @@ extends Camera2D
 @export var hide_legacy_actor_sprites_when_proxying := true
 @export var add_contact_shadows := true
 @export var depth_sort_characters := true
-@export var show_prototype_badge := true
+# Developer-only A/B badge. F9 remains available for regression comparison, but the
+# adopted three-quarter view should not advertise itself as a prototype during normal play.
+@export var show_prototype_badge := false
 @export var toggle_key: Key = KEY_F9
 @export_range(0.05, 1.0, 0.05) var actor_refresh_seconds := 0.20
 
@@ -294,8 +296,8 @@ func _restore_all_actor_visuals() -> void:
 
 
 func _find_main_actor_sprite(actor: Node2D) -> Sprite2D:
-	# Current Akio and migrated Hushiro standard enemies all use a direct Sprite2D
-	# named Sprite2D. The fallback keeps the prototype useful for compatibility actors.
+	# Current Akio and migrated standard enemies generally use a direct Sprite2D named
+	# Sprite2D. The fallback keeps the presentation useful for compatibility actors.
 	var direct := actor.get_node_or_null("Sprite2D") as Sprite2D
 	if direct != null:
 		return direct
@@ -408,7 +410,7 @@ func _ensure_prototype_badge() -> void:
 	if not show_prototype_badge:
 		return
 	var layer := CanvasLayer.new()
-	layer.name = "ThreeQuarterPrototypeHUD"
+	layer.name = "ThreeQuarterDebugHUD"
 	layer.layer = 90
 	add_child(layer)
 
@@ -428,6 +430,6 @@ func _update_badge_text() -> void:
 	if _prototype_badge == null:
 		return
 	if _active_three_quarter:
-		_prototype_badge.text = "THREE-QUARTER POV V2  |  F9: legacy view"
+		_prototype_badge.text = "THREE-QUARTER POV  |  F9: legacy debug view"
 	else:
-		_prototype_badge.text = "LEGACY TOP-DOWN VIEW  |  F9: three-quarter POV"
+		_prototype_badge.text = "LEGACY DEBUG VIEW  |  F9: three-quarter POV"
