@@ -210,7 +210,8 @@ func _prepare_actor_visual(actor: Node) -> void:
 
 func _refresh_world_controls() -> void:
 	# CanvasLayer HUD is already screen-space and must never be counter-projected. Only
-	# Control nodes living in the same world tree as the Player/current room are adjusted.
+	# top-level Control roots living in the same world tree as the Player/current room are
+	# adjusted; child Controls inherit that transform once instead of being double-scaled.
 	if _target == null:
 		return
 	var world_root := _target.get_parent()
@@ -227,9 +228,12 @@ func _prepare_world_controls_recursive(node: Node, inside_canvas_layer: bool) ->
 			control.set_meta(PRESENTATION_WORLD_UI_SCALE_META, control.scale)
 		var base_scale_value: Variant = control.get_meta(PRESENTATION_WORLD_UI_SCALE_META)
 		if base_scale_value is Vector2:
-			var base_scale := base_scale_value as Vector2
+			var base_scale: Vector2 = base_scale_value
 			var safe_compression := maxf(0.01, ground_vertical_compression)
 			control.scale = Vector2(base_scale.x, base_scale.y / safe_compression)
+		# Descendant Controls inherit the corrected transform from this root. Recursing
+		# into them would apply the inverse compression multiple times.
+		return
 
 	for child: Node in node.get_children():
 		_prepare_world_controls_recursive(child, now_inside_canvas_layer)
@@ -252,6 +256,7 @@ func _restore_world_controls_recursive(node: Node, inside_canvas_layer: bool) ->
 			var base_scale_value: Variant = control.get_meta(PRESENTATION_WORLD_UI_SCALE_META)
 			if base_scale_value is Vector2:
 				control.scale = base_scale_value
+		return
 
 	for child: Node in node.get_children():
 		_restore_world_controls_recursive(child, now_inside_canvas_layer)
