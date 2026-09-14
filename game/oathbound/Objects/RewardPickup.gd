@@ -28,7 +28,6 @@ const REWARD_COLORS := {
 	"mist": Color(0.66, 0.48, 0.87),
 	"scroll": Color(0.87, 0.78, 0.55),
 	"maxhp": Color(0.85, 0.2, 0.15),
-	"maxposture": Color(0.87, 0.67, 0.13),
 	"boon": Color(0.3, 0.72, 1.0),
 	"technique": Color(0.3, 0.72, 1.0),
 }
@@ -38,7 +37,6 @@ const REWARD_LABELS := {
 	"mist": "Mist",
 	"scroll": "Scrolls",
 	"maxhp": "Max Health",
-	"maxposture": "Max Posture",
 	"boon": "Technique",
 	"technique": "Technique",
 }
@@ -191,10 +189,6 @@ func _grant_currency_or_stat() -> void:
 				player.hp = min(player.hp + reward_amount, player.maxhp)
 				if player.has_method("_update_health_bar"):
 					player._update_health_bar()
-		"maxposture":
-			var player := get_tree().get_first_node_in_group("player")
-			if player != null and "stagger_max" in player:
-				player.stagger_max += reward_amount
 
 	_show_hud_toast()
 	print("[RewardPickup] Granted: %s x%d" % [reward_key, reward_amount])

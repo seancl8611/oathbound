@@ -1,21 +1,34 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7hdlxttxkrep"]
+[gd_scene load_steps=10 format=3 uid="uid://c7hdlxttxkrep"]
 
 [ext_resource type="Script" path="res://Regions/Hushiro/Chambers/CombatChamber.gd" id="1_6qnrf"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_2wlxx"]
 [ext_resource type="Script" path="res://Regions/Hushiro/Encounters/EncounterSpawner.gd" id="5_0cb17"]
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="7_qym0e"]
 [ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="7_rd5to"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Presentation/ThreeQuarterHushiroPrototype.gd" id="8_3qv"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="9_3qv"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="10_3qv"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="20_xw04x"]
 
 [node name="CombatChamber" type="Node2D"]
 script = ExtResource("1_6qnrf")
 
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -1000
 texture_filter = 2
 texture_repeat = 2
 texture = ExtResource("2_2wlxx")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
+
+[node name="ThreeQuarterPresentation" type="Node2D" parent="."]
+script = ExtResource("9_3qv")
+
+[node name="Scenery" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("8_3qv")
+
+[node name="CombatFX" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("10_3qv")
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 

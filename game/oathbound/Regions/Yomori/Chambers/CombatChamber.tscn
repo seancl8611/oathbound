@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://Regions/Yomori/Chambers/CombatChamber.gd" id="1_yomori"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_bg"]
@@ -6,17 +6,33 @@
 [ext_resource type="Script" path="res://Utility/RoomBounds.gd" id="4_bounds"]
 [ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="5_gate"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="6_damage"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="7_visibility"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterRegionScenery.gd" id="8_scenery"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="9_fx"]
 
 [node name="YomoriCombatChamber" type="Node2D"]
 script = ExtResource("1_yomori")
 
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -1000
 texture_filter = 2
 texture_repeat = 2
 texture = ExtResource("2_bg")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 modulate = Color(0.72, 0.78, 0.68, 1)
+
+[node name="ThreeQuarterPresentation" type="Node2D" parent="."]
+script = ExtResource("7_visibility")
+hide_background_when_active = true
+
+[node name="Scenery" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("8_scenery")
+region_profile = "yomori"
+room_profile = "combat"
+
+[node name="CombatFX" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("9_fx")
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
