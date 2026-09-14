@@ -8,6 +8,7 @@ on:
     paths:
       - "game/oathbound/Regions/Yomori/**"
       - "game/oathbound/Enemy/Area 2/**"
+      - "game/oathbound/Core/Combat/**"
       - "game/oathbound/Textures/Enemy/foot_soldier/**"
       - "game/oathbound/Textures/Enemy/shield_captain/**"
       - "game/oathbound/Textures/Enemy/spirit_monk/**"
@@ -58,6 +59,21 @@ jobs:
           fi
           if grep -F "ERROR: Error calling deferred method:" yomori-visual-assets.log; then
             echo "FAIL: Yomori visual asset smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify Yomori Health-first standard defense
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Yomori/Validation/YomoriStandardDefenseSmoke.tscn 2>&1 | tee yomori-standard-defense.log
+          grep -F "[YomoriStandardDefenseSmoke] PASS" yomori-standard-defense.log
+          if grep -F "SCRIPT ERROR:" yomori-standard-defense.log; then
+            echo "FAIL: Yomori standard defense emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" yomori-standard-defense.log; then
+            echo "FAIL: Yomori standard defense emitted a deferred-call runtime error."
             exit 1
           fi
 
@@ -134,6 +150,7 @@ jobs:
             yomori-import.log
             yomori-editor.log
             yomori-visual-assets.log
+            yomori-standard-defense.log
             yomori-route-contract.log
             twin-maws-contract.log
             yomori-playtest-regression.log
