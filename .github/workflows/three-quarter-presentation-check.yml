@@ -8,18 +8,24 @@ on:
     paths:
       - "game/oathbound/Utility/CameraFollow.gd"
       - "game/oathbound/Utility/ThreeQuarter*.gd"
+      - "game/oathbound/Core/Chambers/ThreeQuarter/**"
       - "game/oathbound/Regions/Hushiro/Chambers/**"
       - "game/oathbound/Regions/Hushiro/Presentation/**"
       - "game/oathbound/Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.*"
+      - "game/oathbound/Regions/Yomori/Chambers/**"
+      - "game/oathbound/Regions/Kagutsuchi/Chambers/**"
       - "game/oathbound/Utility/SceneRegistry.gd"
       - ".github/workflows/three-quarter-presentation-check.yml"
   pull_request:
     paths:
       - "game/oathbound/Utility/CameraFollow.gd"
       - "game/oathbound/Utility/ThreeQuarter*.gd"
+      - "game/oathbound/Core/Chambers/ThreeQuarter/**"
       - "game/oathbound/Regions/Hushiro/Chambers/**"
       - "game/oathbound/Regions/Hushiro/Presentation/**"
       - "game/oathbound/Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.*"
+      - "game/oathbound/Regions/Yomori/Chambers/**"
+      - "game/oathbound/Regions/Kagutsuchi/Chambers/**"
       - "game/oathbound/Utility/SceneRegistry.gd"
       - ".github/workflows/three-quarter-presentation-check.yml"
   workflow_dispatch:
@@ -42,7 +48,7 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
-      - name: Validate Area 1 three-quarter routing and region isolation
+      - name: Validate adopted three-quarter routing across all regions
         shell: bash
         run: |
           set -o pipefail
