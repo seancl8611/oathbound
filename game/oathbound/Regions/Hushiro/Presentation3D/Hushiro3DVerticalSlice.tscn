@@ -1,0 +1,395 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://Regions/Hushiro/Presentation3D/Hushiro3DVerticalSlice.gd" id="1_slice"]
+
+[sub_resource type="StandardMaterial3D" id="MatGround"]
+albedo_color = Color(0.105, 0.082, 0.074, 1)
+roughness = 0.94
+
+[sub_resource type="StandardMaterial3D" id="MatStone"]
+albedo_color = Color(0.25, 0.245, 0.225, 1)
+roughness = 0.88
+
+[sub_resource type="StandardMaterial3D" id="MatStoneDark"]
+albedo_color = Color(0.105, 0.11, 0.105, 1)
+roughness = 0.92
+
+[sub_resource type="StandardMaterial3D" id="MatTorii"]
+albedo_color = Color(0.33, 0.055, 0.042, 1)
+roughness = 0.72
+
+[sub_resource type="StandardMaterial3D" id="MatWood"]
+albedo_color = Color(0.145, 0.075, 0.052, 1)
+roughness = 0.84
+
+[sub_resource type="StandardMaterial3D" id="MatAkio"]
+albedo_color = Color(0.12, 0.13, 0.145, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="MatAkioCloth"]
+albedo_color = Color(0.32, 0.06, 0.055, 1)
+roughness = 0.78
+
+[sub_resource type="StandardMaterial3D" id="MatEnemy"]
+albedo_color = Color(0.235, 0.19, 0.16, 1)
+roughness = 0.82
+
+[sub_resource type="StandardMaterial3D" id="MatHound"]
+albedo_color = Color(0.19, 0.115, 0.105, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="MatMetal"]
+albedo_color = Color(0.42, 0.43, 0.42, 1)
+metallic = 0.72
+roughness = 0.32
+
+[sub_resource type="StandardMaterial3D" id="MatEmber"]
+albedo_color = Color(0.58, 0.105, 0.035, 1)
+emission_enabled = true
+emission = Color(0.72, 0.12, 0.025, 1)
+emission_energy_multiplier = 2.2
+roughness = 0.55
+
+[sub_resource type="PlaneMesh" id="MeshFloor"]
+size = Vector2(20, 12)
+
+[sub_resource type="BoxMesh" id="MeshBox"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="MeshHumanoid"]
+radius = 0.38
+height = 1.45
+
+[sub_resource type="SphereMesh" id="MeshSphere"]
+radius = 0.35
+height = 0.7
+
+[sub_resource type="CylinderMesh" id="MeshCylinder"]
+top_radius = 0.35
+bottom_radius = 0.45
+height = 0.16
+radial_segments = 24
+
+[node name="Hushiro3DVerticalSlice" type="Node3D"]
+script = ExtResource("1_slice")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+projection = 1
+size = 12.5
+near = 0.1
+far = 80.0
+position = Vector3(0, 12.5, 12.7)
+current = true
+
+[node name="MoonKey" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-58, -32, 0)
+light_color = Color(0.68, 0.72, 0.82, 1)
+light_energy = 1.15
+shadow_enabled = true
+
+[node name="ToriiEmberLight" type="OmniLight3D" parent="."]
+position = Vector3(0, 1.4, -4.7)
+omni_range = 6.5
+light_color = Color(0.9, 0.27, 0.09, 1)
+light_energy = 2.25
+shadow_enabled = true
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Environment"]
+mesh = SubResource("MeshFloor")
+material_override = SubResource("MatGround")
+
+[node name="GroundInset" type="MeshInstance3D" parent="Environment"]
+position = Vector3(0, 0.008, 0.25)
+scale = Vector3(0.56, 1, 0.52)
+mesh = SubResource("MeshCylinder")
+material_override = SubResource("MatStoneDark")
+
+[node name="FarWallLeft" type="MeshInstance3D" parent="Environment"]
+position = Vector3(-6.65, 0.55, -5.55)
+scale = Vector3(5.2, 1.1, 0.55)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStoneDark")
+
+[node name="FarWallMidLeft" type="MeshInstance3D" parent="Environment"]
+position = Vector3(-2.45, 0.38, -5.62)
+rotation_degrees = Vector3(0, 4, -4)
+scale = Vector3(2.5, 0.76, 0.5)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStone")
+
+[node name="FarWallMidRight" type="MeshInstance3D" parent="Environment"]
+position = Vector3(2.65, 0.42, -5.6)
+rotation_degrees = Vector3(0, -3, 3)
+scale = Vector3(2.8, 0.84, 0.5)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStone")
+
+[node name="FarWallRight" type="MeshInstance3D" parent="Environment"]
+position = Vector3(6.75, 0.6, -5.5)
+scale = Vector3(4.8, 1.2, 0.56)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStoneDark")
+
+[node name="RuinedTorii" type="Node3D" parent="Environment"]
+position = Vector3(0, 0, -5.02)
+
+[node name="LeftPillar" type="MeshInstance3D" parent="Environment/RuinedTorii"]
+position = Vector3(-1.55, 1.75, 0)
+scale = Vector3(0.28, 3.5, 0.34)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatTorii")
+
+[node name="RightPillar" type="MeshInstance3D" parent="Environment/RuinedTorii"]
+position = Vector3(1.55, 1.75, 0)
+scale = Vector3(0.28, 3.5, 0.34)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatTorii")
+
+[node name="CrossBeam" type="MeshInstance3D" parent="Environment/RuinedTorii"]
+position = Vector3(0, 3.25, 0)
+scale = Vector3(4.2, 0.32, 0.44)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatTorii")
+
+[node name="UpperBeam" type="MeshInstance3D" parent="Environment/RuinedTorii"]
+position = Vector3(-0.35, 3.7, 0.02)
+rotation_degrees = Vector3(0, 0, -2.5)
+scale = Vector3(4.9, 0.2, 0.38)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="BrokenCap" type="MeshInstance3D" parent="Environment/RuinedTorii"]
+position = Vector3(2.1, 3.92, 0.04)
+rotation_degrees = Vector3(0, 0, 9)
+scale = Vector3(1.25, 0.18, 0.34)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="LeftRuin" type="Node3D" parent="Environment"]
+position = Vector3(-7.25, 0, -0.9)
+
+[node name="Base" type="MeshInstance3D" parent="Environment/LeftRuin"]
+position = Vector3(0, 0.4, 0)
+rotation_degrees = Vector3(0, -18, 0)
+scale = Vector3(1.45, 0.8, 1.15)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStoneDark")
+
+[node name="Post" type="MeshInstance3D" parent="Environment/LeftRuin"]
+position = Vector3(-0.35, 1.35, -0.05)
+rotation_degrees = Vector3(0, -18, 5)
+scale = Vector3(0.3, 1.9, 0.32)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="Roof" type="MeshInstance3D" parent="Environment/LeftRuin"]
+position = Vector3(0.05, 2.25, -0.02)
+rotation_degrees = Vector3(0, -18, -7)
+scale = Vector3(2.2, 0.22, 1.15)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="RightRuin" type="Node3D" parent="Environment"]
+position = Vector3(7.05, 0, 0.75)
+rotation_degrees = Vector3(0, 17, 0)
+
+[node name="Base" type="MeshInstance3D" parent="Environment/RightRuin"]
+position = Vector3(0, 0.35, 0)
+scale = Vector3(1.35, 0.7, 1.1)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStoneDark")
+
+[node name="Post" type="MeshInstance3D" parent="Environment/RightRuin"]
+position = Vector3(0.4, 1.25, 0)
+rotation_degrees = Vector3(0, 0, -6)
+scale = Vector3(0.28, 1.8, 0.3)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="ForegroundFenceLeft" type="Node3D" parent="Environment"]
+position = Vector3(-5.7, 0, 4.75)
+rotation_degrees = Vector3(0, -9, 0)
+
+[node name="PostA" type="MeshInstance3D" parent="Environment/ForegroundFenceLeft"]
+position = Vector3(-0.8, 0.65, 0)
+scale = Vector3(0.18, 1.3, 0.18)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="PostB" type="MeshInstance3D" parent="Environment/ForegroundFenceLeft"]
+position = Vector3(0.8, 0.52, 0)
+rotation_degrees = Vector3(0, 0, 12)
+scale = Vector3(0.18, 1.05, 0.18)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="Rail" type="MeshInstance3D" parent="Environment/ForegroundFenceLeft"]
+position = Vector3(0, 0.78, 0)
+rotation_degrees = Vector3(0, 0, -4)
+scale = Vector3(1.9, 0.16, 0.16)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatWood")
+
+[node name="RockA" type="MeshInstance3D" parent="Environment"]
+position = Vector3(-4.4, 0.33, 1.8)
+rotation_degrees = Vector3(8, 24, -5)
+scale = Vector3(0.9, 0.65, 0.75)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStone")
+
+[node name="RockB" type="MeshInstance3D" parent="Environment"]
+position = Vector3(5.25, 0.25, -1.8)
+rotation_degrees = Vector3(-4, -31, 7)
+scale = Vector3(0.75, 0.5, 0.8)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatStone")
+
+[node name="EmberMarkerA" type="MeshInstance3D" parent="Environment"]
+position = Vector3(-2.2, 0.1, -3.7)
+scale = Vector3(0.2, 0.12, 0.2)
+mesh = SubResource("MeshSphere")
+material_override = SubResource("MatEmber")
+
+[node name="EmberMarkerB" type="MeshInstance3D" parent="Environment"]
+position = Vector3(2.0, 0.1, -3.95)
+scale = Vector3(0.15, 0.1, 0.15)
+mesh = SubResource("MeshSphere")
+material_override = SubResource("MatEmber")
+
+[node name="Actors" type="Node3D" parent="."]
+
+[node name="AkioPrototype" type="Node3D" parent="Actors"]
+position = Vector3(0, 0, 2.2)
+
+[node name="Body" type="MeshInstance3D" parent="Actors/AkioPrototype"]
+position = Vector3(0, 0.92, 0)
+mesh = SubResource("MeshHumanoid")
+material_override = SubResource("MatAkio")
+cast_shadow = 1
+
+[node name="Head" type="MeshInstance3D" parent="Actors/AkioPrototype"]
+position = Vector3(0, 1.85, 0)
+scale = Vector3(0.66, 0.66, 0.66)
+mesh = SubResource("MeshSphere")
+material_override = SubResource("MatAkio")
+
+[node name="Sash" type="MeshInstance3D" parent="Actors/AkioPrototype"]
+position = Vector3(0, 1.05, 0.02)
+scale = Vector3(0.86, 0.16, 0.9)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatAkioCloth")
+
+[node name="Katana" type="MeshInstance3D" parent="Actors/AkioPrototype"]
+position = Vector3(0.48, 1.02, -0.08)
+rotation_degrees = Vector3(0, 0, -17)
+scale = Vector3(0.055, 1.1, 0.055)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatMetal")
+
+[node name="SwordsmanPrototype" type="Node3D" parent="Actors"]
+position = Vector3(-2.65, 0, -0.85)
+rotation_degrees = Vector3(0, 155, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Actors/SwordsmanPrototype"]
+position = Vector3(0, 0.88, 0)
+scale = Vector3(1.03, 0.94, 1.03)
+mesh = SubResource("MeshHumanoid")
+material_override = SubResource("MatEnemy")
+
+[node name="Head" type="MeshInstance3D" parent="Actors/SwordsmanPrototype"]
+position = Vector3(0, 1.78, 0)
+scale = Vector3(0.62, 0.62, 0.62)
+mesh = SubResource("MeshSphere")
+material_override = SubResource("MatEnemy")
+
+[node name="Katana" type="MeshInstance3D" parent="Actors/SwordsmanPrototype"]
+position = Vector3(0.5, 0.98, -0.06)
+rotation_degrees = Vector3(0, 0, -19)
+scale = Vector3(0.055, 1.05, 0.055)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatMetal")
+
+[node name="HoundPrototype" type="Node3D" parent="Actors"]
+position = Vector3(3.0, 0, -1.55)
+rotation_degrees = Vector3(0, -128, 0)
+
+[node name="Body" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(0, 0.48, 0.05)
+scale = Vector3(0.72, 0.58, 1.45)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatHound")
+
+[node name="Head" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(0, 0.67, -0.86)
+scale = Vector3(0.82, 0.72, 0.95)
+mesh = SubResource("MeshSphere")
+material_override = SubResource("MatHound")
+
+[node name="EarLeft" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(-0.22, 1.02, -0.91)
+rotation_degrees = Vector3(14, 0, -12)
+scale = Vector3(0.14, 0.42, 0.16)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatHound")
+
+[node name="EarRight" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(0.22, 1.02, -0.91)
+rotation_degrees = Vector3(14, 0, 12)
+scale = Vector3(0.14, 0.42, 0.16)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatHound")
+
+[node name="LegFL" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(-0.27, 0.23, -0.48)
+scale = Vector3(0.16, 0.46, 0.18)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatHound")
+
+[node name="LegFR" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(0.27, 0.23, -0.48)
+scale = Vector3(0.16, 0.46, 0.18)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatHound")
+
+[node name="LegBL" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(-0.27, 0.23, 0.5)
+scale = Vector3(0.16, 0.46, 0.18)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatHound")
+
+[node name="LegBR" type="MeshInstance3D" parent="Actors/HoundPrototype"]
+position = Vector3(0.27, 0.23, 0.5)
+scale = Vector3(0.16, 0.46, 0.18)
+mesh = SubResource("MeshBox")
+material_override = SubResource("MatHound")
+
+[node name="BlockoutHUD" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="Backdrop" type="ColorRect" parent="BlockoutHUD"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 308.0
+offset_bottom = 58.0
+color = Color(0.025, 0.023, 0.027, 0.82)
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="BlockoutHUD"]
+offset_left = 18.0
+offset_top = 15.0
+offset_right = 300.0
+offset_bottom = 34.0
+theme_override_colors/font_color = Color(0.9, 0.82, 0.72, 1)
+theme_override_font_sizes/font_size = 12
+text = "HUSHIRO — STYLIZED 3D VERTICAL SLICE BLOCKOUT"
+
+[node name="Help" type="Label" parent="BlockoutHUD"]
+offset_left = 18.0
+offset_top = 35.0
+offset_right = 298.0
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0.66, 0.65, 0.65, 1)
+theme_override_font_sizes/font_size = 9
+text = "WASD: planar move   SPACE: dash-speed preview"
