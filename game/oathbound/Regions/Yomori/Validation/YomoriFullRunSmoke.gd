@@ -11,7 +11,7 @@ const YOMORI_CATALOG = preload("res://Regions/Yomori/Encounters/YomoriEncounterC
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
 const EXPECTED_COMBAT_SCENE: String = "res://Regions/Yomori/Chambers/CombatChamber.tscn"
 const EXPECTED_TWIN_MAWS_SCENE: String = "res://Regions/Yomori/Chambers/TwinMawsChamber.tscn"
-const EXPECTED_TREASURE_SCENE: String = "res://Core/Chambers/Types/TreasureChamber.tscn"
+const EXPECTED_TREASURE_SCENE: String = "res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn"
 const REQUIRED_ROLES: Array[String] = ["combat", "shrine", "merchant", "rest", "treasure", "miniboss", "boss"]
 const SEARCH_SEED_LIMIT: int = 4096
 
