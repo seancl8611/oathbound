@@ -4,43 +4,33 @@ class_name HushiroEnemyContract
 ## Shared playtest runtime contract for Hushiro standard enemies.
 ##
 ## Individual controllers remain responsible for authored behavior and presentation.
-## This layer normalizes shared durability / Posture after legacy scene _ready() code
-## and Inspector overrides have run, so imported values cannot silently replace the
-## current playtest baseline.
+## This layer normalizes shared durability after legacy scene _ready() code and Inspector
+## overrides have run. Standard-enemy Posture/Deathblow ownership is retired: the old
+## Posture values remain as compatibility configuration only for imported controllers.
 
-const CONTRACT_REVISION: int = 2
+const CONTRACT_REVISION: int = 3
 const POSTURE_RECOVER_DELAY: float = 1.5
 const POSTURE_RECOVER_RATE: float = 20.0
 const POSTURE_BREAK_DURATION: float = 2.5
 const POSTURE_BREAK_RESET_RATIO: float = 0.50
-const POSTURE_BREAK_RUNTIME = preload("res://Utility/HushiroPostureBreakRuntime.gd")
-const POSTURE_READABILITY_RUNTIME = preload("res://Utility/HushiroPostureReadabilityRuntime.gd")
+const NO_POSTURE_RUNTIME = preload("res://Utility/HushiroStandardNoPostureRuntime.gd")
 const HOUND_COMBAT_RUNTIME = preload("res://Utility/HushiroHoundCombatRuntime.gd")
 
-# BlightedHound still contains an imported local posture-break trigger. The shared
-# CombatController is now authoritative, so keep the old local trigger unreachable and
-# let HushiroHoundCombatRuntime mirror the real value back to its existing UI.
+# BlightedHound still contains an imported local posture-break trigger. Keep that local
+# trigger unreachable while the no-Posture runtime zeros its compatibility meter.
 const HOUND_LEGACY_POSTURE_GUARD_MAX: float = 10000.0
 
 const BASELINES: Dictionary = {
 	# Area 1 hack-and-slash calibration is anchored to the pre-awakening base-katana
 	# 9 -> 12 -> 21 sequence: 42 damage after three hits, 51 after four, 63 after five.
-	# Common bodies should be disposable individually; encounter composition, pressure,
-	# movement, and authored defense create the danger.
+	# `posture` values are retained only as legacy scene/config compatibility data; they
+	# are not a standard-enemy kill, stagger, UI, or Deathblow gate anymore.
 	"hollow": {"health": 40, "posture": 40.0},
 	"hound": {"health": 50, "posture": 45.0},
-	# Archer is intentionally fragile once Akio closes: 45 HP survives the three-hit
-	# 42-damage phrase but dies on clean hit four (51 cumulative) unless its weak guard helps.
 	"archer": {"health": 45, "posture": 65.0},
-	# Standard Area 1 soldier target: 60 HP survives four clean hits (51) and dies on
-	# hit five (63). A successful 35%-Health guard on even the lightest hit can deny that
-	# five-hit clean kill, while a sixth committed swing can still finish normal pressure.
 	"swordsman": {"health": 60, "posture": 90.0},
-	# Bilemass is a normal hazard body, not a Health sponge. It shares the five-hit
-	# clean-kill envelope while its danger comes from space control and spit commitment.
 	"bilemass": {"health": 60, "posture": 70.0},
-	# Warden remains the deliberate durable exception. 140 HP survives ten clean
-	# base-katana hits (135) and dies on the eleventh (147), before guard extension.
+	# Warden remains the deliberate durable standard-enemy exception by Health/role.
 	"warden": {"health": 140, "posture": 150.0},
 }
 
@@ -57,10 +47,6 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 
 	# HushiroEnemyRuntime has two legitimate discovery paths: node_added for new spawns
 	# and a deferred sweep for actors that already existed when the runtime initialized.
-	# Those paths can converge on the same actor in one frame. Re-running this contract
-	# used to duplicate telemetry and could reset live Posture/config state a second time.
-	# Treat the shared contract as an idempotent install boundary. Callers that truly
-	# need to re-normalize an already-installed actor must opt in with force=true.
 	if not force and is_current_contract(enemy, key):
 		return
 
@@ -70,13 +56,14 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 
 	enemy.set_meta("hushiro_enemy_type", key)
 	enemy.set_meta("hushiro_contract", "area1_player_paced_combat")
+	enemy.set_meta("oathbound_standard_posture_retired", true)
 	apply_pressure_metadata(enemy, key)
 
 	_set_property_if_present(enemy, "hp", health)
 	_set_property_if_present(enemy, "_max_hp", health)
 
-	# Keep controller-owned exported defaults in sync as well. This matters for
-	# direct Playtest Lab spawns and for any controller that reapplies its defaults.
+	# Keep controller-owned exported defaults in sync as well. This matters for direct
+	# Playtest Lab spawns and controllers that reapply their imported defaults.
 	match key:
 		"hollow":
 			_set_property_if_present(enemy, "hollow_hp", health)
@@ -89,8 +76,8 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 		"warden":
 			_set_property_if_present(enemy, "warden_hp", health)
 
-	# The Hound's old local meter is now only an input bridge for its imported parry
-	# callback. Other enemies already use CombatController directly.
+	# Imported fields remain normalized so legacy code cannot accidentally trip a local
+	# meter before the shared no-Posture boundary has a chance to zero it.
 	if key == "hound":
 		_set_property_if_present(enemy, "max_posture", HOUND_LEGACY_POSTURE_GUARD_MAX)
 	else:
@@ -99,6 +86,7 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 	_set_property_if_present(enemy, "posture_recovery_delay", POSTURE_RECOVER_DELAY)
 	_set_property_if_present(enemy, "posture_decay_rate", POSTURE_RECOVER_RATE)
 	_set_property_if_present(enemy, "posture_break_duration", POSTURE_BREAK_DURATION)
+	_set_property_if_present(enemy, "_dbroken_active", false)
 
 	var combat: Node = enemy.get_node_or_null("Combat")
 	if combat != null:
@@ -108,7 +96,7 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 			cfg = CombatConfig.new()
 		else:
 			# Scene resources may be shared by multiple instances. Never mutate the
-			# imported resource in place when authoring an enemy-specific Posture max.
+			# imported resource in place when preserving compatibility values.
 			cfg = cfg.duplicate(true) as CombatConfig
 
 		cfg.posture_max = posture_max
@@ -118,14 +106,17 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 		cfg.posture_break_reset_ratio = POSTURE_BREAK_RESET_RATIO
 		combat.set("config", cfg)
 		combat.set("_posture", 0.0)
+		combat.set("_break_until_ts", -1.0)
 
-	_attach_posture_break_runtime(enemy, key)
-	_attach_posture_readability_runtime(enemy)
+	_attach_no_posture_runtime(enemy)
 	if key == "hound":
 		_attach_hound_combat_runtime(enemy)
 
+	if enemy.has_method("hide_posture_bar"):
+		enemy.call("hide_posture_bar")
+
 	# Set the install marker only after normalization/runtime attachment completes so a
-	# partial/failed path can never masquerade as a successful current contract.
+	# partial path can never masquerade as a successful current contract.
 	var application_count: int = int(enemy.get_meta("hushiro_contract_apply_count", 0)) + 1
 	enemy.set_meta("hushiro_contract_revision", CONTRACT_REVISION)
 	enemy.set_meta("hushiro_contract_enemy_type", key)
@@ -136,12 +127,10 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 			"enemy_type": key,
 			"enemy_id": enemy.get_instance_id(),
 			"health": health,
-			"posture_max": posture_max,
-			"posture_recover_delay": POSTURE_RECOVER_DELAY,
-			"posture_recover_rate": POSTURE_RECOVER_RATE,
-			"posture_break_duration": POSTURE_BREAK_DURATION,
-			"posture_break_runtime": true,
-			"posture_readability_runtime": true,
+			"legacy_posture_max": posture_max,
+			"standard_posture_retired": true,
+			"posture_break_runtime": false,
+			"posture_readability_runtime": false,
 			"hound_shared_posture_bridge": key == "hound",
 			"v2_pressure_migrated": true,
 			"frontline_pressure_body": bool(enemy.get_meta("oathbound_frontline_pressure_body", true)),
@@ -170,8 +159,7 @@ static func apply_pressure_metadata(enemy: Node, enemy_type: String) -> void:
 		return
 
 	# AttackDirector remains compatibility infrastructure around Combat V2. These
-	# generic metadata keys let the Oathbound facade distinguish close-frontline crowd
-	# spacing from ranged/spatial actors without hard-coding Hushiro scene names there.
+	# metadata keys distinguish close-frontline bodies from ranged/spatial actors.
 	enemy.set_meta("oathbound_v2_pressure_migrated", true)
 	enemy.set_meta("oathbound_frontline_pressure_body", is_frontline_pressure_type(key))
 	enemy.set_meta("oathbound_pressure_role", pressure_role_for_type(key))
@@ -195,7 +183,6 @@ static func pressure_role_for_type(enemy_type: String) -> String:
 
 static func _apply_hound_tuning(enemy: Node) -> void:
 	# Keep the pack-rusher identity, but make each commitment readable and punishable.
-	# The encounter director controls concurrency; these values control one Hound's turn.
 	_set_property_if_present(enemy, "movement_speed", 75.0)
 	_set_property_if_present(enemy, "lunge_speed", 235.0)
 	_set_property_if_present(enemy, "lunge_windup", 0.55)
@@ -210,21 +197,11 @@ static func _apply_hound_tuning(enemy: Node) -> void:
 	_set_property_if_present(enemy, "parry_posture_gain", 35.0)
 
 
-static func _attach_posture_break_runtime(enemy: Node, enemy_type: String) -> void:
-	if enemy.get_node_or_null("HushiroPostureBreakRuntime") != null:
+static func _attach_no_posture_runtime(enemy: Node) -> void:
+	if enemy.get_node_or_null("HushiroStandardNoPostureRuntime") != null:
 		return
-	var runtime: Node = POSTURE_BREAK_RUNTIME.new()
-	runtime.name = "HushiroPostureBreakRuntime"
-	if runtime.has_method("configure"):
-		runtime.call("configure", enemy, enemy_type)
-	enemy.add_child(runtime)
-
-
-static func _attach_posture_readability_runtime(enemy: Node) -> void:
-	if enemy.get_node_or_null("HushiroPostureReadabilityRuntime") != null:
-		return
-	var runtime: Node = POSTURE_READABILITY_RUNTIME.new()
-	runtime.name = "HushiroPostureReadabilityRuntime"
+	var runtime: Node = NO_POSTURE_RUNTIME.new()
+	runtime.name = "HushiroStandardNoPostureRuntime"
 	if runtime.has_method("configure"):
 		runtime.call("configure", enemy)
 	enemy.add_child(runtime)
