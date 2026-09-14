@@ -11,6 +11,9 @@ const RESTRAINT_PARRY_OPEN_FRACTION: float = 0.62
 const RESTRAINT_PARRY_CLOSE_LEAD: float = 0.08
 const RESTRAINT_PARRY_STAGGER: float = 1.20
 const RESTRAINT_FAILURE_HEALTH_DAMAGE: int = 4
+# Temporary symbol compatibility for WardenV2's older validation dictionary. The
+# runtime no longer applies player Posture on restraint failure.
+const RESTRAINT_FAILURE_POSTURE: float = 0.0
 
 var _restraint_parry_open_at: float = 0.0
 var _restraint_parry_close_at: float = 0.0
@@ -18,42 +21,26 @@ var _restraint_tell_shown: bool = false
 
 
 func _ready() -> void:
-	# Feed the inherited default application the current Hushiro durability target.
 	warden_hp = HUSHIRO_WARDEN_HP
-
-	# The imported Player CHAINED state still has a mash escape implementation. Point
-	# it at parry with an unreachable press count; this wrapper owns the actual single
-	# timed parry check below and hides the obsolete mash progress UI.
 	chain_break_action = "parry"
 	chain_break_presses = 999
-
 	super._ready()
-
-	# Warden is a slow restraint/support priority target, not another permanent-guard
-	# swordsman. It can still react defensively through inherited humanoid hooks, but it
-	# does not idle behind a default block state.
 	can_block = true
 	block_by_default = false
 	block_chance_on_hit = 0.35
-
 	print("[WardenRules] Current Hushiro restraint contract active")
 
 
 func _start_restrain(p: Node2D) -> void:
 	super._start_restrain(p)
-
 	var now := Time.get_ticks_msec() * 0.001
 	_restraint_parry_open_at = now + chain_duration * RESTRAINT_PARRY_OPEN_FRACTION
 	_restraint_parry_close_at = maxf(_restraint_parry_open_at + 0.05, _restrain_until - RESTRAINT_PARRY_CLOSE_LEAD)
 	_restraint_tell_shown = false
-
-	# Remove the imported mash-progress presentation. The Warden itself supplies the
-	# pre-yank parry tell through the shared parry indicator.
 	if is_instance_valid(p):
 		var chain_ui_value: Variant = p.get("_chain_ui")
 		if chain_ui_value is CanvasItem:
 			(chain_ui_value as CanvasItem).visible = false
-
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("warden_restrain_start", {
 			"warden": CombatTelemetry.snapshot_actor(self),
@@ -67,9 +54,7 @@ func _start_restrain(p: Node2D) -> void:
 func _end_restrain_if_elapsed() -> void:
 	if not _restraining:
 		return
-
 	var now := Time.get_ticks_msec() * 0.001
-
 	if not _restraint_tell_shown and now >= _restraint_parry_open_at:
 		_restraint_tell_shown = true
 		_show_parry_indicator(maxf(0.05, _restraint_parry_close_at - now), false)
@@ -78,11 +63,9 @@ func _end_restrain_if_elapsed() -> void:
 				"warden": CombatTelemetry.snapshot_actor(self),
 				"window": maxf(0.0, _restraint_parry_close_at - now),
 			})
-
 	if now >= _restraint_parry_open_at and now <= _restraint_parry_close_at and Input.is_action_just_pressed("parry"):
 		_break_restrain_with_parry()
 		return
-
 	if now >= _restrain_until:
 		_apply_restrain_failure_health_damage()
 		_hide_parry_indicator()
@@ -92,10 +75,8 @@ func _end_restrain_if_elapsed() -> void:
 func _break_restrain_with_parry() -> void:
 	var now := Time.get_ticks_msec() * 0.001
 	var p: Node2D = _restrained_player
-
 	if is_instance_valid(p) and p.has_method("_end_chain_restraint"):
 		p.call("_end_chain_restraint")
-
 	_restraining = false
 	_restrained_player = null
 	_restrain_until = 0.0
@@ -103,10 +84,6 @@ func _break_restrain_with_parry() -> void:
 	_restraint_parry_close_at = 0.0
 	_restraint_tell_shown = false
 	_hide_parry_indicator()
-
-	# Successful escape is intentionally a strong punish window: the Warden is a
-	# support/controller enemy whose restraint should become dangerous only when the
-	# player misses this readable response.
 	var knock_dir := Vector2.RIGHT
 	if is_instance_valid(p):
 		var away := global_position - p.global_position
@@ -117,7 +94,6 @@ func _break_restrain_with_parry() -> void:
 	_stunned_until = now + RESTRAINT_PARRY_STAGGER
 	_backoff_until = now + RESTRAINT_PARRY_STAGGER
 	_goto(WardenState.STAGGER, RESTRAINT_PARRY_STAGGER)
-
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("warden_restrain_parried", {
 			"warden": CombatTelemetry.snapshot_actor(self),
@@ -130,14 +106,12 @@ func _apply_restrain_failure_health_damage() -> void:
 	var p: Node2D = _restrained_player
 	if not is_instance_valid(p):
 		return
-
 	var hp_before: int = int(p.get("hp")) if p.get("hp") != null else 0
 	if p.has_method("take_damage"):
 		p.call("take_damage", RESTRAINT_FAILURE_HEALTH_DAMAGE)
 	elif p.get("hp") != null:
 		p.set("hp", maxi(0, hp_before - RESTRAINT_FAILURE_HEALTH_DAMAGE))
 	var hp_after: int = int(p.get("hp")) if p.get("hp") != null else hp_before
-
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("warden_restrain_failed", {
 			"warden": CombatTelemetry.snapshot_actor(self),
@@ -147,3 +121,7 @@ func _apply_restrain_failure_health_damage() -> void:
 			"health_after": hp_after,
 			"player_posture_retired": true,
 		})
+
+
+func get_restrain_failure_health_damage_for_test() -> int:
+	return RESTRAINT_FAILURE_HEALTH_DAMAGE
