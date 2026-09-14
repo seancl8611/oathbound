@@ -6,6 +6,9 @@ class_name HushiroStandardNoPostureRuntime
 ## Deathblow state. CombatController remains attached because imported controllers use
 ## it for unrelated combat timing, but any Posture mutation is synchronously neutralized
 ## before CombatController can evaluate a break.
+##
+## This runtime is intentionally event-driven. Standard enemies can be numerous, so the
+## retirement bridge must not add another per-enemy physics poll to the combat room.
 
 var enemy: Node = null
 var combat: Node = null
@@ -19,7 +22,6 @@ func configure(owner_enemy: Node) -> void:
 
 
 func _ready() -> void:
-	process_physics_priority = 95
 	if enemy == null:
 		enemy = get_parent()
 	if combat == null and enemy != null:
@@ -27,15 +29,6 @@ func _ready() -> void:
 
 	_retire_legacy_posture_helpers()
 	_connect_posture_guard()
-	_neutralize_posture_state()
-
-
-func _physics_process(_delta: float) -> void:
-	if enemy == null or not is_instance_valid(enemy):
-		return
-	if combat == null or not is_instance_valid(combat):
-		combat = enemy.get_node_or_null("Combat")
-		_connect_posture_guard()
 	_neutralize_posture_state()
 
 
