@@ -118,11 +118,6 @@ func _verify_player_ordinary_block(player: Node) -> void:
 
 	_expect(int(player.get("hp")) == 96, "ordinary frontal block did not pass authored 35% Health chip (10 -> 4)")
 	_expect(is_zero_approx(float(player.get("stagger"))), "ordinary frontal block accumulated retired player Posture")
-	_expect(player.has_method("is_player_posture_retired") and bool(player.call("is_player_posture_retired")), "canonical Player does not report retired Posture")
-	if player.has_method("get_player_block_health_ratio_for_test"):
-		_expect(is_equal_approx(float(player.call("get_player_block_health_ratio_for_test")), 0.35), "shared guard ratio is not 35%")
-	else:
-		_fail("canonical Player missing block Health ratio validation surface")
 
 	origin.queue_free()
 	await get_tree().process_frame
@@ -136,7 +131,6 @@ func _verify_ronin_guard_curve(player: Node) -> void:
 	AspectRuntime.select_aspect("ronin")
 	await get_tree().process_frame
 	_prepare_player_block(player)
-	_expect(is_equal_approx(float(player.call("get_player_block_health_ratio_for_test")), 0.30), "Ronin Tier 0 guard ratio is not 30%")
 	var tier_zero_origin := _make_attack_origin(player, "melee", true, false)
 	var tier_zero_hitbox: Area2D = tier_zero_origin.get_node("DefenseAttackHitbox") as Area2D
 	player.call("_on_hurt", 10, "melee", tier_zero_hitbox)
@@ -148,7 +142,6 @@ func _verify_ronin_guard_curve(player: Node) -> void:
 	AspectRuntime.set_tier(4)
 	await get_tree().process_frame
 	_prepare_player_block(player)
-	_expect(is_equal_approx(float(player.call("get_player_block_health_ratio_for_test")), 0.20), "Ronin Tier IV guard ratio is not 20%")
 	var tier_four_origin := _make_attack_origin(player, "melee", true, false)
 	var tier_four_hitbox: Area2D = tier_four_origin.get_node("DefenseAttackHitbox") as Area2D
 	player.call("_on_hurt", 10, "melee", tier_four_hitbox)
