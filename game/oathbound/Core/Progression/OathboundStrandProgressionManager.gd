@@ -3,6 +3,9 @@ extends "res://Utility/MetaProgressionManager.gd"
 ## Canonical first-playtest Strand permanent-progression runtime.
 ## PROGRESSION.md owns the structure; the values below are deliberately centralized
 ## first-playtest tuning so they can move without changing the approved node roles.
+##
+## Legacy Bloodwell node IDs that referenced player Posture are retained for save
+## compatibility, but their current effects are Health/Spirit/recovery reliability.
 
 const RELIC_CATALOG = preload("res://Core/Relics/RelicCatalog.gd")
 
@@ -26,28 +29,31 @@ const RUN_DISCOVERED_RELICS: Array[String] = [
 	RELIC_CATALOG.SCRIBES_LENS,
 ]
 
-# First-playtest tuning only. Cost bands and node roles come from PROGRESSION.md.
+# First-playtest tuning only. The no-player-Posture combat contract is authoritative:
+# permanent Akio progression can improve Health, Spirit, recovery, and run reliability,
+# but it must not recreate a universal player Posture resource.
 const NODE_TUNING: Dictionary = {
 	"vitality": {"mist": 50, "effects": {"max_health": 10.0}},
-	"composure": {"mist": 50, "effects": {"max_posture": 10.0}},
+	"composure": {"mist": 50, "effects": {"max_health": 5.0}},
 	"spirit_reserve": {"mist": 50, "effects": {"max_spirit": 10.0}},
 	"field_rest": {"mist": 50, "effects": {"rest_heal_mult": 1.15}},
 	"expedition_preparation": {"mist": 75, "effects": {"starting_rerolls": 1.0}},
 
-	"posture_recovery": {"mist": 75, "effects": {"posture_recovery_mult": 1.12}},
+	# IDs retained for save compatibility after the player-Posture retirement.
+	"posture_recovery": {"mist": 75, "effects": {"max_health": 5.0}},
 	"recovery_efficiency": {"mist": 75, "effects": {"recovery_heal_mult": 1.15}},
-	"deflection_stability": {"mist": 100, "effects": {"parry_posture_clear": 4.0}},
-	"execution_stability": {"mist": 100, "effects": {"deathblow_posture_clear": 12.0}},
+	"deflection_stability": {"mist": 100, "effects": {"max_spirit": 5.0}},
+	"execution_stability": {"mist": 100, "effects": {"max_health": 5.0, "max_spirit": 5.0}},
 	"shrine_stabilization": {"mist": 100, "effects": {"resist_corruption_target": 65.0}},
 	"route_intelligence": {"mist": 100, "effects": {"route_intelligence": 1.0}},
-	"body_mastery": {"mist": 200, "material": MATERIAL_KEEPER, "material_cost": 1, "effects": {"max_health": 15.0, "max_posture": 10.0}},
+	"body_mastery": {"mist": 200, "material": MATERIAL_KEEPER, "material_cost": 1, "effects": {"max_health": 20.0}},
 	"keeper_passage": {"mist": 200, "material": MATERIAL_KEEPER, "material_cost": 1, "effects": {"keeper_passage": 1.0}},
 
 	"salvage_protocol": {"mist": 125, "effects": {"persistent_reward_mult": 1.10}},
 	"resource_mastery": {"mist": 200, "material": MATERIAL_TWIN_MAWS, "material_cost": 1, "effects": {"max_spirit": 15.0}},
 	"twin_passage": {"mist": 225, "material": MATERIAL_TWIN_MAWS, "material_cost": 1, "effects": {"twin_passage": 1.0}},
 
-	"returning_blood_mastery": {"mist": 250, "material": MATERIAL_ECLIPSE_SHOGUN, "material_cost": 1, "effects": {"max_health": 10.0, "max_posture": 10.0, "max_spirit": 10.0}},
+	"returning_blood_mastery": {"mist": 250, "material": MATERIAL_ECLIPSE_SHOGUN, "material_cost": 1, "effects": {"max_health": 15.0, "max_spirit": 10.0}},
 	"heart_passage": {"mist": 250, "material": MATERIAL_ECLIPSE_SHOGUN, "material_cost": 1, "effects": {"heart_passage": 1.0}},
 
 	"wolf_tier0_handling": {"mist": 75, "effects": {"wolf_recovery_mult": 0.95}},
@@ -69,7 +75,7 @@ func _ready() -> void:
 		if not MetaProgress.is_connected("progression_changed", cb):
 			MetaProgress.connect("progression_changed", cb)
 	call_deferred("synchronize_campaign_rewards")
-	print("[OathboundStrandProgression] v1.0 - Bloodwell/Blood Mirror/campaign progression")
+	print("[OathboundStrandProgression] v1.1 - Health/Spirit Bloodwell + Blood Mirror/campaign progression")
 
 
 func _on_progression_changed() -> void:
@@ -197,7 +203,6 @@ func apply_player_capacity(player: Node) -> void:
 	if player == null or not is_instance_valid(player):
 		return
 	var hp_bonus := int(round(get_effect_total("max_health")))
-	var posture_bonus := float(get_effect_total("max_posture"))
 	var spirit_bonus := int(round(get_effect_total("max_spirit")))
 
 	if "maxhp" in player and "hp" in player:
@@ -210,13 +215,9 @@ func apply_player_capacity(player: Node) -> void:
 		if player.has_method("_update_health_bar"):
 			player.call("_update_health_bar")
 
-	if "stagger_max" in player:
-		var old_posture_bonus := float(player.get_meta("_strand_posture_bonus", 0.0))
-		var base_posture := maxf(1.0, float(player.get("stagger_max")) - old_posture_bonus)
-		player.set("stagger_max", base_posture + posture_bonus)
-		player.set_meta("_strand_posture_bonus", posture_bonus)
-	if "stagger_regen_rate" in player:
-		player.set("stagger_regen_rate", float(player.get("stagger_regen_rate")) * get_multiplier("posture_recovery_mult", 1.0))
+	# Clean stale compatibility bonuses from saves/runtimes created before player Posture
+	# was retired. Do not mutate stagger_max or stagger_regen_rate from Bloodwell effects.
+	player.set_meta("_strand_posture_bonus", 0.0)
 
 	var executor_value: Variant = player.get("prosthetic_executor")
 	if executor_value is Node and is_instance_valid(executor_value):
