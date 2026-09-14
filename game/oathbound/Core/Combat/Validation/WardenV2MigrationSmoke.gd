@@ -54,18 +54,21 @@ func _run() -> void:
 	else:
 		_fail("Warden missing V2 legacy-role declaration")
 
-	# Restraint failure Posture below is player-facing guard pressure, not a Warden kill
-	# meter. Standard Warden Posture/Deathblow ownership remains retired above.
+	# The restraint itself remains a timed special-parry test. Missing the escape no
+	# longer fills retired player Posture; it adds a small Health consequence instead.
 	var restraint_value: Variant = warden.call("get_v2_warden_restraint_contract_for_test")
 	if restraint_value is Dictionary:
 		var restraint: Dictionary = restraint_value as Dictionary
 		_expect(str(restraint.get("chain_break_action", "")) == "parry", "Warden restraint no longer uses timed parry escape")
 		_expect(int(restraint.get("chain_break_presses", 0)) == 999, "obsolete mash escape became reachable again")
 		_expect(is_equal_approx(float(restraint.get("chain_duration", 0.0)), 1.0), "Warden restraint duration changed")
-		_expect(is_equal_approx(float(restraint.get("restraint_failure_posture", 0.0)), 25.0), "Warden restraint failure player Posture changed")
+		_expect(is_zero_approx(float(restraint.get("restraint_failure_posture", 0.0))), "Warden restraint still exposes a player-Posture failure penalty")
 		_expect(is_equal_approx(float(restraint.get("restraint_parry_stagger", 0.0)), 1.20), "Warden successful restraint parry stagger changed")
 	else:
 		_fail("Warden restraint validation contract unavailable")
+	_expect(warden.has_method("get_restrain_failure_health_damage_for_test"), "Warden missing Health-first restraint failure introspection")
+	if warden.has_method("get_restrain_failure_health_damage_for_test"):
+		_expect(int(warden.call("get_restrain_failure_health_damage_for_test")) == 4, "Warden failed restraint Health penalty is not 4")
 
 	warden.set("_next_attack_ready", -1.0)
 	warden.set("_v2_pressure_retry_until", -1.0)
@@ -115,9 +118,6 @@ func _run() -> void:
 	else:
 		_fail("Warden response runtime unavailable for profile assertion")
 
-	# Heavy/control role: ordinary power-1 sword pressure cannot flinch a neutral Warden.
-	# Base Heavy power 2 can interrupt neutral behavior, but all committed Warden attacks
-	# now require explicit power 3. The chain's identity-specific override remains aligned.
 	_expect(not bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 1, false)), "light hit incorrectly interrupts neutral Warden")
 	_expect(bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 2, false)), "base Heavy cannot interrupt neutral Warden")
 	_expect(not bool(warden.call("should_v2_warden_interrupt_for_test", CHAIN_SWING, 1, true)), "light hit incorrectly interrupts committed Warden chain")
@@ -136,7 +136,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | enemy Posture retired")
+		print("[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | enemy/player Posture retired")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

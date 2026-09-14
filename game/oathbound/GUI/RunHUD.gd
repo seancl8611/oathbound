@@ -2,9 +2,11 @@ extends CanvasLayer
 
 ## RunHUD — Always-visible combat HUD, built entirely via script.
 ##
-## Shows: HP bar, posture bar, gold counter, spirit pips (0–10),
-##        equipped prosthetic icon with cooldown ring, spirit cost badge,
-##        and relic socket dots.
+## Shows: HP bar, gold counter, spirit pips (0–10), equipped prosthetic icon
+##        with cooldown ring, spirit cost badge, and relic socket dots.
+##
+## Player Posture is retired from the active combat model. update_posture()
+## remains as a compatibility no-op while older callers are migrated.
 ##
 ## Usage:
 ##   var hud = load("res://GUI/RunHUD.gd").new()
@@ -17,8 +19,6 @@ extends CanvasLayer
 # ─── Layout constants ───
 const HP_BAR_WIDTH = 180.0
 const HP_BAR_HEIGHT = 8.0
-const POSTURE_BAR_WIDTH = 150.0
-const POSTURE_BAR_HEIGHT = 5.0
 const SPIRIT_PIP_W = 10.0
 const SPIRIT_PIP_H = 14.0
 const SPIRIT_PIP_GAP = 3.0
@@ -29,15 +29,11 @@ const COL_MIST = Color(0.66, 0.48, 0.87, 1.0)
 const COL_SCROLL = Color(0.87, 0.78, 0.55, 1.0)
 const COL_EMBLEM = Color(0.87, 0.66, 0.27, 1.0)
 const COL_MAXHP = Color(0.85, 0.2, 0.15, 1.0)
-const COL_MAXPOSTURE = Color(0.87, 0.67, 0.13, 1.0)
 # ─── Colors ───
 const COL_HP_FILL = Color(0.8, 0.13, 0.13, 0.95)
 const COL_HP_LOW = Color(0.9, 0.2, 0.1, 1.0)
 const COL_HP_BG = Color(0.15, 0.04, 0.04, 0.8)
 const COL_HP_BORDER = Color(0.25, 0.08, 0.08, 0.9)
-const COL_POSTURE_FILL = Color(0.87, 0.67, 0.13, 0.95)
-const COL_POSTURE_HIGH = Color(0.9, 0.4, 0.05, 1.0)
-const COL_POSTURE_BG = Color(0.1, 0.1, 0.03, 0.8)
 const COL_GOLD = Color(0.91, 0.77, 0.29, 1.0)
 const COL_SPIRIT_FILLED = Color(0.35, 0.69, 0.87, 1.0)
 const COL_SPIRIT_GLOW = Color(0.48, 0.81, 1.0, 1.0)
@@ -57,8 +53,6 @@ var _player: Node = null
 
 var _hp: int = 50
 var _max_hp: int = 50
-var _posture: float = 0.0
-var _posture_max: float = 100.0
 var _gold: int = 0
 var _spirit: int = 10
 var _spirit_max: int = 10
@@ -73,7 +67,6 @@ var _toast_container: VBoxContainer
 var _root: Control
 var _hp_fill: ColorRect
 var _hp_text: Label
-var _posture_fill: ColorRect
 var _gold_label: Label
 var _spirit_pips: Array = []  # Array of ColorRect
 var _prosthetic_icon_label: Label
@@ -83,7 +76,6 @@ var _relic_dot_container: HBoxContainer
 var _spirit_pop_label: Label
 var _spirit_pop_tween: Tween
 var _hp_container: Node
-var _posture_container: Node
 var _is_hub_mode: bool = false
 var _gold_container: Node
 
@@ -111,7 +103,6 @@ func _build_ui() -> void:
 	add_child(_root)
 
 	_build_hp_section()
-	_build_posture_section()
 	_build_gold_section()
 	_build_spirit_section()
 	_build_prosthetic_section()
@@ -163,30 +154,6 @@ func _build_hp_section() -> void:
 	_hp_text.add_theme_font_size_override("font_size", 11)
 	_hp_text.add_theme_color_override("font_color", COL_TEXT_DIM)
 	container.add_child(_hp_text)
-
-
-func _build_posture_section() -> void:
-	# Sits below HP bar, indented slightly
-	var container = Control.new()
-	container.position = Vector2(38, 28)
-	_root.add_child(container)
-	_posture_container = container
-	
-	var border = ColorRect.new()
-	border.size = Vector2(POSTURE_BAR_WIDTH + 2, POSTURE_BAR_HEIGHT + 2)
-	border.position = Vector2(-1, -1)
-	border.color = Color(0.2, 0.17, 0.07, 0.7)
-	container.add_child(border)
-
-	var bg = ColorRect.new()
-	bg.size = Vector2(POSTURE_BAR_WIDTH, POSTURE_BAR_HEIGHT)
-	bg.color = COL_POSTURE_BG
-	container.add_child(bg)
-
-	_posture_fill = ColorRect.new()
-	_posture_fill.size = Vector2(0, POSTURE_BAR_HEIGHT)
-	_posture_fill.color = COL_POSTURE_FILL
-	container.add_child(_posture_fill)
 
 
 func _build_gold_section() -> void:
@@ -369,13 +336,16 @@ func update_hp(current: int, maximum: int) -> void:
 func show_currency_toast(reward_key: String, amount: int) -> void:
 	if _toast_container == null:
 		return
+	# Max Posture rewards are retired with player Posture. Keep this guard while
+	# legacy reward definitions are being migrated so stale calls remain harmless.
+	if reward_key == "maxposture":
+		return
 	
 	var toast_colors = {
 		"gold": COL_GOLD,
 		"mist": COL_MIST,
 		"scroll": COL_SCROLL,
 		"maxhp": COL_MAXHP,
-		"maxposture": COL_MAXPOSTURE,
 		"emblem": COL_EMBLEM,
 	}
 	var toast_labels = {
@@ -383,7 +353,6 @@ func show_currency_toast(reward_key: String, amount: int) -> void:
 		"mist": "Mist Shards",
 		"scroll": "Scrolls",
 		"maxhp": "Max HP",
-		"maxposture": "Max Posture",
 		"emblem": "Boss Emblems",
 	}
 	
@@ -517,24 +486,12 @@ func _get_currency_total(reward_key: String) -> int:
 			if players.size() > 0 and "maxhp" in players[0]:
 				return players[0].maxhp
 			return 0
-		"maxposture":
-			var players = get_tree().get_nodes_in_group("player")
-			if players.size() > 0 and "stagger_max" in players[0]:
-				return int(players[0].stagger_max)
-			return 0
 	return 0
-	
-func update_posture(current: float, maximum: float) -> void:
-	_posture = current
-	_posture_max = max(0.001, maximum)
-	var pct = clampf(_posture / _posture_max, 0.0, 1.0)
-	_posture_fill.size.x = POSTURE_BAR_WIDTH * pct
 
-	# Color shift when high
-	if pct > 0.75:
-		_posture_fill.color = COL_POSTURE_HIGH
-	else:
-		_posture_fill.color = COL_POSTURE_FILL
+func update_posture(_current: float, _maximum: float) -> void:
+	# Compatibility no-op. Player Posture is no longer a visible or active
+	# combat resource, but older call sites may still invoke this during migration.
+	pass
 
 
 func update_gold(amount: int) -> void:
@@ -601,7 +558,6 @@ func update_prosthetic_info(prosthetic_id: String, spirit_cost: int, sockets: in
 
 func _refresh_all() -> void:
 	update_hp(_hp, _max_hp)
-	update_posture(0.0, _posture_max)
 	update_gold(CurrencyManager.get_amount(CurrencyManager.Currency.GOLD))
 	update_spirit(_spirit, _spirit_max)
 
@@ -676,8 +632,6 @@ func set_hub_mode(enabled: bool) -> void:
 	_is_hub_mode = enabled
 	if _hp_container:
 		_hp_container.visible = not enabled
-	if _posture_container:
-		_posture_container.visible = not enabled
 	if _gold_container:
 		_gold_container.visible = not enabled
 		

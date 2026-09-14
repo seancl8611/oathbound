@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://0wvff6554hiu"]
+[gd_scene load_steps=43 format=3 uid="uid://0wvff6554hiu"]
 
 [ext_resource type="Script" path="res://Enemy/Area 2/Encounter/stalker_hound.gd" id="1_0ixlq"]
 [ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_d8uxu"]
@@ -27,9 +27,10 @@
 [ext_resource type="Texture2D" uid="uid://okgt8c5j3sie" path="res://Textures/Enemy/dog/walk6.png" id="25_nwqv5"]
 [ext_resource type="Texture2D" uid="uid://dmw05mtuwq4sc" path="res://Textures/Enemy/dog/walk7.png" id="26_2d5ea"]
 [ext_resource type="Texture2D" uid="uid://dio5y0u24f6og" path="res://Textures/Enemy/dog/walk8.png" id="27_w10x4"]
-[ext_resource type="Script" path="res://Utility/CombatController.gd" id="28_yy002"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyCombatController.gd" id="28_yy002"]
 [ext_resource type="Script" path="res://Utility/CombatConfig.gd" id="29_sdk01"]
 [ext_resource type="PackedScene" uid="uid://uhr6mtuisqm1" path="res://Utility/hit_box.tscn" id="30_syuwa"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyDefenseRuntime.gd" id="31_health"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rfba4"]
 shader = ExtResource("2_d8uxu")
@@ -224,6 +225,9 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTriggerRange"]
 position = Vector2(-1, 1)
 shape = SubResource("CircleShape2D_3wpkl")
+
+[node name="StandardEnemyDefenseRuntime" type="Node" parent="."]
+script = ExtResource("31_health")
 
 [node name="Combat" type="Node" parent="."]
 script = ExtResource("28_yy002")
