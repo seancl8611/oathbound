@@ -8,8 +8,8 @@ extends Node2D
 
 @export_enum("rest", "shrine", "merchant", "miniboss", "boss", "treasure") var profile := "rest"
 
-const FLOOR_Z := 10
-const FLOOR_DETAIL_Z := 12
+const FLOOR_Z := -920
+const FLOOR_DETAIL_Z := -910
 const ACTOR_DEPTH_BIAS := 1000
 
 const GROUND := Color(0.105, 0.087, 0.080, 1.0)
