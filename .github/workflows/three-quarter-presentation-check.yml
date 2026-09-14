@@ -1,0 +1,67 @@
+name: Three-Quarter Presentation Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Utility/CameraFollow.gd"
+      - "game/oathbound/Utility/ThreeQuarter*.gd"
+      - "game/oathbound/Regions/Hushiro/Chambers/**"
+      - "game/oathbound/Regions/Hushiro/Presentation/**"
+      - "game/oathbound/Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.*"
+      - "game/oathbound/Utility/SceneRegistry.gd"
+      - ".github/workflows/three-quarter-presentation-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Utility/CameraFollow.gd"
+      - "game/oathbound/Utility/ThreeQuarter*.gd"
+      - "game/oathbound/Regions/Hushiro/Chambers/**"
+      - "game/oathbound/Regions/Hushiro/Presentation/**"
+      - "game/oathbound/Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.*"
+      - "game/oathbound/Utility/SceneRegistry.gd"
+      - ".github/workflows/three-quarter-presentation-check.yml"
+  workflow_dispatch:
+
+jobs:
+  presentation-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Validate Area 1 three-quarter routing and region isolation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.tscn 2>&1 | tee three-quarter-presentation.log
+          grep -F "[ThreeQuarterPresentationSmoke] PASS" three-quarter-presentation.log
+          if grep -F "SCRIPT ERROR:" three-quarter-presentation.log; then
+            echo "FAIL: three-quarter presentation smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" three-quarter-presentation.log; then
+            echo "FAIL: three-quarter presentation smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload presentation smoke log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: three-quarter-presentation-${{ github.run_id }}
+          path: three-quarter-presentation.log
+          if-no-files-found: warn
+          retention-days: 7
