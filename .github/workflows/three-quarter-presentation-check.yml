@@ -9,6 +9,8 @@ on:
       - "game/oathbound/Utility/CameraFollow.gd"
       - "game/oathbound/Utility/ThreeQuarter*.gd"
       - "game/oathbound/Core/Chambers/ThreeQuarter/**"
+      - "game/oathbound/World/HubScene.tscn"
+      - "game/oathbound/World/ThreeQuarterStrandScenery.gd"
       - "game/oathbound/Regions/Hushiro/Chambers/**"
       - "game/oathbound/Regions/Hushiro/Presentation/**"
       - "game/oathbound/Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.*"
@@ -21,6 +23,8 @@ on:
       - "game/oathbound/Utility/CameraFollow.gd"
       - "game/oathbound/Utility/ThreeQuarter*.gd"
       - "game/oathbound/Core/Chambers/ThreeQuarter/**"
+      - "game/oathbound/World/HubScene.tscn"
+      - "game/oathbound/World/ThreeQuarterStrandScenery.gd"
       - "game/oathbound/Regions/Hushiro/Chambers/**"
       - "game/oathbound/Regions/Hushiro/Presentation/**"
       - "game/oathbound/Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.*"
@@ -48,7 +52,7 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
-      - name: Validate adopted three-quarter routing across all regions
+      - name: Validate adopted three-quarter presentation across all playable worlds
         shell: bash
         run: |
           set -o pipefail
