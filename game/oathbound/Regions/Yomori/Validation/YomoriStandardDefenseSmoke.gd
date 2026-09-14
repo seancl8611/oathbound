@@ -2,8 +2,7 @@ extends Node
 
 ## Runtime proof that every authored Yomori standard role uses the Health-first defense
 ## contract. Standard enemies may keep legacy Posture config data for compatibility, but
-## they must never accumulate Posture, expose a visible Posture bar, or participate in
-## the Deathblow loop.
+## they must never accumulate Posture, expose resource bars, or advertise universal parry.
 
 const STANDARD_SCENES: Array[String] = [
 	"res://Enemy/Area 2/Encounter/lingering_wraith.tscn",
@@ -13,6 +12,9 @@ const STANDARD_SCENES: Array[String] = [
 ]
 
 const STANDARD_COMBAT_SCRIPT_PATH := "res://Core/Combat/StandardEnemyCombatController.gd"
+const RETIRED_PRESENTATION_NAMES: Array[String] = [
+	"PostureBar", "HealthBar", "HealthBarRoot", "HPBar", "HpBar", "EnemyHealthBar", "ParryIndicator"
+]
 
 var _failures: Array[String] = []
 var _validated: int = 0
@@ -23,7 +25,7 @@ func _ready() -> void:
 		await _validate_standard_scene(scene_path)
 
 	if _failures.is_empty():
-		print("[YomoriStandardDefenseSmoke] PASS - roles=%d | Health-only standard defense contract" % _validated)
+		print("[YomoriStandardDefenseSmoke] PASS - roles=%d | Health-only, bar-free, special-only parry" % _validated)
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -48,12 +50,12 @@ func _validate_standard_scene(scene_path: String) -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
-	_expect(actor.has_meta("standard_enemy_health_only") and bool(actor.get_meta("standard_enemy_health_only")), "%s did not declare Health-only standard status" % scene_path)
+	_expect(bool(actor.get_meta("standard_enemy_health_only", false)), "%s did not declare Health-only standard status" % scene_path)
+	_expect(bool(actor.get_meta("standard_enemy_hide_resource_bars", false)), "%s did not retire resource bars" % scene_path)
+	_expect(bool(actor.get_meta("standard_enemy_special_only_parry", false)), "%s did not retire universal parry presentation" % scene_path)
 	_expect(actor.is_in_group("standard_enemy"), "%s did not join standard_enemy group" % scene_path)
 	_expect(actor.get_node_or_null("StandardEnemyDefenseRuntime") != null, "%s is missing StandardEnemyDefenseRuntime" % scene_path)
-
-	var posture_bar := actor.get_node_or_null("PostureBar") as CanvasItem
-	_expect(posture_bar == null or not posture_bar.visible, "%s exposes a visible Posture bar" % scene_path)
+	_expect(not _has_visible_retired_presentation(actor), "%s exposes a retired Health/Posture/parry UI element" % scene_path)
 
 	var combat := actor.get_node_or_null("Combat")
 	if combat != null:
@@ -68,6 +70,15 @@ func _validate_standard_scene(scene_path: String) -> void:
 	_validated += 1
 	actor.queue_free()
 	await get_tree().process_frame
+
+
+func _has_visible_retired_presentation(root: Node) -> bool:
+	for child: Node in root.get_children():
+		if str(child.name) in RETIRED_PRESENTATION_NAMES and child is CanvasItem and (child as CanvasItem).visible:
+			return true
+		if _has_visible_retired_presentation(child):
+			return true
+	return false
 
 
 func _expect(condition: bool, message: String) -> void:
