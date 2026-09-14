@@ -17,11 +17,11 @@ const ENEMY_ACCENT := Color(0.58, 0.105, 0.080, 1.0)
 const HOLLOW_BODY := Color(0.315, 0.305, 0.285, 1.0)
 const BILE_BODY := Color(0.235, 0.285, 0.165, 1.0)
 const WARDEN_BODY := Color(0.185, 0.170, 0.160, 1.0)
-const SHADOW_INK := Color(0.025, 0.020, 0.022, 0.72)
 const SKIN := Color(0.66, 0.57, 0.48, 1.0)
 const ATTACK_PLAYER := Color(0.82, 0.86, 0.90, 0.64)
 const ATTACK_ENEMY := Color(0.88, 0.20, 0.12, 0.58)
 const GUARD_COLOR := Color(0.70, 0.76, 0.80, 0.52)
+const EIGHT_DIRECTION_STEP := TAU / 8.0
 
 var _actor: Node2D = null
 var _legacy_sprite: Sprite2D = null
@@ -64,7 +64,10 @@ func _process(dt: float) -> void:
 		velocity = (_actor as CharacterBody2D).velocity
 	_move_speed = velocity.length()
 	if _move_speed > 4.0:
-		_facing = velocity.normalized()
+		# Eight discrete sectors deliberately mirror the intended production sprite
+		# pipeline. The proxy therefore tests directional readability rather than an
+		# impossible infinitely-rotating vector character.
+		_facing = _quantize_eight_direction(velocity)
 		_motion_phase += dt * clampf(5.0 + _move_speed * 0.025, 5.0, 12.0)
 	else:
 		_motion_phase += dt * 2.0
@@ -72,6 +75,14 @@ func _process(dt: float) -> void:
 	_update_animation_state()
 	_role = _resolve_role()
 	queue_redraw()
+
+
+func _quantize_eight_direction(direction: Vector2) -> Vector2:
+	if direction.length_squared() < 0.001:
+		return _facing
+	var angle := direction.angle()
+	var snapped := roundf(angle / EIGHT_DIRECTION_STEP) * EIGHT_DIRECTION_STEP
+	return Vector2(cos(snapped), sin(snapped)).normalized()
 
 
 func _refresh_references() -> void:
@@ -145,8 +156,8 @@ func _draw() -> void:
 
 
 func _draw_ground_readability() -> void:
-	# Small facing wedge is intentionally subtle. It makes eight-direction intent readable
-	# even before final directional animation exists.
+	# Small facing wedge is intentionally subtle. It makes the eight-direction sector
+	# readable even before final directional animation exists.
 	var screen_facing := _project_ground_vector(_facing.normalized())
 	var side := Vector2(-screen_facing.y, screen_facing.x)
 	var tip := screen_facing * 12.0 + Vector2(0.0, 3.5)
