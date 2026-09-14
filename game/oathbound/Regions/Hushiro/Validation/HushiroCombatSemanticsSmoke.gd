@@ -1,9 +1,8 @@
 extends Node
 
-## Regression smoke for the combat issues reproduced from live playtests:
-## - canonical sword Posture must affect Blighted Hounds;
-## - a full Posture meter enters stagger before Deathblow readiness;
-## - dead standard enemies cannot remain Deathblow-ready;
+## Regression smoke for current Hushiro combat semantics:
+## - standard-enemy Health remains the defeat resource;
+## - legacy Posture compatibility fields cannot accumulate or arm Deathblow;
 ## - current Area 1 hack-and-slash Health baselines remain explicit;
 ## - Hound-heavy authored encounters remain inside the Phase 7 pack envelope;
 ## - Keeper death rewards must recover from a stale/freed cached loot parent.
@@ -21,11 +20,11 @@ func _ready() -> void:
 	await get_tree().process_frame
 	_validate_current_burst_baseline()
 	_validate_hound_encounter_pressure_envelope()
-	await _validate_hound_shared_posture_and_stagger()
+	await _validate_hound_standard_posture_retirement()
 	await _validate_keeper_stale_loot_reward_parent()
 
 	if _failures.is_empty():
-		print("[HushiroCombatSemanticsSmoke] PASS - shared Hound posture stagger-first deathblow bounded pack envelope")
+		print("[HushiroCombatSemanticsSmoke] PASS - Health-first standard Hound | Posture retired | bounded pack envelope | Keeper reward recovery")
 		get_tree().quit(0)
 	else:
 		for failure: String in _failures:
@@ -37,17 +36,17 @@ func _ready() -> void:
 func _validate_current_burst_baseline() -> void:
 	var baselines: Dictionary = HUSHIRO_ENEMY_CONTRACT.BASELINES
 	_expect(int((baselines.get("hollow", {}) as Dictionary).get("health", 0)) == 40, "Hollow Health must be 40 for the Area 1 three-hit fodder target")
-	_expect(float((baselines.get("hollow", {}) as Dictionary).get("posture", 0.0)) == 40.0, "Hollow Posture must be 40")
+	_expect(float((baselines.get("hollow", {}) as Dictionary).get("posture", 0.0)) == 40.0, "Hollow legacy Posture compatibility value must remain 40")
 	_expect(int((baselines.get("hound", {}) as Dictionary).get("health", 0)) == 50, "Hound Health must be 50 for the Area 1 four-hit target")
-	_expect(float((baselines.get("hound", {}) as Dictionary).get("posture", 0.0)) == 45.0, "Hound Posture must be 45")
+	_expect(float((baselines.get("hound", {}) as Dictionary).get("posture", 0.0)) == 45.0, "Hound legacy Posture compatibility value must remain 45")
 	_expect(int((baselines.get("archer", {}) as Dictionary).get("health", 0)) == 45, "Archer Health must be 45 for the Area 1 four-hit target")
-	_expect(float((baselines.get("archer", {}) as Dictionary).get("posture", 0.0)) == 65.0, "Archer Posture must remain 65")
+	_expect(float((baselines.get("archer", {}) as Dictionary).get("posture", 0.0)) == 65.0, "Archer legacy Posture compatibility value must remain 65")
 	_expect(int((baselines.get("swordsman", {}) as Dictionary).get("health", 0)) == 60, "Swordsman Health must be 60 for the Area 1 five-hit target")
-	_expect(float((baselines.get("swordsman", {}) as Dictionary).get("posture", 0.0)) == 90.0, "Swordsman Posture must remain 90")
+	_expect(float((baselines.get("swordsman", {}) as Dictionary).get("posture", 0.0)) == 90.0, "Swordsman legacy Posture compatibility value must remain 90")
 	_expect(int((baselines.get("bilemass", {}) as Dictionary).get("health", 0)) == 60, "Bilemass Health must be 60 for the Area 1 five-hit target")
-	_expect(float((baselines.get("bilemass", {}) as Dictionary).get("posture", 0.0)) == 70.0, "Bilemass Posture must remain 70")
+	_expect(float((baselines.get("bilemass", {}) as Dictionary).get("posture", 0.0)) == 70.0, "Bilemass legacy Posture compatibility value must remain 70")
 	_expect(int((baselines.get("warden", {}) as Dictionary).get("health", 0)) == 140, "Warden Health must remain 140 for the Area 1 10-11-hit durable target")
-	_expect(float((baselines.get("warden", {}) as Dictionary).get("posture", 0.0)) == 150.0, "Warden Posture must remain 150")
+	_expect(float((baselines.get("warden", {}) as Dictionary).get("posture", 0.0)) == 150.0, "Warden legacy Posture compatibility value must remain 150")
 
 
 func _validate_hound_encounter_pressure_envelope() -> void:
@@ -75,7 +74,7 @@ func _validate_hound_encounter_pressure_envelope() -> void:
 			_expect(total_count <= 6, "%s wave %d exceeds approved six-active enemy cap (%d)" % [encounter_id, wave_index + 1, total_count])
 
 
-func _validate_hound_shared_posture_and_stagger() -> void:
+func _validate_hound_standard_posture_retirement() -> void:
 	var hound: Node = HOUND_SCENE.instantiate()
 	hound.name = "CombatSemanticsHound"
 	add_child(hound)
@@ -86,21 +85,26 @@ func _validate_hound_shared_posture_and_stagger() -> void:
 
 	var combat: Node = hound.get_node_or_null("Combat")
 	var hound_runtime: Node = hound.get_node_or_null("HushiroHoundCombatRuntime")
-	var break_runtime: Node = hound.get_node_or_null("HushiroPostureBreakRuntime")
+	var no_posture: Node = hound.get_node_or_null("HushiroStandardNoPostureRuntime")
 	_expect(combat != null, "Hound missing shared CombatController")
-	_expect(hound_runtime != null, "Hound shared posture adapter was not attached")
-	_expect(break_runtime != null, "Hound posture-break runtime was not attached")
-	if combat == null or hound_runtime == null or break_runtime == null:
+	_expect(hound_runtime != null, "Hound imported combat compatibility adapter was not attached")
+	_expect(no_posture != null, "Hound no-Posture compatibility boundary was not attached")
+	_expect(hound.get_node_or_null("HushiroPostureBreakRuntime") == null, "Hound retained standard posture-break runtime")
+	_expect(hound.get_node_or_null("HushiroPostureReadabilityRuntime") == null, "Hound retained standard Posture readability runtime")
+	if combat == null or hound_runtime == null or no_posture == null:
 		hound.queue_free()
 		return
+
+	if no_posture.has_method("is_posture_retired"):
+		_expect(bool(no_posture.call("is_posture_retired")), "Hound no-Posture runtime is not active")
 
 	var cfg: CombatConfig = combat.get("config") as CombatConfig
 	_expect(cfg != null, "Hound CombatController missing config")
 	if cfg != null:
-		_expect(is_equal_approx(float(cfg.posture_max), 45.0), "Hound shared Posture max must be 45, got %.2f" % float(cfg.posture_max))
+		_expect(is_equal_approx(float(cfg.posture_max), 45.0), "Hound legacy compatibility posture_max must remain 45, got %.2f" % float(cfg.posture_max))
 
-	# Reproduce a normal Wraith/basic sword event. The playtest log showed authored 12
-	# Posture reaching Hounds as 0; this transaction must now move the shared meter.
+	# Imported attack events may still carry posture values, but the retirement bridge
+	# must synchronously neutralize them before they can become a second kill meter.
 	combat.call("begin_attack_event", {
 		"health_damage": 13,
 		"posture_damage": 12.0,
@@ -111,29 +115,19 @@ func _validate_hound_shared_posture_and_stagger() -> void:
 	})
 	hound_runtime.call("_on_hound_hurt", 13, "oathbound_attack", null)
 	combat.call("end_attack_event")
-	_expect(is_equal_approx(float(combat.call("get_posture")), 12.0), "Hound canonical sword event did not add 12 shared Posture")
+	_expect(is_zero_approx(float(combat.call("get_posture"))), "Hound canonical sword event accumulated retired standard Posture")
 
-	# Reproduce the Hound's existing +35 parry response. The adapter absorbs the local
-	# imported value into the same shared meter, yielding 47 total and therefore a 45/45
-	# break. Crucially, the break frame itself must still be stagger-only.
+	# The Hound's imported local meter may still be written by legacy callbacks. It must
+	# be folded back to zero without arming any executable state.
 	hound.set("posture", 47.0)
 	await get_tree().physics_frame
-	_expect(is_equal_approx(float(combat.call("get_posture")), 45.0), "Hound parry bridge did not fill shared Posture to 45")
-	_expect(bool(break_runtime.call("is_break_active")), "Full Hound Posture did not enter stagger state")
-	_expect(not bool(break_runtime.call("is_deathblow_armed")), "Deathblow armed on the same frame as Hound Posture break")
-	_expect(not bool(hound.call("is_deathblow_ready")), "Legacy Hound readiness bypassed stagger-only beat")
-
-	await get_tree().create_timer(0.24).timeout
-	await get_tree().physics_frame
-	_expect(bool(break_runtime.call("is_deathblow_armed")), "Hound Deathblow did not arm after stagger readability beat")
-	_expect(bool(hound.call("is_deathblow_ready")), "Hound legacy readiness did not mirror shared armed state")
-
-	# Dead standards cannot stay in the player's execution candidate set.
-	hound.set("hp", 0)
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	_expect(not bool(break_runtime.call("is_deathblow_armed")), "Dead Hound remained shared Deathblow-ready")
-	_expect(not bool(hound.call("is_deathblow_ready")), "Dead Hound remained legacy Deathblow-ready")
+	_expect(is_zero_approx(float(combat.call("get_posture"))), "Hound legacy posture bridge bypassed standard retirement")
+	_expect(is_zero_approx(float(hound.get("posture"))), "Hound local compatibility posture remained nonzero")
+	if hound.has_method("is_deathblow_ready"):
+		_expect(not bool(hound.call("is_deathblow_ready")), "standard Hound became Deathblow-ready after posture retirement")
+	var posture_bar: Node = hound.get_node_or_null("PostureBar")
+	if posture_bar is CanvasItem:
+		_expect(not (posture_bar as CanvasItem).visible, "standard Hound PostureBar remained visible")
 
 	hound.queue_free()
 	await get_tree().process_frame
