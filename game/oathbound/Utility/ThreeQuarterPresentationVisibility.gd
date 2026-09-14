@@ -6,9 +6,11 @@ extends Node2D
 
 @export var background_path: NodePath = NodePath("../Background")
 @export var active_background_modulate := Color(0.34, 0.29, 0.26, 1.0)
+@export var hide_background_when_active := false
 
 var _background: CanvasItem = null
 var _background_base_modulate := Color.WHITE
+var _background_base_visible := true
 var _last_active := false
 var _initialized := false
 
@@ -17,6 +19,7 @@ func _ready() -> void:
 	_background = get_node_or_null(background_path) as CanvasItem
 	if _background != null:
 		_background_base_modulate = _background.modulate
+		_background_base_visible = _background.visible
 	_apply_mode(_is_three_quarter_active())
 
 
@@ -51,4 +54,9 @@ func _apply_mode(active: bool) -> void:
 			child.call("set_presentation_active", active)
 
 	if _background != null:
-		_background.modulate = active_background_modulate if active else _background_base_modulate
+		if hide_background_when_active:
+			_background.visible = _background_base_visible and not active
+			_background.modulate = _background_base_modulate
+		else:
+			_background.visible = _background_base_visible
+			_background.modulate = active_background_modulate if active else _background_base_modulate
