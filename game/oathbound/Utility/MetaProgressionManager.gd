@@ -33,15 +33,18 @@ const MATERIAL_KEEPER := "keeper"
 const MATERIAL_TWIN_MAWS := "twin_maws"
 const MATERIAL_ECLIPSE_SHOGUN := "eclipse_shogun"
 
+# NOTE: the legacy IDs posture_recovery / deflection_stability / execution_stability
+# are intentionally retained so existing save ownership remains valid. Their current
+# player-facing names/effects no longer represent a universal player-Posture resource.
 const STRUCTURAL_NODES := [
 	# Bloodwell — Akio
 	{"id": "vitality", "name": "Vitality", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_FIRST_RETURN},
 	{"id": "composure", "name": "Composure", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_FIRST_RETURN},
 	{"id": "spirit_reserve", "name": "Spirit Reserve", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_FIRST_RETURN},
-	{"id": "posture_recovery", "name": "Posture Recovery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
+	{"id": "posture_recovery", "name": "Footwork Recovery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
 	{"id": "recovery_efficiency", "name": "Recovery Efficiency", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
-	{"id": "deflection_stability", "name": "Deflection Stability", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
-	{"id": "execution_stability", "name": "Execution Stability", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
+	{"id": "deflection_stability", "name": "Special Response", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
+	{"id": "execution_stability", "name": "Execution Reserve", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER_OR_LATER},
 	{"id": "body_mastery", "name": "Body Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_KEEPER, "boss_material": MATERIAL_KEEPER},
 	{"id": "resource_mastery", "name": "Resource Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_TWIN_MAWS, "boss_material": MATERIAL_TWIN_MAWS},
 	{"id": "returning_blood_mastery", "name": "Returning Blood Mastery", "station": STATION_BLOODWELL, "group": "akio", "stage": STAGE_AFTER_SHOGUN, "boss_material": MATERIAL_ECLIPSE_SHOGUN},
