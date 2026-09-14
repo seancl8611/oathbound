@@ -174,7 +174,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/HollowV2MigrationSmoke.tscn 2>&1 | tee hollow-v2-migration.log
-          grep -F "[HollowV2MigrationSmoke] PASS - simple fodder brain | pressure bite | commitment | low poise | Posture preserved" hollow-v2-migration.log
+          grep -F "[HollowV2MigrationSmoke] PASS - simple fodder brain | pressure bite | commitment | low poise | Posture retired" hollow-v2-migration.log
           if grep -F "SCRIPT ERROR:" hollow-v2-migration.log; then
             echo "FAIL: Combat V2 Hollow migration smoke emitted a GDScript runtime error."
             exit 1
@@ -189,7 +189,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/ArcherV2MigrationSmoke.tscn 2>&1 | tee archer-v2-migration.log
-          grep -F "[ArcherV2MigrationSmoke] PASS - ranged brain | arrival pressure | aim commitment | low poise | Posture preserved" archer-v2-migration.log
+          grep -F "[ArcherV2MigrationSmoke] PASS - ranged brain | arrival pressure | aim commitment | low poise | Posture retired" archer-v2-migration.log
           if grep -F "SCRIPT ERROR:" archer-v2-migration.log; then
             echo "FAIL: Combat V2 Archer migration smoke emitted a GDScript runtime error."
             exit 1
@@ -204,7 +204,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/BilemassV2MigrationSmoke.tscn 2>&1 | tee bilemass-v2-migration.log
-          grep -F "[BilemassV2MigrationSmoke] PASS - hazard brain | landing pressure | spit commitment | Poise | puddle contract | Posture preserved" bilemass-v2-migration.log
+          grep -F "[BilemassV2MigrationSmoke] PASS - hazard brain | landing pressure | spit commitment | Poise | puddle contract | Posture retired" bilemass-v2-migration.log
           if grep -F "SCRIPT ERROR:" bilemass-v2-migration.log; then
             echo "FAIL: Combat V2 Bilemass migration smoke emitted a GDScript runtime error."
             exit 1
@@ -219,7 +219,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/WardenV2MigrationSmoke.tscn 2>&1 | tee warden-v2-migration.log
-          grep -F "[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | restraint/Posture preserved" warden-v2-migration.log
+          grep -F "[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | enemy Posture retired" warden-v2-migration.log
           if grep -F "SCRIPT ERROR:" warden-v2-migration.log; then
             echo "FAIL: Combat V2 Warden migration smoke emitted a GDScript runtime error."
             exit 1
