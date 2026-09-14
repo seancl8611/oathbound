@@ -15,10 +15,13 @@ extends Camera2D
 
 @export_category("Three-quarter presentation prototype")
 @export var three_quarter_enabled := true
-@export_range(0.5, 1.5, 0.01) var presentation_zoom := 0.88
-@export_range(0.5, 1.0, 0.01) var ground_vertical_compression := 0.72
-@export var framing_world_offset := Vector2(0.0, -28.0)
+# V2 deliberately uses a gentler projection than the first stretch-test. The authored
+# room dressing now carries most of the depth read instead of relying on severe Y squash.
+@export_range(0.5, 1.5, 0.01) var presentation_zoom := 0.94
+@export_range(0.5, 1.0, 0.01) var ground_vertical_compression := 0.84
+@export var framing_world_offset := Vector2(0.0, -18.0)
 @export var compensate_character_sprites := true
+@export_range(0.0, 1.0, 0.05) var sprite_counter_projection := 1.0
 @export var add_contact_shadows := true
 @export var depth_sort_characters := true
 @export var show_prototype_badge := true
@@ -27,6 +30,7 @@ extends Camera2D
 
 const PRESENTATION_SCALE_META := &"_oathbound_three_quarter_base_scale"
 const PRESENTATION_Z_META := &"_oathbound_three_quarter_base_z"
+const PRESENTATION_SHADOW_PENDING_META := &"_oathbound_three_quarter_shadow_pending"
 const PRESENTATION_SHADOW_NAME := &"ThreeQuarterGroundShadow"
 # Existing scenes were authored before world-depth sorting and often leave backgrounds
 # at z=0. Bias projected actors above that legacy floor, then sort actors against one
@@ -175,9 +179,12 @@ func _prepare_actor_visual(actor: Node) -> void:
 		if base_scale_value is Vector2:
 			var base_scale: Vector2 = base_scale_value
 			var safe_compression := maxf(0.01, ground_vertical_compression)
-			# Camera Y is compressed. Counter-scale only the vertical dimensions of body
-			# artwork so the actor remains upright while its ground position is projected.
-			sprite.scale = Vector2(base_scale.x, base_scale.y / safe_compression)
+			# Counter-project only the body artwork. The interpolation knob lets us reduce
+			# correction if placeholder sprites feel too tall while new directional art is
+			# still being authored for this view.
+			var target_y_factor := 1.0 / safe_compression
+			var y_factor := lerpf(1.0, target_y_factor, clampf(sprite_counter_projection, 0.0, 1.0))
+			sprite.scale = Vector2(base_scale.x, base_scale.y * y_factor)
 
 	if add_contact_shadows:
 		_ensure_contact_shadow(actor_2d, sprite)
@@ -197,6 +204,7 @@ func _restore_all_actor_visuals() -> void:
 		if actor_2d.has_meta(PRESENTATION_Z_META):
 			actor_2d.z_index = int(actor_2d.get_meta(PRESENTATION_Z_META))
 
+		actor_2d.remove_meta(PRESENTATION_SHADOW_PENDING_META)
 		var shadow := actor_2d.get_node_or_null(NodePath(str(PRESENTATION_SHADOW_NAME)))
 		if shadow != null:
 			shadow.queue_free()
@@ -218,11 +226,13 @@ func _find_main_actor_sprite(actor: Node2D) -> Sprite2D:
 func _ensure_contact_shadow(actor: Node2D, sprite: Sprite2D) -> void:
 	if actor.has_node(NodePath(str(PRESENTATION_SHADOW_NAME))):
 		return
+	if bool(actor.get_meta(PRESENTATION_SHADOW_PENDING_META, false)):
+		return
 
 	var radius_x := 11.0
 	if sprite != null and sprite.texture != null:
 		radius_x = clampf(float(sprite.texture.get_width()) * absf(sprite.scale.x) * 0.16, 8.0, 18.0)
-	var radius_y := radius_x * 0.48
+	var radius_y := radius_x * 0.50
 
 	var points := PackedVector2Array()
 	for index: int in range(20):
@@ -232,10 +242,33 @@ func _ensure_contact_shadow(actor: Node2D, sprite: Sprite2D) -> void:
 	var shadow := Polygon2D.new()
 	shadow.name = str(PRESENTATION_SHADOW_NAME)
 	shadow.polygon = points
-	shadow.color = Color(0.035, 0.025, 0.025, 0.26)
+	shadow.color = Color(0.035, 0.025, 0.025, 0.28)
 	shadow.position = Vector2(0.0, 5.0)
 	shadow.z_index = -1
 	shadow.show_behind_parent = true
+
+	# CameraFollow can enter _ready() while GameFlow is still attaching the room/player
+	# hierarchy. Godot correctly rejects add_child() while that parent is busy. Mark this
+	# actor as pending and attach on the next safe idle turn instead.
+	actor.set_meta(PRESENTATION_SHADOW_PENDING_META, true)
+	_attach_contact_shadow_deferred.call_deferred(actor, shadow)
+
+
+func _attach_contact_shadow_deferred(actor: Node2D, shadow: Polygon2D) -> void:
+	if not is_instance_valid(actor):
+		if is_instance_valid(shadow):
+			shadow.queue_free()
+		return
+
+	actor.remove_meta(PRESENTATION_SHADOW_PENDING_META)
+	if not _active_three_quarter or not add_contact_shadows:
+		if is_instance_valid(shadow):
+			shadow.queue_free()
+		return
+	if actor.has_node(NodePath(str(PRESENTATION_SHADOW_NAME))):
+		if is_instance_valid(shadow):
+			shadow.queue_free()
+		return
 	actor.add_child(shadow)
 
 
@@ -275,6 +308,6 @@ func _update_badge_text() -> void:
 	if _prototype_badge == null:
 		return
 	if _active_three_quarter:
-		_prototype_badge.text = "THREE-QUARTER POV PROTOTYPE  |  F9: legacy view"
+		_prototype_badge.text = "THREE-QUARTER POV V2  |  F9: legacy view"
 	else:
 		_prototype_badge.text = "LEGACY TOP-DOWN VIEW  |  F9: three-quarter POV"
