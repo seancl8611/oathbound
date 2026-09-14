@@ -4,10 +4,12 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-09-09
+last_reviewed: 2026-09-14
 topics:
   - project-identity
   - combat
+  - stylized-3d
+  - three-quarter-camera
   - returning-blood
   - techniques
   - relics
@@ -22,6 +24,8 @@ topics:
   - postgame
 related:
   - OVERVIEW-DESIGN-PILLARS
+  - OVERVIEW-STYLIZED-3D-PRESENTATION
+  - OVERVIEW-V2-COMBAT-DIRECTION
   - OVERVIEW-FULL-SCOPE
   - OVERVIEW-ENDGAME-POSTGAME-RELEASE
   - GAMEPLAY-COMBAT
@@ -38,7 +42,9 @@ related:
 
 # Oathbound Game Overview
 
-Oathbound is a high-angle 2D action roguelite built around disciplined katana combat, posture pressure, precise parries, stagger, deathblows, previewed branching routes, and run-based build progression.
+Oathbound is a **fixed high-angle stylized 3D action roguelite** built around disciplined katana combat, fast planar movement, attack commitment, spacing, selective defense, hidden enemy Poise/interruption, explicit special-response parries, previewed branching routes, and run-based build progression.
+
+The production presentation is three-quarter / isometric-like rather than a free-camera third-person game. Characters, enemies, combat rooms, props, lighting, shadows, and controlled occlusion should increasingly use real 3D representation while gameplay decisions remain grounded on the combat plane. The current Camera2D projection/procedural-proxy stack is a migration bridge, not the final production target.
 
 The game should feel disciplined, dangerous, elegant, and cursed. Combat readability and player execution take priority over spectacle or automatic build power.
 
@@ -54,7 +60,7 @@ His lineage explains why the power awakens. His discipline and inherited express
 
 Akio remains a swordsman first. Blood Aspects reshape the weapon kit, Techniques customize core sword actions and supporting synergies, Prosthetics provide one equipped tactical tool, and Relics provide one smaller run-wide support effect.
 
-The build should strengthen decisions the player already makes—timing, spacing, posture pressure, parries, movement, deathblows, targeting, and resource use—rather than replace combat fundamentals.
+The build should strengthen decisions the player already makes—timing, spacing, movement, attack commitment, selective defense, special responses, targeting, rear positioning, and resource use—rather than replace combat fundamentals.
 
 Akio never speaks, supplies dialogue choices, or uses internal monologue. NPCs, intelligent enemies, and bosses carry spoken/written dialogue; Akio is characterized through action, stillness, physical reaction, and refusal.
 
@@ -76,7 +82,10 @@ A mastery-level player may theoretically clear all three regions and defeat the 
 # Current gameplay shape
 
 - Returning Blood awakens after the first death and begins the repeated-run progression loop.
-- Shared combat includes parry, Health/posture, block, dash, stagger, deathblow, genuine rear-hit/backstab classification, and Prosthetic support.
+- Shared combat uses **player Health + mobility + aspect-specific/selective defense**. There is no universal player Posture resource.
+- Standard enemies use **Health + hidden Poise/interruption**, not a universal standard-enemy Posture/Deathblow loop.
+- Parry is an **explicit special-response mechanic**, not the default answer to ordinary melee/projectile contacts; authored boss/miniboss/execution moments may retain special execution infrastructure.
+- The combat camera/presentation target is fixed high-angle stylized 3D while movement, attack reach, pressure admission, crowd spacing, and encounter logic remain ground-plane concepts.
 - Launch Blood Aspects: **Wolf, Wraith, Ronin**.
 - Every post-awakening normal run begins at Aspect Tier 0; optional Shrine Resist/Embrace progression reaches Tier IV maximum.
 - Blood/Blood Art becomes available only from Tier II onward.
@@ -92,7 +101,7 @@ A mastery-level player may theoretically clear all three regions and defeat the 
 
 Permanent progression is intentionally compact and supports execution rather than replacing it.
 
-- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes.
+- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes. Akio nodes support Health, Spirit, recovery, and reliability without recreating universal player Posture.
 - **Forge Bench:** 19 Prosthetic upgrades + 20 Relic mastery milestones across 10 Relics.
 - **Blood Mirror:** 3 nodes per Aspect / 9 total, focused on Tier 0 Handling, Signature Reliability, and Blood Discipline.
 - **Boss materials:** exactly six Bloodwell gates at launch—one Akio mastery node and one regional-passage Infrastructure node per regional boss material.
@@ -194,21 +203,25 @@ Mandatory campaign information is communicated directly; the Discovery Board car
 
 # Current design focus
 
-Oathbound's **top-level launch architecture is closed**, and the planned first-playtest/runtime package is substantially implemented through the Shogun-to-Heart shell.
+Oathbound's **gameplay launch architecture is substantially closed**, while the approved production presentation is now moving from the Camera2D three-quarter prototype into a stylized 3D implementation.
 
 Current work is:
 
-1. final real-player integration validation and evidence-backed stability/readability fixes,
+1. final real-player integration validation and evidence-backed combat/stability/readability fixes,
 2. playtest-driven combat, encounter, economy, reward, and run-duration tuning,
-3. final production-art/VFX/audio/readability/accessibility replacement and polish,
-4. dedicated design of the two-form Heart moveset/arena/tuning package within the approved Heart identity/structure, followed by implementation and real-player validation,
-5. release QA, localization verification, and legal/provenance completion.
+3. a representative **Hushiro stylized-3D vertical slice** proving fixed Camera3D framing, planar combat semantics, 3D Akio/enemy representation, room volume, lighting, shadows, VFX, and controlled occlusion before mass regional conversion,
+4. shared planar-to-3D actor/room/camera foundations followed by Hushiro-first production conversion,
+5. final production art/VFX/audio/readability/accessibility replacement and polish,
+6. dedicated design of the two-form Heart moveset/arena/tuning package within the approved Heart identity/structure, followed by implementation and real-player validation,
+7. release QA, localization verification, and legal/provenance completion.
 
-The Heart's exact combat design is the major intentional gameplay-content gap. `TRUE_FINAL_HEART.md` explicitly leaves that moveset/arena/tuning work open, so it must be designed before implementation rather than inferred from the current non-combat shell.
+The Heart's exact combat design remains the major intentional gameplay-content gap. `TRUE_FINAL_HEART.md` explicitly leaves that moveset/arena/tuning work open, so it must be designed before implementation rather than inferred from the current non-combat shell.
 
 # Source links
 
 - [Design pillars](DESIGN_PILLARS.md)
+- [Stylized 3D presentation direction](STYLIZED_3D_PRESENTATION_DIRECTION.md)
+- [Three-quarter presentation bridge](THREE_QUARTER_PRESENTATION_PROTOTYPE.md)
 - [Full game scope](FULL_GAME_SCOPE.md)
 - [Endgame, postgame, and release](ENDGAME_POSTGAME_RELEASE.md)
 - [Current design questions](../_meta/OPEN_QUESTIONS.md)
