@@ -54,7 +54,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroDefenseContractSmoke.tscn 2>&1 | tee hushiro-defense-contract.log
-          grep -F "[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture retired | real HP number exact | perilous thrust bypass + warning" hushiro-defense-contract.log
+          grep -F "[HushiroDefenseContractSmoke] PASS - player guard 35% Health chip + Posture retired | enemy guard partial HP + Posture retired | exact HP numbers | perilous bypass" hushiro-defense-contract.log
           if grep -F "SCRIPT ERROR:" hushiro-defense-contract.log; then
             echo "FAIL: Hushiro defense contract emitted a GDScript runtime error."
             exit 1
@@ -219,7 +219,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Combat/Validation/WardenV2MigrationSmoke.tscn 2>&1 | tee warden-v2-migration.log
-          grep -F "[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | enemy Posture retired" warden-v2-migration.log
+          grep -F "[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | enemy/player Posture retired" warden-v2-migration.log
           if grep -F "SCRIPT ERROR:" warden-v2-migration.log; then
             echo "FAIL: Combat V2 Warden migration smoke emitted a GDScript runtime error."
             exit 1
