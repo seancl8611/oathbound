@@ -10,7 +10,7 @@ const HUSHIRO_WARDEN_HP: int = 140
 const RESTRAINT_PARRY_OPEN_FRACTION: float = 0.62
 const RESTRAINT_PARRY_CLOSE_LEAD: float = 0.08
 const RESTRAINT_PARRY_STAGGER: float = 1.20
-const RESTRAINT_FAILURE_POSTURE: float = 25.0
+const RESTRAINT_FAILURE_HEALTH_DAMAGE: int = 4
 
 var _restraint_parry_open_at: float = 0.0
 var _restraint_parry_close_at: float = 0.0
@@ -84,7 +84,7 @@ func _end_restrain_if_elapsed() -> void:
 		return
 
 	if now >= _restrain_until:
-		_apply_restrain_failure_posture()
+		_apply_restrain_failure_health_damage()
 		_hide_parry_indicator()
 		super._end_restrain_if_elapsed()
 
@@ -126,28 +126,24 @@ func _break_restrain_with_parry() -> void:
 		})
 
 
-func _apply_restrain_failure_posture() -> void:
+func _apply_restrain_failure_health_damage() -> void:
 	var p: Node2D = _restrained_player
 	if not is_instance_valid(p):
 		return
 
-	var current_value: Variant = p.get("stagger")
-	var max_value: Variant = p.get("stagger_max")
-	if current_value == null or max_value == null:
-		return
-
-	var before := float(current_value)
-	var maximum := maxf(1.0, float(max_value))
-	var after := minf(maximum, before + RESTRAINT_FAILURE_POSTURE)
-	p.set("stagger", after)
-	if p.has_method("_update_stagger_ui"):
-		p.call("_update_stagger_ui")
+	var hp_before: int = int(p.get("hp")) if p.get("hp") != null else 0
+	if p.has_method("take_damage"):
+		p.call("take_damage", RESTRAINT_FAILURE_HEALTH_DAMAGE)
+	elif p.get("hp") != null:
+		p.set("hp", maxi(0, hp_before - RESTRAINT_FAILURE_HEALTH_DAMAGE))
+	var hp_after: int = int(p.get("hp")) if p.get("hp") != null else hp_before
 
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("warden_restrain_failed", {
 			"warden": CombatTelemetry.snapshot_actor(self),
 			"player": CombatTelemetry.snapshot_actor(p),
-			"posture_before": before,
-			"posture_added": RESTRAINT_FAILURE_POSTURE,
-			"posture_after": after,
+			"health_before": hp_before,
+			"health_damage": maxi(0, hp_before - hp_after),
+			"health_after": hp_after,
+			"player_posture_retired": true,
 		})
