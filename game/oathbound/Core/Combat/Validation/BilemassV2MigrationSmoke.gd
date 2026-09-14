@@ -28,14 +28,21 @@ func _run() -> void:
 	_expect(bilemass.get_node_or_null("CombatActionRunner") != null, "Bilemass missing CombatActionRunner")
 	_expect(bilemass.get_node_or_null("EnemyMotor") != null, "Bilemass missing EnemyMotor")
 	_expect(bilemass.get_node_or_null("EnemyBrain") != null, "Bilemass missing EnemyBrain")
-	_expect(bilemass.get_node_or_null("HushiroPostureBreakRuntime") != null, "Bilemass lost shared Posture/Deathblow runtime")
-	_expect(bilemass.get_node_or_null("PostureBar") != null, "Bilemass lost canonical PostureBar")
+	_expect(bilemass.get_node_or_null("HushiroStandardNoPostureRuntime") != null, "Bilemass missing standard no-Posture runtime")
+	_expect(bilemass.get_node_or_null("HushiroPostureBreakRuntime") == null, "Bilemass retained retired standard Posture/Deathblow runtime")
+	_expect(bilemass.get_node_or_null("HushiroPostureReadabilityRuntime") == null, "Bilemass retained retired standard Posture readability runtime")
+	var posture_bar: Node = bilemass.get_node_or_null("PostureBar")
+	if posture_bar is CanvasItem:
+		_expect(not (posture_bar as CanvasItem).visible, "Bilemass standard PostureBar is still visible")
 
 	_expect(int(bilemass.get("hp")) == 60, "Bilemass Hushiro hack-and-slash Health target is not 60")
 	var combat: Node = bilemass.get_node_or_null("Combat")
 	if combat != null:
 		var cfg: CombatConfig = combat.get("config") as CombatConfig
-		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 70.0), "Bilemass canonical Posture max is not 70")
+		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 70.0), "Bilemass legacy compatibility posture_max is not 70")
+		if combat.has_method("add_posture"):
+			combat.call("add_posture", 70.0)
+			_expect(is_zero_approx(float(combat.call("get_posture"))), "Bilemass accumulated retired standard Posture")
 	else:
 		_fail("Bilemass missing CombatController")
 
@@ -100,7 +107,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[BilemassV2MigrationSmoke] PASS - hazard brain | landing pressure | spit commitment | Poise | puddle contract | Posture preserved")
+		print("[BilemassV2MigrationSmoke] PASS - hazard brain | landing pressure | spit commitment | Poise | puddle contract | Posture retired")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
