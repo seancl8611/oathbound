@@ -211,7 +211,6 @@ func _build_foreground_post(base: Vector2, side: float) -> void:
 	_add_local_polygon(node, PackedVector2Array([
 		Vector2(-7, 0), Vector2(7, 0), Vector2(8, -62), Vector2(-8, -62)
 	]), WOOD, 0)
-	draw_set_transform(Vector2.ZERO)
 	var grass := Node2D.new()
 	grass.position = base + Vector2(side * 15.0, 0)
 	grass.z_index = _depth_for_y(base.y) + 2
