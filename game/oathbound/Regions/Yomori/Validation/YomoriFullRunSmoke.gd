@@ -11,7 +11,7 @@ const YOMORI_CATALOG = preload("res://Regions/Yomori/Encounters/YomoriEncounterC
 const EXPECTED_PLAYER_SCRIPT: String = "res://Player/OathboundCombatPlayer.gd"
 const EXPECTED_COMBAT_SCENE: String = "res://Regions/Yomori/Chambers/CombatChamber.tscn"
 const EXPECTED_TWIN_MAWS_SCENE: String = "res://Regions/Yomori/Chambers/TwinMawsChamber.tscn"
-const EXPECTED_TREASURE_SCENE: String = "res://Core/Chambers/Types/TreasureChamber.tscn"
+const EXPECTED_TREASURE_SCENE: String = "res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn"
 const REQUIRED_ROLES: Array[String] = ["combat", "shrine", "merchant", "rest", "treasure", "miniboss", "boss"]
 const SEARCH_SEED_LIMIT: int = 4096
 
@@ -228,7 +228,7 @@ func _validate_loaded_chamber(index: int) -> void:
 	if base_role == "combat":
 		_expect(room.scene_file_path == EXPECTED_COMBAT_SCENE, "Chamber %d: combat leaked outside canonical Yomori chamber" % [index + 1])
 	if base_role == "treasure":
-		_expect(room.scene_file_path == EXPECTED_TREASURE_SCENE, "Chamber %d: Treasure aliases another room" % [index + 1])
+		_expect(room.scene_file_path == EXPECTED_TREASURE_SCENE, "Chamber %d: Treasure did not resolve to canonical ThreeQuarter scene" % [index + 1])
 	if base_role == "boss":
 		_validate_twin_maws_room(room, index)
 

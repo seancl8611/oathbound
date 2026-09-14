@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _run() -> void:
 	await get_tree().process_frame
+	_prepare_awakened_aspect_state()
 	var player: Node = await _spawn_player()
 	if player == null:
 		_finish()
@@ -28,6 +29,16 @@ func _run() -> void:
 	player.queue_free()
 	await get_tree().process_frame
 	_finish()
+
+
+func _prepare_awakened_aspect_state() -> void:
+	# Ronin is a post-awakening Aspect. The first-attempt runtime intentionally gates
+	# Aspect selection before Returning Blood awakens, so defense validation must opt
+	# into the same awakened state used by actual Aspect runs.
+	if typeof(MetaProgress) == TYPE_OBJECT:
+		MetaProgress.set("returning_blood_awakened", true)
+	if typeof(AspectRuntime) == TYPE_OBJECT:
+		AspectRuntime.select_aspect("wolf")
 
 
 func _spawn_player() -> Node:
