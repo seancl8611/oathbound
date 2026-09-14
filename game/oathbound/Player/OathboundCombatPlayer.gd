@@ -10,11 +10,23 @@ extends "res://Player/OathboundCombatPlayerCore.gd"
 ## boundary: the first Heavy Cleave may flow into a second Quick/Cross/Heavy phrase.
 ## Hitboxes, AttackEvent delivery, dash/parry cancellation, held-Thrust branching,
 ## PlayerMotor, CombatActionRunner, and recovery timing remain owned by the core.
+##
+## Combat V2 defense retirement:
+## Player Posture is no longer a player-facing durability resource. Health is the sole
+## ordinary durability meter; holding guard converts eligible frontal hits into authored
+## Health chip instead of filling a second meter. The inherited stagger fields remain at
+## a safe compatibility shape until the legacy controller can be deleted outright.
 
 const AREA1_PRESSURE_MAX_HITS: int = 6
 const AREA1_PRESSURE_MIDPOINT_HIT: int = 3
 const BASE_KATANA_IDS: Array[String] = ["quick_slash", "cross_cut", "heavy_cleave"]
 const PARRY_POLICY = preload("res://Core/Combat/OathboundParryPolicy.gd")
+
+const PLAYER_POSTURE_COMPATIBILITY_MAX: float = 100.0
+const BASE_BLOCK_HEALTH_RATIO: float = 0.35
+const RONIN_BLOCK_HEALTH_RATIO_T0: float = 0.30
+const RONIN_BLOCK_HEALTH_TIER_STEP: float = 0.025
+const RONIN_BLOCK_HEALTH_RATIO_MIN: float = 0.20
 
 var _area1_pressure_hits_started: int = 0
 var _area1_pressure_active: bool = false
@@ -22,7 +34,221 @@ var _area1_pressure_active: bool = false
 
 func _ready() -> void:
 	super._ready()
-	print("[OathboundPlayer] v2.2 - Area 1 six-hit player-paced pressure string")
+	_retire_player_posture_state()
+	print("[OathboundPlayer] v2.3 - Health guard + retired player Posture")
+
+
+# =============================================================================
+# PLAYER DEFENSE - HEALTH + GUARD, NO PLAYER POSTURE
+# =============================================================================
+
+func apply_aspect_configuration() -> void:
+	# Preserve all non-defense Aspect setup owned by the inherited integration layer,
+	# then neutralize the legacy player-Posture compatibility fields.
+	super.apply_aspect_configuration()
+	_retire_player_posture_state()
+
+
+func _setup_stagger_ui() -> void:
+	# The imported controller creates this dynamically. Keeping setup as a deliberate
+	# no-op prevents a retired meter from entering the scene tree in the first place.
+	_stagger_ui = null
+	_stagger_bg = null
+	_stagger_fill = null
+	_stagger_border = null
+
+
+func _update_stagger_ui() -> void:
+	stagger = 0.0
+	if _stagger_ui != null and is_instance_valid(_stagger_ui):
+		_stagger_ui.visible = false
+
+
+func _tick_stagger(_delta: float) -> void:
+	# Some imported mechanics still write the compatibility field. It may never persist
+	# long enough to become a gameplay resource or trigger the old break state.
+	if not is_zero_approx(float(stagger)):
+		stagger = 0.0
+
+
+func _posture_break() -> void:
+	# Compatibility-only override. Player Posture cannot stun Akio in Combat V2.
+	stagger = 0.0
+	_stun_until = 0.0
+	_stun_started_at = 0.0
+	if _state == State.STUNNED:
+		_change_state(State.IDLE)
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("retired_player_posture_break_ignored", {
+			"player": CombatTelemetry.snapshot_actor(self),
+		})
+
+
+func _retire_player_posture_state() -> void:
+	stagger = 0.0
+	stagger_max = PLAYER_POSTURE_COMPATIBILITY_MAX
+	stagger_regen_rate = 0.0
+	stagger_regen_blocked = 0.0
+	_stagger_suppress_until = 0.0
+	_stun_until = 0.0
+	_stun_started_at = 0.0
+	_update_stagger_ui()
+
+
+func _player_block_health_ratio() -> float:
+	if typeof(AspectRuntime) == TYPE_OBJECT and str(AspectRuntime.selected_aspect) == str(ASPECT_CATALOG.RONIN):
+		var tier: int = clampi(int(AspectRuntime.tier), 0, 4)
+		return maxf(
+			RONIN_BLOCK_HEALTH_RATIO_MIN,
+			RONIN_BLOCK_HEALTH_RATIO_T0 - RONIN_BLOCK_HEALTH_TIER_STEP * float(tier)
+		)
+	return BASE_BLOCK_HEALTH_RATIO
+
+
+func get_player_block_health_ratio_for_test() -> float:
+	return _player_block_health_ratio()
+
+
+func is_player_posture_retired() -> bool:
+	return true
+
+
+func _blocked_health_damage(incoming_damage: int) -> int:
+	if incoming_damage <= 0:
+		return 0
+	return maxi(1, int(round(float(incoming_damage) * _player_block_health_ratio())))
+
+
+func _handle_block(area: Area2D, dmg: int, dmg_type: String, attacker: Node, atk_pos: Vector2) -> void:
+	var resolved_attacker: Node = _resolve_attacker(area, attacker)
+	var attack_origin: Vector2 = atk_pos
+	if resolved_attacker is Node2D and is_instance_valid(resolved_attacker):
+		attack_origin = (resolved_attacker as Node2D).global_position
+
+	var to_attacker: Vector2 = attack_origin - global_position
+	var facing: Vector2 = _facing_dir.normalized()
+	if facing.length_squared() <= 0.001:
+		facing = Vector2.RIGHT
+	var relative_angle: float = 0.0
+	if to_attacker.length_squared() > 0.001:
+		relative_angle = absf(rad_to_deg(facing.angle_to(to_attacker.normalized())))
+	var inside_arc: bool = to_attacker.length_squared() <= 0.001 or relative_angle <= CURRENT_BLOCK_ARC_DEGREES * 0.5
+
+	if not inside_arc:
+		if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_resolution("block_failed_outside_arc", self, resolved_attacker, area, {
+				"damage": dmg,
+				"damage_type": dmg_type,
+				"attack_position": [attack_origin.x, attack_origin.y],
+				"relative_angle_deg": relative_angle,
+				"block_half_arc_deg": CURRENT_BLOCK_ARC_DEGREES * 0.5,
+				"player_posture_retired": true,
+			})
+		take_damage(dmg)
+		var rear_kb_dir: Vector2 = (global_position - attack_origin).normalized()
+		knockback += rear_kb_dir * 120.0
+		if combat:
+			combat.notify_got_hit({"damage": dmg, "type": dmg_type})
+		return
+
+	var hp_before: int = int(hp)
+	var guard_damage: int = _blocked_health_damage(dmg)
+	if guard_damage > 0:
+		take_damage(guard_damage, false)
+	var hp_after: int = int(hp)
+	var actual_health_lost: int = maxi(0, hp_before - hp_after)
+	stagger = 0.0
+
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_resolution("block_success", self, resolved_attacker, area, {
+			"damage_type": dmg_type,
+			"incoming_health_damage": dmg,
+			"health_damage_received": actual_health_lost,
+			"block_health_ratio": _player_block_health_ratio(),
+			"player_posture_retired": true,
+			"aspect": str(AspectRuntime.selected_aspect) if typeof(AspectRuntime) == TYPE_OBJECT else "",
+			"aspect_tier": int(AspectRuntime.tier) if typeof(AspectRuntime) == TYPE_OBJECT else 0,
+			"attack_position": [attack_origin.x, attack_origin.y],
+			"relative_angle_deg": relative_angle,
+		})
+
+	apply_hitstop(HITSTOP_BLOCKED)
+	_shake_camera(SHAKE_BLOCKED, HITSTOP_BLOCKED)
+	_flash_player(Color(0.8, 0.8, 1.0), 0.06)
+
+	var kb_dir: Vector2 = (global_position - attack_origin).normalized()
+	knockback += kb_dir * 50.0
+
+	var contact_source: Node = attacker if attacker != null and is_instance_valid(attacker) else resolved_attacker
+	if contact_source != null and is_instance_valid(contact_source):
+		if contact_source.has_method("on_blocked"):
+			contact_source.call("on_blocked")
+		elif contact_source.is_in_group("enemy_projectile") or contact_source.is_in_group("deflectable"):
+			contact_source.queue_free()
+
+	# Ronin keeps its authored block-to-Reprisal conversion. Its stronger guard identity
+	# now lives in lower Health chip rather than a larger/slower Posture meter.
+	if hp > 0 and typeof(AspectRuntime) == TYPE_OBJECT and str(AspectRuntime.selected_aspect) == str(ASPECT_CATALOG.RONIN) and int(AspectRuntime.tier) >= 1:
+		_aspect_reprisal_until = Time.get_ticks_msec() * 0.001 + 0.85
+
+
+func _try_fanged_guard(dmg: int, dmg_type: String, attacker: Node) -> bool:
+	# Wolf Tier III remains one qualifying frontal normal guard during its authored
+	# commitment window. It now resolves through the same Health-chip rule as ordinary
+	# guard and can no longer build or break player Posture.
+	if not _aspect_fanged_guard_available or _state != State.ATTACKING:
+		return false
+	if dmg_type in ["grab", "mass", "unblockable", "perilous"]:
+		return false
+	var source: Node = _resolve_attacker(attacker if attacker is Area2D else null, attacker)
+	if not (source is Node2D):
+		return false
+	var to_attacker: Vector2 = (source as Node2D).global_position - global_position
+	if to_attacker.length_squared() > 0.001:
+		var attack_facing: Vector2 = _attack_aim_dir.normalized()
+		if attack_facing.dot(to_attacker.normalized()) < cos(deg_to_rad(CURRENT_BLOCK_ARC_DEGREES * 0.5)):
+			return false
+
+	var hp_before: int = int(hp)
+	var guard_damage: int = _blocked_health_damage(dmg)
+	if guard_damage > 0:
+		take_damage(guard_damage, false)
+	_aspect_fanged_guard_available = false
+	stagger = 0.0
+	apply_hitstop(HITSTOP_BLOCKED)
+	_shake_camera(SHAKE_BLOCKED, HITSTOP_BLOCKED)
+	_flash_player(Color(0.8, 0.8, 1.0), 0.06)
+
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("wolf_fanged_guard", {
+			"player": CombatTelemetry.snapshot_actor(self),
+			"incoming_health_damage": dmg,
+			"health_damage_received": maxi(0, hp_before - int(hp)),
+			"block_health_ratio": _player_block_health_ratio(),
+			"player_posture_retired": true,
+		})
+	return true
+
+
+func get_playtest_snapshot() -> Dictionary:
+	var snapshot: Dictionary = super.get_playtest_snapshot()
+	snapshot["posture"] = 0.0
+	snapshot["max_posture"] = 0.0
+	snapshot["posture_retired"] = true
+	snapshot["block_health_ratio"] = _player_block_health_ratio()
+	return snapshot
+
+
+func get_core_combat_baseline() -> Dictionary:
+	var baseline: Dictionary = super.get_core_combat_baseline()
+	baseline["max_posture"] = 0.0
+	baseline["posture_recover_delay"] = 0.0
+	baseline["posture_recover_rate"] = 0.0
+	baseline["posture_break_duration"] = 0.0
+	baseline["posture_break_reset_ratio"] = 0.0
+	baseline["player_posture_retired"] = true
+	baseline["block_health_ratio"] = _player_block_health_ratio()
+	return baseline
 
 
 func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
