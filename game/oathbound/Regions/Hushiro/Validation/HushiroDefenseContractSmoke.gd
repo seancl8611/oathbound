@@ -2,6 +2,7 @@ extends Node
 
 const PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const SWORDSMAN_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn")
+const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
 
 var _failures: Array[String] = []
 
@@ -140,6 +141,11 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	enemy.global_position = Vector2(50.0, 0.0)
 	add_child(enemy)
 	await get_tree().process_frame
+
+	# Match live Hushiro spawn normalization instead of testing the imported scene in
+	# isolation. The regional runtime applies this contract after the enemy's _ready().
+	HUSHIRO_ENEMY_CONTRACT.apply(enemy, "swordsman")
+	await get_tree().physics_frame
 	enemy.set_physics_process(false)
 	enemy.set("hp", 90)
 
