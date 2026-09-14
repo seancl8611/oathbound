@@ -31,14 +31,21 @@ func _run() -> void:
 	_expect(warden.get_node_or_null("CombatActionRunner") != null, "Warden missing CombatActionRunner")
 	_expect(warden.get_node_or_null("EnemyMotor") != null, "Warden missing EnemyMotor")
 	_expect(warden.get_node_or_null("EnemyBrain") != null, "Warden missing EnemyBrain")
-	_expect(warden.get_node_or_null("HushiroPostureBreakRuntime") != null, "Warden lost shared Posture/Deathblow runtime")
-	_expect(warden.get_node_or_null("PostureBar") != null, "Warden lost canonical PostureBar")
+	_expect(warden.get_node_or_null("HushiroStandardNoPostureRuntime") != null, "Warden missing standard no-Posture runtime")
+	_expect(warden.get_node_or_null("HushiroPostureBreakRuntime") == null, "Warden retained retired standard Posture/Deathblow runtime")
+	_expect(warden.get_node_or_null("HushiroPostureReadabilityRuntime") == null, "Warden retained retired standard Posture readability runtime")
+	var posture_bar: Node = warden.get_node_or_null("PostureBar")
+	if posture_bar is CanvasItem:
+		_expect(not (posture_bar as CanvasItem).visible, "Warden standard PostureBar is still visible")
 
 	_expect(int(warden.get("hp")) == 140, "Warden Hushiro Health baseline changed during V2 migration")
 	var combat: Node = warden.get_node_or_null("Combat")
 	if combat != null:
 		var cfg: CombatConfig = combat.get("config") as CombatConfig
-		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 150.0), "Warden canonical Posture max is not 150")
+		_expect(cfg != null and is_equal_approx(float(cfg.posture_max), 150.0), "Warden legacy compatibility posture_max is not 150")
+		if combat.has_method("add_posture"):
+			combat.call("add_posture", 150.0)
+			_expect(is_zero_approx(float(combat.call("get_posture"))), "Warden accumulated retired standard enemy Posture")
 	else:
 		_fail("Warden missing CombatController")
 
@@ -47,13 +54,15 @@ func _run() -> void:
 	else:
 		_fail("Warden missing V2 legacy-role declaration")
 
+	# Restraint failure Posture below is player-facing guard pressure, not a Warden kill
+	# meter. Standard Warden Posture/Deathblow ownership remains retired above.
 	var restraint_value: Variant = warden.call("get_v2_warden_restraint_contract_for_test")
 	if restraint_value is Dictionary:
 		var restraint: Dictionary = restraint_value as Dictionary
 		_expect(str(restraint.get("chain_break_action", "")) == "parry", "Warden restraint no longer uses timed parry escape")
 		_expect(int(restraint.get("chain_break_presses", 0)) == 999, "obsolete mash escape became reachable again")
 		_expect(is_equal_approx(float(restraint.get("chain_duration", 0.0)), 1.0), "Warden restraint duration changed")
-		_expect(is_equal_approx(float(restraint.get("restraint_failure_posture", 0.0)), 25.0), "Warden restraint failure Posture changed")
+		_expect(is_equal_approx(float(restraint.get("restraint_failure_posture", 0.0)), 25.0), "Warden restraint failure player Posture changed")
 		_expect(is_equal_approx(float(restraint.get("restraint_parry_stagger", 0.0)), 1.20), "Warden successful restraint parry stagger changed")
 	else:
 		_fail("Warden restraint validation contract unavailable")
@@ -127,7 +136,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | restraint/Posture preserved")
+		print("[WardenV2MigrationSmoke] PASS - control brain | perilous restraint pressure | explicit commitment | stateful Poise | short guard | enemy Posture retired")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
