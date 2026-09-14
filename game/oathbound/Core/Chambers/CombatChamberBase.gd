@@ -1,12 +1,14 @@
 extends RoomBase
 
 ## =============================================================================
-## COMBAT ROOM - v2.0 SEKIRO DUEL SYSTEM
+## COMBAT ROOM - PRESSURE PACING
 ## =============================================================================
-## Philosophy: Support sequential dueling, not crowd management
-## - Strict token limits (1 attacker at a time)
-## - Longer cooldowns for deliberate pacing
-## - Proper wave spacing
+## Philosophy: coordinated enemy pressure instead of sequential dueling.
+## - One attacker for small encounters, up to two melee attackers in larger packs.
+## - Ranged pressure may overlap melee pressure without becoming constant spam.
+## - Short turnover/cooldown windows keep enemies active while preserving readable tells.
+## - AttackDirector remains the compatibility API; migrated enemies may use the newer
+##   pressure-reservation path layered on top of it.
 ## =============================================================================
 
 @onready var ui: CanvasLayer = preload("res://Utility/UpgradeChoiceUI.tscn").instantiate()
@@ -23,15 +25,28 @@ var _alive = 0
 var _encounter_aggro_locked: bool = false
 
 const COMBAT_REWARDS = {
-	"gold":        {1: 50, 2: 75, 3: 100},
-	"mist":        {1: 4,  2: 5,  3: 6},
-	"scroll":      {1: 1,  2: 2,  3: 3},
-	"maxhp":       {1: 3,  2: 4,  3: 5},
-	"maxposture":  {1: 5,  2: 7,  3: 10},
+	"gold":   {1: 50, 2: 75, 3: 100},
+	"mist":   {1: 4,  2: 5,  3: 6},
+	"scroll": {1: 1,  2: 2,  3: 3},
+	"maxhp":  {1: 3,  2: 4,  3: 5},
 }
 
+const SMALL_ENCOUNTER_MELEE_LIMIT: int = 1
+const LARGE_ENCOUNTER_MELEE_LIMIT: int = 2
+const LARGE_ENCOUNTER_THRESHOLD: int = 3
+const MAX_ADVANCE_SLOTS: int = 4
+const MAX_RANGED_ATTACKERS: int = 2
+
+const MELEE_COOLDOWN_SEC: float = 1.35
+const ADVANCE_COOLDOWN_SEC: float = 0.65
+const RANGED_COOLDOWN_SEC: float = 2.0
+const FORMATION_COOLDOWN_SEC: float = 0.8
+const ATTACK_GRANT_GAP_SEC: float = 0.25
+const ATTACK_TURNOVER_SEC: float = 0.30
+
+
 func _ready() -> void:
-	print("[CombatRoom] v2.0 - Sekiro Duel System")
+	print("[CombatRoom] Pressure pacing active")
 	add_child(ui)
 	ui.visible = false
 	ui.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
@@ -51,47 +66,46 @@ func _ready() -> void:
 	_push_spawn_rect_to_spawner(_spawn_rect)
 
 	lock_all_gates()
-	
-	# Initialize AttackDirector with duel settings BEFORE starting encounter
-	_configure_duel_tokens()
-	
+
+	# Establish readable pressure defaults before the encounter begins. Autoscaling
+	# raises melee concurrency only when enough enemies are actually alive to justify it.
+	_configure_pressure_tokens()
+
 	_start_encounter()
 
 
-## Configure AttackDirector for Sekiro-style dueling
-func _configure_duel_tokens() -> void:
+## Configure AttackDirector compatibility roles for Hades-like encounter pressure.
+func _configure_pressure_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
-	
-	# CORE DUEL SETTINGS - One attacker at a time
+
 	AttackDir.set_role_limits({
-		"melee_attack": 1,    # Only ONE enemy attacks at a time
-		"advance_move": 2,    # Two can approach (one dueling, one waiting)
-		"ranged_attack": 1,   # One ranged enemy can fire
+		"melee_attack": SMALL_ENCOUNTER_MELEE_LIMIT,
+		"advance_move": 3,
+		"ranged_attack": MAX_RANGED_ATTACKERS,
 		"frontal": 1,
 		"flank_left": 1,
-		"flank_right": 1
+		"flank_right": 1,
 	})
-	
-	# LONG COOLDOWNS - Deliberate pacing
+
 	AttackDir.set_role_cooldowns({
-		"melee_attack": 4.0,  # Same enemy can't attack again for 4 seconds
-		"advance_move": 2.0,  # Slower approach cycling
-		"ranged_attack": 3.5, # Archers fire less often
-		"frontal": 1.5,
-		"flank_left": 1.5,
-		"flank_right": 1.5
+		"melee_attack": MELEE_COOLDOWN_SEC,
+		"advance_move": ADVANCE_COOLDOWN_SEC,
+		"ranged_attack": RANGED_COOLDOWN_SEC,
+		"frontal": FORMATION_COOLDOWN_SEC,
+		"flank_left": FORMATION_COOLDOWN_SEC,
+		"flank_right": FORMATION_COOLDOWN_SEC,
 	})
-	
-	# Configure global grant gap if available
+
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = 1.2  # 1.2 seconds between any attack grants
-	
-	# Configure attack turnover if available
+		AttackDir.grant_gap_sec = ATTACK_GRANT_GAP_SEC
 	if _has_property(AttackDir, "attack_turnover_delay"):
-		AttackDir.attack_turnover_delay = 1.8  # Delay after attack before next enemy can go
-	
-	print("[CombatRoom] Duel tokens configured: 1 melee, 2 advance, long cooldowns")
+		AttackDir.attack_turnover_delay = ATTACK_TURNOVER_SEC
+	if _has_property(AttackDir, "max_frontline"):
+		AttackDir.max_frontline = 4
+
+	print("[CombatRoom] Pressure roles configured: dynamic 1-2 melee, up to 2 ranged")
+
 
 func _start_encounter() -> void:
 	if spawner:
@@ -104,7 +118,7 @@ func _start_encounter() -> void:
 
 		var tmpl: Dictionary = {}
 		var area_id = get_meta("area_id") if has_meta("area_id") else 1
-		
+
 		# Use EncounterDB if available
 		if typeof(EncounterDB) == TYPE_OBJECT:
 			var forced_id = encounter_id_override.strip_edges()
@@ -128,11 +142,12 @@ func _start_encounter() -> void:
 		push_warning("[CombatRoom] EnemyEncounterSpawner missing; falling back to timer")
 		await get_tree().create_timer(6.0).timeout
 		_on_room_cleared()
-		
+
+
 func _pick_encounter_for_area(area_id: int) -> Dictionary:
 	if typeof(EncounterDB) != TYPE_OBJECT:
 		return _default_template()
-	
+
 	match area_id:
 		1:
 			if EncounterDB.has_method("pick_area1"):
@@ -150,9 +165,10 @@ func _pick_encounter_for_area(area_id: int) -> Dictionary:
 			if EncounterDB.has_method("pick_area1"):
 				push_warning("[CombatRoom] No pick_area3() yet — using area 1 encounters")
 				return EncounterDB.pick_area1()
-	
+
 	return _default_template()
-	
+
+
 func _on_encounter_started() -> void:
 	print("[CombatRoom] Encounter started")
 	_alive = 0
@@ -160,9 +176,8 @@ func _on_encounter_started() -> void:
 		if is_instance_valid(e) and is_ancestor_of(e):
 			_alive += 1
 			_wire_enemy_signals(e)
-	
-	# Start token management
-	_start_token_autoscale()
+
+	_start_pressure_autoscale()
 
 
 func _on_encounter_cleared() -> void:
@@ -177,43 +192,43 @@ func _on_room_cleared() -> void:
 	print("[CombatRoom] Room cleared → preparing reward")
 	emit_signal("room_cleared")
 
+
 func post_clear() -> void:
 	print("[CombatRoom] Post-clear → spawning reward pickup")
-	
+
 	var reward_key = get_meta("reward_key") if has_meta("reward_key") else ""
 	var area_id = get_meta("area_id") if has_meta("area_id") else 1
-	
-	# Determine reward amount (0 for boon — handled internally by pickup)
+
+	# Technique rewards are resolved by their own picker rather than a numeric amount.
 	var amount = 0
-	if reward_key != "boon" and reward_key != "":
+	if reward_key not in ["boon", "technique", ""]:
 		var table = COMBAT_REWARDS.get(reward_key, {})
 		amount = table.get(area_id, table.get(1, 0))
-	
-	# Default to boon if no reward key
+
+	# New combat rooms default to current Technique terminology. `boon` remains accepted
+	# by RewardPickup only for compatibility with imported later-area route data.
 	if reward_key == "":
-		reward_key = "boon"
-	
+		reward_key = "technique"
+
 	# Find spawn position (center of room or near player)
 	var spawn_pos = Vector2.ZERO
 	var room_center = get_node_or_null("RoomCenter")
 	if room_center and room_center is Node2D:
 		spawn_pos = room_center.global_position
 	else:
-		# Fallback: use spawn rect center
 		spawn_pos = _spawn_rect.get_center() if _spawn_rect.size != Vector2.ZERO else global_position
-	
-	# Spawn the pickup
+
 	var RewardPickupScript = load("res://Objects/RewardPickup.gd")
 	var pickup = RewardPickupScript.new()
 	pickup.setup(reward_key, amount, area_id)
 	pickup.global_position = spawn_pos
 	add_child(pickup)
-	
-	# Wait for player to collect, then unlock gates
+
 	await pickup.collected
 	unlock_all_gates()
 	print("[CombatRoom] Reward collected → gates unlocked")
-	
+
+
 func _grant_max_hp(amount: int) -> void:
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
@@ -225,18 +240,11 @@ func _grant_max_hp(amount: int) -> void:
 				p._update_health_bar()
 
 
-func _grant_max_posture(amount: int) -> void:
-	var players = get_tree().get_nodes_in_group("player")
-	if players.size() > 0:
-		var p = players[0]
-		if "stagger_max" in p:
-			p.stagger_max += amount
-			
-## Default fallback template - simple duel encounter
+## Default fallback template - short two-wave pressure encounter.
 func _default_template() -> Dictionary:
 	return {
-		"id": "fallback_duel",
-		"wave_spacing": [8.0, 10.0],
+		"id": "fallback_pressure",
+		"wave_spacing": [3.0, 4.0],
 		"waves": [
 			{"groups": [
 				{"type": "soldier", "count": 1}
@@ -247,93 +255,91 @@ func _default_template() -> Dictionary:
 		]
 	}
 
+
 func _wire_enemy_signals(e: Node) -> void:
 	if not is_instance_valid(e):
 		return
-	
+
 	if e.has_signal("enemy_died") and not e.is_connected("enemy_died", Callable(self, "_on_enemy_died")):
 		e.connect("enemy_died", Callable(self, "_on_enemy_died"))
 
+
 func _on_enemy_died(_enemy: Node) -> void:
 	_alive = max(0, _alive - 1)
-	# Token scaling is still handled by autoscale tick.
+	# Pressure scaling is still handled by the autoscale tick.
 
 
-func _start_token_autoscale() -> void:
+func _start_pressure_autoscale() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 	if not is_instance_valid(self):
 		return
-	
-	if not has_node("TokenTick"):
+
+	if not has_node("PressureTick"):
 		var t = Timer.new()
-		t.name = "TokenTick"
-		t.wait_time = 1.0  # Slower tick for deliberate combat
+		t.name = "PressureTick"
+		t.wait_time = 0.5
 		t.one_shot = false
 		add_child(t)
 		t.timeout.connect(_autoscale_tick)
-	
-	# Initial tick
+
 	_autoscale_tick()
-	$TokenTick.start()
+	$PressureTick.start()
 
 
 func _autoscale_tick() -> void:
-	# Recount alive enemies
 	var count = 0
 	for e in get_tree().get_nodes_in_group("enemy"):
 		if is_instance_valid(e) and is_ancestor_of(e):
 			count += 1
 	_alive = count
 
-	# Check aggro state
 	_update_encounter_aggro_lock()
-	
-	# Update tokens based on enemy count
-	# KEY: Even with more enemies, keep strict duel limits
-	_update_duel_tokens()
+	_update_pressure_tokens()
 
 
-## Update tokens maintaining duel feel regardless of enemy count
-func _update_duel_tokens() -> void:
+## Scale compatibility roles by live encounter pressure. Small fights remain readable;
+## packs of three or more may overlap a second melee action instead of forming a queue.
+func _update_pressure_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 
 	var alive = 0
+	var ranged_bodies = 0
 	for e in get_tree().get_nodes_in_group("enemy"):
 		if is_instance_valid(e) and is_ancestor_of(e):
 			alive += 1
+			if e.is_in_group("archer") or e.is_in_group("ranged"):
+				ranged_bodies += 1
 
-	# SEKIRO DUEL PHILOSOPHY:
-	# - Always keep melee attackers at 1 (true dueling)
-	# - Only slightly increase advance slots with more enemies
-	# - Ranged stays at 1 to not overwhelm
-	
-	var melee = 1                           # ALWAYS 1 - core duel principle
-	var advance = clampi(alive / 2, 1, 2)   # 1-2 can approach
-	var ranged = 1                          # Always 1 ranged
-	
+	var melee = SMALL_ENCOUNTER_MELEE_LIMIT if alive < LARGE_ENCOUNTER_THRESHOLD else LARGE_ENCOUNTER_MELEE_LIMIT
+	var advance = clampi(alive, 1, MAX_ADVANCE_SLOTS)
+	var ranged = mini(MAX_RANGED_ATTACKERS, ranged_bodies)
+	if ranged_bodies > 0:
+		ranged = maxi(1, ranged)
+
 	AttackDir.set_role_limits({
 		"melee_attack": melee,
 		"advance_move": advance,
 		"ranged_attack": ranged,
 		"frontal": 1,
 		"flank_left": 1,
-		"flank_right": 1
+		"flank_right": 1,
 	})
 
-	# Keep cooldowns long for deliberate pacing
 	AttackDir.set_role_cooldowns({
-		"melee_attack": 4.0,
-		"advance_move": 2.0,
-		"ranged_attack": 3.5,
-		"frontal": 1.5,
-		"flank_left": 1.5,
-		"flank_right": 1.5
+		"melee_attack": MELEE_COOLDOWN_SEC,
+		"advance_move": ADVANCE_COOLDOWN_SEC,
+		"ranged_attack": RANGED_COOLDOWN_SEC,
+		"frontal": FORMATION_COOLDOWN_SEC,
+		"flank_left": FORMATION_COOLDOWN_SEC,
+		"flank_right": FORMATION_COOLDOWN_SEC,
 	})
 
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = 1.2
+		AttackDir.grant_gap_sec = ATTACK_GRANT_GAP_SEC
+	if _has_property(AttackDir, "attack_turnover_delay"):
+		AttackDir.attack_turnover_delay = ATTACK_TURNOVER_SEC
 
 
 func _on_enemy_spawned(e: Node) -> void:
@@ -410,19 +416,20 @@ func _has_property(o: Object, name: String) -> bool:
 			return true
 	return false
 
+
 func _detect_encounter_area(encounter_id: String, fallback: int) -> int:
 	if typeof(EncounterDB) != TYPE_OBJECT:
 		return fallback
-	
+
 	# Check each area's encounter list for the ID
 	if EncounterDB.get("area1_encounters") != null:
 		for enc in EncounterDB.area1_encounters:
 			if enc.get("id", "") == encounter_id:
 				return 1
-	
+
 	if EncounterDB.get("area2_encounters") != null:
 		for enc in EncounterDB.area2_encounters:
 			if enc.get("id", "") == encounter_id:
 				return 2
-	
+
 	return fallback
