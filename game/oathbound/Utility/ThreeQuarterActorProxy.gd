@@ -124,8 +124,20 @@ func _update_animation_state() -> void:
 	_animation_progress = 0.0
 	if _animation_player == null or not is_instance_valid(_animation_player):
 		return
-	_current_animation = str(_animation_player.current_animation).to_lower()
-	var length := _animation_player.current_animation_length
+	# Many current actors legitimately leave their AnimationPlayer stopped while idle or
+	# while controller-driven combat logic owns the state. Godot reports an engine error
+	# if current_animation_length is queried with no enabled playback, so stopped playback
+	# is a normal no-animation state for the presentation proxy.
+	if not _animation_player.is_playing():
+		return
+	var animation_name := str(_animation_player.current_animation)
+	if animation_name.is_empty() or not _animation_player.has_animation(animation_name):
+		return
+	_current_animation = animation_name.to_lower()
+	var animation := _animation_player.get_animation(animation_name)
+	if animation == null:
+		return
+	var length := float(animation.length)
 	if length > 0.001:
 		_animation_progress = clampf(_animation_player.current_animation_position / length, 0.0, 1.0)
 
