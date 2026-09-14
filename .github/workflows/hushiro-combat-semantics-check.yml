@@ -54,7 +54,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroDefenseContractSmoke.tscn 2>&1 | tee hushiro-defense-contract.log
-          grep -F "[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture | real HP number exact | perilous thrust bypass + warning" hushiro-defense-contract.log
+          grep -F "[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture retired | real HP number exact | perilous thrust bypass + warning" hushiro-defense-contract.log
           if grep -F "SCRIPT ERROR:" hushiro-defense-contract.log; then
             echo "FAIL: Hushiro defense contract emitted a GDScript runtime error."
             exit 1
@@ -69,7 +69,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroGuardReadabilitySmoke.tscn 2>&1 | tee hushiro-guard-readability.log
-          grep -F "[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical partial 4 HP + 14 Posture | exact HP number" hushiro-guard-readability.log
+          grep -F "[HushiroGuardReadabilitySmoke] PASS - visible guard | canonical partial 4 HP | standard Posture hidden | exact HP number" hushiro-guard-readability.log
           if grep -F "SCRIPT ERROR:" hushiro-guard-readability.log; then
             echo "FAIL: Guard readability smoke emitted a GDScript runtime error."
             exit 1
