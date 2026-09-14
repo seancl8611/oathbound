@@ -24,8 +24,6 @@ const MIST := Color(0.58, 0.64, 0.63, 0.13)
 const GOLD := Color(0.65, 0.47, 0.17, 1.0)
 const SHADOW := Color(0.02, 0.018, 0.02, 0.30)
 
-var _phase := 0.0
-
 
 func _ready() -> void:
 	_build_common_room()
@@ -42,21 +40,6 @@ func _ready() -> void:
 			_build_boss()
 		"treasure":
 			_build_treasure()
-	set_process(true)
-
-
-func _process(dt: float) -> void:
-	_phase += dt
-	# Only lightweight procedural glow/mist nodes rely on redraw; chamber gameplay does not.
-	queue_redraw()
-
-
-func _draw() -> void:
-	# Slow floor haze makes service rooms feel dimensional without introducing particles
-	# or changing collision. It remains deliberately subtle under gameplay/UI.
-	var drift := sin(_phase * 0.35) * 14.0
-	_draw_ellipse(Vector2(-155.0 + drift, 145.0), Vector2(88.0, 18.0), MIST, FLOOR_DETAIL_Z + 1)
-	_draw_ellipse(Vector2(185.0 - drift * 0.7, -120.0), Vector2(70.0, 14.0), Color(MIST.r, MIST.g, MIST.b, 0.08), FLOOR_DETAIL_Z + 1)
 
 
 func _build_common_room() -> void:
@@ -88,6 +71,11 @@ func _build_common_room() -> void:
 		seam.width = 1.0
 		seam.z_index = FLOOR_DETAIL_Z
 		add_child(seam)
+
+	# Haze is represented by explicit negative-z ground polygons instead of `_draw()` on
+	# this root. That guarantees it can never paint over Akio, enemies or interaction UI.
+	_add_floor_ellipse(Vector2(-155.0, 145.0), Vector2(88.0, 18.0), MIST, FLOOR_DETAIL_Z + 1)
+	_add_floor_ellipse(Vector2(185.0, -120.0), Vector2(70.0, 14.0), Color(MIST.r, MIST.g, MIST.b, 0.08), FLOOR_DETAIL_Z + 1)
 
 	# Far wall shapes give every service room a stable visual horizon.
 	for spec: Dictionary in [
@@ -276,6 +264,19 @@ func _add_local_polygon(parent: Node2D, points: PackedVector2Array, color: Color
 	parent.add_child(polygon)
 
 
+func _add_floor_ellipse(center: Vector2, radii: Vector2, color: Color, z_value: int) -> void:
+	var node := Polygon2D.new()
+	var points := PackedVector2Array()
+	for index: int in range(28):
+		var angle := TAU * float(index) / 28.0
+		points.append(Vector2(cos(angle) * radii.x, sin(angle) * radii.y))
+	node.polygon = points
+	node.color = color
+	node.position = center
+	node.z_index = z_value
+	add_child(node)
+
+
 func _add_depth_ellipse(center: Vector2, radii: Vector2, color: Color, local_z: int) -> void:
 	var node := Polygon2D.new()
 	var points := PackedVector2Array()
@@ -324,12 +325,3 @@ func _draw_ground_circle_outline(center: Vector2, radius: float, color: Color, w
 	line.width = width
 	line.z_index = FLOOR_DETAIL_Z + 1
 	add_child(line)
-
-
-func _draw_ellipse(center: Vector2, radii: Vector2, color: Color, _z: int) -> void:
-	# Called from _draw(); z is represented by this scenery node's low common layer.
-	var points := PackedVector2Array()
-	for index: int in range(28):
-		var angle := TAU * float(index) / 28.0
-		points.append(center + Vector2(cos(angle) * radii.x, sin(angle) * radii.y))
-	draw_colored_polygon(points, color)
