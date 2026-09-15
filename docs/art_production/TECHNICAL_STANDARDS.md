@@ -4,7 +4,7 @@ title: Art Technical Standards
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-09-14
+last_reviewed: 2026-09-15
 topics:
   - stylized-3d
   - gltf
@@ -56,6 +56,27 @@ Working prototype targets:
 - bosses: established relative to Akio and camera readability.
 
 The character origin/pivot should sit at the gameplay contact point between the feet and ground unless a specific creature rig requires a documented exception.
+
+## Shared Planar3D bridge contract
+
+`res://Utility/Planar3DPresentationBridge.gd` is the shared simulation-to-presentation adapter. It owns only region-agnostic responsibilities:
+
+- mapping authoritative `Node2D` ground coordinates to X/Z presentation space;
+- maintaining the SubViewport / `Camera3D` render target;
+- reconciling presentation actors with authoritative player/enemy groups;
+- preserving the existing combat simulation as movement, hitbox, timing, damage, Pressure Director and encounter authority;
+- suppressing legacy actor art only after a valid replacement visual exists;
+- restoring compatibility presentation state when live 3D is disabled.
+
+The shared bridge must not preload or instantiate Hushiro, Yomori or Kagutsuchi-specific environment content. Region implementations extend it through these hooks:
+
+- `_create_environment_root()` — region room/environment representation;
+- `_create_actor_visual(actor, role)` — region-specific visual/model selection;
+- `_decorate_actor_visual(visual, actor, role)` — presentation-only VFX/accessories that do not own combat.
+
+Region-specific camera profiles, visibility watchdogs, actor grounding offsets and environment art rules also belong in the region subclass. This boundary is enforced by the Planar3D CI workflow so later Yomori/Kagutsuchi work can reuse the bridge without inheriting Hushiro art dependencies.
+
+Replacement behavior is deliberately fail-safe. If a model/factory fails to produce a live `Node3D`, the old authoritative body art must remain visible. An asset-loading failure may degrade presentation, but it must never make a combat actor invisible.
 
 ## Character model standard
 
