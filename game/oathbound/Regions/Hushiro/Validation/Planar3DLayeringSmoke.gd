@@ -1,8 +1,9 @@
 extends Node
 
-## Regression proof for the first live-3D real-player failure: opaque legacy 2D room art
-## must not be able to cover the SubViewport presentation, while planar CombatFX remain
-## visible and mirrored 3D actors remain above temporary raised floor geometry.
+## Regression proof for the live-3D real-player presentation contract: opaque legacy 2D
+## room art must not cover the SubViewport, planar CombatFX must remain visible, mirrored
+## actors must sit above temporary floor geometry, and Hushiro must retain the flatter,
+## wider illustrated camera profile established after the first visual playtest.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd")
 
@@ -80,6 +81,13 @@ func _run() -> void:
 		_expect(bool(state.get("combat_fx_visible", false)), "bridge state reports hidden CombatFX")
 		_expect(int(state.get("actor_visual_count", 0)) >= 1, "3D player representation was not created")
 		_expect(float(state.get("min_actor_y", 0.0)) >= 0.09, "3D actor root still intersects the temporary floor plane")
+
+		var compression := float(state.get("illustrated_ground_compression", 1.0))
+		var elevation := float(state.get("illustrated_camera_elevation_degrees", 90.0))
+		var zoom := float(state.get("illustrated_presentation_zoom", 1.0))
+		_expect(compression >= 0.58 and compression <= 0.66, "Hushiro projection drifted away from illustrated three-quarter target")
+		_expect(elevation >= 35.0 and elevation <= 42.0, "Hushiro Camera3D elevation drifted too top-down or too low")
+		_expect(zoom >= 0.68 and zoom <= 0.78, "Hushiro framing drifted away from pulled-back target")
 	else:
 		_fail("bridge layering introspection unavailable")
 
@@ -90,7 +98,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DLayeringSmoke] PASS - legacy floor stays hidden | CombatFX preserved | actor ground lift")
+		print("[Planar3DLayeringSmoke] PASS - layering + actor lift + illustrated camera profile")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
