@@ -118,10 +118,27 @@ func _try_external_model() -> bool:
 	if not (model is Node3D):
 		model.queue_free()
 		return false
+	# A syntactically valid GLB/scene can still be presentation-empty. Do not mark an
+	# external replacement active unless it contains renderable mesh geometry; otherwise
+	# the bridge could hide the authoritative legacy actor and leave an invisible enemy.
+	# Rejecting the candidate here keeps the existing curated/procedural role fallback live.
+	if not _has_renderable_geometry(model):
+		model.queue_free()
+		push_warning("[Planar3DActorVisual] rejected non-renderable external model: %s" % model_path)
+		return false
 	model.name = "ImportedModel"
 	_visual_root.add_child(model)
 	_external_model_active = true
 	return true
+
+
+func _has_renderable_geometry(root: Node) -> bool:
+	if root is MeshInstance3D and (root as MeshInstance3D).mesh != null:
+		return true
+	for child: Node in root.get_children():
+		if _has_renderable_geometry(child):
+			return true
+	return false
 
 
 func _build_humanoid(is_player: bool) -> void:
