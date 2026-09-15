@@ -334,14 +334,27 @@ func _find_player() -> Node2D:
 func _role_for(actor: Node2D) -> String:
 	if actor.is_in_group("player"):
 		return "player"
-	# presentation_role/enemy_type are shared contracts. hushiro_enemy_type remains in the
-	# compatibility list until the current Hushiro roster is migrated to the shared key.
-	for metadata_key: StringName in [&"presentation_role", &"enemy_type", &"hushiro_enemy_type"]:
-		var role := str(actor.get_meta(metadata_key, "")).to_lower()
-		if role == "swordsman":
-			return "swordsman"
-		if role == "hound":
-			return "hound"
+
+	# `presentation_role` is the region-neutral presentation identity contract. Preserve
+	# arbitrary semantic roles (archer, warden, controller, future regional roles, etc.)
+	# rather than collapsing every non-Swordsman/Hound actor into generic `enemy`.
+	var presentation_role := str(actor.get_meta(&"presentation_role", "")).strip_edges().to_lower()
+	if not presentation_role.is_empty():
+		return presentation_role
+
+	# `enemy_type` is a shared compatibility fallback used by some non-Hushiro actors.
+	var enemy_type := str(actor.get_meta(&"enemy_type", "")).strip_edges().to_lower()
+	if not enemy_type.is_empty():
+		return enemy_type
+
+	# Hushiro's old metadata key remains only as a migration fallback. New Hushiro
+	# standard enemies publish presentation_role through HushiroEnemyContract.
+	var hushiro_enemy_type := str(actor.get_meta(&"hushiro_enemy_type", "")).strip_edges().to_lower()
+	if not hushiro_enemy_type.is_empty():
+		return hushiro_enemy_type
+
+	# Last-resort name/script inference exists only for legacy actors that have not yet
+	# been normalized by a region contract.
 	var identity := str(actor.name).to_lower()
 	var script_value: Variant = actor.get_script()
 	if script_value is Script:
