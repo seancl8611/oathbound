@@ -111,7 +111,8 @@ func _body_extent(body: CharacterBody2D) -> float:
 		extent = maxf(rectangle.size.x, rectangle.size.y) * 0.5
 	if extent <= 0.0:
 		return 0.0
-	return extent * maxf(absf(collision.global_scale.x), absf(collision.global_scale.y), 0.001)
+	var scale_factor := maxf(absf(collision.global_scale.x), absf(collision.global_scale.y))
+	return extent * maxf(scale_factor, 0.001)
 
 
 func get_state_for_test() -> Dictionary:
