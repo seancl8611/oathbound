@@ -1,16 +1,24 @@
 extends "res://Utility/Planar3DPresentationBridge.gd"
 
-## Hushiro-specific hardening for the live planar-combat -> 3D presentation bridge.
+## Hushiro-specific hardening and art-direction profile for the live planar-combat -> 3D
+## presentation bridge.
 ##
-## The first real-player 3D playtest exposed two presentation-only failures:
-## - legacy opaque 2D room dressing could become visible again above the 3D SubViewport;
-## - mirrored actor roots sat exactly on Y=0 while temporary 3D floor pieces rise a few
-##   centimeters above that plane, visually burying feet/lower bodies.
-##
-## Combat ownership remains entirely in the existing 2D actors. This wrapper only makes
-## the Hushiro visual replacement deterministic while the production 3D path is proven.
+## Combat ownership remains entirely in the existing 2D actors. This wrapper owns only
+## the visual replacement contract: persistent legacy-art suppression, actor grounding,
+## and the Hushiro camera profile used to make real-time 3D read closer to illustrated 2D.
 
 @export var actor_ground_lift: float = 0.10
+
+@export_category("Illustrated three-quarter camera")
+# The first live-3D playtest inherited the compatibility projection (0.84 ~= 57 degrees
+# above the ground) and read too top-down/chunky. Hushiro now deliberately uses a flatter
+# three-quarter projection: asin(0.62) ~= 38.3 degrees above the combat plane.
+@export_range(0.50, 0.75, 0.01) var illustrated_ground_compression: float = 0.62
+# Camera2D zoom is also mirrored by the Camera3D bridge. 0.72 shows roughly 30% more arena
+# than the previous 0.94 profile, bringing the framing closer to an authored Hades-like
+# room composition without changing any combat distances.
+@export_range(0.60, 0.90, 0.01) var illustrated_presentation_zoom: float = 0.72
+@export var illustrated_framing_world_offset := Vector2(0.0, -8.0)
 
 
 func _process(delta: float) -> void:
@@ -29,6 +37,50 @@ func _process(delta: float) -> void:
 	# temporary 3D floor kit contains slightly raised stone surfaces, so lift only the
 	# presentation roots after base synchronization. Gameplay positions/hitboxes do not move.
 	_apply_actor_ground_lift()
+
+
+func _capture_and_adjust_legacy_camera() -> void:
+	super._capture_and_adjust_legacy_camera()
+	var camera2d := get_viewport().get_camera_2d()
+	if camera2d == null:
+		return
+
+	_set_camera_profile_property(camera2d, "ground_vertical_compression", illustrated_ground_compression)
+	_set_camera_profile_property(camera2d, "presentation_zoom", illustrated_presentation_zoom)
+	_set_camera_profile_property(camera2d, "framing_world_offset", illustrated_framing_world_offset)
+
+	# CameraFollow caches its exported profile into Camera2D.zoom. Apply immediately so
+	# the first Camera3D sync and the surviving 2D CombatFX share the exact same projection.
+	if camera2d.has_method("_apply_presentation_profile"):
+		camera2d.call("_apply_presentation_profile")
+	if camera2d.has_method("snap_to_target"):
+		camera2d.call("snap_to_target")
+
+	print(
+		"[HushiroPlanar3D] illustrated camera profile compression=%.2f elevation=%.1fdeg zoom=%.2f"
+		% [illustrated_ground_compression, rad_to_deg(asin(illustrated_ground_compression)), illustrated_presentation_zoom]
+	)
+
+
+func _restore_legacy_presentation() -> void:
+	var camera2d := get_viewport().get_camera_2d() if is_inside_tree() else null
+	super._restore_legacy_presentation()
+	# Restoring the exported values alone does not recalculate CameraFollow.zoom. Reapply
+	# its profile so leaving live 3D cannot strand the compatibility camera at Hushiro's
+	# flatter test values.
+	if camera2d != null and is_instance_valid(camera2d):
+		if camera2d.has_method("_apply_presentation_profile"):
+			camera2d.call("_apply_presentation_profile")
+		if camera2d.has_method("snap_to_target"):
+			camera2d.call("snap_to_target")
+
+
+func _set_camera_profile_property(camera2d: Camera2D, property_name: String, value: Variant) -> void:
+	if not _has_property(camera2d, property_name):
+		return
+	if not _camera2d_settings.has(property_name):
+		_camera2d_settings[property_name] = camera2d.get(property_name)
+	camera2d.set(property_name, value)
 
 
 func _hide_legacy_room_art() -> void:
@@ -87,4 +139,7 @@ func get_layering_state_for_test() -> Dictionary:
 		"combat_fx_visible": combat_fx == null or combat_fx.visible,
 		"actor_visual_count": actor_count,
 		"min_actor_y": min_actor_y,
+		"illustrated_ground_compression": illustrated_ground_compression,
+		"illustrated_camera_elevation_degrees": rad_to_deg(asin(illustrated_ground_compression)),
+		"illustrated_presentation_zoom": illustrated_presentation_zoom,
 	}
