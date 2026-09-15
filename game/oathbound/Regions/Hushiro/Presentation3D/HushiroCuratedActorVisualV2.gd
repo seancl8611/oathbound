@@ -24,6 +24,13 @@ func _apply_illustrated_material_treatment(node: Node) -> void:
 	_brighten_after_parent_treatment(node)
 
 
+func get_curated_animation_state_for_test() -> Dictionary:
+	var state := super.get_curated_animation_state_for_test()
+	state["forward_correction_degrees"] = rad_to_deg(CURATED_FORWARD_CORRECTION_YAW)
+	state["readability_revision"] = 2
+	return state
+
+
 func _brighten_after_parent_treatment(node: Node) -> void:
 	if node is MeshInstance3D:
 		var mesh_instance := node as MeshInstance3D
