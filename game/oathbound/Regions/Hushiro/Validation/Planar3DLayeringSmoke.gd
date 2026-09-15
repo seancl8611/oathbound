@@ -6,8 +6,8 @@ extends Node
 ## keeping their authoritative simulation as CharacterBody2D. It protects exclusive 3D
 ## actor replacement, imported human animation, source-driven dash/katana presentation,
 ## contact shadows, attack presentation VFX, legacy ground telegraphs, fixed Camera3D
-## framing, target viewport sizing and the Rupture room/lighting language without changing
-## any combat semantics.
+## framing, target viewport sizing, bridge disable/re-enable restoration, and the Rupture
+## room/lighting language without changing any combat semantics.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd")
 
@@ -124,20 +124,13 @@ func _run() -> void:
 		_expect(int(state.get("attack_vfx_count", 0)) >= 2, "Akio/Swordsman combat-synced 3D attack VFX contract missing")
 		_expect(float(state.get("min_actor_y", 0.0)) >= 0.09, "3D actor root still intersects the temporary floor plane")
 
-		var animation_value: Variant = state.get("curated_animation_state", {})
-		if animation_value is Dictionary:
-			var animation_state := animation_value as Dictionary
-			_expect(bool(animation_state.get("active", false)), "curated animation introspection reports inactive library")
-			_expect(int(animation_state.get("clip_count", 0)) >= 5, "curated runtime library retained fewer than five usable clips")
-			_expect(int(animation_state.get("remapped_tracks", 0)) > 0, "curated animation library remapped zero skeleton tracks")
-			_expect(not str(animation_state.get("idle_clip", "")).is_empty(), "curated animation library selected no idle clip")
-			_expect(not str(animation_state.get("locomotion_clip", "")).is_empty(), "curated animation library selected no locomotion clip")
-			var dash_mode := str(animation_state.get("dash_mode", ""))
-			var attack_mode := str(animation_state.get("attack_mode", ""))
-			_expect(dash_mode in ["authored_clip", "locomotion_lean_fallback"], "curated Akio dash has no deterministic presentation mode")
-			_expect(attack_mode in ["authored_source_progress", "manual_source_progress"], "curated katana attack has no source-progress presentation mode")
+		var animation_states_value: Variant = state.get("curated_animation_states_by_role", {})
+		if animation_states_value is Dictionary:
+			var animation_states := animation_states_value as Dictionary
+			_validate_curated_animation_role(animation_states, "player", "Akio")
+			_validate_curated_animation_role(animation_states, "swordsman", "Swordsman")
 		else:
-			_fail("curated animation introspection unavailable")
+			_fail("per-role curated animation introspection unavailable")
 
 		var compression := float(state.get("illustrated_ground_compression", 1.0))
 		var elevation := float(state.get("illustrated_camera_elevation_degrees", 90.0))
@@ -174,14 +167,67 @@ func _run() -> void:
 	else:
 		_fail("bridge layering introspection unavailable")
 
+	# Exercise the actual Hushiro bridge lifecycle rather than only the failure-injection
+	# bridge. Disabling live 3D must restore every compatibility body/room item, and a later
+	# re-enable must rebuild the representative 3D set without losing planar CombatFX.
+	bridge.call("set_presentation_enabled", false)
+	for _i: int in range(3):
+		await get_tree().process_frame
+	_expect(not bool(bridge.call("is_presentation_enabled")), "Hushiro live 3D bridge did not deactivate")
+	_expect(background.visible, "legacy Background was not restored when Hushiro live 3D disabled")
+	_expect(scenery.visible, "legacy Scenery was not restored when Hushiro live 3D disabled")
+	_expect(combat_fx.visible, "CombatFX visibility changed when Hushiro live 3D disabled")
+	_expect(player_legacy_body.visible, "legacy player body was not restored when Hushiro live 3D disabled")
+	_expect(swordsman_legacy_body.visible, "legacy Swordsman body was not restored when Hushiro live 3D disabled")
+	_expect(hound_legacy_body.visible, "legacy Hound body was not restored when Hushiro live 3D disabled")
+
+	bridge.call("set_presentation_enabled", true)
+	for _i: int in range(6):
+		await get_tree().process_frame
+	_expect(bool(bridge.call("is_presentation_enabled")), "Hushiro live 3D bridge did not reactivate")
+	_expect(not background.visible, "legacy Background was not suppressed after Hushiro live 3D re-enable")
+	_expect(not scenery.visible, "legacy Scenery was not suppressed after Hushiro live 3D re-enable")
+	_expect(combat_fx.visible, "CombatFX visibility was lost after Hushiro live 3D re-enable")
+	_expect(not player_legacy_body.visible, "legacy player body was not re-suppressed after live 3D re-enable")
+	_expect(not swordsman_legacy_body.visible, "legacy Swordsman body was not re-suppressed after live 3D re-enable")
+	_expect(not hound_legacy_body.visible, "legacy Hound body was not re-suppressed after live 3D re-enable")
+	var reenabled_state_value: Variant = bridge.call("get_layering_state_for_test")
+	if reenabled_state_value is Dictionary:
+		var reenabled_state := reenabled_state_value as Dictionary
+		_expect(int(reenabled_state.get("actor_visual_count", 0)) >= 3, "Hushiro re-enable did not rebuild Akio + Swordsman + Hound presentation actors")
+		_expect(int(reenabled_state.get("animated_curated_actor_count", 0)) >= 2, "Hushiro re-enable did not restore curated humanoid animation")
+		_expect(int(reenabled_state.get("hound_actor_count", 0)) >= 1, "Hushiro re-enable did not restore authored Hound presentation")
+	else:
+		_fail("Hushiro layering introspection unavailable after re-enable")
+
 	room.queue_free()
 	await get_tree().process_frame
 	_finish()
 
 
+func _validate_curated_animation_role(animation_states: Dictionary, role: String, label: String) -> void:
+	if not animation_states.has(role):
+		_fail("%s curated animation state missing" % label)
+		return
+	var animation_value: Variant = animation_states.get(role)
+	if not (animation_value is Dictionary):
+		_fail("%s curated animation state is invalid" % label)
+		return
+	var animation_state := animation_value as Dictionary
+	_expect(bool(animation_state.get("active", false)), "%s curated animation library is inactive" % label)
+	_expect(int(animation_state.get("clip_count", 0)) >= 5, "%s runtime library retained fewer than five usable clips" % label)
+	_expect(int(animation_state.get("remapped_tracks", 0)) > 0, "%s animation library remapped zero skeleton tracks" % label)
+	_expect(not str(animation_state.get("idle_clip", "")).is_empty(), "%s animation library selected no idle clip" % label)
+	_expect(not str(animation_state.get("locomotion_clip", "")).is_empty(), "%s animation library selected no locomotion clip" % label)
+	var dash_mode := str(animation_state.get("dash_mode", ""))
+	var attack_mode := str(animation_state.get("attack_mode", ""))
+	_expect(dash_mode in ["authored_clip", "locomotion_lean_fallback"], "%s dash has no deterministic presentation mode" % label)
+	_expect(attack_mode in ["authored_source_progress", "manual_source_progress"], "%s attack has no source-progress presentation mode" % label)
+
+
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DLayeringSmoke] PASS - Akio dash/katana + Swordsman + Hound | animated 3D actors/VFX | exclusive legacy suppression | Rupture room | fixed 640x360 Camera3D")
+		print("[Planar3DLayeringSmoke] PASS - Akio + Swordsman per-role animation | Hound | lifecycle restore/rebuild | 3D VFX | Rupture room | fixed 640x360 Camera3D")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
