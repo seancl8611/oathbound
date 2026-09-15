@@ -5,6 +5,7 @@ extends Node
 ## remains, because RewardPickup waits for `choice_made` while the SceneTree is paused.
 
 const UI_SCRIPT = preload("res://Core/Rewards/TechniqueRewardUI.gd")
+const TECHNIQUE_CATALOG = preload("res://Core/Techniques/TechniqueCatalog.gd")
 
 var _failed := false
 var _choice_count := 0
@@ -28,6 +29,7 @@ func _run_smoke() -> void:
 	await get_tree().process_frame
 
 	var original_rerolls := int(RunData.technique_rerolls) if RunData != null else 0
+	var original_acquired: Array = RunData.acquired_upgrades.duplicate(true) if RunData != null else []
 	if RunData != null:
 		RunData.technique_rerolls = 1
 
@@ -88,7 +90,27 @@ func _run_smoke() -> void:
 	_expect(not get_tree().paused, "single-option reward did not resume after selection")
 	_expect(_choice_count == 3, "single-option reward did not emit choice_made")
 
+	# The service boundary must be safe even if a future caller bypasses this UI. Exhaust
+	# the real catalog, then request a reroll directly. No alternative exists, so the call
+	# must return no replacement screen and must not consume the resource.
 	if RunData != null:
+		var exhausted_ids: Array = []
+		for technique_id: Variant in TECHNIQUE_CATALOG.TECHNIQUES.keys():
+			exhausted_ids.append(str(technique_id))
+		for refinement_id: Variant in TECHNIQUE_CATALOG.REFINEMENTS.keys():
+			exhausted_ids.append(str(refinement_id))
+		RunData.acquired_upgrades = exhausted_ids
+		RunData.technique_rerolls = 1
+		var service_result: Array = UpgradeService.reroll_three_choices(
+			UpgradeService.SOURCE_STANDARD,
+			1,
+			[{"id": "validation_current"}]
+		)
+		_expect(service_result.is_empty(), "exhausted reroll service returned a fake alternative screen")
+		_expect(int(RunData.technique_rerolls) == 1, "reroll service consumed resource before proving an alternative existed")
+
+	if RunData != null:
+		RunData.acquired_upgrades = original_acquired
 		RunData.technique_rerolls = original_rerolls
 	ui.queue_free()
 	await get_tree().process_frame
@@ -106,7 +128,7 @@ func _finish() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[TechniqueRewardUISmoke] PASS - exhausted pool continues safely | technique_none selectable | hidden-card focus blocked | exhausted reroll spend blocked")
+	print("[TechniqueRewardUISmoke] PASS - exhausted pool continues safely | technique_none selectable | hidden-card focus blocked | exhausted reroll spend blocked | service reroll spend deferred")
 	get_tree().quit(0)
 
 
