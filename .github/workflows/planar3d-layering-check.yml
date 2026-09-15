@@ -10,6 +10,9 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Art3D/**"
+      - "tools/assets/**"
+      - "docs/assets/**"
       - ".github/workflows/planar3d-layering-check.yml"
   pull_request:
     paths:
@@ -17,16 +20,32 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Art3D/**"
+      - "tools/assets/**"
+      - "docs/assets/**"
       - ".github/workflows/planar3d-layering-check.yml"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   layering-contract:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Fetch and verify curated CC0 assets
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/assets/fetch_assets.py \
+            --manifest tools/assets/asset_manifest.json \
+            --repo-root . \
+            --report asset-sync-report.json
 
       - name: Setup Godot 4.7.2
         uses: chickensoft-games/setup-godot@v2
@@ -36,7 +55,18 @@ jobs:
           include-templates: false
 
       - name: Import project
-        run: godot --headless --path game/oathbound --import
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee planar3d-import.log
+          if grep -F "SCRIPT ERROR:" planar3d-import.log; then
+            echo "FAIL: 3D project import emitted a GDScript error."
+            exit 1
+          fi
+          if grep -F "ERROR: Cannot open file" planar3d-import.log; then
+            echo "FAIL: Godot could not open an installed 3D asset."
+            exit 1
+          fi
 
       - name: Validate live 3D layering contract
         shell: bash
@@ -53,11 +83,29 @@ jobs:
             exit 1
           fi
 
-      - name: Upload layering smoke log
+      - name: Commit verified third-party binaries
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add game/oathbound/Art3D/ThirdParty
+          if git diff --cached --quiet; then
+            echo "Asset tree already matches the pinned manifest."
+            exit 0
+          fi
+          git config user.name "oathbound-asset-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync verified third-party 3D assets"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload 3D validation evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: planar3d-layering-${{ github.run_id }}
-          path: planar3d-layering.log
+          name: planar3d-validation-${{ github.run_id }}
+          path: |
+            asset-sync-report.json
+            planar3d-import.log
+            planar3d-layering.log
           if-no-files-found: warn
-          retention-days: 7
+          retention-days: 14
