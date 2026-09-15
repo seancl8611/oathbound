@@ -91,31 +91,44 @@ func get_presentation_state() -> Dictionary:
 	var unknown_hushiro_count := 0
 	var role_counts: Dictionary = {}
 
+	# Keep three production-model concepts separate in diagnostics:
+	# - slot exists: a resource is present at the canonical path;
+	# - spawned: this role currently has a live presentation actor;
+	# - active: that actor actually accepted/rendered the role-specific GLB.
+	# A file existing at a slot is not proof that it is renderable or currently in use.
+	var production_model_slot_exists_by_role: Dictionary = {}
+	var production_model_spawned_by_role: Dictionary = {}
+	var production_model_active_by_role: Dictionary = {}
+	var production_model_slot_exists_count := 0
+	var production_model_active_count := 0
+	for role_value: Variant in HUSHIRO_V2_MODEL_PATHS.keys():
+		var slot_role := str(role_value)
+		var model_path := str(HUSHIRO_V2_MODEL_PATHS.get(slot_role, ""))
+		var slot_exists := not model_path.is_empty() and ResourceLoader.exists(model_path)
+		production_model_slot_exists_by_role[slot_role] = slot_exists
+		production_model_spawned_by_role[slot_role] = false
+		production_model_active_by_role[slot_role] = false
+		if slot_exists:
+			production_model_slot_exists_count += 1
+
 	for visual_value: Variant in _actor_visuals.values():
 		if not (visual_value is Node3D) or not is_instance_valid(visual_value as Node3D):
 			continue
 		var visual := visual_value as Node3D
 		var role := str(visual.get("actor_role"))
 		role_counts[role] = int(role_counts.get(role, 0)) + 1
+		if production_model_spawned_by_role.has(role):
+			production_model_spawned_by_role[role] = true
 		if visual.has_method("get_visual_tier"):
 			var tier := str(visual.call("get_visual_tier"))
+			if tier == "role_specific_glb" and production_model_active_by_role.has(role):
+				if not bool(production_model_active_by_role.get(role, false)):
+					production_model_active_count += 1
+				production_model_active_by_role[role] = true
 			if tier == "hushiro_authored_standard":
 				authored_standard_count += 1
 				if role not in ["hollow", "archer", "bilemass", "warden"]:
 					unknown_hushiro_count += 1
-
-	# Production-model readiness is observational only. It lets diagnostics and CI report
-	# which final role slots have actually landed without imposing scale/material/rig rules
-	# before those GLBs exist.
-	var production_model_ready_by_role: Dictionary = {}
-	var production_model_ready_count := 0
-	for role_value: Variant in HUSHIRO_V2_MODEL_PATHS.keys():
-		var slot_role := str(role_value)
-		var model_path := str(HUSHIRO_V2_MODEL_PATHS.get(slot_role, ""))
-		var ready := not model_path.is_empty() and ResourceLoader.exists(model_path)
-		production_model_ready_by_role[slot_role] = ready
-		if ready:
-			production_model_ready_count += 1
 
 	# Parent V1 introspection did not know this new authored tier, so it counted these
 	# visuals as procedural. Reclassify them for diagnostics/CI without changing rendering.
@@ -125,7 +138,15 @@ func get_presentation_state() -> Dictionary:
 	state["procedural_actor_count"] = maxi(0, int(state.get("procedural_actor_count", 0)) - authored_standard_count)
 	state["role_specific_actor_count"] = int(state.get("role_specific_actor_count", 0)) + authored_standard_count
 	state["production_model_slot_count"] = HUSHIRO_V2_MODEL_PATHS.size()
-	state["production_model_ready_count"] = production_model_ready_count
-	state["production_model_ready_by_role"] = production_model_ready_by_role
+	state["production_model_slot_exists_count"] = production_model_slot_exists_count
+	state["production_model_slot_exists_by_role"] = production_model_slot_exists_by_role
+	state["production_model_spawned_by_role"] = production_model_spawned_by_role
+	state["production_model_active_count"] = production_model_active_count
+	state["production_model_active_by_role"] = production_model_active_by_role
+
+	# Compatibility aliases for diagnostics consumers created before the existence/active
+	# distinction. `ready` here means only that a canonical slot resource exists.
+	state["production_model_ready_count"] = production_model_slot_exists_count
+	state["production_model_ready_by_role"] = production_model_slot_exists_by_role.duplicate(true)
 	state["presentation_revision"] = 2
 	return state
