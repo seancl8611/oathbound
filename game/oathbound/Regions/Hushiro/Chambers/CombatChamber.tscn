@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7hdlxttxkrep"]
+[gd_scene load_steps=13 format=3 uid="uid://c7hdlxttxkrep"]
 
 [ext_resource type="Script" path="res://Regions/Hushiro/Chambers/CombatChamber.gd" id="1_6qnrf"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_2wlxx"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="10_3qv"]
 [ext_resource type="Script" path="res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridgeV2.gd" id="11_3d"]
 [ext_resource type="Script" path="res://Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnosticsV2.gd" id="12_3d_diag"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Combat/HushiroEnemySeparationRuntime.gd" id="13_sep"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="20_xw04x"]
 
 [node name="CombatChamber" type="Node2D"]
@@ -37,6 +38,9 @@ script = ExtResource("11_3d")
 
 [node name="Planar3DPlaytestDiagnostics" type="Node" parent="."]
 script = ExtResource("12_3d_diag")
+
+[node name="HushiroEnemySeparationRuntime" type="Node" parent="."]
+script = ExtResource("13_sep")
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
