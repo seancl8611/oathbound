@@ -13,6 +13,8 @@ on:
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DExternalModelFallbackSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DNonRenderableModel.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
@@ -30,6 +32,8 @@ on:
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DExternalModelFallbackSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DNonRenderableModel.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
@@ -81,8 +85,10 @@ jobs:
           grep -Fq "func _create_actor_visual(" "$shared_bridge"
           grep -Fq "func _decorate_actor_visual(" "$shared_bridge"
           grep -Fq "func _has_valid_actor_visual(" "$shared_bridge"
+          grep -Fq "func _actor_visual_is_ready(" "$shared_bridge"
           grep -Fq "var external_model_path: String" "$shared_actor"
           grep -Fq "func set_external_model_path(" "$shared_actor"
+          grep -Fq "func _has_renderable_geometry(" "$shared_actor"
           grep -Fq 'set_meta("presentation_role", key)' "$enemy_contract"
 
           grep -Fq "Hushiro3DEnvironment.gd" "$hushiro"
@@ -100,6 +106,7 @@ jobs:
           grep -Fq "HushiroStandardEnemyActorVisual.gd" "$hushiro_v2"
           grep -Fq "illustrated_ground_compression = 0.48" "$hushiro_v2"
           grep -Fq "illustrated_presentation_zoom = 0.52" "$hushiro_v2"
+          grep -Fq "production_model_ready_by_role" "$hushiro_v2"
 
           grep -Fq "hushiro_3d_presentation_snapshot" "$diagnostics"
           grep -Fq "get_current_snapshot_for_test" "$diagnostics"
@@ -109,7 +116,7 @@ jobs:
           grep -Fq '[node name="Planar3DPresentationBridge" type="Node" parent="."]' "$chamber"
           grep -Fq '[node name="Planar3DPlaytestDiagnostics" type="Node" parent="."]' "$chamber"
 
-          echo "Shared 3D region-isolation, presentation-role, diagnostics and live Hushiro V2 wiring contracts verified."
+          echo "Shared 3D region-isolation, renderability fail-safe, presentation-role, diagnostics and live Hushiro V2 wiring contracts verified."
 
       - name: Fetch and verify curated CC0 assets
         if: github.event_name == 'push'
@@ -244,6 +251,21 @@ jobs:
             exit 1
           fi
 
+      - name: Validate non-renderable external model fallback
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DExternalModelFallbackSmoke.tscn 2>&1 | tee planar3d-external-model-fallback.log
+          grep -F "[Planar3DExternalModelFallbackSmoke] PASS" planar3d-external-model-fallback.log
+          if grep -F "SCRIPT ERROR:" planar3d-external-model-fallback.log; then
+            echo "FAIL: external-model fallback smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-external-model-fallback.log; then
+            echo "FAIL: external-model fallback smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Validate 3D replacement fail-safe lifecycle
         shell: bash
         run: |
@@ -292,6 +314,7 @@ jobs:
             planar3d-layering.log
             planar3d-v2.log
             planar3d-diagnostics.log
+            planar3d-external-model-fallback.log
             planar3d-failsafe.log
           if-no-files-found: warn
           retention-days: 14
