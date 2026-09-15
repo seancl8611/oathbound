@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "policy": {
+    "source_strategy": "official-license-authority+pinned-staging-bytes",
     "allowed_licenses": [
       "CC0-1.0"
     ],
