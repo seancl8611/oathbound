@@ -43,29 +43,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Verify shared bridge stays region agnostic
+      - name: Verify shared 3D layer stays region agnostic
         shell: bash
         run: |
           set -euo pipefail
-          shared="game/oathbound/Utility/Planar3DPresentationBridge.gd"
+          shared_bridge="game/oathbound/Utility/Planar3DPresentationBridge.gd"
+          shared_actor="game/oathbound/Utility/Planar3DActorVisual.gd"
           hushiro="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"
+          chamber="game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
 
-          if grep -Fq "res://Regions/Hushiro/" "$shared"; then
+          if grep -Fq "res://Regions/Hushiro/" "$shared_bridge"; then
             echo "FAIL: shared Planar3DPresentationBridge depends directly on Hushiro content."
             exit 1
           fi
+          if grep -Fq "res://Regions/Hushiro/" "$shared_actor"; then
+            echo "FAIL: shared Planar3DActorVisual depends directly on Hushiro region content."
+            exit 1
+          fi
+          if grep -Fq "res://Art3D/Characters/" "$shared_actor"; then
+            echo "FAIL: shared Planar3DActorVisual owns production character paths; region presenters must choose models."
+            exit 1
+          fi
 
-          grep -Fq "func _create_environment_root()" "$shared"
-          grep -Fq "func _create_actor_visual(" "$shared"
-          grep -Fq "func _decorate_actor_visual(" "$shared"
-          grep -Fq "func _has_valid_actor_visual(" "$shared"
+          grep -Fq "func _create_environment_root()" "$shared_bridge"
+          grep -Fq "func _create_actor_visual(" "$shared_bridge"
+          grep -Fq "func _decorate_actor_visual(" "$shared_bridge"
+          grep -Fq "func _has_valid_actor_visual(" "$shared_bridge"
+          grep -Fq "var external_model_path: String" "$shared_actor"
+          grep -Fq "func set_external_model_path(" "$shared_actor"
 
           grep -Fq "Hushiro3DEnvironment.gd" "$hushiro"
+          grep -Fq "PRODUCTION_MODEL_PATHS" "$hushiro"
+          grep -Fq "HushiroSwordsman/hushiro_swordsman.glb" "$hushiro"
+          grep -Fq "BlightedHound/blighted_hound.glb" "$hushiro"
           grep -Fq "func _create_environment_root()" "$hushiro"
           grep -Fq "func _create_actor_visual(" "$hushiro"
           grep -Fq "func _decorate_actor_visual(" "$hushiro"
 
-          echo "Shared bridge region-isolation contract verified."
+          grep -Fq "HushiroPlanar3DPresentationBridge.gd" "$chamber"
+          grep -Fq '[node name="Planar3DPresentationBridge" type="Node" parent="."]' "$chamber"
+
+          echo "Shared 3D region-isolation and live Hushiro wiring contracts verified."
 
       - name: Fetch and verify curated CC0 assets
         if: github.event_name == 'push'
