@@ -50,6 +50,7 @@ func _apply_collision() -> void:
 	# Ensure the Area2D actually monitors when unlocked
 	if area:
 		area.set_deferred("monitorable", not locked)
+		area.set_deferred("monitoring", not locked)
 	# Visual alpha
 	if sprite:
 		var m := sprite.modulate
@@ -86,8 +87,19 @@ func _apply_indicator() -> void:
 		"Boss":      color = Color(1.0,0.3,0.3)
 		_:           color = Color(1,1,1)
 
-	if $Sprite2D:
-		$Sprite2D.modulate = color
+	if sprite:
+		sprite.modulate = color
+
+	# ChamberBase historically wrote raw route tokens such as "combat:technique" into the
+	# world label. Replace that engineering token with the actual destination/reward name.
+	if label:
+		var display_token := token
+		if display_token.find(":") != -1:
+			var parts := display_token.split(":", false)
+			if parts.size() >= 2:
+				display_token = str(parts[parts.size() - 1])
+		display_token = display_token.replace("_", " ").capitalize()
+		label.text = display_token
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if locked or _used:
