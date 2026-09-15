@@ -13,6 +13,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
@@ -28,6 +29,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
@@ -55,6 +57,7 @@ jobs:
           shared_actor="game/oathbound/Utility/Planar3DActorVisual.gd"
           enemy_contract="game/oathbound/Utility/HushiroEnemyContract.gd"
           hushiro="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"
+          diagnostics="game/oathbound/Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnostics.gd"
           chamber="game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
 
           if grep -Fq "res://Regions/Hushiro/" "$shared_bridge"; then
@@ -86,10 +89,14 @@ jobs:
           grep -Fq "func _create_actor_visual(" "$hushiro"
           grep -Fq "func _decorate_actor_visual(" "$hushiro"
 
+          grep -Fq "hushiro_3d_presentation_snapshot" "$diagnostics"
+          grep -Fq "get_current_snapshot_for_test" "$diagnostics"
           grep -Fq "HushiroPlanar3DPresentationBridge.gd" "$chamber"
+          grep -Fq "Hushiro3DPlaytestDiagnostics.gd" "$chamber"
           grep -Fq '[node name="Planar3DPresentationBridge" type="Node" parent="."]' "$chamber"
+          grep -Fq '[node name="Planar3DPlaytestDiagnostics" type="Node" parent="."]' "$chamber"
 
-          echo "Shared 3D region-isolation, presentation-role and live Hushiro wiring contracts verified."
+          echo "Shared 3D region-isolation, presentation-role, diagnostics and live Hushiro wiring contracts verified."
 
       - name: Fetch and verify curated CC0 assets
         if: github.event_name == 'push'
@@ -198,6 +205,21 @@ jobs:
             exit 1
           fi
 
+      - name: Validate 3D playtest diagnostics
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.tscn 2>&1 | tee planar3d-diagnostics.log
+          grep -F "[Planar3DDiagnosticsSmoke] PASS" planar3d-diagnostics.log
+          if grep -F "SCRIPT ERROR:" planar3d-diagnostics.log; then
+            echo "FAIL: Planar3D diagnostics smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-diagnostics.log; then
+            echo "FAIL: Planar3D diagnostics smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Validate 3D replacement fail-safe lifecycle
         shell: bash
         run: |
@@ -244,6 +266,7 @@ jobs:
             third-party-3d-assets.log
             planar3d-role-contract.log
             planar3d-layering.log
+            planar3d-diagnostics.log
             planar3d-failsafe.log
           if-no-files-found: warn
           retention-days: 14
