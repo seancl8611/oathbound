@@ -5,17 +5,16 @@ extends Node3D
 ## The bound CharacterBody2D/Node2D remains authoritative for position, hitboxes,
 ## attack timing, Health, Pressure Director admission and all combat resolution. This
 ## node mirrors that state into a real Node3D representation. The generated geometry is
-## intentionally production-replaceable: when a game-ready glTF/GLB is available, the
-## same bridge can instance it without changing the combat simulation.
+## intentionally production-replaceable: region presenters may provide a game-ready
+## glTF/GLB path without changing the combat simulation or coupling this shared visual
+## to any region-specific asset directory.
 
 @export_enum("player", "swordsman", "hound", "enemy") var actor_role: String = "enemy"
 @export var use_procedural_fallback: bool = true
 
-const OPTIONAL_MODEL_PATHS: Dictionary = {
-	"player": "res://Art3D/Characters/Akio/akio.glb",
-	"swordsman": "res://Art3D/Characters/HushiroSwordsman/hushiro_swordsman.glb",
-	"hound": "res://Art3D/Characters/BlightedHound/blighted_hound.glb",
-}
+## Optional production model selected by the region-specific presentation layer.
+## Shared code intentionally owns no Akio/Hushiro/Yomori/Kagutsuchi asset paths.
+var external_model_path: String = ""
 
 var source_actor: Node2D = null
 var _visual_root: Node3D = null
@@ -46,6 +45,12 @@ func configure(role: String, actor: Node2D) -> void:
 
 func bind_source(actor: Node2D) -> void:
 	source_actor = actor
+
+
+func set_external_model_path(model_path: String) -> void:
+	external_model_path = model_path
+	if is_node_ready():
+		_rebuild_visual()
 
 
 func sync_from_source(delta: float) -> void:
@@ -103,7 +108,7 @@ func _rebuild_visual() -> void:
 
 
 func _try_external_model() -> bool:
-	var model_path := str(OPTIONAL_MODEL_PATHS.get(actor_role, ""))
+	var model_path := external_model_path.strip_edges()
 	if model_path.is_empty() or not ResourceLoader.exists(model_path):
 		return false
 	var packed := load(model_path) as PackedScene
