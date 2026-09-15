@@ -74,7 +74,11 @@ func sync_from_source(delta: float) -> void:
 
 
 func _rebuild_visual() -> void:
+	# Detach the old tree immediately before deferring destruction. Leaving queued children
+	# attached until frame end can force Godot to auto-rename the new VisualRoot and makes
+	# same-frame model/fallback refreshes lose their stable path.
 	for child: Node in get_children():
+		remove_child(child)
 		child.queue_free()
 
 	_visual_root = Node3D.new()
