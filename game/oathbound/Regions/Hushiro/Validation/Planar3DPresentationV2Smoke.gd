@@ -137,6 +137,40 @@ func _run() -> void:
 	else:
 		_fail("V2 environment diagnostics unavailable")
 
+	# The live V2 presenter subclasses the shared lifecycle contract but swaps both the
+	# environment and actor factories. Exercise the actual production presenter through a
+	# full shutdown/rebuild so those overrides cannot accidentally strand legacy art hidden
+	# or come back with a partial role set after a runtime presentation reset.
+	bridge.call("set_presentation_enabled", false)
+	for _i: int in range(2):
+		await get_tree().process_frame
+	_expect(not bool(bridge.call("is_presentation_enabled")), "V2 bridge did not deactivate cleanly")
+	_expect(background.visible, "V2 shutdown did not restore legacy Background")
+	_expect(scenery.visible, "V2 shutdown did not restore legacy Scenery")
+	_expect(combat_fx.visible, "V2 shutdown hid planar CombatFX")
+	for body: CanvasItem in legacy_bodies:
+		_expect(body.visible, "V2 shutdown did not restore a legacy actor body")
+
+	bridge.call("set_presentation_enabled", true)
+	for _i: int in range(10):
+		await get_tree().process_frame
+	_expect(bool(bridge.call("is_presentation_enabled")), "V2 bridge did not reactivate after shutdown")
+	_expect(not background.visible, "V2 rebuild did not re-suppress legacy Background")
+	_expect(not scenery.visible, "V2 rebuild did not re-suppress legacy Scenery")
+	_expect(combat_fx.visible, "V2 rebuild hid planar CombatFX")
+	for body: CanvasItem in legacy_bodies:
+		_expect(not body.visible, "V2 rebuild left a legacy actor body visible beside its replacement")
+
+	var rebuilt_state_value: Variant = bridge.call("get_presentation_state")
+	if rebuilt_state_value is Dictionary:
+		var rebuilt_state := rebuilt_state_value as Dictionary
+		_expect(int(rebuilt_state.get("presentation_revision", 0)) == 2, "V2 rebuild lost its presentation revision")
+		_expect(int(rebuilt_state.get("actor_visual_count", 0)) >= 7, "V2 rebuild did not restore all representative actor visuals")
+		_expect(int(rebuilt_state.get("hushiro_standard_actor_count", 0)) >= 4, "V2 rebuild lost authored standard-enemy visuals")
+		_expect(int(rebuilt_state.get("procedural_actor_count", 0)) == 0, "V2 rebuild regressed to anonymous procedural actor fallback")
+	else:
+		_fail("V2 rebuilt presentation state unavailable")
+
 	room.queue_free()
 	await get_tree().process_frame
 	_finish()
@@ -163,7 +197,7 @@ func _make_actor(room: Node2D, actor_name: String, role: String, position_value:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DPresentationV2Smoke] PASS - wider/flatter camera | corrected human forward | all Hushiro standard roles authored | quiet-center courtyard | no debug badge")
+		print("[Planar3DPresentationV2Smoke] PASS - wider/flatter camera | corrected human forward | all Hushiro standard roles authored | quiet-center courtyard | reversible V2 lifecycle | no debug badge")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
