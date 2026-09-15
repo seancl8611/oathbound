@@ -5,7 +5,10 @@ extends "res://Utility/Planar3DPresentationBridge.gd"
 ##
 ## Combat ownership remains entirely in the existing 2D actors. This wrapper owns only
 ## the visual replacement contract: persistent legacy-art suppression, actor grounding,
-## and the Hushiro camera profile used to make real-time 3D read closer to illustrated 2D.
+## curated placeholder selection, and the Hushiro camera profile used to make real-time
+## 3D read closer to illustrated 2D.
+
+const HUSHIRO_ACTOR_VISUAL_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroCuratedActorVisual.gd")
 
 @export var actor_ground_lift: float = 0.10
 
@@ -37,6 +40,20 @@ func _process(delta: float) -> void:
 	# temporary 3D floor kit contains slightly raised stone surfaces, so lift only the
 	# presentation roots after base synchronization. Gameplay positions/hitboxes do not move.
 	_apply_actor_ground_lift()
+
+
+func _add_actor_visual(actor: Node2D) -> void:
+	if _world_root == null:
+		return
+	var visual_value: Variant = HUSHIRO_ACTOR_VISUAL_SCRIPT.new()
+	if not (visual_value is Node3D):
+		return
+	var visual := visual_value as Node3D
+	visual.name = "Actor3D_%s" % str(actor.get_instance_id())
+	_world_root.add_child(visual)
+	if visual.has_method("configure"):
+		visual.call("configure", _role_for(actor), actor)
+	_actor_visuals[actor.get_instance_id()] = visual
 
 
 func _capture_and_adjust_legacy_camera() -> void:
@@ -124,6 +141,9 @@ func get_layering_state_for_test() -> Dictionary:
 
 	var min_actor_y := actor_ground_lift
 	var actor_count := 0
+	var curated_actor_count := 0
+	var role_specific_actor_count := 0
+	var procedural_actor_count := 0
 	for visual_value: Variant in _actor_visuals.values():
 		if visual_value is Node3D and is_instance_valid(visual_value as Node3D):
 			var visual := visual_value as Node3D
@@ -132,12 +152,23 @@ func get_layering_state_for_test() -> Dictionary:
 			else:
 				min_actor_y = minf(min_actor_y, visual.position.y)
 			actor_count += 1
+			if visual.has_method("get_visual_tier"):
+				match str(visual.call("get_visual_tier")):
+					"curated_cc0_humanoid":
+						curated_actor_count += 1
+					"role_specific_glb":
+						role_specific_actor_count += 1
+					_:
+						procedural_actor_count += 1
 
 	return {
 		"background_hidden": background == null or not background.visible,
 		"scenery_hidden": scenery == null or not scenery.visible,
 		"combat_fx_visible": combat_fx == null or combat_fx.visible,
 		"actor_visual_count": actor_count,
+		"curated_actor_count": curated_actor_count,
+		"role_specific_actor_count": role_specific_actor_count,
+		"procedural_actor_count": procedural_actor_count,
 		"min_actor_y": min_actor_y,
 		"illustrated_ground_compression": illustrated_ground_compression,
 		"illustrated_camera_elevation_degrees": rad_to_deg(asin(illustrated_ground_compression)),
