@@ -47,7 +47,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --verbose --path game/oathbound res://Core/Release/Validation/ChoiceResumePlayerStateSmoke.tscn 2>&1 | tee choice-resume-state.log
-          grep -F "[ChoiceResumePlayerStateSmoke] PASS - choice boundary preserves snapshot | chamber ownership applies once | Health/Posture/Spirit restored" choice-resume-state.log
+          grep -F "[ChoiceResumePlayerStateSmoke] PASS - choice boundary preserves snapshot | chamber ownership applies once | Health/Spirit restored | legacy Posture ignored" choice-resume-state.log
           if grep -F "SCRIPT ERROR:" choice-resume-state.log; then
             echo "FAIL: choice resume smoke emitted a GDScript runtime error."
             exit 1
@@ -66,7 +66,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound res://Core/Validation/TechniqueRewardUISmoke.tscn 2>&1 | tee technique-reward-ui.log
-          grep -F "[TechniqueRewardUISmoke] PASS - exhausted pool continues safely | technique_none selectable | hidden-card focus blocked" technique-reward-ui.log
+          grep -F "[TechniqueRewardUISmoke] PASS - exhausted pool continues safely | technique_none selectable | hidden-card focus blocked | exhausted reroll spend blocked" technique-reward-ui.log
           if grep -F "SCRIPT ERROR:" technique-reward-ui.log; then
             echo "FAIL: Technique reward UI smoke emitted a GDScript runtime error."
             exit 1
