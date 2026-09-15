@@ -34,6 +34,14 @@ func _ready() -> void:
 	show_debug_label = false
 	super._ready()
 
+	# Emit one region/revision-owned startup marker after the shared bridge has initialized.
+	# CI can use this to prove that the live RunScene actually instantiated V2 even when a
+	# Camera2D is not yet available early enough for the parent camera-profile log.
+	print(
+		"[HushiroPlanar3DV2] revision=2 compression=%.2f elevation=%.1fdeg zoom=%.2f"
+		% [illustrated_ground_compression, rad_to_deg(asin(illustrated_ground_compression)), illustrated_presentation_zoom]
+	)
+
 
 func _setup_world() -> void:
 	super._setup_world()
