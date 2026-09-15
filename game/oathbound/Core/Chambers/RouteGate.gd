@@ -11,6 +11,7 @@ signal gate_used(gate_type: String)
 @onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
 @onready var area: Area2D = get_node_or_null("Area2D")
 @onready var shape: CollisionShape2D = get_node_or_null("Area2D/CollisionShape2D")
+@onready var label: Label = get_node_or_null("Label")
 
 var _used: bool = false
 var _entry_grace_until_msec: int = 0
@@ -20,6 +21,12 @@ func _ready() -> void:
 	_entry_grace_until_msec = Time.get_ticks_msec() + int(round(maxf(0.0, entry_grace_seconds) * 1000.0))
 	if area and not area.body_entered.is_connected(Callable(self, "_on_Area2D_body_entered")):
 		area.body_entered.connect(_on_Area2D_body_entered)
+	if label:
+		# Exit choices are world-space signposts, not combat HUD. Keep them compact and
+		# hide them while a room is locked so route text cannot sit on top of a live fight.
+		label.add_theme_font_size_override("font_size", 10)
+		label.scale = Vector2(0.72, 0.72)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_apply_indicator()
 	_apply_collision()
 
@@ -43,12 +50,15 @@ func _apply_collision() -> void:
 	# Ensure the Area2D actually monitors when unlocked
 	if area:
 		area.set_deferred("monitorable", not locked)
-		area.set_deferred("monitoring", not locked)
 	# Visual alpha
 	if sprite:
 		var m := sprite.modulate
 		m.a = 0.9 if locked else 0.5
 		sprite.set_deferred("modulate", m)
+	# Route labels are choice affordances. They should appear only after the room has been
+	# cleared/unlocked, never as giant world text in the middle of combat.
+	if label:
+		label.set_deferred("visible", not locked)
 
 func _apply_indicator() -> void:
 	var token := str(gate_type)
