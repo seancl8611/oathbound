@@ -112,7 +112,7 @@ func _start_encounter() -> void:
 					push_warning("[CombatRoom] Unknown encounter_id_override: %s" % forced_id)
 					forced_id = ""
 				else:
-					# Detect correct area from which array the encounter lives in
+					# Detect correct area from which array the encounter lives in.
 					area_id = _detect_encounter_area(forced_id, area_id)
 
 			if tmpl.is_empty():
@@ -400,7 +400,8 @@ func _detect_encounter_area(encounter_id: String, fallback: int) -> int:
 	if typeof(EncounterDB) != TYPE_OBJECT:
 		return fallback
 	
-	# Check each area's encounter list for the ID
+	# Keep forced/debug encounter area context aligned with the catalog that supplied it;
+	# the spawner resolves identical enemy type strings against area-specific registries.
 	if EncounterDB.get("area1_encounters") != null:
 		for enc in EncounterDB.area1_encounters:
 			if enc.get("id", "") == encounter_id:
@@ -410,5 +411,10 @@ func _detect_encounter_area(encounter_id: String, fallback: int) -> int:
 		for enc in EncounterDB.area2_encounters:
 			if enc.get("id", "") == encounter_id:
 				return 2
+
+	if EncounterDB.get("area3_encounters") != null:
+		for enc in EncounterDB.area3_encounters:
+			if enc.get("id", "") == encounter_id:
+				return 3
 	
 	return fallback
