@@ -5,7 +5,7 @@ extends "res://Utility/Planar3DPresentationBridge.gd"
 ##
 ## Combat ownership remains entirely in the existing 2D actors. This wrapper owns only
 ## the visual replacement contract: persistent legacy-art suppression, actor grounding,
-## Hushiro environment selection, curated placeholder selection, combat-synced
+## Hushiro environment/model selection, curated placeholder selection, combat-synced
 ## presentation VFX, and the Hushiro camera profile used to make real-time 3D read closer
 ## to illustrated 2D.
 
@@ -13,6 +13,15 @@ const HUSHIRO_ENVIRONMENT_SCRIPT = preload("res://Regions/Hushiro/Presentation3D
 const HUSHIRO_ACTOR_VISUAL_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroCuratedActorVisual.gd")
 const HUSHIRO_HOUND_VISUAL_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroHoundActorVisual.gd")
 const HUSHIRO_ATTACK_VFX_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroAttackVFX.gd")
+
+# Production slots belong to the region presentation, never the shared actor utility.
+# This prevents another region from reusing a semantic role such as "swordsman" or
+# "hound" and accidentally loading Hushiro art.
+const PRODUCTION_MODEL_PATHS: Dictionary = {
+	"player": "res://Art3D/Characters/Akio/akio.glb",
+	"swordsman": "res://Art3D/Characters/HushiroSwordsman/hushiro_swordsman.glb",
+	"hound": "res://Art3D/Characters/BlightedHound/blighted_hound.glb",
+}
 
 @export var actor_ground_lift: float = 0.10
 
@@ -57,9 +66,13 @@ func _create_environment_root() -> Node3D:
 
 func _create_actor_visual(_actor: Node2D, role: String) -> Node3D:
 	var visual_value: Variant = HUSHIRO_HOUND_VISUAL_SCRIPT.new() if role == "hound" else HUSHIRO_ACTOR_VISUAL_SCRIPT.new()
-	if visual_value is Node3D:
-		return visual_value as Node3D
-	return null
+	if not (visual_value is Node3D):
+		return null
+	var visual := visual_value as Node3D
+	var production_model_path := str(PRODUCTION_MODEL_PATHS.get(role, ""))
+	if visual.has_method("set_external_model_path"):
+		visual.call("set_external_model_path", production_model_path)
+	return visual
 
 
 func _decorate_actor_visual(visual: Node3D, actor: Node2D, role: String) -> void:
