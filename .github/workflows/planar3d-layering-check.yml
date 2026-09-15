@@ -41,6 +41,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify shared bridge stays region agnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          shared="game/oathbound/Utility/Planar3DPresentationBridge.gd"
+          hushiro="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"
+
+          if grep -Fq "res://Regions/Hushiro/" "$shared"; then
+            echo "FAIL: shared Planar3DPresentationBridge depends directly on Hushiro content."
+            exit 1
+          fi
+
+          grep -Fq "func _create_environment_root()" "$shared"
+          grep -Fq "func _create_actor_visual(" "$shared"
+          grep -Fq "func _decorate_actor_visual(" "$shared"
+          grep -Fq "func _has_valid_actor_visual(" "$shared"
+
+          grep -Fq "Hushiro3DEnvironment.gd" "$hushiro"
+          grep -Fq "func _create_environment_root()" "$hushiro"
+          grep -Fq "func _create_actor_visual(" "$hushiro"
+          grep -Fq "func _decorate_actor_visual(" "$hushiro"
+
+          echo "Shared bridge region-isolation contract verified."
+
       - name: Fetch and verify curated CC0 assets
         if: github.event_name == 'push'
         shell: bash
