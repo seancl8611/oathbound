@@ -1,0 +1,65 @@
+name: Hushiro Presentation V2 Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  hushiro-presentation-v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify second-pass Hushiro presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.tscn 2>&1 | tee hushiro-presentation-v2.log
+          grep -F "[Planar3DPresentationV2Smoke] PASS" hushiro-presentation-v2.log
+          if grep -F "SCRIPT ERROR:" hushiro-presentation-v2.log; then
+            echo "FAIL: Hushiro V2 presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-presentation-v2.log; then
+            echo "FAIL: Hushiro V2 presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Smoke live Hushiro combat chamber wiring
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-v2-runscene.log
+          grep -F "[HushiroPlanar3D] illustrated camera profile compression=0.48" hushiro-v2-runscene.log
+          grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-v2-runscene.log
+          if grep -F "SCRIPT ERROR:" hushiro-v2-runscene.log; then
+            echo "FAIL: live Hushiro V2 RunScene emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Upload V2 presentation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hushiro-presentation-v2-${{ github.run_id }}
+          path: |
+            hushiro-presentation-v2.log
+            hushiro-v2-runscene.log
+          if-no-files-found: warn
+          retention-days: 7
