@@ -4,9 +4,10 @@ extends Node
 ##
 ## This smoke intentionally exercises Akio, Swordsman and Blighted Hound together while
 ## keeping their authoritative simulation as CharacterBody2D. It protects exclusive 3D
-## actor replacement, imported human animation, contact shadows, attack presentation VFX,
-## legacy ground telegraphs, fixed Camera3D framing, target viewport sizing and the Rupture
-## room/lighting language without changing any combat semantics.
+## actor replacement, imported human animation, source-driven dash/katana presentation,
+## contact shadows, attack presentation VFX, legacy ground telegraphs, fixed Camera3D
+## framing, target viewport sizing and the Rupture room/lighting language without changing
+## any combat semantics.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd")
 
@@ -131,6 +132,10 @@ func _run() -> void:
 			_expect(int(animation_state.get("remapped_tracks", 0)) > 0, "curated animation library remapped zero skeleton tracks")
 			_expect(not str(animation_state.get("idle_clip", "")).is_empty(), "curated animation library selected no idle clip")
 			_expect(not str(animation_state.get("locomotion_clip", "")).is_empty(), "curated animation library selected no locomotion clip")
+			var dash_mode := str(animation_state.get("dash_mode", ""))
+			var attack_mode := str(animation_state.get("attack_mode", ""))
+			_expect(dash_mode in ["authored_clip", "locomotion_lean_fallback"], "curated Akio dash has no deterministic presentation mode")
+			_expect(attack_mode in ["authored_source_progress", "manual_source_progress"], "curated katana attack has no source-progress presentation mode")
 		else:
 			_fail("curated animation introspection unavailable")
 
@@ -176,7 +181,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DLayeringSmoke] PASS - Akio + Swordsman + Hound | animated 3D actors/VFX | exclusive legacy suppression | Rupture room | fixed 640x360 Camera3D")
+		print("[Planar3DLayeringSmoke] PASS - Akio dash/katana + Swordsman + Hound | animated 3D actors/VFX | exclusive legacy suppression | Rupture room | fixed 640x360 Camera3D")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
