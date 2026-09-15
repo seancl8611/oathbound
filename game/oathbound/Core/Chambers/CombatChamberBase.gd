@@ -147,6 +147,7 @@ func _pick_encounter_for_area(area_id: int) -> Dictionary:
 				return EncounterDB.pick_area3()
 			if EncounterDB.has_method("pick_area1"):
 				push_warning("[CombatRoom] No pick_area3() yet — using area 1 encounters")
+				return EncounterDB.pick_area1()
 	
 	return _default_template()
 	
