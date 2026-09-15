@@ -14,7 +14,7 @@ The current Hushiro V2 runtime checks these canonical production/replacement slo
 - `Characters/CellarBilemass/cellar_bilemass.glb`
 - `Characters/HushiroWarden/hushiro_warden.glb`
 
-A path merely existing is **not** enough to displace the current presentation. The production validator requires a PackedScene/Node3D with renderable mesh geometry and the semantic animation aliases the current shared adapter can drive. `Planar3DActorVisual.gd` also rejects non-renderable external scenes at runtime, and the bridge only hides an authoritative legacy actor after a valid replacement has been built successfully.
+A path merely existing is **not** enough to displace the current presentation. The production validator requires a PackedScene/Node3D with renderable mesh geometry plus the semantic animation aliases the current shared adapter can drive. Those semantic clips must contain real 3D transform or blend-shape animation with multiple samples; marker-, event-, or visibility-only tracks do not count as production-ready character motion. `Planar3DActorVisual.gd` also rejects non-renderable external scenes at runtime, and the bridge only hides an authoritative legacy actor after a valid replacement has been built successfully.
 
 If a production slot is absent or rejected, Hushiro V2 falls back by role:
 
@@ -29,11 +29,11 @@ Runtime diagnostics intentionally distinguish five production-model states:
 
 1. **slot exists** — a resource is present at the canonical path;
 2. **slot renderable** — it instantiates as a Node3D and contains real mesh geometry;
-3. **activation ready** — it also contains the semantic animation aliases required by the current runtime adapter;
+3. **activation ready** — it also contains the semantic animation aliases and pose-bearing tracks required by the current runtime adapter;
 4. **role spawned** — that semantic actor role currently has a live presentation actor;
 5. **production model active** — the spawned actor actually accepted and is rendering the role-specific GLB.
 
-This distinction prevents an empty, malformed, static, or rejected file from being reported as a successful production-art handoff or silently replacing a proven animated fallback.
+This distinction prevents an empty, malformed, static, marker-only, or rejected file from being reported as a successful production-art handoff or silently replacing a proven animated fallback.
 
 ## Automated third-party intake
 
@@ -80,6 +80,8 @@ The current direct production-GLB adapter requires these semantic aliases before
 - idle: `Idle` or `idle`
 - locomotion: one of `Jog`, `Run`, `Walk`, or `walk`
 - attack: one of `Sword_Attack`, `SwordAttack`, `Attack`, or `attack`
+
+Each required semantic clip must include at least one real 3D position, rotation, scale, or blend-shape track with at least two key samples. Merely naming three clips correctly while animating only visibility, events, audio, or markers is intentionally rejected because it would make a final model structurally “animated” but visually static in combat.
 
 The visible motion inside those clips remains role-specific. For example, a Hound may use a bite animation and an Archer may use a shot animation while exposing the stable runtime alias `Attack`. Hurt/death clips are optional for activation today but should use recognizable names (`Hurt`/`Hit`/`Stagger`, `Death`/`Dying`) so the adapter can use them when present.
 

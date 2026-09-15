@@ -5,8 +5,8 @@ extends RefCounted
 ## Runtime presenters already reject non-renderable external scenes. This validator gives
 ## CI/diagnostics the same early warning before final art silently falls back to a curated
 ## or authored placeholder. It intentionally avoids role-specific scale/material/rig rules
-## until real production assets exist, but it does enforce the animation aliases that the
-## current shared production-model adapter can actually drive.
+## until real production assets exist, but it does enforce the animation aliases and real
+## pose-bearing tracks that the current shared production-model adapter can actually drive.
 
 const IDLE_CLIP_NAMES: Array[String] = ["Idle", "idle"]
 const LOCOMOTION_CLIP_NAMES: Array[String] = ["Jog", "Run", "Walk", "walk"]
@@ -27,6 +27,11 @@ static func inspect_scene(model_path: String) -> Dictionary:
 		"skeleton_count": 0,
 		"animation_player_count": 0,
 		"animation_clip_count": 0,
+		"animation_nonempty_clip_count": 0,
+		"animation_pose_clip_count": 0,
+		"animation_pose_track_count": 0,
+		# Compatibility name retained for diagnostics created before pose-track validation.
+		# A usable clip now specifically means a clip with real 3D pose/blend-shape tracks.
 		"animation_usable_clip_count": 0,
 		"animation_names": [],
 		"semantic_animation_clips": {},
@@ -86,6 +91,12 @@ static func _scan_node(node: Node, result: Dictionary) -> void:
 			var animation := animation_player.get_animation(animation_name)
 			if animation == null or animation.get_track_count() <= 0:
 				continue
+			result["animation_nonempty_clip_count"] = int(result.get("animation_nonempty_clip_count", 0)) + 1
+			var pose_track_count := _pose_track_count(animation)
+			if pose_track_count <= 0:
+				continue
+			result["animation_pose_clip_count"] = int(result.get("animation_pose_clip_count", 0)) + 1
+			result["animation_pose_track_count"] = int(result.get("animation_pose_track_count", 0)) + pose_track_count
 			result["animation_usable_clip_count"] = int(result.get("animation_usable_clip_count", 0)) + 1
 			var names_value: Variant = result.get("animation_names", [])
 			var names: Array = names_value if names_value is Array else []
@@ -95,6 +106,27 @@ static func _scan_node(node: Node, result: Dictionary) -> void:
 			result["animation_names"] = names
 	for child: Node in node.get_children():
 		_scan_node(child, result)
+
+
+static func _pose_track_count(animation: Animation) -> int:
+	var pose_tracks := 0
+	for track_index: int in range(animation.get_track_count()):
+		var track_type := animation.track_get_type(track_index)
+		if track_type not in [
+			Animation.TYPE_POSITION_3D,
+			Animation.TYPE_ROTATION_3D,
+			Animation.TYPE_SCALE_3D,
+			Animation.TYPE_BLEND_SHAPE,
+		]:
+			continue
+		# A single-key transform is a pose declaration, not evidence that the semantic clip
+		# actually animates. Requiring at least two samples prevents static/marker-only final
+		# scenes from displacing a proven animated fallback while remaining compatible with
+		# normal imported glTF skeletal and blend-shape animation tracks.
+		if animation.track_get_key_count(track_index) < 2:
+			continue
+		pose_tracks += 1
+	return pose_tracks
 
 
 static func _semantic_animation_clips(names_value: Variant) -> Dictionary:
