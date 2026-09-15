@@ -297,21 +297,14 @@ func _actor_visual_is_ready(visual: Node3D) -> bool:
 	if visual.has_method("is_visual_ready"):
 		return bool(visual.call("is_visual_ready"))
 
-	# Shared and current region presenters expose these internal build authorities. They
-	# are checked before the geometry fallback so an intentionally empty presenter cannot
-	# hide the authoritative 2D actor merely because a Node3D instance exists.
-	if _has_property(visual, "_external_model_active") and bool(visual.get("_external_model_active")):
-		return true
-	if _has_property(visual, "_rig_root"):
-		var rig_value: Variant = visual.get("_rig_root")
-		if rig_value is Node3D and is_instance_valid(rig_value as Node3D):
-			return true
-
-	# Preserve compatibility for future custom presenters that do not inherit the shared
-	# actor visual but do build real renderable GeometryInstance3D descendants.
-	for candidate: Node in visual.find_children("*", "GeometryInstance3D", true, false):
-		if candidate is GeometryInstance3D and is_instance_valid(candidate):
-			return true
+	# Replacement exclusivity is allowed only when there is real renderable geometry.
+	# Internal success flags are intentionally insufficient: a malformed/imported scene
+	# can be a perfectly valid Node3D hierarchy while containing no mesh at all.
+	for candidate: Node in visual.find_children("*", "MeshInstance3D", true, false):
+		if candidate is MeshInstance3D and is_instance_valid(candidate):
+			var mesh_instance := candidate as MeshInstance3D
+			if mesh_instance.mesh != null:
+				return true
 	return false
 
 
