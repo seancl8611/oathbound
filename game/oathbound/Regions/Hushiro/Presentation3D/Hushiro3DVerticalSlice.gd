@@ -1,12 +1,13 @@
 extends Node3D
 
-## First isolated production-direction blockout for Oathbound's stylized 3D migration.
+## Standalone Hushiro 3D composition lab retained for fast art/camera experiments.
 ##
-## This scene deliberately does NOT own combat yet. It proves the fixed high-angle
-## Camera3D composition, planar movement read, real 3D Hushiro room volume, lighting,
-## occlusion, and gameplay-scale actor silhouettes before current Combat V2 authority is
-## bridged into 3D. The live route remains on the compatibility presentation until that
-## bridge can preserve combat timings/ranges/pressure semantics exactly.
+## This scene does NOT own production combat. The live Hushiro CombatChamber now uses
+## HushiroPlanar3DPresentationBridge, which mirrors the authoritative CharacterBody2D
+## simulation into Camera3D presentation while preserving combat timing/range/pressure
+## semantics. Keep this isolated scene only for experiments that do not require live
+## Combat V2 behavior; production presentation changes should ultimately land in the
+## live bridge/environment/actor stack and its validation.
 
 @export var move_speed: float = 4.6
 @export var camera_follow_speed: float = 8.0
