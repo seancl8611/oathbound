@@ -14,7 +14,7 @@ The current Hushiro V2 runtime checks these canonical production/replacement slo
 - `Characters/CellarBilemass/cellar_bilemass.glb`
 - `Characters/HushiroWarden/hushiro_warden.glb`
 
-A path merely existing is **not** enough to displace the current presentation. `Planar3DActorVisual.gd` rejects external scenes that do not contain renderable mesh geometry, and the bridge only hides an authoritative legacy actor after a renderable replacement has been built successfully.
+A path merely existing is **not** enough to displace the current presentation. The production validator requires a PackedScene/Node3D with renderable mesh geometry and the semantic animation aliases the current shared adapter can drive. `Planar3DActorVisual.gd` also rejects non-renderable external scenes at runtime, and the bridge only hides an authoritative legacy actor after a valid replacement has been built successfully.
 
 If a production slot is absent or rejected, Hushiro V2 falls back by role:
 
@@ -25,13 +25,15 @@ If a production slot is absent or rejected, Hushiro V2 falls back by role:
 
 Do **not** copy an arbitrary downloaded model directly into a runtime slot. Third-party assets enter through the intake area first, are validated in Godot, and only become a live actor after scale/rig/material/animation review.
 
-Runtime diagnostics intentionally distinguish three production-model states:
+Runtime diagnostics intentionally distinguish five production-model states:
 
 1. **slot exists** — a resource is present at the canonical path;
-2. **role spawned** — that semantic actor role currently has a live presentation actor;
-3. **production model active** — the spawned actor actually accepted and is rendering the role-specific GLB.
+2. **slot renderable** — it instantiates as a Node3D and contains real mesh geometry;
+3. **activation ready** — it also contains the semantic animation aliases required by the current runtime adapter;
+4. **role spawned** — that semantic actor role currently has a live presentation actor;
+5. **production model active** — the spawned actor actually accepted and is rendering the role-specific GLB.
 
-This distinction prevents an empty, malformed, or rejected file from being reported as a successful production-art handoff.
+This distinction prevents an empty, malformed, static, or rejected file from being reported as a successful production-art handoff or silently replacing a proven animated fallback.
 
 ## Automated third-party intake
 
@@ -72,6 +74,16 @@ AI-generated meshes may be used as starting points, but hero characters and impo
 ## Animation
 
 Humanoid production models should prefer a retargetable humanoid skeleton. Shared locomotion/reaction clips can use a compatible animation library; signature combat actions should be customized where needed for Oathbound's timing and martial identity.
+
+The current direct production-GLB adapter requires these semantic aliases before a canonical Hushiro slot is allowed to displace its animated fallback:
+
+- idle: `Idle` or `idle`
+- locomotion: one of `Jog`, `Run`, `Walk`, or `walk`
+- attack: one of `Sword_Attack`, `SwordAttack`, `Attack`, or `attack`
+
+The visible motion inside those clips remains role-specific. For example, a Hound may use a bite animation and an Archer may use a shot animation while exposing the stable runtime alias `Attack`. Hurt/death clips are optional for activation today but should use recognizable names (`Hurt`/`Hit`/`Stagger`, `Death`/`Dying`) so the adapter can use them when present.
+
+These aliases describe the current direct-GLB contract, not a permanent limitation on the animation pipeline. If Oathbound later moves a role to a separate retargeted animation library, the validator and adapter must change together rather than letting a static mesh silently become production-authoritative.
 
 The zero-cost bootstrap uses Quaternius' CC0 Universal Base Characters and Universal Animation Library as audited references. These files are staged under `ThirdParty/` rather than pretending that the stock character is Akio.
 

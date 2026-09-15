@@ -52,6 +52,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify production model validator contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DProductionModelValidatorSmoke.tscn 2>&1 | tee hushiro-production-model-validator.log
+          grep -F "[Planar3DProductionModelValidatorSmoke] PASS" hushiro-production-model-validator.log
+          if grep -F "SCRIPT ERROR:" hushiro-production-model-validator.log; then
+            echo "FAIL: production model validator smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-production-model-validator.log; then
+            echo "FAIL: production model validator smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify production GLB state diagnostics
         shell: bash
         run: |
@@ -90,6 +105,7 @@ jobs:
           path: |
             hushiro-presentation-v2.log
             hushiro-enemy-separation.log
+            hushiro-production-model-validator.log
             hushiro-production-model-state.log
             hushiro-v2-runscene.log
           if-no-files-found: warn
