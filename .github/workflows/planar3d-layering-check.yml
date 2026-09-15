@@ -11,6 +11,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
       - "tools/assets/**"
       - "docs/assets/**"
@@ -22,6 +23,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
       - "tools/assets/**"
       - "docs/assets/**"
@@ -86,6 +88,21 @@ jobs:
             exit 1
           fi
 
+      - name: Probe Godot GLTFDocument import path
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/GLTFImportProbe.tscn 2>&1 | tee gltf-import-probe.log
+          grep -F "[GLTFImportProbe] PASS" gltf-import-probe.log
+          if grep -F "SCRIPT ERROR:" gltf-import-probe.log; then
+            echo "FAIL: direct GLTFDocument probe emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" gltf-import-probe.log; then
+            echo "FAIL: direct GLTFDocument probe emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Validate curated third-party 3D compatibility
         shell: bash
         run: |
@@ -143,6 +160,7 @@ jobs:
             humanoid-glb-inspect.log
             animation-glb-inspect.log
             planar3d-import.log
+            gltf-import-probe.log
             third-party-3d-assets.log
             planar3d-layering.log
           if-no-files-found: warn
