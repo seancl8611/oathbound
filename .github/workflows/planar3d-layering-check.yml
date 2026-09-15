@@ -10,6 +10,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
@@ -22,6 +23,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
@@ -157,6 +159,21 @@ jobs:
             exit 1
           fi
 
+      - name: Validate 3D replacement fail-safe lifecycle
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DFailSafeSmoke.tscn 2>&1 | tee planar3d-failsafe.log
+          grep -F "[Planar3DFailSafeSmoke] PASS" planar3d-failsafe.log
+          if grep -F "SCRIPT ERROR:" planar3d-failsafe.log; then
+            echo "FAIL: Planar3D fail-safe smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-failsafe.log; then
+            echo "FAIL: Planar3D fail-safe smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Commit verified third-party binaries
         if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
         shell: bash
@@ -187,5 +204,6 @@ jobs:
             gltf-import-probe.log
             third-party-3d-assets.log
             planar3d-layering.log
+            planar3d-failsafe.log
           if-no-files-found: warn
           retention-days: 14
