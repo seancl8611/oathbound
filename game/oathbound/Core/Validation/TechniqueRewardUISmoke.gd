@@ -1,10 +1,10 @@
 extends Node
 
-## Regression smoke for Technique reward exhaustion and keyboard focus safety.
+## Regression smoke for Technique reward exhaustion, reroll safety and keyboard focus.
 ## A reward screen must always provide a completion path even when no eligible Technique
 ## remains, because RewardPickup waits for `choice_made` while the SceneTree is paused.
 
-const UI_SCRIPT = preload("res://Utility/UpgradeChoiceUI.gd")
+const UI_SCRIPT = preload("res://Core/Rewards/TechniqueRewardUI.gd")
 
 var _failed := false
 var _choice_count := 0
@@ -19,7 +19,7 @@ func _ready() -> void:
 func _run_smoke() -> void:
 	var ui_value: Variant = UI_SCRIPT.new()
 	if not (ui_value is CanvasLayer):
-		_fail("UpgradeChoiceUI failed to instantiate")
+		_fail("TechniqueRewardUI failed to instantiate")
 		_finish()
 		return
 	var ui := ui_value as CanvasLayer
@@ -27,9 +27,14 @@ func _run_smoke() -> void:
 	ui.choice_made.connect(_on_choice_made)
 	await get_tree().process_frame
 
-	# Empty legacy callers must receive a selectable no-op continuation instead of a
-	# paused screen with no cards.
-	ui.call("open_with_choices", [])
+	var original_rerolls := int(RunData.technique_rerolls) if RunData != null else 0
+	if RunData != null:
+		RunData.technique_rerolls = 1
+
+	# Empty canonical callers must receive a selectable no-op continuation instead of a
+	# paused screen with no cards. Even if a reroll resource exists, an entirely exhausted
+	# screen must not offer a button that can spend it for another no-op screen.
+	ui.call("open_with_context", [], UpgradeService.SOURCE_STANDARD, 1)
 	_expect(get_tree().paused, "empty Technique reward did not pause while choice UI was open")
 	var empty_options_value: Variant = ui.get("options")
 	var empty_options := empty_options_value as Array if empty_options_value is Array else []
@@ -38,6 +43,12 @@ func _run_smoke() -> void:
 		_expect(str((empty_options[0] as Dictionary).get("id", "")) == "technique_none", "empty Technique reward fallback used the wrong compatibility id")
 	else:
 		_fail("empty Technique reward fallback was not a Dictionary")
+	var reroll_button_value: Variant = ui.get("_reroll_button")
+	if reroll_button_value is Button:
+		_expect((reroll_button_value as Button).visible, "canonical exhausted Technique screen unexpectedly hid reroll control")
+		_expect((reroll_button_value as Button).disabled, "exhausted Technique screen allowed wasting a reroll resource")
+	else:
+		_fail("Technique reroll button was unavailable for validation")
 	ui.call("_select_choice", 0)
 	_expect(not get_tree().paused, "selecting exhausted-pool continuation did not unpause the SceneTree")
 	_expect(_choice_count == 1, "selecting exhausted-pool continuation did not emit choice_made exactly once")
@@ -77,6 +88,8 @@ func _run_smoke() -> void:
 	_expect(not get_tree().paused, "single-option reward did not resume after selection")
 	_expect(_choice_count == 3, "single-option reward did not emit choice_made")
 
+	if RunData != null:
+		RunData.technique_rerolls = original_rerolls
 	ui.queue_free()
 	await get_tree().process_frame
 	_finish()
@@ -93,7 +106,7 @@ func _finish() -> void:
 	if _failed:
 		get_tree().quit(1)
 		return
-	print("[TechniqueRewardUISmoke] PASS - exhausted pool continues safely | technique_none selectable | hidden-card focus blocked")
+	print("[TechniqueRewardUISmoke] PASS - exhausted pool continues safely | technique_none selectable | hidden-card focus blocked | exhausted reroll spend blocked")
 	get_tree().quit(0)
 
 
