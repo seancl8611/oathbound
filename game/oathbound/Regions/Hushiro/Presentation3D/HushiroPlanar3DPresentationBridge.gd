@@ -9,6 +9,7 @@ extends "res://Utility/Planar3DPresentationBridge.gd"
 ## 3D read closer to illustrated 2D.
 
 const HUSHIRO_ACTOR_VISUAL_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroCuratedActorVisual.gd")
+const HUSHIRO_HOUND_VISUAL_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroHoundActorVisual.gd")
 
 @export var actor_ground_lift: float = 0.10
 
@@ -45,14 +46,15 @@ func _process(delta: float) -> void:
 func _add_actor_visual(actor: Node2D) -> void:
 	if _world_root == null:
 		return
-	var visual_value: Variant = HUSHIRO_ACTOR_VISUAL_SCRIPT.new()
+	var role := _role_for(actor)
+	var visual_value: Variant = HUSHIRO_HOUND_VISUAL_SCRIPT.new() if role == "hound" else HUSHIRO_ACTOR_VISUAL_SCRIPT.new()
 	if not (visual_value is Node3D):
 		return
 	var visual := visual_value as Node3D
 	visual.name = "Actor3D_%s" % str(actor.get_instance_id())
 	_world_root.add_child(visual)
 	if visual.has_method("configure"):
-		visual.call("configure", _role_for(actor), actor)
+		visual.call("configure", role, actor)
 	_actor_visuals[actor.get_instance_id()] = visual
 
 
@@ -142,6 +144,7 @@ func get_layering_state_for_test() -> Dictionary:
 	var min_actor_y := actor_ground_lift
 	var actor_count := 0
 	var curated_actor_count := 0
+	var hound_actor_count := 0
 	var role_specific_actor_count := 0
 	var procedural_actor_count := 0
 	for visual_value: Variant in _actor_visuals.values():
@@ -156,10 +159,18 @@ func get_layering_state_for_test() -> Dictionary:
 				match str(visual.call("get_visual_tier")):
 					"curated_cc0_humanoid":
 						curated_actor_count += 1
+					"hushiro_stylized_hound":
+						hound_actor_count += 1
 					"role_specific_glb":
 						role_specific_actor_count += 1
 					_:
 						procedural_actor_count += 1
+
+	var environment_state: Dictionary = {}
+	if _environment_root != null and is_instance_valid(_environment_root) and _environment_root.has_method("get_presentation_state_for_test"):
+		var environment_value: Variant = _environment_root.call("get_presentation_state_for_test")
+		if environment_value is Dictionary:
+			environment_state = environment_value as Dictionary
 
 	return {
 		"background_hidden": background == null or not background.visible,
@@ -167,10 +178,12 @@ func get_layering_state_for_test() -> Dictionary:
 		"combat_fx_visible": combat_fx == null or combat_fx.visible,
 		"actor_visual_count": actor_count,
 		"curated_actor_count": curated_actor_count,
+		"hound_actor_count": hound_actor_count,
 		"role_specific_actor_count": role_specific_actor_count,
 		"procedural_actor_count": procedural_actor_count,
 		"min_actor_y": min_actor_y,
 		"illustrated_ground_compression": illustrated_ground_compression,
 		"illustrated_camera_elevation_degrees": rad_to_deg(asin(illustrated_ground_compression)),
 		"illustrated_presentation_zoom": illustrated_presentation_zoom,
+		"environment_state": environment_state,
 	}
