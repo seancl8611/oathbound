@@ -251,18 +251,29 @@ func _reconcile_actors() -> void:
 	for actor: Node2D in _presentation_actors():
 		var actor_id := actor.get_instance_id()
 		seen[actor_id] = true
-		if not _has_valid_actor_visual(actor_id):
+		var has_visual := _has_valid_actor_visual(actor_id)
+		if not has_visual:
+			# A replacement may have existed on the previous reconciliation and disappeared
+			# since then. Restore the authoritative body before attempting a rebuild so a
+			# failed resource/model rebuild can never strand a live actor invisible.
+			_restore_actor_art(actor)
 			_add_actor_visual(actor)
-		# Exclusive replacement must be fail-safe: never hide the authoritative legacy body
-		# unless a live replacement visual actually exists for this actor.
-		if hide_legacy_actor_art and _has_valid_actor_visual(actor_id):
+			has_visual = _has_valid_actor_visual(actor_id)
+
+		if hide_legacy_actor_art and has_visual:
 			_hide_actor_art(actor)
+		else:
+			# This also makes toggling exclusive replacement off at runtime reversible.
+			_restore_actor_art(actor)
 
 	for actor_id: Variant in _actor_visuals.keys():
 		if seen.has(actor_id):
 			continue
 		var visual_value: Variant = _actor_visuals.get(actor_id)
 		if visual_value is Node and is_instance_valid(visual_value as Node):
+			var source_value: Variant = (visual_value as Node).get("source_actor")
+			if source_value is Node2D and is_instance_valid(source_value as Node2D):
+				_restore_actor_art(source_value as Node2D)
 			(visual_value as Node).queue_free()
 		_actor_visuals.erase(actor_id)
 
@@ -391,6 +402,23 @@ func _hide_actor_art_recursive(root: Node2D, node: Node) -> void:
 			_remember_and_hide(item)
 	for child: Node in node.get_children():
 		_hide_actor_art_recursive(root, child)
+
+
+func _restore_actor_art(actor: Node2D) -> void:
+	_restore_actor_art_recursive(actor, actor)
+
+
+func _restore_actor_art_recursive(root: Node2D, node: Node) -> void:
+	if node != root and bool(node.get_meta(KEEP_REPLACEMENT_META, false)):
+		return
+	if node != root and node is CanvasItem:
+		var item := node as CanvasItem
+		if item.has_meta(LEGACY_VISIBLE_META):
+			item.visible = bool(item.get_meta(LEGACY_VISIBLE_META))
+			item.remove_meta(LEGACY_VISIBLE_META)
+			_legacy_static_items.erase(item)
+	for child: Node in node.get_children():
+		_restore_actor_art_recursive(root, child)
 
 
 func _remember_and_hide(item: CanvasItem) -> void:
