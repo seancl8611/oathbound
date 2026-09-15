@@ -11,6 +11,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
@@ -27,6 +28,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
@@ -57,7 +59,9 @@ jobs:
           shared_actor="game/oathbound/Utility/Planar3DActorVisual.gd"
           enemy_contract="game/oathbound/Utility/HushiroEnemyContract.gd"
           hushiro="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"
+          hushiro_v2="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridgeV2.gd"
           diagnostics="game/oathbound/Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnostics.gd"
+          diagnostics_v2="game/oathbound/Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnosticsV2.gd"
           chamber="game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
 
           if grep -Fq "res://Regions/Hushiro/" "$shared_bridge"; then
@@ -89,14 +93,23 @@ jobs:
           grep -Fq "func _create_actor_visual(" "$hushiro"
           grep -Fq "func _decorate_actor_visual(" "$hushiro"
 
+          # V2 is the live Hushiro acceptance presenter. It must remain a region-local
+          # specialization layered on top of the already-tested V1 lifecycle/fail-safe.
+          grep -Fq 'extends "res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"' "$hushiro_v2"
+          grep -Fq "Hushiro3DEnvironmentV2.gd" "$hushiro_v2"
+          grep -Fq "HushiroStandardEnemyActorVisual.gd" "$hushiro_v2"
+          grep -Fq "illustrated_ground_compression = 0.48" "$hushiro_v2"
+          grep -Fq "illustrated_presentation_zoom = 0.52" "$hushiro_v2"
+
           grep -Fq "hushiro_3d_presentation_snapshot" "$diagnostics"
           grep -Fq "get_current_snapshot_for_test" "$diagnostics"
-          grep -Fq "HushiroPlanar3DPresentationBridge.gd" "$chamber"
-          grep -Fq "Hushiro3DPlaytestDiagnostics.gd" "$chamber"
+          grep -Fq 'extends "res://Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnostics.gd"' "$diagnostics_v2"
+          grep -Fq "HushiroPlanar3DPresentationBridgeV2.gd" "$chamber"
+          grep -Fq "Hushiro3DPlaytestDiagnosticsV2.gd" "$chamber"
           grep -Fq '[node name="Planar3DPresentationBridge" type="Node" parent="."]' "$chamber"
           grep -Fq '[node name="Planar3DPlaytestDiagnostics" type="Node" parent="."]' "$chamber"
 
-          echo "Shared 3D region-isolation, presentation-role, diagnostics and live Hushiro wiring contracts verified."
+          echo "Shared 3D region-isolation, presentation-role, diagnostics and live Hushiro V2 wiring contracts verified."
 
       - name: Fetch and verify curated CC0 assets
         if: github.event_name == 'push'
@@ -205,6 +218,17 @@ jobs:
             exit 1
           fi
 
+      - name: Validate Hushiro V2 acceptance presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.tscn 2>&1 | tee planar3d-v2.log
+          grep -F "[Planar3DPresentationV2Smoke] PASS" planar3d-v2.log
+          if grep -F "SCRIPT ERROR:" planar3d-v2.log; then
+            echo "FAIL: Hushiro V2 presentation smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Validate 3D playtest diagnostics
         shell: bash
         run: |
@@ -266,6 +290,7 @@ jobs:
             third-party-3d-assets.log
             planar3d-role-contract.log
             planar3d-layering.log
+            planar3d-v2.log
             planar3d-diagnostics.log
             planar3d-failsafe.log
           if-no-files-found: warn
