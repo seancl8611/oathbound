@@ -10,6 +10,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Art3D/**"
       - "tools/assets/**"
       - "docs/assets/**"
@@ -20,6 +21,7 @@ on:
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Art3D/**"
       - "tools/assets/**"
       - "docs/assets/**"
@@ -68,6 +70,21 @@ jobs:
             exit 1
           fi
 
+      - name: Validate curated third-party 3D compatibility
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.tscn 2>&1 | tee third-party-3d-assets.log
+          grep -F "[ThirdParty3DAssetSmoke] PASS" third-party-3d-assets.log
+          if grep -F "SCRIPT ERROR:" third-party-3d-assets.log; then
+            echo "FAIL: third-party 3D asset smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" third-party-3d-assets.log; then
+            echo "FAIL: third-party 3D asset smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Validate live 3D layering contract
         shell: bash
         run: |
@@ -106,6 +123,7 @@ jobs:
           path: |
             asset-sync-report.json
             planar3d-import.log
+            third-party-3d-assets.log
             planar3d-layering.log
           if-no-files-found: warn
           retention-days: 14
