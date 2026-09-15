@@ -57,9 +57,14 @@ func get_current_snapshot_for_test() -> Dictionary:
 
 
 func _snapshot_for_bridge(bridge: Node) -> Dictionary:
-	if bridge == null or not bridge.has_method("get_layering_state_for_test"):
+	if bridge == null:
 		return {}
-	var state_value: Variant = bridge.call("get_layering_state_for_test")
+	var state_value: Variant = null
+	if bridge.has_method("get_presentation_state"):
+		state_value = bridge.call("get_presentation_state")
+	elif bridge.has_method("get_layering_state_for_test"):
+		# Compatibility path for older bridge implementations during migration.
+		state_value = bridge.call("get_layering_state_for_test")
 	if not (state_value is Dictionary):
 		return {}
 	var state := state_value as Dictionary
