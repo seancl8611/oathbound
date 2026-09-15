@@ -2,8 +2,8 @@ extends Node
 
 ## Regression proof for the live-3D real-player presentation contract: opaque legacy 2D
 ## room art must not cover the SubViewport, planar CombatFX must remain visible, mirrored
-## actors must sit above temporary floor geometry, and Hushiro must retain the flatter,
-## wider illustrated camera profile established after the first visual playtest.
+## actors must sit above temporary floor geometry, the verified curated humanoid tier must
+## replace blockout geometry, and Hushiro must retain the flatter illustrated camera.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd")
 
@@ -80,6 +80,7 @@ func _run() -> void:
 		_expect(bool(state.get("scenery_hidden", false)), "bridge state reports visible legacy Scenery")
 		_expect(bool(state.get("combat_fx_visible", false)), "bridge state reports hidden CombatFX")
 		_expect(int(state.get("actor_visual_count", 0)) >= 1, "3D player representation was not created")
+		_expect(int(state.get("curated_actor_count", 0)) >= 1, "Hushiro player silently fell back instead of using the verified curated humanoid")
 		_expect(float(state.get("min_actor_y", 0.0)) >= 0.09, "3D actor root still intersects the temporary floor plane")
 
 		var compression := float(state.get("illustrated_ground_compression", 1.0))
@@ -98,7 +99,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DLayeringSmoke] PASS - layering + actor lift + illustrated camera profile")
+		print("[Planar3DLayeringSmoke] PASS - layering + curated humanoid + actor lift + illustrated camera profile")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
