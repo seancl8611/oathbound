@@ -103,9 +103,9 @@ func _run() -> void:
 	var ready_value: Variant = state.get("production_model_ready_by_role", {})
 	if ready_value is Dictionary and exists_value is Dictionary:
 		var ready_map := ready_value as Dictionary
-		var exists_map := exists_value as Dictionary
+		var exists_alias_map := exists_value as Dictionary
 		for role: String in ROLES:
-			_expect(bool(ready_map.get(role, false)) == bool(exists_map.get(role, false)), "legacy ready alias diverged for %s" % role)
+			_expect(bool(ready_map.get(role, false)) == bool(exists_alias_map.get(role, false)), "legacy ready alias diverged for %s" % role)
 		_expect(int(state.get("production_model_ready_count", -1)) == int(state.get("production_model_slot_exists_count", -2)), "legacy ready count diverged from slot existence count")
 	else:
 		_fail("legacy production model readiness aliases unavailable")
