@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "allowed_licenses": [
+      "CC0-1.0"
+    ],
+    "allowed_destination_prefixes": [
+      "game/oathbound/Art3D/ThirdParty/"
+    ],
+    "max_asset_mb": 32
+  },
+  "assets": [
+    {
+      "id": "quaternius_ubc_superhero_male_reference",
+      "enabled": true,
+      "kind": "humanoid_reference",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "official_source": "https://quaternius.com/packs/universalbasecharacters.html",
+      "official_download": "https://quaternius.itch.io/universal-base-characters",
+      "upstream_package_sha256": "fdbf1804c90dfc1ea03e992bff7da2dfd1a79318e13270a660180f9308455f40",
+      "staging_repository": "https://github.com/Seyamalam/blood-league-kickoff",
+      "staging_revision": "aa02a4e6d8337a0604d2da131bcbbeb1f01badf0",
+      "url": "https://raw.githubusercontent.com/Seyamalam/blood-league-kickoff/aa02a4e6d8337a0604d2da131bcbbeb1f01badf0/public/assets/vendor/quaternius/night-striker.glb",
+      "sha256": "a466828c67a4acc9b2413212ce6d9cde235e3aed9b675680c14fd9673858f118",
+      "destination": "game/oathbound/Art3D/ThirdParty/Quaternius/UniversalBaseCharacters/superhero_male_reference.glb",
+      "runtime_slot": null,
+      "notes": "Audited GLB derived from the free Standard Superhero_Male_FullBody. Kept as a neutral humanoid/rig reference, not final Akio art."
+    },
+    {
+      "id": "quaternius_universal_animation_library_reference",
+      "enabled": true,
+      "kind": "humanoid_animation_library",
+      "author": "Quaternius",
+      "license": "CC0-1.0",
+      "official_source": "https://quaternius.com/packs/universalanimationlibrary.html",
+      "official_download": "https://quaternius.itch.io/universal-animation-library",
+      "upstream_package_sha256": "cc73fc4e495b82958207316596317a3f40b9fa38065bde1027937452da537724",
+      "staging_repository": "https://github.com/Seyamalam/blood-league-kickoff",
+      "staging_revision": "aa02a4e6d8337a0604d2da131bcbbeb1f01badf0",
+      "url": "https://raw.githubusercontent.com/Seyamalam/blood-league-kickoff/aa02a4e6d8337a0604d2da131bcbbeb1f01badf0/public/assets/vendor/quaternius/universal-animation-library.glb",
+      "sha256": "4c748767741a3e495d89667b9a218b690ba9810b9517a12e960780e3ca72c4e9",
+      "destination": "game/oathbound/Art3D/ThirdParty/Quaternius/UniversalAnimationLibrary/universal_animation_library.glb",
+      "runtime_slot": null,
+      "notes": "Audited no-root-motion Standard library. It shares the Quaternius humanoid skeleton and is staged for Godot retargeting/clip extraction rather than silently becoming combat authority."
+    }
+  ]
+}
