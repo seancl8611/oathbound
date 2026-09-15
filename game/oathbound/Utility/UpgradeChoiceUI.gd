@@ -223,12 +223,20 @@ func _refresh_reroll() -> void:
 		count = int(RunData.technique_rerolls)
 	var reroll_template: String = LOCALIZATION.ui("technique.reroll", "Reroll Entire Screen (%d)")
 	_reroll_button.text = reroll_template % count
-	_reroll_button.disabled = _source.is_empty() or count <= 0
+	var has_real_choice := _has_real_technique_choice()
+	_reroll_button.disabled = _source.is_empty() or count <= 0 or not has_real_choice
 	_reroll_button.visible = not _source.is_empty()
 
 
+func _has_real_technique_choice() -> bool:
+	for choice_value: Variant in options:
+		if choice_value is Dictionary and str((choice_value as Dictionary).get("id", "")) != "technique_none":
+			return true
+	return false
+
+
 func _on_reroll_pressed() -> void:
-	if _source.is_empty():
+	if _source.is_empty() or not _has_real_technique_choice():
 		return
 	var rerolled: Array = UpgradeService.reroll_three_choices(_source, _area_id, options)
 	if rerolled.is_empty():
