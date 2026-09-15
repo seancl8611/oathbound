@@ -49,6 +49,22 @@ jobs:
             --repo-root . \
             --report asset-sync-report.json
 
+      - name: Inspect raw curated GLB contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/assets/inspect_glb.py \
+            game/oathbound/Art3D/ThirdParty/Quaternius/UniversalBaseCharacters/superhero_male_reference.glb \
+            --min-joints 50 \
+            --report humanoid-glb-report.json \
+            | tee humanoid-glb-inspect.log
+          python3 tools/assets/inspect_glb.py \
+            game/oathbound/Art3D/ThirdParty/Quaternius/UniversalAnimationLibrary/universal_animation_library.glb \
+            --min-joints 50 \
+            --min-animations 5 \
+            --report animation-glb-report.json \
+            | tee animation-glb-inspect.log
+
       - name: Setup Godot 4.7.2
         uses: chickensoft-games/setup-godot@v2
         with:
@@ -122,6 +138,10 @@ jobs:
           name: planar3d-validation-${{ github.run_id }}
           path: |
             asset-sync-report.json
+            humanoid-glb-report.json
+            animation-glb-report.json
+            humanoid-glb-inspect.log
+            animation-glb-inspect.log
             planar3d-import.log
             third-party-3d-assets.log
             planar3d-layering.log
