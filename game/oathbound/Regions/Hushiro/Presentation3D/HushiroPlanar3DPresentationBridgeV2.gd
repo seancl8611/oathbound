@@ -96,6 +96,19 @@ func get_presentation_state() -> Dictionary:
 				if role not in ["hollow", "archer", "bilemass", "warden"]:
 					unknown_hushiro_count += 1
 
+	# Production-model readiness is observational only. It lets diagnostics and CI report
+	# which final role slots have actually landed without imposing scale/material/rig rules
+	# before those GLBs exist.
+	var production_model_ready_by_role: Dictionary = {}
+	var production_model_ready_count := 0
+	for role_value: Variant in HUSHIRO_V2_MODEL_PATHS.keys():
+		var slot_role := str(role_value)
+		var model_path := str(HUSHIRO_V2_MODEL_PATHS.get(slot_role, ""))
+		var ready := not model_path.is_empty() and ResourceLoader.exists(model_path)
+		production_model_ready_by_role[slot_role] = ready
+		if ready:
+			production_model_ready_count += 1
+
 	# Parent V1 introspection did not know this new authored tier, so it counted these
 	# visuals as procedural. Reclassify them for diagnostics/CI without changing rendering.
 	state["hushiro_standard_actor_count"] = authored_standard_count
@@ -103,5 +116,8 @@ func get_presentation_state() -> Dictionary:
 	state["actor_role_counts"] = role_counts
 	state["procedural_actor_count"] = maxi(0, int(state.get("procedural_actor_count", 0)) - authored_standard_count)
 	state["role_specific_actor_count"] = int(state.get("role_specific_actor_count", 0)) + authored_standard_count
+	state["production_model_slot_count"] = HUSHIRO_V2_MODEL_PATHS.size()
+	state["production_model_ready_count"] = production_model_ready_count
+	state["production_model_ready_by_role"] = production_model_ready_by_role
 	state["presentation_revision"] = 2
 	return state
