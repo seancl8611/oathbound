@@ -88,7 +88,10 @@ func _activate() -> void:
 	_setup_render_target()
 	_setup_world()
 	_capture_and_adjust_legacy_camera()
-	if hide_legacy_room_art:
+	# Never erase the old room before a region has successfully supplied a replacement
+	# environment. This keeps the compatibility presentation visible if a region factory
+	# is missing or fails while the shared bridge is being adopted elsewhere.
+	if hide_legacy_room_art and _environment_root != null:
 		_hide_legacy_room_art()
 	_presentation_active = true
 	_refresh_left = 0.0
@@ -248,9 +251,11 @@ func _reconcile_actors() -> void:
 	for actor: Node2D in _presentation_actors():
 		var actor_id := actor.get_instance_id()
 		seen[actor_id] = true
-		if not _actor_visuals.has(actor_id):
+		if not _has_valid_actor_visual(actor_id):
 			_add_actor_visual(actor)
-		if hide_legacy_actor_art:
+		# Exclusive replacement must be fail-safe: never hide the authoritative legacy body
+		# unless a live replacement visual actually exists for this actor.
+		if hide_legacy_actor_art and _has_valid_actor_visual(actor_id):
 			_hide_actor_art(actor)
 
 	for actor_id: Variant in _actor_visuals.keys():
@@ -260,6 +265,16 @@ func _reconcile_actors() -> void:
 		if visual_value is Node and is_instance_valid(visual_value as Node):
 			(visual_value as Node).queue_free()
 		_actor_visuals.erase(actor_id)
+
+
+func _has_valid_actor_visual(actor_id: Variant) -> bool:
+	if not _actor_visuals.has(actor_id):
+		return false
+	var visual_value: Variant = _actor_visuals.get(actor_id)
+	if visual_value is Node3D and is_instance_valid(visual_value as Node3D):
+		return true
+	_actor_visuals.erase(actor_id)
+	return false
 
 
 func _add_actor_visual(actor: Node2D) -> void:
