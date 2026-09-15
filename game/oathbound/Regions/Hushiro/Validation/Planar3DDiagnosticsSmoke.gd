@@ -1,10 +1,10 @@
 extends Node
 
-## Runtime proof that the Hushiro playtest diagnostics can observe the live bridge without
-## owning or mutating presentation/combat state.
+## Runtime proof that the live Hushiro V2 playtest diagnostics can observe the production
+## presentation bridge without owning or mutating presentation/combat state.
 
-const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd")
-const DIAGNOSTICS_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnostics.gd")
+const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridgeV2.gd")
+const DIAGNOSTICS_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnosticsV2.gd")
 
 var _failures: Array[String] = []
 
@@ -44,7 +44,7 @@ func _run() -> void:
 
 	var bridge_value: Variant = BRIDGE_SCRIPT.new()
 	if not (bridge_value is Node):
-		_fail("Hushiro bridge failed to instantiate")
+		_fail("Hushiro V2 bridge failed to instantiate")
 		_finish()
 		return
 	var bridge := bridge_value as Node
@@ -53,7 +53,7 @@ func _run() -> void:
 
 	var diagnostics_value: Variant = DIAGNOSTICS_SCRIPT.new()
 	if not (diagnostics_value is Node):
-		_fail("Hushiro 3D diagnostics failed to instantiate")
+		_fail("Hushiro V2 3D diagnostics failed to instantiate")
 		_finish()
 		return
 	var diagnostics := diagnostics_value as Node
@@ -86,6 +86,21 @@ func _run() -> void:
 		_expect(bool(snapshot.get("environment_has_ruined_torii", false)), "diagnostics did not observe Hushiro torii landmark")
 		_expect(not (snapshot.get("player_animation_mode", {}) as Dictionary).is_empty(), "diagnostics omitted player animation mode")
 
+		# V2-only observability: telemetry must identify the active presentation revision,
+		# the quiet-center room contract, and all production model slots without pretending
+		# that currently absent final GLBs are present.
+		_expect(int(snapshot.get("presentation_revision", 0)) == 2, "diagnostics did not report V2 presentation revision")
+		_expect(int(snapshot.get("production_model_slot_count", 0)) == 7, "diagnostics production model slot count drifted from seven Hushiro roles")
+		_expect(int(snapshot.get("environment_composition_revision", 0)) == 2, "diagnostics did not report V2 environment composition")
+		_expect(bool(snapshot.get("environment_quiet_center", false)), "diagnostics did not report V2 quiet-center room contract")
+		var readiness_value: Variant = snapshot.get("production_model_ready_by_role", {})
+		if readiness_value is Dictionary:
+			var readiness := readiness_value as Dictionary
+			for role: String in ["player", "swordsman", "hound", "hollow", "archer", "bilemass", "warden"]:
+				_expect(readiness.has(role), "diagnostics omitted production model slot: %s" % role)
+		else:
+			_fail("diagnostics production model readiness map unavailable")
+
 	room.queue_free()
 	await get_tree().process_frame
 	_finish()
@@ -93,7 +108,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DDiagnosticsSmoke] PASS - live Hushiro 3D diagnostics expose actor tier, animation, camera, viewport, layering and environment state")
+		print("[Planar3DDiagnosticsSmoke] PASS - live Hushiro V2 diagnostics expose actor tier, animation, camera, viewport, layering, environment and production-model readiness")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
