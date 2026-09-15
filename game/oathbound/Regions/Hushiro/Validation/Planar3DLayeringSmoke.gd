@@ -3,8 +3,9 @@ extends Node
 ## Regression proof for the live-3D real-player presentation contract: opaque legacy 2D
 ## room art must not cover the SubViewport, planar CombatFX must remain visible, mirrored
 ## actors must sit above temporary floor geometry, the verified curated humanoid tier and
-## authored Hound silhouette must replace generic blockouts, and Hushiro must retain the
-## flatter illustrated camera plus Rupture-specific room/lighting language.
+## authored Hound silhouette must replace generic blockouts, human locomotion must consume
+## the verified runtime AnimationLibrary, and Hushiro must retain its illustrated camera
+## plus Rupture-specific room/lighting language.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd")
 
@@ -91,8 +92,20 @@ func _run() -> void:
 		_expect(bool(state.get("combat_fx_visible", false)), "bridge state reports hidden CombatFX")
 		_expect(int(state.get("actor_visual_count", 0)) >= 2, "representative player + Hound 3D actors were not created")
 		_expect(int(state.get("curated_actor_count", 0)) >= 1, "Hushiro player silently fell back instead of using the verified curated humanoid")
+		_expect(int(state.get("animated_curated_actor_count", 0)) >= 1, "curated humanoid did not activate the imported runtime AnimationLibrary")
 		_expect(int(state.get("hound_actor_count", 0)) >= 1, "Blighted Hound silently fell back instead of using the authored Hushiro silhouette")
 		_expect(float(state.get("min_actor_y", 0.0)) >= 0.09, "3D actor root still intersects the temporary floor plane")
+
+		var animation_value: Variant = state.get("curated_animation_state", {})
+		if animation_value is Dictionary:
+			var animation_state := animation_value as Dictionary
+			_expect(bool(animation_state.get("active", false)), "curated animation introspection reports inactive library")
+			_expect(int(animation_state.get("clip_count", 0)) >= 5, "curated runtime library retained fewer than five usable clips")
+			_expect(int(animation_state.get("remapped_tracks", 0)) > 0, "curated animation library remapped zero skeleton tracks")
+			_expect(not str(animation_state.get("idle_clip", "")).is_empty(), "curated animation library selected no idle clip")
+			_expect(not str(animation_state.get("locomotion_clip", "")).is_empty(), "curated animation library selected no locomotion clip")
+		else:
+			_fail("curated animation introspection unavailable")
 
 		var compression := float(state.get("illustrated_ground_compression", 1.0))
 		var elevation := float(state.get("illustrated_camera_elevation_degrees", 90.0))
@@ -124,7 +137,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DLayeringSmoke] PASS - layering + curated humanoid + authored Hound + Rupture room + illustrated camera")
+		print("[Planar3DLayeringSmoke] PASS - layering + animated curated humanoid + authored Hound + Rupture room + illustrated camera")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
