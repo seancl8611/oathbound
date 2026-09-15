@@ -4,7 +4,7 @@ title: Stylized 3D Presentation Direction
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-09-14
+last_reviewed: 2026-09-15
 topics:
   - project-identity
   - three-quarter-camera
@@ -164,6 +164,27 @@ Convert Area 1 first. Do not mass-convert Yomori/Kagutsuchi until Hushiro proves
 
 Yomori and Kagutsuchi inherit the shared 3D foundations while retaining their own combat/boss ownership and regional visual language.
 
+## Hushiro vertical-slice implementation checkpoint
+
+As of September 15, 2026, the representative Hushiro slice has an implemented, automated bridge suitable for manual visual/readability acceptance before wider conversion.
+
+Implemented presentation contract:
+
+- the authoritative actors remain `CharacterBody2D`; the bridge maps their planar coordinates/facing into an orthographic fixed-angle `Camera3D` SubViewport without changing combat-space distances;
+- Akio and the Swordsman use a pinned/verified CC0 Quaternius humanoid tier instead of generic procedural humanoid blocks while final Oathbound role-specific GLBs remain the higher-priority production slot;
+- the matching Quaternius Universal Animation Library imports as a Godot `AnimationLibrary`; recognized skeleton tracks are remapped by bone name and non-bone/root-motion tracks are discarded so presentation animation cannot move the gameplay proxy;
+- idle/locomotion use authored imported animation; dash explicitly mirrors the authoritative source dash state using an authored dash/dodge clip when available or a fast locomotion/lean presentation fallback otherwise;
+- a matching imported attack clip, when available, is sampled from authoritative 2D action progress; otherwise the deterministic manual katana pose remains source-progress-driven, so decorative animation never owns hit timing;
+- the Blighted Hound uses a dedicated Hushiro stylized predator silhouette with corruption mass, jaw/leg/tail state posing, contact shadow, and attack/hurt/death presentation while the current predator/Pressure Director runtime remains authoritative;
+- Akio/Swordsman attacks have a separate presentation-only emissive 3D sword-arc layer driven by existing attack progress; it owns no hitbox or damage behavior;
+- legacy actor body sprites are suppressed exclusively while replacement 3D visuals are active, while planar `CombatFX` ground telegraphs remain visible;
+- the representative room now carries Hushiro Rupture volume through wet stone, ruined torii/village/shrine forms, ritual blood accents, rubble, controlled near-camera occluders, cold directional moonlight and localized warm ember lighting;
+- the 3D presentation renders at the project target 640x360 internal viewport / 1280x720 window override, on a negative CanvasLayer so existing HUD/reward/death UI remains above it and retains input authority.
+
+Automated validation protects the representative Akio + Swordsman + Hound set, imported runtime animation, contact shadows, attack VFX, exclusive legacy-body suppression, planar telegraphs, camera projection/framing, viewport target, HUD-safe layer ordering, and Rupture environment/lighting landmarks. Hushiro combat regressions remain responsible for the authoritative Health + hidden-Poise + special-response and encounter/pressure semantics.
+
+This checkpoint is **not final character/environment art**. Curated CC0 humans and authored runtime geometry are production-replaceable tiers used to validate the final representation architecture. The remaining Phase-B acceptance gate is a real gameplay pass for visual readability, occlusion, animation feel, and performance at the target viewport before mass-converting Hushiro.
+
 ## Replacement visual exclusivity
 
 This is a hard production rule:
@@ -214,8 +235,8 @@ The purpose of 3D is to improve dimensional presence, animation, environment dep
 
 ## Current immediate priorities
 
-1. keep validating the Health + hidden-Poise + special-response combat model through real playtests;
-2. reconcile first-return/Bloodwell progression with the no-player-Posture contract;
-3. instrument the Hound/player damage path so telemetry reports raw damage, modifiers, and actual Health lost before balance changes;
-4. harden temporary replacement-visual hiding so old and new actor bodies cannot overlap;
-5. begin the representative Hushiro 3D vertical slice rather than investing further in final 2D body art.
+1. complete manual visual/readability/performance acceptance of the representative Hushiro 3D slice at the target viewport;
+2. keep validating the Health + hidden-Poise + special-response combat model through real playtests without conflating presentation changes with balance changes;
+3. replace curated placeholder tiers with final Akio/Hushiro production assets incrementally after the slice is accepted, retaining the same visual-root and source-state contracts;
+4. establish reusable room/prop/lighting authoring conventions from the accepted Hushiro slice;
+5. do not mass-convert Yomori or Kagutsuchi until Hushiro demonstrates acceptable combat readability, animation workflow, performance, and room-authoring throughput.
