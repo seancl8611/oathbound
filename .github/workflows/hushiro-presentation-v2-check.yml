@@ -52,6 +52,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify production GLB state diagnostics
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DProductionModelStateSmoke.tscn 2>&1 | tee hushiro-production-model-state.log
+          grep -F "[Planar3DProductionModelStateSmoke] PASS" hushiro-production-model-state.log
+          if grep -F "SCRIPT ERROR:" hushiro-production-model-state.log; then
+            echo "FAIL: Hushiro production model state smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-production-model-state.log; then
+            echo "FAIL: Hushiro production model state smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Smoke live Hushiro combat chamber wiring
         shell: bash
         run: |
@@ -75,6 +90,7 @@ jobs:
           path: |
             hushiro-presentation-v2.log
             hushiro-enemy-separation.log
+            hushiro-production-model-state.log
             hushiro-v2-runscene.log
           if-no-files-found: warn
           retention-days: 7
