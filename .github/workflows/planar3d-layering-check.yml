@@ -7,10 +7,12 @@ on:
       - "agent/**"
     paths:
       - "game/oathbound/Utility/Planar3D*.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
@@ -20,10 +22,12 @@ on:
   pull_request:
     paths:
       - "game/oathbound/Utility/Planar3D*.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
       - "game/oathbound/Regions/Hushiro/Presentation3D/**"
       - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
       - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
       - "game/oathbound/Art3D/**"
@@ -49,6 +53,7 @@ jobs:
           set -euo pipefail
           shared_bridge="game/oathbound/Utility/Planar3DPresentationBridge.gd"
           shared_actor="game/oathbound/Utility/Planar3DActorVisual.gd"
+          enemy_contract="game/oathbound/Utility/HushiroEnemyContract.gd"
           hushiro="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"
           chamber="game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
 
@@ -71,6 +76,7 @@ jobs:
           grep -Fq "func _has_valid_actor_visual(" "$shared_bridge"
           grep -Fq "var external_model_path: String" "$shared_actor"
           grep -Fq "func set_external_model_path(" "$shared_actor"
+          grep -Fq 'set_meta("presentation_role", key)' "$enemy_contract"
 
           grep -Fq "Hushiro3DEnvironment.gd" "$hushiro"
           grep -Fq "PRODUCTION_MODEL_PATHS" "$hushiro"
@@ -83,7 +89,7 @@ jobs:
           grep -Fq "HushiroPlanar3DPresentationBridge.gd" "$chamber"
           grep -Fq '[node name="Planar3DPresentationBridge" type="Node" parent="."]' "$chamber"
 
-          echo "Shared 3D region-isolation and live Hushiro wiring contracts verified."
+          echo "Shared 3D region-isolation, presentation-role and live Hushiro wiring contracts verified."
 
       - name: Fetch and verify curated CC0 assets
         if: github.event_name == 'push'
@@ -162,6 +168,21 @@ jobs:
             exit 1
           fi
 
+      - name: Validate shared presentation-role handoff
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DRoleContractSmoke.tscn 2>&1 | tee planar3d-role-contract.log
+          grep -F "[Planar3DRoleContractSmoke] PASS" planar3d-role-contract.log
+          if grep -F "SCRIPT ERROR:" planar3d-role-contract.log; then
+            echo "FAIL: Planar3D role-contract smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-role-contract.log; then
+            echo "FAIL: Planar3D role-contract smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Validate live 3D layering contract
         shell: bash
         run: |
@@ -221,6 +242,7 @@ jobs:
             planar3d-import.log
             gltf-import-probe.log
             third-party-3d-assets.log
+            planar3d-role-contract.log
             planar3d-layering.log
             planar3d-failsafe.log
           if-no-files-found: warn
