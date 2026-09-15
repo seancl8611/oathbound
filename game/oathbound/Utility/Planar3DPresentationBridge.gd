@@ -8,6 +8,11 @@ extends Node
 ## facing/action state, and renders a fixed high-angle Camera3D into the existing canvas.
 ## 2D hitboxes, ranges, Pressure Director behavior, encounter logic and timing remain
 ## unchanged while we validate the 3D production direction in actual play.
+##
+## Region-specific presentation belongs in subclasses. The shared bridge deliberately
+## knows nothing about Hushiro/Yomori/Kagutsuchi environment implementations; subclasses
+## provide environment roots, actor visuals and optional actor decorations through the
+## factory hooks below.
 
 @export var enabled: bool = true
 @export var pixels_per_meter: float = 64.0
@@ -18,7 +23,6 @@ extends Node
 @export var show_debug_label: bool = true
 
 const ACTOR_VISUAL_SCRIPT = preload("res://Utility/Planar3DActorVisual.gd")
-const HUSHIRO_ENVIRONMENT_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/Hushiro3DEnvironment.gd")
 const LEGACY_VISIBLE_META := &"_oathbound_planar3d_base_visible"
 const KEEP_REPLACEMENT_META := &"oathbound_keep_with_replacement_visual"
 
@@ -163,9 +167,10 @@ func _setup_world() -> void:
 	world_environment.environment = environment
 	_world_root.add_child(world_environment)
 
-	_environment_root = HUSHIRO_ENVIRONMENT_SCRIPT.new() as Node3D
+	_environment_root = _create_environment_root()
 	if _environment_root != null:
-		_environment_root.name = "Hushiro3DEnvironment"
+		if str(_environment_root.name).is_empty():
+			_environment_root.name = "Presentation3DEnvironment"
 		var room := get_parent() as Node2D
 		if room != null:
 			_environment_root.position = map_2d_to_3d(room.global_position)
@@ -178,6 +183,25 @@ func _setup_world() -> void:
 	_camera3d.far = 90.0
 	_camera3d.current = true
 	_world_root.add_child(_camera3d)
+
+
+## Region hook. Shared presentation code must not know which environment kit a region uses.
+func _create_environment_root() -> Node3D:
+	return null
+
+
+## Region hook. The default bridge uses a generic production-replaceable actor visual.
+func _create_actor_visual(_actor: Node2D, _role: String) -> Node3D:
+	var visual_value: Variant = ACTOR_VISUAL_SCRIPT.new()
+	if visual_value is Node3D:
+		return visual_value as Node3D
+	return null
+
+
+## Region hook for presentation-only VFX/accessories that should be children of the
+## replacement visual. Combat ownership must remain on the authoritative source actor.
+func _decorate_actor_visual(_visual: Node3D, _actor: Node2D, _role: String) -> void:
+	pass
 
 
 func _sync_viewport_size() -> void:
@@ -241,14 +265,15 @@ func _reconcile_actors() -> void:
 func _add_actor_visual(actor: Node2D) -> void:
 	if _world_root == null:
 		return
-	var visual_value: Variant = ACTOR_VISUAL_SCRIPT.new()
-	if not (visual_value is Node3D):
+	var role := _role_for(actor)
+	var visual := _create_actor_visual(actor, role)
+	if visual == null:
 		return
-	var visual := visual_value as Node3D
 	visual.name = "Actor3D_%s" % str(actor.get_instance_id())
 	_world_root.add_child(visual)
 	if visual.has_method("configure"):
-		visual.call("configure", _role_for(actor), actor)
+		visual.call("configure", role, actor)
+	_decorate_actor_visual(visual, actor, role)
 	_actor_visuals[actor.get_instance_id()] = visual
 
 
@@ -294,7 +319,9 @@ func _find_player() -> Node2D:
 func _role_for(actor: Node2D) -> String:
 	if actor.is_in_group("player"):
 		return "player"
-	for metadata_key: StringName in [&"hushiro_enemy_type", &"enemy_type"]:
+	# presentation_role/enemy_type are shared contracts. hushiro_enemy_type remains in the
+	# compatibility list until the current Hushiro roster is migrated to the shared key.
+	for metadata_key: StringName in [&"presentation_role", &"enemy_type", &"hushiro_enemy_type"]:
 		var role := str(actor.get_meta(metadata_key, "")).to_lower()
 		if role == "swordsman":
 			return "swordsman"
