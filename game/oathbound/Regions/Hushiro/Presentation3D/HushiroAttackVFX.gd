@@ -12,7 +12,6 @@ var source_actor: Node2D = null
 var actor_role := "enemy"
 var _arc_root: Node3D = null
 var _material: StandardMaterial3D = null
-var _last_attack_active := false
 
 
 func _ready() -> void:
@@ -41,7 +40,6 @@ func _process(_delta: float) -> void:
 	var attacking := _source_attack_active() or _source_animation_is_attack()
 	if not attacking:
 		_arc_root.visible = false
-		_last_attack_active = false
 		return
 
 	var progress := _source_action_progress()
@@ -51,7 +49,6 @@ func _process(_delta: float) -> void:
 	var visible_now := progress >= 0.10 and progress <= 0.78
 	_arc_root.visible = visible_now
 	if not visible_now:
-		_last_attack_active = true
 		return
 
 	var sweep := lerpf(-0.62, 0.62, window_progress)
@@ -60,7 +57,6 @@ func _process(_delta: float) -> void:
 	_arc_root.rotation.x = lerpf(-0.12, 0.10, window_progress)
 	_arc_root.scale = Vector3.ONE * lerpf(0.86, 1.05, pulse)
 	_arc_root.position.y = 0.02 + pulse * 0.08
-	_last_attack_active = true
 
 
 func _build_arc() -> void:
