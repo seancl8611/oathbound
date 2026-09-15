@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Regions/Hushiro/Presentation/ThreeQuarterHushiroPrototype.gd" id="8_3qv"]
 [ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="9_3qv"]
 [ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="10_3qv"]
-[ext_resource type="Script" path="res://Utility/Planar3DPresentationBridge.gd" id="11_3d"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd" id="11_3d"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="20_xw04x"]
 
 [node name="CombatChamber" type="Node2D"]
