@@ -2,9 +2,10 @@ extends Node
 
 ## Regression proof for Planar3D failure/lifecycle safety.
 ##
-## A validation-only bridge deliberately fails actor replacement while providing a valid
-## 3D environment. The authoritative 2D body must remain visible, room art must restore
-## when presentation is disabled, and re-enabling presentation must remain safe.
+## The validation bridge moves through initial failure, successful replacement, lost
+## replacement, rebuild failure, runtime exclusivity toggling, group removal and full
+## bridge disable/re-enable. At every point the authoritative 2D body must remain safely
+## recoverable rather than becoming permanently invisible.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Validation/Planar3DFailSafeBridge.gd")
 
@@ -59,7 +60,50 @@ func _run() -> void:
 	_expect(bool(bridge.call("is_presentation_enabled")), "failure-injection bridge did not activate")
 	_expect(not background.visible, "valid replacement environment did not suppress legacy Background")
 	_expect(not scenery.visible, "valid replacement environment did not suppress legacy Scenery")
-	_expect(legacy_body.visible, "failed actor replacement incorrectly hid authoritative legacy body")
+	_expect(legacy_body.visible, "initial failed actor replacement incorrectly hid authoritative legacy body")
+
+	# Prove a valid replacement hides the legacy body.
+	bridge.call("set_actor_visuals_allowed", true)
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(not legacy_body.visible, "successful actor replacement did not suppress legacy body")
+
+	# Simulate a replacement disappearing after it already hid the body, then make the
+	# rebuild fail. This is the production failure mode that can otherwise create an
+	# invisible-but-still-authoritative live actor.
+	bridge.call("set_actor_visuals_allowed", false)
+	bridge.call("drop_actor_visuals")
+	await get_tree().process_frame
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(legacy_body.visible, "lost replacement plus failed rebuild stranded legacy body hidden")
+
+	# Recovery must remain possible after the failure.
+	bridge.call("set_actor_visuals_allowed", true)
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(not legacy_body.visible, "replacement did not recover after a failed rebuild")
+
+	# Runtime exclusivity changes must be reversible without restarting the room.
+	bridge.set("hide_legacy_actor_art", false)
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(legacy_body.visible, "disabling exclusive replacement did not restore legacy actor art")
+	bridge.set("hide_legacy_actor_art", true)
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(not legacy_body.visible, "re-enabling exclusive replacement did not hide legacy actor art")
+
+	# If an actor temporarily leaves the presentation set while remaining alive, removing
+	# its replacement must restore its authoritative body before the visual is discarded.
+	player.remove_from_group("player")
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(legacy_body.visible, "actor leaving presentation group remained hidden after replacement removal")
+	player.add_to_group("player")
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(not legacy_body.visible, "actor rejoining presentation group did not regain replacement")
 
 	bridge.call("set_presentation_enabled", false)
 	for _i: int in range(2):
@@ -68,8 +112,11 @@ func _run() -> void:
 	_expect(not bool(bridge.call("is_presentation_enabled")), "bridge did not deactivate")
 	_expect(background.visible, "legacy Background was not restored after disabling live 3D")
 	_expect(scenery.visible, "legacy Scenery was not restored after disabling live 3D")
-	_expect(legacy_body.visible, "legacy actor body changed visibility during presentation shutdown")
+	_expect(legacy_body.visible, "legacy actor body was not restored during presentation shutdown")
 
+	# Re-enable with actor creation failing again: room replacement may activate, but actor
+	# authority must stay visible until a valid replacement exists.
+	bridge.call("set_actor_visuals_allowed", false)
 	bridge.call("set_presentation_enabled", true)
 	for _i: int in range(5):
 		await get_tree().process_frame
@@ -86,7 +133,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DFailSafeSmoke] PASS - failed actor replacement preserves legacy body and bridge lifecycle restores safely")
+		print("[Planar3DFailSafeSmoke] PASS - replacement loss/failure restores legacy actor art and bridge lifecycle remains reversible")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
