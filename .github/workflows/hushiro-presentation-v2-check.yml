@@ -41,6 +41,17 @@ jobs:
             exit 1
           fi
 
+      - name: Verify Hushiro enemy separation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroEnemySeparationSmoke.tscn 2>&1 | tee hushiro-enemy-separation.log
+          grep -F "[HushiroEnemySeparationSmoke] PASS" hushiro-enemy-separation.log
+          if grep -F "SCRIPT ERROR:" hushiro-enemy-separation.log; then
+            echo "FAIL: Hushiro enemy separation emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Smoke live Hushiro combat chamber wiring
         shell: bash
         run: |
@@ -60,6 +71,7 @@ jobs:
           name: hushiro-presentation-v2-${{ github.run_id }}
           path: |
             hushiro-presentation-v2.log
+            hushiro-enemy-separation.log
             hushiro-v2-runscene.log
           if-no-files-found: warn
           retention-days: 7
