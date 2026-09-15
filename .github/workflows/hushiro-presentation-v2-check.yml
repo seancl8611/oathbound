@@ -57,7 +57,10 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-v2-runscene.log
-          grep -F "[HushiroPlanar3D] illustrated camera profile compression=0.48" hushiro-v2-runscene.log
+          # This region/revision-owned startup marker proves the production RunScene used
+          # the V2 presenter. The older parent camera-profile line is intentionally not a
+          # requirement because Camera2D can initialize after the bridge in the live scene.
+          grep -F "[HushiroPlanar3DV2] revision=2 compression=0.48 elevation=28.7deg zoom=0.52" hushiro-v2-runscene.log
           grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-v2-runscene.log
           if grep -F "SCRIPT ERROR:" hushiro-v2-runscene.log; then
             echo "FAIL: live Hushiro V2 RunScene emitted a GDScript runtime error."
