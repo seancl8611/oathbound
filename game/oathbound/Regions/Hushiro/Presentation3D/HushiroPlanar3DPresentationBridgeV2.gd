@@ -6,9 +6,12 @@ extends "res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.
 
 const HUSHIRO_ENVIRONMENT_V2_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/Hushiro3DEnvironmentV2.gd")
 const HUSHIRO_CURATED_HUMAN_V2_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroCuratedActorVisualV2.gd")
-const HUSHIRO_STANDARD_ENEMY_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroStandardEnemyActorVisual.gd")
+const HUSHIRO_HOUND_V2_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroHoundActorVisualV2.gd")
+const HUSHIRO_STANDARD_ENEMY_V2_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroStandardEnemyActorVisualV2.gd")
 const PRODUCTION_MODEL_VALIDATOR = preload("res://Utility/Planar3DProductionModelValidator.gd")
 
+# The V2 standard wrapper extends HushiroStandardEnemyActorVisual.gd so authored role
+# silhouettes remain the fallback when a final production slot is absent or rejected.
 const HUSHIRO_V2_MODEL_PATHS: Dictionary = {
 	"player": "res://Art3D/Characters/Akio/akio.glb",
 	"swordsman": "res://Art3D/Characters/HushiroSwordsman/hushiro_swordsman.glb",
@@ -76,11 +79,11 @@ func _create_actor_visual(_actor: Node2D, role: String) -> Node3D:
 	var visual_value: Variant
 	match role:
 		"hound":
-			visual_value = HUSHIRO_HOUND_VISUAL_SCRIPT.new()
+			visual_value = HUSHIRO_HOUND_V2_SCRIPT.new()
 		"player", "swordsman":
 			visual_value = HUSHIRO_CURATED_HUMAN_V2_SCRIPT.new()
 		_:
-			visual_value = HUSHIRO_STANDARD_ENEMY_SCRIPT.new()
+			visual_value = HUSHIRO_STANDARD_ENEMY_V2_SCRIPT.new()
 
 	if not (visual_value is Node3D):
 		return null
@@ -88,8 +91,9 @@ func _create_actor_visual(_actor: Node2D, role: String) -> Node3D:
 	var production_model_path := str(HUSHIRO_V2_MODEL_PATHS.get(role, ""))
 	var validation := _production_model_validation_for_role(role, production_model_path)
 	# A final-art file does not automatically displace a proven fallback. The current
-	# shared adapter needs renderable geometry plus semantic Idle + locomotion + Attack
-	# clips before it can present a production actor without becoming static in combat.
+	# direct-GLB adapter needs renderable geometry plus semantic Idle + locomotion + Attack
+	# clips carrying real pose/deformation animation before it can become authoritative
+	# presentation without creating a static actor in combat.
 	if bool(validation.get("activation_ready", false)) and visual.has_method("set_external_model_path"):
 		visual.call("set_external_model_path", production_model_path)
 	return visual
@@ -104,7 +108,7 @@ func get_presentation_state() -> Dictionary:
 	# Keep production-model concepts separate in diagnostics:
 	# - slot exists: a resource is present at the canonical path;
 	# - slot renderable: that resource can instantiate a Node3D with mesh geometry;
-	# - activation ready: renderable + the semantic animation aliases the runtime drives;
+	# - activation ready: renderable + semantic pose animation the runtime drives;
 	# - spawned: this role currently has a live presentation actor;
 	# - active: that actor actually accepted/rendered the role-specific GLB.
 	var production_model_slot_exists_by_role: Dictionary = {}
@@ -113,6 +117,7 @@ func get_presentation_state() -> Dictionary:
 	var production_model_validation_by_role: Dictionary = {}
 	var production_model_spawned_by_role: Dictionary = {}
 	var production_model_active_by_role: Dictionary = {}
+	var production_animation_state_by_role: Dictionary = {}
 	var production_model_slot_exists_count := 0
 	var production_model_slot_renderable_count := 0
 	var production_model_activation_ready_count := 0
@@ -145,6 +150,10 @@ func get_presentation_state() -> Dictionary:
 		role_counts[role] = int(role_counts.get(role, 0)) + 1
 		if production_model_spawned_by_role.has(role):
 			production_model_spawned_by_role[role] = true
+		if visual.has_method("get_production_animation_state_for_test"):
+			var animation_state_value: Variant = visual.call("get_production_animation_state_for_test")
+			if animation_state_value is Dictionary:
+				production_animation_state_by_role[role] = (animation_state_value as Dictionary).duplicate(true)
 		if visual.has_method("get_visual_tier"):
 			var tier := str(visual.call("get_visual_tier"))
 			if tier == "role_specific_glb" and production_model_active_by_role.has(role):
@@ -174,6 +183,7 @@ func get_presentation_state() -> Dictionary:
 	state["production_model_spawned_by_role"] = production_model_spawned_by_role
 	state["production_model_active_count"] = production_model_active_count
 	state["production_model_active_by_role"] = production_model_active_by_role
+	state["production_animation_state_by_role"] = production_animation_state_by_role
 
 	# Compatibility aliases for diagnostics consumers created before the existence/active
 	# distinction. `ready` here means only that a canonical slot resource exists.

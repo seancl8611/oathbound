@@ -10,6 +10,9 @@ extends "res://Regions/Hushiro/Presentation3D/HushiroCuratedActorVisual.gd"
 const CURATED_FORWARD_CORRECTION_YAW := PI
 const PLAYER_READABILITY_LIFT := Color(1.28, 1.26, 1.34, 1.0)
 const ENEMY_READABILITY_LIFT := Color(1.20, 1.14, 1.08, 1.0)
+const EXTERNAL_ANIMATION_DRIVER = preload("res://Utility/Planar3DExternalAnimationDriver.gd")
+
+var _production_animation_state: Dictionary = {}
 
 
 func _normalize_curated_model(model: Node3D, target_height: float) -> void:
@@ -22,6 +25,26 @@ func _normalize_curated_model(model: Node3D, target_height: float) -> void:
 func _apply_illustrated_material_treatment(node: Node) -> void:
 	super._apply_illustrated_material_treatment(node)
 	_brighten_after_parent_treatment(node)
+
+
+func _sync_external_animation(speed: float) -> void:
+	# Final Akio/Swordsman GLBs use the same source-progress contract as other Hushiro V2
+	# production actors. The curated Quaternius tier keeps its own remapped animation path.
+	_production_animation_state = EXTERNAL_ANIMATION_DRIVER.sync(_visual_root, source_actor, speed)
+
+
+func get_production_animation_state_for_test() -> Dictionary:
+	if not _external_model_active:
+		return {
+			"external_model_active": false,
+			"mode": "inactive",
+			"clip": "",
+			"source": "none",
+			"progress": -1.0,
+		}
+	var state := _production_animation_state.duplicate(true)
+	state["external_model_active"] = true
+	return state
 
 
 func get_curated_animation_state_for_test() -> Dictionary:

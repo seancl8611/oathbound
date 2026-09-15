@@ -67,6 +67,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify source-driven production GLB animation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DExternalAnimationSyncSmoke.tscn 2>&1 | tee hushiro-production-animation-sync.log
+          grep -F "[Planar3DExternalAnimationSyncSmoke] PASS" hushiro-production-animation-sync.log
+          if grep -F "SCRIPT ERROR:" hushiro-production-animation-sync.log; then
+            echo "FAIL: source-driven production animation smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-production-animation-sync.log; then
+            echo "FAIL: source-driven production animation smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify production GLB state diagnostics
         shell: bash
         run: |
@@ -106,6 +121,7 @@ jobs:
             hushiro-presentation-v2.log
             hushiro-enemy-separation.log
             hushiro-production-model-validator.log
+            hushiro-production-animation-sync.log
             hushiro-production-model-state.log
             hushiro-v2-runscene.log
           if-no-files-found: warn

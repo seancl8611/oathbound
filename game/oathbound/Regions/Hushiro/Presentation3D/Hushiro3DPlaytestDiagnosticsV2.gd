@@ -26,6 +26,8 @@ func _snapshot_for_bridge(bridge: Node) -> Dictionary:
 	var production_spawned := production_spawned_value as Dictionary if production_spawned_value is Dictionary else {}
 	var production_active_value: Variant = state.get("production_model_active_by_role", {})
 	var production_active := production_active_value as Dictionary if production_active_value is Dictionary else {}
+	var production_animation_value: Variant = state.get("production_animation_state_by_role", {})
+	var production_animation := production_animation_value as Dictionary if production_animation_value is Dictionary else {}
 	var environment_value: Variant = state.get("environment_state", {})
 	var environment_state := environment_value as Dictionary if environment_value is Dictionary else {}
 
@@ -45,6 +47,7 @@ func _snapshot_for_bridge(bridge: Node) -> Dictionary:
 	snapshot["production_model_spawned_by_role"] = production_spawned.duplicate(true)
 	snapshot["production_model_active_count"] = int(state.get("production_model_active_count", 0))
 	snapshot["production_model_active_by_role"] = production_active.duplicate(true)
+	snapshot["production_animation_state_by_role"] = production_animation.duplicate(true)
 	# Compatibility fields retained for existing telemetry consumers.
 	snapshot["production_model_ready_count"] = int(state.get("production_model_ready_count", 0))
 	snapshot["production_model_ready_by_role"] = production_exists.duplicate(true)
