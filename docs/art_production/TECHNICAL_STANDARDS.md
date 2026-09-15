@@ -76,7 +76,7 @@ The shared bridge must not preload or instantiate Hushiro, Yomori or Kagutsuchi-
 
 Region-specific camera profiles, visibility watchdogs, actor grounding offsets and environment art rules also belong in the region subclass. This boundary is enforced by the Planar3D CI workflow so later Yomori/Kagutsuchi work can reuse the bridge without inheriting Hushiro art dependencies.
 
-Replacement behavior is deliberately fail-safe. If a model/factory fails to produce a live `Node3D`, the old authoritative body art must remain visible. An asset-loading failure may degrade presentation, but it must never make a combat actor invisible.
+Replacement behavior is deliberately fail-safe. If a model/factory fails to produce a live `Node3D`, the old authoritative body art must remain visible. An asset-loading failure may degrade presentation, but it must never make a combat actor invisible. External model candidates must also contain actual `MeshInstance3D` geometry before they are accepted as active replacements; a valid-but-empty scene falls back instead of suppressing the legacy actor.
 
 ## Character model standard
 
@@ -170,13 +170,27 @@ Do not commit raw assets whose license forbids redistribution. For non-CC0/non-p
 
 ## Replacement model contract
 
-The live 3D actor visual runtime currently checks these production slots first:
+The live Hushiro V2 presenter owns these **seven** production character slots:
 
-- `res://Art3D/Characters/Akio/akio.glb`
-- `res://Art3D/Characters/HushiroSwordsman/hushiro_swordsman.glb`
-- `res://Art3D/Characters/BlightedHound/blighted_hound.glb`
+- Akio — `res://Art3D/Characters/Akio/akio.glb`
+- Swordsman — `res://Art3D/Characters/HushiroSwordsman/hushiro_swordsman.glb`
+- Blighted Hound — `res://Art3D/Characters/BlightedHound/blighted_hound.glb`
+- Hollow — `res://Art3D/Characters/Hollow/hollow.glb`
+- Archer — `res://Art3D/Characters/HushiroArcher/hushiro_archer.glb`
+- Bilemass — `res://Art3D/Characters/CellarBilemass/cellar_bilemass.glb`
+- Warden — `res://Art3D/Characters/HushiroWarden/hushiro_warden.glb`
 
-If a production/AI model is present there, the visual bridge can use it instead of its procedural fallback. Replacement visuals remain exclusive: old body sprites must stay hidden while the 3D representation is active.
+The region presenter, not the shared utility layer, owns these paths so another region may reuse semantic role names without accidentally loading Hushiro art. Runtime diagnostics expose slot readiness observationally; absence of a final file is not itself an error while the placeholder tier is still approved.
+
+Current fallback order is role-specific rather than one universal capsule:
+
+- Akio / Swordsman: production GLB → curated CC0 Quaternius humanoid + remapped animation library → procedural safety fallback;
+- Blighted Hound: production GLB → authored Hushiro predator blockout;
+- Hollow / Archer / Bilemass / Warden: production GLB → distinct authored Hushiro role blockout.
+
+A production file is not accepted merely because the path exists. The imported scene must instantiate as `Node3D` and contain renderable mesh geometry. If it does not, the role fallback remains active and legacy actor suppression is not allowed to create an invisible combatant.
+
+Production GLBs are otherwise treated as authored deliverables: the runtime does not silently invent final scale, pivot, facing, rig, material, or animation assumptions for an unseen asset. Each delivered model must therefore pass the scale/grounding/facing/material/animation acceptance checks below before its slot is considered visually approved.
 
 ## Environment modularity
 
