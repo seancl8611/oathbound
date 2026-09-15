@@ -144,9 +144,11 @@ func get_layering_state_for_test() -> Dictionary:
 	var min_actor_y := actor_ground_lift
 	var actor_count := 0
 	var curated_actor_count := 0
+	var animated_curated_actor_count := 0
 	var hound_actor_count := 0
 	var role_specific_actor_count := 0
 	var procedural_actor_count := 0
+	var first_curated_animation_state: Dictionary = {}
 	for visual_value: Variant in _actor_visuals.values():
 		if visual_value is Node3D and is_instance_valid(visual_value as Node3D):
 			var visual := visual_value as Node3D
@@ -159,6 +161,12 @@ func get_layering_state_for_test() -> Dictionary:
 				match str(visual.call("get_visual_tier")):
 					"curated_cc0_humanoid":
 						curated_actor_count += 1
+						if visual.has_method("get_animation_tier") and str(visual.call("get_animation_tier")) == "curated_animation_library":
+							animated_curated_actor_count += 1
+							if first_curated_animation_state.is_empty() and visual.has_method("get_curated_animation_state_for_test"):
+								var animation_state_value: Variant = visual.call("get_curated_animation_state_for_test")
+								if animation_state_value is Dictionary:
+									first_curated_animation_state = animation_state_value as Dictionary
 					"hushiro_stylized_hound":
 						hound_actor_count += 1
 					"role_specific_glb":
@@ -178,6 +186,8 @@ func get_layering_state_for_test() -> Dictionary:
 		"combat_fx_visible": combat_fx == null or combat_fx.visible,
 		"actor_visual_count": actor_count,
 		"curated_actor_count": curated_actor_count,
+		"animated_curated_actor_count": animated_curated_actor_count,
+		"curated_animation_state": first_curated_animation_state,
 		"hound_actor_count": hound_actor_count,
 		"role_specific_actor_count": role_specific_actor_count,
 		"procedural_actor_count": procedural_actor_count,
