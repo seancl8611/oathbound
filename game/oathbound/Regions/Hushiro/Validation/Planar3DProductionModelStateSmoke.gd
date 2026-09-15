@@ -112,9 +112,10 @@ func _run() -> void:
 			if slot_exists:
 				counted_exists += 1
 				# Once somebody lands a canonical final-art file, CI refuses to hide a proven
-				# fallback behind malformed geometry or a static model the runtime cannot drive.
+				# fallback behind malformed geometry or a direct-GLB animation contract the
+				# runtime cannot safely drive.
 				_expect(slot_renderable, "canonical production slot exists but is not renderable: %s state=%s" % [role, str(per_role_validation.get("state", "unknown"))])
-				_expect(activation_ready, "canonical production slot exists but lacks required Idle/locomotion/Attack animation aliases: %s state=%s" % [role, str(per_role_validation.get("state", "unknown"))])
+				_expect(activation_ready, "canonical production slot exists but is not direct-GLB activation-ready: %s state=%s players=%d root_tracks=%d" % [role, str(per_role_validation.get("state", "unknown")), int(per_role_validation.get("animation_contract_player_count", 0)), int(per_role_validation.get("animation_root_transform_track_count", 0))])
 			else:
 				_expect(str(per_role_validation.get("state", "")) == "absent", "missing production slot did not report absent: %s" % role)
 			if slot_renderable:
@@ -124,6 +125,9 @@ func _run() -> void:
 				counted_activation_ready += 1
 				_expect(slot_exists and slot_renderable, "activation-ready slot lacks valid renderable resource: %s" % role)
 				_expect(bool(per_role_validation.get("animation_contract_ready", false)), "activation-ready slot lacks animation contract: %s" % role)
+				_expect(int(per_role_validation.get("animation_contract_player_count", 0)) >= 1, "activation-ready slot lacks one complete AnimationPlayer: %s" % role)
+				_expect(not str(per_role_validation.get("animation_contract_player_path", "")).is_empty(), "activation-ready slot lacks selected AnimationPlayer path: %s" % role)
+				_expect(int(per_role_validation.get("animation_root_transform_track_count", -1)) == 0, "activation-ready slot contains scene-root transform animation: %s" % role)
 			if final_active:
 				counted_active += 1
 				_expect(activation_ready, "role-specific GLB active without activation-ready production contract: %s" % role)
@@ -154,7 +158,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DProductionModelStateSmoke] PASS - production slot existence, renderability, animation readiness, spawned-role state, and active GLB state remain distinct and consistent")
+		print("[Planar3DProductionModelStateSmoke] PASS - production slot existence, renderability, single-player/root-safe animation readiness, spawned-role state, and active GLB state remain consistent")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

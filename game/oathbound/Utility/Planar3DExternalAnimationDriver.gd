@@ -8,6 +8,8 @@ extends RefCounted
 ## attack clip is sampled at that progress instead of being allowed to free-run and drift
 ## away from the hitbox/damage timeline.
 
+const PRODUCTION_MODEL_VALIDATOR = preload("res://Utility/Planar3DProductionModelValidator.gd")
+
 const IDLE_CLIPS: Array[String] = ["Idle", "idle"]
 const LOCOMOTION_CLIPS: Array[String] = ["Jog", "Run", "Walk", "walk"]
 const ATTACK_CLIPS: Array[String] = ["Sword_Attack", "SwordAttack", "Attack", "attack"]
@@ -23,12 +25,15 @@ static func sync(visual_root: Node, source_actor: Node2D, speed: float) -> Dicti
 		"progress": -1.0,
 		"sample_seconds": -1.0,
 		"player_found": false,
+		"player_path": "",
 	}
-	var player := _find_animation_player(visual_root)
+	var imported_root := _imported_scene_root(visual_root)
+	var player := _find_contract_animation_player(visual_root, imported_root)
 	if player == null:
-		state["mode"] = "missing_animation_player"
+		state["mode"] = "missing_contract_animation_player"
 		return state
 	state["player_found"] = true
+	state["player_path"] = str(imported_root.get_path_to(player)) if imported_root != null else str(player.get_path())
 
 	var source_animation := _source_animation_name(source_actor)
 	var attacking := _source_attack_active(source_actor) or _contains_any(source_animation, ATTACK_STATE_TOKENS)
@@ -96,7 +101,7 @@ static func _exact_source_attack_progress(source_actor: Node2D) -> Dictionary:
 	# Some legacy enemies expose attack timing only through their existing 2D
 	# AnimationPlayer. Mirroring its position keeps the production mesh aligned with the
 	# source presentation instead of inventing an unrelated loop.
-	var source_player := _find_animation_player(source_actor)
+	var source_player := _find_any_animation_player(source_actor)
 	if source_player != null:
 		var current_name := str(source_player.current_animation)
 		if not current_name.is_empty() and _contains_any(current_name, ATTACK_STATE_TOKENS):
@@ -112,7 +117,7 @@ static func _exact_source_attack_progress(source_actor: Node2D) -> Dictionary:
 
 
 static func _source_animation_name(source_actor: Node2D) -> String:
-	var player := _find_animation_player(source_actor)
+	var player := _find_any_animation_player(source_actor)
 	if player == null:
 		return ""
 	return str(player.current_animation).to_lower()
@@ -145,13 +150,35 @@ static func _contains_any(value: String, needles: Array[String]) -> bool:
 	return false
 
 
-static func _find_animation_player(node: Node) -> AnimationPlayer:
+static func _imported_scene_root(visual_root: Node) -> Node:
+	if visual_root == null:
+		return null
+	var imported := visual_root.get_node_or_null("ImportedModel")
+	return imported if imported != null else visual_root
+
+
+static func _find_contract_animation_player(node: Node, scene_root: Node) -> AnimationPlayer:
+	if node == null:
+		return null
+	for child: Node in node.get_children():
+		if child is AnimationPlayer:
+			var player := child as AnimationPlayer
+			var inspection_value: Variant = PRODUCTION_MODEL_VALIDATOR.inspect_animation_player(player, scene_root)
+			if inspection_value is Dictionary and bool((inspection_value as Dictionary).get("contract_ready", false)):
+				return player
+		var nested := _find_contract_animation_player(child, scene_root)
+		if nested != null:
+			return nested
+	return null
+
+
+static func _find_any_animation_player(node: Node) -> AnimationPlayer:
 	if node == null:
 		return null
 	for child: Node in node.get_children():
 		if child is AnimationPlayer:
 			return child as AnimationPlayer
-		var nested := _find_animation_player(child)
+		var nested := _find_any_animation_player(child)
 		if nested != null:
 			return nested
 	return null

@@ -14,7 +14,7 @@ The current Hushiro V2 runtime checks these canonical production/replacement slo
 - `Characters/CellarBilemass/cellar_bilemass.glb`
 - `Characters/HushiroWarden/hushiro_warden.glb`
 
-A path merely existing is **not** enough to displace the current presentation. The production validator requires a PackedScene/Node3D with renderable mesh geometry plus the semantic animation aliases the current shared adapter can drive. Those semantic clips must contain real 3D transform or blend-shape animation with multiple samples; marker-, event-, or visibility-only tracks do not count as production-ready character motion. `Planar3DActorVisual.gd` also rejects non-renderable external scenes at runtime, and the bridge only hides an authoritative legacy actor after a valid replacement has been built successfully.
+A path merely existing is **not** enough to displace the current presentation. The production validator requires a PackedScene/Node3D with renderable mesh geometry plus the semantic animation aliases the current shared adapter can drive. Those semantic clips must contain real 3D transform or blend-shape animation with multiple samples; marker-, event-, or visibility-only tracks do not count as production-ready character motion. The required semantic contract must exist on one runtime-compatible `AnimationPlayer`; a scene-wide union of clips spread across unrelated players is not accepted. Scene-root transform animation is also rejected for the direct-GLB path because it could visually move the imported model away from the authoritative planar proxy. `Planar3DActorVisual.gd` additionally rejects non-renderable external scenes at runtime, and the bridge only hides an authoritative legacy actor after a valid replacement has been built successfully.
 
 If a production slot is absent or rejected, Hushiro V2 falls back by role:
 
@@ -29,11 +29,11 @@ Runtime diagnostics intentionally distinguish five production-model states:
 
 1. **slot exists** — a resource is present at the canonical path;
 2. **slot renderable** — it instantiates as a Node3D and contains real mesh geometry;
-3. **activation ready** — it also contains the semantic animation aliases and pose-bearing tracks required by the current runtime adapter;
+3. **activation ready** — one compatible `AnimationPlayer` contains the required semantic pose clips and the scene has no direct scene-root transform animation;
 4. **role spawned** — that semantic actor role currently has a live presentation actor;
 5. **production model active** — the spawned actor actually accepted and is rendering the role-specific GLB.
 
-This distinction prevents an empty, malformed, static, marker-only, or rejected file from being reported as a successful production-art handoff or silently replacing a proven animated fallback.
+Diagnostics also expose the selected contract-player path, contract-player count, root-transform-track count, and live production-animation state. This prevents an empty, malformed, static, marker-only, split-player, root-moving, or otherwise rejected file from being reported as a successful production-art handoff or silently replacing a proven animated fallback.
 
 ## Automated third-party intake
 
@@ -81,11 +81,15 @@ The current direct production-GLB adapter requires these semantic aliases before
 - locomotion: one of `Jog`, `Run`, `Walk`, or `walk`
 - attack: one of `Sword_Attack`, `SwordAttack`, `Attack`, or `attack`
 
-Each required semantic clip must include at least one real 3D position, rotation, scale, or blend-shape track with at least two key samples. Merely naming three clips correctly while animating only visibility, events, audio, or markers is intentionally rejected because it would make a final model structurally “animated” but visually static in combat.
+Each required semantic clip must include at least one real 3D position, rotation, scale, or blend-shape track with at least two key samples. Merely naming three clips correctly while animating only visibility, events, audio, or markers is intentionally rejected because it would make a final model structurally “animated” but visually static in combat. The three required semantics must be present as usable pose clips on the same `AnimationPlayer`, matching the runtime driver that will actually play them.
+
+For attacks, the imported clip is presentation only. When the authoritative planar actor exposes `_attack_profile` + `_attack_elapsed`, the V2 production-animation driver samples the imported Attack clip at the exact normalized source progress and pauses it at that sample; the GLB is not allowed to free-run ahead of or behind the hitbox/damage timeline. Legacy enemies that expose their existing attack timeline only through a source `AnimationPlayer` mirror that source clip progress instead. Idle/locomotion/death clips may play continuously because they do not own combat timing. If an attack source exposes no exact timing yet, diagnostics explicitly report the free-play fallback instead of inventing authoritative progress.
 
 The visible motion inside those clips remains role-specific. For example, a Hound may use a bite animation and an Archer may use a shot animation while exposing the stable runtime alias `Attack`. Hurt/death clips are optional for activation today but should use recognizable names (`Hurt`/`Hit`/`Stagger`, `Death`/`Dying`) so the adapter can use them when present.
 
-These aliases describe the current direct-GLB contract, not a permanent limitation on the animation pipeline. If Oathbound later moves a role to a separate retargeted animation library, the validator and adapter must change together rather than letting a static mesh silently become production-authoritative.
+Direct scene-root position/rotation/scale animation is not accepted in a canonical production slot. The presenter itself mirrors the authoritative planar actor's location and facing; allowing a GLB animation to also move its scene root would create visual drift/double motion. This rule intentionally does **not** guess at final root-bone/retargeting policy before real production rigs exist. If a final rig uses root-bone motion, review and adapt that asset deliberately rather than weakening the general bridge contract silently.
+
+These aliases describe the current direct-GLB contract, not a permanent limitation on the animation pipeline. If Oathbound later moves a role to a separate retargeted animation library, the validator and adapter must change together rather than letting a static or timing-independent mesh silently become production-authoritative.
 
 The zero-cost bootstrap uses Quaternius' CC0 Universal Base Characters and Universal Animation Library as audited references. These files are staged under `ThirdParty/` rather than pretending that the stock character is Akio.
 

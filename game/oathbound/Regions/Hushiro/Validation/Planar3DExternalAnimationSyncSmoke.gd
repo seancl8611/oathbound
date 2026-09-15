@@ -1,7 +1,8 @@
 extends Node
 
 ## Proves that a final Hushiro GLB mirrors authoritative attack progress instead of
-## free-running independently from the planar hitbox/damage timeline.
+## free-running independently from the planar hitbox/damage timeline. It also proves the
+## runtime skips unrelated AnimationPlayers rather than assuming the first one owns combat.
 
 const PRESENTER_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroStandardEnemyActorVisualV2.gd")
 const TEST_ACTOR_SCRIPT = preload("res://Regions/Hushiro/Validation/Planar3DExternalAnimationTestActor.gd")
@@ -59,14 +60,18 @@ func _run() -> void:
 	_expect(str(state.get("mode", "")) == "source_progress", "attack did not enter source-progress mode")
 	_expect(str(state.get("source", "")) == "attack_elapsed", "attack did not use authoritative elapsed/profile timing")
 	_expect(str(state.get("clip", "")) == "Attack", "attack semantic clip was not selected")
+	_expect(str(state.get("player_path", "")).ends_with("GameplayAnimationPlayer"), "runtime did not skip the unrelated first AnimationPlayer")
 	_expect(absf(float(state.get("progress", -1.0)) - 0.25) < 0.01, "25% attack progress was not mirrored")
 	_expect(absf(float(state.get("sample_seconds", -1.0)) - 0.50) < 0.02, "25% attack sample did not seek the 2-second clip to 0.5s")
-	var imported_player := _first_animation_player(visual)
+	var imported_player := _find_animation_player_named(visual, "GameplayAnimationPlayer")
 	if imported_player == null:
-		_fail("active production fixture lost its AnimationPlayer")
+		_fail("active production fixture lost its contract AnimationPlayer")
 	else:
 		_expect(not imported_player.is_playing(), "source-progress attack clip should be paused after deterministic seek")
 		_expect(absf(imported_player.current_animation_position - 0.50) < 0.02, "AnimationPlayer position drifted from 25% authoritative progress")
+	var decoy_player := _find_animation_player_named(visual, "DecorativeAnimationPlayer")
+	if decoy_player != null:
+		_expect(str(decoy_player.current_animation).is_empty(), "unrelated decorative AnimationPlayer was incorrectly driven")
 
 	actor.set("_attack_elapsed", 0.75)
 	visual.call("sync_from_source", 0.016)
@@ -127,8 +132,29 @@ func _save_model() -> bool:
 	root.add_child(body)
 	body.owner = root
 
+	# This player deliberately appears first and has all the right names but no pose tracks.
+	# Runtime selection must ignore it and choose the later contract-compatible player.
+	var decorative_player := AnimationPlayer.new()
+	decorative_player.name = "DecorativeAnimationPlayer"
+	root.add_child(decorative_player)
+	decorative_player.owner = root
+	var decorative_library := AnimationLibrary.new()
+	for clip_name: String in ["Idle", "Run", "Attack"]:
+		var decorative_animation := Animation.new()
+		decorative_animation.length = 1.0
+		var decorative_track := decorative_animation.add_track(Animation.TYPE_VALUE)
+		decorative_animation.track_set_path(decorative_track, NodePath("Body:visible"))
+		decorative_animation.track_insert_key(decorative_track, 0.0, true)
+		decorative_animation.track_insert_key(decorative_track, 1.0, true)
+		if decorative_library.add_animation(StringName(clip_name), decorative_animation) != OK:
+			root.free()
+			return false
+	if decorative_player.add_animation_library(&"", decorative_library) != OK:
+		root.free()
+		return false
+
 	var player := AnimationPlayer.new()
-	player.name = "AnimationPlayer"
+	player.name = "GameplayAnimationPlayer"
 	root.add_child(player)
 	player.owner = root
 	var library := AnimationLibrary.new()
@@ -166,11 +192,13 @@ func _animation_state(visual: Node3D) -> Dictionary:
 	return (state_value as Dictionary).duplicate(true)
 
 
-func _first_animation_player(node: Node) -> AnimationPlayer:
+func _find_animation_player_named(node: Node, target_name: String) -> AnimationPlayer:
+	if node == null:
+		return null
 	for child: Node in node.get_children():
-		if child is AnimationPlayer:
+		if child is AnimationPlayer and child.name == target_name:
 			return child as AnimationPlayer
-		var nested := _first_animation_player(child)
+		var nested := _find_animation_player_named(child, target_name)
 		if nested != null:
 			return nested
 	return null
@@ -183,7 +211,7 @@ func _cleanup() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DExternalAnimationSyncSmoke] PASS - production attack clips sample authoritative elapsed or source AnimationPlayer progress while locomotion/idle remain free playback")
+		print("[Planar3DExternalAnimationSyncSmoke] PASS - compatible AnimationPlayer selection and source-progress attack sampling preserve planar timing authority")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

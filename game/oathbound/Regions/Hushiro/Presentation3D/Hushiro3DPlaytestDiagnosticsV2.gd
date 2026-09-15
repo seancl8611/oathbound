@@ -44,6 +44,9 @@ func _snapshot_for_bridge(bridge: Node) -> Dictionary:
 	snapshot["production_model_activation_ready_by_role"] = production_activation.duplicate(true)
 	snapshot["production_model_validation_state_by_role"] = _validation_states(production_validation)
 	snapshot["production_model_semantic_clips_by_role"] = _semantic_clips(production_validation)
+	snapshot["production_model_contract_player_path_by_role"] = _validation_field_map(production_validation, "animation_contract_player_path", "")
+	snapshot["production_model_contract_player_count_by_role"] = _validation_field_map(production_validation, "animation_contract_player_count", 0)
+	snapshot["production_model_root_transform_track_count_by_role"] = _validation_field_map(production_validation, "animation_root_transform_track_count", 0)
 	snapshot["production_model_spawned_by_role"] = production_spawned.duplicate(true)
 	snapshot["production_model_active_count"] = int(state.get("production_model_active_count", 0))
 	snapshot["production_model_active_by_role"] = production_active.duplicate(true)
@@ -76,3 +79,12 @@ func _semantic_clips(validation_by_role: Dictionary) -> Dictionary:
 		var clips_value: Variant = (validation_value as Dictionary).get("semantic_animation_clips", {})
 		clips_by_role[role] = (clips_value as Dictionary).duplicate(true) if clips_value is Dictionary else {}
 	return clips_by_role
+
+
+func _validation_field_map(validation_by_role: Dictionary, field: String, fallback: Variant) -> Dictionary:
+	var values: Dictionary = {}
+	for role_value: Variant in validation_by_role.keys():
+		var role := str(role_value)
+		var validation_value: Variant = validation_by_role.get(role_value, {})
+		values[role] = (validation_value as Dictionary).get(field, fallback) if validation_value is Dictionary else fallback
+	return values
