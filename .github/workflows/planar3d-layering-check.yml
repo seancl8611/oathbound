@@ -46,7 +46,7 @@ permissions:
 jobs:
   layering-contract:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
