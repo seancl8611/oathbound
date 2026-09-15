@@ -16,6 +16,10 @@ func _snapshot_for_bridge(bridge: Node) -> Dictionary:
 	var role_counts := role_counts_value as Dictionary if role_counts_value is Dictionary else {}
 	var production_exists_value: Variant = state.get("production_model_slot_exists_by_role", state.get("production_model_ready_by_role", {}))
 	var production_exists := production_exists_value as Dictionary if production_exists_value is Dictionary else {}
+	var production_renderable_value: Variant = state.get("production_model_slot_renderable_by_role", {})
+	var production_renderable := production_renderable_value as Dictionary if production_renderable_value is Dictionary else {}
+	var production_validation_value: Variant = state.get("production_model_validation_by_role", {})
+	var production_validation := production_validation_value as Dictionary if production_validation_value is Dictionary else {}
 	var production_spawned_value: Variant = state.get("production_model_spawned_by_role", {})
 	var production_spawned := production_spawned_value as Dictionary if production_spawned_value is Dictionary else {}
 	var production_active_value: Variant = state.get("production_model_active_by_role", {})
@@ -30,6 +34,9 @@ func _snapshot_for_bridge(bridge: Node) -> Dictionary:
 	snapshot["production_model_slot_count"] = int(state.get("production_model_slot_count", 0))
 	snapshot["production_model_slot_exists_count"] = int(state.get("production_model_slot_exists_count", state.get("production_model_ready_count", 0)))
 	snapshot["production_model_slot_exists_by_role"] = production_exists.duplicate(true)
+	snapshot["production_model_slot_renderable_count"] = int(state.get("production_model_slot_renderable_count", 0))
+	snapshot["production_model_slot_renderable_by_role"] = production_renderable.duplicate(true)
+	snapshot["production_model_validation_state_by_role"] = _validation_states(production_validation)
 	snapshot["production_model_spawned_by_role"] = production_spawned.duplicate(true)
 	snapshot["production_model_active_count"] = int(state.get("production_model_active_count", 0))
 	snapshot["production_model_active_by_role"] = production_active.duplicate(true)
@@ -39,3 +46,12 @@ func _snapshot_for_bridge(bridge: Node) -> Dictionary:
 	snapshot["environment_composition_revision"] = int(environment_state.get("composition_revision", 0))
 	snapshot["environment_quiet_center"] = bool(environment_state.get("quiet_center", false))
 	return snapshot
+
+
+func _validation_states(validation_by_role: Dictionary) -> Dictionary:
+	var states: Dictionary = {}
+	for role_value: Variant in validation_by_role.keys():
+		var role := str(role_value)
+		var validation_value: Variant = validation_by_role.get(role_value, {})
+		states[role] = str((validation_value as Dictionary).get("state", "unknown")) if validation_value is Dictionary else "unknown"
+	return states

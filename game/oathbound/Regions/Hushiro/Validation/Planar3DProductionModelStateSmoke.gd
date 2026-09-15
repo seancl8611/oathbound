@@ -1,8 +1,8 @@
 extends Node
 
 ## Validates the V2 production-GLB handoff diagnostics without assuming that any final
-## asset has landed yet. A canonical path existing, a role being spawned, and a final GLB
-## actually being accepted are deliberately separate states.
+## asset has landed yet. A canonical path existing, being structurally renderable, a role
+## being spawned, and a final GLB actually being accepted are deliberately separate states.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridgeV2.gd")
 const ROLES: Array[String] = ["player", "swordsman", "hound", "hollow", "archer", "bilemass", "warden"]
@@ -71,31 +71,57 @@ func _run() -> void:
 
 	_expect(int(state.get("production_model_slot_count", 0)) == ROLES.size(), "canonical production model slot count drifted")
 	var exists_value: Variant = state.get("production_model_slot_exists_by_role", {})
+	var renderable_value: Variant = state.get("production_model_slot_renderable_by_role", {})
+	var validation_value: Variant = state.get("production_model_validation_by_role", {})
 	var spawned_value: Variant = state.get("production_model_spawned_by_role", {})
 	var active_value: Variant = state.get("production_model_active_by_role", {})
-	if not (exists_value is Dictionary and spawned_value is Dictionary and active_value is Dictionary):
-		_fail("production model existence/spawned/active maps unavailable")
+	if not (exists_value is Dictionary and renderable_value is Dictionary and validation_value is Dictionary and spawned_value is Dictionary and active_value is Dictionary):
+		_fail("production model existence/renderable/validation/spawned/active maps unavailable")
 	else:
 		var exists_map := exists_value as Dictionary
+		var renderable_map := renderable_value as Dictionary
+		var validation_map := validation_value as Dictionary
 		var spawned_map := spawned_value as Dictionary
 		var active_map := active_value as Dictionary
 		var counted_exists := 0
+		var counted_renderable := 0
 		var counted_active := 0
 		for role: String in ROLES:
 			_expect(exists_map.has(role), "slot-existence diagnostics missing role %s" % role)
+			_expect(renderable_map.has(role), "slot-renderable diagnostics missing role %s" % role)
+			_expect(validation_map.has(role), "slot validation diagnostics missing role %s" % role)
 			_expect(spawned_map.has(role), "spawn diagnostics missing role %s" % role)
 			_expect(active_map.has(role), "active-GLB diagnostics missing role %s" % role)
 			_expect(bool(spawned_map.get(role, false)), "representative role was not marked spawned: %s" % role)
+
 			var slot_exists := bool(exists_map.get(role, false))
+			var slot_renderable := bool(renderable_map.get(role, false))
 			var final_active := bool(active_map.get(role, false))
+			var per_role_validation_value: Variant = validation_map.get(role, {})
+			var per_role_validation := per_role_validation_value as Dictionary if per_role_validation_value is Dictionary else {}
+			_expect(str(per_role_validation.get("path", "")).ends_with(".glb"), "canonical validation path missing/invalid for %s" % role)
+			_expect(bool(per_role_validation.get("exists", false)) == slot_exists, "validator existence disagrees for %s" % role)
+			_expect(bool(per_role_validation.get("renderable", false)) == slot_renderable, "validator renderability disagrees for %s" % role)
+
 			if slot_exists:
 				counted_exists += 1
+				# Once somebody lands a canonical final-art file, CI must reject malformed/empty
+				# scene content rather than silently allowing the runtime fallback to mask it.
+				_expect(slot_renderable, "canonical production slot exists but is not renderable: %s state=%s" % [role, str(per_role_validation.get("state", "unknown"))])
+			else:
+				_expect(str(per_role_validation.get("state", "")) == "absent", "missing production slot did not report absent: %s" % role)
+			if slot_renderable:
+				counted_renderable += 1
+				_expect(slot_exists, "renderable slot reported without canonical resource: %s" % role)
 			if final_active:
 				counted_active += 1
 				_expect(slot_exists, "role-specific GLB active without canonical slot resource: %s" % role)
+				_expect(slot_renderable, "role-specific GLB active while validator reports non-renderable: %s" % role)
 			if not slot_exists:
 				_expect(not final_active, "missing production slot incorrectly reported active: %s" % role)
+
 		_expect(int(state.get("production_model_slot_exists_count", -1)) == counted_exists, "production model existence count disagrees with role map")
+		_expect(int(state.get("production_model_slot_renderable_count", -1)) == counted_renderable, "production model renderable count disagrees with role map")
 		_expect(int(state.get("production_model_active_count", -1)) == counted_active, "production model active count disagrees with role map")
 
 	# Compatibility `ready` fields remain an existence alias until old telemetry consumers
@@ -117,7 +143,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DProductionModelStateSmoke] PASS - production slot existence, spawned-role state, and active GLB state remain distinct and consistent")
+		print("[Planar3DProductionModelStateSmoke] PASS - production slot existence, renderability, spawned-role state, and active GLB state remain distinct and consistent")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

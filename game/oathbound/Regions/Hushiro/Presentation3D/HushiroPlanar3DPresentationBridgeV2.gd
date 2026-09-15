@@ -7,6 +7,7 @@ extends "res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.
 const HUSHIRO_ENVIRONMENT_V2_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/Hushiro3DEnvironmentV2.gd")
 const HUSHIRO_CURATED_HUMAN_V2_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroCuratedActorVisualV2.gd")
 const HUSHIRO_STANDARD_ENEMY_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroStandardEnemyActorVisual.gd")
+const PRODUCTION_MODEL_VALIDATOR = preload("res://Utility/Planar3DProductionModelValidator.gd")
 
 const HUSHIRO_V2_MODEL_PATHS: Dictionary = {
 	"player": "res://Art3D/Characters/Akio/akio.glb",
@@ -17,6 +18,11 @@ const HUSHIRO_V2_MODEL_PATHS: Dictionary = {
 	"bilemass": "res://Art3D/Characters/CellarBilemass/cellar_bilemass.glb",
 	"warden": "res://Art3D/Characters/HushiroWarden/hushiro_warden.glb",
 }
+
+# Production files are immutable for one running build, so expensive scene inspection is
+# cached lazily the first time diagnostics/CI ask for it. Live actor selection still uses
+# the normal presenter path and never depends on this observational cache.
+var _production_model_validation_cache: Dictionary = {}
 
 
 func _ready() -> void:
@@ -32,6 +38,7 @@ func _ready() -> void:
 	# The bottom-left migration badge was useful during engineering but visibly polluted
 	# the actual acceptance screenshot. Diagnostics remain in telemetry instead.
 	show_debug_label = false
+	_production_model_validation_cache.clear()
 	super._ready()
 
 	# Emit one region/revision-owned startup marker after the shared bridge has initialized.
@@ -91,25 +98,35 @@ func get_presentation_state() -> Dictionary:
 	var unknown_hushiro_count := 0
 	var role_counts: Dictionary = {}
 
-	# Keep three production-model concepts separate in diagnostics:
+	# Keep production-model concepts separate in diagnostics:
 	# - slot exists: a resource is present at the canonical path;
+	# - slot renderable: that resource can instantiate a Node3D with mesh geometry;
 	# - spawned: this role currently has a live presentation actor;
 	# - active: that actor actually accepted/rendered the role-specific GLB.
 	# A file existing at a slot is not proof that it is renderable or currently in use.
 	var production_model_slot_exists_by_role: Dictionary = {}
+	var production_model_slot_renderable_by_role: Dictionary = {}
+	var production_model_validation_by_role: Dictionary = {}
 	var production_model_spawned_by_role: Dictionary = {}
 	var production_model_active_by_role: Dictionary = {}
 	var production_model_slot_exists_count := 0
+	var production_model_slot_renderable_count := 0
 	var production_model_active_count := 0
 	for role_value: Variant in HUSHIRO_V2_MODEL_PATHS.keys():
 		var slot_role := str(role_value)
 		var model_path := str(HUSHIRO_V2_MODEL_PATHS.get(slot_role, ""))
-		var slot_exists := not model_path.is_empty() and ResourceLoader.exists(model_path)
+		var validation := _production_model_validation_for_role(slot_role, model_path)
+		var slot_exists := bool(validation.get("exists", false))
+		var slot_renderable := bool(validation.get("renderable", false))
+		production_model_validation_by_role[slot_role] = validation
 		production_model_slot_exists_by_role[slot_role] = slot_exists
+		production_model_slot_renderable_by_role[slot_role] = slot_renderable
 		production_model_spawned_by_role[slot_role] = false
 		production_model_active_by_role[slot_role] = false
 		if slot_exists:
 			production_model_slot_exists_count += 1
+		if slot_renderable:
+			production_model_slot_renderable_count += 1
 
 	for visual_value: Variant in _actor_visuals.values():
 		if not (visual_value is Node3D) or not is_instance_valid(visual_value as Node3D):
@@ -140,6 +157,9 @@ func get_presentation_state() -> Dictionary:
 	state["production_model_slot_count"] = HUSHIRO_V2_MODEL_PATHS.size()
 	state["production_model_slot_exists_count"] = production_model_slot_exists_count
 	state["production_model_slot_exists_by_role"] = production_model_slot_exists_by_role
+	state["production_model_slot_renderable_count"] = production_model_slot_renderable_count
+	state["production_model_slot_renderable_by_role"] = production_model_slot_renderable_by_role
+	state["production_model_validation_by_role"] = production_model_validation_by_role
 	state["production_model_spawned_by_role"] = production_model_spawned_by_role
 	state["production_model_active_count"] = production_model_active_count
 	state["production_model_active_by_role"] = production_model_active_by_role
@@ -150,3 +170,20 @@ func get_presentation_state() -> Dictionary:
 	state["production_model_ready_by_role"] = production_model_slot_exists_by_role.duplicate(true)
 	state["presentation_revision"] = 2
 	return state
+
+
+func _production_model_validation_for_role(role: String, model_path: String) -> Dictionary:
+	var cached_value: Variant = _production_model_validation_cache.get(role, null)
+	if cached_value is Dictionary:
+		var cached := cached_value as Dictionary
+		if str(cached.get("path", "")) == model_path:
+			return cached.duplicate(true)
+	var validation_value: Variant = PRODUCTION_MODEL_VALIDATOR.inspect_scene(model_path)
+	var validation := validation_value as Dictionary if validation_value is Dictionary else {
+		"path": model_path,
+		"exists": false,
+		"renderable": false,
+		"state": "validator_error",
+	}
+	_production_model_validation_cache[role] = validation.duplicate(true)
+	return validation.duplicate(true)
