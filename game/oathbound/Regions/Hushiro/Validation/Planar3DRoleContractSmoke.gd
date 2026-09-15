@@ -2,7 +2,8 @@ extends Node
 
 ## Regression proof for the region-neutral actor-role handoff into Planar3D presentation.
 ## Hushiro may keep its legacy `hushiro_enemy_type` metadata for compatibility, but the
-## presentation bridge must prefer the shared `presentation_role` contract.
+## presentation bridge must prefer and preserve arbitrary shared `presentation_role`
+## values so future region roles are not collapsed into generic `enemy`.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd")
 const HUSHIRO_ENEMY_CONTRACT = preload("res://Utility/HushiroEnemyContract.gd")
@@ -40,16 +41,38 @@ func _run() -> void:
 	add_child(hound)
 	_expect(str(bridge.call("_role_for", hound)) == "hound", "Planar3D hound role resolution fell back to Hushiro-specific metadata")
 
+	# Prove the shared bridge is not hard-coded to the two roles already converted in the
+	# vertical slice. Archer is a real Hushiro role and exercises arbitrary semantic-role
+	# pass-through that later Yomori/Kagutsuchi presenters will also depend on.
+	var archer := Node2D.new()
+	archer.name = "PresentationRoleArcher"
+	add_child(archer)
+	HUSHIRO_ENEMY_CONTRACT.apply(archer, "archer")
+	await get_tree().process_frame
+	_expect(str(archer.get_meta("presentation_role", "")) == "archer", "Hushiro contract did not publish shared archer presentation_role")
+	archer.set_meta("hushiro_enemy_type", "hound")
+	_expect(str(bridge.call("_role_for", archer)) == "archer", "Planar3D collapsed arbitrary shared archer role instead of preserving it")
+
+	# `enemy_type` remains a region-neutral fallback for actors that have not adopted the
+	# explicit presentation_role key yet. It must also preserve arbitrary role names.
+	var future_role := Node2D.new()
+	future_role.name = "FutureRegionalController"
+	future_role.set_meta("enemy_type", "controller")
+	add_child(future_role)
+	_expect(str(bridge.call("_role_for", future_role)) == "controller", "Planar3D collapsed shared enemy_type fallback into generic enemy")
+
 	bridge.free()
 	swordsman.queue_free()
 	hound.queue_free()
+	archer.queue_free()
+	future_role.queue_free()
 	await get_tree().process_frame
 	_finish()
 
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DRoleContractSmoke] PASS - Hushiro publishes shared presentation_role and Planar3D prefers it over legacy region metadata")
+		print("[Planar3DRoleContractSmoke] PASS - shared presentation roles preserve swordsman, hound, archer and future regional identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
