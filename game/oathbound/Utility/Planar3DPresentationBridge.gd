@@ -283,8 +283,35 @@ func _has_valid_actor_visual(actor_id: Variant) -> bool:
 		return false
 	var visual_value: Variant = _actor_visuals.get(actor_id)
 	if visual_value is Node3D and is_instance_valid(visual_value as Node3D):
-		return true
+		var visual := visual_value as Node3D
+		if _actor_visual_is_ready(visual):
+			return true
+		visual.queue_free()
 	_actor_visuals.erase(actor_id)
+	return false
+
+
+func _actor_visual_is_ready(visual: Node3D) -> bool:
+	if visual == null or not is_instance_valid(visual):
+		return false
+	if visual.has_method("is_visual_ready"):
+		return bool(visual.call("is_visual_ready"))
+
+	# Shared and current region presenters expose these internal build authorities. They
+	# are checked before the geometry fallback so an intentionally empty presenter cannot
+	# hide the authoritative 2D actor merely because a Node3D instance exists.
+	if _has_property(visual, "_external_model_active") and bool(visual.get("_external_model_active")):
+		return true
+	if _has_property(visual, "_rig_root"):
+		var rig_value: Variant = visual.get("_rig_root")
+		if rig_value is Node3D and is_instance_valid(rig_value as Node3D):
+			return true
+
+	# Preserve compatibility for future custom presenters that do not inherit the shared
+	# actor visual but do build real renderable GeometryInstance3D descendants.
+	for candidate: Node in visual.find_children("*", "GeometryInstance3D", true, false):
+		if candidate is GeometryInstance3D and is_instance_valid(candidate):
+			return true
 	return false
 
 
@@ -296,10 +323,18 @@ func _add_actor_visual(actor: Node2D) -> void:
 	if visual == null:
 		return
 	visual.name = "Actor3D_%s" % str(actor.get_instance_id())
-	_world_root.add_child(visual)
+
+	# Configure before entering the SceneTree. Planar3DActorVisual._ready() builds the rig,
+	# so configuring afterwards would construct a default enemy once and immediately tear
+	# it down/rebuild it for the real role/source/model path.
 	if visual.has_method("configure"):
 		visual.call("configure", role, actor)
+	_world_root.add_child(visual)
 	_decorate_actor_visual(visual, actor, role)
+
+	if not _actor_visual_is_ready(visual):
+		visual.queue_free()
+		return
 	_actor_visuals[actor.get_instance_id()] = visual
 
 
