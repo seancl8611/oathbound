@@ -164,7 +164,9 @@ func _apply_actor_ground_lift() -> void:
 			(visual_value as Node3D).position.y = safe_lift
 
 
-func get_layering_state_for_test() -> Dictionary:
+## Runtime-neutral presentation snapshot used by diagnostics as well as CI validation.
+## Keep this observational: callers must not need to mutate bridge or combat state.
+func get_presentation_state() -> Dictionary:
 	var room := get_parent()
 	var background: CanvasItem = null
 	var scenery: CanvasItem = null
@@ -271,6 +273,11 @@ func get_layering_state_for_test() -> Dictionary:
 		"texture_mouse_passthrough": texture_mouse_passthrough,
 		"environment_state": environment_state,
 	}
+
+
+## Compatibility alias for existing smoke tests and older tooling.
+func get_layering_state_for_test() -> Dictionary:
+	return get_presentation_state()
 
 
 func _count_named_descendants(node: Node, target_name: StringName) -> int:
