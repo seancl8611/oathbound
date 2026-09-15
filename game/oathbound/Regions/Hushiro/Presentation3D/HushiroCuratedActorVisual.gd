@@ -7,7 +7,8 @@ extends "res://Utility/Planar3DActorVisual.gd"
 ## Priority remains:
 ##   final role-specific GLB -> curated CC0 humanoid -> procedural fallback.
 ## The authoritative CharacterBody2D still owns every gameplay decision. Imported attack
-## animation is sampled from the existing 2D action progress; it never owns hit timing.
+## animation is sampled from the existing 2D action progress; dash/locomotion only mirror
+## source state and never own movement, invulnerability, hit timing, or root motion.
 
 const CURATED_HUMANOID_PATH := "res://Art3D/ThirdParty/Quaternius/UniversalBaseCharacters/superhero_male_reference.glb"
 const CURATED_ANIMATION_LIBRARY_PATH := "res://Art3D/ThirdParty/Quaternius/UniversalAnimationLibrary/universal_animation_library.glb"
@@ -30,6 +31,7 @@ var _curated_animation_remapped_tracks := 0
 var _curated_animation_discarded_tracks := 0
 var _curated_idle_clip := StringName()
 var _curated_locomotion_clip := StringName()
+var _curated_dash_clip := StringName()
 var _curated_attack_clip := StringName()
 var _curated_hurt_clip := StringName()
 var _curated_death_clip := StringName()
@@ -90,9 +92,12 @@ func get_curated_animation_state_for_test() -> Dictionary:
 		"discarded_tracks": _curated_animation_discarded_tracks,
 		"idle_clip": str(_curated_idle_clip),
 		"locomotion_clip": str(_curated_locomotion_clip),
+		"dash_clip": str(_curated_dash_clip),
 		"attack_clip": str(_curated_attack_clip),
 		"hurt_clip": str(_curated_hurt_clip),
 		"death_clip": str(_curated_death_clip),
+		"dash_mode": "authored_clip" if _curated_dash_clip != StringName() else "locomotion_lean_fallback",
+		"attack_mode": "authored_source_progress" if _curated_attack_clip != StringName() else "manual_source_progress",
 	}
 
 
@@ -140,8 +145,15 @@ func _try_curated_humanoid() -> bool:
 		_sync_curated_pose()
 
 	print(
-		"[HushiroCuratedActorVisual] %s using verified CC0 humanoid tier (%d bones) animation=%s clips=%d"
-		% [actor_role, skeleton.get_bone_count(), get_animation_tier(), _curated_animation_clip_count]
+		"[HushiroCuratedActorVisual] %s using verified CC0 humanoid tier (%d bones) animation=%s clips=%d dash=%s attack=%s"
+		% [
+			actor_role,
+			skeleton.get_bone_count(),
+			get_animation_tier(),
+			_curated_animation_clip_count,
+			str(get_curated_animation_state_for_test().get("dash_mode", "")),
+			str(get_curated_animation_state_for_test().get("attack_mode", "")),
+		]
 	)
 	return true
 
@@ -154,6 +166,7 @@ func _reset_animation_runtime() -> void:
 	_curated_animation_discarded_tracks = 0
 	_curated_idle_clip = StringName()
 	_curated_locomotion_clip = StringName()
+	_curated_dash_clip = StringName()
 	_curated_attack_clip = StringName()
 	_curated_hurt_clip = StringName()
 	_curated_death_clip = StringName()
@@ -190,13 +203,14 @@ func _setup_curated_animation_library() -> bool:
 	_curated_animation_clip_count = runtime_library.get_animation_list().size()
 	_curated_idle_clip = _select_semantic_clip(runtime_library, ["idle", "stand", "breath"])
 	_curated_locomotion_clip = _select_semantic_clip(runtime_library, ["run", "jog", "walk", "locomotion", "move"])
+	_curated_dash_clip = _select_semantic_clip(runtime_library, ["dash", "dodge", "roll", "evade"])
 	_curated_attack_clip = _select_semantic_clip(runtime_library, ["sword", "attack", "slash", "melee", "strike"])
 	_curated_hurt_clip = _select_semantic_clip(runtime_library, ["hurt", "hit", "impact", "stagger"])
 	_curated_death_clip = _select_semantic_clip(runtime_library, ["death", "die", "dead"])
 
 	# Idle and locomotion are required for the authored library to become authoritative.
-	# Combat-specific clips remain optional because the deterministic manual attack pose is
-	# a safer fallback than allowing a decorative animation to invent combat timing.
+	# Action-specific clips remain optional because deterministic source-state fallbacks are
+	# safer than allowing decorative animation to invent dash or attack timing.
 	if _curated_idle_clip == StringName() or _curated_locomotion_clip == StringName():
 		player.queue_free()
 		_curated_animation_player = null
@@ -269,6 +283,7 @@ func _sync_external_animation(speed: float) -> void:
 	if not _curated_model_active:
 		super._sync_external_animation(speed)
 		return
+	_reset_curated_model_transform()
 	if _curated_animation_library_active and _sync_curated_library_animation(speed):
 		return
 	_sync_curated_pose()
@@ -281,6 +296,7 @@ func _sync_curated_library_animation(speed: float) -> bool:
 	var source_animation := _source_animation_name()
 	var dead := _source_dead() or source_animation.contains("death")
 	var hurt := _contains_any(source_animation, ["hurt", "stagger", "parried", "hit"])
+	var dashing := _contains_any(source_animation, ["dash", "dodge", "roll", "evade"])
 	var attacking := _source_attack_active() or _contains_any(source_animation, ["attack", "slash", "cleave", "thrust", "counter"])
 
 	if dead:
@@ -293,6 +309,16 @@ func _sync_curated_library_animation(speed: float) -> bool:
 			_play_curated_clip(_curated_hurt_clip, 1.0, false)
 			return true
 		return false
+	if dashing:
+		if _curated_dash_clip != StringName():
+			_play_curated_clip(_curated_dash_clip, 1.35, false)
+		else:
+			# The movement controller remains authoritative. This fallback simply gives the
+			# 0.3s source dash a lower/faster silhouette when the library has no dash clip.
+			_play_curated_clip(_curated_locomotion_clip, 1.85, false)
+			_curated_model.rotation.x = _curated_base_rotation.x - 0.20
+			_curated_model.position.y = _curated_base_position.y - 0.035
+		return true
 	if attacking:
 		if _curated_attack_clip == StringName():
 			return false
@@ -326,6 +352,13 @@ func _animation_for(clip: StringName) -> Animation:
 	if _curated_animation_player == null or clip == StringName():
 		return null
 	return _curated_animation_player.get_animation(clip)
+
+
+func _reset_curated_model_transform() -> void:
+	if _curated_model == null:
+		return
+	_curated_model.position = _curated_base_position
+	_curated_model.rotation = _curated_base_rotation
 
 
 func _find_skeleton(node: Node) -> Skeleton3D:
@@ -409,8 +442,7 @@ func _reset_curated_pose() -> void:
 	if _curated_animation_player != null:
 		_curated_animation_player.stop()
 	_curated_last_clip = StringName()
-	_curated_model.position = _curated_base_position
-	_curated_model.rotation = _curated_base_rotation
+	_reset_curated_model_transform()
 	for bone_name: Variant in _curated_base_pose_rotations.keys():
 		var bone_index := _curated_skeleton.find_bone(str(bone_name))
 		if bone_index >= 0:
@@ -441,6 +473,7 @@ func _sync_curated_pose() -> void:
 	var source_animation := _source_animation_name()
 	var dead := _source_dead() or source_animation.contains("death")
 	var hurt := _contains_any(source_animation, ["hurt", "stagger", "parried"])
+	var dashing := _contains_any(source_animation, ["dash", "dodge", "roll", "evade"])
 	var attacking := _source_attack_active() or _contains_any(source_animation, ["attack", "slash", "cleave", "thrust", "counter"])
 	var speed := _source_velocity().length()
 
@@ -451,6 +484,15 @@ func _sync_curated_pose() -> void:
 	if hurt:
 		_apply_bone_rotation("spine_03", Vector3.RIGHT, -0.22)
 		_apply_bone_rotation("pelvis", Vector3.FORWARD, sin(_motion_phase * 1.4) * 0.08)
+		return
+	if dashing:
+		# Manual fallback still mirrors source movement; it only changes the rendered pose.
+		_curated_model.rotation.x -= 0.20
+		_curated_model.position.y -= 0.035
+		var dash_stride := sin(_motion_phase * 1.45)
+		_apply_bone_rotation("thigh_l", Vector3.RIGHT, dash_stride * 0.52)
+		_apply_bone_rotation("thigh_r", Vector3.RIGHT, -dash_stride * 0.52)
+		_apply_bone_rotation("spine_03", Vector3.RIGHT, -0.12)
 		return
 	if attacking:
 		var progress := clampf(_source_action_progress(), 0.0, 1.0)
