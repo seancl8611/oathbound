@@ -2,14 +2,17 @@ extends "res://Utility/Planar3DActorVisual.gd"
 
 ## Hushiro-only middle visual tier between final Oathbound character GLBs and the
 ## procedural blockout geometry. It uses a pinned/verified CC0 Quaternius humanoid for
-## human actors while the dedicated animation-library retarget remains under validation.
+## human actors and the matching Universal Animation Library when Godot imports it.
 ##
 ## Priority remains:
 ##   final role-specific GLB -> curated CC0 humanoid -> procedural fallback.
-## The authoritative CharacterBody2D still owns every gameplay decision.
+## The authoritative CharacterBody2D still owns every gameplay decision. Imported attack
+## animation is sampled from the existing 2D action progress; it never owns hit timing.
 
 const CURATED_HUMANOID_PATH := "res://Art3D/ThirdParty/Quaternius/UniversalBaseCharacters/superhero_male_reference.glb"
+const CURATED_ANIMATION_LIBRARY_PATH := "res://Art3D/ThirdParty/Quaternius/UniversalAnimationLibrary/universal_animation_library.glb"
 const MIN_CURATED_BONES := 50
+const MIN_CURATED_ANIMATIONS := 5
 const PLAYER_HEIGHT_METERS := 1.90
 const SWORDSMAN_HEIGHT_METERS := 1.84
 
@@ -20,12 +23,25 @@ var _curated_base_pose_rotations: Dictionary = {}
 var _curated_base_position := Vector3.ZERO
 var _curated_base_rotation := Vector3.ZERO
 
+var _curated_animation_player: AnimationPlayer = null
+var _curated_animation_library_active := false
+var _curated_animation_clip_count := 0
+var _curated_animation_remapped_tracks := 0
+var _curated_animation_discarded_tracks := 0
+var _curated_idle_clip := StringName()
+var _curated_locomotion_clip := StringName()
+var _curated_attack_clip := StringName()
+var _curated_hurt_clip := StringName()
+var _curated_death_clip := StringName()
+var _curated_last_clip := StringName()
+
 
 func _rebuild_visual() -> void:
 	_curated_model_active = false
 	_curated_model = null
 	_curated_skeleton = null
 	_curated_base_pose_rotations.clear()
+	_reset_animation_runtime()
 
 	if actor_role not in ["player", "swordsman"]:
 		super._rebuild_visual()
@@ -46,12 +62,6 @@ func _rebuild_visual() -> void:
 		_build_humanoid(actor_role == "player")
 
 
-func sync_from_source(delta: float) -> void:
-	super.sync_from_source(delta)
-	if _curated_model_active:
-		_sync_curated_pose()
-
-
 func is_curated_placeholder_active() -> bool:
 	return _curated_model_active
 
@@ -62,6 +72,28 @@ func get_visual_tier() -> String:
 	if _external_model_active:
 		return "role_specific_glb"
 	return "procedural_fallback"
+
+
+func get_animation_tier() -> String:
+	if _curated_model_active and _curated_animation_library_active:
+		return "curated_animation_library"
+	if _curated_model_active:
+		return "manual_pose_adapter"
+	return "role_specific_or_procedural"
+
+
+func get_curated_animation_state_for_test() -> Dictionary:
+	return {
+		"active": _curated_animation_library_active,
+		"clip_count": _curated_animation_clip_count,
+		"remapped_tracks": _curated_animation_remapped_tracks,
+		"discarded_tracks": _curated_animation_discarded_tracks,
+		"idle_clip": str(_curated_idle_clip),
+		"locomotion_clip": str(_curated_locomotion_clip),
+		"attack_clip": str(_curated_attack_clip),
+		"hurt_clip": str(_curated_hurt_clip),
+		"death_clip": str(_curated_death_clip),
+	}
 
 
 func _try_curated_humanoid() -> bool:
@@ -95,15 +127,205 @@ func _try_curated_humanoid() -> bool:
 	_curated_base_position = model.position
 	_curated_base_rotation = model.rotation
 	_curated_model_active = true
-	# Mark as external so the base presenter does not try to drive nonexistent imported
-	# clips. Hushiro applies a small skeleton pose adapter below until retargeting is ready.
 	_external_model_active = true
 	model.set_meta("oathbound_curated_placeholder", true)
 	model.set_meta("oathbound_source_license", "CC0-1.0")
-	model.set_meta("oathbound_animation_state", "retarget_pending")
-	_sync_curated_pose()
-	print("[HushiroCuratedActorVisual] %s using verified CC0 humanoid tier (%d bones)" % [actor_role, skeleton.get_bone_count()])
+
+	_curated_animation_library_active = _setup_curated_animation_library()
+	model.set_meta(
+		"oathbound_animation_state",
+		"curated_animation_library" if _curated_animation_library_active else "manual_pose_adapter"
+	)
+	if not _curated_animation_library_active:
+		_sync_curated_pose()
+
+	print(
+		"[HushiroCuratedActorVisual] %s using verified CC0 humanoid tier (%d bones) animation=%s clips=%d"
+		% [actor_role, skeleton.get_bone_count(), get_animation_tier(), _curated_animation_clip_count]
+	)
 	return true
+
+
+func _reset_animation_runtime() -> void:
+	_curated_animation_player = null
+	_curated_animation_library_active = false
+	_curated_animation_clip_count = 0
+	_curated_animation_remapped_tracks = 0
+	_curated_animation_discarded_tracks = 0
+	_curated_idle_clip = StringName()
+	_curated_locomotion_clip = StringName()
+	_curated_attack_clip = StringName()
+	_curated_hurt_clip = StringName()
+	_curated_death_clip = StringName()
+	_curated_last_clip = StringName()
+
+
+func _setup_curated_animation_library() -> bool:
+	if _curated_model == null or _curated_skeleton == null:
+		return false
+	if not ResourceLoader.exists(CURATED_ANIMATION_LIBRARY_PATH):
+		return false
+	var source_resource := load(CURATED_ANIMATION_LIBRARY_PATH)
+	if not (source_resource is AnimationLibrary):
+		return false
+	var source_library := source_resource as AnimationLibrary
+	if source_library.get_animation_list().size() < MIN_CURATED_ANIMATIONS:
+		return false
+
+	var runtime_library := _build_runtime_animation_library(source_library)
+	if runtime_library == null or runtime_library.get_animation_list().size() < MIN_CURATED_ANIMATIONS:
+		return false
+
+	var player := AnimationPlayer.new()
+	player.name = "CuratedAnimationPlayer"
+	# Imported AnimationLibrary track paths are rewritten relative to the curated model,
+	# so the AnimationPlayer can use its parent as the animation root.
+	player.root_node = NodePath("..")
+	_curated_model.add_child(player)
+	if player.add_animation_library(&"", runtime_library) != OK:
+		player.queue_free()
+		return false
+
+	_curated_animation_player = player
+	_curated_animation_clip_count = runtime_library.get_animation_list().size()
+	_curated_idle_clip = _select_semantic_clip(runtime_library, ["idle", "stand", "breath"])
+	_curated_locomotion_clip = _select_semantic_clip(runtime_library, ["run", "jog", "walk", "locomotion", "move"])
+	_curated_attack_clip = _select_semantic_clip(runtime_library, ["sword", "attack", "slash", "melee", "strike"])
+	_curated_hurt_clip = _select_semantic_clip(runtime_library, ["hurt", "hit", "impact", "stagger"])
+	_curated_death_clip = _select_semantic_clip(runtime_library, ["death", "die", "dead"])
+
+	# Idle and locomotion are required for the authored library to become authoritative.
+	# Combat-specific clips remain optional because the deterministic manual attack pose is
+	# a safer fallback than allowing a decorative animation to invent combat timing.
+	if _curated_idle_clip == StringName() or _curated_locomotion_clip == StringName():
+		player.queue_free()
+		_curated_animation_player = null
+		return false
+	return true
+
+
+func _build_runtime_animation_library(source_library: AnimationLibrary) -> AnimationLibrary:
+	if _curated_model == null or _curated_skeleton == null:
+		return null
+	var runtime_library := AnimationLibrary.new()
+	var skeleton_path := _curated_model.get_path_to(_curated_skeleton)
+	for animation_name: StringName in source_library.get_animation_list():
+		var source_animation := source_library.get_animation(animation_name)
+		if source_animation == null:
+			continue
+		var animation := source_animation.duplicate(true) as Animation
+		if animation == null:
+			continue
+
+		# Quaternius' base character and animation packs share one skeleton. Remap every
+		# recognized bone track directly to the live character skeleton and discard scene/
+		# root transforms so imported animation can never move the gameplay proxy.
+		for track_index: int in range(animation.get_track_count() - 1, -1, -1):
+			var source_path := animation.track_get_path(track_index)
+			var bone_name := _bone_name_from_track_path(source_path)
+			if bone_name.is_empty() or _curated_skeleton.find_bone(bone_name) < 0:
+				animation.remove_track(track_index)
+				_curated_animation_discarded_tracks += 1
+				continue
+			animation.track_set_path(track_index, NodePath("%s:%s" % [str(skeleton_path), bone_name]))
+			_curated_animation_remapped_tracks += 1
+		if animation.get_track_count() == 0:
+			continue
+		runtime_library.add_animation(animation_name, animation)
+	return runtime_library
+
+
+func _bone_name_from_track_path(path: NodePath) -> String:
+	if path.get_subname_count() <= 0:
+		return ""
+	# Skeleton bone animation paths use the bone as the first subname. Keep this strict;
+	# mesh blend-shapes and arbitrary node-property tracks are intentionally excluded.
+	return str(path.get_subname(0))
+
+
+func _select_semantic_clip(library: AnimationLibrary, tokens: Array[String]) -> StringName:
+	var best := StringName()
+	var best_score := -1
+	for animation_name: StringName in library.get_animation_list():
+		var lower := str(animation_name).to_lower()
+		var score := 0
+		for token: String in tokens:
+			if lower.contains(token):
+				score += 10
+		# Prefer ordinary gameplay clips over obviously specialized variants.
+		if lower.contains("loop"):
+			score += 1
+		if lower.contains("weapon") or lower.contains("sword"):
+			score += 2
+		if lower.contains("jump") or lower.contains("swim") or lower.contains("dance"):
+			score -= 8
+		if score > best_score and score > 0:
+			best_score = score
+			best = animation_name
+	return best
+
+
+func _sync_external_animation(speed: float) -> void:
+	if not _curated_model_active:
+		super._sync_external_animation(speed)
+		return
+	if _curated_animation_library_active and _sync_curated_library_animation(speed):
+		return
+	_sync_curated_pose()
+
+
+func _sync_curated_library_animation(speed: float) -> bool:
+	if _curated_animation_player == null or source_actor == null:
+		return false
+
+	var source_animation := _source_animation_name()
+	var dead := _source_dead() or source_animation.contains("death")
+	var hurt := _contains_any(source_animation, ["hurt", "stagger", "parried", "hit"])
+	var attacking := _source_attack_active() or _contains_any(source_animation, ["attack", "slash", "cleave", "thrust", "counter"])
+
+	if dead:
+		if _curated_death_clip != StringName():
+			_play_curated_clip(_curated_death_clip, 1.0, false)
+			return true
+		return false
+	if hurt:
+		if _curated_hurt_clip != StringName():
+			_play_curated_clip(_curated_hurt_clip, 1.0, false)
+			return true
+		return false
+	if attacking:
+		if _curated_attack_clip == StringName():
+			return false
+		var animation := _animation_for(_curated_attack_clip)
+		if animation == null:
+			return false
+		_play_curated_clip(_curated_attack_clip, 1.0, true)
+		var progress := clampf(_source_action_progress(), 0.0, 1.0)
+		_curated_animation_player.seek(progress * animation.length, true)
+		_curated_animation_player.pause()
+		return true
+
+	if speed > 12.0:
+		var speed_scale := clampf(speed / 95.0, 0.65, 1.65)
+		_play_curated_clip(_curated_locomotion_clip, speed_scale, false)
+		return true
+	_play_curated_clip(_curated_idle_clip, 1.0, false)
+	return true
+
+
+func _play_curated_clip(clip: StringName, speed_scale: float, force_restart: bool) -> void:
+	if _curated_animation_player == null or clip == StringName():
+		return
+	if force_restart or _curated_last_clip != clip or not _curated_animation_player.is_playing():
+		_curated_animation_player.play(clip)
+		_curated_last_clip = clip
+	_curated_animation_player.speed_scale = speed_scale
+
+
+func _animation_for(clip: StringName) -> Animation:
+	if _curated_animation_player == null or clip == StringName():
+		return null
+	return _curated_animation_player.get_animation(clip)
 
 
 func _find_skeleton(node: Node) -> Skeleton3D:
@@ -161,8 +383,6 @@ func _apply_illustrated_material_treatment(node: Node) -> void:
 				if source_material is StandardMaterial3D:
 					var styled := (source_material as StandardMaterial3D).duplicate() as StandardMaterial3D
 					if styled != null:
-						# Preserve authored textures while suppressing glossy/PBR-heavy response. A
-						# muted multiplier helps disparate placeholder assets share one visual world.
 						var multiplier := Color(0.55, 0.54, 0.58, 1.0) if actor_role == "player" else Color(0.64, 0.50, 0.42, 1.0)
 						styled.albedo_color *= multiplier
 						styled.roughness = maxf(styled.roughness, 0.82)
@@ -176,20 +396,19 @@ func _apply_illustrated_material_treatment(node: Node) -> void:
 func _capture_curated_pose() -> void:
 	if _curated_skeleton == null:
 		return
-	for bone_name: String in [
-		"pelvis", "spine_01", "spine_02", "spine_03",
-		"clavicle_l", "upperarm_l", "lowerarm_l", "hand_l",
-		"clavicle_r", "upperarm_r", "lowerarm_r", "hand_r",
-		"thigh_l", "calf_l", "foot_l", "thigh_r", "calf_r", "foot_r"
-	]:
-		var bone_index := _curated_skeleton.find_bone(bone_name)
-		if bone_index >= 0:
-			_curated_base_pose_rotations[bone_name] = _curated_skeleton.get_bone_pose_rotation(bone_index)
+	# Capture every imported bone so falling back from an authored clip to the deterministic
+	# adapter never leaves stale transforms behind on fingers, neck, or secondary joints.
+	for bone_index: int in range(_curated_skeleton.get_bone_count()):
+		var bone_name := str(_curated_skeleton.get_bone_name(bone_index))
+		_curated_base_pose_rotations[bone_name] = _curated_skeleton.get_bone_pose_rotation(bone_index)
 
 
 func _reset_curated_pose() -> void:
 	if _curated_skeleton == null or _curated_model == null:
 		return
+	if _curated_animation_player != null:
+		_curated_animation_player.stop()
+	_curated_last_clip = StringName()
 	_curated_model.position = _curated_base_position
 	_curated_model.rotation = _curated_base_rotation
 	for bone_name: Variant in _curated_base_pose_rotations.keys():
@@ -213,8 +432,7 @@ func _sync_curated_pose() -> void:
 		return
 	_reset_curated_pose()
 
-	# Bring the source T-pose into a compact gameplay silhouette first. Motion below is
-	# deliberately restrained because the final library retarget remains a separate task.
+	# Deterministic fallback used only when a required authored semantic clip is unavailable.
 	_apply_bone_rotation("upperarm_l", Vector3.FORWARD, 1.12)
 	_apply_bone_rotation("upperarm_r", Vector3.FORWARD, -1.12)
 	_apply_bone_rotation("lowerarm_l", Vector3.RIGHT, -0.12)
@@ -269,8 +487,8 @@ func _add_role_silhouette_dressing() -> void:
 	var blood := _material(Color(0.28, 0.035, 0.032, 1.0), 0.88)
 	var cloth := dark_cloth if actor_role == "player" else enemy_cloth
 
-	# Simple kitbash pieces are intentionally broad shapes at gameplay distance. They
-	# distinguish roles while a future outfit pack / Akio-specific model replaces them.
+	# Broad kitbash pieces remain presentation placeholders for identity/readability. The
+	# future Akio/Swordsman production GLBs replace this entire curated tier atomically.
 	_add_box(_visual_root, "CuratedSash", Vector3(0.62, 0.10, 0.34), Vector3(0.0, 0.93, 0.0), blood if actor_role == "player" else cloth)
 	var sheath := _add_box(_visual_root, "CuratedSheath", Vector3(0.07, 0.07, 0.92), Vector3(-0.31, 0.77, 0.05), cloth)
 	sheath.rotation = Vector3(0.0, -0.38, -0.22)
