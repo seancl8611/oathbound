@@ -4,15 +4,34 @@ This directory is the production landing zone for real-time 3D assets used by th
 
 ## Character slots
 
-The current runtime checks for these production/replacement slots first:
+The current Hushiro V2 runtime checks these canonical production/replacement slots first:
 
 - `Characters/Akio/akio.glb`
 - `Characters/HushiroSwordsman/hushiro_swordsman.glb`
 - `Characters/BlightedHound/blighted_hound.glb`
+- `Characters/Hollow/hollow.glb`
+- `Characters/HushiroArcher/hushiro_archer.glb`
+- `Characters/CellarBilemass/cellar_bilemass.glb`
+- `Characters/HushiroWarden/hushiro_warden.glb`
 
-If a slot is absent, `Planar3DActorVisual.gd` builds a procedural real-time 3D fallback so gameplay migration remains testable without final art.
+A path merely existing is **not** enough to displace the current presentation. `Planar3DActorVisual.gd` rejects external scenes that do not contain renderable mesh geometry, and the bridge only hides an authoritative legacy actor after a renderable replacement has been built successfully.
 
-Do **not** copy an arbitrary downloaded model directly into one of these three runtime slots. Third-party assets enter through the intake area first, are validated in Godot, and only become a live actor after scale/rig/material/animation review.
+If a production slot is absent or rejected, Hushiro V2 falls back by role:
+
+- Akio and Swordsman use the audited Quaternius CC0 humanoid + remapped Universal Animation Library tier;
+- Blighted Hound uses its authored Hushiro predator silhouette;
+- Hollow, Archer, Bilemass and Warden use authored role-specific Hushiro blockout silhouettes;
+- the shared anonymous procedural actor remains a final safety net outside those covered Hushiro roles, not the intended Hushiro V2 presentation.
+
+Do **not** copy an arbitrary downloaded model directly into a runtime slot. Third-party assets enter through the intake area first, are validated in Godot, and only become a live actor after scale/rig/material/animation review.
+
+Runtime diagnostics intentionally distinguish three production-model states:
+
+1. **slot exists** — a resource is present at the canonical path;
+2. **role spawned** — that semantic actor role currently has a live presentation actor;
+3. **production model active** — the spawned actor actually accepted and is rendering the role-specific GLB.
+
+This distinction prevents an empty, malformed, or rejected file from being reported as a successful production-art handoff.
 
 ## Automated third-party intake
 
@@ -56,6 +75,8 @@ Humanoid production models should prefer a retargetable humanoid skeleton. Share
 
 The zero-cost bootstrap uses Quaternius' CC0 Universal Base Characters and Universal Animation Library as audited references. These files are staged under `ThirdParty/` rather than pretending that the stock character is Akio.
 
+Production animation remains presentation-driven by authoritative combat state. Root motion from an imported model is not allowed to silently move the gameplay proxy or redefine attack timing, range, invulnerability, damage, Pressure Director admission, or encounter logic.
+
 ## Rendering target
 
 Real-time 3D is not an excuse to look like a conventional chunky 3D action game. The presentation target is:
@@ -68,4 +89,4 @@ That means flatter orthographic three-quarter framing, controlled values, restra
 
 The current bridge deliberately keeps the existing Node2D combat actors authoritative. A 3D model mirrors position, facing and action state only. Do not move damage, hitbox, pressure, encounter or balance authority into a model asset without an explicit gameplay migration.
 
-Replacement visuals are exclusive. When a 3D body is active, legacy body Sprite2D/AnimatedSprite2D art must remain hidden rather than rendering underneath it.
+Replacement visuals are exclusive and fail-safe. When a valid 3D body is active, legacy body Sprite2D/AnimatedSprite2D art stays hidden rather than rendering underneath it. If replacement creation fails or becomes non-renderable, the authoritative legacy actor is restored instead of disappearing.
