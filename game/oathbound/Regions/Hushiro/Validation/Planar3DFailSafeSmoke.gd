@@ -2,10 +2,10 @@ extends Node
 
 ## Regression proof for Planar3D failure/lifecycle safety.
 ##
-## The validation bridge moves through initial failure, successful replacement, lost
-## replacement, rebuild failure, runtime exclusivity toggling, group removal and full
-## bridge disable/re-enable. At every point the authoritative 2D body must remain safely
-## recoverable rather than becoming permanently invisible.
+## The validation bridge moves through initial failure, empty/non-renderable replacement,
+## successful replacement, lost replacement, rebuild failure, runtime exclusivity toggling,
+## group removal and full bridge disable/re-enable. At every point the authoritative 2D
+## body must remain safely recoverable rather than becoming permanently invisible.
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Validation/Planar3DFailSafeBridge.gd")
 
@@ -62,8 +62,16 @@ func _run() -> void:
 	_expect(not scenery.visible, "valid replacement environment did not suppress legacy Scenery")
 	_expect(legacy_body.visible, "initial failed actor replacement incorrectly hid authoritative legacy body")
 
-	# Prove a valid replacement hides the legacy body.
+	# A Node3D existing is not sufficient proof that an actor has renderable replacement
+	# content. Reject an intentionally empty presenter and preserve the authoritative body.
 	bridge.call("set_actor_visuals_allowed", true)
+	bridge.call("set_return_empty_visual", true)
+	bridge.call("_reconcile_actors")
+	await get_tree().process_frame
+	_expect(legacy_body.visible, "empty/non-renderable replacement incorrectly hid authoritative legacy body")
+
+	# Prove a valid replacement hides the legacy body.
+	bridge.call("set_return_empty_visual", false)
 	bridge.call("_reconcile_actors")
 	await get_tree().process_frame
 	_expect(not legacy_body.visible, "successful actor replacement did not suppress legacy body")
@@ -133,7 +141,7 @@ func _run() -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Planar3DFailSafeSmoke] PASS - replacement loss/failure restores legacy actor art and bridge lifecycle remains reversible")
+		print("[Planar3DFailSafeSmoke] PASS - empty/lost/failed replacements preserve legacy actor art and bridge lifecycle remains reversible")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
