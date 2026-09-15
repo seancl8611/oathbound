@@ -5,9 +5,11 @@ extends "res://Utility/Planar3DPresentationBridge.gd"
 ##
 ## Combat ownership remains entirely in the existing 2D actors. This wrapper owns only
 ## the visual replacement contract: persistent legacy-art suppression, actor grounding,
-## curated placeholder selection, combat-synced presentation VFX, and the Hushiro camera
-## profile used to make real-time 3D read closer to illustrated 2D.
+## Hushiro environment selection, curated placeholder selection, combat-synced
+## presentation VFX, and the Hushiro camera profile used to make real-time 3D read closer
+## to illustrated 2D.
 
+const HUSHIRO_ENVIRONMENT_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/Hushiro3DEnvironment.gd")
 const HUSHIRO_ACTOR_VISUAL_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroCuratedActorVisual.gd")
 const HUSHIRO_HOUND_VISUAL_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroHoundActorVisual.gd")
 const HUSHIRO_ATTACK_VFX_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroAttackVFX.gd")
@@ -44,32 +46,36 @@ func _process(delta: float) -> void:
 	_apply_actor_ground_lift()
 
 
-func _add_actor_visual(actor: Node2D) -> void:
-	if _world_root == null:
-		return
-	var role := _role_for(actor)
-	var visual_value: Variant = HUSHIRO_HOUND_VISUAL_SCRIPT.new() if role == "hound" else HUSHIRO_ACTOR_VISUAL_SCRIPT.new()
-	if not (visual_value is Node3D):
-		return
-	var visual := visual_value as Node3D
-	visual.name = "Actor3D_%s" % str(actor.get_instance_id())
-	_world_root.add_child(visual)
-	if visual.has_method("configure"):
-		visual.call("configure", role, actor)
+func _create_environment_root() -> Node3D:
+	var environment_value: Variant = HUSHIRO_ENVIRONMENT_SCRIPT.new()
+	if not (environment_value is Node3D):
+		return null
+	var environment := environment_value as Node3D
+	environment.name = "Hushiro3DEnvironment"
+	return environment
 
+
+func _create_actor_visual(_actor: Node2D, role: String) -> Node3D:
+	var visual_value: Variant = HUSHIRO_HOUND_VISUAL_SCRIPT.new() if role == "hound" else HUSHIRO_ACTOR_VISUAL_SCRIPT.new()
+	if visual_value is Node3D:
+		return visual_value as Node3D
+	return null
+
+
+func _decorate_actor_visual(visual: Node3D, actor: Node2D, role: String) -> void:
 	# Sword arcs are deliberately separate from actor animation/model ownership. They read
 	# authoritative action state only and can therefore be replaced independently by final
 	# particles/shaders without touching combat timing or the final character GLBs.
-	if role in ["player", "swordsman"]:
-		var vfx_value: Variant = HUSHIRO_ATTACK_VFX_SCRIPT.new()
-		if vfx_value is Node3D:
-			var vfx := vfx_value as Node3D
-			vfx.name = "HushiroAttackVFX"
-			visual.add_child(vfx)
-			if vfx.has_method("configure"):
-				vfx.call("configure", role, actor)
-
-	_actor_visuals[actor.get_instance_id()] = visual
+	if role not in ["player", "swordsman"]:
+		return
+	var vfx_value: Variant = HUSHIRO_ATTACK_VFX_SCRIPT.new()
+	if not (vfx_value is Node3D):
+		return
+	var vfx := vfx_value as Node3D
+	vfx.name = "HushiroAttackVFX"
+	visual.add_child(vfx)
+	if vfx.has_method("configure"):
+		vfx.call("configure", role, actor)
 
 
 func _capture_and_adjust_legacy_camera() -> void:
