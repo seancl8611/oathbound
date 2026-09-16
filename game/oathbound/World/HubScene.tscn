@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://World/Hub.gd" id="1_qm1wv"]
 [ext_resource type="Texture2D" uid="uid://brh8sgxga6n5m" path="res://Textures/hub.png" id="2_uc1vc"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://World/OathboundBloodCavern.gd" id="10_2hmrb"]
 [ext_resource type="Script" path="res://World/BloodMirror.gd" id="11_blood_mirror"]
 [ext_resource type="Script" path="res://World/NarrativeNPC.gd" id="12_narrative"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="13_visibility"]
+[ext_resource type="Script" path="res://World/ThreeQuarterStrandScenery.gd" id="14_scenery"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qekqq"]
 size = Vector2(39, 52)
@@ -19,8 +21,17 @@ size = Vector2(39, 52)
 script = ExtResource("1_qm1wv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1000
 position = Vector2(16, -383)
 texture = ExtResource("2_uc1vc")
+
+[node name="ThreeQuarterPresentation" type="Node2D" parent="."]
+script = ExtResource("13_visibility")
+background_path = NodePath("../Sprite2D")
+hide_background_when_active = true
+
+[node name="Scenery" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("14_scenery")
 
 [node name="Player" parent="." instance=ExtResource("2_wdemo")]
 

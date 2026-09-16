@@ -2,8 +2,8 @@ extends Node
 
 ## Canonical runtime scene registry.
 ##
-## Shared service chambers remain common across regions. Region-specific combat/boss
-## ownership is selected explicitly before GameFlow loads a chamber so no earlier
+## Shared service chambers remain common across regions by default. Region-specific
+## overrides are selected explicitly before GameFlow loads a chamber so no earlier
 ## region acts as the implementation authority for later content.
 
 var _shared_rooms := {
@@ -19,15 +19,37 @@ var _shared_rooms := {
 
 var _rooms_by_area := {
 	1: {
+		# Area 1 keeps its authored Hushiro-specific three-quarter wrappers.
 		"combat": preload("res://Regions/Hushiro/Chambers/CombatChamber.tscn"),
+		"shrine": preload("res://Regions/Hushiro/Chambers/ShrineChamber.tscn"),
+		"merchant": preload("res://Regions/Hushiro/Chambers/MerchantChamber.tscn"),
+		"shop": preload("res://Regions/Hushiro/Chambers/MerchantChamber.tscn"),
+		"miniboss": preload("res://Regions/Hushiro/Chambers/MinibossChamber.tscn"),
+		"rest": preload("res://Regions/Hushiro/Chambers/RestChamber.tscn"),
+		"boss": preload("res://Regions/Hushiro/Chambers/BossChamber.tscn"),
+		"treasure": preload("res://Regions/Hushiro/Chambers/TreasureChamber.tscn"),
 	},
 	2: {
+		# Yomori uses native combat/boss authority plus region-aware inherited service rooms.
 		"combat": preload("res://Regions/Yomori/Chambers/CombatChamber.tscn"),
+		"shrine": preload("res://Core/Chambers/ThreeQuarter/ShrineChamber.tscn"),
+		"merchant": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"shop": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"miniboss": preload("res://Core/Chambers/ThreeQuarter/MinibossChamber.tscn"),
+		"rest": preload("res://Core/Chambers/ThreeQuarter/RestChamber.tscn"),
 		"boss": preload("res://Regions/Yomori/Chambers/TwinMawsChamber.tscn"),
+		"treasure": preload("res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn"),
 	},
 	3: {
+		# Kagutsuchi follows the same presentation architecture with court-specific dressing.
 		"combat": preload("res://Regions/Kagutsuchi/Chambers/CombatChamber.tscn"),
+		"shrine": preload("res://Core/Chambers/ThreeQuarter/ShrineChamber.tscn"),
+		"merchant": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"shop": preload("res://Core/Chambers/ThreeQuarter/MerchantChamber.tscn"),
+		"miniboss": preload("res://Core/Chambers/ThreeQuarter/MinibossChamber.tscn"),
+		"rest": preload("res://Core/Chambers/ThreeQuarter/RestChamber.tscn"),
 		"boss": preload("res://Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn"),
+		"treasure": preload("res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn"),
 	},
 }
 
@@ -83,5 +105,5 @@ var enemies_by_area := {
 		"elite_defender": preload("res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.tscn"),
 		"hollow_vessel": preload("res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.tscn"),
 		"court_sentinel": preload("res://Regions/Kagutsuchi/Enemies/Standard/CourtSentinel.tscn"),
-	}
+	},
 }

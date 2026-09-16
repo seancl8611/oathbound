@@ -12,7 +12,7 @@ const EXPECTED_PLAYER_SCRIPT := "res://Player/OathboundCombatPlayer.gd"
 const EXPECTED_COMBAT_SCENE := "res://Regions/Kagutsuchi/Chambers/CombatChamber.tscn"
 const EXPECTED_BOSS_SCENE := "res://Regions/Kagutsuchi/Chambers/EclipseShogunChamber.tscn"
 const EXPECTED_HANDOFF_SCENE := "res://Core/Endgame/HeartHandoffChamber.tscn"
-const EXPECTED_TREASURE_SCENE := "res://Core/Chambers/Types/TreasureChamber.tscn"
+const EXPECTED_TREASURE_SCENE := "res://Core/Chambers/ThreeQuarter/TreasureChamber.tscn"
 const REQUIRED_ROLES: Array[String] = ["combat", "shrine", "merchant", "rest", "treasure", "miniboss", "boss"]
 const SEARCH_SEED_LIMIT := 4096
 

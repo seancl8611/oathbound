@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://Core/Chambers/Types/BossChamber.gd" id="1_boss"]
 [ext_resource type="PackedScene" uid="uid://c1sy2hkesodd" path="res://Core/Chambers/RouteGate.tscn" id="2_gate"]
@@ -9,18 +9,34 @@
 [ext_resource type="Script" path="res://Utility/duo_boss_manager.gd" id="7_duo"]
 [ext_resource type="PackedScene" path="res://Enemy/Area 2/Boss/rootfang_runtime.tscn" id="8_rootfang"]
 [ext_resource type="PackedScene" path="res://Enemy/Area 2/Boss/briarthorn_runtime.tscn" id="9_briarthorn"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="10_visibility"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterRegionScenery.gd" id="11_scenery"]
+[ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="12_fx"]
 
 [node name="TwinMawsChamber" type="Node2D"]
 script = ExtResource("1_boss")
 metadata/area_id = 2
 
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -1000
 texture_filter = 2
 texture_repeat = 2
 texture = ExtResource("3_bg")
 region_enabled = true
 region_rect = Rect2(-4000, -4000, 4000, 4000)
 modulate = Color(0.68, 0.75, 0.63, 1)
+
+[node name="ThreeQuarterPresentation" type="Node2D" parent="."]
+script = ExtResource("10_visibility")
+hide_background_when_active = true
+
+[node name="Scenery" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("11_scenery")
+region_profile = "yomori"
+room_profile = "boss"
+
+[node name="CombatFX" type="Node2D" parent="ThreeQuarterPresentation"]
+script = ExtResource("12_fx")
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 
