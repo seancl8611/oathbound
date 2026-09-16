@@ -13,6 +13,10 @@ const KIND_REFINEMENT := "refinement"
 const ACTION_BASIC := "basic"
 const ACTION_HELD := "held"
 const ACTION_DASH := "dash"
+# Legacy classification tokens remain readable for old discovery/training records only.
+# They are not present in the current Technique roster and do not restore retired runtime inputs.
+const ACTION_DEATHBLOW := "deathblow"
+const ACTION_COUNTER := "counter"
 
 const FAMILIES := ["echo", "rupture", "seal", "rift", "crimson"]
 
