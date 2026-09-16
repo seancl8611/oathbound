@@ -17,7 +17,7 @@ const DEFAULT_POLICY := {
 	"turn_rate_deg": 900.0,
 }
 
-const POLICIES := {
+static var POLICIES: Dictionary = {
 	# Pre-awakening base katana: responsive openers, planted heavy finish.
 	"quick_slash": _policy(0.72, 0.90, 0.58, 0.44, 0.82, 980.0),
 	"cross_cut": _policy(0.70, 0.86, 0.50, 0.38, 0.78, 900.0),
