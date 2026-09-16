@@ -117,7 +117,10 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-v2-runscene.log
-          grep -F "[HushiroPlanar3DV3] revision=3 hybrid_2_5d=true compression=0.50 elevation=30.0deg zoom=0.40 actor_scale=0.78" hushiro-v2-runscene.log
+          # Presence of the V3 marker proves the production RunScene used the hybrid
+          # presentation. Exact framing values are manual-playtest tuning and should not
+          # make CI brittle when zoom/actor scale are deliberately adjusted.
+          grep -F "[HushiroPlanar3DV3] revision=3 hybrid_2_5d=true" hushiro-v2-runscene.log
           grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-v2-runscene.log
           if grep -F "SCRIPT ERROR:" hushiro-v2-runscene.log; then
             echo "FAIL: live Hushiro V3 RunScene emitted a GDScript runtime error."
