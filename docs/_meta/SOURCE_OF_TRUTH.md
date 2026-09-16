@@ -4,99 +4,49 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-09-10
+last_reviewed: 2026-09-16
 ---
 
 # Source of Truth
 
-Each major subject has one authoritative file. Other documents should summarize, link, or describe production consequences rather than maintain a competing definition.
+Each major subject has one owning authority. Dependent docs summarize or translate that authority; they do not preserve superseded mechanics for compatibility.
 
-| Subject | Authoritative file |
+| Subject | Authority |
 |---|---|
-| Game identity and pitch | `docs/overview/GAME_OVERVIEW.md` |
+| Game identity / current project shape | `docs/overview/GAME_OVERVIEW.md` |
 | Design pillars | `docs/overview/DESIGN_PILLARS.md` |
-| Combat V2 transition direction | `docs/overview/V2_COMBAT_DIRECTION.md` |
-| Full production scope | `docs/overview/FULL_GAME_SCOPE.md` |
-| Endgame, canonical postgame, completion, and release package | `docs/overview/ENDGAME_POSTGAME_RELEASE.md` |
-| Current unresolved design priorities | `docs/_meta/OPEN_QUESTIONS.md` |
-| Top-level production order | `docs/overview/PRODUCTION_ROADMAP.md` |
-| Core gameplay loop | `docs/gameplay/CORE_LOOP.md` |
-| Combat rules and vocabulary | `docs/gameplay/COMBAT.md` |
-| Shared combat first-playtest implementation values | `docs/gameplay/COMBAT_IMPLEMENTATION_BASELINE.md` |
-| Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
-| Introductory first-attempt rules and pre-awakening exceptions | `docs/gameplay/FIRST_ATTEMPT.md` |
-| Blood Aspect system mechanics | `docs/gameplay/BLOOD_ASPECTS.md` |
-| Shared Blood Aspect first-playtest implementation values | `docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md` |
-| Shared Blood Aspect weapon-kit model | `docs/gameplay/ASPECT_WEAPON_KIT_MODEL.md` |
-| Blood Aspect evaluation and roster-comparison guidelines | `docs/gameplay/ASPECT_IDENTITY_GUIDELINES.md` |
-| Wolf qualitative Tier 0 weapon kit | `docs/gameplay/WOLF_ASPECT.md` |
-| Wraith qualitative Tier 0 weapon kit | `docs/gameplay/WRAITH_ASPECT.md` |
-| Ronin qualitative Tier 0 weapon kit | `docs/gameplay/RONIN_ASPECT.md` |
-| Corruption and Shrine mechanics | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
-| Technique mechanics | `docs/gameplay/TECHNIQUES.md` |
-| Individual Technique catalog and refinements | `docs/gameplay/TECHNIQUE_CATALOG.md` |
-| Shared Technique-family first-playtest implementation values | `docs/gameplay/TECHNIQUE_IMPLEMENTATION_BASELINES.md` |
-| Relic mechanics and launch roster | `docs/gameplay/RELICS.md` |
-| Relic first-playtest values, mastery thresholds, and trigger/reset rules | `docs/gameplay/RELIC_IMPLEMENTATION_BASELINE.md` |
-| Persistent and run progression | `docs/gameplay/PROGRESSION.md` |
-| Currency/material ownership and permanent upgrade gates | `docs/gameplay/PROGRESSION.md` |
-| Reward payouts, Gold/Shop economy, Mist/Scroll payouts, regional boss-material drops | `docs/gameplay/ITEMS_AND_REWARDS.md` |
-| Blood Cavern trial rules | `docs/gameplay/BLOOD_CAVERN_TRIALS.md` |
-| Prosthetic mechanics, first-playtest values, and 19 upgrade values | `docs/gameplay/PROSTHETICS.md` |
-| World and island setting | `docs/lore/WORLD.md` |
-| Story spine | `docs/lore/STORY_OVERVIEW.md` |
-| Narrative delivery and campaign presentation | `docs/narrative/NARRATIVE_DELIVERY.md` |
-| Beast Blood canon | `docs/lore/BEAST_BLOOD.md` |
-| Returning Blood canon | `docs/lore/RETURNING_BLOOD.md` |
-| The Order | `docs/lore/THE_ORDER.md` |
-| Barrier and Blood Moon | `docs/lore/THE_BARRIER_AND_BLOOD_MOON.md` |
-| Eclipse Shogun canon | `docs/lore/ECLIPSE_SHOGUN.md` |
-| Akio | `docs/characters/AKIO.md` |
-| Strand NPC roster | `docs/characters/STRAND_NPCS.md` |
-| Individual Strand NPCs | `docs/characters/strand/*.md` |
-| Cross-area room identities | `docs/content/ROOM_TYPES.md` |
-| Area 1 identity | `docs/content/area_1/OVERVIEW.md` |
-| Area 1 enemy roster | `docs/content/area_1/ENEMIES.md` and `docs/content/area_1/enemies/*.md` |
-| Area 1 first-playtest encounter/layout/miniboss/boss implementation package | `docs/content/area_1/HUSHIRO_IMPLEMENTATION_BASELINE.md` |
-| Area 1 minibosses | `docs/content/area_1/MINIBOSSES.md` |
-| Area 1 boss | `docs/content/area_1/BOSS.md` |
-| Area 1 rooms | `docs/content/area_1/ENVIRONMENT_AND_ROOMS.md` |
-| Area 2 identity | `docs/content/area_2/OVERVIEW.md` |
-| Area 2 enemy roster | `docs/content/area_2/ENEMIES.md` and `docs/content/area_2/enemies/*.md` |
-| Area 2 minibosses | `docs/content/area_2/MINIBOSSES.md` |
-| Area 2 boss | `docs/content/area_2/BOSS.md` |
-| Area 3 identity | `docs/content/area_3/OVERVIEW.md` |
-| Area 3 enemy roster | `docs/content/area_3/ENEMIES.md` and `docs/content/area_3/enemies/*.md` |
-| Area 3 minibosses | `docs/content/area_3/MINIBOSSES.md` |
-| Eclipse Shogun encounter | `docs/content/area_3/BOSS.md` |
-| True-final Heart encounter | `docs/content/area_3/TRUE_FINAL_HEART.md` |
-| Strand identity and services | `docs/content/strand/OVERVIEW.md`, `INTERACTIBLES.md`, and `interactibles/*.md` |
+| Combat direction | `docs/overview/V2_COMBAT_DIRECTION.md` |
+| Shared combat rules | `docs/gameplay/COMBAT.md` |
+| Isometric 2D runtime presentation | `docs/overview/ISOMETRIC_2D_PRESENTATION_DIRECTION.md` |
+| Production roadmap | `docs/overview/PRODUCTION_ROADMAP.md` |
 | Art direction | `docs/art_production/ART_DIRECTION.md` |
 | Art technical standards | `docs/art_production/TECHNICAL_STANDARDS.md` |
-| Character and enemy brief requirements | `docs/art_production/CHARACTER_BRIEF_STANDARD.md` |
-| Shared combat and Corruption VFX | `docs/art_production/CORE_VFX.md` |
-| Blood Aspect VFX | `docs/art_production/ASPECT_VFX.md` |
-| Prosthetic VFX | `docs/art_production/PROSTHETIC_VFX.md` |
-| Technique VFX | `docs/art_production/TECHNIQUE_VFX.md` |
-| Item, reward, currency, and boss-material art | `docs/art_production/ITEM_REWARD_ART.md` |
-| Art asset inventory | `docs/art_production/ASSET_INVENTORY.md` |
-| Outsourcing process | `docs/art_production/OUTSOURCING_WORKFLOW.md` |
-| Milestone scope | `docs/art_production/milestones/MILESTONE_*.md` |
-| Run HUD and combat feedback | `docs/ui_ux/HUD.md` |
-| Strand HUD and prompts | `docs/ui_ux/STRAND_HUD_AND_PROMPTS.md` |
-| Shrine interface | `docs/ui_ux/SHRINE_INTERFACE.md` |
-| Technique rewards and build-management interface | `docs/ui_ux/TECHNIQUE_REWARDS.md` |
-| Hub interfaces | `docs/ui_ux/HUB_INTERFACES.md` |
-| Blood Mirror and trials UI | `docs/ui_ux/BLOOD_MIRROR_TRIALS.md` |
-| Results and Strand return | `docs/ui_ux/RUN_RESULTS.md` |
-| Pause and build overview | `docs/ui_ux/PAUSE_OVERVIEW.md` |
+| Rig-rendered character pipeline | `docs/art_production/RIG_RENDERED_2D_PIPELINE.md` |
+| Akio commission | `docs/commissions/akio/AKIO_COMMISSION_BRIEF.md` |
+| Blood Aspect system | `docs/gameplay/BLOOD_ASPECTS.md` |
+| Wolf / Wraith / Ronin | corresponding `docs/gameplay/*_ASPECT.md` |
+| Aspect first-playtest values | `docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md` |
+| Technique system | `docs/gameplay/TECHNIQUES.md` |
+| Technique roster | `docs/gameplay/TECHNIQUE_CATALOG.md` |
+| Prosthetics | `docs/gameplay/PROSTHETICS.md` |
+| Relics | `docs/gameplay/RELICS.md` |
+| Corruption / Shrines | `docs/gameplay/CORRUPTION_AND_SHRINES.md` |
+| Progression / currencies | `docs/gameplay/PROGRESSION.md` + `ITEMS_AND_REWARDS.md` |
+| Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
+| Akio character canon | `docs/characters/AKIO.md` |
+| Regional content | relevant `docs/content/area_*` authority |
+| True-final Heart encounter | `docs/content/area_3/TRUE_FINAL_HEART.md` |
+| Run HUD / combat feedback | `docs/ui_ux/HUD.md` |
+| Current unresolved work | `docs/_meta/OPEN_QUESTIONS.md` |
+| Canonical terminology / retired search anchors | `docs/_meta/TERMINOLOGY.md` |
 
-## Conflict rule
+## Conflict rules
 
-When files conflict, use the authority listed here. Correct dependent summaries after resolving the authoritative file. `FIRST_ATTEMPT.md` specifically owns the pre-awakening exceptions to the otherwise-normal run, Technique, Shrine, Prosthetic, and campaign rules. `ENDGAME_POSTGAME_RELEASE.md` owns post-story run goals, completion/achievement volume, launch challenge-system exclusions, and release presentation requirements. `COMBAT_IMPLEMENTATION_BASELINE.md` owns shared first-playtest numeric combat values while `COMBAT.md` owns the qualitative/shared combat rules those values implement. `V2_COMBAT_DIRECTION.md` owns the approved direction for the Combat V2 transition, but it does not silently replace current V1 gameplay contracts before the relevant owning authorities and runtime packages are migrated. `ASPECT_IMPLEMENTATION_BASELINES.md` owns first-playtest Wolf/Wraith/Ronin numerical values while the individual Aspect files own their qualitative action and Tier behavior. `TECHNIQUE_IMPLEMENTATION_BASELINES.md` owns shared first-playtest Technique-family constants and normalization while `TECHNIQUES.md` and `TECHNIQUE_CATALOG.md` own system rules and the individual roster. `PROSTHETICS.md` owns both the Prosthetic roster/progression rules and the approved first-playtest values for all eight tools and nineteen upgrades. `RELIC_IMPLEMENTATION_BASELINE.md` owns first-playtest Relic values, mastery thresholds, and trigger/reset behavior while `RELICS.md` owns roster identity, acquisition, swapping, and mastery architecture. `HUSHIRO_IMPLEMENTATION_BASELINE.md` owns Hushiro's first-playtest standard encounter scripts, reusable gameplay-space inventory, and numerical/state contracts for Village Ogre, The Collector, and Keeper while the existing Area 1 files continue to own their qualitative identity and presentation.
+1. Current Combat V2 authority supersedes older universal Posture/Deathblow assumptions. Standard enemies use Health plus hidden Poise/interruption; player-facing Posture and the shared Deathblow/execution loop are retired.
+2. Current presentation authority supersedes live Planar3D / Camera3D experiments. The production runtime is authoritative planar 2D with fixed high-angle Camera2D directional-sprite presentation.
+3. Current Technique authority uses additive ownership with no Technique slots/global inventory cap. The current catalog baseline is 40 Techniques + 6 refinements; older five-action matrices are historical.
+4. Blood Aspect identity belongs to the Aspect authorities. Shared docs must not invent one universal defensive event simply to make old Technique or UI content fit.
+5. First-playtest numeric baselines are tunable implementation targets, not immutable design law.
+6. Historical/research docs never override a current authority.
 
-If the current design genuinely does not answer a conflict and the decision affects scope, add one concise question to `OPEN_QUESTIONS.md`.
-
-## Duplication rule
-
-Detailed definitions belong only in their authoritative file. Overview files summarize the game. Milestones describe production scope and dependencies. The question tracker contains only unresolved priorities. Historical notes never override current authoritative content.
+When a current authority and runtime disagree, reconcile both around the approved direction rather than restoring a retired system merely to satisfy an old test, count, or compatibility path.

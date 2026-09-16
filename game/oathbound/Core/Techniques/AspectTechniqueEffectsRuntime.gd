@@ -1,18 +1,16 @@
 extends "res://Core/Techniques/TechniqueEffectsRuntime.gd"
 
-## Adapts Blood Aspect attack IDs to the universal Technique action-trigger contract.
-## Technique families care about Basic/Held/Dash/Counter, not the selected weapon kit's
-## move name. Blood Arts and Wraith secondary passage contacts deliberately do not
-## receive ordinary full Technique triggers.
+## Adapts Blood Aspect attack IDs to the current shared Technique trigger contract.
+## Global Technique families use Basic/Held/Dash triggers only; kit-specific defensive
+## mechanics stay behind explicit kit eligibility rather than becoming universal events.
+## Blood Arts and Wraith secondary passage contacts deliberately do not receive ordinary
+## full-value Technique triggers.
 
 const PLAYTEST_FX_RUNTIME: Script = preload("res://Core/Presentation/OathboundPlaytestFxRuntime.gd")
 
 
 func _ready() -> void:
 	super._ready()
-	# Temporary playtest-readability layer. It is debug-build only and purely
-	# observational, so authored release visuals can replace it without touching the
-	# Technique rules/executor.
 	if OS.is_debug_build() and get_node_or_null("PlaytestFxRuntime") == null:
 		var runtime_value: Variant = PLAYTEST_FX_RUNTIME.new()
 		if runtime_value is Node:
@@ -31,9 +29,6 @@ func on_player_hit(target: Node, player: Node, attack_area: Area2D = null) -> vo
 		return
 	if typeof(AspectRuntime) == TYPE_OBJECT and AspectRuntime.has_method("is_secondary_passage_contact"):
 		if AspectRuntime.is_secondary_passage_contact(attack_area, target):
-			# The Wraith authority explicitly forbids unrestricted full-value Technique
-			# multiplication on passage contacts. First-playtest policy is zero ordinary
-			# Technique proc rather than silently over-rewarding the secondary target.
 			return
 
 	if trigger.is_empty():
@@ -43,7 +38,8 @@ func on_player_hit(target: Node, player: Node, attack_area: Area2D = null) -> vo
 	var original_id: String = str(attack_area.get_meta("attack_id", ""))
 	var universal_id: String = _universal_attack_id(trigger)
 	if universal_id.is_empty():
-		super.on_player_hit(target, player, attack_area)
+		# Kit-specific/non-global triggers are intentionally ignored by the global
+		# Technique executor unless a dedicated compatible hook handles them elsewhere.
 		return
 
 	attack_area.set_meta("attack_id", universal_id)
@@ -59,6 +55,4 @@ func _universal_attack_id(trigger: String) -> String:
 			return "hold_thrust"
 		"dash":
 			return "dash_slash"
-		"counter":
-			return "counter_cut"
 	return ""

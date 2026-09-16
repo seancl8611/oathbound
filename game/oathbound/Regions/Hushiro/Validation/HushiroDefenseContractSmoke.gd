@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _run() -> void:
 	await get_tree().process_frame
+	_prepare_awakened_aspect_state()
 	var player: Node = await _spawn_player()
 	if player == null:
 		_finish()
@@ -20,6 +21,7 @@ func _run() -> void:
 
 	await _verify_damage_number_manager_rejects_non_hp_values()
 	await _verify_player_ordinary_block(player)
+	await _verify_ronin_guard_curve(player)
 	await _verify_player_perilous_thrust_bypasses_block(player)
 	await _verify_enemy_guard_is_partial_health(player)
 	await _verify_perilous_thrust_warning(player)
@@ -27,6 +29,16 @@ func _run() -> void:
 	player.queue_free()
 	await get_tree().process_frame
 	_finish()
+
+
+func _prepare_awakened_aspect_state() -> void:
+	# Ronin is a post-awakening Aspect. The first-attempt runtime intentionally gates
+	# Aspect selection before Returning Blood awakens, so defense validation must opt
+	# into the same awakened state used by actual Aspect runs.
+	if typeof(MetaProgress) == TYPE_OBJECT:
+		MetaProgress.set("returning_blood_awakened", true)
+	if typeof(AspectRuntime) == TYPE_OBJECT:
+		AspectRuntime.select_aspect("wolf")
 
 
 func _spawn_player() -> Node:
@@ -95,7 +107,7 @@ func _verify_damage_number_manager_rejects_non_hp_values() -> void:
 	)
 
 
-func _verify_player_ordinary_block(player: Node) -> void:
+func _prepare_player_block(player: Node) -> void:
 	player.set("hp", 100)
 	player.set("stagger", 0.0)
 	player.set("_facing_dir", Vector2.RIGHT)
@@ -104,29 +116,64 @@ func _verify_player_ordinary_block(player: Node) -> void:
 	if combat != null and combat.has_method("start_block"):
 		combat.call("start_block")
 
+
+func _verify_player_ordinary_block(player: Node) -> void:
+	if typeof(AspectRuntime) == TYPE_OBJECT:
+		AspectRuntime.select_aspect("wolf")
+	await get_tree().process_frame
+	_prepare_player_block(player)
+
 	var origin := _make_attack_origin(player, "melee", true, false)
 	var hitbox: Area2D = origin.get_node("DefenseAttackHitbox") as Area2D
 	player.call("_on_hurt", 10, "melee", hitbox)
 
-	_expect(int(player.get("hp")) == 100, "ordinary frontal block leaked HP damage")
-	_expect(is_equal_approx(float(player.get("stagger")), 12.0), "ordinary frontal block did not apply authored 12 player Posture")
+	_expect(int(player.get("hp")) == 96, "ordinary frontal block did not pass authored 35% Health chip (10 -> 4)")
+	_expect(is_zero_approx(float(player.get("stagger"))), "ordinary frontal block accumulated retired player Posture")
 
 	origin.queue_free()
 	await get_tree().process_frame
 
 
+func _verify_ronin_guard_curve(player: Node) -> void:
+	if typeof(AspectRuntime) != TYPE_OBJECT:
+		_fail("AspectRuntime unavailable for Ronin guard validation")
+		return
+
+	AspectRuntime.select_aspect("ronin")
+	await get_tree().process_frame
+	_prepare_player_block(player)
+	var tier_zero_origin := _make_attack_origin(player, "melee", true, false)
+	var tier_zero_hitbox: Area2D = tier_zero_origin.get_node("DefenseAttackHitbox") as Area2D
+	player.call("_on_hurt", 10, "melee", tier_zero_hitbox)
+	_expect(int(player.get("hp")) == 97, "Ronin Tier 0 guard did not convert 10 incoming Health to 3 chip")
+	_expect(is_zero_approx(float(player.get("stagger"))), "Ronin Tier 0 guard accumulated retired player Posture")
+	tier_zero_origin.queue_free()
+	await get_tree().process_frame
+
+	AspectRuntime.set_tier(4)
+	await get_tree().process_frame
+	_prepare_player_block(player)
+	var tier_four_origin := _make_attack_origin(player, "melee", true, false)
+	var tier_four_hitbox: Area2D = tier_four_origin.get_node("DefenseAttackHitbox") as Area2D
+	player.call("_on_hurt", 10, "melee", tier_four_hitbox)
+	_expect(int(player.get("hp")) == 98, "Ronin Tier IV guard did not convert 10 incoming Health to 2 chip")
+	_expect(is_zero_approx(float(player.get("stagger"))), "Ronin Tier IV guard accumulated retired player Posture")
+	tier_four_origin.queue_free()
+	await get_tree().process_frame
+
+	AspectRuntime.select_aspect("wolf")
+	await get_tree().process_frame
+
+
 func _verify_player_perilous_thrust_bypasses_block(player: Node) -> void:
-	player.set("hp", 100)
-	player.set("stagger", 0.0)
-	player.set("_facing_dir", Vector2.RIGHT)
-	player.set("_state", 6) # LegacyPlayerController.State.BLOCKING
+	_prepare_player_block(player)
 
 	var origin := _make_attack_origin(player, "perilous", false, true)
 	var hitbox: Area2D = origin.get_node("DefenseAttackHitbox") as Area2D
 	player.call("_on_hurt", 8, "perilous", hitbox)
 
 	_expect(int(player.get("hp")) == 92, "perilous thrust was incorrectly absorbed by ordinary block")
-	_expect(is_equal_approx(float(player.get("stagger")), 0.0), "perilous thrust incorrectly applied ordinary block Posture")
+	_expect(is_zero_approx(float(player.get("stagger"))), "perilous thrust mutated retired player Posture")
 
 	origin.queue_free()
 	await get_tree().process_frame
@@ -141,9 +188,6 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	enemy.global_position = Vector2(50.0, 0.0)
 	add_child(enemy)
 	await get_tree().process_frame
-
-	# Match live Hushiro spawn normalization instead of testing the imported scene in
-	# isolation. The regional runtime applies this contract after the enemy's _ready().
 	HUSHIRO_ENEMY_CONTRACT.apply(enemy, "swordsman")
 	await get_tree().physics_frame
 	enemy.set_physics_process(false)
@@ -178,14 +222,10 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 
 	_expect(int(enemy.get("hp")) == 86, "V2 Swordsman guard did not pass the authored 35% Health damage")
 	_expect(is_zero_approx(float(combat.call("get_posture"))), "active standard-enemy guard accumulated retired Posture")
-	_expect(
-		_count_damage_number_nodes() == guarded_number_count_before + 1,
-		"guarded Health loss did not create exactly one floating damage number"
-	)
+	_expect(_count_damage_number_nodes() == guarded_number_count_before + 1, "guarded Health loss did not create exactly one floating damage number")
 	_expect(_latest_damage_number_text() == "4", "guarded floating number did not equal actual enemy HP lost")
 
 	await _reset_damage_number_probe()
-
 	enemy.call("_set_blocking", false)
 	enemy.set("can_block", false)
 	var unguarded_hitbox: Area2D = _make_player_sword_hitbox(player, "Unguarded")
@@ -199,14 +239,8 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 
 	_expect(hp_lost > 0, "unguarded control hit did not remove enemy HP")
 	_expect(is_zero_approx(float(combat.call("get_posture"))), "unguarded standard hit accumulated retired Posture")
-	_expect(
-		_count_damage_number_nodes() == real_number_count_before + 1,
-		"real enemy HP loss did not create exactly one floating damage number"
-	)
-	_expect(
-		_latest_damage_number_text() == str(hp_lost),
-		"floating damage number did not equal actual enemy HP lost"
-	)
+	_expect(_count_damage_number_nodes() == real_number_count_before + 1, "real enemy HP loss did not create exactly one floating damage number")
+	_expect(_latest_damage_number_text() == str(hp_lost), "floating damage number did not equal actual enemy HP lost")
 
 	await _reset_damage_number_probe()
 	enemy.set("hp", 5)
@@ -216,14 +250,8 @@ func _verify_enemy_guard_is_partial_health(player: Node) -> void:
 	enemy.call("_on_hurt_box_hurt", 12, "sword_light", overkill_hitbox)
 	_expect(int(enemy.get("hp")) == 0, "overkill control hit did not clamp enemy HP to zero")
 	await get_tree().process_frame
-	_expect(
-		_count_damage_number_nodes() == overkill_number_count_before + 1,
-		"overkill HP loss did not create exactly one floating damage number"
-	)
-	_expect(
-		_latest_damage_number_text() == "5",
-		"overkill floating number exceeded the enemy HP actually removed"
-	)
+	_expect(_count_damage_number_nodes() == overkill_number_count_before + 1, "overkill HP loss did not create exactly one floating damage number")
+	_expect(_latest_damage_number_text() == "5", "overkill floating number exceeded the enemy HP actually removed")
 
 	await _reset_damage_number_probe()
 	sword_origin.queue_free()
@@ -292,7 +320,7 @@ func _latest_damage_number_text() -> String:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[HushiroDefenseContractSmoke] PASS - player block HP-exclusive | V2 enemy guard partial HP + Posture retired | real HP number exact | perilous thrust bypass + warning")
+		print("[HushiroDefenseContractSmoke] PASS - base 35% + Ronin 30->20% Health-chip guard | player/enemy Posture retired | exact HP numbers | perilous bypass")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

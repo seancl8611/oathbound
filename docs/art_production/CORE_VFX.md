@@ -4,119 +4,42 @@ title: Core Combat and Corruption VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
-topics:
-  - vfx
-  - parry
-  - hit-spark
-  - sword-trail
-  - posture-break
-  - deathblow
-  - corruption
-  - shrine
-related:
-  - GAMEPLAY-COMBAT
-  - GAMEPLAY-CORRUPTION-SHRINES
-  - UI-HUD
-  - UI-SHRINE
-  - ART-MILESTONE-01
+last_reviewed: 2026-09-16
 ---
 
 # Core Combat and Corruption VFX
 
-Shared combat cues must strengthen readability without obscuring silhouettes, attack direction, recovery frames, or safe space. Frequent effects remain compact. Stronger presentation is reserved for posture breaks, execution openings, Shrine decisions, and boss transitions.
+Shared effects communicate hit direction, danger, movement, state changes, and impact without hiding actor silhouettes or enemy telegraphs at the accepted high-angle camera.
 
-## Milestone 1 combat bundle
+## Shared combat bundle
 
-### VFX-001 — Parry Spark
+### Hit Spark
+Ordinary damage confirmation. Compact, directional, and short-lived. Stronger attacks may use heavier variants without becoming screen-filling explosions.
 
-**Purpose:** immediate confirmation of a successful deflect.
+### Sword Trail
+Clarifies Akio's blade path. Stage 1 needs a light Quick Slash trail, a clearly different Cross Cut path, and a heavier Heavy Cleave treatment. Trails support animation readability; they do not define hitboxes or impact timing.
 
-**Working frames:** 4–6.
+### Interruption / heavy-impact response
+Hidden Poise is not a visible meter, but a meaningful stagger/interruption may receive a brief body-centered impact/recoil cue when animation alone is insufficient. This is feedback for a resolved reaction, not a universal posture-break state.
 
-- Standard deflect: compact directional burst.
-- Perfect parry: brighter core and stronger punctuation.
-- Must remain distinct from Hit Spark without depending on sound.
-- No broad smoke cloud, circular explosion, or magical glyph.
+### Guard contact
+Actors that actually own Guard may use a compact guarded-contact cue distinct from a normal Health hit. Ronin Reprisal may receive a stronger authored response cue when unlocked. Do not imply that every Aspect or enemy owns the same Guard/counter rules.
 
-### VFX-002 — Hit Spark
+### Danger / spatial telegraphs
+Projectiles, AoEs, grabs, committed lunges, hazards, and boss mechanics use shape/timing language appropriate to the threat. Telegraphs remain separate from actor body sprites where practical.
 
-**Purpose:** ordinary damage confirmation.
+## Retired shared cues
 
-**Working frames:** 3–5.
+Do **not** produce universal assets for a player/enemy Posture bar, generic Posture Break, Deathblow availability, or shared execution prompt. Those systems are not part of the current standard combat loop.
 
-- Smaller and quieter than Parry Spark.
-- Clears quickly.
-- Must not compete with posture break, deathblow, or boss-transition cues.
+Boss/miniboss encounters may still commission bespoke vulnerability, stagger, armor-break, phase-transition, or punish-window cues when their own encounter authority requires them.
 
-### VFX-003 — Deathblow Cue
+## Corruption / Shrine cues
 
-**Purpose:** persistent confirmation that an execution is available.
+- **Corruption Full:** restrained dark-crimson pressure showing that Shrine resolution is available.
+- **Embrace:** controlled Returning Blood surge communicating Aspect Tier advancement.
+- **Resist:** cooler stabilization/release language communicating restraint without advancement.
 
-**Working frames:** 3–4 frame loop for the valid window.
+## Delivery rule
 
-- Anchored above or around the enemy's upper body.
-- Uses a ritual blood-seal or restrained execution-mark language.
-- Remains visible in crowded combat.
-- Must not resemble a generic exclamation icon.
-
-### VFX-004 — Sword Trail
-
-**Purpose:** clarify Akio's base blade paths.
-
-**Working frames:** approximately 4–6 per swing family.
-
-Required variants:
-
-- Quick Slash — shortest and lightest,
-- Cross Cut — wider diagonal path,
-- Heavy Cleave — weightiest and most committed.
-
-Trails reinforce the weapon path and clear before obscuring recovery or the next attack.
-
-### VFX-005 — Posture Break Cue
-
-**Purpose:** show that enemy posture has fully broken and a vulnerability state has begun.
-
-**Working direction:** quick body-centered break flash with a compact cracked ring and sharp metallic fragments.
-
-- Slightly larger and longer than Parry Spark.
-- Clears quickly.
-- Distinct from hit, parry, hurt, death, and Deathblow Cue.
-- The break cue communicates that the enemy opened; the persistent Deathblow Cue communicates that execution remains available.
-
-VFX-005 is included in Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblow Cue because that batch establishes the complete posture-break-to-execution read on the baseline humanoid enemy.
-
-## Corruption and Shrine cues
-
-### Corruption Full Cue
-
-Shows that Corruption is full and may be resolved at the next Shrine.
-
-- low-frequency dark-crimson pressure around Akio and the meter,
-- ends immediately after Shrine resolution,
-- distinct from low HP, depleted Spirit, Burn, Shock, or boss empowerment.
-
-### Embrace Transformation Cue
-
-Communicates a Blood Aspect Tier increase.
-
-- Shrine flare,
-- controlled blood-red surge into Akio,
-- brief full-body ignition,
-- settlement into the new Aspect and Tier state.
-
-### Resist Stabilization Cue
-
-Communicates stabilization without Tier advancement.
-
-- cooler pale ritual pulse,
-- outward release of pressure,
-- brief recovery beat,
-- clearly reads as restraint rather than empowerment.
-
-## Delivery and testing
-
-Every effect requires source files, transparent frames or sheets, timing notes, palette continuity, and clean Godot import.
-
-Effects must remain readable across Hushiro, Yomori, and Kagutsuchi backgrounds with HUD, damage numbers, screen shake, multiple enemies, and environmental atmosphere active.
+VFX source files and game-ready 2D outputs must remain readable over Hushiro, Yomori, and Kagutsuchi with multiple enemies and atmosphere active. Effects may follow gameplay events but never become combat authority.

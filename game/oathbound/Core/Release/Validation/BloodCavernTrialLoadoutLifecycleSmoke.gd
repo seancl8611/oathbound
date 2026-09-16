@@ -34,7 +34,7 @@ func _run() -> void:
 		"aspect_id": "ronin",
 		"aspect_tier": 4,
 		"blood": 88.0,
-		"technique_ids": ["rupture_mountain_breaker", "seal_counterseal", "crimson_deep_cut"],
+		"technique_ids": ["rupture_mountain_breaker", "seal_binding_draw", "crimson_deep_cut"],
 		"prosthetic_id": "fang_harpoon",
 		"relic_id": "spirit_tassel",
 	}
@@ -44,7 +44,7 @@ func _run() -> void:
 	)
 	_expect(str(AspectRuntime.selected_aspect) == "ronin" and int(AspectRuntime.tier) == 4, "active trial did not stage fixed Ronin Tier IV")
 	_expect(is_equal_approx(float(AspectRuntime.blood), 88.0), "active trial did not stage fixed Blood")
-	_expect(RunData.acquired_upgrades == ["rupture_mountain_breaker", "seal_counterseal", "crimson_deep_cut"], "active trial did not stage exact unlimited Technique collection")
+	_expect(RunData.acquired_upgrades == ["rupture_mountain_breaker", "seal_binding_draw", "crimson_deep_cut"], "active trial did not stage exact unlimited Technique collection")
 	_expect(str(ProstheticManager.equipped_prosthetic_id) == "fang_harpoon", "active trial did not stage fixed Prosthetic")
 	_expect(str(RelicRuntime.equipped_relic_id) == "spirit_tassel", "active trial did not stage fixed Relic")
 

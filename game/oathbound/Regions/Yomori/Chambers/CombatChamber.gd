@@ -78,7 +78,7 @@ func post_clear() -> void:
 	print("[YomoriCombatChamber] Reward collected: %s -> gates unlocked" % reward_key)
 
 
-func _configure_pressure_tokens() -> void:
+func _configure_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 	AttackDir.set_role_limits({
@@ -99,7 +99,7 @@ func _configure_pressure_tokens() -> void:
 		AttackDir.max_frontline = 4
 
 
-func _update_pressure_tokens() -> void:
+func _update_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 	var alive := 0

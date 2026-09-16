@@ -228,7 +228,7 @@ func _validate_loaded_chamber(index: int) -> void:
 	if base_role == "combat":
 		_expect(room.scene_file_path == EXPECTED_COMBAT_SCENE, "Chamber %d: combat leaked outside canonical Yomori chamber" % [index + 1])
 	if base_role == "treasure":
-		_expect(room.scene_file_path == EXPECTED_TREASURE_SCENE, "Chamber %d: Treasure aliases another room" % [index + 1])
+		_expect(room.scene_file_path == EXPECTED_TREASURE_SCENE, "Chamber %d: Treasure did not resolve to canonical ThreeQuarter scene" % [index + 1])
 	if base_role == "boss":
 		_validate_twin_maws_room(room, index)
 

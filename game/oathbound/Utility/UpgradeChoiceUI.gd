@@ -11,6 +11,14 @@ const LOCALIZATION = preload("res://Core/Release/OathboundLocalization.gd")
 const READABILITY_STYLER = preload("res://Core/Release/OathboundReadabilityStyler.gd")
 const CARD_WIDTH := 190.0
 const CARD_HEIGHT := 205.0
+const NO_TECHNIQUE_CHOICE := {
+	"id": "technique_none",
+	"displayname": "No Eligible Technique",
+	"details": "No additional Technique currently satisfies this reward's eligibility rules. Select to continue.",
+	"family": "neutral",
+	"kind": "none",
+	"rarity": "common",
+}
 
 const FAMILY_COLORS := {
 	"echo": Color(0.82, 0.84, 0.88),
@@ -126,6 +134,11 @@ func open_with_context(list: Array, source: String, area_id: int) -> void:
 
 func _open(list: Array) -> void:
 	options = list.duplicate(true)
+	# Never pause the run on a reward screen with zero actionable controls. This can
+	# happen after a very complete run exhausts the eligible Technique/refinement pool,
+	# or if an older caller supplies an empty list.
+	if options.is_empty():
+		options.append(NO_TECHNIQUE_CHOICE.duplicate(true))
 	_focused_index = 0
 	_refresh_cards()
 	_refresh_reroll()
@@ -133,8 +146,7 @@ func _open(list: Array) -> void:
 	visible = true
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if not _cards.is_empty():
-		_cards[0].grab_focus()
+	_focus_current_card()
 	print("[TechniqueRewardUI] opened — %d choices | source=%s" % [options.size(), _source if not _source.is_empty() else "legacy"])
 
 
@@ -201,6 +213,7 @@ func _kind_label(data: Dictionary) -> String:
 		"cross": return LOCALIZATION.ui("technique.kind.cross", "CROSS-FAMILY TECHNIQUE")
 		"legendary": return LOCALIZATION.ui("technique.kind.legendary", "LEGENDARY TECHNIQUE")
 		"refinement": return LOCALIZATION.ui("technique.kind.refinement", "REFINEMENT")
+		"none": return LOCALIZATION.ui("technique.kind.none", "CONTINUE")
 		_: return LOCALIZATION.ui("technique.kind.generic", "TECHNIQUE")
 
 
@@ -210,12 +223,20 @@ func _refresh_reroll() -> void:
 		count = int(RunData.technique_rerolls)
 	var reroll_template: String = LOCALIZATION.ui("technique.reroll", "Reroll Entire Screen (%d)")
 	_reroll_button.text = reroll_template % count
-	_reroll_button.disabled = _source.is_empty() or count <= 0
+	var has_real_choice := _has_real_technique_choice()
+	_reroll_button.disabled = _source.is_empty() or count <= 0 or not has_real_choice
 	_reroll_button.visible = not _source.is_empty()
 
 
+func _has_real_technique_choice() -> bool:
+	for choice_value: Variant in options:
+		if choice_value is Dictionary and str((choice_value as Dictionary).get("id", "")) != "technique_none":
+			return true
+	return false
+
+
 func _on_reroll_pressed() -> void:
-	if _source.is_empty():
+	if _source.is_empty() or not _has_real_technique_choice():
 		return
 	var rerolled: Array = UpgradeService.reroll_three_choices(_source, _area_id, options)
 	if rerolled.is_empty():
@@ -225,21 +246,23 @@ func _on_reroll_pressed() -> void:
 	_focused_index = 0
 	_refresh_cards()
 	_refresh_reroll()
-	if not _cards.is_empty():
-		_cards[0].grab_focus()
+	_focus_current_card()
 	print("[TechniqueRewardUI] rerolled entire screen")
 
 
 func _input(event: InputEvent) -> void:
 	if not visible or not event.is_pressed():
 		return
+	var selectable_count := mini(options.size(), _cards.size())
+	if selectable_count <= 0:
+		return
 	if event.is_action_pressed("left"):
-		_focused_index = maxi(0, _focused_index - 1)
-		_cards[_focused_index].grab_focus()
+		_focused_index = clampi(_focused_index - 1, 0, selectable_count - 1)
+		_focus_current_card()
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("right"):
-		_focused_index = mini(_cards.size() - 1, _focused_index + 1)
-		_cards[_focused_index].grab_focus()
+		_focused_index = clampi(_focused_index + 1, 0, selectable_count - 1)
+		_focus_current_card()
 		get_viewport().set_input_as_handled()
 	elif event.is_action_pressed("interact"):
 		_select_choice(_focused_index)
@@ -247,15 +270,24 @@ func _input(event: InputEvent) -> void:
 
 
 func _set_focus(index: int) -> void:
-	_focused_index = index
+	if index >= 0 and index < options.size():
+		_focused_index = index
+
+
+func _focus_current_card() -> void:
+	if _focused_index < 0 or _focused_index >= options.size() or _focused_index >= _cards.size():
+		return
+	if _cards[_focused_index].visible:
+		_cards[_focused_index].grab_focus()
 
 
 func _select_choice(index: int) -> void:
 	if index < 0 or index >= options.size():
 		return
 	var choice: Dictionary = options[index]
-	if str(choice.get("id", "")) == "technique_none":
-		return
+	# `technique_none` is an intentional terminal fallback from the offer generator.
+	# Treat it as a no-op selection so an exhausted pool can never leave the SceneTree
+	# paused forever. UpgradeService already ignores this compatibility ID.
 	visible = false
 	get_tree().paused = false
 	choice_made.emit(choice)

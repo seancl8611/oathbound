@@ -8,12 +8,20 @@ on:
     paths:
       - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
       - "game/oathbound/Core/Release/Validation/ChoiceResumePlayerStateSmoke.*"
+      - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
+      - "game/oathbound/Core/Validation/TechniqueRewardUISmoke.*"
+      - "game/oathbound/Utility/UpgradeChoiceUI.gd"
+      - "game/oathbound/autoload/UpgradeService.gd"
       - "game/oathbound/autoload/OathboundRegionGameFlow.gd"
       - ".github/workflows/choice-resume-state-check.yml"
   pull_request:
     paths:
       - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
       - "game/oathbound/Core/Release/Validation/ChoiceResumePlayerStateSmoke.*"
+      - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
+      - "game/oathbound/Core/Validation/TechniqueRewardUISmoke.*"
+      - "game/oathbound/Utility/UpgradeChoiceUI.gd"
+      - "game/oathbound/autoload/UpgradeService.gd"
       - "game/oathbound/autoload/OathboundRegionGameFlow.gd"
       - ".github/workflows/choice-resume-state-check.yml"
   workflow_dispatch:
@@ -41,7 +49,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --verbose --path game/oathbound res://Core/Release/Validation/ChoiceResumePlayerStateSmoke.tscn 2>&1 | tee choice-resume-state.log
-          grep -F "[ChoiceResumePlayerStateSmoke] PASS - choice boundary preserves snapshot | chamber ownership applies once | Health/Posture/Spirit restored" choice-resume-state.log
+          grep -F "[ChoiceResumePlayerStateSmoke] PASS - choice boundary preserves snapshot | chamber ownership applies once | Health/Spirit restored | legacy Posture ignored" choice-resume-state.log
           if grep -F "SCRIPT ERROR:" choice-resume-state.log; then
             echo "FAIL: choice resume smoke emitted a GDScript runtime error."
             exit 1
@@ -55,11 +63,32 @@ jobs:
             exit 1
           fi
 
-      - name: Upload choice resume log
+      - name: Verify exhausted Technique reward continuation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Validation/TechniqueRewardUISmoke.tscn 2>&1 | tee technique-reward-ui.log
+          grep -F "[TechniqueRewardUISmoke] PASS - exhausted pool continues safely | technique_none selectable | hidden-card focus blocked | exhausted reroll spend blocked" technique-reward-ui.log
+          if grep -F "SCRIPT ERROR:" technique-reward-ui.log; then
+            echo "FAIL: Technique reward UI smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" technique-reward-ui.log; then
+            echo "FAIL: Technique reward UI smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+          if grep -F "ObjectDB instance was leaked at exit" technique-reward-ui.log; then
+            echo "FAIL: Technique reward UI smoke leaked ObjectDB instances."
+            exit 1
+          fi
+
+      - name: Upload choice resume logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: choice-resume-state-${{ github.run_id }}
-          path: choice-resume-state.log
+          path: |
+            choice-resume-state.log
+            technique-reward-ui.log
           if-no-files-found: warn
           retention-days: 7

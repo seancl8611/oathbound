@@ -183,7 +183,7 @@ func _validate_loaded_chamber(index: int) -> void:
 	if base_role == "combat":
 		_expect(room.scene_file_path == EXPECTED_COMBAT_SCENE, "Kagutsuchi combat leaked to %s" % room.scene_file_path)
 	if base_role == "treasure":
-		_expect(room.scene_file_path == EXPECTED_TREASURE_SCENE, "Treasure aliases another room")
+		_expect(room.scene_file_path == EXPECTED_TREASURE_SCENE, "Treasure did not resolve to canonical ThreeQuarter scene")
 	if base_role == "boss":
 		_validate_shogun_room(room, index)
 

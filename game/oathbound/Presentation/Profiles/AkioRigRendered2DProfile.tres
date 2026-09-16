@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Presentation/DirectionalSpriteProfile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+profile_id = "akio_rig_rendered_2d"
+actor_role = "player"
+asset_ready = false
+visual_scale_multiplier = 0.62
+visual_offset = Vector2(0, 0)
+foot_anchor_px = Vector2(64, 112)
+frame_canvas_size = Vector2i(128, 128)
+enforce_frame_canvas_size = true
+pixel_art = true
+snap_actor_to_pixel_grid = true
+default_fps = 12.0
+required_animation_bases = PackedStringArray("idle", "move", "dash", "defend", "hurt", "death", "attack_quick_slash", "attack_cross_cut", "attack_heavy_cleave")
+looping_animation_bases = PackedStringArray("idle", "move")
+authoritative_sample_states = PackedStringArray("attack")
+action_aliases = {
+"quick_slash": "quick_slash",
+"cross_cut": "cross_cut",
+"heavy_cleave": "heavy_cleave",
+"hold_thrust": "quick_slash",
+"dash_slash": "quick_slash",
+"counter_cut": "cross_cut"
+}

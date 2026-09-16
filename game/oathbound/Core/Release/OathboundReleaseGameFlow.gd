@@ -106,7 +106,7 @@ func resume_prepared_run() -> bool:
 
 	_restore_aspect_state(checkpoint.get("aspect", {}))
 	_restore_corruption_state(checkpoint.get("corruption", {}))
-	_resume_player_state = (checkpoint.get("player", {}) as Dictionary).duplicate(true) if checkpoint.get("player", {}) is Dictionary else {}
+	_resume_player_state = _sanitize_player_state(checkpoint.get("player", {}))
 
 	var record_state_value: Variant = checkpoint.get("records", {})
 	var record_state: Dictionary = record_state_value if record_state_value is Dictionary else {}
@@ -131,7 +131,7 @@ func _load_current_room() -> void:
 	# Choice-first regional routes can resume before a concrete chamber exists. Keep
 	# the saved Player snapshot pending until the choice resolves and the canonical
 	# Player is actually parented into a room; otherwise Continue would silently reset
-	# Health/Posture/Spirit at the first Yomori or Kagutsuchi choice.
+	# Health/Spirit at the first Yomori or Kagutsuchi choice.
 	_apply_pending_resume_player_state_if_ready()
 	await get_tree().process_frame
 	_save_safe_checkpoint()
@@ -222,18 +222,29 @@ func _restore_corruption_state(value: Variant) -> void:
 		CorruptionRuntime.set_corruption_for_playtest(int((value as Dictionary).get("corruption", 0)))
 
 
+func _sanitize_player_state(value: Variant) -> Dictionary:
+	if not (value is Dictionary):
+		return {}
+	var state := (value as Dictionary).duplicate(true)
+	# Safe-resume version 1 may contain these keys from checkpoints written before the
+	# universal player-Posture retirement. Accept the old checkpoint, but do not propagate
+	# the obsolete resource into a new checkpoint or back into the current Player.
+	for legacy_key: String in ["stagger", "stagger_max", "posture", "max_posture"]:
+		state.erase(legacy_key)
+	return state
+
+
 func _capture_player_state() -> Dictionary:
 	if player == null or not is_instance_valid(player):
-		# On a resumed unresolved choice there is deliberately no Player yet. Preserve
-		# the saved snapshot in any checkpoint written at that boundary so another quit
-		# before choosing a chamber cannot erase the Player's persisted combat state.
+		# On a resumed unresolved choice there is deliberately no Player yet. Preserve the
+		# saved snapshot in any checkpoint written at that boundary so another quit before
+		# choosing a chamber cannot erase the Player's persisted Health/Spirit state.
 		if not _resume_player_state.is_empty():
-			return _resume_player_state.duplicate(true)
+			return _sanitize_player_state(_resume_player_state)
 		return {}
 	var result := {
 		"hp": int(player.get("hp")) if player.get("hp") != null else 1,
 		"maxhp": int(player.get("maxhp")) if player.get("maxhp") != null else 1,
-		"stagger_max": float(player.get("stagger_max")) if player.get("stagger_max") != null else 0.0,
 	}
 	var executor_value: Variant = player.get("prosthetic_executor")
 	if executor_value is Node and is_instance_valid(executor_value):
@@ -250,8 +261,8 @@ func _apply_resume_player_state(state: Dictionary) -> void:
 		player.set("maxhp", maxi(1, int(state.get("maxhp", player.get("maxhp")))))
 	if player.get("hp") != null:
 		player.set("hp", clampi(int(state.get("hp", player.get("hp"))), 1, int(player.get("maxhp"))))
-	if player.get("stagger_max") != null and state.has("stagger_max"):
-		player.set("stagger_max", maxf(1.0, float(state.get("stagger_max", player.get("stagger_max")))))
+	# Legacy Posture/stagger keys are intentionally ignored. Universal player Posture is
+	# no longer part of the active combat contract and must not regain authority via saves.
 	if player.has_method("_update_health_bar"):
 		player.call("_update_health_bar")
 	if player.get("collected_upgrades") != null and typeof(RunData) == TYPE_OBJECT:

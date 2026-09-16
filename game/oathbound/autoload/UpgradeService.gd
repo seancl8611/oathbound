@@ -73,20 +73,39 @@ func get_three_choices_for_source(source: String, area_id: int = 1, exclude_ids:
 func reroll_three_choices(source: String, area_id: int, previous_choices: Array) -> Array:
 	if RunData == null or not RunData.has_method("spend_technique_reroll"):
 		return []
-	if not RunData.spend_technique_reroll():
+	if int(RunData.technique_rerolls) <= 0:
 		return []
+
+	# Generate against the current screen before charging the resource. _fill_screen()
+	# always pads to three cards with technique_none, so array size cannot tell us whether
+	# an actual alternative exists; require at least one real ID not present on the old
+	# screen. This keeps late-run/small-pool rerolls from consuming a resource for nothing.
 	var excluded: Array = []
+	var previous_real_ids: Array[String] = []
 	for choice in previous_choices:
 		if choice is Dictionary:
 			var id := str(choice.get("id", ""))
-			if not id.is_empty():
-				excluded.append(id)
+			if id.is_empty() or id == "technique_none":
+				continue
+			excluded.append(id)
+			previous_real_ids.append(id)
+
 	var rerolled := get_three_choices_for_source(source, area_id, excluded)
-	if rerolled.size() < 3:
-		# Preserve the resource spend but relax immediate-repeat exclusion if the
-		# eligible pool is unusually small. Rarity/eligibility rules still hold.
-		rerolled = get_three_choices_for_source(source, area_id)
+	if not _offer_has_new_real_choice(rerolled, previous_real_ids):
+		return []
+	if not RunData.spend_technique_reroll():
+		return []
 	return rerolled
+
+
+func _offer_has_new_real_choice(choices: Array, previous_real_ids: Array[String]) -> bool:
+	for choice in choices:
+		if not (choice is Dictionary):
+			continue
+		var id := str(choice.get("id", ""))
+		if not id.is_empty() and id != "technique_none" and id not in previous_real_ids:
+			return true
+	return false
 
 
 func apply_upgrade(choice: Dictionary) -> void:

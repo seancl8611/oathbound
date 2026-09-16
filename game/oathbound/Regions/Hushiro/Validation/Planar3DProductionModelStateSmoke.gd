@@ -1,0 +1,176 @@
+extends Node
+
+## Validates the V2 production-GLB handoff diagnostics without assuming that any final
+## asset has landed yet. Canonical path existence, structural renderability, semantic
+## animation readiness, role spawn state, and actual final-GLB activation are distinct.
+
+const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridgeV2.gd")
+const ROLES: Array[String] = ["player", "swordsman", "hound", "hollow", "archer", "bilemass", "warden"]
+
+var _failures: Array[String] = []
+
+
+func _ready() -> void:
+	call_deferred("_run")
+
+
+func _run() -> void:
+	var room := Node2D.new()
+	room.name = "ProductionModelStateSmokeRoom"
+
+	var background := Sprite2D.new()
+	background.name = "Background"
+	room.add_child(background)
+	var presentation := Node2D.new()
+	presentation.name = "ThreeQuarterPresentation"
+	room.add_child(presentation)
+	var scenery := Node2D.new()
+	scenery.name = "Scenery"
+	presentation.add_child(scenery)
+	var combat_fx := Node2D.new()
+	combat_fx.name = "CombatFX"
+	presentation.add_child(combat_fx)
+
+	for index: int in range(ROLES.size()):
+		var role := ROLES[index]
+		var actor := CharacterBody2D.new()
+		actor.name = "ProductionState_%s" % role
+		actor.position = Vector2(float(index * 48), float((index % 2) * 40))
+		if role == "player":
+			actor.add_to_group("player")
+		else:
+			actor.add_to_group("enemy")
+			actor.set_meta("presentation_role", role)
+			actor.set_meta("hushiro_enemy_type", role)
+		var legacy_body := Sprite2D.new()
+		legacy_body.name = "LegacyBody"
+		actor.add_child(legacy_body)
+		room.add_child(actor)
+
+	var bridge_value: Variant = BRIDGE_SCRIPT.new()
+	if not (bridge_value is Node):
+		_fail("V2 bridge failed to instantiate")
+		_finish()
+		return
+	var bridge := bridge_value as Node
+	bridge.name = "Planar3DPresentationBridge"
+	room.add_child(bridge)
+	add_child(room)
+
+	for _i: int in range(10):
+		await get_tree().process_frame
+
+	var state_value: Variant = bridge.call("get_presentation_state")
+	if not (state_value is Dictionary):
+		_fail("production model diagnostics state unavailable")
+		room.queue_free()
+		await get_tree().process_frame
+		_finish()
+		return
+	var state := state_value as Dictionary
+
+	_expect(int(state.get("production_model_slot_count", 0)) == ROLES.size(), "canonical production model slot count drifted")
+	var exists_value: Variant = state.get("production_model_slot_exists_by_role", {})
+	var renderable_value: Variant = state.get("production_model_slot_renderable_by_role", {})
+	var activation_value: Variant = state.get("production_model_activation_ready_by_role", {})
+	var validation_value: Variant = state.get("production_model_validation_by_role", {})
+	var spawned_value: Variant = state.get("production_model_spawned_by_role", {})
+	var active_value: Variant = state.get("production_model_active_by_role", {})
+	if not (exists_value is Dictionary and renderable_value is Dictionary and activation_value is Dictionary and validation_value is Dictionary and spawned_value is Dictionary and active_value is Dictionary):
+		_fail("production model existence/renderable/activation/validation/spawned/active maps unavailable")
+	else:
+		var exists_map := exists_value as Dictionary
+		var renderable_map := renderable_value as Dictionary
+		var activation_map := activation_value as Dictionary
+		var validation_map := validation_value as Dictionary
+		var spawned_map := spawned_value as Dictionary
+		var active_map := active_value as Dictionary
+		var counted_exists := 0
+		var counted_renderable := 0
+		var counted_activation_ready := 0
+		var counted_active := 0
+		for role: String in ROLES:
+			_expect(exists_map.has(role), "slot-existence diagnostics missing role %s" % role)
+			_expect(renderable_map.has(role), "slot-renderable diagnostics missing role %s" % role)
+			_expect(activation_map.has(role), "activation-readiness diagnostics missing role %s" % role)
+			_expect(validation_map.has(role), "slot validation diagnostics missing role %s" % role)
+			_expect(spawned_map.has(role), "spawn diagnostics missing role %s" % role)
+			_expect(active_map.has(role), "active-GLB diagnostics missing role %s" % role)
+			_expect(bool(spawned_map.get(role, false)), "representative role was not marked spawned: %s" % role)
+
+			var slot_exists := bool(exists_map.get(role, false))
+			var slot_renderable := bool(renderable_map.get(role, false))
+			var activation_ready := bool(activation_map.get(role, false))
+			var final_active := bool(active_map.get(role, false))
+			var per_role_validation_value: Variant = validation_map.get(role, {})
+			var per_role_validation := per_role_validation_value as Dictionary if per_role_validation_value is Dictionary else {}
+			_expect(str(per_role_validation.get("path", "")).ends_with(".glb"), "canonical validation path missing/invalid for %s" % role)
+			_expect(bool(per_role_validation.get("exists", false)) == slot_exists, "validator existence disagrees for %s" % role)
+			_expect(bool(per_role_validation.get("renderable", false)) == slot_renderable, "validator renderability disagrees for %s" % role)
+			_expect(bool(per_role_validation.get("activation_ready", false)) == activation_ready, "validator activation readiness disagrees for %s" % role)
+
+			if slot_exists:
+				counted_exists += 1
+				# Once somebody lands a canonical final-art file, CI refuses to hide a proven
+				# fallback behind malformed geometry or a direct-GLB animation contract the
+				# runtime cannot safely drive.
+				_expect(slot_renderable, "canonical production slot exists but is not renderable: %s state=%s" % [role, str(per_role_validation.get("state", "unknown"))])
+				_expect(activation_ready, "canonical production slot exists but is not direct-GLB activation-ready: %s state=%s players=%d root_tracks=%d" % [role, str(per_role_validation.get("state", "unknown")), int(per_role_validation.get("animation_contract_player_count", 0)), int(per_role_validation.get("animation_root_transform_track_count", 0))])
+			else:
+				_expect(str(per_role_validation.get("state", "")) == "absent", "missing production slot did not report absent: %s" % role)
+			if slot_renderable:
+				counted_renderable += 1
+				_expect(slot_exists, "renderable slot reported without canonical resource: %s" % role)
+			if activation_ready:
+				counted_activation_ready += 1
+				_expect(slot_exists and slot_renderable, "activation-ready slot lacks valid renderable resource: %s" % role)
+				_expect(bool(per_role_validation.get("animation_contract_ready", false)), "activation-ready slot lacks animation contract: %s" % role)
+				_expect(int(per_role_validation.get("animation_contract_player_count", 0)) >= 1, "activation-ready slot lacks one complete AnimationPlayer: %s" % role)
+				_expect(not str(per_role_validation.get("animation_contract_player_path", "")).is_empty(), "activation-ready slot lacks selected AnimationPlayer path: %s" % role)
+				_expect(int(per_role_validation.get("animation_root_transform_track_count", -1)) == 0, "activation-ready slot contains scene-root transform animation: %s" % role)
+			if final_active:
+				counted_active += 1
+				_expect(activation_ready, "role-specific GLB active without activation-ready production contract: %s" % role)
+			if not slot_exists:
+				_expect(not final_active, "missing production slot incorrectly reported active: %s" % role)
+
+		_expect(int(state.get("production_model_slot_exists_count", -1)) == counted_exists, "production model existence count disagrees with role map")
+		_expect(int(state.get("production_model_slot_renderable_count", -1)) == counted_renderable, "production model renderable count disagrees with role map")
+		_expect(int(state.get("production_model_activation_ready_count", -1)) == counted_activation_ready, "production model activation-ready count disagrees with role map")
+		_expect(int(state.get("production_model_active_count", -1)) == counted_active, "production model active count disagrees with role map")
+
+	# Compatibility `ready` fields remain an existence alias until old telemetry consumers
+	# are retired. They must not diverge from the explicit slot-existence state.
+	var ready_value: Variant = state.get("production_model_ready_by_role", {})
+	if ready_value is Dictionary and exists_value is Dictionary:
+		var ready_map := ready_value as Dictionary
+		var exists_alias_map := exists_value as Dictionary
+		for role: String in ROLES:
+			_expect(bool(ready_map.get(role, false)) == bool(exists_alias_map.get(role, false)), "legacy ready alias diverged for %s" % role)
+		_expect(int(state.get("production_model_ready_count", -1)) == int(state.get("production_model_slot_exists_count", -2)), "legacy ready count diverged from slot existence count")
+	else:
+		_fail("legacy production model readiness aliases unavailable")
+
+	room.queue_free()
+	await get_tree().process_frame
+	_finish()
+
+
+func _finish() -> void:
+	if _failures.is_empty():
+		print("[Planar3DProductionModelStateSmoke] PASS - production slot existence, renderability, single-player/root-safe animation readiness, spawned-role state, and active GLB state remain consistent")
+		get_tree().quit(0)
+		return
+	for failure: String in _failures:
+		push_error("[Planar3DProductionModelStateSmoke] %s" % failure)
+	print("[Planar3DProductionModelStateSmoke] FAIL count=%d" % _failures.size())
+	get_tree().quit(1)
+
+
+func _expect(condition: bool, message: String) -> void:
+	if not condition:
+		_fail(message)
+
+
+func _fail(message: String) -> void:
+	_failures.append(message)

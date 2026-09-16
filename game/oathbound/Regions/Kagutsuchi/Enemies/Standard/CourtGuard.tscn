@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://pcsqj8jlqd5j"]
+[gd_scene load_steps=38 format=3 uid="uid://pcsqj8jlqd5j"]
 
 [ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Standard/CourtGuard.gd" id="1_jeygg"]
 [ext_resource type="Shader" path="res://Shaders/buff_glow.gdshader" id="2_6ujl8"]
@@ -25,7 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://2l1dslkwebk3" path="res://Textures/Enemy/foot_soldier/walk6.png" id="23_10nm3"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="24_6f111"]
 [ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="25_qp7ek"]
-[ext_resource type="Script" path="res://Utility/CombatController.gd" id="26_awlhr"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyCombatController.gd" id="26_awlhr"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyDefenseRuntime.gd" id="27_health"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rfba4"]
 shader = ExtResource("2_6ujl8")
@@ -151,6 +152,9 @@ shape = SubResource("RectangleShape2D_rborl")
 [node name="snd_hit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("25_qp7ek")
 volume_db = -20.0
+
+[node name="StandardEnemyDefenseRuntime" type="Node" parent="."]
+script = ExtResource("27_health")
 
 [node name="Combat" type="Node" parent="."]
 script = ExtResource("26_awlhr")

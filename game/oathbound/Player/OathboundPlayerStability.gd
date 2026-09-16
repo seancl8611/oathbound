@@ -8,6 +8,10 @@ extends "res://Player/OathboundPlayerTargeting.gd"
 const DEATH_RETURN_DELAY := 0.45
 const TECHNIQUE_DEATHBLOW_GRACE := 2.0
 var _combat_dead: bool = false
+var _damage_trace_raw: int = 0
+var _damage_trace_type: String = ""
+var _damage_trace_modifier: float = 1.0
+var _damage_trace_final_requested: int = 0
 
 
 func _ready() -> void:
@@ -22,10 +26,68 @@ func _ready() -> void:
 	super._ready()
 
 
+func _on_hurt(dmg: int, dmg_type: String, attacker: Node = null) -> void:
+	if _combat_dead:
+		return
+
+	var hp_before: int = int(hp)
+	var modifier: float = 1.0
+	var stance_effects: Node = get_node_or_null("/root/StanceEffects")
+	if stance_effects != null and stance_effects.has_method("get_curse_damage_mult"):
+		modifier = float(stance_effects.call("get_curse_damage_mult", attacker))
+
+	_damage_trace_raw = dmg
+	_damage_trace_type = dmg_type
+	_damage_trace_modifier = modifier
+	_damage_trace_final_requested = 0
+
+	super._on_hurt(dmg, dmg_type, attacker)
+
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		var hp_after: int = int(hp)
+		var resolved_attacker: Node = null
+		var hit_area: Area2D = attacker as Area2D if attacker is Area2D else null
+		resolved_attacker = _resolve_attacker(hit_area, attacker)
+		var payload: Dictionary = {
+			"raw_damage": dmg,
+			"damage_type": dmg_type,
+			"stance_modifier": modifier,
+			"expected_modified_damage": int(max(1.0, float(dmg) * modifier)),
+			"final_requested_damage": _damage_trace_final_requested,
+			"hp_before": hp_before,
+			"hp_after": hp_after,
+			"actual_health_lost": maxi(0, hp_before - hp_after),
+			"blocked_or_avoided": hp_before == hp_after,
+			"stance_effects_present": stance_effects != null,
+		}
+		if resolved_attacker != null and is_instance_valid(resolved_attacker):
+			payload["resolved_attacker"] = CombatTelemetry.snapshot_actor(resolved_attacker)
+		CombatTelemetry.record_event("player_incoming_damage_resolved", payload)
+
+	_damage_trace_raw = 0
+	_damage_trace_type = ""
+	_damage_trace_modifier = 1.0
+	_damage_trace_final_requested = 0
+
+
 func take_damage(amount: int, show_feedback: bool = true) -> void:
 	if _combat_dead:
 		return
+	var hp_before: int = int(hp)
+	_damage_trace_final_requested = amount
 	super.take_damage(amount, show_feedback)
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		var hp_after: int = int(hp)
+		CombatTelemetry.record_event("player_health_damage_applied", {
+			"raw_incoming_damage": _damage_trace_raw,
+			"damage_type": _damage_trace_type,
+			"stance_modifier": _damage_trace_modifier,
+			"requested_damage": amount,
+			"armor": int(armor),
+			"hp_before": hp_before,
+			"hp_after": hp_after,
+			"actual_health_lost": maxi(0, hp_before - hp_after),
+		})
 
 
 func _try_deathblow() -> bool:

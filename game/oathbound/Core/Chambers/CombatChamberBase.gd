@@ -1,14 +1,13 @@
 extends RoomBase
 
 ## =============================================================================
-## COMBAT ROOM - PRESSURE PACING
+## COMBAT ROOM - HEALTH-FIRST PRESSURE SYSTEM
 ## =============================================================================
-## Philosophy: coordinated enemy pressure instead of sequential dueling.
-## - One attacker for small encounters, up to two melee attackers in larger packs.
-## - Ranged pressure may overlap melee pressure without becoming constant spam.
-## - Short turnover/cooldown windows keep enemies active while preserving readable tells.
-## - AttackDirector remains the compatibility API; migrated enemies may use the newer
-##   pressure-reservation path layered on top of it.
+## Philosophy: readable multi-enemy pressure rather than sequential dueling.
+## - concurrency scales with the living roster
+## - short attack turnover keeps the player moving
+## - ranged and melee pressure can overlap without becoming a dogpile
+## - standard enemies resolve through Health + hidden Poise, not Posture rewards
 ## =============================================================================
 
 @onready var ui: CanvasLayer = preload("res://Utility/UpgradeChoiceUI.tscn").instantiate()
@@ -25,28 +24,14 @@ var _alive = 0
 var _encounter_aggro_locked: bool = false
 
 const COMBAT_REWARDS = {
-	"gold":   {1: 50, 2: 75, 3: 100},
-	"mist":   {1: 4,  2: 5,  3: 6},
-	"scroll": {1: 1,  2: 2,  3: 3},
-	"maxhp":  {1: 3,  2: 4,  3: 5},
+	"gold":        {1: 50, 2: 75, 3: 100},
+	"mist":        {1: 4,  2: 5,  3: 6},
+	"scroll":      {1: 1,  2: 2,  3: 3},
+	"maxhp":       {1: 3,  2: 4,  3: 5},
 }
 
-const SMALL_ENCOUNTER_MELEE_LIMIT: int = 1
-const LARGE_ENCOUNTER_MELEE_LIMIT: int = 2
-const LARGE_ENCOUNTER_THRESHOLD: int = 3
-const MAX_ADVANCE_SLOTS: int = 4
-const MAX_RANGED_ATTACKERS: int = 2
-
-const MELEE_COOLDOWN_SEC: float = 1.35
-const ADVANCE_COOLDOWN_SEC: float = 0.65
-const RANGED_COOLDOWN_SEC: float = 2.0
-const FORMATION_COOLDOWN_SEC: float = 0.8
-const ATTACK_GRANT_GAP_SEC: float = 0.25
-const ATTACK_TURNOVER_SEC: float = 0.30
-
-
 func _ready() -> void:
-	print("[CombatRoom] Pressure pacing active")
+	print("[CombatRoom] Health-first pressure combat")
 	add_child(ui)
 	ui.visible = false
 	ui.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
@@ -66,46 +51,45 @@ func _ready() -> void:
 	_push_spawn_rect_to_spawner(_spawn_rect)
 
 	lock_all_gates()
-
-	# Establish readable pressure defaults before the encounter begins. Autoscaling
-	# raises melee concurrency only when enough enemies are actually alive to justify it.
-	_configure_pressure_tokens()
-
+	
+	# Compatibility name retained because region-specific rooms override this hook.
+	# The behavior is pressure-oriented rather than a one-at-a-time duel.
+	_configure_duel_tokens()
+	
 	_start_encounter()
 
 
-## Configure AttackDirector compatibility roles for Hades-like encounter pressure.
-func _configure_pressure_tokens() -> void:
+## Configure the initial AttackDirector pressure envelope.
+## The method name is retained for compatibility with region-specific overrides.
+func _configure_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
-
+	
 	AttackDir.set_role_limits({
-		"melee_attack": SMALL_ENCOUNTER_MELEE_LIMIT,
+		"melee_attack": 1,
 		"advance_move": 3,
-		"ranged_attack": MAX_RANGED_ATTACKERS,
+		"ranged_attack": 1,
 		"frontal": 1,
 		"flank_left": 1,
-		"flank_right": 1,
+		"flank_right": 1
 	})
-
+	
 	AttackDir.set_role_cooldowns({
-		"melee_attack": MELEE_COOLDOWN_SEC,
-		"advance_move": ADVANCE_COOLDOWN_SEC,
-		"ranged_attack": RANGED_COOLDOWN_SEC,
-		"frontal": FORMATION_COOLDOWN_SEC,
-		"flank_left": FORMATION_COOLDOWN_SEC,
-		"flank_right": FORMATION_COOLDOWN_SEC,
+		"melee_attack": 1.35,
+		"advance_move": 0.65,
+		"ranged_attack": 1.80,
+		"frontal": 0.75,
+		"flank_left": 0.75,
+		"flank_right": 0.75
 	})
-
+	
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = ATTACK_GRANT_GAP_SEC
+		AttackDir.grant_gap_sec = 0.38
+	
 	if _has_property(AttackDir, "attack_turnover_delay"):
-		AttackDir.attack_turnover_delay = ATTACK_TURNOVER_SEC
-	if _has_property(AttackDir, "max_frontline"):
-		AttackDir.max_frontline = 4
-
-	print("[CombatRoom] Pressure roles configured: dynamic 1-2 melee, up to 2 ranged")
-
+		AttackDir.attack_turnover_delay = 0.48
+	
+	print("[CombatRoom] Pressure envelope configured: 1 melee, 3 advance, 1 ranged")
 
 func _start_encounter() -> void:
 	if spawner:
@@ -118,7 +102,7 @@ func _start_encounter() -> void:
 
 		var tmpl: Dictionary = {}
 		var area_id = get_meta("area_id") if has_meta("area_id") else 1
-
+		
 		# Use EncounterDB if available
 		if typeof(EncounterDB) == TYPE_OBJECT:
 			var forced_id = encounter_id_override.strip_edges()
@@ -128,7 +112,7 @@ func _start_encounter() -> void:
 					push_warning("[CombatRoom] Unknown encounter_id_override: %s" % forced_id)
 					forced_id = ""
 				else:
-					# Detect correct area from which array the encounter lives in
+					# Detect correct area from which array the encounter lives in.
 					area_id = _detect_encounter_area(forced_id, area_id)
 
 			if tmpl.is_empty():
@@ -142,12 +126,11 @@ func _start_encounter() -> void:
 		push_warning("[CombatRoom] EnemyEncounterSpawner missing; falling back to timer")
 		await get_tree().create_timer(6.0).timeout
 		_on_room_cleared()
-
-
+		
 func _pick_encounter_for_area(area_id: int) -> Dictionary:
 	if typeof(EncounterDB) != TYPE_OBJECT:
 		return _default_template()
-
+	
 	match area_id:
 		1:
 			if EncounterDB.has_method("pick_area1"):
@@ -165,10 +148,9 @@ func _pick_encounter_for_area(area_id: int) -> Dictionary:
 			if EncounterDB.has_method("pick_area1"):
 				push_warning("[CombatRoom] No pick_area3() yet — using area 1 encounters")
 				return EncounterDB.pick_area1()
-
+	
 	return _default_template()
-
-
+	
 func _on_encounter_started() -> void:
 	print("[CombatRoom] Encounter started")
 	_alive = 0
@@ -176,8 +158,9 @@ func _on_encounter_started() -> void:
 		if is_instance_valid(e) and is_ancestor_of(e):
 			_alive += 1
 			_wire_enemy_signals(e)
-
-	_start_pressure_autoscale()
+	
+	# Start pressure-token management.
+	_start_token_autoscale()
 
 
 func _on_encounter_cleared() -> void:
@@ -192,43 +175,43 @@ func _on_room_cleared() -> void:
 	print("[CombatRoom] Room cleared → preparing reward")
 	emit_signal("room_cleared")
 
-
 func post_clear() -> void:
 	print("[CombatRoom] Post-clear → spawning reward pickup")
-
+	
 	var reward_key = get_meta("reward_key") if has_meta("reward_key") else ""
 	var area_id = get_meta("area_id") if has_meta("area_id") else 1
-
-	# Technique rewards are resolved by their own picker rather than a numeric amount.
+	
+	# Determine reward amount (0 for boon — handled internally by pickup)
 	var amount = 0
-	if reward_key not in ["boon", "technique", ""]:
+	if reward_key != "boon" and reward_key != "":
 		var table = COMBAT_REWARDS.get(reward_key, {})
 		amount = table.get(area_id, table.get(1, 0))
-
-	# New combat rooms default to current Technique terminology. `boon` remains accepted
-	# by RewardPickup only for compatibility with imported later-area route data.
+	
+	# Default to boon if no reward key
 	if reward_key == "":
-		reward_key = "technique"
-
+		reward_key = "boon"
+	
 	# Find spawn position (center of room or near player)
 	var spawn_pos = Vector2.ZERO
 	var room_center = get_node_or_null("RoomCenter")
 	if room_center and room_center is Node2D:
 		spawn_pos = room_center.global_position
 	else:
+		# Fallback: use spawn rect center
 		spawn_pos = _spawn_rect.get_center() if _spawn_rect.size != Vector2.ZERO else global_position
-
+	
+	# Spawn the pickup
 	var RewardPickupScript = load("res://Objects/RewardPickup.gd")
 	var pickup = RewardPickupScript.new()
 	pickup.setup(reward_key, amount, area_id)
 	pickup.global_position = spawn_pos
 	add_child(pickup)
-
+	
+	# Wait for player to collect, then unlock gates
 	await pickup.collected
 	unlock_all_gates()
 	print("[CombatRoom] Reward collected → gates unlocked")
-
-
+	
 func _grant_max_hp(amount: int) -> void:
 	var players = get_tree().get_nodes_in_group("player")
 	if players.size() > 0:
@@ -240,11 +223,11 @@ func _grant_max_hp(amount: int) -> void:
 				p._update_health_bar()
 
 
-## Default fallback template - short two-wave pressure encounter.
+## Default fallback template - short pressure ramp.
 func _default_template() -> Dictionary:
 	return {
 		"id": "fallback_pressure",
-		"wave_spacing": [3.0, 4.0],
+		"wave_spacing": [3.0, 4.5],
 		"waves": [
 			{"groups": [
 				{"type": "soldier", "count": 1}
@@ -255,91 +238,88 @@ func _default_template() -> Dictionary:
 		]
 	}
 
-
 func _wire_enemy_signals(e: Node) -> void:
 	if not is_instance_valid(e):
 		return
-
+	
 	if e.has_signal("enemy_died") and not e.is_connected("enemy_died", Callable(self, "_on_enemy_died")):
 		e.connect("enemy_died", Callable(self, "_on_enemy_died"))
 
-
 func _on_enemy_died(_enemy: Node) -> void:
 	_alive = max(0, _alive - 1)
-	# Pressure scaling is still handled by the autoscale tick.
+	# Token scaling is still handled by autoscale tick.
 
 
-func _start_pressure_autoscale() -> void:
+func _start_token_autoscale() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 	if not is_instance_valid(self):
 		return
-
-	if not has_node("PressureTick"):
+	
+	if not has_node("TokenTick"):
 		var t = Timer.new()
-		t.name = "PressureTick"
+		t.name = "TokenTick"
 		t.wait_time = 0.5
 		t.one_shot = false
 		add_child(t)
 		t.timeout.connect(_autoscale_tick)
-
+	
+	# Initial tick
 	_autoscale_tick()
-	$PressureTick.start()
+	$TokenTick.start()
 
 
 func _autoscale_tick() -> void:
+	# Recount alive enemies
 	var count = 0
 	for e in get_tree().get_nodes_in_group("enemy"):
 		if is_instance_valid(e) and is_ancestor_of(e):
 			count += 1
 	_alive = count
 
+	# Check aggro state
 	_update_encounter_aggro_lock()
-	_update_pressure_tokens()
+	
+	# Update pressure permissions based on the live roster.
+	_update_duel_tokens()
 
 
-## Scale compatibility roles by live encounter pressure. Small fights remain readable;
-## packs of three or more may overlap a second melee action instead of forming a queue.
-func _update_pressure_tokens() -> void:
+## Compatibility hook: dynamically scales pressure instead of enforcing a duel.
+func _update_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 
 	var alive = 0
-	var ranged_bodies = 0
 	for e in get_tree().get_nodes_in_group("enemy"):
 		if is_instance_valid(e) and is_ancestor_of(e):
 			alive += 1
-			if e.is_in_group("archer") or e.is_in_group("ranged"):
-				ranged_bodies += 1
 
-	var melee = SMALL_ENCOUNTER_MELEE_LIMIT if alive < LARGE_ENCOUNTER_THRESHOLD else LARGE_ENCOUNTER_MELEE_LIMIT
-	var advance = clampi(alive, 1, MAX_ADVANCE_SLOTS)
-	var ranged = mini(MAX_RANGED_ATTACKERS, ranged_bodies)
-	if ranged_bodies > 0:
-		ranged = maxi(1, ranged)
-
+	var melee := 1 if alive <= 2 else 2
+	var advance := clampi(alive, 1, 4)
+	var ranged := 1 if alive <= 4 else 2
+	
 	AttackDir.set_role_limits({
 		"melee_attack": melee,
 		"advance_move": advance,
 		"ranged_attack": ranged,
 		"frontal": 1,
 		"flank_left": 1,
-		"flank_right": 1,
+		"flank_right": 1
 	})
 
 	AttackDir.set_role_cooldowns({
-		"melee_attack": MELEE_COOLDOWN_SEC,
-		"advance_move": ADVANCE_COOLDOWN_SEC,
-		"ranged_attack": RANGED_COOLDOWN_SEC,
-		"frontal": FORMATION_COOLDOWN_SEC,
-		"flank_left": FORMATION_COOLDOWN_SEC,
-		"flank_right": FORMATION_COOLDOWN_SEC,
+		"melee_attack": 1.35,
+		"advance_move": 0.65,
+		"ranged_attack": 1.80,
+		"frontal": 0.75,
+		"flank_left": 0.75,
+		"flank_right": 0.75
 	})
 
 	if _has_property(AttackDir, "grant_gap_sec"):
-		AttackDir.grant_gap_sec = ATTACK_GRANT_GAP_SEC
+		AttackDir.grant_gap_sec = 0.38
 	if _has_property(AttackDir, "attack_turnover_delay"):
-		AttackDir.attack_turnover_delay = ATTACK_TURNOVER_SEC
+		AttackDir.attack_turnover_delay = 0.48
 
 
 func _on_enemy_spawned(e: Node) -> void:
@@ -416,20 +396,25 @@ func _has_property(o: Object, name: String) -> bool:
 			return true
 	return false
 
-
 func _detect_encounter_area(encounter_id: String, fallback: int) -> int:
 	if typeof(EncounterDB) != TYPE_OBJECT:
 		return fallback
-
-	# Check each area's encounter list for the ID
+	
+	# Keep forced/debug encounter area context aligned with the catalog that supplied it;
+	# the spawner resolves identical enemy type strings against area-specific registries.
 	if EncounterDB.get("area1_encounters") != null:
 		for enc in EncounterDB.area1_encounters:
 			if enc.get("id", "") == encounter_id:
 				return 1
-
+	
 	if EncounterDB.get("area2_encounters") != null:
 		for enc in EncounterDB.area2_encounters:
 			if enc.get("id", "") == encounter_id:
 				return 2
 
+	if EncounterDB.get("area3_encounters") != null:
+		for enc in EncounterDB.area3_encounters:
+			if enc.get("id", "") == encounter_id:
+				return 3
+	
 	return fallback

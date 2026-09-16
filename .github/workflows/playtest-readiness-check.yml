@@ -1,0 +1,69 @@
+name: Playtest Readiness Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  playtest-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify Mirror Umbrella runtime contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Prosthetics/OathboundProstheticRuntimeSmoke.tscn 2>&1 | tee prosthetic-runtime-smoke.log
+          grep -F "[OathboundProstheticRuntimeSmoke] PASS - Umbrella local storage overflow release no-player-Posture" prosthetic-runtime-smoke.log
+          if grep -F "SCRIPT ERROR:" prosthetic-runtime-smoke.log; then
+            echo "FAIL: Prosthetic runtime smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" prosthetic-runtime-smoke.log; then
+            echo "FAIL: Prosthetic runtime smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Smoke current RunScene
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee playtest-runscene-smoke.log
+          grep -F "player_factory_created script=res://Player/OathboundCombatPlayer.gd" playtest-runscene-smoke.log
+          grep -F "prosthetic_executor script=res://Core/Prosthetics/OathboundProstheticExecutor.gd" playtest-runscene-smoke.log
+          if grep -F "SCRIPT ERROR:" playtest-runscene-smoke.log; then
+            echo "FAIL: RunScene emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" playtest-runscene-smoke.log; then
+            echo "FAIL: RunScene emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload readiness logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playtest-readiness-${{ github.run_id }}
+          path: |
+            prosthetic-runtime-smoke.log
+            playtest-runscene-smoke.log
+          if-no-files-found: warn
+          retention-days: 7

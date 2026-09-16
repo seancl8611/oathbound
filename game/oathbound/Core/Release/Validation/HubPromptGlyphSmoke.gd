@@ -84,7 +84,6 @@ func _validate_default_controller_layout() -> void:
 		"interact": "[A]",
 		"prosthetic": "[Y]",
 		"special": "[RB]",
-		"execute_finisher": "[A]",
 		"left": "[LS Left]",
 		"right": "[LS Right]",
 		"up": "[LS Up]",

@@ -15,7 +15,7 @@ const BASE_FALLBACK_FONT_SIZE: int = 16
 
 const BINDABLE_ACTIONS: Array[String] = [
 	"up", "down", "left", "right",
-	"attack", "parry", "dash", "interact", "prosthetic", "special", "execute_finisher",
+	"attack", "parry", "dash", "interact", "prosthetic", "special",
 ]
 
 const DEFAULTS: Dictionary = {
@@ -58,9 +58,10 @@ func _input(event: InputEvent) -> void:
 	if not event.is_action_pressed("parry"):
 		return
 
-	# The current combat controller already treats a held parry action as the block
-	# state. Toggle mode therefore latches the same canonical action instead of adding
-	# a second block action or changing combat timing rules.
+	# The current combat controller still uses the `parry` input action as its shared
+	# Guard/defense input. Toggle mode latches that input without changing combat rules.
+	# This name is an implementation compatibility seam, not a statement that every
+	# Aspect owns a universal timed-parry mechanic.
 	_block_toggle_latched = not _block_toggle_latched
 	if _block_toggle_latched:
 		Input.action_press("parry")
@@ -231,8 +232,6 @@ func _apply_bus(bus_name: String, linear: float) -> void:
 
 
 func _apply_visual_readability() -> void:
-	# Godot 4.7 ThemeDB fallbacks affect Controls that do not provide a more specific
-	# theme override. Explicit authored font sizes remain under their owning UI surface.
 	ThemeDB.fallback_base_scale = get_ui_scale()
 	ThemeDB.fallback_font_size = maxi(1, int(round(float(BASE_FALLBACK_FONT_SIZE) * get_text_scale())))
 
@@ -276,7 +275,6 @@ func _apply_action_binding(action: String) -> void:
 	var stored: Array = stored_value
 	if stored.is_empty():
 		return
-	# Keep project defaults for any device family the player has not overridden.
 	var overridden_families: Dictionary = {}
 	for encoded_value: Variant in stored:
 		if encoded_value is Dictionary:
@@ -295,8 +293,6 @@ func _apply_action_binding(action: String) -> void:
 
 
 func _reset_bindings_to_project_defaults() -> void:
-	# Project defaults are restored on the next launch after the custom binding section
-	# is cleared. During the current session, reload project.godot's InputMap settings.
 	for action: String in BINDABLE_ACTIONS:
 		if not InputMap.has_action(action):
 			continue
