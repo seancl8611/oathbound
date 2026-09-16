@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fast static guard for Oathbound final-integration readiness boundaries."""
+"""Fast static guard for Oathbound's current final-integration boundaries."""
 
 from pathlib import Path
 import sys
@@ -30,7 +30,7 @@ def require(text: str, needle: str, label: str) -> None:
 
 def forbid(text: str, needle: str, label: str) -> None:
     if needle.casefold() in text.casefold():
-        raise AssertionError(f"{label}: retired Technique-slot language returned: {needle!r}")
+        raise AssertionError(f"{label}: retired contract text returned: {needle!r}")
 
 
 def main() -> int:
@@ -44,27 +44,34 @@ def main() -> int:
     attribution = read(ATTRIBUTION)
     milestone_7 = read(MILESTONE_7)
 
-    retired_phrases = (
-        "five direct Technique slots",
-        "five direct slots",
-        "direct-slot",
-        "same-slot replacement",
-        "direct slotted Techniques",
-        "25 direct slotted Techniques",
-        "rare same-slot replacement",
-    )
-    for label, text in (("ASSET_INVENTORY", asset), ("MILESTONE_04", milestone)):
-        for phrase in retired_phrases:
+    # Current Technique production is additive and uses only the shared triggers that
+    # still exist across the supported Combat V2 kits. Do not restore retired trigger
+    # families merely to satisfy historical counts/checks.
+    for label, text in (
+        ("ASSET_INVENTORY", asset),
+        ("MILESTONE_04", milestone),
+        ("TECHNIQUE_REWARDS", ui),
+        ("TECHNIQUE_VFX", vfx),
+    ):
+        for phrase in (
+            "five action-trigger classifications",
+            "Parry / Counter, and Deathblow",
+            "five direct Technique slots",
+            "same-slot replacement",
+            "50 actual Techniques plus 10 refinements",
+        ):
             forbid(text, phrase, label)
 
-    require(asset, "Unlimited run-owned collection", "ASSET_INVENTORY")
-    require(asset, "five action-trigger classifications", "ASSET_INVENTORY")
+    require(asset, "40 Techniques + 6 refinements", "ASSET_INVENTORY")
+    require(asset, "Basic Attack, Held Attack, and Dash / Dash Attack", "ASSET_INVENTORY")
     require(milestone, "unlimited additive ownership", "MILESTONE_04")
     require(milestone, "trigger labels, not equipment slots", "MILESTONE_04")
     require(ui, "no global Technique inventory cap", "TECHNIQUE_REWARDS")
     require(ui, "trigger classifications, not Technique slots", "TECHNIQUE_REWARDS")
-    require(vfx, "not Technique slots", "TECHNIQUE_VFX")
-    require(vfx, "Multiple owned Techniques may respond to the same action", "TECHNIQUE_VFX")
+    require(vfx, "40 Techniques + 6 refinements", "TECHNIQUE_VFX")
+    require(vfx, "Basic Attack", "TECHNIQUE_VFX")
+    require(vfx, "Held Attack", "TECHNIQUE_VFX")
+    require(vfx, "Dash / Dash Attack", "TECHNIQUE_VFX")
 
     # Heart combat remains deliberately unauthored. Contract tests may drive the
     # downstream completion signal, but a normal gameplay shell must reject it.
@@ -74,22 +81,16 @@ def main() -> int:
     require(endgame_smoke, "Normal Heart shell accepted the contract-only completion shortcut", "EndgameCampaignContractSmoke")
     require(endgame_smoke, 'set_meta("contract_test", true)', "EndgameCampaignContractSmoke")
 
-    # The release wrapper may still recognize base-menu implementation sentinels, but
-    # those internal strings must be replaced before reaching the player.
+    # Player-facing release strings must remain localized/clean.
     require(front_end, 'LOCALIZATION.ui("front_end.build_label", "Development Build")', "OathboundFrontEnd")
     require(front_end, 'LOCALIZATION.ui("front_end.settings.subtitle", "Audio, accessibility, readability, and input.")', "OathboundFrontEnd")
     require(front_end, 'LOCALIZATION.ui("front_end.credits.subtitle", "Credits and acknowledgements")', "OathboundFrontEnd")
     require(front_end, "Credits, licenses, and third-party notices are being finalized for release.", "OathboundFrontEnd")
 
-    # Final art milestone says major placeholder art must be gone, but external asset
-    # provenance is not allowed to disappear from the release checklist just to make a
-    # readiness check look green. Known unresolved evidence stays explicit until solved.
     require(milestone_7, "no major placeholder art remains", "MILESTONE_07")
     blocker_count = attribution.count("**Release status:** BLOCKED")
     if blocker_count < 5:
-        raise AssertionError(
-            "RELEASE_ATTRIBUTION_AUDIT: expected the known font/music/GUI/SFX/texture blocker sections to remain explicit"
-        )
+        raise AssertionError("RELEASE_ATTRIBUTION_AUDIT: known release provenance blockers must remain explicit")
     for path in (
         "game/oathbound/Font/tenderness.otf",
         "game/oathbound/Audio/Music/battleThemeA.mp3",
@@ -100,7 +101,7 @@ def main() -> int:
         require(attribution, path, "RELEASE_ATTRIBUTION_AUDIT")
 
     print(
-        "[FinalIntegrationReadiness] PASS - slotless Technique production aligned | "
+        "[FinalIntegrationReadiness] PASS - current Technique production aligned | "
         "Heart completion test-only | player-facing front end clean | attribution blockers explicit"
     )
     return 0
