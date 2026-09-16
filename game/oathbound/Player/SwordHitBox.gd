@@ -6,10 +6,15 @@ class_name SwordHitBox
 ## =============================================================================
 ## Existing sword timing/shape behavior is preserved while every sword contact now
 ## publishes the canonical shared AttackEvent fields expected by the current docs:
-## health_damage, posture_damage, block_posture_damage, stagger_level,
+## health_damage, posture_damage, block_posture_damage, poise_damage, stagger_level,
 ## proc_coefficient.
 ##
-## Legacy metadata (damage, damage_type, combo_index, etc.) remains during the
+## `poise_damage` is the Combat V2 interruption-power field. Current authored profiles
+## still carry the imported `stagger_level`, so this bridge resolves the equivalent
+## poise power once at emission time. Enemy response code can therefore consume the
+## canonical field directly without reconstructing player attack power on contact.
+##
+## Legacy metadata (damage, damage_type, combo_index, stagger_level, etc.) remains during
 ## reconciliation so existing enemies and HurtBox code continue to function.
 ## =============================================================================
 
@@ -37,6 +42,7 @@ var _current_damage = 10
 var _current_posture_damage = 8.0
 var _current_block_posture_damage = 8.0
 var _current_stagger_level: int = 0
+var _current_poise_damage: int = 1
 var _current_proc_coefficient: float = 1.0
 var _swing_token = ""
 var _hit_targets: Array = []
@@ -113,6 +119,7 @@ func _calculate_damage() -> void:
 	_current_posture_damage = base_posture_damage * post_mult
 	_current_block_posture_damage = base_block_posture_damage * post_mult
 	_current_stagger_level = base_stagger_level
+	_current_poise_damage = poise_damage_from_stagger_level(_current_stagger_level)
 	_current_proc_coefficient = base_proc_coefficient
 
 	var player = _find_player_owner()
@@ -147,6 +154,7 @@ func _update_meta() -> void:
 	set_meta("health_damage", _current_damage)
 	set_meta("posture_damage", _current_posture_damage)
 	set_meta("block_posture_damage", _current_block_posture_damage)
+	set_meta("poise_damage", _current_poise_damage)
 	set_meta("stagger_level", _current_stagger_level)
 	set_meta("proc_coefficient", _current_proc_coefficient)
 
@@ -274,6 +282,7 @@ func activate_for_profile(profile: Dictionary, combo_index: int = 0) -> void:
 	_current_posture_damage = float(profile.get("posture_damage", profile.get("posture", base_posture_damage)))
 	_current_block_posture_damage = float(profile.get("block_posture_damage", _current_posture_damage))
 	_current_stagger_level = int(profile.get("stagger_level", base_stagger_level))
+	_current_poise_damage = maxi(1, int(profile.get("poise_damage", poise_damage_from_stagger_level(_current_stagger_level))))
 	_current_proc_coefficient = float(profile.get("proc_coefficient", base_proc_coefficient))
 
 	knockback_force = float(profile.get("knockback", knockback_force))
@@ -379,11 +388,18 @@ func set_size_multiplier(mult: float) -> void:
 # =============================================================================
 # UTILITY
 # =============================================================================
+static func poise_damage_from_stagger_level(stagger_level: int) -> int:
+	return maxi(1, stagger_level + 1)
+
+
 func get_current_damage() -> int:
 	return _current_damage
 
 func get_current_posture_damage() -> float:
 	return _current_posture_damage
+
+func get_current_poise_damage() -> int:
+	return _current_poise_damage
 
 func get_current_combo_index() -> int:
 	return _current_combo_index
@@ -396,6 +412,7 @@ func get_current_attack_event() -> Dictionary:
 		"health_damage": _current_damage,
 		"posture_damage": _current_posture_damage,
 		"block_posture_damage": _current_block_posture_damage,
+		"poise_damage": _current_poise_damage,
 		"stagger_level": _current_stagger_level,
 		"proc_coefficient": _current_proc_coefficient,
 		"attack_id": _current_attack_id,

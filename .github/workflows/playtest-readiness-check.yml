@@ -26,6 +26,21 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
+      - name: Verify canonical player poise pressure
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/CanonicalPoisePressureSmoke.tscn 2>&1 | tee canonical-poise-pressure-smoke.log
+          grep -F "[CanonicalPoisePressureSmoke] PASS" canonical-poise-pressure-smoke.log
+          if grep -F "SCRIPT ERROR:" canonical-poise-pressure-smoke.log; then
+            echo "FAIL: Canonical poise pressure smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" canonical-poise-pressure-smoke.log; then
+            echo "FAIL: Canonical poise pressure smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify authored player action motion policy
         shell: bash
         run: |
@@ -78,6 +93,7 @@ jobs:
         with:
           name: playtest-readiness-${{ github.run_id }}
           path: |
+            canonical-poise-pressure-smoke.log
             player-action-motion-policy-smoke.log
             prosthetic-runtime-smoke.log
             playtest-runscene-smoke.log
