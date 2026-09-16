@@ -37,24 +37,30 @@ func get_three_choices_for_source(source: String, area_id: int = 1, exclude_ids:
 func reroll_three_choices(source: String, area_id: int, previous_choices: Array) -> Array:
 	if RunData == null or not RunData.has_method("spend_technique_reroll"):
 		return []
-	if not RunData.spend_technique_reroll():
+	if int(RunData.technique_rerolls) <= 0:
 		return []
 
+	# Preserve the parent's safety rule: prove that the reroll contains at least one
+	# genuinely new real Technique before charging the resource. Scribe's Lens rerolls
+	# may keep a fourth card, but that extra slot never justifies spending for an
+	# exhausted/no-op screen.
 	var excluded: Array = []
+	var previous_real_ids: Array[String] = []
 	for choice_value: Variant in previous_choices:
 		if choice_value is Dictionary:
 			var id: String = str((choice_value as Dictionary).get("id", ""))
-			if not id.is_empty():
-				excluded.append(id)
+			if id.is_empty() or id == "technique_none":
+				continue
+			excluded.append(id)
+			previous_real_ids.append(id)
 
 	var rerolled: Array = super.get_three_choices_for_source(source, area_id, excluded)
 	if previous_choices.size() >= 4:
 		rerolled = _append_extra_choice(rerolled, source, area_id, excluded)
-	var desired_count: int = 4 if previous_choices.size() >= 4 else 3
-	if rerolled.size() < desired_count:
-		rerolled = super.get_three_choices_for_source(source, area_id)
-		if desired_count >= 4:
-			rerolled = _append_extra_choice(rerolled, source, area_id, [])
+	if not _offer_has_new_real_choice(rerolled, previous_real_ids):
+		return []
+	if not RunData.spend_technique_reroll():
+		return []
 	return rerolled
 
 
