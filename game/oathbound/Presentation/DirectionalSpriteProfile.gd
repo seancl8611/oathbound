@@ -7,7 +7,6 @@ class_name DirectionalSpriteProfile
 ## SpriteFrames set is registered to an authoritative Node2D actor.
 
 const DIRECTIONS: Array[String] = ["e", "se", "s", "sw", "w", "nw", "n", "ne"]
-const DEFAULT_SAMPLE_STATES := PackedStringArray(["attack"])
 
 @export_category("Identity")
 @export var profile_id: String = ""
@@ -28,7 +27,7 @@ const DEFAULT_SAMPLE_STATES := PackedStringArray(["attack"])
 @export_category("Animation contract")
 @export var required_animation_bases: PackedStringArray = PackedStringArray(["idle", "move"])
 @export var looping_animation_bases: PackedStringArray = PackedStringArray(["idle", "move"])
-@export var authoritative_sample_states: PackedStringArray = DEFAULT_SAMPLE_STATES
+@export var authoritative_sample_states: PackedStringArray = PackedStringArray(["attack"])
 @export var action_aliases: Dictionary = {}
 
 
