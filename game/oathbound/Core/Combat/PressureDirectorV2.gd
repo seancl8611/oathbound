@@ -46,42 +46,52 @@ func request_threat(who: Node, request: Dictionary) -> Dictionary:
 	var spacing: float = _spacing_for(severity)
 	var retry_at: float = now
 	var conflict_reason: String = ""
+	var danger_end: float = impact_at + active_duration
 
+	# Readability is owned by the full dangerous contact window, not just the instant
+	# an attack first becomes active. The prior timestamp-only check could admit a new
+	# hit after the configured spacing even while the first attack was still dangerous.
 	for reservation_value: Variant in _reservations.values():
 		if not (reservation_value is Dictionary):
 			continue
 		var other: Dictionary = reservation_value as Dictionary
 		var other_impact: float = float(other.get("impact_at", now))
+		var other_active: float = maxf(0.01, float(other.get("active_duration", 0.16)))
+		var other_end: float = other_impact + other_active
 		var other_severity: String = str(other.get("severity", "normal"))
 		var required_spacing: float = maxf(spacing, _spacing_for(other_severity))
-		if absf(impact_at - other_impact) < required_spacing:
+		if _windows_overlap_with_margin(impact_at, danger_end, other_impact, other_end, required_spacing):
 			conflict_reason = "impact_spacing"
-			retry_at = maxf(retry_at, other_impact + required_spacing - impact_delay)
+			# Preserve request-local impact_delay semantics: retry_at is when this enemy may
+			# begin the same windup so its predicted impact lands after the existing danger
+			# window plus authored spacing.
+			retry_at = maxf(retry_at, other_end + required_spacing - impact_delay)
 
+	# Pressure cost follows the same window model. Two attacks whose center timestamps
+	# are separated can still create one unreadable burst if one remains active into the
+	# other's budget neighborhood.
 	var near_cost: float = threat_cost
+	var latest_near_end: float = danger_end
 	for reservation_value: Variant in _reservations.values():
 		if not (reservation_value is Dictionary):
 			continue
 		var other: Dictionary = reservation_value as Dictionary
-		if absf(impact_at - float(other.get("impact_at", now))) <= budget_window:
+		var other_impact: float = float(other.get("impact_at", now))
+		var other_active: float = maxf(0.01, float(other.get("active_duration", 0.16)))
+		var other_end: float = other_impact + other_active
+		if _windows_overlap_with_margin(impact_at, danger_end, other_impact, other_end, budget_window):
 			near_cost += float(other.get("threat_cost", 0.0))
+			latest_near_end = maxf(latest_near_end, other_end)
 	if near_cost > max_near_impact_cost + 0.001:
 		conflict_reason = "pressure_budget" if conflict_reason.is_empty() else conflict_reason
-		var latest_near_impact: float = impact_at
-		for reservation_value: Variant in _reservations.values():
-			if not (reservation_value is Dictionary):
-				continue
-			var other: Dictionary = reservation_value as Dictionary
-			var other_impact: float = float(other.get("impact_at", now))
-			if absf(impact_at - other_impact) <= budget_window:
-				latest_near_impact = maxf(latest_near_impact, other_impact)
-		retry_at = maxf(retry_at, latest_near_impact + budget_window - impact_delay)
+		retry_at = maxf(retry_at, latest_near_end + budget_window - impact_delay)
 
 	_record("enemy_v2_threat_requested", who, {
 		"attack_id": attack_id,
 		"severity": severity,
 		"impact_delay": impact_delay,
 		"impact_at": impact_at,
+		"active_duration": active_duration,
 		"threat_cost": threat_cost,
 	})
 
@@ -91,6 +101,7 @@ func request_threat(who: Node, request: Dictionary) -> Dictionary:
 			"attack_id": attack_id,
 			"severity": severity,
 			"impact_at": impact_at,
+			"active_duration": active_duration,
 			"retry_at": retry_at,
 			"reason": conflict_reason,
 		})
@@ -258,6 +269,17 @@ func _default_cost(severity: String) -> float:
 			return 1.30
 		_:
 			return 1.00
+
+
+func _windows_overlap_with_margin(
+		start_a: float,
+		end_a: float,
+		start_b: float,
+		end_b: float,
+		margin: float
+	) -> bool:
+	var safe_margin: float = maxf(0.0, margin)
+	return start_a < end_b + safe_margin and end_a > start_b - safe_margin
 
 
 func _denied(now: float, retry_at: float, reason: String) -> Dictionary:
