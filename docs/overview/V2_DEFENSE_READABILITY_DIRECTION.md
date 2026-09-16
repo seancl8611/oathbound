@@ -1,116 +1,135 @@
 # Combat V2 Defense and Readability Direction
 
-Status: approved direction, September 2026.
+Status: approved current direction, September 2026.
 
-## Why this changed
+## Purpose
 
-Oathbound's combat has moved away from a Sekiro-like duel model and toward a faster, crowd-driven hack-and-slash model. The first-room September playtests showed that carrying the old assumptions forward creates unnecessary cognitive and presentation load: ordinary enemies expose Posture/Deathblow state, most attacks ask for parry timing, and large counter indicators compete with multiple enemies, hazards, movement, and target selection.
+Oathbound's defense/readability model supports fast multi-enemy combat rather than a duel structure built around one universal timed-defense exchange.
 
-The new defense model should make Akio worry primarily about **space, enemy count, target priority, positioning, dodging, and surviving overlapping pressure**. A missed parry should not be the universal failure state for ordinary combat.
+The player should primarily read **space, enemy count, target priority, positioning, attack commitment, movement options, and the defensive tools belonging to the active kit**.
 
-## Core combat-resource hierarchy
+## Core resource hierarchy
 
-- **Health** decides normal defeat.
-- **Poise** is hidden and decides immediate flinch/interruption resistance.
-- Standard-enemy **Posture is retired from the target architecture**. It should not be a second ordinary kill meter.
-- Standard-enemy universal **Deathblow readiness is retired**.
-- Reusable authored execution/finisher infrastructure may remain for minibosses, bosses, phase transitions, and deliberately-authored special moments.
-- The player keeps a compact visible Health readout. Player-facing Posture is also slated for retirement as this migration completes.
-- Standard enemies should not carry floating Health/Posture bars. Miniboss/boss Health presentation may remain where it improves encounter readability.
+- **Health** decides normal player and enemy defeat.
+- **Poise / interruption resistance** is hidden and decides whether a hit causes immediate flinch, stagger, or action interruption.
+- Standard enemies do not expose a second universal control meter.
+- Standard enemies die through Health loss; no additional universal finishing interaction is required.
+- Bosses/minibosses may use encounter-specific stagger, vulnerability, armor, transition, or recovery states when those improve the encounter.
+- Standard enemies should not carry floating internal-state bars. Boss/miniboss Health presentation may remain where it improves encounter readability.
 
-## Poise replaces the immediate-interruption job
+## Poise owns immediate interruption resistance
 
-Poise is deliberately not another player-facing resource bar. It answers one local question: **does this hit interrupt this action right now?**
+Poise is not another player-facing resource bar. It answers one local question:
 
-Area 1 role intent:
+> **Does this hit interrupt this actor's current action right now?**
+
+Current Hushiro role intent remains:
 
 | Role | Neutral | Committed | Result |
 | --- | ---: | ---: | --- |
-| Hollow / Hound / Archer | 1 | 1 | ordinary sword pressure can flinch them out of actions |
-| Swordsman / Bilemass | 1 | 2 | easy to flinch while neutral; committed moves resist light hits |
-| Warden / brute-control bodies | 2 | 3 | light pressure does not casually erase their commitments; heavier tools matter |
+| Hollow / Hound / Archer | 1 | 1 | ordinary sword pressure can interrupt them readily |
+| Swordsman / Bilemass | 1 | 2 | easy to disrupt while neutral; committed moves resist lighter hits |
+| Warden / brute-control bodies | 2 | 3 | light pressure does not casually erase commitments; heavier tools matter |
 
-The exact values may evolve, but the role distinction is architectural: squishier bodies are interruptible; heavier/brute bodies earn resistance through Poise rather than inflated Health.
+Exact values are tuning baselines, not immutable balance law. The architectural distinction is what matters: lighter bodies are easier to interrupt; heavy/brute bodies earn resistance through Poise rather than inflated Health.
 
-## Parry is opt-in, not universal
+## Player defense is kit-specific
 
-Parry remains in Oathbound, but it is no longer a foundational answer to every enemy attack.
+There is no requirement that every Blood Aspect expose the same timed defensive action.
 
-### Default rule
+### Ronin
 
-**Ordinary attacks are not parry opportunities.**
+Ronin keeps its authored **guard / Reprisal** identity. Reprisal is a Ronin mechanic and should be presented, tuned, documented, and tested as such.
 
-An ordinary attack may be:
-- avoided through movement/dash,
-- blocked when that attack is authored as blockable,
-- interrupted before impact when the enemy's Poise allows it,
-- outranged or repositioned around.
+### Other kits
 
-Opening Akio's parry window against an ordinary blockable hit should resolve as defense/block rather than granting a parry reward.
+Wolf, Wraith, and future kits may answer danger through different combinations of:
 
-### Special rule
+- movement,
+- dash,
+- spacing,
+- attack interruption,
+- unique defensive actions,
+- invulnerability/avoidance windows where explicitly authored,
+- or other kit-specific tools.
 
-Only deliberately-authored attacks opt into parry. New attack content should stamp:
+Shared runtime helpers may support multiple kits, but shared code does not imply a universal player-facing mechanic.
 
-`special_parry = true`
+## Ordinary attack readability
 
-on the canonical attack hitbox/projectile. During migration, the existing `perilous` damage type remains a compatibility bridge for already-authored special thrust-style attacks.
+Ordinary enemy attacks should communicate their answer through the actor and the world rather than a large universal icon.
 
-Good candidates include:
-- a signature Swordsman thrust,
-- selected elite/miniboss techniques,
-- boss signature moves and phase-specific counters,
-- future special projectiles explicitly designed around reflection/counterplay.
+Primary cues are:
 
-Being dangerous, heavy, or unblockable does **not automatically mean parryable**. These are separate authored properties.
+- body pose and silhouette,
+- weapon direction,
+- windup timing,
+- movement trajectory,
+- weapon trail or impact VFX,
+- audio,
+- spacing,
+- and recovery.
 
-## Readability language
+The player should be able to distinguish a committed dangerous action from neutral movement without needing to read an internal combat resource.
 
-### Ordinary melee
+## Guard readability
 
-No universal floating parry marker. Telegraph through body animation, pose, motion, weapon trail, sound, spacing, and the enemy's authored windup.
+When an enemy guards, the state should be obvious from stance, weapon/shield position, reaction, and impact feedback.
 
-### Special parry opportunity
+Guard may alter Health damage, Poise pressure, permitted follow-ups, or break behavior according to the enemy's authored guard profile. A blocked hit should clearly communicate that guard caused the result.
 
-Use one **small, deterministic special-counter mark**. It should be visually subordinate to the enemy animation, not a large HUD element over the enemy. It should not cycle through yellow/red states that imply multiple simultaneous rules.
+## Projectiles
 
-The current PressureDirector `impact_at` prediction remains useful timing authority for eligible close-frontline special attacks. The September playtest showed matched Swordsman contacts landed close to the scheduled predicted contact; the larger problem was that the cue appeared on ordinary attacks and carried too much visual/semantic weight.
+Projectile flight and collision remain authoritative gameplay information. Telegraphs should make origin, trajectory, danger, and impact timing understandable at the accepted high-angle camera.
 
-### Projectile
+A projectile does not inherit a special response merely because another enemy attack uses one. Any exceptional counter or reflection behavior must be authored by the projectile/kit that owns it.
 
-A normal projectile is not automatically parryable. Flight/local collision geometry remains authoritative for its movement. A projectile receives the special-counter cue only when that projectile explicitly opts into special parry behavior.
+## Hazards and ground attacks
 
-### Hazard / ground attack
+Spatial attacks use spatial warnings. Landing zones, puddles, explosions, delayed eruptions, and other arena hazards should communicate:
 
-Spatial warning only. Never reuse parry/counter language for a landing zone, puddle, explosion footprint, or other positional hazard.
+- affected area,
+- activation timing,
+- persistence when relevant,
+- and whether the zone is safe again.
 
-### Unblockable
-
-`unblockable` and `special_parry` are independent. An unblockable attack may demand avoidance with no counter opportunity. A special parry move may be intentionally counterable. Presentation must communicate the authored answer rather than deriving it from one old Sekiro color ladder.
+Do not reuse unrelated defensive language for a positional hazard.
 
 ## Forgiveness target
 
-The default defensive loop should be forgiving enough that an ordinary missed parry input does not convert every incoming attack into a high-damage timing failure. Holding/using defense against an ordinary blockable attack should continue into the block path; the special parry reward is reserved for attacks explicitly designed around it.
+Difficulty should primarily come from:
 
-Difficulty should come primarily from:
 - enemy groups and composition,
 - overlapping intentions,
 - target priority,
 - movement and geometry,
 - ranged/hazard pressure,
 - attack commitment and Poise differences,
-- waves and recovery openings.
+- waves,
+- and recovery openings.
 
-## Production budget
+Ordinary combat should not turn every incoming hit into a test of one narrow timing mechanic.
 
-Universal Posture/Deathblow/parry expectations multiply animation, execution, UI, cue, camera, targeting, and testing costs across every enemy. Reserving executions and parry moments for authored high-value encounters lets those moments receive better art and animation while common enemies remain readable in crowded fights.
+## Boss and miniboss exceptions
 
-## Migration contract
+Bosses and minibosses can introduce bespoke response rules when the encounter earns them. Examples include authored armor breaks, stagger windows, phase counters, vulnerability windows, reflection mechanics, or unique defensive prompts.
 
-1. Introduce explicit special-parry classification and make ordinary defense ignore the old universal-parry assumption.
-2. Reduce the shared special-counter indicator and remove ordinary-attack cue spam.
-3. Retire standard-enemy PostureBar/Posture-break/Deathblow runtime ownership while preserving boss/miniboss execution infrastructure.
-4. Retire player-facing Posture and reconcile block cost/guard behavior with the simpler defense model.
-5. Continue profiling runtime/presentation churn as old Posture, Deathblow, and universal cue nodes leave the standard-enemy path.
+These are encounter-specific rules. They do not redefine the standard enemy or player resource model.
 
-This direction is a design authority, not a manual-playtest gate. Continue implementing coherent architectural work; request a playtest when a runtime question specifically benefits from one.
+## Presentation budget
+
+Readability systems should spend visual attention where it matters. Standard enemies should rely primarily on animation, silhouettes, VFX, audio, and spatial telegraphs rather than carrying multiple bars and icons.
+
+High-value boss/miniboss mechanics may justify additional UI because the player is solving a bespoke encounter rather than reading a crowded standard room.
+
+## Implementation contract
+
+1. Health remains the normal defeat authority.
+2. Hidden Poise/interruption owns immediate reaction resistance.
+3. Ronin guard/Reprisal remains character-specific.
+4. Standard enemy UI stays compact and avoids exposing internal control state as a universal bar.
+5. Boss/miniboss stagger or vulnerability states are authored per encounter.
+6. New gameplay content must not infer shared defense mechanics from reusable runtime helpers.
+7. Isometric 2D presentation communicates these states without taking gameplay authority from the planar simulation.
+
+This direction is a design authority, not a manual-playtest gate. Continue coherent implementation work and request focused playtests when a runtime or readability question specifically benefits from player evidence.

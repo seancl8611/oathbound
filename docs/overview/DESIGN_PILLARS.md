@@ -4,25 +4,26 @@ title: Oathbound Design Pillars
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-09-14
+last_reviewed: 2026-09-16
 topics:
   - combat-readability
   - tragic-horror
   - regional-escalation
   - production-foundations
-  - stylized-3d
-  - three-quarter-camera
+  - isometric-2d
+  - directional-sprites
+  - high-angle-camera
 ---
 
 # Design Pillars
 
 ## Martial clarity first
 
-Combat is demanding but legible. Silhouettes, weapon direction, windups, special-response states, hidden-Poise interruption, hazards, and deliberately authored execution openings must remain understandable at normal gameplay scale. Atmosphere and ornament may intensify the scene, but they cannot obscure response rules.
+Combat is demanding but legible. Silhouettes, weapon direction, windups, guard states, hit reactions, hidden-Poise interruption, hazards, and authored vulnerability windows must remain understandable at normal gameplay scale. Atmosphere and ornament may intensify the scene, but they cannot obscure response rules.
 
 ## Momentum over defensive waiting
 
-The central exchange is movement, attack commitment, spacing, target prioritization, selective defense, and pressure management rather than standing in universal parry/posture loops. Health is the player's primary survival resource. Standard enemies use Health plus hidden Poise/interruption; special parry responses are explicit rather than universal.
+The central exchange is movement, attack commitment, spacing, target prioritization, selective kit-specific defense, and pressure management. Health is the player's primary survival resource. Standard enemies use Health plus hidden Poise/interruption and should remain vulnerable to sustained aggressive play rather than forcing repeated duel resets.
 
 ## Power with visible consequence
 
@@ -42,24 +43,32 @@ Retained humanity does not equal freedom. Beast Blood can recruit a person's rem
 
 Every unit should communicate role through stance, weapon shape, movement, body mass, and attack preparation before secondary costume detail is noticed. Enemy families may share materials and motifs, but blockers, ranged threats, controllers, predators, and elites must remain distinct at a glance.
 
-This requirement becomes more important, not less, in the stylized 3D production direction. Models, rigs, materials, animation, and VFX are judged first at the fixed high-angle gameplay camera distance.
+This requirement is evaluated at the accepted high-angle gameplay camera. Directional character art, animation, VFX, shadows, and environment contrast must preserve silhouettes at the actual screen-space size used in combat.
 
-## Fixed high-angle stylized 3D presentation
+## Authoritative 2D, isometric-style presentation
 
-Oathbound's production presentation is a fixed high-angle three-quarter / isometric-like 3D view.
+Oathbound's production runtime uses an authoritative planar 2D simulation with a fixed high-angle/isometric-style presentation.
 
-- production characters and enemies should increasingly use stylized 3D representation;
-- combat rooms should increasingly be authored as 3D spaces with real volume, lighting, shadows, and controlled occlusion;
-- gameplay decisions remain constrained to the combat ground plane unless a separate system explicitly requires otherwise;
-- the camera remains stable and authored rather than becoming a free third-person camera;
-- 3D presentation must preserve combat distances, timings, encounter rules, and Pressure Director semantics unless playtesting separately changes those systems;
-- hybrid 2D UI/VFX remain valid when they are the clearest solution.
+- gameplay actors remain `Node2D` / `CharacterBody2D`-based unless an owning system explicitly says otherwise;
+- Camera2D framing keeps the accepted high-angle composition;
+- characters and enemies use eight-direction 2D presentation;
+- feet/contact points anchor actor placement and Y-based depth sorting;
+- environments use layered illustrated 2D construction, controlled overlap, shadows, and occlusion;
+- combat VFX and telegraphs remain independent 2D presentation layers;
+- presentation must preserve gameplay distances, timings, target selection, pressure admission, crowd spacing, and encounter rules;
+- UI and presentation never become combat authority.
 
-The existing Camera2D projection/procedural-proxy stack is a migration bridge, not the final production target.
+Offline 3D rigs are valid art-production tools for rendering directional 2D frames. The source rig is not a live runtime actor.
+
+## Small-screen readability is the production test
+
+Akio and enemies are intentionally small in screen space. Character art is successful when the silhouette, weapon, facing, locomotion, anticipation, impact, guard state, and major role cues survive at gameplay scale.
+
+A model, render, sprite, or effect that looks impressive only in close-up is not production-ready.
 
 ## Replacement visuals are exclusive
 
-When a new body representation replaces an older one, the older body art must be hidden or disabled. Custom sprites, AnimatedSprite layers, meshes, rigs, and future production actor roots must never unintentionally render on top of the legacy body representation.
+When a new body representation replaces an older one, the older body art must be hidden or disabled. Directional sprites, temporary procedural proxies, and future final actor art must never unintentionally render on top of one another.
 
 Intentional auxiliary VFX may remain, but replacement character art is exclusive rather than additive.
 
@@ -75,14 +84,16 @@ The progression is thematic rather than a universal biological stage system. Bea
 
 Kagutsuchi's inhabitants may direct abilities and preserve more intelligence than the outer island's victims. They are more dangerous servants of Beast Blood, not genuine masters equal to Akio.
 
-Escalation should be visible in silhouette, ornamentation, movement language, lighting, materials, architecture, and corruption expression while preserving each region's established setting: gate village, forest, and royal court.
+Escalation should be visible in silhouette, ornamentation, movement language, lighting, materials, architecture, corruption expression, VFX, and environmental composition while preserving each region's established setting: gate village, forest, and royal court.
 
 ## Build variety without losing the sword game
 
-Blood Aspects, Techniques, Prosthetics, Relics, and items should change tactics without replacing the core katana, movement, spacing, commitment, selective-defense, and pressure-management game.
+Blood Aspects, Techniques, Prosthetics, Relics, and items should change tactics without replacing the core katana, movement, spacing, commitment, selective-defense, target-priority, and pressure-management game.
+
+Global progression content must not assume a kit-specific combat event. Kit-specific hooks are valid when eligibility and ownership are explicit.
 
 ## Reusable production foundations
 
-Player scale, animation-state clarity, UI language, VFX hierarchy, palettes, pivots, planar-to-3D coordinate rules, 3D actor roots, camera conventions, modular environment standards, and occlusion rules should be established early and inherited by later milestones.
+Player scale, eight-direction conventions, animation-state clarity, UI language, VFX hierarchy, palettes, feet anchors, frame canvases, camera conventions, Y-depth rules, modular environment standards, and occlusion rules should be established early and inherited by later milestones.
 
 Production should remain divided into reviewable, dependency-aware batches even when the full game is scoped in advance.

@@ -4,12 +4,12 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-09-14
+last_reviewed: 2026-09-16
 topics:
   - project-identity
   - combat
-  - stylized-3d
-  - three-quarter-camera
+  - isometric-2d
+  - directional-sprites
   - returning-blood
   - techniques
   - relics
@@ -24,7 +24,7 @@ topics:
   - postgame
 related:
   - OVERVIEW-DESIGN-PILLARS
-  - OVERVIEW-STYLIZED-3D-PRESENTATION
+  - OVERVIEW-ISOMETRIC-2D-PRESENTATION
   - OVERVIEW-V2-COMBAT-DIRECTION
   - OVERVIEW-FULL-SCOPE
   - OVERVIEW-ENDGAME-POSTGAME-RELEASE
@@ -42,11 +42,11 @@ related:
 
 # Oathbound Game Overview
 
-Oathbound is a **fixed high-angle stylized 3D action roguelite** built around disciplined katana combat, fast planar movement, attack commitment, spacing, selective defense, hidden enemy Poise/interruption, explicit special-response parries, previewed branching routes, and run-based build progression.
+Oathbound is a **fixed high-angle/isometric-style 2D action roguelite** built around aggressive katana combat, fast planar movement, authored attack commitment, target switching, spacing, hidden enemy Poise/interruption, kit-specific defense, previewed branching routes, and run-based build progression.
 
-The production presentation is three-quarter / isometric-like rather than a free-camera third-person game. Characters, enemies, combat rooms, props, lighting, shadows, and controlled occlusion should increasingly use real 3D representation while gameplay decisions remain grounded on the combat plane. The current Camera2D projection/procedural-proxy stack is a migration bridge, not the final production target.
+Gameplay authority remains planar 2D. The production presentation uses Camera2D, small screen-space characters, eight-direction actor sprites, feet-based Y depth, layered illustrated environments, and independent 2D VFX/telegraphs. Offline 3D rigs may be used to render directional 2D frames, but source rigs are not live runtime actors.
 
-The game should feel disciplined, dangerous, elegant, and cursed. Combat readability and player execution take priority over spectacle or automatic build power.
+The game should feel disciplined, dangerous, elegant, cursed, and readable. Player execution and combat clarity take priority over spectacle or automatic build power.
 
 # Premise
 
@@ -58,9 +58,9 @@ His lineage explains why the power awakens. His discipline and inherited express
 
 # Core player fantasy
 
-Akio remains a swordsman first. Blood Aspects reshape the weapon kit, Techniques customize core sword actions and supporting synergies, Prosthetics provide one equipped tactical tool, and Relics provide one smaller run-wide support effect.
+Akio remains a swordsman first. Blood Aspects reshape the weapon kit, Techniques customize current sword actions and supporting synergies, Prosthetics provide one equipped tactical tool, and Relics provide a smaller run-wide support effect.
 
-The build should strengthen decisions the player already makes—timing, spacing, movement, attack commitment, selective defense, special responses, targeting, rear positioning, and resource use—rather than replace combat fundamentals.
+The build should strengthen decisions the player already makes—timing, spacing, movement, attack commitment, target selection, selective kit-specific defense, rear positioning, and resource use—rather than replace combat fundamentals.
 
 Akio never speaks, supplies dialogue choices, or uses internal monologue. NPCs, intelligent enemies, and bosses carry spoken/written dialogue; Akio is characterized through action, stillness, physical reaction, and refusal.
 
@@ -72,7 +72,7 @@ The first attempt is a **real normal run**, not a scripted prologue route.
 - The complete 12 / 10 / 11 regional route remains reachable.
 - Akio uses the base katana kit and starts with **Beast-Bane Whistle** as the default equipped Prosthetic.
 - Blood Aspects, Corruption/Tier progression, Blood, Blood Arts, Relic loadout, and permanent upgrades are not yet active.
-- Technique rewards are available and modify the base katana's normal five action tags.
+- Technique rewards remain available using the current supported combat-action/family event model.
 - Rest, Shop, Treasure, miniboss, Gold, Mist/Scroll rewards, routing, and other normal room flow remain active where meaningful.
 - Shrines remain usable for their below-full support result, but Embrace/Tier advancement is unavailable before Returning Blood awakens.
 - The first death may happen anywhere the player's actual skill allows.
@@ -82,16 +82,16 @@ A mastery-level player may theoretically clear all three regions and defeat the 
 # Current gameplay shape
 
 - Returning Blood awakens after the first death and begins the repeated-run progression loop.
-- Shared combat uses **player Health + mobility + aspect-specific/selective defense**. There is no universal player Posture resource.
-- Standard enemies use **Health + hidden Poise/interruption**, not a universal standard-enemy Posture/Deathblow loop.
-- Parry is an **explicit special-response mechanic**, not the default answer to ordinary melee/projectile contacts; authored boss/miniboss/execution moments may retain special execution infrastructure.
-- The combat camera/presentation target is fixed high-angle stylized 3D while movement, attack reach, pressure admission, crowd spacing, and encounter logic remain ground-plane concepts.
+- Shared combat uses **player Health + mobility + kit-specific/selective defense**.
+- Standard enemies use **Health + hidden Poise/interruption**. Health is the normal defeat condition.
+- Ronin retains its authored **guard / Reprisal** identity; the shared combat model does not assume every Aspect exposes the same timed defensive action.
+- Bosses/minibosses may use bespoke stagger, vulnerability, armor, or phase-transition states when their encounter calls for them.
+- Runtime combat authority remains planar 2D while presentation uses the approved high-angle/isometric-style Camera2D composition.
 - Launch Blood Aspects: **Wolf, Wraith, Ronin**.
 - Every post-awakening normal run begins at Aspect Tier 0; optional Shrine Resist/Embrace progression reaches Tier IV maximum.
 - Blood/Blood Art becomes available only from Tier II onward.
-- Five direct Technique slots: **Basic Attack, Held Attack, Dash, Parry / Counter, Deathblow**.
-- Technique roster: **50 actual Techniques + 10 refinements** across Echo, Rupture, Seal, Rift, and Crimson Vulnerable/backstab/direct-Health identities.
-- Supporting / Cross-family / Legendary Techniques are slotless; no global Technique inventory cap exists.
+- Techniques have **no inventory slots and no global inventory cap**. The active catalog currently contains **40 Techniques + 6 refinements** after reconciliation with Combat V2's supported shared triggers.
+- The five Technique families remain **Echo, Rupture, Seal, Rift, and Crimson**.
 - One equipped Prosthetic from an eight-tool roster with 19 permanent Forge upgrades.
 - One equipped Relic from a 10-item persistent collection with **Base → Mastery I → Mastery II** use-based progression.
 - Relic acquisition uses 4 campaign/Strand + 2 Blood Cavern/challenge + 4 run-discovered unlocks, with limited regional-transition swapping.
@@ -101,7 +101,7 @@ A mastery-level player may theoretically clear all three regions and defeat the 
 
 Permanent progression is intentionally compact and supports execution rather than replacing it.
 
-- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes. Akio nodes support Health, Spirit, recovery, and reliability without recreating universal player Posture.
+- **Bloodwell:** 10 Akio nodes + 8 Run Infrastructure nodes. Akio nodes support Health, Spirit, recovery, and reliability.
 - **Forge Bench:** 19 Prosthetic upgrades + 20 Relic mastery milestones across 10 Relics.
 - **Blood Mirror:** 3 nodes per Aspect / 9 total, focused on Tier 0 Handling, Signature Reliability, and Blood Discipline.
 - **Boss materials:** exactly six Bloodwell gates at launch—one Akio mastery node and one regional-passage Infrastructure node per regional boss material.
@@ -138,13 +138,11 @@ The approved launch regional route contains **33 counted chambers**:
 
 Each region offers one optional miniboss opportunity from two authored candidates. Branches preview room/reward information, normally offer one or two exits, and may reconverge without routine backtracking.
 
-Standard Combat rooms use **deliberately authored encounter scripts**. When a Combat chamber is selected, the game chooses an eligible encounter from that region's authored pool rather than procedurally constructing an enemy mix from a threat budget. Opening/main/final route bands do not require separate encounter pools; individual encounters may later receive minimum-chamber eligibility where their mechanics or teaching role require it.
+Standard Combat rooms use **deliberately authored encounter scripts**. When a Combat chamber is selected, the game chooses an eligible encounter from that region's authored pool rather than procedurally constructing an enemy mix from a threat budget.
 
-Standard enemies are region-native by default. Cross-region continuation uses a separately authored evolved regional variant rather than carrying the unchanged enemy forward or simply increasing its statistics. The only approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's five standard enemies are all native Court units.
+Standard enemies are region-native by default. Cross-region continuation uses a separately authored evolved regional variant rather than carrying the unchanged enemy forward or simply increasing its statistics. The approved launch lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's standard enemies remain native Court units.
 
-The controlled-generation, Technique-offer, Gold/Shop, survival/capacity, boss-reward, Relic-acquisition, persistent-resource payout, permanent-progression, first-attempt, narrative-delivery, and postgame/release models are approved and implemented at first-playtest/release-contract depth. Exact values remain playtest-tunable.
-
-A normal successful Binding run targets approximately **45–50 minutes of active time**. Heart/Suppression routes target approximately **55–60 minutes**. Regional encounter pools and encounter scripts are authored and runtime-integrated; remaining encounter work is playtest-driven tuning, readability, pacing, and final presentation polish.
+A normal successful Binding run targets approximately **45–50 minutes of active time**. Heart/Suppression routes target approximately **55–60 minutes**.
 
 # Campaign structure
 
@@ -158,7 +156,7 @@ The Shogun relationship uses seven awakened confrontation states: dismissal → 
 
 After all six remaining Bindings are destroyed, the seventh successful story run continues directly from the Shogun into the two-form true-final Heart encounter with the same active build.
 
-The first Heart victory **does not erase existing Beast Blood**. Akio destroys the Heart's manifested body and permanently removes its ability to produce, release, or spread new Beast Blood. The Heart survives as a faint regenerating remnant. Existing bearers—including Akio and the Shogun—retain their established Blood and reconstruction.
+The first Heart victory does not erase existing Beast Blood. Akio destroys the Heart's manifested body and permanently removes its ability to produce, release, or spread new Beast Blood. The Heart survives as a faint regenerating remnant. Existing bearers—including Akio and the Shogun—retain their established Blood and reconstruction.
 
 The main story ends because the curse can no longer expand to anyone new or threaten the mainland through propagation.
 
@@ -177,7 +175,7 @@ Launch does not require Heat/Pact-style modifiers, New Game+, endless mode, dail
 
 # Narrative production shape
 
-The launch narrative package is intentionally bounded:
+The launch narrative package remains intentionally bounded:
 
 - silent Akio with zero dialogue/choice/internal-monologue content,
 - approximately **5 major controlled in-engine sequences**,
@@ -198,31 +196,34 @@ Mandatory campaign information is communicated directly; the Discovery Board car
 - **The Strand** — persistent hub, preparation, progression, and return point.
 - **Hushiro Gate Village / Rupture** — recent human/community collapse.
 - **Yomori Grove / Adaptation** — long-term predator/spirit consequences; includes Stalker Hound as an evolved continuation of the earlier hound lineage.
-- **Kagutsuchi Court / False Ascendancy** — disciplined elite mutation mistaken for mastery; uses its own five-enemy Court roster.
+- **Kagutsuchi Court / False Ascendancy** — disciplined elite mutation mistaken for mastery; uses its own Court roster.
 - **Heart spaces** — specialized post-Shogun campaign/endgame content outside the 33 counted regional chambers.
 
 # Current design focus
 
-Oathbound's **gameplay launch architecture is substantially closed**, while the approved production presentation is now moving from the Camera2D three-quarter prototype into a stylized 3D implementation.
+Oathbound's launch gameplay architecture is substantially defined. Current work is focused on convergence and production proof rather than reopening broad architecture.
 
-Current work is:
+Current priorities are:
 
-1. final real-player integration validation and evidence-backed combat/stability/readability fixes,
-2. playtest-driven combat, encounter, economy, reward, and run-duration tuning,
-3. a representative **Hushiro stylized-3D vertical slice** proving fixed Camera3D framing, planar combat semantics, 3D Akio/enemy representation, room volume, lighting, shadows, VFX, and controlled occlusion before mass regional conversion,
-4. shared planar-to-3D actor/room/camera foundations followed by Hushiro-first production conversion,
-5. final production art/VFX/audio/readability/accessibility replacement and polish,
-6. dedicated design of the two-form Heart moveset/arena/tuning package within the approved Heart identity/structure, followed by implementation and real-player validation,
-7. release QA, localization verification, and legal/provenance completion.
-
-The Heart's exact combat design remains the major intentional gameplay-content gap. `TRUE_FINAL_HEART.md` explicitly leaves that moveset/arena/tuning work open, so it must be designed before implementation rather than inferred from the current non-combat shell.
+1. Combat V2 stale-reference/runtime reconciliation,
+2. player-facing integration and evidence-backed stability/readability fixes,
+3. Hushiro isometric 2D composition and actor-readability validation,
+4. the **Akio + Corrupted Swordsman offline-rig → directional-2D proof**,
+5. a controlled clean-prerender vs pixel-treatment comparison before actor-production scale-up,
+6. playtest-driven combat, encounter, economy, reward, and run-duration tuning,
+7. final production art/VFX/audio/readability/accessibility replacement and polish,
+8. dedicated design and implementation of the two-form Heart combat encounter,
+9. release QA, localization verification, and legal/provenance completion.
 
 # Source links
 
 - [Design pillars](DESIGN_PILLARS.md)
-- [Stylized 3D presentation direction](STYLIZED_3D_PRESENTATION_DIRECTION.md)
-- [Three-quarter presentation bridge](THREE_QUARTER_PRESENTATION_PROTOTYPE.md)
+- [Combat V2 direction](V2_COMBAT_DIRECTION.md)
+- [Defense/readability direction](V2_DEFENSE_READABILITY_DIRECTION.md)
+- [Isometric 2D presentation direction](ISOMETRIC_2D_PRESENTATION_DIRECTION.md)
+- [Rig-rendered 2D pipeline](../art_production/RIG_RENDERED_2D_PIPELINE.md)
 - [Full game scope](FULL_GAME_SCOPE.md)
+- [Production roadmap](PRODUCTION_ROADMAP.md)
 - [Endgame, postgame, and release](ENDGAME_POSTGAME_RELEASE.md)
 - [Current design questions](../_meta/OPEN_QUESTIONS.md)
 - [First attempt](../gameplay/FIRST_ATTEMPT.md)
@@ -231,6 +232,7 @@ The Heart's exact combat design remains the major intentional gameplay-content g
 - [Progression](../gameplay/PROGRESSION.md)
 - [Items and rewards](../gameplay/ITEMS_AND_REWARDS.md)
 - [Technique System](../gameplay/TECHNIQUES.md)
+- [Technique Catalog](../gameplay/TECHNIQUE_CATALOG.md)
 - [Relics](../gameplay/RELICS.md)
 - [Run structure](../gameplay/RUN_STRUCTURE.md)
 - [Returning Blood](../lore/RETURNING_BLOOD.md)
