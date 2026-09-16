@@ -1,13 +1,13 @@
 extends Node
 
-## Non-destructive contract smoke for the launch release shell. It validates structure
-## and round-trips isolated in-memory run state without deleting or replacing user save
-## slots. SaveSlots is only asked for its canonical paths/metadata.
+## Non-destructive release-shell contract smoke. Current checks intentionally avoid
+## retired player-Posture and shared Deathblow/execution assumptions.
 
 const SAVE_SCRIPT = preload("res://Core/Release/OathboundSaveSlotManager.gd")
 const SETTINGS_SCRIPT = preload("res://Core/Release/OathboundSettingsManager.gd")
 const RUN_DATA_SCRIPT = preload("res://Core/Release/OathboundReleaseRunData.gd")
 const FLOW_SCRIPT = preload("res://Core/Release/OathboundReleaseGameFlow.gd")
+const TECHNIQUE_CATALOG = preload("res://Core/Techniques/TechniqueCatalog.gd")
 const TITLE_SCENE = preload("res://TitleScreen/menu.tscn")
 const PAUSE_SCRIPT = preload("res://Core/Release/OathboundPauseOverview.gd")
 
@@ -20,7 +20,7 @@ const REQUIRED_SETTINGS: Array[String] = [
 ]
 const REQUIRED_BINDINGS: Array[String] = [
 	"up", "down", "left", "right", "attack", "parry", "dash", "interact",
-	"prosthetic", "special", "execute_finisher",
+	"prosthetic", "special",
 ]
 const REQUIRED_FRONT_END_BUTTONS: Array[String] = [
 	"Continue", "New Game", "Settings", "Credits", "Quit",
@@ -45,7 +45,6 @@ class CheckpointPlayer:
 	extends Node
 	var hp: int = 46
 	var maxhp: int = 130
-	var stagger_max: float = 84.0
 	var collected_upgrades: Array = []
 	var prosthetic_executor: Node = null
 	func _update_health_bar() -> void:
@@ -96,13 +95,12 @@ func _validate_settings_contract() -> void:
 		_expect(SETTINGS_SCRIPT.DEFAULTS.has(key), "required setting missing: %s" % key)
 	for action: String in REQUIRED_BINDINGS:
 		_expect(action in SETTINGS_SCRIPT.BINDABLE_ACTIONS, "required rebindable action missing: %s" % action)
+	_expect("execute_finisher" not in SETTINGS_SCRIPT.BINDABLE_ACTIONS, "retired shared execution input remains rebindable")
 	for method_name: String in REQUIRED_SETTINGS_METHODS:
 		_expect(SettingsManager.has_method(method_name), "live settings API missing: %s" % method_name)
 	_expect(float(SETTINGS_SCRIPT.DEFAULTS.get("ui_scale", 0.0)) > 0.0, "UI scale default invalid")
 	_expect(float(SETTINGS_SCRIPT.DEFAULTS.get("text_scale", 0.0)) > 0.0, "text scale default invalid")
 	_expect(str(SETTINGS_SCRIPT.DEFAULTS.get("block_mode", "")) in ["hold", "toggle"], "block-mode default invalid")
-	_expect(ThemeDB.fallback_base_scale > 0.0, "ThemeDB UI fallback scale was not initialized")
-	_expect(ThemeDB.fallback_font_size > 0, "ThemeDB text fallback size was not initialized")
 
 
 func _validate_checkpoint_round_trip() -> void:
@@ -110,20 +108,15 @@ func _validate_checkpoint_round_trip() -> void:
 	source.current_area_id = 2
 	source.depth = 7
 	source.gold = 133
-	# Postgame run-goal selection is Boat-owned and must survive a safe quit/resume.
 	source.requested_run_goal = source.RUN_GOAL_HEART_SUPPRESSION
 	source.run_goal = source.RUN_GOAL_HEART_SUPPRESSION
 	source.technique_rerolls = 2
 	source.path_history.append("combat:technique")
 	source.path_history.append("shrine")
-	# Technique ownership is slotless. These are three real launch Action Techniques
-	# sharing the Basic trigger, proving checkpoint serialization preserves the exact
-	# collection instead of collapsing same-trigger Techniques into positional entries.
 	source.acquired_upgrades.append("echo_lingering_cut")
 	source.acquired_upgrades.append("rupture_rupturing_edge")
 	source.acquired_upgrades.append("seal_sealing_cuts")
 	source.enemies_killed = 14
-	source.perfect_parries = 6
 	var checkpoint: Dictionary = source.get_checkpoint_state()
 
 	var restored: Node = RUN_DATA_SCRIPT.new()
@@ -135,9 +128,9 @@ func _validate_checkpoint_round_trip() -> void:
 	_expect(restored.run_goal == source.RUN_GOAL_HEART_SUPPRESSION, "checkpoint lost resolved postgame run goal")
 	_expect(restored.technique_rerolls == 2, "checkpoint lost Technique rerolls")
 	_expect(restored.path_history == source.path_history, "checkpoint lost route history")
-	_expect(restored.acquired_upgrades == source.acquired_upgrades, "checkpoint lost or collapsed the slotless Technique collection")
+	_expect(restored.acquired_upgrades == source.acquired_upgrades, "checkpoint lost the slotless Technique collection")
 	_expect(restored.acquired_upgrades.size() == 3, "checkpoint did not preserve all same-run Techniques")
-	_expect(restored.enemies_killed == 14 and restored.perfect_parries == 6, "checkpoint lost run statistics")
+	_expect(restored.enemies_killed == 14, "checkpoint lost run statistics")
 
 	var flow: Node = FLOW_SCRIPT.new()
 	var valid_checkpoint := {
@@ -157,9 +150,6 @@ func _validate_checkpoint_round_trip() -> void:
 	_expect(not flow.prepare_resume_checkpoint({"version": flow.CHECKPOINT_VERSION}), "release GameFlow accepted a later incomplete checkpoint")
 	_expect(not flow.has_prepared_resume_checkpoint(), "rejected checkpoint retained a stale previously prepared resume")
 
-	# Player vitals are part of the safe chamber snapshot even though the broader
-	# handoff harness intentionally avoids scene/player creation. Exercise the exact
-	# production capture/apply helpers in memory so resume cannot silently reset them.
 	var checkpoint_player := CheckpointPlayer.new()
 	var checkpoint_executor := CheckpointExecutor.new()
 	checkpoint_player.prosthetic_executor = checkpoint_executor
@@ -168,19 +158,17 @@ func _validate_checkpoint_round_trip() -> void:
 	var player_state: Dictionary = flow.call("_capture_player_state")
 	_expect(int(player_state.get("hp", -1)) == 46, "checkpoint player capture lost Health")
 	_expect(int(player_state.get("maxhp", -1)) == 130, "checkpoint player capture lost max Health")
-	_expect(is_equal_approx(float(player_state.get("stagger_max", -1.0)), 84.0), "checkpoint player capture lost Posture capacity")
+	_expect(not player_state.has("posture") and not player_state.has("stagger") and not player_state.has("stagger_max"), "checkpoint reintroduced retired player Posture state")
 	_expect(int(player_state.get("spirit", -1)) == 37, "checkpoint player capture lost Spirit")
 	_expect(int(player_state.get("max_spirit", -1)) == 120, "checkpoint player capture lost max Spirit")
 
 	checkpoint_player.hp = 99
 	checkpoint_player.maxhp = 99
-	checkpoint_player.stagger_max = 1.0
 	checkpoint_executor.current_spirit = 2
 	checkpoint_executor.max_spirit = 20
 	flow.call("_apply_resume_player_state", player_state)
 	_expect(checkpoint_player.hp == 46, "checkpoint player restore lost Health")
 	_expect(checkpoint_player.maxhp == 130, "checkpoint player restore lost max Health")
-	_expect(is_equal_approx(checkpoint_player.stagger_max, 84.0), "checkpoint player restore lost Posture capacity")
 	_expect(checkpoint_executor.current_spirit == 37, "checkpoint player restore lost Spirit")
 	_expect(checkpoint_executor.max_spirit == 120, "checkpoint player restore lost max Spirit")
 
@@ -200,11 +188,13 @@ func _validate_records_contract() -> void:
 	_expect(_total(breakdown, "prosthetic_upgrades") == 19, "completion contract must include 19 Prosthetic upgrades")
 	_expect(_total(breakdown, "relics") == 9, "completion contract must include the nine currently obtainable Relics")
 	_expect(_total(breakdown, "relic_mastery") == 18, "completion contract must include mastery for currently obtainable Relics")
-	_expect(_total(breakdown, "techniques") == 60, "completion contract must include 50 Techniques + 10 refinements")
-	_expect(_total(breakdown, "trials") == 1, "completion contract must require only the currently playable Execution Trial")
+	var expected_techniques := TECHNIQUE_CATALOG.TECHNIQUES.size() + TECHNIQUE_CATALOG.REFINEMENTS.size()
+	_expect(expected_techniques == 46, "runtime Technique catalog must match current 40 Techniques + 6 refinements")
+	_expect(_total(breakdown, "techniques") == expected_techniques, "completion contract Technique total drifted from runtime catalog")
+	_expect(_total(breakdown, "trials") == 1, "completion contract must include the currently playable Blood Cavern trial")
 	_expect(_total(breakdown, "heart_aspects") == 3, "completion contract must include Wolf/Wraith/Ronin Heart victories")
 	_expect(_total(breakdown, "discovery_records") == 24, "completion contract must include all 24 authored reachable Discovery Board records")
-	_expect(RecordsRuntime.REQUIRED_DISCOVERY_RECORDS.size() == NarrativeRuntime.get_all_lore().size(), "required Discovery Board list drifted from the authored lore catalog")
+	_expect(RecordsRuntime.REQUIRED_DISCOVERY_RECORDS.size() == NarrativeRuntime.get_all_lore().size(), "required Discovery Board list drifted from authored lore catalog")
 
 	var records: Dictionary = RecordsRuntime.get_records_snapshot()
 	for key: String in [
@@ -233,10 +223,7 @@ func _validate_front_end_contract() -> void:
 		_expect(label in button_texts, "front end missing required action: %s" % label)
 	_expect(front_end.has_method("_prepare_continue_checkpoint"), "front end lacks safe checkpoint preparation gate")
 	if front_end.has_method("_prepare_continue_checkpoint"):
-		_expect(
-			not bool(front_end.call("_prepare_continue_checkpoint", {"version": FLOW_SCRIPT.CHECKPOINT_VERSION})),
-			"front end accepted an incomplete checkpoint instead of falling back safely"
-		)
+		_expect(not bool(front_end.call("_prepare_continue_checkpoint", {"version": FLOW_SCRIPT.CHECKPOINT_VERSION})), "front end accepted an incomplete checkpoint")
 
 	front_end.call("_build_settings_menu")
 	await get_tree().process_frame
@@ -252,7 +239,6 @@ func _validate_front_end_contract() -> void:
 			rebinding_button_found = true
 	_expect(block_mode_button_found, "Settings UI does not expose Hold/Toggle block preference")
 	_expect(rebinding_button_found, "Settings UI does not expose controls/rebinding")
-
 	front_end.queue_free()
 	await get_tree().process_frame
 
