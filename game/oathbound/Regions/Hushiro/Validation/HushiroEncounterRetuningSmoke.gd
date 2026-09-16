@@ -188,7 +188,7 @@ func _validate_v2_impact_spacing() -> void:
 	add_child(director)
 
 	var hounds: Array[PressureDummy] = []
-	for index: int in range(4):
+	for index: int in range(5):
 		var hound := PressureDummy.new()
 		hound.name = "PressureHound%d" % index
 		add_child(hound)
@@ -197,14 +197,16 @@ func _validate_v2_impact_spacing() -> void:
 	var now: float = Time.get_ticks_msec() * 0.001
 	var first: Dictionary = director.request_threat(hounds[0], _hound_lunge_request(now + 0.45))
 	var stacked: Dictionary = director.request_threat(hounds[1], _hound_lunge_request(now + 0.45))
-	var staggered: Dictionary = director.request_threat(hounds[2], _hound_lunge_request(now + 0.82))
-	var near_staggered: Dictionary = director.request_threat(hounds[3], _hound_lunge_request(now + 0.86))
+	var timestamp_spaced_but_window_unsafe: Dictionary = director.request_threat(hounds[2], _hound_lunge_request(now + 0.82))
+	var staggered: Dictionary = director.request_threat(hounds[3], _hound_lunge_request(now + 1.08))
+	var near_staggered: Dictionary = director.request_threat(hounds[4], _hound_lunge_request(now + 1.12))
 
 	_expect(bool(first.get("admitted", false)), "First Hound impact should be admitted")
 	_expect(not bool(stacked.get("admitted", false)), "Simultaneous second heavy Hound impact must be delayed")
-	_expect(bool(staggered.get("admitted", false)), "Later Hound impact should be admitted once spacing is readable")
-	_expect(not bool(near_staggered.get("admitted", false)), "Another heavy impact too close to the staggered impact must be delayed")
-	_expect(director.reservation_count() == 2, "Expected exactly two spaced Hound impact reservations")
+	_expect(not bool(timestamp_spaced_but_window_unsafe.get("admitted", false)), "Timestamp-spaced Hound impact must still be delayed while the first danger window plus heavy margin is live")
+	_expect(bool(staggered.get("admitted", false)), "Later Hound impact should be admitted once the first danger window and heavy spacing margin have cleared")
+	_expect(not bool(near_staggered.get("admitted", false)), "Another heavy impact too close to the staggered danger window must be delayed")
+	_expect(director.reservation_count() == 2, "Expected exactly two safely spaced Hound impact reservations")
 
 	director.queue_free()
 	for hound: PressureDummy in hounds:
