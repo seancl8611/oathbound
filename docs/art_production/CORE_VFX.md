@@ -4,18 +4,19 @@ title: Core Combat and Corruption VFX
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-21
+last_reviewed: 2026-09-16
 topics:
   - vfx
-  - parry
-  - hit-spark
+  - hit-confirmation
   - sword-trail
-  - posture-break
-  - deathblow
+  - guard-impact
+  - interruption
+  - danger-telegraphs
   - corruption
   - shrine
 related:
   - GAMEPLAY-COMBAT
+  - OVERVIEW-V2-COMBAT-DIRECTION
   - GAMEPLAY-CORRUPTION-SHRINES
   - UI-HUD
   - UI-SHRINE
@@ -24,68 +25,89 @@ related:
 
 # Core Combat and Corruption VFX
 
-Shared combat cues must strengthen readability without obscuring silhouettes, attack direction, recovery frames, or safe space. Frequent effects remain compact. Stronger presentation is reserved for posture breaks, execution openings, Shrine decisions, and boss transitions.
+Shared combat cues must strengthen readability without obscuring silhouettes, weapon direction, recovery, escape space, or enemy intent.
 
-## Milestone 1 combat bundle
+Combat V2 does **not** use a universal player-Posture / enemy-Posture / Deathblow loop and does not require every player kit to expose the same timed parry/counter presentation. Core VFX therefore covers only genuinely shared feedback. Kit-, enemy-, and encounter-specific responses belong to their owning packages.
 
-### VFX-001 — Parry Spark
+## Shared combat bundle
 
-**Purpose:** immediate confirmation of a successful deflect.
+### VFX-001 — Hit Spark
 
-**Working frames:** 4–6.
+**Purpose:** immediate ordinary damage/contact confirmation.
 
-- Standard deflect: compact directional burst.
-- Perfect parry: brighter core and stronger punctuation.
-- Must remain distinct from Hit Spark without depending on sound.
-- No broad smoke cloud, circular explosion, or magical glyph.
+Working frame range: approximately 3–5 frames at the current sprite treatment.
 
-### VFX-002 — Hit Spark
+- compact and directional;
+- clears quickly;
+- supports weapon-path readability rather than hiding it;
+- may vary modestly by material/target type without becoming a separate effect family for every enemy;
+- must remain visually below major boss, Blood Art, corruption, and special-response events.
 
-**Purpose:** ordinary damage confirmation.
+### VFX-002 — Sword Trail
 
-**Working frames:** 3–5.
+**Purpose:** clarify Akio's katana path at the small accepted gameplay scale.
 
-- Smaller and quieter than Parry Spark.
-- Clears quickly.
-- Must not compete with posture break, deathblow, or boss-transition cues.
+The trail follows the actual presented attack geometry and must not imply extra reach or a different hitbox.
 
-### VFX-003 — Deathblow Cue
+Intro/base-katana examples include:
 
-**Purpose:** persistent confirmation that an execution is available.
+- Quick Slash — shortest/lightest;
+- Cross Cut — wider continuation path;
+- Heavy Cleave — weightiest/most committed.
 
-**Working frames:** 3–4 frame loop for the valid window.
+Aspect-specific trails may replace or extend this language while remaining subordinate to the weapon/body silhouette.
 
-- Anchored above or around the enemy's upper body.
-- Uses a ritual blood-seal or restrained execution-mark language.
-- Remains visible in crowded combat.
-- Must not resemble a generic exclamation icon.
+### VFX-003 — Guard / Protected Contact
 
-### VFX-004 — Sword Trail
+**Purpose:** show that an incoming strike contacted an authored guard/protected state instead of landing as an ordinary unguarded hit.
 
-**Purpose:** clarify Akio's base blade paths.
+- compact contact flash at the weapon/guard region;
+- visibly different from an ordinary Health hit;
+- does not imply a universal block meter;
+- may communicate stronger recoil/break response for authored enemy guards or Ronin-specific guard states;
+- exact Health-chip behavior remains gameplay-owned.
 
-**Working frames:** approximately 4–6 per swing family.
+This effect family is reusable, but guard availability/coverage/outcome remains specific to the owning player kit or enemy profile.
 
-Required variants:
+### VFX-004 — Interruption / Stagger Confirmation
 
-- Quick Slash — shortest and lightest,
-- Cross Cut — wider diagonal path,
-- Heavy Cleave — weightiest and most committed.
+**Purpose:** make meaningful loss of control readable when hidden Poise/interruption rules cause it.
 
-Trails reinforce the weapon path and clear before obscuring recovery or the next attack.
+This is not a meter-break effect.
 
-### VFX-005 — Posture Break Cue
+- short body-centered interruption accent or recoil punctuation;
+- stronger than a normal hit reaction only when gameplay actually enters an authored interruption/stagger state;
+- no persistent universal icon;
+- heavy enemies may take Health damage without showing this response when their current action resists interruption.
 
-**Purpose:** show that enemy posture has fully broken and a vulnerability state has begun.
+### VFX-005 — Dangerous Attack / Spatial Threat Language
 
-**Working direction:** quick body-centered break flash with a compact cracked ring and sharp metallic fragments.
+**Purpose:** support learnable enemy pressure without covering the screen in generic warnings.
 
-- Slightly larger and longer than Parry Spark.
-- Clears quickly.
-- Distinct from hit, parry, hurt, death, and Deathblow Cue.
-- The break cue communicates that the enemy opened; the persistent Deathblow Cue communicates that execution remains available.
+Shared language should be semantic rather than one universal icon:
 
-VFX-005 is included in Milestone 1 Batch 2 with the Corrupted Swordsman and Deathblow Cue because that batch establishes the complete posture-break-to-execution read on the baseline humanoid enemy.
+- direct committed melee may use concise late timing emphasis;
+- projectile threats use projectile-local geometry/ETA cues;
+- ground AoEs use their landing/impact area;
+- grabs, restraints, sweeps, or unblockable/perilous attacks use distinct authored silhouette/VFX language where the owning combat design requires it.
+
+The presentation must describe the actual threat geometry/timing. It must not promise a block/parry response that the active kit does not own.
+
+## Specialized responses are not global core VFX
+
+The following may exist, but they are **not universal shared-combat requirements**:
+
+- Ronin Reprisal opportunity/response;
+- a kit-specific parry or counter spark;
+- enemy-specific guard break;
+- boss/miniboss stagger or vulnerability cue;
+- execution-like encounter mechanics;
+- Technique-created statuses;
+- Aspect-specific protected-commitment states.
+
+These belong to the relevant Aspect, enemy, boss, Technique, or encounter authority.
+
+Do not recreate the retired universal Parry Spark + Posture Break Cue + Deathblow Cue hierarchy as the default combat language.
 
 ## Corruption and Shrine cues
 
@@ -93,30 +115,57 @@ VFX-005 is included in Milestone 1 Batch 2 with the Corrupted Swordsman and Deat
 
 Shows that Corruption is full and may be resolved at the next Shrine.
 
-- low-frequency dark-crimson pressure around Akio and the meter,
-- ends immediately after Shrine resolution,
-- distinct from low HP, depleted Spirit, Burn, Shock, or boss empowerment.
+- low-frequency dark-crimson pressure around Akio and/or the meter;
+- ends immediately after Shrine resolution;
+- distinct from low Health, depleted Spirit, Blood readiness, or boss empowerment.
 
 ### Embrace Transformation Cue
 
 Communicates a Blood Aspect Tier increase.
 
-- Shrine flare,
-- controlled blood-red surge into Akio,
-- brief full-body ignition,
-- settlement into the new Aspect and Tier state.
+- Shrine flare;
+- controlled blood-red surge into Akio;
+- brief full-body ignition/transformation punctuation;
+- settlement into the new Aspect/Tier state.
 
 ### Resist Stabilization Cue
 
 Communicates stabilization without Tier advancement.
 
-- cooler pale ritual pulse,
-- outward release of pressure,
-- brief recovery beat,
-- clearly reads as restraint rather than empowerment.
+- cooler/paler ritual pulse;
+- outward release of pressure;
+- brief recovery beat;
+- clearly reads as restraint/stabilization rather than empowerment.
+
+### Stabilize at Tier IV
+
+When the selected Aspect can no longer advance, the full-Corruption Shrine result should reuse the established stabilization language rather than inventing a fake Tier V transformation.
+
+## Layering and directional-actor boundary
+
+Core combat VFX stay separate from the directional character body frames wherever practical.
+
+This allows:
+
+- body art to be rerendered without rebuilding hit feedback;
+- clean-prerender and pixel/downsample character treatments to use the same gameplay VFX;
+- attack timing/telegraphs to remain authoritative even while character art changes;
+- frequent effects to be tuned independently for screen clutter.
+
+A body animation may visually imply impact, guard, or recoil, but critical gameplay feedback should not depend on one baked frame that disappears when the actor sprite set is replaced.
 
 ## Delivery and testing
 
-Every effect requires source files, transparent frames or sheets, timing notes, palette continuity, and clean Godot import.
+Every production effect requires the relevant source files, transparent frames/textures/shader data, timing notes, palette continuity, and clean Godot import.
 
-Effects must remain readable across Hushiro, Yomori, and Kagutsuchi backgrounds with HUD, damage numbers, screen shake, multiple enemies, and environmental atmosphere active.
+Effects must be tested with:
+
+- the accepted `0.50` Hushiro camera zoom and `0.72` ground-compression presentation;
+- multiple enemies on screen;
+- directional actor sprites at their intended screen size;
+- HUD and damage feedback active;
+- Hushiro, Yomori, and Kagutsuchi value ranges;
+- environmental atmosphere/foreground occluders;
+- both clean-prerender and pixel/downsample actor treatments while that style decision remains open.
+
+The test is successful when the player can tell **what happened and what threat remains** without the effect obscuring the next decision.

@@ -2,80 +2,121 @@
 
 Authoritative art direction, technical standards, asset inventory, outsourcing workflow, visual-system briefs, and milestone scope belong here.
 
-## Core documents
+## Current production authority
+
+Oathbound's production runtime is **authoritative planar 2D with fixed high-angle/isometric-style presentation**.
+
+- characters use eight-direction 2D presentation;
+- environments use layered illustrated 2D construction;
+- feet/contact points own actor placement and Y-depth;
+- combat VFX/telegraphs remain independent 2D layers;
+- offline 3D rigs may be used to generate directional 2D character frames;
+- live real-time 3D actors/environments are retired research, not the production default.
+
+Read these first for current art/presentation work:
 
 - [Art Direction](ART_DIRECTION.md)
 - [Technical Standards](TECHNICAL_STANDARDS.md)
+- [Rig-Rendered 2D Character Pipeline](RIG_RENDERED_2D_PIPELINE.md)
+- [Isometric 2D Runtime Presentation Direction](../overview/ISOMETRIC_2D_PRESENTATION_DIRECTION.md)
 - [Asset Inventory](ASSET_INVENTORY.md)
 - [Character and Enemy Brief Standard](CHARACTER_BRIEF_STANDARD.md)
+- [Outsourcing Workflow](OUTSOURCING_WORKFLOW.md)
+- [Art Milestones](milestones/README.md)
+
+System-specific presentation authorities:
+
 - [Core Combat and Corruption VFX](CORE_VFX.md)
 - [Blood Aspect VFX](ASPECT_VFX.md)
 - [Prosthetic Tool VFX](PROSTHETIC_VFX.md)
 - [Technique VFX](TECHNIQUE_VFX.md)
 - [Item, Pickup, and Reward Art](ITEM_REWARD_ART.md)
-- [Outsourcing Workflow](OUTSOURCING_WORKFLOW.md)
-- [Art Milestones](milestones/README.md)
 
-## Current production dependencies
+## Current character-production gate
 
-Wolf, Wraith, and Ronin are the fixed launch Blood Aspect families. All three Tier 0-IV packages are locked at current qualitative paper-design depth and may guide high-level production planning.
+Do not scale actor production across the roster yet.
 
-Current Aspect production groups include:
+Current order:
 
-- **Wolf:** Tier 0 close pressure/pursuit, Blood Tempo, Feral Momentum, Blood Hunt/Blood Fang, Fanged Guard, Apex Mauling, and Blood-resource states.
-- **Wraith:** Tier 0 spectral geometry, Pale Barrage, Spectral Edge, Wraith's Reach, Spectral Passage, Beyond the Veil, and Blood-resource states.
-- **Ronin:** Tier 0 heavy/stability language, Steadfast Reprisal, repeated maximum-posture-capacity growth, Falling Mountain/Deep Rupture, Unbroken Resolve/Measured Weight/Perfect Weight, Shattering Wake, and Blood-resource states.
+1. custom Akio source model/rig;
+2. Akio Proof A — Idle + Move + Quick Slash, eight directions, high-resolution masters and runtime derivatives;
+3. in-game clean-prerender vs pixel/downsample comparison at the accepted Hushiro camera;
+4. finish Akio's current Stage 1 set after the minimum proof passes;
+5. one Corrupted Swordsman on the same pipeline;
+6. only then approve or reject roster-wide rig-rendered production.
 
-Exact final animation counts, sprite overlays, VFX, audio, icon, HUD, Shrine, selection, and trial requirements still depend on implementation briefs and playable validation rather than reopening the approved qualitative Tier packages.
+The artist-facing Akio brief is `docs/commissions/akio/AKIO_COMMISSION_BRIEF.md`.
 
-The Technique system uses five direct combat slots—Basic Attack, Held Attack, Dash, Parry / Counter, and Deathblow—plus slotless Supporting, Cross-family, and Legendary Techniques. The retired four-active-plus-reserve model and temporary Prosthetic-Technique layer are not production targets.
+## Current gameplay dependencies
 
-The complete Technique roster is approved at qualitative paper-design depth:
+Art-production files translate current gameplay authorities; they do not preserve superseded combat models for historical convenience.
 
-- 25 direct Techniques,
-- 15 same-family Supporting Techniques,
-- 5 Cross-family Techniques,
-- 5 Legendary Techniques,
-- 10 refinements,
-- 10 Common / 18 Uncommon / 17 Rare / 5 Legendary rarity distribution.
+### Combat
 
-The five family mechanics are Echo, Rupture, Seal, Rift, and Crimson Vulnerable / backstab / direct Health damage.
+Current shared combat assumptions:
 
-Final Technique production counts now depend on reward/readability audit, VFX/icon briefs, implementation constraints, and playable validation—not on unfinished roster construction.
+- Health is the normal player/enemy defeat resource;
+- standard enemies use hidden Poise/interruption rather than a universal visible Posture/deathblow loop;
+- player-facing Posture is retired;
+- defense is kit-specific where identity demands it;
+- Ronin retains the authored guard/Reprisal identity;
+- bosses/minibosses may own bespoke stagger/vulnerability states;
+- combat presentation must remain readable at the accepted small screen-space scale.
 
-Crimson production language requires a readable Vulnerable enemy status, enhanced Vulnerable-backstab hit feedback, a concentrated Deep Cut rear-hit treatment, bounded sword-shaped Blood Arc AoE, and Predator's Wake application feedback. The superseded Burst-ready / recharge presentation is not a production target.
+Use `docs/gameplay/COMBAT.md` and `docs/overview/V2_COMBAT_DIRECTION.md` as the owning authorities.
 
-The launch Relic roster is also approved at qualitative depth: 10 Relics, one equipped slot, persistent collection/mastery/progression, no rarity tiers, and Strand-side progression/management at the Forge. No separate Relic Reliquary asset family is required.
+### Blood Aspects
 
-The eight Prosthetic launch tools and shallow linear Forge paths are approved at qualitative depth.
+Wolf, Wraith, and Ronin remain the fixed launch Aspect families. Art should communicate their distinct weapon/commitment identities without assuming every Aspect shares the same timed defensive action.
 
-Permanent hub upgrade-station scope is:
+Detailed Tier/Blood-Art presentation requirements belong to the current Aspect gameplay docs plus `ASPECT_VFX.md` after reconciliation with those authorities.
 
-- **Bloodwell:** Akio + Run Infrastructure,
-- **Forge Bench:** Prosthetics + Relics,
-- **Blood Mirror:** Blood Aspects after the Mirror unlocks later in the game.
+### Techniques
 
-The old alternate-weapon development / weapon-socket Forge system is not a production target. The Bloodwell's old fixed three-branch tree is not a production requirement.
+Techniques have **no inventory slots and no global inventory cap**.
 
-Other remaining production dependencies include:
+The active catalog currently contains **40 Techniques + 6 refinements** after reconciliation with Combat V2's supported shared triggers. The five families remain Echo, Rupture, Seal, Rift, and Crimson.
 
-- the major-system scope audit,
-- full-run integration and reward/pacing validation,
-- exact permanent-upgrade node/value/interface volume,
-- narrative authored-content, voice, portrait, and cinematic volume,
-- postgame Heart-route access, rewards, records, and presentation,
-- encounter-specific sprite, animation, and bespoke VFX counts once the Shogun and Heart implementation packages are approved.
+Art/UI must not imply the retired four-active-plus-reserve model, exclusive per-action equipment slots, a temporary Prosthetic-Technique layer, universal Deathblow requirements, or universal Parry/Counter eligibility.
 
-All Aspect attacks are player-directed. Art must not imply corrective tracking, hidden homing, or automatic target rotation. Wolf does not require a companion or mirrored attacker asset.
+Use `docs/gameplay/TECHNIQUES.md` and `docs/gameplay/TECHNIQUE_CATALOG.md` for current counts/eligibility rather than duplicating a historical roster here.
 
-No duplicate Aspect-specific Blood Art progression tree is included in current scope.
+### Prosthetics and Relics
 
-The modular regional environment kits and functional-room families are already in scope. Exact room counts, route topology, branch frequency, miniboss frequency, route-marker quantity, and authored layout counts remain prototype and playtest decisions unless they create a verified need for additional art packages.
+- eight launch Prosthetic tools remain in scope;
+- one Prosthetic is equipped at a time;
+- the Forge owns 19 permanent Prosthetic upgrades;
+- 10 persistent Relics remain in scope;
+- one Relic is equipped;
+- Relics use Base -> Mastery I -> Mastery II progression;
+- no separate Relic Reliquary or rarity-badge production family is required.
 
-Additional Blood Aspects are excluded from current launch production scope.
+### Permanent progression
+
+Permanent station scope remains:
+
+- **Bloodwell:** Akio + Run Infrastructure;
+- **Forge Bench:** Prosthetics + Relics;
+- **Blood Mirror:** Blood Aspect progression after unlock.
+
+The old alternate-weapon/socket Forge system and old fixed three-branch Bloodwell presentation are not production targets.
+
+## Environment production dependency
+
+Production supports the approved regional route shape:
+
+- Hushiro — 12 counted chambers;
+- Yomori — 10 counted chambers;
+- Kagutsuchi — 11 counted chambers.
+
+These are not 33 unique illustrated rooms. Production should build reusable layered environment foundations, prop/occluder families, regional skins, landmarks, functional-room treatments, miniboss/boss arenas, and authored composition variants.
+
+Use ground-contact depth logic and split tall props into base/upper layers when needed for readable actor overlap.
 
 ## Authority rule
 
 Art-production documents translate approved design into asset requirements. They do not invent mechanics, lore, values, catalog entries, route algorithms, or encounter behavior when the owning design file remains unresolved.
+
+When an art-production file conflicts with a current gameplay/overview authority, reconcile the art file rather than preserving the stale mechanic as a second design path.
 
 The asset inventory records high-level groups. Individual briefs own detailed visual requirements. Milestones own production grouping, dependencies, and quotation boundaries.

@@ -4,257 +4,402 @@ title: Art Technical Standards
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-09-15
+last_reviewed: 2026-09-16
 topics:
-  - stylized-3d
-  - gltf
-  - godot-import
-  - rigging
-  - animation-retargeting
+  - isometric-2d
+  - directional-sprites
+  - rig-rendered-2d
+  - blender
+  - spriteframes
+  - frame-registration
+  - animation
+  - illustrated-environments
   - ai-assisted-assets
   - third-party-assets
   - naming
   - delivery
 related:
   - ART-DIRECTION
+  - ART-RIG-RENDERED-2D-PIPELINE
+  - OVERVIEW-ISOMETRIC-2D-PRESENTATION
   - ART-OUTSOURCING-WORKFLOW
-  - OVERVIEW-STYLIZED-3D-PRESENTATION
 ---
 
 # Art Technical Standards
 
-These are the current defaults for Oathbound's **real-time stylized 3D production pipeline**. The fixed high-angle camera and planar combat contract remain the primary constraints. Final art should be judged from gameplay distance before close-up polish.
+These are the current technical defaults for Oathbound's **authoritative 2D / isometric-style presentation pipeline**. The normal runtime is Godot 2D. Offline 3D tools are allowed and encouraged where they improve character production, but they generate 2D deliverables rather than becoming live gameplay actors.
+
+Final art is judged from the accepted gameplay camera before close-up polish.
 
 ## Runtime standard
 
 | Category | Standard |
 |---|---|
-| Production representation | Real-time stylized 3D by default |
-| Camera | Fixed high-angle / three-quarter Camera3D; little or no player-controlled rotation |
-| Gameplay plane | X/Z ground plane; vertical representation does not imply unrestricted vertical gameplay |
-| Preferred interchange | glTF 2.0 / GLB |
-| Character delivery | Game-ready model + materials/textures + rig + animation-ready skeleton |
-| Environment delivery | Modular 3D kit pieces with clean pivots, consistent scale, and collision/occlusion intent documented |
-| Godot target | Godot 4.x, current project uses 4.7 feature level |
-| UI/illustration | 2D remains valid for HUD, portraits, Technique/Relic art, story art, decals, and selected VFX |
-| Hades-style prerender | Optional later A/B fallback, not the current default runtime |
+| Gameplay authority | Planar 2D (`Node2D` / `CharacterBody2D`) |
+| Production camera | Fixed high-angle/isometric-style `Camera2D` |
+| Accepted proving composition | zoom `0.50`, ground compression `0.72`, framing offset `(0, -12)` |
+| Character runtime representation | Eight-direction 2D sprites / `SpriteFrames` |
+| Character direction order | `e, se, s, sw, w, nw, n, ne` |
+| Character depth | Feet/contact point with Y-based ordering |
+| Environment runtime representation | Layered illustrated 2D |
+| Combat VFX | Independent 2D presentation driven by gameplay state |
+| Offline character source | Hand-drawn 2D or custom 3D model/rig/animation rendered to 2D |
+| Godot target | Godot 4.x; current CI/project target 4.7.2 |
+| Current internal/display target | 640 x 360 internal / 1280 x 720 display |
+| Live runtime 3D | Retired research path; not the production default |
 
-## Coordinate and scale contract
+## Gameplay/presentation boundary
 
-The live migration bridge currently maps authoritative 2D combat coordinates to 3D at **64 gameplay pixels = 1 meter**:
+Art and presentation may not own or silently alter:
 
-`Vector2(x, y) -> Vector3(x / 64, 0, y / 64)`
+- actor movement or collision;
+- gameplay facing;
+- target selection;
+- attack reach or hit geometry;
+- damage timing or values;
+- invulnerability windows;
+- Poise/interruption outcomes;
+- guard/Reprisal outcomes;
+- AI or Pressure Director scheduling;
+- encounter composition;
+- progression or reward state.
 
-This is a migration scale, not a permanent physics mandate. Production models should nevertheless be authored near sensible meter scale so replacement assets do not need extreme import scaling.
+`CombatActionRunner` and the owning gameplay systems remain authoritative. Presentation consumes their state.
 
-Working prototype targets:
+## Coordinate and registration contract
 
-- Akio: approximately 1.8–2.0 m visual height;
-- standard humanoids: approximately 1.7–2.1 m depending on role;
-- Hound: approximately 0.7–1.0 m shoulder/head height with a longer ground footprint;
-- large standard/controller enemies: scale by silhouette and gameplay footprint, not realism alone;
-- bosses: established relative to Akio and camera readability.
+The game world is a `Vector2` combat plane. Isometric depth is a presentation convention, not a third gameplay axis.
 
-The character origin/pivot should sit at the gameplay contact point between the feet and ground unless a specific creature rig requires a documented exception.
+For every directional actor:
 
-## Shared Planar3D bridge contract
+- the gameplay node position is the feet/contact point;
+- the visible body may extend above, around, or temporarily beyond that point without moving gameplay collision;
+- Y-depth uses the actor's gameplay/contact base rather than the top of the art;
+- feet registration must remain stable through loops and attacks;
+- source animation must not bake gameplay-authoritative root translation into the runtime frames;
+- visual scale is independent of collision and attack range.
 
-`res://Utility/Planar3DPresentationBridge.gd` is the shared simulation-to-presentation adapter. It owns only region-agnostic responsibilities:
+The current proof runtime profile uses a fixed **128 x 128** canvas with a **(64, 112)** feet anchor. That is the current Godot proof-export contract, not a restriction on the resolution of paid source/master renders.
 
-- mapping authoritative `Node2D` ground coordinates to X/Z presentation space;
-- maintaining the SubViewport / `Camera3D` render target;
-- reconciling presentation actors with authoritative player/enemy groups;
-- preserving the existing combat simulation as movement, hitbox, timing, damage, Pressure Director and encounter authority;
-- suppressing legacy actor art only after a valid replacement visual exists;
-- restoring compatibility presentation state when live 3D is disabled.
+## Master-source vs runtime-derivative contract
 
-The shared bridge must not preload or instantiate Hushiro, Yomori or Kagutsuchi-specific environment content. Region implementations extend it through these hooks:
+Production must distinguish **editable/high-resolution source** from the **runtime derivative**.
 
-- `_create_environment_root()` — region room/environment representation;
-- `_create_actor_visual(actor, role)` — region-specific visual/model selection;
-- `_decorate_actor_visual(visual, actor, role)` — presentation-only VFX/accessories that do not own combat.
+### Source/master deliverables
 
-Region-specific camera profiles, visibility watchdogs, actor grounding offsets and environment art rules also belong in the region subclass. This boundary is enforced by the Planar3D CI workflow so later Yomori/Kagutsuchi work can reuse the bridge without inheriting Hushiro art dependencies.
+For a commissioned or internally produced rig-rendered character, retain:
 
-Replacement behavior is deliberately fail-safe. If a model/factory fails to produce a live `Node3D`, the old authoritative body art must remain visible. An asset-loading failure may degrade presentation, but it must never make a combat actor invisible. External model candidates must also contain actual `MeshInstance3D` geometry before they are accepted as active replacements; a valid-but-empty scene falls back instead of suppressing the legacy actor.
+- the editable source model/rig/animations;
+- the fixed render camera and lighting/material setup;
+- high-resolution transparent directional master renders;
+- enough resolution to re-derive alternate runtime treatments without reconstructing the asset.
 
-## Character model standard
+For a hero character such as Akio, a working target around **1024 x 1024 transparent masters** is appropriate when it contains the full weapon silhouette with comfortable margin, but the exact master canvas may be adjusted to the model/render setup. The important rule is that masters are materially higher resolution than the current 128 x 128 runtime proof output.
 
-Priorities, in order:
+### Runtime derivatives
 
-1. gameplay silhouette;
-2. weapon and hand readability;
-3. rig deformation around major combat poses;
-4. cloth/armor mass that supports the character identity;
-5. materials that survive dark lighting;
-6. corruption landmarks and regional identity;
+The current proof tools validate a fixed 128 x 128 RGBA frame set with stable registration. Runtime derivatives may later move to another whole-profile canvas if visual testing justifies it, but individual frames may not be auto-trimmed independently.
+
+Clean prerender, larger clean derivative, pixel/downsample treatment, and selective hand cleanup should all be derivable from the same source/master package whenever practical.
+
+## Directional actor contract
+
+All production actor sets render or draw eight independent directions:
+
+`e, se, s, sw, w, nw, n, ne`
+
+Do not assume four directions can be mirrored for final production. Mirroring can reverse:
+
+- weapon hand and scabbard relationship;
+- costume asymmetry;
+- corruption asymmetry;
+- readable slash direction;
+- stance details;
+- VFX attachment interpretation.
+
+The source-rig render workflow should rotate the actor/root against a fixed camera rather than moving the registration point.
+
+## Animation naming and state contract
+
+Non-attack states use:
+
+`<state>_<direction>`
+
+Examples:
+
+- `idle_s`
+- `move_ne`
+- `dash_w`
+- `defend_se`
+- `hurt_n`
+- `death_sw`
+
+Attack states use the gameplay action id:
+
+`attack_<action_id>_<direction>`
+
+Examples:
+
+- `attack_quick_slash_ne`
+- `attack_cross_cut_s`
+- `attack_heavy_cleave_w`
+- `attack_basic_swing_se`
+
+The runtime profile may explicitly alias closely related gameplay ids to one presentation clip during a proof. Alias/fallback behavior must be documented rather than hidden in artist naming.
+
+## Animation authoring standard
+
+Source animation and runtime sprite playback have different responsibilities.
+
+### Source animation
+
+A Blender/Maya/other source animation may be authored at a normal animation timeline rate such as 24 or 30 fps. The artist should focus on:
+
+- readable anticipation;
+- clean weapon path;
+- convincing body mechanics;
+- distinct impact/follow-through;
+- readable recovery;
+- stable feet/root setup appropriate for in-place gameplay;
+- deformation quality at extreme sword poses.
+
+The artist should not be forced to hand-match every current prototype millisecond. Early gameplay timing may still be tuned after the motion is accepted.
+
+### Runtime sampling
+
+The exported sprite cadence is a separate production choice. The current proof defaults to **12 fps** derivatives, but clean prerender and pixel-treatment comparisons may justify a different cadence later.
+
+For attacks, `DirectionalActorPresentation` samples the visible frame from normalized authoritative `CombatActionRunner` progress. Therefore the sprite animation follows gameplay timing and cannot move the hit window merely by changing frame count.
+
+Idle/move/other free-running loops may use their authored `SpriteFrames` speed.
+
+## 3D source-rig standard
+
+When using offline 3D for a production character, priorities are:
+
+1. recognizable gameplay silhouette;
+2. weapon/scabbard readability;
+3. clean deformation through required combat poses;
+4. cloth/armor mass that supports identity;
+5. materials/lighting that survive the final 2D render;
+6. corruption landmarks and asymmetry;
 7. close-up detail only after the above are proven.
 
-Avoid spending polygon or texture budget on facial/detail work that cannot be read from the normal camera.
+For Akio specifically, the source package should provide:
 
-For humanoids, prefer a clean humanoid skeleton compatible with Godot retargeting. Keep weapon attachment points explicit. Akio should have stable anchors for katana hand, sheath, weapon-tip/VFX, prosthetic/equipment, and future cloth/secondary motion.
+- editable model, UVs, materials, and textures;
+- reusable humanoid deformation/control rig;
+- katana and scabbard as separate editable objects;
+- stable hand/weapon/scabbard attachment structure;
+- useful VFX/weapon-tip/blade-base reference points where practical;
+- neutral bind/reference pose;
+- combat-ready pose/idle;
+- editable animation Actions/clips;
+- fixed orthographic render camera and repeatable render setup;
+- relative/packed dependencies so the project can reopen without missing external files.
 
-## Animation standard
+The source rig may come from Blender directly or be authored partly in ZBrush/Maya/Substance/another DCC, but the final paid Akio package should include a working Blender source/render handoff because the repository render tooling targets Blender.
 
-Animation is rig-driven 3D by default.
+## Root-motion rule
 
-Required principles:
+Gameplay movement remains authoritative in Godot.
 
-- combat impact timing remains authored by gameplay; animation must match those windows rather than redefining them;
-- locomotion/reactions may be shared or retargeted across compatible humanoid rigs;
-- signature attacks should receive custom animation when generic motion weakens role identity;
-- root motion is not automatically authoritative; planar gameplay movement remains owned by the combat runtime unless a specific migration explicitly changes that contract;
-- imported animation libraries must be tested for scale, root motion, foot sliding, facing axis, and bone mapping before production use;
-- animation names should remain semantic and stable enough to map from combat actions.
+- locomotion should be renderable in place;
+- dash/attack source motion may contain body mechanics but must not force the runtime actor to translate according to pixels in the animation;
+- if an animator authors root displacement for natural motion, the export/render pipeline must provide an in-place version or otherwise neutralize the gameplay translation;
+- collision, attack travel, and dash distance are not read from the sprite sequence.
 
-Working clip families:
+## Render output standard
 
-- idle / ready;
-- locomotion in the required directions or a retargetable directional locomotion set;
-- dash / evasive movement;
-- basic attack chain;
-- special/Technique attacks;
-- guard/parry/special-response poses where relevant;
-- hit/interruption reactions;
-- death;
-- boss/miniboss execution or phase-specific clips as authored.
+Rig-rendered source frames should use:
 
-## Materials and textures
+- transparent RGBA output;
+- fixed camera and projection across all directions/actions;
+- fixed canvas per output tier;
+- stable feet/contact registration;
+- consistent lighting and shadow treatment;
+- no per-frame auto-crop;
+- no camera drift;
+- no direction-specific scale change;
+- exact semantic file naming;
+- zero-padded frame numbering.
 
-Real-time 3D should look deliberately illustrated rather than physically neutral.
+Runtime proof naming:
 
-Allowed/encouraged techniques include:
+`<animation_base>_<direction>_<frame:03>.png`
+
+Example:
+
+`attack_quick_slash_ne_004.png`
+
+## Godot import contract
+
+The current runtime path is:
+
+`authoritative actor -> CombatActionRunner/state -> DirectionalActorPresentation -> DirectionalSpriteProfile -> SpriteFrames`
+
+Current registered proof profiles:
+
+- `res://Presentation/Profiles/AkioRigRendered2DProfile.tres`
+- `res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres`
+
+The current builder is:
+
+`res://Tools/Rig2D/BuildDirectionalSpriteFrames.gd`
+
+The machine-readable **runtime derivative** proof contract is:
+
+`tools/rig2d/poc_manifest.json`
+
+The manifest's 128 x 128 / 12 fps values describe the current Godot proof derivative. They do not replace the separate requirement to preserve higher-resolution paid masters/source files.
+
+## Character-production gating
+
+The current production order is:
+
+1. commission/finish a custom Akio source model and rig;
+2. prove **Idle + Move + Quick Slash** first as the smallest useful in-game character-production gate;
+3. judge silhouette, camera scale, feet registration, animation quality, render treatment, and iteration workflow in Oathbound;
+4. after that gate is accepted, finish Akio's remaining Stage 1 animation set;
+5. only after Akio's pipeline is accepted, commission/build the Corrupted Swordsman proof on the same standards;
+6. only after the pair proves the pipeline, scale it to the wider roster.
+
+This staged order reduces the risk of paying for a complete animation library before the actual in-game character-production method is proven.
+
+## Environment technical standard
+
+Production environments are layered illustrated 2D, not live modular 3D room kits.
+
+Favor reusable painted/modular pieces where they preserve authored composition:
+
+- ground/base plates;
+- paths and floor wear;
+- walls, broken walls, fences, and barricades;
+- torii/gate pieces;
+- building facades/roof silhouettes;
+- trees/vegetation;
+- rocks/debris;
+- shrine/lantern props;
+- corruption overlays;
+- foreground/upper occluder pieces.
+
+Tall props may be split into a ground/base layer and an upper foreground layer. Collision remains authored separately from decorative art when needed for clarity.
+
+## Materials and texture treatment
+
+For painted 2D, values and material cues are authored directly into the illustration.
+
+For offline 3D source rigs, allowed/encouraged techniques include:
 
 - hand-painted albedo/value control;
-- restrained roughness and metallic response;
-- stylized normal detail where it remains readable;
-- toon/painterly light ramps;
+- restrained roughness/metallic response;
+- stylized normals where useful;
+- toon/painterly ramps;
 - selective outlines/ink accents;
 - rim accents for silhouette separation;
-- controlled baked or painted value gradients;
-- decals for blood, grime, ritual marks, and region-specific wear.
+- controlled baked/painted value gradients;
+- decals for blood, grime, ritual marks, and regional wear.
 
-Avoid depending on expensive material complexity where a simpler reusable shader produces the same gameplay read.
+Do not overbuild source shaders whose key qualities disappear after the 2D render/downsample treatment.
 
 ## AI-assisted asset policy
 
-AI generation is allowed as a **production accelerator**, especially for prototype meshes, blockout props, texture exploration, concept-to-3D drafts, and variant generation.
+AI generation may be used as a production accelerator for concept exploration, prototype meshes, blockouts, texture exploration, and variant studies when its provenance is acceptable.
 
-Generated assets are not automatically production-ready. Before shipping, important assets should be checked for:
+Generated material is not automatically production-ready. Before shipping, important assets must be checked for:
 
-- silhouette accuracy against approved concept/reference art;
-- topology and deformation quality;
+- silhouette accuracy against approved references;
+- topology/deformation quality where 3D is used;
 - UV/material consistency;
 - rig quality and bone naming;
 - animation compatibility;
 - hidden/non-manifold/internal geometry;
 - texture artifacts or unintended symbols/details;
-- polygon/texture budget;
-- legal/license provenance of the generation workflow and source inputs.
+- final 2D readability;
+- source/license/provenance risk.
 
-Hero characters and bosses should receive manual cleanup even when AI supplies the starting mesh.
+Hero characters and bosses require deliberate human cleanup and approval even when AI contributes to an early source stage.
 
 ## Public / third-party asset policy
 
-CC0 is preferred for raw assets that may be committed and redistributed with the repository.
+CC0 or clearly permissive licensing is preferred for raw assets committed to the repository.
 
-Current approved prototype candidates include:
+Quaternius Universal Base Characters and Universal Animation Library were useful during the retired live-3D presentation experiment. They remain valid research/reference material, but they are **not** the approved visual baseline for Akio or the final roster.
 
-- **Quaternius Universal Base Characters** — CC0, humanoid rig, game-ready topology, glTF support;
-- **Quaternius Universal Animation Library** — CC0, Godot-tested humanoid animation library suitable for retargeting;
-- **Kenney CC0 3D kits** — useful for temporary environment/prop blockout where their visual language does not become final art by accident.
+Any committed third-party asset must have source, license, and modification status recorded. Placeholder/research use does not automatically approve an asset as final Oathbound art.
 
-Any committed third-party asset must have its source, license, and modification status recorded. Placeholder use does not automatically approve the asset as final Oathbound art.
-
-Do not commit raw assets whose license forbids redistribution. For non-CC0/non-permissive sources, verify the actual license before repository inclusion.
-
-## Replacement model contract
-
-The live Hushiro V2 presenter owns these **seven** production character slots:
-
-- Akio — `res://Art3D/Characters/Akio/akio.glb`
-- Swordsman — `res://Art3D/Characters/HushiroSwordsman/hushiro_swordsman.glb`
-- Blighted Hound — `res://Art3D/Characters/BlightedHound/blighted_hound.glb`
-- Hollow — `res://Art3D/Characters/Hollow/hollow.glb`
-- Archer — `res://Art3D/Characters/HushiroArcher/hushiro_archer.glb`
-- Bilemass — `res://Art3D/Characters/CellarBilemass/cellar_bilemass.glb`
-- Warden — `res://Art3D/Characters/HushiroWarden/hushiro_warden.glb`
-
-The region presenter, not the shared utility layer, owns these paths so another region may reuse semantic role names without accidentally loading Hushiro art. Runtime diagnostics expose slot readiness observationally; absence of a final file is not itself an error while the placeholder tier is still approved.
-
-Current fallback order is role-specific rather than one universal capsule:
-
-- Akio / Swordsman: production GLB → curated CC0 Quaternius humanoid + remapped animation library → procedural safety fallback;
-- Blighted Hound: production GLB → authored Hushiro predator blockout;
-- Hollow / Archer / Bilemass / Warden: production GLB → distinct authored Hushiro role blockout.
-
-A production file is not accepted merely because the path exists. The imported scene must instantiate as `Node3D` and contain renderable mesh geometry. If it does not, the role fallback remains active and legacy actor suppression is not allowed to create an invisible combatant.
-
-Production GLBs are otherwise treated as authored deliverables: the runtime does not silently invent final scale, pivot, facing, rig, material, or animation assumptions for an unseen asset. Each delivered model must therefore pass the scale/grounding/facing/material/animation acceptance checks below before its slot is considered visually approved.
-
-## Environment modularity
-
-Environment production should favor reusable kits rather than one giant unique mesh per room.
-
-Examples for Hushiro:
-
-- wall and broken-wall modules;
-- torii/gate pieces;
-- house and roof modules;
-- fences/barricades;
-- stone path pieces;
-- rocks/debris;
-- dead trees/vegetation;
-- shrine/lantern props;
-- decals and corruption overlays.
-
-Room composition may combine unique hero landmarks with shared modular pieces. Collision/gameplay bounds remain authored independently from decorative geometry during the migration.
+Do not commit raw assets whose license forbids redistribution. For commissioned work, require explicit disclosure of third-party meshes, clothing, textures, mocap, animation packs, AI-generated material, and plugins that affect delivery or rights.
 
 ## Naming
 
-Recommended model/source naming:
+Preserve one asset identity across concept sheets, Blender source, textures, animation Actions, master renders, runtime derivatives, previews, and contractor briefs.
 
-`ASSETID_assetname_LOD#.glb`
+Recommended source names:
 
-`ASSETID_assetname_source.blend`
+- `PC_AKIO_akio_source.blend`
+- `EN_A1_SWORDSMAN_hushiro_swordsman_source.blend`
 
-Animation clips:
+Recommended animation Action names should be semantic and map cleanly to gameplay ids, for example:
 
-`assetname_action_variant`
+- `akio_idle`
+- `akio_move`
+- `akio_quick_slash`
+- `akio_cross_cut`
+- `akio_heavy_cleave`
 
-Examples:
-
-- `PC_AKIO_akio_LOD0.glb`
-- `EN_A1_SWORDSMAN_hushiro_swordsman_LOD0.glb`
-- `akio_quick_slash_01`
-- `hushiro_swordsman_attack_windup`
-
-Preserve the same asset identity across concept sheets, source models, textures, rigs, animations, previews, inventory entries, and contractor briefs.
+Runtime frame names still follow the directional contract described above.
 
 ## Delivery-folder baseline
 
-Each production batch should contain the relevant subset of:
+A production character delivery should contain the relevant subset of:
 
+- `/Source`
 - `/Models`
 - `/Textures`
-- `/Source`
 - `/Animations`
+- `/MasterRenders`
+- `/RuntimeDerivatives` when supplied
 - `/Previews`
 - `/Notes`
 - `/Licenses`
 
-Reference folders and delivery folders must remain separate so visual references cannot be mistaken for approved deliverables.
+Reference folders and paid deliverables must remain separate so visual references cannot be mistaken for owned source art.
+
+## Commission/rightsholder requirements
+
+For paid character work, the production agreement should explicitly cover the project's right to use, modify, reanimate, rerender, create derivatives from, and commercially distribute the delivered game asset/renders at the required scope. The project must also receive the editable source deliverables promised by the brief.
+
+Third-party dependencies and any restrictions must be disclosed before final acceptance. Contract language should be reviewed independently when ownership stakes justify it; repository documentation is a production requirement, not legal advice.
 
 ## Acceptance checks
 
-- model scale and ground pivot are correct;
-- silhouette reads from the gameplay camera;
-- weapon and attack direction are immediately readable;
-- rig deformation survives required poses;
-- animation timing matches gameplay impact windows;
-- imported materials remain legible in representative dark lighting;
-- no old body sprite/model renders underneath the replacement;
-- model/animation imports into Godot without manual repair every run;
-- environment props do not create uncontrolled combat occlusion;
-- performance is validated at the project's 640×360 internal / 1280×720 display target;
-- license/provenance is recorded for external assets.
+A character or environment batch is not accepted merely because the files exist.
+
+### Character checks
+
+- recognizable silhouette at the accepted gameplay camera;
+- correct feet/contact registration;
+- all required directions present;
+- weapon/facing immediately readable;
+- no unintended mirroring of asymmetry;
+- animation deformation survives required poses;
+- attack anticipation/impact/follow-through remain readable at runtime size;
+- no gameplay-authoritative root motion is baked into runtime frames;
+- attack frames follow CombatActionRunner timing rather than own it;
+- master/source package can be reopened without missing dependencies;
+- runtime frame set imports without recurring manual repair;
+- clean and pixel/downsample treatments can be compared without gameplay changes;
+- provenance/rights are recorded.
+
+### Environment checks
+
+- actors remain readable against the background;
+- tall props sort/occlude correctly from their base/contact point;
+- environment layers do not hide critical threats for excessive time;
+- collision intent remains independent from decorative overlap where needed;
+- VFX/telegraphs remain legible over the art;
+- performance is validated at the project target resolution.
+
+## Historical live-3D boundary
+
+`Planar3DPresentationBridge`, Hushiro `Presentation3D`, GLB runtime validators, and related Quaternius integration remain research/reference from the rejected real-time 3D experiment. They are not production standards and ordinary gameplay must not reactivate them without an explicit new direction decision.

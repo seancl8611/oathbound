@@ -16,6 +16,8 @@ topics:
   - rig-rendered-2d
 related:
   - OVERVIEW-V2-COMBAT-DIRECTION
+  - ART-DIRECTION
+  - ART-TECHNICAL-STANDARDS
   - ART-RIG-RENDERED-2D-PIPELINE
 ---
 
@@ -34,9 +36,11 @@ The concise target is:
 Character art may be produced through either:
 
 1. fully hand-drawn directional animation; or
-2. offline 3D model → rig → animate → fixed-angle render → 2D frames.
+2. offline 3D model -> rig -> animate -> fixed-angle render -> 2D frames.
 
-Godot should consume the same directional-sprite contract regardless of how the final frames were produced.
+Godot consumes the same directional-sprite contract regardless of how the final frames were produced.
+
+Live real-time 3D actors/environments are not the ordinary production target. The previous Planar3D work remains historical research/reference unless the project explicitly reopens that renderer decision.
 
 ## Accepted composition gate
 
@@ -52,17 +56,39 @@ Accepted proving profile:
 
 These values remain tunable art/readability parameters, but subsequent work should build on this composition rather than reopen the renderer decision without new evidence.
 
-## Current character-production proof
+## Current character-production gate
 
-The next production gate is intentionally narrow:
+The next expensive art decision is intentionally staged around a **custom Akio**, not a generic universal-base character.
 
-> **Build one Akio-appropriate rig-rendered source character and one Corrupted Swordsman, render both into eight-direction 2D frame sets, and judge whether clean prerender or a deliberate pixel/downsample treatment is the better final character route.**
+### Gate A — Akio minimum proof
 
-The Godot runtime reserves `DirectionalSpriteProfile` seams for those roles. Until real frame sets are supplied, procedural placeholders remain valid temporary presentation.
+Produce the custom Akio model/rig and prove at least:
 
-Do not scale the source-rig pipeline across the roster until the Akio/Swordsman pair passes visual, animation, memory, registration, and iteration-speed acceptance.
+- Idle;
+- Move / combat run;
+- Quick Slash;
+- all eight directions;
+- stable feet/contact registration;
+- high-resolution transparent masters;
+- one or more current runtime derivatives for in-game comparison.
 
-The detailed production handoff is `docs/art_production/RIG_RENDERED_2D_PIPELINE.md` and the machine-readable proof contract is `tools/rig2d/poc_manifest.json`.
+Judge this proof inside the accepted Hushiro camera before paying for or producing a complete animation library.
+
+The purpose is to validate Akio's real silhouette, animation language, source-rig quality, render setup, clean-prerender vs pixel/downsample treatment, and iteration speed.
+
+### Gate B — Akio Stage 1
+
+After Gate A passes, complete the current Akio production profile:
+
+`idle`, `move`, `dash`, `defend`, `hurt`, `death`, `attack_quick_slash`, `attack_cross_cut`, `attack_heavy_cleave`.
+
+### Gate C — Corrupted Swordsman
+
+After the Akio pipeline is accepted, produce one Corrupted Swordsman with the same camera/registration/runtime contract. The Akio + Swordsman pair is then used to validate crowd depth, repeated actor cost, player/enemy style consistency, and whether the pipeline should scale across the roster.
+
+Do not scale the source-rig pipeline across the roster until these gates pass.
+
+The detailed production handoff is `docs/art_production/RIG_RENDERED_2D_PIPELINE.md`, the artist-facing Akio authority is `docs/commissions/akio/AKIO_COMMISSION_BRIEF.md`, and the machine-readable **current runtime derivative** contract is `tools/rig2d/poc_manifest.json`.
 
 ## Gameplay authority boundary
 
@@ -89,6 +115,8 @@ The world remains a `Vector2` combat plane. Isometric depth is a rendering conve
 The gameplay camera is fixed, high-angle, and wide enough to support multi-enemy pressure readability.
 
 Future tuning must be driven by threat readability: the player must be able to read melee approaches, ranged setup, projectiles/AoEs, escape space, and environmental obstacles before they become immediate contact threats.
+
+Camera changes should be evaluated in representative multi-enemy Hushiro combat rather than from an empty-room screenshot alone.
 
 ## Actor presentation contract
 
@@ -138,7 +166,10 @@ Therefore:
 - changing frame count cannot silently move gameplay hit windows;
 - hitstop and gameplay timing remain authoritative outside the sprite frame set;
 - re-rendering a source model cannot alter damage timing;
+- source animation authoring FPS does not need to equal runtime sprite FPS;
 - art production can iterate independently from combat logic.
+
+The animator should still provide clear anticipation, strike/follow-through, and recovery structure. Godot can remap those visual phases over the authoritative action timeline without requiring the source Action to encode gameplay events.
 
 Idle and locomotion loops may free-run at their authored SpriteFrames speed.
 
@@ -151,11 +182,37 @@ Rules:
 - actor world position represents its feet/contact point on the combat plane;
 - visual height does not alter collision dimensions;
 - bulky/tall roles scale presentation separately from gameplay collision/range;
-- source animation does not introduce gameplay root motion;
+- source animation does not introduce gameplay-authoritative root motion;
 - attack frames visually follow authoritative action progress;
 - replacement body art is exclusive and must hide obsolete placeholder/body visuals.
 
-The first Akio/Swordsman proof uses a fixed `128 x 128` frame canvas and `(64, 112)` feet anchor. Those values may be revised only as a whole-profile contract; individual frames must not be independently auto-trimmed around the moving body or weapon.
+The current Godot proof derivative uses a fixed `128 x 128` frame canvas and `(64, 112)` feet anchor. Those values describe the **runtime proof profile**, not the resolution of paid source/master renders.
+
+Paid/custom source art should preserve substantially higher-resolution transparent master renders and editable source files so runtime resolution/style can be changed without reconstructing the character.
+
+## Source/master vs runtime derivative
+
+The production pipeline explicitly has two tiers.
+
+### Source/master tier
+
+Keep:
+
+- editable model/rig/Actions;
+- fixed render setup;
+- high-resolution transparent masters;
+- stable registration;
+- no per-frame cropping;
+- enough margin for weapon arcs;
+- provenance/rights information.
+
+For Akio, approximately `1024 x 1024` transparent masters are a reasonable working target if the full weapon silhouette fits comfortably, but the exact master canvas can be adjusted to the source setup.
+
+### Runtime derivative tier
+
+The current proof validator and Blender templates are built around `128 x 128` RGBA frames at a 12 fps proof cadence. That is the current import/test contract, not a final visual-resolution decision.
+
+If the Akio proof shows that a different whole-profile canvas or cadence is needed, update the runtime profile/tooling deliberately. Do not auto-trim individual frames or allow the feet anchor to wander.
 
 ## Direction contract
 
@@ -164,6 +221,8 @@ The production direction order is:
 `e, se, s, sw, w, nw, n, ne`
 
 The source asset rotates against a fixed render camera so one authored action can generate all required directions. The runtime selects the already-rendered direction from gameplay facing.
+
+Render all eight directions independently for production. Do not assume four-direction horizontal mirroring is safe, because handedness, katana/scabbard placement, costume asymmetry, corruption asymmetry and weapon paths would reverse.
 
 No gameplay facing calculation should depend on sprite appearance.
 
@@ -175,7 +234,9 @@ Keep high-quality source renders so the same rig/action can be evaluated as:
 2. downsampled/quantized pixel treatment;
 3. selectively hand-cleaned frames if useful.
 
-Do not lock a final palette count, outline treatment, or exact source-render shader before the Akio/Swordsman comparison. Registration, direction naming, gameplay-timing separation, and runtime import are the stable engineering contract.
+Do not lock a final palette count, outline treatment, exact source-render shader, or final runtime resolution before the Akio comparison. Registration, direction naming, gameplay-timing separation, source ownership, and runtime import are the stable engineering contract.
+
+The style decision should be made from actual Hushiro combat with multiple threats, not enlarged isolated character previews.
 
 ## Environment contract
 
@@ -195,6 +256,8 @@ Recommended layer language:
 
 Depth sorting uses each object's ground-contact/base Y rather than the top of its artwork. Tall props may split into base and foreground/upper layers when that produces clearer overlap.
 
+The production target is not live modular 3D scenery. Offline 3D can still be used as a perspective/layout/paintover aid if the final runtime result remains layered 2D and obeys the same occlusion/readability rules.
+
 ## VFX contract
 
 Body art and combat VFX remain separate.
@@ -207,23 +270,25 @@ This keeps combat readability and timing stable while actor art is replaced or r
 
 Expected production pipeline:
 
-`concept → model → rig → animate → fixed-camera directional renders → optional pixel treatment → SpriteFrames → DirectionalActorPresentation`
+`concept/turnaround -> custom model -> rig -> animate -> fixed-camera high-res directional masters -> runtime derivatives -> optional pixel treatment -> SpriteFrames -> DirectionalActorPresentation`
 
-The source render camera, canvas, feet anchor, direction names, and animation-state names are standardized so rerendering an updated model does not require gameplay-code changes.
+The source render camera, feet anchor, direction names, animation-state names, and source-to-runtime traceability are standardized so rerendering an updated model does not require gameplay-code changes.
 
-The repository includes validation/import tooling for conventionally named PNG sequences and `DirectionalSpriteProfile` resources. A profile becomes asset-ready only after its required direction/animation contract passes.
+The repository includes validation/import tooling for conventionally named runtime PNG sequences and `DirectionalSpriteProfile` resources. A production profile becomes asset-ready only after its required direction/animation contract passes.
 
 ## Immediate priorities
 
 1. keep the accepted Hushiro camera/composition and Combat V2 behavior stable;
-2. acquire/create the first Akio-appropriate source rig and required proof actions;
-3. render/import Akio's eight-direction proof set;
-4. create/render the Corrupted Swordsman using the same camera/canvas/feet rules;
-5. compare clean prerender and pixel/downsample treatment in real Hushiro combat;
-6. validate multiple actors, Y-depth, attack readability, and memory/import cost;
-7. only after that acceptance decision, expand the character pipeline;
-8. continue layered Hushiro scenery production independently where it does not obscure the character comparison.
+2. use the Akio commission brief to source/produce the custom Akio model, textures, rig and editable source package;
+3. complete Akio Gate A with Idle + Move + Quick Slash in all eight directions;
+4. derive clean and pixel/downsample runtime treatments from the same high-resolution masters;
+5. judge Akio in real Hushiro combat before completing the full paid animation set;
+6. after Akio Gate A passes, finish the current Stage 1 profile and validate dash/guard/hurt/death/full basic chain;
+7. only then produce the Corrupted Swordsman proof on the same standards;
+8. validate multiple actors, Y-depth, attack readability, memory/import cost and iteration speed;
+9. only after that acceptance decision, expand character production across the roster;
+10. continue layered Hushiro scenery production where it does not obscure the character comparison.
 
 ## Scope guard
 
-Do not add a second live actor-rendering architecture beside this one. Experimental or retired renderer code may remain temporarily only while cleanup work is active; ordinary gameplay scenes, production docs, tests, and new implementation should target the current isometric 2D presentation contract.
+Do not add a second live actor-rendering architecture beside this one. Experimental or retired renderer code may remain temporarily only as historical research/reference; ordinary gameplay scenes, production docs, tests, and new implementation should target the current isometric 2D presentation contract.
