@@ -70,6 +70,17 @@ jobs:
             exit 1
           fi
 
+      - name: Verify pressure window fairness
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/PressureDirectorWindowFairnessSmoke.tscn 2>&1 | tee pressure-window-fairness.log
+          grep -F "[PressureDirectorWindowFairnessSmoke] PASS - active-window spacing | window-aware pressure budget | release cleanup" pressure-window-fairness.log
+          if grep -F "SCRIPT ERROR:" pressure-window-fairness.log; then
+            echo "FAIL: pressure window fairness smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Verify standard-enemy Posture retirement
         shell: bash
         run: |
@@ -177,6 +188,7 @@ jobs:
             combat-contract-editor.log
             player-paced.log
             player-pressure.log
+            pressure-window-fairness.log
             standard-posture-retirement.log
             special-parry-policy.log
             counter-cue-pressure.log
