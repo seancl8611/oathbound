@@ -8,6 +8,7 @@ on:
     paths:
       - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
       - "game/oathbound/Core/Release/Validation/ChoiceResumePlayerStateSmoke.*"
+      - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
       - "game/oathbound/Core/Validation/TechniqueRewardUISmoke.*"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/autoload/UpgradeService.gd"
@@ -17,6 +18,7 @@ on:
     paths:
       - "game/oathbound/Core/Release/OathboundReleaseGameFlow.gd"
       - "game/oathbound/Core/Release/Validation/ChoiceResumePlayerStateSmoke.*"
+      - "game/oathbound/Core/Relics/OathboundUpgradeService.gd"
       - "game/oathbound/Core/Validation/TechniqueRewardUISmoke.*"
       - "game/oathbound/Utility/UpgradeChoiceUI.gd"
       - "game/oathbound/autoload/UpgradeService.gd"
