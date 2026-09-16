@@ -1,4 +1,4 @@
-name: Hushiro Presentation V2 Check
+name: Hushiro Isometric 2D Presentation Check
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  hushiro-presentation-v2:
+  hushiro-isometric-2d:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -26,33 +26,18 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
-      - name: Verify second-pass Hushiro presentation
+      - name: Verify isometric 2D actor and camera contract
         shell: bash
         run: |
           set -o pipefail
-          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.tscn 2>&1 | tee hushiro-presentation-v2.log
-          grep -F "[Planar3DPresentationV2Smoke] PASS" hushiro-presentation-v2.log
-          if grep -F "SCRIPT ERROR:" hushiro-presentation-v2.log; then
-            echo "FAIL: Hushiro V2 presentation emitted a GDScript runtime error."
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Isometric2DPresentationSmoke.tscn 2>&1 | tee hushiro-isometric-2d.log
+          grep -F "[Isometric2DPresentationSmoke] PASS" hushiro-isometric-2d.log
+          if grep -F "SCRIPT ERROR:" hushiro-isometric-2d.log; then
+            echo "FAIL: Hushiro isometric 2D presentation emitted a GDScript runtime error."
             exit 1
           fi
-          if grep -F "ERROR: Error calling deferred method:" hushiro-presentation-v2.log; then
-            echo "FAIL: Hushiro V2 presentation emitted a deferred-call runtime error."
-            exit 1
-          fi
-
-      - name: Verify freed-source presentation lifetime
-        shell: bash
-        run: |
-          set -o pipefail
-          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DFreedSourceLifetimeSmoke.tscn 2>&1 | tee planar3d-freed-source-lifetime.log
-          grep -F "[Planar3DFreedSourceLifetimeSmoke] PASS" planar3d-freed-source-lifetime.log
-          if grep -F "SCRIPT ERROR:" planar3d-freed-source-lifetime.log; then
-            echo "FAIL: freed-source presentation lifetime smoke emitted a GDScript runtime error."
-            exit 1
-          fi
-          if grep -F "ERROR: Error calling deferred method:" planar3d-freed-source-lifetime.log; then
-            echo "FAIL: freed-source presentation lifetime smoke emitted a deferred-call runtime error."
+          if grep -F "ERROR: Error calling deferred method:" hushiro-isometric-2d.log; then
+            echo "FAIL: Hushiro isometric 2D presentation emitted a deferred-call runtime error."
             exit 1
           fi
 
@@ -67,78 +52,29 @@ jobs:
             exit 1
           fi
 
-      - name: Verify production model validator contract
-        shell: bash
-        run: |
-          set -o pipefail
-          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DProductionModelValidatorSmoke.tscn 2>&1 | tee hushiro-production-model-validator.log
-          grep -F "[Planar3DProductionModelValidatorSmoke] PASS" hushiro-production-model-validator.log
-          if grep -F "SCRIPT ERROR:" hushiro-production-model-validator.log; then
-            echo "FAIL: production model validator smoke emitted a GDScript runtime error."
-            exit 1
-          fi
-          if grep -F "ERROR: Error calling deferred method:" hushiro-production-model-validator.log; then
-            echo "FAIL: production model validator smoke emitted a deferred-call runtime error."
-            exit 1
-          fi
-
-      - name: Verify source-driven production GLB animation
-        shell: bash
-        run: |
-          set -o pipefail
-          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DExternalAnimationSyncSmoke.tscn 2>&1 | tee hushiro-production-animation-sync.log
-          grep -F "[Planar3DExternalAnimationSyncSmoke] PASS" hushiro-production-animation-sync.log
-          if grep -F "SCRIPT ERROR:" hushiro-production-animation-sync.log; then
-            echo "FAIL: source-driven production animation smoke emitted a GDScript runtime error."
-            exit 1
-          fi
-          if grep -F "ERROR: Error calling deferred method:" hushiro-production-animation-sync.log; then
-            echo "FAIL: source-driven production animation smoke emitted a deferred-call runtime error."
-            exit 1
-          fi
-
-      - name: Verify production GLB state diagnostics
-        shell: bash
-        run: |
-          set -o pipefail
-          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DProductionModelStateSmoke.tscn 2>&1 | tee hushiro-production-model-state.log
-          grep -F "[Planar3DProductionModelStateSmoke] PASS" hushiro-production-model-state.log
-          if grep -F "SCRIPT ERROR:" hushiro-production-model-state.log; then
-            echo "FAIL: Hushiro production model state smoke emitted a GDScript runtime error."
-            exit 1
-          fi
-          if grep -F "ERROR: Error calling deferred method:" hushiro-production-model-state.log; then
-            echo "FAIL: Hushiro production model state smoke emitted a deferred-call runtime error."
-            exit 1
-          fi
-
       - name: Smoke live Hushiro combat chamber wiring
         shell: bash
         run: |
           set -o pipefail
-          godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-v2-runscene.log
-          # Presence of the V3 marker proves the production RunScene used the hybrid
-          # presentation. Exact framing values are manual-playtest tuning and should not
-          # make CI brittle when zoom/actor scale are deliberately adjusted.
-          grep -F "[HushiroPlanar3DV3] revision=3 hybrid_2_5d=true" hushiro-v2-runscene.log
-          grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-v2-runscene.log
-          if grep -F "SCRIPT ERROR:" hushiro-v2-runscene.log; then
-            echo "FAIL: live Hushiro V3 RunScene emitted a GDScript runtime error."
+          godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-isometric-runscene.log
+          grep -F "[HushiroIsometric2D] revision=1 runtime=2d directional=8 zoom=0.50 compression=0.72 live_3d=false" hushiro-isometric-runscene.log
+          if grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-isometric-runscene.log; then
+            echo "FAIL: retired live 3D bridge is still active in the playable Hushiro chamber."
+            exit 1
+          fi
+          if grep -F "SCRIPT ERROR:" hushiro-isometric-runscene.log; then
+            echo "FAIL: live Hushiro isometric 2D RunScene emitted a GDScript runtime error."
             exit 1
           fi
 
-      - name: Upload V2 presentation logs
+      - name: Upload isometric presentation logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: hushiro-presentation-v2-${{ github.run_id }}
+          name: hushiro-isometric-2d-${{ github.run_id }}
           path: |
-            hushiro-presentation-v2.log
-            planar3d-freed-source-lifetime.log
+            hushiro-isometric-2d.log
             hushiro-enemy-separation.log
-            hushiro-production-model-validator.log
-            hushiro-production-animation-sync.log
-            hushiro-production-model-state.log
-            hushiro-v2-runscene.log
+            hushiro-isometric-runscene.log
           if-no-files-found: warn
           retention-days: 7
