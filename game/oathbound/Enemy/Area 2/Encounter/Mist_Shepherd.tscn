@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://crgeeakwaelj1"]
+[gd_scene load_steps=15 format=3 uid="uid://crgeeakwaelj1"]
 
 [ext_resource type="Script" path="res://Enemy/Area 2/Encounter/Mist_Shepherd.gd" id="1_su2d5"]
 [ext_resource type="Texture2D" uid="uid://ddwaxh7fkp6yg" path="res://Textures/Enemy/spirit_monk/spirit_monk.png" id="2_20mkg"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="8_31xju"]
 [ext_resource type="PackedScene" uid="uid://uhr6mtuisqm1" path="res://Utility/hit_box.tscn" id="9_j0f76"]
 [ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="10_6dain"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyDefenseRuntime.gd" id="11_health"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ingj8"]
 shader = ExtResource("2_o5yd2")
@@ -79,6 +80,9 @@ libraries = {
 
 [node name="BuffTimer" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="StandardEnemyDefenseRuntime" type="Node" parent="."]
+script = ExtResource("11_health")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

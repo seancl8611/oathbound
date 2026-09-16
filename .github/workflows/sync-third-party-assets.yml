@@ -1,0 +1,77 @@
+name: Sync Third-Party 3D Assets
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "tools/assets/**"
+      - "docs/assets/THIRD_PARTY_ASSETS.md"
+      - ".github/workflows/sync-third-party-assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-assets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout source branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Fetch and verify manifest assets
+        run: |
+          python3 tools/assets/fetch_assets.py \
+            --manifest tools/assets/asset_manifest.json \
+            --repo-root . \
+            --report asset-sync-report.json
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Verify Godot can import staged GLB assets
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee asset-godot-import.log
+          if grep -F "SCRIPT ERROR:" asset-godot-import.log; then
+            echo "FAIL: asset import emitted a GDScript error"
+            exit 1
+          fi
+          if grep -F "ERROR: Cannot open file" asset-godot-import.log; then
+            echo "FAIL: Godot could not open an installed asset"
+            exit 1
+          fi
+
+      - name: Commit verified binary assets when changed
+        shell: bash
+        run: |
+          git add game/oathbound/Art3D/ThirdParty
+          if git diff --cached --quiet; then
+            echo "Asset tree already matches manifest."
+            exit 0
+          fi
+          git config user.name "oathbound-asset-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync verified third-party 3D assets"
+          git push origin "HEAD:${{ github.ref_name }}"
+
+      - name: Upload intake evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: asset-intake-${{ github.run_id }}
+          path: |
+            asset-sync-report.json
+            asset-godot-import.log
+          if-no-files-found: warn
+          retention-days: 14

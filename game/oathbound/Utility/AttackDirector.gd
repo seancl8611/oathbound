@@ -1,16 +1,16 @@
 extends Node
 
-## Stable role-based combat-pressure coordinator.
+## Stable combat-pressure coordinator.
 ##
-## Core invariant: active attack ownership is never stolen. An enemy that owns an
-## attack role keeps it until that enemy releases it, dies, or is freed. Rooms may
-## raise role limits to admit overlapping pressure; spacing and stall prevention still
-## never revoke a live action just to hand its slot to another enemy mid-swing.
+## Core invariant: an active melee turn is never stolen. An enemy that owns the
+## `melee_attack` role keeps it until that enemy releases it, dies, or is freed.
+## Waiting enemies may approach/orbit, but crowd spacing and stall prevention never
+## revoke an active attack and hand the same turn to a second enemy mid-swing.
 
 signal role_released(role: String)
 signal crowd_backoff(targets: Array)
 
-@export_group("Attack Pressure")
+@export_group("Attack Turns")
 @export var max_melee_attackers: int = 1
 @export var grant_gap_sec: float = 0.35
 @export var per_enemy_cooldown: float = 1.25
@@ -69,7 +69,7 @@ func _ready() -> void:
 	stall_timer.start()
 
 	_last_attack_time = Time.get_ticks_msec() * 0.001
-	print("[AttackDirector] v4.1 - Stable pressure-role coordinator")
+	print("[AttackDirector] v4.0 - Stable single-turn combat")
 
 
 func _ensure_role(role: String) -> void:
@@ -202,7 +202,7 @@ func set_role_limits(limits: Dictionary) -> void:
 		_ensure_role(role)
 		_roles[role]["limit"] = maxi(0, int(limits[role_value]))
 		# Never prune an active holder. A lowered cap simply prevents new grants until
-		# existing holders finish their actions naturally.
+		# existing holders finish their turns naturally.
 
 
 func set_role_cooldowns(values: Dictionary) -> void:
@@ -306,7 +306,7 @@ func _stall_prevention_tick() -> void:
 		return
 
 	# Nudge only the enemy's approach/decision state. Do not grant or steal an attack
-	# role here; the enemy must request its own action when its authored windup begins.
+	# role here; the enemy must request its own turn when its authored windup begins.
 	if "_force_attack_soon" in closest:
 		closest.set("_force_attack_soon", true)
 	if closest.has_method("_crowd_force_backoff"):

@@ -1,0 +1,320 @@
+name: Planar3D Layering Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+    paths:
+      - "game/oathbound/Utility/Planar3D*.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Regions/Hushiro/Presentation3D/**"
+      - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DExternalModelFallbackSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DNonRenderableModel.tscn"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
+      - "game/oathbound/Art3D/**"
+      - "tools/assets/**"
+      - "docs/assets/**"
+      - ".github/workflows/planar3d-layering-check.yml"
+  pull_request:
+    paths:
+      - "game/oathbound/Utility/Planar3D*.gd"
+      - "game/oathbound/Utility/HushiroEnemyContract.gd"
+      - "game/oathbound/Regions/Hushiro/Presentation3D/**"
+      - "game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DLayeringSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DFailSafe*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DExternalModelFallbackSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DNonRenderableModel.tscn"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DRoleContractSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.*"
+      - "game/oathbound/Regions/Hushiro/Validation/GLTFImportProbe.*"
+      - "game/oathbound/Art3D/**"
+      - "tools/assets/**"
+      - "docs/assets/**"
+      - ".github/workflows/planar3d-layering-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  layering-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify shared 3D layer stays region agnostic
+        shell: bash
+        run: |
+          set -euo pipefail
+          shared_bridge="game/oathbound/Utility/Planar3DPresentationBridge.gd"
+          shared_actor="game/oathbound/Utility/Planar3DActorVisual.gd"
+          enemy_contract="game/oathbound/Utility/HushiroEnemyContract.gd"
+          hushiro="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"
+          hushiro_v2="game/oathbound/Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridgeV2.gd"
+          diagnostics="game/oathbound/Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnostics.gd"
+          diagnostics_v2="game/oathbound/Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnosticsV2.gd"
+          chamber="game/oathbound/Regions/Hushiro/Chambers/CombatChamber.tscn"
+
+          if grep -Fq "res://Regions/Hushiro/" "$shared_bridge"; then
+            echo "FAIL: shared Planar3DPresentationBridge depends directly on Hushiro content."
+            exit 1
+          fi
+          if grep -Fq "res://Regions/Hushiro/" "$shared_actor"; then
+            echo "FAIL: shared Planar3DActorVisual depends directly on Hushiro region content."
+            exit 1
+          fi
+          if grep -Fq "res://Art3D/Characters/" "$shared_actor"; then
+            echo "FAIL: shared Planar3DActorVisual owns production character paths; region presenters must choose models."
+            exit 1
+          fi
+
+          grep -Fq "func _create_environment_root()" "$shared_bridge"
+          grep -Fq "func _create_actor_visual(" "$shared_bridge"
+          grep -Fq "func _decorate_actor_visual(" "$shared_bridge"
+          grep -Fq "func _has_valid_actor_visual(" "$shared_bridge"
+          grep -Fq "func _actor_visual_is_ready(" "$shared_bridge"
+          grep -Fq "var external_model_path: String" "$shared_actor"
+          grep -Fq "func set_external_model_path(" "$shared_actor"
+          grep -Fq "func _has_renderable_geometry(" "$shared_actor"
+          grep -Fq 'set_meta("presentation_role", key)' "$enemy_contract"
+
+          grep -Fq "Hushiro3DEnvironment.gd" "$hushiro"
+          grep -Fq "PRODUCTION_MODEL_PATHS" "$hushiro"
+          grep -Fq "HushiroSwordsman/hushiro_swordsman.glb" "$hushiro"
+          grep -Fq "BlightedHound/blighted_hound.glb" "$hushiro"
+          grep -Fq "func _create_environment_root()" "$hushiro"
+          grep -Fq "func _create_actor_visual(" "$hushiro"
+          grep -Fq "func _decorate_actor_visual(" "$hushiro"
+
+          # V2 is the live Hushiro acceptance presenter. It must remain a region-local
+          # specialization layered on top of the already-tested V1 lifecycle/fail-safe.
+          grep -Fq 'extends "res://Regions/Hushiro/Presentation3D/HushiroPlanar3DPresentationBridge.gd"' "$hushiro_v2"
+          grep -Fq "Hushiro3DEnvironmentV2.gd" "$hushiro_v2"
+          grep -Fq "HushiroStandardEnemyActorVisual.gd" "$hushiro_v2"
+          grep -Fq "illustrated_ground_compression = 0.48" "$hushiro_v2"
+          grep -Fq "illustrated_presentation_zoom = 0.52" "$hushiro_v2"
+          grep -Fq "production_model_ready_by_role" "$hushiro_v2"
+
+          grep -Fq "hushiro_3d_presentation_snapshot" "$diagnostics"
+          grep -Fq "get_current_snapshot_for_test" "$diagnostics"
+          grep -Fq 'extends "res://Regions/Hushiro/Presentation3D/Hushiro3DPlaytestDiagnostics.gd"' "$diagnostics_v2"
+          grep -Fq "HushiroPlanar3DPresentationBridgeV2.gd" "$chamber"
+          grep -Fq "Hushiro3DPlaytestDiagnosticsV2.gd" "$chamber"
+          grep -Fq '[node name="Planar3DPresentationBridge" type="Node" parent="."]' "$chamber"
+          grep -Fq '[node name="Planar3DPlaytestDiagnostics" type="Node" parent="."]' "$chamber"
+
+          echo "Shared 3D region-isolation, renderability fail-safe, presentation-role, diagnostics and live Hushiro V2 wiring contracts verified."
+
+      - name: Fetch and verify curated CC0 assets
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/assets/fetch_assets.py \
+            --manifest tools/assets/asset_manifest.json \
+            --repo-root . \
+            --report asset-sync-report.json
+
+      - name: Inspect raw curated GLB contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/assets/inspect_glb.py \
+            game/oathbound/Art3D/ThirdParty/Quaternius/UniversalBaseCharacters/superhero_male_reference.glb \
+            --min-joints 50 \
+            --report humanoid-glb-report.json \
+            | tee humanoid-glb-inspect.log
+          python3 tools/assets/inspect_glb.py \
+            game/oathbound/Art3D/ThirdParty/Quaternius/UniversalAnimationLibrary/universal_animation_library.glb \
+            --min-joints 50 \
+            --min-animations 5 \
+            --report animation-glb-report.json \
+            | tee animation-glb-inspect.log
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --import 2>&1 | tee planar3d-import.log
+          if grep -F "SCRIPT ERROR:" planar3d-import.log; then
+            echo "FAIL: 3D project import emitted a GDScript error."
+            exit 1
+          fi
+          if grep -F "ERROR: Cannot open file" planar3d-import.log; then
+            echo "FAIL: Godot could not open an installed 3D asset."
+            exit 1
+          fi
+
+      - name: Probe Godot GLTFDocument import path
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/GLTFImportProbe.tscn 2>&1 | tee gltf-import-probe.log
+          grep -F "[GLTFImportProbe] PASS" gltf-import-probe.log
+          if grep -F "SCRIPT ERROR:" gltf-import-probe.log; then
+            echo "FAIL: direct GLTFDocument probe emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" gltf-import-probe.log; then
+            echo "FAIL: direct GLTFDocument probe emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Validate curated third-party 3D compatibility
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/ThirdParty3DAssetSmoke.tscn 2>&1 | tee third-party-3d-assets.log
+          grep -F "[ThirdParty3DAssetSmoke] PASS" third-party-3d-assets.log
+          if grep -F "SCRIPT ERROR:" third-party-3d-assets.log; then
+            echo "FAIL: third-party 3D asset smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" third-party-3d-assets.log; then
+            echo "FAIL: third-party 3D asset smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Validate shared presentation-role handoff
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DRoleContractSmoke.tscn 2>&1 | tee planar3d-role-contract.log
+          grep -F "[Planar3DRoleContractSmoke] PASS" planar3d-role-contract.log
+          if grep -F "SCRIPT ERROR:" planar3d-role-contract.log; then
+            echo "FAIL: Planar3D role-contract smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-role-contract.log; then
+            echo "FAIL: Planar3D role-contract smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Validate live 3D layering contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DLayeringSmoke.tscn 2>&1 | tee planar3d-layering.log
+          grep -F "[Planar3DLayeringSmoke] PASS" planar3d-layering.log
+          if grep -F "SCRIPT ERROR:" planar3d-layering.log; then
+            echo "FAIL: live 3D layering smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-layering.log; then
+            echo "FAIL: live 3D layering smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Validate Hushiro V2 acceptance presentation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DPresentationV2Smoke.tscn 2>&1 | tee planar3d-v2.log
+          grep -F "[Planar3DPresentationV2Smoke] PASS" planar3d-v2.log
+          if grep -F "SCRIPT ERROR:" planar3d-v2.log; then
+            echo "FAIL: Hushiro V2 presentation smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Validate 3D playtest diagnostics
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DDiagnosticsSmoke.tscn 2>&1 | tee planar3d-diagnostics.log
+          grep -F "[Planar3DDiagnosticsSmoke] PASS" planar3d-diagnostics.log
+          if grep -F "SCRIPT ERROR:" planar3d-diagnostics.log; then
+            echo "FAIL: Planar3D diagnostics smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-diagnostics.log; then
+            echo "FAIL: Planar3D diagnostics smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Validate non-renderable external model fallback
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DExternalModelFallbackSmoke.tscn 2>&1 | tee planar3d-external-model-fallback.log
+          grep -F "[Planar3DExternalModelFallbackSmoke] PASS" planar3d-external-model-fallback.log
+          if grep -F "SCRIPT ERROR:" planar3d-external-model-fallback.log; then
+            echo "FAIL: external-model fallback smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-external-model-fallback.log; then
+            echo "FAIL: external-model fallback smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Validate 3D replacement fail-safe lifecycle
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DFailSafeSmoke.tscn 2>&1 | tee planar3d-failsafe.log
+          grep -F "[Planar3DFailSafeSmoke] PASS" planar3d-failsafe.log
+          if grep -F "SCRIPT ERROR:" planar3d-failsafe.log; then
+            echo "FAIL: Planar3D fail-safe smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-failsafe.log; then
+            echo "FAIL: Planar3D fail-safe smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Commit verified third-party binaries
+        if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add game/oathbound/Art3D/ThirdParty
+          if git diff --cached --quiet; then
+            echo "Asset tree already matches the pinned manifest."
+            exit 0
+          fi
+          git config user.name "oathbound-asset-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync verified third-party 3D assets"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Upload 3D validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: planar3d-validation-${{ github.run_id }}
+          path: |
+            asset-sync-report.json
+            humanoid-glb-report.json
+            animation-glb-report.json
+            humanoid-glb-inspect.log
+            animation-glb-inspect.log
+            planar3d-import.log
+            gltf-import-probe.log
+            third-party-3d-assets.log
+            planar3d-role-contract.log
+            planar3d-layering.log
+            planar3d-v2.log
+            planar3d-diagnostics.log
+            planar3d-external-model-fallback.log
+            planar3d-failsafe.log
+          if-no-files-found: warn
+          retention-days: 14

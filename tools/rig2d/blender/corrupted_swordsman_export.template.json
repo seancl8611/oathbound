@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "actor_id": "corrupted_swordsman",
+  "armature_object": "CorruptedSwordsman_Rig",
+  "rotation_object": "CorruptedSwordsman_Root",
+  "camera_object": "Rig2D_Camera",
+  "output_dir": "../exports/corrupted_swordsman/frames",
+  "resolution_px": [128, 128],
+  "transparent": true,
+  "frame_step": 2,
+  "directions": [
+    {"name": "e", "yaw_deg": 0.0},
+    {"name": "se", "yaw_deg": 45.0},
+    {"name": "s", "yaw_deg": 90.0},
+    {"name": "sw", "yaw_deg": 135.0},
+    {"name": "w", "yaw_deg": 180.0},
+    {"name": "nw", "yaw_deg": 225.0},
+    {"name": "n", "yaw_deg": 270.0},
+    {"name": "ne", "yaw_deg": 315.0}
+  ],
+  "animations": [
+    {"base": "idle", "action": "CorruptedSwordsman_Idle"},
+    {"base": "move", "action": "CorruptedSwordsman_Move"},
+    {"base": "defend", "action": "CorruptedSwordsman_Defend"},
+    {"base": "hurt", "action": "CorruptedSwordsman_Hurt"},
+    {"base": "death", "action": "CorruptedSwordsman_Death"},
+    {"base": "attack_basic_swing", "action": "CorruptedSwordsman_Attack_BasicSwing"},
+    {"base": "attack_quick_thrust", "action": "CorruptedSwordsman_Attack_QuickThrust"},
+    {"base": "attack_cross_swing", "action": "CorruptedSwordsman_Attack_CrossSwing"},
+    {"base": "attack_running_swing", "action": "CorruptedSwordsman_Attack_RunningSwing"}
+  ]
+}

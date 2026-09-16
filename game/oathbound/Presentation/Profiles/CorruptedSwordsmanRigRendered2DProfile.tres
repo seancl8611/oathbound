@@ -1,0 +1,30 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Presentation/DirectionalSpriteProfile.gd" id="1_profile"]
+
+[resource]
+script = ExtResource("1_profile")
+profile_id = "corrupted_swordsman_rig_rendered_2d"
+actor_role = "swordsman"
+asset_ready = false
+visual_scale_multiplier = 0.60
+visual_offset = Vector2(0, 0)
+foot_anchor_px = Vector2(64, 112)
+frame_canvas_size = Vector2i(128, 128)
+enforce_frame_canvas_size = true
+pixel_art = true
+snap_actor_to_pixel_grid = true
+default_fps = 12.0
+required_animation_bases = PackedStringArray("idle", "move", "defend", "hurt", "death", "attack_basic_swing", "attack_quick_thrust", "attack_cross_swing", "attack_running_swing")
+looping_animation_bases = PackedStringArray("idle", "move")
+authoritative_sample_states = PackedStringArray("attack")
+action_aliases = {
+"basic_swing": "basic_swing",
+"quick_thrust": "quick_thrust",
+"cross_swing": "cross_swing",
+"running_swing": "running_swing",
+"thrust_followup_1": "cross_swing",
+"thrust_followup_2": "cross_swing",
+"cross_swing_1": "cross_swing",
+"cross_swing_2": "cross_swing"
+}

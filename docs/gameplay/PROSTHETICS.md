@@ -4,7 +4,7 @@ title: Prosthetic Tools
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-09-15
 topics:
   - prosthetics
   - spirit-emblems
@@ -41,7 +41,7 @@ These values are prototype implementation targets, not immutable final balance l
 | Thunder Rod | Precision line attack / Shock setup | Hits first target in aimed line and applies Shock |
 | Smoke Gourd | Target break / temporary control zone | Short-lived smoke field disrupts targeting |
 | Fang Harpoon | Interrupt / modest enemy reposition | Medium-range shot modestly pulls eligible target |
-| Mirror Umbrella | Timed protection / stored-posture release | Active guard stores pressure then releases posture impact |
+| Mirror Umbrella | Timed protection / local stored-pressure release | Active guard stores incoming block pressure then releases enemy posture pressure |
 | Flame Vent | Close-range HP damage / Burn | Short forward cone with Burn |
 | Mist Raven | Invulnerable blink / reposition | Very short fixed-distance vanish/reappearance |
 | Bloodletting Gourd | Risky recovery / aggression sustain | Trades Spirit for healing + short healing-on-hit window |
@@ -79,7 +79,7 @@ Shared rules:
 | Thunder Rod | **22** | **3.0 s** | **0.24 s** | **0.32 s** | 260 px first-target line; 22 Health / 18 posture + Shock |
 | Smoke Gourd | **24** | **7.0 s** | **0.25 s** | **0.30 s** | 115 px targeting-disruption field for 3.0 s |
 | Fang Harpoon | **18** | **2.5 s** | **0.22 s** | **0.32 s** | 220 px shot; 10 Health / 20 posture + 45 px eligible pull |
-| Mirror Umbrella | **20** | **4.5 s** | **0.10 s** | **0.25 s** | up to 1.25 s frontal guard storing block-posture pressure |
+| Mirror Umbrella | **20** | **4.5 s** | **0.10 s** | **0.25 s** | up to 1.25 s frontal guard storing local block pressure; no player Posture |
 | Flame Vent | **20** | **3.5 s** | **0.25 s** | **0.35 s** | 100 px / 70° cone; 18 Health / 8 posture + Burn |
 | Mist Raven | **26** | **4.5 s** | **0.06 s** | **0.16 s** | 72 px fixed-direction invulnerable blink |
 | Bloodletting Gourd | **30** | **8.0 s** | **0.30 s** | **0.30 s** | heal 15 + 4.0 s healing-on-hit window |
@@ -206,7 +206,7 @@ Heavy/protected enemies and bosses remain stationary but still take applicable H
 
 # Mirror Umbrella
 
-Mirror Umbrella is a timed guard/conversion tool, not a second parry system.
+Mirror Umbrella is a timed guard/conversion tool, not a second parry system. Its capacity is entirely local to the Prosthetic: **it does not create, fill, or break a universal player Posture/stagger meter.**
 
 ## Base
 
@@ -215,17 +215,17 @@ Mirror Umbrella is a timed guard/conversion tool, not a second parry system.
 - startup / recovery: **0.10 / 0.25 s**
 - frontal coverage: approximately **180°**
 - maximum active hold: **1.25 s**
-- stored-pressure capacity: **50 incoming block-posture damage**
+- stored-pressure capacity: **50 incoming block-pressure**
 
 While active against a valid blockable frontal hit:
 
 - Akio takes **0 Health damage**,
-- Akio receives only **25% of the hit's normal block-posture damage**,
-- the incoming hit's normal block-posture value is added to Umbrella storage, up to capacity.
+- Akio gains **no universal player Posture/stagger consequence** from the absorbed pressure,
+- the incoming hit's normal block-pressure value is added to Umbrella-local storage, up to capacity.
 
 On release/close:
 
-- emit a compact approximately **90 px frontal posture release**,
+- emit a compact approximately **90 px frontal enemy posture-pressure release**,
 - release posture pressure equals **75% of stored pressure**,
 - base release is capped at **38 posture damage**.
 
@@ -321,19 +321,19 @@ Excluded from healing-on-hit:
 - Upgrades do not add alternate attacks, new status families, autonomous effects, Technique-family interactions, or new combat roles.
 - Base tools must be useful before upgrades.
 - Fully upgraded tools should feel more reliable/effective, not like different weapons.
-- Direct-damage tools cannot make sword/parry/posture/deathblow play optional.
+- Direct-damage tools cannot make sword/defense/enemy-pressure/execution play optional.
 - Upgrade depth does not need to be identical across tools.
 - Pull/blink/interrupt behavior respects boss/elite immunity rules.
 - Mist Raven remains distinct from Wraith Aspect.
 - Smoke cannot hide essential attack tells.
-- Mirror Umbrella remains distinct from the universal parry and does not bypass perilous-response rules.
+- Mirror Umbrella remains distinct from the universal parry, does not bypass perilous-response rules, and never restores a universal player Posture resource.
 - Shock and Burn are Prosthetic statuses unless another authority explicitly creates a separate interaction.
 
 # Planning exit condition
 
 The Prosthetic package is **complete for planning** at first-playtest depth.
 
-The eight base tools and nineteen upgrades now have enough Spirit, repeat-use, timing, geometry, Health/posture, status, control, and upgrade data to instantiate in Godot.
+The eight base tools and nineteen upgrades now have enough Spirit, repeat-use, timing, geometry, Health/enemy-pressure, status, control, and upgrade data to instantiate in Godot.
 
 Do not create a follow-up Prosthetic planning pass merely to refine final cooldowns, hitboxes, VFX synchronization, projectile speed, status magnitudes, or balance. Those values should move through implementation/playtesting unless a genuine missing rule or structural incompatibility appears.
 

@@ -117,7 +117,7 @@ jobs:
           assert_log "Corruption Playtest tab" "[OathboundPlaytestLab] Corruption tab built"
           assert_log "Prosthetic registry" "[OathboundProstheticManager] registry validation PASS"
           assert_log "persistent Forge progression" "[OathboundPersistentProstheticManager] durable Forge progression"
-          assert_log "Strand progression runtime" "[OathboundStrandProgression] v1.0 - Bloodwell/Blood Mirror/campaign progression"
+          assert_log "Strand progression runtime" "[OathboundStrandProgression] v1.1 - Health/Spirit Bloodwell + Blood Mirror/campaign progression"
           assert_log "100-Spirit executor" "[OathboundProstheticExecutor] v1.0 - canonical 100 Spirit runtime"
           assert_log "persistent Relic runtime" "[OathboundRelicRuntime] v1.0 - one-slot persistent Relic runtime"
           assert_log "Corruption runtime" "[OathboundCorruptionRuntime] v1.0 - 0/100 run pressure + Shrine authority"

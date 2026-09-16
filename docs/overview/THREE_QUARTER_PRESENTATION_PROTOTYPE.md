@@ -1,296 +1,171 @@
-# Three-Quarter / 2.5D Presentation Standard
+# Three-Quarter Presentation Bridge
 
-Status: **adopted game-wide presentation direction**
+Status: **transitional compatibility layer**
 
-## Decision
+The original Camera2D three-quarter projection prototype proved the camera composition, room readability, upright actor silhouettes, projected ground cues, and general high-angle direction that Oathbound now wants to keep.
 
-Oathbound uses a fixed high-angle three-quarter / isometric-like presentation for world-space gameplay.
+It is no longer the final production target.
 
-This direction was approved after direct playtesting of the projected camera, dimensional room treatment and upright actor proxies. It is no longer an experiment that competes with the legacy top-down view. New world, character, VFX and environment work should be authored for the three-quarter presentation by default.
+The authoritative presentation direction is now [STYLIZED_3D_PRESENTATION_DIRECTION.md](STYLIZED_3D_PRESENTATION_DIRECTION.md):
 
-The gameplay simulation remains 2D:
+> **Planar action-roguelite combat + fixed high-angle Camera3D presentation + stylized 3D characters, enemies, rooms, props, lighting, and VFX.**
 
-- `CharacterBody2D` movement remains authoritative.
-- Existing 2D collision shapes and hitboxes remain authoritative.
-- Existing enemy AI, navigation, Pressure Director logic and encounter geometry remain authoritative.
-- Attack ranges and ground distances are not rewritten merely for presentation.
-- The presentation layer projects those authoritative coordinates for the screen.
+This file now defines what the existing 2D projection/proxy stack is allowed to do while the 3D vertical slice is built.
 
-Architecture rule:
+## What the current bridge preserves
 
-> **2D combat simulation + fixed three-quarter projected presentation + dimensional artwork.**
+Until a room or actor is migrated to the 3D production path, the existing three-quarter bridge remains useful for playable continuity and design validation.
 
-Do not migrate Oathbound to full `CharacterBody3D` / 3D physics merely to obtain this presentation. A future vertical-gameplay requirement would need its own design justification.
+Current compatibility responsibilities include:
 
-## Projection baseline
+- preserving existing CharacterBody2D movement/collision for unmigrated actors;
+- projecting current room geometry with the established high-angle composition;
+- keeping screen-upright actor/UI presentation readable;
+- providing temporary upright procedural actor proxies;
+- providing temporary contact shadows and Y-derived depth ordering;
+- preserving current combat/encounter rules while presentation changes underneath them;
+- allowing F9 developer comparison against legacy flat presentation when debugging regressions.
 
-`Utility/CameraFollow.gd` owns the global projection profile.
+The bridge must not become a reason to keep final production characters or final production rooms in the old representation.
 
-Adopted baseline:
+## Existing projection baseline
 
-- horizontal camera zoom: `0.94`
-- ground-plane vertical compression: `0.84`
-- framing offset: `Vector2(0, -18)`
-- upright actor art is counter-projected vertically
-- world-space interface roots are counter-projected once so labels/prompts remain upright
-- player/enemy roots receive Y-derived draw order
-- player/enemy contact shadows establish the ground plane
-- procedural proxy/shadow attachment is deferred so GameFlow construction cannot race `add_child()`
+`Utility/CameraFollow.gd` currently owns the compatibility projection profile:
 
-A world-space circle is expected to read as an ellipse on screen because the circle belongs to the projected ground plane. The simulation-space circle remains unchanged.
+- horizontal camera zoom: `0.94`;
+- ground-plane vertical compression: `0.84`;
+- framing offset: `Vector2(0, -18)`;
+- actor artwork may be counter-projected vertically;
+- world-space interface roots are counter-projected once;
+- player/enemy roots receive Y-derived draw order;
+- temporary contact shadows establish the ground plane;
+- procedural proxy/shadow attachment is deferred so GameFlow construction cannot race `add_child()`.
 
-`F9` is retained only as a developer A/B/debug switch for checking projection regressions against legacy presentation. It is not a competing player-facing mode.
+These values are compatibility tuning, not requirements for the future Camera3D implementation.
 
-## Playable-world coverage
+## Current world coverage
 
-The adopted presentation now covers the main world-space game flow:
+The compatibility presentation currently covers:
 
-1. **The Strand / Hub**
-2. **Hushiro** — Area 1
-3. **Yomori** — Area 2
-4. **Kagutsuchi Court** — Area 3
-5. **Blood Cavern training**, which runs inside the Strand and uses the same projected actor/depth systems
+1. The Strand / Hub;
+2. Hushiro;
+3. Yomori;
+4. Kagutsuchi Court;
+5. Blood Cavern training.
 
-Title, video and CanvasLayer-only menu screens are screen-space interfaces and do not require world projection conversion.
+Title/video/CanvasLayer menu screens remain screen-space interfaces.
 
-## The Strand
+## Temporary actor proxies
 
-`World/ThreeQuarterStrandScenery.gd` replaces the old flat hub-image read while the adopted presentation is active.
+`Utility/ThreeQuarterActorProxy.gd` remains a temporary readability/prototyping tool.
 
-The conversion deliberately preserves all original gameplay coordinates and scripts. Dimensional placeholders are anchored to the existing stations rather than moving interaction geometry:
+It may communicate:
 
-- Boat
-- Forge
-- Discovery Board
-- Bloodwell
-- Merchant
-- Blood Cavern entrance
-- Blood Mirror
-- Keeper
-- Scribe
-- Raven
-- Undead Samurai
-- Smith
-- Peddler
+- player/enemy role silhouettes;
+- broad facing;
+- attack/guard posture;
+- rough regional identity;
+- approximate body volume at the intended camera scale.
 
-The Strand now reads as a carved refuge with a projected floor, cavern walls, station silhouettes, NPC stand-ins and foreground lighting/occlusion cues. These are production-layout placeholders rather than final environment art.
+It is not final character art and should not receive large final-art investment.
 
-## Hushiro visual language
+## Replacement visual exclusivity
 
-Hushiro uses the Area 1 authored presentation layer under `Regions/Hushiro/Presentation/`.
+This compatibility layer must obey the same production rule as the future 3D path:
 
-Current composition language:
+> **A replacement actor visual is exclusive, not additive.**
 
-- weathered earth and stone
-- retaining walls with visible faces/top surfaces
-- ruined torii and shrine forms
-- dead grass, rocks, broken fencing and foreground occluders
-- blood/ember ritual accents
-- sparse feudal-road architecture
+When a proxy/custom visual replaces an actor body, previous body visuals must not remain visible underneath it.
 
-Hushiro has dedicated three-quarter wrappers for:
+The bridge therefore needs to handle more than one direct `Sprite2D` when necessary. Nested or multipart legacy `Sprite2D`/`AnimatedSprite2D` body stacks must be hidden/restored as a set. Intentional auxiliary VFX may opt out explicitly.
 
-- Combat
-- Rest
-- Shrine
-- Merchant / Shop
-- Miniboss
-- Boss
-- Treasure
+Future production 3D actors should avoid heuristics by owning a clear visual root that can be enabled/disabled deterministically.
 
-The inherited service-room wrappers preserve their existing gameplay scripts and interaction nodes and add presentation only.
+## Ground-space vs upright-space rule
 
-## Yomori visual language
-
-Yomori keeps its native combat and Twin Maws boss authority while using the same presentation architecture.
-
-`Utility/ThreeQuarterRegionScenery.gd` gives Area 2 a distinct language:
-
-- wet blue-green / desaturated ground
-- broken stone walls
-- crooked trees and exposed roots
-- reeds and low mist shapes
-- ghost lanterns
-- root-arch boss framing
-- spectral teal readability accents
-
-Rest, Shrine, Merchant / Shop, Miniboss and Treasure use inherited shared three-quarter wrappers. `SceneRegistry` selects those wrappers only while Area 2 is active, so their scenery resolves to Yomori automatically.
-
-## Kagutsuchi Court visual language
-
-Kagutsuchi keeps its native combat and Eclipse Shogun boss authority while using the same presentation architecture.
-
-Area 3 visual rules:
-
-- dark court stone
-- crimson lacquered architecture
-- gold trim and ritual accents
-- tall pillars and strict wall rhythm
-- banners, braziers and foreground rails
-- monumental Eclipse gate framing
-
-Rest, Shrine, Merchant / Shop, Miniboss and Treasure use the same region-aware inherited service wrappers, resolved as Kagutsuchi by the active Area 3 registry state.
-
-## Directional actor presentation
-
-`Utility/ThreeQuarterActorProxy.gd` is the temporary production bridge for character art.
-
-Important rules:
-
-- authoritative actor roots, movement, AI and hitboxes are never replaced by the proxy
-- facing is quantized into eight sectors to match the intended production animation pipeline
-- stopped `AnimationPlayer` playback is a valid state and must never produce errors
-- the canonical Player proxy may read existing controller state for facing, attacks, blocks and parries, but it must not write gameplay state
-- legacy body sprites may be made transparent while the proxy is active
-
-Current proxy identities cover:
-
-### Akio
-
-- upright ronin silhouette
-- katana readability
-- crimson identity accents
-- controller-aware stationary attack/guard facing
-
-### Hushiro
-
-- Swordsman
-- Warden
-- Archer
-- Hollow
-- Hound
-- Bilemass
-
-### Yomori
-
-- Lingering Wraith
-- Lantern Wraith
-- Mist Shepherd
-- Stalker Hound
-- Rootfang
-- Briarthorn
-
-### Kagutsuchi
-
-- Court Guard
-- Court Caster
-- Elite Defender
-- Hollow Vessel
-- Court Sentinel
-- Eclipse Shogun
-
-These are silhouette/readability specifications, not final character art.
-
-## Projected combat readability
-
-`Utility/ThreeQuarterCombatPresentation.gd` owns presentation-only ground cues.
-
-Current language includes:
-
-- enemy arrival ripples
-- melee pressure rings/arcs
-- ranged sightlines and target ellipses
-- Bilemass area-pressure cues
-- hound pressure cues
-- larger boss action footprints
-- Yomori spectral cue color
-- Kagutsuchi court/crimson cue color
-- player slash/guard readability through the actor proxy
-
-All ground-space effects are authored in world coordinates. The camera projection converts their circles/ranges into screen ellipses automatically, preserving gameplay truth.
-
-These effects never create damage, change ranges, reserve attack tokens, alter AI or participate in collision.
-
-## Screen-upright vs ground-space rule
-
-Every new world visual must be classified deliberately.
+This classification remains useful in 3D and should survive migration.
 
 ### Ground-space
 
-Project with the arena:
+Examples:
 
-- AoE circles
-- target zones
-- floor trails
-- landing marks
-- contact shadows
-- range indicators
-- decals
+- AoE footprints;
+- target zones;
+- floor trails;
+- landing marks;
+- contact shadows;
+- range indicators;
+- floor decals.
 
-### Screen-upright / body-upright
+These belong to the combat plane and should preserve gameplay scale.
 
-Counter-project or keep in CanvasLayer:
+### Upright/screen-space
 
-- character bodies
-- world interaction labels
-- world health/status UI
-- damage numbers where applicable
-- HUD
-- menus
-- selected particles intended to rise vertically
+Examples:
 
-Do not allow a world-space Control hierarchy to receive inverse compression more than once; child Controls inherit the correction from their top world-space Control root.
+- character bodies;
+- interaction labels;
+- world health/status UI where retained;
+- damage numbers;
+- HUD;
+- menus;
+- selected particles meant to rise vertically.
 
-## Depth and occlusion contract
+The 3D implementation may realize these differently, but the semantic distinction remains valuable.
 
-Dimensional props need a meaningful ground anchor.
+## Regional visual language preserved through migration
 
-- ground/floor content stays in the low background z-band
-- upright actors use Y-derived depth ordering
-- tall props use the same broad Y-anchor convention so Akio can pass behind/in front naturally
-- foreground occluders must be placed where temporary player concealment does not make combat unfair
-- CanvasLayer HUD is never included in world depth sorting
+### Hushiro
 
-The current compatibility depth bias exists because many legacy scenes were authored at z=0. Production scenes should increasingly use explicit floor/prop/depth bands instead of relying on accidental draw order.
+- weathered earth and stone;
+- ruined torii/shrine forms;
+- broken fencing and sparse village architecture;
+- blood/ember ritual accents;
+- recent corruption and physical collapse.
 
-## Production art pipeline
+Hushiro is the first production 3D proving ground.
 
-The engine/presentation conversion is now established. Remaining work is primarily content production and polish.
+### Yomori
 
-### Character production
+- wet blue-green/desaturated ground;
+- broken stone and crooked trees;
+- exposed roots, reeds, mist, spectral lights;
+- long-term predation/adaptation.
 
-Initial target: up to eight directions where facing materially affects silhouette/readability.
+### Kagutsuchi Court
 
-Requirements:
+- dark court stone;
+- crimson lacquer and gold ritual trim;
+- strict pillars/wall rhythm;
+- banners, braziers, monumental gates;
+- disciplined false-ascendancy presentation.
 
-- stable foot/ground anchors
-- consistent apparent body height through directions
-- silhouettes readable against dark environments
-- attack arcs designed for three-quarter screen depth rather than top-down radial motion
-- separate body and ground-shadow responsibilities
-- animation timing synchronized to existing combat impact windows
-- mirroring/reuse allowed when it remains visually convincing
+These visual identities move forward into 3D rather than being discarded with the old projection technique.
 
-### Environment production
+## Validation responsibility during transition
 
-Replace procedural placeholders with painted/dimensional modular assets while preserving the projection contract:
+Existing presentation validation may continue protecting unmigrated scenes, but it must evolve as the 3D path lands.
 
-- floors/ground planes
-- walls with visible faces and top surfaces
-- gates, shrines, houses, cliffs and court structures with explicit ground anchors
-- safe foreground occlusion modules
-- atmospheric layers outside simulation bounds
-- room variants that preserve gameplay geometry
+Do not weaken gameplay invariants just to satisfy a presentation migration. Regional route contracts still own route structure, roster, boss authority, and encounter semantics.
 
-### VFX production
+New 3D validation should eventually cover:
 
-Replace debug/procedural cues with production effects while preserving their ground-space/upright classification and gameplay timing.
-
-## Validation contract
-
-`Regions/Hushiro/Validation/ThreeQuarterPresentationSmoke.gd` and `.github/workflows/three-quarter-presentation-check.yml` protect the adopted architecture.
-
-The contract verifies:
-
-- the Strand owns an active three-quarter presentation layer while preserving core gameplay stations
-- Area 1 resolves Hushiro presentation rooms
-- Area 2 resolves Yomori native combat/boss rooms plus region-aware three-quarter service rooms
-- Area 3 resolves Kagutsuchi native combat/boss rooms plus region-aware three-quarter service rooms
-- combat/boss rooms expose projected combat presentation where required
-- legacy flat backgrounds are replaced only by presentation layers, not by gameplay rewrites
-
-Regional route contracts remain responsible for route structure, roster and boss authority. Presentation migrations should update those expected resource paths without weakening their gameplay invariants.
+- fixed-camera availability/framing;
+- ground-plane coordinate agreement;
+- required 3D actor visual roots;
+- replacement-visual exclusivity;
+- collision/hitbox timing parity where a system is migrated;
+- room/camera/occlusion conventions;
+- representative Hushiro vertical-slice traversal.
 
 ## Non-goals
 
-The presentation shift does not justify throwing away the current combat architecture. Player movement, enemy AI, Pressure Director, Health/Poise rules, encounter scheduling, Aspects, Techniques, Relics, Prosthetics, Corruption and other combat systems remain authoritative unless playtesting identifies a separate gameplay problem.
+The compatibility bridge does not authorize:
+
+- a full free-camera third-person rewrite;
+- changing combat ranges merely to match visuals;
+- adding unrestricted vertical navigation;
+- replacing stable Pressure Director/encounter systems without a gameplay reason;
+- treating procedural proxies as final art.
+
+The bridge exists to keep the game playable while Oathbound moves to its approved stylized 3D production representation.

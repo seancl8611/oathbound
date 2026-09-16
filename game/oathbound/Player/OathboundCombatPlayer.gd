@@ -184,6 +184,18 @@ static func area1_pressure_total_damage_target() -> int:
 
 
 # =============================================================================
+# RETIRED UNIVERSAL PLAYER POSTURE COMPATIBILITY
+# =============================================================================
+
+func apply_umbrella_posture(_amount: float) -> void:
+	# Mirror Umbrella owns its own stored-pressure capacity/overflow contract. The
+	# imported core method used to feed 25% of that pressure into Akio's global stagger
+	# meter and could trigger a player posture break. Universal player Posture is retired;
+	# keep this callable only so older Prosthetic code remains source-compatible.
+	return
+
+
+# =============================================================================
 # SPECIAL-ONLY PARRY CLASSIFICATION
 # =============================================================================
 

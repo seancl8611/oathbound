@@ -119,8 +119,8 @@ func post_clear() -> void:
 	print("[HushiroCombatChamber] Reward collected: %s -> gates unlocked" % reward_key)
 
 
-# CombatChamberBase calls this pressure hook virtually during room startup.
-func _configure_pressure_tokens() -> void:
+# Keep the inherited method name because CombatChamberBase invokes it virtually.
+func _configure_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 
@@ -173,8 +173,8 @@ static func phase7_pressure_limits(alive: int, _hounds: int, frontline_pressure:
 	}
 
 
-# The shared pressure autoscale timer calls this hook as the wave population changes.
-func _update_pressure_tokens() -> void:
+# The shared autoscale timer calls this method as the current wave population changes.
+func _update_duel_tokens() -> void:
 	if typeof(AttackDir) != TYPE_OBJECT:
 		return
 

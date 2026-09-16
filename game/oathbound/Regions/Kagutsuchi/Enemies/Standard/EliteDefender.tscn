@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2xw5jcfasip4"]
+[gd_scene load_steps=13 format=3 uid="uid://c2xw5jcfasip4"]
 
 [ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Standard/EliteDefender.gd" id="1_n0krw"]
 [ext_resource type="Texture2D" uid="uid://bvvgttpl7c2r" path="res://Textures/Enemy/shield/shield.png" id="2_nhw8h"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="3_7kkqq"]
 [ext_resource type="PackedScene" uid="uid://uhr6mtuisqm1" path="res://Utility/hit_box.tscn" id="4_xapdq"]
 [ext_resource type="AudioStream" uid="uid://bi7t7cjthnhhc" path="res://Audio/SoundEffect/enemy_hit.ogg" id="5_pwfxu"]
-[ext_resource type="Script" path="res://Utility/CombatController.gd" id="6_wm63f"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyCombatController.gd" id="6_wm63f"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyDefenseRuntime.gd" id="7_standard_defense"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_24u87"]
 radius = 20.0
@@ -25,12 +26,15 @@ _data = {
 "walk": SubResource("Animation_ng8q7")
 }
 
-[node name="Elite_Defender" type="CharacterBody2D" groups=["enemy", "shield_ring"]]
+[node name="Elite_Defender" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 5
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_n0krw")
 metadata/_edit_vertical_guides_ = [-19.0]
+
+[node name="StandardEnemyDefenseRuntime" type="Node" parent="."]
+script = ExtResource("7_standard_defense")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4, 0)

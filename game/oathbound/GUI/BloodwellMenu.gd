@@ -2,7 +2,8 @@ extends Control
 
 ## Current Bloodwell presentation for the approved 10 Akio + 8 Run Infrastructure
 ## permanent nodes. Values/prices are first-playtest tuning owned centrally by the
-## Strand progression runtime.
+## Strand progression runtime. The Bloodwell follows the no-universal-player-Posture
+## combat contract: Akio upgrades focus on Health, Spirit, recovery, and reliability.
 
 signal menu_closed
 signal upgrade_purchased(upgrade_id: String)
@@ -89,7 +90,7 @@ func _build_ui() -> void:
 	close_button.pressed.connect(_close)
 	title_row.add_child(close_button)
 	var intro := Label.new()
-	intro.text = "Permanent Akio and Run Infrastructure progression. Mist and regional boss materials persist immediately."
+	intro.text = "Permanent Akio Health, Spirit, recovery, and Run Infrastructure progression. Mist and regional boss materials persist immediately."
 	intro.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	intro.add_theme_font_size_override("font_size", 10)
 	intro.add_theme_color_override("font_color", COLOR_TEXT_DIM)
@@ -208,13 +209,9 @@ func _effect_text(data: Dictionary) -> String:
 func _effect_piece(key: String, value: float) -> String:
 	match key:
 		"max_health": return "+%d max Health" % int(value)
-		"max_posture": return "+%d max Posture" % int(value)
 		"max_spirit": return "+%d max Spirit" % int(value)
 		"rest_heal_mult": return "+%d%% Rest recovery" % int(round((value - 1.0) * 100.0))
 		"recovery_heal_mult": return "+%d%% approved Health recovery" % int(round((value - 1.0) * 100.0))
-		"posture_recovery_mult": return "+%d%% posture recovery" % int(round((value - 1.0) * 100.0))
-		"parry_posture_clear": return "Parries clear %d posture" % int(value)
-		"deathblow_posture_clear": return "Deathblows clear %d posture" % int(value)
 		"starting_rerolls": return "+%d Technique reroll per run" % int(value)
 		"resist_corruption_target": return "Resist returns Corruption to %d" % int(value)
 		"route_intelligence": return "Improved route information"

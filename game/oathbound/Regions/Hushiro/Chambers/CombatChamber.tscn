@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7hdlxttxkrep"]
+[gd_scene load_steps=12 format=3 uid="uid://c7hdlxttxkrep"]
 
 [ext_resource type="Script" path="res://Regions/Hushiro/Chambers/CombatChamber.gd" id="1_6qnrf"]
 [ext_resource type="Texture2D" uid="uid://b6umklllf2jsl" path="res://Textures/dirt_full_new.png" id="2_2wlxx"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Regions/Hushiro/Presentation/ThreeQuarterHushiroPrototype.gd" id="8_3qv"]
 [ext_resource type="Script" path="res://Utility/ThreeQuarterPresentationVisibility.gd" id="9_3qv"]
 [ext_resource type="Script" path="res://Utility/ThreeQuarterCombatPresentation.gd" id="10_3qv"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Presentation/HushiroIsometric2DPresentation.gd" id="11_iso"]
+[ext_resource type="Script" path="res://Regions/Hushiro/Combat/HushiroEnemySeparationRuntime.gd" id="13_sep"]
 [ext_resource type="Script" path="res://Utility/DamageNumberManager.gd" id="20_xw04x"]
 
 [node name="CombatChamber" type="Node2D"]
@@ -29,6 +31,12 @@ script = ExtResource("8_3qv")
 
 [node name="CombatFX" type="Node2D" parent="ThreeQuarterPresentation"]
 script = ExtResource("10_3qv")
+
+[node name="Isometric2DPresentation" type="Node" parent="."]
+script = ExtResource("11_iso")
+
+[node name="HushiroEnemySeparationRuntime" type="Node" parent="."]
+script = ExtResource("13_sep")
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 

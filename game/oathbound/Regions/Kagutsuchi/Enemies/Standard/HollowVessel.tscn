@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bsvoqw8u0ifun"]
+[gd_scene load_steps=8 format=3 uid="uid://bsvoqw8u0ifun"]
 
 [ext_resource type="Script" path="res://Regions/Kagutsuchi/Enemies/Standard/HollowVessel.gd" id="1_pakt6"]
 [ext_resource type="PackedScene" uid="uid://xy3cvpwdy828" path="res://Utility/hurt_box.tscn" id="2_vtrjr"]
 [ext_resource type="Texture2D" uid="uid://c7poj351xa6xy" path="res://Textures/Enemy/corruptedden/corruptedden.png" id="3_3rb1h"]
 [ext_resource type="PackedScene" path="res://Regions/Kagutsuchi/Enemies/Summons/Spillborn.tscn" id="4_spill"]
+[ext_resource type="Script" path="res://Core/Combat/StandardEnemyDefenseRuntime.gd" id="5_standard_defense"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jyfeg"]
 radius = 32.249
@@ -14,6 +15,9 @@ radius = 32.311
 [node name="hollow_vessel" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_pakt6")
 hollow_scene = ExtResource("4_spill")
+
+[node name="StandardEnemyDefenseRuntime" type="Node" parent="."]
+script = ExtResource("5_standard_defense")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8.22544e-06, 7.62939e-06)

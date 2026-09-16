@@ -7,6 +7,9 @@ class_name CombatActionRunner
 ## coroutines rather than replacing their canonical hitbox/damage path. It becomes the
 ## authoritative source for commitment and motion permissions immediately, while legacy
 ## attack code still announces ACTIVE / RECOVERY / COMPLETE transitions.
+##
+## Presentation may read the public progress helpers below. It must never mutate this
+## runner or use sprite playback to decide damage timing.
 
 enum Phase {
 	IDLE,
@@ -151,6 +154,35 @@ func phase_progress() -> float:
 			return clampf(phase_elapsed / definition.recovery_duration, 0.0, 1.0)
 		_:
 			return 0.0
+
+
+func action_duration() -> float:
+	if definition == null:
+		return 0.0
+	return maxf(
+		0.01,
+		definition.startup_duration + definition.active_duration + definition.recovery_duration
+	)
+
+
+func action_progress() -> float:
+	# Continuous 0..1 progress across startup + active + recovery. This is intended for
+	# presentation sampling (especially pre-rendered directional attack frames). Combat
+	# remains phase/event authoritative even if a visual clip has a different frame rate.
+	if definition == null or phase == Phase.IDLE:
+		return 0.0
+	return clampf(action_elapsed / action_duration(), 0.0, 1.0)
+
+
+func presentation_snapshot() -> Dictionary:
+	return {
+		"running": is_running(),
+		"action_id": str(current_action_id()),
+		"phase": phase_name(),
+		"phase_progress": phase_progress(),
+		"action_progress": action_progress(),
+		"action_duration": action_duration(),
+	}
 
 
 func current_action_id() -> StringName:

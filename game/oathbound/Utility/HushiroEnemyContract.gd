@@ -55,6 +55,10 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 	var posture_max: float = float(baseline.posture)
 
 	enemy.set_meta("hushiro_enemy_type", key)
+	# `presentation_role` is the region-neutral identity consumed by the shared Planar3D
+	# bridge. Keep the Hushiro key above for compatibility while new presentation code
+	# depends on this shared semantic role instead of region-specific metadata.
+	enemy.set_meta("presentation_role", key)
 	enemy.set_meta("hushiro_contract", "area1_player_paced_combat")
 	enemy.set_meta("oathbound_standard_posture_retired", true)
 	apply_pressure_metadata(enemy, key)
@@ -125,6 +129,7 @@ static func apply(enemy: Node, enemy_type: String, force: bool = false) -> void:
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("hushiro_enemy_contract_applied", {
 			"enemy_type": key,
+			"presentation_role": key,
 			"enemy_id": enemy.get_instance_id(),
 			"health": health,
 			"legacy_posture_max": posture_max,

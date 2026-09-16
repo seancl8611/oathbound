@@ -4,9 +4,11 @@ title: Art Direction
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-07-14
+last_reviewed: 2026-09-14
 topics:
-  - pixel-art
+  - stylized-3d
+  - fixed-high-angle-camera
+  - painterly-materials
   - combat-readability
   - regional-palettes
   - corruption-language
@@ -14,6 +16,7 @@ topics:
   - the-heart
 related:
   - ART-TECHNICAL-STANDARDS
+  - OVERVIEW-STYLIZED-3D-PRESENTATION
   - CONTENT-STRAND-OVERVIEW
   - CONTENT-AREA1-OVERVIEW
   - CONTENT-AREA2-OVERVIEW
@@ -24,23 +27,29 @@ related:
 
 ## Core style
 
-Oathbound uses high-resolution stylized pixel art with dark painterly lighting and premium combat effects. Hand-painted concept art, portraits, and marketing illustration may support the sprite pipeline, but gameplay assets must be designed for the high-angle 2D camera first.
+Oathbound targets **stylized real-time 3D viewed through a fixed high-angle / three-quarter camera**, with painterly materials, strong silhouettes, dark Japanese-gothic martial horror, and premium combat effects. The goal is an illustrated, authored look rather than photorealism or a generic low-poly appearance.
+
+Hades remains a useful presentation and readability reference, but Oathbound is not currently adopting Hades I's pre-rendered-character runtime pipeline. Production characters and environments are expected to remain real 3D in Godot unless a later vertical-slice comparison proves that selected assets are materially better when pre-rendered to 2D.
+
+2D remains appropriate for concept art, portraits, UI, Technique/Relic illustrations, selected VFX/decals, story art, and other screen-space elements.
 
 The game should feel disciplined, dangerous, elegant, and cursed. Martial clarity is the first priority; atmosphere is the second.
 
 ## Global visual rules
 
-### Sprite scale
+### Gameplay-scale character treatment
 
-Akio uses a medium-large baseline sprite scale so stance, weapon direction, and parry timing remain readable. Standard enemies may range from slightly smaller to slightly larger depending on role. Elites should feel noticeably heavier. Bosses may range from grounded duelists to major corrupted silhouettes. Environment proportions may be slightly compressed to protect framing and combat clarity.
+Akio uses a medium-large readable silhouette relative to the combat camera. Standard enemies may range from slightly smaller to slightly larger depending on role. Elites should feel noticeably heavier. Bosses may range from grounded duelists to major corrupted silhouettes.
+
+Production models should spend geometry and texture budget where the normal camera can actually read it: stance, weapon shape, cloth mass, armor grouping, corruption landmarks, head/shoulder silhouette, and attack poses. Cinematic facial detail is lower priority than gameplay readability.
 
 ### Silhouette philosophy
 
-Every unit must read first through stance, weapon shape, posture, and mass. Ornament, costume detail, and corruption accents are secondary. Enemy families share motifs, but role changes must remain obvious before small details are noticed.
+Every unit must read first through stance, weapon shape, body line, and mass. Ornament, costume detail, and corruption accents are secondary. Enemy families share motifs, but role changes must remain obvious before small details are noticed.
 
 ### Value and contrast
 
-Foreground gameplay assets must separate clearly from atmospheric backgrounds through controlled value ranges, readable edges, and reduced competition in combat spaces. The darkest characters cannot merge into the darkest environments.
+Foreground gameplay assets must separate clearly from atmospheric backgrounds through controlled value ranges, readable edges, lighting, material response, and reduced competition in combat spaces. The darkest characters cannot merge into the darkest environments.
 
 ### Global palette anchors
 
@@ -77,17 +86,22 @@ Do not imply a conventional airborne or bite-spread infection. Do not make every
 - Blood changes according to freshness, curse state, and containment.
 - Corruption combines blood, heat, ash, lacquer, mist, and biological pressure rather than reading as generic magic.
 
+Materials should be authored for the fixed gameplay camera. Hand-painted albedo/value control, restrained roughness variation, selective metallic response, toon/painterly ramps, outlines, rim accents, and stylized shadow treatment are all valid tools when they improve the illustrated read.
+
 ### Animation clarity
 
-Startup, active, recoil, stagger, posture-break, and deathblow-ready states require distinct body language. Busy costumes may not obscure the body line, weapon path, or windup. Bosses may be ornate, but their key actions should be visually cleaner than the background.
+Startup, active, recovery, recoil, stagger/interruption, special-response, and execution states require distinct body language. Busy costumes may not obscure the body line, weapon path, or windup. Bosses may be ornate, but their key actions should be visually cleaner than the background.
+
+Production animation is rig-driven 3D by default. Timing must follow the existing combat action/impact windows rather than silently redefining gameplay timing. Shared humanoid locomotion/reactions may be retargeted; signature attacks should receive custom animation where identity/readability requires it.
 
 ## Readability rules
 
 - Telegraphs must read from the normal gameplay camera without text labels.
 - Attack direction and guard state must remain legible in crowded rooms.
 - Family resemblance cannot erase role distinction.
-- Atmosphere, fog, and particles should be layered separately where practical.
-- Frequent effects stay restrained; parry, posture break, deathblow, Shrine choice, and boss phase transitions receive stronger priority.
+- Atmosphere, fog, particles, and foreground occlusion must not hide critical threats for too long.
+- Frequent effects stay restrained; special parry responses, major interruptions, executions, Shrine choice, and boss phase transitions receive stronger priority.
+- Every production model, material, animation, and environment module must be reviewed at normal gameplay distance before close-up detail is approved.
 
 ## Regional escalation
 
@@ -149,4 +163,6 @@ Concept work may suggest a divine organ, island core, vessel, remnant, or part o
 
 ## Production rule
 
-Regional art may become more ornate as the game advances, but combat communication must remain consistent. Every environment, character, and VFX delivery should be reviewed at gameplay scale before detail polish is approved.
+Regional art may become more ornate as the game advances, but combat communication must remain consistent. Every environment, character, material, animation, and VFX delivery should be reviewed at gameplay scale before detail polish is approved.
+
+The current production default is **real-time 3D first**. Pre-rendering a completed 3D rig to 2D remains a reversible fallback/experiment if later A/B testing proves it materially improves Oathbound's final illustrated look enough to justify the additional sprite-render/export pipeline.

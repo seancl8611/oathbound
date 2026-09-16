@@ -12,6 +12,11 @@ export_credentials.cfg
 playtest_logs/
 **/playtest_logs/
 
+# Rig-rendered 2D working exports / Blender backup files
+tools/rig2d/exports/
+*.blend1
+*.blend2
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 

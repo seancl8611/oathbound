@@ -1,0 +1,103 @@
+name: Hushiro Isometric 2D Presentation Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  hushiro-isometric-2d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify rig2d offline tooling contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/rig2d/validate_frame_set.py tools/rig2d/validate_tooling_contract.py tools/rig2d/blender/render_directional.py
+          python tools/rig2d/validate_tooling_contract.py
+
+      - name: Verify isometric 2D actor and camera contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Isometric2DPresentationSmoke.tscn 2>&1 | tee hushiro-isometric-2d.log
+          grep -F "[Isometric2DPresentationSmoke] PASS" hushiro-isometric-2d.log
+          if grep -F "SCRIPT ERROR:" hushiro-isometric-2d.log; then
+            echo "FAIL: Hushiro isometric 2D presentation emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" hushiro-isometric-2d.log; then
+            echo "FAIL: Hushiro isometric 2D presentation emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify rig-rendered 2D pipeline contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/RigRendered2DPipelineSmoke.tscn 2>&1 | tee rig-rendered-2d-pipeline.log
+          grep -F "[RigRendered2DPipelineSmoke] PASS" rig-rendered-2d-pipeline.log
+          if grep -F "SCRIPT ERROR:" rig-rendered-2d-pipeline.log; then
+            echo "FAIL: rig-rendered 2D pipeline smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" rig-rendered-2d-pipeline.log; then
+            echo "FAIL: rig-rendered 2D pipeline smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Verify Hushiro enemy separation
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/HushiroEnemySeparationSmoke.tscn 2>&1 | tee hushiro-enemy-separation.log
+          grep -F "[HushiroEnemySeparationSmoke] PASS" hushiro-enemy-separation.log
+          if grep -F "SCRIPT ERROR:" hushiro-enemy-separation.log; then
+            echo "FAIL: Hushiro enemy separation emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Smoke live Hushiro combat chamber wiring
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-isometric-runscene.log
+          grep -F "[HushiroIsometric2D] revision=2 runtime=2d directional=8 zoom=0.50 compression=0.72 live_3d=false rig2d_profiles=akio+swordsman pixel_art_ready=true" hushiro-isometric-runscene.log
+          if grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-isometric-runscene.log; then
+            echo "FAIL: retired live 3D bridge is still active in the playable Hushiro chamber."
+            exit 1
+          fi
+          if grep -F "SCRIPT ERROR:" hushiro-isometric-runscene.log; then
+            echo "FAIL: live Hushiro isometric 2D RunScene emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Upload isometric presentation logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hushiro-isometric-2d-${{ github.run_id }}
+          path: |
+            hushiro-isometric-2d.log
+            rig-rendered-2d-pipeline.log
+            hushiro-enemy-separation.log
+            hushiro-isometric-runscene.log
+          if-no-files-found: warn
+          retention-days: 7
