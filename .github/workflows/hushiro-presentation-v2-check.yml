@@ -41,6 +41,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify freed-source presentation lifetime
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/Planar3DFreedSourceLifetimeSmoke.tscn 2>&1 | tee planar3d-freed-source-lifetime.log
+          grep -F "[Planar3DFreedSourceLifetimeSmoke] PASS" planar3d-freed-source-lifetime.log
+          if grep -F "SCRIPT ERROR:" planar3d-freed-source-lifetime.log; then
+            echo "FAIL: freed-source presentation lifetime smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" planar3d-freed-source-lifetime.log; then
+            echo "FAIL: freed-source presentation lifetime smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Hushiro enemy separation
         shell: bash
         run: |
@@ -102,13 +117,10 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-v2-runscene.log
-          # This region/revision-owned startup marker proves the production RunScene used
-          # the V2 presenter. The older parent camera-profile line is intentionally not a
-          # requirement because Camera2D can initialize after the bridge in the live scene.
-          grep -F "[HushiroPlanar3DV2] revision=2 compression=0.48 elevation=28.7deg zoom=0.52" hushiro-v2-runscene.log
+          grep -F "[HushiroPlanar3DV3] revision=3 hybrid_2_5d=true compression=0.50 elevation=30.0deg zoom=0.40 actor_scale=0.78" hushiro-v2-runscene.log
           grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-v2-runscene.log
           if grep -F "SCRIPT ERROR:" hushiro-v2-runscene.log; then
-            echo "FAIL: live Hushiro V2 RunScene emitted a GDScript runtime error."
+            echo "FAIL: live Hushiro V3 RunScene emitted a GDScript runtime error."
             exit 1
           fi
 
@@ -119,6 +131,7 @@ jobs:
           name: hushiro-presentation-v2-${{ github.run_id }}
           path: |
             hushiro-presentation-v2.log
+            planar3d-freed-source-lifetime.log
             hushiro-enemy-separation.log
             hushiro-production-model-validator.log
             hushiro-production-animation-sync.log
