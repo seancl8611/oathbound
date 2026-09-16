@@ -1,6 +1,6 @@
 extends "res://Player/OathboundPlayer.gd"
 
-## Combat V2 Phase 5 Player motion adapter.
+## Combat V2 Player motion adapter.
 ##
 ## The imported Player controller still owns input, combo selection, canonical sword
 ## hitboxes/AttackEvent delivery, defense, Techniques, Prosthetics and state timing.
@@ -11,6 +11,7 @@ extends "res://Player/OathboundPlayer.gd"
 const ACTION_DEFINITION_SCRIPT = preload("res://Core/Combat/CombatActionDefinition.gd")
 const ACTION_RUNNER_SCRIPT = preload("res://Core/Combat/CombatActionRunner.gd")
 const PLAYER_MOTOR_SCRIPT = preload("res://Core/Combat/PlayerMotor.gd")
+const PLAYER_ACTION_MOTION_POLICY = preload("res://Core/Combat/PlayerActionMotionPolicy.gd")
 
 const ATTACK_HOLD_LOCOMOTION_WEIGHT: float = 0.60
 const DEFAULT_STARTUP_TURN_RATE_DEG: float = 900.0
@@ -22,7 +23,7 @@ var _v2_player_motor: PlayerMotor = null
 func _ready() -> void:
 	super._ready()
 	_install_v2_player_motion_runtime()
-	print("[OathboundPlayer] v2.1 - PlayerMotor + CombatActionRunner motion slice")
+	print("[OathboundPlayer] v2.2 - authored PlayerMotor + CombatActionRunner motion policy")
 
 
 func _install_v2_player_motion_runtime() -> void:
@@ -64,7 +65,10 @@ func _install_v2_player_motion_runtime() -> void:
 # =============================================================================
 
 func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
-	super._start_profile_attack(profile, combo_idx)
+	# Motion commitment is keyed to the authored action id, not inferred from damage,
+	# Poise, or hitbox shape. This keeps combat feel stable when balance values change.
+	var resolved_profile: Dictionary = PLAYER_ACTION_MOTION_POLICY.apply_to_profile(profile)
+	super._start_profile_attack(resolved_profile, combo_idx)
 	if _state != State.ATTACKING or _attack_profile.is_empty():
 		return
 	_begin_v2_player_action(_attack_profile)
@@ -86,15 +90,15 @@ func _begin_v2_player_action(profile: Dictionary) -> void:
 	var stagger_level: int = int(profile.get("stagger_level", 0))
 	var heavy: bool = stagger_level >= 1 or str(profile.get("hitbox_shape", "")) == "cleave_heavy"
 
+	# Fallback values remain for external/temporary attack profiles, but every current
+	# shipped player action is expected to arrive with explicit v2_* values from the
+	# PlayerActionMotionPolicy contract.
 	var commit_fraction: float = 0.70
 	var startup_weight: float = 0.86
 	var committed_weight: float = 0.50
 	var active_weight: float = 0.38
 	var recovery_weight: float = 0.76
 
-	# Fast movement-context attacks keep more locomotion. Heavy attacks remain
-	# intentionally more planted, preserving physicality without imposing that rule on
-	# every sword action.
 	if trigger == "dash":
 		commit_fraction = 0.78
 		startup_weight = 0.96
@@ -107,15 +111,6 @@ func _begin_v2_player_action(profile: Dictionary) -> void:
 		committed_weight = 0.28
 		active_weight = 0.18
 		recovery_weight = 0.58
-
-	# Pale Barrage is explicitly authored as a stationary repeated-jab sequence in the
-	# current Aspect layer. Keep that identity until motion permissions move directly
-	# into every Aspect profile.
-	if action_id == "wraith_pale_barrage":
-		startup_weight = 0.0
-		committed_weight = 0.0
-		active_weight = 0.0
-		recovery_weight = 0.0
 
 	definition.action_id = StringName(action_id)
 	definition.startup_duration = startup
@@ -134,6 +129,7 @@ func _begin_v2_player_action(profile: Dictionary) -> void:
 			"action_id": action_id,
 			"trigger": trigger,
 			"heavy": heavy,
+			"authored_policy": PLAYER_ACTION_MOTION_POLICY.has_policy(action_id),
 			"commit_fraction": definition.commit_fraction,
 			"startup_weight": definition.startup_locomotion_weight,
 			"committed_weight": definition.committed_locomotion_weight,
@@ -337,6 +333,10 @@ func get_v2_player_locomotion_velocity() -> Vector2:
 	if _v2_player_motor == null or not is_instance_valid(_v2_player_motor):
 		return Vector2.ZERO
 	return _v2_player_motor.locomotion_velocity()
+
+
+func has_authored_v2_motion_policy(action_id: String) -> bool:
+	return PLAYER_ACTION_MOTION_POLICY.has_policy(action_id)
 
 
 func get_playtest_snapshot() -> Dictionary:

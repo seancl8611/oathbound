@@ -26,6 +26,21 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
+      - name: Verify authored player action motion policy
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Release/Validation/PlayerActionMotionPolicySmoke.tscn 2>&1 | tee player-action-motion-policy-smoke.log
+          grep -F "[PlayerActionMotionPolicySmoke] PASS" player-action-motion-policy-smoke.log
+          if grep -F "SCRIPT ERROR:" player-action-motion-policy-smoke.log; then
+            echo "FAIL: Player action motion policy smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" player-action-motion-policy-smoke.log; then
+            echo "FAIL: Player action motion policy smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Mirror Umbrella runtime contract
         shell: bash
         run: |
@@ -63,6 +78,7 @@ jobs:
         with:
           name: playtest-readiness-${{ github.run_id }}
           path: |
+            player-action-motion-policy-smoke.log
             prosthetic-runtime-smoke.log
             playtest-runscene-smoke.log
           if-no-files-found: warn
