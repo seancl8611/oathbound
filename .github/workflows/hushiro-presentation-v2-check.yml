@@ -26,6 +26,13 @@ jobs:
       - name: Import project
         run: godot --headless --path game/oathbound --import
 
+      - name: Verify rig2d offline tooling contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m py_compile tools/rig2d/validate_frame_set.py tools/rig2d/validate_tooling_contract.py tools/rig2d/blender/render_directional.py
+          python tools/rig2d/validate_tooling_contract.py
+
       - name: Verify isometric 2D actor and camera contract
         shell: bash
         run: |
