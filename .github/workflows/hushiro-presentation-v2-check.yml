@@ -41,6 +41,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify rig-rendered 2D pipeline contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/RigRendered2DPipelineSmoke.tscn 2>&1 | tee rig-rendered-2d-pipeline.log
+          grep -F "[RigRendered2DPipelineSmoke] PASS" rig-rendered-2d-pipeline.log
+          if grep -F "SCRIPT ERROR:" rig-rendered-2d-pipeline.log; then
+            echo "FAIL: rig-rendered 2D pipeline smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" rig-rendered-2d-pipeline.log; then
+            echo "FAIL: rig-rendered 2D pipeline smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
       - name: Verify Hushiro enemy separation
         shell: bash
         run: |
@@ -57,7 +72,7 @@ jobs:
         run: |
           set -o pipefail
           godot --headless --path game/oathbound --quit-after 30 res://Utility/RunScene.tscn 2>&1 | tee hushiro-isometric-runscene.log
-          grep -F "[HushiroIsometric2D] revision=1 runtime=2d directional=8 zoom=0.50 compression=0.72 live_3d=false" hushiro-isometric-runscene.log
+          grep -F "[HushiroIsometric2D] revision=2 runtime=2d directional=8 zoom=0.50 compression=0.72 live_3d=false rig2d_profiles=akio+swordsman pixel_art_ready=true" hushiro-isometric-runscene.log
           if grep -F "[Planar3DPresentationBridge] Live real-time 3D presentation active" hushiro-isometric-runscene.log; then
             echo "FAIL: retired live 3D bridge is still active in the playable Hushiro chamber."
             exit 1
@@ -74,6 +89,7 @@ jobs:
           name: hushiro-isometric-2d-${{ github.run_id }}
           path: |
             hushiro-isometric-2d.log
+            rig-rendered-2d-pipeline.log
             hushiro-enemy-separation.log
             hushiro-isometric-runscene.log
           if-no-files-found: warn

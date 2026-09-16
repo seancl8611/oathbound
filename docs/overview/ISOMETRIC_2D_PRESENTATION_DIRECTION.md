@@ -13,6 +13,7 @@ topics:
   - planar-combat
   - environment-production
   - character-production
+  - rig-rendered-2d
 supersedes:
   - OVERVIEW-STYLIZED-3D-PRESENTATION
 related:
@@ -34,12 +35,39 @@ The concise target is:
 
 > **2D authoritative combat + fixed high-angle/isometric Camera2D composition + small eight-direction actor sprites + layered illustrated 2D environments + independent 2D combat VFX.**
 
-This direction is intentionally compatible with two future character-art pipelines:
+This direction is intentionally compatible with two character-art pipelines:
 
 1. fully hand-drawn directional animation; or
 2. offline 3D model -> rig -> animate -> fixed-angle render -> 2D sprite atlas.
 
-Godot should not care which pipeline produced the final frames.
+Godot must not care which pipeline produced the final frames.
+
+## September 16, 2026 composition gate: accepted
+
+The first live playtest of the new Hushiro 2D-isometric presentation accepted the core composition direction.
+
+Accepted qualities:
+
+- the fixed high-angle perspective reads substantially better than the rejected live-3D slice;
+- `0.50` presentation zoom gives materially better multi-enemy visibility;
+- `0.72` ground compression creates the intended elevated/isometric read without changing the combat plane;
+- player/enemy screen size is appropriate for the wider combat language;
+- encounter space and approach vectors are easier to read;
+- the accepted camera/profile survived a cleared encounter, reward collection and room transition without changing Combat V2 ownership.
+
+Therefore camera distance, basic actor scale and the 2D runtime direction are no longer waiting on an architectural proof. They remain tunable art/readability values, but subsequent work should build **on this composition** rather than reopen the renderer decision without new evidence.
+
+## Current character-production proof
+
+The next production gate is intentionally narrower than a roster conversion:
+
+> **Build one rig-rendered Akio and one rig-rendered Corrupted Swordsman, render both into eight-direction 2D atlases, and judge whether this pipeline plus a pixel-art/downsampled treatment is the right final character route.**
+
+The Godot runtime now reserves explicit `DirectionalSpriteProfile` slots for those two roles. Until real atlases are supplied, their existing procedural placeholders remain active. Other enemy roles stay on placeholders during this proof.
+
+Do not build the rest of Hushiro's roster from a 3D rig until the Akio/Swordsman pair passes visual, animation, memory and iteration-speed acceptance.
+
+The detailed production handoff is `docs/art_production/RIG_RENDERED_2D_PIPELINE.md` and the machine-readable proof contract is `tools/rig2d/poc_manifest.json`.
 
 ## What remains authoritative
 
@@ -64,7 +92,7 @@ The world remains a `Vector2` combat plane. Isometric depth is a rendering conve
 
 The gameplay camera is fixed, high-angle and substantially wider than the original close 2D presentation.
 
-Current Hushiro proving profile:
+Accepted Hushiro proving profile:
 
 - presentation zoom: `0.50`;
 - ground vertical compression: `0.72`;
@@ -72,7 +100,7 @@ Current Hushiro proving profile:
 - no player-controlled camera rotation;
 - no live 3D camera in ordinary Hushiro combat.
 
-These values are a playtest baseline, not a final immutable art number. Future tuning should be driven by threat readability: the player must be able to read melee approaches, ranged setup, projectiles/AoEs, escape space and environmental obstacles before they become immediate contact threats.
+Future tuning must be driven by threat readability: the player must be able to read melee approaches, ranged setup, projectiles/AoEs, escape space and environmental obstacles before they become immediate contact threats.
 
 ## Actor presentation contract
 
@@ -85,7 +113,7 @@ Each actor resolves to:
 - role identity such as `player`, `swordsman`, `hound`, `hollow`, `archer`, `bilemass`, `warden`;
 - a visual scale independent of collision size.
 
-Production sprite animation naming contract:
+Baseline production naming:
 
 `<state>_<direction>`
 
@@ -93,11 +121,38 @@ Examples:
 
 - `idle_s`
 - `move_ne`
-- `attack_w`
 - `hurt_se`
 - `death_n`
 
-Temporary procedural 2D placeholders may satisfy this contract until actual art exists. A final hand-drawn atlas or offline-rendered atlas must be able to replace the placeholder without modifying movement, combat timing or hitboxes.
+Rig-rendered attacks use action-specific names:
+
+`attack_<action_id>_<direction>`
+
+Examples:
+
+- `attack_quick_slash_ne`
+- `attack_heavy_cleave_s`
+- `attack_basic_swing_w`
+- `attack_quick_thrust_n`
+
+Temporary procedural 2D placeholders satisfy the same presentation seam until actual art exists. A hand-drawn atlas or offline-rendered atlas must replace the placeholder without modifying movement, combat timing or hitboxes.
+
+## Attack animation authority
+
+This is a hard rule for the rig-render proof:
+
+> **Rendered attack animation follows combat timing; it never owns combat timing.**
+
+`CombatActionRunner` exposes presentation-only normalized action progress. `DirectionalActorPresentation` uses that progress to select the visible frame of attack-specific directional animations.
+
+Therefore:
+
+- attack frame count can change without moving a hitbox window;
+- hitstop and gameplay timing remain authoritative outside the sprite atlas;
+- a re-rendered model cannot silently alter damage timing;
+- the art pipeline can iterate independently from combat logic.
+
+Idle and movement loops may free-run at their authored SpriteFrames speed.
 
 ## Feet/pivot and scale contract
 
@@ -111,6 +166,20 @@ Rules:
 - animation must not introduce gameplay root motion;
 - attack frames visually follow authoritative action progress rather than owning impact timing;
 - old body sprites are exclusive with replacement presentation and must not render underneath new art.
+
+The initial Akio/Swordsman proof uses a fixed `128 x 128` frame canvas and `(64, 112)` feet anchor for every rendered frame. These can be revised as one whole-profile contract if the first model proves it needs more canvas, but individual frames must not be auto-trimmed around the moving body or weapon.
+
+## Pixel-art proof contract
+
+The first rig-rendered profiles are configured for nearest-neighbor filtering and pixel-snapped presentation once real atlases are active.
+
+The comparison should retain high-quality source renders so the same rig can be evaluated as:
+
+1. clean pre-rendered 2D;
+2. downsampled/quantized pixel-art treatment;
+3. selectively hand-cleaned pixel frames if needed.
+
+Do not lock a final palette count, outline treatment or exact render-camera setup before the Akio/Swordsman comparison. Those are art decisions. Registration, direction naming and gameplay timing separation are the stable engineering contract.
 
 ## Environment contract
 
@@ -138,31 +207,27 @@ Sword trails, hit flashes, danger telegraphs, projectile cues, ground AoEs, stat
 
 This allows character art to be replaced without touching combat readability or impact timing.
 
-## Offline 3D-to-2D compatibility
+## Offline 3D-to-2D pipeline
 
-If Oathbound later uses rigged 3D characters for production, those assets are content-generation tools rather than the live renderer.
+If Oathbound uses rigged 3D characters for production, those assets are content-generation tools rather than the live renderer.
 
 Expected pipeline:
 
-`concept -> model -> rig -> animate -> fixed camera directional renders -> atlas -> DirectionalActorPresentation`
+`concept -> model -> rig -> animate -> fixed camera directional renders -> optional pixel treatment -> SpriteFrames -> DirectionalActorPresentation`
 
 The export camera, sprite canvas, feet pivot, direction names and animation-state names must be standardized so re-rendering an updated model does not require gameplay code changes.
 
-## Immediate vertical-slice goal
+A headless Godot builder now exists to ingest conventionally named imported PNG sequences, build a `SpriteFrames` resource, validate every required direction/animation and mark a profile asset-ready only after its contract passes.
 
-The next Hushiro playtest does not need final art. It must prove an **ugly-but-correct** production composition:
+## Current immediate priorities
 
-- live runtime is 2D;
-- camera is far enough out for multi-enemy threat reading;
-- player/enemy bodies are materially smaller than the rejected live-3D versions;
-- all standard roles have distinct placeholder silhouettes;
-- presentation uses eight-direction state resolution;
-- old body sprites never stack beneath replacements;
-- actor sorting is tied to the ground plane;
-- layered Hushiro scenery and CombatFX remain visible;
-- no presentation system changes gameplay distances/timing.
-
-After that gate, effort should shift from renderer architecture toward better placeholder/final actor art and Hushiro environment composition.
+1. keep the accepted Hushiro camera/composition and Combat V2 behavior stable;
+2. create the first Akio 3D model/rig against the rig-rendered 2D contract;
+3. render/import Akio's required eight-direction proof set;
+4. create/render the Corrupted Swordsman using the same camera/canvas/feet-registration rules;
+5. compare clean pre-rendered vs pixel-art/downsampled presentation in real Hushiro combat;
+6. only after that acceptance decision, expand the character pipeline or invest heavily in remaining Hushiro character art;
+7. continue developing layered Hushiro 2D scenery independently of the character proof where it does not obscure that comparison.
 
 ## Retired active path
 

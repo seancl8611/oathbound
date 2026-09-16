@@ -1,17 +1,15 @@
 extends Node
 
-## Hushiro's live presentation bridge after retiring real-time 3D from the playable slice.
+## Hushiro's live 2D isometric presentation bridge.
 ##
-## Combat remains entirely authoritative on the existing Node2D/CharacterBody2D actors.
-## This bridge owns only:
-## - fixed high-angle/isometric Camera2D framing;
-## - smaller screen-space actor presentation suitable for Hades-like threat readability;
-## - eight-direction semantic actor presenters that can later accept hand-drawn or
-##   offline-3D-rendered SpriteFrames atlases;
-## - exclusive suppression/restoration of obsolete body sprites;
-## - presenter lifetime cleanup.
+## Combat remains entirely authoritative on existing Node2D/CharacterBody2D actors.
+## This bridge owns framing plus replacement body presentation only. The first production
+## content proof is intentionally scoped to Akio + Corrupted Swordsman via two rig-ready
+## DirectionalSpriteProfile resources. Every other role remains on readable placeholders.
 
 const DIRECTIONAL_PRESENTER_SCRIPT = preload("res://Utility/DirectionalActorPresentation.gd")
+const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2DProfile.tres")
+const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres")
 
 @export_category("Isometric combat framing")
 @export_range(0.35, 0.75, 0.01) var presentation_zoom: float = 0.50
@@ -102,7 +100,7 @@ func _report_startup_once() -> void:
 		return
 	_startup_reported = true
 	print(
-		"[HushiroIsometric2D] revision=1 runtime=2d directional=8 zoom=%.2f compression=%.2f live_3d=false"
+		"[HushiroIsometric2D] revision=2 runtime=2d directional=8 zoom=%.2f compression=%.2f live_3d=false rig2d_profiles=akio+swordsman pixel_art_ready=true"
 		% [presentation_zoom, ground_vertical_compression]
 	)
 
@@ -144,7 +142,20 @@ func _add_presenter(actor: Node2D) -> void:
 	var scale_factor := player_visual_scale if role == "player" else _role_scale(role)
 	if presenter.has_method("configure"):
 		presenter.call("configure", actor, role, scale_factor, ground_vertical_compression)
+	var profile := _profile_for_role(role)
+	if profile != null and presenter.has_method("set_profile"):
+		presenter.call("set_profile", profile)
 	_presenters[actor.get_instance_id()] = presenter
+
+
+func _profile_for_role(role: String) -> Resource:
+	match role:
+		"player":
+			return AKIO_RIG2D_PROFILE
+		"swordsman":
+			return SWORDSMAN_RIG2D_PROFILE
+		_:
+			return null
 
 
 func _role_scale(role: String) -> float:
@@ -207,6 +218,7 @@ func _is_live_object(value: Variant) -> bool:
 func get_presentation_state_for_test() -> Dictionary:
 	var camera := get_viewport().get_camera_2d()
 	var actor_states: Array[Dictionary] = []
+	var profiled_presenters := 0
 	for presenter_value: Variant in _presenters.values():
 		if not _is_live_object(presenter_value) or not (presenter_value is Node):
 			continue
@@ -214,13 +226,18 @@ func get_presentation_state_for_test() -> Dictionary:
 		if presenter.has_method("get_presentation_state_for_test"):
 			var state_value: Variant = presenter.call("get_presentation_state_for_test")
 			if state_value is Dictionary:
-				actor_states.append((state_value as Dictionary).duplicate(true))
+				var actor_state := (state_value as Dictionary).duplicate(true)
+				actor_states.append(actor_state)
+				if not str(actor_state.get("profile_id", "")).is_empty():
+					profiled_presenters += 1
 	return {
 		"runtime": "2d",
+		"revision": 2,
 		"direction_count": 8,
 		"presentation_zoom": presentation_zoom,
 		"ground_vertical_compression": ground_vertical_compression,
 		"presenter_count": _presenters.size(),
+		"profiled_presenter_count": profiled_presenters,
 		"camera_configured": camera != null and is_instance_valid(camera) and _camera_configured_id == camera.get_instance_id(),
 		"actor_states": actor_states,
 	}

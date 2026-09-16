@@ -50,10 +50,12 @@ func _run() -> void:
 		return
 	var state := state_value as Dictionary
 	_expect(str(state.get("runtime", "")) == "2d", "live Hushiro presentation did not report 2D runtime")
+	_expect(int(state.get("revision", 0)) == 2, "rig-ready presentation revision is not active")
 	_expect(int(state.get("direction_count", 0)) == 8, "directional actor contract is not eight-way")
 	_expect(is_equal_approx(float(state.get("presentation_zoom", 0.0)), 0.50), "unexpected combat framing zoom")
 	_expect(is_equal_approx(float(state.get("ground_vertical_compression", 0.0)), 0.72), "unexpected isometric ground compression")
 	_expect(int(state.get("presenter_count", 0)) == 1, "player did not receive exactly one directional presenter")
+	_expect(int(state.get("profiled_presenter_count", 0)) == 1, "player did not receive its rig-rendered 2D profile slot")
 	_expect(bool(state.get("camera_configured", false)), "Camera2D was not configured by isometric presentation bridge")
 	_expect(not body.visible, "legacy body sprite remained visible underneath directional replacement")
 
@@ -65,7 +67,10 @@ func _run() -> void:
 			_expect(str(actor_state.get("role", "")) == "player", "directional presenter did not resolve player role")
 			_expect(str(actor_state.get("direction", "")) == "e", "eastward movement did not quantize to e")
 			_expect(str(actor_state.get("state", "")) == "move", "moving player did not resolve move semantic state")
-			_expect(bool(actor_state.get("placeholder_active", false)), "placeholder presenter was not active without an atlas")
+			_expect(str(actor_state.get("profile_id", "")) == "akio_rig_rendered_2d", "Akio rig profile was not assigned")
+			_expect(not bool(actor_state.get("asset_ready", true)), "Akio profile incorrectly claims production frames already exist")
+			_expect(bool(actor_state.get("pixel_art", false)), "Akio rig profile is not configured for nearest-filter pixel proof")
+			_expect(bool(actor_state.get("placeholder_active", false)), "placeholder presenter was not active before rig atlas import")
 		else:
 			_fail("actor state entry was not a Dictionary")
 	else:
@@ -85,7 +90,7 @@ func _fail(message: String) -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[Isometric2DPresentationSmoke] PASS - 2D runtime, wide framing, eight-direction presenter, and exclusive body replacement are active")
+		print("[Isometric2DPresentationSmoke] PASS - 2D runtime, wide framing, eight-direction presenter, rig profile slot, and exclusive body replacement are active")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

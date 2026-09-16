@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "runtime": "godot_2d",
+  "proof_scope": ["akio", "corrupted_swordsman"],
+  "directions": [
+    {"name": "e", "godot_vector": [1.0, 0.0], "screen_angle_deg": 0},
+    {"name": "se", "godot_vector": [0.7071, 0.7071], "screen_angle_deg": 45},
+    {"name": "s", "godot_vector": [0.0, 1.0], "screen_angle_deg": 90},
+    {"name": "sw", "godot_vector": [-0.7071, 0.7071], "screen_angle_deg": 135},
+    {"name": "w", "godot_vector": [-1.0, 0.0], "screen_angle_deg": 180},
+    {"name": "nw", "godot_vector": [-0.7071, -0.7071], "screen_angle_deg": 225},
+    {"name": "n", "godot_vector": [0.0, -1.0], "screen_angle_deg": 270},
+    {"name": "ne", "godot_vector": [0.7071, -0.7071], "screen_angle_deg": 315}
+  ],
+  "frame_contract": {
+    "format": "png_rgba",
+    "canvas_px": [128, 128],
+    "foot_anchor_px": [64, 112],
+    "default_fps": 12,
+    "crop_each_frame": false,
+    "root_motion": false,
+    "file_pattern": "<animation_base>_<direction>_<frame:03>.png",
+    "pixel_filter": "nearest"
+  },
+  "akio_animation_bases": [
+    "idle",
+    "move",
+    "dash",
+    "defend",
+    "hurt",
+    "death",
+    "attack_quick_slash",
+    "attack_cross_cut",
+    "attack_heavy_cleave"
+  ],
+  "corrupted_swordsman_animation_bases": [
+    "idle",
+    "move",
+    "defend",
+    "hurt",
+    "death",
+    "attack_basic_swing",
+    "attack_quick_thrust",
+    "attack_cross_swing",
+    "attack_running_swing"
+  ],
+  "notes": [
+    "Keep the render camera and frame canvas fixed for every direction and every frame.",
+    "Rotate the actor/rig for direction renders; do not move the feet registration point.",
+    "Attack animation playback is sampled from authoritative CombatActionRunner progress in Godot.",
+    "The 3D model and rig are offline content-generation inputs only; no live 3D actor is required at runtime."
+  ]
+}
