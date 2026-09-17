@@ -1,0 +1,51 @@
+name: Aspect Guard Ownership Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  aspect-guard-ownership:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Import project headlessly
+        run: godot --headless --path game/oathbound --import
+
+      - name: Verify Aspect guard ownership contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Aspects/AspectGuardOwnershipSmoke.tscn 2>&1 | tee aspect-guard-ownership.log
+          grep -F "[AspectGuardOwnershipSmoke] PASS - base Guard retained; Wolf/Wraith tap-parry only; Ronin owns sustained Guard" aspect-guard-ownership.log
+          if grep -F "SCRIPT ERROR:" aspect-guard-ownership.log; then
+            echo "FAIL: Aspect guard ownership smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" aspect-guard-ownership.log; then
+            echo "FAIL: Aspect guard ownership smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Upload Aspect guard ownership log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aspect-guard-ownership-${{ github.run_id }}
+          path: aspect-guard-ownership.log
+          if-no-files-found: warn
+          retention-days: 7
