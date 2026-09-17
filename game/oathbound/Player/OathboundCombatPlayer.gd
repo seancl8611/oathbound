@@ -196,6 +196,94 @@ func apply_umbrella_posture(_amount: float) -> void:
 
 
 # =============================================================================
+# COMBAT V2 ASPECT GUARD OWNERSHIP
+# =============================================================================
+
+func _allows_sustained_guard() -> bool:
+	# Preserve the pre-awakening base-katana compatibility contract. Once a Blood Aspect
+	# is active, sustained Guard belongs to Ronin; Wolf/Wraith keep the shared tap-parry
+	# window and their own authored defensive/mobility tools instead of inheriting a
+	# universal hold-to-block answer.
+	if typeof(AspectRuntime) != TYPE_OBJECT:
+		return true
+	var aspect_id: String = str(AspectRuntime.selected_aspect)
+	return aspect_id.is_empty() or aspect_id == ASPECT_CATALOG.RONIN
+
+
+func allows_sustained_guard_for_test() -> bool:
+	return _allows_sustained_guard()
+
+
+func _start_block():
+	if not _allows_sustained_guard():
+		_block_held = false
+		_wants_block_takeover = false
+		return
+	super._start_block()
+
+
+func _start_parry(window_s: float):
+	if _allows_sustained_guard():
+		super._start_parry(window_s)
+		return
+
+	# OathboundPlayer gives a held defense press immediately after a dash priority over
+	# the parry window and enters BLOCKING directly. Disable only that compatibility
+	# shortcut for Wolf/Wraith, then let the normal tap-parry window open unchanged.
+	var priority_until: float = _post_dodge_block_priority_until
+	_post_dodge_block_priority_until = -1.0
+	super._start_parry(window_s)
+	_post_dodge_block_priority_until = priority_until
+	_block_held = false
+	_wants_block_takeover = false
+	if _state == State.PARRYING:
+		_play_anim("parry")
+
+
+func _state_parrying(delta: float):
+	if _allows_sustained_guard():
+		super._state_parrying(delta)
+		return
+
+	_parry_timer -= delta
+	_perfect_parry_available = false
+	if _parry_timer <= 0.0:
+		_parry_active = false
+		_block_held = false
+		_wants_block_takeover = false
+		_change_state(State.IDLE)
+
+
+func _process_buffered_input():
+	# The legacy buffer interprets a still-held parry input as a request to start Block.
+	# For Wolf/Wraith the same buffered press remains a parry request instead.
+	if (
+		not _allows_sustained_guard()
+		and _buffered_action == "parry"
+		and _buffer_timer > 0.0
+		and _can_start_parry()
+	):
+		_start_parry(_get_effective_parry_window())
+		_buffered_action = ""
+		_buffer_timer = 0.0
+		return
+	super._process_buffered_input()
+
+
+func _on_anim_finished(anim_name: String):
+	# Legacy animation completion contains a second direct PARRYING -> BLOCKING shortcut.
+	# End the tap-parry normally for Wolf/Wraith instead of allowing that hidden path to
+	# recreate universal sustained Guard.
+	if not _allows_sustained_guard() and anim_name == "parry" and _state == State.PARRYING:
+		_parry_active = false
+		_block_held = false
+		_wants_block_takeover = false
+		_change_state(State.IDLE)
+		return
+	super._on_anim_finished(anim_name)
+
+
+# =============================================================================
 # SPECIAL-ONLY PARRY CLASSIFICATION
 # =============================================================================
 
