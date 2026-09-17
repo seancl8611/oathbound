@@ -46,17 +46,17 @@ func _test_window_scheduler() -> void:
 	})
 	_expect(bool(first.get("admitted", false)), "first normal threat was not admitted")
 
-	# Windups may overlap. The second attack is admitted because its dangerous impact
-	# lands outside the first normal spacing window.
+	# Windups may overlap. The second attack is admitted because its dangerous contact
+	# window begins after the first window plus the authored normal-spacing margin.
 	var separated: Dictionary = director.request_threat(b, {
 		"attack_id": "b",
-		"impact_at": now + 1.35,
-		"impact_delay": 1.35,
+		"impact_at": now + 1.42,
+		"impact_delay": 1.42,
 		"active_duration": 0.15,
 		"severity": "normal",
 		"threat_cost": 1.0,
 	})
-	_expect(bool(separated.get("admitted", false)), "separated future impact was incorrectly serialized")
+	_expect(bool(separated.get("admitted", false)), "separated future danger window was incorrectly serialized")
 	_expect(director.reservation_count() == 2, "director did not retain concurrent separated threats")
 
 	var overlap: Dictionary = director.request_threat(c, {
@@ -70,7 +70,10 @@ func _test_window_scheduler() -> void:
 	_expect(not bool(overlap.get("admitted", true)), "near-simultaneous normal impact was admitted")
 	_expect(str(overlap.get("reason", "")) in ["impact_spacing", "pressure_budget"], "overlap denial did not report a pressure reason")
 
+	# Clear both reservations that bracket the rejected contact window. The same request
+	# should then become available, proving release cleanup rather than timestamp drift.
 	director.release_threat(a, str(first.get("reservation_id", "")), "test_release")
+	director.release_threat(b, str(separated.get("reservation_id", "")), "test_release")
 	var after_release: Dictionary = director.request_threat(c, {
 		"attack_id": "c",
 		"impact_at": now + 1.05,
@@ -79,7 +82,7 @@ func _test_window_scheduler() -> void:
 		"severity": "normal",
 		"threat_cost": 1.0,
 	})
-	_expect(bool(after_release.get("admitted", false)), "released impact window did not become available")
+	_expect(bool(after_release.get("admitted", false)), "released danger windows did not become available")
 
 	var perilous: Dictionary = director.request_threat(d, {
 		"attack_id": "d_perilous",
