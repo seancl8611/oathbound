@@ -1,0 +1,33 @@
+name: Temporary Hades Reference Fetch
+
+on:
+  push:
+    branches:
+      - agent/temp-hades-reference-fetch
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download reference screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p hades_refs
+          curl -L --fail --retry 3 \
+            "https://raw.githubusercontent.com/PsychoBrosGames/psychobrosgames.github.io/main/assets/press/hades/gallery-1.jpg" \
+            -o hades_refs/hades_gallery_1.jpg
+          curl -L --fail --retry 3 \
+            "https://raw.githubusercontent.com/PsychoBrosGames/psychobrosgames.github.io/main/assets/press/hades/gallery-2.jpg" \
+            -o hades_refs/hades_gallery_2.jpg
+          file hades_refs/*
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: hades-reference-screenshots
+          path: hades_refs/
+          if-no-files-found: error
+          retention-days: 1
