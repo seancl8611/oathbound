@@ -18,11 +18,17 @@ jobs:
           set -euo pipefail
           mkdir -p hades_refs
           curl -L --fail --retry 3 \
-            "https://raw.githubusercontent.com/PsychoBrosGames/psychobrosgames.github.io/main/assets/press/hades/gallery-1.jpg" \
-            -o hades_refs/hades_gallery_1.jpg
-          curl -L --fail --retry 3 \
             "https://raw.githubusercontent.com/PsychoBrosGames/psychobrosgames.github.io/main/assets/press/hades/gallery-2.jpg" \
-            -o hades_refs/hades_gallery_2.jpg
+            -o hades_refs/hades_combat_press.jpg
+          curl -L --fail --retry 3 \
+            "https://raw.githubusercontent.com/p1xelons/235/main/game-hw/hadesSS1.jpg" \
+            -o hades_refs/hadesSS1.jpg
+          curl -L --fail --retry 3 \
+            "https://raw.githubusercontent.com/p1xelons/235/main/game-hw/hadesSS2.jpg" \
+            -o hades_refs/hadesSS2.jpg
+          curl -L --fail --retry 3 \
+            "https://raw.githubusercontent.com/p1xelons/235/main/game-hw/hadesSS3.jpg" \
+            -o hades_refs/hadesSS3.jpg
           file hades_refs/*
       - name: Upload screenshots
         uses: actions/upload-artifact@v4
