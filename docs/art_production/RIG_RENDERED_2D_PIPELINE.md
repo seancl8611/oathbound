@@ -25,12 +25,16 @@ The runtime chain is:
 
 ## Current registered runtime slots
 
-Godot has two rig-rendered content slots:
+Godot has two full-production rig-rendered content slots:
 
 - `res://Presentation/Profiles/AkioRigRendered2DProfile.tres`
 - `res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres`
 
-They remain intentionally `asset_ready=false` until a complete validated runtime frame set is built. Hushiro continues to use procedural placeholders until then.
+Akio also has a dedicated partial commission gate:
+
+- `res://Presentation/Profiles/AkioProofAProfile.tres`
+
+The full profiles remain intentionally `asset_ready=false` until complete validated runtime frame sets are built. The Proof A profile is separate so the first three commissioned Actions can be playtested without weakening the nine-animation production contract.
 
 The profile/import seam is stable enough that real art can replace the placeholder without changing combat code.
 
@@ -46,7 +50,7 @@ Commission/finish the custom Akio model, materials and rig, then produce at leas
 - `move`
 - `attack_quick_slash`
 
-Render those actions from all eight directions and integrate them into an isolated proof/profile path if necessary. The purpose is to answer the expensive questions early:
+The Client renders those Actions from all eight directions and integrates them through the dedicated Proof A profile. The artist is not required to deliver directional PNG sequences under the current Akio commission. The purpose is to answer the expensive questions early:
 
 - Does Akio actually read like Akio at the accepted camera?
 - Does the custom silhouette survive the small screen-space scale?
@@ -54,7 +58,7 @@ Render those actions from all eight directions and integrate them into an isolat
 - Does clean prerender or deliberate downsample/pixel treatment fit the game better?
 - Is the Blender -> render -> validate -> Godot iteration loop practical?
 
-Do **not** weaken the production runtime validator merely to accept an intentionally incomplete Proof A. Use a dedicated proof subset/profile/config when implementation reaches that point.
+Do **not** weaken the production runtime validator merely to accept an intentionally incomplete Proof A. The dedicated `AkioProofAProfile.tres`, `tools/rig2d/akio_proof_a_manifest.json`, and `tools/rig2d/blender/akio_proof_a_export.template.json` own this partial gate.
 
 ### Akio Proof B / Stage 1 completion
 
@@ -156,21 +160,21 @@ The source rig may use natural body translation while animating, but the deliver
 
 ## Source/master render contract
 
-A paid custom character should not be delivered only as final-size runtime sprites.
+Keep the **artist-delivered editable source** separate from the **client-generated render outputs**.
 
-Retain:
+Artist/source retention for Akio includes:
 
 - editable Blender source;
 - model, UVs, textures/materials;
 - rig/control rig;
 - editable Actions;
-- fixed camera/render setup;
-- transparent **high-resolution master renders** for every delivered action/direction;
 - source information/licensing for any third-party or generated dependencies.
 
-For Akio, a working target around **1024 x 1024 transparent masters** is appropriate when it comfortably contains the full sword silhouette. The exact master canvas may be adjusted based on the source model and camera; the requirement is that it remain materially higher resolution than the runtime derivative and consistent across the actor's delivered set.
+The Client adds/owns the fixed camera/render setup and generates transparent high-resolution directional masters plus runtime derivatives from the accepted source.
 
-Master renders should keep:
+For Akio, a working target around **1024 x 1024 transparent masters** is appropriate when it comfortably contains the full sword silhouette. The exact master canvas may be adjusted based on the source model and client render setup; it should remain materially higher resolution than the runtime derivative and consistent across the actor's rendered set.
+
+Client-generated master renders should keep:
 
 - one fixed canvas per source tier;
 - stable feet/contact registration;
@@ -179,7 +183,7 @@ Master renders should keep:
 - consistent lighting/material treatment;
 - enough margin for the full weapon path.
 
-High-resolution masters may live outside the runtime project/package if repository size makes that practical. The editable source and ownership/provenance still need to be preserved.
+High-resolution masters may live outside the runtime project/package if repository size makes that practical. Under the current Akio commission, rendered directional PNG sequences are not required artist deliverables.
 
 ## Runtime derivative contract
 
@@ -239,11 +243,19 @@ High-resolution masters may use the same semantic naming in a separate master-re
 
 ## Current repository tooling
 
-The machine-readable **runtime derivative** contract is:
+The machine-readable **full runtime derivative** contract is:
 
 `tools/rig2d/poc_manifest.json`
 
-The current Blender templates/exporter are also configured around the 128 x 128 runtime proof. They are not yet the paid-master renderer contract.
+The dedicated Akio Milestone 1 / Proof A contract is:
+
+`tools/rig2d/akio_proof_a_manifest.json`
+
+with Blender template:
+
+`tools/rig2d/blender/akio_proof_a_export.template.json`
+
+The current Blender templates/exporter are configured around the 128 x 128 runtime proof derivative. High-resolution master generation remains a client-side integration step rather than an artist deliverable contract.
 
 `tools/rig2d/README.md` owns the current repository command flow. When the real Akio source arrives, extend the tooling deliberately if we want one automated command to render high-resolution masters and derive runtime outputs. Do not silently reinterpret the existing 128 x 128 validator as if it already validates master delivery.
 
