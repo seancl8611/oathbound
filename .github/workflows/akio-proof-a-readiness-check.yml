@@ -1,0 +1,70 @@
+name: Akio Proof A Readiness Check
+
+on:
+  push:
+    branches:
+      - main
+      - "agent/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  akio-proof-a-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Godot 4.7.2
+        uses: chickensoft-games/setup-godot@v2
+        with:
+          version: 4.7.2
+          use-dotnet: false
+          include-templates: false
+
+      - name: Verify rig2d tooling contracts
+        run: python tools/rig2d/validate_tooling_contract.py
+
+      - name: Import project
+        run: godot --headless --path game/oathbound --import
+
+      - name: Compile editor project
+        run: godot --headless --editor --path game/oathbound --quit-after 3
+
+      - name: Verify Akio Proof A readiness seam
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/AkioProofAReadinessSmoke.tscn 2>&1 | tee akio-proof-a-readiness.log
+          grep -F "[AkioProofAReadinessSmoke] PASS - 24-clip Proof A profile, temporary aliases, and Hushiro override are ready" akio-proof-a-readiness.log
+          if grep -F "SCRIPT ERROR:" akio-proof-a-readiness.log; then
+            echo "FAIL: Akio Proof A readiness smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" akio-proof-a-readiness.log; then
+            echo "FAIL: Akio Proof A readiness smoke emitted a deferred-call runtime error."
+            exit 1
+          fi
+
+      - name: Preserve full production rig2d contract
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/RigRendered2DPipelineSmoke.tscn 2>&1 | tee rig2d-production-regression.log
+          grep -F "[RigRendered2DPipelineSmoke] PASS" rig2d-production-regression.log
+          if grep -F "SCRIPT ERROR:" rig2d-production-regression.log; then
+            echo "FAIL: Full rig-rendered pipeline smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
+      - name: Upload Akio Proof A logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: akio-proof-a-readiness-${{ github.run_id }}
+          path: |
+            akio-proof-a-readiness.log
+            rig2d-production-regression.log
+          if-no-files-found: warn
+          retention-days: 7

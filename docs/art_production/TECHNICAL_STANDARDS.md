@@ -85,16 +85,21 @@ The current proof runtime profile uses a fixed **128 x 128** canvas with a **(64
 
 Production must distinguish **editable/high-resolution source** from the **runtime derivative**.
 
-### Source/master deliverables
+### Source/master retention
 
-For a commissioned or internally produced rig-rendered character, retain:
+For a commissioned rig-rendered character such as Akio, distinguish the artist's **editable source handoff** from the client's **render integration artifacts**.
+
+Retain from the artist/source package:
 
 - the editable source model/rig/animations;
-- the fixed render camera and lighting/material setup;
-- high-resolution transparent directional master renders;
-- enough resolution to re-derive alternate runtime treatments without reconstructing the asset.
+- textures/materials and documented dependencies;
+- enough source quality and framing margin to generate alternate render treatments without reconstructing the asset.
 
-For a hero character such as Akio, a working target around **1024 x 1024 transparent masters** is appropriate when it contains the full weapon silhouette with comfortable margin, but the exact master canvas may be adjusted to the model/render setup. The important rule is that masters are materially higher resolution than the current 128 x 128 runtime proof output.
+The Client owns the fixed render camera and lighting/material integration setup and generates high-resolution transparent directional masters plus runtime derivatives.
+
+For a hero character such as Akio, a working target around **1024 x 1024 transparent masters** is appropriate when it contains the full weapon silhouette with comfortable margin, but the exact master canvas may be adjusted to the client render setup. The important rule is that masters are materially higher resolution than the current 128 x 128 runtime proof output.
+
+Under the current Akio commission scope, directional PNG sequences and high-resolution master renders are client-generated outputs rather than required artist deliverables.
 
 ### Runtime derivatives
 

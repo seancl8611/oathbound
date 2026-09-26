@@ -1,122 +1,135 @@
 # Akio 3D Character Commission Brief
 
 ## Goal
-Create a high-quality custom 3D **Akio** that can become the long-term source asset for Oathbound.
 
-The 3D character is an **offline production source**, not a live Godot actor. The model will be rigged and animated, then rendered from eight directions into 2D sprites for the actual game.
+Create a high-quality custom 3D **Akio** that can become the long-term reusable source character for Oathbound.
+
+The commissioned model, rig, materials, and animations are **offline production source assets**, not a live Godot actor. Oathbound's client-side pipeline will render the delivered source from eight directions, derive runtime sprites, and integrate those sprites into the existing Godot 2D combat runtime.
+
+The external artist-facing production specification is the detailed creative/technical scope. This repository brief records the engineering boundary that the game expects.
 
 ## Character direction
-Akio is a disciplined samurai beast hunter. He should feel practical, worn and dangerous rather than ornate or conventionally heroic.
+
+Akio is a disciplined Order beast hunter and katana swordsman. He should feel practical, worn, controlled, and dangerous rather than noble, ceremonial, theatrical, or generic-anime.
 
 Key visual traits:
 
-- lean, dark samurai-hunter silhouette;
+- lean, grounded working-warrior silhouette;
 - layered/weathered cloth and wrapped limbs;
-- compact practical armor and light lamellar pieces;
+- compact practical reinforcement/light armor;
 - katana and scabbard clearly readable at the hip;
-- scarf, cords, pouches and ritual details without excessive small visual noise;
-- strong stance/weapon silhouette from a high-angle gameplay camera;
-- readable asymmetry that survives eight-direction rendering.
+- restrained scarf, cords, pouches, seals, and ritual details;
+- readable asymmetry that survives eight-direction rendering;
+- strong stance and weapon path from the fixed high-angle gameplay camera.
 
-Approved concept/reference images and gameplay-camera screenshots will be supplied before modeling.
+Design decisions are judged at actual gameplay scale, not only in close-up presentation renders.
 
-The artist should design for the actual small on-screen combat scale, not only for close-up renders.
+## Artist source responsibility
 
-## Production setup
+The current commission asks the artist to deliver editable source work, not finished runtime sprite sheets.
 
-The final source package should be usable in **Blender** for rerendering and later animation work.
+Required source direction:
 
-The artist may use other tools during creation, but final delivery should include a working Blender source/render handoff with no inaccessible dependency required for normal editing/rendering.
-
-Please include:
-
-- neutral bind/reference pose;
-- combat-ready pose/idle;
+- custom final Akio model;
+- clean topology suitable for deformation and sword animation;
+- final UVs, textures, and materials;
 - reusable humanoid deformation/control rig;
+- neutral bind/reference pose;
 - katana and scabbard as separate editable objects;
-- useful hand/weapon/scabbard attachment structure;
-- clean source organization and semantic animation names.
+- useful hand/weapon/scabbard/VFX reference points where practical;
+- commissioned animations as editable Blender Actions or clearly organized equivalent Actions in the delivered Blender file;
+- source organization that reopens cleanly without inaccessible proprietary dependencies;
+- disclosure of third-party meshes, clothing, textures, mocap, animation packs, AI-generated content, add-ons, and plugins.
 
-## Eight-direction output
+Other DCC tools may be used during production, but the final normal-use handoff must be workable in Blender.
 
-Each approved 3D animation is authored once, then rendered from:
+## Client-side directional rendering
 
-`E, SE, S, SW, W, NW, N, NE`
+The **Client** owns the downstream rendering/export pipeline.
 
-Use one fixed orthographic/high-angle render camera and rotate the character/root for directional views.
+For every accepted source animation, Oathbound will render:
 
-Do not rely on mirroring only four directions. Akio's handedness, katana/scabbard placement, costume asymmetry and weapon paths must remain correct.
+\`E, SE, S, SW, W, NW, N, NE\`
 
-Every rendered frame must keep stable feet/contact registration with no per-frame auto-cropping.
+The client integration setup will provide the fixed high-angle camera, render canvas, lighting/material treatment, output naming, high-resolution masters, runtime derivatives, and Godot import.
 
-## Proof A — first paid/in-game gate
+The artist is therefore **not required to deliver eight-direction PNG sequences under the current scope**.
 
-Before completing the full animation package, prove these three actions:
+The artist's responsibility is to make each source animation remain readable when viewed from the required eight directions and to preserve stable, primarily in-place body/weapon motion suitable for client-side rendering.
 
-1. **Idle** — restrained combat-ready stance.
-2. **Move / combat run** — fast, controlled combat movement rather than a casual jog.
-3. **Quick Slash** — fast, compact opening katana cut with a readable weapon path.
+## Milestone 1 / Proof A
 
-Render all three from all eight directions.
+Milestone 1 is the current paid gate.
 
-This first gate is used inside Oathbound to judge:
+### Checkpoint A — character design approval
 
-- whether the finished Akio silhouette works at the real gameplay camera;
-- rig/deformation quality;
-- stable feet registration;
+Resolve enough visual information to approve:
+
+- full-body silhouette and proportions;
+- front / three-quarter / side / back information sufficient for production;
+- palette/material direction;
+- major asymmetry;
+- gameplay-camera silhouette/readability.
+
+### Checkpoint B — final 3D source character
+
+Deliver the approved custom model, materials, reusable rig, Blender source handoff, katana/scabbard setup, and deformation-ready character.
+
+### Checkpoint C — Proof A animations
+
+Author these three editable source animations:
+
+1. **Idle** — restrained combat-ready loop.
+2. **Move / Combat Run** — fast, controlled combat locomotion.
+3. **Quick Slash** — fast, compact opening katana cut with a clean weapon path.
+
+Oathbound then renders the three Actions from all eight directions and tests them in-game.
+
+Proof A is used to judge:
+
+- Akio-specific silhouette at the accepted camera;
+- deformation quality;
+- stable feet/contact registration;
 - weapon readability;
-- source/render iteration quality;
-- clean prerender vs downsample/pixel-style treatment.
+- animation language;
+- source-to-render iteration quality;
+- clean prerender vs downsample/pixel treatment;
+- runtime integration without changing gameplay authority.
 
-If this gate exposes a fundamental model/rig/render problem, we should fix it before paying for the complete animation library.
+Milestone 1 ends at accepted Proof A.
 
-## Proof B / Stage 1 animation set
+## Milestone 2 — future core animation package
 
-After Proof A is accepted, complete these as separate editable animations:
+Milestone 2 is not part of the currently authorized work. It begins only after Proof A is accepted and separate written approval is given.
+
+The intended core animation set is:
 
 1. **Idle**
-2. **Move / combat run**
-3. **Dash / step-dodge** — short, decisive evasive burst.
-4. **Defend** — clear compact guard posture.
-5. **Hurt** — short readable hit reaction.
-6. **Death** — grounded combat death.
-7. **Quick Slash** — fast, compact opening katana cut.
-8. **Cross Cut** — clearly different continuation using a different weapon/body path.
-9. **Heavy Cleave** — slower, more committed finisher with stronger anticipation and follow-through.
+2. **Move / Combat Run**
+3. **Dash / Step-Dodge**
+4. **Defend**
+5. **Hurt**
+6. **Death**
+7. **Quick Slash**
+8. **Cross Cut**
+9. **Heavy Cleave**
 
-The basic sword phrase should feel like:
+The basic sword phrase should read as:
 
-`fast opening cut -> distinct continuation -> heavy finisher`
+\`fast opening cut -> distinct continuation -> heavy finisher\`
 
 ## Animation timing
 
-Do **not** design the source animation around one exact current Godot millisecond timeline.
-
-Author convincing motion with clear:
+Source animation should be authored for convincing motion with readable:
 
 - anticipation;
-- strike/impact motion;
+- strike/impact;
 - follow-through;
 - recovery.
 
-A normal source-animation timeline such as 24 or 30 fps is fine.
+A conventional source rate such as 24 or 30 fps is fine.
 
-Godot remains authoritative for gameplay movement, dash distance, collision, damage, hit windows and legal transitions. The final sprite presentation is mapped over normalized gameplay action progress.
-
-Animations should therefore be primarily **in-place**. If natural root translation is used while authoring, also provide/render an in-place gameplay version.
-
-## High-resolution masters and runtime sprites
-
-Do not deliver only 128 x 128 finished sprites.
-
-Please keep transparent **high-resolution master renders** for every delivered animation/direction. A working target around **1024 x 1024** per frame is appropriate if it comfortably contains the full Akio/katana silhouette; the exact source canvas may be adjusted to the render setup as long as it remains fixed and substantially higher resolution than the game derivative.
-
-We will derive the final runtime sprite size/style from those masters. The current Godot proof uses a 128 x 128 derivative, but we want freedom to compare:
-
-- clean prerendered 2D;
-- larger clean derivatives if needed;
-- downsampled/pixel-style treatment;
-- selective hand cleanup.
+Godot remains authoritative for gameplay movement, dash distance, collision, damage timing, hit windows, invulnerability, and legal transitions. Animations should therefore be primarily **in-place** for gameplay output. Natural translation may be useful while authoring, but the delivered source must support stable client-side in-place rendering.
 
 ## Blood Aspects
 
@@ -126,43 +139,32 @@ Akio later changes fighting style through Blood Aspects:
 - **Wraith:** longer-range spacing/positional sequence;
 - **Ronin:** slower, heavier committed sequence with guard/Reprisal identity.
 
-Do not animate the full Aspect libraries in Stage 1. The initial model/rig should simply be reusable enough to support future stance, material, weapon-motion and animation variations.
+Do not animate the complete Aspect libraries during Milestone 1. The initial model/rig should remain reusable enough for later stance, material, weapon-motion, and animation variations.
 
-## Required source deliverables
+## Rights and provenance
 
-- complete editable Blender `.blend`;
-- final model, UVs, textures and materials;
-- reusable deformation/control rig;
-- neutral bind/reference pose;
-- katana and scabbard as separate editable objects;
-- all commissioned animations as editable Blender Actions;
-- useful hand/weapon/scabbard/VFX reference points where practical;
-- fixed render camera and lighting/material setup;
-- transparent high-resolution master PNG sequences;
-- all eight directions for every commissioned action;
-- stable feet/contact registration;
-- no per-frame auto-cropping;
-- no gameplay-authoritative root motion in exported gameplay sequences;
-- packed or clearly documented relative dependencies so the source reopens cleanly;
-- disclosure of third-party meshes, clothing, textures, mocap, animation packs, AI-generated content and required plugins.
+The project needs sufficient rights to use the delivered work in Oathbound, modify it, reanimate it, rerender it, derive 2D assets from it, and commercially distribute the resulting game and related approved materials at the agreed contractual scope.
 
-## Rights requirement
+Editable source delivery is required.
 
-The project needs sufficient rights to use the delivered work in Oathbound, modify it, reanimate it, rerender it, create derivative 2D assets from it, and commercially distribute the resulting game/assets at the agreed scope.
+Any third-party restriction that could limit commercial use, modification, derived renders, or future contractor handoff must be disclosed before acceptance.
 
-The editable source package is required in addition to rendered outputs.
+The production specification is the creative/technical scope; the final Artist Services Agreement controls payment, revisions/acceptance, ownership/license terms, confidentiality, cancellation, schedule changes, and other legal terms.
 
-Any third-party restrictions must be disclosed before final acceptance. Final contract wording can be handled separately; this brief defines the production expectation.
+## Runtime integration authority
 
-## Approval milestones
+The commission must not rewrite player gameplay.
 
-1. Character turnaround / interpretation of approved Akio references.
-2. 3D silhouette/blockout at gameplay-relevant views.
-3. Final model + materials.
-4. Rig + deformation test.
-5. **Proof A:** Idle + Move + Quick Slash, all eight directions, high-resolution masters.
-6. In-game acceptance of Akio silhouette/render treatment.
-7. **Proof B:** finish the remaining Stage 1 animations and renders.
-8. Deliver the complete editable source package.
+The current integration chain is:
 
-After Stage 1 is tested in Oathbound, the next likely Akio animation order is **Hold Thrust, Dash Slash, Counter Cut**, followed later by the dedicated Wolf/Wraith/Ronin libraries.
+\`authoritative Node2D player -> CombatActionRunner/state -> DirectionalActorPresentation -> DirectionalSpriteProfile -> SpriteFrames\`
+
+Milestone 1 uses the dedicated partial profile:
+
+\`res://Presentation/Profiles/AkioProofAProfile.tres\`
+
+The full production profile remains:
+
+\`res://Presentation/Profiles/AkioRigRendered2DProfile.tres\`
+
+Proof A intentionally requires only **Idle + Move + Quick Slash**. The full production profile remains strict for the complete nine-animation package.

@@ -20,6 +20,7 @@ const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSw
 @export var player_visual_scale: float = 1.0
 @export var standard_enemy_visual_scale: float = 1.0
 @export_range(0.03, 0.50, 0.01) var actor_refresh_seconds: float = 0.08
+@export var player_profile_override: Resource = null
 
 var _presenter_root: Node2D = null
 var _presenters: Dictionary = {}
@@ -151,7 +152,7 @@ func _add_presenter(actor: Node2D) -> void:
 func _profile_for_role(role: String) -> Resource:
 	match role:
 		"player":
-			return AKIO_RIG2D_PROFILE
+			return player_profile_override if player_profile_override != null else AKIO_RIG2D_PROFILE
 		"swordsman":
 			return SWORDSMAN_RIG2D_PROFILE
 		_:
