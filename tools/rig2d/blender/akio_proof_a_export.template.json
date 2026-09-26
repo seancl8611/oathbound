@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "actor_id": "akio",
+  "armature_object": "Akio_Rig",
+  "rotation_object": "Akio_Root",
+  "camera_object": "Rig2D_Camera",
+  "output_dir": "../exports/akio_proof_a/frames",
+  "resolution_px": [128, 128],
+  "transparent": true,
+  "frame_step": 2,
+  "directions": [
+    {"name": "e", "yaw_deg": 0.0},
+    {"name": "se", "yaw_deg": 45.0},
+    {"name": "s", "yaw_deg": 90.0},
+    {"name": "sw", "yaw_deg": 135.0},
+    {"name": "w", "yaw_deg": 180.0},
+    {"name": "nw", "yaw_deg": 225.0},
+    {"name": "n", "yaw_deg": 270.0},
+    {"name": "ne", "yaw_deg": 315.0}
+  ],
+  "animations": [
+    {"base": "idle", "action": "Akio_Idle"},
+    {"base": "move", "action": "Akio_Move"},
+    {"base": "attack_quick_slash", "action": "Akio_Attack_QuickSlash"}
+  ]
+}
