@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "runtime": "godot_2d",
+  "proof_scope": ["akio"],
+  "directions": [
+    {"name": "e", "godot_vector": [1.0, 0.0], "screen_angle_deg": 0},
+    {"name": "se", "godot_vector": [0.7071, 0.7071], "screen_angle_deg": 45},
+    {"name": "s", "godot_vector": [0.0, 1.0], "screen_angle_deg": 90},
+    {"name": "sw", "godot_vector": [-0.7071, 0.7071], "screen_angle_deg": 135},
+    {"name": "w", "godot_vector": [-1.0, 0.0], "screen_angle_deg": 180},
+    {"name": "nw", "godot_vector": [-0.7071, -0.7071], "screen_angle_deg": 225},
+    {"name": "n", "godot_vector": [0.0, -1.0], "screen_angle_deg": 270},
+    {"name": "ne", "godot_vector": [0.7071, -0.7071], "screen_angle_deg": 315}
+  ],
+  "frame_contract": {
+    "format": "png_rgba",
+    "canvas_px": [128, 128],
+    "foot_anchor_px": [64, 112],
+    "default_fps": 12,
+    "crop_each_frame": false,
+    "root_motion": false,
+    "file_pattern": "<animation_base>_<direction>_<frame:03>.png",
+    "pixel_filter": "nearest"
+  },
+  "akio_animation_bases": [
+    "idle",
+    "move",
+    "attack_quick_slash"
+  ],
+  "notes": [
+    "Milestone 1 / Proof A only: Idle, Move / Combat Run, and Quick Slash.",
+    "Render all eight directions independently from the client-owned Blender integration setup.",
+    "The commissioned 3D source remains editable; runtime PNGs are client-generated derivatives.",
+    "Cross Cut, Heavy Cleave, and other unfinished actions may temporarily fall back to Proof A art during playtest only."
+  ]
+}
