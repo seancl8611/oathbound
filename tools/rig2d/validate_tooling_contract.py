@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate that Blender export templates and the rig2d manifest describe one contract."""
+"""Validate full-production and Akio Proof A rig2d export contracts."""
 
 from __future__ import annotations
 
@@ -8,12 +8,25 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-MANIFEST_PATH = ROOT / "poc_manifest.json"
-TEMPLATES = {
-    "akio": ROOT / "blender" / "akio_export.template.json",
-    "corrupted_swordsman": ROOT / "blender" / "corrupted_swordsman_export.template.json",
-}
 EXPECTED_DIRECTIONS = ["e", "se", "s", "sw", "w", "nw", "n", "ne"]
+
+CONTRACTS = [
+    {
+        "label": "production",
+        "manifest": ROOT / "poc_manifest.json",
+        "templates": {
+            "akio": ROOT / "blender" / "akio_export.template.json",
+            "corrupted_swordsman": ROOT / "blender" / "corrupted_swordsman_export.template.json",
+        },
+    },
+    {
+        "label": "akio_proof_a",
+        "manifest": ROOT / "akio_proof_a_manifest.json",
+        "templates": {
+            "akio": ROOT / "blender" / "akio_proof_a_export.template.json",
+        },
+    },
+]
 
 
 def load_json(path: Path) -> dict:
@@ -28,59 +41,68 @@ def fail(message: str, errors: list[str]) -> None:
     errors.append(message)
 
 
-def main() -> int:
-    errors: list[str] = []
+def validate_contract(contract: dict, errors: list[str]) -> None:
+    label = str(contract["label"])
+    manifest_path = Path(contract["manifest"])
+    templates: dict[str, Path] = contract["templates"]
+
     try:
-        manifest = load_json(MANIFEST_PATH)
+        manifest = load_json(manifest_path)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
-        print(f"[Rig2DToolingContract] FAIL {exc}", file=sys.stderr)
-        return 1
+        fail(f"{label}: {exc}", errors)
+        return
 
     proof_scope = manifest.get("proof_scope", [])
-    if proof_scope != list(TEMPLATES):
-        fail(f"proof_scope must be {list(TEMPLATES)}, got {proof_scope}", errors)
+    expected_scope = list(templates)
+    if proof_scope != expected_scope:
+        fail(f"{label}: proof_scope must be {expected_scope}, got {proof_scope}", errors)
 
     manifest_directions = manifest.get("directions", [])
     direction_names = [entry.get("name") for entry in manifest_directions if isinstance(entry, dict)]
     if direction_names != EXPECTED_DIRECTIONS:
-        fail(f"manifest direction order mismatch: {direction_names}", errors)
+        fail(f"{label}: manifest direction order mismatch: {direction_names}", errors)
 
     frame_contract = manifest.get("frame_contract", {})
-    canvas = frame_contract.get("canvas_px") if isinstance(frame_contract, dict) else None
-    if canvas != [128, 128]:
-        fail(f"proof canvas must remain 128x128, got {canvas}", errors)
-    if frame_contract.get("default_fps") != 12:
-        fail(f"proof cadence must remain 12 fps, got {frame_contract.get('default_fps')}", errors)
-    if frame_contract.get("crop_each_frame") is not False:
-        fail("frame cropping must remain disabled", errors)
-    if frame_contract.get("root_motion") is not False:
-        fail("gameplay root motion must remain disabled", errors)
+    if not isinstance(frame_contract, dict):
+        fail(f"{label}: frame_contract must be an object", errors)
+        return
 
-    for actor, template_path in TEMPLATES.items():
+    canvas = frame_contract.get("canvas_px")
+    if canvas != [128, 128]:
+        fail(f"{label}: runtime proof canvas must remain 128x128, got {canvas}", errors)
+    if frame_contract.get("default_fps") != 12:
+        fail(f"{label}: runtime proof cadence must remain 12 fps, got {frame_contract.get('default_fps')}", errors)
+    if frame_contract.get("crop_each_frame") is not False:
+        fail(f"{label}: frame cropping must remain disabled", errors)
+    if frame_contract.get("root_motion") is not False:
+        fail(f"{label}: gameplay root motion must remain disabled", errors)
+
+    for actor, template_path in templates.items():
         try:
             template = load_json(template_path)
         except (OSError, ValueError, json.JSONDecodeError) as exc:
-            fail(str(exc), errors)
+            fail(f"{label}: {exc}", errors)
             continue
 
         if template.get("actor_id") != actor:
-            fail(f"{template_path.name}: actor_id must be {actor}", errors)
+            fail(f"{label}: {template_path.name}: actor_id must be {actor}", errors)
         if template.get("resolution_px") != canvas:
-            fail(f"{template_path.name}: resolution_px must match manifest canvas {canvas}", errors)
+            fail(f"{label}: {template_path.name}: resolution_px must match manifest canvas {canvas}", errors)
         if template.get("transparent") is not True:
-            fail(f"{template_path.name}: transparent output must be enabled", errors)
+            fail(f"{label}: {template_path.name}: transparent output must be enabled", errors)
         if int(template.get("frame_step", 0)) <= 0:
-            fail(f"{template_path.name}: frame_step must be positive", errors)
+            fail(f"{label}: {template_path.name}: frame_step must be positive", errors)
 
         template_directions = template.get("directions", [])
         template_direction_names = [entry.get("name") for entry in template_directions if isinstance(entry, dict)]
         if template_direction_names != direction_names:
-            fail(f"{template_path.name}: direction order differs from manifest", errors)
+            fail(f"{label}: {template_path.name}: direction order differs from manifest", errors)
         if len(template_directions) == len(manifest_directions):
             for render_direction, runtime_direction in zip(template_directions, manifest_directions):
                 if float(render_direction.get("yaw_deg", -999.0)) != float(runtime_direction.get("screen_angle_deg", -998.0)):
                     fail(
-                        f"{template_path.name}: yaw for {render_direction.get('name')} must match manifest screen angle",
+                        f"{label}: {template_path.name}: yaw for {render_direction.get('name')} "
+                        "must match manifest screen angle",
                         errors,
                     )
 
@@ -88,18 +110,27 @@ def main() -> int:
         template_bases = [entry.get("base") for entry in animation_entries if isinstance(entry, dict)]
         expected_bases = manifest.get(f"{actor}_animation_bases", [])
         if template_bases != expected_bases:
-            fail(f"{template_path.name}: animation bases differ from manifest", errors)
+            fail(f"{label}: {template_path.name}: animation bases differ from manifest", errors)
         for entry in animation_entries:
             if not isinstance(entry, dict) or not str(entry.get("action", "")).strip():
-                fail(f"{template_path.name}: every animation base needs a Blender action name", errors)
+                fail(f"{label}: {template_path.name}: every animation base needs a Blender action name", errors)
                 break
+
+
+def main() -> int:
+    errors: list[str] = []
+    for contract in CONTRACTS:
+        validate_contract(contract, errors)
 
     if errors:
         for error in errors:
             print(f"[Rig2DToolingContract] FAIL {error}", file=sys.stderr)
         return 1
 
-    print("[Rig2DToolingContract] PASS - manifest and Akio/Swordsman Blender templates agree on the 8-way 128x128 proof contract")
+    print(
+        "[Rig2DToolingContract] PASS - production and Akio Proof A manifests/templates "
+        "agree on the eight-direction 128x128 runtime-derivative contract"
+    )
     return 0
 
 
