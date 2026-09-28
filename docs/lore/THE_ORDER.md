@@ -37,8 +37,11 @@ The modern Order retains the essential duty:
 
 - maintain the barrier and Strand operation,
 - watch for the Blood Moon,
-- prepare one exceptional warrior for the crossing,
+- train and select exceptional warriors from its ordinary ranks,
+- prepare one warrior for the crossing,
 - and destroy the cursed force and whatever sustains it.
+
+Its warriors are not recruited through prophecy or known supernatural destiny. Akio joined as a skilled swordsman and Order member before anyone knew he carried dormant inherited Beast Blood.
 
 ## Established knowledge
 
@@ -49,6 +52,7 @@ The modern Order retains the essential duty:
 - It infers that the cursed forces may answer to a ruler or depend on a central source, but it does not know the Heart's identity, the plague-era history, the extraction process, or the Shogun's mainland ambitions.
 - It does not normally use Beast Blood to empower its warriors.
 - It does not know that Akio descends from an escaped island bloodline or carries dormant inherited Beast Blood.
+- It does not know that Akio's unexplained attraction to the island before the crossing is the dormant Blood reacting to its source.
 - Akio's Returning Blood is an exceptional event, not standard doctrine or an expected result.
 
 ## Mission
@@ -84,7 +88,7 @@ The Order is primarily a background faction. It provides:
 - the Boat and ritual preparation used for each crossing,
 - and limited world-building context about previous warriors and the island's cursed inhabitants.
 
-Some Strand personnel are members or agents of the Order, while other residents may simply support the operation. The Raven is the established Order courier. The Keeper predates the modern organization but remains central to its threshold duty.
+Some Strand personnel are members or agents of the Order, while other residents may simply support the operation. The Scribe is an Order archivist assigned to the Strand expedition and knew Akio through the Order before the campaign. The Raven is the established Order courier. The Keeper predates the modern organization but remains central to its threshold duty.
 
 The Order does not need a large political subplot or complete understanding of the island. Akio discovers the kingdom's history, his lineage, the Heart, and the real consequences of the mission after crossing.
 
