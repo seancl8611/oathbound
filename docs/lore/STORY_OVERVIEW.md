@@ -11,7 +11,7 @@ topics:
   - returning-blood
   - eclipse-shogun
   - the-heart
-  - royal-bloodline
+  - inherited-bloodline
   - heart-bindings
   - silent-protagonist
   - ending
