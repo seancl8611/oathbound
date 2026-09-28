@@ -45,6 +45,14 @@ Akio unknowingly descends from that escaped royal child.
 
 This does not create a second source of Beast Blood and does not make the curse conventionally hereditary. The original alteration still came from Beast Blood extracted from the Heart. Akio inherits the dormant condition first formed in the escaped child before birth.
 
+## Dormant pull toward the island
+
+Before Returning Blood awakens, Akio has no active Blood powers and does not know he carries an inherited condition. As the Blood Moon approaches and he prepares for the island crossing, the dormant Blood reacts subtly to proximity to its source.
+
+Akio experiences this only as an unexplained sense of recognition, unease, and personal importance around the island. The Heart does not speak to him, issue commands, reveal information, or override his will. The pull may influence why the mission feels unusually difficult for him to ignore, but Akio still chooses to accept it for his own reasons.
+
+This dormant response is not itself Returning Blood and cannot reconstruct him. The first death inside the barrier remains the event that fully awakens the inherited condition.
+
 ## First awakening
 
 Akio begins the game without active Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
@@ -60,6 +68,8 @@ His first attempt is a real run rather than a fixed prologue. He uses his normal
 When that attempt eventually ends in death, the dormant Blood's regenerative instinct activates for the first time.
 
 Because Akio's body developed naturally around the inherited condition, the Blood reconstructs his established human form instead of immediately replacing it with a fixed corrupted form. He reforms at the Strand carrying the first known Returning Blood.
+
+Akio did not seek this outcome and does not initially regard reconstruction or effective immortality as a gift. His first return is an unwanted supernatural consequence of the inherited Blood, not the fulfillment of a wish or Order rite.
 
 That first complete reconstruction establishes the Strand as Returning Blood's stable return point. Later deaths follow the preserved human pattern and destination created by that first successful return. The deeper supernatural transport remains deliberately mysterious; the Bloodwell, Keeper, Boat, and Order warding do not create or power the revival.
 
