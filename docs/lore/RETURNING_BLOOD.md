@@ -35,13 +35,11 @@ Returning Blood is the unprecedented form taken by the dormant Beast Blood inher
 
 ## Escaped bloodline
 
-During the early Beast Blood era, the Eclipse Shogun and the child's mother had both taken Beast Blood but had not yet undergone their later severe transformations.
+During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of Beast Blood rather than receiving a later extracted dose.
 
-The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of Beast Blood rather than receiving a later extracted dose.
+Before the barrier was completed, the child escaped the island. The bloodline survived outside containment for generations. Its descendants did not display ordinary Beast Blood powers, obvious mutation, or knowledge of their origin.
 
-Before the barrier was completed, the child was secretly taken from the island by the mother and a trusted retainer. The bloodline survived outside the containment for generations. Its descendants did not display ordinary Beast Blood powers, obvious mutation, or knowledge of their origin.
-
-Akio unknowingly descends from that escaped royal child.
+Akio unknowingly descends from that escaped bloodline. The ancestor's exact identity, family, and escape remain deliberately undefined at current scope.
 
 This does not create a second source of Beast Blood and does not make the curse conventionally hereditary. The original alteration still came from Beast Blood extracted from the Heart. Akio inherits the dormant condition first formed in the escaped child before birth.
 
@@ -176,11 +174,11 @@ The key permanent consequence is **containment of propagation**: Beast Blood can
 
 ## Relationship to the Shogun
 
-Neither Akio nor the Shogun begins the campaign knowing their blood relationship.
+The Shogun's fascination with Akio's repeated returns and unusual control eventually develops into recognition that Akio demonstrates something the Shogun cannot: Beast Blood power combined with the genuine ability to reject its continuation.
 
-The Shogun's fascination with Akio's repeated returns and unusual control eventually develops into recognition that Akio descends from the royal child who escaped before containment. This deepens his attempt to claim Akio as an heir and continuation of the kingdom.
+He attempts to recruit Akio as proof that Beast Blood can be mastered and that his vision for the kingdom was justified.
 
-Akio's refusal remains more important than the lineage itself. Because Akio is silent, that refusal is expressed entirely through his continued opposition rather than spoken debate or a dialogue choice.
+Akio's refusal is expressed entirely through continued opposition rather than spoken debate or a dialogue choice.
 
 `NARRATIVE_DELIVERY.md` owns the seven awakened Shogun progression states and reveal timing.
 
@@ -206,7 +204,7 @@ Akio's refusal remains more important than the lineage itself. Because Akio is s
 
 ## Deliberately unresolved
 
-- the exact identity and fate of the escaped child's mother and retainer,
+- the exact identity, family, and fate of the escaped ancestor,
 - how the bloodline remained hidden across generations,
 - the deeper metaphysics behind the first reconstruction and preserved return imprint,
 - whether any other dormant descendants still exist,
