@@ -78,15 +78,13 @@ The required historical order is:
 7. delayed corruption and dependence,
 8. continued use and fall.
 
-## The escaped royal bloodline
+## The escaped inherited bloodline
 
-During the early Beast Blood era, the Shogun and the child's mother had both taken Beast Blood but had not yet undergone severe transformation.
+During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the alteration rather than receiving a later extracted dose.
 
-Their child developed while the mother already carried Beast Blood and inherited a dormant expression of the alteration while remaining human.
+Before the barrier was completed, the child escaped the island. The bloodline survived outside containment for generations and eventually produced Akio.
 
-Before the barrier was completed, the mother and a trusted retainer secretly took the child from the island. The bloodline survived outside containment for generations and eventually produced Akio.
-
-The child's gender, name, protectors, escape route, and later life remain intentionally undefined.
+The child's identity, family, protectors, escape route, and later life remain intentionally undefined. Akio's inherited condition does not make him a secret royal heir and does not create a second independent source of Beast Blood.
 
 ## The Shogun's fall and present goal
 
@@ -174,16 +172,16 @@ His silence continues through the bloodline reveal, Shogun recruitment, Heart co
 
 ## Akio and the Shogun
 
-The Shogun senses Beast Blood within Akio but does not initially know its origin.
+The Shogun senses Beast Blood within Akio but does not initially understand why Akio can survive and control it differently from ordinary bearers.
 
 Their repeated relationship develops through:
 
 1. dismissal,
 2. fascination with Akio's returns and controlled Aspects,
-3. recognition of the escaped royal bloodline and recruitment,
+3. recognition that Akio demonstrates a form of genuine control and an attempt to recruit him as proof of the Shogun's worldview,
 4. fear and hatred after Akio silently rejects him through continued opposition and attacks the Heart.
 
-Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while retaining the ability to oppose its continuation.
+Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while retaining the ability to reject its continuation.
 
 `NARRATIVE_DELIVERY.md` owns the seven awakened Shogun dialogue states, the rare pre-awakening fallback, and the reveal cadence.
 
@@ -247,7 +245,7 @@ The following remain intentionally undefined or implementation-level:
 
 - the Heart's ultimate origin,
 - the ancient builders and full purpose of the complex,
-- the escaped child's identity and exact escape,
+- the escaped ancestor's identity and exact escape,
 - the deeper metaphysics of Strand reconstruction,
 - the Shogun's exact barrier-breach plan,
 - exact dialogue scripts and line counts,
