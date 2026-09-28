@@ -14,6 +14,16 @@ topics:
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 
+## 2026-09-28 — Akio pre-mission motivation, dormant island pull, and Scribe relationship locked
+
+Akio joined the Order as a skilled swordsman through ordinary service rather than prophecy, wealth, or known supernatural destiny. As the Blood Moon approaches, his dormant inherited Beast Blood reacts subtly to the island and Heart, producing unexplained recognition, unease, and personal pull. This influence is not speech, telepathy, compulsion, or active Returning Blood; Akio still chooses to accept the mission.
+
+Akio did not seek Returning Blood and does not initially welcome resurrection or effective immortality. After the first reconstruction he continues because the island threat remains unresolved and Returning Blood has made him the first Order warrior capable of making repeated attempts instead of leaving the next crossing to another one-way expedition.
+
+The Scribe is now Akio's established pre-campaign personal connection. They met through the Order and share a quiet romantic attachment before arriving at the Strand. The relationship remains restrained rather than becoming a major romance subplot. The Scribe is independently assigned as the Order's Strand archivist/discovery recorder, so her presence has an operational purpose separate from Akio. She represents a human connection and life Akio possessed before the island while also documenting the unprecedented changes Returning Blood causes in him.
+
+**Authority:** `docs/characters/AKIO.md`, `docs/characters/strand/SCRIBE.md`, `docs/lore/THE_ORDER.md`, `docs/lore/BEAST_BLOOD.md`, `docs/lore/RETURNING_BLOOD.md`, `docs/lore/STORY_OVERVIEW.md`, `docs/narrative/NARRATIVE_DELIVERY.md`.
+
 ## 2026-08-18 — Heart suppression ending, canonical postgame, and launch release package locked
 
 The first true-final Heart victory no longer destroys all Beast Blood or makes Akio mortal.
