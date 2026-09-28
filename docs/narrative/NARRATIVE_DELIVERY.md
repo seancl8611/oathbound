@@ -128,7 +128,7 @@ The player should leave understanding only:
 
 Do not explain his ancestry during this scene.
 
-The Strand Keeper is the strongest immediate witness because previous Order warriors did not return. The Scribe may begin documenting the event. Other NPCs can react according to their roles, but the scene should not become a six-person exposition circle.
+The Strand Keeper is the strongest immediate witness because previous Order warriors did not return. The Scribe may begin documenting the event, but her reaction also carries personal weight because she knew Akio before the expedition and already shares a quiet romantic attachment with him. Other NPCs can react according to their roles, but the scene should not become a six-person exposition circle.
 
 # Campaign story cadence
 
@@ -242,7 +242,7 @@ Owns:
 
 He carries the heaviest NPC story burden.
 
-## Scribe — evidence and understanding
+## Scribe — evidence, understanding, and Akio's pre-island connection
 
 Owns:
 
@@ -252,7 +252,11 @@ Owns:
 - bloodline corroboration,
 - Discovery Board updates,
 - distinctions between known fact, reconstructed history, and unresolved theory,
+- restrained personal concern for Akio as someone she knew and cared for before the campaign,
+- tension between documenting Returning Blood as the Order's breakthrough and recognizing its cost to Akio,
 - postgame confirmation that the Heart regenerates tissue but no longer produces new Beast Blood.
+
+Her relationship with Akio is romantic but deliberately understated. It should deepen the emotional meaning of repeated returns without becoming a separate romance questline or requiring dialogue choices from Akio.
 
 ## Raven — outside Order and duty
 
