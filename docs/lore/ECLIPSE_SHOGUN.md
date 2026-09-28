@@ -9,7 +9,7 @@ topics:
   - eclipse-shogun
   - beast-blood
   - plague
-  - royal-bloodline
+  - inherited-bloodline
   - final-boss
   - heart-bindings
   - narrative-delivery
