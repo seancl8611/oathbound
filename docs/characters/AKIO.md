@@ -145,11 +145,11 @@ Akio never verbally explains his feelings to her. Their relationship must work t
 
 ## Hidden lineage
 
-During the early Beast Blood era, the Eclipse Shogun and the child's other parent had both taken Beast Blood while still retaining mostly human bodies and minds.
+During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the altered Blood rather than receiving a later extracted dose.
 
-Their child developed with a dormant inherited expression of the altered Blood and was secretly taken from the island before the barrier was completed. That escaped bloodline survived outside the island for generations.
+That child escaped the island before the barrier was completed, and the dormant condition survived through descendants outside containment. Akio descends from this escaped bloodline. The ancestor's exact identity, family, and escape history remain deliberately undefined at current scope and do not make Akio a secret royal heir.
 
-Akio is a descendant of that child. He remains human and begins the game with no active Blood abilities or knowledge of the connection.
+Akio remains human and begins the game with no active Blood abilities or knowledge of the connection.
 
 Akio is the first known descendant to return inside the barrier during a Blood Moon and die after the dormant condition has been fully stirred. His first death awakens its regenerative power as Returning Blood.
 
@@ -161,11 +161,11 @@ Akio's repeated confrontations with the Eclipse Shogun form a central campaign r
 
 The Shogun senses Beast Blood within Akio and initially dismisses his restraint as weakness. As Akio repeatedly returns and demonstrates controlled Blood Aspects, the Shogun becomes fascinated and interprets him as a favored or more advanced bearer.
 
-Over time, the Shogun realizes that Akio descends from the royal child who escaped before containment. This makes his recruitment more personal: he attempts to claim Akio as a champion, general, heir, and continuation of the kingdom's bloodline.
+Over time, the Shogun recognizes that Akio is not merely surviving Beast Blood but exercising a form of genuine control the Shogun himself cannot achieve. He attempts to recruit Akio as proof that Beast Blood can be mastered and that the Shogun's vision was justified.
 
 Akio never verbally accepts, rejects, or debates the offer. His defining answer is silent refusal through continued opposition.
 
-As Akio survives, wins, and damages the Heart, the Shogun's fascination becomes envy, fear, and hatred. Akio represents a bearer who can use Beast Blood while remaining able to oppose the Heart's authority and prevent the curse from spreading further.
+As Akio survives, wins, and damages the Heart, the Shogun's fascination becomes envy, fear, and hatred. Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while remaining able to reject its continuation and oppose the Heart's authority.
 
 The broad relationship progression remains dismissal, fascination, recognition/recruitment, and fear/hatred. `NARRATIVE_DELIVERY.md` owns the campaign timing and presentation states.
 
@@ -318,4 +318,3 @@ Frame counts are working contractor estimates. Final timing is tuned in Godot an
 - Do not equate another character's retained intelligence or deliberate mutation use with Akio's sovereignty.
 - Do not remove Returning Blood or reconstruction from Akio after the canonical Heart victory.
 - Do not allow the Heart to create/spread new Beast Blood after Story Complete.
-- Do not require Akio to adopt a conventional royal-heir personality after the lineage reveal.
