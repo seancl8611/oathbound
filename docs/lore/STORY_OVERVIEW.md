@@ -11,7 +11,7 @@ topics:
   - returning-blood
   - eclipse-shogun
   - the-heart
-  - royal-bloodline
+  - inherited-bloodline
   - heart-bindings
   - silent-protagonist
   - ending
@@ -78,15 +78,13 @@ The required historical order is:
 7. delayed corruption and dependence,
 8. continued use and fall.
 
-## The escaped royal bloodline
+## The escaped inherited bloodline
 
-During the early Beast Blood era, the Shogun and the child's mother had both taken Beast Blood but had not yet undergone severe transformation.
+During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the alteration rather than receiving a later extracted dose.
 
-Their child developed while the mother already carried Beast Blood and inherited a dormant expression of the alteration while remaining human.
+Before the barrier was completed, the child escaped the island. The bloodline survived outside containment for generations and eventually produced Akio.
 
-Before the barrier was completed, the mother and a trusted retainer secretly took the child from the island. The bloodline survived outside containment for generations and eventually produced Akio.
-
-The child's gender, name, protectors, escape route, and later life remain intentionally undefined.
+The child's identity, family, protectors, escape route, and later life remain intentionally undefined. Akio's inherited condition does not make him a secret royal heir and does not create a second independent source of Beast Blood.
 
 ## The Shogun's fall and present goal
 
@@ -140,19 +138,29 @@ The Order knows that organized regenerative cursed forces remain on the island a
 
 Akio's mission is to destroy the island's hostile cursed forces and ruler and find and destroy whatever source sustains them. The mission is considered one-way.
 
+Akio joined the Order as a skilled swordsman before anyone knew his inherited condition existed. As the Blood Moon approaches, dormant Beast Blood produces a subtle unexplained pull toward the island: recognition, unease, and a sense that the mission matters personally. The Heart does not speak to or control him, and the pull does not replace his own decision to accept the mission.
+
 Akio begins without active Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
 
 His first attempt is not a scripted tutorial route. He enters the normal Hushiro → Yomori → Kagutsuchi route using his base sword kit, the default Beast-Bane Whistle, ordinary Technique rewards, and normal room/routing interactions. A new player is expected to die early because they lack knowledge and progression, but the game does not force the death at a particular room.
 
 He is the first known descendant of the escaped bloodline to return inside the barrier during a Blood Moon and die after the dormant inherited Blood has been fully stirred.
 
-His first death—wherever it actually occurs—awakens Returning Blood. Because his body developed naturally around the dormant condition, it reconstructs his established human form at the Strand rather than fixing him into an ordinary corrupted transformation.
+His first death—wherever it actually occurs—awakens Returning Blood. Because his body developed naturally around the dormant condition, it reconstructs his established human form at the Strand rather than fixing him into an ordinary corrupted transformation. Akio did not seek this resurrection and does not initially welcome the immortality implied by it.
 
 That first reconstruction establishes the human pattern and Strand destination used by later returns. The deeper metaphysics remain deliberately mysterious.
 
 A mastery-level player may theoretically defeat the Shogun and reach the Heart before dying. In that exceptional case, the Heart destroys Akio before any Binding ritual can occur, awakening Returning Blood without reducing the six remaining player Bindings.
 
 Akio's lineage explains why he returns. His discipline and resolve explain why he can later control and evolve the Blood without surrendering himself to it.
+
+## Akio and the Scribe
+
+Akio and the Scribe knew each other through the Order before the Blood Moon expedition and already share a quiet romantic attachment when the campaign begins. Their relationship is deliberately understated rather than a major romance subplot.
+
+The Scribe is independently assigned to the Strand as the Order's archivist and discovery recorder. She therefore has a real operational reason to be present and is not simply accompanying Akio as a partner.
+
+She knows Akio as a person from before the island and provides one of the clearest emotional contrasts to the mission. After his first return, she is both professionally responsible for documenting Returning Blood and personally disturbed by what repeated reconstruction may be doing to him.
 
 ## Akio as silent protagonist
 
@@ -164,16 +172,16 @@ His silence continues through the bloodline reveal, Shogun recruitment, Heart co
 
 ## Akio and the Shogun
 
-The Shogun senses Beast Blood within Akio but does not initially know its origin.
+The Shogun senses Beast Blood within Akio but does not initially understand why Akio can survive and control it differently from ordinary bearers.
 
 Their repeated relationship develops through:
 
 1. dismissal,
 2. fascination with Akio's returns and controlled Aspects,
-3. recognition of the escaped royal bloodline and recruitment,
+3. recognition that Akio demonstrates a form of genuine control and an attempt to recruit him as proof of the Shogun's worldview,
 4. fear and hatred after Akio silently rejects him through continued opposition and attacks the Heart.
 
-Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while retaining the ability to oppose its continuation.
+Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while retaining the ability to reject its continuation.
 
 `NARRATIVE_DELIVERY.md` owns the seven awakened Shogun dialogue states, the rare pre-awakening fallback, and the reveal cadence.
 
@@ -237,7 +245,7 @@ The following remain intentionally undefined or implementation-level:
 
 - the Heart's ultimate origin,
 - the ancient builders and full purpose of the complex,
-- the escaped child's identity and exact escape,
+- the escaped ancestor's identity and exact escape,
 - the deeper metaphysics of Strand reconstruction,
 - the Shogun's exact barrier-breach plan,
 - exact dialogue scripts and line counts,

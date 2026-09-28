@@ -107,14 +107,21 @@ His discipline and resolve are communicated through:
 - silence while other characters project meaning onto him,
 - deliberate combat preparation,
 - refusal expressed through continued action,
-- changing relationships with Strand NPCs and the Order,
+- a quiet pre-existing bond with the Scribe and changing relationships with the Strand and Order,
+- discomfort with Returning Blood rather than desire for immortality or cursed power,
 - physical signs of Returning Blood,
-- the player's repeated choice to continue the mission,
+- the player's repeated choice to continue the mission despite having a life and person worth returning to,
 - and the final ability to use Returning Blood against its own source strongly enough to permanently stop that source from creating or spreading new Beast Blood.
 
 He does not need a large tragic biography, voiced philosophy, or branching morality choices.
 
 ## Original mission
+
+Akio joined the Order before the events of the game as a skilled swordsman drawn to its disciplined life of service. He was not recruited because of a prophecy, known bloodline, promised wealth, or expected supernatural role. The Order recognizes his ability, trains him as one of its warriors, and eventually selects him for the Blood Moon crossing.
+
+As the Blood Moon approaches, Akio develops a subtle and unexplained pull toward the island: a sense of recognition, unease, and personal importance he cannot account for. This is the dormant inherited Beast Blood within him reacting to the island and its source. It does not speak to him, control him, reveal the Heart, or compel his actions. Akio does not know that the feeling is supernatural.
+
+That pull reinforces rather than replaces his ordinary motives. Akio accepts the mission because he believes the contained threat must be ended, because he is capable of attempting it, and because something about the island feels personally impossible to ignore.
 
 The Order sends Akio from the Strand on what it considers a one-way extermination mission. He is commanded to cross the barrier, destroy the island's hostile Beast Blood forces and any ruler directing them, and find and destroy the source that allows the curse and its apparently deathless bearers to persist.
 
@@ -122,15 +129,27 @@ Akio begins without knowledge of the Heart, the plague-era history, the extracti
 
 The Order also does not know that Akio carries dormant inherited Beast Blood. It supplies his training, equipment, warding, and initial command rather than intentionally creating Returning Blood.
 
-Akio's first death unexpectedly turns the one-way mission into a repeated campaign in which he and the player discover the truth.
+Akio's first death unexpectedly turns the one-way mission into a repeated campaign in which he and the player discover the truth. He did not seek Returning Blood, does not welcome immortality, and is disturbed by being reconstructed after death. He nevertheless continues because the mission remains unresolved and Returning Blood has made him the first Order warrior capable of making repeated attempts instead of leaving the next crossing to another one-way expedition.
+
+## Relationship to the Scribe
+
+Akio and the Scribe knew each other before the Blood Moon expedition because both served within the Order. Their relationship developed there rather than beginning at the Strand.
+
+They share a quiet pre-existing romantic attachment, but Oathbound does not treat their relationship as a large romance subplot. Their affection is restrained, familiar, and expressed through history, concern, trust, and small changes in behavior rather than declarations, melodrama, or dialogue choices.
+
+The Scribe has an independent reason to be at the Strand: she is the Order's assigned archivist and discovery recorder for the expedition. She is not present merely because of Akio. Their shared service is what places both of them at the Strand as the campaign begins.
+
+Narratively, the Scribe represents the ordinary life and human connection Akio had before the island. After his first reconstruction, she is both one of the people trying to understand Returning Blood and someone personally disturbed by what it is doing to him. She may question the cost of continued crossings without replacing Akio's agency or becoming the reason the mission exists.
+
+Akio never verbally explains his feelings to her. Their relationship must work through established familiarity, physical reaction, repeated Strand encounters, and his continued choices.
 
 ## Hidden lineage
 
-During the early Beast Blood era, the Eclipse Shogun and the child's other parent had both taken Beast Blood while still retaining mostly human bodies and minds.
+During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the altered Blood rather than receiving a later extracted dose.
 
-Their child developed with a dormant inherited expression of the altered Blood and was secretly taken from the island before the barrier was completed. That escaped bloodline survived outside the island for generations.
+That child escaped the island before the barrier was completed, and the dormant condition survived through descendants outside containment. Akio descends from this escaped bloodline. The ancestor's exact identity, family, and escape history remain deliberately undefined at current scope and do not make Akio a secret royal heir.
 
-Akio is a descendant of that child. He remains human and begins the game with no active Blood abilities or knowledge of the connection.
+Akio remains human and begins the game with no active Blood abilities or knowledge of the connection.
 
 Akio is the first known descendant to return inside the barrier during a Blood Moon and die after the dormant condition has been fully stirred. His first death awakens its regenerative power as Returning Blood.
 
@@ -142,11 +161,11 @@ Akio's repeated confrontations with the Eclipse Shogun form a central campaign r
 
 The Shogun senses Beast Blood within Akio and initially dismisses his restraint as weakness. As Akio repeatedly returns and demonstrates controlled Blood Aspects, the Shogun becomes fascinated and interprets him as a favored or more advanced bearer.
 
-Over time, the Shogun realizes that Akio descends from the royal child who escaped before containment. This makes his recruitment more personal: he attempts to claim Akio as a champion, general, heir, and continuation of the kingdom's bloodline.
+Over time, the Shogun recognizes that Akio is not merely surviving Beast Blood but exercising a form of genuine control the Shogun himself cannot achieve. He attempts to recruit Akio as proof that Beast Blood can be mastered and that the Shogun's vision was justified.
 
 Akio never verbally accepts, rejects, or debates the offer. His defining answer is silent refusal through continued opposition.
 
-As Akio survives, wins, and damages the Heart, the Shogun's fascination becomes envy, fear, and hatred. Akio represents a bearer who can use Beast Blood while remaining able to oppose the Heart's authority and prevent the curse from spreading further.
+As Akio survives, wins, and damages the Heart, the Shogun's fascination becomes envy, fear, and hatred. Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while remaining able to reject its continuation and oppose the Heart's authority.
 
 The broad relationship progression remains dismissal, fascination, recognition/recruitment, and fear/hatred. `NARRATIVE_DELIVERY.md` owns the campaign timing and presentation states.
 
@@ -299,4 +318,3 @@ Frame counts are working contractor estimates. Final timing is tuned in Godot an
 - Do not equate another character's retained intelligence or deliberate mutation use with Akio's sovereignty.
 - Do not remove Returning Blood or reconstruction from Akio after the canonical Heart victory.
 - Do not allow the Heart to create/spread new Beast Blood after Story Complete.
-- Do not require Akio to adopt a conventional royal-heir personality after the lineage reveal.

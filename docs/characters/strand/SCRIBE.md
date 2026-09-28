@@ -22,7 +22,21 @@ related:
 
 The Scribe is the Strand's archivist, recorder, and keeper of practical knowledge. She maintains the Discovery Board and catalogs enemy weaknesses, observed Technique patterns, prosthetic discoveries, Relic notes, and fragments of island history. She supports codex progression, discovery tracking, and the gradual conversion of recovered knowledge into useful understanding.
 
+She is an Order member assigned to the Strand for the Blood Moon expedition rather than someone who followed Akio there solely because of their relationship. She and Akio knew each other through the Order before the campaign and already share a quiet romantic attachment when the game begins.
+
+Their relationship remains understated. The Scribe is not a conventional love-interest questline and Akio has no romance choices or dialogue responses. Her emotional role is to know Akio as a person from before the island while her professional role requires her to document the unprecedented Returning Blood changes happening to him.
+
 Her records may explain known Technique combat verbs, affinities, and refinements without preserving the temporary active or reserve build from a completed run.
+
+## Relationship to Akio
+
+Akio and the Scribe met while serving within the Order. Their bond developed before either was stationed at the Strand, giving Akio an established human connection and implied life outside the island mission.
+
+The relationship is romantic but restrained: familiar concern, trust, shared history, and quiet intimacy rather than a large romance plot. Its exact earlier milestones, labels, and duration do not need to be exhaustively defined.
+
+Before Akio's first crossing, the Scribe understands that the mission is expected to be one-way. After Returning Blood reconstructs him, relief is mixed with fear and professional uncertainty. She does not treat his resurrection as a gift simply because it keeps him alive.
+
+Across the campaign she can question what repeated crossings and Blood use are costing him, while still helping interpret discoveries and supporting the mission. She represents a life and relationship Akio could value outside the island; she does not command him to continue or stop.
 
 ## One-sentence fantasy
 

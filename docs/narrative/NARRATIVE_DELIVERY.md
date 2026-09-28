@@ -72,7 +72,7 @@ The player must directly understand:
 - the Heart exists and originally produces Beast Blood,
 - six ancient Heart Bindings remain,
 - Returning Blood can break those Bindings,
-- Akio descends from the escaped royal bloodline,
+- Akio carries dormant inherited Beast Blood from an escaped island bloodline,
 - the Shogun wants to preserve and spread Beast Blood,
 - destroying all six Bindings exposes the true Heart route,
 - the final Heart victory permanently ends the Heart's ability to create or spread **new Beast Blood**,
@@ -106,7 +106,7 @@ Narratively:
 
 Any initial Order/Keeper/Raven line should be brief and non-blocking. The opening should communicate only enough to establish that Akio is an Order swordsman entering a hostile contained island on a one-way mission.
 
-The game does not front-load the Heart, plague, extraction process, royal bloodline, or Shogun history.
+The game does not front-load the Heart, plague, extraction process, Akio's inherited bloodline, or Shogun history.
 
 # First Returning Blood reconstruction
 
@@ -128,7 +128,7 @@ The player should leave understanding only:
 
 Do not explain his ancestry during this scene.
 
-The Strand Keeper is the strongest immediate witness because previous Order warriors did not return. The Scribe may begin documenting the event. Other NPCs can react according to their roles, but the scene should not become a six-person exposition circle.
+The Strand Keeper is the strongest immediate witness because previous Order warriors did not return. The Scribe may begin documenting the event, but her reaction also carries personal weight because she knew Akio before the expedition and already shares a quiet romantic attachment with him. Other NPCs can react according to their roles, but the scene should not become a six-person exposition circle.
 
 # Campaign story cadence
 
@@ -138,7 +138,7 @@ The campaign uses the following major narrative states:
 2. **First return / early campaign** — Akio's return is unexplained; control and island history begin developing.
 3. **Binding 1** — the Heart and Binding-rejection campaign are established.
 4. **Binding 2** — the Shogun becomes openly fascinated with Akio's returns and controlled Blood.
-5. **Binding 3** — the Shogun recognizes the escaped royal bloodline and attempts recruitment.
+5. **Binding 3** — the Shogun recognizes Akio's genuine Beast Blood control and attempts recruitment.
 6. **Bindings 4–6** — recruitment collapses into possession, fear, and hatred as Akio continues damaging the Heart.
 7. **Seventh story run** — final Shogun confrontation followed directly by the true Heart.
 8. **Canonical ending** — the Heart is permanently crippled as a source of new Beast Blood; existing bearers survive; credits follow.
@@ -162,13 +162,13 @@ Both Akio and the Shogun have returned. The Shogun is now interested in Akio's u
 
 ## Shogun state 3 — Recognition and recruitment
 
-This is the main bloodline reveal.
+This is the main recruitment turn.
 
-The Shogun recognizes Akio as a descendant of the royal child who escaped before containment and attempts to claim him as heir, champion, general, or proof of the kingdom's future.
+The Shogun recognizes that Akio is doing something no ordinary Beast Blood bearer can do: using its power while retaining the genuine ability to resist its continuation and oppose the Heart. He interprets Akio as proof that Beast Blood can be mastered and attempts to recruit him as champion, ally, or validation of the kingdom's future.
 
 Akio does not answer verbally. His refusal is expressed through silence and continued opposition.
 
-After this confrontation/Binding return, Keeper/Scribe evidence should corroborate enough of the claim that the player understands it is real, while the escaped child's exact identity, mother, retainer, route, and later life remain deliberately incomplete.
+Akio's inherited escaped-island bloodline remains a separate mystery. Keeper/Scribe evidence may later clarify that his dormant condition came through an ancestor who escaped before containment, without making the Shogun his ancestor or turning the recruitment scene into a royal-heir reveal.
 
 ## Shogun state 4 — Possession becomes anger
 
@@ -237,12 +237,12 @@ Owns:
 - containment and crossing context,
 - guilt over the kingdom's fall,
 - interpretation of Akio's repeated returns,
-- eventual corroboration of the royal-lineage reveal,
+- eventual corroboration of Akio's inherited escaped-island bloodline,
 - postgame recognition that the Heart still pulses but can no longer spread its curse.
 
 He carries the heaviest NPC story burden.
 
-## Scribe — evidence and understanding
+## Scribe — evidence, understanding, and Akio's pre-island connection
 
 Owns:
 
@@ -252,7 +252,11 @@ Owns:
 - bloodline corroboration,
 - Discovery Board updates,
 - distinctions between known fact, reconstructed history, and unresolved theory,
+- restrained personal concern for Akio as someone she knew and cared for before the campaign,
+- tension between documenting Returning Blood as the Order's breakthrough and recognizing its cost to Akio,
 - postgame confirmation that the Heart regenerates tissue but no longer produces new Beast Blood.
+
+Her relationship with Akio is romantic but deliberately understated. It should deepen the emotional meaning of repeated returns without becoming a separate romance questline or requiring dialogue choices from Akio.
 
 ## Raven — outside Order and duty
 
@@ -395,7 +399,7 @@ Working target: approximately **5 major sequences**:
 
 1. first Returning Blood reconstruction,
 2. first Heart discovery / Binding 1 establishment,
-3. bloodline recognition / recruitment emphasis,
+3. Shogun recognition / recruitment emphasis,
 4. Binding 6 / unbound-Heart final-run setup,
 5. Heart crippling / canonical ending.
 

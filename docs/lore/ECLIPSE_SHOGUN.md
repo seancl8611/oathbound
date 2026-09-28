@@ -9,7 +9,7 @@ topics:
   - eclipse-shogun
   - beast-blood
   - plague
-  - royal-bloodline
+  - inherited-bloodline
   - final-boss
   - heart-bindings
   - narrative-delivery
@@ -36,15 +36,13 @@ When a deadly plague pushed the kingdom toward extinction, he authorized researc
 
 Because corruption appeared gradually, Beast Blood spread through the population before its cost was understood. The Shogun remains responsible for continuing, defending, and expanding its use after transformation and loss of independence became clear.
 
-## The escaped royal bloodline
+## The escaped inherited bloodline
 
-During the early Beast Blood era, the Shogun and the child's mother had both taken Beast Blood but had not yet undergone severe transformation.
+During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the alteration.
 
-Their child developed while the mother already carried Beast Blood and inherited a dormant expression of the alteration. Before the barrier was completed, the mother and a trusted retainer secretly took the child from the island.
+The child escaped before the barrier was completed, and the bloodline survived outside containment for generations. Akio eventually descends from that line.
 
-That bloodline survived outside containment and eventually produced Akio.
-
-The child's gender, name, protectors, escape details, and later life remain intentionally undefined.
+The ancestor's exact identity, family, protectors, escape details, and later life remain intentionally undefined. The Shogun is not established as Akio's ancestor.
 
 ## Responsibility and false mastery
 
@@ -89,16 +87,14 @@ The canonical Heart victory instead prevents the Heart from producing or releasi
 
 ## Relationship to Akio
 
-Neither Akio nor the Shogun initially understands their blood relationship.
-
 Their relationship develops through four broad emotional stages:
 
 1. **Dismissal** — the Shogun sees Akio as another restrained Order warrior.
 2. **Fascination** — Akio's returns and controlled Aspects reveal an unprecedented bearer.
-3. **Recognition and recruitment** — the Shogun recognizes the escaped royal bloodline and attempts to claim Akio as an heir, champion, or proof of his future kingdom.
-4. **Fear and hatred** — Akio silently rejects that inheritance, repeatedly defeats him, and attacks the Heart.
+3. **Recognition and recruitment** — the Shogun recognizes that Akio possesses genuine control over Beast Blood and attempts to recruit him as proof that the Shogun's vision was justified.
+4. **Fear and hatred** — Akio silently rejects him, repeatedly defeats him, and attacks the Heart.
 
-The Shogun's offer is sincere within his corrupted worldview but possessive rather than loving or equal. Akio's refusal proves that bloodline does not create ownership or allegiance.
+The Shogun's offer is sincere within his corrupted worldview but possessive rather than equal. Akio appears to embody the successful Beast Blood bearer the Shogun has always claimed should be possible. Akio's continued opposition instead exposes the central flaw in the Shogun's supposed mastery: the Shogun cannot reject the Blood, the Heart, or the continuation of his kingdom.
 
 Akio is a silent protagonist and never answers the Shogun verbally. The Shogun therefore carries the spoken side of their relationship while Akio's refusal is expressed through continued action.
 
@@ -108,7 +104,7 @@ Akio is a silent protagonist and never answers the Shogun verbally. The Shogun t
 
 1. **Shogun 1 — Dismissal**
 2. **Shogun 2 — Fascination with Akio's return/control**
-3. **Shogun 3 — Bloodline recognition and recruitment**
+3. **Shogun 3 — Recognition of Akio's genuine control and recruitment**
 4. **Shogun 4 — Possessive anger after refusal**
 5. **Shogun 5 — Fear beneath contempt as Bindings fall**
 6. **Shogun 6 — Hatred/desperation before the final Binding**
@@ -116,7 +112,7 @@ Akio is a silent protagonist and never answers the Shogun verbally. The Shogun t
 
 A rare additional pre-awakening dialogue state may occur if an exceptionally skilled player reaches the Shogun on Akio's first attempt before any death. It does not advance or replace the seven-state awakened campaign sequence.
 
-The bloodline reveal occurs at the third awakened Shogun confrontation. Keeper/Scribe evidence may corroborate the claim afterward without exhaustively defining the escaped child's life.
+The third awakened Shogun confrontation is the main recruitment turn: he identifies Akio's genuine control as the proof he has been seeking and tries to claim that success for his worldview. Separate later evidence may clarify Akio's inherited escaped-island bloodline without making the Shogun his ancestor.
 
 ## Character and encounter identity
 
@@ -156,12 +152,12 @@ Locked:
 - ruler before the Order,
 - plague-era responsibility,
 - forced-salvation goal,
-- escaped royal bloodline,
+- escaped inherited island bloodline,
 - false mastery,
 - repeated relationship with Akio,
 - silent Akio / spoken Shogun relationship,
 - seven awakened confrontation states plus rare pre-awakening fallback,
-- bloodline reveal at the third awakened Shogun encounter,
+- recognition/recruitment turn at the third awakened Shogun encounter,
 - regal and controlled character direction,
 - deliberate intelligent inhuman escalation,
 - reconstruction throughout the Binding campaign,
