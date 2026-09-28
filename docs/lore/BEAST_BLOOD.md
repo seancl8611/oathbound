@@ -115,9 +115,9 @@ After all six remaining Bindings are destroyed, the exposed Heart can tear free 
 
 Akio does not receive a new dose from the Heart during the game opening.
 
-During the early Beast Blood era, the Eclipse Shogun and the child's mother had both taken Beast Blood while still capable of producing a human child. The child was conceived after both parents were altered and developed while the mother already carried Beast Blood. The child carried a dormant inherited expression of the Blood.
+During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the Blood rather than receiving a later extracted dose.
 
-That child escaped the island before the barrier was completed, and the dormant condition continued through the surviving bloodline outside the containment.
+That child escaped the island before the barrier was completed, and the dormant condition continued through the surviving bloodline outside containment. The ancestor's exact identity and family remain deliberately undefined.
 
 This is a narrow historical exception, not a new general transmission route. It does not mean every child of a bearer inherits Beast Blood, that Beast Blood spreads through ordinary reproduction, or that descendants create new Blood independent of the Heart. The original supernatural alteration still came from Blood extracted from the Heart.
 
