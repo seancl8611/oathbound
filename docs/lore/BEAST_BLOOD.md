@@ -36,6 +36,7 @@ Beast Blood is a rare supernatural power drawn from the Heart, an ancient living
 - A bearer who remains intelligent or composed may still be enslaved to desires reshaped by the Blood.
 - Beast Blood becomes naturally more powerful during the Blood Moon.
 - Once active in a bearer, Beast Blood does not require repeated doses or continued transfer from the Heart.
+- Dormant inherited Beast Blood may react subtly to the Heart's active Blood Moon cycle and proximity to its source without becoming active, communicating information, or controlling the bearer.
 - Existing Beast Blood remains active in its bearer even after the Heart is permanently crippled at the end of the campaign.
 - The canonical Heart victory prevents the Heart from producing, releasing, or propagating **new Beast Blood**. It does not erase Beast Blood already present in Akio, the Shogun, or other existing bearers.
 
@@ -122,7 +123,9 @@ This is a narrow historical exception, not a new general transmission route. It 
 
 Akio remains human. His body developed naturally around the inherited condition rather than receiving active Beast Blood after reaching adulthood.
 
-When Akio returns inside the barrier during the Blood Moon, the dormant Blood becomes fully active. His first death triggers its regenerative power and creates the first known Returning Blood manifestation.
+As Akio approaches the island during the Blood Moon, the dormant Blood can register its source only as a vague pull, recognition, or unease that Akio does not understand. This is not telepathy or compulsion and does not grant active Blood abilities.
+
+When Akio returns inside the barrier during the Blood Moon, the dormant Blood becomes fully stirred. His first death triggers its regenerative power and creates the first known Returning Blood manifestation.
 
 ## Retained humanity is not control
 
