@@ -106,7 +106,7 @@ Narratively:
 
 Any initial Order/Keeper/Raven line should be brief and non-blocking. The opening should communicate only enough to establish that Akio is an Order swordsman entering a hostile contained island on a one-way mission.
 
-The game does not front-load the Heart, plague, extraction process, royal bloodline, or Shogun history.
+The game does not front-load the Heart, plague, extraction process, Akio's inherited bloodline, or Shogun history.
 
 # First Returning Blood reconstruction
 
@@ -237,7 +237,7 @@ Owns:
 - containment and crossing context,
 - guilt over the kingdom's fall,
 - interpretation of Akio's repeated returns,
-- eventual corroboration of the royal-lineage reveal,
+- eventual corroboration of Akio's inherited escaped-island bloodline,
 - postgame recognition that the Heart still pulses but can no longer spread its curse.
 
 He carries the heaviest NPC story burden.
