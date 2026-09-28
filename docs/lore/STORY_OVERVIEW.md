@@ -140,19 +140,29 @@ The Order knows that organized regenerative cursed forces remain on the island a
 
 Akio's mission is to destroy the island's hostile cursed forces and ruler and find and destroy whatever source sustains them. The mission is considered one-way.
 
+Akio joined the Order as a skilled swordsman before anyone knew his inherited condition existed. As the Blood Moon approaches, dormant Beast Blood produces a subtle unexplained pull toward the island: recognition, unease, and a sense that the mission matters personally. The Heart does not speak to or control him, and the pull does not replace his own decision to accept the mission.
+
 Akio begins without active Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
 
 His first attempt is not a scripted tutorial route. He enters the normal Hushiro → Yomori → Kagutsuchi route using his base sword kit, the default Beast-Bane Whistle, ordinary Technique rewards, and normal room/routing interactions. A new player is expected to die early because they lack knowledge and progression, but the game does not force the death at a particular room.
 
 He is the first known descendant of the escaped bloodline to return inside the barrier during a Blood Moon and die after the dormant inherited Blood has been fully stirred.
 
-His first death—wherever it actually occurs—awakens Returning Blood. Because his body developed naturally around the dormant condition, it reconstructs his established human form at the Strand rather than fixing him into an ordinary corrupted transformation.
+His first death—wherever it actually occurs—awakens Returning Blood. Because his body developed naturally around the dormant condition, it reconstructs his established human form at the Strand rather than fixing him into an ordinary corrupted transformation. Akio did not seek this resurrection and does not initially welcome the immortality implied by it.
 
 That first reconstruction establishes the human pattern and Strand destination used by later returns. The deeper metaphysics remain deliberately mysterious.
 
 A mastery-level player may theoretically defeat the Shogun and reach the Heart before dying. In that exceptional case, the Heart destroys Akio before any Binding ritual can occur, awakening Returning Blood without reducing the six remaining player Bindings.
 
 Akio's lineage explains why he returns. His discipline and resolve explain why he can later control and evolve the Blood without surrendering himself to it.
+
+## Akio and the Scribe
+
+Akio and the Scribe knew each other through the Order before the Blood Moon expedition and already share a quiet romantic attachment when the campaign begins. Their relationship is deliberately understated rather than a major romance subplot.
+
+The Scribe is independently assigned to the Strand as the Order's archivist and discovery recorder. She therefore has a real operational reason to be present and is not simply accompanying Akio as a partner.
+
+She knows Akio as a person from before the island and provides one of the clearest emotional contrasts to the mission. After his first return, she is both professionally responsible for documenting Returning Blood and personally disturbed by what repeated reconstruction may be doing to him.
 
 ## Akio as silent protagonist
 
