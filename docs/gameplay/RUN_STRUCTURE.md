@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-25
+last_reviewed: 2026-10-03
 topics:
   - runs
   - first-attempt
@@ -55,32 +55,26 @@ The campaign takes place beneath the Blood Moon. The game does not define how mu
 
 ## Introductory first attempt
 
-The first attempt is **not a scripted prologue route**. `FIRST_ATTEMPT.md` owns its pre-awakening exceptions.
+The first attempt is an **authored opening expedition already in progress**, not the normal repeatable 33-chamber roguelite route. `FIRST_ATTEMPT.md` owns its exact pre-awakening gameplay contract.
 
-The player begins directly in the normal Hushiro route as an ordinary Order swordsman carrying dormant inherited Beast Blood but no active Returning Blood powers.
+Before the player takes control, Akio has already reached the Strand, met its recurring NPCs, crossed onto the island, and progressed deep into the expedition as an ordinary Order swordsman with no Beast Blood.
 
-During this attempt:
+The playable opening teaches essential combat through real gameplay and advances to the Eclipse Shogun. The first Shogun encounter is mechanically playable and should respect player performance, but its narrative outcome is fixed:
 
-- the player uses the base katana kit,
-- **Beast-Bane Whistle** is the default equipped Prosthetic,
-- normal Technique rewards are available and modify the base-katana action tags,
-- normal Combat, Rest, Shop, Treasure, miniboss, Gold, Mist/Scroll, reward, and route-choice flow remains available where meaningful,
-- Shrines remain valid route rooms and use their no-Aspect/below-full support behavior,
-- Blood Aspects are unavailable,
-- Corruption, Resist/Embrace Tier progression, Blood, and Blood Arts are unavailable,
-- Relic loadout and permanent upgrade systems are not yet active.
+1. Akio is defeated and mortally wounded.
+2. The Shogun becomes interested in the human who reached him without Beast Blood.
+3. The Shogun calls a large, source-near concentration of ordinary Beast Blood from the island/Heart and forces it into Akio.
+4. Akio dies.
+5. Returning Blood forms and reconstructs Akio at the Strand.
+6. The normal repeated-run preparation/progression loop begins.
 
-The game does **not** force Akio's first death at a predetermined room, enemy, miniboss, or boss. A new player is expected to die relatively early because they lack knowledge, permanent progression, Blood Aspects, Relics, and a developed toolkit, but the route itself remains honest.
+The Shogun does not deliberately stabilize or weaken Akio's transformation. He is testing what the Blood will make of him, not intentionally creating Returning Blood.
 
-A highly skilled player may progress through all three regions, defeat Keeper, Twin Maws, and the Eclipse Shogun, and reach the Heart before dying. In that exceptional case, no Binding can yet be broken because the rejection ritual requires awakened Returning Blood. Heart contact destroys Akio's current body, triggers his first Returning Blood reconstruction, and begins the normal six-Binding campaign without advancing Binding progress.
-
-Whenever the first death occurs, dormant inherited Beast Blood awakens and reconstructs Akio at the Strand as Returning Blood. The return is brief and striking rather than a long explanatory cutscene. Akio remains silent; the player understands that he died and returned, but not yet his ancestry or the full Blood system.
-
-The normal repeated-run preparation/progression loop begins after this return. Persistent rewards already earned on the first attempt remain saved under their normal rules.
+The exact playable opening length, encounter count, and route slice are production/playtest decisions. It does **not** need to reproduce the entire normal Hushiro → Yomori → Kagutsuchi route before the scripted Shogun confrontation.
 
 ## Regional flow
 
-The intended full route is:
+After Returning Blood awakens, the intended full repeatable route is:
 
 1. Hushiro Gate Village
 2. Yomori Grove
@@ -88,8 +82,6 @@ The intended full route is:
 4. Eclipse Shogun
 5. temporary access to the Heart chamber
 6. one Binding completion during the first six successful post-awakening clears, the canonical true-final Heart encounter after all six Bindings are destroyed, or an approved postgame endpoint after Story Complete
-
-The introductory first attempt uses this **same complete regional flow**. It is not restricted to a short Hushiro-only path.
 
 All three regions have approved **prototype chamber structures**. Their chamber counts, structural bands, and the prototype branching-frequency model below are planning targets for implementation and playtesting rather than immutable final balance values. Exact standard-combat encounter scripts, encounter-pool counts, authored room-variant counts, and final tuned percentages remain later content/playable-validation work.
 
@@ -164,7 +156,6 @@ Hushiro uses **12 counted chambers**, including Keeper of the Gate at Chamber 12
 - Chambers 2–3 introduce the normal previewed route-choice structure.
 - Chamber 1's authored encounter should function as an accessible opening combat test; further encounter-specific early gating is assigned only during encounter authoring when needed.
 - Hushiro's build purpose is to establish the first **Action Technique** modifications and the first recognizable family/build direction, not to finish the build.
-- On the first attempt, this same guaranteed Technique reward modifies the base katana rather than a Blood Aspect weapon kit.
 
 ### Chambers 4–8 — Main stretch
 
@@ -214,7 +205,7 @@ Yomori is intentionally shorter than Hushiro because its normal enemies, minibos
 
 ### Chambers 3–7 — Main stretch
 
-The main Yomori room/reward pool is active here. Area 2's build purpose is to add or deepen useful **Action Techniques** while expanding the existing build through Supporting Techniques, refinements, Cross-family eligibility, continued Aspect progression after awakening, and other reward choices. Multiple Action Techniques may modify the same combat trigger; this region does not assume unfilled action slots.
+The main Yomori room/reward pool is active here. Area 2's build purpose is to add or deepen useful **Action Techniques** while expanding the existing build through Supporting Techniques, refinements, Cross-family eligibility, continued Aspect progression after awakening, and other reward choices. Multiple Action Techniques may modify or respond to the same combat trigger under the current Technique rules.
 
 Yomori's single miniboss opportunity is eligible during **Chambers 4–7**. Each run selects one candidate from:
 
@@ -261,7 +252,7 @@ Kagutsuchi is the mature-build region. Its standard enemies are inherently more 
 
 ### Chambers 3–7 — Main Court
 
-The complete normal Kagutsuchi room/reward pool is eligible here. The region's build purpose is to **finish or sharpen the mature run build** through additional Action Techniques, Supporting Techniques, refinements, Cross-family Techniques, eligible Legendaries, continued Shrine decisions after awakening, and competing economy/survival rewards. Action Technique value is evaluated by the build's interactions and trigger frequency rather than by filling a fixed action-slot checklist.
+The complete normal Kagutsuchi room/reward pool is eligible here. The region's build purpose is to **finish or sharpen the mature run build** through additional Action Techniques, Supporting Techniques, refinements, Cross-family Techniques, eligible Legendaries, continued Shrine decisions after awakening, and competing economy/survival rewards.
 
 Kagutsuchi's single miniboss opportunity is eligible during **Chambers 4–7**. Each run selects one candidate from:
 
@@ -280,11 +271,11 @@ The miniboss path is optional. A normal Kagutsuchi run therefore contains **0–
 
 ### Chamber 11 — Eclipse Shogun
 
-The Eclipse Shogun is fixed at Chamber 11 and completes the normal three-region combat route. All Kagutsuchi routes converge on his royal arena.
+The Eclipse Shogun is fixed at Chamber 11 and completes the normal post-awakening three-region combat route. All Kagutsuchi routes converge on his royal arena.
 
 The Shogun must test a mature run build without assuming a specific Aspect Tier, Blood Art, Technique family, Legendary, Relic, Prosthetic upgrade level, or exact reward history.
 
-A rare pre-awakening dialogue state exists if an exceptional first-attempt player reaches him before Akio's first death. It does not replace the seven awakened-campaign confrontation states.
+This repeatable Chamber 11 confrontation is distinct from the authored opening first-attempt Shogun encounter that creates Returning Blood.
 
 ### Kagutsuchi route-network safeguards
 
@@ -313,21 +304,13 @@ The transition should:
 
 The current recovery prototype restores **20% max Health and 35% max Spirit**, then enforces minimum next-region entry floors of **35% max Health and 50% max Spirit**. This is viability support rather than a full reset. Blood is not automatically refilled.
 
-The safe transition after Keeper is the normal in-run Relic swap point before Yomori. The safe transition after Twin Maws is the normal in-run Relic swap point before Kagutsuchi. Newly discovered Relics may also be equipped immediately at discovery; routine swapping is not available in combat, ordinary rooms, Rest rooms, Shops, or the pause menu. If Relics are not yet available on the first attempt, the transition simply omits that management step.
+The safe transition after Keeper is the normal in-run Relic swap point before Yomori. The safe transition after Twin Maws is the normal in-run Relic swap point before Kagutsuchi. Newly discovered Relics may also be equipped immediately at discovery; routine swapping is not available in combat, ordinary rooms, Rest rooms, Shops, or the pause menu.
 
 Exact transition-interface presentation and final recovery tuning remain later implementation/playtest decisions.
 
 ## Post-Shogun handoff
 
 The Eclipse Shogun does **not** lead to another counted regional transition chamber.
-
-### Exceptional pre-awakening first-attempt clear
-
-If Akio reaches the Heart before his first death:
-
-**Shogun → Heart approach → pre-awakening Heart chamber → no Binding ritual available → Heart destroys Akio → first Returning Blood reconstruction at the Strand.**
-
-No Heart Binding is destroyed in this exceptional sequence.
 
 ### Awakened campaign clears 1–6
 
@@ -339,7 +322,7 @@ The Heart is not fought normally during these six Binding clears.
 
 After all six Bindings have been destroyed:
 
-**Shogun → Heart approach → canonical Heart encounter → Heart destroyed → Story Complete → return to Strand.**
+**Shogun → Heart approach → canonical Heart encounter → Heart source crippled → Story Complete → return to Strand.**
 
 ### Postgame Standard Expedition
 
@@ -347,7 +330,7 @@ After all six Bindings have been destroyed:
 
 ### Postgame Heart Suppression
 
-**Boat selects Heart Suppression → Hushiro → Yomori → Kagutsuchi → Shogun → regenerated Heart → suppression clear → return to Strand.**
+**Boat selects Heart Suppression → Hushiro → Yomori → Kagutsuchi → Shogun → regenerated Heart manifestation → suppression clear → return to Strand.**
 
 ## Full-route pacing target
 
