@@ -4,13 +4,14 @@ title: Beast Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-10-03
 topics:
   - beast-blood
   - the-heart
   - corruption
   - transformation
-  - inherited-beast-blood
+  - identity
+  - eclipse-shogun
   - heart-bindings
   - extraction
   - ending
@@ -24,197 +25,171 @@ related:
 
 # Beast Blood
 
-Beast Blood is a rare supernatural power drawn from the Heart, an ancient living godlike organ or supernatural core associated uniquely with the island.
+Beast Blood is a supernatural curse and power drawn from the Heart, an ancient living godlike organ or supernatural core associated uniquely with the island.
+
+It should be understood through symptoms, consequences, stories, and observed patterns rather than through a complete biological model.
 
 ## Established properties
 
 - Beast Blood can heal disease and injury, strengthen the body, extend life, and support unnatural regeneration.
-- Its benefits carry progressive corruption, physical mutation, impaired judgment, and eventual loss of genuine independence.
-- It intensifies qualities and motivations already present in the bearer rather than assigning every victim one repeated role or behavior.
-- Fear may become violent self-preservation; loyalty may become possessiveness; pride may become domination; hunger may become predation.
-- Strong resolve can delay transformation, but ordinary bearers do not achieve Akio's true control.
-- A bearer who remains intelligent or composed may still be enslaved to desires reshaped by the Blood.
+- Its benefits carry corruption, mutation, intensified impulses, impaired judgment, and eventual risk of losing genuine independence.
+- It does **not** affect every bearer the same way. Some die from exposure; some transform rapidly; some retain recognizable humanity for long periods; some become unusually powerful or specialized beasts.
+- Beast Blood appears to work with what it finds in the bearer. Identity, temperament, intention, emotional state, physical condition, duration, manner of exposure, and strength of will may influence the result.
+- Resolve and discipline can support greater control, but they do not guarantee resistance and do not make every strong-willed warrior equivalent to Akio.
+- Greed, obsession, lust, jealousy, rage, fear, grief, loneliness, pride, hunger, devotion, and similar drives may become exaggerated or expressed physically through transformation. This remains a suggestive supernatural pattern, not a deterministic taxonomy.
+- A bearer who remains intelligent or composed may still be trapped by desires reshaped by the Blood.
 - Beast Blood becomes naturally more powerful during the Blood Moon.
-- Once active in a bearer, Beast Blood does not require repeated doses or continued transfer from the Heart.
-- Dormant inherited Beast Blood may react subtly to the Heart's active Blood Moon cycle and proximity to its source without becoming active, communicating information, or controlling the bearer.
-- Existing Beast Blood remains active in its bearer even after the Heart is permanently crippled at the end of the campaign.
-- The canonical Heart victory prevents the Heart from producing, releasing, or propagating **new Beast Blood**. It does not erase Beast Blood already present in Akio, the Shogun, or other existing bearers.
+- Once active in a bearer, Beast Blood normally does not require repeated doses or a continuous physical channel to the Heart.
+- Existing Beast Blood remains active even after the Heart is permanently crippled at the end of the campaign.
+
+A useful in-world formulation is:
+
+> The Blood does not make beasts from nothing. It works with what it finds.
 
 ## Discovery of the imprisoned Heart
 
-The Heart was not transported to the island by the Shogun's civilization. It was already buried beneath or within the land.
+The Heart was already buried beneath or within the island before the Shogun's civilization discovered it.
 
-Royal excavation during the expansion of Kagutsuchi Court exposed a sealed passage into an ancient complex built around the Heart. The first explorers encountered only part of the immense living mass, embedded in stone and enclosed by layered restraints, seals, and unknown materials.
+Royal excavation beneath Kagutsuchi Court exposed an ancient complex built around the Heart. Seven ancient **Heart Bindings** kept it dormant, limited its influence, and protected its deeper body. Their builders, age, method, and complete purpose remain unknown.
 
-These ancient **Heart Bindings** kept the Heart dormant, limited its influence, and protected its deeper body. The Shogun's civilization did not create them. Their builders, age, method, and complete purpose remain unknown.
+The Shogun initially ordered the discovery sealed and restricted study. Only when a deadly plague threatened the kingdom with extinction did he authorize the first controlled human use.
 
-The surrounding complex also contained damaged inscriptions, ritual markings, operating spaces, and structures whose original functions could not be established. It may have been a prison, shrine, containment site, research complex, or a combination that changed over time.
+## Plague, breach, and extraction
 
-The Shogun ordered the discovery sealed, prohibited direct human use, and limited study to trusted royal engineers, scholars, physicians, ritual specialists, guards, and retainers. The Heart remained under restricted study until a deadly plague pushed the island's civilization toward extinction and the Shogun authorized its first controlled human use.
+During the plague, the Court breached the outermost Heart Binding, leaving six intact. This exposed living Heart tissue and made Beast Blood extraction possible.
 
-Whether the original collapse was natural, caused by failing ancient architecture, or subtly influenced by the Heart remains deliberately unresolved.
-
-## The first breached Binding
-
-The intact Heart Bindings prevented the Court from reaching living Heart tissue or obtaining usable Beast Blood.
-
-During the plague, the Shogun authorized his researchers to breach the prison. They destroyed or opened the outermost Heart Binding and exposed a small part of the Heart.
-
-This was the first irreversible violation of the ancient containment system. The breach stirred the Heart from deep dormancy, strengthened its pulse and influence, and made extraction possible without fully releasing it.
-
-Beast Blood genuinely cured the plague and initially appeared miraculous. Its corruption emerged late enough that use spread through the endangered population before the consequences were understood. By the time transformation and loss of independence became undeniable, the kingdom had become dependent on the Blood for survival, strength, and continued rule.
-
-## Shogun-built extraction apparatus
-
-Usable Beast Blood comes directly from the Heart, but it cannot be obtained by simply cutting exposed tissue or draining a visible vessel.
-
-After breaching the first Binding, the Shogun's engineers, physicians, and ritual specialists constructed an extraction apparatus against the exposed portion of the Heart. The apparatus is a later Court invention and is separate from the ancient Binding system.
-
-Its exact production design may remain simple, but its required functions are:
-
-- receive a small measure of freshly drawn human blood,
-- carry that offering inward to the exposed Heart,
-- receive the Beast Blood released in response,
-- and collect it in a sealed vessel or basin.
-
-The offering does not require a death or human sacrifice.
-
-The process follows a clear supernatural exchange:
+The Shogun's engineers, physicians, and ritual specialists built an extraction apparatus against the exposed Heart. Its basic supernatural exchange is:
 
 > Human blood flows inward. The Heart releases Beast Blood outward.
 
-The Heart's pulse changes when the offering reaches it, and a small amount of dark Beast Blood returns through the apparatus. The Blood is produced or released only after the Heart is deliberately disturbed.
+Beast Blood genuinely cured the plague. Corruption emerged slowly enough that use spread before its full cost became undeniable. By then the kingdom had become dependent on the Blood for survival, strength, longevity, and rule.
 
-The Court never determines why human blood causes this response. The Heart may consume the offering, react through instinct, follow an unknown supernatural law, or attempt to incorporate the life introduced into it.
+The Shogun remains responsible for continuing, defending, experimenting with, and ultimately seeking to expand Beast Blood after its consequences were known.
 
-## Extraction danger and access boundary
+## Source-near Blood and concentration
 
-The Heart does not remain passive during extraction. Its pulse strengthens, its influence fills the chamber, and living tissue presses against the remaining Bindings.
+There is only one Beast Blood. The Shogun does not possess a separate refined variety and does not create a second substance in his own body.
 
-Researchers must collect the Blood and end the process before the Heart's reaction becomes uncontrollable. If extraction is mistimed or prolonged, the released Blood may overwhelm those present, Heart tissue may invade the apparatus, or the chamber may begin closing around them.
+However, exposure is not always equivalent in circumstance or intensity. Beast Blood collected in small quantities, Blood already long settled in another bearer, and an overwhelming concentration deliberately called from near the Heart need not provoke identical responses.
 
-This prevents extraction from becoming safe, casual, or industrial. Every attempt requires entering the Heart chamber, disturbing the awakened source, and risking direct exposure to the curse.
+Through his centuries-long bond with the Heart, the Shogun can call and direct Beast Blood from the island/Heart itself. This allows him to deliver unusually large, source-near concentrations to chosen subjects.
 
-Once collected, Beast Blood already possesses its supernatural effects. It may be held in small sealed vessels and must be deliberately consumed or introduced into a person's body. Ordinary contact, proximity, bites, wounds, contaminated soil, roots, water, prey, damaged vegetation, or merely dying on the island do not transmit Beast Blood or create new bearers.
+This distinction explains Akio's opening exposure without inventing "Shogun Blood": the material remains Beast Blood, but Akio receives an extraordinary quantity drawn close to its true source while mortally wounded.
 
-This rarity is essential. The danger is not a conventional outbreak; it is the possibility that people will exploit, transport, weaponize, worship, or distribute a forbidden power.
+## The Shogun's experiments
 
-## Heart Bindings and awakening
+The Shogun has deliberately exposed selected people to Beast Blood before Akio.
 
-The Heart's ancient prison originally contained seven Bindings. The Court destroyed the outermost before the game, leaving six intact Bindings for Akio's campaign.
+Captives, enemies, followers, retainers, or warriors who interested him may have been given concentrated exposure so he could see what the curse made of them. Some unusually specialized creatures, minibosses, or bosses may eventually be revealed as products of these experiments where their individual lore supports it.
 
-Destroying a Binding permanently removes one part of that ancient prison. The Heart can regenerate living tissue, but it did not create the Bindings and cannot rebuild their materials, seals, or containment function.
+This is not the origin of every beast on the island. Most corruption remains a consequence of the kingdom's historical Beast Blood use and the long lives of existing bearers.
 
-As more Bindings are destroyed, the Heart becomes more awake and its supernatural influence strengthens. Existing Beast Blood reacts more intensely, the Blood Moon may become more severe, and Akio experiences greater pressure and temptation from the curse.
+The Shogun's experimentation reinforces his false mastery: he understands how to call, direct, and provoke the Blood, but he cannot guarantee the form it will take because the bearer matters.
 
-This influence does not require physical channels or a constant supply of Beast Blood to every bearer. Existing Blood remains part of each bearer and responds more strongly as the Heart's imprisonment weakens.
+## Transmission boundary
 
-After all six remaining Bindings are destroyed, the exposed Heart can tear free as the Unbound Heart and form the enormous Vessel of Continuance during the true-final encounter.
+Beast Blood must be deliberately introduced into a living body or otherwise delivered through an established supernatural use. It is not a conventional contagious outbreak.
 
-## Akio's inherited exception
+Ordinary proximity, contaminated soil, roots, water, prey, vegetation, or merely dying on the island do not automatically create new Beast Blood bearers.
 
-Akio does not receive a new dose from the Heart during the game opening.
+This rarity is important. The central danger is deliberate exploitation, extraction, experimentation, weaponization, worship, and distribution of forbidden power.
 
-During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the Blood rather than receiving a later extracted dose.
-
-That child escaped the island before the barrier was completed, and the dormant condition continued through the surviving bloodline outside containment. The ancestor's exact identity and family remain deliberately undefined.
-
-This is a narrow historical exception, not a new general transmission route. It does not mean every child of a bearer inherits Beast Blood, that Beast Blood spreads through ordinary reproduction, or that descendants create new Blood independent of the Heart. The original supernatural alteration still came from Blood extracted from the Heart.
-
-Akio remains human. His body developed naturally around the inherited condition rather than receiving active Beast Blood after reaching adulthood.
-
-As Akio approaches the island during the Blood Moon, the dormant Blood can register its source only as a vague pull, recognition, or unease that Akio does not understand. This is not telepathy or compulsion and does not grant active Blood abilities.
-
-When Akio returns inside the barrier during the Blood Moon, the dormant Blood becomes fully stirred. His first death triggers its regenerative power and creates the first known Returning Blood manifestation.
-
-## Retained humanity is not control
+## Retained humanity is not mastery
 
 Corruption does not immediately erase memory, recognition, loyalty, training, ambition, speech, or attachment.
 
-The island's inhabitants may still recognize former comrades, rulers, handlers, families, territories, and customs. They may direct abilities, follow plans, perform rituals, and deliberately trigger mutations. None of those abilities prove that they control Beast Blood.
+Bearers may still recognize comrades, rulers, families, territories, and customs. They may plan, perform rituals, fight skillfully, or deliberately reveal mutations.
 
-Ordinary bearers gradually lose the ability to reject the Blood or act against its continuation. Their remaining humanity may become part of the mechanism that defends the curse. They are not necessarily mindless puppets, but the Blood ultimately governs what they are capable of refusing.
+The Shogun himself demonstrates exceptional resolve and sophisticated control. Long exposure has magnified qualities already present in him: determination, possessiveness, ambition, pride, desire, fear of extinction, and refusal to let his kingdom end.
 
-The Shogun does not require a hive mind to retain followers. Existing loyalty, military hierarchy, dependence, fear, faith, and pride in the kingdom can survive in corrupted form. Independent beasts, failed bodies, and spirits may have no loyalty to him at all.
+His control remains incomplete because he cannot truly reject Beast Blood, abandon the Heart, accept natural death, or permit others to refuse his vision.
 
-They may attack Akio because he is an armed outsider, a warrior of the Order, and an intruder entering defended territory. Akio carrying Returning Blood does not automatically make him one of them.
+Akio later becomes the strongest contradiction to that worldview: another exceptionally resolute bearer whose identity and intentions shape the curse differently and who remains capable of opposing its source.
 
 ## Manifestation range
 
 Beast Blood may produce:
 
+- death from exposure,
 - partially human corrupted people,
 - full or partial beast transformations,
 - altered animals,
+- powerful specialized forms,
 - unstable masses or failed bodies,
-- the true spirits of deceased bearers persisting as incomplete memories or remnants,
-- and visible ecological devastation caused by the long presence and actions of corrupted inhabitants and beasts.
+- true spirits of deceased bearers persisting as incomplete memories or remnants,
+- and ecological devastation caused by the long presence and actions of corrupted inhabitants and beasts.
 
-Yomori Grove's damaged ecology does not mean that Beast Blood has become environmentally contagious. Its blighted roots, sap, fungal growth, and other visual signs express the prolonged effect of corrupted people and creatures on the region rather than a new route of transmission.
+These outcomes do not require a rigid universal stage system. The regions emphasize different expressions of the same curse:
 
-These outcomes do not require a rigid universal stage system. Host, duration, will, physical condition, environment, manner of use, and whether the body developed around the Blood may influence the result. The regions emphasize different dominant expressions of the same curse:
+- **Hushiro Gate Village — Rupture:** recent transformation, violence, bodily collapse, and fragmented community.
+- **Yomori Grove — Adaptation:** long-term predation, spiritual persistence, and ecological devastation surrounding corrupted life.
+- **Kagutsuchi Court — False Ascendancy:** disciplined, specialized mutations mistaken for mastery by elites still bound to the Blood.
 
-- Hushiro Gate Village presents rupture, recent transformation, violence, and human collapse.
-- Yomori Grove presents long-term adaptation, predation, spiritual persistence, and ecological devastation surrounding corrupted life.
-- Kagutsuchi Court presents false ascendancy: powerful specialized mutations mistaken for mastery by elites who remain bound to the Blood.
+## Akio's unprecedented response
+
+Akio begins the game as an ordinary human Order warrior with no Beast Blood in him.
+
+At the end of his first expedition, he reaches the Eclipse Shogun through his own skill. After mortally wounding Akio, the Shogun calls a large source-near concentration of Beast Blood from the Heart/island and forces it into Akio, intending to see what the curse will make of someone so capable.
+
+Akio dies carrying that Blood. Instead of the expected death or conventional transformation, the Blood reconstructs him without fully erasing his identity. This becomes the first known **Returning Blood** manifestation.
+
+No single exact explanation is canon for why Akio responds this way. His rare individual response, extraordinary resolve, identity, intentions, direct source-near exposure, and death all matter without being reduced to a scientific formula.
 
 ## The Heart
 
-The Heart is a physically real but supernatural ancient source. It may be the surviving organ of a forgotten godlike being, the core of the island, a divine vessel, or the remnant of something too large or alien to understand. Its ultimate origin should remain deliberately ambiguous.
+The Heart is physically real but supernatural. It may be the surviving organ of a forgotten godlike being, the core of the island, a divine vessel, or something stranger. Its ultimate origin remains deliberately ambiguous.
 
-Conflicting evidence may suggest that:
+The Heart possesses primal agency rather than a human personality. Its nature expresses survival, regeneration, growth, continuation, resistance to restraint, and incorporation of other life.
 
-- it belonged to a dead or sleeping god,
-- the island grew around it or is part of it,
-- an older civilization worshipped or imprisoned it,
-- it arrived from somewhere beyond the island,
-- or it has always existed beneath or within the land.
+It gives genuine healing and life, but its form of preservation gradually rewrites the bearer. Whether it is malicious, instinctive, defensive, or simply incompatible with human life remains unresolved.
 
-No single explanation is currently canon.
+## Heart Bindings and awakening
 
-The Heart is alive, but not in an ordinary human sense. It exists somewhere between dormancy, injury, imprisonment, and awakening. The first breached Binding, human exploitation, repeated Beast Blood extraction, and the Blood Moon have increased its activity.
+The Heart's ancient prison originally contained seven Bindings. The Court destroyed the outermost before the game, leaving six intact for Akio's campaign.
 
-The Heart possesses primal agency rather than a human personality. It does not require dialogue, a political plan, direct selection of Akio, or automatic control over everyone who dies on the island. Its nature expresses survival, regeneration, growth, continuation, resistance to restraint, and incorporation of other life.
+Destroying a Binding permanently removes one external restraint. The Heart can regenerate living tissue, but it did not create the Bindings and cannot recreate their containment function.
 
-It gives genuine life and healing, but its form of preservation gradually rewrites the bearer according to that nature. Whether the Heart is malicious, instinctive, defensive, or simply incompatible with human life remains intentionally unresolved.
+As more Bindings are destroyed, the Heart becomes more awake and its supernatural influence strengthens. Existing Beast Blood reacts more intensely, and the Blood Moon/campaign pressure may worsen.
 
-## Canonical crippling of the source
-
-The first true-final Heart victory canonically destroys the Heart's manifested combat body and reduces the source to a faint regenerating remnant.
-
-The victory permanently changes what the Heart is capable of:
-
-- it can no longer produce or release new Beast Blood,
-- Beast Blood can no longer be deliberately extracted from it,
-- no new person or creature can become a Beast Blood bearer,
-- its influence can no longer expand beyond the existing infected population,
-- the Shogun's plan to spread Beast Blood to the mainland is permanently defeated,
-- the Heart's remaining activity is reduced to a local containment/suppression problem.
-
-Existing Beast Blood is **not** erased. Akio, the Shogun, corrupted inhabitants, altered beasts, and other existing bearers retain the supernatural effects already sustained by the Blood within them, including regeneration where their established form supports it.
-
-The Heart itself can regenerate physical tissue over time because regeneration is fundamental to its nature, but it can never regenerate the lost ability to create or propagate Beast Blood. Postgame Heart encounters represent Akio returning to suppress this regrowth before it becomes locally dangerous.
-
-The permanent story victory is therefore containment of propagation, not extermination of every existing bearer.
-
-## Worship
-
-Some desperate inhabitants, especially among the ruined people of Hushiro Gate Village, may worship the Heart as the only power that answered their suffering. Their faith is fragmented and unstable rather than a complete island-wide religion.
-
-This worship should suggest that the Heart may be an ancient god or sacred entity without proving any one explanation of its origin.
+After all six remaining Bindings are destroyed, the Heart can form the true-final manifested combat body described by the Heart encounter authority.
 
 ## Relationship to Returning Blood
 
-Returning Blood is not a separate original substance. It is the awakened inherited Beast Blood within Akio reconstructing his established human form while preserving continuity of self.
+Returning Blood is not a separate original substance. It is the unprecedented relationship formed when the Beast Blood forced into Akio reconstructs him while preserving his continuity of self.
 
-Akio's lineage explains why this manifestation is possible. His resolve does not create Returning Blood; it allows him to develop genuine sovereignty over the awakened power afterward.
+Because Beast Blood appears responsive to bearer identity, emotion, intention, and instinct, Akio gradually learns to steer its transformative nature. Blood Aspects are controlled adaptations of that curse rather than unrelated magical classes.
 
-Other bearers may retain humanity, intelligence, or technical use of mutations, but Akio is the only known bearer with genuine control. He remains capable of resisting escalation, expressing different Blood Aspects, returning toward a controlled baseline, and opposing the Heart itself.
+When Akio is conscious, his increasing control can shape the Blood deliberately. When he dies, conscious control disappears and the Blood falls back on deeper survival instinct. That instinct selects the Strand as his safest known place and reconstructs him at the established return spot.
 
-After a Shogun victory during the first six successful clears, Akio can place Returning Blood into the Court's extraction apparatus. The Heart attempts to reclaim that Blood, but Akio's controlled Blood rejects its authority. The resulting pulse destroys one remaining Heart Binding before the Heart retaliates and dissolves Akio's current body.
+## Canonical crippling of the source
 
-Returning Blood's established rejection of the Heart supports the final severance of the Heart's ability to create/spread Beast Blood without becoming a separate one-off player mechanic.
+The first true-final Heart victory destroys the Heart's manifested combat body and permanently cripples its supernatural reach.
+
+Afterward:
+
+- it can no longer produce or release new Beast Blood,
+- Beast Blood can no longer be deliberately extracted from it,
+- no new bearer can be created,
+- the curse cannot expand beyond the existing bearer population,
+- the Shogun's mainland-spread plan is permanently defeated.
+
+Existing Beast Blood is **not** erased. Akio, the Shogun, corrupted inhabitants, altered beasts, and other existing bearers retain the supernatural effects already sustained by the Blood within them.
+
+The Heart may regenerate physical tissue over time because regeneration is fundamental to its nature, but postgame regrowth does not restore its lost ability to create or propagate Beast Blood.
 
 ## Visual discipline
 
-The Heart and Beast Blood generally use restrained dark crimson, blackened veins, wet coagulated materials, fissures, host-specific distortions, pressure, and ancient organic weight. They should not default to bright neon-red magic, conventional zombie imagery, or a completely explained anatomical design.
+The Heart and Beast Blood generally use restrained dark crimson, blackened veins, wet coagulated materials, fissures, host-specific distortions, pressure, and ancient organic weight. They should not default to bright neon-red magic, conventional zombie imagery, or a fully explained anatomical design.
+
+## Canon restrictions
+
+- Do not restore inherited Beast Blood or an escaped-bloodline origin for Akio.
+- Do not explain Beast Blood through a rigid receptor/assimilation/biological model.
+- Do not describe Akio as immune.
+- Do not make resolve alone the reason Akio survives.
+- Do not invent a distinct Shogun Blood substance.
+- The Shogun may call/direct ordinary Beast Blood from near the Heart in exceptional concentration.
+- Do not make personality/emotion a deterministic alignment chart; it is an influence communicated through patterns and dialogue.
+- Do not make ordinary environmental contact a general transmission route.
+- Do not make every island creature a Shogun experiment.
+- Do not describe the final Heart victory as erasing existing Beast Blood.
