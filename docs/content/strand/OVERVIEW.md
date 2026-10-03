@@ -4,7 +4,7 @@ title: The Strand
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-24
+last_reviewed: 2026-10-03
 topics:
   - strand
   - hub
@@ -12,17 +12,19 @@ topics:
   - npc-services
   - barrier-threshold
   - permanent-progression
+  - returning-blood
 related:
   - CHAR-STRAND-NPCS
   - CONTENT-STRAND-INTERACTIBLES
   - ART-DIRECTION
   - LORE-BARRIER-BLOOD-MOON
+  - LORE-RETURNING-BLOOD
   - CHAR-STRAND-KEEPER
 ---
 
 # The Strand
 
-The Strand is Oathbound's persistent hub, the controlled threshold in the island's barrier, and the place Returning Blood reconstructs Akio after failed and successful runs.
+The Strand is Oathbound's persistent hub and the controlled threshold in the island's barrier. It is also the place Returning Blood reconstructs Akio after death, **not because the Strand itself is a resurrection anchor, but because Akio subconsciously identifies one specific place here as safety.**
 
 ## Functions
 
@@ -35,6 +37,17 @@ The Strand is Oathbound's persistent hub, the controlled threshold in the island
 - Discovery/codex review
 - Forge, Bloodwell, merchant, and other hub services
 - Later-unlocked Blood Mirror Aspect progression and mastery
+- Akio's established Returning Blood reconstruction location
+
+## Returning Blood return point
+
+Before the player first controls Akio at the Strand, Akio has already used the hub as the Order expedition's secure foothold and knows its people and layout.
+
+After the opening Shogun encounter, Akio dies with Returning Blood newly formed. With conscious control absent, the Blood follows his strongest survival instinct: return somewhere safe. The Strand is that place, and Akio reconstructs at one specific safe location within it.
+
+That first successful return reinforces the exact location as his subconscious destination, so later deaths reconstruct him there again.
+
+No Strand structure, Order oath, seal, Keeper power, Bloodwell function, Boat ritual, or barrier ward creates this return point. The Strand supplies the remembered safety; Akio's instinct supplies the destination; Returning Blood performs the reconstruction.
 
 ## Permanent progression stations
 
@@ -93,11 +106,10 @@ The Strand should use a few distinct role-specific structures rather than repeat
 - central Bloodwell shrine marker,
 - cliff stair access,
 - Blood Cavern entrance and later-unlocked Blood Mirror chamber,
-- offshore torii aligned with the cursed island.
+- offshore torii aligned with the cursed island,
+- a visually consistent but non-magical safe return spot where Akio reconstructs after death.
 
 A separate Relic Reliquary is not part of the current approved hub scope; Relic progression and Strand-side management belong to the Forge.
-
-The Keeper, barrier anchor, Boat, and offshore torii should read as one connected departure composition without requiring a large cinematic sequence.
 
 ## Ambient pressure
 
@@ -112,7 +124,7 @@ The Keeper, barrier anchor, Boat, and offshore torii should read as one connecte
 
 ## Movement philosophy
 
-NPC motion is restrained, functional, and watchful. The Strand should not feel socially bustling. Much of its life comes from environmental movement—smoke, tide, cloth, paper, light, wind, and the quiet pressure of the barrier—while characters perform maintenance, ritual, recordkeeping, and preparation.
+NPC motion is restrained, functional, and watchful. The Strand should not feel socially bustling. Much of its life comes from environmental movement while characters perform maintenance, ritual, recordkeeping, and preparation.
 
 ## Primary NPCs
 
