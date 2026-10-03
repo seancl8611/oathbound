@@ -4,12 +4,14 @@ title: Eclipse Shogun
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-10-03
 topics:
   - eclipse-shogun
   - beast-blood
   - plague
-  - inherited-bloodline
+  - first-attempt
+  - returning-blood
+  - experiments
   - final-boss
   - heart-bindings
   - narrative-delivery
@@ -28,122 +30,154 @@ The Eclipse Shogun was the successful ruler of the island kingdom before the Ord
 
 ## Discovery and plague
 
-Royal excavation beneath Kagutsuchi Court exposed an ancient complex surrounding the imprisoned Heart. Seven ancient Heart Bindings kept the Heart dormant, limited its influence, and protected its deeper body. The Shogun's civilization did not create them.
+Royal excavation beneath Kagutsuchi Court exposed an ancient complex surrounding the imprisoned Heart. Seven ancient Heart Bindings kept the Heart dormant and restrained.
 
-The Shogun initially sealed the site, prohibited direct human use, and permitted only restricted study.
+The Shogun initially sealed the site and restricted direct human use.
 
-When a deadly plague pushed the kingdom toward extinction, he authorized researchers to breach the outermost Binding and build an extraction apparatus against the exposed Heart. Fresh human blood was offered inward, and the Heart released Beast Blood outward. The treatment cured the plague.
+When a deadly plague pushed the kingdom toward extinction, he authorized researchers to breach the outermost Binding and build an extraction apparatus against the exposed Heart. Beast Blood released by the Heart cured the plague.
 
-Because corruption appeared gradually, Beast Blood spread through the population before its cost was understood. The Shogun remains responsible for continuing, defending, and expanding its use after transformation and loss of independence became clear.
-
-## The escaped inherited bloodline
-
-During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the alteration.
-
-The child escaped before the barrier was completed, and the bloodline survived outside containment for generations. Akio eventually descends from that line.
-
-The ancestor's exact identity, family, protectors, escape details, and later life remain intentionally undefined. The Shogun is not established as Akio's ancestor.
+Because corruption appeared gradually, Beast Blood spread before its cost was understood. The Shogun remains responsible for continuing, defending, experimenting with, and seeking to expand its use after transformation and loss of independence became clear.
 
 ## Responsibility and false mastery
 
 The Shogun is not an innocent puppet.
 
-His first use of Beast Blood can be understood as a last resort against extinction. His later decisions remain his responsibility.
+His first use of Beast Blood can be understood as a desperate attempt to save his people. His later decisions remain his responsibility.
 
-Long-term Beast Blood magnified qualities already present in him:
+Beast Blood appears to magnify qualities already present in a bearer. In the Shogun:
 
-- determination became an inability to surrender,
+- determination became inability to surrender,
 - responsibility became possession,
 - protection became control,
 - confidence became pride,
-- authority became domination,
+- ambition became domination,
+- desire became entitlement,
 - and fear of extinction became rejection of natural death.
 
-He can direct mutations, retain intelligence, preserve tactical discipline, and choose when to reveal greater power. He interprets these abilities as mastery.
+He retains extraordinary resolve, intelligence, tactical discipline, and the ability to direct his own mutations. He interprets that as mastery.
 
-His mastery is false because he cannot willingly abandon the Heart, end extraction, accept the natural death of his kingdom, permit others to reject Beast Blood, or imagine a future without the Blood and his rule.
+His mastery is false because he cannot willingly abandon the Heart, end Beast Blood, accept the death of his kingdom, permit others to reject his salvation, or imagine a future without his rule.
 
-Akio alone demonstrates genuine control by using Beast Blood while retaining the ability to Resist, change its expression, return toward baseline, and oppose the Heart itself.
+## Bond with the Heart
+
+The Shogun has carried Beast Blood and remained close to the Heart for generations of ordinary human life. That prolonged relationship gives him exceptional influence over the curse.
+
+He can call and direct **ordinary Beast Blood from the island/Heart itself**. This does not mean he produces a private or refined "Shogun Blood." There is one Beast Blood.
+
+What differs is circumstance: the Shogun can draw unusually large concentrations directly from or very near the source rather than relying only on Blood long settled in another bearer or a small stored extraction.
+
+He can use that ability on himself, in combat, and on other people. He cannot perfectly dictate what Beast Blood will make of a bearer because the bearer matters.
+
+## Experiments on bearers
+
+The Shogun has previously exposed selected people to Beast Blood to see what the curse would make of them.
+
+Possible subjects include captives, enemies, followers, retainers, and warriors whose strength or character interested him. Some powerful or unusual creatures on the island may later be revealed as products of these experiments where that origin strengthens their individual story.
+
+Not every beast is a Shogun experiment. The island's corrupted population also descends from the kingdom's widespread historical Beast Blood use and centuries of adaptation.
+
+The experiments serve three narrative functions:
+
+- establish that the Shogun already knows he can deliberately direct Beast Blood into others,
+- reinforce his belief that stronger people can become superior forms,
+- and make his treatment of Akio an extension of established behavior rather than a one-off ritual invented for the protagonist.
 
 ## Present goal
 
 The Shogun intends to end the island's containment and extend his kingdom to the mainland through conquest and forced salvation.
 
-He believes Beast Blood overcame disease, injury, age, and natural death. In his view, the island was transformed and then imprisoned by outsiders too weak to accept what it had become.
+He believes Beast Blood overcame disease, injury, age, and natural death. He treats the failures of Hushiro and Yomori as failed adaptation or weakness rather than evidence that Beast Blood should be abandoned.
 
-He intends to incorporate those who accept his salvation and defeat or transform those who resist.
+Kagutsuchi Court's disciplined elites are his preferred proof that the Blood can be controlled.
 
-The exact method and timing of his attempt to overcome the barrier remain future narrative detail rather than current gameplay scope.
+## First confrontation with Akio
 
-## Relationship to the island and Heart
+Akio reaches the Shogun on his first expedition **before possessing Beast Blood**.
 
-Many corrupted inhabitants retain memory, culture, hierarchy, skill, ambition, and loyalty. Their organization does not require a hive mind.
+This is important to the Shogun. An ordinary human Order swordsman has crossed the island and reached him through skill alone.
 
-The Shogun treats the Heart as a supernatural power his Court discovered and brought under royal control. The Heart does not need to speak to or directly command him. His sincere ambitions now protect it, preserve Beast Blood, and spread its influence.
+The opening fight is playable, but the story requires Akio's defeat. After mortally wounding him, the Shogun chooses to test rather than merely discard him.
 
-Existing Beast Blood does not require renewed doses or a continuous physical channel. Once Beast Blood exists in a bearer, its established healing, mutation, longevity, and regenerative effects remain part of that bearer even after the Heart is permanently crippled at the end of the campaign.
+His intention is captured by the line:
 
-The canonical Heart victory instead prevents the Heart from producing or releasing **new Beast Blood** and permanently stops the curse from spreading to new bearers. It does not remove Beast Blood already present in the Shogun or other existing bearers.
+> "Let's see what the Blood makes of you."
 
-## Relationship to Akio
+The Shogun calls a large, source-near concentration of Beast Blood through his bond with the Heart. The chamber's veins awaken; Blood moves through the environment and around him or his weapon; he drives it into Akio's mortal wound.
 
-Their relationship develops through four broad emotional stages:
+He is **not** deliberately stabilizing, weakening, or slowing Akio's transformation. He does not know the result.
 
-1. **Dismissal** — the Shogun sees Akio as another restrained Order warrior.
-2. **Fascination** — Akio's returns and controlled Aspects reveal an unprecedented bearer.
-3. **Recognition and recruitment** — the Shogun recognizes that Akio possesses genuine control over Beast Blood and attempts to recruit him as proof that the Shogun's vision was justified.
-4. **Fear and hatred** — Akio silently rejects him, repeatedly defeats him, and attacks the Heart.
+He expects Akio either to die from the curse or to become some powerful transformed bearer.
 
-The Shogun's offer is sincere within his corrupted worldview but possessive rather than equal. Akio appears to embody the successful Beast Blood bearer the Shogun has always claimed should be possible. Akio's continued opposition instead exposes the central flaw in the Shogun's supposed mastery: the Shogun cannot reject the Blood, the Heart, or the continuation of his kingdom.
+Instead, Akio dies and later reconstructs at the Strand as the first known bearer of Returning Blood.
 
-Akio is a silent protagonist and never answers the Shogun verbally. The Shogun therefore carries the spoken side of their relationship while Akio's refusal is expressed through continued action.
+The Shogun therefore accidentally creates the conditions for the greatest threat to his rule.
 
-## Seven campaign confrontation states
+## Akio and Shogun as parallels
 
-`NARRATIVE_DELIVERY.md` owns the detailed delivery, but the approved story cadence is:
+Akio and the Shogun both possess exceptional resolve and discipline. The distinction is not that Akio simply wants to remain human more strongly.
 
-1. **Shogun 1 — Dismissal**
-2. **Shogun 2 — Fascination with Akio's return/control**
-3. **Shogun 3 — Recognition of Akio's genuine control and recruitment**
-4. **Shogun 4 — Possessive anger after refusal**
-5. **Shogun 5 — Fear beneath contempt as Bindings fall**
-6. **Shogun 6 — Hatred/desperation before the final Binding**
-7. **Shogun 7 — Brief final confrontation before the Heart**
+Beast Blood responds differently to different people and appears to exaggerate identity, intention, and emotional drives.
 
-A rare additional pre-awakening dialogue state may occur if an exceptionally skilled player reaches the Shogun on Akio's first attempt before any death. It does not advance or replace the seven-state awakened campaign sequence.
+The Shogun's greed, ambition, possession, desire, obsession, pride, and fear of extinction have shaped the form of his long relationship with the Blood.
 
-The third awakened Shogun confrontation is the main recruitment turn: he identifies Akio's genuine control as the proof he has been seeking and tries to claim that success for his worldview. Separate later evidence may clarify Akio's inherited escaped-island bloodline without making the Shogun his ancestor.
+Akio's discipline and comparatively pure purpose shape a different manifestation. His response remains extraordinarily rare and cannot be reproduced through moral virtue or Order training alone.
+
+The contrast is thematic rather than a moral transformation formula.
+
+## Relationship to Akio after the first return
+
+Their relationship develops through five broad stages:
+
+1. **Curiosity / experiment** — the Shogun chooses to expose the mortal Akio to Beast Blood to see what it will make of him.
+2. **Fascination** — Akio returns and begins demonstrating controlled Blood Aspects.
+3. **Recognition and recruitment** — the Shogun treats Akio as apparent proof that Beast Blood can be mastered and attempts to claim him as validation of his worldview.
+4. **Possessive anger and fear** — Akio silently rejects him and continues breaking Heart Bindings.
+5. **Hatred and desperation** — Akio threatens the Heart and the future of the Shogun's kingdom.
+
+The Shogun's offer is sincere within his corrupted worldview but possessive rather than equal.
+
+Akio remains silent. His answer is continued opposition.
+
+## Campaign confrontation states
+
+`NARRATIVE_DELIVERY.md` owns exact presentation, but the approved cadence is:
+
+- **Opening Shogun confrontation — Experiment:** first attempt; Akio has no Beast Blood; Shogun causes the exposure and Akio's narrative defeat.
+- **Post-return Shogun 1 — Fascination:** the Shogun sees that Akio returned from the experiment.
+- **Post-return Shogun 2 — Recognition:** Akio's growing control becomes undeniable.
+- **Post-return Shogun 3 — Recruitment:** the Shogun openly tries to claim Akio as proof of mastery.
+- **Post-return Shogun 4 — Possessive anger:** continued refusal and Binding damage turn curiosity into anger.
+- **Post-return Shogun 5 — Fear beneath contempt:** the Heart is increasingly endangered.
+- **Post-return Shogun 6 — Hatred/desperation:** final Binding campaign confrontation.
+- **Final story Shogun — Final confrontation:** no Bindings remain; the route continues directly into the Heart.
+
+Exact line count/state numbering may be consolidated by narrative production as long as the opening exposure and later relationship progression remain intact.
 
 ## Character and encounter identity
 
 The Shogun is a regal, composed, highly disciplined ruler whose apparent control of Beast Blood culminates in deliberate inhuman escalation.
 
-His high-level direction should communicate:
+He should communicate:
 
 - aristocratic authority,
-- restrained confidence and speech,
+- restrained confidence,
 - overwhelming martial presence,
-- elegant and controlled movement,
+- elegant controlled movement,
 - deliberate rather than accidental mutation,
+- curiosity toward exceptional strength,
 - and continued intelligence through his most inhuman state.
 
-Kokushibo from *Demon Slayer* is a high-level reference for composed menace, discipline, and controlled monstrous escalation. The Eclipse Shogun must remain an original design and must not copy Kokushibo's eyes, anatomy, costume, weapon, moon motifs, effects, silhouette, attacks, or exact mannerisms.
-
-The Shogun should read as a sovereign and false master before he reads as a heavily armored warrior or conventional monster.
-
-This is sufficient for current full-game scope. His exact body design, costume, weapon, phase count, phase names, attack patterns, transformation anatomy, animation list, and VFX requirements remain later character-concept and encounter-design work.
+He should read as a sovereign and false master before he reads as a conventional monster.
 
 ## Successful clears and postgame reconstruction
 
-The Shogun reconstructs between the first six successful Heart Binding clears so he remains the repeated run climax. His existing Beast Blood is sufficient; no new dose or physical connection is required.
+The Shogun reconstructs between successful Heart Binding clears so he remains the repeated run climax. His existing Beast Blood is sufficient; no new dose or physical channel is required for each return.
 
-Narrative presentation should let later encounters acknowledge the fact that both Akio and the Shogun return, without requiring a separate Shogun-reconstruction cinematic after every clear.
+After the sixth Binding is destroyed, the final story run defeats the Shogun's current body and continues directly into the true-final Heart encounter.
 
-After the sixth Binding is destroyed, the seventh successful story run defeats the Shogun's current body and continues directly into the true-final Heart encounter.
+The final Heart victory does **not** permanently kill the Shogun. Existing Beast Blood remains active even after the Heart loses its ability to create or spread new Blood.
 
-The final Heart victory does **not** permanently kill the Shogun. Akio cripples the Heart's ability to create and spread new Beast Blood, but the Shogun already carries Beast Blood and retains its regenerative/reconstructive benefits. His current defeated body may therefore reconstruct again after the canonical ending.
-
-This supports canonical postgame continuity: the Shogun and other existing Beast Blood bearers remain on the island, while the possibility of creating new bearers or spreading the curse beyond the existing population has been permanently removed.
+This supports canonical postgame continuity: the Shogun and other existing bearers remain on the island while creation of new bearers has been permanently ended.
 
 ## Current boundaries
 
@@ -152,22 +186,24 @@ Locked:
 - ruler before the Order,
 - plague-era responsibility,
 - forced-salvation goal,
-- escaped inherited island bloodline,
 - false mastery,
-- repeated relationship with Akio,
-- silent Akio / spoken Shogun relationship,
-- seven awakened confrontation states plus rare pre-awakening fallback,
-- recognition/recruitment turn at the third awakened Shogun encounter,
-- regal and controlled character direction,
-- deliberate intelligent inhuman escalation,
-- reconstruction throughout the Binding campaign,
-- continued reconstruction after the canonical ending because existing Beast Blood remains active,
+- exceptional bond with the Heart,
+- ability to call/direct ordinary source-near Beast Blood,
+- history of deliberate Beast Blood experiments on selected people,
+- opening first-attempt confrontation where he causes Akio's Beast Blood exposure,
+- "Let's see what the Blood makes of you" as the intent/working line,
+- no deliberate stabilization of Akio's transformation,
+- Akio/Shogun resolve parallel shaped by different identities and intentions,
+- fascination → recognition/recruitment → anger/fear/hatred progression,
+- regal controlled character direction,
+- reconstruction throughout the Binding campaign and postgame,
 - permanent loss of the Heart's ability to create/spread new Beast Blood after the story victory.
 
 Deferred:
 
+- exact list of creatures created through Shogun experimentation,
 - exact barrier-breach plan,
-- exact dialogue scripts/line counts,
-- exact reconstruction visual treatment beyond narrative scope,
+- final dialogue wording beyond approved intent lines,
+- exact reconstruction visuals,
 - exact encounter structure and moveset,
 - final visual concept and production list.
