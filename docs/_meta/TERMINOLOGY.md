@@ -4,7 +4,7 @@ title: Oathbound Terminology
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-09-16
+last_reviewed: 2026-10-03
 ---
 
 # Oathbound Terminology
@@ -62,11 +62,25 @@ Current Technique launch baseline: **40 Techniques + 6 refinements** across Echo
 ## World / campaign
 
 - **the Heart** — ancient living supernatural source of Beast Blood; exact origin remains deliberately ambiguous.
-- **Beast Blood** — corrupting supernatural power obtained from the Heart.
-- **Returning Blood** — Akio's inherited expression that reconstructs his established human form after death.
+- **Beast Blood** — corrupting supernatural power/curse obtained from the Heart. It manifests differently between bearers and appears influenced by identity, intention, emotion, resolve, circumstance, and manner of exposure without following a rigid transformation taxonomy.
+- **source-near Beast Blood** — ordinary Beast Blood called or delivered directly from or very near the Heart in unusually high concentration. This is not a second substance or "Shogun Blood."
+- **Returning Blood** — the unprecedented relationship formed when Akio dies after the Shogun forces source-near Beast Blood into him; it reconstructs Akio while preserving continuity of identity and increasingly responds to his intent/instinct.
+- **Shogun experiment** — a person deliberately exposed to Beast Blood by the Eclipse Shogun to see what the curse makes of them. Some specific powerful creatures may use this origin; it is not the origin of all beasts.
 - **Heart Binding** — one of the ancient restraints around the Heart.
-- **The Strand** — persistent shoreline hub.
+- **The Strand** — persistent shoreline hub and the place Akio subconsciously selects as his safe return destination after death. The Strand itself is not a resurrection anchor.
 - **Hushiro Gate Village / Yomori Grove / Kagutsuchi Court** — Areas 1, 2, and 3.
+
+### Retired lore anchors
+
+The following are superseded and should not appear as current canon:
+
+- inherited Returning Blood;
+- escaped ancestor / escaped Beast Blood bloodline as Akio's origin;
+- royal bloodline as Akio's explanation;
+- dormant inherited Beast Blood pulling Akio toward the island;
+- first death occurring anywhere as the awakening trigger;
+- separate refined Shogun Blood;
+- an Order oath/seal/ward or magical Strand property anchoring resurrection.
 
 ## Persistent resources
 
@@ -86,4 +100,4 @@ There is no generic Boss Emblem currency.
 
 ## Canon boundaries
 
-Do not casually introduce environmental/airborne Beast Blood transmission, standard Order Beast Blood dosing, immunity for Akio, true Blood control for ordinary bearers, a resolved cosmic origin for the Heart, live 3D character runtime as current production direction, or retired Posture/Deathblow systems as current combat authority.
+Do not casually introduce environmental/airborne Beast Blood transmission, standard Order Beast Blood dosing, immunity for Akio, a scientific assimilation/receptor explanation, true Blood control for ordinary bearers, a separate Shogun Blood substance, a resolved cosmic origin for the Heart, live 3D character runtime as current production direction, or retired Posture/Deathblow systems as current combat authority.
