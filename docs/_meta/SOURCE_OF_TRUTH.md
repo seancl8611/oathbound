@@ -4,12 +4,12 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-09-16
+last_reviewed: 2026-10-03
 ---
 
 # Source of Truth
 
-Each major subject has one owning authority. Dependent docs summarize or translate that authority; they do not preserve superseded mechanics for compatibility.
+Each major subject has one owning authority. Dependent docs summarize or translate that authority; they do not preserve superseded mechanics or lore for compatibility.
 
 | Subject | Authority |
 |---|---|
@@ -23,6 +23,12 @@ Each major subject has one owning authority. Dependent docs summarize or transla
 | Art technical standards | `docs/art_production/TECHNICAL_STANDARDS.md` |
 | Rig-rendered character pipeline | `docs/art_production/RIG_RENDERED_2D_PIPELINE.md` |
 | Akio commission | `docs/commissions/akio/AKIO_COMMISSION_BRIEF.md` |
+| Beast Blood supernatural rules | `docs/lore/BEAST_BLOOD.md` |
+| Returning Blood origin / resurrection rules | `docs/lore/RETURNING_BLOOD.md` |
+| Main campaign story spine | `docs/lore/STORY_OVERVIEW.md` |
+| Eclipse Shogun character/lore canon | `docs/lore/ECLIPSE_SHOGUN.md` |
+| Narrative delivery / dialogue-state cadence | `docs/narrative/NARRATIVE_DELIVERY.md` |
+| Opening first-attempt gameplay contract | `docs/gameplay/FIRST_ATTEMPT.md` |
 | Blood Aspect system | `docs/gameplay/BLOOD_ASPECTS.md` |
 | Wolf / Wraith / Ronin | corresponding `docs/gameplay/*_ASPECT.md` |
 | Aspect first-playtest values | `docs/gameplay/ASPECT_IMPLEMENTATION_BASELINES.md` |
@@ -34,6 +40,8 @@ Each major subject has one owning authority. Dependent docs summarize or transla
 | Progression / currencies | `docs/gameplay/PROGRESSION.md` + `ITEMS_AND_REWARDS.md` |
 | Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
 | Akio character canon | `docs/characters/AKIO.md` |
+| Strand return-location presentation | `docs/content/strand/OVERVIEW.md` + `docs/lore/RETURNING_BLOOD.md` |
+| Scribe character / Returning Blood observer role | `docs/characters/strand/SCRIBE.md` |
 | Regional content | relevant `docs/content/area_*` authority |
 | True-final Heart encounter | `docs/content/area_3/TRUE_FINAL_HEART.md` |
 | Run HUD / combat feedback | `docs/ui_ux/HUD.md` |
@@ -48,5 +56,7 @@ Each major subject has one owning authority. Dependent docs summarize or transla
 4. Blood Aspect identity belongs to the Aspect authorities. Shared docs must not invent one universal defensive event simply to make old Technique or UI content fit.
 5. First-playtest numeric baselines are tunable implementation targets, not immutable design law.
 6. Historical/research docs never override a current authority.
+7. Current Returning Blood authority supersedes all escaped-bloodline, inherited-Beast-Blood, dormant island-pull, and unscripted-first-death explanations. Akio begins Blood-free; the opening Shogun exposure creates Returning Blood.
+8. The Strand is not a magical resurrection anchor. Returning Blood reconstructs Akio there because his subconscious survival instinct selects the established safe location.
 
-When a current authority and runtime disagree, reconcile both around the approved direction rather than restoring a retired system merely to satisfy an old test, count, or compatibility path.
+When a current authority and runtime disagree, reconcile both around the approved direction rather than restoring a retired system or lore explanation merely to satisfy an old test, count, or compatibility path.

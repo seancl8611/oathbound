@@ -4,14 +4,14 @@ title: Story Overview
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-10-03
 topics:
   - story
   - blood-moon
   - returning-blood
   - eclipse-shogun
   - the-heart
-  - inherited-bloodline
+  - first-attempt
   - heart-bindings
   - silent-protagonist
   - ending
@@ -37,218 +37,222 @@ The source of Beast Blood is the Heart, an ancient living godlike organ or super
 
 Its ultimate origin remains deliberately ambiguous. It may be an organ of a forgotten entity, the core of the island, a divine vessel, or something that cannot be understood through human categories.
 
-The Heart possesses primal agency centered on survival, regeneration, growth, continuation, resistance to restraint, and incorporation. It does not require a human personality, spoken plan, or clearly defined morality.
-
 Long before the Shogun's civilization, an unknown power enclosed the Heart within an ancient complex and seven layered Heart Bindings. The Bindings kept it dormant, limited its influence, and protected its deeper body.
 
-## Discovery beneath Kagutsuchi Court
+## Discovery, plague, and fall
 
-During the kingdom's prosperous expansion, royal excavation beneath Kagutsuchi Court exposed a sealed stairway and ancient structure.
+Royal excavation beneath Kagutsuchi Court exposed the ancient complex. The Shogun initially ordered it sealed and restricted study.
 
-Engineers, guards, scholars, physicians, and ritual specialists discovered part of the Heart embedded within the island's stone. They could not determine whether the complex was a shrine, prison, research site, containment system, or a structure that had served several purposes.
+Years later, a deadly plague pushed the kingdom toward extinction. The Shogun authorized researchers to breach the outermost Heart Binding, leaving six intact, and construct an extraction apparatus against the exposed Heart.
 
-The Shogun ordered the site sealed, prohibited direct human use, and allowed only restricted study.
+Human blood was offered inward; the Heart released Beast Blood outward. Beast Blood genuinely cured the plague.
 
-The builders, age, original purpose, cause of discovery, and relationship between the ancient complex and the later barrier remain unknown.
+Corruption appeared gradually. Transformation, intensified impulses, and loss of genuine independence became undeniable only after the kingdom had become dependent on the cure.
 
-## Plague, breach, and extraction
-
-Years later, a deadly plague pushed the island toward extinction. Conventional medicine and containment failed.
-
-The Shogun authorized researchers to breach the outermost Heart Binding only when the kingdom appeared unlikely to survive without forbidden intervention. Six intact Bindings remained.
-
-The breach exposed living Heart tissue and awakened the source enough to make extraction possible. The Court then built its own apparatus against the exposed portion.
-
-Researchers placed a small measure of freshly drawn human blood into the apparatus. The offering flowed inward, and the Heart released Beast Blood outward into a collection vessel. The process required no death or human sacrifice.
-
-Beast Blood genuinely cured the plague. The sick recovered and damaged bodies healed.
-
-Because corruption appeared gradually, use spread before its full cost became clear. Physical transformation, intensified impulses, violent behavior, and loss of genuine independence emerged only after the kingdom had become dependent on the cure.
-
-The Shogun remains responsible for continuing, defending, and expanding Beast Blood after those consequences became undeniable.
+The Shogun remains responsible for continuing, defending, experimenting with, and seeking to expand Beast Blood after those consequences became known.
 
 The required historical order is:
 
-1. discovery,
+1. Heart discovery,
 2. restriction and study,
 3. extinction-level plague,
 4. first Binding breach,
 5. Court-built extraction,
 6. miraculous cure,
 7. delayed corruption and dependence,
-8. continued use and fall.
+8. continued use, experimentation, and fall.
 
-## The escaped inherited bloodline
+## Beast Blood and the bearer
 
-During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of the alteration rather than receiving a later extracted dose.
+Beast Blood is one curse, but it does not produce one result.
 
-Before the barrier was completed, the child escaped the island. The bloodline survived outside containment for generations and eventually produced Akio.
+Some people die from exposure. Some become beasts. Some retain intelligence or humanity for longer. Some become unusually powerful or specialized forms.
 
-The child's identity, family, protectors, escape route, and later life remain intentionally undefined. Akio's inherited condition does not make him a secret royal heir and does not create a second independent source of Beast Blood.
+The Blood appears to work with what it finds. Identity, temperament, intention, emotion, resolve, physical condition, manner of exposure, and duration may influence the result. Greed, obsession, rage, lust, jealousy, fear, grief, loneliness, pride, devotion, hunger, or determination can be magnified and expressed through the curse.
 
-## The Shogun's fall and present goal
+This remains supernatural and impressionistic rather than a rigid transformation taxonomy.
 
-The Shogun did not originally seek Beast Blood, but the cure's success changed his judgment. He came to see the forbidden power as proof that his decision and authority had saved the kingdom.
+Exceptional resolve can support control but does not guarantee Akio's outcome. The Shogun himself is exceptionally disciplined and resolute; the Blood has amplified his ambition, possessiveness, fear of extinction, pride, and refusal to surrender his kingdom.
 
-Long-term Beast Blood magnified qualities already present in him:
+## The Shogun's false mastery
 
-- determination became inability to surrender,
-- responsibility became possession,
-- protection became control,
-- authority became domination,
-- fear of extinction became rejection of natural death.
+The Shogun can direct mutations, retain intelligence, preserve tactical discipline, and choose when to reveal greater power. His centuries-long bond with the Heart also lets him call and direct Beast Blood from the island/Heart itself.
 
-He remains intelligent and responsible. The Heart does not directly control him like a puppet.
+He interprets these abilities as mastery.
 
-He now believes Beast Blood represents a stronger form of life and intends to end containment, restore his kingdom, and extend it to the mainland through conquest and forced salvation.
+His mastery is false because he cannot willingly abandon the Heart, end Beast Blood, accept natural death, permit others to refuse his salvation, or imagine a future without his kingdom and rule.
 
-He treats Kagutsuchi Court's disciplined elites as proof of mastery and dismisses the suffering of Hushiro and Yomori as failed adaptation or weak discipline.
+He now intends to end containment, restore his kingdom, and extend Beast Blood to the mainland through conquest and forced salvation.
 
-His mastery is false because he cannot abandon the Heart, end extraction, accept natural death, or permit others to reject his salvation.
+## Shogun experiments
+
+The Shogun has used Beast Blood deliberately on selected people before Akio. Captives, enemies, followers, retainers, or warriors who interested him may have been exposed so he could observe what the curse made of them.
+
+Some unusual island creatures, minibosses, or bosses may therefore be revealed as past experiments where their individual lore supports it. This is not the origin of every corrupted being.
+
+The experiments reinforce the Shogun's worldview: he believes exceptional people can be remade into stronger forms and treats the suffering or failure of others as weakness rather than evidence that his project is wrong.
 
 ## Barrier, Blood Moon, and the Strand
 
 After the kingdom's fall, survivors, mainland warriors, ritualists, and religious authorities created the containment barrier. Their organization became the Order.
 
-The barrier prevents corrupted inhabitants from leaving and prevents deliberate transport of Beast Blood or Heart-derived material beyond the island. Entry is also extremely difficult.
+The barrier prevents the island's cursed population and Heart-derived material from escaping. Entry is extremely difficult.
 
 The Blood Moon is the visible result of a recurring active cycle within the Heart. During it, existing Beast Blood strengthens and the barrier comes under pressure.
 
-The Strand is the barrier's controlled threshold. The Keeper, a former Court noble bound to the anchor, stabilizes the route used by the Order-sealed Boat.
+The Strand is the Order's controlled shoreline threshold and secure foothold. The Keeper stabilizes the crossing used by the Order-sealed Boat.
 
 The campaign remains beneath the Blood Moon without defining exactly how much ordinary time passes between Akio's attempts.
 
-## The island's inhabitants
+## Akio's mission
 
-Beast Blood does not spread through ordinary contact, bites, wounds, soil, roots, water, prey, vegetation, or death on the island. It must be deliberately introduced.
+Akio joins the Order through ordinary service as a highly skilled swordsman. He is not recruited because of prophecy, secret ancestry, or known supernatural potential.
 
-Many corrupted inhabitants retain memory, culture, skill, ambition, relationships, and loyalty while losing the ability to reject Beast Blood or act against its continuation.
+The Order sends him through the barrier to destroy the island's hostile cursed forces and ruler and to find and destroy whatever source sustains them. The mission is considered one-way.
+
+Akio begins with no Beast Blood and no Returning Blood powers.
+
+Before the player takes control, Akio has already reached the Strand, met the expedition's recurring NPCs, crossed onto the island, and progressed deep into his first expedition. The game begins late in that first attempt rather than with introductions at the hub.
+
+## First Shogun confrontation
+
+Akio reaches the Eclipse Shogun through his own martial skill.
+
+The opening culminates in a playable first confrontation. The player may demonstrate skill, but the narrative outcome is Akio's defeat.
+
+The Shogun is intrigued that an ordinary human crossed the island and reached him without Beast Blood. After mortally wounding Akio, he chooses not merely to discard him. His attitude is arrogant experimentation:
+
+> "Let's see what the Blood makes of you."
+
+Through his bond with the Heart, the Shogun calls a large concentration of Beast Blood from the island/Heart itself. The Blood is not a separate Shogun-created substance; it is ordinary Beast Blood delivered unusually close to the true source and in overwhelming concentration.
+
+The chamber's veins awaken, Blood moves through the environment and around the Shogun or his weapon, and he drives it into Akio's mortal wound. The scene fades toward black.
+
+The Shogun expects death or transformation. He does not know what will happen.
+
+## Birth of Returning Blood
+
+Akio dies carrying the source-near Beast Blood.
+
+Instead of one of the known outcomes, the Blood reconstructs him without fully erasing the continuity of his identity. This unprecedented relationship becomes **Returning Blood**.
+
+The exact reason Akio responds this successfully is intentionally unresolved. His rare individual response, discipline and resolve, identity and comparatively pure intention, direct concentrated exposure, and death all matter without being reduced to genes, immunity, a hidden assimilation mechanism, or ancestry.
+
+Akio did not seek this power and does not initially regard effective immortality as a gift.
+
+## Why Akio returns to the Strand
+
+The Strand does not magically summon Akio and no Order oath, seal, ward, Bloodwell, Boat, or ritual anchors his soul there.
+
+Returning Blood increasingly responds to Akio's intention. When Akio dies, conscious control is absent, so the Blood falls back on identity and instinct.
+
+Its dominant instruction is survival: return somewhere safe.
+
+The Strand is the safest place Akio knows during the expedition. His first reconstruction therefore occurs at one specific safe place there. That successful return reinforces the location as his subconscious destination, causing later deaths to reconstruct him at the same spot.
+
+The exact supernatural mechanics of crossing distance remain unexplained. The important rule is that Akio subconsciously selects the Strand through survival instinct.
+
+## Akio and the Scribe
+
+Akio and the Scribe knew each other through the Order before the Blood Moon expedition and already share a quiet romantic attachment when the campaign begins.
+
+Because the player begins after Akio has already used the Strand as his expedition base, the Scribe and other hub characters already know him when first shown on screen.
+
+Their first major player-facing conversations occur after Akio's impossible return. The immediate questions are not introductions but alarm and disbelief: How is he alive? What did the Shogun do to him? What is the Blood doing now?
+
+The Scribe becomes the recurring observer who studies Returning Blood without ever reducing it to a complete scientific explanation. She can establish gradually that Beast Blood affects people differently, appears shaped by the bearer, rebuilds Akio, and responds increasingly to his intention and instinct.
+
+She may eventually infer:
+
+> "I don't think the Blood is choosing the Strand, Akio. I think you are."
+
+The term **Returning Blood** may emerge through this investigation.
+
+## Blood Aspects and control
+
+Because Beast Blood naturally changes its bearer, Akio's growing sovereignty lets him gradually steer those changes.
+
+Blood Aspects are controlled adaptations of Returning Blood. The Blood responds to conscious intention, personality, emotion, and instinct rather than functioning as unrelated magical classes.
+
+Akio and the Shogun are thematic parallels. Both are exceptionally resolute. The Shogun's greed, ambition, possession, obsession, and fear of extinction have shaped his long corruption; Akio's discipline and comparatively selfless mission shape a different relationship with the same curse.
+
+This does not create a simple moral rule where good intentions automatically grant control.
+
+## Island inhabitants
+
+Many corrupted inhabitants retain memory, culture, skill, ambition, relationships, and loyalty while losing the ability to reject Beast Blood or its continuation.
 
 The regions present different long-term expressions of the same curse:
 
 - **Hushiro Gate Village — Rupture:** recent corruption, bodily collapse, violence, fragmented community, desperate faith.
-- **Yomori Grove — Adaptation:** long-term predation, persistent spirits, and ecological damage caused by corrupted inhabitants and beasts.
-- **Kagutsuchi Court — False Ascendancy:** preserved hierarchy, beauty, discipline, and advanced mutation mistaken for mastery.
+- **Yomori Grove — Adaptation:** long-term predation, persistent spirits, and ecological damage surrounding corrupted life.
+- **Kagutsuchi Court — False Ascendancy:** preserved hierarchy, discipline, beauty, and specialized mutation mistaken for mastery.
 
-Yomori's wraiths are true spirits persisting as incomplete memories or remnants. The environment itself is not infected with a transmissible form of Beast Blood.
-
-## Akio's mission and first return
-
-The Order knows that organized regenerative cursed forces remain on the island and that the Blood Moon creates a rare crossing opportunity. It does not know the Heart, plague history, extraction process, Shogun's conquest plan, or Akio's lineage.
-
-Akio's mission is to destroy the island's hostile cursed forces and ruler and find and destroy whatever source sustains them. The mission is considered one-way.
-
-Akio joined the Order as a skilled swordsman before anyone knew his inherited condition existed. As the Blood Moon approaches, dormant Beast Blood produces a subtle unexplained pull toward the island: recognition, unease, and a sense that the mission matters personally. The Heart does not speak to or control him, and the pull does not replace his own decision to accept the mission.
-
-Akio begins without active Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
-
-His first attempt is not a scripted tutorial route. He enters the normal Hushiro → Yomori → Kagutsuchi route using his base sword kit, the default Beast-Bane Whistle, ordinary Technique rewards, and normal room/routing interactions. A new player is expected to die early because they lack knowledge and progression, but the game does not force the death at a particular room.
-
-He is the first known descendant of the escaped bloodline to return inside the barrier during a Blood Moon and die after the dormant inherited Blood has been fully stirred.
-
-His first death—wherever it actually occurs—awakens Returning Blood. Because his body developed naturally around the dormant condition, it reconstructs his established human form at the Strand rather than fixing him into an ordinary corrupted transformation. Akio did not seek this resurrection and does not initially welcome the immortality implied by it.
-
-That first reconstruction establishes the human pattern and Strand destination used by later returns. The deeper metaphysics remain deliberately mysterious.
-
-A mastery-level player may theoretically defeat the Shogun and reach the Heart before dying. In that exceptional case, the Heart destroys Akio before any Binding ritual can occur, awakening Returning Blood without reducing the six remaining player Bindings.
-
-Akio's lineage explains why he returns. His discipline and resolve explain why he can later control and evolve the Blood without surrendering himself to it.
-
-## Akio and the Scribe
-
-Akio and the Scribe knew each other through the Order before the Blood Moon expedition and already share a quiet romantic attachment when the campaign begins. Their relationship is deliberately understated rather than a major romance subplot.
-
-The Scribe is independently assigned to the Strand as the Order's archivist and discovery recorder. She therefore has a real operational reason to be present and is not simply accompanying Akio as a partner.
-
-She knows Akio as a person from before the island and provides one of the clearest emotional contrasts to the mission. After his first return, she is both professionally responsible for documenting Returning Blood and personally disturbed by what repeated reconstruction may be doing to him.
-
-## Akio as silent protagonist
-
-Akio never speaks or supplies written responses, dialogue choices, or internal monologue.
-
-The story is told around and through him. NPCs, intelligent enemies, and bosses may speak; Akio's character and decisions are expressed through action, stillness, physical reaction, combat, refusal, and the player's continued movement through the campaign.
-
-His silence continues through the bloodline reveal, Shogun recruitment, Heart confrontation, ending, and postgame.
+Yomori's environment is not a conventional contagious reservoir. The danger remains Beast Blood deliberately introduced and sustained in living bearers.
 
 ## Akio and the Shogun
 
-The Shogun senses Beast Blood within Akio but does not initially understand why Akio can survive and control it differently from ordinary bearers.
+The Shogun personally creates the conditions for Akio's Returning Blood and later becomes fascinated by the result.
 
-Their repeated relationship develops through:
+Their relationship develops through:
 
-1. dismissal,
-2. fascination with Akio's returns and controlled Aspects,
-3. recognition that Akio demonstrates a form of genuine control and an attempt to recruit him as proof of the Shogun's worldview,
-4. fear and hatred after Akio silently rejects him through continued opposition and attacks the Heart.
+1. **Opening curiosity** — the Shogun decides to see what Beast Blood makes of Akio.
+2. **Fascination** — Akio returns and begins directing the Blood in ways the Shogun did not expect.
+3. **Recognition and recruitment** — the Shogun treats Akio as apparent proof that Beast Blood can be mastered and wants to claim that success for his worldview.
+4. **Possessive anger, fear, and hatred** — Akio silently rejects him through continued opposition and attacks the Heart.
 
-Akio becomes the contradiction the Shogun cannot accept: a bearer who can use Beast Blood while retaining the ability to reject its continuation.
-
-`NARRATIVE_DELIVERY.md` owns the seven awakened Shogun dialogue states, the rare pre-awakening fallback, and the reveal cadence.
+Akio becomes the contradiction the Shogun cannot accept: a bearer created through the Shogun's own intervention who can use Beast Blood while remaining capable of rejecting its continuation.
 
 ## Heart Binding campaign
 
-The Court destroyed one of the seven ancient Bindings before the game. Six remain when Akio begins the campaign.
+The Court destroyed one of the seven ancient Bindings before the game. Six remain after Returning Blood awakens.
 
-After Returning Blood awakens, each of the first six successful Shogun victories follows the same underlying ritual:
+Each of the first six successful post-awakening Shogun victories follows the same underlying ritual:
 
 1. Akio enters the Heart chamber.
 2. He offers Returning Blood through the Court-built extraction apparatus.
 3. The Heart attempts to reclaim its own power.
-4. Akio's controlled Blood rejects that control.
+4. Akio's controlled Blood rejects that authority.
 5. One remaining Binding ruptures.
-6. The Heart dissolves Akio's current body.
-7. Returning Blood reconstructs him at the Strand.
+6. The Heart destroys Akio's current body.
+7. Returning Blood falls back on Akio's established survival instinct and reconstructs him at the Strand.
 8. Permanent rewards and Binding progress persist.
 
-The ritual is simple and reusable. `NARRATIVE_DELIVERY.md` defines six escalating visual/campaign states of this same sequence rather than six unique mechanisms.
+The Heart can regenerate living tissue but cannot recreate the ancient external restraints.
 
-The Heart can regenerate living tissue but cannot rebuild the external ancient restraints created by an unknown power.
+## Silent protagonist
 
-The Shogun reconstructs between these clears through existing Beast Blood. No renewed dose or physical channel is required.
+Akio never speaks, supplies written responses, dialogue choices, or internal monologue.
+
+NPCs, intelligent enemies, and bosses may speak. Akio's character is expressed through action, stillness, physical reaction, combat, refusal, and continued movement through the campaign.
 
 ## Final story run and ending
 
-After the sixth remaining Binding is destroyed, the next successful full route becomes the seventh and final story run.
+After the sixth remaining Binding is destroyed, the next successful route becomes the final story run.
 
-Akio defeats the Shogun's current body and continues directly into the exposed Heart chamber without ending the active run.
+Akio defeats the Shogun's current body and continues directly into the true-final Heart encounter.
 
-The Heart encounter has two conceptual forms:
+The first Heart victory destroys the Heart's manifested combat body and permanently ends its ability to produce, release, or spread **new Beast Blood**. Extraction is ended and the Shogun's mainland expansion plan is defeated.
 
-1. **The Unbound Heart** — the Heart tears free and becomes a mobile beastlike organ with malformed limbs.
-2. **The Vessel of Continuance** — the Heart creates an enormous nonhuman defensive beast body around itself while remaining visibly central.
+Existing Beast Blood remains active. Akio retains Returning Blood and reconstruction. The Shogun and other existing bearers retain the sustain already present in their Blood.
 
-Akio destroys the Heart's manifested combat body and permanently cripples its supernatural reach.
-
-The Heart survives only as a faint regenerating remnant, but it can **never again produce, release, or spread new Beast Blood**. The extraction cycle is ended permanently, the Shogun's mainland expansion plan is broken, and the curse can no longer create new bearers.
-
-Existing Beast Blood remains active. Akio retains Returning Blood and reconstruction. The Shogun and other existing Beast Blood bearers retain the benefits and sustain already present in their bodies. The Shogun may therefore reconstruct again after his final-story defeat.
-
-The ending must make the victory unmistakable: the Heart has been reduced from an expanding existential threat to a contained remnant whose activity can be monitored and suppressed. Akio has not erased the island's existing cursed population; he has permanently ended the possibility of the curse spreading beyond it or being given to anyone new.
-
-Akio remains silent. The ending and credits follow.
+The Heart survives only as a faint regenerating remnant. The main story victory is permanent containment of propagation, not erasure of every existing cursed being.
 
 ## Canonical postgame
 
-The completed save continues **canonically** after the ending.
+Akio continues returning to the island to monitor existing Beast Blood threats and suppress the Heart's local physical regrowth.
 
-The Heart slowly regenerates physical tissue because regeneration is fundamental to its nature, but it cannot recover the lost ability to create or propagate Beast Blood. Its postgame pulse is faint and local.
+Postgame runs do not undo the story victory and cannot restore the Heart's ability to create new bearers.
 
-Akio continues returning to the island to monitor existing Beast Blood threats and periodically suppress the Heart's regrowth. Existing bearers—including the Shogun—remain valid recurring threats because their Blood never became inert.
+## Deliberate mysteries
 
-Postgame runs do not create a new ending or undo the story victory. Their purpose is continued containment of a permanently non-propagating curse.
-
-The postgame/release authority owns route selection, repeat Heart suppression, completion goals, records, achievements, and release-scope rules.
-
-## Deliberate mysteries and deferred implementation
-
-The following remain intentionally undefined or implementation-level:
+The following remain intentionally unresolved:
 
 - the Heart's ultimate origin,
-- the ancient builders and full purpose of the complex,
-- the escaped ancestor's identity and exact escape,
-- the deeper metaphysics of Strand reconstruction,
-- the Shogun's exact barrier-breach plan,
-- exact dialogue scripts and line counts,
-- exact camera timing and portrait implementation,
-- exact Shogun and Heart movesets,
-- the exact mechanism by which the crippled Heart regrows its postgame combat manifestation.
+- the ancient builders and full purpose of the prison,
+- exactly why Akio responds so successfully to concentrated Beast Blood,
+- the exact metaphysics connecting identity/emotion/intention to transformation,
+- the exact supernatural mechanics of Strand reconstruction across distance,
+- which specific creatures were created by Shogun experimentation,
+- the Shogun's exact barrier-breach method,
+- and the exact mechanism by which the crippled Heart regrows its postgame combat manifestation.

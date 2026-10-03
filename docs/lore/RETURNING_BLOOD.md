@@ -4,15 +4,16 @@ title: Returning Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-10-03
 topics:
   - returning-blood
   - akio
   - revival
   - blood-aspects
-  - inherited-beast-blood
+  - beast-blood
   - strand
   - first-attempt
+  - eclipse-shogun
   - heart-bindings
   - ending
   - postgame
@@ -21,7 +22,6 @@ related:
   - CHAR-AKIO
   - LORE-THE-ORDER
   - LORE-ECLIPSE-SHOGUN
-  - LORE-BARRIER-BLOOD-MOON
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
@@ -31,182 +31,179 @@ related:
 
 # Returning Blood
 
-Returning Blood is the unprecedented form taken by the dormant Beast Blood inherited through Akio's bloodline. It first awakens when he dies on the island during the Blood Moon and reconstructs him without erasing the continuity of his identity.
+Returning Blood is the unprecedented form Beast Blood takes within Akio after the Eclipse Shogun deliberately forces a large, source-near concentration of the Heart's Blood into him at the end of Akio's first attempt.
 
-## Escaped bloodline
+It is **not inherited**, is not an Order technique, and is not a separate substance created by the Shogun. It is ordinary Beast Blood drawn unusually close to its true source and introduced in overwhelming concentration, then shaped by Akio's rare response, identity, resolve, intentions, and death.
 
-During the early Beast Blood era, an island child developed before birth while the mother already carried Beast Blood. The child remained human but carried a dormant inherited expression of Beast Blood rather than receiving a later extracted dose.
+The exact reason Akio becomes the first known bearer to retain himself this completely remains deliberately unexplained.
 
-Before the barrier was completed, the child escaped the island. The bloodline survived outside containment for generations. Its descendants did not display ordinary Beast Blood powers, obvious mutation, or knowledge of their origin.
+## Beast Blood does not make the same thing twice
 
-Akio unknowingly descends from that escaped bloodline. The ancestor's exact identity, family, and escape remain deliberately undefined at current scope.
+Beast Blood is a curse, not a predictable recipe. Different bearers react differently.
 
-This does not create a second source of Beast Blood and does not make the curse conventionally hereditary. The original alteration still came from Beast Blood extracted from the Heart. Akio inherits the dormant condition first formed in the escaped child before birth.
+Some die from exposure. Some become beasts. Some retain more memory, speech, discipline, or recognizable personality. Some become unusually powerful or specialized forms.
 
-## Dormant pull toward the island
+The Blood also appears to magnify and reshape what is already present in a bearer. Resolve and mental discipline can support greater control; obsession, greed, rage, fear, jealousy, grief, loneliness, lust, pride, or other powerful drives may influence what the curse makes of someone. This relationship should remain suggestive rather than becoming a rigid transformation chart.
 
-Before Returning Blood awakens, Akio has no active Blood powers and does not know he carries an inherited condition. As the Blood Moon approaches and he prepares for the island crossing, the dormant Blood reacts subtly to proximity to its source.
+Akio and the Shogun both possess exceptional resolve. Their different intentions and identities help explain why the same curse manifests so differently in them. Resolve alone does not guarantee Akio's outcome and does not diminish the strength of other Order warriors.
 
-Akio experiences this only as an unexplained sense of recognition, unease, and personal importance around the island. The Heart does not speak to him, issue commands, reveal information, or override his will. The pull may influence why the mission feels unusually difficult for him to ignore, but Akio still chooses to accept it for his own reasons.
+## First attempt and Shogun intervention
 
-This dormant response is not itself Returning Blood and cannot reconstruct him. The first death inside the barrier remains the event that fully awakens the inherited condition.
+Akio begins the game without Beast Blood, Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
 
-## First awakening
+The player enters late in Akio's first expedition. Akio has already reached the Strand, met its people, crossed onto the island, and fought deep into the normal route. He reaches the Eclipse Shogun through his own ability as an Order swordsman.
 
-Akio begins the game without active Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
+The opening culminates in Akio's first confrontation with the Shogun. The encounter is playable, but the story requires Akio's defeat. The Shogun mortally wounds him and becomes interested in the ordinary human who crossed the island and reached him without using Beast Blood.
 
-He is the first known descendant of the escaped bloodline to:
+The Shogun's intent is not to grant Akio immortality. It is arrogant curiosity:
 
-- return inside the barrier,
-- do so during a Blood Moon, when existing Beast Blood is unusually active,
-- and suffer death while the inherited condition is fully stirred by those circumstances.
+> "Let's see what the Blood makes of you."
 
-His first attempt is a real run rather than a fixed prologue. He uses his normal sword training, the default Beast-Bane Whistle, ordinary run Technique rewards, and the normal route/room flow while the Blood-specific progression systems remain dormant.
+Through his centuries-long bond with the Heart, the Shogun calls and directs Beast Blood from the island/Heart itself. Veins in the chamber awaken; Blood moves through the environment and around the Shogun or his weapon; he drives a large concentration into Akio's mortal wound. The presentation then fades toward black.
 
-When that attempt eventually ends in death, the dormant Blood's regenerative instinct activates for the first time.
+The Blood is not a separate "Shogun Blood." Its distinction is proximity and concentration: it has been called directly from or near the Heart rather than reaching Akio through an ordinary downstream bearer or small collected dose.
 
-Because Akio's body developed naturally around the inherited condition, the Blood reconstructs his established human form instead of immediately replacing it with a fixed corrupted form. He reforms at the Strand carrying the first known Returning Blood.
+The Shogun expects Akio to die or become another corrupted being. He does not know what the result will be.
 
-Akio did not seek this outcome and does not initially regard reconstruction or effective immortality as a gift. His first return is an unwanted supernatural consequence of the inherited Blood, not the fulfillment of a wish or Order rite.
+## The Shogun's experiments
 
-That first complete reconstruction establishes the Strand as Returning Blood's stable return point. Later deaths follow the preserved human pattern and destination created by that first successful return. The deeper supernatural transport remains deliberately mysterious; the Bloodwell, Keeper, Boat, and Order warding do not create or power the revival.
+The act is not unique to Akio. The Shogun has previously used his bond with the Heart to expose selected people to Beast Blood and observe what the curse makes of them.
 
-## Why Akio is unique
+Captives, enemies, followers, retainers, or warriors who interested him may have become unusually powerful or specialized creatures. Some named beasts, minibosses, or bosses may therefore be revealed as past Shogun experiments where their individual lore supports it. This should enrich specific creatures rather than become the origin of every corrupted being on the island.
 
-Previous Order warriors did not carry Akio's inherited condition. They entered the island as ordinary humans protected by anti-corruption warding and died without developing Returning Blood.
+This history explains why the Shogun knows he can deliberately force Beast Blood into another person while preserving uncertainty about the outcome.
 
-Earlier descendants of the escaped bloodline lived outside the barrier and never combined Akio's three awakening conditions. Akio is therefore not the result of an Order recipe, deliberate experiment, newly administered dose, or stronger version of ordinary warding.
+## Birth of Returning Blood
 
-Akio is not immune. His lineage gives him the capacity to survive the awakening and preserve a human baseline, but Beast Blood can still transform him, intensify his impulses, and threaten his independence.
+Akio's response is unprecedented.
 
-## Resolve and genuine control
+The Beast Blood takes root, but it does not fully erase him. His unusual reaction to the curse, exceptional discipline and resolve, strong identity, and comparatively uncorrupted intention all influence the form it takes without providing a single mechanical explanation for why he survives.
 
-Resolve does not create Returning Blood.
+Akio dies carrying the source-near Blood the Shogun forced into him. Instead of settling into one of the known outcomes, the Blood reconstructs him while preserving the continuity of Akio's human identity.
 
-Akio's lineage and first death explain why he can return. His discipline and resolve explain why he can later control and evolve the awakened Blood without surrendering himself to it.
+That new relationship is Returning Blood.
 
-Returning Blood initially acts without his understanding. Across later runs, Akio gradually learns to:
+The story should communicate **what happened** without reducing the event to genetics, receptors, immunity, a hidden ancestry rule, or a repeatable formula.
+
+## Why the Strand is the return point
+
+The Strand is not a magical resurrection anchor, and the Order does not create Akio's return point through an oath, seal, ward, Bloodwell, Boat, or ritual.
+
+Returning Blood increasingly listens to Akio's conscious intent while he is alive. Death removes that conscious control, so the Blood falls back on deeper identity and instinct.
+
+Akio's strongest remaining impulse is survival: return somewhere safe.
+
+The Strand is the safest place he knows on the island expedition. It contains his allies, preparation, resources, and secure foothold. On the first reconstruction, Returning Blood follows that subconscious survival instinct and rebuilds Akio at one specific safe location on the Strand.
+
+That successful return reinforces the same location as his instinctive destination. Later deaths therefore reconstruct him at the same spot.
+
+A useful eventual Scribe inference is:
+
+> "I don't think the Blood is choosing the Strand, Akio. I think you are."
+
+The deeper supernatural mechanics of how reconstruction crosses distance remain deliberately unexplained. The important rule is that **Akio's subconscious intent selects the destination; the Strand does not summon him.**
+
+## Resolve, identity, and genuine control
+
+Resolve does not by itself create Returning Blood.
+
+Akio's first return comes from an unprecedented convergence: a rare individual response, the Shogun's direct source-near exposure, Akio's identity and resolve, his intentions, and death while the Blood is taking root.
+
+Afterward, discipline becomes increasingly important because Akio learns to direct a curse that naturally wants to change its bearer.
+
+Across later runs Akio learns to:
 
 - resist further escalation,
-- consciously permit greater transformation,
+- consciously permit selected transformations,
 - stabilize different Blood Aspects,
 - direct temporary Techniques through those forms,
 - return toward a controlled human baseline,
 - and continue opposing the Heart and Shogun while carrying their power.
 
-Other bearers may retain intelligence, memory, loyalty, speech, ambition, martial skill, or deliberate mutation use. Those qualities do not equal Akio's genuine control. Ordinary bearers ultimately lose the ability to reject the Blood or act against its continuation.
+Other bearers may retain intelligence, memory, loyalty, speech, ambition, martial skill, or deliberate mutation use. Those qualities do not automatically equal Akio's degree of sovereignty.
 
-## First-attempt progression
+## Blood Aspects and adaptation
 
-`FIRST_ATTEMPT.md` owns the pre-awakening gameplay rules.
+Blood Aspects are controlled expressions of the same transformative curse.
 
-The first attempt uses the normal full route rather than a special tutorial route:
+Beast Blood naturally adapts and changes its bearer. Because Akio retains his identity and becomes increasingly able to influence the Blood, he learns to steer that tendency rather than merely suffer it.
 
-1. Akio begins directly in the normal Hushiro route as an ordinary Order swordsman carrying dormant inherited Blood.
-2. The player uses the base katana kit, default Beast-Bane Whistle, normal Technique rewards, and ordinary route/room interactions.
-3. Blood Aspects, Corruption, Embrace/Tier growth, Blood, Blood Arts, Relic loadout, and permanent upgrades are not yet active.
-4. Shrines remain usable for their non-Aspect support behavior, but they cannot Embrace or advance a Tier.
-5. The player's first death may happen anywhere the normal route allows.
-6. Dormant inherited Beast Blood awakens and reconstructs Akio at the Strand.
-7. The first reconstruction establishes the stable human pattern and return point used by later returns.
-8. Subtle physical and environmental signs establish that something has changed.
-9. The normal Blood-powered progression loop begins after the return.
+This gives the run progression a narrative foundation:
 
-A mastery-level player may defeat the entire regional route and reach the Heart before dying. In that exceptional case, no Binding can yet be broken because the rejection ritual requires awakened Returning Blood; the Heart destroys Akio there, causing the first awakening without advancing Binding progress.
-
-There is no authored requirement that the first death occur at a specific enemy, room, miniboss, or boss.
+- the Blood wants to change Akio,
+- Akio's personality, emotion, instinct, and conscious intent shape that change,
+- Shrines and Aspect progression give him structured opportunities to Resist or Embrace it,
+- and the resulting Aspects are directed adaptations rather than unrelated magical classes.
 
 ## Failed-run return
 
-After the first awakening, Returning Blood reforms Akio at the Strand whenever he dies during a run. Death is real: his current body is destroyed, while Returning Blood preserves continuity and reconstructs the established human pattern at its stable return point.
+After the first awakening, Returning Blood reconstructs Akio at the established Strand location whenever he dies during a run.
 
-The current run's Corruption, Blood Aspect Tier, Techniques, refinements, Gold, room progress, and temporary Relic effects are burned away during the return.
+Death is real: his current body is destroyed. Returning Blood preserves continuity and rebuilds his established human form according to the subconscious return pattern.
 
-Permanent upgrades, unlocked Aspects, Blood Mirror progress, discoveries, and major currencies survive according to the progression system.
+The current run's temporary state is lost according to the progression system. Permanent upgrades, unlocked systems, discoveries, major currencies, and campaign progress persist where their owning authorities specify.
 
-Akio may then board the Boat and cross again while the campaign remains beneath the Blood Moon. The story does not define how much ordinary time passes between attempts.
+Akio may then cross again while the campaign remains beneath the Blood Moon.
 
 ## Successful Binding-run return
 
-During each of the first six successful clears after Returning Blood has awakened, Akio defeats the Eclipse Shogun and reaches the Heart chamber and extraction apparatus built by the Shogun's civilization.
+During each of the first six successful clears after Returning Blood has awakened, Akio defeats the Eclipse Shogun and reaches the Heart chamber and Court extraction apparatus.
 
-The successful Binding-run sequence is:
+The established sequence remains:
 
-1. Akio cuts himself and places Returning Blood into the apparatus as the human-blood offering.
+1. Akio places Returning Blood into the apparatus as the human-blood offering.
 2. The apparatus carries that Blood into the exposed Heart.
-3. The Heart attempts to absorb and reclaim its own power.
-4. Akio's Blood resists that control.
+3. The Heart attempts to absorb or reclaim its own power.
+4. Akio's Returning Blood resists that authority.
 5. The resulting rejection pulse breaks one ancient Heart Binding.
-6. The Heart retaliates through the same contact and dissolves Akio's current body into blood.
-7. Returning Blood follows the stable pattern and destination established by the first return and reconstructs him at the Strand.
-8. Temporary run-state is lost, while the destroyed Binding and permanent rewards remain.
+6. The Heart retaliates and destroys Akio's current body.
+7. With conscious control gone, Returning Blood falls back to Akio's established survival instinct and reconstructs him at the Strand.
+8. Temporary run state is lost while the destroyed Binding and permanent rewards remain.
 
-The process is intentionally direct. It does not require a different mechanism for each Binding, an extended ritual explanation, or visible travel of Akio's blood across the island.
-
-The Heart Binding remains destroyed because it is an external ancient restraint that the Heart did not create and cannot regenerate. Akio can complete only one Binding per run because the retaliation destroys his current body immediately after the rupture.
-
-## Final Heart confrontation
-
-After all six remaining Bindings are destroyed, the seventh successful story run does not repeat the extraction ritual.
-
-Akio defeats the Shogun's current body and continues into the true-final Heart encounter while the same run remains active.
-
-Returning Blood's established rejection of the Heart supports the final narrative resolution without requiring a separate new player mechanic or weak-point subsystem.
-
-The first Heart victory destroys the Heart's manifested combat body and permanently cripples the source's ability to produce, release, or spread **new Beast Blood**. It does not erase Beast Blood already present in existing bearers.
-
-## Returning Blood after the ending
-
-Akio retains Returning Blood after the canonical ending.
-
-The final victory severs the Heart's ability to create new bearers or extend its curse beyond the existing Beast Blood population, but Akio's inherited active Blood remains part of him. His established benefits therefore remain intact:
-
-- Returning Blood reconstruction,
-- Blood Aspects,
-- supernatural regeneration,
-- and the run systems built around them.
-
-The same rule applies to the Eclipse Shogun and other existing Beast Blood bearers. Their existing Blood does not disappear merely because the Heart can no longer make more.
-
-The Heart itself is reduced to a faint regenerating remnant. Akio can continue returning to the island after the story to monitor and suppress that regrowth before its local activity becomes dangerous. These postgame expeditions are canonical continuations of the completed story rather than a non-canonical restoration of powers that were lost.
-
-The key permanent consequence is **containment of propagation**: Beast Blood can no longer infect, transform, or be deliberately given to anyone new.
+The Heart can regenerate living tissue but cannot recreate the external ancient Bindings.
 
 ## Relationship to the Shogun
 
-The Shogun's fascination with Akio's repeated returns and unusual control eventually develops into recognition that Akio demonstrates something the Shogun cannot: Beast Blood power combined with the genuine ability to reject its continuation.
+The Shogun creates the conditions for the very power that later threatens him.
 
-He attempts to recruit Akio as proof that Beast Blood can be mastered and that his vision for the kingdom was justified.
+He takes an ordinary but extraordinary human opponent, gives him direct access to the curse in overwhelming source-near concentration, and expects the Blood to prove the Shogun's worldview correct.
 
-Akio's refusal is expressed entirely through continued opposition rather than spoken debate or a dialogue choice.
+Instead, Akio becomes the first known bearer capable of repeatedly using Beast Blood while retaining the ability to reject its continuation and oppose the Heart itself.
 
-`NARRATIVE_DELIVERY.md` owns the seven awakened Shogun progression states and reveal timing.
+The relationship therefore develops from the Shogun's initial curiosity and authorship of Akio's exposure into fascination, attempted recruitment, possessive anger, fear, and hatred.
+
+## Final Heart confrontation and postgame
+
+After all six remaining Bindings are destroyed, the seventh successful story run continues from the Shogun into the true-final Heart encounter.
+
+The first Heart victory permanently cripples the source's ability to produce, release, or spread **new Beast Blood**. It does not erase Beast Blood already present in existing bearers.
+
+Akio retains Returning Blood after the canonical ending, including reconstruction and Blood Aspects. The Shogun and other existing bearers likewise retain the supernatural sustain already present in them.
+
+Postgame expeditions are canonical containment work against the existing cursed population and the Heart's faint physical regrowth.
 
 ## Canon restrictions
 
+- Do not describe Returning Blood as inherited or bloodline-based.
+- Do not restore the escaped-ancestor explanation.
 - Do not describe Akio as immune to Beast Blood.
+- Do not reduce Akio's outcome to willpower alone.
 - Do not describe Returning Blood as a standard Order technique or repeatable recipe.
-- Do not make Order warding or resolve the cause of Returning Blood.
-- Do not introduce a new dose of Beast Blood during Akio's first attempt.
-- Do not imply that ordinary contact, wounds, proximity, or death on the island creates Beast Blood bearers.
-- Do not describe the Keeper, Boat, Bloodwell, or Strand as the source of Returning Blood.
-- Do not turn the Strand return into a separate technical anchor system.
-- Do not call Akio half-human or require him to be nonhuman.
-- Do not give Akio Blood Aspects, Corruption/Tier progression, Blood, or Blood Arts before the first awakening.
-- Do not forbid ordinary Technique rewards, normal room flow, or the default Beast-Bane Whistle on the first attempt.
-- Do not force the first death at a predetermined normal-route enemy or chamber.
-- Do not describe revival as consequence-free or imply that the current body survives death.
+- Do not invent a separate refined "Shogun Blood" substance.
+- The Shogun directs ordinary Beast Blood from the Heart/island in unusually large, source-near concentration.
+- Do not say the Shogun deliberately slows or stabilizes Akio's transformation; he does not know what the Blood will make of Akio.
+- Do not make the Strand, Bloodwell, Keeper, Boat, Order warding, oath, or seal the source or anchor of revival.
+- Akio subconsciously selects the Strand return location through survival instinct when conscious control is absent.
+- Do not give Akio Blood Aspects, Corruption/Tier progression, Blood, or Blood Arts before the opening Shogun exposure and first reconstruction.
 - Do not treat Blood Aspects as unrelated magical classes.
-- Do not describe intelligent or deliberate mutation use by another bearer as genuine control equal to Akio's.
 - Do not describe the final Heart victory as making existing Beast Blood inert.
 - Do not remove Returning Blood, Shogun reconstruction, or existing-bearer regeneration after the ending.
-- Do not allow the Heart to create or release new Beast Blood after the canonical ending.
 
 ## Deliberately unresolved
 
-- the exact identity, family, and fate of the escaped ancestor,
-- how the bloodline remained hidden across generations,
-- the deeper metaphysics behind the first reconstruction and preserved return imprint,
-- whether any other dormant descendants still exist,
-- the exact biological/supernatural mechanism by which the crippled Heart regrows its postgame manifestations,
-- and exact implementation details of first-return visuals beyond the approved narrative-delivery package.
+- why Akio is the first known person to respond this successfully to the curse,
+- the exact metaphysics by which identity, emotion, intention, and instinct influence Beast Blood,
+- the exact supernatural mechanics that reconstruct Akio across distance,
+- which specific island creatures were Shogun experiments,
+- the Heart's ultimate origin,
+- and the exact biological/supernatural mechanism by which the crippled Heart regrows its postgame manifestations.

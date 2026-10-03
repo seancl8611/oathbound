@@ -4,7 +4,7 @@ title: Core Gameplay Loop
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-10-03
 topics:
   - core-loop
   - first-attempt
@@ -17,6 +17,7 @@ topics:
   - postgame
 related:
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-BLOOD-ASPECTS
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-ITEMS-REWARDS
@@ -28,62 +29,77 @@ related:
 
 # Core Gameplay Loop
 
-## Introductory first attempt
+## Opening first attempt
 
-Before the persistent roguelite loop begins, Akio crosses to the island without active Beast Blood abilities.
+Before the persistent roguelite loop begins, the player enters late in Akio's first island expedition.
 
-The player uses the base sword kit and available Order equipment. Blood Aspects, Shrine Resist/Embrace progression, and Blood-derived Techniques are unavailable.
+Akio is still an ordinary human Order swordsman with no Beast Blood, Returning Blood, Blood Aspect, Corruption, or Blood Art. He has already visited the Strand and met its recurring NPCs before the player's first hub-controlled state.
 
-The attempt ends in Akio's first death. Dormant inherited Beast Blood awakens, reconstructs him at the Strand as Returning Blood, and begins the normal repeated-run structure.
+The opening advances to the Eclipse Shogun. The first Shogun fight is playable and should respect player skill, but the narrative outcome is fixed: Akio is defeated and mortally wounded.
 
-The opening should reveal the return through brief gameplay presentation and subtle signs rather than a long explanatory cutscene.
+The Shogun then calls a large, source-near concentration of ordinary Beast Blood from the island/Heart and forces it into Akio with the intent, "Let's see what the Blood makes of you."
+
+Akio dies. Returning Blood forms and reconstructs him at the Strand. This event begins the normal repeated-run structure.
+
+`FIRST_ATTEMPT.md` owns the exact opening gameplay contract and presentation boundary.
 
 ## Persistent loop
 
-1. Return to or prepare in the Strand.
-2. Use available persistent services: the Bloodwell for Akio / Run Infrastructure progression, the Forge for Prosthetic / Relic progression and management, the Merchant and Discovery Board for their approved services, and the Blood Mirror for Blood Aspect progression after it is unlocked later in the game.
-3. Prepare and confirm the current Blood Aspect, Prosthetic, and Relic loadout as those systems become available; the Boat remains the final run-start confirmation point.
+1. Akio reconstructs at or prepares in the Strand.
+2. Use available persistent services: Bloodwell, Forge, Merchant, Discovery Board, Blood Mirror, training/trial spaces, and other unlocked hub functions according to their owning systems.
+3. Prepare the current Blood Aspect, Prosthetic, Relic, and other run-start choices as those systems become available; the Boat remains the final departure confirmation point.
 4. Cross toward the island beneath the Blood Moon.
-5. Progress through Combat, reward, Shrine, Rest, Shop, miniboss, and boss spaces.
-6. Build run power through Blood Aspect Tier choices, five slotted Techniques, slotless Supporting / Cross-family / Legendary Techniques, refinements, rare same-slot replacements, the equipped Relic benefit, Gold/Shop decisions, temporary survival/capacity rewards, and other run-only rewards.
-7. Fill Corruption through combat accomplishments and choose Resist or Embrace at Shrines.
+5. Progress through Combat, reward, Shrine, Rest, Shop, miniboss, boss, and regional transition spaces.
+6. Build run power through the selected Blood Aspect, Techniques, equipped support systems, economy choices, recovery/capacity rewards, and other run-only rewards defined by their owning authorities.
+7. Use Shrines to Resist or Embrace Returning Blood progression where eligible.
 8. Route toward previewed rewards that support build growth, survival, economy, or persistent progress.
-9. Die and reform at the Strand, or defeat the Eclipse Shogun and enter the Heart chamber.
-10. During the first six successful clears, offer Returning Blood through the Shogun-built extraction apparatus. The Heart's failed attempt to reclaim that Blood breaks one ancient Heart Binding and dissolves Akio's current body.
-11. Reform at the Strand, lose run-only state, keep permanent progression and the destroyed Binding, and prepare for the next crossing.
-12. After all six Bindings are destroyed, complete the seventh story run by defeating the Shogun's current body and continuing into the two-phase true-final Heart encounter without ending the run.
-13. After story completion, continue normal runs and optionally repeat the Heart route without additional story progression.
+9. Die and reconstruct at the Strand, or defeat the Eclipse Shogun and enter the Heart chamber.
+10. During the first six successful post-awakening clears, offer Returning Blood through the Court extraction apparatus. The Heart's failed attempt to reclaim that Blood breaks one ancient Heart Binding and destroys Akio's current body.
+11. Returning Blood falls back on Akio's established subconscious survival destination and reconstructs him at the Strand; temporary run state is lost while permanent progression and destroyed Bindings persist.
+12. After all six Bindings are destroyed, the final story run defeats the Shogun and continues directly into the true-final Heart encounter with the active build.
+13. After Story Complete, Akio continues canonical containment expeditions, including approved Heart-suppression routes, without restoring the Heart's ability to create new Beast Blood.
+
+## Returning Blood loop logic
+
+Returning Blood is not an inherited restart token or a Strand-powered resurrection system.
+
+While Akio is alive, the Blood increasingly responds to conscious intention. When he dies, conscious control disappears and the Blood falls back on survival instinct. The Strand is the safest place Akio knows during the expedition, so his subconscious directs reconstruction to the same established safe location there.
+
+The first resurrection creates this repeated gameplay loop only after the Shogun's opening Beast Blood exposure.
 
 ## Moment-to-moment loop
 
-1. Read the encounter and identify priority threats.
-2. Pressure enemies with katana attacks and movement.
-3. Block, dodge, or parry according to the telegraph and response rule.
-4. Use the selected Blood Aspect's Basic Attack sequence, Held Attack, Dash Attack, and Parry Counter according to timing and context.
-5. Build enemy posture while managing Akio's Health, posture, Spirit Emblems, Corruption, and space after those systems are active.
-6. Use the equipped Prosthetic, Relic benefit, and current Technique build to strengthen chosen combat patterns without replacing sword fundamentals.
-7. Exploit posture breaks and deathblow openings.
-8. Reposition around hazards, ranged pressure, restraints, and multi-enemy combinations.
-9. Claim the previewed reward and make the next routing or build decision.
+Moment-to-moment combat is owned by current Combat V2 authority. At a high level the player:
+
+1. reads encounter composition and threat priority,
+2. pressures enemies with katana attacks and movement,
+3. uses the active kit's defensive/mobility responses,
+4. expresses the selected Blood Aspect through its current weapon behavior and resources,
+5. uses Prosthetic, Relic, Technique, and Aspect synergies without replacing sword fundamentals,
+6. manages positioning, interruption pressure, hazards, and multi-enemy combinations,
+7. claims the room reward and makes the next routing/build decision.
 
 ## Build-identity rule
 
-After Blood Aspects are unlocked, the selected Aspect is the run's central tactical identity. Corruption and Embrace determine how far that identity escalates vertically. Techniques provide the main horizontal run-build customization around it.
+After Returning Blood awakens, the selected Blood Aspect is the run's central tactical identity. Corruption and Resist/Embrace progression determine how far that expression escalates vertically. Techniques provide the primary horizontal run-build customization around it.
 
-The introductory first attempt is the deliberate exception: Akio has no active Blood identity yet.
+The opening first attempt is the deliberate exception: Akio has no active Blood identity yet.
 
-The player should commonly establish several of the five direct combat slots across Areas 1 and 2, then continue deepening the build through remaining slots, slotless Supporting Techniques, Cross-family Techniques, refinements, rare replacements, and higher-rarity opportunities through Area 3. Filled direct slots normally stay committed unless a valid replacement offer explicitly overwrites that same slot.
-
-The same active build continues from the Shogun into an enabled Heart route. The current survival prototype partially restores Health and Spirit before the Heart, with exact values owned by `ITEMS_AND_REWARDS.md`; all other temporary build state continues unless its owning system explicitly says otherwise. Final encounter tuning remains later work.
+The same active build continues from the Shogun into an enabled Heart route unless an owning system explicitly says otherwise.
 
 ## Permanent progression boundary
 
-Permanent progression may improve Akio, Run Infrastructure, Prosthetics, Relics, and later-unlocked Blood Aspect mastery within their owning stations. It should increase options, reliability, or resilience without replacing the run's Aspect Tier choices, Technique build, routing decisions, or combat execution.
+Permanent progression may improve Akio, Run Infrastructure, Prosthetics, Relics, and Blood Aspect mastery within their owning stations. It should increase options, reliability, or resilience without replacing run decisions or combat execution.
 
-## Design requirement
+## Locked campaign loop
 
-Run systems should deepen the sword-combat loop rather than bypass it. A successful build may change timing, mobility, resource use, pressure, area coverage, control, delayed damage, punish options, economy, or survivability, but Akio should still feel like a swordsman whose survival depends on reading combat correctly.
+The following remain locked:
 
-The seven-original/six-remaining Binding count, six Binding clears, seventh final-story run, two-phase Heart concept, canonical first-clear ending, and repeatable non-progressing postgame route are locked.
+- seven original Heart Bindings / six remaining when the campaign begins,
+- six successful Binding clears after Returning Blood awakens,
+- a final story run continuing from Shogun into the true Heart,
+- a canonical first-clear ending that permanently stops creation/propagation of new Beast Blood,
+- existing bearers retaining their already-present Blood,
+- canonical postgame containment/suppression.
 
-The Heart encounter uses established combat systems and does not add a separate weak-point subsystem. Exact attacks, final tuning, postgame route controls, and deferred modifiers or variants remain future design work.
+Exact combat tuning, reward cadence, Heart moveset, postgame route controls, and deferred variants remain owned by their respective gameplay/encounter authorities.

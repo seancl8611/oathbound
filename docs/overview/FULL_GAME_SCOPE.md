@@ -4,7 +4,7 @@ title: Full Game Scope
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-09-09
+last_reviewed: 2026-10-03
 topics:
   - full-scope
   - techniques
@@ -22,7 +22,9 @@ related:
   - OVERVIEW-PRODUCTION-ROADMAP
   - OVERVIEW-ENDGAME-POSTGAME-RELEASE
   - GAMEPLAY-RUN-STRUCTURE
+  - GAMEPLAY-FIRST-ATTEMPT
   - GAMEPLAY-PROGRESSION
+  - LORE-RETURNING-BLOOD
   - NARRATIVE-DELIVERY
   - META-OPEN-QUESTIONS
 ---
@@ -37,8 +39,7 @@ This document summarizes Oathbound's approved launch shape. Detailed mechanics r
 |---|---|
 | Player | Akio; fully silent protagonist |
 | Blood Aspects | 3 — Wolf, Wraith, Ronin |
-| Direct Technique slots | 5 |
-| Techniques | 50 + 10 refinements |
+| Techniques | Current active paper baseline: 40 + 6 refinements |
 | Prosthetics | 8 tools / 19 permanent upgrades |
 | Relics | 10 / Base + 2 mastery ranks each |
 | Bloodwell | 10 Akio + 8 Run Infrastructure nodes |
@@ -50,61 +51,81 @@ This document summarizes Oathbound's approved launch shape. Detailed mechanics r
 | Standard enemies | 6 Hushiro / 4 Yomori / 5 Kagutsuchi |
 | Regional minibosses | 6 authored / 2 per region |
 | Regional bosses | 3 |
-| Regional chambers | 33 — 12 / 10 / 11 |
+| Post-awakening regional chambers | 33 — 12 / 10 / 11 |
 | Heart Bindings | 7 original / 6 player-destroyed |
 | True-final Heart | 1 encounter / 2 forms |
 | Persistent resources | Mist, Scrolls, 3 boss-material families |
 | Run-only currency | Gold |
-| Major narrative sequences | ~5 |
-| Awakened Shogun states | 7 + 1 rare pre-awakening fallback |
-| Binding presentation states | 6 states of one reusable ritual |
+| Opening narrative | Authored first-attempt lead-in + first Shogun experiment/death/return |
+| Binding presentation | 6 states of one reusable ritual |
 | Major Strand conversations | ~30–36 |
 | Lore / Records entries | ~20–25 substantive entries |
-| Narrative writing target | ~15k–20k words |
 | Launch achievements | ~30 |
 | Save slots | 3 |
 
 # First attempt
 
-The first attempt is the normal full route, not a scripted tutorial.
+The first attempt is an **authored opening expedition already in progress**, not the normal repeatable 33-chamber route.
 
-Akio starts with:
+Before player control, Akio has already visited the Strand, met the recurring NPCs, crossed onto the island, and fought deep enough to reach the Eclipse Shogun.
 
-- base katana,
-- Beast-Bane Whistle,
-- ordinary Technique rewards and room/reward flow,
-- no active Blood Aspect, Corruption/Tier progression, Blood Art, Relic loadout, or permanent upgrades.
+Akio begins with:
 
-The first death may happen anywhere. An exceptional player may reach the Shogun/Heart before dying; Heart contact triggers the first awakening without destroying a Binding.
+- his ordinary human Order-warrior combat identity,
+- no Beast Blood,
+- no Returning Blood,
+- no active Blood Aspect, Corruption/Tier progression, Blood, or Blood Art,
+- no permanent Blood progression.
+
+The opening advances to the first Shogun fight. The fight is mechanically playable and may acknowledge exceptional performance, but the narrative requires Akio's defeat.
+
+The Shogun then calls a large, source-near concentration of ordinary Beast Blood from the island/Heart and forces it into the mortally wounded Akio with the intent: **"Let's see what the Blood makes of you."**
+
+Akio dies and reconstructs at the Strand as the first known bearer of Returning Blood. The normal repeated-run loop begins afterward.
+
+# Returning Blood narrative rule
+
+Returning Blood is not inherited and Akio has no escaped-island bloodline explanation.
+
+Beast Blood affects people differently and appears influenced by the bearer: identity, intentions, emotional state, resolve, circumstance, physical condition, and manner of exposure can shape the result. Some die, some transform, some retain more of themselves, and some become unusually powerful or specialized.
+
+Akio's exact unprecedented compatibility remains deliberately unresolved. His resolve matters, but willpower alone does not explain him.
+
+The Shogun has previously exposed selected people to Beast Blood to see what the curse would make of them. Some specific powerful creatures may later be identified as past experiments; this is not the origin of every beast.
+
+# Strand return rule
+
+The Strand is not a magical resurrection anchor.
+
+While Akio is alive, Returning Blood increasingly responds to conscious intent. When he dies, it falls back on subconscious survival instinct. The Strand is the safest place Akio knows during the expedition, so the Blood reconstructs him at the same established safe location there.
+
+The Scribe can eventually infer that Akio, not the Strand itself, is choosing the destination.
 
 # Run and combat structure
 
-Launch regional route:
+The normal repeatable post-awakening regional route remains:
 
 - Hushiro — 12 chambers / Keeper / ~14–16 min,
 - Yomori — 10 / Twin Maws / ~12–14 min,
 - Kagutsuchi — 11 / Eclipse Shogun / ~15–17 min.
 
-Normal successful Binding runs target ~45–50 active minutes. Heart/Suppression routes target ~55–60.
+Normal successful Binding runs target approximately the established 41–47 minute three-region active-time range before Heart/Binding resolution, subject to playtesting.
 
 Standard Combat uses deliberately authored regional encounter scripts selected by the route generator; it does not procedurally assemble enemy threat budgets.
 
-Standard enemies are region-native by default. The only approved launch cross-region lineage is **Blighted Hounds → Stalker Hound** in Yomori.
+Standard enemies are region-native by default. The approved launch cross-region lineage is **Blighted Hounds → Stalker Hound** in Yomori.
 
 # Build and progression scope
 
-Run build:
+Run build uses:
 
 - one Blood Aspect at Tier 0 after awakening,
 - optional Shrine progression through Tier IV,
-- five direct Technique slots,
-- slotless Supporting / Cross-family / Legendary Techniques,
-- refinements/replacements,
+- unlimited additive Technique ownership under the current Technique authority,
+- refinements and higher-rarity/cross-family opportunities,
 - one Prosthetic,
 - one Relic,
 - Gold/Shop and survival/capacity decisions.
-
-There is no global Technique inventory cap beyond the five direct slots and no general launch consumable inventory.
 
 Permanent progression:
 
@@ -117,20 +138,28 @@ All foundational permanent systems are structurally available after the first Bi
 
 # Campaign and narrative
 
-After Returning Blood awakens, Akio destroys the six remaining Heart Bindings across six successful Shogun clears. The seventh story run continues directly from Shogun into the two-form Heart encounter.
+After Returning Blood awakens, Akio destroys the six remaining Heart Bindings across six successful post-awakening Shogun clears. The final story run continues directly from Shogun into the two-form Heart encounter.
 
 Akio remains silent throughout the game.
 
-Narrative production target:
+The Shogun relationship now begins with the opening experiment and develops through:
 
-- ~5 controlled in-engine sequences,
-- 7 awakened Shogun states + rare pre-awakening fallback,
+**experiment → fascination → recognition/recruitment → possessive anger → fear → hatred/desperation → final confrontation.**
+
+The Scribe and other Strand NPCs already know Akio before the player's first controlled hub visit. Their first major player-facing conversations react to his impossible return rather than introducing themselves.
+
+The narrative should imply that Beast Blood works differently through different bearers and may magnify personality, intention, emotion, and instinct. It should not present a rigid morality chart or complete scientific mechanism.
+
+Working production scale remains bounded around:
+
+- a small number of controlled major in-engine sequences,
+- the authored opening Shogun exposure/death/return package,
+- recurring post-return Shogun states,
 - 6 Binding states,
 - ~30–36 major Strand conversations,
 - ~4–6 reactive line sets per NPC,
 - ~20–25 substantive Lore / Records entries,
-- ~15k–20k narrative words,
-- no full spoken-dialogue VO requirement.
+- text-led dialogue with no full spoken-dialogue VO requirement.
 
 # Canonical Heart ending
 
@@ -143,7 +172,7 @@ Akio destroys the Heart's manifested body and permanently cripples the source so
 - the curse cannot spread beyond the existing population,
 - the Shogun's mainland expansion plan is permanently defeated.
 
-The Heart survives as a faint regenerating remnant. Existing Beast Blood remains active in Akio, the Shogun, corrupted inhabitants, altered beasts, and other existing bearers. Their established regeneration/reconstruction remains intact.
+The Heart survives as a faint regenerating remnant. Existing Beast Blood remains active in Akio, the Shogun, corrupted inhabitants, altered beasts, and other existing bearers.
 
 # Canonical postgame
 
@@ -156,32 +185,9 @@ Boat run goals:
 
 Postgame adds no new currency or progression tree. It supports existing mastery, collection, records, and completion.
 
-100% Completion broadly requires:
-
-- Story Complete,
-- all Bloodwell/Blood Mirror/Prosthetic progression,
-- all Relics collected and mastered,
-- all Techniques/refinements discovered,
-- required trials and Discovery Board completion,
-- Heart victory with Wolf, Wraith, and Ronin.
-
-Launch target is approximately 30 achievements.
-
 # Release boundary
 
-Launch includes:
-
-- 3 save slots,
-- Continue / New Game / Settings / Credits / platform-appropriate Quit,
-- safe autosave and quit/resume support,
-- control rebinding,
-- vibration options,
-- screen-shake/reduced-flash/reduced-VFX options,
-- UI/text scaling and color-independent gameplay communication,
-- text-speed/instant/manual-advance options,
-- separate Master/Music/SFX/Ambience controls,
-- English as required launch language with localization-ready text systems,
-- required contributor/licensing credits and notices.
+Launch includes the existing approved save, settings, accessibility, localization-ready text, credits, autosave, and platform presentation requirements.
 
 Launch does **not** require:
 
@@ -196,23 +202,6 @@ Launch does **not** require:
 
 # Scope status
 
-**Top-level launch architecture remains closed, and the planned first-playtest runtime is substantially realized.**
+The top-level launch architecture remains closed at current paper-design depth. This lore revision changes the **origin and delivery of Returning Blood and the opening first-attempt structure**; it does not reopen the post-awakening regional route, progression architecture, Heart Binding count, ending, or postgame model.
 
-Implemented/validated at first-playtest or release-contract depth now includes:
-
-1. the shared combat/player-build layer — Blood Aspects, Techniques, Prosthetics, Relics, Corruption/Shrines, Blood generation, and permanent progression bridges,
-2. the authored Hushiro / Yomori / Kagutsuchi regional routes, enemy/miniboss/boss content, rewards, and Region 1 -> 2 -> 3 runtime handoffs,
-3. first-attempt/no-Aspect flow, Returning Blood awakening, Strand progression, six-Binding campaign routing, and the Shogun-to-Heart handoff shell,
-4. authored narrative/presentation contracts, release front end, three save slots, records/completion, settings/accessibility surfaces, and postgame contract flow.
-
-Remaining production work is not another broad documentation-to-code pass. It is:
-
-1. final real-player integration validation and evidence-backed stability/readability fixes,
-2. playtest-driven numerical balance, economy, encounter feel, and run-pacing validation,
-3. final production-art/VFX/audio/readability/accessibility replacement and polish,
-4. dedicated design of the true-final two-form Heart combat moveset/arena/tuning, followed by implementation and real-player validation,
-5. release QA plus any outstanding legal/provenance completion.
-
-The current Heart runtime remains a non-combat integration shell. `TRUE_FINAL_HEART.md` intentionally leaves its exact moveset and encounter implementation details open, so code must not invent that encounter merely to close an implementation checklist.
-
-`OPEN_QUESTIONS.md` owns the active integration/playtest boundary; `PRODUCTION_ROADMAP.md` owns the current production order.
+`OPEN_QUESTIONS.md` owns the active integration/playtest boundary; `PRODUCTION_ROADMAP.md` owns current production order.

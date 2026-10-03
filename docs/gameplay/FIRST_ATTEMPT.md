@@ -4,146 +4,151 @@ title: First Attempt
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-08-25
+last_reviewed: 2026-10-03
 topics:
   - first-attempt
   - onboarding
   - returning-blood
-  - run-structure
-  - techniques
-  - prosthetics
-  - shrines
+  - eclipse-shogun
+  - beast-blood
   - death
+  - strand
 related:
   - GAMEPLAY-RUN-STRUCTURE
   - GAMEPLAY-TECHNIQUES
   - GAMEPLAY-PROSTHETICS
-  - GAMEPLAY-CORRUPTION-SHRINES
   - LORE-RETURNING-BLOOD
+  - LORE-ECLIPSE-SHOGUN
   - NARRATIVE-DELIVERY
 ---
 
 # First Attempt
 
-The first attempt is **not a scripted prologue route**. It is a real Oathbound run using the normal regional route, chamber structure, route generation, authored encounters, room functions, rewards, miniboss opportunities, bosses, and full three-region destination.
+The first attempt is now an **authored opening expedition already in progress**, not the ordinary repeatable roguelite loop.
 
-The design expectation is that a new player will usually die early because they have limited knowledge, no permanent progression, no Blood Aspect, and only the core starting kit. The game does not force that death at a predetermined room or enemy.
+Akio has already:
 
-A highly skilled player may progress arbitrarily far on the first attempt, including defeating Keeper, Twin Maws, the Eclipse Shogun, and reaching the Heart. The game is not tuned to prevent this outcome merely to preserve onboarding.
+- arrived at the Strand,
+- met the recurring Strand NPCs,
+- crossed onto the island,
+- fought through much of the expedition,
+- and advanced far enough to reach the Eclipse Shogun.
 
-# Start presentation
+The player begins late in this first attempt. Akio has no Beast Blood or Returning Blood powers yet. He reaches the Shogun through his own ability as an Order warrior.
 
-The player's first playable control should begin directly in the normal Hushiro route, at or immediately before Hushiro Chamber 1. Do not require a bespoke tutorial dungeon, fixed introductory encounter sequence, forced early boss loss, or long opening cutscene.
+The purpose of the opening is to establish Akio's baseline competence, teach the essential combat language through real play, introduce the Shogun, and create Returning Blood through a mandatory narrative event.
 
-Any initial mission framing from the Order, Strand Keeper, Raven, environment, or UI should be brief and non-blocking. The player learns primarily by playing the same route they will later repeat.
+# Opening structure
+
+The exact chamber count and starting location of the playable lead-in remain production details. The opening should be long enough to let the player move, fight, and understand Akio as a skilled swordsman before supernatural progression begins, but it does not need to replay the complete normal 12 / 10 / 11 route before the first Shogun encounter.
+
+The required structure is:
+
+1. player control begins during Akio's first expedition, after his initial Strand arrival and introductions have already happened,
+2. the player uses Akio's normal human combat kit,
+3. the opening advances toward the Eclipse Shogun,
+4. the player fights the Shogun,
+5. the narrative requires Akio's defeat even if the player performs exceptionally well,
+6. the Shogun deliberately forces a large source-near concentration of Beast Blood into the mortally wounded Akio,
+7. Akio dies,
+8. Returning Blood reconstructs him at the Strand,
+9. the normal repeated-run preparation/progression loop begins.
+
+This supersedes the previous design where the first death could occur at any normal-route enemy and a mastery player could reach the Heart before awakening.
 
 # First-attempt loadout
 
-Akio begins with:
+Akio begins as an ordinary Order swordsman with no Beast Blood in his body.
 
-- the **base katana core combat kit**,
-- the normal five Technique trigger classifications available to run rewards: Basic Attack, Held Attack, Dash / Dash Attack, Parry / Counter, and Deathblow,
-- **Beast-Bane Whistle** as the single default equipped Prosthetic,
-- normal Health, posture, Spirit, dash, block, parry, counter, deathblow, and other universal combat rules.
-
-Those five combat actions are trigger classifications, not Technique equipment slots. The first attempt begins with no acquired Techniques, and multiple later Techniques may modify or respond to the same trigger under the normal Technique rules.
+He uses the current approved base combat kit and starting equipment appropriate to the production build. Detailed combat verbs are owned by current Combat V2 authority rather than duplicated here.
 
 Akio does **not** begin with:
 
+- Returning Blood,
 - a Blood Aspect,
 - Aspect Tier progression,
 - Corruption,
 - Blood or a Blood Art,
-- a Relic,
-- permanent Bloodwell/Blood Mirror/Forge upgrades,
-- or later campaign unlocks.
+- permanent Bloodwell/Blood Mirror progression,
+- or other systems that narratively depend on his first resurrection.
 
-Beast-Bane Whistle is the working default starting Prosthetic because its short-radius interrupt / anti-beast stagger role is simple, broadly useful, and does not pre-select a later Aspect or Technique-family identity.
+Temporary/tutorial rewards may appear only if they support the opening without implying that Akio already possesses Returning Blood.
 
-# Normal run interaction
+# First Shogun encounter
 
-The first attempt preserves the normal run loop wherever the required system is already meaningful.
+The first Shogun fight should be mechanically real enough for player skill to matter, but the story outcome is fixed.
 
-## Techniques
+The player is allowed to fight well. If a mastery-level player reaches an apparent victory threshold, the encounter transitions into the same authored narrative outcome rather than pretending the Shogun simply has infinite Health.
 
-Technique rewards are fully available. **Action Techniques** modify or respond to the equivalent base-katana combat triggers before Blood Aspects unlock, using the same universal Basic / Held / Dash / Parry-Counter / Deathblow action classifications.
+The intended reference principle is a skill-respecting scripted defeat: gameplay can acknowledge exceptional performance while the story still requires Akio to lose.
 
-Hushiro Chamber 1 therefore keeps its normal guaranteed three-choice **Action Technique** reward. Supporting, Cross-family, refinement, and Legendary eligibility continues to follow the normal Technique rules if the player somehow develops a qualifying first-attempt build.
+After Akio is mortally wounded, the Shogun becomes interested in the human who reached him without Beast Blood.
 
-There is no Technique inventory cap or action-slot occupancy on the first attempt. Acquiring one Technique for a trigger does not close that trigger to other eligible Techniques.
+His working intent line is:
 
-All first-attempt Techniques remain run-only and are lost when the attempt ends.
+> "Let's see what the Blood makes of you."
 
-## Rooms, routing, and economy
+The Shogun then uses his bond with the Heart to call and direct ordinary Beast Blood from the island/Heart itself in unusually high, source-near concentration.
 
-The player may use normal:
+Presentation target:
 
-- previewed route choices,
-- Combat rooms,
-- Rest rooms,
-- Shops and Gold,
-- Treasure,
-- miniboss routes,
-- Technique rewards,
-- Mist and Scroll rewards,
-- recovery and temporary-capacity rewards where normally eligible.
+- veins in the chamber/floor/walls awaken,
+- Blood moves through the environment toward the Shogun or his weapon,
+- the Shogun drives the Blood into Akio's mortal wound,
+- Akio's visible response begins,
+- the screen fades toward black before an elaborate transformation explanation is required.
 
-Persistent rewards earned before the first death are saved under the normal persistence rules even though their spending interfaces may not yet be available.
-
-Reward types that require a still-locked persistent system remain ineligible until that system unlocks; their normal unavailable-weight redistribution rules apply rather than creating special first-attempt substitutes.
-
-## Shrines before Returning Blood
-
-Shrines remain valid route rooms before Returning Blood awakens.
-
-Because Akio has no active Returning Blood, Corruption, or selected Aspect on the first attempt:
-
-- **Embrace is unavailable**,
-- no Aspect Tier can be gained,
-- no Corruption meter is shown,
-- and the Shrine uses its approved below-full support behavior rather than an Aspect progression decision.
-
-The current support prototype restores **20% max Health + 25% max Spirit**. Each resource resolves independently; if one is already full, that portion is simply skipped.
+The Shogun does not deliberately stabilize or weaken the transformation. He expects death or corruption and is testing what the Blood will make of Akio.
 
 # First death and awakening
 
-The first death may occur in any legal combat situation on the route. It is not tied to a particular enemy, chamber, miniboss, or boss.
+Akio dies carrying the concentrated Beast Blood.
 
-When Akio dies for the first time:
+Instead of remaining dead or becoming a conventional beast, the Blood reconstructs his established human identity. This unprecedented result becomes Returning Blood.
 
-1. his current body is genuinely destroyed,
-2. dormant inherited Beast Blood awakens as Returning Blood,
-3. he reconstructs at the Strand,
-4. the first return establishes the normal stable return pattern,
-5. run-only first-attempt state is lost,
-6. already-earned persistent rewards remain,
-7. the normal repeated-run preparation/progression loop begins.
+The first return is therefore caused by the opening Shogun encounter, not by an inherited condition, ordinary death on the island, Order warding, or a random early combat failure.
 
-The first reconstruction is a narrative presentation beat, not a separate gameplay tutorial.
+# First Strand return
 
-# Exceptional first-attempt full clear
+Akio reconstructs at one specific safe location on the Strand.
 
-A sufficiently skilled player is allowed to clear the entire normal regional route before dying.
+The Strand is not a magical resurrection anchor. Returning Blood responds to Akio's conscious intention while he is alive; once he dies, that control falls back to instinct.
 
-If this happens:
+His strongest subconscious instruction is survival and return to safety. The Strand is the safest place he knows during the expedition, so the Blood reconstructs him there.
 
-- Keeper and Twin Maws resolve normally as bosses,
-- the Eclipse Shogun may use a rare pre-awakening first-encounter dialogue state,
-- defeating the Shogun opens the normal Heart approach,
-- the player may physically reach the Heart chamber,
-- but **no Heart Binding can be destroyed yet**, because the Binding-rejection ritual specifically requires awakened Returning Blood.
+The successful first return reinforces that exact location as his instinctive return destination for later deaths.
 
-At the Heart, the dormant condition is finally forced into its awakening state when the Heart destroys Akio's current body. This becomes his first death and first Returning Blood reconstruction. No Binding is counted as destroyed, and the normal six-Binding campaign begins afterward.
+The first player-facing Strand story beat therefore begins **after** NPCs already know Akio. Their reactions center on the impossible return:
 
-This exceptional endpoint exists only to keep the full first attempt mechanically honest. The game does not insert an earlier forced loss or invisible difficulty wall to stop a mastery-level player.
+- How is Akio alive?
+- What did the Shogun do to him?
+- Why is Beast Blood inside him without having fully transformed him?
+
+The Scribe begins studying the phenomenon from this point onward.
+
+# Transition into the normal run loop
+
+After the first reconstruction:
+
+- Returning Blood is active,
+- Blood Aspect/Corruption progression can begin according to its owning systems,
+- permanent Strand progression can unlock according to progression authority,
+- repeated departures use the approved normal regional route,
+- later failed runs reconstruct Akio at the established Strand return spot,
+- campaign dialogue assumes the Strand NPCs already knew Akio before the player's first hub-controlled state.
+
+The normal run loop is therefore something the player enters **after witnessing why Akio can return**.
 
 # Onboarding principle
 
-The first attempt follows the same philosophy as the rest of Oathbound:
+The opening should still teach through real gameplay rather than through a long tutorial cutscene.
 
-- teach through the real game rather than a disposable tutorial route,
-- allow player skill to exceed expected progression,
-- do not fake an unwinnable encounter merely to trigger the roguelite loop,
-- and let the first death feel personal because it happened where the player's actual skill carried them.
+However, narrative causality now takes priority over the old fully-unscripted-first-death rule. The game needs the player to witness:
 
-Exact first-attempt balance, expected death chamber distribution, tutorial prompts, and rare no-death telemetry remain implementation/playtest work.
+- Akio succeeding without Beast Blood,
+- the Shogun taking interest in him,
+- the Shogun causing the direct Beast Blood exposure,
+- Akio's death,
+- and the first impossible return.
+
+Exact opening duration, encounter count, tutorial prompts, Shogun performance acknowledgement, and transition timing remain implementation/playtest work.
