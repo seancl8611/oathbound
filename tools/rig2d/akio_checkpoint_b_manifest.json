@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "runtime": "godot_2d",
+  "proof_scope": [
+    "akio"
+  ],
+  "directions": [
+    {
+      "name": "e",
+      "godot_vector": [
+        1.0,
+        0.0
+      ],
+      "screen_angle_deg": 0
+    },
+    {
+      "name": "se",
+      "godot_vector": [
+        0.7071,
+        0.7071
+      ],
+      "screen_angle_deg": 45
+    },
+    {
+      "name": "s",
+      "godot_vector": [
+        0.0,
+        1.0
+      ],
+      "screen_angle_deg": 90
+    },
+    {
+      "name": "sw",
+      "godot_vector": [
+        -0.7071,
+        0.7071
+      ],
+      "screen_angle_deg": 135
+    },
+    {
+      "name": "w",
+      "godot_vector": [
+        -1.0,
+        0.0
+      ],
+      "screen_angle_deg": 180
+    },
+    {
+      "name": "nw",
+      "godot_vector": [
+        -0.7071,
+        -0.7071
+      ],
+      "screen_angle_deg": 225
+    },
+    {
+      "name": "n",
+      "godot_vector": [
+        0.0,
+        -1.0
+      ],
+      "screen_angle_deg": 270
+    },
+    {
+      "name": "ne",
+      "godot_vector": [
+        0.7071,
+        -0.7071
+      ],
+      "screen_angle_deg": 315
+    }
+  ],
+  "frame_contract": {
+    "format": "png_rgba",
+    "canvas_px": [
+      512,
+      512
+    ],
+    "foot_anchor_px": [
+      256,
+      256
+    ],
+    "default_fps": 30,
+    "crop_each_frame": false,
+    "root_motion": false,
+    "file_pattern": "<animation_base>_<direction>_<frame:03>.png",
+    "pixel_filter": "linear"
+  },
+  "akio_animation_bases": [
+    "idle",
+    "move",
+    "attack_quick_slash"
+  ],
+  "notes": [
+    "Hammer Checkpoint B in-game integration only: Idle, Move / Combat Run, and Quick Slash.",
+    "Uses the delivered 512x512 clean-prerender frame set without a pixel-art treatment.",
+    "Idle and Move preserve the authored 30 fps source cadence; attacks remain sampled from authoritative gameplay progress.",
+    "The fixed registration point is the center of Hammer's render canvas at (256, 256).",
+    "This checkpoint profile is separate from the older 128x128 Proof A placeholder contract."
+  ]
+}

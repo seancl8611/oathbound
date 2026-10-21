@@ -11,7 +11,7 @@ on:
 jobs:
   akio-proof-a-readiness:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,6 +47,35 @@ jobs:
             exit 1
           fi
 
+      - name: Validate real Akio Checkpoint B frames
+        if: ${{ hashFiles('game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames/*.png') != '' }}
+        run: |
+          python tools/rig2d/validate_frame_set.py \
+            --manifest tools/rig2d/akio_checkpoint_b_manifest.json \
+            --actor akio \
+            --source game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames
+
+      - name: Build real Akio Checkpoint B atlas
+        if: ${{ hashFiles('game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames/*.png') != '' }}
+        run: |
+          godot --headless --path game/oathbound \
+            --script res://Tools/Rig2D/BuildDirectionalSpriteFrames.gd -- \
+            --profile=res://Presentation/Profiles/AkioCheckpointBProfile.tres \
+            --source=res://Art2D/RigRendered/Akio/CheckpointB/Frames \
+            --output=res://Art2D/RigRendered/Akio/CheckpointB/AkioCheckpointBDirectionalSpriteFrames.tres
+
+      - name: Verify real Akio Checkpoint B atlas
+        if: ${{ hashFiles('game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames/*.png') != '' }}
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/AkioCheckpointBAssetSmoke.tscn 2>&1 | tee akio-checkpoint-b.log
+          grep -F "[AkioCheckpointBAssetSmoke] PASS - real Akio Checkpoint B art is ready for Hushiro playtest" akio-checkpoint-b.log
+          if grep -F "SCRIPT ERROR:" akio-checkpoint-b.log; then
+            echo "FAIL: Akio Checkpoint B smoke emitted a GDScript runtime error."
+            exit 1
+          fi
+
       - name: Preserve full production rig2d contract
         shell: bash
         run: |
@@ -65,6 +94,7 @@ jobs:
           name: akio-proof-a-readiness-${{ github.run_id }}
           path: |
             akio-proof-a-readiness.log
+            akio-checkpoint-b.log
             rig2d-production-regression.log
           if-no-files-found: warn
           retention-days: 7

@@ -105,7 +105,7 @@ echo Godot      : !GODOT_EXE!
 echo.
 
 rem --- Fetch exact remote state -----------------------------------------------
-echo [1/7] Fetching latest origin...
+echo [1/8] Fetching latest origin...
 git fetch --prune origin
 if errorlevel 1 goto :git_fail
 
@@ -121,7 +121,7 @@ for /f "delims=" %%H in ('git rev-parse "origin/!BRANCH!"') do set "REMOTE_SHA=%
 echo       Remote SHA: !REMOTE_SHA!
 
 rem --- Remove previous disposable worktree -----------------------------------
-echo [2/7] Removing previous playtest checkout...
+echo [2/8] Removing previous playtest checkout...
 git worktree remove --force "!PLAYTEST_DIR!" >nul 2>&1
 if exist "!PLAYTEST_DIR!" rmdir /s /q "!PLAYTEST_DIR!" >nul 2>&1
 if exist "!PLAYTEST_DIR!" (
@@ -136,12 +136,12 @@ git worktree prune --expire now >nul 2>&1
 if errorlevel 1 goto :git_fail
 
 rem --- Create pristine detached checkout --------------------------------------
-echo [3/7] Creating clean checkout from origin/!BRANCH!...
+echo [3/8] Creating clean checkout from origin/!BRANCH!...
 git worktree add --force --detach "!PLAYTEST_DIR!" "origin/!BRANCH!"
 if errorlevel 1 goto :git_fail
 
 rem --- Verify exact revision and canonical project ----------------------------
-echo [4/7] Verifying checkout...
+echo [4/8] Verifying checkout...
 set "LOCAL_SHA="
 for /f "delims=" %%H in ('git -C "!PLAYTEST_DIR!" rev-parse HEAD') do set "LOCAL_SHA=%%H"
 if not defined LOCAL_SHA (
@@ -172,7 +172,7 @@ echo       SHA    : !LOCAL_SHA!
 echo       Project: !PROJECT_FILE!
 
 rem --- Build the fresh import cache before opening the editor -----------------
-echo [5/7] Importing project headlessly...
+echo [5/8] Importing project headlessly...
 "!GODOT_EXE!" --headless --path "!PROJECT_DIR!" --import > "!IMPORT_LOG!" 2>&1
 if errorlevel 1 (
     echo.
@@ -182,8 +182,24 @@ if errorlevel 1 (
     exit /b 9
 )
 
+rem --- Build Akio Checkpoint B runtime atlas when this branch contains the frames
+echo [6/8] Preparing Akio Checkpoint B presentation...
+if exist "!AKIO_FRAME_DIR!" (
+    "!GODOT_EXE!" --headless --path "!PROJECT_DIR!" --script res://Tools/Rig2D/BuildDirectionalSpriteFrames.gd -- --profile=res://Presentation/Profiles/AkioCheckpointBProfile.tres --source=res://Art2D/RigRendered/Akio/CheckpointB/Frames --output=res://Art2D/RigRendered/Akio/CheckpointB/AkioCheckpointBDirectionalSpriteFrames.tres > "!AKIO_BUILD_LOG!" 2>&1
+    if errorlevel 1 (
+        echo.
+        echo ERROR: Akio Checkpoint B frame build failed. Full log:
+        type "!AKIO_BUILD_LOG!"
+        popd
+        exit /b 9
+    )
+    type "!AKIO_BUILD_LOG!"
+) else (
+    echo       No Akio Checkpoint B frame set found on this branch; skipping.
+)
+
 rem --- Re-open headlessly after import and reject unresolved load errors -------
-echo [6/7] Verifying clean editor load...
+echo [7/8] Verifying clean editor load...
 "!GODOT_EXE!" --headless --editor --path "!PROJECT_DIR!" --quit-after 3 > "!EDITOR_LOG!" 2>&1
 if errorlevel 1 (
     echo.
@@ -205,7 +221,7 @@ if not errorlevel 1 (
 echo       IMPORT PREFLIGHT PASSED
 
 rem --- Launch exact Godot project ---------------------------------------------
-echo [7/7] Launching Godot with explicit project path...
+echo [8/8] Launching Godot with explicit project path...
 echo.
 echo ============================================================
 echo  READY TO PLAYTEST

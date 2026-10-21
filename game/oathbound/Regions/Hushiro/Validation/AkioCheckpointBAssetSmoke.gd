@@ -1,0 +1,47 @@
+extends Node
+
+const CHECKPOINT_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
+const HUSHIRO_PRESENTATION_SCRIPT = preload("res://Regions/Hushiro/Presentation/HushiroIsometric2DPresentation.gd")
+
+var _failures: Array[String] = []
+
+func _ready() -> void:
+	_expect(bool(CHECKPOINT_PROFILE.get("asset_ready")), "Checkpoint B profile was not built")
+	_expect(CHECKPOINT_PROFILE.get("frame_canvas_size") == Vector2i(512, 512), "Checkpoint B canvas must be 512x512")
+	_expect(CHECKPOINT_PROFILE.get("foot_anchor_px") == Vector2(256, 256), "Checkpoint B anchor must remain at render center")
+	_expect(is_equal_approx(float(CHECKPOINT_PROFILE.get("visual_scale_multiplier")), 0.5), "Checkpoint B visual scale must start at 0.50")
+	_expect(is_equal_approx(float(CHECKPOINT_PROFILE.get("default_fps")), 30.0), "Checkpoint B loops must preserve 30 fps")
+	_expect(not bool(CHECKPOINT_PROFILE.get("pixel_art")), "Checkpoint B must use clean linear prerender filtering")
+
+	var atlas_value: Variant = CHECKPOINT_PROFILE.get("sprite_frames")
+	_expect(atlas_value is SpriteFrames, "Checkpoint B SpriteFrames are missing")
+	if atlas_value is SpriteFrames:
+		var atlas := atlas_value as SpriteFrames
+		var total := 0
+		var expected_value: Variant = CHECKPOINT_PROFILE.call("expected_animation_names")
+		if expected_value is PackedStringArray:
+			for animation_text: String in expected_value as PackedStringArray:
+				var animation_name := StringName(animation_text)
+				_expect(atlas.has_animation(animation_name), "missing animation %s" % animation_text)
+				if atlas.has_animation(animation_name):
+					total += atlas.get_frame_count(animation_name)
+		_expect(total == 768, "Checkpoint B atlas must contain 768 frames, got %d" % total)
+
+	var presentation_value: Variant = HUSHIRO_PRESENTATION_SCRIPT.new()
+	_expect(presentation_value is Node, "could not instantiate Hushiro presentation")
+	if presentation_value is Node:
+		var presentation := presentation_value as Node
+		_expect(presentation.call("_profile_for_role", "player") == CHECKPOINT_PROFILE, "Hushiro must automatically select ready Checkpoint B Akio art")
+		presentation.free()
+
+	if _failures.is_empty():
+		print("[AkioCheckpointBAssetSmoke] PASS - real Akio Checkpoint B art is ready for Hushiro playtest")
+		get_tree().quit(0)
+		return
+	for failure: String in _failures:
+		push_error("[AkioCheckpointBAssetSmoke] %s" % failure)
+	get_tree().quit(1)
+
+func _expect(condition: bool, message: String) -> void:
+	if not condition:
+		_failures.append(message)

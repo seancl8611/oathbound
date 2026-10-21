@@ -8,7 +8,7 @@ extends Node
 ## DirectionalSpriteProfile resources. Every other role remains on readable placeholders.
 
 const DIRECTIONAL_PRESENTER_SCRIPT = preload("res://Utility/DirectionalActorPresentation.gd")
-const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2DProfile.tres")
+const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2DProfile.tres")\nconst AKIO_CHECKPOINT_B_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres")
 
 @export_category("Isometric combat framing")
@@ -152,11 +152,22 @@ func _add_presenter(actor: Node2D) -> void:
 func _profile_for_role(role: String) -> Resource:
 	match role:
 		"player":
-			return player_profile_override if player_profile_override != null else AKIO_RIG2D_PROFILE
+			if player_profile_override != null:
+				return player_profile_override
+			if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE):
+				return AKIO_CHECKPOINT_B_PROFILE
+			return AKIO_RIG2D_PROFILE
 		"swordsman":
 			return SWORDSMAN_RIG2D_PROFILE
 		_:
 			return null
+
+
+func _profile_asset_ready(profile: Resource) -> bool:
+	if profile == null:
+		return false
+	var value: Variant = profile.get("asset_ready")
+	return value is bool and bool(value)
 
 
 func _role_scale(role: String) -> float:
