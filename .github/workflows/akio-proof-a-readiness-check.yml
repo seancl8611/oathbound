@@ -55,6 +55,18 @@ jobs:
             --actor akio \
             --source game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames
 
+      - name: Verify branch-local Akio runtime loader
+        if: ${{ hashFiles('game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames/*.png') != '' }}
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Regions/Hushiro/Validation/AkioCheckpointBAssetSmoke.tscn 2>&1 | tee akio-checkpoint-b-runtime-loader.log
+          grep -F "[AkioCheckpointBAssetSmoke] PASS - real Akio Checkpoint B art is ready for Hushiro playtest" akio-checkpoint-b-runtime-loader.log
+          if grep -F "SCRIPT ERROR:" akio-checkpoint-b-runtime-loader.log; then
+            echo "FAIL: branch-local Akio runtime loader emitted a GDScript error."
+            exit 1
+          fi
+
       - name: Build real Akio Checkpoint B atlas
         if: ${{ hashFiles('game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames/*.png') != '' }}
         run: |
@@ -94,6 +106,7 @@ jobs:
           name: akio-proof-a-readiness-${{ github.run_id }}
           path: |
             akio-proof-a-readiness.log
+            akio-checkpoint-b-runtime-loader.log
             akio-checkpoint-b.log
             rig2d-production-regression.log
           if-no-files-found: warn

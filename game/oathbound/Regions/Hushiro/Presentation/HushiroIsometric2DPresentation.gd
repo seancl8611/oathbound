@@ -10,6 +10,7 @@ extends Node
 const DIRECTIONAL_PRESENTER_SCRIPT = preload("res://Utility/DirectionalActorPresentation.gd")
 const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2DProfile.tres")
 const AKIO_CHECKPOINT_B_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
+const AKIO_CHECKPOINT_B_FRAMES_DIR := "res://Art2D/RigRendered/Akio/CheckpointB/Frames"
 const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres")
 
 @export_category("Isometric combat framing")
@@ -28,6 +29,7 @@ var _presenters: Dictionary = {}
 var _refresh_left: float = 0.0
 var _camera_configured_id: int = 0
 var _startup_reported := false
+var _checkpoint_b_prepare_attempted := false
 
 
 func _ready() -> void:
@@ -155,6 +157,7 @@ func _profile_for_role(role: String) -> Resource:
 		"player":
 			if player_profile_override != null:
 				return player_profile_override
+			_prepare_checkpoint_b_profile()
 			if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE):
 				return AKIO_CHECKPOINT_B_PROFILE
 			return AKIO_RIG2D_PROFILE
@@ -162,6 +165,71 @@ func _profile_for_role(role: String) -> Resource:
 			return SWORDSMAN_RIG2D_PROFILE
 		_:
 			return null
+
+
+func _prepare_checkpoint_b_profile() -> void:
+	if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE) or _checkpoint_b_prepare_attempted:
+		return
+	_checkpoint_b_prepare_attempted = true
+
+	var source := DirAccess.open(AKIO_CHECKPOINT_B_FRAMES_DIR)
+	if source == null:
+		return
+	var files := source.get_files()
+	files.sort()
+	if files.is_empty():
+		return
+
+	var expected_value: Variant = AKIO_CHECKPOINT_B_PROFILE.call("expected_animation_names")
+	if not (expected_value is PackedStringArray):
+		push_error("[AkioCheckpointB] profile returned invalid expected animation names")
+		return
+	var expected := expected_value as PackedStringArray
+	var frames := SpriteFrames.new()
+	if frames.has_animation(&"default"):
+		frames.remove_animation(&"default")
+	var fps := maxf(1.0, float(AKIO_CHECKPOINT_B_PROFILE.get("default_fps")))
+	var total_frames := 0
+
+	for animation_text: String in expected:
+		var animation_name := StringName(animation_text)
+		var prefix := "%s_" % animation_text
+		var matching := PackedStringArray()
+		for file_name: String in files:
+			var lower := file_name.to_lower()
+			if lower.begins_with(prefix.to_lower()) and lower.ends_with(".png"):
+				matching.append(file_name)
+		matching.sort()
+		if matching.is_empty():
+			push_error("[AkioCheckpointB] missing runtime frames for %s" % animation_text)
+			return
+
+		frames.add_animation(animation_name)
+		frames.set_animation_speed(animation_name, fps)
+		var animation_base := str(AKIO_CHECKPOINT_B_PROFILE.call("animation_base_from_name", animation_text))
+		frames.set_animation_loop(
+			animation_name,
+			bool(AKIO_CHECKPOINT_B_PROFILE.call("is_looping_animation_base", animation_base))
+		)
+
+		for file_name: String in matching:
+			var texture_value := load(AKIO_CHECKPOINT_B_FRAMES_DIR.path_join(file_name))
+			if texture_value == null or not (texture_value is Texture2D):
+				push_error("[AkioCheckpointB] could not load runtime frame %s" % file_name)
+				return
+			frames.add_frame(animation_name, texture_value as Texture2D)
+			total_frames += 1
+
+	AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", frames)
+	AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", true)
+	var validation_value: Variant = AKIO_CHECKPOINT_B_PROFILE.call("validate_contract", true)
+	if validation_value is PackedStringArray and not (validation_value as PackedStringArray).is_empty():
+		AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", null)
+		AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", false)
+		push_error("[AkioCheckpointB] runtime atlas validation failed: %s" % " | ".join(validation_value as PackedStringArray))
+		return
+
+	print("[AkioCheckpointB] runtime atlas ready animations=%d frames=%d" % [expected.size(), total_frames])
 
 
 func _profile_asset_ready(profile: Resource) -> bool:
