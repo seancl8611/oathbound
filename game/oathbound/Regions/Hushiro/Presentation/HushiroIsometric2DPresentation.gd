@@ -157,7 +157,8 @@ func _profile_for_role(role: String) -> Resource:
 		"player":
 			if player_profile_override != null:
 				return player_profile_override
-			_prepare_checkpoint_b_profile()
+			if is_inside_tree():
+				_prepare_checkpoint_b_profile()
 			if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE):
 				return AKIO_CHECKPOINT_B_PROFILE
 			return AKIO_RIG2D_PROFILE

@@ -10,6 +10,7 @@ func _ready() -> void:
 	_expect(presentation_value is Node, "could not instantiate Hushiro presentation")
 	if presentation_value is Node:
 		var presentation := presentation_value as Node
+		presentation.call("_prepare_checkpoint_b_profile")
 		_expect(
 			presentation.call("_profile_for_role", "player") == CHECKPOINT_PROFILE,
 			"Hushiro must resolve the real Checkpoint B Akio profile without a prebuilt atlas"
