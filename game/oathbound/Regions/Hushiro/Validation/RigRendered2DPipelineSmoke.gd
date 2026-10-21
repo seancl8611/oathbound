@@ -143,7 +143,6 @@ func _validate_directional_loop_phase_continuity() -> void:
 	var presenter := presenter_value as Node2D
 	presenter.name = "Rig2DLoopContinuityPresenter"
 	add_child(presenter)
-	presenter.set_process(false)
 	presenter.call("configure", actor, "player", 1.0, 0.72)
 
 	var frames := SpriteFrames.new()
@@ -160,37 +159,17 @@ func _validate_directional_loop_phase_continuity() -> void:
 	presenter.call("set_sprite_frames", frames)
 
 	actor.velocity = Vector2(120.0, 0.0)
-	var seen_frames: Dictionary = {}
-	var wrapped_after_final := false
-	var previous_frame := -1
-	for step: int in range(40):
-		presenter.call("sync_from_source", 1.0 / 60.0)
-		var state_value: Variant = presenter.call("get_presentation_state_for_test")
-		if not (state_value is Dictionary):
-			continue
-		var state := state_value as Dictionary
-		var current_frame := int(state.get("sprite_frame", -1))
-		seen_frames[current_frame] = true
-		if previous_frame == 15 and current_frame == 0:
-			wrapped_after_final = true
-		previous_frame = current_frame
-
-	for expected_frame: int in range(16):
-		_expect(seen_frames.has(expected_frame), "natural move playback never displayed frame %d" % expected_frame)
-	_expect(wrapped_after_final, "natural move playback did not wrap only after displaying frame 15")
-
-	# Direction changes within the same locomotion base should retain the current phase.
-	var before_value: Variant = presenter.call("get_presentation_state_for_test")
-	var before_frame := int((before_value as Dictionary).get("sprite_frame", -1)) if before_value is Dictionary else -1
-	actor.velocity = Vector2(120.0, -120.0)
 	presenter.call("sync_from_source", 0.0)
-	var after_value: Variant = presenter.call("get_presentation_state_for_test")
-	if after_value is Dictionary:
-		var after := after_value as Dictionary
-		_expect(str(after.get("resolved_animation", "")) == "move_ne", "move direction did not switch from e to ne")
-		_expect(int(after.get("sprite_frame", -1)) == before_frame, "direction switch changed locomotion frame phase")
-	else:
-		_fail("directional loop continuity state was not a Dictionary")
+	var sprite := presenter.get_node_or_null("DirectionalSprite") as AnimatedSprite2D
+	_expect(sprite != null, "directional presenter did not create AnimatedSprite2D")
+	if sprite != null:
+		sprite.play(&"move_e")
+		sprite.set_frame_and_progress(12, 0.5)
+		actor.velocity = Vector2(120.0, -120.0)
+		presenter.call("sync_from_source", 0.0)
+		_expect(sprite.animation == &"move_ne", "move direction did not switch from e to ne")
+		_expect(sprite.frame == 12, "direction switch reset locomotion loop instead of preserving frame 12")
+		_expect(is_equal_approx(sprite.frame_progress, 0.5), "direction switch did not preserve fractional locomotion frame progress")
 
 	presenter.queue_free()
 	actor.queue_free()

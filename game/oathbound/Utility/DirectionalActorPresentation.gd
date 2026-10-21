@@ -35,10 +35,6 @@ var _last_draw_signature := ""
 var _resolved_animation_name := ""
 var _authoritative_sampled := false
 var _sampled_frame := -1
-var _loop_animation_base := ""
-var _loop_animation_name := StringName()
-var _loop_frame_index: int = 0
-var _loop_frame_accumulator: float = 0.0
 var _sprite: AnimatedSprite2D = null
 var _sprite_frames: SpriteFrames = null
 var _profile: Resource = null
@@ -90,7 +86,7 @@ func set_profile(profile: Resource) -> void:
 		_sprite_frames = frames_value as SpriteFrames if frames_value is SpriteFrames else null
 	_apply_profile_settings()
 	_apply_counter_projection()
-	_sync_atlas_animation(true, 0.0)
+	_sync_atlas_animation(true)
 	queue_redraw()
 
 
@@ -106,7 +102,7 @@ func set_sprite_frames(frames: SpriteFrames) -> void:
 		_sprite.sprite_frames = frames
 	_apply_profile_settings()
 	_apply_counter_projection()
-	_sync_atlas_animation(true, 0.0)
+	_sync_atlas_animation(true)
 
 
 func sync_from_source(delta: float) -> void:
@@ -120,7 +116,7 @@ func _process(delta: float) -> void:
 	_sync_from_source(delta)
 
 
-func _sync_from_source(delta: float) -> void:
+func _sync_from_source(_delta: float) -> void:
 	if source_actor == null or not is_instance_valid(source_actor):
 		return
 
@@ -142,7 +138,7 @@ func _sync_from_source(delta: float) -> void:
 	# Presentation sorting uses the actor's feet/world anchor, independent of sprite height.
 	z_index = clampi(1000 + int(round(source_actor.global_position.y)), -4095, 4095)
 	_apply_counter_projection()
-	_sync_atlas_animation(false, delta)
+	_sync_atlas_animation(false)
 
 	var signature := "%s|%s|%s|%.3f" % [_semantic_state, _direction_name, _action_id, visual_scale]
 	if signature != _last_draw_signature:
@@ -221,7 +217,7 @@ func _apply_counter_projection() -> void:
 	scale = Vector2(visual_scale, visual_scale / safe_compression)
 
 
-func _sync_atlas_animation(force_restart: bool, delta: float = 0.0) -> void:
+func _sync_atlas_animation(force_restart: bool) -> void:
 	_resolved_animation_name = ""
 	_authoritative_sampled = false
 	_sampled_frame = -1
@@ -249,64 +245,31 @@ func _sync_atlas_animation(force_restart: bool, delta: float = 0.0) -> void:
 		and _profile_should_sample(_semantic_state)
 	)
 	if sample_from_authority:
-		_reset_loop_clock_if_needed()
 		_sample_animation(desired, _authoritative_progress)
 		return
 
-	if _sprite_frames.get_animation_loop(desired):
-		_sample_loop_animation(desired, delta, force_restart)
-		return
-
-	_reset_loop_clock_if_needed()
 	if force_restart or _sprite.animation != desired or not _sprite.is_playing():
+		var previous_animation := _sprite.animation
+		var previous_frame := _sprite.frame
+		var previous_progress := _sprite.frame_progress
+		var preserve_loop_phase := (
+			not force_restart
+			and previous_animation != desired
+			and _should_preserve_loop_phase(previous_animation, desired)
+		)
 		_sprite.play(desired)
+		if preserve_loop_phase:
+			_restore_loop_phase(desired, previous_animation, previous_frame, previous_progress)
 
 
-func _sample_loop_animation(animation_name: StringName, delta: float, force_restart: bool) -> void:
-	if _sprite_frames == null or _sprite == null:
-		return
-	var frame_count := _sprite_frames.get_frame_count(animation_name)
-	if frame_count <= 0:
-		return
-	var animation_base := _animation_base_for_phase(animation_name)
-	var base_changed := animation_base != _loop_animation_base
-	var previous_count := 0
-	if _loop_animation_name != StringName() and _sprite_frames.has_animation(_loop_animation_name):
-		previous_count = _sprite_frames.get_frame_count(_loop_animation_name)
-
-	if force_restart or base_changed:
-		_loop_frame_index = 0
-		_loop_frame_accumulator = 0.0
-	elif _loop_animation_name != animation_name and previous_count > 0 and previous_count != frame_count:
-		var normalized := float(_loop_frame_index) / float(previous_count)
-		_loop_frame_index = clampi(int(floor(normalized * float(frame_count))), 0, frame_count - 1)
-
-	_loop_animation_base = animation_base
-	_loop_animation_name = animation_name
-
-	var fps := maxf(1.0, _sprite_frames.get_animation_speed(animation_name))
-	var seconds_per_frame := 1.0 / fps
-	_loop_frame_accumulator += maxf(0.0, delta)
-
-	# Advance at most one source frame per rendered update. If a debug hitch is longer
-	# than one 30 fps frame, the clock catches up over later updates instead of silently
-	# skipping commissioned poses. This is presentation-only; gameplay timing is untouched.
-	if _loop_frame_accumulator >= seconds_per_frame:
-		_loop_frame_accumulator -= seconds_per_frame
-		_loop_frame_index = (_loop_frame_index + 1) % frame_count
-
-	_sprite.animation = animation_name
-	_sprite.pause()
-	_loop_frame_index = clampi(_loop_frame_index, 0, frame_count - 1)
-	var frame_progress := clampf(_loop_frame_accumulator / seconds_per_frame, 0.0, 1.0)
-	_sprite.set_frame_and_progress(_loop_frame_index, frame_progress)
-
-
-func _reset_loop_clock_if_needed() -> void:
-	_loop_animation_base = ""
-	_loop_animation_name = StringName()
-	_loop_frame_index = 0
-	_loop_frame_accumulator = 0.0
+func _should_preserve_loop_phase(previous_animation: StringName, desired_animation: StringName) -> bool:
+	if _sprite_frames == null:
+		return false
+	if not _sprite_frames.has_animation(previous_animation) or not _sprite_frames.has_animation(desired_animation):
+		return false
+	if not _sprite_frames.get_animation_loop(previous_animation) or not _sprite_frames.get_animation_loop(desired_animation):
+		return false
+	return _animation_base_for_phase(previous_animation) == _animation_base_for_phase(desired_animation)
 
 
 func _animation_base_for_phase(animation_name: StringName) -> String:
@@ -318,6 +281,26 @@ func _animation_base_for_phase(animation_name: StringName) -> String:
 		if animation_text.ends_with(suffix):
 			return animation_text.left(animation_text.length() - suffix.length())
 	return animation_text
+
+
+func _restore_loop_phase(
+	desired_animation: StringName,
+	previous_animation: StringName,
+	previous_frame: int,
+	previous_progress: float
+) -> void:
+	if _sprite_frames == null or _sprite == null:
+		return
+	var previous_count := _sprite_frames.get_frame_count(previous_animation)
+	var desired_count := _sprite_frames.get_frame_count(desired_animation)
+	if previous_count <= 0 or desired_count <= 0:
+		return
+	var previous_position := float(previous_frame) + clampf(previous_progress, 0.0, 1.0)
+	var normalized := fposmod(previous_position / float(previous_count), 1.0)
+	var desired_position := normalized * float(desired_count)
+	var desired_frame := clampi(int(floor(desired_position)), 0, desired_count - 1)
+	var desired_progress := clampf(desired_position - floor(desired_position), 0.0, 1.0)
+	_sprite.set_frame_and_progress(desired_frame, desired_progress)
 
 
 func _animation_candidates() -> PackedStringArray:
