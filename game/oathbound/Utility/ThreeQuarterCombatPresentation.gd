@@ -18,13 +18,19 @@ const YOMORI_CUE := Color(0.28, 0.68, 0.58, 0.30)
 const COURT_CUE := Color(0.70, 0.24, 0.12, 0.32)
 const BILE_CUE := Color(0.43, 0.58, 0.18, 0.28)
 
+const REDRAW_INTERVAL: float = 1.0 / 30.0
+
 var _spawn_ages: Dictionary = {}
 var _scan_left := 0.0
+var _redraw_left := 0.0
 var _presentation_active := true
+var _actor_cache: Array[Node2D] = []
+var _animation_player_cache: Dictionary = {}
 
 
 func _ready() -> void:
 	z_index = 900
+	_refresh_actor_registry()
 	set_process(true)
 
 
@@ -41,24 +47,35 @@ func _process(dt: float) -> void:
 		_spawn_ages[id_value] = float(_spawn_ages[id_value]) + dt
 	_scan_left -= dt
 	if _scan_left <= 0.0:
-		_scan_left = 0.08
+		_scan_left = 0.10
 		_refresh_actor_registry()
-	queue_redraw()
+	_redraw_left -= dt
+	if _redraw_left <= 0.0:
+		_redraw_left = REDRAW_INTERVAL
+		queue_redraw()
 
 
 func _refresh_actor_registry() -> void:
 	var current_ids: Dictionary = {}
-	for actor: Node2D in _actors():
+	_actor_cache = _scan_actors()
+	for actor: Node2D in _actor_cache:
 		var actor_id := actor.get_instance_id()
 		current_ids[actor_id] = true
 		if not _spawn_ages.has(actor_id):
 			_spawn_ages[actor_id] = 0.0
+		if not _animation_player_cache.has(actor_id):
+			_animation_player_cache[actor_id] = _find_animation_player(actor)
 	for id_value: Variant in _spawn_ages.keys():
 		if not current_ids.has(id_value):
 			_spawn_ages.erase(id_value)
+			_animation_player_cache.erase(id_value)
 
 
 func _actors() -> Array[Node2D]:
+	return _actor_cache
+
+
+func _scan_actors() -> Array[Node2D]:
 	var out: Array[Node2D] = []
 	var tree := get_tree()
 	if tree == null:
@@ -183,7 +200,14 @@ func _role_for(actor: Node2D) -> String:
 
 
 func _animation_name(actor: Node) -> String:
-	var animation_player := _find_animation_player(actor)
+	if actor == null or not is_instance_valid(actor):
+		return ""
+	var actor_id := actor.get_instance_id()
+	var animation_value: Variant = _animation_player_cache.get(actor_id, null)
+	var animation_player := animation_value as AnimationPlayer if animation_value is AnimationPlayer else null
+	if animation_player == null or not is_instance_valid(animation_player):
+		animation_player = _find_animation_player(actor)
+		_animation_player_cache[actor_id] = animation_player
 	if animation_player == null or not animation_player.is_playing():
 		return ""
 	return str(animation_player.current_animation).to_lower()

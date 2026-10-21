@@ -38,6 +38,12 @@ var _sampled_frame := -1
 var _sprite: AnimatedSprite2D = null
 var _sprite_frames: SpriteFrames = null
 var _profile: Resource = null
+var _source_property_names: Dictionary = {}
+var _profile_property_names: Dictionary = {}
+var _animation_players: Array[AnimationPlayer] = []
+var _legacy_body_items: Array[CanvasItem] = []
+var _legacy_hidden: bool = false
+var _action_runner: Node = null
 
 
 func _ready() -> void:
@@ -63,6 +69,7 @@ func configure(actor: Node2D, role: String, scale_factor: float, compression: fl
 	actor_role = role.strip_edges().to_lower()
 	_base_visual_scale = maxf(0.05, scale_factor)
 	ground_compression = clampf(compression, 0.35, 1.0)
+	_rebuild_source_caches()
 	_apply_profile_settings()
 	_apply_counter_projection()
 	_sync_from_source(0.0)
@@ -70,6 +77,7 @@ func configure(actor: Node2D, role: String, scale_factor: float, compression: fl
 
 func set_profile(profile: Resource) -> void:
 	_profile = profile
+	_rebuild_profile_cache()
 	if _profile != null:
 		var role_value: Variant = _profile.get("actor_role")
 		if role_value != null and not str(role_value).strip_edges().is_empty():
@@ -148,7 +156,7 @@ func _resolve_runtime_contract() -> Dictionary:
 	# The shared CombatActionRunner is the clean boundary for attack identity/timing.
 	# This lets rig-rendered attack frames be sampled from gameplay progress instead of
 	# letting AnimatedSprite2D decide when an impact should occur.
-	var runner := source_actor.get_node_or_null("CombatActionRunner")
+	var runner := _action_runner
 	if runner != null and is_instance_valid(runner) and runner.has_method("presentation_snapshot"):
 		var snapshot_value: Variant = runner.call("presentation_snapshot")
 		if snapshot_value is Dictionary:
@@ -358,18 +366,49 @@ func _source_dead() -> bool:
 	return false
 
 
-func _current_animation_name() -> String:
+func _rebuild_source_caches() -> void:
+	_source_property_names.clear()
+	_animation_players.clear()
+	_legacy_body_items.clear()
+	_legacy_hidden = false
+	_action_runner = null
+	if source_actor == null or not is_instance_valid(source_actor):
+		return
+	for info: Dictionary in source_actor.get_property_list():
+		_source_property_names[str(info.get("name", ""))] = true
+	_action_runner = source_actor.get_node_or_null("CombatActionRunner")
 	for candidate: Node in source_actor.find_children("*", "AnimationPlayer", true, false):
 		if candidate is AnimationPlayer:
-			var player := candidate as AnimationPlayer
-			if not str(player.current_animation).is_empty():
-				return str(player.current_animation)
+			_animation_players.append(candidate as AnimationPlayer)
+	for child: Node in source_actor.get_children():
+		if bool(child.get_meta(KEEP_WITH_REPLACEMENT_META, false)):
+			continue
+		if _is_primary_body_visual(child):
+			_legacy_body_items.append(child as CanvasItem)
+
+
+func _rebuild_profile_cache() -> void:
+	_profile_property_names.clear()
+	if _profile == null:
+		return
+	for info: Dictionary in _profile.get_property_list():
+		_profile_property_names[str(info.get("name", ""))] = true
+
+
+func _current_animation_name() -> String:
+	for player: AnimationPlayer in _animation_players:
+		if player != null and is_instance_valid(player) and not str(player.current_animation).is_empty():
+			return str(player.current_animation)
 	return ""
 
 
 func _property_value(object: Object, property_name: String) -> Variant:
 	if object == null or not is_instance_valid(object):
 		return null
+	if object == source_actor:
+		if not _source_property_names.has(property_name):
+			return null
+		return object.get(property_name)
 	for info: Dictionary in object.get_property_list():
 		if str(info.get("name", "")) == property_name:
 			return object.get(property_name)
@@ -382,12 +421,9 @@ func _bool_property(object: Object, property_name: String) -> bool:
 
 
 func _profile_value(property_name: String, fallback: Variant) -> Variant:
-	if _profile == null:
+	if _profile == null or not _profile_property_names.has(property_name):
 		return fallback
-	for info: Dictionary in _profile.get_property_list():
-		if str(info.get("name", "")) == property_name:
-			return _profile.get(property_name)
-	return fallback
+	return _profile.get(property_name)
 
 
 func _profile_bool(property_name: String, fallback: bool) -> bool:
@@ -431,29 +467,25 @@ func _append_unique(target: PackedStringArray, value: String) -> void:
 
 
 func _hide_legacy_body() -> void:
-	if source_actor == null or not is_instance_valid(source_actor):
+	if _legacy_hidden:
 		return
-	for child: Node in source_actor.get_children():
-		if bool(child.get_meta(KEEP_WITH_REPLACEMENT_META, false)):
+	_legacy_hidden = true
+	for item: CanvasItem in _legacy_body_items:
+		if item == null or not is_instance_valid(item):
 			continue
-		if not _is_primary_body_visual(child):
-			continue
-		var item := child as CanvasItem
 		if not item.has_meta(LEGACY_VISIBLE_META):
 			item.set_meta(LEGACY_VISIBLE_META, item.visible)
 		item.visible = false
 
 
 func _restore_legacy_body() -> void:
-	if source_actor == null or not is_instance_valid(source_actor):
-		return
-	for child: Node in source_actor.get_children():
-		if not (child is CanvasItem):
+	for item: CanvasItem in _legacy_body_items:
+		if item == null or not is_instance_valid(item):
 			continue
-		var item := child as CanvasItem
 		if item.has_meta(LEGACY_VISIBLE_META):
 			item.visible = bool(item.get_meta(LEGACY_VISIBLE_META))
 			item.remove_meta(LEGACY_VISIBLE_META)
+	_legacy_hidden = false
 
 
 func _is_primary_body_visual(node: Node) -> bool:

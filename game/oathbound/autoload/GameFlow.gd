@@ -175,6 +175,11 @@ func _load_current_room() -> void:
 		return
 
 	var token: String = str(route[current_index])
+	var room_load_started_ms: int = Time.get_ticks_msec()
+	_record_room_load_stage("started", room_load_started_ms, {
+		"token": token,
+		"current_index": current_index,
+	})
 
 	# Handle unresolved choice
 	if token.begins_with("CHOICE_"):
@@ -209,6 +214,7 @@ func _load_current_room() -> void:
 	for c in room_container.get_children():
 		c.queue_free()
 	await get_tree().process_frame
+	_record_room_load_stage("container_cleared", room_load_started_ms, {"token": token})
 
 	var room: Node = packed.instantiate()
 	room.add_to_group("room")
@@ -225,6 +231,10 @@ func _load_current_room() -> void:
 	room_container.add_child(room)
 	
 	await get_tree().process_frame
+	_record_room_load_stage("room_ready", room_load_started_ms, {
+		"token": token,
+		"room_name": str(room.name),
+	})
 
 	# Ensure we have a player instance
 	if player == null:
@@ -245,6 +255,10 @@ func _load_current_room() -> void:
 
 	room_container.add_child(player)
 	await get_tree().process_frame
+	_record_room_load_stage("player_ready_hidden", room_load_started_ms, {
+		"token": token,
+		"player_name": str(player.name),
+	})
 
 	# Position at spawn
 	var target_pos := (player as Node2D).global_position if player is Node2D else Vector2.ZERO
@@ -270,7 +284,24 @@ func _load_current_room() -> void:
 		if not room.is_connected("room_cleared", Callable(self, "_on_room_cleared")):
 			room.connect("room_cleared", Callable(self, "_on_room_cleared").bind(room))
 
+	_record_room_load_stage("completed", room_load_started_ms, {
+		"token": token,
+		"room_name": str(room.name),
+	})
 	emit_signal("room_changed", token)
+
+
+func _record_room_load_stage(stage: String, started_ms: int, extra: Dictionary = {}) -> void:
+	var elapsed_ms := maxi(0, Time.get_ticks_msec() - started_ms)
+	if stage == "completed":
+		print("[GameFlowPerf] room_load token=%s elapsed_ms=%d" % [str(extra.get("token", "")), elapsed_ms])
+	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
+		return
+	var payload := extra.duplicate(true)
+	payload["stage"] = stage
+	payload["elapsed_ms"] = elapsed_ms
+	CombatTelemetry.record_event("room_load_stage", payload)
+
 
 func _setup_exit_gates(room: Node) -> void:
 	var next_type := peek_next_type()

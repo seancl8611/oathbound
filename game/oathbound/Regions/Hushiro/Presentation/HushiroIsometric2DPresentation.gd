@@ -11,6 +11,7 @@ const DIRECTIONAL_PRESENTER_SCRIPT = preload("res://Utility/DirectionalActorPres
 const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2DProfile.tres")
 const AKIO_CHECKPOINT_B_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const AKIO_CHECKPOINT_B_FRAMES_DIR := "res://Art2D/RigRendered/Akio/CheckpointB/Frames"
+const CHECKPOINT_B_LOAD_BUDGET_MS: int = 3
 const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres")
 
 @export_category("Isometric combat framing")
@@ -29,7 +30,13 @@ var _presenters: Dictionary = {}
 var _refresh_left: float = 0.0
 var _camera_configured_id: int = 0
 var _startup_reported := false
-var _checkpoint_b_prepare_attempted := false
+var _checkpoint_b_prepare_started := false
+var _checkpoint_b_prepare_active := false
+var _checkpoint_b_prepare_started_ms: int = 0
+var _checkpoint_b_prepare_max_chunk_ms: int = 0
+var _checkpoint_b_prepare_index: int = 0
+var _checkpoint_b_prepare_queue: Array[Dictionary] = []
+var _checkpoint_b_prepare_frames: SpriteFrames = null
 
 
 func _ready() -> void:
@@ -45,6 +52,7 @@ func _exit_tree() -> void:
 
 
 func _process(delta: float) -> void:
+	_advance_checkpoint_b_prepare()
 	_configure_camera_if_needed()
 	_refresh_left -= delta
 	if _refresh_left <= 0.0:
@@ -158,7 +166,7 @@ func _profile_for_role(role: String) -> Resource:
 			if player_profile_override != null:
 				return player_profile_override
 			if is_inside_tree():
-				_prepare_checkpoint_b_profile()
+				_begin_checkpoint_b_prepare()
 			if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE):
 				return AKIO_CHECKPOINT_B_PROFILE
 			return AKIO_RIG2D_PROFILE
@@ -168,10 +176,11 @@ func _profile_for_role(role: String) -> Resource:
 			return null
 
 
-func _prepare_checkpoint_b_profile() -> void:
-	if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE) or _checkpoint_b_prepare_attempted:
+func _begin_checkpoint_b_prepare() -> void:
+	if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE) or _checkpoint_b_prepare_started:
 		return
-	_checkpoint_b_prepare_attempted = true
+	_checkpoint_b_prepare_started = true
+	_checkpoint_b_prepare_started_ms = Time.get_ticks_msec()
 
 	var source := DirAccess.open(AKIO_CHECKPOINT_B_FRAMES_DIR)
 	if source == null:
@@ -186,11 +195,12 @@ func _prepare_checkpoint_b_profile() -> void:
 		push_error("[AkioCheckpointB] profile returned invalid expected animation names")
 		return
 	var expected := expected_value as PackedStringArray
-	var frames := SpriteFrames.new()
-	if frames.has_animation(&"default"):
-		frames.remove_animation(&"default")
 	var fps := maxf(1.0, float(AKIO_CHECKPOINT_B_PROFILE.get("default_fps")))
-	var total_frames := 0
+	_checkpoint_b_prepare_frames = SpriteFrames.new()
+	if _checkpoint_b_prepare_frames.has_animation(&"default"):
+		_checkpoint_b_prepare_frames.remove_animation(&"default")
+	_checkpoint_b_prepare_queue.clear()
+	_checkpoint_b_prepare_index = 0
 
 	for animation_text: String in expected:
 		var animation_name := StringName(animation_text)
@@ -203,34 +213,110 @@ func _prepare_checkpoint_b_profile() -> void:
 		matching.sort()
 		if matching.is_empty():
 			push_error("[AkioCheckpointB] missing runtime frames for %s" % animation_text)
+			_checkpoint_b_prepare_frames = null
 			return
 
-		frames.add_animation(animation_name)
-		frames.set_animation_speed(animation_name, fps)
+		_checkpoint_b_prepare_frames.add_animation(animation_name)
+		_checkpoint_b_prepare_frames.set_animation_speed(animation_name, fps)
 		var animation_base := str(AKIO_CHECKPOINT_B_PROFILE.call("animation_base_from_name", animation_text))
-		frames.set_animation_loop(
+		_checkpoint_b_prepare_frames.set_animation_loop(
 			animation_name,
 			bool(AKIO_CHECKPOINT_B_PROFILE.call("is_looping_animation_base", animation_base))
 		)
-
 		for file_name: String in matching:
-			var texture_value := load(AKIO_CHECKPOINT_B_FRAMES_DIR.path_join(file_name))
-			if texture_value == null or not (texture_value is Texture2D):
-				push_error("[AkioCheckpointB] could not load runtime frame %s" % file_name)
-				return
-			frames.add_frame(animation_name, texture_value as Texture2D)
-			total_frames += 1
+			_checkpoint_b_prepare_queue.append({
+				"animation": animation_name,
+				"path": AKIO_CHECKPOINT_B_FRAMES_DIR.path_join(file_name),
+			})
 
-	AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", frames)
+	_checkpoint_b_prepare_active = true
+	print("[AkioCheckpointB] incremental prepare started frames=%d budget_ms=%d" % [
+		_checkpoint_b_prepare_queue.size(),
+		CHECKPOINT_B_LOAD_BUDGET_MS,
+	])
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_checkpoint_b_prepare_started", {
+			"frame_count": _checkpoint_b_prepare_queue.size(),
+			"budget_ms": CHECKPOINT_B_LOAD_BUDGET_MS,
+		})
+
+
+func _advance_checkpoint_b_prepare() -> void:
+	if not _checkpoint_b_prepare_active or _checkpoint_b_prepare_frames == null:
+		return
+	var chunk_started_ms := Time.get_ticks_msec()
+	while _checkpoint_b_prepare_index < _checkpoint_b_prepare_queue.size():
+		var entry: Dictionary = _checkpoint_b_prepare_queue[_checkpoint_b_prepare_index]
+		var texture_path := str(entry.get("path", ""))
+		var texture_value := load(texture_path)
+		if texture_value == null or not (texture_value is Texture2D):
+			push_error("[AkioCheckpointB] could not load runtime frame %s" % texture_path)
+			_checkpoint_b_prepare_active = false
+			_checkpoint_b_prepare_frames = null
+			return
+		_checkpoint_b_prepare_frames.add_frame(
+			entry.get("animation", StringName()) as StringName,
+			texture_value as Texture2D
+		)
+		_checkpoint_b_prepare_index += 1
+		if Time.get_ticks_msec() - chunk_started_ms >= CHECKPOINT_B_LOAD_BUDGET_MS:
+			break
+
+	var chunk_ms := Time.get_ticks_msec() - chunk_started_ms
+	_checkpoint_b_prepare_max_chunk_ms = maxi(_checkpoint_b_prepare_max_chunk_ms, chunk_ms)
+	if _checkpoint_b_prepare_index < _checkpoint_b_prepare_queue.size():
+		return
+	_finish_checkpoint_b_prepare()
+
+
+func _finish_checkpoint_b_prepare() -> void:
+	if _checkpoint_b_prepare_frames == null:
+		return
+	AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", _checkpoint_b_prepare_frames)
 	AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", true)
 	var validation_value: Variant = AKIO_CHECKPOINT_B_PROFILE.call("validate_contract", true)
 	if validation_value is PackedStringArray and not (validation_value as PackedStringArray).is_empty():
 		AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", null)
 		AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", false)
-		push_error("[AkioCheckpointB] runtime atlas validation failed: %s" % " | ".join(validation_value as PackedStringArray))
+		_checkpoint_b_prepare_active = false
+		push_error("[AkioCheckpointB] incremental atlas validation failed: %s" % " | ".join(validation_value as PackedStringArray))
 		return
 
-	print("[AkioCheckpointB] runtime atlas ready animations=%d frames=%d" % [expected.size(), total_frames])
+	_checkpoint_b_prepare_active = false
+	var elapsed_ms := maxi(0, Time.get_ticks_msec() - _checkpoint_b_prepare_started_ms)
+	print("[AkioCheckpointB] incremental atlas ready animations=24 frames=%d elapsed_ms=%d max_chunk_ms=%d" % [
+		_checkpoint_b_prepare_index,
+		elapsed_ms,
+		_checkpoint_b_prepare_max_chunk_ms,
+	])
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_checkpoint_b_prepare_completed", {
+			"frame_count": _checkpoint_b_prepare_index,
+			"elapsed_ms": elapsed_ms,
+			"max_chunk_ms": _checkpoint_b_prepare_max_chunk_ms,
+		})
+	_swap_checkpoint_b_presenters()
+
+
+func _swap_checkpoint_b_presenters() -> void:
+	for presenter_value: Variant in _presenters.values():
+		if not _is_live_object(presenter_value) or not (presenter_value is Node):
+			continue
+		var presenter := presenter_value as Node
+		var source_value: Variant = presenter.get("source_actor")
+		if source_value is Node and is_instance_valid(source_value) and (source_value as Node).is_in_group("player"):
+			if presenter.has_method("set_profile"):
+				presenter.call("set_profile", AKIO_CHECKPOINT_B_PROFILE)
+
+
+func _prepare_checkpoint_b_profile() -> void:
+	# Synchronous validation helper used only by headless asset smoke tests. Live Hushiro
+	# uses the incremental loader above so 768 texture loads never block a gameplay frame.
+	if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE):
+		return
+	_begin_checkpoint_b_prepare()
+	while _checkpoint_b_prepare_active:
+		_advance_checkpoint_b_prepare()
 
 
 func _profile_asset_ready(profile: Resource) -> bool:
