@@ -92,6 +92,8 @@ func _draw() -> void:
 		return
 	var player := _find_player()
 	for actor: Node2D in _actors():
+		if actor == null or not is_instance_valid(actor):
+			continue
 		var local_pos := to_local(actor.global_position)
 		var is_player := actor.is_in_group("player")
 		var role := _role_for(actor)
