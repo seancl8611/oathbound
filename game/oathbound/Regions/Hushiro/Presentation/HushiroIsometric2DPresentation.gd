@@ -11,7 +11,17 @@ const DIRECTIONAL_PRESENTER_SCRIPT = preload("res://Utility/DirectionalActorPres
 const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2DProfile.tres")
 const AKIO_CHECKPOINT_B_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const AKIO_CHECKPOINT_B_FRAMES_DIR := "res://Art2D/RigRendered/Akio/CheckpointB/Frames"
-const CHECKPOINT_B_LOAD_BUDGET_MS: int = 3
+const CHECKPOINT_B_MAX_INFLIGHT: int = 12
+const CHECKPOINT_B_BOOTSTRAP_IDLE_TEXTURES := {
+	"e": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_e_000.png"),
+	"se": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_se_000.png"),
+	"s": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_s_000.png"),
+	"sw": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_sw_000.png"),
+	"w": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_w_000.png"),
+	"nw": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_nw_000.png"),
+	"n": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_n_000.png"),
+	"ne": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_ne_000.png"),
+}
 const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres")
 
 @export_category("Isometric combat framing")
@@ -32,11 +42,16 @@ var _camera_configured_id: int = 0
 var _startup_reported := false
 var _checkpoint_b_prepare_started := false
 var _checkpoint_b_prepare_active := false
+var _checkpoint_b_prepare_complete := false
 var _checkpoint_b_prepare_started_ms: int = 0
-var _checkpoint_b_prepare_max_chunk_ms: int = 0
 var _checkpoint_b_prepare_index: int = 0
+var _checkpoint_b_prepare_loaded: int = 0
 var _checkpoint_b_prepare_queue: Array[Dictionary] = []
 var _checkpoint_b_prepare_frames: SpriteFrames = null
+var _checkpoint_b_inflight: Dictionary = {}
+var _checkpoint_b_animation_textures: Dictionary = {}
+var _checkpoint_b_animation_loaded_counts: Dictionary = {}
+var _checkpoint_b_animation_expected_counts: Dictionary = {}
 
 
 func _ready() -> void:
@@ -177,7 +192,7 @@ func _profile_for_role(role: String) -> Resource:
 
 
 func _begin_checkpoint_b_prepare() -> void:
-	if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE) or _checkpoint_b_prepare_started:
+	if _checkpoint_b_prepare_started:
 		return
 	_checkpoint_b_prepare_started = true
 	_checkpoint_b_prepare_started_ms = Time.get_ticks_msec()
@@ -200,7 +215,12 @@ func _begin_checkpoint_b_prepare() -> void:
 	if _checkpoint_b_prepare_frames.has_animation(&"default"):
 		_checkpoint_b_prepare_frames.remove_animation(&"default")
 	_checkpoint_b_prepare_queue.clear()
+	_checkpoint_b_inflight.clear()
+	_checkpoint_b_animation_textures.clear()
+	_checkpoint_b_animation_loaded_counts.clear()
+	_checkpoint_b_animation_expected_counts.clear()
 	_checkpoint_b_prepare_index = 0
+	_checkpoint_b_prepare_loaded = 0
 
 	for animation_text: String in expected:
 		var animation_name := StringName(animation_text)
@@ -223,79 +243,145 @@ func _begin_checkpoint_b_prepare() -> void:
 			animation_name,
 			bool(AKIO_CHECKPOINT_B_PROFILE.call("is_looping_animation_base", animation_base))
 		)
-		for file_name: String in matching:
+
+		# Every Checkpoint B animation starts with Hammer's real directional idle pose.
+		# That means Akio is visibly the commissioned character from the first presenter
+		# frame even while the full move/attack clips are still streaming in.
+		var direction := animation_text.get_slice("_", animation_text.get_slice_count("_") - 1)
+		var bootstrap_value: Variant = CHECKPOINT_B_BOOTSTRAP_IDLE_TEXTURES.get(direction, null)
+		if bootstrap_value is Texture2D:
+			_checkpoint_b_prepare_frames.add_frame(animation_name, bootstrap_value as Texture2D)
+
+		var textures: Array = []
+		textures.resize(matching.size())
+		_checkpoint_b_animation_textures[animation_text] = textures
+		_checkpoint_b_animation_loaded_counts[animation_text] = 0
+		_checkpoint_b_animation_expected_counts[animation_text] = matching.size()
+		for frame_index: int in range(matching.size()):
 			_checkpoint_b_prepare_queue.append({
+				"animation_text": animation_text,
 				"animation": animation_name,
-				"path": AKIO_CHECKPOINT_B_FRAMES_DIR.path_join(file_name),
+				"frame_index": frame_index,
+				"path": AKIO_CHECKPOINT_B_FRAMES_DIR.path_join(matching[frame_index]),
 			})
 
+	# Mark the commissioned profile usable immediately. Its 24 animations all have a
+	# real Akio directional bootstrap frame; completed clips atomically replace those
+	# one-frame stand-ins as background loading finishes.
+	AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", _checkpoint_b_prepare_frames)
+	AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", true)
 	_checkpoint_b_prepare_active = true
-	print("[AkioCheckpointB] incremental prepare started frames=%d budget_ms=%d" % [
+	print("[AkioCheckpointB] threaded prepare started frames=%d inflight=%d bootstrap=real_akio" % [
 		_checkpoint_b_prepare_queue.size(),
-		CHECKPOINT_B_LOAD_BUDGET_MS,
+		CHECKPOINT_B_MAX_INFLIGHT,
 	])
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("akio_checkpoint_b_prepare_started", {
 			"frame_count": _checkpoint_b_prepare_queue.size(),
-			"budget_ms": CHECKPOINT_B_LOAD_BUDGET_MS,
+			"max_inflight": CHECKPOINT_B_MAX_INFLIGHT,
+			"bootstrap": "real_akio",
 		})
 
 
 func _advance_checkpoint_b_prepare() -> void:
 	if not _checkpoint_b_prepare_active or _checkpoint_b_prepare_frames == null:
 		return
-	var chunk_started_ms := Time.get_ticks_msec()
-	while _checkpoint_b_prepare_index < _checkpoint_b_prepare_queue.size():
-		var entry: Dictionary = _checkpoint_b_prepare_queue[_checkpoint_b_prepare_index]
-		var texture_path := str(entry.get("path", ""))
-		var texture_value := load(texture_path)
-		if texture_value == null or not (texture_value is Texture2D):
-			push_error("[AkioCheckpointB] could not load runtime frame %s" % texture_path)
-			_checkpoint_b_prepare_active = false
-			_checkpoint_b_prepare_frames = null
-			return
-		_checkpoint_b_prepare_frames.add_frame(
-			entry.get("animation", StringName()) as StringName,
-			texture_value as Texture2D
-		)
-		_checkpoint_b_prepare_index += 1
-		if Time.get_ticks_msec() - chunk_started_ms >= CHECKPOINT_B_LOAD_BUDGET_MS:
-			break
 
-	var chunk_ms := Time.get_ticks_msec() - chunk_started_ms
-	_checkpoint_b_prepare_max_chunk_ms = maxi(_checkpoint_b_prepare_max_chunk_ms, chunk_ms)
-	if _checkpoint_b_prepare_index < _checkpoint_b_prepare_queue.size():
+	while _checkpoint_b_inflight.size() < CHECKPOINT_B_MAX_INFLIGHT and _checkpoint_b_prepare_index < _checkpoint_b_prepare_queue.size():
+		var entry: Dictionary = _checkpoint_b_prepare_queue[_checkpoint_b_prepare_index]
+		_checkpoint_b_prepare_index += 1
+		var texture_path := str(entry.get("path", ""))
+		var request_error := ResourceLoader.load_threaded_request(texture_path, "Texture2D", true)
+		if request_error != OK and request_error != ERR_BUSY:
+			push_error("[AkioCheckpointB] threaded request failed %s error=%d" % [texture_path, request_error])
+			_checkpoint_b_prepare_active = false
+			return
+		_checkpoint_b_inflight[texture_path] = entry
+
+	var completed_paths := PackedStringArray()
+	for path_value: Variant in _checkpoint_b_inflight.keys():
+		var texture_path := str(path_value)
+		var status := ResourceLoader.load_threaded_get_status(texture_path)
+		if status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
+			push_error("[AkioCheckpointB] threaded load failed %s status=%d" % [texture_path, status])
+			_checkpoint_b_prepare_active = false
+			return
+		if status != ResourceLoader.THREAD_LOAD_LOADED:
+			continue
+
+		var texture_value := ResourceLoader.load_threaded_get(texture_path)
+		if texture_value == null or not (texture_value is Texture2D):
+			push_error("[AkioCheckpointB] threaded result was not Texture2D: %s" % texture_path)
+			_checkpoint_b_prepare_active = false
+			return
+		var entry: Dictionary = _checkpoint_b_inflight[texture_path]
+		_store_checkpoint_b_loaded_texture(entry, texture_value as Texture2D)
+		completed_paths.append(texture_path)
+
+	for texture_path: String in completed_paths:
+		_checkpoint_b_inflight.erase(texture_path)
+
+	if _checkpoint_b_prepare_loaded >= _checkpoint_b_prepare_queue.size() and _checkpoint_b_inflight.is_empty():
+		_finish_checkpoint_b_prepare()
+
+
+func _store_checkpoint_b_loaded_texture(entry: Dictionary, texture: Texture2D) -> void:
+	var animation_text := str(entry.get("animation_text", ""))
+	var frame_index := int(entry.get("frame_index", -1))
+	var textures_value: Variant = _checkpoint_b_animation_textures.get(animation_text, null)
+	if not (textures_value is Array):
 		return
-	_finish_checkpoint_b_prepare()
+	var textures := textures_value as Array
+	if frame_index < 0 or frame_index >= textures.size():
+		return
+	if textures[frame_index] != null:
+		return
+	textures[frame_index] = texture
+	_checkpoint_b_animation_textures[animation_text] = textures
+	_checkpoint_b_prepare_loaded += 1
+	var loaded_count := int(_checkpoint_b_animation_loaded_counts.get(animation_text, 0)) + 1
+	_checkpoint_b_animation_loaded_counts[animation_text] = loaded_count
+	if loaded_count >= int(_checkpoint_b_animation_expected_counts.get(animation_text, textures.size())):
+		_install_checkpoint_b_animation(animation_text)
+
+
+func _install_checkpoint_b_animation(animation_text: String) -> void:
+	if _checkpoint_b_prepare_frames == null:
+		return
+	var textures_value: Variant = _checkpoint_b_animation_textures.get(animation_text, null)
+	if not (textures_value is Array):
+		return
+	var textures := textures_value as Array
+	var animation_name := StringName(animation_text)
+	_checkpoint_b_prepare_frames.clear(animation_name)
+	for texture_value: Variant in textures:
+		if not (texture_value is Texture2D):
+			return
+		_checkpoint_b_prepare_frames.add_frame(animation_name, texture_value as Texture2D)
 
 
 func _finish_checkpoint_b_prepare() -> void:
 	if _checkpoint_b_prepare_frames == null:
 		return
-	AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", _checkpoint_b_prepare_frames)
-	AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", true)
 	var validation_value: Variant = AKIO_CHECKPOINT_B_PROFILE.call("validate_contract", true)
 	if validation_value is PackedStringArray and not (validation_value as PackedStringArray).is_empty():
-		AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", null)
-		AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", false)
 		_checkpoint_b_prepare_active = false
-		push_error("[AkioCheckpointB] incremental atlas validation failed: %s" % " | ".join(validation_value as PackedStringArray))
+		push_error("[AkioCheckpointB] threaded atlas validation failed: %s" % " | ".join(validation_value as PackedStringArray))
 		return
 
 	_checkpoint_b_prepare_active = false
+	_checkpoint_b_prepare_complete = true
 	var elapsed_ms := maxi(0, Time.get_ticks_msec() - _checkpoint_b_prepare_started_ms)
-	print("[AkioCheckpointB] incremental atlas ready animations=24 frames=%d elapsed_ms=%d max_chunk_ms=%d" % [
-		_checkpoint_b_prepare_index,
+	print("[AkioCheckpointB] threaded atlas ready animations=24 frames=%d elapsed_ms=%d" % [
+		_checkpoint_b_prepare_loaded,
 		elapsed_ms,
-		_checkpoint_b_prepare_max_chunk_ms,
 	])
 	if CombatTelemetry != null and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("akio_checkpoint_b_prepare_completed", {
-			"frame_count": _checkpoint_b_prepare_index,
+			"frame_count": _checkpoint_b_prepare_loaded,
 			"elapsed_ms": elapsed_ms,
-			"max_chunk_ms": _checkpoint_b_prepare_max_chunk_ms,
+			"max_inflight": CHECKPOINT_B_MAX_INFLIGHT,
 		})
-	_swap_checkpoint_b_presenters()
 
 
 func _swap_checkpoint_b_presenters() -> void:
@@ -310,13 +396,25 @@ func _swap_checkpoint_b_presenters() -> void:
 
 
 func _prepare_checkpoint_b_profile() -> void:
-	# Synchronous validation helper used only by headless asset smoke tests. Live Hushiro
-	# uses the incremental loader above so 768 texture loads never block a gameplay frame.
-	if _profile_asset_ready(AKIO_CHECKPOINT_B_PROFILE):
+	# Headless validation intentionally uses synchronous loading. Live gameplay never
+	# enters this loop; it uses ResourceLoader's threaded path above.
+	if _checkpoint_b_prepare_complete:
 		return
 	_begin_checkpoint_b_prepare()
-	while _checkpoint_b_prepare_active:
-		_advance_checkpoint_b_prepare()
+	if _checkpoint_b_prepare_frames == null:
+		return
+
+	_checkpoint_b_inflight.clear()
+	for entry: Dictionary in _checkpoint_b_prepare_queue:
+		var texture_path := str(entry.get("path", ""))
+		var texture_value := load(texture_path)
+		if texture_value == null or not (texture_value is Texture2D):
+			push_error("[AkioCheckpointB] validation load failed %s" % texture_path)
+			_checkpoint_b_prepare_active = false
+			return
+		_store_checkpoint_b_loaded_texture(entry, texture_value as Texture2D)
+	_checkpoint_b_prepare_index = _checkpoint_b_prepare_queue.size()
+	_finish_checkpoint_b_prepare()
 
 
 func _profile_asset_ready(profile: Resource) -> bool:
