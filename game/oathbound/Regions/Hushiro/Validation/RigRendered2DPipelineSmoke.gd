@@ -29,6 +29,7 @@ func _run() -> void:
 	_validate_profile_contracts()
 	_validate_alias_contracts()
 	await _validate_eight_direction_quantization()
+	await _validate_directional_loop_phase_continuity()
 	await _validate_authoritative_attack_sampling()
 	_finish()
 
@@ -123,6 +124,52 @@ func _validate_eight_direction_quantization() -> void:
 			_expect(str(state.get("state", "")) == "move", "direction %s did not remain in move semantic state" % direction_name)
 		else:
 			_fail("8-way presentation state was not a Dictionary")
+
+	presenter.queue_free()
+	actor.queue_free()
+	await get_tree().process_frame
+
+
+func _validate_directional_loop_phase_continuity() -> void:
+	var actor := CharacterBody2D.new()
+	actor.name = "Rig2DLoopContinuityActor"
+	add_child(actor)
+
+	var presenter_value: Variant = PRESENTER_SCRIPT.new()
+	_expect(presenter_value is Node2D, "could not instantiate directional presenter for loop continuity")
+	if not (presenter_value is Node2D):
+		actor.queue_free()
+		return
+	var presenter := presenter_value as Node2D
+	presenter.name = "Rig2DLoopContinuityPresenter"
+	add_child(presenter)
+	presenter.call("configure", actor, "player", 1.0, 0.72)
+
+	var frames := SpriteFrames.new()
+	if frames.has_animation(&"default"):
+		frames.remove_animation(&"default")
+	for animation_name: StringName in [&"move_e", &"move_ne"]:
+		frames.add_animation(animation_name)
+		frames.set_animation_speed(animation_name, 30.0)
+		frames.set_animation_loop(animation_name, true)
+		for frame_index: int in range(16):
+			var image := Image.create(4, 4, false, Image.FORMAT_RGBA8)
+			image.fill(Color(float(frame_index) / 16.0, 0.2, 0.3, 1.0))
+			frames.add_frame(animation_name, ImageTexture.create_from_image(image))
+	presenter.call("set_sprite_frames", frames)
+
+	actor.velocity = Vector2(120.0, 0.0)
+	presenter.call("sync_from_source", 0.0)
+	var sprite := presenter.get_node_or_null("DirectionalSprite") as AnimatedSprite2D
+	_expect(sprite != null, "directional presenter did not create AnimatedSprite2D")
+	if sprite != null:
+		sprite.play(&"move_e")
+		sprite.set_frame_and_progress(12, 0.5)
+		actor.velocity = Vector2(120.0, -120.0)
+		presenter.call("sync_from_source", 0.0)
+		_expect(sprite.animation == &"move_ne", "move direction did not switch from e to ne")
+		_expect(sprite.frame == 12, "direction switch reset locomotion loop instead of preserving frame 12")
+		_expect(is_equal_approx(sprite.frame_progress, 0.5), "direction switch did not preserve fractional locomotion frame progress")
 
 	presenter.queue_free()
 	actor.queue_free()
@@ -259,7 +306,7 @@ func _fail(message: String) -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("[RigRendered2DPipelineSmoke] PASS - complete 72-animation Akio/Swordsman atlas contracts, 8-way quantization, aliases, and authoritative attack-frame sampling are ready")
+		print("[RigRendered2DPipelineSmoke] PASS - complete 72-animation Akio/Swordsman atlas contracts, 8-way quantization, loop-phase continuity, aliases, and authoritative attack-frame sampling are ready")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

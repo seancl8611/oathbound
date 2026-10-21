@@ -20,6 +20,8 @@ var _capture_start_ms: int = 0
 var _sample_accumulator: float = 0.0
 var _flush_accumulator: float = 0.0
 var _event_counts: Dictionary = {}
+var _pending_lines: Array[String] = []
+var _property_name_cache: Dictionary = {}
 var _diagnostics: CombatTelemetryDiagnostics = DIAGNOSTICS_SCRIPT.new()
 
 
@@ -72,6 +74,8 @@ func _start_capture() -> void:
 	_sample_accumulator = 0.0
 	_flush_accumulator = 0.0
 	_event_counts.clear()
+	_pending_lines.clear()
+	_property_name_cache.clear()
 	_diagnostics.reset()
 	_capturing = true
 
@@ -116,7 +120,11 @@ func record_event(event_name: String, data: Dictionary = {}) -> void:
 		payload[key_value] = data[key_value]
 	_event_counts[event_name] = int(_event_counts.get(event_name, 0)) + 1
 	_diagnostics.observe(event_name, data)
-	_capture_file.store_line(JSON.stringify(payload))
+	_pending_lines.append(JSON.stringify(payload))
+	# Keep a hard ceiling so a pathological debug session cannot accumulate an
+	# unbounded telemetry buffer if the regular physics flush is interrupted.
+	if _pending_lines.size() >= 256:
+		_flush_now()
 
 
 func snapshot_actor(actor: Node) -> Dictionary:
@@ -246,8 +254,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _flush_now() -> void:
-	if _capture_file != null:
-		_capture_file.flush()
+	if _capture_file == null:
+		return
+	if not _pending_lines.is_empty():
+		_capture_file.store_string("\n".join(_pending_lines) + "\n")
+		_pending_lines.clear()
+	_capture_file.flush()
 
 
 func _record_world_sample() -> void:
@@ -356,10 +368,17 @@ func _property_value(object: Object, property_name: String) -> Variant:
 func _has_property(object: Object, property_name: String) -> bool:
 	if object == null:
 		return false
-	for property_data in object.get_property_list():
-		if str(property_data.get("name", "")) == property_name:
-			return true
-	return false
+	var object_id := int(object.get_instance_id())
+	var cached_value: Variant = _property_name_cache.get(object_id, null)
+	var property_names: Dictionary
+	if cached_value is Dictionary:
+		property_names = cached_value as Dictionary
+	else:
+		property_names = {}
+		for property_data: Dictionary in object.get_property_list():
+			property_names[str(property_data.get("name", ""))] = true
+		_property_name_cache[object_id] = property_names
+	return property_names.has(property_name)
 
 
 func _vec2(value: Vector2) -> Array:

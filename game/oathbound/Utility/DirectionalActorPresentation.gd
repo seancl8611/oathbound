@@ -249,7 +249,58 @@ func _sync_atlas_animation(force_restart: bool) -> void:
 		return
 
 	if force_restart or _sprite.animation != desired or not _sprite.is_playing():
+		var previous_animation := _sprite.animation
+		var previous_frame := _sprite.frame
+		var previous_progress := _sprite.frame_progress
+		var preserve_loop_phase := (
+			not force_restart
+			and previous_animation != desired
+			and _should_preserve_loop_phase(previous_animation, desired)
+		)
 		_sprite.play(desired)
+		if preserve_loop_phase:
+			_restore_loop_phase(desired, previous_animation, previous_frame, previous_progress)
+
+
+func _should_preserve_loop_phase(previous_animation: StringName, desired_animation: StringName) -> bool:
+	if _sprite_frames == null:
+		return false
+	if not _sprite_frames.has_animation(previous_animation) or not _sprite_frames.has_animation(desired_animation):
+		return false
+	if not _sprite_frames.get_animation_loop(previous_animation) or not _sprite_frames.get_animation_loop(desired_animation):
+		return false
+	return _animation_base_for_phase(previous_animation) == _animation_base_for_phase(desired_animation)
+
+
+func _animation_base_for_phase(animation_name: StringName) -> String:
+	var animation_text := str(animation_name)
+	if _profile != null and _profile.has_method("animation_base_from_name"):
+		return str(_profile.call("animation_base_from_name", animation_text))
+	for direction: String in DIRECTIONS:
+		var suffix := "_%s" % direction
+		if animation_text.ends_with(suffix):
+			return animation_text.left(animation_text.length() - suffix.length())
+	return animation_text
+
+
+func _restore_loop_phase(
+	desired_animation: StringName,
+	previous_animation: StringName,
+	previous_frame: int,
+	previous_progress: float
+) -> void:
+	if _sprite_frames == null or _sprite == null:
+		return
+	var previous_count := _sprite_frames.get_frame_count(previous_animation)
+	var desired_count := _sprite_frames.get_frame_count(desired_animation)
+	if previous_count <= 0 or desired_count <= 0:
+		return
+	var previous_position := float(previous_frame) + clampf(previous_progress, 0.0, 1.0)
+	var normalized := fposmod(previous_position / float(previous_count), 1.0)
+	var desired_position := normalized * float(desired_count)
+	var desired_frame := clampi(int(floor(desired_position)), 0, desired_count - 1)
+	var desired_progress := clampf(desired_position - floor(desired_position), 0.0, 1.0)
+	_sprite.set_frame_and_progress(desired_frame, desired_progress)
 
 
 func _animation_candidates() -> PackedStringArray:
@@ -630,6 +681,8 @@ func get_presentation_state_for_test() -> Dictionary:
 		"resolved_animation": _resolved_animation_name,
 		"authoritative_sampled": _authoritative_sampled,
 		"sampled_frame": _sampled_frame,
+		"sprite_frame": _sprite.frame if _sprite != null else -1,
+		"sprite_frame_progress": _sprite.frame_progress if _sprite != null else 0.0,
 		"atlas_active": _sprite != null and _sprite.visible and _sprite_frames != null,
 		"placeholder_active": use_placeholder_when_atlas_missing and (_sprite == null or not _sprite.visible),
 	}

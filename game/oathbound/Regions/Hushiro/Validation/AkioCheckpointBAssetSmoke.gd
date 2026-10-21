@@ -35,7 +35,20 @@ func _ready() -> void:
 				var animation_name := StringName(animation_text)
 				_expect(atlas.has_animation(animation_name), "missing animation %s" % animation_text)
 				if atlas.has_animation(animation_name):
-					total += atlas.get_frame_count(animation_name)
+					var frame_count := atlas.get_frame_count(animation_name)
+					total += frame_count
+					var expected_count := 40
+					if animation_text.begins_with("move_"):
+						expected_count = 16
+					_expect(
+						frame_count == expected_count,
+						"%s must contain %d frames, got %d" % [animation_text, expected_count, frame_count]
+					)
+					var should_loop := animation_text.begins_with("idle_") or animation_text.begins_with("move_")
+					_expect(
+						atlas.get_animation_loop(animation_name) == should_loop,
+						"%s loop flag did not match Checkpoint B contract" % animation_text
+					)
 		_expect(total == 768, "Checkpoint B atlas must contain 768 frames, got %d" % total)
 
 	if _failures.is_empty():
