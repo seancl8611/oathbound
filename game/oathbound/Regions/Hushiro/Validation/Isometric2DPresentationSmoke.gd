@@ -67,10 +67,18 @@ func _run() -> void:
 			_expect(str(actor_state.get("role", "")) == "player", "directional presenter did not resolve player role")
 			_expect(str(actor_state.get("direction", "")) == "e", "eastward movement did not quantize to e")
 			_expect(str(actor_state.get("state", "")) == "move", "moving player did not resolve move semantic state")
-			_expect(str(actor_state.get("profile_id", "")) == "akio_rig_rendered_2d", "Akio rig profile was not assigned")
-			_expect(not bool(actor_state.get("asset_ready", true)), "Akio profile incorrectly claims production frames already exist")
-			_expect(bool(actor_state.get("pixel_art", false)), "Akio rig profile is not configured for nearest-filter pixel proof")
-			_expect(bool(actor_state.get("placeholder_active", false)), "placeholder presenter was not active before rig atlas import")
+			var checkpoint_source := DirAccess.open("res://Art2D/RigRendered/Akio/CheckpointB/Frames")
+			var checkpoint_available := checkpoint_source != null and not checkpoint_source.get_files().is_empty()
+			if checkpoint_available:
+				_expect(str(actor_state.get("profile_id", "")) == "akio_checkpoint_b", "real Akio Checkpoint B bootstrap profile was not assigned")
+				_expect(bool(actor_state.get("asset_ready", false)), "real Akio Checkpoint B bootstrap was not marked usable")
+				_expect(not bool(actor_state.get("pixel_art", true)), "real Akio Checkpoint B bootstrap should use clean prerender filtering")
+				_expect(not bool(actor_state.get("placeholder_active", true)), "real Akio Checkpoint B bootstrap incorrectly fell back to placeholder")
+			else:
+				_expect(str(actor_state.get("profile_id", "")) == "akio_rig_rendered_2d", "Akio rig profile was not assigned")
+				_expect(not bool(actor_state.get("asset_ready", true)), "Akio profile incorrectly claims production frames already exist")
+				_expect(bool(actor_state.get("pixel_art", false)), "Akio rig profile is not configured for nearest-filter pixel proof")
+				_expect(bool(actor_state.get("placeholder_active", false)), "placeholder presenter was not active before rig atlas import")
 		else:
 			_fail("actor state entry was not a Dictionary")
 	else:

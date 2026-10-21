@@ -12,15 +12,15 @@ const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2
 const AKIO_CHECKPOINT_B_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const AKIO_CHECKPOINT_B_FRAMES_DIR := "res://Art2D/RigRendered/Akio/CheckpointB/Frames"
 const CHECKPOINT_B_MAX_INFLIGHT: int = 12
-const CHECKPOINT_B_BOOTSTRAP_IDLE_TEXTURES := {
-	"e": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_e_000.png"),
-	"se": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_se_000.png"),
-	"s": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_s_000.png"),
-	"sw": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_sw_000.png"),
-	"w": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_w_000.png"),
-	"nw": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_nw_000.png"),
-	"n": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_n_000.png"),
-	"ne": preload("res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_ne_000.png"),
+const CHECKPOINT_B_BOOTSTRAP_IDLE_PATHS := {
+	"e": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_e_000.png",
+	"se": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_se_000.png",
+	"s": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_s_000.png",
+	"sw": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_sw_000.png",
+	"w": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_w_000.png",
+	"nw": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_nw_000.png",
+	"n": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_n_000.png",
+	"ne": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_ne_000.png",
 }
 const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres")
 
@@ -248,9 +248,9 @@ func _begin_checkpoint_b_prepare() -> void:
 		# That means Akio is visibly the commissioned character from the first presenter
 		# frame even while the full move/attack clips are still streaming in.
 		var direction := animation_text.get_slice("_", animation_text.get_slice_count("_") - 1)
-		var bootstrap_value: Variant = CHECKPOINT_B_BOOTSTRAP_IDLE_TEXTURES.get(direction, null)
-		if bootstrap_value is Texture2D:
-			_checkpoint_b_prepare_frames.add_frame(animation_name, bootstrap_value as Texture2D)
+		var bootstrap_texture := _checkpoint_b_bootstrap_texture(direction)
+		if bootstrap_texture != null:
+			_checkpoint_b_prepare_frames.add_frame(animation_name, bootstrap_texture)
 
 		var textures: Array = []
 		textures.resize(matching.size())
@@ -281,6 +281,18 @@ func _begin_checkpoint_b_prepare() -> void:
 			"max_inflight": CHECKPOINT_B_MAX_INFLIGHT,
 			"bootstrap": "real_akio",
 		})
+
+
+func _checkpoint_b_bootstrap_texture(direction: String) -> Texture2D:
+	var source_path := str(CHECKPOINT_B_BOOTSTRAP_IDLE_PATHS.get(direction, ""))
+	if source_path.is_empty():
+		return null
+	var absolute_path := ProjectSettings.globalize_path(source_path)
+	var image := Image.load_from_file(absolute_path)
+	if image == null or image.is_empty():
+		push_error("[AkioCheckpointB] could not decode bootstrap image %s" % source_path)
+		return null
+	return ImageTexture.create_from_image(image)
 
 
 func _advance_checkpoint_b_prepare() -> void:
