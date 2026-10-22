@@ -10,7 +10,9 @@ Oathbound's production art targets an illustrated high-angle 2D game. Runtime co
 - `ASSET_INVENTORY.md` — high-level production groups/counts.
 - `CORE_VFX.md` — shared combat feedback.
 - `ASPECT_VFX.md`, `TECHNIQUE_VFX.md`, `PROSTHETIC_VFX.md` — system-specific presentation.
-- `../commissions/akio/AKIO_COMMISSION_BRIEF.md` — the single artist-facing Akio commission brief.
+- `../commissions/akio/AKIO_COMMISSION_BRIEF.md` — authoritative repository artist commission brief.
+- [Hammer Proof A feedback tracker](../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) — live queue of artist-facing feedback, observed source-art issues, and questions; **not an approved change order**.
+- [Akio Proof A integration tracker](AKIO_PROOF_A_INTEGRATION_TRACKER.md) — live internal Godot engineering tasks, status, dependencies, and playtest evidence; **not a replacement for gameplay authority**.
 
 ## Current production priorities
 
