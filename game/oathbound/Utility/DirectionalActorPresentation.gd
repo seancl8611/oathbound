@@ -46,6 +46,9 @@ var _legacy_hidden: bool = false
 var _action_runner: Node = null
 var _focus_trace_last_key: String = ""
 var _focus_trace_was_attacking: bool = false
+var _focus_trace_last_frame: int = -1
+var _focus_motion_last_key: String = ""
+var _focus_motion_last_ms: int = 0
 
 
 func _ready() -> void:
@@ -691,13 +694,10 @@ func get_presentation_state_for_test() -> Dictionary:
 	}
 
 
-# Record only actual presented-frame transitions while a focused test is enabled.
-# This intentionally does NOT sample CollisionShape2D nodes, resize hitboxes, alter
-# SpriteFrames, or affect gameplay's authoritative action progression.
+# Record presented-frame changes without altering action progression or hitboxes.
 func _trace_focused_akio_frame() -> void:
 	if not OS.is_debug_build() or actor_role != "player" or str(_profile_value("profile_id", "")) != "akio_checkpoint_b":
-		_focus_trace_last_key = ""
-		_focus_trace_was_attacking = false
+		_reset_focused_visual_trace()
 		return
 	if (
 		typeof(PlaytestLab) != TYPE_OBJECT
@@ -706,8 +706,7 @@ func _trace_focused_akio_frame() -> void:
 		or typeof(CombatTelemetry) != TYPE_OBJECT
 		or not CombatTelemetry.is_capturing()
 	):
-		_focus_trace_last_key = ""
-		_focus_trace_was_attacking = false
+		_reset_focused_visual_trace()
 		return
 	if _sprite == null or _sprite_frames == null or not _sprite.visible:
 		return
@@ -718,11 +717,25 @@ func _trace_focused_akio_frame() -> void:
 		if _focus_trace_was_attacking:
 			CombatTelemetry.record_event("akio_focus_visual_exit", {
 				"sequence": sequence,
-				"previous_frame": _sampled_frame,
+				"previous_frame": _focus_trace_last_frame,
 				"state": _semantic_state,
 			})
 		_focus_trace_last_key = ""
 		_focus_trace_was_attacking = false
+		# In the same focused test, sample locomotion at most every 120 ms.
+		# Idle is only logged on transitions; this avoids large per-frame traces.
+		if _semantic_state in ["idle", "move"]:
+			var motion_key := "%s|%s|%s" % [_semantic_state, _direction_name, _resolved_animation_name]
+			var now_ms := Time.get_ticks_msec()
+			if motion_key != _focus_motion_last_key or (_semantic_state == "move" and now_ms - _focus_motion_last_ms >= 120):
+				_focus_motion_last_key = motion_key
+				_focus_motion_last_ms = now_ms
+				CombatTelemetry.record_event("akio_focus_locomotion_sample", {
+					"state": _semantic_state,
+					"direction": _direction_name,
+					"animation": _resolved_animation_name,
+					"frame": _sprite.frame,
+				})
 		return
 
 	_focus_trace_was_attacking = true
@@ -733,6 +746,7 @@ func _trace_focused_akio_frame() -> void:
 	if signature == _focus_trace_last_key:
 		return
 	_focus_trace_last_key = signature
+	_focus_trace_last_frame = _sprite.frame
 	CombatTelemetry.record_event("akio_focus_visual_frame", {
 		"sequence": sequence,
 		"attack_id": _action_id,
@@ -745,3 +759,11 @@ func _trace_focused_akio_frame() -> void:
 		"hitbox_active": hitbox_active,
 		"authoritative_sampling": _authoritative_sampled,
 	})
+
+
+func _reset_focused_visual_trace() -> void:
+	_focus_trace_last_key = ""
+	_focus_trace_was_attacking = false
+	_focus_trace_last_frame = -1
+	_focus_motion_last_key = ""
+	_focus_motion_last_ms = 0
