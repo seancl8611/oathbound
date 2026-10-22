@@ -54,6 +54,25 @@ Switch **back to Baseline** after testing. All presets are session-only and defa
 
 Run and Idle source clips can still be inspected separately through Mode B. If the blur persists under every preset, compare the original PNGs or Blender renders directly against the real in-game capture before deciding whether to request an art revision.
 
+### Mode A4 — Run frame integrity / camera timing diagnostics (no video needed)
+
+After the first five visual A/B presets failed to improve jitter, the next question is **whether the correct PNG frames are loaded and displayed in order**, and whether camera/presentation motion is uneven.
+
+The offline CI build now runs `tools/rig2d/validate_frame_set.py --manifest tools/rig2d/akio_checkpoint_b_manifest.json --actor akio --source game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames`. This verifies **128 Run PNGs = 16 consecutive frames × 8 directions**, 512×512 RGBA dimensions, plus the 320 Idle and 328 Quick Slash frames. A passing check establishes file completeness against our *declared manifest*, **not** that 16 frames faithfully capture Hammer's original Blender scene or pose spacing.
+
+**In-game, do one Run trace at Baseline:**
+
+1. Wait for the Godot log to say `[AkioCheckpointB] threaded atlas ready animations=24 frames=776`.
+2. Open Playtest Lab → **Focused Tests** → **Akio Run frame-order / camera diagnostics**.
+3. Click **Export 4 Run frame contact sheets (E/W/N/S)** once. The images are saved in `C:/OathboundPlaytest/game/oathbound/playtest_logs/` as `akio_run_source_frames_e.png`, `_w.png`, `_n.png`, `_s.png`. Each is a single 4×4 index grid (row-major frames 0–15), cropped at one **fixed** canvas rectangle. Do not crop each sprite differently. The files show per-frame pose registration and continuity and can be uploaded individually, without a gameplay video.
+4. Keep the rendering option on **Baseline**, select **Arm 12-second Run trace (starts when lab closes)** and close the lab with backtick.
+5. Run **East/West for approximately the first 6 seconds**, then **North/South for the remaining 6 seconds**. The trace stops automatically and prints `[AkioRunTrace] COMPLETE`. It does not alter gameplay.
+6. Upload the new `combat_*.jsonl`, Godot log and **four contact sheets**. Those allow analysis of frame order, actual displayed-frame timing, missing/duplicate/blended poses, presenter versus authoritative world motion, and actual camera versus camera target positions.
+
+The JSONL contains `akio_run_trace_begin`, `akio_run_frame_sample` and `akio_run_trace_end`. Each per-render-callback sample records: semantic state, direction, `animation`, displayed `frame`, `frame_count`, `sprite_fps`, `frame_changed`, `frame_jumped`, frame interval, render/physics frame indices, player velocity and world position, presenter position, on-screen sprite position, and Camera2D actual screen center/target. Diagnostics are **off outside the 12-second window**; no camera or animation changes are made during this diagnostic.
+
+**Interpretation:** If source-frame sheets show a large discontinuity at constant canvas registration, focus next on Blender/action export and the fixed-camera staging. If frames are consecutive, stable and visually coherent but `akio_run_frame_sample` shows repeated unexpected restarts, jumps or high on-screen positional variance while actor velocity is stable, investigate Godot animation playback or camera synchronization first. High stable game FPS does **not** rule out these subtler problems.
+
 ### Mode B — Original source animation (30 FPS; no combat)
 
 Keep the lab open and enable **Play source animation at 30 FPS (while lab is open)**.
