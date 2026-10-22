@@ -77,6 +77,12 @@ The client currently uses `AkioCheckpointBProfile.tres` with `visual_scale_multi
 
 **Small remaining acceptance test:** compare N/S with E/W running at intended camera zoom; compare source Run/Idle at 30 FPS; capture source and live views; use a non-shipping filter/scale A/B to separate Godot softness from source assets. Capture a brief annotated video for Hammer only if the concern persists after that comparison. The confirmed sheathing-continuity issue remains first priority.
 
+## Run frame-integrity follow-up (2026-10-22)
+
+The owner supplied `combat_1792706336.jsonl`, `godot(20261022-220034).log` and indexed Run contact sheets for E, W, N and S. The 12-second test observed 1,350 presenter samples, all 16 source indices per cardinal animation at 30 FPS, and **no skipped frame indices**. The PNG contact sheets exhibit a complete stride cycle and no obvious missing tile. The user's earlier observations (lateral twitch/softness, N/S waddling) remain valid, but **the evidence does not demonstrate a defective Blender Action or missing exported frames**.
+
+At the actual 640×360 viewport, the art is reduced approximately 4× from 512 source frames via the combined 0.5 character/profile and 0.5 camera zoom. Akio's visible side-view figure can occupy only about 18–25 native pixels in width/height measurements. Source readability when displayed much larger in Blender therefore does not automatically predict sharp motion in-game. Before requesting any Run redo, **test a deliberately mipmapped or high-quality prefiltered client-render path and, if necessary, physics/camera synchronization**. Neither is Hammer's responsibility. Sheathing continuity remains the leading confirmed issue to raise with him; North/South waddling remains separately reviewable.
+
 ## Run rendering A/B follow-up (2026-10-22)
 
 The owner has now tested all five **live game** presets (Baseline, Nearest, Linear+world snap, Nearest+world snap, Linear+125% size). **None meaningfully reduced movement twitchiness or apparent blur**; the larger character made it more noticeable. East/West and diagonal running are the most visibly shaky/soft. North/South is smoother but has the previously reported waddling-like gait. The 16-frame Run loop is clean. The Idle movement remains a low-priority subtlety, not a new artist defect.
@@ -115,7 +121,7 @@ The 30 FPS source is now playing correctly in real combat, not just the paused p
 | 2026-10-22 | Repeated sheathing between attacks | **Reconfirmed during full-speed live combat:** full draw–slash–sheath as a repeatable basic attack feels unnecessarily committed. **Prioritize discussion with Hammer** about keeping the blade drawn through combinations and aligning future Idle/Run. Owner must approve the message before sending. |
 | 2026-10-22 | Scope, exact Action split, additions and revisions | **Pending discussion with Hammer**, no quote or change order recorded. |
 | 2026-10-22 | Live 30 FPS gameplay checked against logs and actual animation | **Verified on updated branch** in local Godot log `godot(20261022-173048).log` and combat telemetry `combat_1792689985.jsonl`; no gameplay timing bug reproduced. |
-| 2026-10-22 | Run rendering A/B results | Owner tested every preset; none fixed lateral/diagonal shakiness or N/S waddling. Await matched-size recorded evidence before artist Run revision request. |
+| 2026-10-22 | Run rendering A/B results | Owner tested every preset; none fixed lateral/diagonal shakiness or N/S waddling. The later 12-second trace verified all 16 frames per cardinal Run and zero index skips; next work is client-side mipmap/prefilter and camera-synchronization diagnosis, not an immediate Hammer Run revision. |
 | — | Message sent / Hammer response | **Not yet recorded.** |
 | — | Revision approved / assets delivered / accepted | **Not yet recorded.** |
 
