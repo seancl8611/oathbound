@@ -39,11 +39,22 @@ func _run() -> void:
 	await get_tree().process_frame
 	player.set_physics_process(false)
 
-	# In normal gameplay the prototype authored profiles are unchanged, even if
-	# the focused timing dropdown happens to be set to Hammer.
+	# Regression: Normal combat must honor Hammer's gameplay timing when selected.
+	# Previously this silently fell back to the fast prototype unless isolation
+	# was also enabled. This is the specific bug fixed for Checkpoint B.
+	_expect(PlaytestLab.get_akio_quick_slash_timing_mode() == HAMMER, "Hammer should be the default debug gameplay timing")
+	_expect(PlaytestLab.is_akio_source_gameplay_active(), "normal combat ignored Hammer timing selection")
 	player.call("_start_attack", 0)
-	_expect(not bool((player.get("_attack_profile") as Dictionary).get("checkpoint_b_source_timing", false)), "normal gameplay unexpectedly uses source timing")
-	_expect(is_equal_approx(float((player.get("_attack_profile") as Dictionary).get("duration", -1.0)), 0.36), "normal Quick Slash duration mutated")
+	_expect(bool((player.get("_attack_profile") as Dictionary).get("checkpoint_b_source_timing", false)), "normal combat fell back to fast Quick Slash")
+	_expect(is_equal_approx(float((player.get("_attack_profile") as Dictionary).get("duration", -1.0)), TIMING.STARTUP_DURATION + TIMING.ACTIVE_DURATION), "normal combat has the wrong Hammer attack state duration")
+
+	# Switching only the timing dropdown (without isolation) restores the
+	# original authored fast values; combo selection stays in Normal mode.
+	PlaytestLab.set_akio_quick_slash_timing_mode(PROTOTYPE)
+	_expect(not PlaytestLab.is_akio_source_gameplay_active(), "prototype selected but still reporting Hammer source")
+	player.call("_start_attack", 0)
+	_expect(not bool((player.get("_attack_profile") as Dictionary).get("checkpoint_b_source_timing", false)), "prototype flag leaked into normal combat")
+	_expect(is_equal_approx(float((player.get("_attack_profile") as Dictionary).get("duration", -1.0)), 0.36), "normal prototype duration changed")
 
 	# Focused original/prototype comparison must still be available.
 	PlaytestLab.set_focused_test_scenario(QUICK)
@@ -108,7 +119,7 @@ func _run() -> void:
 	player.call("_start_attack", 2)
 	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "heavy_cleave", "normal Heavy Cleave missing")
 	player.call("_start_attack", 0)
-	_expect(is_equal_approx(float((player.get("_attack_profile") as Dictionary).get("duration", -1.0)), 0.36), "normal Quick Slash lost original duration")
+	_expect(bool((player.get("_attack_profile") as Dictionary).get("checkpoint_b_source_timing", false)), "normal Quick Slash did not retain selected Hammer timing")
 
 	player.queue_free()
 	AspectRuntime.selected_aspect = old_aspect
@@ -125,7 +136,7 @@ func _finish() -> void:
 	PlaytestLab.set_focused_test_scenario(NORMAL)
 	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - prototype restoration | 41-frame Hammer gameplay | recovery dash/parry cancel | preserved normal combos")
+		print("[AkioFocusedPlaytestSmoke] PASS - Hammer timing in normal combat | optional isolation | 41-frame source | recovery dash/parry | prototype fallback | original combo identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
