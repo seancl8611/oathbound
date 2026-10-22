@@ -618,7 +618,8 @@ func get_akio_mipmapped_run_frames(original: SpriteFrames) -> SpriteFrames:
 				return null
 			var output_texture: Texture2D = texture
 			if animation_text.begins_with("move_"):
-				var pixels: Image = texture.get_image()
+				var source_pixels: Image = texture.get_image()
+				var pixels: Image = source_pixels.duplicate() if source_pixels != null else null
 				if pixels == null or pixels.is_empty():
 					push_warning("[AkioRenderTest] Run texture cannot be read; mipmap test unavailable")
 					return null

@@ -103,6 +103,8 @@ func _run() -> void:
 			var pixels := Image.create(8, 8, false, Image.FORMAT_RGBA8)
 			pixels.fill(Color(0.2, float(frame) / 16.0, 0.8, 1.0))
 			fixture.add_frame(animation, ImageTexture.create_from_image(pixels))
+	var original_texture: Texture2D = fixture.get_frame_texture(&"move_e", 0)
+	var original_pixel: Color = original_texture.get_image().get_pixel(0, 0)
 	var mipped: SpriteFrames = PlaytestLab.get_akio_mipmapped_run_frames(fixture)
 	_expect(mipped != null, "Run mipmap generation did not produce an atlas")
 	if mipped != null:
@@ -110,7 +112,8 @@ func _run() -> void:
 		_expect(is_equal_approx(mipped.get_animation_speed(&"move_e"), 30.0), "mipmap mode changed FPS")
 		_expect(mipped.get_animation_loop(&"move_e"), "mipmap mode changed loop setting")
 		_expect(mipped.get_frame_texture(&"move_e", 0).get_image().has_mipmaps(), "mipmap variant lacks mip levels")
-		_expect(not fixture.get_frame_texture(&"move_e", 0).get_image().has_mipmaps(), "mipmap mode mutated source texture")
+		_expect(fixture.get_frame_texture(&"move_e", 0) == original_texture, "mipmap mode replaced the source texture")
+		_expect(fixture.get_frame_texture(&"move_e", 0).get_image().get_pixel(0, 0).is_equal_approx(original_pixel), "mipmap mode changed source pixels")
 	comparison_profile.set("sprite_frames", fixture)
 	presenter.call("set_profile", comparison_profile)
 	PlaytestLab.set_akio_render_test_preset("mipmapped_run")
