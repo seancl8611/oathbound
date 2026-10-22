@@ -23,6 +23,8 @@ func _run() -> void:
 
 	_expect(PlaytestLab.has_method("set_focused_test_scenario"), "PlaytestLab focused scenario setter is missing")
 	_expect(PlaytestLab.has_method("set_akio_quick_slash_timing_mode"), "PlaytestLab timing setter is missing")
+	_expect(PlaytestLab.has_method("set_akio_render_test_preset"), "PlaytestLab visual A/B setter is missing")
+	_expect(PlaytestLab.get_akio_render_test_preset() == "baseline", "Akio render comparison must default to the unmodified baseline")
 	_expect(PlaytestLab.get_focused_test_scenario() == NORMAL, "normal combat must be the default")
 	_expect(is_equal_approx(float(SOURCE_PROFILE.get("default_fps")), 30.0), "Hammer FPS contract changed")
 	_expect(TIMING.SOURCE_FRAME_COUNT == 41, "Hammer Quick Slash must contain 41 frames")
@@ -38,6 +40,58 @@ func _run() -> void:
 	add_child(player)
 	await get_tree().process_frame
 	player.set_physics_process(false)
+
+	# Debug-only live sprite A/B. Same actor, same animation/profile and
+	# world position: only sprite sampling, snap and display size may differ.
+	var comparison_profile: Resource = SOURCE_PROFILE.duplicate(true)
+	comparison_profile.set("sprite_frames", SpriteFrames.new())
+	var presenter: Node2D = load("res://Utility/DirectionalActorPresentation.gd").new()
+	add_child(presenter)
+	presenter.call("configure", player, "player", 1.0, 0.72)
+	presenter.call("set_profile", comparison_profile)
+	player.global_position = Vector2(10.4, 17.6)
+	presenter.call("sync_from_source", 0.0)
+	var visual_state: Dictionary = presenter.call("get_presentation_state_for_test")
+	_expect(str(visual_state.get("render_test_preset", "")) == "baseline", "visual baseline not applied")
+	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR, "baseline lost original linear sampling")
+	_expect(is_equal_approx(float(visual_state.get("visual_scale", -1.0)), 0.5), "baseline changed Akio scale")
+	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "baseline unexpectedly snaps world position")
+
+	PlaytestLab.set_akio_render_test_preset("nearest")
+	presenter.call("sync_from_source", 0.0)
+	visual_state = presenter.call("get_presentation_state_for_test")
+	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_NEAREST, "nearest preset did not reach live Sprite2D")
+	_expect(is_equal_approx(float(visual_state.get("visual_scale", -1.0)), 0.5), "nearest filter altered actor scale")
+	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "nearest preset unexpectedly enables snap")
+
+	PlaytestLab.set_akio_render_test_preset("linear_snap")
+	presenter.call("sync_from_source", 0.0)
+	visual_state = presenter.call("get_presentation_state_for_test")
+	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR, "linear+snap changed filtering")
+	_expect(bool(visual_state.get("render_world_pixel_snap", false)), "linear+snap did not enable snap")
+	_expect(presenter.global_position.distance_to(Vector2(10.0, 18.0)) < 0.01, "linear+snap did not round visual world position")
+
+	PlaytestLab.set_akio_render_test_preset("nearest_snap")
+	presenter.call("sync_from_source", 0.0)
+	visual_state = presenter.call("get_presentation_state_for_test")
+	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_NEAREST, "nearest+snap lost nearest filter")
+	_expect(bool(visual_state.get("render_world_pixel_snap", false)), "nearest+snap lost snap")
+
+	PlaytestLab.set_akio_render_test_preset("linear_125")
+	presenter.call("sync_from_source", 0.0)
+	visual_state = presenter.call("get_presentation_state_for_test")
+	_expect(is_equal_approx(float(visual_state.get("visual_scale", -1.0)), 0.625), "125-percent scale preset not applied")
+	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR, "125-percent comparison changed filtering")
+	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "125-percent comparison retained unwanted snap")
+
+	PlaytestLab.set_akio_render_test_preset("not_a_preset")
+	presenter.call("sync_from_source", 0.0)
+	visual_state = presenter.call("get_presentation_state_for_test")
+	_expect(PlaytestLab.get_akio_render_test_preset() == "baseline", "invalid preset should restore baseline")
+	_expect(is_equal_approx(float(visual_state.get("visual_scale", -1.0)), 0.5), "reset-to-baseline failed to restore actor scale")
+	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR, "reset-to-baseline failed to restore original filtering")
+	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "reset-to-baseline retained pixel snapping")
+	presenter.queue_free()
 
 	# Regression: Normal combat must honor Hammer's gameplay timing when selected.
 	# Previously this silently fell back to the fast prototype unless isolation
@@ -135,8 +189,9 @@ func _expect(condition: bool, message: String) -> void:
 func _finish() -> void:
 	PlaytestLab.set_focused_test_scenario(NORMAL)
 	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
+	PlaytestLab.set_akio_render_test_preset("baseline")
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - Hammer timing in normal combat | optional isolation | 41-frame source | recovery dash/parry | prototype fallback | original combo identities")
+		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | reversible Akio rendering A/B | recovery dash/parry | prototype fallback | normal combo identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
