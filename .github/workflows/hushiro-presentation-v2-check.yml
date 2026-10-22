@@ -74,6 +74,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify focused Akio test preserves normal combat
+        shell: bash
+        run: |
+          set -o pipefail
+          godot --headless --path game/oathbound res://Core/Combat/Validation/AkioFocusedPlaytestSmoke.tscn 2>&1 | tee akio-focused-playtest.log
+          grep -F "[AkioFocusedPlaytestSmoke] PASS" akio-focused-playtest.log
+          if grep -F "SCRIPT ERROR:" akio-focused-playtest.log; then
+            echo "FAIL: focused Akio playtest triggered a GDScript error."
+            exit 1
+          fi
+          if grep -F "ERROR: Error calling deferred method:" akio-focused-playtest.log; then
+            echo "FAIL: focused Akio playtest triggered a deferred-call error."
+            exit 1
+          fi
+
       - name: Smoke live Hushiro combat chamber wiring
         shell: bash
         run: |
@@ -97,6 +112,7 @@ jobs:
           path: |
             hushiro-isometric-2d.log
             rig-rendered-2d-pipeline.log
+            akio-focused-playtest.log
             hushiro-enemy-separation.log
             hushiro-isometric-runscene.log
           if-no-files-found: warn
