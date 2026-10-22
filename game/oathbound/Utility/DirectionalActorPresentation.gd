@@ -162,6 +162,7 @@ func _sync_from_source(_delta: float) -> void:
 	z_index = clampi(1000 + int(round(source_actor.global_position.y)), -4095, 4095)
 	_apply_counter_projection()
 	_sync_atlas_animation(false)
+	_apply_akio_run_pose_lock()
 
 	var signature := "%s|%s|%s|%.3f" % [_semantic_state, _direction_name, _action_id, visual_scale]
 	if signature != _last_draw_signature:
@@ -298,6 +299,28 @@ func _apply_akio_render_test_preset() -> void:
 			else native_filter
 		)
 	_apply_counter_projection()
+
+
+# Display-only experiment: Akio still moves in the world while the current
+# directional Run PNG is held on one frame. Never edits source SpriteFrames,
+# combat state, world position, camera, or the underlying 30 FPS animation clock.
+func _apply_akio_run_pose_lock() -> void:
+	if (
+		not OS.is_debug_build()
+		or actor_role != "player"
+		or str(_profile_value("profile_id", "")) != "akio_checkpoint_b"
+		or _semantic_state != "move"
+		or _sprite == null
+		or not _sprite.visible
+		or _sprite_frames == null
+		or not _resolved_animation_name.begins_with("move_")
+		or typeof(PlaytestLab) != TYPE_OBJECT
+		or not PlaytestLab.has_method("get_akio_run_sync_test_mode")
+		or str(PlaytestLab.get_akio_run_sync_test_mode()) != "pose_lock"
+	):
+		return
+	if _sprite_frames.get_frame_count(_sprite.animation) > 4:
+		_sprite.set_frame_and_progress(4, 0.0)
 
 
 func _apply_counter_projection() -> void:

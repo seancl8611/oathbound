@@ -54,6 +54,12 @@ var _active_three_quarter := false
 var _actor_refresh_left := 0.0
 var _prototype_badge: Label = null
 
+# Debug-only camera comparison. Always restore the original per-scene camera
+# settings rather than changing project defaults or global physics timing.
+var _akio_sync_mode_applied: String = "baseline"
+var _akio_default_process_callback: int = Camera2D.CAMERA2D_PROCESS_IDLE
+var _akio_default_smoothing: bool = true
+
 
 func _ready() -> void:
 	_target = get_parent() as Node2D
@@ -65,6 +71,8 @@ func _ready() -> void:
 	make_current()
 	position_smoothing_enabled = smoothing_on_start
 	position_smoothing_speed = smoothing_speed
+	_akio_default_process_callback = process_callback
+	_akio_default_smoothing = position_smoothing_enabled
 
 	_apply_presentation_profile()
 	_ensure_prototype_badge()
@@ -74,6 +82,30 @@ func _exit_tree() -> void:
 	# Do not leave actor/UI visuals mutated if this Camera2D is removed while the scene
 	# survives a transition/debug reload.
 	_restore_all_actor_visuals()
+
+
+# Runs only to pick a debug comparison setting; does not change camera position.
+# The authoritative follow target remains updated in _physics_process().
+func _process(_dt: float) -> void:
+	if not OS.is_debug_build():
+		return
+	if typeof(PlaytestLab) != TYPE_OBJECT or not PlaytestLab.has_method("get_akio_run_sync_test_mode"):
+		return
+	var mode: String = str(PlaytestLab.get_akio_run_sync_test_mode())
+	if mode == _akio_sync_mode_applied:
+		return
+	_akio_sync_mode_applied = mode
+	process_callback = (
+		Camera2D.CAMERA2D_PROCESS_PHYSICS
+		if mode == "camera_physics"
+		else _akio_default_process_callback
+	)
+	position_smoothing_enabled = (
+		false if mode == "camera_no_smoothing" else _akio_default_smoothing
+	)
+	print("[AkioSyncTest] camera applied mode=%s callback=%d smoothing=%s" % [
+		mode, process_callback, position_smoothing_enabled,
+	])
 
 
 func _physics_process(dt: float) -> void:

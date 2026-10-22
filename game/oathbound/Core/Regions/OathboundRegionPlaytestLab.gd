@@ -40,6 +40,17 @@ const AKIO_RENDER_LINEAR_SNAP: String = "linear_snap"
 const AKIO_RENDER_NEAREST_SNAP: String = "nearest_snap"
 const AKIO_RENDER_LINEAR_125: String = "linear_125"
 const AKIO_RENDER_MIPMAPPED_RUN: String = "mipmapped_run"
+
+# Orthogonal to texture filtering. Each diagnostic alters exactly one
+# presentation variable, never authoritative actor physics or source art.
+const AKIO_SYNC_BASELINE: String = "baseline"
+const AKIO_SYNC_POSE_LOCK: String = "pose_lock"
+const AKIO_SYNC_CAMERA_PHYSICS: String = "camera_physics"
+const AKIO_SYNC_CAMERA_NO_SMOOTHING: String = "camera_no_smoothing"
+const AKIO_SYNC_MODES: Array[String] = [
+	AKIO_SYNC_BASELINE, AKIO_SYNC_POSE_LOCK,
+	AKIO_SYNC_CAMERA_PHYSICS, AKIO_SYNC_CAMERA_NO_SMOOTHING,
+]
 const AKIO_RENDER_PRESETS: Array[String] = [
 	AKIO_RENDER_BASELINE, AKIO_RENDER_NEAREST,
 	AKIO_RENDER_LINEAR_SNAP, AKIO_RENDER_NEAREST_SNAP,
@@ -57,6 +68,8 @@ var _quick_slash_timing_mode: String = QUICK_TIMING_HAMMER
 var _quick_slash_timing_dropdown: OptionButton
 var _akio_render_preset: String = AKIO_RENDER_BASELINE
 var _akio_render_dropdown: OptionButton
+var _akio_sync_test_mode: String = AKIO_SYNC_BASELINE
+var _akio_sync_dropdown: OptionButton
 # Session-only generated GPU mipmaps; no PNGs or other files are written.
 var _akio_mipped_run_frames: SpriteFrames = null
 var _akio_mipped_source_id: int = 0
@@ -644,6 +657,25 @@ func get_akio_mipmapped_run_frames(original: SpriteFrames) -> SpriteFrames:
 	return result
 
 
+# Camera/animation synchronization experiment is independent of old filter tests.
+func get_akio_run_sync_test_mode() -> String:
+	return _akio_sync_test_mode if OS.is_debug_build() else AKIO_SYNC_BASELINE
+
+
+func set_akio_run_sync_test_mode(mode: String) -> void:
+	if not OS.is_debug_build():
+		return
+	var selected: String = mode if mode in AKIO_SYNC_MODES else AKIO_SYNC_BASELINE
+	if _akio_sync_test_mode == selected:
+		return
+	_akio_sync_test_mode = selected
+	if _akio_sync_dropdown != null:
+		_akio_sync_dropdown.select(AKIO_SYNC_MODES.find(selected))
+	print("[AkioSyncTest] mode=%s; Run pose/camera only; player physics and source PNGs unchanged" % selected)
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_run_sync_test_mode", {"mode": selected})
+
+
 # Starts only after closing the paused lab; never runs during its source preview.
 func arm_akio_run_trace() -> void:
 	if not OS.is_debug_build():
@@ -807,7 +839,7 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	render_title.add_theme_font_size_override("font_size", 15)
 	vbox.add_child(render_title)
 	var render_info := Label.new()
-	render_info.text = "Try the same N/S/E/W run route with each preset. Baseline is unchanged; nearest changes sprite filtering; snap tests whole-world-pixel actor placement; 125% tests whether size loses detail. Close the lab to compare. No source PNG, animation speed, collisions or camera zoom are altered."
+	render_info.text = "Filtering tests already evaluated: mipmaps worsened the visible Run. Keep this section on 1. Baseline, and use the new Run movement/camera isolation controls below."
 	render_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(render_info)
 	_akio_render_dropdown = OptionButton.new()
@@ -826,6 +858,31 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	render_note.text = "Preset 6 generates true Run mipmaps once in memory. The first switch may briefly pause; judge steady motion, not startup. Restore Baseline when finished."
 	render_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(render_note)
+
+	var sync_separator := HSeparator.new()
+	vbox.add_child(sync_separator)
+	var sync_title := Label.new()
+	sync_title.text = "Akio Run movement / camera isolation (NEW)"
+	sync_title.add_theme_font_size_override("font_size", 15)
+	vbox.add_child(sync_title)
+	var sync_info := Label.new()
+	sync_info.text = "Keep the sharpness preset on 1. Baseline. Each option changes ONE variable: lock Akio's Run pose during movement, match camera updates to physics ticks, or disable camera smoothing. Run the same N/S and E/W route after closing the lab."
+	sync_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(sync_info)
+	_akio_sync_dropdown = OptionButton.new()
+	_akio_sync_dropdown.add_item("A. Baseline (normal Run + camera)")
+	_akio_sync_dropdown.add_item("B. Freeze Run on frame 4 while moving (camera unchanged)")
+	_akio_sync_dropdown.add_item("C. Camera physics callback (Run/smoothing unchanged)")
+	_akio_sync_dropdown.add_item("D. Camera smoothing OFF (Run/callback unchanged)")
+	_akio_sync_dropdown.select(AKIO_SYNC_MODES.find(_akio_sync_test_mode))
+	_akio_sync_dropdown.item_selected.connect(func(index: int) -> void:
+		set_akio_run_sync_test_mode(AKIO_SYNC_MODES[index])
+	)
+	vbox.add_child(_akio_sync_dropdown)
+	var sync_note := Label.new()
+	sync_note.text = "If B still jitters, the sprite animation poses are not required for the problem. If B becomes steady, camera alone is unlikely to explain all visual shaking. Presets are reversible and disabled in release builds."
+	sync_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(sync_note)
 
 	var trace_separator := HSeparator.new()
 	vbox.add_child(trace_separator)

@@ -1,6 +1,6 @@
 # Akio Checkpoint B — Focused Playtest
 
-**Current checkpoint (2026-10-22): Hammer's original Quick Slash 30 FPS cadence has been verified in actual gameplay; the current open question is whether Godot presentation settings explain Akio's softness while running at gameplay zoom. Use the rendering A/B below before attributing blur to Hammer's source.**
+**Current checkpoint (2026-10-22): Hammer's 30 FPS Quick Slash cadence is verified. Run advances all 16 frames without indexing skips, but it looks jittery in E/W and, less noticeably, N/S. User's latest mipmap A/B made the Run look worse. Investigate moving-character versus camera timing with the NEW Mode A3c below. Do not request artist revisions yet.**
 
 **Ongoing decisions and follow-up:** [Hammer artist feedback tracker](../../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) and [internal Godot integration tracker](../../art_production/AKIO_PROOF_A_INTEGRATION_TRACKER.md). Those are draft working queues; this page records the current debug testing procedure.
 
@@ -61,6 +61,23 @@ The first five presets did not resolve Run jitter; the live trace already proved
 Wait until the startup log reports all 776 frames. Open Focused Tests, select preset 6, close the lab and allow first-time in-memory preparation. **Only treat the test as active if the Godot log prints `[AkioRenderTest] mipmaps READY generated=128`**. Run sustained North/South and East/West after that message. Compare against preset 1 Baseline on the same route and window size, preferably alternating Baseline → mipmapped → Baseline. Observe whether edge shimmer is reduced, or the figure is merely blurrier. The selected mode is **not** an automated visual-quality score.
 
 If both appear equally jittery, move to a debug-only camera/physics interpolation A/B; do not request a Hammer re-export or change Run FPS based solely on the clean frame-index trace. Restore Baseline after the test.
+
+### Mode A3c — Movement / camera isolation (new, after failed mipmapping)
+
+**Evidence:** `combat_1792709349.jsonl` and `godot(20261022-225254).log` from `b15bbf6` confirm real generated Run mipmaps (128 frames) and selection/return to Baseline. Owner reports mipmaps worsened the shaking. The telemetry contains no new 12-second frame trace, so do not invent objective GPU-quality scores. A single 128.76 ms performance hitch occurred during the mipmapped test; sustained frame-order faults were not measured in this run. North/South also suffers (less obvious).
+
+**Next test:** in Playtest Lab → Focused Tests, keep **Akio Run sharpness** on **1. Baseline**, then find **Akio Run movement / camera isolation (NEW)**. Make the same short route E/W and N/S for each setting, waiting for movement to settle after changing the mode:
+
+| Mode | Changes | What we learn |
+|---|---|---|
+| A. Baseline | Normal directional 30 FPS Run, existing camera | Reference |
+| B. Freeze Run on frame 4 | Run pose fixed during movement; character and camera keep moving normally | If jitter remains, Run frame-to-frame pose changes are **not necessary** to reproduce it |
+| C. Camera physics callback | Camera updates on fixed physics ticks instead of its default idle callback; smoothing unchanged | Is mixed camera/actor tick scheduling contributing? |
+| D. Camera smoothing OFF | Default camera update callback retained; smoothing disabled | Is smoothing-related screen-space motion responsible? |
+
+Each mode changes **one** variable. No Combat V2 mechanics, movement speed, camera zoom, source PNGs, or Run FPS metadata change. Other animations behave normally. After comparing B/C/D, restore **A. Baseline**. Read the log's `[AkioSyncTest]` markers to confirm the selected camera mode applied.
+
+**Interpretation:** If the fixed Run pose in B still visibly jitters against the background, focus on physics-to-render/camera transforms; if fixed pose is steady and only animated Run looks shaky, investigate pose registration and source stride within a constant-canvas export. If C helps, revisit Camera2D update synchronization; if D helps, investigate smoothing response. The 30 FPS sprite may look more discrete than 120 FPS motion even when correct; don't confuse that with frame-index faults.
 
 ### Mode A4 — Run frame integrity / camera timing diagnostics (no video needed)
 

@@ -25,6 +25,8 @@ func _run() -> void:
 	_expect(PlaytestLab.has_method("set_akio_quick_slash_timing_mode"), "PlaytestLab timing setter is missing")
 	_expect(PlaytestLab.has_method("set_akio_render_test_preset"), "PlaytestLab visual A/B setter is missing")
 	_expect(PlaytestLab.has_method("get_akio_mipmapped_run_frames"), "Run mipmap generator missing")
+	_expect(PlaytestLab.has_method("set_akio_run_sync_test_mode"), "Run sync mode setter missing")
+	_expect(PlaytestLab.get_akio_run_sync_test_mode() == "baseline", "Run sync baseline must be default")
 	_expect(PlaytestLab.has_method("arm_akio_run_trace"), "Run frame/camera trace arming control missing")
 	_expect(PlaytestLab.has_method("is_akio_run_trace_active"), "Run frame/camera trace status control missing")
 	_expect(PlaytestLab.has_method("export_akio_run_contact_sheets"), "Run indexed contact-sheet generator missing")
@@ -132,6 +134,34 @@ func _run() -> void:
 	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR, "reset-to-baseline failed to restore original filtering")
 	_expect(not bool(visual_state.get("render_mipmaps_active", false)), "baseline retained generated Run mipmaps")
 	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "reset-to-baseline retained pixel snapping")
+
+	# Frame lock must change only the displayed pose during locomotion.
+	# Camera comparison must restore original process callback and smoothing.
+	PlaytestLab.set_akio_run_sync_test_mode("pose_lock")
+	player.velocity = Vector2(100.0, 0.0)
+	presenter.call("sync_from_source", 0.0)
+	visual_state = presenter.call("get_presentation_state_for_test")
+	_expect(str(visual_state.get("state", "")) == "move", "pose-lock fixture was not moving")
+	_expect(int(visual_state.get("sprite_frame", -1)) == 4, "pose-lock did not hold frame 4")
+	PlaytestLab.set_akio_run_sync_test_mode("baseline")
+	var test_camera: Camera2D = player.get_node_or_null("Camera2D") as Camera2D
+	_expect(test_camera != null, "camera comparison requires canonical Camera2D")
+	if test_camera != null:
+		var normal_callback: int = test_camera.process_callback
+		var normal_smoothing: bool = test_camera.position_smoothing_enabled
+		PlaytestLab.set_akio_run_sync_test_mode("camera_physics")
+		test_camera.call("_process", 0.0)
+		_expect(test_camera.process_callback == Camera2D.CAMERA2D_PROCESS_PHYSICS, "camera physics test not applied")
+		_expect(test_camera.position_smoothing_enabled == normal_smoothing, "camera physics test modified smoothing")
+		PlaytestLab.set_akio_run_sync_test_mode("camera_no_smoothing")
+		test_camera.call("_process", 0.0)
+		_expect(not test_camera.position_smoothing_enabled, "camera no-smoothing test not applied")
+		_expect(test_camera.process_callback == normal_callback, "camera no-smoothing test changed callback")
+		PlaytestLab.set_akio_run_sync_test_mode("baseline")
+		test_camera.call("_process", 0.0)
+		_expect(test_camera.process_callback == normal_callback, "camera callback did not restore")
+		_expect(test_camera.position_smoothing_enabled == normal_smoothing, "camera smoothing did not restore")
+	player.velocity = Vector2.ZERO
 	presenter.queue_free()
 
 	# Regression: Normal combat must honor Hammer's gameplay timing when selected.
@@ -231,8 +261,9 @@ func _finish() -> void:
 	PlaytestLab.set_focused_test_scenario(NORMAL)
 	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
 	PlaytestLab.set_akio_render_test_preset("baseline")
+	PlaytestLab.set_akio_run_sync_test_mode("baseline")
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | reversible mipmap A/B | recovery dash/parry | prototype fallback | normal combo identities")
+		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | reversible mipmap and camera/pose A/B | recovery dash/parry | prototype fallback | normal combo identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
