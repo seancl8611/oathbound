@@ -29,6 +29,8 @@ const KAGUTSUCHI_TEST_ACTORS := [
 # Milestone tests are session-only. Keep normal gameplay as the default.
 const FOCUSED_TEST_NORMAL: String = "normal"
 const FOCUSED_TEST_AKIO_CHECKPOINT_B: String = "akio_checkpoint_b_quick_slash"
+const QUICK_TIMING_PROTOTYPE: String = "prototype"
+const QUICK_TIMING_HAMMER: String = "hammer_source_30fps"
 const AKIO_SOURCE_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const AKIO_SOURCE_FPS: float = 30.0
 const AKIO_SOURCE_DIRECTIONS: Array[String] = ["e", "se", "s", "sw", "w", "nw", "n", "ne"]
@@ -37,6 +39,8 @@ const AKIO_SOURCE_ANIMATIONS: Array[String] = ["attack_quick_slash", "move", "id
 var _focused_test_scenario: String = FOCUSED_TEST_NORMAL
 var _focused_diagnostics_enabled: bool = true
 var _focused_scenario_dropdown: OptionButton
+var _quick_slash_timing_mode: String = QUICK_TIMING_HAMMER
+var _quick_slash_timing_dropdown: OptionButton
 var _focused_diagnostics_check: CheckButton
 var _source_preview_enabled: bool = false
 var _source_preview_frame: int = 0
@@ -506,6 +510,30 @@ func is_akio_quick_slash_focus_active() -> bool:
 	)
 
 
+func get_akio_quick_slash_timing_mode() -> String:
+	return _quick_slash_timing_mode if OS.is_debug_build() else QUICK_TIMING_PROTOTYPE
+
+
+func is_akio_source_gameplay_active() -> bool:
+	return is_akio_quick_slash_focus_active() and get_akio_quick_slash_timing_mode() == QUICK_TIMING_HAMMER
+
+
+func set_akio_quick_slash_timing_mode(mode: String) -> void:
+	if not OS.is_debug_build():
+		return
+	var next_mode := QUICK_TIMING_HAMMER if mode == QUICK_TIMING_HAMMER else QUICK_TIMING_PROTOTYPE
+	if next_mode == _quick_slash_timing_mode:
+		return
+	_quick_slash_timing_mode = next_mode
+	# An in-flight action retains the timing values copied into its own profile.
+	# This option only affects subsequently started attacks.
+	if _quick_slash_timing_dropdown != null:
+		_quick_slash_timing_dropdown.select(1 if next_mode == QUICK_TIMING_HAMMER else 0)
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_focus_timing_mode_changed", {"mode": next_mode})
+	print("[FocusedTests] Quick Slash gameplay timing=", next_mode)
+
+
 func is_akio_focus_diagnostics_active() -> bool:
 	return is_akio_quick_slash_focus_active() and _focused_diagnostics_enabled
 
@@ -552,9 +580,28 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	vbox.add_child(_focused_scenario_dropdown)
 
 	var explanation := Label.new()
-	explanation.text = "Basic taps/holds execute only Quick Slash in the focused scenario. Combo continuations are bypassed; normal timing, hitboxes and movement are unchanged. Requires the base katana (no Blood Aspect selected)."
+	explanation.text = "Basic taps/holds execute only Quick Slash. Combo branching is bypassed. Choose prototype or full Hammer 30 FPS timing below. Requires base katana (no Blood Aspect selected)."
 	explanation.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(explanation)
+
+	var timing_label := Label.new()
+	timing_label.text = "Quick Slash timing during actual gameplay"
+	vbox.add_child(timing_label)
+	_quick_slash_timing_dropdown = OptionButton.new()
+	_quick_slash_timing_dropdown.add_item("Original prototype (fast)")
+	_quick_slash_timing_dropdown.set_item_metadata(0, QUICK_TIMING_PROTOTYPE)
+	_quick_slash_timing_dropdown.add_item("Hammer original (41 frames / 30 FPS)")
+	_quick_slash_timing_dropdown.set_item_metadata(1, QUICK_TIMING_HAMMER)
+	_quick_slash_timing_dropdown.select(1 if _quick_slash_timing_mode == QUICK_TIMING_HAMMER else 0)
+	_quick_slash_timing_dropdown.item_selected.connect(func(index: int) -> void:
+		set_akio_quick_slash_timing_mode(str(_quick_slash_timing_dropdown.get_item_metadata(index)))
+	)
+	vbox.add_child(_quick_slash_timing_dropdown)
+
+	var timing_info := Label.new()
+	timing_info.text = "Hammer mode: 15 source frames of windup, 8 of attack, 18 of recovery. Dash/parry may cancel after the strike, at the start of recovery. Changes only the next Quick Slash; normal combat is unchanged."
+	timing_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(timing_info)
 
 	_focused_diagnostics_check = CheckButton.new()
 	_focused_diagnostics_check.text = "Record focused animation frames in combat telemetry"
