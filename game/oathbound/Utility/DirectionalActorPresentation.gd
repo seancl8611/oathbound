@@ -53,6 +53,8 @@ var _focus_motion_last_ms: int = 0
 # Nonpersistent Checkpoint B visual A/B. Only this display adapter is changed.
 var _akio_render_test_applied: String = ""
 var _akio_render_test_pixel_snap: bool = false
+var _akio_original_frames: SpriteFrames = null
+var _akio_render_mipmaps_active: bool = false
 
 var _run_trace_previous_animation: String = ""
 var _run_trace_previous_frame: int = -1
@@ -98,6 +100,8 @@ func set_profile(profile: Resource) -> void:
 			actor_role = str(role_value).strip_edges().to_lower()
 		var frames_value: Variant = _profile.get("sprite_frames")
 		_sprite_frames = frames_value as SpriteFrames if frames_value is SpriteFrames else null
+	_akio_original_frames = _sprite_frames
+	_akio_render_test_applied = ""
 	_apply_profile_settings()
 	_apply_counter_projection()
 	_sync_atlas_animation(true)
@@ -112,6 +116,8 @@ func set_sprite_frames(frames: SpriteFrames) -> void:
 	# Compatibility seam for temporary/test atlases. Production content should normally
 	# be assigned through DirectionalSpriteProfile so pivot/filter/validation stay bundled.
 	_sprite_frames = frames
+	_akio_original_frames = frames
+	_akio_render_test_applied = ""
 	if _sprite != null:
 		_sprite.sprite_frames = frames
 	_apply_profile_settings()
@@ -246,19 +252,50 @@ func _apply_akio_render_test_preset() -> void:
 		return
 	_akio_render_test_applied = preset
 	_akio_render_test_pixel_snap = preset in ["linear_snap", "nearest_snap"]
+	_akio_render_mipmaps_active = false
 	var debug_scale: float = 1.25 if preset == "linear_125" else 1.0
 	visual_scale = _base_visual_scale
 	if _profile != null and _sprite_frames != null:
 		visual_scale *= maxf(0.05, float(_profile_value("visual_scale_multiplier", 1.0)))
 	visual_scale *= debug_scale
 	if _sprite != null:
+		var intended_frames: SpriteFrames = _akio_original_frames
+		if (
+			preset == "mipmapped_run"
+			and intended_frames != null
+			and typeof(PlaytestLab) == TYPE_OBJECT
+			and PlaytestLab.has_method("get_akio_mipmapped_run_frames")
+		):
+			var mipmap_frames: SpriteFrames = PlaytestLab.get_akio_mipmapped_run_frames(intended_frames)
+			if mipmap_frames != null:
+				intended_frames = mipmap_frames
+				_akio_render_mipmaps_active = true
+			else:
+				push_warning("[AkioRenderTest] mipmapped Run unavailable; baseline textures in use")
+		if intended_frames != null and _sprite_frames != intended_frames:
+			# Preserve current frame/phase across texture variants; no clock reset.
+			var previous_animation: StringName = _sprite.animation
+			var previous_frame: int = _sprite.frame
+			var previous_progress: float = _sprite.frame_progress
+			var previously_playing: bool = _sprite.is_playing()
+			_sprite_frames = intended_frames
+			_sprite.sprite_frames = intended_frames
+			if intended_frames.has_animation(previous_animation):
+				_sprite.animation = previous_animation
+				_sprite.set_frame_and_progress(
+					clampi(previous_frame, 0, intended_frames.get_frame_count(previous_animation) - 1),
+					previous_progress
+				)
+				if previously_playing:
+					_sprite.play()
 		var native_filter: int = (
 			CanvasItem.TEXTURE_FILTER_NEAREST if _profile_bool("pixel_art", false)
 			else CanvasItem.TEXTURE_FILTER_LINEAR
 		)
 		_sprite.texture_filter = (
-			CanvasItem.TEXTURE_FILTER_NEAREST
-			if preset in ["nearest", "nearest_snap"] else native_filter
+			CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS if _akio_render_mipmaps_active
+			else CanvasItem.TEXTURE_FILTER_NEAREST if preset in ["nearest", "nearest_snap"]
+			else native_filter
 		)
 	_apply_counter_projection()
 
@@ -732,6 +769,7 @@ func get_presentation_state_for_test() -> Dictionary:
 		"asset_ready": _profile_bool("asset_ready", false),
 		"pixel_art": _profile_bool("pixel_art", false),
 		"render_test_preset": _akio_render_test_applied,
+		"render_mipmaps_active": _akio_render_mipmaps_active,
 		"render_filter": _sprite.texture_filter if _sprite != null else -1,
 		"render_world_pixel_snap": _akio_render_test_pixel_snap or _profile_bool("snap_actor_to_pixel_grid", false),
 		"resolved_animation": _resolved_animation_name,

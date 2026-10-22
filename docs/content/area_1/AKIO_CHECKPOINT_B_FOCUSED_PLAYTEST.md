@@ -54,6 +54,14 @@ Switch **back to Baseline** after testing. All presets are session-only and defa
 
 Run and Idle source clips can still be inspected separately through Mode B. If the blur persists under every preset, compare the original PNGs or Blender renders directly against the real in-game capture before deciding whether to request an art revision.
 
+### Mode A3b — Run-only genuine mipmap A/B (new; no video required)
+
+The first five presets did not resolve Run jitter; the live trace already proved that all Run frames advance in order. The next isolated test is **Baseline vs preset 6, Run-only generated mipmaps**, at identical window resolution, native Akio scale and 30 FPS. Preset 6 does more than toggle the texture filter: it builds actual mip levels for all eight 16-frame Run directions in memory. Original PNGs, Idle, attacks, camera, collisions and movement are unchanged. No derivative image files or backups are written.
+
+Wait until the startup log reports all 776 frames. Open Focused Tests, select preset 6, close the lab and allow first-time in-memory preparation. **Only treat the test as active if the Godot log prints `[AkioRenderTest] mipmaps READY generated=128`**. Run sustained North/South and East/West after that message. Compare against preset 1 Baseline on the same route and window size, preferably alternating Baseline → mipmapped → Baseline. Observe whether edge shimmer is reduced, or the figure is merely blurrier. The selected mode is **not** an automated visual-quality score.
+
+If both appear equally jittery, move to a debug-only camera/physics interpolation A/B; do not request a Hammer re-export or change Run FPS based solely on the clean frame-index trace. Restore Baseline after the test.
+
 ### Mode A4 — Run frame integrity / camera timing diagnostics (no video needed)
 
 After the first five visual A/B presets failed to improve jitter, the next question is **whether the correct PNG frames are loaded and displayed in order**, and whether camera/presentation motion is uneven.

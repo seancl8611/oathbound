@@ -118,6 +118,12 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 - **Second targeted hypothesis:** gameplay actor transforms update on physics ticks while camera smoothing and the `DirectionalActorPresentation` render on different cadence; investigate a debug-only smooth-camera/physics-interpolation comparison only if mipmap/prefilter variant fails. Physics interpolation may add latency and needs owner evaluation, particularly in action combat.
 - **Decision:** Source indexing and animated sprite playback order are **validated**; visual polish remains **unresolved**. No reason yet to ask Hammer to redo Run, and no reason to repeat the already unsuccessful nearest/pixel-snap/125% presets. Preserve original master 512×512 and combat timing.
 
+## Next Run experiment — actual mipmapped textures (implemented; owner field retest pending)
+
+A debug-only sixth Akio rendering preset now generates mipmap levels **in memory** for all 128 Run frames (16 × eight directions), using true `Image.generate_mipmaps()` and `TEXTURE_FILTER_LINEAR_WITH_MIPMAPS`. This is not a no-op filter comparison. Idle/Quick Slash source textures and all 30 FPS durations are unchanged; no new PNGs, on-disk backups or production renderer changes. Live presenter preserves frame phase when switching back to Baseline. The focused-playtest smoke test checks the generated image mip levels, unchanged source texture, 16-frame count, 30 FPS and reversible filtering.
+
+**Needs field evidence:** check for `[AkioRenderTest] mipmaps READY generated=128`, compare steady N/S and E/W Run at unchanged gameplay scale/window dimensions against Baseline, and record whether silhouette edge shimmer improves or simply blurs. No claim of visual success until owner playtests. If it does not help, prioritize controlled camera/physics scheduling. The original clean frame-order trace cannot measure GPU pixel output.
+
 ## Run frame integrity and synchronization diagnostic (2026-10-22)
 
 The user's prior Blender preview was smooth. Our earlier advice to submit gameplay video was not a usable diagnostic in this workflow. The pipeline already has a Python frame validator, and the Checkpoint B manifest explicitly declares 16 Run frames per direction (128 total), 40 Idle and 41 Quick Slash (776 total). **Counts validate declared coverage but do not establish that Blender's original frame range/frame rate was sampled correctly.**

@@ -24,6 +24,7 @@ func _run() -> void:
 	_expect(PlaytestLab.has_method("set_focused_test_scenario"), "PlaytestLab focused scenario setter is missing")
 	_expect(PlaytestLab.has_method("set_akio_quick_slash_timing_mode"), "PlaytestLab timing setter is missing")
 	_expect(PlaytestLab.has_method("set_akio_render_test_preset"), "PlaytestLab visual A/B setter is missing")
+	_expect(PlaytestLab.has_method("get_akio_mipmapped_run_frames"), "Run mipmap generator missing")
 	_expect(PlaytestLab.has_method("arm_akio_run_trace"), "Run frame/camera trace arming control missing")
 	_expect(PlaytestLab.has_method("is_akio_run_trace_active"), "Run frame/camera trace status control missing")
 	_expect(PlaytestLab.has_method("export_akio_run_contact_sheets"), "Run indexed contact-sheet generator missing")
@@ -88,12 +89,45 @@ func _run() -> void:
 	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR, "125-percent comparison changed filtering")
 	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "125-percent comparison retained unwanted snap")
 
+
+	# Complete, tiny 8-direction fixture verifies that actual image mipmaps
+	# are present and that the source and frame timing remain unchanged.
+	var fixture := SpriteFrames.new()
+	fixture.remove_animation(&"default")
+	for direction: String in ["e", "se", "s", "sw", "w", "nw", "n", "ne"]:
+		var animation := StringName("move_%s" % direction)
+		fixture.add_animation(animation)
+		fixture.set_animation_speed(animation, 30.0)
+		fixture.set_animation_loop(animation, true)
+		for frame: int in range(16):
+			var pixels := Image.create(8, 8, false, Image.FORMAT_RGBA8)
+			pixels.fill(Color(0.2, float(frame) / 16.0, 0.8, 1.0))
+			fixture.add_frame(animation, ImageTexture.create_from_image(pixels))
+	var mipped: SpriteFrames = PlaytestLab.get_akio_mipmapped_run_frames(fixture)
+	_expect(mipped != null, "Run mipmap generation did not produce an atlas")
+	if mipped != null:
+		_expect(mipped.get_frame_count(&"move_e") == 16, "mipmap mode changed frame count")
+		_expect(is_equal_approx(mipped.get_animation_speed(&"move_e"), 30.0), "mipmap mode changed FPS")
+		_expect(mipped.get_animation_loop(&"move_e"), "mipmap mode changed loop setting")
+		_expect(mipped.get_frame_texture(&"move_e", 0).get_image().has_mipmaps(), "mipmap variant lacks mip levels")
+		_expect(not fixture.get_frame_texture(&"move_e", 0).get_image().has_mipmaps(), "mipmap mode mutated source texture")
+	comparison_profile.set("sprite_frames", fixture)
+	presenter.call("set_profile", comparison_profile)
+	PlaytestLab.set_akio_render_test_preset("mipmapped_run")
+	presenter.call("sync_from_source", 0.0)
+	visual_state = presenter.call("get_presentation_state_for_test")
+	_expect(bool(visual_state.get("render_mipmaps_active", false)), "mipmapped Run was not applied")
+	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS, "mipmap mode did not change GPU filter")
+	_expect(is_equal_approx(float(visual_state.get("visual_scale", -1.0)), 0.5), "mipmap mode changed scale")
+	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "mipmap mode changed position")
+
 	PlaytestLab.set_akio_render_test_preset("not_a_preset")
 	presenter.call("sync_from_source", 0.0)
 	visual_state = presenter.call("get_presentation_state_for_test")
 	_expect(PlaytestLab.get_akio_render_test_preset() == "baseline", "invalid preset should restore baseline")
 	_expect(is_equal_approx(float(visual_state.get("visual_scale", -1.0)), 0.5), "reset-to-baseline failed to restore actor scale")
 	_expect(int(visual_state.get("render_filter", -1)) == CanvasItem.TEXTURE_FILTER_LINEAR, "reset-to-baseline failed to restore original filtering")
+	_expect(not bool(visual_state.get("render_mipmaps_active", false)), "baseline retained generated Run mipmaps")
 	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "reset-to-baseline retained pixel snapping")
 	presenter.queue_free()
 
@@ -195,7 +229,7 @@ func _finish() -> void:
 	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
 	PlaytestLab.set_akio_render_test_preset("baseline")
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | reversible Akio rendering A/B | recovery dash/parry | prototype fallback | normal combo identities")
+		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | reversible mipmap A/B | recovery dash/parry | prototype fallback | normal combo identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

@@ -39,10 +39,11 @@ const AKIO_RENDER_NEAREST: String = "nearest"
 const AKIO_RENDER_LINEAR_SNAP: String = "linear_snap"
 const AKIO_RENDER_NEAREST_SNAP: String = "nearest_snap"
 const AKIO_RENDER_LINEAR_125: String = "linear_125"
+const AKIO_RENDER_MIPMAPPED_RUN: String = "mipmapped_run"
 const AKIO_RENDER_PRESETS: Array[String] = [
 	AKIO_RENDER_BASELINE, AKIO_RENDER_NEAREST,
 	AKIO_RENDER_LINEAR_SNAP, AKIO_RENDER_NEAREST_SNAP,
-	AKIO_RENDER_LINEAR_125,
+	AKIO_RENDER_LINEAR_125, AKIO_RENDER_MIPMAPPED_RUN,
 ]
 const AKIO_SOURCE_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const AKIO_SOURCE_FPS: float = 30.0
@@ -56,6 +57,9 @@ var _quick_slash_timing_mode: String = QUICK_TIMING_HAMMER
 var _quick_slash_timing_dropdown: OptionButton
 var _akio_render_preset: String = AKIO_RENDER_BASELINE
 var _akio_render_dropdown: OptionButton
+# Session-only generated GPU mipmaps; no PNGs or other files are written.
+var _akio_mipped_run_frames: SpriteFrames = null
+var _akio_mipped_source_id: int = 0
 var _run_trace_armed: bool = false
 var _run_trace_start_ms: int = -1
 var _run_trace_status: Label
@@ -584,6 +588,61 @@ func set_akio_render_test_preset(preset: String) -> void:
 		CombatTelemetry.record_event("akio_render_test_preset", {"preset": next_preset})
 
 
+# Source Run frame images receive real mipmap levels, not just a filter flag.
+# All 128 Run frames must exist. Non-Run frames retain their original texture
+# references and cadence. Cache the in-memory variant for this debug session.
+func get_akio_mipmapped_run_frames(original: SpriteFrames) -> SpriteFrames:
+	if not OS.is_debug_build() or original == null:
+		return null
+	if _akio_mipped_run_frames != null and _akio_mipped_source_id == original.get_instance_id():
+		return _akio_mipped_run_frames
+	for direction: String in AKIO_SOURCE_DIRECTIONS:
+		var name := StringName("move_%s" % direction)
+		if not original.has_animation(name) or original.get_frame_count(name) != 16:
+			push_warning("[AkioRenderTest] mipmap Run test requires 16 loaded frames in each direction")
+			return null
+
+	var result := SpriteFrames.new()
+	if result.has_animation(&"default"):
+		result.remove_animation(&"default")
+	var run_count: int = 0
+	for animation_text: String in original.get_animation_names():
+		var animation := StringName(animation_text)
+		result.add_animation(animation)
+		result.set_animation_speed(animation, original.get_animation_speed(animation))
+		result.set_animation_loop(animation, original.get_animation_loop(animation))
+		for index: int in range(original.get_frame_count(animation)):
+			var texture: Texture2D = original.get_frame_texture(animation, index)
+			if texture == null:
+				push_warning("[AkioRenderTest] null source frame; mipmap test unavailable")
+				return null
+			var output_texture: Texture2D = texture
+			if animation_text.begins_with("move_"):
+				var pixels: Image = texture.get_image()
+				if pixels == null or pixels.is_empty():
+					push_warning("[AkioRenderTest] Run texture cannot be read; mipmap test unavailable")
+					return null
+				if pixels.get_format() != Image.FORMAT_RGBA8:
+					pixels.convert(Image.FORMAT_RGBA8)
+				var generation_error: Error = pixels.generate_mipmaps()
+				if generation_error != OK or not pixels.has_mipmaps():
+					push_warning("[AkioRenderTest] mipmap generation failed; baseline retained")
+					return null
+				output_texture = ImageTexture.create_from_image(pixels)
+				if output_texture == null or output_texture.get_size() != texture.get_size():
+					push_warning("[AkioRenderTest] generated Run texture invalid; baseline retained")
+					return null
+				run_count += 1
+			result.add_frame(animation, output_texture, original.get_frame_duration(animation, index))
+	if run_count != 128:
+		push_warning("[AkioRenderTest] expected 128 mipmapped Run frames; baseline retained")
+		return null
+	_akio_mipped_run_frames = result
+	_akio_mipped_source_id = original.get_instance_id()
+	print("[AkioRenderTest] mipmaps READY generated=128 Run frames (all directions); original unchanged")
+	return result
+
+
 # Starts only after closing the paused lab; never runs during its source preview.
 func arm_akio_run_trace() -> void:
 	if not OS.is_debug_build():
@@ -756,13 +815,14 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	_akio_render_dropdown.add_item("3. Linear + world-pixel snap")
 	_akio_render_dropdown.add_item("4. Nearest + world-pixel snap")
 	_akio_render_dropdown.add_item("5. Linear + 125% Akio size (diagnostic)")
+	_akio_render_dropdown.add_item("6. Run-only generated mipmaps (linear; normal scale)")
 	_akio_render_dropdown.select(AKIO_RENDER_PRESETS.find(_akio_render_preset))
 	_akio_render_dropdown.item_selected.connect(func(index: int) -> void:
 		set_akio_render_test_preset(AKIO_RENDER_PRESETS[index])
 	)
 	vbox.add_child(_akio_render_dropdown)
 	var render_note := Label.new()
-	render_note.text = "Nearest can appear jagged; snap can stutter. These are comparisons, not automatic fixes. Restore Baseline when finished."
+	render_note.text = "Preset 6 generates true Run mipmaps once in memory. The first switch may briefly pause; judge steady motion, not startup. Restore Baseline when finished."
 	render_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(render_note)
 
