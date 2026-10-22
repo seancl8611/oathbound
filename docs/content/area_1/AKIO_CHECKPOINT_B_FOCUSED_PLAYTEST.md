@@ -1,6 +1,6 @@
 # Akio Checkpoint B — Focused Playtest
 
-**Current checkpoint (2026-10-22): The project owner has seen Hammer's 30 FPS source preview but has NOT yet validated that speed during actual gameplay on the updated branch. Complete a live playtest before treating the timing fix as visually verified or finalizing Hammer feedback.**
+**Current checkpoint (2026-10-22): Hammer's original Quick Slash 30 FPS cadence has been verified in actual gameplay; the current open question is whether Godot presentation settings explain Akio's softness while running at gameplay zoom. Use the rendering A/B below before attributing blur to Hammer's source.**
 
 **Ongoing decisions and follow-up:** [Hammer artist feedback tracker](../../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) and [internal Godot integration tracker](../../art_production/AKIO_PROOF_A_INTEGRATION_TRACKER.md). Those are draft working queues; this page records the current debug testing procedure.
 
@@ -33,6 +33,26 @@ Hammer's 41 source frames are provisionally divided as **15 windup frames (0.5 s
 **Normal combo chaining remains disabled only in the Quick Slash-only scenario.** If the player does not cancel, the full 41 frames play before the next normal attack can start. In Normal combat, the first Quick Slash now plays at the selected Hammer timing, while Cross Cut and Heavy Cleave remain available with their prior profile timings. Debug builds initially select Hammer; released builds retain original authored values.
 
 **Important:** The 15/8/18 frame phase boundaries are a test hypothesis, not a verified frame-by-frame impact annotation from Hammer. Blade impact poses appear to vary by viewing direction. After playtesting, compare hitbox-edge timestamps with the presented frames per direction and tune these provisional windows if needed. The original 30 FPS source preview below is unchanged and remains paused/independent.
+
+### Mode A3 — Akio Run clarity / Godot rendering A/B (actual gameplay)
+
+**Purpose:** Diagnose soft or blurry looking Run sprites without changing Hammer's PNGs, character source, Quick Slash timing, player movement, enemy visuals, camera zoom, or animation FPS. Applies **only to Akio's Checkpoint B live directional presenter**, not the source preview.
+
+Open Playtest Lab with backtick, select **Focused Tests**, and scroll to **Akio Run sharpness test (LIVE GAMEPLAY ONLY)**. Choose one preset, **close the lab**, and run the same short route in N/S then E/W. Open the lab again to switch to the next setting.
+
+| Preset | Akio filtering | World-position rounding | Visual size | What it isolates |
+|---|---|---|---|---|
+| **1. Baseline** (default) | Linear | Off (original) | 100% | Reproduce existing game. |
+| **2. Nearest filter only** | Nearest | Off | 100% | Does interpolation make the character look soft? Expect possible jaggies; not necessarily an improvement. |
+| **3. Linear + world-pixel snap** | Linear | On | 100% | Are fractional world coordinates contributing? May add movement jitter; this is **not** screen-space snapping with a moving camera. |
+| **4. Nearest + world-pixel snap** | Nearest | On | 100% | Combined rendering comparison, after judging 2 and 3 separately. |
+| **5. Linear + 125% Akio size** | Linear | Off | 125% | Does ordinary gameplay scale lose important silhouette/detail? **Changes apparent character size**, so do not use it as a final character-scale recommendation. |
+
+**Test order:** baseline → nearest → baseline → linear+snap → baseline → 125% size. Keep a similar route, window size, camera view and direction. A short clip of Akio running North and South in each useful setting is more informative than stills alone. If nearest looks crisp but jagged, that suggests an interpolation/downsampling tradeoff; if 125% becomes clearer, the accepted gameplay scale may be part of the problem. Neither result alone proves the Blender model is defective.
+
+Switch **back to Baseline** after testing. All presets are session-only and default to Baseline on a new debug run; **release builds always use the authored profile**. The Godot log records `[AkioRenderTest] preset=...` and the existing combat JSONL records `akio_render_test_preset` when capture is enabled. These are configuration-change markers, **not an image-quality measurement**. The animation itself stays at its existing 30 FPS.
+
+Run and Idle source clips can still be inspected separately through Mode B. If the blur persists under every preset, compare the original PNGs or Blender renders directly against the real in-game capture before deciding whether to request an art revision.
 
 ### Mode B — Original source animation (30 FPS; no combat)
 
