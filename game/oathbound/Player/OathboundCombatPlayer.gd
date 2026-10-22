@@ -18,6 +18,7 @@ const PARRY_POLICY = preload("res://Core/Combat/OathboundParryPolicy.gd")
 
 var _area1_pressure_hits_started: int = 0
 var _area1_pressure_active: bool = false
+var _focused_quick_slash_sequence: int = 0
 
 
 func _ready() -> void:
@@ -25,7 +26,50 @@ func _ready() -> void:
 	print("[OathboundPlayer] v2.2 - Area 1 six-hit player-paced pressure string")
 
 
+
+func _akio_quick_slash_focus_active() -> bool:
+	return (
+		OS.is_debug_build()
+		and typeof(PlaytestLab) == TYPE_OBJECT
+		and PlaytestLab.has_method("is_akio_quick_slash_focus_active")
+		and bool(PlaytestLab.call("is_akio_quick_slash_focus_active"))
+	)
+
+
+func _akio_quick_slash_trace_active() -> bool:
+	return (
+		_akio_quick_slash_focus_active()
+		and typeof(PlaytestLab) == TYPE_OBJECT
+		and PlaytestLab.has_method("is_akio_focus_diagnostics_active")
+		and bool(PlaytestLab.call("is_akio_focus_diagnostics_active"))
+	)
+
+
+func _start_attack(combo_idx: int) -> void:
+	# This single debug-only seam isolates the FIRST basic attack profile.
+	# Normal gameplay keeps the existing six-hit pressure string untouched.
+	super._start_attack(0 if _akio_quick_slash_focus_active() else combo_idx)
+
+
+func _start_tap_attack_from_hold() -> void:
+	if _akio_quick_slash_focus_active():
+		_start_attack(0)
+		return
+	super._start_tap_attack_from_hold()
+
+
+func _start_thrust() -> void:
+	if _akio_quick_slash_focus_active():
+		_start_attack(0)
+		return
+	super._start_thrust()
+
+
+
+
 func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
+	if _akio_quick_slash_focus_active() and str(profile.get("id", "")) == "quick_slash":
+		_focused_quick_slash_sequence += 1
 	var resolved: Dictionary = profile
 	var id: String = str(profile.get("id", ""))
 	var base_katana_basic: bool = _area1_pressure_enabled() and id in BASE_KATANA_IDS
@@ -56,6 +100,18 @@ func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
 
 	super._start_profile_attack(resolved, combo_idx)
 
+	if _akio_quick_slash_trace_active() and id == "quick_slash" and typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_focus_attack_started", {
+			"sequence": _focused_quick_slash_sequence,
+			"attack_id": id,
+			"combo_index": _combo_index,
+			"authored_duration": float(_attack_profile.get("duration", 0.0)),
+			"startup": float(_attack_profile.get("startup", 0.0)),
+			"active": float(_attack_profile.get("active", 0.0)),
+			"recovery": float(_attack_profile.get("recovery", 0.0)),
+			"aim": [_attack_aim_dir.x, _attack_aim_dir.y],
+		})
+
 	if base_katana_basic and typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("player_area1_pressure_swing", {
 			"hit_number": _area1_pressure_hits_started,
@@ -67,6 +123,8 @@ func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
 
 
 func _begin_attack_branch_hold() -> void:
+	if _akio_quick_slash_focus_active():
+		return
 	if _area1_is_midpoint_heavy():
 		if _queued_combo_index != -1:
 			return
@@ -81,12 +139,16 @@ func _begin_attack_branch_hold() -> void:
 
 
 func _can_queue_next_combo_attack() -> bool:
+	if _akio_quick_slash_focus_active():
+		return false
 	if _area1_is_midpoint_heavy():
 		return _can_queue_sword_branch()
 	return super._can_queue_next_combo_attack()
 
 
 func _can_queue_sword_branch() -> bool:
+	if _akio_quick_slash_focus_active():
+		return false
 	if not _area1_is_midpoint_heavy():
 		return super._can_queue_sword_branch()
 
@@ -143,7 +205,7 @@ func _drop_combo() -> void:
 
 
 func _area1_pressure_enabled() -> bool:
-	return typeof(AspectRuntime) == TYPE_OBJECT and str(AspectRuntime.selected_aspect).is_empty()
+	return not _akio_quick_slash_focus_active() and typeof(AspectRuntime) == TYPE_OBJECT and str(AspectRuntime.selected_aspect).is_empty()
 
 
 func _area1_is_midpoint_heavy() -> bool:
@@ -415,3 +477,28 @@ func _apply_impact_vibration(intensity: float, duration: float) -> void:
 	var strong: float = normalized * 0.70 * strength
 	for device_id: int in Input.get_connected_joypads():
 		Input.start_joy_vibration(device_id, weak, strong, maxf(0.02, duration))
+
+# Focused test instrumentation observes authority edges, never controls hitboxes.
+func _activate_current_attack_hitbox() -> void:
+	super._activate_current_attack_hitbox()
+	_trace_focused_hitbox_edge("active")
+
+
+func _deactivate_current_attack_hitbox() -> void:
+	var was_active := _attack_hitbox_active
+	super._deactivate_current_attack_hitbox()
+	if was_active:
+		_trace_focused_hitbox_edge("inactive")
+
+
+func _trace_focused_hitbox_edge(edge: String) -> void:
+	if not _akio_quick_slash_trace_active() or str(_attack_profile.get("id", "")) != "quick_slash":
+		return
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_focus_hitbox_edge", {
+			"sequence": _focused_quick_slash_sequence,
+			"edge": edge,
+			"attack_id": "quick_slash",
+			"elapsed_s": _attack_elapsed,
+			"combo_index": _combo_index,
+		})
