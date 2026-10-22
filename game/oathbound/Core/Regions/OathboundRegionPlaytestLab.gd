@@ -31,6 +31,19 @@ const FOCUSED_TEST_NORMAL: String = "normal"
 const FOCUSED_TEST_AKIO_CHECKPOINT_B: String = "akio_checkpoint_b_quick_slash"
 const QUICK_TIMING_PROTOTYPE: String = "prototype"
 const QUICK_TIMING_HAMMER: String = "hammer_source_30fps"
+
+# Presentation-only comparison presets. Baseline preserves the commissioned
+# profile's exact existing filtering, scale and subpixel actor placement.
+const AKIO_RENDER_BASELINE: String = "baseline"
+const AKIO_RENDER_NEAREST: String = "nearest"
+const AKIO_RENDER_LINEAR_SNAP: String = "linear_snap"
+const AKIO_RENDER_NEAREST_SNAP: String = "nearest_snap"
+const AKIO_RENDER_LINEAR_125: String = "linear_125"
+const AKIO_RENDER_PRESETS: Array[String] = [
+	AKIO_RENDER_BASELINE, AKIO_RENDER_NEAREST,
+	AKIO_RENDER_LINEAR_SNAP, AKIO_RENDER_NEAREST_SNAP,
+	AKIO_RENDER_LINEAR_125,
+]
 const AKIO_SOURCE_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const AKIO_SOURCE_FPS: float = 30.0
 const AKIO_SOURCE_DIRECTIONS: Array[String] = ["e", "se", "s", "sw", "w", "nw", "n", "ne"]
@@ -41,6 +54,8 @@ var _focused_diagnostics_enabled: bool = true
 var _focused_scenario_dropdown: OptionButton
 var _quick_slash_timing_mode: String = QUICK_TIMING_HAMMER
 var _quick_slash_timing_dropdown: OptionButton
+var _akio_render_preset: String = AKIO_RENDER_BASELINE
+var _akio_render_dropdown: OptionButton
 var _focused_diagnostics_check: CheckButton
 var _source_preview_enabled: bool = false
 var _source_preview_frame: int = 0
@@ -542,6 +557,26 @@ func set_akio_quick_slash_timing_mode(mode: String) -> void:
 	print("[FocusedTests] Quick Slash gameplay timing=", next_mode)
 
 
+# Debug-only comparison affects only Akio's Checkpoint B directional presenter.
+# Not the source animation, camera, player motor, enemy visuals or attack FPS.
+func get_akio_render_test_preset() -> String:
+	return _akio_render_preset if OS.is_debug_build() else AKIO_RENDER_BASELINE
+
+
+func set_akio_render_test_preset(preset: String) -> void:
+	if not OS.is_debug_build():
+		return
+	var next_preset: String = preset if preset in AKIO_RENDER_PRESETS else AKIO_RENDER_BASELINE
+	if _akio_render_preset == next_preset:
+		return
+	_akio_render_preset = next_preset
+	if _akio_render_dropdown != null:
+		_akio_render_dropdown.select(AKIO_RENDER_PRESETS.find(next_preset))
+	print("[AkioRenderTest] preset=%s; visual-only; no changes to combat or source PNGs" % next_preset)
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_render_test_preset", {"preset": next_preset})
+
+
 func is_akio_focus_diagnostics_active() -> bool:
 	return is_akio_quick_slash_focus_active() and _focused_diagnostics_enabled
 
@@ -610,6 +645,32 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	timing_info.text = "Hammer is the default debug-test timing: all base-katana Quick Slashes play 41 frames at 30 FPS, whether isolation is ON or OFF. Cross Cut / Heavy Cleave retain their original timing. Dash/parry may cancel during recovery. Switch to Original prototype to compare."
 	timing_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(timing_info)
+
+	var render_separator := HSeparator.new()
+	vbox.add_child(render_separator)
+	var render_title := Label.new()
+	render_title.text = "Akio Run sharpness test (LIVE GAMEPLAY ONLY)"
+	render_title.add_theme_font_size_override("font_size", 15)
+	vbox.add_child(render_title)
+	var render_info := Label.new()
+	render_info.text = "Try the same N/S/E/W run route with each preset. Baseline is unchanged; nearest changes sprite filtering; snap tests whole-world-pixel actor placement; 125% tests whether size loses detail. Close the lab to compare. No source PNG, animation speed, collisions or camera zoom are altered."
+	render_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(render_info)
+	_akio_render_dropdown = OptionButton.new()
+	_akio_render_dropdown.add_item("1. Baseline - linear / subpixel / normal size")
+	_akio_render_dropdown.add_item("2. Nearest filter only - normal size")
+	_akio_render_dropdown.add_item("3. Linear + world-pixel snap")
+	_akio_render_dropdown.add_item("4. Nearest + world-pixel snap")
+	_akio_render_dropdown.add_item("5. Linear + 125% Akio size (diagnostic)")
+	_akio_render_dropdown.select(AKIO_RENDER_PRESETS.find(_akio_render_preset))
+	_akio_render_dropdown.item_selected.connect(func(index: int) -> void:
+		set_akio_render_test_preset(AKIO_RENDER_PRESETS[index])
+	)
+	vbox.add_child(_akio_render_dropdown)
+	var render_note := Label.new()
+	render_note.text = "Nearest can appear jagged; snap can stutter. These are comparisons, not automatic fixes. Restore Baseline when finished."
+	render_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(render_note)
 
 	_focused_diagnostics_check = CheckButton.new()
 	_focused_diagnostics_check.text = "Record focused animation frames in combat telemetry"
