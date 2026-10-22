@@ -50,6 +50,10 @@ var _focus_trace_last_frame: int = -1
 var _focus_motion_last_key: String = ""
 var _focus_motion_last_ms: int = 0
 
+# Nonpersistent Checkpoint B visual A/B. Only this display adapter is changed.
+var _akio_render_test_applied: String = ""
+var _akio_render_test_pixel_snap: bool = false
+
 
 func _ready() -> void:
 	set_meta(KEEP_WITH_REPLACEMENT_META, true)
@@ -127,6 +131,7 @@ func _sync_from_source(_delta: float) -> void:
 		return
 
 	_hide_legacy_body()
+	_apply_akio_render_test_preset()
 	var runtime_contract := _resolve_runtime_contract()
 	var facing := _resolve_facing(runtime_contract)
 	if facing.length_squared() > 0.001:
@@ -138,7 +143,7 @@ func _sync_from_source(_delta: float) -> void:
 	_authoritative_progress = float(runtime_contract.get("action_progress", -1.0))
 
 	var source_position := source_actor.global_position
-	if _profile_bool("snap_actor_to_pixel_grid", false) and _sprite_frames != null:
+	if (_profile_bool("snap_actor_to_pixel_grid", false) or _akio_render_test_pixel_snap) and _sprite_frames != null:
 		source_position = Vector2(round(source_position.x), round(source_position.y))
 	global_position = source_position
 	# Presentation sorting uses the actor's feet/world anchor, independent of sprite height.
@@ -193,6 +198,9 @@ func _resolve_runtime_contract() -> Dictionary:
 
 
 func _apply_profile_settings() -> void:
+	# New profile/atlas must re-evaluate debug overrides on next frame.
+	_akio_render_test_applied = ""
+	_akio_render_test_pixel_snap = false
 	visual_scale = _base_visual_scale
 	if _profile != null and _sprite_frames != null:
 		visual_scale *= maxf(0.05, float(_profile_value("visual_scale_multiplier", 1.0)))
@@ -214,6 +222,39 @@ func _apply_profile_settings() -> void:
 		)
 	else:
 		_sprite.position = Vector2.ZERO
+
+
+# Applies only to the player Checkpoint B profile, once per preset switch.
+# This is entirely independent of Hammer's imported texture files/animation clock.
+func _apply_akio_render_test_preset() -> void:
+	var preset := "baseline"
+	if (
+		OS.is_debug_build()
+		and actor_role == "player"
+		and str(_profile_value("profile_id", "")) == "akio_checkpoint_b"
+		and typeof(PlaytestLab) == TYPE_OBJECT
+		and PlaytestLab.has_method("get_akio_render_test_preset")
+	):
+		preset = str(PlaytestLab.get_akio_render_test_preset())
+	if preset == _akio_render_test_applied:
+		return
+	_akio_render_test_applied = preset
+	_akio_render_test_pixel_snap = preset in ["linear_snap", "nearest_snap"]
+	var debug_scale: float = 1.25 if preset == "linear_125" else 1.0
+	visual_scale = _base_visual_scale
+	if _profile != null and _sprite_frames != null:
+		visual_scale *= maxf(0.05, float(_profile_value("visual_scale_multiplier", 1.0)))
+	visual_scale *= debug_scale
+	if _sprite != null:
+		var native_filter: int = (
+			CanvasItem.TEXTURE_FILTER_NEAREST if _profile_bool("pixel_art", false)
+			else CanvasItem.TEXTURE_FILTER_LINEAR
+		)
+		_sprite.texture_filter = (
+			CanvasItem.TEXTURE_FILTER_NEAREST
+			if preset in ["nearest", "nearest_snap"] else native_filter
+		)
+	_apply_counter_projection()
 
 
 func _apply_counter_projection() -> void:
@@ -684,6 +725,9 @@ func get_presentation_state_for_test() -> Dictionary:
 		"profile_id": str(_profile_value("profile_id", "")),
 		"asset_ready": _profile_bool("asset_ready", false),
 		"pixel_art": _profile_bool("pixel_art", false),
+		"render_test_preset": _akio_render_test_applied,
+		"render_filter": _sprite.texture_filter if _sprite != null else -1,
+		"render_world_pixel_snap": _akio_render_test_pixel_snap or _profile_bool("snap_actor_to_pixel_grid", false),
 		"resolved_animation": _resolved_animation_name,
 		"authoritative_sampled": _authoritative_sampled,
 		"sampled_frame": _sampled_frame,
