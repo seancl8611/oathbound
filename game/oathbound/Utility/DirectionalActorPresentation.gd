@@ -44,6 +44,8 @@ var _animation_players: Array[AnimationPlayer] = []
 var _legacy_body_items: Array[CanvasItem] = []
 var _legacy_hidden: bool = false
 var _action_runner: Node = null
+var _focus_trace_last_key: String = ""
+var _focus_trace_was_attacking: bool = false
 
 
 func _ready() -> void:
@@ -114,6 +116,7 @@ func _process(delta: float) -> void:
 		queue_free()
 		return
 	_sync_from_source(delta)
+	_trace_focused_akio_frame()
 
 
 func _sync_from_source(_delta: float) -> void:
@@ -686,3 +689,59 @@ func get_presentation_state_for_test() -> Dictionary:
 		"atlas_active": _sprite != null and _sprite.visible and _sprite_frames != null,
 		"placeholder_active": use_placeholder_when_atlas_missing and (_sprite == null or not _sprite.visible),
 	}
+
+
+# Record only actual presented-frame transitions while a focused test is enabled.
+# This intentionally does NOT sample CollisionShape2D nodes, resize hitboxes, alter
+# SpriteFrames, or affect gameplay's authoritative action progression.
+func _trace_focused_akio_frame() -> void:
+	if not OS.is_debug_build() or actor_role != "player" or str(_profile_value("profile_id", "")) != "akio_checkpoint_b":
+		_focus_trace_last_key = ""
+		_focus_trace_was_attacking = false
+		return
+	if (
+		typeof(PlaytestLab) != TYPE_OBJECT
+		or not PlaytestLab.has_method("is_akio_focus_diagnostics_active")
+		or not bool(PlaytestLab.call("is_akio_focus_diagnostics_active"))
+		or typeof(CombatTelemetry) != TYPE_OBJECT
+		or not CombatTelemetry.is_capturing()
+	):
+		_focus_trace_last_key = ""
+		_focus_trace_was_attacking = false
+		return
+	if _sprite == null or _sprite_frames == null or not _sprite.visible:
+		return
+
+	var attack_now := _semantic_state == "attack" and _action_id == "quick_slash"
+	var sequence := int(_property_value(source_actor, "_focused_quick_slash_sequence"))
+	if not attack_now:
+		if _focus_trace_was_attacking:
+			CombatTelemetry.record_event("akio_focus_visual_exit", {
+				"sequence": sequence,
+				"previous_frame": _sampled_frame,
+				"state": _semantic_state,
+			})
+		_focus_trace_last_key = ""
+		_focus_trace_was_attacking = false
+		return
+
+	_focus_trace_was_attacking = true
+	var hitbox_active := bool(_property_value(source_actor, "_attack_hitbox_active"))
+	var signature := "%d|%s|%d|%s|%s" % [
+		sequence, _resolved_animation_name, _sprite.frame, _action_phase, str(hitbox_active)
+	]
+	if signature == _focus_trace_last_key:
+		return
+	_focus_trace_last_key = signature
+	CombatTelemetry.record_event("akio_focus_visual_frame", {
+		"sequence": sequence,
+		"attack_id": _action_id,
+		"phase": _action_phase,
+		"direction": _direction_name,
+		"animation": _resolved_animation_name,
+		"frame": _sprite.frame,
+		"frame_count": _sprite_frames.get_frame_count(_sprite.animation),
+		"action_progress": _authoritative_progress,
+		"hitbox_active": hitbox_active,
+		"authoritative_sampling": _authoritative_sampled,
+	})
