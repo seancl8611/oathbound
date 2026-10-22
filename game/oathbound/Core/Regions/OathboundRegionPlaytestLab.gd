@@ -515,7 +515,15 @@ func get_akio_quick_slash_timing_mode() -> String:
 
 
 func is_akio_source_gameplay_active() -> bool:
-	return is_akio_quick_slash_focus_active() and get_akio_quick_slash_timing_mode() == QUICK_TIMING_HAMMER
+	# Animation cadence and combo isolation are independent experiments.
+	# With Hammer selected, even a normal base-katana Quick Slash uses its
+	# original cadence. Debug-only: release builds retain authored timings.
+	return (
+		OS.is_debug_build()
+		and get_akio_quick_slash_timing_mode() == QUICK_TIMING_HAMMER
+		and typeof(AspectRuntime) == TYPE_OBJECT
+		and str(AspectRuntime.selected_aspect).is_empty()
+	)
 
 
 func set_akio_quick_slash_timing_mode(mode: String) -> void:
@@ -580,12 +588,12 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	vbox.add_child(_focused_scenario_dropdown)
 
 	var explanation := Label.new()
-	explanation.text = "Basic taps/holds execute only Quick Slash. Combo branching is bypassed. Choose prototype or full Hammer 30 FPS timing below. Requires base katana (no Blood Aspect selected)."
+	explanation.text = "Combo isolation: Quick Slash only bypasses Cross Cut / Heavy Cleave. Animation speed is selected independently below and applies to every base-katana Quick Slash, even in Normal combat."
 	explanation.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(explanation)
 
 	var timing_label := Label.new()
-	timing_label.text = "Quick Slash timing during actual gameplay"
+	timing_label.text = "Quick Slash timing in live gameplay (independent of combo isolation)"
 	vbox.add_child(timing_label)
 	_quick_slash_timing_dropdown = OptionButton.new()
 	_quick_slash_timing_dropdown.add_item("Original prototype (fast)")
@@ -599,7 +607,7 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	vbox.add_child(_quick_slash_timing_dropdown)
 
 	var timing_info := Label.new()
-	timing_info.text = "Hammer mode: 15 source frames of windup, 8 of attack, 18 of recovery. Dash/parry may cancel after the strike, at the start of recovery. Changes only the next Quick Slash; normal combat is unchanged."
+	timing_info.text = "Hammer is the default debug-test timing: all base-katana Quick Slashes play 41 frames at 30 FPS, whether isolation is ON or OFF. Cross Cut / Heavy Cleave retain their original timing. Dash/parry may cancel during recovery. Switch to Original prototype to compare."
 	timing_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(timing_info)
 
