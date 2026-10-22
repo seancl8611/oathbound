@@ -67,7 +67,7 @@ Use **Done / Code implemented, needs field retest / Blocked on art / Planned / I
 | AI-10 | **P1** | Owner again observes N/S Run as slightly waddling **despite a clean loop**. Test whether high-angle stride foreshortening, motor speed vs loop cadence (16 frames at 30 FPS), or animation poses are responsible. | **Confirmed user observation; root cause under investigation** | Compare N/S to E/W at the same speed and gameplay zoom; collect short video with source 30 FPS reference before artist feedback. |
 | AI-11 | P2 | Keep debugging/scenario infrastructure reusable for future enemies/checkpoints; avoid permanent one-off gameplay mechanics leaking into production. | **Foundation implemented** | Debug-only controls, default normal scenario, specific event-gated logs, no shared AspectCatalog profile mutation. |
 | AI-12 | P1 | **End-to-end directional transition regression:** after new Action deliveries, verify each compass direction across Attack→Idle, Attack→Move, Attack→Dash, Dash→Idle, Draw→Attack, sheath interruption and scene reload. | **Planned; contingent on art** | Sprite selection and continuity remain correct; no loop-phase/one-shot restarts or sudden sword teleport. |
-| AI-13 | **P1** | **Investigate moving-sprite blur / gameplay-scale softness** before attributing it to Blender model detail. Source art is 512×512 canvas; current presentation uses `visual_scale_multiplier=0.5`, camera zoom `0.5`, `TEXTURE_FILTER_LINEAR` and no pixel snapping. | **New investigation — owner-observed blur** | A/B native source versus live gameplay, static versus running, linear versus nearest filter and modest scale/zoom difference in temporary debug setup; restore unchanged production values, check camera subpixel/smoothing if needed. Avoid assuming pixel filtering is the cause without screenshots. |
+| AI-13 | **P1** | **Investigate moving-sprite blur / gameplay-scale softness**. Source frame canvas 512×512; actual game uses Akio `visual_scale_multiplier=0.5`, camera zoom `0.5`, linear filtering and no snap. | **Debug A/B implemented; waiting for user screenshots/video and perception.** | Playtest Lab > Focused Tests > Akio Run sharpness test: Baseline, Nearest only, Linear+world snap, Nearest+world snap, Linear+125% size. Compare N/S and E/W routes; log `akio_render_test_preset`; retain original art/timing. Rule out renderer vs source only after visual evidence. |
 | AI-14 | P3 | **Idle visibility at true gameplay scale.** Owner sees restrained Idle motion with no major complaint. | **Provisionally acceptable / monitor** | Check one full 40-frame 30 FPS Idle loop at source and native gameplay zoom; accept if natural and stable. Do not enlarge gestures simply to make motion conspicuous. |
 
 ## Practical architecture proposed for AI-03–AI-06 (not yet implemented)
@@ -104,6 +104,15 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 4. **Only then decide final Quick Slash speed and combo-lockout durations.** The verified 1.3667-second draw–strike–sheath cycle is a visual reference, not a final mandatory commitment per hit.
 5. Keep additional tests for Normal-scenario timing, parry, input-buffer edge cases and atlas preparation performance on the engineering backlog without making them a reason to force provisional speed changes.
 
+## Run sharpness diagnostic implementation (2026-10-22)
+
+- Added an **independent, debug-only Live Akio Run sharpness dropdown** to `Core/Regions/OathboundRegionPlaytestLab.gd` (existing Focused Tests tab).
+- `Utility/DirectionalActorPresentation.gd` applies the selected linear/nearest texture filtering, optional world-coordinate rounding, or +25% Akio visual scale only when showing `akio_checkpoint_b` player profile.
+- Baseline preserves the original pixel placement, linear texture filtering and 0.5 profile visual multiplier. **Do not touch Hammer's PNGs, source frame cadence, hitboxes, controller, camera zoom or non-Akio presenters.** Baseline is default and session-only.
+- Added regression assertions to `Core/Combat/Validation/AkioFocusedPlaytestSmoke.gd` verifying preset propagation, pixel placement, scale and exact restoration. CI status must be verified separately.
+- **Next manual evidence:** comparable N/S and E/W running video under presets 1, 2, 3 and 5, noting clarity and possible jaggedness/stutter. Distinguish **world-pixel rounding** from full screen-space pixel-perfect camera snapping.
+- See [Focused Playtest guide](../content/area_1/AKIO_CHECKPOINT_B_FOCUSED_PLAYTEST.md) Mode A3 for exact test steps. **No conclusion about Hammer source quality yet.**
+
 ## Evidence from focused live playtest — 2026-10-22
 
 **Files reviewed:** `godot(20261022-173048).log` and `combat_1792689985.jsonl` (user-uploaded test artifacts; not committed to GitHub). Recorded build `ddf266a0fffdab77a889979636f7ea4ef1a33726`.
@@ -123,6 +132,7 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 | 2026-10-22 | Initialized engineering tracker; separated confirmed runtime fixes, subjective feedback, unapproved proposed architecture and artist dependencies. |
 | 2026-10-22 | Verified 22 live Hammer-mode Quick Slashes: 7 full 41-frame completions, 8 recovery dash cancels, 7 damage interruptions. Deferred final timing until sword-drawn and combo art exist. |
 | 2026-10-22 | Owner reports N/S Run looks somewhat waddling though loop is clean, moving Akio appears blurry/soft, and Idle is subtle but acceptable. Checked client-side 0.5 visual scale, 0.5 zoom, linear filtering and disabled pixel snap; reserved one bounded diagnostic A/B before asking Hammer for any Run/Idle art revision. |
+| 2026-10-22 | Implemented independent in-game rendering A/B presets with a smoke regression and instructions; awaiting user comparison of nearest, snap and slightly larger display. |
 
 ## Maintenance rule
 
