@@ -161,6 +161,8 @@ set "PROJECT_DIR=!PLAYTEST_DIR!\game\oathbound"
 set "PROJECT_FILE=!PROJECT_DIR!\project.godot"
 set "IMPORT_LOG=!PLAYTEST_DIR!\playtest_import.log"
 set "EDITOR_LOG=!PLAYTEST_DIR!\playtest_editor_check.log"
+set "AKIO_FRAME_DIR=!PROJECT_DIR!\Art2D\RigRendered\Akio\CheckpointB\Frames"
+set "AKIO_BUILD_LOG=!PLAYTEST_DIR!\playtest_akio_build.log"
 if not exist "!PROJECT_FILE!" (
     echo ERROR: Canonical Godot project was not found: !PROJECT_FILE!
     popd
