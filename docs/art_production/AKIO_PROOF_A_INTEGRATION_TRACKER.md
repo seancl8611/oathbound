@@ -29,7 +29,7 @@ topics:
 ## Playtest conclusions and non-negotiable separation of concerns
 
 - **Owner-observed:** All-Quick-Slash isolation did work in an earlier playtest and made the excessive speed easy to judge.
-- **Owner-observed:** Hammer's 41-frame, 30 FPS original Quick Slash looks noticeably better than compressed prototype playback (~0.32 s visual sampling).
+- **Owner-observed in the Playtest Lab source preview/examples:** Hammer's 41-frame, 30 FPS Quick Slash looks noticeably better than compressed prototype playback (~0.32 s visual sampling). **The owner has not yet seen or validated Hammer's actual 30 FPS Quick Slash during live combat on the corrected branch.**
 - **Owner-observed:** Repeated final re-sheathing looks awkward during fast attack repetition and would be inappropriate between multiple future combo hits.
 - **Confirmed source-art constraint:** At least east-facing \`attack_quick_slash\` frames ~29–40 show the return-to-sheath and the current \`idle\`/\`move\` source poses are sheathed. A cropped slash clip **alone** cannot supply a complete drawn-sword combat-ready state.
 - **Engineering ownership:** Godot remains authoritative for movement, damage, actual hitbox windows, dash/parry permissions, action phase, combo queue, recovery, hitstop, and presentation sampling. Hammer owns source models/rig/animation Actions, not collision or eight-direction PNG export.
@@ -91,16 +91,16 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 - **First full-source test:** authored Quick Slash profile copied to 0.50 s startup, ~0.267 s active, 0.60 s recovery; Combat V2 presentation advanced through recovery for this specific test. **Still reported too fast** in one live playtest.
 - **Discovered configuration bug:** Hammer timing originally required **Quick Slash-only scenario AND Hammer selection**. That dependency was removed on \`agent/akio-checkpoint-b-playtest\`; Hammer timing now also applies in **Normal combat** for debug base-katana Quick Slash.
 - **Current diagnostic contract:** Godot console prints \`[AkioCheckpointB] live Quick Slash timing=hammer_source_30fps source_30fps=true action_total=1.3667s isolated=<true/false>\`. JSONL emits \`akio_checkpoint_b_live_timing\` for each live Quick Slash.
-- **Verification:** Automated smoke for independent Hammer timing was added; **do not claim human visual completion** until a new local playtest confirms frame sampling and cooldown/cancel behavior. Check actual GitHub Actions for latest CI status before saying it passed.
+- **Verification:** Automated smoke for independent Hammer timing was added; **the project owner has not yet verified Hammer source cadence in live gameplay on the corrected branch**. Do not claim human visual completion until local playtesting confirms sampling, 41-frame playback and cooldown/cancel behavior. Check actual GitHub Actions for latest CI status before saying it passed.
 - **Artist issue:** the full Quick Slash ends with the sword resheathed, and existing Idle/Run returns to sheathed. Do not "fix" this by simply cutting frames in the renderer. See artist tracker.
 
 ## Next action order
 
-1. **Owner reviews/approves Hammer feedback wording** in the artist tracker; obtain Hammer's proposal on the minimum coherent drawn-sword art revision/package and whether added work is in scope.
-2. Complete a new **live gameplay** test with timing and isolation independently selected. Save the Godot log and \`combat_*.jsonl\`. Confirm current 41-frame playback visually, dash/parry cancellation, and the exact source phase boundaries.
-3. Record the artist response and formally separate *accepted revisions* from *paid new Actions* before changing the commission brief or 3D deliverables.
-4. Once revised Blender Actions are available, render using the established eight-view client pipeline and implement the weapon-readiness / transition logic; test it with the smallest coherent subset before adding more.
-5. Only then revisit Quick Slash's final commitment/impact pacing and the broader combo.
+1. **Next checkpoint — owner live playtest of the latest updated branch.** In Playtest Lab > Focused Tests, select **Hammer original (41 frames / 30 FPS)** during **actual gameplay**, optionally enable Quick Slash-only isolation, and attack in combat with the lab **closed**. Check that Akio actually plays the full sequence with the intended cadence. Source-preview playback inside the open lab does **not** count.
+2. **Validate with evidence.** Save the Godot log and \`combat_*.jsonl\`. Check \`[AkioCheckpointB] live Quick Slash timing=hammer_source_30fps\` and \`action_total=1.3667s\`, plus displayed frame sampling, full 41-frame completion, dash/parry recovery cancellation and actual hit timing. Do not infer visual success from a log line alone.
+3. **Only after that test:** update both trackers with new observations, then review/refine the proposed Hammer feedback, especially the repeated sheathing, drawn-sword Idle/Run dependencies, and any reproducible directional issues. No artist contact before this review unless explicitly requested by the owner.
+4. Obtain Hammer's advice on smallest coherent art revision and whether each proposed Action is already within revision scope or would be a paid addition. Update the owning commission brief only after agreement.
+5. When revised Blender Actions are delivered and approved, render via the eight-view pipeline, implement the smallest coherent weapon-readiness transitions, and retest. Then reassess final Quick Slash impact pacing and combo design.
 
 ## Update log
 
