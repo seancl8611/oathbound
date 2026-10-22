@@ -56,6 +56,12 @@ var _quick_slash_timing_mode: String = QUICK_TIMING_HAMMER
 var _quick_slash_timing_dropdown: OptionButton
 var _akio_render_preset: String = AKIO_RENDER_BASELINE
 var _akio_render_dropdown: OptionButton
+var _run_trace_armed: bool = false
+var _run_trace_start_ms: int = -1
+var _run_trace_status: Label
+const RUN_TRACE_DURATION_MS: int = 12000
+const RUN_CONTACT_CROP := Rect2i(160, 88, 192, 192)
+const RUN_CONTACT_DIRECTIONS: Array[String] = ["e", "w", "n", "s"]
 var _focused_diagnostics_check: CheckButton
 var _source_preview_enabled: bool = false
 var _source_preview_frame: int = 0
@@ -504,6 +510,7 @@ func _spawn_selected_region_actor(dropdown: OptionButton, region_name: String) -
 
 func _process(delta: float) -> void:
 	super._process(delta)
+	_advance_akio_run_trace()
 	if _ui == null or not _ui.visible or not _source_preview_enabled:
 		return
 	# PlaytestLab runs PROCESS_MODE_ALWAYS while gameplay is paused. Source playback
@@ -575,6 +582,93 @@ func set_akio_render_test_preset(preset: String) -> void:
 	print("[AkioRenderTest] preset=%s; visual-only; no changes to combat or source PNGs" % next_preset)
 	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("akio_render_test_preset", {"preset": next_preset})
+
+
+# Starts only after closing the paused lab; never runs during its source preview.
+func arm_akio_run_trace() -> void:
+	if not OS.is_debug_build():
+		return
+	_run_trace_start_ms = -1
+	_run_trace_armed = true
+	if _run_trace_status != null:
+		_run_trace_status.text = "Armed: close the lab, then run E/W and N/S for 12 seconds."
+	print("[AkioRunTrace] armed; close the lab to start")
+
+
+func is_akio_run_trace_active() -> bool:
+	return OS.is_debug_build() and _run_trace_start_ms >= 0
+
+
+func _advance_akio_run_trace() -> void:
+	if not OS.is_debug_build():
+		return
+	if _run_trace_armed and (_ui == null or not _ui.visible):
+		_run_trace_armed = false
+		_run_trace_start_ms = Time.get_ticks_msec()
+		print("[AkioRunTrace] START 12s; move in E/W, N/S; data=akio_run_frame_sample")
+		if CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("akio_run_trace_begin", {"duration_ms": RUN_TRACE_DURATION_MS})
+	if _run_trace_start_ms < 0:
+		return
+	var elapsed_ms := Time.get_ticks_msec() - _run_trace_start_ms
+	if elapsed_ms >= RUN_TRACE_DURATION_MS:
+		_run_trace_start_ms = -1
+		print("[AkioRunTrace] COMPLETE; send combat_*.jsonl and the four PNG contact sheets")
+		if CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("akio_run_trace_end", {"elapsed_ms": elapsed_ms})
+		if _run_trace_status != null:
+			_run_trace_status.text = "Capture complete. Send combat_*.jsonl and the four PNG sheets from playtest_logs."
+
+
+# Source-frame contact sheets, not rendered gameplay images. A constant crop
+# makes foot/torso displacement and missing/duplicated poses visible at once.
+func export_akio_run_contact_sheets() -> bool:
+	if not OS.is_debug_build():
+		return false
+	var value: Variant = AKIO_SOURCE_PROFILE.get("sprite_frames")
+	if not (value is SpriteFrames):
+		print("[AkioRunTrace] atlas not available yet; retry after loading completes")
+		return false
+	var atlas := value as SpriteFrames
+	var folder := ProjectSettings.globalize_path("res://playtest_logs")
+	if DirAccess.make_dir_recursive_absolute(folder) != OK:
+		push_warning("[AkioRunTrace] cannot create contact sheet directory: %s" % folder)
+		return false
+	for direction: String in RUN_CONTACT_DIRECTIONS:
+		var animation := StringName("move_%s" % direction)
+		if not atlas.has_animation(animation) or atlas.get_frame_count(animation) != 16:
+			print("[AkioRunTrace] move_%s not ready (need 16 frames); retry once atlas is ready" % direction)
+			return false
+		if not is_equal_approx(atlas.get_animation_speed(animation), 30.0):
+			push_warning("[AkioRunTrace] unexpected move FPS %s = %s" % [direction, atlas.get_animation_speed(animation)])
+	var ok := true
+	for direction: String in RUN_CONTACT_DIRECTIONS:
+		var animation := StringName("move_%s" % direction)
+		var sheet := Image.create(768, 768, false, Image.FORMAT_RGBA8)
+		sheet.fill(Color(0.13, 0.15, 0.18, 1.0))
+		for frame: int in range(16):
+			var texture := atlas.get_frame_texture(animation, frame)
+			if texture == null:
+				ok = false
+				continue
+			var image := texture.get_image()
+			if image == null or image.is_empty() or not Rect2i(Vector2i.ZERO, image.get_size()).encloses(RUN_CONTACT_CROP):
+				ok = false
+				continue
+			if image.get_format() != Image.FORMAT_RGBA8:
+				image.convert(Image.FORMAT_RGBA8)
+			var destination := Vector2i((frame % 4) * 192, (frame / 4) * 192)
+			sheet.blend_rect(image, RUN_CONTACT_CROP, destination)
+		var output := folder.path_join("akio_run_source_frames_%s.png" % direction)
+		var result := sheet.save_png(output)
+		if result != OK:
+			ok = false
+			push_warning("[AkioRunTrace] save failed %s code=%s" % [output, result])
+		else:
+			print("[AkioRunTrace] source frame sheet saved: %s (tiles left-to-right, top-to-bottom = 0..15)" % output)
+	if _run_trace_status != null:
+		_run_trace_status.text = "Sheets saved in playtest_logs: E / W / N / S" if ok else "Some sheet images failed; see Godot log."
+	return ok
 
 
 func is_akio_focus_diagnostics_active() -> bool:
@@ -671,6 +765,31 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	render_note.text = "Nearest can appear jagged; snap can stutter. These are comparisons, not automatic fixes. Restore Baseline when finished."
 	render_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(render_note)
+
+	var trace_separator := HSeparator.new()
+	vbox.add_child(trace_separator)
+	var trace_header := Label.new()
+	trace_header.text = "Akio Run frame-order / camera diagnostics"
+	trace_header.add_theme_font_size_override("font_size", 15)
+	vbox.add_child(trace_header)
+	var trace_info := Label.new()
+	trace_info.text = "Arm a 12-second per-render-frame trace, close the lab and run sideways then vertically. The JSONL reports displayed frame indices, transitions, timing, player/sprite positions and actual camera center. Use Baseline first."
+	trace_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(trace_info)
+	var trace_button := Button.new()
+	trace_button.text = "Arm 12-second Run trace (starts when lab closes)"
+	trace_button.pressed.connect(arm_akio_run_trace)
+	vbox.add_child(trace_button)
+	var sheet_button := Button.new()
+	sheet_button.text = "Export 4 Run frame contact sheets (E/W/N/S)"
+	sheet_button.pressed.connect(func() -> void:
+		export_akio_run_contact_sheets()
+	)
+	vbox.add_child(sheet_button)
+	_run_trace_status = Label.new()
+	_run_trace_status.text = "Not recording. Exports go to game/oathbound/playtest_logs."
+	_run_trace_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(_run_trace_status)
 
 	_focused_diagnostics_check = CheckButton.new()
 	_focused_diagnostics_check.text = "Record focused animation frames in combat telemetry"
