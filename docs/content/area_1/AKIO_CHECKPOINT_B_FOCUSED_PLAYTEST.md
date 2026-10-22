@@ -1,5 +1,7 @@
 # Akio Checkpoint B — Focused Playtest
 
+**Current checkpoint (2026-10-22): The project owner has seen Hammer's 30 FPS source preview but has NOT yet validated that speed during actual gameplay on the updated branch. Complete a live playtest before treating the timing fix as visually verified or finalizing Hammer feedback.**
+
 **Ongoing decisions and follow-up:** [Hammer artist feedback tracker](../../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) and [internal Godot integration tracker](../../art_production/AKIO_PROOF_A_INTEGRATION_TRACKER.md). Those are draft working queues; this page records the current debug testing procedure.
 
 ## Where to find it
@@ -44,7 +46,9 @@ Keep the lab open and enable **Play source animation at 30 FPS (while lab is ope
 
 ## Recommended comparison
 
-1. Preview all eight directional Quick Slash clips at original 30 FPS.
+**The first priority is a real gameplay test, not another source-preview review.** With the Playtest Lab closed, confirm Quick Slash's live timing visually and check the timing log. A paused source animation cannot verify the live controller.
+
+1. Preview all eight directional Quick Slash clips at original 30 FPS only as the reference comparison.
 2. Select Quick Slash-only gameplay with frame diagnostics, then close the lab.
 3. Attack in all eight directions, allowing each attack to complete.
 4. Compare presented frame progression and hitbox edges from the existing combat JSONL against the source preview. Test dash/parry during the committed opening, again during recovery, and once after the whole clip; observe whether it feels responsive but punishing.
