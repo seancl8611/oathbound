@@ -866,7 +866,9 @@ func _trace_akio_run_frame() -> void:
 	var camera := viewport.get_camera_2d()
 	var camera_center := camera.get_screen_center_position() if camera != null else Vector2.ZERO
 	var camera_target := camera.global_position if camera != null else Vector2.ZERO
-	var actor_velocity := source_actor.velocity if source_actor is CharacterBody2D else Vector2.ZERO
+	var actor_velocity: Vector2 = Vector2.ZERO
+	if source_actor is CharacterBody2D:
+		actor_velocity = (source_actor as CharacterBody2D).velocity
 
 	CombatTelemetry.record_event("akio_run_frame_sample", {
 		"semantic_state": _semantic_state,
