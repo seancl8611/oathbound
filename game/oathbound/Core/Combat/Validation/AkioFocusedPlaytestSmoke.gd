@@ -143,6 +143,7 @@ func _run() -> void:
 	visual_state = presenter.call("get_presentation_state_for_test")
 	_expect(str(visual_state.get("state", "")) == "move", "pose-lock fixture was not moving")
 	_expect(int(visual_state.get("sprite_frame", -1)) == 4, "pose-lock did not hold frame 4")
+	_expect(not bool(visual_state.get("sprite_playing", true)), "pose-lock leaves sprite internal animation clock running")
 	PlaytestLab.set_akio_run_sync_test_mode("baseline")
 	var test_camera: Camera2D = player.get_node_or_null("Camera2D") as Camera2D
 	_expect(test_camera != null, "camera comparison requires canonical Camera2D")

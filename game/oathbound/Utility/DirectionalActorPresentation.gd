@@ -320,6 +320,9 @@ func _apply_akio_run_pose_lock() -> void:
 	):
 		return
 	if _sprite_frames.get_frame_count(_sprite.animation) > 4:
+		# Pause the child Sprite2D's own animation processor as well; a mere
+		# set_frame would be undone by the sprite's next internal update.
+		_sprite.pause()
 		_sprite.set_frame_and_progress(4, 0.0)
 
 
@@ -799,6 +802,7 @@ func get_presentation_state_for_test() -> Dictionary:
 		"authoritative_sampled": _authoritative_sampled,
 		"sampled_frame": _sampled_frame,
 		"sprite_frame": _sprite.frame if _sprite != null else -1,
+		"sprite_playing": _sprite.is_playing() if _sprite != null else false,
 		"sprite_frame_progress": _sprite.frame_progress if _sprite != null else 0.0,
 		"atlas_active": _sprite != null and _sprite.visible and _sprite_frames != null,
 		"placeholder_active": use_placeholder_when_atlas_missing and (_sprite == null or not _sprite.visible),
