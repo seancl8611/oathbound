@@ -1,5 +1,7 @@
 # Akio Checkpoint B — Focused Playtest
 
+**Ongoing decisions and follow-up:** [Hammer artist feedback tracker](../../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) and [internal Godot integration tracker](../../art_production/AKIO_PROOF_A_INTEGRATION_TRACKER.md). Those are draft working queues; this page records the current debug testing procedure.
+
 ## Where to find it
 
 In a Godot debug playtest, enter Hushiro and press the backtick key to open **Oathbound Playtest Lab**. Open the **Focused Tests** tab. The lab pauses gameplay while open.
