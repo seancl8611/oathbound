@@ -45,8 +45,10 @@ topics:
 | HA-02 | P0 dependency | Current **Idle and Move/Run source poses also show the sword sheathed**. Trimming the tail of Quick Slash alone would cause the weapon to snap back into its sheath on movement/idle transitions. Any sword-out solution needs coherent resting/moving poses or an artist-supported transition approach. | **Confirmed by frame inspection; discuss minimal viable art package.** |
 | HA-03 | P1 | Ask whether Hammer can **separate the existing draw/strike/sheath material** into editable Actions or variations using his existing Blender rig and keys. Preserve the source full-sequence Action. | **Proposal / feasibility question; not commissioned yet.** |
 | HA-04 | P1 | Explore a **drawn-sword Quick Slash** ending in a ready posture instead of sheathing, plus **combat-ready Idle** and **combat-ready Move/Run**. A separate **sheath transition** can follow later after combat stops. | **Candidate design / new-scope discussion, not approved deliverables.** |
-| HA-05 | P2 | Some earlier directional movement tests described **N/S Run as waddling**; determine whether the issue persists at native frame cadence and accepted camera view before sending a specific correction. | **Provisional subjective concern; reproduce and capture reference video first.** |
+| HA-05 | **P1 — verify before artist feedback** | Owner again reports that **North/South Run looks somewhat like waddling** although the loop itself is clean. Foreshortened high-angle view and hip/leg alternation could contribute; capture live N/S beside E/W and a source-speed view. | **Owner-observed; source-pose problem vs gameplay-scale presentation not yet isolated. Do not request an unspecific Run revision yet.** |
 | HA-06 | P2 | Source blade extension/impact read differently by direction in earlier tests. Check all eight views at correct playback speed and actual game size before identifying a particular pose as defective. | **Requires comparative review; no artist revision request yet.** |
+| HA-07 | **P1 — diagnosis first** | Owner reports **soft/blurry-looking Akio while running at normal gameplay camera scale**. The Godot client uses 0.5 actor visual scale, 0.5 presentation zoom and LINEAR filtering without pixel snap; this can soften moving sprite detail. | **Observation confirmed; cause unknown. Compare source and live Godot, and A/B client-side filtering/scale before blaming artist texture quality.** |
+| HA-08 | P3 — watch only | Idle loop appears functional but **restrained breathing/pose motion is barely noticeable** at gameplay zoom. Owner reports no major Idle defects. | **Provisionally acceptable**; only ask Hammer to amplify if source and in-game review establish an actual readability need. |
 
 ### Evidence for the P0 sheathing issue
 
@@ -66,6 +68,14 @@ topics:
 3. **After feasibility/quote:** Approve only what is needed for a clean Proof A test. The full core combo (Cross Cut / Heavy Cleave) remains future work under the original milestone structure.
 
 **Important alternative to ask about:** If Hammer can reuse a convincing partial drawn-sword segment plus a ready pose with little added work, compare that solution against commissioning full new loops. **Do not assume a frame-range cut alone is production-ready**, since movement transitions also have to agree.
+
+## Additional Run / Idle feedback to verify (2026-10-22)
+
+The owner confirms Run loops cleanly but North/South locomotion can read as waddling. Akio appears somewhat blurry/soft while in motion; Idle works but has deliberately small movements that are hard to perceive at normal scale. **Do not assume this is caused by a low-quality model or automatically request new Run/Idle art.**
+
+The client currently uses `AkioCheckpointBProfile.tres` with `visual_scale_multiplier=0.5`, `pixel_art=false`, `snap_actor_to_pixel_grid=false`, plus scene camera zoom `0.5`; `DirectionalActorPresentation` consequently uses `TEXTURE_FILTER_LINEAR`. The original 512×512 sprite canvases contain a relatively small character. Downscaling/filtering and high-angle leg foreshortening are plausible **engineering/visual-presentation hypotheses**, not proven causes of blur or waddling.
+
+**Small remaining acceptance test:** compare N/S with E/W running at intended camera zoom; compare source Run/Idle at 30 FPS; capture source and live views; use a non-shipping filter/scale A/B to separate Godot softness from source assets. Capture a brief annotated video for Hammer only if the concern persists after that comparison. The confirmed sheathing-continuity issue remains first priority.
 
 ## Latest live-playtest interpretation (2026-10-22)
 
