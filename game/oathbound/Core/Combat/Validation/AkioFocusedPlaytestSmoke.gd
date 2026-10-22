@@ -203,6 +203,7 @@ func _run() -> void:
 	_expect(is_equal_approx(float(current.get("duration", -1.0)), 0.36), "prototype Quick Slash duration changed")
 	_expect(is_equal_approx(float(current.get("startup", -1.0)), 0.055), "prototype Quick Slash startup changed")
 	_expect(is_equal_approx(float(current.get("active", -1.0)), 0.075), "prototype Quick Slash hitbox timing changed")
+	_expect(float(current.get("v2_startup_locomotion_weight", 0.0)) > 0.0, "prototype Quick Slash movement policy changed")
 
 	# Focused Hammer timing: use the actual 41-frame/30fps cadence in gameplay.
 	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
@@ -215,6 +216,18 @@ func _run() -> void:
 	_expect(is_equal_approx(float(current.get("active", -1.0)), TIMING.ACTIVE_DURATION), "Hammer active window mismatch")
 	_expect(is_equal_approx(float(current.get("recovery", -1.0)), TIMING.RECOVERY_DURATION), "Hammer recovery mismatch")
 	_expect(is_equal_approx(float(current.get("duration", 0.0)) + float(current.get("recovery", 0.0)), TIMING.SOURCE_TOTAL_DURATION), "full gameplay lifecycle must equal 41 source frames")
+	# No free skating for the full Hammer draw-strike-sheathe sequence; do not
+	# change motion for prototype, dash, Blood Aspects or any other attacks.
+	for key: String in [
+		"v2_startup_locomotion_weight", "v2_committed_locomotion_weight",
+		"v2_active_locomotion_weight", "v2_recovery_locomotion_weight"
+	]:
+		_expect(is_zero_approx(float(current.get(key, -1.0))), "Hammer Quick Slash not rooted: " + key)
+	_expect(is_zero_approx(float(current.get("lunge_speed", -1.0))), "Hammer Quick Slash retains unintended movement lunge")
+	player.set("_move_input", Vector2.RIGHT)
+	player.set("knockback", Vector2.ZERO)
+	player.call("_calculate_velocity", 1.0 / 60.0)
+	_expect((player as CharacterBody2D).velocity.length() < 0.01, "Hammer Quick Slash allows locomotion while attacking")
 	_expect(not bool(player.call("_can_start_dodge")), "early committed windup allowed a dash")
 	_expect(not bool(player.call("_can_start_parry")), "early committed windup allowed a parry")
 
@@ -223,6 +236,8 @@ func _run() -> void:
 		var runner := runner_value as Node
 		_expect(is_equal_approx(float(runner.call("action_duration")), TIMING.SOURCE_TOTAL_DURATION), "runner/source durations diverge")
 		player.call("_end_attack")
+		player.call("_calculate_velocity", 1.0 / 60.0)
+		_expect((player as CharacterBody2D).velocity.length() < 0.01, "Hammer sheathing/recovery allows skating")
 		_expect(bool(runner.call("is_running")), "runner ended before recoverable source frames")
 		_expect(not bool(player.get("_attack_hitbox_active")), "hitbox stayed active entering source recovery")
 		_expect(bool(player.call("_can_start_dodge")), "dash unavailable in Hammer recovery")
@@ -231,9 +246,15 @@ func _run() -> void:
 		player.call("_state_attack_recovery", 0.10)
 		_expect(float(runner.get("action_elapsed")) > before + 0.09, "source animation clock froze in recovery")
 		_expect(bool(runner.call("is_running")), "runner ended early during source recovery")
-		player.call("_start_dodge")
+		# A dash requested shortly BEFORE recovery must still fire when the
+		# recoverable window opens, without lengthening the cancellable attack.
+		# This test simulates the existing standard input buffer (no fake keys).
+		player.call("_buffer_input", "dodge")
+		player.call("_process_buffered_input")
+		_expect(int(player.get("_state")) == int(player.State.DODGING), "buffered recovery dash did not execute")
 		_expect(not bool(runner.call("is_running")), "dash did not interrupt the source animation")
 		_expect(not bool(player.get("_attack_hitbox_active")), "dash left source hitbox active")
+	player.set("_move_input", Vector2.ZERO)
 	else:
 		_failures.append("CombatActionRunner was not attached to focused player")
 
@@ -271,7 +292,7 @@ func _finish() -> void:
 	PlaytestLab.set_akio_render_test_preset("baseline")
 	PlaytestLab.set_akio_run_sync_test_mode("baseline")
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | physics camera default + legacy jitter regression + pose isolation | recovery dash/parry | prototype fallback | normal combo identities")
+		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | camera fix + rooted Hammer Quick Slash + buffered recovery dash + pose isolation | recovery dash/parry | prototype fallback | normal combo identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

@@ -77,6 +77,22 @@ static func apply_to_profile(profile: Dictionary) -> Dictionary:
 	resolved["v2_active_locomotion_weight"] = float(policy.get("active_weight", DEFAULT_POLICY["active_weight"]))
 	resolved["v2_recovery_locomotion_weight"] = float(policy.get("recovery_weight", DEFAULT_POLICY["recovery_weight"]))
 	resolved["v2_startup_turn_rate_deg"] = float(policy.get("turn_rate_deg", DEFAULT_POLICY["turn_rate_deg"]))
+
+	# The temporary 41-frame Hammer Quick Slash is a fully committed
+	# draw-strike-sheathe sequence. Its feet cannot be driven by the general
+	# mobile-sword input policy without skating across the ground. This applies
+	# ONLY to the opt-in source-timing profile; prototype Quick Slash, other
+	# attacks, enemies and Blood Aspects retain their authored movement.
+	# External knockback, hitboxes and dash/parry interruption remain authoritative.
+	if action_id == "quick_slash" and bool(resolved.get("checkpoint_b_source_timing", false)):
+		resolved["v2_startup_locomotion_weight"] = 0.0
+		resolved["v2_committed_locomotion_weight"] = 0.0
+		resolved["v2_active_locomotion_weight"] = 0.0
+		resolved["v2_recovery_locomotion_weight"] = 0.0
+		# Zero even if the older prototype profile authored a lunge. A short,
+		# precisely timed forward step can be designed separately after this
+		# no-skating baseline is approved in gameplay.
+		resolved["lunge_speed"] = 0.0
 	return resolved
 
 

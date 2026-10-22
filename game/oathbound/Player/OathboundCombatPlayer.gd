@@ -52,6 +52,55 @@ func _start_attack(combo_idx: int) -> void:
 	super._start_attack(0 if _akio_quick_slash_focus_active() else combo_idx)
 
 
+# Track INPUT attempts, not only successful dashes. The previous telemetry
+# confirmed dash cancels but could not distinguish early buffered presses,
+# expired requests or cooldown rejection. Source-profile debug telemetry only.
+func _gather_input() -> void:
+	var source_action: bool = (
+		OS.is_debug_build()
+		and bool(_attack_profile.get("checkpoint_b_source_timing", false))
+		and _state in [State.ATTACKING, State.ATTACK_RECOVERY]
+	)
+	var dash_pressed: bool = source_action and Input.is_action_just_pressed("dash")
+	var prior_state: int = _state
+	var can_dodge: bool = _can_start_dodge() if dash_pressed else false
+	var elapsed_s: float = _attack_elapsed
+	var recovery_left_s: float = _recovery_timer
+	var cooldown_left_s: float = _dodge_cooldown
+	super._gather_input()
+	if dash_pressed and typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_focus_dash_input", {
+			"state_before": prior_state,
+			"elapsed_attack_s": elapsed_s,
+			"recovery_remaining_s": recovery_left_s,
+			"dodge_cooldown_s": cooldown_left_s,
+			"allowed_immediately": can_dodge,
+			"accepted_immediately": _state == State.DODGING,
+			"buffered": _buffered_action == "dodge" and _buffer_timer > 0.0,
+			"buffer_remaining_s": _buffer_timer,
+		})
+
+
+func _tick_input_buffer(delta: float) -> void:
+	var expired_dodge: bool = (
+		OS.is_debug_build()
+		and bool(_attack_profile.get("checkpoint_b_source_timing", false))
+		and _state in [State.ATTACKING, State.ATTACK_RECOVERY]
+		and _buffered_action == "dodge"
+		and _buffer_timer > 0.0
+		and _buffer_timer <= delta
+	)
+	var elapsed_s: float = _attack_elapsed
+	var remaining_s: float = _recovery_timer
+	super._tick_input_buffer(delta)
+	if expired_dodge and typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_focus_dash_buffer_expired", {
+			"state": _state,
+			"elapsed_attack_s": elapsed_s,
+			"recovery_remaining_s": remaining_s,
+		})
+
+
 func _start_tap_attack_from_hold() -> void:
 	if _akio_quick_slash_focus_active():
 		_start_attack(0)
@@ -371,6 +420,15 @@ func _state_parrying(delta: float):
 
 
 func _process_buffered_input():
+	var queued_dodge: bool = (
+		OS.is_debug_build()
+		and bool(_attack_profile.get("checkpoint_b_source_timing", false))
+		and _state in [State.ATTACKING, State.ATTACK_RECOVERY]
+		and _buffered_action == "dodge"
+		and _buffer_timer > 0.0
+	)
+	var elapsed_s: float = _attack_elapsed
+	var recovery_left_s: float = _recovery_timer
 	# The legacy buffer interprets a still-held parry input as a request to start Block.
 	# For Wolf/Wraith the same buffered press remains a parry request instead.
 	if (
@@ -384,6 +442,11 @@ func _process_buffered_input():
 		_buffer_timer = 0.0
 		return
 	super._process_buffered_input()
+	if queued_dodge and _state == State.DODGING and typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_focus_dash_buffer_executed", {
+			"elapsed_attack_s": elapsed_s,
+			"recovery_remaining_s": recovery_left_s,
+		})
 
 
 func _on_anim_finished(anim_name: String):
