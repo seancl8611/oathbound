@@ -26,6 +26,28 @@ const KAGUTSUCHI_TEST_ACTORS := [
 	{"id": "eclipse_shogun", "name": "Eclipse Shogun", "scene": "res://Regions/Kagutsuchi/Enemies/Bosses/EclipseShogun.tscn"},
 ]
 
+# Milestone tests are session-only. Keep normal gameplay as the default.
+const FOCUSED_TEST_NORMAL: String = "normal"
+const FOCUSED_TEST_AKIO_CHECKPOINT_B: String = "akio_checkpoint_b_quick_slash"
+const AKIO_SOURCE_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
+const AKIO_SOURCE_FPS: float = 30.0
+const AKIO_SOURCE_DIRECTIONS: Array[String] = ["e", "se", "s", "sw", "w", "nw", "n", "ne"]
+const AKIO_SOURCE_ANIMATIONS: Array[String] = ["attack_quick_slash", "move", "idle"]
+
+var _focused_test_scenario: String = FOCUSED_TEST_NORMAL
+var _focused_diagnostics_enabled: bool = true
+var _focused_scenario_dropdown: OptionButton
+var _focused_diagnostics_check: CheckButton
+var _source_preview_enabled: bool = false
+var _source_preview_frame: int = 0
+var _source_preview_elapsed: float = 0.0
+var _source_preview_animation: OptionButton
+var _source_preview_direction: OptionButton
+var _source_preview_sprite: Sprite2D
+var _source_preview_status: Label
+var _source_preview_toggle: CheckButton
+
+
 const PLAYTEST_POWER_MULTIPLIERS: Array[float] = [1.0, 2.0, 3.0, 5.0, 10.0]
 const RECOMMENDED_INTEGRATION_POWER: float = 5.0
 const FAST_CLEAR_POWER: float = 10.0
@@ -94,6 +116,7 @@ func _build_build_tab(tabs: TabContainer) -> void:
 	super._build_build_tab(tabs)
 	_build_power_tab(tabs)
 	_build_region_tab(tabs)
+	_build_focused_tests_tab(tabs)
 
 
 func _build_power_tab(tabs: TabContainer) -> void:
@@ -454,3 +477,184 @@ func _spawn_selected_region_actor(dropdown: OptionButton, region_name: String) -
 		actor.add_to_group("enemy")
 	print("[PlaytestLab] Spawned targeted %s actor: %s" % [region_name, str(entry.get("name", actor.name))])
 	_refresh_status()
+
+
+# =============================================================================
+# FOCUSED TESTS - REUSABLE DEBUG-SCENARIO SHELL / HAMMER CHECKPOINT B
+# =============================================================================
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	if _ui == null or not _ui.visible or not _source_preview_enabled:
+		return
+	# PlaytestLab runs PROCESS_MODE_ALWAYS while gameplay is paused. Source playback
+	# therefore cannot modify CombatActionRunner, gameplay hitboxes or combo timing.
+	_source_preview_elapsed += maxf(0.0, delta)
+	if _source_preview_elapsed >= 1.0 / AKIO_SOURCE_FPS:
+		var steps := int(floor(_source_preview_elapsed * AKIO_SOURCE_FPS))
+		_source_preview_elapsed -= float(steps) / AKIO_SOURCE_FPS
+		_source_preview_frame += steps
+	_refresh_source_preview()
+
+
+func is_akio_quick_slash_focus_active() -> bool:
+	return (
+		OS.is_debug_build()
+		and _focused_test_scenario == FOCUSED_TEST_AKIO_CHECKPOINT_B
+		and typeof(AspectRuntime) == TYPE_OBJECT
+		and str(AspectRuntime.selected_aspect).is_empty()
+	)
+
+
+func is_akio_focus_diagnostics_active() -> bool:
+	return is_akio_quick_slash_focus_active() and _focused_diagnostics_enabled
+
+
+func get_focused_test_scenario() -> String:
+	return _focused_test_scenario if OS.is_debug_build() else FOCUSED_TEST_NORMAL
+
+
+func set_focused_test_scenario(scenario: String) -> void:
+	if not OS.is_debug_build():
+		return
+	var next_scenario := scenario if scenario == FOCUSED_TEST_AKIO_CHECKPOINT_B else FOCUSED_TEST_NORMAL
+	if next_scenario == _focused_test_scenario:
+		return
+	_focused_test_scenario = next_scenario
+	# Reset only the transient combo/queue state when explicitly switching test modes.
+	# Nothing in the authored attack profiles, hitboxes or action durations is changed.
+	var player := _get_player()
+	if player != null and player.has_method("_drop_combo"):
+		player.call("_drop_combo")
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("focused_test_scenario_changed", {"scenario": _focused_test_scenario})
+	print("[FocusedTests] scenario=", _focused_test_scenario)
+	if _focused_scenario_dropdown != null:
+		_focused_scenario_dropdown.select(1 if next_scenario == FOCUSED_TEST_AKIO_CHECKPOINT_B else 0)
+
+
+func _build_focused_tests_tab(tabs: TabContainer) -> void:
+	var vbox := _make_tab(tabs, "Focused Tests")
+	var title := Label.new()
+	title.text = "Milestone / isolated tests"
+	title.add_theme_font_size_override("font_size", 16)
+	vbox.add_child(title)
+
+	_focused_scenario_dropdown = OptionButton.new()
+	_focused_scenario_dropdown.add_item("Normal combat")
+	_focused_scenario_dropdown.set_item_metadata(0, FOCUSED_TEST_NORMAL)
+	_focused_scenario_dropdown.add_item("Akio Checkpoint B - Quick Slash only")
+	_focused_scenario_dropdown.set_item_metadata(1, FOCUSED_TEST_AKIO_CHECKPOINT_B)
+	_focused_scenario_dropdown.select(0)
+	_focused_scenario_dropdown.item_selected.connect(func(index: int) -> void:
+		set_focused_test_scenario(str(_focused_scenario_dropdown.get_item_metadata(index)))
+	)
+	vbox.add_child(_focused_scenario_dropdown)
+
+	var explanation := Label.new()
+	explanation.text = "Basic taps/holds execute only Quick Slash in the focused scenario. Combo continuations are bypassed; normal timing, hitboxes and movement are unchanged. Requires the base katana (no Blood Aspect selected)."
+	explanation.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(explanation)
+
+	_focused_diagnostics_check = CheckButton.new()
+	_focused_diagnostics_check.text = "Record focused animation frames in combat telemetry"
+	_focused_diagnostics_check.button_pressed = _focused_diagnostics_enabled
+	_focused_diagnostics_check.toggled.connect(func(checked: bool) -> void:
+		_focused_diagnostics_enabled = checked
+	)
+	vbox.add_child(_focused_diagnostics_check)
+
+	var separator := HSeparator.new()
+	vbox.add_child(separator)
+
+	var preview_label := Label.new()
+	preview_label.text = "Original Hammer PNG preview - independent of gameplay"
+	preview_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(preview_label)
+
+	_source_preview_toggle = CheckButton.new()
+	_source_preview_toggle.text = "Play source animation at 30 FPS (while lab is open)"
+	_source_preview_toggle.toggled.connect(func(enabled: bool) -> void:
+		_source_preview_enabled = enabled
+		_source_preview_frame = 0
+		_source_preview_elapsed = 0.0
+		if _source_preview_sprite != null and not enabled:
+			_source_preview_sprite.texture = null
+		_refresh_source_preview()
+	)
+	vbox.add_child(_source_preview_toggle)
+
+	var controls := HBoxContainer.new()
+	vbox.add_child(controls)
+	_source_preview_animation = OptionButton.new()
+	for animation: String in AKIO_SOURCE_ANIMATIONS:
+		_source_preview_animation.add_item(animation)
+	_source_preview_animation.item_selected.connect(func(_index: int) -> void: _restart_source_preview())
+	controls.add_child(_source_preview_animation)
+
+	_source_preview_direction = OptionButton.new()
+	for direction: String in AKIO_SOURCE_DIRECTIONS:
+		_source_preview_direction.add_item(direction.to_upper())
+	_source_preview_direction.select(0)
+	_source_preview_direction.item_selected.connect(func(_index: int) -> void: _restart_source_preview())
+	controls.add_child(_source_preview_direction)
+
+	# Use a cropped render viewport rather than displaying the entire 512px PNG.
+	# The source is not rewritten, cropped on disk, or routed through gameplay.
+	var preview_panel := SubViewportContainer.new()
+	preview_panel.custom_minimum_size = Vector2(240, 182)
+	preview_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	vbox.add_child(preview_panel)
+	var viewport := SubViewport.new()
+	viewport.size = Vector2i(240, 182)
+	viewport.transparent_bg = true
+	viewport.disable_3d = true
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	viewport.process_mode = Node.PROCESS_MODE_ALWAYS
+	preview_panel.add_child(viewport)
+	_source_preview_sprite = Sprite2D.new()
+	_source_preview_sprite.position = Vector2(120, 91)
+	_source_preview_sprite.scale = Vector2(1.35, 1.35)
+	_source_preview_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+	viewport.add_child(_source_preview_sprite)
+
+	_source_preview_status = Label.new()
+	_source_preview_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(_source_preview_status)
+	_refresh_source_preview()
+
+
+func _restart_source_preview() -> void:
+	_source_preview_elapsed = 0.0
+	_source_preview_frame = 0
+	_refresh_source_preview()
+
+
+func _refresh_source_preview() -> void:
+	if _source_preview_status == null:
+		return
+	if not _source_preview_enabled:
+		_source_preview_status.text = "Source preview off. Select a direction and enable 30 FPS playback; no game/combat timing changes."
+		return
+	if _source_preview_animation == null or _source_preview_direction == null or _source_preview_sprite == null:
+		return
+	var animation_name := "%s_%s" % [
+		AKIO_SOURCE_ANIMATIONS[_source_preview_animation.selected],
+		AKIO_SOURCE_DIRECTIONS[_source_preview_direction.selected],
+	]
+	var sprite_frames_value: Variant = AKIO_SOURCE_PROFILE.get("sprite_frames")
+	if not (sprite_frames_value is SpriteFrames):
+		_source_preview_status.text = "Akio frames not loaded yet. Enter Hushiro gameplay, allow the atlas to prepare, then reopen the lab."
+		return
+	var frames := sprite_frames_value as SpriteFrames
+	if not frames.has_animation(StringName(animation_name)):
+		_source_preview_status.text = "Waiting for %s to become available." % animation_name
+		return
+	var expected_count := 41 if animation_name.begins_with("attack_") else (16 if animation_name.begins_with("move_") else 40)
+	var count := frames.get_frame_count(StringName(animation_name))
+	if count != expected_count:
+		_source_preview_status.text = "Waiting for full animation %s (%d/%d frames)." % [animation_name, count, expected_count]
+		return
+	_source_preview_frame = posmod(_source_preview_frame, count)
+	_source_preview_sprite.texture = frames.get_frame_texture(StringName(animation_name), _source_preview_frame)
+	_source_preview_status.text = "%s | frame %02d/%02d | source 30 FPS | combat paused" % [animation_name, _source_preview_frame, count - 1]
