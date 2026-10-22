@@ -255,9 +255,9 @@ func _run() -> void:
 		_expect(str(player.get("_buffered_action")) == "", "buffered recovery dash was not consumed")
 		_expect(not bool(runner.call("is_running")), "dash did not interrupt the source animation")
 		_expect(not bool(player.get("_attack_hitbox_active")), "dash left source hitbox active")
-	player.set("_move_input", Vector2.ZERO)
 	else:
 		_failures.append("CombatActionRunner was not attached to focused player")
+	player.set("_move_input", Vector2.ZERO)
 
 	# Tap and hold still resolve exclusively to Quick Slash, regardless of cadence.
 	player.call("_start_tap_attack_from_hold")
