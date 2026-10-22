@@ -73,7 +73,7 @@ func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
 		_focused_quick_slash_sequence += 1
 	var resolved: Dictionary = profile
 	var id: String = str(profile.get("id", ""))
-	if id == "quick_slash" and _akio_quick_slash_focus_active() and PlaytestLab.is_akio_source_gameplay_active():
+	if id == "quick_slash" and OS.is_debug_build() and PlaytestLab.is_akio_source_gameplay_active():
 		# Never mutate the shared AspectCatalog profile. Normal combat and the
 		# original quick-only test keep their pre-commission timing.
 		resolved = CHECKPOINT_B_TIMING.apply_source_timing(profile)
@@ -104,6 +104,25 @@ func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
 			resolved["restart_lockout"] = 0.0
 
 	super._start_profile_attack(resolved, combo_idx)
+
+	if id == "quick_slash" and OS.is_debug_build():
+		var source_timing: bool = bool(_attack_profile.get("checkpoint_b_source_timing", false))
+		var runner_duration: float = 0.0
+		if _v2_player_action_runner != null and is_instance_valid(_v2_player_action_runner):
+			runner_duration = _v2_player_action_runner.action_duration()
+		var details := {
+			"timing_mode": "hammer_source_30fps" if source_timing else "prototype",
+			"source_30fps": source_timing,
+			"combo_isolation": _akio_quick_slash_focus_active(),
+			"attack_duration": float(_attack_profile.get("duration", 0.0)),
+			"recovery_duration": float(_attack_profile.get("recovery", 0.0)),
+			"presentation_duration": runner_duration,
+		}
+		print("[AkioCheckpointB] live Quick Slash timing=%s source_30fps=%s action_total=%.4fs isolated=%s" % [
+			details["timing_mode"], source_timing, runner_duration, details["combo_isolation"]
+		])
+		if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+			CombatTelemetry.record_event("akio_checkpoint_b_live_timing", details)
 
 	if _akio_quick_slash_trace_active() and id == "quick_slash" and typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
 		CombatTelemetry.record_event("akio_focus_attack_started", {
