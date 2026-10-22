@@ -8,8 +8,8 @@
     {
       "name": "e",
       "godot_vector": [
-        1.0,
-        0.0
+        1,
+        0
       ],
       "screen_angle_deg": 0
     },
@@ -24,8 +24,8 @@
     {
       "name": "s",
       "godot_vector": [
-        0.0,
-        1.0
+        0,
+        1
       ],
       "screen_angle_deg": 90
     },
@@ -40,8 +40,8 @@
     {
       "name": "w",
       "godot_vector": [
-        -1.0,
-        0.0
+        -1,
+        0
       ],
       "screen_angle_deg": 180
     },
@@ -56,8 +56,8 @@
     {
       "name": "n",
       "godot_vector": [
-        0.0,
-        -1.0
+        0,
+        -1
       ],
       "screen_angle_deg": 270
     },
@@ -95,7 +95,13 @@
     "Hammer Checkpoint B in-game integration only: Idle, Move / Combat Run, and Quick Slash.",
     "Uses the delivered 512x512 clean-prerender frame set without a pixel-art treatment.",
     "Idle and Move preserve the authored 30 fps source cadence; attacks remain sampled from authoritative gameplay progress.",
+    "Authoritative Blender export audit resolves runtime counts to Idle=40, Move=16, Quick Slash=41 per direction; looping closure endpoints are omitted only when they duplicate the start pose.",
     "The fixed registration point is the center of Hammer's render canvas at (256, 256).",
     "This checkpoint profile is separate from the older 128x128 Proof A placeholder contract."
-  ]
+  ],
+  "animation_frame_counts": {
+    "idle": 40,
+    "move": 16,
+    "attack_quick_slash": 41
+  }
 }
