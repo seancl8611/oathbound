@@ -32,6 +32,12 @@ jobs:
           set -euo pipefail
           python -m py_compile tools/rig2d/validate_frame_set.py tools/rig2d/validate_tooling_contract.py tools/rig2d/blender/render_directional.py
           python tools/rig2d/validate_tooling_contract.py
+          # Exact exported frame contract: 8 directions x (40 Idle + 16 Run + 41 Quick Slash).
+          # This proves numbered PNG coverage/canvas; not that Blender poses are evenly spaced.
+          python tools/rig2d/validate_frame_set.py \
+            --manifest tools/rig2d/akio_checkpoint_b_manifest.json \
+            --actor akio \
+            --source game/oathbound/Art2D/RigRendered/Akio/CheckpointB/Frames
 
       - name: Verify isometric 2D actor and camera contract
         shell: bash
