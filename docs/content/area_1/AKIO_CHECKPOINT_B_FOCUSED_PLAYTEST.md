@@ -1,6 +1,6 @@
 # Akio Checkpoint B — Focused Playtest
 
-**Current checkpoint (2026-10-22): Hammer's 30 FPS Quick Slash cadence is verified. Run advances all 16 frames without indexing skips, but it looks jittery in E/W and, less noticeably, N/S. User's latest mipmap A/B made the Run look worse. Investigate moving-character versus camera timing with the NEW Mode A3c below. Do not request artist revisions yet.**
+**Current checkpoint (2026-10-22): Owner isolated Akio Run jitter to the old idle-frame Camera2D update combined with smoothing. Freezing the animated Run pose did not help; camera PHYSICS callback with smoothing retained completely removed the reported jitter; IDLE callback with smoothing disabled also removed it. CameraFollow now defaults to PHYSICS+ON for normal gameplay (code implemented, permanent-default field retest pending). No artist re-export or animation-FPS change is required for this jitter fix. See Mode A3c below.**
 
 **Ongoing decisions and follow-up:** [Hammer artist feedback tracker](../../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) and [internal Godot integration tracker](../../art_production/AKIO_PROOF_A_INTEGRATION_TRACKER.md). Those are draft working queues; this page records the current debug testing procedure.
 
@@ -62,22 +62,29 @@ Wait until the startup log reports all 776 frames. Open Focused Tests, select pr
 
 If both appear equally jittery, move to a debug-only camera/physics interpolation A/B; do not request a Hammer re-export or change Run FPS based solely on the clean frame-index trace. Restore Baseline after the test.
 
-### Mode A3c — Movement / camera isolation (new, after failed mipmapping)
+### Mode A3c — Camera jitter root cause and permanent fix
 
-**Evidence:** `combat_1792709349.jsonl` and `godot(20261022-225254).log` from `b15bbf6` confirm real generated Run mipmaps (128 frames) and selection/return to Baseline. Owner reports mipmaps worsened the shaking. The telemetry contains no new 12-second frame trace, so do not invent objective GPU-quality scores. A single 128.76 ms performance hitch occurred during the mipmapped test; sustained frame-order faults were not measured in this run. North/South also suffers (less obvious).
+**Evidence from successive owner playtests on 2026-10-22:**
+- The 128-frame Run-only mipmap experiment generated successfully but made Akio's jitter/blur worse (`combat_1792709349.jsonl` and `godot(20261022-225254).log`; mipmap build `b15bbf6`).
+- In the next focused comparison build `892943bd`: B (Run frame 4 frozen) **still jittered**; C (camera physics callback, smoothing unchanged) **completely cleared the jitter**; D (camera smoothing OFF, default idle callback) **also cleared it**; reverting to A (idle callback + smoothing ON) **reproduced blur/jitter**.
+- This isolates the **old idle callback + smoothing combination** as the runtime presentation problem. The precise lower-level Godot scheduling mechanism is not separately proven. Hammer's PNG frames/30 FPS playback and combat animation state do not need changes to resolve this particular defect.
 
-**Next test:** in Playtest Lab → Focused Tests, keep **Akio Run sharpness** on **1. Baseline**, then find **Akio Run movement / camera isolation (NEW)**. Make the same short route E/W and N/S for each setting, waiting for movement to settle after changing the mode:
+**Permanent correction:** `CameraFollow.gd` now chooses `Camera2D.CAMERA2D_PROCESS_PHYSICS` in `_ready()`, before activating the camera. Camera follow target is already updated during `_physics_process()`; its camera refresh now runs in physics mode as well. Normal `position_smoothing_enabled = smoothing_on_start` and existing smoothing speed, zoom, projection, combat/movement and asset files remain unchanged. This default applies outside the debug Playtest Lab, too.
 
-| Mode | Changes | What we learn |
-|---|---|---|
-| A. Baseline | Normal directional 30 FPS Run, existing camera | Reference |
-| B. Freeze Run on frame 4 | Run pose fixed during movement; character and camera keep moving normally | If jitter remains, Run frame-to-frame pose changes are **not necessary** to reproduce it |
-| C. Camera physics callback | Camera updates on fixed physics ticks instead of its default idle callback; smoothing unchanged | Is mixed camera/actor tick scheduling contributing? |
-| D. Camera smoothing OFF | Default camera update callback retained; smoothing disabled | Is smoothing-related screen-space motion responsible? |
+**One short post-fix acceptance pass:** Update and launch the existing branch, enter Hushiro, and move N/S/E/W in **normal gameplay**, with **Akio Run sharpness = 1. Baseline** and **Akio camera jitter fix / legacy regression = A. FIXED baseline**. It should look like the previously successful camera C test, with smoothing still working. Also briefly try attacking, dashing, stopping and room transitions, then confirm A remains the normal default.
 
-Each mode changes **one** variable. No Combat V2 mechanics, movement speed, camera zoom, source PNGs, or Run FPS metadata change. Other animations behave normally. After comparing B/C/D, restore **A. Baseline**. Read the log's `[AkioSyncTest]` markers to confirm the selected camera mode applied.
+The debug dropdown has **changed meaning** on the fixed branch:
 
-**Interpretation:** If the fixed Run pose in B still visibly jitters against the background, focus on physics-to-render/camera transforms; if fixed pose is steady and only animated Run looks shaky, investigate pose registration and source stride within a constant-canvas export. If C helps, revisit Camera2D update synchronization; if D helps, investigate smoothing response. The 30 FPS sprite may look more discrete than 120 FPS motion even when correct; don't confuse that with frame-index faults.
+| Current selection | Callback | Smoothing | Purpose |
+|---|---|---|---|
+| **A. FIXED baseline** | PHYSICS | ON | Permanent behavior; expected smooth |
+| **B. Freeze Run frame 4** | PHYSICS | ON | Fixed-pose isolation, no longer expected to shake |
+| **C. OLD BUG** | IDLE | ON | Deliberately reproduce the old jitter for regression only |
+| **D. OLD workaround** | IDLE | OFF | Reproduce why turning smoothing off previously helped |
+
+**Important:** In the earlier comparison build C was the *fix*, but in the **new corrected build C is the old bug** for regression testing. Compare against A; restore A after any experiment. The Godot log prints `[AkioSyncTest]` when the camera comparison changes.
+
+Do not confuse a remaining artistic gait/waddle issue (if noticed *after* the camera fix) with the resolved position jitter. No need to repeat frame-index traces, mipmapping or texture-filter experiments.
 
 ### Mode A4 — Run frame integrity / camera timing diagnostics (no video needed)
 

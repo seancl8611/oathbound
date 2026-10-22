@@ -41,15 +41,17 @@ const AKIO_RENDER_NEAREST_SNAP: String = "nearest_snap"
 const AKIO_RENDER_LINEAR_125: String = "linear_125"
 const AKIO_RENDER_MIPMAPPED_RUN: String = "mipmapped_run"
 
-# Orthogonal to texture filtering. Each diagnostic alters exactly one
-# presentation variable, never authoritative actor physics or source art.
+# Owner confirmed PHYSICS+ON and IDLE+OFF both remove camera-induced Run
+# jitter; IDLE+ON is the faulty legacy combination. The corrected default
+# PHYSICS+ON is authoritative in CameraFollow.gd, not this diagnostic menu.
+# Keep the two old configurations for a focused regression comparison.
 const AKIO_SYNC_BASELINE: String = "baseline"
 const AKIO_SYNC_POSE_LOCK: String = "pose_lock"
-const AKIO_SYNC_CAMERA_PHYSICS: String = "camera_physics"
-const AKIO_SYNC_CAMERA_NO_SMOOTHING: String = "camera_no_smoothing"
+const AKIO_SYNC_LEGACY_IDLE_SMOOTHING: String = "legacy_idle_smoothing"
+const AKIO_SYNC_LEGACY_IDLE_NO_SMOOTHING: String = "legacy_idle_no_smoothing"
 const AKIO_SYNC_MODES: Array[String] = [
 	AKIO_SYNC_BASELINE, AKIO_SYNC_POSE_LOCK,
-	AKIO_SYNC_CAMERA_PHYSICS, AKIO_SYNC_CAMERA_NO_SMOOTHING,
+	AKIO_SYNC_LEGACY_IDLE_SMOOTHING, AKIO_SYNC_LEGACY_IDLE_NO_SMOOTHING,
 ]
 const AKIO_RENDER_PRESETS: Array[String] = [
 	AKIO_RENDER_BASELINE, AKIO_RENDER_NEAREST,
@@ -862,25 +864,25 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	var sync_separator := HSeparator.new()
 	vbox.add_child(sync_separator)
 	var sync_title := Label.new()
-	sync_title.text = "Akio Run movement / camera isolation (NEW)"
+	sync_title.text = "Akio camera jitter fix / legacy regression"
 	sync_title.add_theme_font_size_override("font_size", 15)
 	vbox.add_child(sync_title)
 	var sync_info := Label.new()
-	sync_info.text = "Keep the sharpness preset on 1. Baseline. Each option changes ONE variable: lock Akio's Run pose during movement, match camera updates to physics ticks, or disable camera smoothing. Run the same N/S and E/W route after closing the lab."
+	sync_info.text = "FIXED DEFAULT: camera PHYSICS callback + smoothing ON. Owner confirmed this is smooth. Old IDLE callback + smoothing ON was jittery; IDLE with smoothing OFF was also smooth. Keep Run sharpness on 1. Baseline. Test A in normal gameplay; only use C/D briefly to reproduce the prior bug."
 	sync_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(sync_info)
 	_akio_sync_dropdown = OptionButton.new()
-	_akio_sync_dropdown.add_item("A. Baseline (normal Run + camera)")
-	_akio_sync_dropdown.add_item("B. Freeze Run on frame 4 while moving (camera unchanged)")
-	_akio_sync_dropdown.add_item("C. Camera physics callback (Run/smoothing unchanged)")
-	_akio_sync_dropdown.add_item("D. Camera smoothing OFF (Run/callback unchanged)")
+	_akio_sync_dropdown.add_item("A. FIXED baseline - PHYSICS callback + smoothing ON")
+	_akio_sync_dropdown.add_item("B. Freeze Run frame 4 (fixed physics camera unchanged)")
+	_akio_sync_dropdown.add_item("C. OLD BUG - IDLE callback + smoothing ON")
+	_akio_sync_dropdown.add_item("D. OLD workaround - IDLE callback + smoothing OFF")
 	_akio_sync_dropdown.select(AKIO_SYNC_MODES.find(_akio_sync_test_mode))
 	_akio_sync_dropdown.item_selected.connect(func(index: int) -> void:
 		set_akio_run_sync_test_mode(AKIO_SYNC_MODES[index])
 	)
 	vbox.add_child(_akio_sync_dropdown)
 	var sync_note := Label.new()
-	sync_note.text = "If B still jitters, the sprite animation poses are not required for the problem. If B becomes steady, camera alone is unlikely to explain all visual shaking. Presets are reversible and disabled in release builds."
+	sync_note.text = "Results from the previous build: frozen Run still jittered with the legacy camera; changing to PHYSICS+ON or IDLE+OFF cleared the issue. A now applies the permanent physics-camera fix. C deliberately reenables the old bug, D restores the old workaround. Restore A after comparing."
 	sync_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(sync_note)
 

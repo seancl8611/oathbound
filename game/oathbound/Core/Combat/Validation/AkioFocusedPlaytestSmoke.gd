@@ -135,8 +135,9 @@ func _run() -> void:
 	_expect(not bool(visual_state.get("render_mipmaps_active", false)), "baseline retained generated Run mipmaps")
 	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "reset-to-baseline retained pixel snapping")
 
+	# Owner-confirmed corrective baseline must be PHYSICS+ON. Retain a debug-only
+	# exact reproduction of the old IDLE+ON jitter and the IDLE+OFF workaround.
 	# Frame lock must change only the displayed pose during locomotion.
-	# Camera comparison must restore original process callback and smoothing.
 	PlaytestLab.set_akio_run_sync_test_mode("pose_lock")
 	player.velocity = Vector2(100.0, 0.0)
 	presenter.call("sync_from_source", 0.0)
@@ -150,18 +151,24 @@ func _run() -> void:
 	if test_camera != null:
 		var normal_callback: int = test_camera.process_callback
 		var normal_smoothing: bool = test_camera.position_smoothing_enabled
-		PlaytestLab.set_akio_run_sync_test_mode("camera_physics")
+		_expect(normal_callback == Camera2D.CAMERA2D_PROCESS_PHYSICS, "canonical camera must default to physics callback")
+		_expect(normal_smoothing, "canonical camera must preserve smoothing under physics callback")
+		PlaytestLab.set_akio_run_sync_test_mode("legacy_idle_smoothing")
 		test_camera.call("_process", 0.0)
-		_expect(test_camera.process_callback == Camera2D.CAMERA2D_PROCESS_PHYSICS, "camera physics test not applied")
-		_expect(test_camera.position_smoothing_enabled == normal_smoothing, "camera physics test modified smoothing")
-		PlaytestLab.set_akio_run_sync_test_mode("camera_no_smoothing")
+		_expect(test_camera.process_callback == Camera2D.CAMERA2D_PROCESS_IDLE, "legacy IDLE+ON mode not applied")
+		_expect(test_camera.position_smoothing_enabled, "legacy IDLE+ON lost original smoothing")
+		PlaytestLab.set_akio_run_sync_test_mode("legacy_idle_no_smoothing")
 		test_camera.call("_process", 0.0)
-		_expect(not test_camera.position_smoothing_enabled, "camera no-smoothing test not applied")
-		_expect(test_camera.process_callback == normal_callback, "camera no-smoothing test changed callback")
+		_expect(test_camera.process_callback == Camera2D.CAMERA2D_PROCESS_IDLE, "legacy IDLE+OFF changed its callback")
+		_expect(not test_camera.position_smoothing_enabled, "legacy IDLE+OFF did not disable smoothing")
 		PlaytestLab.set_akio_run_sync_test_mode("baseline")
 		test_camera.call("_process", 0.0)
-		_expect(test_camera.process_callback == normal_callback, "camera callback did not restore")
-		_expect(test_camera.position_smoothing_enabled == normal_smoothing, "camera smoothing did not restore")
+		_expect(test_camera.process_callback == Camera2D.CAMERA2D_PROCESS_PHYSICS, "baseline did not restore physics camera callback")
+		_expect(test_camera.position_smoothing_enabled, "baseline did not restore smoothing")
+		_expect(test_camera.process_callback == normal_callback, "camera callback baseline drifted from startup")
+		_expect(test_camera.position_smoothing_enabled == normal_smoothing, "camera smoothing baseline drifted from startup")
+		PlaytestLab.set_akio_run_sync_test_mode("invalid_camera_mode")
+		_expect(PlaytestLab.get_akio_run_sync_test_mode() == "baseline", "invalid camera mode did not restore fixed default")
 	player.velocity = Vector2.ZERO
 	presenter.queue_free()
 
@@ -264,7 +271,7 @@ func _finish() -> void:
 	PlaytestLab.set_akio_render_test_preset("baseline")
 	PlaytestLab.set_akio_run_sync_test_mode("baseline")
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | reversible mipmap and camera/pose A/B | recovery dash/parry | prototype fallback | normal combo identities")
+		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | physics camera default + legacy jitter regression + pose isolation | recovery dash/parry | prototype fallback | normal combo identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

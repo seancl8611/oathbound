@@ -54,10 +54,14 @@ var _active_three_quarter := false
 var _actor_refresh_left := 0.0
 var _prototype_badge: Label = null
 
-# Debug-only camera comparison. Always restore the original per-scene camera
-# settings rather than changing project defaults or global physics timing.
+# Akio's owner-verified Run jitter occurred ONLY with idle-frame Camera2D
+# updates and smoothing enabled together. This camera follows a CharacterBody2D
+# on physics ticks; keep its own callback on physics ticks too, with smoothing
+# retained. The debug Lab can temporarily reproduce the previous configuration.
+# This is the source of truth for CameraFollow instances (no project-wide change).
+const DEFAULT_CAMERA_CALLBACK: int = Camera2D.CAMERA2D_PROCESS_PHYSICS
 var _akio_sync_mode_applied: String = "baseline"
-var _akio_default_process_callback: int = Camera2D.CAMERA2D_PROCESS_IDLE
+var _akio_default_process_callback: int = DEFAULT_CAMERA_CALLBACK
 var _akio_default_smoothing: bool = true
 
 
@@ -65,6 +69,10 @@ func _ready() -> void:
 	_target = get_parent() as Node2D
 	_base_zoom = zoom
 	_active_three_quarter = three_quarter_enabled
+
+	# Set before making the camera current; avoid a one-frame idle/smoothed
+	# startup and keep the follow target + Camera2D sampling in physics time.
+	process_callback = DEFAULT_CAMERA_CALLBACK
 
 	# Snap before enabling smoothing/current to avoid the initial slide.
 	_snap_follow_position()
@@ -95,14 +103,11 @@ func _process(_dt: float) -> void:
 	if mode == _akio_sync_mode_applied:
 		return
 	_akio_sync_mode_applied = mode
-	process_callback = (
-		Camera2D.CAMERA2D_PROCESS_PHYSICS
-		if mode == "camera_physics"
-		else _akio_default_process_callback
-	)
-	position_smoothing_enabled = (
-		false if mode == "camera_no_smoothing" else _akio_default_smoothing
-	)
+	# Historical reproduction only: owner confirmed IDLE+ON jittered, while
+	# IDLE+OFF and PHYSICS+ON did not. Baseline now means PHYSICS+ON.
+	var legacy_idle: bool = mode == "legacy_idle_smoothing" or mode == "legacy_idle_no_smoothing"
+	process_callback = Camera2D.CAMERA2D_PROCESS_IDLE if legacy_idle else _akio_default_process_callback
+	position_smoothing_enabled = _akio_default_smoothing and mode != "legacy_idle_no_smoothing"
 	print("[AkioSyncTest] camera applied mode=%s callback=%d smoothing=%s" % [
 		mode, process_callback, position_smoothing_enabled,
 	])
