@@ -64,9 +64,12 @@ Use **Done / Code implemented, needs field retest / Blocked on art / Planned / I
 | AI-07 | P1 | **Hitbox alignment:** current Hammer test divides 41 frames as **15/8/18**, which was a hypothesis, not a precise artist-confirmed impact frame range. Compare E/SE/S/SW/W/NW/N/NE impact poses with actual hitbox edges. | **Investigation** | Blade strikes land when visually plausible. Use direction-aware data only if necessary; avoid changing damage based on sprite-frame polling. |
 | AI-08 | P1 | **Defensive cancel policy:** test permits dash/parry during source recovery; early buffer 0.15 s. | **Eight recovery dash cancels verified; parry and detailed input-buffer edge cases pending.** | `dash_cancel` occurs at 0.82–1.30 seconds into the attack (recovery). All observed activated focused Quick Slash hitboxes subsequently deactivated. One separate `dash_slash` action occurred during isolation and warrants test-scenario purity review. |
 | AI-09 | P1 | **Combo continuation after accepted art:** define legal Cross Cut / Heavy Cleave starts, visual poses, queue windows and movement restrictions against drawn-sword Quick Slash; keep fallback profiles in the meantime. | **Future; blocked on later animation deliveries** | No unnecessary intermediate sheathing; no global lock to 1.37 s per hit; timing is tuned by playtest. |
-| AI-10 | P2 | Check N/S movement "waddling" impression at native FPS and approved gameplay zoom before attributing it to art vs render/sampling/motor displacement. | **Investigation** | Capture N/S 30 FPS source and live overlays, compare directional silhouettes, request only evidence-based artist adjustments. |
+| AI-10 | **P1** | Owner again observes N/S Run as slightly waddling **despite a clean loop**. Test whether high-angle stride foreshortening, motor speed vs loop cadence (16 frames at 30 FPS), or animation poses are responsible. | **Confirmed user observation; root cause under investigation** | Compare N/S to E/W at the same speed and gameplay zoom; collect short video with source 30 FPS reference before artist feedback. |
 | AI-11 | P2 | Keep debugging/scenario infrastructure reusable for future enemies/checkpoints; avoid permanent one-off gameplay mechanics leaking into production. | **Foundation implemented** | Debug-only controls, default normal scenario, specific event-gated logs, no shared AspectCatalog profile mutation. |
 | AI-12 | P1 | **End-to-end directional transition regression:** after new Action deliveries, verify each compass direction across Attack→Idle, Attack→Move, Attack→Dash, Dash→Idle, Draw→Attack, sheath interruption and scene reload. | **Planned; contingent on art** | Sprite selection and continuity remain correct; no loop-phase/one-shot restarts or sudden sword teleport. |
+
+| AI-13 | **P1** | **Investigate moving-sprite blur / gameplay-scale softness** before attributing it to Blender model detail. Source art is 512×512 canvas; current presentation uses `visual_scale_multiplier=0.5`, camera zoom `0.5`, `TEXTURE_FILTER_LINEAR` and no pixel snapping. | **New investigation — owner-observed blur** | A/B native source versus live gameplay, static versus running, linear versus nearest filter and modest scale/zoom difference in temporary debug setup; restore unchanged production values, check camera subpixel/smoothing if needed. Avoid assuming pixel filtering is the cause without screenshots. |
+| AI-14 | P3 | **Idle visibility at true gameplay scale.** Owner sees restrained Idle motion with no major complaint. | **Provisionally acceptable / monitor** | Check one full 40-frame 30 FPS Idle loop at source and native gameplay zoom; accept if natural and stable. Do not enlarge gestures simply to make motion conspicuous. |
 
 ## Practical architecture proposed for AI-03–AI-06 (not yet implemented)
 
@@ -96,9 +99,9 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 
 ## Next action order
 
-1. **Next checkpoint — review Hammer's sheathing feedback with the owner.** The corrected live 30 FPS timing is now confirmed. Ask about keeping the sword drawn between attacks, matching Idle/Run poses and the least disruptive Blender Action revision; obtain approval before sending.
-2. **Plan later Cross Cut / Heavy Cleave animations** with consistent sword-drawn handoff poses; these are not part of the already-authorized Proof A animation set. Scope and pricing require separate agreement.
-3. When coherent source revisions plus additional combo actions exist, render eight directions, integrate attack-to-attack flow, and separately test defensive dash/parry cancellations.
+1. **One bounded movement/Idle visual acceptance pass before artist feedback:** compare N/S against E/W Run at native gameplay camera (same speed, same surroundings); compare live Run to original 30 FPS source; check whether the moving softness changes with temporary Godot filtering/scaling rather than source art. Verify Idle plays its full 40-frame loop without jitter; subtle movement is acceptable. Record one short gameplay clip and do not alter the base gameplay timings.
+2. **Review Hammer's feedback with the owner**, prioritizing verified re-sheathing and any Run/source-art concern that remains after the technical A/B. Ask about keeping the blade drawn, matching Idle/Run poses and minimal editable Blender Action changes. Obtain approval before sending.
+3. **Plan later Cross Cut / Heavy Cleave animations** with consistent sword-drawn handoff poses; additions are not already authorized in Proof A. Once revised source and further combo actions are delivered, render all eight directions and integrate attack-to-attack flow before separately testing defensive cancels.
 4. **Only then decide final Quick Slash speed and combo-lockout durations.** The verified 1.3667-second draw–strike–sheath cycle is a visual reference, not a final mandatory commitment per hit.
 5. Keep additional tests for Normal-scenario timing, parry, input-buffer edge cases and atlas preparation performance on the engineering backlog without making them a reason to force provisional speed changes.
 
@@ -120,6 +123,7 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 |---|---|
 | 2026-10-22 | Initialized engineering tracker; separated confirmed runtime fixes, subjective feedback, unapproved proposed architecture and artist dependencies. |
 | 2026-10-22 | Verified 22 live Hammer-mode Quick Slashes: 7 full 41-frame completions, 8 recovery dash cancels, 7 damage interruptions. Deferred final timing until sword-drawn and combo art exist. |
+| 2026-10-22 | Owner reports N/S Run looks somewhat waddling though loop is clean, moving Akio appears blurry/soft, and Idle is subtle but acceptable. Checked client-side 0.5 visual scale, 0.5 zoom, linear filtering and disabled pixel snap; reserved one bounded diagnostic A/B before asking Hammer for any Run/Idle art revision. |
 
 ## Maintenance rule
 
