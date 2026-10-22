@@ -15,6 +15,7 @@ const AREA1_PRESSURE_MAX_HITS: int = 6
 const AREA1_PRESSURE_MIDPOINT_HIT: int = 3
 const BASE_KATANA_IDS: Array[String] = ["quick_slash", "cross_cut", "heavy_cleave"]
 const PARRY_POLICY = preload("res://Core/Combat/OathboundParryPolicy.gd")
+const CHECKPOINT_B_TIMING = preload("res://Core/Combat/AkioCheckpointBTiming.gd")
 
 var _area1_pressure_hits_started: int = 0
 var _area1_pressure_active: bool = false
@@ -72,6 +73,10 @@ func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
 		_focused_quick_slash_sequence += 1
 	var resolved: Dictionary = profile
 	var id: String = str(profile.get("id", ""))
+	if id == "quick_slash" and _akio_quick_slash_focus_active() and PlaytestLab.is_akio_source_gameplay_active():
+		# Never mutate the shared AspectCatalog profile. Normal combat and the
+		# original quick-only test keep their pre-commission timing.
+		resolved = CHECKPOINT_B_TIMING.apply_source_timing(profile)
 	var base_katana_basic: bool = _area1_pressure_enabled() and id in BASE_KATANA_IDS
 
 	if base_katana_basic:
@@ -106,6 +111,8 @@ func _start_profile_attack(profile: Dictionary, combo_idx: int = 0) -> void:
 			"attack_id": id,
 			"combo_index": _combo_index,
 			"authored_duration": float(_attack_profile.get("duration", 0.0)),
+			"source_30fps": bool(_attack_profile.get("checkpoint_b_source_timing", false)),
+			"expected_visual_duration": CHECKPOINT_B_TIMING.SOURCE_TOTAL_DURATION if bool(_attack_profile.get("checkpoint_b_source_timing", false)) else 0.0,
 			"startup": float(_attack_profile.get("startup", 0.0)),
 			"active": float(_attack_profile.get("active", 0.0)),
 			"recovery": float(_attack_profile.get("recovery", 0.0)),
@@ -194,6 +201,18 @@ func _queue_next_combo_attack() -> void:
 
 
 func _state_attack_recovery(delta: float) -> void:
+	# The existing Combat V2 presentation runner normally ticks only while
+	# ATTACKING. Hammer's complete clip also occupies the separate recovery
+	# state, so keep its presentation clock advancing for this test profile.
+	# This never moves the hitbox or alters the legacy recovery timer.
+	if (
+		bool(_attack_profile.get("checkpoint_b_source_timing", false))
+		and _v2_player_action_runner != null
+		and is_instance_valid(_v2_player_action_runner)
+		and _v2_player_action_runner.is_running()
+		and _v2_player_action_runner.phase_name() == "RECOVERY"
+	):
+		_v2_player_action_runner.tick(delta)
 	super._state_attack_recovery(delta)
 	if _area1_pressure_hits_started >= AREA1_PRESSURE_MAX_HITS and _state not in [State.ATTACKING, State.ATTACK_RECOVERY]:
 		_area1_reset_pressure_string()
@@ -202,6 +221,22 @@ func _state_attack_recovery(delta: float) -> void:
 func _drop_combo() -> void:
 	_area1_reset_pressure_string()
 	super._drop_combo()
+
+
+# The Hammer full-source test has a locked windup/strike but lets players
+# dash or parry out of the sheathing/recovery frames. The existing Motor and
+# CombatActionRunner already own safe interruption, hitbox shutdown and combo
+# cleanup. Other attacks retain their original cancellation policy.
+func _can_start_dodge() -> bool:
+	if bool(_attack_profile.get("checkpoint_b_source_timing", false)) and _state == State.ATTACK_RECOVERY:
+		return _dodge_cooldown <= 0.0
+	return super._can_start_dodge()
+
+
+func _can_start_parry() -> bool:
+	if bool(_attack_profile.get("checkpoint_b_source_timing", false)) and _state == State.ATTACK_RECOVERY:
+		return _parry_lockout <= 0.0
+	return super._can_start_parry()
 
 
 func _area1_pressure_enabled() -> bool:
