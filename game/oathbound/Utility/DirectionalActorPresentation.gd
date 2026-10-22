@@ -54,6 +54,11 @@ var _focus_motion_last_ms: int = 0
 var _akio_render_test_applied: String = ""
 var _akio_render_test_pixel_snap: bool = false
 
+var _run_trace_previous_animation: String = ""
+var _run_trace_previous_frame: int = -1
+var _run_trace_last_frame_change_us: int = 0
+var _run_trace_last_sample_us: int = 0
+
 
 func _ready() -> void:
 	set_meta(KEEP_WITH_REPLACEMENT_META, true)
@@ -124,6 +129,7 @@ func _process(delta: float) -> void:
 		return
 	_sync_from_source(delta)
 	_trace_focused_akio_frame()
+	_trace_akio_run_frame()
 
 
 func _sync_from_source(_delta: float) -> void:
@@ -802,6 +808,94 @@ func _trace_focused_akio_frame() -> void:
 		"action_progress": _authoritative_progress,
 		"hitbox_active": hitbox_active,
 		"authoritative_sampling": _authoritative_sampled,
+	})
+
+
+# Per-render-callback diagnostic, strictly opt-in for 12 seconds. Unlike the
+# older 120ms locomotion sampler this records ALL frame changes and camera/
+# sprite positions, so missing frame indices and presentation judder can be
+# separated from smooth authoritative world velocity. Does not influence play.
+func _trace_akio_run_frame() -> void:
+	if (
+		not OS.is_debug_build()
+		or actor_role != "player"
+		or str(_profile_value("profile_id", "")) != "akio_checkpoint_b"
+		or typeof(PlaytestLab) != TYPE_OBJECT
+		or not PlaytestLab.has_method("is_akio_run_trace_active")
+		or not PlaytestLab.is_akio_run_trace_active()
+		or typeof(CombatTelemetry) != TYPE_OBJECT
+		or not CombatTelemetry.is_capturing()
+		or _sprite == null
+		or _sprite_frames == null
+		or not _sprite.visible
+	):
+		_run_trace_previous_animation = ""
+		_run_trace_previous_frame = -1
+		_run_trace_last_frame_change_us = 0
+		_run_trace_last_sample_us = 0
+		return
+
+	var animation := str(_sprite.animation)
+	var count := _sprite_frames.get_frame_count(_sprite.animation)
+	var frame_now := _sprite.frame
+	var changed := animation != _run_trace_previous_animation or frame_now != _run_trace_previous_frame
+	var jumped := false
+	var frame_interval_ms := -1.0
+	var now_us := Time.get_ticks_usec()
+	if (
+		changed
+		and animation == _run_trace_previous_animation
+		and _run_trace_previous_frame >= 0
+		and count > 0
+	):
+		jumped = frame_now != ((_run_trace_previous_frame + 1) % count)
+	if changed and _run_trace_last_frame_change_us > 0:
+		frame_interval_ms = float(now_us - _run_trace_last_frame_change_us) / 1000.0
+	if changed:
+		_run_trace_previous_animation = animation
+		_run_trace_previous_frame = frame_now
+		_run_trace_last_frame_change_us = now_us
+
+	var sample_interval_ms := -1.0
+	if _run_trace_last_sample_us > 0:
+		sample_interval_ms = float(now_us - _run_trace_last_sample_us) / 1000.0
+	_run_trace_last_sample_us = now_us
+
+	var viewport := get_viewport()
+	var screen_position := viewport.get_canvas_transform() * global_position
+	var camera := viewport.get_camera_2d()
+	var camera_center := camera.get_screen_center_position() if camera != null else Vector2.ZERO
+	var camera_target := camera.global_position if camera != null else Vector2.ZERO
+	var actor_velocity := source_actor.velocity if source_actor is CharacterBody2D else Vector2.ZERO
+
+	CombatTelemetry.record_event("akio_run_frame_sample", {
+		"semantic_state": _semantic_state,
+		"direction": _direction_name,
+		"animation": animation,
+		"frame": frame_now,
+		"frame_count": count,
+		"frame_progress": _sprite.frame_progress,
+		"sprite_fps": _sprite_frames.get_animation_speed(_sprite.animation),
+		"frame_changed": changed,
+		"frame_jumped": jumped,
+		"frame_interval_ms": frame_interval_ms,
+		"sample_interval_ms": sample_interval_ms,
+		"render_frame": Engine.get_frames_drawn(),
+		"physics_frame": Engine.get_physics_frames(),
+		"actor_x": source_actor.global_position.x,
+		"actor_y": source_actor.global_position.y,
+		"velocity_x": actor_velocity.x,
+		"velocity_y": actor_velocity.y,
+		"presenter_x": global_position.x,
+		"presenter_y": global_position.y,
+		"screen_x": screen_position.x,
+		"screen_y": screen_position.y,
+		"camera_target_x": camera_target.x,
+		"camera_target_y": camera_target.y,
+		"camera_center_x": camera_center.x,
+		"camera_center_y": camera_center.y,
+		"filter": _sprite.texture_filter,
+		"render_preset": _akio_render_test_applied,
 	})
 
 
