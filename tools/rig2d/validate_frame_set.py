@@ -78,6 +78,28 @@ def validate(manifest_path: Path, actor: str, source: Path, allow_unexpected: bo
         return errors
 
     expected_animations = {f"{base}_{direction}" for base in animation_bases for direction in directions}
+    frame_counts_raw = manifest.get("animation_frame_counts", {})
+    animation_frame_counts: dict[str, int] = {}
+    if frame_counts_raw:
+        if not isinstance(frame_counts_raw, dict):
+            errors.append("manifest animation_frame_counts must be an object when provided")
+            return errors
+        for base in animation_bases:
+            if base not in frame_counts_raw:
+                errors.append(f"manifest animation_frame_counts is missing base '{base}'")
+                continue
+            try:
+                expected_count = int(frame_counts_raw[base])
+            except (TypeError, ValueError):
+                errors.append(f"manifest animation_frame_counts['{base}'] must be an integer")
+                continue
+            if expected_count <= 0:
+                errors.append(f"manifest animation_frame_counts['{base}'] must be > 0")
+                continue
+            animation_frame_counts[base] = expected_count
+        if errors:
+            return errors
+
     discovered: dict[str, list[tuple[int, Path]]] = {}
 
     png_paths = sorted(path for path in source.iterdir() if path.is_file() and path.suffix.lower() == ".png")
@@ -127,6 +149,18 @@ def validate(manifest_path: Path, actor: str, source: Path, allow_unexpected: bo
             errors.append(
                 f"non-contiguous frames for {animation_name}: expected {expected_indices}, got {indices}"
             )
+            continue
+
+        if animation_frame_counts:
+            base = animation_name.rsplit("_", 1)[0]
+            expected_count = animation_frame_counts.get(base)
+            if expected_count is None:
+                errors.append(f"no frame-count contract for animation base '{base}'")
+                continue
+            if len(indices) != expected_count:
+                errors.append(
+                    f"wrong frame count for {animation_name}: expected {expected_count}, got {len(indices)}"
+                )
 
     return errors
 
