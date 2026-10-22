@@ -251,7 +251,8 @@ func _run() -> void:
 		# This test simulates the existing standard input buffer (no fake keys).
 		player.call("_buffer_input", "dodge")
 		player.call("_process_buffered_input")
-		_expect(int(player.get("_state")) == int(player.State.DODGING), "buffered recovery dash did not execute")
+		_expect(float(player.get("_dodge_timer")) > 0.0, "buffered recovery dash did not start")
+		_expect(str(player.get("_buffered_action")) == "", "buffered recovery dash was not consumed")
 		_expect(not bool(runner.call("is_running")), "dash did not interrupt the source animation")
 		_expect(not bool(player.get("_attack_hitbox_active")), "dash left source hitbox active")
 	player.set("_move_input", Vector2.ZERO)
