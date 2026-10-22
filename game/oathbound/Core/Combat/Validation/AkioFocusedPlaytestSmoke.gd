@@ -2,8 +2,11 @@ extends Node
 
 const PLAYER_SCENE: PackedScene = preload("res://Player/aspect_player.tscn")
 const SOURCE_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
+const TIMING = preload("res://Core/Combat/AkioCheckpointBTiming.gd")
 const NORMAL := "normal"
 const QUICK := "akio_checkpoint_b_quick_slash"
+const PROTOTYPE := "prototype"
+const HAMMER := "hammer_source_30fps"
 
 var _failures: Array[String] = []
 
@@ -17,13 +20,17 @@ func _run() -> void:
 		_failures.append("focused test harness must be exercised in a debug build")
 		_finish()
 		return
-	_expect(PlaytestLab.has_method("set_focused_test_scenario"), "PlaytestLab focused scenario setter is missing")
-	_expect(PlaytestLab.has_method("is_akio_quick_slash_focus_active"), "PlaytestLab focused scenario query is missing")
-	_expect(PlaytestLab.get_focused_test_scenario() == NORMAL, "normal combat is not the default")
-	_expect(is_equal_approx(float(SOURCE_PROFILE.get("default_fps")), 30.0), "Hammer source FPS contract changed")
 
-	var previous_aspect: String = str(AspectRuntime.selected_aspect)
-	var previous_tier: int = int(AspectRuntime.tier)
+	_expect(PlaytestLab.has_method("set_focused_test_scenario"), "PlaytestLab focused scenario setter is missing")
+	_expect(PlaytestLab.has_method("set_akio_quick_slash_timing_mode"), "PlaytestLab timing setter is missing")
+	_expect(PlaytestLab.get_focused_test_scenario() == NORMAL, "normal combat must be the default")
+	_expect(is_equal_approx(float(SOURCE_PROFILE.get("default_fps")), 30.0), "Hammer FPS contract changed")
+	_expect(TIMING.SOURCE_FRAME_COUNT == 41, "Hammer Quick Slash must contain 41 frames")
+	_expect(is_equal_approx(TIMING.SOURCE_TOTAL_DURATION, 41.0 / 30.0), "Hammer source duration mismatch")
+	_expect(TIMING.STARTUP_FRAMES + TIMING.ACTIVE_FRAMES + TIMING.RECOVERY_FRAMES == 41, "source phase counts do not total 41")
+
+	var old_aspect: String = str(AspectRuntime.selected_aspect)
+	var old_tier: int = int(AspectRuntime.tier)
 	AspectRuntime.selected_aspect = ""
 	AspectRuntime.tier = 0
 
@@ -32,35 +39,80 @@ func _run() -> void:
 	await get_tree().process_frame
 	player.set_physics_process(false)
 
+	# In normal gameplay the prototype authored profiles are unchanged, even if
+	# the focused timing dropdown happens to be set to Hammer.
+	player.call("_start_attack", 0)
+	_expect(not bool((player.get("_attack_profile") as Dictionary).get("checkpoint_b_source_timing", false)), "normal gameplay unexpectedly uses source timing")
+	_expect(is_equal_approx(float((player.get("_attack_profile") as Dictionary).get("duration", -1.0)), 0.36), "normal Quick Slash duration mutated")
+
+	# Focused original/prototype comparison must still be available.
 	PlaytestLab.set_focused_test_scenario(QUICK)
+	PlaytestLab.set_akio_quick_slash_timing_mode(PROTOTYPE)
 	_expect(PlaytestLab.is_akio_quick_slash_focus_active(), "focused Quick Slash mode not enabled")
+	_expect(not PlaytestLab.is_akio_source_gameplay_active(), "prototype unexpectedly uses Hammer timing")
 	player.call("_start_attack", 2)
-	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "quick_slash", "a heavy attack was selected while focused")
-	_expect(int(player.get("_combo_index")) == 0, "focused basic attack advanced combo index")
-	_expect(not bool(player.call("_can_queue_next_combo_attack")), "focused attack unexpectedly allows combo queue")
-	_expect(not bool(player.call("_can_queue_sword_branch")), "focused attack unexpectedly allows sword branch")
-
 	var current: Dictionary = player.get("_attack_profile") as Dictionary
-	_expect(is_equal_approx(float(current.get("duration", -1.0)), 0.36), "focused mode mutated authored Quick Slash duration")
-	_expect(is_equal_approx(float(current.get("startup", -1.0)), 0.055), "focused mode mutated authored Quick Slash startup")
-	_expect(is_equal_approx(float(current.get("active", -1.0)), 0.075), "focused mode mutated authored Quick Slash active hit window")
+	_expect(str(current.get("id", "")) == "quick_slash", "focused mode selected Heavy Cleave")
+	_expect(int(player.get("_combo_index")) == 0, "focused attack advanced combo index")
+	_expect(not bool(player.call("_can_queue_next_combo_attack")), "focused mode allowed combo queue")
+	_expect(not bool(player.call("_can_queue_sword_branch")), "focused mode allowed thrust branch")
+	_expect(is_equal_approx(float(current.get("duration", -1.0)), 0.36), "prototype Quick Slash duration changed")
+	_expect(is_equal_approx(float(current.get("startup", -1.0)), 0.055), "prototype Quick Slash startup changed")
+	_expect(is_equal_approx(float(current.get("active", -1.0)), 0.075), "prototype Quick Slash hitbox timing changed")
 
+	# Focused Hammer timing: use the actual 41-frame/30fps cadence in gameplay.
+	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
+	_expect(PlaytestLab.is_akio_source_gameplay_active(), "Hammer source gameplay mode not active")
+	player.call("_start_attack", 0)
+	current = player.get("_attack_profile") as Dictionary
+	_expect(bool(current.get("checkpoint_b_source_timing", false)), "Hammer profile marker missing")
+	_expect(is_equal_approx(float(current.get("duration", -1.0)), TIMING.STARTUP_DURATION + TIMING.ACTIVE_DURATION), "Hammer attack-state duration mismatch")
+	_expect(is_equal_approx(float(current.get("startup", -1.0)), TIMING.STARTUP_DURATION), "Hammer startup mismatch")
+	_expect(is_equal_approx(float(current.get("active", -1.0)), TIMING.ACTIVE_DURATION), "Hammer active window mismatch")
+	_expect(is_equal_approx(float(current.get("recovery", -1.0)), TIMING.RECOVERY_DURATION), "Hammer recovery mismatch")
+	_expect(is_equal_approx(float(current.get("duration", 0.0)) + float(current.get("recovery", 0.0)), TIMING.SOURCE_TOTAL_DURATION), "full gameplay lifecycle must equal 41 source frames")
+	_expect(not bool(player.call("_can_start_dodge")), "early committed windup allowed a dash")
+	_expect(not bool(player.call("_can_start_parry")), "early committed windup allowed a parry")
+
+	var runner_value: Variant = player.get("_v2_player_action_runner")
+	if runner_value is Node and is_instance_valid(runner_value):
+		var runner := runner_value as Node
+		_expect(is_equal_approx(float(runner.call("action_duration")), TIMING.SOURCE_TOTAL_DURATION), "runner/source durations diverge")
+		player.call("_end_attack")
+		_expect(bool(runner.call("is_running")), "runner ended before recoverable source frames")
+		_expect(not bool(player.get("_attack_hitbox_active")), "hitbox stayed active entering source recovery")
+		_expect(bool(player.call("_can_start_dodge")), "dash unavailable in Hammer recovery")
+		_expect(bool(player.call("_can_start_parry")), "parry unavailable in Hammer recovery")
+		var before := float(runner.get("action_elapsed"))
+		player.call("_state_attack_recovery", 0.10)
+		_expect(float(runner.get("action_elapsed")) > before + 0.09, "source animation clock froze in recovery")
+		_expect(bool(runner.call("is_running")), "runner ended early during source recovery")
+		player.call("_start_dodge")
+		_expect(not bool(runner.call("is_running")), "dash did not interrupt the source animation")
+		_expect(not bool(player.get("_attack_hitbox_active")), "dash left source hitbox active")
+	else:
+		_failures.append("CombatActionRunner was not attached to focused player")
+
+	# Tap and hold still resolve exclusively to Quick Slash, regardless of cadence.
 	player.call("_start_tap_attack_from_hold")
-	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "quick_slash", "tap attack was not isolated")
+	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "quick_slash", "tap escaped Quick Slash isolation")
 	player.call("_start_thrust")
-	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "quick_slash", "hold release escaped Quick Slash isolation")
+	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "quick_slash", "hold escaped Quick Slash isolation")
 
+	# Return to the normal three-hit profiles; no global authoring changes.
 	PlaytestLab.set_focused_test_scenario(NORMAL)
-	_expect(not PlaytestLab.is_akio_quick_slash_focus_active(), "focus mode still active after disabling")
+	_expect(not PlaytestLab.is_akio_quick_slash_focus_active(), "focus mode failed to turn off")
 	player.call("_start_attack", 1)
-	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "cross_cut", "normal Cross Cut was not restored")
-	_expect(int(player.get("_combo_index")) == 1, "normal combo index did not restore")
+	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "cross_cut", "normal Cross Cut missing")
+	_expect(int(player.get("_combo_index")) == 1, "normal combo index missing")
 	player.call("_start_attack", 2)
-	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "heavy_cleave", "normal Heavy Cleave was not restored")
+	_expect(str((player.get("_attack_profile") as Dictionary).get("id", "")) == "heavy_cleave", "normal Heavy Cleave missing")
+	player.call("_start_attack", 0)
+	_expect(is_equal_approx(float((player.get("_attack_profile") as Dictionary).get("duration", -1.0)), 0.36), "normal Quick Slash lost original duration")
 
 	player.queue_free()
-	AspectRuntime.selected_aspect = previous_aspect
-	AspectRuntime.tier = previous_tier
+	AspectRuntime.selected_aspect = old_aspect
+	AspectRuntime.tier = old_tier
 	_finish()
 
 
@@ -71,8 +123,9 @@ func _expect(condition: bool, message: String) -> void:
 
 func _finish() -> void:
 	PlaytestLab.set_focused_test_scenario(NORMAL)
+	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - isolation | normal combo restoration | unchanged combat timings | source 30 FPS")
+		print("[AkioFocusedPlaytestSmoke] PASS - prototype restoration | 41-frame Hammer gameplay | recovery dash/parry cancel | preserved normal combos")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:
