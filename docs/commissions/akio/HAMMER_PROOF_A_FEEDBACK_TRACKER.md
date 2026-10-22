@@ -18,7 +18,7 @@ topics:
 
 **Purpose:** Living internal working record of observed in-game animation problems, positives, questions to ask Hammer, and artist-dependent improvements. Use this to prepare *one* clear, prioritized feedback message. **This file has not been sent to Hammer; entries are not automatic change orders, approved extra scope, or final acceptance/rejection.**
 
-**Status:** Feedback collecting; **hold contacting Hammer until the updated 30 FPS live-gameplay branch is playtested**. Repeated re-sheathing is the current leading artist-feedback candidate, not a finalized request.  
+**Status:** Live 30 FPS Quick Slash gameplay verified on 2026-10-22. **Sheathing feedback is now ready for owner review before contacting Hammer.** Full combo and final attack-speed decisions remain pending future matching animations; no new art scope has been approved.  
 **Working game branch:** \`agent/akio-checkpoint-b-playtest\`.  
 **Naming caution:** "Checkpoint B" is the current game/playtest asset and branch label. The repository's commission brief calls the first three **Proof A animations** the **Milestone 1 / Checkpoint C** animation deliverable, after Checkpoint B's 3D source handoff. Do not confuse the debug label with the contractual milestone name.
 
@@ -33,7 +33,7 @@ topics:
 
 | ID | Observation | Status / implication |
 |---|---|---|
-| HP-01 | The **source preview** of Quick Slash at 30 FPS looks better than the original accelerated gameplay clip. Full sequence has **41 frames (~1.37 s)**. | **Observed by project owner in the paused/source examples only.** **Hammer's real 30 FPS timing has NOT yet been verified during actual combat.** Preserve the source for the next test. |
+| HP-01 | The **actual in-game** Quick Slash at Hammer's 30 FPS looks significantly better than the sped-up prototype. Full source is **41 frames (~1.37 s)**. | **Confirmed by owner during 2026-10-22 live combat playtest** and supported by 22 Hammer-mode attack traces. Preserve source pacing as a useful reference; **do not lock final combat speed** until the drawn-sword flow and other combo attacks exist. |
 | HP-02 | The fast initial draw/unsheathe portion is acceptable; the complaint is **not** that the sword needs to be drawn more slowly. | **Observed by project owner.** Do not inadvertently slow or exaggerate the initial unsheathe. |
 | HP-03 | Initial in-game integration confirms the source can be rendered/played in eight directions. | **Technically integrated, not a final art-quality approval.** Judge animation quality at real gameplay scale. |
 
@@ -41,7 +41,7 @@ topics:
 
 | ID | Priority | Finding / desired outcome | Status |
 |---|---|---|---|
-| HA-01 | **P0 — feedback candidate after live validation** | **Repeated sheathing after every Quick Slash looks unnatural** during rapid attacks and would be especially conspicuous between hits of the future three-hit combo. Aim for a sword that stays out during active combat, with deliberate sheathing only when appropriate. | **Confirmed in playtest; solution pending artist discussion.** |
+| HA-01 | **P0 — ready for owner-reviewed Hammer discussion** | **Repeated sheathing after every Quick Slash looks unnatural** during rapid attacks and would be especially conspicuous between hits of the future three-hit combo. Aim for a sword that stays out during active combat, with deliberate sheathing only when appropriate. | **Confirmed in playtest; solution pending artist discussion.** |
 | HA-02 | P0 dependency | Current **Idle and Move/Run source poses also show the sword sheathed**. Trimming the tail of Quick Slash alone would cause the weapon to snap back into its sheath on movement/idle transitions. Any sword-out solution needs coherent resting/moving poses or an artist-supported transition approach. | **Confirmed by frame inspection; discuss minimal viable art package.** |
 | HA-03 | P1 | Ask whether Hammer can **separate the existing draw/strike/sheath material** into editable Actions or variations using his existing Blender rig and keys. Preserve the source full-sequence Action. | **Proposal / feasibility question; not commissioned yet.** |
 | HA-04 | P1 | Explore a **drawn-sword Quick Slash** ending in a ready posture instead of sheathing, plus **combat-ready Idle** and **combat-ready Move/Run**. A separate **sheath transition** can follow later after combat stops. | **Candidate design / new-scope discussion, not approved deliverables.** |
@@ -67,6 +67,12 @@ topics:
 
 **Important alternative to ask about:** If Hammer can reuse a convincing partial drawn-sword segment plus a ready pose with little added work, compare that solution against commissioning full new loops. **Do not assume a frame-range cut alone is production-ready**, since movement transitions also have to agree.
 
+## Latest live-playtest interpretation (2026-10-22)
+
+The 30 FPS source is now playing correctly in real combat, not just the paused preview. **Do not ask Hammer to shorten Quick Slash based on one isolated repeatable attack.** Because the current isolation blocks Cross Cut / Heavy Cleave, full-combo flow and final attack commitment have **not** been evaluated. Seven uninterrupted attacks displayed all 41 source frames; eight were successfully dash-canceled during recovery. What remains artist-facing is the embedded **sheathing after each Quick Slash** and the need for compatible sword-drawn states across future combo art.
+
+**Feedback order:** (1) present the sheathing problem with a representative live gameplay clip, (2) ask Hammer for a minimal coherent approach to drawing / keeping sword out / sheathing only after combat, (3) confirm whether separate source Actions and Idle/Move poses are revisions or new scope, and (4) plan the Cross Cut / Heavy Cleave animation stage before locking speed and cancels. Avoid presenting the current ~1.37-second action commitment as a final gameplay requirement.
+
 ## Questions to send Hammer
 
 - Would you agree that repeating the complete draw → cut → sheath cycle for every basic attack will feel unnatural once Akio chains strikes?
@@ -87,10 +93,10 @@ topics:
 
 | Date | Item | Outcome / next step |
 |---|---|---|
-| 2026-10-22 | Source-preview 30 FPS versus original gameplay speed | User prefers Hammer's pacing **in the preview/examples**; actual live 30 FPS combat **has not yet been witnessed or confirmed**. Next step is a fresh playtest of the updated branch. |
-| 2026-10-22 | Repeated sheathing between attacks | User flagged as awkward; retain as leading artist-feedback candidate, but **do not send yet**. Re-evaluate after proper 30 FPS live combat testing. |
+| 2026-10-22 | **Actual gameplay** 30 FPS versus accelerated prototype | Owner confirms 30 FPS Quick Slash is visually much better. Of 22 instrumented Quick Slashes, 7 ran to full 41-frame completion; 8 were dash-canceled during recovery and 7 were interrupted by enemy damage. Full combo pacing **cannot yet be judged**. |
+| 2026-10-22 | Repeated sheathing between attacks | **Reconfirmed during full-speed live combat:** full draw–slash–sheath as a repeatable basic attack feels unnecessarily committed. **Prioritize discussion with Hammer** about keeping the blade drawn through combinations and aligning future Idle/Run. Owner must approve the message before sending. |
 | 2026-10-22 | Scope, exact Action split, additions and revisions | **Pending discussion with Hammer**, no quote or change order recorded. |
-| — | Live 30 FPS gameplay checked against logs and actual animation | **Not yet tested by project owner on the corrected branch.** |
+| 2026-10-22 | Live 30 FPS gameplay checked against logs and actual animation | **Verified on updated branch** in local Godot log `godot(20261022-173048).log` and combat telemetry `combat_1792689985.jsonl`; no gameplay timing bug reproduced. |
 | — | Message sent / Hammer response | **Not yet recorded.** |
 | — | Revision approved / assets delivered / accepted | **Not yet recorded.** |
 
