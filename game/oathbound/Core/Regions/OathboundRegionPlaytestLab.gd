@@ -45,6 +45,8 @@ const AKIO_RENDER_MIPMAPPED_RUN: String = "mipmapped_run"
 # jitter; IDLE+ON is the faulty legacy combination. The corrected default
 # PHYSICS+ON is authoritative in CameraFollow.gd, not this diagnostic menu.
 # Keep the two old configurations for a focused regression comparison.
+const AKIO_RUN_BLEND_ON: String = "blend"
+const AKIO_RUN_BLEND_OFF: String = "off"
 const AKIO_SYNC_BASELINE: String = "baseline"
 const AKIO_SYNC_POSE_LOCK: String = "pose_lock"
 const AKIO_SYNC_LEGACY_IDLE_SMOOTHING: String = "legacy_idle_smoothing"
@@ -70,6 +72,9 @@ var _quick_slash_timing_mode: String = QUICK_TIMING_HAMMER
 var _quick_slash_timing_dropdown: OptionButton
 var _akio_render_preset: String = AKIO_RENDER_BASELINE
 var _akio_render_dropdown: OptionButton
+# Session-only, visual-only A/B. Blend adjacent source poses at game render FPS.
+var _akio_run_blend_mode: String = AKIO_RUN_BLEND_ON
+var _akio_run_blend_dropdown: OptionButton
 var _akio_sync_test_mode: String = AKIO_SYNC_BASELINE
 var _akio_sync_dropdown: OptionButton
 # Session-only generated GPU mipmaps; no PNGs or other files are written.
@@ -659,6 +664,26 @@ func get_akio_mipmapped_run_frames(original: SpriteFrames) -> SpriteFrames:
 	return result
 
 
+# Independent 30-FPS source Run smoothing A/B; never changes sprite index,
+# movement speed, camera, source PNGs, or attack animations.
+func get_akio_run_blend_mode() -> String:
+	return _akio_run_blend_mode if OS.is_debug_build() else AKIO_RUN_BLEND_ON
+
+
+func set_akio_run_blend_mode(mode: String) -> void:
+	if not OS.is_debug_build():
+		return
+	var selected := AKIO_RUN_BLEND_OFF if mode == AKIO_RUN_BLEND_OFF else AKIO_RUN_BLEND_ON
+	if _akio_run_blend_mode == selected:
+		return
+	_akio_run_blend_mode = selected
+	if _akio_run_blend_dropdown != null:
+		_akio_run_blend_dropdown.select(0 if selected == AKIO_RUN_BLEND_ON else 1)
+	print("[AkioRunBlend] mode=%s; source frame indices/30 FPS unchanged" % selected)
+	if typeof(CombatTelemetry) == TYPE_OBJECT and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("akio_run_blend_mode", {"mode": selected})
+
+
 # Camera/animation synchronization experiment is independent of old filter tests.
 func get_akio_run_sync_test_mode() -> String:
 	return _akio_sync_test_mode if OS.is_debug_build() else AKIO_SYNC_BASELINE
@@ -860,6 +885,19 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	render_note.text = "Preset 6 generates true Run mipmaps once in memory. The first switch may briefly pause; judge steady motion, not startup. Restore Baseline when finished."
 	render_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(render_note)
+
+	var run_blend_label := Label.new()
+	run_blend_label.text = "Akio Run: visual frame interpolation (30-FPS sprites unchanged)"
+	run_blend_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	vbox.add_child(run_blend_label)
+	_akio_run_blend_dropdown = OptionButton.new()
+	_akio_run_blend_dropdown.add_item("Smooth: blend between neighboring Run frames")
+	_akio_run_blend_dropdown.add_item("Original: hold each Run frame until next")
+	_akio_run_blend_dropdown.select(0 if _akio_run_blend_mode == AKIO_RUN_BLEND_ON else 1)
+	_akio_run_blend_dropdown.item_selected.connect(func(index: int) -> void:
+		set_akio_run_blend_mode(AKIO_RUN_BLEND_ON if index == 0 else AKIO_RUN_BLEND_OFF)
+	)
+	vbox.add_child(_akio_run_blend_dropdown)
 
 	var sync_separator := HSeparator.new()
 	vbox.add_child(sync_separator)

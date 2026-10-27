@@ -27,6 +27,7 @@ func _run() -> void:
 	_expect(PlaytestLab.has_method("get_akio_mipmapped_run_frames"), "Run mipmap generator missing")
 	_expect(PlaytestLab.has_method("set_akio_run_sync_test_mode"), "Run sync mode setter missing")
 	_expect(PlaytestLab.get_akio_run_sync_test_mode() == "baseline", "Run sync baseline must be default")
+	_expect(PlaytestLab.get_akio_run_blend_mode() == "blend", "Run frame interpolation should be enabled for V2 A/B")
 	_expect(PlaytestLab.has_method("arm_akio_run_trace"), "Run frame/camera trace arming control missing")
 	_expect(PlaytestLab.has_method("is_akio_run_trace_active"), "Run frame/camera trace status control missing")
 	_expect(PlaytestLab.has_method("export_akio_run_contact_sheets"), "Run indexed contact-sheet generator missing")
@@ -151,8 +152,37 @@ func _run() -> void:
 			"Run frame-cycle truncated at step %d: displayed %d instead of %d" % [
 				run_step, int(run_frame_state.get("sprite_frame", -1)), run_step % 16])
 		_expect(not bool(run_frame_state.get("sprite_playing", true)), "source Run must be phase sampled, not autonomously restarted")
+	# Source frames remain 0..15, and interpolation only adds an in-between
+	# visual. Test both visual modes and the wrap from frame 15 -> 0.
 	player.velocity = Vector2.ZERO
 	presenter.call("sync_from_source", 0.0)
+	player.velocity = Vector2(200.0, 0.0)
+	presenter.call("sync_from_source", 0.0)
+	presenter.call("sync_from_source", 1.0 / 60.0)
+	var blend_state: Dictionary = presenter.call("get_presentation_state_for_test")
+	_expect(int(blend_state.get("sprite_frame", -1)) == 0, "half-frame blend changed source index")
+	_expect(bool(blend_state.get("run_blend_active", false)), "Run interpolation missing at half frame")
+	_expect(int(blend_state.get("run_blend_next_frame", -1)) == 1, "Run interpolation next frame should be 1")
+	_expect(is_equal_approx(float(blend_state.get("run_blend_weight", 0.0)), 0.5), "Run interpolation alpha should be one half")
+	# Frame 15 must blend into frame 0 at the full gait loop boundary.
+	presenter.set("_akio_run_source_phase", 15.5)
+	presenter.call("sync_from_source", 0.0)
+	blend_state = presenter.call("get_presentation_state_for_test")
+	_expect(int(blend_state.get("sprite_frame", -1)) == 15, "Run closing frame must remain 15")
+	_expect(int(blend_state.get("run_blend_next_frame", -1)) == 0, "Run closing frame must blend into frame 0")
+	_expect(is_equal_approx(float(blend_state.get("run_blend_weight", 0.0)), 0.5), "Run closing frame blend weight drifted")
+	PlaytestLab.set_akio_run_blend_mode("off")
+	presenter.call("sync_from_source", 1.0 / 120.0)
+	blend_state = presenter.call("get_presentation_state_for_test")
+	_expect(not bool(blend_state.get("run_blend_active", true)), "Original Run mode must disable interpolation")
+	PlaytestLab.set_akio_run_blend_mode("blend")
+	presenter.call("sync_from_source", 0.0)
+	blend_state = presenter.call("get_presentation_state_for_test")
+	_expect(bool(blend_state.get("run_blend_active", false)), "Restoring blend mode did not show interpolation")
+	player.velocity = Vector2.ZERO
+	presenter.call("sync_from_source", 0.0)
+	blend_state = presenter.call("get_presentation_state_for_test")
+	_expect(not bool(blend_state.get("run_blend_active", true)), "Run overlay leaked into Idle")
 
 	# Owner-confirmed corrective baseline must be PHYSICS+ON. Retain a debug-only
 	# exact reproduction of the old IDLE+ON jitter and the IDLE+OFF workaround.

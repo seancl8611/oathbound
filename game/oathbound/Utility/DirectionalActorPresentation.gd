@@ -65,6 +65,11 @@ var _run_trace_last_frame_change_us: int = 0
 # truncating the 16-frame gait cycle. One cycle = 16 / 30 seconds.
 var _akio_run_source_phase: float = 0.0
 var _akio_run_source_active: bool = false
+# Render-only interpolation between adjacent commissioned PNGs. The source
+# animation clock and gameplay movement remain authoritative and unchanged.
+var _akio_run_blend_overlay: Sprite2D = null
+var _akio_run_blend_next_frame: int = -1
+var _akio_run_blend_weight: float = 0.0
 var _run_trace_last_sample_us: int = 0
 
 
@@ -77,6 +82,13 @@ func _ready() -> void:
 	_sprite.flip_h = false
 	_sprite.set_meta(KEEP_WITH_REPLACEMENT_META, true)
 	add_child(_sprite)
+	_akio_run_blend_overlay = Sprite2D.new()
+	_akio_run_blend_overlay.name = "AkioRunFrameBlend"
+	_akio_run_blend_overlay.centered = false
+	_akio_run_blend_overlay.position = Vector2.ZERO
+	_akio_run_blend_overlay.texture_filter = CanvasItem.TEXTURE_FILTER_PARENT_NODE
+	_akio_run_blend_overlay.visible = false
+	_sprite.add_child(_akio_run_blend_overlay)
 	_apply_profile_settings()
 	_apply_counter_projection()
 	queue_redraw()
@@ -331,6 +343,7 @@ func _apply_akio_run_pose_lock() -> void:
 		# set_frame would be undone by the sprite's next internal update.
 		_sprite.pause()
 		_sprite.set_frame_and_progress(4, 0.0)
+		_clear_akio_run_blend()
 
 
 func _apply_counter_projection() -> void:
@@ -410,6 +423,7 @@ func _sample_akio_source_run(delta: float) -> void:
 	):
 		_akio_run_source_active = false
 		_akio_run_source_phase = 0.0
+		_clear_akio_run_blend()
 		return
 
 	var count := _sprite_frames.get_frame_count(_sprite.animation)
@@ -430,6 +444,39 @@ func _sample_akio_source_run(delta: float) -> void:
 	var subframe := clampf(phase - floor(phase), 0.0, 1.0)
 	_sprite.pause()
 	_sprite.set_frame_and_progress(source_frame, subframe)
+	# Source PNG playback is inherently stepped (one still every 33.3 ms).
+	# Blend only the visual between adjacent frames, including 15 -> 0.
+	# This approximates the in-between motion Blender can show natively.
+	var mode := "blend"
+	if typeof(PlaytestLab) == TYPE_OBJECT and PlaytestLab.has_method("get_akio_run_blend_mode"):
+		mode = str(PlaytestLab.get_akio_run_blend_mode())
+	if mode != "blend" or _akio_run_blend_overlay == null or subframe <= 0.001:
+		_clear_akio_run_blend()
+		return
+	var next_index := (source_frame + 1) % count
+	var next_texture: Texture2D = _sprite_frames.get_frame_texture(_sprite.animation, next_index)
+	if next_texture == null:
+		_clear_akio_run_blend()
+		return
+	# Two 512px textures share the same registered foot anchor. self_modulate
+	# affects only the current image (not its child overlay), so alphas sum to 1.
+	var blend_weight := clampf(subframe, 0.0, 1.0)
+	_sprite.self_modulate.a = 1.0 - blend_weight
+	_akio_run_blend_overlay.texture = next_texture
+	_akio_run_blend_overlay.modulate.a = blend_weight
+	_akio_run_blend_overlay.visible = true
+	_akio_run_blend_next_frame = next_index
+	_akio_run_blend_weight = blend_weight
+
+
+func _clear_akio_run_blend() -> void:
+	if _sprite != null:
+		_sprite.self_modulate.a = 1.0
+	if _akio_run_blend_overlay != null:
+		_akio_run_blend_overlay.visible = false
+		_akio_run_blend_overlay.texture = null
+	_akio_run_blend_next_frame = -1
+	_akio_run_blend_weight = 0.0
 
 
 func _should_preserve_loop_phase(previous_animation: StringName, desired_animation: StringName) -> bool:
@@ -858,6 +905,9 @@ func get_presentation_state_for_test() -> Dictionary:
 		"sprite_frame": _sprite.frame if _sprite != null else -1,
 		"sprite_playing": _sprite.is_playing() if _sprite != null else false,
 		"sprite_frame_progress": _sprite.frame_progress if _sprite != null else 0.0,
+		"run_blend_active": _akio_run_blend_overlay != null and _akio_run_blend_overlay.visible,
+		"run_blend_next_frame": _akio_run_blend_next_frame,
+		"run_blend_weight": _akio_run_blend_weight,
 		"atlas_active": _sprite != null and _sprite.visible and _sprite_frames != null,
 		"placeholder_active": use_placeholder_when_atlas_missing and (_sprite == null or not _sprite.visible),
 	}
