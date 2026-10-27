@@ -34,9 +34,9 @@ func _run() -> void:
 	_expect(PlaytestLab.get_akio_render_test_preset() == "baseline", "Akio render comparison must default to the unmodified baseline")
 	_expect(PlaytestLab.get_focused_test_scenario() == NORMAL, "normal combat must be the default")
 	_expect(is_equal_approx(float(SOURCE_PROFILE.get("default_fps")), 30.0), "Hammer FPS contract changed")
-	_expect(TIMING.SOURCE_FRAME_COUNT == 41, "Hammer Quick Slash must contain 41 frames")
-	_expect(is_equal_approx(TIMING.SOURCE_TOTAL_DURATION, 41.0 / 30.0), "Hammer source duration mismatch")
-	_expect(TIMING.STARTUP_FRAMES + TIMING.ACTIVE_FRAMES + TIMING.RECOVERY_FRAMES == 41, "source phase counts do not total 41")
+	_expect(TIMING.SOURCE_FRAME_COUNT == 40, "Hammer Quick Slash must contain 40 frames")
+	_expect(is_equal_approx(TIMING.SOURCE_TOTAL_DURATION, 40.0 / 30.0), "Hammer source duration mismatch")
+	_expect(TIMING.STARTUP_FRAMES + TIMING.ACTIVE_FRAMES + TIMING.RECOVERY_FRAMES == 40, "source phase counts do not total 41")
 
 	var old_aspect: String = str(AspectRuntime.selected_aspect)
 	var old_tier: int = int(AspectRuntime.tier)
@@ -205,7 +205,7 @@ func _run() -> void:
 	_expect(is_equal_approx(float(current.get("active", -1.0)), 0.075), "prototype Quick Slash hitbox timing changed")
 	_expect(float(current.get("v2_startup_locomotion_weight", 0.0)) > 0.0, "prototype Quick Slash movement policy changed")
 
-	# Focused Hammer timing: use the actual 41-frame/30fps cadence in gameplay.
+	# Focused Hammer timing: use the actual 40-frame/30fps cadence in gameplay.
 	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
 	_expect(PlaytestLab.is_akio_source_gameplay_active(), "Hammer source gameplay mode not active")
 	player.call("_start_attack", 0)
@@ -215,7 +215,7 @@ func _run() -> void:
 	_expect(is_equal_approx(float(current.get("startup", -1.0)), TIMING.STARTUP_DURATION), "Hammer startup mismatch")
 	_expect(is_equal_approx(float(current.get("active", -1.0)), TIMING.ACTIVE_DURATION), "Hammer active window mismatch")
 	_expect(is_equal_approx(float(current.get("recovery", -1.0)), TIMING.RECOVERY_DURATION), "Hammer recovery mismatch")
-	_expect(is_equal_approx(float(current.get("duration", 0.0)) + float(current.get("recovery", 0.0)), TIMING.SOURCE_TOTAL_DURATION), "full gameplay lifecycle must equal 41 source frames")
+	_expect(is_equal_approx(float(current.get("duration", 0.0)) + float(current.get("recovery", 0.0)), TIMING.SOURCE_TOTAL_DURATION), "full gameplay lifecycle must equal 40 source frames")
 	# No free skating for the full Hammer draw-strike-sheathe sequence; do not
 	# change motion for prototype, dash, Blood Aspects or any other attacks.
 	for key: String in [

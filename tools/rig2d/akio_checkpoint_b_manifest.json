@@ -95,13 +95,14 @@
     "Hammer Checkpoint B in-game integration only: Idle, Move / Combat Run, and Quick Slash.",
     "Uses the delivered 512x512 clean-prerender frame set without a pixel-art treatment.",
     "Idle and Move preserve the authored 30 fps source cadence; attacks remain sampled from authoritative gameplay progress.",
-    "Authoritative Blender export audit resolves runtime counts to Idle=40, Move=16, Quick Slash=41 per direction; looping closure endpoints are omitted only when they duplicate the start pose.",
+    "Authoritative Blender export audit resolves runtime counts to Idle=40, Move=16, Quick Slash=40 per direction; looping closure endpoints are omitted only when they duplicate the start pose.",
     "The fixed registration point is the center of Hammer's render canvas at (256, 256).",
-    "This checkpoint profile is separate from the older 128x128 Proof A placeholder contract."
+    "This checkpoint profile is separate from the older 128x128 Proof A placeholder contract.",
+    "Hammer revision V2: 40 Idle / 16 Move / 40 Quick Slash per direction = 768 frames; calibrated eight-direction camera yaw labels after a +135-degree raw-export discrepancy."
   ],
   "animation_frame_counts": {
     "idle": 40,
     "move": 16,
-    "attack_quick_slash": 41
+    "attack_quick_slash": 40
   }
 }
