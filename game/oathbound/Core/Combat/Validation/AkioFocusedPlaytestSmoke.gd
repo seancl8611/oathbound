@@ -135,6 +135,25 @@ func _run() -> void:
 	_expect(not bool(visual_state.get("render_mipmaps_active", false)), "baseline retained generated Run mipmaps")
 	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "reset-to-baseline retained pixel snapping")
 
+
+	# Regression: all 16 commissioned Run frames must play in order over two
+	# uninterrupted loops, not truncate after the first few frames. This checks
+	# live presenter frame selection rather than merely counting SpriteFrames.
+	PlaytestLab.set_akio_run_sync_test_mode("baseline")
+	player.velocity = Vector2(200.0, 0.0)
+	presenter.call("sync_from_source", 0.0)
+	for run_step: int in range(32):
+		if run_step > 0:
+			presenter.call("sync_from_source", 1.0 / 30.0)
+		var run_frame_state: Dictionary = presenter.call("get_presentation_state_for_test")
+		_expect(str(run_frame_state.get("resolved_animation", "")) == "move_e", "Run frame-cycle test lost East-facing move")
+		_expect(int(run_frame_state.get("sprite_frame", -1)) == run_step % 16,
+			"Run frame-cycle truncated at step %d: displayed %d instead of %d" % [
+				run_step, int(run_frame_state.get("sprite_frame", -1)), run_step % 16])
+		_expect(not bool(run_frame_state.get("sprite_playing", true)), "source Run must be phase sampled, not autonomously restarted")
+	player.velocity = Vector2.ZERO
+	presenter.call("sync_from_source", 0.0)
+
 	# Owner-confirmed corrective baseline must be PHYSICS+ON. Retain a debug-only
 	# exact reproduction of the old IDLE+ON jitter and the IDLE+OFF workaround.
 	# Frame lock must change only the displayed pose during locomotion.

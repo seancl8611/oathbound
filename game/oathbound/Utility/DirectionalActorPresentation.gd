@@ -59,6 +59,12 @@ var _akio_render_mipmaps_active: bool = false
 var _run_trace_previous_animation: String = ""
 var _run_trace_previous_frame: int = -1
 var _run_trace_last_frame_change_us: int = 0
+
+# Hammer Checkpoint B Run uses an explicit source-frame clock. This prevents
+# AnimatedSprite2D.play() restarts or directional animation switches from
+# truncating the 16-frame gait cycle. One cycle = 16 / 30 seconds.
+var _akio_run_source_phase: float = 0.0
+var _akio_run_source_active: bool = false
 var _run_trace_last_sample_us: int = 0
 
 
@@ -162,6 +168,7 @@ func _sync_from_source(_delta: float) -> void:
 	z_index = clampi(1000 + int(round(source_actor.global_position.y)), -4095, 4095)
 	_apply_counter_projection()
 	_sync_atlas_animation(false)
+	_sample_akio_source_run(_delta)
 	_apply_akio_run_pose_lock()
 
 	var signature := "%s|%s|%s|%.3f" % [_semantic_state, _direction_name, _action_id, visual_scale]
@@ -364,7 +371,10 @@ func _sync_atlas_animation(force_restart: bool) -> void:
 		_sample_animation(desired, _authoritative_progress)
 		return
 
-	if force_restart or _sprite.animation != desired or not _sprite.is_playing():
+	var is_source_run := _is_akio_source_run(desired)
+	# The explicit Run clock intentionally pauses AnimatedSprite2D. Do not
+	# treat that pause as a reason to restart the animation every render tick.
+	if force_restart or _sprite.animation != desired or (not _sprite.is_playing() and not is_source_run):
 		var previous_animation := _sprite.animation
 		var previous_frame := _sprite.frame
 		var previous_progress := _sprite.frame_progress
@@ -376,6 +386,50 @@ func _sync_atlas_animation(force_restart: bool) -> void:
 		_sprite.play(desired)
 		if preserve_loop_phase:
 			_restore_loop_phase(desired, previous_animation, previous_frame, previous_progress)
+
+
+
+func _is_akio_source_run(animation_name: StringName) -> bool:
+	return (
+		actor_role == "player"
+		and str(_profile_value("profile_id", "")) == "akio_checkpoint_b"
+		and _sprite_frames != null
+		and str(animation_name).begins_with("move_")
+		and _sprite_frames.has_animation(animation_name)
+		and _sprite_frames.get_animation_loop(animation_name)
+		and _sprite_frames.get_frame_count(animation_name) == 16
+	)
+
+
+func _sample_akio_source_run(delta: float) -> void:
+	if (
+		_semantic_state != "move"
+		or _sprite == null
+		or not _sprite.visible
+		or not _is_akio_source_run(_sprite.animation)
+	):
+		_akio_run_source_active = false
+		_akio_run_source_phase = 0.0
+		return
+
+	var count := _sprite_frames.get_frame_count(_sprite.animation)
+	var fps := maxf(1.0, _sprite_frames.get_animation_speed(_sprite.animation))
+	if not _akio_run_source_active:
+		_akio_run_source_phase = 0.0
+		_akio_run_source_active = true
+	else:
+		_akio_run_source_phase = fposmod(
+			_akio_run_source_phase + maxf(0.0, delta) * fps,
+			float(count)
+		)
+	# Choose every source frame exactly once per frame interval at steady 30 FPS.
+	# Keep this clock across direction changes so turning does not restart Run.
+	# A tiny epsilon prevents 0.999999 floating-point error at 1/30-sec steps.
+	var phase := _akio_run_source_phase
+	var source_frame := clampi(int(floor(phase + 0.000001)), 0, count - 1)
+	var subframe := clampf(phase - floor(phase), 0.0, 1.0)
+	_sprite.pause()
+	_sprite.set_frame_and_progress(source_frame, subframe)
 
 
 func _should_preserve_loop_phase(previous_animation: StringName, desired_animation: StringName) -> bool:
