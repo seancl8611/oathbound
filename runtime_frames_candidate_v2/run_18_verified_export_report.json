@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "source": "C:\\Users\\seanc\\OneDrive\\Desktop\\working\\akio_blockout.blend",
+  "source_sha256": "2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a",
+  "blender_version": [
+    5,
+    2,
+    2
+  ],
+  "original_action_range": [
+    0.0,
+    16.0
+  ],
+  "action_keyframes": {
+    "0.0": 138,
+    "2.0": 104,
+    "4.0": 101,
+    "6.0": 101,
+    "8.0": 213,
+    "9.0": 775,
+    "10.0": 213,
+    "11.0": 759,
+    "12.0": 213,
+    "13.0": 753,
+    "14.0": 213,
+    "15.0": 761,
+    "16.0": 213,
+    "18.0": 780
+  },
+  "action_fcurves": 1012,
+  "original_use_nla": true,
+  "verified_evaluation": "Run Action OBrig, NLA disabled, temporary manual range 0..18",
+  "rendered_loop_checks": {
+    "e": {
+      "frame_0_vs_18": 0.004247917328029871,
+      "frame_0_vs_16": 0.19228574633598328,
+      "old_15_to_0": 0.2213679403066635,
+      "new_17_to_0": 0.13252098858356476
+    },
+    "se": {
+      "frame_0_vs_18": 0.006627561990171671,
+      "frame_0_vs_16": 0.20449306070804596,
+      "old_15_to_0": 0.22898533940315247,
+      "new_17_to_0": 0.14017397165298462
+    },
+    "s": {
+      "frame_0_vs_18": 0.01083866786211729,
+      "frame_0_vs_16": 0.15556153655052185,
+      "old_15_to_0": 0.18529900908470154,
+      "new_17_to_0": 0.10580604523420334
+    },
+    "sw": {
+      "frame_0_vs_18": 0.00743375439196825,
+      "frame_0_vs_16": 0.18690192699432373,
+      "old_15_to_0": 0.21072444319725037,
+      "new_17_to_0": 0.12796418368816376
+    },
+    "w": {
+      "frame_0_vs_18": 0.004710870329290628,
+      "frame_0_vs_16": 0.20433740317821503,
+      "old_15_to_0": 0.23358586430549622,
+      "new_17_to_0": 0.13746999204158783
+    },
+    "nw": {
+      "frame_0_vs_18": 0.006272260565310717,
+      "frame_0_vs_16": 0.15778489410877228,
+      "old_15_to_0": 0.19492201507091522,
+      "new_17_to_0": 0.1034080758690834
+    },
+    "n": {
+      "frame_0_vs_18": 0.008510752581059933,
+      "frame_0_vs_16": 0.1123039647936821,
+      "old_15_to_0": 0.13227933645248413,
+      "new_17_to_0": 0.06166033074259758
+    },
+    "ne": {
+      "frame_0_vs_18": 0.006596623919904232,
+      "frame_0_vs_16": 0.16465792059898376,
+      "old_15_to_0": 0.1858142763376236,
+      "new_17_to_0": 0.10420053452253342
+    }
+  },
+  "pose_diagnostics": {
+    "0_to_16": {
+      "max": 1.6990165710449219,
+      "highest_bone_deltas": [
+        {
+          "bone": "VIS_thigh_ik_pole.L",
+          "delta": 1.6990166
+        },
+        {
+          "bone": "VIS_upper_arm_ik_pole.R",
+          "delta": 1.0842247
+        },
+        {
+          "bone": "VIS_upper_arm_ik_pole.L",
+          "delta": 0.9667606
+        },
+        {
+          "bone": "VIS_thigh_ik_pole.R",
+          "delta": 0.6306462
+        },
+        {
+          "bone": "ORG-heel.02.R",
+          "delta": 0.5684562
+        },
+        {
+          "bone": "MCH-heel.02_rock1.R",
+          "delta": 0.5684561
+        },
+        {
+          "bone": "toe.R",
+          "delta": 0.568456
+        },
+        {
+          "bone": "ORG-toe.R",
+          "delta": 0.568456
+        },
+        {
+          "bone": "MCH-toe.R",
+          "delta": 0.568456
+        },
+        {
+          "bone": "MCH-heel.02_roll2.R",
+          "delta": 0.568456
+        },
+        {
+          "bone": "MCH-heel.02_roll1.R",
+          "delta": 0.568456
+        },
+        {
+          "bone": "DEF-toe.R",
+          "delta": 0.568456
+        }
+      ]
+    },
+    "0_to_18": {
+      "max": 0.052568912506103516,
+      "highest_bone_deltas": [
+        {
+          "bone": "VIS_upper_arm_ik_pole.L",
+          "delta": 0.0525689
+        },
+        {
+          "bone": "VIS_thigh_ik_pole.R",
+          "delta": 0.0338006
+        },
+        {
+          "bone": "upper_arm_ik.R",
+          "delta": 0.026047
+        },
+        {
+          "bone": "VIS_thigh_ik_pole.L",
+          "delta": 0.0251865
+        },
+        {
+          "bone": "MCH-forearm_ik.R",
+          "delta": 0.0245282
+        },
+        {
+          "bone": "MCH-upper_arm_ik_swing.R",
+          "delta": 0.023311
+        },
+        {
+          "bone": "MCH-upper_arm_ik_swing.L",
+          "delta": 0.0077435
+        },
+        {
+          "bone": "MCH-forearm_tweak.L",
+          "delta": 0.0073595
+        },
+        {
+          "bone": "forearm_tweak.L",
+          "delta": 0.0073595
+        },
+        {
+          "bone": "MCH-forearm_tweak.L.001",
+          "delta": 0.0073595
+        },
+        {
+          "bone": "forearm_tweak.L.001",
+          "delta": 0.0073595
+        },
+        {
+          "bone": "DEF-forearm.L.001",
+          "delta": 0.0072837
+        }
+      ]
+    }
+  },
+  "source_fps": 30,
+  "proposed_loop": "Blender 0..17 at 30 FPS; 18 is an unexported closure sample",
+  "written_png_count": 144,
+  "written_run_frames": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "output_directory": "C:\\Users\\seanc\\OneDrive\\Desktop\\working\\akio_proof_a\\runtime_frames_candidate_v2\\move",
+  "direction_probe": "C:\\Users\\seanc\\OneDrive\\Desktop\\working\\akio_proof_a\\runtime_frames_candidate_v2\\run_18_direction_probe.png",
+  "completed_utc": "2026-10-28T01:04:26.568946+00:00"
+}
