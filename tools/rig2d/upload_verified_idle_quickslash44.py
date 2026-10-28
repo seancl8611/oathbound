@@ -165,7 +165,11 @@ def prepare_text_updates(report_bytes: bytes) -> dict[Path, bytes]:
                  ('frame 0..39', 'frame 0..43')]:
         t["timing"] = change_once(t["timing"], a, b, p)
     p = paths["focused_smoke"]
-    for a, b in [('TIMING.SOURCE_FRAME_COUNT == 40', 'TIMING.SOURCE_FRAME_COUNT == 44'),
+    for a, b in [('Focused Hammer timing: use the actual 40-frame/30fps cadence',
+                  'Focused Hammer timing: use the 44-frame/30fps candidate cadence'),
+                 ('full gameplay lifecycle must equal 40 source frames',
+                  'full gameplay lifecycle must equal 44 source frames'),
+                 ('TIMING.SOURCE_FRAME_COUNT == 40', 'TIMING.SOURCE_FRAME_COUNT == 44'),
                  ('must contain 40 frames', 'must contain 44 frames'),
                  ('40.0 / 30.0', '44.0 / 30.0'),
                  ('== 40, "source phase counts do not total 41"',
@@ -230,9 +234,6 @@ def main() -> None:
     validator = REPO/"tools/rig2d/validate_frame_set.py"
     subprocess.run([sys.executable, str(validator), "--manifest", str(REPO/manifest),
                     "--actor", "akio", "--source", str(RUNTIME)], check=True, cwd=REPO)
-    subprocess.run([sys.executable, str(validator), "--manifest", str(REPO/manifest),
-                    "--actor", "akio", "--source", str(ROOT)],
-                   check=True, cwd=REPO) if False else None  # candidate folders are separated; runtime is flat
     if len(list(RUNTIME.glob("*.png"))) != 816:
         raise RuntimeError("Runtime frame inventory not exactly 816")
     git("add", "-A", "--",
