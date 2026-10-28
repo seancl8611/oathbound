@@ -62,7 +62,7 @@ var _run_trace_last_frame_change_us: int = 0
 
 # Hammer Checkpoint B Run uses an explicit source-frame clock. This prevents
 # AnimatedSprite2D.play() restarts or directional animation switches from
-# truncating the 16-frame gait cycle. One cycle = 16 / 30 seconds.
+# truncating the verified 18-frame gait cycle. One cycle = 18 / 30 seconds.
 var _akio_run_source_phase: float = 0.0
 var _akio_run_source_active: bool = false
 # Render-only interpolation between adjacent commissioned PNGs. The source
@@ -410,7 +410,7 @@ func _is_akio_source_run(animation_name: StringName) -> bool:
 		and str(animation_name).begins_with("move_")
 		and _sprite_frames.has_animation(animation_name)
 		and _sprite_frames.get_animation_loop(animation_name)
-		and _sprite_frames.get_frame_count(animation_name) == 16
+		and _sprite_frames.get_frame_count(animation_name) == 18
 	)
 
 
@@ -447,7 +447,7 @@ func _sample_akio_source_run(delta: float) -> void:
 	# Source PNG playback is inherently stepped (one still every 33.3 ms).
 	# Blend only the visual between adjacent frames, including 15 -> 0.
 	# This approximates the in-between motion Blender can show natively.
-	var mode := "blend"
+	var mode := "off"
 	if typeof(PlaytestLab) == TYPE_OBJECT and PlaytestLab.has_method("get_akio_run_blend_mode"):
 		mode = str(PlaytestLab.get_akio_run_blend_mode())
 	if mode != "blend" or _akio_run_blend_overlay == null or subframe <= 0.001:

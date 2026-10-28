@@ -41,7 +41,7 @@ func _ready() -> void:
 					if animation_text.begins_with("idle_"):
 						expected_count = 40
 					elif animation_text.begins_with("move_"):
-						expected_count = 16
+						expected_count = 18
 					_expect(
 						frame_count == expected_count,
 						"%s must contain %d frames, got %d" % [animation_text, expected_count, frame_count]
@@ -51,7 +51,7 @@ func _ready() -> void:
 						atlas.get_animation_loop(animation_name) == should_loop,
 						"%s loop flag did not match Checkpoint B contract" % animation_text
 					)
-		_expect(total == 768, "Checkpoint B atlas must contain 768 frames, got %d" % total)
+		_expect(total == 784, "Checkpoint B atlas must contain 784 frames, got %d" % total)
 
 	if _failures.is_empty():
 		print("[AkioCheckpointBAssetSmoke] PASS - real Akio Checkpoint B art is ready for Hushiro playtest")

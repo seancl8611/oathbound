@@ -27,8 +27,9 @@ from pathlib import Path
 PIVOT_NAME = "CameraPivot"
 ARMATURE_NAME = "rig"
 TEST_RESOLUTION = 512
-# Fail on new Action ranges until artist frame boundaries are reviewed.
-EXPECTED_COUNTS = {'idle': 40, 'move': 16, 'attack_quick_slash': 40}
+# Fail closed: verified Run cycle is 0..18. Older saved Action range 0..16 is truncated.
+# For Run, prefer the standalone SHA-verified 18-frame exporter with NLA disabled.
+EXPECTED_COUNTS = {'idle': 40, 'move': 18, 'attack_quick_slash': 40}
 
 # Verified V2 labels by visual comparison against canonical old eight-direction
 # sprites. Values are offsets from Hammer's Oct-2026 SAVED CameraPivot yaw.

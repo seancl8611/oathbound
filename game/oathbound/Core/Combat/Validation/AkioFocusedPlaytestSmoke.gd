@@ -27,7 +27,7 @@ func _run() -> void:
 	_expect(PlaytestLab.has_method("get_akio_mipmapped_run_frames"), "Run mipmap generator missing")
 	_expect(PlaytestLab.has_method("set_akio_run_sync_test_mode"), "Run sync mode setter missing")
 	_expect(PlaytestLab.get_akio_run_sync_test_mode() == "baseline", "Run sync baseline must be default")
-	_expect(PlaytestLab.get_akio_run_blend_mode() == "blend", "Run frame interpolation should be enabled for V2 A/B")
+	_expect(PlaytestLab.get_akio_run_blend_mode() == "off", "18-frame Run must start in source-only mode")
 	_expect(PlaytestLab.has_method("arm_akio_run_trace"), "Run frame/camera trace arming control missing")
 	_expect(PlaytestLab.has_method("is_akio_run_trace_active"), "Run frame/camera trace status control missing")
 	_expect(PlaytestLab.has_method("export_akio_run_contact_sheets"), "Run indexed contact-sheet generator missing")
@@ -102,16 +102,16 @@ func _run() -> void:
 		fixture.add_animation(animation)
 		fixture.set_animation_speed(animation, 30.0)
 		fixture.set_animation_loop(animation, true)
-		for frame: int in range(16):
+		for frame: int in range(18):
 			var pixels := Image.create(8, 8, false, Image.FORMAT_RGBA8)
-			pixels.fill(Color(0.2, float(frame) / 16.0, 0.8, 1.0))
+			pixels.fill(Color(0.2, float(frame) / 18.0, 0.8, 1.0))
 			fixture.add_frame(animation, ImageTexture.create_from_image(pixels))
 	var original_texture: Texture2D = fixture.get_frame_texture(&"move_e", 0)
 	var original_pixel: Color = original_texture.get_image().get_pixel(0, 0)
 	var mipped: SpriteFrames = PlaytestLab.get_akio_mipmapped_run_frames(fixture)
 	_expect(mipped != null, "Run mipmap generation did not produce an atlas")
 	if mipped != null:
-		_expect(mipped.get_frame_count(&"move_e") == 16, "mipmap mode changed frame count")
+		_expect(mipped.get_frame_count(&"move_e") == 18, "mipmap mode changed frame count")
 		_expect(is_equal_approx(mipped.get_animation_speed(&"move_e"), 30.0), "mipmap mode changed FPS")
 		_expect(mipped.get_animation_loop(&"move_e"), "mipmap mode changed loop setting")
 		_expect(mipped.get_frame_texture(&"move_e", 0).get_image().has_mipmaps(), "mipmap variant lacks mip levels")
@@ -137,25 +137,26 @@ func _run() -> void:
 	_expect(presenter.global_position.distance_to(player.global_position) < 0.01, "reset-to-baseline retained pixel snapping")
 
 
-	# Regression: all 16 commissioned Run frames must play in order over two
+	# Regression: all 18 verified Run frames must play in order over two
 	# uninterrupted loops, not truncate after the first few frames. This checks
 	# live presenter frame selection rather than merely counting SpriteFrames.
 	PlaytestLab.set_akio_run_sync_test_mode("baseline")
 	player.velocity = Vector2(200.0, 0.0)
 	presenter.call("sync_from_source", 0.0)
-	for run_step: int in range(32):
+	for run_step: int in range(36):
 		if run_step > 0:
 			presenter.call("sync_from_source", 1.0 / 30.0)
 		var run_frame_state: Dictionary = presenter.call("get_presentation_state_for_test")
 		_expect(str(run_frame_state.get("resolved_animation", "")) == "move_e", "Run frame-cycle test lost East-facing move")
-		_expect(int(run_frame_state.get("sprite_frame", -1)) == run_step % 16,
+		_expect(int(run_frame_state.get("sprite_frame", -1)) == run_step % 18,
 			"Run frame-cycle truncated at step %d: displayed %d instead of %d" % [
-				run_step, int(run_frame_state.get("sprite_frame", -1)), run_step % 16])
+				run_step, int(run_frame_state.get("sprite_frame", -1)), run_step % 18])
 		_expect(not bool(run_frame_state.get("sprite_playing", true)), "source Run must be phase sampled, not autonomously restarted")
-	# Source frames remain 0..15, and interpolation only adds an in-between
-	# visual. Test both visual modes and the wrap from frame 15 -> 0.
+	# Source frames remain 0..17, and interpolation only adds an in-between
+	# visual. Test both visual modes and the wrap from frame 17 -> 0.
 	player.velocity = Vector2.ZERO
 	presenter.call("sync_from_source", 0.0)
+	PlaytestLab.set_akio_run_blend_mode("blend")
 	player.velocity = Vector2(200.0, 0.0)
 	presenter.call("sync_from_source", 0.0)
 	presenter.call("sync_from_source", 1.0 / 60.0)
@@ -164,11 +165,11 @@ func _run() -> void:
 	_expect(bool(blend_state.get("run_blend_active", false)), "Run interpolation missing at half frame")
 	_expect(int(blend_state.get("run_blend_next_frame", -1)) == 1, "Run interpolation next frame should be 1")
 	_expect(is_equal_approx(float(blend_state.get("run_blend_weight", 0.0)), 0.5), "Run interpolation alpha should be one half")
-	# Frame 15 must blend into frame 0 at the full gait loop boundary.
-	presenter.set("_akio_run_source_phase", 15.5)
+	# Frame 17 must blend into frame 0 at the full gait loop boundary.
+	presenter.set("_akio_run_source_phase", 17.5)
 	presenter.call("sync_from_source", 0.0)
 	blend_state = presenter.call("get_presentation_state_for_test")
-	_expect(int(blend_state.get("sprite_frame", -1)) == 15, "Run closing frame must remain 15")
+	_expect(int(blend_state.get("sprite_frame", -1)) == 17, "Run closing frame must remain 17")
 	_expect(int(blend_state.get("run_blend_next_frame", -1)) == 0, "Run closing frame must blend into frame 0")
 	_expect(is_equal_approx(float(blend_state.get("run_blend_weight", 0.0)), 0.5), "Run closing frame blend weight drifted")
 	PlaytestLab.set_akio_run_blend_mode("off")
@@ -179,6 +180,7 @@ func _run() -> void:
 	presenter.call("sync_from_source", 0.0)
 	blend_state = presenter.call("get_presentation_state_for_test")
 	_expect(bool(blend_state.get("run_blend_active", false)), "Restoring blend mode did not show interpolation")
+	PlaytestLab.set_akio_run_blend_mode("off")
 	player.velocity = Vector2.ZERO
 	presenter.call("sync_from_source", 0.0)
 	blend_state = presenter.call("get_presentation_state_for_test")
@@ -341,6 +343,7 @@ func _finish() -> void:
 	PlaytestLab.set_akio_quick_slash_timing_mode(HAMMER)
 	PlaytestLab.set_akio_render_test_preset("baseline")
 	PlaytestLab.set_akio_run_sync_test_mode("baseline")
+	PlaytestLab.set_akio_run_blend_mode("off")
 	if _failures.is_empty():
 		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | camera fix + rooted Hammer Quick Slash + buffered recovery dash + pose isolation | recovery dash/parry | prototype fallback | normal combo identities")
 		get_tree().quit(0)

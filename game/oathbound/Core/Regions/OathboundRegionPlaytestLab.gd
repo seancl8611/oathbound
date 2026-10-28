@@ -73,7 +73,7 @@ var _quick_slash_timing_dropdown: OptionButton
 var _akio_render_preset: String = AKIO_RENDER_BASELINE
 var _akio_render_dropdown: OptionButton
 # Session-only, visual-only A/B. Blend adjacent source poses at game render FPS.
-var _akio_run_blend_mode: String = AKIO_RUN_BLEND_ON
+var _akio_run_blend_mode: String = AKIO_RUN_BLEND_OFF
 var _akio_run_blend_dropdown: OptionButton
 var _akio_sync_test_mode: String = AKIO_SYNC_BASELINE
 var _akio_sync_dropdown: OptionButton
@@ -609,7 +609,7 @@ func set_akio_render_test_preset(preset: String) -> void:
 
 
 # Source Run frame images receive real mipmap levels, not just a filter flag.
-# All 128 Run frames must exist. Non-Run frames retain their original texture
+# All 144 Run frames must exist. Non-Run frames retain their original texture
 # references and cadence. Cache the in-memory variant for this debug session.
 func get_akio_mipmapped_run_frames(original: SpriteFrames) -> SpriteFrames:
 	if not OS.is_debug_build() or original == null:
@@ -618,8 +618,8 @@ func get_akio_mipmapped_run_frames(original: SpriteFrames) -> SpriteFrames:
 		return _akio_mipped_run_frames
 	for direction: String in AKIO_SOURCE_DIRECTIONS:
 		var name := StringName("move_%s" % direction)
-		if not original.has_animation(name) or original.get_frame_count(name) != 16:
-			push_warning("[AkioRenderTest] mipmap Run test requires 16 loaded frames in each direction")
+		if not original.has_animation(name) or original.get_frame_count(name) != 18:
+			push_warning("[AkioRenderTest] mipmap Run test requires 18 loaded frames in each direction")
 			return null
 
 	var result := SpriteFrames.new()
@@ -655,19 +655,19 @@ func get_akio_mipmapped_run_frames(original: SpriteFrames) -> SpriteFrames:
 					return null
 				run_count += 1
 			result.add_frame(animation, output_texture, original.get_frame_duration(animation, index))
-	if run_count != 128:
-		push_warning("[AkioRenderTest] expected 128 mipmapped Run frames; baseline retained")
+	if run_count != 144:
+		push_warning("[AkioRenderTest] expected 144 mipmapped Run frames; baseline retained")
 		return null
 	_akio_mipped_run_frames = result
 	_akio_mipped_source_id = original.get_instance_id()
-	print("[AkioRenderTest] mipmaps READY generated=128 Run frames (all directions); original unchanged")
+	print("[AkioRenderTest] mipmaps READY generated=144 Run frames (all directions); original unchanged")
 	return result
 
 
 # Independent 30-FPS source Run smoothing A/B; never changes sprite index,
 # movement speed, camera, source PNGs, or attack animations.
 func get_akio_run_blend_mode() -> String:
-	return _akio_run_blend_mode if OS.is_debug_build() else AKIO_RUN_BLEND_ON
+	return _akio_run_blend_mode if OS.is_debug_build() else AKIO_RUN_BLEND_OFF
 
 
 func set_akio_run_blend_mode(mode: String) -> void:
@@ -755,17 +755,17 @@ func export_akio_run_contact_sheets() -> bool:
 		return false
 	for direction: String in RUN_CONTACT_DIRECTIONS:
 		var animation := StringName("move_%s" % direction)
-		if not atlas.has_animation(animation) or atlas.get_frame_count(animation) != 16:
-			print("[AkioRunTrace] move_%s not ready (need 16 frames); retry once atlas is ready" % direction)
+		if not atlas.has_animation(animation) or atlas.get_frame_count(animation) != 18:
+			print("[AkioRunTrace] move_%s not ready (need 18 frames); retry once atlas is ready" % direction)
 			return false
 		if not is_equal_approx(atlas.get_animation_speed(animation), 30.0):
 			push_warning("[AkioRunTrace] unexpected move FPS %s = %s" % [direction, atlas.get_animation_speed(animation)])
 	var ok := true
 	for direction: String in RUN_CONTACT_DIRECTIONS:
 		var animation := StringName("move_%s" % direction)
-		var sheet := Image.create(768, 768, false, Image.FORMAT_RGBA8)
+		var sheet := Image.create(960, 768, false, Image.FORMAT_RGBA8)
 		sheet.fill(Color(0.13, 0.15, 0.18, 1.0))
-		for frame: int in range(16):
+		for frame: int in range(18):
 			var texture := atlas.get_frame_texture(animation, frame)
 			if texture == null:
 				ok = false
@@ -776,7 +776,7 @@ func export_akio_run_contact_sheets() -> bool:
 				continue
 			if image.get_format() != Image.FORMAT_RGBA8:
 				image.convert(Image.FORMAT_RGBA8)
-			var destination := Vector2i((frame % 4) * 192, (frame / 4) * 192)
+			var destination := Vector2i((frame % 5) * 192, (frame / 5) * 192)
 			sheet.blend_rect(image, RUN_CONTACT_CROP, destination)
 		var output := folder.path_join("akio_run_source_frames_%s.png" % direction)
 		var result := sheet.save_png(output)
@@ -1043,7 +1043,7 @@ func _refresh_source_preview() -> void:
 	if not frames.has_animation(StringName(animation_name)):
 		_source_preview_status.text = "Waiting for %s to become available." % animation_name
 		return
-	var expected_count := 40 if animation_name.begins_with("attack_") else (16 if animation_name.begins_with("move_") else 40)
+	var expected_count := 40 if animation_name.begins_with("attack_") else (18 if animation_name.begins_with("move_") else 40)
 	var count := frames.get_frame_count(StringName(animation_name))
 	if count != expected_count:
 		_source_preview_status.text = "Waiting for full animation %s (%d/%d frames)." % [animation_name, count, expected_count]

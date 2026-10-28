@@ -1,5 +1,11 @@
 # Akio Checkpoint B — Focused Playtest
 
+## Verified Run 18 integration (2026-10-27)
+
+The October revised Blender Run was re-rendered from the verified SHA-256 `2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a`. The rig returns visually to its starting pose at frame 18, not 16. The correct 30 FPS runtime loop is **18 images, frames 0–17 per direction** (0.6 seconds). Across eight directions that is 144 Run frames, with 320 Idle and 320 Quick Slash, **784 total**. Preserve the physics-callback camera fix. The experimental Run-frame interpolation is **OFF** by default for baseline playtesting; an optional toggle remains available in Focused Tests.
+
+This section supersedes older investigation entries below that mention a 16-frame Run or 768 total PNGs; those older entries are retained as investigation history. The verification report under `runtime_frames_candidate_v2/run_18_verified_export_report.json` is the authoritative new Run export record. Historical candidate-v2 audit files still describe the original 16-frame export.
+
 **Current checkpoint (2026-10-22): Owner playtested the permanent PHYSICS+ON camera fix, with good Run and stationary Quick Slash. New problem: moving during the 41-frame Quick Slash caused visible skating; recovery dash cancellation felt unreliable. Telemetry confirms movement weights were high throughout the attack and at least four recovery dash cancellations succeeded across the uploaded sessions. The new debug source-timing Quick Slash now ignores free locomotion and prototype lunge for the entire 1.3667-second draw-strike-sheathe, while still allowing recovery dash/parry. Debug telemetry additionally captures dash input accepted/buffered/expired. This is an integration test, not a request for Hammer to revise frames.**
 
 **Ongoing decisions and follow-up:** [Hammer artist feedback tracker](../../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) and [internal Godot integration tracker](../../art_production/AKIO_PROOF_A_INTEGRATION_TRACKER.md). Those are draft working queues; this page records the current debug testing procedure.
