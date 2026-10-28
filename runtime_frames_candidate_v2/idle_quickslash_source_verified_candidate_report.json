@@ -1,0 +1,161 @@
+{
+  "status": "PASS",
+  "source": "C:\\Users\\seanc\\OneDrive\\Desktop\\working\\akio_blockout.blend",
+  "source_sha256": "2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a",
+  "blender_version": [
+    5,
+    2,
+    2
+  ],
+  "fps": 30,
+  "canvas_px": [
+    512,
+    512
+  ],
+  "directions": [
+    "e",
+    "se",
+    "s",
+    "sw",
+    "w",
+    "nw",
+    "n",
+    "ne"
+  ],
+  "candidate_only": true,
+  "notes": [
+    "Quick Slash 0..43 is a source inspection candidate, NOT approved runtime timing.",
+    "Do not update Godot's manifest or timing until animation ending is reviewed."
+  ],
+  "animations": {
+    "idle": {
+      "action": "idle",
+      "saved_range": [
+        0.0,
+        40.0
+      ],
+      "saved_manual_range_enabled": false,
+      "rendered_frames": [
+        0,
+        39
+      ],
+      "frames_per_direction": 40,
+      "loop": true,
+      "curve_count": 651,
+      "keyframe_times": [
+        0.0,
+        20.0,
+        40.0
+      ],
+      "loop_and_tail_image_differences": {
+        "e": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.00011088967585237697
+        },
+        "se": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.00016169817536137998
+        },
+        "s": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.00010400771861895919
+        },
+        "sw": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.00015211247955448925
+        },
+        "w": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.000146599137224257
+        },
+        "nw": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.00013662572018802166
+        },
+        "n": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.00010912422294495627
+        },
+        "ne": {
+          "frame_0_vs_40": 0.0,
+          "frame_39_vs_0": 0.00010769541404442862
+        }
+      }
+    },
+    "attack_quick_slash": {
+      "action": "quick_slash",
+      "saved_range": [
+        0.0,
+        40.0
+      ],
+      "saved_manual_range_enabled": true,
+      "rendered_frames": [
+        0,
+        43
+      ],
+      "frames_per_direction": 44,
+      "loop": false,
+      "curve_count": 666,
+      "keyframe_times": [
+        -2.0,
+        0.0,
+        1.0,
+        2.0,
+        3.0,
+        5.0,
+        13.0,
+        17.0,
+        19.0,
+        20.0,
+        21.0,
+        23.0,
+        25.0,
+        27.0,
+        30.0,
+        31.0,
+        33.0,
+        34.0,
+        36.0,
+        40.0,
+        41.0,
+        43.0
+      ],
+      "loop_and_tail_image_differences": {
+        "e": {
+          "frame_39_vs_40": 0.0288325734436512,
+          "frame_40_vs_43": 0.03387138992547989
+        },
+        "se": {
+          "frame_39_vs_40": 0.022573834285140038,
+          "frame_40_vs_43": 0.04135114327073097
+        },
+        "s": {
+          "frame_39_vs_40": 0.03870952129364014,
+          "frame_40_vs_43": 0.06801041215658188
+        },
+        "sw": {
+          "frame_39_vs_40": 0.0447106659412384,
+          "frame_40_vs_43": 0.06622298806905746
+        },
+        "w": {
+          "frame_39_vs_40": 0.04066051170229912,
+          "frame_40_vs_43": 0.04660842567682266
+        },
+        "nw": {
+          "frame_39_vs_40": 0.02378951758146286,
+          "frame_40_vs_43": 0.04381386563181877
+        },
+        "n": {
+          "frame_39_vs_40": 0.020128920674324036,
+          "frame_40_vs_43": 0.054031889885663986
+        },
+        "ne": {
+          "frame_39_vs_40": 0.02799912542104721,
+          "frame_40_vs_43": 0.051117073744535446
+        }
+      }
+    }
+  },
+  "total_candidate_pngs": 672,
+  "completed_utc": "2026-10-28T03:51:00.247901+00:00"
+}

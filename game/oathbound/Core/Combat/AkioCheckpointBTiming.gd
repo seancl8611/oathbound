@@ -2,11 +2,11 @@ extends RefCounted
 class_name AkioCheckpointBTiming
 
 ## Debug-only Checkpoint B source-cadence combat experiment.
-## These 40 frames belong to Hammer's delivered directional Quick Slash.
+## These 44 frames belong to Hammer's delivered directional Quick Slash.
 ## The current move's impact poses differ by direction, so these phase
 ## boundaries are deliberately provisional and must be checked in playtests.
 const SOURCE_FPS: float = 30.0
-const SOURCE_FRAME_COUNT: int = 40
+const SOURCE_FRAME_COUNT: int = 44
 const SOURCE_TOTAL_DURATION: float = float(SOURCE_FRAME_COUNT) / SOURCE_FPS
 const STARTUP_FRAMES: int = 15
 const ACTIVE_FRAMES: int = 8
@@ -19,7 +19,7 @@ static func apply_source_timing(original: Dictionary) -> Dictionary:
 	var result := original.duplicate(true)
 	# Legacy: duration is the active attack state; recovery is a separate state.
 	# Combat V2: action_duration = startup + active + recovery.
-	# Keeping these equal makes frame 0..39 advance at the intended 30 FPS.
+	# Keeping these equal makes frame 0..43 advance at the intended 30 FPS.
 	result["duration"] = STARTUP_DURATION + ACTIVE_DURATION
 	result["startup"] = STARTUP_DURATION
 	result["active"] = ACTIVE_DURATION

@@ -846,7 +846,7 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	_quick_slash_timing_dropdown = OptionButton.new()
 	_quick_slash_timing_dropdown.add_item("Original prototype (fast)")
 	_quick_slash_timing_dropdown.set_item_metadata(0, QUICK_TIMING_PROTOTYPE)
-	_quick_slash_timing_dropdown.add_item("Hammer V2 (40 frames / 30 FPS)")
+	_quick_slash_timing_dropdown.add_item("Hammer revised (44 frames / 30 FPS)")
 	_quick_slash_timing_dropdown.set_item_metadata(1, QUICK_TIMING_HAMMER)
 	_quick_slash_timing_dropdown.select(1 if _quick_slash_timing_mode == QUICK_TIMING_HAMMER else 0)
 	_quick_slash_timing_dropdown.item_selected.connect(func(index: int) -> void:
@@ -855,7 +855,7 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	vbox.add_child(_quick_slash_timing_dropdown)
 
 	var timing_info := Label.new()
-	timing_info.text = "Hammer is the default debug-test timing: all base-katana Quick Slashes play 40 frames at 30 FPS, whether isolation is ON or OFF. Cross Cut / Heavy Cleave retain their original timing. Dash/parry may cancel during recovery. Switch to Original prototype to compare."
+	timing_info.text = "Hammer is the default debug-test timing: all base-katana Quick Slashes play 44 frames at 30 FPS, whether isolation is ON or OFF. Cross Cut / Heavy Cleave retain their original timing. Dash/parry may cancel during recovery. Switch to Original prototype to compare."
 	timing_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(timing_info)
 
@@ -1043,7 +1043,7 @@ func _refresh_source_preview() -> void:
 	if not frames.has_animation(StringName(animation_name)):
 		_source_preview_status.text = "Waiting for %s to become available." % animation_name
 		return
-	var expected_count := 40 if animation_name.begins_with("attack_") else (18 if animation_name.begins_with("move_") else 40)
+	var expected_count := 44 if animation_name.begins_with("attack_") else (18 if animation_name.begins_with("move_") else 40)
 	var count := frames.get_frame_count(StringName(animation_name))
 	if count != expected_count:
 		_source_preview_status.text = "Waiting for full animation %s (%d/%d frames)." % [animation_name, count, expected_count]

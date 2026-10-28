@@ -1,5 +1,23 @@
 # Akio Checkpoint B — Focused Playtest
 
+## Updated revised-source Idle + Quick Slash candidate (2026-10-28)
+
+This section supersedes older 40/41-frame Quick Slash descriptions below.
+Source SHA-256: \`2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a\`.
+The October revised source has **Idle 40 frames (0..39, frame 40 identical to 0)**,
+**Run 18 frames (0..17, frame 18 closes 0)** and **non-looping Quick Slash 44-frame inspection candidate (0..43)** in all eight views. Total **816**.
+Quick Slash still has manually saved Action range 0..40 but real artist keys through 43;
+do not use the saved range alone. Source FPS 30; Quick Slash test lasts 44/30 ~= 1.467 seconds.
+Provisional combat phases remain startup 15 (0.5s), active 8 (~0.267s) and
+recovery **21** (~0.7s), subject to impact-pose and cancel-feel review. No
+new damage authority or hitbox rules are assigned to rendered frames.
+View the new candidate in the Playtest Lab, stationary then while holding
+movement, for all eight directions; verify recovery, sheath and Attack->Idle/Run
+transitions and recovery dash/parry. Keep Run smoothing experiments off. Do not
+accept final commissioned Quick Slash solely on frame-count or CI checks.
+Verification: \`runtime_frames_candidate_v2/idle_quickslash_source_verified_candidate_report.json\`.
+Repeatable procedure: \`tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md\`.
+
 ## Verified Run 18 integration (2026-10-27)
 
 The October revised Blender Run was re-rendered from the verified SHA-256 `2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a`. The rig returns visually to its starting pose at frame 18, not 16. The correct 30 FPS runtime loop is **18 images, frames 0–17 per direction** (0.6 seconds). Across eight directions that is 144 Run frames, with 320 Idle and 320 Quick Slash, **784 total**. Preserve the physics-callback camera fix. The experimental Run-frame interpolation is **OFF** by default for baseline playtesting; an optional toggle remains available in Focused Tests.

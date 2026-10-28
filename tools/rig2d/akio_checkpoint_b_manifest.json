@@ -97,11 +97,12 @@
     "Idle and Move preserve the authored 30 fps source cadence; attacks remain sampled from authoritative gameplay progress.",
     "The fixed registration point is the center of Hammer's render canvas at (256, 256).",
     "This checkpoint profile is separate from the older 128x128 Proof A placeholder contract.",
-    "Verified 18-frame Run export from exact Blender source SHA256 2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a: frame 18 closes frame 0, playback frames 0-17 at 30 FPS. Idle=40, Move=18, Quick Slash=40 per direction; total 784 PNGs."
+    "Verified 18-frame Run export from exact Blender source SHA256 2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a: frame 18 closes frame 0, playback frames 0-17 at 30 FPS. Idle=40, Move=18, Quick Slash=44 candidate per direction; total 816 PNGs.",
+    "Verified revised-source Idle 40 and Quick Slash 44-frame nonlooping inspection candidate, 8 directions from exact source SHA256 2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a; total 816 PNGs. Quick Slash end/timing pending owner gameplay assessment."
   ],
   "animation_frame_counts": {
     "idle": 40,
     "move": 18,
-    "attack_quick_slash": 40
+    "attack_quick_slash": 44
   }
 }
