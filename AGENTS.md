@@ -55,6 +55,7 @@ objective: >-
 - Pressure/AI difficulty comes from readable multi-enemy intentions, geometry, role combinations, movement, and authored commitments rather than HP sponges.
 
 ## Character production contract
+**MANDATORY before any Blender character/animation import or eight-direction PNG export:** read `tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md`. Audit Action slots, meaningful keys beyond manual/NLA ranges, loop endpoint, all eight images, source hash and matching Godot timing. Never infer animation length solely from Blender's manual Action range. This procedure covers Akio and every future rig-rendered enemy.
 - `DirectionalActorPresentation` is presentation-only; combat/movement remain authoritative elsewhere.
 - Animation naming is `<state>_<direction>` and `attack_<action_id>_<direction>`.
 - Runtime source frames use stable canvas/feet registration and no gameplay root motion.

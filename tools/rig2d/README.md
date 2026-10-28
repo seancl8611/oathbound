@@ -1,5 +1,8 @@
 # Rig-rendered 2D proof tooling
 
+See [Blender -> 8-direction PNG -> Godot: repeatable export procedure](BLENDER_TO_GODOT_EXPORT_WORKFLOW.md) before inspecting any artist .blend Action, rendering sprites, or promoting a frame-count change. The guide records the Run 16/18 truncation incident, Idle 40 loop closure, non-looping Quick Slash 44 candidate, source-hash requirements, NLA/Action-slot pitfalls, directional validation and synchronized Godot contract changes.
+
+
 Status: **Akio commission Proof A integration-ready; real source delivery is the next content step.**
 
 This folder is the client-owned bridge between an editable Blender character source and Oathbound's live Godot 2D runtime.

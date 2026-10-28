@@ -38,6 +38,8 @@ The full profiles remain intentionally `asset_ready=false` until complete valida
 
 The profile/import seam is stable enough that real art can replace the placeholder without changing combat code.
 
+> **Required production checklist:** Before exporting ANY artist Action to eight-direction PNGs, read [`tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md`](../../tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md). It owns source-curve completeness, NLA/Action-slot checks, closing-frame rules, 8-view validation and coherent Godot promotion. This includes every future enemy; do not rely on manual Action ranges alone.
+
 ## Production order
 
 The current production order is deliberately risk-limited.
