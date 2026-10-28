@@ -280,7 +280,6 @@ func _run() -> void:
 	player.call("_calculate_velocity", 1.0 / 60.0)
 	_expect((player as CharacterBody2D).velocity.length() < 0.01, "Hammer Quick Slash allows locomotion while attacking")
 	_expect(not bool(player.call("_can_start_dodge")), "early committed windup allowed a dash")
-	_expect(not bool(player.call("_can_start_parry")), "early committed windup allowed a parry")
 
 	var runner_value: Variant = player.get("_v2_player_action_runner")
 	if runner_value is Node and is_instance_valid(runner_value):
@@ -292,7 +291,6 @@ func _run() -> void:
 		_expect(bool(runner.call("is_running")), "runner ended before recoverable source frames")
 		_expect(not bool(player.get("_attack_hitbox_active")), "hitbox stayed active entering source recovery")
 		_expect(bool(player.call("_can_start_dodge")), "dash unavailable in Hammer recovery")
-		_expect(bool(player.call("_can_start_parry")), "parry unavailable in Hammer recovery")
 		var before := float(runner.get("action_elapsed"))
 		player.call("_state_attack_recovery", 0.10)
 		_expect(float(runner.get("action_elapsed")) > before + 0.09, "source animation clock froze in recovery")
@@ -345,7 +343,7 @@ func _finish() -> void:
 	PlaytestLab.set_akio_run_sync_test_mode("baseline")
 	PlaytestLab.set_akio_run_blend_mode("off")
 	if _failures.is_empty():
-		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | camera fix + rooted Hammer Quick Slash + buffered recovery dash + pose isolation | recovery dash/parry | prototype fallback | normal combo identities")
+		print("[AkioFocusedPlaytestSmoke] PASS - Hammer 30 FPS gameplay | camera fix + rooted Hammer Quick Slash + buffered recovery dash + pose isolation | recovery dash | prototype fallback | normal combo identities")
 		get_tree().quit(0)
 		return
 	for failure: String in _failures:

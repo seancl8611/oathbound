@@ -13,10 +13,50 @@ recovery **21** (~0.7s), subject to impact-pose and cancel-feel review. No
 new damage authority or hitbox rules are assigned to rendered frames.
 View the new candidate in the Playtest Lab, stationary then while holding
 movement, for all eight directions; verify recovery, sheath and Attack->Idle/Run
-transitions and recovery dash/parry. Keep Run smoothing experiments off. Do not
+transitions and recovery dash. Keep Run smoothing experiments off. Do not
 accept final commissioned Quick Slash solely on frame-count or CI checks.
 Verification: \`runtime_frames_candidate_v2/idle_quickslash_source_verified_candidate_report.json\`.
 Repeatable procedure: \`tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md\`.
+
+## Focused eight-direction 44-frame validation (2026-10-28)
+
+**Result: PASS for complete in-game source sampling.** Evidence from owner playtest
+\`combat_1793200223.jsonl\` (1,133 valid events) and \`godot(20261028-151144).log\`,
+running source commit \`017b66692a596ecdbeb406d02760e2f750c2fe83\`.
+The 816-frame atlas loaded successfully (24 directional animations). The focused
+Quick Slash-only scenario was selected, with per-frame telemetry enabled.
+
+- **13 Quick Slash starts**, **12 complete** at exactly 44/30 ~= 1.4667 seconds
+  and **1 intentionally interrupted** by recovery dash.
+- **All eight directions individually verified**, sequences 1–8: E, NE, N, NW,
+  W, SW, S, SE. Each reports all 44 source indices **0..43 in ascending order**
+  with no skipped indices. The four recovered end frames **40–43 really display**
+  during live play; all 12 completed attacks reach frame 43 before returning to
+  Idle or Move. Presentation marks \`authoritative_sampling=true\`.
+- Sequence 9 changed facing from E to SE within the attack at frame 10 and
+  reported that frame under both directions. This is an **intentional/situational
+  facing switch, not a missing index**; if visually distracting, consider
+  whether facing should lock for the committed portion of the attack.
+- Hitbox-active edges occur at 0.5167 s (visual frame ~15), inactive at 0.7667 s
+  (visual frame ~23), consistent for all 13 attacks; artistic blade-contact
+  alignment is **not** proved by counts alone.
+- Sequence 13 used **recovery dash** to interrupt at ~0.8333 s, after presenting
+  frames 0..25. A separate early buffered input expired, which is expected if
+  pressed too far ahead of the legal cancel window. No sprites were missing.
+- All 13 actions recorded zero voluntary locomotion weights during the four
+  attack phases, supporting the planted-Quick-Slash policy.
+- Godot reports **no errors**; it used the existing Firing Line encounter
+  fallback warning. Startup atlas preparation took **39,070 ms** in this
+  capture, versus 2,897 ms in the prior capture; this is a startup-performance
+  observation, not evidence of per-frame animation stutter. Steady 120-FPS
+  gameplay windows should be considered separately.
+
+**Remaining assessment is qualitative**, not missing-frame troubleshooting:
+owner judgment of Quick Slash speed, weapon/sheath continuity, final transition
+to Idle/Move, blade-impact alignment and visual facing changes. Preserve the
+source-correct 40/18/44 candidate and the verified Blender export workflow.
+**The generic player parry feature was removed; do not request parry tests.**
+The only defensive Quick Slash cancellation tested here is recovery **dash**.
 
 ## Observed revised-source 44-frame playtest (2026-10-28)
 
@@ -24,9 +64,9 @@ Repeatable procedure: \`tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md\`.
 
 **Confirmed:** Seven ordinary (non-isolated) Quick Slash actions started and completed. Each reported \`source_30fps=true\`, \`presentation_duration=1.4666667s\`, \`attack_duration=0.7666667s\`, \`recovery_duration=0.7s\` and \`combat_v2_action_completed.elapsed=1.4666667s\`. All seven used zero voluntary locomotion weights for startup/committed/active/recovery; the intended planted-attack policy was applied. The tested attack-start facings were South (five), North (one), East (one). One later \`hold_thrust\` was started while normal combo isolation was off; capture ended before it completed, not a Quick Slash error. The 55.91 ms startup hitch and two Firing Line encounter fallback warnings are not direct Quick Slash export errors.
 
-**NOT YET PROVED:** These logs have **no** \`akio_focus_visual_frame\`, \`akio_focus_visual_exit\`, \`akio_focus_hitbox_edge\`, or dash/parry-focused events. Seven successful 44/30-second action lifecycles **do not prove all 44 individual visible indices (0..43) were shown** or that frame 43 matches a pleasing Idle transition. No qualitative owner feedback was included. The recorded North/South/East attack starts do not cover all eight orientations. Do not call the animation aesthetically accepted or the sprite-frame sampler verified solely from this capture.
+**NOT YET PROVED:** These logs have **no** \`akio_focus_visual_frame\`, \`akio_focus_visual_exit\`, \`akio_focus_hitbox_edge\`, or dash-focused events. Seven successful 44/30-second action lifecycles **do not prove all 44 individual visible indices (0..43) were shown** or that frame 43 matches a pleasing Idle transition. No qualitative owner feedback was included. The recorded North/South/East attack starts do not cover all eight orientations. Do not call the animation aesthetically accepted or the sprite-frame sampler verified solely from this capture.
 
-**Next focused verification:** In Hushiro, backtick -> Focused Tests -> **Akio Checkpoint B - Quick Slash only**, select **Hammer revised (44 frames / 30 FPS)**, turn on **Record focused animation frames in combat telemetry**, close the lab. Perform one uninterrupted Quick Slash while facing each of E/SE/S/SW/W/NW/N/NE, then repeat an attack with movement input held and separately test a recovery dash/parry. The next \`combat_*.jsonl\` must contain frame-level event traces; verify that each uncancelled attack reports indices **0..43** in order and that blade/Idle transitions look acceptable. Keep Run baseline interpolation OFF; do not change gameplay attack/hitbox authority to force sprite test success.
+**Next focused verification:** In Hushiro, backtick -> Focused Tests -> **Akio Checkpoint B - Quick Slash only**, select **Hammer revised (44 frames / 30 FPS)**, turn on **Record focused animation frames in combat telemetry**, close the lab. Perform one uninterrupted Quick Slash while facing each of E/SE/S/SW/W/NW/N/NE, then repeat an attack with movement input held and separately test a recovery dash. The next \`combat_*.jsonl\` must contain frame-level event traces; verify that each uncancelled attack reports indices **0..43** in order and that blade/Idle transitions look acceptable. Keep Run baseline interpolation OFF; do not change gameplay attack/hitbox authority to force sprite test success.
 
 ## Verified Run 18 integration (2026-10-27)
 
@@ -37,6 +77,10 @@ This section supersedes older investigation entries below that mention a 16-fram
 **Current checkpoint (2026-10-22): Owner playtested the permanent PHYSICS+ON camera fix, with good Run and stationary Quick Slash. New problem: moving during the 41-frame Quick Slash caused visible skating; recovery dash cancellation felt unreliable. Telemetry confirms movement weights were high throughout the attack and at least four recovery dash cancellations succeeded across the uploaded sessions. The new debug source-timing Quick Slash now ignores free locomotion and prototype lunge for the entire 1.3667-second draw-strike-sheathe, while still allowing recovery dash/parry. Debug telemetry additionally captures dash input accepted/buffered/expired. This is an integration test, not a request for Hammer to revise frames.**
 
 **Ongoing decisions and follow-up:** [Hammer artist feedback tracker](../../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md) and [internal Godot integration tracker](../../art_production/AKIO_PROOF_A_INTEGRATION_TRACKER.md). Those are draft working queues; this page records the current debug testing procedure.
+
+## Historical notes below
+
+Sections describing older 40/41-frame Quick Slash experiments, or suggesting player parry, are superseded by the validated 44-frame results above. Parry was removed from current player gameplay; do not treat legacy test prose as a current mechanic.
 
 ## Where to find it
 

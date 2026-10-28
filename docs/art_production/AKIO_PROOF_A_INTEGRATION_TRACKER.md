@@ -17,6 +17,25 @@ topics:
 
 # Akio Proof A — Internal Animation Integration Tracker
 
+## Latest verified 44-frame animation delivery (2026-10-28)
+
+Source SHA \`2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a\`:
+Idle 40, Run 18, Quick Slash 44 frames in each of eight directions (816 PNGs).
+Run visibly matches the revised Blender source and no longer suffers a truncated
+16-frame loop. Focused owner capture \`combat_1793200223.jsonl\` confirms 12
+uninterrupted Quick Slash actions displaying every index 0–43 sequentially;
+the first eight cover E/NE/N/NW/W/SW/S/SE. One additional recovery dash interrupted
+at frame 25, as designed; the hitbox remained active only during its authored
+0.517–0.767-second strike window. One E->SE facing change reused index 10 for
+the new direction; this is not a frame omission. No new source export is needed
+for the test. Remaining owner assessment: sheath/readiness, strike alignment,
+recovery feel, and Idle/Move transitions. Atlas startup was 39.07 s in this
+particular capture, worth tracking independently of steady FPS.
+
+**Player parry has been retired.** References to testing generic parry below
+are old investigation notes, not active gates. Focus any current Quick Slash
+cancellation evaluation on dash; do not resurrect retired combat behavior.
+
 **Purpose:** Living engineering backlog for the work Oathbound must do to playtest and integrate Hammer's editable Blender animations, independent of any artist revisions. **This is a tracker, not a new combat-design authority or permission to expand the commission.** Start here in future GitHub sessions instead of reconstructing decisions from chat history.
 
 **Working branch:** \`agent/akio-checkpoint-b-playtest\` as of 2026-10-22.  
@@ -32,7 +51,7 @@ topics:
 - **Owner-verified in live combat on 2026-10-22:** Hammer's 41-frame, 30 FPS Quick Slash looks significantly better than the compressed prototype playback (~0.32 s sampling); runtime cadence is now verified by telemetry as well as human playtest. **Its final combat commitment is not settled**, because this test intentionally blocks follow-up Cross Cut / Heavy Cleave and still includes embedded sheathing.
 - **Owner-observed:** Repeated final re-sheathing looks awkward during fast attack repetition and would be inappropriate between multiple future combo hits.
 - **Confirmed source-art constraint:** At least east-facing \`attack_quick_slash\` frames ~29–40 show the return-to-sheath and the current \`idle\`/\`move\` source poses are sheathed. A cropped slash clip **alone** cannot supply a complete drawn-sword combat-ready state.
-- **Engineering ownership:** Godot remains authoritative for movement, damage, actual hitbox windows, dash/parry permissions, action phase, combo queue, recovery, hitstop, and presentation sampling. Hammer owns source models/rig/animation Actions, not collision or eight-direction PNG export.
+- **Engineering ownership:** Godot remains authoritative for movement, damage, actual hitbox windows, dash permissions, action phase, combo queue, recovery, hitstop, and presentation sampling. Hammer owns source models/rig/animation Actions, not collision or eight-direction PNG export.
 - **Do not lock prototype combat numbers:** Source timing is a valid baseline for testing, not an immutable 1.3667-second animation commitment for all future attacks.
 - **Do not globally rewrite the combo yet:** Subsequent Cross Cut / Heavy Cleave assets have not yet been commissioned/accepted in this integration pass. Preserve their current fallback until separately reauthored and reviewed.
 
@@ -60,16 +79,16 @@ Use **Done / Code implemented, needs field retest / Blocked on art / Planned / I
 | AI-03 | P0 | **Architect weapon-readiness presentation:** sheathed outside combat, sword-out inside combat, and coherent transitions. Avoid sheath/unsheathe per attack. | **Blocked on art feasibility; design not yet approved** | Artist responds to [HA-01–HA-04](../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md). Do not implement synthetic frame cropping that leaves sheathed Idle/Run. |
 | AI-04 | P1 | Introduce explicit \`SHEATHED\` / \`DRAWN\` presentation stance (plus \`DRAWING\`/\`SHEATHING\` transitions if accepted) without changing 2D authoritative combat. Route Idle, Move, Quick Slash, dash and interruption using stance and current action. | **Planned; contingent on art** | A player never snaps from a sword-out strike to a sheathed movement frame during sustained combat. Preserve 8-direction orientation, foot anchor, sprite priorities. |
 | AI-05 | P1 | **Separate opening unsheathe and repeatable sword-out attack.** Preserve Hammer's full source Action; if revised art provided, map first draw attack and sword-already-drawn Quick Slash to distinct animation bases. | **Blocked on artist delivery** | Repeat strikes never play an embedded sheath tail; source remains editable and Godot chooses the proper clip. |
-| AI-06 | P1 | **Combat disengage / auto-sheath policy.** Prototype a 3–5 s inactivity window only when safe/out of combat. Trigger a dedicated sheath transition and allow interruption by new combat actions. | **Proposal; not approved** | Stable enter/exit behavior with nearby enemies, attacks, dash, parry and scene changes. Do not bind weapon readiness to arbitrary one-shot clip completion. |
+| AI-06 | P1 | **Combat disengage / auto-sheath policy.** Prototype a 3–5 s inactivity window only when safe/out of combat. Trigger a dedicated sheath transition and allow interruption by new combat actions. | **Proposal; not approved** | Stable enter/exit behavior with nearby enemies, attacks, dash and scene changes. Do not bind weapon readiness to arbitrary one-shot clip completion. |
 | AI-07 | P1 | **Hitbox alignment:** current Hammer test divides 41 frames as **15/8/18**, which was a hypothesis, not a precise artist-confirmed impact frame range. Compare E/SE/S/SW/W/NW/N/NE impact poses with actual hitbox edges. | **Investigation** | Blade strikes land when visually plausible. Use direction-aware data only if necessary; avoid changing damage based on sprite-frame polling. |
-| AI-08 | P1 | **Defensive cancel policy:** test permits dash/parry during source recovery; early buffer 0.15 s. | **Eight recovery dash cancels verified; parry and detailed input-buffer edge cases pending.** | `dash_cancel` occurs at 0.82–1.30 seconds into the attack (recovery). All observed activated focused Quick Slash hitboxes subsequently deactivated. One separate `dash_slash` action occurred during isolation and warrants test-scenario purity review. |
+| AI-08 | P1 | **Defensive cancel policy:** test permits dash during source recovery; early buffer 0.15 s. | **Recovery dash validated; generic parry has been retired. Detailed dash-buffer edge cases remain optional.** | `dash_cancel` occurs at 0.82–1.30 seconds into the attack (recovery). All observed activated focused Quick Slash hitboxes subsequently deactivated. One separate `dash_slash` action occurred during isolation and warrants test-scenario purity review. |
 | AI-09 | P1 | **Combo continuation after accepted art:** define legal Cross Cut / Heavy Cleave starts, visual poses, queue windows and movement restrictions against drawn-sword Quick Slash; keep fallback profiles in the meantime. | **Future; blocked on later animation deliveries** | No unnecessary intermediate sheathing; no global lock to 1.37 s per hit; timing is tuned by playtest. |
 | AI-10 | **P1** | **North/South Run gait readability** — a perceived waddle may remain even after camera-induced jitter is fixed. | **Needs reassessment after permanent camera fix.** | Owner confirms N/S exhibited the same camera-dependent jitter more subtly; do not label remaining gait as an art defect until testing with corrected PHYSICS+ON camera. |
 | AI-11 | P2 | Keep debugging/scenario infrastructure reusable for future enemies/checkpoints; avoid permanent one-off gameplay mechanics leaking into production. | **Foundation implemented** | Debug-only controls, default normal scenario, specific event-gated logs, no shared AspectCatalog profile mutation. |
 | AI-12 | P1 | **End-to-end directional transition regression:** after new Action deliveries, verify each compass direction across Attack→Idle, Attack→Move, Attack→Dash, Dash→Idle, Draw→Attack, sheath interruption and scene reload. | **Planned; contingent on art** | Sprite selection and continuity remain correct; no loop-phase/one-shot restarts or sudden sword teleport. |
 | AI-13 | **P1** | **Directional Run screen-space jitter.** Original trace verified consecutive 16-frame playback. Owner's follow-up A/B showed old IDLE+ON camera jitter persisted with Run pose frozen, but disappeared with PHYSICS+ON or IDLE+OFF camera settings. | **Permanent camera fix field-tested positively in build `c81ead7`.** | `CameraFollow.gd` defaults to physics callback with smoothing preserved. Debug modes reproduce legacy regression. Do not change Hammer frames, Run FPS, or project-wide physics/interpolation. |
 | AI-14 | P3 | **Idle visibility at true gameplay scale.** Owner sees restrained Idle motion with no major complaint. | **Provisionally acceptable / monitor** | Check one full 40-frame 30 FPS Idle loop at source and native gameplay zoom; accept if natural and stable. Do not enlarge gestures simply to make motion conspicuous. |
-| AI-15 | **P1** | **Quick Slash skating during movement.** Normal Combat V2 Quick Slash weights (0.90 startup / 0.58 committed / 0.44 active / 0.82 recovery) permit substantial locomotion while the full Hammer draw-strike-sheathe plays. | **Source-timing-only planted motion fix implemented; owner retest pending.** | 41 frames at 30 FPS, hitbox timings and camera preserved. Movement weights and inherited lunge zeroed only for `checkpoint_b_source_timing`; dash/parry and external impulses allowed. Evaluate short intentional forward strike step separately after root lock is visually accepted. |
+| AI-15 | **P1** | **Quick Slash skating during movement.** Normal Combat V2 Quick Slash weights (0.90 startup / 0.58 committed / 0.44 active / 0.82 recovery) permit substantial locomotion while the full Hammer draw-strike-sheathe plays. | **Source-timing-only planted motion fix implemented; owner retest pending.** | 41 frames at 30 FPS, hitbox timings and camera preserved. Movement weights and inherited lunge zeroed only for `checkpoint_b_source_timing`; dash and external impulses allowed. Evaluate short intentional forward strike step separately after root lock is visually accepted. |
 | AI-16 | **P1** | **Recovery dash cancel feels inconsistent.** Four `dash_cancel` interrupts observed in three session logs, at 0.767/0.900/0.767/1.283 sec after attack start. | **Mechanism verified working; input diagnostics added; feel tuning pending.** | New `akio_focus_dash_input`, `akio_focus_dash_buffer_executed`, and `akio_focus_dash_buffer_expired` distinguish missed presses from cooldown/commit lock/buffer expiry. Do not globally relax commitment or cancel startup. |
 
 ## Practical architecture proposed for AI-03–AI-06 (not yet implemented)
@@ -79,7 +98,7 @@ A small **visual equipment-state machine** is preferable to hacking attack playb
 \`\`\`text
 SHEATHED  -- combat begins / first attack --> DRAWING or DRAW-ATTACK
 DRAWING   -- complete --> DRAWN
-DRAWN     -- Quick Slash / Cross Cut / Heavy Cleave / Dash / Parry --> DRAWN
+DRAWN     -- Quick Slash / Cross Cut / Heavy Cleave / Dash --> DRAWN
 DRAWN     -- safe + idle timeout --> SHEATHING
 SHEATHING -- complete --> SHEATHED
 SHEATHING -- interrupted by attack/dash --> DRAWN or a valid DRAW-ATTACK transition
@@ -104,7 +123,7 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 2. **Review Hammer's feedback with the owner**, prioritizing verified re-sheathing and any Run/source-art concern that remains after the technical A/B. Ask about keeping the blade drawn, matching Idle/Run poses and minimal editable Blender Action changes. Obtain approval before sending.
 3. **Plan later Cross Cut / Heavy Cleave animations** with consistent sword-drawn handoff poses; additions are not already authorized in Proof A. Once revised source and further combo actions are delivered, render all eight directions and integrate attack-to-attack flow before separately testing defensive cancels.
 4. **Only then decide final Quick Slash speed and combo-lockout durations.** The verified 1.3667-second draw–strike–sheath cycle is a visual reference, not a final mandatory commitment per hit.
-5. Keep additional tests for Normal-scenario timing, parry, input-buffer edge cases and atlas preparation performance on the engineering backlog without making them a reason to force provisional speed changes.
+5. Keep additional tests for Normal-scenario timing and dash input-buffer edge cases and atlas preparation performance on the engineering backlog without making them a reason to force provisional speed changes.
 
 ## Run frame trace and source contact-sheet analysis — 2026-10-22
 
@@ -126,7 +145,7 @@ Only introduce transitions that have matching art and have been approved. \`Idle
 
 **Evidence:** `combat_1792711340.jsonl`, `combat_1792711418.jsonl`, `combat_1792711539.jsonl`, `godot(20261022-232728).log`. Each real Quick Slash retains `source_30fps=true` and full source duration. All 34 recorded Quick Slash motor-start profiles in the three sessions use 0.90/0.58/0.44/0.82 phase movement weights (committed weight 0.58). This is fully sufficient to explain controllable translational skating without blaming Hammer's 2D render. Four Combat V2 `dash_cancel` interrupts are present: at ~0.767, 0.900, 0.767 and 1.283 seconds. These prove cancel exists, not that failed key presses were processed correctly; old telemetry captured successes, not attempts.
 
-**Targeted code adjustment:** When and only when `checkpoint_b_source_timing=true` for `quick_slash`, the Combat V2 `PlayerActionMotionPolicy` resolves zero phase locomotion weights and no legacy lunge for the full sequence. Preserve separate recovery-state dash/parry cancellation, hitboxes, 30 FPS presentation, knockback, other attacks' authored mobility. New debug-only `OathboundCombatPlayer` input telemetry records dash request acceptance, buffering, successful buffered execution and expiry without modifying the input windows. Smoke test covers rooted ATTACKING and RECOVERY, full source timing, buffered dash, and prototype motion continuity. Needs owner playtest; do not mark completed until confirmed.
+**Targeted code adjustment:** When and only when `checkpoint_b_source_timing=true` for `quick_slash`, the Combat V2 `PlayerActionMotionPolicy` resolves zero phase locomotion weights and no legacy lunge for the full sequence. Preserve separate recovery-state dash cancellation, hitboxes, 30 FPS presentation, knockback, other attacks' authored mobility. New debug-only `OathboundCombatPlayer` input telemetry records dash request acceptance, buffering, successful buffered execution and expiry without modifying the input windows. Smoke test covers rooted ATTACKING and RECOVERY, full source timing, buffered dash, and prototype motion continuity. Needs owner playtest; do not mark completed until confirmed.
 
 **Design follow-on (not yet implemented):** Consider a narrow Hades/Stygian-blade-style authored forward step during strike onset if rooted mode feels too static, but do not restore unrestricted input movement while the sword is visibly being sheathed. If misses recur, analyze new input-attempt events before lengthening buffering or reducing action commitment.
 

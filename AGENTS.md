@@ -50,7 +50,7 @@ objective: >-
 - There is **no universal player Posture bar, enemy Posture bar, posture-break kill loop, Deathblow prompt, or mandatory execution layer**.
 - `posture_damage`/similar fields may remain temporarily as internal compatibility pressure channels; they are not permission to restore visible Posture gameplay.
 - Defense is kit-specific where identity requires it. Ronin retains Guard/Reprisal identity.
-- Do not assume a universal parry/counter event across all Aspects.
+- Retired gameplay: the player parry feature was removed. Do not prescribe, revive, or test generic parry in Akio playtests; current defense is kit-specific (for example Ronin Guard/Reprisal). Ignore stale compatibility symbols/comments implying that Akio can parry. For Quick Slash recovery, test **dash** cancellation only.
 - Bosses/minibosses may own bespoke stagger, armor, vulnerability, phase, or recovery rules.
 - Pressure/AI difficulty comes from readable multi-enemy intentions, geometry, role combinations, movement, and authored commitments rather than HP sponges.
 

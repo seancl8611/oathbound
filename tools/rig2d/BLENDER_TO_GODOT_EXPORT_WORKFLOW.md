@@ -45,7 +45,7 @@ Read this BEFORE opening/exporting an artist's Blender delivery or changing Spri
 - Keep the manifest, SpriteFrames atlas, smoke tests, developer preview, source-cadence timing and playtest notes consistent with the approved *test* range. Attack hitboxes remain gameplay-owned; changing frame count changes test recovery duration only if explicitly desired.
 - On the present Akio test branch, use the safeguarded `tools/rig2d/upload_verified_idle_quickslash44.py` after running the Blender verifier. Do **not** use the legacy `akio_checkpoint_b_hammer_export.py` as authority for frame counts: it derives a count from the saved Action range, which caused the Run omission.
 - Prefer one asset-promotion commit and ordinary branch push, not extra repositories, backups or unstaged unknown changes. Do not commit .blend masters or ZIPs into the runtime game.
-- Launch the existing `./oathbound-playtest.cmd agent/akio-checkpoint-b-playtest`, verify Godot import and exact-head CI, and test all eight clips at intended source FPS. Check Idle->Run->Idle, attack->idle/run, recovery dash/parry, feet, weapon readiness, hitbox vs pose, and action-frame trace. Store observations in the appropriate playtest/artist tracker.
+- Launch the existing `./oathbound-playtest.cmd agent/akio-checkpoint-b-playtest`, verify Godot import and exact-head CI, and test all eight clips at intended source FPS. Check Idle->Run->Idle, attack->idle/run, recovery dash (the old player parry mechanic is retired), feet, weapon readiness, hitbox vs pose, and action-frame trace. Store observations in the appropriate playtest/artist tracker.
 
 ### E. Before advancing to a new artist or Milestone 2
 

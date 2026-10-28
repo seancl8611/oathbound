@@ -855,7 +855,7 @@ func _build_focused_tests_tab(tabs: TabContainer) -> void:
 	vbox.add_child(_quick_slash_timing_dropdown)
 
 	var timing_info := Label.new()
-	timing_info.text = "Hammer is the default debug-test timing: all base-katana Quick Slashes play 44 frames at 30 FPS, whether isolation is ON or OFF. Cross Cut / Heavy Cleave retain their original timing. Dash/parry may cancel during recovery. Switch to Original prototype to compare."
+	timing_info.text = "Hammer is the default debug-test timing: all base-katana Quick Slashes play 44 frames at 30 FPS, whether isolation is ON or OFF. Cross Cut / Heavy Cleave retain their original timing. Dash may cancel during recovery. Switch to Original prototype to compare."
 	timing_info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vbox.add_child(timing_info)
 
