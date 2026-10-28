@@ -18,6 +18,16 @@ accept final commissioned Quick Slash solely on frame-count or CI checks.
 Verification: \`runtime_frames_candidate_v2/idle_quickslash_source_verified_candidate_report.json\`.
 Repeatable procedure: \`tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md\`.
 
+## Observed revised-source 44-frame playtest (2026-10-28)
+
+**Evidence:** \`combat_1793194705.jsonl\` (573 valid JSONL events) and \`godot(20261028-134110).log\` from exact \`agent/akio-checkpoint-b-playtest\` commit \`017b66692a596ecdbeb406d02760e2f750c2fe83\`. All 13 exact-head GitHub Actions workflows passed. The real Akio atlas prepared with 24 animations / 816 frames in 2897 ms. No Godot script/runtime errors were reported.
+
+**Confirmed:** Seven ordinary (non-isolated) Quick Slash actions started and completed. Each reported \`source_30fps=true\`, \`presentation_duration=1.4666667s\`, \`attack_duration=0.7666667s\`, \`recovery_duration=0.7s\` and \`combat_v2_action_completed.elapsed=1.4666667s\`. All seven used zero voluntary locomotion weights for startup/committed/active/recovery; the intended planted-attack policy was applied. The tested attack-start facings were South (five), North (one), East (one). One later \`hold_thrust\` was started while normal combo isolation was off; capture ended before it completed, not a Quick Slash error. The 55.91 ms startup hitch and two Firing Line encounter fallback warnings are not direct Quick Slash export errors.
+
+**NOT YET PROVED:** These logs have **no** \`akio_focus_visual_frame\`, \`akio_focus_visual_exit\`, \`akio_focus_hitbox_edge\`, or dash/parry-focused events. Seven successful 44/30-second action lifecycles **do not prove all 44 individual visible indices (0..43) were shown** or that frame 43 matches a pleasing Idle transition. No qualitative owner feedback was included. The recorded North/South/East attack starts do not cover all eight orientations. Do not call the animation aesthetically accepted or the sprite-frame sampler verified solely from this capture.
+
+**Next focused verification:** In Hushiro, backtick -> Focused Tests -> **Akio Checkpoint B - Quick Slash only**, select **Hammer revised (44 frames / 30 FPS)**, turn on **Record focused animation frames in combat telemetry**, close the lab. Perform one uninterrupted Quick Slash while facing each of E/SE/S/SW/W/NW/N/NE, then repeat an attack with movement input held and separately test a recovery dash/parry. The next \`combat_*.jsonl\` must contain frame-level event traces; verify that each uncancelled attack reports indices **0..43** in order and that blade/Idle transitions look acceptable. Keep Run baseline interpolation OFF; do not change gameplay attack/hitbox authority to force sprite test success.
+
 ## Verified Run 18 integration (2026-10-27)
 
 The October revised Blender Run was re-rendered from the verified SHA-256 `2d81b409f326cd6c265e4b78d0076ec3bde23f6e0e209d2fcfb4709c79efbe7a`. The rig returns visually to its starting pose at frame 18, not 16. The correct 30 FPS runtime loop is **18 images, frames 0–17 per direction** (0.6 seconds). Across eight directions that is 144 Run frames, with 320 Idle and 320 Quick Slash, **784 total**. Preserve the physics-callback camera fix. The experimental Run-frame interpolation is **OFF** by default for baseline playtesting; an optional toggle remains available in Focused Tests.
