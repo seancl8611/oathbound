@@ -16,6 +16,8 @@ topics:
 
 # 2026-10-03 — Returning Blood origin and opening narrative revision
 
+> **Historical / superseded on 2026-10-29:** The Akio-specific Shogun injection and mandatory opening defeat in this record are no longer canon. See [the replacement decision](2026-10-29-physician-protective-binding-origin.md) and current `docs/lore/RETURNING_BLOOD.md`. This file is retained for historical context.
+
 This decision supersedes the earlier escaped-bloodline / dormant-inherited-Beast-Blood origin and the earlier fully unscripted first-death model.
 
 ## Locked origin

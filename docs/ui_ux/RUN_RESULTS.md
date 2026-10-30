@@ -4,7 +4,7 @@ title: Run Results and Strand Return
 category: ui-ux
 status: approved
 authority: primary
-last_reviewed: 2026-08-25
+last_reviewed: 2026-10-29
 topics:
   - run-results
   - first-return
@@ -45,7 +45,7 @@ Oathbound requires distinct presentation states for:
 
 The first death is not a standard failed-run reset because it awakens Returning Blood and establishes the roguelite return loop.
 
-After the unscripted first attempt ends:
+After Akio's first genuine death during the normal-route first expedition:
 
 1. load/transition to the Strand,
 2. play the approved first Returning Blood reconstruction beat,
@@ -178,4 +178,4 @@ The canonical Heart ending does not remove Returning Blood. Postgame deaths cont
 - Run-only and persistent information must be visually separated.
 - Final Technique build may be recorded for run history only if clearly non-equipped/non-recoverable and must preserve slotless ownership semantics.
 - First return, failed run, Binding return, first Heart clear, and repeat Heart-suppression clear require distinct result states.
-- The exceptional pre-awakening Shogun/Heart route records no destroyed Binding.
+- An exceptional pre-awakening Shogun/Heart route records no destroyed Binding; Returning Blood still awakens on the first genuine death.

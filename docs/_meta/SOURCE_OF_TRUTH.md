@@ -4,7 +4,7 @@ title: Source of Truth
 category: meta
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 ---
 
 # Source of Truth
@@ -40,6 +40,7 @@ Each major subject has one owning authority. Dependent docs summarize or transla
 | Progression / currencies | `docs/gameplay/PROGRESSION.md` + `ITEMS_AND_REWARDS.md` |
 | Run structure | `docs/gameplay/RUN_STRUCTURE.md` |
 | Akio character canon | `docs/characters/AKIO.md` |
+| Physician and protective-binding character | `docs/characters/strand/PHYSICIAN.md` |
 | Strand return-location presentation | `docs/content/strand/OVERVIEW.md` + `docs/lore/RETURNING_BLOOD.md` |
 | Scribe character / Returning Blood observer role | `docs/characters/strand/SCRIBE.md` |
 | Regional content | relevant `docs/content/area_*` authority |

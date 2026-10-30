@@ -4,7 +4,7 @@ title: The Strand
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - strand
   - hub
@@ -41,19 +41,17 @@ The Strand is Oathbound's persistent hub and the controlled threshold in the isl
 
 ## Returning Blood return point
 
-Before the player first controls Akio at the Strand, Akio has already used the hub as the Order expedition's secure foothold and knows its people and layout.
+Before departure the physician equips Akio with a first-field-test experimental anti-corruption binding at the Strand. Following direct exposure on the island and his first genuine death, Beast Blood reconstructs him at the established safe spot near the Bloodwell; the changed binding helps preserve his recognizable human identity.
 
-After the opening Shogun encounter, Akio dies with Returning Blood newly formed. With conscious control absent, the Blood follows his strongest survival instinct: return somewhere safe. The Strand is that place, and Akio reconstructs at one specific safe location within it.
+Neither the Strand nor the binding magically determines the return destination. Akio's **subconscious survival instinct** chooses this place of safety and repeated returns reinforce it.
 
-That first successful return reinforces the exact location as his subconscious destination, so later deaths reconstruct him there again.
-
-No Strand structure, Order oath, seal, Keeper power, Bloodwell function, Boat ritual, or barrier ward creates this return point. The Strand supplies the remembered safety; Akio's instinct supplies the destination; Returning Blood performs the reconstruction.
+The physician examines the changed binding; the Scribe records the historical and human implications.
 
 ## Permanent progression stations
 
 Current launch scope uses three permanent upgrade stations:
 
-- **Bloodwell:** Akio + Run Infrastructure progression.
+- **Bloodwell:** Akio + Run Infrastructure progression, with the physician overseeing its protective-binding research framing.
 - **Forge Bench:** Prosthetic + Relic progression and management.
 - **Blood Mirror:** Blood Aspect permanent progression after the Mirror unlocks later in the game.
 
@@ -99,7 +97,7 @@ The Strand should use a few distinct role-specific structures rather than repeat
 - dock and departure Boat,
 - barrier anchor or threshold shrine aligned with the offshore passage,
 - open-sided Forge,
-- formal Order house,
+- formal Order house with a small physician/warding workbench,
 - Keeper building or station near the threshold,
 - Merchant lean-to/stall,
 - Discovery Board and Scribe study,
@@ -134,6 +132,7 @@ NPC motion is restrained, functional, and watchful. The Strand should not feel s
 - [Raven](../../characters/strand/RAVEN.md)
 - [Undead Samurai](../../characters/strand/UNDEAD_SAMURAI.md)
 - [Scribe](../../characters/strand/SCRIBE.md)
+- [Physician](../../characters/strand/PHYSICIAN.md)
 
 ## Navigation requirement
 
