@@ -63,7 +63,7 @@ The Order assumes that destroying the source will end the threat. It does not po
 
 The mission is considered one-way. Akio is expected to complete as much of it as possible, not return with a report.
 
-Before the player's opening sequence begins, Akio has already arrived at the Strand, met the expedition personnel, crossed the barrier, and progressed deep into this mission.
+The player's opening begins at the Strand as Akio prepares to cross for the first time, receives the physician's experimental protective binding, and departs to the ordinary Hushiro route.
 
 ## Warding tradition
 

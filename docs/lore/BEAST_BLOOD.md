@@ -78,7 +78,7 @@ The Shogun's source-near capability remains part of his history and experiments 
 
 ## The Shogun's experiments
 
-The Shogun has deliberately exposed selected people to Beast Blood before Akio.
+The Shogun has deliberately exposed selected people to Beast Blood in the past, independently of Akio.
 
 Captives, enemies, followers, retainers, or warriors who interested him may have been given concentrated exposure so he could see what the curse made of them. Some unusually specialized creatures, minibosses, or bosses may eventually be revealed as products of these experiments where their individual lore supports it.
 

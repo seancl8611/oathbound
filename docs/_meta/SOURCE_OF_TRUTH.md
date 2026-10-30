@@ -57,7 +57,7 @@ Each major subject has one owning authority. Dependent docs summarize or transla
 4. Blood Aspect identity belongs to the Aspect authorities. Shared docs must not invent one universal defensive event simply to make old Technique or UI content fit.
 5. First-playtest numeric baselines are tunable implementation targets, not immutable design law.
 6. Historical/research docs never override a current authority.
-7. Current Returning Blood authority supersedes all escaped-bloodline, inherited-Beast-Blood, dormant island-pull, and unscripted-first-death explanations. Akio begins Blood-free; the opening Shogun exposure creates Returning Blood.
+7. Current Returning Blood authority supersedes inherited/escaped-bloodline origins and the former Shogun injection/required opening defeat. Akio begins Blood-free, receives the Order physician's protective binding, is directly infected in early Hushiro, and first reconstructs after a genuine death. The altered binding helps preserve humanity but neither creates the Blood nor supplies a guaranteed resurrection formula.
 8. The Strand is not a magical resurrection anchor. Returning Blood reconstructs Akio there because his subconscious survival instinct selects the established safe location.
 
 When a current authority and runtime disagree, reconcile both around the approved direction rather than restoring a retired system or lore explanation merely to satisfy an old test, count, or compatibility path.

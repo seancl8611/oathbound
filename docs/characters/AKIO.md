@@ -87,7 +87,7 @@ Only NPCs, intelligent enemies, and bosses speak. Akio communicates through acti
 
 Non-semantic breathing, combat exertions, hurt sounds, or similar performance audio may exist if useful, but they are not authored dialogue.
 
-This silence applies through the entire campaign, including the first Shogun exposure, Returning Blood investigation, Shogun recruitment, Heart confrontation, ending, and postgame presentation.
+This silence applies through the entire campaign, including the physician's opening binding, first Blood exposure, Returning Blood investigation, Shogun recruitment, Heart confrontation, ending, and postgame presentation.
 
 ## Personality and narrative presentation
 
@@ -115,13 +115,9 @@ Before crossing, an Order physician fits him with an experimental anti-corruptio
 
 ## Relationship to the Scribe
 
-Akio and the Scribe knew each other before the Blood Moon expedition because both served within the Order. They share a quiet pre-existing romantic attachment, but Oathbound does not treat their relationship as a large romance subplot.
+Akio and the Scribe knew each other through the Order and share a quiet pre-existing romantic connection. The Scribe has her own assignment at the Strand as archivist and discovery recorder.
 
-The Scribe has an independent reason to be at the Strand: she is the Order's assigned archivist and discovery recorder for the expedition.
-
-Because the player first sees the Strand after Akio's first resurrection, the Scribe and other hub NPCs do not need introductory conversations with him. They already know him. Their first major player-facing reaction is disbelief that he has returned alive.
-
-The Scribe becomes both a professional observer of Returning Blood and someone personally disturbed by what repeated reconstruction may be doing to Akio.
+Because play begins with preparation at the Strand, the player may see the two together before Akio's first island crossing; they do not need to be introduced as strangers. After his unexpected first resurrection, the Scribe reacts with relief and disquiet. The physician investigates Akio's changing body and binding, while she preserves discoveries and worries about what repeated returns cost him.
 
 ## Protective binding and Returning Blood origin
 

@@ -56,7 +56,7 @@ This document summarizes Oathbound's approved launch shape. Detailed mechanics r
 | True-final Heart | 1 encounter / 2 forms |
 | Persistent resources | Mist, Scrolls, 3 boss-material families |
 | Run-only currency | Gold |
-| Opening narrative | Authored first-attempt lead-in + first Shogun experiment/death/return |
+| Opening narrative | Strand physician fitting + normal Hushiro first run + direct exposure / first-death return |
 | Binding presentation | 6 states of one reusable ritual |
 | Major Strand conversations | ~30–36 |
 | Lore / Records entries | ~20–25 substantive entries |

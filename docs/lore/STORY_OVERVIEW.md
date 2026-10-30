@@ -86,7 +86,7 @@ He now intends to end containment, restore his kingdom, and extend Beast Blood t
 
 ## Shogun experiments
 
-The Shogun has used Beast Blood deliberately on selected people before Akio. Captives, enemies, followers, retainers, or warriors who interested him may have been exposed so he could observe what the curse made of them.
+The Shogun has used Beast Blood deliberately on selected people in the past, independently of Akio. Captives, enemies, followers, retainers, or warriors who interested him may have been exposed so he could observe what the curse made of them.
 
 Some unusual island creatures, minibosses, or bosses may therefore be revealed as past experiments where their individual lore supports it. This is not the origin of every corrupted being.
 
@@ -207,7 +207,7 @@ The following remain intentionally unresolved:
 
 - the Heart's ultimate origin,
 - the ancient builders and full purpose of the prison,
-- exactly why Akio responds so successfully to concentrated Beast Blood,
+- exactly why Akio and the altered protective binding preserve identity after direct Beast Blood exposure and death,
 - the exact metaphysics connecting identity/emotion/intention to transformation,
 - the exact supernatural mechanics of Strand reconstruction across distance,
 - which specific creatures were created by Shogun experimentation,

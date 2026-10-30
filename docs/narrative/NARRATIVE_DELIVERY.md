@@ -86,13 +86,7 @@ Akio and the Shogun both possess exceptional resolve. Their different intentions
 
 # Shogun experimentation delivery
 
-The Shogun's act on Akio should later be contextualized as something he has done before.
-
-Recovered records, Keeper/Scribe interpretation, specific boss histories, or the Shogun himself may reveal that he exposed selected captives, enemies, followers, retainers, or promising warriors to Beast Blood to see what the curse would make of them.
-
-Some specific powerful creatures may therefore be past experiments. Do not retroactively make every beast on the island one of his creations.
-
-This history explains his confidence in the opening act while preserving uncertainty about Akio's outcome.
+Records, selected creatures, and the Shogun's statements may reveal that he deliberately exposed **other** island subjects to Beast Blood. That history illustrates his confidence and cruelty, but it has no causal role in Akio's first infection, protective binding, or resurrection. Not every island creature is a Shogun experiment.
 
 # Campaign story cadence
 
@@ -145,7 +139,7 @@ Production uses one reusable ritual with escalating persistent Heart/Binding sta
 
 Mandatory story delivery owns:
 
-- opening Shogun exposure,
+- early direct Beast Blood exposure and changing protective binding,
 - first return,
 - Returning Blood's unprecedented nature,
 - Shogun reconstruction,

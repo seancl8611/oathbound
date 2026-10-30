@@ -4,7 +4,7 @@ title: Run Structure
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - runs
   - first-attempt
@@ -55,22 +55,11 @@ The campaign takes place beneath the Blood Moon. The game does not define how mu
 
 ## Introductory first attempt
 
-The first attempt is an **authored opening expedition already in progress**, not the normal repeatable 33-chamber roguelite route. `FIRST_ATTEMPT.md` owns its exact pre-awakening gameplay contract.
+The first attempt begins at the Strand with a concise fitting of the Order physician's experimental protective binding, then follows the **normal Hushiro Floor 1 route**. Akio starts human, with no Beast Blood or Blood Aspect powers.
 
-Before the player takes control, Akio has already reached the Strand, met its recurring NPCs, crossed onto the island, and progressed deep into the expedition as an ordinary Order swordsman with no Beast Blood.
+A serious early direct blood-bearing encounter introduces Beast Blood despite the binding's incomplete protection. His first **genuine death** during play triggers unexpected Returning Blood reconstruction and begins the repeated preparation/progression loop. There is no required introductory Shogun confrontation, Shogun-given Blood, or scripted defeat.
 
-The playable opening teaches essential combat through real gameplay and advances to the Eclipse Shogun. The first Shogun encounter is mechanically playable and should respect player performance, but its narrative outcome is fixed:
-
-1. Akio is defeated and mortally wounded.
-2. The Shogun becomes interested in the human who reached him without Beast Blood.
-3. The Shogun calls a large, source-near concentration of ordinary Beast Blood from the island/Heart and forces it into Akio.
-4. Akio dies.
-5. Returning Blood forms and reconstructs Akio at the Strand.
-6. The normal repeated-run preparation/progression loop begins.
-
-The Shogun does not deliberately stabilize or weaken Akio's transformation. He is testing what the Blood will make of him, not intentionally creating Returning Blood.
-
-The exact playable opening length, encounter count, and route slice are production/playtest decisions. It does **not** need to reproduce the entire normal Hushiro → Yomori → Kagutsuchi route before the scripted Shogun confrontation.
+The first-run restrictions stay in effect until awakening. An exceptional player may progress far before dying but cannot destroy a Heart Binding before first resurrection. `FIRST_ATTEMPT.md` owns the exact edge-case and onboarding contract.
 
 ## Regional flow
 
@@ -275,7 +264,7 @@ The Eclipse Shogun is fixed at Chamber 11 and completes the normal post-awakenin
 
 The Shogun must test a mature run build without assuming a specific Aspect Tier, Blood Art, Technique family, Legendary, Relic, Prosthetic upgrade level, or exact reward history.
 
-This repeatable Chamber 11 confrontation is distinct from the authored opening first-attempt Shogun encounter that creates Returning Blood.
+This repeatable Chamber 11 confrontation is not preceded by a mandatory opening Shogun experiment; Akio's Returning Blood awakens upon his first genuine death after the early Hushiro infection.
 
 ### Kagutsuchi route-network safeguards
 
