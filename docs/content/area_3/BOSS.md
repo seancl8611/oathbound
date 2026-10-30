@@ -4,7 +4,7 @@ title: The Eclipse Shogun — Boss Encounter
 category: content
 status: draft
 authority: primary
-last_reviewed: 2026-08-18
+last_reviewed: 2026-10-29
 topics:
   - area-3
   - eclipse-shogun
@@ -43,14 +43,14 @@ The fight should expose his false mastery: he can direct mutation and retain dis
 
 ## Repeated relationship
 
-The encounter supports campaign-level progression rather than narratively resetting after each run:
+The repeated Shogun fight advances an ongoing relationship rather than narratively resetting after each run:
 
-1. dismissal,
-2. fascination with Akio's returns and controlled Aspects,
-3. recognition/recruitment through the escaped royal bloodline,
-4. fear and hatred after Akio rejects him and attacks the Heart.
+1. discovery of Akio's unusual independent control of Beast Blood,
+2. fascination with Returning Blood and increasingly directed Aspects,
+3. recognition and attempted recruitment as proof of the Shogun's forced-salvation beliefs,
+4. possessive anger, fear and hatred after Akio refuses through action and damages the Heart.
 
-Exact dialogue and cinematic implementation remain owned by `NARRATIVE_DELIVERY.md`.
+Akio's origin is not an escaped bloodline and not a Shogun experiment. Exact dialogue and cinematic implementation remain owned by `NARRATIVE_DELIVERY.md`.
 
 ## Character direction
 

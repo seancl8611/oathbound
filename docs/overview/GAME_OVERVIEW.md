@@ -4,7 +4,7 @@ title: Oathbound Game Overview
 category: overview
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - project-identity
   - combat
@@ -50,15 +50,11 @@ The game should feel disciplined, dangerous, elegant, cursed, and readable. Play
 
 # Premise
 
-Akio is a silent warrior of the Order sent through a containment barrier onto a cursed Japanese-gothic island whose kingdom once used Beast Blood from the Heart to survive a plague.
+Akio is a silent Order swordsman sent to a cursed island beyond a containment barrier. He begins fully human with **no Beast Blood**.
 
-Akio begins as an ordinary human Order swordsman with **no Beast Blood**. The game starts late in his already-underway first expedition, after he has met the Strand NPCs and fought deep enough into the island to reach the Eclipse Shogun through his own skill.
+An Order physician fits him with an experimental anti-corruption binding before departure. During an early Hushiro encounter, a serious direct blood-bearing wound infects him despite partial protection. The device begins changing alongside the curse. After his first genuine death, Beast Blood unexpectedly reconstructs Akio while the altered binding helps preserve his human identity. This is **Returning Blood**.
 
-The Shogun defeats and mortally wounds him, then deliberately calls a large, source-near concentration of ordinary Beast Blood from the Heart/island and forces it into Akio with the intent: **"Let's see what the Blood makes of you."**
-
-Akio dies. Instead of remaining dead or becoming a conventional beast, the Blood reconstructs him while preserving the continuity of his identity. This unprecedented relationship becomes **Returning Blood**.
-
-Beast Blood affects people differently and appears influenced by the bearer: identity, intention, emotion, resolve, circumstance, physical condition, and manner of exposure may all shape the result. The exact reason Akio responds so successfully remains deliberately unexplained.
+Beast Blood powers the supernatural effects; the device regulates imperfectly; Akio's own identity and discipline shape his emerging control. Exact mechanics remain mysterious.
 
 # Core player fantasy
 
@@ -70,18 +66,9 @@ Akio never speaks, supplies dialogue choices, or uses internal monologue. NPCs, 
 
 # First attempt
 
-The first attempt is an **authored opening expedition already in progress**, not the normal repeatable 33-chamber route.
+The player begins with a concise Strand physician preparation beat, then the normal Hushiro Floor 1 route. Akio has ordinary human combat abilities until first genuine death and awakening.
 
-- Akio has already arrived at the Strand and met its recurring NPCs before the player's first hub-controlled state.
-- Player control begins late in Akio's first expedition.
-- Akio has no Beast Blood, Blood Aspect, Corruption/Tier progression, Blood, Blood Art, or permanent Blood progression yet.
-- The opening teaches essential combat through real gameplay and advances to the Eclipse Shogun.
-- The first Shogun encounter is playable and should respect player performance, but Akio's narrative defeat is required.
-- The Shogun forces source-near Beast Blood into the mortally wounded Akio.
-- Akio dies and reconstructs at the Strand as the first known bearer of Returning Blood.
-- The normal roguelite loop begins after that return.
-
-The exact opening route slice, encounter count, and duration remain production/playtest decisions. `FIRST_ATTEMPT.md` owns the detailed contract.
+There is no compulsory opening Shogun fight or Shogun-caused exposure. A no-death mastery player cannot break a Heart Binding or skip the six-Binding campaign before awakening. `FIRST_ATTEMPT.md` owns the details.
 
 # Returning Blood and the Strand
 
@@ -103,17 +90,13 @@ Akio and the Shogun are thematic parallels: both have exceptional resolve, but t
 
 # The Shogun's experiments
 
-The Shogun's act on Akio is not a one-off capability invented for the protagonist.
+The Shogun can direct ordinary Beast Blood through his exceptional Heart connection and may have experimented on selected **other** bearers. He did not infect Akio or produce his protective binding.
 
-Through his centuries-long bond with the Heart, the Shogun can call and direct ordinary Beast Blood from or near its source. He has previously exposed selected captives, enemies, followers, retainers, or promising warriors to Beast Blood to see what the curse would make of them.
-
-Some unusual/powerful island creatures may be revealed as past Shogun experiments where that origin strengthens their individual lore. This is not the origin of every corrupted being.
-
-The Shogun does **not** possess a separate refined blood type and does not intentionally stabilize Akio's transformation.
+When he later encounters Akio's unusual degree of control, his curiosity grows into fascination, attempted recruitment, then fear and hatred as Akio opposes the Heart.
 
 # Current gameplay shape
 
-- Returning Blood awakens after the scripted opening Shogun exposure/death and begins the repeated-run progression loop.
+- Returning Blood awakens after the first genuine death following direct Hushiro exposure and begins the repeated-run progression loop.
 - Shared combat uses **player Health + mobility + kit-specific/selective defense**.
 - Standard enemies use **Health + hidden Poise/interruption**. Health is the normal defeat condition.
 - Ronin retains its authored **guard / Reprisal** identity; the shared combat model does not assume every Aspect exposes the same timed defensive action.
@@ -172,7 +155,7 @@ Standard Combat rooms use **deliberately authored encounter scripts**. When a Co
 
 Standard enemies are region-native by default. The approved launch cross-region lineage is **Blighted Hounds → Stalker Hound** in Yomori Grove; Kagutsuchi's standard enemies remain native Court units.
 
-The authored opening first attempt is separate from this repeatable 33-chamber structure.
+The first attempt begins on the normal Hushiro route; it has pre-awakening restrictions rather than a separate mandatory Shogun prologue.
 
 # Campaign structure
 
@@ -182,7 +165,7 @@ After Returning Blood awakens, each of the first six successful Binding runs has
 
 The same ritual uses six escalating visual/campaign states rather than six different mechanisms or missions.
 
-The Shogun relationship begins with the **opening experiment** and develops through fascination → recognition/recruitment → possessive anger → fear → hatred/desperation → final confrontation. Akio remains silent throughout.
+The Shogun relationship begins with **discovery** of Akio's unusual control and develops through fascination → recruitment → possessive anger → fear → hatred/desperation → final confrontation. Akio remains silent.
 
 After all six remaining Bindings are destroyed, the final story run continues directly from the Shogun into the true-final Heart encounter with the same active build.
 
@@ -195,7 +178,7 @@ The main story ends because the curse can no longer expand to anyone new or thre
 The launch narrative package remains intentionally bounded:
 
 - silent Akio with zero dialogue/choice/internal-monologue content,
-- an authored opening Shogun confrontation/exposure sequence,
+- a physician fitting, direct early island exposure and first-death reconstruction sequence,
 - a first Strand reconstruction/reaction sequence,
 - recurring post-return Shogun confrontation states following fascination → recognition/recruitment → anger/fear/hatred,
 - **6 visual states** of one reusable Binding ritual,
@@ -208,7 +191,7 @@ The launch narrative package remains intentionally bounded:
 
 Mandatory campaign information is communicated directly; the Discovery Board carries optional historical depth rather than required plot comprehension.
 
-The Scribe is the main recurring observer of Returning Blood. She may gradually establish that Beast Blood affects people differently, seems shaped by the bearer, rebuilds Akio, and increasingly follows his intent/instinct without ever providing a definitive scientific explanation.
+The physician researches the altered protective binding and oversees Bloodwell progression fiction. The Scribe independently records history, discoveries and the human implications of Returning Blood; neither provides a definitive scientific explanation.
 
 # Canonical postgame
 

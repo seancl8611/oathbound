@@ -4,7 +4,7 @@ title: Bloodwell
 category: content
 status: approved
 authority: primary
-last_reviewed: 2026-08-17
+last_reviewed: 2026-10-29
 topics:
   - strand
   - bloodwell
@@ -38,9 +38,11 @@ Launch scope is **10 Akio nodes + 8 Run Infrastructure nodes**. `PROGRESSION.md`
 
 ## Lore role
 
-The Bloodwell is a controlled Order ritual site later associated with Akio's unprecedented returns. It does not create Returning Blood, power revival, or function as a physical Heart-connected anchor.
+The Bloodwell remains Akio's stable visual reformation point and the existing Akio + Run Infrastructure permanent-progression station.
 
-Akio's first reconstruction establishes the Strand as the stable return destination; the Bloodwell is the approved presentation point within that hub.
+The physician works nearby to examine Akio's altered protective binding, apply treatments and research ways to improve resilience. This **reframes existing Bloodwell upgrades**, not a new station, currency or fourth upgrade tree.
+
+The Bloodwell does not create Returning Blood, choose the destination or empower a magic tether. Beast Blood reconstructs Akio while subconscious instinct selects the Strand.
 
 ## Visual identity
 

@@ -4,7 +4,7 @@ title: Eclipse Shogun
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - eclipse-shogun
   - beast-blood
@@ -80,7 +80,7 @@ The experiments serve three narrative functions:
 
 - establish that the Shogun already knows he can deliberately direct Beast Blood into others,
 - reinforce his belief that stronger people can become superior forms,
-- and make his treatment of Akio an extension of established behavior rather than a one-off ritual invented for the protagonist.
+- reinforce his false claims of mastery without making him responsible for Akio's Returning Blood origin.
 
 ## Present goal
 
@@ -92,25 +92,9 @@ Kagutsuchi Court's disciplined elites are his preferred proof that the Blood can
 
 ## First confrontation with Akio
 
-Akio reaches the Shogun on his first expedition **before possessing Beast Blood**.
+Akio's first expedition begins in Hushiro and can reach the Shogun through normal play. The Shogun did not infect Akio, manufacture his device, or require a scripted opening defeat.
 
-This is important to the Shogun. An ordinary human Order swordsman has crossed the island and reached him through skill alone.
-
-The opening fight is playable, but the story requires Akio's defeat. After mortally wounding him, the Shogun chooses to test rather than merely discard him.
-
-His intention is captured by the line:
-
-> "Let's see what the Blood makes of you."
-
-The Shogun calls a large, source-near concentration of Beast Blood through his bond with the Heart. The chamber's veins awaken; Blood moves through the environment and around him or his weapon; he drives it into Akio's mortal wound.
-
-He is **not** deliberately stabilizing, weakening, or slowing Akio's transformation. He does not know the result.
-
-He expects Akio either to die from the curse or to become some powerful transformed bearer.
-
-Instead, Akio dies and later reconstructs at the Strand as the first known bearer of Returning Blood.
-
-The Shogun therefore accidentally creates the conditions for the greatest threat to his rule.
+When he encounters Akio, he finds a cursed swordsman with an increasingly unusual degree of self-control. This discovery challenges his understanding of Beast Blood.
 
 ## Akio and Shogun as parallels
 
@@ -126,32 +110,21 @@ The contrast is thematic rather than a moral transformation formula.
 
 ## Relationship to Akio after the first return
 
-Their relationship develops through five broad stages:
-
-1. **Curiosity / experiment** — the Shogun chooses to expose the mortal Akio to Beast Blood to see what it will make of him.
-2. **Fascination** — Akio returns and begins demonstrating controlled Blood Aspects.
-3. **Recognition and recruitment** — the Shogun treats Akio as apparent proof that Beast Blood can be mastered and attempts to claim him as validation of his worldview.
-4. **Possessive anger and fear** — Akio silently rejects him and continues breaking Heart Bindings.
-5. **Hatred and desperation** — Akio threatens the Heart and the future of the Shogun's kingdom.
-
-The Shogun's offer is sincere within his corrupted worldview but possessive rather than equal.
-
-Akio remains silent. His answer is continued opposition.
+1. **Discovery:** he encounters an independently cursed Akio.
+2. **Fascination:** repeated returns and controlled mutations draw his attention.
+3. **Recognition and recruitment:** he tries to claim Akio as proof of his salvation ideology.
+4. **Possessive anger and fear:** Akio refuses and damages Heart Bindings.
+5. **Hatred and desperation:** Akio threatens the Heart and the Shogun's kingdom.
 
 ## Campaign confrontation states
 
-`NARRATIVE_DELIVERY.md` owns exact presentation, but the approved cadence is:
+- **First normal-route encounter — Discovery:** the Shogun sees Akio's exceptional relationship with Beast Blood.
+- **Later encounters — Fascination:** he notices repeated returns and directed Blood Aspects.
+- **Recognition / recruitment:** he attempts to win Akio to the Court's cause.
+- **Possessive anger / fear / hatred:** continued opposition and Binding damage threaten his rule.
+- **Final story confrontation:** he falls before the true-final Heart route.
 
-- **Opening Shogun confrontation — Experiment:** first attempt; Akio has no Beast Blood; Shogun causes the exposure and Akio's narrative defeat.
-- **Post-return Shogun 1 — Fascination:** the Shogun sees that Akio returned from the experiment.
-- **Post-return Shogun 2 — Recognition:** Akio's growing control becomes undeniable.
-- **Post-return Shogun 3 — Recruitment:** the Shogun openly tries to claim Akio as proof of mastery.
-- **Post-return Shogun 4 — Possessive anger:** continued refusal and Binding damage turn curiosity into anger.
-- **Post-return Shogun 5 — Fear beneath contempt:** the Heart is increasingly endangered.
-- **Post-return Shogun 6 — Hatred/desperation:** final Binding campaign confrontation.
-- **Final story Shogun — Final confrontation:** no Bindings remain; the route continues directly into the Heart.
-
-Exact line count/state numbering may be consolidated by narrative production as long as the opening exposure and later relationship progression remain intact.
+Exact line delivery and state counts remain production decisions. No scripted opening Shogun experiment occurs.
 
 ## Character and encounter identity
 
@@ -181,29 +154,6 @@ This supports canonical postgame continuity: the Shogun and other existing beare
 
 ## Current boundaries
 
-Locked:
+Locked: plague-era responsibility and false mastery; extraordinary Heart bond and ability to direct source-near Blood; past experiments on **other** bearers; **no Shogun-created Akio**; fascination → recruitment → anger/fear/hatred; continued Shogun regeneration, Heart Binding arc and canonical postgame.
 
-- ruler before the Order,
-- plague-era responsibility,
-- forced-salvation goal,
-- false mastery,
-- exceptional bond with the Heart,
-- ability to call/direct ordinary source-near Beast Blood,
-- history of deliberate Beast Blood experiments on selected people,
-- opening first-attempt confrontation where he causes Akio's Beast Blood exposure,
-- "Let's see what the Blood makes of you" as the intent/working line,
-- no deliberate stabilization of Akio's transformation,
-- Akio/Shogun resolve parallel shaped by different identities and intentions,
-- fascination → recognition/recruitment → anger/fear/hatred progression,
-- regal controlled character direction,
-- reconstruction throughout the Binding campaign and postgame,
-- permanent loss of the Heart's ability to create/spread new Beast Blood after the story victory.
-
-Deferred:
-
-- exact list of creatures created through Shogun experimentation,
-- exact barrier-breach plan,
-- final dialogue wording beyond approved intent lines,
-- exact reconstruction visuals,
-- exact encounter structure and moveset,
-- final visual concept and production list.
+Deferred: which creatures were experiments, exact barrier-breach method, Shogun lines, encounter design, reconstruction visuals and art.

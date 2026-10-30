@@ -4,13 +4,19 @@ title: Decision Log
 category: meta
 status: approved
 authority: summary
-last_reviewed: 2026-09-28
+last_reviewed: 2026-10-29
 topics:
   - decisions
   - design-history
 ---
 
 # Decision Log
+
+## 2026-10-29 — Physician protective binding and normal first-run origin
+
+Supersedes the October 3 **Akio-specific** Shogun experiment and required opening defeat. Akio begins human, receives a first-field-test Order physician binding, enters normal Hushiro Floor 1, contracts Beast Blood through an early direct wound, and first reconstructs after a genuine in-run death. The changed device helps preserve identity; Blood supplies regeneration; Akio remains cursed. The new physician is a seventh major Strand NPC linked to existing Bloodwell progression, distinct from the Scribe. The Strand remains Akio's subconscious safe destination. The six-Binding campaign and final Heart are unchanged.
+
+See [new decision](decisions/2026-10-29-physician-protective-binding-origin.md) and [current Returning Blood authority](../lore/RETURNING_BLOOD.md).
 
 Concise index of major approved directions that materially changed Oathbound's game shape. Detailed iteration remains recoverable through Git history; current authoritative files always override this history.
 

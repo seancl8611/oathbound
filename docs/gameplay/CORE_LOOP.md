@@ -4,7 +4,7 @@ title: Core Gameplay Loop
 category: gameplay
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - core-loop
   - first-attempt
@@ -31,17 +31,11 @@ related:
 
 ## Opening first attempt
 
-Before the persistent roguelite loop begins, the player enters late in Akio's first island expedition.
+Akio begins as a fully human Order swordsman at the Strand, where a physician fits an experimental protective binding before the Boat departs for **normal Hushiro Floor 1**.
 
-Akio is still an ordinary human Order swordsman with no Beast Blood, Returning Blood, Blood Aspect, Corruption, or Blood Art. He has already visited the Strand and met its recurring NPCs before the player's first hub-controlled state.
+An early authored, direct blood-bearing wound introduces Beast Blood; the binding cannot entirely exclude it. The first genuine death during play unexpectedly awakens Returning Blood and opens the recurring loop. The Shogun does not trigger Akio's initial infection or a mandatory opening defeat.
 
-The opening advances to the Eclipse Shogun. The first Shogun fight is playable and should respect player skill, but the narrative outcome is fixed: Akio is defeated and mortally wounded.
-
-The Shogun then calls a large, source-near concentration of ordinary Beast Blood from the island/Heart and forces it into Akio with the intent, "Let's see what the Blood makes of you."
-
-Akio dies. Returning Blood forms and reconstructs him at the Strand. This event begins the normal repeated-run structure.
-
-`FIRST_ATTEMPT.md` owns the exact opening gameplay contract and presentation boundary.
+A mastery no-death run cannot skip the six Heart Bindings; `FIRST_ATTEMPT.md` owns exceptional pre-awakening behavior.
 
 ## Persistent loop
 
@@ -61,11 +55,9 @@ Akio dies. Returning Blood forms and reconstructs him at the Strand. This event 
 
 ## Returning Blood loop logic
 
-Returning Blood is not an inherited restart token or a Strand-powered resurrection system.
+Beast Blood supplies regeneration and mutation while the changed protective binding helps maintain identity; Akio's discipline increasingly shapes chosen transformations.
 
-While Akio is alive, the Blood increasingly responds to conscious intention. When he dies, conscious control disappears and the Blood falls back on survival instinct. The Strand is the safest place Akio knows during the expedition, so his subconscious directs reconstruction to the same established safe location there.
-
-The first resurrection creates this repeated gameplay loop only after the Shogun's opening Beast Blood exposure.
+On death, Akio's subconscious survival instinct selects the Strand as his safest familiar place. The Blood reconstructs him at the same spot. The physician's device and Strand are **not** magical resurrection anchors.
 
 ## Moment-to-moment loop
 

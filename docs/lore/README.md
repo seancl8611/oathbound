@@ -13,7 +13,7 @@ Remaining narrative work concerns authored delivery and production detail: final
 - [Story Overview](STORY_OVERVIEW.md) — complete campaign spine and ending
 - [World](WORLD.md) — island and historical world context
 - [Beast Blood](BEAST_BLOOD.md) — source, effects, bearer variation, transmission, and corruption rules
-- [Returning Blood](RETURNING_BLOOD.md) — Akio's Shogun-caused first exposure, reconstruction, and Strand return logic
+- [Returning Blood](RETURNING_BLOOD.md) — Akio's physician-binding exposure, reconstruction, and Strand return logic
 - [The Order](THE_ORDER.md) — mission authority and background faction
 - [The Barrier and Blood Moon](THE_BARRIER_AND_BLOOD_MOON.md) — containment, crossing, and campaign setting
 - [Eclipse Shogun](ECLIPSE_SHOGUN.md) — antagonist history, Heart bond, experiments, goal, and relationship to Akio
@@ -26,27 +26,17 @@ The Story Overview summarizes the complete spine. Detailed rules remain in the l
 
 ## Current Returning Blood foundation
 
-Akio does **not** inherit Returning Blood or dormant Beast Blood through an escaped bloodline.
+Akio does **not** inherit Returning Blood. He is an ordinary human who receives an experimental protective binding from the Order physician before the first island run.
 
-He reaches the Eclipse Shogun on his first expedition as an ordinary human Order warrior. The Shogun deliberately forces a large concentration of ordinary Beast Blood drawn directly from or near the Heart into the mortally wounded Akio. Akio dies and becomes the first known bearer of Returning Blood.
+The player begins at the Strand then normal Hushiro Floor 1. An early direct blood-bearing wound infects Akio despite the device's incomplete protection. At his first genuine death, Beast Blood rebuilds him while the altered binding helps preserve humanity. The device was not designed for resurrection.
 
-Why Akio responds so successfully remains deliberately unresolved. Beast Blood affects bearers differently and appears influenced by identity, intention, emotion, resolve, circumstance, and manner of exposure without following a rigid scientific or moral formula.
-
-Returning Blood increasingly responds to Akio's conscious intent. In death it falls back on survival instinct, causing Akio to reconstruct at the same safe location on the Strand he subconsciously chooses as his return destination.
+The Shogun does not cause Akio's initial infection or a required opening defeat. The Strand is selected subconsciously by Akio's survival instinct, not by a tether. The physician examines the device and oversees existing Bloodwell upgrades; the Scribe records the history and human cost.
 
 ## Remaining narrative production
 
-Narrative delivery must continue refining the authored presentation for:
-
-- the playable opening expedition and first Shogun defeat,
-- the Shogun's "Let's see what the Blood makes of you" exposure sequence,
-- Akio's first Returning Blood reconstruction,
-- Strand NPC disbelief and the Scribe's gradual investigation,
-- implied evidence that bearer identity/emotion influences Beast Blood,
-- selected creatures whose histories may reveal past Shogun experimentation,
-- Shogun dialogue progression and reconstruction,
-- campaign-state NPC, codex, results, and Heart-chamber updates,
-- ending and credits,
-- voice acting and final cinematic/in-engine dialogue scope.
-
-Deliberate mysteries such as the Heart's ultimate origin, the ancient builders, and the exact reason Akio is the unprecedented successful bearer are canon boundaries, not missing answers.
+- Short Strand physician fitting and normal Hushiro onboarding.
+- Direct early Blood exposure and altered-binding reaction.
+- Natural first death, reconstruction, physician/Scribe reactions.
+- Gradual device adaptation and uncertain personal costs.
+- Shogun discovery, fascination, recruitment and opposition beats.
+- Six Binding rituals, true Heart climax, ending and postgame.

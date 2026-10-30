@@ -4,7 +4,7 @@ title: Strand NPC Roster
 category: character
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-10-29
 topics:
   - strand
   - npcs
@@ -16,7 +16,7 @@ related:
 
 # Strand NPC Roster
 
-The Strand contains six primary recurring NPC roles. The roster is authoritative here; each linked file owns the character's detailed identity, motion, animation, and presentation brief.
+The Strand contains seven primary recurring NPC roles. The roster is authoritative here; each linked file owns the character's detailed identity, motion, animation, and presentation brief.
 
 | NPC | Primary function | Detailed brief |
 |---|---|---|
@@ -26,6 +26,7 @@ The Strand contains six primary recurring NPC roles. The roster is authoritative
 | Raven | Order courier for vows, notices, progress, and rewards | [Raven](strand/RAVEN.md) |
 | Undead Samurai | Combat teacher, trial-giver, and martial repository | [Undead Samurai](strand/UNDEAD_SAMURAI.md) |
 | Scribe | Archivist, codex keeper, and discovery tracker | [Scribe](strand/SCRIBE.md) |
+| Physician | Experimental protective-binding research and Bloodwell progression framing | [Physician](strand/PHYSICIAN.md) |
 
 ## Shared production requirements
 
