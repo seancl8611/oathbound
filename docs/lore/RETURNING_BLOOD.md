@@ -4,7 +4,7 @@ title: Returning Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - returning-blood
   - akio
@@ -31,11 +31,11 @@ related:
 
 # Returning Blood
 
-Returning Blood is the unprecedented form Beast Blood takes within Akio after the Eclipse Shogun deliberately forces a large, source-near concentration of the Heart's Blood into him at the end of Akio's first attempt.
+Returning Blood is the unprecedented reconstruction of Akio by Beast Blood while an experimental anti-corruption **protective binding** created by an Order physician helps preserve his humanity. Akio begins his expedition fully human, with no Beast Blood in him.
 
-It is **not inherited**, is not an Order technique, and is not a separate substance created by the Shogun. It is ordinary Beast Blood drawn unusually close to its true source and introduced in overwhelming concentration, then shaped by Akio's rare response, identity, resolve, intentions, and death.
+The device is meant to resist corruption and preserve identity, **not** to grant immortality or supernatural powers. During an early Hushiro encounter, Beast Blood is introduced through a serious direct blood-bearing wound. The device partly restrains the curse but starts changing with it. At Akio's first genuine death the Blood unexpectedly rebuilds him with continuity of self.
 
-The exact reason Akio becomes the first known bearer to retain himself this completely remains deliberately unexplained.
+Beast Blood supplies regeneration and mutation; the altered binding regulates it imperfectly; Akio's rare response, identity, resolve and developing discipline allow control. These are interacting causes, not a repeatable formula. Akio remains cursed and the precise mechanism remains mysterious.
 
 ## Beast Blood does not make the same thing twice
 
@@ -47,43 +47,25 @@ The Blood also appears to magnify and reshape what is already present in a beare
 
 Akio and the Shogun both possess exceptional resolve. Their different intentions and identities help explain why the same curse manifests so differently in them. Resolve alone does not guarantee Akio's outcome and does not diminish the strength of other Order warriors.
 
-## First attempt and Shogun intervention
+## First expedition and direct exposure
 
-Akio begins the game without Beast Blood, Returning Blood, Blood Aspects, Corruption, Blood, or a Blood Art.
+Before departure at the Strand, an Order physician fits Akio with his first field-test protective binding. The physician hopes to preserve judgment and human identity against corruption; resurrection is not a known or intended effect.
 
-The player enters late in Akio's first expedition. Akio has already reached the Strand, met its people, crossed onto the island, and fought deep into the normal route. He reaches the Eclipse Shogun through his own ability as an Order swordsman.
+Play begins with brief Strand preparation followed by **normal Hushiro Floor 1** gameplay. A significant early encounter causes a direct Beast Blood-bearing wound; generic scratches, air, soil, water, or incidental contact do not automatically infect everyone. The device reacts but cannot exclude the curse.
 
-The opening culminates in Akio's first confrontation with the Shogun. The encounter is playable, but the story requires Akio's defeat. The Shogun mortally wounds him and becomes interested in the ordinary human who crossed the island and reached him without using Beast Blood.
+Akio's **first genuine death** during the run produces his first reconstruction. Skilled players may survive farther through the route; they cannot destroy a Heart Binding before awakening. There is no required opening Shogun encounter or scripted defeat. The Shogun **does not** inject Akio's first Blood or cause Returning Blood.
 
-The Shogun's intent is not to grant Akio immortality. It is arrogant curiosity:
+## Physician and evolving binding
 
-> "Let's see what the Blood makes of you."
+A new physician NPC in the Strand examines Akio and the evolving binding after his returns. The device may physically change with the curse and become difficult to separate from its bearer; precise appearance, function, attachment and removal consequences are still unresolved.
 
-Through his centuries-long bond with the Heart, the Shogun calls and directs Beast Blood from the island/Heart itself. Veins in the chamber awaken; Blood moves through the environment and around the Shogun or his weapon; he drives a large concentration into Akio's mortal wound. The presentation then fades toward black.
-
-The Blood is not a separate "Shogun Blood." Its distinction is proximity and concentration: it has been called directly from or near the Heart rather than reaching Akio through an ordinary downstream bearer or small collected dose.
-
-The Shogun expects Akio to die or become another corrupted being. He does not know what the result will be.
-
-## The Shogun's experiments
-
-The act is not unique to Akio. The Shogun has previously used his bond with the Heart to expose selected people to Beast Blood and observe what the curse makes of them.
-
-Captives, enemies, followers, retainers, or warriors who interested him may have become unusually powerful or specialized creatures. Some named beasts, minibosses, or bosses may therefore be revealed as past Shogun experiments where their individual lore supports it. This should enrich specific creatures rather than become the origin of every corrupted being on the island.
-
-This history explains why the Shogun knows he can deliberately force Beast Blood into another person while preserving uncertainty about the outcome.
+The physician oversees the **existing Bloodwell** Akio/Run Infrastructure upgrade service in fiction, not a new permanent station. The Scribe remains the archivist and human observer. The Shogun's historical experiments on **other** subjects may remain, but he did not make Akio.
 
 ## Birth of Returning Blood
 
-Akio's response is unprecedented.
+Akio dies carrying directly introduced Beast Blood. The Blood reconstructs its host while the altered protective binding helps preserve the recognizable human pattern and continuity of identity.
 
-The Beast Blood takes root, but it does not fully erase him. His unusual reaction to the curse, exceptional discipline and resolve, strong identity, and comparatively uncorrupted intention all influence the form it takes without providing a single mechanical explanation for why he survives.
-
-Akio dies carrying the source-near Blood the Shogun forced into him. Instead of settling into one of the known outcomes, the Blood reconstructs him while preserving the continuity of Akio's human identity.
-
-That new relationship is Returning Blood.
-
-The story should communicate **what happened** without reducing the event to genetics, receptors, immunity, a hidden ancestry rule, or a repeatable formula.
+The physician did not design this outcome. On Akio's first return he is relieved and professionally alarmed: the binding has become something unforeseen. Akio's identity and extraordinary personal response contribute without making him immune or chosen by heredity.
 
 ## Why the Strand is the return point
 
@@ -105,35 +87,15 @@ The deeper supernatural mechanics of how reconstruction crosses distance remain 
 
 ## Resolve, identity, and genuine control
 
-Resolve does not by itself create Returning Blood.
+Akio's resolve alone does not create Returning Blood. His survival involves a rare individual response to direct infection, the binding's imperfect containment and adaptation, identity, intent, and death.
 
-Akio's first return comes from an unprecedented convergence: a rare individual response, the Shogun's direct source-near exposure, Akio's identity and resolve, his intentions, and death while the Blood is taking root.
-
-Afterward, discipline becomes increasingly important because Akio learns to direct a curse that naturally wants to change its bearer.
-
-Across later runs Akio learns to:
-
-- resist further escalation,
-- consciously permit selected transformations,
-- stabilize different Blood Aspects,
-- direct temporary Techniques through those forms,
-- return toward a controlled human baseline,
-- and continue opposing the Heart and Shogun while carrying their power.
-
-Other bearers may retain intelligence, memory, loyalty, speech, ambition, martial skill, or deliberate mutation use. Those qualities do not automatically equal Akio's degree of sovereignty.
+Over repeated runs he learns to resist escalation, permit chosen mutations, stabilize Blood Aspects and return toward a human baseline. The device is vulnerable, not a perfect cure; another warrior cannot simply wear an identical charm and expect resurrection.
 
 ## Blood Aspects and adaptation
 
-Blood Aspects are controlled expressions of the same transformative curse.
+As the binding partially contains the curse and Akio learns control, he can direct mutation into selective Blood Aspects. **Beast Blood** creates these transformations; the device does not store independent magic or manufacture the Blood.
 
-Beast Blood naturally adapts and changes its bearer. Because Akio retains his identity and becomes increasingly able to influence the Blood, he learns to steer that tendency rather than merely suffer it.
-
-This gives the run progression a narrative foundation:
-
-- the Blood wants to change Akio,
-- Akio's personality, emotion, instinct, and conscious intent shape that change,
-- Shrines and Aspect progression give him structured opportunities to Resist or Embrace it,
-- and the resulting Aspects are directed adaptations rather than unrelated magical classes.
+The established Wolf/Wraith/Ronin kits, Resist/Embrace, Tier, Techniques, Blood Arts, Blood Mirror, and Bloodwell mechanics remain authoritative.
 
 ## Failed-run return
 
@@ -164,13 +126,7 @@ The Heart can regenerate living tissue but cannot recreate the external ancient 
 
 ## Relationship to the Shogun
 
-The Shogun creates the conditions for the very power that later threatens him.
-
-He takes an ordinary but extraordinary human opponent, gives him direct access to the curse in overwhelming source-near concentration, and expects the Blood to prove the Shogun's worldview correct.
-
-Instead, Akio becomes the first known bearer capable of repeatedly using Beast Blood while retaining the ability to reject its continuation and oppose the Heart itself.
-
-The relationship therefore develops from the Shogun's initial curiosity and authorship of Akio's exposure into fascination, attempted recruitment, possessive anger, fear, and hatred.
+The Shogun is not the creator of Akio's condition. His later first encounter with Akio reveals a bearer who appears able to direct Beast Blood without forfeiting humanity. Fascination grows into recognition and attempted recruitment, then possessive anger, fear and hatred as Akio opposes the Heart.
 
 ## Final Heart confrontation and postgame
 
@@ -184,26 +140,22 @@ Postgame expeditions are canonical containment work against the existing cursed 
 
 ## Canon restrictions
 
-- Do not describe Returning Blood as inherited or bloodline-based.
-- Do not restore the escaped-ancestor explanation.
-- Do not describe Akio as immune to Beast Blood.
-- Do not reduce Akio's outcome to willpower alone.
-- Do not describe Returning Blood as a standard Order technique or repeatable recipe.
-- Do not invent a separate refined "Shogun Blood" substance.
-- The Shogun directs ordinary Beast Blood from the Heart/island in unusually large, source-near concentration.
-- Do not say the Shogun deliberately slows or stabilizes Akio's transformation; he does not know what the Blood will make of Akio.
-- Do not make the Strand, Bloodwell, Keeper, Boat, Order warding, oath, or seal the source or anchor of revival.
-- Akio subconsciously selects the Strand return location through survival instinct when conscious control is absent.
-- Do not give Akio Blood Aspects, Corruption/Tier progression, Blood, or Blood Arts before the opening Shogun exposure and first reconstruction.
-- Do not treat Blood Aspects as unrelated magical classes.
-- Do not describe the final Heart victory as making existing Beast Blood inert.
-- Do not remove Returning Blood, Shogun reconstruction, or existing-bearer regeneration after the ending.
+- Akio begins human, uninfected, and with no inherited Beast Blood.
+- A Strand physician equips him with the Order's first experimental protective binding before departure.
+- An early **direct blood-bearing wound** introduces Beast Blood; the curse is not universally contagious through casual contact.
+- The binding partially protects identity but neither generates Beast Blood nor guarantees resurrection.
+- The **first genuine death** in normal play awakens Returning Blood; there is no compulsory Shogun defeat or Shogun-caused exposure.
+- Akio remains cursed. Beast Blood powers regeneration and mutation; the evolving device regulates imperfectly; Akio learns self-control.
+- The physician becomes a seventh major Strand NPC linked to existing Bloodwell progression; the Scribe retains records and personal insight. No fourth progression tree.
+- The Strand return location is selected by **Akio's subconscious survival instinct**, not a device tether, magical Strand property, ward, Boat or Bloodwell.
+- The exact device mechanism, degree of fusion, and reproducibility are unresolved.
+- The six-Binding campaign, final Heart outcome, postgame and gameplay systems remain unchanged.
 
 ## Deliberately unresolved
 
-- why Akio is the first known person to respond this successfully to the curse,
-- the exact metaphysics by which identity, emotion, intention, and instinct influence Beast Blood,
-- the exact supernatural mechanics that reconstruct Akio across distance,
-- which specific island creatures were Shogun experiments,
-- the Heart's ultimate origin,
-- and the exact biological/supernatural mechanism by which the crippled Heart regrows its postgame manifestations.
+- the physician's name, personality, exact motives and ultimate arc;
+- the device's shape, materials, placement, mechanism, fusion depth and possible removal/failure;
+- the early exposure enemy and precise visual staging;
+- why this reaction works for Akio, and the mechanics of maintaining identity after death;
+- the supernatural mechanics of reconstructing across distance (not the established subconscious destination choice);
+- Heart origin, precise Blood/identity metaphysics, and individual Shogun experiment subjects.

@@ -4,7 +4,7 @@ title: Beast Blood
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - beast-blood
   - the-heart
@@ -74,7 +74,7 @@ However, exposure is not always equivalent in circumstance or intensity. Beast B
 
 Through his centuries-long bond with the Heart, the Shogun can call and direct Beast Blood from the island/Heart itself. This allows him to deliver unusually large, source-near concentrations to chosen subjects.
 
-This distinction explains Akio's opening exposure without inventing "Shogun Blood": the material remains Beast Blood, but Akio receives an extraordinary quantity drawn close to its true source while mortally wounded.
+The Shogun's source-near capability remains part of his history and experiments on other subjects; it no longer explains Akio's first exposure. Akio is directly infected during an early Hushiro encounter while wearing an experimental Order protective binding.
 
 ## The Shogun's experiments
 
@@ -127,13 +127,9 @@ These outcomes do not require a rigid universal stage system. The regions emphas
 
 ## Akio's unprecedented response
 
-Akio begins the game as an ordinary human Order warrior with no Beast Blood in him.
+Akio starts as a human wearing the Order physician's experimental protective binding. A serious early Hushiro wound **directly** introduces Beast Blood; the binding partly restrains corruption but starts adapting to it.
 
-At the end of his first expedition, he reaches the Eclipse Shogun through his own skill. After mortally wounding Akio, the Shogun calls a large source-near concentration of Beast Blood from the Heart/island and forces it into Akio, intending to see what the curse will make of someone so capable.
-
-Akio dies carrying that Blood. Instead of the expected death or conventional transformation, the Blood reconstructs him without fully erasing his identity. This becomes the first known **Returning Blood** manifestation.
-
-No single exact explanation is canon for why Akio responds this way. His rare individual response, extraordinary resolve, identity, intentions, direct source-near exposure, and death all matter without being reduced to a scientific formula.
+At his first genuine death, Beast Blood rebuilds him while the altered device helps preserve his identity. Beast Blood supplies the supernatural power, and Akio's personal response and later discipline help control it. He is not immune; the Shogun did not infect him.
 
 ## The Heart
 
@@ -155,11 +151,9 @@ After all six remaining Bindings are destroyed, the Heart can form the true-fina
 
 ## Relationship to Returning Blood
 
-Returning Blood is not a separate original substance. It is the unprecedented relationship formed when the Beast Blood forced into Akio reconstructs him while preserving his continuity of self.
+Returning Blood is an extraordinary reconstruction of Akio by ordinary Beast Blood with his recognizable identity preserved through a changing interaction with the physician's protective binding. It is neither another blood substance nor a deliberate resurrection technology.
 
-Because Beast Blood appears responsive to bearer identity, emotion, intention, and instinct, Akio gradually learns to steer its transformative nature. Blood Aspects are controlled adaptations of that curse rather than unrelated magical classes.
-
-When Akio is conscious, his increasing control can shape the Blood deliberately. When he dies, conscious control disappears and the Blood falls back on deeper survival instinct. That instinct selects the Strand as his safest known place and reconstructs him at the established return spot.
+Akio gradually directs Blood mutations into Aspects. At death, his subconscious survival instinct selects the Strand; the device and Strand do not anchor or choose the destination.
 
 ## Canonical crippling of the source
 
@@ -187,6 +181,8 @@ The Heart and Beast Blood generally use restrained dark crimson, blackened veins
 - Do not explain Beast Blood through a rigid receptor/assimilation/biological model.
 - Do not describe Akio as immune.
 - Do not make resolve alone the reason Akio survives.
+- The Shogun does not cause Akio's initial infection or Returning Blood.
+- The experimental protective binding partially regulates Beast Blood but does not manufacture it.
 - Do not invent a distinct Shogun Blood substance.
 - The Shogun may call/direct ordinary Beast Blood from near the Heart in exceptional concentration.
 - Do not make personality/emotion a deterministic alignment chart; it is an influence communicated through patterns and dialogue.

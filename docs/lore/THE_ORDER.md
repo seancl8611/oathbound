@@ -4,7 +4,7 @@ title: The Order
 category: lore
 status: draft
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - order
   - blood-moon
@@ -45,14 +45,11 @@ Its warriors are not recruited through prophecy or known supernatural destiny. A
 
 ## Established knowledge
 
-- The Order knows that the island contains an organized population of Beast Blood users with unnatural strength, regeneration, and apparent resistance to ordinary death.
-- It knows that the barrier prevents reliable entry and departure and that the Blood Moon creates a rare crossing opportunity.
-- It knows how to maintain the Strand threshold and prepare the Boat, but it does not fully understand the Heart-linked reason the barrier comes under pressure.
-- It knows that every warrior previously sent through the crossing failed to return.
-- It infers that the cursed forces may answer to a ruler or depend on a central source, but it does not know the Heart's identity, the plague-era history, the extraction process, the Shogun's experiments, or his mainland ambitions.
-- It does not normally use Beast Blood to empower its warriors.
-- Akio begins the expedition with no Beast Blood in him.
-- Akio's Returning Blood is an exceptional event caused after he reaches the Shogun, not standard doctrine or an expected result.
+- The Order knows Beast Blood can both empower and corrupt island bearers.
+- Earlier Blood Moon expeditions failed to return.
+- The modern Order lacks full knowledge of the Heart, the Shogun's plans and the extraction history.
+- Its anti-corruption tradition has yielded one **experimental physician-made protective binding** intended to preserve humanity, not immortality.
+- Akio is selected for skill, begins uninfected, and becomes the device's first field-test wearer.
 
 ## Mission
 
@@ -70,28 +67,17 @@ Before the player's opening sequence begins, Akio has already arrived at the Str
 
 ## Warding tradition
 
-The Order has developed anti-corruption rites, seals, protective markings, barrier maintenance practices, and warding magic through generations of guarding the Strand.
+Generations of seals, ritual practice and medicine have aimed to protect memory, judgment and spiritual integrity. They provide no general immunity.
 
-These protections are intended to preserve judgment, memory, and spiritual integrity against the island's pressure. They do not grant immunity, do not prevent every Beast Blood transformation, and have never previously allowed a warrior to return after death.
+A Strand physician develops a novel experimental binding for Akio. During an early direct Beast Blood exposure it does not exclude the curse but begins adapting to it. Its participation in preserving human identity through unexpected reconstruction was neither planned nor proven reproducible.
 
-Order warding does **not** create Returning Blood and does not anchor Akio to the Strand.
-
-Akio's Returning Blood begins only after the Eclipse Shogun deliberately forces a large, source-near concentration of Beast Blood into the mortally wounded Akio. Akio's discipline and resolve later help him develop control over that unprecedented condition, but Order training alone cannot reproduce it.
+The device does not summon Akio to the Strand or select his destination.
 
 ## Role in the story
 
-The Order is primarily a background faction. It provides:
+The Order trains Akio, gives the mission, maintains the barrier and Strand, prepares the Boat, and supplies the physician's device. The physician becomes a major Strand researcher associated with Bloodwell upgrades, while the Scribe retains the archival and human perspective.
 
-- Akio's martial discipline and initial authority,
-- the mission that begins the game,
-- anti-corruption rites and field equipment,
-- maintenance of the barrier and the organized operation at the Strand,
-- the Boat and ritual preparation used for each crossing,
-- and limited world-building context about previous warriors and the island's cursed inhabitants.
-
-Some Strand personnel are members or agents of the Order, while other residents may simply support the operation. The Scribe is an Order archivist assigned to the Strand expedition and knew Akio through the Order before the campaign. The Raven is the established Order courier. The Keeper predates the modern organization but remains central to its threshold duty.
-
-The Order does not need a large political subplot or complete understanding of the island. Akio discovers the kingdom's history, the Heart, the Shogun's Beast Blood experiments, and the real consequences of the mission after crossing.
+The Shogun has no role in Akio's initial infection. The Heart and the island's history are uncovered through exploration.
 
 ## Visual identity
 

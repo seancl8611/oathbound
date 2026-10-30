@@ -4,7 +4,7 @@ title: Narrative Delivery and Campaign Presentation
 category: narrative
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - narrative-delivery
   - silent-protagonist
@@ -43,118 +43,29 @@ NPCs, intelligent enemies, and bosses speak. Akio communicates through action, s
 
 # Mandatory campaign understanding
 
-The player must directly understand over the course of the campaign that:
+The player must learn, through sparse scenes and evolving NPC conversations, that Akio began human; the Order physician fitted a novel protective binding; early direct Beast Blood exposure overcame it; Akio died and unexpectedly returned; Beast Blood supplies regeneration and mutation while the changed binding partly preserves identity; Akio gradually steers the curse; the Shogun did not create him; the Heart sustains Beast Blood and is restrained by six remaining Bindings; Breaking them leads to the final Heart, whose eventual defeat stops creation/spread of new Blood while leaving existing bearers active.
 
-- Akio began the expedition without Beast Blood,
-- he reached the Shogun through his own skill,
-- the Shogun deliberately forced Beast Blood into him,
-- Akio died and returned,
-- Beast Blood affects different people differently and appears influenced by the bearer,
-- Returning Blood is unprecedented and dangerous,
-- Akio's Blood increasingly responds to his intention and instinct,
-- the Shogun also reconstructs and has a history of Beast Blood experimentation,
-- the Heart exists and originally produces Beast Blood,
-- six ancient Heart Bindings remain,
-- Returning Blood can break those Bindings,
-- the Shogun wants to preserve and spread Beast Blood,
-- destroying all six Bindings exposes the true Heart route,
-- the final Heart victory permanently ends the Heart's ability to create or spread **new Beast Blood**,
-- existing Beast Blood remains active afterward.
-
-The player does **not** need a final scientific explanation for why Akio is uniquely successful.
+Neither a full scientific explanation nor a prescribed morality chart is required.
 
 # Opening first attempt
 
-The opening now begins **late in Akio's first expedition**.
+Start with short Strand preparation and the physician fitting/checking Akio's anti-corruption binding. Akio then enters normal Hushiro Floor 1 and learns combat through play.
 
-The player is not shown Akio arriving at the Strand or meeting its recurring NPCs for the first time. Those events have already happened.
+An early authored direct blood-bearing wound introduces Beast Blood. The device cannot exclude it. The first genuine death occurs naturally in play; no compulsory scripted Shogun defeat.
 
-The playable opening should establish:
+# Direct exposure and protective-binding sequence
 
-1. Akio is an accomplished Order swordsman without supernatural Blood powers.
-2. He has already fought far enough into the island to approach the Eclipse Shogun.
-3. The player learns essential movement/combat through real play rather than a long tutorial cutscene.
-4. Akio reaches the Shogun.
-5. The Shogun fight is mechanically playable but ends in a required narrative defeat.
+**Retired:** the Shogun does not cause Akio's initial infection or first resurrection.
 
-Exact opening length and starting chamber remain implementation work.
-
-# First Shogun exposure sequence
-
-This is one of the game's major controlled narrative beats.
-
-After mortally wounding Akio, the Shogun is intrigued that an ordinary human has crossed the island and reached him without Beast Blood.
-
-His approved intent/working line is:
-
-> "Let's see what the Blood makes of you."
-
-The Shogun then calls and directs a large concentration of ordinary Beast Blood from the island/Heart itself.
-
-Visual direction should remain simple and readable:
-
-1. floor/wall veins in the chamber awaken,
-2. Blood moves through the environment toward the Shogun or his weapon,
-3. a concentrated mass of Blood gathers around him,
-4. he drives it into Akio's mortal wound,
-5. Akio begins reacting,
-6. the screen fades toward black.
-
-Do not show the Shogun carefully stabilizing, weakening, or engineering Akio's transformation. He is testing the curse, not manufacturing Returning Blood on purpose.
-
-The Blood is not a separate "Shogun Blood." Its exceptional quality is that the Shogun has called an overwhelming concentration directly from or near the Heart's source.
+The new opening emphasizes physician preparation, direct island exposure, and the altered binding's response. Exact visual design and infected enemy remain production details; avoid suggesting the device was designed to resurrect.
 
 # First Returning Blood reconstruction
 
-The first reconstruction should remain concise and unsettling.
-
-Sequence direction:
-
-1. darkness after Akio's death,
-2. Returning Blood gathers at one specific safe location on the Strand,
-3. Akio's human body reconstructs,
-4. nearby Strand characters react with recognition and disbelief,
-5. Akio remains silent,
-6. the player regains control quickly.
-
-The player should leave the sequence understanding only:
-
-> Akio died after the Shogun put Beast Blood into him. Akio returned. Nobody expected this.
-
-Do not immediately explain why.
+After the first genuine death, Beast Blood reconstructs Akio at his established safe Strand location. The physician examines the altered binding with relief and alarm, having never intended resurrection. The Scribe registers the impossible return and records the human implications. Keep Akio silent and the scene concise.
 
 # First hub dialogue state
 
-The Strand NPCs already know Akio.
-
-Their first player-facing conversations must therefore avoid introductory lines and instead react to the return.
-
-Useful immediate questions include:
-
-- "Akio?"
-- "How are you here?"
-- "What did he do to you?"
-- "There is Beast Blood in you."
-
-The Scribe should begin observation rather than offer a complete answer.
-
-Her early discoveries may progress roughly as:
-
-1. Beast Blood is present in Akio.
-2. It did not produce a familiar transformation.
-3. Beast Blood does not affect every person equally.
-4. The bearer appears to influence what the curse becomes.
-5. Akio's Blood is actively rebuilding him.
-6. It responds more strongly to his intention over time.
-7. His repeated Strand return may be his own subconscious survival instinct directing the Blood.
-
-Potential working observations:
-
-> "The Blood does not make beasts from nothing. It works with what it finds."
-
-> "I don't think the Blood is choosing the Strand, Akio. I think you are."
-
-Exact final dialogue should remain natural and sparse.
+The player may have met the physician and other Strand residents before departing. On return, the physician studies changes in the experimental device while the Scribe documents Akio and worries about his humanity. Neither gives a definitive mechanical explanation.
 
 # Beast Blood personality/identity delivery
 
@@ -185,49 +96,32 @@ This history explains his confidence in the opening act while preserving uncerta
 
 # Campaign story cadence
 
-The campaign uses these major narrative states:
-
-1. **Opening first attempt** — Akio reaches the Shogun without Beast Blood; Shogun experiment; death.
-2. **First return / early campaign** — Strand disbelief; Returning Blood is unexplained; Scribe begins study.
-3. **Early awakened Shogun rematch** — the Shogun discovers Akio returned from his experiment and becomes fascinated.
-4. **Binding campaign** — the Heart, extraction history, and Binding-rejection objective are established while Akio's control grows.
-5. **Recognition/recruitment** — the Shogun treats Akio as proof that Beast Blood can be mastered and attempts to claim him for his worldview.
-6. **Later Bindings** — recruitment collapses into possession, fear, and hatred as Akio continues damaging the Heart.
-7. **Final story run** — final Shogun confrontation followed directly by the true Heart.
-8. **Canonical ending** — the Heart is permanently crippled as a source of new Beast Blood; existing bearers survive.
-9. **Canonical postgame** — Akio continues returning to suppress the Heart's physical regrowth and monitor the remaining Beast Blood population.
-
-Failed runs do not need to advance the core plot every time.
+1. Strand fitting; normal first Hushiro run.
+2. Early direct exposure; protective binding changes with the curse.
+3. Natural first death; unforeseen Returning Blood; physician and Scribe react.
+4. Akio learns controlled Aspects; the physician researches the binding.
+5. Shogun later encounters an independent bearer with exceptional control.
+6. Six Heart Binding runs; Shogun recognition and attempted recruitment turn to anger.
+7. Final Shogun-to-Heart story run; propagation-severing ending.
+8. Canonical containment postgame with existing bearers still cursed.
 
 # Shogun dialogue progression
 
-The Shogun relationship begins in the opening rather than with an optional rare pre-awakening fallback.
+## First normal-route encounter — Discovery
 
-## Opening — Experiment
+The Shogun notices Akio's unusual relationship with Beast Blood. He did not infect him.
 
-The Shogun is intrigued rather than personally invested. Akio's unaided arrival earns enough interest for the Shogun to expose him to Beast Blood.
+## Later encounters — Fascination
 
-Working intent: **"Let's see what the Blood makes of you."**
+Akio's repeated returns and directed Aspects sharpen his interest.
 
-## First awakened rematch — Fascination
+## Recognition and recruitment
 
-The Shogun realizes Akio survived and returned. This is an outcome he did not predict.
-
-## Recognition
-
-Akio's directed Aspects and continued independence become undeniable. The Shogun begins interpreting him as evidence that the Blood can be mastered.
-
-## Recruitment
-
-The Shogun attempts to claim Akio's success as validation of his own vision and offers him a place within it.
-
-Akio never answers verbally.
+He sees Akio as proof of his forced-salvation worldview and seeks to claim him.
 
 ## Possessive anger / fear / hatred
 
-Continued refusal and destroyed Bindings turn fascination into personal anger and fear. By the final story confrontation, recruitment is over.
-
-Exact encounter-state count may be tuned during narrative production, but the opening Experiment state and the later fascination → recognition/recruitment → anger/fear/hatred arc are locked.
+Akio's wordless refusal and Binding damage threaten his kingdom.
 
 # Binding-clear presentation
 
@@ -239,33 +133,13 @@ Production uses one reusable ritual with escalating persistent Heart/Binding sta
 
 # Strand NPC ownership
 
-The recurring NPCs should not repeat the same exposition.
-
-## Keeper — history and guilt
-
-Owns old Court perspective, containment/crossing context, Shogun-before-corruption history, and the moral interpretation of the kingdom's fall.
-
-## Scribe — evidence and Returning Blood
-
-Owns recovered records, plague/extraction evidence, Beast Blood variation, Returning Blood observation, Discovery Board updates, distinctions between fact and theory, and restrained personal concern for Akio.
-
-She is the strongest candidate to name Returning Blood and infer that Akio's subconscious survival instinct chooses the Strand return location.
-
-## Raven — Order and outside world
-
-Owns mission notices, Order reactions, formal progress acknowledgement, and reminders that the mainland still exists beyond the island.
-
-## Undead Samurai — discipline and control
-
-Owns the martial interpretation of Akio and the Shogun as two highly disciplined bearers whose intentions and ability to reject the Blood differ.
-
-## Smith — physical consequences
-
-Owns practical observations about Akio's reconstructed body, tools, materials, Blood-reactive equipment, and physical campaign changes.
-
-## Peddler — human cost
-
-Owns provenance, salvage, and uncomfortable glimpses of the people transformed or used during the kingdom's fall, including possible traces of Shogun experimentation.
+- **Physician:** protective binding, bodily condition, device changes and Bloodwell research.
+- **Scribe:** records, island discoveries, identity and the human stakes of Akio's condition.
+- **Keeper:** old kingdom, barrier and crossing.
+- **Smith:** Prosthetic and Relic craftsmanship.
+- **Raven:** Order communication and outside world.
+- **Undead Samurai:** martial discipline.
+- **Peddler:** supplies and human cost.
 
 # Discovery Board boundary
 
@@ -332,12 +206,9 @@ Akio's continued expeditions are containment/suppression work, not a reset of th
 
 # Narrative restrictions
 
-- Do not restore inherited/escaped-bloodline Returning Blood.
-- Do not front-load a scientific explanation for Akio.
-- Do not introduce the Strand NPCs to Akio as strangers after the first return.
-- Do not describe the Shogun's exposure as a separate blood type.
-- Do not have the Shogun intentionally stabilize Akio's transformation.
-- Do not make the Strand magically choose Akio; Akio subconsciously chooses safety.
-- Do not make personality/intent a rigid morality or monster-class chart.
-- Do not make every island creature a Shogun experiment.
-- Do not give Akio spoken or written responses.
+- No inherited Blood, mandatory opening Shogun defeat, or Shogun-made Returning Blood.
+- No instant cure, guaranteed resurrection technology, or universal ambient Beast Blood transmission.
+- The binding regulates; Beast Blood powers mutation and reconstruction; Akio remains cursed.
+- The physician complements rather than replaces the Scribe and does not add a fourth progression station.
+- Akio's subconscious instinct chooses the Strand, not a magical ward/device tether.
+- Akio is entirely silent; the Heart, Binding and postgame rules remain intact.

@@ -4,7 +4,7 @@ title: Story Overview
 category: lore
 status: approved
 authority: primary
-last_reviewed: 2026-10-03
+last_reviewed: 2026-10-29
 topics:
   - story
   - blood-moon
@@ -106,39 +106,19 @@ The campaign remains beneath the Blood Moon without defining exactly how much or
 
 ## Akio's mission
 
-Akio joins the Order through ordinary service as a highly skilled swordsman. He is not recruited because of prophecy, secret ancestry, or known supernatural potential.
+Akio, an ordinary Order swordsman with no Beast Blood, undertakes a likely one-way expedition to end the island curse. Before departure a Strand physician fits him with a first-field-test anti-corruption binding intended to preserve humanity.
 
-The Order sends him through the barrier to destroy the island's hostile cursed forces and ruler and to find and destroy whatever source sustains them. The mission is considered one-way.
+The player begins with concise Strand preparation and proceeds into **normal Hushiro Floor 1** play, not a late Shogun prologue.
 
-Akio begins with no Beast Blood and no Returning Blood powers.
+## First island exposure
 
-Before the player takes control, Akio has already reached the Strand, met the expedition's recurring NPCs, crossed onto the island, and progressed deep into his first expedition. The game begins late in that first attempt rather than with introductions at the hub.
+An early authored Hushiro encounter introduces Beast Blood through a serious direct blood-bearing wound, overcoming the device's imperfect protection. The binding begins adapting to the curse. Akio continues as an ordinary swordsman until his first genuine death, wherever it happens.
 
-## First Shogun confrontation
-
-Akio reaches the Eclipse Shogun through his own martial skill.
-
-The opening culminates in a playable first confrontation. The player may demonstrate skill, but the narrative outcome is Akio's defeat.
-
-The Shogun is intrigued that an ordinary human crossed the island and reached him without Beast Blood. After mortally wounding Akio, he chooses not merely to discard him. His attitude is arrogant experimentation:
-
-> "Let's see what the Blood makes of you."
-
-Through his bond with the Heart, the Shogun calls a large concentration of Beast Blood from the island/Heart itself. The Blood is not a separate Shogun-created substance; it is ordinary Beast Blood delivered unusually close to the true source and in overwhelming concentration.
-
-The chamber's veins awaken, Blood moves through the environment and around the Shogun or his weapon, and he drives it into Akio's mortal wound. The scene fades toward black.
-
-The Shogun expects death or transformation. He does not know what will happen.
+The Shogun is not part of the opening exposure, and Akio is not required to lose to him.
 
 ## Birth of Returning Blood
 
-Akio dies carrying the source-near Beast Blood.
-
-Instead of one of the known outcomes, the Blood reconstructs him without fully erasing the continuity of his identity. This unprecedented relationship becomes **Returning Blood**.
-
-The exact reason Akio responds this successfully is intentionally unresolved. His rare individual response, discipline and resolve, identity and comparatively pure intention, direct concentrated exposure, and death all matter without being reduced to genes, immunity, a hidden assimilation mechanism, or ancestry.
-
-Akio did not seek this power and does not initially regard effective immortality as a gift.
+At his first genuine death, Beast Blood reconstructs Akio, while the altered protective binding helps preserve his recognizable identity. The physician never intended resurrection and cannot fully explain the convergence. Akio remains cursed; identity, resolve and rare response matter without providing a repeatable formula.
 
 ## Why Akio returns to the Strand
 
@@ -154,29 +134,15 @@ The exact supernatural mechanics of crossing distance remain unexplained. The im
 
 ## Akio and the Scribe
 
-Akio and the Scribe knew each other through the Order before the Blood Moon expedition and already share a quiet romantic attachment when the campaign begins.
+Akio and the Scribe already know one another through the Order and share a restrained attachment. They may meet during initial Strand preparation.
 
-Because the player begins after Akio has already used the Strand as his expedition base, the Scribe and other hub characters already know him when first shown on screen.
-
-Their first major player-facing conversations occur after Akio's impossible return. The immediate questions are not introductions but alarm and disbelief: How is he alive? What did the Shogun do to him? What is the Blood doing now?
-
-The Scribe becomes the recurring observer who studies Returning Blood without ever reducing it to a complete scientific explanation. She can establish gradually that Beast Blood affects people differently, appears shaped by the bearer, rebuilds Akio, and responds increasingly to his intention and instinct.
-
-She may eventually infer:
-
-> "I don't think the Blood is choosing the Strand, Akio. I think you are."
-
-The term **Returning Blood** may emerge through this investigation.
+After the first resurrection, the physician studies the evolving device and Akio's physical changes; the Scribe independently preserves the history, discoveries, and the human implications of his condition.
 
 ## Blood Aspects and control
 
-Because Beast Blood naturally changes its bearer, Akio's growing sovereignty lets him gradually steer those changes.
+Beast Blood naturally mutates bearers. Akio's evolving protective binding partially regulates the curse while Akio learns to steer specific transformations as Blood Aspects. The device does not generate the power.
 
-Blood Aspects are controlled adaptations of Returning Blood. The Blood responds to conscious intention, personality, emotion, and instinct rather than functioning as unrelated magical classes.
-
-Akio and the Shogun are thematic parallels. Both are exceptionally resolute. The Shogun's greed, ambition, possession, obsession, and fear of extinction have shaped his long corruption; Akio's discipline and comparatively selfless mission shape a different relationship with the same curse.
-
-This does not create a simple moral rule where good intentions automatically grant control.
+The Shogun and Akio both have exceptional resolve but different intentions. This is a thematic contrast rather than a deterministic morality formula.
 
 ## Island inhabitants
 
@@ -192,16 +158,7 @@ Yomori's environment is not a conventional contagious reservoir. The danger rema
 
 ## Akio and the Shogun
 
-The Shogun personally creates the conditions for Akio's Returning Blood and later becomes fascinated by the result.
-
-Their relationship develops through:
-
-1. **Opening curiosity** — the Shogun decides to see what Beast Blood makes of Akio.
-2. **Fascination** — Akio returns and begins directing the Blood in ways the Shogun did not expect.
-3. **Recognition and recruitment** — the Shogun treats Akio as apparent proof that Beast Blood can be mastered and wants to claim that success for his worldview.
-4. **Possessive anger, fear, and hatred** — Akio silently rejects him through continued opposition and attacks the Heart.
-
-Akio becomes the contradiction the Shogun cannot accept: a bearer created through the Shogun's own intervention who can use Beast Blood while remaining capable of rejecting its continuation.
+The Shogun does not make Akio or initiate his infection. When they later meet, he is fascinated by Akio's ability to use Beast Blood while preserving identity. He moves from curiosity to recruitment, possessive anger, fear, and hatred as Akio refuses through continued opposition to the Heart.
 
 ## Heart Binding campaign
 
