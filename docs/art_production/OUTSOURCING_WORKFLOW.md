@@ -22,9 +22,9 @@ related:
 
 Markdown files in this repository are the internal source of truth. Word and PDF briefs are contractor-facing exports. Exported documents may add commercial terms and signatures, but they must not silently redefine approved gameplay, lore, asset scope, or technical requirements.
 
-## Paid Style Test gate
+## Paid Style Test / artist style-matching gate
 
-Milestone 1 does not begin until a separate paid Style Test is delivered and approved under its own short agreement.
+Where a **new untested artist or visual craft** requires a separately approved paid style-matching test, commission one before scaling that contractor's production. **Do not apply this generic gate retroactively to Hammer's signed Akio Milestone 1 / Proof A**, which already has its own design, rough-source, final-source and animation/playtest checkpoints. Refer to [Visual Asset Roadmap](VISUAL_ASSET_ROADMAP.md) for the first integrated character + room + effect acceptance gate.
 
 The Style Test confirms:
 
@@ -83,7 +83,7 @@ Test:
 - normal gameplay camera scale,
 - mixed encounters,
 - attack windups and recovery,
-- parry, posture, and deathblow states,
+- only kit-specific Guard/Reprisal or vulnerability states actually supported by current Combat V2 (no universal Posture/Deathblow),
 - hazards and VFX overlap,
 - room transitions,
 - UI contrast,
@@ -106,7 +106,7 @@ Revisions cannot silently expand the brief.
 ## Batch and commercial structure
 
 - Quote, start, review, approve, and pay work per internal batch.
-- Current template uses 30% at formal batch kickoff and 70% after final post-engine approval.
+- Older generic templates may use a 30% kickoff / 70% approval split, but **actual signed agreement controls**. Hammer's executed Akio Milestone 1 has separate checkpoint terms; do not assume its pricing, 50/50 payments, or revision rules automatically transfer to a proposed Milestone 2.
 - Either party may pause or cancel between batches.
 - A top-level milestone is a production goal, not an all-or-nothing delivery.
 - If a batch is canceled after kickoff, payment and transfer of substantially completed work must follow the signed contractor agreement rather than assumptions in the internal repository.
