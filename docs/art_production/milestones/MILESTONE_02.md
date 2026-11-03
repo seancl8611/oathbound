@@ -4,14 +4,14 @@ title: Milestone 2 — Complete Area 1 Production
 category: art-production
 status: approved
 authority: primary
-last_reviewed: 2026-08-16
+last_reviewed: 2026-11-03
 ---
 
 # Milestone 2 — Complete Area 1 Production
 
 ## Goal
 
-Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village production package while respecting art dependencies.
+Turn the integrated Akio + first three enemies + benchmark room + essential VFX/HUD slice into a visually complete Hushiro Gate Village package. Keep character production the largest investment but expand rooms, props and effects **alongside** encounter-specific needs rather than after the entire roster. Refer to [visual production roadmap](../VISUAL_ASSET_ROADMAP.md).
 
 ## Authoritative design sources
 
@@ -47,7 +47,7 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - Ogre shield coverage, charge, impacts, and unblockable warning
 - Collector fog, chains, snare, ground masses, and reappearance cues
 - Keeper Phase 1, rupture transition, Phase 2, defeat, and completion effects
-- Miniboss and boss health/posture UI
+- Miniboss and boss health/phase or bespoke vulnerability UI only where their actual encounters use it
 - Five Hushiro functional room skins
 - Necessary Hushiro props, breakables, reward object, and arena landmarks
 - Shared Corruption meter and Shrine Resist/Embrace foundation
@@ -59,7 +59,7 @@ Turn the Milestone 1 combat slice into a visually complete Hushiro Gate Village 
 - Final Wolf, Wraith, and Ronin VFX sets
 - Complete Tier I–IV Aspect mutation overlays
 - Final Aspect-specific iconography and selection presentation
-- Final Technique cards, five-direct-slot build UI, Supporting/Cross-family/Legendary presentation, refinements, replacement states, and route-reward marker family
+- Final Technique cards/build UI for additive ownership, supporting and cross-family interactions, refinements, and route-reward markers (no retired five-slot or replacement screens)
 - Full Technique, Relic, currency, temporary-capacity, and consumable art families
 - Strand NPCs and final Peddler character
 - Final room/reward percentage weights and encounter-composition tuning
@@ -68,15 +68,16 @@ Milestone 2 may use temporary developer markers to test reward routing. Final sh
 
 ## Dependency-driven batches
 
-1. Remaining standard enemies + their VFX
-2. Village Ogre + VFX + arena support
-3. The Collector + VFX + arena support
-4. Keeper visual development, Phase 1, boss UI, and arena base
-5. Keeper transformation, Phase 2, and boss completion states
-6. Room skins, props, and final arena integration
-7. Corruption/Shrine foundation and full Area 1 integration review
+1. **Inherit and test** Akio + Swordsman + the reusable benchmark room + essential VFX/HUD before commissioning broader character batches; complete Blighted Hound and Hollow slice acceptance.
+2. Remaining standard enemies + their VFX, testing each in the growing Hushiro kit.
+3. Village Ogre + VFX + arena support
+4. The Collector + VFX + arena support
+5. Keeper visual development, Phase 1, boss UI, and arena base
+6. Keeper transformation, Phase 2, and boss completion states
+7. Expand room skins/props and final arena integration **alongside** these encounters; do not defer every environment until the bosses are finished
+8. Corruption/Shrine foundation and full Area 1 integration review
 
-Exact commercial batch grouping may be adjusted during quotation without changing the approved milestone boundary.
+Exact commercial batch grouping may be adjusted during quotation without changing the approved milestone boundary. Boss/arena design and necessary VFX depend on each other; use placeholders for complex systems until their encounter rules are settled. **Art Milestone 2 is not Hammer's proposed Akio animation Milestone 2** and is not covered by that agreement.
 
 ## Completion test
 
