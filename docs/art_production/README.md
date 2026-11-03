@@ -16,11 +16,15 @@ Oathbound's production art targets an illustrated high-angle 2D game. Runtime co
 
 ## Current production priorities
 
-1. Finish Combat V2 presentation cleanup so retired Posture/Deathblow assumptions do not generate art scope.
-2. Produce Akio as the first reusable source-rig character and render the agreed Stage 1 directional set.
-3. Compare clean stylized prerendering against an intentional pixel/downsample treatment from the same masters.
-4. Produce one Corrupted Swordsman after Akio passes the first in-game gate.
-5. Scale the pipeline only after actor size, silhouette, animation readability, feet registration, depth sorting, memory/import cost, and iteration speed are proven in real Hushiro combat.
+**Canonical staged plan:** [Visual Asset Roadmap — Character-First, Integrated Gates](VISUAL_ASSET_ROADMAP.md). The plan prioritizes character commissions but explicitly does **not** finish the entire character roster before environments, props, VFX and HUD.
+
+1. Accept Akio Proof A only after full editable-source, eight-view export and real Godot playtest/feedback checks; compare clean prerender versus deliberate downsample treatment. Follow the source-complete [Blender-to-Godot workflow](../../tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md).
+2. Separately quote/authorize Hammer's proposed Akio Milestone 2 for the six remaining base animations; validate sword-drawn transitions and the three-hit combo before committing to expensive expansions. See [Milestone 2 planning](../commissions/akio/AKIO_MILESTONE_02_PLANNING.md).
+3. Prove one Corrupted Swordsman using the same pipeline before expanding the enemy roster.
+4. **Before bulk character production**, introduce one small reusable Hushiro combat room, basic props, essential independent VFX and minimal HUD to test visual cohesion, feet/occlusion, contrast and threat readability.
+5. Expand Hushiro enemies, minibosses, boss and room/effect kits in gameplay-driven batches; defer the Strand and later regions until their own production gates.
+
+**Contract naming caution:** Hammer's Akio commission Milestone 1/2 and Oathbound's Art Production Milestone 1/2 are different work breakdowns. Internal art stages do not expand signed contractor scope or authorize payment.
 
 ## Current combat-art boundary
 
