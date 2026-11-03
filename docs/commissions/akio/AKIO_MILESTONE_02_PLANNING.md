@@ -2,6 +2,8 @@
 
 **Status:** planning / **not quoted, contracted, paid or authorized** (2026-11-03). This file supplements, but does not change, the signed Hammer Milestone 1 agreement or the baseline [Akio commission brief](AKIO_COMMISSION_BRIEF.md). Obtain Hammer's feasibility input, a separate quote/contract or written amendment, and explicit owner approval before assigning work.
 
+**Artist-facing working draft:** [Milestone 2 — Draft Scope and Quote Request](AKIO_MILESTONE_02_SCOPE_QUOTE_DRAFT.md). This is the editable scope to review, not a quotation from Hammer or a signed authorization. The matching Google Doc is filed in the existing Oathbound - Akio Character Commission Drive folder for iterative owner review.
+
 ## What "second commission" currently means
 
 The planned second commission to **Hammer for Akio** is the six **remaining** base animation Actions, not a new character or the whole Art Production Milestone 2 Hushiro region:
