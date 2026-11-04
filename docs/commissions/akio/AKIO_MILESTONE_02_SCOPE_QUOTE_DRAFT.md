@@ -10,7 +10,7 @@ audience: internal_now_artist_after_approval
 
 ---
 
-
+> **ARCHIVED INTERNAL REFERENCE — NOT THE LIVE COMMISSION DRAFT.** The active, editable Milestone 2 document plan is in [Google Drive — Commission Document Plan](https://docs.google.com/document/d/1g6sypige1VriDhsglEDiPRwW50Cz2AAAtBUATZmI8AQ/edit). This GitHub copy records an earlier detailed draft; do not maintain it as a second source of truth or send it to Hammer without review.
 
 # OATHBOUND — AKIO MILESTONE 2
 
