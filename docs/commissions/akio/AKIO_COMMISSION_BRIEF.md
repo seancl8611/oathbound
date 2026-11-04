@@ -102,7 +102,7 @@ Milestone 1 ends at accepted Proof A.
 
 Milestone 2 is not part of the currently authorized work. It begins only after Proof A is accepted and separate written approval is given.
 
-**Internal production plan (not an amendment):** [Akio Milestone 2 planning and first-commission lessons](AKIO_MILESTONE_02_PLANNING.md). The initial six-Action proposal is unchanged; the planning file recommends early sword-state/three-hit-combo tests, exact Blender Action/frame-range audits, and separately quoted optional drawn-sword Idle/Run, transitions or Quick Slash variants. These extras are **not** included by implication.
+**Internal production planning:** Milestone 2 artist-facing drafts, pricing and unapproved change options are maintained privately in Google Drive and are not published in this repository. The six baseline Actions below remain the planning reference; no extras are authorized by implication.
 
 The intended core animation set is:
 
