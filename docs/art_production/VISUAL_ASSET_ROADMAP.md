@@ -8,11 +8,11 @@ Prioritize Akio and the reusable character source-rig workflow, **without** fini
 
 The runtime remains authoritative planar Godot 2D. Offline character models/Actions generate eight independent directional sprite renderings. Environments are layered illustrated 2D. Independent 2D VFX and HUD are driven by gameplay state. Never let sprite frame counts or visual effects redefine damage, root motion or combat timings.
 
-## Two different milestone systems — do not confuse them
+## Commission nomenclature
 
-- **Hammer's Akio commission Milestone 1 / Proof A:** specifically the agreed Akio model/rig plus Idle, Move/Combat Run, Quick Slash, under the signed artist agreement. It does not include rooms, HUD, enemy art or the remaining six base animations.
-- **Hammer's proposed Akio commission Milestone 2:** the remaining six base animations (Dash, Defend, Hurt, Death, Cross Cut, Heavy Cleave), separately quoted and authorized; see [Milestone 2 planning](../commissions/akio/AKIO_MILESTONE_02_PLANNING.md).
-- **Oathbound Art Production Milestones 1–6:** internal broader packages covering a playable Hushiro visual slice, the complete region, the Strand and later regions. These do not automatically authorize Hammer or imply one artist owns every discipline.
+Use the signed/authorized **Hammer commission milestones** as the only milestone numbers for commissioned Akio work. Milestone 1 covers the source Akio and Proof A; proposed Milestone 2 would complete six remaining base Actions and full Akio acceptance. **Proofs are specific experimental tests** and checkpoints are staged reviews/deliveries; neither creates a second milestone numbering system.
+
+The remaining Hushiro/enemy/environment packages are **content planning stages**, not separate numbered commission milestones. Their exact contractor scopes depend on later written approval. **Keep pricing, draft artist briefs and unsigned agreements in private Google Drive, not this public repository.**
 
 ## Stage/gate order
 
@@ -22,7 +22,7 @@ The runtime remains authoritative planar Godot 2D. Offline character models/Acti
 | 2 | Complete Akio's **base nine-animation library** via separately approved commission Milestone 2 after Proof A is accepted. Prototype sword-drawn state continuity and full three-hit phrase early within its gated schedule. | Playable Quick Slash → Cross Cut → Heavy Cleave, Dash/Defend/Hurt/Death, transitions, cancels and state continuity without changing Combat V2 authority. |
 | 3 | First enemy **Corrupted Swordsman** on the same source-rig/Blender → PNG → Godot standard. | Player/enemy differentiation, eight-direction windups, collision/sorting, multiple-actor runtime cost, source/renderer reuse. |
 | 4 — before broad roster expansion | **One Hushiro benchmark room** with a tiny reusable environment/prop kit, plus essential sword/hit/attack-cue VFX and minimal HUD. | Akio + Swordsman are readable together in a convincing room: proper grounding, occlusion/depth, foreground/background contrast, threat cues and repeatable scene construction. |
-| 5 | Blighted Hound and Hollow, then expand the playable Art Milestone 1 combat slice to four actors. | Distinct movement/attack roles, crowd readability, basic feedback and multi-enemy playtest in the benchmark room. |
+| 5 | Blighted Hound and Hollow, then expand the playable Hushiro combat slice to four actors. | Distinct movement/attack roles, crowd readability, basic feedback and multi-enemy playtest in the benchmark room. |
 | 6 | Remaining Hushiro standards, two minibosses and Keeper of the Gate; **expand** room foundations, props, arena supports, bespoke VFX and HUD only alongside encounters that need them. | Complete reusable Area 1 route presentation, functional room language, effects/arena coordination and validated combat readability. |
 | 7+ | Strand NPCs/services and the rest of the game: Blood Aspects, Yomori, Kagutsuchi, Heart, richer systems/UI, etc. | Region/system-specific gates before expensive art-scale commitments. |
 
@@ -52,5 +52,5 @@ The first room is an **acceptance instrument**, not a commitment to a different 
 ## Sources and maintenance
 
 - [Art Direction](ART_DIRECTION.md), [Technical Standards](TECHNICAL_STANDARDS.md), [Asset Inventory](ASSET_INVENTORY.md), [Rig-rendered 2D pipeline](RIG_RENDERED_2D_PIPELINE.md).
-- [Art Milestone 1](milestones/MILESTONE_01.md), [Art Milestone 2](milestones/MILESTONE_02.md) and later milestone documents remain detailed package authorities; resolve inconsistencies in favor of current Combat V2 and this sequencing decision.
+- Older numbered art-content package documents remain historical scope references, not an additional commercial milestone schedule; resolve inconsistencies in favor of Combat V2 and this roadmap.
 - [Akio commission brief](../commissions/akio/AKIO_COMMISSION_BRIEF.md), [Hammer feedback](../commissions/akio/HAMMER_PROOF_A_FEEDBACK_TRACKER.md), [Akio engineering tracker](AKIO_PROOF_A_INTEGRATION_TRACKER.md), and [canonical eight-direction export workflow](../../tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md).
