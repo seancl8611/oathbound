@@ -23,6 +23,7 @@ const CHECKPOINT_B_BOOTSTRAP_IDLE_PATHS := {
 	"ne": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_ne_000.png",
 }
 const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSwordsmanRigRendered2DProfile.tres")
+const AKIO_ENEMY_VISUAL_PROXY_PROFILE = preload("res://Presentation/Profiles/AkioEnemyVisualProxyProfile.tres")
 
 @export_category("Isometric combat framing")
 @export_range(0.35, 0.75, 0.01) var presentation_zoom: float = 0.50
@@ -34,6 +35,11 @@ const SWORDSMAN_RIG2D_PROFILE = preload("res://Presentation/Profiles/CorruptedSw
 @export var standard_enemy_visual_scale: float = 1.0
 @export_range(0.03, 0.50, 0.01) var actor_refresh_seconds: float = 0.08
 @export var player_profile_override: Resource = null
+
+@export_category("Temporary enemy art experiment")
+## Debug builds only: Corrupted Swordsmen borrow the SAME Akio Proof A textures.
+## Disable when evaluating real enemy art. This does not affect enemy logic.
+@export var debug_use_akio_swordsman_visual_proxy: bool = true
 
 var _presenter_root: Node2D = null
 var _presenters: Dictionary = {}
@@ -186,6 +192,11 @@ func _profile_for_role(role: String) -> Resource:
 				return AKIO_CHECKPOINT_B_PROFILE
 			return AKIO_RIG2D_PROFILE
 		"swordsman":
+			if OS.is_debug_build() and debug_use_akio_swordsman_visual_proxy:
+				if is_inside_tree():
+					_begin_checkpoint_b_prepare()
+				if _profile_asset_ready(AKIO_ENEMY_VISUAL_PROXY_PROFILE):
+					return AKIO_ENEMY_VISUAL_PROXY_PROFILE
 			return SWORDSMAN_RIG2D_PROFILE
 		_:
 			return null
@@ -270,6 +281,11 @@ func _begin_checkpoint_b_prepare() -> void:
 	# one-frame stand-ins as background loading finishes.
 	AKIO_CHECKPOINT_B_PROFILE.set("sprite_frames", _checkpoint_b_prepare_frames)
 	AKIO_CHECKPOINT_B_PROFILE.set("asset_ready", true)
+	# Reuse one in-memory atlas for Akio and every proxy Swordsman.
+	# Do NOT duplicate 816 PNG files or load a separate enemy atlas.
+	if OS.is_debug_build() and debug_use_akio_swordsman_visual_proxy:
+		AKIO_ENEMY_VISUAL_PROXY_PROFILE.set("sprite_frames", _checkpoint_b_prepare_frames)
+		AKIO_ENEMY_VISUAL_PROXY_PROFILE.set("asset_ready", true)
 	_checkpoint_b_prepare_active = true
 	print("[AkioCheckpointB] threaded prepare started frames=%d inflight=%d bootstrap=real_akio" % [
 		_checkpoint_b_prepare_queue.size(),
