@@ -241,6 +241,13 @@ func _apply_profile_settings() -> void:
 		return
 	_sprite.sprite_frames = _sprite_frames
 	_sprite.flip_h = false
+	# Visually distinguish an Akio-skinned enemy from the real player.
+	# This tint applies only to the temporary debug enemy profile.
+	_sprite.modulate = (
+		Color(1.0, 0.55, 0.55, 1.0)
+		if OS.is_debug_build() and str(_profile_value("profile_id", "")) == "akio_enemy_visual_proxy"
+		else Color.WHITE
+	)
 	if _profile != null:
 		var anchor_value: Variant = _profile_value("foot_anchor_px", Vector2.ZERO)
 		var offset_value: Variant = _profile_value("visual_offset", Vector2.ZERO)
