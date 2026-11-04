@@ -77,7 +77,7 @@ Milestone 2 may use temporary developer markers to test reward routing. Final sh
 7. Expand room skins/props and final arena integration **alongside** these encounters; do not defer every environment until the bosses are finished
 8. Corruption/Shrine foundation and full Area 1 integration review
 
-Exact commercial batch grouping may be adjusted during quotation without changing the approved milestone boundary. Boss/arena design and necessary VFX depend on each other; use placeholders for complex systems until their encounter rules are settled. **Art Milestone 2 is not Hammer's proposed Akio animation Milestone 2** and is not covered by that agreement.
+Exact commercial batch grouping may be adjusted during quotation without changing the approved milestone boundary. Boss/arena design and necessary VFX depend on each other; use placeholders for complex systems until their encounter rules are settled. This historical Hushiro content package is not an independently authorized artist milestone or a contract for the proposed Akio animation Milestone 2.
 
 ## Completion test
 
