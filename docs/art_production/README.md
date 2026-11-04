@@ -19,7 +19,7 @@ Oathbound's production art targets an illustrated high-angle 2D game. Runtime co
 **Canonical staged plan:** [Visual Asset Roadmap — Character-First, Integrated Gates](VISUAL_ASSET_ROADMAP.md). The plan prioritizes character commissions but explicitly does **not** finish the entire character roster before environments, props, VFX and HUD.
 
 1. Accept Akio Proof A only after full editable-source, eight-view export and real Godot playtest/feedback checks; compare clean prerender versus deliberate downsample treatment. Follow the source-complete [Blender-to-Godot workflow](../../tools/rig2d/BLENDER_TO_GODOT_EXPORT_WORKFLOW.md).
-2. Separately quote/authorize Hammer's proposed Akio Milestone 2 for the six remaining base animations; validate sword-drawn transitions and the three-hit combo before committing to expensive expansions. See [Milestone 2 planning](../commissions/akio/AKIO_MILESTONE_02_PLANNING.md).
+2. Separately quote/authorize Hammer's proposed Akio Milestone 2 for the six remaining base animations; validate sword-drawn transitions and the three-hit combo before committing to expensive expansions. This follow-on scope is drafted privately outside the public repository.
 3. Prove one Corrupted Swordsman using the same pipeline before expanding the enemy roster.
 4. **Before bulk character production**, introduce one small reusable Hushiro combat room, basic props, essential independent VFX and minimal HUD to test visual cohesion, feet/occlusion, contrast and threat readability.
 5. Expand Hushiro enemies, minibosses, boss and room/effect kits in gameplay-driven batches; defer the Strand and later regions until their own production gates.
