@@ -1,3 +1,5 @@
+> **DOCUMENT ROUTING (2026-11-03):** Milestone 2 commissioning paperwork is actively drafted in the [Akio Milestone 2 Google Drive working folder](https://drive.google.com/drive/folders/1YubLF0u0WSXn6ypC3rlP1e5FSoT0kxj3). The [high-level document plan](https://docs.google.com/document/d/1g6sypige1VriDhsglEDiPRwW50Cz2AAAtBUATZmI8AQ/edit) is the working source of truth. This GitHub file captures stable technical/planning background, not a current artist-ready quote, contract, or separately maintained revision.
+
 # Akio — Proposed Milestone 2 Commission Plan (Planning Only)
 
 **Status:** planning / **not quoted, contracted, paid or authorized** (2026-11-03). This file supplements, but does not change, the signed Hammer Milestone 1 agreement or the baseline [Akio commission brief](AKIO_COMMISSION_BRIEF.md). Obtain Hammer's feasibility input, a separate quote/contract or written amendment, and explicit owner approval before assigning work.
