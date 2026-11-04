@@ -21,17 +21,17 @@ related:
 
 Build a **character-first, integrated** visual slice: Akio plus Corrupted Swordsman, one minimal reusable Hushiro room, required combat VFX/HUD, then Blighted Hound and Hollow. The complete slice contains four combatants, but we must test character/environment/effect cohesion **before** commissioning the wider roster. See [visual production roadmap](../VISUAL_ASSET_ROADMAP.md).
 
-This broad **Art Production Milestone 1** is distinct from Hammer's currently signed **Akio Milestone 1 / Proof A** (Akio source rig + Idle/Move/Quick Slash), which does **not** include enemies, room art, VFX or HUD. Each separate artist commission requires its own written scope/approval; the internal milestone is not a purchase order.
+**Historical content-package label only:** this four-character Hushiro slice is not a separate artist commission or a second numbered milestone series. The sole contractual Milestone 1 currently authorized is Hammer's Akio source/Proof A; enemies, room art, VFX and HUD need separate future written scope.
 
 ## Acceptance gates
 
 1. **Akio Proof A:** Verify source rig, Action/slot/keyframe completeness, all-eight-direction rendering, feet anchor, silhouette and realistic movement/strike playback in Godot. Choose visual treatment only after in-game comparisons. Do not prematurely authorize a full roster.
-2. **Akio base library:** After accepted Proof A and separate written authorization, complete the remaining six core Actions and judge full combo/weapon-state continuity. See [proposed Hammer Milestone 2 plan](../../commissions/akio/AKIO_MILESTONE_02_PLANNING.md).
+2. **Akio base library:** After accepted Proof A and separate written authorization, complete the remaining six core Actions and judge full combo/weapon-state continuity..
 3. **Corrupted Swordsman:** Validate player/enemy silhouette, directional attack anticipation and repeated actor/depth/import costs.
 4. **Mini Hushiro environment + effects gate:** Add only one modular combat room kit, a few reusable props, grounding/shadows, basic sword/hit/attack cues, and minimal combat HUD; confirm character size, visual contrast, Y-occlusion and mixed VFX readability.
 5. **Four-combatant slice:** Add Blighted Hound and Hollow; verify mixed roles and crowd readability in the benchmark room before significant Area 1 scale-up.
 
-## Included scope (broad art milestone, not one artist contract)
+## Included visual-slice scope (not one artist contract)
 
 | ID | Asset | Purpose |
 |---|---|---|
