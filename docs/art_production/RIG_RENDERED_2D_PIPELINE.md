@@ -11,7 +11,7 @@ The immediate proof is intentionally staged:
 3. build one Corrupted Swordsman on the same pipeline;
 4. only then decide whether to scale the method across the roster.
 
-**Cross-discipline art gate:** [Visual Asset Roadmap](VISUAL_ASSET_ROADMAP.md) adds **one small Hushiro benchmark room, reusable props, basic VFX and HUD** after the Akio + first Swordsman proof and **before bulk enemy/roster production**. This does not change the underlying source-rig acceptance requirements. The [proposed Akio Milestone 2 commission](../commissions/akio/AKIO_MILESTONE_02_PLANNING.md) is for six remaining base Actions, not the next character or the full region.
+**Cross-discipline art gate:** [Visual Asset Roadmap](VISUAL_ASSET_ROADMAP.md) adds **one small Hushiro benchmark room, reusable props, basic VFX and HUD** after the Akio + first Swordsman proof and **before bulk enemy/roster production**. This does not change the underlying source-rig acceptance requirements. The proposed private Akio Milestone 2 scope covers six remaining base Actions, not the next character or the full region.
 
 Do not turn the retired live-3D experiment back into the runtime. The 3D model exists to generate 2D art.
 
