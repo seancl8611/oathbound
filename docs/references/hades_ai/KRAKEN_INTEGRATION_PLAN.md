@@ -1,6 +1,6 @@
 # Kraken (working label) — Oathbound enemy AI integration plan
 
-**Status:** Architectural proposal / documentation only (Nov 5, 2026). No Kraken runtime exists or is installed. The user used the word “Kraken”; its identity as a product, code name or tool has **not** been established, so this is only a **working name** for the Hades-inspired AI cleanup. **This document does not rename contractual Hammer milestones.**
+**Status:** Staged architectural plan; **a first opt-in Hades-style Swordsman behavior prototype is now implemented** (Nov 5, 2026). No separate Kraken runtime or third-party plugin exists or is installed. The user used the word “Kraken”; its identity as a product, code name or tool has **not** been established, so this is only a **working name** for the Hades-inspired AI cleanup. **This document does not rename contractual Hammer milestones.**
 
 **Git baseline:** `agent/akio-checkpoint-b-playtest` at `c756090c42831512d750f5dfbad4c928e6143d7d`; preserve existing canonical local checkout. **Initial target:** the Corrupted Swordsman in Area 1 Firing Line. No changes to Akio source art, combat input, other regions, or commissions.
 
@@ -113,7 +113,7 @@ PER-ENEMY CONTROLLER  SwordsmanBehavior (NEW, optional/flagged)
 
 ## E. Rollback / delivery discipline
 
-- **Documentation first:** current commit changes no gameplay.
+- **Implementation status:** The v1 Hades-like Swordsman policy, one Hushiro engagement coordinator, short post-attack hold, supporter retaliation and rollback flag have landed; see [HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md](HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md). This is a first experiment, **not** a completed migration or owner-approved gameplay result.
 - Each code stage gets its own small commit and a debug feature toggle. Do not simultaneously retire the legacy Swordsman and introduce coordinator/animation edits.
 - Use the existing `agent/akio-checkpoint-b-playtest` branch and standard `oathbound-playtest.cmd`; no duplicate local clone or outbound folder.
 - Rollback = disable the opted-in new Swordsman behavior and restore legacy tactical selection. `PressureDirectorV2`, legacy attacks and visual proxy remain available.
@@ -136,5 +136,5 @@ PER-ENEMY CONTROLLER  SwordsmanBehavior (NEW, optional/flagged)
 ## G. Ready-to-implement decision list
 
 - **Accepted direction to plan:** Hades-inspired readable committed attacks; one spatial authority; simple finite combat flow; retain attack motor + pressure director + authored waves.
-- **Still requires design approval before gameplay edits:** exact slot approach, support role priorities, Hushiro-only vs globally reusable coordinator, how opportunistic counters should override support, and numeric thresholds.
+- **Still awaiting in-game approval/tuning:** exact engagement/support distances and angle, whether one lead attacker feels too restrictive, opportunistic retaliation, and whether to expand this Hushiro-only implementation. Numeric settings are provisional pending owner playtest.
 - **Name resolution:** `Kraken` remains a document-only working label unless the user specifies an existing tool/architecture to integrate. The recommended solution needs no named third-party Kraken package.
