@@ -24,7 +24,7 @@ Oathbound's production art targets an illustrated high-angle 2D game. Runtime co
 4. **Before bulk character production**, introduce one small reusable Hushiro combat room, basic props, essential independent VFX and minimal HUD to test visual cohesion, feet/occlusion, contrast and threat readability.
 5. Expand Hushiro enemies, minibosses, boss and room/effect kits in gameplay-driven batches; defer the Strand and later regions until their own production gates.
 
-**Contract naming caution:** Hammer's Akio commission Milestone 1/2 and Oathbound's Art Production Milestone 1/2 are different work breakdowns. Internal art stages do not expand signed contractor scope or authorize payment.
+**Commission naming:** Hammer's Akio Milestone 1 and the separately proposed Milestone 2 are the only numbered commissioned Akio milestones. Broader visual-asset stages are production sequencing, **not** a separate numbered milestone system and do not expand signed contractor scope or authorize payment.
 
 ## Current combat-art boundary
 
