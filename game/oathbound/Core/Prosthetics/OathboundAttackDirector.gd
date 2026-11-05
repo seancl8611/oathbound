@@ -175,6 +175,10 @@ func _crowd_tick() -> void:
 
 
 func _counts_toward_close_frontline(who: Node) -> bool:
+	# Authored Hushiro surround positions replace the legacy crowd-backoff
+	# policy for opted-in Swordsmen; other enemy types keep their fallback.
+	if who != null and who.has_method("uses_hades_melee_policy") and bool(who.call("uses_hades_melee_policy")):
+		return false
 	if who != null and is_instance_valid(who) and who.has_meta(META_FRONTLINE_PRESSURE_BODY):
 		return bool(who.get_meta(META_FRONTLINE_PRESSURE_BODY))
 	return true
