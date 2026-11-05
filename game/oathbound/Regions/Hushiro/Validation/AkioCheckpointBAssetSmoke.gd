@@ -72,6 +72,19 @@ func _ready() -> void:
 		)
 		_expect(not fallback.is_empty() and fallback[0] == "idle_w",
 			"missing %s source Action must temporarily fall back to Idle" % state_name)
+	# Hades-style per-enemy weapon presentation uses authored phase data rather
+	# than a global elapsed animation clock that can finish before hitbox spawn.
+	for dir_name: String in ["e", "se", "s", "sw", "w", "nw", "n", "ne"]:
+		var windup_frame: int = int(ENEMY_PROXY_PROFILE.call("visual_frame_for_phase", "STARTUP", 0.5, 44))
+		var committed_frame: int = int(ENEMY_PROXY_PROFILE.call("visual_frame_for_phase", "COMMITTED", 0.5, 44))
+		var strike_start: int = int(ENEMY_PROXY_PROFILE.call("visual_frame_for_phase", "ACTIVE", 0.0, 44))
+		var strike_end: int = int(ENEMY_PROXY_PROFILE.call("visual_frame_for_phase", "ACTIVE", 1.0, 44))
+		var recovery_end: int = int(ENEMY_PROXY_PROFILE.call("visual_frame_for_phase", "RECOVERY", 1.0, 44))
+		_expect(windup_frame < strike_start and committed_frame <= strike_start,
+			"%s: Swordsman windup has no earlier distinct animation pose" % dir_name)
+		_expect(strike_end > strike_start, "%s: strike never advances through real Quick Slash poses" % dir_name)
+		_expect(recovery_end == 43, "%s: recovery skips last authored source frame" % dir_name)
+
 	var proxy_valid: PackedStringArray = ENEMY_PROXY_PROFILE.call("validate_contract", true)
 	_expect(proxy_valid.is_empty(), "enemy proxy source atlas must validate: %s" % " | ".join(proxy_valid))
 
