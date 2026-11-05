@@ -37,6 +37,20 @@ func plan_for(actor: Node2D, player: Node2D) -> Dictionary:
 	_cleanup_anchors(roster)
 	_ensure_active(roster, player, now)
 
+	# Hades II-style close-pressure retaliation: if Akio moves directly onto a
+	# waiting Swordsman while the active attacker is far away, that nearby unit
+	# becomes the attacker after the minimum lease. This avoids passive fleeing.
+	var actor_range: float = actor.global_position.distance_to(player.global_position)
+	if actor.get_instance_id() != _active_id and actor_range < 36.0 and now >= _engager_lease_until:
+		var current_lead: Node2D = null
+		for current: Node2D in roster:
+			if current.get_instance_id() == _active_id:
+				current_lead = current
+				break
+		if current_lead == null or current_lead.global_position.distance_to(player.global_position) > 68.0:
+			_active_id = actor.get_instance_id()
+			_engager_lease_until = now + ENGAGER_MIN_LEASE
+
 	var id: int = actor.get_instance_id()
 	if not _anchors.has(id):
 		var initial_dir: Vector2 = actor.global_position - player.global_position
