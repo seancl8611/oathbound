@@ -1,6 +1,6 @@
 # Oathbound enemy combat — current behavior vs proposed target
 
-**Baseline:** `agent/akio-checkpoint-b-playtest`, commit `c756090c42831512d750f5dfbad4c928e6143d7d` (Nov 5, 2026). **Scope:** Engineering design review for Hushiro Corrupted Swordsman, then extension to other enemies. **Status:** Proposal only. Nothing below is implemented, commissioned, or merged.
+**Baseline:** `agent/akio-checkpoint-b-playtest`, commit `c756090c42831512d750f5dfbad4c928e6143d7d` (Nov 5, 2026). **Scope:** Engineering design review for Hushiro Corrupted Swordsman, then extension to other enemies. **Status:** This inventory records the original baseline and target decisions. **The first Hades-inspired Swordsman policy is now implemented experimentally** in the working branch; consult [HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md](HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md) for current implemented-versus-pending details. Nothing here is artist-commissioned or merged to main.
 
 ## Core objective
 
@@ -53,4 +53,4 @@ Make the Swordsman individually legible, deliberate and punishable while multipl
 - Preserve original hitbox/HP/posture/guard/prosthetic/pressure contracts; no actor duplication or alternative source folder.
 - Verify one Swordsman, two Swordsmen, and two Swordsmen plus Archer, including respawn/room exit and the next authored wave.
 
-**Do not begin a rewrite using only this inventory.** Use [KRAKEN_INTEGRATION_PLAN.md](KRAKEN_INTEGRATION_PLAN.md) to sequence dependencies and gates.
+**Implementation has begun with an opt-in, rollback-safe Swordsman prototype.** Use [KRAKEN_INTEGRATION_PLAN.md](KRAKEN_INTEGRATION_PLAN.md) and the [v1 playtest notes](HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md) to distinguish completed experiments from remaining dependencies; don't treat the proposed table as a second live implementation.
