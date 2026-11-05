@@ -177,7 +177,7 @@ func _test_swordsman_integration() -> void:
 	# Running approach is simultaneously telegraphing=true. Its actual physics
 	# velocity must be nonzero; old precedence suppressed it until timeout.
 	target.global_position = Vector2(115.0, 0.0)
-	enemy.global_position = Vector2.ZERO
+	(enemy as Node2D).global_position = Vector2.ZERO
 	enemy.set("player", target)
 	enemy.set("_in_running_approach", true)
 	enemy.set("telegraphing", true)
@@ -188,7 +188,7 @@ func _test_swordsman_integration() -> void:
 	enemy.set_physics_process(true)
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	_expect(enemy.global_position.x > 1.0, "Swordsman telegraphed running attack failed to move toward target")
+	_expect((enemy as Node2D).global_position.x > 1.0, "Swordsman telegraphed running attack failed to move toward target")
 	enemy.set_physics_process(false)
 	enemy.set("_in_running_approach", false)
 	enemy.set("telegraphing", false)
