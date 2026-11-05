@@ -22,6 +22,7 @@ Use [Game Overview](overview/GAME_OVERVIEW.md) and [Full Game Scope](overview/FU
 - [Regional content](content/README.md)
 - [Art production](art_production/README.md)
 - [UI/UX](ui_ux/README.md)
+- [External Hades combat AI reference library](references/hades_ai/README.md) — pinned sources and original analysis; **non-authoritative, no game code imports**
 
 ## Repository control files
 
