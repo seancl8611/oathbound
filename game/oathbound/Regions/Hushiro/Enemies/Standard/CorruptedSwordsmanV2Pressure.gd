@@ -86,14 +86,7 @@ func _try_attack() -> void:
 		_v2_pending_attack_type = -1
 		return
 
-	var attack_choice: int = _v2_pending_attack_type
-	if distance >= running_min_distance:
-		# The base random selection could choose a stationary Basic/Cross Swing
-		# even 80-125 units away. At this range ONLY a closing move is valid.
-		attack_choice = AttackType.RUNNING_SWING
-	elif attack_choice < 0 or attack_choice == AttackType.RUNNING_SWING:
-		attack_choice = _select_attack_type()
-
+	var attack_choice: int = _v2_attack_choice_for_distance(distance, _v2_pending_attack_type)
 	var admission: Dictionary = _request_v2_pressure_for_attack(attack_choice, now, false)
 	if not bool(admission.get("admitted", false)):
 		_v2_pending_attack_type = attack_choice
@@ -121,6 +114,17 @@ func _try_attack() -> void:
 			_start_custom_attack(_current_attack_type)
 
 	_switch_state(AIState.ATTACK)
+
+
+# Pure selection seam for range regression tests. Pressure admission and
+# damage authority remain unchanged.
+func _v2_attack_choice_for_distance(distance: float, pending_choice: int = -1) -> int:
+	if distance >= running_min_distance:
+		# At 80-125 world units the enemy MUST close before striking.
+		return AttackType.RUNNING_SWING
+	if pending_choice >= 0 and pending_choice != AttackType.RUNNING_SWING:
+		return pending_choice
+	return _select_attack_type()
 
 
 func _start_humanoid_counter_attack(counter_kind: String) -> void:
