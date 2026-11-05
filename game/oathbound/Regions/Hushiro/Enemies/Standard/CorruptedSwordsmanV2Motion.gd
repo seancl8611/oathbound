@@ -98,13 +98,22 @@ func _perform_cross_swing_hit(hit_num: int, gen: int) -> void:
 
 func _start_running_swing() -> void:
 	if not telegraphing and not is_attacking and not _dbroken_active:
-		var startup: float = maxf(running_telegraph_time, _calculate_approach_time() + running_telegraph_time)
-		_begin_v2_action(&"running_swing", startup, active_window, 0.24, 0.78)
+		# Hades-style attack data: approach is NOT an early part of the slash
+		# animation. The actual windup duration is supplied at arrival.
+		_begin_v2_action(&"running_swing", running_telegraph_time, active_window, 0.24, 0.78)
+		if is_instance_valid(_v2_action_runner):
+			_v2_action_runner.begin_approach()
 	super._start_running_swing()
 
 
+func _begin_running_swing_windup(windup_duration: float) -> void:
+	if is_instance_valid(_v2_action_runner) and str(_v2_action_runner.current_action_id()) == "running_swing":
+		_v2_action_runner.begin_windup(windup_duration)
+
+
 func _perform_running_swing() -> void:
-	_mark_v2_action_active()
+	# The legacy coroutine can wait for hitstop before it creates a hitbox.
+	# Mark ACTIVE at the actual hitbox spawn, not before that async wait.
 	super._perform_running_swing()
 
 
@@ -231,7 +240,17 @@ func _tick_v2_action_motion(delta: float) -> void:
 		# Early windup tracks Akio; once the runner crosses its explicit commitment
 		# point this snapshot stops updating. The active hitbox therefore uses a late
 		# but committed target instead of either full homing or an instant-start snapshot.
-		if telegraphing and _v2_action_runner.allows_target_tracking() and is_instance_valid(player):
+		if (
+			telegraphing
+			and _v2_action_runner.allows_target_tracking()
+			and is_instance_valid(player)
+			and (
+				str(_v2_action_runner.current_action_id()) != "running_swing"
+				or _in_running_approach
+			)
+		):
+			# Running Swing freezes its target when APPROACH ends. Do not
+			# silently retarget its committed body animation or hitbox.
 			_windup_player_pos0 = player.global_position
 
 	var desired_locomotion: Vector2 = velocity - knockback
