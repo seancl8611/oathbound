@@ -2,6 +2,16 @@ extends Node
 
 const ENEMY_BRAIN_SCRIPT = preload("res://Core/Combat/EnemyBrain.gd")
 const SWORDSMAN_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn")
+const SURROUND_SCRIPT = preload("res://Regions/Hushiro/Combat/HushiroMeleeSurroundCoordinator.gd")
+
+class MockSwordsman:
+	extends CharacterBody2D
+
+	func uses_hades_melee_policy() -> bool:
+		return true
+
+	func is_dead() -> bool:
+		return false
 
 var _failures: Array[String] = []
 
@@ -13,6 +23,7 @@ func _ready() -> void:
 func _run() -> void:
 	await get_tree().process_frame
 	_test_shared_brain_cadence()
+	_test_hades_surround_coordinator()
 	await _test_swordsman_integration()
 	_finish()
 
@@ -66,6 +77,44 @@ func _test_shared_brain_cadence() -> void:
 	_expect(brain.next_decision_at() < 0.0, "no-op invalidation reintroduced decision scheduling")
 
 	actor.queue_free()
+
+
+func _test_hades_surround_coordinator() -> void:
+	var room := Node2D.new()
+	room.name = "HadesSurroundSmokeRoom"
+	add_child(room)
+	var player := Node2D.new()
+	player.global_position = Vector2.ZERO
+	room.add_child(player)
+	var coordinator: Node = SURROUND_SCRIPT.new()
+	room.add_child(coordinator)
+
+	var first := MockSwordsman.new()
+	first.global_position = Vector2(72.0, 0.0)
+	room.add_child(first)
+	first.add_to_group("enemy")
+	var second := MockSwordsman.new()
+	second.global_position = Vector2(-82.0, 0.0)
+	room.add_child(second)
+	second.add_to_group("enemy")
+
+	var first_plan: Dictionary = coordinator.call("plan_for", first, player)
+	var second_plan: Dictionary = coordinator.call("plan_for", second, player)
+	_expect(first_plan.get("role") == "engage", "nearest Swordsman should claim first engagement")
+	_expect(second_plan.get("role") == "support", "second Swordsman should hold support, not rush Akio")
+	var support_point: Vector2 = second_plan.get("position", Vector2.ZERO)
+	_expect(support_point.distance_to(player.global_position) >= 90.0, "support position is inside melee pile")
+	for test_index: int in range(8):
+		_expect(coordinator.call("role_for_test", first, player) == "engage", "first Swordsman engagement churned")
+		_expect(coordinator.call("role_for_test", second, player) == "support", "second Swordsman orbit role churned")
+
+	coordinator.set("_engager_lease_until", 0.0)
+	coordinator.call("attack_completed", first)
+	_expect(coordinator.call("role_for_test", second, player) == "engage",
+		"attack completion should rotate engagement to waiting Swordsman")
+	_expect(coordinator.call("role_for_test", first, player) == "support",
+		"completed attacker should recover outside immediate engagement")
+	room.queue_free()
 
 
 func _test_swordsman_integration() -> void:
@@ -173,6 +222,11 @@ func _test_swordsman_integration() -> void:
 	if backed_roles_value is Dictionary:
 		_expect(not (backed_roles_value as Dictionary).has("advance_move"), "backed-off Swordsman acquired legacy advance_move")
 	enemy.set("_backoff_until", -1.0)
+	_expect(bool(enemy.call("uses_hades_melee_policy")), "Hades-inspired Swordsman policy not opted in")
+	enemy.set("next_swipe_time", now + 9.0)
+	enemy.call("_v2_brain_tick", 0.016)
+	_expect(str(enemy.call("get_hades_melee_state")) == "approach",
+		"Swordsman still uses high-frequency tactical orbiting outside blade reach")
 
 	# Running approach is simultaneously telegraphing=true. Its actual physics
 	# velocity must be nonzero; old precedence suppressed it until timeout.
