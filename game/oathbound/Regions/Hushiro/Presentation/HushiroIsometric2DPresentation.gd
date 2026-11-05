@@ -12,6 +12,9 @@ const AKIO_RIG2D_PROFILE = preload("res://Presentation/Profiles/AkioRigRendered2
 const AKIO_CHECKPOINT_B_PROFILE = preload("res://Presentation/Profiles/AkioCheckpointBProfile.tres")
 const AKIO_CHECKPOINT_B_FRAMES_DIR := "res://Art2D/RigRendered/Akio/CheckpointB/Frames"
 const CHECKPOINT_B_MAX_INFLIGHT: int = 12
+# Temporary lower-detail Run loop is ready BEFORE enemies can move.
+# It is replaced by all 18 source frames via the normal threaded importer.
+const CHECKPOINT_B_MOVE_PREVIEW_FRAME_COUNT: int = 6
 const CHECKPOINT_B_BOOTSTRAP_IDLE_PATHS := {
 	"e": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_e_000.png",
 	"se": "res://Art2D/RigRendered/Akio/CheckpointB/Frames/idle_se_000.png",
@@ -221,6 +224,15 @@ func _begin_checkpoint_b_prepare() -> void:
 		push_error("[AkioCheckpointB] profile returned invalid expected animation names")
 		return
 	var expected := expected_value as PackedStringArray
+	# Load complete movement clips first. The previous queue loaded all 320 Idle
+	# frames ahead of Run, prolonging early enemy gliding.
+	var loading_order := PackedStringArray()
+	for animation_text: String in expected:
+		if animation_text.begins_with("move_"):
+			loading_order.append(animation_text)
+	for animation_text: String in expected:
+		if not animation_text.begins_with("move_"):
+			loading_order.append(animation_text)
 	var fps := maxf(1.0, float(AKIO_CHECKPOINT_B_PROFILE.get("default_fps")))
 	_checkpoint_b_prepare_frames = SpriteFrames.new()
 	if _checkpoint_b_prepare_frames.has_animation(&"default"):
@@ -233,7 +245,7 @@ func _begin_checkpoint_b_prepare() -> void:
 	_checkpoint_b_prepare_index = 0
 	_checkpoint_b_prepare_loaded = 0
 
-	for animation_text: String in expected:
+	for animation_text: String in loading_order:
 		var animation_name := StringName(animation_text)
 		var prefix := "%s_" % animation_text
 		var matching := PackedStringArray()
@@ -255,13 +267,29 @@ func _begin_checkpoint_b_prepare() -> void:
 			bool(AKIO_CHECKPOINT_B_PROFILE.call("is_looping_animation_base", animation_base))
 		)
 
-		# Every Checkpoint B animation starts with Hammer's real directional idle pose.
-		# That means Akio is visibly the commissioned character from the first presenter
-		# frame even while the full move/attack clips are still streaming in.
 		var direction := animation_text.get_slice("_", animation_text.get_slice_count("_") - 1)
-		var bootstrap_texture := _checkpoint_b_bootstrap_texture(direction)
-		if bootstrap_texture != null:
-			_checkpoint_b_prepare_frames.add_frame(animation_name, bootstrap_texture)
+		if animation_text.begins_with("move_"):
+			# A real short gait cycle is shown at the correct SOURCE duration from
+			# the first enemy movement frame; it is never a frozen Idle pose.
+			var preview_count := mini(CHECKPOINT_B_MOVE_PREVIEW_FRAME_COUNT, matching.size())
+			for preview_index: int in range(preview_count):
+				var source_index := int(floor(float(preview_index * matching.size()) / float(preview_count)))
+				var preview_path := AKIO_CHECKPOINT_B_FRAMES_DIR.path_join(matching[source_index])
+				var preview_texture := _checkpoint_b_bootstrap_png(preview_path)
+				if preview_texture == null:
+					push_error("[AkioCheckpointB] could not bootstrap Run preview: %s" % preview_path)
+					_checkpoint_b_prepare_frames = null
+					return
+				_checkpoint_b_prepare_frames.add_frame(animation_name, preview_texture)
+			_checkpoint_b_prepare_frames.set_animation_speed(
+				animation_name, fps * float(preview_count) / float(matching.size())
+			)
+		else:
+			# Idle and attacks retain the already proven directional static
+			# bootstrap while their full clips stream in.
+			var bootstrap_texture := _checkpoint_b_bootstrap_texture(direction)
+			if bootstrap_texture != null:
+				_checkpoint_b_prepare_frames.add_frame(animation_name, bootstrap_texture)
 
 		var textures: Array = []
 		textures.resize(matching.size())
@@ -303,6 +331,10 @@ func _checkpoint_b_bootstrap_texture(direction: String) -> Texture2D:
 	var source_path := str(CHECKPOINT_B_BOOTSTRAP_IDLE_PATHS.get(direction, ""))
 	if source_path.is_empty():
 		return null
+	return _checkpoint_b_bootstrap_png(source_path)
+
+
+func _checkpoint_b_bootstrap_png(source_path: String) -> Texture2D:
 	var absolute_path := ProjectSettings.globalize_path(source_path)
 	var image := Image.load_from_file(absolute_path)
 	if image == null or image.is_empty():
@@ -386,6 +418,11 @@ func _install_checkpoint_b_animation(animation_text: String) -> void:
 		if not (texture_value is Texture2D):
 			return
 		_checkpoint_b_prepare_frames.add_frame(animation_name, texture_value as Texture2D)
+	# The temporary six-pose Run loop is source-time sampled at a lower frame
+	# rate; the complete promoted clip must return to the original 30 FPS.
+	_checkpoint_b_prepare_frames.set_animation_speed(
+		animation_name, maxf(1.0, float(AKIO_CHECKPOINT_B_PROFILE.get("default_fps")))
+	)
 
 
 func _finish_checkpoint_b_prepare() -> void:
