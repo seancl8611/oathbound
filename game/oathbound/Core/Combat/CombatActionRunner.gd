@@ -17,6 +17,7 @@ enum Phase {
 	COMMITTED,
 	ACTIVE,
 	RECOVERY,
+	APPROACH, # real approach has no predicted attack-frame progress
 }
 
 signal action_started(action_id: StringName)
@@ -51,6 +52,22 @@ func begin(action_definition: CombatActionDefinition) -> void:
 		"startup_duration": definition.startup_duration,
 		"commit_fraction": definition.commit_fraction,
 	})
+
+
+# Phase boundaries are driven by the real attack coroutine. For distance-
+# closing attacks, do not consume the WINDUP clock before reaching sword range.
+func begin_approach() -> void:
+	if definition == null or phase == Phase.IDLE:
+		return
+	_set_phase(Phase.APPROACH)
+
+
+func begin_windup(actual_duration: float) -> void:
+	if definition == null or phase == Phase.IDLE:
+		return
+	definition.startup_duration = maxf(0.05, actual_duration)
+	action_elapsed = 0.0
+	_set_phase(Phase.STARTUP)
 
 
 func tick(delta: float) -> void:
@@ -121,13 +138,15 @@ func is_committed() -> bool:
 
 
 func allows_target_tracking() -> bool:
-	return phase == Phase.STARTUP
+	return phase in [Phase.APPROACH, Phase.STARTUP]
 
 
 func locomotion_weight() -> float:
 	if definition == null:
 		return 1.0
 	match phase:
+		Phase.APPROACH:
+			return 1.0
 		Phase.STARTUP:
 			return clampf(definition.startup_locomotion_weight, 0.0, 1.0)
 		Phase.COMMITTED:
@@ -144,6 +163,8 @@ func phase_progress() -> float:
 	if definition == null:
 		return 0.0
 	match phase:
+		Phase.APPROACH:
+			return 0.0
 		Phase.STARTUP, Phase.COMMITTED:
 			return clampf(action_elapsed / maxf(0.01, definition.startup_duration), 0.0, 1.0)
 		Phase.ACTIVE:
@@ -169,7 +190,7 @@ func action_progress() -> float:
 	# Continuous 0..1 progress across startup + active + recovery. This is intended for
 	# presentation sampling (especially pre-rendered directional attack frames). Combat
 	# remains phase/event authoritative even if a visual clip has a different frame rate.
-	if definition == null or phase == Phase.IDLE:
+	if definition == null or phase == Phase.IDLE or phase == Phase.APPROACH:
 		return 0.0
 	return clampf(action_elapsed / action_duration(), 0.0, 1.0)
 
@@ -191,6 +212,8 @@ func current_action_id() -> StringName:
 
 func phase_name() -> String:
 	match phase:
+		Phase.APPROACH:
+			return "APPROACH"
 		Phase.STARTUP:
 			return "STARTUP"
 		Phase.COMMITTED:
