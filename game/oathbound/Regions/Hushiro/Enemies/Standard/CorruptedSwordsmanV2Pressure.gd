@@ -162,7 +162,27 @@ func _start_humanoid_counter_attack(counter_kind: String) -> void:
 	_switch_state(AIState.ATTACK)
 
 
-func _request_v2_pressure_for_attack(attack_choice: int, now: float, is_counter: bool) -> Dictionary:
+# Action/weapon scheduling data stays enemy-owned, as in the referenced Hades
+# EnemyData/WeaponAIData split; shared PressureDirectorV2 owns conflicts.
+# Rebooking happens only at the actual end of a Running Swing approach.
+func _v2_sync_running_impact_to_windup(windup_duration: float) -> bool:
+	var now: float = Time.get_ticks_msec() * 0.001
+	_release_v2_pressure("running_approach_complete_rebook")
+	var admission: Dictionary = _request_v2_pressure_for_attack(
+		AttackType.RUNNING_SWING, now, false, windup_duration
+	)
+	if not bool(admission.get("admitted", false)):
+		_v2_pressure_retry_until = maxf(
+			now + PRESSURE_RETRY_FLOOR,
+			float(admission.get("retry_at", now + PRESSURE_RETRY_FLOOR))
+		)
+		return false
+	_v2_pressure_reservation_id = str(admission.get("reservation_id", ""))
+	_v2_pressure_retry_until = -1.0
+	return true
+
+
+func _request_v2_pressure_for_attack(attack_choice: int, now: float, is_counter: bool, actual_impact_delay: float = -1.0) -> Dictionary:
 	var director: Node = get_attack_director()
 	if director == null or not director.has_method("request_pressure_threat"):
 		# Safe compatibility fallback for unusual test scenes or old bootstraps. Production
@@ -171,14 +191,14 @@ func _request_v2_pressure_for_attack(attack_choice: int, now: float, is_counter:
 			return {"admitted": true, "reservation_id": "legacy_token", "impact_at": now}
 		return {"admitted": false, "retry_at": now + 0.12, "reason": "legacy_fallback_denied"}
 
-	var request: Dictionary = _v2_pressure_request_for_attack(attack_choice, now, is_counter)
+	var request: Dictionary = _v2_pressure_request_for_attack(attack_choice, now, is_counter, actual_impact_delay)
 	var value: Variant = director.call("request_pressure_threat", self, request)
 	if value is Dictionary:
 		return value as Dictionary
 	return {"admitted": false, "retry_at": now + 0.12, "reason": "invalid_pressure_response"}
 
 
-func _v2_pressure_request_for_attack(attack_choice: int, now: float, is_counter: bool) -> Dictionary:
+func _v2_pressure_request_for_attack(attack_choice: int, now: float, is_counter: bool, actual_impact_delay: float = -1.0) -> Dictionary:
 	var attack_id: String = "basic_swing"
 	var impact_delay: float = maxf(0.10, telegraph_time)
 	var active_duration: float = maxf(0.04, active_window)
@@ -206,6 +226,11 @@ func _v2_pressure_request_for_attack(attack_choice: int, now: float, is_counter:
 			threat_cost = 1.30
 		_:
 			pass
+
+	if actual_impact_delay >= 0.0:
+		# The actor has finished its variable-length approach. Predict only the
+		# remaining REAL telegraph, rather than an outdated travel estimate.
+		impact_delay = maxf(0.05, actual_impact_delay)
 
 	if is_counter:
 		attack_id += "_counter"
