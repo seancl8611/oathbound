@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "reference_policy": "Original third-party game Lua remains external and is NOT committed in this repository. For personal research, download to the ignored .local directory only.",
+  "snapshotted_utc": "2026-11-05",
+  "games": [
+    {
+      "id": "hades_1",
+      "title": "Hades (original)",
+      "mirror_repository": "superma58/HadesScripts",
+      "source_commit": "073d0797663de6d303b1074925a3429937512d7a",
+      "license_status": "Mirror has no explicit GitHub repository license; do not redistribute extracted proprietary game scripts.",
+      "files": [
+        {
+          "path": "EnemyAI.lua",
+          "git_blob_sha1": "db12f0f0381346991ad8f4832a6ccef25ef3df17",
+          "purpose": "AttackerAI, SurroundAI, MaxAttackers, windups, recovery",
+          "url": "https://raw.githubusercontent.com/superma58/HadesScripts/073d0797663de6d303b1074925a3429937512d7a/EnemyAI.lua"
+        },
+        {
+          "path": "EnemyData.lua",
+          "git_blob_sha1": "6dc7f972a71480a46a7c084f0f5b1da89e47cff1",
+          "purpose": "Enemy archetypes including Thugs and Exalted",
+          "url": "https://raw.githubusercontent.com/superma58/HadesScripts/073d0797663de6d303b1074925a3429937512d7a/EnemyData.lua"
+        },
+        {
+          "path": "WeaponData.lua",
+          "git_blob_sha1": "f6923524a4f098ddf048fbbf5301e4747aace87e",
+          "purpose": "Weapon/attack-range and timing configurations",
+          "url": "https://raw.githubusercontent.com/superma58/HadesScripts/073d0797663de6d303b1074925a3429937512d7a/WeaponData.lua"
+        },
+        {
+          "path": "EncounterData.lua",
+          "git_blob_sha1": "a05f166f8375313034e59f5339cb05109c7f351a",
+          "purpose": "Wave budgets, spawn data, encounter definitions",
+          "url": "https://raw.githubusercontent.com/superma58/HadesScripts/073d0797663de6d303b1074925a3429937512d7a/EncounterData.lua"
+        },
+        {
+          "path": "EnemySets.lua",
+          "git_blob_sha1": "bc912e04ea495dc1f1ebe8adca3afb20e9883325",
+          "purpose": "Enemy roster composition",
+          "url": "https://raw.githubusercontent.com/superma58/HadesScripts/073d0797663de6d303b1074925a3429937512d7a/EnemySets.lua"
+        },
+        {
+          "path": "EncounterSets.lua",
+          "git_blob_sha1": "8f0a06881810e2676bfca25b2a0b6837c8d55609",
+          "purpose": "Encounter grouping",
+          "url": "https://raw.githubusercontent.com/superma58/HadesScripts/073d0797663de6d303b1074925a3429937512d7a/EncounterSets.lua"
+        },
+        {
+          "path": "RoomDataElysium.lua",
+          "git_blob_sha1": "eaaa462430a23fc75468fbb1ac1bae2a179481a3",
+          "purpose": "Elysium room/encounter context",
+          "url": "https://raw.githubusercontent.com/superma58/HadesScripts/073d0797663de6d303b1074925a3429937512d7a/RoomDataElysium.lua"
+        }
+      ]
+    },
+    {
+      "id": "hades_2",
+      "title": "Hades II",
+      "mirror_repository": "syslies93/hades2-scripts-mod",
+      "source_commit": "48db5c0f05bcab35f40a6f438b32af33febb099e",
+      "license_status": "Mirror has no explicit GitHub repository license; do not redistribute extracted proprietary game scripts.",
+      "files": [
+        {
+          "path": "EnemyAILogic.lua",
+          "git_blob_sha1": "4875593eca1d88e9895c1bd1d73e0a244458e44c",
+          "purpose": "SurroundAI, attack admission, orbiting, recovery",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EnemyAILogic.lua"
+        },
+        {
+          "path": "EnemyData_SatyrLancer.lua",
+          "git_blob_sha1": "137316971b57b513573adce3c8ea7a52bac9d101",
+          "purpose": "Satyr lancer enemy source definitions",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EnemyData_SatyrLancer.lua"
+        },
+        {
+          "path": "EnemyData_SatyrCrossbow.lua",
+          "git_blob_sha1": "a170e45123d5c70e460cbb64df4a8b72cc8faef8",
+          "purpose": "Satyr crossbow enemy source definitions",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EnemyData_SatyrCrossbow.lua"
+        },
+        {
+          "path": "EnemyData_SatyrSapper.lua",
+          "git_blob_sha1": "2663f77c7314bcbe9a0f5f323cee9b39fe0b8121",
+          "purpose": "Satyr Sapper; explicitly uses MaxAttackers=2",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EnemyData_SatyrSapper.lua"
+        },
+        {
+          "path": "EnemyData_TyphonHeadAdd.lua",
+          "git_blob_sha1": "0fb9cd8a6f556fce84fee7aca31b363ae424ba88",
+          "purpose": "Typhon-related add source; not proof of full Warden behavior",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EnemyData_TyphonHeadAdd.lua"
+        },
+        {
+          "path": "EnemyData_TyphonHead.lua",
+          "git_blob_sha1": "194cd0563bace454ea99b535eeee41507a15c1ea",
+          "purpose": "Typhon encounter source; avoid mislabeling as ordinary enemy",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EnemyData_TyphonHead.lua"
+        },
+        {
+          "path": "EncounterData.lua",
+          "git_blob_sha1": "d41fc221697198dc8605de9d964594647372725a",
+          "purpose": "Wave difficulty patterns and base overrides",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EncounterData.lua"
+        },
+        {
+          "path": "EncounterLogic.lua",
+          "git_blob_sha1": "862022ed55b6bfe00b77b8579755163cd9a6279",
+          "purpose": "Wave progression and spawning logic",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EncounterLogic.lua"
+        },
+        {
+          "path": "EncounterSets.lua",
+          "git_blob_sha1": "a79c54ce6d86bac13d4c0de8921e5f166c6c4017",
+          "purpose": "Encounter composition/grouping",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EncounterSets.lua"
+        },
+        {
+          "path": "EnemySets.lua",
+          "git_blob_sha1": "83f15dd3c1c8e9018b3db6bb9e2299e9dcc83ea2",
+          "purpose": "Enemy grouping",
+          "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EnemySets.lua"
+        }
+      ]
+    }
+  ]
+}
