@@ -22,6 +22,10 @@ Authoritative player-facing mechanics and system rules belong here.
 - [Prosthetic Tools](PROSTHETICS.md)
 - [Items, Currencies, and Rewards](ITEMS_AND_REWARDS.md)
 
+## Enemy-combat research (non-authoritative)
+
+- [Hades I & II AI source reference library](../references/hades_ai/README.md) — pinned upstream code links, optional local-only reference download, current-vs-target inventory and the **provisional** Kraken-labeled integration plan. The actual playable implementation remains authoritative in Godot source.
+
 ## Current status
 
 Major gameplay architecture is complete at first-pass paper/prototype depth:
