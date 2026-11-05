@@ -30,6 +30,8 @@ var _direction_name := "s"
 var _semantic_state := "idle"
 var _action_id := ""
 var _action_phase := "IDLE"
+var _action_phase_progress: float = 0.0
+var _enemy_last_phase_trace: String = ""
 var _authoritative_progress: float = -1.0
 var _last_draw_signature := ""
 var _resolved_animation_name := ""
@@ -170,6 +172,7 @@ func _sync_from_source(_delta: float) -> void:
 	_semantic_state = _resolve_semantic_state(runtime_contract)
 	_action_id = str(runtime_contract.get("action_id", ""))
 	_action_phase = str(runtime_contract.get("action_phase", "IDLE"))
+	_action_phase_progress = float(runtime_contract.get("phase_progress", 0.0))
 	_authoritative_progress = float(runtime_contract.get("action_progress", -1.0))
 
 	var source_position := source_actor.global_position
@@ -180,6 +183,7 @@ func _sync_from_source(_delta: float) -> void:
 	z_index = clampi(1000 + int(round(source_actor.global_position.y)), -4095, 4095)
 	_apply_counter_projection()
 	_sync_atlas_animation(false)
+	_trace_proxy_enemy_visual_state()
 	_sample_akio_source_run(_delta)
 	_apply_akio_run_pose_lock()
 
@@ -194,6 +198,7 @@ func _resolve_runtime_contract() -> Dictionary:
 		"action_id": "",
 		"action_phase": "IDLE",
 		"action_progress": -1.0,
+		"phase_progress": 0.0,
 	}
 
 	# The shared CombatActionRunner is the clean boundary for attack identity/timing.
@@ -208,7 +213,17 @@ func _resolve_runtime_contract() -> Dictionary:
 				result["action_id"] = str(snapshot.get("action_id", ""))
 				result["action_phase"] = str(snapshot.get("phase", "IDLE"))
 				result["action_progress"] = float(snapshot.get("action_progress", -1.0))
-				result["state"] = "attack"
+				result["phase_progress"] = float(snapshot.get("phase_progress", 0.0))
+				if (
+					_is_akio_enemy_proxy()
+					and str(snapshot.get("phase", "")) == "APPROACH"
+					and str(snapshot.get("action_id", "")) == "running_swing"
+				):
+					# Chase with Run, then expose the weapon-preparation pose only
+					# when the REAL windup starts, as in the Hades attacker loop.
+					result["state"] = "move"
+				else:
+					result["state"] = "attack"
 
 	# Hushiro Swordsman follow-up beats can temporarily override the runner's parent
 	# action id. Alias mapping in its profile decides whether those beats share a clip.
@@ -383,6 +398,20 @@ func _sync_atlas_animation(force_restart: bool) -> void:
 
 	_sprite.visible = true
 	_resolved_animation_name = str(desired)
+	if _is_akio_enemy_proxy() and _semantic_state == "attack" and _profile.has_method("visual_frame_for_phase"):
+		var frame_count: int = _sprite_frames.get_frame_count(desired)
+		if frame_count > 0:
+			var frame_value: Variant = _profile.call(
+				"visual_frame_for_phase", _action_phase, _action_phase_progress, frame_count
+			)
+			var frame_index: int = clampi(int(frame_value), 0, frame_count - 1)
+			if _sprite.animation != desired:
+				_sprite.animation = desired
+			_sprite.pause()
+			_sprite.set_frame_and_progress(frame_index, 0.0)
+			_authoritative_sampled = true
+			_sampled_frame = frame_index
+			return
 	var sample_from_authority := (
 		_authoritative_progress >= 0.0
 		and _profile_should_sample(_semantic_state)
@@ -560,6 +589,33 @@ func _sample_animation(animation_name: StringName, progress: float) -> void:
 	_sprite.frame = frame_index
 	_authoritative_sampled = true
 	_sampled_frame = frame_index
+
+
+func _is_akio_enemy_proxy() -> bool:
+	return actor_role == "swordsman" and str(_profile_value("profile_id", "")) == "akio_enemy_visual_proxy"
+
+
+func _trace_proxy_enemy_visual_state() -> void:
+	if not _is_akio_enemy_proxy() or source_actor == null or not is_instance_valid(source_actor):
+		return
+	var key: String = "%s|%s|%s|%s" % [
+		_semantic_state, _direction_name, _action_id, _action_phase
+	]
+	if _enemy_last_phase_trace == key:
+		return
+	_enemy_last_phase_trace = key
+	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
+		return
+	CombatTelemetry.record_event("swordsman_visual_phase", {
+		"actor": CombatTelemetry.snapshot_actor(source_actor),
+		"state": _semantic_state,
+		"attack_id": _action_id,
+		"phase": _action_phase,
+		"direction": _direction_name,
+		"animation": _resolved_animation_name,
+		"frame": _sprite.frame if _sprite != null else -1,
+		"fallback": _semantic_state in ["hurt", "defend", "death"],
+	})
 
 
 func _resolve_facing(runtime_contract: Dictionary) -> Vector2:
@@ -897,6 +953,7 @@ func get_presentation_state_for_test() -> Dictionary:
 		"action_id": _action_id,
 		"action_phase": _action_phase,
 		"action_progress": _authoritative_progress,
+		"phase_progress": _action_phase_progress,
 		"visual_scale": visual_scale,
 		"ground_compression": ground_compression,
 		"profile_id": str(_profile_value("profile_id", "")),
