@@ -77,11 +77,21 @@ func _can_attack_now(now: float) -> bool:
 
 func _try_attack() -> void:
 	var now: float = Time.get_ticks_msec() * 0.001
-	if not _can_attack_now(now):
+	if not _can_attack_now(now) or not is_instance_valid(player):
+		return
+
+	var distance: float = global_position.distance_to(player.global_position)
+	if not _v2_attack_start_eligible(distance):
+		# A previously denied reservation must not later fire from an invalid range.
+		_v2_pending_attack_type = -1
 		return
 
 	var attack_choice: int = _v2_pending_attack_type
-	if attack_choice < 0:
+	if distance >= running_min_distance:
+		# The base random selection could choose a stationary Basic/Cross Swing
+		# even 80-125 units away. At this range ONLY a closing move is valid.
+		attack_choice = AttackType.RUNNING_SWING
+	elif attack_choice < 0 or attack_choice == AttackType.RUNNING_SWING:
 		attack_choice = _select_attack_type()
 
 	var admission: Dictionary = _request_v2_pressure_for_attack(attack_choice, now, false)
@@ -120,6 +130,10 @@ func _start_humanoid_counter_attack(counter_kind: String) -> void:
 		return
 	var now: float = Time.get_ticks_msec() * 0.001
 	if now < stunned_until:
+		return
+
+	# Guard counters are short melee responses, not long-range teleports.
+	if not is_instance_valid(player) or global_position.distance_to(player.global_position) > _v2_reliable_melee_range():
 		return
 
 	var attack_choice: int = AttackType.BASIC_SWING
