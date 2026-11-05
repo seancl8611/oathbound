@@ -1710,8 +1710,8 @@ func _trace_swordsman_hitbox(edge: String, hit_area: Area2D) -> void:
 	var payload: Dictionary = {
 		"enemy": CombatTelemetry.snapshot_actor(self),
 		"edge": edge,
-		"attack_id": get_v2_action_id() if has_method("get_v2_action_id") else "legacy",
-		"action_phase": get_v2_action_phase() if has_method("get_v2_action_phase") else "",
+		"attack_id": str(call("get_v2_action_id")) if has_method("get_v2_action_id") else "legacy",
+		"action_phase": str(call("get_v2_action_phase")) if has_method("get_v2_action_phase") else "",
 		"hitbox_token": hit_area.get_meta("swing_token", 0),
 		"hitbox_position": hit_area.global_position,
 		"hitbox_direction": hit_area.get_meta("swing_dir", Vector2.ZERO),
