@@ -17,6 +17,14 @@ const BRAIN_STICKINESS: float = 0.10
 const PREFERRED_PRESSURE_DISTANCE: float = 48.0
 const TOO_CLOSE_DISTANCE: float = 24.0
 
+@export var use_hades_melee_policy: bool = true
+const HADES_MELEE_REACH: float = 51.0
+const HADES_HOLD_DISTANCE: float = 13.0
+const HADES_POST_ATTACK_HOLD: float = 0.35
+
+var _hades_state: String = "approach"
+var _hades_recovery_until: float = 0.0
+var _hades_room_coordinator: Node = null
 var _v2_enemy_brain: EnemyBrain = null
 
 
@@ -106,6 +114,10 @@ func _v2_brain_tick(delta: float) -> void:
 
 	_check_combat_stuck(delta)
 	_update_player_passivity(delta)
+
+	if use_hades_melee_policy:
+		_hades_style_tick(delta, now, direction, distance)
+		return
 
 	var scores: Dictionary = _v2_build_intent_scores(now, distance)
 	var intent: StringName = &"approach"
@@ -336,6 +348,11 @@ func _finish_attack() -> void:
 	# that post-attack coin flip; the brain makes the next tactical decision instead.
 	_force_attack_soon = false
 	_switch_state(AIState.ENGAGE)
+	if use_hades_melee_policy:
+		_hades_recovery_until = Time.get_ticks_msec() * 0.001 + HADES_POST_ATTACK_HOLD
+		_hades_set_state("recover")
+		if is_instance_valid(_hades_room_coordinator):
+			_hades_room_coordinator.call("attack_completed", self)
 	if _v2_enemy_brain != null and is_instance_valid(_v2_enemy_brain):
 		_v2_enemy_brain.request_immediate_reconsideration()
 
