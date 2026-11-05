@@ -11,6 +11,26 @@ func _ready() -> void:
 	_expect(presentation_value is Node, "could not instantiate Hushiro presentation")
 	if presentation_value is Node:
 		var presentation := presentation_value as Node
+		# The enemy must have a real moving cycle BEFORE full 816-frame
+		# background loading, or it will visibly glide across its first seconds.
+		presentation.call("_begin_checkpoint_b_prepare")
+		var bootstrap_value: Variant = CHECKPOINT_PROFILE.get("sprite_frames")
+		_expect(bootstrap_value is SpriteFrames, "Akio preview atlas missing before streaming")
+		if bootstrap_value is SpriteFrames:
+			var preview_atlas := bootstrap_value as SpriteFrames
+			for dir_name: String in ["e", "se", "s", "sw", "w", "nw", "n", "ne"]:
+				var move_name := StringName("move_%s" % dir_name)
+				_expect(preview_atlas.has_animation(move_name), "move preview missing %s" % dir_name)
+				if preview_atlas.has_animation(move_name):
+					_expect(preview_atlas.get_frame_count(move_name) == 6,
+						"move preview must animate six real Run poses from first frame")
+					_expect(is_equal_approx(preview_atlas.get_animation_speed(move_name), 10.0),
+						"move preview must preserve full 18/30 second stride cadence")
+		var pending_queue: Array = presentation.get("_checkpoint_b_prepare_queue")
+		_expect(not pending_queue.is_empty(), "streaming queue missing")
+		if not pending_queue.is_empty():
+			_expect(str((pending_queue[0] as Dictionary).get("animation_text", "")).begins_with("move_"),
+				"complete Run must stream before Idle/Quick Slash")
 		presentation.call("_prepare_checkpoint_b_profile")
 		_expect(
 			presentation.call("_profile_for_role", "swordsman") == ENEMY_PROXY_PROFILE,
