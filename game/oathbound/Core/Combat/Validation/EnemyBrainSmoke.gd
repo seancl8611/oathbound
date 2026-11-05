@@ -188,6 +188,11 @@ func _test_swordsman_integration() -> void:
 	enemy.set_physics_process(true)
 	await get_tree().physics_frame
 	await get_tree().physics_frame
+	print("[SwordsmanApproachSmoke] pos=", (enemy as Node2D).global_position,
+		" velocity=", (enemy as CharacterBody2D).velocity,
+		" running=", enemy.get("_in_running_approach"),
+		" telegraph=", enemy.get("telegraphing"), " ai_state=", enemy.get("ai_state"),
+		" player_valid=", is_instance_valid(enemy.get("player")))
 	_expect((enemy as Node2D).global_position.x > 1.0, "Swordsman telegraphed running attack failed to move toward target")
 	enemy.set_physics_process(false)
 	enemy.set("_in_running_approach", false)
