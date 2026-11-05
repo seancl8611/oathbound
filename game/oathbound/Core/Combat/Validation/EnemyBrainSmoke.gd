@@ -114,6 +114,22 @@ func _test_swordsman_integration() -> void:
 	else:
 		_fail("Swordsman missing V2 intent scoring surface")
 
+	# November 5 visual-proxy playtest: ordinary slash hitboxes could not reach
+	# attacks randomly selected at 80-125 units. This contract must never regress.
+	if enemy.has_method("_v2_reliable_melee_range") and enemy.has_method("_v2_attack_start_eligible"):
+		var reliable_reach: float = float(enemy.call("_v2_reliable_melee_range"))
+		_expect(reliable_reach >= 48.0 and reliable_reach <= 60.0, "Swordsman melee gate is not calibrated to its shortest blade")
+		_expect(bool(enemy.call("_v2_attack_start_eligible", 50.0)), "Swordsman lost safe close melee")
+		_expect(not bool(enemy.call("_v2_attack_start_eligible", 70.0)), "Swordsman may still launch a stationary slash from 70 units")
+		_expect(bool(enemy.call("_v2_attack_start_eligible", 96.0)), "Swordsman lost legitimate long-range running approach")
+		_expect(not bool(enemy.call("_v2_attack_start_eligible", 140.0)), "Swordsman can attack beyond approach envelope")
+		var gap_scores: Dictionary = enemy.call("_v2_build_intent_scores", now, 70.0)
+		_expect(float(gap_scores.get(&"attack", -INF)) == -INF, "Swordsman scores normal attacks inside out-of-reach 55-79 gap")
+		_expect(float(gap_scores.get(&"approach", -INF)) > float(gap_scores.get(&"strafe", -INF)), "Swordsman stays orbiting outside sword reach")
+		_expect(int(enemy.call("_v2_attack_choice_for_distance", 96.0, 0)) == 3, "distant attack must force running approach, not pending Basic Swing")
+	else:
+		_fail("Swordsman missing reliable melee and approach contract")
+
 	# Area 1 guard propensity is pressure-responsive, not a random roll on each hit.
 	# At full Health while its own attack is cooling down, strafe should still beat guard.
 	# After Akio has built meaningful Health/Posture pressure, the finite guard becomes
@@ -157,6 +173,25 @@ func _test_swordsman_integration() -> void:
 	if backed_roles_value is Dictionary:
 		_expect(not (backed_roles_value as Dictionary).has("advance_move"), "backed-off Swordsman acquired legacy advance_move")
 	enemy.set("_backoff_until", -1.0)
+
+	# Running approach is simultaneously telegraphing=true. Its actual physics
+	# velocity must be nonzero; old precedence suppressed it until timeout.
+	target.global_position = Vector2(115.0, 0.0)
+	enemy.global_position = Vector2.ZERO
+	enemy.set("player", target)
+	enemy.set("_in_running_approach", true)
+	enemy.set("telegraphing", true)
+	enemy.set("swinging", false)
+	enemy.set("is_attacking", false)
+	enemy.set("_backoff_until", -1.0)
+	enemy.set("knockback", Vector2.ZERO)
+	enemy.set_physics_process(true)
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	_expect(enemy.global_position.x > 1.0, "Swordsman telegraphed running attack failed to move toward target")
+	enemy.set_physics_process(false)
+	enemy.set("_in_running_approach", false)
+	enemy.set("telegraphing", false)
 
 	if is_instance_valid(enemy):
 		enemy.queue_free()
