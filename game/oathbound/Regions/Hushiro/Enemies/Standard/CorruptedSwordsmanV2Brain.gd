@@ -12,7 +12,9 @@ const ENEMY_BRAIN_SCRIPT = preload("res://Core/Combat/EnemyBrain.gd")
 const BRAIN_DECISION_INTERVAL: float = 0.18
 const BRAIN_MIN_INTENT_HOLD: float = 0.14
 const BRAIN_STICKINESS: float = 0.10
-const PREFERRED_PRESSURE_DISTANCE: float = 68.0
+# Swordsmen must close into real hitbox reach before starting ordinary swings.
+# The older 68-unit orbit left them visibly attacking outside blade contact.
+const PREFERRED_PRESSURE_DISTANCE: float = 48.0
 const TOO_CLOSE_DISTANCE: float = 24.0
 
 var _v2_enemy_brain: EnemyBrain = null
@@ -123,8 +125,7 @@ func _v2_build_intent_scores(now: float, distance: float) -> Dictionary:
 	pressure_urgency = maxf(pressure_urgency, clampf(_passive_timer / maxf(0.25, max_passive_time), 0.0, 1.0))
 
 	var attack_score: float = -INF
-	var extended_attack_range: float = maxf(attack_start_max_range, running_min_distance + 45.0)
-	if attack_ready and distance >= attack_start_min_range and distance <= extended_attack_range:
+	if attack_ready and _v2_attack_start_eligible(distance):
 		attack_score = 0.80 + pressure_urgency * 0.35
 		if distance <= close_combat_range:
 			attack_score += 0.20
@@ -153,6 +154,10 @@ func _v2_build_intent_scores(now: float, distance: float) -> Dictionary:
 		strafe_score += 0.34
 	if not attack_ready:
 		strafe_score += 0.18
+	# The old orbit score won at 60-80 units, preventing the final approach
+	# even when NO normal swing could actually reach the player.
+	if distance > _v2_reliable_melee_range() and distance < running_min_distance:
+		approach_score = maxf(approach_score, strafe_score + 0.18)
 
 	var guard_score: float = -INF
 	if guard_ready and distance <= hushiro_guard_range:
@@ -275,6 +280,21 @@ func _v2_move_retreat(delta: float, direction: Vector2) -> void:
 # =============================================================================
 # ATTACK / GUARD READINESS
 # =============================================================================
+
+# A normal slash may start only inside the shortest sword strike's reliable
+# reach. A running swing may start farther out only because its approach phase
+# must move the enemy into range before the hit.
+func _v2_reliable_melee_range() -> float:
+	return maxf(attack_start_min_range, minf(attack_start_max_range, minf(swipe_range, minf(cross_range, thrust_range))) - 4.0)
+
+
+func _v2_attack_start_eligible(distance: float) -> bool:
+	if distance < attack_start_min_range:
+		return false
+	if distance <= _v2_reliable_melee_range():
+		return true
+	return distance >= running_min_distance and distance <= maxf(attack_start_max_range, running_min_distance + 45.0)
+
 
 func _v2_attack_temporally_ready(now: float) -> bool:
 	if telegraphing or swinging or is_attacking or _dbroken_active:
