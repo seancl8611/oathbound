@@ -11,6 +11,7 @@
 | [OATHBOUND_CURRENT_VS_TARGET.md](OATHBOUND_CURRENT_VS_TARGET.md) | Current behavior inventory, keep/adapt/retire decisions, proposed design criteria and owners |
 | [KRAKEN_INTEGRATION_PLAN.md](KRAKEN_INTEGRATION_PLAN.md) | Dependency graph, staged engineering migration, rollback and test gates |
 | [HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md](HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md) | First implemented Hades-like Swordsman prototype, original Godot code paths and owner playtest checks |
+| [HADES_STYLE_SWORDSMAN_V1_LOG_REVIEW_2026-11-05.md](HADES_STYLE_SWORDSMAN_V1_LOG_REVIEW_2026-11-05.md) | Second owner playtest: measured Running Swing impact timing, hit/whiff analysis, missing telegraph presentation and focused fix plan |
 | [source_manifest.json](source_manifest.json) | Pinned upstream repo commits, Git blob IDs, source locations and purpose for each of 17 Lua files |
 | [fetch_reference_sources.py](fetch_reference_sources.py) | Optional local-only fetch/verify helper for the original scripts |
 
