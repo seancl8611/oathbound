@@ -10,6 +10,7 @@
 | [SOURCE_RESEARCH.md](SOURCE_RESEARCH.md) | Verified mechanisms in the external Lua mirrors, with pinned line references and original Oathbound takeaways |
 | [OATHBOUND_CURRENT_VS_TARGET.md](OATHBOUND_CURRENT_VS_TARGET.md) | Current behavior inventory, keep/adapt/retire decisions, proposed design criteria and owners |
 | [KRAKEN_INTEGRATION_PLAN.md](KRAKEN_INTEGRATION_PLAN.md) | Dependency graph, staged engineering migration, rollback and test gates |
+| [HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md](HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md) | First implemented Hades-like Swordsman prototype, original Godot code paths and owner playtest checks |
 | [source_manifest.json](source_manifest.json) | Pinned upstream repo commits, Git blob IDs, source locations and purpose for each of 17 Lua files |
 | [fetch_reference_sources.py](fetch_reference_sources.py) | Optional local-only fetch/verify helper for the original scripts |
 
@@ -49,4 +50,4 @@ Alternatively, fetch only one game with `--game hades_1` or `--game hades_2`. Th
 
 Pinned sources are research snapshots, and mirrors can be incomplete or modified. Cite precise pinned source and line anchor when forming a claim. If a source disappears, the manifest retains its commit/blob identity but does not confer redistribution rights. Future source updates should create an **explicit new manifest revision and new research comparison**, never silently replace the current reference baseline.
 
-This folder is documentation and a local-only research cache, **not a new art milestone, not a game engine module, and not a source of truth for production combat code**.
+This folder is a research and design library, **not a new art milestone or a gameplay source of truth**. The first Hades-style Swordsman prototype is now implemented in Godot; follow the [v1 playtest notes](HADES_STYLE_SWORDSMAN_V1_PLAYTEST.md) for its exact state.
