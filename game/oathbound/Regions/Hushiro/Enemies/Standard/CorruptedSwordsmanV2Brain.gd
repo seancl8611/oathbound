@@ -127,6 +127,117 @@ func _v2_brain_tick(delta: float) -> void:
 	_v2_execute_intent(intent, delta, now, direction, distance)
 
 
+# Authored, Hades-inspired behavior replaces the tactical scorer for opted-in
+# Swordsmen only. It does NOT replace the V2 attack/pressure implementation.
+func uses_hades_melee_policy() -> bool:
+	return use_hades_melee_policy
+
+
+func get_hades_melee_state() -> String:
+	return _hades_state if use_hades_melee_policy else "legacy_v2_scoring"
+
+
+func _hades_style_tick(delta: float, now: float, direction: Vector2, distance: float) -> void:
+	# Existing ATTACK/STUNNED/DEAD states are handled by _hfsm_tick first.
+	# Guard is deliberately held until its authored window expires.
+	if ai_state == AIState.DEFEND and now < _defend_until:
+		_hades_hold(delta, "guard")
+		return
+	if ai_state != AIState.ENGAGE:
+		_switch_state(AIState.ENGAGE)
+
+	if now < _hades_recovery_until:
+		_hades_hold(delta, "recover")
+		return
+
+	var plan: Dictionary = _hades_melee_plan()
+	var role: String = str(plan.get("role", "engage"))
+	var destination: Vector2 = plan.get("position", global_position)
+
+	if role == "support":
+		_hades_move_to(delta, destination, "support")
+		return
+
+	# Occasional defensive punctuation, not a random guard/strafe roll every
+	# 0.18 seconds. Guard, posture and the existing counter system are retained.
+	if now >= _hades_next_guard_at and distance <= HADES_MELEE_REACH:
+		if get_hp_ratio() < 0.55 and _v2_guard_ready(now) and not _v2_attack_temporally_ready(now):
+			_hades_next_guard_at = now + 4.0
+			_switch_state(AIState.DEFEND)
+			_hades_hold(delta, "guard")
+			return
+
+	# Preserve the existing 54-unit normal-melee gate and long-range
+	# Running Swing approach; impact admission stays with PressureDirectorV2.
+	if _v2_attack_start_eligible(distance) and _can_attack_now(now):
+		_try_attack()
+		if ai_state == AIState.ATTACK or telegraphing or swinging or _in_running_approach:
+			_hades_set_state("attack")
+			return
+
+	if distance < attack_start_min_range:
+		var away: Vector2 = -direction
+		if away.length_squared() < 0.001:
+			away = Vector2.RIGHT
+		_hades_move_to(delta, global_position + away * 30.0, "step_out")
+	elif distance <= HADES_MELEE_REACH:
+		_hades_hold(delta, "ready")
+	else:
+		_hades_move_to(delta, destination, "approach")
+
+
+var _hades_next_guard_at: float = 0.0
+
+
+func _hades_melee_plan() -> Dictionary:
+	if not is_instance_valid(player):
+		return {}
+	if not is_instance_valid(_hades_room_coordinator):
+		for node: Node in get_tree().get_nodes_in_group("hushiro_melee_surround"):
+			if node.get_parent() != null and node.get_parent().is_ancestor_of(self):
+				_hades_room_coordinator = node
+				break
+	if is_instance_valid(_hades_room_coordinator):
+		var value: Variant = _hades_room_coordinator.call("plan_for", self, player)
+		if value is Dictionary:
+			return value as Dictionary
+	var radial: Vector2 = global_position - player.global_position
+	if radial.length_squared() < 1.0:
+		radial = Vector2.RIGHT
+	return {"role": "engage", "position": player.global_position + radial.normalized() * 44.0}
+
+
+func _hades_move_to(delta: float, destination: Vector2, intent_name: String) -> void:
+	var offset: Vector2 = destination - global_position
+	if offset.length() < HADES_HOLD_DISTANCE:
+		_hades_hold(delta, intent_name + "_hold")
+		return
+	_hades_set_state(intent_name)
+	# ONE positional authority: no legacy radial orbit or per-actor
+	# _compute_separation force. Physical overlap safety remains room-owned.
+	var avoidance: Vector2 = _compute_wall_avoidance()
+	velocity = _smooth_velocity(offset.normalized() * approach_speed + avoidance * 0.40 + knockback, delta)
+
+
+func _hades_hold(delta: float, intent_name: String) -> void:
+	_hades_set_state(intent_name)
+	velocity = _smooth_velocity(knockback, delta)
+
+
+func _hades_set_state(next_state: String) -> void:
+	if _hades_state == next_state:
+		return
+	var previous: String = _hades_state
+	_hades_state = next_state
+	if CombatTelemetry != null and CombatTelemetry.is_capturing():
+		CombatTelemetry.record_event("swordsman_hades_state", {
+			"enemy": CombatTelemetry.snapshot_actor(self),
+			"previous": previous,
+			"current": next_state,
+			"position": global_position,
+		})
+
+
 func _v2_build_intent_scores(now: float, distance: float) -> Dictionary:
 	var posture_ratio: float = _get_humanoid_posture_ratio_safe()
 	var another_enemy_active: bool = _is_another_enemy_mid_swing()
