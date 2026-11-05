@@ -23,6 +23,7 @@ func _ready() -> void:
 func _run() -> void:
 	await get_tree().process_frame
 	_test_shared_brain_cadence()
+	_test_hades_action_clock()
 	_test_hades_surround_coordinator()
 	await _test_swordsman_integration()
 	_finish()
@@ -77,6 +78,35 @@ func _test_shared_brain_cadence() -> void:
 	_expect(brain.next_decision_at() < 0.0, "no-op invalidation reintroduced decision scheduling")
 
 	actor.queue_free()
+
+
+func _test_hades_action_clock() -> void:
+	var runner := CombatActionRunner.new()
+	add_child(runner)
+	var definition := CombatActionDefinition.new()
+	definition.action_id = &"running_swing"
+	definition.startup_duration = 0.5
+	definition.active_duration = 0.18
+	definition.recovery_duration = 0.24
+	runner.begin(definition)
+	runner.begin_approach()
+	runner.tick(1.25)
+	_expect(runner.phase_name() == "APPROACH", "running approach lost explicit phase")
+	_expect(is_zero_approx(runner.action_progress()), "approach is consuming visual attack frames before windup")
+
+	runner.begin_windup(0.52)
+	runner.tick(0.16)
+	_expect(runner.phase_name() == "STARTUP", "actual windup did not begin after approach")
+	_expect(runner.action_progress() < 0.25, "real windup incorrectly retained elapsed approach time")
+	runner.mark_active()
+	_expect(runner.phase_name() == "ACTIVE", "active hitbox phase not reflected by runner")
+	_expect(is_zero_approx(runner.phase_progress()), "active strike begins mid-animation")
+	runner.tick(0.06)
+	_expect(runner.phase_progress() > 0.2, "active strike progress must advance from real impact")
+	runner.mark_recovery()
+	_expect(runner.phase_name() == "RECOVERY", "real recovery phase missing")
+	runner.complete()
+	runner.queue_free()
 
 
 func _test_hades_surround_coordinator() -> void:
@@ -230,6 +260,11 @@ func _test_swordsman_integration() -> void:
 		_expect(not (backed_roles_value as Dictionary).has("advance_move"), "backed-off Swordsman acquired legacy advance_move")
 	enemy.set("_backoff_until", -1.0)
 	_expect(bool(enemy.call("uses_hades_melee_policy")), "Hades-inspired Swordsman policy not opted in")
+	var actual_request: Dictionary = enemy.call(
+		"_v2_pressure_request_for_attack", 3, now, false, 0.52
+	)
+	_expect(is_equal_approx(float(actual_request.get("impact_delay", -1.0)), 0.52),
+		"Running Swing reservation still predicts approach after the enemy reached windup")
 	enemy.set("next_swipe_time", now + 9.0)
 	enemy.call("_v2_brain_tick", 0.016)
 	_expect(str(enemy.call("get_hades_melee_state")) == "approach",
