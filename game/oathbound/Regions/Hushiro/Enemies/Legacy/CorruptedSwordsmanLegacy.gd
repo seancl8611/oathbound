@@ -285,16 +285,18 @@ func _physics_process(delta):
 	# Soldier-specific HFSM.
 	_hfsm_tick(delta)
 
-	# Attack movement must be applied AFTER HFSM so it cannot be overwritten
-	# by engage/defend movement in the same physics frame.
-	if telegraphing or swinging or is_attacking:
-		if now < _lunge_until:
-			velocity = _lunge_dir * _lunge_speed + knockback
-		else:
-			velocity = knockback
-	elif _in_running_approach:
+	# Attack movement must be applied AFTER HFSM so it cannot be overwritten.
+	# A running approach ALSO sets telegraphing=true: it MUST take precedence,
+	# otherwise the telegraph branch zeroes velocity and the enemy attacks from
+	# its original distance (observed during the Akio visual-proxy playtest).
+	if _in_running_approach:
 		if is_instance_valid(player):
 			velocity = direction * running_approach_speed + knockback
+		else:
+			velocity = knockback
+	elif telegraphing or swinging or is_attacking:
+		if now < _lunge_until:
+			velocity = _lunge_dir * _lunge_speed + knockback
 		else:
 			velocity = knockback
 
@@ -1531,8 +1533,13 @@ func _start_running_swing() -> void:
 			_windup_player_pos0 = player.global_position
 			break
 		
-		# Timeout: still swing (whiff is allowed), but take snapshot now.
+		# Preserve intentional whiffs after dodges, but do not swing from well
+		# outside blade reach if the enemy was blocked or never closed the gap.
 		if now_s - approach_start > 1.2:
+			if dist > running_range + humanoid_lunge_barely_outside_bonus:
+				_in_running_approach = false
+				_abort_attack_sequence(now_s)
+				return
 			_windup_player_pos0 = player.global_position
 			break
 		
