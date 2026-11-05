@@ -13,6 +13,27 @@ class MockSwordsman:
 	func is_dead() -> bool:
 		return false
 
+class MockPlayerHurtbox:
+	extends Area2D
+	signal hurt(damage: int, damage_type: String, attacker: Node)
+	var total_damage: int = 0
+
+	func _ready() -> void:
+		add_to_group("player_hurtbox")
+		collision_layer = 2
+		collision_mask = 0
+		monitorable = true
+		var shape := CollisionShape2D.new()
+		var circle := CircleShape2D.new()
+		circle.radius = 13.0
+		shape.shape = circle
+		add_child(shape)
+		hurt.connect(_on_hurt)
+
+	func _on_hurt(damage: int, _damage_type: String, _attacker: Node) -> void:
+		total_damage += damage
+
+
 var _failures: Array[String] = []
 
 
@@ -292,6 +313,29 @@ func _test_swordsman_integration() -> void:
 	enemy.set_physics_process(false)
 	enemy.set("_in_running_approach", false)
 	enemy.set("telegraphing", false)
+
+	# Real Area2D overlap, not merely a hitbox-spawn method stub. This catches
+	# a Swordsman hitbox that exists but fails to damage a stationary target.
+	var hurtbox := MockPlayerHurtbox.new()
+	target.add_child(hurtbox)
+	await get_tree().physics_frame
+	var compass: Array[Vector2] = [
+		Vector2.RIGHT, Vector2(1, 1).normalized(), Vector2.DOWN,
+		Vector2(-1, 1).normalized(), Vector2.LEFT,
+		Vector2(-1, -1).normalized(), Vector2.UP, Vector2(1, -1).normalized(),
+	]
+	for facing: Vector2 in compass:
+		target.global_position = facing * 48.0
+		(enemy as Node2D).global_position = Vector2.ZERO
+		enemy.set("_windup_player_pos0", target.global_position)
+		hurtbox.total_damage = 0
+		enemy.call("_spawn_attack_hitbox", 8, 65.0, false)
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		_expect(hurtbox.total_damage == 8,
+			"Swordsman 65-unit directional capsule did not hit stationary hurtbox at %s" % str(facing))
+		enemy.call("_cleanup_swipe")
+		await get_tree().physics_frame
 
 	if is_instance_valid(enemy):
 		enemy.queue_free()
