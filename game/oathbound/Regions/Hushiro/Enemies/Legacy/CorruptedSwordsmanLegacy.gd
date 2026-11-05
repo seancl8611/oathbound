@@ -1546,7 +1546,17 @@ func _start_running_swing() -> void:
 		await get_tree().create_timer(0.04).timeout
 	
 	_in_running_approach = false
-	
+
+	# The Hades-style attacker loop only requests its final attack window once
+	# it can actually strike. Rebook stale predicted impact at the true windup.
+	# If the shared pressure scheduler is busy, cancel safely and try later.
+	if has_method("_v2_sync_running_impact_to_windup"):
+		if not bool(call("_v2_sync_running_impact_to_windup", wind)):
+			_abort_attack_sequence(Time.get_ticks_msec() * 0.001)
+			return
+	if has_method("_begin_running_swing_windup"):
+		call("_begin_running_swing_windup", wind)
+
 	# If invalidated right after loop, abort cleanly.
 	if my_gen != _parry_gen:
 		_abort_attack_sequence(Time.get_ticks_msec() * 0.001)
@@ -1589,7 +1599,10 @@ func _perform_running_swing() -> void:
 	is_attacking = true
 	_attack_gen += 1
 	var my_gen = _attack_gen
-
+	# Activate the gameplay runner when the real hitbox will be spawned, not
+	# when the old estimate said the sword should have landed.
+	if has_method("_mark_v2_action_active"):
+		call("_mark_v2_action_active")
 	_spawn_attack_hitbox(running_damage, running_range, false)
 
 	var now_s := Time.get_ticks_msec() * 0.001
@@ -1603,6 +1616,13 @@ func _perform_running_swing() -> void:
 		running_approach_speed * 0.60,
 		0.12
 	)
+	# The hitbox has already snapshotted its direction. The physical step must
+	# follow that same committed direction, not a separately recomputed
+	# homing vector after Akio has dodged.
+	if is_instance_valid(_current_swipe_area):
+		var locked_value: Variant = _current_swipe_area.get_meta("swing_dir", Vector2.ZERO)
+		if locked_value is Vector2 and (locked_value as Vector2).length_squared() > 0.001:
+			lunge["dir"] = locked_value as Vector2
 
 	_apply_humanoid_lunge(lunge, now_s)
 
