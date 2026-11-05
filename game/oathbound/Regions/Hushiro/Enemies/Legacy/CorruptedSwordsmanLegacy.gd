@@ -1695,6 +1695,44 @@ func _spawn_attack_hitbox(dmg: int, range_val: float, is_telegraph: bool) -> voi
 	# Store locked values so _update_swipe_hitbox_position does not retarget.
 	area.set_meta("swing_dir", dir)
 	area.set_meta("swing_offset", offset)
+	if not is_telegraph:
+		area.set_meta("had_contact", false)
+		_trace_swordsman_hitbox("spawned", area)
+
+
+# Read-only telemetry: distinguishes no hitbox, whiff, wrong orientation and
+# delayed contact without changing authored damage or collision geometry.
+func _trace_swordsman_hitbox(edge: String, hit_area: Area2D) -> void:
+	if typeof(CombatTelemetry) != TYPE_OBJECT or not CombatTelemetry.is_capturing():
+		return
+	if not is_instance_valid(hit_area):
+		return
+	var payload: Dictionary = {
+		"enemy": CombatTelemetry.snapshot_actor(self),
+		"edge": edge,
+		"attack_id": get_v2_action_id() if has_method("get_v2_action_id") else "legacy",
+		"action_phase": get_v2_action_phase() if has_method("get_v2_action_phase") else "",
+		"hitbox_token": hit_area.get_meta("swing_token", 0),
+		"hitbox_position": hit_area.global_position,
+		"hitbox_direction": hit_area.get_meta("swing_dir", Vector2.ZERO),
+		"had_contact": bool(hit_area.get_meta("had_contact", false)),
+		"physics_frame": Engine.get_physics_frames(),
+	}
+	if is_instance_valid(player):
+		payload["target"] = CombatTelemetry.snapshot_actor(player)
+		payload["distance_to_player"] = global_position.distance_to(player.global_position)
+	var shape_node: CollisionShape2D = hit_area.get_node_or_null("CollisionShape2D") as CollisionShape2D
+	if shape_node != null and shape_node.shape is CapsuleShape2D:
+		payload["capsule_radius"] = (shape_node.shape as CapsuleShape2D).radius
+		payload["capsule_length"] = (shape_node.shape as CapsuleShape2D).height
+	CombatTelemetry.record_event("swordsman_attack_hitbox", payload)
+
+
+func _cleanup_swipe() -> void:
+	if is_instance_valid(_current_swipe_area) and _current_swipe_area.has_meta("had_contact"):
+		_trace_swordsman_hitbox("removed", _current_swipe_area)
+	super._cleanup_swipe()
+
 
 func _on_swipe_area_entered(area: Area2D) -> void:
 	if area == null:
@@ -1706,7 +1744,10 @@ func _on_swipe_area_entered(area: Area2D) -> void:
 		if _current_swipe_area.get_meta("consumed"):
 			return
 		_current_swipe_area.set_meta("consumed", true)
-	
+	if is_instance_valid(_current_swipe_area):
+		_current_swipe_area.set_meta("had_contact", true)
+		_trace_swordsman_hitbox("contact", _current_swipe_area)
+
 	var dmg = swipe_damage
 	if _current_swipe_area and _current_swipe_area.has_meta("damage"):
 		dmg = int(_current_swipe_area.get_meta("damage"))
