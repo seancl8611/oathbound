@@ -114,6 +114,13 @@ func _test_hades_surround_coordinator() -> void:
 		"attack completion should rotate engagement to waiting Swordsman")
 	_expect(coordinator.call("role_for_test", first, player) == "support",
 		"completed attacker should recover outside immediate engagement")
+
+	# Retaliation rule: a player who pursues a support Swordsman at close range
+	# should not make that enemy flee indefinitely while the lead is far away.
+	coordinator.set("_engager_lease_until", 0.0)
+	player.global_position = Vector2(70.0, 0.0)
+	_expect(coordinator.call("role_for_test", first, player) == "engage",
+		"close-pressured support unit failed to become the active attacker")
 	room.queue_free()
 
 
