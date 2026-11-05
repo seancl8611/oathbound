@@ -105,7 +105,7 @@
         },
         {
           "path": "EncounterLogic.lua",
-          "git_blob_sha1": "862022ed55b6bfe00b77b8579755163cd9a6279",
+          "git_blob_sha1": "862022ed55b6bfe00b77b8579755163cd9a6279b",
           "purpose": "Wave progression and spawning logic",
           "url": "https://raw.githubusercontent.com/syslies93/hades2-scripts-mod/48db5c0f05bcab35f40a6f438b32af33febb099e/EncounterLogic.lua"
         },
