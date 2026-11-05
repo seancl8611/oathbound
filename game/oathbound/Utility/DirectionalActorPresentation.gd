@@ -398,7 +398,12 @@ func _sync_atlas_animation(force_restart: bool) -> void:
 
 	_sprite.visible = true
 	_resolved_animation_name = str(desired)
-	if _is_akio_enemy_proxy() and _semantic_state == "attack" and _profile.has_method("visual_frame_for_phase"):
+	if (
+		_is_akio_enemy_proxy()
+		and _semantic_state == "attack"
+		and _action_phase in ["STARTUP", "COMMITTED", "ACTIVE", "RECOVERY"]
+		and _profile.has_method("visual_frame_for_phase")
+	):
 		var frame_count: int = _sprite_frames.get_frame_count(desired)
 		if frame_count > 0:
 			var frame_value: Variant = _profile.call(
