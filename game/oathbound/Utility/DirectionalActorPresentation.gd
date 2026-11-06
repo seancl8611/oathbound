@@ -633,13 +633,13 @@ func _resolve_facing(runtime_contract: Dictionary) -> Vector2:
 		var input_value: Variant = _property_value(source_actor, "_move_input")
 		if input_value is Vector2 and (input_value as Vector2).length_squared() > 0.01:
 			return input_value as Vector2
+		if source_actor is CharacterBody2D:
+			var motion: Vector2 = (source_actor as CharacterBody2D).velocity
+			if motion.length_squared() > 64.0:
+				return motion
 		var facing_value: Variant = _property_value(source_actor, "_facing_dir")
 		if facing_value is Vector2 and (facing_value as Vector2).length_squared() > 0.01:
 			return facing_value as Vector2
-		if source_actor is CharacterBody2D:
-			var motion: Vector2 = (source_actor as CharacterBody2D).velocity
-			if motion.length_squared() > 1.0:
-				return motion
 	# During attacks, authoritative aim/target snapshot has priority over locomotion.
 	if str(runtime_contract.get("state", "")) == "attack":
 		for property_name: String in ["_attack_aim_dir", "attack_aim_dir"]:
