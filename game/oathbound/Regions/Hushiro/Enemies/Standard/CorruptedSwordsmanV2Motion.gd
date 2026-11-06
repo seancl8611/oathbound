@@ -95,6 +95,21 @@ func _perform_cross_swing_hit(hit_num: int, gen: int) -> void:
 	super._perform_cross_swing_hit(hit_num, gen)
 
 
+# The visual action switches to ACTIVE on the EXACT call that creates
+# the damaging Area2D. Previously the runner switched on the next physics
+# tick, which could show a hitbox while Akio's proxy still displayed windup.
+func _spawn_attack_hitbox(damage: int, reach: float, is_telegraph: bool) -> void:
+	super._spawn_attack_hitbox(damage, reach, is_telegraph)
+	if not is_telegraph and is_instance_valid(_current_swipe_area):
+		_mark_v2_action_active()
+
+
+func _spawn_thrust_hitbox(damage: int, reach: float, is_telegraph: bool) -> void:
+	super._spawn_thrust_hitbox(damage, reach, is_telegraph)
+	if not is_telegraph and is_instance_valid(_current_swipe_area):
+		_mark_v2_action_active()
+
+
 func _start_running_swing() -> void:
 	if not telegraphing and not is_attacking and not _dbroken_active:
 		# Hades-style attack data: approach is NOT an early part of the slash
