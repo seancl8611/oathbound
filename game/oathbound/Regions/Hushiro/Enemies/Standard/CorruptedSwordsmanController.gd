@@ -240,12 +240,18 @@ func _spawn_attack_hitbox(dmg: int, range_val: float, is_telegraph: bool) -> voi
 	super._spawn_attack_hitbox(dmg, range_val, is_telegraph)
 	if is_instance_valid(_current_swipe_area):
 		_stamp_current_attack_event(dmg, "melee", true, is_telegraph)
+		if not is_telegraph and has_method("_mark_v2_action_active"):
+			# The player's damaging collision area and the visible attack
+			# frames become ACTIVE at the SAME gameplay event.
+			call("_mark_v2_action_active")
 
 
 func _spawn_thrust_hitbox(dmg: int, range_val: float, is_telegraph: bool) -> void:
 	super._spawn_thrust_hitbox(dmg, range_val, is_telegraph)
 	if is_instance_valid(_current_swipe_area):
 		_stamp_current_attack_event(dmg, "perilous", false, is_telegraph)
+		if not is_telegraph and has_method("_mark_v2_action_active"):
+			call("_mark_v2_action_active")
 
 
 func _stamp_current_attack_event(damage: int, damage_type: String, blockable: bool, is_telegraph: bool = false) -> void:
