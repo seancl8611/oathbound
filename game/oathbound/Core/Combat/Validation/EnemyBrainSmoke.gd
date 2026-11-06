@@ -2,6 +2,7 @@ extends Node
 
 const ENEMY_BRAIN_SCRIPT = preload("res://Core/Combat/EnemyBrain.gd")
 const SWORDSMAN_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedSwordsman.tscn")
+const ARCHER_ARROW_SCENE: PackedScene = preload("res://Regions/Hushiro/Enemies/Standard/CorruptedArcherProjectile.tscn")
 const SURROUND_SCRIPT = preload("res://Regions/Hushiro/Combat/HushiroMeleeSurroundCoordinator.gd")
 
 class MockSwordsman:
@@ -47,7 +48,37 @@ func _run() -> void:
 	_test_hades_action_clock()
 	_test_hades_surround_coordinator()
 	await _test_swordsman_integration()
+	await _test_archer_projectile_sweep()
 	_finish()
+
+
+func _test_archer_projectile_sweep() -> void:
+	# An arrow moving faster than a thin hurtbox's diameter per physics tick
+	# must still register damage rather than tunneling across the player.
+	var target := Node2D.new()
+	target.name = "ProjectileSweepTarget"
+	target.add_to_group("player")
+	target.global_position = Vector2(110.0, 0.0)
+	add_child(target)
+	var hurtbox := MockPlayerHurtbox.new()
+	target.add_child(hurtbox)
+	var arrow_value: Node = ARCHER_ARROW_SCENE.instantiate()
+	_expect(arrow_value is Area2D, "Canonical Archer projectile is not an Area2D")
+	if arrow_value is Area2D:
+		var arrow := arrow_value as Area2D
+		add_child(arrow)
+		arrow.global_position = Vector2.ZERO
+		arrow.collision_mask = 2
+		arrow.call("launch", Vector2.RIGHT, 600.0, 2)
+		await get_tree().physics_frame
+		var hit: bool = bool(arrow.call(
+			"_sweep_projectile_contact", Vector2.ZERO, Vector2(160.0, 0.0)
+		))
+		_expect(hit and hurtbox.total_damage == 2,
+			"Fast Archer projectile swept through a stationary player without damage")
+		if is_instance_valid(arrow):
+			arrow.queue_free()
+	target.queue_free()
 
 
 func _test_shared_brain_cadence() -> void:
