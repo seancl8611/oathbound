@@ -66,7 +66,12 @@ func _physics_process(delta: float) -> void:
 	if _is_blocked or _hit_something:
 		return
 	
-	# Move arrow
+	# Check the full flight segment before translating. Narrow arrows used
+	# to tunnel through player hurtboxes between consecutive physics frames.
+	var from_point: Vector2 = global_position
+	var to_point: Vector2 = from_point + velocity * delta
+	if _armed and _sweep_projectile_contact(from_point, to_point):
+		return
 	position += velocity * delta
 	
 	# Update rotation to match trajectory (no extra sprite spin)
@@ -77,6 +82,28 @@ func _physics_process(delta: float) -> void:
 	if _armed and not _hit_something:
 		_check_overlaps()
 		
+func _sweep_projectile_contact(from_point: Vector2, to_point: Vector2) -> bool:
+	if (to_point - from_point).length_squared() < 0.001:
+		return false
+	var query := PhysicsRayQueryParameters2D.create(from_point, to_point, collision_mask)
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	query.hit_from_inside = true
+	query.exclude = [get_rid()]
+	var result: Dictionary = get_world_2d().direct_space_state.intersect_ray(query)
+	var hit: Variant = result.get("collider", null)
+	if hit is Area2D:
+		var hurt_area: Area2D = hit as Area2D
+		if (
+			(_is_deflected and hurt_area.is_in_group("hurtbox") and not hurt_area.is_in_group("player_hurtbox"))
+			or (not _is_deflected and hurt_area.is_in_group("player_hurtbox"))
+		):
+			global_position = result.get("position", from_point)
+			_on_area_entered(hurt_area)
+			return _hit_something or _is_blocked
+	return false
+
+
 func _check_overlaps() -> void:
 	if _hit_something:
 		return
@@ -337,8 +364,10 @@ func initialize(dir: Vector2, spd: float, dmg: int = 2) -> void:
 
 
 func _arm_projectile() -> void:
-	await get_tree().process_frame
-	await get_tree().process_frame
+	# _ready defers this to the same startup frame. Do not wait two process
+	# frames while the arrow moves with collision monitoring disabled.
+	if not is_inside_tree() or is_queued_for_deletion():
+		return
 	
 	add_to_group("attack")
 	add_to_group("enemy_projectile")
@@ -351,4 +380,5 @@ func _arm_projectile() -> void:
 	# CRITICAL: Check for overlaps immediately after arming
 	# This catches arrows that are already inside the player
 	await get_tree().physics_frame
-	_check_overlaps()
+	if is_instance_valid(self) and not is_queued_for_deletion():
+		_check_overlaps()
