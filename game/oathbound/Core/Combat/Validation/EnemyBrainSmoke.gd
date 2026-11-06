@@ -228,12 +228,13 @@ func _test_swordsman_integration() -> void:
 		_expect(reliable_reach >= 48.0 and reliable_reach <= 60.0, "Swordsman melee gate is not calibrated to its shortest blade")
 		_expect(bool(enemy.call("_v2_attack_start_eligible", 50.0)), "Swordsman lost safe close melee")
 		_expect(not bool(enemy.call("_v2_attack_start_eligible", 70.0)), "Swordsman may still launch a stationary slash from 70 units")
-		_expect(bool(enemy.call("_v2_attack_start_eligible", 96.0)), "Swordsman lost legitimate long-range running approach")
+		_expect(not bool(enemy.call("_v2_attack_start_eligible", 96.0)), "Swordsman still launches a damaging attack instead of walking into blade reach")
 		_expect(not bool(enemy.call("_v2_attack_start_eligible", 140.0)), "Swordsman can attack beyond approach envelope")
 		var gap_scores: Dictionary = enemy.call("_v2_build_intent_scores", now, 70.0)
 		_expect(float(gap_scores.get(&"attack", -INF)) == -INF, "Swordsman scores normal attacks inside out-of-reach 55-79 gap")
 		_expect(float(gap_scores.get(&"approach", -INF)) > float(gap_scores.get(&"strafe", -INF)), "Swordsman stays orbiting outside sword reach")
-		_expect(int(enemy.call("_v2_attack_choice_for_distance", 96.0, 0)) == 3, "distant attack must force running approach, not pending Basic Swing")
+		_expect(int(enemy.call("_v2_attack_choice_for_distance", 96.0, 0)) == 0, "distant queued Basic Swing was replaced with retired Running Swing")
+		_expect(int(enemy.call("_v2_attack_choice_for_distance", 45.0, 3)) != 3, "retired Running Swing still selected from a pending attack")
 	else:
 		_fail("Swordsman missing reliable melee and approach contract")
 
@@ -372,12 +373,11 @@ func _test_swordsman_integration() -> void:
 		enemy.call("_cleanup_swipe")
 		await get_tree().physics_frame
 
-	# End-to-end Hades-style RUNNING_SWING contract, rather than a synthetic
-	# capsule spawned directly by the test. A stationary target at 96 units
-	# must be reached, visibly wound up on the real action clock, and damaged
-	# by the actual temporary hitbox during its active window.
+	# A full normal melee action must still connect when Akio holds still.
+	# The former 96-unit lunge is retired; ordinary approach movement should
+	# take the enemy into reliable blade reach before the attack is requested.
 	hurtbox.total_damage = 0
-	target.global_position = Vector2(96.0, 0.0)
+	target.global_position = Vector2(46.0, 0.0)
 	(enemy as Node2D).global_position = Vector2.ZERO
 	(enemy as CharacterBody2D).velocity = Vector2.ZERO
 	enemy.set("_windup_player_pos0", Vector2.ZERO)
@@ -388,12 +388,25 @@ func _test_swordsman_integration() -> void:
 	enemy.set("_backoff_until", -1.0)
 	enemy.set_physics_process(true)
 	await get_tree().physics_frame
-	enemy.call("_start_running_swing")
-	await get_tree().create_timer(2.0).timeout
+	enemy.call("_start_basic_swing")
+	await get_tree().create_timer(1.5).timeout
 	enemy.set_physics_process(false)
-	_expect(hurtbox.total_damage == 8,
-		"full Running Swing failed to damage a stationary target at 96 units; applied %d" % hurtbox.total_damage)
+	_expect(hurtbox.total_damage == 6,
+		"full normal Swordsman swing failed to damage stationary target within reach; applied %d" % hurtbox.total_damage)
 	enemy.call("_cleanup_swipe")
+
+	# Once acquired, leaving the old 300-unit deaggro radius must NOT send
+	# the Swordsman back to idle. Range affects movement goal, not aggro.
+	enemy.set("_engaged", true)
+	enemy.set("_saw_player_once", true)
+	enemy.set("telegraphing", false)
+	enemy.set("is_attacking", false)
+	enemy.set("swinging", false)
+	enemy.set("_backoff_until", -1.0)
+	target.global_position = Vector2(500.0, 0.0)
+	enemy.call("_v2_brain_tick", 0.016)
+	_expect(bool(enemy.get("_engaged")), "Swordsman deaggroed after player exceeded former leash radius")
+	_expect(int(enemy.get("ai_state")) != 0, "Swordsman returned to IDLE after already acquiring Akio")
 
 	if is_instance_valid(enemy):
 		enemy.queue_free()
