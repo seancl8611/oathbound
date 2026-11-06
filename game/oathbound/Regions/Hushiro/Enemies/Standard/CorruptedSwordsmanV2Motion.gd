@@ -70,7 +70,8 @@ func _start_basic_swing() -> void:
 
 
 func _perform_basic_swing() -> void:
-	_mark_v2_action_active()
+	# The coroutine can yield through hitstop. The ACTUAL damaging hitbox
+	# spawn now advances ACTIVE, not this pre-yield method entry.
 	super._perform_basic_swing()
 
 
@@ -81,7 +82,6 @@ func _start_quick_thrust() -> void:
 
 
 func _perform_quick_thrust() -> void:
-	_mark_v2_action_active()
 	super._perform_quick_thrust()
 
 
@@ -92,7 +92,6 @@ func _start_cross_swing() -> void:
 
 
 func _perform_cross_swing_hit(hit_num: int, gen: int) -> void:
-	_mark_v2_action_active()
 	super._perform_cross_swing_hit(hit_num, gen)
 
 
