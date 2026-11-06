@@ -514,9 +514,10 @@ func _try_proximity_aggro() -> void:
 
 
 func set_auto_aggro_on_spawn(v: bool) -> void:
+	# Spawn policy can grant aggro, but cannot revoke it once acquired.
 	auto_aggro_on_spawn = v
-	if not auto_aggro_on_spawn:
-		_saw_player_once = false
+	if auto_aggro_on_spawn:
+		_saw_player_once = true
 
 
 func _patrol_step(delta: float) -> void:
