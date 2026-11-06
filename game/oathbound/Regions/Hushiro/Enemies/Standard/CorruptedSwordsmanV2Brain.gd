@@ -78,12 +78,8 @@ func _v2_brain_tick(delta: float) -> void:
 	var distance: float = to_player.length()
 	var direction: Vector2 = to_player / maxf(0.001, distance)
 
-	if distance > deaggro_radius:
-		_engaged = false
-		if _v2_enemy_brain != null:
-			_v2_enemy_brain.invalidate_intent("deaggro")
-		_switch_state(AIState.IDLE)
-		return
+	# Encounter aggression is latched once acquired. Distance may change the
+	# APPROACH destination, but never resets combat to patrol mid-wave.
 
 	# Room crowd spacing owns close-body occupancy in Combat V2. A backed-off Swordsman
 	# must not start a fresh attack/counter or immediately reacquire a sticky V1
@@ -167,8 +163,9 @@ func _hades_style_tick(delta: float, now: float, direction: Vector2, distance: f
 			_hades_hold(delta, "guard")
 			return
 
-	# Preserve the existing 54-unit normal-melee gate and long-range
-	# Running Swing approach; impact admission stays with PressureDirectorV2.
+	# All three authored attacks require real melee reach. An enemy outside
+	# that envelope RUNS toward its engagement destination, without starting
+	# an attack or consuming a pressure reservation.
 	if _v2_attack_start_eligible(distance) and _can_attack_now(now):
 		_try_attack()
 		if ai_state == AIState.ATTACK or telegraphing or swinging or _in_running_approach:
@@ -404,9 +401,8 @@ func _v2_move_retreat(delta: float, direction: Vector2) -> void:
 # ATTACK / GUARD READINESS
 # =============================================================================
 
-# A normal slash may start only inside the shortest sword strike's reliable
-# reach. A running swing may start farther out only because its approach phase
-# must move the enemy into range before the hit.
+# The Swordsman now APPROACHES normally and attacks only from authored sword
+# reach. Running Swing is retired from automatic engagement/attack selection.
 func _v2_reliable_melee_range() -> float:
 	return maxf(attack_start_min_range, minf(attack_start_max_range, minf(swipe_range, minf(cross_range, thrust_range))) - 4.0)
 
@@ -414,9 +410,7 @@ func _v2_reliable_melee_range() -> float:
 func _v2_attack_start_eligible(distance: float) -> bool:
 	if distance < attack_start_min_range:
 		return false
-	if distance <= _v2_reliable_melee_range():
-		return true
-	return distance >= running_min_distance and distance <= maxf(attack_start_max_range, running_min_distance + 45.0)
+	return distance <= _v2_reliable_melee_range()
 
 
 func _v2_attack_temporally_ready(now: float) -> bool:
