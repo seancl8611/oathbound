@@ -649,10 +649,7 @@ func _state_engage_tick(delta: float) -> void:
 		velocity = _get_idle_sway(delta) * 2.0 + knockback
 		return
 
-	if dist > deaggro_radius:
-		_engaged = false
-		_switch_state(AIState.IDLE)
-		return
+	# No distance-driven deaggro: combat remains active for the encounter.
 
 	var now_s = Time.get_ticks_msec() * 0.001
 	
@@ -951,7 +948,7 @@ func _try_attack() -> void:
 		AttackType.CROSS_SWING:
 			_start_cross_swing()
 		AttackType.RUNNING_SWING:
-			_start_running_swing()
+			_start_basic_swing()
 		_:
 			_start_custom_attack(_current_attack_type)
 	
@@ -967,11 +964,8 @@ func _select_attack_type() -> int:
 	
 	var dist = global_position.distance_to(player.global_position)
 	
-	# Running swing when far
-	if dist >= running_min_distance:
-		if randf() < running_chance:
-			_last_attack_type = AttackType.RUNNING_SWING
-			return AttackType.RUNNING_SWING
+	# Long-distance attacks are retired. Approach normally and choose one
+	# of the three readable close-range moves when in sword reach.
 	
 	# Weighted selection - avoid repeating
 	var weights = {
