@@ -83,6 +83,12 @@ func _ready() -> void:
 		_expect(windup_frame < strike_start and committed_frame <= strike_start,
 			"%s: Swordsman windup has no earlier distinct animation pose" % dir_name)
 		_expect(strike_end > strike_start, "%s: strike never advances through real Quick Slash poses" % dir_name)
+		_expect(int(ENEMY_PROXY_PROFILE.call("visual_frame_for_phase", "STARTUP", 1.0, 44)) == 14,
+			"%s: Swordsman preparation should use the 15 source startup frames" % dir_name)
+		_expect(strike_start == 15 and strike_end == 22,
+			"%s: damaged sword contact should coincide with verified Quick Slash 15..22 source frames" % dir_name)
+		_expect(int(ENEMY_PROXY_PROFILE.call("visual_frame_for_phase", "RECOVERY", 0.0, 44)) == 23,
+			"%s: visual recovery begins at source frame 23" % dir_name)
 		_expect(recovery_end == 43, "%s: recovery skips last authored source frame" % dir_name)
 
 	var proxy_valid: PackedStringArray = ENEMY_PROXY_PROFILE.call("validate_contract", true)
