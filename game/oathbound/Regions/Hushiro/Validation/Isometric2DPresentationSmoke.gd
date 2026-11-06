@@ -2,6 +2,19 @@ extends Node
 
 const BRIDGE_SCRIPT = preload("res://Regions/Hushiro/Presentation/HushiroIsometric2DPresentation.gd")
 const CAMERA_SCRIPT = preload("res://Utility/CameraFollow.gd")
+const DIRECTIONAL_PRESENTER_SCRIPT = preload("res://Utility/DirectionalActorPresentation.gd")
+
+class MockLiveMovementPlayer:
+	extends CharacterBody2D
+	var _move_input: Vector2 = Vector2.RIGHT
+	var _facing_dir: Vector2 = Vector2.RIGHT
+	var _attack_aim_dir: Vector2 = Vector2.RIGHT
+	var _dodge_dir: Vector2 = Vector2.RIGHT
+	var _dodge_timer: float = 0.0
+	var gameplay_state: String = "move"
+
+	func get_directional_presentation_state() -> String:
+		return gameplay_state
 
 var _failures: Array[String] = []
 
@@ -84,7 +97,50 @@ func _run() -> void:
 	else:
 		_fail("directional presenter diagnostics were empty")
 
+	_test_player_direction_stale_facing(room)
 	_finish()
+
+
+func _test_player_direction_stale_facing(room: Node2D) -> void:
+	# The real problem: gameplay movement changes but a previous attack-facing
+	# vector remains valid. This must NEVER pin the player's Run direction.
+	var actor := MockLiveMovementPlayer.new()
+	actor.name = "VisualDirectionTestPlayer"
+	room.add_child(actor)
+	var visual: Node2D = DIRECTIONAL_PRESENTER_SCRIPT.new()
+	room.add_child(visual)
+	visual.call("configure", actor, "player", 1.0, 0.72)
+
+	actor._attack_aim_dir = Vector2.RIGHT
+	actor._facing_dir = Vector2.RIGHT
+	for step: Dictionary in [
+		{"input": Vector2.LEFT, "direction": "w"},
+		{"input": Vector2.UP, "direction": "n"},
+		{"input": Vector2.DOWN, "direction": "s"},
+		{"input": Vector2.RIGHT, "direction": "e"},
+	]:
+		actor._move_input = step["input"]
+		visual.call("sync_from_source", 0.016)
+		var result: Dictionary = visual.call("get_presentation_state_for_test")
+		_expect(str(result.get("state", "")) == "move", "live MOVING state was obscured by stale animation")
+		_expect(str(result.get("direction", "")) == str(step["direction"]),
+			"player Run direction stuck despite changed input: %s" % str(step["direction"]))
+
+	actor.gameplay_state = "dash"
+	actor._dodge_dir = Vector2.UP
+	actor._dodge_timer = 0.10
+	visual.call("sync_from_source", 0.016)
+	var dash_state: Dictionary = visual.call("get_presentation_state_for_test")
+	_expect(str(dash_state.get("direction", "")) == "n", "dash should use its own committed heading")
+
+	actor.gameplay_state = "move"
+	actor._dodge_timer = 0.0
+	actor._move_input = Vector2.LEFT
+	visual.call("sync_from_source", 0.016)
+	var resumed: Dictionary = visual.call("get_presentation_state_for_test")
+	_expect(str(resumed.get("direction", "")) == "w", "dash exit left stale heading in Run animation")
+	visual.queue_free()
+	actor.queue_free()
 
 
 func _expect(condition: bool, message: String) -> void:
