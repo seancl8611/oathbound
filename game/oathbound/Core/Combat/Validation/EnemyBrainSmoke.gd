@@ -314,6 +314,41 @@ func _test_swordsman_integration() -> void:
 	enemy.set("_in_running_approach", false)
 	enemy.set("telegraphing", false)
 
+	# Running Swing must follow the moving target until its committed telegraph
+	# beat, but must NOT home after commitment. Previously the first target
+	# snapshot was frozen at the end of the approach (~0.5s too early).
+	var runner: CombatActionRunner = enemy.get_node_or_null("CombatActionRunner") as CombatActionRunner
+	_expect(runner != null, "Swordsman runner missing during telegraph targeting test")
+	if runner != null:
+		enemy.set("player", target)
+		(enemy as Node2D).global_position = Vector2.ZERO
+		enemy.set("velocity", Vector2.ZERO)
+		enemy.set("knockback", Vector2.ZERO)
+		enemy.set("telegraphing", true)
+		enemy.set("swinging", false)
+		enemy.set("is_attacking", false)
+		enemy.set("_windup_player_pos0", Vector2.RIGHT * 55.0)
+		enemy.call("_begin_v2_action", &"running_swing", 0.50, 0.18, 0.24, 0.78)
+		enemy.call("_begin_running_swing_windup", 0.50)
+		target.global_position = Vector2.UP * 55.0
+		await get_tree().physics_frame
+		enemy.call("_tick_v2_action_motion", 0.016)
+		var snapshot: Vector2 = enemy.get("_windup_player_pos0")
+		_expect(snapshot.distance_to(target.global_position) < 0.01,
+			"Running Swing refused to track Akio during early visible windup")
+
+		runner.tick(0.42)
+		_expect(runner.phase_name() == "COMMITTED",
+			"Running Swing did not lock facing before actual strike")
+		target.global_position = Vector2.LEFT * 55.0
+		await get_tree().physics_frame
+		enemy.call("_tick_v2_action_motion", 0.016)
+		var locked_snapshot: Vector2 = enemy.get("_windup_player_pos0")
+		_expect(locked_snapshot.distance_to(snapshot) < 0.01,
+			"Running Swing is homing after commit; late dodges should still cause misses")
+		runner.complete()
+		enemy.set("telegraphing", false)
+
 	# Real Area2D overlap, not merely a hitbox-spawn method stub. This catches
 	# a Swordsman hitbox that exists but fails to damage a stationary target.
 	var hurtbox := MockPlayerHurtbox.new()
