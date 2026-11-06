@@ -11,6 +11,30 @@ extends "res://Player/OathboundCombatPlayerCore.gd"
 ## Hitboxes, AttackEvent delivery, dash/parry cancellation, held-Thrust branching,
 ## PlayerMotor, CombatActionRunner, and recovery timing remain owned by the core.
 
+# The active gameplay FSM, not the legacy AnimationPlayer's last clip,
+# tells the rig-to-2D presenter when Akio is actually moving or dodging.
+# In particular, MOVING must not inherit a stale attack-facing direction.
+func get_directional_presentation_state() -> String:
+	if _combat_dead:
+		return "death"
+	match _state:
+		State.IDLE:
+			return "idle"
+		State.MOVING:
+			return "move"
+		State.DODGING:
+			return "dash"
+		State.ATTACKING, State.ATTACK_RECOVERY:
+			return "attack"
+		State.BLOCKING, State.PARRYING:
+			return "defend"
+		State.STUNNED:
+			return "hurt"
+		_:
+			# Special actions keep existing presentation fallback semantics.
+			return ""
+
+
 const AREA1_PRESSURE_MAX_HITS: int = 6
 const AREA1_PRESSURE_MIDPOINT_HIT: int = 3
 const BASE_KATANA_IDS: Array[String] = ["quick_slash", "cross_cut", "heavy_cleave"]
