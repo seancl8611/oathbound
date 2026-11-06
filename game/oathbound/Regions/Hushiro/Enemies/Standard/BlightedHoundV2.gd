@@ -104,12 +104,7 @@ func _v2_predator_tick(delta: float, now: float) -> void:
 
 	var to_player: Vector2 = player.global_position - global_position
 	var distance: float = to_player.length()
-	if distance > deaggro_radius:
-		_saw_player_once = false
-		if _v2_enemy_brain != null:
-			_v2_enemy_brain.invalidate_intent("deaggro")
-		_goto(State.PATROL)
-		return
+	# Acquired aggro persists until target loss, death or encounter teardown.
 
 	var direction: Vector2 = to_player / maxf(0.001, distance)
 	_charge_dir = direction if direction.length_squared() > 0.001 else _charge_dir
