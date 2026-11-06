@@ -350,6 +350,19 @@ func _test_swordsman_integration() -> void:
 		runner.complete()
 		enemy.set("telegraphing", false)
 
+		# When a real damage Area2D is created, the attack's visible ACTIVE
+		# phase must begin on this call, not a frame later or at coroutine entry.
+		enemy.call("_begin_v2_action", &"basic_swing", 0.50, 0.22, 0.18, 0.62)
+		enemy.call("_spawn_attack_hitbox", 6, 62.0, false)
+		_expect(runner.phase_name() == "ACTIVE", "basic hitbox spawn and visual ACTIVE disagree")
+		enemy.call("_cleanup_swipe")
+		runner.complete()
+		enemy.call("_begin_v2_action", &"quick_thrust", 0.48, 0.23, 0.22, 0.64)
+		enemy.call("_spawn_thrust_hitbox", 8, 70.0, false)
+		_expect(runner.phase_name() == "ACTIVE", "thrust hitbox spawn and visual ACTIVE disagree")
+		enemy.call("_cleanup_swipe")
+		runner.complete()
+
 	# Real Area2D overlap, not merely a hitbox-spawn method stub. This catches
 	# a Swordsman hitbox that exists but fails to damage a stationary target.
 	var hurtbox := MockPlayerHurtbox.new()
