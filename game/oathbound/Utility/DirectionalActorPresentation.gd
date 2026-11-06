@@ -165,11 +165,13 @@ func _sync_from_source(_delta: float) -> void:
 	_hide_legacy_body()
 	_apply_akio_render_test_preset()
 	var runtime_contract := _resolve_runtime_contract()
+	# Resolve live gameplay state BEFORE heading: the correct heading authority
+	# depends on whether Akio is moving, dodging, or committed to a strike.
+	_semantic_state = _resolve_semantic_state(runtime_contract)
 	var facing := _resolve_facing(runtime_contract)
 	if facing.length_squared() > 0.001:
 		_facing = facing.normalized()
 	_direction_name = _quantized_direction_name(_facing)
-	_semantic_state = _resolve_semantic_state(runtime_contract)
 	_action_id = str(runtime_contract.get("action_id", ""))
 	_action_phase = str(runtime_contract.get("action_phase", "IDLE"))
 	_action_phase_progress = float(runtime_contract.get("phase_progress", 0.0))
@@ -624,6 +626,20 @@ func _trace_proxy_enemy_visual_state() -> void:
 
 
 func _resolve_facing(runtime_contract: Dictionary) -> Vector2:
+	# Akio's live MOVING state is authoritative, even if a stale legacy attack
+	# clip/facing property survived a cancel. Prefer current input direction so
+	# knockback, collision sliding and transient low velocity don't freeze Run.
+	if actor_role == "player" and _semantic_state == "move":
+		var input_value: Variant = _property_value(source_actor, "_move_input")
+		if input_value is Vector2 and (input_value as Vector2).length_squared() > 0.01:
+			return input_value as Vector2
+		var facing_value: Variant = _property_value(source_actor, "_facing_dir")
+		if facing_value is Vector2 and (facing_value as Vector2).length_squared() > 0.01:
+			return facing_value as Vector2
+		if source_actor is CharacterBody2D:
+			var motion: Vector2 = (source_actor as CharacterBody2D).velocity
+			if motion.length_squared() > 1.0:
+				return motion
 	# During attacks, authoritative aim/target snapshot has priority over locomotion.
 	if str(runtime_contract.get("state", "")) == "attack":
 		for property_name: String in ["_attack_aim_dir", "attack_aim_dir"]:
@@ -666,6 +682,12 @@ func _resolve_facing(runtime_contract: Dictionary) -> Vector2:
 func _resolve_semantic_state(runtime_contract: Dictionary) -> String:
 	if _source_dead():
 		return "death"
+	# Player's state machine wins over both the last AnimationPlayer clip and
+	# an action runner that has not yet cleaned up after an interruption.
+	if actor_role == "player" and source_actor.has_method("get_directional_presentation_state"):
+		var player_state: String = str(source_actor.call("get_directional_presentation_state"))
+		if player_state in VALID_STATES:
+			return player_state
 	var explicit := str(runtime_contract.get("state", "")).strip_edges().to_lower()
 	if explicit in VALID_STATES:
 		return explicit
