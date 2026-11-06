@@ -109,19 +109,20 @@ func _try_attack() -> void:
 		AttackType.CROSS_SWING:
 			_start_cross_swing()
 		AttackType.RUNNING_SWING:
-			_start_running_swing()
+			# No active path should select this. Defensive fallback avoids a
+			# legacy pending choice reintroducing an out-of-range lunge.
+			_start_basic_swing()
 		_:
 			_start_custom_attack(_current_attack_type)
 
 	_switch_state(AIState.ATTACK)
 
 
-# Pure selection seam for range regression tests. Pressure admission and
-# damage authority remain unchanged.
+# Pure selection seam for range regression tests. Only standard sword attacks
+# can be selected by the current Hades-style encounter policy.
 func _v2_attack_choice_for_distance(distance: float, pending_choice: int = -1) -> int:
-	if distance >= running_min_distance:
-		# At 80-125 world units the enemy MUST close before striking.
-		return AttackType.RUNNING_SWING
+	# Running Swing is removed as an automatic gap closer. Even a stale
+	# reservation from the old AI must not restart it.
 	if pending_choice >= 0 and pending_choice != AttackType.RUNNING_SWING:
 		return pending_choice
 	return _select_attack_type()
