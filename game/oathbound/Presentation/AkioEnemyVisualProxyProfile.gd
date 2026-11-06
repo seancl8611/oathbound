@@ -26,8 +26,10 @@ func animation_base_for(state: String, action_id: String = "") -> String:
 # Slash source, NOT a substitute for a commissioned Swordsman strike.
 # Fractions use the number of available frames (currently 44), so a new
 # Blender export can be audited without rewriting the common presentation.
+const ANTICIPATION_INITIAL_FRACTION: float = 0.07
 const ANTICIPATION_EARLY_FRACTION: float = 0.18
 const ANTICIPATION_COMMITTED_FRACTION: float = 0.27
+const ANTICIPATION_COMMIT_TIME_FRACTION: float = 0.78
 const ATTACK_START_FRACTION: float = 0.29
 const ATTACK_END_FRACTION: float = 0.80
 
@@ -40,11 +42,21 @@ func visual_frame_for_phase(phase: String, progress: float, frame_count: int) ->
 	var frame_fraction: float = ANTICIPATION_EARLY_FRACTION
 	match phase:
 		"STARTUP":
-			# Stay in a recognizable weapon-preparation silhouette rather
-			# than playing the full slash before a hitbox exists.
-			frame_fraction = ANTICIPATION_EARLY_FRACTION
+			# Let Akio's temporary sword-ready poses advance slowly and
+			# continuously rather than holding a frozen frame, then jumping
+			# to another one at the commitment beat.
+			frame_fraction = lerpf(
+				ANTICIPATION_INITIAL_FRACTION, ANTICIPATION_EARLY_FRACTION,
+				clampf(clamped / ANTICIPATION_COMMIT_TIME_FRACTION, 0.0, 1.0)
+			)
 		"COMMITTED":
-			frame_fraction = ANTICIPATION_COMMITTED_FRACTION
+			frame_fraction = lerpf(
+				ANTICIPATION_EARLY_FRACTION, ANTICIPATION_COMMITTED_FRACTION,
+				clampf(
+					(clamped - ANTICIPATION_COMMIT_TIME_FRACTION)
+					/ (1.0 - ANTICIPATION_COMMIT_TIME_FRACTION), 0.0, 1.0
+				)
+			)
 		"ACTIVE":
 			frame_fraction = lerpf(ATTACK_START_FRACTION, ATTACK_END_FRACTION, clamped)
 		"RECOVERY":
