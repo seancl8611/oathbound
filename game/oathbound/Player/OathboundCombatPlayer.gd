@@ -19,6 +19,11 @@ func get_directional_presentation_state() -> String:
 		return "death"
 	match _state:
 		State.IDLE:
+			# Some authored locomotion transitions and display-only fixtures
+			# still move through externally supplied velocity while the FSM
+			# is IDLE. Preserve the real Run clock in that case.
+			if _move_input.length_squared() > 0.01 or velocity.length_squared() > 64.0:
+				return "move"
 			return "idle"
 		State.MOVING:
 			return "move"
