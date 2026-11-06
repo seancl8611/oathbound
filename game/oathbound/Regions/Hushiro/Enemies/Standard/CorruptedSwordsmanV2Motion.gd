@@ -237,20 +237,13 @@ func _tick_v2_action_motion(delta: float) -> void:
 		elif swinging or (is_attacking and not telegraphing):
 			_v2_action_runner.mark_active()
 
-		# Early windup tracks Akio; once the runner crosses its explicit commitment
-		# point this snapshot stops updating. The active hitbox therefore uses a late
-		# but committed target instead of either full homing or an instant-start snapshot.
-		if (
-			telegraphing
-			and _v2_action_runner.allows_target_tracking()
-			and is_instance_valid(player)
-			and (
-				str(_v2_action_runner.current_action_id()) != "running_swing"
-				or _in_running_approach
-			)
-		):
-			# Running Swing freezes its target when APPROACH ends. Do not
-			# silently retarget its committed body animation or hitbox.
+		# Hades-style telegraph: track Akio during APPROACH and the EARLY
+		# WINDUP, then lock the snapshot as the attack becomes COMMITTED.
+		# The old Running Swing froze aim at approach completion, leaving
+		# roughly half a second of stale targeting before the hitbox spawned.
+		# This updates once per physics frame until the genuine commit beat;
+		# during ACTIVE there is no homing and dodging can still cause a whiff.
+		if telegraphing and _v2_action_runner.allows_target_tracking() and is_instance_valid(player):
 			_windup_player_pos0 = player.global_position
 
 	var desired_locomotion: Vector2 = velocity - knockback
