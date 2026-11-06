@@ -372,6 +372,29 @@ func _test_swordsman_integration() -> void:
 		enemy.call("_cleanup_swipe")
 		await get_tree().physics_frame
 
+	# End-to-end Hades-style RUNNING_SWING contract, rather than a synthetic
+	# capsule spawned directly by the test. A stationary target at 96 units
+	# must be reached, visibly wound up on the real action clock, and damaged
+	# by the actual temporary hitbox during its active window.
+	hurtbox.total_damage = 0
+	target.global_position = Vector2(96.0, 0.0)
+	(enemy as Node2D).global_position = Vector2.ZERO
+	(enemy as CharacterBody2D).velocity = Vector2.ZERO
+	enemy.set("_windup_player_pos0", Vector2.ZERO)
+	enemy.set("telegraphing", false)
+	enemy.set("swinging", false)
+	enemy.set("is_attacking", false)
+	enemy.set("_in_running_approach", false)
+	enemy.set("_backoff_until", -1.0)
+	enemy.set_physics_process(true)
+	await get_tree().physics_frame
+	enemy.call("_start_running_swing")
+	await get_tree().create_timer(2.0).timeout
+	enemy.set_physics_process(false)
+	_expect(hurtbox.total_damage == 8,
+		"full Running Swing failed to damage a stationary target at 96 units; applied %d" % hurtbox.total_damage)
+	enemy.call("_cleanup_swipe")
+
 	if is_instance_valid(enemy):
 		enemy.queue_free()
 	if is_instance_valid(target):
